@@ -195,21 +195,31 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
   font-style:italic;letter-spacing:-.02em;text-decoration:none;
   white-space:nowrap;
 }
-@media(max-width:600px){
-  .site-nav a span{display:none}
-  .site-nav a{padding:6px 10px}
+@media(max-width:480px){
+  .site-nav a span.full{display:none}
+  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav .nav-brand{font-size:.8rem}
 }
 
+
+.legacy-note{
+  margin-top:8px;font-size:.78rem;color:var(--dim);
+  background:rgba(255,200,0,.08);border-left:3px solid #f59e0b;
+  padding:6px 10px;border-radius:0 6px 6px 0;line-height:1.45;
+}
+.fb-body em{display:block;margin-top:7px;font-size:.78rem;color:#b45309;
+  background:rgba(251,191,36,.1);border-left:3px solid #f59e0b;
+  padding:5px 9px;border-radius:0 5px 5px 0;line-height:1.4;}
 </style>
 </head>
 <body>
 <nav class="site-nav">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
-<a href="index.html" class="nav-link">🏠 <span>Inicio</span></a>
-<a href="teoria.html" class="nav-link">⚗️ <span>Principios</span></a>
-<a href="grupos.html" class="nav-link active">🔬 <span>Grupos</span></a>
-<a href="juego.html" class="nav-link">🎮 <span>Juego</span></a>
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link active">🔬 <span class="full">Grupos</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
   </div>
 </nav>
 <div class="app">
@@ -326,16 +336,16 @@ const GROUPS = [
     ],
     example:{name:'hex-3-eno', parts:[{t:'hex',cls:'c',l:'Cadena 6C'},{t:'3-en',cls:'i',l:'Doble C3'},{t:'o',cls:'g',l:'Alqueno'}]},
     exercises:[
-      {svgKey:'but1eno',ans:'but-1-eno',accepted:['but-1-eno'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}],hints:['4C con doble enlace en el extremo.','Localizador antes del sufijo: but-1-eno.'],expl:'4C, doble en C1 → <b>but-1-eno</b>.'},
-      {svgKey:'pent2eno',ans:'pent-2-eno',accepted:['pent-2-eno'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['5C, doble enlace en posición 2.','pent-2-eno.'],expl:'5C, doble en C2 → <b>pent-2-eno</b>.'},
-      {svgKey:'hex1eno',ans:'hex-1-eno',accepted:['hex-1-eno'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}],hints:['6C con doble enlace terminal.','hex-1-eno.'],expl:'6C, doble en C1 → <b>hex-1-eno</b>.'},
-      {svgKey:'buta13dieno',ans:'buta-1,3-dieno',accepted:['buta-1,3-dieno'],bd:[{t:'buta',cls:'c',l:'4C'},{t:'1,3-di',cls:'i',l:'Dobles C1,C3'},{t:'en',cls:'i',l:'×2'},{t:'o',cls:'g',l:'Dieno'}],hints:['4C con dos dobles enlaces.','Localizadores 1 y 3: buta-1,3-dieno.'],expl:'4C, dobles en C1,C3 → <b>buta-1,3-dieno</b>.'},
-      {svgKey:'metilBut2eno',ans:'2-metilbut-2-eno',accepted:['2-metilbut-2-eno'],bd:[{t:'2-metil',cls:'r',l:'Ramif.'},{t:'but',cls:'c',l:'4C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['4C + metilo. Doble enlace en la misma posición que el metilo.','2-metilbut-2-eno.'],expl:'4C, metilo C2, doble C2 → <b>2-metilbut-2-eno</b>.'},
-      {svgKey:'hex3eno',ans:'hex-3-eno',accepted:['hex-3-eno'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'3-en',cls:'i',l:'Doble C3'},{t:'o',cls:'g',l:'Alqueno'}],hints:['6C, doble enlace en la mitad.','hex-3-eno.'],expl:'6C, doble en C3 → <b>hex-3-eno</b>.'},
+      {svgKey:'but1eno',ans:'but-1-eno',accepted:['but-1-eno','1-buteno'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}],hints:['4C con doble enlace en el extremo.','Localizador antes del sufijo: but-1-eno.'],expl:'4C, doble en C1 → <b>but-1-eno</b>. 💡 <em>Nombre anterior: <b>1-buteno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'pent2eno',ans:'pent-2-eno',accepted:['pent-2-eno','2-penteno'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['5C, doble enlace en posición 2.','pent-2-eno.'],expl:'5C, doble en C2 → <b>pent-2-eno</b>. 💡 <em>Nombre anterior: <b>2-penteno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'hex1eno',ans:'hex-1-eno',accepted:['hex-1-eno','1-hexeno'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}],hints:['6C con doble enlace terminal.','hex-1-eno.'],expl:'6C, doble en C1 → <b>hex-1-eno</b>. 💡 <em>Nombre anterior: <b>1-hexeno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'buta13dieno',ans:'buta-1,3-dieno',accepted:['buta-1,3-dieno','1,3-butadieno'],bd:[{t:'buta',cls:'c',l:'4C'},{t:'1,3-di',cls:'i',l:'Dobles C1,C3'},{t:'en',cls:'i',l:'×2'},{t:'o',cls:'g',l:'Dieno'}],hints:['4C con dos dobles enlaces.','Localizadores 1 y 3: buta-1,3-dieno.'],expl:'4C, dobles en C1,C3 → <b>buta-1,3-dieno</b>. 💡 <em>Nombre anterior: <b>1,3-butadieno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'metilBut2eno',ans:'2-metilbut-2-eno',accepted:['2-metilbut-2-eno','2-metil-2-buteno'],bd:[{t:'2-metil',cls:'r',l:'Ramif.'},{t:'but',cls:'c',l:'4C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['4C + metilo. Doble enlace en la misma posición que el metilo.','2-metilbut-2-eno.'],expl:'4C, metilo C2, doble C2 → <b>2-metilbut-2-eno</b>. 💡 <em>Nombre anterior: <b>2-metil-2-buteno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'hex3eno',ans:'hex-3-eno',accepted:['hex-3-eno','3-hexeno'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'3-en',cls:'i',l:'Doble C3'},{t:'o',cls:'g',l:'Alqueno'}],hints:['6C, doble enlace en la mitad.','hex-3-eno.'],expl:'6C, doble en C3 → <b>hex-3-eno</b>. 💡 <em>Nombre anterior: <b>3-hexeno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
       {svgKey:'cicloPenteno',ans:'ciclopent-1-eno',accepted:['ciclopent-1-eno','ciclopenteno'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'1-en',cls:'i',l:'Doble C1-C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['Anillo de 5C con un doble enlace. Los C del doble son C1 y C2.','ciclopent-1-eno.'],expl:'Ciclo 5C + doble enlace → <b>ciclopent-1-eno</b>.'},
       {svgKey:'cicloHexeno',ans:'ciclohex-1-eno',accepted:['ciclohex-1-eno','ciclohexeno'],bd:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'1-en',cls:'i',l:'Doble C1-C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['Anillo de 6C con un doble enlace.','ciclohex-1-eno.'],expl:'Ciclo 6C + doble enlace → <b>ciclohex-1-eno</b>.'},
       {svgKey:'metilCicloHexeno',ans:'1-metilciclohex-2-eno',accepted:['1-metilciclohex-2-eno'],bd:[{t:'1-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'2-en',cls:'i',l:'Doble C2-C3'},{t:'o',cls:'g',l:'Alqueno'}],hints:['Ciclo 6C con metilo y doble enlace. El metilo está en C1, el doble en C2-C3.','1-metilciclohex-2-eno.'],expl:'Ciclo 6C, metilo C1, doble C2 → <b>1-metilciclohex-2-eno</b>.'},
-      {svgKey:'penta13dieno',ans:'penta-1,3-dieno',accepted:['penta-1,3-dieno'],bd:[{t:'penta',cls:'c',l:'5C'},{t:'1,3-di',cls:'i',l:'Dobles C1,C3'},{t:'en',cls:'i',l:'×2'},{t:'o',cls:'g',l:'Dieno'}],hints:['5C con dos dobles enlaces conjugados.','penta-1,3-dieno.'],expl:'5C, dobles en C1,C3 → <b>penta-1,3-dieno</b>.'},
+      {svgKey:'penta13dieno',ans:'penta-1,3-dieno',accepted:['penta-1,3-dieno','1,3-pentadieno'],bd:[{t:'penta',cls:'c',l:'5C'},{t:'1,3-di',cls:'i',l:'Dobles C1,C3'},{t:'en',cls:'i',l:'×2'},{t:'o',cls:'g',l:'Dieno'}],hints:['5C con dos dobles enlaces conjugados.','penta-1,3-dieno.'],expl:'5C, dobles en C1,C3 → <b>penta-1,3-dieno</b>. 💡 <em>Nombre anterior: <b>1,3-pentadieno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
     ]
   },
 
@@ -355,15 +365,15 @@ const GROUPS = [
     example:{name:'hex-3-ino', parts:[{t:'hex',cls:'c',l:'Cadena 6C'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Alquino'}]},
     exercises:[
       {svgKey:'propino',ans:'propino',accepted:['propino','prop-1-ino'],bd:[{t:'prop',cls:'c',l:'3C'},{t:'in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}],hints:['3C con triple enlace terminal. Nombre tradicional aceptado.','propino (= prop-1-ino).'],expl:'3C, triple C1 → <b>propino</b>.'},
-      {svgKey:'but1ino',ans:'but-1-ino',accepted:['but-1-ino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}],hints:['4C con triple enlace en el extremo.','Localizador antes del sufijo: but-1-ino.'],expl:'4C, triple en C1 → <b>but-1-ino</b>.'},
-      {svgKey:'but2ino',ans:'but-2-ino',accepted:['but-2-ino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['4C con triple enlace interior.','but-2-ino.'],expl:'4C, triple en C2 → <b>but-2-ino</b>.'},
-      {svgKey:'hex1ino',ans:'hex-1-ino',accepted:['hex-1-ino'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}],hints:['6C, triple enlace terminal.','hex-1-ino.'],expl:'6C, triple en C1 → <b>hex-1-ino</b>.'},
-      {svgKey:'hex3ino',ans:'hex-3-ino',accepted:['hex-3-ino'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Alquino'}],hints:['6C, triple enlace central.','hex-3-ino.'],expl:'6C, triple en C3 → <b>hex-3-ino</b>.'},
+      {svgKey:'but1ino',ans:'but-1-ino',accepted:['but-1-ino','1-butino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}],hints:['4C con triple enlace en el extremo.','Localizador antes del sufijo: but-1-ino.'],expl:'4C, triple en C1 → <b>but-1-ino</b>. 💡 <em>Nombre anterior: <b>1-butino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'but2ino',ans:'but-2-ino',accepted:['but-2-ino','2-butino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['4C con triple enlace interior.','but-2-ino.'],expl:'4C, triple en C2 → <b>but-2-ino</b>. 💡 <em>Nombre anterior: <b>2-butino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'hex1ino',ans:'hex-1-ino',accepted:['hex-1-ino','1-hexino'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}],hints:['6C, triple enlace terminal.','hex-1-ino.'],expl:'6C, triple en C1 → <b>hex-1-ino</b>. 💡 <em>Nombre anterior: <b>1-hexino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'hex3ino',ans:'hex-3-ino',accepted:['hex-3-ino','3-hexino'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Alquino'}],hints:['6C, triple enlace central.','hex-3-ino.'],expl:'6C, triple en C3 → <b>hex-3-ino</b>. 💡 <em>Nombre anterior: <b>3-hexino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
       {svgKey:'penta14diino',ans:'penta-1,4-diino',accepted:['penta-1,4-diino'],bd:[{t:'penta',cls:'c',l:'5C'},{t:'1,4-diin',cls:'i',l:'Triples C1,C4'},{t:'o',cls:'g',l:'Diino'}],hints:['5C con dos triples enlaces en los extremos.','penta-1,4-diino.'],expl:'5C, triples en C1,C4 → <b>penta-1,4-diino</b>.'},
-      {svgKey:'pent1en4ino',ans:'pent-1-en-4-ino',accepted:['pent-1-en-4-ino'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'4-in',cls:'i',l:'Triple C4'},{t:'o',cls:'g',l:'Enino'}],hints:['5C con doble Y triple enlace.','Enino: primero el -en, luego el -ino. pent-1-en-4-ino.'],expl:'5C, doble C1, triple C4 → <b>pent-1-en-4-ino</b>.'},
-      {svgKey:'metilPent2ino',ans:'4-metilpent-2-ino',accepted:['4-metilpent-2-ino'],bd:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C + metilo en C4, triple en C2.','4-metilpent-2-ino.'],expl:'5C, metilo C4, triple C2 → <b>4-metilpent-2-ino</b>.'},
-      {svgKey:'pent2ino',ans:'pent-2-ino',accepted:['pent-2-ino'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C con triple enlace en C2.','pent-2-ino.'],expl:'5C, triple en C2 → <b>pent-2-ino</b>.'},
-      {svgKey:'but1en3ino',ans:'but-1-en-3-ino',accepted:['but-1-en-3-ino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Enino'}],hints:['4C con doble y triple enlace. Enino.','but-1-en-3-ino.'],expl:'4C, doble C1, triple C3 → <b>but-1-en-3-ino</b>.'},
+      {svgKey:'pent1en4ino',ans:'pent-1-en-4-ino',accepted:['pent-1-en-4-ino','1-penten-4-ino'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'4-in',cls:'i',l:'Triple C4'},{t:'o',cls:'g',l:'Enino'}],hints:['5C con doble Y triple enlace.','Enino: primero el -en, luego el -ino. pent-1-en-4-ino.'],expl:'5C, doble C1, triple C4 → <b>pent-1-en-4-ino</b>. 💡 <em>Nombre anterior: <b>1-penten-4-ino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'metilPent2ino',ans:'4-metilpent-2-ino',accepted:['4-metilpent-2-ino','4-metil-2-pentino'],bd:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C + metilo en C4, triple en C2.','4-metilpent-2-ino.'],expl:'5C, metilo C4, triple C2 → <b>4-metilpent-2-ino</b>. 💡 <em>Nombre anterior: <b>4-metil-2-pentino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'pent2ino',ans:'pent-2-ino',accepted:['pent-2-ino','2-pentino'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C con triple enlace en C2.','pent-2-ino.'],expl:'5C, triple en C2 → <b>pent-2-ino</b>. 💡 <em>Nombre anterior: <b>2-pentino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
+      {svgKey:'but1en3ino',ans:'but-1-en-3-ino',accepted:['but-1-en-3-ino','1-buten-3-ino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Enino'}],hints:['4C con doble y triple enlace. Enino.','but-1-en-3-ino.'],expl:'4C, doble C1, triple C3 → <b>but-1-en-3-ino</b>. 💡 <em>Nombre anterior: <b>1-buten-3-ino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
     ]
   },
 

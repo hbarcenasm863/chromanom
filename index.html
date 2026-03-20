@@ -263,9 +263,10 @@ footer span{color:var(--naranja);font-weight:700}
   font-style:italic;letter-spacing:-.02em;text-decoration:none;
   white-space:nowrap;
 }
-@media(max-width:600px){
-  .site-nav a span{display:none}
-  .site-nav a{padding:6px 10px}
+@media(max-width:480px){
+  .site-nav a span.full{display:none}
+  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav .nav-brand{font-size:.8rem}
 }
 
 </style>
@@ -274,10 +275,10 @@ footer span{color:var(--naranja);font-weight:700}
 <nav class="site-nav">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
-<a href="index.html" class="nav-link active">🏠 <span>Inicio</span></a>
-<a href="teoria.html" class="nav-link">⚗️ <span>Principios</span></a>
-<a href="grupos.html" class="nav-link">🔬 <span>Grupos</span></a>
-<a href="juego.html" class="nav-link">🎮 <span>Juego</span></a>
+<a href="index.html" class="nav-link active">🏠 <span class="full">Inicio</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
   </div>
 </nav>
 <div class="app">
