@@ -10,11 +10,11 @@
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   /* 4-part color scheme */
-  --c1:#e74c3c;  /* ramificaciones */
-  --c2:#e67e22;  /* cadena */
-  --c3:#1e88e5;  /* insaturaciones */
-  --c4:#8e44ad;  /* grupo funcional */
-  --c1b:#fdeaea;--c2b:#fef3e2;--c3b:#e3f2fd;--c4b:#f5eef8;
+  --c1:#0072B2;  /* sustituyentes */
+  --c2:#E69F00;  /* cadena */
+  --c3:#009E73;  /* insaturaciones */
+  --c4:#CC79A7;  /* grupo funcional */
+  --c1b:#e6f2ff;--c2b:#fff8e6;--c3b:#e6f7f2;--c4b:#fce8f4;
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -394,12 +394,12 @@ const GROUPS = [
     exercises:[
       {svgKey:'metilBenceno',ans:'metilbenceno',accepted:['metilbenceno','tolueno'],bd:[{t:'metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un metilo. Sin numerar.','metilbenceno (tolueno).'],expl:'Benceno + metilo → <b>metilbenceno</b> (tolueno).'},
       {svgKey:'etilBenceno',ans:'etilbenceno',accepted:['etilbenceno'],bd:[{t:'etil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un etilo. Sin numerar.','etilbenceno.'],expl:'Benceno + etilo → <b>etilbenceno</b>.'},
-      {svgKey:'ortoXileno',ans:'1,2-dimetilbenceno',accepted:['1,2-dimetilbenceno','orto-xileno','o-xileno','ortoxileno','oxileno','orto xileno','o xileno','xileno orto','xileno o','1,2 dimetilbenceno','1,2-dimetil benceno','orto-dimetilbenceno','o-dimetilbenceno','ortodimetilbenceno','1,2dimetilbenceno','dimetilbenceno 1,2'],bd:[{t:'1,2-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos en posiciones adyacentes → 1,2.','1,2-dimetilbenceno (o-xileno).'],expl:'Dos metilos adyacentes → <b>1,2-dimetilbenceno</b>.'},
-      {svgKey:'metaXileno',ans:'1,3-dimetilbenceno',accepted:['1,3-dimetilbenceno','meta-xileno','m-xileno','metaxileno','mxileno','meta xileno','m xileno','xileno meta','xileno m','1,3 dimetilbenceno','1,3-dimetil benceno','meta-dimetilbenceno','m-dimetilbenceno','metadimetilbenceno','1,3dimetilbenceno','dimetilbenceno 1,3'],bd:[{t:'1,3-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos separados por un C.','1,3-dimetilbenceno (m-xileno).'],expl:'Dos metilos en 1,3 → <b>1,3-dimetilbenceno</b>.'},
-      {svgKey:'paraXileno',ans:'1,4-dimetilbenceno',accepted:['1,4-dimetilbenceno','para-xileno','p-xileno','paraxileno','pxileno','para xileno','p xileno','xileno para','xileno p','1,4 dimetilbenceno','1,4-dimetil benceno','para-dimetilbenceno','p-dimetilbenceno','paradimetilbenceno','1,4dimetilbenceno','dimetilbenceno 1,4'],bd:[{t:'1,4-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos en posiciones opuestas → 1,4.','1,4-dimetilbenceno (p-xileno).'],expl:'Dos metilos opuestos → <b>1,4-dimetilbenceno</b>.'},
-      {svgKey:'etilMetilBenceno',ans:'1-etil-3-metilbenceno',accepted:['1-etil-3-metilbenceno','1-etil-3-metil benceno','1 etil 3 metilbenceno','1-etil-3-metil-benceno','m-etilmetilbenceno','meta-etilmetilbenceno','m etilmetilbenceno','meta etilmetilbenceno','m-etil-metilbenceno','meta-etil-metilbenceno','3-metil-1-etilbenceno','3-metil-1-etil benceno','1-etil-3-metilbencen','m-etilbenceno','metaetilmetilbenceno'],bd:[{t:'1-etil-3-metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Etil y metil. Alfabético: etil → C1.','1-etil-3-metilbenceno.'],expl:'Etil C1, metil C3 → <b>1-etil-3-metilbenceno</b>.'},
-      {svgKey:'cloro2MetilBenceno',ans:'1-cloro-2-metilbenceno',accepted:['1-cloro-2-metilbenceno','1-cloro-2-metil benceno','1 cloro 2 metilbenceno','1-cloro-2-metil-benceno','2-metil-1-clorobenceno','2-metil-1-cloro benceno','1cloro2metilbenceno','orto-clorometilbenceno','o-clorometilbenceno'],bd:[{t:'1-cloro-2-metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Cloro y metil en posiciones adyacentes. Cloro (c) antes que metil → C1.','1-cloro-2-metilbenceno.'],expl:'Cloro C1, metil C2 → <b>1-cloro-2-metilbenceno</b>.'},
-      {svgKey:'trimetilBenceno',ans:'1,2,4-trimetilbenceno',accepted:['1,2,4-trimetilbenceno','1,2,4-trimetil benceno','1 2 4 trimetilbenceno','1,2,4-trimetil-benceno','1,2,4trimetilbenceno','trimetilbenceno 1,2,4','1,2,4-trimetilbencen'],bd:[{t:'1,2,4-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Tres metilos. Localizadores más bajos posibles: 1,2,4.','1,2,4-trimetilbenceno.'],expl:'Tres metilos → <b>1,2,4-trimetilbenceno</b>.'},
+      {svgKey:'ortoXileno',ans:'1,2-dimetilbenceno',accepted:['1,2-dimetilbenceno','orto-xileno','o-xileno'],bd:[{t:'1,2-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos en posiciones adyacentes → 1,2.','1,2-dimetilbenceno (o-xileno).'],expl:'Dos metilos adyacentes → <b>1,2-dimetilbenceno</b>.'},
+      {svgKey:'metaXileno',ans:'1,3-dimetilbenceno',accepted:['1,3-dimetilbenceno','meta-xileno','m-xileno'],bd:[{t:'1,3-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos separados por un C.','1,3-dimetilbenceno (m-xileno).'],expl:'Dos metilos en 1,3 → <b>1,3-dimetilbenceno</b>.'},
+      {svgKey:'paraXileno',ans:'1,4-dimetilbenceno',accepted:['1,4-dimetilbenceno','para-xileno','p-xileno'],bd:[{t:'1,4-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Dos metilos en posiciones opuestas → 1,4.','1,4-dimetilbenceno (p-xileno).'],expl:'Dos metilos opuestos → <b>1,4-dimetilbenceno</b>.'},
+      {svgKey:'etilMetilBenceno',ans:'1-etil-3-metilbenceno',accepted:['1-etil-3-metilbenceno'],bd:[{t:'1-etil-3-metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Etil y metil. Alfabético: etil → C1.','1-etil-3-metilbenceno.'],expl:'Etil C1, metil C3 → <b>1-etil-3-metilbenceno</b>.'},
+      {svgKey:'cloro2MetilBenceno',ans:'1-cloro-2-metilbenceno',accepted:['1-cloro-2-metilbenceno'],bd:[{t:'1-cloro-2-metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Cloro y metil en posiciones adyacentes. Cloro (c) antes que metil → C1.','1-cloro-2-metilbenceno.'],expl:'Cloro C1, metil C2 → <b>1-cloro-2-metilbenceno</b>.'},
+      {svgKey:'trimetilBenceno',ans:'1,2,4-trimetilbenceno',accepted:['1,2,4-trimetilbenceno'],bd:[{t:'1,2,4-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Tres metilos. Localizadores más bajos posibles: 1,2,4.','1,2,4-trimetilbenceno.'],expl:'Tres metilos → <b>1,2,4-trimetilbenceno</b>.'},
       {svgKey:'clorobenceno',ans:'clorobenceno',accepted:['clorobenceno'],bd:[{t:'cloro',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un átomo de cloro.','clorobenceno. No se numera con un solo sustituyente.'],expl:'Benceno + cloro → <b>clorobenceno</b>.'},
       {svgKey:'isopropilBenceno',ans:'isopropilbenceno',accepted:['isopropilbenceno','cumeno'],bd:[{t:'isopropil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un isopropilo (−CH(CH₃)₂).','isopropilbenceno (cumeno).'],expl:'Benceno + isopropilo → <b>isopropilbenceno</b>.'},
     ]
@@ -740,7 +740,7 @@ const GROUPS = [
 let currentGroup = GROUPS[0].id;
 let exState = {}; // per-group exercise state
 
-function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0,attempts:0})}
+function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0})}
 
 // ═══════════════════════════════════════════════════════════
 // DROPDOWN
@@ -994,42 +994,19 @@ function renderExercise(gid){
 
   if(st.idx >= g.exercises.length){
     const pct = st.tot>0?Math.round(st.ok/st.tot*100):0;
-    const maxPts = g.exercises.length*10;
-    const effPct = maxPts>0?Math.round(st.score/maxPts*100):0;
-    // Gradient & badge by score
-    var grad, badge, nivel, rec;
-    if(pct>=90){grad='linear-gradient(135deg,#f59e0b,#f97316)';badge='🥇';nivel='Maestro';rec='¡Excelente dominio! Avanza al siguiente grupo funcional.';}
-    else if(pct>=75){grad='linear-gradient(135deg,#10b981,#059669)';badge='🥈';nivel='Avanzado';rec='Muy bien. Repasa los ejercicios fallados y sigue adelante.';}
-    else if(pct>=50){grad='linear-gradient(135deg,#3b82f6,#6366f1)';badge='🥉';nivel='En progreso';rec='Buen comienzo. Repite el grupo para afianzar los conceptos.';}
-    else{grad='linear-gradient(135deg,#6b7280,#374151)';badge='📚';nivel='Practicando';rec='Sigue practicando. Revisa la teoría y vuelve a intentarlo.';}
-    card.innerHTML = ''
-      +'<div style="border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.12)">'
-        +'<div style="background:'+grad+';padding:28px 24px 20px;text-align:center">'
-          +'<div style="font-size:3rem;margin-bottom:6px">'+badge+'</div>'
-          +'<div style="font-family:\'Fraunces\',serif;font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:4px">'+(pct>=90?'¡Maestro!':pct>=75?'¡Muy bien!':pct>=50?'¡Buen avance!':'Sigue practicando')+'</div>'
-          +'<div style="color:rgba(255,255,255,.85);font-size:.82rem">'+g.name+' — Nivel: <strong>'+nivel+'</strong></div>'
-        +'</div>'
-        +'<div style="padding:22px 22px 18px;background:var(--surf)">'
-          +'<div class="stats3" style="margin-bottom:16px">'
-            +'<div class="stat"><div class="stat-n" style="color:#16a34a">'+st.ok+'</div><div class="stat-l">Correctas</div></div>'
-            +'<div class="stat"><div class="stat-n" style="color:var(--c1)">'+st.err+'</div><div class="stat-l">Incorrectas</div></div>'
-            +'<div class="stat"><div class="stat-n" style="color:var(--c4)">'+st.score+'</div><div class="stat-l">Puntos</div></div>'
-          +'</div>'
-          +'<div style="margin-bottom:10px">'
-            +'<div style="display:flex;justify-content:space-between;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dimmer);margin-bottom:4px"><span>Aciertos</span><span>'+pct+'%</span></div>'
-            +'<div style="height:7px;background:var(--brd);border-radius:100px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,#10b981,#059669);border-radius:100px;transition:width .6s ease"></div></div>'
-          +'</div>'
-          +'<div style="margin-bottom:16px">'
-            +'<div style="display:flex;justify-content:space-between;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dimmer);margin-bottom:4px"><span>Eficiencia</span><span>'+effPct+'%</span></div>'
-            +'<div style="height:7px;background:var(--brd);border-radius:100px;overflow:hidden"><div style="height:100%;width:'+effPct+'%;background:linear-gradient(90deg,var(--c3),var(--c4));border-radius:100px;transition:width .6s ease"></div></div>'
-          +'</div>'
-          +'<div style="background:var(--surf2);border:1px solid var(--brd);border-radius:10px;padding:10px 14px;font-size:.8rem;color:var(--dim);line-height:1.6;margin-bottom:18px">💡 '+rec+'</div>'
-          +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
-            +'<button class="btn-check" style="flex:1" onclick="restartEx(\''+gid+'\')">🔄 Repetir ejercicios</button>'
-            +'<a href="juego.html" style="flex:1;display:flex;align-items:center;justify-content:center;padding:10px 14px;background:var(--surf2);border:1.5px solid var(--brd);border-radius:var(--rs);color:var(--dim);font-family:\'Outfit\',sans-serif;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s" onmouseover="this.style.borderColor=\'var(--c3)\';this.style.color=\'var(--c3)\'" onmouseout="this.style.borderColor=\'var(--brd)\';this.style.color=\'var(--dim)\'">🎮 Ir al Juego</a>'
-          +'</div>'
-        +'</div>'
-      +'</div>';
+    const emoji = pct>=80?'🏆':pct>=50?'📚':'💪';
+    card.innerHTML = `
+      <div style="text-align:center;padding:30px 10px">
+        <div style="font-size:2.5rem;margin-bottom:10px">${emoji}</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;margin-bottom:6px">${pct>=80?'¡Dominas este grupo!':pct>=50?'¡Buen avance!':'Sigue practicando'}</div>
+        <div style="color:var(--dim);font-size:.85rem;margin-bottom:20px">Acertaste el ${pct}% de los ejercicios de ${g.name}.</div>
+        <div class="stats3" style="max-width:320px;margin:0 auto 20px">
+          <div class="stat"><div class="stat-n" style="color:#16a34a">${st.ok}</div><div class="stat-l">Correctas</div></div>
+          <div class="stat"><div class="stat-n" style="color:var(--c1)">${st.err}</div><div class="stat-l">Incorrectas</div></div>
+          <div class="stat"><div class="stat-n" style="color:var(--c4)">${st.score}</div><div class="stat-l">Puntos</div></div>
+        </div>
+        <button class="btn-check" onclick="restartEx('${gid}')">Repetir ejercicios →</button>
+      </div>`;
     return;
   }
 
@@ -1061,8 +1038,8 @@ function renderExercise(gid){
 
     <div id="ahints-${gid}"></div>
 
-    <div class="btn-row" id="abrow-${gid}">
-      <button class="btn-sm btn-hint-auto" onclick="showExHint('${gid}')">💡 Pista</button>
+    <div class="btn-row">
+      <button class="btn-sm" onclick="showExHint('${gid}')">💡 Pista</button>
       <button class="btn-sm btn-reveal" onclick="revealEx('${gid}')">👁 Ver respuesta</button>
       <button class="btn-sm" onclick="nextEx('${gid}')">Siguiente →</button>
     </div>
@@ -1088,50 +1065,24 @@ function checkEx(gid){
   const val=inp?.value.trim(); if(!val) return;
   const ex=g.exercises[st.idx];
   const correct=ex.accepted.some(a=>norm(a)===norm(val));
-  st.attempts++;
+  st.answered=true; st.tot++;
+  document.getElementById('abtn-'+gid).disabled=true;
+  inp.disabled=true;
+  document.getElementById('etot-'+gid).textContent=st.tot;
   const fb=document.getElementById('afb-'+gid);
-  fb.className='feedback show';
+  fb.classList.add('show');
   if(correct){
-    st.answered=true; st.tot++;
-    inp.disabled=true;
-    document.getElementById('abtn-'+gid).disabled=true;
-    inp.className='ans-input ok';
-    st.ok++; const pts=Math.max(10-st.hints*2-(st.attempts-1)*2,2); st.score+=pts;
+    inp.classList.add('ok');
+    st.ok++; const pts=Math.max(10-st.hints*2,4); st.score+=pts;
     document.getElementById('eok-'+gid).textContent=st.ok;
-    document.getElementById('etot-'+gid).textContent=st.tot;
-    document.querySelector('.ex-pts') && (document.querySelector('.ex-pts').textContent='⭐ '+st.score+' pts');
+    document.getElementById('ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
     fb.classList.add('ok');
-    fb.innerHTML='<div class="fb-head ok">✓ ¡Correcto! +'+pts+' pts</div><div class="fb-body">'+ex.expl+'<div class="name-breakdown">'+buildBd(ex)+'</div></div>';
-    // Ocultar botones pista/revelar al completar
-    var brow=document.getElementById('abrow-'+gid);
-    if(brow){var btns=brow.querySelectorAll('.btn-hint-auto,.btn-reveal');btns.forEach(function(b){b.style.display='none';});}
+    fb.innerHTML=`<div class="fb-head ok">✓ ¡Correcto! +${pts} pts</div><div class="fb-body">${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
   } else {
-    inp.className='ans-input err';
-    inp.value='';
+    inp.classList.add('err'); st.err++;
+    document.getElementById('eerr-'+gid).textContent=st.err;
     fb.classList.add('fail');
-    if(st.attempts>=3){
-      // 3er intento fallido → revelar automáticamente
-      st.answered=true; st.tot++; st.err++;
-      inp.disabled=true;
-      document.getElementById('abtn-'+gid).disabled=true;
-      document.getElementById('etot-'+gid).textContent=st.tot;
-      document.getElementById('eerr-'+gid).textContent=st.err;
-      fb.innerHTML='<div class="fb-head fail">✗ 3 intentos agotados</div><div class="fb-body">La respuesta correcta es <strong>'+ex.ans+'</strong>. '+ex.expl+'<div class="name-breakdown">'+buildBd(ex)+'</div></div>';
-      // Ocultar botones pista/revelar al revelar automáticamente
-      var brow=document.getElementById('abrow-'+gid);
-      if(brow){var btns=brow.querySelectorAll('.btn-hint-auto,.btn-reveal');btns.forEach(function(b){b.style.display='none';});}
-    } else {
-      // Mostrar pista automática del array hints
-      const hintIdx=st.attempts-1; // intento 1→hint 0, intento 2→hint 1
-      fb.innerHTML='<div class="fb-head fail">✗ Incorrecto (intento '+st.attempts+'/3)</div><div class="fb-body">Intenta de nuevo.</div>';
-      if(ex.hints && ex.hints[hintIdx]){
-        const w=document.getElementById('ahints-'+gid);
-        const c=document.createElement('div'); c.className='hint-card show';
-        c.innerHTML='<div class="hint-num">Pista automática '+st.attempts+'</div>'+ex.hints[hintIdx];
-        w.appendChild(c); st.hints++;
-      }
-      setTimeout(function(){inp.className='ans-input';inp.focus();},400);
-    }
+    fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
   }
 }
 
@@ -1165,12 +1116,12 @@ function revealEx(gid){
 }
 
 function nextEx(gid){
-  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0; st.attempts=0;
+  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0;
   renderExercise(gid);
 }
 
 function restartEx(gid){
-  exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0,attempts:0};
+  exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0};
   renderExercise(gid);
 }
 
@@ -1237,14 +1188,8 @@ const MOLS={
     _pts=[];let s='';const r=32,cx=48,cy=48;
     const verts=[0,1,2,3,4].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));
     verts.forEach((v,i)=>{ const n=verts[(i+1)%5]; s+=ln(v.x,v.y,n.x,n.y); _reg(v.x,v.y,3); });
-    // Etilo en v[0]: 2 bonds hacia arriba (zigzag)
-    s+=ln(verts[0].x,verts[0].y,verts[0].x+BL*COS30,verts[0].y-BL*SIN30);
-    s+=ln(verts[0].x+BL*COS30,verts[0].y-BL*SIN30,verts[0].x+BL*COS30*2,verts[0].y-BL*SIN30+BL*SIN30);
-    _reg(verts[0].x+BL*COS30*2,verts[0].y-BL*SIN30+BL*SIN30);
-    // Metilo en v[1]: dirección radial hacia afuera (cos(-π/2+2π/5), sin(-π/2+2π/5))
-    const a1=-Math.PI/2+2*Math.PI/5;
-    s+=ln(verts[1].x,verts[1].y,verts[1].x+BL*Math.cos(a1),verts[1].y+BL*Math.sin(a1));
-    _reg(verts[1].x+BL*Math.cos(a1),verts[1].y+BL*Math.sin(a1));
+    s+=ln(verts[0].x,verts[0].y,verts[0].x-BL*COS30,verts[0].y-BL*SIN30);
+    s+=ln(verts[1].x,verts[1].y,verts[1].x,verts[1].y+BL);
     return mkSVG(s);
   },
   // ALQUENOS
@@ -1693,7 +1638,7 @@ const MOLS={
   // CICLOALCANOS nuevos
   ciclobutano(){_pts=[];let s='';const r=25,cx=25,cy=25;[[0,1],[1,2],[2,3],[3,0]].forEach(([a,b])=>{const ax=cx+r*Math.cos(Math.PI/4+a*Math.PI/2),ay=cy+r*Math.sin(Math.PI/4+a*Math.PI/2),bx=cx+r*Math.cos(Math.PI/4+b*Math.PI/2),by=cy+r*Math.sin(Math.PI/4+b*Math.PI/2);s+=ln(ax,ay,bx,by);_reg(ax,ay,3);});return mkSVG(s);},
   propilCiclopentano(){_pts=[];let s='';const r=32,cx=50,cy=38;const v=[0,1,2,3,4].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));v.forEach((vi,i)=>{const n=v[(i+1)%5];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});const top=v[0];s+=ln(top.x,top.y,top.x+BL*COS30,top.y-BL*SIN30);s+=ln(top.x+BL*COS30,top.y-BL*SIN30,top.x+BL*COS30*2,top.y);s+=ln(top.x+BL*COS30*2,top.y,top.x+BL*COS30*3,top.y-BL*SIN30);_reg(top.x+BL*COS30*3,top.y-BL*SIN30);return mkSVG(s);},
-  trimetilCiclopentano(){_pts=[];let s='';const r=32,cx=38,cy=38;const v=[0,1,2,3,4].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));v.forEach((vi,i)=>{const n=v[(i+1)%5];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});[0,1,2].forEach(function(i){const a=-Math.PI/2+i*2*Math.PI/5;s+=ln(v[i].x,v[i].y,v[i].x+BL*Math.cos(a),v[i].y+BL*Math.sin(a));_reg(v[i].x+BL*Math.cos(a),v[i].y+BL*Math.sin(a));});return mkSVG(s);},
+  trimetilCiclopentano(){_pts=[];let s='';const r=32,cx=38,cy=38;const v=[0,1,2,3,4].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));v.forEach((vi,i)=>{const n=v[(i+1)%5];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});[0,1,2].forEach(i=>{const d=i%2===0?-BL:BL;s+=ln(v[i].x,v[i].y,v[i].x,v[i].y+d);_reg(v[i].x,v[i].y+d);});return mkSVG(s);},
 
   // ALQUENOS cíclicos
   cicloPenteno(){_pts=[];let s='';const r=32,cx=38,cy=38;const v=[0,1,2,3,4].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/5),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/5)}));v.forEach((vi,i)=>{const n=v[(i+1)%5];if(i===0){s+=dbl(vi.x,vi.y,n.x,n.y);}else{s+=ln(vi.x,vi.y,n.x,n.y);}  _reg(vi.x,vi.y,3);});return mkSVG(s);},
@@ -1767,8 +1712,8 @@ const MOLS={
   metilCicloHexanol(){_pts=[];let s='';const r=36,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'OH');s+=ln(v[3].x,v[3].y,v[3].x,v[3].y+BL);_reg(v[3].x,v[3].y+BL);return mkSVG(s);},
 
   // ÉTERES nuevos (cíclicos + benceno)
-  metoxiBenceno(){_pts=[];const{v,s:bs}=bnzRing(44,44,34);let s=bs;s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'O');s+=ln(v[0].x,v[0].y-BL,v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);_reg(v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);return mkSVG(s);},
-  etoxiBenceno(){_pts=[];const{v,s:bs}=bnzRing(44,44,34);let s=bs;s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'O');s+=ln(v[0].x,v[0].y-BL,v[0].x+BL*COS30,v[0].y-BL-BL*SIN30);s+=ln(v[0].x+BL*COS30,v[0].y-BL-BL*SIN30,v[0].x+BL*COS30*2,v[0].y-BL);_reg(v[0].x+BL*COS30*2,v[0].y-BL);return mkSVG(s);},
+  metoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=atm(0,-BL,'O');s+=ln(0,-BL,-BL*COS30,-(BL+BL*SIN30));_reg(-BL*COS30,-(BL+BL*SIN30));return mkSVG(s);},
+  etoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=atm(0,-BL,'O');s+=ln(0,-BL,BL*COS30,-(BL+BL*SIN30));s+=ln(BL*COS30,-(BL+BL*SIN30),BL*COS30*2,-BL);_reg(BL*COS30*2,-BL);return mkSVG(s);},
   metoxiCicloHexano(){_pts=[];let s='';const r=36,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'O');s+=ln(v[0].x,v[0].y-BL,v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);_reg(v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);return mkSVG(s);},
   etoxiMetano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);return mkSVG(s);},
 
@@ -1882,7 +1827,8 @@ document.getElementById('content-area').innerHTML = `
   <div style="font-size:.84rem;font-weight:700;color:var(--dim);margin-bottom:2px">ChromaNom</div>
   <div>Nomenclatura Orgánica · IUPAC · Bachillerato</div>
   <div style="margin-top:5px;font-size:.71rem">
-      <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
+    © 2026 <strong style="color:var(--dim)">Harvey Barcenas Morales</strong> · Todos los derechos reservados<br>
+    Material educativo de uso académico. Prohibida su reproducción sin autorización.
   </div>
 </div>
 </body>

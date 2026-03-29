@@ -21,10 +21,10 @@
   --naranja: #f07c1e;
   --naranja-l: #fef3ea;
   /* ChromaNom 4-part colors */
-  --c1:#e74c3c;--c1b:#fdeaea;   /* ramificaciones - rojo */
-  --c2:#e67e22;--c2b:#fef3e2;   /* insaturaciones - naranja */
-  --c3:#1e88e5;--c3b:#e3f2fd;   /* cadena - azul */
-  --c4:#8e44ad;--c4b:#f5eef8;   /* grupo funcional - violeta */
+  --c1:#0072B2;--c1b:#e6f2ff;   /* sustituyentes - azul Wong */
+  --c2:#E69F00;--c2b:#fff8e6;   /* cadena - naranja Wong */
+  --c3:#009E73;--c3b:#e6f7f2;   /* insaturaciones - verde Wong */
+  --c4:#CC79A7;--c4b:#fce8f4;   /* grupo funcional - magenta Wong */
   --bg:     #f6fafe;
   --surf:   #ffffff;
   --brd:    #d0e6f5;
@@ -85,9 +85,9 @@ header{
   border:2px solid;font-size:.72rem;font-weight:700;
   letter-spacing:.03em;
 }
-.lp.r{color:#e74c3c;border-color:#e74c3c;background:#fdeaea}
-.lp.c{color:#e67e22;border-color:#e67e22;background:#fef3e2}
-.lp.i{color:var(--azul);border-color:var(--azul);background:var(--azul-l)}
+.lp.r{color:var(--c1);border-color:var(--c1);background:var(--c1b)}
+.lp.c{color:var(--c2);border-color:var(--c2);background:var(--c2b)}
+.lp.i{color:var(--c3);border-color:var(--c3);background:var(--c3b)}
 .lp.g{color:var(--c4);border-color:var(--c4);background:var(--c4b)}
 .dot{width:7px;height:7px;border-radius:50%}
 
@@ -160,13 +160,13 @@ header{
 }
 .np{display:flex;flex-direction:column;align-items:center;gap:5px}
 .nw{font-family:'Courier New',monospace;font-size:1.3rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
-.nw.r{color:#e74c3c;background:#fdeaea}
-.nw.c{color:#e67e22;background:#fef3e2}
-.nw.i{color:var(--azul);background:var(--azul-l)}
+.nw.r{color:var(--c1);background:var(--c1b)}
+.nw.c{color:var(--c2);background:var(--c2b)}
+.nw.i{color:var(--c3);background:var(--c3b)}
 .nw.g{color:var(--c4);background:var(--c4b)}
 .nw.sep{background:transparent;color:var(--dimmer);font-size:1rem}
 .nl{font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;white-space:nowrap}
-.nl.r{color:#e74c3c}.nl.c{color:#e67e22}.nl.i{color:var(--azul)}.nl.g{color:var(--c4)}
+.nl.r{color:var(--c1)}.nl.c{color:var(--c2)}.nl.i{color:var(--c3)}.nl.g{color:var(--c4)}
 .more-examples{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
 .me{background:#f8feff;border:1px solid var(--brd);border-radius:var(--rs);padding:10px 14px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end}
 
@@ -349,7 +349,7 @@ footer span{color:var(--naranja);font-weight:700}
 <div class="sec-lbl">Módulos de aprendizaje</div>
 <div class="modules">
 
-  <a class="mod-card azul" href="teoria.html" target="mod-top">
+  <a class="mod-card azul" href="teoria.html">
     <div class="mod-top">
       <span class="mod-icon">⚗️</span>
       <div class="mod-title">Principios de Nomenclatura</div>
@@ -366,7 +366,7 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
   </a>
 
-  <a class="mod-card verde" href="grupos.html" target="mod-top">
+  <a class="mod-card verde" href="grupos.html">
     <div class="mod-top">
       <span class="mod-icon">🔬</span>
       <div class="mod-title">Grupos Funcionales</div>
@@ -382,7 +382,7 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
   </a>
 
-  <a class="mod-card naranja" href="juego.html" target="mod-top">
+  <a class="mod-card naranja" href="juego.html">
     <div class="mod-top">
       <span class="mod-icon">🎮</span>
       <div class="mod-title">Juego de Práctica</div>
@@ -409,11 +409,11 @@ footer span{color:var(--naranja);font-weight:700}
     <table class="pri-tbl">
       <thead><tr><th>#</th><th>Grupo funcional</th><th>Fórmula</th><th>Sufijo IUPAC</th><th>Como sustituyente</th></tr></thead>
       <tbody>
-        <tr><td><span class="num-badge">1</span></td><td style="font-weight:700;color:#e74c3c">Carboxilatos (sales)</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COO⁻</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">ácido -carboxilato / -oato</td><td style="font-size:.78rem;color:var(--tx)">carboxilato-</td></tr>
-        <tr><td><span class="num-badge">2</span></td><td style="font-weight:700;color:#e74c3c">Ácidos carboxílicos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOH</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">ácido -carboxílico / ácido -oico</td><td style="font-size:.78rem;color:var(--tx)">carboxi-</td></tr>
-        <tr><td><span class="num-badge">3</span></td><td style="font-weight:700;color:#e74c3c">Ésteres</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOR'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carboxilato de R / -oato de R</td><td style="font-size:.78rem;color:var(--tx)">(R)oxicarbonil-</td></tr>
-        <tr><td><span class="num-badge">4</span></td><td style="font-weight:700;color:#e74c3c">Haluros de ácido</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COX</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">haluro de -carbonilo / haluro de -oilo</td><td style="font-size:.78rem;color:var(--tx)">halocarbonil-</td></tr>
-        <tr><td><span class="num-badge">5</span></td><td style="font-weight:700;color:#e74c3c">Amidas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CONH₂</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carboxamida / -amida</td><td style="font-size:.78rem;color:var(--tx)">carbamoil-</td></tr>
+        <tr><td><span class="num-badge">1</span></td><td style="font-weight:700;color:#0072B2">Carboxilatos (sales)</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COO⁻</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">ácido -carboxilato / -oato</td><td style="font-size:.78rem;color:var(--tx)">carboxilato-</td></tr>
+        <tr><td><span class="num-badge">2</span></td><td style="font-weight:700;color:#0072B2">Ácidos carboxílicos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOH</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">ácido -carboxílico / ácido -oico</td><td style="font-size:.78rem;color:var(--tx)">carboxi-</td></tr>
+        <tr><td><span class="num-badge">3</span></td><td style="font-weight:700;color:#0072B2">Ésteres</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOR'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carboxilato de R / -oato de R</td><td style="font-size:.78rem;color:var(--tx)">(R)oxicarbonil-</td></tr>
+        <tr><td><span class="num-badge">4</span></td><td style="font-weight:700;color:#0072B2">Haluros de ácido</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COX</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">haluro de -carbonilo / haluro de -oilo</td><td style="font-size:.78rem;color:var(--tx)">halocarbonil-</td></tr>
+        <tr><td><span class="num-badge">5</span></td><td style="font-weight:700;color:#0072B2">Amidas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CONH₂</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carboxamida / -amida</td><td style="font-size:.78rem;color:var(--tx)">carbamoil-</td></tr>
         <tr><td><span class="num-badge">6</span></td><td style="font-weight:700;color:var(--azul)">Nitrilos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−C≡N</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carbonitrilo / -nitrilo</td><td style="font-size:.78rem;color:var(--tx)">ciano-</td></tr>
         <tr><td><span class="num-badge">7</span></td><td style="font-weight:700;color:var(--naranja)">Aldehídos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CHO</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-carbaldehído / -al</td><td style="font-size:.78rem;color:var(--tx)">formil- / oxo-</td></tr>
         <tr><td><span class="num-badge">8</span></td><td style="font-weight:700;color:var(--naranja)">Cetonas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CO−R'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4);font-weight:700">-ona</td><td style="font-size:.78rem;color:var(--tx)">oxo-</td></tr>
@@ -436,7 +436,8 @@ footer span{color:var(--naranja);font-weight:700}
     <div style="font-size:.85rem;font-weight:700;color:var(--dim);margin-bottom:2px">ChromaNom</div>
     <div>Nomenclatura Orgánica · IUPAC · Bachillerato</div>
     <div style="margin-top:6px;font-size:.72rem">
-      <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
+      © 2026 <strong style="color:var(--dim)">Harvey Barcenas Morales</strong> · Todos los derechos reservados<br>
+      Material educativo de uso académico. Prohibida su reproducción sin autorización.
     </div>
   </div>
 </footer>
