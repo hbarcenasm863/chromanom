@@ -6,10 +6,16 @@
 <title>NomOrg — Juego de Nomenclatura</title>
 <style>
 :root{
-  --c1:#e74c3c;--c1b:#fdeaea;--c1m:rgba(231,76,60,.12);
-  --c2:#e67e22;--c2b:#fef3e2;--c2m:rgba(230,126,34,.12);
-  --c3:#1e88e5;--c3b:#e3f2fd;--c3m:rgba(30,136,229,.12);
-  --c4:#8e44ad;--c4b:#f5eef8;--c4m:rgba(142,68,173,.12);
+  /* Paleta Wong — daltonismo-segura, consistente con index/teoria/grupos */
+  --c1:#0072B2;--c1b:#e6f2ff;--c1m:rgba(0,114,178,.12);   /* sustituyentes - azul */
+  --c2:#E69F00;--c2b:#fff8e6;--c2m:rgba(230,159,0,.12);    /* cadena - naranja */
+  --c3:#009E73;--c3b:#e6f7f2;--c3m:rgba(0,158,115,.12);    /* insaturaciones - verde */
+  --c4:#CC79A7;--c4b:#fce8f4;--c4m:rgba(204,121,167,.12);  /* grupo funcional - magenta */
+  /* Versiones oscurecidas para texto (pasan WCAG AA 4.5:1 sobre blanco) */
+  --c1t:#0072B2;  /* azul ya pasa */
+  --c2t:#9A6E00;  /* naranja oscuro */
+  --c3t:#007A5A;  /* verde oscuro */
+  --c4t:#A0527F;  /* magenta oscuro */
   --ok:#16a34a;--okb:#dcfce7;
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
@@ -113,10 +119,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
   text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;
   flex-shrink:0;align-self:flex-start;
 }
-.qt-mc{background:var(--c3b);color:var(--c3)}
-.qt-drag{background:var(--c2b);color:var(--c2)}
-.qt-id{background:var(--c1b);color:var(--c1)}
-.qt-write{background:var(--c4b);color:var(--c4)}
+.qt-mc{background:var(--c3b);color:var(--c3t)}
+.qt-drag{background:var(--c2b);color:var(--c2t)}
+.qt-id{background:var(--c1b);color:var(--c1t)}
+.qt-write{background:var(--c4b);color:var(--c4t)}
 
 .q-title{font-size:1rem;font-weight:700;color:var(--tx);margin-bottom:16px;line-height:1.5;flex-shrink:0}
 
@@ -180,10 +186,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
   touch-action:none;
 }
 .token:active{cursor:grabbing;transform:scale(1.05)}
-.token.r{color:var(--c1);background:var(--c1b);border-color:var(--c1)}
-.token.c{color:var(--c2);background:var(--c2b);border-color:var(--c2)}
-.token.i{color:var(--c3);background:var(--c3b);border-color:var(--c3)}
-.token.g{color:var(--c4);background:var(--c4b);border-color:var(--c4)}
+.token.r{color:var(--c1t);background:var(--c1b);border-color:var(--c1)}
+.token.c{color:var(--c2t);background:var(--c2b);border-color:var(--c2)}
+.token.i{color:var(--c3t);background:var(--c3b);border-color:var(--c3)}
+.token.g{color:var(--c4t);background:var(--c4b);border-color:var(--c4)}
 .token.neutral{color:var(--tx);background:var(--surf2,#e8f4fb);border-color:var(--brd)}
 .token.used{opacity:.35;cursor:not-allowed}
 .drop-slot{
@@ -220,14 +226,14 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
   background:var(--surf);cursor:pointer;font-family:var(--sans);font-size:.78rem;
   font-weight:700;transition:all .18s;
 }
-.id-btn.r{color:var(--c1);border-color:var(--c1)}.id-btn.r:hover,.id-btn.r.active{background:var(--c1);color:#fff}
-.id-btn.c{color:var(--c2);border-color:var(--c2)}.id-btn.c:hover,.id-btn.c.active{background:var(--c2);color:#fff}
-.id-btn.i{color:var(--c3);border-color:var(--c3)}.id-btn.i:hover,.id-btn.i.active{background:var(--c3);color:#fff}
-.id-btn.g{color:var(--c4);border-color:var(--c4)}.id-btn.g:hover,.id-btn.g.active{background:var(--c4);color:#fff}
-.id-seg.r{background:var(--c1b);color:var(--c1);border-color:var(--c1)}
-.id-seg.c{background:var(--c2b);color:var(--c2);border-color:var(--c2)}
-.id-seg.i{background:var(--c3b);color:var(--c3);border-color:var(--c3)}
-.id-seg.g{background:var(--c4b);color:var(--c4);border-color:var(--c4)}
+.id-btn.r{color:var(--c1t);border-color:var(--c1)}.id-btn.r:hover,.id-btn.r.active{background:var(--c1);color:#fff}
+.id-btn.c{color:var(--c2t);border-color:var(--c2)}.id-btn.c:hover,.id-btn.c.active{background:var(--c2t);color:#fff}
+.id-btn.i{color:var(--c3t);border-color:var(--c3)}.id-btn.i:hover,.id-btn.i.active{background:var(--c3t);color:#fff}
+.id-btn.g{color:var(--c4t);border-color:var(--c4)}.id-btn.g:hover,.id-btn.g.active{background:var(--c4t);color:#fff}
+.id-seg.r{background:var(--c1b);color:var(--c1t);border-color:var(--c1)}
+.id-seg.c{background:var(--c2b);color:var(--c2t);border-color:var(--c2)}
+.id-seg.i{background:var(--c3b);color:var(--c3t);border-color:var(--c3)}
+.id-seg.g{background:var(--c4b);color:var(--c4t);border-color:var(--c4)}
 
 /* ── TYPE D: ESCRIBIR NOMBRE ── */
 .write-input{
@@ -264,7 +270,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .rs{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:16px;text-align:center}
 .rs-n{font-family:var(--mono);font-size:2rem;font-weight:700;line-height:1}
 .rs-l{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dimmer);margin-top:4px}
-.rs.ok .rs-n{color:var(--ok)}.rs.err .rs-n{color:var(--c1)}.rs.time .rs-n{color:var(--c2)}
+.rs.ok .rs-n{color:var(--ok)}.rs.err .rs-n{color:var(--c1)}.rs.time .rs-n{color:var(--c2t)}
 .resumen-breakdown{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:18px 20px;margin-bottom:16px}
 .rb-title{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:var(--dimmer);margin-bottom:12px}
 .rb-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--brd)}
@@ -1981,7 +1987,7 @@ function showResults(){
   document.getElementById('res-emoji').textContent=emoji;
   document.getElementById('res-title').textContent=title;
   document.getElementById('res-sub').textContent=`${pct}% de aciertos · ${score} puntos`;
-  document.getElementById('res-header').style.background=pct>=70?'linear-gradient(135deg,#14532d,#16a34a)':pct>=50?'linear-gradient(135deg,#78350f,#e67e22)':'linear-gradient(135deg,#7f1d1d,#e74c3c)';
+  document.getElementById('res-header').style.background=pct>=70?'linear-gradient(135deg,#14532d,#16a34a)':pct>=50?'linear-gradient(135deg,#78350f,#e67e22)':'linear-gradient(135deg,#7f1d1d,#c0392b)';
   // Sistema de medallas
   let medalIcon,medalTitle,medalDesc;
   if(pct>=90){medalIcon='🥇';medalTitle='Experto';medalDesc='¡Dominio excelente! ≥ 90% de aciertos';}
@@ -2002,7 +2008,7 @@ function showResults(){
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
     const p=Math.round(st.ok/st.tot*100);
-    const col=p>=70?'var(--ok)':p>=50?'var(--c2)':'var(--c1)';
+    const col=p>=70?'var(--ok)':p>=50?'var(--c2t)':'var(--c1)';
     rbHtml+=`<div class="rb-row">
       <span class="rb-type ${typeCls[t]}">${typeNames[t]}</span>
       <span class="rb-label">${st.ok}/${st.tot}</span>

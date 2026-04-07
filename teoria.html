@@ -10,6 +10,11 @@
   --c2:#E69F00;--c2b:#fff8e6;
   --c3:#009E73;--c3b:#e6f7f2;
   --c4:#CC79A7;--c4b:#fce8f4;
+  /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
+  --c1t:#0072B2;  /* azul ya pasa */
+  --c2t:#9A6E00;  /* naranja oscuro 4.6:1 */
+  --c3t:#007A5A;  /* verde oscuro 5.3:1 */
+  --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   --r:16px;--rs:10px;
@@ -27,7 +32,7 @@ body::after{content:'';position:absolute;inset:0;background-image:url("data:imag
 /* HEADER */
 header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
 .logo{font-family:var(--serif);font-weight:700;font-size:2.1rem;letter-spacing:-.04em;font-style:italic}
-.logo em{color:var(--c4);font-style:normal}
+.logo em{color:var(--c4t);font-style:normal}
 .logo-sub{font-size:.75rem;color:var(--dim);margin-top:3px;letter-spacing:.04em}
 .legend{display:none}
 .lp{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;border:2px solid;font-size:.7rem;font-weight:700}
@@ -41,7 +46,7 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .intro-card{background:var(--tx);border-radius:var(--r);padding:30px 36px;margin-bottom:28px;color:#fff;position:relative;overflow:hidden}
 .intro-card::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
 .intro-card h1{font-family:var(--serif);font-size:1.55rem;font-weight:700;font-style:italic;margin-bottom:8px}
-.intro-card h1 span{color:var(--c2);font-style:normal}
+.intro-card h1 span{color:var(--c2t);font-style:normal}
 .intro-card p{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.75;max-width:560px}
 .four-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .ft{padding:5px 13px;border-radius:100px;font-size:.72rem;font-weight:700;border:1.5px solid}
@@ -59,11 +64,11 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .part-card.i{border-color:var(--c3);background:var(--c3b)}
 .part-card.g{border-color:var(--c4);background:var(--c4b)}
 .part-num{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;margin-bottom:4px}
-.part-card.r .part-num{color:var(--c1)}.part-card.c .part-num{color:var(--c2)}
-.part-card.i .part-num{color:var(--c3)}.part-card.g .part-num{color:var(--c4)}
+.part-card.r .part-num{color:var(--c1t)}.part-card.c .part-num{color:var(--c2t)}
+.part-card.i .part-num{color:var(--c3t)}.part-card.g .part-num{color:var(--c4t)}
 .part-title{font-size:1rem;font-weight:800;margin-bottom:5px}
-.part-card.r .part-title{color:var(--c1)}.part-card.c .part-title{color:var(--c2)}
-.part-card.i .part-title{color:var(--c3)}.part-card.g .part-title{color:var(--c4)}
+.part-card.r .part-title{color:var(--c1t)}.part-card.c .part-title{color:var(--c2t)}
+.part-card.i .part-title{color:var(--c3t)}.part-card.g .part-title{color:var(--c4t)}
 .part-desc{font-size:.8rem;color:var(--dim);line-height:1.6}
 
 /* SECTION LABEL */
@@ -105,9 +110,9 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .step-tab{flex:1;padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s;border-right:1px solid var(--brd);font-size:.7rem;font-weight:700;color:var(--dimmer);background:#f0ede6}
 .step-tab:last-child{border-right:none}
 .step-tab.r.on{background:var(--c1);color:#fff}
-.step-tab.c.on{background:var(--c2);color:#fff}
-.step-tab.i.on{background:var(--c3);color:#fff}
-.step-tab.g.on{background:var(--c4);color:#fff}
+.step-tab.c.on{background:var(--c2t);color:#fff}
+.step-tab.i.on{background:var(--c3t);color:#fff}
+.step-tab.g.on{background:var(--c4t);color:#fff}
 .step-tab:hover:not(.on){background:var(--bg);color:var(--tx)}
 .step-num{font-size:.55rem;display:block;opacity:.7;margin-bottom:2px}
 
@@ -122,9 +127,9 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .step-desc.g .step-icon{background:var(--c4b)}
 .step-text strong{font-size:.88rem;display:block;margin-bottom:3px}
 .step-desc.r .step-text strong{color:var(--c1)}
-.step-desc.c .step-text strong{color:var(--c2)}
-.step-desc.i .step-text strong{color:var(--c3)}
-.step-desc.g .step-text strong{color:var(--c4)}
+.step-desc.c .step-text strong{color:var(--c2t)}
+.step-desc.i .step-text strong{color:var(--c3t)}
+.step-desc.g .step-text strong{color:var(--c4t)}
 .step-text p{font-size:.82rem;color:var(--dim);line-height:1.65}
 
 /* NAME BUILD */
@@ -139,7 +144,7 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .nw.g{color:var(--c4);background:var(--c4b)}
 .nw.pre{color:var(--c4);background:var(--c4b);font-style:italic;opacity:.85}
 .nl{font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;white-space:nowrap}
-.nl.r{color:var(--c1)}.nl.c{color:var(--c2)}.nl.i{color:var(--c3)}.nl.g{color:var(--c4)}
+.nl.r{color:var(--c1t)}.nl.c{color:var(--c2t)}.nl.i{color:var(--c3t)}.nl.g{color:var(--c4t)}
 
 /* CONTROLS */
 .controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
@@ -158,8 +163,8 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .rule-n.r{background:var(--c1);color:#fff}.rule-n.c{background:var(--c2);color:#fff}
 .rule-n.i{background:var(--c3);color:#fff}.rule-n.g{background:var(--c4);color:#fff}
 .rule-body strong{font-size:.88rem;display:block;margin-bottom:3px}
-.rule-body.r strong{color:var(--c1)}.rule-body.c strong{color:var(--c2)}
-.rule-body.i strong{color:var(--c3)}.rule-body.g strong{color:var(--c4)}
+.rule-body.r strong{color:var(--c1t)}.rule-body.c strong{color:var(--c2t)}
+.rule-body.i strong{color:var(--c3t)}.rule-body.g strong{color:var(--c4t)}
 .rule-body p{font-size:.81rem;color:var(--dim);line-height:1.68}
 
 footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-size:.77rem;color:var(--dimmer);margin-top:16px}
@@ -563,50 +568,50 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">1</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">1</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">met-</td>
           <td style="padding:8px 14px;color:var(--dim)">metano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">7</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">7</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">hept-</td>
           <td style="padding:8px 14px;color:var(--dim)">heptano</td>
         </tr>
         <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">2</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">2</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">et-</td>
           <td style="padding:8px 14px;color:var(--dim)">etano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">8</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">8</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">oct-</td>
           <td style="padding:8px 14px;color:var(--dim)">octano</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">3</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">3</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">prop-</td>
           <td style="padding:8px 14px;color:var(--dim)">propano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">9</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">9</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">non-</td>
           <td style="padding:8px 14px;color:var(--dim)">nonano</td>
         </tr>
         <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">4</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">4</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">but-</td>
           <td style="padding:8px 14px;color:var(--dim)">butano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">10</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">10</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">dec-</td>
           <td style="padding:8px 14px;color:var(--dim)">decano</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">5</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">5</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">pent-</td>
           <td style="padding:8px 14px;color:var(--dim)">pentano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">11</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">11</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">undec-</td>
           <td style="padding:8px 14px;color:var(--dim)">undecano</td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">6</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">6</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">hex-</td>
           <td style="padding:8px 14px;color:var(--dim)">hexano</td>
-          <td style="padding:8px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">12</td>
+          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">12</td>
           <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">dodec-</td>
           <td style="padding:8px 14px;color:var(--dim)">dodecano</td>
         </tr>
@@ -629,11 +634,11 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">2</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2)">di-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">bis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">dicloro, dimetil… / bis(clorometil)</td></tr>
-        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">3</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2)">tri-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tris-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tricloro, trimetil…</td></tr>
-        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">4</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2)">tetra-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tetrakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tetracloro…</td></tr>
-        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">5</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2)">penta-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">pentakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">pentacloro…</td></tr>
-        <tr><td style="padding:7px 14px;color:var(--c3);font-weight:700;font-family:var(--mono)">6</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2)">hexa-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">hexakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">hexacloro…</td></tr>
+        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">2</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">di-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">bis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">dicloro, dimetil… / bis(clorometil)</td></tr>
+        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">3</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">tri-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tris-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tricloro, trimetil…</td></tr>
+        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">4</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">tetra-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tetrakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tetracloro…</td></tr>
+        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">5</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">penta-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">pentakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">pentacloro…</td></tr>
+        <tr><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">6</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">hexa-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">hexakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">hexacloro…</td></tr>
       </tbody>
     </table>
   </div>
