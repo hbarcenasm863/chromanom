@@ -35,25 +35,7 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .lp.g{color:var(--c4);border-color:var(--c4);background:var(--c4b)}
 .dot{width:6px;height:6px;border-radius:50%}
 
-/* DROPDOWN SELECTOR */
-.group-selector-wrap{position:relative;margin-bottom:20px;z-index:50}
-.group-selector-btn{display:flex;align-items:center;gap:10px;width:100%;padding:13px 18px;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);cursor:pointer;font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:600;color:var(--tx);transition:all .2s;box-shadow:var(--sh)}
-.group-selector-btn:hover{border-color:var(--c4)}
-.group-selector-btn.open{border-color:var(--c4);border-bottom-left-radius:0;border-bottom-right-radius:0}
-.gsb-icon{font-size:1.1rem}
-.gsb-name{flex:1;text-align:left}
-.gsb-badge{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:2px 9px;border-radius:100px;border:1px solid;flex-shrink:0}
-.gsb-arrow{font-size:.7rem;color:var(--dimmer);transition:transform .2s;flex-shrink:0}
-.group-selector-btn.open .gsb-arrow{transform:rotate(180deg)}
-.group-dropdown{display:none;position:absolute;top:100%;left:0;right:0;background:var(--surf);border:1.5px solid var(--c4);border-top:none;border-bottom-left-radius:var(--r);border-bottom-right-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;z-index:100}
-.group-dropdown.open{display:block}
-.group-opt{display:flex;align-items:center;gap:10px;width:100%;padding:10px 18px;border:none;background:transparent;color:var(--dim);font-family:'Outfit',sans-serif;font-size:.84rem;font-weight:500;cursor:pointer;text-align:left;border-left:3px solid transparent;transition:all .12s}
-.group-opt:hover{background:var(--surf2);color:var(--tx)}
-.group-opt.active{background:var(--c4b);color:var(--c4);font-weight:700;border-left-color:var(--c4)}
-.go-icon{font-size:.95rem;width:22px;text-align:center;flex-shrink:0}
-.go-priority{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dimmer);margin-left:auto;flex-shrink:0}
-.group-opt.active .go-priority{color:var(--c4);opacity:.7}
-.go-sep{height:1px;background:var(--brd);margin:3px 0}
+
 
 /* SECTION CARDS */
 .sec-card{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:22px;box-shadow:var(--sh);margin-bottom:14px;animation:up .25s ease}
@@ -210,6 +192,49 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .fb-body em{display:block;margin-top:7px;font-size:.78rem;color:#b45309;
   background:rgba(251,191,36,.1);border-left:3px solid #f59e0b;
   padding:5px 9px;border-radius:0 5px 5px 0;line-height:1.4;}
+
+/* ── GALERÍA DE GRUPOS ── */
+.gallery-section{margin-bottom:18px}
+.gallery-section-label{font-size:.6rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--dimmer);margin-bottom:8px;
+  padding:0 2px;display:flex;align-items:center;gap:8px}
+.gallery-section-label::after{content:'';flex:1;height:1px;background:var(--brd)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.gallery-card{
+  background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);
+  padding:13px 14px 11px;cursor:pointer;transition:all .18s;
+  display:flex;flex-direction:column;gap:5px;
+  box-shadow:var(--sh);position:relative;overflow:hidden
+}
+.gallery-card::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(0,0,0,.03));
+  pointer-events:none}
+.gallery-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,110,168,.13);border-color:var(--c4)}
+.gallery-card:active{transform:translateY(0)}
+.gc-top{display:flex;align-items:center;gap:8px}
+.gc-icon{font-size:1.3rem;line-height:1;flex-shrink:0}
+.gc-name{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;
+  color:var(--tx);line-height:1.25}
+.gc-formula{font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  padding:3px 8px;border-radius:6px;align-self:flex-start;
+  border:1.5px solid;font-weight:700;letter-spacing:.02em}
+.gc-badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  color:var(--dimmer);margin-top:1px}
+
+/* ── BOTÓN VOLVER ── */
+.btn-back{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;margin-bottom:16px;
+  background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--rs);
+  color:var(--dim);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .15s;box-shadow:var(--sh)
+}
+.btn-back:hover{border-color:var(--c4);color:var(--c4);background:var(--c4b)}
+
+@media(max-width:600px){
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+  .gc-name{font-size:.78rem}
+}
 </style>
 </head>
 <body>
@@ -237,23 +262,11 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
   </div>
 </header>
 
-<!-- ── DROPDOWN SELECTOR ── -->
-<div style="font-size:.8rem;color:var(--dimmer);margin-bottom:8px;display:flex;align-items:center;gap:6px">
-  <span style="font-size:1rem">👇</span>
-  <span><strong style="color:var(--tx)">Selecciona un grupo funcional</strong> para ver su teoría y practicar ejercicios</span>
-</div>
-<div class="group-selector-wrap">
-  <button class="group-selector-btn" id="gsb" onclick="toggleDropdown()">
-    <span class="gsb-icon" id="gsb-icon">🔗</span>
-    <span class="gsb-name" id="gsb-name" style="color:var(--c4);font-weight:700">Toca aquí para elegir un grupo funcional…</span>
-    <span class="gsb-badge" id="gsb-badge" style="color:var(--dimmer);border-color:var(--brd);background:var(--surf2)">sin grupo func.</span>
-    <span class="gsb-arrow">▼</span>
-  </button>
-  <div class="group-dropdown" id="group-dropdown"></div>
-</div>
+<!-- ── GALERÍA DE GRUPOS ── -->
+<div id="gallery-area"></div>
 
 <!-- ── CONTENT ── -->
-<div id="content-area"></div>
+<div id="content-area" style="display:none"></div>
 </div><!-- /app -->
 
 <script>
@@ -745,65 +758,63 @@ function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answere
 // ═══════════════════════════════════════════════════════════
 // DROPDOWN
 // ═══════════════════════════════════════════════════════════
-function buildDropdown(){
-  const dd = document.getElementById('group-dropdown');
-  // Group by category for visual separators
-  const cats = [
-    {label:'Hidrocarburos', ids:['alcanos','cicloalcanos','alquenos','alquinos','benceno']},
-    {label:'Oxigenados neutros', ids:['alcoholes','eteres','aldehidos','cetonas']},
-    {label:'Ácidos y derivados', ids:['acidos','haluros','anhidridos','esteres','amidas']},
-    {label:'Con nitrógeno', ids:['nitrilos','aminas']},
-  ];
-  cats.forEach((cat,ci)=>{
-    if(ci>0){const sep=document.createElement('div');sep.className='go-sep';dd.appendChild(sep)}
-    const lbl=document.createElement('div');
-    lbl.style.cssText='padding:6px 18px 3px;font-size:.59rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--dimmer)';
-    lbl.textContent=cat.label; dd.appendChild(lbl);
+// ── GALERÍA DE GRUPOS ──
+const CATS = [
+  {label:'Hidrocarburos', ids:['alcanos','cicloalcanos','alquenos','alquinos','benceno']},
+  {label:'Oxigenados neutros', ids:['alcoholes','eteres','aldehidos','cetonas']},
+  {label:'Acidos y derivados', ids:['acidos','haluros','anhidridos','esteres','amidas']},
+  {label:'Con nitrogeno', ids:['nitrilos','aminas']},
+];
+
+function buildGallery(){
+  const ga = document.getElementById('gallery-area');
+  ga.innerHTML = '';
+  // Intro
+  const intro = document.createElement('div');
+  intro.style.cssText = 'font-size:.82rem;color:var(--dimmer);margin-bottom:18px;line-height:1.6;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:11px 14px;';
+  intro.innerHTML = '<strong style="color:var(--tx)">Selecciona un grupo funcional</strong> para ver su teoria IUPAC y practicar ejercicios de nomenclatura organica.';
+  ga.appendChild(intro);
+  // Categories
+  CATS.forEach(cat=>{
+    const sec = document.createElement('div');
+    sec.className = 'gallery-section';
+    const lbl = document.createElement('div');
+    lbl.className = 'gallery-section-label';
+    lbl.textContent = cat.label;
+    sec.appendChild(lbl);
+    const grid = document.createElement('div');
+    grid.className = 'gallery-grid';
     cat.ids.forEach(id=>{
-      const g=GROUPS.find(x=>x.id===id); if(!g) return;
-      const btn=document.createElement('button');
-      btn.className='group-opt'+(id===currentGroup?' active':'');
-      btn.id='gopt-'+id;
-      btn.innerHTML=`<span class="go-icon">${g.icon}</span><span>${g.name}</span><span class="go-priority">P${g.priority}</span>`;
-      btn.onclick=()=>{ selectGroup(id); };
-      dd.appendChild(btn);
+      const g = GROUPS.find(x=>x.id===id); if(!g) return;
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.tabIndex = 0;
+      card.setAttribute('role','button');
+      card.setAttribute('aria-label', g.name);
+      // Color accent on left border
+      card.style.borderLeftColor = g.color;
+      card.style.borderLeftWidth = '3px';
+      card.innerHTML = '<div class="gc-top">'
+        + '<span class="gc-icon">' + g.icon + '</span>'
+        + '<span class="gc-name">' + g.name + '</span>'
+        + '</div>'
+        + '<span class="gc-formula" style="color:' + g.color + ';border-color:' + g.color + ';background:' + g.colorb + '">'
+        + g.formula + '</span>'
+        + '<span class="gc-badge">' + g.badge + '</span>';
+      card.onclick = function(){ showGroup(id); };
+      card.onkeydown = function(e){ if(e.key==='Enter'||e.key===' '){ showGroup(id); } };
+      grid.appendChild(card);
     });
+    sec.appendChild(grid);
+    ga.appendChild(sec);
   });
 }
 
-function toggleDropdown(){
-  const btn=document.getElementById('gsb');
-  const dd=document.getElementById('group-dropdown');
-  const isOpen=dd.classList.contains('open');
-  btn.classList.toggle('open',!isOpen);
-  dd.classList.toggle('open',!isOpen);
-  if(!isOpen){
-    // close on outside click
-    setTimeout(()=>document.addEventListener('click',closeDropdown,{once:true}),10);
-  }
-}
-
-function closeDropdown(){
-  document.getElementById('gsb').classList.remove('open');
-  document.getElementById('group-dropdown').classList.remove('open');
-}
-
-function selectGroup(gid){
-  closeDropdown();
-  showGroup(gid);
-}
-
-function updateSelectorBtn(g){
-  document.getElementById('gsb-icon').textContent=g.icon;
-  document.getElementById('gsb-name').textContent=g.name;
-  document.getElementById('gsb-name').style.color='';
-  document.getElementById('gsb-name').style.fontWeight='';
-  const badge=document.getElementById('gsb-badge');
-  badge.textContent=g.badge;
-  badge.style.color=g.color; badge.style.borderColor=g.color; badge.style.background=g.colorb;
-  document.querySelectorAll('.group-opt').forEach(o=>o.classList.remove('active'));
-  const active=document.getElementById('gopt-'+g.id);
-  if(active){ active.classList.add('active'); active.scrollIntoView({block:'nearest'}); }
+function showGallery(){
+  document.getElementById('gallery-area').style.display = '';
+  document.getElementById('content-area').style.display = 'none';
+  document.getElementById('content-area').innerHTML = '';
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -813,39 +824,40 @@ function showGroup(gid){
   currentGroup = gid;
   const g = GROUPS.find(x=>x.id===gid);
   if(!g) return;
-  updateSelectorBtn(g);
+
+  // Ocultar galería, mostrar contenido
+  document.getElementById('gallery-area').style.display = 'none';
   const area = document.getElementById('content-area');
+  area.style.display = '';
   area.innerHTML = '';
-  // Scroll al inicio para mostrar la teoría primero, no los ejercicios
   window.scrollTo({top: 0, behavior: 'instant'});
+
+  // ── Botón volver ──
+  const backBtn = document.createElement('button');
+  backBtn.className = 'btn-back';
+  backBtn.innerHTML = '&#8592; Lista de grupos';
+  backBtn.onclick = function(){ showGallery(); };
+  area.appendChild(backBtn);
 
   // ── Theory card ──
   const theory = document.createElement('div');
   theory.className = 'sec-card';
-  theory.innerHTML = `
-    <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-      <span style="font-size:2rem">${g.icon}</span>
-      <div style="flex:1">
-        <h2>${g.name}</h2>
-        <p style="margin-bottom:8px">${g.desc}</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <span class="group-formula">${g.formula}</span>
-          <span class="group-badge" style="color:${g.color};border-color:${g.color};background:${g.colorb}">${g.badge}</span>
-          <span class="priority-tag">Prioridad ${g.priority}/16</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec-lbl">Las 4 partes en un ejemplo</div>
-    <div class="name-strip">${buildNameStrip(g)}</div>
-
-    <div class="sec-lbl" style="margin-top:14px">Reglas IUPAC</div>
-    <div class="rules-list">${buildRules(g)}</div>
-
-    <div class="iupac-note">📌 <strong>IUPAC:</strong> ${g.iupac}</div>
-
-    ${g.id==='benceno' ? buildCommonNames() : ''}
-  `;
+  theory.innerHTML = '<div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
+    + '<span style="font-size:2rem">' + g.icon + '</span>'
+    + '<div style="flex:1">'
+    + '<h2>' + g.name + '</h2>'
+    + '<p style="margin-bottom:8px">' + g.desc + '</p>'
+    + '<div style="display:flex;gap:8px;flex-wrap:wrap">'
+    + '<span class="group-formula">' + g.formula + '</span>'
+    + '<span class="group-badge" style="color:' + g.color + ';border-color:' + g.color + ';background:' + g.colorb + '">' + g.badge + '</span>'
+    + '<span class="priority-tag">Prioridad ' + g.priority + '/16</span>'
+    + '</div></div></div>'
+    + '<div class="sec-lbl">Las 4 partes en un ejemplo</div>'
+    + '<div class="name-strip">' + buildNameStrip(g) + '</div>'
+    + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC</div>'
+    + '<div class="rules-list">' + buildRules(g) + '</div>'
+    + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '</div>'
+    + (g.id==='benceno' ? buildCommonNames() : '');
   area.appendChild(theory);
 
   // ── Exercises card ──
@@ -1006,6 +1018,8 @@ function renderExercise(gid){
           <div class="stat"><div class="stat-n" style="color:var(--c4)">${st.score}</div><div class="stat-l">Puntos</div></div>
         </div>
         <button class="btn-check" onclick="restartEx('${gid}')">Repetir ejercicios →</button>
+        <br><br>
+        <button class="btn-sm" onclick="showGallery()" style="margin:0 auto;display:block">&#8592; Elegir otro grupo</button>
       </div>`;
     return;
   }
@@ -1808,19 +1822,7 @@ const MOLS={
 };
 
 // ── INIT ──
-buildDropdown();
-// Mostrar pantalla de bienvenida en vez de cargar automáticamente
-document.getElementById('content-area').innerHTML = `
-  <div style="text-align:center;padding:48px 24px;color:var(--dimmer)">
-    <div style="font-size:3rem;margin-bottom:16px">🧪</div>
-    <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--tx);margin-bottom:8px">¡Bienvenido a Grupos Funcionales!</div>
-    <div style="font-size:.9rem;line-height:1.7;max-width:380px;margin:0 auto">
-      Usa el <strong>selector de arriba</strong> para elegir un grupo funcional.<br>
-      Verás su <span style="color:var(--c3)">teoría IUPAC</span> y podrás practicar con <span style="color:var(--c4)">ejercicios</span>.
-    </div>
-    <div style="margin-top:24px;font-size:2rem;animation:bounce .9s infinite alternate">⬆️</div>
-  </div>
-`;
+buildGallery();
 </script>
 
 <div style="text-align:center;padding:20px 18px;margin-top:16px;border-top:1px solid var(--brd);font-size:.75rem;color:var(--dimmer);line-height:1.9">
