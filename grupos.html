@@ -758,7 +758,7 @@ const GROUPS = [
 let currentGroup = GROUPS[0].id;
 let exState = {}; // per-group exercise state
 
-function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0})}
+function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,attempts:0,answered:false,score:0,ok:0,err:0,tot:0})}
 
 // ═══════════════════════════════════════════════════════════
 // DROPDOWN
@@ -1032,6 +1032,7 @@ function renderExercise(gid){
   const ex = g.exercises[st.idx];
   st.answered = false;
   st.hints = 0;
+  st.attempts = 0;
   const pct = g.exercises.length > 0 ? st.idx / g.exercises.length * 100 : 0;
 
   card.innerHTML = `
@@ -1050,6 +1051,7 @@ function renderExercise(gid){
     <div class="ans-lbl" style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--dimmer);margin-bottom:8px">Escribe el nombre IUPAC</div>
     <div class="ans-row">
       <input class="ans-input" id="ainp-${gid}" type="text" placeholder="nombre IUPAC completo…" autocomplete="off" spellcheck="false"
+        oninput="this.classList.remove('err')"
         onkeydown="if(event.key==='Enter')checkEx('${gid}')">
       <button class="btn-check" id="abtn-${gid}" onclick="checkEx('${gid}')">Verificar →</button>
     </div>
@@ -1084,24 +1086,32 @@ function checkEx(gid){
   const val=inp?.value.trim(); if(!val) return;
   const ex=g.exercises[st.idx];
   const correct=ex.accepted.some(a=>norm(a)===norm(val));
-  st.answered=true; st.tot++;
-  document.getElementById('abtn-'+gid).disabled=true;
-  inp.disabled=true;
-  document.getElementById('etot-'+gid).textContent=st.tot;
   const fb=document.getElementById('afb-'+gid);
-  fb.classList.add('show');
+  fb.classList.remove('ok','fail'); fb.classList.add('show');
   if(correct){
-    inp.classList.add('ok');
-    st.ok++; const pts=Math.max(10-st.hints*2,4); st.score+=pts;
+    inp.classList.remove('err'); inp.classList.add('ok');
+    st.answered=true; st.tot++;
+    document.getElementById('abtn-'+gid).disabled=true;
+    inp.disabled=true;
+    document.getElementById('etot-'+gid).textContent=st.tot;
+    st.ok++; const pts=Math.max(10-st.hints*2-st.attempts*2,2); st.score+=pts;
     document.getElementById('eok-'+gid).textContent=st.ok;
-    document.getElementById('ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
+    document.querySelector('.ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
     fb.classList.add('ok');
     fb.innerHTML=`<div class="fb-head ok">✓ ¡Correcto! +${pts} pts</div><div class="fb-body">${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
   } else {
-    inp.classList.add('err'); st.err++;
+    inp.classList.add('err'); st.err++; st.attempts++;
     document.getElementById('eerr-'+gid).textContent=st.err;
     fb.classList.add('fail');
-    fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
+    if(st.attempts>=3){
+      st.answered=true; st.tot++;
+      document.getElementById('abtn-'+gid).disabled=true;
+      inp.disabled=true;
+      document.getElementById('etot-'+gid).textContent=st.tot;
+      fb.innerHTML=`<div class="fb-head fail">✗ Intento ${st.attempts}/3 — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Respuesta correcta: <strong>${ex.ans}</strong><br>${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
+    } else {
+      fb.innerHTML=`<div class="fb-head fail">✗ Intento ${st.attempts}/3 — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Revisa las pistas e intenta de nuevo.</div>`;
+    }
   }
 }
 
@@ -1261,10 +1271,10 @@ const MOLS={
   metoxiPropano(){
     _pts=[];const p=zz(0,0,3,true);
     let s=chain(p);
-    // oxygen + methyl going perpendicular up from C1
+    // oxygen + methyl going perpendicular up from C1 — O drawn last so bonds don't cross it
     s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);
-    s+=atm(p[0].x,p[0].y-BL,'O');
     s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);
+    s+=atm(p[0].x,p[0].y-BL,'O');
     return mkSVG(s);
   },
   // ALDEHÍDOS
@@ -1405,13 +1415,13 @@ const MOLS={
     // left chain (2C): starts at O, goes left-down then left-up
     const l1={x:ox-BL*COS30,y:oy+BL*SIN30};
     const l2={x:l1.x-BL*COS30,y:l1.y-BL*SIN30};
-    let s=atm(ox,oy,'O');
-    s+=ln(ox,oy,r1.x,r1.y); s+=ln(r1.x,r1.y,r2.x,r2.y);
+    let s=ln(ox,oy,r1.x,r1.y); s+=ln(r1.x,r1.y,r2.x,r2.y);
     s+=ln(ox,oy,l1.x,l1.y); s+=ln(l1.x,l1.y,l2.x,l2.y);
     _reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);
+    s+=atm(ox,oy,'O');
     return mkSVG(s);
   },
-  metoxiButano(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);return mkSVG(s);},
+  metoxiButano(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
   etoxiPropano(){
     // C2H5-O-C3H7: ethyl left (2C), propyl right (3C)
     _pts=[];
@@ -1423,10 +1433,10 @@ const MOLS={
     // left chain (2C)
     const l1={x:ox-BL*COS30,y:oy+BL*SIN30};
     const l2={x:l1.x-BL*COS30,y:l1.y-BL*SIN30};
-    let s=atm(ox,oy,'O');
-    s+=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(r2.x,r2.y,r3.x,r3.y);
+    let s=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(r2.x,r2.y,r3.x,r3.y);
     s+=ln(ox,oy,l1.x,l1.y);s+=ln(l1.x,l1.y,l2.x,l2.y);
     _reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(r3.x,r3.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);
+    s+=atm(ox,oy,'O');
     return mkSVG(s);
   },
   propoxiPropano(){
@@ -1441,10 +1451,10 @@ const MOLS={
     const l1={x:ox-BL*COS30,y:oy+BL*SIN30};
     const l2={x:l1.x-BL*COS30,y:l1.y-BL*SIN30};
     const l3={x:l2.x-BL*COS30,y:l2.y+BL*SIN30};
-    let s=atm(ox,oy,'O');
-    s+=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(r2.x,r2.y,r3.x,r3.y);
+    let s=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(r2.x,r2.y,r3.x,r3.y);
     s+=ln(ox,oy,l1.x,l1.y);s+=ln(l1.x,l1.y,l2.x,l2.y);s+=ln(l2.x,l2.y,l3.x,l3.y);
     _reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(r3.x,r3.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);_reg(l3.x,l3.y);
+    s+=atm(ox,oy,'O');
     return mkSVG(s);
   },
 
@@ -1731,10 +1741,10 @@ const MOLS={
   metilCicloHexanol(){_pts=[];let s='';const r=36,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'OH');s+=ln(v[3].x,v[3].y,v[3].x,v[3].y+BL);_reg(v[3].x,v[3].y+BL);return mkSVG(s);},
 
   // ÉTERES nuevos (cíclicos + benceno)
-  metoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=atm(0,-BL,'O');s+=ln(0,-BL,-BL*COS30,-(BL+BL*SIN30));_reg(-BL*COS30,-(BL+BL*SIN30));return mkSVG(s);},
-  etoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=atm(0,-BL,'O');s+=ln(0,-BL,BL*COS30,-(BL+BL*SIN30));s+=ln(BL*COS30,-(BL+BL*SIN30),BL*COS30*2,-BL);_reg(BL*COS30*2,-BL);return mkSVG(s);},
-  metoxiCicloHexano(){_pts=[];let s='';const r=36,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=atm(v[0].x,v[0].y-BL,'O');s+=ln(v[0].x,v[0].y-BL,v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);_reg(v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);return mkSVG(s);},
-  etoxiMetano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);return mkSVG(s);},
+  metoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=ln(0,-BL,-BL*COS30,-(BL+BL*SIN30));_reg(-BL*COS30,-(BL+BL*SIN30));s+=atm(0,-BL,'O');return mkSVG(s);},
+  etoxiBenceno(){_pts=[];let s=bnzRing(0,0);s+=ln(0,0,0,-BL);s+=ln(0,-BL,BL*COS30,-(BL+BL*SIN30));s+=ln(BL*COS30,-(BL+BL*SIN30),BL*COS30*2,-BL);_reg(BL*COS30*2,-BL);s+=atm(0,-BL,'O');return mkSVG(s);},
+  metoxiCicloHexano(){_pts=[];let s='';const r=36,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=ln(v[0].x,v[0].y-BL,v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);_reg(v[0].x-BL*COS30,v[0].y-BL-BL*SIN30);s+=atm(v[0].x,v[0].y-BL,'O');return mkSVG(s);},
+  etoxiMetano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
 
   // ALDEHÍDOS cíclicos
   cicloHexanCarbaldehido(){_pts=[];let s='';const r=34,cx=44,cy=44;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);s+=dbl(v[0].x,v[0].y-BL,v[0].x,v[0].y-2*BL);s+=atm(v[0].x,v[0].y-2*BL,'O');return mkSVG(s);},
