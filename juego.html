@@ -715,6 +715,35 @@ const M = {
     s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);
     _reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);
     return mkSVG(s);},
+
+  // ── AMIDAS extra ──
+  pentanamida(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  hexanamida(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+
+  // ── NITRILOS extra ──
+  etanonitrilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  hexanonitrilo(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+
+  // ── ALDEHÍDOS extra ──
+  etanal(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  hexanal(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+
+  // ── CETONAS extra ──
+  hexan2ona(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+
+  // ── ÉSTERES ──
+  // Estructura: R₁–CO–O–R₂. Siempre dibujar enlaces antes que átomos O.
+  etanoatoMetilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  propanoatoMetilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  etanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);_reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  butanoatoMetilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+
+  // ── ÉTERES ──
+  // O al final en todos (z-order correcto).
+  metoximetano(){_pts=[];const p=zz(0,0,2,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y);_reg(p[0].x,p[0].y);_reg(p[1].x,p[1].y);s+=atm((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2,'O');return mkSVG(s);},
+  metoxietano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  etoxietano(){_pts=[];const ox=0,oy=0;const r1={x:BL*COS30,y:BL*SIN30},r2={x:2*BL*COS30,y:0},l1={x:-BL*COS30,y:BL*SIN30},l2={x:-2*BL*COS30,y:0};let s=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(ox,oy,l1.x,l1.y);s+=ln(l1.x,l1.y,l2.x,l2.y);_reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);s+=atm(ox,oy,'O');return mkSVG(s);},
+  metoxipropano(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
 };
 
 // ════════════════════════════════════════════════════════
@@ -1596,6 +1625,382 @@ const QBANK = [
    highlight:{text:'bencen',cls:'cg'},
    correct:['c','g'],
    expl:'En el 1,2-dimetilbenceno, <b>bencen</b> es a la vez <b>cadena principal</b> y <b>grupo funcional</b> aromático. Se aceptan ambas categorías.', topic:'benceno'},
+
+  // ════════════════════════════════════════════════════════
+  // AMIDAS — preguntas adicionales
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'propanamida', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'propanamida', opts:['propanamida','propanoato','propanonitrilo','butanamida'],
+   expl:'3C con −CONH₂ → <b>propanamida</b>.', topic:'amidas'},
+
+  {type:'mc', mol:'hexanamida', q:'¿Cuál es el nombre IUPAC de esta amida de 6 carbonos?',
+   ans:'hexanamida', opts:['hexanamida','pentanamida','hexanonitrilo','ácido hexanoico'],
+   expl:'6C con −CONH₂ → <b>hexanamida</b>.', topic:'amidas'},
+
+  {type:'mc', mol:'etanamida', q:'¿Qué indica el sufijo "-amida" en la nomenclatura IUPAC?',
+   ans:'Grupo funcional −CONH₂', opts:['Grupo funcional −CONH₂','Grupo −OH','Triple enlace C≡N','Ácido carboxílico −COOH'],
+   expl:'El sufijo <b>-amida</b> indica la presencia del grupo −CONH₂.', topic:'amidas'},
+
+  {type:'drag', mol:'butanamida', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+   ans:'butanamida',
+   slots:[
+     {id:'da1',label:'Cadena',correct:'but',cls:'c'},
+     {id:'da2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'da3',label:'Grupo funcional',correct:'amida',cls:'g'},
+   ],
+   tokens:[{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'pent',cls:'c'},{text:'ol',cls:'g'},{text:'nitrilo',cls:'g'}],
+   expl:'4C con −CONH₂ → <b>butanamida</b>.',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
+
+  {type:'drag', mol:'pentanamida', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+   ans:'pentanamida',
+   slots:[
+     {id:'db1',label:'Cadena',correct:'pent',cls:'c'},
+     {id:'db2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'db3',label:'Grupo funcional',correct:'amida',cls:'g'},
+   ],
+   tokens:[{text:'pent',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'but',cls:'c'},{text:'ol',cls:'g'},{text:'oico',cls:'g'}],
+   expl:'5C con −CONH₂ → <b>pentanamida</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
+
+  {type:'id', mol:'propanamida',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propanamida',
+   highlight:{text:'prop',cls:'c'},
+   correct:'c',
+   expl:'"prop" es la <b>Cadena principal</b> — indica 3 carbonos.', topic:'amidas'},
+
+  {type:'id', mol:'butanamida',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butanamida',
+   highlight:{text:'amida',cls:'g'},
+   correct:'g',
+   expl:'"amida" es el <b>Grupo funcional</b> — indica el grupo −CONH₂.', topic:'amidas'},
+
+  {type:'id', mol:'pentanamida',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'pentanamida',
+   highlight:{text:'pent',cls:'c'},
+   correct:'c',
+   expl:'"pent" es la <b>Cadena principal</b> — indica 5 carbonos.', topic:'amidas'},
+
+  {type:'write', mol:'propanamida', q:'Escribe el nombre IUPAC de esta amida.',
+   ans:'propanamida', accepted:['propanamida'],
+   expl:'3C con −CONH₂ → <b>propanamida</b>.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
+
+  {type:'write', mol:'pentanamida', q:'Escribe el nombre IUPAC de esta amida.',
+   hints:['Tiene 5 carbonos incluyendo el del −CONH₂','El sufijo de amida es -amida'],
+   ans:'pentanamida', accepted:['pentanamida'],
+   expl:'5C con −CONH₂ → <b>pentanamida</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
+
+  // ════════════════════════════════════════════════════════
+  // NITRILOS — preguntas adicionales
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'butanonitrilo', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'butanonitrilo', opts:['butanonitrilo','butanamida','propanonitrilo','pentanonitrilo'],
+   expl:'4C con −C≡N → <b>butanonitrilo</b>.', topic:'nitrilos'},
+
+  {type:'mc', mol:'pentanonitrilo', q:'¿Por qué el pentanonitrilo tiene 5 carbonos y no 4?',
+   ans:'El carbono del −C≡N se cuenta en la cadena', opts:['El carbono del −C≡N se cuenta en la cadena','El −C≡N añade 2 carbonos','El nitrógeno se convierte en carbono','El sufijo -nitrilo añade un carbono extra'],
+   expl:'En IUPAC, el carbono del grupo <b>−C≡N</b> se incluye en el recuento de la cadena.', topic:'nitrilos'},
+
+  {type:'mc', mol:'propanonitrilo', q:'¿Cuál es la fórmula del grupo funcional nitrilo?',
+   ans:'−C≡N', opts:['−C≡N','−CONH₂','−CHO','−C=N−'],
+   expl:'El grupo nitrilo es <b>−C≡N</b>: triple enlace carbono–nitrógeno.', topic:'nitrilos'},
+
+  {type:'drag', mol:'propanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+   ans:'propanonitrilo',
+   slots:[
+     {id:'dn1',label:'Cadena',correct:'prop',cls:'c'},
+     {id:'dn2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'dn3',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+   ],
+   tokens:[{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'but',cls:'c'},{text:'amida',cls:'g'},{text:'hex',cls:'c'}],
+   expl:'3C con −C≡N → <b>propanonitrilo</b>.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+  {type:'drag', mol:'pentanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+   ans:'pentanonitrilo',
+   slots:[
+     {id:'do1',label:'Cadena',correct:'pent',cls:'c'},
+     {id:'do2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'do3',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+   ],
+   tokens:[{text:'pent',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'but',cls:'c'},{text:'amida',cls:'g'},{text:'hex',cls:'c'}],
+   expl:'5C con −C≡N → <b>pentanonitrilo</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+  {type:'id', mol:'butanonitrilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butanonitrilo',
+   highlight:{text:'but',cls:'c'},
+   correct:'c',
+   expl:'"but" es la <b>Cadena principal</b> — indica 4 carbonos.', topic:'nitrilos'},
+
+  {type:'id', mol:'pentanonitrilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'pentanonitrilo',
+   highlight:{text:'nitrilo',cls:'g'},
+   correct:'g',
+   expl:'"nitrilo" es el <b>Grupo funcional</b> — indica el grupo −C≡N.', topic:'nitrilos'},
+
+  {type:'id', mol:'propanonitrilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propanonitrilo',
+   highlight:{text:'prop',cls:'c'},
+   correct:'c',
+   expl:'"prop" es la <b>Cadena principal</b> — indica 3 carbonos.', topic:'nitrilos'},
+
+  {type:'write', mol:'pentanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+   hints:['Tiene 5 carbonos incluyendo el del −C≡N','El sufijo es -onitrilo'],
+   ans:'pentanonitrilo', accepted:['pentanonitrilo'],
+   expl:'5C con −C≡N → <b>pentanonitrilo</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+  {type:'write', mol:'hexanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+   hints:['Tiene 6 carbonos incluyendo el del −C≡N','El prefijo hex- indica 6 carbonos'],
+   ans:'hexanonitrilo', accepted:['hexanonitrilo'],
+   expl:'6C con −C≡N → <b>hexanonitrilo</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+  // ════════════════════════════════════════════════════════
+  // ALDEHÍDOS — preguntas adicionales
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'etanal', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'etanal', opts:['etanal','metanal','propanal','etanol'],
+   expl:'2C con −CHO → <b>etanal</b>.', topic:'aldehidos'},
+
+  {type:'mc', mol:'pentanal', q:'¿Qué distingue a un aldehído de una cetona?',
+   ans:'El grupo −CHO está en el extremo de la cadena', opts:['El grupo −CHO está en el extremo de la cadena','Tiene dos carbonos enlazados al C=O interior','El C=O siempre está en posición 2','Lleva un grupo −OH'],
+   expl:'En los aldehídos, el carbonilo (C=O) está en el <b>extremo</b> de la cadena como −CHO; en las cetonas está en posición interna.', topic:'aldehidos'},
+
+  {type:'drag', mol:'hexanal', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+   ans:'hexanal',
+   slots:[
+     {id:'dh1',label:'Cadena',correct:'hex',cls:'c'},
+     {id:'dh2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'dh3',label:'Grupo funcional',correct:'al',cls:'g'},
+   ],
+   tokens:[{text:'hex',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'pent',cls:'c'},{text:'ol',cls:'g'},{text:'ona',cls:'g'}],
+   expl:'6C con −CHO → <b>hexanal</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+  {type:'id', mol:'etanal',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanal',
+   highlight:{text:'al',cls:'g'},
+   correct:'g',
+   expl:'"al" es el <b>Grupo funcional</b> — sufijo que indica aldehído (−CHO).', topic:'aldehidos'},
+
+  // ════════════════════════════════════════════════════════
+  // CETONAS — preguntas adicionales
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'hexan2ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
+   ans:'hexan-2-ona', opts:['hexan-2-ona','hexan-3-ona','pentan-2-ona','hexanal'],
+   expl:'6C con C=O en C2 → <b>hexan-2-ona</b>.', topic:'cetonas'},
+
+  {type:'drag', mol:'hexan2ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+   ans:'hexan-2-ona',
+   slots:[
+     {id:'dk1',label:'Cadena',correct:'hex',cls:'c'},
+     {id:'dk2',label:'Saturación',correct:'an',cls:'c'},
+     {id:'dk3',label:'Localizador + GF',correct:'2-ona',cls:'g'},
+   ],
+   tokens:[{text:'hex',cls:'c'},{text:'an',cls:'c'},{text:'2-ona',cls:'g'},{text:'pent',cls:'c'},{text:'3-ona',cls:'g'},{text:'ol',cls:'g'}],
+   expl:'6C, C=O en C2 → <b>hexan-2-ona</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  {type:'id', mol:'hexan2ona',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'hexan-2-ona',
+   highlight:{text:'2-on',cls:'g'},
+   correct:'g',
+   expl:'"2-on" es el <b>Grupo funcional</b> + localizador — indica cetona (C=O) en C2.', topic:'cetonas'},
+
+  {type:'write', mol:'hexan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
+   hints:['Cadena de 6 carbonos con C=O','El carbonilo no está en el extremo — usa el localizador 2'],
+   ans:'hexan-2-ona', accepted:['hexan-2-ona','hexan2ona','2-hexanona'],
+   expl:'6C, C=O en C2 → <b>hexan-2-ona</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  // ════════════════════════════════════════════════════════
+  // ÉSTERES
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'etanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+   ans:'etanoato de metilo', opts:['etanoato de metilo','ácido etanoico','etanoato de etilo','propanoato de metilo'],
+   expl:'Ácido etanoico (2C) + metanol → <b>etanoato de metilo</b>.', topic:'esteres'},
+
+  {type:'mc', mol:'etanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+   ans:'etanoato de etilo', opts:['etanoato de etilo','propanoato de etilo','etanoato de metilo','etanoato de propilo'],
+   expl:'Ácido etanoico (2C) + etanol → <b>etanoato de etilo</b> (acetato de etilo).', topic:'esteres'},
+
+  {type:'mc', mol:'butanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+   ans:'butanoato de metilo', opts:['butanoato de metilo','propanoato de metilo','butanoato de etilo','ácido butanoico'],
+   expl:'Ácido butanoico (4C) + metanol → <b>butanoato de metilo</b>.', topic:'esteres'},
+
+  {type:'mc', mol:'etanoatoMetilo', q:'¿Cuántos carbonos tiene el ácido de origen del etanoato de metilo?',
+   ans:'2 (etanoico)', opts:['2 (etanoico)','3 (propanoico)','1 (metanoico)','4 (butanoico)'],
+   expl:'El prefijo <b>etanoato</b> proviene del ácido etanoico, que tiene <b>2 carbonos</b>.', topic:'esteres'},
+
+  {type:'mc', mol:'propanoatoMetilo', q:'¿Qué sufijo IUPAC indica que un compuesto es un éster?',
+   ans:'-oato', opts:['-oato','-oico','-ol','-amida'],
+   expl:'Los ésteres se nombran con el sufijo <b>-oato</b> (del ácido carboxílico correspondiente).', topic:'esteres'},
+
+  {type:'drag', mol:'etanoatoMetilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+   ans:'etanoato de metilo',
+   slots:[
+     {id:'de1',label:'Ácido derivado',correct:'etanoato',cls:'g'},
+     {id:'de2',label:'Alquilo',correct:'de metilo',cls:'r'},
+   ],
+   tokens:[{text:'etanoato',cls:'g'},{text:'de metilo',cls:'r'},{text:'propanoato',cls:'g'},{text:'de etilo',cls:'r'}],
+   expl:'Ácido etanoico + metanol → <b>etanoato de metilo</b>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  {type:'drag', mol:'propanoatoMetilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+   ans:'propanoato de metilo',
+   slots:[
+     {id:'df1',label:'Ácido derivado',correct:'propanoato',cls:'g'},
+     {id:'df2',label:'Alquilo',correct:'de metilo',cls:'r'},
+   ],
+   tokens:[{text:'propanoato',cls:'g'},{text:'de metilo',cls:'r'},{text:'butanoato',cls:'g'},{text:'de etilo',cls:'r'}],
+   expl:'Ácido propanoico + metanol → <b>propanoato de metilo</b>.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  {type:'drag', mol:'etanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+   ans:'etanoato de etilo',
+   slots:[
+     {id:'dg1',label:'Ácido derivado',correct:'etanoato',cls:'g'},
+     {id:'dg2',label:'Alquilo',correct:'de etilo',cls:'r'},
+   ],
+   tokens:[{text:'etanoato',cls:'g'},{text:'de etilo',cls:'r'},{text:'propanoato',cls:'g'},{text:'de metilo',cls:'r'}],
+   expl:'Ácido etanoico + etanol → <b>etanoato de etilo</b>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  {type:'id', mol:'etanoatoMetilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanoato de metilo',
+   highlight:{text:'et',cls:'c'},
+   correct:'c',
+   expl:'"et" es la <b>Cadena principal</b> del ácido de origen — indica 2 carbonos (ácido etanoico).', topic:'esteres'},
+
+  {type:'id', mol:'etanoatoMetilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanoato de metilo',
+   highlight:{text:'anoato',cls:'g'},
+   correct:'g',
+   expl:'"anoato" es el <b>Grupo funcional</b> — sufijo que indica éster (cadena saturada).', topic:'esteres'},
+
+  {type:'id', mol:'propanoatoMetilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propanoato de metilo',
+   highlight:{text:'de metilo',cls:'r'},
+   correct:'r',
+   expl:'"de metilo" es la parte <b>alquílica</b> del éster — el grupo metilo (−CH₃) del alcohol de origen.', topic:'esteres'},
+
+  {type:'write', mol:'etanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['El ácido de origen tiene 2 carbonos: ácido etanoico','El alcohol de origen es el metanol'],
+   ans:'etanoato de metilo', accepted:['etanoato de metilo','acetato de metilo'],
+   expl:'CH₃COO−CH₃: ácido etanoico + metanol → <b>etanoato de metilo</b>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  {type:'write', mol:'propanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['El ácido de origen tiene 3 carbonos: ácido propanoico','El alcohol de origen es el metanol'],
+   ans:'propanoato de metilo', accepted:['propanoato de metilo'],
+   expl:'CH₃CH₂COO−CH₃: ácido propanoico + metanol → <b>propanoato de metilo</b>.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  // ════════════════════════════════════════════════════════
+  // ÉTERES
+  // ════════════════════════════════════════════════════════
+
+  {type:'mc', mol:'etoxietano', q:'¿Cuál es el nombre IUPAC del éter dietílico (C₂H₅−O−C₂H₅)?',
+   ans:'etoxietano', opts:['etoxietano','etoximetano','metoxietano','propoxietano'],
+   expl:'Dos grupos etilo unidos por O → <b>etoxietano</b> (éter dietílico).', topic:'eteres'},
+
+  {type:'mc', mol:'metoximetano', q:'¿Cuál es el nombre IUPAC del éter dimetílico (CH₃−O−CH₃)?',
+   ans:'metoximetano', opts:['metoximetano','etoximetano','dimetilóxido','metoxietano'],
+   expl:'Dos grupos metilo unidos por O → <b>metoximetano</b> (éter dimetílico).', topic:'eteres'},
+
+  {type:'mc', mol:'metoxietano', q:'¿Qué indica el prefijo "metoxi-" en la nomenclatura IUPAC de éteres?',
+   ans:'Un grupo −O−CH₃ unido a la cadena', opts:['Un grupo −O−CH₃ unido a la cadena','Un grupo −O−C₂H₅','Un grupo −OH','Un grupo −OCO−'],
+   expl:'El prefijo <b>metoxi-</b> indica el grupo <b>−O−CH₃</b> (metoxilo) como sustituyente de la cadena principal.', topic:'eteres'},
+
+  {type:'mc', mol:'metoxipropano', q:'¿Cuántos carbonos tiene en total el metoxipropano?',
+   ans:'4 (1 del metoxi + 3 del propano)', opts:['4 (1 del metoxi + 3 del propano)','3','5','6'],
+   expl:'Metoxi (−OCH₃ = <b>1C</b>) + propano (<b>3C</b>) = <b>4 carbonos</b> en total.', topic:'eteres'},
+
+  {type:'drag', mol:'metoximetano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+   ans:'metoximetano',
+   slots:[
+     {id:'dx1',label:'Grupo éter',correct:'metoxi',cls:'g'},
+     {id:'dx2',label:'Cadena',correct:'met',cls:'c'},
+     {id:'dx3',label:'Clase',correct:'ano',cls:'g'},
+   ],
+   tokens:[{text:'metoxi',cls:'g'},{text:'met',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'et',cls:'c'}],
+   expl:'CH₃−O−CH₃: dos metilos, el menor es metoxi → <b>metoximetano</b>.',
+   parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'met',cls:'c',l:'1C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'drag', mol:'metoxietano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+   ans:'metoxietano',
+   slots:[
+     {id:'dy1',label:'Grupo éter',correct:'metoxi',cls:'g'},
+     {id:'dy2',label:'Cadena',correct:'et',cls:'c'},
+     {id:'dy3',label:'Clase',correct:'ano',cls:'g'},
+   ],
+   tokens:[{text:'metoxi',cls:'g'},{text:'et',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'prop',cls:'c'}],
+   expl:'CH₃−O−C₂H₅: metilo (menor) = metoxi, etano (mayor) = cadena → <b>metoxietano</b>.',
+   parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'drag', mol:'etoxietano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+   ans:'etoxietano',
+   slots:[
+     {id:'dz1',label:'Grupo éter',correct:'etoxi',cls:'g'},
+     {id:'dz2',label:'Cadena',correct:'et',cls:'c'},
+     {id:'dz3',label:'Clase',correct:'ano',cls:'g'},
+   ],
+   tokens:[{text:'etoxi',cls:'g'},{text:'et',cls:'c'},{text:'ano',cls:'g'},{text:'metoxi',cls:'g'},{text:'prop',cls:'c'}],
+   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b> (éter dietílico).',
+   parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'id', mol:'etoxietano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etoxietano',
+   highlight:{text:'etoxi',cls:'g'},
+   correct:'g',
+   expl:'"etoxi" es el <b>Grupo funcional</b> — indica el grupo −O−C₂H₅ (etoxilo, la parte éter).', topic:'eteres'},
+
+  {type:'id', mol:'metoxipropano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'1-metoxipropano',
+   highlight:{text:'prop',cls:'c'},
+   correct:'c',
+   expl:'"prop" es la <b>Cadena principal</b> — indica 3 carbonos (la cadena más larga).', topic:'eteres'},
+
+  {type:'id', mol:'metoxietano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'metoxietano',
+   highlight:{text:'metoxi',cls:'g'},
+   correct:'g',
+   expl:'"metoxi" es el <b>Grupo funcional</b> — indica el grupo −O−CH₃ (metoxilo, éter).', topic:'eteres'},
+
+  {type:'write', mol:'etoxietano', q:'Escribe el nombre IUPAC del éter dietílico.',
+   hints:['Dos grupos etilo (2C) unidos por un oxígeno','El grupo −O−C₂H₅ se llama etoxi-'],
+   ans:'etoxietano', accepted:['etoxietano','éter dietílico','eter dietilico'],
+   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b>.',
+   parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'write', mol:'metoxietano', q:'Escribe el nombre IUPAC de este éter.',
+   hints:['Un grupo metilo y un grupo etilo unidos por O','El grupo menor (metilo) es el prefijo: metoxi-'],
+   ans:'metoxietano', accepted:['metoxietano','etoximetano'],
+   expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b>.',
+   parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 ];
 
 // ════════════════════════════════════════════════════════
