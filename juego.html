@@ -1632,11 +1632,11 @@ const QBANK = [
 
   {type:'mc', mol:'propanamida', q:'¿Cuál es el nombre IUPAC de esta estructura?',
    ans:'propanamida', opts:['propanamida','propanoato','propanonitrilo','butanamida'],
-   expl:'3C con −CONH₂ → <b>propanamida</b>.', topic:'amidas'},
+   expl:'3C con −CONH₂ → <b>propanamida</b> (nombre funcional: <em>propionamida</em>).', topic:'amidas'},
 
   {type:'mc', mol:'hexanamida', q:'¿Cuál es el nombre IUPAC de esta amida de 6 carbonos?',
    ans:'hexanamida', opts:['hexanamida','pentanamida','hexanonitrilo','ácido hexanoico'],
-   expl:'6C con −CONH₂ → <b>hexanamida</b>.', topic:'amidas'},
+   expl:'6C con −CONH₂ → <b>hexanamida</b> (nombre funcional: <em>capramida</em>).', topic:'amidas'},
 
   {type:'mc', mol:'etanamida', q:'¿Qué indica el sufijo "-amida" en la nomenclatura IUPAC?',
    ans:'Grupo funcional −CONH₂', opts:['Grupo funcional −CONH₂','Grupo −OH','Triple enlace C≡N','Ácido carboxílico −COOH'],
@@ -1650,7 +1650,7 @@ const QBANK = [
      {id:'da3',label:'Grupo funcional',correct:'amida',cls:'g'},
    ],
    tokens:[{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'pent',cls:'c'},{text:'ol',cls:'g'},{text:'nitrilo',cls:'g'}],
-   expl:'4C con −CONH₂ → <b>butanamida</b>.',
+   expl:'4C con −CONH₂ → <b>butanamida</b> (nombre funcional: <em>butiramida</em>).',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
 
   {type:'drag', mol:'pentanamida', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
@@ -1661,7 +1661,7 @@ const QBANK = [
      {id:'db3',label:'Grupo funcional',correct:'amida',cls:'g'},
    ],
    tokens:[{text:'pent',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'but',cls:'c'},{text:'ol',cls:'g'},{text:'oico',cls:'g'}],
-   expl:'5C con −CONH₂ → <b>pentanamida</b>.',
+   expl:'5C con −CONH₂ → <b>pentanamida</b> (nombre funcional: <em>valeramida</em>).',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
 
   {type:'id', mol:'propanamida',
@@ -1686,14 +1686,14 @@ const QBANK = [
    expl:'"pent" es la <b>Cadena principal</b> — indica 5 carbonos.', topic:'amidas'},
 
   {type:'write', mol:'propanamida', q:'Escribe el nombre IUPAC de esta amida.',
-   ans:'propanamida', accepted:['propanamida'],
-   expl:'3C con −CONH₂ → <b>propanamida</b>.',
+   ans:'propanamida', accepted:['propanamida','propionamida'],
+   expl:'3C con −CONH₂ → <b>propanamida</b> (nombre funcional: <em>propionamida</em>).',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
 
   {type:'write', mol:'pentanamida', q:'Escribe el nombre IUPAC de esta amida.',
    hints:['Tiene 5 carbonos incluyendo el del −CONH₂','El sufijo de amida es -amida'],
-   ans:'pentanamida', accepted:['pentanamida'],
-   expl:'5C con −CONH₂ → <b>pentanamida</b>.',
+   ans:'pentanamida', accepted:['pentanamida','valeramida'],
+   expl:'5C con −CONH₂ → <b>pentanamida</b> (nombre funcional: <em>valeramida</em>).',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Term.'}], topic:'amidas'},
 
   // ════════════════════════════════════════════════════════
@@ -1702,7 +1702,7 @@ const QBANK = [
 
   {type:'mc', mol:'butanonitrilo', q:'¿Cuál es el nombre IUPAC de esta estructura?',
    ans:'butanonitrilo', opts:['butanonitrilo','butanamida','propanonitrilo','pentanonitrilo'],
-   expl:'4C con −C≡N → <b>butanonitrilo</b>.', topic:'nitrilos'},
+   expl:'4C con −C≡N → <b>butanonitrilo</b> (nombre funcional: <em>butironitrilo</em>).', topic:'nitrilos'},
 
   {type:'mc', mol:'pentanonitrilo', q:'¿Por qué el pentanonitrilo tiene 5 carbonos y no 4?',
    ans:'El carbono del −C≡N se cuenta en la cadena', opts:['El carbono del −C≡N se cuenta en la cadena','El −C≡N añade 2 carbonos','El nitrógeno se convierte en carbono','El sufijo -nitrilo añade un carbono extra'],
@@ -1720,7 +1720,7 @@ const QBANK = [
      {id:'dn3',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
    ],
    tokens:[{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'but',cls:'c'},{text:'amida',cls:'g'},{text:'hex',cls:'c'}],
-   expl:'3C con −C≡N → <b>propanonitrilo</b>.',
+   expl:'3C con −C≡N → <b>propanonitrilo</b> (nombre funcional: <em>propionitrilo</em>).',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'drag', mol:'pentanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
@@ -1731,7 +1731,7 @@ const QBANK = [
      {id:'do3',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
    ],
    tokens:[{text:'pent',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'but',cls:'c'},{text:'amida',cls:'g'},{text:'hex',cls:'c'}],
-   expl:'5C con −C≡N → <b>pentanonitrilo</b>.',
+   expl:'5C con −C≡N → <b>pentanonitrilo</b> (nombre funcional: <em>valeronitrilo</em>).',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'id', mol:'butanonitrilo',
@@ -1757,14 +1757,14 @@ const QBANK = [
 
   {type:'write', mol:'pentanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
    hints:['Tiene 5 carbonos incluyendo el del −C≡N','El sufijo es -onitrilo'],
-   ans:'pentanonitrilo', accepted:['pentanonitrilo'],
-   expl:'5C con −C≡N → <b>pentanonitrilo</b>.',
+   ans:'pentanonitrilo', accepted:['pentanonitrilo','valeronitrilo'],
+   expl:'5C con −C≡N → <b>pentanonitrilo</b> (nombre funcional: <em>valeronitrilo</em>).',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'write', mol:'hexanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
    hints:['Tiene 6 carbonos incluyendo el del −C≡N','El prefijo hex- indica 6 carbonos'],
-   ans:'hexanonitrilo', accepted:['hexanonitrilo'],
-   expl:'6C con −C≡N → <b>hexanonitrilo</b>.',
+   ans:'hexanonitrilo', accepted:['hexanonitrilo','capronitrilo'],
+   expl:'6C con −C≡N → <b>hexanonitrilo</b> (nombre funcional: <em>capronitrilo</em>).',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   // ════════════════════════════════════════════════════════
@@ -1773,7 +1773,7 @@ const QBANK = [
 
   {type:'mc', mol:'etanal', q:'¿Cuál es el nombre IUPAC de esta estructura?',
    ans:'etanal', opts:['etanal','metanal','propanal','etanol'],
-   expl:'2C con −CHO → <b>etanal</b>.', topic:'aldehidos'},
+   expl:'2C con −CHO → <b>etanal</b> (nombre funcional: <em>acetaldehído</em>).', topic:'aldehidos'},
 
   {type:'mc', mol:'pentanal', q:'¿Qué distingue a un aldehído de una cetona?',
    ans:'El grupo −CHO está en el extremo de la cadena', opts:['El grupo −CHO está en el extremo de la cadena','Tiene dos carbonos enlazados al C=O interior','El C=O siempre está en posición 2','Lleva un grupo −OH'],
@@ -1787,7 +1787,7 @@ const QBANK = [
      {id:'dh3',label:'Grupo funcional',correct:'al',cls:'g'},
    ],
    tokens:[{text:'hex',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'pent',cls:'c'},{text:'ol',cls:'g'},{text:'ona',cls:'g'}],
-   expl:'6C con −CHO → <b>hexanal</b>.',
+   expl:'6C con −CHO → <b>hexanal</b> (nombre funcional: <em>capronaldehído</em>).',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
 
   {type:'id', mol:'etanal',
@@ -1803,7 +1803,7 @@ const QBANK = [
 
   {type:'mc', mol:'hexan2ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
    ans:'hexan-2-ona', opts:['hexan-2-ona','hexan-3-ona','pentan-2-ona','hexanal'],
-   expl:'6C con C=O en C2 → <b>hexan-2-ona</b>.', topic:'cetonas'},
+   expl:'6C con C=O en C2 → <b>hexan-2-ona</b> (nombre funcional: <em>metil butil cetona</em>).', topic:'cetonas'},
 
   {type:'drag', mol:'hexan2ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
    ans:'hexan-2-ona',
@@ -1813,7 +1813,7 @@ const QBANK = [
      {id:'dk3',label:'Localizador + GF',correct:'2-ona',cls:'g'},
    ],
    tokens:[{text:'hex',cls:'c'},{text:'an',cls:'c'},{text:'2-ona',cls:'g'},{text:'pent',cls:'c'},{text:'3-ona',cls:'g'},{text:'ol',cls:'g'}],
-   expl:'6C, C=O en C2 → <b>hexan-2-ona</b>.',
+   expl:'6C, C=O en C2 → <b>hexan-2-ona</b> (nombre funcional: <em>metil butil cetona</em>).',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
 
   {type:'id', mol:'hexan2ona',
@@ -1825,8 +1825,8 @@ const QBANK = [
 
   {type:'write', mol:'hexan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
    hints:['Cadena de 6 carbonos con C=O','El carbonilo no está en el extremo — usa el localizador 2'],
-   ans:'hexan-2-ona', accepted:['hexan-2-ona','hexan2ona','2-hexanona'],
-   expl:'6C, C=O en C2 → <b>hexan-2-ona</b>.',
+   ans:'hexan-2-ona', accepted:['hexan-2-ona','hexan2ona','2-hexanona','metil butil cetona'],
+   expl:'6C, C=O en C2 → <b>hexan-2-ona</b> (nombre funcional: <em>metil butil cetona</em>).',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
 
   // ════════════════════════════════════════════════════════
@@ -1835,15 +1835,15 @@ const QBANK = [
 
   {type:'mc', mol:'etanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster?',
    ans:'etanoato de metilo', opts:['etanoato de metilo','ácido etanoico','etanoato de etilo','propanoato de metilo'],
-   expl:'Ácido etanoico (2C) + metanol → <b>etanoato de metilo</b>.', topic:'esteres'},
+   expl:'Ácido etanoico (2C) + metanol → <b>etanoato de metilo</b> (nombre funcional: <em>acetato de metilo</em>).', topic:'esteres'},
 
   {type:'mc', mol:'etanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
    ans:'etanoato de etilo', opts:['etanoato de etilo','propanoato de etilo','etanoato de metilo','etanoato de propilo'],
-   expl:'Ácido etanoico (2C) + etanol → <b>etanoato de etilo</b> (acetato de etilo).', topic:'esteres'},
+   expl:'Ácido etanoico (2C) + etanol → <b>etanoato de etilo</b> (nombre funcional: <em>acetato de etilo</em>).', topic:'esteres'},
 
   {type:'mc', mol:'butanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster?',
    ans:'butanoato de metilo', opts:['butanoato de metilo','propanoato de metilo','butanoato de etilo','ácido butanoico'],
-   expl:'Ácido butanoico (4C) + metanol → <b>butanoato de metilo</b>.', topic:'esteres'},
+   expl:'Ácido butanoico (4C) + metanol → <b>butanoato de metilo</b> (nombre funcional: <em>butirato de metilo</em>).', topic:'esteres'},
 
   {type:'mc', mol:'etanoatoMetilo', q:'¿Cuántos carbonos tiene el ácido de origen del etanoato de metilo?',
    ans:'2 (etanoico)', opts:['2 (etanoico)','3 (propanoico)','1 (metanoico)','4 (butanoico)'],
@@ -1860,7 +1860,7 @@ const QBANK = [
      {id:'de2',label:'Alquilo',correct:'de metilo',cls:'r'},
    ],
    tokens:[{text:'etanoato',cls:'g'},{text:'de metilo',cls:'r'},{text:'propanoato',cls:'g'},{text:'de etilo',cls:'r'}],
-   expl:'Ácido etanoico + metanol → <b>etanoato de metilo</b>.',
+   expl:'Ácido etanoico + metanol → <b>etanoato de metilo</b> (nombre funcional: <em>acetato de metilo</em>).',
    parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   {type:'drag', mol:'propanoatoMetilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
@@ -1870,7 +1870,7 @@ const QBANK = [
      {id:'df2',label:'Alquilo',correct:'de metilo',cls:'r'},
    ],
    tokens:[{text:'propanoato',cls:'g'},{text:'de metilo',cls:'r'},{text:'butanoato',cls:'g'},{text:'de etilo',cls:'r'}],
-   expl:'Ácido propanoico + metanol → <b>propanoato de metilo</b>.',
+   expl:'Ácido propanoico + metanol → <b>propanoato de metilo</b> (nombre funcional: <em>propionato de metilo</em>).',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   {type:'drag', mol:'etanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
@@ -1880,7 +1880,7 @@ const QBANK = [
      {id:'dg2',label:'Alquilo',correct:'de etilo',cls:'r'},
    ],
    tokens:[{text:'etanoato',cls:'g'},{text:'de etilo',cls:'r'},{text:'propanoato',cls:'g'},{text:'de metilo',cls:'r'}],
-   expl:'Ácido etanoico + etanol → <b>etanoato de etilo</b>.',
+   expl:'Ácido etanoico + etanol → <b>etanoato de etilo</b> (nombre funcional: <em>acetato de etilo</em>).',
    parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   {type:'id', mol:'etanoatoMetilo',
@@ -1907,13 +1907,13 @@ const QBANK = [
   {type:'write', mol:'etanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
    hints:['El ácido de origen tiene 2 carbonos: ácido etanoico','El alcohol de origen es el metanol'],
    ans:'etanoato de metilo', accepted:['etanoato de metilo','acetato de metilo'],
-   expl:'CH₃COO−CH₃: ácido etanoico + metanol → <b>etanoato de metilo</b>.',
+   expl:'CH₃COO−CH₃: ácido etanoico + metanol → <b>etanoato de metilo</b> (nombre funcional: <em>acetato de metilo</em>).',
    parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   {type:'write', mol:'propanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
    hints:['El ácido de origen tiene 3 carbonos: ácido propanoico','El alcohol de origen es el metanol'],
-   ans:'propanoato de metilo', accepted:['propanoato de metilo'],
-   expl:'CH₃CH₂COO−CH₃: ácido propanoico + metanol → <b>propanoato de metilo</b>.',
+   ans:'propanoato de metilo', accepted:['propanoato de metilo','propionato de metilo'],
+   expl:'CH₃CH₂COO−CH₃: ácido propanoico + metanol → <b>propanoato de metilo</b> (nombre funcional: <em>propionato de metilo</em>).',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   // ════════════════════════════════════════════════════════
@@ -1944,7 +1944,7 @@ const QBANK = [
      {id:'dx3',label:'Clase',correct:'ano',cls:'g'},
    ],
    tokens:[{text:'metoxi',cls:'g'},{text:'met',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'et',cls:'c'}],
-   expl:'CH₃−O−CH₃: dos metilos, el menor es metoxi → <b>metoximetano</b>.',
+   expl:'CH₃−O−CH₃: dos metilos, el menor es metoxi → <b>metoximetano</b> (nombre funcional: <em>éter dimetílico</em>).',
    parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'met',cls:'c',l:'1C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 
   {type:'drag', mol:'metoxietano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
@@ -1955,7 +1955,7 @@ const QBANK = [
      {id:'dy3',label:'Clase',correct:'ano',cls:'g'},
    ],
    tokens:[{text:'metoxi',cls:'g'},{text:'et',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'prop',cls:'c'}],
-   expl:'CH₃−O−C₂H₅: metilo (menor) = metoxi, etano (mayor) = cadena → <b>metoxietano</b>.',
+   expl:'CH₃−O−C₂H₅: metilo (menor) = metoxi, etano (mayor) = cadena → <b>metoxietano</b> (nombre funcional: <em>éter metil etílico</em>).',
    parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 
   {type:'drag', mol:'etoxietano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
@@ -1993,13 +1993,13 @@ const QBANK = [
   {type:'write', mol:'etoxietano', q:'Escribe el nombre IUPAC del éter dietílico.',
    hints:['Dos grupos etilo (2C) unidos por un oxígeno','El grupo −O−C₂H₅ se llama etoxi-'],
    ans:'etoxietano', accepted:['etoxietano','éter dietílico','eter dietilico'],
-   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b>.',
+   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b> (nombre funcional: <em>éter dietílico</em>).',
    parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 
   {type:'write', mol:'metoxietano', q:'Escribe el nombre IUPAC de este éter.',
    hints:['Un grupo metilo y un grupo etilo unidos por O','El grupo menor (metilo) es el prefijo: metoxi-'],
-   ans:'metoxietano', accepted:['metoxietano','etoximetano'],
-   expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b>.',
+   ans:'metoxietano', accepted:['metoxietano','etoximetano','éter metil etílico','eter metil etilico'],
+   expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b> (nombre funcional: <em>éter metil etílico</em>).',
    parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 ];
 
