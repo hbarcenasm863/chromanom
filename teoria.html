@@ -179,6 +179,36 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   .nw{font-size:1rem}
 }
 
+/* ── IN-PAGE TOC NAV ── */
+.toc-nav{
+  position:sticky;top:48px;z-index:90;
+  background:var(--bg);
+  border-bottom:2px solid var(--brd);
+  padding:7px 18px 5px;
+  margin:0 -18px 28px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  display:flex;gap:6px;
+  white-space:nowrap;
+  box-shadow:0 2px 8px rgba(26,110,168,.07);
+}
+.toc-nav::-webkit-scrollbar{display:none}
+.toc-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 14px;border-radius:100px;
+  border:2px solid var(--brd);background:var(--surf);
+  color:var(--dim);font-size:.72rem;font-weight:600;
+  cursor:pointer;text-decoration:none;
+  transition:all .2s;white-space:nowrap;flex-shrink:0;
+}
+.toc-pill:hover{border-color:var(--c4);color:var(--c4t)}
+.toc-pill.active{font-weight:700;color:#fff}
+.toc-pill[data-sec="esquema"].active{background:var(--c4);border-color:var(--c4)}
+.toc-pill[data-sec="ejemplos"].active{background:var(--c1);border-color:var(--c1)}
+.toc-pill[data-sec="algoritmo"].active{background:var(--c2);border-color:var(--c2)}
+.toc-pill[data-sec="tablas"].active{background:var(--c3);border-color:var(--c3)}
+.toc-pill[data-sec="sustituyentes"].active{background:var(--c4t);border-color:var(--c4t)}
+
 /* ── NAV BAR ── */
 .site-nav{
   display:flex;align-items:center;justify-content:space-between;
@@ -236,6 +266,16 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </header>
 
+<!-- IN-PAGE TABLE OF CONTENTS -->
+<nav class="toc-nav" id="toc-nav">
+  <a class="toc-pill active" href="#esquema" data-sec="esquema">📐 Esquema</a>
+  <a class="toc-pill" href="#ejemplos" data-sec="ejemplos">🔍 Ejemplos</a>
+  <a class="toc-pill" href="#algoritmo" data-sec="algoritmo">📋 Algoritmo</a>
+  <a class="toc-pill" href="#tablas" data-sec="tablas">📊 Tablas</a>
+  <a class="toc-pill" href="#sustituyentes" data-sec="sustituyentes">🔗 Sustituyentes</a>
+</nav>
+
+<div id="esquema"></div>
 <div class="intro-card">
   <h1>Todo nombre orgánico tiene <span>4 partes</span></h1>
   <p>Siempre en el mismo orden. Aprende a identificar cada parte y podrás nombrar — o descifrar — cualquier compuesto orgánico, sin importar el grupo funcional.</p>
@@ -271,6 +311,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div id="ejemplos"></div>
 <div class="slbl">Paso a paso — selecciona un ejemplo</div>
 <div class="ex-nav">
   <button class="ex-btn active" onclick="showEx(0,this)">ácido 5-etilnon-6-enoico</button>
@@ -542,6 +583,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div id="algoritmo"></div>
 <div class="slbl" style="margin-top:8px">El algoritmo de 5 pasos</div>
 <div class="rule-card"><div class="rule-n g">1</div><div class="rule-body g"><strong>Identificar el grupo funcional principal</strong><p>El que aparece más arriba en la tabla de jerarquía (IUPAC) determina el sufijo y la numeración. Si no hay grupo funcional → alcano.</p></div></div>
 <div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Determinar la cadena principal</strong><p>La más larga que contenga el grupo funcional e insaturaciones. La longitud tiene prioridad sobre las insaturaciones (IUPAC).</p></div></div>
@@ -549,6 +591,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
 <div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
 
+<div id="tablas"></div>
 <!-- ════════ TABLAS DE REFERENCIA ════════ -->
 
 <!-- TABLA 1: PREFIJOS DE CADENA -->
@@ -670,6 +713,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div id="sustituyentes"></div>
 <!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
 <div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
 
@@ -954,6 +998,26 @@ const T3=[
 const CC={c1:'var(--c1)',c3:'var(--c3)',c4:'var(--c4)',dim:'var(--dimmer)'};
 const CB={c1:'var(--c1b)',c3:'var(--c3b)',c4:'var(--c4b)',dim:'var(--bg)'};
 const tb=document.getElementById('tabla3-body');
+// ── TOC active section tracking ──
+(function(){
+  const IDS=['esquema','ejemplos','algoritmo','tablas','sustituyentes'];
+  const pills=document.querySelectorAll('.toc-pill');
+  function setActive(id){
+    pills.forEach(p=>{
+      const on=p.dataset.sec===id;
+      p.classList.toggle('active',on);
+      if(on) p.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    });
+  }
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting) setActive(e.target.id);});
+  },{rootMargin:'-8% 0px -72% 0px',threshold:0});
+  IDS.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});
+  document.querySelectorAll('.toc-pill').forEach(p=>{
+    p.addEventListener('click',()=>setActive(p.dataset.sec));
+  });
+})();
+
 if(tb){T3.forEach((r,i)=>{
   const tr=document.createElement('tr');
   if(i%2)tr.style.background='#f8f7f4';
