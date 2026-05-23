@@ -670,6 +670,186 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
+<div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
+
+<div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
+  <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Qué es un sustituyente complejo?</div>
+  <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:600px">
+    Un <strong style="color:#fcd34d">sustituyente complejo</strong> es aquel cuya cadena es ramificada o cuyo nombre trivial resulta ambiguo.
+    IUPAC (recomendaciones 2013) exige nombrarlo sistemáticamente: el carbono de unión a la cadena principal es <strong style="color:#7dd3fc">C-1</strong> del sustituyente,
+    se toma la cadena más larga desde ese punto, el nombre termina en <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">-il</code>
+    y se encierra entre paréntesis en el nombre final.
+    Ejemplo: <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">5-(1,2-dimetilpropil)nonano</code>
+    (antiguo: <em style="color:rgba(255,255,255,.5)">5-isopropilnonano</em>).
+  </p>
+</div>
+
+<!-- Procedimiento paso a paso -->
+<div class="slbl">Cómo nombrar un sustituyente complejo — paso a paso</div>
+<div class="rule-card"><div class="rule-n r">1</div><div class="rule-body r"><strong>Identificar el carbono de unión</strong><p>El carbono del sustituyente que se une a la cadena principal es C-1. Siempre se numera desde ahí hacia adentro del sustituyente.</p></div></div>
+<div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Buscar la cadena más larga desde C-1</strong><p>Desde el carbono de unión, sigue la cadena continua más larga. Su longitud da el prefijo base: etil (2C), propil (3C), butil (4C)…</p></div></div>
+<div class="rule-card"><div class="rule-n i">3</div><div class="rule-body i"><strong>Nombrar las ramificaciones internas</strong><p>Cualquier cadena lateral dentro del sustituyente recibe su propio localizador según la numeración interna (C-1 = punto de unión). Ejemplo: metilo en C1 y C2 → <strong>1,2-dimetil…</strong></p></div></div>
+<div class="rule-card"><div class="rule-n g">4</div><div class="rule-body g"><strong>Encerrar entre paréntesis en el nombre final</strong><p>El nombre completo del sustituyente va entre paréntesis: <strong>(1,2-dimetilpropil)</strong>. Solo se omiten los paréntesis para sustituyentes simples sin ramificación (metil, etil, propil…).</p></div></div>
+<div class="rule-card"><div class="rule-n r">5</div><div class="rule-body r"><strong>Insertar con localizador en la cadena principal</strong><p>El guion une el localizador con el paréntesis, sin espacios: <strong>5-(1,2-dimetilpropil)nonano</strong>. El nombre completo es una sola palabra.</p></div></div>
+
+<!-- Tabla: reglas de escritura IUPAC vs funcional -->
+<div class="slbl" style="margin-top:24px">Tabla 4 — Reglas de escritura: IUPAC actual vs. nomenclatura funcional (pre-2005)</div>
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:20px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Aspecto</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual (2013)</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nomenclatura funcional (pre-2005)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Guiones (−)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Solo entre localizador y nombre: <strong>2-metil</strong>, <strong>5-(1,2-dimetilpropil)</strong>. El compuesto va todo junto: <strong>3-etilpentano</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Se incluía en el nombre trivial: <em>sec-butil</em>, <em>tert-butil</em></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Espacios</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Nunca.</strong> El nombre IUPAC es una sola palabra: <strong>3-etil-2-metilpentano</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Permitidos: <em>metil etil cetona</em>, <em>éter dietílico</em></td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Paréntesis</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Obligatorios para sustituyentes ramificados: <strong>5-(1,2-dimetilpropil)nonano</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Se omitían gracias a los nombres triviales: <em>5-isopropilnonano</em></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Localizadores</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Inmediatamente antes del sufijo: <strong>butan-2-ol</strong>, <strong>hex-1-en-3-ol</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Al inicio: <em>2-butanol</em>, <em>1-hexen-3-ol</em></td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Nombre del sustituyente</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Sistemático: <strong>(1-metiletil)</strong>, <strong>(1,1-dimetiletil)</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Trivial aceptado: <em>isopropil</em>, <em>ter-butil</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
+    ℹ En publicaciones y libros de texto pre-2005 es habitual encontrar la nomenclatura funcional. Ambas conviven; en exámenes de bachillerato se suele aceptar la forma funcional, pero la IUPAC es la correcta.
+  </div>
+</div>
+
+<!-- Tabla: nombres triviales vs IUPAC -->
+<div class="slbl">Tabla 5 — Sustituyentes: nombre trivial (pre-2005) → nombre IUPAC sistemático</div>
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:20px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre trivial (pre-2005)</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre IUPAC sistemático</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Estructura (desde C-1)</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Orden alfabético</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isopropil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1-metiletil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1 unido a CH₃ y CH₃ → etilo + metilo en C1</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isobutil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(2-metilpropil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1 — C — C(CH₃)— → propilo + metilo en C2</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">sec-butil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1-metilpropil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1(CH₃)—C—C— → propilo + metilo en C1</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>sec-</em> <strong>NO</strong> cuenta → ordena por «b»</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">ter-butil <em style="font-size:.7rem">(tert-butil)</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1,1-dimetiletil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1(CH₃)₂— → etilo + dos metilos en C1</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>tert-</em> <strong>NO</strong> cuenta → ordena por «b»</td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">neopentil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(2,2-dimetilpropil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1—C(CH₃)₂— → propilo + dos metilos en C2</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)">ordena por «n» (neo sin equivalente IUPAC)</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isopentil <em style="font-size:.7rem">(isoamil)</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(3-metilbutil)</td>
+          <td style="padding:9px 14px;font-size:.78rem">C-1—C—C(CH₃)— → butilo + metilo en C3</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
+    ⚠ Usar <strong>isopropil</strong>, <strong>isobutil</strong> o <strong>ter-butil</strong> directamente en un nombre IUPAC es incorrecto (IUPAC 2013). Los nombres sistemáticos entre paréntesis son obligatorios.
+  </div>
+</div>
+
+<!-- Tabla: orden alfabético de sustituyentes -->
+<div class="slbl">Tabla 6 — Orden alfabético de sustituyentes: qué prefijos cuentan</div>
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:28px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Prefijo</th>
+          <th style="padding:9px 14px;text-align:center;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">¿Cuenta para el orden?</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Ejemplo</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Se ordena por…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">di-, tri-, tetra-…</td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">3-etil-<strong>di</strong>metil… → etil antes que metil</td>
+          <td style="padding:9px 14px;font-size:.78rem">«e» de etil</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">iso-</td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:#d9ead3;color:#166534;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">SÍ</span></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>iso</em>butil vs etil → etil antes (e &lt; i)</td>
+          <td style="padding:9px 14px;font-size:.78rem">«i» de iso (forma parte del nombre)</td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">sec-</td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>sec-</em>butil → se ignora «sec-»</td>
+          <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">tert-</td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>tert-</em>butil → se ignora «tert-»</td>
+          <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">Sustituyente entre ( )</td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:#cfe2f3;color:#1e40af;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">ENTERO</span></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">(1,2-dimetilpropil) → ordena por «d»</td>
+          <td style="padding:9px 14px;font-size:.78rem">primera letra del nombre (sin paréntesis)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
+    Regla mnemotécnica: los prefijos <strong>multiplicadores</strong> (di-, tri-…) y los prefijos <strong>estereodescriptores</strong> (sec-, tert-) no cuentan. El prefijo <strong>iso-</strong> es parte del nombre, no un descriptor, por eso sí cuenta.
+  </div>
+</div>
+
 <!-- FOOTER COPYRIGHT -->
 <div style="text-align:center;padding:16px;font-size:.72rem;color:rgba(255,255,255,.3);background:var(--tx,#1a1714);margin-top:auto">
   <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
