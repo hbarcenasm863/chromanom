@@ -207,6 +207,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .toc-pill[data-sec="ejemplos"].active{background:var(--c1);border-color:var(--c1)}
 .toc-pill[data-sec="algoritmo"].active{background:var(--c2);border-color:var(--c2)}
 .toc-pill[data-sec="tablas"].active{background:var(--c3);border-color:var(--c3)}
+.toc-pill[data-sec="comparacion"].active{background:var(--c1);border-color:var(--c1)}
 .toc-pill[data-sec="sustituyentes"].active{background:var(--c4t);border-color:var(--c4t)}
 
 /* ── NAV BAR ── */
@@ -272,6 +273,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <a class="toc-pill" href="#ejemplos" data-sec="ejemplos">🔍 Ejemplos</a>
   <a class="toc-pill" href="#algoritmo" data-sec="algoritmo">📋 Algoritmo</a>
   <a class="toc-pill" href="#tablas" data-sec="tablas">📊 Tablas</a>
+  <a class="toc-pill" href="#comparacion" data-sec="comparacion">📖 Comparación</a>
   <a class="toc-pill" href="#sustituyentes" data-sec="sustituyentes">🔗 Sustituyentes</a>
 </nav>
 
@@ -713,6 +715,79 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div id="comparacion"></div>
+<!-- SECCIÓN: COMPARACIÓN DE NOMENCLATURAS -->
+<div class="slbl" style="margin-top:32px">Comparación de nomenclaturas — IUPAC actual vs. nomenclatura funcional pre-2005</div>
+
+<div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
+  <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Por qué cambiaron los nombres?</div>
+  <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
+    La IUPAC actualizó sus recomendaciones en 2013 para eliminar ambigüedades: los nombres triviales como <em style="color:rgba(255,255,255,.5)">acetona</em> o <em style="color:rgba(255,255,255,.5)">éter etílico</em> eran aceptados, pero no eran deducibles de la estructura.
+    La nomenclatura sistemática permite <strong style="color:#fcd34d">construir cualquier nombre desde cero</strong> conociendo solo las reglas.
+    En libros y exámenes de bachillerato conviven ambas; aquí encontrarás las equivalencias más frecuentes.
+  </p>
+</div>
+
+<!-- Reglas generales de posición del localizador -->
+<div class="slbl">Reglas generales de escritura</div>
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:20px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Regla</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Pre-2005 / funcional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Posición del localizador</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Antes del sufijo</strong>: butan-<strong>2</strong>-ol, hex-<strong>1</strong>-eno, butan-<strong>2</strong>-ona</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Al inicio: <em>2</em>-butanol, <em>1</em>-hexeno, <em>2</em>-butanona</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Espacios en el nombre</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Nunca</strong>: el nombre es una sola palabra continua</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Permitidos: <em>metil etil cetona</em>, <em>éter etílico</em></td>
+        </tr>
+        <tr style="background:#f8f7f4">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Guiones</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Solo entre número y sufijo/prefijo: <strong>but-1-eno</strong>, <strong>2-metil</strong></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Solo antes del localizador inicial: <em>2-butanol</em></td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Nombres triviales</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>No aceptados</strong> en IUPAC (salvo excepciones históricas como benceno)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Aceptados: <em>acetona</em>, <em>glicerol</em>, <em>cloroformo</em>…</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tabla grande: equivalencias por grupo funcional -->
+<div class="slbl">Equivalencias por grupo funcional</div>
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:28px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.81rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;width:130px">Grupo</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre trivial / pre-2005</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual</th>
+        </tr>
+      </thead>
+      <tbody id="cmp-body">
+      </tbody>
+    </table>
+  </div>
+  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
+    * Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan. En contextos educativos de bachillerato suelen seguir admitiéndose como respuesta correcta.
+  </div>
+</div>
+
 <div id="sustituyentes"></div>
 <!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
 <div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
@@ -998,9 +1073,89 @@ const T3=[
 const CC={c1:'var(--c1)',c3:'var(--c3)',c4:'var(--c4)',dim:'var(--dimmer)'};
 const CB={c1:'var(--c1b)',c3:'var(--c3b)',c4:'var(--c4b)',dim:'var(--bg)'};
 const tb=document.getElementById('tabla3-body');
+// ── Tabla comparación de nomenclaturas ──
+const CMP=[
+  // ALDEHÍDOS
+  {g:'Aldehídos',  old:'formaldehído / aldehído fórmico',    neu:'metanal'},
+  {g:'',           old:'acetaldehído / aldehído acético',    neu:'etanal'},
+  {g:'',           old:'propionaldehído',                    neu:'propanal'},
+  {g:'',           old:'butiraldehído',                      neu:'butanal'},
+  {g:'',           old:'valeraldehído',                      neu:'pentanal'},
+  {g:'',           old:'caproaldehído',                      neu:'hexanal'},
+  // CETONAS
+  {g:'Cetonas',    old:'acetona / dimetil cetona',           neu:'propan-2-ona'},
+  {g:'',           old:'metil etil cetona',                  neu:'butan-2-ona'},
+  {g:'',           old:'metil propil cetona',                neu:'pentan-2-ona'},
+  {g:'',           old:'dietil cetona',                      neu:'pentan-3-ona'},
+  {g:'',           old:'metil isobutil cetona',              neu:'4-metilpentan-2-ona'},
+  // ÁCIDOS CARBOXÍLICOS
+  {g:'Ácidos',     old:'ácido fórmico',                      neu:'ácido metanoico'},
+  {g:'',           old:'ácido acético',                      neu:'ácido etanoico'},
+  {g:'',           old:'ácido propiónico',                   neu:'ácido propanoico'},
+  {g:'',           old:'ácido butírico',                     neu:'ácido butanoico'},
+  {g:'',           old:'ácido valérico',                     neu:'ácido pentanoico'},
+  {g:'',           old:'ácido caproico',                     neu:'ácido hexanoico'},
+  // ÉSTERES
+  {g:'Ésteres',    old:'acetato de metilo',                  neu:'etanoato de metilo'},
+  {g:'',           old:'acetato de etilo',                   neu:'etanoato de etilo'},
+  {g:'',           old:'propionato de metilo',               neu:'propanoato de metilo'},
+  {g:'',           old:'butirato de metilo',                 neu:'butanoato de metilo'},
+  // ÉTERES
+  {g:'Éteres',     old:'éter dimetílico / óxido de metilo',  neu:'metoximetano'},
+  {g:'',           old:'éter metil etílico',                 neu:'metoxietano'},
+  {g:'',           old:'éter dietílico / éter etílico',      neu:'etoxietano'},
+  {g:'',           old:'éter metil propílico',               neu:'metoxipropano'},
+  // AMIDAS
+  {g:'Amidas',     old:'formamida',                          neu:'metanamida'},
+  {g:'',           old:'acetamida',                          neu:'etanamida'},
+  {g:'',           old:'propionamida',                       neu:'propanamida'},
+  {g:'',           old:'butiramida',                         neu:'butanamida'},
+  {g:'',           old:'valeramida',                         neu:'pentanamida'},
+  // NITRILOS
+  {g:'Nitrilos',   old:'acetonitrilo / cianuro de metilo',   neu:'etanonitrilo'},
+  {g:'',           old:'propionitrilo',                      neu:'propanonitrilo'},
+  {g:'',           old:'butironitrilo',                      neu:'butanonitrilo'},
+  {g:'',           old:'valeronitrilo',                      neu:'pentanonitrilo'},
+  {g:'',           old:'capronitrilo',                       neu:'hexanonitrilo'},
+  // ALCOHOLES (localizador)
+  {g:'Alcoholes',  old:'alcohol metílico',                   neu:'metanol'},
+  {g:'',           old:'alcohol etílico',                    neu:'etanol'},
+  {g:'',           old:'alcohol propílico / 1-propanol',     neu:'propan-1-ol'},
+  {g:'',           old:'alcohol isopropílico / 2-propanol',  neu:'propan-2-ol'},
+  {g:'',           old:'2-butanol',                          neu:'butan-2-ol'},
+  {g:'',           old:'glicerol / glicerina',               neu:'propano-1,2,3-triol'},
+];
+const GC={
+  'Aldehídos':'var(--c4t)','Cetonas':'var(--c4t)','Ácidos':'var(--c1t)',
+  'Ésteres':'var(--c1t)','Éteres':'var(--c3t)','Amidas':'var(--c2t)',
+  'Nitrilos':'var(--c2t)','Alcoholes':'var(--c3t)'
+};
+const GB={
+  'Aldehídos':'var(--c4b)','Cetonas':'var(--c4b)','Ácidos':'var(--c1b)',
+  'Ésteres':'var(--c1b)','Éteres':'var(--c3b)','Amidas':'var(--c2b)',
+  'Nitrilos':'var(--c2b)','Alcoholes':'var(--c3b)'
+};
+const cmpTb=document.getElementById('cmp-body');
+if(cmpTb){
+  let curG='',alt=false;
+  CMP.forEach(r=>{
+    const isHeader=r.g!=='';
+    if(isHeader){curG=r.g;alt=false;}
+    const tr=document.createElement('tr');
+    const bg=isHeader?GB[curG]:(alt?'#f8f7f4':'#fff');
+    tr.style.cssText=`border-bottom:1px solid var(--brd);background:${bg}`;
+    tr.innerHTML=`
+      <td style="padding:8px 14px;font-weight:700;font-size:.75rem;color:${GC[curG]||'var(--dim)'}">${r.g}</td>
+      <td style="padding:8px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer);font-style:italic">${r.old}</td>
+      <td style="padding:8px 14px;font-family:var(--mono);font-size:.78rem;font-weight:700;color:${GC[curG]||'var(--dim)'}">${r.neu}</td>`;
+    cmpTb.appendChild(tr);
+    if(!isHeader)alt=!alt;
+  });
+}
+
 // ── TOC active section tracking ──
 (function(){
-  const IDS=['esquema','ejemplos','algoritmo','tablas','sustituyentes'];
+  const IDS=['esquema','ejemplos','algoritmo','tablas','comparacion','sustituyentes'];
   const pills=document.querySelectorAll('.toc-pill');
   function setActive(id){
     pills.forEach(p=>{
