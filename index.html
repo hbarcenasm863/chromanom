@@ -225,6 +225,68 @@ header{
 .pri-tbl tr:hover td{background:var(--azul-l);cursor:default}
 .num-badge{font-family:'Courier New',monospace;font-size:.7rem;font-weight:700;background:var(--azul-l);border:1px solid var(--brd);padding:1px 7px;border-radius:100px;color:var(--azul-d)}
 
+/* ── TUTORIAL TOUR ── */
+.tour-ov{position:fixed;inset:0;background:rgba(10,30,50,.82);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(3px)}
+.tour-ov.open{display:flex}
+.tour-modal{background:var(--surf);border-radius:22px;max-width:480px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:hidden;position:relative;animation:fadeUp .3s ease both}
+.tour-header{background:linear-gradient(135deg,var(--azul-d),var(--azul));padding:22px 28px 18px;color:#fff;position:relative}
+.tour-step-lbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.55);margin-bottom:4px}
+.tour-title{font-size:1.25rem;font-weight:900;line-height:1.2;font-style:italic}
+.tour-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.tour-close:hover{background:rgba(255,255,255,.3)}
+.tour-body{padding:22px 28px 18px;min-height:160px}
+.tour-body p{font-size:.88rem;color:var(--dim);line-height:1.7;margin-bottom:10px}
+.tour-body p:last-child{margin-bottom:0}
+.tour-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tour-chip{padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:700;border:1.5px solid}
+.tour-chip.r{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
+.tour-chip.c{color:var(--c2t);border-color:var(--c2);background:var(--c2b)}
+.tour-chip.i{color:var(--c3t);border-color:var(--c3);background:var(--c3b)}
+.tour-chip.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
+.tour-chip.az{color:var(--azul-d);border-color:var(--azul);background:var(--azul-l)}
+.tour-chip.vd{color:var(--verde-d);border-color:var(--verde);background:var(--verde-l)}
+.tour-chip.or{color:#a04000;border-color:var(--naranja);background:var(--naranja-l)}
+.tour-name-demo{display:flex;flex-wrap:wrap;gap:3px;background:#f0f7ff;border:1.5px solid var(--brd);border-radius:10px;padding:12px 16px;margin:12px 0;align-items:flex-end}
+.tnw{font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;padding:2px 6px;border-radius:5px;line-height:1}
+.tnw.r{color:var(--c1);background:var(--c1b)}
+.tnw.c{color:var(--c2);background:var(--c2b)}
+.tnw.i{color:var(--c3);background:var(--c3b)}
+.tnw.g{color:var(--c4);background:var(--c4b)}
+.tnl{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+.tnl.r{color:var(--c1t)}.tnl.c{color:var(--c2t)}.tnl.i{color:var(--c3t)}.tnl.g{color:var(--c4t)}
+.tnp{display:flex;flex-direction:column;align-items:center;gap:4px}
+.tour-feat-row{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.tour-feat{flex:1;min-width:100px;background:var(--bg);border:1.5px solid var(--brd);border-radius:10px;padding:10px 12px;font-size:.75rem;color:var(--dim);line-height:1.4}
+.tour-feat strong{display:block;font-size:.88rem;color:var(--tx);margin-bottom:2px}
+.tour-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tour-link{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:var(--rs);text-decoration:none;font-size:.82rem;font-weight:700;flex:1;min-width:120px;transition:transform .15s;border:2px solid transparent}
+.tour-link:hover{transform:translateY(-2px)}
+.tour-link.az{background:linear-gradient(135deg,var(--azul-d),var(--azul));color:#fff}
+.tour-link.vd{background:linear-gradient(135deg,var(--verde-d),var(--verde));color:#fff}
+.tour-link.or{background:linear-gradient(135deg,#c45c0c,var(--naranja));color:#fff}
+.tour-footer{padding:14px 28px 22px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brd)}
+.tour-dots{display:flex;gap:6px}
+.tour-dot{width:8px;height:8px;border-radius:50%;background:var(--brd);border:none;cursor:pointer;transition:all .2s;padding:0}
+.tour-dot.active{background:var(--azul);width:20px;border-radius:4px}
+.tour-navs{display:flex;gap:8px}
+.tour-btn{padding:8px 18px;border-radius:var(--rs);border:none;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s}
+.tour-btn.prev{background:var(--bg);color:var(--dim);border:1.5px solid var(--brd)}
+.tour-btn.prev:hover{background:var(--brd)}
+.tour-btn.next{background:var(--azul);color:#fff}
+.tour-btn.next:hover{background:var(--azul-d)}
+/* tour trigger button */
+.btn-tour{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border-radius:var(--rs);
+  border:1.5px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.1);
+  color:#fff;font-family:inherit;
+  font-size:.82rem;font-weight:700;cursor:pointer;
+  transition:all .2s;margin-top:16px;
+  backdrop-filter:blur(2px);
+}
+.btn-tour:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55);transform:translateY(-1px)}
+
 /* ── FOOTER ── */
 footer{
   text-align:center;padding:28px 0;
@@ -331,6 +393,7 @@ footer span{color:var(--naranja);font-weight:700}
       <div class="fp i">③ Insaturaciones</div>
       <div class="fp g">④ Grupo funcional</div>
     </div>
+    <button class="btn-tour" onclick="tourOpen()">▶ ¿Cómo funciona ChromaNom?</button>
   </div>
   <div class="hero-stats">
     <div class="hs"><div class="hs-n">16</div><div class="hs-l">Grupos</div></div>
@@ -499,5 +562,150 @@ footer span{color:var(--naranja);font-weight:700}
 </div>
 
 </div>
+
+<!-- TUTORIAL TOUR OVERLAY -->
+<div class="tour-ov" id="tour-ov" onclick="tourOverlayClick(event)">
+  <div class="tour-modal" id="tour-modal">
+    <div class="tour-header" id="tour-hdr">
+      <div class="tour-step-lbl" id="tour-lbl">Paso 1 de 5</div>
+      <div class="tour-title" id="tour-title">Bienvenida</div>
+      <button class="tour-close" onclick="tourClose()" title="Cerrar">✕</button>
+    </div>
+    <div class="tour-body" id="tour-body"></div>
+    <div class="tour-footer">
+      <div class="tour-dots" id="tour-dots"></div>
+      <div class="tour-navs">
+        <button class="tour-btn prev" id="tour-prev" onclick="tourPrev()">← Anterior</button>
+        <button class="tour-btn next" id="tour-next" onclick="tourNext()">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TOUR=[
+  {
+    title:'Bienvenida a ChromaNom',
+    hdrColor:'linear-gradient(135deg,#0d4a73,#1a6ea8)',
+    body:`
+      <p>ChromaNom te enseña a nombrar compuestos orgánicos según la IUPAC usando un método visual de <strong>4 colores</strong>. Cada parte del nombre tiene un color fijo.</p>
+      <div class="tour-name-demo">
+        <div class="tnp"><span class="tnw r">2-etil</span><span class="tnl r">① Ramif.</span></div>
+        <div class="tnp"><span class="tnw c">hex</span><span class="tnl c">② Cadena 6C</span></div>
+        <div class="tnp"><span class="tnw i">3-en</span><span class="tnl i">③ Insatur.</span></div>
+        <div class="tnp"><span class="tnw g">1-ol</span><span class="tnl g">④ Grupo func.</span></div>
+      </div>
+      <p>Una vez que internalizas los 4 colores, cualquier nombre — por largo que sea — se vuelve legible de un vistazo.</p>
+      <div class="tour-chips">
+        <span class="tour-chip r">① Ramificaciones</span>
+        <span class="tour-chip c">② Cadena principal</span>
+        <span class="tour-chip i">③ Insaturaciones</span>
+        <span class="tour-chip g">④ Grupo funcional</span>
+      </div>`
+  },
+  {
+    title:'① Principios de Nomenclatura',
+    hdrColor:'linear-gradient(135deg,#0d4a73,#1a6ea8)',
+    body:`
+      <p>El módulo de <strong>Teoría</strong> explica el sistema completo con un algoritmo de 5 pasos para nombrar cualquier molécula orgánica.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>📐 Esquema 4 partes</strong>El mapa visual del sistema. Aprende qué buscar en cada molécula.</div>
+        <div class="tour-feat"><strong>📋 Algoritmo 5 pasos</strong>Cómo elegir la cadena, numerar y añadir sufijos — paso a paso.</div>
+      </div>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>⚖️ Reglas de desempate</strong>Cuándo dos cadenas o dos numeraciones son posibles — cuál escoger.</div>
+        <div class="tour-feat"><strong>📖 Comparación IUPAC</strong>Tabla de 40 diferencias entre nomenclatura 2013 y la anterior a 2005.</div>
+      </div>
+      <p style="margin-top:10px">Cada sección tiene un botón <strong>Practicar</strong> con ejercicios integrados paso a paso.</p>`
+  },
+  {
+    title:'② Grupos Funcionales',
+    hdrColor:'linear-gradient(135deg,#357a1f,#4aaa2e)',
+    body:`
+      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 16 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>16 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con diagrama de prioridad IUPAC.</div>
+        <div class="tour-feat"><strong>160 ejercicios</strong>10 ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
+      </div>
+      <p>Las estructuras usan dibujos SVG de línea-ángulo (skeletal formula) como los de examen.</p>
+      <div class="tour-chips">
+        <span class="tour-chip g">Ácidos carboxílicos</span>
+        <span class="tour-chip g">Ésteres</span>
+        <span class="tour-chip g">Amidas</span>
+        <span class="tour-chip g">Nitrilos</span>
+        <span class="tour-chip i">Aldehídos · Cetonas</span>
+        <span class="tour-chip r">Alcoholes · Éteres</span>
+        <span class="tour-chip az">Alcanos · Alquenos · Alquinos</span>
+      </div>`
+  },
+  {
+    title:'③ Juego de Práctica',
+    hdrColor:'linear-gradient(135deg,#c45c0c,#f07c1e)',
+    body:`
+      <p>El <strong>Juego</strong> te pone a prueba con moléculas reales, cronómetro de 45 segundos y 4 tipos de preguntas.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>🔵 Opción múltiple</strong>Elige el nombre correcto entre 4 opciones. Rápido y directo.</div>
+        <div class="tour-feat"><strong>🟠 Arrastrar partes</strong>Arrastra cada parte del nombre al hueco que corresponde.</div>
+      </div>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>🟢 Identificar</strong>Señala qué parte de la molécula es la cadena, el sustituyente o el grupo.</div>
+        <div class="tour-feat"><strong>🩷 Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
+      </div>
+      <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
+  },
+  {
+    title:'¡Listo para empezar!',
+    hdrColor:'linear-gradient(135deg,#0d4a73,#357a1f)',
+    body:`
+      <p>Sigue la ruta recomendada para aprovechar ChromaNom al máximo:</p>
+      <div class="tour-links">
+        <a class="tour-link az" href="teoria.html">⚗️ <span>① Principios<br><small style="font-weight:400;opacity:.85">Empieza aquí</small></span></a>
+        <a class="tour-link vd" href="grupos.html">🔬 <span>② Grupos<br><small style="font-weight:400;opacity:.85">Luego aquí</small></span></a>
+        <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Pon a prueba</small></span></a>
+      </div>
+      <p style="margin-top:14px;font-size:.8rem;color:var(--dimmer)">Puedes volver a ver este tutorial pulsando el botón <strong>"▶ ¿Cómo funciona?"</strong> de la portada en cualquier momento.</p>`
+  }
+];
+
+let tourStep=0;
+
+function tourOpen(){
+  tourStep=0;
+  document.getElementById('tour-ov').classList.add('open');
+  tourRender();
+}
+function tourClose(){
+  document.getElementById('tour-ov').classList.remove('open');
+}
+function tourOverlayClick(e){
+  if(e.target===document.getElementById('tour-ov'))tourClose();
+}
+function tourGo(n){
+  tourStep=Math.max(0,Math.min(TOUR.length-1,n));
+  tourRender();
+}
+function tourPrev(){tourGo(tourStep-1);}
+function tourNext(){
+  if(tourStep===TOUR.length-1){tourClose();return;}
+  tourGo(tourStep+1);
+}
+
+function tourRender(){
+  const s=TOUR[tourStep];
+  const n=TOUR.length;
+  document.getElementById('tour-lbl').textContent=`Paso ${tourStep+1} de ${n}`;
+  document.getElementById('tour-title').textContent=s.title;
+  document.getElementById('tour-hdr').style.background=s.hdrColor;
+  document.getElementById('tour-body').innerHTML=s.body;
+  // dots
+  const dotsEl=document.getElementById('tour-dots');
+  dotsEl.innerHTML=TOUR.map((_,i)=>`<button class="tour-dot${i===tourStep?' active':''}" onclick="tourGo(${i})" aria-label="Diapositiva ${i+1}"></button>`).join('');
+  // nav buttons
+  document.getElementById('tour-prev').style.display=tourStep===0?'none':'';
+  const nextBtn=document.getElementById('tour-next');
+  nextBtn.textContent=tourStep===TOUR.length-1?'Cerrar ✕':'Siguiente →';
+}
+</script>
+
 </body>
 </html>
