@@ -2333,7 +2333,22 @@ function checkID(choice,btn){
 
 // ── WRITE ──
 function buildWrite(q){
+  // Show IUPAC ordering reminder if the answer has multiple substituents or locators
+  const ans=q.ans||'';
+  const hasMultiSub=/\d-[a-záéíóú].*\d-[a-záéíóú]/i.test(ans)||/etil.*metil|metil.*etil/i.test(ans);
+  const hasEnOl=/(en|in)-\d|-\d-(ol|ona|al)\b/.test(ans);
+  let rulesHint='';
+  if(hasMultiSub){
+    rulesHint=`<div style="font-size:.74rem;color:var(--c2t);background:var(--c2b);border:1px solid var(--c2);border-radius:var(--rs);padding:6px 11px;margin-bottom:8px;line-height:1.6">
+      💡 <strong>Reglas IUPAC:</strong> ramificaciones en orden <strong>alfabético</strong> (di-/tri- no cuentan) · localizadores menores posibles · nombre sin espacios
+    </div>`;
+  } else if(hasEnOl){
+    rulesHint=`<div style="font-size:.74rem;color:var(--c2t);background:var(--c2b);border:1px solid var(--c2);border-radius:var(--rs);padding:6px 11px;margin-bottom:8px;line-height:1.6">
+      💡 <strong>IUPAC:</strong> localizador <em>antes</em> del sufijo que modifica → <em>hex-3-en-2-ol</em>, no 3-hexen-2-ol
+    </div>`;
+  }
   return `<div class="write-attempts" id="write-attempts">Intento 1/3 · +10 pts si aciertas</div>
+  ${rulesHint}
   <div class="write-hint" id="write-hint"></div>
   <input class="write-input" id="write-inp" placeholder="Escribe el nombre IUPAC completo…" autocomplete="off" autocorrect="off" spellcheck="false"/>
   <button class="btn-check" id="write-btn" onclick="checkWrite()">Verificar →</button>`;
@@ -2367,7 +2382,7 @@ function checkWrite(){
       document.getElementById('write-btn').disabled=true;
       const hintEl=document.getElementById('write-hint');
       if(hintEl){ hintEl.style.display='none'; }
-      showFeedback(false,q.expl,q.ans,0);
+      showFeedback(false,q.expl,q.ans,0,val);
       history.push({type:q.type,ok:false,ans:q.ans,given:val,topic:q.topic});
     } else {
       // Show hint and update attempts label
@@ -2420,7 +2435,7 @@ function disableAll(){
 }
 
 // ── FEEDBACK ──
-function showFeedback(ok,expl,ans,pts){
+function showFeedback(ok,expl,ans,pts,given){
   const fb=document.getElementById('feedback');
   const nxt=document.getElementById('q-next');
   const ptsVal=(pts!==undefined)?pts:10;
@@ -2432,7 +2447,14 @@ function showFeedback(ok,expl,ans,pts){
     fb.innerHTML=`✓ <strong>¡Correcto! +${ptsVal} pts</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
   } else {
     fb.className='feedback err';
-    fb.innerHTML=`✗ <strong>Incorrecto.</strong> La respuesta era: <span style="font-family:var(--mono)">${ans}</span><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
+    let cmpHtml='';
+    if(given && given!=='(tiempo)'){
+      cmpHtml=`<div style="font-family:var(--mono);font-size:.78rem;background:rgba(0,0,0,.08);padding:7px 10px;border-radius:6px;margin:6px 0;line-height:1.9">
+        <span style="opacity:.55">Tu respuesta: </span><strong style="color:var(--c1)">${given}</strong><br>
+        <span style="opacity:.55">Respuesta correcta: </span><strong style="color:#16a34a">${ans}</strong>
+      </div>`;
+    }
+    fb.innerHTML=`✗ <strong>Incorrecto.</strong>${cmpHtml}<span style="font-size:.8rem;opacity:.85">${expl}</span>`;
   }
   nxt.classList.add('show');
   // Show name breakdown if available
@@ -2448,6 +2470,28 @@ function nextQ(){qIdx++;loadQuestion();}
 // ════════════════════════════════════════════════════════
 // RESULTS
 // ════════════════════════════════════════════════════════
+// ── localStorage helpers ──
+function lsKey(nivel){return 'chromanom_best_'+nivel;}
+function saveBest(nivel,pct,sc){
+  const prev=JSON.parse(localStorage.getItem(lsKey(nivel))||'null');
+  if(!prev||pct>prev.pct||(pct===prev.pct&&sc>prev.sc)){
+    localStorage.setItem(lsKey(nivel),JSON.stringify({pct,sc,date:new Date().toLocaleDateString('es')}));
+    return true; // new record
+  }
+  return false;
+}
+function getBest(nivel){return JSON.parse(localStorage.getItem(lsKey(nivel))||'null');}
+function medalEmoji(pct){return pct>=90?'🥇':pct>=70?'🥈':pct>=50?'🥉':'🔰';}
+
+// Render best scores on portada level cards
+function renderBests(){
+  ['hidrocarburos','oxigenados','nitrogenados','completo'].forEach(nv=>{
+    const b=getBest(nv);
+    const el=document.querySelector(`.nivel-card[onclick*="${nv}"] .nivel-count`);
+    if(el&&b){el.innerHTML=el.innerHTML.replace(/ · Mejor:.*$/,'')+` · Mejor: ${medalEmoji(b.pct)} ${b.pct}%`;}
+  });
+}
+
 function showResults(){
   showScreen('s-resumen');
   const total=questions.length;
@@ -2455,6 +2499,8 @@ function showResults(){
   const err=history.filter(h=>!h.ok&&!h.timeout).length;
   const tout=history.filter(h=>h.timeout).length;
   const pct=Math.round(ok/total*100);
+  const isRecord=saveBest(currentLevel,pct,score);
+  renderBests();
 
   // Header
   let emoji,title,sub;
@@ -2465,7 +2511,7 @@ function showResults(){
 
   document.getElementById('res-emoji').textContent=emoji;
   document.getElementById('res-title').textContent=title;
-  document.getElementById('res-sub').textContent=`${pct}% de aciertos · ${score} puntos`;
+  document.getElementById('res-sub').textContent=`${pct}% de aciertos · ${score} pts${isRecord?' · 🏆 ¡Nuevo récord personal!':''}`;
   document.getElementById('res-header').style.background=pct>=70?'linear-gradient(135deg,#14532d,#16a34a)':pct>=50?'linear-gradient(135deg,#78350f,#e67e22)':'linear-gradient(135deg,#7f1d1d,#c0392b)';
   // Sistema de medallas
   let medalIcon,medalTitle,medalDesc;
@@ -2549,6 +2595,7 @@ function showScreen(id){
 
 // Fix drag API
 document.addEventListener('dragover',e=>e.preventDefault());
+renderBests();
 
 // ════════════════════════════════════════════════════════
 // ANALYTICS → Google Sheets via Apps Script
