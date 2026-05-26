@@ -179,6 +179,68 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   .nw{font-size:1rem}
 }
 
+/* ── MODAL PRACTICAR ── */
+.prac-overlay{position:fixed;inset:0;background:rgba(13,45,66,.78);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.prac-overlay.open{display:flex}
+.prac-modal{background:var(--surf);border-radius:var(--r);width:100%;max-width:620px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.45);animation:fadeUp .25s ease}
+.prac-head{background:var(--tx);color:#fff;padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-radius:var(--r) var(--r) 0 0;position:sticky;top:0;z-index:2}
+.prac-head-info{flex:1;min-width:0}
+.prac-sec-lbl{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-bottom:3px}
+.prac-mol-name{font-family:var(--serif);font-size:1rem;font-weight:700;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prac-x{background:rgba(255,255,255,.12);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.prac-x:hover{background:rgba(255,255,255,.26)}
+.prac-mol-area{background:#fafaf8;border-bottom:2px solid var(--brd);min-height:130px;display:flex;align-items:center;justify-content:center;padding:16px 20px}
+.prac-mol-area svg{width:100%;max-height:120px;overflow:visible}
+.prac-struct{font-family:var(--mono);font-size:.95rem;color:var(--tx);text-align:center;line-height:2;padding:8px}
+.prac-body{padding:18px 20px}
+.prac-step-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.prac-badge{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;color:#fff;font-family:var(--serif);font-size:.85rem;font-weight:700;flex-shrink:0}
+.prac-step-title{font-size:.9rem;font-weight:700;color:var(--tx)}
+.prac-expl{font-size:.8rem;color:var(--dim);line-height:1.65;margin-bottom:12px;padding:10px 14px;background:var(--c4b);border-radius:var(--rs);border-left:3px solid var(--c4)}
+.prac-q{font-size:.86rem;font-weight:600;color:var(--tx);margin-bottom:11px}
+.prac-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.prac-opt{padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-size:.81rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.prac-opt:hover:not(:disabled){border-color:var(--c4);color:var(--c4t)}
+.prac-opt.correct{border-color:var(--c3)!important;background:var(--c3b)!important;color:var(--c3t)!important;font-weight:700}
+.prac-opt.wrong{border-color:#e55!important;background:#fce8e6!important;color:#b91c1c!important}
+.prac-write-row{display:none;gap:8px;margin-bottom:10px;align-items:center}
+.prac-write-row.show{display:flex}
+.prac-inp{flex:1;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);font-family:var(--mono);font-size:.85rem;outline:none;transition:border-color .15s}
+.prac-inp:focus{border-color:var(--c4)}
+.prac-inp.ok{border-color:var(--c3);background:var(--c3b)}
+.prac-inp.err{border-color:#e55;background:#fce8e6}
+.prac-check{padding:10px 18px;background:var(--c4);color:#fff;border:none;border-radius:var(--rs);font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0}
+.prac-check:hover:not(:disabled){background:var(--c4t)}
+.prac-check:disabled{opacity:.5;cursor:not-allowed}
+.prac-fb{font-size:.8rem;line-height:1.65;padding:10px 14px;border-radius:var(--rs);margin-bottom:14px;display:none}
+.prac-fb.show{display:block}
+.prac-fb.ok{background:var(--c3b);border-left:3px solid var(--c3);color:var(--c3t)}
+.prac-fb.err{background:#fce8e6;border-left:3px solid #e55;color:#b91c1c}
+.prac-nb{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:10px 14px;background:var(--bg);border-radius:var(--rs)}
+.prac-nb-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dimmer);width:100%;margin-bottom:3px}
+.pnp{padding:4px 11px;border-radius:8px;font-family:var(--mono);font-size:.8rem;font-weight:700;border:2px solid;opacity:.25;transition:all .35s}
+.pnp.show{opacity:1}
+.pnp.r{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
+.pnp.c{color:var(--c2t);border-color:var(--c2);background:var(--c2b)}
+.pnp.i{color:var(--c3t);border-color:var(--c3);background:var(--c3b)}
+.pnp.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
+.pnp.p{color:#6d28d9;border-color:#7c3aed;background:#ede9fe}
+.prac-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:2px solid var(--brd);background:#fafaf8;border-radius:0 0 var(--r) var(--r)}
+.prac-nav{padding:8px 18px;border:2px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
+.prac-nav:hover:not(:disabled){border-color:var(--c4);color:var(--c4t)}
+.prac-nav:disabled{opacity:.3;cursor:not-allowed}
+.prac-nav.go{background:var(--c4);border-color:var(--c4);color:#fff}
+.prac-nav.go:hover:not(:disabled){background:var(--c4t)}
+.prac-dots-row{display:flex;gap:6px;align-items:center}
+.prac-dot{width:8px;height:8px;border-radius:50%;background:var(--brd);transition:all .2s}
+.prac-dot.done{background:var(--c3)}
+.prac-dot.cur{background:var(--c4);transform:scale(1.35)}
+/* Trigger button */
+.prac-trigger{padding:5px 14px;border-radius:100px;border:2px solid var(--c4);background:transparent;color:var(--c4t);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;flex-shrink:0}
+.prac-trigger:hover{background:var(--c4);color:#fff}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sec-hdr .slbl{margin-bottom:0}
+
 /* ── IN-PAGE TOC NAV ── */
 .toc-nav{
   position:sticky;top:48px;z-index:90;
@@ -1153,6 +1215,332 @@ if(cmpTb){
   });
 }
 
+// ── DATOS DE EJERCICIOS ──
+const PD={
+  esquema:{sec:'Las 4 partes del nombre',titulo:'2-metilpentano',mol:'ex-1',
+    nb:{r:'2-metil',c:'pent',i:'an',g:'o'},
+    pasos:[
+      {n:1,titulo:'Grupo funcional',expl:'El grupo funcional determina el sufijo. Si no hay ninguno, la molécula es un alcano.',
+       q:'¿Hay algún grupo funcional (−OH, C=O, −COOH)?',tipo:'mc',
+       ops:['Sí, alcohol (−OH) → -ol','Sí, cetona (C=O) → -ona','No — alcano → sufijo -o','Sí, ácido → -oico'],
+       resp:'No — alcano → sufijo -o',parte:'g',
+       fb:'Los alcanos no tienen heteroátomos. El sufijo es siempre <strong>-o</strong>.'},
+      {n:2,titulo:'Cadena principal',expl:'La cadena más larga de carbonos contiguos, incluyendo el mayor número de ramificaciones.',
+       q:'¿Cuántos C tiene la cadena más larga?',tipo:'mc',
+       ops:['3C → prop-','4C → but-','5C → pent-','6C → hex-'],
+       resp:'5C → pent-',parte:'c',
+       fb:'La cadena en zigzag tiene <strong>5 C</strong>. El metilo es una rama, no parte de la cadena principal → <strong>pent-</strong>.'},
+      {n:3,titulo:'Insaturaciones',expl:'Dobles enlaces → -en-; triples → -in-; sin ninguno → -an-.',
+       q:'¿Hay dobles o triples enlaces?',tipo:'mc',
+       ops:['Sí, doble C=C → -en-','Sí, triple C≡C → -in-','No → -an-'],
+       resp:'No → -an-',parte:'i',
+       fb:'No hay insaturaciones → <strong>-an-</strong>. Cadena base: <em>pentan-</em>.'},
+      {n:4,titulo:'Ramificaciones',expl:'Cada rama lleva localizador. Se ordenan alfabéticamente (los prefijos di-/tri- no cuentan).',
+       q:'¿Qué ramificación hay y en qué carbono?',tipo:'mc',
+       ops:['1-metil','2-metil','3-metil','2-etil'],
+       resp:'2-metil',parte:'r',
+       fb:'El CH₃ lateral está en <strong>C2</strong> (numerando para dar el menor localizador posible) → <strong>2-metil</strong>.'},
+      {n:5,titulo:'Construir el nombre',expl:'[Ramificaciones] + [cadena] + [insaturación] + [sufijo]. Todo junto, sin espacios.',
+       q:'Escribe el nombre IUPAC completo:',tipo:'write',
+       resp:'2-metilpentano',parte:null,
+       fb:'✓ <strong>2-metilpentano</strong>: rama + cadena + sin insaturación + alcano.'}
+    ]},
+  ejemplos:{sec:'Ejemplos interactivos',titulo:'pentan-2-ona',mol:'ex-3',
+    nb:{r:'',c:'pent',i:'an',g:'2-ona'},
+    pasos:[
+      {n:1,titulo:'Grupo funcional',expl:'El C=O entre dos carbonos → cetona. El C=O en el extremo → aldehído.',
+       q:'¿Qué tipo de carbonilo tiene esta molécula?',tipo:'mc',
+       ops:['Aldehído — C=O en extremo → -al','Cetona — C=O entre 2C → -ona','Ácido carboxílico → -oico','Alcano → -o'],
+       resp:'Cetona — C=O entre 2C → -ona',parte:'g',
+       fb:'El C=O está en C2, con carbonos a ambos lados → <strong>cetona</strong> → sufijo <strong>-ona</strong>.'},
+      {n:2,titulo:'Cadena principal',expl:'La cadena más larga que pase por el grupo funcional.',
+       q:'¿Cuántos C incluye la cadena con el C=O?',tipo:'mc',
+       ops:['3C → prop-','4C → but-','5C → pent-','6C → hex-'],
+       resp:'5C → pent-',parte:'c',
+       fb:'La cadena continua por el C=O tiene <strong>5 C</strong> → <strong>pent-</strong>.'},
+      {n:3,titulo:'Insaturaciones y ramas',expl:'El C=O ya está capturado en el sufijo. Busca solo dobles/triples C=C o C≡C y ramas.',
+       q:'¿Hay insaturaciones adicionales o ramificaciones?',tipo:'mc',
+       ops:['Sí, doble C=C → -en-','Sí, una ramificación','No → -an- y sin prefijos'],
+       resp:'No → -an- y sin prefijos',parte:'i',
+       fb:'Nada más → <strong>-an-</strong>. Nombre parcial: <em>pentan-</em>.'},
+      {n:4,titulo:'Posición del C=O',expl:'IUPAC: el localizador va justo antes del sufijo que modifica. Numera desde el extremo que dé menor localizador al C=O.',
+       q:'¿En qué posición queda el C=O?',tipo:'mc',
+       ops:['C1 (imposible: sería aldehído)','C2 → 2-ona ✓','C3 → 3-ona','C4'],
+       resp:'C2 → 2-ona ✓',parte:'g',
+       fb:'C=O en <strong>C2</strong> (localizador 2 < 4 desde el otro extremo). Sufijo IUPAC: <strong>-2-ona</strong> (antes: 2-pentanona).'},
+      {n:5,titulo:'Nombre completo',expl:'Sin ramas + cadena + sin insaturación extra + localizador antes del sufijo.',
+       q:'Escribe el nombre IUPAC:',tipo:'write',
+       resp:'pentan-2-ona',parte:null,
+       fb:'✓ <strong>pentan-2-ona</strong>. Notación pre-2005: "2-pentanona" — hoy el localizador va antes del sufijo.'}
+    ]},
+  algoritmo:{sec:'El algoritmo de 5 pasos',titulo:'3-etil-2-metilpentan-1-ol',mol:'ex-4',
+    nb:{r:'3-etil-2-metil',c:'pent',i:'an',g:'1-ol'},
+    pasos:[
+      {n:1,titulo:'Paso 1 — Grupo funcional',expl:'El grupo de mayor prioridad en la tabla IUPAC determina el sufijo y la dirección de numeración.',
+       q:'¿Cuál es el grupo funcional principal?',tipo:'mc',
+       ops:['Cetona (C=O interior) → -ona','Alcohol (−OH) → -ol','Éter (R−O−R) → alcoxi-','Alcano → -o'],
+       resp:'Alcohol (−OH) → -ol',parte:'g',
+       fb:'El <strong>−OH</strong> (alcohol) tiene la mayor prioridad aquí → sufijo <strong>-ol</strong>. La numeración empieza desde el extremo más cercano al −OH.'},
+      {n:2,titulo:'Paso 2 — Cadena principal',expl:'La más larga que contenga el grupo funcional y el mayor número de ramificaciones.',
+       q:'¿Cuántos C tiene la cadena principal (con el −OH y pasando por más ramas)?',tipo:'mc',
+       ops:['4C → but-','5C → pent- ✓','6C → hex-','7C → hept-'],
+       resp:'5C → pent- ✓',parte:'c',
+       fb:'La cadena C1(−OH)−C2−C3−C4−C5 tiene <strong>5 C</strong> y recoge las dos ramas. El etilo y el metilo son sustituyentes → <strong>pent-</strong>.'},
+      {n:3,titulo:'Paso 3 — Numeración',expl:'Numera desde el extremo que dé el menor localizador al grupo funcional. COOH y CHO siempre son C1.',
+       q:'¿En qué posición queda el −OH al numerar correctamente?',tipo:'mc',
+       ops:['C1 (desde el extremo con −OH) ✓','C2','C3','C5'],
+       resp:'C1 (desde el extremo con −OH) ✓',parte:'g',
+       fb:'Numerando desde el extremo con −OH: C1(−OH)−C2−C3−C4−C5. Sufijo: <strong>-1-ol</strong> → pentan-1-...'},
+      {n:4,titulo:'Paso 4 — Ramificaciones (orden alfabético)',expl:'Las ramas se listan alfabéticamente. Los prefijos di-, tri-… no cuentan; iso- sí cuenta.',
+       q:'¿Cuál es el orden alfabético correcto de las ramas?',tipo:'mc',
+       ops:['2-metil-3-etil (m antes que e — incorrecto)','3-etil-2-metil (e antes que m ✓)','Solo 3-etil','Solo 2-metil'],
+       resp:'3-etil-2-metil (e antes que m ✓)',parte:'r',
+       fb:'<strong>e</strong>til va antes que <strong>m</strong>etil → <strong>3-etil-2-metil</strong>. C3 para el etilo y C2 para el metilo.'},
+      {n:5,titulo:'Paso 5 — Nombre completo',expl:'[Ramas alfabético] + [cadena] + [-an-] + [localizador-sufijo]. Una sola palabra.',
+       q:'Escribe el nombre IUPAC completo:',tipo:'write',
+       resp:'3-etil-2-metilpentan-1-ol',parte:null,
+       fb:'✓ <strong>3-etil-2-metilpentan-1-ol</strong>. Los 5 pasos aplicados: grupo → cadena → numeración → ramas → ensamblar.'}
+    ]},
+  tablas:{sec:'Tablas de referencia',titulo:'5-metilhex-3-en-2-ol',mol:'ex-5',
+    nb:{r:'5-metil',c:'hex',i:'3-en',g:'2-ol'},
+    pasos:[
+      {n:1,titulo:'Grupo funcional prioritario',expl:'Cuando hay varios grupos, el de mayor prioridad (tabla 3, más arriba) determina el sufijo. El C=C es insaturación, no supera al −OH.',
+       q:'¿Cuál es el grupo funcional que da el sufijo?',tipo:'mc',
+       ops:['Alqueno (C=C) → sufijo -eno','Alcohol (−OH) → sufijo -ol ✓','Cetona (C=O) → sufijo -ona','Alcano → -o'],
+       resp:'Alcohol (−OH) → sufijo -ol ✓',parte:'g',
+       fb:'El <strong>−OH</strong> (alcohol) supera al C=C en la jerarquía IUPAC → sufijo <strong>-ol</strong>. El doble enlace se indicará con <strong>-en-</strong>.'},
+      {n:2,titulo:'Cadena principal',expl:'Debe contener el grupo funcional principal (−OH) Y la insaturación (C=C). Busca la más larga que los incluya a ambos.',
+       q:'¿Cuántos C tiene la cadena con −OH y C=C?',tipo:'mc',
+       ops:['5C → pent-','6C → hex- ✓','7C → hept-','4C → but-'],
+       resp:'6C → hex- ✓',parte:'c',
+       fb:'La cadena C1−C2(−OH)−C3=C4−C5−C6 contiene el −OH y el C=C: <strong>6 C</strong> → <strong>hex-</strong>. El metilo en C5 es rama.'},
+      {n:3,titulo:'Numeración y localizadores',expl:'Numera para el menor localizador al grupo de mayor prioridad (−OH). IUPAC: localizadores antes del sufijo que modifican.',
+       q:'Al numerar correctamente, ¿dónde quedan −OH y C=C?',tipo:'mc',
+       ops:['−OH en C5, C=C en C3-C4','−OH en C2, C=C en C3-C4 → hex-3-en-2-ol ✓','−OH en C1','−OH en C3'],
+       resp:'−OH en C2, C=C en C3-C4 → hex-3-en-2-ol ✓',parte:'i',
+       fb:'Desde el extremo con −OH más cercano: C1−C2(−OH)−C3=C4−C5−C6. −OH en <strong>C2</strong>, C=C entre <strong>C3-C4</strong> → <strong>hex-3-en-2-ol</strong>.'},
+      {n:4,titulo:'Ramificación',expl:'Con la numeración fijada, identifica el localizador del metilo.',
+       q:'¿En qué carbono está el metilo lateral?',tipo:'mc',
+       ops:['C4','C5 ✓','C2','C6'],
+       resp:'C5 ✓',parte:'r',
+       fb:'Con C2 = −OH, el CH₃ lateral cae en <strong>C5</strong> → prefijo <strong>5-metil</strong>.'},
+      {n:5,titulo:'Nombre completo',expl:'Rama + cadena + infijo -en- con localizador + sufijo -ol con localizador.',
+       q:'Escribe el nombre IUPAC completo:',tipo:'write',
+       resp:'5-metilhex-3-en-2-ol',parte:null,
+       fb:'✓ <strong>5-metilhex-3-en-2-ol</strong>. Localizadores antes de cada sufijo: hex-<strong>3</strong>-en-<strong>2</strong>-ol.'}
+    ]},
+  comparacion:{sec:'Comparación de nomenclaturas',titulo:'"metil propil cetona" → IUPAC',mol:'ex-3',
+    nb:{r:'',c:'pent',i:'an',g:'2-ona'},
+    pasos:[
+      {n:1,titulo:'Identificar el tipo por el nombre funcional',expl:'En nomenclatura funcional (pre-2005) el tipo de compuesto aparece al final: "… cetona", "… alcohol", "éter …".',
+       q:'¿Qué tipo de compuesto es "metil propil cetona"?',tipo:'mc',
+       ops:['Alcohol','Éter','Cetona ✓','Aldehído'],
+       resp:'Cetona ✓',parte:'g',
+       fb:'La palabra <strong>cetona</strong> indica C=O entre dos cadenas → sufijo IUPAC <strong>-ona</strong>.'},
+      {n:2,titulo:'Contar los carbonos totales',expl:'En el nombre funcional los carbonos están implícitos: metil = 1C, propil = 3C. El C del carbonilo también cuenta.',
+       q:'¿Cuántos C en total? (metil 1C + C=O 1C + propil 3C)',tipo:'mc',
+       ops:['3C → prop-','4C → but-','5C → pent- ✓','6C → hex-'],
+       resp:'5C → pent- ✓',parte:'c',
+       fb:'1 + 1 + 3 = <strong>5 C</strong> → prefijo <strong>pent-</strong>.'},
+      {n:3,titulo:'Insaturaciones adicionales',expl:'El C=O de la cetona ya está en el sufijo. Solo busca dobles/triples C=C / C≡C extra.',
+       q:'¿Hay insaturaciones adicionales?',tipo:'mc',
+       ops:['Sí, doble C=C → -en-','Sí, triple C≡C → -in-','No → -an- ✓'],
+       resp:'No → -an- ✓',parte:'i',
+       fb:'Sin insaturaciones extra → <strong>-an-</strong>.'},
+      {n:4,titulo:'Posición del C=O y regla IUPAC 2013',expl:'En nomenclatura pre-2005 el localizador iba al inicio: "2-pentanona". En IUPAC 2013 va antes del sufijo.',
+       q:'¿Cómo se escribe el localizador del C=O en IUPAC actual?',tipo:'mc',
+       ops:['Al inicio: 2-pentanona (pre-2005)','Antes del sufijo: pentan-2-ona ✓','Al final: pentanona-2','No se indica'],
+       resp:'Antes del sufijo: pentan-2-ona ✓',parte:'g',
+       fb:'IUPAC 2013: localizador <strong>antes del sufijo</strong> que modifica → <strong>pentan-2-ona</strong>. La forma "2-pentanona" es nomenclatura pre-2005.'},
+      {n:5,titulo:'Nombre IUPAC equivalente',expl:'Aplica todo lo aprendido para convertir el nombre funcional.',
+       q:'Escribe el nombre IUPAC de "metil propil cetona":',tipo:'write',
+       resp:'pentan-2-ona',parte:null,
+       fb:'✓ <strong>pentan-2-ona</strong>. Tabla de equivalencias: acetona → propan-2-ona; metil etil cetona → butan-2-ona; metil propil cetona → pentan-2-ona.'}
+    ]},
+  sustituyentes:{sec:'Sustituyentes complejos',titulo:'Nombrar −CH(CH₃)₂',mol:null,
+    svgHtml:'<div class="prac-struct">CH₃<br>│<br><strong style="color:var(--c4t);font-size:1.1em">C</strong>H —— (unión a cadena principal)<br>│<br>CH₃<br><span style="font-size:.72rem;color:var(--dimmer)">El CH marcado es el C-1</span></div>',
+    nb:{c:'etil',g:'(1-metiletil)'},
+    pasos:[
+      {n:1,titulo:'C-1: el carbono de unión',expl:'El carbono de unión al compuesto principal es siempre C-1 del sustituyente. Desde él se numera hacia adentro.',
+       q:'¿Cuál es el C-1 en −CH(CH₃)₂?',tipo:'mc',
+       ops:['Un CH₃ del extremo','El CH central (3 enlaces: 2×CH₃ + 1×cadena principal) ✓','Cualquiera vale','No existe C-1'],
+       resp:'El CH central (3 enlaces: 2×CH₃ + 1×cadena principal) ✓',parte:null,
+       fb:'El <strong>CH central</strong> es C-1: se une a la cadena principal. Los dos CH₃ son ramas internas del sustituyente.'},
+      {n:2,titulo:'Cadena más larga desde C-1',expl:'Desde C-1, sigue la cadena continua más larga. Esa longitud da el prefijo base del sustituyente.',
+       q:'¿Cuántos C tiene la cadena más larga desde C-1?',tipo:'mc',
+       ops:['1C → metil','2C → etil (C-1 + 1 CH₃) ✓','3C → propil','4C → butil'],
+       resp:'2C → etil (C-1 + 1 CH₃) ✓',parte:'c',
+       fb:'C-1 + uno de los CH₃ = <strong>2 C</strong> → base <strong>etil</strong>. El sustituyente es un etilo ramificado.'},
+      {n:3,titulo:'Ramificaciones internas',expl:'El CH₃ que no forma la cadena base es una rama interna. Su localizador se cuenta desde C-1.',
+       q:'¿Hay ramas dentro del sustituyente? ¿En qué posición?',tipo:'mc',
+       ops:['No hay ramas','Sí, CH₃ en C-1 ✓','Sí, CH₃ en C-2','Sí, dos CH₃ en C-2'],
+       resp:'Sí, CH₃ en C-1 ✓',parte:'r',
+       fb:'El segundo CH₃ está unido al propio C-1 → <strong>metilo en C-1</strong> → localizador: 1-metil.'},
+      {n:4,titulo:'Nombre IUPAC del sustituyente',expl:'Se construye como un nombre normal: rama + cadena + sufijo -il. Al ser ramificado, va entre paréntesis en el nombre del compuesto.',
+       q:'¿Cuál es el nombre IUPAC correcto?',tipo:'mc',
+       ops:['propil','isopropil (trivial, no IUPAC)','(1-metiletil) ✓','(2-metiletil)'],
+       resp:'(1-metiletil) ✓',parte:'g',
+       fb:'Etil (2C) + metilo en C-1 → <strong>1-metiletil</strong>. Entre paréntesis porque es ramificado: <strong>(1-metiletil)</strong>. "Isopropil" es el nombre trivial pre-2005.'},
+      {n:5,titulo:'Equivalencia con nombre trivial',expl:'Conocer los pares trivial ↔ IUPAC permite leer libros pre-2005 sin confusión.',
+       q:'¿Cómo se llamaba (1-metiletil) antes de 2005?',tipo:'mc',
+       ops:['sec-butil','isobutil','isopropil ✓','neopentil'],
+       resp:'isopropil ✓',parte:null,
+       fb:'<strong>isopropil = (1-metiletil)</strong>. Otros pares clave: isobutil = (2-metilpropil); sec-butil = (1-metilpropil); ter-butil = (1,1-dimetiletil). El prefijo <em>iso-</em> SÍ cuenta en el orden alfabético.'}
+    ]}
+};
+
+// ── CONTROLADOR DEL MODAL ──
+const PM={sec:null,step:0,ans:[],data:null};
+const PASO_BG=['','var(--c4)','var(--c2)','var(--c4)','var(--c1)','var(--c2)'];
+
+function pmOpen(secId){
+  const d=PD[secId]; if(!d) return;
+  PM.sec=secId; PM.step=0; PM.data=d;
+  PM.ans=new Array(d.pasos.length).fill(false);
+  document.getElementById('pm-sec').textContent=d.sec;
+  document.getElementById('pm-titulo').textContent=d.titulo;
+  const molEl=document.getElementById('pm-mol');
+  if(d.mol){
+    const svg=document.querySelector(`#${d.mol} .mol-area svg`);
+    molEl.innerHTML=svg?svg.outerHTML:'';
+  } else {
+    molEl.innerHTML=d.svgHtml||'';
+  }
+  pmRender();
+  document.getElementById('prac-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function pmClose(){
+  document.getElementById('prac-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function pmOverlayClick(e){if(e.target===document.getElementById('prac-overlay'))pmClose();}
+
+function pmNorm(s){return s.toLowerCase().trim().replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u').replace(/\s/g,'');}
+
+function pmRender(){
+  const d=PM.data, paso=d.pasos[PM.step], done=PM.ans[PM.step];
+  document.getElementById('pm-stitle').textContent=paso.titulo;
+  document.getElementById('pm-expl').textContent=paso.expl;
+  document.getElementById('pm-q').textContent=paso.q;
+  const badge=document.getElementById('pm-badge');
+  badge.textContent=paso.n; badge.style.background=PASO_BG[paso.n]||'var(--c4)';
+  const fb=document.getElementById('pm-fb');
+  fb.className='prac-fb'; fb.innerHTML='';
+  const optsEl=document.getElementById('pm-opts');
+  const writeEl=document.getElementById('pm-write');
+  const inp=document.getElementById('pm-inp');
+  const chk=document.getElementById('pm-check');
+  optsEl.innerHTML=''; inp.value=''; inp.className='prac-inp'; inp.disabled=false;
+  chk.disabled=false;
+  if(paso.tipo==='mc'){
+    writeEl.className='prac-write-row';
+    paso.ops.forEach(op=>{
+      const btn=document.createElement('button');
+      btn.className='prac-opt'; btn.textContent=op;
+      if(done){
+        btn.disabled=true;
+        if(op===paso.resp)btn.className='prac-opt correct';
+      } else {
+        btn.onclick=()=>pmSelect(btn,op,paso);
+      }
+      optsEl.appendChild(btn);
+    });
+  } else {
+    writeEl.className='prac-write-row show';
+    if(done){inp.className='prac-inp ok';inp.value=paso.resp;inp.disabled=true;chk.disabled=true;}
+  }
+  if(done){fb.innerHTML='✓ '+paso.fb;fb.className='prac-fb show ok';}
+  pmNB(); pmDots(); pmNavBtns();
+}
+
+function pmSelect(btn,val,paso){
+  document.querySelectorAll('.prac-opt').forEach(b=>{b.disabled=true;b.onclick=null;});
+  const ok=val===paso.resp;
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok){document.querySelectorAll('.prac-opt').forEach(b=>{if(b.textContent===paso.resp)b.classList.add('correct');});}
+  pmFb(ok,paso.fb); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
+}
+
+function pmCheck(){
+  const paso=PM.data.pasos[PM.step];
+  const inp=document.getElementById('pm-inp');
+  const ok=pmNorm(inp.value)===pmNorm(paso.resp);
+  inp.className='prac-inp '+(ok?'ok':'err');
+  inp.disabled=true; document.getElementById('pm-check').disabled=true;
+  pmFb(ok,paso.fb); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
+}
+
+function pmFb(ok,txt){
+  const fb=document.getElementById('pm-fb');
+  fb.innerHTML=(ok?'✓ ':'✗ Respuesta correcta: ')+txt;
+  fb.className='prac-fb show '+(ok?'ok':'err');
+}
+
+function pmReveal(parte){
+  document.querySelectorAll(`#pm-nb .pnp.${parte}`).forEach(el=>el.classList.add('show'));
+}
+
+function pmNB(){
+  const d=PM.data, nb=document.getElementById('pm-nb');
+  nb.innerHTML='<div class="prac-nb-lbl">Nombre en construcción</div>';
+  const order=['p','r','c','i','g'];
+  order.forEach(k=>{
+    const val=d.nb&&d.nb[k]; if(!val)return;
+    const el=document.createElement('span');
+    el.className='pnp '+k;
+    el.textContent=val;
+    const revealed=d.pasos.some((p,i)=>p.parte===k&&PM.ans[i]);
+    if(revealed)el.classList.add('show');
+    nb.appendChild(el);
+  });
+}
+
+function pmDots(){
+  const el=document.getElementById('pm-dots'); el.innerHTML='';
+  PM.data.pasos.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='prac-dot'+(i<PM.step?' done':'')+(i===PM.step?' cur':'');
+    el.appendChild(d);
+  });
+}
+
+function pmNavBtns(){
+  const d=PM.data, done=PM.ans[PM.step];
+  document.getElementById('pm-prev').disabled=PM.step===0;
+  const nxt=document.getElementById('pm-next');
+  const last=PM.step===d.pasos.length-1;
+  nxt.disabled=!done;
+  nxt.textContent=last?'Cerrar ✓':'Siguiente →';
+  nxt.className='prac-nav'+(done?' go':'');
+}
+
+function pmPrev(){if(PM.step>0){PM.step--;pmRender();}}
+function pmNext(){
+  const last=PM.step===PM.data.pasos.length-1;
+  if(last){pmClose();}else{PM.step++;pmRender();}
+}
+
+// Inyectar botones "Practicar" junto a cada cabecera de sección
+document.addEventListener('DOMContentLoaded',()=>{
+  [['esquema','esquema'],['ejemplos','ejemplos'],['algoritmo','algoritmo'],
+   ['tablas','tablas'],['comparacion','comparacion'],['sustituyentes','sustituyentes']]
+  .forEach(([anchorId,secId])=>{
+    const anchor=document.getElementById(anchorId); if(!anchor)return;
+    let el=anchor.nextElementSibling;
+    while(el&&!el.classList.contains('slbl'))el=el.nextElementSibling;
+    if(!el)return;
+    const hdr=document.createElement('div'); hdr.className='sec-hdr';
+    el.style.marginBottom='0';
+    el.parentNode.insertBefore(hdr,el); hdr.appendChild(el);
+    const btn=document.createElement('button'); btn.className='prac-trigger';
+    btn.textContent='🎯 Practicar'; btn.onclick=()=>pmOpen(secId);
+    hdr.appendChild(btn);
+  });
+});
+
 // ── TOC active section tracking ──
 (function(){
   const IDS=['esquema','ejemplos','algoritmo','tablas','comparacion','sustituyentes'];
@@ -1185,5 +1573,39 @@ if(tb){T3.forEach((r,i)=>{
   tb.appendChild(tr);
 });}
 </script>
+
+<!-- ── MODAL PRACTICAR ── -->
+<div id="prac-overlay" class="prac-overlay" onclick="pmOverlayClick(event)">
+  <div class="prac-modal">
+    <div class="prac-head">
+      <div class="prac-head-info">
+        <div class="prac-sec-lbl" id="pm-sec"></div>
+        <div class="prac-mol-name" id="pm-titulo"></div>
+      </div>
+      <button class="prac-x" onclick="pmClose()">✕</button>
+    </div>
+    <div class="prac-mol-area" id="pm-mol"></div>
+    <div class="prac-body">
+      <div class="prac-step-row">
+        <span class="prac-badge" id="pm-badge">1</span>
+        <span class="prac-step-title" id="pm-stitle"></span>
+      </div>
+      <div class="prac-expl" id="pm-expl"></div>
+      <div class="prac-q" id="pm-q"></div>
+      <div class="prac-opts" id="pm-opts"></div>
+      <div class="prac-write-row" id="pm-write">
+        <input class="prac-inp" id="pm-inp" type="text" placeholder="Escribe el nombre IUPAC…">
+        <button class="prac-check" id="pm-check" onclick="pmCheck()">Verificar</button>
+      </div>
+      <div class="prac-fb" id="pm-fb"></div>
+      <div class="prac-nb" id="pm-nb"><div class="prac-nb-lbl">Nombre en construcción</div></div>
+    </div>
+    <div class="prac-foot">
+      <button class="prac-nav" id="pm-prev" onclick="pmPrev()">← Anterior</button>
+      <div class="prac-dots-row" id="pm-dots"></div>
+      <button class="prac-nav" id="pm-next" onclick="pmNext()">Siguiente →</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
