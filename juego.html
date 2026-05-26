@@ -567,7 +567,7 @@ const M = {
   dimetilbutano(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
   // 2,2-dimetilpropano (neopentano): cadena 3C, dos metilos en C2 (p[1]): uno arriba, uno abajo
   dimetilpropano(){_pts=[];const p=zz(0,0,3);let s=chain(p);
-    s+=ln(p[1].x,p[1].y,p[1].x-BL,p[1].y);  // izquierda horizontal
+    s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);   // arriba
     s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);   // abajo
     return mkSVG(s);},
   // 2,3-dimetilbutano (alias)
@@ -780,7 +780,7 @@ const M = {
   trimetilbenceno135(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));
     s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);
     const a2=Math.PI/6;s+=ln(v[2].x,v[2].y,v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));_reg(v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));
-    const a4=-Math.PI+Math.PI/6;s+=ln(v[4].x,v[4].y,v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));_reg(v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));
+    const a4=Math.PI-Math.PI/6;s+=ln(v[4].x,v[4].y,v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));_reg(v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));
     return mkSVG(s);},
 
   // ── ÉTERES ──
@@ -1170,19 +1170,22 @@ const QBANK = [
   {type:'write', mol:'ortoXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están en posiciones adyacentes (1,2)'],
    ans:'1,2-dimetilbenceno', accepted:['1,2-dimetilbenceno','orto-xileno','o-xileno','o-dimetilbenceno','1,2-xileno','ortoxileno','orto xileno','oxileno','o xileno','1,2 dimetilbenceno','1,2dimetilbenceno','o-dimetil benceno','orto-dimetilbenceno','ortodimetilbenceno'],
-   expl:'Benceno con dos metilos en posiciones adyacentes (1,2) → <b>1,2-dimetilbenceno</b>.',
+   oldNames:['orto-xileno','o-xileno','o-dimetilbenceno','1,2-xileno','ortoxileno','orto xileno','oxileno','o xileno','1,2 dimetilbenceno','1,2dimetilbenceno','o-dimetil benceno','orto-dimetilbenceno','ortodimetilbenceno'],
+   expl:'Benceno con dos metilos en posiciones adyacentes (1,2) → <b>1,2-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,2-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'metaXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están separados por un carbono (1,3)'],
    ans:'1,3-dimetilbenceno', accepted:['1,3-dimetilbenceno','meta-xileno','m-xileno','m-dimetilbenceno','1,3-xileno','metaxileno','meta xileno','mxileno','m xileno','1,3 dimetilbenceno','1,3dimetilbenceno','m-dimetil benceno','meta-dimetilbenceno','metadimetilbenceno'],
-   expl:'Benceno con dos metilos en posiciones 1 y 3 → <b>1,3-dimetilbenceno</b>.',
+   oldNames:['meta-xileno','m-xileno','m-dimetilbenceno','1,3-xileno','metaxileno','meta xileno','mxileno','m xileno','1,3 dimetilbenceno','1,3dimetilbenceno','m-dimetil benceno','meta-dimetilbenceno','metadimetilbenceno'],
+   expl:'Benceno con dos metilos en posiciones 1 y 3 → <b>1,3-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,3-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'paraXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están en posiciones opuestas (1,4)'],
    ans:'1,4-dimetilbenceno', accepted:['1,4-dimetilbenceno','para-xileno','p-xileno','p-dimetilbenceno','1,4-xileno','paraxileno','para xileno','pxileno','p xileno','1,4 dimetilbenceno','1,4dimetilbenceno','p-dimetil benceno','para-dimetilbenceno','paradimetilbenceno'],
-   expl:'Benceno con dos metilos en posiciones opuestas (1,4) → <b>1,4-dimetilbenceno</b>.',
+   oldNames:['para-xileno','p-xileno','p-dimetilbenceno','1,4-xileno','paraxileno','para xileno','pxileno','p xileno','1,4 dimetilbenceno','1,4dimetilbenceno','p-dimetil benceno','para-dimetilbenceno','paradimetilbenceno'],
+   expl:'Benceno con dos metilos en posiciones opuestas (1,4) → <b>1,4-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,4-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'ciclohexanona', q:'Escribe el nombre IUPAC completo de esta estructura.',
@@ -1525,9 +1528,10 @@ const QBANK = [
    parts:[{t:'but',cls:'c',l:'4C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'prop1eno', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'prop-1-eno', accepted:['prop-1-eno','1-propeno','propeno','prop1eno'],
+   ans:'prop-1-eno', accepted:['prop-1-eno','1-propeno','propeno','prop1eno','propileno'],
+   oldNames:['propileno'],
    hints:['Cadena de 3 carbonos','Tiene un doble enlace en C1'],
-   expl:'3C, doble enlace en C1 → <b>prop-1-eno</b>.',
+   expl:'3C, doble enlace en C1 → <b>prop-1-eno</b>. "Propileno" es el nombre industrial anterior; IUPAC 2013 usa <b>prop-1-eno</b>.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'pent1ino', q:'Escribe el nombre IUPAC completo de esta estructura.',
@@ -1544,8 +1548,9 @@ const QBANK = [
 
   {type:'write', mol:'metilbenceno', q:'Escribe el nombre IUPAC de esta molécula aromática.',
    ans:'metilbenceno', accepted:['metilbenceno','tolueno'],
+   oldNames:['tolueno'],
    hints:['Es un benceno con un sustituyente','El sustituyente es de 1 carbono'],
-   expl:'Benceno + metilo → <b>metilbenceno</b> (tolueno como nombre común).',
+   expl:'Benceno + metilo → <b>metilbenceno</b>. "Tolueno" es el nombre trivial anterior; IUPAC 2013 usa <b>metilbenceno</b>.',
    parts:[{t:'metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'acidopropanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
@@ -1568,8 +1573,9 @@ const QBANK = [
 
   {type:'write', mol:'etanamida', q:'Escribe el nombre IUPAC de esta amida.',
    ans:'etanamida', accepted:['etanamida','acetamida'],
+   oldNames:['acetamida'],
    hints:['Cadena de 2 carbonos con −CONH₂','El grupo funcional es una amida'],
-   expl:'2C con −CONH₂ → <b>etanamida</b>.',
+   expl:'2C con −CONH₂ → <b>etanamida</b>. "Acetamida" es el nombre trivial anterior; IUPAC 2013 usa <b>etanamida</b>.',
    parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
 
   {type:'write', mol:'propanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
@@ -2061,8 +2067,9 @@ const QBANK = [
   // Q2: write — isopropilbenceno
   {type:'write', mol:'isopropilbenceno', q:'Escribe el nombre IUPAC de esta estructura aromática.',
    ans:'isopropilbenceno', accepted:['isopropilbenceno','(1-metiletil)benceno','cumeno'],
+   oldNames:['cumeno'],
    hints:['Benceno con sustituyente ramificado de 3 carbonos','El sustituyente tiene el punto de unión en el carbono central'],
-   expl:'Sustituyente isopropilo en benceno → <b>isopropilbenceno</b> (nombre trivial: cumeno).',
+   expl:'Sustituyente isopropilo en benceno → <b>isopropilbenceno</b>. "Cumeno" es el nombre trivial pre-2005; IUPAC 2013 usa <b>isopropilbenceno</b>.',
    parts:[{t:'isopropil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   // Q3: mc — 1,2,3-trimetilbenceno
@@ -2471,6 +2478,7 @@ function checkWrite(){
   if(!val.trim())return;
   const inp=document.getElementById('write-inp');
   const ok=q.accepted.some(a=>norm(a)===norm(val));
+  const isOldName=ok && q.oldNames && q.oldNames.some(a=>norm(a)===norm(val));
   if(ok){
     // Correct!
     const pts=[10,5,2][Math.min(writeAttempts,2)];
@@ -2478,7 +2486,7 @@ function checkWrite(){
     inp.classList.remove('err'); inp.classList.add('ok');
     document.getElementById('write-btn').disabled=true;
     score+=pts; typeStats[q.type].ok++;
-    showFeedback(ok,q.expl,q.ans,pts);
+    showFeedback(isOldName?'old':true,q.expl,q.ans,pts);
     history.push({type:q.type,ok,ans:q.ans,given:val,topic:q.topic});
   } else {
     writeAttempts++;
@@ -2553,6 +2561,12 @@ function showFeedback(ok,expl,ans,pts,given){
   if(ok===null){
     fb.className='feedback time';
     fb.innerHTML=`⏰ <strong>¡Tiempo!</strong> La respuesta era: <strong>${ans}</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
+  } else if(ok==='old'){
+    fb.className='feedback ok';
+    fb.innerHTML=`✓ <strong>Aceptado. +${ptsVal} pts</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`
+      +`<div style="margin-top:9px;background:rgba(230,159,0,.12);border:1.5px solid rgba(230,159,0,.4);border-radius:8px;padding:8px 12px;font-size:.79rem;line-height:1.65">`
+      +`📘 <strong>Nomenclatura anterior (pre-2005).</strong> El nombre según <strong>IUPAC 2013</strong> es: <strong style="color:#16a34a;font-family:var(--mono)">${ans}</strong>`
+      +`</div>`;
   } else if(ok){
     fb.className='feedback ok';
     fb.innerHTML=`✓ <strong>¡Correcto! +${ptsVal} pts</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
