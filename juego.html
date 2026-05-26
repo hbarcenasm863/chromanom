@@ -416,11 +416,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">126 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">187 preguntas · 20 por sesión</div></div>
       </button>
     </div>
     <div class="portada-stats">
-      <div class="ps"><div class="ps-n">126</div><div class="ps-l">En el banco</div></div>
+      <div class="ps"><div class="ps-n" id="stat-banco">187</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">45s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
@@ -2721,6 +2721,7 @@ function showScreen(id){
 // Fix drag API
 document.addEventListener('dragover',e=>e.preventDefault());
 renderBests();
+document.getElementById('stat-banco').textContent=QBANK.length;
 
 // ════════════════════════════════════════════════════════
 // ANALYTICS → Google Sheets via Apps Script
