@@ -274,6 +274,25 @@ footer span{color:var(--naranja);font-weight:700}
   .site-nav .nav-brand{font-size:.8rem}
 }
 
+/* Ruta recomendada */
+.ruta-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:20px 22px;margin-bottom:24px;box-shadow:var(--sh)}
+.ruta-hdr{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.16em;color:var(--dimmer);margin-bottom:14px}
+.ruta-steps{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rs{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--rs);border:2px solid;text-decoration:none;flex:1;min-width:160px;transition:transform .18s,box-shadow .18s}
+.rs:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.rs.r1{border-color:var(--azul);background:#e6f2ff;color:var(--azul-d)}
+.rs.r2{border-color:var(--verde);background:#e6f7f2;color:#006b4f}
+.rs.r3{border-color:var(--naranja);background:#fff3e6;color:#a04000}
+.rs-n{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;flex-shrink:0;line-height:1}
+.rs-title{font-size:.88rem;font-weight:800;margin-bottom:2px}
+.rs-desc{font-size:.72rem;line-height:1.45;opacity:.8}
+.rs-arr{font-size:1.1rem;color:var(--dim);flex-shrink:0;font-weight:700}
+@media(max-width:600px){.ruta-steps{flex-direction:column}.rs-arr{transform:rotate(90deg)}}
+/* Badges paso en mod-card */
+.mod-paso{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;opacity:.65;margin-bottom:4px}
+/* Cobertura temática */
+.temas-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tema-chip{padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:600;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25)}
 </style>
 </head>
 <body>
@@ -299,8 +318,14 @@ footer span{color:var(--naranja);font-weight:700}
 <div class="hero">
   <div>
     <h1>La forma <span>visual</span> de aprender<br>nomenclatura orgánica</h1>
-    <p>Comprende, practica y domina los nombres de los compuestos orgánicos usando un código de color en 4 partes y podrás nombrar —o descifrar— cualquier compuesto, sin importar el grupo funcional.</p>
-    <div class="four-parts">
+    <p>ChromaNom te enseña a nombrar compuestos orgánicos según la nomenclatura <strong>IUPAC</strong> — desde alcanos hasta amidas y nitrilos — con un método visual en 4 partes. Diseñado para bachillerato: sin instalaciones, sin registro, todo en el navegador.</p>
+    <div class="temas-row">
+      <span class="tema-chip">Alcanos · Alquenos · Alquinos</span>
+      <span class="tema-chip">Alcoholes · Cetonas · Aldehídos</span>
+      <span class="tema-chip">Ácidos · Ésteres · Éteres</span>
+      <span class="tema-chip">Amidas · Nitrilos</span>
+    </div>
+    <div class="four-parts" style="margin-top:14px">
       <div class="fp r">① Ramificaciones</div>
       <div class="fp c">② Cadena principal</div>
       <div class="fp i">③ Insaturaciones</div>
@@ -351,12 +376,42 @@ footer span{color:var(--naranja);font-weight:700}
 </div>
 
 <!-- MÓDULOS -->
+<div class="ruta-card">
+  <div class="ruta-hdr">¿Por dónde empiezo? — Ruta recomendada</div>
+  <div class="ruta-steps">
+    <a class="rs r1" href="teoria.html">
+      <span class="rs-n">①</span>
+      <div>
+        <div class="rs-title">Principios</div>
+        <div class="rs-desc">El sistema de 4 colores, el algoritmo de 5 pasos y las tablas de referencia. Empieza aquí si no conoces IUPAC.</div>
+      </div>
+    </a>
+    <span class="rs-arr">→</span>
+    <a class="rs r2" href="grupos.html">
+      <span class="rs-n">②</span>
+      <div>
+        <div class="rs-title">Grupos funcionales</div>
+        <div class="rs-desc">Explora cada grupo con su estructura, reglas IUPAC y 10 ejercicios específicos.</div>
+      </div>
+    </a>
+    <span class="rs-arr">→</span>
+    <a class="rs r3" href="juego.html">
+      <span class="rs-n">③</span>
+      <div>
+        <div class="rs-title">Juego de práctica</div>
+        <div class="rs-desc">Pon a prueba lo aprendido con preguntas aleatorias, cronometradas y de distintos tipos.</div>
+      </div>
+    </a>
+  </div>
+</div>
+
 <div class="sec-lbl">Módulos de aprendizaje</div>
 <div class="modules">
 
   <a class="mod-card azul" href="teoria.html">
     <div class="mod-top">
       <span class="mod-icon">⚗️</span>
+      <div class="mod-paso">① Empieza aquí</div>
       <div class="mod-title">Principios de Nomenclatura</div>
       <div class="mod-desc">Las 4 partes, el algoritmo paso a paso, tablas de referencia completas y ejercicios de identificación y escritura de nombres.</div>
     </div>
@@ -374,6 +429,7 @@ footer span{color:var(--naranja);font-weight:700}
   <a class="mod-card verde" href="grupos.html">
     <div class="mod-top">
       <span class="mod-icon">🔬</span>
+      <div class="mod-paso">② Luego aquí</div>
       <div class="mod-title">Grupos Funcionales</div>
       <div class="mod-desc">Los 16 grupos funcionales con sus reglas IUPAC, estructuras de línea-ángulo y 10 ejercicios por grupo. 160 ejercicios en total.</div>
     </div>
@@ -390,6 +446,7 @@ footer span{color:var(--naranja);font-weight:700}
   <a class="mod-card naranja" href="juego.html">
     <div class="mod-top">
       <span class="mod-icon">🎮</span>
+      <div class="mod-paso">③ Pon a prueba lo aprendido</div>
       <div class="mod-title">Juego de Práctica</div>
       <div class="mod-desc">Pon a prueba lo aprendido con 4 tipos de retos interactivos: opción múltiple, arrastrar partes, identificar fragmentos y escribir nombres completos. 45 segundos por pregunta.</div>
     </div>
