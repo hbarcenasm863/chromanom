@@ -308,7 +308,9 @@ const GROUPS = [
       {svgKey:'propilHexano',ans:'3-propilhexano',accepted:['3-propilhexano'],bd:[{t:'3-propil',cls:'r',l:'Ramif.'},{t:'hex',cls:'c',l:'6C'},{t:'ano',cls:'g',l:'Alcano'}],hints:['6C cadena principal. La cadena lateral larga es un propilo.','Propilo en C3.'],expl:'6C, propilo en C3 → <b>3-propilhexano</b>.'},
       {svgKey:'neopentano',ans:'2,2-dimetilpropano',accepted:['2,2-dimetilpropano','neopentano'],bd:[{t:'2,2-dimetil',cls:'r',l:'Ramif.'},{t:'prop',cls:'c',l:'3C'},{t:'ano',cls:'g',l:'Alcano'}],hints:['Carbono central con 4 cadenas iguales.','3C principal, dos metilos en C2.'],expl:'3C, dos metilos en C2 → <b>2,2-dimetilpropano</b>.'},
       {svgKey:'etilButano',ans:'3-etilhexano',accepted:['3-etilhexano'],bd:[{t:'3-etil',cls:'r',l:'Ramif.'},{t:'hex',cls:'c',l:'6C'},{t:'ano',cls:'g',l:'Alcano'}],hints:['Busca la cadena más larga: hay 6C.','Etilo en C3.'],expl:'6C cadena principal, etilo en C3 → <b>3-etilhexano</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-ano</strong>',loc:'Cadena más larga (no hay localizador de grupo funcional)',sub:'<strong>…-il-</strong> (como sustituyente alquilo)'},
+    competition:'Si hay cualquier otro grupo funcional, el alcano es la cadena base y ese grupo da el sufijo.'
   },
 
   // ── 2. CICLOALCANOS ─────────────────────────────────────
@@ -336,7 +338,9 @@ const GROUPS = [
       {svgKey:'ciclobutano',ans:'ciclobutano',accepted:['ciclobutano'],bd:[{t:'ciclobut',cls:'c',l:'Ciclo 4C'},{t:'ano',cls:'g',l:'Cicloalcano'}],hints:['Anillo de 4 carbonos.','ciclo + but + ano.'],expl:'Anillo 4C → <b>ciclobutano</b>.'},
       {svgKey:'propilCiclopentano',ans:'propilciclopentano',accepted:['propilciclopentano'],bd:[{t:'propil',cls:'r',l:'Ramif.'},{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'ano',cls:'g',l:'Cicloalcano'}],hints:['Ciclo 5C con un propilo. Un solo sustituyente.','propil + ciclopent + ano.'],expl:'Ciclo 5C + propilo → <b>propilciclopentano</b>.'},
       {svgKey:'trimetilCiclopentano',ans:'1,2,3-trimetilciclopentano',accepted:['1,2,3-trimetilciclopentano'],bd:[{t:'1,2,3-trimetil',cls:'r',l:'Ramif.'},{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'ano',cls:'g',l:'Cicloalcano'}],hints:['Tres metilos en el anillo de 5C.','Localizadores más bajos: 1, 2 y 3.'],expl:'Ciclo 5C, tres metilos consecutivos → <b>1,2,3-trimetilciclopentano</b>.'},
-    ]
+    ],
+    apply:{pos:'Prefijo <strong>ciclo-</strong> + sufijo <strong>-ano</strong>',loc:'El anillo completo es la cadena',sub:'<strong>ciclo…-il-</strong>'},
+    competition:'El anillo puede ser la cadena principal si tiene más C que cualquier cadena abierta, o pasa a prefijo <strong>ciclo…-il-</strong>.'
   },
 
   // ── 3. ALQUENOS ─────────────────────────────────────────
@@ -364,7 +368,9 @@ const GROUPS = [
       {svgKey:'cicloHexeno',ans:'ciclohex-1-eno',accepted:['ciclohex-1-eno','ciclohexeno'],bd:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'1-en',cls:'i',l:'Doble C1-C2'},{t:'o',cls:'g',l:'Alqueno'}],hints:['Anillo de 6C con un doble enlace.','ciclohex-1-eno.'],expl:'Ciclo 6C + doble enlace → <b>ciclohex-1-eno</b>.'},
       {svgKey:'metilCicloHexeno',ans:'1-metilciclohex-2-eno',accepted:['1-metilciclohex-2-eno'],bd:[{t:'1-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'2-en',cls:'i',l:'Doble C2-C3'},{t:'o',cls:'g',l:'Alqueno'}],hints:['Ciclo 6C con metilo y doble enlace. El metilo está en C1, el doble en C2-C3.','1-metilciclohex-2-eno.'],expl:'Ciclo 6C, metilo C1, doble C2 → <b>1-metilciclohex-2-eno</b>.'},
       {svgKey:'penta13dieno',ans:'penta-1,3-dieno',accepted:['penta-1,3-dieno','1,3-pentadieno'],bd:[{t:'penta',cls:'c',l:'5C'},{t:'1,3-di',cls:'i',l:'Dobles C1,C3'},{t:'en',cls:'i',l:'×2'},{t:'o',cls:'g',l:'Dieno'}],hints:['5C con dos dobles enlaces conjugados.','penta-1,3-dieno.'],expl:'5C, dobles en C1,C3 → <b>penta-1,3-dieno</b>. 💡 <em>Nombre anterior: <b>1,3-pentadieno</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-eno</strong> con localizador',loc:'El doble enlace recibe el número menor',sub:'<strong>…-enil-</strong>'},
+    competition:'Con −OH: el alcohol manda → <strong>hex-3-en-1-ol</strong>. Con −COOH: <strong>ácido pent-4-enoico</strong>.'
   },
 
   // ── 4. ALQUINOS ─────────────────────────────────────────
@@ -392,7 +398,9 @@ const GROUPS = [
       {svgKey:'metilPent2ino',ans:'4-metilpent-2-ino',accepted:['4-metilpent-2-ino','4-metil-2-pentino'],bd:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C + metilo en C4, triple en C2.','4-metilpent-2-ino.'],expl:'5C, metilo C4, triple C2 → <b>4-metilpent-2-ino</b>. 💡 <em>Nombre anterior: <b>4-metil-2-pentino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
       {svgKey:'pent2ino',ans:'pent-2-ino',accepted:['pent-2-ino','2-pentino'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}],hints:['5C con triple enlace en C2.','pent-2-ino.'],expl:'5C, triple en C2 → <b>pent-2-ino</b>. 💡 <em>Nombre anterior: <b>2-pentino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
       {svgKey:'but1en3ino',ans:'but-1-en-3-ino',accepted:['but-1-en-3-ino','1-buten-3-ino'],bd:[{t:'but',cls:'c',l:'4C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Enino'}],hints:['4C con doble y triple enlace. Enino.','but-1-en-3-ino.'],expl:'4C, doble C1, triple C3 → <b>but-1-en-3-ino</b>. 💡 <em>Nombre anterior: <b>1-buten-3-ino</b> (pre-IUPAC 2013, aún aceptado en muchos países).</em>'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-ino</strong> con localizador',loc:'El triple enlace recibe el número menor',sub:'<strong>…-inil-</strong>'},
+    competition:'Con −OH: el alcohol manda → <strong>but-3-in-1-ol</strong>. Con −COOH: <strong>ácido prop-2-inoico</strong> (propiólico).'
   },
 
   // ── 5. AROMÁTICOS (BENCENO) ─────────────────────────────
@@ -420,7 +428,9 @@ const GROUPS = [
       {svgKey:'trimetilBenceno',ans:'1,2,4-trimetilbenceno',accepted:['1,2,4-trimetilbenceno'],bd:[{t:'1,2,4-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Tres metilos. Localizadores más bajos posibles: 1,2,4.','1,2,4-trimetilbenceno.'],expl:'Tres metilos → <b>1,2,4-trimetilbenceno</b>.'},
       {svgKey:'clorobenceno',ans:'clorobenceno',accepted:['clorobenceno'],bd:[{t:'cloro',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un átomo de cloro.','clorobenceno. No se numera con un solo sustituyente.'],expl:'Benceno + cloro → <b>clorobenceno</b>.'},
       {svgKey:'isopropilBenceno',ans:'isopropilbenceno',accepted:['isopropilbenceno','cumeno'],bd:[{t:'isopropil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un isopropilo (−CH(CH₃)₂).','isopropilbenceno (cumeno).'],expl:'Benceno + isopropilo → <b>isopropilbenceno</b>.'},
-    ]
+    ],
+    apply:{pos:'Base: <strong>benceno</strong> (o prefijo <strong>fenil-</strong>)',loc:'El C unido al sustituyente es C1',sub:'<strong>fenil-</strong>'},
+    competition:'Con −OH en el anillo: el OH manda → <strong>hidroxibenceno</strong> (fenol). Con −COOH: <strong>ácido bencenocarboxílico</strong>.'
   },
 
   // ── 6. ALCOHOLES ────────────────────────────────────────
@@ -450,7 +460,9 @@ const GROUPS = [
       {svgKey:'metilCicloHexanol',ans:'4-metilciclohexan-1-ol',accepted:['4-metilciclohexan-1-ol','4-metilciclohexanol'],bd:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}],hints:['Ciclo 6C con OH y metilo. El OH es C1 (mayor prioridad).','Para localizadores más bajos: metilo en C4.'],expl:'Ciclo 6C, OH C1, metilo C4 → <b>4-metilciclohexan-1-ol</b>.'},
       {svgKey:'dimetilCicloHexanol',ans:'2,2-dimetilciclohexan-1-ol',accepted:['2,2-dimetilciclohexan-1-ol'],bd:[{t:'2,2-dimetil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}],hints:['Ciclo 6C con OH y dos metilos en el mismo carbono.','OH es C1, los dos metilos están en C2.'],expl:'Ciclo 6C, OH C1, dos metilos C2 → <b>2,2-dimetilciclohexan-1-ol</b>.'},
       {svgKey:'cicloHex2en1ol',ans:'ciclohex-2-en-1-ol',accepted:['ciclohex-2-en-1-ol'],bd:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'1-ol',cls:'g',l:'OH en C1'}],hints:['Ciclo 6C con doble enlace Y OH. El OH es C1 (mayor prioridad).','Doble enlace en C2-C3: ciclohex-2-en-1-ol.'],expl:'Ciclo 6C, OH C1, doble C2 → <b>ciclohex-2-en-1-ol</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-ol</strong> con localizador',loc:'El C con −OH recibe el número más bajo',sub:'<strong>hidroxi-</strong>'},
+    competition:'Con −COOH (mayor prioridad): el OH pasa a <strong>hidroxi-</strong> → <em>ácido 3-hidroxipropanoico</em>. Con C=O cetona: el OH pasa a <strong>hidroxi-</strong> → <em>4-hidroxipentan-2-ona</em>.'
   },
 
   // ── 7. ÉTERES ───────────────────────────────────────────
@@ -479,7 +491,9 @@ const GROUPS = [
       {svgKey:'etoxiBenceno',ans:'etoxibenceno',accepted:['etoxibenceno'],bd:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}],hints:['Benceno con un grupo −OC₂H₅.','etoxibenceno.'],expl:'Benceno + −OC₂H₅ → <b>etoxibenceno</b>.'},
       {svgKey:'metoxiCicloHexano',ans:'metoxiciclohexano',accepted:['metoxiciclohexano'],bd:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'ano',cls:'g',l:'Cicloalcano'}],hints:['Ciclohexano con un grupo −OCH₃. El anillo es la cadena principal (6C > 1C).','metoxiciclohexano.'],expl:'Ciclo 6C + −OCH₃ → <b>metoxiciclohexano</b>.'},
       {svgKey:'etoxiMetano',ans:'metoxietano',accepted:['metoxietano','etoximetano'],bd:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}],hints:['Metilo y etilo. Metoxi es el prefijo (menor), etano la cadena.','metoxietano.'],expl:'CH₃-O-C₂H₅ → <b>metoxietano</b>.'},
-    ]
+    ],
+    apply:{pos:'Prefijo: <strong>alcoxi-</strong> sobre cadena principal',loc:'El grupo OR menor se nombra como prefijo',sub:'<strong>(R)oxi-</strong>'},
+    competition:'El éter casi siempre es la cadena base (prioridad muy baja). Con −OH: el OH manda → el éter queda como prefijo <strong>alcoxi-</strong> → <em>2-metoxietan-1-ol</em>.'
   },
 
   // ── 8. ALDEHÍDOS ────────────────────────────────────────
@@ -509,7 +523,9 @@ const GROUPS = [
       {svgKey:'ciclopentanCarbaldehido',ans:'ciclopentancarbaldehído',accepted:['ciclopentancarbaldehído','ciclopentancarbaldehido'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'carbaldehíd',cls:'g',l:'CHO externo'},{t:'o',cls:'g',l:'Terminación'}],hints:['Anillo 5C con CHO fuera del ciclo.','ciclopentancarbaldehído.'],expl:'Ciclo 5C + CHO externo → <b>ciclopentancarbaldehído</b>.'},
       {svgKey:'metilCicloHexanCarbaldehido',ans:'2-metilciclohexancarbaldehído',accepted:['2-metilciclohexancarbaldehído','2-metilciclohexancarbaldehido'],bd:[{t:'2-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'carbaldehíd',cls:'g',l:'CHO externo'},{t:'o',cls:'g',l:'Terminación'}],hints:['Ciclo 6C con CHO externo y un metilo. El C con CHO es C1.','El metilo queda en C2.'],expl:'Ciclo 6C, CHO en C1, metilo C2 → <b>2-metilciclohexancarbaldehído</b>.'},
       {svgKey:'metilPentanal',ans:'3-metilpentanal',accepted:['3-metilpentanal'],bd:[{t:'3-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}],hints:['5C con metilo lateral. El CHO es C1.','El metilo está en C3.'],expl:'5C, metilo C3 → <b>3-metilpentanal</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-al</strong> (C1 implícito)',loc:'El C del −CHO es siempre C1, no se escribe',sub:'<strong>formil-</strong> / <strong>oxo-</strong>'},
+    competition:'Con −OH (menor prioridad): el CHO manda, el OH pasa a <strong>hidroxi-</strong> → <em>3-hidroxipropanal</em>. Con −COOH: el COOH manda, el CHO pasa a <strong>formil-</strong>.'
   },
 
   // ── 9. CETONAS ──────────────────────────────────────────
@@ -538,7 +554,9 @@ const GROUPS = [
       {svgKey:'ciclopentanona',ans:'ciclopentanona',accepted:['ciclopentanona'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'on',cls:'g',l:'C=O en C1'},{t:'a',cls:'g',l:'Cetona'}],hints:['Anillo 5C con C=O.','ciclopentanona.'],expl:'Ciclo 5C + C=O → <b>ciclopentanona</b>.'},
       {svgKey:'metilCicloHexanona',ans:'2-metilciclohexan-1-ona',accepted:['2-metilciclohexan-1-ona','2-metilciclohexanona'],bd:[{t:'2-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-on',cls:'g',l:'C=O en C1'},{t:'a',cls:'g',l:'Cetona'}],hints:['Ciclo 6C con C=O y un metilo. El C=O es C1.','El metilo queda en C2: 2-metilciclohexan-1-ona.'],expl:'Ciclo 6C, C=O C1, metilo C2 → <b>2-metilciclohexan-1-ona</b>.'},
       {svgKey:'heptan4ona',ans:'heptan-4-ona',accepted:['heptan-4-ona'],bd:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'4-on',cls:'g',l:'C=O en C4'},{t:'a',cls:'g',l:'Cetona'}],hints:['7C, C=O en el centro exacto.','heptan-4-ona.'],expl:'7C, C=O en C4 → <b>heptan-4-ona</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-ona</strong> con localizador',loc:'El C=O interior recibe el menor localizador',sub:'<strong>oxo-</strong>'},
+    competition:'Con −OH (menor prioridad): la cetona manda, el OH pasa a <strong>hidroxi-</strong> → <em>4-hidroxipentan-2-ona</em>. Con −COOH: el COOH manda, el C=O pasa a <strong>oxo-</strong>.'
   },
 
   // ── 10. ÁCIDOS CARBOXÍLICOS ──────────────────────────────
@@ -568,7 +586,9 @@ const GROUPS = [
       {svgKey:'acidoCiclopentanocarboxilico',ans:'ácido ciclopentanocarboxílico',accepted:['ácido ciclopentanocarboxílico','acido ciclopentanocarboxilico'],bd:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ocarboxílic',cls:'g',l:'COOH externo'},{t:'o',cls:'g',l:'Terminación'}],hints:['Ciclo 5C con COOH fuera del anillo.','ácido ciclopentanocarboxílico.'],expl:'Ciclo 5C + COOH externo → <b>ácido ciclopentanocarboxílico</b>.'},
       {svgKey:'acidoMetilCiclohexanocarboxilico',ans:'ácido 4-metilciclohexanocarboxílico',accepted:['ácido 4-metilciclohexanocarboxílico','acido 4-metilciclohexanocarboxilico'],bd:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'4-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ocarboxílic',cls:'g',l:'COOH externo'},{t:'o',cls:'g',l:'Terminación'}],hints:['Ciclo 6C con COOH externo y un metilo. El C con COOH es C1.','El metilo queda en C4.'],expl:'Ciclo 6C, COOH C1, metilo C4 → <b>ácido 4-metilciclohexanocarboxílico</b>.'},
       {svgKey:'acidoPentanoico',ans:'ácido pentanoico',accepted:['ácido pentanoico','acido pentanoico'],bd:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Grupo func.'}],hints:['5C con COOH.','ácido pentanoico.'],expl:'5C → <b>ácido pentanoico</b>.'},
-    ]
+    ],
+    apply:{pos:'<strong>ácido</strong> + sufijo <strong>-oico</strong>',loc:'El C del −COOH es siempre C1, no se escribe',sub:'<strong>carboxi-</strong>'},
+    competition:'El ácido carboxílico tiene la máxima prioridad entre los grupos con sufijo. Todos los demás grupos pasan a prefijo: <strong>hidroxi-</strong>, <strong>oxo-</strong>, <strong>amino-</strong>, <strong>alcoxi-</strong>, etc.'
   },
 
   // ── 11. HALUROS DE ÁCIDO ────────────────────────────────
@@ -597,7 +617,9 @@ const GROUPS = [
       {svgKey:'cloruroCiclohexanocarbonilo',ans:'cloruro de ciclohexanocarbonilo',accepted:['cloruro de ciclohexanocarbonilo'],bd:[{t:'cloruro de ',cls:'g',l:'Haluro'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'carbonilo',cls:'g',l:'COCl externo',svgs:["cloruroCiclohexanocarbonilo", "bromuroCiclopentanocarbonilo"],svgLabels:{"cloruroCiclohexanocarbonilo": "cloruro de\nciclohexanocarbonilo", "bromuroCiclopentanocarbonilo": "bromuro de\nciclopentanocarbonilo"}}],hints:['Ciclo 6C con COCl fuera del anillo.','Cuando el COX está fuera del ciclo: -carbonilo.'],expl:'Ciclo 6C + COCl externo → <b>cloruro de ciclohexanocarbonilo</b>.'},
       {svgKey:'bromuroCiclopentanocarbonilo',ans:'bromuro de ciclopentanocarbonilo',accepted:['bromuro de ciclopentanocarbonilo'],bd:[{t:'bromuro de ',cls:'g',l:'Haluro'},{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'carbonilo',cls:'g',l:'COBr externo'}],hints:['Ciclo 5C con COBr fuera del anillo.','bromuro de ciclopentanocarbonilo.'],expl:'Ciclo 5C + COBr externo → <b>bromuro de ciclopentanocarbonilo</b>.'},
       {svgKey:'cloruoPentanoilo',ans:'cloruro de pentanoílo',accepted:['cloruro de pentanoílo','cloruro de pentanoilo'],bd:[{t:'cloruro de ',cls:'g',l:'Haluro'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oílo',cls:'g',l:'Grupo func.'}],hints:['5C con COCl.','cloruro de pentanoílo.'],expl:'5C + COCl → <b>cloruro de pentanoílo</b>.'},
-    ]
+    ],
+    apply:{pos:'<strong>haluro de</strong> + sufijo <strong>-oilo</strong>',loc:'El C del −COX es C1',sub:'<strong>halocarbonil-</strong>'},
+    competition:'El haluro de ácido tiene prioridad 4 (solo por debajo de carboxilatos, ácidos y ésteres). Los demás grupos pasan a prefijos.'
   },
 
   // ── 12. ANHÍDRIDOS ──────────────────────────────────────
@@ -625,7 +647,9 @@ const GROUPS = [
       {svgKey:'anhidridoButanoico',ans:'anhídrido butanoico',accepted:['anhídrido butanoico','anhidrido butanoico'],bd:[{t:'anhídrido',cls:'g',l:'Prefijo'},{t:'butanoico',cls:'c',l:'4C × 2'}],hints:['Repaso: dos grupos 4C.','anhídrido butanoico.'],expl:'Simétrico 4C → <b>anhídrido butanoico</b>.'},
       {svgKey:'anhidridoEtanoicoPropanoico',ans:'anhídrido etanoico propanoico',accepted:['anhídrido etanoico propanoico','anhidrido etanoico propanoico'],bd:[{t:'anhídrido',cls:'g',l:'Prefijo'},{t:'etanoico',cls:'c',l:'2C'},{t:'propanoico',cls:'c',l:'3C'}],hints:['Repaso asimétrico. Orden alfabético.','etanoico antes que propanoico.'],expl:'Asimétrico → <b>anhídrido etanoico propanoico</b>.'},
       {svgKey:'anhidridoMetanoicoEtanoico',ans:'anhídrido etanoico metanoico',accepted:['anhídrido etanoico metanoico','anhidrido etanoico metanoico'],bd:[{t:'anhídrido',cls:'g',l:'Prefijo'},{t:'etanoico',cls:'c',l:'2C'},{t:'metanoico',cls:'c',l:'1C'}],hints:['Repaso asimétrico 1C+2C. Orden alfabético.','etanoico antes que metanoico.'],expl:'→ <b>anhídrido etanoico metanoico</b>.'},
-    ]
+    ],
+    apply:{pos:'<strong>anhídrido</strong> + nombre del ácido',loc:'Ambos grupos acilo comparten el O puente',sub:'(no aplica como sustituyente simple)'},
+    competition:'El anhídrido tiene prioridad 3 (mayor que aldehídos, cetonas, alcoholes). Los otros grupos pasan a prefijos.'
   },
 
   // ── 13. ÉSTERES ─────────────────────────────────────────
@@ -655,7 +679,9 @@ const GROUPS = [
       {svgKey:'ciclohexanocarboxilatoMetilo',ans:'ciclohexanocarboxilato de metilo',accepted:['ciclohexanocarboxilato de metilo'],bd:[{t:'ciclohex',cls:'c',l:'Ciclo 6C acilo'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ocarboxilato de',cls:'g',l:'Éster cíclico'},{t:'metilo',cls:'g',l:'1C alcohol'}],hints:['Ciclo 6C con COOCH₃ externo.','El acilo es ciclohexano + carboxilato.'],expl:'Ciclo 6C + COOCH₃ → <b>ciclohexanocarboxilato de metilo</b>.'},
       {svgKey:'ciclopentanocarboxilatoEtilo',ans:'ciclopentanocarboxilato de etilo',accepted:['ciclopentanocarboxilato de etilo'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C acilo'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ocarboxilato de',cls:'g',l:'Éster cíclico'},{t:'etilo',cls:'g',l:'2C alcohol'}],hints:['Ciclo 5C con COOEt externo.','ciclopentanocarboxilato de etilo.'],expl:'Ciclo 5C + COOEt → <b>ciclopentanocarboxilato de etilo</b>.'},
       {svgKey:'pentanoatoMetilo',ans:'pentanoato de metilo',accepted:['pentanoato de metilo'],bd:[{t:'pent',cls:'c',l:'5C acilo'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oato de',cls:'g',l:'Éster'},{t:'metilo',cls:'g',l:'1C alcohol'}],hints:['Acilo 5C + alcohol metilo.','pentanoato de metilo.'],expl:'5C + metilo → <b>pentanoato de metilo</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo <strong>-oato de R-ilo</strong>',loc:'El C del grupo acilo es C1',sub:'<strong>(R)oxicarbonil-</strong>'},
+    competition:'El éster tiene prioridad 3 (igual que anhídrido). Con −OH en el alcohol: <strong>hidroxi-</strong> → <em>2-hidroxietanoato de metilo</em>.'
   },
 
   // ── 14. AMIDAS ──────────────────────────────────────────
@@ -685,7 +711,9 @@ const GROUPS = [
       {svgKey:'ciclopentanocarboxamida',ans:'ciclopentanocarboxamida',accepted:['ciclopentanocarboxamida'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'carboxamid',cls:'g',l:'CONH₂ externo'},{t:'a',cls:'g',l:'Terminación'}],hints:['Ciclo 5C con CONH₂ fuera del anillo.','ciclopentanocarboxamida.'],expl:'Ciclo 5C + CONH₂ externo → <b>ciclopentanocarboxamida</b>.'},
       {svgKey:'nMetilButanamida',ans:'N-metilbutanamida',accepted:['N-metilbutanamida'],bd:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}],hints:['4C + metilo en el N.','N-metilbutanamida.'],expl:'4C, N-metil → <b>N-metilbutanamida</b>.'},
       {svgKey:'pentanamida',ans:'pentanamida',accepted:['pentanamida'],bd:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}],hints:['5C con CONH₂.','pentanamida.'],expl:'5C → <b>pentanamida</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-amida</strong>',loc:'El C del −CONH₂ es C1',sub:'<strong>carbamoil-</strong>'},
+    competition:'Con −OH (menor prioridad): la amida manda, el OH pasa a <strong>hidroxi-</strong> → <em>3-hidroxipropanamida</em>.'
   },
 
   // ── 15. NITRILOS ────────────────────────────────────────
@@ -715,7 +743,9 @@ const GROUPS = [
       {svgKey:'ciclopentanoCarbonitrilo',ans:'ciclopentanocarbonitrilo',accepted:['ciclopentanocarbonitrilo'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'carbonitrilo',cls:'g',l:'CN externo'}],hints:['Ciclo 5C con CN fuera del anillo.','ciclopentanocarbonitrilo.'],expl:'Ciclo 5C + CN externo → <b>ciclopentanocarbonitrilo</b>.'},
       {svgKey:'metilCiclohexanoCarbonitrilo',ans:'4-metilciclohexanocarbonitrilo',accepted:['4-metilciclohexanocarbonitrilo'],bd:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'carbonitrilo',cls:'g',l:'CN externo'}],hints:['Ciclo 6C con CN externo y un metilo. El C con CN es C1.','El metilo queda en C4.'],expl:'Ciclo 6C, CN C1, metilo C4 → <b>4-metilciclohexanocarbonitrilo</b>.'},
       {svgKey:'hexanonitrilo',ans:'hexanonitrilo',accepted:['hexanonitrilo'],bd:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}],hints:['6C con CN.','hexanonitrilo.'],expl:'6C → <b>hexanonitrilo</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-nitrilo</strong>',loc:'El C del −C≡N es C1',sub:'<strong>ciano-</strong>'},
+    competition:'Con −OH (menor prioridad): el nitrilo manda, el OH pasa a <strong>hidroxi-</strong> → <em>3-hidroxipropanonitrilo</em>.'
   },
 
   // ── 16. AMINAS ──────────────────────────────────────────
@@ -746,7 +776,9 @@ const GROUPS = [
       {svgKey:'cicloHexilamina',ans:'ciclohexanamina',accepted:['ciclohexanamina','ciclohexilamina'],bd:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amin',cls:'g',l:'NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}],hints:['Anillo 6C con −NH₂. El C con NH₂ es C1.','ciclohexanamina.'],expl:'Ciclo 6C + NH₂ → <b>ciclohexanamina</b>.'},
       {svgKey:'ciclopentilamina',ans:'ciclopentanamina',accepted:['ciclopentanamina','ciclopentilamina'],bd:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amin',cls:'g',l:'NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}],hints:['Anillo 5C con −NH₂.','ciclopentanamina.'],expl:'Ciclo 5C + NH₂ → <b>ciclopentanamina</b>.'},
       {svgKey:'nMetilCicloHexilamina',ans:'N-metilciclohexanamina',accepted:['N-metilciclohexanamina'],bd:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amin',cls:'g',l:'NH en C1'},{t:'a',cls:'g',l:'Terminación'}],hints:['Ciclo 6C con NH + metilo en N.','N-metilciclohexanamina.'],expl:'Ciclo 6C, N-metil → <b>N-metilciclohexanamina</b>.'},
-    ]
+    ],
+    apply:{pos:'Sufijo: <strong>-amina</strong> con localizador',loc:'El C con −NH₂ recibe el menor localizador',sub:'<strong>amino-</strong>'},
+    competition:'Con −OH (mayor prioridad): el OH manda, la amina pasa a <strong>amino-</strong> → <em>3-aminopropan-1-ol</em>. Con −COOH: el COOH manda → <em>ácido 4-aminobutanoico</em>.'
   },
 
 ];
@@ -774,10 +806,12 @@ const CATS = [
 function buildGallery(){
   const ga = document.getElementById('gallery-area');
   ga.innerHTML = '';
-  // Intro
+  // Intro banner — shows total group count prominently
   const intro = document.createElement('div');
-  intro.style.cssText = 'font-size:.82rem;color:var(--dimmer);margin-bottom:18px;line-height:1.6;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:11px 14px;';
-  intro.innerHTML = '<strong style="color:var(--tx)">Selecciona un grupo funcional</strong> para ver su teoria IUPAC y practicar ejercicios de nomenclatura organica.';
+  intro.style.cssText = 'font-size:.82rem;color:var(--dimmer);margin-bottom:18px;line-height:1.6;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:11px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;';
+  intro.innerHTML = '<span style="font-family:\'Fraunces\',serif;font-size:2rem;font-weight:900;line-height:1;color:var(--c4t)">16</span>'
+    + '<div><strong style="color:var(--tx)">grupos funcionales</strong> del bachillerato organizados en <strong style="color:var(--tx)">4 familias</strong>.<br>'
+    + '<span style="font-size:.76rem">Selecciona uno para ver su teoría IUPAC y practicar ejercicios de nomenclatura.</span></div>';
   ga.appendChild(intro);
   // Categories
   CATS.forEach(cat=>{
@@ -785,7 +819,7 @@ function buildGallery(){
     sec.className = 'gallery-section';
     const lbl = document.createElement('div');
     lbl.className = 'gallery-section-label';
-    lbl.textContent = cat.label;
+    lbl.textContent = cat.label + ' · ' + cat.ids.length + ' grupos';
     sec.appendChild(lbl);
     const grid = document.createElement('div');
     grid.className = 'gallery-grid';
@@ -864,6 +898,29 @@ function showGroup(gid){
     + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '</div>'
     + (g.id==='benceno' ? buildCommonNames() : '');
   area.appendChild(theory);
+
+  // ── Cómo se aplica card ──
+  if(g.apply){
+    const applyCard = document.createElement('div');
+    applyCard.className = 'sec-card';
+    applyCard.innerHTML = '<div class="sec-lbl" style="margin-bottom:12px">Cómo se aplica en el nombre</div>'
+      + '<div style="overflow-x:auto">'
+      + '<table style="width:100%;border-collapse:collapse;font-size:.8rem">'
+      + '<thead><tr style="background:var(--surf2)">'
+      + '<th style="text-align:left;padding:7px 10px;border:1px solid var(--brd);font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dimmer);font-weight:700">Posición en el nombre</th>'
+      + '<th style="text-align:left;padding:7px 10px;border:1px solid var(--brd);font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dimmer);font-weight:700">Localizador</th>'
+      + '<th style="text-align:left;padding:7px 10px;border:1px solid var(--brd);font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dimmer);font-weight:700">Como sustituyente (baja prioridad)</th>'
+      + '</tr></thead>'
+      + '<tbody><tr>'
+      + '<td style="padding:9px 10px;border:1px solid var(--brd);line-height:1.5">' + g.apply.pos + '</td>'
+      + '<td style="padding:9px 10px;border:1px solid var(--brd);line-height:1.5">' + g.apply.loc + '</td>'
+      + '<td style="padding:9px 10px;border:1px solid var(--brd);line-height:1.5">' + g.apply.sub + '</td>'
+      + '</tr></tbody>'
+      + '</table>'
+      + '</div>'
+      + (g.competition ? '<div style="margin-top:10px;padding:9px 12px;background:var(--c4b);border:1px solid rgba(142,68,173,.2);border-radius:var(--rs);font-size:.8rem;color:var(--tx);line-height:1.6"><strong style="color:var(--c4t);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em">Cuando compite con otro grupo</strong><br>' + g.competition + '</div>' : '');
+    area.appendChild(applyCard);
+  }
 
   // ── Exercises card ──
   const exCard = document.createElement('div');
@@ -1181,6 +1238,8 @@ function atm(x,y,sym){
   return `<rect x="${r2(x-pw)}" y="${r2(y-ph/2)}" width="${pw*2}" height="${ph}" rx="4" fill="white" stroke="#2a2520" stroke-width="1.2"/>
   <text x="${r2(x)}" y="${r2(y)}" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-weight="700" font-size="${fs}" fill="#1a1714">${sym}</text>`;
 }
+function hl(x,y,r,col){return `<circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(r)}" fill="${col||'var(--c4)'}" fill-opacity="0.18" stroke="${col||'var(--c4)'}" stroke-width="1.5" stroke-opacity="0.5"/>`;}
+
 function zz(x0,y0,n,su=true){
   const pts=[{x:x0,y:y0}];
   for(let i=0;i<n-1;i++){
@@ -1263,11 +1322,11 @@ const MOLS={
     return mkSVG(s);
   },
   // ALCOHOLES
-  propan1ol(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  propan1ol(){_pts=[];const p=zz(0,0,3,true);let s=hl(p[0].x,p[0].y-BL,22,'var(--c4)');s+=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
   pentan2ol(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
   metilButan2ol(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
   // ÉTERES
-  metoxiMetano(){_pts=[];const p=zz(0,0,2,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y);s+=atm((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2,'O');return mkSVG(s);},
+  metoxiMetano(){_pts=[];const p=zz(0,0,2,true);const ox=(p[0].x+p[1].x)/2,oy=(p[0].y+p[1].y)/2;let s=hl(ox,oy,22,'var(--c4)');s+=ln(p[0].x,p[0].y,p[1].x,p[1].y);s+=atm(ox,oy,'O');return mkSVG(s);},
   metoxiPropano(){
     _pts=[];const p=zz(0,0,3,true);
     let s=chain(p);
@@ -1278,7 +1337,7 @@ const MOLS={
     return mkSVG(s);
   },
   // ALDEHÍDOS
-  propanal(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  propanal(){_pts=[];const p=zz(0,0,3,true);let s=hl(p[0].x,p[0].y-BL,22,'var(--c4)');s+=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
   oxoPentanal(){
     _pts=[];const p=zz(0,0,5,true);let s=chain(p);
     s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');
@@ -1286,7 +1345,7 @@ const MOLS={
     return mkSVG(s);
   },
   // CETONAS
-  pentan2ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  pentan2ona(){_pts=[];const p=zz(0,0,5);let s=hl(p[1].x,p[1].y-BL,22,'var(--c4)');s+=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
   pentan3ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
   // ÁCIDOS
   acidoPropanoico(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
@@ -1390,12 +1449,13 @@ const MOLS={
   metanol(){
     // CH3-OH: 1C → show both labels explicitly
     _pts=[];
-    let s=atm(0,0,'CH₃'); _reg(0,0,20);
+    let s=hl(20+BL,0,22,'var(--c4)');
+    s+=atm(0,0,'CH₃'); _reg(0,0,20);
     s+=ln(20,0,20+BL,0);
     s+=atm(20+BL,0,'OH'); _reg(20+BL,0,16);
     return mkSVG(s);
   },
-  etanol(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  etanol(){_pts=[];const p=zz(0,0,2,true);let s=hl(p[0].x,p[0].y-BL,22,'var(--c4)');s+=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
   butan2ol(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
   hex3ol(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);s+=atm(p[2].x,p[2].y+BL,'OH');return mkSVG(s);},
   metilButan3ol(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'OH');s+=ln(p[3].x,p[3].y,p[3].x,p[3].y-BL);return mkSVG(s);},
@@ -1462,7 +1522,8 @@ const MOLS={
   metanal(){
     // H-CHO: formaldehído, 1C — show as H2C=O
     _pts=[];
-    let s=atm(0,0,'H₂C');_reg(0,0,20);
+    let s=hl(20+BL+10,0,22,'var(--c4)');
+    s+=atm(0,0,'H₂C');_reg(0,0,20);
     s+=dbl(20,0,20+BL,0);
     s+=atm(20+BL+10,0,'O');_reg(20+BL+10,0,12);
     return mkSVG(s);
@@ -1475,7 +1536,7 @@ const MOLS={
   hex2enal(){_pts=[];const p=zz(0,0,6,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+dbl(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
 
   // CETONAS extra
-  butanona(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  butanona(){_pts=[];const p=zz(0,0,4,true);let s=hl(p[1].x,p[1].y-BL,22,'var(--c4)');s+=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
   hexan2ona(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
   hexan3ona(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
   metilButan2ona(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');s+=ln(p[3].x,p[3].y,p[3].x,p[3].y-BL);return mkSVG(s);},
@@ -1488,7 +1549,7 @@ const MOLS={
   acidoMetanoico(){
     // HCOOH — 1C: show as labeled atoms with bond
     _pts=[];
-    let s='';
+    let s=hl(8+BL,0,30,'var(--c4)');
     s+=atm(0,0,'H');_reg(0,0,8);
     s+=ln(8,0,8+BL,0);
     // C=O up, O-H down from central carbon junction
@@ -1497,7 +1558,7 @@ const MOLS={
     _reg(8+BL,0-BL);_reg(8+BL,BL+14);
     return mkSVG(s);
   },
-  acidoEtanoico(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidoEtanoico(){_pts=[];const p=zz(0,0,2,true);let s=hl(p[0].x,p[0].y,30,'var(--c4)');s+=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   acidoButanoico(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   acidoPentanoico(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   acido3MetilButanoico(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
