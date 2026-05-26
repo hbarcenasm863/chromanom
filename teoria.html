@@ -269,6 +269,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .toc-pill[data-sec="ejemplos"].active{background:var(--c1);border-color:var(--c1)}
 .toc-pill[data-sec="algoritmo"].active{background:var(--c2);border-color:var(--c2)}
 .toc-pill[data-sec="tablas"].active{background:var(--c3);border-color:var(--c3)}
+.toc-pill[data-sec="desempate"].active{background:var(--c2);border-color:var(--c2)}
 .toc-pill[data-sec="comparacion"].active{background:var(--c1);border-color:var(--c1)}
 .toc-pill[data-sec="sustituyentes"].active{background:var(--c4t);border-color:var(--c4t)}
 
@@ -335,6 +336,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <a class="toc-pill" href="#ejemplos" data-sec="ejemplos">🔍 Ejemplos</a>
   <a class="toc-pill" href="#algoritmo" data-sec="algoritmo">📋 Algoritmo</a>
   <a class="toc-pill" href="#tablas" data-sec="tablas">📊 Tablas</a>
+  <a class="toc-pill" href="#desempate" data-sec="desempate">⚖️ Desempate</a>
   <a class="toc-pill" href="#comparacion" data-sec="comparacion">📖 Comparación</a>
   <a class="toc-pill" href="#sustituyentes" data-sec="sustituyentes">🔗 Sustituyentes</a>
 </nav>
@@ -774,6 +776,138 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
     ↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre. Los demás se nombran como sustituyentes usando su nombre secundario.
+  </div>
+</div>
+
+<div id="desempate"></div>
+<!-- SECCIÓN: REGLAS DE DESEMPATE -->
+<div class="slbl" style="margin-top:32px">Reglas de desempate — ¿cómo elegir cuando hay empate?</div>
+
+<div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
+  <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Cuándo hay empate?</div>
+  <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
+    A veces <strong style="color:#fcd34d">dos o más cadenas tienen la misma longitud</strong>, o bien dos sentidos de numeración producen el mismo conjunto de localizadores.
+    La IUPAC define <strong style="color:#fcd34d">5 criterios de desempate para elegir la cadena principal</strong> y <strong style="color:#fcd34d">4 criterios para elegir la dirección de numeración</strong>, que se aplican
+    <em>en ese orden</em>: en cuanto uno rompe el empate, se detiene el proceso.
+  </p>
+</div>
+
+<!-- ── PARTE A: CADENA PRINCIPAL ── -->
+<div class="slbl" style="margin-bottom:10px">Parte A — Desempate para elegir la cadena principal</div>
+
+<div class="rule-card">
+  <div class="rule-n c">A1</div>
+  <div class="rule-body c">
+    <strong>Mayor número de carbonos en la cadena</strong>
+    <p>La cadena más larga gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2. (En la práctica, si existe una única cadena más larga, el desempate termina aquí.)</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n c">A2</div>
+  <div class="rule-body c">
+    <strong>Mayor número de ramificaciones (sustituyentes)</strong>
+    <p>Entre dos cadenas de igual longitud, gana la que tiene <em>más</em> sustituyentes unidos a ella.
+    Ejemplo: si la cadena α tiene 3 ramas y la cadena β tiene 2 ramas, se elige la cadena α.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n c">A3</div>
+  <div class="rule-body c">
+    <strong>Menor conjunto de localizadores de ramificaciones</strong>
+    <p>Si el número de ramificaciones es igual, se comparan los conjuntos de localizadores como sets ordenados de menor a mayor.
+    Gana el conjunto con el valor más bajo en la primera posición en que difieran.
+    Ejemplo: {2, 3} &lt; {2, 5}, por lo que gana la cadena con localizadores {2, 3}.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n c">A4</div>
+  <div class="rule-body c">
+    <strong>Menor localizador en el primer punto de diferencia</strong>
+    <p>Si los conjuntos son idénticos pero los sustituyentes difieren en posición individualmente, se comparan posición a posición.
+    Ejemplo: un sustituyente en C3 frente a C4 → gana C3 por ser menor localizador.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n c">A5</div>
+  <div class="rule-body c">
+    <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
+    <p>Si todo lo anterior sigue empatado, se considera el orden alfabético de los nombres de los sustituyentes (sin tener en cuenta los prefijos multiplicativos di-, tri-, etc.).
+    El primer sustituyente alfabético debe tener el menor localizador posible.</p>
+  </div>
+</div>
+
+<!-- ── PARTE B: DIRECCIÓN DE NUMERACIÓN ── -->
+<div class="slbl" style="margin-top:24px;margin-bottom:10px">Parte B — Desempate para elegir la dirección de numeración</div>
+
+<div class="rule-card">
+  <div class="rule-n r">B1</div>
+  <div class="rule-body r">
+    <strong>Menor localizador al grupo funcional principal</strong>
+    <p>El grupo funcional de mayor prioridad (COOH, CHO, C=O, OH, NH₂…) debe recibir el menor localizador posible. Los ácidos carboxílicos y aldehídos terminales siempre son C1; esto resuelve el desempate automáticamente en esos casos.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n r">B2</div>
+  <div class="rule-body r">
+    <strong>Menor localizador al conjunto de insaturaciones</strong>
+    <p>Si el grupo funcional no rompe el empate, se asigna el menor conjunto de localizadores a los dobles y triples enlaces (en conjunto, tratados como un solo set). Gana la dirección que produce el set más bajo comparado posición a posición.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n r">B3</div>
+  <div class="rule-body r">
+    <strong>Menor localizador al conjunto de sustituyentes</strong>
+    <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de todas las ramificaciones como un conjunto ordenado. Gana la dirección que produce el conjunto con el menor valor en la primera posición discrepante.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n r">B4</div>
+  <div class="rule-body r">
+    <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
+    <p>Si aún hay empate, el sustituyente citado primero alfabéticamente debe tener el menor localizador posible. Este criterio rara vez se necesita en cadenas simples, pero aparece en moléculas con muchos sustituyentes distintos.</p>
+  </div>
+</div>
+
+<!-- ── TABLA EJEMPLO ── -->
+<div class="slbl" style="margin-top:24px;margin-bottom:10px">Ejemplo aplicado — criterio A3 en acción</div>
+
+<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:28px">
+  <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+      <thead>
+        <tr style="background:var(--tx);color:#fff">
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Opción</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre propuesto</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Localizadores de sustituyentes</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--brd)">
+          <td style="padding:9px 14px;font-weight:700;color:var(--c3t)">✓ Correcta</td>
+          <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>2</strong>-metilpentano</td>
+          <td style="padding:9px 14px">{ 2, 3 }</td>
+          <td style="padding:9px 14px;color:var(--c3t);font-size:.78rem">El 2 es menor que el 4 → este set gana</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 14px;font-weight:700;color:#b91c1c">✗ Incorrecta</td>
+          <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>4</strong>-metilpentano</td>
+          <td style="padding:9px 14px">{ 3, 4 }</td>
+          <td style="padding:9px 14px;color:#b91c1c;font-size:.78rem">El 4 en segunda posición es mayor → descartada</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
+    Ambas opciones recogen la misma cadena de 5 C con los mismos dos sustituyentes (etilo en C3, metilo). El desempate lo resuelve el criterio A3: se comparan los sets {2,3} y {3,4} posición a posición — en la primera posición 2 &lt; 3, por lo que se elige <strong>3-etil-2-metilpentano</strong>.
   </div>
 </div>
 
@@ -1526,7 +1660,7 @@ function pmNext(){
 // Inyectar botones "Practicar" junto a cada cabecera de sección
 document.addEventListener('DOMContentLoaded',()=>{
   [['esquema','esquema'],['ejemplos','ejemplos'],['algoritmo','algoritmo'],
-   ['tablas','tablas'],['comparacion','comparacion'],['sustituyentes','sustituyentes']]
+   ['tablas','tablas'],['desempate','desempate'],['comparacion','comparacion'],['sustituyentes','sustituyentes']]
   .forEach(([anchorId,secId])=>{
     const anchor=document.getElementById(anchorId); if(!anchor)return;
     let el=anchor.nextElementSibling;
@@ -1543,7 +1677,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 // ── TOC active section tracking ──
 (function(){
-  const IDS=['esquema','ejemplos','algoritmo','tablas','comparacion','sustituyentes'];
+  const IDS=['esquema','ejemplos','algoritmo','tablas','desempate','comparacion','sustituyentes'];
   const pills=document.querySelectorAll('.toc-pill');
   function setActive(id){
     pills.forEach(p=>{

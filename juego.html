@@ -738,6 +738,51 @@ const M = {
   etanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);_reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
   butanoatoMetilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
 
+  // ── AROMÁTICOS EXTRA ──
+  // propilbenceno: cadena propilo (3C zigzag) en v[0] (arriba)
+  propilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;
+    // C1: v[0]→arriba, C2: arriba-izquierda, C3: arriba (más)
+    s+=ln(0,-r,0,-r-BL);
+    s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);
+    s+=ln(-BL*COS30,-r-BL-BL*SIN30,-BL*COS30,-r-BL-BL*SIN30-BL);
+    _reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);_reg(-BL*COS30,-r-BL-BL*SIN30-BL);
+    return mkSVG(s);},
+
+  // isopropilbenceno: sustituyente isopropilo en v[0] — CH ramificado con dos CH₃
+  isopropilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;
+    // Enlace anillo → C isopropílico central
+    s+=ln(0,-r,0,-r-BL);
+    // Rama izquierda (CH₃)
+    s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);
+    // Rama derecha (CH₃)
+    s+=ln(0,-r-BL, BL*COS30,-r-BL-BL*SIN30);
+    _reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);_reg(BL*COS30,-r-BL-BL*SIN30);
+    return mkSVG(s);},
+
+  // 1,2,3-trimetilbenceno: metilos en v[0], v[1], v[2] (tres consecutivos)
+  trimetilbenceno123(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));
+    // v[0]: dirección (0,-1)
+    s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);
+    // v[1]: dirección ángulo -π/6
+    const a1=-Math.PI/6;s+=ln(v[1].x,v[1].y,v[1].x+BL*Math.cos(a1),v[1].y+BL*Math.sin(a1));_reg(v[1].x+BL*Math.cos(a1),v[1].y+BL*Math.sin(a1));
+    // v[2]: dirección ángulo π/6
+    const a2=Math.PI/6;s+=ln(v[2].x,v[2].y,v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));_reg(v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));
+    return mkSVG(s);},
+
+  // 1,2,4-trimetilbenceno: metilos en v[0], v[1], v[3]
+  trimetilbenceno124(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));
+    s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);
+    const a1=-Math.PI/6;s+=ln(v[1].x,v[1].y,v[1].x+BL*Math.cos(a1),v[1].y+BL*Math.sin(a1));_reg(v[1].x+BL*Math.cos(a1),v[1].y+BL*Math.sin(a1));
+    s+=ln(v[3].x,v[3].y,v[3].x,v[3].y+BL);_reg(v[3].x,v[3].y+BL);
+    return mkSVG(s);},
+
+  // 1,3,5-trimetilbenceno (mesitileno): metilos en v[0], v[2], v[4] — simetría D₃h
+  trimetilbenceno135(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));
+    s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);
+    const a2=Math.PI/6;s+=ln(v[2].x,v[2].y,v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));_reg(v[2].x+BL*Math.cos(a2),v[2].y+BL*Math.sin(a2));
+    const a4=-Math.PI+Math.PI/6;s+=ln(v[4].x,v[4].y,v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));_reg(v[4].x+BL*Math.cos(a4),v[4].y+BL*Math.sin(a4));
+    return mkSVG(s);},
+
   // ── ÉTERES ──
   // O al final en todos (z-order correcto).
   metoximetano(){_pts=[];const p=zz(0,0,2,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y);_reg(p[0].x,p[0].y);_reg(p[1].x,p[1].y);s+=atm((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2,'O');return mkSVG(s);},
@@ -2001,6 +2046,72 @@ const QBANK = [
    ans:'metoxietano', accepted:['metoxietano','etoximetano','éter metil etílico','eter metil etilico'],
    expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b> (nombre funcional: <em>éter metil etílico</em>).',
    parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  // ════════════════════════════════════════════════════════
+  // AROMÁTICOS — preguntas adicionales
+  // ════════════════════════════════════════════════════════
+
+  // Q1: write — propilbenceno
+  {type:'write', mol:'propilbenceno', q:'Escribe el nombre IUPAC de este aromático.',
+   ans:'propilbenceno', accepted:['propilbenceno','propil-benceno'],
+   hints:['Benceno con sustituyente de 3 carbonos','El prefijo propil- indica 3 carbonos en cadena lineal'],
+   expl:'Cadena de 3C unida al benceno → <b>propilbenceno</b>.',
+   parts:[{t:'propil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q2: write — isopropilbenceno
+  {type:'write', mol:'isopropilbenceno', q:'Escribe el nombre IUPAC de esta estructura aromática.',
+   ans:'isopropilbenceno', accepted:['isopropilbenceno','(1-metiletil)benceno','cumeno'],
+   hints:['Benceno con sustituyente ramificado de 3 carbonos','El sustituyente tiene el punto de unión en el carbono central'],
+   expl:'Sustituyente isopropilo en benceno → <b>isopropilbenceno</b> (nombre trivial: cumeno).',
+   parts:[{t:'isopropil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q3: mc — 1,2,3-trimetilbenceno
+  {type:'mc', mol:'trimetilbenceno123', q:'¿Cuál es el nombre IUPAC de este trimetilbenceno (metilos en tres posiciones consecutivas)?',
+   ans:'1,2,3-trimetilbenceno',
+   opts:['1,2,3-trimetilbenceno','1,2,4-trimetilbenceno','1,3,5-trimetilbenceno','trimetilbenceno'],
+   expl:'Tres metilos en posiciones 1, 2 y 3 (consecutivas) del anillo → <b>1,2,3-trimetilbenceno</b>.',
+   parts:[{t:'1,2,3-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q4: mc — 1,2,4-trimetilbenceno
+  {type:'mc', mol:'trimetilbenceno124', q:'¿Cuál es el nombre IUPAC de este trimetilbenceno?',
+   ans:'1,2,4-trimetilbenceno',
+   opts:['1,2,4-trimetilbenceno','1,2,3-trimetilbenceno','1,3,5-trimetilbenceno','2,3,4-trimetilbenceno'],
+   expl:'Metilos en posiciones 1, 2 y 4 → <b>1,2,4-trimetilbenceno</b> (pseudocumeno en nombre trivial).',
+   parts:[{t:'1,2,4-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q5: mc — 1,3,5-trimetilbenceno (mesitileno)
+  {type:'mc', mol:'trimetilbenceno135', q:'¿Cuál es el nombre IUPAC del mesitileno (metilos equidistantes en el anillo)?',
+   ans:'1,3,5-trimetilbenceno',
+   opts:['1,3,5-trimetilbenceno','1,2,4-trimetilbenceno','1,2,3-trimetilbenceno','3,5-dimetilbenceno'],
+   expl:'Tres metilos en posiciones alternas (1, 3 y 5) con simetría D₃h → <b>1,3,5-trimetilbenceno</b> (mesitileno).',
+   parts:[{t:'1,3,5-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q6: id — propilbenceno (identificar el sustituyente «propil»)
+  {type:'id', mol:'propilbenceno',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propilbenceno',
+   highlight:{text:'propil',cls:'r'},
+   correct:'r',
+   expl:'"propil" es la <b>Ramificación</b> — sustituyente de 3 carbonos en cadena lineal unido al anillo bencénico.', topic:'benceno'},
+
+  // Q7: mc — isómeros etilbenceno / dimetilbencenos (fórmula C₈H₁₀)
+  {type:'mc', mol:'etilbenceno', q:'¿Cuántos isómeros aromáticos de fórmula C₈H₁₀ existen (con sustituyentes de cadena abierta)?',
+   ans:'4 (etilbenceno + o-, m-, p-xileno)',
+   opts:['4 (etilbenceno + o-, m-, p-xileno)','2 (etilbenceno y xileno)','3 (los tres xilenos)','6 (todos los posibles)'],
+   expl:'Con fórmula C₈H₁₀ y anillo bencénico hay <b>4 isómeros</b>: etilbenceno, 1,2-dimetilbenceno (o-xileno), 1,3-dimetilbenceno (m-xileno) y 1,4-dimetilbenceno (p-xileno).',
+   topic:'benceno'},
+
+  // Q8: drag — 1,2-dimetilbenceno descompuesto en [1,2-dimetil][bencen][o]
+  {type:'drag', mol:'ortoXileno',
+   q:'Arrastra cada fragmento a su posición en el nombre IUPAC del orto-xileno.',
+   ans:'1,2-dimetilbenceno',
+   slots:[
+     {id:'dar1',label:'Sustituyentes',correct:'1,2-dimetil',cls:'r'},
+     {id:'dar2',label:'Anillo',correct:'bencen',cls:'c'},
+     {id:'dar3',label:'Aromático',correct:'o',cls:'g'},
+   ],
+   tokens:[{text:'1,2-dimetil',cls:'r'},{text:'bencen',cls:'c'},{text:'o',cls:'g'},{text:'1,3-dimetil',cls:'r'},{text:'ciclohex',cls:'c'},{text:'ano',cls:'c'}],
+   expl:'Dos metilos en posiciones 1 y 2 → <b>1,2-dimetilbenceno</b> (orto-xileno).', topic:'benceno'},
 ];
 
 // ════════════════════════════════════════════════════════
