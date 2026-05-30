@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NomOrg — Juego de Nomenclatura</title>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>NomOrg — Juego de Nomenclatura v2</title>
 <style>
 :root{
   /* Paleta Wong — daltonismo-segura, consistente con index/teoria/grupos */
@@ -178,6 +184,33 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
   align-items:center;justify-content:center;min-height:150px;flex-shrink:0;
 }
 .mol-card svg{max-width:100%;max-height:160px;overflow:visible}
+.mol-card{transition:opacity .15s,transform .15s}
+
+/* VIEW TOGGLE */
+.view-toggle{
+  display:flex;gap:6px;justify-content:center;margin-bottom:10px;
+}
+.vt-btn{
+  padding:5px 14px;border-radius:20px;
+  border:1.5px solid var(--brd);background:var(--surf);
+  color:var(--dimmer);font-family:var(--sans);font-size:.74rem;
+  font-weight:700;cursor:pointer;transition:all .2s;
+}
+.vt-btn.active{background:var(--c2b);border-color:var(--c2);color:var(--c2t);}
+.vt-btn:hover:not(.active){background:var(--bg);border-color:var(--dimmer);color:var(--tx);}
+
+/* FORMULA DISPLAY */
+.formula-display{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;padding:8px 4px;overflow-x:auto;
+}
+.formula-text{
+  font-family:'Courier New',monospace;font-size:1.05rem;
+  font-weight:700;color:var(--tx);letter-spacing:.04em;
+  text-align:center;line-height:1.7;
+  word-break:break-all;
+}
+.formula-text sub{font-size:.72em;}
 
 /* FEEDBACK */
 .feedback{
@@ -443,23 +476,23 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     <div class="portada-modes">
       <button class="nivel-card hc" onclick="openLevelModal('hidrocarburos')">
         <div class="nivel-icon">🔗</div>
-        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">69 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">93 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos</div><div class="nivel-count">47 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, éteres</div><div class="nivel-count">100 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
-        <div><div class="nivel-name">Compuestos Nitrogenados</div><div class="nivel-desc">Amidas y nitrilos</div><div class="nivel-count">10 preguntas · todas por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Nitrogenados</div><div class="nivel-desc">Amidas y nitrilos</div><div class="nivel-count">34 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">187 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">227 preguntas · 20 por sesión</div></div>
       </button>
     </div>
     <div class="portada-stats">
-      <div class="ps"><div class="ps-n" id="stat-banco">187</div><div class="ps-l">En el banco</div></div>
+      <div class="ps"><div class="ps-n" id="stat-banco">227</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">45s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
@@ -614,13 +647,13 @@ const M = {
   dimetilbutano23(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
   // 3-metilpentano: metilo en C3 (p[2]) hacia arriba
   metilpentano3(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y-BL);return mkSVG(s);},
-  // 3-etil-2-metilpentano: cadena 5C, metilo en C2 (p[1] arriba), etilo en C3 (p[2] abajo+diagonal)
+  // 3-etil-2-metilpentano: cadena 5C, metilo en C2 (p[1] arriba), etilo en C3 (p[2] abajo vertical)
   etilmetilpentano(){_pts=[];const p=zz(0,0,5);let s=chain(p);
     // Metilo en C2: perpendicular arriba
     s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);
-    // Etilo en C3: baja vertical luego diagonal derecha para evitar cruce con cadena
-    const ex1=p[2].x,ey1=p[2].y+BL;
-    const ex2=p[2].x+BL*COS30,ey2=p[2].y+BL+BL*SIN30;
+    // Etilo en C3: zigzag abajo-derecha / abajo-izquierda (2 carbonos visibles)
+    const ex1=p[2].x+BL*COS30, ey1=p[2].y+BL*SIN30;
+    const ex2=p[2].x,          ey2=p[2].y+2*BL*SIN30;
     s+=ln(p[2].x,p[2].y,ex1,ey1);
     s+=ln(ex1,ey1,ex2,ey2);
     _reg(ex1,ey1);_reg(ex2,ey2);
@@ -665,6 +698,7 @@ const M = {
   pentanal(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
 
   // ── CETONAS ──
+  propan2ona(){_pts=[];const p=zz(0,0,3);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
   pentan2ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
   pentan3ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
   butan2ona(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
@@ -781,11 +815,11 @@ const M = {
   // ── AROMÁTICOS EXTRA ──
   // propilbenceno: cadena propilo (3C zigzag) en v[0] (arriba)
   propilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;
-    // C1: v[0]→arriba, C2: arriba-izquierda, C3: arriba (más)
+    // C1: recto arriba; C2: diagonal izquierda; C3: diagonal derecha (zigzag real)
     s+=ln(0,-r,0,-r-BL);
     s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);
-    s+=ln(-BL*COS30,-r-BL-BL*SIN30,-BL*COS30,-r-BL-BL*SIN30-BL);
-    _reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);_reg(-BL*COS30,-r-BL-BL*SIN30-BL);
+    s+=ln(-BL*COS30,-r-BL-BL*SIN30,0,-r-BL-2*BL*SIN30);
+    _reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);_reg(0,-r-BL-2*BL*SIN30);
     return mkSVG(s);},
 
   // isopropilbenceno: sustituyente isopropilo en v[0] — CH ramificado con dos CH₃
@@ -829,6 +863,190 @@ const M = {
   metoxietano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
   etoxietano(){_pts=[];const ox=0,oy=0;const r1={x:BL*COS30,y:BL*SIN30},r2={x:2*BL*COS30,y:0},l1={x:-BL*COS30,y:BL*SIN30},l2={x:-2*BL*COS30,y:0};let s=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(ox,oy,l1.x,l1.y);s+=ln(l1.x,l1.y,l2.x,l2.y);_reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);s+=atm(ox,oy,'O');return mkSVG(s);},
   metoxipropano(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  // Nuevas SVGs para moléculas de teoría sin preguntas
+  metanol(){_pts=[];let s=ln(0,0,0,-BL);_reg(0,-BL);s+=atm(0,-BL,'OH');return mkSVG(s);},
+  acidoMetanoico(){_pts=[];let s=dbl(0,0,0,-BL);s+=ln(0,0,0,BL);_reg(0,-BL);_reg(0,BL);s+=atm(0,-BL,'O');s+=atm(0,BL,'OH');return mkSVG(s);},
+  acidoHexanoico(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  metanamida(){_pts=[];let s=dbl(0,0,0,-BL);s+=ln(0,0,0,BL);_reg(0,-BL);_reg(0,BL);s+=atm(0,-BL,'O');s+=atm(0,BL,'NH₂');return mkSVG(s);},
+  cuatroMetilpentan2ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');s+=ln(p[3].x,p[3].y,p[3].x,p[3].y+BL);return mkSVG(s);},
+};
+
+// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
+// FÓRMULA ESTRUCTURAL DESARROLLADA (SVG con todos los átomos)
+// Solo moléculas no cíclicas y no aromáticas
+// ════════════════════════════════════════════════════════
+function mkDevSVG(ch){
+  const U=40,atoms=[],bonds=[],occ=new Set();
+  function pk(x,y){return Math.round(x)+','+Math.round(y);}
+  function addA(s,x,y){
+    const k=pk(x,y);
+    if(s==='H'&&occ.has(k))return -1;
+    occ.add(k);atoms.push({s,x,y});return atoms.length-1;
+  }
+  function addB(i,j,o=1){if(i>=0&&j>=0)bonds.push({i,j,o});}
+  function addH(pi,x,y){const hi=addA('H',x,y);if(hi>=0)addB(pi,hi);}
+  function plBr(pi,bArr,sx,sy,dir,fBn){
+    let px=sx,py=sy,pii=pi;
+    for(let k=0;k<bArr.length;k++){
+      const ba=bArr[k];const ny=py+(dir==='u'?-U:U);
+      const bi=addA(ba.s||'C',px,ny);
+      if(bi>=0)addB(pii,bi,k===0?fBn:(ba.bn||1));
+      let bh=ba.h||0;const isLa=k===bArr.length-1;
+      if(bi>=0){
+        if(isLa&&bh>0){addH(bi,px,ny+(dir==='u'?-U:U));bh--;}
+        if(bh>0){addH(bi,px-U,ny);bh--;}
+        if(bh>0){addH(bi,px+U,ny);bh--;}
+      }
+      pii=bi>=0?bi:pii;py=ny;
+    }
+  }
+  const ci=[];
+  for(let i=0;i<ch.length;i++){
+    const ca=ch[i];
+    ci.push(addA(ca.s||'C',(i+1)*U,U));
+    if(i>0)addB(ci[i-1],ci[i],ch[i-1].bn||1);
+  }
+  for(let i=0;i<ch.length;i++){
+    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
+    let h=ca.h;const isF=i===0,isLa=i===ch.length-1;
+    if(isF&&h>0){addH(idx,x-U,y);h--;}
+    if(isLa&&h>0){addH(idx,x+U,y);h--;}
+    if(!ca.bu&&h>0){addH(idx,x,y-U);h--;}
+    if(!ca.bd&&h>0){addH(idx,x,y+U);h--;}
+  }
+  for(let i=0;i<ch.length;i++){
+    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
+    if(ca.bu)plBr(idx,ca.bu,x,y,'u',ca.buBn||1);
+    if(ca.bd)plBr(idx,ca.bd,x,y,'d',ca.bdBn||1);
+  }
+  if(!atoms.length)return '';
+  const xs=atoms.map(a=>a.x),ys=atoms.map(a=>a.y);
+  const P=16,ox=-Math.min(...xs)+P,oy=-Math.min(...ys)+P;
+  const W=Math.max(...xs)-Math.min(...xs)+P*2,Hh=Math.max(...ys)-Math.min(...ys)+P*2;
+  let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
+  const SH=10,SHH=8;
+  for(const b of bonds){
+    const a1=atoms[b.i],a2=atoms[b.j];if(!a1||!a2)continue;
+    const x1=a1.x+ox,y1=a1.y+oy,x2=a2.x+ox,y2=a2.y+oy;
+    const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
+    const ux=dx/len,uy=dy/len,s1=a1.s==='H'?SHH:SH,s2=a2.s==='H'?SHH:SH;
+    const lx1=x1+ux*s1,ly1=y1+uy*s1,lx2=x2-ux*s2,ly2=y2-uy*s2;
+    const px=-uy*3,py=ux*3,c='#1a2a3a';
+    const ln=(ax1,ay1,ax2,ay2)=>`<line x1="${ax1.toFixed(1)}" y1="${ay1.toFixed(1)}" x2="${ax2.toFixed(1)}" y2="${ay2.toFixed(1)}" stroke="${c}" stroke-width="1.5" stroke-linecap="round"/>`;
+    if(b.o===1)sv+=ln(lx1,ly1,lx2,ly2);
+    else if(b.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+    else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+  }
+  for(const a of atoms){
+    const px=a.x+ox,py=a.y+oy,isH=a.s==='H';
+    const fill=a.s==='C'?'#0d2d42':a.s==='H'?'#556677':a.s==='O'?'#c8230a':a.s==='N'?'#0033aa':'#333';
+    sv+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${isH?7:9}" fill="white"/>`;
+    sv+=`<text x="${px.toFixed(1)}" y="${py.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="${isH?10:13}" font-weight="${isH?'400':'700'}" fill="${fill}">${a.s}</text>`;
+  }
+  sv+='</svg>';return sv;
+}
+// Descriptores: [{s,h,bn,bu,buBn,bd,bdBn},...]
+// h=H a colocar; bn=orden enlace al siguiente(def.1); bu/bd=ramas arriba/abajo
+const _C3=[{h:3}],_O0=[{s:'O',h:0}],_O1=[{s:'O',h:1}],_N2=[{s:'N',h:2}];
+const MOLDES={
+  // ── ALCANOS ──
+  etano:[{h:3,bn:1},{h:3}],
+  propano:[{h:3,bn:1},{h:2,bn:1},{h:3}],
+  butano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hexano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  heptano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilbutano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:3}],
+  metilpentano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilpentano3:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:3}],
+  dimetilbutano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:_C3},{h:3}],
+  dimetilbutano23:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:_C3},{h:3}],
+  dimetilpropano:[{h:3,bn:1},{h:0,bn:1,bu:_C3,bd:_C3},{h:3}],
+  dimetilpentano24:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:1,bn:1,bu:_C3},{h:3}],
+  etilmetilpentano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:[{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:3}],
+  // ── ALQUENOS ──
+  prop1eno:[{h:2,bn:2},{h:1,bn:1},{h:3}],
+  but1eno:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  but2eno:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:3}],
+  pent2eno:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  hex1eno:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  buta13dieno:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:2},{h:2}],
+  pent13dieno:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:2},{h:1,bn:1},{h:3}],
+  // ── ALQUINOS ──
+  but1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  but2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:3}],
+  pent1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pent2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  hex1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hex3ino:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  // ── ALCOHOLES ──
+  metanol:[{h:3,bn:1},{s:'O',h:1}],
+  etanol:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  propan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  propan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:3}],
+  butan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  butan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:3}],
+  pentan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  pentan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentan3ol:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:3}],
+  hexan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  but3en2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:1,bn:2},{h:2}],
+  propan12diol:[{h:2,bn:1,bd:_O1},{h:1,bn:1,bd:_O1},{h:3}],
+  // ── ALDEHÍDOS ──
+  etanal:[{h:3,bn:1},{h:1,bu:_O0,buBn:2}],
+  propanal:[{h:3,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  butanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  pentanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  hexanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  // ── CETONAS ──
+  propan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:3}],
+  butan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  pentan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  hexan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hexan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  cuatroMetilpentan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:1,bn:1,bd:_C3},{h:3}],
+  // ── ÁCIDOS CARBOXÍLICOS ──
+  acidoMetanoico:[{h:1,bu:_O0,buBn:2,bd:_O1}],
+  acidoetanoico:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidopropanoico:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidobutanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidopentanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoHexanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  // ── ÉSTERES ──
+  etanoatoMetilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  etanoatoEtilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  propanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  butanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  // ── ÉTERES ──
+  metoximetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:3}],
+  metoxietano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  metoxipropano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  etoxietano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  // ── AMIDAS ──
+  metanamida:[{h:1,bu:_O0,buBn:2,bd:_N2}],
+  etanamida:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  propanamida:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  butanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  pentanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  hexanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  // ── NITRILOS ──
+  etanonitrilo:[{h:3,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  propanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  butanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  pentanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  hexanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  // AMINAS
+  metilamina:[{h:3,bn:1},{s:'N',h:2}],
+  etanamina:[{h:3,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  propanamina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  butan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  butan2amina:[{h:3,bn:1},{h:1,bn:1,bd:_N2},{h:2,bn:1},{h:3}],
+  nMetilPropan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:1,bn:1},{h:3}],
+  nMetilButan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:1,bn:1},{h:3}],
+  pentano15diamina:[{s:'N',h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  trimetilamina:[{h:3,bn:1},{s:'N',h:0,bn:1,bu:_C3},{h:3}],
 };
 
 // ════════════════════════════════════════════════════════
@@ -1187,43 +1405,46 @@ const QBANK = [
   // ESCRIBIR NOMBRE (14 preguntas)
   // ════════════════════════════════════════════════════════
   {type:'write', mol:'propan1ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'propan-1-ol', accepted:['propan-1-ol'],
+   hints:['Cadena de 3 carbonos con −OH','El −OH está en el carbono extremo (C1)'],
+   ans:'propan-1-ol', accepted:['propan-1-ol','1-propanol','propan1ol','propanol','1propanol'],
    expl:'3C, −OH en C1 → <b>propan-1-ol</b>.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
 
   {type:'write', mol:'butan1ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'butan-1-ol', accepted:['butan-1-ol'],
+   hints:['Cadena de 4 carbonos con −OH','El −OH está en el extremo de la cadena (C1)'],
+   ans:'butan-1-ol', accepted:['butan-1-ol','1-butanol','butan1ol','butanol','1butanol'],
    expl:'4C, −OH en C1 → <b>butan-1-ol</b>.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
 
   {type:'write', mol:'pentan2ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   hints:['Cadena de 5 carbonos con −OH','El −OH no está en el extremo'],
-   ans:'pentan-2-ol', accepted:['pentan-2-ol'],
+   hints:['Cadena de 5 carbonos con −OH','El −OH está en C2, no en el extremo'],
+   ans:'pentan-2-ol', accepted:['pentan-2-ol','2-pentanol','pentan2ol','2pentanol'],
    expl:'5C, −OH en C2 → <b>pentan-2-ol</b>.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-ol',cls:'g',l:'OH en C2'}], topic:'alcoholes'},
 
   {type:'write', mol:'but1ino', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'but-1-ino', accepted:['but-1-ino'],
+   hints:['Cadena de 4 carbonos','Hay un triple enlace en el extremo (C1)'],
+   ans:'but-1-ino', accepted:['but-1-ino','1-butino','but1ino','1butino'],
    expl:'4C, triple enlace en C1 → <b>but-1-ino</b>.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
 
   {type:'write', mol:'ortoXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están en posiciones adyacentes (1,2)'],
-   ans:'1,2-dimetilbenceno', accepted:['1,2-dimetilbenceno','orto-xileno','o-xileno','o-dimetilbenceno','1,2-xileno','ortoxileno','orto xileno','oxileno','o xileno','1,2 dimetilbenceno','1,2dimetilbenceno','o-dimetil benceno','orto-dimetilbenceno','ortodimetilbenceno'],
+   ans:'1,2-dimetilbenceno', accepted:['1,2-dimetilbenceno','orto-xileno','o-xileno','o-dimetilbenceno','odimetilbenceno','1,2-xileno','1,2xileno','12xileno','ortoxileno','orto xileno','oxileno','o xileno','1,2 dimetilbenceno','1,2dimetilbenceno','12dimetilbenceno','o-dimetil benceno','orto-dimetilbenceno','ortodimetilbenceno'],
    oldNames:['orto-xileno','o-xileno','o-dimetilbenceno','1,2-xileno','ortoxileno','orto xileno','oxileno','o xileno','1,2 dimetilbenceno','1,2dimetilbenceno','o-dimetil benceno','orto-dimetilbenceno','ortodimetilbenceno'],
    expl:'Benceno con dos metilos en posiciones adyacentes (1,2) → <b>1,2-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,2-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'metaXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están separados por un carbono (1,3)'],
-   ans:'1,3-dimetilbenceno', accepted:['1,3-dimetilbenceno','meta-xileno','m-xileno','m-dimetilbenceno','1,3-xileno','metaxileno','meta xileno','mxileno','m xileno','1,3 dimetilbenceno','1,3dimetilbenceno','m-dimetil benceno','meta-dimetilbenceno','metadimetilbenceno'],
+   ans:'1,3-dimetilbenceno', accepted:['1,3-dimetilbenceno','meta-xileno','m-xileno','m-dimetilbenceno','mdimetilbenceno','1,3-xileno','1,3xileno','13xileno','metaxileno','meta xileno','mxileno','m xileno','1,3 dimetilbenceno','1,3dimetilbenceno','13dimetilbenceno','m-dimetil benceno','meta-dimetilbenceno','metadimetilbenceno'],
    oldNames:['meta-xileno','m-xileno','m-dimetilbenceno','1,3-xileno','metaxileno','meta xileno','mxileno','m xileno','1,3 dimetilbenceno','1,3dimetilbenceno','m-dimetil benceno','meta-dimetilbenceno','metadimetilbenceno'],
    expl:'Benceno con dos metilos en posiciones 1 y 3 → <b>1,3-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,3-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'paraXileno', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Benceno con dos grupos metilo','Los metilos están en posiciones opuestas (1,4)'],
-   ans:'1,4-dimetilbenceno', accepted:['1,4-dimetilbenceno','para-xileno','p-xileno','p-dimetilbenceno','1,4-xileno','paraxileno','para xileno','pxileno','p xileno','1,4 dimetilbenceno','1,4dimetilbenceno','p-dimetil benceno','para-dimetilbenceno','paradimetilbenceno'],
+   ans:'1,4-dimetilbenceno', accepted:['1,4-dimetilbenceno','para-xileno','p-xileno','p-dimetilbenceno','pdimetilbenceno','1,4-xileno','1,4xileno','14xileno','paraxileno','para xileno','pxileno','p xileno','1,4 dimetilbenceno','1,4dimetilbenceno','14dimetilbenceno','p-dimetil benceno','para-dimetilbenceno','paradimetilbenceno'],
    oldNames:['para-xileno','p-xileno','p-dimetilbenceno','1,4-xileno','paraxileno','para xileno','pxileno','p xileno','1,4 dimetilbenceno','1,4dimetilbenceno','p-dimetil benceno','para-dimetilbenceno','paradimetilbenceno'],
    expl:'Benceno con dos metilos en posiciones opuestas (1,4) → <b>1,4-dimetilbenceno</b>. Los prefijos orto/meta/para son nomenclatura pre-2005; IUPAC 2013 usa los localizadores numéricos.',
    parts:[{t:'1,4-dimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
@@ -1236,13 +1457,16 @@ const QBANK = [
 
   {type:'write', mol:'propanal', q:'Escribe el nombre IUPAC completo de esta estructura.',
    hints:['Cadena de 3 carbonos','El grupo funcional es un aldehído terminal'],
-   ans:'propanal', accepted:['propanal'],
-   expl:'3C con C=O terminal (aldehído) → <b>propanal</b>.',
+   ans:'propanal', accepted:['propanal','propionaldehído','propionaldehido'],
+   oldNames:['propionaldehído','propionaldehido'],
+   expl:'3C con C=O terminal (aldehído) → <b>propanal</b>. "Propionaldehído" es el nombre funcional anterior.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
 
   {type:'write', mol:'butanal', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'butanal', accepted:['butanal'],
-   expl:'4C con C=O terminal (aldehído) → <b>butanal</b>.',
+   hints:['Cadena de 4 carbonos','El grupo funcional es un aldehído terminal'],
+   ans:'butanal', accepted:['butanal','butiraldehído','butiraldehido'],
+   oldNames:['butiraldehído','butiraldehido'],
+   expl:'4C con C=O terminal (aldehído) → <b>butanal</b>. "Butiraldehído" es el nombre funcional anterior.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
 
   {type:'write', mol:'propanamida', q:'Escribe el nombre IUPAC completo de esta estructura.',
@@ -1251,8 +1475,9 @@ const QBANK = [
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
 
   {type:'write', mol:'butanonitrilo', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'butanonitrilo', accepted:['butanonitrilo'],
-   expl:'4C con −C≡N → <b>butanonitrilo</b>.',
+   ans:'butanonitrilo', accepted:['butanonitrilo','butironitrilo'],
+   oldNames:['butironitrilo'],
+   expl:'4C con −C≡N → <b>butanonitrilo</b>. "Butironitrilo" es el nombre funcional anterior.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'write', mol:'ciclopentanol', q:'Escribe el nombre IUPAC completo de esta estructura.',
@@ -1329,7 +1554,7 @@ const QBANK = [
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'hex1eno', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'hex-1-eno', accepted:['hex-1-eno','1-hexeno','hex1eno'],
+   ans:'hex-1-eno', accepted:['hex-1-eno','1-hexeno','hex1eno','1hexeno'],
    hints:['Cadena de 6 carbonos con un doble enlace','El doble enlace está en el extremo (C1)'],
    expl:'6C, doble enlace en C1 → <b>hex-1-eno</b>.',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
@@ -1341,7 +1566,7 @@ const QBANK = [
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
 
   {type:'write', mol:'pent2ino', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'pent-2-ino', accepted:['pent-2-ino','2-pentino','pent2ino'],
+   ans:'pent-2-ino', accepted:['pent-2-ino','2-pentino','pent2ino','2pentino'],
    hints:['Cadena de 5 carbonos con un triple enlace','El triple enlace no empieza en el extremo'],
    expl:'5C, triple enlace en C2 → <b>pent-2-ino</b>.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
@@ -1353,9 +1578,10 @@ const QBANK = [
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
 
   {type:'write', mol:'pentanal', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'pentanal', accepted:['pentanal'],
+   ans:'pentanal', accepted:['pentanal','valeraldehído','valeraldehido'],
+   oldNames:['valeraldehído','valeraldehido'],
    hints:['Tiene 5 carbonos en cadena','El grupo funcional es un aldehído (−CHO)'],
-   expl:'5C con C=O terminal → <b>pentanal</b>.',
+   expl:'5C con C=O terminal → <b>pentanal</b>. "Valeraldehído" es el nombre funcional anterior.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
 
   // pentan-3-ol
@@ -1365,7 +1591,7 @@ const QBANK = [
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-ol',cls:'g',l:'OH en C3'}], topic:'alcoholes'},
 
   {type:'write', mol:'pentan3ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'pentan-3-ol', accepted:['pentan-3-ol','3-pentanol','pentan3ol'],
+   ans:'pentan-3-ol', accepted:['pentan-3-ol','3-pentanol','pentan3ol','3pentanol'],
    hints:['Cadena de 5 carbonos con un −OH','El hidroxilo está en el carbono central'],
    expl:'5C, −OH en C3 → <b>pentan-3-ol</b>.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-ol',cls:'g',l:'OH en C3'}], topic:'alcoholes'},
@@ -1377,10 +1603,16 @@ const QBANK = [
    parts:[{t:'2,4-dimetil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
 
   {type:'write', mol:'dimetilpentano24', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'2,4-dimetilpentano', accepted:['2,4-dimetilpentano','2,4-dimetil-pentano'],
-   hints:['Cadena principal de 5 carbonos','Hay dos ramificaciones metilo simétricas'],
-   expl:'5C con metilos en C2 y C4 → <b>2,4-dimetilpentano</b>.',
+   ans:'2,4-dimetilpentano', accepted:['2,4-dimetilpentano','2,4-dimetil-pentano','2,4dimetilpentano','24dimetilpentano'],
+   hints:['La cadena principal tiene exactamente 5 carbonos (pent-)','Los dos grupos -CH₃ colgantes son ramificaciones metilo, no alargan la cadena principal','Numera desde el extremo más cercano a las ramificaciones → localizadores 2 y 4'],
+   expl:'5C con metilos en C2 y C4 → <b>2,4-dimetilpentano</b>. Recuerda: los 7 carbonos totales de la molécula incluyen 5C de cadena + 2C de ramificaciones.',
    parts:[{t:'2,4-dimetil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'write', mol:'etilmetilpentano', q:'Escribe el nombre IUPAC completo de esta estructura ramificada.',
+   ans:'3-etil-2-metilpentano', accepted:['3-etil-2-metilpentano','3-etil-2-metil-pentano','3etil-2-metilpentano','3etil2metilpentano'],
+   hints:['Busca la cadena más larga: tiene 5 carbonos (pent-)','Hay un grupo etilo (-CH₂CH₃) en C3 y un metilo (-CH₃) en C2','Los sustituyentes se listan en orden alfabético: etil antes que metil'],
+   expl:'Cadena de 5C con etilo en C3 y metilo en C2 → <b>3-etil-2-metilpentano</b>. Truco: la molécula tiene 8C en total (5+2+1) — si obtienes heptano o más, revisa tu cadena principal.',
+   parts:[{t:'3-etil',cls:'r',l:'Ramif.'},{t:'-2-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
 
   // ── PREGUNTAS ADICIONALES TIPO MC ──
 
@@ -1562,26 +1794,26 @@ const QBANK = [
    parts:[{t:'ciclopent',cls:'c',l:'Ciclo 5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
 
   {type:'write', mol:'but2eno', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'but-2-eno', accepted:['but-2-eno','2-buteno','but2eno'],
+   ans:'but-2-eno', accepted:['but-2-eno','2-buteno','but2eno','2buteno'],
    hints:['Cadena de 4 carbonos con doble enlace','El doble enlace no está en el extremo'],
    expl:'4C, doble enlace entre C2 y C3 → <b>but-2-eno</b>.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'2-en',cls:'i',l:'Doble C2'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'prop1eno', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'prop-1-eno', accepted:['prop-1-eno','1-propeno','propeno','prop1eno','propileno'],
+   ans:'prop-1-eno', accepted:['prop-1-eno','1-propeno','propeno','prop1eno','1propeno','propileno'],
    oldNames:['propileno'],
    hints:['Cadena de 3 carbonos','Tiene un doble enlace en C1'],
    expl:'3C, doble enlace en C1 → <b>prop-1-eno</b>. "Propileno" es el nombre industrial anterior; IUPAC 2013 usa <b>prop-1-eno</b>.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'pent1ino', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'pent-1-ino', accepted:['pent-1-ino','1-pentino','pent1ino'],
+   ans:'pent-1-ino', accepted:['pent-1-ino','1-pentino','pent1ino','1pentino'],
    hints:['Cadena de 5 carbonos con triple enlace','El triple enlace está en el extremo'],
    expl:'5C, triple enlace en C1 → <b>pent-1-ino</b>.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
 
   {type:'write', mol:'hex3ino', q:'Escribe el nombre IUPAC completo de esta estructura.',
-   ans:'hex-3-ino', accepted:['hex-3-ino','3-hexino','hex3ino'],
+   ans:'hex-3-ino', accepted:['hex-3-ino','3-hexino','hex3ino','3hexino'],
    hints:['Cadena de 6 carbonos con triple enlace','El triple enlace está en el centro'],
    expl:'6C, triple enlace entre C3 y C4 → <b>hex-3-ino</b>.',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'3-in',cls:'i',l:'Triple C3'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
@@ -1594,19 +1826,20 @@ const QBANK = [
    parts:[{t:'metil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'acidopropanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
-   ans:'ácido propanoico', accepted:['ácido propanoico','acido propanoico','propanoico'],
+   ans:'ácido propanoico', accepted:['ácido propanoico','acido propanoico','propanoico','ácido propiónico','acido propionico'],
+   oldNames:['ácido propiónico','acido propionico'],
    hints:['Tiene 3 carbonos incluyendo el carboxilo','Termina en −COOH'],
-   expl:'3C con −COOH → <b>ácido propanoico</b>.',
+   expl:'3C con −COOH → <b>ácido propanoico</b>. "Ácido propiónico" es el nombre funcional anterior.',
    parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
 
   {type:'write', mol:'propan1ol', q:'Escribe el nombre IUPAC de este alcohol.',
-   ans:'propan-1-ol', accepted:['propan-1-ol','1-propanol','propan1ol','propanol'],
+   ans:'propan-1-ol', accepted:['propan-1-ol','1-propanol','propan1ol','propanol','1propanol'],
    hints:['Cadena de 3 carbonos con −OH','El −OH está en el extremo (C1)'],
    expl:'3C, −OH en C1 → <b>propan-1-ol</b>.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
 
   {type:'write', mol:'pentan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
-   ans:'pentan-2-ona', accepted:['pentan-2-ona','2-pentanona','pentan2ona'],
+   ans:'pentan-2-ona', accepted:['pentan-2-ona','2-pentanona','pentan2ona','2pentanona'],
    hints:['Cadena de 5 carbonos con C=O interior','El carbonilo está en C2'],
    expl:'5C, C=O en C2 → <b>pentan-2-ona</b>.',
    parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
@@ -1620,8 +1853,9 @@ const QBANK = [
 
   {type:'write', mol:'propanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
    ans:'propanonitrilo', accepted:['propanonitrilo','propionitrilo'],
+   oldNames:['propionitrilo'],
    hints:['Tiene un grupo −C≡N','Cuenta 3 carbonos incluyendo el del nitrilo'],
-   expl:'3C con −C≡N → <b>propanonitrilo</b>.',
+   expl:'3C con −C≡N → <b>propanonitrilo</b>. "Propionitrilo" es el nombre funcional anterior.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'write', mol:'ciclohexanol', q:'Escribe el nombre IUPAC de este compuesto.',
@@ -1637,27 +1871,30 @@ const QBANK = [
    parts:[{t:'metil',cls:'r',l:'Sustit.'},{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
 
   {type:'write', mol:'butan2ol', q:'Escribe el nombre IUPAC de este alcohol.',
-   ans:'butan-2-ol', accepted:['butan-2-ol','2-butanol','butan2ol'],
+   ans:'butan-2-ol', accepted:['butan-2-ol','2-butanol','butan2ol','2butanol'],
    hints:['Cadena de 4 carbonos con −OH','El −OH está en C2, no en el extremo'],
    expl:'4C, −OH en C2 → <b>butan-2-ol</b>.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-ol',cls:'g',l:'OH en C2'}], topic:'alcoholes'},
 
   {type:'write', mol:'butan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
-   ans:'butan-2-ona', accepted:['butan-2-ona','2-butanona','butan2ona','metiletilcetona'],
+   ans:'butan-2-ona', accepted:['butan-2-ona','2-butanona','butan2ona','2butanona','metiletilcetona'],
+   oldNames:['metiletilcetona'],
    hints:['Cadena de 4 carbonos con C=O','El carbonilo está en C2'],
-   expl:'4C, C=O en C2 → <b>butan-2-ona</b>.',
+   expl:'4C, C=O en C2 → <b>butan-2-ona</b>. "Metiletilcetona" es el nombre funcional anterior.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
 
   {type:'write', mol:'acidobutanoico', q:'Escribe el nombre IUPAC de este ácido.',
-   ans:'ácido butanoico', accepted:['ácido butanoico','acido butanoico','butanoico'],
+   ans:'ácido butanoico', accepted:['ácido butanoico','acido butanoico','butanoico','ácido butírico','acido butirico'],
+   oldNames:['ácido butírico','acido butirico'],
    hints:['Tiene 4 carbonos incluyendo el carboxilo','El sufijo de ácido carboxílico es -oico'],
-   expl:'4C con −COOH → <b>ácido butanoico</b>.',
+   expl:'4C con −COOH → <b>ácido butanoico</b>. "Ácido butírico" es el nombre funcional anterior.',
    parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
 
   {type:'write', mol:'butanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
-   ans:'butanonitrilo', accepted:['butanonitrilo'],
+   ans:'butanonitrilo', accepted:['butanonitrilo','butironitrilo'],
+   oldNames:['butironitrilo'],
    hints:['Tiene un grupo −C≡N','Cuenta 4 carbonos incluyendo el del nitrilo'],
-   expl:'4C con −C≡N → <b>butanonitrilo</b>.',
+   expl:'4C con −C≡N → <b>butanonitrilo</b>. "Butironitrilo" es el nombre funcional anterior.',
    parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
 
   {type:'write', mol:'etilbenceno', q:'Escribe el nombre IUPAC de este aromático.',
@@ -1667,15 +1904,16 @@ const QBANK = [
    parts:[{t:'etil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   {type:'write', mol:'hexan2ol', q:'Escribe el nombre IUPAC de este alcohol.',
-   ans:'hexan-2-ol', accepted:['hexan-2-ol','2-hexanol','hexan2ol'],
+   ans:'hexan-2-ol', accepted:['hexan-2-ol','2-hexanol','hexan2ol','2hexanol'],
    hints:['Cadena de 6 carbonos con −OH','El −OH está cerca del extremo (C2)'],
    expl:'6C, −OH en C2 → <b>hexan-2-ol</b>.',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-ol',cls:'g',l:'OH en C2'}], topic:'alcoholes'},
 
   {type:'write', mol:'acidopentanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
-   ans:'ácido pentanoico', accepted:['ácido pentanoico','acido pentanoico','pentanoico'],
+   ans:'ácido pentanoico', accepted:['ácido pentanoico','acido pentanoico','pentanoico','ácido valérico','acido valerico'],
+   oldNames:['ácido valérico','acido valerico'],
    hints:['Tiene 5 carbonos incluyendo el carboxilo','Ácido → terminación -oico'],
-   expl:'5C con −COOH → <b>ácido pentanoico</b>.',
+   expl:'5C con −COOH → <b>ácido pentanoico</b>. "Ácido valérico" es el nombre funcional anterior.',
    parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
 
   // ── IDENTIFICAR PARTES — AROMÁTICOS ──
@@ -1916,7 +2154,7 @@ const QBANK = [
 
   {type:'write', mol:'hexan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
    hints:['Cadena de 6 carbonos con C=O','El carbonilo no está en el extremo — usa el localizador 2'],
-   ans:'hexan-2-ona', accepted:['hexan-2-ona','hexan2ona','2-hexanona','metil butil cetona'],
+   ans:'hexan-2-ona', accepted:['hexan-2-ona','hexan2ona','2-hexanona','2hexanona','metil butil cetona'],
    expl:'6C, C=O en C2 → <b>hexan-2-ona</b> (nombre funcional: <em>metil butil cetona</em>).',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
 
@@ -1998,13 +2236,15 @@ const QBANK = [
   {type:'write', mol:'etanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
    hints:['El ácido de origen tiene 2 carbonos: ácido etanoico','El alcohol de origen es el metanol'],
    ans:'etanoato de metilo', accepted:['etanoato de metilo','acetato de metilo'],
-   expl:'CH₃COO−CH₃: ácido etanoico + metanol → <b>etanoato de metilo</b> (nombre funcional: <em>acetato de metilo</em>).',
+   oldNames:['acetato de metilo'],
+   expl:'CH₃COO−CH₃: ácido etanoico + metanol → <b>etanoato de metilo</b>. "Acetato de metilo" es el nombre funcional anterior.',
    parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   {type:'write', mol:'propanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
    hints:['El ácido de origen tiene 3 carbonos: ácido propanoico','El alcohol de origen es el metanol'],
    ans:'propanoato de metilo', accepted:['propanoato de metilo','propionato de metilo'],
-   expl:'CH₃CH₂COO−CH₃: ácido propanoico + metanol → <b>propanoato de metilo</b> (nombre funcional: <em>propionato de metilo</em>).',
+   oldNames:['propionato de metilo'],
+   expl:'CH₃CH₂COO−CH₃: ácido propanoico + metanol → <b>propanoato de metilo</b>. "Propionato de metilo" es el nombre funcional anterior.',
    parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
 
   // ════════════════════════════════════════════════════════
@@ -2084,14 +2324,62 @@ const QBANK = [
   {type:'write', mol:'etoxietano', q:'Escribe el nombre IUPAC del éter dietílico.',
    hints:['Dos grupos etilo (2C) unidos por un oxígeno','El grupo −O−C₂H₅ se llama etoxi-'],
    ans:'etoxietano', accepted:['etoxietano','éter dietílico','eter dietilico'],
-   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b> (nombre funcional: <em>éter dietílico</em>).',
+   oldNames:['éter dietílico','eter dietilico'],
+   expl:'C₂H₅−O−C₂H₅: dos etilos iguales → <b>etoxietano</b>. "Éter dietílico" es el nombre funcional anterior.',
    parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 
   {type:'write', mol:'metoxietano', q:'Escribe el nombre IUPAC de este éter.',
    hints:['Un grupo metilo y un grupo etilo unidos por O','El grupo menor (metilo) es el prefijo: metoxi-'],
    ans:'metoxietano', accepted:['metoxietano','etoximetano','éter metil etílico','eter metil etilico'],
-   expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b> (nombre funcional: <em>éter metil etílico</em>).',
+   oldNames:['éter metil etílico','eter metil etilico'],
+   expl:'CH₃−O−C₂H₅: metoxi (menor) + etano (mayor) → <b>metoxietano</b>. "Éter metil etílico" es el nombre funcional anterior.',
    parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  // ════════════════════════════════════════════════════════
+  // PREGUNTAS WRITE ADICIONALES — moléculas sin write anterior
+  // ════════════════════════════════════════════════════════
+
+  {type:'write', mol:'etanol', q:'Escribe el nombre IUPAC de este alcohol.',
+   hints:['Cadena de 2 carbonos con −OH','El −OH está en el extremo (C1)'],
+   ans:'etanol', accepted:['etanol','etan-1-ol','1-etanol','alcohol etilico','alcohol etílico'],
+   oldNames:['alcohol etílico','alcohol etilico'],
+   expl:'2C, −OH en C1 → <b>etanol</b>. "Alcohol etílico" es el nombre funcional anterior.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ol',cls:'g',l:'OH'}], topic:'alcoholes'},
+
+  {type:'write', mol:'etanal', q:'Escribe el nombre IUPAC de este aldehído.',
+   hints:['Cadena de 2 carbonos con C=O terminal','El sufijo de aldehído es -al'],
+   ans:'etanal', accepted:['etanal','acetaldehído','acetaldehido'],
+   oldNames:['acetaldehído','acetaldehido'],
+   expl:'2C con C=O terminal → <b>etanal</b>. "Acetaldehído" es el nombre funcional anterior.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+  {type:'write', mol:'acidoetanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+   hints:['Cadena de 2 carbonos incluyendo el carboxilo','El grupo −COOH da el sufijo -oico'],
+   ans:'ácido etanoico', accepted:['ácido etanoico','acido etanoico','etanoico','ácido acético','acido acetico'],
+   oldNames:['ácido acético','acido acetico'],
+   expl:'2C con −COOH → <b>ácido etanoico</b>. "Ácido acético" es el nombre funcional anterior.',
+   parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+  {type:'write', mol:'propan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
+   hints:['Cadena de 3 carbonos con C=O interior','En una cadena de 3C el carbonilo siempre está en C2'],
+   ans:'propan-2-ona', accepted:['propan-2-ona','2-propanona','propan2ona','2propanona','acetona'],
+   oldNames:['acetona'],
+   expl:'3C, C=O en C2 → <b>propan-2-ona</b>. "Acetona" es el nombre trivial anterior; es la cetona más simple.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  {type:'write', mol:'etanoatoEtilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['El ácido de origen tiene 2 carbonos: ácido etanoico','El alcohol de origen es el etanol (C₂H₅OH)'],
+   ans:'etanoato de etilo', accepted:['etanoato de etilo','acetato de etilo'],
+   oldNames:['acetato de etilo'],
+   expl:'CH₃COO−C₂H₅: ácido etanoico + etanol → <b>etanoato de etilo</b>. "Acetato de etilo" es el nombre funcional anterior.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+  {type:'write', mol:'metoximetano', q:'Escribe el nombre IUPAC del éter dimetílico.',
+   hints:['Dos grupos metilo (1C) unidos por un oxígeno','El grupo menor es metoxi-, la cadena es metano'],
+   ans:'metoximetano', accepted:['metoximetano','éter dimetílico','eter dimetilico','dimetileter','dimetiléter'],
+   oldNames:['éter dimetílico','eter dimetilico'],
+   expl:'CH₃−O−CH₃: dos metilos iguales → <b>metoximetano</b>. "Éter dimetílico" es el nombre funcional anterior.',
+   parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'met',cls:'c',l:'1C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
 
   // ════════════════════════════════════════════════════════
   // AROMÁTICOS — preguntas adicionales
@@ -2133,6 +2421,29 @@ const QBANK = [
    expl:'Tres metilos en posiciones alternas (1, 3 y 5) con simetría D₃h → <b>1,3,5-trimetilbenceno</b> (mesitileno).',
    parts:[{t:'1,3,5-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
+  // Q3b: write — 1,2,3-trimetilbenceno
+  {type:'write', mol:'trimetilbenceno123', q:'Escribe el nombre IUPAC de este trimetilbenceno.',
+   hints:['Benceno con tres grupos metilo en posiciones adyacentes','Tres metilos consecutivos → localizadores 1,2,3'],
+   ans:'1,2,3-trimetilbenceno', accepted:['1,2,3-trimetilbenceno','1,2,3-trimetil-benceno','1,2,3trimetilbenceno','123trimetilbenceno'],
+   expl:'Tres metilos en posiciones consecutivas 1,2,3 → <b>1,2,3-trimetilbenceno</b>.',
+   parts:[{t:'1,2,3-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q4b: write — 1,2,4-trimetilbenceno
+  {type:'write', mol:'trimetilbenceno124', q:'Escribe el nombre IUPAC de este trimetilbenceno.',
+   hints:['Benceno con tres grupos metilo','Dos metilos adyacentes y uno separado → localizadores 1,2,4'],
+   ans:'1,2,4-trimetilbenceno', accepted:['1,2,4-trimetilbenceno','1,2,4-trimetil-benceno','pseudocumeno','1,2,4trimetilbenceno','124trimetilbenceno'],
+   oldNames:['pseudocumeno'],
+   expl:'Metilos en 1,2 y 4 → <b>1,2,4-trimetilbenceno</b>. "Pseudocumeno" es el nombre anterior.',
+   parts:[{t:'1,2,4-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // Q5b: write — 1,3,5-trimetilbenceno (mesitileno)
+  {type:'write', mol:'trimetilbenceno135', q:'Escribe el nombre IUPAC del mesitileno.',
+   hints:['Benceno con tres grupos metilo equidistantes','Metilos alternos → localizadores 1,3,5'],
+   ans:'1,3,5-trimetilbenceno', accepted:['1,3,5-trimetilbenceno','1,3,5-trimetil-benceno','mesitileno','1,3,5trimetilbenceno','135trimetilbenceno'],
+   oldNames:['mesitileno'],
+   expl:'Tres metilos en posiciones alternas (1,3,5) → <b>1,3,5-trimetilbenceno</b>. "Mesitileno" es el nombre trivial anterior.',
+   parts:[{t:'1,3,5-trimetil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
   // Q6: id — propilbenceno (identificar el sustituyente «propil»)
   {type:'id', mol:'propilbenceno',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
@@ -2159,6 +2470,180 @@ const QBANK = [
    ],
    tokens:[{text:'1,2-dimetil',cls:'r'},{text:'bencen',cls:'c'},{text:'o',cls:'g'},{text:'1,3-dimetil',cls:'r'},{text:'ciclohex',cls:'c'},{text:'ano',cls:'c'}],
    expl:'Dos metilos en posiciones 1 y 2 → <b>1,2-dimetilbenceno</b> (orto-xileno).', topic:'benceno'},
+
+  // ── PREGUNTAS AÑADIDAS DESDE TEORÍA (moléculas sin ejercicio) ────────────────
+
+  // Alcanos simples
+  {type:'mc', mol:'etano', q:'¿Cuál es el nombre IUPAC de este alcano de 2 carbonos?',
+   ans:'etano', opts:['etano','metano','propano','butano'],
+   expl:'2 carbonos en cadena lineal → <b>etano</b>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'mc', mol:'pentano', q:'¿Cuál es el nombre IUPAC de este alcano de 5 carbonos?',
+   ans:'pentano', opts:['pentano','butano','hexano','heptano'],
+   expl:'5 carbonos en cadena lineal → <b>pentano</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'mc', mol:'heptano', q:'¿Cuál es el nombre IUPAC de este alcano de 7 carbonos?',
+   ans:'heptano', opts:['heptano','hexano','octano','pentano'],
+   expl:'7 carbonos en cadena lineal → <b>heptano</b>.',
+   parts:[{t:'hept',cls:'c',l:'7C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'write', mol:'heptano', q:'Escribe el nombre IUPAC de este alcano.',
+   ans:'heptano', accepted:['heptano'],
+   hints:['Cuenta los carbonos de izquierda a derecha','7 carbonos: hept + ano'],
+   expl:'7C lineal → <b>heptano</b>.', topic:'alcanos'},
+
+  // 3-metilpentano
+  {type:'mc', mol:'metilpentano3', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'3-metilpentano', opts:['3-metilpentano','2-metilpentano','3-metilbutano','2-metilhexano'],
+   expl:'5C cadena principal, metilo en C3 → <b>3-metilpentano</b>.',
+   parts:[{t:'3-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'write', mol:'metilpentano3', q:'Escribe el nombre IUPAC completo de esta estructura.',
+   ans:'3-metilpentano', accepted:['3-metilpentano','3-metil-pentano','3metilpentano'],
+   hints:['La cadena principal tiene 5C (pentano)','El metilo está en C3, no en C2','Si lo numeraras desde el otro extremo darías también C3 (es el mismo)'],
+   expl:'5C con metilo en C3 → <b>3-metilpentano</b>.', topic:'alcanos'},
+
+  // 2,3-dimetilbutano
+  {type:'mc', mol:'dimetilbutano23', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'2,3-dimetilbutano', opts:['2,3-dimetilbutano','2,2-dimetilbutano','2,3-dimetilpentano','3,4-dimetilhexano'],
+   expl:'4C cadena principal, metilos en C2 y C3 → <b>2,3-dimetilbutano</b>.',
+   parts:[{t:'2,3-dimetil',cls:'r',l:'Ramif.'},{t:'but',cls:'c',l:'4C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'alcanos'},
+
+  {type:'write', mol:'dimetilbutano23', q:'Escribe el nombre IUPAC completo de esta estructura.',
+   ans:'2,3-dimetilbutano', accepted:['2,3-dimetilbutano','2,3-dimetil-butano','2,3dimetilbutano','23dimetilbutano'],
+   hints:['Hay 6 carbonos en total, pero la cadena más larga es de 4C','Los dos metilos están en carbonos adyacentes C2 y C3','Nunca puede ser 3,4- porque ese localizador es más alto que 2,3-'],
+   expl:'4C con metilos en C2 y C3 → <b>2,3-dimetilbutano</b>.', topic:'alcanos'},
+
+  // Alcoholes
+  {type:'mc', mol:'metanol', q:'¿Cuál es el nombre IUPAC de este alcohol de 1 carbono?',
+   ans:'metanol', opts:['metanol','etanol','propan-1-ol','butan-1-ol'],
+   expl:'1 carbono con −OH → <b>metanol</b>.',
+   oldNames:['alcohol metílico','alcohol metilico'],
+   parts:[{t:'met',cls:'c',l:'1C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'ol',cls:'g',l:'OH'}], topic:'alcoholes'},
+
+  {type:'write', mol:'metanol', q:'Escribe el nombre IUPAC de este alcohol.',
+   ans:'metanol', accepted:['metanol','alcohol metilico','alcohol metílico'],
+   oldNames:['alcohol metílico','alcohol metilico'],
+   hints:['1 carbono con grupo −OH','met + an + ol'],
+   expl:'1C + −OH → <b>metanol</b>. Nombre antiguo: <em>alcohol metílico</em>.', topic:'alcoholes'},
+
+  {type:'mc', mol:'pentan1ol', q:'¿Cuál es el nombre IUPAC de este alcohol?',
+   ans:'pentan-1-ol', opts:['pentan-1-ol','pentan-2-ol','butan-1-ol','hexan-1-ol'],
+   expl:'5C con −OH en el extremo (C1) → <b>pentan-1-ol</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
+
+  {type:'write', mol:'pentan1ol', q:'Escribe el nombre IUPAC de este alcohol.',
+   ans:'pentan-1-ol', accepted:['pentan-1-ol','pentan1ol','1-pentanol','1pentanol'],
+   hints:['5 carbonos con −OH en el extremo','El OH está en el carbono 1','pentan + 1 + ol'],
+   expl:'5C, −OH en C1 → <b>pentan-1-ol</b>.', topic:'alcoholes'},
+
+  // Cetonas
+  {type:'mc', mol:'pentan3ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
+   ans:'pentan-3-ona', opts:['pentan-3-ona','pentan-2-ona','hexan-3-ona','butan-2-ona'],
+   expl:'5C con C=O en el centro (C3) → <b>pentan-3-ona</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-on',cls:'g',l:'C=O en C3'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  {type:'write', mol:'pentan3ona', q:'Escribe el nombre IUPAC de esta cetona.',
+   ans:'pentan-3-ona', accepted:['pentan-3-ona','pentan3ona','3-pentanona','3pentanona','dietilcetona'],
+   oldNames:['dietilcetona'],
+   hints:['5 carbonos con C=O','El C=O está en C3 (el de en medio)','pentan + 3 + ona'],
+   expl:'5C, C=O en C3 → <b>pentan-3-ona</b>.', topic:'cetonas'},
+
+  {type:'mc', mol:'hexan3ona', q:'¿Cuál es el nombre IUPAC de esta cetona de 6 carbonos?',
+   ans:'hexan-3-ona', opts:['hexan-3-ona','hexan-2-ona','pentan-3-ona','heptan-3-ona'],
+   expl:'6C con C=O en C3 → <b>hexan-3-ona</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-on',cls:'g',l:'C=O en C3'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  {type:'write', mol:'hexan3ona', q:'Escribe el nombre IUPAC de esta cetona.',
+   ans:'hexan-3-ona', accepted:['hexan-3-ona','hexan3ona','3-hexanona','3hexanona'],
+   hints:['6 carbonos con C=O','Numera desde el extremo más cercano al C=O → localizador 3','hex + 3 + ona'],
+   expl:'6C, C=O en C3 → <b>hexan-3-ona</b>.', topic:'cetonas'},
+
+  // 4-metilpentan-2-ona
+  {type:'mc', mol:'cuatroMetilpentan2ona', q:'¿Cuál es el nombre IUPAC de esta cetona ramificada?',
+   ans:'4-metilpentan-2-ona', opts:['4-metilpentan-2-ona','3-metilpentan-2-ona','4-metilpentan-3-ona','2-metilpentan-4-ona'],
+   expl:'5C con metilo en C4 y C=O en C2 → <b>4-metilpentan-2-ona</b>.',
+   parts:[{t:'4-metil',cls:'r',l:'Ramif.'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+  {type:'write', mol:'cuatroMetilpentan2ona', q:'Escribe el nombre IUPAC de esta cetona ramificada.',
+   ans:'4-metilpentan-2-ona', accepted:['4-metilpentan-2-ona','4-metilpentan2ona','4metilpentan-2-ona','4metilpentan2ona'],
+   hints:['Cadena principal de 5C con C=O → pentan-X-ona','El C=O está cerca del extremo: posición 2','El metilo cuelga del C4'],
+   expl:'5C, C=O en C2, metilo en C4 → <b>4-metilpentan-2-ona</b>.', topic:'cetonas'},
+
+  // Alquenos/dienos
+  {type:'mc', mol:'pent13dieno', q:'¿Cuál es el nombre IUPAC de este dieno conjugado?',
+   ans:'penta-1,3-dieno', opts:['penta-1,3-dieno','buta-1,3-dieno','penta-1,4-dieno','penta-2,4-dieno'],
+   expl:'5C con dobles enlaces en C1-C2 y C3-C4 → <b>penta-1,3-dieno</b>.',
+   parts:[{t:'penta',cls:'c',l:'5C'},{t:'1,3-dien',cls:'i',l:'Dobles C1,C3'},{t:'o',cls:'g',l:'Dieno'}], topic:'alquenos'},
+
+  {type:'write', mol:'pent13dieno', q:'Escribe el nombre IUPAC de este dieno.',
+   ans:'penta-1,3-dieno', accepted:['penta-1,3-dieno','penta13dieno','penta1,3dieno','1,3-pentadieno','1,3pentadieno','13-pentadieno','13pentadieno','penta-1,3dieno'],
+   hints:['5 carbonos con dos dobles enlaces','Los dobles enlaces están en C1-C2 y C3-C4','penta + 1,3 + dieno. La "a" de enlace es obligatoria: penta-1,3-dieno'],
+   expl:'5C, dobles C1 y C3 → <b>penta-1,3-dieno</b>.', topic:'alquenos'},
+
+  // Alquinos
+  {type:'mc', mol:'hex1ino', q:'¿Cuál es el nombre IUPAC de este alquino?',
+   ans:'hex-1-ino', opts:['hex-1-ino','hex-2-ino','pent-1-ino','hept-1-ino'],
+   expl:'6C con triple enlace en C1 → <b>hex-1-ino</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'1-in',cls:'i',l:'Triple C1'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+  {type:'write', mol:'hex1ino', q:'Escribe el nombre IUPAC de este alquino.',
+   ans:'hex-1-ino', accepted:['hex-1-ino','hex1ino','1-hexino','1hexino'],
+   hints:['6 carbonos con triple enlace','El triple enlace está en el extremo: posición 1','hex + 1 + ino'],
+   expl:'6C, triple enlace en C1 → <b>hex-1-ino</b>.', topic:'alquinos'},
+
+  // Nitrilos
+  {type:'mc', mol:'etanonitrilo', q:'¿Cuál es el nombre IUPAC de este nitrilo?',
+   ans:'etanonitrilo', opts:['etanonitrilo','propanonitrilo','metanonitrilo','butanonitrilo'],
+   expl:'2C con grupo −C≡N → <b>etanonitrilo</b>.',
+   oldNames:['acetonitrilo'],
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+  {type:'write', mol:'etanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+   ans:'etanonitrilo', accepted:['etanonitrilo','acetonitrilo'],
+   oldNames:['acetonitrilo'],
+   hints:['2 carbonos totales (incluyendo el C del CN)','et + ano + nitrilo'],
+   expl:'2C con −C≡N → <b>etanonitrilo</b>. Nombre antiguo: <em>acetonitrilo</em>.', topic:'nitrilos'},
+
+  // Amidas
+  {type:'mc', mol:'metanamida', q:'¿Cuál es el nombre IUPAC de esta amida de 1 carbono?',
+   ans:'metanamida', opts:['metanamida','etanamida','propanamida','metanonitrilo'],
+   expl:'1C con −CO−NH₂ → <b>metanamida</b>.',
+   oldNames:['formamida'],
+   parts:[{t:'met',cls:'c',l:'1C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+  {type:'write', mol:'metanamida', q:'Escribe el nombre IUPAC de esta amida.',
+   ans:'metanamida', accepted:['metanamida','formamida'],
+   oldNames:['formamida'],
+   hints:['1 solo carbono en el grupo −CONH₂','met + an + amida'],
+   expl:'1C con −CONH₂ → <b>metanamida</b>. Nombre antiguo: <em>formamida</em>.', topic:'amidas'},
+
+  // Ácidos carboxílicos
+  {type:'mc', mol:'acidoMetanoico', q:'¿Cuál es el nombre IUPAC de este ácido de 1 carbono?',
+   ans:'ácido metanoico', opts:['ácido metanoico','ácido etanoico','ácido propanoico','ácido fórmico'],
+   expl:'1C con −COOH → <b>ácido metanoico</b>.',
+   oldNames:['ácido fórmico','acido formico'],
+   parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'met',cls:'c',l:'1C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+  {type:'write', mol:'acidoMetanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+   ans:'ácido metanoico', accepted:['ácido metanoico','acido metanoico','ácido fórmico','acido formico'],
+   oldNames:['ácido fórmico','acido formico'],
+   hints:['Solo 1 carbono: el propio COOH','ácido + met + an + oico'],
+   expl:'1C → <b>ácido metanoico</b>. Nombre antiguo: <em>ácido fórmico</em>.', topic:'acidos'},
+
+  {type:'mc', mol:'acidoHexanoico', q:'¿Cuál es el nombre IUPAC de este ácido de 6 carbonos?',
+   ans:'ácido hexanoico', opts:['ácido hexanoico','ácido pentanoico','ácido heptanoico','ácido hexanodioico'],
+   expl:'6C con −COOH → <b>ácido hexanoico</b>.',
+   oldNames:['ácido caproico','acido caproico'],
+   parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+  {type:'write', mol:'acidoHexanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+   ans:'ácido hexanoico', accepted:['ácido hexanoico','acido hexanoico','ácido caproico','acido caproico'],
+   oldNames:['ácido caproico','acido caproico'],
+   hints:['6 carbonos incluyendo el COOH','ácido + hex + an + oico'],
+   expl:'6C con −COOH → <b>ácido hexanoico</b>. Nombre antiguo: <em>ácido caproico</em>.', topic:'acidos'},
 ];
 
 // ════════════════════════════════════════════════════════
@@ -2166,6 +2651,7 @@ const QBANK = [
 // ════════════════════════════════════════════════════════
 let questions=[], qIdx=0, score=0, timer=null, timeLeft=49;
 let answered=false;
+let molView='skel'; // 'skel' | 'form'
 let history=[];
 let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0}};
 let writeAttempts=0;
@@ -2241,10 +2727,31 @@ function startGame(){
   loadQuestion();
 }
 
+function setMolView(view){
+  molView=view;
+  const q=questions[qIdx];
+  const card=document.getElementById('mol-card-inner');
+  if(!card)return;
+  const sBtn=document.getElementById('vt-skel');
+  const fBtn=document.getElementById('vt-form');
+  if(sBtn)sBtn.classList.toggle('active',view==='skel');
+  if(fBtn)fBtn.classList.toggle('active',view==='form');
+  card.style.opacity='0';card.style.transform='scale(0.96)';
+  setTimeout(()=>{
+    if(view==='form'&&MOLDES[q.mol]){
+      card.innerHTML=`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`;
+    } else {
+      card.innerHTML=M[q.mol]?M[q.mol]():'';
+    }
+    card.style.opacity='1';card.style.transform='scale(1)';
+  },140);
+}
+
 function loadQuestion(){
   if(qIdx>=questions.length){showResults();return;}
   answered=false;
   writeAttempts=0;
+  molView='skel';
   const q=questions[qIdx];
   typeStats[q.type].tot++;
 
@@ -2260,9 +2767,16 @@ function loadQuestion(){
   const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre'};
   const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write'};
 
+  const hasFm=!!MOLDES[q.mol];
+  const toggleHtml=hasFm?`<div class="view-toggle">
+    <button class="vt-btn active" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
+    <button class="vt-btn" id="vt-form" onclick="setMolView('form')">⊡ Desarrollada</button>
+  </div>`:'';
+  const molInner=M[q.mol]?M[q.mol]():'';
+
   let html=`<div class="q-type-badge ${typeCls[q.type]}">${typeBadge[q.type]}</div>`;
   html+=`<div class="q-title">${q.q}</div>`;
-  html+=`<div class="mol-card">${M[q.mol]?M[q.mol]():''}</div>`;
+  html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
   if(q.type==='mc') html+=buildMC(q);
   else if(q.type==='drag') html+=buildDrag(q);
