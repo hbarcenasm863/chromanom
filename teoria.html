@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <title>NomOrg — Las 4 Partes</title>
 <style>
 :root{
   --c1:#0072B2;--c1b:#e6f2ff;
-  --c2:#E69F00;--c2b:#fff8e6;
-  --c3:#009E73;--c3b:#e6f7f2;
+  --c2:#166534;--c2b:#dcfce7;
+  --c3:#b45309;--c3b:#fef3c7;
   --c4:#CC79A7;--c4b:#fce8f4;
   /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
   --c1t:#0072B2;  /* azul ya pasa */
-  --c2t:#9A6E00;  /* naranja oscuro 4.6:1 */
-  --c3t:#007A5A;  /* verde oscuro 5.3:1 */
+  --c2t:#14532d;  /* verde oscuro */
+  --c3t:#92400e;  /* dorado oscuro */
   --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
@@ -50,10 +56,10 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .intro-card p{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.75;max-width:560px}
 .four-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .ft{padding:5px 13px;border-radius:100px;font-size:.72rem;font-weight:700;border:1.5px solid}
-.ft.r{color:#fca5a5;border-color:#fca5a5;background:rgba(231,76,60,.18)}
-.ft.c{color:#fcd34d;border-color:#fcd34d;background:rgba(230,126,34,.18)}
-.ft.i{color:#7dd3fc;border-color:#7dd3fc;background:rgba(30,136,229,.18)}
-.ft.g{color:#c4b5fd;border-color:#c4b5fd;background:rgba(142,68,173,.18)}
+.ft.r{color:#93c5fd;border-color:#93c5fd;background:rgba(0,114,178,.18)}
+.ft.c{color:#86efac;border-color:#86efac;background:rgba(22,101,52,.18)}
+.ft.i{color:#fcd34d;border-color:#fcd34d;background:rgba(180,83,9,.18)}
+.ft.g{color:#f9a8d4;border-color:#f9a8d4;background:rgba(204,121,167,.18)}
 
 /* 4 PARTS GRID */
 .parts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px}
@@ -95,10 +101,10 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .atom-text{transition:fill .4s,font-weight .4s}
 
 /* highlight classes applied to mol-area */
-.hl-r .br{stroke:var(--c1)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 4px rgba(231,76,60,.6))}
-.hl-c .bc{stroke:var(--c2)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(230,126,34,.55))}
-.hl-i .bi{stroke:var(--c3)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(30,136,229,.6))}
-.hl-g .bg{stroke:var(--c4)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(142,68,173,.55))}
+.hl-r .br{stroke:var(--c1)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 4px rgba(0,114,178,.65))}
+.hl-c .bc{stroke:var(--c2)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(22,101,52,.65))}
+.hl-i .bi{stroke:var(--c3)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(180,83,9,.65))}
+.hl-g .bg{stroke:var(--c4)!important;stroke-width:3.5!important;filter:drop-shadow(0 0 5px rgba(204,121,167,.65))}
 .hl-g .ag{stroke:var(--c4)!important;fill:var(--c4b)!important}
 .hl-g .tg{fill:var(--c4)!important;font-weight:900}
 .hl-r .ar{stroke:var(--c1)!important;fill:var(--c1b)!important}
@@ -303,6 +309,9 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   .site-nav a{padding:5px 8px;font-size:.72rem}
   .site-nav .nav-brand{font-size:.8rem}
 }
+.view-toggle-t{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
+.vt-btn-t{background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--dim);transition:all .15s}
+.vt-btn-t.active{background:var(--c1);border-color:var(--c1);color:#fff}
 
 </style>
 </head>
@@ -1706,6 +1715,109 @@ if(tb){T3.forEach((r,i)=>{
   <td style="padding:7px 12px;font-size:.76rem;color:var(--dimmer)">${r.ss}</td>`;
   tb.appendChild(tr);
 });}
+
+// ════════════════════════════════════════════════════════
+// FÓRMULA SEMIDESARROLLADA — también usada en ejemplos de teoría
+// ════════════════════════════════════════════════════════
+function mkDevSVG(ch){
+  if(!ch||!ch.length)return '';
+  const HU=72,VU=56;
+  function lbl(s,h){const y=s||'C';return h<=0?y:h===1?y+'H':h===2?y+'H₂':h===3?y+'H₃':y+'H₄';}
+  function aCol(s){return s==='O'?'#c8230a':s==='N'?'#0033aa':s==='Cl'?'#1a7a1a':s==='Br'?'#8b1a1a':s==='F'?'#3366aa':'#0d2d42';}
+  const nds=[],eds=[];
+  function addN(x,y,s,h){nds.push({x,y,lb:lbl(s,h),cl:aCol(s)});}
+  function addE(x1,y1,x2,y2,o){eds.push({x1,y1,x2,y2,o});}
+  const N=ch.length;
+  for(let i=0;i<N;i++){const ca=ch[i];addN((i+1)*HU,0,ca.s||'C',ca.h||0);}
+  for(let i=1;i<N;i++)addE(i*HU,0,(i+1)*HU,0,ch[i-1].bn||1);
+  function doSub(px,py,bArr,dir,fBn){
+    let cx=px,cy=py,bo=fBn;
+    for(const ba of bArr){
+      const ny=dir==='u'?cy-VU:cy+VU;
+      addN(cx,ny,ba.s||'C',ba.h||0);addE(cx,cy,cx,ny,bo);
+      cy=ny;bo=ba.bn||1;
+    }
+  }
+  for(let i=0;i<N;i++){const ca=ch[i],cx=(i+1)*HU;
+    if(ca.bu)doSub(cx,0,ca.bu,'u',ca.buBn||1);
+    if(ca.bd)doSub(cx,0,ca.bd,'d',ca.bdBn||1);
+  }
+  if(!nds.length)return '';
+  const P=28,minX=Math.min(...nds.map(n=>n.x)),maxX=Math.max(...nds.map(n=>n.x));
+  const minY=Math.min(...nds.map(n=>n.y)),maxY=Math.max(...nds.map(n=>n.y));
+  const ox=-minX+P+16,oy=-minY+P+8;
+  const W=maxX-minX+P*2+32,Hh=maxY-minY+P*2+16;
+  let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
+  const C='#1a2a3a';
+  const ln=(a,b,c,d)=>`<line x1="${a.toFixed(1)}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${C}" stroke-width="1.6" stroke-linecap="round"/>`;
+  for(const e of eds){
+    const n1=nds.find(n=>n.x===e.x1&&n.y===e.y1),n2=nds.find(n=>n.x===e.x2&&n.y===e.y2);
+    const ax1=e.x1+ox,ay1=e.y1+oy,ax2=e.x2+ox,ay2=e.y2+oy;
+    const dx=ax2-ax1,dy=ay2-ay1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
+    const ux=dx/len,uy=dy/len,isV=Math.abs(ux)<0.1;
+    const p1=n1?(isV?9:n1.lb.length*4+4):14,p2=n2?(isV?9:n2.lb.length*4+4):14;
+    const lx1=ax1+ux*p1,ly1=ay1+uy*p1,lx2=ax2-ux*p2,ly2=ay2-uy*p2;
+    const px=-uy*2.5,py=ux*2.5;
+    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2);
+    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+    else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+  }
+  for(const n of nds){
+    const x=n.x+ox,y=n.y+oy;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
+  }
+  sv+='</svg>';return sv;
+}
+
+// Descriptores para los 6 ejemplos de teoría
+const _TO0=[{s:'O',h:0}],_TO1=[{s:'O',h:1}];
+const TEORIA_MOLS={
+  // ácido 5-etilnon-6-enoico
+  m0:[{h:0,bn:1,bu:_TO0,buBn:2,bd:_TO1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bn:1,bu:[{h:2,bn:1},{h:3}]},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  // 2-metilpentano
+  m1:[{h:3,bn:1},{h:1,bn:1,bu:[{h:3}]},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // but-1-eno
+  m2:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  // pentan-2-ona
+  m3:[{h:3,bn:1},{h:0,bn:1,bu:_TO0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // 3-etil-2-metilpentan-1-ol
+  m4:[{h:2,bn:1,bu:_TO1},{h:1,bn:1,bd:[{h:3}]},{h:1,bn:1,bu:[{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:3}],
+  // 5-metilhex-3-en-2-ol
+  m5:[{h:3,bn:1},{h:1,bn:1,bu:_TO1},{h:1,bn:2},{h:1,bn:1},{h:1,bn:1,bu:[{h:3}]},{h:3}]
+};
+
+// Inyectar toggle en cada mol-area de los ejemplos
+const _tOrig={},_tSemi={};
+document.addEventListener('DOMContentLoaded',()=>{
+  Object.keys(TEORIA_MOLS).forEach(id=>{
+    const area=document.getElementById(id);
+    if(!area)return;
+    const origSVG=area.querySelector('svg');
+    if(!origSVG)return;
+    origSVG.classList.add('skel-view');
+    const semiDiv=document.createElement('div');
+    semiDiv.className='semi-view';
+    semiDiv.style.display='none';
+    semiDiv.innerHTML=mkDevSVG(TEORIA_MOLS[id]);
+    area.appendChild(semiDiv);
+    const bar=document.createElement('div');
+    bar.className='view-toggle-t';
+    bar.id='vtbar-'+id;
+    bar.innerHTML=`<button class="vt-btn-t active" onclick="tTeoria('${id}','skel')">⬡ Esqueletal</button><button class="vt-btn-t" onclick="tTeoria('${id}','form')">— Semidesarrollada</button>`;
+    area.parentNode.insertBefore(bar,area);
+  });
+});
+function tTeoria(id,view){
+  const area=document.getElementById(id);
+  const bar=document.getElementById('vtbar-'+id);
+  const btns=bar.querySelectorAll('button');
+  btns[0].classList.toggle('active',view==='skel');
+  btns[1].classList.toggle('active',view==='form');
+  const orig=area.querySelector('.skel-view');
+  const semi=area.querySelector('.semi-view');
+  if(orig)orig.style.display=view==='form'?'none':'';
+  if(semi)semi.style.display=view==='form'?'':'none';
+}
 </script>
 
 <!-- ── MODAL PRACTICAR ── -->

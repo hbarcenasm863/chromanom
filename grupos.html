@@ -11,14 +11,14 @@
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   /* 4-part color scheme */
   --c1:#0072B2;  /* sustituyentes */
-  --c2:#E69F00;  /* cadena */
-  --c3:#009E73;  /* insaturaciones */
+  --c2:#166534;  /* cadena - verde oscuro */
+  --c3:#b45309;  /* insaturaciones - dorado */
   --c4:#CC79A7;  /* grupo funcional */
-  --c1b:#e6f2ff;--c2b:#fff8e6;--c3b:#e6f7f2;--c4b:#fce8f4;
+  --c1b:#e6f2ff;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
   /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
   --c1t:#0072B2;  /* azul ya pasa */
-  --c2t:#9A6E00;  /* naranja oscuro 4.6:1 */
-  --c3t:#007A5A;  /* verde oscuro 5.3:1 */
+  --c2t:#14532d;  /* verde oscuro */
+  --c3t:#92400e;  /* dorado oscuro */
   --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
@@ -774,72 +774,51 @@ const GROUPS = [
 // FÓRMULA ESTRUCTURAL DESARROLLADA
 // ═══════════════════════════════════════════════════════════
 function mkDevSVG(ch){
-  const U=40,atoms=[],bonds=[],occ=new Set();
-  function pk(x,y){return Math.round(x)+','+Math.round(y);}
-  function addA(s,x,y){
-    const k=pk(x,y);
-    if(s==='H'&&occ.has(k))return -1;
-    occ.add(k);atoms.push({s,x,y});return atoms.length-1;
-  }
-  function addB(i,j,o=1){if(i>=0&&j>=0)bonds.push({i,j,o});}
-  function addH(pi,x,y){const hi=addA('H',x,y);if(hi>=0)addB(pi,hi);}
-  function plBr(pi,bArr,sx,sy,dir,fBn){
-    let px=sx,py=sy,pii=pi;
-    for(let k=0;k<bArr.length;k++){
-      const ba=bArr[k];const ny=py+(dir==='u'?-U:U);
-      const bi=addA(ba.s||'C',px,ny);
-      if(bi>=0)addB(pii,bi,k===0?fBn:(ba.bn||1));
-      let bh=ba.h||0;const isLa=k===bArr.length-1;
-      if(bi>=0){
-        if(isLa&&bh>0){addH(bi,px,ny+(dir==='u'?-U:U));bh--;}
-        if(bh>0){addH(bi,px-U,ny);bh--;}
-        if(bh>0){addH(bi,px+U,ny);bh--;}
-      }
-      pii=bi>=0?bi:pii;py=ny;
+  if(!ch||!ch.length)return '';
+  const HU=72,VU=56;
+  function lbl(s,h){const y=s||'C';return h<=0?y:h===1?y+'H':h===2?y+'H₂':h===3?y+'H₃':y+'H₄';}
+  function aCol(s){return s==='O'?'#c8230a':s==='N'?'#0033aa':s==='Cl'?'#1a7a1a':s==='Br'?'#8b1a1a':s==='F'?'#3366aa':'#0d2d42';}
+  const nds=[],eds=[];
+  function addN(x,y,s,h){nds.push({x,y,lb:lbl(s,h),cl:aCol(s)});}
+  function addE(x1,y1,x2,y2,o){eds.push({x1,y1,x2,y2,o});}
+  const N=ch.length;
+  for(let i=0;i<N;i++){const ca=ch[i];addN((i+1)*HU,0,ca.s||'C',ca.h||0);}
+  for(let i=1;i<N;i++)addE(i*HU,0,(i+1)*HU,0,ch[i-1].bn||1);
+  function doSub(px,py,bArr,dir,fBn){
+    let cx=px,cy=py,bo=fBn;
+    for(const ba of bArr){
+      const ny=dir==='u'?cy-VU:cy+VU;
+      addN(cx,ny,ba.s||'C',ba.h||0);addE(cx,cy,cx,ny,bo);
+      cy=ny;bo=ba.bn||1;
     }
   }
-  const ci=[];
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i];
-    ci.push(addA(ca.s||'C',(i+1)*U,U));
-    if(i>0)addB(ci[i-1],ci[i],ch[i-1].bn||1);
+  for(let i=0;i<N;i++){const ca=ch[i],cx=(i+1)*HU;
+    if(ca.bu)doSub(cx,0,ca.bu,'u',ca.buBn||1);
+    if(ca.bd)doSub(cx,0,ca.bd,'d',ca.bdBn||1);
   }
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
-    let h=ca.h;const isF=i===0,isLa=i===ch.length-1;
-    if(isF&&h>0){addH(idx,x-U,y);h--;}
-    if(isLa&&h>0){addH(idx,x+U,y);h--;}
-    if(!ca.bu&&h>0){addH(idx,x,y-U);h--;}
-    if(!ca.bd&&h>0){addH(idx,x,y+U);h--;}
-  }
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
-    if(ca.bu)plBr(idx,ca.bu,x,y,'u',ca.buBn||1);
-    if(ca.bd)plBr(idx,ca.bd,x,y,'d',ca.bdBn||1);
-  }
-  if(!atoms.length)return '';
-  const xs=atoms.map(a=>a.x),ys=atoms.map(a=>a.y);
-  const P=16,ox=-Math.min(...xs)+P,oy=-Math.min(...ys)+P;
-  const W=Math.max(...xs)-Math.min(...xs)+P*2,Hh=Math.max(...ys)-Math.min(...ys)+P*2;
+  if(!nds.length)return '';
+  const P=28,minX=Math.min(...nds.map(n=>n.x)),maxX=Math.max(...nds.map(n=>n.x));
+  const minY=Math.min(...nds.map(n=>n.y)),maxY=Math.max(...nds.map(n=>n.y));
+  const ox=-minX+P+16,oy=-minY+P+8;
+  const W=maxX-minX+P*2+32,Hh=maxY-minY+P*2+16;
   let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
-  const SH=10,SHH=8;
-  for(const b of bonds){
-    const a1=atoms[b.i],a2=atoms[b.j];if(!a1||!a2)continue;
-    const x1=a1.x+ox,y1=a1.y+oy,x2=a2.x+ox,y2=a2.y+oy;
-    const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
-    const ux=dx/len,uy=dy/len,s1=a1.s==='H'?SHH:SH,s2=a2.s==='H'?SHH:SH;
-    const lx1=x1+ux*s1,ly1=y1+uy*s1,lx2=x2-ux*s2,ly2=y2-uy*s2;
-    const px=-uy*3,py=ux*3,c='#1a2a3a';
-    const ln=(ax1,ay1,ax2,ay2)=>`<line x1="${ax1.toFixed(1)}" y1="${ay1.toFixed(1)}" x2="${ax2.toFixed(1)}" y2="${ay2.toFixed(1)}" stroke="${c}" stroke-width="1.5" stroke-linecap="round"/>`;
-    if(b.o===1)sv+=ln(lx1,ly1,lx2,ly2);
-    else if(b.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+  const C='#1a2a3a';
+  const ln=(a,b,c,d)=>`<line x1="${a.toFixed(1)}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${C}" stroke-width="1.6" stroke-linecap="round"/>`;
+  for(const e of eds){
+    const n1=nds.find(n=>n.x===e.x1&&n.y===e.y1),n2=nds.find(n=>n.x===e.x2&&n.y===e.y2);
+    const ax1=e.x1+ox,ay1=e.y1+oy,ax2=e.x2+ox,ay2=e.y2+oy;
+    const dx=ax2-ax1,dy=ay2-ay1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
+    const ux=dx/len,uy=dy/len,isV=Math.abs(ux)<0.1;
+    const p1=n1?(isV?9:n1.lb.length*4+4):14,p2=n2?(isV?9:n2.lb.length*4+4):14;
+    const lx1=ax1+ux*p1,ly1=ay1+uy*p1,lx2=ax2-ux*p2,ly2=ay2-uy*p2;
+    const px=-uy*2.5,py=ux*2.5;
+    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2);
+    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
     else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
   }
-  for(const a of atoms){
-    const px=a.x+ox,py=a.y+oy,isH=a.s==='H';
-    const fill=a.s==='C'?'#0d2d42':a.s==='H'?'#556677':a.s==='O'?'#c8230a':a.s==='N'?'#0033aa':'#333';
-    sv+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${isH?7:9}" fill="white"/>`;
-    sv+=`<text x="${px.toFixed(1)}" y="${py.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="${isH?10:13}" font-weight="${isH?'400':'700'}" fill="${fill}">${a.s}</text>`;
+  for(const n of nds){
+    const x=n.x+ox,y=n.y+oy;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
   }
   sv+='</svg>';return sv;
 }
@@ -981,7 +960,7 @@ let exMolView = 'skel';
 let currentGroup = GROUPS[0].id;
 let exState = {}; // per-group exercise state
 
-function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0})}
+function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,tries:0,score:0,ok:0,err:0,tot:0})}
 
 // ═══════════════════════════════════════════════════════════
 // DROPDOWN
@@ -1275,14 +1254,14 @@ function renderExercise(gid){
   const ex = g.exercises[st.idx];
   st.answered = false;
   st.hints = 0;
-  exMolView = 'skel';
   const pct = g.exercises.length > 0 ? st.idx / g.exercises.length * 100 : 0;
   const hasDev = !!(ex.svgKey && MOLDES_G[ex.svgKey]);
+  exMolView = hasDev ? 'form' : 'skel';
   const toggleHtml = hasDev ? `<div class="view-toggle">
-    <button class="vt-btn active" id="ex-vt-skel" onclick="setExMolView('skel')">⬡ Esqueletal</button>
-    <button class="vt-btn" id="ex-vt-form" onclick="setExMolView('form')">⊡ Desarrollada</button>
+    <button class="vt-btn" id="ex-vt-skel" onclick="setExMolView('skel')">⬡ Esqueletal</button>
+    <button class="vt-btn active" id="ex-vt-form" onclick="setExMolView('form')">— Semidesarrollada</button>
   </div>` : '';
-  const molInner = ex.svgKey && MOLS[ex.svgKey] ? MOLS[ex.svgKey]() : `<span style="font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--tx)">${ex.mol}</span>`;
+  const molInner = hasDev ? mkDevSVG(MOLDES_G[ex.svgKey]) : (ex.svgKey && MOLS[ex.svgKey] ? MOLS[ex.svgKey]() : `<span style="font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--tx)">${ex.mol}</span>`);
 
   card.innerHTML = `
     <div class="sec-lbl">Ejercicios — ${g.name}</div>
@@ -1341,18 +1320,29 @@ function checkEx(gid){
   document.getElementById('etot-'+gid).textContent=st.tot;
   const fb=document.getElementById('afb-'+gid);
   fb.classList.add('show');
+  const MAX_TRIES=3;
   if(correct){
     inp.classList.add('ok');
-    st.ok++; const pts=Math.max(10-st.hints*2,4); st.score+=pts;
+    st.ok++; const pts=Math.max(10-st.hints*2-st.tries*2,2); st.score+=pts;
     document.getElementById('eok-'+gid).textContent=st.ok;
     document.getElementById('ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
     fb.classList.add('ok');
     fb.innerHTML=`<div class="fb-head ok">✓ ¡Correcto! +${pts} pts</div><div class="fb-body">${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
   } else {
-    inp.classList.add('err'); st.err++;
+    st.tries++; st.err++;
     document.getElementById('eerr-'+gid).textContent=st.err;
-    fb.classList.add('fail');
-    fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
+    if(st.tries<MAX_TRIES){
+      st.answered=false;
+      inp.classList.add('err');
+      inp.disabled=false;
+      document.getElementById('abtn-'+gid).disabled=false;
+      fb.classList.add('fail');
+      fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto (intento ${st.tries}/${MAX_TRIES}) — <strong>${val}</strong></div><div class="fb-body">Inténtalo de nuevo o usa una pista.</div>`;
+      setTimeout(()=>{inp.classList.remove('err');inp.value='';inp.focus();},800);
+    } else {
+      fb.classList.add('fail');
+      fb.innerHTML=`<div class="fb-head fail">✗ Sin más intentos — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
+    }
   }
 }
 
@@ -1386,12 +1376,12 @@ function revealEx(gid){
 }
 
 function nextEx(gid){
-  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0;
+  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0; st.tries=0;
   renderExercise(gid);
 }
 
 function restartEx(gid){
-  exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0};
+  exState[gid]={idx:0,hints:0,answered:false,tries:0,score:0,ok:0,err:0,tot:0};
   renderExercise(gid);
 }
 

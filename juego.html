@@ -14,13 +14,13 @@
 :root{
   /* Paleta Wong — daltonismo-segura, consistente con index/teoria/grupos */
   --c1:#0072B2;--c1b:#e6f2ff;--c1m:rgba(0,114,178,.12);   /* sustituyentes - azul */
-  --c2:#E69F00;--c2b:#fff8e6;--c2m:rgba(230,159,0,.12);    /* cadena - naranja */
-  --c3:#009E73;--c3b:#e6f7f2;--c3m:rgba(0,158,115,.12);    /* insaturaciones - verde */
+  --c2:#166534;--c2b:#dcfce7;--c2m:rgba(22,101,52,.12);     /* cadena - verde oscuro */
+  --c3:#b45309;--c3b:#fef3c7;--c3m:rgba(180,83,9,.12);     /* insaturaciones - dorado */
   --c4:#CC79A7;--c4b:#fce8f4;--c4m:rgba(204,121,167,.12);  /* grupo funcional - magenta */
   /* Versiones oscurecidas para texto (pasan WCAG AA 4.5:1 sobre blanco) */
   --c1t:#0072B2;  /* azul ya pasa */
-  --c2t:#9A6E00;  /* naranja oscuro */
-  --c3t:#007A5A;  /* verde oscuro */
+  --c2t:#14532d;  /* verde oscuro texto */
+  --c3t:#92400e;  /* dorado oscuro texto */
   --c4t:#A0527F;  /* magenta oscuro */
   --ok:#16a34a;--okb:#dcfce7;
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
@@ -46,8 +46,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 #s-portada{
   background:linear-gradient(145deg,#0d2d42 0%,#0d4a73 50%,#0a3d5e 100%);
   align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-  min-height:600px;padding:40px 0;
+  position:relative;overflow-x:hidden;
 }
 #s-portada::before{
   content:'';position:absolute;inset:0;
@@ -436,6 +435,25 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .write-hint{font-size:.78rem;color:var(--c2);background:var(--c2b);border:1px solid var(--c2);border-radius:var(--rs);padding:6px 12px;margin-bottom:8px;display:none;}
 .write-attempts{font-size:.7rem;color:var(--dimmer);margin-bottom:4px;}
 
+.qt-build{background:#fce8f4;color:#a0527f}
+.build-wrap{display:flex;flex-direction:column;gap:0}
+.build-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;background:var(--surf);border:1.5px solid var(--brd);border-bottom:none;border-radius:var(--r) var(--r) 0 0;align-items:center}
+.bld-btn{height:30px;min-width:30px;padding:0 7px;border:1.5px solid var(--brd);border-radius:7px;background:var(--surf);color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .13s}
+.bld-btn:hover{border-color:var(--c1);color:var(--c1);background:var(--c1b)}
+.bld-btn.active{background:var(--tx);color:#fff;border-color:var(--tx)}
+.bld-btn.bE{color:#c8230a}.bld-btn.bN{color:#0033aa}.bld-btn.bCl{color:#1a7a1a;font-size:.65rem}.bld-btn.bBr{color:#8b1a1a;font-size:.65rem}.bld-btn.bF{color:#3366aa}
+.bld-btn.erase-btn{color:#c0392b}.bld-btn.erase-btn.active{background:#c0392b;border-color:#c0392b;color:#fff}
+.bld-sep{width:1px;height:20px;background:var(--brd);margin:0 2px}
+.build-canvas{width:100%;height:260px;display:block;background:#fafaf8;border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r);cursor:crosshair}
+.nivel-card.ct{border-left:3px solid #f97316}
+.drill-section{width:100%;margin-bottom:14px}
+.drill-summary{list-style:none;color:rgba(255,255,255,.75);font-size:.78rem;font-weight:700;cursor:pointer;padding:6px 12px;border:1.5px solid rgba(255,255,255,.2);border-radius:20px;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;user-select:none}
+.drill-section[open] .drill-summary{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.drill-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center}
+.drill-pill{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-radius:100px;color:rgba(255,255,255,.85);font-size:.72rem;font-weight:700;padding:5px 13px;cursor:pointer;transition:all .18s}
+.drill-pill:hover{background:rgba(255,255,255,.16);border-color:rgba(252,211,77,.6);color:#fcd34d}
+.rb-type.build{background:#fff2e8;color:#f97316}
+
 </style>
 </head>
 <body>
@@ -490,7 +508,27 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
         <div class="nivel-icon">⭐</div>
         <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">227 preguntas · 20 por sesión</div></div>
       </button>
+      <button class="nivel-card ct" onclick="openLevelModal('constructor')">
+        <div class="nivel-icon">🏗️</div>
+        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">50 moléculas · 20 por sesión</div></div>
+      </button>
     </div>
+    <details class="drill-section">
+      <summary class="drill-summary">🎯 Practicar por grupo funcional ▾</summary>
+      <div class="drill-pills">
+        <button class="drill-pill" onclick="openLevelModal('alcanos')">Alcanos</button>
+        <button class="drill-pill" onclick="openLevelModal('alquenos')">Alquenos</button>
+        <button class="drill-pill" onclick="openLevelModal('alquinos')">Alquinos</button>
+        <button class="drill-pill" onclick="openLevelModal('alcoholes')">Alcoholes</button>
+        <button class="drill-pill" onclick="openLevelModal('cetonas')">Cetonas</button>
+        <button class="drill-pill" onclick="openLevelModal('aldehidos')">Aldehídos</button>
+        <button class="drill-pill" onclick="openLevelModal('acidos')">Ácidos Carboxílicos</button>
+        <button class="drill-pill" onclick="openLevelModal('esteres')">Ésteres</button>
+        <button class="drill-pill" onclick="openLevelModal('eteres')">Éteres</button>
+        <button class="drill-pill" onclick="openLevelModal('amidas')">Amidas</button>
+        <button class="drill-pill" onclick="openLevelModal('nitrilos')">Nitrilos</button>
+      </div>
+    </details>
     <div class="portada-stats">
       <div class="ps"><div class="ps-n" id="stat-banco">227</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">45s</div><div class="ps-l">Por pregunta</div></div>
@@ -512,6 +550,33 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     <input class="modal-input" id="modal-curso" type="text" placeholder="Ej: 10A, 11B, 10-02…" autocomplete="off"
       onkeydown="if(event.key==='Enter')confirmStartGame()">
     <button class="btn-modal-start" onclick="confirmStartGame()">▶ Comenzar</button>
+  </div>
+</div>
+
+<!-- MODAL: consentimiento modo libre -->
+<div id="modal-consent" class="modal-overlay">
+  <div class="modal-box" style="max-width:360px">
+    <div style="font-size:1.6rem;margin-bottom:8px">🌐</div>
+    <div class="modal-title" style="font-size:1rem">Modo libre (anónimo)</div>
+    <p style="font-size:.8rem;color:var(--dim);line-height:1.7;margin-bottom:16px;text-align:left">
+      Al usar este modo, aceptas que la aplicación registre información sobre tu actividad para mejorar la herramienta.
+    </p>
+    <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px;text-align:left">
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
+        <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
+        <span>No se recopilan datos personales.</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
+        <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
+        <span>Se guardan únicamente resultados de los ejercicios (respuestas, aciertos, errores, tiempo).</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
+        <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
+        <span>Los datos se usan con fines educativos y de mejora de la aplicación.</span>
+      </div>
+    </div>
+    <button class="btn-modal-start" onclick="acceptConsent()">Aceptar y continuar</button>
+    <button onclick="closeConsent()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid var(--brd);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:var(--dim)">Cancelar</button>
   </div>
 </div>
 
@@ -569,8 +634,6 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     </div>
     <div class="history-list" id="history-list"></div>
     <div style="margin-top:20px">
-      <button id="btn-sheets" class="btn-sheets" onclick="sendToSheets()">📊 Enviar resultados a Google Sheets</button>
-      <div id="sheets-status" class="sheets-status"></div>
       <button class="btn-replay" onclick="openLevelModal(currentLevel)" style="margin-top:8px">🔄 Jugar de nuevo</button>
       <button class="btn-home" onclick="showScreen('s-portada')">← Volver al inicio</button>
     </div>
@@ -873,76 +936,55 @@ const M = {
 
 // ════════════════════════════════════════════════════════
 // ════════════════════════════════════════════════════════
-// FÓRMULA ESTRUCTURAL DESARROLLADA (SVG con todos los átomos)
+// FÓRMULA SEMIDESARROLLADA (grupos como CH₃, CH₂, con líneas de enlace)
 // Solo moléculas no cíclicas y no aromáticas
 // ════════════════════════════════════════════════════════
 function mkDevSVG(ch){
-  const U=40,atoms=[],bonds=[],occ=new Set();
-  function pk(x,y){return Math.round(x)+','+Math.round(y);}
-  function addA(s,x,y){
-    const k=pk(x,y);
-    if(s==='H'&&occ.has(k))return -1;
-    occ.add(k);atoms.push({s,x,y});return atoms.length-1;
-  }
-  function addB(i,j,o=1){if(i>=0&&j>=0)bonds.push({i,j,o});}
-  function addH(pi,x,y){const hi=addA('H',x,y);if(hi>=0)addB(pi,hi);}
-  function plBr(pi,bArr,sx,sy,dir,fBn){
-    let px=sx,py=sy,pii=pi;
-    for(let k=0;k<bArr.length;k++){
-      const ba=bArr[k];const ny=py+(dir==='u'?-U:U);
-      const bi=addA(ba.s||'C',px,ny);
-      if(bi>=0)addB(pii,bi,k===0?fBn:(ba.bn||1));
-      let bh=ba.h||0;const isLa=k===bArr.length-1;
-      if(bi>=0){
-        if(isLa&&bh>0){addH(bi,px,ny+(dir==='u'?-U:U));bh--;}
-        if(bh>0){addH(bi,px-U,ny);bh--;}
-        if(bh>0){addH(bi,px+U,ny);bh--;}
-      }
-      pii=bi>=0?bi:pii;py=ny;
+  if(!ch||!ch.length)return '';
+  const HU=72,VU=56;
+  function lbl(s,h){const y=s||'C';return h<=0?y:h===1?y+'H':h===2?y+'H₂':h===3?y+'H₃':y+'H₄';}
+  function aCol(s){return s==='O'?'#c8230a':s==='N'?'#0033aa':s==='Cl'?'#1a7a1a':s==='Br'?'#8b1a1a':s==='F'?'#3366aa':'#0d2d42';}
+  const nds=[],eds=[];
+  function addN(x,y,s,h){nds.push({x,y,lb:lbl(s,h),cl:aCol(s)});}
+  function addE(x1,y1,x2,y2,o){eds.push({x1,y1,x2,y2,o});}
+  const N=ch.length;
+  for(let i=0;i<N;i++){const ca=ch[i];addN((i+1)*HU,0,ca.s||'C',ca.h||0);}
+  for(let i=1;i<N;i++)addE(i*HU,0,(i+1)*HU,0,ch[i-1].bn||1);
+  function doSub(px,py,bArr,dir,fBn){
+    let cx=px,cy=py,bo=fBn;
+    for(const ba of bArr){
+      const ny=dir==='u'?cy-VU:cy+VU;
+      addN(cx,ny,ba.s||'C',ba.h||0);addE(cx,cy,cx,ny,bo);
+      cy=ny;bo=ba.bn||1;
     }
   }
-  const ci=[];
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i];
-    ci.push(addA(ca.s||'C',(i+1)*U,U));
-    if(i>0)addB(ci[i-1],ci[i],ch[i-1].bn||1);
+  for(let i=0;i<N;i++){const ca=ch[i],cx=(i+1)*HU;
+    if(ca.bu)doSub(cx,0,ca.bu,'u',ca.buBn||1);
+    if(ca.bd)doSub(cx,0,ca.bd,'d',ca.bdBn||1);
   }
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
-    let h=ca.h;const isF=i===0,isLa=i===ch.length-1;
-    if(isF&&h>0){addH(idx,x-U,y);h--;}
-    if(isLa&&h>0){addH(idx,x+U,y);h--;}
-    if(!ca.bu&&h>0){addH(idx,x,y-U);h--;}
-    if(!ca.bd&&h>0){addH(idx,x,y+U);h--;}
-  }
-  for(let i=0;i<ch.length;i++){
-    const ca=ch[i],idx=ci[i],x=(i+1)*U,y=U;
-    if(ca.bu)plBr(idx,ca.bu,x,y,'u',ca.buBn||1);
-    if(ca.bd)plBr(idx,ca.bd,x,y,'d',ca.bdBn||1);
-  }
-  if(!atoms.length)return '';
-  const xs=atoms.map(a=>a.x),ys=atoms.map(a=>a.y);
-  const P=16,ox=-Math.min(...xs)+P,oy=-Math.min(...ys)+P;
-  const W=Math.max(...xs)-Math.min(...xs)+P*2,Hh=Math.max(...ys)-Math.min(...ys)+P*2;
+  if(!nds.length)return '';
+  const P=28,minX=Math.min(...nds.map(n=>n.x)),maxX=Math.max(...nds.map(n=>n.x));
+  const minY=Math.min(...nds.map(n=>n.y)),maxY=Math.max(...nds.map(n=>n.y));
+  const ox=-minX+P+16,oy=-minY+P+8;
+  const W=maxX-minX+P*2+32,Hh=maxY-minY+P*2+16;
   let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
-  const SH=10,SHH=8;
-  for(const b of bonds){
-    const a1=atoms[b.i],a2=atoms[b.j];if(!a1||!a2)continue;
-    const x1=a1.x+ox,y1=a1.y+oy,x2=a2.x+ox,y2=a2.y+oy;
-    const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
-    const ux=dx/len,uy=dy/len,s1=a1.s==='H'?SHH:SH,s2=a2.s==='H'?SHH:SH;
-    const lx1=x1+ux*s1,ly1=y1+uy*s1,lx2=x2-ux*s2,ly2=y2-uy*s2;
-    const px=-uy*3,py=ux*3,c='#1a2a3a';
-    const ln=(ax1,ay1,ax2,ay2)=>`<line x1="${ax1.toFixed(1)}" y1="${ay1.toFixed(1)}" x2="${ax2.toFixed(1)}" y2="${ay2.toFixed(1)}" stroke="${c}" stroke-width="1.5" stroke-linecap="round"/>`;
-    if(b.o===1)sv+=ln(lx1,ly1,lx2,ly2);
-    else if(b.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+  const C='#1a2a3a';
+  const ln=(a,b,c,d)=>`<line x1="${a.toFixed(1)}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${C}" stroke-width="1.6" stroke-linecap="round"/>`;
+  for(const e of eds){
+    const n1=nds.find(n=>n.x===e.x1&&n.y===e.y1),n2=nds.find(n=>n.x===e.x2&&n.y===e.y2);
+    const ax1=e.x1+ox,ay1=e.y1+oy,ax2=e.x2+ox,ay2=e.y2+oy;
+    const dx=ax2-ax1,dy=ay2-ay1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
+    const ux=dx/len,uy=dy/len,isV=Math.abs(ux)<0.1;
+    const p1=n1?(isV?9:n1.lb.length*4+4):14,p2=n2?(isV?9:n2.lb.length*4+4):14;
+    const lx1=ax1+ux*p1,ly1=ay1+uy*p1,lx2=ax2-ux*p2,ly2=ay2-uy*p2;
+    const px=-uy*2.5,py=ux*2.5;
+    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2);
+    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
     else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
   }
-  for(const a of atoms){
-    const px=a.x+ox,py=a.y+oy,isH=a.s==='H';
-    const fill=a.s==='C'?'#0d2d42':a.s==='H'?'#556677':a.s==='O'?'#c8230a':a.s==='N'?'#0033aa':'#333';
-    sv+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${isH?7:9}" fill="white"/>`;
-    sv+=`<text x="${px.toFixed(1)}" y="${py.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="${isH?10:13}" font-weight="${isH?'400':'700'}" fill="${fill}">${a.s}</text>`;
+  for(const n of nds){
+    const x=n.x+ox,y=n.y+oy;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
   }
   sv+='</svg>';return sv;
 }
@@ -2653,7 +2695,7 @@ let questions=[], qIdx=0, score=0, timer=null, timeLeft=49;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
 let history=[];
-let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0}};
+let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
 let studentName='', studentCourse='';
@@ -2662,13 +2704,38 @@ const NIVEL_TOPICS={
   hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
   oxigenados:   ['alcoholes','cetonas','aldehidos','acidos','esteres','eteres'],
   nitrogenados: ['amidas','nitrilos'],
-  completo:     null
+  completo:     null,
+  constructor:  ['constructor'],
+  // Por grupo funcional individual
+  alcanos:    ['alcanos'],
+  alquenos:   ['alquenos'],
+  alquinos:   ['alquinos'],
+  alcoholes:  ['alcoholes'],
+  cetonas:    ['cetonas'],
+  aldehidos:  ['aldehidos'],
+  acidos:     ['acidos'],
+  esteres:    ['esteres'],
+  eteres:     ['eteres'],
+  amidas:     ['amidas'],
+  nitrilos:   ['nitrilos'],
 };
 const NIVEL_LABELS={
   hidrocarburos:'Hidrocarburos',
   oxigenados:   'Compuestos Oxigenados',
   nitrogenados: 'Compuestos Nitrogenados',
-  completo:     'Juego Completo'
+  completo:     'Juego Completo',
+  constructor:  '🏗️ Constructor Molecular',
+  alcanos:   'Alcanos',
+  alquenos:  'Alquenos',
+  alquinos:  'Alquinos',
+  alcoholes: 'Alcoholes',
+  cetonas:   'Cetonas',
+  aldehidos: 'Aldehídos',
+  acidos:    'Ácidos Carboxílicos',
+  esteres:   'Ésteres',
+  eteres:    'Éteres',
+  amidas:    'Amidas',
+  nitrilos:  'Nitrilos',
 };
 
 const CIRCUMFERENCE=138.2;
@@ -2683,6 +2750,8 @@ function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
 
 // ── Modo de acceso ──────────────────────────────────────
 let freeMode = false;
+let freeConsent = false;
+
 function setModo(modo){
   freeMode = (modo==='libre');
   document.getElementById('btn-modo-colegio').className='modo-btn'+(freeMode?'':' active-colegio');
@@ -2694,7 +2763,12 @@ function openLevelModal(nivel){
   currentLevel=nivel;
   if(freeMode){
     studentName=''; studentCourse='';
-    startGame(); return;
+    if(!freeConsent){
+      document.getElementById('modal-consent').classList.add('open');
+    } else {
+      startGame();
+    }
+    return;
   }
   document.getElementById('modal-level-tag').textContent=NIVEL_LABELS[nivel]||nivel;
   document.getElementById('modal-nombre').value=studentName;
@@ -2704,6 +2778,14 @@ function openLevelModal(nivel){
 }
 function closeModal(){
   document.getElementById('modal-estudiante').classList.remove('open');
+}
+function acceptConsent(){
+  freeConsent=true;
+  document.getElementById('modal-consent').classList.remove('open');
+  startGame();
+}
+function closeConsent(){
+  document.getElementById('modal-consent').classList.remove('open');
 }
 function confirmStartGame(){
   const n=document.getElementById('modal-nombre').value.trim();
@@ -2720,7 +2802,7 @@ function startGame(){
   const n=Math.min(pool.length,20);
   questions=shuffle(pool).slice(0,n);
   qIdx=0; score=0; history=[];
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
   writeAttempts=0;
   _analyticsSent=false;
   showScreen('s-game');
@@ -2751,7 +2833,6 @@ function loadQuestion(){
   if(qIdx>=questions.length){showResults();return;}
   answered=false;
   writeAttempts=0;
-  molView='skel';
   const q=questions[qIdx];
   typeStats[q.type].tot++;
 
@@ -2764,24 +2845,27 @@ function loadQuestion(){
   const area=document.getElementById('q-area');
   area.innerHTML='';
 
-  const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre'};
-  const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write'};
+  const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura'};
+  const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build'};
 
-  const hasFm=!!MOLDES[q.mol];
+  const isBuild=q.type==='build';
+  const hasFm=!isBuild&&!!MOLDES[q.mol];
+  molView=hasFm?'form':'skel';
   const toggleHtml=hasFm?`<div class="view-toggle">
-    <button class="vt-btn active" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
-    <button class="vt-btn" id="vt-form" onclick="setMolView('form')">⊡ Desarrollada</button>
+    <button class="vt-btn" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
+    <button class="vt-btn active" id="vt-form" onclick="setMolView('form')">— Semidesarrollada</button>
   </div>`:'';
-  const molInner=M[q.mol]?M[q.mol]():'';
+  const molInner=hasFm?`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`:(M[q.mol]?M[q.mol]():'');
 
   let html=`<div class="q-type-badge ${typeCls[q.type]}">${typeBadge[q.type]}</div>`;
   html+=`<div class="q-title">${q.q}</div>`;
-  html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
+  if(!isBuild) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
   if(q.type==='mc') html+=buildMC(q);
   else if(q.type==='drag') html+=buildDrag(q);
   else if(q.type==='id') html+=buildID(q);
   else if(q.type==='write') html+=buildWrite(q);
+  else if(q.type==='build') html+=buildBuild(q);
 
   html+=`<div class="feedback" id="feedback"></div>`;
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
@@ -2792,6 +2876,10 @@ function loadQuestion(){
   if(q.type==='write'){
     const inp=document.getElementById('write-inp');
     inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkWrite();});
+  }
+  if(isBuild){
+    bldAtoms=[];bldBonds=[];bldBondSrc=null;bldNid=0;bldNbid=0;bldHist=[];bldAttempts=0;bldRingCircles=[];
+    bldSetTool('C');bldRender();
   }
 
   startTimer();
@@ -2965,10 +3053,10 @@ function buildID(q){
   <div style="font-size:.8rem;color:var(--dim);margin-bottom:8px">¿A qué parte corresponde el fragmento enmarcado?</div>
   ${hint}
   <div class="id-options">
-    <button class="id-btn r" onclick="checkID('r',this)">🔴 Ramificación</button>
-    <button class="id-btn c" onclick="checkID('c',this)">🟠 Cadena principal</button>
-    <button class="id-btn i" onclick="checkID('i',this)">🔵 Insaturación</button>
-    <button class="id-btn g" onclick="checkID('g',this)">🟣 Grupo funcional</button>
+    <button class="id-btn r" onclick="checkID('r',this)">🔵 Ramificación</button>
+    <button class="id-btn c" onclick="checkID('c',this)">🟢 Cadena principal</button>
+    <button class="id-btn i" onclick="checkID('i',this)">🟡 Insaturación</button>
+    <button class="id-btn g" onclick="checkID('g',this)">🩷 Grupo funcional</button>
   </div>`;
 }
 
@@ -3152,10 +3240,393 @@ function showFeedback(ok,expl,ans,pts,given){
   // Show name breakdown if available
   const q=questions[qIdx];
   if(q.parts){
-    const bdHtml=q.parts.map(p=>`<span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin:2px"><span style="font-family:var(--mono);font-size:.85rem;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--${p.cls}b);color:var(--${p.cls})">${p.t}</span><span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--${p.cls})">${p.l}</span></span>`).join('');
+    const _clsV={r:'c1',c:'c2',i:'c3',g:'c4'};
+    const bdHtml=q.parts.map(p=>{const cv=_clsV[p.cls]||'c4';return `<span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin:2px"><span style="font-family:var(--mono);font-size:.85rem;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--${cv}b);color:var(--${cv}t)">${p.t}</span><span style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--${cv}t)">${p.l}</span></span>`;}).join('');
     fb.innerHTML+=`<div style="display:flex;flex-wrap:wrap;gap:2px;margin-top:8px;align-items:flex-end">${bdHtml}</div>`;
   }
 }
+
+// ════════════════════════════════════════════════════════
+// BUILD TYPE — Constructor Molecular
+// ════════════════════════════════════════════════════════
+
+// Convert MOLDES descriptor to heavy-atom graph {atoms:[{id,el}], bonds:[{f,t,o}]}
+function moldesGraph(ch){
+  let nid=0;
+  const atoms=[],bonds=[];
+  function addA(s){const id=nid++;atoms.push({id,el:s||'C'});return id;}
+  function addB(f,t,o){bonds.push({f,t,o:o||1});}
+  const chainIds=ch.map(ca=>addA(ca.s));
+  for(let i=1;i<ch.length;i++)addB(chainIds[i-1],chainIds[i],ch[i-1].bn||1);
+  function subs(pid,arr,bo){
+    let prev=pid,b=bo;
+    for(const sa of arr){
+      const sid=addA(sa.s);addB(prev,sid,b);
+      prev=sid;b=sa.bn||1;
+      if(sa.bu)subs(sid,sa.bu,sa.buBn||1);
+      if(sa.bd)subs(sid,sa.bd,sa.bdBn||1);
+    }
+  }
+  for(let i=0;i<ch.length;i++){
+    const ca=ch[i];
+    if(ca.bu)subs(chainIds[i],ca.bu,ca.buBn||1);
+    if(ca.bd)subs(chainIds[i],ca.bd,ca.bdBn||1);
+  }
+  return{atoms,bonds};
+}
+
+// Graph isomorphism (backtracking) — compares heavy-atom graphs
+function checkIso(G1,G2){
+  if(G1.atoms.length!==G2.atoms.length||G1.bonds.length!==G2.bonds.length)return false;
+  function buildAdj(G){
+    const m={};
+    G.atoms.forEach(a=>m[a.id]=[]);
+    G.bonds.forEach(b=>{m[b.f].push({nb:b.t,o:b.o});m[b.t].push({nb:b.f,o:b.o});});
+    return m;
+  }
+  const a1=buildAdj(G1),a2=buildAdj(G2);
+  const sig1=G1.atoms.map(a=>a.el+'_'+a1[a.id].reduce((s,e)=>s+e.o,0)).sort().join(',');
+  const sig2=G2.atoms.map(a=>a.el+'_'+a2[a.id].reduce((s,e)=>s+e.o,0)).sort().join(',');
+  if(sig1!==sig2)return false;
+  const ids1=G1.atoms.map(a=>a.id),ids2=G2.atoms.map(a=>a.id);
+  const map={},used=new Set();
+  function consistent(v1,v2){
+    if(G1.atoms.find(a=>a.id===v1).el!==G2.atoms.find(a=>a.id===v2).el)return false;
+    for(const [k,v] of Object.entries(map)){
+      const mk=+k;
+      const e1=G1.bonds.find(b=>(b.f===v1&&b.t===mk)||(b.t===v1&&b.f===mk));
+      const e2=G2.bonds.find(b=>(b.f===v2&&b.t===v)||(b.t===v2&&b.f===v));
+      if(!!e1!==!!e2)return false;
+      if(e1&&e2&&e1.o!==e2.o)return false;
+    }
+    return true;
+  }
+  function bt(d){
+    if(d===ids1.length)return true;
+    const v1=ids1[d];
+    for(const v2 of ids2){
+      if(used.has(v2))continue;
+      if(!consistent(v1,v2))continue;
+      map[v1]=v2;used.add(v2);
+      if(bt(d+1))return true;
+      delete map[v1];used.delete(v2);
+    }
+    return false;
+  }
+  return bt(0);
+}
+
+// ── Canvas state ──
+let bldAtoms=[],bldBonds=[],bldHist=[],bldTool='C',bldBondSrc=null,bldNid=0,bldNbid=0,bldAttempts=0,bldRingCircles=[];
+const BLD_COLORS={C:'#1a1a1a',O:'#c0392b',N:'#1a4bcc',Cl:'#1a7a1a',Br:'#7a1a1a',F:'#2255aa'};
+const BLD_PLACEMENT_TOOLS=['C','O','N','Cl','Br','F','rBz','rC6','rC5','rC4'];
+
+function bldPush(){
+  bldHist.push(JSON.stringify({atoms:bldAtoms,bonds:bldBonds,nid:bldNid,nbid:bldNbid,rings:bldRingCircles}));
+  if(bldHist.length>25)bldHist.shift();
+}
+function bldUndo(){
+  if(!bldHist.length)return;
+  const st=JSON.parse(bldHist.pop());
+  bldAtoms=st.atoms;bldBonds=st.bonds;bldNid=st.nid;bldNbid=st.nbid;
+  bldRingCircles=st.rings||[];
+  bldBondSrc=null;bldRender();
+}
+function bldClearAll(){bldPush();bldAtoms=[];bldBonds=[];bldBondSrc=null;bldRingCircles=[];bldRender();}
+
+function bldSetTool(t){
+  bldTool=t;bldBondSrc=null;
+  document.querySelectorAll('.bld-btn').forEach(b=>b.classList.remove('active'));
+  const btn=document.getElementById('bld-t-'+t);
+  if(btn)btn.classList.add('active');
+  const sv=document.getElementById('bld-svg');
+  if(sv)sv.style.cursor=BLD_PLACEMENT_TOOLS.includes(t)?'crosshair':t==='del'?'not-allowed':'default';
+}
+
+// Ring placement configs: n=sides, d=edge length, bonds=bond orders around ring, deloc=draw inner circle
+const BLD_RINGS={
+  rBz:{n:6,d:72,bonds:[1,1,1,1,1,1],deloc:true},
+  rC6:{n:6,d:72,bonds:[1,1,1,1,1,1],deloc:false},
+  rC5:{n:5,d:72,bonds:[1,1,1,1,1],  deloc:false},
+  rC4:{n:4,d:72,bonds:[1,1,1,1],    deloc:false},
+};
+
+function bldPlaceRing(cx,cy,type){
+  const cfg=BLD_RINGS[type];if(!cfg)return;
+  const {n,d,bonds,deloc}=cfg;
+  const R=d/(2*Math.sin(Math.PI/n));
+  bldPush();
+  const ids=[];
+  for(let i=0;i<n;i++){
+    const a=-Math.PI/2+i*(2*Math.PI/n);
+    ids.push(bldNid);
+    bldAtoms.push({id:bldNid++,x:Math.round(cx+R*Math.cos(a)),y:Math.round(cy+R*Math.sin(a)),el:'C'});
+  }
+  for(let i=0;i<n;i++)bldBonds.push({id:bldNbid++,f:ids[i],t:ids[(i+1)%n],o:bonds[i]});
+  if(deloc)bldRingCircles.push({cx,cy,r:Math.round(R*0.52)});
+  bldRender();
+}
+
+function bldRender(){
+  const sv=document.getElementById('bld-svg');
+  if(!sv)return;
+  const VALENCE={C:4,O:2,N:3,Cl:1,Br:1,F:1};
+  const HSUB=['','','₂','₃','₄'];
+  function iHyd(at){
+    const v=VALENCE[at.el]??4;
+    const used=bldBonds.filter(b=>b.f===at.id||b.t===at.id).reduce((s,b)=>s+b.o,0);
+    return Math.max(0,v-used);
+  }
+  const R=24;
+  let inner='';
+  // Bonds (drawn first, underneath atoms)
+  bldBonds.forEach(bd=>{
+    const a=bldAtoms.find(x=>x.id===bd.f),b=bldAtoms.find(x=>x.id===bd.t);
+    if(!a||!b)return;
+    const dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy)||1;
+    const nx=-dy/len,ny=dx/len;
+    if(bd.o===1){
+      inner+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#555" stroke-width="2.5" stroke-linecap="round"/>`;
+    } else if(bd.o===2){
+      const s=4;
+      inner+=`<line x1="${a.x+nx*s}" y1="${a.y+ny*s}" x2="${b.x+nx*s}" y2="${b.y+ny*s}" stroke="#555" stroke-width="2.2"/>`;
+      inner+=`<line x1="${a.x-nx*s}" y1="${a.y-ny*s}" x2="${b.x-nx*s}" y2="${b.y-ny*s}" stroke="#555" stroke-width="2.2"/>`;
+    } else {
+      const s=4.5;
+      inner+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#555" stroke-width="2"/>`;
+      inner+=`<line x1="${a.x+nx*s}" y1="${a.y+ny*s}" x2="${b.x+nx*s}" y2="${b.y+ny*s}" stroke="#555" stroke-width="1.5"/>`;
+      inner+=`<line x1="${a.x-nx*s}" y1="${a.y-ny*s}" x2="${b.x-nx*s}" y2="${b.y-ny*s}" stroke="#555" stroke-width="1.5"/>`;
+    }
+  });
+  // Benzene delocalization circles (between bonds and atoms)
+  bldRingCircles.forEach(rc=>{
+    inner+=`<circle cx="${rc.cx}" cy="${rc.cy}" r="${rc.r}" fill="none" stroke="#555" stroke-width="1.8" opacity=".65" pointer-events="none"/>`;
+  });
+  // Atoms with implicit H labels
+  bldAtoms.forEach(at=>{
+    const isSrc=bldBondSrc===at.id;
+    const col=BLD_COLORS[at.el]||'#1a1a1a';
+    const h=iHyd(at);
+    const fill=isSrc?'#fef08a':'#fff';
+    const sw=isSrc?3:2.2;
+    inner+=`<circle cx="${at.x}" cy="${at.y}" r="${R}" fill="${fill}" stroke="${col}" stroke-width="${sw}" data-aid="${at.id}" class="bld-atom" style="cursor:pointer"/>`;
+    if(h>0){
+      inner+=`<text text-anchor="middle" pointer-events="none">`;
+      inner+=`<tspan x="${at.x}" y="${at.y-3}" font-size="11" font-weight="800" fill="${col}">${at.el}</tspan>`;
+      inner+=`<tspan x="${at.x}" dy="11" font-size="9" font-weight="700" fill="${col}">H${h===1?'':HSUB[h]||h}</tspan>`;
+      inner+=`</text>`;
+    } else {
+      inner+=`<text x="${at.x}" y="${at.y+5}" text-anchor="middle" font-size="13" font-weight="800" fill="${col}" pointer-events="none">${at.el}</text>`;
+    }
+  });
+  sv.innerHTML=inner;
+  sv.querySelectorAll('.bld-atom').forEach(el=>{
+    el.addEventListener('click',e=>{e.stopPropagation();bldClickAtom(+el.dataset.aid);});
+  });
+}
+
+function bldClickBg(e){
+  if(answered)return;
+  const sv=document.getElementById('bld-svg');
+  if(!sv)return;
+  if(!BLD_PLACEMENT_TOOLS.includes(bldTool))return;
+  const rect=sv.getBoundingClientRect();
+  const x=e.clientX-rect.left,y=e.clientY-rect.top;
+  if(bldTool in BLD_RINGS){
+    bldPlaceRing(x,y,bldTool);
+    return;
+  }
+  const MIN=48;
+  for(const a of bldAtoms){const dx=a.x-x,dy=a.y-y;if(Math.sqrt(dx*dx+dy*dy)<MIN)return;}
+  bldPush();
+  bldAtoms.push({id:bldNid++,x,y,el:bldTool});
+  bldRender();
+}
+
+function bldClickAtom(aid){
+  if(answered)return;
+  if(bldTool==='del'){
+    bldPush();
+    bldBonds=bldBonds.filter(b=>b.f!==aid&&b.t!==aid);
+    bldAtoms=bldAtoms.filter(a=>a.id!==aid);
+    bldBondSrc=null;bldRender();
+    return;
+  }
+  const BOND_TOOLS=['bond1','bond2','bond3'];
+  if(BOND_TOOLS.includes(bldTool)){
+    if(bldBondSrc===null){bldBondSrc=aid;bldRender();}
+    else if(bldBondSrc===aid){bldBondSrc=null;bldRender();}
+    else{
+      const o=+bldTool.replace('bond','');
+      bldPush();
+      bldBonds=bldBonds.filter(b=>!((b.f===bldBondSrc&&b.t===aid)||(b.t===bldBondSrc&&b.f===aid)));
+      bldBonds.push({id:bldNbid++,f:bldBondSrc,t:aid,o});
+      bldBondSrc=null;bldRender();
+    }
+  }
+}
+
+function buildBuild(q){
+  return `<div class="build-wrap">
+    <div class="build-toolbar">
+      <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Átomo:</span>
+      <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')">C</button>
+      <button class="bld-btn bE" id="bld-t-O" onclick="bldSetTool('O')">O</button>
+      <button class="bld-btn bN" id="bld-t-N" onclick="bldSetTool('N')">N</button>
+      <div class="bld-sep"></div>
+      <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Enlace:</span>
+      <button class="bld-btn" id="bld-t-bond1" onclick="bldSetTool('bond1')">─</button>
+      <button class="bld-btn" id="bld-t-bond2" onclick="bldSetTool('bond2')">═</button>
+      <button class="bld-btn" id="bld-t-bond3" onclick="bldSetTool('bond3')">≡</button>
+      <div class="bld-sep"></div>
+      <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Anillo:</span>
+      <button class="bld-btn" id="bld-t-rBz" onclick="bldSetTool('rBz')" title="Benceno — anillo deslocalizado" style="font-size:.65rem">⬡Bz</button>
+      <button class="bld-btn" id="bld-t-rC6" onclick="bldSetTool('rC6')" title="Ciclohexano" style="font-size:.65rem">⬡C6</button>
+      <button class="bld-btn" id="bld-t-rC5" onclick="bldSetTool('rC5')" title="Ciclopentano" style="font-size:.65rem">⬠C5</button>
+      <button class="bld-btn" id="bld-t-rC4" onclick="bldSetTool('rC4')" title="Ciclobutano" style="font-size:.65rem">⬜C4</button>
+      <span style="flex:1"></span>
+      <button class="bld-btn erase-btn" id="bld-t-del" onclick="bldSetTool('del')" title="Borrar átomo">🗑</button>
+      <button class="bld-btn" onclick="bldUndo()" title="Deshacer (Ctrl+Z)">↩</button>
+      <button class="bld-btn" onclick="bldClearAll()" title="Limpiar todo">✕</button>
+    </div>
+    <svg id="bld-svg" class="build-canvas" onclick="bldClickBg(event)"></svg>
+    <div style="font-size:.67rem;color:var(--dim);padding:5px 10px;background:var(--surf);border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r)">
+      <b>C/O/N</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>🗑</b>: elimina átomo y sus enlaces &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
+    </div>
+  </div>
+  <div id="bld-hint" style="min-height:18px;font-size:.76rem;color:var(--dim);margin-top:6px;font-style:italic"></div>
+  <button class="btn-check" id="bld-check" onclick="checkBuild()" style="margin-top:10px">Verificar estructura →</button>`;
+}
+
+function checkBuild(){
+  if(answered)return;
+  const q=questions[qIdx];
+  const ref=MOLDES[q.buildKey];
+  if(!ref)return;
+  const refG=moldesGraph(ref);
+  const stuG={
+    atoms:bldAtoms.map(a=>({id:a.id,el:a.el})),
+    bonds:bldBonds.map(b=>({f:b.f,t:b.t,o:b.o}))
+  };
+  bldAttempts++;
+  const correct=checkIso(refG,stuG);
+  const hint=document.getElementById('bld-hint');
+  const fb=document.getElementById('feedback');
+  const nxt=document.getElementById('q-next');
+  if(correct){
+    answered=true;stopTimer();
+    const pts=bldAttempts===1?10:bldAttempts===2?6:3;
+    score+=pts;typeStats[q.type].ok++;
+    if(fb){fb.className='feedback ok';fb.innerHTML=`✓ <strong>¡Correcto!</strong> +${pts} punto${pts>1?'s':''}. Estructura verificada por isomorfismo de grafos.`;}
+    if(nxt)nxt.classList.add('show');
+    if(hint)hint.textContent='';
+    const chk=document.getElementById('bld-check');if(chk)chk.disabled=true;
+    history.push({type:q.type,ok:true,ans:q.buildKey,given:'dibujado',topic:q.topic});
+  } else if(bldAttempts>=3){
+    answered=true;stopTimer();
+    if(fb){fb.className='feedback err';fb.innerHTML=`✗ <strong>Incorrecto.</strong> La estructura no coincide con <em>${q.buildKey}</em>. Estructura de referencia:`;}
+    const area=document.getElementById('q-area');
+    const molCard=document.createElement('div');
+    molCard.className='mol-card';molCard.style.marginTop='10px';
+    molCard.innerHTML=`<div class="formula-display">${mkDevSVG(ref)}</div>`;
+    area.appendChild(molCard);
+    if(nxt)nxt.classList.add('show');
+    const chk=document.getElementById('bld-check');if(chk)chk.disabled=true;
+    history.push({type:q.type,ok:false,ans:q.buildKey,given:'dibujado',topic:q.topic});
+  } else {
+    const rem=3-bldAttempts;
+    const refC=refG.atoms.filter(a=>a.el==='C').length;
+    const refO=refG.atoms.filter(a=>a.el==='O').length;
+    const refN=refG.atoms.filter(a=>a.el==='N').length;
+    const stuC=stuG.atoms.filter(a=>a.el==='C').length;
+    const stuO=stuG.atoms.filter(a=>a.el==='O').length;
+    const stuN=stuG.atoms.filter(a=>a.el==='N').length;
+    let hintMsg='';
+    if(stuG.atoms.length!==refG.atoms.length){
+      hintMsg=`La molécula tiene ${refG.atoms.length} átomo(s) pesado(s) en total.`;
+    } else if(stuC!==refC){
+      hintMsg=`Revisa el número de carbonos: deben ser ${refC}.`;
+    } else if(stuO!==refO){
+      hintMsg=`Revisa el número de oxígenos: deben ser ${refO}.`;
+    } else if(stuN!==refN){
+      hintMsg=`Revisa el número de nitrógenos: deben ser ${refN}.`;
+    } else {
+      hintMsg=`La composición de átomos es correcta, revisa los enlaces (órdenes y conexiones).`;
+    }
+    if(hint)hint.textContent=`Intento ${bldAttempts}/3. Pista: ${hintMsg} (${rem} intento${rem>1?'s':''} restante${rem>1?'s':''})`;
+  }
+}
+
+// Ctrl+Z undo in build mode
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'){bldUndo();}});
+
+// ── QBANK: build questions ──
+const QBANK_BUILD=[
+  // Alcanos
+  {type:'build',buildKey:'etano',topic:'constructor',q:'Construye la estructura del <strong>etano</strong> (C₂H₆)'},
+  {type:'build',buildKey:'propano',topic:'constructor',q:'Construye la estructura del <strong>propano</strong> (C₃H₈)'},
+  {type:'build',buildKey:'butano',topic:'constructor',q:'Construye la estructura del <strong>butano</strong> (C₄H₁₀)'},
+  {type:'build',buildKey:'pentano',topic:'constructor',q:'Construye la estructura del <strong>pentano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'hexano',topic:'constructor',q:'Construye la estructura del <strong>hexano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'metilbutano',topic:'constructor',q:'Construye la estructura del <strong>2-metilbutano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'metilpentano',topic:'constructor',q:'Construye la estructura del <strong>2-metilpentano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'metilpentano3',topic:'constructor',q:'Construye la estructura del <strong>3-metilpentano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'dimetilpropano',topic:'constructor',q:'Construye la estructura del <strong>2,2-dimetilpropano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'dimetilpentano24',topic:'constructor',q:'Construye la estructura del <strong>2,4-dimetilpentano</strong> (C₇H₁₆)'},
+  // Alquenos
+  {type:'build',buildKey:'prop1eno',topic:'constructor',q:'Construye la estructura del <strong>prop-1-eno</strong> (C₃H₆)'},
+  {type:'build',buildKey:'but1eno',topic:'constructor',q:'Construye la estructura del <strong>but-1-eno</strong> (C₄H₈)'},
+  {type:'build',buildKey:'but2eno',topic:'constructor',q:'Construye la estructura del <strong>but-2-eno</strong> (C₄H₈)'},
+  {type:'build',buildKey:'pent2eno',topic:'constructor',q:'Construye la estructura del <strong>pent-2-eno</strong> (C₅H₁₀)'},
+  {type:'build',buildKey:'buta13dieno',topic:'constructor',q:'Construye la estructura del <strong>buta-1,3-dieno</strong> (C₄H₆)'},
+  // Alquinos
+  {type:'build',buildKey:'but2ino',topic:'constructor',q:'Construye la estructura del <strong>but-2-ino</strong> (C₄H₆)'},
+  {type:'build',buildKey:'pent1ino',topic:'constructor',q:'Construye la estructura del <strong>pent-1-ino</strong> (C₅H₈)'},
+  {type:'build',buildKey:'hex1ino',topic:'constructor',q:'Construye la estructura del <strong>hex-1-ino</strong> (C₆H₁₀)'},
+  {type:'build',buildKey:'hex3ino',topic:'constructor',q:'Construye la estructura del <strong>hex-3-ino</strong> (C₆H₁₀)'},
+  // Alcoholes
+  {type:'build',buildKey:'etanol',topic:'constructor',q:'Construye la estructura del <strong>etanol</strong> (C₂H₆O)'},
+  {type:'build',buildKey:'propan1ol',topic:'constructor',q:'Construye la estructura del <strong>propan-1-ol</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'propan2ol',topic:'constructor',q:'Construye la estructura del <strong>propan-2-ol</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'butan1ol',topic:'constructor',q:'Construye la estructura del <strong>butan-1-ol</strong> (C₄H₁₀O)'},
+  {type:'build',buildKey:'butan2ol',topic:'constructor',q:'Construye la estructura del <strong>butan-2-ol</strong> (C₄H₁₀O)'},
+  {type:'build',buildKey:'pentan2ol',topic:'constructor',q:'Construye la estructura del <strong>pentan-2-ol</strong> (C₅H₁₂O)'},
+  // Aldehídos
+  {type:'build',buildKey:'etanal',topic:'constructor',q:'Construye la estructura del <strong>etanal</strong> (C₂H₄O)'},
+  {type:'build',buildKey:'propanal',topic:'constructor',q:'Construye la estructura del <strong>propanal</strong> (C₃H₆O)'},
+  {type:'build',buildKey:'butanal',topic:'constructor',q:'Construye la estructura del <strong>butanal</strong> (C₄H₈O)'},
+  {type:'build',buildKey:'pentanal',topic:'constructor',q:'Construye la estructura del <strong>pentanal</strong> (C₅H₁₀O)'},
+  // Cetonas
+  {type:'build',buildKey:'propan2ona',topic:'constructor',q:'Construye la estructura de la <strong>propan-2-ona</strong> (C₃H₆O)'},
+  {type:'build',buildKey:'butan2ona',topic:'constructor',q:'Construye la estructura de la <strong>butan-2-ona</strong> (C₄H₈O)'},
+  {type:'build',buildKey:'pentan3ona',topic:'constructor',q:'Construye la estructura de la <strong>pentan-3-ona</strong> (C₅H₁₀O)'},
+  {type:'build',buildKey:'cuatroMetilpentan2ona',topic:'constructor',q:'Construye la estructura de la <strong>4-metilpentan-2-ona</strong> (C₆H₁₂O)'},
+  // Ácidos
+  {type:'build',buildKey:'acidoetanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido etanoico</strong> (C₂H₄O₂)'},
+  {type:'build',buildKey:'acidopropanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido propanoico</strong> (C₃H₆O₂)'},
+  {type:'build',buildKey:'acidobutanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido butanoico</strong> (C₄H₈O₂)'},
+  {type:'build',buildKey:'acidopentanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido pentanoico</strong> (C₅H₁₀O₂)'},
+  // Ésteres
+  {type:'build',buildKey:'etanoatoMetilo',topic:'constructor',q:'Construye la estructura del <strong>etanoato de metilo</strong> (C₃H₆O₂)'},
+  {type:'build',buildKey:'etanoatoEtilo',topic:'constructor',q:'Construye la estructura del <strong>etanoato de etilo</strong> (C₄H₈O₂)'},
+  {type:'build',buildKey:'propanoatoMetilo',topic:'constructor',q:'Construye la estructura del <strong>propanoato de metilo</strong> (C₄H₈O₂)'},
+  // Éteres
+  {type:'build',buildKey:'metoximetano',topic:'constructor',q:'Construye la estructura del <strong>metoximetano</strong> (C₂H₆O)'},
+  {type:'build',buildKey:'metoxietano',topic:'constructor',q:'Construye la estructura del <strong>metoxietano</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'etoxietano',topic:'constructor',q:'Construye la estructura del <strong>etoxietano</strong> (C₄H₁₀O)'},
+  // Amidas
+  {type:'build',buildKey:'etanamida',topic:'constructor',q:'Construye la estructura de la <strong>etanamida</strong> (C₂H₅NO)'},
+  {type:'build',buildKey:'propanamida',topic:'constructor',q:'Construye la estructura de la <strong>propanamida</strong> (C₃H₇NO)'},
+  {type:'build',buildKey:'butanamida',topic:'constructor',q:'Construye la estructura de la <strong>butanamida</strong> (C₄H₉NO)'},
+  // Nitrilos
+  {type:'build',buildKey:'etanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>etanonitrilo</strong> (C₂H₃N)'},
+  {type:'build',buildKey:'propanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>propanonitrilo</strong> (C₃H₅N)'},
+  {type:'build',buildKey:'butanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>butanonitrilo</strong> (C₄H₇N)'},
+  // Aminas
+  {type:'build',buildKey:'metilamina',topic:'constructor',q:'Construye la estructura de la <strong>metilamina</strong> (CH₅N)'},
+  {type:'build',buildKey:'etanamina',topic:'constructor',q:'Construye la estructura de la <strong>etanamina</strong> (C₂H₇N)'},
+];
+QBANK.push(...QBANK_BUILD);
 
 function nextQ(){qIdx++;loadQuestion();}
 
@@ -3177,7 +3648,7 @@ function medalEmoji(pct){return pct>=90?'🥇':pct>=70?'🥈':pct>=50?'🥉':'�
 
 // Render best scores on portada level cards
 function renderBests(){
-  ['hidrocarburos','oxigenados','nitrogenados','completo'].forEach(nv=>{
+  ['hidrocarburos','oxigenados','nitrogenados','completo','constructor'].forEach(nv=>{
     const b=getBest(nv);
     const el=document.querySelector(`.nivel-card[onclick*="${nv}"] .nivel-count`);
     if(el&&b){el.innerHTML=el.innerHTML.replace(/ · Mejor:.*$/,'')+` · Mejor: ${medalEmoji(b.pct)} ${b.pct}%`;}
@@ -3219,8 +3690,8 @@ function showResults(){
   document.getElementById('r-time').textContent=tout;
 
   // By type
-  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre'};
-  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write'};
+  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor'};
+  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build'};
   let rbHtml='';
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
@@ -3308,8 +3779,9 @@ function buildPayload(trigger){
     fecha:     new Date().toISOString().slice(0,10),
     hora:      new Date().toTimeString().slice(0,5),
     sesion:    Math.random().toString(36).slice(2,8),
-    nombre:    studentName,
-    curso:     studentCourse,
+    nombre:    freeMode ? '(anónimo)' : studentName,
+    curso:     freeMode ? '(libre)'   : studentCourse,
+    anonimo:   freeMode,
     nivel:     NIVEL_LABELS[currentLevel]||currentLevel,
     trigger,
     correctas: correct, total, timeouts,
@@ -3318,6 +3790,7 @@ function buildPayload(trigger){
     errores_drag:  typeStats.drag.tot -typeStats.drag.ok,
     errores_id:    typeStats.id.tot   -typeStats.id.ok,
     errores_write: typeStats.write.tot-typeStats.write.ok,
+    errores_build: typeStats.build.tot-typeStats.build.ok,
     errores_por_tema:   JSON.stringify(topicErrors),
     aciertos_por_tema:  JSON.stringify(topicOk),
     moleculas_falladas: failedMols
@@ -3325,7 +3798,6 @@ function buildPayload(trigger){
 }
 
 function sendAnalytics(trigger){
-  if(freeMode) return;
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   if(_analyticsSent) return;
   if(history.length===0) return;
