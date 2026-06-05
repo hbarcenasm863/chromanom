@@ -511,7 +511,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
       </button>
       <button class="nivel-card ct" onclick="openLevelModal('constructor')">
         <div class="nivel-icon">🏗️</div>
-        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">50 moléculas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">74 moléculas · 20 por sesión</div></div>
       </button>
     </div>
     <details class="drill-section">
@@ -528,11 +528,20 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
         <button class="drill-pill" onclick="openLevelModal('eteres')">Éteres</button>
         <button class="drill-pill" onclick="openLevelModal('amidas')">Amidas</button>
         <button class="drill-pill" onclick="openLevelModal('nitrilos')">Nitrilos</button>
+        <button class="drill-pill" onclick="openLevelModal('aminas')">Aminas</button>
+        <button class="drill-pill" onclick="openLevelModal('benceno')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Aromáticos</button>
+      </div>
+    </details>
+    <details class="drill-section">
+      <summary class="drill-summary">🏗️ Practicar constructor por familia ▾</summary>
+      <div class="drill-pills">
+        <button class="drill-pill" onclick="openLevelModal('constructor')">Todas las moléculas</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Solo aromáticos</button>
       </div>
     </details>
     <div class="portada-stats">
       <div class="ps"><div class="ps-n" id="stat-banco">227</div><div class="ps-l">En el banco</div></div>
-      <div class="ps"><div class="ps-n">45s</div><div class="ps-l">Por pregunta</div></div>
+      <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
   </div>
@@ -590,6 +599,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     <div class="gh-progress"><div class="gh-bar" id="gh-bar" style="width:0%"></div></div>
     <div class="gh-q" id="gh-q">1 / 20</div>
     <div class="gh-score">⭐ <span id="gh-score">0</span></div>
+    <div id="gh-streak" style="font-family:var(--mono);font-size:.78rem;color:#f97316;white-space:nowrap">🔥<span id="gh-streak-n">0</span></div>
     <svg class="timer-ring" id="timer-svg" viewBox="0 0 52 52">
       <circle class="timer-bg" cx="26" cy="26" r="22"/>
       <circle class="timer-fg" id="timer-fg" cx="26" cy="26" r="22"
@@ -636,6 +646,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     <div class="history-list" id="history-list"></div>
     <div style="margin-top:20px">
       <button class="btn-replay" onclick="openLevelModal(currentLevel)" style="margin-top:8px">🔄 Jugar de nuevo</button>
+      <button class="btn-replay" id="btn-retry-errors" onclick="retryErrors()" style="margin-top:8px;display:none">❌ Repetir preguntas falladas</button>
       <button class="btn-home" onclick="showScreen('s-portada')">← Volver al inicio</button>
     </div>
   </div>
@@ -933,6 +944,89 @@ const M = {
   acidoHexanoico(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   metanamida(){_pts=[];let s=dbl(0,0,0,-BL);s+=ln(0,0,0,BL);_reg(0,-BL);_reg(0,BL);s+=atm(0,-BL,'O');s+=atm(0,BL,'NH₂');return mkSVG(s);},
   cuatroMetilpentan2ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');s+=ln(p[3].x,p[3].y,p[3].x,p[3].y+BL);return mkSVG(s);},
+  // ── AROMÁTICOS BÁSICOS ──
+  benceno(){_pts=[];let s=bnzRing(0,0);return mkSVG(s);},
+  fenol(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'OH');return mkSVG(s);},
+  anilina(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'NH₂');return mkSVG(s);},
+  clorobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Cl');return mkSVG(s);},
+  bromobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Br');return mkSVG(s);},
+
+  // ── AMINAS ──
+  metilamina(){_pts=[];let s=ln(0,0,0,-BL);_reg(0,-BL);s+=atm(0,-BL,'NH₂');return mkSVG(s);},
+  etanamina(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  propanamina(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  butan1amina(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  butan2amina(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'NH₂');return mkSVG(s);},
+  trimetilamina(){_pts=[];let s=ln(0,0,0,-BL);s+=ln(0,0,BL*COS30,BL*SIN30);s+=ln(0,0,-BL*COS30,BL*SIN30);_reg(0,-BL);_reg(BL*COS30,BL*SIN30);_reg(-BL*COS30,BL*SIN30);s+=atm(0,0,'N');return mkSVG(s);},
+  nMetilPropan1amina(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'NH');return mkSVG(s);},
+  nMetilButan1amina(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'NH');return mkSVG(s);},
+  pentano15diamina(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');s+=ln(p[4].x,p[4].y,p[4].x,p[4].y-BL);s+=atm(p[4].x,p[4].y-BL,'NH₂');return mkSVG(s);},
+
+  // ── ALQUINOS (interno) ──
+  but2ino(){_pts=[];const p=zz(0,0,4);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y)+ln(p[2].x,p[2].y,p[3].x,p[3].y);return mkSVG(s);},
+
+  // ── AROMÁTICOS MONOSUSTITUIDOS (grupos heterofuncionales) ──
+  // Helpers locales: r=28, todos los grupos cuelgan de v[0] (top) salvo indicación
+  nitrobenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'NO₂');return mkSVG(s);},
+  acidobenzoico(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'COOH');return mkSVG(s);},
+  benzaldehido(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'CHO');return mkSVG(s);},
+  anisol(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OCH₃');return mkSVG(s);},
+
+  // ── AROMÁTICOS DISUSTITUIDOS ──
+  // Coordenadas de vértice i: (r·cos(-π/2+i·π/3), r·sin(-π/2+i·π/3))
+  // v[1]=(r·C30,−r·S30) dir (C30,−S30); v[2]=(r·C30,r·S30) dir (C30,S30); v[3]=(0,r); v[4]=(−r·C30,r·S30); v[5]=(−r·C30,−r·S30)
+  ortoNitrotolueno(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);_reg(0,-D);           // CH₃ en v[0]
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'NO₂'); // NO₂ en v[1]
+    return mkSVG(s);},
+  acidoSalicilico(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'COOH');   // COOH en v[0]
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'OH'); // OH en v[1]
+    return mkSVG(s);},
+  paraCresol(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'OH');    // OH en v[0]
+    s+=ln(0,r,0,D);_reg(0,D);              // CH₃ en v[3] (para)
+    return mkSVG(s);},
+  resorcinol(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'OH');    // OH en v[0]
+    s+=ln(r*COS30,r*SIN30,D*COS30,D*SIN30);s+=atm(D*COS30,D*SIN30,'OH'); // OH en v[2] (meta)
+    return mkSVG(s);},
+  paraCloroanilina(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'NH₂');  // NH₂ en v[0]
+    s+=ln(0,r,0,D);s+=atm(0,D,'Cl');       // Cl en v[3] (para)
+    return mkSVG(s);},
+
+  // ── AROMÁTICOS POLISUSTITUIDOS / MOLÉCULAS DE INTERÉS ──
+  TNT(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);_reg(0,-D);           // CH₃ en v[0]
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'NO₂');  // NO₂ en v[1]
+    s+=ln(0,r,0,D);s+=atm(0,D,'NO₂');     // NO₂ en v[3]
+    s+=ln(-r*COS30,-r*SIN30,-D*COS30,-D*SIN30);s+=atm(-D*COS30,-D*SIN30,'NO₂'); // NO₂ en v[5]
+    return mkSVG(s);},
+  acidoPicrico(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'OH');   // OH en v[0]
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'NO₂');
+    s+=ln(0,r,0,D);s+=atm(0,D,'NO₂');
+    s+=ln(-r*COS30,-r*SIN30,-D*COS30,-D*SIN30);s+=atm(-D*COS30,-D*SIN30,'NO₂');
+    return mkSVG(s);},
+  vainillina(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'CHO');  // CHO en v[0] (C1)
+    s+=ln(0,r,0,D);s+=atm(0,D,'OH');      // OH en v[3] (C4)
+    s+=ln(-r*COS30,r*SIN30,-D*COS30,D*SIN30);s+=atm(-D*COS30,D*SIN30,'OCH₃'); // OCH₃ en v[4] (C5)
+    return mkSVG(s);},
+  aspirina(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'COOH');  // COOH en v[0]
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'OCOCH₃'); // OAc en v[1]
+    return mkSVG(s);},
+  paracetamol(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'OH');    // OH en v[0]
+    s+=ln(0,r,0,D);s+=atm(0,D,'NHCOCH₃'); // amida en v[3] (para)
+    return mkSVG(s);},
+  triclorobenceno124(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;
+    s+=ln(0,-r,0,-D);s+=atm(0,-D,'Cl');    // Cl en v[0] (C1)
+    s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'Cl'); // Cl en v[1] (C2)
+    s+=ln(0,r,0,D);s+=atm(0,D,'Cl');       // Cl en v[3] (C4)
+    return mkSVG(s);},
 };
 
 // ════════════════════════════════════════════════════════
@@ -1107,6 +1201,17 @@ const MOLDES={
   build_anilina: {chain:[{bn:1,bu:[{s:'N'}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_clorobenceno: {chain:[{bn:1,bu:[{s:'Cl'}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_bromobenceno: {chain:[{bn:1,bu:[{s:'Br'}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  // ── DI-SUSTITUIDOS ──
+  build_ortoXileno:   {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_metaXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_paraXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1,bu:[{}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  // ── TRI-SUSTITUIDOS ──
+  build_trimetilbenceno123: {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_trimetilbenceno124: {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_trimetilbenceno135: {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{}], ring:[[5,0,1]], aromatic:true},
+  // ── ALQUIL-BENCENOS (cadena larga) ──
+  build_propilbenceno:     {chain:[{bn:1,bu:[{bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_isopropilbenceno:  {chain:[{bn:1,bu:[{bn:1,bd:[{}]},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
 };
 
 // ════════════════════════════════════════════════════════
@@ -1820,9 +1925,9 @@ const QBANK = [
    expl:'El localizador <b>3</b> indica en qué carbono se encuentra el grupo −OH.',
    topic:'alcoholes'},
 
-  {type:'mc', mol:'dimetilpentano24', q:'¿Por qué se numeran los metilos como 2,4 y no como 2,4 desde el otro extremo?',
-   ans:'Da los localizadores más bajos (2,4 vs 2,4)', opts:['Da los localizadores más bajos (2,4 vs 2,4)','Es una convención arbitraria','El C2 es más importante','Por orden alfabético'],
-   expl:'En este caso 2,4 = 2,4 (simétrico). Siempre se busca la numeración con localizadores <b>más bajos</b>.',
+  {type:'mc', mol:'dimetilpentano24', q:'¿Qué ocurre al numerar el 2,4-dimetilpentano desde cualquier extremo?',
+   ans:'Los localizadores son idénticos: molécula simétrica', opts:['Los localizadores son idénticos: molécula simétrica','El extremo izquierdo siempre tiene prioridad','Da localizadores 1,3 desde el otro extremo','La numeración nunca importa en cadenas ramificadas'],
+   expl:'El 2,4-dimetilpentano es simétrico: numerando desde cualquier extremo se obtienen los mismos localizadores 2 y 4. IUPAC aplica aquí el criterio de primer punto de diferencia, pero ambas numeraciones son equivalentes.',
    topic:'alcanos'},
 
   {type:'mc', mol:'ciclobutanol', q:'¿Cuál es el grupo funcional presente en el ciclobutanol?',
@@ -2369,7 +2474,7 @@ const QBANK = [
 
   {type:'id', mol:'metoxipropano',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
-   name:'1-metoxipropano',
+   name:'metoxipropano',
    highlight:{text:'prop',cls:'c'},
    correct:'c',
    expl:'"prop" es la <b>Cadena principal</b> — indica 3 carbonos (la cadena más larga).', topic:'eteres'},
@@ -2530,6 +2635,233 @@ const QBANK = [
    ],
    tokens:[{text:'1,2-dimetil',cls:'r'},{text:'bencen',cls:'c'},{text:'o',cls:'g'},{text:'1,3-dimetil',cls:'r'},{text:'ciclohex',cls:'c'},{text:'ano',cls:'c'}],
    expl:'Dos metilos en posiciones 1 y 2 → <b>1,2-dimetilbenceno</b> (orto-xileno).', topic:'benceno'},
+
+  // ── NITROBENCENO ──
+  {type:'mc', mol:'nitrobenceno', q:'¿Cuál es el grupo funcional del nitrobenceno?',
+   ans:'−NO₂ (grupo nitro)', opts:['−NO₂ (grupo nitro)','−NH₂ (amino)','−OH (fenol)','−NO (nitroso)'],
+   expl:'El grupo <b>−NO₂</b> (nitro) se forma por nitración del benceno con HNO₃/H₂SO₄. Es un sustituyente fuertemente desactivante.',
+   parts:[{t:'nitro',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'write', mol:'nitrobenceno', q:'Escribe el nombre IUPAC de C₆H₅NO₂.',
+   hints:['Benceno con un grupo −NO₂','nitro + benceno'],
+   ans:'nitrobenceno', accepted:['nitrobenceno','nitro-benceno'],
+   expl:'Benceno con sustituyente nitro (−NO₂) → <b>nitrobenceno</b>.',
+   parts:[{t:'nitro',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'nitrobenceno', q:'¿Cuál es la fórmula molecular del nitrobenceno?',
+   ans:'C₆H₅NO₂', opts:['C₆H₅NO₂','C₆H₅NH₂','C₆H₅NO','C₇H₇NO₂'],
+   expl:'El benceno C₆H₆ pierde un H y gana −NO₂ → <b>C₆H₅NO₂</b> (MM = 123 g/mol).',
+   parts:[{t:'nitro',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'nitrobenceno', q:'¿Cuál es el nombre del proceso para obtener nitrobenceno?',
+   ans:'Nitración (HNO₃ + H₂SO₄ concentrados)', opts:['Nitración (HNO₃ + H₂SO₄ concentrados)','Oxidación','Reducción','Halogenación'],
+   expl:'La <b>nitración</b> aromática emplea la mezcla sulfonítrica (HNO₃ + H₂SO₄) para generar el electrófilo NO₂⁺ que sustituye un H del anillo.',
+   topic:'benceno'},
+
+  // ── ÁCIDO BENZOICO ──
+  {type:'mc', mol:'acidobenzoico', q:'¿Qué grupo funcional distingue al ácido benzoico del benceno?',
+   ans:'−COOH (carboxilo)', opts:['−COOH (carboxilo)','−CHO (aldehído)','−OH (fenol)','−CO₂⁻ (carboxilato)'],
+   expl:'El ácido benzoico tiene el grupo <b>−COOH</b> (carboxilo) unido directamente al anillo bencénico.',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'bencen',cls:'c',l:'Anillo'},{t:'oico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'write', mol:'acidobenzoico', q:'Escribe el nombre IUPAC de C₆H₅COOH.',
+   hints:['Benceno con −COOH','El sufijo del ácido es -oico'],
+   ans:'ácido benzoico', accepted:['ácido benzoico','acido benzoico','ácido bencenocarboxílico','acido bencenocarboxilico','benzoico'],
+   expl:'Benceno con −COOH → <b>ácido benzoico</b> (IUPAC también acepta ácido bencenocarboxílico).',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'bencen',cls:'c',l:'Anillo'},{t:'oico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'mc', mol:'acidobenzoico', q:'¿El ácido benzoico es más o menos ácido que el ácido acético (pKa ácido benzoico ≈ 4,2; ácido acético ≈ 4,76)?',
+   ans:'Más ácido (pKa menor)', opts:['Más ácido (pKa menor)','Menos ácido (pKa mayor)','Igual de ácido','No es un ácido'],
+   expl:'El anillo aromático estabiliza por resonancia el carboxilato → el ácido benzoico (pKa ≈ 4,2) es <b>más ácido</b> que el acético (pKa ≈ 4,76).',
+   topic:'benceno'},
+
+  // ── BENZALDEHÍDO ──
+  {type:'mc', mol:'benzaldehido', q:'¿A qué familia pertenece el benzaldehído?',
+   ans:'Aldehídos aromáticos', opts:['Aldehídos aromáticos','Cetonas aromáticas','Ácidos aromáticos','Alcoholes aromáticos'],
+   expl:'El benzaldehído tiene el grupo <b>−CHO</b> unido al anillo → es un aldehído aromático.',
+   parts:[{t:'benzaldeh',cls:'g',l:'Aldehído'},{t:'ído',cls:'g',l:'Aromat.'}], topic:'benceno'},
+  {type:'write', mol:'benzaldehido', q:'Escribe el nombre IUPAC de C₆H₅CHO.',
+   hints:['Benceno con −CHO (aldehído)','benz + aldehído'],
+   ans:'benzaldehído', accepted:['benzaldehído','benzaldehido','benzenecarbaldehído','benzenecarbaldehido','fenilaldehído','fenilaldehido'],
+   expl:'Benceno con −CHO → <b>benzaldehído</b>. IUPAC sistemático: benzenecarbaldehído.',
+   parts:[{t:'benz',cls:'c',l:'Anillo'},{t:'aldehído',cls:'g',l:'CHO'}], topic:'benceno'},
+  {type:'mc', mol:'benzaldehido', q:'¿Con qué aroma natural se asocia el benzaldehído?',
+   ans:'Almendras amargas (y cerezas)', opts:['Almendras amargas (y cerezas)','Vainilla','Menta','Naranja'],
+   expl:'El <b>benzaldehído</b> (C₆H₅CHO) es el aroma característico de las almendras amargas, las cerezas y el mazapán.',
+   topic:'benceno'},
+
+  // ── ANISOL ──
+  {type:'mc', mol:'anisol', q:'¿Cuál es el nombre IUPAC del anisol?',
+   ans:'metoxibenceno', opts:['metoxibenceno','fenoximetano','metilbenceno','benzaldehído'],
+   expl:'Anisol = benceno + −OCH₃ → <b>metoxibenceno</b> (éter aromático). "Anisol" es el nombre trivial.',
+   parts:[{t:'metoxi',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'write', mol:'anisol', q:'Escribe el nombre IUPAC del anisol (C₆H₅OCH₃).',
+   hints:['El grupo es −OCH₃ (metoxi)','metoxi + benceno'],
+   ans:'metoxibenceno', accepted:['metoxibenceno','metoxi-benceno','anisol'],
+   expl:'C₆H₅−OCH₃ → <b>metoxibenceno</b>. El grupo −OCH₃ es el éter metílico del fenol.',
+   parts:[{t:'metoxi',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'anisol', q:'¿A qué familia pertenece el anisol?',
+   ans:'Éteres aromáticos', opts:['Éteres aromáticos','Alcoholes aromáticos','Fenoles','Aldehídos aromáticos'],
+   expl:'El <b>anisol</b> tiene un oxígeno puente entre el anillo y el metilo → es un <b>éter aromático</b> (metoxibenceno).',
+   topic:'benceno'},
+
+  // ── ORTO-NITROTOLUENO ──
+  {type:'mc', mol:'ortoNitrotolueno', q:'¿Cuál es el nombre IUPAC del orto-nitrotolueno?',
+   ans:'1-metil-2-nitrobenceno', opts:['1-metil-2-nitrobenceno','2-nitrotolueno','1-nitro-2-metilbenceno','2-metil-1-nitrobenceno'],
+   expl:'IUPAC 2013: localizador más bajo primero → <b>1-metil-2-nitrobenceno</b>. El prefijo orto indica posiciones 1 y 2.',
+   parts:[{t:'1-metil',cls:'r',l:'Metilo (C1)'},{t:'2-nitro',cls:'r',l:'Nitro (C2)'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'ortoNitrotolueno', q:'¿Cuántos isómeros posicionales del nitrotolueno existen?',
+   ans:'3 (orto, meta, para)', opts:['3 (orto, meta, para)','2 (orto y para)','4','6'],
+   expl:'El −NO₂ puede ir en posición 2 (orto), 3 (meta) o 4 (para) respecto al metilo → <b>3 isómeros</b>: 2-nitrotolueno, 3-nitrotolueno y 4-nitrotolueno.',
+   topic:'benceno'},
+  {type:'mc', mol:'ortoNitrotolueno', q:'En la nomenclatura orto/meta/para, "orto" indica que los sustituyentes están en posiciones:',
+   ans:'1 y 2 (adyacentes)', opts:['1 y 2 (adyacentes)','1 y 3 (uno de separación)','1 y 4 (opuestas)','1 y 6 (opuestas)'],
+   expl:'"<b>Orto</b>" (o-) → posiciones 1,2 (adyacentes); "<b>meta</b>" (m-) → 1,3; "<b>para</b>" (p-) → 1,4. Es nomenclatura anterior a IUPAC 2013.',
+   topic:'benceno'},
+
+  // ── ÁCIDO SALICÍLICO ──
+  {type:'mc', mol:'acidoSalicilico', q:'¿Qué dos grupos funcionales tiene el ácido salicílico?',
+   ans:'−COOH y −OH (orto)', opts:['−COOH y −OH (orto)','−COOH y −NH₂','−CHO y −OH','−COOH y −OCH₃'],
+   expl:'El ácido salicílico tiene <b>−COOH</b> en C1 y <b>−OH</b> en C2 (posición orto) → ácido 2-hidroxibenzoico.',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'2-hidroxi',cls:'r',l:'OH en C2'},{t:'benzo',cls:'c',l:'Anillo'},{t:'ico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'write', mol:'acidoSalicilico', q:'Escribe el nombre IUPAC del ácido salicílico.',
+   hints:['Tiene −COOH y −OH en el mismo anillo','El −OH está en posición 2 (orto)'],
+   ans:'ácido 2-hidroxibenzoico', accepted:['ácido 2-hidroxibenzoico','acido 2-hidroxibenzoico','2-hidroxibenzoico','ácido salicílico','acido salicilico','salicílico'],
+   expl:'COOH en C1 y OH en C2 → <b>ácido 2-hidroxibenzoico</b>. Nombre trivial: <em>ácido salicílico</em>.',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'2-hidroxi',cls:'r',l:'OH en C2'},{t:'benzo',cls:'c',l:'Anillo'},{t:'ico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'mc', mol:'acidoSalicilico', q:'¿De qué compuesto se obtiene la aspirina (ácido acetilsalicílico)?',
+   ans:'Ácido salicílico', opts:['Ácido salicílico','Fenol','Ácido benzoico','Benzaldehído'],
+   expl:'La aspirina se obtiene por <b>acetilación del −OH</b> del ácido salicílico con anhídrido acético → ácido 2-(acetoxi)benzoico.',
+   topic:'benceno'},
+
+  // ── PARA-CRESOL ──
+  {type:'mc', mol:'paraCresol', q:'¿Cuál es el nombre IUPAC del para-cresol?',
+   ans:'4-metilfenol', opts:['4-metilfenol','2-metilfenol','4-metilbenceno','metoxibenceno'],
+   expl:'El para-cresol tiene −OH en C1 y −CH₃ en C4 (posición para) → <b>4-metilfenol</b>.',
+   parts:[{t:'4-metil',cls:'r',l:'Metilo (C4)'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+  {type:'write', mol:'paraCresol', q:'Escribe el nombre IUPAC del para-cresol.',
+   hints:['Fenol con un metilo en posición para (4)','4-metil + fenol'],
+   ans:'4-metilfenol', accepted:['4-metilfenol','4-metil-fenol','para-cresol','p-cresol'],
+   expl:'−OH en C1 y −CH₃ en C4 → <b>4-metilfenol</b>. Nombre trivial: <em>para-cresol</em>.',
+   parts:[{t:'4-metil',cls:'r',l:'Metilo (C4)'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+  {type:'mc', mol:'paraCresol', q:'Los tres cresoles (o-, m-, p-) son isómeros de fórmula:',
+   ans:'C₇H₈O', opts:['C₇H₈O','C₇H₆O','C₆H₆O','C₈H₁₀O'],
+   expl:'Metilbenceno (C₇H₈) + OH (sustituye H) → <b>C₇H₈O</b>. Los tres cresoles son isómeros de posición con la misma fórmula.',
+   topic:'benceno'},
+
+  // ── RESORCINOL ──
+  {type:'mc', mol:'resorcinol', q:'¿Cuál es el nombre sistemático del resorcinol?',
+   ans:'benceno-1,3-diol', opts:['benceno-1,3-diol','benceno-1,2-diol','benceno-1,4-diol','1,3-difenol'],
+   expl:'El resorcinol tiene dos grupos −OH en posiciones 1 y 3 → <b>benceno-1,3-diol</b>.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'1,3',cls:'i',l:'Localiz.'},{t:'diol',cls:'g',l:'2 × OH'}], topic:'benceno'},
+  {type:'write', mol:'resorcinol', q:'Escribe el nombre IUPAC del resorcinol.',
+   hints:['Dos grupos −OH en el anillo bencénico','Posiciones 1 y 3 (meta)'],
+   ans:'benceno-1,3-diol', accepted:['benceno-1,3-diol','benceno-1,3diol','1,3-bencenodiol','13bencenodiol','resorcinol'],
+   expl:'−OH en 1 y 3 → <b>benceno-1,3-diol</b> (meta-diol). Nombre trivial: <em>resorcinol</em>.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'1,3',cls:'i',l:'Localiz.'},{t:'diol',cls:'g',l:'2 × OH'}], topic:'benceno'},
+  {type:'mc', mol:'resorcinol', q:'¿Cuántos dihidroxibencenos (bencenodiol) isómeros existen?',
+   ans:'3 (catecol 1,2; resorcinol 1,3; hidroquinona 1,4)', opts:['3 (catecol 1,2; resorcinol 1,3; hidroquinona 1,4)','2','4','6'],
+   expl:'Los tres isómeros del benceno-diol son: <b>catecol</b> (1,2), <b>resorcinol</b> (1,3) e <b>hidroquinona</b> (1,4).',
+   topic:'benceno'},
+
+  // ── PARA-CLOROANILINA ──
+  {type:'mc', mol:'paraCloroanilina', q:'¿Cuál es el nombre IUPAC de la para-cloroanilina?',
+   ans:'4-cloroanilina', opts:['4-cloroanilina','2-cloroanilina','4-clorobenceno','4-clorofenol'],
+   expl:'Anilina con Cl en posición 4 (para) → <b>4-cloroanilina</b> (IUPAC: 4-clorobencenamina).',
+   parts:[{t:'4-cloro',cls:'r',l:'Cl en C4'},{t:'anil',cls:'c',l:'Anillo'},{t:'ina',cls:'g',l:'NH₂'}], topic:'benceno'},
+  {type:'write', mol:'paraCloroanilina', q:'Escribe el nombre IUPAC de NH₂-C₆H₄-Cl (posición para).',
+   hints:['Anilina con Cl en posición 4','4-cloro + anilina'],
+   ans:'4-cloroanilina', accepted:['4-cloroanilina','4-cloro-anilina','para-cloroanilina','p-cloroanilina'],
+   expl:'−NH₂ en C1 y −Cl en C4 → <b>4-cloroanilina</b>.',
+   parts:[{t:'4-cloro',cls:'r',l:'Cl en C4'},{t:'anil',cls:'c',l:'Anillo'},{t:'ina',cls:'g',l:'NH₂'}], topic:'benceno'},
+  {type:'mc', mol:'paraCloroanilina', q:'¿Cuál es la fórmula molecular de la 4-cloroanilina?',
+   ans:'C₆H₆ClN', opts:['C₆H₆ClN','C₆H₅Cl','C₆H₇N','C₆H₄ClNO'],
+   expl:'Anilina (C₆H₇N) − H + Cl → <b>C₆H₆ClN</b>. La sustitución de un H del anillo por Cl mantiene el N del grupo −NH₂.',
+   parts:[{t:'4-cloro',cls:'r',l:'Cl en C4'},{t:'anil',cls:'c',l:'Anillo'},{t:'ina',cls:'g',l:'NH₂'}], topic:'benceno'},
+
+  // ── TNT ──
+  {type:'mc', mol:'TNT', q:'¿Qué significa el acrónimo TNT?',
+   ans:'2,4,6-trinitrotolueno', opts:['2,4,6-trinitrotolueno','trinitrotoluol','tetran itrotolueno','2,3,4-trinitrotolueno'],
+   expl:'<b>TNT</b> = <b>2,4,6-trinitrotolueno</b>: metilbenceno con tres grupos −NO₂ en posiciones 2, 4 y 6 (simétricas al metilo).',
+   parts:[{t:'2,4,6-trinitro',cls:'r',l:'3 × NO₂'},{t:'toluen',cls:'c',l:'Metilbenceno'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'TNT', q:'¿Cuántos grupos −NO₂ tiene el TNT y en qué posiciones?',
+   ans:'Tres, en posiciones 2, 4 y 6', opts:['Tres, en posiciones 2, 4 y 6','Dos, en 2 y 4','Cuatro, en 2,3,4,5','Tres, en 1, 3 y 5'],
+   expl:'El TNT tiene <b>tres grupos nitro (−NO₂)</b> en las posiciones 2, 4 y 6 del anillo, simétricamente respecto al metilo de C1.',
+   topic:'benceno'},
+  {type:'write', mol:'TNT', q:'Escribe el nombre IUPAC completo del TNT.',
+   hints:['Metilbenceno (tolueno) con tres grupos nitro','Posiciones 2, 4 y 6 (simétricas al metilo)'],
+   ans:'2,4,6-trinitrotolueno', accepted:['2,4,6-trinitrotolueno','2,4,6trinitrotolueno','1-metil-2,4,6-trinitrobenceno','tnt'],
+   expl:'TNT = <b>2,4,6-trinitrotolueno</b> (nombre IUPAC: 1-metil-2,4,6-trinitrobenceno).',
+   parts:[{t:'2,4,6-trinitro',cls:'r',l:'3 × NO₂'},{t:'toluen',cls:'c',l:'Metilbenceno'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+
+  // ── ÁCIDO PÍCRICO ──
+  {type:'mc', mol:'acidoPicrico', q:'¿Cuál es el nombre IUPAC del ácido pícrico?',
+   ans:'2,4,6-trinitrofenol', opts:['2,4,6-trinitrofenol','2,4,6-trinitrotolueno','2,4-dinitrofenol','trinitrobenzoico'],
+   expl:'El ácido pícrico es un fenol (−OH) con tres grupos nitro en posiciones 2, 4 y 6 → <b>2,4,6-trinitrofenol</b>.',
+   parts:[{t:'2,4,6-trinitro',cls:'r',l:'3 × NO₂'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+  {type:'mc', mol:'acidoPicrico', q:'¿En qué se diferencia el ácido pícrico del TNT?',
+   ans:'Tienen OH (fenol) en lugar del CH₃ (metilo) en C1', opts:['Tienen OH (fenol) en lugar del CH₃ (metilo) en C1','El ácido pícrico tiene cuatro grupos nitro','No hay diferencia','El TNT tiene un OH adicional'],
+   expl:'TNT tiene −CH₃ en C1 y 3 × −NO₂; el ácido pícrico tiene <b>−OH en C1</b> y 3 × −NO₂ → ambos muy explosivos.',
+   topic:'benceno'},
+  {type:'write', mol:'acidoPicrico', q:'Escribe el nombre IUPAC del ácido pícrico.',
+   hints:['Fenol con tres grupos nitro','Posiciones 2, 4 y 6 como en el TNT'],
+   ans:'2,4,6-trinitrofenol', accepted:['2,4,6-trinitrofenol','2,4,6trinitrofenol','ácido pícrico','acido picrico'],
+   expl:'Fenol + 3 × −NO₂ en 2,4,6 → <b>2,4,6-trinitrofenol</b>. Trivial: <em>ácido pícrico</em>.',
+   parts:[{t:'2,4,6-trinitro',cls:'r',l:'3 × NO₂'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+
+  // ── VAINILLINA ──
+  {type:'mc', mol:'vainillina', q:'¿Cuántos y cuáles grupos funcionales tiene la vainillina?',
+   ans:'Tres: −CHO, −OH y −OCH₃', opts:['Tres: −CHO, −OH y −OCH₃','Dos: −CHO y −OH','Cuatro: −CHO, −OH, −OCH₃ y −COOH','Solo −CHO'],
+   expl:'La vainillina es 4-hidroxi-3-metoxibenzaldehído: <b>−CHO</b> (C1), <b>−OCH₃</b> (C3) y <b>−OH</b> (C4).',
+   parts:[{t:'4-hidroxi-3-metoxi',cls:'r',l:'OH+OCH₃'},{t:'benz',cls:'c',l:'Anillo'},{t:'aldehído',cls:'g',l:'CHO'}], topic:'benceno'},
+  {type:'mc', mol:'vainillina', q:'¿Con qué aroma natural se asocia la vainillina?',
+   ans:'Vainilla', opts:['Vainilla','Canela','Almendras','Menta'],
+   expl:'La <b>vainillina</b> (4-hidroxi-3-metoxibenzaldehído) es el compuesto responsable del aroma de la <b>vainilla</b>. Se extrae de la vaina de Vanilla planifolia.',
+   topic:'benceno'},
+  {type:'mc', mol:'vainillina', q:'¿Cuál es el nombre IUPAC de la vainillina?',
+   ans:'4-hidroxi-3-metoxibenzaldehído', opts:['4-hidroxi-3-metoxibenzaldehído','3-metoxi-4-hidroxibenzaldehído','4-metoxibenzaldehído','vainillina'],
+   expl:'IUPAC 2013: localizador menor primero → <b>4-hidroxi-3-metoxibenzaldehído</b>. El grupo aldehído fija el C1 del anillo.',
+   parts:[{t:'4-hidroxi-3-metoxi',cls:'r',l:'OH+OCH₃'},{t:'benz',cls:'c',l:'Anillo'},{t:'aldehído',cls:'g',l:'CHO'}], topic:'benceno'},
+
+  // ── ASPIRINA ──
+  {type:'mc', mol:'aspirina', q:'¿Cuáles son los dos grupos funcionales del ácido acetilsalicílico (aspirina)?',
+   ans:'−COOH (ácido) y −OCOCH₃ (éster)', opts:['−COOH (ácido) y −OCOCH₃ (éster)','−COOH y −OH','−COOH y −NH₂','−OH y −OCOCH₃'],
+   expl:'La aspirina tiene <b>−COOH</b> en C1 y <b>−OCOCH₃</b> (éster acetato) en C2. El −OH del ácido salicílico se ha esterificado.',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'acetil',cls:'r',l:'Acetato'},{t:'salicíl',cls:'c',l:'Anillo+OH'},{t:'ico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'write', mol:'aspirina', q:'Escribe el nombre IUPAC de la aspirina.',
+   hints:['Proviene del ácido salicílico esterificado','El nombre tiene "acetoxi" para el éster y "benzoico" para el −COOH'],
+   ans:'ácido 2-(acetoxi)benzoico', accepted:['ácido 2-(acetoxi)benzoico','acido 2-acetoxibenzoico','ácido acetilsalicílico','acido acetilsalicilico','aspirina'],
+   expl:'−COOH en C1 + −OCOCH₃ en C2 → <b>ácido 2-(acetoxi)benzoico</b>. Nombre trivial: <em>ácido acetilsalicílico</em> / aspirina.',
+   parts:[{t:'ácido',cls:'g',l:'Ácido'},{t:'2-(acetoxi)',cls:'r',l:'OAc en C2'},{t:'benzo',cls:'c',l:'Anillo'},{t:'ico',cls:'g',l:'Carboxilo'}], topic:'benceno'},
+  {type:'mc', mol:'aspirina', q:'¿Qué reacción convierte el ácido salicílico en aspirina?',
+   ans:'Esterificación del −OH con anhídrido acético', opts:['Esterificación del −OH con anhídrido acético','Oxidación del −OH','Nitración del anillo','Reducción del −COOH'],
+   expl:'La acetilación del −OH del ácido salicílico con anhídrido acético produce el grupo éster −OCOCH₃ → <b>aspirina</b>.',
+   topic:'benceno'},
+
+  // ── PARACETAMOL ──
+  {type:'mc', mol:'paracetamol', q:'¿Cuáles son los grupos funcionales del paracetamol?',
+   ans:'−OH (fenol) y −NHCOCH₃ (amida)', opts:['−OH (fenol) y −NHCOCH₃ (amida)','−OH y −NH₂','−COOH y −NH₂','−OH y −OCH₃'],
+   expl:'El paracetamol tiene <b>−OH</b> (fenol) en C1 y <b>−NHCOCH₃</b> (grupo acetamida) en C4 (para).',
+   parts:[{t:'4-acetamido',cls:'r',l:'NHCOCH₃'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+  {type:'mc', mol:'paracetamol', q:'¿En qué posición está el grupo amida respecto al −OH en el paracetamol?',
+   ans:'Posición para (1,4)', opts:['Posición para (1,4)','Posición orto (1,2)','Posición meta (1,3)','No hay sustitución posicional'],
+   expl:'El paracetamol es 4-acetamidofenol: −OH en C1 y −NHCOCH₃ en C4 → posición <b>para</b>.',
+   parts:[{t:'4-acetamido',cls:'r',l:'NHCOCH₃ en C4'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH en C1'}], topic:'benceno'},
+  {type:'write', mol:'paracetamol', q:'Escribe el nombre IUPAC del paracetamol.',
+   hints:['Fenol con acetamida en posición para','4-acetamido + fenol'],
+   ans:'N-(4-hidroxifenil)etanamida', accepted:['N-(4-hidroxifenil)etanamida','4-acetamidofenol','4-acetamido-fenol','paracetamol','acetaminofén','acetaminofen'],
+   expl:'IUPAC: <b>N-(4-hidroxifenil)etanamida</b>. Nombres aceptados: 4-acetamidofenol, acetaminofén.',
+   parts:[{t:'4-acetamido',cls:'r',l:'NHCOCH₃'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'benceno'},
+
+  // ── 1,2,4-TRICLOROBENCENO ──
+  {type:'mc', mol:'triclorobenceno124', q:'¿En qué posiciones están los cloros del 1,2,4-triclorobenceno?',
+   ans:'C1, C2 y C4', opts:['C1, C2 y C4','C1, C3 y C5','C1, C2 y C3','C1 y C4'],
+   expl:'El 1,2,4-triclorobenceno tiene <b>Cl en C1, C2 y C4</b>: dos cloros adyacentes y uno en posición para respecto al C1.',
+   parts:[{t:'1,2,4-tricloro',cls:'r',l:'3 × Cl'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
+  {type:'mc', mol:'triclorobenceno124', q:'¿Cuántos isómeros del triclorobenceno existen?',
+   ans:'3 (1,2,3; 1,2,4; 1,3,5)', opts:['3 (1,2,3; 1,2,4; 1,3,5)','2','4','6'],
+   expl:'Los tres triclorobencenos son: <b>1,2,3-</b> (tres consecutivos), <b>1,2,4-</b> (dos adyacentes + uno en 4) y <b>1,3,5-</b> (alternados).',
+   topic:'benceno'},
+  {type:'write', mol:'triclorobenceno124', q:'Escribe el nombre IUPAC del isómero del triclorobenceno con Cl en posiciones 1, 2 y 4.',
+   hints:['Benceno con tres Cl','Posiciones 1, 2 y 4'],
+   ans:'1,2,4-triclorobenceno', accepted:['1,2,4-triclorobenceno','1,2,4tricloro benceno','1,2,4-trichlorobenzene'],
+   expl:'Tres Cl en posiciones 1, 2 y 4 → <b>1,2,4-triclorobenceno</b>.',
+   parts:[{t:'1,2,4-tricloro',cls:'r',l:'3 × Cl'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 
   // ── PREGUNTAS AÑADIDAS DESDE TEORÍA (moléculas sin ejercicio) ────────────────
 
@@ -2704,12 +3036,839 @@ const QBANK = [
    oldNames:['ácido caproico','acido caproico'],
    hints:['6 carbonos incluyendo el COOH','ácido + hex + an + oico'],
    expl:'6C con −COOH → <b>ácido hexanoico</b>. Nombre antiguo: <em>ácido caproico</em>.', topic:'acidos'},
+
+  // ════════════════════════════════════════════════════════
+  // PREGUNTAS AÑADIDAS (auditoría) — agrupadas por topic
+  // ════════════════════════════════════════════════════════
+
+  // ── ALDEHÍDOS (extra) ──
+  {type:'drag', mol:'pentanal', q:'Arrastra los fragmentos para formar el nombre IUPAC de este aldehído.',
+   ans:'pentanal',
+   slots:[
+     {id:'au_ald1',label:'Cadena principal',correct:'pent',cls:'c'},
+     {id:'au_ald2',label:'Sin insaturación',correct:'an',cls:'c'},
+     {id:'au_ald3',label:'Grupo funcional',correct:'al',cls:'g'},
+   ],
+   tokens:[{text:'pent',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'but',cls:'c'},{text:'ol',cls:'g'},{text:'ona',cls:'g'}],
+   expl:'Cadena de 5C con −CHO → <b>pentanal</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'drag', mol:'propanal', q:'Arrastra los fragmentos para formar el nombre IUPAC de este aldehído.',
+   ans:'propanal',
+   slots:[
+     {id:'au_ald4',label:'Cadena principal',correct:'prop',cls:'c'},
+     {id:'au_ald5',label:'Sin insaturación',correct:'an',cls:'c'},
+     {id:'au_ald6',label:'Grupo funcional',correct:'al',cls:'g'},
+   ],
+   tokens:[{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'et',cls:'c'},{text:'ol',cls:'g'},{text:'oico',cls:'g'}],
+   expl:'Cadena de 3C con −CHO → <b>propanal</b>.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'id', mol:'butanal',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butanal', highlight:{text:'but',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"but" es la <b>Cadena principal</b> — indica los 4 carbonos (incluido el del −CHO).', topic:'aldehidos'},
+
+  {type:'id', mol:'etanal',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanal', highlight:{text:'et',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"et" es la <b>Cadena principal</b> — indica los 2 carbonos del etanal.', topic:'aldehidos'},
+
+  {type:'write', mol:'etanal', q:'Escribe el nombre IUPAC de este aldehído.',
+   hints:['Cadena de 2 carbonos','2C + sin insaturación + sufijo de aldehído'],
+   ans:'etanal', accepted:['etanal','acetaldehído','acetaldehido'],
+   expl:'2C con −CHO → <b>etanal</b>. Nombre antiguo: <em>acetaldehído</em>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'write', mol:'hexanal', q:'Escribe el nombre IUPAC de este aldehído.',
+   hints:['Cadena de 6 carbonos','hex + an + al'],
+   ans:'hexanal', accepted:['hexanal','capronaldehído','capronaldehido'],
+   expl:'6C con −CHO → <b>hexanal</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'mc', mol:'butanal', q:'¿Cuál es el nombre IUPAC de este aldehído de 4 carbonos?',
+   ans:'butanal', opts:['butanal','butanona','butan-1-ol','ácido butanoico'],
+   expl:'Cadena de 4C con −CHO terminal → <b>butanal</b>. La terminación <b>-al</b> indica aldehído.',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'mc', mol:'propanal', q:'¿Qué posición ocupa siempre el grupo −CHO en un aldehído lineal?',
+   ans:'El carbono 1 (extremo de la cadena)', opts:['El carbono 1 (extremo de la cadena)','El carbono central','Cualquier carbono','El carbono 2'],
+   expl:'El grupo aldehído −CHO es terminal: ocupa siempre el <b>C1</b>, por eso no requiere localizador.',
+   parts:[{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'mc', mol:'hexanal', q:'¿Por qué el grupo −CHO no lleva número localizador?',
+   ans:'Porque siempre está en el extremo (C1)', opts:['Porque siempre está en el extremo (C1)','Porque está en el centro','Porque es opcional','Porque va en C2'],
+   expl:'El −CHO solo puede ser terminal, así que por convención IUPAC no se indica su localizador: <b>hexanal</b>, no hexan-1-al.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'mc', mol:'etanal', q:'¿Cuál es el grupo funcional característico de los aldehídos?',
+   ans:'−CHO (carbonilo terminal)', opts:['−CHO (carbonilo terminal)','−COOH','−OH','−C≡N'],
+   expl:'Los aldehídos tienen un carbonilo en el extremo: <b>−CHO</b>. Su sufijo IUPAC es <b>-al</b>.',
+   parts:[{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'mc', mol:'butanal', q:'¿En qué se diferencia el butanal de la butan-2-ona?',
+   ans:'El butanal tiene el carbonilo en el extremo (−CHO); la cetona en el interior', opts:['El butanal tiene el carbonilo en el extremo (−CHO); la cetona en el interior','Tienen distinta cantidad de carbonos','El butanal es un alcohol','No hay diferencia'],
+   expl:'Ambos tienen 4C y un grupo C=O, pero en el <b>butanal</b> el carbonilo es terminal (aldehído) y en la butan-2-ona es interno (cetona).',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'write', mol:'pentanal', q:'Escribe el nombre IUPAC de este aldehído de 5 carbonos.',
+   hints:['5 carbonos en la cadena','pent + an + al'],
+   ans:'pentanal', accepted:['pentanal','valeraldehído','valeraldehido'],
+   expl:'5C con −CHO → <b>pentanal</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'CHO'}], topic:'aldehidos'},
+
+  {type:'id', mol:'propanal',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propanal', highlight:{text:'al',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"al" es el <b>Grupo funcional</b> — sufijo que indica aldehído (−CHO).', topic:'aldehidos'},
+
+  {type:'id', mol:'hexanal',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'hexanal', highlight:{text:'hex',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"hex" es la <b>Cadena principal</b> — 6 carbonos.', topic:'aldehidos'},
+
+  // ── ALQUINOS (extra) ──
+  {type:'drag', mol:'but2ino', q:'Arrastra los fragmentos para formar el nombre IUPAC de este alquino.',
+   ans:'but-2-ino',
+   slots:[
+     {id:'au_alq1',label:'Cadena principal',correct:'but',cls:'c'},
+     {id:'au_alq2',label:'Localizador del triple enlace',correct:'2',cls:'i'},
+     {id:'au_alq3',label:'Grupo funcional (triple enlace)',correct:'ino',cls:'g'},
+   ],
+   tokens:[{text:'but',cls:'c'},{text:'2',cls:'i'},{text:'ino',cls:'g'},{text:'pent',cls:'c'},{text:'1',cls:'i'},{text:'eno',cls:'g'}],
+   expl:'4C con triple enlace en C2 → <b>but-2-ino</b>.',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'2',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'drag', mol:'pent1ino', q:'Arrastra los fragmentos para formar el nombre IUPAC de este alquino.',
+   ans:'pent-1-ino',
+   slots:[
+     {id:'au_alq4',label:'Cadena principal',correct:'pent',cls:'c'},
+     {id:'au_alq5',label:'Localizador del triple enlace',correct:'1',cls:'i'},
+     {id:'au_alq6',label:'Grupo funcional (triple enlace)',correct:'ino',cls:'g'},
+   ],
+   tokens:[{text:'pent',cls:'c'},{text:'1',cls:'i'},{text:'ino',cls:'g'},{text:'but',cls:'c'},{text:'2',cls:'i'},{text:'eno',cls:'g'}],
+   expl:'5C con triple enlace en C1 → <b>pent-1-ino</b>.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'1',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'drag', mol:'hex3ino', q:'Arrastra los fragmentos para formar el nombre IUPAC de este alquino.',
+   ans:'hex-3-ino',
+   slots:[
+     {id:'au_alq7',label:'Cadena principal',correct:'hex',cls:'c'},
+     {id:'au_alq8',label:'Localizador del triple enlace',correct:'3',cls:'i'},
+     {id:'au_alq9',label:'Grupo funcional (triple enlace)',correct:'ino',cls:'g'},
+   ],
+   tokens:[{text:'hex',cls:'c'},{text:'3',cls:'i'},{text:'ino',cls:'g'},{text:'pent',cls:'c'},{text:'1',cls:'i'},{text:'eno',cls:'g'}],
+   expl:'6C con triple enlace en C3 (cadena simétrica) → <b>hex-3-ino</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'3',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'id', mol:'pent1ino',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'pent-1-ino', highlight:{text:'pent',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"pent" es la <b>Cadena principal</b> — 5 carbonos.', topic:'alquinos'},
+
+  {type:'id', mol:'but2ino',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'but-2-ino', highlight:{text:'2',cls:'i'}, correct:'i',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"2" es el <b>localizador de la insaturación</b> — indica la posición del triple enlace.', topic:'alquinos'},
+
+  {type:'id', mol:'hex1ino',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'hex-1-ino', highlight:{text:'ino',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"ino" es el <b>sufijo de grupo funcional</b> — indica un triple enlace C≡C (alquino).', topic:'alquinos'},
+
+  {type:'write', mol:'but1ino', q:'Escribe el nombre IUPAC completo de este alquino.',
+   hints:['Cadena de 4 carbonos con un triple enlace','El triple enlace empieza en el C1'],
+   ans:'but-1-ino', accepted:['but-1-ino','but1ino','butino','1-butino'],
+   expl:'4C con triple enlace en C1 → <b>but-1-ino</b>.',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'write', mol:'hex3ino', q:'Escribe el nombre IUPAC completo de este alquino.',
+   hints:['Cadena de 6 carbonos con un triple enlace','El triple enlace está en el centro (C3)'],
+   ans:'hex-3-ino', accepted:['hex-3-ino','hex3ino','3-hexino'],
+   expl:'6C con triple enlace en C3 → <b>hex-3-ino</b>. Numerando desde cualquier extremo se obtiene 3 (cadena simétrica).',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'3',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'mc', mol:'but2ino', q:'¿Qué sufijo distingue a un alquino de un alqueno?',
+   ans:'-ino (alquino) frente a -eno (alqueno)', opts:['-ino (alquino) frente a -eno (alqueno)','-ano frente a -eno','-ol frente a -al','-oico frente a -ona'],
+   expl:'El sufijo <b>-ino</b> indica un triple enlace (alquino); <b>-eno</b> indica un doble enlace (alqueno).',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'2',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'mc', mol:'hex1ino', q:'¿Cuántos enlaces comparten los dos carbonos del triple enlace en un alquino?',
+   ans:'Tres (un enlace σ y dos π)', opts:['Tres (un enlace σ y dos π)','Dos','Uno','Cuatro'],
+   expl:'Un triple enlace C≡C está formado por <b>tres enlaces</b>: uno sigma y dos pi. Sufijo IUPAC: <b>-ino</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'1',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'mc', mol:'pent1ino', q:'¿Por qué el pent-1-ino se numera desde ese extremo?',
+   ans:'Para dar al triple enlace el localizador más bajo (1)', opts:['Para dar al triple enlace el localizador más bajo (1)','Por orden alfabético','Es arbitrario','Para que el C1 sea CH₃'],
+   expl:'La cadena se numera para que la insaturación reciba el localizador más bajo: el triple enlace en el extremo da <b>1</b>, no 4.',
+   parts:[{t:'pent',cls:'c',l:'5C'},{t:'1',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  {type:'mc', mol:'but1ino', q:'¿Cuál es el nombre IUPAC de un alquino de 4C con el triple enlace en el C1?',
+   ans:'but-1-ino', opts:['but-1-ino','but-2-ino','but-1-eno','butano'],
+   expl:'4C + triple enlace en C1 → <b>but-1-ino</b>.',
+   parts:[{t:'but',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'ino',cls:'g',l:'Triple enl.'}], topic:'alquinos'},
+
+  // ── ÉTERES (extra) ──
+  {type:'write', mol:'metoximetano', q:'Escribe el nombre IUPAC de este éter simétrico.',
+   hints:['Es el éter más simple','Los dos grupos alquilo son metilo'],
+   ans:'metoximetano', accepted:['metoximetano','dimetil éter','éter dimetílico','eter dimetilico','dimetileter'],
+   expl:'Dos grupos metilo unidos por O: el sustituyente metoxi va al metano → <b>metoximetano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'Sust. alcoxi'},{t:'metano',cls:'c',l:'Cadena 1C'}], topic:'eteres'},
+
+  {type:'write', mol:'metoxipropano', q:'Escribe el nombre IUPAC de este éter.',
+   hints:['Cadena principal de 3 carbonos (propano)','El grupo −OCH₃ es el sustituyente metoxi'],
+   ans:'metoxipropano', accepted:['metoxipropano','1-metoxipropano','éter metil propílico','eter metil propilico'],
+   expl:'Cadena de 3C (propano) con sustituyente −OCH₃ → <b>metoxipropano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'propano',cls:'c',l:'Cadena 3C'}], topic:'eteres'},
+
+  {type:'drag', mol:'metoxipropano', q:'Arrastra los fragmentos para formar el nombre IUPAC de este éter.',
+   ans:'metoxipropano',
+   slots:[
+     {id:'au_et1',label:'Sustituyente alcoxi (menor)',correct:'metoxi',cls:'r'},
+     {id:'au_et2',label:'Cadena principal',correct:'prop',cls:'c'},
+     {id:'au_et3',label:'Terminación de alcano',correct:'ano',cls:'g'},
+   ],
+   tokens:[{text:'metoxi',cls:'r'},{text:'prop',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'r'},{text:'et',cls:'c'}],
+   expl:'El grupo menor (−OCH₃) es metoxi; la cadena mayor de 3C es propano → <b>metoxipropano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'prop',cls:'c',l:'3C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'id', mol:'metoxipropano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'metoxipropano', highlight:{text:'metoxi',cls:'r'}, correct:'r',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"metoxi" (−OCH₃) es el <b>sustituyente alcoxi</b> que precede a la cadena principal.', topic:'eteres'},
+
+  {type:'id', mol:'metoximetano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'metoximetano', highlight:{text:'metano',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"metano" es la <b>cadena principal</b> de 1 carbono a la que se une el sustituyente metoxi.', topic:'eteres'},
+
+  {type:'mc', mol:'metoxietano', q:'¿Cuál es el nombre IUPAC de CH₃−O−C₂H₅?',
+   ans:'metoxietano', opts:['metoxietano','etoximetano','metoximetano','etoxietano'],
+   expl:'El grupo menor (metilo) se nombra como sustituyente metoxi; la cadena mayor (2C) es etano → <b>metoxietano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'mc', mol:'etoxietano', q:'¿Cómo se elige la cadena principal en un éter por nomenclatura sustitutiva?',
+   ans:'La cadena de carbono más larga; el grupo alcoxi menor es sustituyente', opts:['La cadena de carbono más larga; el grupo alcoxi menor es sustituyente','La cadena más corta','La que contiene el oxígeno','Cualquiera de las dos'],
+   expl:'Se toma como cadena principal la cadena carbonada más larga; el otro grupo, unido por O, se nombra como prefijo <b>alcoxi-</b>.',
+   parts:[{t:'etoxi',cls:'r',l:'−OC₂H₅'},{t:'et',cls:'c',l:'2C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'mc', mol:'metoxipropano', q:'¿Qué representa el prefijo "metoxi-" en metoxipropano?',
+   ans:'El grupo −O−CH₃ unido a la cadena', opts:['El grupo −O−CH₃ unido a la cadena','Un grupo metilo simple','Un doble enlace','Un grupo −OH'],
+   expl:'<b>metoxi-</b> = −O−CH₃ (oxígeno + metilo) actuando como sustituyente alcoxi sobre la cadena de propano.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'prop',cls:'c',l:'3C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'drag', mol:'metoximetano', q:'Arrastra los fragmentos para formar el nombre del éter dimetílico.',
+   ans:'metoximetano',
+   slots:[
+     {id:'au_et4',label:'Sustituyente alcoxi',correct:'metoxi',cls:'r'},
+     {id:'au_et5',label:'Cadena principal',correct:'met',cls:'c'},
+     {id:'au_et6',label:'Terminación de alcano',correct:'ano',cls:'g'},
+   ],
+   tokens:[{text:'metoxi',cls:'r'},{text:'met',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'r'},{text:'prop',cls:'c'}],
+   expl:'Dos metilos: el sustituyente metoxi sobre el metano → <b>metoximetano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'met',cls:'c',l:'1C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'id', mol:'metoxietano',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'metoxietano', highlight:{text:'et',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"et" es la <b>cadena principal</b> (etano, 2C) a la que se une el metoxi.', topic:'eteres'},
+
+  {type:'mc', mol:'metoximetano', q:'¿Por qué los éteres se nombran con un prefijo "alcoxi-" y no con sufijo?',
+   ans:'Porque el grupo −O− no es prioritario: se trata como sustituyente', opts:['Porque el grupo −O− no es prioritario: se trata como sustituyente','Porque no tienen grupo funcional','Porque siempre son simétricos','Porque el oxígeno es terminal'],
+   expl:'El oxígeno de éter tiene baja prioridad funcional, por eso se nombra como sustituyente <b>alcoxi-</b> sobre la cadena principal.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'met',cls:'c',l:'1C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+  {type:'write', mol:'metoxipropano', q:'Escribe el nombre IUPAC del éter formado por metilo y propilo unidos por O.',
+   hints:['La cadena más larga es la de 3C (propano)','El grupo −OCH₃ es metoxi'],
+   ans:'metoxipropano', accepted:['metoxipropano','1-metoxipropano','éter metil propílico','eter metil propilico'],
+   expl:'Propano (cadena principal, 3C) con sustituyente metoxi → <b>metoxipropano</b>.',
+   parts:[{t:'metoxi',cls:'r',l:'−OCH₃'},{t:'propano',cls:'c',l:'3C'}], topic:'eteres'},
+
+  // ── ÁCIDOS CARBOXÍLICOS (extra) ──
+  {type:'drag', mol:'acidoetanoico', q:'Arrastra los fragmentos para formar el nombre IUPAC de este ácido.',
+   ans:'ácido etanoico',
+   slots:[
+     {id:'au_ac1',label:'Prefijo de familia',correct:'ácido',cls:'g'},
+     {id:'au_ac2',label:'Cadena principal',correct:'etan',cls:'c'},
+     {id:'au_ac3',label:'Grupo funcional (−COOH)',correct:'oico',cls:'g'},
+   ],
+   tokens:[{text:'ácido',cls:'g'},{text:'etan',cls:'c'},{text:'oico',cls:'g'},{text:'propan',cls:'c'},{text:'al',cls:'g'}],
+   expl:'2C con −COOH → <b>ácido etanoico</b> (nombre antiguo: ácido acético).',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'etan',cls:'c',l:'2C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'drag', mol:'acidopentanoico', q:'Arrastra los fragmentos para formar el nombre IUPAC de este ácido.',
+   ans:'ácido pentanoico',
+   slots:[
+     {id:'au_ac4',label:'Prefijo de familia',correct:'ácido',cls:'g'},
+     {id:'au_ac5',label:'Cadena principal',correct:'pentan',cls:'c'},
+     {id:'au_ac6',label:'Grupo funcional (−COOH)',correct:'oico',cls:'g'},
+   ],
+   tokens:[{text:'ácido',cls:'g'},{text:'pentan',cls:'c'},{text:'oico',cls:'g'},{text:'butan',cls:'c'},{text:'ona',cls:'g'}],
+   expl:'5C con −COOH → <b>ácido pentanoico</b>.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'pentan',cls:'c',l:'5C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'id', mol:'acidoetanoico',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'ácido etanoico', highlight:{text:'oico',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'El sufijo "-oico" (con el prefijo ácido) es el <b>grupo funcional</b> ácido carboxílico −COOH.', topic:'acidos'},
+
+  {type:'id', mol:'acidopentanoico',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'ácido pentanoico', highlight:{text:'pentan',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"pentan" es la <b>cadena principal</b> de 5 carbonos (incluido el del −COOH).', topic:'acidos'},
+
+  {type:'mc', mol:'acidobutanoico', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico de 4 carbonos?',
+   ans:'ácido butanoico', opts:['ácido butanoico','butanal','butanamida','butanoato de metilo'],
+   expl:'4C con −COOH → <b>ácido butanoico</b>. La terminación <b>-oico</b> precedida de "ácido" indica el grupo carboxilo.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'butan',cls:'c',l:'4C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'mc', mol:'acidoetanoico', q:'¿Qué grupo funcional caracteriza a los ácidos carboxílicos?',
+   ans:'−COOH (carboxilo)', opts:['−COOH (carboxilo)','−CHO','−OH','−CO−'],
+   expl:'Los ácidos carboxílicos contienen el grupo <b>−COOH</b> (carboxilo). Sufijo IUPAC: ácido ...-oico.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'etan',cls:'c',l:'2C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'mc', mol:'acidopropanoico', q:'¿En qué carbono se encuentra siempre el grupo −COOH?',
+   ans:'En el C1 (extremo), por eso no lleva localizador', opts:['En el C1 (extremo), por eso no lleva localizador','En el C2','En el centro','En cualquier carbono'],
+   expl:'El carboxilo es terminal: ocupa el <b>C1</b> y por convención no se indica su localizador.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'propan',cls:'c',l:'3C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'write', mol:'acidoetanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+   hints:['Cadena de 2 carbonos','ácido + etan + oico'],
+   ans:'ácido etanoico', accepted:['ácido etanoico','acido etanoico','ácido acético','acido acetico'],
+   oldNames:['ácido acético','acido acetico'],
+   expl:'2C con −COOH → <b>ácido etanoico</b>. Nombre antiguo: <em>ácido acético</em>.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'etan',cls:'c',l:'2C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'write', mol:'acidopentanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+   hints:['Cadena de 5 carbonos','ácido + pentan + oico'],
+   ans:'ácido pentanoico', accepted:['ácido pentanoico','acido pentanoico','ácido valérico','acido valerico'],
+   oldNames:['ácido valérico','acido valerico'],
+   expl:'5C con −COOH → <b>ácido pentanoico</b>. Nombre antiguo: <em>ácido valérico</em>.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'pentan',cls:'c',l:'5C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'mc', mol:'acidopentanoico', q:'¿En qué se diferencia un ácido carboxílico de un aldehído con la misma cadena?',
+   ans:'El ácido tiene −COOH; el aldehído solo −CHO', opts:['El ácido tiene −COOH; el aldehído solo −CHO','No se diferencian','El ácido tiene un −OH alcohólico','El aldehído tiene −COOH'],
+   expl:'El carboxilo <b>−COOH</b> añade un oxígeno extra (=O y −OH sobre el mismo C) respecto al aldehído <b>−CHO</b>.',
+   parts:[{t:'ácido ',cls:'g',l:'Familia'},{t:'pentan',cls:'c',l:'5C'},{t:'oico',cls:'g',l:'−COOH'}], topic:'acidos'},
+
+  {type:'id', mol:'acidobutanoico',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'ácido butanoico', highlight:{text:'butan',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"butan" es la <b>cadena principal</b> de 4 carbonos (incluido el del carboxilo).', topic:'acidos'},
+
+  // ── ÉSTERES (extra) ──
+  {type:'drag', mol:'butanoatoMetilo', q:'Arrastra los fragmentos para formar el nombre IUPAC de este éster.',
+   ans:'butanoato de metilo',
+   slots:[
+     {id:'au_es1',label:'Cadena del ácido (acilo)',correct:'butanoato',cls:'c'},
+     {id:'au_es2',label:'Conector',correct:'de',cls:'g'},
+     {id:'au_es3',label:'Grupo del alcohol',correct:'metilo',cls:'r'},
+   ],
+   tokens:[{text:'butanoato',cls:'c'},{text:'de',cls:'g'},{text:'metilo',cls:'r'},{text:'etanoato',cls:'c'},{text:'etilo',cls:'r'}],
+   expl:'Ácido butanoico + metanol → <b>butanoato de metilo</b>.',
+   parts:[{t:'butanoato',cls:'c',l:'Acilo 4C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'drag', mol:'etanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC de este éster.',
+   ans:'etanoato de etilo',
+   slots:[
+     {id:'au_es4',label:'Cadena del ácido (acilo)',correct:'etanoato',cls:'c'},
+     {id:'au_es5',label:'Conector',correct:'de',cls:'g'},
+     {id:'au_es6',label:'Grupo del alcohol',correct:'etilo',cls:'r'},
+   ],
+   tokens:[{text:'etanoato',cls:'c'},{text:'de',cls:'g'},{text:'etilo',cls:'r'},{text:'propanoato',cls:'c'},{text:'metilo',cls:'r'}],
+   expl:'Ácido etanoico + etanol → <b>etanoato de etilo</b>.',
+   parts:[{t:'etanoato',cls:'c',l:'Acilo 2C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'etilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'id', mol:'butanoatoMetilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butanoato de metilo', highlight:{text:'oato de',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"-oato de" es el <b>grupo funcional</b> éster: une el acilo del ácido con el grupo del alcohol.', topic:'esteres'},
+
+  {type:'id', mol:'etanoatoEtilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanoato de etilo', highlight:{text:'etilo',cls:'r'}, correct:'r',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"etilo" proviene del <b>alcohol</b> (etanol): es el grupo R unido al oxígeno del éster.', topic:'esteres'},
+
+  {type:'write', mol:'etanoatoEtilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['Procede del ácido etanoico y del etanol','...oato de ...ilo'],
+   ans:'etanoato de etilo', accepted:['etanoato de etilo','acetato de etilo'],
+   expl:'Ácido etanoico + etanol → <b>etanoato de etilo</b> (nombre común: acetato de etilo).',
+   parts:[{t:'etanoato',cls:'c',l:'Acilo 2C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'etilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'write', mol:'butanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['Procede del ácido butanoico y del metanol','...oato de ...ilo'],
+   ans:'butanoato de metilo', accepted:['butanoato de metilo'],
+   expl:'Ácido butanoico + metanol → <b>butanoato de metilo</b>.',
+   parts:[{t:'butanoato',cls:'c',l:'Acilo 4C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'mc', mol:'propanoatoMetilo', q:'¿De qué ácido y alcohol procede el propanoato de metilo?',
+   ans:'Ácido propanoico + metanol', opts:['Ácido propanoico + metanol','Ácido metanoico + propanol','Ácido etanoico + etanol','Ácido butanoico + metanol'],
+   expl:'El <b>propanoato</b> viene del ácido propanoico (3C) y el <b>metilo</b> del metanol → propanoato de metilo.',
+   parts:[{t:'propanoato',cls:'c',l:'Acilo 3C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'mc', mol:'etanoatoMetilo', q:'¿Qué orden sigue el nombre de un éster?',
+   ans:'Primero el acilo (...oato), luego "de", luego el grupo del alcohol (...ilo)', opts:['Primero el acilo (...oato), luego "de", luego el grupo del alcohol (...ilo)','Primero el alcohol y luego el ácido','Solo el nombre del ácido','Solo el nombre del alcohol'],
+   expl:'Estructura del nombre: <b>...oato de ...ilo</b> — la parte del ácido va primero (acilo), seguida del grupo alquilo del alcohol.',
+   parts:[{t:'etanoato',cls:'c',l:'Acilo 2C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'mc', mol:'butanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster de ácido butanoico y metanol?',
+   ans:'butanoato de metilo', opts:['butanoato de metilo','metanoato de butilo','butanoato de etilo','ácido butanoico'],
+   expl:'Acilo del ácido butanoico (butanoato) + metilo del metanol → <b>butanoato de metilo</b>.',
+   parts:[{t:'butanoato',cls:'c',l:'Acilo 4C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  {type:'id', mol:'propanoatoMetilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'propanoato de metilo', highlight:{text:'propan',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"propan" es la <b>cadena principal</b> (acilo de 3C) procedente del ácido propanoico.', topic:'esteres'},
+
+  {type:'write', mol:'propanoatoMetilo', q:'Escribe el nombre IUPAC de este éster.',
+   hints:['Procede del ácido propanoico y del metanol','...oato de ...ilo'],
+   ans:'propanoato de metilo', accepted:['propanoato de metilo'],
+   expl:'Ácido propanoico + metanol → <b>propanoato de metilo</b>.',
+   parts:[{t:'propanoato',cls:'c',l:'Acilo 3C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
+
+  // ── AMIDAS (extra) ──
+  {type:'drag', mol:'etanamida', q:'Arrastra los fragmentos para formar el nombre IUPAC de esta amida.',
+   ans:'etanamida',
+   slots:[
+     {id:'au_am1',label:'Cadena principal',correct:'etan',cls:'c'},
+     {id:'au_am2',label:'Grupo funcional (−CONH₂)',correct:'amida',cls:'g'},
+   ],
+   tokens:[{text:'etan',cls:'c'},{text:'amida',cls:'g'},{text:'propan',cls:'c'},{text:'amina',cls:'g'},{text:'al',cls:'g'}],
+   expl:'2C con −CONH₂ → <b>etanamida</b>.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'write', mol:'butanamida', q:'Escribe el nombre IUPAC de esta amida.',
+   hints:['Cadena de 4 carbonos','butan + amida'],
+   ans:'butanamida', accepted:['butanamida'],
+   expl:'4C con −CONH₂ → <b>butanamida</b>.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'write', mol:'etanamida', q:'Escribe el nombre IUPAC de esta amida.',
+   hints:['Cadena de 2 carbonos','etan + amida'],
+   ans:'etanamida', accepted:['etanamida','acetamida'],
+   expl:'2C con −CONH₂ → <b>etanamida</b> (nombre antiguo: acetamida).',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'mc', mol:'butanamida', q:'¿Cuál es el grupo funcional de las amidas?',
+   ans:'−CONH₂ (carbonilo unido a nitrógeno)', opts:['−CONH₂ (carbonilo unido a nitrógeno)','−COOH','−NH₂ solo','−C≡N'],
+   expl:'Las amidas tienen el grupo <b>−CONH₂</b>: un carbonilo unido a nitrógeno. Sufijo IUPAC: <b>-amida</b>.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'mc', mol:'pentanamida', q:'¿En qué se diferencia una amida (−CONH₂) de una amina (−NH₂)?',
+   ans:'La amida tiene un carbonilo (C=O) junto al nitrógeno; la amina no', opts:['La amida tiene un carbonilo (C=O) junto al nitrógeno; la amina no','No se diferencian','La amina tiene oxígeno','La amida no tiene nitrógeno'],
+   expl:'La amida combina carbonilo + nitrógeno (<b>−CONH₂</b>); la amina solo tiene <b>−NH₂</b> sin carbonilo.',
+   parts:[{t:'pentan',cls:'c',l:'5C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'id', mol:'etanamida',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanamida', highlight:{text:'etan',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"etan" es la <b>cadena principal</b> de 2 carbonos (incluido el del carbonilo).', topic:'amidas'},
+
+  {type:'mc', mol:'propanamida', q:'¿Cuál es el nombre IUPAC de una amida lineal de 3 carbonos?',
+   ans:'propanamida', opts:['propanamida','propanonitrilo','propanal','ácido propanoico'],
+   expl:'3C con −CONH₂ → <b>propanamida</b>. El sufijo <b>-amida</b> indica el grupo amida.',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  {type:'mc', mol:'etanamida', q:'¿Lleva localizador el grupo amida en una cadena lineal?',
+   ans:'No, porque −CONH₂ es siempre terminal (C1)', opts:['No, porque −CONH₂ es siempre terminal (C1)','Sí, siempre el 2','Sí, depende de la cadena','Solo si hay ramificación'],
+   expl:'El grupo amida es terminal: ocupa el <b>C1</b>, por lo que no necesita localizador.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amida',cls:'g',l:'−CONH₂'}], topic:'amidas'},
+
+  // ── NITRILOS (extra) ──
+  {type:'drag', mol:'etanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC de este nitrilo.',
+   ans:'etanonitrilo',
+   slots:[
+     {id:'au_ni1',label:'Cadena principal',correct:'etano',cls:'c'},
+     {id:'au_ni2',label:'Grupo funcional (−C≡N)',correct:'nitrilo',cls:'g'},
+   ],
+   tokens:[{text:'etano',cls:'c'},{text:'nitrilo',cls:'g'},{text:'propano',cls:'c'},{text:'amida',cls:'g'},{text:'al',cls:'g'}],
+   expl:'2C (incluido el del −C≡N) → <b>etanonitrilo</b>.',
+   parts:[{t:'etano',cls:'c',l:'2C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  {type:'write', mol:'etanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+   hints:['Cadena de 2 carbonos (incluyendo el del −C≡N)','etano + nitrilo'],
+   ans:'etanonitrilo', accepted:['etanonitrilo','acetonitrilo'],
+   expl:'2C con −C≡N → <b>etanonitrilo</b> (nombre antiguo: acetonitrilo).',
+   parts:[{t:'etano',cls:'c',l:'2C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  {type:'write', mol:'butanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+   hints:['Cadena de 4 carbonos (incluyendo el del −C≡N)','butano + nitrilo'],
+   ans:'butanonitrilo', accepted:['butanonitrilo'],
+   expl:'4C con −C≡N → <b>butanonitrilo</b>.',
+   parts:[{t:'butano',cls:'c',l:'4C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  {type:'mc', mol:'butanonitrilo', q:'¿Cuál es el grupo funcional de los nitrilos?',
+   ans:'−C≡N (ciano)', opts:['−C≡N (ciano)','−CONH₂','−CHO','−COOH'],
+   expl:'Los nitrilos contienen el grupo <b>−C≡N</b>. El carbono del nitrilo cuenta en la cadena; sufijo: <b>-nitrilo</b>.',
+   parts:[{t:'butano',cls:'c',l:'4C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  {type:'mc', mol:'propanonitrilo', q:'¿Por qué el propanonitrilo tiene 3 carbonos y no 2?',
+   ans:'Porque el carbono del grupo −C≡N forma parte de la cadena', opts:['Porque el carbono del grupo −C≡N forma parte de la cadena','Por error de conteo','Porque el nitrógeno cuenta como carbono','Porque hay un metilo extra'],
+   expl:'En los nitrilos el carbono del <b>−C≡N</b> se incluye en la cadena principal, por eso el propanonitrilo tiene 3C.',
+   parts:[{t:'propano',cls:'c',l:'3C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  {type:'id', mol:'etanonitrilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanonitrilo', highlight:{text:'nitrilo',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"nitrilo" es el <b>grupo funcional</b> −C≡N (sufijo de los nitrilos).', topic:'nitrilos'},
+
+  {type:'id', mol:'butanonitrilo',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butanonitrilo', highlight:{text:'butano',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"butano" es la <b>cadena principal</b> de 4 carbonos (incluido el del −C≡N).', topic:'nitrilos'},
+
+  {type:'mc', mol:'pentanonitrilo', q:'¿Cuál es el nombre IUPAC de un nitrilo lineal con 5 carbonos en total?',
+   ans:'pentanonitrilo', opts:['pentanonitrilo','butanonitrilo','pentanamida','ácido pentanoico'],
+   expl:'5C (uno de ellos el del −C≡N) → <b>pentanonitrilo</b>.',
+   parts:[{t:'pentano',cls:'c',l:'5C'},{t:'nitrilo',cls:'g',l:'−C≡N'}], topic:'nitrilos'},
+
+  // ── AMINAS (nuevas) ──
+  {type:'mc', mol:'metilamina', q:'¿Cuál es el nombre IUPAC de CH₃NH₂?',
+   ans:'metanamina', opts:['metanamina','metanamida','metanol','metanonitrilo'],
+   accepted:['metanamina','metilamina'],
+   expl:'1C con −NH₂ terminal → <b>metanamina</b> (IUPAC sustitución). El nombre de radicofuncional <em>metilamina</em> también se acepta en bachillerato.',
+   parts:[{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'etanamina', q:'¿Cuál es el nombre IUPAC de CH₃CH₂NH₂?',
+   ans:'etanamina', opts:['etanamina','etanol','etanamida','etanonitrilo'],
+   expl:'Cadena de 2C con −NH₂ → <b>etanamina</b>. El sufijo <b>-amina</b> indica el grupo amino.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'propanamina', q:'¿Cuál es el grupo funcional de las aminas?',
+   ans:'−NH₂ (grupo amino)', opts:['−NH₂ (grupo amino)','−CONH₂','−C≡N','−OH'],
+   expl:'Las aminas tienen el grupo <b>−NH₂</b> (amino) sin carbonilo. Sufijo IUPAC: <b>-amina</b>.',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'butan1amina', q:'¿Cuál es el nombre IUPAC de una amina de 4C con el −NH₂ en el extremo?',
+   ans:'butan-1-amina', opts:['butan-1-amina','butan-2-amina','butanamida','butanonitrilo'],
+   expl:'4C con −NH₂ en C1 → <b>butan-1-amina</b>. El localizador indica la posición del grupo amino.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'butan1amina', q:'¿Qué diferencia hay entre butan-1-amina y butan-2-amina?',
+   ans:'La posición del grupo −NH₂ en la cadena (C1 vs C2)', opts:['La posición del grupo −NH₂ en la cadena (C1 vs C2)','El número de carbonos','Una es amida','Una tiene doble enlace'],
+   expl:'Ambas tienen 4C y un −NH₂, pero el localizador indica si el amino está en el <b>C1</b> o en el <b>C2</b>.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'nMetilPropan1amina', q:'¿Qué indica el prefijo "N-" en N-metilpropan-1-amina?',
+   ans:'Que el grupo metilo está unido directamente al nitrógeno', opts:['Que el grupo metilo está unido directamente al nitrógeno','Que hay nitrógeno en C1','Que es una amina primaria','Que el metilo va en el carbono N'],
+   expl:'El localizador <b>N-</b> señala que el sustituyente (metilo) está sobre el átomo de nitrógeno, no sobre la cadena carbonada.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'mc', mol:'nMetilPropan1amina', q:'¿Qué tipo de amina es la N-metilpropan-1-amina?',
+   ans:'Secundaria (el N está unido a dos carbonos)', opts:['Secundaria (el N está unido a dos carbonos)','Primaria','Terciaria','Cuaternaria'],
+   expl:'El nitrógeno está unido a dos grupos carbonados (propilo y metilo) → amina <b>secundaria</b>.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'propan',cls:'c',l:'3C'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'mc', mol:'metilamina', q:'¿Qué tipo de amina es la metanamina (metilamina, CH₃NH₂)?',
+   ans:'Primaria (el N está unido a un solo carbono)', opts:['Primaria (el N está unido a un solo carbono)','Secundaria','Terciaria','No es una amina'],
+   expl:'El nitrógeno se une a un único grupo carbonado (metilo) → amina <b>primaria</b>. IUPAC: <b>metanamina</b>.',
+   parts:[{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'drag', mol:'etanamina', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+   ans:'etanamina',
+   slots:[
+     {id:'au_amn1',label:'Cadena',correct:'etan',cls:'c'},
+     {id:'au_amn2',label:'Grupo funcional',correct:'amina',cls:'g'},
+   ],
+   tokens:[{text:'etan',cls:'c'},{text:'amina',cls:'g'},{text:'met',cls:'c'},{text:'anol',cls:'g'},{text:'al',cls:'g'}],
+   expl:'2C con −NH₂ → <b>etanamina</b>.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'drag', mol:'butan1amina', q:'Arrastra los fragmentos para formar el nombre IUPAC de esta amina.',
+   ans:'butan-1-amina',
+   slots:[
+     {id:'au_amn3',label:'Cadena principal',correct:'butan',cls:'c'},
+     {id:'au_amn4',label:'Localizador del −NH₂',correct:'1',cls:'i'},
+     {id:'au_amn5',label:'Grupo funcional',correct:'amina',cls:'g'},
+   ],
+   tokens:[{text:'butan',cls:'c'},{text:'1',cls:'i'},{text:'amina',cls:'g'},{text:'propan',cls:'c'},{text:'2',cls:'i'},{text:'amida',cls:'g'}],
+   expl:'4C con −NH₂ en C1 → <b>butan-1-amina</b>.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'drag', mol:'nMetilPropan1amina', q:'Arrastra los fragmentos para formar el nombre IUPAC de esta amina secundaria.',
+   ans:'N-metilpropan-1-amina',
+   slots:[
+     {id:'au_amn6',label:'Sustituyente sobre el nitrógeno',correct:'N-metil',cls:'r'},
+     {id:'au_amn7',label:'Cadena principal',correct:'propan',cls:'c'},
+     {id:'au_amn8',label:'Localizador del −NH−',correct:'1',cls:'i'},
+     {id:'au_amn9',label:'Grupo funcional',correct:'amina',cls:'g'},
+   ],
+   tokens:[{text:'N-metil',cls:'r'},{text:'propan',cls:'c'},{text:'1',cls:'i'},{text:'amina',cls:'g'},{text:'etil',cls:'r'},{text:'2',cls:'i'}],
+   expl:'Propilo (3C) + metilo sobre el N + amino en C1 → <b>N-metilpropan-1-amina</b> (amina secundaria).',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'write', mol:'metilamina', q:'Escribe el nombre IUPAC de esta amina (CH₃NH₂).',
+   hints:['Un solo carbono unido a −NH₂','metan + amina'],
+   ans:'metanamina', accepted:['metanamina','metilamina'],
+   expl:'1C con −NH₂ → <b>metanamina</b> (IUPAC sustitución). El nombre radicofuncional <em>metilamina</em> también se acepta.',
+   parts:[{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'etanamina', q:'Escribe el nombre IUPAC de esta amina.',
+   hints:['Cadena de 2 carbonos con −NH₂','etan + amina'],
+   ans:'etanamina', accepted:['etanamina','etilamina'],
+   expl:'2C con −NH₂ → <b>etanamina</b> (nombre tradicional: etilamina).',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'propanamina', q:'Escribe el nombre de esta amina de 3 carbonos.',
+   hints:['Cadena de 3 carbonos con −NH₂','propan/propil + amina'],
+   ans:'propan-1-amina', accepted:['propan-1-amina','propanamina','propilamina','1-propanamina'],
+   expl:'3C con −NH₂ en C1 → <b>propan-1-amina</b> (propilamina).',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'butan1amina', q:'Escribe el nombre IUPAC de esta amina.',
+   hints:['Cadena de 4 carbonos con −NH₂ en el extremo','butan + 1 + amina'],
+   ans:'butan-1-amina', accepted:['butan-1-amina','butan1amina','butilamina','1-butanamina','butanamina'],
+   expl:'4C con −NH₂ en C1 → <b>butan-1-amina</b>.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'nMetilPropan1amina', q:'Escribe el nombre IUPAC de esta amina secundaria.',
+   hints:['Cadena principal de 3C (propano), −NH− en C1','Hay un metilo unido al nitrógeno: prefijo N-metil'],
+   ans:'N-metilpropan-1-amina', accepted:['N-metilpropan-1-amina','n-metilpropan-1-amina','nmetilpropan1amina','N-metilpropanamina'],
+   expl:'Propilo (3C) con un metilo sobre el nitrógeno → <b>N-metilpropan-1-amina</b> (amina secundaria).',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'id', mol:'etanamina',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'etanamina', highlight:{text:'amina',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"amina" es el <b>grupo funcional</b> −NH₂ (sufijo de las aminas).', topic:'aminas'},
+
+  {type:'id', mol:'butan1amina',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butan-1-amina', highlight:{text:'butan',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"butan" es la <b>cadena principal</b> de 4 carbonos.', topic:'aminas'},
+
+  {type:'id', mol:'butan1amina',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'butan-1-amina', highlight:{text:'1',cls:'i'}, correct:'i',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"1" es el <b>localizador</b> que indica la posición del grupo −NH₂ en la cadena.', topic:'aminas'},
+
+  {type:'id', mol:'nMetilPropan1amina',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'N-metilpropan-1-amina', highlight:{text:'N-metil',cls:'r'}, correct:'r',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"N-metil" es un <b>sustituyente</b> sobre el nitrógeno (no sobre la cadena).', topic:'aminas'},
+
+  {type:'mc', mol:'propanamina', q:'¿Cuál es el nombre IUPAC de una amina lineal de 3 carbonos con −NH₂ en el extremo?',
+   ans:'propan-1-amina', opts:['propan-1-amina','propan-2-amina','propanamida','propanal'],
+   expl:'3C con −NH₂ en C1 → <b>propan-1-amina</b>.',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'etanamina', q:'¿Por qué la etanamina no necesita localizador para el grupo amino?',
+   ans:'Porque solo hay una posición posible en una cadena de 2C', opts:['Porque solo hay una posición posible en una cadena de 2C','Porque el amino va siempre en C2','Porque es una convención sin razón','Porque tiene un doble enlace'],
+   expl:'En una cadena de 2 carbonos el −NH₂ solo puede ir en un extremo, así que el localizador es innecesario: <b>etanamina</b>.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'propanamina', q:'¿Qué orden se usa para los sustituyentes sobre el nitrógeno frente a los de la cadena?',
+   ans:'Los del nitrógeno llevan el prefijo "N-" para distinguirlos', opts:['Los del nitrógeno llevan el prefijo "N-" para distinguirlos','Se numeran igual que los de la cadena','Se omiten siempre','Llevan el prefijo "O-"'],
+   expl:'Para señalar que un sustituyente está sobre el nitrógeno (no sobre un carbono) se usa el localizador <b>N-</b>, p. ej. N-metil.',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'nMetilPropan1amina', q:'¿Cuántos grupos carbonados se unen al nitrógeno en una amina terciaria?',
+   ans:'Tres', opts:['Tres','Uno','Dos','Ninguno'],
+   expl:'Primaria: 1 carbono sobre el N; secundaria: 2; <b>terciaria: 3</b>. La N-metilpropan-1-amina, con 2, es secundaria.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'propan',cls:'c',l:'3C'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'write', mol:'propanamina', q:'Escribe el nombre IUPAC de esta amina primaria de 3 carbonos.',
+   hints:['Cadena de 3 carbonos con −NH₂ en el extremo','propan + 1 + amina'],
+   ans:'propan-1-amina', accepted:['propan-1-amina','propanamina','propilamina','1-propanamina'],
+   expl:'3C con −NH₂ en C1 → <b>propan-1-amina</b> (amina primaria).',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  // ── AMINAS (ampliación — nomenclatura IUPAC correcta) ──
+
+  // propan-2-amina (isopropilamina)
+  {type:'mc', mol:'butan2amina', q:'¿Cuál es el nombre IUPAC de la isopropilamina (−NH₂ en C2 de una cadena de 3C)?',
+   ans:'propan-2-amina', opts:['propan-2-amina','propan-1-amina','propan-2-ol','isopropilamina'],
+   expl:'3C con −NH₂ en C2 → <b>propan-2-amina</b>. El localizador 2 indica la posición del amino. Nombre radicofuncional: <em>isopropilamina</em>.',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'2',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'butan2amina', q:'Escribe el nombre IUPAC de la isopropilamina.',
+   hints:['Cadena de 3C con −NH₂ en el carbono central (C2)','propan + 2 + amina'],
+   ans:'propan-2-amina', accepted:['propan-2-amina','isopropilamina','2-propanamina'],
+   expl:'−NH₂ en C2 de una cadena de 3C → <b>propan-2-amina</b> (radicofuncional: <em>isopropilamina</em>).',
+   parts:[{t:'propan',cls:'c',l:'3C'},{t:'2',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  // N-metilbutan-1-amina
+  {type:'mc', mol:'nMetilButan1amina', q:'¿Qué tipo de amina es la N-metilbutan-1-amina?',
+   ans:'Secundaria (N unido a dos grupos alquilo)', opts:['Secundaria (N unido a dos grupos alquilo)','Primaria','Terciaria','Cuaternaria'],
+   expl:'El nitrógeno está unido a butilo (C4) y metilo → dos grupos carbonados → <b>amina secundaria</b>. El prefijo N- indica sustitución en el nitrógeno.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  {type:'write', mol:'nMetilButan1amina', q:'Escribe el nombre IUPAC de esta amina secundaria (butil + N-metil).',
+   hints:['Cadena principal de 4C (butano), −NH− en C1','Un metilo unido al nitrógeno: prefijo N-metil'],
+   ans:'N-metilbutan-1-amina', accepted:['N-metilbutan-1-amina','n-metilbutan-1-amina','N-metilbutanamina'],
+   expl:'Butilo (4C) + metilo sobre el N + amino en C1 → <b>N-metilbutan-1-amina</b>. N- indica sustitución en el átomo de nitrógeno.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  // trimetilamina / N,N-dimetilmetanamina
+  {type:'mc', mol:'trimetilamina', q:'¿Cuál es el nombre IUPAC de la trimetilamina N(CH₃)₃?',
+   ans:'N,N-dimetilmetanamina', opts:['N,N-dimetilmetanamina','trimetilamina','dimetilmetilamina','N-dimetilmetanamina'],
+   expl:'Tres metilos sobre el N: cadena principal = metilo (metanamina), dos metilos adicionales sobre el N → <b>N,N-dimetilmetanamina</b>. Nombre radicofuncional: <em>trimetilamina</em>.',
+   parts:[{t:'N,N-dimetil',cls:'r',l:'Sust. en N'},{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'N'}], topic:'aminas'},
+
+  {type:'write', mol:'trimetilamina', q:'Escribe el nombre IUPAC de la trimetilamina (amina terciaria con tres metilos).',
+   hints:['Tres grupos metilo sobre el nitrógeno','Cadena principal: metanamina; dos metilos extra sobre el N: N,N-dimetil'],
+   ans:'N,N-dimetilmetanamina', accepted:['N,N-dimetilmetanamina','n,n-dimetilmetanamina','trimetilamina'],
+   expl:'N(CH₃)₃ → cadena principal metil, dos más sobre el N → <b>N,N-dimetilmetanamina</b> (radicofuncional: <em>trimetilamina</em>). Es una amina <b>terciaria</b>.',
+   parts:[{t:'N,N-dimetil',cls:'r',l:'Sust. en N'},{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'N'}], topic:'aminas'},
+
+  {type:'mc', mol:'trimetilamina', q:'¿Cuántos grupos carbonados lleva el nitrógeno en la N,N-dimetilmetanamina?',
+   ans:'Tres (amina terciaria)', opts:['Tres (amina terciaria)','Dos (amina secundaria)','Uno (amina primaria)','Ninguno'],
+   expl:'N,N-dimetilmetanamina = N(CH₃)₃: el nitrógeno lleva <b>tres</b> metilos → amina <b>terciaria</b>.',
+   parts:[{t:'N,N-dimetil',cls:'r',l:'Sust. en N'},{t:'metan',cls:'c',l:'1C'},{t:'amina',cls:'g',l:'N'}], topic:'aminas'},
+
+  // anilina / bencenamina (aromáticas)
+  {type:'mc', mol:'anilina', q:'¿Cuál es el nombre IUPAC de la anilina (C₆H₅NH₂)?',
+   ans:'bencenamina', opts:['bencenamina','fenol','N-metilanilina','aminobenceno'],
+   expl:'Benceno con −NH₂ → <b>bencenamina</b> (IUPAC). El nombre común <em>anilina</em> sigue muy extendido en bachillerato.',
+   parts:[{t:'bencen',cls:'c',l:'Anillo'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'anilina', q:'Escribe el nombre IUPAC de la anilina.',
+   hints:['Anillo bencénico con −NH₂ unido directamente','bencen + amina'],
+   ans:'bencenamina', accepted:['bencenamina','anilina','aminobenceno'],
+   expl:'C₆H₅NH₂ → <b>bencenamina</b> (IUPAC sustitución). El nombre histórico <em>anilina</em> es ampliamente aceptado.',
+   parts:[{t:'bencen',cls:'c',l:'Anillo'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'anilina', q:'¿Qué tipo de amina es la bencenamina (anilina)?',
+   ans:'Primaria aromática (−NH₂ unido al anillo)', opts:['Primaria aromática (−NH₂ unido al anillo)','Secundaria','Terciaria','No es una amina'],
+   expl:'El nitrógeno lleva solo un sustituyente (el anillo bencénico) → <b>amina primaria</b>. Al estar unido directamente al benceno es una <b>amina aromática</b>.',
+   parts:[{t:'bencen',cls:'c',l:'Anillo'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'drag', mol:'anilina', q:'Arrastra los fragmentos para formar el nombre IUPAC de la anilina.',
+   ans:'bencenamina',
+   slots:[
+     {id:'au_amn10',label:'Cadena/anillo principal',correct:'bencen',cls:'c'},
+     {id:'au_amn11',label:'Grupo funcional',correct:'amina',cls:'g'},
+   ],
+   tokens:[{text:'bencen',cls:'c'},{text:'amina',cls:'g'},{text:'ol',cls:'g'},{text:'metil',cls:'r'},{text:'fenol',cls:'g'}],
+   expl:'Anillo bencénico + grupo −NH₂ → <b>bencenamina</b> (anilina).',
+   parts:[{t:'bencen',cls:'c',l:'Anillo'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  // N-metilbencenamina
+  {type:'mc', mol:'anilina', q:'¿Cómo se llama en IUPAC la N-metilanilina (C₆H₅NHCH₃)?',
+   ans:'N-metilbencenamina', opts:['N-metilbencenamina','metilbencenamina','N-metilbenceno','2-metilbencenamina'],
+   expl:'Bencenamina + metilo sobre el N → <b>N-metilbencenamina</b>. El localizador N- indica que el metilo va sobre el nitrógeno, no sobre el anillo.',
+   parts:[{t:'N-metil',cls:'r',l:'Sust. en N'},{t:'bencen',cls:'c',l:'Anillo'},{t:'amina',cls:'g',l:'NH'}], topic:'aminas'},
+
+  // diaminas biogénicas
+  {type:'mc', mol:'pentano15diamina', q:'¿Cuál es el nombre IUPAC de la cadaverina (H₂N−(CH₂)₅−NH₂)?',
+   ans:'pentano-1,5-diamina', opts:['pentano-1,5-diamina','butano-1,4-diamina','pentano-1,5-diol','pentanamida'],
+   expl:'5C con −NH₂ en C1 y C5 → <b>pentano-1,5-diamina</b>. La cadaverina es una diamina biogénica que se forma en la descomposición de proteínas.',
+   parts:[{t:'pentano',cls:'c',l:'5C'},{t:'1,5',cls:'i',l:'Localiz.'},{t:'diamina',cls:'g',l:'2×NH₂'}], topic:'aminas'},
+
+  {type:'write', mol:'pentano15diamina', q:'Escribe el nombre IUPAC de la cadaverina (diamina de 5 carbonos).',
+   hints:['5 carbonos, −NH₂ en ambos extremos (C1 y C5)','pentano + 1,5 + diamina'],
+   ans:'pentano-1,5-diamina', accepted:['pentano-1,5-diamina','pentano15diamina','cadaverina'],
+   expl:'H₂N−(CH₂)₅−NH₂ → <b>pentano-1,5-diamina</b>. Nombre común: <em>cadaverina</em>.',
+   parts:[{t:'pentano',cls:'c',l:'5C'},{t:'1,5',cls:'i',l:'Localiz.'},{t:'diamina',cls:'g',l:'2×NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'pentano15diamina', q:'¿Qué prefijo IUPAC se usa cuando hay dos grupos −NH₂ en la misma molécula?',
+   ans:'diamina (con los dos localizadores)', opts:['diamina (con los dos localizadores)','biamina','di-amina','di-amino'],
+   expl:'Cuando hay dos grupos amino se usa el prefijo multiplicador <b>di</b>: pentano-<b>1,5-di</b>amina. Los dos localizadores indican las posiciones de cada −NH₂.',
+   parts:[{t:'pentano',cls:'c',l:'5C'},{t:'1,5',cls:'i',l:'Localiz.'},{t:'diamina',cls:'g',l:'2×NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'pentano15diamina', q:'¿Cuál es el nombre IUPAC de la putrescina H₂N−(CH₂)₄−NH₂?',
+   ans:'butano-1,4-diamina', opts:['butano-1,4-diamina','butano-1,4-diol','pentano-1,5-diamina','butanamina'],
+   expl:'4C con −NH₂ en C1 y C4 → <b>butano-1,4-diamina</b>. La putrescina es la diamina biogénica de 4 carbonos (vs. cadaverina, 5C).',
+   parts:[{t:'butano',cls:'c',l:'4C'},{t:'1,4',cls:'i',l:'Localiz.'},{t:'diamina',cls:'g',l:'2×NH₂'}], topic:'aminas'},
+
+  // preguntas conceptuales generales
+  {type:'mc', mol:'etanamina', q:'¿Cuál es la diferencia entre una amina y una amida?',
+   ans:'La amida tiene un carbonilo (C=O) junto al nitrógeno; la amina no', opts:['La amida tiene un carbonilo (C=O) junto al nitrógeno; la amina no','La amina tiene el N unido al O','La amida es siempre gaseosa','No hay diferencia'],
+   expl:'<b>Amina</b>: −NH₂ sin carbonilo (sufijo -amina). <b>Amida</b>: −CONH₂ con C=O adyacente (sufijo -amida). No confundirlos.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  {type:'mc', mol:'butan1amina', q:'¿Qué sufijo IUPAC identifica a las aminas?',
+   ans:'-amina', opts:['-amina','-amida','-anol','-nitrilo'],
+   expl:'Las aminas primarias se nombran con el sufijo <b>-amina</b> (sustituye la -o del alcano: etano → etanamina). Para secundarias/terciarias se añade el prefijo N- con el sustituyente sobre el N.',
+   parts:[{t:'butan',cls:'c',l:'4C'},{t:'1',cls:'i',l:'Localiz.'},{t:'amina',cls:'g',l:'Sufijo'}], topic:'aminas'},
+
+  {type:'mc', mol:'propanamina', q:'Según la nomenclatura IUPAC de sustitución, ¿cuál es la diferencia entre "etilamina" y "etanamina"?',
+   ans:'Son el mismo compuesto: etanamina es IUPAC y etilamina es radicofuncional', opts:['Son el mismo compuesto: etanamina es IUPAC y etilamina es radicofuncional','Son isómeros','Tienen distinto grupo funcional','Difieren en el número de carbonos'],
+   expl:'<b>Etanamina</b> (IUPAC sustitución) y <b>etilamina</b> (radicofuncional) designan el mismo compuesto CH₃CH₂NH₂. En bachillerato hispanoparlante se aceptan ambas nomenclaturas.',
+   parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
+
+  // ── ALQUENOS (extra) ──
+  {type:'drag', mol:'hex1eno', q:'Arrastra los fragmentos para formar el nombre IUPAC de este alqueno.',
+   ans:'hex-1-eno',
+   slots:[
+     {id:'au_alk1',label:'Cadena principal',correct:'hex',cls:'c'},
+     {id:'au_alk2',label:'Localizador del doble enlace',correct:'1',cls:'i'},
+     {id:'au_alk3',label:'Grupo funcional (doble enlace)',correct:'eno',cls:'g'},
+   ],
+   tokens:[{text:'hex',cls:'c'},{text:'1',cls:'i'},{text:'eno',cls:'g'},{text:'pent',cls:'c'},{text:'2',cls:'i'},{text:'ino',cls:'g'}],
+   expl:'6C con doble enlace en C1 → <b>hex-1-eno</b>.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'1',cls:'i',l:'Localiz.'},{t:'eno',cls:'g',l:'Doble enl.'}], topic:'alquenos'},
+
+  {type:'drag', mol:'buta13dieno', q:'Arrastra los fragmentos para formar el nombre IUPAC de este dieno.',
+   ans:'buta-1,3-dieno',
+   slots:[
+     {id:'au_alk4',label:'Cadena principal',correct:'buta',cls:'c'},
+     {id:'au_alk5',label:'Localizadores de los dobles enlaces',correct:'1,3',cls:'i'},
+     {id:'au_alk6',label:'Dos dobles enlaces',correct:'dieno',cls:'g'},
+   ],
+   tokens:[{text:'buta',cls:'c'},{text:'1,3',cls:'i'},{text:'dieno',cls:'g'},{text:'penta',cls:'c'},{text:'2,4',cls:'i'},{text:'eno',cls:'g'}],
+   expl:'4C con dobles enlaces en C1 y C3 → <b>buta-1,3-dieno</b>.',
+   parts:[{t:'buta',cls:'c',l:'4C'},{t:'1,3',cls:'i',l:'Localiz.'},{t:'dieno',cls:'g',l:'2 dobles enl.'}], topic:'alquenos'},
+
+  {type:'id', mol:'hex1eno',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'hex-1-eno', highlight:{text:'1',cls:'i'}, correct:'i',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"1" es el <b>localizador de la insaturación</b> — indica dónde empieza el doble enlace.', topic:'alquenos'},
+
+  {type:'id', mol:'buta13dieno',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'buta-1,3-dieno', highlight:{text:'dieno',cls:'g'}, correct:'g',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"dieno" indica el <b>grupo funcional</b>: dos dobles enlaces C=C.', topic:'alquenos'},
+
+  {type:'id', mol:'but1eno',
+   q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+   name:'but-1-eno', highlight:{text:'but',cls:'c'}, correct:'c',
+   opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
+   expl:'"but" es la <b>cadena principal</b> de 4 carbonos.', topic:'alquenos'},
+
+  {type:'mc', mol:'buta13dieno', q:'¿Qué indica el prefijo "di" en buta-1,3-dieno?',
+   ans:'Que hay dos dobles enlaces C=C', opts:['Que hay dos dobles enlaces C=C','Que hay dos carbonos','Que hay dos ramificaciones','Que hay dos grupos −OH'],
+   expl:'El multiplicador <b>di</b> antes de "-eno" indica <b>dos</b> dobles enlaces, en las posiciones 1 y 3.',
+   parts:[{t:'buta',cls:'c',l:'4C'},{t:'1,3',cls:'i',l:'Localiz.'},{t:'dieno',cls:'g',l:'2 dobles enl.'}], topic:'alquenos'},
+
+  {type:'mc', mol:'hex1eno', q:'¿Cuál es el nombre IUPAC de un alqueno de 6C con el doble enlace en el C1?',
+   ans:'hex-1-eno', opts:['hex-1-eno','hex-2-eno','hexano','hex-1-ino'],
+   expl:'6C + doble enlace en C1 → <b>hex-1-eno</b>. El sufijo <b>-eno</b> indica el doble enlace.',
+   parts:[{t:'hex',cls:'c',l:'6C'},{t:'1',cls:'i',l:'Localiz.'},{t:'eno',cls:'g',l:'Doble enl.'}], topic:'alquenos'},
 ];
+
 
 // ════════════════════════════════════════════════════════
 // GAME STATE
 // ════════════════════════════════════════════════════════
 let questions=[], qIdx=0, score=0, timer=null, timeLeft=49;
+let streak=0, bestStreak=0;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
 let history=[];
@@ -2721,7 +3880,7 @@ let studentName='', studentCourse='';
 const NIVEL_TOPICS={
   hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
   oxigenados:   ['alcoholes','cetonas','aldehidos','acidos','esteres','eteres'],
-  nitrogenados: ['amidas','nitrilos'],
+  nitrogenados: ['amidas','nitrilos','aminas'],
   completo:     null,
   constructor:  ['constructor'],
   // Por grupo funcional individual
@@ -2736,6 +3895,9 @@ const NIVEL_TOPICS={
   eteres:     ['eteres'],
   amidas:     ['amidas'],
   nitrilos:   ['nitrilos'],
+  aminas:     ['aminas'],
+  benceno:    ['benceno'],
+  constructor_aromaticos: null,
 };
 const NIVEL_LABELS={
   hidrocarburos:'Hidrocarburos',
@@ -2754,6 +3916,7 @@ const NIVEL_LABELS={
   eteres:    'Éteres',
   amidas:    'Amidas',
   nitrilos:  'Nitrilos',
+  aminas:    'Aminas',
 };
 
 const CIRCUMFERENCE=138.2;
@@ -2765,6 +3928,17 @@ function norm(s){
 }
 
 function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+
+// ── Streak (racha de aciertos) ──
+function bumpStreak(ok){
+  if(ok){streak++; if(streak>bestStreak)bestStreak=streak;}
+  else{streak=0;}
+  updateStreakDisplay();
+}
+function updateStreakDisplay(){
+  const el=document.getElementById('gh-streak-n');
+  if(el)el.textContent=streak;
+}
 
 // ── Modo de acceso ──────────────────────────────────────
 let freeMode = false;
@@ -2814,12 +3988,18 @@ function confirmStartGame(){
   closeModal(); startGame();
 }
 function startGame(){
-  const pool=NIVEL_TOPICS[currentLevel]
-    ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
-    :QBANK;
+  let pool;
+  if(currentLevel==='constructor_aromaticos'){
+    pool=QBANK.filter(q=>q.type==='build'&&q.topic==='benceno');
+  } else {
+    pool=NIVEL_TOPICS[currentLevel]
+      ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
+      :QBANK;
+  }
   const n=Math.min(pool.length,20);
   questions=shuffle(pool).slice(0,n);
   qIdx=0; score=0; history=[];
+  streak=0; bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
   writeAttempts=0;
   _analyticsSent=false;
@@ -2857,6 +4037,7 @@ function loadQuestion(){
   // Header
   document.getElementById('gh-q').textContent=`${qIdx+1} / ${questions.length}`;
   document.getElementById('gh-score').textContent=score;
+  updateStreakDisplay();
   document.getElementById('gh-bar').style.width=`${(qIdx/questions.length)*100}%`;
 
   // Build question HTML
@@ -2917,6 +4098,7 @@ function checkMC(ans,btn){
   const ok=norm(ans)===norm(q.ans);
   if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
   else{btn.classList.add('wrong');}
+  bumpStreak(ok);
   showFeedback(ok,q.expl,q.ans);
   history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
 }
@@ -3042,6 +4224,7 @@ function checkDrag(){
     }
   });
   if(allOk){score+=10;typeStats[q.type].ok++;}
+  bumpStreak(allOk);
   document.getElementById('drag-check').style.display='none';
   showFeedback(allOk,q.expl,q.ans);
   history.push({type:q.type,ok:allOk,ans:q.ans,given:'(colocar)',topic:q.topic});
@@ -3117,6 +4300,7 @@ function checkID(choice,btn){
       if(cb)cb.classList.add('active');
     });
   }
+  bumpStreak(ok);
   const ansLabel=correctArr.length>1?correctArr.map(c=>({r:'Ramificación',c:'Cadena principal',i:'Insaturación',g:'Grupo funcional'}[c])).join(' / '):correctArr[0];
   showFeedback(ok,q.expl,'');
   history.push({type:q.type,ok,ans:ansLabel,given:choice,topic:q.topic});
@@ -3159,6 +4343,7 @@ function checkWrite(){
     inp.classList.remove('err'); inp.classList.add('ok');
     document.getElementById('write-btn').disabled=true;
     score+=pts; typeStats[q.type].ok++;
+    bumpStreak(true);
     showFeedback(isOldName?'old':true,q.expl,q.ans,pts);
     history.push({type:q.type,ok,ans:q.ans,given:val,topic:q.topic});
   } else {
@@ -3174,6 +4359,7 @@ function checkWrite(){
       document.getElementById('write-btn').disabled=true;
       const hintEl=document.getElementById('write-hint');
       if(hintEl){ hintEl.style.display='none'; }
+      bumpStreak(false);
       showFeedback(false,q.expl,q.ans,0,val);
       history.push({type:q.type,ok:false,ans:q.ans,given:val,topic:q.topic});
     } else {
@@ -3192,7 +4378,7 @@ function checkWrite(){
 
 // ── TIMER ──
 function startTimer(){
-  timeLeft=45;
+  timeLeft=60;
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
   updateTimer();
@@ -3205,8 +4391,17 @@ function startTimer(){
         answered=true;
         disableAll();
         const q=questions[qIdx];
-        showFeedback(null,q.expl,q.ans);
-        history.push({type:q.type,ok:false,ans:q.ans,given:'(tiempo)',topic:q.topic,timeout:true});
+        if(q.type==='build'){
+          const fb=document.getElementById('feedback');
+          const nxt=document.getElementById('q-next');
+          const svgHtml=getBuildRefSVG(q.buildKey);
+          if(fb){fb.className='feedback time';fb.innerHTML=`⏰ <strong>¡Tiempo!</strong> Estructura correcta:`+(svgHtml?`<div class="mol-card" style="margin-top:8px"><div class="formula-display">${svgHtml}</div></div>`:' (no disponible)');}
+          if(nxt)nxt.classList.add('show');
+          history.push({type:q.type,ok:false,ans:q.buildKey,given:'(tiempo)',topic:q.topic,timeout:true});
+        } else {
+          showFeedback(null,q.expl,q.ans);
+          history.push({type:q.type,ok:false,ans:q.ans,given:'(tiempo)',topic:q.topic,timeout:true});
+        }
       }
     }
   },1000);
@@ -3215,7 +4410,7 @@ function updateTimer(){
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
   if(!fg||!txt)return;
-  const pct=timeLeft/45;
+  const pct=timeLeft/60;
   fg.style.strokeDashoffset=CIRCUMFERENCE*(1-pct);
   fg.style.stroke=timeLeft>15?'#fcd34d':timeLeft>7?'var(--c2)':'var(--c1)';
   txt.textContent=timeLeft;
@@ -3297,6 +4492,27 @@ function moldesGraph(mol){
     mol.ring.forEach(([i,j,o])=>addB(chainIds[i],chainIds[j],o||1));
   }
   return{atoms,bonds};
+}
+
+// Maps build question keys to M renderer keys (for reference SVG display)
+const BUILD_MOL_MAP={
+  build_ciclobutano:'ciclobutano',build_ciclopentano:'ciclopentano',build_ciclohexano:'ciclohexano',
+  build_metilciclopentano:'metilciclopentano',build_metilciclohexano:'metilciclohexano',
+  build_etilciclohexano:'etilciclohexano',build_ciclohexanona:'ciclohexanona',
+  build_ciclopentanona:'ciclopentanona',
+  build_benceno:'benceno',build_tolueno:'metilbenceno',build_etilbenceno:'etilbenceno',
+  build_fenol:'fenol',build_anilina:'anilina',
+  build_clorobenceno:'clorobenceno',build_bromobenceno:'bromobenceno',
+  build_ortoXileno:'ortoXileno',build_metaXileno:'metaXileno',build_paraXileno:'paraXileno',
+  build_trimetilbenceno123:'trimetilbenceno123',build_trimetilbenceno124:'trimetilbenceno124',build_trimetilbenceno135:'trimetilbenceno135',
+  build_propilbenceno:'propilbenceno',build_isopropilbenceno:'isopropilbenceno',
+};
+function getBuildRefSVG(buildKey){
+  const ref=MOLDES[buildKey];
+  if(!ref)return '';
+  if(Array.isArray(ref))return mkDevSVG(ref);
+  const molKey=BUILD_MOL_MAP[buildKey]||buildKey.replace(/^build_/,'');
+  return M[molKey]?M[molKey]():'';
 }
 
 // Graph isomorphism (backtracking) — compares heavy-atom graphs
@@ -3499,7 +4715,12 @@ function bldClickAtom(aid){
 }
 
 function buildBuild(q){
-  return `<div class="build-wrap">
+  const firstTime=!localStorage.getItem('bld_tutorial_seen');
+  if(firstTime){localStorage.setItem('bld_tutorial_seen','1');}
+  const tutHtml=firstTime?`<div style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.3);border-radius:10px;padding:10px 14px;font-size:.76rem;color:#ea580c;margin-bottom:8px;line-height:1.7">
+  💡 <strong>Primera vez:</strong> Clic en el lienzo para colocar átomos. Para un doble enlace C=O: coloca O, luego selecciona ═ y clic en C y luego en O. Usa <em>rBz</em> para el anillo de benceno.
+</div>`:'';
+  return tutHtml+`<div class="build-wrap">
     <div class="build-toolbar">
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Átomo:</span>
       <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')">C</button>
@@ -3557,6 +4778,7 @@ function checkBuild(){
     answered=true;stopTimer();
     const pts=bldAttempts===1?10:bldAttempts===2?6:3;
     score+=pts;typeStats[q.type].ok++;
+    bumpStreak(true);
     if(fb){fb.className='feedback ok';fb.innerHTML=`✓ <strong>¡Correcto!</strong> +${pts} punto${pts>1?'s':''}. Estructura verificada por isomorfismo de grafos.`;}
     if(nxt)nxt.classList.add('show');
     if(hint)hint.textContent='';
@@ -3564,12 +4786,9 @@ function checkBuild(){
     history.push({type:q.type,ok:true,ans:q.buildKey,given:'dibujado',topic:q.topic});
   } else if(bldAttempts>=3){
     answered=true;stopTimer();
-    if(fb){fb.className='feedback err';fb.innerHTML=`✗ <strong>Incorrecto.</strong> La estructura no coincide con <em>${q.buildKey}</em>. Estructura de referencia:`;}
-    const area=document.getElementById('q-area');
-    const molCard=document.createElement('div');
-    molCard.className='mol-card';molCard.style.marginTop='10px';
-    molCard.innerHTML=`<div class="formula-display">${mkDevSVG(ref)}</div>`;
-    area.appendChild(molCard);
+    bumpStreak(false);
+    const svgHtml=getBuildRefSVG(q.buildKey);
+    if(fb){fb.className='feedback err';fb.innerHTML=`✗ <strong>Incorrecto.</strong> Estructura de referencia:`+(svgHtml?`<div class="mol-card" style="margin-top:8px"><div class="formula-display">${svgHtml}</div></div>`:' (no disponible)');}
     if(nxt)nxt.classList.add('show');
     const chk=document.getElementById('bld-check');if(chk)chk.disabled=true;
     history.push({type:q.type,ok:false,ans:q.buildKey,given:'dibujado',topic:q.topic});
@@ -3666,14 +4885,14 @@ const QBANK_BUILD=[
   {type:'build',buildKey:'metilamina',topic:'constructor',q:'Construye la estructura de la <strong>metilamina</strong> (CH₅N)'},
   {type:'build',buildKey:'etanamina',topic:'constructor',q:'Construye la estructura de la <strong>etanamina</strong> (C₂H₇N)'},
   // Cicloalcanos
-  {type:'build',buildKey:'build_ciclobutano',topic:'benceno',q:'Construye la estructura del <strong>ciclobutano</strong> (C₄H₈) — usa el template de anillo rC4'},
-  {type:'build',buildKey:'build_ciclopentano',topic:'benceno',q:'Construye la estructura del <strong>ciclopentano</strong> (C₅H₁₀) — usa el template de anillo rC5'},
-  {type:'build',buildKey:'build_ciclohexano',topic:'benceno',q:'Construye la estructura del <strong>ciclohexano</strong> (C₆H₁₂) — usa el template de anillo rC6'},
-  {type:'build',buildKey:'build_metilciclopentano',topic:'benceno',q:'Construye la estructura del <strong>metilciclopentano</strong> (C₆H₁₂)'},
-  {type:'build',buildKey:'build_metilciclohexano',topic:'benceno',q:'Construye la estructura del <strong>metilciclohexano</strong> (C₇H₁₄)'},
-  {type:'build',buildKey:'build_etilciclohexano',topic:'benceno',q:'Construye la estructura del <strong>etilciclohexano</strong> (C₈H₁₆)'},
-  {type:'build',buildKey:'build_ciclohexanona',topic:'benceno',q:'Construye la estructura de la <strong>ciclohexanona</strong> (C₆H₁₀O)'},
-  {type:'build',buildKey:'build_ciclopentanona',topic:'benceno',q:'Construye la estructura de la <strong>ciclopentanona</strong> (C₅H₈O)'},
+  {type:'build',buildKey:'build_ciclobutano',topic:'alcanos',q:'Construye la estructura del <strong>ciclobutano</strong> (C₄H₈) — usa el template de anillo rC4'},
+  {type:'build',buildKey:'build_ciclopentano',topic:'alcanos',q:'Construye la estructura del <strong>ciclopentano</strong> (C₅H₁₀) — usa el template de anillo rC5'},
+  {type:'build',buildKey:'build_ciclohexano',topic:'alcanos',q:'Construye la estructura del <strong>ciclohexano</strong> (C₆H₁₂) — usa el template de anillo rC6'},
+  {type:'build',buildKey:'build_metilciclopentano',topic:'alcanos',q:'Construye la estructura del <strong>metilciclopentano</strong> (C₆H₁₂)'},
+  {type:'build',buildKey:'build_metilciclohexano',topic:'alcanos',q:'Construye la estructura del <strong>metilciclohexano</strong> (C₇H₁₄)'},
+  {type:'build',buildKey:'build_etilciclohexano',topic:'alcanos',q:'Construye la estructura del <strong>etilciclohexano</strong> (C₈H₁₆)'},
+  {type:'build',buildKey:'build_ciclohexanona',topic:'cetonas',q:'Construye la estructura de la <strong>ciclohexanona</strong> (C₆H₁₀O)'},
+  {type:'build',buildKey:'build_ciclopentanona',topic:'cetonas',q:'Construye la estructura de la <strong>ciclopentanona</strong> (C₅H₈O)'},
   // Aromáticos (requieren template rBz)
   {type:'build',buildKey:'build_benceno',topic:'benceno',q:'Construye la estructura del <strong>benceno</strong> (C₆H₆) — usa el template <em>rBz</em> para el anillo deslocalizado'},
   {type:'build',buildKey:'build_tolueno',topic:'benceno',q:'Construye la estructura del <strong>tolueno</strong> (metilbenceno, C₇H₈) — usa rBz para el anillo aromático'},
@@ -3682,6 +4901,17 @@ const QBANK_BUILD=[
   {type:'build',buildKey:'build_anilina',topic:'benceno',q:'Construye la estructura de la <strong>anilina</strong> (C₆H₅NH₂) — usa rBz para el anillo aromático'},
   {type:'build',buildKey:'build_clorobenceno',topic:'benceno',q:'Construye la estructura del <strong>clorobenceno</strong> (C₆H₅Cl) — usa rBz para el anillo aromático'},
   {type:'build',buildKey:'build_bromobenceno',topic:'benceno',q:'Construye la estructura del <strong>bromobenceno</strong> (C₆H₅Br) — usa rBz para el anillo aromático'},
+  // ── DI-SUSTITUIDOS ──
+  {type:'build',buildKey:'build_ortoXileno',topic:'benceno',q:'Construye el <strong>1,2-dimetilbenceno</strong> (orto-xileno, C₈H₁₀) — coloca dos metilos en carbonos <em>adyacentes</em> del anillo'},
+  {type:'build',buildKey:'build_metaXileno',topic:'benceno',q:'Construye el <strong>1,3-dimetilbenceno</strong> (meta-xileno, C₈H₁₀) — coloca dos metilos dejando un carbono libre entre ellos'},
+  {type:'build',buildKey:'build_paraXileno',topic:'benceno',q:'Construye el <strong>1,4-dimetilbenceno</strong> (para-xileno, C₈H₁₀) — coloca dos metilos en carbonos <em>opuestos</em> del anillo'},
+  // ── TRI-SUSTITUIDOS ──
+  {type:'build',buildKey:'build_trimetilbenceno123',topic:'benceno',q:'Construye el <strong>1,2,3-trimetilbenceno</strong> (C₉H₁₂) — tres metilos en posiciones <em>consecutivas</em> del anillo'},
+  {type:'build',buildKey:'build_trimetilbenceno124',topic:'benceno',q:'Construye el <strong>1,2,4-trimetilbenceno</strong> (C₉H₁₂) — metilos en posiciones 1, 2 y 4'},
+  {type:'build',buildKey:'build_trimetilbenceno135',topic:'benceno',q:'Construye el <strong>1,3,5-trimetilbenceno</strong> (mesitileno, C₉H₁₂) — tres metilos en posiciones <em>alternas</em> (simetría D₃ₕ)'},
+  // ── ALQUIL-BENCENOS ──
+  {type:'build',buildKey:'build_propilbenceno',topic:'benceno',q:'Construye el <strong>propilbenceno</strong> (C₉H₁₂) — cadena propilo (3C) unida al anillo aromático'},
+  {type:'build',buildKey:'build_isopropilbenceno',topic:'benceno',q:'Construye el <strong>isopropilbenceno</strong> (cumeno, C₉H₁₂) — sustituyente isopropilo CH(CH₃)₂ en el anillo'},
 ];
 QBANK.push(...QBANK_BUILD);
 
@@ -3731,7 +4961,7 @@ function showResults(){
 
   document.getElementById('res-emoji').textContent=emoji;
   document.getElementById('res-title').textContent=title;
-  document.getElementById('res-sub').textContent=`${pct}% de aciertos · ${score} pts${isRecord?' · 🏆 ¡Nuevo récord personal!':''}`;
+  document.getElementById('res-sub').textContent=`${pct}% de aciertos · ${score} pts · 🔥 Mejor racha: ${bestStreak}${isRecord?' · 🏆 ¡Nuevo récord personal!':''}`;
   document.getElementById('res-header').style.background=pct>=70?'linear-gradient(135deg,#14532d,#16a34a)':pct>=50?'linear-gradient(135deg,#78350f,#e67e22)':'linear-gradient(135deg,#7f1d1d,#c0392b)';
   // Sistema de medallas
   let medalIcon,medalTitle,medalDesc;
@@ -3766,7 +4996,7 @@ function showResults(){
   // Recommendations
   const errTopics={};
   history.filter(h=>!h.ok).forEach(h=>{errTopics[h.topic]=(errTopics[h.topic]||0)+1;});
-  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)'};
+  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)'};
   const sorted=Object.entries(errTopics).sort((a,b)=>b[1]-a[1]);
 
   let recHtml='';
@@ -3801,8 +5031,24 @@ function showResults(){
   });
   document.getElementById('history-list').innerHTML=hlHtml;
 
+  // Botón "repetir errores" — visible solo si hubo preguntas falladas
+  const errQs=history.filter(h=>!h.ok&&!h.timeout);
+  const retryBtn=document.getElementById('btn-retry-errors');
+  if(retryBtn)retryBtn.style.display=errQs.length>0?'block':'none';
+
   // Enviar analytics al terminar la partida completa
   sendAnalytics('fin_partida');
+}
+
+function retryErrors(){
+  const errTopics=[...new Set(history.filter(h=>!h.ok).map(h=>h.topic))];
+  const errPool=QBANK.filter(q=>errTopics.includes(q.topic));
+  if(errPool.length===0)return;
+  questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
+  qIdx=0;score=0;history=[];streak=0;bestStreak=0;
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
+  showScreen('s-game');
+  loadQuestion();
 }
 
 // ════════════════════════════════════════════════════════
