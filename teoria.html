@@ -12,15 +12,16 @@
 <title>NomOrg — Las 4 Partes</title>
 <style>
 :root{
-  --c1:#0891b2;--c1b:#cffafe;
-  --c2:#166534;--c2b:#dcfce7;
-  --c3:#b45309;--c3b:#fef3c7;
-  --c4:#CC79A7;--c4b:#fce8f4;
+  --c1:#0891b2;--c1b:#cffafe;   /* ramificación - teal */
+  --c2:#166534;--c2b:#dcfce7;   /* cadena - verde oscuro */
+  --c3:#b45309;--c3b:#fef3c7;   /* insaturaciones - dorado */
+  --c4:#CC79A7;--c4b:#fce8f4;   /* grupo funcional - rosa */
   /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
   --c1t:#0e7490;  /* teal oscuro */
   --c2t:#14532d;  /* verde oscuro */
   --c3t:#92400e;  /* dorado oscuro */
-  --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
+  --c4t:#A0527F;  /* rosa oscuro 5.2:1 */
+  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;  /* errores */
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   --r:16px;--rs:10px;
@@ -208,20 +209,20 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .prac-opt{padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-size:.81rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
 .prac-opt:hover:not(:disabled){border-color:var(--c4);color:var(--c4t)}
 .prac-opt.correct{border-color:var(--c3)!important;background:var(--c3b)!important;color:var(--c3t)!important;font-weight:700}
-.prac-opt.wrong{border-color:#e55!important;background:#fce8e6!important;color:#b91c1c!important}
+.prac-opt.wrong{border-color:var(--err)!important;background:var(--errb)!important;color:var(--errt)!important}
 .prac-write-row{display:none;gap:8px;margin-bottom:10px;align-items:center}
 .prac-write-row.show{display:flex}
 .prac-inp{flex:1;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);font-family:var(--mono);font-size:.85rem;outline:none;transition:border-color .15s}
 .prac-inp:focus{border-color:var(--c4)}
 .prac-inp.ok{border-color:var(--c3);background:var(--c3b)}
-.prac-inp.err{border-color:#e55;background:#fce8e6}
+.prac-inp.err{border-color:var(--err);background:var(--errb)}
 .prac-check{padding:10px 18px;background:var(--c4);color:#fff;border:none;border-radius:var(--rs);font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0}
 .prac-check:hover:not(:disabled){background:var(--c4t)}
 .prac-check:disabled{opacity:.5;cursor:not-allowed}
 .prac-fb{font-size:.8rem;line-height:1.65;padding:10px 14px;border-radius:var(--rs);margin-bottom:14px;display:none}
 .prac-fb.show{display:block}
 .prac-fb.ok{background:var(--c3b);border-left:3px solid var(--c3);color:var(--c3t)}
-.prac-fb.err{background:#fce8e6;border-left:3px solid #e55;color:#b91c1c}
+.prac-fb.err{background:var(--errb);border-left:3px solid var(--err);color:var(--errt)}
 .prac-nb{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:10px 14px;background:var(--bg);border-radius:var(--rs)}
 .prac-nb-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dimmer);width:100%;margin-bottom:3px}
 .pnp{padding:4px 11px;border-radius:8px;font-family:var(--mono);font-size:.8rem;font-weight:700;border:2px solid;opacity:.25;transition:all .35s}
@@ -907,10 +908,10 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
           <td style="padding:9px 14px;color:var(--c3t);font-size:.78rem">El 2 es menor que el 4 → este set gana</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-weight:700;color:#b91c1c">✗ Incorrecta</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--errt)">✗ Incorrecta</td>
           <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>4</strong>-metilpentano</td>
           <td style="padding:9px 14px">{ 3, 4 }</td>
-          <td style="padding:9px 14px;color:#b91c1c;font-size:.78rem">El 4 en segunda posición es mayor → descartada</td>
+          <td style="padding:9px 14px;color:var(--errt);font-size:.78rem">El 4 en segunda posición es mayor → descartada</td>
         </tr>
       </tbody>
     </table>
@@ -1138,7 +1139,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <tbody>
         <tr style="background:#f8f7f4">
           <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">di-, tri-, tetra-…</td>
-          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:var(--errb);color:var(--errt);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">3-etil-<strong>di</strong>metil… → etil antes que metil</td>
           <td style="padding:9px 14px;font-size:.78rem">«e» de etil</td>
         </tr>
@@ -1150,13 +1151,13 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         </tr>
         <tr style="background:#f8f7f4">
           <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">sec-</td>
-          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:var(--errb);color:var(--errt);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>sec-</em>butil → se ignora «sec-»</td>
           <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
         </tr>
         <tr>
           <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">tert-</td>
-          <td style="padding:9px 14px;text-align:center"><span style="background:#fce8e6;color:#b91c1c;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:var(--errb);color:var(--errt);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>tert-</em>butil → se ignora «tert-»</td>
           <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
         </tr>
