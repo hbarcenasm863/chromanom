@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NomOrg · Grupos Funcionales</title>
+<title>NomOrg · Grupos Funcionales v2</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
-  /* 4-part color scheme — teal/verde-oscuro/dorado/rosa */
-  --c1:#0891b2;  /* ramificación - teal */
+  /* 4-part color scheme */
+  --c1:#0891b2;  /* sustituyentes - teal */
   --c2:#166534;  /* cadena - verde oscuro */
   --c3:#b45309;  /* insaturaciones - dorado */
-  --c4:#CC79A7;  /* grupo funcional - rosa */
+  --c4:#CC79A7;  /* grupo funcional */
   --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
   /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
   --c1t:#0e7490;  /* teal oscuro */
-  --c2t:#14532d;  /* verde oscuro texto */
-  --c3t:#92400e;  /* dorado oscuro texto */
-  --c4t:#A0527F;  /* rosa oscuro 5.2:1 */
-  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;  /* errores */
+  --c2t:#14532d;  /* verde oscuro */
+  --c3t:#92400e;  /* dorado oscuro */
+  --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
+  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -98,7 +98,7 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .ans-input{flex:1;background:var(--surf2);border:2px solid var(--brd);border-radius:var(--rs);padding:10px 14px;color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:.9rem;outline:none;transition:border-color .2s}
 .ans-input:focus{border-color:var(--c4)}
 .ans-input.ok{border-color:#16a34a;background:#f0fdf4}
-.ans-input.err{border-color:var(--err);background:var(--errb)}
+.ans-input.err{border-color:var(--c1);background:var(--c1b)}
 .btn-check{padding:10px 18px;background:var(--tx);border:none;border-radius:var(--rs);color:#fff;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-check:hover{background:var(--c4);transform:translateY(-1px)}
 .btn-check:disabled{opacity:.3;cursor:not-allowed;transform:none}
@@ -106,9 +106,9 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 .feedback.show{display:block}
 .feedback.ok{background:#f0fdf4;border:1.5px solid rgba(22,163,74,.3)}
-.feedback.fail{background:var(--errb);border:1.5px solid var(--err)}
+.feedback.fail{background:var(--c1b);border:1.5px solid rgba(231,76,60,.2)}
 .fb-head{font-weight:700;font-size:.88rem;margin-bottom:4px}
-.fb-head.ok{color:#16a34a}.fb-head.fail{color:var(--errt)}
+.fb-head.ok{color:#16a34a}.fb-head.fail{color:var(--c1)}
 .fb-body{font-size:.8rem;color:var(--dim);line-height:1.6}
 .hint-card{display:none;background:#fffbea;border:1px solid rgba(234,179,8,.3);border-radius:var(--rs);padding:10px 14px;margin-top:6px;font-size:.8rem;color:var(--dim);line-height:1.6;animation:up .2s ease}
 .hint-card.show{display:block}
@@ -116,7 +116,7 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .btn-sm{padding:8px 14px;background:transparent;border:1.5px solid var(--brd);border-radius:var(--rs);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s}
 .btn-sm:hover{border-color:var(--c4);color:var(--c4t)}
-.btn-reveal:hover{border-color:var(--c2);color:var(--c2t)}
+.btn-reveal:hover{border-color:var(--c1);color:var(--c1)}
 .name-breakdown{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px;align-items:flex-end}
 .nb-part{display:flex;flex-direction:column;align-items:center;gap:3px}
 .nb-word{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;padding:2px 6px;border-radius:4px}
@@ -134,6 +134,12 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .mol-area .mol-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmer);margin-bottom:8px;align-self:flex-start}
 .mol-svg-wrap{width:100%;display:flex;align-items:center;justify-content:center;overflow:visible}
 .mol-svg-wrap svg{width:100%;max-height:140px;height:auto;overflow:visible;display:block}
+/* ── TOGGLE FÓRMULA DESARROLLADA ── */
+.view-toggle{display:flex;gap:6px;justify-content:center;margin-bottom:10px;width:100%}
+.vt-btn{padding:4px 13px;border-radius:20px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dimmer);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s}
+.vt-btn.active{background:var(--c2);border-color:var(--c2);color:#fff}
+.vt-btn:hover:not(.active){background:var(--bg);border-color:var(--dimmer);color:var(--tx)}
+.mol-dev-wrap{width:100%;display:flex;align-items:center;justify-content:center;overflow-x:auto;transition:opacity .15s}
 .iupac-note{background:var(--c4b);border:1px solid rgba(142,68,173,.2);border-radius:var(--rs);padding:10px 14px;font-size:.78rem;color:var(--c4t);line-height:1.6;margin-top:10px}
 
 @media(max-width:600px){
@@ -765,12 +771,197 @@ const GROUPS = [
 
 
 // ═══════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
+// FÓRMULA ESTRUCTURAL DESARROLLADA
+// ═══════════════════════════════════════════════════════════
+function mkDevSVG(ch){
+  if(!ch||!ch.length)return '';
+  const HU=72,VU=56;
+  function lbl(s,h){const y=s||'C';return h<=0?y:h===1?y+'H':h===2?y+'H₂':h===3?y+'H₃':y+'H₄';}
+  function aCol(s){return s==='O'?'#c8230a':s==='N'?'#0033aa':s==='Cl'?'#1a7a1a':s==='Br'?'#8b1a1a':s==='F'?'#3366aa':'#0d2d42';}
+  const nds=[],eds=[];
+  function addN(x,y,s,h){nds.push({x,y,lb:lbl(s,h),cl:aCol(s)});}
+  function addE(x1,y1,x2,y2,o){eds.push({x1,y1,x2,y2,o});}
+  const N=ch.length;
+  for(let i=0;i<N;i++){const ca=ch[i];addN((i+1)*HU,0,ca.s||'C',ca.h||0);}
+  for(let i=1;i<N;i++)addE(i*HU,0,(i+1)*HU,0,ch[i-1].bn||1);
+  function doSub(px,py,bArr,dir,fBn){
+    let cx=px,cy=py,bo=fBn;
+    for(const ba of bArr){
+      const ny=dir==='u'?cy-VU:cy+VU;
+      addN(cx,ny,ba.s||'C',ba.h||0);addE(cx,cy,cx,ny,bo);
+      cy=ny;bo=ba.bn||1;
+    }
+  }
+  for(let i=0;i<N;i++){const ca=ch[i],cx=(i+1)*HU;
+    if(ca.bu)doSub(cx,0,ca.bu,'u',ca.buBn||1);
+    if(ca.bd)doSub(cx,0,ca.bd,'d',ca.bdBn||1);
+  }
+  if(!nds.length)return '';
+  const P=28,minX=Math.min(...nds.map(n=>n.x)),maxX=Math.max(...nds.map(n=>n.x));
+  const minY=Math.min(...nds.map(n=>n.y)),maxY=Math.max(...nds.map(n=>n.y));
+  const ox=-minX+P+16,oy=-minY+P+8;
+  const W=maxX-minX+P*2+32,Hh=maxY-minY+P*2+16;
+  let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
+  const C='#1a2a3a';
+  const ln=(a,b,c,d)=>`<line x1="${a.toFixed(1)}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${C}" stroke-width="1.6" stroke-linecap="round"/>`;
+  for(const e of eds){
+    const n1=nds.find(n=>n.x===e.x1&&n.y===e.y1),n2=nds.find(n=>n.x===e.x2&&n.y===e.y2);
+    const ax1=e.x1+ox,ay1=e.y1+oy,ax2=e.x2+ox,ay2=e.y2+oy;
+    const dx=ax2-ax1,dy=ay2-ay1,len=Math.sqrt(dx*dx+dy*dy);if(len<1)continue;
+    const ux=dx/len,uy=dy/len,isV=Math.abs(ux)<0.1;
+    const p1=n1?(isV?9:n1.lb.length*4+4):14,p2=n2?(isV?9:n2.lb.length*4+4):14;
+    const lx1=ax1+ux*p1,ly1=ay1+uy*p1,lx2=ax2-ux*p2,ly2=ay2-uy*p2;
+    const px=-uy*2.5,py=ux*2.5;
+    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2);
+    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+    else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+  }
+  for(const n of nds){
+    const x=n.x+ox,y=n.y+oy;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
+  }
+  sv+='</svg>';return sv;
+}
+const _C3=[{h:3}],_O0=[{s:'O',h:0}],_O1=[{s:'O',h:1}],_N2=[{s:'N',h:2}],_Cl=[{s:'Cl',h:0}],_Br=[{s:'Br',h:0}],_F=[{s:'F',h:0}];
+const MOLDES_G={
+  // ── ALCANOS ──
+  butano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hexano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilButano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:3}],
+  metilPentano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  dimetilButano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:_C3},{h:3}],
+  etilMetilPentano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:[{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:3}],
+  etilButano:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bu:[{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  neopentano:[{h:3,bn:1},{h:0,bn:1,bu:_C3,bd:_C3},{h:3}],
+  trimetilPentano:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bn:1,bu:_C3},{h:1,bn:1,bd:_C3},{h:3}],
+  propilHexano:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bu:[{h:2,bn:1},{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // ── ALQUENOS ──
+  propeno:[{h:2,bn:2},{h:1,bn:1},{h:3}],
+  but1eno:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  pent2eno:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  hex1eno:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hex3eno:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  metilBut1eno:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:1,bd:_C3},{h:3}],
+  metilBut2eno:[{h:3,bn:1},{h:0,bn:2,bd:_C3},{h:1,bn:1},{h:3}],
+  metilPent2eno:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:1,bn:1,bd:_C3},{h:3}],
+  dimetilBut2eno:[{h:3,bn:1},{h:0,bn:2,bd:_C3},{h:0,bn:1,bu:_C3},{h:3}],
+  buta13dieno:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:2},{h:2}],
+  penta13dieno:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:2},{h:1,bn:1},{h:3}],
+  // ── ALQUINOS ──
+  propino:[{h:1,bn:3},{h:0,bn:1},{h:3}],
+  but1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  but2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:3}],
+  pent2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  hex1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hex3ino:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:3}],
+  metilPent2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:1,bn:1,bd:_C3},{h:3}],
+  // ── ALCOHOLES ──
+  etanol:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  propan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  butan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:3}],
+  pentan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hex3ol:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilButan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:1,bn:1,bu:_C3},{h:3}],
+  propan12diol:[{h:2,bn:1,bd:_O1},{h:1,bn:1,bd:_O1},{h:3}],
+  but3en2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:1,bn:2},{h:2}],
+  pent1en3ol:[{h:2,bn:2},{h:1,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:3}],
+  // ── ALDEHÍDOS ──
+  metanal:[{h:2,bu:_O0,buBn:2}],
+  propanal:[{h:3,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  butanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  pentanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  metilPropanal:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bu:_O0,buBn:2}],
+  metilPentanal:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  hex2enal:[{h:1,bu:_O0,buBn:2,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // ── CETONAS ──
+  butanona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  pentan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  hexan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hexan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilButan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:1,bn:1,bd:_C3},{h:3}],
+  heptan4ona:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // ── ÉTERES ──
+  metoxiMetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:3}],
+  etoxiMetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  etoxiEtano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  metoxiPropano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  etoxiPropano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  propoxiPropano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metoxiButano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  // ── ANHÍDRIDOS ──
+  anhidridoEtanoico:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:3}],
+  anhidridoPropanoico:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  anhidridoButanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  anhidridoMetanoicoEtanoico:[{h:1,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:3}],
+  anhidridoEtanoicoPropanoico:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:3}],
+  // ── ÁCIDOS CARBOXÍLICOS ──
+  acidoMetanoico:[{h:1,bu:_O0,buBn:2,bd:_O1}],
+  acidoEtanoico:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoPropanoico:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoButanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoPentanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acido3MetilButanoico:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoBut2enoico:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  // ── HALUROS DE ACILO ──
+  cloruoMetanoilo:[{h:1,bu:_O0,buBn:2,bd:_Cl}],
+  cloruroEtanoilo:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_Cl}],
+  bromuroPropanoilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_Br}],
+  bromuoButanoilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_Br}],
+  fluoruroEtanoilo:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_F}],
+  cloruoPentanoilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_Cl}],
+  cloruroMetilButanoilo:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_Cl}],
+  // ── ÉSTERES ──
+  metanoatoMetilo:[{h:1,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  etanoatoMetilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  etanoatoEtilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  propanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  propanoatoEtilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  butanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  butanoatoEtilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  pentanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  // ── AMIDAS ──
+  metanamida:[{h:1,bu:_O0,buBn:2,bd:_N2}],
+  etanamida:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  propanamida:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  butanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  pentanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  nMetilEtanamida:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'N',h:1,bn:1},{h:3}],
+  nNDimetilPropanamida:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'N',h:0,bn:1,bu:_C3},{h:3}],
+  nMetilButanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'N',h:1,bn:1},{h:3}],
+  // ── NITRILOS ──
+  metanonitrilo:[{h:1,bn:3},{s:'N',h:0}],
+  etanonitrilo:[{h:3,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  propanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  butanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  pentanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  hexanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  metilButanonitrilo:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  // ── ENINOS Y DIINOS ──
+  but1en3ino:[{h:2,bn:2},{h:1,bn:1},{h:0,bn:3},{h:1}],
+  pent1en4ino:[{h:2,bn:2},{h:1,bn:1},{h:2,bn:1},{h:0,bn:3},{h:1}],
+  penta14diino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:0,bn:3},{h:1}],
+  // ── AMINAS ──
+  metilamina:[{h:3,bn:1},{s:'N',h:2}],
+  etanamina:[{h:3,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  propanamina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  butan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  butan2amina:[{h:3,bn:1},{h:1,bn:1,bd:_N2},{h:2,bn:1},{h:3}],
+  nMetilPropan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:1,bn:1},{h:3}],
+  nMetilButan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:1,bn:1},{h:3}],
+  pentano15diamina:[{s:'N',h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'N',h:2}],
+  trimetilamina:[{h:3,bn:1},{s:'N',h:0,bn:1,bu:_C3},{h:3}],
+};
+let exMolView = 'skel';
+
 // STATE
 // ═══════════════════════════════════════════════════════════
 let currentGroup = GROUPS[0].id;
 let exState = {}; // per-group exercise state
 
-function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0})}
+function getEx(gid){ return exState[gid] || (exState[gid]={idx:0,hints:0,answered:false,tries:0,score:0,ok:0,err:0,tot:0})}
 
 // ═══════════════════════════════════════════════════════════
 // DROPDOWN
@@ -1015,6 +1206,26 @@ function buildCommonNames(){
 // ═══════════════════════════════════════════════════════════
 // EXERCISES
 // ═══════════════════════════════════════════════════════════
+function setExMolView(view){
+  exMolView=view;
+  const sBtn=document.getElementById('ex-vt-skel');
+  const fBtn=document.getElementById('ex-vt-form');
+  if(sBtn)sBtn.classList.toggle('active',view==='skel');
+  if(fBtn)fBtn.classList.toggle('active',view==='form');
+  const wrap=document.getElementById('ex-mol-wrap');
+  if(!wrap)return;
+  const key=wrap.dataset.key;
+  wrap.style.opacity='0';
+  setTimeout(()=>{
+    if(view==='form'&&MOLDES_G[key]){
+      wrap.innerHTML=mkDevSVG(MOLDES_G[key]);
+    } else {
+      wrap.innerHTML=MOLS[key]?MOLS[key]():'';
+    }
+    wrap.style.opacity='1';
+  },130);
+}
+
 function renderExercise(gid){
   const g = GROUPS.find(x=>x.id===gid);
   const st = getEx(gid);
@@ -1045,6 +1256,13 @@ function renderExercise(gid){
   st.answered = false;
   st.hints = 0;
   const pct = g.exercises.length > 0 ? st.idx / g.exercises.length * 100 : 0;
+  const hasDev = !!(ex.svgKey && MOLDES_G[ex.svgKey]);
+  exMolView = hasDev ? 'form' : 'skel';
+  const toggleHtml = hasDev ? `<div class="view-toggle">
+    <button class="vt-btn" id="ex-vt-skel" onclick="setExMolView('skel')">⬡ Esqueletal</button>
+    <button class="vt-btn active" id="ex-vt-form" onclick="setExMolView('form')">— Semidesarrollada</button>
+  </div>` : '';
+  const molInner = hasDev ? mkDevSVG(MOLDES_G[ex.svgKey]) : (ex.svgKey && MOLS[ex.svgKey] ? MOLS[ex.svgKey]() : `<span style="font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--tx)">${ex.mol}</span>`);
 
   card.innerHTML = `
     <div class="sec-lbl">Ejercicios — ${g.name}</div>
@@ -1056,7 +1274,8 @@ function renderExercise(gid){
 
     <div class="mol-area">
       <div class="mol-label">Estructura del compuesto</div>
-      <div class="mol-svg-wrap">${ex.svgKey && MOLS[ex.svgKey] ? MOLS[ex.svgKey]() : `<span style="font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--tx)">${ex.mol}</span>`}</div>
+      ${toggleHtml}
+      <div class="mol-dev-wrap" id="ex-mol-wrap" data-key="${ex.svgKey||''}">${molInner}</div>
     </div>
 
     <div class="ans-lbl" style="font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.13em;color:var(--dimmer);margin-bottom:8px">Escribe el nombre IUPAC</div>
@@ -1102,18 +1321,29 @@ function checkEx(gid){
   document.getElementById('etot-'+gid).textContent=st.tot;
   const fb=document.getElementById('afb-'+gid);
   fb.classList.add('show');
+  const MAX_TRIES=3;
   if(correct){
     inp.classList.add('ok');
-    st.ok++; const pts=Math.max(10-st.hints*2,4); st.score+=pts;
+    st.ok++; const pts=Math.max(10-st.hints*2-st.tries*2,2); st.score+=pts;
     document.getElementById('eok-'+gid).textContent=st.ok;
     document.getElementById('ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
     fb.classList.add('ok');
     fb.innerHTML=`<div class="fb-head ok">✓ ¡Correcto! +${pts} pts</div><div class="fb-body">${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
   } else {
-    inp.classList.add('err'); st.err++;
+    st.tries++; st.err++;
     document.getElementById('eerr-'+gid).textContent=st.err;
-    fb.classList.add('fail');
-    fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
+    if(st.tries<MAX_TRIES){
+      st.answered=false;
+      inp.classList.add('err');
+      inp.disabled=false;
+      document.getElementById('abtn-'+gid).disabled=false;
+      fb.classList.add('fail');
+      fb.innerHTML=`<div class="fb-head fail">✗ Incorrecto (intento ${st.tries}/${MAX_TRIES}) — <strong>${val}</strong></div><div class="fb-body">Inténtalo de nuevo o usa una pista.</div>`;
+      setTimeout(()=>{inp.classList.remove('err');inp.value='';inp.focus();},800);
+    } else {
+      fb.classList.add('fail');
+      fb.innerHTML=`<div class="fb-head fail">✗ Sin más intentos — tu respuesta: <strong>${val}</strong></div><div class="fb-body">Usa las pistas o "Ver respuesta".</div>`;
+    }
   }
 }
 
@@ -1147,12 +1377,12 @@ function revealEx(gid){
 }
 
 function nextEx(gid){
-  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0;
+  const st=getEx(gid); st.idx++; st.answered=false; st.hints=0; st.tries=0;
   renderExercise(gid);
 }
 
 function restartEx(gid){
-  exState[gid]={idx:0,hints:0,answered:false,score:0,ok:0,err:0,tot:0};
+  exState[gid]={idx:0,hints:0,answered:false,tries:0,score:0,ok:0,err:0,tot:0};
   renderExercise(gid);
 }
 
