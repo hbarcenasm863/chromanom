@@ -1,14 +1,13 @@
 // ChromaNom Service Worker — v2.0
 // Cache-first para uso offline completo
 
-const CACHE = 'chromanom-v2';
+const CACHE = 'chromanom-v3';
 const ASSETS = [
   './',
   './index.html',
   './teoria.html',
   './grupos.html',
   './juego.html',
-  './editor.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
