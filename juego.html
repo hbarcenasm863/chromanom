@@ -466,6 +466,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
 <a href="juego.html" class="nav-link active">🎮 <span class="full">Juego</span></a>
+<a href="editor.html" class="nav-link">✏️ <span class="full">Editor</span></a>
   </div>
 </nav>
 
@@ -4711,9 +4712,39 @@ function bldClickAtom(aid){
     else if(bldBondSrc===aid){bldBondSrc=null;bldRender();}
     else{
       const o=+bldTool.replace('bond','');
+      const BVAL={C:4,O:2,N:3,Cl:1,Br:1,F:1};
+      const srcId=bldBondSrc;
+      const propBonds=[
+        ...bldBonds.filter(b=>!((b.f===srcId&&b.t===aid)||(b.t===srcId&&b.f===aid))),
+        {id:-1,f:srcId,t:aid,o}
+      ];
+      const calcUsed=atomId=>{
+        const abs=propBonds.filter(b=>b.f===atomId||b.t===atomId);
+        let used=abs.reduce((s,b)=>s+b.o,0);
+        bldRingCircles.forEach(rc=>{
+          if(rc.atomIds?.includes(atomId)){
+            const rb=abs.filter(b=>rc.atomIds.includes(b.f===atomId?b.t:b.f));
+            used+=rb.length*0.5;
+          }
+        });
+        return Math.round(used);
+      };
+      const atSrc=bldAtoms.find(a=>a.id===srcId);
+      const atDst=bldAtoms.find(a=>a.id===aid);
+      const srcOver=calcUsed(srcId)>(BVAL[atSrc?.el]??4);
+      const dstOver=calcUsed(aid)>(BVAL[atDst?.el]??4);
+      const hint=document.getElementById('bld-hint');
+      if(srcOver||dstOver){
+        const badAt=srcOver?atSrc:atDst;
+        const maxV=BVAL[badAt?.el]??4;
+        if(hint){hint.textContent=`⚠ Valencia excedida: ${badAt?.el} acepta máx. ${maxV} enlace${maxV===1?'':'s'}. Usa un orden menor o elimina un enlace existente.`;hint.style.color='var(--err)';}
+        bldBondSrc=null;bldRender();
+        return;
+      }
+      if(hint&&hint.textContent.startsWith('⚠')){hint.textContent='';hint.style.color='';}
       bldPush();
-      bldBonds=bldBonds.filter(b=>!((b.f===bldBondSrc&&b.t===aid)||(b.t===bldBondSrc&&b.f===aid)));
-      bldBonds.push({id:bldNbid++,f:bldBondSrc,t:aid,o});
+      bldBonds=bldBonds.filter(b=>!((b.f===srcId&&b.t===aid)||(b.t===srcId&&b.f===aid)));
+      bldBonds.push({id:bldNbid++,f:srcId,t:aid,o});
       bldBondSrc=null;bldRender();
     }
   }
