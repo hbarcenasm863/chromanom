@@ -536,7 +536,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
       <summary class="drill-summary">🏗️ Practicar constructor por familia ▾</summary>
       <div class="drill-pills">
         <button class="drill-pill" onclick="openLevelModal('constructor')">Todas las moléculas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Solo aromáticos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Solo aromáticos (construir)</button>
       </div>
     </details>
     <div class="portada-stats">
@@ -3917,6 +3917,8 @@ const NIVEL_LABELS={
   amidas:    'Amidas',
   nitrilos:  'Nitrilos',
   aminas:    'Aminas',
+  benceno:   'Aromáticos',
+  constructor_aromaticos: '🏗️ Constructor — Solo Aromáticos',
 };
 
 const CIRCUMFERENCE=138.2;
@@ -4718,7 +4720,7 @@ function buildBuild(q){
   const firstTime=!localStorage.getItem('bld_tutorial_seen');
   if(firstTime){localStorage.setItem('bld_tutorial_seen','1');}
   const tutHtml=firstTime?`<div style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.3);border-radius:10px;padding:10px 14px;font-size:.76rem;color:#ea580c;margin-bottom:8px;line-height:1.7">
-  💡 <strong>Primera vez:</strong> Clic en el lienzo para colocar átomos. Para un doble enlace C=O: coloca O, luego selecciona ═ y clic en C y luego en O. Usa <em>rBz</em> para el anillo de benceno.
+  💡 <strong>Primera vez:</strong> Clic en el lienzo para colocar átomos (C, O, N, Cl, Br, F). Para un doble enlace C=O: coloca O, selecciona ═ y clic en C y luego en O. Usa <em>rBz</em> para el anillo de benceno.
 </div>`:'';
   return tutHtml+`<div class="build-wrap">
     <div class="build-toolbar">
@@ -4726,6 +4728,9 @@ function buildBuild(q){
       <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')">C</button>
       <button class="bld-btn bE" id="bld-t-O" onclick="bldSetTool('O')">O</button>
       <button class="bld-btn bN" id="bld-t-N" onclick="bldSetTool('N')">N</button>
+      <button class="bld-btn bCl" id="bld-t-Cl" onclick="bldSetTool('Cl')">Cl</button>
+      <button class="bld-btn bBr" id="bld-t-Br" onclick="bldSetTool('Br')">Br</button>
+      <button class="bld-btn bF" id="bld-t-F" onclick="bldSetTool('F')">F</button>
       <div class="bld-sep"></div>
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Enlace:</span>
       <button class="bld-btn" id="bld-t-bond1" onclick="bldSetTool('bond1')">─</button>
@@ -4744,7 +4749,7 @@ function buildBuild(q){
     </div>
     <svg id="bld-svg" class="build-canvas" onclick="bldClickBg(event)"></svg>
     <div style="font-size:.67rem;color:var(--dim);padding:5px 10px;background:var(--surf);border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r)">
-      <b>C/O/N</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>🗑</b>: elimina átomo y sus enlaces &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
+      <b>C/O/N/Cl/Br/F</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>🗑</b>: elimina átomo y sus enlaces &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
     </div>
   </div>
   <div id="bld-hint" style="min-height:18px;font-size:.76rem;color:var(--dim);margin-top:6px;font-style:italic"></div>
@@ -4759,7 +4764,7 @@ function checkBuild(){
   // Aromatic compounds require the benzene ring template (rBz)
   if(!Array.isArray(ref)&&ref.aromatic&&bldRingCircles.length===0){
     bldAttempts++;
-    const fb=document.getElementById('bld-feedback');
+    const fb=document.getElementById('feedback');
     if(fb){fb.className='feedback err';fb.innerHTML=`💡 <strong>Compuesto aromático.</strong> Usa el template <em>rBz</em> (benceno) del panel de herramientas para dibujar el anillo. ${3-bldAttempts} intento${3-bldAttempts!==1?'s':''} restante${3-bldAttempts!==1?'s':''}.`;}
     if(bldAttempts>=3){answered=true;stopTimer();const nxt=document.getElementById('q-next');if(nxt)nxt.classList.add('show');}
     return;
