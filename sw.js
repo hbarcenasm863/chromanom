@@ -1,16 +1,20 @@
-// ChromaNom Service Worker — v1.0
+// ChromaNom Service Worker — v2.0
 // Cache-first para uso offline completo
 
-const CACHE = 'chromanom-v1';
+const CACHE = 'chromanom-v2';
 const ASSETS = [
   './',
   './index.html',
   './teoria.html',
   './grupos.html',
   './juego.html',
+  './editor.html',
   './manifest.json',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/icon-192-maskable.png',
+  './icons/icon-512-maskable.png',
+  './icons/icon-180.png'
 ];
 
 // Instalar: guardar todos los archivos en caché
@@ -37,6 +41,8 @@ self.addEventListener('fetch', e => {
   if (!e.request.url.startsWith(self.location.origin)) return;
   // No interceptar requests a Google Apps Script (analytics)
   if (e.request.url.includes('script.google.com')) return;
+  // No interceptar requests a Google Fonts (fallan silenciosamente offline)
+  if (e.request.url.includes('fonts.googleapis.com') || e.request.url.includes('fonts.gstatic.com')) return;
 
   e.respondWith(
     caches.match(e.request).then(cached => {
