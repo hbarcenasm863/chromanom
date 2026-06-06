@@ -93,7 +93,7 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* MOL AREA */
-.mol-area{background:#fafaf8;border-bottom:2px solid var(--brd);padding:24px 20px 16px;min-height:180px;display:flex;align-items:center;justify-content:center}
+.mol-area{background:#fafaf8;border-bottom:2px solid var(--brd);padding:20px 20px 14px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .mol-area svg{width:100%;max-height:160px;overflow:visible}
 
 /* SVG HIGHLIGHTING */
@@ -110,6 +110,14 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 .hl-g .tg{fill:var(--c4)!important;font-weight:900}
 .hl-r .ar{stroke:var(--c1)!important;fill:var(--c1b)!important}
 .hl-r .tr{fill:var(--c1)!important}
+
+/* semi-developed formula highlight */
+.sd{font-family:var(--mono);font-size:.78rem;text-align:center;margin-top:10px;line-height:2;letter-spacing:.01em;width:100%}
+.sd-r,.sd-c,.sd-i,.sd-g{border-radius:3px;padding:1px 3px;transition:background .25s,color .25s,box-shadow .25s}
+.hl-r .sd-r{background:var(--c1b);color:var(--c1);box-shadow:0 0 6px rgba(8,145,178,.35)}
+.hl-c .sd-c{background:var(--c2b);color:var(--c2t);box-shadow:0 0 6px rgba(22,101,52,.35)}
+.hl-i .sd-i{background:var(--c3b);color:var(--c3t);box-shadow:0 0 6px rgba(180,83,9,.35)}
+.hl-g .sd-g{background:var(--c4b);color:var(--c4t);box-shadow:0 0 6px rgba(204,121,167,.35)}
 
 /* STEPS */
 .steps-area{padding:20px 22px}
@@ -426,6 +434,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <line class="bond br" x1="136" y1="0" x2="136" y2="-34" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
       <line class="bond br" x1="136" y1="-34" x2="170" y2="-53" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
     </svg>
+    <div class="sd"><span class="sd-g">HOOC</span>—<span class="sd-c">CH₂—CH₂—CH₂—CH</span><span class="sd-r">(CH₂CH₃)</span>—<span class="sd-i">CH═CH</span>—<span class="sd-c">CH₂—CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
@@ -465,6 +474,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <!-- Methyl at C2 (34,19): straight up -->
       <line class="bond br" x1="34" y1="19" x2="34" y2="-22" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
     </svg>
+    <div class="sd"><span class="sd-c">CH₃—CH</span><span class="sd-r">(CH₃)</span>—<span class="sd-c">CH₂—CH₂—CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
@@ -502,6 +512,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <line class="bond bc" x1="34" y1="19" x2="68" y2="0" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
       <line class="bond bc" x1="68" y1="0" x2="102" y2="19" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
     </svg>
+    <div class="sd"><span class="sd-i">CH₂═CH</span>—<span class="sd-c">CH₂—CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
@@ -542,6 +553,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <rect class="atom-box ag" x="20" y="-37" width="26" height="17" rx="4" fill="white" stroke="#1a1714" stroke-width="1.2"/>
       <text class="atom-text tg" x="34" y="-28.5" text-anchor="middle" dominant-baseline="central" font-family="'Courier New',monospace" font-weight="700" font-size="10" fill="#1a1714">O</text>
     </svg>
+    <div class="sd"><span class="sd-c">CH₃</span>—<span class="sd-g">C═O</span>—<span class="sd-c">CH₂—CH₂—CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
@@ -587,6 +599,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <line class="bond br" x1="68" y1="0" x2="68" y2="-36" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
       <line class="bond br" x1="68" y1="-36" x2="102" y2="-55" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
     </svg>
+    <div class="sd"><span class="sd-g">HO</span><span class="sd-c">CH₂—CH</span><span class="sd-r">(CH₃)</span>—<span class="sd-c">CH</span><span class="sd-r">(CH₂CH₃)</span>—<span class="sd-c">CH₂—CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
@@ -633,6 +646,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <!-- Methyl at C5 (136,0): up -->
       <line class="bond br" x1="136" y1="0" x2="136" y2="-38" stroke="#2a2520" stroke-width="2.2" stroke-linecap="round"/>
     </svg>
+    <div class="sd"><span class="sd-c">CH₃—CH</span><span class="sd-g">(OH)</span>—<span class="sd-i">CH═CH</span>—<span class="sd-c">CH</span><span class="sd-r">(CH₃)</span>—<span class="sd-c">CH₃</span></div>
   </div>
   <div class="steps-area">
     <div class="steps-row">
