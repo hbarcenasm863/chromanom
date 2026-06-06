@@ -1,12 +1,13 @@
 {
+  "id": "/chromanom/",
   "name": "ChromaNom — Nomenclatura Orgánica",
   "short_name": "ChromaNom",
-  "description": "Aprende nomenclatura orgánica IUPAC con el método visual de 4 colores. Bachillerato.",
+  "description": "Aprende nomenclatura orgánica IUPAC con el método visual de 4 colores. Bachillerato y universidad.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#0d4a73",
+  "orientation": "any",
+  "background_color": "#0d2d42",
   "theme_color": "#0d4a73",
   "lang": "es",
   "categories": ["education"],
@@ -15,16 +16,27 @@
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
-  "screenshots": [],
   "shortcuts": [
     {
       "name": "Principios IUPAC",
@@ -42,6 +54,12 @@
       "name": "Juego de Práctica",
       "short_name": "Juego",
       "url": "./juego.html",
+      "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
+    },
+    {
+      "name": "Editor Molecular",
+      "short_name": "Editor",
+      "url": "./editor.html",
       "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
     }
   ]

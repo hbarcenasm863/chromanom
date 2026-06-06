@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NomOrg · Grupos Funcionales v2</title>
+<title>ChromaNom · Grupos Funcionales</title>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -257,6 +263,7 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link active">🔬 <span class="full">Grupos</span></a>
 <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="editor.html" class="nav-link">✏️ <span class="full">Editor</span></a>
   </div>
 </nav>
 <div class="app">
@@ -2081,5 +2088,7 @@ buildGallery();
 <div style="text-align:center;padding:16px;font-size:.72rem;color:rgba(255,255,255,.3);background:var(--tx,#1a1714);margin-top:auto">
   <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
 </div>
+<script src="pwa-install.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>NomOrg — Las 4 Partes</title>
 <style>
 :root{
@@ -324,6 +324,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <a href="teoria.html" class="nav-link active">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
 <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="editor.html" class="nav-link">✏️ <span class="full">Editor</span></a>
   </div>
 </nav>
 <div class="app">
@@ -1854,5 +1855,7 @@ function tTeoria(id,view){
     </div>
   </div>
 </div>
+<script src="pwa-install.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
