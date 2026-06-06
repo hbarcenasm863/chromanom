@@ -10,16 +10,17 @@
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   /* 4-part color scheme */
-  --c1:#0072B2;  /* sustituyentes */
+  --c1:#0891b2;  /* sustituyentes - teal */
   --c2:#166534;  /* cadena - verde oscuro */
   --c3:#b45309;  /* insaturaciones - dorado */
   --c4:#CC79A7;  /* grupo funcional */
-  --c1b:#e6f2ff;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
+  --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
   /* Versiones oscurecidas para texto (WCAG AA 4.5:1 sobre blanco) */
-  --c1t:#0072B2;  /* azul ya pasa */
+  --c1t:#0e7490;  /* teal oscuro */
   --c2t:#14532d;  /* verde oscuro */
   --c3t:#92400e;  /* dorado oscuro */
   --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
+  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -97,7 +98,7 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .ans-input{flex:1;background:var(--surf2);border:2px solid var(--brd);border-radius:var(--rs);padding:10px 14px;color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:.9rem;outline:none;transition:border-color .2s}
 .ans-input:focus{border-color:var(--c4)}
 .ans-input.ok{border-color:#16a34a;background:#f0fdf4}
-.ans-input.err{border-color:var(--c1);background:var(--c1b)}
+.ans-input.err{border-color:var(--err);background:var(--errb)}
 .btn-check{padding:10px 18px;background:var(--tx);border:none;border-radius:var(--rs);color:#fff;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
 .btn-check:hover{background:var(--c4);transform:translateY(-1px)}
 .btn-check:disabled{opacity:.3;cursor:not-allowed;transform:none}
@@ -105,9 +106,9 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 .feedback.show{display:block}
 .feedback.ok{background:#f0fdf4;border:1.5px solid rgba(22,163,74,.3)}
-.feedback.fail{background:var(--c1b);border:1.5px solid rgba(231,76,60,.2)}
+.feedback.fail{background:var(--errb);border:1.5px solid rgba(220,38,38,.2)}
 .fb-head{font-weight:700;font-size:.88rem;margin-bottom:4px}
-.fb-head.ok{color:#16a34a}.fb-head.fail{color:var(--c1)}
+.fb-head.ok{color:#16a34a}.fb-head.fail{color:var(--errt)}
 .fb-body{font-size:.8rem;color:var(--dim);line-height:1.6}
 .hint-card{display:none;background:#fffbea;border:1px solid rgba(234,179,8,.3);border-radius:var(--rs);padding:10px 14px;margin-top:6px;font-size:.8rem;color:var(--dim);line-height:1.6;animation:up .2s ease}
 .hint-card.show{display:block}
@@ -1241,7 +1242,7 @@ function renderExercise(gid){
         <div style="color:var(--dim);font-size:.85rem;margin-bottom:20px">Acertaste el ${pct}% de los ejercicios de ${g.name}.</div>
         <div class="stats3" style="max-width:320px;margin:0 auto 20px">
           <div class="stat"><div class="stat-n" style="color:#16a34a">${st.ok}</div><div class="stat-l">Correctas</div></div>
-          <div class="stat"><div class="stat-n" style="color:var(--c1)">${st.err}</div><div class="stat-l">Incorrectas</div></div>
+          <div class="stat"><div class="stat-n" style="color:var(--err)">${st.err}</div><div class="stat-l">Incorrectas</div></div>
           <div class="stat"><div class="stat-n" style="color:var(--c4t)">${st.score}</div><div class="stat-l">Puntos</div></div>
         </div>
         <button class="btn-check" onclick="restartEx('${gid}')">Repetir ejercicios →</button>
@@ -1294,7 +1295,7 @@ function renderExercise(gid){
     </div>
     <div class="stats3" style="margin-top:14px">
       <div class="stat"><div class="stat-n" style="color:#16a34a" id="eok-${gid}">${st.ok}</div><div class="stat-l">Correctas</div></div>
-      <div class="stat"><div class="stat-n" style="color:var(--c1)" id="eerr-${gid}">${st.err}</div><div class="stat-l">Incorrectas</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--err)" id="eerr-${gid}">${st.err}</div><div class="stat-l">Incorrectas</div></div>
       <div class="stat"><div class="stat-n" style="color:var(--c4t)" id="etot-${gid}">${st.tot}</div><div class="stat-l">Respondidas</div></div>
     </div>
   `;

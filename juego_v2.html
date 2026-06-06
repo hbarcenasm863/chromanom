@@ -22,8 +22,8 @@
   --c2t:#14532d;  /* verde oscuro texto */
   --c3t:#92400e;  /* dorado oscuro texto */
   --c4t:#A0527F;  /* magenta oscuro */
-  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
   --ok:#16a34a;--okb:#dcfce7;
+  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;  /* errores / respuesta incorrecta */
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
   --r:16px;--rs:10px;
@@ -349,7 +349,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .rs{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:16px;text-align:center}
 .rs-n{font-family:var(--mono);font-size:2rem;font-weight:700;line-height:1}
 .rs-l{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dimmer);margin-top:4px}
-.rs.ok .rs-n{color:var(--ok)}.rs.err .rs-n{color:var(--c1)}.rs.time .rs-n{color:var(--c2t)}
+.rs.ok .rs-n{color:var(--ok)}.rs.err .rs-n{color:var(--errt)}.rs.time .rs-n{color:var(--c2t)}
 .resumen-breakdown{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:18px 20px;margin-bottom:16px}
 .rb-title{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:var(--dimmer);margin-bottom:12px}
 .rb-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;padding:10px 12px;border-radius:var(--rs);border:1px solid var(--brd)}
@@ -441,7 +441,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .build-wrap{display:flex;flex-direction:column;gap:0}
 .build-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;background:var(--surf);border:1.5px solid var(--brd);border-bottom:none;border-radius:var(--r) var(--r) 0 0;align-items:center}
 .bld-btn{height:30px;min-width:30px;padding:0 7px;border:1.5px solid var(--brd);border-radius:7px;background:var(--surf);color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .13s}
-.bld-btn:hover{border-color:var(--c1);color:var(--c1);background:var(--c1b)}
+.bld-btn:hover{border-color:var(--tx);color:var(--tx);background:var(--brd)}
 .bld-btn.active{background:var(--tx);color:#fff;border-color:var(--tx)}
 .bld-btn.bE{color:#c8230a}.bld-btn.bN{color:#0033aa}.bld-btn.bCl{color:#1a7a1a;font-size:.65rem}.bld-btn.bBr{color:#8b1a1a;font-size:.65rem}.bld-btn.bF{color:#3366aa}
 .bld-btn.erase-btn{color:#c0392b}.bld-btn.erase-btn.active{background:#c0392b;border-color:#c0392b;color:#fff}
@@ -646,8 +646,6 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     </div>
     <div class="history-list" id="history-list"></div>
     <div style="margin-top:20px">
-      <button class="btn-sheets" id="btn-sheets" onclick="sendToSheets()" style="display:none">📊 Enviar resultados a Sheets</button>
-      <div class="sheets-status" id="sheets-status"></div>
       <button class="btn-replay" onclick="openLevelModal(currentLevel)" style="margin-top:8px">🔄 Jugar de nuevo</button>
       <button class="btn-replay" id="btn-retry-errors" onclick="retryErrors()" style="margin-top:8px;display:none">❌ Repetir preguntas falladas</button>
       <button class="btn-home" onclick="showScreen('s-portada')">← Volver al inicio</button>
@@ -4417,7 +4415,7 @@ function updateTimer(){
   if(!fg||!txt)return;
   const pct=timeLeft/60;
   fg.style.strokeDashoffset=CIRCUMFERENCE*(1-pct);
-  fg.style.stroke=timeLeft>15?'#fcd34d':timeLeft>7?'var(--c2)':'var(--c1)';
+  fg.style.stroke=timeLeft>30?'var(--ok)':timeLeft>15?'#fcd34d':'var(--err)';
   txt.textContent=timeLeft;
 }
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
@@ -4448,7 +4446,7 @@ function showFeedback(ok,expl,ans,pts,given){
     let cmpHtml='';
     if(given && given!=='(tiempo)'){
       cmpHtml=`<div style="font-family:var(--mono);font-size:.78rem;background:rgba(0,0,0,.08);padding:7px 10px;border-radius:6px;margin:6px 0;line-height:1.9">
-        <span style="opacity:.55">Tu respuesta: </span><strong style="color:var(--c1)">${given}</strong><br>
+        <span style="opacity:.55">Tu respuesta: </span><strong style="color:var(--errt)">${given}</strong><br>
         <span style="opacity:.55">Respuesta correcta: </span><strong style="color:#16a34a">${ans}</strong>
       </div>`;
     }
@@ -4991,7 +4989,7 @@ function showResults(){
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
     const p=Math.round(st.ok/st.tot*100);
-    const col=p>=70?'var(--ok)':p>=50?'var(--c2t)':'var(--c1)';
+    const col=p>=70?'var(--ok)':p>=50?'var(--c3t)':'var(--errt)';
     rbHtml+=`<div class="rb-row">
       <span class="rb-type ${typeCls[t]}">${typeNames[t]}</span>
       <span class="rb-label">${st.ok}/${st.tot}</span>
@@ -5034,7 +5032,7 @@ function showResults(){
       <span class="hl-icon">${icon}</span>
       <span class="rb-type ${h.type}" style="font-size:.6rem;padding:2px 7px">${tnames[h.type]}</span>
       <span class="hl-q">${h.ans}</span>
-      ${!h.ok&&h.given!=='(arrastrar)'?`<span class="hl-a" style="color:var(--c1);font-size:.72rem">${h.given}</span>`:''}
+      ${!h.ok&&h.given!=='(arrastrar)'?`<span class="hl-a" style="color:var(--errt);font-size:.72rem">${h.given}</span>`:''}
     </div>`;
   });
   document.getElementById('history-list').innerHTML=hlHtml;
@@ -5113,46 +5111,22 @@ function sendAnalytics(trigger){
   if(_analyticsSent) return;
   if(history.length===0) return;
   _analyticsSent=true;
-  const body=JSON.stringify(buildPayload(trigger));
-  // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
-  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-    .then(r=>{ if(r.ok) _updateSheetsStatus('ok'); })
-    .catch(()=>{ _analyticsSent=false; _updateSheetsStatus('error'); });
-}
-
-function _updateSheetsStatus(state){
-  const btn=document.getElementById('btn-sheets');
-  const status=document.getElementById('sheets-status');
-  if(!status) return;
-  if(state==='ok'){
-    status.textContent='✅ Resultados guardados en Google Sheets.';
-    if(btn){btn.style.display='none';}
-  } else {
-    status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
-    if(btn){btn.style.display='flex';}
-  }
+  navigator.sendBeacon(ANALYTICS_URL, new Blob([JSON.stringify(buildPayload(trigger))],{type:'application/json'}));
 }
 
 function sendToSheets(){
+  const url=ANALYTICS_URL;
   const btn=document.getElementById('btn-sheets');
   const status=document.getElementById('sheets-status');
-  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'){
-    if(status) status.textContent='⚠ Configura la URL del Apps Script en el código (ANALYTICS_URL).';
+  if(!url||url==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'){
+    status.textContent='⚠ Configura la URL del Apps Script en el código (ANALYTICS_URL).';
     return;
   }
-  if(btn){btn.disabled=true;btn.innerHTML='⏳ Enviando…';}
-  _analyticsSent=false;
-  fetch(ANALYTICS_URL,{method:'POST',body:JSON.stringify(buildPayload('manual')),headers:{'Content-Type':'text/plain'}})
+  btn.disabled=true; btn.innerHTML='⏳ Enviando…';
+  fetch(url,{method:'POST',body:JSON.stringify(buildPayload('manual')),headers:{'Content-Type':'application/json'}})
     .then(r=>r.ok?r.text():Promise.reject(r.status))
-    .then(()=>{
-      _analyticsSent=true;
-      if(btn){btn.style.display='none';}
-      if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
-    })
-    .catch(()=>{
-      if(btn){btn.disabled=false;btn.innerHTML='📊 Reintentar envío';btn.style.display='flex';}
-      if(status) status.textContent='⚠ Error al enviar. Verifica la URL del Apps Script.';
-    });
+    .then(()=>{btn.innerHTML='✅ Enviado';status.textContent='Resultados guardados en Google Sheets.';})
+    .catch(()=>{btn.disabled=false;btn.innerHTML='📊 Reintentar envío';status.textContent='Error al enviar. Verifica la URL del Apps Script.';});
 }
 
 window.addEventListener('beforeunload',()=>sendAnalytics('cierre'));
