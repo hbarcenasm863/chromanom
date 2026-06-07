@@ -681,9 +681,13 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 
 <div id="tablas"></div>
 <!-- ════════ TABLAS DE REFERENCIA ════════ -->
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:32px;margin-bottom:16px">
+  <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)">Tablas de referencia</div>
+  <button onclick="printTables()" style="display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--c1);color:#fff;border:none;border-radius:20px;font-size:.76rem;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:opacity .15s" onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">⬇ Guardar como PDF</button>
+</div>
 
 <!-- TABLA 1: PREFIJOS DE CADENA -->
-<div class="slbl" style="margin-top:32px">Tabla 1 — Prefijos de cadena (número de carbonos)</div>
+<div class="slbl">Tabla 1 — Prefijos de cadena (número de carbonos)</div>
 <div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:24px">
   <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:.82rem">
@@ -1831,6 +1835,75 @@ function tTeoria(id,view){
   const semi=area.querySelector('.semi-view');
   if(orig)orig.style.display=view==='form'?'none':'';
   if(semi)semi.style.display=view==='form'?'':'none';
+}
+
+function printTables(){
+  const T3html=T3.map((r,i)=>`<tr style="background:${i%2?'#f5f5f3':'#fff'}">
+    <td style="padding:5px 9px;text-align:center;font-weight:700">${r.n}</td>
+    <td style="padding:5px 9px;font-weight:600">${r.name}</td>
+    <td style="padding:5px 9px;font-family:monospace">${r.fm}</td>
+    <td style="padding:5px 9px;font-family:monospace">${r.sf}</td>
+    <td style="padding:5px 9px;font-family:monospace;color:#555">${r.ss}</td>
+  </tr>`).join('');
+  let lastG='';
+  const CMPhtml=CMP.map((r,i)=>{
+    const isNew=r.g&&r.g!==lastG;
+    if(r.g)lastG=r.g;
+    return `<tr style="background:${i%2?'#f5f5f3':'#fff'}${isNew?';border-top:2px solid #bcd':''}">
+      <td style="padding:5px 9px;font-weight:${isNew?700:400}">${r.g||''}</td>
+      <td style="padding:5px 9px;font-style:italic;color:#555">${r.old}</td>
+      <td style="padding:5px 9px;font-family:monospace;font-weight:600">${r.neu}</td>
+    </tr>`;
+  }).join('');
+  const w=window.open('','_blank','width=820,height=680');
+  w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<title>ChromaNom — Tablas de referencia</title>
+<style>
+body{font-family:'Trebuchet MS',Arial,sans-serif;font-size:11.5px;color:#0d2d42;margin:18px 22px;line-height:1.5}
+h1{font-family:Georgia,serif;font-size:17px;margin-bottom:2px;padding-bottom:6px;border-bottom:2px solid #0d4a73}
+h1 small{font-size:10px;font-weight:400;color:#666;float:right;margin-top:4px}
+h2{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#444;margin:16px 0 5px;padding-bottom:3px;border-bottom:1px solid #ddd}
+table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:4px}
+th{background:#0d2d42;color:#fff;padding:5px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.07em}
+td{border-bottom:1px solid #e8e8e8}
+.note{font-size:10px;color:#555;background:#fafaf8;border-top:1px solid #ddd;padding:5px 9px;margin-bottom:14px}
+@media print{@page{margin:12mm}body{margin:0}}
+</style></head><body>
+<h1>ChromaNom — Tablas de referencia IUPAC <small>Impreso desde ChromaNom</small></h1>
+
+<h2>Tabla 1 — Prefijos de cadena</h2>
+<table><thead><tr><th>N° C</th><th>Prefijo</th><th>Alcano</th><th>N° C</th><th>Prefijo</th><th>Alcano</th></tr></thead><tbody>
+<tr><td style="padding:5px 9px">1</td><td style="padding:5px 9px"><b>met-</b></td><td style="padding:5px 9px">metano</td><td style="padding:5px 9px">7</td><td style="padding:5px 9px"><b>hept-</b></td><td style="padding:5px 9px">heptano</td></tr>
+<tr style="background:#f5f5f3"><td style="padding:5px 9px">2</td><td style="padding:5px 9px"><b>et-</b></td><td style="padding:5px 9px">etano</td><td style="padding:5px 9px">8</td><td style="padding:5px 9px"><b>oct-</b></td><td style="padding:5px 9px">octano</td></tr>
+<tr><td style="padding:5px 9px">3</td><td style="padding:5px 9px"><b>prop-</b></td><td style="padding:5px 9px">propano</td><td style="padding:5px 9px">9</td><td style="padding:5px 9px"><b>non-</b></td><td style="padding:5px 9px">nonano</td></tr>
+<tr style="background:#f5f5f3"><td style="padding:5px 9px">4</td><td style="padding:5px 9px"><b>but-</b></td><td style="padding:5px 9px">butano</td><td style="padding:5px 9px">10</td><td style="padding:5px 9px"><b>dec-</b></td><td style="padding:5px 9px">decano</td></tr>
+<tr><td style="padding:5px 9px">5</td><td style="padding:5px 9px"><b>pent-</b></td><td style="padding:5px 9px">pentano</td><td style="padding:5px 9px">11</td><td style="padding:5px 9px"><b>undec-</b></td><td style="padding:5px 9px">undecano</td></tr>
+<tr style="background:#f5f5f3"><td style="padding:5px 9px">6</td><td style="padding:5px 9px"><b>hex-</b></td><td style="padding:5px 9px">hexano</td><td style="padding:5px 9px">12</td><td style="padding:5px 9px"><b>dodec-</b></td><td style="padding:5px 9px">dodecano</td></tr>
+</tbody></table>
+
+<h2>Tabla 2 — Prefijos multiplicadores</h2>
+<table><thead><tr><th>N°</th><th>Simple</th><th>Complejo</th><th>Uso</th></tr></thead><tbody>
+<tr><td style="padding:5px 9px">2</td><td style="padding:5px 9px"><b>di-</b></td><td style="padding:5px 9px">bis-</td><td style="padding:5px 9px">dicloro, dimetil…</td></tr>
+<tr style="background:#f5f5f3"><td style="padding:5px 9px">3</td><td style="padding:5px 9px"><b>tri-</b></td><td style="padding:5px 9px">tris-</td><td style="padding:5px 9px">tricloro, trimetil…</td></tr>
+<tr><td style="padding:5px 9px">4</td><td style="padding:5px 9px"><b>tetra-</b></td><td style="padding:5px 9px">tetrakis-</td><td style="padding:5px 9px">tetracloro…</td></tr>
+<tr style="background:#f5f5f3"><td style="padding:5px 9px">5</td><td style="padding:5px 9px"><b>penta-</b></td><td style="padding:5px 9px">pentakis-</td><td style="padding:5px 9px">pentacloro…</td></tr>
+<tr><td style="padding:5px 9px">6</td><td style="padding:5px 9px"><b>hexa-</b></td><td style="padding:5px 9px">hexakis-</td><td style="padding:5px 9px">hexacloro…</td></tr>
+</tbody></table>
+<div class="note">⚠ Los prefijos di-, tri-, tetra- NO cuentan para el orden alfabético. Los prefijos iso-, ciclo-, neo- SÍ cuentan.</div>
+
+<h2>Tabla 3 — Grupos funcionales (orden de prioridad IUPAC ↓)</h2>
+<table><thead><tr><th>#</th><th>Clase</th><th>Fórmula</th><th>Sufijo principal</th><th>Como sustituyente</th></tr></thead>
+<tbody>${T3html}</tbody></table>
+<div class="note">↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre.</div>
+
+<h2>Equivalencias — nombres triviales vs. IUPAC actual</h2>
+<table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
+<tbody>${CMPhtml}</tbody></table>
+<div class="note">* Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan.</div>
+
+<script>window.addEventListener('load',()=>{window.print();window.addEventListener('afterprint',()=>window.close());});<\/script>
+</body></html>`);
+  w.document.close();
 }
 </script>
 
