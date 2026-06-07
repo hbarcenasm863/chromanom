@@ -1659,15 +1659,15 @@ const QBANK = [
 
   // ciclohexeno
   {type:'mc', mol:'ciclohexeno', q:'¿Cuál es el nombre IUPAC de esta estructura?',
-   ans:'ciclohexeno', opts:['ciclohexeno','ciclohexano','ciclopenteno','ciclohexadieno'],
-   expl:'Anillo de 6C con un doble enlace → <b>ciclohexeno</b>.',
-   parts:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'en',cls:'i',l:'Doble'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+   ans:'ciclohex-1-eno', opts:['ciclohex-1-eno','ciclohexano','ciclopenteno','ciclohexadieno'],
+   expl:'Anillo de 6C con un doble enlace en C1 → <b>ciclohex-1-eno</b>. (También aceptado: <em>ciclohexeno</em> en nomenclatura pre-2013.)',
+   parts:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'-1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   {type:'write', mol:'ciclohexeno', q:'Escribe el nombre IUPAC de esta estructura cíclica.',
-   ans:'ciclohexeno', accepted:['ciclohexeno'],
-   hints:['Es un anillo de 6 carbonos','Tiene un doble enlace en el anillo'],
-   expl:'Anillo de 6C con doble enlace → <b>ciclohexeno</b>.',
-   parts:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'en',cls:'i',l:'Doble'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+   ans:'ciclohex-1-eno', accepted:['ciclohex-1-eno','ciclohexeno'],
+   hints:['Es un anillo de 6 carbonos con un doble enlace','IUPAC 2013: el localizador va antes del sufijo: ciclohex-1-eno'],
+   expl:'Anillo de 6C + doble enlace → <b>ciclohex-1-eno</b>. Nombre anterior aceptado: <em>ciclohexeno</em>.',
+   parts:[{t:'ciclohex',cls:'c',l:'Ciclo 6C'},{t:'-1-en',cls:'i',l:'Doble C1'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
 
   // ciclobutano
   {type:'mc', mol:'ciclobutano', q:'¿Cuál es el nombre IUPAC de esta estructura?',
