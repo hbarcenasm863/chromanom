@@ -1545,6 +1545,35 @@ const PD={
        ops:['sec-butil','isobutil','isopropil','neopentil'],
        resp:'isopropil',parte:null,
        fb:'<strong>isopropil = (1-metiletil)</strong>. Otros pares clave: isobutil = (2-metilpropil); sec-butil = (1-metilpropil); ter-butil = (1,1-dimetiletil). El prefijo <em>iso-</em> SÍ cuenta en el orden alfabético.'}
+    ]},
+  desempate:{sec:'Reglas de desempate',titulo:'3-etil-2-metilpentano',mol:null,
+    svgHtml:'<div class="prac-struct" style="font-size:.78rem;line-height:2.2;text-align:center">Cadena de 5C con etilo y metilo<br><span style="color:var(--c1)">Num. A:</span> metilo en C<strong>2</strong>, etilo en C<strong>3</strong> → set {2, 3}<br><span style="color:var(--c2t)">Num. B:</span> metilo en C<strong>4</strong>, etilo en C<strong>3</strong> → set {3, 4}<br><span style="font-size:.68rem;color:var(--dimmer)">A1 y A2 empatados — ¿qué decide?</span></div>',
+    nb:{r:'3-etil-2-metil',c:'pent',i:'an',g:'o'},
+    pasos:[
+      {n:1,titulo:'Criterio A1 — Cadena más larga',expl:'El primer criterio de desempate es la longitud: gana la cadena con más carbonos. Si hay empate de longitud, se aplica A2.',
+       q:'Dos posibles cadenas tienen ambas 5C. ¿Qué se hace?',tipo:'mc',
+       ops:['Elegir la que esté más a la izquierda','Pasar al criterio A2 (más ramificaciones)','Pasar directamente al criterio A4 (orden alfabético)','El nombre tiene dos formas correctas'],
+       resp:'Pasar al criterio A2 (más ramificaciones)',parte:null,
+       fb:'A1 empata (ambas 5C) → se aplica el <strong>criterio A2</strong>: gana la cadena que recoja más sustituyentes.'},
+      {n:2,titulo:'Criterio A2 — Más ramificaciones',expl:'Gana la cadena que incluya el mayor número de sustituyentes. Si el número también empata, se pasa al A3.',
+       q:'Ambas opciones recogen los mismos 2 sustituyentes (etilo + metilo). ¿Qué sigue?',tipo:'mc',
+       ops:['A2 resuelve — elegir la cadena de la derecha','Pasar al criterio A3 (localizadores más bajos)','Pasar al criterio A4 (orden alfabético)','El nombre tiene dos formas válidas'],
+       resp:'Pasar al criterio A3 (localizadores más bajos)',parte:null,
+       fb:'A2 también empata (ambas recogen 2 ramas) → se aplica el <strong>criterio A3</strong>: comparar los sets de localizadores posición a posición.'},
+      {n:3,titulo:'Criterio A3 — Sets de localizadores',expl:'Se ordenan los localizadores de menor a mayor y se comparan posición a posición. Gana el set cuyo primer localizador diferente sea el más bajo.',
+       q:'Sets a comparar: {2, 3} vs {3, 4}. ¿Cuál set es el más bajo?',tipo:'mc',
+       ops:['{3, 4} — la suma (7) supera a la de {2, 3} (5)','{2, 3} — primer localizador diferente: 2 < 3','Son equivalentes — se usa la suma total','{3, 4} — el localizador mayor (4) da más opciones'],
+       resp:'{2, 3} — primer localizador diferente: 2 < 3',parte:'r',
+       fb:'Posición a posición: primera diferencia 2 vs 3 → <strong>2 < 3</strong> → gana el set <strong>{2, 3}</strong>. Nunca se suman localizadores; solo importa la primera posición diferente.'},
+      {n:4,titulo:'Cadena base e insaturación',expl:'Con A3 resuelto (set {2,3}), se identifica la cadena principal: 5 carbonos sin dobles ni triples enlaces.',
+       q:'¿Cuál es el prefijo de cadena e infijo de insaturación para 5C sin dobles ni triples enlaces?',tipo:'mc',
+       ops:['but- y -en-','pent- y -an-','hex- y -in-','pent- y -en-'],
+       resp:'pent- y -an-',parte:'c',
+       fb:'5 carbonos → prefijo <strong>pent-</strong>; sin insaturaciones → infijo <strong>-an-</strong>. Base parcial: <em>pentan-</em>.'},
+      {n:5,titulo:'Nombre IUPAC completo',expl:'Ramas en orden alfabético (e antes que m) con localizadores del set {2,3}: etilo en C3, metilo en C2.',
+       q:'Escribe el nombre IUPAC completo de la molécula:',tipo:'write',
+       resp:'3-etil-2-metilpentano',parte:'i',
+       fb:'✓ <strong>3-etil-2-metilpentano</strong>. A3 eligió {2,3}; orden alfabético: <em>etil</em> (e) antes que <em>metil</em> (m) → 3-etil- y 2-metil-.'}
     ]}
 };
 
