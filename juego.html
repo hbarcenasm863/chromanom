@@ -502,7 +502,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">150 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, fenoles, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">175 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
@@ -510,7 +510,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">474 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">499 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ct" onclick="openLevelModal('constructor')">
         <div class="nivel-icon">🏗️</div>
@@ -3874,6 +3874,150 @@ const QBANK = [
    ans:'hex-1-eno', opts:['hex-1-eno','hex-2-eno','hexano','hex-1-ino'],
    expl:'6C + doble enlace en C1 → <b>hex-1-eno</b>. El sufijo <b>-eno</b> indica el doble enlace.',
    parts:[{t:'hex',cls:'c',l:'6C'},{t:'1',cls:'i',l:'Localiz.'},{t:'eno',cls:'g',l:'Doble enl.'}], topic:'alquenos'},
+
+  // ════════════════════════════════════════════════════════
+  // FENOLES (25 preguntas)
+  // ════════════════════════════════════════════════════════
+  {type:'mc', mol:'fenol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'fenol', opts:['fenol','hidroxibenceno','bencenol','cresol'],
+   expl:'C₆H₅-OH → <b>fenol</b> (nombre retenido IUPAC 2013). Equivalente a hidroxibenceno.',
+   parts:[{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'dosmetilfenol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'2-metilfenol', opts:['2-metilfenol','3-metilfenol','metilbenceno','fenilmetanol'],
+   expl:'Fenol con metilo en posición 2 (adyacente al OH). OH=C1 → <b>2-metilfenol</b>.',
+   parts:[{t:'2-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuametilfenol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'4-metilfenol', opts:['4-metilfenol','2-metilfenol','1-metilfenol','cresol'],
+   expl:'Fenol con metilo en posición opuesta al OH → C4. OH=C1 → <b>4-metilfenol</b>.',
+   parts:[{t:'4-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuaclorofenol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+   ans:'4-clorofenol', opts:['4-clorofenol','2-clorofenol','clorobencenol','fenilcloruro'],
+   expl:'Fenol con cloro en posición opuesta (C4). OH=C1 → <b>4-clorofenol</b>.',
+   parts:[{t:'4-cloro',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol12', q:'¿Cuál es el nombre IUPAC de esta estructura con dos grupos OH en el anillo?',
+   ans:'benceno-1,2-diol', opts:['benceno-1,2-diol','1,2-difenol','bencenodiol','catecol'],
+   expl:'Dos −OH adyacentes en el anillo: se usa bencenodiol con localizadores → <b>benceno-1,2-diol</b>.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,2-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol14', q:'¿Cuál es el nombre IUPAC de esta estructura con dos grupos OH opuestos?',
+   ans:'benceno-1,4-diol', opts:['benceno-1,4-diol','benceno-1,2-diol','benceno-2,4-diol','hidroquinona'],
+   expl:'Dos −OH opuestos en el anillo → <b>benceno-1,4-diol</b> (hidroquinona en nombre común).',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,4-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'fenol', q:'¿Qué nombre común acepta IUPAC 2013 para el hidroxibenceno?',
+   ans:'fenol', opts:['fenol','cresol','anisol','naftol'],
+   expl:'<b>Fenol</b> es el nombre retenido (retained name) por IUPAC 2013 para C₆H₅-OH = hidroxibenceno.',
+   parts:[{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'dosmetilfenol', q:'¿Qué regla de numeración se aplica en los fenoles?',
+   ans:'El OH recibe siempre C1', opts:['El OH recibe siempre C1','Se numera alfabéticamente','El metilo recibe C1','Se numeran los C en orden creciente'],
+   expl:'En fenoles, el −OH tiene prioridad: <b>el OH recibe C1</b>. Los demás sustituyentes se numeran para dar localizadores mínimos.',
+   parts:[{t:'2-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol13', q:'¿Cuál es el nombre IUPAC de dos grupos OH en posiciones 1 y 3 del benceno?',
+   ans:'benceno-1,3-diol', opts:['benceno-1,3-diol','benceno-1,2-diol','fenol-3-ol','benceno-2,4-diol'],
+   expl:'Dos −OH en posiciones 1 y 3 → <b>benceno-1,3-diol</b> (resorcinol en nombre común).',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,3-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuametilfenol', q:'¿Cuál es el nombre común del 4-metilfenol?',
+   ans:'p-cresol', opts:['p-cresol','o-cresol','m-cresol','timol'],
+   expl:'4-metilfenol = <b>p-cresol</b> (para-cresol). o-cresol = 2-metilfenol; m-cresol = 3-metilfenol.',
+   parts:[{t:'4-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'drag', mol:'fenol',
+   q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+   ans:'fenol',
+   slots:[
+     {id:'f1',label:'Anillo aromático',correct:'fen',cls:'c'},
+     {id:'f2',label:'Grupo funcional',correct:'ol',cls:'g'},
+   ],
+   tokens:[{text:'fen',cls:'c'},{text:'ol',cls:'g'},{text:'bencen',cls:'c'},{text:'il',cls:'r'}],
+   expl:'C₆H₅-OH → <b>fen</b> (anillo) + <b>ol</b> (OH) = fenol.', topic:'fenoles'},
+
+  {type:'drag', mol:'cuametilfenol',
+   q:'Arrastra cada fragmento a su posición en el nombre IUPAC del 4-metilfenol.',
+   ans:'4-metilfenol',
+   slots:[
+     {id:'f1',label:'Sustituyente',correct:'4-metil',cls:'r'},
+     {id:'f2',label:'Anillo aromático',correct:'fen',cls:'c'},
+     {id:'f3',label:'Grupo funcional',correct:'ol',cls:'g'},
+   ],
+   tokens:[{text:'4-metil',cls:'r'},{text:'fen',cls:'c'},{text:'ol',cls:'g'},{text:'2-metil',cls:'r'},{text:'bencen',cls:'c'}],
+   expl:'OH=C1, metilo en C4 → <b>4-metil</b> + <b>fen</b> + <b>ol</b> = 4-metilfenol.', topic:'fenoles'},
+
+  {type:'drag', mol:'bencenol14',
+   q:'Arrastra cada fragmento a su posición en el nombre del benceno-1,4-diol.',
+   ans:'benceno-1,4-diol',
+   slots:[
+     {id:'f1',label:'Anillo aromático',correct:'benceno',cls:'c'},
+     {id:'f2',label:'Grupo funcional',correct:'-1,4-diol',cls:'g'},
+   ],
+   tokens:[{text:'benceno',cls:'c'},{text:'-1,4-diol',cls:'g'},{text:'-1,2-diol',cls:'g'},{text:'fenol',cls:'c'}],
+   expl:'Dos OH opuestos: <b>benceno</b> + <b>-1,4-diol</b> = benceno-1,4-diol.', topic:'fenoles'},
+
+  {type:'mc', mol:'fenol', q:'¿A qué familia pertenece el fenol?',
+   ans:'Fenoles aromáticos (OH en anillo bencénico)', opts:['Fenoles aromáticos (OH en anillo bencénico)','Alcoholes alifáticos','Éteres','Cetonas aromáticas'],
+   expl:'El <b>fenol</b> tiene el −OH unido directamente al anillo bencénico, lo que lo hace aromático y más ácido que los alcoholes alifáticos.',
+   parts:[{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuaclorofenol', q:'¿Qué localizador toma el cloro en el 4-clorofenol?',
+   ans:'C4 (posición opuesta al OH)', opts:['C4 (posición opuesta al OH)','C1 (misma posición que OH)','C2 (adyacente al OH)','C3'],
+   expl:'OH=C1 (prioridad). El Cl está en la posición opuesta al OH en el anillo → <b>C4</b>.',
+   parts:[{t:'4-cloro',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol12', q:'¿Qué nombre común recibe el benceno-1,2-diol?',
+   ans:'catecol', opts:['catecol','resorcinol','hidroquinona','pirocatecol'],
+   expl:'<b>Catecol</b> es el nombre común aceptado para benceno-1,2-diol (posiciones adyacentes).',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,2-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol13', q:'¿Qué nombre común recibe el benceno-1,3-diol?',
+   ans:'resorcinol', opts:['resorcinol','catecol','hidroquinona','cresol'],
+   expl:'<b>Resorcinol</b> es el nombre común aceptado para benceno-1,3-diol.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,3-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol14', q:'¿Qué nombre común recibe el benceno-1,4-diol?',
+   ans:'hidroquinona', opts:['hidroquinona','resorcinol','catecol','quinol'],
+   expl:'<b>Hidroquinona</b> es el nombre común aceptado para benceno-1,4-diol (posiciones opuestas).',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,4-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'dosmetilfenol', q:'¿Cuál es el nombre de este fenol con metilo en posición 2?',
+   ans:'2-metilfenol', opts:['2-metilfenol','o-metilfenol','1-metilfenol','2-metilbencenol'],
+   expl:'Fenol base + metilo en C2 → <b>2-metilfenol</b>. El prefijo "orto" (o-) no es IUPAC preferred name.',
+   parts:[{t:'2-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'fenol', q:'¿Cuántos carbonos tiene el anillo del fenol?',
+   ans:'6 carbonos', opts:['6 carbonos','5 carbonos','7 carbonos','4 carbonos'],
+   expl:'El fenol tiene un anillo <b>bencénico de 6 carbonos</b> con un −OH sustituyente.',
+   parts:[{t:'fen',cls:'c',l:'Anillo 6C'},{t:'ol',cls:'g',l:'OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuaclorofenol', q:'¿Cómo se nombra el sustituyente Cl en el anillo del fenol?',
+   ans:'cloro- (prefijo)', opts:['cloro- (prefijo)','-clor- (infijo)','cloril- (sufijo)','cloruro de fenilo'],
+   expl:'Los halógenos en aromáticos se nombran como prefijos: <b>cloro-</b>, bromo-, fluoro-, yodo-.',
+   parts:[{t:'4-cloro',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol14', q:'¿Cuál de estos es el nombre IUPAC correcto para la hidroquinona?',
+   ans:'benceno-1,4-diol', opts:['benceno-1,4-diol','1,4-hidroxibenceno','p-dihidroxibenceno','bencenodiol-1,4'],
+   expl:'La hidroquinona = <b>benceno-1,4-diol</b>. La posición del localizador precede al sufijo -diol.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,4-diol',cls:'g',l:'2 OH'}], topic:'fenoles'},
+
+  {type:'mc', mol:'cuametilfenol', q:'¿Cuál de estos es el nombre IUPAC del p-cresol?',
+   ans:'4-metilfenol', opts:['4-metilfenol','1-metil-4-fenol','4-metilfenilo','para-cresol'],
+   expl:'p-cresol = <b>4-metilfenol</b>. "p-" = posición para = 4. El IUPAC preferred name es 4-metilfenol.',
+   parts:[{t:'4-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'dosmetilfenol', q:'¿Cuál de estos es el nombre IUPAC del o-cresol?',
+   ans:'2-metilfenol', opts:['2-metilfenol','1-metilfenol','fenol-2-metilo','metilhidroxibenceno'],
+   expl:'o-cresol = <b>2-metilfenol</b>. "o-" = orto = posición 2 respecto al OH.',
+   parts:[{t:'2-metil',cls:'r',l:'Sustit.'},{t:'fen',cls:'c',l:'Anillo'},{t:'ol',cls:'g',l:'OH C1'}], topic:'fenoles'},
+
+  {type:'mc', mol:'bencenol12', q:'¿Qué indica el localizador 1,2 en benceno-1,2-diol?',
+   ans:'Los OH están en carbonos adyacentes', opts:['Los OH están en carbonos adyacentes','Los OH están separados por un carbono','Los OH están opuestos','Hay dos anillos bencénicos'],
+   expl:'Los localizadores 1 y 2 indican que los −OH están en <b>carbonos adyacentes</b> (posición orto) del anillo.',
+   parts:[{t:'benceno',cls:'c',l:'Anillo'},{t:'-1,2-diol',cls:'g',l:'OH en 1,2'}], topic:'fenoles'},
 ];
 
 
@@ -3892,7 +4036,7 @@ let studentName='', studentCourse='';
 
 const NIVEL_TOPICS={
   hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
-  oxigenados:   ['alcoholes','cetonas','aldehidos','acidos','esteres','eteres'],
+  oxigenados:   ['alcoholes','fenoles','cetonas','aldehidos','acidos','esteres','eteres'],
   nitrogenados: ['amidas','nitrilos','aminas'],
   completo:     null,
   constructor:  ['constructor'],
@@ -3910,6 +4054,7 @@ const NIVEL_TOPICS={
   nitrilos:   ['nitrilos'],
   aminas:     ['aminas'],
   benceno:    ['benceno'],
+  fenoles:    ['fenoles'],
   constructor_aromaticos: null,
 };
 const NIVEL_LABELS={
