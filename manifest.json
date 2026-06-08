@@ -55,6 +55,6 @@
       "short_name": "Juego",
       "url": "./juego.html",
       "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
-    },
+    }
   ]
 }
