@@ -956,6 +956,14 @@ const M = {
   clorobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Cl');return mkSVG(s);},
   bromobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Br');return mkSVG(s);},
 
+  // ── FENOLES ──
+  dosmetilfenol(){_pts=[];let s=bnzRing(0,0);const r=28;const v1x=r*Math.cos(-Math.PI/6),v1y=r*Math.sin(-Math.PI/6);s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(v1x,v1y,v1x+BL*COS30,v1y-BL*SIN30);_reg(v1x+BL*COS30,v1y-BL*SIN30);return mkSVG(s);},
+  cuametilfenol(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(0,r,0,r+BL);_reg(0,r+BL);return mkSVG(s);},
+  cuaclorofenol(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(0,r,0,r+BL);s+=atm(0,r+BL,'Cl');return mkSVG(s);},
+  bencenol12(){_pts=[];let s=bnzRing(0,0);const r=28;const v1x=r*Math.cos(-Math.PI/6),v1y=r*Math.sin(-Math.PI/6);s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(v1x,v1y,v1x+BL*COS30,v1y-BL*SIN30);s+=atm(v1x+BL*COS30,v1y-BL*SIN30,'OH');return mkSVG(s);},
+  bencenol13(){_pts=[];let s=bnzRing(0,0);const r=28;const v2x=r*Math.cos(Math.PI/6),v2y=r*Math.sin(Math.PI/6);s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(v2x,v2y,v2x+BL*COS30,v2y+BL*SIN30);s+=atm(v2x+BL*COS30,v2y+BL*SIN30,'OH');return mkSVG(s);},
+  bencenol14(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OH');s+=ln(0,r,0,r+BL);s+=atm(0,r+BL,'OH');return mkSVG(s);},
+
   // ── AMINAS ──
   metilamina(){_pts=[];let s=ln(0,0,0,-BL);_reg(0,-BL);s+=atm(0,-BL,'NH₂');return mkSVG(s);},
   etanamina(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
