@@ -1,7 +1,7 @@
-// ChromaNom Service Worker — v4.0
+// ChromaNom Service Worker — v5.0
 // Cache-first para uso offline completo
 
-const CACHE = 'chromanom-v4';
+const CACHE = 'chromanom-v5';
 const ASSETS = [
   './',
   './index.html',
