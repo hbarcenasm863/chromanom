@@ -1,7 +1,9 @@
-// ChromaNom Service Worker — v5.0
-// Cache-first para uso offline completo
+// ChromaNom Service Worker — v6.0
+// Cache-first para uso offline completo, incluyendo Google Fonts
 
-const CACHE = 'chromanom-v5';
+const CACHE = 'chromanom-v6';
+const FONT_CACHE = 'chromanom-fonts-v1';
+
 const ASSETS = [
   './',
   './index.html',
@@ -25,11 +27,15 @@ self.addEventListener('install', e => {
   self.skipWaiting();
 });
 
-// Activar: borrar cachés antiguas
+// Activar: borrar cachés antiguas (mantener fuentes)
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter(k => k !== CACHE && k !== FONT_CACHE)
+          .map(k => caches.delete(k))
+      )
     )
   );
   self.clients.claim();
@@ -37,18 +43,36 @@ self.addEventListener('activate', e => {
 
 // Fetch: caché primero, red como respaldo
 self.addEventListener('fetch', e => {
-  // Solo interceptar requests del mismo origen
-  if (!e.request.url.startsWith(self.location.origin)) return;
+  const url = e.request.url;
+
   // No interceptar requests a Google Apps Script (analytics)
-  if (e.request.url.includes('script.google.com')) return;
-  // No interceptar requests a Google Fonts (fallan silenciosamente offline)
-  if (e.request.url.includes('fonts.googleapis.com') || e.request.url.includes('fonts.gstatic.com')) return;
+  if (url.includes('script.google.com')) return;
+
+  // Google Fonts: caché primero, luego red (stale-while-revalidate ligero)
+  if (url.includes('fonts.googleapis.com') || url.includes('fonts.gstatic.com')) {
+    e.respondWith(
+      caches.open(FONT_CACHE).then(cache =>
+        cache.match(e.request).then(cached => {
+          const networkFetch = fetch(e.request).then(response => {
+            if (response && response.status === 200) {
+              cache.put(e.request, response.clone());
+            }
+            return response;
+          }).catch(() => cached); // sin red → devuelve caché aunque no esté
+          return cached || networkFetch;
+        })
+      )
+    );
+    return;
+  }
+
+  // Todo lo demás: caché primero, red como respaldo
+  if (!url.startsWith(self.location.origin)) return;
 
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
       return fetch(e.request).then(response => {
-        // Guardar respuestas exitosas en caché
         if (response && response.status === 200 && response.type === 'basic') {
           const clone = response.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
