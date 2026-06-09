@@ -309,9 +309,6 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     </div>
 
     <div class="portada-form">
-      <label class="form-label">Tu nombre</label>
-      <input id="inp-name" class="form-input" type="text" placeholder="Ej: Ana García" maxlength="80">
-
       <div class="form-row">
         <div>
           <label class="form-label">Nivel</label>
@@ -650,7 +647,7 @@ const LEVEL_HINTS = {
 
 // ── ESTADO ──
 let ST = {
-  name:'', level:'', type:'', mode:'mc',
+  level:'', type:'', mode:'mc',
   questions:[], currentIdx:0,
   score:0, correct:0, totalAttempts:0, attempts:0,
   sessionStart:null, sessionEnd:null
@@ -663,12 +660,11 @@ function selectMode(m){
 }
 
 function startGame(){
-  const name = document.getElementById('inp-name').value.trim();
   const level = document.getElementById('inp-level').value;
   const type  = document.getElementById('inp-type').value;
-  if(!name||!level||!type){ alert('Por favor completa todos los campos'); return; }
+  if(!level||!type){ alert('Por favor selecciona nivel y tipo'); return; }
 
-  ST.name = name; ST.level = level; ST.type = type;
+  ST.level = level; ST.type = type;
   ST.sessionStart = new Date();
   ST.score = 0; ST.correct = 0; ST.totalAttempts = 0; ST.currentIdx = 0;
 
@@ -901,9 +897,7 @@ function generateCert(grade, level){
       <div class="cert-title">Certificado de Logro</div>
       <div class="cert-sub">En Nomenclatura Inorgánica · IonNom</div>
       <div class="cert-body">
-        <p>Se certifica que</p>
-        <div class="cert-name">${ST.name}</div>
-        <p>ha completado exitosamente una sesión de práctica</p>
+        <p>Esta sesión de práctica fue completada</p>
         <p>demostrando un nivel de desempeño: <strong>${level}</strong></p>
       </div>
       <div class="cert-stats">
@@ -925,8 +919,7 @@ function generateCert(grade, level){
 
 function resetGame(){
   clearTimeout(nextTimer);
-  ST = {name:'',level:'',type:'',mode:ST.mode,questions:[],currentIdx:0,score:0,correct:0,totalAttempts:0,attempts:0,sessionStart:null,sessionEnd:null};
-  document.getElementById('inp-name').value='';
+  ST = {level:'',type:'',mode:ST.mode,questions:[],currentIdx:0,score:0,correct:0,totalAttempts:0,attempts:0,sessionStart:null,sessionEnd:null};
   document.getElementById('inp-level').value='';
   document.getElementById('inp-type').value='';
   document.getElementById('cert-container').innerHTML='';
