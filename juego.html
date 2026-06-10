@@ -130,7 +130,12 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .modal-input:focus{outline:none;border-color:var(--c4)}
 .modal-input::placeholder{color:rgba(255,255,255,.28)}
 .btn-modal-start{width:100%;padding:14px;background:var(--c4);color:#fff;border:none;border-radius:10px;font-family:var(--sans);font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:4px}
-.btn-modal-start:hover{background:#6d28d9;transform:translateY(-1px)}
+.btn-modal-start:hover:not(:disabled){background:#6d28d9;transform:translateY(-1px)}
+.btn-modal-start:disabled{opacity:.38;cursor:not-allowed;transform:none}
+.modal-input select,.modal-input option{background:#1a2535;color:#fff}
+select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,.5)' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.modal-code-ok{font-size:.84rem;font-weight:600;color:#4ade80;background:rgba(74,222,128,.1);border-radius:8px;padding:8px 12px;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.modal-code-err{font-size:.82rem;color:#f87171;background:rgba(248,113,113,.08);border-radius:8px;padding:7px 12px;margin-bottom:14px}
 .btn-sheets{width:100%;padding:13px;margin-top:6px;background:linear-gradient(135deg,#1e6f40,#27ae60);color:#fff;border:none;border-radius:var(--rs);font-family:var(--sans);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-sheets:hover{filter:brightness(1.1);transform:translateY(-1px)}.btn-sheets:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .sheets-status{font-size:.73rem;color:rgba(255,255,255,.45);text-align:center;margin-top:5px;min-height:1.1em}
@@ -554,13 +559,25 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
     <div class="modal-school">🏫 Colegio Rufino José Cuervo</div>
     <div class="modal-title">¿Quién juega? 🎓</div>
     <div id="modal-level-tag" class="modal-level-tag">Juego Completo</div>
-    <div class="modal-label">Nombre completo</div>
-    <input class="modal-input" id="modal-nombre" type="text" placeholder="Ej: Ana García López" autocomplete="name"
-      onkeydown="if(event.key==='Enter')document.getElementById('modal-curso').focus()">
     <div class="modal-label">Curso</div>
-    <input class="modal-input" id="modal-curso" type="text" placeholder="Ej: 10A, 11B, 10-02…" autocomplete="off"
-      onkeydown="if(event.key==='Enter')confirmStartGame()">
-    <button class="btn-modal-start" onclick="confirmStartGame()">▶ Comenzar</button>
+    <select class="modal-input" id="modal-curso-sel" onchange="validateStudentCode()">
+      <option value="">— Selecciona tu curso —</option>
+      <option value="1003">1003</option>
+      <option value="1004">1004</option>
+      <option value="1005">1005</option>
+      <option value="1006">1006</option>
+      <option value="1101">1101</option>
+      <option value="1102">1102</option>
+      <option value="1103">1103</option>
+      <option value="1104">1104</option>
+    </select>
+    <div class="modal-label">Código de estudiante</div>
+    <input class="modal-input" id="modal-codigo" type="text" inputmode="numeric" maxlength="6"
+      placeholder="Ingresa tus 6 dígitos" autocomplete="off"
+      oninput="validateStudentCode()" onkeydown="if(event.key==='Enter')confirmStartGame()">
+    <div id="modal-code-ok" class="modal-code-ok" style="display:none"></div>
+    <div id="modal-code-err" class="modal-code-err" style="display:none"></div>
+    <button class="btn-modal-start" id="btn-comenzar" onclick="confirmStartGame()" disabled>▶ Comenzar</button>
   </div>
 </div>
 
@@ -3878,7 +3895,186 @@ let history=[];
 let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
-let studentName='', studentCourse='';
+let studentName='', studentCourse='', studentCode='';
+const STUDENTS={
+  '100307':'LANDERO VEGA SHARITH ALEJANDRA',
+  '100401':'ACUÑA SANTOS JOSILENNY',
+  '100402':'AMARIS TORRES LITZY DAYANA',
+  '100403':'BARRAGAN SOLORZANO DANNA BRIGITTE',
+  '100404':'BELTRAN FUENTES KAREN JULIANA',
+  '100405':'CASTAÑEDA MORERA JHOAN DAVID',
+  '100406':'CHAVES CHAUTA CIELO ESMERALDA',
+  '100407':'CORTES APONTE JHON ALEXANDER',
+  '100408':'GALLARDO FERNANDEZ CRISTIAN CAMILO',
+  '100409':'GARCIA MUÑOZ JUAN DIEGO',
+  '100410':'GOMEZ MACIAS BRAYAN STIVEN',
+  '100411':'HERNANDEZ VALENCIA LUCIANA',
+  '100412':'LEMOS ROBLEDO JUAN CAMILO',
+  '100413':'MOLINA MOTTA LAUREN ESTEFANY',
+  '100414':'MONTAÑO CABARCAS JULIAN ESTEBAN',
+  '100415':'MORENO FONQUE VALERY TATIANA',
+  '100416':'PIRELA GONZALEZ MARIANGELES MANUELA',
+  '100417':'RAMOS OLIVARES NICOLLE JULIETH',
+  '100418':'RODRIGUEZ LEIVA MARIA VALENTINA',
+  '100419':'RODRIGUEZ PEÑA KEVIN ANDRES',
+  '100420':'SANCHEZ MOLINA SARA ISABELA',
+  '100421':'SANCHEZ SUAREZ SARA ISABELLA',
+  '100422':'SEGURA GARCIA LAURA SOFIA',
+  '100423':'SOTILLO MEDINA SANYA MICHELL',
+  '100424':'SUAREZ MENDEZ JUAN SEBASTIAN',
+  '100425':'TORO GIL LUISA FERNANDA',
+  '100426':'TORRECILLA GARCIA DANGLIS DAYANNA',
+  '100501':'ALVAREZ TORRES MAILY TATIANA',
+  '100502':'ARCILA MARTIN MARIA JULIANA',
+  '100503':'AROCA VILLAREAL FREDY SANTIAGO',
+  '100504':'ASPRILLA PEREZ KRISTHOPHER SMITH',
+  '100505':'CAMARGO MONTERO MARIANA',
+  '100506':'CARRILLO MEDINA BRAYAN ANDRES',
+  '100507':'DIAZ GUZMAN ISABELA',
+  '100508':'DUARTE OSORIO MARIA CAMILA',
+  '100509':'FLOREZ AROCA MARIANA',
+  '100510':'GONGORA NEUTA DANIEL SANTIAGO',
+  '100511':'GONZALEZ MARTINEZ LUIS ALEJANDRO',
+  '100513':'MARTINEZ PARRA JUAN CAMILO',
+  '100514':'MEDINA MACHADO FLORELIS DEL VALLE',
+  '100515':'MUÑOZ SANABRIA MEYLEEN SOFIA',
+  '100516':'NOVOA SUAREZ DANNA SOFIA',
+  '100517':'OROZCO OLIVARES ANDRES DAVID',
+  '100518':'OTALORA PICO SAMUEL',
+  '100519':'PARDO DUARTE CRISTIAN CAMILO',
+  '100520':'PINZON GARCES KAROL DAYANA',
+  '100521':'RODRIGUEZ PULIDO JOSTIN ALEJANDRO',
+  '100522':'RUEDA SALAZAR SOBEIDA',
+  '100523':'SANCHEZ GARZON MIGUEL ANGEL',
+  '100524':'TORRES NAVARRO FELIPE ANDRES',
+  '100525':'VILLAMIL RAMIREZ ASHLIN MALENA',
+  '100526':'AYALA DUARTE SHARICK VANESA',
+  '100601':'ALVAREZ ESTRELLA YULISSA',
+  '100602':'BALLESTEROS VANEGAS DANIEL SANTIAGO',
+  '100603':'CALDERON VERGARA MARINELA JULIETH',
+  '100604':'CASTILLO MARIAN SOFIA',
+  '100605':'COGOLLO RODRIGUEZ FLORENS BEATRIZ',
+  '100606':'CUEVAS PINZON JUAN JOSE',
+  '100607':'DIAZ LADINO MICHAEL DAVID',
+  '100608':'GOMEZ NARVAEZ ARIANA',
+  '100609':'LEMUS FUENTES KEVIN DANIEL',
+  '100610':'LINAREZ DOS REIS ANNAIRETH NIKOLL',
+  '100611':'MEDINA CUBILLOS ELKIN SANTIAGO',
+  '100612':'MELENGUE QUINCHANEGUA MANUEL ESTEBAN',
+  '100613':'MUÑOZ ZAMBRANO KEVIN TOMAS',
+  '100614':'MUÑOZ LARA IZABELLA',
+  '100615':'PANQUEVA LOPEZ DAVID STEVEN',
+  '100616':'PEÑA CRUZ SARA DAILYN',
+  '100617':'PEREZ PEÑALVER YESIBEL LUCIA',
+  '100618':'QUINTANA OVIEDO SERGIO ANDRES',
+  '100619':'RENGIFO MONTILLA ASHLEY MARGARETH',
+  '100620':'RUIZ BALAGUERA LAURA VALENTINA',
+  '100621':'SARMIENTO ROJANO LEIDY CAROLINA',
+  '100622':'SILVA OLIVEROS JUAN FELIPE',
+  '100623':'VANEGAS SALAS KIMBERLY SOFIA',
+  '100624':'YATE MOYANO SANTIAGO',
+  '100625':'ZAMORA SANTAMARIA LENNON SANTIAGO',
+  '100626':'ANGULO SALCEDO HANSEL RAQNSES',
+  '100627':'HERRAN FORERO SAILY GISETH',
+  '100628':'ALARCON LOZZADA ARAIDNYZ DEL CARMEN',
+  '100629':'BANGUERO CANTOR ANGIE LIZETH',
+  '110101':'AMARIS ARAUJO ALANYS LISETH',
+  '110102':'BETANCOURT MORENO LIAM YACETH',
+  '110103':'DIAZ DURAN SAMUEL SANTIAGO',
+  '110104':'DIAZ MELO NICOLE SOFIA',
+  '110105':'GALLEGO MARIN ANDRU YAZIL',
+  '110106':'GARCIA ERAZO LAURA SOFIA',
+  '110107':'JARA LOSADA LAURA CAMILA',
+  '110108':'LEAL GONZALEZ BRAINER DACCIR',
+  '110109':'MEDINA ORTIZ SANTIAGO',
+  '110110':'MELENDEZ CONTRERAS ESTEFANY',
+  '110111':'MORERA VARGAS SARA JULIETH',
+  '110112':'NARVAES NARVAEZ SARA MICHELL',
+  '110113':'PACHON HERNANDEZ NICOLLE VANESSA',
+  '110114':'PATIÑO GUTIERREZ JUAN SEBASTIAN',
+  '110115':'PEREA MOSQUERA INGRID YOHANA',
+  '110116':'PEREZ TORRES YERALDIN',
+  '110117':'PERILLA VALLES LINDA ESTEFANY',
+  '110118':'PORTILLA SILVA KAROL XIMENA',
+  '110120':'SANTAMARIA CUENCA LUIS ALEJANDRO',
+  '110121':'SEGURA URREGO ALEX JULIETH',
+  '110122':'TORRES MAHECHA JOHAN SANTIAGO',
+  '110124':'ZAMBRANO MARIN SUSANA',
+  '110130':'RIOS MUÑETON MARIA FERNANDA',
+  '110201':'ANGARITA OLIVAREZ LUIS ANGEL',
+  '110202':'AVENDAÑO RAMIREZ DERLYE JOHANNA',
+  '110203':'BERRIO ROBAYO DAVID SANTIAGO',
+  '110204':'BUSTOS BENAVIDES SHAROM ALEJANDRA',
+  '110205':'CASTAÑEDA RIVEROS YURI TATIANA',
+  '110206':'GALINDO SABOGAL JHON FREDY',
+  '110207':'GARAY DIAZ ANA VALENTINA',
+  '110208':'JARA LOZADA KAREN LIZETH',
+  '110209':'LEON CONTRERAS NICOLETTE STEPHANIE',
+  '110210':'LOAIZA VERGARA NICOLE',
+  '110211':'LOPEZ SALCEDO JAVIER MATEO',
+  '110212':'MAESTRE CEBALLOS FREYDER JOSE',
+  '110213':'MEJIA MARCHAN ZAIN MISAEL',
+  '110214':'MOLINA RAMOS PABLO',
+  '110215':'PEREZ PEÑALVER ALBERT JOSE',
+  '110216':'RAMIREZ CALDERON JHONATAN',
+  '110217':'RINCON GUZMAN DANNA VALENTINA',
+  '110218':'RIOS MUÑETON MARIA FERNANDA',
+  '110219':'RIVERA MENDEZ JUAN CAMILO',
+  '110220':'ROMERO TABARES SHERIL SNEIGY',
+  '110221':'RUIZ BALAGUERA MARIA FERNANDA',
+  '110222':'SANCHEZ SUAREZ DANIEL SANTIAGO',
+  '110223':'VARGAS HERNANDEZ SAHARA DANIELA',
+  '110226':'VASQUEZ SARMIENTO DILAN STIVEN',
+  '110228':'RODRIGUEZ PEDREROS SANTIAGO',
+  '110301':'ARISMENDI PEREZ ADRIANA',
+  '110302':'BONILLA MONROY JUAN ESTEBAN',
+  '110303':'CALA SANCHEZ DYLAN YESID',
+  '110304':'DELAROSA DIAZ ALEJANDRA',
+  '110305':'GALVIZ SANTAMARIA ALISSON DAYAN',
+  '110306':'GARCIA ACOSTA VALERIA SOFIA',
+  '110307':'GARZON GARZON VALERY ESTEFANIA',
+  '110309':'GORDILLO TAPIAS DANIELA',
+  '110310':'GUTIERREZ ESPINOSA JHON FREDY',
+  '110311':'MAHECHA LIZARAZO EMILYN YHOZARA',
+  '110312':'MARTINEZ DELOSRIOS AMMY GABRIELA',
+  '110313':'MERCADO BENAVIDES STIVEN DANIEL',
+  '110314':'MERCADO FORNARIS YESUA STIVEN',
+  '110315':'NOSA BELTRAN DANIEL RICARDO',
+  '110316':'OCAMPO SEPULVEDA ALEX DAVID',
+  '110317':'PERDOMO GUTIERREZ YESICA PAOLA',
+  '110318':'RAMIREZ CORTES ANA MARIA',
+  '110319':'RAMOS PORTO JULIO CESAR',
+  '110320':'RUA CASTRO VALENTINA',
+  '110321':'SANCHEZ SANCHEZ DANNA MICHELL',
+  '110322':'VARGAS SANTACRUZ HANNAH VANESSA',
+  '110323':'VENEGAS MENDOZA KAROL LIZETH',
+  '110324':'AREVALO SANCHEZ DANA SOFIA',
+  '110401':'ALVARADO LUNA YUDENNIS DANIELIZ',
+  '110402':'ANGEL GUTIERREZ OSCAR DAVID',
+  '110403':'ARENILLA GALVAN LINA MARCELA',
+  '110404':'BAUTISTA PEÑA MARIAN SOFIA',
+  '110405':'BUSTOS NEUSA PABLO JULIAN',
+  '110406':'CARRILLO SANCHEZ JUAN SEBASTIAN',
+  '110407':'CASTILLO COBOS ANYI JULIETH',
+  '110408':'CRUZ HERNANDEZ EDINDSON ARLEY',
+  '110409':'CUEVAS MONTAÑA DANNA ALEJANDRA',
+  '110410':'DIAZ MARIN DAYANNA',
+  '110411':'FORERO CAICEDO SANTIAGO',
+  '110412':'FRANCO DIAZ JUAN MIGUEL',
+  '110413':'GARCIA GOMEZ JOSE MANUEL',
+  '110414':'GRANADOS TELLEZ ANA MARIA',
+  '110415':'GUTIERREZ NIÑO ALEJANDRO',
+  '110416':'LEON CONTRERAS GABRIEL ALEJANDRO',
+  '110417':'MENDEZ BENAVIDES OLIVER DAVID',
+  '110418':'NINCO VARGAS IVETH CAMILA',
+  '110419':'NIÑO CELY JULIAN MATEO',
+  '110420':'PONTON LIZARAZO SHAIRA ALEJANDRA',
+  '110421':'SAENZ HONTIBON SEBASTIAN',
+  '110422':'TORRES MARTINEZ YULI ESTEFANIA',
+  '110423':'RUIZ MARIA ALEJANDRA',
+  '110424':'BELLO GONZALEZ LAURA VALENTINA',
+  '110425':'LOZANO NOSA PAULA ALEJANDRA'
+};
 
 const NIVEL_TOPICS={
   hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
@@ -3959,7 +4155,7 @@ function setModo(modo){
 function openLevelModal(nivel){
   currentLevel=nivel;
   if(freeMode){
-    studentName=''; studentCourse='';
+    studentName=''; studentCourse=''; studentCode='';
     if(!freeConsent){
       document.getElementById('modal-consent').classList.add('open');
     } else {
@@ -3968,13 +4164,44 @@ function openLevelModal(nivel){
     return;
   }
   document.getElementById('modal-level-tag').textContent=NIVEL_LABELS[nivel]||nivel;
-  document.getElementById('modal-nombre').value=studentName;
-  document.getElementById('modal-curso').value=studentCourse;
+  if(studentCode){
+    document.getElementById('modal-curso-sel').value=studentCourse;
+    document.getElementById('modal-codigo').value=studentCode;
+    validateStudentCode();
+  } else {
+    document.getElementById('modal-curso-sel').value='';
+    document.getElementById('modal-codigo').value='';
+    document.getElementById('modal-code-ok').style.display='none';
+    document.getElementById('modal-code-err').style.display='none';
+    document.getElementById('btn-comenzar').disabled=true;
+  }
   document.getElementById('modal-estudiante').classList.add('open');
-  setTimeout(()=>document.getElementById(studentName?'modal-curso':'modal-nombre').focus(),80);
+  setTimeout(()=>document.getElementById(studentCode?'btn-comenzar':'modal-curso-sel').focus(),80);
 }
 function closeModal(){
   document.getElementById('modal-estudiante').classList.remove('open');
+}
+function validateStudentCode(){
+  const sel=document.getElementById('modal-curso-sel').value;
+  const cod=document.getElementById('modal-codigo').value.trim();
+  const okDiv=document.getElementById('modal-code-ok');
+  const errDiv=document.getElementById('modal-code-err');
+  const btn=document.getElementById('btn-comenzar');
+  okDiv.style.display='none'; errDiv.style.display='none'; btn.disabled=true;
+  if(cod.length<6) return;
+  const name=STUDENTS[cod];
+  if(!name){
+    errDiv.textContent='Código no encontrado. Verifica tus 6 dígitos.';
+    errDiv.style.display='block'; return;
+  }
+  const codCurso=cod.substring(0,4);
+  if(sel && codCurso!==sel){
+    errDiv.textContent='Este código no corresponde al curso '+sel+'.';
+    errDiv.style.display='block'; return;
+  }
+  if(!sel) document.getElementById('modal-curso-sel').value=codCurso;
+  okDiv.innerHTML='✓ '+name;
+  okDiv.style.display='flex'; btn.disabled=false;
 }
 function acceptConsent(){
   freeConsent=true;
@@ -3985,11 +4212,12 @@ function closeConsent(){
   document.getElementById('modal-consent').classList.remove('open');
 }
 function confirmStartGame(){
-  const n=document.getElementById('modal-nombre').value.trim();
-  const c=document.getElementById('modal-curso').value.trim();
-  if(!n){document.getElementById('modal-nombre').focus();return;}
-  if(!c){document.getElementById('modal-curso').focus();return;}
-  studentName=n; studentCourse=c;
+  const sel=document.getElementById('modal-curso-sel').value;
+  const cod=document.getElementById('modal-codigo').value.trim();
+  if(!sel){document.getElementById('modal-curso-sel').focus();return;}
+  if(cod.length<6||!STUDENTS[cod]){document.getElementById('modal-codigo').focus();return;}
+  if(cod.substring(0,4)!==sel){document.getElementById('modal-codigo').focus();return;}
+  studentName=STUDENTS[cod]; studentCourse=sel; studentCode=cod;
   closeModal(); startGame();
 }
 function startGame(){
@@ -5092,6 +5320,7 @@ function buildPayload(trigger){
     sesion:    Math.random().toString(36).slice(2,8),
     nombre:    freeMode ? '(anónimo)' : studentName,
     curso:     freeMode ? '(libre)'   : studentCourse,
+    codigo:    freeMode ? ''          : studentCode,
     anonimo:   freeMode,
     nivel:     NIVEL_LABELS[currentLevel]||currentLevel,
     trigger,
