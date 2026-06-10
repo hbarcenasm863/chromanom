@@ -1225,6 +1225,16 @@ const MOLDES={
   // ── ALQUIL-BENCENOS (cadena larga) ──
   build_propilbenceno:     {chain:[{bn:1,bu:[{bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_isopropilbenceno:  {chain:[{bn:1,bu:[{bn:1,bd:[{}]},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  // ── CICLOALCANOS CON HETEROÁTOMO ──
+  build_ciclohexanol: {chain:[{bn:1,bu:_O1},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  build_ciclopentanol: {chain:[{bn:1,bu:_O1},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  // ── FENOLES ──
+  build_dosmetilfenol: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_cuametilfenol: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1},{bn:1,bu:[{}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_cuaclorofenol: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1},{bn:1,bu:[{s:'Cl'}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_bencenol12: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_bencenol13: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_bencenol14: {chain:[{bn:1,bu:[{s:'O'}]},{bn:1},{bn:1},{bn:1,bu:[{s:'O'}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
 };
 
 // ════════════════════════════════════════════════════════
@@ -4151,6 +4161,8 @@ function startGame(){
   let pool;
   if(currentLevel==='constructor_aromaticos'){
     pool=QBANK.filter(q=>q.type==='build'&&q.topic==='benceno');
+  } else if(currentLevel==='constructor'){
+    pool=QBANK.filter(q=>q.type==='build');
   } else {
     pool=NIVEL_TOPICS[currentLevel]
       ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
@@ -4666,6 +4678,10 @@ const BUILD_MOL_MAP={
   build_ortoXileno:'ortoXileno',build_metaXileno:'metaXileno',build_paraXileno:'paraXileno',
   build_trimetilbenceno123:'trimetilbenceno123',build_trimetilbenceno124:'trimetilbenceno124',build_trimetilbenceno135:'trimetilbenceno135',
   build_propilbenceno:'propilbenceno',build_isopropilbenceno:'isopropilbenceno',
+  build_ciclohexanol:'ciclohexanol', build_ciclopentanol:'ciclopentanol',
+  build_dosmetilfenol:'dosmetilfenol', build_cuametilfenol:'cuametilfenol',
+  build_cuaclorofenol:'cuaclorofenol', build_bencenol12:'bencenol12',
+  build_bencenol13:'bencenol13', build_bencenol14:'bencenol14',
 };
 function getBuildRefSVG(buildKey){
   const ref=MOLDES[buildKey];
@@ -5182,6 +5198,101 @@ const QBANK_BUILD=[
    expl:'Anillo <b>rBz</b> con un propilo (cadena 3C en línea). Coloca tres carbonos en serie y une el primero al anillo.'},
   {type:'build',buildKey:'build_isopropilbenceno',topic:'benceno',q:'Construye el <strong>isopropilbenceno</strong> (cumeno, C₉H₁₂) — sustituyente isopropilo CH(CH₃)₂ en el anillo',
    expl:'Anillo <b>rBz</b> con un isopropilo: un C central con dos metilos unido al anillo. El C de unión tiene 1H implícito. También llamado cumeno.'},
+  // ── Alcanos adicionales ──
+  {type:'build',buildKey:'heptano',topic:'alcanos',q:'Construye la estructura del <strong>heptano</strong> (C₇H₁₆)',
+   expl:'Cadena lineal de <b>7C</b> con enlaces simples. Cinco carbonos internos con 2H cada uno; los dos extremos con 3H.'},
+  {type:'build',buildKey:'dimetilbutano',topic:'alcanos',q:'Construye la estructura del <strong>2,3-dimetilbutano</strong> (C₆H₁₄)',
+   expl:'Cadena de <b>4C</b> con metilos en C2 y C3 (adyacentes). Ambos C centrales tienen 1H implícito y una rama CH₃. CH₃-CH(CH₃)-CH(CH₃)-CH₃.'},
+  {type:'build',buildKey:'etilmetilpentano',topic:'alcanos',q:'Construye la estructura del <strong>3-etil-2-metilpentano</strong> (C₈H₁₈)',
+   expl:'Cadena de <b>5C</b> con metilo en C2 y etilo en C3. El C2 tiene 1H implícito; el C3 tiene 0H (cuaternario). CH₃-CH(CH₃)-C(C₂H₅)H-CH₂-CH₃.'},
+  // ── Alquenos adicionales ──
+  {type:'build',buildKey:'hex1eno',topic:'alquenos',q:'Construye la estructura del <strong>hex-1-eno</strong> (C₆H₁₂)',
+   expl:'Cadena de <b>6C</b> con doble enlace C1=C2. C1 tiene 2H; C2 tiene 1H; los cuatro restantes tienen sus H normales.'},
+  {type:'build',buildKey:'pent13dieno',topic:'alquenos',q:'Construye la estructura del <strong>penta-1,3-dieno</strong> (C₅H₈)',
+   expl:'Cadena de <b>5C</b> con dobles enlaces C1=C2 y C3=C4 (sistema 1,3-dieno). C1 tiene 2H; C2 y C3 tienen 1H; C4 tiene 1H; C5 tiene 3H.'},
+  // ── Alquinos adicionales ──
+  {type:'build',buildKey:'but1ino',topic:'alquinos',q:'Construye la estructura del <strong>but-1-ino</strong> (C₄H₆)',
+   expl:'Cadena de <b>4C</b> con triple enlace C1≡C2. C1 tiene 1H (alquino terminal); C2 sin H; C3 con 2H; C4 con 3H.'},
+  {type:'build',buildKey:'pent2ino',topic:'alquinos',q:'Construye la estructura del <strong>pent-2-ino</strong> (C₅H₈)',
+   expl:'Cadena de <b>5C</b> con triple enlace C2≡C3. Dos carbonos a cada lado del triple enlace; C2 y C3 sin H. CH₃-C≡C-CH₂-CH₃.'},
+  // ── Alcoholes adicionales ──
+  {type:'build',buildKey:'metanol',topic:'alcoholes',q:'Construye la estructura del <strong>metanol</strong> (CH₄O)',
+   expl:'Un solo carbono con grupo −OH. CH₃–OH. El O tiene 1H implícito (valencia 2). El alcohol más sencillo.'},
+  {type:'build',buildKey:'pentan1ol',topic:'alcoholes',q:'Construye la estructura del <strong>pentan-1-ol</strong> (C₅H₁₂O)',
+   expl:'Cadena de <b>5C</b> con −OH en C1 (extremo). CH₃–(CH₂)₃–CH₂–OH. El O con 1H va al final de la cadena.'},
+  {type:'build',buildKey:'pentan3ol',topic:'alcoholes',q:'Construye la estructura del <strong>pentan-3-ol</strong> (C₅H₁₂O)',
+   expl:'Cadena de <b>5C</b> con −OH en C3 (central). Dos grupos etilo flanquean el C del OH. CH₃–CH₂–CH(OH)–CH₂–CH₃.'},
+  {type:'build',buildKey:'hexan2ol',topic:'alcoholes',q:'Construye la estructura del <strong>hexan-2-ol</strong> (C₆H₁₄O)',
+   expl:'Cadena de <b>6C</b> con −OH en C2. Cadena de 6C con el OH en el segundo carbono. CH₃–CH(OH)–(CH₂)₃–CH₃.'},
+  {type:'build',buildKey:'but3en2ol',topic:'alcoholes',q:'Construye la estructura del <strong>but-3-en-2-ol</strong> (C₄H₈O)',
+   expl:'Cadena de <b>4C</b> con −OH en C2 y doble enlace C3=C4. El OH tiene prioridad sobre el doble enlace. CH₃–CH(OH)–CH=CH₂.'},
+  {type:'build',buildKey:'propan12diol',topic:'alcoholes',q:'Construye la estructura del <strong>propano-1,2-diol</strong> (C₃H₈O₂)',
+   expl:'Cadena de <b>3C</b> con −OH en C1 y C2. Dos grupos OH en carbonos adyacentes. HO–CH₂–CH(OH)–CH₃.'},
+  {type:'build',buildKey:'build_ciclohexanol',topic:'alcoholes',q:'Construye la estructura del <strong>ciclohexanol</strong> (C₆H₁₂O) — usa el template rC6',
+   expl:'Anillo <b>rC6</b> con un −OH en un carbono del anillo. Ese C tiene 1H implícito en lugar de 2H. El OH va al exterior del anillo.'},
+  {type:'build',buildKey:'build_ciclopentanol',topic:'alcoholes',q:'Construye la estructura del <strong>ciclopentanol</strong> (C₅H₁₀O) — usa el template rC5',
+   expl:'Anillo <b>rC5</b> con un −OH en un carbono. Ese C tiene 1H implícito. Alcanol cíclico de 5 carbonos.'},
+  // ── Aldehídos adicionales ──
+  {type:'build',buildKey:'hexanal',topic:'aldehidos',q:'Construye la estructura del <strong>hexanal</strong> (C₆H₁₂O)',
+   expl:'Cadena de <b>6C</b> con −CHO en C1. Cinco carbonos de cadena más el C del aldehído (C=O con 1H). CH₃–(CH₂)₄–CHO.'},
+  // ── Cetonas adicionales ──
+  {type:'build',buildKey:'pentan2ona',topic:'cetonas',q:'Construye la estructura de la <strong>pentan-2-ona</strong> (C₅H₁₀O)',
+   expl:'Cadena de <b>5C</b> con C=O en C2. Un metilo a un lado y un propilo al otro del carbonilo. CH₃–CO–CH₂–CH₂–CH₃.'},
+  {type:'build',buildKey:'hexan2ona',topic:'cetonas',q:'Construye la estructura de la <strong>hexan-2-ona</strong> (C₆H₁₂O)',
+   expl:'Cadena de <b>6C</b> con C=O en C2. Un metilo a un lado y un butilo al otro del carbonilo. CH₃–CO–(CH₂)₃–CH₃.'},
+  {type:'build',buildKey:'hexan3ona',topic:'cetonas',q:'Construye la estructura de la <strong>hexan-3-ona</strong> (C₆H₁₂O)',
+   expl:'Cadena de <b>6C</b> con C=O en C3. Un etilo a cada lado del carbonilo. CH₃–CH₂–CO–CH₂–CH₂–CH₃.'},
+  // ── Ácidos adicionales ──
+  {type:'build',buildKey:'acidoMetanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido metanoico</strong> (CH₂O₂)',
+   expl:'Solo el carbono del grupo −COOH: un H, un doble enlace a O y un enlace a OH. H–COOH. También llamado ácido fórmico.'},
+  {type:'build',buildKey:'acidoHexanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido hexanoico</strong> (C₆H₁₂O₂)',
+   expl:'Cadena de <b>6C</b> con −COOH terminal. Cinco carbonos de cadena más el grupo ácido. CH₃–(CH₂)₄–COOH.'},
+  // ── Ésteres adicionales ──
+  {type:'build',buildKey:'butanoatoMetilo',topic:'esteres',q:'Construye la estructura del <strong>butanoato de metilo</strong> (C₅H₁₀O₂)',
+   expl:'<b>Ácido butanoico + metanol</b>. Enlace éster C(=O)–O. CH₃–CH₂–CH₂–C(=O)–O–CH₃.'},
+  // ── Éteres adicionales ──
+  {type:'build',buildKey:'metoxipropano',topic:'eteres',q:'Construye la estructura del <strong>metoxipropano</strong> (C₄H₁₀O)',
+   expl:'Éter con grupos <b>metilo y propilo</b>. CH₃–O–CH₂–CH₂–CH₃. El O central enlaza un C (metilo) y una cadena de 3C (propilo).'},
+  // ── Amidas adicionales ──
+  {type:'build',buildKey:'metanamida',topic:'amidas',q:'Construye la estructura de la <strong>metanamida</strong> (CH₃NO)',
+   expl:'Solo el carbono del grupo amida: H–C(=O)–NH₂. El H está en el mismo carbono que el C=O y el C–NH₂. También llamada formamida.'},
+  {type:'build',buildKey:'pentanamida',topic:'amidas',q:'Construye la estructura de la <strong>pentanamida</strong> (C₅H₁₁NO)',
+   expl:'Cadena de <b>5C</b> con −CONH₂ terminal. Cuatro carbonos de cadena más el C del grupo amida. CH₃–(CH₂)₃–CONH₂.'},
+  {type:'build',buildKey:'hexanamida',topic:'amidas',q:'Construye la estructura de la <strong>hexanamida</strong> (C₆H₁₃NO)',
+   expl:'Cadena de <b>6C</b> con −CONH₂ terminal. Cinco carbonos de cadena más el C del grupo amida. CH₃–(CH₂)₄–CONH₂.'},
+  // ── Nitrilos adicionales ──
+  {type:'build',buildKey:'pentanonitrilo',topic:'nitrilos',q:'Construye la estructura del <strong>pentanonitrilo</strong> (C₅H₉N)',
+   expl:'Cadena de <b>5C</b> con −C≡N terminal. Cuatro carbonos de cadena más el C nitrilo con triple enlace a N. CH₃–(CH₂)₃–C≡N.'},
+  {type:'build',buildKey:'hexanonitrilo',topic:'nitrilos',q:'Construye la estructura del <strong>hexanonitrilo</strong> (C₆H₁₁N)',
+   expl:'Cadena de <b>6C</b> con −C≡N terminal. Cinco carbonos de cadena más el C nitrilo. CH₃–(CH₂)₄–C≡N.'},
+  // ── Aminas adicionales ──
+  {type:'build',buildKey:'propanamina',topic:'aminas',q:'Construye la estructura de la <strong>propan-1-amina</strong> (C₃H₉N)',
+   expl:'Cadena de <b>3C</b> con −NH₂ en C1. CH₃–CH₂–CH₂–NH₂. El N tiene 2H implícitos (amina primaria).'},
+  {type:'build',buildKey:'butan1amina',topic:'aminas',q:'Construye la estructura de la <strong>butan-1-amina</strong> (C₄H₁₁N)',
+   expl:'Cadena de <b>4C</b> con −NH₂ en C1. CH₃–CH₂–CH₂–CH₂–NH₂. Amina primaria de 4 carbonos.'},
+  {type:'build',buildKey:'butan2amina',topic:'aminas',q:'Construye la estructura de la <strong>butan-2-amina</strong> (C₄H₁₁N)',
+   expl:'Cadena de <b>4C</b> con −NH₂ en C2. CH₃–CH(NH₂)–CH₂–CH₃. El N en el C2 con 2H implícitos y 1H en el C portador.'},
+  {type:'build',buildKey:'trimetilamina',topic:'aminas',q:'Construye la estructura de la <strong>trimetilamina</strong> (C₃H₉N)',
+   expl:'Tres grupos metilo unidos al N central. CH₃–N(–CH₃)–CH₃. El N tiene <b>3 enlaces</b> a carbono; no tiene H implícito (amina terciaria).'},
+  {type:'build',buildKey:'nMetilPropan1amina',topic:'aminas',q:'Construye la estructura de la <strong>N-metilpropan-1-amina</strong> (C₄H₁₁N)',
+   expl:'Cadena de propilo con N secundario (1H) unido también a un metilo. CH₃–CH₂–CH₂–NH–CH₃. El N tiene 1H implícito (amina secundaria).'},
+  {type:'build',buildKey:'nMetilButan1amina',topic:'aminas',q:'Construye la estructura de la <strong>N-metilbutan-1-amina</strong> (C₅H₁₃N)',
+   expl:'Cadena de butilo con N secundario unido a un metilo. CH₃–(CH₂)₃–NH–CH₃. N tiene 1H implícito.'},
+  {type:'build',buildKey:'pentano15diamina',topic:'aminas',q:'Construye la estructura de la <strong>pentano-1,5-diamina</strong> (C₅H₁₄N₂)',
+   expl:'Cadena de <b>5C</b> con −NH₂ en C1 y C5 (ambos extremos). H₂N–CH₂–CH₂–CH₂–CH₂–CH₂–NH₂. También llamada cadaverina.'},
+  // ── Fenoles ──
+  {type:'build',buildKey:'build_dosmetilfenol',topic:'fenoles',q:'Construye la estructura del <strong>2-metilfenol</strong> (C₇H₈O) — usa rBz para el anillo aromático',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y un metilo (CH₃) en C2 (adyacente al OH). El C1 y C2 del anillo pierden su H implícito.'},
+  {type:'build',buildKey:'build_cuametilfenol',topic:'fenoles',q:'Construye la estructura del <strong>4-metilfenol</strong> (C₇H₈O) — usa rBz para el anillo aromático',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y un metilo en C4 (posición opuesta). Los C1 y C4 del anillo pierden su H implícito.'},
+  {type:'build',buildKey:'build_cuaclorofenol',topic:'fenoles',q:'Construye la estructura del <strong>4-clorofenol</strong> (C₆H₅ClO) — usa rBz para el anillo aromático',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y Cl en C4. El Cl tiene valencia 1; el O del OH tiene 1H implícito.'},
+  {type:'build',buildKey:'build_bencenol12',topic:'fenoles',q:'Construye la estructura del <strong>benceno-1,2-diol</strong> (catecol, C₆H₆O₂) — usa rBz',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y −OH en C2 (adyacentes). Ambos oxígenos tienen 1H implícito. También llamado catecol.'},
+  {type:'build',buildKey:'build_bencenol13',topic:'fenoles',q:'Construye la estructura del <strong>benceno-1,3-diol</strong> (resorcinol, C₆H₆O₂) — usa rBz',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y −OH en C3 (posición meta). También llamado resorcinol.'},
+  {type:'build',buildKey:'build_bencenol14',topic:'fenoles',q:'Construye la estructura del <strong>benceno-1,4-diol</strong> (hidroquinona, C₆H₆O₂) — usa rBz',
+   expl:'Anillo <b>rBz</b> con −OH en C1 y −OH en C4 (posiciones opuestas). También llamada hidroquinona.'},
 ];
 QBANK.push(...QBANK_BUILD);
 
