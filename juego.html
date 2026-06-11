@@ -443,15 +443,21 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .write-attempts{font-size:.7rem;color:var(--dimmer);margin-bottom:4px;}
 
 .qt-build{background:#fce8f4;color:#a0527f}
-.build-wrap{display:flex;flex-direction:column;gap:0}
+.build-wrap{display:flex;flex-direction:column;gap:0;position:relative}
 .build-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;background:var(--surf);border:1.5px solid var(--brd);border-bottom:none;border-radius:var(--r) var(--r) 0 0;align-items:center}
 .bld-btn{height:30px;min-width:30px;padding:0 7px;border:1.5px solid var(--brd);border-radius:7px;background:var(--surf);color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .13s}
 .bld-btn:hover{border-color:var(--c1);color:var(--c1);background:var(--c1b)}
 .bld-btn.active{background:var(--tx);color:#fff;border-color:var(--tx)}
 .bld-btn.bE{color:#c8230a}.bld-btn.bN{color:#0033aa}.bld-btn.bCl{color:#1a7a1a;font-size:.65rem}.bld-btn.bBr{color:#8b1a1a;font-size:.65rem}.bld-btn.bF{color:#3366aa}
 .bld-btn.erase-btn{color:#c0392b}.bld-btn.erase-btn.active{background:#c0392b;border-color:#c0392b;color:#fff}
+.bld-btn.pan-btn{color:var(--c3t)}
 .bld-sep{width:1px;height:20px;background:var(--brd);margin:0 2px}
-.build-canvas{width:100%;height:260px;display:block;background:#fafaf8;border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r);cursor:crosshair}
+.build-canvas{width:100%;height:260px;display:block;background:#fafaf8;border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r);cursor:crosshair;overflow:hidden}
+.build-canvas.pan-active{cursor:grab}.build-canvas.pan-active.panning{cursor:grabbing}
+.bld-zoom-overlay{position:absolute;bottom:36px;right:8px;display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.93);border:1.5px solid var(--brd);border-radius:8px;padding:2px 5px;z-index:5;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.bld-zoom-btn{width:22px;height:22px;border:1.5px solid var(--brd);border-radius:4px;background:var(--surf);cursor:pointer;font-size:.82rem;font-weight:700;color:var(--dim);display:flex;align-items:center;justify-content:center;transition:all .12s;line-height:1;font-family:'JetBrains Mono',monospace}
+.bld-zoom-btn:hover{background:var(--c1b);border-color:var(--c1);color:var(--c1)}
+.bld-zoom-lvl{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--dimmer);min-width:30px;text-align:center;user-select:none}
 .nivel-card.ct{border-left:3px solid #f97316}
 .drill-section{width:100%;margin-bottom:14px}
 .drill-summary{list-style:none;color:rgba(255,255,255,.75);font-size:.78rem;font-weight:700;cursor:pointer;padding:6px 12px;border:1.5px solid rgba(255,255,255,.2);border-radius:20px;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;user-select:none}
@@ -4311,6 +4317,7 @@ function loadQuestion(){
   }
   if(isBuild){
     bldAtoms=[];bldBonds=[];bldBondSrc=null;bldNid=0;bldNbid=0;bldHist=[];bldAttempts=0;bldRingCircles=[];
+    bldViewTx=0;bldViewTy=0;bldViewScale=1;bldPanDrag=null;bldEventsAttached=false;
     bldSetTool('C');bldRender();
   }
 
@@ -4791,6 +4798,7 @@ function checkIso(G1,G2){
 
 // ── Canvas state ──
 let bldAtoms=[],bldBonds=[],bldHist=[],bldTool='C',bldBondSrc=null,bldNid=0,bldNbid=0,bldAttempts=0,bldRingCircles=[];
+let bldViewTx=0,bldViewTy=0,bldViewScale=1,bldPanDrag=null,bldEventsAttached=false;
 const BLD_COLORS={C:'#1a1a1a',O:'#c0392b',N:'#1a4bcc',Cl:'#1a7a1a',Br:'#7a1a1a',F:'#2255aa'};
 const BLD_PLACEMENT_TOOLS=['C','O','N','Cl','Br','F','rBz','rC6','rC5','rC4'];
 
@@ -4813,7 +4821,10 @@ function bldSetTool(t){
   const btn=document.getElementById('bld-t-'+t);
   if(btn)btn.classList.add('active');
   const sv=document.getElementById('bld-svg');
-  if(sv)sv.style.cursor=BLD_PLACEMENT_TOOLS.includes(t)?'crosshair':t==='del'?'not-allowed':'default';
+  if(sv){
+    if(t==='pan'){sv.classList.add('pan-active');}else{sv.classList.remove('pan-active','panning');}
+    sv.style.cursor=t==='pan'?'grab':BLD_PLACEMENT_TOOLS.includes(t)?'crosshair':t==='del'?'not-allowed':'default';
+  }
 }
 
 // Ring placement configs: n=sides, d=edge length, bonds=bond orders around ring, deloc=draw inner circle
@@ -4900,10 +4911,11 @@ function bldRender(){
       inner+=`<text x="${at.x}" y="${at.y+5}" text-anchor="middle" font-size="13" font-weight="800" fill="${col}" pointer-events="none">${at.el}</text>`;
     }
   });
-  sv.innerHTML=inner;
+  sv.innerHTML=`<g transform="translate(${bldViewTx},${bldViewTy}) scale(${bldViewScale})">${inner}</g>`;
   sv.querySelectorAll('.bld-atom').forEach(el=>{
-    el.addEventListener('click',e=>{e.stopPropagation();bldClickAtom(+el.dataset.aid);});
+    el.addEventListener('click',e=>{e.stopPropagation();if(bldTool==='pan')return;bldClickAtom(+el.dataset.aid);});
   });
+  bldAttachCanvasEvents();
 }
 
 function bldClickBg(e){
@@ -4912,7 +4924,7 @@ function bldClickBg(e){
   if(!sv)return;
   if(!BLD_PLACEMENT_TOOLS.includes(bldTool))return;
   const rect=sv.getBoundingClientRect();
-  const x=e.clientX-rect.left,y=e.clientY-rect.top;
+  const x=(e.clientX-rect.left-bldViewTx)/bldViewScale,y=(e.clientY-rect.top-bldViewTy)/bldViewScale;
   if(bldTool in BLD_RINGS){
     bldPlaceRing(x,y,bldTool);
     return;
@@ -4947,6 +4959,57 @@ function bldClickAtom(aid){
   }
 }
 
+function bldZoomBy(factor,pivotX,pivotY){
+  const sv=document.getElementById('bld-svg');if(!sv)return;
+  const r=sv.getBoundingClientRect();
+  const px=(pivotX!==undefined)?pivotX:r.width/2;
+  const py=(pivotY!==undefined)?pivotY:r.height/2;
+  const ns=Math.min(4,Math.max(0.2,bldViewScale*factor));
+  const ratio=ns/bldViewScale;
+  bldViewTx=px-(px-bldViewTx)*ratio;
+  bldViewTy=py-(py-bldViewTy)*ratio;
+  bldViewScale=ns;
+  bldRender();bldUpdateZoom();
+}
+
+function bldResetView(){
+  bldViewTx=0;bldViewTy=0;bldViewScale=1;
+  bldRender();bldUpdateZoom();
+}
+
+function bldUpdateZoom(){
+  const el=document.getElementById('bld-zoom-lvl');
+  if(el)el.textContent=Math.round(bldViewScale*100)+'%';
+}
+
+function bldAttachCanvasEvents(){
+  if(bldEventsAttached)return;
+  const sv=document.getElementById('bld-svg');if(!sv)return;
+  sv.addEventListener('mousedown',e=>{
+    if(e.button===1||(e.button===0&&bldTool==='pan')){
+      e.preventDefault();
+      const r=sv.getBoundingClientRect();
+      bldPanDrag={sx:e.clientX-r.left,sy:e.clientY-r.top,tx:bldViewTx,ty:bldViewTy};
+      sv.classList.add('panning');
+    }
+  });
+  sv.addEventListener('mousemove',e=>{
+    if(!bldPanDrag)return;
+    const r=sv.getBoundingClientRect();
+    bldViewTx=bldPanDrag.tx+(e.clientX-r.left-bldPanDrag.sx);
+    bldViewTy=bldPanDrag.ty+(e.clientY-r.top-bldPanDrag.sy);
+    bldRender();bldUpdateZoom();
+  });
+  sv.addEventListener('mouseup',()=>{if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}});
+  sv.addEventListener('mouseleave',()=>{if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}});
+  sv.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const r=sv.getBoundingClientRect();
+    bldZoomBy(e.deltaY<0?1.1:1/1.1,e.clientX-r.left,e.clientY-r.top);
+  },{passive:false});
+  bldEventsAttached=true;
+}
+
 function buildBuild(q){
   const firstTime=!localStorage.getItem('bld_tutorial_seen');
   if(firstTime){localStorage.setItem('bld_tutorial_seen','1');}
@@ -4973,14 +5036,22 @@ function buildBuild(q){
       <button class="bld-btn" id="bld-t-rC6" onclick="bldSetTool('rC6')" title="Ciclohexano" style="font-size:.65rem">⬡C6</button>
       <button class="bld-btn" id="bld-t-rC5" onclick="bldSetTool('rC5')" title="Ciclopentano" style="font-size:.65rem">⬠C5</button>
       <button class="bld-btn" id="bld-t-rC4" onclick="bldSetTool('rC4')" title="Ciclobutano" style="font-size:.65rem">⬜C4</button>
+      <div class="bld-sep"></div>
+      <button class="bld-btn pan-btn" id="bld-t-pan" onclick="bldSetTool('pan')" title="Mover lienzo (panorámica)">Pan</button>
       <span style="flex:1"></span>
       <button class="bld-btn erase-btn" id="bld-t-del" onclick="bldSetTool('del')" title="Borrar átomo">🗑</button>
       <button class="bld-btn" onclick="bldUndo()" title="Deshacer (Ctrl+Z)">↩</button>
       <button class="bld-btn" onclick="bldClearAll()" title="Limpiar todo">✕</button>
     </div>
     <svg id="bld-svg" class="build-canvas" onclick="bldClickBg(event)"></svg>
+    <div class="bld-zoom-overlay">
+      <button class="bld-zoom-btn" onclick="bldZoomBy(1.2)" title="Zoom +">+</button>
+      <span class="bld-zoom-lvl" id="bld-zoom-lvl">100%</span>
+      <button class="bld-zoom-btn" onclick="bldZoomBy(1/1.2)" title="Zoom −">−</button>
+      <button class="bld-zoom-btn" onclick="bldResetView()" title="Restablecer vista (Ctrl+0)">⊡</button>
+    </div>
     <div style="font-size:.67rem;color:var(--dim);padding:5px 10px;background:var(--surf);border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r)">
-      <b>C/O/N/Cl/Br/F</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>🗑</b>: elimina átomo y sus enlaces &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
+      <b>C/O/N/Cl/Br/F</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>Pan</b>: mover lienzo &nbsp;·&nbsp; rueda del ratón: zoom &nbsp;·&nbsp; <b>🗑</b>: elimina átomo &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
     </div>
   </div>
   <div id="bld-hint" style="min-height:18px;font-size:.76rem;color:var(--dim);margin-top:6px;font-style:italic"></div>
@@ -5053,7 +5124,10 @@ function checkBuild(){
 }
 
 // Ctrl+Z undo in build mode
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'){bldUndo();}});
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='z'){bldUndo();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='0'){e.preventDefault();bldResetView();}
+});
 
 // ── QBANK: build questions ──
 const QBANK_BUILD=[
