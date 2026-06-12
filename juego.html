@@ -466,7 +466,25 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .drill-pill{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-radius:100px;color:rgba(255,255,255,.85);font-size:.72rem;font-weight:700;padding:5px 13px;cursor:pointer;transition:all .18s}
 .drill-pill:hover{background:rgba(255,255,255,.16);border-color:rgba(252,211,77,.6);color:#fcd34d}
 .rb-type.build{background:#fff2e8;color:#f97316}
-
+/* Welcome modal */
+.mb-opt{display:flex;align-items:center;gap:12px;padding:13px 16px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:11px;cursor:pointer;transition:all .18s;margin-bottom:8px;width:100%;text-align:left}
+.mb-opt:hover{background:rgba(255,255,255,.1);border-color:rgba(252,211,77,.45);transform:translateX(3px)}
+.mb-opt-icon{font-size:1.4rem;flex-shrink:0;width:36px;text-align:center}
+.mb-opt-title{font-size:.9rem;font-weight:800;color:#fff}
+.mb-opt-sub{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px}
+.mb-back{background:none;border:1.5px solid rgba(255,255,255,.2);border-radius:7px;color:rgba(255,255,255,.6);font-size:.78rem;padding:6px 14px;cursor:pointer;transition:all .15s;margin-bottom:12px}
+.mb-back:hover{border-color:rgba(255,255,255,.4);color:#fff}
+.mb-seccion-list{display:flex;flex-direction:column;gap:7px}
+.mb-sec-card{display:flex;align-items:center;gap:10px;padding:10px 13px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;cursor:pointer;transition:all .18s;width:100%;text-align:left}
+.mb-sec-card:hover{background:rgba(255,255,255,.1);border-color:rgba(252,211,77,.5);transform:translateX(3px)}
+.mb-sec-icon{font-size:1.15rem;width:26px;text-align:center;flex-shrink:0}
+.mb-sec-name{font-size:.84rem;font-weight:700;color:#fff}
+.mb-sec-desc{font-size:.63rem;color:rgba(255,255,255,.48);margin-top:1px}
+.mb-grupo-wrap{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto}
+.mb-grupo-lbl{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-top:4px}
+.mb-pill-row{display:flex;flex-wrap:wrap;gap:5px}
+.mb-pill{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.14);border-radius:100px;color:rgba(255,255,255,.8);font-size:.72rem;font-weight:700;padding:5px 12px;cursor:pointer;transition:all .15s}
+.mb-pill:hover{background:rgba(255,255,255,.14);border-color:rgba(252,211,77,.55);color:#fcd34d}
 </style>
 </head>
 <body>
@@ -560,30 +578,92 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 </div>
 
 <!-- MODAL: datos del estudiante -->
-<div id="modal-estudiante" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+<!-- MODAL: código estudiante -->
+<div id="modal-codigo-est" class="modal-overlay">
   <div class="modal-box">
     <div class="modal-school">🏫 Colegio Rufino José Cuervo</div>
-    <div class="modal-title">¿Quién juega? 🎓</div>
-    <div id="modal-level-tag" class="modal-level-tag">Juego Completo</div>
-    <div class="modal-label">Curso</div>
-    <select class="modal-input" id="modal-curso-sel" onchange="validateStudentCode()">
-      <option value="">— Selecciona tu curso —</option>
-      <option value="1003">1003</option>
-      <option value="1004">1004</option>
-      <option value="1005">1005</option>
-      <option value="1006">1006</option>
-      <option value="1101">1101</option>
-      <option value="1102">1102</option>
-      <option value="1103">1103</option>
-      <option value="1104">1104</option>
-    </select>
+    <div class="modal-title">¡Hola! 👋</div>
     <div class="modal-label">Código de estudiante</div>
-    <input class="modal-input" id="modal-codigo" type="text" inputmode="numeric" maxlength="6"
+    <input class="modal-input" id="mc-input" type="text" inputmode="numeric" maxlength="6"
       placeholder="Ingresa tus 6 dígitos" autocomplete="off"
-      oninput="validateStudentCode()" onkeydown="if(event.key==='Enter')confirmStartGame()">
-    <div id="modal-code-ok" class="modal-code-ok" style="display:none"></div>
-    <div id="modal-code-err" class="modal-code-err" style="display:none"></div>
-    <button class="btn-modal-start" id="btn-comenzar" onclick="confirmStartGame()" disabled>▶ Comenzar</button>
+      oninput="validateCodigoInput()" onkeydown="if(event.key==='Enter')confirmCodigo()">
+    <div id="mc-ok" class="modal-code-ok" style="display:none"></div>
+    <div id="mc-err" class="modal-code-err" style="display:none"></div>
+    <button class="btn-modal-start" id="mc-btn" onclick="confirmCodigo()" disabled>Continuar →</button>
+  </div>
+</div>
+
+<!-- MODAL: bienvenida estudiante -->
+<div id="modal-bienvenida" class="modal-overlay">
+  <div class="modal-box" style="max-width:440px">
+    <div class="modal-school">🏫 Colegio Rufino José Cuervo</div>
+    <div class="modal-title" id="mb-title">¡Bienvenido(a)! 🎓</div>
+    <div id="mb-main">
+      <button class="mb-opt" onclick="mbShowSeccion()">
+        <span class="mb-opt-icon">📚</span>
+        <div><div class="mb-opt-title">Por sección</div><div class="mb-opt-sub">Hidrocarburos · Oxigenados · Nitrogenados</div></div>
+      </button>
+      <button class="mb-opt" onclick="mbShowGrupo()">
+        <span class="mb-opt-icon">🔬</span>
+        <div><div class="mb-opt-title">Por grupo funcional</div><div class="mb-opt-sub">Alcanos, alcoholes, cetonas y más</div></div>
+      </button>
+      <button class="mb-opt" onclick="mbStartLevel('completo')">
+        <span class="mb-opt-icon">⭐</span>
+        <div><div class="mb-opt-title">Juego completo</div><div class="mb-opt-sub">Todos los grupos funcionales · 20 preguntas al azar</div></div>
+      </button>
+    </div>
+    <div id="mb-seccion" style="display:none">
+      <button class="mb-back" onclick="mbBack()">← Volver</button>
+      <div class="mb-seccion-list">
+        <button class="mb-sec-card" onclick="mbStartLevel('hidrocarburos')">
+          <span class="mb-sec-icon">🔗</span>
+          <div><div class="mb-sec-name">Hidrocarburos</div><div class="mb-sec-desc">Alcanos, alquenos, alquinos, aromáticos</div></div>
+        </button>
+        <button class="mb-sec-card" onclick="mbStartLevel('oxigenados')">
+          <span class="mb-sec-icon">💧</span>
+          <div><div class="mb-sec-name">Compuestos Oxigenados</div><div class="mb-sec-desc">Alcoholes, cetonas, aldehídos, ácidos, éteres</div></div>
+        </button>
+        <button class="mb-sec-card" onclick="mbStartLevel('nitrogenados')">
+          <span class="mb-sec-icon">🔵</span>
+          <div><div class="mb-sec-name">Compuestos Nitrogenados</div><div class="mb-sec-desc">Amidas, nitrilos y aminas</div></div>
+        </button>
+        <button class="mb-sec-card" onclick="mbStartLevel('constructor')">
+          <span class="mb-sec-icon">🏗️</span>
+          <div><div class="mb-sec-name">Constructor Molecular</div><div class="mb-sec-desc">Dibuja estructuras a partir del nombre IUPAC</div></div>
+        </button>
+      </div>
+    </div>
+    <div id="mb-grupo" style="display:none">
+      <button class="mb-back" onclick="mbBack()">← Volver</button>
+      <div class="mb-grupo-wrap">
+        <div class="mb-grupo-lbl">Hidrocarburos</div>
+        <div class="mb-pill-row">
+          <button class="mb-pill" onclick="mbStartLevel('alcanos')">Alcanos</button>
+          <button class="mb-pill" onclick="mbStartLevel('alquenos')">Alquenos</button>
+          <button class="mb-pill" onclick="mbStartLevel('alquinos')">Alquinos</button>
+          <button class="mb-pill" onclick="mbStartLevel('benceno')">Aromáticos</button>
+        </div>
+        <div class="mb-grupo-lbl">Oxigenados</div>
+        <div class="mb-pill-row">
+          <button class="mb-pill" onclick="mbStartLevel('alcoholes')">Alcoholes</button>
+          <button class="mb-pill" onclick="mbStartLevel('cetonas')">Cetonas</button>
+          <button class="mb-pill" onclick="mbStartLevel('aldehidos')">Aldehídos</button>
+          <button class="mb-pill" onclick="mbStartLevel('acidos')">Ácidos carboxílicos</button>
+          <button class="mb-pill" onclick="mbStartLevel('esteres')">Ésteres</button>
+          <button class="mb-pill" onclick="mbStartLevel('eteres')">Éteres</button>
+        </div>
+        <div class="mb-grupo-lbl">Nitrogenados</div>
+        <div class="mb-pill-row">
+          <button class="mb-pill" onclick="mbStartLevel('amidas')">Amidas</button>
+          <button class="mb-pill" onclick="mbStartLevel('nitrilos')">Nitrilos</button>
+          <button class="mb-pill" onclick="mbStartLevel('aminas')">Aminas</button>
+        </div>
+        <div class="mb-grupo-lbl">Constructor</div>
+        <div class="mb-pill-row">
+          <button class="mb-pill" onclick="mbStartLevel('constructor')">Constructor Molecular</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -4155,7 +4235,8 @@ function setModo(modo){
   freeMode = (modo==='libre');
   document.getElementById('btn-modo-colegio').className='modo-btn'+(freeMode?'':' active-colegio');
   document.getElementById('btn-modo-libre').className='modo-btn'+(freeMode?' active-libre':'');
-  document.getElementById('modo-label').textContent=freeMode?'Modo libre — elige tu nivel':'Colegio Rufino José Cuervo — elige tu nivel';
+  document.getElementById('modo-label').textContent=freeMode?'Modo libre — elige tu nivel':'Selecciona tu nivel';
+  if(!freeMode) openCodigoModal();
 }
 
 function openLevelModal(nivel){
@@ -4169,45 +4250,67 @@ function openLevelModal(nivel){
     }
     return;
   }
-  document.getElementById('modal-level-tag').textContent=NIVEL_LABELS[nivel]||nivel;
-  if(studentCode){
-    document.getElementById('modal-curso-sel').value=studentCourse;
-    document.getElementById('modal-codigo').value=studentCode;
-    validateStudentCode();
-  } else {
-    document.getElementById('modal-curso-sel').value='';
-    document.getElementById('modal-codigo').value='';
-    document.getElementById('modal-code-ok').style.display='none';
-    document.getElementById('modal-code-err').style.display='none';
-    document.getElementById('btn-comenzar').disabled=true;
-  }
-  document.getElementById('modal-estudiante').classList.add('open');
-  setTimeout(()=>document.getElementById(studentCode?'btn-comenzar':'modal-curso-sel').focus(),80);
+  if(studentCode){ startGame(); } else { openCodigoModal(); }
 }
-function closeModal(){
-  document.getElementById('modal-estudiante').classList.remove('open');
+
+function openCodigoModal(){
+  document.getElementById('mc-input').value=studentCode||'';
+  document.getElementById('mc-ok').style.display='none';
+  document.getElementById('mc-err').style.display='none';
+  document.getElementById('mc-btn').disabled=true;
+  if(studentCode) validateCodigoInput();
+  document.getElementById('modal-codigo-est').classList.add('open');
+  setTimeout(()=>document.getElementById('mc-input').focus(),80);
 }
-function validateStudentCode(){
-  const sel=document.getElementById('modal-curso-sel').value;
-  const cod=document.getElementById('modal-codigo').value.trim();
-  const okDiv=document.getElementById('modal-code-ok');
-  const errDiv=document.getElementById('modal-code-err');
-  const btn=document.getElementById('btn-comenzar');
+function closeCodigoModal(){
+  document.getElementById('modal-codigo-est').classList.remove('open');
+}
+function validateCodigoInput(){
+  const cod=document.getElementById('mc-input').value.trim();
+  const okDiv=document.getElementById('mc-ok');
+  const errDiv=document.getElementById('mc-err');
+  const btn=document.getElementById('mc-btn');
   okDiv.style.display='none'; errDiv.style.display='none'; btn.disabled=true;
   if(cod.length<6) return;
   const name=STUDENTS[cod];
-  if(!name){
-    errDiv.textContent='Código no encontrado. Verifica tus 6 dígitos.';
-    errDiv.style.display='block'; return;
-  }
-  const codCurso=cod.substring(0,4);
-  if(sel && codCurso!==sel){
-    errDiv.textContent='Este código no corresponde al curso '+sel+'.';
-    errDiv.style.display='block'; return;
-  }
-  if(!sel) document.getElementById('modal-curso-sel').value=codCurso;
+  if(!name){errDiv.textContent='Código no encontrado. Verifica tus 6 dígitos.';errDiv.style.display='block';return;}
   okDiv.innerHTML='✓ '+name;
   okDiv.style.display='flex'; btn.disabled=false;
+}
+function confirmCodigo(){
+  const cod=document.getElementById('mc-input').value.trim();
+  if(cod.length<6||!STUDENTS[cod]) return;
+  studentCode=cod; studentName=STUDENTS[cod]; studentCourse=cod.substring(0,4);
+  closeCodigoModal();
+  openBienvenida();
+}
+function openBienvenida(){
+  const parts=studentName.split(' ');
+  const firstName=parts[2]||parts[parts.length-1];
+  document.getElementById('mb-title').textContent='¡Bienvenido(a), '+firstName+'! 🎓';
+  document.getElementById('mb-main').style.display='block';
+  document.getElementById('mb-seccion').style.display='none';
+  document.getElementById('mb-grupo').style.display='none';
+  document.getElementById('modal-bienvenida').classList.add('open');
+}
+function closeBienvenida(){
+  document.getElementById('modal-bienvenida').classList.remove('open');
+}
+function mbBack(){
+  document.getElementById('mb-main').style.display='block';
+  document.getElementById('mb-seccion').style.display='none';
+  document.getElementById('mb-grupo').style.display='none';
+}
+function mbShowSeccion(){
+  document.getElementById('mb-main').style.display='none';
+  document.getElementById('mb-seccion').style.display='block';
+}
+function mbShowGrupo(){
+  document.getElementById('mb-main').style.display='none';
+  document.getElementById('mb-grupo').style.display='block';
+}
+function mbStartLevel(nivel){
+  currentLevel=nivel; closeBienvenida(); startGame();
 }
 function acceptConsent(){
   freeConsent=true;
@@ -4216,15 +4319,6 @@ function acceptConsent(){
 }
 function closeConsent(){
   document.getElementById('modal-consent').classList.remove('open');
-}
-function confirmStartGame(){
-  const sel=document.getElementById('modal-curso-sel').value;
-  const cod=document.getElementById('modal-codigo').value.trim();
-  if(!sel){document.getElementById('modal-curso-sel').focus();return;}
-  if(cod.length<6||!STUDENTS[cod]){document.getElementById('modal-codigo').focus();return;}
-  if(cod.substring(0,4)!==sel){document.getElementById('modal-codigo').focus();return;}
-  studentName=STUDENTS[cod]; studentCourse=sel; studentCode=cod;
-  closeModal(); startGame();
 }
 function startGame(){
   let pool;
