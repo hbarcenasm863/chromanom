@@ -5511,9 +5511,9 @@ function sendAnalytics(trigger){
   if(history.length===0) return;
   _analyticsSent=true;
   const body=JSON.stringify(buildPayload(trigger));
-  // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
-  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-    .then(r=>{ if(r.ok) _updateSheetsStatus('ok'); })
+  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'}})
+    .then(r=>r.ok?r.json():Promise.reject('HTTP '+r.status))
+    .then(d=>{ if(d&&d.ok) _updateSheetsStatus('ok'); else throw new Error(d&&d.error); })
     .catch(()=>{ _analyticsSent=false; _updateSheetsStatus('error'); });
 }
 
@@ -5540,19 +5540,24 @@ function sendToSheets(){
   if(btn){btn.disabled=true;btn.innerHTML='⏳ Enviando…';}
   _analyticsSent=false;
   fetch(ANALYTICS_URL,{method:'POST',body:JSON.stringify(buildPayload('manual')),headers:{'Content-Type':'text/plain'}})
-    .then(r=>r.ok?r.text():Promise.reject(r.status))
-    .then(()=>{
+    .then(r=>r.ok?r.json():Promise.reject('HTTP '+r.status))
+    .then(d=>{
+      if(!d||!d.ok) throw new Error(d&&d.error);
       _analyticsSent=true;
       if(btn){btn.style.display='none';}
       if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
     })
-    .catch(()=>{
+    .catch(err=>{
       if(btn){btn.disabled=false;btn.innerHTML='📊 Reintentar envío';btn.style.display='flex';}
-      if(status) status.textContent='⚠ Error al enviar. Verifica la URL del Apps Script.';
+      if(status) status.textContent='⚠ Error al enviar: '+(err||'verifica la URL del Apps Script.');
     });
 }
 
-window.addEventListener('beforeunload',()=>sendAnalytics('cierre'));
+window.addEventListener('beforeunload',()=>{
+  if(!_analyticsSent && history.length>0 && ANALYTICS_URL && ANALYTICS_URL!=='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'){
+    navigator.sendBeacon(ANALYTICS_URL, JSON.stringify(buildPayload('cierre')));
+  }
+});
 </script>
 
 <!-- FOOTER COPYRIGHT -->
