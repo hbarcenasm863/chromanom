@@ -391,7 +391,8 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="tema-chip">Alcanos · Alquenos · Alquinos</span>
       <span class="tema-chip">Alcoholes · Cetonas · Aldehídos</span>
       <span class="tema-chip">Ácidos · Ésteres · Éteres</span>
-      <span class="tema-chip">Amidas · Nitrilos</span>
+      <span class="tema-chip">Amidas · Nitrilos · Aminas</span>
+      <span class="tema-chip">Aromáticos · Constructor molecular</span>
     </div>
     <div class="four-parts" style="margin-top:14px">
       <div class="fp r">① Ramificaciones</div>
@@ -402,9 +403,9 @@ footer span{color:var(--naranja);font-weight:700}
     <button class="btn-tour" onclick="tourOpen()">▶ ¿Cómo funciona ChromaNom?</button>
   </div>
   <div class="hero-stats">
-    <div class="hs"><div class="hs-n">16</div><div class="hs-l">Grupos</div></div>
-    <div class="hs"><div class="hs-n">160+</div><div class="hs-l">Ejercicios</div></div>
-    <div class="hs"><div class="hs-n">IUPAC</div><div class="hs-l"></div></div>
+    <div class="hs"><div class="hs-n">400</div><div class="hs-l">Preguntas</div></div>
+    <div class="hs"><div class="hs-n">17</div><div class="hs-l">Grupos</div></div>
+    <div class="hs"><div class="hs-n">108</div><div class="hs-l">Moléculas</div></div>
   </div>
 </div>
 
@@ -500,12 +501,12 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod-icon">🔬</span>
       <div class="mod-paso">② Luego aquí</div>
       <div class="mod-title">Grupos Funcionales</div>
-      <div class="mod-desc">Los 16 grupos funcionales con sus reglas IUPAC, estructuras de línea-ángulo y 10 ejercicios por grupo. 160 ejercicios en total.</div>
+      <div class="mod-desc">Los 17 grupos funcionales con sus reglas IUPAC, estructuras de línea-ángulo y ejercicios propios. 177 ejercicios en total.</div>
     </div>
     <div class="mod-bottom">
       <div class="mod-chips">
-        <span class="mc">16 grupos</span>
-        <span class="mc">160 ejercicios</span>
+        <span class="mc">17 grupos</span>
+        <span class="mc">177 ejercicios</span>
         <span class="mc">SVG skeletal</span>
       </div>
       <span class="mod-arrow">→</span>
@@ -517,14 +518,14 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod-icon">🎮</span>
       <div class="mod-paso">③ Pon a prueba lo aprendido</div>
       <div class="mod-title">Juego de Práctica</div>
-      <div class="mod-desc">Pon a prueba lo aprendido con 5 tipos de retos interactivos: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres completos y construir estructuras. 45 segundos por pregunta.</div>
+      <div class="mod-desc">400 preguntas en 5 formatos: opción múltiple, arrastrar partes, identificar fragmentos, escribir el nombre completo y construir estructuras. Juega por sección, por grupo funcional o mezcla todo. 60 segundos por pregunta.</div>
     </div>
     <div class="mod-bottom">
       <div class="mod-chips">
-        <span class="mc">5 modos</span>
-        <span class="mc">20 preguntas</span>
-        <span class="mc">Cronometrado</span>
-        <span class="mc">Resultados</span>
+        <span class="mc">400 preguntas</span>
+        <span class="mc">5 formatos</span>
+        <span class="mc">60 s / pregunta</span>
+        <span class="mc">Constructor molecular</span>
       </div>
       <span class="mod-arrow">→</span>
     </div>
@@ -644,10 +645,10 @@ const TOUR=[
     title:'② Grupos Funcionales',
     hdrColor:'linear-gradient(135deg,#357a1f,#4aaa2e)',
     body:`
-      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 16 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
+      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 17 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>16 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con diagrama de prioridad IUPAC.</div>
-        <div class="tour-feat"><strong>160 ejercicios</strong>10 ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
+        <div class="tour-feat"><strong>17 grupos</strong>Desde ácidos carboxílicos hasta alquinos y aromáticos, con diagrama de prioridad IUPAC.</div>
+        <div class="tour-feat"><strong>177 ejercicios</strong>Ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
       </div>
       <p>Las estructuras usan dibujos SVG de línea-ángulo (skeletal formula) como los de examen.</p>
       <div class="tour-chips">
@@ -655,16 +656,17 @@ const TOUR=[
         <span class="tour-chip g">Ésteres</span>
         <span class="tour-chip g">Amidas</span>
         <span class="tour-chip g">Nitrilos</span>
+        <span class="tour-chip g">Aminas</span>
         <span class="tour-chip i">Aldehídos · Cetonas</span>
         <span class="tour-chip r">Alcoholes · Éteres</span>
-        <span class="tour-chip az">Alcanos · Alquenos · Alquinos</span>
+        <span class="tour-chip az">Alcanos · Alquenos · Alquinos · Aromáticos</span>
       </div>`
   },
   {
     title:'③ Juego de Práctica',
     hdrColor:'linear-gradient(135deg,#c45c0c,#f07c1e)',
     body:`
-      <p>El <strong>Juego</strong> te pone a prueba con moléculas reales, cronómetro de 45 segundos y 4 tipos de preguntas.</p>
+      <p>El <strong>Juego</strong> te pone a prueba con 400 preguntas sobre moléculas reales, cronómetro de 60 segundos y 5 tipos de retos.</p>
       <div class="tour-feat-row">
         <div class="tour-feat"><strong>🔵 Opción múltiple</strong>Elige el nombre correcto entre 4 opciones. Rápido y directo.</div>
         <div class="tour-feat"><strong>🟠 Arrastrar partes</strong>Arrastra cada parte del nombre al hueco que corresponde.</div>
@@ -672,6 +674,10 @@ const TOUR=[
       <div class="tour-feat-row">
         <div class="tour-feat"><strong>🟢 Identificar</strong>Señala qué parte de la molécula es la cadena, el sustituyente o el grupo.</div>
         <div class="tour-feat"><strong>🩷 Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
+      </div>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>🧪 Constructor</strong>Dibuja la molécula tú mismo en el lienzo con átomos y enlaces. 108 moléculas disponibles.</div>
+        <div class="tour-feat"><strong>3 modos de juego</strong>Por sección, por grupo funcional o juego completo mezclado. 20 preguntas por sesión.</div>
       </div>
       <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
   },
