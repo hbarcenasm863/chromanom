@@ -1,7 +1,7 @@
 // ChromaNom Service Worker — v6.0
 // Cache-first para uso offline completo, incluyendo Google Fonts
 
-const CACHE = 'chromanom-v6';
+const CACHE = 'chromanom-v7';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -16,7 +16,8 @@ const ASSETS = [
   './icons/icon-192-maskable.png',
   './icons/icon-512-maskable.png',
   './icons/icon-180.png',
-  './pwa-install.js'
+  './pwa-install.js',
+  './icons/logo.png'
 ];
 
 // Instalar: guardar todos los archivos en caché
