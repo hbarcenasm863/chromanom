@@ -1,26 +1,27 @@
 // ChromaNom Service Worker — v6.0
 // Cache-first para uso offline completo, incluyendo Google Fonts
 
-const CACHE = 'chromanom-v8';
+const CACHE = 'chromanom-v9';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
-  './',
-  './index.html',
-  './teoria.html',
-  './grupos.html',
-  './juego.html',
-  './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-192-maskable.png',
-  './icons/icon-512-maskable.png',
-  './icons/icon-180.png',
-  './pwa-install.js',
-  './icons/logo.png',
-  './icons/favicon-32.png',
-  './icons/favicon-16.png',
-  './favicon.ico'
+  '/chromanom/',
+  '/chromanom/index.html',
+  '/chromanom/teoria.html',
+  '/chromanom/grupos.html',
+  '/chromanom/juego.html',
+  '/chromanom/referencia.html',
+  '/chromanom/manifest.json',
+  '/chromanom/icons/icon-192.png',
+  '/chromanom/icons/icon-512.png',
+  '/chromanom/icons/icon-192-maskable.png',
+  '/chromanom/icons/icon-512-maskable.png',
+  '/chromanom/icons/icon-180.png',
+  '/chromanom/pwa-install.js',
+  '/chromanom/icons/logo.png',
+  '/chromanom/icons/favicon-32.png',
+  '/chromanom/icons/favicon-16.png',
+  '/chromanom/favicon.ico'
 ];
 
 // Instalar: guardar todos los archivos en caché

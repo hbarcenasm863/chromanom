@@ -1,13 +1,12 @@
 {
-  "id": "/chromanom/",
   "name": "ChromaNom — Nomenclatura Orgánica",
   "short_name": "ChromaNom",
   "description": "Aprende nomenclatura orgánica IUPAC con el método visual de 4 colores. Bachillerato y universidad.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/chromanom/",
+  "scope": "/chromanom/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0d2d42",
+  "background_color": "#ffffff",
   "theme_color": "#0d4a73",
   "lang": "es",
   "categories": ["education"],
@@ -41,19 +40,19 @@
     {
       "name": "Principios IUPAC",
       "short_name": "Teoría",
-      "url": "./teoria.html",
+      "url": "/chromanom/teoria.html",
       "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
     },
     {
       "name": "Grupos Funcionales",
       "short_name": "Grupos",
-      "url": "./grupos.html",
+      "url": "/chromanom/grupos.html",
       "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
     },
     {
       "name": "Juego de Práctica",
       "short_name": "Juego",
-      "url": "./juego.html",
+      "url": "/chromanom/juego.html",
       "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
     }
   ]
