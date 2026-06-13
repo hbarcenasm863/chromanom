@@ -738,6 +738,6 @@ function tourRender(){
 }
 </script>
 <script src="pwa-install.js"></script>
-<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});</script>
 </body>
 </html>
