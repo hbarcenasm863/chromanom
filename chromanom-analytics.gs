@@ -197,7 +197,7 @@ function buildEstadisticas(ss, namedData) {
   const students = agruparEstudiantes(namedData);
   let row = 2;
   Object.values(students)
-    .sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
+    .sort((a, b) => String(a.curso).localeCompare(String(b.curso)) || String(a.nombre).localeCompare(String(b.nombre)))
     .forEach(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
       const nivelPcts = NIVEL_KEYS.map(nk => {
@@ -251,7 +251,7 @@ function buildResumenCursos(ss, namedData) {
 
   let row = 2;
   Object.entries(cursos)
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
     .forEach(([curso, c]) => {
       const pct = c.totalT ? Math.round(c.totalC / c.totalT * 100) : 0;
       const nivelPcts = NIVEL_KEYS.map(nk => {
@@ -336,7 +336,7 @@ function updateCursoSheet(ss, curso, data) {
 
   let row = 2;
   Object.entries(students)
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
     .forEach(([nombre, s]) => {
       const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
       sh.appendRow([nombre, s.sesiones, s.totalT, pct, s.lastDate]);
