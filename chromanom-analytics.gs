@@ -75,7 +75,7 @@ function jsonResponse(obj) {
 function reconstruirEstadisticas() {
   const ss = getSpreadsheet();
   updateStats(ss);
-  SpreadsheetApp.getUi().alert('✅ Estadísticas actualizadas correctamente.');
+  console.log('✅ Estadísticas actualizadas correctamente — ' + new Date());
 }
 
 // ── Log de errores en hoja Diagnóstico ─────────────────────
