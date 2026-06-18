@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChromaNom — Generador de Ejercicios</title>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<style>
+:root{
+  --primary:#0d4a73;
+  --primary-d:#0d2d42;
+  --primary-l:#e8f4fb;
+  --surface:#f7f9fc;
+  --surf:#ffffff;
+  --border:#d0dde8;
+  --tx:#0d2d42;
+  --dim:#2a3f52;
+  --dimmer:#3a5568;
+  --r:14px;--rs:8px;
+  --sh:0 2px 12px rgba(13,74,115,.10);
+  --sh2:0 6px 32px rgba(13,74,115,.16);
+  /* MDEC colors */
+  --c-c:#1b8a3a;
+  --c-g:#b5176b;
+  --c-i:#d97200;
+  --c-r:#1156a8;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--surface);
+  color:var(--tx);
+  font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  min-height:100vh;
+}
+
+/* ── NAV ── */
+.site-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#0d2d42;
+  padding:0 20px;
+  height:48px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,.28);
+}
+.site-nav a{
+  color:rgba(255,255,255,.75);
+  text-decoration:none;
+  font-size:.78rem;font-weight:600;
+  padding:6px 14px;border-radius:8px;
+  transition:background .15s,color .15s;
+  display:flex;align-items:center;gap:5px;
+}
+.site-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
+.site-nav .nav-links{display:flex;gap:4px;align-items:center}
+.site-nav .nav-brand{
+  display:flex;align-items:center;gap:8px;
+  color:#fff;font-weight:800;font-size:.88rem;
+  font-style:italic;letter-spacing:-.02em;text-decoration:none;
+  white-space:nowrap;
+}
+.site-nav .nav-brand img{height:28px;width:auto;object-fit:contain}
+@media(max-width:480px){
+  .site-nav a span.full{display:none}
+  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav .nav-brand{font-size:.8rem}
+  .site-nav .nav-brand img{height:22px}
+}
+
+/* ── LAYOUT ── */
+.app{max-width:860px;margin:0 auto;padding:28px 20px 80px;}
+
+/* ── PAGE TITLE ── */
+.page-title{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:28px;
+  padding-bottom:18px;
+  border-bottom:2px solid var(--border);
+}
+.page-title-icon{
+  font-size:2.2rem;
+  background:var(--primary-l);
+  border-radius:50%;
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.page-title h1{font-size:1.45rem;font-weight:800;color:var(--primary);letter-spacing:-.02em}
+.page-title p{font-size:.83rem;color:var(--dim);margin-top:3px}
+
+/* ── CONFIG PANEL ── */
+.config-panel{
+  background:var(--surf);
+  border:1.5px solid var(--border);
+  border-radius:var(--r);
+  padding:24px;
+  box-shadow:var(--sh);
+  margin-bottom:28px;
+}
+.config-section{margin-bottom:22px}
+.config-section:last-child{margin-bottom:0}
+.config-label{
+  font-size:.78rem;font-weight:800;
+  color:var(--primary);
+  text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+}
+.config-label::before{
+  content:'';display:inline-block;
+  width:3px;height:14px;
+  background:var(--primary);
+  border-radius:2px;
+}
+
+/* Checkbox grid */
+.cb-grid{
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.cb-item{
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:20px;
+  padding:5px 12px;
+  cursor:pointer;
+  font-size:.8rem;font-weight:600;
+  color:var(--dim);
+  user-select:none;
+  transition:all .15s;
+}
+.cb-item:hover{border-color:var(--primary);color:var(--primary)}
+.cb-item input[type=checkbox]{
+  width:15px;height:15px;
+  accent-color:var(--primary);
+  cursor:pointer;
+}
+.cb-item.checked{
+  background:var(--primary-l);
+  border-color:var(--primary);
+  color:var(--primary);
+}
+
+/* Tipo checkboxes */
+.tipo-grid{display:flex;flex-direction:column;gap:8px}
+.tipo-item{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--rs);
+  padding:10px 14px;
+  cursor:pointer;
+  user-select:none;
+  transition:all .15s;
+}
+.tipo-item:hover{border-color:var(--primary)}
+.tipo-item.checked{background:var(--primary-l);border-color:var(--primary)}
+.tipo-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);cursor:pointer;margin-top:2px;flex-shrink:0}
+.tipo-item-body{flex:1}
+.tipo-item-title{font-size:.84rem;font-weight:700;color:var(--tx)}
+.tipo-item-desc{font-size:.75rem;color:var(--dimmer);margin-top:2px}
+
+/* Slider */
+.slider-row{display:flex;align-items:center;gap:14px}
+.slider-row input[type=range]{
+  flex:1;
+  height:6px;
+  accent-color:var(--primary);
+  cursor:pointer;
+}
+.slider-val{
+  font-size:1.2rem;font-weight:800;
+  color:var(--primary);
+  min-width:32px;text-align:center;
+}
+
+/* Generate button */
+.btn-generate{
+  display:block;width:100%;
+  padding:14px 24px;
+  background:var(--primary);
+  color:#fff;
+  border:none;border-radius:var(--r);
+  font-size:1rem;font-weight:800;
+  cursor:pointer;
+  transition:background .18s,transform .1s,box-shadow .18s;
+  box-shadow:0 4px 16px rgba(13,74,115,.28);
+  letter-spacing:.01em;
+}
+.btn-generate:hover{background:#0d2d42;box-shadow:0 6px 24px rgba(13,74,115,.36)}
+.btn-generate:active{transform:scale(.99)}
+
+/* Warning */
+.warning{
+  background:#fff8e1;border:1.5px solid #f0b429;
+  border-radius:var(--rs);padding:10px 14px;
+  font-size:.82rem;color:#92400e;
+  margin-bottom:16px;display:none;
+}
+.warning.show{display:block}
+
+/* ── EXERCISE SHEET ── */
+#exercise-sheet{display:none}
+#exercise-sheet.show{display:block}
+
+.sheet-header{
+  background:var(--surf);
+  border:1.5px solid var(--border);
+  border-radius:var(--r);
+  padding:20px 24px;
+  margin-bottom:24px;
+  box-shadow:var(--sh);
+}
+.sheet-title{
+  font-size:1.05rem;font-weight:800;
+  color:var(--primary);
+  margin-bottom:12px;
+  text-align:center;
+  letter-spacing:-.01em;
+}
+.sheet-meta{
+  display:flex;flex-wrap:wrap;gap:16px;
+  font-size:.82rem;color:var(--dim);
+}
+.sheet-meta-field{
+  display:flex;align-items:center;gap:6px;flex:1;min-width:180px;
+}
+.sheet-meta-field label{font-weight:700;white-space:nowrap}
+.sheet-meta-field .meta-line{
+  flex:1;border-bottom:1.5px solid var(--border);
+  height:18px;min-width:60px;
+}
+
+/* Exercise items */
+.exercises-list{display:flex;flex-direction:column;gap:20px}
+.exercise{
+  background:var(--surf);
+  border:1.5px solid var(--border);
+  border-radius:var(--r);
+  padding:20px 22px;
+  box-shadow:var(--sh);
+}
+.ex-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.ex-num{
+  font-size:1rem;font-weight:900;
+  color:var(--primary);
+  min-width:28px;
+}
+.ex-badge{
+  font-size:.68rem;font-weight:800;
+  padding:3px 10px;border-radius:100px;
+  text-transform:uppercase;letter-spacing:.07em;
+}
+.badge-a{background:#e0f2fe;color:#0369a1}
+.badge-b{background:#f0fdf4;color:#166534}
+.badge-c{background:#fdf4ff;color:#7e22ce}
+.ex-instruction{font-size:.84rem;color:var(--dim)}
+
+/* Tipo A */
+.ex-svg-wrap{
+  display:flex;justify-content:center;align-items:center;
+  margin:14px 0;
+  min-height:130px;
+}
+.ex-svg-wrap svg{height:130px;width:auto;max-width:100%}
+.ex-answer-line{
+  display:flex;align-items:center;gap:8px;
+  margin-top:14px;
+  font-size:.84rem;font-weight:700;color:var(--dim);
+}
+.ex-answer-line .ans-line{
+  flex:1;border-bottom:1.5px solid #aaa;
+  height:20px;
+}
+
+/* Tipo B */
+.ex-compound-name{
+  font-size:1.1rem;font-weight:700;
+  color:var(--tx);
+  text-align:center;
+  padding:14px;
+  background:var(--surface);
+  border-radius:var(--rs);
+  border:1.5px solid var(--border);
+  margin:12px 0;
+  font-style:italic;
+}
+.ex-draw-box{
+  border:2px dashed #aab8c8;
+  border-radius:var(--rs);
+  width:220px;height:130px;
+  margin:12px auto 0;
+  background-image:
+    linear-gradient(rgba(180,200,220,.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180,200,220,.18) 1px, transparent 1px);
+  background-size:16px 16px;
+  background-color:#fafcff;
+}
+
+/* Tipo C */
+.mdec-name-display{
+  display:flex;justify-content:center;align-items:center;gap:2px;
+  flex-wrap:wrap;
+  padding:12px;
+  background:var(--surface);
+  border-radius:var(--rs);
+  border:1.5px solid var(--border);
+  margin:10px 0;
+}
+.mdec-pill{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:6px;
+  font-size:.9rem;font-weight:700;
+  font-family:'Courier New',monospace;
+  letter-spacing:.01em;
+  color:#fff;
+}
+.pill-c{background:var(--c-c)}
+.pill-g{background:var(--c-g)}
+.pill-i{background:var(--c-i)}
+.pill-r{background:var(--c-r)}
+
+.mdec-table{
+  width:100%;border-collapse:collapse;
+  margin-top:10px;font-size:.82rem;
+}
+.mdec-table th{
+  background:var(--surface);
+  color:var(--dim);
+  font-weight:700;font-size:.73rem;
+  text-transform:uppercase;letter-spacing:.06em;
+  padding:7px 10px;
+  border:1px solid var(--border);
+  text-align:left;
+}
+.mdec-table td{
+  border:1px solid var(--border);
+  padding:8px 10px;
+  font-size:.82rem;
+}
+.mdec-table td:first-child{
+  font-family:'Courier New',monospace;
+  font-weight:700;
+  color:var(--tx);
+  white-space:nowrap;
+}
+.mdec-table td.blank-line{
+  color:#bbb;
+  font-size:.7rem;
+}
+
+/* ── ACTION BAR ── */
+.action-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(255,255,255,.96);
+  border-top:1.5px solid var(--border);
+  padding:10px 20px;
+  display:none;
+  justify-content:center;
+  gap:12px;
+  z-index:200;
+  backdrop-filter:blur(8px);
+  box-shadow:0 -4px 20px rgba(13,74,115,.12);
+}
+.action-bar.show{display:flex}
+.btn-action{
+  padding:10px 22px;
+  border-radius:var(--r);
+  font-size:.88rem;font-weight:700;
+  cursor:pointer;
+  transition:all .15s;
+  border:none;
+}
+.btn-print{
+  background:var(--primary);
+  color:#fff;
+  box-shadow:0 3px 12px rgba(13,74,115,.25);
+}
+.btn-print:hover{background:#0d2d42}
+.btn-reset{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  color:var(--dim);
+}
+.btn-reset:hover{border-color:var(--primary);color:var(--primary)}
+
+/* ── ANSWER KEY (screen) ── */
+.answer-key{
+  background:var(--surf);
+  border:1.5px solid var(--border);
+  border-radius:var(--r);
+  padding:24px;
+  margin-top:28px;
+  box-shadow:var(--sh);
+}
+.answer-key h2{
+  font-size:1.1rem;font-weight:800;
+  color:var(--primary);
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+.ak-list{display:flex;flex-direction:column;gap:14px}
+.ak-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:12px 14px;
+  background:var(--surface);
+  border-radius:var(--rs);
+  border:1px solid var(--border);
+  font-size:.83rem;
+}
+.ak-num{font-weight:900;color:var(--primary);min-width:24px;flex-shrink:0;padding-top:2px}
+.ak-body{flex:1}
+.ak-label{font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.ak-name{font-weight:700;color:var(--tx);font-size:.88rem;margin-bottom:4px}
+.ak-svg{display:flex;justify-content:flex-start}
+.ak-svg svg{height:80px;width:auto}
+.ak-table{
+  width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px;
+}
+.ak-table th{
+  background:var(--surf);color:var(--dim);font-weight:700;font-size:.68rem;
+  text-transform:uppercase;letter-spacing:.05em;
+  padding:5px 8px;border:1px solid var(--border);text-align:left;
+}
+.ak-table td{border:1px solid var(--border);padding:6px 8px}
+.ak-table td:first-child{font-family:'Courier New',monospace;font-weight:700}
+.ak-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700;color:#fff;margin-right:4px}
+.tag-c{background:var(--c-c)}.tag-g{background:var(--c-g)}.tag-i{background:var(--c-i)}.tag-r{background:var(--c-r)}
+.cls-name-c{color:var(--c-c);font-weight:700}
+.cls-name-g{color:var(--c-g);font-weight:700}
+.cls-name-i{color:var(--c-i);font-weight:700}
+.cls-name-r{color:var(--c-r);font-weight:700}
+
+/* ── PRINT-ONLY answer key section (hidden on screen) ── */
+.print-answer-key{display:none}
+
+/* ── PRINT STYLES ── */
+@media print{
+  @page{margin:1.8cm 1.5cm}
+  body{background:#fff !important;color:#000 !important}
+
+  /* Hide screen-only elements */
+  .site-nav,
+  .page-title,
+  .config-panel,
+  .warning,
+  .action-bar,
+  .answer-key{display:none !important}
+
+  /* Show sheet */
+  #exercise-sheet{display:block !important}
+
+  .sheet-header{
+    box-shadow:none;border:1.5px solid #000;
+    padding:14px 18px;margin-bottom:16px;
+    page-break-inside:avoid;break-inside:avoid;
+  }
+  .sheet-title{color:#000}
+
+  /* Exercises */
+  .exercises-list{display:grid;gap:14px;grid-template-columns:1fr}
+  .exercise{
+    box-shadow:none;border:1px solid #aaa;
+    padding:14px 16px;
+    break-inside:avoid;page-break-inside:avoid;
+  }
+  /* 2-col for Tipo A only sheets */
+  .exercises-list.has-a{grid-template-columns:1fr 1fr}
+  .exercise.tipo-b,.exercise.tipo-c{grid-column:1 / -1}
+
+  .ex-badge{border:1px solid #aaa;color:#000 !important;background:#fff !important}
+  .ex-compound-name{border:1px solid #aaa;background:#f9f9f9}
+  .ex-draw-box{background:#fff;border-color:#999}
+  .mdec-name-display{background:#f9f9f9;border-color:#aaa}
+
+  /* Force MDEC colors in print */
+  .mdec-pill{color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pill-c{background:#1b8a3a !important}
+  .pill-g{background:#b5176b !important}
+  .pill-i{background:#d97200 !important}
+  .pill-r{background:#1156a8 !important}
+
+  .mdec-table th,.mdec-table td{border-color:#aaa}
+
+  /* Show print-only answer key */
+  .print-answer-key{display:block !important}
+
+  .print-ak-page{page-break-before:always;break-before:page}
+  .print-ak-page h2{
+    font-size:1.1rem;font-weight:800;
+    border-bottom:2px solid #000;
+    padding-bottom:8px;margin-bottom:14px;
+  }
+  .print-ak-list{display:flex;flex-direction:column;gap:10px}
+  .print-ak-item{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:10px 12px;
+    border:1px solid #aaa;border-radius:6px;
+    break-inside:avoid;page-break-inside:avoid;
+    font-size:.78rem;
+  }
+  .print-ak-num{font-weight:900;min-width:20px;flex-shrink:0}
+  .print-ak-body{flex:1}
+  .print-ak-svg svg{height:72px;width:auto}
+  .print-ak-name{font-weight:700;font-size:.84rem;margin-bottom:4px}
+  .print-ak-table{width:100%;border-collapse:collapse;font-size:.74rem;margin-top:6px}
+  .print-ak-table th{
+    background:#f2f2f2;font-weight:700;font-size:.65rem;
+    text-transform:uppercase;padding:4px 8px;
+    border:1px solid #aaa;text-align:left;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .print-ak-table td{border:1px solid #aaa;padding:5px 8px}
+  .print-ak-table td:first-child{font-family:monospace;font-weight:700}
+  .print-tag-c,.print-tag-g,.print-tag-i,.print-tag-r{
+    padding:1px 7px;border-radius:4px;font-size:.7rem;font-weight:700;
+    color:#fff;display:inline-block;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .print-tag-c{background:#1b8a3a}
+  .print-tag-g{background:#b5176b}
+  .print-tag-i{background:#d97200}
+  .print-tag-r{background:#1156a8}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="./index.html" class="nav-brand">
+    <img src="icons/logo.png" alt="ChromaNom">
+    ChromaNom
+  </a>
+  <div class="nav-links">
+    <a href="./index.html" class="nav-link">&#127968; <span class="full">Inicio</span></a>
+    <a href="./teoria.html" class="nav-link">&#9879;&#65039; <span class="full">Principios</span></a>
+    <a href="./grupos.html" class="nav-link">&#128300; <span class="full">Grupos</span></a>
+    <a href="./juego.html" class="nav-link">&#127918; <span class="full">Juego</span></a>
+    <a href="./generador.html" class="nav-link active">&#128196; <span class="full">Generador</span></a>
+  </div>
+</nav>
+
+<div class="app">
+
+  <div class="page-title">
+    <div class="page-title-icon">&#128196;</div>
+    <div>
+      <h1>Generador de Ejercicios</h1>
+      <p>Crea hojas de trabajo personalizadas para nomenclatura org&aacute;nica IUPAC</p>
+    </div>
+  </div>
+
+  <!-- Config panel (screen only) -->
+  <div class="config-panel" id="config-panel">
+
+    <!-- Grupos funcionales -->
+    <div class="config-section">
+      <div class="config-label">Grupos funcionales</div>
+      <div class="cb-grid" id="grupos-grid">
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="alcanos" checked> Alcanos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="alquenos" checked> Alquenos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="alquinos" checked> Alquinos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="alcoholes" checked> Alcoholes</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="cetonas" checked> Cetonas</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="aldehidos" checked> Alde&iacute;dos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="acidos" checked> &Aacute;cidos carbox&iacute;licos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="esteres" checked> &Eacute;steres</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="eteres" checked> &Eacute;teres</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="amidas" checked> Amidas</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="nitrilos" checked> Nitrilos</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="aminas" checked> Aminas</label>
+        <label class="cb-item checked"><input type="checkbox" name="grupo" value="benceno" checked> Arom&aacute;ticos (benceno)</label>
+      </div>
+    </div>
+
+    <!-- Tipo de ejercicio -->
+    <div class="config-section">
+      <div class="config-label">Tipo de ejercicio</div>
+      <div class="tipo-grid">
+        <label class="tipo-item checked">
+          <input type="checkbox" name="tipo" value="A" checked>
+          <div class="tipo-item-body">
+            <div class="tipo-item-title">Tipo A &mdash; Nombrar mol&eacute;cula</div>
+            <div class="tipo-item-desc">Se muestra la estructura; el alumno escribe el nombre IUPAC.</div>
+          </div>
+        </label>
+        <label class="tipo-item checked">
+          <input type="checkbox" name="tipo" value="B" checked>
+          <div class="tipo-item-body">
+            <div class="tipo-item-title">Tipo B &mdash; Trazar estructura</div>
+            <div class="tipo-item-desc">Se da el nombre IUPAC; el alumno dibuja la estructura esquel&eacute;tica.</div>
+          </div>
+        </label>
+        <label class="tipo-item checked">
+          <input type="checkbox" name="tipo" value="C" checked>
+          <div class="tipo-item-body">
+            <div class="tipo-item-title">Tipo C &mdash; An&aacute;lisis MDEC</div>
+            <div class="tipo-item-desc">Se da el nombre coloreado por partes; el alumno identifica tipo y significado de cada fragmento.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Numero de preguntas -->
+    <div class="config-section">
+      <div class="config-label">N&uacute;mero de preguntas</div>
+      <div class="slider-row">
+        <input type="range" id="n-slider" min="5" max="30" value="10"
+               oninput="document.getElementById('n-val').textContent=this.value">
+        <span class="slider-val" id="n-val">10</span>
+      </div>
+    </div>
+
+    <!-- Warning -->
+    <div class="warning" id="gen-warning"></div>
+
+    <button class="btn-generate" onclick="generate()">Generar ejercicios</button>
+  </div>
+
+  <!-- Exercise sheet -->
+  <div id="exercise-sheet">
+    <div class="sheet-header">
+      <div class="sheet-title">ChromaNom &mdash; Ejercicios de Nomenclatura Org&aacute;nica IUPAC</div>
+      <div class="sheet-meta">
+        <div class="sheet-meta-field">
+          <label>Fecha:</label><div class="meta-line"></div>
+        </div>
+        <div class="sheet-meta-field">
+          <label>Nombre:</label><div class="meta-line"></div>
+        </div>
+        <div class="sheet-meta-field">
+          <label>Curso:</label><div class="meta-line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="exercises-list" id="exercises-list"></div>
+    <!-- On-screen answer key -->
+    <div class="answer-key" id="answer-key">
+      <h2>Clave de respuestas</h2>
+      <div class="ak-list" id="ak-list"></div>
+    </div>
+  </div>
+
+</div><!-- .app -->
+
+<!-- Floating action bar -->
+<div class="action-bar" id="action-bar">
+  <button class="btn-action btn-reset" onclick="resetSheet()">&#8635; Nueva hoja</button>
+  <button class="btn-action btn-print" onclick="window.print()">&#128424; Imprimir / Guardar PDF</button>
+</div>
+
+<!-- Print-only answer key (injected by JS) -->
+<div class="print-answer-key" id="print-answer-key"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// SVG ENGINE (verbatim from juego.html lines 768-807)
+// ─────────────────────────────────────────────────────────────────────────────
+const BL=40,COS30=Math.sqrt(3)/2,SIN30=0.5;
+let _pts=[];
+function _reg(x,y,pad=6){_pts.push({x,y,pad});}
+function ln(x1,y1,x2,y2){_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
+function dbl(x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1,ox=-dy/len*2.5,oy=dx/len*2.5;_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1+ox}" y1="${y1+oy}" x2="${x2+ox}" y2="${y2+oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1-ox}" y1="${y1-oy}" x2="${x2-ox}" y2="${y2-oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
+function tri(x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1,ox=-dy/len*3.5,oy=dx/len*3.5;_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1+ox}" y1="${y1+oy}" x2="${x2+ox}" y2="${y2+oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1-ox}" y1="${y1-oy}" x2="${x2-ox}" y2="${y2-oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
+function atm(x,y,t){const w=t.length*6.5+10,h=18;_reg(x,y,w/2+2);return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="4" fill="white" stroke="#1a1714" stroke-width="1.2"/><text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="'Courier New',monospace" font-weight="700" font-size="9.5" fill="#1a1714">${t}</text>`;}
+function zz(x,y,n,up=true){const pts=[];for(let i=0;i<n;i++){if(i===0)pts.push({x,y});else{const prev=pts[i-1];const goUp=(i%2===1)?up:!up;pts.push({x:prev.x+BL*COS30,y:prev.y+(goUp?-BL*SIN30:BL*SIN30)});}}return pts;}
+function chain(p){let s='';for(let i=0;i<p.length-1;i++){s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);_reg(p[i].x,p[i].y);}if(p.length)_reg(p[p.length-1].x,p[p.length-1].y);return s;}
+function bnzRing(cx,cy){let s='';const r=28;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=`<circle cx="${cx}" cy="${cy}" r="13" fill="none" stroke="#1a1714" stroke-width="1.4"/>`;return s;}
+function ring(n,r,cx,cy,dbl_idx=-1){let s='';const v=Array.from({length:n},(_,i)=>({x:cx+r*Math.cos(-Math.PI/2+i*2*Math.PI/n),y:cy+r*Math.sin(-Math.PI/2+i*2*Math.PI/n)}));v.forEach((vi,i)=>{const ni=v[(i+1)%n];if(i===dbl_idx)s+=dbl(vi.x,vi.y,ni.x,ni.y);else s+=ln(vi.x,vi.y,ni.x,ni.y);_reg(vi.x,vi.y,3);});return {s,v};}
+function mkSVG(content){if(!_pts.length)return `<svg viewBox="-20 -20 100 60" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;_pts.forEach(p=>{minX=Math.min(minX,p.x-(p.pad||6));minY=Math.min(minY,p.y-(p.pad||6));maxX=Math.max(maxX,p.x+(p.pad||6));maxY=Math.max(maxY,p.y+(p.pad||6));});const pad=8;return `<svg viewBox="${minX-pad} ${minY-pad} ${maxX-minX+pad*2} ${maxY-minY+pad*2}" xmlns="http://www.w3.org/2000/svg">${content}</svg>`;}
+function _radDir(i,n){const a=-Math.PI/2+i*2*Math.PI/n;return {dx:Math.cos(a),dy:Math.sin(a)};}
+function _subM1(v,i,n,label){const d=_radDir(i,n);const ex=v[i].x+BL*d.dx,ey=v[i].y+BL*d.dy;return ln(v[i].x,v[i].y,ex,ey)+(label?atm(ex,ey,label):'');}
+function _subM2(v,i,n){const d=_radDir(i,n);const m1x=v[i].x+BL*d.dx,m1y=v[i].y+BL*d.dy;const ang2=Math.atan2(d.dy,d.dx)+(d.dx>=0?-Math.PI/6:Math.PI/6);const m2x=m1x+BL*Math.cos(ang2),m2y=m1y+BL*Math.sin(ang2);_reg(m1x,m1y);_reg(m2x,m2y);return ln(v[i].x,v[i].y,m1x,m1y)+ln(m1x,m1y,m2x,m2y);}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MOLECULE LIBRARY
+// ─────────────────────────────────────────────────────────────────────────────
+const M = {
+  butano(){_pts=[];return mkSVG(chain(zz(0,0,4)));},
+  propano(){_pts=[];return mkSVG(chain(zz(0,0,3)));},
+  etano(){_pts=[];return mkSVG(chain(zz(0,0,2)));},
+  pentano(){_pts=[];return mkSVG(chain(zz(0,0,5)));},
+  hexano(){_pts=[];return mkSVG(chain(zz(0,0,6)));},
+  heptano(){_pts=[];return mkSVG(chain(zz(0,0,7)));},
+  metilpentano(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);return mkSVG(s);},
+  metilbutano(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);return mkSVG(s);},
+  dimetilbutano(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
+  dimetilpropano(){_pts=[];const p=zz(0,0,3);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);return mkSVG(s);},
+  metilpentano3(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y-BL);return mkSVG(s);},
+  etilmetilpentano(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);const ex1=p[2].x+BL*COS30,ey1=p[2].y+BL*SIN30,ex2=p[2].x,ey2=p[2].y+2*BL*SIN30;s+=ln(p[2].x,p[2].y,ex1,ey1);s+=ln(ex1,ey1,ex2,ey2);_reg(ex1,ey1);_reg(ex2,ey2);return mkSVG(s);},
+  dimetilpentano24(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);s+=ln(p[3].x,p[3].y,p[3].x,p[3].y+BL);return mkSVG(s);},
+  but1eno(){_pts=[];const p=zz(0,0,4);let s=dbl(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  but2eno(){_pts=[];const p=zz(0,0,4);return mkSVG(ln(p[0].x,p[0].y,p[1].x,p[1].y)+dbl(p[1].x,p[1].y,p[2].x,p[2].y)+ln(p[2].x,p[2].y,p[3].x,p[3].y));},
+  prop1eno(){_pts=[];const p=zz(0,0,3);return mkSVG(dbl(p[0].x,p[0].y,p[1].x,p[1].y)+ln(p[1].x,p[1].y,p[2].x,p[2].y));},
+  pent2eno(){_pts=[];const p=zz(0,0,5);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+dbl(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  hex1eno(){_pts=[];const p=zz(0,0,6);let s=dbl(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  buta13dieno(){_pts=[];const p=zz(0,0,4);return mkSVG(dbl(p[0].x,p[0].y,p[1].x,p[1].y)+ln(p[1].x,p[1].y,p[2].x,p[2].y)+dbl(p[2].x,p[2].y,p[3].x,p[3].y));},
+  but1ino(){_pts=[];const p=zz(0,0,4);let s=tri(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  pent1ino(){_pts=[];const p=zz(0,0,5);let s=tri(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  pent2ino(){_pts=[];const p=zz(0,0,5);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  hex1ino(){_pts=[];const p=zz(0,0,6);let s=tri(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  but2ino(){_pts=[];const p=zz(0,0,4);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y)+ln(p[2].x,p[2].y,p[3].x,p[3].y);return mkSVG(s);},
+  etanol(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  propan1ol(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  butan1ol(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  pentan1ol(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  butan2ol(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+  propan2ol(){_pts=[];const p=zz(0,0,3);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+  pentan2ol(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+  pentan3ol(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=ln(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'OH');return mkSVG(s);},
+  hexan2ol(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+  but3en2ol(){_pts=[];const p=zz(0,0,4,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+ln(p[1].x,p[1].y,p[2].x,p[2].y)+dbl(p[2].x,p[2].y,p[3].x,p[3].y);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL)+atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+  propan12diol(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL)+atm(p[0].x,p[0].y-BL,'OH');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL)+atm(p[1].x,p[1].y+BL,'OH');return mkSVG(s);},
+  ciclohexanol(){_pts=[];const {s,v}=ring(6,34,44,44);return mkSVG(s+_subM1(v,0,6,'OH'));},
+  ciclopentanol(){_pts=[];const {s,v}=ring(5,30,38,38);return mkSVG(s+_subM1(v,0,5,'OH'));},
+  ciclobutanol(){_pts=[];const {s,v}=ring(4,28,36,36);return mkSVG(s+_subM1(v,0,4,'OH'));},
+  propanal(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  butanal(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  pentanal(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  etanal(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  hexanal(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  propan2ona(){_pts=[];const p=zz(0,0,3);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  pentan2ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  pentan3ona(){_pts=[];const p=zz(0,0,5);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
+  butan2ona(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  hexan3ona(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
+  hexan2ona(){_pts=[];const p=zz(0,0,6);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  ciclohexanona(){_pts=[];const {s,v}=ring(6,34,44,44);const d=_radDir(0,6);const ex=v[0].x+BL*d.dx,ey=v[0].y+BL*d.dy;_reg(v[0].x,v[0].y);_reg(ex,ey);return mkSVG(s+dbl(v[0].x,v[0].y,ex,ey)+atm(ex,ey,'O'));},
+  ciclopentanona(){_pts=[];const {s,v}=ring(5,30,38,38);const d=_radDir(0,5);const ex=v[0].x+BL*d.dx,ey=v[0].y+BL*d.dy;_reg(v[0].x,v[0].y);_reg(ex,ey);return mkSVG(s+dbl(v[0].x,v[0].y,ex,ey)+atm(ex,ey,'O'));},
+  acidoetanoico(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidopropanoico(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidobutanoico(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidopentanoico(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  etanamida(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  propanamida(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  butanamida(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  pentanamida(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  etanonitrilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  propanonitrilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  butanonitrilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  pentanonitrilo(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  hexanonitrilo(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  metilamina(){_pts=[];let s=ln(0,0,0,-BL);_reg(0,-BL);s+=atm(0,-BL,'NH₂');return mkSVG(s);},
+  etanamina(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  propanamina(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  butan1amina(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');return mkSVG(s);},
+  butan2amina(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'NH₂');return mkSVG(s);},
+  pentano15diamina(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'NH₂');s+=ln(p[4].x,p[4].y,p[4].x,p[4].y-BL);s+=atm(p[4].x,p[4].y-BL,'NH₂');return mkSVG(s);},
+  ciclobutano(){_pts=[];const {s}=ring(4,28,36,36);return mkSVG(s);},
+  ciclopentano(){_pts=[];const {s}=ring(5,30,38,38);return mkSVG(s);},
+  ciclohexano(){_pts=[];const {s}=ring(6,34,44,44);return mkSVG(s);},
+  metilciclohexano(){_pts=[];const {s,v}=ring(6,34,44,44);return mkSVG(s+_subM1(v,0,6,''));},
+  metilciclopentano(){_pts=[];const {s,v}=ring(5,30,38,38);return mkSVG(s+_subM1(v,0,5,''));},
+  etilciclohexano(){_pts=[];const {s,v}=ring(6,34,44,44);return mkSVG(s+_subM2(v,0,6));},
+  ciclohexeno(){_pts=[];const {s}=ring(6,34,44,44,0);return mkSVG(s);},
+  ciclohex2en1ol(){_pts=[];const {s,v}=ring(6,34,44,44,1);return mkSVG(s+_subM1(v,0,6,'OH'));},
+  metoximetano(){_pts=[];const p=zz(0,0,2,true);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y);_reg(p[0].x,p[0].y);_reg(p[1].x,p[1].y);s+=atm((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2,'O');return mkSVG(s);},
+  metoxietano(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  etoxietano(){_pts=[];const ox=0,oy=0;const r1={x:BL*COS30,y:BL*SIN30},r2={x:2*BL*COS30,y:0},l1={x:-BL*COS30,y:BL*SIN30},l2={x:-2*BL*COS30,y:0};let s=ln(ox,oy,r1.x,r1.y);s+=ln(r1.x,r1.y,r2.x,r2.y);s+=ln(ox,oy,l1.x,l1.y);s+=ln(l1.x,l1.y,l2.x,l2.y);_reg(ox,oy,4);_reg(r1.x,r1.y);_reg(r2.x,r2.y);_reg(l1.x,l1.y);_reg(l2.x,l2.y);s+=atm(ox,oy,'O');return mkSVG(s);},
+  metoxipropano(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  etanoatoMetilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  propanoatoMetilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  etanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);_reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  butanoatoMetilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  metilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);return mkSVG(s);},
+  ortoXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);const a1=-Math.PI/2+Math.PI/3;const dx1=Math.cos(a1),dy1=Math.sin(a1);s+=ln(v[1].x,v[1].y,v[1].x+BL*dx1,v[1].y+BL*dy1);_reg(v[1].x+BL*dx1,v[1].y+BL*dy1);return mkSVG(s);},
+  metaXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);const a2=-Math.PI/2+2*Math.PI/3;const dx2=Math.cos(a2),dy2=Math.sin(a2);s+=ln(v[2].x,v[2].y,v[2].x+BL*dx2,v[2].y+BL*dy2);_reg(v[2].x+BL*dx2,v[2].y+BL*dy2);return mkSVG(s);},
+  paraXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);s+=ln(v[3].x,v[3].y,v[3].x,v[3].y+BL);_reg(v[3].x,v[3].y+BL);return mkSVG(s);},
+  etilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);_reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);return mkSVG(s);},
+  propilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=ln(0,-r-BL,-BL*COS30,-r-BL-BL*SIN30);s+=ln(-BL*COS30,-r-BL-BL*SIN30,0,-r-BL-2*BL*SIN30);_reg(0,-r-BL);_reg(-BL*COS30,-r-BL-BL*SIN30);_reg(0,-r-BL-2*BL*SIN30);return mkSVG(s);},
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MOLS DATASET
+// ─────────────────────────────────────────────────────────────────────────────
+const MOLS = [
+  {key:'butano',name:'butano',topic:'alcanos',parts:[{t:'but',cls:'c',l:'4 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'propano',name:'propano',topic:'alcanos',parts:[{t:'prop',cls:'c',l:'3 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'hexano',name:'hexano',topic:'alcanos',parts:[{t:'hex',cls:'c',l:'6 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'heptano',name:'heptano',topic:'alcanos',parts:[{t:'hept',cls:'c',l:'7 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'metilbutano',name:'2-metilbutano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'dimetilpropano',name:'2,2-dimetilpropano',topic:'alcanos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'metilpentano',name:'2-metilpentano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'ciclohexano',name:'ciclohexano',topic:'alcanos',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'ciclobutano',name:'ciclobutano',topic:'alcanos',parts:[{t:'ciclobut',cls:'c',l:'Anillo de 4 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'ciclopentano',name:'ciclopentano',topic:'alcanos',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'metilciclopentano',name:'metilciclopentano',topic:'alcanos',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'etilciclohexano',name:'etilciclohexano',topic:'alcanos',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'but1eno',name:'but-1-eno',topic:'alquenos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'1-en',cls:'i',l:'Doble enlace en C1'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'but2eno',name:'but-2-eno',topic:'alquenos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'prop1eno',name:'prop-1-eno',topic:'alquenos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'1-en',cls:'i',l:'Doble enlace en C1'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'pent2eno',name:'pent-2-eno',topic:'alquenos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'hex1eno',name:'hex-1-eno',topic:'alquenos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'1-en',cls:'i',l:'Doble enlace en C1'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'buta13dieno',name:'buta-1,3-dieno',topic:'alquenos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'1,3-dien',cls:'i',l:'Doble enlace en C1 y C3'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'ciclohexeno',name:'ciclohexeno',topic:'alquenos',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'en',cls:'i',l:'Doble enlace en el anillo'},{t:'o',cls:'g',l:'Alqueno'}]},
+  {key:'but1ino',name:'but-1-ino',topic:'alquinos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}]},
+  {key:'pent1ino',name:'pent-1-ino',topic:'alquinos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}]},
+  {key:'pent2ino',name:'pent-2-ino',topic:'alquinos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}]},
+  {key:'hex1ino',name:'hex-1-ino',topic:'alquinos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}]},
+  {key:'but2ino',name:'but-2-ino',topic:'alquinos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}]},
+  {key:'etanol',name:'etanol',topic:'alcoholes',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'ol',cls:'g',l:'Grupo −OH (alcohol)'}]},
+  {key:'propan1ol',name:'propan-1-ol',topic:'alcoholes',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
+  {key:'butan1ol',name:'butan-1-ol',topic:'alcoholes',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
+  {key:'butan2ol',name:'butan-2-ol',topic:'alcoholes',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-ol',cls:'g',l:'−OH en C2'}]},
+  {key:'propan2ol',name:'propan-2-ol',topic:'alcoholes',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-ol',cls:'g',l:'−OH en C2'}]},
+  {key:'pentan2ol',name:'pentan-2-ol',topic:'alcoholes',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-ol',cls:'g',l:'−OH en C2'}]},
+  {key:'ciclohexanol',name:'ciclohexanol',topic:'alcoholes',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'ol',cls:'g',l:'−OH (alcohol)'}]},
+  {key:'ciclopentanol',name:'ciclopentanol',topic:'alcoholes',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5C'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'ol',cls:'g',l:'−OH (alcohol)'}]},
+  {key:'ciclobutanol',name:'ciclobutanol',topic:'alcoholes',parts:[{t:'ciclobut',cls:'c',l:'Anillo de 4C'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'ol',cls:'g',l:'−OH (alcohol)'}]},
+  {key:'propan12diol',name:'propano-1,2-diol',topic:'alcoholes',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'ano',cls:'c',l:'Sin insaturaciones'},{t:'1,2-diol',cls:'g',l:'−OH en C1 y C2'}]},
+  {key:'pentan2ona',name:'pentan-2-ona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'butan2ona',name:'butan-2-ona',topic:'cetonas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'pentan3ona',name:'pentan-3-ona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'3-on',cls:'g',l:'C=O en C3'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'ciclopentanona',name:'ciclopentanona',topic:'cetonas',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5C'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'on',cls:'g',l:'C=O (cetona cíclica)'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'ciclohexanona',name:'ciclohexanona',topic:'cetonas',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'on',cls:'g',l:'C=O (cetona cíclica)'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'etanal',name:'etanal',topic:'aldehidos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldeído terminal (−CHO)'}]},
+  {key:'propanal',name:'propanal',topic:'aldehidos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldeído terminal (−CHO)'}]},
+  {key:'butanal',name:'butanal',topic:'aldehidos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldeído terminal (−CHO)'}]},
+  {key:'pentanal',name:'pentanal',topic:'aldehidos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldeído terminal (−CHO)'}]},
+  {key:'hexanal',name:'hexanal',topic:'aldehidos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldeído terminal (−CHO)'}]},
+  {key:'acidoetanoico',name:'ácido etanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'et',cls:'c',l:'2 carbonos (incluye −COOH)'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
+  {key:'acidopropanoico',name:'ácido propanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos (incluye −COOH)'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
+  {key:'acidobutanoico',name:'ácido butanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'but',cls:'c',l:'4 carbonos (incluye −COOH)'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
+  {key:'acidopentanoico',name:'ácido pentanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'pent',cls:'c',l:'5 carbonos (incluye −COOH)'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
+  {key:'etanoatoMetilo',name:'etanoato de metilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
+  {key:'propanoatoMetilo',name:'propanoato de metilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster (del ácido propanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
+  {key:'etanoatoEtilo',name:'etanoato de etilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de etilo',cls:'r',l:'Grupo alcoxi (etanol)'}]},
+  {key:'butanoatoMetilo',name:'butanoato de metilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster (del ácido butanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
+  {key:'metoximetano',name:'metoximetano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'metan',cls:'c',l:'1 carbono (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'metoxietano',name:'metoxietano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'etan',cls:'c',l:'2 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'etoxietano',name:'etoxietano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'etan',cls:'c',l:'2 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'metoxipropano',name:'metoxipropano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'propan',cls:'c',l:'3 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'etanamida',name:'etanamida',topic:'amidas',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
+  {key:'propanamida',name:'propanamida',topic:'amidas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
+  {key:'butanamida',name:'butanamida',topic:'amidas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
+  {key:'pentanamida',name:'pentanamida',topic:'amidas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
+  {key:'etanonitrilo',name:'etanonitrilo',topic:'nitrilos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'propanonitrilo',name:'propanonitrilo',topic:'nitrilos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'butanonitrilo',name:'butanonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'pentanonitrilo',name:'pentanonitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'etanamina',name:'etanamina',topic:'aminas',parts:[{t:'etan',cls:'c',l:'2 carbonos'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'propanamina',name:'propanamina',topic:'aminas',parts:[{t:'propan',cls:'c',l:'3 carbonos'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'butan1amina',name:'butan-1-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'butan2amina',name:'butan-2-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'c',l:'Sin insaturaciones'},{t:'2-amin',cls:'g',l:'−NH₂ en C2'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'pentano15diamina',name:'pentano-1,5-diamina',topic:'aminas',parts:[{t:'pentan',cls:'c',l:'5 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'1,5-diamin',cls:'g',l:'−NH₂ en C1 y C5'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'metilbenceno',name:'metilbenceno',topic:'benceno',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'etilbenceno',name:'etilbenceno',topic:'benceno',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'propilbenceno',name:'propilbenceno',topic:'benceno',parts:[{t:'propil',cls:'r',l:'Sustituyente propilo (3C)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'ortoXileno',name:'1,2-dimetilbenceno',topic:'benceno',parts:[{t:'1,2-dimetil',cls:'r',l:'Dos metilos en C1 y C2 (orto)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'metaXileno',name:'1,3-dimetilbenceno',topic:'benceno',parts:[{t:'1,3-dimetil',cls:'r',l:'Dos metilos en C1 y C3 (meta)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'paraXileno',name:'1,4-dimetilbenceno',topic:'benceno',parts:[{t:'1,4-dimetil',cls:'r',l:'Dos metilos en C1 y C4 (para)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+const MDEC_NAMES = {
+  c:'Cadena principal',
+  g:'Grupo funcional',
+  i:'Insaturación',
+  r:'Ramificación'
+};
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function getSVG(key){
+  if(M[key]) return M[key]();
+  return `<svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg"><text x="40" y="30" text-anchor="middle" font-size="9" fill="#999">${key}</text></svg>`;
+}
+
+function mdecPills(parts){
+  return parts.map(p=>`<span class="mdec-pill pill-${p.cls}">${p.t}</span>`).join('');
+}
+
+function mdecTableBlank(parts){
+  const rows=parts.map(p=>`<tr>
+    <td>${p.t}</td>
+    <td class="blank-line">&mdash;</td>
+    <td class="blank-line">&mdash;</td>
+  </tr>`).join('');
+  return `<table class="mdec-table">
+    <thead><tr><th>Fragmento</th><th>Tipo (Cadena/GF/Insaturaci&oacute;n/Ramif.)</th><th>Significado</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function mdecTableFull(parts){
+  const rows=parts.map(p=>`<tr>
+    <td>${p.t}</td>
+    <td><span class="ak-tag tag-${p.cls}">${p.cls.toUpperCase()}</span> <span class="cls-name-${p.cls}">${MDEC_NAMES[p.cls]}</span></td>
+    <td>${p.l}</td>
+  </tr>`).join('');
+  return `<table class="ak-table">
+    <thead><tr><th>Fragmento</th><th>Tipo MDEC</th><th>Significado</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function printMdecTableFull(parts){
+  const rows=parts.map(p=>`<tr>
+    <td>${p.t}</td>
+    <td><span class="print-tag-${p.cls}">${p.cls.toUpperCase()}</span> ${MDEC_NAMES[p.cls]}</td>
+    <td>${p.l}</td>
+  </tr>`).join('');
+  return `<table class="print-ak-table">
+    <thead><tr><th>Fragmento</th><th>Tipo MDEC</th><th>Significado</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UI — toggle checked style on checkbox labels
+// ─────────────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.cb-item, .tipo-item').forEach(label=>{
+  const cb=label.querySelector('input[type=checkbox]');
+  cb.addEventListener('change',()=>{
+    label.classList.toggle('checked', cb.checked);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GENERATOR
+// ─────────────────────────────────────────────────────────────────────────────
+let _generated=[];
+
+function generate(){
+  const warning=document.getElementById('gen-warning');
+  warning.className='warning';
+  warning.textContent='';
+
+  const grupos=[...document.querySelectorAll('input[name=grupo]:checked')].map(cb=>cb.value);
+  const tipos=[...document.querySelectorAll('input[name=tipo]:checked')].map(cb=>cb.value);
+  const n=parseInt(document.getElementById('n-slider').value,10);
+
+  if(!grupos.length){
+    warning.textContent='Selecciona al menos un grupo funcional.';
+    warning.className='warning show';
+    return;
+  }
+  if(!tipos.length){
+    warning.textContent='Selecciona al menos un tipo de ejercicio.';
+    warning.className='warning show';
+    return;
+  }
+
+  const pool=MOLS.filter(m=>grupos.includes(m.topic));
+  if(!pool.length){
+    warning.textContent='No hay moléculas disponibles para los grupos seleccionados.';
+    warning.className='warning show';
+    return;
+  }
+
+  const shuffled=shuffle(pool);
+  const count=Math.min(n, shuffled.length);
+  if(count<n){
+    warning.textContent=`Solo hay ${count} molécula(s) disponibles para la selección; se generarán ${count} ejercicio(s).`;
+    warning.className='warning show';
+  }
+
+  const chosen=shuffled.slice(0, count);
+  _generated=chosen.map((mol,idx)=>({mol, tipo: tipos[idx % tipos.length]}));
+
+  renderSheet();
+}
+
+function renderSheet(){
+  const sheet=document.getElementById('exercise-sheet');
+  const list=document.getElementById('exercises-list');
+  const akList=document.getElementById('ak-list');
+  const printAK=document.getElementById('print-answer-key');
+
+  list.innerHTML='';
+  akList.innerHTML='';
+
+  const allA=_generated.every(e=>e.tipo==='A');
+  list.className='exercises-list'+(allA?' has-a':'');
+
+  _generated.forEach((entry, idx)=>{
+    const {mol, tipo}=entry;
+    const num=idx+1;
+    const svgHtml=getSVG(mol.key);
+
+    // ── Exercise card ──
+    let exHtml='';
+    if(tipo==='A'){
+      exHtml=`<div class="exercise tipo-a">
+        <div class="ex-header">
+          <span class="ex-num">${num}.</span>
+          <span class="ex-badge badge-a">Nomenclatura</span>
+          <span class="ex-instruction">Escribe el nombre IUPAC de la siguiente estructura:</span>
+        </div>
+        <div class="ex-svg-wrap">${svgHtml}</div>
+        <div class="ex-answer-line">
+          <span>Nombre IUPAC:</span>
+          <div class="ans-line"></div>
+        </div>
+      </div>`;
+    } else if(tipo==='B'){
+      exHtml=`<div class="exercise tipo-b">
+        <div class="ex-header">
+          <span class="ex-num">${num}.</span>
+          <span class="ex-badge badge-b">Estructura</span>
+          <span class="ex-instruction">Dibuja la estructura esquelética del siguiente compuesto:</span>
+        </div>
+        <div class="ex-compound-name">${mol.name}</div>
+        <div class="ex-draw-box"></div>
+      </div>`;
+    } else {
+      exHtml=`<div class="exercise tipo-c">
+        <div class="ex-header">
+          <span class="ex-num">${num}.</span>
+          <span class="ex-badge badge-c">Análisis MDEC</span>
+          <span class="ex-instruction">Identifica cada parte del nombre según el método MDEC:</span>
+        </div>
+        <div class="mdec-name-display">${mdecPills(mol.parts)}</div>
+        ${mdecTableBlank(mol.parts)}
+      </div>`;
+    }
+    list.insertAdjacentHTML('beforeend', exHtml);
+
+    // ── Screen answer key item ──
+    let akHtml='';
+    if(tipo==='A'){
+      akHtml=`<div class="ak-item">
+        <div class="ak-num">${num}.</div>
+        <div class="ak-body">
+          <div class="ak-label">Tipo A — Nombre IUPAC</div>
+          <div class="ak-svg">${svgHtml}</div>
+          <div class="ak-name">${mol.name}</div>
+        </div>
+      </div>`;
+    } else if(tipo==='B'){
+      akHtml=`<div class="ak-item">
+        <div class="ak-num">${num}.</div>
+        <div class="ak-body">
+          <div class="ak-label">Tipo B — Estructura</div>
+          <div class="ak-name">${mol.name}</div>
+          <div class="ak-svg">${svgHtml}</div>
+        </div>
+      </div>`;
+    } else {
+      akHtml=`<div class="ak-item">
+        <div class="ak-num">${num}.</div>
+        <div class="ak-body">
+          <div class="ak-label">Tipo C — Análisis MDEC</div>
+          <div class="ak-name">${mol.name}</div>
+          ${mdecTableFull(mol.parts)}
+        </div>
+      </div>`;
+    }
+    akList.insertAdjacentHTML('beforeend', akHtml);
+  });
+
+  // ── Print-only answer key ──
+  let printItems='';
+  _generated.forEach((entry, idx)=>{
+    const {mol, tipo}=entry;
+    const num=idx+1;
+    const svgHtml=getSVG(mol.key);
+    let body='';
+    if(tipo==='A'){
+      body=`<div class="print-ak-svg">${svgHtml}</div><div class="print-ak-name">${mol.name}</div>`;
+    } else if(tipo==='B'){
+      body=`<div class="print-ak-name">${mol.name}</div><div class="print-ak-svg">${svgHtml}</div>`;
+    } else {
+      body=`<div class="print-ak-name">${mol.name}</div>${printMdecTableFull(mol.parts)}`;
+    }
+    printItems+=`<div class="print-ak-item">
+      <div class="print-ak-num">${num}.</div>
+      <div class="print-ak-body">${body}</div>
+    </div>`;
+  });
+  printAK.innerHTML=`<div class="print-ak-page">
+    <h2>Clave de respuestas</h2>
+    <div class="print-ak-list">${printItems}</div>
+  </div>`;
+
+  sheet.className='show';
+  document.getElementById('action-bar').className='action-bar show';
+  sheet.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function resetSheet(){
+  document.getElementById('exercise-sheet').className='';
+  document.getElementById('action-bar').className='action-bar';
+  document.getElementById('print-answer-key').innerHTML='';
+  document.getElementById('exercises-list').innerHTML='';
+  document.getElementById('ak-list').innerHTML='';
+  document.getElementById('gen-warning').className='warning';
+  _generated=[];
+  document.getElementById('config-panel').scrollIntoView({behavior:'smooth', block:'start'});
+}
+</script>
+
+<script>
+if('serviceWorker' in navigator)
+  navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});
+</script>
+</body>
+</html>

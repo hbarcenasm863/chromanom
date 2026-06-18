@@ -10,7 +10,9 @@
   "background_color": "#ffffff",
   "theme_color": "#0d4a73",
   "lang": "es",
-  "categories": ["education"],
+  "categories": [
+    "education"
+  ],
   "icons": [
     {
       "src": "icons/icon-192.png",
@@ -42,19 +44,45 @@
       "name": "Principios IUPAC",
       "short_name": "Teoría",
       "url": "/chromanom/teoria.html",
-      "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Grupos Funcionales",
       "short_name": "Grupos",
       "url": "/chromanom/grupos.html",
-      "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Juego de Práctica",
       "short_name": "Juego",
       "url": "/chromanom/juego.html",
-      "icons": [{"src": "icons/icon-192.png", "sizes": "192x192"}]
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Generador de Ejercicios",
+      "short_name": "Generador",
+      "url": "/chromanom/generador.html",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
