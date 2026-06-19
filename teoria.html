@@ -1887,8 +1887,8 @@ function printTables(){
       <td style="padding:5px 9px;font-family:monospace;font-weight:600">${r.neu}</td>
     </tr>`;
   }).join('');
-  const w=window.open('','_blank','width=820,height=680');
-  w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ChromaNom — Tablas de referencia</title>
 <style>
 body{font-family:'Trebuchet MS',Arial,sans-serif;font-size:11.5px;color:#0d2d42;margin:18px 22px;line-height:1.5}
@@ -1899,8 +1899,10 @@ table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:4px}
 th{background:#0d2d42;color:#fff;padding:5px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.07em}
 td{border-bottom:1px solid #e8e8e8}
 .note{font-size:10px;color:#555;background:#fafaf8;border-top:1px solid #ddd;padding:5px 9px;margin-bottom:14px}
-@media print{@page{margin:12mm}body{margin:0}}
+.print-btn{display:block;margin:0 0 16px;padding:10px 22px;background:#0d4a73;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+@media print{.print-btn{display:none}@page{margin:12mm}body{margin:0}}
 </style></head><body>
+<button class="print-btn" onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
 <h1>ChromaNom — Tablas de referencia IUPAC <small>Impreso desde ChromaNom</small></h1>
 
 <h2>Tabla 1 — Prefijos de cadena</h2>
@@ -1932,10 +1934,11 @@ td{border-bottom:1px solid #e8e8e8}
 <table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
 <tbody>${CMPhtml}</tbody></table>
 <div class="note">* Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan.</div>
-
-<script>window.addEventListener('load',()=>{window.print();window.addEventListener('afterprint',()=>window.close());});<\/script>
-</body></html>`);
-  w.document.close();
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const w=window.open(url,'_blank');
+  if(w)setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
 </script>
 
