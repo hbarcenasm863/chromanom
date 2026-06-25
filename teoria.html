@@ -328,6 +328,54 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .vt-btn-t{background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--dim);transition:all .15s}
 .vt-btn-t.active{background:var(--c1);border-color:var(--c1);color:#fff}
 
+/* ── TOPIC MENU ── */
+#topic-menu{margin-top:8px}
+.tm-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+@media(max-width:500px){.tm-grid{grid-template-columns:1fr}}
+.tm-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:20px 18px;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;gap:5px;transition:transform .2s,box-shadow .2s,border-color .2s;box-shadow:var(--sh)}
+.tm-card:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--azul)}
+.tm-icon{font-size:1.9rem;line-height:1}
+.tm-title{font-size:.92rem;font-weight:800;color:var(--tx)}
+.tm-desc{font-size:.74rem;color:var(--dim);line-height:1.45;flex:1}
+.tm-open{font-size:.7rem;font-weight:700;color:var(--azul);align-self:flex-end;margin-top:6px}
+/* ── PANEL ── */
+.topic-panel{display:none}
+.panel-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--brd)}
+.panel-back{background:var(--bg);border:1.5px solid var(--brd);border-radius:var(--rs);padding:7px 14px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--dim);transition:background .15s;font-family:inherit}
+.panel-back:hover{background:var(--brd)}
+.panel-topbar-title{font-size:.88rem;font-weight:800;color:var(--tx)}
+.panel-nav-row{display:flex;justify-content:space-between;gap:10px;margin-top:32px;padding-top:20px;border-top:2px solid var(--brd);flex-wrap:wrap}
+.pnav-btn{background:var(--azul);color:#fff;border:none;border-radius:var(--rs);padding:10px 18px;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .15s;font-family:inherit}
+.pnav-btn:hover{background:var(--azul-d)}
+/* ── COMPARADORES ── */
+.comp-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:22px 22px;margin:20px 0;box-shadow:var(--sh)}
+.comp-head{font-size:.9rem;font-weight:800;color:var(--tx);margin-bottom:2px}
+.comp-sub{font-size:.78rem;color:var(--dim);margin-bottom:14px}
+.comp-mol-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.comp-opt{flex:1;min-width:130px}
+.comp-opt-lbl{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.comp-chain{border:2px solid;border-radius:var(--rs);padding:10px 12px}
+.comp-chain-atoms{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.cc{font-family:'Courier New',monospace;font-size:.78rem;font-weight:700;padding:3px 6px;border-radius:5px}
+.cc.c{color:var(--c2);background:var(--c2b)}
+.cc.x{color:#dc2626;background:#fee2e2}
+.cc-bond{color:var(--dim);font-size:.85rem;font-weight:700;padding:0 1px}
+.comp-chain-info{margin-top:6px;font-size:.68rem;line-height:1.45}
+.comp-vs{align-self:center;font-size:.78rem;font-weight:800;color:var(--dim);padding:0 4px;flex-shrink:0}
+.comp-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.comp-step{display:flex;gap:10px;padding:10px 12px;background:var(--bg);border:1.5px solid var(--brd);border-radius:var(--rs);transition:all .35s}
+.comp-step.locked{opacity:.28;filter:grayscale(.5);pointer-events:none}
+.comp-step.active{border-color:var(--azul);background:var(--azul-l)}
+.comp-step.win{border-color:var(--verde);background:var(--verde-l)}
+.cs-n{font-size:.68rem;font-weight:800;background:var(--azul);color:#fff;border-radius:50%;min-width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.win .cs-n{background:var(--verde)}
+.cs-body{font-size:.78rem;color:var(--tx);line-height:1.6}
+.comp-ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.comp-btn{padding:8px 18px;border:none;border-radius:var(--rs);font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;transition:background .15s}
+.comp-btn:hover{background:var(--azul-d)}
+.comp-btn:disabled{background:var(--verde);cursor:default}
+.comp-btn-sec{background:var(--bg);color:var(--dim);border:1.5px solid var(--brd)}
+.comp-btn-sec:hover{background:var(--brd)}
 </style>
 </head>
 <body>
@@ -356,16 +404,59 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 </header>
 
 <!-- IN-PAGE TABLE OF CONTENTS -->
-<nav class="toc-nav" id="toc-nav">
-  <a class="toc-pill active" href="#esquema" data-sec="esquema">📐 Esquema</a>
-  <a class="toc-pill" href="#ejemplos" data-sec="ejemplos">🔍 Ejemplos</a>
-  <a class="toc-pill" href="#algoritmo" data-sec="algoritmo">📋 Algoritmo</a>
-  <a class="toc-pill" href="#tablas" data-sec="tablas">📊 Tablas</a>
-  <a class="toc-pill" href="#desempate" data-sec="desempate">⚖️ Desempate</a>
-  <a class="toc-pill" href="#comparacion" data-sec="comparacion">📖 Comparación</a>
-  <a class="toc-pill" href="#sustituyentes" data-sec="sustituyentes">🔗 Sustituyentes</a>
-</nav>
+<div id="topic-menu">
+  <div class="tm-grid">
+    <button class="tm-card" onclick="goPanel('panel-esquema')">
+      <span class="tm-icon">📐</span>
+      <span class="tm-title">Esquema MDEC</span>
+      <span class="tm-desc">Las 4 partes de todo nombre orgánico</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-ejemplos')">
+      <span class="tm-icon">🔍</span>
+      <span class="tm-title">Ejemplos paso a paso</span>
+      <span class="tm-desc">6 moléculas resueltas con el sistema de 4 colores</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-algoritmo')">
+      <span class="tm-icon">📋</span>
+      <span class="tm-title">Algoritmo de 5 pasos</span>
+      <span class="tm-desc">Cómo nombrar cualquier molécula orgánica</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-tablas')">
+      <span class="tm-icon">📊</span>
+      <span class="tm-title">Tablas de referencia</span>
+      <span class="tm-desc">Prefijos de cadena, multiplicadores y grupos</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-desempate')">
+      <span class="tm-icon">⚖️</span>
+      <span class="tm-title">Reglas de desempate</span>
+      <span class="tm-desc">Cómo elegir cadena y dirección de numeración</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-comparacion')">
+      <span class="tm-icon">📖</span>
+      <span class="tm-title">Comparación IUPAC</span>
+      <span class="tm-desc">Nomenclatura actual vs nomenclatura pre-2005</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+    <button class="tm-card" onclick="goPanel('panel-sustituyentes')">
+      <span class="tm-icon">🔗</span>
+      <span class="tm-title">Sustituyentes complejos</span>
+      <span class="tm-desc">Nomenclatura IUPAC de sustituyentes ramificados</span>
+      <span class="tm-open">Abrir →</span>
+    </button>
+  </div>
+</div>
 
+<!-- ══ PANEL: ESQUEMA ══ -->
+<div class="topic-panel" id="panel-esquema">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">📐 Esquema MDEC</span>
+</div>
 <div id="esquema"></div>
 <div class="intro-card">
   <h1>Todo nombre orgánico tiene <span>4 partes</span></h1>
@@ -402,6 +493,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div class="panel-nav-row">
+  <span></span>
+  <button class="pnav-btn" onclick="goPanel('panel-ejemplos')">🔍 Ejemplos →</button>
+</div>
+</div><!-- /panel-esquema -->
+
+<!-- ══ PANEL: EJEMPLOS ══ -->
+<div class="topic-panel" id="panel-ejemplos">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">🔍 Ejemplos paso a paso</span>
+</div>
 <div id="ejemplos"></div>
 <div class="slbl">Paso a paso — selecciona un ejemplo</div>
 <div class="ex-nav">
@@ -674,6 +777,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-esquema')">← 📐 Esquema</button>
+  <button class="pnav-btn" onclick="goPanel('panel-algoritmo')">📋 Algoritmo →</button>
+</div>
+</div><!-- /panel-ejemplos -->
+
+<!-- ══ PANEL: ALGORITMO ══ -->
+<div class="topic-panel" id="panel-algoritmo">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">📋 Algoritmo de 5 pasos</span>
+</div>
 <div id="algoritmo"></div>
 <div class="slbl" style="margin-top:8px">El algoritmo de 5 pasos</div>
 <div class="rule-card"><div class="rule-n g">1</div><div class="rule-body g"><strong>Identificar el grupo funcional principal</strong><p>El que aparece más arriba en la tabla de jerarquía (IUPAC) determina el sufijo y la numeración. Si no hay grupo funcional → alcano.</p></div></div>
@@ -682,6 +797,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
 <div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
 
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-ejemplos')">← 🔍 Ejemplos</button>
+  <button class="pnav-btn" onclick="goPanel('panel-tablas')">📊 Tablas →</button>
+</div>
+</div><!-- /panel-algoritmo -->
+
+<!-- ══ PANEL: TABLAS ══ -->
+<div class="topic-panel" id="panel-tablas">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">📊 Tablas de referencia</span>
+</div>
 <div id="tablas"></div>
 <!-- ════════ TABLAS DE REFERENCIA ════════ -->
 <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:32px;margin-bottom:16px">
@@ -808,6 +935,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-algoritmo')">← 📋 Algoritmo</button>
+  <button class="pnav-btn" onclick="goPanel('panel-desempate')">⚖️ Desempate →</button>
+</div>
+</div><!-- /panel-tablas -->
+
+<!-- ══ PANEL: DESEMPATE ══ -->
+<div class="topic-panel" id="panel-desempate">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">⚖️ Reglas de desempate</span>
+</div>
 <div id="desempate"></div>
 <!-- SECCIÓN: REGLAS DE DESEMPATE -->
 <div class="slbl" style="margin-top:32px">Reglas de desempate — ¿cómo elegir cuando hay empate?</div>
@@ -905,41 +1044,168 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
-<!-- ── TABLA EJEMPLO ── -->
-<div class="slbl" style="margin-top:24px;margin-bottom:10px">Ejemplo aplicado — criterio A3 en acción</div>
-
-<div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:28px">
-  <div style="overflow-x:auto">
-    <table style="width:100%;border-collapse:collapse;font-size:.82rem">
-      <thead>
-        <tr style="background:var(--tx);color:#fff">
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Opción</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre propuesto</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Localizadores de sustituyentes</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Resultado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c3t)">✓ Correcta</td>
-          <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>2</strong>-metilpentano</td>
-          <td style="padding:9px 14px">{ 2, 3 }</td>
-          <td style="padding:9px 14px;color:var(--c3t);font-size:.78rem">El 2 es menor que el 4 → este set gana</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 14px;font-weight:700;color:var(--errt)">✗ Incorrecta</td>
-          <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>4</strong>-metilpentano</td>
-          <td style="padding:9px 14px">{ 3, 4 }</td>
-          <td style="padding:9px 14px;color:var(--errt);font-size:.78rem">El 4 en segunda posición es mayor → descartada</td>
-        </tr>
-      </tbody>
-    </table>
+<!-- ── COMPARADOR A ── -->
+<div class="comp-card">
+  <div class="comp-head">🔬 Comparador — Parte A (criterios A1 → A3)</div>
+  <div class="comp-sub">Molécula: <strong>3-etil-2-metilpentano</strong> — ¿cuál es la cadena principal?</div>
+  <div class="comp-mol-row">
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:var(--c2t)">Cadena α — empieza desde la izquierda</div>
+      <div class="comp-chain" style="border-color:var(--c2);background:var(--c2b)">
+        <div class="comp-chain-atoms">
+          <span class="cc c">C1</span><span class="cc-bond">—</span><span class="cc c">C2</span><span class="cc-bond">—</span><span class="cc c">C3</span><span class="cc-bond">—</span><span class="cc c">C4</span><span class="cc-bond">—</span><span class="cc c">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:var(--c2t)">5 carbonos · sustituyentes en <strong>{2, 3}</strong></div>
+      </div>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:#dc2626">Cadena β — empieza desde la derecha</div>
+      <div class="comp-chain" style="border-color:#fca5a5;background:#fef2f2">
+        <div class="comp-chain-atoms">
+          <span class="cc x">C1</span><span class="cc-bond">—</span><span class="cc x">C2</span><span class="cc-bond">—</span><span class="cc x">C3</span><span class="cc-bond">—</span><span class="cc x">C4</span><span class="cc-bond">—</span><span class="cc x">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:#dc2626">5 carbonos · sustituyentes en <strong>{3, 4}</strong></div>
+      </div>
+    </div>
   </div>
-  <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    Ambas opciones recogen la misma cadena de 5 C con los mismos dos sustituyentes (etilo en C3, metilo). El desempate lo resuelve el criterio A3: se comparan los sets {2,3} y {3,4} posición a posición — en la primera posición 2 &lt; 3, por lo que se elige <strong>3-etil-2-metilpentano</strong>.
+  <div class="comp-steps" id="cA-steps">
+    <div class="comp-step" id="cA-s0">
+      <div class="cs-n">A1</div>
+      <div class="cs-body">Ambas cadenas tienen <strong>5 carbonos</strong>. El criterio A1 (mayor longitud) no rompe el empate — pasa al siguiente.</div>
+    </div>
+    <div class="comp-step locked" id="cA-s1">
+      <div class="cs-n">A2</div>
+      <div class="cs-body">Ambas tienen <strong>2 sustituyentes</strong> (un metilo y un etilo). El criterio A2 (mayor número de ramas) tampoco rompe el empate.</div>
+    </div>
+    <div class="comp-step locked" id="cA-s2">
+      <div class="cs-n">A3</div>
+      <div class="cs-body">Se comparan los localizadores posición a posición:<br>
+        Cadena α: { <strong style="color:var(--c2t)">2</strong>, 3 } &nbsp;|&nbsp; Cadena β: { <strong style="color:#dc2626">3</strong>, 4 }<br>
+        Primera posición: <strong>2 &lt; 3</strong> → la cadena α gana.
+      </div>
+    </div>
+    <div class="comp-step locked win" id="cA-s3">
+      <div class="cs-n">✓</div>
+      <div class="cs-body"><strong>Nombre correcto: 3-etil-2-metilpentano</strong><br>
+        <span style="color:var(--dim);font-size:.75rem">Localizadores {2,3} &lt; {3,4} — el empate se rompe en A3, primera posición.</span>
+      </div>
+    </div>
+  </div>
+  <div class="comp-ctrl">
+    <button class="comp-btn" id="cA-btn" onclick="stepCA()">▶ Ver paso a paso</button>
+    <button class="comp-btn comp-btn-sec" onclick="resetCA()">↺ Reiniciar</button>
   </div>
 </div>
 
+<!-- ── COMPARADOR B ── -->
+<div class="comp-card">
+  <div class="comp-head">🔬 Comparador — Parte B (criterios B1 y B3)</div>
+  <div class="comp-sub">¿Desde qué extremo se numera la cadena?</div>
+
+  <div class="comp-sub" style="margin-top:8px;font-weight:700;color:var(--tx)">Caso B1 — hay grupo funcional: <em>4-metilpentan-2-ol</em></div>
+  <div class="comp-mol-row">
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:var(--c2t)">Izquierda → derecha</div>
+      <div class="comp-chain" style="border-color:var(--c2);background:var(--c2b)">
+        <div class="comp-chain-atoms">
+          <span class="cc c">C1</span><span class="cc-bond">—</span><span class="cc c">C2</span><span class="cc-bond">—</span><span class="cc c">C3</span><span class="cc-bond">—</span><span class="cc c">C4</span><span class="cc-bond">—</span><span class="cc c">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:var(--c2t)">−OH en <strong>C2</strong> · metilo en C4</div>
+      </div>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:#dc2626">Derecha → izquierda</div>
+      <div class="comp-chain" style="border-color:#fca5a5;background:#fef2f2">
+        <div class="comp-chain-atoms">
+          <span class="cc x">C1</span><span class="cc-bond">—</span><span class="cc x">C2</span><span class="cc-bond">—</span><span class="cc x">C3</span><span class="cc-bond">—</span><span class="cc x">C4</span><span class="cc-bond">—</span><span class="cc x">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:#dc2626">−OH en <strong>C4</strong> · metilo en C2</div>
+      </div>
+    </div>
+  </div>
+  <div class="comp-steps" id="cB1-steps">
+    <div class="comp-step" id="cB1-s0">
+      <div class="cs-n">B1</div>
+      <div class="cs-body">Criterio B1 — Menor localizador al grupo funcional principal (−OH):<br>
+        Izq→der: −OH en <strong style="color:var(--c2t)">C2</strong> &nbsp;|&nbsp; Der→izq: −OH en <strong style="color:#dc2626">C4</strong><br>
+        <strong>2 &lt; 4</strong> → numerar izquierda → derecha.
+      </div>
+    </div>
+    <div class="comp-step locked win" id="cB1-s1">
+      <div class="cs-n">✓</div>
+      <div class="cs-body"><strong>Nombre correcto: 4-metilpentan-2-ol</strong><br>
+        <span style="color:var(--dim);font-size:.75rem">B1 resuelve el empate: el −OH siempre recibe el localizador más bajo posible.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-sub" style="margin-top:18px;font-weight:700;color:var(--tx)">Caso B3 — sin grupo funcional ni insaturaciones: <em>2-metilpentano</em></div>
+  <div class="comp-mol-row">
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:var(--c2t)">Izquierda → derecha</div>
+      <div class="comp-chain" style="border-color:var(--c2);background:var(--c2b)">
+        <div class="comp-chain-atoms">
+          <span class="cc c">C1</span><span class="cc-bond">—</span><span class="cc c">C2</span><span class="cc-bond">—</span><span class="cc c">C3</span><span class="cc-bond">—</span><span class="cc c">C4</span><span class="cc-bond">—</span><span class="cc c">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:var(--c2t)">metilo en <strong>C2</strong></div>
+      </div>
+    </div>
+    <div class="comp-vs">VS</div>
+    <div class="comp-opt">
+      <div class="comp-opt-lbl" style="color:#dc2626">Derecha → izquierda</div>
+      <div class="comp-chain" style="border-color:#fca5a5;background:#fef2f2">
+        <div class="comp-chain-atoms">
+          <span class="cc x">C1</span><span class="cc-bond">—</span><span class="cc x">C2</span><span class="cc-bond">—</span><span class="cc x">C3</span><span class="cc-bond">—</span><span class="cc x">C4</span><span class="cc-bond">—</span><span class="cc x">C5</span>
+        </div>
+        <div class="comp-chain-info" style="color:#dc2626">metilo en <strong>C4</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="comp-steps" id="cB3-steps">
+    <div class="comp-step" id="cB3-s0">
+      <div class="cs-n">B1</div>
+      <div class="cs-body">No hay grupo funcional → B1 no aplica. Pasa al siguiente.</div>
+    </div>
+    <div class="comp-step locked" id="cB3-s1">
+      <div class="cs-n">B2</div>
+      <div class="cs-body">No hay insaturaciones → B2 no aplica. Pasa al siguiente.</div>
+    </div>
+    <div class="comp-step locked" id="cB3-s2">
+      <div class="cs-n">B3</div>
+      <div class="cs-body">Criterio B3 — Menor localizador al conjunto de sustituyentes:<br>
+        Izq→der: metilo en <strong style="color:var(--c2t)">C2</strong> → {2} &nbsp;|&nbsp; Der→izq: metilo en <strong style="color:#dc2626">C4</strong> → {4}<br>
+        <strong>{2} &lt; {4}</strong> → numerar izquierda → derecha.
+      </div>
+    </div>
+    <div class="comp-step locked win" id="cB3-s3">
+      <div class="cs-n">✓</div>
+      <div class="cs-body"><strong>Nombre correcto: 2-metilpentano</strong><br>
+        <span style="color:var(--dim);font-size:.75rem">Sin grupo funcional ni insaturaciones, B3 decide: el conjunto de sustituyentes más bajo gana.</span>
+      </div>
+    </div>
+  </div>
+  <div class="comp-ctrl">
+    <button class="comp-btn" id="cB1-btn" onclick="stepCB1()">▶ Caso B1</button>
+    <button class="comp-btn comp-btn-sec" id="cB1-reset" onclick="resetCB1()" style="display:none">↺</button>
+    <button class="comp-btn" id="cB3-btn" onclick="stepCB3()" style="margin-left:8px">▶ Caso B3</button>
+    <button class="comp-btn comp-btn-sec" id="cB3-reset" onclick="resetCB3()" style="display:none">↺</button>
+  </div>
+</div>
+
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-tablas')">← 📊 Tablas</button>
+  <button class="pnav-btn" onclick="goPanel('panel-comparacion')">📖 Comparación →</button>
+</div>
+</div><!-- /panel-desempate -->
+
+<!-- ══ PANEL: COMPARACION ══ -->
+<div class="topic-panel" id="panel-comparacion">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">📖 Comparación IUPAC</span>
+</div>
 <div id="comparacion"></div>
 <!-- SECCIÓN: COMPARACIÓN DE NOMENCLATURAS -->
 <div class="slbl" style="margin-top:32px">Comparación de nomenclaturas — IUPAC actual vs. nomenclatura funcional pre-2005</div>
@@ -1013,6 +1279,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
 </div>
 
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-desempate')">← ⚖️ Desempate</button>
+  <button class="pnav-btn" onclick="goPanel('panel-sustituyentes')">🔗 Sustituyentes →</button>
+</div>
+</div><!-- /panel-comparacion -->
+
+<!-- ══ PANEL: SUSTITUYENTES ══ -->
+<div class="topic-panel" id="panel-sustituyentes">
+<div class="panel-topbar">
+  <button class="panel-back" onclick="showMenu()">← Temas</button>
+  <span class="panel-topbar-title">🔗 Sustituyentes complejos</span>
+</div>
 <div id="sustituyentes"></div>
 <!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
 <div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
@@ -1193,6 +1471,12 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     Regla mnemotécnica: los prefijos <strong>multiplicadores</strong> (di-, tri-…) y los prefijos <strong>estereodescriptores</strong> (sec-, tert-) no cuentan. El prefijo <strong>iso-</strong> es parte del nombre, no un descriptor, por eso sí cuenta.
   </div>
 </div>
+
+<div class="panel-nav-row">
+  <button class="pnav-btn" onclick="goPanel('panel-comparacion')">← 📖 Comparación</button>
+  <span></span>
+</div>
+</div><!-- /panel-sustituyentes -->
 
 <!-- FOOTER COPYRIGHT -->
 <div style="text-align:center;padding:16px;font-size:.72rem;color:rgba(255,255,255,.3);background:var(--tx,#1a1714);margin-top:auto">
@@ -1887,8 +2171,8 @@ function printTables(){
       <td style="padding:5px 9px;font-family:monospace;font-weight:600">${r.neu}</td>
     </tr>`;
   }).join('');
-  const w=window.open('','_blank','width=820,height=680');
-  w.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+  const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ChromaNom — Tablas de referencia</title>
 <style>
 body{font-family:'Trebuchet MS',Arial,sans-serif;font-size:11.5px;color:#0d2d42;margin:18px 22px;line-height:1.5}
@@ -1899,8 +2183,10 @@ table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:4px}
 th{background:#0d2d42;color:#fff;padding:5px 9px;text-align:left;font-size:9px;text-transform:uppercase;letter-spacing:.07em}
 td{border-bottom:1px solid #e8e8e8}
 .note{font-size:10px;color:#555;background:#fafaf8;border-top:1px solid #ddd;padding:5px 9px;margin-bottom:14px}
-@media print{@page{margin:12mm}body{margin:0}}
+.print-btn{display:block;margin:0 0 16px;padding:10px 22px;background:#0d4a73;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+@media print{.print-btn{display:none}@page{margin:12mm}body{margin:0}}
 </style></head><body>
+<button class="print-btn" onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
 <h1>ChromaNom — Tablas de referencia IUPAC <small>Impreso desde ChromaNom</small></h1>
 
 <h2>Tabla 1 — Prefijos de cadena</h2>
@@ -1932,10 +2218,11 @@ td{border-bottom:1px solid #e8e8e8}
 <table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
 <tbody>${CMPhtml}</tbody></table>
 <div class="note">* Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan.</div>
-
-<script>window.addEventListener('load',()=>{window.print();window.addEventListener('afterprint',()=>window.close());});<\/script>
-</body></html>`);
-  w.document.close();
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const w=window.open(url,'_blank');
+  if(w)setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
 </script>
 
@@ -1974,5 +2261,88 @@ td{border-bottom:1px solid #e8e8e8}
 </div>
 <script src="pwa-install.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});</script>
+<script>
+// ── PANEL NAVIGATION ──
+const PANELS=['panel-esquema','panel-ejemplos','panel-algoritmo','panel-tablas','panel-desempate','panel-comparacion','panel-sustituyentes'];
+function showMenu(){
+  document.getElementById('topic-menu').style.display='';
+  PANELS.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goPanel(id){
+  document.getElementById('topic-menu').style.display='none';
+  PANELS.forEach(pid=>{const el=document.getElementById(pid);if(el)el.style.display='none';});
+  const panel=document.getElementById(id);
+  if(panel){panel.style.display='';window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+// ── COMPARADOR A (criterios A1→A3) ──
+let cAstep=-1;
+function stepCA(){
+  if(cAstep>=3)return;
+  cAstep++;
+  for(let i=0;i<=3;i++){
+    const el=document.getElementById('cA-s'+i);
+    if(!el)continue;
+    if(i<cAstep)el.className='comp-step active';
+    else if(i===cAstep)el.className='comp-step active'+(i===3?' win':'');
+    else el.className='comp-step locked';
+  }
+  if(cAstep>=3){const b=document.getElementById('cA-btn');b.disabled=true;b.textContent='✓ Completado';}
+}
+function resetCA(){
+  cAstep=-1;
+  for(let i=0;i<=3;i++){const el=document.getElementById('cA-s'+i);if(el)el.className='comp-step'+(i>0?' locked':'');}
+  const b=document.getElementById('cA-btn');b.disabled=false;b.textContent='▶ Ver paso a paso';
+}
+
+// ── COMPARADOR B1 ──
+let cB1step=-1;
+function stepCB1(){
+  if(cB1step>=1)return;
+  cB1step++;
+  for(let i=0;i<=1;i++){
+    const el=document.getElementById('cB1-s'+i);
+    if(!el)continue;
+    if(i<cB1step)el.className='comp-step active';
+    else if(i===cB1step)el.className='comp-step active'+(i===1?' win':'');
+    else el.className='comp-step locked';
+  }
+  if(cB1step>=1){
+    const b=document.getElementById('cB1-btn');b.disabled=true;b.textContent='✓ Completado';
+    document.getElementById('cB1-reset').style.display='';
+  }
+}
+function resetCB1(){
+  cB1step=-1;
+  for(let i=0;i<=1;i++){const el=document.getElementById('cB1-s'+i);if(el)el.className='comp-step'+(i>0?' locked':'');}
+  const b=document.getElementById('cB1-btn');b.disabled=false;b.textContent='▶ Caso B1';
+  document.getElementById('cB1-reset').style.display='none';
+}
+
+// ── COMPARADOR B3 ──
+let cB3step=-1;
+function stepCB3(){
+  if(cB3step>=3)return;
+  cB3step++;
+  for(let i=0;i<=3;i++){
+    const el=document.getElementById('cB3-s'+i);
+    if(!el)continue;
+    if(i<cB3step)el.className='comp-step active';
+    else if(i===cB3step)el.className='comp-step active'+(i===3?' win':'');
+    else el.className='comp-step locked';
+  }
+  if(cB3step>=3){
+    const b=document.getElementById('cB3-btn');b.disabled=true;b.textContent='✓ Completado';
+    document.getElementById('cB3-reset').style.display='';
+  }
+}
+function resetCB3(){
+  cB3step=-1;
+  for(let i=0;i<=3;i++){const el=document.getElementById('cB3-s'+i);if(el)el.className='comp-step'+(i>0?' locked':'');}
+  const b=document.getElementById('cB3-btn');b.disabled=false;b.textContent='▶ Caso B3';
+  document.getElementById('cB3-reset').style.display='none';
+}
+</script>
 </body>
 </html>

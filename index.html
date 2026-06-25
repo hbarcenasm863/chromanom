@@ -204,6 +204,7 @@ header{
 .mod-card.azul{background:linear-gradient(135deg,var(--azul-d),var(--azul));border-color:var(--azul)}
 .mod-card.verde{background:linear-gradient(135deg,var(--verde-d),var(--verde));border-color:var(--verde)}
 .mod-card.naranja{background:linear-gradient(135deg,#c45c0c,var(--naranja));border-color:var(--naranja);grid-column:1/-1}
+.mod-card.morado{background:linear-gradient(135deg,#5b21b6,#7c3aed);border-color:#7c3aed;grid-column:1/-1}
 .mod-top{padding:28px 28px 20px;flex:1;color:#fff}
 .mod-icon{font-size:2.4rem;margin-bottom:12px;display:block}
 .mod-title{font-size:1.2rem;font-weight:900;margin-bottom:6px;line-height:1.2}
@@ -409,7 +410,7 @@ footer span{color:var(--naranja);font-weight:700}
   <div class="hero-stats">
     <div class="hs"><div class="hs-n">400</div><div class="hs-l">Preguntas</div></div>
     <div class="hs"><div class="hs-n">17</div><div class="hs-l">Grupos</div></div>
-    <div class="hs"><div class="hs-n">108</div><div class="hs-l">Moléculas</div></div>
+    <div class="hs"><div class="hs-n">259</div><div class="hs-l">Moléculas</div></div>
   </div>
 </div>
 
@@ -530,6 +531,24 @@ footer span{color:var(--naranja);font-weight:700}
         <span class="mc">5 formatos</span>
         <span class="mc">60 s / pregunta</span>
         <span class="mc">Constructor molecular</span>
+      </div>
+      <span class="mod-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="mod-card morado" href="generador.html">
+    <div class="mod-top">
+      <span class="mod-icon">📝</span>
+      <div class="mod-paso">🧑‍🏫 Herramienta para docentes</div>
+      <div class="mod-title">Generador de Ejercicios</div>
+      <div class="mod-desc">Genera hojas de trabajo personalizadas con 259 moléculas: elige grupos funcionales, tipo de ejercicio (nombrar estructura / trazar a partir del nombre / análisis MDEC) y número de preguntas. Imprimible directamente como PDF.</div>
+    </div>
+    <div class="mod-bottom">
+      <div class="mod-chips">
+        <span class="mc">259 moléculas</span>
+        <span class="mc">3 tipos de ejercicio</span>
+        <span class="mc">Imprimible PDF</span>
+        <span class="mc">13 grupos funcionales</span>
       </div>
       <span class="mod-arrow">→</span>
     </div>
@@ -680,7 +699,7 @@ const TOUR=[
         <div class="tour-feat"><strong>🩷 Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
       </div>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>🧪 Constructor</strong>Dibuja la molécula tú mismo en el lienzo con átomos y enlaces. 108 moléculas disponibles.</div>
+        <div class="tour-feat"><strong>🧪 Constructor</strong>Dibuja la molécula tú mismo en el lienzo con átomos y enlaces. 74 moléculas disponibles.</div>
         <div class="tour-feat"><strong>3 modos de juego</strong>Por sección, por grupo funcional o juego completo mezclado. 20 preguntas por sesión.</div>
       </div>
       <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
