@@ -2265,7 +2265,7 @@ td{border-bottom:1px solid #e8e8e8}
 // ── PANEL NAVIGATION ──
 const PANELS=['panel-esquema','panel-ejemplos','panel-algoritmo','panel-tablas','panel-desempate','panel-comparacion','panel-sustituyentes'];
 function showMenu(){
-  document.getElementById('topic-menu').style.display='';
+  document.getElementById('topic-menu').style.display='block';
   PANELS.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -2273,7 +2273,7 @@ function goPanel(id){
   document.getElementById('topic-menu').style.display='none';
   PANELS.forEach(pid=>{const el=document.getElementById(pid);if(el)el.style.display='none';});
   const panel=document.getElementById(id);
-  if(panel){panel.style.display='';window.scrollTo({top:0,behavior:'smooth'});}
+  if(panel){panel.style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
 }
 
 // ── COMPARADOR A (criterios A1→A3) ──
