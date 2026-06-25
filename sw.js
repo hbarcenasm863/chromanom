@@ -1,7 +1,7 @@
 // ChromaNom Service Worker — v6.0
 // Cache-first para uso offline completo, incluyendo Google Fonts
 
-const CACHE = 'chromanom-v9';
+const CACHE = 'chromanom-v11';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
