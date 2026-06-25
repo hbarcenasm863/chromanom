@@ -797,6 +797,62 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
 <div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
 
+<!-- ── STEPPER INLINE DEL ALGORITMO ── -->
+<div class="slbl" style="margin-top:24px">Aplica los 5 pasos — molécula de ejemplo</div>
+<div class="comp-card" id="alg-stepper">
+  <div class="comp-head">🧪 <strong>3-etil-2-metilpentan-1-ol</strong> — paso a paso</div>
+  <div class="comp-sub">Pulsa "Siguiente paso" para ver cómo se aplica cada paso del algoritmo a esta molécula.</div>
+
+  <!-- nombre que se va construyendo -->
+  <div id="alg-name-build" style="display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;background:#f0f7ff;border:1.5px solid var(--brd);border-radius:var(--rs);padding:12px 16px;margin-bottom:14px;min-height:48px">
+    <span style="font-size:.72rem;color:var(--dim);font-style:italic">El nombre se construye aquí…</span>
+  </div>
+
+  <div class="comp-steps" id="alg-steps">
+    <div class="comp-step" id="alg-s0">
+      <div class="cs-n" style="background:var(--c4)">1</div>
+      <div class="cs-body">
+        <strong>Grupo funcional → sufijo <span style="color:var(--c4t)">-ol</span></strong><br>
+        El −OH (alcohol) está más arriba en la jerarquía IUPAC que cualquier otro grupo aquí. Determina el sufijo: <strong style="color:var(--c4t)">…-ol</strong>.
+      </div>
+    </div>
+    <div class="comp-step locked" id="alg-s1">
+      <div class="cs-n" style="background:var(--c2)">2</div>
+      <div class="cs-body">
+        <strong>Cadena principal → <span style="color:var(--c2t)">pent-</span></strong><br>
+        La cadena más larga que contiene el −OH y pasa por las dos ramas tiene <strong>5 carbonos</strong> → prefijo <strong style="color:var(--c2t)">pent-</strong>.
+      </div>
+    </div>
+    <div class="comp-step locked" id="alg-s2">
+      <div class="cs-n" style="background:var(--c4)">3</div>
+      <div class="cs-body">
+        <strong>Numeración → −OH en <span style="color:var(--c4t)">C1</span></strong><br>
+        Numerando desde el extremo con −OH: C1(−OH)−C2−C3−C4−C5. Menor localizador al grupo funcional → <strong style="color:var(--c4t)">pentan-1-ol</strong>.
+      </div>
+    </div>
+    <div class="comp-step locked" id="alg-s3">
+      <div class="cs-n" style="background:var(--c1)">4</div>
+      <div class="cs-body">
+        <strong>Ramificaciones → <span style="color:var(--c1t)">3-etil-2-metil</span></strong><br>
+        Etilo en C3 y metilo en C2. Orden alfabético: <strong>e</strong>til antes que <strong>m</strong>etil → <strong style="color:var(--c1t)">3-etil-2-metil</strong>.
+      </div>
+    </div>
+    <div class="comp-step locked win" id="alg-s4">
+      <div class="cs-n">5</div>
+      <div class="cs-body">
+        <strong>Nombre completo: <span style="color:var(--c2t)">3-etil-2-metilpentan-1-ol</span></strong><br>
+        [Ramas α] + [cadena] + [sufijo con localizador] → <strong>3-etil-2-metil · pent · an · -1-ol</strong> → todo junto: <strong style="color:var(--c2t)">3-etil-2-metilpentan-1-ol</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-ctrl">
+    <button class="comp-btn" id="alg-btn" onclick="stepAlg()">▶ Siguiente paso</button>
+    <button class="comp-btn comp-btn-sec" onclick="resetAlg()">↺ Reiniciar</button>
+    <button class="comp-btn" style="background:var(--c4);margin-left:8px" onclick="pmOpen('algoritmo')">🎯 Practicar con preguntas</button>
+  </div>
+</div>
+
 <div class="panel-nav-row">
   <button class="pnav-btn" onclick="goPanel('panel-ejemplos')">← 🔍 Ejemplos</button>
   <button class="pnav-btn" onclick="goPanel('panel-tablas')">📊 Tablas →</button>
@@ -2274,6 +2330,43 @@ function goPanel(id){
   PANELS.forEach(pid=>{const el=document.getElementById(pid);if(el)el.style.display='none';});
   const panel=document.getElementById(id);
   if(panel){panel.style.display='block';window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+// ── STEPPER ALGORITMO ──
+const ALG_NAME=[
+  {partes:[]},
+  {partes:[{t:'…-ol',cls:'g',l:'Grupo func.'}]},
+  {partes:[{t:'pent',cls:'c',l:'5C'},{t:'…-ol',cls:'g',l:'Grupo func.'}]},
+  {partes:[{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'i',l:'Saturado'},{t:'-1-ol',cls:'g',l:'OH en C1'}]},
+  {partes:[{t:'3-etil-2-metil',cls:'r',l:'Ramas (alfab.)'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'i',l:'Saturado'},{t:'-1-ol',cls:'g',l:'OH en C1'}]},
+  {partes:[{t:'3-etil-2-metil',cls:'r',l:'Ramas'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'i',l:'Saturado'},{t:'-1-ol',cls:'g',l:'OH en C1'}]},
+];
+const CLS_COLOR={r:'color:var(--c1);background:var(--c1b)',c:'color:var(--c2);background:var(--c2b)',i:'color:var(--c3);background:var(--c3b)',g:'color:var(--c4);background:var(--c4b)'};
+let algStep=-1;
+function renderAlgName(idx){
+  const nb=document.getElementById('alg-name-build');
+  const partes=ALG_NAME[idx]?ALG_NAME[idx].partes:[];
+  if(!partes.length){nb.innerHTML='<span style="font-size:.72rem;color:var(--dim);font-style:italic">El nombre se construye aquí…</span>';return;}
+  nb.innerHTML=partes.map(p=>`<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;padding:3px 7px;border-radius:6px;${CLS_COLOR[p.cls]}">${p.t}</span><span style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;${p.cls==='r'?'color:var(--c1t)':p.cls==='c'?'color:var(--c2t)':p.cls==='i'?'color:var(--c3t)':'color:var(--c4t)'}">${p.l}</span></div>`).join('');
+}
+function stepAlg(){
+  if(algStep>=4)return;
+  algStep++;
+  for(let i=0;i<=4;i++){
+    const el=document.getElementById('alg-s'+i);
+    if(!el)continue;
+    if(i<algStep)el.className='comp-step active';
+    else if(i===algStep)el.className='comp-step active'+(i===4?' win':'');
+    else el.className='comp-step locked';
+  }
+  renderAlgName(algStep+1);
+  if(algStep>=4){const b=document.getElementById('alg-btn');b.disabled=true;b.textContent='✓ Nombre completo';}
+}
+function resetAlg(){
+  algStep=-1;
+  for(let i=0;i<=4;i++){const el=document.getElementById('alg-s'+i);if(el)el.className='comp-step'+(i>0?' locked':'');}
+  renderAlgName(0);
+  const b=document.getElementById('alg-btn');b.disabled=false;b.textContent='▶ Siguiente paso';
 }
 
 // ── COMPARADOR A (criterios A1→A3) ──
