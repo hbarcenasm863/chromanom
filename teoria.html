@@ -379,6 +379,27 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .comp-btn:disabled{background:var(--verde);cursor:default}
 .comp-btn-sec{background:var(--bg);color:var(--dim);border:1.5px solid var(--brd)}
 .comp-btn-sec:hover{background:var(--brd)}
+/* ── RULE MODAL ── */
+.rmod-overlay{position:fixed;inset:0;background:rgba(13,45,66,.72);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;box-sizing:border-box}
+.rmod-box{background:#fff;border-radius:18px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 20px 60px rgba(13,45,66,.35);display:flex;flex-direction:column;max-height:calc(100vh - 32px)}
+.rmod-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 12px;border-bottom:2px solid var(--brd);flex-shrink:0}
+.rmod-tag{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:3px 9px;border-radius:6px}
+.rmod-tag.c{background:var(--c2b);color:var(--c2t)}
+.rmod-tag.r{background:var(--errb);color:var(--errt)}
+.rmod-ttl{font-size:.88rem;font-weight:800;color:var(--tx);margin-left:8px}
+.rmod-x{background:none;border:none;font-size:1.4rem;color:var(--dim);cursor:pointer;padding:2px 6px;line-height:1;font-family:inherit}
+.rmod-svg-area{padding:14px 14px 4px;background:var(--bg);flex-shrink:0}
+.rmod-step-txt{text-align:center;font-size:.7rem;font-weight:700;color:var(--dim);padding:6px 0 8px;letter-spacing:.04em;flex-shrink:0}
+.rmod-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;gap:8px;border-top:2px solid var(--brd);flex-shrink:0}
+.rmod-btn{background:var(--azul);color:#fff;border:none;border-radius:var(--rs);padding:10px 16px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
+.rmod-btn:hover{background:var(--azul-d)}
+.rmod-btn:disabled{background:var(--brd);color:var(--dim);cursor:default}
+.rmod-snd{background:none;border:2px solid var(--brd);border-radius:var(--rs);padding:9px 13px;font-size:.88rem;cursor:pointer;transition:background .15s;line-height:1}
+.rmod-snd:hover{background:var(--brd)}
+/* Rule cards become interactive */
+.rule-card{cursor:pointer;transition:box-shadow .15s,transform .15s}
+.rule-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.rc-hint{font-size:.67rem;font-weight:700;color:var(--azul);margin-top:5px;letter-spacing:.03em}
 </style>
 </head>
 <body>
@@ -967,299 +988,91 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <!-- ── PARTE A: CADENA PRINCIPAL ── -->
 <div class="slbl" style="margin-bottom:10px">Parte A — Desempate para elegir la cadena principal</div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('A1')">
   <div class="rule-n c">A1</div>
   <div class="rule-body c">
     <strong>Mayor número de carbonos en la cadena</strong>
-    <p>La cadena más larga gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2. (En la práctica, si existe una única cadena más larga, el desempate termina aquí.)</p>
+    <p>La cadena más larga gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('A2')">
   <div class="rule-n c">A2</div>
   <div class="rule-body c">
     <strong>Mayor número de ramificaciones (sustituyentes)</strong>
-    <p>Entre dos cadenas de igual longitud, gana la que tiene <em>más</em> sustituyentes unidos a ella.
-    Ejemplo: si la cadena α tiene 3 ramas y la cadena β tiene 2 ramas, se elige la cadena α.</p>
+    <p>Entre dos cadenas de igual longitud, gana la que tiene más sustituyentes unidos a ella.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('A3')">
   <div class="rule-n c">A3</div>
   <div class="rule-body c">
     <strong>Menor conjunto de localizadores de ramificaciones</strong>
-    <p>Si el número de ramificaciones es igual, se comparan los conjuntos de localizadores como sets ordenados de menor a mayor.
-    Gana el conjunto con el valor más bajo en la primera posición en que difieran.
-    Ejemplo: {2, 3} &lt; {2, 5}, por lo que gana la cadena con localizadores {2, 3}.</p>
+    <p>Se comparan los conjuntos de localizadores ordenados de menor a mayor. Gana el conjunto con el valor más bajo en la primera posición discrepante. Ej.: {2,3} &lt; {3,4}.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('A4')">
   <div class="rule-n c">A4</div>
   <div class="rule-body c">
     <strong>Menor localizador en el primer punto de diferencia</strong>
-    <p>Si los conjuntos son idénticos pero los sustituyentes difieren en posición individualmente, se comparan posición a posición.
-    Ejemplo: un sustituyente en C3 frente a C4 → gana C3 por ser menor localizador.</p>
+    <p>Si la primera posición de los conjuntos empata, se pasa a la segunda, luego a la tercera, hasta encontrar la diferencia.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('A5')">
   <div class="rule-n c">A5</div>
   <div class="rule-body c">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
-    <p>Si todo lo anterior sigue empatado, se considera el orden alfabético de los nombres de los sustituyentes (sin tener en cuenta los prefijos multiplicativos di-, tri-, etc.).
-    El primer sustituyente alfabético debe tener el menor localizador posible.</p>
+    <p>Si todo lo anterior empata, el sustituyente nombrado primero alfabéticamente debe tener el menor localizador posible.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
 <!-- ── PARTE B: DIRECCIÓN DE NUMERACIÓN ── -->
 <div class="slbl" style="margin-top:24px;margin-bottom:10px">Parte B — Desempate para elegir la dirección de numeración</div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('B1')">
   <div class="rule-n r">B1</div>
   <div class="rule-body r">
     <strong>Menor localizador al grupo funcional principal</strong>
-    <p>El grupo funcional de mayor prioridad (COOH, CHO, C=O, OH, NH₂…) debe recibir el menor localizador posible. Los ácidos carboxílicos y aldehídos terminales siempre son C1; esto resuelve el desempate automáticamente en esos casos.</p>
+    <p>El grupo funcional de mayor prioridad (−OH, C=O, −COOH…) debe recibir el menor localizador posible.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('B2')">
   <div class="rule-n r">B2</div>
   <div class="rule-body r">
     <strong>Menor localizador al conjunto de insaturaciones</strong>
-    <p>Si el grupo funcional no rompe el empate, se asigna el menor conjunto de localizadores a los dobles y triples enlaces (en conjunto, tratados como un solo set). Gana la dirección que produce el set más bajo comparado posición a posición.</p>
+    <p>Si el grupo funcional no rompe el empate, se asigna el menor localizador al conjunto de dobles y triples enlaces.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('B3')">
   <div class="rule-n r">B3</div>
   <div class="rule-body r">
     <strong>Menor localizador al conjunto de sustituyentes</strong>
-    <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de todas las ramificaciones como un conjunto ordenado. Gana la dirección que produce el conjunto con el menor valor en la primera posición discrepante.</p>
+    <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de las ramificaciones. Gana la dirección con el menor valor en la primera posición discrepante.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<div class="rule-card">
+<div class="rule-card" onclick="openRuleModal('B4')">
   <div class="rule-n r">B4</div>
   <div class="rule-body r">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
-    <p>Si aún hay empate, el sustituyente citado primero alfabéticamente debe tener el menor localizador posible. Este criterio rara vez se necesita en cadenas simples, pero aparece en moléculas con muchos sustituyentes distintos.</p>
+    <p>Si aún hay empate, el sustituyente citado primero alfabéticamente debe tener el menor localizador posible.</p>
+    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
 
-<!-- ── COMPARADOR A ── -->
-<div class="comp-card">
-  <div class="comp-head">🔬 Comparador — Parte A (criterios A1 → A3)</div>
-  <div class="comp-sub">Molécula: <strong>3-etil-2-metilpentano</strong> — ¿cuál es la cadena principal?</div>
-
-  <!-- SVG molecular diagram with dual numbering -->
-  <svg id="molCA" viewBox="0 0 310 125" width="100%" style="display:block;max-height:160px;background:#fafafa;border:1.5px solid #d0e6f5;border-radius:10px;margin-bottom:6px">
-    <!-- α numbers (top, green) -->
-    <text id="aN1" x="28" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
-    <text id="aN2" x="88" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
-    <text id="aN3" x="148" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
-    <text id="aN4" x="208" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
-    <text id="aN5" x="268" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>
-    <!-- Methyl branch above C2 -->
-    <line x1="88" y1="50" x2="88" y2="37" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="88" y="34" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">CH₃</text>
-    <!-- Chain bonds -->
-    <line x1="43" y1="65" x2="73" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="103" y1="65" x2="133" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="163" y1="65" x2="193" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="223" y1="65" x2="253" y2="65" stroke="#475569" stroke-width="2"/>
-    <!-- Ethyl branch below C3 (angled right to avoid β labels) -->
-    <line x1="148" y1="80" x2="166" y2="96" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="178" y="102" font-family="sans-serif" font-size="9" fill="#64748b">CH₂CH₃</text>
-    <!-- Carbon atoms -->
-    <circle id="cA1" cx="28" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="28" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-    <circle id="cA2" cx="88" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="88" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-    <circle id="cA3" cx="148" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="148" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-    <circle id="cA4" cx="208" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="208" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-    <circle id="cA5" cx="268" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="268" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-    <!-- β numbers (bottom, red, reversed) -->
-    <text id="bN1" x="28"  y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
-    <text id="bN2" x="88"  y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
-    <text id="bN3" x="148" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
-    <text id="bN4" x="208" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
-    <text id="bN5" x="268" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>
-    <!-- Step hint label -->
-    <text id="svgCA-lbl" x="155" y="118" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b" font-style="italic"></text>
-  </svg>
-  <div style="display:flex;justify-content:space-between;font-size:.7rem;font-weight:700;padding:0 4px 10px">
-    <span style="color:#059669">α: numeración izq → der</span>
-    <span style="color:#dc2626">β: numeración der → izq</span>
-  </div>
-
-  <div class="comp-steps" id="cA-steps">
-    <div class="comp-step locked" id="cA-s0">
-      <div class="cs-n">A1</div>
-      <div class="cs-body">Ambas cadenas tienen <strong>5 carbonos</strong> (los 5 círculos resaltados). El criterio A1 (mayor longitud) no rompe el empate — pasa al siguiente.</div>
-    </div>
-    <div class="comp-step locked" id="cA-s1">
-      <div class="cs-n">A2</div>
-      <div class="cs-body">Ambas tienen <strong>2 sustituyentes</strong> (C2: metilo ↑ · C3: etilo ↘). El criterio A2 (mayor número de ramas) tampoco rompe el empate.</div>
-    </div>
-    <div class="comp-step locked" id="cA-s2">
-      <div class="cs-n">A3</div>
-      <div class="cs-body">Localizadores posición a posición:<br>
-        α (verde): { <strong style="color:#059669">2</strong>, 3 } &nbsp;|&nbsp; β (rojo): { <strong style="color:#dc2626">3</strong>, 4 }<br>
-        Primera posición: <strong>2 &lt; 3</strong> → dirección α gana. C2 (verde ↑) antes que C4 (rojo ↑).
-      </div>
-    </div>
-    <div class="comp-step locked" id="cA-s3">
-      <div class="cs-n">✓</div>
-      <div class="cs-body"><strong>Nombre correcto: 3-etil-2-metilpentano</strong><br>
-        <span style="color:var(--dim);font-size:.75rem">α{2,3} &lt; β{3,4} — empate roto en A3.</span>
-      </div>
-    </div>
-  </div>
-  <div class="comp-ctrl">
-    <button class="comp-btn" id="cA-btn" onclick="stepCA()">▶ Ver paso a paso</button>
-    <button class="comp-btn comp-btn-sec" onclick="resetCA()">↺ Reiniciar</button>
-  </div>
-</div>
-
-<!-- ── COMPARADOR B ── -->
-<div class="comp-card">
-  <div class="comp-head">🔬 Comparador — Parte B (criterios B1 y B3)</div>
-  <div class="comp-sub">¿Desde qué extremo se numera la cadena?</div>
-
-  <!-- CASO B1 -->
-  <div style="font-size:.8rem;font-weight:800;color:var(--tx);margin:10px 0 6px">Caso B1 — hay grupo funcional: <em style="color:var(--c4t)">4-metilpentan-2-ol</em></div>
-  <svg id="molCB1" viewBox="0 0 310 110" width="100%" style="display:block;max-height:140px;background:#fafafa;border:1.5px solid #d0e6f5;border-radius:10px;margin-bottom:6px">
-    <!-- α numbers (green) -->
-    <text id="b1aN1" x="28"  y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
-    <text id="b1aN2" x="88"  y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
-    <text id="b1aN3" x="148" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
-    <text id="b1aN4" x="208" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
-    <text id="b1aN5" x="268" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>
-    <!-- OH above C2, CH3 below C4 -->
-    <line x1="88" y1="50" x2="88" y2="37" stroke="#CC79A7" stroke-width="1.5"/>
-    <text x="88" y="34" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#CC79A7" font-weight="700">−OH</text>
-    <line x1="208" y1="80" x2="208" y2="94" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="208" y="104" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">CH₃</text>
-    <!-- Chain bonds -->
-    <line x1="43" y1="65" x2="73" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="103" y1="65" x2="133" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="163" y1="65" x2="193" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="223" y1="65" x2="253" y2="65" stroke="#475569" stroke-width="2"/>
-    <!-- Carbon atoms -->
-    <circle id="b1c1" cx="28"  cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="28"  y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-    <circle id="b1c2" cx="88"  cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="88"  y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-    <circle id="b1c3" cx="148" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="148" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-    <circle id="b1c4" cx="208" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="208" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-    <circle id="b1c5" cx="268" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="268" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-    <!-- β numbers (reversed) -->
-    <text id="b1bN1" x="28"  y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
-    <text id="b1bN2" x="88"  y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
-    <text id="b1bN3" x="148" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
-    <text id="b1bN4" x="208" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
-    <text id="b1bN5" x="268" y="97" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>
-  </svg>
-  <div style="display:flex;justify-content:space-between;font-size:.7rem;font-weight:700;padding:0 4px 10px">
-    <span style="color:#059669">α: izq → der &nbsp; (−OH en posición <strong>2</strong>)</span>
-    <span style="color:#dc2626">β: der → izq &nbsp; (−OH en posición <strong>4</strong>)</span>
-  </div>
-  <div class="comp-steps" id="cB1-steps">
-    <div class="comp-step locked" id="cB1-s0">
-      <div class="cs-n">B1</div>
-      <div class="cs-body">Criterio B1 — menor localizador al grupo funcional (−OH, rosa):<br>
-        α (izq→der): −OH en C2 → posición <strong style="color:#059669">2</strong><br>
-        β (der→izq): −OH en C4 → posición <strong style="color:#dc2626">4</strong><br>
-        <strong>2 &lt; 4</strong> → numerar izquierda → derecha.
-      </div>
-    </div>
-    <div class="comp-step locked" id="cB1-s1">
-      <div class="cs-n">✓</div>
-      <div class="cs-body"><strong>Nombre correcto: 4-metilpentan-2-ol</strong><br>
-        <span style="color:var(--dim);font-size:.75rem">B1 resuelve el empate: el −OH siempre recibe el localizador más bajo posible.</span>
-      </div>
-    </div>
-  </div>
-  <div class="comp-ctrl">
-    <button class="comp-btn" id="cB1-btn" onclick="stepCB1()">▶ Caso B1</button>
-    <button class="comp-btn comp-btn-sec" id="cB1-reset" onclick="resetCB1()" style="display:none">↺ Reiniciar</button>
-  </div>
-
-  <!-- CASO B3 -->
-  <div style="font-size:.8rem;font-weight:800;color:var(--tx);margin:22px 0 6px;border-top:1.5px solid var(--brd);padding-top:18px">Caso B3 — sin grupo funcional ni insaturaciones: <em style="color:var(--c2t)">2-metilpentano</em></div>
-  <svg id="molCB3" viewBox="0 0 310 100" width="100%" style="display:block;max-height:130px;background:#fafafa;border:1.5px solid #d0e6f5;border-radius:10px;margin-bottom:6px">
-    <!-- α numbers -->
-    <text id="b3aN1" x="28"  y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
-    <text id="b3aN2" x="88"  y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
-    <text id="b3aN3" x="148" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
-    <text id="b3aN4" x="208" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
-    <text id="b3aN5" x="268" y="13" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>
-    <!-- Methyl above C2 -->
-    <line x1="88" y1="50" x2="88" y2="37" stroke="#94a3b8" stroke-width="1.3"/>
-    <text x="88" y="34" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#64748b">CH₃</text>
-    <!-- Chain bonds -->
-    <line x1="43" y1="65" x2="73" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="103" y1="65" x2="133" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="163" y1="65" x2="193" y2="65" stroke="#475569" stroke-width="2"/>
-    <line x1="223" y1="65" x2="253" y2="65" stroke="#475569" stroke-width="2"/>
-    <!-- Carbon atoms -->
-    <circle id="b3c1" cx="28"  cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="28"  y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-    <circle id="b3c2" cx="88"  cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="88"  y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-    <circle id="b3c3" cx="148" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="148" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-    <circle id="b3c4" cx="208" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="208" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-    <circle id="b3c5" cx="268" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
-    <text x="268" y="69" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-    <!-- β numbers -->
-    <text id="b3bN1" x="28"  y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
-    <text id="b3bN2" x="88"  y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
-    <text id="b3bN3" x="148" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
-    <text id="b3bN4" x="208" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
-    <text id="b3bN5" x="268" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>
-  </svg>
-  <div style="display:flex;justify-content:space-between;font-size:.7rem;font-weight:700;padding:0 4px 10px">
-    <span style="color:#059669">α: izq → der &nbsp; (CH₃ en posición <strong>2</strong>)</span>
-    <span style="color:#dc2626">β: der → izq &nbsp; (CH₃ en posición <strong>4</strong>)</span>
-  </div>
-  <div class="comp-steps" id="cB3-steps">
-    <div class="comp-step locked" id="cB3-s0">
-      <div class="cs-n">B1</div>
-      <div class="cs-body">No hay grupo funcional (no −OH, no −COOH, etc.) → B1 no aplica. Pasa al siguiente criterio.</div>
-    </div>
-    <div class="comp-step locked" id="cB3-s1">
-      <div class="cs-n">B2</div>
-      <div class="cs-body">No hay insaturaciones (no dobles ni triples enlaces) → B2 no aplica. Pasa al siguiente criterio.</div>
-    </div>
-    <div class="comp-step locked" id="cB3-s2">
-      <div class="cs-n">B3</div>
-      <div class="cs-body">Criterio B3 — menor localizador al conjunto de sustituyentes (CH₃):<br>
-        α (izq→der): CH₃ en posición <strong style="color:#059669">2</strong> → {2}<br>
-        β (der→izq): CH₃ en posición <strong style="color:#dc2626">4</strong> → {4}<br>
-        <strong>{2} &lt; {4}</strong> → numerar izquierda → derecha.
-      </div>
-    </div>
-    <div class="comp-step locked" id="cB3-s3">
-      <div class="cs-n">✓</div>
-      <div class="cs-body"><strong>Nombre correcto: 2-metilpentano</strong><br>
-        <span style="color:var(--dim);font-size:.75rem">Sin grupo funcional ni insaturaciones, B3 decide: el conjunto de sustituyentes más bajo gana.</span>
-      </div>
-    </div>
-  </div>
-  <div class="comp-ctrl">
-    <button class="comp-btn" id="cB3-btn" onclick="stepCB3()">▶ Caso B3</button>
-    <button class="comp-btn comp-btn-sec" id="cB3-reset" onclick="resetCB3()" style="display:none">↺ Reiniciar</button>
-  </div>
-</div>
+<!-- modales interactivos insertados por JS -->
 
 <div class="panel-nav-row">
   <button class="pnav-btn" onclick="goPanel('panel-tablas')">← 📊 Tablas</button>
@@ -2285,6 +2098,24 @@ td{border-bottom:1px solid #e8e8e8}
 <table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
 <tbody>${CMPhtml}</tbody></table>
 <div class="note">* Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan.</div>
+<div id="ruleModal" class="rmod-overlay" style="display:none" onclick="rmodClose(event)">
+  <div class="rmod-box" onclick="event.stopPropagation()">
+    <div class="rmod-hdr">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="rmodTag" class="rmod-tag c">A1</span>
+        <span id="rmodTtl" class="rmod-ttl"></span>
+      </div>
+      <button class="rmod-x" onclick="rmodX()">&#215;</button>
+    </div>
+    <div class="rmod-svg-area" id="rmodSvgArea"></div>
+    <div class="rmod-step-txt" id="rmodStepTxt">paso 1 de 4</div>
+    <div class="rmod-nav">
+      <button class="rmod-btn" id="rmodPrev" onclick="rmodPrev()">&#9664; Anterior</button>
+      <button class="rmod-snd" onclick="rmodSpeak()">&#128266;</button>
+      <button class="rmod-btn" id="rmodNext" onclick="rmodNext()">Siguiente &#9654;</button>
+    </div>
+  </div>
+</div>
 </body></html>`;
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   const url=URL.createObjectURL(blob);
@@ -2343,157 +2174,314 @@ function goPanel(id){
   if(panel){panel.style.display='';window.scrollTo({top:0,behavior:'smooth'});}
 }
 
-// ── HELPERS SVG ──
-function svgFill(id,fill,stroke){const el=document.getElementById(id);if(el){el.style.fill=fill;el.style.stroke=stroke||fill;}}
-function svgTxt(id,fill,weight){const el=document.getElementById(id);if(el){el.style.fill=fill;if(weight)el.style.fontWeight=weight;}}
-function svgReset(ids,fill,stroke){ids.forEach(id=>svgFill(id,fill,stroke));}
-function svgTxtReset(ids,fill){ids.forEach(id=>{const el=document.getElementById(id);if(el){el.style.fill=fill;el.style.fontWeight='700';el.style.fontSize='11px';}});}
 
-// ── COMPARADOR A (criterios A1→A3) ──
-const CA_MAX=3;
-let cAstep=-1;
-function svgCA_update(){
-  const NEUTRAL='#f1f5f9',NBORDER='#475569';
-  const GREEN='#dcfce7',GBORDER='#059669';
-  const AMBER='#fef3c7',ABORDER='#f59e0b';
-  const RED='#fee2e2',RBORDER='#dc2626';
-  const WIN='#bbf7d0',WBORDER='#16a34a';
-  const circles=['cA1','cA2','cA3','cA4','cA5'];
-  // reset all
-  svgReset(circles,NEUTRAL,NBORDER);
-  const lbl=document.getElementById('svgCA-lbl');
-  if(lbl)lbl.textContent='';
-  if(cAstep<0)return;
-  if(cAstep===0){// A1: chain length
-    svgReset(circles,'#e8f4fb','#1a6ea8');
-    if(lbl)lbl.textContent='A1: ambas cadenas tienen 5 carbonos';
-  }else if(cAstep===1){// A2: substituents at C2, C3
-    svgFill('cA2',AMBER,ABORDER);svgFill('cA3',AMBER,ABORDER);
-    if(lbl)lbl.textContent='A2: los sustituyentes están en C2 y C3';
-  }else if(cAstep===2){// A3: C2 green wins (α pos 2), show α-pos vs β-pos
-    svgFill('cA2',GREEN,GBORDER);// methyl at α-pos 2 (winner)
-    svgFill('cA3',RED,RBORDER);  // ethyl at β-pos 3 (first β element)
-    svgTxt('aN2','#059669','900');svgTxt('bN2','#dc2626','900');
-    if(lbl)lbl.textContent='A3: α{2,3} vs β{3,4} — primera pos: 2 < 3, α gana';
-  }else if(cAstep===3){// win
-    svgReset(circles,WIN,WBORDER);
-    if(lbl)lbl.textContent='Dirección α correcta → 3-etil-2-metilpentano';
-  }
-}
-function stepCA(){
-  if(cAstep>=CA_MAX)return;
-  cAstep++;
-  for(let i=0;i<=CA_MAX;i++){
-    const el=document.getElementById('cA-s'+i);if(!el)continue;
-    if(i<cAstep)el.className='comp-step active';
-    else if(i===cAstep)el.className='comp-step active'+(i===CA_MAX?' win':'');
-    else el.className='comp-step locked';
-  }
-  svgCA_update();
-  if(cAstep>=CA_MAX){const b=document.getElementById('cA-btn');b.disabled=true;b.textContent='✓ Completado';}
-}
-function resetCA(){
-  cAstep=-1;
-  for(let i=0;i<=CA_MAX;i++){const el=document.getElementById('cA-s'+i);if(el)el.className='comp-step locked';}
-  const b=document.getElementById('cA-btn');b.disabled=false;b.textContent='▶ Ver paso a paso';
-  svgReset(['cA1','cA2','cA3','cA4','cA5'],'#f1f5f9','#475569');
-  svgTxtReset(['aN1','aN2','aN3','aN4','aN5'],'#059669');
-  svgTxtReset(['bN1','bN2','bN3','bN4','bN5'],'#dc2626');
-  const lbl=document.getElementById('svgCA-lbl');if(lbl)lbl.textContent='';
-}
+// ── RULE MODALS ──
+const _N='#f1f5f9',_NB='#475569',_G='#dcfce7',_GB='#059669',_R='#fee2e2',_RB='#dc2626';
+const _A='#fef3c7',_AB='#f59e0b',_W='#bbf7d0',_WB='#16a34a',_BL='#e8f4fb',_BB='#1a6ea8';
+function _hi(id,f,s){const e=document.getElementById(id);if(e){e.style.fill=f;if(s)e.style.stroke=s;}}
+function _hiA(ids,f,s){ids.forEach(id=>_hi(id,f,s));}
+function _txt(id,f,w,sz){const e=document.getElementById(id);if(e){if(f)e.style.fill=f;if(w)e.style.fontWeight=w;if(sz)e.style.fontSize=sz;}}
+function _txtRst(ids,f){ids.forEach(id=>_txt(id,f,'700','11px'));}
+function _lbl(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
 
-// ── COMPARADOR B1 ──
-const CB1_MAX=1;
-let cB1step=-1;
-function svgCB1_update(){
-  const NEUTRAL='#f1f5f9',NBORDER='#475569';
-  const GREEN='#dcfce7',GBORDER='#059669';
-  const RED='#fee2e2',RBORDER='#dc2626';
-  const WIN='#bbf7d0',WBORDER='#16a34a';
-  svgReset(['b1c1','b1c2','b1c3','b1c4','b1c5'],NEUTRAL,NBORDER);
-  if(cB1step<0)return;
-  if(cB1step===0){// B1: OH highlight — same carbon (C2) has α-pos 2 vs β-pos 4
-    svgFill('b1c2',GREEN,GBORDER); // C2 wins: OH gets the lowest locator
-    svgTxt('b1aN2','#059669','900'); // "2" above C2 = α wins
-    svgTxt('b1bN2','#dc2626','900'); // "4" below C2 = β loses
-  }else if(cB1step===1){// win
-    svgReset(['b1c1','b1c2','b1c3','b1c4','b1c5'],WIN,WBORDER);
-  }
-}
-function stepCB1(){
-  if(cB1step>=CB1_MAX)return;
-  cB1step++;
-  for(let i=0;i<=CB1_MAX;i++){
-    const el=document.getElementById('cB1-s'+i);if(!el)continue;
-    if(i<cB1step)el.className='comp-step active';
-    else if(i===cB1step)el.className='comp-step active'+(i===CB1_MAX?' win':'');
-    else el.className='comp-step locked';
-  }
-  svgCB1_update();
-  if(cB1step>=CB1_MAX){
-    const b=document.getElementById('cB1-btn');b.disabled=true;b.textContent='✓ Completado';
-    document.getElementById('cB1-reset').style.display='';
-  }
-}
-function resetCB1(){
-  cB1step=-1;
-  for(let i=0;i<=CB1_MAX;i++){const el=document.getElementById('cB1-s'+i);if(el)el.className='comp-step locked';}
-  const b=document.getElementById('cB1-btn');b.disabled=false;b.textContent='▶ Caso B1';
-  document.getElementById('cB1-reset').style.display='none';
-  svgReset(['b1c1','b1c2','b1c3','b1c4','b1c5'],'#f1f5f9','#475569');
-  svgTxtReset(['b1aN1','b1aN2','b1aN3','b1aN4','b1aN5'],'#059669');
-  svgTxtReset(['b1bN1','b1bN2','b1bN3','b1bN4','b1bN5'],'#dc2626');
-}
+const SVG_A4 = `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text x="12" y="29" font-size="11" font-family="sans-serif" fill="#059669" font-weight="700">Cadena α:</text>
+<rect id="a4ga1" x="100" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="115" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">2</text>
+<rect id="a4ga2" x="138" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="153" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">4</text>
+<rect id="a4ga3" x="176" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="191" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">6</text>
+<text x="12" y="65" font-size="11" font-family="sans-serif" fill="#dc2626" font-weight="700">Cadena β:</text>
+<rect id="a4rb1" x="100" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="115" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">2</text>
+<rect id="a4rb2" x="138" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="153" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">6</text>
+<rect id="a4rb3" x="176" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="191" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">8</text>
+<text id="a4lbl" x="155" y="92" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`;
 
-// ── COMPARADOR B3 ──
-const CB3_MAX=3;
-let cB3step=-1;
-function svgCB3_update(){
-  const NEUTRAL='#f1f5f9',NBORDER='#475569';
-  const GREEN='#dcfce7',GBORDER='#059669';
-  const RED='#fee2e2',RBORDER='#dc2626';
-  const WIN='#bbf7d0',WBORDER='#16a34a';
-  svgReset(['b3c1','b3c2','b3c3','b3c4','b3c5'],NEUTRAL,NBORDER);
-  if(cB3step<0)return;
-  if(cB3step===0){// B1 N/A — dim all slightly
-    ['b3c1','b3c2','b3c3','b3c4','b3c5'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.opacity='.55';});
-  }else if(cB3step===1){// B2 N/A
-    ['b3c1','b3c2','b3c3','b3c4','b3c5'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.opacity='.55';});
-  }else if(cB3step===2){// B3: CH3 at C2 (α-pos 2) vs C4 (β-pos 2)
-    ['b3c1','b3c2','b3c3','b3c4','b3c5'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.opacity='1';});
-    svgFill('b3c2',GREEN,GBORDER); // CH3 at α-pos 2 (winner)
-    // same C2 atom: β-position = 4 (label b3bN2 = "4" below C2)
-    svgTxt('b3aN2','#059669','900');
-    svgTxt('b3bN2','#dc2626','900');
-  }else if(cB3step===3){// win
-    ['b3c1','b3c2','b3c3','b3c4','b3c5'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.opacity='1';});
-    svgReset(['b3c1','b3c2','b3c3','b3c4','b3c5'],WIN,WBORDER);
+const SVG_A5 = `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text x="12" y="29" font-size="11" font-family="sans-serif" fill="#059669" font-weight="700">Dir. α:</text>
+<rect id="a5ga1" x="80" y="16" width="68" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="114" y="31" text-anchor="middle" font-size="11" font-family="monospace" fill="#059669" font-weight="700">etil: 2</text>
+<rect id="a5ga2" x="156" y="16" width="74" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="193" y="31" text-anchor="middle" font-size="11" font-family="monospace" fill="#059669" font-weight="700">metil: 4</text>
+<text x="12" y="65" font-size="11" font-family="sans-serif" fill="#dc2626" font-weight="700">Dir. β:</text>
+<rect id="a5rb1" x="80" y="52" width="68" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="114" y="67" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626" font-weight="700">etil: 4</text>
+<rect id="a5rb2" x="156" y="52" width="74" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
+<text x="193" y="67" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626" font-weight="700">metil: 2</text>
+<text id="a5lbl" x="155" y="92" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`;
+
+function _svg4c(pfx,bch){return `<svg viewBox="0 0 260 105" width="100%" style="max-height:130px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<line x1="49" y1="62" x2="81" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="109" y1="62" x2="141" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="169" y1="62" x2="201" y2="62" stroke="#475569" stroke-width="2"/>
+${bch}
+<circle id="${pfx}c1" cx="35" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="35" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="${pfx}c2" cx="95" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="95" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="${pfx}c3" cx="155" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="155" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="${pfx}c4" cx="215" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="215" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<text id="${pfx}lbl" x="125" y="20" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`;}
+
+function _svg5c(pfx,nums,bch){return `<svg viewBox="0 0 310 115" width="100%" style="max-height:140px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+${nums?`<text id="${pfx}an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
+<text id="${pfx}an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
+<text id="${pfx}an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
+<text id="${pfx}an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
+<text id="${pfx}an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>`:''}
+<line x1="44" y1="65" x2="76" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="104" y1="65" x2="136" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="164" y1="65" x2="196" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="224" y1="65" x2="256" y2="65" stroke="#475569" stroke-width="2"/>
+${bch}
+<circle id="${pfx}c1" cx="30" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="${pfx}c2" cx="90" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="${pfx}c3" cx="150" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="${pfx}c4" cx="210" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="${pfx}c5" cx="270" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+${nums?`<text id="${pfx}bn1" x="30" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
+<text id="${pfx}bn2" x="90" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
+<text id="${pfx}bn3" x="150" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
+<text id="${pfx}bn4" x="210" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
+<text id="${pfx}bn5" x="270" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>`:''}
+<text id="${pfx}lbl" x="150" y="${nums?'':'18'}" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`;}
+
+const RMOD={
+  A1:{
+    col:'c',title:'Mayor número de carbonos en la cadena',
+    get svg(){return _svg4c('a1','<line x1="95" y1="76" x2="95" y2="92" stroke="#94a3b8" stroke-width="1.3"/><text x="95" y="101" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    steps:[
+      {narr:'Molécula: 2-metilbutano. Hay dos posibles cadenas. ¿Cuál es la más larga?',
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_lbl('a1lbl','');}},
+      {narr:'Cadena larga: cuatro carbonos seguidos, de C1 a C4. Es la ruta más extensa.',
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_BL,_BB);_lbl('a1lbl','C1‒C2‒C3‒C4: 4 carbonos');}},
+      {narr:'Ruta alternativa por la rama: solo tres carbonos. Es más corta.',
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_hi('a1c2',_A,_AB);_lbl('a1lbl','Ruta rama: 3C < 4C');}},
+      {narr:'A1: cadena de cuatro gana. El nombre correcto es 2-metilbutano.',
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_W,_WB);_lbl('a1lbl','✓ 2-metilbutano');}}
+    ]
+  },
+  A2:{
+    col:'c',title:'Mayor número de ramificaciones',
+    get svg(){return _svg5c('a2',false,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text><line x1="150" y1="79" x2="165" y2="97" stroke="#94a3b8" stroke-width="1.3"/><text x="178" y="103" font-size="9" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>');},
+    steps:[
+      {narr:'3-etil-2-metilpentano. Dos cadenas de cinco carbonos. A1 empata. Se aplica A2.',
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_lbl('a2lbl','A1: ambas cadenas tienen 5C');}},
+      {narr:'Cadena principal: tiene dos sustituyentes, metilo en C2 y etilo en C3.',
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_BL,_BB);_hi('a2c2',_A,_AB);_hi('a2c3',_A,_AB);_lbl('a2lbl','2 sustituyentes en C2 y C3');}},
+      {narr:'La cadena alternativa por el etilo tendría solo un sustituyente.',
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_hi('a2c2',_R,_RB);_lbl('a2lbl','Ruta alt: 1 sustituyente');}},
+      {narr:'A2: dos ramificaciones ganan. La cadena con más ramas es la principal.',
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_W,_WB);_lbl('a2lbl','✓ 3-etil-2-metilpentano');}}
+    ]
+  },
+  A3:{
+    col:'c',title:'Menor conjunto de localizadores',
+    get svg(){return _svg5c('a3',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text><line x1="150" y1="79" x2="165" y2="97" stroke="#94a3b8" stroke-width="1.3"/><text x="178" y="103" font-size="9" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>');},
+    steps:[
+      {narr:'A2 empata: mismas ramificaciones. Se comparan los conjuntos de localizadores posición a posición.',
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_txtRst(['a3an1','a3an2','a3an3','a3an4','a3an5'],'#059669');_txtRst(['a3bn1','a3bn2','a3bn3','a3bn4','a3bn5'],'#dc2626');_lbl('a3lbl','');}},
+      {narr:'Dirección alfa verde: sustituyentes en posición 2 y 3. Conjunto llaves dos, tres.',
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_G,_GB);_hi('a3c3',_G,_GB);_txt('a3an2','#059669','900');_txt('a3an3','#059669','900');_lbl('a3lbl','α: {2,3}');}},
+      {narr:'Dirección beta rojo: sustituyentes en posición 3 y 4. Conjunto llaves tres, cuatro.',
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c3',_R,_RB);_hi('a3c4',_R,_RB);_txt('a3bn3','#dc2626','900');_txt('a3bn4','#dc2626','900');_lbl('a3lbl','β: {3,4}');}},
+      {narr:'A3: llaves dos, tres menor que llaves tres, cuatro. Primera diferencia: 2 menor que 3. Alfa gana.',
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_W,_WB);_lbl('a3lbl','✓ {2,3} < {3,4}');}}
+    ]
+  },
+  A4:{
+    col:'c',title:'Menor localizador en el primer punto de diferencia',
+    get svg(){return SVG_A4;},
+    steps:[
+      {narr:'Dos cadenas con igual longitud, igual número de ramas. Primer localizador igual. Se compara el segundo.',
+       hi(){_hiA(['a4ga1','a4ga2','a4ga3','a4rb1','a4rb2','a4rb3'],_N,_NB);_lbl('a4lbl','');}},
+      {narr:'Primera posición: dos igual dos. Empata. Se pasa a la segunda posición.',
+       hi(){_hi('a4ga1',_A,_AB);_hi('a4rb1',_A,_AB);_hi('a4ga2',_N,_NB);_hi('a4rb2',_N,_NB);_hi('a4ga3',_N,_NB);_hi('a4rb3',_N,_NB);_lbl('a4lbl','Pos 1: 2 = 2 — empate');}},
+      {narr:'Segunda posición: cuatro menor que seis. La cadena alfa tiene el valor más bajo aquí.',
+       hi(){_hi('a4ga1',_A,_AB);_hi('a4rb1',_A,_AB);_hi('a4ga2',_G,_GB);_hi('a4rb2',_R,_RB);_lbl('a4lbl','Pos 2: 4 < 6 — alfa gana');}},
+      {narr:'A4: cuatro menor que seis en la segunda posición. La cadena alfa es la cadena principal.',
+       hi(){_hiA(['a4ga1','a4ga2','a4ga3'],_W,_WB);_lbl('a4lbl','✓ Cadena α gana en posición 2');}}
+    ]
+  },
+  A5:{
+    col:'c',title:'Menor localizador al sustituyente con prioridad alfabética',
+    get svg(){return SVG_A5;},
+    steps:[
+      {narr:'Todo lo anterior empata. A5: el sustituyente nombrado primero alfabéticamente recibe el menor localizador.',
+       hi(){_hiA(['a5ga1','a5ga2','a5rb1','a5rb2'],_N,_NB);_lbl('a5lbl','');}},
+      {narr:'Orden alfabético: etilo viene antes que metilo. Etilo debe tener el localizador más bajo posible.',
+       hi(){_hi('a5ga1',_A,_AB);_hi('a5rb1',_A,_AB);_lbl('a5lbl','"etil" < "metil" alfabéticamente');}},
+      {narr:'Dirección alfa: etilo en dos, metilo en cuatro. Etilo recibe el localizador más bajo.',
+       hi(){_hi('a5ga1',_G,_GB);_hi('a5ga2',_BL,_BB);_hi('a5rb1',_R,_RB);_lbl('a5lbl','α: etil=2 ✓ • β: etil=4 ✗');}},
+      {narr:'A5: dirección alfa correcta. El nombre es 2-etil-4-metilpentano.',
+       hi(){_hiA(['a5ga1','a5ga2'],_W,_WB);_lbl('a5lbl','✓ 2-etil-4-metilpentano');}}
+    ]
+  },
+  B1:{
+    col:'r',title:'Menor localizador al grupo funcional principal',
+    get svg(){return _svg5c('b1',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#CC79A7" stroke-width="1.8"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#CC79A7" font-weight="700">−OH</text><line x1="210" y1="79" x2="210" y2="93" stroke="#94a3b8" stroke-width="1.3"/><text x="210" y="103" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    steps:[
+      {narr:'4-metilpentan-2-ol. El grupo funcional guión OH determina la dirección de numeración.',
+       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_N,_NB);_txtRst(['b1an1','b1an2','b1an3','b1an4','b1an5'],'#059669');_txtRst(['b1bn1','b1bn2','b1bn3','b1bn4','b1bn5'],'#dc2626');_lbl('b1lbl','');}},
+      {narr:'Dirección alfa verde: guión OH en C2, posición dos.',
+       hi(){_hi('b1c2',_G,_GB);_txt('b1an2','#059669','900','13px');_lbl('b1lbl','α: −OH en posición 2');}},
+      {narr:'Dirección beta rojo: el mismo guión OH recibe posición cuatro. Cuatro es mayor que dos.',
+       hi(){_hi('b1c2',_A,_AB);_txt('b1an2','#059669','700','11px');_txt('b1bn4','#dc2626','900','13px');_lbl('b1lbl','β: −OH en posición 4');}},
+      {narr:'B1: dos menor que cuatro. Dirección alfa gana. El nombre correcto es 4-metilpentan-2-ol.',
+       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_W,_WB);_lbl('b1lbl','✓ 4-metilpentan-2-ol');}}
+    ]
+  },
+  B2:{
+    col:'r',title:'Menor localizador al conjunto de insaturaciones',
+    get svg(){return `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b2an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
+<text id="b2an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
+<text id="b2an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
+<text id="b2an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
+<text id="b2an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>
+<line x1="44" y1="58" x2="76" y2="58" stroke="#475569" stroke-width="2.5"/>
+<line x1="44" y1="66" x2="76" y2="66" stroke="#475569" stroke-width="2.5"/>
+<line x1="104" y1="62" x2="136" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="164" y1="62" x2="196" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="224" y1="62" x2="256" y2="62" stroke="#475569" stroke-width="2"/>
+<circle id="b2c1" cx="30" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b2c2" cx="90" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b2c3" cx="150" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b2c4" cx="210" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b2c5" cx="270" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="b2bn1" x="30" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
+<text id="b2bn2" x="90" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
+<text id="b2bn3" x="150" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
+<text id="b2bn4" x="210" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
+<text id="b2bn5" x="270" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>
+<text id="b2lbl" x="150" y="12" text-anchor="middle" font-size="0" fill="transparent"></text>
+</svg>`;},
+    steps:[
+      {narr:'Pent-1-eno. Sin grupo funcional: B1 no aplica. Se aplica B2: menor localizador al doble enlace.',
+       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_N,_NB);_txtRst(['b2an1','b2an2','b2an3','b2an4','b2an5'],'#059669');_txtRst(['b2bn1','b2bn2','b2bn3','b2bn4','b2bn5'],'#dc2626');}},
+      {narr:'Dirección alfa verde: doble enlace entre C1 y C2, localizador uno.',
+       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');}},
+      {narr:'Dirección beta rojo: el mismo doble enlace recibiría localizador cuatro. Cuatro mayor que uno.',
+       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');_txt('b2bn4','#dc2626','900','13px');}},
+      {narr:'B2: uno menor que cuatro. Dirección alfa gana. El nombre correcto es pent-1-eno.',
+       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_W,_WB);}}
+    ]
+  },
+  B3:{
+    col:'r',title:'Menor localizador al conjunto de sustituyentes',
+    get svg(){return _svg5c('b3',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    steps:[
+      {narr:'2-metilpentano. Sin grupo funcional ni insaturaciones. B1 y B2 no aplican. Se aplica B3.',
+       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_N,_NB);_txtRst(['b3an1','b3an2','b3an3','b3an4','b3an5'],'#059669');_txtRst(['b3bn1','b3bn2','b3bn3','b3bn4','b3bn5'],'#dc2626');_lbl('b3lbl','');}},
+      {narr:'Dirección alfa verde: metilo en posición dos. Conjunto llaves dos.',
+       hi(){_hi('b3c2',_G,_GB);_txt('b3an2','#059669','900','13px');_lbl('b3lbl','α: {2}');}},
+      {narr:'Dirección beta rojo: el mismo metilo recibe posición cuatro. Conjunto llaves cuatro.',
+       hi(){_hi('b3c2',_A,_AB);_txt('b3an2','#059669','700','11px');_txt('b3bn4','#dc2626','900','13px');_lbl('b3lbl','β: {4}');}},
+      {narr:'B3: dos menor que cuatro. Dirección alfa gana. El nombre correcto es 2-metilpentano.',
+       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_W,_WB);_lbl('b3lbl','✓ 2-metilpentano');}}
+    ]
+  },
+  B4:{
+    col:'r',title:'Menor localizador al sustituyente con prioridad alfabética',
+    get svg(){return `<svg viewBox="0 0 310 115" width="100%" style="max-height:140px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b4an1" x="25" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">1</text>
+<text id="b4an2" x="75" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">2</text>
+<text id="b4an3" x="125" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">3</text>
+<text id="b4an4" x="175" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">4</text>
+<text id="b4an5" x="225" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">5</text>
+<text id="b4an6" x="275" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">6</text>
+<line x1="38" y1="60" x2="62" y2="60" stroke="#475569" stroke-width="2"/>
+<line x1="88" y1="60" x2="112" y2="60" stroke="#475569" stroke-width="2"/>
+<line x1="138" y1="60" x2="162" y2="60" stroke="#475569" stroke-width="2"/>
+<line x1="188" y1="60" x2="212" y2="60" stroke="#475569" stroke-width="2"/>
+<line x1="238" y1="60" x2="262" y2="60" stroke="#475569" stroke-width="2"/>
+<line x1="125" y1="74" x2="125" y2="90" stroke="#94a3b8" stroke-width="1.3"/>
+<text x="125" y="100" text-anchor="middle" font-size="8" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>
+<line x1="175" y1="46" x2="175" y2="34" stroke="#94a3b8" stroke-width="1.3"/>
+<text x="175" y="31" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>
+<circle id="b4c1" cx="25" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="25" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b4c2" cx="75" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="75" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b4c3" cx="125" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="125" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b4c4" cx="175" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="175" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b4c5" cx="225" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="225" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<circle id="b4c6" cx="275" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="275" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C6</text>
+<text id="b4bn1" x="25" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">6</text>
+<text id="b4bn2" x="75" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">5</text>
+<text id="b4bn3" x="125" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">4</text>
+<text id="b4bn4" x="175" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">3</text>
+<text id="b4bn5" x="225" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">2</text>
+<text id="b4bn6" x="275" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">1</text>
+<text id="b4lbl" x="150" y="112" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`;},
+    steps:[
+      {narr:'3-etil-4-metilhexano. Los conjuntos de localizadores 3,4 son iguales en ambas direcciones. Se aplica B4.',
+       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_N,_NB);_lbl('b4lbl','');}},
+      {narr:'Orden alfabético: etilo viene antes que metilo. Etilo debe recibir el localizador más bajo posible.',
+       hi(){_hi('b4c3',_A,_AB);_hi('b4c4',_A,_AB);_lbl('b4lbl','"etil" < "metil" alfabéticamente');}},
+      {narr:'Dirección alfa verde: etilo en posición tres, metilo en cuatro. Etilo tiene el número menor.',
+       hi(){_hi('b4c3',_G,_GB);_hi('b4c4',_BL,_BB);_txt('b4an3','#059669','900','12px');_lbl('b4lbl','α: etil=3 ✓');}},
+      {narr:'B4: etilo en tres es menor que cuatro. Dirección alfa gana. El nombre correcto es 3-etil-4-metilhexano.',
+       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_W,_WB);_lbl('b4lbl','✓ 3-etil-4-metilhexano');}}
+    ]
   }
+};
+
+let _rId=null,_rStep=0;
+function openRuleModal(rid){
+  const r=RMOD[rid];if(!r)return;
+  _rId=rid;_rStep=0;
+  document.getElementById('rmodTag').textContent=rid;
+  document.getElementById('rmodTag').className='rmod-tag '+(r.col==='r'?'r':'c');
+  document.getElementById('rmodTtl').textContent=r.title;
+  document.getElementById('rmodSvgArea').innerHTML=r.svg;
+  _updateRmod();
+  document.getElementById('ruleModal').style.display='flex';
+  document.body.style.overflow='hidden';
+  _speak(r.steps[0].narr);
 }
-function stepCB3(){
-  if(cB3step>=CB3_MAX)return;
-  cB3step++;
-  for(let i=0;i<=CB3_MAX;i++){
-    const el=document.getElementById('cB3-s'+i);if(!el)continue;
-    if(i<cB3step)el.className='comp-step active';
-    else if(i===cB3step)el.className='comp-step active'+(i===CB3_MAX?' win':'');
-    else el.className='comp-step locked';
-  }
-  svgCB3_update();
-  if(cB3step>=CB3_MAX){
-    const b=document.getElementById('cB3-btn');b.disabled=true;b.textContent='✓ Completado';
-    document.getElementById('cB3-reset').style.display='';
-  }
+function _updateRmod(){
+  const r=RMOD[_rId];if(!r)return;
+  r.steps[_rStep].hi();
+  document.getElementById('rmodStepTxt').textContent='paso '+(_rStep+1)+' de '+r.steps.length;
+  document.getElementById('rmodPrev').disabled=(_rStep===0);
+  const nb=document.getElementById('rmodNext');
+  nb.disabled=(_rStep===r.steps.length-1);
+  nb.textContent=_rStep===r.steps.length-1?'✓ Fin':'Siguiente ►';
 }
-function resetCB3(){
-  cB3step=-1;
-  for(let i=0;i<=CB3_MAX;i++){const el=document.getElementById('cB3-s'+i);if(el)el.className='comp-step locked';}
-  const b=document.getElementById('cB3-btn');b.disabled=false;b.textContent='▶ Caso B3';
-  document.getElementById('cB3-reset').style.display='none';
-  ['b3c1','b3c2','b3c3','b3c4','b3c5'].forEach(id=>{const el=document.getElementById(id);if(el){el.style.fill='#f1f5f9';el.style.stroke='#475569';el.style.opacity='1';}});
-  svgTxtReset(['b3aN1','b3aN2','b3aN3','b3aN4','b3aN5'],'#059669');
-  svgTxtReset(['b3bN1','b3bN2','b3bN3','b3bN4','b3bN5'],'#dc2626');
-}
+function rmodNext(){const r=RMOD[_rId];if(!r||_rStep>=r.steps.length-1)return;_rStep++;_updateRmod();_speak(r.steps[_rStep].narr);}
+function rmodPrev(){if(!_rId||_rStep<=0)return;_rStep--;_updateRmod();_speak(RMOD[_rId].steps[_rStep].narr);}
+function rmodSpeak(){if(_rId)_speak(RMOD[_rId].steps[_rStep].narr);}
+function _speak(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';u.rate=0.9;speechSynthesis.speak(u);}
+function rmodClose(e){if(e.target===document.getElementById('ruleModal'))rmodX();}
+function rmodX(){document.getElementById('ruleModal').style.display='none';document.body.style.overflow='';if('speechSynthesis' in window)speechSynthesis.cancel();document.getElementById('rmodSvgArea').innerHTML='';_rId=null;_rStep=0;}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&_rId)rmodX();});
+
 </script>
 </body>
 </html>
