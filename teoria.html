@@ -2322,271 +2322,386 @@ function _hiA(ids,f,s){ids.forEach(id=>_hi(id,f,s));}
 function _txt(id,f,w,sz){const e=document.getElementById(id);if(e){if(f)e.style.fill=f;if(w)e.style.fontWeight=w;if(sz)e.style.fontSize=sz;}}
 function _txtRst(ids,f){ids.forEach(id=>_txt(id,f,'700','11px'));}
 function _lbl(id,t){const e=document.getElementById(id);if(e)e.textContent=t;}
-
-const SVG_A4 = `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-<text x="12" y="29" font-size="11" font-family="sans-serif" fill="#059669" font-weight="700">Cadena α:</text>
-<rect id="a4ga1" x="100" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="115" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">2</text>
-<rect id="a4ga2" x="138" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="153" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">4</text>
-<rect id="a4ga3" x="176" y="16" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="191" y="31" text-anchor="middle" font-size="13" font-family="monospace" fill="#059669" font-weight="700">6</text>
-<text x="12" y="65" font-size="11" font-family="sans-serif" fill="#dc2626" font-weight="700">Cadena β:</text>
-<rect id="a4rb1" x="100" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="115" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">2</text>
-<rect id="a4rb2" x="138" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="153" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">6</text>
-<rect id="a4rb3" x="176" y="52" width="30" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="191" y="67" text-anchor="middle" font-size="13" font-family="monospace" fill="#dc2626" font-weight="700">8</text>
-<text id="a4lbl" x="155" y="92" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
-</svg>`;
-
-const SVG_A5 = `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-<text x="12" y="29" font-size="11" font-family="sans-serif" fill="#059669" font-weight="700">Dir. α:</text>
-<rect id="a5ga1" x="80" y="16" width="68" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="114" y="31" text-anchor="middle" font-size="11" font-family="monospace" fill="#059669" font-weight="700">etil: 2</text>
-<rect id="a5ga2" x="156" y="16" width="74" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="193" y="31" text-anchor="middle" font-size="11" font-family="monospace" fill="#059669" font-weight="700">metil: 4</text>
-<text x="12" y="65" font-size="11" font-family="sans-serif" fill="#dc2626" font-weight="700">Dir. β:</text>
-<rect id="a5rb1" x="80" y="52" width="68" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="114" y="67" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626" font-weight="700">etil: 4</text>
-<rect id="a5rb2" x="156" y="52" width="74" height="22" rx="5" fill="#f1f5f9" stroke="#475569" style="transition:fill .3s,stroke .3s"/>
-<text x="193" y="67" text-anchor="middle" font-size="11" font-family="monospace" fill="#dc2626" font-weight="700">metil: 2</text>
-<text id="a5lbl" x="155" y="92" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
-</svg>`;
-
-function _svg4c(pfx,bch){return `<svg viewBox="0 0 260 105" width="100%" style="max-height:130px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-<line x1="49" y1="62" x2="81" y2="62" stroke="#475569" stroke-width="2"/>
-<line x1="109" y1="62" x2="141" y2="62" stroke="#475569" stroke-width="2"/>
-<line x1="169" y1="62" x2="201" y2="62" stroke="#475569" stroke-width="2"/>
-${bch}
-<circle id="${pfx}c1" cx="35" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="35" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-<circle id="${pfx}c2" cx="95" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="95" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-<circle id="${pfx}c3" cx="155" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="155" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-<circle id="${pfx}c4" cx="215" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="215" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-<text id="${pfx}lbl" x="125" y="20" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
-</svg>`;}
-
-function _svg5c(pfx,nums,bch){return `<svg viewBox="0 0 310 115" width="100%" style="max-height:140px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-${nums?`<text id="${pfx}an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
-<text id="${pfx}an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
-<text id="${pfx}an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
-<text id="${pfx}an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
-<text id="${pfx}an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>`:''}
-<line x1="44" y1="65" x2="76" y2="65" stroke="#475569" stroke-width="2"/>
-<line x1="104" y1="65" x2="136" y2="65" stroke="#475569" stroke-width="2"/>
-<line x1="164" y1="65" x2="196" y2="65" stroke="#475569" stroke-width="2"/>
-<line x1="224" y1="65" x2="256" y2="65" stroke="#475569" stroke-width="2"/>
-${bch}
-<circle id="${pfx}c1" cx="30" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="30" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-<circle id="${pfx}c2" cx="90" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="90" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-<circle id="${pfx}c3" cx="150" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="150" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-<circle id="${pfx}c4" cx="210" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="210" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-<circle id="${pfx}c5" cx="270" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="270" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-${nums?`<text id="${pfx}bn1" x="30" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
-<text id="${pfx}bn2" x="90" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
-<text id="${pfx}bn3" x="150" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
-<text id="${pfx}bn4" x="210" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
-<text id="${pfx}bn5" x="270" y="98" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>`:''}
-<text id="${pfx}lbl" x="150" y="${nums?'':'18'}" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
-</svg>`;}
+function _hiLine(id,s,w){const e=document.getElementById(id);if(e){e.style.stroke=s;if(w)e.style.strokeWidth=w;}}
+function _hiTxt(id,f){const e=document.getElementById(id);if(e)e.style.fill=f;}
 
 const RMOD={
   A1:{
-    col:'c',title:'Mayor número de carbonos en la cadena',
-    get svg(){return _svg4c('a1','<line x1="95" y1="76" x2="95" y2="92" stroke="#94a3b8" stroke-width="1.3"/><text x="95" y="101" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    col:'c',title:'Mayor n\u00famero de carbonos en la cadena',
+    svg:`<svg viewBox="0 0 280 110" width="100%" style="max-height:140px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<line x1="50" y1="62" x2="90" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="120" y1="62" x2="160" y2="62" stroke="#475569" stroke-width="2"/>
+<line x1="190" y1="62" x2="230" y2="62" stroke="#475569" stroke-width="2"/>
+<line id="a1bl" x1="105" y1="77" x2="105" y2="93" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a1bt" x="105" y="103" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="a1c1" cx="35" cy="62" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="35" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="a1c2" cx="105" cy="62" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="105" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="a1c3" cx="175" cy="62" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="175" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="a1c4" cx="245" cy="62" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="245" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<text id="a1lbl" x="140" y="20" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Miremos esta molécula: 2-metilbutano. Hay dos posibles caminos… ¿cuál dirías que es el más largo?',
-       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_lbl('a1lbl','');}},
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_hiLine('a1bl','#94a3b8');_hiTxt('a1bt','#64748b');_lbl('a1lbl','');}},
       {narr:'Fijémonos en este camino: seguimos cuatro carbonos seguidos, de C1 a C4… se ve bastante largo, ¿no?',
-       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_BL,_BB);_lbl('a1lbl','C1‒C2‒C3‒C4: 4 carbonos');}},
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_BL,_BB);_hiLine('a1bl','#94a3b8');_hiTxt('a1bt','#64748b');_lbl('a1lbl','C1‒C2‒C3‒C4: 4 carbonos');}},
       {narr:'Ahora probemos el otro, pasando por la rama… aquí solo alcanzamos tres carbonos. Se queda corto.',
-       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_hi('a1c2',_A,_AB);_lbl('a1lbl','Ruta rama: 3C < 4C');}},
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_N,_NB);_hi('a1c2',_A,'#d97706');_hiLine('a1bl','#dc2626',2);_hiTxt('a1bt','#dc2626');_lbl('a1lbl','Ruta rama: 3C < 4C');}},
       {narr:'Entonces, ¿con cuál nos quedamos? Exacto: el de cuatro carbonos. Ese es el camino principal.',
-       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_W,_WB);_lbl('a1lbl','✓ 2-metilbutano');}}
+       hi(){_hiA(['a1c1','a1c2','a1c3','a1c4'],_W,_WB);_hiLine('a1bl','#16a34a');_hiTxt('a1bt','#16a34a');_lbl('a1lbl','\u2713 2-metilbutano');}}
     ]
   },
   A2:{
-    col:'c',title:'Mayor número de ramificaciones',
-    get svg(){return _svg5c('a2',false,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text><line x1="150" y1="79" x2="165" y2="97" stroke="#94a3b8" stroke-width="1.3"/><text x="178" y="103" font-size="9" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>');},
+    col:'c',title:'Mayor n\u00famero de ramificaciones',
+    svg:`<svg viewBox="0 0 320 130" width="100%" style="max-height:155px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<line x1="45" y1="68" x2="75" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="105" y1="68" x2="135" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="68" x2="195" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="68" x2="255" y2="68" stroke="#475569" stroke-width="2"/>
+<line id="a2ml" x1="90" y1="53" x2="90" y2="37" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a2mt" x="90" y="31" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<line id="a2el" x1="150" y1="83" x2="165" y2="100" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a2et" x="175" y="108" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2082;CH&#x2083;</text>
+<circle id="a2c1" cx="30" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="a2c2" cx="90" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="a2c3" cx="150" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="a2c4" cx="210" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="a2c5" cx="270" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="a2lbl" x="150" y="20" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Aquí tenemos 3-etil-2-metilpentano. Hay dos caminos de cinco carbonos… así que estamos empatados. Vamos a ver cuál conviene más.',
-       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_lbl('a2lbl','A1: ambas cadenas tienen 5C');}},
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_hiLine('a2ml','#94a3b8');_hiTxt('a2mt','#64748b');_hiLine('a2el','#94a3b8');_hiTxt('a2et','#64748b');_lbl('a2lbl','A1: ambas cadenas tienen 5C');}},
       {narr:'Si seguimos este camino, aparecen dos ramas: una en el carbono 2 y otra en el 3…',
-       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_BL,_BB);_hi('a2c2',_A,_AB);_hi('a2c3',_A,_AB);_lbl('a2lbl','2 sustituyentes en C2 y C3');}},
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_BL,_BB);_hi('a2c2',_A,'#d97706');_hi('a2c3',_A,'#d97706');_hiLine('a2ml','#d97706',2);_hiTxt('a2mt','#d97706');_hiLine('a2el','#d97706',2);_hiTxt('a2et','#d97706');_lbl('a2lbl','2 sustituyentes en C2 y C3');}},
       {narr:'Pero si probamos el otro camino, solo aparece una rama…',
-       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_hi('a2c2',_R,_RB);_lbl('a2lbl','Ruta alt: 1 sustituyente');}},
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_N,_NB);_hi('a2c2',_R,_RB);_hiLine('a2ml','#94a3b8');_hiTxt('a2mt','#64748b');_hiLine('a2el','#94a3b8');_hiTxt('a2et','#64748b');_lbl('a2lbl','Ruta alt: 1 sustituyente');}},
       {narr:'¿Cuál te conviene más? El que muestra más ramificaciones. Por eso este es el camino principal.',
-       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_W,_WB);_lbl('a2lbl','✓ 3-etil-2-metilpentano');}}
+       hi(){_hiA(['a2c1','a2c2','a2c3','a2c4','a2c5'],_W,_WB);_hiLine('a2ml','#16a34a');_hiTxt('a2mt','#059669');_hiLine('a2el','#16a34a');_hiTxt('a2et','#059669');_lbl('a2lbl','\u2713 3-etil-2-metilpentano');}}
     ]
   },
   A3:{
     col:'c',title:'Menor conjunto de localizadores',
-    get svg(){return _svg5c('a3',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text><line x1="150" y1="79" x2="165" y2="97" stroke="#94a3b8" stroke-width="1.3"/><text x="178" y="103" font-size="9" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>');},
+    svg:`<svg viewBox="0 0 320 130" width="100%" style="max-height:155px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="a3an1" x="30" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="a3an2" x="90" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="a3an3" x="150" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="a3an4" x="210" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="a3an5" x="270" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<line x1="45" y1="68" x2="75" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="105" y1="68" x2="135" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="68" x2="195" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="68" x2="255" y2="68" stroke="#475569" stroke-width="2"/>
+<line id="a3ml" x1="90" y1="53" x2="90" y2="37" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a3mt" x="90" y="31" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<line id="a3el" x1="150" y1="83" x2="165" y2="100" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a3et" x="175" y="108" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2082;CH&#x2083;</text>
+<circle id="a3c1" cx="30" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="a3c2" cx="90" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="a3c3" cx="150" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="a3c4" cx="210" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="a3c5" cx="270" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="a3bn1" x="30" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="a3bn2" x="90" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="a3bn3" x="150" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="a3bn4" x="210" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="a3bn5" x="270" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="a3lbl" x="150" y="128" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Seguimos empatados… así que toca mirar con más detalle. Comparemos qué pasa al recorrer la molécula en cada dirección.',
-       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_txtRst(['a3an1','a3an2','a3an3','a3an4','a3an5'],'#059669');_txtRst(['a3bn1','a3bn2','a3bn3','a3bn4','a3bn5'],'#dc2626');_lbl('a3lbl','');}},
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_txtRst(['a3an1','a3an2','a3an3','a3an4','a3an5'],'#059669');_txtRst(['a3bn1','a3bn2','a3bn3','a3bn4','a3bn5'],'#dc2626');_hiLine('a3ml','#94a3b8');_hiTxt('a3mt','#64748b');_hiLine('a3el','#94a3b8');_hiTxt('a3et','#64748b');_lbl('a3lbl','');}},
       {narr:'Si empezamos por este lado, las ramas aparecen rápido: primero en el carbono 2 y luego en el 3…',
-       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_G,_GB);_hi('a3c3',_G,_GB);_txt('a3an2','#059669','900');_txt('a3an3','#059669','900');_lbl('a3lbl','α: {2,3}');}},
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_G,_GB);_hi('a3c3',_G,_GB);_txt('a3an2','#059669','900');_txt('a3an3','#059669','900');_hiLine('a3ml','#059669',2);_hiTxt('a3mt','#059669');_hiLine('a3el','#059669',2);_hiTxt('a3et','#059669');_lbl('a3lbl','\u03b1: \u007b2,3\u007d');}},
       {narr:'Pero si empezamos desde el otro extremo, aparecen más tarde: en el 3 y luego en el 4…',
-       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c3',_R,_RB);_hi('a3c4',_R,_RB);_txt('a3bn3','#dc2626','900');_txt('a3bn4','#dc2626','900');_lbl('a3lbl','β: {3,4}');}},
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c3',_R,_RB);_hi('a3c4',_R,_RB);_txt('a3bn3','#dc2626','900');_txt('a3bn4','#dc2626','900');_hiLine('a3ml','#94a3b8');_hiTxt('a3mt','#64748b');_hiLine('a3el','#dc2626',2);_hiTxt('a3et','#dc2626');_lbl('a3lbl','\u03b2: \u007b3,4\u007d');}},
       {narr:'¿Qué camino conviene? El que encuentra las ramas antes. Por eso esta dirección es la correcta.',
-       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_W,_WB);_lbl('a3lbl','✓ {2,3} < {3,4}');}}
+       hi(){_hiA(['a3c1','a3c2','a3c3','a3c4','a3c5'],_N,_NB);_hi('a3c2',_W,_WB);_hiLine('a3ml','#16a34a');_hiTxt('a3mt','#059669');_lbl('a3lbl','\u2713 \u007b2,3\u007d < \u007b3,4\u007d');}}
     ]
   },
   A4:{
     col:'c',title:'Menor localizador en el primer punto de diferencia',
-    get svg(){return SVG_A4;},
+    svg:`<svg viewBox="0 0 380 135" width="100%" style="max-height:160px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="a4an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="a4an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="a4an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="a4an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="a4an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<text id="a4an6" x="330" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">6</text>
+<line x1="44" y1="68" x2="76" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="104" y1="68" x2="136" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="164" y1="68" x2="196" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="224" y1="68" x2="256" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="284" y1="68" x2="316" y2="68" stroke="#475569" stroke-width="2"/>
+<line id="a4m2l" x1="90" y1="54" x2="90" y2="40" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a4m2t" x="90" y="35" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<line id="a4m3l" x1="150" y1="54" x2="150" y2="40" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a4m3t" x="150" y="35" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<line id="a4m5l" x1="270" y1="54" x2="270" y2="40" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a4m5t" x="270" y="35" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="a4c1" cx="30" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="a4c2" cx="90" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="a4c3" cx="150" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="a4c4" cx="210" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="a4c5" cx="270" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<circle id="a4c6" cx="330" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="330" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C6</text>
+<text id="a4bn1" x="30" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">6</text>
+<text id="a4bn2" x="90" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="a4bn3" x="150" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="a4bn4" x="210" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="a4bn5" x="270" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="a4bn6" x="330" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="a4lbl" x="180" y="130" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Aquí todo sigue empatado… incluso el primer punto. Así que toca comparar paso a paso.',
-       hi(){_hiA(['a4ga1','a4ga2','a4ga3','a4rb1','a4rb2','a4rb3'],_N,_NB);_lbl('a4lbl','');}},
+       hi(){_hiA(['a4c1','a4c2','a4c3','a4c4','a4c5','a4c6'],_N,_NB);_txtRst(['a4an1','a4an2','a4an3','a4an4','a4an5','a4an6'],'#059669');_txtRst(['a4bn1','a4bn2','a4bn3','a4bn4','a4bn5','a4bn6'],'#dc2626');_hiLine('a4m2l','#94a3b8');_hiTxt('a4m2t','#64748b');_hiLine('a4m3l','#94a3b8');_hiTxt('a4m3t','#64748b');_hiLine('a4m5l','#94a3b8');_hiTxt('a4m5t','#64748b');_lbl('a4lbl','');}},
       {narr:'En la primera posición ambos caminos coinciden… siguen empatados.',
-       hi(){_hi('a4ga1',_A,_AB);_hi('a4rb1',_A,_AB);_hi('a4ga2',_N,_NB);_hi('a4rb2',_N,_NB);_hi('a4ga3',_N,_NB);_hi('a4rb3',_N,_NB);_lbl('a4lbl','Pos 1: 2 = 2 — empate');}},
+       hi(){_hiA(['a4c1','a4c2','a4c3','a4c4','a4c5','a4c6'],_N,_NB);_hi('a4c2',_A,'#d97706');_hi('a4c5',_A,'#d97706');_txt('a4an2','#d97706','900');_txt('a4bn5','#d97706','900');_hiLine('a4m2l','#d97706',2);_hiTxt('a4m2t','#d97706');_hiLine('a4m5l','#d97706',2);_hiTxt('a4m5t','#d97706');_lbl('a4lbl','Pos 1: 2 = 2 \u2014 empate');}},
       {narr:'Pero en la siguiente aparece la diferencia: en este camino la rama aparece antes que en el otro…',
-       hi(){_hi('a4ga1',_A,_AB);_hi('a4rb1',_A,_AB);_hi('a4ga2',_G,_GB);_hi('a4rb2',_R,_RB);_lbl('a4lbl','Pos 2: 4 < 6 — alfa gana');}},
+       hi(){_hi('a4c2',_A,'#d97706');_hi('a4c5',_A,'#d97706');_hi('a4c3',_G,_GB);_txt('a4an3','#059669','900');_txt('a4bn3','#dc2626','900');_hiLine('a4m3l','#059669',2);_hiTxt('a4m3t','#059669');_lbl('a4lbl','Pos 2: \u03b1=3 < \u03b2=4 \u2014 \u03b1 gana');}},
       {narr:'Y ahí se define todo: el camino que muestra la diferencia primero es el que gana.',
-       hi(){_hiA(['a4ga1','a4ga2','a4ga3'],_W,_WB);_lbl('a4lbl','✓ Cadena α gana en posición 2');}}
+       hi(){_hiA(['a4c1','a4c2','a4c3','a4c4','a4c5','a4c6'],_W,_WB);_hiLine('a4m2l','#16a34a');_hiTxt('a4m2t','#059669');_hiLine('a4m3l','#16a34a');_hiTxt('a4m3t','#059669');_hiLine('a4m5l','#16a34a');_hiTxt('a4m5t','#059669');_lbl('a4lbl','\u2713 Cadena \u03b1 gana en posici\u00f3n 2');}}
     ]
   },
   A5:{
-    col:'c',title:'Menor localizador al sustituyente con prioridad alfabética',
-    get svg(){return SVG_A5;},
+    col:'c',title:'Menor localizador al sustituyente con prioridad alfab\u00e9tica',
+    svg:`<svg viewBox="0 0 320 140" width="100%" style="max-height:165px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="a5an1" x="30" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="a5an2" x="90" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="a5an3" x="150" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="a5an4" x="210" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="a5an5" x="270" y="20" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<line x1="45" y1="75" x2="75" y2="75" stroke="#475569" stroke-width="2"/>
+<line x1="105" y1="75" x2="135" y2="75" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="75" x2="195" y2="75" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="75" x2="255" y2="75" stroke="#475569" stroke-width="2"/>
+<line id="a5el" x1="90" y1="60" x2="75" y2="43" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a5et" x="62" y="36" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2082;CH&#x2083;</text>
+<line id="a5ml" x1="210" y1="60" x2="210" y2="44" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="a5mt" x="210" y="38" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="a5c1" cx="30" cy="75" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="79" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="a5c2" cx="90" cy="75" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="79" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="a5c3" cx="150" cy="75" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="79" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="a5c4" cx="210" cy="75" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="79" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="a5c5" cx="270" cy="75" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="79" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="a5bn1" x="30" y="120" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="a5bn2" x="90" y="120" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="a5bn3" x="150" y="120" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="a5bn4" x="210" y="120" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="a5bn5" x="270" y="120" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="a5lbl" x="150" y="136" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Si todo lo anterior empata, usamos el último criterio: el orden alfabético.',
-       hi(){_hiA(['a5ga1','a5ga2','a5rb1','a5rb2'],_N,_NB);_lbl('a5lbl','');}},
+       hi(){_hiA(['a5c1','a5c2','a5c3','a5c4','a5c5'],_N,_NB);_txtRst(['a5an1','a5an2','a5an3','a5an4','a5an5'],'#059669');_txtRst(['a5bn1','a5bn2','a5bn3','a5bn4','a5bn5'],'#dc2626');_hiLine('a5el','#94a3b8');_hiTxt('a5et','#64748b');_hiLine('a5ml','#94a3b8');_hiTxt('a5mt','#64748b');_lbl('a5lbl','');}},
       {narr:'Entre etilo y metilo… ¿cuál va primero? Etilo.',
-       hi(){_hi('a5ga1',_A,_AB);_hi('a5rb1',_A,_AB);_lbl('a5lbl','"etil" < "metil" alfabéticamente');}},
+       hi(){_hiA(['a5c1','a5c2','a5c3','a5c4','a5c5'],_N,_NB);_hi('a5c2',_A,'#d97706');_hi('a5c4',_A,'#d97706');_hiLine('a5el','#d97706',2);_hiTxt('a5et','#d97706');_hiLine('a5ml','#d97706',2);_hiTxt('a5mt','#d97706');_lbl('a5lbl','"etil" < "metil" alfab\u00e9ticamente');}},
       {narr:'Entonces ese grupo debería aparecer lo más pronto posible en el recorrido…',
-       hi(){_hi('a5ga1',_G,_GB);_hi('a5ga2',_BL,_BB);_hi('a5rb1',_R,_RB);_lbl('a5lbl','α: etil=2 ✓ • β: etil=4 ✗');}},
+       hi(){_hiA(['a5c1','a5c2','a5c3','a5c4','a5c5'],_N,_NB);_hi('a5c2',_G,_GB);_txt('a5an2','#059669','900');_txt('a5bn2','#dc2626','900');_hiLine('a5el','#059669',2);_hiTxt('a5et','#059669');_lbl('a5lbl','\u03b1: etil=2 \u2713 \u2022 \u03b2: etil=4 \u2717');}},
       {narr:'Y justo eso ocurre en esta dirección. Por eso este es el camino correcto.',
-       hi(){_hiA(['a5ga1','a5ga2'],_W,_WB);_lbl('a5lbl','✓ 2-etil-4-metilpentano');}}
+       hi(){_hiA(['a5c1','a5c2','a5c3','a5c4','a5c5'],_W,_WB);_hiLine('a5el','#16a34a');_hiTxt('a5et','#059669');_hiLine('a5ml','#16a34a');_hiTxt('a5mt','#059669');_lbl('a5lbl','\u2713 2-etil-4-metilpentano');}}
     ]
   },
   B1:{
     col:'r',title:'Menor localizador al grupo funcional principal',
-    get svg(){return _svg5c('b1',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#CC79A7" stroke-width="1.8"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#CC79A7" font-weight="700">−OH</text><line x1="210" y1="79" x2="210" y2="93" stroke="#94a3b8" stroke-width="1.3"/><text x="210" y="103" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    svg:`<svg viewBox="0 0 320 130" width="100%" style="max-height:155px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b1an1" x="30" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="b1an2" x="90" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="b1an3" x="150" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="b1an4" x="210" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="b1an5" x="270" y="15" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<line x1="45" y1="68" x2="75" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="105" y1="68" x2="135" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="68" x2="195" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="68" x2="255" y2="68" stroke="#475569" stroke-width="2"/>
+<line id="b1ohl" x1="90" y1="53" x2="90" y2="38" stroke="#CC79A7" stroke-width="1.8" style="transition:stroke .3s"/>
+<text id="b1oht" x="90" y="33" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#CC79A7" font-weight="700" style="transition:fill .3s">&#x2212;OH</text>
+<line id="b1ml" x1="210" y1="83" x2="210" y2="98" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="b1mt" x="210" y="108" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="b1c1" cx="30" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b1c2" cx="90" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b1c3" cx="150" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b1c4" cx="210" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b1c5" cx="270" cy="68" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="b1bn1" x="30" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="b1bn2" x="90" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="b1bn3" x="150" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="b1bn4" x="210" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="b1bn5" x="270" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="b1lbl" x="150" y="128" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Ahora cambia la regla del juego. Aquí manda el grupo funcional: el –OH.',
-       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_N,_NB);_txtRst(['b1an1','b1an2','b1an3','b1an4','b1an5'],'#059669');_txtRst(['b1bn1','b1bn2','b1bn3','b1bn4','b1bn5'],'#dc2626');_lbl('b1lbl','');}},
+       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_N,_NB);_txtRst(['b1an1','b1an2','b1an3','b1an4','b1an5'],'#059669');_txtRst(['b1bn1','b1bn2','b1bn3','b1bn4','b1bn5'],'#dc2626');_hiLine('b1ohl','#CC79A7',1.8);_hiTxt('b1oht','#CC79A7');_hiLine('b1ml','#94a3b8');_hiTxt('b1mt','#64748b');_lbl('b1lbl','');}},
       {narr:'Si recorremos la molécula en esta dirección, el –OH aparece rápido: en el carbono 2…',
-       hi(){_hi('b1c2',_G,_GB);_txt('b1an2','#059669','900','13px');_lbl('b1lbl','α: −OH en posición 2');}},
+       hi(){_hi('b1c2','#fce8f4','#CC79A7');_txt('b1an2','#CC79A7','900','13px');_hiLine('b1ohl','#CC79A7',1.8);_hiTxt('b1oht','#CC79A7');_lbl('b1lbl','\u03b1: \u2212OH en posici\u00f3n 2');}},
       {narr:'Pero si vamos al revés, aparece mucho más tarde, en el 4…',
-       hi(){_hi('b1c2',_A,_AB);_txt('b1an2','#059669','700','11px');_txt('b1bn4','#dc2626','900','13px');_lbl('b1lbl','β: −OH en posición 4');}},
+       hi(){_hi('b1c2',_A,'#d97706');_txt('b1an2','#059669','700','11px');_txt('b1bn4','#dc2626','900','13px');_hiLine('b1ohl','#CC79A7',1.8);_hiTxt('b1oht','#CC79A7');_lbl('b1lbl','\u03b2: \u2212OH en posici\u00f3n 4');}},
       {narr:'¿Qué nos conviene? Encontrarlo lo antes posible. Por eso esta dirección es la correcta.',
-       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_W,_WB);_lbl('b1lbl','✓ 4-metilpentan-2-ol');}}
+       hi(){_hiA(['b1c1','b1c2','b1c3','b1c4','b1c5'],_W,_WB);_hiLine('b1ohl','#16a34a',1.8);_hiTxt('b1oht','#16a34a');_hiLine('b1ml','#16a34a');_hiTxt('b1mt','#059669');_lbl('b1lbl','\u2713 4-metilpentan-2-ol');}}
     ]
   },
   B2:{
     col:'r',title:'Menor localizador al conjunto de insaturaciones',
-    get svg(){return `<svg viewBox="0 0 310 108" width="100%" style="max-height:135px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-<text id="b2an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">1</text>
-<text id="b2an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">2</text>
-<text id="b2an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">3</text>
-<text id="b2an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">4</text>
-<text id="b2an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669">5</text>
-<line x1="44" y1="58" x2="76" y2="58" stroke="#475569" stroke-width="2.5"/>
-<line x1="44" y1="66" x2="76" y2="66" stroke="#475569" stroke-width="2.5"/>
-<line x1="104" y1="62" x2="136" y2="62" stroke="#475569" stroke-width="2"/>
-<line x1="164" y1="62" x2="196" y2="62" stroke="#475569" stroke-width="2"/>
-<line x1="224" y1="62" x2="256" y2="62" stroke="#475569" stroke-width="2"/>
-<circle id="b2c1" cx="30" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="30" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-<circle id="b2c2" cx="90" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="90" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-<circle id="b2c3" cx="150" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="150" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-<circle id="b2c4" cx="210" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="210" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-<circle id="b2c5" cx="270" cy="62" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="270" y="66" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-<text id="b2bn1" x="30" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">5</text>
-<text id="b2bn2" x="90" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">4</text>
-<text id="b2bn3" x="150" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">3</text>
-<text id="b2bn4" x="210" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">2</text>
-<text id="b2bn5" x="270" y="95" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626">1</text>
-<text id="b2lbl" x="150" y="12" text-anchor="middle" font-size="0" fill="transparent"></text>
-</svg>`;},
+    svg:`<svg viewBox="0 0 320 125" width="100%" style="max-height:150px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b2an1" x="30" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="b2an2" x="90" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="b2an3" x="150" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="b2an4" x="210" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="b2an5" x="270" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<line id="b2da" x1="45" y1="61" x2="75" y2="61" stroke="#94a3b8" stroke-width="2" style="transition:stroke .3s,stroke-width .3s"/>
+<line id="b2db" x1="45" y1="69" x2="75" y2="69" stroke="#94a3b8" stroke-width="2" style="transition:stroke .3s,stroke-width .3s"/>
+<line x1="105" y1="65" x2="135" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="65" x2="195" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="65" x2="255" y2="65" stroke="#475569" stroke-width="2"/>
+<circle id="b2c1" cx="30" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b2c2" cx="90" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b2c3" cx="150" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b2c4" cx="210" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b2c5" cx="270" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="b2bn1" x="30" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="b2bn2" x="90" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="b2bn3" x="150" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="b2bn4" x="210" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="b2bn5" x="270" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="b2lbl" x="150" y="122" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Aquí no hay grupo funcional, así que nos fijamos en el doble enlace.',
-       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_N,_NB);_txtRst(['b2an1','b2an2','b2an3','b2an4','b2an5'],'#059669');_txtRst(['b2bn1','b2bn2','b2bn3','b2bn4','b2bn5'],'#dc2626');}},
+       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_N,_NB);_txtRst(['b2an1','b2an2','b2an3','b2an4','b2an5'],'#059669');_txtRst(['b2bn1','b2bn2','b2bn3','b2bn4','b2bn5'],'#dc2626');_hiLine('b2da','#94a3b8',2);_hiLine('b2db','#94a3b8',2);_lbl('b2lbl','');}},
       {narr:'Si recorremos desde este lado, el doble enlace aparece de inmediato: entre el carbono 1 y el 2…',
-       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');}},
+       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');_hiLine('b2da','#059669',2.5);_hiLine('b2db','#059669',2.5);_lbl('b2lbl','\u03b1: doble enlace en posici\u00f3n 1');}},
       {narr:'Pero desde el otro extremo aparece mucho más tarde…',
-       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');_txt('b2bn4','#dc2626','900','13px');}},
+       hi(){_hi('b2c1',_G,_GB);_hi('b2c2',_G,_GB);_txt('b2an1','#059669','900','13px');_txt('b2bn2','#dc2626','900','13px');_hiLine('b2da','#059669',2.5);_hiLine('b2db','#059669',2.5);_lbl('b2lbl','\u03b2: doble enlace en posici\u00f3n 4');}},
       {narr:'Nos quedamos con el camino donde aparece primero. Esa es la dirección correcta.',
-       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_W,_WB);}}
+       hi(){_hiA(['b2c1','b2c2','b2c3','b2c4','b2c5'],_W,_WB);_hiLine('b2da','#16a34a',2.5);_hiLine('b2db','#16a34a',2.5);_lbl('b2lbl','\u2713 pent-1-eno');}}
     ]
   },
   B3:{
     col:'r',title:'Menor localizador al conjunto de sustituyentes',
-    get svg(){return _svg5c('b3',true,'<line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/><text x="90" y="36" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>');},
+    svg:`<svg viewBox="0 0 320 125" width="100%" style="max-height:150px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b3an1" x="30" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="b3an2" x="90" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="b3an3" x="150" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="b3an4" x="210" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="b3an5" x="270" y="14" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<line x1="45" y1="65" x2="75" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="105" y1="65" x2="135" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="165" y1="65" x2="195" y2="65" stroke="#475569" stroke-width="2"/>
+<line x1="225" y1="65" x2="255" y2="65" stroke="#475569" stroke-width="2"/>
+<line id="b3ml" x1="90" y1="50" x2="90" y2="37" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="b3mt" x="90" y="31" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="b3c1" cx="30" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b3c2" cx="90" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b3c3" cx="150" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b3c4" cx="210" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b3c5" cx="270" cy="65" r="15" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="69" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<text id="b3bn1" x="30" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="b3bn2" x="90" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="b3bn3" x="150" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="b3bn4" x="210" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="b3bn5" x="270" y="108" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="b3lbl" x="150" y="122" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Aquí no hay grupo funcional ni dobles enlaces… así que nos fijamos en las ramas.',
-       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_N,_NB);_txtRst(['b3an1','b3an2','b3an3','b3an4','b3an5'],'#059669');_txtRst(['b3bn1','b3bn2','b3bn3','b3bn4','b3bn5'],'#dc2626');_lbl('b3lbl','');}},
+       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_N,_NB);_txtRst(['b3an1','b3an2','b3an3','b3an4','b3an5'],'#059669');_txtRst(['b3bn1','b3bn2','b3bn3','b3bn4','b3bn5'],'#dc2626');_hiLine('b3ml','#94a3b8');_hiTxt('b3mt','#64748b');_lbl('b3lbl','');}},
       {narr:'Si recorremos desde este lado, la rama aparece rápido, en el carbono 2…',
-       hi(){_hi('b3c2',_G,_GB);_txt('b3an2','#059669','900','13px');_lbl('b3lbl','α: {2}');}},
+       hi(){_hi('b3c2',_G,_GB);_txt('b3an2','#059669','900','13px');_hiLine('b3ml','#059669',2);_hiTxt('b3mt','#059669');_lbl('b3lbl','\u03b1: \u007b2\u007d');}},
       {narr:'Pero desde el otro lado aparece más tarde…',
-       hi(){_hi('b3c2',_A,_AB);_txt('b3an2','#059669','700','11px');_txt('b3bn4','#dc2626','900','13px');_lbl('b3lbl','β: {4}');}},
+       hi(){_hi('b3c2',_A,'#d97706');_txt('b3an2','#059669','700','11px');_txt('b3bn2','#dc2626','900','13px');_hiLine('b3ml','#d97706',2);_hiTxt('b3mt','#d97706');_lbl('b3lbl','\u03b2: \u007b4\u007d');}},
       {narr:'Entonces elegimos el camino donde aparece primero. Esa es la dirección correcta.',
-       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_W,_WB);_lbl('b3lbl','✓ 2-metilpentano');}}
+       hi(){_hiA(['b3c1','b3c2','b3c3','b3c4','b3c5'],_W,_WB);_hiLine('b3ml','#16a34a');_hiTxt('b3mt','#059669');_lbl('b3lbl','\u2713 2-metilpentano');}}
     ]
   },
   B4:{
-    col:'r',title:'Menor localizador al sustituyente con prioridad alfabética',
-    get svg(){return `<svg viewBox="0 0 310 115" width="100%" style="max-height:140px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
-<text id="b4an1" x="25" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">1</text>
-<text id="b4an2" x="75" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">2</text>
-<text id="b4an3" x="125" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">3</text>
-<text id="b4an4" x="175" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">4</text>
-<text id="b4an5" x="225" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">5</text>
-<text id="b4an6" x="275" y="16" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#059669">6</text>
-<line x1="38" y1="60" x2="62" y2="60" stroke="#475569" stroke-width="2"/>
-<line x1="88" y1="60" x2="112" y2="60" stroke="#475569" stroke-width="2"/>
-<line x1="138" y1="60" x2="162" y2="60" stroke="#475569" stroke-width="2"/>
-<line x1="188" y1="60" x2="212" y2="60" stroke="#475569" stroke-width="2"/>
-<line x1="238" y1="60" x2="262" y2="60" stroke="#475569" stroke-width="2"/>
-<line x1="125" y1="74" x2="125" y2="90" stroke="#94a3b8" stroke-width="1.3"/>
-<text x="125" y="100" text-anchor="middle" font-size="8" font-family="sans-serif" fill="#64748b">CH₂CH₃</text>
-<line x1="175" y1="46" x2="175" y2="34" stroke="#94a3b8" stroke-width="1.3"/>
-<text x="175" y="31" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b">CH₃</text>
-<circle id="b4c1" cx="25" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="25" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
-<circle id="b4c2" cx="75" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="75" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
-<circle id="b4c3" cx="125" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="125" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
-<circle id="b4c4" cx="175" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="175" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
-<circle id="b4c5" cx="225" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="225" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
-<circle id="b4c6" cx="275" cy="60" r="13" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
-<text x="275" y="64" text-anchor="middle" font-size="8" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C6</text>
-<text id="b4bn1" x="25" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">6</text>
-<text id="b4bn2" x="75" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">5</text>
-<text id="b4bn3" x="125" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">4</text>
-<text id="b4bn4" x="175" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">3</text>
-<text id="b4bn5" x="225" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">2</text>
-<text id="b4bn6" x="275" y="97" text-anchor="middle" font-family="monospace" font-size="10" font-weight="700" fill="#dc2626">1</text>
-<text id="b4lbl" x="150" y="112" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
-</svg>`;},
+    col:'r',title:'Menor localizador al sustituyente con prioridad alfab\u00e9tica',
+    svg:`<svg viewBox="0 0 380 135" width="100%" style="max-height:160px;background:#fafafa;border-radius:8px;border:1.5px solid #d0e6f5">
+<text id="b4an1" x="30" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">1</text>
+<text id="b4an2" x="90" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">2</text>
+<text id="b4an3" x="150" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">3</text>
+<text id="b4an4" x="210" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">4</text>
+<text id="b4an5" x="270" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">5</text>
+<text id="b4an6" x="330" y="16" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#059669" style="transition:fill .3s">6</text>
+<line x1="44" y1="68" x2="76" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="104" y1="68" x2="136" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="164" y1="68" x2="196" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="224" y1="68" x2="256" y2="68" stroke="#475569" stroke-width="2"/>
+<line x1="284" y1="68" x2="316" y2="68" stroke="#475569" stroke-width="2"/>
+<line id="b4el" x1="150" y1="82" x2="165" y2="100" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="b4et" x="175" y="108" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2082;CH&#x2083;</text>
+<line id="b4ml" x1="210" y1="54" x2="210" y2="40" stroke="#94a3b8" stroke-width="1.5" style="transition:stroke .3s"/>
+<text id="b4mt" x="210" y="34" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#64748b" style="transition:fill .3s">CH&#x2083;</text>
+<circle id="b4c1" cx="30" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="30" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+<circle id="b4c2" cx="90" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="90" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+<circle id="b4c3" cx="150" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="150" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+<circle id="b4c4" cx="210" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="210" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+<circle id="b4c5" cx="270" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="270" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+<circle id="b4c6" cx="330" cy="68" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .3s,stroke .3s"/>
+<text x="330" y="72" text-anchor="middle" font-size="9" font-family="monospace" fill="#1e293b" font-weight="600" pointer-events="none">C6</text>
+<text id="b4bn1" x="30" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">6</text>
+<text id="b4bn2" x="90" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">5</text>
+<text id="b4bn3" x="150" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">4</text>
+<text id="b4bn4" x="210" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">3</text>
+<text id="b4bn5" x="270" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">2</text>
+<text id="b4bn6" x="330" y="112" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#dc2626" style="transition:fill .3s">1</text>
+<text id="b4lbl" x="180" y="130" text-anchor="middle" font-size="9" font-family="sans-serif" fill="#64748b" font-style="italic"></text>
+</svg>`,
     steps:[
       {narr:'Aquí pasa algo interesante: en ambos recorridos las posiciones son iguales… seguimos empatados.',
-       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_N,_NB);_lbl('b4lbl','');}},
+       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_N,_NB);_txtRst(['b4an1','b4an2','b4an3','b4an4','b4an5','b4an6'],'#059669');_txtRst(['b4bn1','b4bn2','b4bn3','b4bn4','b4bn5','b4bn6'],'#dc2626');_hiLine('b4el','#94a3b8');_hiTxt('b4et','#64748b');_hiLine('b4ml','#94a3b8');_hiTxt('b4mt','#64748b');_lbl('b4lbl','');}},
       {narr:'Así que volvemos al orden alfabético. ¿Quién va primero: etilo o metilo? Etilo.',
-       hi(){_hi('b4c3',_A,_AB);_hi('b4c4',_A,_AB);_lbl('b4lbl','"etil" < "metil" alfabéticamente');}},
+       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_N,_NB);_hi('b4c3',_A,'#d97706');_hi('b4c4',_A,'#d97706');_hiLine('b4el','#d97706',2);_hiTxt('b4et','#d97706');_hiLine('b4ml','#d97706',2);_hiTxt('b4mt','#d97706');_lbl('b4lbl','"etil" < "metil" alfab\u00e9ticamente');}},
       {narr:'Entonces buscamos el camino donde ese grupo aparezca antes…',
-       hi(){_hi('b4c3',_G,_GB);_hi('b4c4',_BL,_BB);_txt('b4an3','#059669','900','12px');_lbl('b4lbl','α: etil=3 ✓');}},
+       hi(){_hi('b4c3',_G,_GB);_hi('b4c4',_BL,_BB);_txt('b4an3','#059669','900','12px');_hiLine('b4el','#059669',2);_hiTxt('b4et','#059669');_lbl('b4lbl','\u03b1: etil=3 \u2713');}},
       {narr:'Y aquí ocurre justamente eso. Por eso esta es la dirección correcta.',
-       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_W,_WB);_lbl('b4lbl','✓ 3-etil-4-metilhexano');}}
+       hi(){_hiA(['b4c1','b4c2','b4c3','b4c4','b4c5','b4c6'],_W,_WB);_hiLine('b4el','#16a34a');_hiTxt('b4et','#059669');_hiLine('b4ml','#16a34a');_hiTxt('b4mt','#059669');_lbl('b4lbl','\u2713 3-etil-4-metilhexano');}}
     ]
   }
 };
