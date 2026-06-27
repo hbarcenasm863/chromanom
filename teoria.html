@@ -827,6 +827,41 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div class="comp-head">🧪 <strong>3-etil-2-metilpentan-1-ol</strong> — paso a paso</div>
   <div class="comp-sub">Pulsa "Siguiente paso" para ver cómo se aplica cada paso del algoritmo a esta molécula.</div>
 
+  <!-- SVG molecular diagram — MDEC highlights per step -->
+  <svg id="molAlg" viewBox="0 0 310 115" width="100%" style="display:block;max-height:145px;background:#fafafa;border:1.5px solid var(--brd);border-radius:10px;margin-bottom:10px">
+    <!-- –OH above C1 -->
+    <line x1="30" y1="51" x2="30" y2="39" stroke="#CC79A7" stroke-width="1.8"/>
+    <text id="algoh" x="30" y="36" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8" font-weight="700">−OH</text>
+    <!-- CH₃ above C2 -->
+    <line x1="90" y1="51" x2="90" y2="39" stroke="#94a3b8" stroke-width="1.3"/>
+    <text id="algm2" x="90" y="36" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">CH₃</text>
+    <!-- CH₂CH₃ below C3 (angled right) -->
+    <line x1="150" y1="79" x2="165" y2="96" stroke="#94a3b8" stroke-width="1.3"/>
+    <text id="alget" x="179" y="102" font-family="sans-serif" font-size="9" fill="#94a3b8">CH₂CH₃</text>
+    <!-- Chain bonds -->
+    <line x1="44" y1="65" x2="76" y2="65" stroke="#475569" stroke-width="2"/>
+    <line x1="104" y1="65" x2="136" y2="65" stroke="#475569" stroke-width="2"/>
+    <line x1="164" y1="65" x2="196" y2="65" stroke="#475569" stroke-width="2"/>
+    <line x1="224" y1="65" x2="256" y2="65" stroke="#475569" stroke-width="2"/>
+    <!-- Carbon circles -->
+    <circle id="algc1" cx="30"  cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
+    <text x="30"  y="69" text-anchor="middle" font-family="monospace" font-size="9" fill="#1e293b" font-weight="600" pointer-events="none">C1</text>
+    <circle id="algc2" cx="90"  cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
+    <text x="90"  y="69" text-anchor="middle" font-family="monospace" font-size="9" fill="#1e293b" font-weight="600" pointer-events="none">C2</text>
+    <circle id="algc3" cx="150" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
+    <text x="150" y="69" text-anchor="middle" font-family="monospace" font-size="9" fill="#1e293b" font-weight="600" pointer-events="none">C3</text>
+    <circle id="algc4" cx="210" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
+    <text x="210" y="69" text-anchor="middle" font-family="monospace" font-size="9" fill="#1e293b" font-weight="600" pointer-events="none">C4</text>
+    <circle id="algc5" cx="270" cy="65" r="14" fill="#f1f5f9" stroke="#475569" stroke-width="1.5" style="transition:fill .35s,stroke .35s"/>
+    <text x="270" y="69" text-anchor="middle" font-family="monospace" font-size="9" fill="#1e293b" font-weight="600" pointer-events="none">C5</text>
+    <!-- Locators (initially hidden) -->
+    <text id="algn1" x="30"  y="100" text-anchor="middle" font-family="monospace" font-size="12" font-weight="900" fill="#A0527F" opacity="0" style="transition:opacity .35s">1</text>
+    <text id="algn2" x="90"  y="100" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#14532d" opacity="0" style="transition:opacity .35s">2</text>
+    <text id="algn3" x="150" y="100" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#14532d" opacity="0" style="transition:opacity .35s">3</text>
+    <text id="algn4" x="210" y="100" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#14532d" opacity="0" style="transition:opacity .35s">4</text>
+    <text id="algn5" x="270" y="100" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#14532d" opacity="0" style="transition:opacity .35s">5</text>
+  </svg>
+
   <!-- nombre que se va construyendo -->
   <div id="alg-name-build" style="display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;background:#f0f7ff;border:1.5px solid var(--brd);border-radius:var(--rs);padding:12px 16px;margin-bottom:14px;min-height:48px">
     <span style="font-size:.72rem;color:var(--dim);font-style:italic">El nombre se construye aquí…</span>
@@ -2154,24 +2189,6 @@ td{border-bottom:1px solid #e8e8e8}
 <table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
 <tbody>${CMPhtml}</tbody></table>
 <div class="note">* Los nombres en cursiva eran aceptados por IUPAC antes de 2005 pero ya no se recomiendan.</div>
-<div id="ruleModal" class="rmod-overlay" style="display:none" onclick="rmodClose(event)">
-  <div class="rmod-box" onclick="event.stopPropagation()">
-    <div class="rmod-hdr">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span id="rmodTag" class="rmod-tag c">A1</span>
-        <span id="rmodTtl" class="rmod-ttl"></span>
-      </div>
-      <button class="rmod-x" onclick="rmodX()">&#215;</button>
-    </div>
-    <div class="rmod-svg-area" id="rmodSvgArea"></div>
-    <div class="rmod-step-txt" id="rmodStepTxt">paso 1 de 4</div>
-    <div class="rmod-nav">
-      <button class="rmod-btn" id="rmodPrev" onclick="rmodPrev()">&#9664; Anterior</button>
-      <button class="rmod-snd" onclick="rmodSpeak()">&#128266;</button>
-      <button class="rmod-btn" id="rmodNext" onclick="rmodNext()">Siguiente &#9654;</button>
-    </div>
-  </div>
-</div>
 </body></html>`;
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   const url=URL.createObjectURL(blob);
@@ -2240,6 +2257,33 @@ const ALG_NAME=[
   {partes:[{t:'3-etil-2-metil',cls:'r',l:'Ramas'},{t:'pent',cls:'c',l:'5C'},{t:'an',cls:'i',l:'Saturado'},{t:'-1-ol',cls:'g',l:'OH en C1'}]},
 ];
 const CLS_COLOR={r:'color:var(--c1);background:var(--c1b)',c:'color:var(--c2);background:var(--c2b)',i:'color:var(--c3);background:var(--c3b)',g:'color:var(--c4);background:var(--c4b)'};
+function svgAlg_update(step){
+  const C='#f1f5f9',CB='#475569';
+  const C4F='#fce8f4',C4S='#CC79A7';
+  const C2F='#dcfce7',C2S='#166534';
+  const C1F='#cffafe',C1S='#0891b2';
+  const circles=['algc1','algc2','algc3','algc4','algc5'];
+  circles.forEach(id=>{const e=document.getElementById(id);if(e){e.style.fill=C;e.style.stroke=CB;}});
+  ['algoh','algm2','alget'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.fill='#94a3b8';});
+  ['algn1','algn2','algn3','algn4','algn5'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.opacity='0';});
+  if(step<0)return;
+  // Step 0+: grupo funcional – OH en C1 (rosa)
+  const c1=document.getElementById('algc1');if(c1){c1.style.fill=C4F;c1.style.stroke=C4S;}
+  const oh=document.getElementById('algoh');if(oh)oh.style.fill='#CC79A7';
+  if(step<1)return;
+  // Step 1+: cadena de 5C (verde)
+  ['algc2','algc3','algc4','algc5'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.fill=C2F;e.style.stroke=C2S;}});
+  if(step<2)return;
+  // Step 2+: localizadores visibles
+  ['algn1','algn2','algn3','algn4','algn5'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.opacity='1';});
+  if(step<3)return;
+  // Step 3+: ramificaciones en C2 y C3 (teal)
+  const c2=document.getElementById('algc2'),c3=document.getElementById('algc3');
+  if(c2){c2.style.fill=C1F;c2.style.stroke=C1S;}
+  if(c3){c3.style.fill=C1F;c3.style.stroke=C1S;}
+  const m2=document.getElementById('algm2'),et=document.getElementById('alget');
+  if(m2)m2.style.fill='#0e7490';if(et)et.style.fill='#0e7490';
+}
 let algStep=-1;
 function renderAlgName(idx){
   const nb=document.getElementById('alg-name-build');
@@ -2258,12 +2302,14 @@ function stepAlg(){
     else el.className='comp-step locked';
   }
   renderAlgName(algStep+1);
+  svgAlg_update(algStep);
   if(algStep>=4){const b=document.getElementById('alg-btn');b.disabled=true;b.textContent='✓ Nombre completo';}
 }
 function resetAlg(){
   algStep=-1;
   for(let i=0;i<=4;i++){const el=document.getElementById('alg-s'+i);if(el)el.className='comp-step'+(i>0?' locked':'');}
   renderAlgName(0);
+  svgAlg_update(-1);
   const b=document.getElementById('alg-btn');b.disabled=false;b.textContent='▶ Siguiente paso';
 }
 
@@ -2576,5 +2622,23 @@ function rmodX(){document.getElementById('ruleModal').style.display='none';docum
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&_rId)rmodX();});
 
 </script>
+<div id="ruleModal" class="rmod-overlay" style="display:none" onclick="rmodClose(event)">
+  <div class="rmod-box" onclick="event.stopPropagation()">
+    <div class="rmod-hdr">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="rmodTag" class="rmod-tag c">A1</span>
+        <span id="rmodTtl" class="rmod-ttl"></span>
+      </div>
+      <button class="rmod-x" onclick="rmodX()">&#215;</button>
+    </div>
+    <div class="rmod-svg-area" id="rmodSvgArea"></div>
+    <div class="rmod-step-txt" id="rmodStepTxt">paso 1 de 4</div>
+    <div class="rmod-nav">
+      <button class="rmod-btn" id="rmodPrev" onclick="rmodPrev()">&#9664; Anterior</button>
+      <button class="rmod-snd" onclick="rmodSpeak()">&#128266;</button>
+      <button class="rmod-btn" id="rmodNext" onclick="rmodNext()">Siguiente &#9654;</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
