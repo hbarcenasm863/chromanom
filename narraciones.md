@@ -1,11 +1,6 @@
 # Narraciones de los modales interactivos — ChromaNom
 
-Cada bloque tiene el **ID de la regla**, el número de paso y el texto actual.
-Edita el texto del campo `narr` y luego dímelo para que lo aplique al código.
-
-> **Principio de personalización de Mayer**: habla como si fuera una conversación,
-> usa "tú", primera persona del plural ("fijémonos"), preguntas retóricas, pausas
-> naturales. Evita vocabulario excesivamente técnico donde baste uno más simple.
+> Versión revisada — estilo conversacional (Mayer personalización)
 
 ---
 
@@ -13,56 +8,48 @@ Edita el texto del campo `narr` y luego dímelo para que lo aplique al código.
 
 ### A1 · Mayor número de carbonos
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `Molécula: 2-metilbutano. Hay dos posibles cadenas. ¿Cuál es la más larga?` |
-| 2 | `Cadena larga: cuatro carbonos seguidos, de C1 a C4. Es la ruta más extensa.` |
-| 3 | `Ruta alternativa por la rama: solo tres carbonos. Es más corta.` |
-| 4 | `A1: cadena de cuatro gana. El nombre correcto es 2-metilbutano.` |
-
----
+| Paso | Narración |
+|------|-----------|
+| 1 | Miremos esta molécula: 2-metilbutano. Hay dos posibles caminos… ¿cuál dirías que es el más largo? |
+| 2 | Fijémonos en este camino: seguimos cuatro carbonos seguidos, de C1 a C4… se ve bastante largo, ¿no? |
+| 3 | Ahora probemos el otro, pasando por la rama… aquí solo alcanzamos tres carbonos. Se queda corto. |
+| 4 | Entonces, ¿con cuál nos quedamos? Exacto: el de cuatro carbonos. Ese es el camino principal. |
 
 ### A2 · Mayor número de ramificaciones
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `3-etil-2-metilpentano. Dos cadenas de cinco carbonos. A1 empata. Se aplica A2.` |
-| 2 | `Cadena principal: tiene dos sustituyentes, metilo en C2 y etilo en C3.` |
-| 3 | `La cadena alternativa por el etilo tendría solo un sustituyente.` |
-| 4 | `A2: dos ramificaciones ganan. La cadena con más ramas es la principal.` |
+| Paso | Narración |
+|------|-----------|
+| 1 | Aquí tenemos 3-etil-2-metilpentano. Hay dos caminos de cinco carbonos… así que estamos empatados. Vamos a ver cuál conviene más. |
+| 2 | Si seguimos este camino, aparecen dos ramas: una en el carbono 2 y otra en el 3… |
+| 3 | Pero si probamos el otro camino, solo aparece una rama… |
+| 4 | ¿Cuál te conviene más? El que muestra más ramificaciones. Por eso este es el camino principal. |
 
----
+### A3 · Menor localización temprana
 
-### A3 · Menor conjunto de localizadores
+| Paso | Narración |
+|------|-----------|
+| 1 | Seguimos empatados… así que toca mirar con más detalle. Comparemos qué pasa al recorrer la molécula en cada dirección. |
+| 2 | Si empezamos por este lado, las ramas aparecen rápido: primero en el carbono 2 y luego en el 3… |
+| 3 | Pero si empezamos desde el otro extremo, aparecen más tarde: en el 3 y luego en el 4… |
+| 4 | ¿Qué camino conviene? El que encuentra las ramas antes. Por eso esta dirección es la correcta. |
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `A2 empata: mismas ramificaciones. Se comparan los conjuntos de localizadores posición a posición.` |
-| 2 | `Dirección alfa verde: sustituyentes en posición 2 y 3. Conjunto llaves dos, tres.` |
-| 3 | `Dirección beta rojo: sustituyentes en posición 3 y 4. Conjunto llaves tres, cuatro.` |
-| 4 | `A3: llaves dos, tres menor que llaves tres, cuatro. Primera diferencia: 2 menor que 3. Alfa gana.` |
+### A4 · Primer punto de diferencia
 
----
-
-### A4 · Primer punto de diferencia en el conjunto
-
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `Dos cadenas con igual longitud, igual número de ramas. Primer localizador igual. Se compara el segundo.` |
-| 2 | `Primera posición: dos igual dos. Empata. Se pasa a la segunda posición.` |
-| 3 | `Segunda posición: cuatro menor que seis. La cadena alfa tiene el valor más bajo aquí.` |
-| 4 | `A4: cuatro menor que seis en la segunda posición. La cadena alfa es la cadena principal.` |
-
----
+| Paso | Narración |
+|------|-----------|
+| 1 | Aquí todo sigue empatado… incluso el primer punto. Así que toca comparar paso a paso. |
+| 2 | En la primera posición ambos caminos coinciden… siguen empatados. |
+| 3 | Pero en la siguiente aparece la diferencia: en este camino la rama aparece antes que en el otro… |
+| 4 | Y ahí se define todo: el camino que muestra la diferencia primero es el que gana. |
 
 ### A5 · Prioridad alfabética del sustituyente
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `Todo lo anterior empata. A5: el sustituyente nombrado primero alfabéticamente recibe el menor localizador.` |
-| 2 | `Orden alfabético: etilo viene antes que metilo. Etilo debe tener el localizador más bajo posible.` |
-| 3 | `Dirección alfa: etilo en dos, metilo en cuatro. Etilo recibe el localizador más bajo.` |
-| 4 | `A5: dirección alfa correcta. El nombre es 2-etil-4-metilpentano.` |
+| Paso | Narración |
+|------|-----------|
+| 1 | Si todo lo anterior empata, usamos el último criterio: el orden alfabético. |
+| 2 | Entre etilo y metilo… ¿cuál va primero? Etilo. |
+| 3 | Entonces ese grupo debería aparecer lo más pronto posible en el recorrido… |
+| 4 | Y justo eso ocurre en esta dirección. Por eso este es el camino correcto. |
 
 ---
 
@@ -70,42 +57,36 @@ Edita el texto del campo `narr` y luego dímelo para que lo aplique al código.
 
 ### B1 · Menor localizador al grupo funcional
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `4-metilpentan-2-ol. El grupo funcional guión OH determina la dirección de numeración.` |
-| 2 | `Dirección alfa verde: guión OH en C2, posición dos.` |
-| 3 | `Dirección beta rojo: el mismo guión OH recibe posición cuatro. Cuatro es mayor que dos.` |
-| 4 | `B1: dos menor que cuatro. Dirección alfa gana. El nombre correcto es 4-metilpentan-2-ol.` |
-
----
+| Paso | Narración |
+|------|-----------|
+| 1 | Ahora cambia la regla del juego. Aquí manda el grupo funcional: el –OH. |
+| 2 | Si recorremos la molécula en esta dirección, el –OH aparece rápido: en el carbono 2… |
+| 3 | Pero si vamos al revés, aparece mucho más tarde, en el 4… |
+| 4 | ¿Qué nos conviene? Encontrarlo lo antes posible. Por eso esta dirección es la correcta. |
 
 ### B2 · Menor localizador al doble enlace
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `Pent-1-eno. Sin grupo funcional: B1 no aplica. Se aplica B2: menor localizador al doble enlace.` |
-| 2 | `Dirección alfa verde: doble enlace entre C1 y C2, localizador uno.` |
-| 3 | `Dirección beta rojo: el mismo doble enlace recibiría localizador cuatro. Cuatro mayor que uno.` |
-| 4 | `B2: uno menor que cuatro. Dirección alfa gana. El nombre correcto es pent-1-eno.` |
+| Paso | Narración |
+|------|-----------|
+| 1 | Aquí no hay grupo funcional, así que nos fijamos en el doble enlace. |
+| 2 | Si recorremos desde este lado, el doble enlace aparece de inmediato: entre el carbono 1 y el 2… |
+| 3 | Pero desde el otro extremo aparece mucho más tarde… |
+| 4 | Nos quedamos con el camino donde aparece primero. Esa es la dirección correcta. |
 
----
+### B3 · Menor localizador a los sustituyentes
 
-### B3 · Menor localizador al conjunto de sustituyentes
-
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `2-metilpentano. Sin grupo funcional ni insaturaciones. B1 y B2 no aplican. Se aplica B3.` |
-| 2 | `Dirección alfa verde: metilo en posición dos. Conjunto llaves dos.` |
-| 3 | `Dirección beta rojo: el mismo metilo recibe posición cuatro. Conjunto llaves cuatro.` |
-| 4 | `B3: dos menor que cuatro. Dirección alfa gana. El nombre correcto es 2-metilpentano.` |
-
----
+| Paso | Narración |
+|------|-----------|
+| 1 | Aquí no hay grupo funcional ni dobles enlaces… así que nos fijamos en las ramas. |
+| 2 | Si recorremos desde este lado, la rama aparece rápido, en el carbono 2… |
+| 3 | Pero desde el otro lado aparece más tarde… |
+| 4 | Entonces elegimos el camino donde aparece primero. Esa es la dirección correcta. |
 
 ### B4 · Prioridad alfabética en la numeración
 
-| Paso | Texto actual |
-|------|-------------|
-| 1 | `3-etil-4-metilhexano. Los conjuntos de localizadores 3,4 son iguales en ambas direcciones. Se aplica B4.` |
-| 2 | `Orden alfabético: etilo viene antes que metilo. Etilo debe recibir el localizador más bajo posible.` |
-| 3 | `Dirección alfa verde: etilo en posición tres, metilo en cuatro. Etilo tiene el número menor.` |
-| 4 | `B4: etilo en tres es menor que cuatro. Dirección alfa gana. El nombre correcto es 3-etil-4-metilhexano.` |
+| Paso | Narración |
+|------|-----------|
+| 1 | Aquí pasa algo interesante: en ambos recorridos las posiciones son iguales… seguimos empatados. |
+| 2 | Así que volvemos al orden alfabético. ¿Quién va primero: etilo o metilo? Etilo. |
+| 3 | Entonces buscamos el camino donde ese grupo aparezca antes… |
+| 4 | Y aquí ocurre justamente eso. Por eso esta es la dirección correcta. |
