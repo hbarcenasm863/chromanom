@@ -1057,6 +1057,8 @@ function _chemNorm(t) {
   // Halógenos en fórmulas
   t = t.replace(/COCl/g,'cloruro de acilo').replace(/COBr/g,'bromuro de acilo')
        .replace(/COF/g,'fluoruro de acilo');
+  // Acrónimos
+  t = t.replace(/IUPAC/g, 'yupac');
   // Símbolos restantes
   t = t.replace(/−/g,' ') // guión matemático → espacio
        .replace(/≡/g,' triple enlace ')
