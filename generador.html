@@ -27,11 +27,11 @@
   --r:14px;--rs:8px;
   --sh:0 2px 12px rgba(13,74,115,.10);
   --sh2:0 6px 32px rgba(13,74,115,.16);
-  /* MDEC colors */
-  --c-c:#1b8a3a;
-  --c-g:#b5176b;
-  --c-i:#d97200;
-  --c-r:#1156a8;
+  /* MDEC colors — alineados con grupos.html/teoria.html */
+  --c-c:#166534;
+  --c-g:#CC79A7;
+  --c-i:#b45309;
+  --c-r:#0891b2;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -1339,9 +1339,9 @@ const MOLS = [
   {key:'butoxibutano',name:'1-butoxibutano',topic:'eteres',parts:[{t:'butoxi',cls:'r',l:'Grupo butoxi (−OC₄H₉)'},{t:'butan',cls:'c',l:'4 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'diisopropiloxter',name:'2-isopropoxipropano',topic:'eteres',parts:[{t:'isopropoxi',cls:'r',l:'Grupo isopropoxi'},{t:'propan',cls:'c',l:'3 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'etoxibenceno',name:'etoxibenceno',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Éter aromático'}]},
-  {key:'tetrahidrofurano',name:'oxolano (THF)',topic:'eteres',parts:[{t:'oxa',cls:'r',l:'Oxígeno en anillo'},{t:'olan',cls:'c',l:'Anillo de 5 átomos'},{t:'o',cls:'g',l:'Éter cíclico (furano saturado)'}]},
-  {key:'tetrahidropirano',name:'oxano (THP)',topic:'eteres',parts:[{t:'oxa',cls:'r',l:'Oxígeno en anillo'},{t:'nan',cls:'c',l:'Anillo de 6 átomos'},{t:'o',cls:'g',l:'Éter cíclico (pirano saturado)'}]},
-  {key:'dioxano',name:'1,4-dioxano',topic:'eteres',parts:[{t:'1,4-di',cls:'r',l:'Posiciones 1 y 4'},{t:'ox',cls:'r',l:'Dos oxígenos'},{t:'an',cls:'c',l:'Anillo de 6 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
+  {key:'tetrahidrofurano',name:'oxolano (THF)',topic:'eteres',parts:[{t:'oxa',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'olan',cls:'c',l:'Anillo de 5 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
+  {key:'tetrahidropirano',name:'oxano (THP)',topic:'eteres',parts:[{t:'oxa',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'nan',cls:'c',l:'Anillo de 6 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
+  {key:'dioxano',name:'1,4-dioxano',topic:'eteres',parts:[{t:'1,4-di',cls:'g',l:'Dos oxígenos en pos. 1 y 4'},{t:'ox',cls:'g',l:'Oxígeno heteroatómico'},{t:'an',cls:'c',l:'Anillo de 6 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
   {key:'dimetoxietano',name:'1,2-dimetoxietano',topic:'eteres',parts:[{t:'1,2-dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'etan',cls:'c',l:'2 carbonos'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'dosMetoxi2Metilpropano',name:'2-metoxi-2-metilpropano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2'},{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'propan',cls:'c',l:'3 carbonos'},{t:'o',cls:'g',l:'Éter (MTBE)'}]},
   {key:'etoxipentan',name:'1-etoxipentano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'pentan',cls:'c',l:'5 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Éter'}]},
@@ -1362,8 +1362,8 @@ const MOLS = [
   {key:'tresMetilButanonitrilo',name:'3-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'dosMetilButanonitrilo',name:'2-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'dosDosMetilPropanonitrilo',name:'2,2-dimetilpropanonitrilo',topic:'nitrilos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'propan',cls:'c',l:'3 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'butanodinitrilo',name:'butanodinitrilo',topic:'nitrilos',parts:[{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'di',cls:'g',l:'Dos grupos nitrilo'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'hexanodinitrilo',name:'hexanodinitrilo',topic:'nitrilos',parts:[{t:'hexan',cls:'c',l:'6 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'di',cls:'g',l:'Dos grupos nitrilo'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'butanodinitrilo',name:'butanodinitrilo',topic:'nitrilos',parts:[{t:'butan',cls:'c',l:'4 carbonos (cadena)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
+  {key:'hexanodinitrilo',name:'hexanodinitrilo',topic:'nitrilos',parts:[{t:'hexan',cls:'c',l:'6 carbonos (cadena)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
   {key:'but2enonitrilo',name:'but-2-enonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'benzonitrilo',name:'benzonitrilo',topic:'nitrilos',parts:[{t:'benzo',cls:'c',l:'Benceno'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'ciclohexanocarbonitrilo',name:'ciclohexanocarbonitrilo',topic:'nitrilos',parts:[{t:'ciclohexano',cls:'c',l:'Anillo de 6C'},{t:'carbo',cls:'c',l:'Carbono adicional'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
