@@ -503,12 +503,12 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div class="part-card c" data-num="2">
     <div class="part-num">Parte ②</div>
     <div class="part-title">Cadena principal</div>
-    <div class="part-desc">La cadena más larga que contiene el grupo funcional. Determina el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
+    <div class="part-desc">La cadena más larga <strong>de carbonos</strong> que contiene el grupo funcional. Determina el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
   </div>
   <div class="part-card i" data-num="3">
     <div class="part-num">Parte ③</div>
     <div class="part-title">Insaturaciones</div>
-    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Se indica el localizador del primer carbono que los forma. Dobles + triples = eninos.</div>
+    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Se indica el localizador del primer carbono que los forma. Dobles + triples = eninos. Sin insaturaciones (solo enlaces simples C−C) → <strong>-an-</strong>: hex<strong>an</strong>-1-ol, prop<strong>an</strong>-2-ona.</div>
   </div>
   <div class="part-card g" data-num="4">
     <div class="part-num">Parte ④</div>
@@ -576,7 +576,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <div class="step-tab g" onclick="S(0,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
     <div class="step-desc r"><div class="step-icon">🔴</div><div class="step-text"><strong>Ramificación: etilo en C5</strong><p>Hay una cadena lateral de 2 carbonos (etilo) unida al C5. Se nombra con su localizador y va al inicio del nombre.</p></div></div>
-    <div class="step-desc c"><div class="step-icon">🟠</div><div class="step-text"><strong>Cadena principal: 9 carbonos → non</strong><p>La cadena más larga que contiene el COOH tiene 9 carbonos. El C del COOH es siempre C1. Prefijo: <strong>non</strong>.</p></div></div>
+    <div class="step-desc c"><div class="step-icon">🟠</div><div class="step-text"><strong>Cadena principal: 9 carbonos → non</strong><p>La cadena más larga de carbonos que contiene el COOH tiene 9 carbonos. El C del COOH es siempre C1. Prefijo: <strong>non</strong>.</p></div></div>
     <div class="step-desc i"><div class="step-icon">🔵</div><div class="step-text"><strong>Doble enlace en C6 → 6-en</strong><p>Las dos líneas paralelas = doble enlace C=C entre C6 y C7. IUPAC: localizador antes del sufijo → <strong>non-6-enoico</strong>.</p></div></div>
     <div class="step-desc g"><div class="step-icon">🟣</div><div class="step-text"><strong>Grupo funcional: ácido carboxílico → ácido…oico</strong><p>El −COOH tiene la máxima prioridad. Siempre es C1. El nombre empieza con <strong>ácido</strong> y termina en <strong>oico</strong>.</p></div></div>
     <div class="name-build">
@@ -1083,7 +1083,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div class="rule-n c">A1</div>
   <div class="rule-body c">
     <strong>Mayor número de carbonos en la cadena</strong>
-    <p>La cadena más larga gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2.</p>
+    <p>La cadena más larga <strong>de carbonos</strong> gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2.</p>
     <div class="rc-hint">▶ Ver ejemplo interactivo</div>
   </div>
 </div>
@@ -1671,7 +1671,7 @@ const PD={
        ops:['Aldehído — C=O en extremo → -al','Cetona — C=O entre 2C → -ona','Ácido carboxílico → -oico','Alcano → -o'],
        resp:'Cetona — C=O entre 2C → -ona',parte:'g',
        fb:'El C=O está en C2, con carbonos a ambos lados → <strong>cetona</strong> → sufijo <strong>-ona</strong>.'},
-      {n:2,titulo:'Cadena principal',expl:'La cadena más larga que pase por el grupo funcional.',
+      {n:2,titulo:'Cadena principal',expl:'La cadena más larga de carbonos que pase por el grupo funcional.',
        q:'¿Cuántos C incluye la cadena con el C=O?',tipo:'mc',
        ops:['3C → prop-','4C → but-','5C → pent-','6C → hex-'],
        resp:'5C → pent-',parte:'c',
