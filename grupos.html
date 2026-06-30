@@ -1025,7 +1025,19 @@ const CATS = [
 
 
 // ── Web Speech API ──────────────────────────────────────────
-let _spkUtt = null;
+let _spkUtt = null, _spkVoice = null;
+function _loadVoice() {
+  const vs = speechSynthesis.getVoices().filter(v => /^es/i.test(v.lang));
+  _spkVoice = vs.find(v => /google/i.test(v.name))
+           || vs.find(v => /apple|luciana|monica|jorge|paola|pablo|verónica|siri/i.test(v.name))
+           || vs.find(v => !/microsoft/i.test(v.name) && !v.localService)
+           || vs.find(v => !/microsoft/i.test(v.name))
+           || vs[0] || null;
+}
+if (window.speechSynthesis) {
+  speechSynthesis.addEventListener('voiceschanged', _loadVoice);
+  _loadVoice();
+}
 function _chemNorm(t) {
   // Subíndices Unicode → dígitos normales
   t = t.replace(/₀/g,'0').replace(/₁/g,'1').replace(/₂/g,'2').replace(/₃/g,'3')
@@ -1077,8 +1089,9 @@ function _speak(raw) {
   speechSynthesis.cancel();
   _spkUtt = new SpeechSynthesisUtterance(text);
   _spkUtt.lang = 'es-ES';
-  _spkUtt.rate = 0.92;
-  _spkUtt.pitch = 1.0;
+  _spkUtt.rate = 0.88;
+  _spkUtt.pitch = 1.05;
+  if (_spkVoice) _spkUtt.voice = _spkVoice;
   speechSynthesis.speak(_spkUtt);
 }
 function _stopSpeak() { speechSynthesis.cancel(); }

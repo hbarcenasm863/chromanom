@@ -1046,7 +1046,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    ↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre. Los demás se nombran como sustituyentes usando su nombre secundario.
+    ↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre. Los demás se nombran como sustituyentes usando su nombre secundario. · <strong>«carbo-»</strong> aparece cuando el grupo funcional queda fuera del anillo (p. ej. <em>ciclohexanocarboxílico</em>); sin «carbo-» el grupo está en el extremo de una cadena abierta (p. ej. <em>hexanoico</em>).
   </div>
 </div>
 
@@ -1532,13 +1532,13 @@ for(let i=0;i<6;i++) render(i);
 
 // ── TABLA 3: Grupos funcionales ──
 const T3=[
-  {n:1, cls:'c1',  name:'Carboxilatos (sales)',  fm:'R−COO⁻',    sf:'ácido -carboxilato / -oato',             ss:'carboxilato-'},
-  {n:2, cls:'c1',  name:'Ácidos carboxílicos',   fm:'R−COOH',     sf:'ácido -carboxílico / ácido -oico',      ss:'carboxi-'},
-  {n:3, cls:'c1',  name:'Ésteres',               fm:"R−COOR'",    sf:'-carboxilato de R / -oato de R',        ss:'(R)oxicarbonil-'},
-  {n:4, cls:'c1',  name:'Haluros de ácido',      fm:'R−COX',      sf:'haluro de -carbonilo / haluro de -oilo',ss:'halocarbonil-'},
-  {n:5, cls:'c1',  name:'Amidas',                fm:'R−CONH₂',    sf:'-carboxamida / -amida',                 ss:'carbamoil-'},
-  {n:6, cls:'c3',  name:'Nitrilos',              fm:'R−C≡N',      sf:'-carbonitrilo / -nitrilo',              ss:'ciano-'},
-  {n:7, cls:'c4',  name:'Aldehídos',             fm:'R−CHO',      sf:'-carbaldehído / -al',                   ss:'formil- / oxo-'},
+  {n:1, cls:'c1',  name:'Carboxilatos (sales)',  fm:'R−COO⁻',    sf:'ácido -carboxilato / -oato',             ss:'carboxilato-', note:'ciclo: -carboxilato · cadena: -oato'},
+  {n:2, cls:'c1',  name:'Ácidos carboxílicos',   fm:'R−COOH',     sf:'ácido -carboxílico / ácido -oico',      ss:'carboxi-',      note:'ciclo: -carboxílico · cadena: -oico'},
+  {n:3, cls:'c1',  name:'Ésteres',               fm:"R−COOR'",    sf:'-carboxilato de R / -oato de R',        ss:'(R)oxicarbonil-',note:'ciclo: -carboxilato de R · cadena: -oato de R'},
+  {n:4, cls:'c1',  name:'Haluros de ácido',      fm:'R−COX',      sf:'haluro de -carbonilo / haluro de -oilo',ss:'halocarbonil-', note:'ciclo: -carbonilo · cadena: -oilo'},
+  {n:5, cls:'c1',  name:'Amidas',                fm:'R−CONH₂',    sf:'-carboxamida / -amida',                 ss:'carbamoil-',    note:'ciclo: -carboxamida · cadena: -amida'},
+  {n:6, cls:'c3',  name:'Nitrilos',              fm:'R−C≡N',      sf:'-carbonitrilo / -nitrilo',              ss:'ciano-',        note:'ciclo: -carbonitrilo · cadena: -nitrilo'},
+  {n:7, cls:'c4',  name:'Aldehídos',             fm:'R−CHO',      sf:'-carbaldehído / -al',                   ss:'formil- / oxo-',note:'ciclo: -carbaldehído · cadena: -al'},
   {n:8, cls:'c4',  name:'Cetonas',               fm:"R−CO−R'",    sf:'-ona',                                  ss:'oxo-'},
   {n:9, cls:'c4',  name:'Alcoholes',             fm:'R−OH',       sf:'-ol',                                   ss:'hidroxi-'},
   {n:10,cls:'c4',  name:'Tioles',                fm:'R−SH',       sf:'-tiol',                                 ss:'sulfanil-'},
@@ -2015,7 +2015,7 @@ if(tb){T3.forEach((r,i)=>{
   tr.innerHTML=`<td style="padding:7px 12px;text-align:center"><span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:${CB[r.cls]};color:${CC[r.cls]};padding:2px 7px;border-radius:100px;border:1px solid ${CC[r.cls]}">${r.n}</span></td>
   <td style="padding:7px 12px;font-weight:700;color:${CC[r.cls]}">${r.name}</td>
   <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;color:var(--dim)">${r.fm}</td>
-  <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;font-weight:700;color:${CC[r.cls]}">${r.sf}</td>
+  <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;font-weight:700;color:${CC[r.cls]}">${r.sf}${r.note?`<br><span style="font-family:var(--base,sans-serif);font-size:.65rem;font-weight:400;color:var(--dim);font-style:italic">${r.note}</span>`:''}</td>
   <td style="padding:7px 12px;font-size:.76rem;color:var(--dimmer)">${r.ss}</td>`;
   tb.appendChild(tr);
 });}
@@ -2129,7 +2129,7 @@ function printTables(){
     <td style="padding:5px 9px;text-align:center;font-weight:700">${r.n}</td>
     <td style="padding:5px 9px;font-weight:600">${r.name}</td>
     <td style="padding:5px 9px;font-family:monospace">${r.fm}</td>
-    <td style="padding:5px 9px;font-family:monospace">${r.sf}</td>
+    <td style="padding:5px 9px;font-family:monospace">${r.sf}${r.note?`<br><small style="font-family:sans-serif;color:#666;font-style:italic">${r.note}</small>`:''}</td>
     <td style="padding:5px 9px;font-family:monospace;color:#555">${r.ss}</td>
   </tr>`).join('');
   let lastG='';
