@@ -44,6 +44,30 @@ body{
 }
 
 /* ── TOP BAR (back link) ── */
+/* ── SITE NAV ── */
+.site-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 16px;
+  background:var(--surf);
+  border-bottom:1.5px solid var(--brd);
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px rgba(8,145,178,.06);
+  margin-bottom:8px;
+}
+.nav-brand{font-weight:800;font-size:.95rem;color:var(--tx);text-decoration:none;letter-spacing:-.01em}
+.site-nav .nav-links{display:flex;gap:4px;align-items:center}
+.nav-link{
+  font-size:.75rem;font-weight:700;
+  padding:6px 10px;border-radius:100px;
+  text-decoration:none;color:var(--dim);
+  transition:background .15s,color .15s;
+  white-space:nowrap;
+}
+.nav-link:hover{background:var(--c1b);color:var(--c1t)}
+.nav-link.active{background:var(--c1);color:#fff}
+.nav-link .full{display:none}
+@media(min-width:520px){.nav-link .full{display:inline}}
+
 .topbar{
   display:flex;align-items:center;justify-content:space-between;
   padding:8px 0 12px;
@@ -272,7 +296,8 @@ code{
   /* Hide interactive elements */
   .back-link,
   .btn-print,
-  .topbar{display:none!important}
+  .topbar,
+  .site-nav{display:none!important}
 
   html,body{background:#fff!important;font-size:11px!important}
 
@@ -347,6 +372,17 @@ code{
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+    <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+    <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+    <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+    <a href="generador.html" class="nav-link">📝 <span class="full">Generador</span></a>
+    <a href="referencia.html" class="nav-link active">📋 <span class="full">Referencia</span></a>
+  </div>
+</nav>
 <div class="page">
 
   <!-- TOP BAR -->
