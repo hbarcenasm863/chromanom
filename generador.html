@@ -466,8 +466,8 @@ body{
   }
 
   /* SVG sizing — 4 per page on letter */
-  .ex-svg-wrap{min-height:0;margin:4px 0}
-  .ex-svg-wrap svg{height:62px !important;width:auto;max-width:100%}
+  .ex-svg-wrap{min-height:0;margin:4px 0;display:flex;justify-content:center}
+  .ex-svg-wrap svg{height:auto !important;max-height:100px;width:auto;max-width:100%}
 
   /* Draw box — compact */
   .ex-draw-box{width:100%;height:80px;margin:4px auto 0}
@@ -493,6 +493,9 @@ body{
   .pill-r{background:#1156a8 !important}
 
   .mdec-table th,.mdec-table td{border-color:#aaa}
+
+  /* Answer key SVGs */
+  .ak-svg svg{height:auto !important;max-height:80px;width:auto;max-width:100%}
 
   /* Show print-only answer key */
 
