@@ -298,6 +298,7 @@ body{
   margin:12px 0;
   font-style:italic;
 }
+.ex-compound-iupac{font-size:.8rem;font-weight:400;font-style:normal;color:var(--tx2,#666);display:block;margin-top:4px}
 .ex-draw-box{
   border:2px dashed #aab8c8;
   border-radius:var(--rs);
@@ -1212,12 +1213,12 @@ const MOLS = [
   {key:'trimetilbenceno123',name:'1,2,3-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,3-trimetil',cls:'r',l:'Tres metilos consecutivos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
   {key:'trimetilbenceno124',name:'1,2,4-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,4-trimetil',cls:'r',l:'Tres metilos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
   {key:'trimetilbenceno135',name:'1,3,5-trimetilbenceno',topic:'benceno',parts:[{t:'1,3,5-trimetil',cls:'r',l:'Tres metilos alternos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'acidoSalicilico',name:'ácido salicílico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-hidroxi',cls:'r',l:'−OH en C2'},{t:'benzo',cls:'c',l:'Benceno'},{t:'ico',cls:'g',l:'Ácido carboxílico'}]},
-  {key:'aspirina',name:'ácido acetilsalicílico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'acetil',cls:'r',l:'Grupo acetilo'},{t:'salicílico',cls:'g',l:'2-OH benzoico'}]},
-  {key:'paracetamol',name:'paracetamol',topic:'benceno',parts:[{t:'4-OH',cls:'r',l:'Fenol en C4'},{t:'-acetilamino',cls:'g',l:'Amida en C1'}]},
+  {key:'acidoSalicilico',name:'ácido salicílico',iupac:'ácido 2-hidroxibenzoico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-hidroxi',cls:'r',l:'−OH en C2'},{t:'benzo',cls:'c',l:'Benceno'},{t:'ico',cls:'g',l:'Ácido carboxílico'}]},
+  {key:'aspirina',name:'ácido acetilsalicílico',iupac:'ácido 2-(acetiloxi)benzoico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'acetil',cls:'r',l:'Grupo acetilo'},{t:'salicílico',cls:'g',l:'2-OH benzoico'}]},
+  {key:'paracetamol',name:'paracetamol',iupac:'N-(4-hidroxifenil)etanamida',topic:'benceno',parts:[{t:'4-OH',cls:'r',l:'Fenol en C4'},{t:'-acetilamino',cls:'g',l:'Amida en C1'}]},
   {key:'TNT',name:'2,4,6-trinitrotolueno',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'tolu',cls:'c',l:'Metilbenceno'},{t:'eno',cls:'g',l:'Aromático'}]},
-  {key:'acidoPicrico',name:'ácido pícrico',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'fen',cls:'c',l:'Fenol'},{t:'ol',cls:'g',l:'−OH (fenol)'}]},
-  {key:'vainillina',name:'vainillina',topic:'benceno',parts:[{t:'4-OH-3-OCH₃',cls:'r',l:'Hidroxi y metoxi'},{t:'benzaldehído',cls:'g',l:'Arilo + CHO'}]},
+  {key:'acidoPicrico',name:'ácido pícrico',iupac:'2,4,6-trinitrofenol',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'fen',cls:'c',l:'Fenol'},{t:'ol',cls:'g',l:'−OH (fenol)'}]},
+  {key:'vainillina',name:'vainillina',iupac:'4-hidroxi-3-metoxibenzaldehído',topic:'benceno',parts:[{t:'4-hidroxi-3-metoxi',cls:'r',l:'−OH en C4, −OCH₃ en C3'},{t:'benz',cls:'c',l:'Anillo bencénico'},{t:'aldehído',cls:'g',l:'Grupo −CHO'}]},
   {key:'acidoHeptanoico',name:'ácido heptanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'hept',cls:'c',l:'7 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoNonanoico',name:'ácido nonanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'non',cls:'c',l:'9 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoDosMetilpropanoico',name:'ácido 2-metilpropanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
@@ -1527,7 +1528,7 @@ function renderSheet(){
           <span class="ex-badge badge-b">Estructura</span>
           <span class="ex-instruction">Dibuja la estructura esquelética del siguiente compuesto:</span>
         </div>
-        <div class="ex-compound-name">${mol.name}</div>
+        <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre común: ${mol.name})</span>`:''}</div>
         <div class="ex-draw-box"></div>
       </div>`;
     } else {
