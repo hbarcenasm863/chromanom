@@ -399,6 +399,65 @@ body{
 }
 .btn-reset:hover{border-color:var(--primary);color:var(--primary)}
 
+/* ── Two-screen ── */
+#config-panel.hidden{display:none}
+
+/* ── Student fields ── */
+.student-fields{display:flex;flex-wrap:wrap;gap:12px}
+.student-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
+.student-field label{font-size:.72rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.07em}
+.student-field input{
+  padding:7px 10px;font-size:.88rem;
+  border:1.5px solid var(--border);border-radius:var(--rs);
+  background:var(--surface);color:var(--tx);
+  outline:none;font-family:inherit;width:100%;
+}
+.student-field input:focus{border-color:var(--primary);background:var(--surf)}
+
+/* ── Help button ── */
+.btn-help{
+  padding:5px 12px;font-size:.78rem;font-weight:700;
+  color:var(--primary);background:var(--primary-l);
+  border:1.5px solid var(--primary);border-radius:20px;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.btn-help:hover{background:var(--primary);color:#fff}
+
+/* ── Help modal ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);
+  z-index:500;display:none;align-items:flex-start;justify-content:center;
+  padding:20px 12px;overflow-y:auto;
+}
+.modal-overlay.show{display:flex}
+.modal-box{
+  background:var(--surf);border-radius:var(--r);
+  box-shadow:var(--sh2);max-width:560px;width:100%;
+  padding:26px 22px 22px;position:relative;margin:auto;
+}
+.modal-close{
+  position:absolute;top:12px;right:14px;font-size:1.4rem;
+  background:none;border:none;cursor:pointer;color:var(--dimmer);line-height:1;
+}
+.modal-close:hover{color:var(--tx)}
+.modal-h{font-size:1rem;font-weight:800;color:var(--primary);margin-bottom:16px}
+.modal-section-label{
+  font-size:.72rem;font-weight:800;color:var(--primary);
+  text-transform:uppercase;letter-spacing:.08em;
+  margin:14px 0 8px;
+  display:flex;align-items:center;gap:6px;
+}
+.modal-section-label::before{content:'';display:inline-block;width:3px;height:12px;background:var(--primary);border-radius:2px}
+.ref-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:4px}
+.ref-table th{background:var(--surface);color:var(--dim);font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;padding:5px 9px;border:1px solid var(--border);text-align:left}
+.ref-table td{border:1px solid var(--border);padding:6px 9px}
+.ref-table td:first-child{font-family:'Courier New',monospace;font-weight:700;color:var(--tx)}
+.mdec-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+/* ── PDF button ── */
+.btn-pdf{background:#1a7a3c;color:#fff;box-shadow:0 3px 12px rgba(26,122,60,.25)}
+.btn-pdf:hover{background:#145f2f}
 
 .ak-item{
   display:flex;align-items:flex-start;gap:14px;
@@ -444,7 +503,8 @@ body{
   .page-title,
   .config-panel,
   .warning,
-  .action-bar{display:none !important}
+  .action-bar,
+  .modal-overlay{display:none !important}
 
   /* Show sheet */
   #exercise-sheet{display:block !important}
@@ -531,10 +591,11 @@ body{
 
   <div class="page-title">
     <div class="page-title-icon">&#128196;</div>
-    <div>
+    <div style="flex:1">
       <h1>Generador de Ejercicios</h1>
       <p>Crea hojas de trabajo personalizadas para nomenclatura org&aacute;nica IUPAC</p>
     </div>
+    <button class="btn-help" onclick="toggleHelp()">&#9432; Referencia</button>
   </div>
 
   <!-- Config panel (screen only) -->
@@ -598,6 +659,25 @@ body{
       </div>
     </div>
 
+    <!-- Datos del estudiante -->
+    <div class="config-section">
+      <div class="config-label">Datos del estudiante <span style="font-size:.7rem;font-weight:500;text-transform:none;letter-spacing:0;color:var(--dimmer);margin-left:4px">(opcional)</span></div>
+      <div class="student-fields">
+        <div class="student-field">
+          <label for="st-nombre">Nombre</label>
+          <input type="text" id="st-nombre" placeholder="Nombre del estudiante" autocomplete="off">
+        </div>
+        <div class="student-field">
+          <label for="st-curso">Curso / Secci&oacute;n</label>
+          <input type="text" id="st-curso" placeholder="Ej: Qu&iacute;mica 11°A" autocomplete="off">
+        </div>
+        <div class="student-field" style="max-width:170px">
+          <label for="st-fecha">Fecha</label>
+          <input type="date" id="st-fecha">
+        </div>
+      </div>
+    </div>
+
     <!-- Warning -->
     <div class="warning" id="gen-warning"></div>
 
@@ -626,10 +706,61 @@ body{
 
 </div><!-- .app -->
 
+<!-- Help / reference modal -->
+<div class="modal-overlay" id="help-modal" onclick="if(event.target===this)toggleHelp()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleHelp()" title="Cerrar">&times;</button>
+    <div class="modal-h">&#9432; Referencia r&aacute;pida &mdash; Nomenclatura IUPAC</div>
+
+    <div class="modal-section-label">Prefijos de cadena (carbonos)</div>
+    <table class="ref-table">
+      <thead><tr><th>Prefijo</th><th>N&deg; C</th><th>Prefijo</th><th>N&deg; C</th></tr></thead>
+      <tbody>
+        <tr><td>met-</td><td>1</td><td>hex-</td><td>6</td></tr>
+        <tr><td>et-</td><td>2</td><td>hept-</td><td>7</td></tr>
+        <tr><td>prop-</td><td>3</td><td>oct-</td><td>8</td></tr>
+        <tr><td>but-</td><td>4</td><td>non-</td><td>9</td></tr>
+        <tr><td>pent-</td><td>5</td><td>dec-</td><td>10</td></tr>
+      </tbody>
+    </table>
+
+    <div class="modal-section-label">Sufijos por grupo funcional</div>
+    <table class="ref-table">
+      <thead><tr><th>Sufijo / Patr&oacute;n</th><th>Grupo funcional</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td>-ano</td><td>Alcano</td><td>propano</td></tr>
+        <tr><td>-eno</td><td>Alqueno (C=C)</td><td>prop-1-eno</td></tr>
+        <tr><td>-ino</td><td>Alquino (C&equiv;C)</td><td>but-1-ino</td></tr>
+        <tr><td>-ol</td><td>Alcohol (&minus;OH)</td><td>propan-1-ol</td></tr>
+        <tr><td>-al</td><td>Alde&iacute;do (&minus;CHO)</td><td>propanal</td></tr>
+        <tr><td>-ona</td><td>Cetona (C=O interior)</td><td>propan-2-ona</td></tr>
+        <tr><td>&aacute;cido &hellip;-oico</td><td>&Aacute;cido carbox&iacute;lico (&minus;COOH)</td><td>&aacute;cido propanoico</td></tr>
+        <tr><td>&hellip;-oato de &hellip;</td><td>&Eacute;ster</td><td>etanoato de metilo</td></tr>
+        <tr><td>-oxi&hellip;</td><td>&Eacute;ter (&minus;O&minus;)</td><td>metoxietano</td></tr>
+        <tr><td>-amida</td><td>Amida (&minus;CONH&sub2;)</td><td>etanamida</td></tr>
+        <tr><td>-nitrilo</td><td>Nitrilo (&minus;C&equiv;N)</td><td>etanonitrilo</td></tr>
+        <tr><td>-amina</td><td>Amina (&minus;NH&sub2;)</td><td>etanamina</td></tr>
+      </tbody>
+    </table>
+
+    <div class="modal-section-label">Colores MDEC</div>
+    <table class="ref-table">
+      <thead><tr><th colspan="2">Categor&iacute;a</th><th>Qu&eacute; identifica</th></tr></thead>
+      <tbody>
+        <tr><td style="width:26px"><span class="mdec-dot" style="background:#166534"></span></td><td><strong>Cadena (C)</strong></td><td>Prefijo num&eacute;rico &mdash; carbonos de la cadena principal</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#CC79A7"></span></td><td><strong>Grupo func. (G)</strong></td><td>Sufijo que indica el grupo funcional principal</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#b45309"></span></td><td><strong>Insaturaci&oacute;n (I)</strong></td><td>Infijo -en- / -in- con indicador de posici&oacute;n</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#0891b2"></span></td><td><strong>Ramificaci&oacute;n (R)</strong></td><td>Sustituyentes: metilos, etilos, halogens, etc.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <!-- Floating action bar -->
 <div class="action-bar" id="action-bar">
-  <button class="btn-action btn-reset" onclick="resetSheet()">&#8635; Nueva hoja</button>
-  <button class="btn-action btn-print" onclick="window.print()">&#128424; Imprimir / Guardar PDF</button>
+  <button class="btn-action btn-reset" onclick="resetSheet()">&#8592; Configuraci&oacute;n</button>
+  <button class="btn-action btn-pdf" onclick="exportPDF()">&#128229; PDF</button>
+  <button class="btn-action btn-print" onclick="window.print()">&#128424; Imprimir</button>
 </div>
 
 
@@ -1621,10 +1752,26 @@ function generate(){
   const chosen=shuffled.slice(0, count);
   _generated=chosen.map((mol,idx)=>({mol, tipo: tipos[idx % tipos.length]}));
 
+  document.getElementById('config-panel').classList.add('hidden');
   renderSheet();
 }
 
 function renderSheet(){
+  // Populate student header
+  const stNombre=document.getElementById('st-nombre').value.trim();
+  const stCurso=document.getElementById('st-curso').value.trim();
+  const stFecha=document.getElementById('st-fecha').value;
+  let fechaStr='';
+  if(stFecha){
+    const d=new Date(stFecha+'T00:00:00');
+    fechaStr=d.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
+  }
+  document.querySelector('.sheet-meta').innerHTML=[
+    ['Nombre',stNombre],['Curso',stCurso],['Fecha',fechaStr]
+  ].map(([lbl,val])=>
+    `<div class="sheet-meta-field"><label>${lbl}:</label>${val?`<span style="font-weight:600;font-size:.88rem">${val}</span>`:'<div class="meta-line"></div>'}</div>`
+  ).join('');
+
   const sheet=document.getElementById('exercise-sheet');
   const list=document.getElementById('exercises-list');
 
@@ -1689,11 +1836,36 @@ function resetSheet(){
   document.getElementById('action-bar').className='action-bar';
   document.getElementById('exercises-list').innerHTML='';
   document.getElementById('gen-warning').className='warning';
+  document.getElementById('config-panel').classList.remove('hidden');
   _generated=[];
   document.getElementById('config-panel').scrollIntoView({behavior:'smooth', block:'start'});
 }
+
+function exportPDF(){
+  const stNombre=document.getElementById('st-nombre').value.trim()||'ejercicios';
+  const filename='ChromaNom_'+stNombre.replace(/\s+/g,'_')+'.pdf';
+  html2pdf().set({
+    margin:[10,10,10,10],
+    filename,
+    image:{type:'jpeg',quality:.98},
+    html2canvas:{scale:2,useCORS:true},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(document.getElementById('exercise-sheet')).save();
+}
+
+function toggleHelp(){
+  document.getElementById('help-modal').classList.toggle('show');
+}
+
+// Default date = today
+(function(){
+  const t=new Date();
+  const iso=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+  document.getElementById('st-fecha').value=iso;
+})();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 <script>
 if('serviceWorker' in navigator)
   navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});
