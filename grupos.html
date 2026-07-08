@@ -1280,11 +1280,16 @@ function svgAnilina(){
 }
 function svgEstireno(){
   _pts=[];const{v,s}=bnzRing(52,52,34);
-  // vinyl: C=C going up from top vertex
   const vx=v[0].x,vy=v[0].y;
-  const x2=vx+BL*COS30,y2=vy-BL*SIN30;
-  let t=s+dbl(vx,vy,x2,y2);
-  _reg(x2,y2-BL*SIN30,4);
+  let t=s+dbl(vx,vy,vx,vy-BL);
+  return mkSVG(t);
+}
+function svgBenzaldehido(){
+  _pts=[];const{v,s}=bnzRing(52,52,34);
+  const vx=v[0].x,vy=v[0].y;
+  let t=s+ln(vx,vy,vx,vy-BL);
+  t+=dbl(vx,vy-BL,vx,vy-2*BL);
+  t+=atm(vx,vy-2*BL,'O');
   return mkSVG(t);
 }
 function svgAnisol(){
@@ -1316,7 +1321,12 @@ function buildCommonNames(){
     {n:'Anilina',iupac:'aminobenceno',fn:svgAnilina},
     {n:'Estireno',iupac:'vinilbenceno',fn:svgEstireno},
     {n:'Anisol',iupac:'metoxibenceno',fn:svgAnisol},
+    {n:'Benzaldehído',iupac:'bencenocarbaldehído',fn:svgBenzaldehido},
     {n:'Ác. benzoico',iupac:'ácido bencenocarboxílico',fn:svgAcidoBenzoico},
+    {n:'o-Xileno',iupac:'1,2-dimetilbenceno',fn:()=>MOLS.ortoXileno()},
+    {n:'m-Xileno',iupac:'1,3-dimetilbenceno',fn:()=>MOLS.metaXileno()},
+    {n:'p-Xileno',iupac:'1,4-dimetilbenceno',fn:()=>MOLS.paraXileno()},
+    {n:'Cumeno',iupac:'isopropilbenceno',fn:()=>MOLS.isopropilBenceno()},
   ];
   return `
     <div class="sec-lbl" style="margin-top:18px">Nombres comunes reconocidos por IUPAC</div>
