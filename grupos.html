@@ -1281,7 +1281,8 @@ function svgAnilina(){
 function svgEstireno(){
   _pts=[];const{v,s}=bnzRing(52,52,34);
   const vx=v[0].x,vy=v[0].y;
-  let t=s+dbl(vx,vy,vx,vy-BL);
+  let t=s+ln(vx,vy,vx,vy-BL);
+  t+=dbl(vx,vy-BL,vx,vy-2*BL);
   return mkSVG(t);
 }
 function svgBenzaldehido(){
