@@ -1192,8 +1192,7 @@ function showGroup(gid){
     + '<div class="name-strip">' + buildNameStrip(g) + '</div>'
     + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC</div>'
     + '<div class="rules-list">' + buildRules(g) + '</div>'
-    + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '<button class="speak-btn" onclick="_speak(\'IUPAC. \' + this.parentElement.textContent)" title="Escuchar">🔊</button></div>'
-    + (g.id==='benceno' ? buildCommonNames() : '');
+    + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '<button class="speak-btn" onclick="_speak(\'IUPAC. \' + this.parentElement.textContent)" title="Escuchar">🔊</button></div>';
   area.appendChild(theory);
 
   // ── Exercises card ──
@@ -1241,10 +1240,11 @@ function buildRules(g){
       }).join('');
       svgBlock = '<div class="rule-mols">' + items + '</div>';
     }
-    return '<div class="rule">'
+    const ruleHtml = '<div class="rule">'
       + '<div class="rule-num">' + (i+1) + '</div>'
       + '<div class="rule-body"><strong>' + r.t + '</strong><button class="speak-btn" onclick="_speak(this.parentElement.querySelector(\'strong\').textContent + \'. \' + this.nextElementSibling.textContent)" title="Escuchar regla">🔊</button><span>' + r.d + '</span>' + svgBlock + '</div>'
       + '</div>';
+    return (g.id==='benceno' && r.t==='Nombres tradicionales') ? ruleHtml + buildCommonNames() : ruleHtml;
   }).join('');
 }
 
