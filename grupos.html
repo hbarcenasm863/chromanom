@@ -1281,8 +1281,11 @@ function svgAnilina(){
 function svgEstireno(){
   _pts=[];const{v,s}=bnzRing(52,52,34);
   const vx=v[0].x,vy=v[0].y;
-  let t=s+ln(vx,vy,vx,vy-BL);
-  t+=dbl(vx,vy-BL,vx,vy-2*BL);
+  // Vinyl: single bond up-left, double bond up-right → visible CH vertex at 120°
+  const x1=vx-BL*COS30, y1=vy-BL*SIN30;
+  const x2=vx,           y2=vy-2*BL*SIN30;
+  let t=s+ln(vx,vy,x1,y1);
+  t+=dbl(x1,y1,x2,y2);
   return mkSVG(t);
 }
 function svgBenzaldehido(){

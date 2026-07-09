@@ -953,7 +953,7 @@ const M = {
   ciclohexanocarbonitrilo(){_pts=[];const {s,v}=ring(6,34,44,44);return mkSVG(s+_subM1(v,0,6,'CN'));},
   // ── nuevos benceno / cíclicos ──
   unoCloro4MetilBenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'Cl');s+=ln(0,r,0,r+BL);_reg(0,r+BL);return mkSVG(s);},
-  etenilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);_reg(0,-r-BL);s+=dbl(0,-r-BL,0,-r-2*BL);_reg(0,-r-2*BL);return mkSVG(s);},
+  etenilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28;const x1=-BL*COS30,y1=-r-BL*SIN30,x2=0,y2=-r-2*BL*SIN30;s+=ln(0,-r,x1,y1);s+=dbl(x1,y1,x2,y2);return mkSVG(s);},
   metoxibenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OCH₃');return mkSVG(s);},
   propoxibenceno(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OC₃H₇');return mkSVG(s);},
   cuatroCloroBenzonitrilo(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'CN');s+=ln(0,r,0,r+BL);s+=atm(0,r+BL,'Cl');return mkSVG(s);},
