@@ -459,6 +459,9 @@ body{
 .btn-pdf{background:#1a7a3c;color:#fff;box-shadow:0 3px 12px rgba(26,122,60,.25)}
 .btn-pdf:hover{background:#145f2f}
 
+/* Benzene SVGs need more vertical room (substituent above ring inflates viewBox) */
+.ex-svg-tall svg{height:160px}
+
 .ak-item{
   display:flex;align-items:flex-start;gap:14px;
   padding:12px 14px;
@@ -528,6 +531,7 @@ body{
   /* SVG sizing — 4 per page on letter */
   .ex-svg-wrap{min-height:0;margin:4px 0;display:flex;justify-content:center}
   .ex-svg-wrap svg{height:auto !important;max-height:100px;width:auto;max-width:100%}
+  .ex-svg-tall svg{max-height:160px !important}
 
   /* Draw box — compact */
   .ex-draw-box{width:100%;height:80px;margin:4px auto 0}
@@ -1788,13 +1792,14 @@ function renderSheet(){
     // ── Exercise card ──
     let exHtml='';
     if(tipo==='A'){
+      const svgWrapCls='ex-svg-wrap'+(mol.topic==='benceno'?' ex-svg-tall':'');
       exHtml=`<div class="exercise tipo-a">
         <div class="ex-header">
           <span class="ex-num">${num}.</span>
           <span class="ex-badge badge-a">Nomenclatura</span>
           <span class="ex-instruction">Escribe el nombre IUPAC de la siguiente estructura:</span>
         </div>
-        <div class="ex-svg-wrap">${svgHtml}</div>
+        <div class="${svgWrapCls}">${svgHtml}</div>
         <div class="ex-answer-line">
           <span>Nombre IUPAC:</span>
           <div class="ans-line"></div>
@@ -1842,15 +1847,19 @@ function resetSheet(){
 }
 
 function exportPDF(){
-  const stNombre=document.getElementById('st-nombre').value.trim()||'ejercicios';
-  const filename='ChromaNom_'+stNombre.replace(/\s+/g,'_')+'.pdf';
-  html2pdf().set({
-    margin:[10,10,10,10],
-    filename,
-    image:{type:'jpeg',quality:.98},
-    html2canvas:{scale:2,useCORS:true},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-  }).from(document.getElementById('exercise-sheet')).save();
+  const styles=document.querySelector('style').textContent;
+  const body=document.getElementById('exercise-sheet').innerHTML;
+  const w=window.open('','_blank');
+  if(!w){alert('Habilita las ventanas emergentes para este sitio y vuelve a intentarlo.');return;}
+  w.document.write(
+    '<!DOCTYPE html><html lang="es"><head>'+
+    '<meta charset="UTF-8"><title>ChromaNom — Ejercicios</title>'+
+    '<style>'+styles+'</style></head>'+
+    '<body><div id="exercise-sheet" class="show">'+body+'</div>'+
+    '<scr'+'ipt>window.onload=function(){window.print();window.close();}<\/scr'+'ipt>'+
+    '</body></html>'
+  );
+  w.document.close();
 }
 
 function toggleHelp(){
@@ -1865,7 +1874,6 @@ function toggleHelp(){
 })();
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 <script>
 if('serviceWorker' in navigator)
   navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});
