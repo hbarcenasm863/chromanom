@@ -1,8 +1,13 @@
-// ChromaNom Service Worker — v6.0
+// ChromaNom Service Worker — v7.0
 // Cache-first para uso offline completo, incluyendo Google Fonts
 
-const CACHE = 'chromanom-v13';
+const CACHE = 'chromanom-v14';
 const FONT_CACHE = 'chromanom-fonts-v1';
+
+// Permite que la página desencadene la activación del nuevo SW
+self.addEventListener('message', e => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
+});
 
 const ASSETS = [
   '/chromanom/',
@@ -25,11 +30,12 @@ const ASSETS = [
 ];
 
 // Instalar: guardar todos los archivos en caché
+// No llamamos skipWaiting() aquí; la página lo pide vía mensaje cuando el usuario
+// acepta la actualización (ver pwa-install.js showUpdateBanner).
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll(ASSETS))
   );
-  self.skipWaiting();
 });
 
 // Activar: borrar cachés antiguas (mantener fuentes)

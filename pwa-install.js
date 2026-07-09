@@ -193,3 +193,119 @@
     inject();
   }
 })();
+
+// ── Detección de actualizaciones del Service Worker ───────────────────────────
+// Se ejecuta independientemente de si la app está instalada o no.
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+
+  function showUpdateBanner(worker) {
+    if (document.getElementById('pwa-update-banner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'pwa-update-banner';
+    banner.innerHTML = `
+      <style>
+        #pwa-update-banner {
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 9998;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: #0d2d42;
+          color: #fff;
+          padding: 12px 16px;
+          border-radius: 12px;
+          box-shadow: 0 4px 20px rgba(0,0,0,.35);
+          font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+          font-size: .84rem;
+          white-space: nowrap;
+          animation: pwa-upd-in .3s ease;
+          max-width: calc(100vw - 32px);
+        }
+        @keyframes pwa-upd-in {
+          from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+          to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        #pwa-update-banner .upd-icon { font-size: 1.1rem; flex-shrink: 0; }
+        #pwa-update-banner .upd-msg  { flex: 1; line-height: 1.3; }
+        #pwa-update-banner .upd-msg strong { display: block; font-size: .88rem; }
+        #pwa-update-banner .upd-msg span   { color: rgba(255,255,255,.65); font-size: .75rem; }
+        #pwa-upd-btn {
+          background: #0d9adb;
+          border: none;
+          color: #fff;
+          font-weight: 700;
+          font-size: .8rem;
+          padding: 7px 13px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-family: inherit;
+          flex-shrink: 0;
+          white-space: nowrap;
+        }
+        #pwa-upd-btn:active { opacity: .8; }
+        #pwa-upd-close {
+          background: none;
+          border: none;
+          color: rgba(255,255,255,.55);
+          font-size: 1rem;
+          cursor: pointer;
+          padding: 2px 4px;
+          line-height: 1;
+          flex-shrink: 0;
+        }
+        #pwa-upd-close:hover { color: #fff; }
+      </style>
+      <span class="upd-icon">✨</span>
+      <span class="upd-msg">
+        <strong>Nueva versión disponible</strong>
+        <span>Hay mejoras listas para cargar</span>
+      </span>
+      <button id="pwa-upd-btn">Actualizar</button>
+      <button id="pwa-upd-close" title="Cerrar">✕</button>
+    `;
+    document.body.appendChild(banner);
+
+    banner.querySelector('#pwa-upd-btn').addEventListener('click', () => {
+      banner.remove();
+      worker.postMessage('SKIP_WAITING');
+    });
+    banner.querySelector('#pwa-upd-close').addEventListener('click', () => {
+      banner.remove();
+    });
+  }
+
+  // Cuando el SW activo cambia (tras skipWaiting) → recarga la página
+  let reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloading) return;
+    reloading = true;
+    location.reload();
+  });
+
+  // Detectar SW en estado "waiting" (nueva versión instalada pero en espera)
+  navigator.serviceWorker.ready.then(reg => {
+    // Ya hay un SW esperando desde antes de que cargara la página
+    if (reg.waiting && navigator.serviceWorker.controller) {
+      showUpdateBanner(reg.waiting);
+    }
+
+    // Se detecta una nueva versión mientras la página está abierta
+    reg.addEventListener('updatefound', () => {
+      const newWorker = reg.installing;
+      if (!newWorker) return;
+      newWorker.addEventListener('statechange', () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          showUpdateBanner(newWorker);
+        }
+      });
+    });
+
+    // Forzar que el navegador busque actualizaciones cada vez que se abre la app
+    reg.update().catch(() => {});
+  });
+})();
