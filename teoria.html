@@ -39,7 +39,6 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100%;line-height:1.6}
-body::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 .app{max-width:860px;margin:0 auto;padding:0 18px 80px}
 
 /* HEADER */
@@ -57,7 +56,6 @@ header{padding:32px 0 24px;border-bottom:2px solid var(--brd);margin-bottom:32px
 
 /* INTRO */
 .intro-card{background:var(--tx);border-radius:var(--r);padding:30px 36px;margin-bottom:28px;color:#fff;position:relative;overflow:hidden}
-.intro-card::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
 .intro-card h1{font-family:var(--serif);font-size:1.55rem;font-weight:700;font-style:italic;margin-bottom:8px}
 .intro-card h1 span{color:var(--c2t);font-style:normal}
 .intro-card p{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.75;max-width:560px}
@@ -400,6 +398,19 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .rule-card{cursor:pointer;transition:box-shadow .15s,transform .15s}
 .rule-card:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
 .rc-hint{font-size:.67rem;font-weight:700;color:var(--azul);margin-top:5px;letter-spacing:.03em}
+/* P7 — Prerequisite callout */
+.prerequisite-callout{background:rgba(13,74,115,.08);border-left:3px solid var(--azul-d);border-radius:6px;padding:10px 14px;margin-bottom:18px;font-size:.84rem;color:var(--tx)}
+.prerequisite-callout a{color:var(--azul-d);font-weight:600;text-decoration:none}
+.prerequisite-callout a:hover{text-decoration:underline}
+/* P2 — Inline rule examples */
+.rule-inline-ex{margin-top:8px;padding:7px 10px;background:var(--bg);border-radius:var(--rs);border:1.5px dashed var(--brd);font-size:.78rem;display:flex;flex-wrap:wrap;gap:5px;align-items:center;line-height:1.4}
+.rule-inline-ex .ex-lbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--dimmer)}
+.rule-inline-ex .win{color:var(--c2t);font-weight:700;font-family:var(--mono)}
+.rule-inline-ex .lose{color:var(--errt);font-family:var(--mono);text-decoration:line-through}
+.rule-inline-ex .win-b{color:var(--c1t);font-weight:700;font-family:var(--mono)}
+/* P6 — Hide chip labels until complete */
+.name-build .nl{opacity:0;transition:opacity .35s}
+.name-build.step-complete .nl{opacity:1}
 </style>
 </head>
 <body>
@@ -432,43 +443,43 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div class="tm-grid">
     <button class="tm-card" onclick="goPanel('panel-esquema')">
       <span class="tm-icon">📐</span>
-      <span class="tm-title">Esquema MDEC</span>
+      <span class="tm-title">① Esquema MDEC</span>
       <span class="tm-desc">Las 4 partes de todo nombre orgánico</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-ejemplos')">
       <span class="tm-icon">🔍</span>
-      <span class="tm-title">Ejemplos paso a paso</span>
+      <span class="tm-title">② Ejemplos paso a paso</span>
       <span class="tm-desc">6 moléculas resueltas con el sistema de 4 colores</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-algoritmo')">
       <span class="tm-icon">📋</span>
-      <span class="tm-title">Algoritmo de 5 pasos</span>
+      <span class="tm-title">③ Algoritmo de 5 pasos</span>
       <span class="tm-desc">Cómo nombrar cualquier molécula orgánica</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-tablas')">
       <span class="tm-icon">📊</span>
-      <span class="tm-title">Tablas de referencia</span>
+      <span class="tm-title">④ Tablas de referencia</span>
       <span class="tm-desc">Prefijos de cadena, multiplicadores y grupos</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-desempate')">
       <span class="tm-icon">⚖️</span>
-      <span class="tm-title">Reglas de desempate</span>
+      <span class="tm-title">⑤ Reglas de desempate</span>
       <span class="tm-desc">Cómo elegir cadena y dirección de numeración</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-comparacion')">
       <span class="tm-icon">📖</span>
-      <span class="tm-title">Comparación IUPAC</span>
+      <span class="tm-title">⑥ Comparación IUPAC</span>
       <span class="tm-desc">Nomenclatura actual vs nomenclatura pre-2005</span>
       <span class="tm-open">Abrir →</span>
     </button>
     <button class="tm-card" onclick="goPanel('panel-sustituyentes')">
       <span class="tm-icon">🔗</span>
-      <span class="tm-title">Sustituyentes complejos</span>
+      <span class="tm-title">⑦ Sustituyentes complejos</span>
       <span class="tm-desc">Nomenclatura IUPAC de sustituyentes ramificados</span>
       <span class="tm-open">Abrir →</span>
     </button>
@@ -484,7 +495,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div id="esquema"></div>
 <div class="intro-card">
   <h1>Todo nombre orgánico tiene <span>4 partes</span></h1>
-  <p>Siempre en el mismo orden. Aprende a identificar cada parte y podrás nombrar — o descifrar — cualquier compuesto orgánico, sin importar el grupo funcional.</p>
+  <p>Siempre en el mismo orden. Cuando identifiques cada parte, podrás nombrar — o descifrar — cualquier compuesto orgánico que te encuentres, sin importar el grupo funcional.</p>
   <div class="four-tags">
     <div class="ft r">① Ramificaciones</div>
     <div class="ft c">② Cadena principal</div>
@@ -498,22 +509,22 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div class="part-card r" data-num="1">
     <div class="part-num">Parte ①</div>
     <div class="part-title">Ramificaciones</div>
-    <div class="part-desc">Cadenas laterales unidas a la principal. Se nombran con su localizador y nombre (metil, etil…) en <strong>orden alfabético</strong>. Los prefijos di-, tri- no cuentan para el orden.</div>
+    <div class="part-desc">Cadenas laterales unidas a la principal. Las nombras con su localizador y nombre (metil, etil…) en <strong>orden alfabético</strong>. Los prefijos di-, tri- no cuentan para el orden.</div>
   </div>
   <div class="part-card c" data-num="2">
     <div class="part-num">Parte ②</div>
     <div class="part-title">Cadena principal</div>
-    <div class="part-desc">La cadena más larga <strong>de carbonos</strong> que contiene el grupo funcional. Determina el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
+    <div class="part-desc">La cadena más larga <strong>de carbonos</strong> que puedas encontrar con el grupo funcional. Usa su longitud para elegir el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
   </div>
   <div class="part-card i" data-num="3">
     <div class="part-num">Parte ③</div>
     <div class="part-title">Insaturaciones</div>
-    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Se indica el localizador del primer carbono que los forma. Dobles + triples = eninos. Sin insaturaciones (solo enlaces simples C−C) → <strong>-an-</strong>: hex<strong>an</strong>-1-ol, prop<strong>an</strong>-2-ona.</div>
+    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Indica el localizador del primer carbono que los forma. Dobles + triples = eninos. Si no hay insaturaciones (solo enlaces simples C−C) → <strong>-an-</strong>: hex<strong>an</strong>-1-ol, prop<strong>an</strong>-2-ona.</div>
   </div>
   <div class="part-card g" data-num="4">
     <div class="part-num">Parte ④</div>
     <div class="part-title">Grupo funcional</div>
-    <div class="part-desc">Determina el <strong>sufijo</strong> final y tiene la máxima prioridad. Consulta la tabla de jerarquía cuando hay varios grupos funcionales en la misma molécula.</div>
+    <div class="part-desc">Determina el <strong>sufijo</strong> final y tiene la máxima prioridad. Consulta la tabla de jerarquía cuando tengas varios grupos funcionales en la misma molécula.</div>
   </div>
 </div>
 
@@ -814,12 +825,17 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <span class="panel-topbar-title">📋 Algoritmo de 5 pasos</span>
 </div>
 <div id="algoritmo"></div>
+<div class="prerequisite-callout">
+  <span>📚</span> Antes de continuar, revisa el
+  <a href="#" onclick="goPanel('panel-esquema');return false;"><strong>① Esquema MDEC</strong></a>
+  y los <a href="#" onclick="goPanel('panel-ejemplos');return false;"><strong>② Ejemplos</strong></a>.
+</div>
 <div class="slbl" style="margin-top:8px">El algoritmo de 5 pasos</div>
-<div class="rule-card"><div class="rule-n g">1</div><div class="rule-body g"><strong>Identificar el grupo funcional principal</strong><p>El que aparece más arriba en la tabla de jerarquía (IUPAC) determina el sufijo y la numeración. Si no hay grupo funcional → alcano.</p></div></div>
-<div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Determinar la cadena principal</strong><p>La más larga que contenga el grupo funcional e insaturaciones. La longitud tiene prioridad sobre las insaturaciones (IUPAC).</p></div></div>
-<div class="rule-card"><div class="rule-n g">3</div><div class="rule-body g"><strong>Numerar la cadena</strong><p>Desde el extremo que dé el localizador más bajo al grupo funcional. COOH y CHO siempre son C1. IUPAC: localizador inmediatamente antes del sufijo: <strong>butan-2-ol</strong>, no 2-butanol.</p></div></div>
-<div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
-<div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
+<div class="rule-card"><div class="rule-n g">1</div><div class="rule-body g"><strong>Identificar el grupo funcional principal</strong><p>Busca el que aparece más arriba en la tabla de jerarquía (IUPAC): ese determina el sufijo y la numeración. Si no hay grupo funcional → alcano.</p></div></div>
+<div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Determinar la cadena principal</strong><p>Elige la cadena más larga que contenga el grupo funcional e insaturaciones. La longitud tiene prioridad sobre las insaturaciones (IUPAC).</p></div></div>
+<div class="rule-card"><div class="rule-n g">3</div><div class="rule-body g"><strong>Numerar la cadena</strong><p>Empieza desde el extremo que dé el localizador más bajo al grupo funcional. COOH y CHO siempre son C1. IUPAC: localizador inmediatamente antes del sufijo: <strong>butan-2-ol</strong>, no 2-butanol.</p></div></div>
+<div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Anota las ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
+<div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Combina: Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
 
 <!-- ── STEPPER INLINE DEL ALGORITMO ── -->
 <div class="slbl" style="margin-top:24px">Aplica los 5 pasos — molécula de ejemplo</div>
@@ -1063,103 +1079,163 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <span class="panel-topbar-title">⚖️ Reglas de desempate</span>
 </div>
 <div id="desempate"></div>
+<div class="prerequisite-callout">
+  <span>📚</span> Antes de continuar, revisa el
+  <a href="#" onclick="goPanel('panel-esquema');return false;"><strong>① Esquema MDEC</strong></a>
+  y los <a href="#" onclick="goPanel('panel-ejemplos');return false;"><strong>② Ejemplos</strong></a>.
+</div>
 <!-- SECCIÓN: REGLAS DE DESEMPATE -->
 <div class="slbl" style="margin-top:32px">Reglas de desempate — ¿cómo elegir cuando hay empate?</div>
 
 <div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
-  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Cuándo hay empate?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
-    A veces <strong style="color:#fcd34d">dos o más cadenas tienen la misma longitud</strong>, o bien dos sentidos de numeración producen el mismo conjunto de localizadores.
-    La IUPAC define <strong style="color:#fcd34d">5 criterios de desempate para elegir la cadena principal</strong> y <strong style="color:#fcd34d">4 criterios para elegir la dirección de numeración</strong>, que se aplican
-    <em>en ese orden</em>: en cuanto uno rompe el empate, se detiene el proceso.
+    Cuando <strong style="color:#fcd34d">dos o más cadenas tienen la misma longitud</strong>, o cuando dos sentidos de numeración te dan el mismo conjunto de localizadores, necesitas desempatar.
+    La IUPAC define <strong style="color:#fcd34d">5 criterios para elegir la cadena principal</strong> y <strong style="color:#fcd34d">4 criterios para elegir la dirección de numeración</strong>, que aplicas
+    <em>en ese orden</em>: en cuanto uno rompe el empate, paras.
   </p>
 </div>
 
 <!-- ── PARTE A: CADENA PRINCIPAL ── -->
 <div class="slbl" style="margin-bottom:10px">Parte A — Desempate para elegir la cadena principal</div>
 
-<div class="rule-card" onclick="openRuleModal('A1')">
+<div class="rule-card">
   <div class="rule-n c">A1</div>
   <div class="rule-body c">
     <strong>Mayor número de carbonos en la cadena</strong>
     <p>La cadena más larga <strong>de carbonos</strong> gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win">C1−C2−C3−C4</span><span style="font-size:.75rem;color:var(--c2t)"> (4C ✓)</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">C1−C2−C3</span><span style="font-size:.75rem;color:var(--errt)"> (3C ✗)</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ 2-metilbutano</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('A2')">
+<div class="rule-card">
   <div class="rule-n c">A2</div>
   <div class="rule-body c">
     <strong>Mayor número de ramificaciones (sustituyentes)</strong>
     <p>Entre dos cadenas de igual longitud, gana la que tiene más sustituyentes unidos a ella.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win">2 ramas ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">1 rama</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ 3-etil-2-metilpentano</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('A3')">
+<div class="rule-card">
   <div class="rule-n c">A3</div>
   <div class="rule-body c">
     <strong>Menor conjunto de localizadores de ramificaciones</strong>
     <p>Se comparan los conjuntos de localizadores ordenados de menor a mayor. Gana el conjunto con el valor más bajo en la primera posición discrepante. Ej.: {2,3} &lt; {3,4}.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win">{2,3} ✓</span>
+      <span style="color:var(--dim)">&lt;</span>
+      <span class="lose">{3,4}</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ primer localizador discrepante: 2 &lt; 3</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('A4')">
+<div class="rule-card">
   <div class="rule-n c">A4</div>
   <div class="rule-body c">
     <strong>Menor localizador en el primer punto de diferencia</strong>
     <p>Si la primera posición de los conjuntos empata, se pasa a la segunda, luego a la tercera, hasta encontrar la diferencia.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span style="color:var(--dim);font-size:.75rem">Pos.1: 2=2 (empate)</span>
+      <span style="color:var(--dim)">→</span>
+      <span style="color:var(--dim);font-size:.75rem">Pos.2:</span>
+      <span class="win">α=3 ✓</span>
+      <span style="color:var(--dim)">&lt;</span>
+      <span class="lose">β=4</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('A5')">
+<div class="rule-card">
   <div class="rule-n c">A5</div>
   <div class="rule-body c">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
     <p>Si todo lo anterior empata, el sustituyente nombrado primero alfabéticamente debe tener el menor localizador posible.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win">etil en C2 ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">etil en C4</span>
+      <span style="color:var(--dimmer);font-size:.72rem">('etil' 1° alfabéticamente)</span>
+    </div>
   </div>
 </div>
 
 <!-- ── PARTE B: DIRECCIÓN DE NUMERACIÓN ── -->
 <div class="slbl" style="margin-top:24px;margin-bottom:10px">Parte B — Desempate para elegir la dirección de numeración</div>
 
-<div class="rule-card" onclick="openRuleModal('B1')">
+<div class="rule-card">
   <div class="rule-n r">B1</div>
   <div class="rule-body r">
     <strong>Menor localizador al grupo funcional principal</strong>
     <p>El grupo funcional de mayor prioridad (−OH, C=O, −COOH…) debe recibir el menor localizador posible.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win-b">−OH en C1 ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">−OH en C4</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ butan-1-ol</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('B2')">
+<div class="rule-card">
   <div class="rule-n r">B2</div>
   <div class="rule-body r">
     <strong>Menor localizador al conjunto de insaturaciones</strong>
     <p>Si el grupo funcional no rompe el empate, se asigna el menor localizador al conjunto de dobles y triples enlaces.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win-b">C=C en C1 ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">C=C en C4</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ but-1-eno</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('B3')">
+<div class="rule-card">
   <div class="rule-n r">B3</div>
   <div class="rule-body r">
     <strong>Menor localizador al conjunto de sustituyentes</strong>
     <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de las ramificaciones. Gana la dirección con el menor valor en la primera posición discrepante.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win-b">metil en C2 ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">metil en C4</span>
+      <span style="color:var(--dimmer);font-size:.72rem">→ {2} &lt; {4}</span>
+    </div>
   </div>
 </div>
 
-<div class="rule-card" onclick="openRuleModal('B4')">
+<div class="rule-card">
   <div class="rule-n r">B4</div>
   <div class="rule-body r">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
     <p>Si aún hay empate, el sustituyente citado primero alfabéticamente debe tener el menor localizador posible.</p>
-    <div class="rc-hint">▶ Ver ejemplo interactivo</div>
+    <div class="rule-inline-ex">
+      <span class="ex-lbl">Ej.:</span>
+      <span class="win-b">etil en C3 ✓</span>
+      <span style="color:var(--dim)">vs</span>
+      <span class="lose">etil en C4</span>
+      <span style="color:var(--dimmer);font-size:.72rem">('etil' antes de 'metil')</span>
+    </div>
   </div>
 </div>
 
@@ -1182,12 +1258,11 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="slbl" style="margin-top:32px">Comparación de nomenclaturas — IUPAC actual vs. nomenclatura funcional pre-2005</div>
 
 <div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
-  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Por qué cambiaron los nombres?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
-    La IUPAC actualizó sus recomendaciones en 2013 para eliminar ambigüedades: los nombres triviales como <em style="color:rgba(255,255,255,.5)">acetona</em> o <em style="color:rgba(255,255,255,.5)">éter etílico</em> eran aceptados, pero no eran deducibles de la estructura.
-    La nomenclatura sistemática permite <strong style="color:#fcd34d">construir cualquier nombre desde cero</strong> conociendo solo las reglas.
-    En libros y exámenes de bachillerato conviven ambas; aquí encontrarás las equivalencias más frecuentes.
+    La IUPAC actualizó sus recomendaciones en 2013 para eliminar ambigüedades: nombres triviales como <em style="color:rgba(255,255,255,.5)">acetona</em> o <em style="color:rgba(255,255,255,.5)">éter etílico</em> eran aceptados, pero no podías deducirlos de la estructura.
+    Con la nomenclatura sistemática puedes <strong style="color:#fcd34d">construir cualquier nombre desde cero</strong> conociendo solo las reglas.
+    En libros y exámenes de bachillerato verás ambas; aquí encuentras las equivalencias más frecuentes.
   </p>
 </div>
 
@@ -1263,17 +1338,21 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <span class="panel-topbar-title">🔗 Sustituyentes complejos</span>
 </div>
 <div id="sustituyentes"></div>
+<div class="prerequisite-callout">
+  <span>📚</span> Antes de continuar, revisa el
+  <a href="#" onclick="goPanel('panel-esquema');return false;"><strong>① Esquema MDEC</strong></a>
+  y los <a href="#" onclick="goPanel('panel-ejemplos');return false;"><strong>② Ejemplos</strong></a>.
+</div>
 <!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
 <div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
 
 <div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
-  <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Qué es un sustituyente complejo?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:600px">
-    Un <strong style="color:#fcd34d">sustituyente complejo</strong> es aquel cuya cadena es ramificada o cuyo nombre trivial resulta ambiguo.
-    IUPAC (recomendaciones 2013) exige nombrarlo sistemáticamente: el carbono de unión a la cadena principal es <strong style="color:#7dd3fc">C-1</strong> del sustituyente,
-    se toma la cadena más larga desde ese punto, el nombre termina en <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">-il</code>
-    y se encierra entre paréntesis en el nombre final.
+    Cuando un sustituyente tiene la cadena ramificada o su nombre trivial es ambiguo, lo tratas como <strong style="color:#fcd34d">sustituyente complejo</strong>.
+    La IUPAC (recomendaciones 2013) te pide nombrarlo sistemáticamente: tomas el carbono de unión a la cadena principal como <strong style="color:#7dd3fc">C-1</strong>,
+    buscas la cadena más larga desde ese punto, y el nombre termina en <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">-il</code>
+    entre paréntesis en el nombre final.
     Ejemplo: <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">5-(1,2-dimetilpropil)nonano</code>
     (antiguo: <em style="color:rgba(255,255,255,.5)">5-isopropilnonano</em>).
   </p>
@@ -1498,6 +1577,10 @@ function render(ex){
   cfg.parts.forEach((pid,i)=>{
     if(pid){const el=document.getElementById(pid); if(el) el.classList.toggle('show', i<=st);}
   });
+
+  // P6 — show chip labels only when all steps complete
+  const nb = card.querySelector('.name-build');
+  if(nb) nb.classList.toggle('step-complete', st===3);
 }
 
 function S(ex,st){steps[ex]=st; stopAuto(ex); render(ex);}

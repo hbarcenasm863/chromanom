@@ -269,6 +269,36 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 .speak-btn:hover{background:var(--c4b);border-color:var(--c4);color:var(--c4t)}
 .speak-btn:active{transform:scale(.95)}
 
+/* ── P3: PESTAÑAS TEORÍA / PRÁCTICA ── */
+.group-tabs{display:flex;gap:4px;margin-bottom:12px;border-bottom:2px solid rgba(0,0,0,.08)}
+.gtab{background:none;border:none;padding:8px 16px;cursor:pointer;font-weight:600;font-size:.82rem;
+  border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;color:var(--dim);transition:color .15s}
+.gtab.active{border-bottom-color:var(--c1,#0891b2);color:var(--c1,#0891b2)}
+.gtab:hover:not(.active){color:var(--tx)}
+
+/* ── P9+P8: ACORDEÓN DE REGLAS ── */
+.rule-accordion{border:1px solid rgba(0,0,0,.08);border-radius:8px;margin-bottom:8px;overflow:hidden}
+.rule-accordion-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+  cursor:pointer;font-weight:600;font-size:.88rem;background:rgba(0,0,0,.03);user-select:none;gap:8px}
+.rule-accordion-header::after{content:'▾';transition:transform .2s;flex-shrink:0;color:var(--dimmer)}
+.rule-accordion.open .rule-accordion-header::after{transform:rotate(-180deg)}
+.rule-accordion-body{padding:0 14px 14px;display:none}
+.rule-accordion.open .rule-accordion-body{display:block}
+.rule-acc-num{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:.85rem;font-weight:900;background:var(--c4b);color:var(--c4t);
+  border-radius:50%;flex-shrink:0}
+.rule-acc-title{font-weight:700;color:var(--tx)}
+.rule-acc-preview{font-weight:400;font-size:.76rem;color:var(--dim);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;min-width:0}
+.rule-acc-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow:hidden}
+
+/* ── P2: LAYOUT 2 COLUMNAS TEXTO | SVG ── */
+.rule-content-grid{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+@media(max-width:600px){.rule-content-grid{grid-template-columns:1fr}}
+.rule-body-text{padding-top:10px}
+.rule-body-text span{font-size:.8rem;color:var(--dim);line-height:1.6;display:block}
+.rule-accordion-body>.rule-body-text{padding-top:10px}
+
 </style>
 </head>
 <body>
@@ -1175,9 +1205,17 @@ function showGroup(gid){
   backBtn.onclick = function(){ showGallery(); };
   area.appendChild(backBtn);
 
-  // ── Theory card ──
+  // ── P3: Barra de pestañas Teoría / Práctica ──
+  const tabBar = document.createElement('div');
+  tabBar.className = 'group-tabs';
+  tabBar.innerHTML = '<button class="gtab active" data-tab="teoria">Teoría</button>'
+    + '<button class="gtab" data-tab="practica">Práctica</button>';
+  area.appendChild(tabBar);
+
+  // ── Theory card (panel Teoría) ──
   const theory = document.createElement('div');
-  theory.className = 'sec-card';
+  theory.className = 'sec-card gtab-panel';
+  theory.dataset.panel = 'teoria';
   theory.innerHTML = '<div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
     + '<span style="font-size:2rem">' + g.icon + '</span>'
     + '<div style="flex:1">'
@@ -1192,15 +1230,27 @@ function showGroup(gid){
     + '<div class="name-strip">' + buildNameStrip(g) + '</div>'
     + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC</div>'
     + '<div class="rules-list">' + buildRules(g) + '</div>'
-    + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '<button class="speak-btn" onclick="_speak(\'IUPAC. \' + this.parentElement.textContent)" title="Escuchar">🔊</button></div>';
+    // P4 — Coherencia: la nota IUPAC repetía la Regla 1; se reemplaza por referencia normativa diferencial
+    + '<div class="iupac-note" style="font-size:.72rem;opacity:.85">&#128204; <strong>Referencia normativa:</strong> IUPAC Recommendations 2013 — <em>Nomenclature of Organic Chemistry: IUPAC Recommendations and Preferred Names 2013</em> (Blue Book, RSC Publishing). Los nombres preferidos IUPAC (PIN) se indican con &#9670;.</div>';
   area.appendChild(theory);
+
+  // ── Panel Práctica (inicialmente oculto) ──
+  const practicePanel = document.createElement('div');
+  practicePanel.className = 'gtab-panel';
+  practicePanel.dataset.panel = 'practica';
+  practicePanel.style.display = 'none';
+  area.appendChild(practicePanel);
 
   // ── Exercises card ──
   const exCard = document.createElement('div');
   exCard.className = 'ex-section';
   exCard.id = 'ex-section-'+gid;
-  area.appendChild(exCard);
+  practicePanel.appendChild(exCard);
   renderExercise(gid);
+
+  // ── Init pestañas y acordeones ──
+  initGroupTabs(area, gid);
+  initAccordions(theory);
 }
 
 function buildNameStrip(g){
@@ -1219,33 +1269,73 @@ function buildRules(g){
       const items = r.svgs.map(key=>{
         const svg = MOLS[key] ? MOLS[key]() : '';
         const rawLabel = r.svgLabels && r.svgLabels[key] ? r.svgLabels[key] : '';
-        // Clean label (remove newlines for display)
         const label = rawLabel.replace(/\n/g,'<br>');
-        // Build name breakdown if svgBd exists for this key
-        let bdHTML = '';
-        if(r.svgBd && r.svgBd[key]){
-          const parts = r.svgBd[key];
-          bdHTML = '<div class="rule-mol-bd">' + parts.map(p=>{
-            return '<div class="rmb-part">'
-              + '<span class="rmb-word ' + p.cls + '">' + p.t + '</span>'
-              + (p.l ? '<span class="rmb-lbl ' + p.cls + '">' + p.l + '</span>' : '')
-              + '</div>';
-          }).join('') + '</div>';
-        }
+        // P6 — Redundancia: se elimina rule-mol-bd de la sección de teoría;
+        // el desglose cromático del nombre se muestra SOLO en la retroalimentación del ejercicio.
         return '<div class="rule-mol-item">'
           + '<div class="rule-mol-svg">' + svg + '</div>'
           + (label ? '<div class="rule-mol-label">' + label + '</div>' : '')
-          + bdHTML
           + '</div>';
       }).join('');
       svgBlock = '<div class="rule-mols">' + items + '</div>';
     }
-    const ruleHtml = '<div class="rule">'
-      + '<div class="rule-num">' + (i+1) + '</div>'
-      + '<div class="rule-body"><strong>' + r.t + '</strong><button class="speak-btn" onclick="_speak(this.parentElement.querySelector(\'strong\').textContent + \'. \' + this.nextElementSibling.textContent)" title="Escuchar regla">🔊</button><span>' + r.d + '</span>' + svgBlock + '</div>'
+
+    // P2 — Contigüidad espacial: layout 2 columnas cuando la regla tiene SVGs
+    const textPart = '<div class="rule-body-text"><span>' + r.d + '</span></div>';
+    const bodyContent = (r.svgs && r.svgs.length)
+      ? '<div class="rule-content-grid">' + textPart + svgBlock + '</div>'
+      : textPart;
+
+    // P9+P8 — Acordeón: header con número + título + preview (≤15 palabras de la descripción)
+    const plainDesc = r.d.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+    const words = plainDesc.split(' ');
+    const preview = words.slice(0,15).join(' ') + (words.length > 15 ? '…' : '');
+
+    // Primer acordeón de cada grupo abierto por defecto (P8 — Segmentación)
+    const openClass = i === 0 ? ' open' : '';
+    const ruleHtml = '<div class="rule-accordion' + openClass + '">'
+      + '<div class="rule-accordion-header">'
+      + '<span class="rule-acc-left">'
+      + '<span class="rule-acc-num">' + (i+1) + '</span>'
+      + '<span class="rule-acc-title">' + r.t + '</span>'
+      + '<span class="rule-acc-preview">' + preview + '</span>'
+      + '</span>'
+      + '<button class="speak-btn" onclick="event.stopPropagation();var b=this.closest(\'.rule-accordion-body\');if(!b)b=this.closest(\'.rule-accordion\').querySelector(\'.rule-accordion-body\');_speak(\'' + (i+1) + '. ' + r.t.replace(/'/g,"\\'") + '. \' + (b?b.querySelector(\'span\').textContent:\'\'))" title="Escuchar regla">🔊</button>'
+      + '</div>'
+      + '<div class="rule-accordion-body">'
+      + bodyContent
+      + '</div>'
       + '</div>';
     return (g.id==='benceno' && r.t==='Nombres tradicionales') ? ruleHtml + buildCommonNames() : ruleHtml;
   }).join('');
+}
+
+// ── P9+P8: Inicializar acordeones ──
+function initAccordions(container){
+  container.querySelectorAll('.rule-accordion-header').forEach(h=>{
+    h.addEventListener('click',function(e){
+      if(e.target.closest('.speak-btn')) return;
+      const acc=h.closest('.rule-accordion');
+      acc.classList.toggle('open');
+    });
+  });
+}
+
+// ── P3: Inicializar pestañas de grupo ──
+function initGroupTabs(container, gid){
+  container.querySelectorAll('.gtab').forEach(tab=>{
+    tab.addEventListener('click',function(){
+      container.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+      container.querySelectorAll('.gtab-panel').forEach(p=>{p.style.display='none';});
+      tab.classList.add('active');
+      const panel=container.querySelector('.gtab-panel[data-panel="'+tab.dataset.tab+'"]');
+      if(panel) panel.style.display='';
+      if(tab.dataset.tab==='practica'){
+        const inp=document.getElementById('ainp-'+gid);
+        if(inp) setTimeout(()=>inp.focus(),100);
+      }
+    });
+  });
 }
 
 // ── Aromatic ring SVG helper (reusable) ──
