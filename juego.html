@@ -5808,7 +5808,7 @@ function checkIso(G1,G2){
 
 // ── Canvas state ──
 let bldAtoms=[],bldBonds=[],bldHist=[],bldTool='C',bldBondSrc=null,bldNid=0,bldNbid=0,bldAttempts=0,bldRingCircles=[];
-let bldViewTx=0,bldViewTy=0,bldViewScale=1,bldPanDrag=null,bldEventsAttached=false;
+let bldViewTx=0,bldViewTy=0,bldViewScale=1,bldPanDrag=null,bldMoveDrag=null,bldEventsAttached=false;
 const BLD_COLORS={C:'#1a1a1a',O:'#c0392b',N:'#1a4bcc',Cl:'#1a7a1a',Br:'#7a1a1a',F:'#2255aa'};
 const BLD_PLACEMENT_TOOLS=['C','O','N','Cl','Br','F','rBz','rC6','rC5','rC4'];
 
@@ -5833,7 +5833,7 @@ function bldSetTool(t){
   const sv=document.getElementById('bld-svg');
   if(sv){
     if(t==='pan'){sv.classList.add('pan-active');}else{sv.classList.remove('pan-active','panning');}
-    sv.style.cursor=t==='pan'?'grab':BLD_PLACEMENT_TOOLS.includes(t)?'crosshair':t==='del'?'not-allowed':'default';
+    sv.style.cursor=t==='pan'?'grab':t==='move'?'default':BLD_PLACEMENT_TOOLS.includes(t)?'crosshair':t==='del'?'not-allowed':'default';
   }
 }
 
@@ -5919,9 +5919,13 @@ function bldRender(){
       inner+=`<line x1="${p1.x-nx*s}" y1="${p1.y-ny*s}" x2="${p2.x-nx*s}" y2="${p2.y-ny*s}" stroke="#475569" stroke-width="1.4"/>`;
     }
   });
-  // Benzene delocalization circles
+  // Benzene delocalization circles (centroid computed from current atom positions so move tool keeps circle aligned)
   bldRingCircles.forEach(rc=>{
-    inner+=`<circle cx="${rc.cx}" cy="${rc.cy}" r="${rc.r}" fill="none" stroke="#475569" stroke-width="1.6" opacity=".6" pointer-events="none"/>`;
+    const ras=rc.atomIds.map(id=>bldAtoms.find(x=>x.id===id)).filter(Boolean);
+    if(ras.length<3)return;
+    const rcx=ras.reduce((s,a)=>s+a.x,0)/ras.length;
+    const rcy=ras.reduce((s,a)=>s+a.y,0)/ras.length;
+    inner+=`<circle cx="${rcx}" cy="${rcy}" r="${rc.r}" fill="none" stroke="#475569" stroke-width="1.6" opacity=".6" pointer-events="none"/>`;
   });
   // Atoms — rounded rect with semi-developed label
   bldAtoms.forEach(at=>{
@@ -5933,12 +5937,23 @@ function bldRender(){
     const bg=isSrc?'#e0f2fe':(BLD_BGC[at.el]||'#f8fafc');
     const stroke=isSrc?'#0891b2':col;
     const sw=isSrc?2.8:1.8;
-    inner+=`<rect x="${at.x-w/2}" y="${at.y-nh/2}" width="${w}" height="${nh}" rx="7" fill="${bg}" stroke="${stroke}" stroke-width="${sw}" data-aid="${at.id}" class="bld-atom" style="cursor:pointer;filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))"/>`;
+    const atomCursor=bldTool==='move'?'grab':'pointer';
+    inner+=`<rect x="${at.x-w/2}" y="${at.y-nh/2}" width="${w}" height="${nh}" rx="7" fill="${bg}" stroke="${stroke}" stroke-width="${sw}" data-aid="${at.id}" class="bld-atom" style="cursor:${atomCursor};filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))"/>`;
     inner+=`<text x="${at.x}" y="${at.y+5}" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="${isSrc?'#0c4a6e':col}" pointer-events="none">${lbl}</text>`;
   });
   sv.innerHTML=`<defs><filter id="bld-glow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#0891b2" flood-opacity=".5"/></filter></defs><g transform="translate(${bldViewTx},${bldViewTy}) scale(${bldViewScale})">${inner}</g>`;
   sv.querySelectorAll('.bld-atom').forEach(el=>{
-    el.addEventListener('click',e=>{e.stopPropagation();if(bldTool==='pan')return;bldClickAtom(+el.dataset.aid);});
+    el.addEventListener('click',e=>{e.stopPropagation();if(bldTool==='pan'||bldTool==='move')return;bldClickAtom(+el.dataset.aid);});
+    el.addEventListener('mousedown',e=>{
+      if(bldTool!=='move'||answered)return;
+      e.stopPropagation();e.preventDefault();
+      const at=bldAtoms.find(x=>x.id===+el.dataset.aid);if(!at)return;
+      const r=sv.getBoundingClientRect();
+      const mx=(e.clientX-r.left-bldViewTx)/bldViewScale;
+      const my=(e.clientY-r.top-bldViewTy)/bldViewScale;
+      bldMoveDrag={aid:at.id,ox:mx-at.x,oy:my-at.y,pushed:false};
+      sv.style.cursor='grabbing';
+    });
   });
   bldAttachCanvasEvents();
 }
@@ -6019,14 +6034,32 @@ function bldAttachCanvasEvents(){
     }
   });
   sv.addEventListener('mousemove',e=>{
+    if(bldMoveDrag){
+      const r=sv.getBoundingClientRect();
+      const mx=(e.clientX-r.left-bldViewTx)/bldViewScale;
+      const my=(e.clientY-r.top-bldViewTy)/bldViewScale;
+      const at=bldAtoms.find(x=>x.id===bldMoveDrag.aid);
+      if(at){
+        if(!bldMoveDrag.pushed){bldPush();bldMoveDrag.pushed=true;}
+        at.x=mx-bldMoveDrag.ox;at.y=my-bldMoveDrag.oy;
+        bldRender();
+      }
+      return;
+    }
     if(!bldPanDrag)return;
     const r=sv.getBoundingClientRect();
     bldViewTx=bldPanDrag.tx+(e.clientX-r.left-bldPanDrag.sx);
     bldViewTy=bldPanDrag.ty+(e.clientY-r.top-bldPanDrag.sy);
     bldRender();bldUpdateZoom();
   });
-  sv.addEventListener('mouseup',()=>{if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}});
-  sv.addEventListener('mouseleave',()=>{if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}});
+  sv.addEventListener('mouseup',()=>{
+    if(bldMoveDrag){bldMoveDrag=null;sv.style.cursor='default';bldRender();return;}
+    if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}
+  });
+  sv.addEventListener('mouseleave',()=>{
+    if(bldMoveDrag){bldMoveDrag=null;bldRender();}
+    if(bldPanDrag){bldPanDrag=null;sv.classList.remove('panning');}
+  });
   sv.addEventListener('wheel',e=>{
     e.preventDefault();
     const r=sv.getBoundingClientRect();
@@ -6078,6 +6111,7 @@ function buildBuild(q){
       <button class="bld-btn" id="bld-t-rC5" onclick="bldSetTool('rC5')" title="Ciclopentano" style="font-size:.65rem">⬠C5</button>
       <button class="bld-btn" id="bld-t-rC4" onclick="bldSetTool('rC4')" title="Ciclobutano" style="font-size:.65rem">⬜C4</button>
       <div class="bld-sep"></div>
+      <button class="bld-btn" id="bld-t-move" onclick="bldSetTool('move')" title="Mover átomo (arrastrar)">Mov</button>
       <button class="bld-btn pan-btn" id="bld-t-pan" onclick="bldSetTool('pan')" title="Mover lienzo (panorámica)">Pan</button>
       <span style="flex:1"></span>
       <button class="bld-btn erase-btn" id="bld-t-del" onclick="bldSetTool('del')" title="Borrar átomo">🗑</button>
@@ -6092,7 +6126,7 @@ function buildBuild(q){
       <button class="bld-zoom-btn" onclick="bldResetView()" title="Restablecer vista (Ctrl+0)">⊡</button>
     </div>
     <div style="font-size:.67rem;color:var(--dim);padding:5px 10px;background:var(--surf);border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r)">
-      <b>C/O/N/Cl/Br/F</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>Pan</b>: mover lienzo &nbsp;·&nbsp; rueda del ratón: zoom &nbsp;·&nbsp; <b>🗑</b>: elimina átomo &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
+      <b>C/O/N/Cl/Br/F</b>: clic en lienzo para añadir átomo &nbsp;·&nbsp; <b>⬡Bz/C6/C5/C4</b>: clic para colocar anillo &nbsp;·&nbsp; <b>─ ═ ≡</b>: clic en dos átomos para enlazar o cambiar orden &nbsp;·&nbsp; <b>Mov</b>: arrastrar átomo &nbsp;·&nbsp; <b>Pan</b>: mover lienzo &nbsp;·&nbsp; rueda del ratón: zoom &nbsp;·&nbsp; <b>🗑</b>: elimina átomo &nbsp;·&nbsp; <b>↩</b> Ctrl+Z deshacer
     </div>
   </div>
   <div id="bld-hint" style="min-height:18px;font-size:.76rem;color:var(--dim);margin-top:6px;font-style:italic"></div>
