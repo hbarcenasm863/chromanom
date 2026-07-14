@@ -6036,12 +6036,28 @@ function bldAttachCanvasEvents(){
 }
 
 function buildBuild(q){
+  // Mostrar nombre con desglose MDEC
+  const _clsV={r:'c1',c:'c2',i:'c3',g:'c4'};
+  const molKey=q.buildKey.replace(/^build_/,'');
+  const refQ=QBANK.find(x=>(x.mol===q.buildKey||x.mol===molKey)&&x.parts);
+  const parts=q.parts||(refQ&&refQ.parts);
+  let mdecHtml='';
+  if(parts&&parts.length){
+    const chips=parts.map(p=>{
+      const cv=_clsV[p.cls]||'c4';
+      return `<span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;margin:0 1px">`
+        +`<span style="font-family:var(--mono);font-size:.98rem;font-weight:800;padding:3px 9px;border-radius:6px;background:var(--${cv}b);color:var(--${cv}t)">${p.t}</span>`
+        +(p.l?`<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--${cv}t)">${p.l}</span>`:'')
+        +`</span>`;
+    }).join('');
+    mdecHtml=`<div style="display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;padding:10px 12px;margin-bottom:10px;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r)">${chips}</div>`;
+  }
   const firstTime=!localStorage.getItem('bld_tutorial_seen');
   if(firstTime){localStorage.setItem('bld_tutorial_seen','1');}
   const tutHtml=firstTime?`<div style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.3);border-radius:10px;padding:10px 14px;font-size:.76rem;color:#ea580c;margin-bottom:8px;line-height:1.7">
   💡 <strong>Primera vez:</strong> Clic en el lienzo para colocar átomos (C, O, N, Cl, Br, F). Para un doble enlace C=O: coloca O, selecciona ═ y clic en C y luego en O. Usa <em>rBz</em> para el anillo de benceno.
 </div>`:'';
-  return tutHtml+`<div class="build-wrap">
+  return mdecHtml+tutHtml+`<div class="build-wrap">
     <div class="build-toolbar">
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Átomo:</span>
       <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')">C</button>
