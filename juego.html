@@ -5839,10 +5839,10 @@ function bldSetTool(t){
 
 // Ring placement configs: n=sides, d=edge length, bonds=bond orders around ring, deloc=draw inner circle
 const BLD_RINGS={
-  rBz:{n:6,d:72,bonds:[1,1,1,1,1,1],deloc:true},
-  rC6:{n:6,d:72,bonds:[1,1,1,1,1,1],deloc:false},
-  rC5:{n:5,d:72,bonds:[1,1,1,1,1],  deloc:false},
-  rC4:{n:4,d:72,bonds:[1,1,1,1],    deloc:false},
+  rBz:{n:6,d:80,bonds:[1,1,1,1,1,1],deloc:true},
+  rC6:{n:6,d:80,bonds:[1,1,1,1,1,1],deloc:false},
+  rC5:{n:5,d:80,bonds:[1,1,1,1,1],  deloc:false},
+  rC4:{n:4,d:80,bonds:[1,1,1,1],    deloc:false},
 };
 
 function bldPlaceRing(cx,cy,type){
@@ -5865,12 +5865,13 @@ function bldRender(){
   const sv=document.getElementById('bld-svg');
   if(!sv)return;
   const VALENCE={C:4,O:2,N:3,Cl:1,Br:1,F:1};
-  const HSUB=['','','₂','₃','₄'];
+  const BLD_BGC={C:'#f8fafc',O:'#fff5f5',N:'#eff6ff',Cl:'#f0fdf4',Br:'#fffbeb',F:'#f0fdfa'};
+  const BLD_HAL=new Set(['Cl','Br','F']);
+  const BSUB='₀₁₂₃₄₅₆₇₈₉';
   function iHyd(at){
     const v=VALENCE[at.el]??4;
     const bonds=bldBonds.filter(b=>b.f===at.id||b.t===at.id);
     let used=bonds.reduce((s,b)=>s+b.o,0);
-    // Aromatic correction: each aromatic ring bond is 1.5, not 1 → add 0.5 per ring bond
     bldRingCircles.forEach(rc=>{
       if(rc.atomIds&&rc.atomIds.includes(at.id)){
         const ringBonds=bonds.filter(b=>rc.atomIds.includes(b.f===at.id?b.t:b.f));
@@ -5879,49 +5880,63 @@ function bldRender(){
     });
     return Math.max(0,v-Math.round(used));
   }
-  const R=24;
+  function bldLabel(at,h){
+    if(BLD_HAL.has(at.el))return at.el;
+    if(h===0)return at.el;
+    if(h===1)return at.el+'H';
+    return at.el+'H'+String(h).split('').map(d=>BSUB[+d]).join('');
+  }
+  function bldLabelW(lbl){
+    let w=0;for(const c of lbl)w+=BSUB.includes(c)?4.5:9;
+    return Math.max(34,Math.ceil(w)+18);
+  }
+  // Compute edge point where a bond line exits a rect node
+  function bldEdgePt(cx,cy,tx,ty,lbl){
+    const hw=bldLabelW(lbl)/2, hh=14;
+    const dx=tx-cx,dy=ty-cy,len=Math.hypot(dx,dy)||1;
+    const t=Math.min(dx?Math.abs(hw/(dx/len)):Infinity, dy?Math.abs(hh/(dy/len)):Infinity);
+    return{x:cx+(dx/len)*t, y:cy+(dy/len)*t};
+  }
   let inner='';
   // Bonds (drawn first, underneath atoms)
   bldBonds.forEach(bd=>{
     const a=bldAtoms.find(x=>x.id===bd.f),b=bldAtoms.find(x=>x.id===bd.t);
     if(!a||!b)return;
-    const dx=b.x-a.x,dy=b.y-a.y,len=Math.sqrt(dx*dx+dy*dy)||1;
+    const laA=bldLabel(a,iHyd(a)),laB=bldLabel(b,iHyd(b));
+    const p1=bldEdgePt(a.x,a.y,b.x,b.y,laA), p2=bldEdgePt(b.x,b.y,a.x,a.y,laB);
+    const dx=p2.x-p1.x,dy=p2.y-p1.y,len=Math.hypot(dx,dy)||1;
     const nx=-dy/len,ny=dx/len;
     if(bd.o===1){
-      inner+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#555" stroke-width="2.5" stroke-linecap="round"/>`;
+      inner+=`<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#475569" stroke-width="2.2" stroke-linecap="round"/>`;
     } else if(bd.o===2){
-      const s=4;
-      inner+=`<line x1="${a.x+nx*s}" y1="${a.y+ny*s}" x2="${b.x+nx*s}" y2="${b.y+ny*s}" stroke="#555" stroke-width="2.2"/>`;
-      inner+=`<line x1="${a.x-nx*s}" y1="${a.y-ny*s}" x2="${b.x-nx*s}" y2="${b.y-ny*s}" stroke="#555" stroke-width="2.2"/>`;
+      const s=3.5;
+      inner+=`<line x1="${p1.x+nx*s}" y1="${p1.y+ny*s}" x2="${p2.x+nx*s}" y2="${p2.y+ny*s}" stroke="#475569" stroke-width="2"/>`;
+      inner+=`<line x1="${p1.x-nx*s}" y1="${p1.y-ny*s}" x2="${p2.x-nx*s}" y2="${p2.y-ny*s}" stroke="#475569" stroke-width="2"/>`;
     } else {
-      const s=4.5;
-      inner+=`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="#555" stroke-width="2"/>`;
-      inner+=`<line x1="${a.x+nx*s}" y1="${a.y+ny*s}" x2="${b.x+nx*s}" y2="${b.y+ny*s}" stroke="#555" stroke-width="1.5"/>`;
-      inner+=`<line x1="${a.x-nx*s}" y1="${a.y-ny*s}" x2="${b.x-nx*s}" y2="${b.y-ny*s}" stroke="#555" stroke-width="1.5"/>`;
+      const s=4;
+      inner+=`<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#475569" stroke-width="2"/>`;
+      inner+=`<line x1="${p1.x+nx*s}" y1="${p1.y+ny*s}" x2="${p2.x+nx*s}" y2="${p2.y+ny*s}" stroke="#475569" stroke-width="1.4"/>`;
+      inner+=`<line x1="${p1.x-nx*s}" y1="${p1.y-ny*s}" x2="${p2.x-nx*s}" y2="${p2.y-ny*s}" stroke="#475569" stroke-width="1.4"/>`;
     }
   });
-  // Benzene delocalization circles (between bonds and atoms)
+  // Benzene delocalization circles
   bldRingCircles.forEach(rc=>{
-    inner+=`<circle cx="${rc.cx}" cy="${rc.cy}" r="${rc.r}" fill="none" stroke="#555" stroke-width="1.8" opacity=".65" pointer-events="none"/>`;
+    inner+=`<circle cx="${rc.cx}" cy="${rc.cy}" r="${rc.r}" fill="none" stroke="#475569" stroke-width="1.6" opacity=".6" pointer-events="none"/>`;
   });
-  // Atoms with implicit H labels
+  // Atoms — rounded rect with semi-developed label
   bldAtoms.forEach(at=>{
     const isSrc=bldBondSrc===at.id;
     const col=BLD_COLORS[at.el]||'#1a1a1a';
     const h=iHyd(at);
-    const fill=isSrc?'#fef08a':'#fff';
-    const sw=isSrc?3:2.2;
-    inner+=`<circle cx="${at.x}" cy="${at.y}" r="${R}" fill="${fill}" stroke="${col}" stroke-width="${sw}" data-aid="${at.id}" class="bld-atom" style="cursor:pointer"/>`;
-    if(h>0){
-      inner+=`<text text-anchor="middle" pointer-events="none">`;
-      inner+=`<tspan x="${at.x}" y="${at.y-3}" font-size="11" font-weight="800" fill="${col}">${at.el}</tspan>`;
-      inner+=`<tspan x="${at.x}" dy="11" font-size="9" font-weight="700" fill="${col}">H${h===1?'':HSUB[h]||h}</tspan>`;
-      inner+=`</text>`;
-    } else {
-      inner+=`<text x="${at.x}" y="${at.y+5}" text-anchor="middle" font-size="13" font-weight="800" fill="${col}" pointer-events="none">${at.el}</text>`;
-    }
+    const lbl=bldLabel(at,h);
+    const w=bldLabelW(lbl), nh=28;
+    const bg=isSrc?'#e0f2fe':(BLD_BGC[at.el]||'#f8fafc');
+    const stroke=isSrc?'#0891b2':col;
+    const sw=isSrc?2.8:1.8;
+    inner+=`<rect x="${at.x-w/2}" y="${at.y-nh/2}" width="${w}" height="${nh}" rx="7" fill="${bg}" stroke="${stroke}" stroke-width="${sw}" data-aid="${at.id}" class="bld-atom" style="cursor:pointer;filter:drop-shadow(0 1px 2px rgba(0,0,0,.1))"/>`;
+    inner+=`<text x="${at.x}" y="${at.y+5}" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="${isSrc?'#0c4a6e':col}" pointer-events="none">${lbl}</text>`;
   });
-  sv.innerHTML=`<g transform="translate(${bldViewTx},${bldViewTy}) scale(${bldViewScale})">${inner}</g>`;
+  sv.innerHTML=`<defs><filter id="bld-glow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#0891b2" flood-opacity=".5"/></filter></defs><g transform="translate(${bldViewTx},${bldViewTy}) scale(${bldViewScale})">${inner}</g>`;
   sv.querySelectorAll('.bld-atom').forEach(el=>{
     el.addEventListener('click',e=>{e.stopPropagation();if(bldTool==='pan')return;bldClickAtom(+el.dataset.aid);});
   });
@@ -5939,7 +5954,7 @@ function bldClickBg(e){
     bldPlaceRing(x,y,bldTool);
     return;
   }
-  const MIN=48;
+  const MIN=65;
   for(const a of bldAtoms){const dx=a.x-x,dy=a.y-y;if(Math.sqrt(dx*dx+dy*dy)<MIN)return;}
   bldPush();
   bldAtoms.push({id:bldNid++,x,y,el:bldTool});
