@@ -520,8 +520,8 @@ body{
   .sheet-title{color:#000;font-size:1rem}
   .sheet-meta{font-size:.72rem}
 
-  /* Exercises — always 2 columns so ~4 fit per page */
-  .exercises-list{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+  /* Exercises — 2 columns on paper, 1 column on narrow phone screens */
+  .exercises-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
   .exercise{
     box-shadow:none;border:1px solid #aaa;
     padding:9px 11px;
@@ -1980,17 +1980,22 @@ function resetSheet(){
 function exportPDF(){
   const styles=document.querySelector('style').textContent;
   const body=document.getElementById('exercise-sheet').innerHTML;
-  const w=window.open('','_blank');
-  if(!w){alert('Habilita las ventanas emergentes para este sitio y vuelve a intentarlo.');return;}
-  w.document.write(
-    '<!DOCTYPE html><html lang="es"><head>'+
-    '<meta charset="UTF-8"><title>ChromaNom — Ejercicios</title>'+
-    '<style>'+styles+'</style></head>'+
-    '<body><div id="exercise-sheet" class="show">'+body+'</div>'+
-    '<scr'+'ipt>window.onload=function(){window.print();window.close();}<\/scr'+'ipt>'+
-    '</body></html>'
-  );
-  w.document.close();
+  const html='<!DOCTYPE html><html lang="es"><head>'
+    +'<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    +'<title>ChromaNom — Ejercicios</title>'
+    +'<style>'+styles+'</style></head>'
+    +'<body><div id="exercise-sheet" class="show">'+body+'</div>'
+    +'<scr'+'ipt>window.onload=function(){setTimeout(function(){window.print();},400);};<\/scr'+'ipt>'
+    +'</body></html>';
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const w=window.open(url,'_blank');
+  setTimeout(function(){URL.revokeObjectURL(url);},60000);
+  if(!w){
+    // Popup bloqueado (común en Android): imprimir directamente la página actual
+    URL.revokeObjectURL(url);
+    window.print();
+  }
 }
 
 function toggleHelp(){
