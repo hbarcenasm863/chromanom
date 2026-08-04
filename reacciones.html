@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChromaNom · Reacciones Orgánicas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
+  --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
+  --c1:#0891b2;--c2:#166534;--c3:#b45309;--c4:#CC79A7;
+  --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
+  --c1t:#0e7490;--c2t:#14532d;--c3t:#92400e;--c4t:#A0527F;
+  --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
+  --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-height:100%}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+/* ── NAV ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;background:#0d4a73;padding:0 20px;height:44px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.site-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:6px;transition:background .15s,color .15s;display:flex;align-items:center;gap:5px}
+.site-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
+.site-nav .nav-links{display:flex;gap:4px;align-items:center}
+.site-nav .nav-brand{color:#fff;font-weight:800;font-size:.88rem;font-style:italic;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+@media(max-width:480px){.site-nav a span.full{display:none}.site-nav a{padding:5px 8px;font-size:.72rem}.site-nav .nav-brand{font-size:.8rem}}
+
+.app{max-width:900px;margin:0 auto;padding:20px 18px 80px;position:relative;z-index:1}
+
+/* ── PAGE HEADER ── */
+.page-header{margin-bottom:24px}
+.page-header h1{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
+.page-header p{color:var(--dim);font-size:.85rem;line-height:1.6}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{padding:8px 16px;border:1.5px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{border-color:var(--c3);color:var(--c3t)}
+.tab-btn.active{background:var(--c3b);border-color:var(--c3);color:var(--c3t)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── GRUPO BADGE ── */
+.grupo-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.gb-pill{padding:4px 14px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;border:1.5px solid}
+.gb-pill.al{color:var(--c2t);border-color:var(--c2);background:var(--c2b)}
+.gb-pill.al2{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
+.gb-pill.aq{color:var(--c3t);border-color:var(--c3);background:var(--c3b)}
+.gb-pill.ar{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
+.gb-formula{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--dim);background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:5px 12px}
+
+/* ── TIPO HEADER ── */
+.tipo-header{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:var(--c3t);margin:20px 0 4px;display:flex;align-items:center;gap:8px}
+.tipo-desc{font-size:.8rem;color:var(--dim);line-height:1.65;margin-bottom:12px}
+
+/* ── REACTION ACCORDION ── */
+.rxn-card{border:1.5px solid var(--brd);border-radius:var(--r);margin-bottom:10px;overflow:hidden;background:var(--surf);box-shadow:var(--sh)}
+.rxn-head{padding:12px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--surf2);transition:background .2s;user-select:none}
+.rxn-head:hover{background:var(--brd)}
+.rxn-head-left{display:flex;align-items:center;gap:10px}
+.rxn-title{font-weight:700;font-size:.88rem}
+.rxn-badge{font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:100px;font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.rxn-chev{font-size:1rem;color:var(--dimmer);transition:transform .25s;flex-shrink:0}
+.rxn-chev.open{transform:rotate(180deg)}
+
+.rxn-body{display:none;padding:16px}
+.rxn-body.open{display:block}
+
+/* ── GENERAL EQUATION ── */
+.rxn-eq{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:#fafaf8;border:1px solid var(--brd);border-left:3px solid var(--c3);border-radius:var(--rs);padding:11px 14px;margin-bottom:12px;color:var(--dim);line-height:1.8;white-space:pre-wrap}
+
+/* ── CONDITIONS & RULES ── */
+.rxn-cond{font-size:.76rem;color:var(--dimmer);font-family:'JetBrains Mono',monospace;margin-bottom:8px;line-height:1.6}
+.rxn-regla{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;background:var(--c3b);color:var(--c3t);border-radius:6px;padding:5px 11px;margin-bottom:12px;line-height:1.4}
+
+/* ── EXAMPLES ── */
+.rxn-ex-lbl{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmer);margin-bottom:6px}
+.rxn-ex{display:flex;align-items:center;gap:7px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;flex-wrap:wrap;opacity:0;animation:rxnFadeUp .35s forwards}
+@keyframes rxnFadeUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(6px)}}
+.rxn-ex-r{color:var(--tx)}
+.rxn-ex-ea{color:var(--c3t);font-weight:700}
+.rxn-arrow{color:var(--c2t);font-size:1rem;flex-shrink:0}
+.rxn-ex-p{color:var(--c2t);font-weight:700}
+.rxn-ex-nota{font-size:.7rem;color:var(--dimmer);font-style:italic;font-family:'Outfit',sans-serif;background:var(--surf2);border-radius:4px;padding:1px 7px}
+
+/* ── MINI-QUIZ ── */
+.quiz-sep{height:1px;background:var(--brd);margin:14px 0 12px}
+.quiz-lbl{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmer);margin-bottom:10px}
+.quiz-q{margin-bottom:14px}
+.quiz-q-text{font-size:.82rem;color:var(--tx);margin-bottom:8px;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:5px}
+.quiz-opt{display:flex;align-items:center;gap:9px;padding:8px 12px;border:1.5px solid var(--brd);border-radius:var(--rs);cursor:pointer;font-size:.8rem;color:var(--dim);background:var(--surf);transition:all .18s;user-select:none}
+.quiz-opt:hover:not(.answered){border-color:var(--c3);color:var(--c3t);background:var(--c3b)}
+.quiz-opt.correct{border-color:#16a34a!important;background:#f0fdf4!important;color:#14532d!important;font-weight:600}
+.quiz-opt.wrong{border-color:var(--err)!important;background:var(--errb)!important;color:var(--errt)!important}
+.quiz-opt.dim-out{opacity:.45;cursor:default}
+.quiz-opt-icon{flex-shrink:0;font-size:.8rem}
+.quiz-fb{font-size:.76rem;margin-top:6px;padding:6px 11px;border-radius:var(--rs);display:none;line-height:1.5}
+.quiz-fb.ok{display:block;background:#f0fdf4;color:#14532d;border:1px solid rgba(22,163,74,.25)}
+.quiz-fb.fail{display:block;background:var(--errb);color:var(--errt);border:1px solid rgba(220,38,38,.2)}
+
+/* ── MISC ── */
+.sec-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--dimmer);margin-bottom:10px}
+.attn{background:#fffbea;border:1px solid rgba(234,179,8,.35);border-radius:var(--rs);padding:10px 14px;font-size:.79rem;color:#92400e;line-height:1.6;margin-bottom:12px}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+    <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+    <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+    <a href="reacciones.html" class="nav-link active">🧪 <span class="full">Reacciones</span></a>
+    <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+  </div>
+</nav>
+
+<div class="app">
+  <div class="page-header">
+    <h1>🧪 Reacciones Orgánicas</h1>
+    <p>Reacciones características de los grupos de hidrocarburos: esquema general, condiciones, ejemplos semi-desarrollados y práctica rápida.</p>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" onclick="switchTab('alcanos')">Alcanos &amp; Cicloalcanos</button>
+    <button class="tab-btn" onclick="switchTab('alquenos')">Alquenos</button>
+    <button class="tab-btn" onclick="switchTab('alquinos')">Alquinos</button>
+    <button class="tab-btn" onclick="switchTab('aromaticos')">Aromáticos</button>
+  </div>
+
+  <!-- ─────────────── ALCANOS + CICLOALCANOS ─────────────── -->
+  <div class="tab-panel active" id="tab-alcanos">
+    <div class="grupo-badge">
+      <span class="gb-pill al">Alcanos</span>
+      <span class="gb-formula">CₙH₂ₙ₊₂</span>
+      <span class="gb-pill al2">Cicloalcanos</span>
+      <span class="gb-formula">CₙH₂ₙ</span>
+    </div>
+
+    <div class="tipo-header">⚡ Sustitución Radical (SR)</div>
+    <p class="tipo-desc">Los alcanos y cicloalcanos son compuestos saturados; no reaccionan por adición. Su reacción típica es la <strong>sustitución homolítica</strong>, donde un H es reemplazado por otro átomo mediante radicales libres generados por luz (hν) o calor (Δ).</p>
+
+    <div id="rxn-al-0" class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('al-0')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Halogenación</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">SR · hν o Δ</span>
+        </div>
+        <span class="rxn-chev" id="chev-al-0">▾</span>
+      </div>
+      <div class="rxn-body" id="body-al-0">
+        <div class="rxn-eq">CₙH₂ₙ₊₂  +  X₂  ──[hν / Δ]──→  CₙH₂ₙ₊₁X  +  HX
+(X = Cl, Br)
+
+Mecanismo:  X₂ →[hν]→ 2 X•   (iniciación)
+            X• + R-H → R• + HX (propagación 1)
+            R• + X₂  → R-X + X• (propagación 2)</div>
+        <div class="rxn-cond">Reactivo: X₂ (Cl₂ más reactivo; Br₂ más selectivo)
+Condición: luz UV (hν) o temperatura alta (Δ)
+Producto: haloalcano + ácido halógeno (HX)</div>
+        <div class="rxn-regla">📌 La selectividad aumenta en el orden: F₂ &gt; Cl₂ &gt; Br₂ &gt; I₂</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₄</span>
+          <span class="rxn-ex-ea">+ Cl₂ →[hν]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃Cl + HCl</span>
+          <span class="rxn-ex-nota">clorometano</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.15s">
+          <span class="rxn-ex-r">CH₃−CH₂−CH₃</span>
+          <span class="rxn-ex-ea">+ Br₂ →[hν]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH(Br)−CH₃ + HBr</span>
+          <span class="rxn-ex-nota">Br al C2° (más selectivo)</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="al-0-q0">
+          <div class="quiz-q-text">¿Qué condición activa la halogenación radical de alcanos?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q0',false)"><span class="quiz-opt-icon">○</span> Calor moderado sin luz</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q0',true)"><span class="quiz-opt-icon">○</span> Luz ultravioleta (hν) o temperatura alta</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q0',false)"><span class="quiz-opt-icon">○</span> Catalizador ácido H₂SO₄</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-0-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="al-0-q1">
+          <div class="quiz-q-text">El producto de  CH₄ + Cl₂ (hν) es:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q1',false)"><span class="quiz-opt-icon">○</span> CH₃OH + HCl</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q1',true)"><span class="quiz-opt-icon">○</span> CH₃Cl + HCl</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-0-q1',false)"><span class="quiz-opt-icon">○</span> CH₂Cl₂ únicamente</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-0-q1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="rxn-al-1" class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('al-1')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c2t)">Combustión completa</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">Oxidación · O₂ exceso</span>
+        </div>
+        <span class="rxn-chev" id="chev-al-1">▾</span>
+      </div>
+      <div class="rxn-body" id="body-al-1">
+        <div class="rxn-eq">CₙH₂ₙ₊₂  +  (3n+1)/2 O₂  ──→  n CO₂  +  (n+1) H₂O
+
+Cicloalcanos:  CₙH₂ₙ  +  3n/2 O₂  ──→  n CO₂  +  n H₂O</div>
+        <div class="rxn-cond">Condición: exceso de O₂
+Productos: CO₂ + H₂O (gases; reacción exotérmica)</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₄ + 2 O₂</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CO₂ + 2 H₂O</span>
+          <span class="rxn-ex-nota">metano</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.15s">
+          <span class="rxn-ex-r">C₃H₈ + 5 O₂</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">3 CO₂ + 4 H₂O</span>
+          <span class="rxn-ex-nota">propano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="al-1-q0">
+          <div class="quiz-q-text">Los productos de la combustión completa de un alcano son:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q0',false)"><span class="quiz-opt-icon">○</span> CO + H₂O</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q0',true)"><span class="quiz-opt-icon">○</span> CO₂ + H₂O</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q0',false)"><span class="quiz-opt-icon">○</span> C + H₂O</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-1-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="al-1-q1">
+          <div class="quiz-q-text">¿Cuántos moles de O₂ necesita el propano (C₃H₈) para combustión completa?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q1',false)"><span class="quiz-opt-icon">○</span> 3</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q1',false)"><span class="quiz-opt-icon">○</span> 4</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-1-q1',true)"><span class="quiz-opt-icon">○</span> 5</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-1-q1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="rxn-al-2" class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('al-2')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Combustión incompleta</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">Oxidación · O₂ escaso</span>
+        </div>
+        <span class="rxn-chev" id="chev-al-2">▾</span>
+      </div>
+      <div class="rxn-body" id="body-al-2">
+        <div class="rxn-eq">CₙH₂ₙ₊₂  +  O₂ (escaso)  ──→  CO  +  H₂O   (o C + H₂O)
+
+Grado de oxidación depende de la deficiencia de O₂:
+  más O₂ → CO  (monóxido, gas incoloro tóxico)
+  menos O₂ → C  (hollín, tizne)</div>
+        <div class="rxn-cond">Condición: deficiencia de oxígeno
+Señal: llama anaranjada/amarilla con humo negro</div>
+        <div class="rxn-regla">⚠️ El CO es incoloro, inodoro y tóxico — se une a la hemoglobina</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">2 CH₄ + 3 O₂</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">2 CO + 4 H₂O</span>
+          <span class="rxn-ex-nota">O₂ escaso → CO</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="al-2-q0">
+          <div class="quiz-q-text">La combustión incompleta produce principalmente:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-2-q0',false)"><span class="quiz-opt-icon">○</span> CO₂ y H₂O</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-2-q0',true)"><span class="quiz-opt-icon">○</span> CO (y/o C) y H₂O</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-2-q0',false)"><span class="quiz-opt-icon">○</span> O₃ y H₂O</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-2-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="rxn-al-3" class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('al-3')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c1t)">Apertura de anillo — Ciclopropano</span>
+          <span class="rxn-badge" style="background:var(--c1b);color:var(--c1t)">Adición · solo C₃</span>
+        </div>
+        <span class="rxn-chev" id="chev-al-3">▾</span>
+      </div>
+      <div class="rxn-body" id="body-al-3">
+        <div class="rxn-eq">Ciclopropano  +  HX  ──→  propano halogenado
+
+Ciclopropano  +  H₂  ──[Ni/Δ]──→  propano</div>
+        <div class="rxn-cond">Solo el ciclopropano (anillo de 3C) reacciona por adición debido a la tensión angular extrema (60°, ángulo ideal 109.5°). Ciclobutano y superiores son estables.</div>
+        <div class="rxn-regla">📌 Los cicloalcanos de ≥4C reaccionan como alcanos (SR), no por adición</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">c-C₃H₆ + HBr</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH₂−CH₂Br</span>
+          <span class="rxn-ex-nota">1-bromopropano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="al-3-q0">
+          <div class="quiz-q-text">¿Cuál cicloalcano puede reaccionar por adición para abrir el anillo?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-3-q0',false)"><span class="quiz-opt-icon">○</span> Ciclohexano</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-3-q0',true)"><span class="quiz-opt-icon">○</span> Ciclopropano</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-3-q0',false)"><span class="quiz-opt-icon">○</span> Ciclopentano</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-3-q0"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-alcanos -->
+
+  <!-- ─────────────── ALQUENOS ─────────────── -->
+  <div class="tab-panel" id="tab-alquenos">
+    <div class="grupo-badge">
+      <span class="gb-pill aq">Alquenos</span>
+      <span class="gb-formula">CₙH₂ₙ · doble enlace C=C</span>
+    </div>
+
+    <div class="tipo-header">➕ Adición Electrofílica (AE)</div>
+    <p class="tipo-desc">El doble enlace C=C actúa como nucleófilo: la nube π dona electrones al electrófilo (E⁺). El nucleófilo (A⁻) se une al carbocatión intermedio. Regla de Markovnikov: el electrófilo va al carbono con más H (menos sustituido).</p>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-0')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Hidrohalogenación</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">AE · HX</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-0">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-0">
+        <div class="rxn-eq">>C=C<  +  H−X  ──→  −CH−CX−
+(X = Cl, Br, I)</div>
+        <div class="rxn-cond">Reactivo: HCl, HBr o HI
+Condición: temperatura ambiente, sin catalizador</div>
+        <div class="rxn-regla">📌 Markovnikov: H → C con más H  |  X → C con más sustituyentes</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-ea">+ HBr</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH(Br)−CH₃</span>
+          <span class="rxn-ex-nota">Br al C2 (más sustituido)</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.2s">
+          <span class="rxn-ex-r">CH₂=CH₂</span>
+          <span class="rxn-ex-ea">+ HCl</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH₂Cl</span>
+          <span class="rxn-ex-nota">cloroetano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-0-q0">
+          <div class="quiz-q-text">CH₃−CH=CH₂ + HCl → ?  (regla de Markovnikov)</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−CHCl−CH₂Cl</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q0',true)"><span class="quiz-opt-icon">○</span> CH₃−CHCl−CH₃</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−CH₂−CH₂Cl</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-0-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="aq-0-q1">
+          <div class="quiz-q-text">En la regla de Markovnikov, ¿a cuál carbono se une el halógeno (X)?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q1',false)"><span class="quiz-opt-icon">○</span> Al carbono con más hidrógenos</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q1',true)"><span class="quiz-opt-icon">○</span> Al carbono con más sustituyentes (menos H)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-0-q1',false)"><span class="quiz-opt-icon">○</span> Al carbono de menor peso molecular</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-0-q1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-1')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c1t)">Halogenación</span>
+          <span class="rxn-badge" style="background:var(--c1b);color:var(--c1t)">AE · X₂ · test Baeyer</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-1">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-1">
+        <div class="rxn-eq">>C=C<  +  X₂  ──→  −CX−CX−   (dihaluro vicinal)
+(X = Cl, Br)</div>
+        <div class="rxn-cond">Reactivo: Cl₂ o Br₂ (solución en CCl₄)
+Sin luz, sin calor — reacción espontánea a t° ambiente
+Estereoquímica: adición anti (trans)</div>
+        <div class="rxn-regla">🧪 Test de Baeyer: Br₂/CCl₄ (anaranjado) → decoloración = insaturación confirmada</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-ea">+ Br₂</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH(Br)−CH₂Br</span>
+          <span class="rxn-ex-nota">1,2-dibromopropano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-1-q0">
+          <div class="quiz-q-text">¿Qué observación confirma un alqueno con el test de Baeyer (Br₂/CCl₄)?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-1-q0',false)"><span class="quiz-opt-icon">○</span> El líquido se vuelve verde</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-1-q0',true)"><span class="quiz-opt-icon">○</span> El color anaranjado del Br₂ desaparece</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-1-q0',false)"><span class="quiz-opt-icon">○</span> Se libera gas</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-1-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-2')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c2t)">Hidrogenación (reducción)</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">AE · H₂ · cat.</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-2">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-2">
+        <div class="rxn-eq">>C=C<  +  H₂  ──[Ni / Pd / Pt]──→  −CH₂−CH₂−   (alcano)</div>
+        <div class="rxn-cond">Reactivo: H₂ gas
+Catalizador: Ni (Raney), Pd/C o Pt (metales heterogéneos)
+Estereoquímica: adición sin (cis)</div>
+        <div class="rxn-regla">📌 Alqueno + H₂ → alcano (saturación completa del doble enlace)</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-ea">+ H₂ →[Ni]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH₂−CH₃</span>
+          <span class="rxn-ex-nota">propano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-2-q0">
+          <div class="quiz-q-text">¿Qué tipo de compuesto se obtiene al hidrogenar un alqueno?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-2-q0',false)"><span class="quiz-opt-icon">○</span> Alquino</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-2-q0',true)"><span class="quiz-opt-icon">○</span> Alcano</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-2-q0',false)"><span class="quiz-opt-icon">○</span> Alcohol</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-2-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-3')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Hidratación (síntesis de alcoholes)</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">AE · H₂O · H₂SO₄</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-3">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-3">
+        <div class="rxn-eq">>C=C<  +  H₂O  ──[H₂SO₄]──→  −CH−C(OH)−   (alcohol)</div>
+        <div class="rxn-cond">Reactivo: H₂O (vapor)
+Catalizador: H₂SO₄ (ácido sulfúrico concentrado)
+Temperatura: 300 °C aprox.</div>
+        <div class="rxn-regla">📌 Markovnikov: OH → C más sustituido (menos H)</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH(OH)−CH₃</span>
+          <span class="rxn-ex-nota">propan-2-ol (Markovnikov)</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.18s">
+          <span class="rxn-ex-r">CH₂=CH₂</span>
+          <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH₂OH</span>
+          <span class="rxn-ex-nota">etanol</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-3-q0">
+          <div class="quiz-q-text">La hidratación de CH₃−CH=CH₂ con H₂SO₄ produce:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-3-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−CH₂−CH₂OH (propan-1-ol)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-3-q0',true)"><span class="quiz-opt-icon">○</span> CH₃−CH(OH)−CH₃ (propan-2-ol)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-3-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−CO−CH₃ (propanona)</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-3-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-4')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Ozonólisis</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">Oxidación · O₃ → ruptura</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-4">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-4">
+        <div class="rxn-eq">Paso 1 (ozonoide):  >C=C<  +  O₃  ──→  molozonide → ozonoide
+Paso 2 (reductora): ozonoide + Zn/H₂O  ──→  2 aldehídos/cetonas
+Paso 2 (oxidante): ozonoide + H₂O₂  ──→  ácidos carboxílicos</div>
+        <div class="rxn-cond">El doble enlace se rompe por completo.
+Condiciones reductoras (Zn/H₂O) → aldehídos (C terminal) o cetonas.
+Condiciones oxidantes (H₂O₂) → ácidos carboxílicos.</div>
+        <div class="rxn-regla">📌 Útil para determinar la posición del doble enlace (análisis estructural)</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−CH=CH₂ + O₃</span>
+          <span class="rxn-ex-ea">→[Zn/H₂O]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃CHO + HCHO</span>
+          <span class="rxn-ex-nota">etanal + metanal</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-4-q0">
+          <div class="quiz-q-text">La ozonólisis reductora de un alqueno CH₂=CH−CH₃ produce:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-4-q0',true)"><span class="quiz-opt-icon">○</span> HCHO + CH₃CHO</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-4-q0',false)"><span class="quiz-opt-icon">○</span> CO₂ + H₂O</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-4-q0',false)"><span class="quiz-opt-icon">○</span> CH₃COOH + HCOOH</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-4-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-5')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c2t)">Prueba de Baeyer (KMnO₄)</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">Oxidación · KMnO₄ frío</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-5">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-5">
+        <div class="rxn-eq">Condiciones frías, diluidas:
+>C=C<  +  KMnO₄ (frío, dil.)  ──→  diol (1,2-diol)  +  MnO₂↓
+
+Condiciones calientes, concentradas:
+>C=C<  +  KMnO₄ (cal., conc.)  ──→  ácidos / CO₂ (ruptura)</div>
+        <div class="rxn-cond">Permanganato de potasio: solución violeta/púrpura
+Resultado: decoloración (morado → incoloro/marrón) = insaturación
+MnO₂ precipitado marrón confirma reacción.</div>
+        <div class="rxn-regla">🧪 Test diferenciador: alquenos y alquinos dan (+), alcanos dan (−)</div>
+        <div class="rxn-ex-lbl">Ejemplo (condiciones frías)</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₂=CH₂ + KMnO₄/H₂O</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">HOCH₂−CH₂OH + MnO₂</span>
+          <span class="rxn-ex-nota">etilenglicol</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-5-q0">
+          <div class="quiz-q-text">La prueba de Baeyer con KMnO₄ en frío da positivo cuando:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-5-q0',false)"><span class="quiz-opt-icon">○</span> La solución se vuelve más violeta</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-5-q0',true)"><span class="quiz-opt-icon">○</span> La solución violeta se decolora (hay insaturación)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-5-q0',false)"><span class="quiz-opt-icon">○</span> Se libera gas verde</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-5-q0"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-alquenos -->
+
+  <!-- ─────────────── ALQUINOS ─────────────── -->
+  <div class="tab-panel" id="tab-alquinos">
+    <div class="grupo-badge">
+      <span class="gb-pill aq">Alquinos</span>
+      <span class="gb-formula">CₙH₂ₙ₋₂ · triple enlace C≡C</span>
+    </div>
+
+    <div class="tipo-header">➕➕ Adición al triple enlace (×1 y ×2)</div>
+    <p class="tipo-desc">El triple enlace puede adicionarse <strong>una</strong> o <strong>dos</strong> veces: la primera adición convierte el alquino en un alqueno; la segunda adición convierte el alqueno en alcano (o derivado). Las mismas reacciones de alquenos aplican, con la posibilidad de doble adición.</p>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ai-0')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Hidrohalogenación (×1 y ×2)</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">AE · HX</span>
+        </div>
+        <span class="rxn-chev" id="chev-ai-0">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ai-0">
+        <div class="rxn-eq">×1:  −C≡C−  +  HX  ──→  −CH=CX−   (haloalqueno, Markovnikov)
+×2:  −CH=CX−  +  HX  ──→  −CH₂−CX₂−  (geminaldialuro)</div>
+        <div class="rxn-cond">Primera adición: forma haloalqueno (puede aislarse controlando estequiometría)
+Segunda adición: 1 mol más de HX → geminaldialuro (dos X en el mismo C)</div>
+        <div class="rxn-regla">📌 Markovnikov en cada paso. Segunda adición: X segundo al C ya halogenado</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH≡CH + HBr (1 mol)</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₂=CHBr</span>
+          <span class="rxn-ex-nota">bromoetileno (×1)</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.18s">
+          <span class="rxn-ex-r">CH≡CH + HBr (2 mol)</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CHBr₂</span>
+          <span class="rxn-ex-nota">1,1-dibromoetano (×2)</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ai-0-q0">
+          <div class="quiz-q-text">La doble adición de HBr a CH≡CH produce:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-0-q0',false)"><span class="quiz-opt-icon">○</span> CH₂Br−CH₂Br (1,2-dibromoetano)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-0-q0',true)"><span class="quiz-opt-icon">○</span> CH₃−CHBr₂ (1,1-dibromoetano)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-0-q0',false)"><span class="quiz-opt-icon">○</span> CH₂=CHBr</div>
+          </div>
+          <div class="quiz-fb" id="fb-ai-0-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ai-1')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c1t)">Halogenación (×1 y ×2)</span>
+          <span class="rxn-badge" style="background:var(--c1b);color:var(--c1t)">AE · X₂</span>
+        </div>
+        <span class="rxn-chev" id="chev-ai-1">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ai-1">
+        <div class="rxn-eq">×1:  −C≡C−  +  X₂  ──→  −CX=CX−   (trans, dihaloalqueno)
+×2:  −CX=CX−  +  X₂  ──→  −CX₂−CX₂−  (tetrahaloalcano)</div>
+        <div class="rxn-cond">Primera adición (×1): produce dihaloalqueno (geometría trans preferente)
+Segunda adición (×2): forma tetrahaloalcano vicinal</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH≡CH + Br₂ (2 mol)</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₂Br−CHBr₂ → CHBr₂−CHBr₂</span>
+          <span class="rxn-ex-nota">1,1,2,2-tetrabromoetano</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ai-1-q0">
+          <div class="quiz-q-text">¿Cuántos moles de Br₂ se necesitan para llevar un alquino hasta tetrahaloalcano?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-1-q0',false)"><span class="quiz-opt-icon">○</span> 1 mol</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-1-q0',true)"><span class="quiz-opt-icon">○</span> 2 moles</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-1-q0',false)"><span class="quiz-opt-icon">○</span> 3 moles</div>
+          </div>
+          <div class="quiz-fb" id="fb-ai-1-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ai-2')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c2t)">Hidrogenación (×1 Lindlar · ×2 total)</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">AE · H₂ · cat.</span>
+        </div>
+        <span class="rxn-chev" id="chev-ai-2">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ai-2">
+        <div class="rxn-eq">×1 (Lindlar):  −C≡C−  +  H₂  ──[Pd/BaSO₄]──→  cis-alqueno
+×2 (total):    −C≡C−  +  2H₂  ──[Ni/Pd]──→  alcano</div>
+        <div class="rxn-cond">Catalizador Lindlar (Pd/BaSO₄ + quinolina): selectivo → solo 1 adición → cis-alqueno
+Catalizador Ni/Pd sin envenenar: hidrogenación total → alcano</div>
+        <div class="rxn-regla">📌 Lindlar → cis (adición sin del mismo lado). Na/NH₃(l) → trans-alqueno</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH≡CH + H₂ →[Lindlar]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">cis-CH₂=CH₂</span>
+          <span class="rxn-ex-nota">etileno (×1)</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.18s">
+          <span class="rxn-ex-r">CH≡CH + 2H₂ →[Ni]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CH₃</span>
+          <span class="rxn-ex-nota">etano (×2)</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ai-2-q0">
+          <div class="quiz-q-text">El catalizador de Lindlar convierte un alquino en:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-2-q0',false)"><span class="quiz-opt-icon">○</span> Trans-alqueno</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-2-q0',true)"><span class="quiz-opt-icon">○</span> Cis-alqueno</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-2-q0',false)"><span class="quiz-opt-icon">○</span> Alcano directamente</div>
+          </div>
+          <div class="quiz-fb" id="fb-ai-2-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ai-3')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Hidratación (Markovnikov → cetona / aldehído)</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">AE · H₂O · HgSO₄</span>
+        </div>
+        <span class="rxn-chev" id="chev-ai-3">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ai-3">
+        <div class="rxn-eq">−C≡C−  +  H₂O  ──[H₂SO₄/HgSO₄]──→  enol  ──→  cetona (o aldehído)
+
+Alquino interno → cetona  (tautomería ceto-enólica)
+Alquino terminal → aldehído (solo acetileno → acetaldehído)</div>
+        <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ (mercurio sulfato)
+Mecanismo: adición de agua → enol intermedio → tautomerización → carbonilo</div>
+        <div class="rxn-regla">📌 Markovnikov: OH al C más sustituido → cetona. Solo HC≡CH → CH₃CHO (aldehído)</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃−C≡CH + H₂O →[H⁺/Hg²⁺]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CO−CH₃</span>
+          <span class="rxn-ex-nota">propanona (cetona)</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.18s">
+          <span class="rxn-ex-r">HC≡CH + H₂O →[H⁺/Hg²⁺]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃−CHO</span>
+          <span class="rxn-ex-nota">etanal (aldehído)</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ai-3-q0">
+          <div class="quiz-q-text">La hidratación de CH₃−C≡CH (propino) produce principalmente:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-3-q0',false)"><span class="quiz-opt-icon">○</span> Un alcohol secundario</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-3-q0',true)"><span class="quiz-opt-icon">○</span> Una cetona (propanona)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-3-q0',false)"><span class="quiz-opt-icon">○</span> Un aldehído primario</div>
+          </div>
+          <div class="quiz-fb" id="fb-ai-3-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ai-4')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Acidez de alquinos terminales</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">Propiedad ácida · pKa ≈ 25</span>
+        </div>
+        <span class="rxn-chev" id="chev-ai-4">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ai-4">
+        <div class="rxn-eq">HC≡C−R  +  NaNH₂  ──→  NaC≡C−R  +  NH₃
+HC≡C−R  +  NaOH  ──→  NaC≡C−R  +  H₂O  (bases fuertes)
+
+Alquinos terminales (H en C≡) son más ácidos que alcanos o alquenos:
+pKa: alcino terminal ≈ 25 / alqueno ≈ 44 / alcano ≈ 50</div>
+        <div class="rxn-cond">Solo alquinos TERMINALES (H unido al carbono del triple enlace)
+Alquinos internos: no tienen H en el triple enlace → no son ácidos</div>
+        <div class="rxn-regla">📌 El C(sp) tiene mayor carácter s → atrae más el par de electrones del enlace C−H → H más fácilmente disociable</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">HC≡CH + NaNH₂</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">NaC≡CH + NH₃</span>
+          <span class="rxn-ex-nota">acetiluro sódico</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ai-4-q0">
+          <div class="quiz-q-text">¿Cuál de los siguientes compuestos puede reaccionar con NaNH₂ por ser ácido?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-4-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−C≡C−CH₃ (but-2-ino, interno)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-4-q0',true)"><span class="quiz-opt-icon">○</span> HC≡C−CH₃ (prop-1-ino, terminal)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ai-4-q0',false)"><span class="quiz-opt-icon">○</span> CH₃−CH₃ (etano)</div>
+          </div>
+          <div class="quiz-fb" id="fb-ai-4-q0"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-alquinos -->
+
+  <!-- ─────────────── AROMÁTICOS ─────────────── -->
+  <div class="tab-panel" id="tab-aromaticos">
+    <div class="grupo-badge">
+      <span class="gb-pill ar">Aromáticos</span>
+      <span class="gb-formula">C₆H₅− · anillo de Hückel (4n+2 e⁻ π)</span>
+    </div>
+
+    <div class="tipo-header">⚡ Sustitución Electrofílica Aromática (SEA)</div>
+    <p class="tipo-desc">El anillo bencénico es rico en electrones π (6 e⁻ deslocalidos). Reacciona con electrófilos fuertes (E⁺ generado por catalizador ácido de Lewis). A diferencia de alquenos, el producto es una <strong>sustitución</strong> (no adición) para mantener la aromaticidad.</p>
+
+    <div class="attn">
+      Mecanismo general SEA: E⁺ + benceno → complejo σ (arenio, pierde aromaticidad) → −H⁺ → producto areno sustituido (recupera aromaticidad)
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ar-0')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Halogenación</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">SEA · X₂ · ácido de Lewis</span>
+        </div>
+        <span class="rxn-chev" id="chev-ar-0">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ar-0">
+        <div class="rxn-eq">C₆H₆  +  X₂  ──[FeBr₃ / AlCl₃]──→  C₆H₅X  +  HX
+
+Catalizador: FeBr₃ (para Br₂) o AlCl₃ (para Cl₂)
+Electrófilo generado: X⁺ (ión halonio) o X−FeX₃⁻</div>
+        <div class="rxn-cond">Sin catalizador NO reacciona (diferente a alquenos)
+Condición: ácido de Lewis activa X₂ → electrófilo X⁺</div>
+        <div class="rxn-regla">📌 SEA no necesita luz (diferencia clave con SR de alcanos)</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">C₆H₆ + Br₂ →[FeBr₃]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">C₆H₅Br + HBr</span>
+          <span class="rxn-ex-nota">bromobenceno</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ar-0-q0">
+          <div class="quiz-q-text">¿Por qué el benceno necesita catalizador (FeBr₃) para halogenarse, pero el etileno no?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-0-q0',true)"><span class="quiz-opt-icon">○</span> El anillo aromático es estable; necesita electrófilo más activo para reaccionar sin perder aromaticidad</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-0-q0',false)"><span class="quiz-opt-icon">○</span> El benceno es más reactivo y reacciona más fácil</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-0-q0',false)"><span class="quiz-opt-icon">○</span> El FeBr₃ aporta hidrógenos adicionales</div>
+          </div>
+          <div class="quiz-fb" id="fb-ar-0-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ar-1')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Nitración</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">SEA · HNO₃/H₂SO₄</span>
+        </div>
+        <span class="rxn-chev" id="chev-ar-1">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ar-1">
+        <div class="rxn-eq">C₆H₆  +  HNO₃  ──[H₂SO₄ conc.]──→  C₆H₅NO₂  +  H₂O
+
+Electrófilo: ión nitronio NO₂⁺  (generado por H₂SO₄ + HNO₃)
+H₂SO₄ + HNO₃ → H₂NO₃⁺ → NO₂⁺ + H₂O</div>
+        <div class="rxn-cond">Mezcla nitrante: HNO₃ conc. + H₂SO₄ conc. (50-60 °C)
+Temperatura baja → monosustitución. Alta → di- o trinitración.</div>
+        <div class="rxn-regla">📌 El trinitrotolueno (TNT) se forma por triple nitración del tolueno</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">C₆H₆ + HNO₃ →[H₂SO₄]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">C₆H₅NO₂ + H₂O</span>
+          <span class="rxn-ex-nota">nitrobenceno</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ar-1-q0">
+          <div class="quiz-q-text">El electrófilo activo en la nitración del benceno es:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-1-q0',false)"><span class="quiz-opt-icon">○</span> NO₃⁻</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-1-q0',true)"><span class="quiz-opt-icon">○</span> NO₂⁺ (ión nitronio)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-1-q0',false)"><span class="quiz-opt-icon">○</span> H₂SO₄</div>
+          </div>
+          <div class="quiz-fb" id="fb-ar-1-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ar-2')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c2t)">Sulfonación</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">SEA · H₂SO₄ · reversible</span>
+        </div>
+        <span class="rxn-chev" id="chev-ar-2">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ar-2">
+        <div class="rxn-eq">C₆H₆  +  H₂SO₄ (conc. o fumante)  ⇌  C₆H₅SO₃H  +  H₂O
+(ácido bencenosulfónico)
+
+Reversible (desulfonación): C₆H₅SO₃H + H₂O (calor) ⇌ C₆H₆ + H₂SO₄</div>
+        <div class="rxn-cond">Electrófilo: SO₃ (trióxido de azufre) — del H₂SO₄ fumante (oleum)
+Reacción reversible: útil en síntesis como grupo bloqueante temporal</div>
+        <div class="rxn-regla">📌 Única SEA reversible — el −SO₃H puede ser eliminado calentando en agua</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">C₆H₆ + SO₃ →[H₂SO₄]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">C₆H₅SO₃H</span>
+          <span class="rxn-ex-nota">ácido bencenosulfónico</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ar-2-q0">
+          <div class="quiz-q-text">La sulfonación del benceno es la única SEA que es:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-2-q0',false)"><span class="quiz-opt-icon">○</span> Irreversible</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-2-q0',true)"><span class="quiz-opt-icon">○</span> Reversible</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-2-q0',false)"><span class="quiz-opt-icon">○</span> Una reacción de adición</div>
+          </div>
+          <div class="quiz-fb" id="fb-ar-2-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ar-3')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c1t)">Alquilación de Friedel-Crafts</span>
+          <span class="rxn-badge" style="background:var(--c1b);color:var(--c1t)">SEA · RX · AlCl₃</span>
+        </div>
+        <span class="rxn-chev" id="chev-ar-3">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ar-3">
+        <div class="rxn-eq">C₆H₆  +  R−X  ──[AlCl₃]──→  C₆H₅−R  +  HX
+(R = grupo alquilo; X = Cl, Br)
+
+Electrófilo: carbocatión R⁺ (o complejo RX·AlCl₃)</div>
+        <div class="rxn-cond">Catalizador: AlCl₃ (ácido de Lewis fuerte)
+Problema: el producto (alquilbenceno) es más reactivo → polialquilación
+Solución: exceso de benceno para minimizar polialquilación</div>
+        <div class="rxn-regla">📌 Limitación: reorganización del carbocatión (puede dar producto rearreglado)</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">C₆H₆ + CH₃Cl →[AlCl₃]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">C₆H₅CH₃ + HCl</span>
+          <span class="rxn-ex-nota">tolueno (metilbenceno)</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ar-3-q0">
+          <div class="quiz-q-text">En la alquilación de Friedel-Crafts, el electrófilo activo es:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-3-q0',false)"><span class="quiz-opt-icon">○</span> AlCl₃ directamente</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-3-q0',true)"><span class="quiz-opt-icon">○</span> El carbocatión R⁺ generado por AlCl₃ + RX</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-3-q0',false)"><span class="quiz-opt-icon">○</span> Cl⁻ (ión cloruro)</div>
+          </div>
+          <div class="quiz-fb" id="fb-ar-3-q0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('ar-4')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Acilación de Friedel-Crafts</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">SEA · RCOCl · AlCl₃</span>
+        </div>
+        <span class="rxn-chev" id="chev-ar-4">▾</span>
+      </div>
+      <div class="rxn-body" id="body-ar-4">
+        <div class="rxn-eq">C₆H₆  +  R−CO−Cl  ──[AlCl₃]──→  C₆H₅−CO−R  +  HCl
+(arilcetona / fenilcetona)
+
+Electrófilo: acilio R−C≡O⁺  (catión acilio)</div>
+        <div class="rxn-cond">Catalizador: AlCl₃ (en exceso, ≥ 1 mol por mol de RCOCl)
+Reactivo: cloruro de acilo (RCOCl) o anhídrido (R(CO)₂O)
+Ventaja sobre alquilación: NO hay poliacilación (el grupo C=O desactiva el anillo)</div>
+        <div class="rxn-regla">📌 Mejor que alquilación para obtener monosustituido limpio</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">C₆H₆ + CH₃COCl →[AlCl₃]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">C₆H₅COCH₃ + HCl</span>
+          <span class="rxn-ex-nota">acetofenona</span>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="ar-4-q0">
+          <div class="quiz-q-text">La acilación de Friedel-Crafts no sufre poliacilación porque:</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-4-q0',false)"><span class="quiz-opt-icon">○</span> El AlCl₃ se consume en la primera etapa</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-4-q0',true)"><span class="quiz-opt-icon">○</span> El grupo −C=O incorporado desactiva el anillo para electrófilos</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ar-4-q0',false)"><span class="quiz-opt-icon">○</span> La reacción es reversible</div>
+          </div>
+          <div class="quiz-fb" id="fb-ar-4-q0"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tab-aromaticos -->
+
+</div><!-- /app -->
+
+<script>
+/* ── TABS ── */
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const idx={alcanos:0,alquenos:1,alquinos:2,aromaticos:3}[id]??0;
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+/* ── ACCORDION ── */
+function toggleRxn(id){
+  const body=document.getElementById('body-'+id);
+  const chev=document.getElementById('chev-'+id);
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen);
+  chev.classList.toggle('open',!isOpen);
+  if(!isOpen){
+    /* re-trigger animations on examples */
+    body.querySelectorAll('.rxn-ex').forEach((el,i)=>{
+      el.style.animation='none';
+      el.offsetHeight; /* reflow */
+      el.style.animation=`rxnFadeUp .35s ${0.05+i*.13}s forwards`;
+    });
+  }
+}
+
+/* ── QUIZ ── */
+const QUIZ_FB={
+  'al-0-q0':{ok:'Correcto — luz UV o calor rompe X₂ en radicales X• que inician la cadena.',fail:'No. El H₂SO₄ es catalizador de SEA (benceno) no de radicales.'},
+  'al-0-q1':{ok:'Correcto — CH₃Cl es el producto primario (monosustitución). Con exceso de Cl₂ pueden formarse CH₂Cl₂, CHCl₃, CCl₄.',fail:'No es OH: la halogenación no agrega OH. Y CH₂Cl₂ puede formarse como producto secundario, no el único.'},
+  'al-1-q0':{ok:'Correcto — CO₂ y H₂O son los productos de combustión completa.',fail:'CO y H₂O indican combustión incompleta.'},
+  'al-1-q1':{ok:'Correcto — C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O. Fórmula: (3n+1)/2 O₂ con n=3: 5.',fail:'Recuerda la fórmula: CₙH₂ₙ₊₂ necesita (3n+1)/2 O₂. Con n=3: 5 moles.'},
+  'al-2-q0':{ok:'Correcto — O₂ escaso → CO (o C negro) en lugar de CO₂.',fail:'CO₂+H₂O es combustión completa; O₃ no es producto de combustión.'},
+  'al-3-q0':{ok:'Correcto — el ciclopropano tiene tensión angular extrema (60°) y reacciona por adición.',fail:'Ciclopentano y ciclohexano son estables y reaccionan por sustitución (SR) como alcanos.'},
+  'aq-0-q0':{ok:'Correcto — Markovnikov: HCl, H va al CH=, Cl va al CH₃−CH< (más sustituido).',fail:'No: la adición anti-Markovnikov (Cl al C1) requiere radicales (peróxidos).'},
+  'aq-0-q1':{ok:'Correcto — el halógeno (electrófilo X) se une al carbono con más sustituyentes (carbocatión más estable).',fail:'No: el H es el que va al C con más H (menos sustituido).'},
+  'aq-1-q0':{ok:'Correcto — la decoloración del Br₂ (naranja→incoloro) indica reacción con el doble enlace.',fail:'No: el Br₂ es naranja/marrón, no verde. No hay gas en esta reacción.'},
+  'aq-2-q0':{ok:'Correcto — el doble enlace se satura con H₂ → alcano.',fail:'Un alquino requeriría quitar H, no añadir. El alcohol requiere agua (hidratación), no H₂.'},
+  'aq-3-q0':{ok:'Correcto — Markovnikov: OH al C2 (más sustituido). Producto: propan-2-ol.',fail:'Propan-1-ol sería anti-Markovnikov. Propanona resultaría de oxidación, no hidratación de alqueno.'},
+  'aq-4-q0':{ok:'Correcto — HCHO (metanal) del CH₂= y CH₃CHO (etanal) del =CH−CH₃.',fail:'CO₂+H₂O es combustión, no ozonólisis. Los ácidos serían de condiciones oxidantes.'},
+  'aq-5-q0':{ok:'Correcto — decoloración del KMnO₄ púrpura indica que el compuesto tiene insaturación (+ para alquenos y alquinos).',fail:'La solución se vuelve MÁS incolora, no más violeta.'},
+  'ai-0-q0':{ok:'Correcto — doble adición de HBr a HC≡CH: 1ª → CH₂=CHBr, 2ª → CH₃CHBr₂ (geminaldialuro).',fail:'CH₂Br−CH₂Br es la doble halogenación con Br₂ (1,2-dibromo). El geminaldialuro lleva ambos Br en el mismo C.'},
+  'ai-1-q0':{ok:'Correcto — 1 mol X₂ → dihaloalqueno; 2 mol X₂ → tetrahaloalcano.',fail:'1 mol da el dihaloalqueno (×1). Para llegar al tetrahaloalcano se necesitan 2 moles.'},
+  'ai-2-q0':{ok:'Correcto — Lindlar es un Pd envenenado (BaSO₄ + quinolina) que detiene en el cis-alqueno.',fail:'Para trans-alqueno se usa Na/NH₃(l) (Birch). Para ir directo a alcano se usa Ni sin envenenar.'},
+  'ai-3-q0':{ok:'Correcto — Markovnikov: OH al C2 (más sustituido) → enol → tautomeriza a cetona CH₃COCH₃.',fail:'El alcohol requeriría condiciones de hidratación sin tautomerización. El aldehído solo se forma con HC≡CH (etino terminal simétrico).'},
+  'ai-4-q0':{ok:'Correcto — solo los alquinos terminales (H unido al C del triple enlace) son suficientemente ácidos.',fail:'El alquino interno no tiene H en el triple enlace. El etano (alcano) tiene pKa ≈ 50, mucho menos ácido.'},
+  'ar-0-q0':{ok:'Correcto — el anillo aromático es muy estable. El catalizador genera un electrófilo más fuerte (X⁺) capaz de atacar.',fail:'No: el benceno es MENOS reactivo que los alquenos por la estabilización aromática. El FeBr₃ activa el Br₂, no dona H.'},
+  'ar-1-q0':{ok:'Correcto — el H₂SO₄ genera NO₂⁺ (nitronio) a partir de HNO₃; el NO₂⁺ ataca el anillo.',fail:'NO₃⁻ es el anión nitrato, no el electrófilo. H₂SO₄ actúa como ácido para generar NO₂⁺.'},
+  'ar-2-q0':{ok:'Correcto — la sulfonación es reversible: calienta con agua y se recupera el benceno.',fail:'Es la única REVERSIBLE. Y es SEA (sustitución), no adición.'},
+  'ar-3-q0':{ok:'Correcto — AlCl₃ es ácido de Lewis que polariza R−Cl → R⁺ (o complejo con carácter de carbocatión).',fail:'AlCl₃ es catalizador, no el electrófilo directo. El Cl⁻ es el nucleófugo (se va).'},
+  'ar-4-q0':{ok:'Correcto — el grupo carbonilo C=O es desactivante (retira densidad electrónica del anillo), bloqueando la segunda acilación.',fail:'AlCl₃ se regenera parcialmente. La sulfonación es la reversible, no la acilación.'},
+};
+
+function rxnAnswer(btn,qid,correct){
+  const container=btn.closest('.quiz-q');
+  if(container.dataset.answered) return;
+  container.dataset.answered='1';
+  const opts=container.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>o.classList.add('dim-out','answered'));
+  if(correct){
+    btn.classList.remove('dim-out');
+    btn.classList.add('correct');
+    btn.querySelector('.quiz-opt-icon').textContent='✓';
+  } else {
+    btn.classList.remove('dim-out');
+    btn.classList.add('wrong');
+    btn.querySelector('.quiz-opt-icon').textContent='✗';
+    /* find and highlight correct */
+    opts.forEach(o=>{
+      const oc=o.getAttribute('onclick');
+      if(oc && oc.includes(',true)')){
+        o.classList.remove('dim-out');
+        o.classList.add('correct');
+        o.querySelector('.quiz-opt-icon').textContent='✓';
+      }
+    });
+  }
+  const fb=document.getElementById('fb-'+qid);
+  if(fb){
+    const data=QUIZ_FB[qid];
+    fb.className='quiz-fb '+(correct?'ok':'fail');
+    fb.textContent=data?(correct?data.ok:data.fail):(correct?'¡Correcto!':'Incorrecto, revisa la teoría.');
+  }
+}
+</script>
+</body>
+</html>
