@@ -68,7 +68,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-chev.open{transform:rotate(180deg)}
 
 .rxn-body{display:none;padding:16px}
-.rxn-body.open{display:block}
 
 /* ── GENERAL EQUATION ── */
 .rxn-eq{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:#fafaf8;border:1px solid var(--brd);border-left:3px solid var(--c3);border-radius:var(--rs);padding:11px 14px;margin-bottom:12px;color:var(--dim);line-height:1.8;white-space:pre-wrap}
@@ -79,8 +78,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 /* ── EXAMPLES ── */
 .rxn-ex-lbl{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmer);margin-bottom:6px}
-.rxn-ex{display:flex;align-items:center;gap:7px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;flex-wrap:wrap;opacity:0;animation:rxnFadeUp .35s forwards}
-@keyframes rxnFadeUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(6px)}}
+.rxn-ex{display:flex;align-items:center;gap:7px;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:.8rem;flex-wrap:wrap;opacity:0;animation:rxnFadeUp .4s ease forwards}
+@keyframes rxnFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .rxn-ex-r{color:var(--tx)}
 .rxn-ex-ea{color:var(--c3t);font-weight:700}
 .rxn-arrow{color:var(--c2t);font-size:1rem;flex-shrink:0}
@@ -106,6 +105,44 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 /* ── MISC ── */
 .sec-lbl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--dimmer);margin-bottom:10px}
 .attn{background:#fffbea;border:1px solid rgba(234,179,8,.35);border-radius:var(--rs);padding:10px 14px;font-size:.79rem;color:#92400e;line-height:1.6;margin-bottom:12px}
+
+/* ── VISUAL EQUATION (meq) ── */
+.meq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:13px 15px;background:var(--surf);border:1.5px solid var(--brd);
+  border-radius:var(--r);margin-bottom:13px}
+.meq-side{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.meq-mol{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--tx)}
+.meq-plus{font-size:.82rem;color:var(--dimmer);padding:0 1px}
+.meq-reag{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--c3t);
+  font-weight:700;background:var(--c3b);border-radius:5px;padding:2px 9px}
+.meq-arr{display:flex;flex-direction:column;align-items:center;gap:1px;
+  min-width:52px;flex-shrink:0}
+.meq-cond{font-size:.6rem;color:var(--dimmer);text-align:center;
+  font-family:'JetBrains Mono',monospace;white-space:nowrap;
+  background:var(--surf2);border-radius:3px;padding:1px 5px}
+.meq-line{font-size:.95rem;color:var(--c2t);font-family:'JetBrains Mono',monospace;letter-spacing:-.05em}
+.meq-prod{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--c2t);font-weight:700}
+/* Atom highlight classes */
+.bp{color:var(--c3t);font-weight:900;text-decoration:none} /* π bond / breaking bond */
+.hn{color:var(--c4t);font-weight:900;background:var(--c4b);
+  border-radius:3px;padding:0 3px;font-style:normal} /* new/changed atom or group */
+
+/* ── MOLECULE COMPARISON CARD ── */
+.mol-cmp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);
+  padding:10px 12px;margin-bottom:13px;overflow-x:auto}
+.mol-cmp-card{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--rs);
+  padding:9px 13px;text-align:center;flex-shrink:0}
+.mol-cmp-formula{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--tx);
+  line-height:1.6;display:block}
+.mol-cmp-name{font-size:.62rem;color:var(--dimmer);margin-top:3px;font-family:'Outfit',sans-serif}
+.mol-cmp-arr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c2t);
+  text-align:center;flex-shrink:0}
+.mol-cmp-reag{font-size:.65rem;color:var(--c3t);font-weight:700}
+
+/* ── ACCORDION OPEN ANIMATION ── */
+.rxn-body.open{display:block;animation:bodySlide .22s ease}
+@keyframes bodySlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── MARKOVNIKOV BOX ── */
 .mk-box{background:var(--c3b);border:2px solid var(--c3);border-radius:var(--r);padding:16px 18px;margin-bottom:20px}
@@ -173,30 +210,54 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-al-0">▾</span>
       </div>
       <div class="rxn-body" id="body-al-0">
-        <div class="rxn-eq">CₙH₂ₙ₊₂  +  X₂  ──[hν / Δ]──→  CₙH₂ₙ₊₁X  +  HX
-(X = Cl, Br)
-
-Mecanismo:  X₂ →[hν]→ 2 X•   (iniciación)
-            X• + R-H → R• + HX (propagación 1)
-            R• + X₂  → R-X + X• (propagación 2)</div>
-        <div class="rxn-cond">Reactivo: X₂ (Cl₂ más reactivo; Br₂ más selectivo)
-Condición: luz UV (hν) o temperatura alta (Δ)
-Producto: haloalcano + ácido halógeno (HX)</div>
-        <div class="rxn-regla">📌 La selectividad aumenta en el orden: F₂ &gt; Cl₂ &gt; Br₂ &gt; I₂</div>
-        <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <!-- Ecuación visual -->
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">H</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">X₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">hν o Δ</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">X</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H<span class="hn">X</span></span>
+          </div>
+        </div>
+        <!-- Comparación molecular -->
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH₂−CH₃</span>
+            <div class="mol-cmp-name">propano</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ Br₂</div>
+            <div>──[hν]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(Br)</span>−CH₃</span>
+            <div class="mol-cmp-name">2-bromopropano + HBr</div>
+          </div>
+        </div>
+        <div class="rxn-cond">① Iniciación: X₂ →[hν]→ 2 X•  ② Propagación: X• + R−H → R• + HX  |  R• + X₂ → R−X + X•  ③ Terminación: 2 R• → R−R</div>
+        <div class="rxn-regla">📌 Br₂ es más selectivo que Cl₂: prefiere el H terciario (radical más estable)</div>
+        <div class="rxn-ex-lbl">Más ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.08s">
           <span class="rxn-ex-r">CH₄</span>
           <span class="rxn-ex-ea">+ Cl₂ →[hν]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃Cl + HCl</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">Cl</span> + HCl</span>
           <span class="rxn-ex-nota">clorometano</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.15s">
-          <span class="rxn-ex-r">CH₃−CH₂−CH₃</span>
-          <span class="rxn-ex-ea">+ Br₂ →[hν]</span>
+        <div class="rxn-ex" style="animation-delay:.23s">
+          <span class="rxn-ex-r">c-C₆H₁₂</span>
+          <span class="rxn-ex-ea">+ Cl₂ →[hν]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH(Br)−CH₃ + HBr</span>
-          <span class="rxn-ex-nota">Br al C2° (más selectivo)</span>
+          <span class="rxn-ex-p">c-C₆H₁₁<span class="hn">Cl</span> + HCl</span>
+          <span class="rxn-ex-nota">clorociclohexano</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -230,11 +291,37 @@ Producto: haloalcano + ácido halógeno (HX)</div>
         <span class="rxn-chev" id="chev-al-1">▾</span>
       </div>
       <div class="rxn-body" id="body-al-1">
-        <div class="rxn-eq">CₙH₂ₙ₊₂  +  (3n+1)/2 O₂  ──→  n CO₂  +  (n+1) H₂O
-
-Cicloalcanos:  CₙH₂ₙ  +  3n/2 O₂  ──→  n CO₂  +  n H₂O</div>
-        <div class="rxn-cond">Condición: exceso de O₂
-Productos: CO₂ + H₂O (gases; reacción exotérmica)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">CₙH₂ₙ₊₂</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">O₂ exceso</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Δ (combustión)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">n CO₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">(n+1) H₂O</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₄  +  2 O₂</span>
+            <div class="mol-cmp-name">metano + oxígeno (exceso)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Δ</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">CO₂</span>  +  2 <span class="hn">H₂O</span></span>
+            <div class="mol-cmp-name">gases de combustión</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Exceso de O₂ · exotérmica · CₙH₂ₙ (cicloalcano) usa 3n/2 mol O₂</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₄ + 2 O₂</span>
@@ -280,14 +367,42 @@ Productos: CO₂ + H₂O (gases; reacción exotérmica)</div>
         <span class="rxn-chev" id="chev-al-2">▾</span>
       </div>
       <div class="rxn-body" id="body-al-2">
-        <div class="rxn-eq">CₙH₂ₙ₊₂  +  O₂ (escaso)  ──→  CO  +  H₂O   (o C + H₂O)
-
-Grado de oxidación depende de la deficiencia de O₂:
-  más O₂ → CO  (monóxido, gas incoloro tóxico)
-  menos O₂ → C  (hollín, tizne)</div>
-        <div class="rxn-cond">Condición: deficiencia de oxígeno
-Señal: llama anaranjada/amarilla con humo negro</div>
-        <div class="rxn-regla">⚠️ El CO es incoloro, inodoro y tóxico — se une a la hemoglobina</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">CₙH₂ₙ₊₂</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">O₂ escaso</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Δ (O₂ insuf.)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">CO</span></span>
+            <span class="meq-plus">/</span>
+            <span class="meq-prod"><span class="hn">C</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">H₂O</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">O₂ deficiencia leve</span>
+            <div class="mol-cmp-name">algo de oxígeno</div>
+          </div>
+          <div class="mol-cmp-arr"><div>──→</div></div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">CO</span>  +  H₂O</span>
+            <div class="mol-cmp-name">monóxido · gas tóxico</div>
+          </div>
+          <div class="mol-cmp-arr"><div>──→ (menos O₂)</div></div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">C</span>  +  H₂O</span>
+            <div class="mol-cmp-name">hollín / tizne</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Señal: llama anaranjada/amarilla con humo negro</div>
+        <div class="rxn-regla">⚠️ CO: incoloro, inodoro y tóxico — se une a la hemoglobina bloqueando el O₂</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">2 CH₄ + 3 O₂</span>
@@ -318,11 +433,36 @@ Señal: llama anaranjada/amarilla con humo negro</div>
         <span class="rxn-chev" id="chev-al-3">▾</span>
       </div>
       <div class="rxn-body" id="body-al-3">
-        <div class="rxn-eq">Ciclopropano  +  HX  ──→  propano halogenado
-
-Ciclopropano  +  H₂  ──[Ni/Δ]──→  propano</div>
-        <div class="rxn-cond">Solo el ciclopropano (anillo de 3C) reacciona por adición debido a la tensión angular extrema (60°, ángulo ideal 109.5°). Ciclobutano y superiores son estables.</div>
-        <div class="rxn-regla">📌 Los cicloalcanos de ≥4C reaccionan como alcanos (SR), no por adición</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">△</span>C₃H₆</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HX</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">tensión → apertura</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">CH₃−CH₂−CH₂<span class="hn">X</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">△</span> (ángulo 60°)</span>
+            <div class="mol-cmp-name">ciclopropano — anillo tenso</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HBr · abre</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH₂−CH₂<span class="hn">Br</span></span>
+            <div class="mol-cmp-name">1-bromopropano (cadena abierta)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Ángulo ideal C−C−C = 109.5° · ciclopropano forzado a 60° → tensión extrema → apertura espontánea · ciclobutano y superiores son estables</div>
+        <div class="rxn-regla">📌 ≥4C cicloalcanos reaccionan como alcanos (SR) · solo ciclopropano abre por adición</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">c-C₃H₆ + HBr</span>
@@ -354,11 +494,23 @@ Ciclopropano  +  H₂  ──[Ni/Δ]──→  propano</div>
 
     <div class="mk-box">
       <div class="mk-title">📌 Regla de Markovnikov</div>
-      <p style="font-size:.8rem;color:var(--c3t);margin-bottom:8px">En la adición de <strong>HX</strong> (o H₂O) a un alqueno asimétrico, el <strong>H</strong> se une al carbono con <em>más hidrógenos</em> (menos sustituido) y el <strong>X</strong> (o OH) al carbono con <em>más sustituyentes</em> (más sustituido). Esto maximiza la estabilidad del carbocatión intermedio (3° &gt; 2° &gt; 1°).</p>
-      <div class="mk-eq">CH₃−CH=CH₂ + HBr  ──→  CH₃−CH(Br)−CH₃   ✓ Markovnikov (Br al C2)
-                           ──→  CH₃−CH₂−CH₂Br    ✗ anti-Markovnikov (producto minoritario)
-
-Regla: H → C con más H (C1 tiene 2H)    Br → C con menos H (C2 tiene 1H)</div>
+      <p style="font-size:.8rem;color:var(--c3t);margin-bottom:12px">En la adición de <strong>HX</strong> (o H₂O) a un alqueno asimétrico, el <strong>H</strong> va al carbono con <em>más H</em> (menos sustituido) y el <strong>X</strong> al carbono con <em>más sustituyentes</em> (más sustituido). El carbocatión más estable es el intermedio.</p>
+      <!-- Visual comparison: correcto vs incorrecto -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+        <div style="flex:1;min-width:200px;background:rgba(22,163,74,.1);border:1.5px solid #16a34a;border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:.62rem;font-weight:700;color:#14532d;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">✓ Markovnikov (mayoritario)</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--tx)">CH₃−<span class="bp">CH=CH₂</span> + HBr</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-top:5px">──→ CH₃−CH<span class="hn">(Br)</span>−CH₃</div>
+          <div style="font-size:.7rem;color:#14532d;margin-top:4px">Br → C2 (más sustituido, 1H)</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:var(--errb);border:1.5px solid var(--err);border-radius:var(--rs);padding:10px 12px">
+          <div style="font-size:.62rem;font-weight:700;color:var(--errt);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">✗ Anti-Markovnikov (minoritario)</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--tx)">CH₃−<span class="bp">CH=CH₂</span> + HBr</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-top:5px;color:var(--errt)">──→ CH₃−CH₂−CH₂<span style="color:var(--errt);font-weight:900">Br</span></div>
+          <div style="font-size:.7rem;color:var(--errt);margin-top:4px">Br → C1 (menos sustituido, 2H)</div>
+        </div>
+      </div>
+      <div style="font-size:.74rem;color:var(--c3t);font-family:'JetBrains Mono',monospace;background:rgba(180,83,9,.08);border-radius:var(--rs);padding:7px 11px">Estabilidad carbocatión: 3° &gt; 2° &gt; 1° · el H va al C con más H · el X va al C con más R</div>
     </div>
 
     <div class="tipo-header">➕ Adición Electrofílica (AE)</div>
@@ -373,25 +525,50 @@ Regla: H → C con más H (C1 tiene 2H)    Br → C con menos H (C2 tiene 1H)</d
         <span class="rxn-chev" id="chev-aq-0">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-0">
-        <div class="rxn-eq">>C=C<  +  H−X  ──→  −CH−CX−
-(X = Cl, Br, I)</div>
-        <div class="rxn-cond">Reactivo: HCl, HBr o HI
-Condición: temperatura ambiente, sin catalizador</div>
-        <div class="rxn-regla">📌 Markovnikov: H → C con más H  |  X → C con más sustituyentes</div>
-        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C=C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H−X</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">T° amb., sin cat.</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−CH−C<span class="hn">X</span>−</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
+            <div class="mol-cmp-name">propeno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HBr</div>
+            <div>──[Markov.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(Br)</span>−CH₃</span>
+            <div class="mol-cmp-name">2-bromopropano · Br al C más sustituido</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Reactivo: HCl, HBr o HI · T° ambiente, sin catalizador · X = Cl, Br, I</div>
+        <div class="rxn-regla">📌 Markovnikov: H → C con más H (menos sustituido) · X → C con menos H (más sustituido)</div>
+        <div class="rxn-ex-lbl">Más ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ HBr</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH(Br)−CH₃</span>
+          <span class="rxn-ex-p">CH₃−CH<span class="hn">(Br)</span>−CH₃</span>
           <span class="rxn-ex-nota">Br al C2 (más sustituido)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.2s">
-          <span class="rxn-ex-r">CH₂=CH₂</span>
+          <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span></span>
           <span class="rxn-ex-ea">+ HCl</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH₂Cl</span>
-          <span class="rxn-ex-nota">cloroetano</span>
+          <span class="rxn-ex-p">CH₃−CH₂<span class="hn">Cl</span></span>
+          <span class="rxn-ex-nota">cloroetano (simétrico → un solo producto)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -425,18 +602,42 @@ Condición: temperatura ambiente, sin catalizador</div>
         <span class="rxn-chev" id="chev-aq-1">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-1">
-        <div class="rxn-eq">>C=C<  +  X₂  ──→  −CX−CX−   (dihaluro vicinal)
-(X = Cl, Br)</div>
-        <div class="rxn-cond">Reactivo: Cl₂ o Br₂ (solución en CCl₄)
-Sin luz, sin calor — reacción espontánea a t° ambiente
-Estereoquímica: adición anti (trans)</div>
-        <div class="rxn-regla">🧪 Test de Baeyer: Br₂/CCl₄ (anaranjado) → decoloración = insaturación confirmada</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C=C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">X₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">T° amb., CCl₄</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">X</span>−C<span class="hn">X</span>−</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
+            <div class="mol-cmp-name">propeno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ Br₂/CCl₄</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(Br)</span>−CH₂<span class="hn">Br</span></span>
+            <div class="mol-cmp-name">1,2-dibromopropano (vicinal)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Reactivo: Cl₂ o Br₂ en CCl₄ · sin luz, sin calor · estereoquímica: adición anti (trans)</div>
+        <div class="rxn-regla">🧪 Test de Baeyer: Br₂/CCl₄ anaranjado → decoloración = insaturación confirmada</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ Br₂</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH(Br)−CH₂Br</span>
+          <span class="rxn-ex-p">CH₃−CH<span class="hn">(Br)</span>−CH₂<span class="hn">Br</span></span>
           <span class="rxn-ex-nota">1,2-dibromopropano</span>
         </div>
         <div class="quiz-sep"></div>
@@ -462,17 +663,43 @@ Estereoquímica: adición anti (trans)</div>
         <span class="rxn-chev" id="chev-aq-2">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-2">
-        <div class="rxn-eq">>C=C<  +  H₂  ──[Ni / Pd / Pt]──→  −CH₂−CH₂−   (alcano)</div>
-        <div class="rxn-cond">Reactivo: H₂ gas
-Catalizador: Ni (Raney), Pd/C o Pt (metales heterogéneos)
-Estereoquímica: adición sin (cis)</div>
-        <div class="rxn-regla">📌 Alqueno + H₂ → alcano (saturación completa del doble enlace)</div>
-        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C=C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Ni / Pd / Pt</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">H₂</span>−C<span class="hn">H₂</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcano)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
+            <div class="mol-cmp-name">propeno (insaturado)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ H₂ / Ni</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">₂</span>−CH<span class="hn">₃</span></span>
+            <div class="mol-cmp-name">propano (saturado)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Catalizador: Ni (Raney), Pd/C o Pt · adición sin (cis) por la superficie del metal</div>
+        <div class="rxn-regla">📌 Alqueno + H₂ → alcano (doble enlace saturado completamente)</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂ →[Ni]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH₂−CH₃</span>
+          <span class="rxn-ex-p">CH₃−<span class="hn">CH₂</span>−<span class="hn">CH₃</span></span>
           <span class="rxn-ex-nota">propano</span>
         </div>
         <div class="quiz-sep"></div>
@@ -498,25 +725,51 @@ Estereoquímica: adición sin (cis)</div>
         <span class="rxn-chev" id="chev-aq-3">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-3">
-        <div class="rxn-eq">>C=C<  +  H₂O  ──[H₂SO₄]──→  −CH−C(OH)−   (alcohol)</div>
-        <div class="rxn-cond">Reactivo: H₂O (vapor)
-Catalizador: H₂SO₄ (ácido sulfúrico concentrado)
-Temperatura: 300 °C aprox.</div>
-        <div class="rxn-regla">📌 Markovnikov: OH → C más sustituido (menos H)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C=C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂O</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H₂SO₄, ~300 °C</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−CH−C<span class="hn">(OH)</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcohol)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
+            <div class="mol-cmp-name">propeno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ H₂O / H⁺</div>
+            <div>──[Markov.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(OH)</span>−CH₃</span>
+            <div class="mol-cmp-name">propan-2-ol · OH al C más sustituido</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Reactivo: H₂O vapor · catalizador: H₂SO₄ concentrado · ~300 °C</div>
+        <div class="rxn-regla">📌 Markovnikov: OH → C más sustituido (menos H) · misma lógica que HX</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH=CH₂</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH(OH)−CH₃</span>
+          <span class="rxn-ex-p">CH₃−CH<span class="hn">(OH)</span>−CH₃</span>
           <span class="rxn-ex-nota">propan-2-ol (Markovnikov)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₂=CH₂</span>
+          <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH₂OH</span>
-          <span class="rxn-ex-nota">etanol</span>
+          <span class="rxn-ex-p">CH₃−CH₂<span class="hn">OH</span></span>
+          <span class="rxn-ex-nota">etanol (simétrico → único producto)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -541,19 +794,44 @@ Temperatura: 300 °C aprox.</div>
         <span class="rxn-chev" id="chev-aq-4">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-4">
-        <div class="rxn-eq">Paso 1 (ozonoide):  >C=C<  +  O₃  ──→  molozonide → ozonoide
-Paso 2 (reductora): ozonoide + Zn/H₂O  ──→  2 aldehídos/cetonas
-Paso 2 (oxidante): ozonoide + H₂O₂  ──→  ácidos carboxílicos</div>
-        <div class="rxn-cond">El doble enlace se rompe por completo.
-Condiciones reductoras (Zn/H₂O) → aldehídos (C terminal) o cetonas.
-Condiciones oxidantes (H₂O₂) → ácidos carboxílicos.</div>
-        <div class="rxn-regla">📌 Útil para determinar la posición del doble enlace (análisis estructural)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">CH=CH</span>−R'</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">O₃</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Zn / H₂O</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">R−CHO</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">R'−CHO</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
+            <div class="mol-cmp-name">propeno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">O₃ → Zn/H₂O</div>
+            <div>──[ruptura]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">CH₃CHO</span>  +  <span class="hn">HCHO</span></span>
+            <div class="mol-cmp-name">etanal + metanal</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Paso 1: C=C + O₃ → ozonoide · Paso 2 reductora (Zn/H₂O) → aldehídos/cetonas · Paso 2 oxidante (H₂O₂) → ácidos carboxílicos</div>
+        <div class="rxn-regla">📌 El doble enlace se rompe por completo → útil para determinar su posición</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH=CH₂ + O₃</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span> + O₃</span>
           <span class="rxn-ex-ea">→[Zn/H₂O]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CHO + HCHO</span>
+          <span class="rxn-ex-p"><span class="hn">CH₃CHO</span> + <span class="hn">HCHO</span></span>
           <span class="rxn-ex-nota">etanal + metanal</span>
         </div>
         <div class="quiz-sep"></div>
@@ -579,21 +857,43 @@ Condiciones oxidantes (H₂O₂) → ácidos carboxílicos.</div>
         <span class="rxn-chev" id="chev-aq-5">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-5">
-        <div class="rxn-eq">Condiciones frías, diluidas:
->C=C<  +  KMnO₄ (frío, dil.)  ──→  diol (1,2-diol)  +  MnO₂↓
-
-Condiciones calientes, concentradas:
->C=C<  +  KMnO₄ (cal., conc.)  ──→  ácidos / CO₂ (ruptura)</div>
-        <div class="rxn-cond">Permanganato de potasio: solución violeta/púrpura
-Resultado: decoloración (morado → incoloro/marrón) = insaturación
-MnO₂ precipitado marrón confirma reacción.</div>
-        <div class="rxn-regla">🧪 Test diferenciador: alquenos y alquinos dan (+), alcanos dan (−)</div>
-        <div class="rxn-ex-lbl">Ejemplo (condiciones frías)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C=C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">KMnO₄ frío</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H₂O, dil.</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">(OH)</span>−C<span class="hn">(OH)</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">+ MnO₂↓</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄ (violeta)</span>
+            <div class="mol-cmp-name">solución inicial</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ alqueno</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">incoloro + MnO₂↓</span></span>
+            <div class="mol-cmp-name">decoloración = (+) insaturación</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + MnO₂↓ · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura)</div>
+        <div class="rxn-regla">🧪 Test diferenciador: alquenos y alquinos (+) decoloran · alcanos (−) no reaccionan</div>
+        <div class="rxn-ex-lbl">Ejemplo (frío, diluido)</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₂=CH₂ + KMnO₄/H₂O</span>
+          <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span> + KMnO₄/H₂O</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">HOCH₂−CH₂OH + MnO₂</span>
-          <span class="rxn-ex-nota">etilenglicol</span>
+          <span class="rxn-ex-p">HO−CH₂−CH₂−<span class="hn">OH</span> + MnO₂</span>
+          <span class="rxn-ex-nota">etilenglicol (1,2-etanodiol)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -629,22 +929,75 @@ MnO₂ precipitado marrón confirma reacción.</div>
         <span class="rxn-chev" id="chev-ai-0">▾</span>
       </div>
       <div class="rxn-body" id="body-ai-0">
-        <div class="rxn-eq">×1:  −C≡C−  +  HX  ──→  −CH=CX−   (haloalqueno, Markovnikov)
-×2:  −CH=CX−  +  HX  ──→  −CH₂−CX₂−  (geminaldialuro)</div>
-        <div class="rxn-cond">Primera adición: forma haloalqueno (puede aislarse controlando estequiometría)
-Segunda adición: 1 mol más de HX → geminaldialuro (dos X en el mismo C)</div>
-        <div class="rxn-regla">📌 Markovnikov en cada paso. Segunda adición: X segundo al C ya halogenado</div>
-        <div class="rxn-ex-lbl">Ejemplos</div>
+        <!-- Paso ×1 -->
+        <div style="font-size:.7rem;font-weight:700;color:var(--c3t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Adición ×1 → haloalqueno</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C≡C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HX (1 mol)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Markovnikov</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−<span class="bp">CH=C</span><span class="hn">X</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(haloalqueno)</span>
+          </div>
+        </div>
+        <!-- Paso ×2 -->
+        <div style="font-size:.7rem;font-weight:700;color:var(--c3t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Adición ×2 → geminaldialuro</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">CH=CX</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HX (1 mol)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Markovnikov</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−CH₂−C<span class="hn">X₂</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(geminal)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
+            <div class="mol-cmp-name">acetileno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HBr ×1</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₂=CH<span class="hn">Br</span></span>
+            <div class="mol-cmp-name">bromoetileno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HBr ×2</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">Br₂</span></span>
+            <div class="mol-cmp-name">1,1-dibromoetano (geminal)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">1 mol HX → haloalqueno (aislable) · 2 mol HX → geminaldialuro (dos X en el mismo C)</div>
+        <div class="rxn-regla">📌 Markovnikov en cada paso · en la ×2 el X va al C ya halogenado</div>
+        <div class="rxn-ex-lbl">Resumen con acetileno</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH≡CH + HBr (1 mol)</span>
+          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + HBr (1 mol)</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₂=CHBr</span>
+          <span class="rxn-ex-p">CH₂=CH<span class="hn">Br</span></span>
           <span class="rxn-ex-nota">bromoetileno (×1)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH≡CH + HBr (2 mol)</span>
+          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + HBr (2 mol)</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CHBr₂</span>
+          <span class="rxn-ex-p">CH₃−CH<span class="hn">Br₂</span></span>
           <span class="rxn-ex-nota">1,1-dibromoetano (×2)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -670,15 +1023,66 @@ Segunda adición: 1 mol más de HX → geminaldialuro (dos X en el mismo C)</div
         <span class="rxn-chev" id="chev-ai-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ai-1">
-        <div class="rxn-eq">×1:  −C≡C−  +  X₂  ──→  −CX=CX−   (trans, dihaloalqueno)
-×2:  −CX=CX−  +  X₂  ──→  −CX₂−CX₂−  (tetrahaloalcano)</div>
-        <div class="rxn-cond">Primera adición (×1): produce dihaloalqueno (geometría trans preferente)
-Segunda adición (×2): forma tetrahaloalcano vicinal</div>
-        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c1t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Adición ×1 → dihaloalqueno (trans)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C≡C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">X₂ (1 mol)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">anti (trans)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">X</span>=C<span class="hn">X</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(trans-dihaloalqueno)</span>
+          </div>
+        </div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c1t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Adición ×2 → tetrahaloalcano</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">CX=CX</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">X₂ (1 mol)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">anti</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">X₂</span>−C<span class="hn">X₂</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(tetrahaloalcano)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
+            <div class="mol-cmp-name">acetileno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ Br₂ ×1</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH<span class="hn">Br</span>=CH<span class="hn">Br</span></span>
+            <div class="mol-cmp-name">1,2-dibromoetileno (trans)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ Br₂ ×2</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH<span class="hn">Br₂</span>−CH<span class="hn">Br₂</span></span>
+            <div class="mol-cmp-name">1,1,2,2-tetrabromoetano</div>
+          </div>
+        </div>
+        <div class="rxn-cond">×1 → trans-dihaloalqueno (geometría anti preferente) · ×2 → tetrahaloalcano (4 halógenos totales)</div>
+        <div class="rxn-ex-lbl">Resumen</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH≡CH + Br₂ (2 mol)</span>
+          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + Br₂ (2 mol)</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₂Br−CHBr₂ → CHBr₂−CHBr₂</span>
+          <span class="rxn-ex-p">CH<span class="hn">Br₂</span>−CH<span class="hn">Br₂</span></span>
           <span class="rxn-ex-nota">1,1,2,2-tetrabromoetano</span>
         </div>
         <div class="quiz-sep"></div>
@@ -704,23 +1108,74 @@ Segunda adición (×2): forma tetrahaloalcano vicinal</div>
         <span class="rxn-chev" id="chev-ai-2">▾</span>
       </div>
       <div class="rxn-body" id="body-ai-2">
-        <div class="rxn-eq">×1 (Lindlar):  −C≡C−  +  H₂  ──[Pd/BaSO₄]──→  cis-alqueno
-×2 (total):    −C≡C−  +  2H₂  ──[Ni/Pd]──→  alcano</div>
-        <div class="rxn-cond">Catalizador Lindlar (Pd/BaSO₄ + quinolina): selectivo → solo 1 adición → cis-alqueno
-Catalizador Ni/Pd sin envenenar: hidrogenación total → alcano</div>
-        <div class="rxn-regla">📌 Lindlar → cis (adición sin del mismo lado). Na/NH₃(l) → trans-alqueno</div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c2t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">×1 Lindlar → cis-alqueno (selectivo)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C≡C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂ (1 mol)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Pd/BaSO₄ (Lindlar)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">cis-−C<span class="hn">H</span>=C<span class="hn">H</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cis-alqueno)</span>
+          </div>
+        </div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c2t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">×2 total → alcano (Ni / Pd normal)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C≡C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">2 H₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Ni / Pd</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−C<span class="hn">H₂</span>−C<span class="hn">H₂</span>−</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcano)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
+            <div class="mol-cmp-name">acetileno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Lindlar</div>
+            <div>──→ (×1)</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">cis</span>-CH₂=CH₂</span>
+            <div class="mol-cmp-name">etileno cis</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ H₂ / Ni</div>
+            <div>──→ (×2)</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="hn">CH₃</span></span>
+            <div class="mol-cmp-name">etano (saturado)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Lindlar (Pd/BaSO₄ + quinolina): envenenado → selectivo (solo ×1 → cis) · Ni/Pd sin envenenar → ×2 total → alcano</div>
+        <div class="rxn-regla">📌 Lindlar → cis (adición sin, mismo lado) · Na/NH₃(l) → trans-alqueno (adición anti)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH≡CH + H₂ →[Lindlar]</span>
+          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + H₂ →[Lindlar]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">cis-CH₂=CH₂</span>
-          <span class="rxn-ex-nota">etileno (×1)</span>
+          <span class="rxn-ex-p"><span class="hn">cis</span>-CH₂=CH₂</span>
+          <span class="rxn-ex-nota">cis-etileno (×1)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH≡CH + 2H₂ →[Ni]</span>
+          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + 2 H₂ →[Ni]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH₃</span>
-          <span class="rxn-ex-nota">etano (×2)</span>
+          <span class="rxn-ex-p">CH₃−<span class="hn">CH₃</span></span>
+          <span class="rxn-ex-nota">etano (×2 total)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -745,25 +1200,65 @@ Catalizador Ni/Pd sin envenenar: hidrogenación total → alcano</div>
         <span class="rxn-chev" id="chev-ai-3">▾</span>
       </div>
       <div class="rxn-body" id="body-ai-3">
-        <div class="rxn-eq">−C≡C−  +  H₂O  ──[H₂SO₄/HgSO₄]──→  enol  ──→  cetona (o aldehído)
-
-Alquino interno → cetona  (tautomería ceto-enólica)
-Alquino terminal → aldehído (solo acetileno → acetaldehído)</div>
-        <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ (mercurio sulfato)
-Mecanismo: adición de agua → enol intermedio → tautomerización → carbonilo</div>
-        <div class="rxn-regla">📌 Markovnikov: OH al C más sustituido → cetona. Solo HC≡CH → CH₃CHO (aldehído)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">−<span class="bp">C≡C</span>−</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂O</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H₂SO₄/HgSO₄</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">enol</span>
+            <span class="meq-plus">⇌</span>
+            <span class="meq-prod"><span class="hn">C=O</span></span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cetona/aldehído)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">C≡CH</span></span>
+            <div class="mol-cmp-name">propino (interno)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">H₂O/HgSO₄</div>
+            <div>──[Markov.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="hn">CO</span>−CH₃</span>
+            <div class="mol-cmp-name">propanona (cetona)</div>
+          </div>
+        </div>
+        <div class="mol-cmp" style="margin-top:-6px">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
+            <div class="mol-cmp-name">acetileno (terminal)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">H₂O/HgSO₄</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="hn">CHO</span></span>
+            <div class="mol-cmp-name">etanal (aldehído)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ · mecanismo: C≡C + H₂O → enol → tautomería → carbonilo</div>
+        <div class="rxn-regla">📌 Alquino interno → cetona · solo HC≡CH → aldehído · Markovnikov: OH al C más sustituido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−C≡CH + H₂O →[H⁺/Hg²⁺]</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">C≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CO−CH₃</span>
+          <span class="rxn-ex-p">CH₃−<span class="hn">CO</span>−CH₃</span>
           <span class="rxn-ex-nota">propanona (cetona)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">HC≡CH + H₂O →[H⁺/Hg²⁺]</span>
+          <span class="rxn-ex-r"><span class="bp">HC≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CHO</span>
-          <span class="rxn-ex-nota">etanal (aldehído)</span>
+          <span class="rxn-ex-p">CH₃−<span class="hn">CHO</span></span>
+          <span class="rxn-ex-nota">etanal (aldehído — caso especial)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -788,20 +1283,44 @@ Mecanismo: adición de agua → enol intermedio → tautomerización → carboni
         <span class="rxn-chev" id="chev-ai-4">▾</span>
       </div>
       <div class="rxn-body" id="body-ai-4">
-        <div class="rxn-eq">HC≡C−R  +  NaNH₂  ──→  NaC≡C−R  +  NH₃
-HC≡C−R  +  NaOH  ──→  NaC≡C−R  +  H₂O  (bases fuertes)
-
-Alquinos terminales (H en C≡) son más ácidos que alcanos o alquenos:
-pKa: alcino terminal ≈ 25 / alqueno ≈ 44 / alcano ≈ 50</div>
-        <div class="rxn-cond">Solo alquinos TERMINALES (H unido al carbono del triple enlace)
-Alquinos internos: no tienen H en el triple enlace → no son ácidos</div>
-        <div class="rxn-regla">📌 El C(sp) tiene mayor carácter s → atrae más el par de electrones del enlace C−H → H más fácilmente disociable</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">H</span>−C≡C−R</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">NaNH₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">base fuerte</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">Na</span>−C≡C−R</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">NH₃</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">H−C≡C−<span style="color:var(--c2t)">CH₃</span></span>
+            <div class="mol-cmp-name">prop-1-ino (terminal) ✓</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ NaNH₂</div>
+            <div>──[ácido]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="hn">Na</span>−C≡C−CH₃ + NH₃</span>
+            <div class="mol-cmp-name">acetiluro sódico</div>
+          </div>
+        </div>
+        <div class="rxn-cond">pKa: alquino terminal ≈ 25 · alqueno ≈ 44 · alcano ≈ 50 · solo alquinos TERMINALES reaccionan</div>
+        <div class="rxn-regla">📌 C(sp) tiene 50% carácter s → mayor electronegatividad → enlace C−H más polar → H más ácido</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">HC≡CH + NaNH₂</span>
+          <span class="rxn-ex-r"><span class="bp">H</span>C≡CH + NaNH₂</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">NaC≡CH + NH₃</span>
-          <span class="rxn-ex-nota">acetiluro sódico</span>
+          <span class="rxn-ex-p"><span class="hn">Na</span>C≡CH + NH₃</span>
+          <span class="rxn-ex-nota">acetiluro sódico (base conjugada)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
