@@ -82,7 +82,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 @keyframes rxnFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .rxn-ex-r{color:var(--tx)}
 .rxn-ex-ea{color:var(--c3t);font-weight:700}
-.rxn-arrow{color:var(--c2t);font-size:1rem;flex-shrink:0}
+.rxn-arrow{display:inline-flex;align-items:center;flex-shrink:0}
 .rxn-ex-p{color:var(--c2t);font-weight:700}
 .rxn-ex-nota{font-size:.7rem;color:var(--dimmer);font-style:italic;font-family:'Outfit',sans-serif;background:var(--surf2);border-radius:4px;padding:1px 7px}
 
@@ -115,12 +115,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .meq-plus{font-size:.82rem;color:var(--dimmer);padding:0 1px}
 .meq-reag{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--c3t);
   font-weight:700;background:var(--c3b);border-radius:5px;padding:2px 9px}
-.meq-arr{display:flex;flex-direction:column;align-items:center;gap:1px;
-  min-width:52px;flex-shrink:0}
-.meq-cond{font-size:.6rem;color:var(--dimmer);text-align:center;
-  font-family:'JetBrains Mono',monospace;white-space:nowrap;
-  background:var(--surf2);border-radius:3px;padding:1px 5px}
-.meq-line{font-size:.95rem;color:var(--c2t);font-family:'JetBrains Mono',monospace;letter-spacing:-.05em}
+.meq-arr{display:flex;align-items:center;flex-shrink:0}
+.meq-cond{display:none} /* replaced by SVG */
+.meq-line{display:none} /* replaced by SVG */
 .meq-prod{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--c2t);font-weight:700}
 /* Atom highlight classes */
 .bp{color:var(--c3t);font-weight:900;text-decoration:none} /* π bond / breaking bond */
@@ -146,6 +143,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 /* ── MARKOVNIKOV BOX ── */
 .mk-box{background:var(--c3b);border:2px solid var(--c3);border-radius:var(--r);padding:16px 18px;margin-bottom:20px}
+/* ── SEA RING VISUALIZATION ── */
+.sea-viz{display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);
+  padding:14px 18px;margin-bottom:14px;justify-content:center}
+.sea-panel{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.sea-lbl{font-size:.7rem;color:var(--dim);font-family:'Outfit',sans-serif;text-align:center;max-width:120px;line-height:1.35}
+.sea-arr{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;min-width:56px}
+.sea-cond{font-size:.62rem;color:var(--dimmer);font-family:'JetBrains Mono',monospace;text-align:center;white-space:nowrap}
+@keyframes seaPulse{0%,100%{opacity:1;transform:translateX(0)}50%{opacity:.35;transform:translateX(5px)}}
+.sea-in{animation:seaPulse 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:right center}
+/* ── ZAITSEV BOX ── */
+.zai-box{background:var(--surf2);border:2px solid var(--brd);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
+.zai-title{font-weight:800;font-size:.85rem;color:var(--c2t);margin-bottom:10px}
+.zai-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
 .mk-title{font-family:'Fraunces',serif;font-weight:900;font-size:1rem;color:var(--c3t);margin-bottom:6px}
 .mk-eq{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:rgba(180,83,9,.07);border-radius:var(--rs);padding:10px 13px;white-space:pre;overflow-x:auto;margin-top:6px;color:var(--dim)}
 
@@ -869,25 +880,26 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="meq-side">
             <span class="meq-prod">−C<span class="hn">(OH)</span>−C<span class="hn">(OH)</span>−</span>
-            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">+ MnO₂↓</span>
+            <span style="font-size:.7rem;color:#92400e;font-weight:700;background:#fef3c7;border-radius:4px;padding:1px 7px;font-family:'Outfit',sans-serif">+ MnO₂↓ pardo</span>
           </div>
         </div>
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄ (violeta)</span>
-            <div class="mol-cmp-name">solución inicial</div>
+            <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄</span>
+            <div class="mol-cmp-name" style="color:#7c3aed;font-weight:700">solución violeta</div>
           </div>
           <div class="mol-cmp-arr">
             <div class="mol-cmp-reag">+ alqueno</div>
             <div>──────→</div>
           </div>
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="hn">incoloro + MnO₂↓</span></span>
-            <div class="mol-cmp-name">decoloración = (+) insaturación</div>
+          <div class="mol-cmp-card" style="border-color:#7c3aed40">
+            <span class="mol-cmp-formula"><span class="hn">diol (incoloro)</span></span>
+            <span class="mol-cmp-formula" style="color:#92400e;font-weight:700;margin-top:4px">+ MnO₂↓ (pardo)</span>
+            <div class="mol-cmp-name">decoloración + precipitado café = (+)</div>
           </div>
         </div>
-        <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + MnO₂↓ · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura)</div>
-        <div class="rxn-regla">🧪 Test diferenciador: alquenos y alquinos (+) decoloran · alcanos (−) no reaccionan</div>
+        <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + <span style="color:#92400e;font-weight:700">MnO₂↓ pardo</span> · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura de C=C)</div>
+        <div class="rxn-regla">🧪 Positivo (+): solución violeta se decolora Y aparece precipitado pardo (MnO₂) · Alcanos (−): no reaccionan</div>
         <div class="rxn-ex-lbl">Ejemplo (frío, diluido)</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span> + KMnO₄/H₂O</span>
@@ -1360,6 +1372,40 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-0">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-0">
+        <!-- ── BENZENE RING VISUALIZATION ── -->
+        <div class="sea-viz">
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="5" stroke="#888" stroke-width="1.5"/>
+              <text x="45" y="0" text-anchor="middle" font-size="11" fill="#888" font-family="'JetBrains Mono',monospace">H</text>
+              <g class="sea-in">
+                <line x1="103" y1="35" x2="77" y2="35" style="stroke:var(--c3t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="73,35 79,31 79,39" style="fill:var(--c3t)"/>
+                <text x="105" y="40" font-size="12" style="fill:var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br⁺</text>
+              </g>
+            </svg>
+            <div class="sea-lbl">benceno + <span style="color:var(--c3t);font-weight:700">Br⁺</span> (FeBr₃ activa Br₂)</div>
+          </div>
+          <div class="sea-arr">
+            <div class="sea-cond">FeBr₃</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="22" viewBox="0 0 55 22">
+              <line x1="2" y1="11" x2="46" y2="11" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="52,11 44,6 44,16" style="fill:var(--c2t)"/>
+            </svg>
+            <div class="sea-cond">SEA</div>
+          </div>
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="4" style="stroke:var(--c3t)" stroke-width="2.2"/>
+              <text x="45" y="-1" text-anchor="middle" font-size="11" style="fill:var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br</text>
+            </svg>
+            <div class="sea-lbl">bromobenceno + <span style="color:var(--dimmer)">HBr</span></div>
+          </div>
+        </div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">C₆H₆</span></span>
@@ -1422,6 +1468,39 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-1">
+        <div class="sea-viz">
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="5" stroke="#888" stroke-width="1.5"/>
+              <text x="45" y="0" text-anchor="middle" font-size="11" fill="#888" font-family="'JetBrains Mono',monospace">H</text>
+              <g class="sea-in">
+                <line x1="107" y1="35" x2="77" y2="35" style="stroke:var(--c4t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="73,35 79,31 79,39" style="fill:var(--c4t)"/>
+                <text x="109" y="40" font-size="11" style="fill:var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂⁺</text>
+              </g>
+            </svg>
+            <div class="sea-lbl">benceno + <span style="color:var(--c4t);font-weight:700">NO₂⁺</span> (ión nitronio)</div>
+          </div>
+          <div class="sea-arr">
+            <div class="sea-cond">H₂SO₄, 50°C</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="22" viewBox="0 0 55 22">
+              <line x1="2" y1="11" x2="46" y2="11" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="52,11 44,6 44,16" style="fill:var(--c2t)"/>
+            </svg>
+            <div class="sea-cond">SEA</div>
+          </div>
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="4" style="stroke:var(--c4t)" stroke-width="2.2"/>
+              <text x="45" y="-1" text-anchor="middle" font-size="9.5" style="fill:var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text>
+            </svg>
+            <div class="sea-lbl">nitrobenceno + <span style="color:var(--dimmer)">H₂O</span></div>
+          </div>
+        </div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">C₆H₆</span></span>
@@ -1491,6 +1570,41 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-2">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-2">
+        <div class="sea-viz">
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="5" stroke="#888" stroke-width="1.5"/>
+              <text x="45" y="0" text-anchor="middle" font-size="11" fill="#888" font-family="'JetBrains Mono',monospace">H</text>
+              <g class="sea-in">
+                <line x1="107" y1="35" x2="77" y2="35" style="stroke:var(--c2t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="73,35 79,31 79,39" style="fill:var(--c2t)"/>
+                <text x="109" y="40" font-size="11" style="fill:var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃</text>
+              </g>
+            </svg>
+            <div class="sea-lbl">benceno + <span style="color:var(--c2t);font-weight:700">SO₃</span> (oleum)</div>
+          </div>
+          <div class="sea-arr">
+            <div class="sea-cond">⇌ reversible</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="28" viewBox="0 0 55 28">
+              <line x1="2" y1="8" x2="46" y2="8" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="52,8 44,3 44,13" style="fill:var(--c2t)"/>
+              <line x1="53" y1="20" x2="9" y2="20" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="3,20 11,15 11,25" style="fill:var(--c2t)"/>
+            </svg>
+            <div class="sea-cond">SEA</div>
+          </div>
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="4" style="stroke:var(--c2t)" stroke-width="2.2"/>
+              <text x="45" y="-1" text-anchor="middle" font-size="9" style="fill:var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text>
+            </svg>
+            <div class="sea-lbl">ác. bencenosulfónico + <span style="color:var(--dimmer)">H₂O</span></div>
+          </div>
+        </div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">C₆H₆</span></span>
@@ -1553,6 +1667,39 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-3">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-3">
+        <div class="sea-viz">
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="5" stroke="#888" stroke-width="1.5"/>
+              <text x="45" y="0" text-anchor="middle" font-size="11" fill="#888" font-family="'JetBrains Mono',monospace">H</text>
+              <g class="sea-in">
+                <line x1="105" y1="35" x2="77" y2="35" style="stroke:var(--c1t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="73,35 79,31 79,39" style="fill:var(--c1t)"/>
+                <text x="107" y="40" font-size="11" style="fill:var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃⁺</text>
+              </g>
+            </svg>
+            <div class="sea-lbl">benceno + <span style="color:var(--c1t);font-weight:700">CH₃⁺</span> (AlCl₃ activa CH₃Cl)</div>
+          </div>
+          <div class="sea-arr">
+            <div class="sea-cond">AlCl₃</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="22" viewBox="0 0 55 22">
+              <line x1="2" y1="11" x2="46" y2="11" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="52,11 44,6 44,16" style="fill:var(--c2t)"/>
+            </svg>
+            <div class="sea-cond">FC-alquil.</div>
+          </div>
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="4" style="stroke:var(--c1t)" stroke-width="2.2"/>
+              <text x="45" y="-1" text-anchor="middle" font-size="10" style="fill:var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃</text>
+            </svg>
+            <div class="sea-lbl">tolueno (metilbenceno) + <span style="color:var(--dimmer)">HCl</span></div>
+          </div>
+        </div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">C₆H₆</span></span>
@@ -1615,6 +1762,39 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-4">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-4">
+        <div class="sea-viz">
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="5" stroke="#888" stroke-width="1.5"/>
+              <text x="45" y="0" text-anchor="middle" font-size="11" fill="#888" font-family="'JetBrains Mono',monospace">H</text>
+              <g class="sea-in">
+                <line x1="115" y1="35" x2="77" y2="35" style="stroke:var(--c4t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="73,35 79,31 79,39" style="fill:var(--c4t)"/>
+                <text x="117" y="40" font-size="10" style="fill:var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃CO⁺</text>
+              </g>
+            </svg>
+            <div class="sea-lbl">benceno + <span style="color:var(--c4t);font-weight:700">CH₃CO⁺</span> (acilio)</div>
+          </div>
+          <div class="sea-arr">
+            <div class="sea-cond">AlCl₃</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="22" viewBox="0 0 55 22">
+              <line x1="2" y1="11" x2="46" y2="11" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="52,11 44,6 44,16" style="fill:var(--c2t)"/>
+            </svg>
+            <div class="sea-cond">FC-acil.</div>
+          </div>
+          <div class="sea-panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 -35 90 115" style="overflow:visible;flex-shrink:0">
+              <polygon points="45,20 71,35 71,65 45,80 19,65 19,35" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/>
+              <circle cx="45" cy="50" r="17" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="5 3"/>
+              <line x1="45" y1="20" x2="45" y2="4" style="stroke:var(--c4t)" stroke-width="2.2"/>
+              <text x="45" y="-1" text-anchor="middle" font-size="8.5" style="fill:var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">COCH₃</text>
+            </svg>
+            <div class="sea-lbl">acetofenona + <span style="color:var(--dimmer)">HCl</span></div>
+          </div>
+        </div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">C₆H₆</span></span>
@@ -1947,13 +2127,49 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Catalizador: H₂SO₄ conc. (o H₃PO₄) · 180 °C → alqueno · 140 °C + ROH → éter</div>
-        <div class="rxn-regla">📌 Zaitsev: H se elimina del Cβ con menos H → alqueno más sustituido (más estable)</div>
+        <!-- Zaitsev visual box -->
+        <div class="zai-box">
+          <div class="zai-title">📌 Regla de Zaitsev — ¿de cuál Cβ se elimina el H?</div>
+          <p style="font-size:.78rem;color:var(--dim);margin-bottom:12px">Cuando hay 2 Hβ disponibles, el H se elimina del Cβ con <strong>menos hidrógenos</strong> → alqueno <strong>más sustituido</strong> → <strong>más estable</strong> (más sustituyentes en C=C).</p>
+          <!-- Sustrato central -->
+          <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--tx);margin-bottom:10px;padding:8px;background:var(--surf);border-radius:var(--rs)">
+            <span style="color:var(--dimmer)">Cβ1→</span><span style="color:var(--c3t);font-weight:700">CH₃</span>−CH(<span class="bp">OH</span>)−<span style="color:var(--c2t);font-weight:700">CH₂</span><span style="color:var(--dimmer)">←Cβ2</span>−CH₃
+            <span style="font-size:.65rem;color:var(--dimmer);display:block;margin-top:2px">2-butanol: Cβ1 tiene 3H, Cβ2 tiene 2H</span>
+          </div>
+          <div class="zai-row">
+            <!-- Producto anti-Zaitsev -->
+            <div style="flex:1;min-width:180px;background:var(--errb);border:1.5px solid var(--err);border-radius:var(--rs);padding:10px 12px">
+              <div style="font-size:.72rem;font-weight:800;color:var(--errt);margin-bottom:6px">✗ Anti-Zaitsev (minoritario)</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem">
+                quita H de <span style="color:var(--c3t);font-weight:700">Cβ1 (CH₃, 3H)</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;margin-top:5px">
+                CH₂<span style="color:var(--errt);font-weight:900">=</span>CH−CH₂−CH₃
+              </div>
+              <div style="font-size:.65rem;color:var(--dimmer);margin-top:3px">but-1-eno · 1 sustituyente · menos estable</div>
+            </div>
+            <!-- Producto Zaitsev -->
+            <div style="flex:1;min-width:180px;background:rgba(22,163,74,.1);border:1.5px solid #16a34a;border-radius:var(--rs);padding:10px 12px">
+              <div style="font-size:.72rem;font-weight:800;color:#16a34a;margin-bottom:6px">✓ Zaitsev (mayoritario)</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem">
+                quita H de <span style="color:var(--c2t);font-weight:700">Cβ2 (CH₂, 2H)</span>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.8rem;margin-top:5px">
+                CH₃−CH<span style="color:#16a34a;font-weight:900">=</span>CH−CH₃
+              </div>
+              <div style="font-size:.65rem;color:var(--dimmer);margin-top:3px">but-2-eno · 2 sustituyentes · más estable</div>
+            </div>
+          </div>
+          <div style="font-size:.7rem;color:var(--dimmer);margin-top:4px">
+            💡 Regla mnemotécnica: <em>"menos H disponibles en Cβ → más estable el doble enlace formado"</em>
+          </div>
+        </div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[H₂SO₄, 180°C]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₂<span class="hn">=</span>CH₂ + H₂O</span>
-          <span class="rxn-ex-nota">eteno</span>
+          <span class="rxn-ex-nota">eteno (1 Cβ posible)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃CH<span class="bp">(OH)</span>CH₂CH₃ →[H₂SO₄, Δ]</span>
@@ -3078,6 +3294,54 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 </div><!-- /app -->
 
 <script>
+/* ── SVG ARROWS ── */
+function mkArr(cond,w,compact){
+  const H=compact?28:36, ay=compact?20:26, hs=compact?5:7, fs=compact?7.5:8.5;
+  const lx2=w-hs*2-3;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const condEl=cond
+    ?`<text x="${w/2}" y="${ay-7}" text-anchor="middle" font-size="${fs}" style="fill:var(--dimmer)" font-family="'JetBrains Mono',monospace">${esc(cond)}</text>`
+    :'';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" viewBox="0 0 ${w} ${H}" style="flex-shrink:0;overflow:visible;display:block">
+    ${condEl}
+    <line x1="3" y1="${ay}" x2="${lx2}" y2="${ay}" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+    <polygon points="${w-2},${ay} ${lx2},${ay-hs} ${lx2},${ay+hs}" style="fill:var(--c2t)"/>
+  </svg>`;
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  /* 1. .meq-arr → SVG con condición encima */
+  document.querySelectorAll('.meq-arr').forEach(el=>{
+    const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
+    el.innerHTML=mkArr(cond,110,false);
+  });
+  /* 2. Extraer →[cond] de .rxn-ex-ea y marcar el siguiente .rxn-arrow */
+  document.querySelectorAll('.rxn-ex-ea').forEach(el=>{
+    const m=el.innerHTML.match(/^([\s\S]*?)\s*→\[([^\]]+)\]\s*$/);
+    if(m){
+      el.innerHTML=m[1].trim();
+      let sib=el.nextElementSibling;
+      while(sib&&!sib.classList.contains('rxn-arrow')) sib=sib.nextElementSibling;
+      if(sib) sib.dataset.cond=m[2];
+    }
+  });
+  /* 3. .rxn-arrow → SVG (con condición si existe) */
+  document.querySelectorAll('.rxn-arrow').forEach(el=>{
+    el.innerHTML=mkArr(el.dataset.cond||'',70,true);
+  });
+  /* 4. .mol-cmp-arr: reemplazar ──[X]──→ y ──────→ por SVG */
+  document.querySelectorAll('.mol-cmp-arr > div:not(.mol-cmp-reag)').forEach(d=>{
+    const t=d.textContent.trim();
+    if(/[─→]/.test(t)){
+      const m=t.match(/──(?:\[([^\]]+)\])?──?→/)||t.match(/^[─]+→$/);
+      if(m){
+        const cond=m[1]||'';
+        d.innerHTML=mkArr(cond,68,true);
+        d.style.cssText='display:flex;align-items:center;justify-content:center';
+      }
+    }
+  });
+});
+
 /* ── TABS ── */
 function switchTab(id){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
