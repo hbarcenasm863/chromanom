@@ -82,7 +82,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 @keyframes rxnFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .rxn-ex-r{color:var(--tx)}
 .rxn-ex-ea{color:var(--c3t);font-weight:700}
-.rxn-arrow{color:var(--c2t);font-size:1rem;flex-shrink:0}
+.rxn-arrow{display:inline-flex;align-items:center;flex-shrink:0}
 .rxn-ex-p{color:var(--c2t);font-weight:700}
 .rxn-ex-nota{font-size:.7rem;color:var(--dimmer);font-style:italic;font-family:'Outfit',sans-serif;background:var(--surf2);border-radius:4px;padding:1px 7px}
 
@@ -115,12 +115,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .meq-plus{font-size:.82rem;color:var(--dimmer);padding:0 1px}
 .meq-reag{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--c3t);
   font-weight:700;background:var(--c3b);border-radius:5px;padding:2px 9px}
-.meq-arr{display:flex;flex-direction:column;align-items:center;gap:1px;
-  min-width:52px;flex-shrink:0}
-.meq-cond{font-size:.6rem;color:var(--dimmer);text-align:center;
-  font-family:'JetBrains Mono',monospace;white-space:nowrap;
-  background:var(--surf2);border-radius:3px;padding:1px 5px}
-.meq-line{font-size:.95rem;color:var(--c2t);font-family:'JetBrains Mono',monospace;letter-spacing:-.05em}
+.meq-arr{display:flex;align-items:center;flex-shrink:0}
+.meq-cond{display:none} /* replaced by SVG */
+.meq-line{display:none} /* replaced by SVG */
 .meq-prod{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--c2t);font-weight:700}
 /* Atom highlight classes */
 .bp{color:var(--c3t);font-weight:900;text-decoration:none} /* π bond / breaking bond */
@@ -869,25 +866,26 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="meq-side">
             <span class="meq-prod">−C<span class="hn">(OH)</span>−C<span class="hn">(OH)</span>−</span>
-            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">+ MnO₂↓</span>
+            <span style="font-size:.7rem;color:#92400e;font-weight:700;background:#fef3c7;border-radius:4px;padding:1px 7px;font-family:'Outfit',sans-serif">+ MnO₂↓ pardo</span>
           </div>
         </div>
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄ (violeta)</span>
-            <div class="mol-cmp-name">solución inicial</div>
+            <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄</span>
+            <div class="mol-cmp-name" style="color:#7c3aed;font-weight:700">solución violeta</div>
           </div>
           <div class="mol-cmp-arr">
             <div class="mol-cmp-reag">+ alqueno</div>
             <div>──────→</div>
           </div>
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="hn">incoloro + MnO₂↓</span></span>
-            <div class="mol-cmp-name">decoloración = (+) insaturación</div>
+          <div class="mol-cmp-card" style="border-color:#7c3aed40">
+            <span class="mol-cmp-formula"><span class="hn">diol (incoloro)</span></span>
+            <span class="mol-cmp-formula" style="color:#92400e;font-weight:700;margin-top:4px">+ MnO₂↓ (pardo)</span>
+            <div class="mol-cmp-name">decoloración + precipitado café = (+)</div>
           </div>
         </div>
-        <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + MnO₂↓ · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura)</div>
-        <div class="rxn-regla">🧪 Test diferenciador: alquenos y alquinos (+) decoloran · alcanos (−) no reaccionan</div>
+        <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + <span style="color:#92400e;font-weight:700">MnO₂↓ pardo</span> · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura de C=C)</div>
+        <div class="rxn-regla">🧪 Positivo (+): solución violeta se decolora Y aparece precipitado pardo (MnO₂) · Alcanos (−): no reaccionan</div>
         <div class="rxn-ex-lbl">Ejemplo (frío, diluido)</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span> + KMnO₄/H₂O</span>
@@ -3078,6 +3076,54 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 </div><!-- /app -->
 
 <script>
+/* ── SVG ARROWS ── */
+function mkArr(cond,w,compact){
+  const H=compact?28:36, ay=compact?20:26, hs=compact?5:7, fs=compact?7.5:8.5;
+  const lx2=w-hs*2-3;
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const condEl=cond
+    ?`<text x="${w/2}" y="${ay-7}" text-anchor="middle" font-size="${fs}" style="fill:var(--dimmer)" font-family="'JetBrains Mono',monospace">${esc(cond)}</text>`
+    :'';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" viewBox="0 0 ${w} ${H}" style="flex-shrink:0;overflow:visible;display:block">
+    ${condEl}
+    <line x1="3" y1="${ay}" x2="${lx2}" y2="${ay}" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+    <polygon points="${w-2},${ay} ${lx2},${ay-hs} ${lx2},${ay+hs}" style="fill:var(--c2t)"/>
+  </svg>`;
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  /* 1. .meq-arr → SVG con condición encima */
+  document.querySelectorAll('.meq-arr').forEach(el=>{
+    const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
+    el.innerHTML=mkArr(cond,110,false);
+  });
+  /* 2. Extraer →[cond] de .rxn-ex-ea y marcar el siguiente .rxn-arrow */
+  document.querySelectorAll('.rxn-ex-ea').forEach(el=>{
+    const m=el.innerHTML.match(/^([\s\S]*?)\s*→\[([^\]]+)\]\s*$/);
+    if(m){
+      el.innerHTML=m[1].trim();
+      let sib=el.nextElementSibling;
+      while(sib&&!sib.classList.contains('rxn-arrow')) sib=sib.nextElementSibling;
+      if(sib) sib.dataset.cond=m[2];
+    }
+  });
+  /* 3. .rxn-arrow → SVG (con condición si existe) */
+  document.querySelectorAll('.rxn-arrow').forEach(el=>{
+    el.innerHTML=mkArr(el.dataset.cond||'',70,true);
+  });
+  /* 4. .mol-cmp-arr: reemplazar ──[X]──→ y ──────→ por SVG */
+  document.querySelectorAll('.mol-cmp-arr > div:not(.mol-cmp-reag)').forEach(d=>{
+    const t=d.textContent.trim();
+    if(/[─→]/.test(t)){
+      const m=t.match(/──(?:\[([^\]]+)\])?──?→/)||t.match(/^[─]+→$/);
+      if(m){
+        const cond=m[1]||'';
+        d.innerHTML=mkArr(cond,68,true);
+        d.style.cssText='display:flex;align-items:center;justify-content:center';
+      }
+    }
+  });
+});
+
 /* ── TABS ── */
 function switchTab(id){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
