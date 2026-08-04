@@ -1360,18 +1360,43 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ar-0">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-0">
-        <div class="rxn-eq">C₆H₆  +  X₂  ──[FeBr₃ / AlCl₃]──→  C₆H₅X  +  HX
-
-Catalizador: FeBr₃ (para Br₂) o AlCl₃ (para Cl₂)
-Electrófilo generado: X⁺ (ión halonio) o X−FeX₃⁻</div>
-        <div class="rxn-cond">Sin catalizador NO reacciona (diferente a alquenos)
-Condición: ácido de Lewis activa X₂ → electrófilo X⁺</div>
-        <div class="rxn-regla">📌 SEA no necesita luz (diferencia clave con SR de alcanos)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">X₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">FeBr₃ / AlCl₃</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">C₆H₅<span class="hn">X</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H<span class="hn">X</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  Br₂</span>
+            <div class="mol-cmp-name">benceno (anillo π rico)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">FeBr₃ → Br⁺</div>
+            <div>──[SEA]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="hn">Br</span>  +  HBr</span>
+            <div class="mol-cmp-name">bromobenceno (aromaticidad conservada)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Sin catalizador NO reacciona · FeBr₃ (para Br₂) o AlCl₃ (para Cl₂) generan el electrófilo X⁺</div>
+        <div class="rxn-regla">📌 SEA no necesita luz (diferencia clave con SR de alcanos) — el anillo se sustituye, no se adiciona</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₆ + Br₂ →[FeBr₃]</span>
+          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + Br₂ →[FeBr₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅Br + HBr</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">Br</span> + HBr</span>
           <span class="rxn-ex-nota">bromobenceno</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1397,18 +1422,50 @@ Condición: ácido de Lewis activa X₂ → electrófilo X⁺</div>
         <span class="rxn-chev" id="chev-ar-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-1">
-        <div class="rxn-eq">C₆H₆  +  HNO₃  ──[H₂SO₄ conc.]──→  C₆H₅NO₂  +  H₂O
-
-Electrófilo: ión nitronio NO₂⁺  (generado por H₂SO₄ + HNO₃)
-H₂SO₄ + HNO₃ → H₂NO₃⁺ → NO₂⁺ + H₂O</div>
-        <div class="rxn-cond">Mezcla nitrante: HNO₃ conc. + H₂SO₄ conc. (50-60 °C)
-Temperatura baja → monosustitución. Alta → di- o trinitración.</div>
-        <div class="rxn-regla">📌 El trinitrotolueno (TNT) se forma por triple nitración del tolueno</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HNO₃</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H₂SO₄ conc., 50 °C</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">C₆H₅<span class="hn">NO₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">H₂SO₄ + HNO₃</span>
+            <div class="mol-cmp-name">mezcla nitrante</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula" style="color:var(--c3t)">NO₂⁺</span>
+            <div class="mol-cmp-name">ión nitronio (electrófilo)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ C₆H₆</div>
+            <div>──[SEA]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="hn">NO₂</span></span>
+            <div class="mol-cmp-name">nitrobenceno</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Mezcla nitrante: HNO₃ conc. + H₂SO₄ conc. (50-60 °C) · T° baja → monosust. · T° alta → di/trinitración</div>
+        <div class="rxn-regla">📌 TNT = tolueno con triple nitración · NO₂⁺ es el electrófilo (no HNO₃ directamente)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₆ + HNO₃ →[H₂SO₄]</span>
+          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + HNO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅NO₂ + H₂O</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">NO₂</span> + H₂O</span>
           <span class="rxn-ex-nota">nitrobenceno</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1434,18 +1491,43 @@ Temperatura baja → monosustitución. Alta → di- o trinitración.</div>
         <span class="rxn-chev" id="chev-ar-2">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-2">
-        <div class="rxn-eq">C₆H₆  +  H₂SO₄ (conc. o fumante)  ⇌  C₆H₅SO₃H  +  H₂O
-(ácido bencenosulfónico)
-
-Reversible (desulfonación): C₆H₅SO₃H + H₂O (calor) ⇌ C₆H₆ + H₂SO₄</div>
-        <div class="rxn-cond">Electrófilo: SO₃ (trióxido de azufre) — del H₂SO₄ fumante (oleum)
-Reacción reversible: útil en síntesis como grupo bloqueante temporal</div>
-        <div class="rxn-regla">📌 Única SEA reversible — el −SO₃H puede ser eliminado calentando en agua</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂SO₄ (fumante)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">SO₃ electrófilo</span>
+            <span class="meq-line">────⇌────</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">C₆H₅<span class="hn">SO₃H</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  SO₃</span>
+            <div class="mol-cmp-name">benceno + trióxido de azufre</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">⇌ reversible</div>
+            <div>──────⇌──────</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="hn">SO₃H</span></span>
+            <div class="mol-cmp-name">ácido bencenosulfónico</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Electrófilo: SO₃ del H₂SO₄ fumante (oleum) · reversible: calentando en H₂O → desulfonación → benceno</div>
+        <div class="rxn-regla">📌 Única SEA reversible — el −SO₃H se usa como grupo bloqueante temporal en síntesis</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₆ + SO₃ →[H₂SO₄]</span>
+          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + SO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅SO₃H</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">SO₃H</span></span>
           <span class="rxn-ex-nota">ácido bencenosulfónico</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1471,20 +1553,44 @@ Reacción reversible: útil en síntesis como grupo bloqueante temporal</div>
         <span class="rxn-chev" id="chev-ar-3">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-3">
-        <div class="rxn-eq">C₆H₆  +  R−X  ──[AlCl₃]──→  C₆H₅−R  +  HX
-(R = grupo alquilo; X = Cl, Br)
-
-Electrófilo: carbocatión R⁺ (o complejo RX·AlCl₃)</div>
-        <div class="rxn-cond">Catalizador: AlCl₃ (ácido de Lewis fuerte)
-Problema: el producto (alquilbenceno) es más reactivo → polialquilación
-Solución: exceso de benceno para minimizar polialquilación</div>
-        <div class="rxn-regla">📌 Limitación: reorganización del carbocatión (puede dar producto rearreglado)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">R−Cl</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">AlCl₃ → R⁺</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">C₆H₅−<span class="hn">R</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">HCl</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃Cl</span>
+            <div class="mol-cmp-name">benceno + clorometano</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">AlCl₃ → CH₃⁺</div>
+            <div>──[FC-alquil.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅−<span class="hn">CH₃</span>  +  HCl</span>
+            <div class="mol-cmp-name">tolueno (metilbenceno)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">AlCl₃ activa R−X → carbocatión R⁺ · riesgo: el alquilbenceno producto es más reactivo → polialquilación · solución: exceso C₆H₆</div>
+        <div class="rxn-regla">📌 Limitación: R⁺ puede reorganizarse (producto rearreglado) · FC-acilación evita esto</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₆ + CH₃Cl →[AlCl₃]</span>
+          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + CH₃Cl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅CH₃ + HCl</span>
-          <span class="rxn-ex-nota">tolueno (metilbenceno)</span>
+          <span class="rxn-ex-p">C₆H₅−<span class="hn">CH₃</span> + HCl</span>
+          <span class="rxn-ex-nota">tolueno</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1509,20 +1615,44 @@ Solución: exceso de benceno para minimizar polialquilación</div>
         <span class="rxn-chev" id="chev-ar-4">▾</span>
       </div>
       <div class="rxn-body" id="body-ar-4">
-        <div class="rxn-eq">C₆H₆  +  R−CO−Cl  ──[AlCl₃]──→  C₆H₅−CO−R  +  HCl
-(arilcetona / fenilcetona)
-
-Electrófilo: acilio R−C≡O⁺  (catión acilio)</div>
-        <div class="rxn-cond">Catalizador: AlCl₃ (en exceso, ≥ 1 mol por mol de RCOCl)
-Reactivo: cloruro de acilo (RCOCl) o anhídrido (R(CO)₂O)
-Ventaja sobre alquilación: NO hay poliacilación (el grupo C=O desactiva el anillo)</div>
-        <div class="rxn-regla">📌 Mejor que alquilación para obtener monosustituido limpio</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">R−CO−Cl</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">AlCl₃ → RC≡O⁺</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">C₆H₅−<span class="hn">CO−R</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">HCl</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃COCl</span>
+            <div class="mol-cmp-name">benceno + cloruro de acetilo</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">AlCl₃ → CH₃CO⁺</div>
+            <div>──[FC-acil.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅−<span class="hn">CO−CH₃</span>  +  HCl</span>
+            <div class="mol-cmp-name">acetofenona</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Reactivo: cloruro de acilo (RCOCl) o anhídrido · AlCl₃ ≥ 1 mol · el grupo −C=O formado desactiva el anillo → no hay poliacilación</div>
+        <div class="rxn-regla">📌 Ventaja vs alquilación: producto monosustituido limpio · el acilio no se reorganiza</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₆ + CH₃COCl →[AlCl₃]</span>
+          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + CH₃COCl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅COCH₃ + HCl</span>
-          <span class="rxn-ex-nota">acetofenona</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">COCH₃</span> + HCl</span>
+          <span class="rxn-ex-nota">acetofenona (arilcetona)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1558,25 +1688,49 @@ Ventaja sobre alquilación: NO hay poliacilación (el grupo C=O desactiva el ani
         <span class="rxn-chev" id="chev-hg-0">▾</span>
       </div>
       <div class="rxn-body" id="body-hg-0">
-        <div class="rxn-eq">Nu:⁻  +  R−X  ──[1 paso concertado]──→  Nu−R  +  X⁻
-
-Velocidad = k [R−X][Nu]  (bimolecular)
-Estado de transición: [Nu···C···X]⁻  (inversión de Walden)</div>
-        <div class="rxn-cond">Favorece: sustrato 1° (poco impedimento estérico)
-Nucleófilo: fuerte y pequeño (OH⁻, CN⁻, I⁻, RS⁻)
-Solvente: aprótico polar (DMSO, acetona) — no solva el Nu</div>
-        <div class="rxn-regla">📌 El Nu ataca por la cara opuesta al GS → la configuración se INVIERTE (inversión de Walden)</div>
-        <div class="rxn-ex-lbl">Ejemplo</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">Nu:⁻</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-mol">R−<span class="bp">X</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">1 paso concertado</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">Nu</span>−R</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">X⁻</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH₂<span class="bp">Br</span>  +  <span class="bp">OH⁻</span></span>
+            <div class="mol-cmp-name">bromoetano + nucleófilo</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Nu ataca opuesto a X</div>
+            <div>──[SN2]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH₂<span class="hn">OH</span>  +  Br⁻</span>
+            <div class="mol-cmp-name">etanol (configuración invertida)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Sustrato 1° (poco impedimento) · Nu fuerte y pequeño (OH⁻, CN⁻, I⁻, RS⁻) · solvente aprótico polar (DMSO, acetona) · v = k[R−X][Nu]</div>
+        <div class="rxn-regla">📌 Nu ataca cara opuesta al GS → la configuración se INVIERTE 180° (inversión de Walden)</div>
+        <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CH₂Br + OH⁻</span>
+          <span class="rxn-ex-r">CH₃CH₂<span class="bp">Br</span> + <span class="bp">OH⁻</span></span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH₂OH + Br⁻</span>
+          <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + Br⁻</span>
           <span class="rxn-ex-nota">bromoetano → etanol (SN2)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃Br + CN⁻</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">Br</span> + <span class="bp">CN⁻</span></span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CN + Br⁻</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">CN</span> + Br⁻</span>
           <span class="rxn-ex-nota">nitrilo (alarga cadena en 1C)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1611,19 +1765,58 @@ Solvente: aprótico polar (DMSO, acetona) — no solva el Nu</div>
         <span class="rxn-chev" id="chev-hg-1">▾</span>
       </div>
       <div class="rxn-body" id="body-hg-1">
-        <div class="rxn-eq">Paso 1 (lento): R−X  ──→  R⁺  +  X⁻   (ionización)
-Paso 2 (rápido): R⁺  +  Nu  ──→  R−Nu
-
-Velocidad = k [R−X]  (unimolecular — solo depende del sustrato)</div>
-        <div class="rxn-cond">Favorece: sustrato 3° (carbocatión 3° más estable)
-Solvente: prótico polar (agua, etanol) — estabiliza iones por puentes H
-Nucleófilo: débil (H₂O, ROH) — atacan el R⁺ plano desde cualquier cara</div>
-        <div class="rxn-regla">📌 El carbocatión (sp²) es plano → Nu ataca ambas caras → RACEMIZACIÓN</div>
+        <div style="font-size:.7rem;font-weight:700;color:#7c3aed;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 1 (lento — determinante)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">X</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">ionización</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">R⁺</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">X⁻</span></span>
+          </div>
+        </div>
+        <div style="font-size:.7rem;font-weight:700;color:#7c3aed;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 2 (rápido)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">R⁺</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-mol">Nu</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Nu ataca por ambas caras</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">Nu</span></span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(racémico)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">(CH₃)₃C−<span class="bp">Br</span>  +  H₂O</span>
+            <div class="mol-cmp-name">2-bromo-2-metilpropano (3°)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">SN1 (2 pasos)</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">(CH₃)₃C−<span class="hn">OH</span>  +  HBr</span>
+            <div class="mol-cmp-name">2-metil-2-propanol</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Sustrato 3° (R⁺ más estable) · solvente prótico polar (H₂O, EtOH) estabiliza iones · Nu débil (H₂O, ROH) · v = k[R−X]</div>
+        <div class="rxn-regla">📌 R⁺ (sp²) es plano → Nu ataca por ambas caras → producto RACÉMICO</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">(CH₃)₃C−Br + H₂O</span>
+          <span class="rxn-ex-r">(CH₃)₃C−<span class="bp">Br</span> + H₂O</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">(CH₃)₃C−OH + HBr</span>
+          <span class="rxn-ex-p">(CH₃)₃C−<span class="hn">OH</span> + HBr</span>
           <span class="rxn-ex-nota">2-metil-2-propanol (SN1 en 3°)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1652,18 +1845,44 @@ Nucleófilo: débil (H₂O, ROH) — atacan el R⁺ plano desde cualquier cara</
         <span class="rxn-chev" id="chev-hg-2">▾</span>
       </div>
       <div class="rxn-body" id="body-hg-2">
-        <div class="rxn-eq">Base:  +  H−Cβ−Cα−X  ──[1 paso concertado]──→  Cβ=Cα  +  HBase  +  X⁻
-
-Geometría: H y X deben ser anti-periplanares (180°) para el solapamiento orbital</div>
-        <div class="rxn-cond">Base fuerte y voluminosa: KOH/EtOH o t-BuOK (favorece eliminación vs SN2)
-Temperatura alta favorece E2 sobre SN2</div>
-        <div class="rxn-regla">📌 Zaitsev: se elimina el H del Cβ con MENOS H → alqueno más sustituido (más estable)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">Base:</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-mol"><span class="bp">H</span>−Cβ−Cα−<span class="bp">X</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">1 paso, anti-periplanar</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">Cβ<span class="hn">=</span>Cα</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">HBase  +  <span class="hn">X⁻</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH₂−CH<span class="bp">Br</span>−CH₃</span>
+            <div class="mol-cmp-name">2-bromobutano + KOH/EtOH</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">E2 · Zaitsev</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">=</span>CH−CH₃  +  KBr</span>
+            <div class="mol-cmp-name">but-2-eno (más sustituido)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Base fuerte voluminosa: KOH/EtOH o t-BuOK · T° alta favorece E2 · H y X deben ser anti-periplanares (180°)</div>
+        <div class="rxn-regla">📌 Zaitsev: el H se elimina del Cβ con menos H → alqueno más sustituido (más estable)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃−CH₂−CHBr−CH₃ + KOH/EtOH</span>
+          <span class="rxn-ex-r">CH₃−CH₂−CH<span class="bp">Br</span>−CH₃ + KOH/EtOH</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃−CH=CH−CH₃ + KBr + H₂O</span>
-          <span class="rxn-ex-nota">but-2-eno (Zaitsev, más sustituido)</span>
+          <span class="rxn-ex-p">CH₃−CH<span class="hn">=</span>CH−CH₃ + KBr</span>
+          <span class="rxn-ex-nota">but-2-eno (Zaitsev)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1699,25 +1918,48 @@ Temperatura alta favorece E2 sobre SN2</div>
         <span class="rxn-chev" id="chev-ao-0">▾</span>
       </div>
       <div class="rxn-body" id="body-ao-0">
-        <div class="rxn-eq">R−CH₂−CHOH−R′  ──[H₂SO₄, Δ]──→  R−CH=CH−R′  +  H₂O
-(eliminación intramolecular)</div>
-        <div class="rxn-cond">Catalizador: H₂SO₄ concentrado (o H₃PO₄)
-Temperatura alta (~180 °C): favorece alqueno (eliminación)
-Temperatura baja (~140 °C) + otro alcohol: favorece éter (sustitución)
-Regioselectividad: Zaitsev (alqueno más sustituido es el producto principal)</div>
-        <div class="rxn-regla">📌 Zaitsev: el H se elimina del Cβ con menos H → alqueno más sustituido</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−CH₂−C<span class="bp">(OH)</span>H−R′</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H₂SO₄, ~180 °C</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−CH<span class="hn">=</span>CH−R′</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH<span class="bp">(OH)</span>CH₂CH₃</span>
+            <div class="mol-cmp-name">2-butanol</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">H₂SO₄/Δ · Zaitsev</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH<span class="hn">=</span>CHCH₃  +  H₂O</span>
+            <div class="mol-cmp-name">but-2-eno (más sustituido)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Catalizador: H₂SO₄ conc. (o H₃PO₄) · 180 °C → alqueno · 140 °C + ROH → éter</div>
+        <div class="rxn-regla">📌 Zaitsev: H se elimina del Cβ con menos H → alqueno más sustituido (más estable)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CH₂OH →[H₂SO₄, 180°C]</span>
+          <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[H₂SO₄, 180°C]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₂=CH₂ + H₂O</span>
-          <span class="rxn-ex-nota">eteno (solo 1 β-C disponible)</span>
+          <span class="rxn-ex-p">CH₂<span class="hn">=</span>CH₂ + H₂O</span>
+          <span class="rxn-ex-nota">eteno</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃CH(OH)CH₂CH₃ →[H₂SO₄, Δ]</span>
+          <span class="rxn-ex-r">CH₃CH<span class="bp">(OH)</span>CH₂CH₃ →[H₂SO₄, Δ]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH=CHCH₃ (ppal)</span>
-          <span class="rxn-ex-nota">but-2-eno (Zaitsev, 2 sustituyentes)</span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">=</span>CHCH₃ (ppal)</span>
+          <span class="rxn-ex-nota">but-2-eno (Zaitsev)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1742,25 +1984,54 @@ Regioselectividad: Zaitsev (alqueno más sustituido es el producto principal)</d
         <span class="rxn-chev" id="chev-ao-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ao-1">
-        <div class="rxn-eq">1° + PCC        ──→  Aldehído (RCHO)           [oxidación controlada]
-1° + KMnO₄/K₂Cr₂O₇ ──→  Ácido carboxílico (RCOOH) [oxidación fuerte]
-2° + oxidante  ──→  Cetona (R₂CO)
-3°             ──→  No se oxida (no tiene H en C−OH)</div>
-        <div class="rxn-cond">PCC (CrO₃/piridina): para alcohol 1° → aldehído (detiene aquí)
-KMnO₄ o K₂Cr₂O₇/H₂SO₄: alcohol 1° → ácido carboxílico (sobreoxida)
-Alcohol 2° → cetona con cualquier oxidante Cr o Mn</div>
-        <div class="rxn-regla">📌 3° no reacciona con CrO₃ ni KMnO₄ (falta H en el C−OH)</div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−CH₂−<span class="bp">OH</span></span>
+            <div class="mol-cmp-name">alcohol 1°</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">PCC</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="hn">CHO</span></span>
+            <div class="mol-cmp-name">aldehído (controlado)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">KMnO₄</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="hn">COOH</span></span>
+            <div class="mol-cmp-name">ácido (sobreoxidado)</div>
+          </div>
+        </div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R₂<span class="bp">CHOH</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">K₂Cr₂O₇ / KMnO₄</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R₂<span class="hn">C=O</span></span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cetona — alcohol 2°)</span>
+          </div>
+        </div>
+        <div class="rxn-cond">PCC → aldehído (1°, controlado) · KMnO₄/K₂Cr₂O₇ → ácido (1°, fuerte) / cetona (2°) · 3° no reacciona (no tiene H en C−OH)</div>
+        <div class="rxn-regla">📌 PCC detiene en aldehído · KMnO₄ sobreoxida el 1° hasta ácido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CH₂OH →[PCC]</span>
+          <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[PCC]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CHO</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">CHO</span></span>
           <span class="rxn-ex-nota">etanol → etanal (aldehído)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃CH(OH)CH₃ →[K₂Cr₂O₇]</span>
+          <span class="rxn-ex-r">CH₃CH<span class="bp">(OH)</span>CH₃ →[K₂Cr₂O₇]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃COCH₃</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">CO</span>CH₃</span>
           <span class="rxn-ex-nota">2-propanol → acetona (cetona)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1786,22 +2057,51 @@ Alcohol 2° → cetona con cualquier oxidante Cr o Mn</div>
         <span class="rxn-chev" id="chev-ao-2">▾</span>
       </div>
       <div class="rxn-body" id="body-ao-2">
-        <div class="rxn-eq">ROH  +  HX  ──→  RX  +  H₂O
-ROH  +  SOCl₂  ──→  RCl  +  SO₂↑  +  HCl↑</div>
-        <div class="rxn-cond">Con HX: 3° → SN1 rápido; 1° → SN2. Reactividad HX: HI &gt; HBr &gt; HCl
-Con SOCl₂ (cloruro de tionilo): limpio — los subproductos son gases, el RCl queda puro</div>
-        <div class="rxn-regla">📌 SOCl₂ es el mejor método para RCl; PCl₃ para PCl₂→RCl también funciona</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">OH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HX</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">SN1 (3°) / SN2 (1°)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">X</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">OH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">SOCl₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">limpio — gases salen</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">Cl</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">SO₂↑  +  HCl↑</span>
+          </div>
+        </div>
+        <div class="rxn-cond">HX: 3° → SN1 rápido · 1° → SN2 · reactividad: HI &gt; HBr &gt; HCl · SOCl₂ más limpio (subproductos son gases)</div>
+        <div class="rxn-regla">📌 SOCl₂ = mejor método para R−Cl (RCl queda puro sin mezcla con agua)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CH₂OH + HBr</span>
+          <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> + HBr</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH₂Br + H₂O</span>
+          <span class="rxn-ex-p">CH₃CH₂<span class="hn">Br</span> + H₂O</span>
           <span class="rxn-ex-nota">bromoetano (SN2)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃OH + SOCl₂</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">OH</span> + SOCl₂</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃Cl + SO₂ + HCl</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">Cl</span> + SO₂↑ + HCl↑</span>
           <span class="rxn-ex-nota">clorometano (subproductos gaseosos)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1827,17 +2127,43 @@ Con SOCl₂ (cloruro de tionilo): limpio — los subproductos son gases, el RCl 
         <span class="rxn-chev" id="chev-ao-3">▾</span>
       </div>
       <div class="rxn-body" id="body-ao-3">
-        <div class="rxn-eq">R−COOH  +  R′−OH  ──[H⁺, Δ]──⇌──  R−COO−R′  +  H₂O
-(ácido carboxílico + alcohol → éster + agua)</div>
-        <div class="rxn-cond">Catalizador: H₂SO₄ (o HCl)
-Reacción reversible (equilibrio)
-Para desplazar hacia éster: exceso de uno de los reactivos o eliminación del H₂O</div>
-        <div class="rxn-regla">📌 Equilibrio Fischer: usa exceso de alcohol o destilación azeotrópica del H₂O</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">COOH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-mol">R′−<span class="bp">OH</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H⁺, Δ, reversible</span>
+            <span class="meq-line">────⇌────</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">COO</span>−R′</span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="bp">COOH</span>  +  CH₃CH₂<span class="bp">OH</span></span>
+            <div class="mol-cmp-name">ácido acético + etanol</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">H⁺, Δ</div>
+            <div>────⇌────</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="hn">COO</span>C₂H₅  +  H₂O</span>
+            <div class="mol-cmp-name">acetato de etilo (éster)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Catalizador: H₂SO₄ (o HCl) · reacción reversible (equilibrio) · para aumentar rendimiento: exceso de alcohol o destilación del H₂O</div>
+        <div class="rxn-regla">📌 Le Chatelier: exceso de alcohol o quitar H₂O desplaza → más éster</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃COOH + CH₃CH₂OH →[H⁺]</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">COOH</span> + CH₃CH₂<span class="bp">OH</span> →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃COOC₂H₅ + H₂O</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">COO</span>C₂H₅ + H₂O</span>
           <span class="rxn-ex-nota">acetato de etilo (éster)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1874,22 +2200,48 @@ Para desplazar hacia éster: exceso de uno de los reactivos o eliminación del H
         <span class="rxn-chev" id="chev-am-0">▾</span>
       </div>
       <div class="rxn-body" id="body-am-0">
-        <div class="rxn-eq">R₃N  +  H−A  ──→  R₃NH⁺  A⁻
-(amina + ácido → sal de amonio)</div>
-        <div class="rxn-cond">Reacción ácido-base: el N dona su par libre al H⁺
-Aminas son bases débiles (pKb ≈ 3−5); HCl, H₂SO₄, RCOOH las neutralizan</div>
-        <div class="rxn-regla">📌 Orden de basicidad (acuoso): amina 2° &gt; 1° &gt; 3° &gt; NH₃ &gt; arilaminas</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">R₃N:</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H−A</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">N: dona par libre</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod"><span class="hn">R₃NH⁺</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">A⁻</span></span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="bp">NH₂</span>  +  HCl</span>
+            <div class="mol-cmp-name">metilamina + ácido</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div>──[ácido-base]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="hn">NH₃⁺</span> Cl⁻</span>
+            <div class="mol-cmp-name">cloruro de metilamonio</div>
+          </div>
+        </div>
+        <div class="rxn-cond">N dona par libre al H⁺ · pKb aminas ≈ 3–5 (bases débiles) · HCl, H₂SO₄, RCOOH las neutralizan</div>
+        <div class="rxn-regla">📌 Basicidad acuosa: amina 2° &gt; 1° &gt; 3° &gt; NH₃ &gt; arilaminas (resonancia desactiva ArNH₂)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃NH₂ + HCl</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">NH₂</span> + HCl</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃NH₃⁺ Cl⁻</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">NH₃⁺</span> Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de metilamonio</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">C₆H₅NH₂ + HCl</span>
+          <span class="rxn-ex-r">C₆H₅<span class="bp">NH₂</span> + HCl</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅NH₃⁺ Cl⁻</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">NH₃⁺</span> Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de anilinio</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1915,17 +2267,43 @@ Aminas son bases débiles (pKb ≈ 3−5); HCl, H₂SO₄, RCOOH las neutralizan
         <span class="rxn-chev" id="chev-am-1">▾</span>
       </div>
       <div class="rxn-body" id="body-am-1">
-        <div class="rxn-eq">Ar−NO₂  +  3 H₂  ──[Pt o Pd]──→  Ar−NH₂  +  2 H₂O
-Ar−NO₂  +  Sn/HCl  ──[luego NaOH]──→  Ar−NH₂</div>
-        <div class="rxn-cond">Método 1: H₂/Pt o Pd/C — catalítico, limpio
-Método 2: Sn (o Fe) + HCl en caliente → sal de amonio → NaOH para liberar arilamina
-Estos métodos son la forma principal de preparar arilaminas</div>
-        <div class="rxn-regla">📌 Los grupos −NO₂ entran por nitración (SEAr); luego se reducen → arilaminas</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">Ar−<span class="bp">NO₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">3 H₂</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Pt o Pd/C</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">Ar−<span class="hn">NH₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">2 H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="bp">NO₂</span></span>
+            <div class="mol-cmp-name">nitrobenceno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ 3 H₂ / Pt</div>
+            <div>──[reducción]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="hn">NH₂</span>  +  2 H₂O</span>
+            <div class="mol-cmp-name">anilina (arilamina)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Método 1: H₂/Pt o Pd/C (catalítico, limpio) · Método 2: Sn o Fe + HCl → sal de amonio → NaOH libera la arilamina</div>
+        <div class="rxn-regla">📌 Secuencia: nitración SEAr (→ −NO₂) + reducción (→ −NH₂) = ruta principal hacia arilaminas</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₅NO₂ + 3H₂ →[Pt]</span>
+          <span class="rxn-ex-r">C₆H₅<span class="bp">NO₂</span> + 3 H₂ →[Pt]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅NH₂ + 2H₂O</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">NH₂</span> + 2 H₂O</span>
           <span class="rxn-ex-nota">nitrobenceno → anilina</span>
         </div>
         <div class="quiz-sep"></div>
@@ -1951,24 +2329,56 @@ Estos métodos son la forma principal de preparar arilaminas</div>
         <span class="rxn-chev" id="chev-am-2">▾</span>
       </div>
       <div class="rxn-body" id="body-am-2">
-        <div class="rxn-eq">Ar−NH₂  +  NaNO₂  +  HCl  ──[0–5°C]──→  Ar−N₂⁺ Cl⁻  +  NaCl  +  H₂O
-(sal de diazonio aromática)
-
-Copulación azo:  Ar−N₂⁺  +  Ar′−OH (o Ar′−NR₂)  ──→  Ar−N=N−Ar′  (colorante azo)</div>
-        <div class="rxn-cond">Temperatura: 0–5 °C obligatoria (el diazonio se descompone a T ambiente → ArOH + N₂)
-NaNO₂ + HCl → HNO₂ in situ → reacciona con la amina aromática</div>
-        <div class="rxn-regla">📌 El N₂ es el mejor grupo saliente → las sales de diazonio permiten sustituir −N₂⁺ por −CN, −F, −Cl, −Br, −OH (reacciones de Sandmeyer)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">Ar−<span class="bp">NH₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">NaNO₂ + HCl</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">0–5 °C (obligatorio)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">Ar−<span class="hn">N₂⁺</span> Cl⁻</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(sal de diazonio)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="bp">NH₂</span> + NaNO₂/HCl</span>
+            <div class="mol-cmp-name">anilina · 0 °C</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">diazotación</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅−<span class="hn">N₂⁺</span>Cl⁻</span>
+            <div class="mol-cmp-name">bencendiazonio (lábil)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Cu₂Cl₂</div>
+            <div>──[Sandm.]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">C₆H₅<span class="hn">Cl</span>  +  N₂↑</span>
+            <div class="mol-cmp-name">clorobenceno</div>
+          </div>
+        </div>
+        <div class="rxn-cond">0–5 °C obligatorio (a T° ambiente el diazonio se descompone → ArOH + N₂) · NaNO₂ + HCl → HNO₂ in situ</div>
+        <div class="rxn-regla">📌 Sandmeyer: N₂⁺ se sustituye por −Cl, −Br, −CN, −F, −OH · N₂ es el mejor grupo saliente</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₅NH₂ + NaNO₂ + HCl →[0°C]</span>
+          <span class="rxn-ex-r">C₆H₅<span class="bp">NH₂</span> + NaNO₂ + HCl →[0°C]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅N₂⁺Cl⁻</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">N₂⁺</span>Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de bencendiazonio</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">C₆H₅N₂⁺ + Cu₂Cl₂</span>
+          <span class="rxn-ex-r">C₆H₅<span class="bp">N₂⁺</span> + Cu₂Cl₂</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅Cl + N₂↑</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">Cl</span> + N₂↑</span>
           <span class="rxn-ex-nota">clorobenceno (Sandmeyer)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2005,18 +2415,42 @@ NaNO₂ + HCl → HNO₂ in situ → reacciona con la amina aromática</div>
         <span class="rxn-chev" id="chev-cb-0">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-0">
-        <div class="rxn-eq">R−CHO  +  HCN  ──[OH⁻ cat.]──→  R−CH(OH)−CN
-(cianohidrina)
-
-R₂C=O  +  HCN  ──→  R₂C(OH)−CN</div>
-        <div class="rxn-cond">Catalizador: base débil (genera CN⁻ nucleófilo)
-CN⁻ ataca el C=O → alcóxido → H⁺ del HCN → cianohidrina</div>
-        <div class="rxn-regla">📌 La cianohidrina tiene un nuevo C−C: útil para alargar cadenas (luego el CN puede hidrolizarse → ácido α-hidroxi)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">CHO</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HCN</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">OH⁻ cat. → CN⁻</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cianohidrina)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="bp">CHO</span></span>
+            <div class="mol-cmp-name">etanal (aldehído)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HCN / OH⁻</div>
+            <div>──[AN]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
+            <div class="mol-cmp-name">lactonitrilo (nuevo C−C)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">OH⁻ genera CN⁻ nucleófilo · CN⁻ ataca el C del C=O (δ+) · toma H⁺ del HCN → cianohidrina</div>
+        <div class="rxn-regla">📌 Nuevo enlace C−C: alarga la cadena en 1C · CN hidrolizable → ácido α-hidroxi</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CHO + HCN →[OH⁻]</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">CHO</span> + HCN →[OH⁻]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH(OH)CN</span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span><span class="hn">CN</span></span>
           <span class="rxn-ex-nota">lactonitrilo (cianohidrina)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2042,24 +2476,48 @@ CN⁻ ataca el C=O → alcóxido → H⁺ del HCN → cianohidrina</div>
         <span class="rxn-chev" id="chev-cb-1">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-1">
-        <div class="rxn-eq">Aldehído (RCHO) + 2[H]  ──→  Alcohol 1° (RCH₂OH)
-Cetona (R₂C=O) + 2[H]  ──→  Alcohol 2° (R₂CHOH)</div>
-        <div class="rxn-cond">LiAlH₄ (éter) o NaBH₄ (MeOH/H₂O): reductores hidruro
-H₂/Ni: hidrogenación catalítica
-LiAlH₄ es más fuerte (reduce también ácidos y ésteres); NaBH₄ es selectivo para C=O</div>
-        <div class="rxn-regla">📌 Aldehído → alcohol 1°; Cetona → alcohol 2° (el H⁻ ataca el C del C=O)</div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="bp">CHO</span></span>
+            <div class="mol-cmp-name">aldehído</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ 2[H]</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−CH₂<span class="hn">OH</span></span>
+            <div class="mol-cmp-name">alcohol 1°</div>
+          </div>
+        </div>
+        <div class="mol-cmp" style="margin-top:-6px">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R₂<span class="bp">C=O</span></span>
+            <div class="mol-cmp-name">cetona</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ 2[H]</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R₂CH<span class="hn">OH</span></span>
+            <div class="mol-cmp-name">alcohol 2°</div>
+          </div>
+        </div>
+        <div class="rxn-cond">LiAlH₄ (éter): reduce C=O, ácidos y ésteres · NaBH₄ (H₂O/MeOH): selectivo solo C=O · H₂/Ni: hidrogenación catalítica</div>
+        <div class="rxn-regla">📌 H⁻ ataca el C del C=O (δ+) · Aldehído → alcohol 1° · Cetona → alcohol 2°</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CHO + NaBH₄</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">CHO</span> + NaBH₄</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH₂OH</span>
-          <span class="rxn-ex-nota">etanal → etanol (1°)</span>
+          <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span></span>
+          <span class="rxn-ex-nota">etanal → etanol (alcohol 1°)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃COCH₃ + LiAlH₄</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">CO</span>CH₃ + LiAlH₄</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH(OH)CH₃</span>
-          <span class="rxn-ex-nota">acetona → 2-propanol (2°)</span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
+          <span class="rxn-ex-nota">acetona → 2-propanol (alcohol 2°)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2084,19 +2542,42 @@ LiAlH₄ es más fuerte (reduce también ácidos y ésteres); NaBH₄ es selecti
         <span class="rxn-chev" id="chev-cb-2">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-2">
-        <div class="rxn-eq">R′MgBr  +  C=O  ──[éter]──→  [R′−C−OMgBr]  ──[H₂O]──→  R′−C−OH
-• HCHO (formaldehído) → alcohol 1°
-• RCHO (aldehído)     → alcohol 2°
-• R₂C=O (cetona)      → alcohol 3°</div>
-        <div class="rxn-cond">Reactivo de Grignard: R′MgBr (R′ = alquilo o arilo)
-Disolvente: éter seco (anhydrous)
-Hidrólisis: H₂O/NH₄Cl ácido para liberar el alcohol</div>
-        <div class="rxn-regla">📌 El Grignard forma un nuevo enlace C−C → herramienta poderosa para sintetizar alcoholes de grados específicos</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol"><span class="bp">R′MgBr</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-mol">R−<span class="bp">C=O</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">éter seco → H₂O</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R′−<span class="hn">C</span>−<span class="hn">OH</span></span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(nuevo C−C)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="bp">MgBr</span>  +  CH₃<span class="bp">CHO</span></span>
+            <div class="mol-cmp-name">Grignard + aldehído</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">éter → H₂O</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−<span class="hn">CH(OH)</span>−CH₃</span>
+            <div class="mol-cmp-name">2-propanol (alcohol 2°)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">HCHO → alcohol 1° · RCHO → alcohol 2° · R₂C=O → alcohol 3° · solvente: éter seco · hidrólisis: H₂O/NH₄Cl</div>
+        <div class="rxn-regla">📌 Grignard forma un nuevo enlace C−C → herramienta para sintetizar alcoholes de cualquier grado</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃MgBr + CH₃CHO →[éter, H₂O]</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">MgBr</span> + CH₃<span class="bp">CHO</span> →[éter, H₂O]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH(OH)CH₃</span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
           <span class="rxn-ex-nota">2-propanol (alcohol 2°)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2122,17 +2603,48 @@ Hidrólisis: H₂O/NH₄Cl ácido para liberar el alcohol</div>
         <span class="rxn-chev" id="chev-cb-3">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-3">
-        <div class="rxn-eq">2 R−CH₂−CHO  ──[NaOH]──→  R−CH₂−CH(OH)−CHR−CHO  (aldol)
-                       ──[Δ]──→  R−CH₂−CH=CR−CHO  +  H₂O  (α,β-insaturado)</div>
-        <div class="rxn-cond">Base diluida (NaOH, H₂O): forma el enolato que ataca el C=O de otra molécula
-El aldol (β-hidroxialdehído) puede deshidratarse con calor → α,β-insaturado
-Requiere H en el C α (adyacente al C=O)</div>
-        <div class="rxn-regla">📌 La condensación aldólica forma un nuevo enlace C−C: alarga la cadena → útil en síntesis</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">2 R−CH₂−<span class="bp">CHO</span></span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">NaOH dil. (enolato)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−CH₂−CH<span class="hn">(OH)</span>−CHR−CHO</span>
+            <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(aldol · nuevo C−C)</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">2 CH₃<span class="bp">CHO</span></span>
+            <div class="mol-cmp-name">etanal (2 moléculas)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">NaOH</div>
+            <div>──→ aldol</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH<span class="hn">(OH)</span>CH₂CHO</span>
+            <div class="mol-cmp-name">3-hidroxibutanal</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Δ (deshidra.)</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CH<span class="hn">=</span>CHCHO</span>
+            <div class="mol-cmp-name">but-2-enal (α,β-insaturado)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">NaOH diluida → enolato ataca C=O de otra molécula · aldol con Δ → α,β-insaturado + H₂O · requiere H en Cα</div>
+        <div class="rxn-regla">📌 Forma un nuevo enlace C−C → alarga la cadena en síntesis · muy utilizada en bioquímica</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">2 CH₃CHO →[NaOH]</span>
+          <span class="rxn-ex-r">2 CH₃<span class="bp">CHO</span> →[NaOH]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH(OH)CH₂CHO</span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₂CHO</span>
           <span class="rxn-ex-nota">3-hidroxibutanal (aldol)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2169,25 +2681,49 @@ Requiere H en el C α (adyacente al C=O)</div>
         <span class="rxn-chev" id="chev-ac-0">▾</span>
       </div>
       <div class="rxn-body" id="body-ac-0">
-        <div class="rxn-eq">R−COOH  +  NaOH  ──→  R−COO⁻Na⁺  +  H₂O
-(neutralización ácido-base)
-
-Ácidos grasos (R largo) + NaOH → jabones (RCOONa, anfipáticos)</div>
-        <div class="rxn-cond">El carboxilato (RCOO⁻) se estabiliza por resonancia (carga repartida entre 2 O)
-Ácidos carboxílicos son más ácidos que alcoholes (pKa 4–5 vs ~16)</div>
-        <div class="rxn-regla">📌 La saponificación de grasas (triésteres) con NaOH produce jabones (carboxilatos de Na)</div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">COOH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">NaOH</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">neutralización</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">COO⁻Na⁺</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="bp">COOH</span>  +  NaOH</span>
+            <div class="mol-cmp-name">ácido acético + base</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="hn">COO⁻Na⁺</span>  +  H₂O</span>
+            <div class="mol-cmp-name">acetato de sodio (estabilizado por resonancia)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">RCOO⁻ estabilizado por resonancia (carga entre 2 O) · pKa ácidos carboxílicos ≈ 4–5 · jabón = ácidos grasos + NaOH</div>
+        <div class="rxn-regla">📌 Saponificación de grasas (triésteres) con NaOH → jabones (carboxilatos de Na, anfipáticos)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃COOH + NaOH</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">COOH</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃COO⁻Na⁺ + H₂O</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">COO⁻Na⁺</span> + H₂O</span>
           <span class="rxn-ex-nota">acetato de sodio</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">C₁₇H₃₅COOH + NaOH</span>
+          <span class="rxn-ex-r">C₁₇H₃₅<span class="bp">COOH</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₁₇H₃₅COO⁻Na⁺ + H₂O</span>
-          <span class="rxn-ex-nota">estearato de Na (jabón)</span>
+          <span class="rxn-ex-p">C₁₇H₃₅<span class="hn">COO⁻Na⁺</span> + H₂O</span>
+          <span class="rxn-ex-nota">estearato de sodio (jabón)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2212,18 +2748,41 @@ Requiere H en el C α (adyacente al C=O)</div>
         <span class="rxn-chev" id="chev-ac-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ac-1">
-        <div class="rxn-eq">1. Oxidación alcohol 1°:  R−CH₂OH  ──[KMnO₄ o K₂Cr₂O₇]──→  R−COOH
-2. Oxidación alquilbenceno: Ar−R  ──[KMnO₄/OH⁻/Δ]──→  Ar−COOH
-3. Hidrólisis de nitrilo:  R−CN  +  H₂O  ──[H⁺ o OH⁻, Δ]──→  R−COOH  +  NH₃</div>
-        <div class="rxn-cond">Alcohol 1° con KMnO₄ fuerte → ácido directo (sin detenerse en aldehído)
-Alquilbencenos: cadena lateral (con H bencílico) → COOH; el anillo no se oxida
-Nitrilo: primero da amida, luego ácido (hidrólisis completa en ácido/base fuerte)</div>
-        <div class="rxn-regla">📌 KMnO₄ siempre oxida alcohol 1° hasta RCOOH; para detenerse en RCHO → usar PCC</div>
-        <div class="rxn-ex-lbl">Ejemplos</div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−CH₂<span class="bp">OH</span></span>
+            <div class="mol-cmp-name">alcohol 1°</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">KMnO₄ fuerte</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="hn">COOH</span></span>
+            <div class="mol-cmp-name">ácido carboxílico</div>
+          </div>
+        </div>
+        <div class="mol-cmp" style="margin-top:-6px">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">Ar−<span class="bp">R</span></span>
+            <div class="mol-cmp-name">alquilbenceno</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">KMnO₄/OH⁻/Δ</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">Ar−<span class="hn">COOH</span></span>
+            <div class="mol-cmp-name">ácido aromático (anillo intacto)</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Alcohol 1° + KMnO₄ fuerte → ácido (sin detenerse en aldehído) · Alquilbenceno: cadena lateral → COOH (anillo no se oxida) · R−CN + H₂O/H⁺ → RCOOH + NH₃</div>
+        <div class="rxn-regla">📌 KMnO₄ sobreoxida 1° hasta RCOOH · para detenerse en RCHO → PCC</div>
+        <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">C₆H₅CH₃ + KMnO₄/OH⁻/Δ</span>
+          <span class="rxn-ex-r">C₆H₅<span class="bp">CH₃</span> + KMnO₄/OH⁻/Δ</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅COOH</span>
+          <span class="rxn-ex-p">C₆H₅<span class="hn">COOH</span></span>
           <span class="rxn-ex-nota">tolueno → ácido benzoico</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2262,28 +2821,50 @@ Nitrilo: primero da amida, luego ácido (hidrólisis completa en ácido/base fue
         <span class="rxn-chev" id="chev-dv-0">▾</span>
       </div>
       <div class="rxn-body" id="body-dv-0">
-        <div class="rxn-eq">Síntesis (Fischer):   RCOOH + R′OH ⇌ RCOOR′ + H₂O   [H⁺]
-Hidrólisis ácida:    RCOOR′ + H₂O ⇌ RCOOH + R′OH  [reversible]
-Saponificación:      RCOOR′ + NaOH → RCOONa + R′OH [irreversible]
-Transesterificación: RCOOR′ + R″OH ⇌ RCOOR″ + R′OH
-Reducción LiAlH₄:   RCOOR′ + 2LiAlH₄ → RCH₂OH + R′OH (2 alcoholes)
-Grignard (2 equiv): RCOOR′ + 2 R″MgBr → R(R″)₂COH (alcohol 3°)</div>
-        <div class="rxn-cond">Hidrólisis ácida: reversible. Saponificación (NaOH): irreversible — carboxilato no reactivo
-LiAlH₄ reduce ambos C=O (acilo + OR): da 2 alcoholes
-Grignard con éster: 2 equivalentes → alcohol 3° con 2 grupos R iguales</div>
-        <div class="rxn-regla">📌 Saponificación irreversible: el RCOO⁻ formado NO reacciona con el R′OH</div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="bp">COOR′</span>  +  NaOH</span>
+            <div class="mol-cmp-name">éster + base (saponificación)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">irreversible</div>
+            <div>──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">R−<span class="hn">COO⁻Na⁺</span>  +  R′OH</span>
+            <div class="mol-cmp-name">carboxilato + alcohol</div>
+          </div>
+        </div>
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">COOR′</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">2 LiAlH₄</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">reducción total</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">CH₂OH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">R′<span class="hn">OH</span></span>
+          </div>
+        </div>
+        <div class="rxn-cond">Fischer: RCOOH + R′OH ⇌ RCOOR′ + H₂O [H⁺] · Hidrólisis ácida: reversible · Saponificación NaOH: irreversible · Grignard (2 eq) → alcohol 3°</div>
+        <div class="rxn-regla">📌 Saponificación irreversible: RCOO⁻ formado NO reacciona con R′OH · LiAlH₄ da 2 alcoholes</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃COOC₂H₅ + NaOH</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃COO⁻Na⁺ + C₂H₅OH</span>
-          <span class="rxn-ex-nota">saponificación del acetato de etilo</span>
+          <span class="rxn-ex-p">CH₃<span class="hn">COO⁻Na⁺</span> + C₂H₅OH</span>
+          <span class="rxn-ex-nota">saponificación (jabón/base)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃COOC₂H₅ + 2LiAlH₄</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + 2 LiAlH₄</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH₂OH + C₂H₅OH</span>
-          <span class="rxn-ex-nota">2 alcoholes (etanol + etanol)</span>
+          <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + C₂H₅<span class="hn">OH</span></span>
+          <span class="rxn-ex-nota">dos alcoholes (reducción total)</span>
         </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2308,11 +2889,82 @@ Grignard con éster: 2 equivalentes → alcohol 3° con 2 grupos R iguales</div>
         <span class="rxn-chev" id="chev-dv-1">▾</span>
       </div>
       <div class="rxn-body" id="body-dv-1">
-        <div class="rxn-eq">RCOCl  +  H₂O   ──→  RCOOH    +  HCl  (hidrólisis → ácido)
-RCOCl  +  R′OH  ──→  RCOOR′  +  HCl  (alcoholisis → éster)
-RCOCl  +  2NH₃  ──→  RCONH₂  +  NH₄Cl (aminólisis → amida)
-RCOCl  +  LiAlH₄──→  RCHO + R′OH    (reducción → aldehído, controlada)
-RCOCl  +  R′MgBr──→  RCOR′          (Grignard → cetona)</div>
+        <!-- Esquema general -->
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">C(=O)Cl</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">Nu−H</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">sustit. nucleofílica</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">C(=O)Nu</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H<span class="hn">Cl</span></span>
+          </div>
+        </div>
+        <!-- 5 nucleófilos posibles -->
+        <div class="mol-cmp" style="flex-direction:column;gap:6px;align-items:stretch">
+          <div style="font-size:.65rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Nucleófilo → Producto</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula"><span class="bp">H₂O</span>  (Nu = OH)</span>
+              <div class="mol-cmp-name">hidrólisis</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula">R−<span class="hn">COOH</span>  +  HCl</span>
+              <div class="mol-cmp-name">ácido carboxílico</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula"><span class="bp">R′OH</span>  (Nu = OR′)</span>
+              <div class="mol-cmp-name">alcoholisis</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula">R−<span class="hn">COOR′</span>  +  HCl</span>
+              <div class="mol-cmp-name">éster</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula"><span class="bp">2 NH₃</span>  (Nu = NH₂)</span>
+              <div class="mol-cmp-name">aminólisis</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula">R−<span class="hn">CONH₂</span>  +  NH₄Cl</span>
+              <div class="mol-cmp-name">amida (2° NH₃ neutraliza HCl)</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula"><span class="bp">LiAlH₄</span>  (reductora)</span>
+              <div class="mol-cmp-name">reducción controlada</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula">R−<span class="hn">CHO</span></span>
+              <div class="mol-cmp-name">aldehído (se para en C=O)</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula"><span class="bp">R′MgBr</span>  (Grignard)</span>
+              <div class="mol-cmp-name">adición organometálica</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
+            <div class="mol-cmp-card" style="flex:1;min-width:160px">
+              <span class="mol-cmp-formula">R−<span class="hn">COR′</span></span>
+              <div class="mol-cmp-name">cetona</div>
+            </div>
+          </div>
+        </div>
         <div class="rxn-cond">Cl⁻ es el mejor grupo saliente de los derivados: los cloruros son los más reactivos
 Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
         <div class="rxn-regla">📌 2 NH₃ en la aminólisis: 1 mol forma la amida, el 2° neutraliza el HCl liberado</div>
@@ -2346,12 +2998,51 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
         <span class="rxn-chev" id="chev-dv-2">▾</span>
       </div>
       <div class="rxn-body" id="body-dv-2">
-        <div class="rxn-eq">RCONH₂  +  H₂O  ──[H⁺ o OH⁻, Δ]──→  RCOOH  +  NH₃  (hidrólisis)
-RCONH₂  +  LiAlH₄  ──→  RCH₂NH₂  (reducción → amina primaria)
-
-Condensación de Claisen (autocondesación de éster):
-2 CH₃COOC₂H₅  ──[NaOEt]──→  CH₃COCH₂COOC₂H₅  +  EtOH
-                               (acetoacetato de etilo, β-cetoéster)</div>
+        <!-- Hidrólisis de amida -->
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">CONH₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">H₂O</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">H⁺ o OH⁻ + Δ</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">COOH</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod"><span class="hn">NH₃</span></span>
+          </div>
+        </div>
+        <!-- Reducción con LiAlH₄ -->
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">CONH₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">LiAlH₄</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">reducción total</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">CH₂NH₂</span></span>
+          </div>
+        </div>
+        <!-- Condensación de Claisen -->
+        <div style="font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Condensación de Claisen (autocondesación de éster)</div>
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">2  CH₃−<span class="bp">COOC₂H₅</span></span>
+            <div class="mol-cmp-name">éster (acetato de etilo ×2)</div>
+          </div>
+          <div class="mol-cmp-arr"><div class="mol-cmp-reag">NaOEt</div><div>──→</div></div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃−CO−<span class="hn">CH₂</span>−COOC₂H₅</span>
+            <div class="mol-cmp-name">β-cetoéster + EtOH</div>
+          </div>
+        </div>
         <div class="rxn-cond">Amidas: NH₂ es mal grupo saliente → las menos reactivas de los derivados
 Hidrólisis requiere condición fuerte (H⁺ o OH⁻ + calor)
 LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</div>
