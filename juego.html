@@ -180,6 +180,39 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .qt-drag{background:var(--c2b);color:var(--c2t)}
 .qt-id{background:var(--c1b);color:var(--c1t)}
 .qt-write{background:var(--c4b);color:var(--c4t)}
+.qt-rxnq{background:#fce7f3;color:#9d174d}
+/* RxnQ equation display */
+.rxnq-eq{display:flex;flex-wrap:nowrap;align-items:center;gap:10px 14px;
+  background:var(--surf2,#f1f5f9);border-radius:10px;padding:14px 18px;margin:12px 0;
+  overflow-x:auto}
+.rxnq-mol-box{background:var(--surf,#fff);border:1.5px solid var(--brd,#e2e8f0);
+  border-radius:8px;padding:10px 14px;display:flex;align-items:center;
+  justify-content:center;min-width:150px;max-width:280px;flex:0 0 auto}
+.rxnq-mol-box svg{max-width:100%;height:auto;display:block;overflow:visible}
+.rxnq-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  color:var(--tx);font-weight:600;text-align:center}
+/* Inline equation pieces — each is a direct flex child of rxnq-eq */
+.rxnq-plus{font-size:1.2rem;font-weight:700;color:#0369a1;
+  font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.rxnq-reagent{color:#0369a1;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;flex-shrink:0}
+/* Arrow column: condition label above the arrow */
+.rxnq-arrow-col{display:flex;flex-direction:column;align-items:center;
+  gap:2px;flex-shrink:0}
+.rxnq-cond{font-size:.72rem;color:var(--dimmer,#94a3b8);font-style:italic;
+  text-align:center;white-space:nowrap}
+.rxnq-arrow{color:#059669;font-size:1.2rem}
+.rxnq-blank-box{background:#fce7f3;border:2.5px dashed #9d174d;border-radius:8px;
+  padding:10px 22px;display:flex;align-items:center;justify-content:center;
+  min-width:70px;color:#9d174d;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.rxnq-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.rxnq-opt{width:100%;text-align:left;padding:10px 14px;border-radius:8px;
+  border:2px solid var(--brd,#e2e8f0);background:var(--surf,#fff);
+  cursor:pointer;font-size:.88rem;font-family:'JetBrains Mono',monospace;
+  transition:background .15s,border-color .15s;color:var(--tx)}
+.rxnq-opt:hover:not(:disabled){background:var(--surf2);border-color:var(--c1)}
+.rxnq-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+.rxnq-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
 
 .q-title{font-size:1rem;font-weight:700;color:var(--tx);margin-bottom:16px;line-height:1.5;flex-shrink:0}
 
@@ -4377,6 +4410,98 @@ function checkMC(ans,btn){
   const ok=norm(ans)===norm(q.ans);
   if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
   else{btn.classList.add('wrong');}
+  bumpStreak(ok);
+  showFeedback(ok,q.expl,q.ans);
+  history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
+}
+
+
+// ── RXNQ (Reaction Question) ──
+// Reuses same formula parser as generador.html (inline copy)
+(function(){
+const _S={'₀':0,'₁':1,'₂':2,'₃':3,'₄':4,'₅':5,'₆':6,'₇':7,'₈':8,'₉':9};
+function _si(s){let n=0;for(const c of s)if(_S[c]!==undefined)n=n*10+_S[c];return n;}
+function _pb(s){
+  if(s==='OH')return{s:'O',h:1};if(s==='NH₂')return{s:'N',h:2};
+  if(s==='Cl')return{s:'Cl',h:0};if(s==='Br')return{s:'Br',h:0};
+  if(s==='F')return{s:'F',h:0};if(s==='I')return{s:'I',h:0};return null;
+}
+function _pa(s,i){
+  const HA=['Cl','Br','OH','NH₂','F','I'];let hp=null;
+  for(const ha of HA){if(s.startsWith(ha,i)&&s[i+ha.length]==='C'){hp=ha;i+=ha.length;break;}}
+  if(i>=s.length||s[i]!=='C')return null;i++;
+  let h=0;if(i<s.length&&s[i]==='H'){i++;let d='';while(i<s.length&&_S[s[i]]!==undefined)d+=s[i++];h=d?_si(d):1;}
+  const nd={h},br=[];if(hp){const b=_pb(hp);if(b)br.push(b);}
+  while(i<s.length&&s[i]==='('){i++;let b='';while(i<s.length&&s[i]!==')')b+=s[i++];if(i<s.length)i++;const bn=_pb(b);if(bn)br.push(bn);}
+  if(!hp){for(const ha of HA){if(s.startsWith(ha,i)&&(i+ha.length>=s.length||!'−─=≡'.includes(s[i+ha.length]))){const b=_pb(ha);if(b){br.push(b);i+=ha.length;}while(i<s.length&&_S[s[i]]!==undefined)i++;break;}}}
+  if(br.length)nd.bd=br;return{node:nd,i};
+}
+function _pcs(s){
+  s=s.replace(/\s*\([^()]{2,50}\)\s*$/,'').trim().replace(/^\d+\s+/,'').trim();
+  if(!s||s.length>50||s.includes('C₆')||s.includes('???'))return null;
+  const ch=[];let i=0,nb=1;
+  while(i<s.length){
+    while(i<s.length&&s[i]===' ')i++;if(i>=s.length)break;
+    if('−─'.includes(s[i])){nb=1;i++;continue;}
+    if(s[i]==='='){nb=2;i++;continue;}if(s[i]==='≡'){nb=3;i++;continue;}
+    if(ch.length>0)ch[ch.length-1].bn=nb;nb=1;
+    const r=_pa(s,i);if(!r)return null;ch.push(r.node);i=r.i;
+  }
+  return ch.length?ch:null;
+}
+window._rxnqMolBox=function(str){
+  if(!str)return'';
+  try{const c=_pcs(str);if(c&&c.length){
+    let sv=mkDevSVG(c);
+    if(sv){
+      const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+      if(vb) sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+      sv=sv.replace('style="display:block;margin:auto"','style="display:block;overflow:visible;max-width:100%;height:auto"');
+      return`<div class="rxnq-mol-box">${sv}</div>`;
+    }
+  }}catch(e){}
+  return`<div class="rxnq-mol-box"><span class="rxnq-mol-txt">${str}</span></div>`;
+};
+})();
+
+function buildRxnQ(q){
+  // Arrow column: condition label sits above the arrow
+  function arrowCol(condText){
+    return`<div class="rxnq-arrow-col">${condText?`<span class="rxnq-cond">${condText}</span>`:''}<span class="rxnq-arrow">──→</span></div>`;
+  }
+  let eqHtml='';
+  if(q.subtype==='producto'){
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <span class="rxnq-plus">+</span>
+      <span class="rxnq-reagent">${q.reactivo}</span>
+      ${arrowCol(q.condicion)}
+      <div class="rxnq-blank-box">?</div>`;
+  } else if(q.subtype==='reactivo'){
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <span class="rxnq-plus">+</span>
+      <div class="rxnq-blank-box">?</div>
+      ${arrowCol(q.condicion)}
+      ${window._rxnqMolBox(q.producto)}`;
+  } else {
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <span class="rxnq-plus">+</span>
+      <span class="rxnq-reagent">${q.reactivo}</span>
+      <div class="rxnq-arrow-col"><div class="rxnq-blank-box" style="font-size:.82rem;padding:6px 12px">???</div><span class="rxnq-arrow">──→</span></div>
+      ${window._rxnqMolBox(q.producto)}`;
+  }
+  const opts=shuffle(q.opts);
+  return `<div class="rxnq-eq">${eqHtml}</div>
+    <div class="rxnq-opts">${opts.map(o=>`<button class="rxnq-opt" onclick="checkRxnQ('${o.replace(/'/,"\\'").replace(/\n/g,' ')}',this)">${o}</button>`).join('')}</div>`;
+}
+function checkRxnQ(ans,btn){
+  if(answered)return;
+  answered=true;stopTimer();
+  const q=questions[qIdx];
+  const allBtns=document.querySelectorAll('.rxnq-opt');
+  allBtns.forEach(b=>{b.disabled=true;if(b.textContent===q.ans)b.classList.add('correct');});
+  const ok=norm(ans)===norm(q.ans);
+  if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
+  else btn.classList.add('wrong');
   bumpStreak(ok);
   showFeedback(ok,q.expl,q.ans);
   history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
