@@ -2237,7 +2237,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-mol"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">X₂</span>
           </div>
@@ -2246,7 +2246,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
-            <span class="meq-prod">C₆H₅<span class="hn">X</span></span>
+            <span class="meq-prod"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c3t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">X</text></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-prod">H<span class="hn">X</span></span>
           </div>
@@ -2269,62 +2269,64 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="mech-step on" id="ms-ar-0-0">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">FeBr₃  +  Br₂  →  FeBr₄⁻  +  Br⁺</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">(o complejo Br—FeBr₃)</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">sin catalizador: Br₂ no ataca el anillo</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">⚡</div>
+                <div style="color:var(--c3t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">FeBr₃  +  Br₂  →  <strong>Br⁺</strong>  +  FeBr₄⁻</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">el catalizador "abre" el bromo y crea el atacante</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 1 de 3 — Electrófilo</div>
-            <div class="mech-step-h">FeBr₃ (ácido de Lewis) activa el Br₂ polarizándolo → genera el electrófilo Br⁺ (o complejo)</div>
-            <div class="mech-step-txt">El <strong>FeBr₃</strong> es un ácido de Lewis que acepta un par libre del Br₂, polarizando fuertemente el enlace Br−Br hasta generar el catión <em>Br⁺</em> (o el complejo equivalente). Sin catalizador, el Br₂ no es electrófilo suficientemente fuerte para atacar el anillo aromático estabilizado.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El catalizador crea el atacante (Br⁺)</div>
+            <div class="mech-step-h">El FeBr₃ "activa" el Br₂ y produce Br⁺, que sí puede atacar el anillo</div>
+            <div class="mech-step-txt">Imagina el <strong>Br₂</strong> como una tijera cerrada: por sí sola no puede cortar el anillo de benceno. El <strong>FeBr₃</strong> actúa como una "llave" que jala tan fuerte de uno de los bromos que el enlace Br−Br se rompe, generando el <strong>Br⁺</strong> (un bromo con carga positiva, hambriento de electrones). Ese Br⁺ sí puede atacar la nube de electrones del anillo. <em>Sin FeBr₃, el Br₂ no reacciona con el benceno</em> (a diferencia de los alquenos, que sí reaccionan directo).</div>
           </div>
           <div class="mech-step" id="ms-ar-0-1">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">anillo π  +  Br⁺  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">complejo σ (arenio)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">[C tiene ahora 4 enlaces, no aromat.]</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🎯</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">Br⁺  entra al anillo π</div>
+                <div style="color:var(--c4t);font-size:.8rem;font-family:'JetBrains Mono',monospace">C forma enlace nuevo con Br</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">intermediario: dura una fracción de segundo</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
-            <div class="mech-step-h">El π del anillo ataca el Br⁺ → complejo arenio: catión ciclohexadienilo con aromaticidad ROTA</div>
-            <div class="mech-step-txt">El <strong>sistema π del benceno</strong> dona electrones al Br⁺ formando el <em>complejo arenio</em> (o complejo σ): el carbono que recibe el Br pasa de sp² a sp³, rompiendo la aromaticidad. Esta especie catiónica es el intermediario de la SEA, con la carga deslocalizada sobre los 3 carbonos restantes.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El Br⁺ entra al anillo (intermediario)</div>
+            <div class="mech-step-h">La nube de electrones del benceno atrae el Br⁺ y forman un enlace C−Br</div>
+            <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong> (6 electrones que "flotan" por todo el anillo como una corona invisible). El <strong>Br⁺</strong>, con carga positiva, es atraído por esa nube y forma un enlace nuevo con uno de los carbonos del anillo. En ese instante, el carbono que recibió el Br pasa a tener 4 enlaces y ya no puede participar en la nube circular → <em>la aromaticidad se rompe temporalmente</em>. Esta especie "incómoda" se llama intermediario y dura poquísimo (fracción de segundo) antes de pasar al siguiente paso.</div>
           </div>
           <div class="mech-step" id="ms-ar-0-2">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">arenio  →  [FeBr₄⁻ abstrae H]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅Br  +  HBr  +  FeBr₃</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">aromaticidad RECUPERADA ✓</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">✅</div>
+                <div style="color:var(--c2t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">FeBr₄⁻  quita el H⁺</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">anillo recupera su nube π ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">bromobenceno + HBr + FeBr₃ ♻️</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 3 de 3 — Rearomatización</div>
-            <div class="mech-step-h">FeBr₄⁻ abstrae el H del carbono sustituido → recupera la aromaticidad y libera HBr</div>
-            <div class="mech-step-txt">El <strong>FeBr₄⁻</strong> (base débil) abstrae el H del carbono sustituido. Al hacerlo, los electrones del C−H van al sistema π, <strong>restaurando la aromaticidad</strong>. Se libera HBr y se regenera FeBr₃. El producto es el arilo halogenado. La fuerza impulsora es justamente la recuperación de la estabilidad aromática.</div>
+            <div class="mech-step-n">Paso 3 de 3 — El anillo se "cura" y recupera su estabilidad</div>
+            <div class="mech-step-h">El FeBr₄⁻ le quita el H⁺ al anillo → aromaticidad recuperada, FeBr₃ se regenera</div>
+            <div class="mech-step-txt">El <strong>FeBr₄⁻</strong> actúa como una mini-aspiradora y le quita el <strong>H⁺</strong> al carbono que tiene el Br. Cuando ese H se va, los electrones del enlace C−H vuelven al anillo y la <strong>nube π circular se restaura</strong> (aromaticidad recuperada). Productos: <em>bromobenceno</em> (el anillo intacto pero con Br en vez de H) + HBr (gas). El FeBr₃ se <strong>regenera</strong> (es catalizador: no se gasta) y puede repetir el proceso con otra molécula de Br₂. Resumen: ¡el anillo siempre prefiere la sustitución (conservar la aromaticidad) a la adición (romperla)!</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  Br₂</span>
-            <div class="mol-cmp-name">benceno (anillo π rico)</div>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg>  +  Br₂</span>
+            <div class="mol-cmp-name">benceno (anillo rico en electrones)</div>
           </div>
           <div class="mol-cmp-arr">
             <div class="mol-cmp-reag">FeBr₃ → Br⁺</div>
             <div>──[SEA]──→</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">C₆H₅<span class="hn">Br</span>  +  HBr</span>
-            <div class="mol-cmp-name">bromobenceno (aromaticidad conservada)</div>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c3t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br</text></svg>  +  HBr</span>
+            <div class="mol-cmp-name">bromobenceno (anillo intacto ✓)</div>
           </div>
         </div>
         <div class="rxn-cond">Sin catalizador NO reacciona · FeBr₃ (para Br₂) o AlCl₃ (para Cl₂) generan el electrófilo X⁺</div>
         <div class="rxn-regla">📌 SEA no necesita luz (diferencia clave con SR de alcanos) — el anillo se sustituye, no se adiciona</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + Br₂ →[FeBr₃]</span>
+          <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + Br₂ →[FeBr₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅<span class="hn">Br</span> + HBr</span>
+          <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c3t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br</text></svg> + HBr</span>
           <span class="rxn-ex-nota">bromobenceno</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2385,7 +2387,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-mol"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">HNO₃</span>
           </div>
@@ -2394,7 +2396,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
-            <span class="meq-prod">C₆H₅<span class="hn">NO₂</span></span>
+            <span class="meq-prod"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-prod">H₂O</span>
           </div>
@@ -2417,39 +2419,41 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="mech-step on" id="ms-ar-1-0">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HNO₃  +  H₂SO₄  →</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">H₂NO₃⁺  →  ⁺NO₂  +  H₂O</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">⁺NO₂ = electrófilo para el anillo</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🧪</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">H₂SO₄ + HNO₃  →  <strong>NO₂⁺</strong>  +  H₂O</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">el H₂SO₄ "activa" el HNO₃ generando el ión nitronio</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 1 de 3 — Catión nitronio</div>
-            <div class="mech-step-h">H₂SO₄ conc. protona el HNO₃ → catión nitronio ⁺NO₂ (electrófilo potente)</div>
-            <div class="mech-step-txt">El <strong>H₂SO₄ concentrado</strong> proton el HNO₃ formando el ácido nitroso protonado, que se descompone en el <em>catión nitronio ⁺NO₂</em> (o ion nitronium). Este catión lineal (N−O) es altamente electrofílico: el N lleva carga positiva y ataca el anillo.</div>
+            <div class="mech-step-n">Paso 1 de 3 — La mezcla nitrante crea el NO₂⁺ (ión nitronio)</div>
+            <div class="mech-step-h">El H₂SO₄ concentrado "activa" el HNO₃ y produce el NO₂⁺, el verdadero atacante del anillo</div>
+            <div class="mech-step-txt">Solos, el ácido nítrico (HNO₃) y el benceno casi no reaccionan. El truco está en la <strong>mezcla nitrante</strong>: juntar HNO₃ y H₂SO₄ concentrados. El H₂SO₄ actúa como un "activador": le agrega un H⁺ al HNO₃, que entonces se rompe y libera el <strong>ión nitronio NO₂⁺</strong> (el N tiene carga positiva). Ese NO₂⁺ es el que en realidad ataca el anillo, no el HNO₃ directamente. <em>Dato curioso</em>: el TNT (trinitrotolueno, explosivo famoso) se fabrica así, poniendo 3 grupos NO₂ en el anillo del tolueno.</div>
           </div>
           <div class="mech-step" id="ms-ar-1-1">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C₆H₆  +  ⁺NO₂  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">complejo arenio: C(H)(NO₂)  sp³</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">carga + deslocalizada en orto/para</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🎯</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">NO₂⁺  entra al anillo π</div>
+                <div style="color:var(--c4t);font-size:.8rem;font-family:'JetBrains Mono',monospace">C forma enlace nuevo con N</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">intermediario: anillo inestable por un momento</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
-            <div class="mech-step-h">El π del benceno ataca el N del ⁺NO₂ → complejo arenio (C sp³, sin aromaticidad)</div>
-            <div class="mech-step-txt">El anillo π ataca el <strong>N electrofílico del ⁺NO₂</strong>, formando el complejo arenio: el C portador pasa a sp³ con H y NO₂. La carga positiva queda deslocalizada en las posiciones orto y para del anillo. Esta especie es el intermediario clave de toda SEA.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El NO₂⁺ entra al anillo (intermediario)</div>
+            <div class="mech-step-h">El N del NO₂⁺ se une a un carbono del benceno. El anillo queda temporalmente "roto"</div>
+            <div class="mech-step-txt">El <strong>NO₂⁺</strong> tiene el nitrógeno (N) con carga positiva: necesita electrones urgente. Los encuentra en la nube π del benceno y forma un enlace nuevo <strong>C−N</strong>. El carbono que recibe el NO₂ pasa a tener 4 enlaces → sale de la nube circular → <em>aromaticidad rota momentáneamente</em>. Esta especie inestable es el intermediario: la carga positiva queda repartida en el anillo (en las posiciones opuestas al NO₂). Dura poquísimo antes de que el siguiente paso la "cure".</div>
           </div>
           <div class="mech-step" id="ms-ar-1-2">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">arenio  →  [HSO₄⁻ abstrae H]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅NO₂  +  H₂SO₄</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">aromaticidad RECUPERADA ✓</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">✅</div>
+                <div style="color:var(--c2t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">HSO₄⁻  quita el H⁺</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">anillo recupera su nube π ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">nitrobenceno + H₂O + H₂SO₄ ♻️</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 3 de 3 — Rearomatización</div>
-            <div class="mech-step-h">HSO₄⁻ abstrae el H del arenio → nitrobenceno + H₂SO₄ (catalizador regenerado)</div>
-            <div class="mech-step-txt">El <strong>HSO₄⁻</strong> (base conjugada del H₂SO₄) abstrae el H del arenio. Los electrones del C−H van al π → aromaticidad recuperada. El H₂SO₄ se regenera (catálisis). Producto: <em>nitrobenceno</em> (líquido amarillo, olor a almendras). Aplicación: precursor de la anilina (C₆H₅NH₂) por reducción.</div>
+            <div class="mech-step-n">Paso 3 de 3 — El anillo recupera su estabilidad, libera H₂O</div>
+            <div class="mech-step-h">El HSO₄⁻ quita el H⁺ al anillo → aromaticidad recuperada, H₂SO₄ se regenera</div>
+            <div class="mech-step-txt">El <strong>HSO₄⁻</strong> (el "resto" del H₂SO₄ después de ceder su H) actúa ahora como base: le quita el <strong>H⁺</strong> al carbono que tiene el NO₂. Los electrones del enlace C−H regresan al anillo → <strong>aromaticidad recuperada</strong>. Producto: <em>nitrobenceno</em> (líquido amarillo con olor a almendras). El H₂SO₄ se regenera (es catalizador). Si se quiere una segunda nitración (otro NO₂ en el anillo), hay que subir la temperatura — el primer NO₂ dificulta el ataque del siguiente NO₂⁺.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2465,21 +2469,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">ión nitronio (electrófilo)</div>
           </div>
           <div class="mol-cmp-arr">
-            <div class="mol-cmp-reag">+ C₆H₆</div>
+            <div class="mol-cmp-reag">+ <svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></div>
             <div>──[SEA]──→</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">C₆H₅<span class="hn">NO₂</span></span>
-            <div class="mol-cmp-name">nitrobenceno</div>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text></svg></span>
+            <div class="mol-cmp-name">nitrobenceno (líquido amarillo)</div>
           </div>
         </div>
         <div class="rxn-cond">Mezcla nitrante: HNO₃ conc. + H₂SO₄ conc. (50-60 °C) · T° baja → monosust. · T° alta → di/trinitración</div>
         <div class="rxn-regla">📌 TNT = tolueno con triple nitración · NO₂⁺ es el electrófilo (no HNO₃ directamente)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + HNO₃ →[H₂SO₄]</span>
+          <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + HNO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅<span class="hn">NO₂</span> + H₂O</span>
+          <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text></svg> + H₂O</span>
           <span class="rxn-ex-nota">nitrobenceno</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2542,7 +2546,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-mol"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">H₂SO₄ (fumante)</span>
           </div>
@@ -2551,7 +2555,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-line">────⇌────</span>
           </div>
           <div class="meq-side">
-            <span class="meq-prod">C₆H₅<span class="hn">SO₃H</span></span>
+            <span class="meq-prod"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c2t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-prod">H₂O</span>
           </div>
@@ -2574,44 +2578,47 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="mech-step on" id="ms-ar-2-0">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H₂SO₄ + SO₃  →  oleum (fumante)</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">SO₃: S tiene 3 O electroneg. → δ+</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">S = electrófilo para el anillo π</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">☁️</div>
+                <div style="color:var(--c2t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">H₂SO₄ fumante = H₂SO₄ + SO₃</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">S del SO₃ tiene δ+ → electrófilo</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">el S "hambriento" de electrones ataca el anillo</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 1 de 3 — Electrófilo SO₃</div>
-            <div class="mech-step-h">H₂SO₄ fumante (oleum) contiene SO₃ libre — el S electrofílico (δ+) ataca el anillo</div>
-            <div class="mech-step-txt">El <strong>SO₃</strong> en el oleum tiene el azufre muy deficiente en electrones (3 oxígenos que jalan e⁻): es un electrófilo fuerte. El anillo π del benceno ataca el S electrofílico iniciando la SEA.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El SO₃ es el electrófilo (S con δ+)</div>
+            <div class="mech-step-h">El H₂SO₄ fumante (oleum) contiene SO₃. El S está tan rodeado de oxígenos que queda "hambriento" de electrones</div>
+            <div class="mech-step-txt">El <strong>H₂SO₄ fumante</strong> (llamado "oleum") no es el ácido sulfúrico normal: contiene SO₃ (trióxido de azufre) disuelto en él. El SO₃ tiene el azufre (S) rodeado por 3 oxígenos muy "ávidos" de electrones, lo que deja al S con muy pocos electrones propios (carga δ+). Ese S "hambriento" es el electrófilo que ataca la nube π del benceno. <em>Diferencia del ácido sulfúrico normal</em>: el H₂SO₄ común no tiene suficiente SO₃ libre para sulfonar el benceno.</div>
           </div>
           <div class="mech-step" id="ms-ar-2-1">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆ + SO₃ → arenio−SO₃⁻</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">→  C₆H₅SO₃H</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ácido bencenosulfónico (grupo −SO₃H)</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🔗</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">anillo + SO₃ → intermediario</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">→ pierde H⁺ →  anillo−SO₃H ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">mismo patrón que las otras SEA</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
-            <div class="mech-step-h">El π ataca el S del SO₃ → complejo arenio; luego pérdida de H⁺ → ácido sulfónico</div>
-            <div class="mech-step-txt">El mecanismo sigue el patrón SEA: ataque electrofílico → complejo arenio → pérdida de H⁺ → rearomatización. El producto es el <em>ácido bencenosulfónico</em>: un fuerte ácido orgánico (pKa < 1) muy soluble en agua.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El S ataca el anillo y se forma el grupo −SO₃H</div>
+            <div class="mech-step-h">El anillo cede electrones al S del SO₃, pasa por el intermediario y pierde H⁺ → ácido sulfónico</div>
+            <div class="mech-step-txt">El mecanismo sigue exactamente el mismo patrón que la halogenación y nitración: 1) el S del SO₃ ataca la nube π del benceno → 2) se forma el intermediario (anillo inestable con C−S nuevo) → 3) se pierde el H⁺ del carbono → aromaticidad recuperada. El producto es el <em>ácido bencenosulfónico</em>, con el grupo <strong>−SO₃H</strong> en el anillo. Este ácido es muy soluble en agua (al contrario del benceno, que no se mezcla con agua) y tiene usos en la fabricación de detergentes y colorantes.</div>
           </div>
           <div class="mech-step" id="ms-ar-2-2">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₅SO₃H  +  H₂O/Δ  ⇌</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₆  +  H₂SO₄</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio reversible a alta T°</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🔄</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">anillo−SO₃H  +  H₂O/Δ</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">⇌  benceno  +  H₂SO₄</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">¡única SEA reversible! útil como "marcador temporal"</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 3 de 3 — Reversibilidad</div>
-            <div class="mech-step-h">Con agua caliente la sulfonación se invierte (desulfonación) → útil como grupo protector</div>
-            <div class="mech-step-txt">A diferencia de otras SEA, la sulfonación es <strong>reversible</strong>. Con agua caliente (Δ) el grupo −SO₃H se puede retirar del anillo (desulfonación). Esto la hace útil como <em>grupo protector temporal</em>: sulfonar → hacer otra reacción en el anillo → desulfonar para recuperar la posición.</div>
+            <div class="mech-step-n">Paso 3 de 3 — ¡Esta reacción es REVERSIBLE! (única SEA así)</div>
+            <div class="mech-step-h">Con agua caliente, el grupo −SO₃H se puede quitar del anillo (desulfonación) → muy útil en síntesis</div>
+            <div class="mech-step-txt">Aquí está la característica especial de la sulfonación: a diferencia de la halogenación, nitración y Friedel-Crafts (todas irreversibles), la sulfonación <strong>puede deshacerse calentando con agua</strong>. Al calentar, el grupo −SO₃H vuelve a ser H (desulfonación). ¿Para qué sirve esto? En síntesis: puedes poner el −SO₃H en una posición del anillo para <em>bloquear ese lugar</em>, hacer otra reacción en otro sitio del anillo, y al final quitar el −SO₃H como si fuera un "marcador temporal". Es como poner una curita en una parte del anillo mientras operas en otro lado.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  SO₃</span>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg>  +  SO₃</span>
             <div class="mol-cmp-name">benceno + trióxido de azufre</div>
           </div>
           <div class="mol-cmp-arr">
@@ -2619,7 +2626,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div>──────⇌──────</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">C₆H₅<span class="hn">SO₃H</span></span>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c2t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text></svg></span>
             <div class="mol-cmp-name">ácido bencenosulfónico</div>
           </div>
         </div>
@@ -2627,9 +2634,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-regla">📌 Única SEA reversible — el −SO₃H se usa como grupo bloqueante temporal en síntesis</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + SO₃ →[H₂SO₄]</span>
+          <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + SO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅<span class="hn">SO₃H</span></span>
+          <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c2t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text></svg></span>
           <span class="rxn-ex-nota">ácido bencenosulfónico</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2690,7 +2697,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-mol"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">R−Cl</span>
           </div>
@@ -2699,7 +2706,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
-            <span class="meq-prod">C₆H₅−<span class="hn">R</span></span>
+            <span class="meq-prod"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c1t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">R</text></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-prod">HCl</span>
           </div>
@@ -2722,44 +2729,46 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="mech-step on" id="ms-ar-3-0">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−Cl  +  AlCl₃  →</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R⁺  +  AlCl₄⁻  (o R⁺---AlCl₄⁻)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺ = electrófilo para el anillo</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">⚡</div>
+                <div style="color:var(--c1t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">R−Cl  +  AlCl₃  →  <strong>R⁺</strong>  +  AlCl₄⁻</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">el AlCl₃ genera el carbocatión (C con carga +)</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 1 de 3 — Carbocatión</div>
-            <div class="mech-step-h">AlCl₃ activa el R−Cl generando el carbocatión R⁺ (o complejo muy electrofílico)</div>
-            <div class="mech-step-txt">El <strong>AlCl₃</strong> acepta el par libre del Cl del R−Cl, generando el ion par o carbocatión libre R⁺. Este carbocatión (muy electrofílico) ataca el anillo aromático. <em>Problema</em>: los carbocationes pueden reorganizarse (trans-posición) antes del ataque → mezcla de productos.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El AlCl₃ crea el carbocatión R⁺</div>
+            <div class="mech-step-h">El AlCl₃ "jala" el Cl del R−Cl, creando el carbocatión R⁺ (un carbono con carga positiva)</div>
+            <div class="mech-step-txt">El <strong>AlCl₃</strong> (otro ácido de Lewis, como el FeBr₃) le quita el Cl al R−Cl, generando el <em>carbocatión R⁺</em>: un carbono con carga positiva, muy hambriento de electrones. Ese R⁺ es el electrófilo que ataca el anillo. <strong>Problema importante</strong>: los carbocationes son inestables y pueden "reorganizarse" (moverse un H de un carbono a otro para ser más estables antes de atacar el anillo). Esto puede dar un producto diferente al esperado. Por ejemplo, con 1-cloropropano se espera propilbenceno, pero puede formarse isopropilbenceno.</div>
           </div>
           <div class="mech-step" id="ms-ar-3-1">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆  +  R⁺  →  arenio</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">AlCl₄⁻ abstracta H </div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅R  +  HCl  +  AlCl₃</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🎯</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">R⁺  entra al anillo → intermediario</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">AlCl₄⁻ quita H⁺ →  anillo−R ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">alquilbenceno + HCl + AlCl₃ ♻️</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
-            <div class="mech-step-h">R⁺ ataca el anillo π → complejo arenio; AlCl₄⁻ está presente como base</div>
-            <div class="mech-step-txt">El R⁺ ataca el anillo formando el complejo arenio. El AlCl₄⁻ (o HCl liberado) abstrae el H del C portador del R → rearomatización. Se regenera el <strong>AlCl₃</strong> (catalizador). Producto: alquilbenceno Ar−R.</div>
+            <div class="mech-step-n">Paso 2 de 3 — R⁺ ataca el anillo y se forma el alquilbenceno</div>
+            <div class="mech-step-h">El R⁺ entra al anillo (mismo patrón SEA), el AlCl₄⁻ quita el H⁺, el anillo recupera la aromaticidad</div>
+            <div class="mech-step-txt">El <strong>R⁺</strong> ataca la nube π del benceno: forma enlace C−R, intermediario inestable, pérdida de H⁺ (captado por el AlCl₄⁻) → aromaticidad recuperada. Producto: el <em>alquilbenceno</em> Ar−R (el anillo con la cadena alquílica). El <strong>AlCl₃ se regenera</strong> (es catalizador) y libera HCl (gas). Ejemplo: benceno + CH₃Cl → tolueno (C₆H₅−CH₃). El tolueno es el disolvente de muchas pinturas y barnices.</div>
           </div>
           <div class="mech-step" id="ms-ar-3-2">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C₆H₅R  más reactivo que C₆H₆</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">polialquilación frecuente</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">solución: acilación (no polialkila)</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">⚠️</div>
+                <div style="color:var(--err);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">alquilbenceno MÁS reactivo que benceno</div>
+                <div style="color:var(--err);font-size:.8rem;font-family:'JetBrains Mono',monospace">→ polialquilación (mezcla de productos)</div>
+                <div style="color:var(--c2t);font-size:.78rem;font-family:'JetBrains Mono',monospace">solución: usar exceso C₆H₆ o acilación FC</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 3 de 3 — Limitaciones</div>
-            <div class="mech-step-h">El alquilbenceno es más reactivo que el benceno → polialquilación; grupos voluminosos dan problemas</div>
-            <div class="mech-step-txt">La <strong>polialquilación</strong> es el mayor problema: el grupo alquilo activa el anillo (dador por inducción), haciéndolo más reactivo que el benceno inicial. Se forma mezcla de mono, di y trialquilado. Solución: usar exceso de benceno para minimizar polialquilación, o preferir la acilación Friedel-Crafts (no hay poliacilación).</div>
+            <div class="mech-step-n">Paso 3 de 3 — ¡El producto es más reactivo! Problema de polialquilación</div>
+            <div class="mech-step-h">El grupo alquilo activa el anillo → reacciona de nuevo → se forman di- y trialquilbencenos (mezcla)</div>
+            <div class="mech-step-txt">Aquí está el gran problema de la alquilación FC: el grupo alquilo R "empuja" electrones al anillo, haciéndolo <strong>más rico en electrones</strong> que el benceno original. Un anillo más rico reacciona más rápido con electrófilos → el alquilbenceno que se acaba de formar reacciona de nuevo con otro R⁺ → <em>polialquilación</em> (mezcla de mono, di, trialquilado). Soluciones: 1) usar mucho exceso de benceno para que el R⁺ sea más probable que encuentre benceno que alquilbenceno; 2) mejor aún, usar la <strong>acilación FC</strong> (siguiente reacción), que no tiene este problema porque el grupo −C=O que queda desactiva el anillo.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃Cl</span>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg>  +  CH₃Cl</span>
             <div class="mol-cmp-name">benceno + clorometano</div>
           </div>
           <div class="mol-cmp-arr">
@@ -2767,7 +2776,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div>──[FC-alquil.]──→</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">C₆H₅−<span class="hn">CH₃</span>  +  HCl</span>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c1t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃</text></svg>  +  HCl</span>
             <div class="mol-cmp-name">tolueno (metilbenceno)</div>
           </div>
         </div>
@@ -2775,9 +2784,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-regla">📌 Limitación: R⁺ puede reorganizarse (producto rearreglado) · FC-acilación evita esto</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + CH₃Cl →[AlCl₃]</span>
+          <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + CH₃Cl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅−<span class="hn">CH₃</span> + HCl</span>
+          <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c1t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃</text></svg> + HCl</span>
           <span class="rxn-ex-nota">tolueno</span>
         </div>
         <div class="quiz-sep"></div>
@@ -2838,7 +2847,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol"><span class="bp">C₆H₆</span></span>
+            <span class="meq-mol"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">R−CO−Cl</span>
           </div>
@@ -2847,7 +2856,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
-            <span class="meq-prod">C₆H₅−<span class="hn">CO−R</span></span>
+            <span class="meq-prod"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CO−R</text></svg></span>
             <span class="meq-plus">+</span>
             <span class="meq-prod">HCl</span>
           </div>
@@ -2870,44 +2879,46 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="mech-step on" id="ms-ar-4-0">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOCl  +  AlCl₃  →</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡O⁺  +  AlCl₄⁻</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">catión acilio: estabilizado R−C(+)=O</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">⚡</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">RCOCl  +  AlCl₃  →  <strong>RC≡O⁺</strong>  +  AlCl₄⁻</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">catión acilio: más estable que R⁺, no se reorganiza</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 1 de 3 — Catión acilio</div>
-            <div class="mech-step-h">AlCl₃ activa el cloruro de ácido → catión acilio R−C≡O⁺ (estabilizado por resonancia)</div>
-            <div class="mech-step-txt">El <strong>AlCl₃</strong> abstrae el Cl del RCOCl, formando el <em>catión acilio R−C≡O⁺</em>. A diferencia del carbocatión de la alquilación, el catión acilio está <strong>estabilizado por resonancia</strong> (R−C⁺=O ↔ R−C=O⁺) y NO se reorganiza → producto único y controlado.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El AlCl₃ crea el catión acilio RC≡O⁺</div>
+            <div class="mech-step-h">El AlCl₃ activa el cloruro de acilo RCOCl → catión acilio RC≡O⁺, que NO se reorganiza (más estable que R⁺)</div>
+            <div class="mech-step-txt">El <strong>AlCl₃</strong> jala el Cl del RCOCl (cloruro de acilo), generando el <em>catión acilio RC≡O⁺</em>. Este catión es <strong>más estable que el carbocatión R⁺</strong> de la alquilación, porque la carga positiva se reparte entre el C y el O (resonancia: R−C⁺=O ↔ R−C=O). Esa estabilidad extra significa que el catión acilio <em>no se reorganiza</em>: siempre es el mismo electrófilo predecible. Resultado: un solo tipo de producto, sin la mezcla de regioisómeros que da la alquilación.</div>
           </div>
           <div class="mech-step" id="ms-ar-4-1">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆  +  R−C≡O⁺  →  arenio</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">AlCl₄⁻ abstrae H </div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅−CO−R  (arilcetona)</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🎯</div>
+                <div style="color:var(--c4t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">RC≡O⁺  entra al anillo → intermediario</div>
+                <div style="color:var(--c2t);font-size:.8rem;font-family:'JetBrains Mono',monospace">→ pierde H⁺ →  arilcetona Ar−CO−R ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">el grupo −C=O desactiva el anillo → no hay poliacilación</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 2 de 3 — Ataque al anillo</div>
-            <div class="mech-step-h">El catión acilio (electrófilo) ataca el anillo π → complejo arenio → pérdida de H⁺</div>
-            <div class="mech-step-txt">El catión acilio ataca el anillo formando el arenio; la rearomatización libera H⁺ (captado por AlCl₄⁻). Producto: <em>arilcetona</em> Ar−CO−R. A diferencia de la alquilación, el grupo −COR <strong>desactiva</strong> el anillo (retira e⁻ por resonancia) → no hay poliacilación.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El catión acilio ataca el anillo → arilcetona</div>
+            <div class="mech-step-h">RC≡O⁺ entra al anillo, pasa por el intermediario, pierde H⁺ → arilcetona Ar−CO−R (sin poliacilación)</div>
+            <div class="mech-step-txt">El catión acilio (RC≡O⁺) ataca la nube π del benceno, forma el intermediario inestable, y pierde H⁺ → aromaticidad recuperada. Producto: la <em>arilcetona</em> Ar−CO−R. <strong>Ventaja clave</strong>: el grupo carbonilo (−C=O) que queda unido al anillo <em>retira electrones del anillo</em> (lo desactiva). Un anillo menos rico en electrones reacciona más lento → la segunda acilación no ocurre → <strong>no hay poliacilación</strong>. Exactamente lo opuesto a la alquilación.</div>
           </div>
           <div class="mech-step" id="ms-ar-4-2">
             <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">Alquilación: polialquila + reorganiza</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Acilación: producto único ✓</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">luego reducir C=O → CH₂ (Clemmensen)</div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;text-align:center">
+                <div style="font-size:1.6rem">🏆</div>
+                <div style="color:var(--err);font-size:.78rem;font-family:'JetBrains Mono',monospace">Alquilación: mezcla + reorganiza ✗</div>
+                <div style="color:var(--c2t);font-weight:700;font-size:.88rem;font-family:'JetBrains Mono',monospace">Acilación: 1 producto limpio ✓</div>
+                <div style="color:var(--dimmer);font-size:.73rem;font-family:'Outfit',sans-serif;font-style:italic">truco: acila → reduce C=O con Clemmensen → alquilbenceno puro</div>
+              </div>
             </div>
-            </div>
-            <div class="mech-step-n">Paso 3 de 3 — Ventaja vs alquilación</div>
-            <div class="mech-step-h">Sin reorganización de carbocatión · sin poliacilación · producto único → acilación preferida en síntesis</div>
-            <div class="mech-step-txt">La acilación es <strong>superior a la alquilación</strong> para síntesis controlada: el catión acilio no se reorganiza (sin mezcla de regioisómeros), y el grupo desactivante C=O evita la poliacilación. Para obtener alquilbenceno de cadena sin ramificación: acilación primero → reducción de Clemmensen (C=O → CH₂) → alquilbenceno limpio.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Por qué la acilación es mejor que la alquilación en síntesis</div>
+            <div class="mech-step-h">Sin reorganización, sin poliacilación → producto monosustituido puro. Para alcanos: acila + reduce (Clemmensen)</div>
+            <div class="mech-step-txt">Comparación directa: <strong>Alquilación FC</strong> → el R⁺ puede reorganizarse (mezcla de isómeros) + el alquilbenceno es más reactivo (polialquilación) → mezcla difícil de separar. <strong>Acilación FC</strong> → el catión acilio no se reorganiza (producto único) + el −C=O desactiva el anillo (sin poliacilación) → producto limpio. Truco avanzado: si quieres un alquilbenceno puro sin ramificaciones, en lugar de alquilar directo, primero <em>acila</em> (para tener un solo producto) y después <em>reduce</em> el grupo C=O a −CH₂− usando el método de Clemmensen (Zn/Hg, HCl). Resultado: el alquilbenceno exacto que querías, sin mezclas.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃COCl</span>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg>  +  CH₃COCl</span>
             <div class="mol-cmp-name">benceno + cloruro de acetilo</div>
           </div>
           <div class="mol-cmp-arr">
@@ -2915,17 +2926,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div>──[FC-acil.]──→</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">C₆H₅−<span class="hn">CO−CH₃</span>  +  HCl</span>
-            <div class="mol-cmp-name">acetofenona</div>
+            <span class="mol-cmp-formula"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="7" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CO−CH₃</text></svg>  +  HCl</span>
+            <div class="mol-cmp-name">acetofenona (arilcetona)</div>
           </div>
         </div>
         <div class="rxn-cond">Reactivo: cloruro de acilo (RCOCl) o anhídrido · AlCl₃ ≥ 1 mol · el grupo −C=O formado desactiva el anillo → no hay poliacilación</div>
         <div class="rxn-regla">📌 Ventaja vs alquilación: producto monosustituido limpio · el acilio no se reorganiza</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">C₆H₆</span> + CH₃COCl →[AlCl₃]</span>
+          <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + CH₃COCl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">C₆H₅<span class="hn">COCH₃</span> + HCl</span>
+          <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="7" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CO−CH₃</text></svg> + HCl</span>
           <span class="rxn-ex-nota">acetofenona (arilcetona)</span>
         </div>
         <div class="quiz-sep"></div>
