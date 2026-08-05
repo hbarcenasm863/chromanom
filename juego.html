@@ -187,8 +187,8 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   overflow-x:auto}
 .rxnq-mol-box{background:var(--surf,#fff);border:1.5px solid var(--brd,#e2e8f0);
   border-radius:8px;padding:10px 14px;display:flex;align-items:center;
-  justify-content:center;min-width:80px}
-.rxnq-mol-box svg{width:auto;height:auto;max-width:260px;display:block}
+  justify-content:center;min-width:150px;max-width:280px;flex:0 0 auto}
+/* SVG width set inline via _rxnqMolBox */
 .rxnq-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.82rem;
   color:var(--tx);font-weight:600;text-align:center}
 /* Inline equation pieces — each is a direct flex child of rxnq-eq */
@@ -4452,7 +4452,13 @@ function _pcs(s){
 }
 window._rxnqMolBox=function(str){
   if(!str)return'';
-  try{const c=_pcs(str);if(c&&c.length){const sv=mkDevSVG(c);if(sv)return`<div class="rxnq-mol-box">${sv}</div>`;}}catch(e){}
+  try{const c=_pcs(str);if(c&&c.length){
+    let sv=mkDevSVG(c);
+    if(sv){
+      sv=sv.replace('style="display:block;margin:auto"','style="width:100%;height:auto;display:block;overflow:visible"');
+      return`<div class="rxnq-mol-box">${sv}</div>`;
+    }
+  }}catch(e){}
   return`<div class="rxnq-mol-box"><span class="rxnq-mol-txt">${str}</span></div>`;
 };
 })();
