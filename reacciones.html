@@ -266,6 +266,61 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <!-- Comparación molecular -->
+
+        <!-- ── STEPPER: Halogenación Radical SR — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-al-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Halogenación Radical SR — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-al-0" onclick="mechStep('al-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-al-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-al-0" onclick="mechStep('al-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-al-0">
+            <span class="mech-dot on" onclick="mechDot('al-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('al-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('al-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-al-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Br−Br  →[hν]  2 Br•</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">cada Br lleva 1 electrón</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">radical libre = muy reactivo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Iniciación</div>
+            <div class="mech-step-h">La luz UV rompe el X−X homolíticamente: cada átomo retiene un electrón → radical X•</div>
+            <div class="mech-step-txt">El enlace Br−Br (o Cl−Cl) se rompe de forma <strong>homolítica</strong>: cada átomo se lleva <em>un</em> electrón, generando dos <strong>radicales libres X•</strong>. Este paso requiere <strong>energía luminosa (hν)</strong> o alta temperatura. Sin él la reacción no comienza.</div>
+          </div>
+          <div class="mech-step" id="ms-al-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Br•  +  R−H  →  R•  +  HBr</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">luego:</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R•  +  Br₂  →  R−Br  +  Br•</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Br• se regenera → cadena continua</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Propagación</div>
+            <div class="mech-step-h">X• arranca un H del alcano → R• que a su vez reacciona con X₂, regenerando X• (cadena)</div>
+            <div class="mech-step-txt">La propagación son DOS pasos que se repiten: <strong>① Br• abstrae un H</strong> del alcano → forma HBr y el radical alquilo R•. <strong>② R• reacciona con Br₂</strong> → forma el producto R−Br y regenera Br•. Este ciclo se repite miles de veces por cada radical iniciado.</div>
+          </div>
+          <div class="mech-step" id="ms-al-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R•  +  Br•  →  R−Br</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R•  +  R•   →  R−R</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Br• + Br•  →  Br₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ningún radical queda libre → cadena termina</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Terminación</div>
+            <div class="mech-step-h">Dos radicales se combinan entre sí, consumiendo los radicales y deteniendo la cadena</div>
+            <div class="mech-step-txt">Cuando dos radicales se encuentran se <strong>combinan formando un enlace covalente</strong> (ningún radical queda suelto). Los productos de terminación son R−X, R−R o X₂. La terminación es poco frecuente porque los radicales son muy reactivos y suelen propagar antes de terminar.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−CH₂−CH₃</span>
@@ -345,6 +400,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">(n+1) H₂O</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Combustión Completa — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-al-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Combustión Completa — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-al-1" onclick="mechStep('al-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-al-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-al-1" onclick="mechStep('al-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-al-1">
+            <span class="mech-dot on" onclick="mechDot('al-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('al-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('al-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-al-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--tx);font-weight:700;font-size:.82rem">CₙH₂ₙ₊₂  +  O₂ exceso  →</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">energía: chispa o llama</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">TODOS los C → CO₂</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">TODOS los H → H₂O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Condición</div>
+            <div class="mech-step-h">Exceso de O₂ y suficiente temperatura garantizan la oxidación total de todos los átomos</div>
+            <div class="mech-step-txt">Para que la combustión sea completa se necesita <strong>exceso de O₂</strong>. Con O₂ suficiente, cada átomo de carbono se oxida completamente hasta CO₂ y cada par de átomos de H forma H₂O. La llama es azulada o invisible (indicador visual de combustión completa).</div>
+          </div>
+          <div class="mech-step" id="ms-al-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₄  +  2 O₂  →  CO₂ + 2 H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₂H₆ + 7/2 O₂ → 2CO₂ + 3H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₃H₈ + 5 O₂  →  3CO₂ + 4H₂O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Balance</div>
+            <div class="mech-step-h">El balance estequiométrico requiere (3n+1)/2 moles de O₂ por mol de CₙH₂ₙ₊₂</div>
+            <div class="mech-step-txt">Fórmula práctica: CₙH₂ₙ₊₂ necesita <em>(3n+1)/2</em> mol O₂. <strong>Ejemplo CH₄</strong>: 1 C → 1 CO₂; 4 H → 2 H₂O; O₂ = (3·1+1)/2 = 2. <strong>C₃H₈</strong>: (3·3+1)/2 = 5 mol O₂.</div>
+          </div>
+          <div class="mech-step" id="ms-al-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₄ + 2O₂ → CO₂ + 2H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">ΔH = −890 kJ/mol (metano)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Aplicaciones: cocina, calefacción, motores</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Energía</div>
+            <div class="mech-step-h">La combustión libera energía (exotérmica) útil como combustible industrial y doméstico</div>
+            <div class="mech-step-txt">La combustión es <strong>exotérmica</strong>: los productos (CO₂, H₂O) tienen menor energía que los reactivos. La energía liberada es el calor de combustión. <strong>Uso práctico</strong>: gas natural (metano), propano (gas de cocina), gasolina (mezcla de alcanos C₅–C₁₂).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₄  +  2 O₂</span>
@@ -423,6 +532,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">H₂O</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Combustión Incompleta — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-al-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Combustión Incompleta — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-al-2" onclick="mechStep('al-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-al-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-al-2" onclick="mechStep('al-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-al-2">
+            <span class="mech-dot on" onclick="mechDot('al-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('al-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('al-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-al-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CₙH₂ₙ₊₂  +  O₂ escaso  →</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">Si muy poco O₂: C (hollín) + H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Si moderado: CO + H₂O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — O₂ limitado</div>
+            <div class="mech-step-h">Con poco O₂ el carbono no alcanza a oxidarse completamente y se forman CO y/o C (hollín)</div>
+            <div class="mech-step-txt">Cuando el <strong>O₂ es insuficiente</strong>, el carbono no llega a oxidarse hasta CO₂. Dependiendo de cuánto O₂ hay: si es muy poco se deposita <strong>carbono sólido (hollín)</strong>; si es moderado se forma el gas tóxico <strong>CO (monóxido de carbono)</strong>.</div>
+          </div>
+          <div class="mech-step" id="ms-al-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">combustión incompleta:</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">C  (hollín) + H₂O</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">CO  (gas tóxico) + H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CO₂ (completa) + H₂O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Productos</div>
+            <div class="mech-step-h">CO es inodoro, incoloro y extremadamente tóxico — se une a la hemoglobina bloqueando el O₂</div>
+            <div class="mech-step-txt">El CO es peligroso porque se une a la hemoglobina con <strong>200× más afinidad</strong> que el O₂, impidiendo el transporte de oxígeno (intoxicación por CO). El hollín (C) ensucia y tapa cañerías. La llama amarilla/naranja es <em>señal visual</em> de combustión incompleta.</div>
+          </div>
+          <div class="mech-step" id="ms-al-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Completa: llama azul → CO₂ + H₂O</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Incompleta: llama amarilla → CO + C</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Misma fórmula del hidrocarburo, distinto O₂</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Comparación</div>
+            <div class="mech-step-h">Completa → azul/invisible · Incompleta → amarilla/naranja; elige el combustible según el contexto</div>
+            <div class="mech-step-txt"><strong>Regla práctica</strong>: si la llama de un quemador es amarilla → ajustar el aire (más O₂). En motores, la combustión incompleta genera hollín que obstruye el catalizador. <strong>Aplicación</strong>: el análisis de los gases de escape revela si la combustión es completa o no.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">O₂ deficiencia leve</span>
@@ -485,6 +648,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">CH₃−CH₂−CH₂<span class="hn">X</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Apertura del Ciclopropano — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-al-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Apertura del Ciclopropano — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-al-3" onclick="mechStep('al-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-al-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-al-3" onclick="mechStep('al-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-al-3">
+            <span class="mech-dot on" onclick="mechDot('al-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('al-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('al-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-al-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ángulo ideal sp³: 109.5°</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">ciclopropano: 60° ← forzado</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">energía de tensión: ~115 kJ/mol</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Tensión angular</div>
+            <div class="mech-step-h">El ángulo C−C−C forzado a 60° (vs 109.5° ideal) hace al ciclopropano muy reactivo</div>
+            <div class="mech-step-txt">El carbono sp³ forma ángulos naturales de 109.5°. En ciclopropano (triángulo), los ángulos se fuerzan a <strong>60°</strong>, creando una enorme <em>tensión angular</em>. Esta tensión almacena energía que hace al anillo muy proclive a romperse, reaccionando por adición (no sustitución) como los alquenos.</div>
+          </div>
+          <div class="mech-step" id="ms-al-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">△C₃H₆  +  H⁺  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH−CH₂⁺ (carbocatión)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ruptura del C−C más tenso</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Ataque</div>
+            <div class="mech-step-h">H⁺ del HX protona uno de los C del anillo; el enlace C−C opuesto se rompe heterolíticamente</div>
+            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> ataca uno de los carbonos del anillo. La tensión del anillo facilita la ruptura heterolítica del enlace C−C opuesto, generando un <strong>carbocatión en el extremo</strong>. Este paso es el determinante de la velocidad.</div>
+          </div>
+          <div class="mech-step" id="ms-al-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH−CH₂⁺  +  Br⁻  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH₂−CH₂Br</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">1-bromopropano (cadena abierta)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Cierre</div>
+            <div class="mech-step-h">X⁻ ataca el carbocatión → 1-haloalcano de cadena abierta (no se aplica Markovnikov en anillo simétrico)</div>
+            <div class="mech-step-txt">El <strong>X⁻</strong> (Br⁻, Cl⁻) ataca el carbocatión, cerrando el mecanismo. El producto es un <strong>haloalcano de cadena abierta</strong>. Nota: ciclopentano y superiores tienen ángulos más cercanos a 109.5° y <em>no</em> abren por adición (reaccionan como alcanos por SR).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">△</span> (ángulo 60°)</span>
@@ -577,6 +793,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">−CH−C<span class="hn">X</span>−</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidrohalogenación — Mecanismo (Markovnikov) ── -->
+        <div class="mech-stepper" id="mech-aq-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidrohalogenación — Mecanismo (Markovnikov)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-0" onclick="mechStep('aq-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-0" onclick="mechStep('aq-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-0">
+            <span class="mech-dot on" onclick="mechDot('aq-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₃−CH=CH₂  +  H⁺  →</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H⁺ → C1 (más H, menos sustituido)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH⁺−CH₃  (carbocatión 2°)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
+            <div class="mech-step-h">H⁺ del HX protona el carbono del doble enlace con MÁS hidrógenos (menos sustituido)</div>
+            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH⁺−CH₃ (2°, estable)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">vs.</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">CH₃−CH₂−CH₂⁺ (1°, inestable)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">más alquilos → más estabilización</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
+            <div class="mech-step-h">El carbocatión se estabiliza por hiperconjugación e inducción de los grupos alquilo vecinos</div>
+            <div class="mech-step-txt">La estabilidad del carbocatión aumenta con más grupos alquilo: 3° > 2° > 1°. Los grupos alquilo <strong>donan densidad electrónica</strong> al carbono positivo por <em>hiperconjugación</em> e inducción. La reacción pasa por el carbocatión más estable (camino de menor energía).</div>
+          </div>
+          <div class="mech-step" id="ms-aq-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH⁺−CH₃  +  Br⁻  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH(Br)−CH₃</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">2-bromopropano ✓ Markovnikov</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Ataque de X⁻</div>
+            <div class="mech-step-h">X⁻ ataca el carbocatión por cualquier cara → producto de Markovnikov (X en C más sustituido)</div>
+            <div class="mech-step-txt">El haluro <strong>X⁻</strong> (nucleófilo) ataca el carbocatión plano por cualquier cara. El resultado es el <strong>haloalcano de Markovnikov</strong>: X en el carbono más sustituido (con menos H). Este mecanismo de dos pasos es la <em>adición electrofílica</em> clásica al doble enlace.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -654,6 +924,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">−C<span class="hn">X</span>−C<span class="hn">X</span>−</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Halogenación del Doble Enlace — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-aq-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Halogenación del Doble Enlace — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-1" onclick="mechStep('aq-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-1" onclick="mechStep('aq-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-1">
+            <span class="mech-dot on" onclick="mechDot('aq-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C=C  +  Br−Br</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">π induce: Br(δ+)−Br(δ−)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">el Br δ+ actúa como electrófilo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Polarización</div>
+            <div class="mech-step-h">El doble enlace π polariza el X₂: un X se vuelve electrofílico (δ+) y el otro nucleofílico (δ−)</div>
+            <div class="mech-step-txt">El doble enlace π, rico en electrones, <strong>induce un dipolo</strong> en el Br₂: el Br más cercano adquiere carga parcial positiva (δ+) y el más lejano carga negativa (δ−). Este Br(δ+) actúa como electrófilo en el paso siguiente.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">ion bromonio:  CH₂−CH₂</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">          ╲Br⁺╱ (puente)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Br⁻ queda libre como nucleófilo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Ion halonio</div>
+            <div class="mech-step-h">El π ataca al Br(δ+), formando un ión puente de bromonio cíclico de 3 miembros</div>
+            <div class="mech-step-txt">Los electrones π atacan al Br(δ+) formando el <strong>ión puente de bromonio</strong>: un catión cíclico de 3 miembros donde el Br comparte carga con ambos carbonos. El Br⁻ resultante queda libre en solución.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Br⁻ ataca cara opuesta al Br⁺</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₂Br−CH₂Br  (trans/anti)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">⇒ dihaloalcano vicinal trans</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Antiadición</div>
+            <div class="mech-step-h">Br⁻ ataca desde la cara OPUESTA al puente de bromonio → adición trans (antiadición)</div>
+            <div class="mech-step-txt">El ion bromonio bloquea una cara, por lo que el Br⁻ <strong>solo puede atacar por la cara opuesta</strong>. Esto produce la <em>antiadición</em> (trans): los dos Br quedan en lados opuestos del enlace. Resultado: 1,2-dihaloalcano <strong>trans-vicinal</strong> (comprobable por estereoquímica).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -716,6 +1039,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcano)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidrogenación Catalítica — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-aq-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidrogenación Catalítica — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-2" onclick="mechStep('aq-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-2" onclick="mechStep('aq-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-2">
+            <span class="mech-dot on" onclick="mechDot('aq-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">superficie:  Ni / Pd / Pt</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">H₂ → 2H (adsorbidos)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C=C también se adsorbe</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Adsorción</div>
+            <div class="mech-step-h">H₂ y el alqueno se adsorben en la superficie del catalizador metálico (Ni, Pd, Pt)</div>
+            <div class="mech-step-txt">El catalizador metálico (Ni, Pd, Pt) <strong>adsorbe el H₂</strong> en su superficie, rompiendo el enlace H−H en dos átomos de H enlazados débilmente al metal. Simultáneamente el alqueno se adsorbe con su cara π.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">H y H → mismo lado del C=C</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">sin-adición (cis)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">⇒ alcano saturado formado</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Transferencia</div>
+            <div class="mech-step-h">Los dos H migran al mismo lado del doble enlace (sin-adición) mientras está adsorbido en el metal</div>
+            <div class="mech-step-txt">Los dos átomos de H se transfieren <strong>simultáneamente desde la misma cara</strong> del doble enlace. Esto produce la <em>sin-adición</em> (o adición cis). El C=C desaparece y se forma el alcano.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH₂−CH₃ (propano)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">catalizador libre → reutilizable</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">sin consumo de Ni/Pd (heterogéneo)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Desorción</div>
+            <div class="mech-step-h">El alcano resultante se desorbe de la superficie; el catalizador queda regenerado y sin consumir</div>
+            <div class="mech-step-txt">El producto <strong>alcano se desorbe</strong> de la superficie metálica, dejando el catalizador libre para otra reacción. El catalizador no se consume (catálisis heterogénea). Aplicación industrial: hidrogenación de aceites vegetales → grasas sólidas (margarinas).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -778,6 +1154,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcohol)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidratación del Alqueno — Mecanismo (Markovnikov) ── -->
+        <div class="mech-stepper" id="mech-aq-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidratación del Alqueno — Mecanismo (Markovnikov)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-3" onclick="mechStep('aq-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-3" onclick="mechStep('aq-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-3">
+            <span class="mech-dot on" onclick="mechDot('aq-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₃−CH=CH₂  +  H⁺  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH⁺−CH₃ (carbocatión 2°)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">igual que HX: H al C con más H</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
+            <div class="mech-step-h">H⁺ del H₂SO₄ se adiciona al C del doble enlace con más H (menos sustituido)</div>
+            <div class="mech-step-txt">El mecanismo es idéntico al de la hidrohalogenación: el <strong>H⁺</strong> protona el alqueno siguiendo la regla de Markovnikov. El carbocatión más sustituido (más estable) se forma en el carbono con menos H.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH⁺−CH₃  +  H₂O  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH(OH₂⁺)−CH₃</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">O dona par libre → enlace O−C</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Ataque de H₂O</div>
+            <div class="mech-step-h">La molécula de agua actúa como nucleófilo y ataca el carbocatión con su par libre del O</div>
+            <div class="mech-step-txt">El agua, aunque débil como nucleófilo, ataca el carbocatión <strong>donando un par libre del O</strong>. Se forma un oxonio (O con carga positiva) como intermediario. Este paso es posible porque el carbocatión es muy electrofílico.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">CH₃−CH(OH₂⁺)−CH₃  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CH(OH)−CH₃  +  H⁺</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">propan-2-ol ✓ Markovnikov</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Desprotonación</div>
+            <div class="mech-step-h">El oxonio pierde H⁺ al disolvente → alcohol con OH en el C más sustituido (Markovnikov)</div>
+            <div class="mech-step-txt">El oxonio pierde un <strong>H⁺ al agua</strong> del disolvente, completando la formación del grupo −OH. El H⁺ se regenera → el H₂SO₄ actúa como <em>catalizador</em> (no se consume). Producto: alcohol con OH en el carbono más sustituido.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -848,6 +1277,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">R'−CHO</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Ozonólisis — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-aq-4">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Ozonólisis — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-4" onclick="mechStep('aq-4',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-4">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-4" onclick="mechStep('aq-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-4">
+            <span class="mech-dot on" onclick="mechDot('aq-4',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-4',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-4',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-4-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−CH=CH−R' + O₃  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">molozonida (1,2,3-trioxolano)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">cíclico 5 miembros, inestable</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Adición de O₃</div>
+            <div class="mech-step-h">El ozono reacciona con el C=C formando el molozonida: un intermedio cíclico de 5 miembros</div>
+            <div class="mech-step-txt">El O₃ reacciona con el doble enlace en una <strong>cicloadición [4+2] concertada</strong> (aunque la mecanística real es más compleja). El molozonida (1,2,3-trioxolano) es muy inestable y se reorganiza espontáneamente.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-4-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">molozonida → carbonil ylide + carbonilo</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">→ ozonida (1,2,4-trioxolano)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">más estable, aislable a baja T°</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Reordenamiento</div>
+            <div class="mech-step-h">El molozonida se abre y recombina formando el ozonida más estable (1,2,4-trioxolano)</div>
+            <div class="mech-step-txt">El molozonida <strong>se fragmenta</strong> en un carbonil ylide y un fragmento carbonílico, que se recombinan formando el <strong>ozonida</strong> (1,2,4-trioxolano). Este intermediario es estable a bajas temperaturas pero explosivo puro — se trabaja en solución.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-4-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Zn/H₂O (reductora)  → R−CHO + R'−CHO</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">H₂O₂ (oxidante) → R−COOH + R'−COOH</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">doble enlace cortado por completo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Ruptura final</div>
+            <div class="mech-step-h">Reductora (Zn/H₂O) → aldehídos/cetonas · Oxidante (H₂O₂) → ácidos carboxílicos</div>
+            <div class="mech-step-txt">La ruptura del ozonida determina los productos: con <strong>Zn/H₂O</strong> (condiciones reductoras) se obtienen <em>aldehídos o cetonas</em>; con <strong>H₂O₂</strong> (oxidante) se oxidan los aldehídos a <em>ácidos carboxílicos</em>. Técnica clave para localizar dobles enlaces en moléculas desconocidas.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -910,6 +1392,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:#92400e;font-weight:700;background:#fef3c7;border-radius:4px;padding:1px 7px;font-family:'Outfit',sans-serif">+ MnO₂↓ pardo</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Prueba de Baeyer — Mecanismo (KMnO₄ frío) ── -->
+        <div class="mech-stepper" id="mech-aq-5">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Prueba de Baeyer — Mecanismo (KMnO₄ frío)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-5" onclick="mechStep('aq-5',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-5">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-5" onclick="mechStep('aq-5',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-5">
+            <span class="mech-dot on" onclick="mechDot('aq-5',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-5',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-5',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-5-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">MnO₄⁻ (violeta) + C=C  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">cicloéster de Mn (sin, cíclico)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">adición simultánea a ambos C</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Acción del MnO₄⁻</div>
+            <div class="mech-step-h">El permanganato viola añade dos grupos OH simultáneamente al mismo lado del doble enlace</div>
+            <div class="mech-step-txt">El MnO₄⁻ se coordina <strong>simétricamente</strong> sobre el doble enlace formando un <em>éster cíclico de Mn</em> de 5 miembros (osmatato manganoso). Ambos oxígenos se transfieren al <strong>mismo lado</strong> de la molécula (sin-adición).</div>
+          </div>
+          <div class="mech-step" id="ms-aq-5-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">cicloéster Mn + H₂O  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">diol vicinale CIS</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ambos −OH en el mismo lado del C−C</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Formación del diol</div>
+            <div class="mech-step-h">Hidrólisis del éster cíclico → diol vicinale cis (ambos OH al mismo lado)</div>
+            <div class="mech-step-txt">El éster cíclico de manganeso se hidroliza formando el <strong>diol vicinale cis</strong>: ambos grupos −OH están en el mismo lado del antiguo doble enlace. El Mn queda como <strong>MnO₂</strong> (sólido pardo).</div>
+          </div>
+          <div class="mech-step" id="ms-aq-5-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">KMnO₄ violeta →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">MnO₂ precipitado pardo (café)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">+ solución decolorada</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">test (+) = doble o triple enlace presente</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Señal visual</div>
+            <div class="mech-step-h">KMnO₄ violeta → MnO₂ pardo + decoloración = prueba POSITIVA para insaturación</div>
+            <div class="mech-step-txt">La prueba de Baeyer es <em>positiva</em> cuando: <strong>① la solución violeta se decolora</strong> (MnO₄⁻ se consume) y <strong>② aparece un precipitado pardo-café de MnO₂</strong>. Los alcanos y benceno NO reaccionan (test negativo). Es la prueba cualitativa más usada para detectar insaturación.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula" style="color:#7c3aed">KMnO₄</span>
@@ -1002,6 +1538,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(geminal)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidrohalogenación de Alquinos — Mecanismo ×1 y ×2 ── -->
+        <div class="mech-stepper" id="mech-ai-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidrohalogenación de Alquinos — Mecanismo ×1 y ×2</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ai-0" onclick="mechStep('ai-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ai-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ai-0" onclick="mechStep('ai-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ai-0">
+            <span class="mech-dot on" onclick="mechDot('ai-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ai-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ai-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ai-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HC≡CH  +  HBr (1 mol)  →</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H → C con más H (terminal)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₂=CH−Br  (bromoetileno)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Adición ×1</div>
+            <div class="mech-step-h">1 mol HX: H se une al C terminal (Markovnikov) → haloalqueno vinílico</div>
+            <div class="mech-step-txt">La primera adición sigue <strong>Markovnikov</strong>: el H⁺ va al C con más H (terminal). El carbocatión vinílico resultante es captado por Br⁻. Producto: <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). El triple enlace queda reducido a doble.</div>
+          </div>
+          <div class="mech-step" id="ms-ai-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₂=CH−Br  +  HBr (1 mol)  →</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Markovnikov: Br → C ya halogenado</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CHBr₂  (1,1-dibromoetano)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Adición ×2</div>
+            <div class="mech-step-h">2° mol HX: H al C con más H (ya tiene uno), X al C que ya lleva X → geminaldialuro</div>
+            <div class="mech-step-txt">En la segunda adición, el H va al CH₂= (más H), dejando al C ya halogenado recibir el <strong>segundo Br</strong>. Resultado: <em>geminaldialuro</em> (ambos X en el MISMO carbono). Ej: CH≡CH + 2HBr → CH₃−CHBr₂ (1,1-dibromoetano, no el 1,2-).</div>
+          </div>
+          <div class="mech-step" id="ms-ai-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HC≡CH  +  1 HBr  →  CH₂=CHBr</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">HC≡CH  +  2 HBr  →  CH₃CHBr₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">controlar por estequiometría</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Resumen</div>
+            <div class="mech-step-h">Triple enlace puede adicionar 1 o 2 moles de HX según la cantidad de reactivo disponible</div>
+            <div class="mech-step-txt">El resultado depende de la <strong>relación molar HX : alquino</strong>. Con 1 equiv → haloalqueno (aislable). Con 2 equiv → geminaldialuro. La selectividad ×1 requiere controlar cuidadosamente la adición. Ej industrial: PVC se produce a partir de cloruro de vinilo (HC≡CH + HCl → CH₂=CHCl).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
@@ -1094,6 +1683,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(tetrahaloalcano)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Halogenación de Alquinos — Mecanismo ×1 y ×2 ── -->
+        <div class="mech-stepper" id="mech-ai-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Halogenación de Alquinos — Mecanismo ×1 y ×2</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ai-1" onclick="mechStep('ai-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ai-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ai-1" onclick="mechStep('ai-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ai-1">
+            <span class="mech-dot on" onclick="mechDot('ai-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ai-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ai-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ai-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HC≡CH  +  Br₂ (1 mol)  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">antiadición → configuración trans</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CHBr=CHBr  (trans-1,2-dibromoetileno)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Adición ×1</div>
+            <div class="mech-step-h">1 mol X₂: adición antiadición al triple enlace → dihaloalqueno trans-vicinal</div>
+            <div class="mech-step-txt">La primera adición de X₂ al triple enlace produce, por <strong>antiadición</strong> (igual que en alquenos), el <em>dihaloalqueno trans-vicinal</em>. Los dos X quedan en lados opuestos del doble enlace restante (configuración trans/E).</div>
+          </div>
+          <div class="mech-step" id="ms-ai-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CHBr=CHBr  +  Br₂  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CHBr₂−CHBr₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">1,1,2,2-tetrabromoetano</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Adición ×2</div>
+            <div class="mech-step-h">Si hay exceso de X₂: segunda adición al doble enlace restante → tetrahaloalcano</div>
+            <div class="mech-step-txt">Con exceso de X₂, el dihaloalqueno reacciona como un alqueno normal: nueva antiadición → <strong>tetrahaloalcano</strong>. Ej: HC≡CH + 2Br₂ → CHBr₂−CHBr₂ (1,1,2,2-tetrabromoetano). El benceno no reacciona con Br₂ sin catalizador (diferencia clave: aromaticidad).</div>
+          </div>
+          <div class="mech-step" id="ms-ai-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C≡C  + X₂ ×1 →  C(X)=C(X) trans</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C≡C  + X₂ ×2 →  CX₂−CX₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">triple enlace más reactivo que doble</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Resumen</div>
+            <div class="mech-step-h">1 equiv X₂ → dihaloalqueno trans · 2 equiv X₂ → tetrahaloalcano; igual que alquenos pero ×2 posible</div>
+            <div class="mech-step-txt">El triple enlace es <strong>más reactivo</strong> que el doble en adiciones electrofílicas porque tiene mayor densidad electrónica π disponible. La única diferencia con alquenos: puede adicionarse <em>dos veces</em>. Observación práctica: Br₂ decolora el alquino más rápido que el alqueno equivalente.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
@@ -1179,6 +1821,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(alcano)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidrogenación Selectiva de Alquinos ── -->
+        <div class="mech-stepper" id="mech-ai-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidrogenación Selectiva de Alquinos</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ai-2" onclick="mechStep('ai-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ai-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ai-2" onclick="mechStep('ai-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ai-2">
+            <span class="mech-dot on" onclick="mechDot('ai-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ai-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ai-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ai-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−R' + H₂  →[Lindlar]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">ambos H al mismo lado</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">⇒ cis-alqueno (Z)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Lindlar (cis)</div>
+            <div class="mech-step-h">Pd/CaCO₃ envenenado con Pb: H₂ se adiciona sin al triple enlace → alqueno CIS</div>
+            <div class="mech-step-txt">El catalizador de <strong>Lindlar</strong> (Pd/CaCO₃ + acetato de Pb) está "envenenado" para que solo reduzca triples a dobles (no más). La adsorción superficial entrega ambos H al <strong>mismo lado</strong> → alqueno <em>cis (Z)</em>. Ejemplo: dimetilacetileno → cis-2-buteno.</div>
+          </div>
+          <div class="mech-step" id="ms-ai-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−R' + 2Na/NH₃  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">electrones solvados reducen</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">⇒ trans-alqueno (E)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Na/NH₃ (trans)</div>
+            <div class="mech-step-h">Metal disuelto en amoníaco líquido reduce el triple enlace vía radical anión → alqueno TRANS</div>
+            <div class="mech-step-txt">El sodio metálico en amoníaco líquido disuelve electrones (electrones solvados) que reducen el triple enlace <strong>paso a paso</strong>: primero un e⁻ → radical anión vinílico; segundo H (del NH₃) se adiciona al radical → el intermedio más estable es el <em>trans</em>. Resultado: alqueno <strong>TRANS (E)</strong>.</div>
+          </div>
+          <div class="mech-step" id="ms-ai-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Lindlar → H₂ sin → cis-alqueno</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Na/NH₃ → anti → trans-alqueno</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mismo alquino, ¡productos opuestos!</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Elección</div>
+            <div class="mech-step-h">Lindlar → alqueno CIS; Na/NH₃ → alqueno TRANS; control estereoquímico preciso</div>
+            <div class="mech-step-txt">La elección del <strong>reductor determina la estereoquímica</strong> del producto. Esto es síntesis estereoselectiva: mismo reactivo de partida, distintos reactivos de reducción → enantiómeros/diastereómeros diferentes. Aplicación en síntesis de feromonas (geometría E o Z cambia la actividad biológica).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
@@ -1256,6 +1951,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cetona/aldehído)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Hidratación de Alquinos — Tautomería Ceto-Enólica ── -->
+        <div class="mech-stepper" id="mech-ai-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Hidratación de Alquinos — Tautomería Ceto-Enólica</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ai-3" onclick="mechStep('ai-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ai-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ai-3" onclick="mechStep('ai-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ai-3">
+            <span class="mech-dot on" onclick="mechDot('ai-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ai-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ai-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ai-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡CH  +  H₂O  →[H⁺/Hg²⁺]</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">enol: R−C(OH)=CH₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">(Markovnikov: OH al C interno)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Hidratación</div>
+            <div class="mech-step-h">H₂O + H⁺/Hg²⁺ se adiciona al triple enlace (Markovnikov) → enol inestable</div>
+            <div class="mech-step-txt">El catalizador de <strong>Hg²⁺/H₂SO₄</strong> activa el triple enlace. El agua se adiciona siguiendo Markovnikov: el OH va al carbono interno (más sustituido). El producto inmediato es un <strong>enol</strong> (OH en C con doble enlace), forma muy inestable.</div>
+          </div>
+          <div class="mech-step" id="ms-ai-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">enol: R−C(OH)=CH₂  ⇌</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">ceto: R−CO−CH₃</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio muy favorecido → ceto</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Tautomería</div>
+            <div class="mech-step-h">El enol tautomeriza espontáneamente: H migra del O al Cα → forma ceto (cetona o aldehído)</div>
+            <div class="mech-step-txt">La <strong>tautomería ceto-enólica</strong>: el H del −OH del enol migra al Cα (catalizando el H⁺ del medio), formando el grupo carbonilo C=O. El equilibrio está <strong>muy desplazado hacia la forma ceto</strong> (99.9% para la mayoría de cetonas). Es una reorganización de H, no una reacción de átomos distintos.</div>
+          </div>
+          <div class="mech-step" id="ms-ai-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₃−C≡C−CH₃ + H₂O  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CO−CH₂−CH₃ (butanona)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HC≡CH + H₂O → CH₃CHO (etanal)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Producto final</div>
+            <div class="mech-step-h">Alquino interno → cetona · Alquino terminal (HC≡C−) → aldehído si HC≡CH o cetona si RC≡CH</div>
+            <div class="mech-step-txt">El producto final depende del alquino: <strong>alquino terminal RC≡CH</strong> → metil-cetona (RCOCH₃, Markovnikov). <strong>Acetileno (HC≡CH)</strong> → acetaldehído (CH₃CHO). Proceso industrial importante: síntesis de acetona (CH₃COCH₃) a partir de propino (CH₃C≡CH + H₂O).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">C≡CH</span></span>
@@ -1338,6 +2086,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">NH₃</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Acidez del Alquino Terminal — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ai-4">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Acidez del Alquino Terminal — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ai-4" onclick="mechStep('ai-4',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ai-4">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ai-4" onclick="mechStep('ai-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ai-4">
+            <span class="mech-dot on" onclick="mechDot('ai-4',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ai-4',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ai-4',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ai-4-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">pKa:  HC≡C−H  ≈ 25</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">       H₂C=CH₂  ≈ 44</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">       CH₃−CH₃   ≈ 50</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mayor %s → mayor electronegatividad</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — ¿Por qué es ácido?</div>
+            <div class="mech-step-h">El H en C sp (alquino terminal) es más ácido porque el orbital sp tiene más carácter s (50%)</div>
+            <div class="mech-step-txt">El orbital <strong>sp tiene 50% de carácter s</strong> (vs. 33% en sp², 25% en sp³). Mayor carácter s → el enlace está más cerca del núcleo → el par de electrones del carbanión queda más estabilizado → el H es <em>más fácil de extraer</em>. Pka ≈ 25: más ácido que un alcano (pKa ≈ 50) pero menos que el agua (pKa 15.7).</div>
+          </div>
+          <div class="mech-step" id="ms-ai-4-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−H  +  NaNH₂  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C⁻ Na⁺  +  NH₃</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">acetiluro: nucleófilo fuerte</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Formación del acetiluro</div>
+            <div class="mech-step-h">Base fuerte (NaNH₂, BuLi) abstrae el H terminal → anión acetiluro R−C≡C⁻ (muy nucleófilo)</div>
+            <div class="mech-step-txt">Con <strong>NaNH₂</strong> (base fuerte, pKa NH₃ ≈ 38 > 25 del alquino) o BuLi, se abstrae el H terminal. El <strong>anión acetiluro R−C≡C⁻</strong> formado tiene el par libre en un orbital sp → nucleófilo muy potente (más que un carbanión sp³).</div>
+          </div>
+          <div class="mech-step" id="ms-ai-4-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C⁻  +  R'−Br  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C−R'  +  Br⁻</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">cadena crece · alquino interno</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Síntesis</div>
+            <div class="mech-step-h">El acetiluro ataca electrófilos R'−X (SN2) formando alquinos internos → extensión de cadena en 1C</div>
+            <div class="mech-step-txt">El acetiluro ataca sustratos primarios (1°) por <strong>SN2</strong>: el par libre del C⁻ sp desplaza el haluro → nuevo enlace C−C. Esto <em>extiende la cadena</em> en 1 carbono. Estrategia de síntesis: HC≡CH → NaNH₂ → HC≡CNa → RX → RC≡CH (síntesis de alquinos de cadena larga).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">H−C≡C−<span style="color:var(--c2t)">CH₃</span></span>
@@ -1449,6 +2251,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H<span class="hn">X</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Halogenación Aromática SEA — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ar-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Halogenación Aromática SEA — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ar-0" onclick="mechStep('ar-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ar-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ar-0" onclick="mechStep('ar-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ar-0">
+            <span class="mech-dot on" onclick="mechDot('ar-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ar-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ar-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ar-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">FeBr₃  +  Br₂  →  FeBr₄⁻  +  Br⁺</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">(o complejo Br—FeBr₃)</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">sin catalizador: Br₂ no ataca el anillo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Electrófilo</div>
+            <div class="mech-step-h">FeBr₃ (ácido de Lewis) activa el Br₂ polarizándolo → genera el electrófilo Br⁺ (o complejo)</div>
+            <div class="mech-step-txt">El <strong>FeBr₃</strong> es un ácido de Lewis que acepta un par libre del Br₂, polarizando fuertemente el enlace Br−Br hasta generar el catión <em>Br⁺</em> (o el complejo equivalente). Sin catalizador, el Br₂ no es electrófilo suficientemente fuerte para atacar el anillo aromático estabilizado.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">anillo π  +  Br⁺  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">complejo σ (arenio)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">[C tiene ahora 4 enlaces, no aromat.]</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
+            <div class="mech-step-h">El π del anillo ataca el Br⁺ → complejo arenio: catión ciclohexadienilo con aromaticidad ROTA</div>
+            <div class="mech-step-txt">El <strong>sistema π del benceno</strong> dona electrones al Br⁺ formando el <em>complejo arenio</em> (o complejo σ): el carbono que recibe el Br pasa de sp² a sp³, rompiendo la aromaticidad. Esta especie catiónica es el intermediario de la SEA, con la carga deslocalizada sobre los 3 carbonos restantes.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">arenio  →  [FeBr₄⁻ abstrae H]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅Br  +  HBr  +  FeBr₃</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">aromaticidad RECUPERADA ✓</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Rearomatización</div>
+            <div class="mech-step-h">FeBr₄⁻ abstrae el H del carbono sustituido → recupera la aromaticidad y libera HBr</div>
+            <div class="mech-step-txt">El <strong>FeBr₄⁻</strong> (base débil) abstrae el H del carbono sustituido. Al hacerlo, los electrones del C−H van al sistema π, <strong>restaurando la aromaticidad</strong>. Se libera HBr y se regenera FeBr₃. El producto es el arilo halogenado. La fuerza impulsora es justamente la recuperación de la estabilidad aromática.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  Br₂</span>
@@ -1544,6 +2399,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Nitración del Benceno SEA — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ar-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Nitración del Benceno SEA — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ar-1" onclick="mechStep('ar-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ar-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ar-1" onclick="mechStep('ar-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ar-1">
+            <span class="mech-dot on" onclick="mechDot('ar-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ar-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ar-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ar-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HNO₃  +  H₂SO₄  →</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">H₂NO₃⁺  →  ⁺NO₂  +  H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">⁺NO₂ = electrófilo para el anillo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Catión nitronio</div>
+            <div class="mech-step-h">H₂SO₄ conc. protona el HNO₃ → catión nitronio ⁺NO₂ (electrófilo potente)</div>
+            <div class="mech-step-txt">El <strong>H₂SO₄ concentrado</strong> proton el HNO₃ formando el ácido nitroso protonado, que se descompone en el <em>catión nitronio ⁺NO₂</em> (o ion nitronium). Este catión lineal (N−O) es altamente electrofílico: el N lleva carga positiva y ataca el anillo.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C₆H₆  +  ⁺NO₂  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">complejo arenio: C(H)(NO₂)  sp³</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">carga + deslocalizada en orto/para</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
+            <div class="mech-step-h">El π del benceno ataca el N del ⁺NO₂ → complejo arenio (C sp³, sin aromaticidad)</div>
+            <div class="mech-step-txt">El anillo π ataca el <strong>N electrofílico del ⁺NO₂</strong>, formando el complejo arenio: el C portador pasa a sp³ con H y NO₂. La carga positiva queda deslocalizada en las posiciones orto y para del anillo. Esta especie es el intermediario clave de toda SEA.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">arenio  →  [HSO₄⁻ abstrae H]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅NO₂  +  H₂SO₄</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">aromaticidad RECUPERADA ✓</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Rearomatización</div>
+            <div class="mech-step-h">HSO₄⁻ abstrae el H del arenio → nitrobenceno + H₂SO₄ (catalizador regenerado)</div>
+            <div class="mech-step-txt">El <strong>HSO₄⁻</strong> (base conjugada del H₂SO₄) abstrae el H del arenio. Los electrones del C−H van al π → aromaticidad recuperada. El H₂SO₄ se regenera (catálisis). Producto: <em>nitrobenceno</em> (líquido amarillo, olor a almendras). Aplicación: precursor de la anilina (C₆H₅NH₂) por reducción.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">H₂SO₄ + HNO₃</span>
@@ -1648,6 +2556,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Sulfonación del Benceno SEA — Mecanismo (Reversible) ── -->
+        <div class="mech-stepper" id="mech-ar-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Sulfonación del Benceno SEA — Mecanismo (Reversible)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ar-2" onclick="mechStep('ar-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ar-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ar-2" onclick="mechStep('ar-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ar-2">
+            <span class="mech-dot on" onclick="mechDot('ar-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ar-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ar-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ar-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H₂SO₄ + SO₃  →  oleum (fumante)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">SO₃: S tiene 3 O electroneg. → δ+</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">S = electrófilo para el anillo π</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Electrófilo SO₃</div>
+            <div class="mech-step-h">H₂SO₄ fumante (oleum) contiene SO₃ libre — el S electrofílico (δ+) ataca el anillo</div>
+            <div class="mech-step-txt">El <strong>SO₃</strong> en el oleum tiene el azufre muy deficiente en electrones (3 oxígenos que jalan e⁻): es un electrófilo fuerte. El anillo π del benceno ataca el S electrofílico iniciando la SEA.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆ + SO₃ → arenio−SO₃⁻</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">→  C₆H₅SO₃H</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ácido bencenosulfónico (grupo −SO₃H)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
+            <div class="mech-step-h">El π ataca el S del SO₃ → complejo arenio; luego pérdida de H⁺ → ácido sulfónico</div>
+            <div class="mech-step-txt">El mecanismo sigue el patrón SEA: ataque electrofílico → complejo arenio → pérdida de H⁺ → rearomatización. El producto es el <em>ácido bencenosulfónico</em>: un fuerte ácido orgánico (pKa < 1) muy soluble en agua.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₅SO₃H  +  H₂O/Δ  ⇌</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₆  +  H₂SO₄</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio reversible a alta T°</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Reversibilidad</div>
+            <div class="mech-step-h">Con agua caliente la sulfonación se invierte (desulfonación) → útil como grupo protector</div>
+            <div class="mech-step-txt">A diferencia de otras SEA, la sulfonación es <strong>reversible</strong>. Con agua caliente (Δ) el grupo −SO₃H se puede retirar del anillo (desulfonación). Esto la hace útil como <em>grupo protector temporal</em>: sulfonar → hacer otra reacción en el anillo → desulfonar para recuperar la posición.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  SO₃</span>
@@ -1743,6 +2704,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">HCl</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Alquilación Friedel-Crafts SEA — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ar-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Alquilación Friedel-Crafts SEA — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ar-3" onclick="mechStep('ar-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ar-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ar-3" onclick="mechStep('ar-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ar-3">
+            <span class="mech-dot on" onclick="mechDot('ar-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ar-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ar-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ar-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−Cl  +  AlCl₃  →</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R⁺  +  AlCl₄⁻  (o R⁺---AlCl₄⁻)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺ = electrófilo para el anillo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Carbocatión</div>
+            <div class="mech-step-h">AlCl₃ activa el R−Cl generando el carbocatión R⁺ (o complejo muy electrofílico)</div>
+            <div class="mech-step-txt">El <strong>AlCl₃</strong> acepta el par libre del Cl del R−Cl, generando el ion par o carbocatión libre R⁺. Este carbocatión (muy electrofílico) ataca el anillo aromático. <em>Problema</em>: los carbocationes pueden reorganizarse (trans-posición) antes del ataque → mezcla de productos.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆  +  R⁺  →  arenio</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">AlCl₄⁻ abstracta H </div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅R  +  HCl  +  AlCl₃</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Complejo arenio</div>
+            <div class="mech-step-h">R⁺ ataca el anillo π → complejo arenio; AlCl₄⁻ está presente como base</div>
+            <div class="mech-step-txt">El R⁺ ataca el anillo formando el complejo arenio. El AlCl₄⁻ (o HCl liberado) abstrae el H del C portador del R → rearomatización. Se regenera el <strong>AlCl₃</strong> (catalizador). Producto: alquilbenceno Ar−R.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C₆H₅R  más reactivo que C₆H₆</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">polialquilación frecuente</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">solución: acilación (no polialkila)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Limitaciones</div>
+            <div class="mech-step-h">El alquilbenceno es más reactivo que el benceno → polialquilación; grupos voluminosos dan problemas</div>
+            <div class="mech-step-txt">La <strong>polialquilación</strong> es el mayor problema: el grupo alquilo activa el anillo (dador por inducción), haciéndolo más reactivo que el benceno inicial. Se forma mezcla de mono, di y trialquilado. Solución: usar exceso de benceno para minimizar polialquilación, o preferir la acilación Friedel-Crafts (no hay poliacilación).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃Cl</span>
@@ -1838,6 +2852,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">HCl</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Acilación Friedel-Crafts SEA — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ar-4">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Acilación Friedel-Crafts SEA — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ar-4" onclick="mechStep('ar-4',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ar-4">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ar-4" onclick="mechStep('ar-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ar-4">
+            <span class="mech-dot on" onclick="mechDot('ar-4',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ar-4',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ar-4',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ar-4-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOCl  +  AlCl₃  →</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡O⁺  +  AlCl₄⁻</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">catión acilio: estabilizado R−C(+)=O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Catión acilio</div>
+            <div class="mech-step-h">AlCl₃ activa el cloruro de ácido → catión acilio R−C≡O⁺ (estabilizado por resonancia)</div>
+            <div class="mech-step-txt">El <strong>AlCl₃</strong> abstrae el Cl del RCOCl, formando el <em>catión acilio R−C≡O⁺</em>. A diferencia del carbocatión de la alquilación, el catión acilio está <strong>estabilizado por resonancia</strong> (R−C⁺=O ↔ R−C=O⁺) y NO se reorganiza → producto único y controlado.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-4-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C₆H₆  +  R−C≡O⁺  →  arenio</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">AlCl₄⁻ abstrae H </div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅−CO−R  (arilcetona)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Ataque al anillo</div>
+            <div class="mech-step-h">El catión acilio (electrófilo) ataca el anillo π → complejo arenio → pérdida de H⁺</div>
+            <div class="mech-step-txt">El catión acilio ataca el anillo formando el arenio; la rearomatización libera H⁺ (captado por AlCl₄⁻). Producto: <em>arilcetona</em> Ar−CO−R. A diferencia de la alquilación, el grupo −COR <strong>desactiva</strong> el anillo (retira e⁻ por resonancia) → no hay poliacilación.</div>
+          </div>
+          <div class="mech-step" id="ms-ar-4-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">Alquilación: polialquila + reorganiza</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Acilación: producto único ✓</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">luego reducir C=O → CH₂ (Clemmensen)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Ventaja vs alquilación</div>
+            <div class="mech-step-h">Sin reorganización de carbocatión · sin poliacilación · producto único → acilación preferida en síntesis</div>
+            <div class="mech-step-txt">La acilación es <strong>superior a la alquilación</strong> para síntesis controlada: el catión acilio no se reorganiza (sin mezcla de regioisómeros), y el grupo desactivante C=O evita la poliacilación. Para obtener alquilbenceno de cadena sin ramificación: acilación primero → reducción de Clemmensen (C=O → CH₂) → alquilbenceno limpio.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula"><span class="bp">C₆H₆</span>  +  CH₃COCl</span>
@@ -1911,6 +2978,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">X⁻</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Sustitución Nucleofílica SN2 — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-hg-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Sustitución Nucleofílica SN2 — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-hg-0" onclick="mechStep('hg-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-hg-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-hg-0" onclick="mechStep('hg-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-hg-0">
+            <span class="mech-dot on" onclick="mechDot('hg-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('hg-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('hg-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-hg-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Nu⁻  →→→  [C···X]  →  Nu−C  +  X⁻</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Nu ataca 180° opuesto a X</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">concertado: 1 solo estado de transición</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ataque posterior</div>
+            <div class="mech-step-h">El nucleófilo ataca el C portador del GS (X) por la cara OPUESTA a X (ataque por detrás)</div>
+            <div class="mech-step-txt">La SN2 ocurre en <strong>un solo paso concertado</strong>: el Nu⁻ ataca por la cara opuesta al GS (ataque posterior, 180°). Simultáneamente, el enlace C−X se rompe. No hay intermediario (carbocatión). La velocidad depende de [R−X] y [Nu]: <em>bimolecular</em>.</div>
+          </div>
+          <div class="mech-step" id="ms-hg-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">ET: [Nu---C---X]⁻</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C con 5 "enlaces" parciales</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">geometría trigonal bipiramidal</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Estado de transición</div>
+            <div class="mech-step-h">En el ET el C es pentacoordinado (trigonal bipiramidal): Nu a 120° del GS que sale</div>
+            <div class="mech-step-txt">El <strong>estado de transición</strong> (no aislable) tiene el C central con 5 grupos: 3 sustituyentes existentes en plano ecuatorial, Nu y X en posiciones axiales. Este ET es el punto de mayor energía → determina la velocidad. Favorecido por C primario (1°, poco impedimento estérico).</div>
+          </div>
+          <div class="mech-step" id="ms-hg-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R-C*(A)(B)(X)  +  Nu⁻  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Nu-C*(A)(B)(...)  (config. INVERTIDA)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">R → S  o  S → R</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Inversión de Walden</div>
+            <div class="mech-step-h">La configuración del C quiral se invierte 180° (como paraguas que se da vuelta con el viento)</div>
+            <div class="mech-step-txt">Si el C es quiral, la SN2 produce <strong>inversión de configuración</strong> (inversión de Walden): el nucleófilo entra por una cara y los tres sustituyentes se "invierten" como un paraguas. Ejemplo: R → S o S → R. Esta estereoespecificidad es la firma diagnóstica de la SN2.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃CH₂<span class="bp">Br</span>  +  <span class="bp">OH⁻</span></span>
@@ -2003,6 +3123,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(racémico)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Sustitución Nucleofílica SN1 — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-hg-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Sustitución Nucleofílica SN1 — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-hg-1" onclick="mechStep('hg-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-hg-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-hg-1" onclick="mechStep('hg-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-hg-1">
+            <span class="mech-dot on" onclick="mechDot('hg-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('hg-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('hg-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-hg-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−X  →[ionización lenta]</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺  (sp², plano)  +  X⁻</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">favorecido: 3° > 2° · solvente prótico</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ionización (lento)</div>
+            <div class="mech-step-h">R−X se ioniza espontáneamente → carbocatión plano sp² + X⁻ (paso determinante)</div>
+            <div class="mech-step-txt">El paso <strong>lento y determinante</strong> es la ionización: el enlace R−X se rompe heterolíticamente → carbocatión R⁺ (plano, sp²) + X⁻. La velocidad depende <em>solo</em> de [R−X] (unimolecular). Favorecido en C 3° (carbocatión más estable) y solventes próticos (agua, etanol) que estabilizan los iones.</div>
+          </div>
+          <div class="mech-step" id="ms-hg-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺  (plano, sp²)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Nu puede atacar cara A  o  cara B</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">con igual probabilidad</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Carbocatión plano</div>
+            <div class="mech-step-h">R⁺ es sp², tiene geometría trigonal plana → las dos caras son accesibles para el nucleófilo</div>
+            <div class="mech-step-txt">El carbocatión sp² es <strong>plano</strong>: sin cara bloqueada, el Nu puede atacar desde arriba o desde abajo con igual probabilidad. Esto genera una <em>mezcla racémica</em> (50% R / 50% S) cuando el C es quiral, a diferencia de la SN2 que da inversión exclusiva.</div>
+          </div>
+          <div class="mech-step" id="ms-hg-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Nu + R⁺ → R−Nu (rápido)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">50% R + 50% S = racémico</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">vs SN2: inversión exclusiva</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Ataque (rápido)</div>
+            <div class="mech-step-h">Nu ataca ambas caras del R⁺ → racemización; favorece sustrato 3° y solventes polares próticos</div>
+            <div class="mech-step-txt">El Nu (nucleófilo débil: H₂O, ROH) ataca las dos caras del carbocatión formando la <strong>mezcla racémica</strong>. Favorecido en: sustratos <em>3°</em> (R⁺ muy estable), solventes próticos polares (H₂O, EtOH estabilizan iones), Nu débil (no hay Nu fuerte para SN2). <strong>Resumen SN1 vs SN2</strong>: sustrato 3° → SN1 · sustrato 1° → SN2.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">(CH₃)₃C−<span class="bp">Br</span>  +  H₂O</span>
@@ -2068,6 +3241,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">HBase  +  <span class="hn">X⁻</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Eliminación E2 — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-hg-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Eliminación E2 — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-hg-2" onclick="mechStep('hg-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-hg-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-hg-2" onclick="mechStep('hg-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-hg-2">
+            <span class="mech-dot on" onclick="mechDot('hg-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('hg-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('hg-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-hg-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Base:  +  H−Cβ−Cα−X  →</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H y X anti-periplanares (180°)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">1 solo paso concertado</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ataque de la base</div>
+            <div class="mech-step-h">Base fuerte (KOH/EtOH) se acerca al Hβ (adyacente al C que lleva X); H y X deben estar anti-periplanares</div>
+            <div class="mech-step-txt">La E2 es <strong>concertada</strong>: en un solo paso, la base abstrae el Hβ mientras el X sale simultáneamente. El requerimiento geométrico es que H y X estén <em>anti-periplanares</em> (diedro = 180°). Si no pueden estar anti, la E2 no ocurre.</div>
+          </div>
+          <div class="mech-step" id="ms-hg-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Base−H  +  Cβ=Cα  +  X⁻</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">doble enlace formado en 1 paso</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Zaitsev: Hβ de Cβ con menos H</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Formación del π</div>
+            <div class="mech-step-h">Los electrones del C−H migran al C−C para formar el doble enlace mientras X⁻ sale</div>
+            <div class="mech-step-txt">Los electrones del enlace <strong>Cβ−H migran al Cβ−Cα</strong> para formar el nuevo π, y simultáneamente el X⁻ se va. El C pasa de sp³ a sp². La regla de <em>Zaitsev</em> aplica cuando hay más de un Hβ: se elimina el del Cβ con <strong>menos H</strong> → alqueno más sustituido (más estable).</div>
+          </div>
+          <div class="mech-step" id="ms-hg-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">2-bromobutano + KOH/EtOH →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">but-2-eno (2 sust.) ✓ Zaitsev</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">but-1-eno (1 sust.) minoritario</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Producto Zaitsev</div>
+            <div class="mech-step-h">Se forma el alqueno más sustituido (termodinámicamente más estable): más sustituyentes en el C=C</div>
+            <div class="mech-step-txt">Con 2-bromobutano: hay dos Cβ posibles (C1 y C3). Zaitsev predice eliminación del H del C3 (2H) → <strong>but-2-eno</strong> (2 sustituyentes en C=C, más estable). El but-1-eno (1 sustituyente) se forma en menor cantidad. Base voluminosa (t-BuOK) puede dar el alqueno menos sustituido (Hofmann) por impedimento estérico.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−CH₂−CH<span class="bp">Br</span>−CH₃</span>
@@ -2139,6 +3365,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Deshidratación de Alcoholes — Mecanismo (E1) ── -->
+        <div class="mech-stepper" id="mech-ao-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Deshidratación de Alcoholes — Mecanismo (E1)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ao-0" onclick="mechStep('ao-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ao-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ao-0" onclick="mechStep('ao-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ao-0">
+            <span class="mech-dot on" onclick="mechDot('ao-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ao-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ao-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ao-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH  +  H⁺  →  R−OH₂⁺</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">OH₂⁺ = grupo saliente excelente</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">pKa H₃O⁺ = −1.7 (MUY buen GS)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Protonación del OH</div>
+            <div class="mech-step-h">H₂SO₄ protona el −OH del alcohol → −OH₂⁺ (buen grupo saliente: agua)</div>
+            <div class="mech-step-txt">El <strong>H⁺ del H₂SO₄</strong> protona el grupo −OH del alcohol, transformándolo en −OH₂⁺. El agua (H₂O) es un <em>grupo saliente excelente</em> (mucho mejor que OH⁻). Este paso activa el alcohol para la eliminación.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−OH₂⁺  →  R⁺  +  H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">carbocatión: sp², plano</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">puede trans-posicionarse</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
+            <div class="mech-step-h">El agua se va formando el carbocatión R⁺; puede reorganizarse si hay migración posible</div>
+            <div class="mech-step-txt">La <strong>H₂O se va</strong> (paso lento, determinante) dejando el carbocatión sp². En C 3° → muy estable. En C 1° → inestable, reacción lenta o no ocurre. Posible <em>trans-posición</em> (reorganización) de H o alquilo si da un R⁺ más estable.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R⁺  →  [HSO₄⁻ abstrae Hβ]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">alqueno más sustituido (Zaitsev)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H₂SO₄ regenerado (catalítico)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Pérdida de H⁺ (Zaitsev)</div>
+            <div class="mech-step-h">HSO₄⁻ abstrae un Hβ → doble enlace · Zaitsev: elimina H del Cβ con menos H → alqueno más sustituido</div>
+            <div class="mech-step-txt">El <strong>HSO₄⁻</strong> abstrae un Hβ del carbocatión → se forma el doble enlace. Zaitsev: si hay dos Cβ posibles, el H se elimina del que tiene <em>menos H</em> → alqueno más sustituido (más estable). El H₂SO₄ se regenera y actúa como catalizador. 180°C → alqueno; 140°C + ROH → éter (competencia).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃CH<span class="bp">(OH)</span>CH₂CH₃</span>
@@ -2227,6 +3506,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ao-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ao-1">
+
+        <!-- ── STEPPER: Oxidación de Alcoholes — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ao-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Oxidación de Alcoholes — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ao-1" onclick="mechStep('ao-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ao-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ao-1" onclick="mechStep('ao-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ao-1">
+            <span class="mech-dot on" onclick="mechDot('ao-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ao-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ao-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ao-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">1°: R−CH₂OH → RCHO → RCOOH</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">2°: R₂CHOH → R₂C=O (cetona)</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">3°: R₃COH → NO REACCIONA</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Alcohol 1° y 2°</div>
+            <div class="mech-step-h">Solo alcoholes 1° y 2° se oxidan; los 3° no (no tienen H en el Cα del −OH)</div>
+            <div class="mech-step-txt">El <strong>mecanismo</strong> requiere un H en el carbono portador del OH (Cα). Los alcoholes <em>1°</em> dan aldehídos (con oxidante suave PCC) o ácidos (con KMnO₄ fuerte). Los <em>2°</em> dan siempre cetonas. Los <em>3°</em> no tienen ese H → no se oxidan por esta vía.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">PCC: 1° → RCHO (se detiene)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">KMnO₄: 1° → RCHO → RCOOH</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">KMnO₄: 2° → R₂C=O (cetona)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Elección del oxidante</div>
+            <div class="mech-step-h">PCC (suave): para detenerse en aldehído · KMnO₄/K₂Cr₂O₇ (fuerte): hasta ácido carboxílico</div>
+            <div class="mech-step-txt">El <strong>PCC</strong> (clorocromato de piridinio) en CH₂Cl₂ oxida alcohol 1° a aldehído y se detiene (condición anhidra, sin agua). El <strong>KMnO₄ caliente/ácido</strong> sobreoxida el aldehído hasta ácido carboxílico. El <strong>K₂Cr₂O₇</strong> en H₂SO₄ es similar al KMnO₄ (se usan ambos en la práctica).</div>
+          </div>
+          <div class="mech-step" id="ms-ao-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C−H del Cα del alcohol + Mn⁷⁺ →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C=O  +  Mn⁵⁺ → Mn⁴⁺ → MnO₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">2e⁻ transferidos por oxidación</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Mecanismo del oxidante</div>
+            <div class="mech-step-h">El metal de transición (Mn⁷⁺ o Cr⁶⁺) acepta electrones del C−H del alcohol → compuesto carbonílico</div>
+            <div class="mech-step-txt">En la oxidación cromato/permanganato, el <strong>metal M(n+) acepta 2 electrones</strong> del enlace Cα−H a través de un éster metálico cíclico transitorio. El C−H se convierte en C=O y el metal se reduce (Mn⁷⁺→Mn⁵⁺→Mn⁴⁺ → MnO₂; Cr⁶⁺→Cr³⁺). El MnO₂ (pardo) o el Cr³⁺ (verde) son los subproductos reducidos.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">R−CH₂−<span class="bp">OH</span></span>
@@ -2332,6 +3664,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">SO₂↑  +  HCl↑</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Alcohol → Haluro de Alquilo ROH + HX/SOCl₂ — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ao-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Alcohol → Haluro de Alquilo ROH + HX/SOCl₂ — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ao-2" onclick="mechStep('ao-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ao-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ao-2" onclick="mechStep('ao-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ao-2">
+            <span class="mech-dot on" onclick="mechDot('ao-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ao-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ao-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ao-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH + HX → R−OH₂⁺ + X⁻</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">1°: SN2 → R−X + H₂O (inversión)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">3°: SN1 → R−X + H₂O (racémico)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — HX: protonación + sustitución</div>
+            <div class="mech-step-h">H⁺ protona el OH → H₂O es el grupo saliente; X⁻ ataca (SN1 en 3°, SN2 en 1°)</div>
+            <div class="mech-step-txt">El mecanismo depende del grado del sustrato: <strong>1° → SN2</strong> (X⁻ ataca por detrás, inversión de configuración) y <strong>3° → SN1</strong> (carbocatión plano, mezcla racémica). La reactividad de HX: HI > HBr > HCl (I⁻ mejor nucleófilo, HI más ácido).</div>
+          </div>
+          <div class="mech-step" id="ms-ao-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH + SOCl₂ → R−O−SOCl + HCl</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−O−SOCl → R−Cl + SO₂↑</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">sin agua de subproducto en el medio</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — SOCl₂: más limpio</div>
+            <div class="mech-step-h">SOCl₂ forma el intermediario clorosulfito R−O−SOCl → Cl⁻ interno desplaza el −OSO → R−Cl</div>
+            <div class="mech-step-txt">Con <strong>SOCl₂</strong>, el −OH se convierte primero en el clorosulfito R−O−SOCl. Luego el Cl⁻ interno desplaza el −OSO (o el Cl libre actúa como Nu): el <strong>SO₂ y HCl son gases</strong> que se eliminan solos sin contaminar el medio. Ventaja: el producto R−Cl queda puro sin mezcla acuosa.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HX: simple, mezcla con H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">SOCl₂: gas SO₂ + HCl salen solos</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">PBr₃: igual lógica, para bromuro</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Comparación</div>
+            <div class="mech-step-h">HX: sencillo pero lento con 1° y posible racemización en 3° · SOCl₂: más limpio y controlado</div>
+            <div class="mech-step-txt">La <strong>elección del reagente</strong> depende del sustrato y la pureza requerida: HX es simple para síntesis de haluro de alquilo sin control estereoquímico. SOCl₂ (y PBr₃) son preferidos en síntesis orgánica controlada. En laboratorio: SOCl₂ en piridina (que neutraliza el HCl liberado) da R−Cl con alta pureza.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="rxn-cond">HX: 3° → SN1 rápido · 1° → SN2 · reactividad: HI &gt; HBr &gt; HCl · SOCl₂ más limpio (subproductos son gases)</div>
         <div class="rxn-regla">📌 SOCl₂ = mejor método para R−Cl (RCl queda puro sin mezcla con agua)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
@@ -2386,6 +3771,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Esterificación de Fischer — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ao-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Esterificación de Fischer — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ao-3" onclick="mechStep('ao-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ao-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ao-3" onclick="mechStep('ao-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ao-3">
+            <span class="mech-dot on" onclick="mechDot('ao-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ao-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ao-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ao-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOH + H⁺ → RC(OH)₂⁺ (catión)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">O del alcohol ataca el C electrofílico</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">nuevo enlace O−C formado</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Activación del carbonilo</div>
+            <div class="mech-step-h">H⁺ protona el C=O del ácido → carbono más electrofílico (δ+); el OH del alcohol ataca</div>
+            <div class="mech-step-txt">El H⁺ protona el grupo carbonilo C=O del ácido carboxílico, haciendo al <strong>carbono mucho más electrofílico</strong>. El oxígeno del alcohol (nucleófilo) ataca ese C formando un nuevo enlace O−C.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C (sp²) + OH del alcohol →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C (sp³): R, OH, OH, OR' (tetraédrico)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">2 grupos −OH en el mismo C</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Intermediario tetraédrico</div>
+            <div class="mech-step-h">El carbono del ácido pasa de sp² (3 grupos) a sp³ (4 grupos): intermediario tetraédrico</div>
+            <div class="mech-step-txt">El <strong>intermediario tetraédrico</strong> tiene el carbono con 4 grupos: R, −OH (del ácido), −OH₂⁺ (protonado) y −OR' (del alcohol). Aunque inestable, es la etapa clave: a partir de aquí hay que perder agua para ir hacia el éster.</div>
+          </div>
+          <div class="mech-step" id="ms-ao-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">tetraédrico → pierde H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−CO−OR' (éster) + H₂O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio reversible; exceso ROH → éster</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Pérdida de H₂O → éster</div>
+            <div class="mech-step-h">Uno de los dos −OH se protona → pierde H₂O → se regenera el C=O ahora con O−R': el éster</div>
+            <div class="mech-step-txt">Uno de los grupos −OH (protonado a −OH₂⁺) se va como agua, y los electrones restantes forman el <strong>doble enlace C=O del éster</strong>. El H⁺ se regenera (catálisis). La reacción es <em>reversible</em>: para desplazarla hacia el éster se usa exceso de alcohol, se retira el agua (Dean-Stark) o se remueve el éster.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃<span class="bp">COOH</span>  +  CH₃CH₂<span class="bp">OH</span></span>
@@ -2459,6 +3897,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">A⁻</span></span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Aminas como Bases — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-am-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Aminas como Bases — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-am-0" onclick="mechStep('am-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-am-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-am-0" onclick="mechStep('am-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-am-0">
+            <span class="mech-dot on" onclick="mechDot('am-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('am-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('am-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-am-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R₃N:  (par libre en N sp³)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">N dona e⁻ al H⁺ del ácido</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enlace N−H se forma</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Par libre del N</div>
+            <div class="mech-step-h">El N sp³ de la amina tiene un par libre que lo hace base de Lewis y Brønsted</div>
+            <div class="mech-step-txt">El <strong>nitrógeno sp³</strong> de la amina tiene un <em>par de electrones no enlazante</em>. Este par le permite actuar como base (ceder e⁻ a H⁺) o como nucleófilo (ceder e⁻ a un C electrofílico). La basicidad de las aminas es mayor que la de los éteres y alcoholes (N más básico que O en aminas alifáticas).</div>
+          </div>
+          <div class="mech-step" id="ms-am-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₃N: + H⁺ → R₃NH⁺  (rápido)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₃NH⁺ A⁻  (sal de amonio)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">soluble en agua</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Formación de la sal</div>
+            <div class="mech-step-h">N dona par libre al H⁺ del ácido (HCl, H₂SO₄, RCOOH) → sal de amonio R₃NH⁺ A⁻</div>
+            <div class="mech-step-txt">La reacción es <strong>rápida y cuantitativa</strong>: el par libre del N se enlaza al H⁺ del ácido formando el ión amonio protonado R₃NH⁺. El anión A⁻ (Cl⁻, SO₄²⁻, RCOO⁻) forma la sal. Las sales de amonio son <em>sólidas, solubles en agua y estables</em>.</div>
+          </div>
+          <div class="mech-step" id="ms-am-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₂NH  (2°): pKb ≈ 3.3</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RNH₂  (1°): pKb ≈ 3.4</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">ArNH₂ (arilamina): pKb ≈ 9.4</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">resonancia ArNH₂ deslocaliza par libre</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Basicidad relativa</div>
+            <div class="mech-step-h">2° > 1° (acuosa) > 3° > NH₃ > arilaminas; la resonancia en ArNH₂ reduce la basicidad</div>
+            <div class="mech-step-txt">En agua: aminas <em>2° > 1°</em> (inductivo + solvatación). Las <em>3°</em> son menos básicas (impedimento estérico reduce solvatación del catión). Las <em>arilaminas</em> (C₆H₅NH₂) son mucho menos básicas (pKb ≈ 9.4) porque la resonancia con el anillo aromático deslocaliza el par libre del N, haciéndolo menos disponible.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃<span class="bp">NH₂</span>  +  HCl</span>
@@ -2526,6 +4018,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">2 H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Reducción de Nitrocompuestos → Amina ── -->
+        <div class="mech-stepper" id="mech-am-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Reducción de Nitrocompuestos → Amina</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-am-1" onclick="mechStep('am-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-am-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-am-1" onclick="mechStep('am-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-am-1">
+            <span class="mech-dot on" onclick="mechDot('am-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('am-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('am-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-am-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Ar−NO₂ + 2H → Ar−NO + H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Ar−NO  + 2H → Ar−NHOH</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−NHOH + 2H → Ar−NH₂ + H₂O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Reducción por etapas</div>
+            <div class="mech-step-h">Ar−NO₂ se reduce en 6e⁻/6H⁺ totales: NO₂ → NO → NHOH → NH₂</div>
+            <div class="mech-step-txt">La reducción del grupo nitro es un proceso de <strong>6 electrones en 3 etapas de 2e⁻</strong>: NO₂ → nitroso (ArNO) → hidroxilamina (ArNHOH) → amina (ArNH₂). Todos los intermediarios son detectables en condiciones controladas. El resultado neto: pérdida de 2 O y ganancia de 3 H₂.</div>
+          </div>
+          <div class="mech-step" id="ms-am-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−NO₂ + 3H₂ →[Pd/C] Ar−NH₂ + 2H₂O</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Sn + HCl: e⁻ del Sn reducen NO₂</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Fe + HCl: mismo principio</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Catalizadores</div>
+            <div class="mech-step-h">H₂/Pt o Pd/C: reducción limpia a amina · Sn/HCl o Fe/HCl: clásico en laboratorio</div>
+            <div class="mech-step-txt">Los <strong>metales de transición (Pt, Pd/C)</strong> catalizan la hidrogenación (H₂) dando la amina limpia. La reducción con <em>Sn/HCl</em> o <em>Fe/HCl</em> es la opción clásica de laboratorio: el metal activo (Sn⁰ o Fe⁰) actúa como agente reductor, cediendo electrones al nitrocompuesto en medio ácido.</div>
+          </div>
+          <div class="mech-step" id="ms-am-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅NO₂ + 3H₂ →[Pd] C₆H₅NH₂ + 2H₂O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anilina → colorantes azo</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">→ fármacos → polímeros</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Importancia industrial</div>
+            <div class="mech-step-h">Síntesis de anilina (C₆H₅NH₂) → colorantes, fármacos, polímeros (nailon, poliuretano)</div>
+            <div class="mech-step-txt">La <strong>anilina (C₆H₅NH₂)</strong>, obtenida por reducción del nitrobenceno, es uno de los compuestos industriales más importantes: precursor de <em>colorantes azo</em> (diazotación → acoplamiento), <em>fármacos</em> (paracetamol, sulfonamidas) y <em>polímeros</em> (nailon 6,6, MDI para poliuretano). La reducción de −NO₂ es la ruta estándar.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">C₆H₅<span class="bp">NO₂</span></span>
@@ -2587,6 +4132,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(sal de diazonio)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Diazotación y Reacción de Sandmeyer ── -->
+        <div class="mech-stepper" id="mech-am-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Diazotación y Reacción de Sandmeyer</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-am-2" onclick="mechStep('am-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-am-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-am-2" onclick="mechStep('am-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-am-2">
+            <span class="mech-dot on" onclick="mechDot('am-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('am-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('am-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-am-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">NaNO₂ + HCl → HNO₂ (in situ)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">ArNH₂ + HNO₂ →[0°C] Ar−N₂⁺ Cl⁻</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">0–5°C OBLIGATORIO</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Formación del diazonio</div>
+            <div class="mech-step-h">NaNO₂ + HCl generan HNO₂ in situ → reacciona con ArNH₂ a 0–5°C → Ar−N₂⁺ Cl⁻</div>
+            <div class="mech-step-txt">El <strong>HNO₂</strong> (generado in situ, inestable) reacciona con el grupo −NH₂ de la arilamina: el N del HNO₂ ataca el N de la amina → forma la sal de diazonio <em>Ar−N₂⁺ Cl⁻</em>. La temperatura de 0–5°C es <strong>obligatoria</strong>: a T° ambiente el diazonio se descompone instantáneamente.</div>
+          </div>
+          <div class="mech-step" id="ms-am-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">0–5°C: Ar−N₂⁺ estable (horas)</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">T° amb.: Ar−N₂⁺ → ArOH + N₂↑</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">N₂ = mejor grupo saliente: pKa muy bajo</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Estabilidad del diazonio</div>
+            <div class="mech-step-h">A 0°C el Ar−N₂⁺ es estable horas; a T° amb. se descompone en ArOH + N₂↑</div>
+            <div class="mech-step-txt">El ión diazonio arilamático es <em>relativamente estable</em> a 0°C (horas) gracias a la resonancia del anillo aromático. A temperatura ambiente se hidroliza espontáneamente → fenol + N₂↑. El N₂ molecular es el <strong>mejor grupo saliente conocido</strong> (pKa del HN₂⁺ ≈ −15), lo que hace al diazonio extremadamente reactivo.</div>
+          </div>
+          <div class="mech-step" id="ms-am-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + Cu₂Cl₂ → Ar−Cl + N₂↑</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + Cu₂Br₂ → Ar−Br + N₂↑</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + CuCN  → Ar−CN + N₂↑</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Sandmeyer</div>
+            <div class="mech-step-h">Cu₂X₂ catalizador sustituye N₂⁺ por X (Cl, Br, CN, F, OH); N₂ gas se libera como impulsante</div>
+            <div class="mech-step-txt">La <strong>reacción de Sandmeyer</strong> usa Cu₂X₂ como catalizador para sustituir el grupo −N₂⁺ por haluros (−Cl, −Br), −CN o −OH. La liberación de <em>N₂ gas</em> (ΔS > 0) es la fuerza impulsante termodinámica. Aplicación: síntesis de arilos halogenados que no se pueden obtener directamente por SEA (ej. ArF via sal de Balz-Schiemann).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">C₆H₅<span class="bp">NH₂</span> + NaNO₂/HCl</span>
@@ -2855,6 +4453,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-cb-1">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-1">
+
+        <!-- ── STEPPER: Reducción de Aldehídos/Cetonas → Alcohol — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-cb-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Reducción de Aldehídos/Cetonas → Alcohol — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-cb-1" onclick="mechStep('cb-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-cb-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-cb-1" onclick="mechStep('cb-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-cb-1">
+            <span class="mech-dot on" onclick="mechDot('cb-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('cb-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('cb-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-cb-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">LiAlH₄ → H⁻ (hidruro)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">H⁻ ataca el C=O (δ+)</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">los e⁻ del C=O migran al O</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — H⁻ como nucleófilo</div>
+            <div class="mech-step-h">LiAlH₄ o NaBH₄ entregan H⁻ (hidruro) que ataca el C=O (δ+) como nucleófilo</div>
+            <div class="mech-step-txt">El <strong>LiAlH₄</strong> (o NaBH₄, más suave) actúa como fuente de <em>H⁻ (hidruro)</em>. El H⁻ es un nucleófilo potente que ataca el carbono del C=O, que tiene carga parcial positiva (δ+). NaBH₄ es más selectivo (reduce solo C=O, no C=C); LiAlH₄ reduce también ésteres, ácidos, amidas.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−C(=O)H  +  H⁻  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH(O⁻)  (alcóxido)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C ahora sp³ con 4 grupos</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Alcóxido</div>
+            <div class="mech-step-h">H⁻ se une al C del C=O; los electrones del doble enlace migran al O → alcóxido R−CH(O⁻)−</div>
+            <div class="mech-step-txt">Tras el ataque del H⁻, el <strong>carbono del C=O pasa de sp² a sp³</strong>: ahora tiene 4 grupos (R, H, O⁻, y el H entrante). El oxígeno queda con carga negativa (alcóxido). Este intermediario es muy básico y reacciona fácilmente con agua.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">alcóxido + H₂O → alcohol + OH⁻</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCHO + H⁻ → RCH₂OH  (1°)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R₂CO + H⁻ → R₂CHOH  (2°)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Protonación → alcohol</div>
+            <div class="mech-step-h">H₂O (trabajo en ácido) protona el alcóxido O⁻ → alcohol · Aldehído → 1° · Cetona → 2°</div>
+            <div class="mech-step-txt">En el trabajo en ácido (H₂O/H₃O⁺), el <strong>alcóxido se protona</strong> → alcohol. Regla: <em>aldehído → alcohol 1°</em> (CH₂OH); <em>cetona → alcohol 2°</em> (CHOH). La reducción con NaBH₄ puede hacerse en MeOH/H₂O directamente (LiAlH₄ reacciona violentamente con agua → usar THF y trabajo cuidadoso).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">R−<span class="bp">CHO</span></span>
@@ -2936,6 +4587,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(nuevo C−C)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Condensación Aldólica — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-cb-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Condensación Aldólica — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-cb-2" onclick="mechStep('cb-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-cb-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-cb-2" onclick="mechStep('cb-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-cb-2">
+            <span class="mech-dot on" onclick="mechDot('cb-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('cb-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('cb-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-cb-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">OH⁻ + R−CH₂−CHO →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH⁻−CHO  (enolato)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C α con par libre: nucleófilo fuerte</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Formación del enolato</div>
+            <div class="mech-step-h">OH⁻ abstrae el Hα (adyacente al C=O) del aldehído → enolato aniónico nucleófilo</div>
+            <div class="mech-step-txt">La base OH⁻ abstrae el <strong>Hα</strong> (el H del C adyacente al C=O): el enolato formado tiene un carbanión estabilizado por resonancia con el grupo carbonilo. Este enolato es el <em>nucleófilo</em> que ataca al segundo aldehído.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enolato  +  R−CHO  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HO−C*−C−CHO (β-hidroxialdehído)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">enlace C−C nuevo formado ✓</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Ataque al carbonilo</div>
+            <div class="mech-step-h">El enolato (nucleófilo) ataca el C=O de un segundo aldehído (electrófilo) → aldol β-hidroxi</div>
+            <div class="mech-step-txt">El <strong>Cα⁻ del enolato</strong> ataca el C=O del segundo aldehído (electrófilo). Se forma un <em>nuevo enlace C−C</em> entre el Cα del primer aldehído y el C carbonílico del segundo. El producto inmediato es el alcóxido del aldol (β-hidroxialdehído).</div>
+          </div>
+          <div class="mech-step" id="ms-cb-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">β-OH−CH−CHO →[Δ]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">−CH=CH−CHO  (enal) + H₂O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">α,β-insaturado = conjugado, más estable</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Aldol → enal</div>
+            <div class="mech-step-h">Al calentar el aldol se deshidrata (β-elimina el OH y el Hα) → α,β-insaturado (enal o enona)</div>
+            <div class="mech-step-txt">El <strong>aldol</strong> (β-hidroxicarbonílico) puede deshidratarse al calentar: el OH del Cβ y el Hα se eliminan → alqueno conjugado con el carbonilo (<em>α,β-insaturado</em>). El sistema C=C−C=O es estabilizado por conjugación. Esta deshidratación se llama condensación aldólica (en sentido estricto).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃<span class="bp">MgBr</span>  +  CH₃<span class="bp">CHO</span></span>
@@ -2995,6 +4699,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(aldol · nuevo C−C)</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Formación de Iminas (Base de Schiff) — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-cb-3">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Formación de Iminas (Base de Schiff) — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-cb-3" onclick="mechStep('cb-3',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-cb-3">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-cb-3" onclick="mechStep('cb-3',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-cb-3">
+            <span class="mech-dot on" onclick="mechDot('cb-3',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('cb-3',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('cb-3',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-cb-3-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−NH₂  +  R'−C(=O)H  →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−NH−C(OH)H−R'  (carbinolomina)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C ahora sp³ con OH y NHR</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ataque de la amina</div>
+            <div class="mech-step-h">El N de R−NH₂ (nucleófilo) ataca el C=O (electrófilo) del aldehído/cetona → carbinolomina</div>
+            <div class="mech-step-txt">El <strong>par libre del N</strong> de la amina primaria ataca el C=O del carbonilo. Se forma la <em>carbinolomina</em> (aminoalcohol): el C pasa de sp² a sp³ con un −OH y un −NHR. Este intermediario se forma rápidamente pero es inestable.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-3-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">carbinolomina →[H⁺]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−CH=N−R  +  H₂O</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">imina (base de Schiff)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Deshidratación</div>
+            <div class="mech-step-h">La carbinolomina pierde agua (H⁺ cataliza) → se forma el doble enlace C=N</div>
+            <div class="mech-step-txt">En medio <em>ligeramente ácido</em> (pH 4–5), el −OH de la carbinolomina se protona → se va como agua. Los electrones del N forman el <strong>doble enlace C=N</strong> de la imina. El pH óptimo: no demasiado básico (no proton el N) ni demasiado ácido (proton el N e impide el ataque).</div>
+          </div>
+          <div class="mech-step" id="ms-cb-3-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−CH=N−R (imina, C=N)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">+ H₂O ⇌ carbonilo + amina</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">reducción (NaBH₄) → amina secundaria</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Imina (Base de Schiff)</div>
+            <div class="mech-step-h">C=N es el grupo funcional de la imina; reversible con H₂O → útil en síntesis y bioquímica</div>
+            <div class="mech-step-txt">La imina (R′−CH=N−R, llamada <em>base de Schiff</em>) es <strong>reversible</strong> en presencia de agua. Aplicaciones: síntesis de <em>aminas secundarias</em> (imina → reducción con NaBH₄ → R′CH₂−NHR, aminación reductora); biomédica: la piridoxal fosfato (vitamina B6) forma iminas con aminoácidos en catálisis enzimática.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">2 CH₃<span class="bp">CHO</span></span>
@@ -3076,6 +4833,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod">H₂O</span>
           </div>
         </div>
+
+        <!-- ── STEPPER: Reacción Ácido-Base de RCOOH — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ac-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Reacción Ácido-Base de RCOOH — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ac-0" onclick="mechStep('ac-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ac-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ac-0" onclick="mechStep('ac-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ac-0">
+            <span class="mech-dot on" onclick="mechDot('ac-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ac-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ac-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ac-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOH  ⇌  RCOO⁻  +  H⁺</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">pKa ≈ 4–5  (ácido débil)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">en agua: < 5% ionizado</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ionización</div>
+            <div class="mech-step-h">RCOOH ⇌ RCOO⁻ + H⁺ · ácido débil (pKa 4–5): ionización parcial en agua</div>
+            <div class="mech-step-txt">Los ácidos carboxílicos son <strong>ácidos débiles</strong>: en agua el equilibrio de ionización está desplazado hacia la izquierda. Sin embargo, son mucho más ácidos que los alcoholes (pKa ≈ 16) o el agua (pKa 15.7). La razón: el carboxilato RCOO⁻ está <em>estabilizado por resonancia</em>.</div>
+          </div>
+          <div class="mech-step" id="ms-ac-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOO⁻: estructura real:</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C(=O—)−O⁻  ↔  R−C(−O⁻)=O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ambos O equivalentes (−1/2 cada uno)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Resonancia del carboxilato</div>
+            <div class="mech-step-h">RCOO⁻ se estabiliza por resonancia: los dos C−O son equivalentes (1.5 entre simple y doble)</div>
+            <div class="mech-step-txt">El <strong>anión carboxilato RCOO⁻</strong> tiene la carga negativa repartida entre los dos oxígenos por resonancia: ningún O tiene la carga entera, sino −½ cada uno. Esta deslocalización <em>estabiliza el anión</em>, haciendo favorable la ionización. Los dos enlaces C−O son equivalentes (longitud intermedia).</div>
+          </div>
+          <div class="mech-step" id="ms-ac-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOOH + NaOH → RCOO⁻Na⁺ + H₂O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">jabones = RCOO⁻Na⁺ (ácidos grasos)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anfipáticos: cabeza polar + cola apolar</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Neutralización</div>
+            <div class="mech-step-h">RCOOH + NaOH → RCOONa + H₂O (cuantitativa); jabonesAplicación industria</div>
+            <div class="mech-step-txt">La neutralización con NaOH es <strong>cuantitativa</strong> (pKa 15.7 del agua >> pKa 4-5 del ácido). El carboxilato de sodio RCOO⁻Na⁺ formado es un <em>jabón</em> si R es una cadena larga (C₁₂–C₁₈): parte apolar (hidrofóbica) en agua solubiliza la grasa en micelas. Saponificación de grasas (triésteres) con NaOH → jabones.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃<span class="bp">COOH</span>  +  NaOH</span>
@@ -3127,6 +4937,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-ac-1">▾</span>
       </div>
       <div class="rxn-body" id="body-ac-1">
+
+        <!-- ── STEPPER: Preparación de Ácidos Carboxílicos — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-ac-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Preparación de Ácidos Carboxílicos — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-ac-1" onclick="mechStep('ac-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-ac-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-ac-1" onclick="mechStep('ac-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-ac-1">
+            <span class="mech-dot on" onclick="mechDot('ac-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('ac-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('ac-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-ac-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−CH₂OH →[KMnO₄] R−CHO → RCOOH</div>
+              <div style="color:var(--err);font-weight:700;font-size:.82rem">no se detiene en RCHO con oxidante fuerte</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">PCC → RCHO (se detiene)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Oxidación de alcohol 1°</div>
+            <div class="mech-step-h">KMnO₄ fuerte (o K₂Cr₂O₇/H₂SO₄) oxida alcohol 1° → aldehído → RCOOH (sobreoxidación)</div>
+            <div class="mech-step-txt">Con <strong>KMnO₄ caliente/ácido o K₂Cr₂O₇/H₂SO₄</strong>, el alcohol 1° se oxida primero a aldehído y luego el aldehído se oxida más hasta ácido carboxílico (el aldehído es muy reactivo con oxidantes fuertes en presencia de agua). Para detenerse en aldehído: usar <em>PCC</em> (condiciones suaves, anhidro).</div>
+          </div>
+          <div class="mech-step" id="ms-ac-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Ar−CH₂−R + KMnO₄/OH⁻/Δ →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−COOH + productos de C</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anillo bencénico resistente a oxidación</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Oxidación de cadena lateral aromática</div>
+            <div class="mech-step-h">KMnO₄ alc./Δ oxida la cadena lateral R de Ar−R hasta −COOH; el anillo aromático no se toca</div>
+            <div class="mech-step-txt">Una propiedad útil: el <strong>anillo aromático resiste la oxidación</strong> con KMnO₄ ácido/base mientras que la cadena lateral (alquilo) sí se oxida completamente hasta −COOH (independiente de la longitud de la cadena). Aplicación: síntesis de ácido benzoico (C₆H₅COOH) a partir de tolueno (C₆H₅CH₃).</div>
+          </div>
+          <div class="mech-step" id="ms-ac-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−CN + 2H₂O →[H⁺/Δ] R−COOH + NH₃</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">cadena crece en 1C (el C del CN)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">útil en síntesis de extensión de cadena</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Hidrólisis de nitrilo</div>
+            <div class="mech-step-h">R−CN + H₂O / H⁺ (o OH⁻) → RCOOH + NH₃ (extiende la cadena en 1 carbono)</div>
+            <div class="mech-step-txt">La <strong>hidrólisis del nitrilo R−CN</strong> es una ruta alternativa: en ácido o base acuosa con calor, el triple C≡N se hidroliza → amida (intermedio) → ácido carboxílico + NH₃ (o NH₄⁺). Importante: el C del CN se convierte en el COOH del ácido → la cadena <em>crece en 1 carbono</em> respecto al R−X de partida (síntesis via R−X + CN⁻ → R−CN → hidrólisis).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">R−CH₂<span class="bp">OH</span></span>
@@ -3200,6 +5063,59 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-dv-0">▾</span>
       </div>
       <div class="rxn-body" id="body-dv-0">
+
+        <!-- ── STEPPER: Ésteres — Reacciones Clave ── -->
+        <div class="mech-stepper" id="mech-dv-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Ésteres — Reacciones Clave</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-dv-0" onclick="mechStep('dv-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-dv-0">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-dv-0" onclick="mechStep('dv-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-dv-0">
+            <span class="mech-dot on" onclick="mechDot('dv-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('dv-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('dv-0',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-dv-0-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOR' + NaOH  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOO⁻Na⁺ + R'OH</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">irreversible: RCOO⁻ no reacciona con ROH</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Saponificación (irreversible)</div>
+            <div class="mech-step-h">Éster + NaOH → carboxilato Na⁺ + alcohol (OH⁻ ataca C=O del éster)</div>
+            <div class="mech-step-txt">La <strong>saponificación</strong> es la reacción de ésteres con OH⁻ (NaOH). El OH⁻ (nucleófilo) ataca el C=O del éster → intermediario tetraédrico → se rompe el enlace C−O del alcohol → carboxilato + alcohol libre. Es <em>irreversible</em> porque el carboxilato (anión) no puede ser atacado por el alcohol.</div>
+          </div>
+          <div class="mech-step" id="ms-dv-0-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RCOOR' + H₂O →[H⁺] ⇌</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RCOOH + R'OH</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mecanismo inverso a la esterificación Fischer</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Hidrólisis ácida (reversible)</div>
+            <div class="mech-step-h">Éster + H₂O/H⁺ ⇌ ácido carboxílico + alcohol (inverso de Fischer)</div>
+            <div class="mech-step-txt">Con H⁺ y H₂O el éster se hidroliza al ácido y el alcohol: es el <strong>inverso exacto de la esterificación de Fischer</strong>. El mecanismo es el mismo (H⁺ activa el carbonilo, H₂O ataca, intermediario tetraédrico, pérdida de ROH). El equilibrio puede desplazarse con exceso de agua.</div>
+          </div>
+          <div class="mech-step" id="ms-dv-0-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOR' + 2LiAlH₄ →[THF]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCH₂OH  +  R'OH</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">2 alcoholes distintos formados</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Reducción con LiAlH₄</div>
+            <div class="mech-step-h">LiAlH₄ reduce el éster hasta DOS alcoholes: R−CH₂OH y R'−OH</div>
+            <div class="mech-step-txt">El <strong>LiAlH₄</strong> reduce el éster en 2 pasos: primero el C=O → aldehído, luego el aldehído → alcohol primario. La ruptura del enlace C−O del alcohol libera el <em>R'OH</em>. Resultado: <strong>dos alcoholes</strong> (uno por cada fragmento del éster). NaBH₄ (suave) NO reduce ésteres.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">R−<span class="bp">COOR′</span>  +  NaOH</span>
@@ -3286,6 +5202,60 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <!-- 5 nucleófilos posibles -->
+
+        <!-- ── STEPPER: Cloruros de Ácido — Mecanismo (SAcN) ── -->
+        <div class="mech-stepper" id="mech-dv-1">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Cloruros de Ácido — Mecanismo (SAcN)</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-dv-1" onclick="mechStep('dv-1',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-dv-1">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-dv-1" onclick="mechStep('dv-1',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-dv-1">
+            <span class="mech-dot on" onclick="mechDot('dv-1',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('dv-1',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('dv-1',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-dv-1-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Nu + R−C(=O)−Cl →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">intermediario tetraédrico [Nu−C(O⁻)(Cl)−R]</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C pasa de sp² a sp³</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Ataque nucleofílico</div>
+            <div class="mech-step-h">El Nu (H₂O, ROH, R'NH₂, RCOO⁻, NH₃) ataca el C=O del cloruro de ácido (altamente electrofílico)</div>
+            <div class="mech-step-txt">El C=O del cloruro de ácido está muy <em>activado</em>: el Cl retira e⁻ del C. El <strong>nucleófilo</strong> (H₂O, ROH, RNH₂, RCOO⁻, NH₃) ataca el C del C=O formando el intermediario tetraédrico. Este paso es rápido porque el C=O es muy electrofílico y Cl⁻ es un excelente grupo saliente.</div>
+          </div>
+          <div class="mech-step" id="ms-dv-1-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">[Nu−C(O⁻)(Cl)−R] →  Cl⁻ se va</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C(=O)−Nu  +  Cl⁻</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Cl⁻ = mejor GS → máxima reactividad</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Intermediario tetraédrico</div>
+            <div class="mech-step-h">El C con 4 grupos (R, O⁻, Nu, Cl) expulsa el Cl⁻ (mejor GS) restaurando el C=O</div>
+            <div class="mech-step-txt">El intermediario tetraédrico <strong>expulsa el Cl⁻</strong> (el mejor grupo saliente entre los derivados del ácido carboxílico). Al salir el Cl⁻, el par del O vuelve a formar el C=O. Resultado: el −Cl es reemplazado por el Nu. La reactividad del RCOCl es la más alta de todos los derivados.</div>
+          </div>
+          <div class="mech-step" id="ms-dv-1-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">+ H₂O → RCOOH (ácido)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">+ ROH → RCOOR (éster)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">+ RNH₂ → RCONHR (amida)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">+ RCOO⁻ → (RCO)₂O (anhídrido)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Productos según el Nu</div>
+            <div class="mech-step-h">5 posibles productos según el nucleófilo: ácido · éster · amida · anhídrido · aldehído</div>
+            <div class="mech-step-txt">El cloruro de ácido es el derivado más versátil: con el <strong>nucleófilo apropiado</strong> se obtiene cualquier derivado. Jerarquía de reactividad: RCOCl > (RCO)₂O > RCOOR' > RCONH₂. El RCOCl se usa en síntesis cuando se necesita un derivado específico de forma rápida y completa.</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp" style="flex-direction:column;gap:6px;align-items:stretch">
           <div style="font-size:.65rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px">Nucleófilo → Producto</div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
@@ -3411,6 +5381,59 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
         </div>
         <!-- Condensación de Claisen -->
         <div style="font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Condensación de Claisen (autocondesación de éster)</div>
+
+        <!-- ── STEPPER: Amidas — Hidrólisis y Reacciones ── -->
+        <div class="mech-stepper" id="mech-dv-2">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Amidas — Hidrólisis y Reacciones</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-dv-2" onclick="mechStep('dv-2',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-dv-2">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-dv-2" onclick="mechStep('dv-2',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-dv-2">
+            <span class="mech-dot on" onclick="mechDot('dv-2',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('dv-2',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('dv-2',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-dv-2-0">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">RCONH₂: resonancia N → C=O</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">N dona par libre → C menos δ+</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">→ menor electrofilia → menor reactividad</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 1 de 3 — Baja reactividad de amidas</div>
+            <div class="mech-step-h">La amida es el menos reactivo de los derivados por resonancia N→C=O que blinda el carbono</div>
+            <div class="mech-step-txt">El <strong>par libre del N</strong> de la amida está en conjugación con el C=O: hay resonancia N−C=O (el N cede e⁻ al C). Esto hace al carbono <em>menos electrofílico</em> que en otros derivados → la amida es el derivado menos reactivo. El enlace C−N de la amida tiene carácter parcial de doble enlace (rotación lenta, relevante en proteínas).</div>
+          </div>
+          <div class="mech-step" id="ms-dv-2-1">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCONH₂ + H₂O →[H⁺/Δ]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOOH + NH₄⁺</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">requiere condiciones drásticas (ácido + calor)</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 2 de 3 — Hidrólisis ácida</div>
+            <div class="mech-step-h">RCONH₂ + H₂O/H⁺/Δ → RCOOH + NH₄⁺ (el N se protona y sale como NH₄⁺)</div>
+            <div class="mech-step-txt">La hidrólisis ácida de amidas requiere <strong>condiciones drásticas</strong> (H⁺ concentrado + calor prolongado) justamente por la baja reactividad del carbonilo de amida. El H⁺ protona el N, debilitando la resonancia → agua ataca → ácido + NH₄⁺. Las proteínas se hidrolizan así en ácido clorhídrico concentrado a 110°C por 24h.</div>
+          </div>
+          <div class="mech-step" id="ms-dv-2-2">
+            <div class="mech-vis">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCONH₂ + 4H⁻ →[LiAlH₄]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCH₂NH₂  (amina primaria)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C=O reducido a CH₂ · N queda unido</div>
+            </div>
+            </div>
+            <div class="mech-step-n">Paso 3 de 3 — Reducción con LiAlH₄</div>
+            <div class="mech-step-h">RCONH₂ + LiAlH₄ → RCH₂NH₂ (amina primaria); 4 H⁻ entregados: C=O → CH₂</div>
+            <div class="mech-step-txt">El <strong>LiAlH₄</strong> reduce la amida completamente: el C=O se reduce a −CH₂− y el N queda unido. Resultado: <em>amina primaria RCH₂NH₂</em>. Esta es una excelente ruta de síntesis de aminas: RCOOH → RCOCl → RCONH₂ → LiAlH₄ → RCH₂NH₂ (alargamiento de cadena con inserción de N).</div>
+          </div>
+        </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">2  CH₃−<span class="bp">COOC₂H₅</span></span>
@@ -3487,6 +5510,8 @@ function showMS(id){
 
 document.addEventListener('DOMContentLoaded',()=>{
   initMS('cb-0',4);
+  // steppers for remaining bodies (3 steps each)
+  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
