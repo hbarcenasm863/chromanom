@@ -182,8 +182,9 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .qt-write{background:var(--c4b);color:var(--c4t)}
 .qt-rxnq{background:#fce7f3;color:#9d174d}
 /* RxnQ equation display */
-.rxnq-eq{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
-  background:var(--surf2,#f1f5f9);border-radius:10px;padding:14px 18px;margin:12px 0}
+.rxnq-eq{display:flex;flex-wrap:nowrap;align-items:center;gap:10px 14px;
+  background:var(--surf2,#f1f5f9);border-radius:10px;padding:14px 18px;margin:12px 0;
+  overflow-x:auto}
 .rxnq-mol-box{background:var(--surf,#fff);border:1.5px solid var(--brd,#e2e8f0);
   border-radius:8px;padding:10px 14px;display:flex;align-items:center;
   justify-content:center;min-width:80px}
