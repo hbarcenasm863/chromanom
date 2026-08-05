@@ -180,6 +180,31 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .qt-drag{background:var(--c2b);color:var(--c2t)}
 .qt-id{background:var(--c1b);color:var(--c1t)}
 .qt-write{background:var(--c4b);color:var(--c4t)}
+.qt-rxnq{background:#fce7f3;color:#9d174d}
+/* RxnQ equation display */
+.rxnq-eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+  background:var(--surf2,#f1f5f9);border-radius:10px;padding:12px 16px;margin:12px 0}
+.rxnq-mol-box{background:var(--surf,#fff);border:1.5px solid var(--brd,#e2e8f0);
+  border-radius:8px;padding:8px 12px;display:flex;align-items:center;
+  justify-content:center;min-width:70px;min-height:56px}
+.rxnq-mol-box svg{max-height:64px;width:auto;max-width:180px;display:block}
+.rxnq-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  color:var(--tx);font-weight:600;text-align:center}
+.rxnq-ops{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:.83rem}
+.rxnq-reagent{color:#0369a1;font-weight:700}
+.rxnq-cond{font-size:.72rem;color:var(--dimmer,#94a3b8);font-style:italic}
+.rxnq-arrow{color:#059669;font-size:1.2rem;flex-shrink:0;align-self:center}
+.rxnq-blank-box{background:#fce7f3;border:2.5px dashed #9d174d;border-radius:8px;
+  padding:6px 18px;display:flex;align-items:center;justify-content:center;
+  min-width:80px;min-height:52px;color:#9d174d;font-weight:700;font-size:1.1rem}
+.rxnq-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.rxnq-opt{width:100%;text-align:left;padding:10px 14px;border-radius:8px;
+  border:2px solid var(--brd,#e2e8f0);background:var(--surf,#fff);
+  cursor:pointer;font-size:.88rem;font-family:'JetBrains Mono',monospace;
+  transition:background .15s,border-color .15s;color:var(--tx)}
+.rxnq-opt:hover:not(:disabled){background:var(--surf2);border-color:var(--c1)}
+.rxnq-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46}
+.rxnq-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
 
 .q-title{font-size:1rem;font-weight:700;color:var(--tx);margin-bottom:16px;line-height:1.5;flex-shrink:0}
 
@@ -3914,7 +3939,7 @@ let streak=0, bestStreak=0;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
 let history=[];
-let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
+let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
 let studentName='', studentCourse='', studentCode='';
@@ -4279,7 +4304,7 @@ function startGame(){
   questions=shuffle(pool).slice(0,n);
   qIdx=0; score=0; history=[];
   streak=0; bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
   writeAttempts=0;
   _analyticsSent=false;
   showScreen('s-game');
@@ -4323,8 +4348,8 @@ function loadQuestion(){
   const area=document.getElementById('q-area');
   area.innerHTML='';
 
-  const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura'};
-  const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build'};
+  const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura',rxnq:'⚗️ Reacción'};
+  const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build',rxnq:'qt-rxnq'};
 
   const isBuild=q.type==='build';
   const hasFm=!isBuild&&!!MOLDES[q.mol];
@@ -4337,13 +4362,14 @@ function loadQuestion(){
 
   let html=`<div class="q-type-badge ${typeCls[q.type]}">${typeBadge[q.type]}</div>`;
   html+=`<div class="q-title">${q.q}</div>`;
-  if(!isBuild) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
+  if(!isBuild&&q.type!=='rxnq') html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
   if(q.type==='mc') html+=buildMC(q);
   else if(q.type==='drag') html+=buildDrag(q);
   else if(q.type==='id') html+=buildID(q);
   else if(q.type==='write') html+=buildWrite(q);
   else if(q.type==='build') html+=buildBuild(q);
+  else if(q.type==='rxnq') html+=buildRxnQ(q);
 
   html+=`<div class="feedback" id="feedback"></div>`;
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
@@ -4377,6 +4403,84 @@ function checkMC(ans,btn){
   const ok=norm(ans)===norm(q.ans);
   if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
   else{btn.classList.add('wrong');}
+  bumpStreak(ok);
+  showFeedback(ok,q.expl,q.ans);
+  history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
+}
+
+
+// ── RXNQ (Reaction Question) ──
+// Reuses same formula parser as generador.html (inline copy)
+(function(){
+const _S={'₀':0,'₁':1,'₂':2,'₃':3,'₄':4,'₅':5,'₆':6,'₇':7,'₈':8,'₉':9};
+function _si(s){let n=0;for(const c of s)if(_S[c]!==undefined)n=n*10+_S[c];return n;}
+function _pb(s){
+  if(s==='OH')return{s:'O',h:1};if(s==='NH₂')return{s:'N',h:2};
+  if(s==='Cl')return{s:'Cl',h:0};if(s==='Br')return{s:'Br',h:0};
+  if(s==='F')return{s:'F',h:0};if(s==='I')return{s:'I',h:0};return null;
+}
+function _pa(s,i){
+  const HA=['Cl','Br','OH','NH₂','F','I'];let hp=null;
+  for(const ha of HA){if(s.startsWith(ha,i)&&s[i+ha.length]==='C'){hp=ha;i+=ha.length;break;}}
+  if(i>=s.length||s[i]!=='C')return null;i++;
+  let h=0;if(i<s.length&&s[i]==='H'){i++;let d='';while(i<s.length&&_S[s[i]]!==undefined)d+=s[i++];h=d?_si(d):1;}
+  const nd={h},br=[];if(hp){const b=_pb(hp);if(b)br.push(b);}
+  while(i<s.length&&s[i]==='('){i++;let b='';while(i<s.length&&s[i]!==')')b+=s[i++];if(i<s.length)i++;const bn=_pb(b);if(bn)br.push(bn);}
+  if(!hp){for(const ha of HA){if(s.startsWith(ha,i)&&(i+ha.length>=s.length||!'−─=≡'.includes(s[i+ha.length]))){const b=_pb(ha);if(b){br.push(b);i+=ha.length;}while(i<s.length&&_S[s[i]]!==undefined)i++;break;}}}
+  if(br.length)nd.bd=br;return{node:nd,i};
+}
+function _pcs(s){
+  s=s.replace(/\s*\([^()]{2,50}\)\s*$/,'').trim().replace(/^\d+\s+/,'').trim();
+  if(!s||s.length>50||s.includes('C₆')||s.includes('???'))return null;
+  const ch=[];let i=0,nb=1;
+  while(i<s.length){
+    while(i<s.length&&s[i]===' ')i++;if(i>=s.length)break;
+    if('−─'.includes(s[i])){nb=1;i++;continue;}
+    if(s[i]==='='){nb=2;i++;continue;}if(s[i]==='≡'){nb=3;i++;continue;}
+    if(ch.length>0)ch[ch.length-1].bn=nb;nb=1;
+    const r=_pa(s,i);if(!r)return null;ch.push(r.node);i=r.i;
+  }
+  return ch.length?ch:null;
+}
+window._rxnqMolBox=function(str){
+  if(!str)return'';
+  try{const c=_pcs(str);if(c&&c.length){const sv=mkDevSVG(c);if(sv)return`<div class="rxnq-mol-box">${sv}</div>`;}}catch(e){}
+  return`<div class="rxnq-mol-box"><span class="rxnq-mol-txt">${str}</span></div>`;
+};
+})();
+
+function buildRxnQ(q){
+  const condPart=q.condicion?`<span class="rxnq-cond">${q.condicion}</span>`:'';
+  let eqHtml='';
+  if(q.subtype==='producto'){
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <div class="rxnq-ops"><span class="rxnq-reagent">+&nbsp;${q.reactivo}</span>${condPart?`<br>${condPart}`:''}</div>
+      <span class="rxnq-arrow">──→</span>
+      <div class="rxnq-blank-box">?</div>`;
+  } else if(q.subtype==='reactivo'){
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <div class="rxnq-ops"><span class="rxnq-reagent">+</span><div class="rxnq-blank-box" style="margin-top:4px">?</div>${condPart?`<br>${condPart}`:''}</div>
+      <span class="rxnq-arrow">──→</span>
+      ${window._rxnqMolBox(q.producto)}`;
+  } else {
+    eqHtml=`${window._rxnqMolBox(q.r)}
+      <div class="rxnq-ops"><span class="rxnq-reagent">+&nbsp;${q.reactivo}</span><div class="rxnq-blank-box" style="margin-top:4px">???</div></div>
+      <span class="rxnq-arrow">──→</span>
+      ${window._rxnqMolBox(q.producto)}`;
+  }
+  const opts=shuffle(q.opts);
+  return `<div class="rxnq-eq">${eqHtml}</div>
+    <div class="rxnq-opts">${opts.map(o=>`<button class="rxnq-opt" onclick="checkRxnQ('${o.replace(/'/,"\\'").replace(/\n/g,' ')}',this)">${o}</button>`).join('')}</div>`;
+}
+function checkRxnQ(ans,btn){
+  if(answered)return;
+  answered=true;stopTimer();
+  const q=questions[qIdx];
+  const allBtns=document.querySelectorAll('.rxnq-opt');
+  allBtns.forEach(b=>{b.disabled=true;if(b.textContent===q.ans)b.classList.add('correct');});
+  const ok=norm(ans)===norm(q.ans);
+  if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
+  else btn.classList.add('wrong');
   bumpStreak(ok);
   showFeedback(ok,q.expl,q.ans);
   history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
@@ -4696,7 +4800,7 @@ function updateTimer(){
 }
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
 function disableAll(){
-  document.querySelectorAll('.mc-opt,.id-btn,.btn-check').forEach(b=>b.disabled=true);
+  document.querySelectorAll('.mc-opt,.id-btn,.btn-check,.rxnq-opt').forEach(b=>b.disabled=true);
   const di=document.getElementById('drag-check');if(di)di.disabled=true;
 }
 
@@ -5313,6 +5417,635 @@ const QBANK_REACCIONES=[
 ];
 QBANK.push(...QBANK_REACCIONES);
 
+// ════════════════════════════════════════════════════════
+// BANCO DE PREGUNTAS — RXNQ (Reacciones)
+// 10 por tema × 10 temas = 100 preguntas
+// subtype: 'producto' | 'reactivo' | 'condicion'
+// ════════════════════════════════════════════════════════
+const QBANK_RXNQ=[
+// ─── ALCANOS (rxn_alcanos) ───────────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'¿Cuál es el producto principal de esta cloración radical?',
+ r:'CH₄',reactivo:'Cl₂',condicion:'hν',producto:'CH₃Cl + HCl',
+ ans:'CH₃Cl + HCl',
+ opts:['CH₃Cl + HCl','CH₂Cl₂ + H₂','CH₄ + Cl₂','CCl₄ + H₂'],
+ expl:'Cl• (radical cloro) arranca un H del metano; CH₃• + Cl₂ → CH₃Cl + Cl•. La luz UV o calor inician la cadena radical.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'reactivo',
+ q:'¿Qué reactivo se necesita para brominar el propano por mecanismo radical?',
+ r:'CH₃−CH₂−CH₃',reactivo:'???',condicion:'hν o Δ',producto:'CH₃−CH(Br)−CH₃ + HBr',
+ ans:'Br₂',
+ opts:['Br₂','HBr','NaBr','BrF'],
+ expl:'Br₂ + hν → 2 Br•. El radical Br• ataca C secundario (más estable) → mayor selectividad que Cl₂.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'condicion',
+ q:'¿Qué condición se necesita para que ocurra esta halogenación radical?',
+ r:'CH₃−CH₂−CH₃',reactivo:'Cl₂',condicion:'???',producto:'CH₃−CHCl−CH₃ + HCl',
+ ans:'hν o Δ (calor)',
+ opts:['hν o Δ (calor)','H₂SO₄','NaOH','Ni, 25 °C'],
+ expl:'La halogenación radical requiere energía (luz UV o calor) para romper Cl₂ y generar radicales Cl• que inician la cadena.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'¿Qué ocurre cuando el butano se quema completamente?',
+ r:'C₄H₁₀',reactivo:'O₂ (exceso)',condicion:'ignición',producto:'4 CO₂ + 5 H₂O',
+ ans:'4 CO₂ + 5 H₂O',
+ opts:['4 CO₂ + 5 H₂O','4 CO + 5 H₂O','2 CO₂ + 2 H₂O','C + H₂O'],
+ expl:'Combustión completa: CₙH₂ₙ₊₂ + (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O. Para C₄H₁₀: C₄H₁₀ + 13/2 O₂ → 4 CO₂ + 5 H₂O.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'Combustión incompleta de metano (poco O₂):',
+ r:'CH₄',reactivo:'O₂ (insuficiente)',condicion:'ignición',producto:'CO + 2 H₂O',
+ ans:'CO + 2 H₂O',
+ opts:['CO + 2 H₂O','CO₂ + 2 H₂O','C + 2 H₂','2 CO₂ + H₂'],
+ expl:'Con O₂ insuficiente el carbono no se oxida completamente: CH₄ + O₂ → CO + 2 H₂O. CO (monóxido) es tóxico y se forma en estufas mal ventiladas.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'¿Qué se obtiene al clorar el metano con exceso de Cl₂?',
+ r:'CH₄',reactivo:'Cl₂ (exceso)',condicion:'hν',producto:'CCl₄ + 4 HCl',
+ ans:'CCl₄ + 4 HCl',
+ opts:['CCl₄ + 4 HCl','CH₃Cl + HCl','CHCl₃ + 3 HCl','CH₂Cl₂ + 2 HCl'],
+ expl:'Con exceso de Cl₂ la sustitución continúa: CH₄ → CH₃Cl → CH₂Cl₂ → CHCl₃ → CCl₄. El producto final es el tetracloruro de carbono.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'reactivo',
+ q:'¿Qué reactivo produce la bromación del metano por mecanismo radical?',
+ r:'CH₄',reactivo:'???',condicion:'hν',producto:'CH₃Br + HBr',
+ ans:'Br₂',
+ opts:['Br₂','HBr','Br⁻','NaBr'],
+ expl:'Br₂ + hν → 2 Br•. El radical Br• es menos reactivo que Cl• pero más selectivo, atacando carbonos más sustituidos preferentemente.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'¿Qué gases produce la combustión completa del hexano?',
+ r:'C₆H₁₄',reactivo:'O₂',condicion:'ignición',producto:'6 CO₂ + 7 H₂O',
+ ans:'6 CO₂ + 7 H₂O',
+ opts:['6 CO₂ + 7 H₂O','6 CO + 7 H₂O','3 CO₂ + 7 H₂O','C + H₂'],
+ expl:'Fórmula general: CₙH₂ₙ₊₂ + O₂ → n CO₂ + (n+1) H₂O. C₆H₁₄ + 19/2 O₂ → 6 CO₂ + 7 H₂O.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'condicion',
+ q:'Para iniciar la cloración del etano por mecanismo radical, ¿qué condición es necesaria?',
+ r:'CH₃−CH₃',reactivo:'Cl₂',condicion:'???',producto:'CH₃−CH₂Cl + HCl',
+ ans:'hν (luz UV)',
+ opts:['hν (luz UV)','NaOH acuoso','H₂SO₄','temperatura ambiente'],
+ expl:'La luz UV (hν) rompe el enlace Cl−Cl homolíticamente: Cl₂ → 2 Cl•. Sin luz (o calor) la reacción no ocurre a temperatura ambiente.'},
+{type:'rxnq',topic:'rxn_alcanos',subtype:'producto',
+ q:'Cloración del 2-metilpropano (isobutano) por mecanismo radical con poco Cl₂:',
+ r:'(CH₃)₃CH',reactivo:'Cl₂',condicion:'hν (limitado)',producto:'(CH₃)₃CCl + HCl',
+ ans:'(CH₃)₃CCl + HCl',
+ opts:['(CH₃)₃CCl + HCl','CH₃−CHCl−CH₂CH₃ + HCl','CH₂Cl(CH₃)₂CH₂ + HCl','CH₃CCl₂CH₃ + HCl'],
+ expl:'El radical 3° (terciario) es más estable que el 2° o 1°. Con Cl₂ limitado se forma principalmente el derivado terciario (CH₃)₃CCl.'},
+
+// ─── ALQUENOS (rxn_alquenos) ─────────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_alquenos',subtype:'producto',
+ q:'Predice el producto principal (regla de Markovnikov):',
+ r:'CH₃−CH=CH₂',reactivo:'HBr',condicion:null,producto:'CH₃−CH(Br)−CH₃',
+ ans:'CH₃−CH(Br)−CH₃',
+ opts:['CH₃−CH(Br)−CH₃','CH₃−CH₂−CH₂Br','CH₃−CBr₂−CH₃','BrCH₂−CH₂−CH₂Br'],
+ expl:'Markovnikov: el H se añade al C con más H (C1) y el Br al C más sustituido (C2). Forma el 2-bromopropano como producto principal.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'reactivo',
+ q:'¿Qué reactivo se usa para hidrogenar este alqueno?',
+ r:'CH₂=CH₂',reactivo:'???',condicion:'Ni, Pd o Pt',producto:'CH₃−CH₃',
+ ans:'H₂',
+ opts:['H₂','HCl','H₂O','H₂SO₄'],
+ expl:'La hidrogenación catalítica requiere H₂ y un catalizador metálico (Ni, Pd, Pt). H₂ se adsorbe en la superficie y se adiciona al doble enlace: CH₂=CH₂ + H₂ → CH₃CH₃.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'condicion',
+ q:'¿Qué condición se necesita para esta hidratación?',
+ r:'CH₃−CH=CH₂',reactivo:'H₂O',condicion:'???',producto:'CH₃−CH(OH)−CH₃',
+ ans:'H₂SO₄ (catalizador ácido)',
+ opts:['H₂SO₄ (catalizador ácido)','hν (luz UV)','NaOH','Ni, 200 °C'],
+ expl:'La hidratación de alquenos requiere catalizador ácido (H₂SO₄) que protona el alqueno generando el carbocatión más estable. Luego el agua ataca. Markovnikov: OH al C más sustituido.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'producto',
+ q:'Halogenación del eteno con Br₂:',
+ r:'CH₂=CH₂',reactivo:'Br₂',condicion:null,producto:'BrCH₂−CH₂Br',
+ ans:'BrCH₂−CH₂Br',
+ opts:['BrCH₂−CH₂Br','CH₃−CH₂Br','CH₂Br₂','CH₃Br + HBr'],
+ expl:'La adición de Br₂ al doble enlace es anti (trans): un Br ataca por un lado, el otro Br por el lado opuesto. Producto: 1,2-dibromoetano. La decoloración de Br₂/CCl₄ es prueba de insaturación.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'producto',
+ q:'Hidrogenación del propeno (Markovnikov no aplica):',
+ r:'CH₃−CH=CH₂',reactivo:'H₂',condicion:'Ni, 25 °C',producto:'CH₃−CH₂−CH₃',
+ ans:'CH₃−CH₂−CH₃',
+ opts:['CH₃−CH₂−CH₃','CH₃−CH(OH)−CH₃','CH₂=CHCH₃','CH₃−CH₂−CH₂H'],
+ expl:'La hidrogenación añade H₂ simétricamente al doble enlace: CH₃CH=CH₂ + H₂ → CH₃CH₂CH₃ (propano). No hay regioquímica porque ambos C reciben un H.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'reactivo',
+ q:'¿Con qué reactivo se obtiene el 2-cloropropano a partir de propeno?',
+ r:'CH₃−CH=CH₂',reactivo:'???',condicion:null,producto:'CH₃−CH(Cl)−CH₃',
+ ans:'HCl',
+ opts:['HCl','Cl₂','H₂ + Cl₂','NaCl'],
+ expl:'HCl se adiciona al doble enlace siguiendo Markovnikov: H al C1 (más H), Cl al C2 (más sustituido). Forma 2-cloropropano como producto principal.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'condicion',
+ q:'¿Qué catalizador se usa para la hidrogenación del 1-buteno?',
+ r:'CH₃−CH₂−CH=CH₂',reactivo:'H₂',condicion:'???',producto:'CH₃−CH₂−CH₂−CH₃',
+ ans:'Ni, Pd o Pt',
+ opts:['Ni, Pd o Pt','H₂SO₄','hν','NaOH'],
+ expl:'La hidrogenación catalítica requiere metales de transición (Ni, Pd, Pt) que adsorben H₂ en su superficie y lo transfieren al alqueno. Sin catalizador la reacción no ocurre a temperatura moderada.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'producto',
+ q:'Adición de HBr al 2-buteno (enlace simétrico):',
+ r:'CH₃−CH=CH−CH₃',reactivo:'HBr',condicion:null,producto:'CH₃−CH(Br)−CH₂−CH₃',
+ ans:'CH₃−CH(Br)−CH₂−CH₃',
+ opts:['CH₃−CH(Br)−CH₂−CH₃','CH₃−CH₂−CH(Br)−CH₃','CH₃−CHBr−CHBr−CH₃','Br₂ + CH₃CHCH₃'],
+ expl:'El doble enlace del 2-buteno es simétrico: ambos C son iguales. HBr se adiciona a cualquiera de los dos C igualmente, dando 2-bromobutano (Markovnikov aplica igualmente).'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'producto',
+ q:'Hidratación del eteno en la industria (síntesis de etanol):',
+ r:'CH₂=CH₂',reactivo:'H₂O',condicion:'H₃PO₄, 300 °C',producto:'CH₃−CH₂OH',
+ ans:'CH₃−CH₂OH',
+ opts:['CH₃−CH₂OH','CH₃CHO','CH₃COOH','CH₃−O−CH₃'],
+ expl:'Síntesis industrial del etanol: CH₂=CH₂ + H₂O → CH₃CH₂OH con catalizador ácido (H₃PO₄) a alta temperatura. Base para bebidas alcohólicas, solventes y biocombustibles en Colombia.'},
+{type:'rxnq',topic:'rxn_alquenos',subtype:'reactivo',
+ q:'¿Qué reactivo decolora al alqueno y confirma la presencia del doble enlace?',
+ r:'CH₂=CH₂',reactivo:'???',condicion:null,producto:'BrCH₂−CH₂Br',
+ ans:'Br₂ (solución naranja/roja)',
+ opts:['Br₂ (solución naranja/roja)','HBr (gas)','KMnO₄ básico','H₂SO₄'],
+ expl:'Br₂ en CCl₄ (naranja/rojo) se decolora al reaccionar con alquenos: CH₂=CH₂ + Br₂ → BrCH₂CH₂Br (incoloro). Esta decoloración es la prueba clásica de insaturación.'},
+
+// ─── ALQUINOS (rxn_alquinos) ─────────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Primera adición de HBr al acetileno (Markovnikov):',
+ r:'CH≡CH',reactivo:'HBr (1 mol)',condicion:null,producto:'CH₂=CHBr',
+ ans:'CH₂=CHBr',
+ opts:['CH₂=CHBr','CH₃CHBr₂','CHBr=CHBr','CH₃−CH₂Br'],
+ expl:'Primera adición de HBr: H al C con más H (C1), Br al C2 → bromoeteno (cloruro de vinilo análogo). El triple enlace queda parcialmente saturado como alqueno.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Segunda adición de HBr al bromoeteno:',
+ r:'CH₂=CHBr',reactivo:'HBr (1 mol)',condicion:null,producto:'CH₃CHBr₂',
+ ans:'CH₃CHBr₂',
+ opts:['CH₃CHBr₂','CH₂Br−CH₂Br','CH₃−CH₂Br','CHBr₂−CH₂Br'],
+ expl:'Markovnikov: H al C1 (tiene 2H), Br al C2 (más sustituido, tiene Br). Dos Br en C2 → 1,1-dibromoetano (gem-dihaluro). Adición total al triple enlace con 2 moles de HBr.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'condicion',
+ q:'¿Qué catalizador convierte el acetileno en acetaldehído?',
+ r:'CH≡CH',reactivo:'H₂O',condicion:'???',producto:'CH₃CHO',
+ ans:'HgSO₄ / H₂SO₄',
+ opts:['HgSO₄ / H₂SO₄','Ni, Pd o Pt','hν','NaOH'],
+ expl:'La hidratación de alquinos requiere HgSO₄/H₂SO₄ como catalizador. Forma un enol inestable que tautomeriza a carbonilo: CH≡CH + H₂O → [CH₂=CHOH] → CH₃CHO (acetaldehído).'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Hidrogenación parcial del propino con catalizador de Lindlar:',
+ r:'CH₃−C≡CH',reactivo:'H₂ (1 mol)',condicion:'Pd/CaCO₃ (Lindlar)',producto:'CH₃−CH=CH₂',
+ ans:'CH₃−CH=CH₂',
+ opts:['CH₃−CH=CH₂','CH₃−CH₂−CH₃','CH₃−C≡CH','CH₂=C=CH₂'],
+ expl:'Lindlar (Pd envenenado) solo adiciona 1 mol de H₂, deteniendo en el alqueno cis. Sin Lindlar (Ni en exceso) la reacción continúa hasta el alcano.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'reactivo',
+ q:'¿Qué reactivo se usa para la hidrogenación completa del acetileno a etano?',
+ r:'CH≡CH',reactivo:'???',condicion:'Ni (exceso)',producto:'CH₃−CH₃',
+ ans:'H₂ (2 moles)',
+ opts:['H₂ (2 moles)','HCl (2 moles)','H₂O','H₂ + HBr'],
+ expl:'Para saturar completamente un triple enlace se necesitan 2 moles de H₂. Con Ni en exceso: CH≡CH + 2 H₂ → CH₃CH₃. Con Lindlar (1 mol H₂) se detiene en el alqueno.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Halogenación del acetileno con Cl₂ (1 mol, primera adición):',
+ r:'CH≡CH',reactivo:'Cl₂ (1 mol)',condicion:null,producto:'CHCl=CHCl',
+ ans:'CHCl=CHCl',
+ opts:['CHCl=CHCl','CHCl₂−CHCl₂','CH₂Cl₂','CH₂=CHCl + HCl'],
+ expl:'Primera adición de Cl₂ al triple enlace: CHCl=CHCl (1,2-dicloroeteno). Segunda adición daría CHCl₂−CHCl₂. El producto depende de la cantidad de Cl₂.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'condicion',
+ q:'¿Cuál es la condición para la hidrogenación parcial (solo hasta alqueno)?',
+ r:'CH₃−C≡CH',reactivo:'H₂ (1 mol)',condicion:'???',producto:'CH₃−CH=CH₂',
+ ans:'Cat. de Lindlar (Pd/CaCO₃ + quinolina)',
+ opts:['Cat. de Lindlar (Pd/CaCO₃ + quinolina)','Ni a 200 °C','H₂SO₄','hν'],
+ expl:'El catalizador de Lindlar es Pd desactivado (sobre CaCO₃ + quinolina). Solo permite adición superficial de H₂ → alqueno (cis). Ni sin desactivar continuaría hasta alcano.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Doble adición de Cl₂ al acetileno (2 moles):',
+ r:'CH≡CH',reactivo:'2 Cl₂',condicion:null,producto:'CHCl₂−CHCl₂',
+ ans:'CHCl₂−CHCl₂',
+ opts:['CHCl₂−CHCl₂','CHCl=CHCl','CCl₄','CH₂Cl₂'],
+ expl:'2 moles de Cl₂ saturan completamente el triple enlace: CH≡CH + 2 Cl₂ → CHCl₂−CHCl₂ (1,1,2,2-tetracloroetano). Doble adición anti.'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'reactivo',
+ q:'¿Qué reactivo convierte CH₂=CHBr en CH₃CHBr₂ (segunda adición)?',
+ r:'CH₂=CHBr',reactivo:'???',condicion:null,producto:'CH₃CHBr₂',
+ ans:'HBr',
+ opts:['HBr','Br₂','H₂','HCl'],
+ expl:'HBr se adiciona al bromoeteno por Markovnikov: H al C con más H (C1 con 2H), Br al C2 (ya tiene un Br). Resultado: CH₃CHBr₂ (1,1-dibromoetano, gem-dihaluro).'},
+{type:'rxnq',topic:'rxn_alquinos',subtype:'producto',
+ q:'Hidratación del propino con HgSO₄/H₂SO₄:',
+ r:'CH₃−C≡CH',reactivo:'H₂O',condicion:'HgSO₄/H₂SO₄',producto:'CH₃−CO−CH₃',
+ ans:'CH₃−CO−CH₃',
+ opts:['CH₃−CO−CH₃','CH₃−CH₂−CHO','CH₃−CH(OH)−CH₂','CH₃−CH=CH₂'],
+ expl:'Markovnikov: OH al C más sustituido (C2). Enol → cetona por tautomería ceto-enólica: CH₃C≡CH + H₂O → CH₃C(OH)=CH₂ → CH₃COCH₃ (acetona/propanona).'},
+
+// ─── AROMATICOS (rxn_aromaticos) ─────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'producto',
+ q:'Nitración del benceno con mezcla nitrante:',
+ r:'C₆H₆',reactivo:'HNO₃ + H₂SO₄',condicion:'55 °C',producto:'C₆H₅NO₂ + H₂O',
+ ans:'C₆H₅NO₂ + H₂O',
+ opts:['C₆H₅NO₂ + H₂O','C₆H₅NO₃ + H₂','C₆H₄(NO₂)₂','C₆H₆ + N₂'],
+ expl:'SEAr: el electrófilo es NO₂⁺ (nitronium) generado por H₂SO₄ + HNO₃. Ataca el anillo → aducto sigma → pérdida de H⁺ → nitrobenceno. Se usa para fabricar explosivos (TNT, RDX) y colorantes.'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'reactivo',
+ q:'¿Con qué se genera el electrófilo Br⁺ para la bromación del benceno?',
+ r:'C₆H₆',reactivo:'???',condicion:'FeBr₃ (catalizador)',producto:'C₆H₅Br + HBr',
+ ans:'Br₂',
+ opts:['Br₂','HBr','KBr','BrF₃'],
+ expl:'Br₂ + FeBr₃ → Br⁺···FeBr₄⁻. El ácido de Lewis FeBr₃ polariza el enlace Br−Br, generando un electrófilo Br⁺ que ataca al anillo aromático en SEAr.'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'condicion',
+ q:'¿Qué catalizador activa el Cl₂ para clorar el benceno?',
+ r:'C₆H₆',reactivo:'Cl₂',condicion:'???',producto:'C₆H₅Cl + HCl',
+ ans:'FeCl₃ (o AlCl₃)',
+ opts:['FeCl₃ (o AlCl₃)','hν (luz UV)','H₂SO₄ diluido','NaOH'],
+ expl:'FeCl₃ es un ácido de Lewis: Cl₂ + FeCl₃ → Cl⁺···FeCl₄⁻. Este electrófilo Cl⁺ ataca el anillo. Con hν (sin catalizador) ocurre adición radical a la cadena lateral, NO al anillo.'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'producto',
+ q:'Alquilación de Friedel-Crafts: benceno + cloruro de etilo:',
+ r:'C₆H₆',reactivo:'CH₃CH₂Cl',condicion:'AlCl₃',producto:'C₆H₅CH₂CH₃ + HCl',
+ ans:'C₆H₅CH₂CH₃ + HCl',
+ opts:['C₆H₅CH₂CH₃ + HCl','C₆H₅Cl + CH₃CH₃','C₆H₄(CH₂CH₃)₂','C₆H₅CHO'],
+ expl:'AlCl₃ activa el RCl generando el carbocatión R⁺. Éste ataca el anillo (SEAr). Producto: etilbenceno (C₆H₅C₂H₅) + HCl. Base de la síntesis del estireno (plásticos).'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'condicion',
+ q:'¿Qué condición diferencia la sulfonación del benceno de otras SEAr?',
+ r:'C₆H₆',reactivo:'H₂SO₄ (fuming)',condicion:'???',producto:'C₆H₅SO₃H',
+ ans:'Δ (calor) y H₂SO₄ concentrado/fumante',
+ opts:['Δ (calor) y H₂SO₄ concentrado/fumante','hν (luz UV) + H₂SO₄ diluido','FeCl₃','H₂O fría'],
+ expl:'La sulfonación requiere H₂SO₄ fumante (oleum) y calor. El electrófilo es SO₃. La reacción es reversible: calentar en H₂O diluida quita el grupo SO₃H (desulfonación).'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'producto',
+ q:'Oxidación del grupo metilo del tolueno con KMnO₄:',
+ r:'C₆H₅−CH₃',reactivo:'KMnO₄',condicion:'H₂SO₄, Δ',producto:'C₆H₅−COOH',
+ ans:'C₆H₅−COOH',
+ opts:['C₆H₅−COOH','C₆H₅−CHO','C₆H₅−CH₂OH','C₆H₅−CH₂Cl'],
+ expl:'KMnO₄ en medio ácido oxida la cadena lateral alquílica hasta el ácido carboxílico, sin importar la longitud de la cadena. Tolueno → ácido benzoico (base para conservantes, PET).'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'reactivo',
+ q:'¿Qué electrófilo se usa en la acilación de Friedel-Crafts?',
+ r:'C₆H₆',reactivo:'???',condicion:'AlCl₃',producto:'C₆H₅−CO−CH₃ + HCl',
+ ans:'CH₃COCl (cloruro de acetilo)',
+ opts:['CH₃COCl (cloruro de acetilo)','CH₃OH','CH₃COOH','CH₃Br'],
+ expl:'En la acilación FC, el cloruro de acilo (RCOCl) + AlCl₃ genera el catión acilio (RCO⁺). Éste ataca el anillo → cetona aromática (metil-fenil-cetona / acetofenoona). Sin reorganización de carbocatión.'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'producto',
+ q:'¿Qué producto da la cloración del tolueno con hν (sin catalizador Lewis)?',
+ r:'C₆H₅−CH₃',reactivo:'Cl₂',condicion:'hν (sin FeCl₃)',producto:'C₆H₅−CH₂Cl + HCl',
+ ans:'C₆H₅−CH₂Cl + HCl',
+ opts:['C₆H₅−CH₂Cl + HCl','C₆H₄Cl−CH₃','C₆H₅−CHCl₂','C₆H₄Cl₂'],
+ expl:'Sin ácido de Lewis, la luz UV genera Cl• (radical). El radical ataca la posición bencílica (cadena lateral), NO el anillo. Producto: cloruro de bencilo (C₆H₅CH₂Cl).'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'condicion',
+ q:'Para realizar la nitración del tolueno a TNT se necesitan:',
+ r:'C₆H₅−CH₃',reactivo:'3 HNO₃',condicion:'???',producto:'C₆H₂(NO₂)₃−CH₃ (TNT)',
+ ans:'H₂SO₄ conc. + 100 °C (3 etapas)',
+ opts:['H₂SO₄ conc. + 100 °C (3 etapas)','FeBr₃ + 25 °C','hν (luz UV)','KMnO₄'],
+ expl:'Cada grupo NO₂ desactiva el anillo para la siguiente nitración. Se necesita H₂SO₄ más concentrado y mayor temperatura en cada etapa. El TNT es trinitrotolueno (2,4,6-trinitrotolueno).'},
+{type:'rxnq',topic:'rxn_aromaticos',subtype:'producto',
+ q:'Bromación del benceno en SEAr:',
+ r:'C₆H₆',reactivo:'Br₂',condicion:'FeBr₃',producto:'C₆H₅Br + HBr',
+ ans:'C₆H₅Br + HBr',
+ opts:['C₆H₅Br + HBr','C₆H₄Br₂ + H₂','C₆H₆Br₂','C₆H₅H + Br₂'],
+ expl:'SEAr conserva la aromaticidad: el anillo recupera el sistema π al perder H⁺ (no Br⁻). Producto: bromobenceno + HBr. La aromaticidad es el motor: muy diferente a la adición electrófila a alquenos.'},
+
+// ─── HALOGENUROS (rxn_halogenuros) ───────────────────────────────────────────
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'producto',
+ q:'Sustitución nucleofílica SN2 del 1-bromopropano con NaOH:',
+ r:'CH₃CH₂CH₂Br',reactivo:'NaOH',condicion:'H₂O',producto:'CH₃CH₂CH₂OH + NaBr',
+ ans:'CH₃CH₂CH₂OH + NaBr',
+ opts:['CH₃CH₂CH₂OH + NaBr','CH₃CH=CH₂ + NaBr','CH₃CH₂CH₂Br + NaOH','CH₂=CHCH₃'],
+ expl:'SN2 (Nu ataca por la espalda): OH⁻ desplaza Br⁻ en un solo paso con inversión de configuración. Halogenuro 1° → reacción SN2 favorecida (menos impedimento estérico).'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'reactivo',
+ q:'¿Qué reactivo convierte el halogenuro en alqueno por eliminación E2?',
+ r:'CH₃−CH(Br)−CH₃',reactivo:'???',condicion:'Δ',producto:'CH₃−CH=CH₂ + HBr',
+ ans:'KOH/alcohol (base fuerte)',
+ opts:['KOH/alcohol (base fuerte)','NaOH/H₂O','HBr','H₂SO₄ diluido'],
+ expl:'E2 requiere base fuerte en solvente polar aprótico (KOH/EtOH). La base arranca un H β simultáneamente con la salida del haluro. Zaitsev: el alqueno más sustituido es el producto mayoritario.'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'condicion',
+ q:'¿Bajo qué condición la sustitución de un 3° se realiza por SN1?',
+ r:'(CH₃)₃CBr',reactivo:'H₂O',condicion:'???',producto:'(CH₃)₃COH + HBr',
+ ans:'Solvente polar prótico (H₂O, ROH), sin base fuerte',
+ opts:['Solvente polar prótico (H₂O, ROH), sin base fuerte','KOH/EtOH (E2)','NaH en THF seco','hν (luz UV)'],
+ expl:'SN1 en haluros 3°: el carbocatión 3° se forma espontáneamente (estable); el solvente polar prótico estabiliza el catión y el haluro. H₂O actúa como nucleófilo. Mecanismo de dos pasos.'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'producto',
+ q:'Eliminación E2 del 2-bromobutano con KOH/EtOH:',
+ r:'CH₃−CH(Br)−CH₂−CH₃',reactivo:'KOH',condicion:'EtOH, Δ',producto:'CH₃−CH=CH−CH₃ (mayoritario)',
+ ans:'CH₃−CH=CH−CH₃ (mayoritario)',
+ opts:['CH₃−CH=CH−CH₃ (mayoritario)','CH₃−CH₂−CH=CH₂','CH₃−CH₂−CH₂−CH₃','CH₃−C(=CH₂)−CH₃'],
+ expl:'Zaitsev: el alqueno más sustituido (2-buteno) es el mayoritario. KOH arranca el H del C más cercano al haluro que da el alqueno más sustituido (2 sustituyentes).'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'producto',
+ q:'Reacción de Grignard: bromuro de etilmagnesio + CO₂:',
+ r:'CH₃CH₂MgBr',reactivo:'CO₂',condicion:'éter seco → H₃O⁺',producto:'CH₃CH₂COOH',
+ ans:'CH₃CH₂COOH',
+ opts:['CH₃CH₂COOH','CH₃CH₂OH','CH₃CH₂CHO','CH₃CH₂−CH₃'],
+ expl:'El reactivo de Grignard (RMgBr) actúa como carbanión (nucleófilo fuerte). Ataca CO₂ → forma sal de carboxilato → H₃O⁺ → ácido carboxílico. Extiende la cadena en 1C.'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'reactivo',
+ q:'¿Con qué reactivo el halogenuro da el alcohol por SN2?',
+ r:'CH₃Br',reactivo:'???',condicion:'H₂O',producto:'CH₃OH + HBr',
+ ans:'NaOH (o H₂O)',
+ opts:['NaOH (o H₂O)','Na₂CO₃','HBr','K₂CrO₄'],
+ expl:'OH⁻ (de NaOH) o H₂O actúan como nucleófilos y desplazan Br⁻ por SN2. El metil-halogenuro es el más reactivo en SN2 por mínimo impedimento estérico.'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'condicion',
+ q:'¿En qué solvente se favorece la SN2 del 1-yodopropano con CN⁻?',
+ r:'CH₃CH₂CH₂I',reactivo:'NaCN',condicion:'???',producto:'CH₃CH₂CH₂CN + NaI',
+ ans:'DMF o DMSO (solvente polar aprótico)',
+ opts:['DMF o DMSO (solvente polar aprótico)','H₂O (solvente polar prótico)','benceno (apolar)','éter dietílico'],
+ expl:'Solvente polar aprótico (DMF, DMSO, acetona) no solva el nucleófilo → CN⁻ libre y reactivo. En solvente prótico el nucleófilo se solva (rodea de H₂O) y es menos reactivo.'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'producto',
+ q:'Síntesis de éter de Williamson con NaOCH₃ y CH₃CH₂Br:',
+ r:'CH₃CH₂Br',reactivo:'NaOCH₃',condicion:'SN2',producto:'CH₃CH₂−O−CH₃ + NaBr',
+ ans:'CH₃CH₂−O−CH₃ + NaBr',
+ opts:['CH₃CH₂−O−CH₃ + NaBr','CH₃CH₂OH + NaBr','CH₃CH₂Br + NaOCH₃','CH₂=CH₂ + CH₃OH'],
+ expl:'Williamson: el alcóxido (RO⁻) actúa como nucleófilo en SN2. Desplaza el haluro del halogenuro menos sustituido → éter asimétrico. Requiere halogenuro 1° (SN2 > E2).'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'reactivo',
+ q:'¿Qué reactivo convierte el halogenuro en alquino terminal (acetiluro)?',
+ r:'CH₃−CH(Br)−CH₃',reactivo:'???',condicion:'2× base fuerte',producto:'CH₃−C≡CH + 2 HBr',
+ ans:'KOH/alcohol (2 equiv.)',
+ opts:['KOH/alcohol (2 equiv.)','NaH (1 equiv.)','H₂SO₄','LiAlH₄'],
+ expl:'Doble eliminación E2 (2 moles de base): primer E2 da alqueno → segundo E2 (con base fuerte) da alquino. Requiere condiciones más duras (2 equiv. de KOH/EtOH, mayor temperatura).'},
+{type:'rxnq',topic:'rxn_halogenuros',subtype:'producto',
+ q:'Reacción de Wurtz: 2 CH₃Br + Na →',
+ r:'2 CH₃Br',reactivo:'Na (metal)',condicion:'éter',producto:'CH₃−CH₃ + 2 NaBr',
+ ans:'CH₃−CH₃ + 2 NaBr',
+ opts:['CH₃−CH₃ + 2 NaBr','CH₃OH + NaBr','CH₃Na + NaBr','CH₄ + NaBr'],
+ expl:'Wurtz: Na metálico reduce los halogenuros y acopla dos fragmentos orgánicos: 2 RX + 2 Na → R−R + 2 NaX. Forma el alcano con el doble de carbonos. Útil para sintetizar alcanos simétricos.'},
+
+// ─── ALCOHOLES (rxn_alcoholes) ───────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'producto',
+ q:'Oxidación suave del etanol con KMnO₄ diluido:',
+ r:'CH₃CH₂OH',reactivo:'KMnO₄ diluido',condicion:'H₂SO₄, Δ suave',producto:'CH₃CHO',
+ ans:'CH₃CHO',
+ opts:['CH₃CHO','CH₃COOH','CO₂ + H₂O','CH₃CH₂Cl'],
+ expl:'Alcohol 1° + oxidante suave (o tiempo corto) → aldehído. Oxidante fuerte o tiempo prolongado → ácido carboxílico. El acetaldehído (CH₃CHO) es el primer producto de metabolización del etanol.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'reactivo',
+ q:'¿Qué reactivo deshidrata el etanol a etileno a 170 °C?',
+ r:'CH₃CH₂OH',reactivo:'???',condicion:'170 °C',producto:'CH₂=CH₂ + H₂O',
+ ans:'H₂SO₄ conc.',
+ opts:['H₂SO₄ conc.','HCl','NaOH','Ni'],
+ expl:'H₂SO₄ conc. a 170 °C deshidrata el alcohol por eliminación E1/E2: pérdida de H y OH del alcohol. A 140 °C (T baja) se forma éter (deshidratación intermolecular). Zaitsev: alqueno más sustituido.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'condicion',
+ q:'¿A qué temperatura H₂SO₄ convierte el etanol en éter dietílico?',
+ r:'2 CH₃CH₂OH',reactivo:'H₂SO₄',condicion:'???',producto:'CH₃CH₂−O−CH₂CH₃ + H₂O',
+ ans:'140 °C (temperatura moderada)',
+ opts:['140 °C (temperatura moderada)','170 °C','25 °C','300 °C'],
+ expl:'140 °C → deshidratación intermolecular (éter); 170 °C → deshidratación intramolecular (alqueno). El éter dietílico (anestesia) se forma a temperatura más baja que el etileno.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'producto',
+ q:'Esterificación de Fischer: ácido acético + etanol:',
+ r:'CH₃COOH + CH₃CH₂OH',reactivo:'H₂SO₄ cat.',condicion:'Δ',producto:'CH₃COOC₂H₅ + H₂O',
+ ans:'CH₃COOC₂H₅ + H₂O',
+ opts:['CH₃COOC₂H₅ + H₂O','CH₃CHO + H₂O','CH₃COOH₂ + C₂H₅OH','CH₃CH₂COOH'],
+ expl:'Fischer: ácido + alcohol ⇌ éster + H₂O (equilibrio). H₂SO₄ es catalizador ácido. Acetato de etilo (CH₃COOC₂H₅): solvente industrial, fragancia de peras. Usado en industria de pinturas en Colombia.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'producto',
+ q:'Oxidación del 2-propanol con KMnO₄ (alcohol 2°):',
+ r:'CH₃−CH(OH)−CH₃',reactivo:'KMnO₄',condicion:'H₂SO₄',producto:'CH₃−CO−CH₃',
+ ans:'CH₃−CO−CH₃',
+ opts:['CH₃−CO−CH₃','CH₃−COOH','CH₃−CH₂−CH₃','CH₃−CHO'],
+ expl:'Alcohol 2° + oxidante → cetona (CH₃COCH₃, acetona). Las cetonas NO se oxidan más con KMnO₄ suave (el C carbonílico no tiene H). Acetona: solvente en industria de esmaltes de uñas.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'reactivo',
+ q:'¿Qué reactivo convierte el 1-propanol en 1-bromopropano?',
+ r:'CH₃CH₂CH₂OH',reactivo:'???',condicion:'H₂SO₄',producto:'CH₃CH₂CH₂Br + H₂O',
+ ans:'HBr',
+ opts:['HBr','Br₂','KBr','NaBr'],
+ expl:'HX (ácido hídrico) convierte alcoholes en halogenuros: OH se protona → buen GS H₂O, luego X⁻ ataca (SN2 para 1°, SN1 para 3°). Reactividad: HI > HBr > HCl.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'condicion',
+ q:'¿Qué condición convierte el alcohol 3° en alqueno (no en éter)?',
+ r:'(CH₃)₃COH',reactivo:'H₂SO₄',condicion:'???',producto:'(CH₃)₂C=CH₂ + H₂O',
+ ans:'Alta temperatura (Δ) y H₂SO₄ concentrado',
+ opts:['Alta temperatura (Δ) y H₂SO₄ concentrado','Temperatura baja (25–50 °C)','NaOH acuoso','hν + Br₂'],
+ expl:'Alta temperatura (Δ) favorece la eliminación (alqueno) sobre la sustitución (éter). Alcohol 3° elimina fácilmente (carbocatión 3° estable). Regla de Zaitsev: alqueno más sustituido.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'producto',
+ q:'¿Qué ocurre al oxidar fuertemente el etanol con KMnO₄/H₂SO₄ en exceso?',
+ r:'CH₃CH₂OH',reactivo:'KMnO₄',condicion:'H₂SO₄, exceso',producto:'CH₃COOH',
+ ans:'CH₃COOH',
+ opts:['CH₃COOH','CH₃CHO','CO₂ + H₂O','CH₃CH₂Cl'],
+ expl:'Oxidación fuerte: alcohol 1° → aldehído → ácido carboxílico. El aldehído formado inicialmente es interceptado por el exceso de oxidante. Ácido acético (vinagre): C₂H₅OH oxidado por bacterias Acetobacter.'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'reactivo',
+ q:'¿Qué reactivo reduce una cetona a alcohol 2°?',
+ r:'CH₃−CO−CH₃',reactivo:'???',condicion:'éter seco → H₃O⁺',producto:'CH₃−CH(OH)−CH₃',
+ ans:'NaBH₄ (o LiAlH₄)',
+ opts:['NaBH₄ (o LiAlH₄)','H₂SO₄','KMnO₄','HCl'],
+ expl:'NaBH₄ o LiAlH₄ reducen C=O a C−OH. NaBH₄ (más suave) reduce aldehídos y cetonas; LiAlH₄ también reduce ácidos, ésteres, amidas. Cetona + H⁻ → alcohol 2° (el H ataca el C=O).'},
+{type:'rxnq',topic:'rxn_alcoholes',subtype:'producto',
+ q:'Reacción del etanol con Na metálico:',
+ r:'CH₃CH₂OH',reactivo:'Na (metal)',condicion:'seco',producto:'CH₃CH₂O⁻Na⁺ + H₂',
+ ans:'CH₃CH₂O⁻Na⁺ + H₂',
+ opts:['CH₃CH₂O⁻Na⁺ + H₂','CH₃CH₂Cl + NaOH','CH₃CHO + NaH','CH₃CH₂ONa (sólido)'],
+ expl:'Los alcoholes son ácidos débiles: R−OH + Na → R−O⁻Na⁺ + ½ H₂↑. El etóxido (CH₃CH₂O⁻Na⁺) es una base fuerte útil en síntesis orgánica. El H₂ burbujea visiblemente.'},
+
+// ─── AMINAS (rxn_aminas) ─────────────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_aminas',subtype:'producto',
+ q:'Reacción básica de la metilamina con HCl:',
+ r:'CH₃NH₂',reactivo:'HCl',condicion:null,producto:'CH₃NH₃Cl',
+ ans:'CH₃NH₃Cl',
+ opts:['CH₃NH₃Cl','CH₃Cl + NH₃','CH₃NHOH','CH₃N + H₂'],
+ expl:'Aminas son bases (par e⁻ libre en N): CH₃NH₂ + HCl → CH₃NH₃⁺Cl⁻ (cloruro de metilamonio). Sal amónica. Las aminas huelen a pescado; su neutralización con ácido forma sales sin olor.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'reactivo',
+ q:'¿Qué reactivo convierte la amina primaria en amida?',
+ r:'CH₃NH₂',reactivo:'???',condicion:null,producto:'CH₃NHCOCH₃ + HCl',
+ ans:'CH₃COCl (cloruro de acetilo)',
+ opts:['CH₃COCl (cloruro de acetilo)','CH₃COOH','CH₃OH','HCl'],
+ expl:'Acilación: amina + cloruro de ácido → amida + HCl. La reacción es rápida (cloruros de ácido muy reactivos). CH₃NH₂ + CH₃COCl → CH₃NHCOCH₃ (N-metilacetamida) + HCl.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'condicion',
+ q:'¿Cómo se convierte un nitroarómático en una amina aromática?',
+ r:'C₆H₅NO₂',reactivo:'H₂',condicion:'???',producto:'C₆H₅NH₂ + 2 H₂O',
+ ans:'Fe/HCl o Sn/HCl (reducción)',
+ opts:['Fe/HCl o Sn/HCl (reducción)','KMnO₄','H₂SO₄ conc.','hν'],
+ expl:'C₆H₅NO₂ + 3 H₂ → C₆H₅NH₂ + 2 H₂O. Con Fe/HCl o Sn/HCl (o H₂/Pd). La anilina (C₆H₅NH₂) es la base de colorantes sintéticos (industria textil colombiana).'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'producto',
+ q:'Sales de diazonio de la anilina con HNO₂ a 0–5 °C:',
+ r:'C₆H₅NH₂',reactivo:'HNO₂ (NaNO₂/HCl)',condicion:'0-5 °C',producto:'C₆H₅N₂⁺Cl⁻',
+ ans:'C₆H₅N₂⁺Cl⁻',
+ opts:['C₆H₅N₂⁺Cl⁻','C₆H₅NO₂','C₆H₅Cl + N₂','C₆H₆ + NO₂'],
+ expl:'Diazotación: ArNH₂ + HNO₂ + HCl → ArN₂⁺Cl⁻ (sal de diazonio). Solo a 0–5°C (si T alta se descompone → fenol). Las sales de diazonio son intermedios para colorantes azo (industria textil).'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'producto',
+ q:'Alquilación de la anilina con CH₃I (exceso):',
+ r:'C₆H₅NH₂',reactivo:'CH₃I (exceso)',condicion:'base',producto:'C₆H₅N(CH₃)₂',
+ ans:'C₆H₅N(CH₃)₂',
+ opts:['C₆H₅N(CH₃)₂','C₆H₅NHCH₃','C₆H₅N(CH₃)₃⁺I⁻','C₆H₅CH₃ + NH₃'],
+ expl:'Metilación de aminas: con exceso CH₃I y base → N,N-dimetilanilina (amina 3°). Con 3 equiv. CH₃I → sal de amonio cuaternaria. El N puede alquilarse hasta 4 veces.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'reactivo',
+ q:'¿Con qué se reduce la acetamida (CH₃CONH₂) para obtener una amina?',
+ r:'CH₃CONH₂',reactivo:'???',condicion:'éter seco → H₃O⁺',producto:'CH₃CH₂NH₂',
+ ans:'LiAlH₄',
+ opts:['LiAlH₄','NaBH₄','H₂/Ni','KMnO₄'],
+ expl:'LiAlH₄ reduce amidas a aminas: RCONH₂ + LiAlH₄ → RCH₂NH₂. NaBH₄ no es suficientemente fuerte para reducir amidas. Acetamida → etilamina (amina 1° más C).'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'condicion',
+ q:'¿A qué temperatura estable existe la sal de diazonio para posterior acoplamiento?',
+ r:'ArNH₂',reactivo:'NaNO₂ + HCl',condicion:'???',producto:'ArN₂⁺Cl⁻',
+ ans:'0–5 °C (baño de hielo)',
+ opts:['0–5 °C (baño de hielo)','25 °C','100 °C','−20 °C'],
+ expl:'Por encima de 5°C la sal de diazonio se descompone rápidamente: ArN₂⁺ + H₂O → ArOH + N₂↑ (reacción violenta). El baño de hielo mantiene la temperatura baja para usar el reactivo.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'producto',
+ q:'Reacción de la amina primaria con ácido nitroso a temperatura ambiente:',
+ r:'CH₃NH₂',reactivo:'HNO₂',condicion:'T ambiente',producto:'CH₃OH + N₂ + H₂O',
+ ans:'CH₃OH + N₂ + H₂O',
+ opts:['CH₃OH + N₂ + H₂O','CH₃N₂⁺','CH₃NO₂','CH₃NHOH'],
+ expl:'Aminas primarias alifáticas + HNO₂ (T ambiente): la sal de diazonio inestable se descompone instantáneamente → alcohol + N₂ + H₂O. Las aromáticas son estables a 0–5°C.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'producto',
+ q:'Síntesis de Gabriel: ftalimida de potasio + CH₃CH₂Br →',
+ r:'Ftalimida-K⁺',reactivo:'CH₃CH₂Br',condicion:'SN2',producto:'N-etil-ftalimida',
+ ans:'N-etil-ftalimida',
+ opts:['N-etil-ftalimida','Etilamina + KBr','CH₃CH₂NH₂','Ftalimida + CH₃CH₃'],
+ expl:'Gabriel: el nitrógeno de la ftalimida actúa como nucleófilo (N−K⁺) en SN2. La N-alquilftalimida se hidroliza (KOH/H₂O o N₂H₄) para liberar amina primaria sin aminas secundarias/terciarias.'},
+{type:'rxnq',topic:'rxn_aminas',subtype:'reactivo',
+ q:'¿Qué se usa para proteger la amina antes de reacciones en el anillo?',
+ r:'C₆H₅NH₂',reactivo:'???',condicion:null,producto:'C₆H₅NHCOCH₃',
+ ans:'CH₃CO₂O (anhídrido acético)',
+ opts:['CH₃CO₂O (anhídrido acético)','CH₃I','HCl','H₂O₂'],
+ expl:'La acetilación de la amina (grupo protector): anilina + Ac₂O → acetanilida. Esto reduce la activación excesiva del anillo (evita polisustitucion). Se desprotege con NaOH/H₂O. Estrategia clave en síntesis de fármacos.'},
+
+// ─── CARBONILO (rxn_carbonilo) ───────────────────────────────────────────────
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'producto',
+ q:'Reducción del etanal con NaBH₄:',
+ r:'CH₃CHO',reactivo:'NaBH₄',condicion:'EtOH → H₃O⁺',producto:'CH₃CH₂OH',
+ ans:'CH₃CH₂OH',
+ opts:['CH₃CH₂OH','CH₃COOH','CH₃CH₃','CH₂=CH₂'],
+ expl:'NaBH₄ dona H⁻ al C=O (electrófilo): aldehído → alcohol 1°. Selectivo: no reduce ésteres ni amidas (a diferencia de LiAlH₄). El etanol es el producto (base del vino y la chicha colombiana).'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'reactivo',
+ q:'¿Qué reactivo convierte la acetona en 2-propanol?',
+ r:'CH₃COCH₃',reactivo:'???',condicion:'H₃O⁺',producto:'CH₃CH(OH)CH₃',
+ ans:'NaBH₄ (o LiAlH₄)',
+ opts:['NaBH₄ (o LiAlH₄)','H₂SO₄','KMnO₄','HCl'],
+ expl:'NaBH₄ reduce cetonas a alcoholes 2°: CH₃COCH₃ + NaBH₄ → CH₃CH(OH)CH₃. La cetona no se oxida más (no tiene H en C=O), por eso los alcoholes 2° son el límite de oxidación por agentes suaves.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'condicion',
+ q:'¿Bajo qué condición la adición de HCN al formaldehído forma un cianohidrina?',
+ r:'HCHO',reactivo:'HCN',condicion:'???',producto:'HOCH₂CN',
+ ans:'Base o CN⁻ (catálisis básica)',
+ opts:['Base o CN⁻ (catálisis básica)','H₂SO₄','hν','Ni, 200 °C'],
+ expl:'HCN solo (pKa 9) es ácido débil; en medio básico o con CN⁻ libre el nucleófilo CN⁻ ataca el carbonilo. Cianohidrinas son intermedios para amino ácidos y síntesis de cadena extendida.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'producto',
+ q:'Condensación aldólica del etanal (autoadición, base):',
+ r:'2 CH₃CHO',reactivo:'NaOH',condicion:'H₂O, 25 °C',producto:'CH₃−CH(OH)−CH₂CHO',
+ ans:'CH₃−CH(OH)−CH₂CHO',
+ opts:['CH₃−CH(OH)−CH₂CHO','CH₃CH₂CHO','CH₃COOH','2 CH₃CH₂OH'],
+ expl:'Aldólica: el enolato de un CH₃CHO (α-C) ataca el C=O del otro CH₃CHO. Producto: aldol (β-hidroxialdehído). Si se calienta → crotonaldehído (eliminación del OH). Base del sabor de panes y caramelización.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'producto',
+ q:'Oxidación del benzaldehído (PhCHO) con KMnO₄:',
+ r:'C₆H₅CHO',reactivo:'KMnO₄',condicion:'H₂SO₄',producto:'C₆H₅COOH',
+ ans:'C₆H₅COOH',
+ opts:['C₆H₅COOH','C₆H₅CH₂OH','C₆H₅CH₃','CO₂ + H₂O'],
+ expl:'Aldehídos se oxidan fácilmente a ácidos carboxílicos (tienen H en C=O). KMnO₄ o reactivo de Tollens (Ag₂O/NH₃) son oxidantes. Ácido benzoico: conservante E210 en refrescos colombianos.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'reactivo',
+ q:'¿Qué reactivo distingue un aldehído de una cetona (reactivo de Tollens)?',
+ r:'CH₃CHO',reactivo:'???',condicion:'baño María',producto:'CH₃COOH + Ag (espejo)',
+ ans:'[Ag(NH₃)₂]⁺OH⁻ (reactivo de Tollens)',
+ opts:['[Ag(NH₃)₂]⁺OH⁻ (reactivo de Tollens)','KMnO₄','NaBH₄','CuSO₄/NaOH (Fehling)'],
+ expl:'Tollens: Ag⁺ oxida el aldehído → plata metálica (espejo de plata) en las paredes. Las cetonas NO reaccionan. Fehling (Cu²⁺ → Cu₂O rojo) también distingue aldehídos pero reacciona mejor con alifáticos.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'condicion',
+ q:'¿Qué condición favorece la reacción de Grignard con una cetona?',
+ r:'CH₃MgBr',reactivo:'CH₃COCH₃',condicion:'???',producto:'(CH₃)₃COH',
+ ans:'Éter seco (THF o Et₂O), N₂, luego H₃O⁺',
+ opts:['Éter seco (THF o Et₂O), N₂, luego H₃O⁺','H₂O/EtOH','H₂SO₄ conc.','Ni, 200 °C'],
+ expl:'Grignard se destruye con agua. Requiere solvente aprótico anhidro (THF, Et₂O) y atmósfera inerte (N₂/Ar). La hidrólisis posterior (H₃O⁺) libera el alcohol del alcóxido de Mg.'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'producto',
+ q:'Formación de imina (base de Schiff) entre etanal y metilamina:',
+ r:'CH₃CHO',reactivo:'CH₃NH₂',condicion:'H⁺ cat., Δ/-H₂O',producto:'CH₃CH=NCH₃ + H₂O',
+ ans:'CH₃CH=NCH₃ + H₂O',
+ opts:['CH₃CH=NCH₃ + H₂O','CH₃CH₂NHCH₃','CH₃CONHCH₃','CH₃CH₂OH + CH₃NH₂'],
+ expl:'Adición nucleofílica de amina + pérdida de H₂O → imina (C=N). Base de Schiff. Equilibrio: se favorece deshidratando. Iminios son intermedios en reacciones biológicas (enzimas PLP en aminoácidos).'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'producto',
+ q:'Reacción de Wittig: etanal + Ph₃P=CH₂ →',
+ r:'CH₃CHO',reactivo:'Ph₃P=CH₂',condicion:null,producto:'CH₃−CH=CH₂ + Ph₃P=O',
+ ans:'CH₃−CH=CH₂ + Ph₃P=O',
+ opts:['CH₃−CH=CH₂ + Ph₃P=O','CH₃CH₂CH₂OH','CH₃CH₂Cl','CH₂=CHOH'],
+ expl:'Wittig: el iluro (Ph₃P=CH₂) ataca el C=O → alqueno con posición doble definida. No hay ambigüedad regioquímica. Ph₃P=O es subproducto. Síntesis precisa de alquenos (fármacos, retinal vitamina A).'},
+{type:'rxnq',topic:'rxn_carbonilo',subtype:'reactivo',
+ q:'¿Con qué reactivo se convierte el aldehído en 1,1-diol (hidrato)?',
+ r:'HCHO',reactivo:'???',condicion:'equilibrio',producto:'H₂C(OH)₂',
+ ans:'H₂O',
+ opts:['H₂O','H₂O₂','NaOH','H₂SO₄'],
+ expl:'HCHO + H₂O ⇌ H₂C(OH)₂ (formaldehído hidratado). El equilibrio favorece el hidrato (gem-diol) para aldehídos simples y formaldehído, pero no para cetonas (stérico y electrónico). Formalina = formaldehído en H₂O.'},
+
+// ─── ACIDOS CARBOXILICOS (rxn_acidos) ────────────────────────────────────────
+{type:'rxnq',topic:'rxn_acidos',subtype:'producto',
+ q:'Esterificación de Fischer: ácido benzoico + metanol:',
+ r:'C₆H₅COOH + CH₃OH',reactivo:'H₂SO₄ cat.',condicion:'Δ, equilibrio',producto:'C₆H₅COOCH₃ + H₂O',
+ ans:'C₆H₅COOCH₃ + H₂O',
+ opts:['C₆H₅COOCH₃ + H₂O','C₆H₅CH₂OH + CO₂','C₆H₅COOH₂','C₆H₅OH + HCOOCH₃'],
+ expl:'Fischer: ácido + alcohol → éster + H₂O. Equilibrio desplazado eliminando agua o exceso de alcohol. Benzoato de metilo: fragancia en perfumes. Base de la síntesis de metilaminas y pHTalatos.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'reactivo',
+ q:'¿Con qué se neutraliza el ácido acético para obtener acetato de sodio?',
+ r:'CH₃COOH',reactivo:'???',condicion:null,producto:'CH₃COONa + H₂O',
+ ans:'NaOH',
+ opts:['NaOH','Na (metal)','NaCl','Na₂SO₄'],
+ expl:'Neutralización: CH₃COOH + NaOH → CH₃COO⁻Na⁺ + H₂O. El acetato de sodio (CH₃COONa) es la sal del ácido débil. Es conservante alimentario (E262), usado en papas fritas con sabor vinagre.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'condicion',
+ q:'¿Qué condición favorece la descarboxilación del ácido malónico a ácido acético?',
+ r:'HOOCCH₂COOH',reactivo:null,condicion:'???',producto:'CH₃COOH + CO₂',
+ ans:'Δ (calor fuerte, > 150 °C)',
+ opts:['Δ (calor fuerte, > 150 °C)','H₂SO₄ fría','hν','NaOH acuoso'],
+ expl:'Los β-cetoácidos y ácidos malonicos se descarboxilan fácilmente con calor: el CO₂ se pierde a través de un estado de transición cíclico de 6 átomos. Útil en síntesis de ácidos.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'producto',
+ q:'Reacción del ácido acético con NH₃ (exceso de temperatura):',
+ r:'CH₃COOH + NH₃',reactivo:null,condicion:'Δ fuerte',producto:'CH₃CONH₂ + H₂O',
+ ans:'CH₃CONH₂ + H₂O',
+ opts:['CH₃CONH₂ + H₂O','CH₃COONH₄','CH₃CH₂NH₂','CH₃NH₂ + CO₂'],
+ expl:'A temperatura alta la sal amónica se deshidrata a amida: CH₃COONH₄ → CH₃CONH₂ + H₂O. La acetamida es sólido blanco. A temperatura baja solo se forma la sal CH₃COONH₄.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'producto',
+ q:'Reducción del ácido propanoico con LiAlH₄:',
+ r:'CH₃CH₂COOH',reactivo:'LiAlH₄',condicion:'éter seco → H₃O⁺',producto:'CH₃CH₂CH₂OH',
+ ans:'CH₃CH₂CH₂OH',
+ opts:['CH₃CH₂CH₂OH','CH₃CH₂CHO','CH₃CH₂COOH','CH₃CH₃'],
+ expl:'LiAlH₄ reduce ácidos carboxílicos directamente a alcoholes 1°: RCOOH + LiAlH₄ → RCH₂OH. NaBH₄ NO reduce ácidos (muy poco reactivo con ellos). 2 pasos: RCOOH → RCH₂OH.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'reactivo',
+ q:'¿Qué reactivo convierte el ácido acético en cloruro de acetilo?',
+ r:'CH₃COOH',reactivo:'???',condicion:null,producto:'CH₃COCl + HCl',
+ ans:'SOCl₂ (cloruro de tionilo)',
+ opts:['SOCl₂ (cloruro de tionilo)','Cl₂','HCl','PCl₃'],
+ expl:'SOCl₂ convierte el −OH del ácido en −Cl: RCOOH + SOCl₂ → RCOCl + SO₂ + HCl. PCl₃ o PCl₅ también funcionan. Los cloruros de ácido son los derivados más reactivos.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'condicion',
+ q:'¿Qué condición especial tiene la esterificación de Fischer para desplazar el equilibrio?',
+ r:'CH₃COOH + CH₃OH',reactivo:'H₂SO₄ cat.',condicion:'???',producto:'CH₃COOCH₃ + H₂O',
+ ans:'Exceso de alcohol o eliminación del agua (CaCl₂ anhidro)',
+ opts:['Exceso de alcohol o eliminación del agua (CaCl₂ anhidro)','Base fuerte (KOH)','H₂ a presión','NaOH acuoso'],
+ expl:'Fischer es equilibrio: Le Chatelier → exceso de ROH o retirar H₂O (tamices moleculares, CaCl₂) desplaza hacia el éster. La saponificación (NaOH) es la reacción inversa e irreversible.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'producto',
+ q:'Reacción del ácido acético con NaHCO₃:',
+ r:'CH₃COOH',reactivo:'NaHCO₃',condicion:null,producto:'CH₃COONa + H₂O + CO₂',
+ ans:'CH₃COONa + H₂O + CO₂',
+ opts:['CH₃COONa + H₂O + CO₂','CH₃COOH₂ + Na','CH₃OH + CO₂','CH₃COONa'],
+ expl:'Los ácidos carboxílicos reaccionan con carbonatos y bicarbonatos con efervescencia (CO₂↑). Esta prueba distingue ácidos carboxílicos de fenoles (fenoles NO reaccionan con NaHCO₃).'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'reactivo',
+ q:'¿Qué oxidante convierte el tolueno en ácido benzoico?',
+ r:'C₆H₅CH₃',reactivo:'???',condicion:'H₂SO₄, Δ',producto:'C₆H₅COOH',
+ ans:'KMnO₄',
+ opts:['KMnO₄','Br₂/FeBr₃','HNO₃/H₂SO₄','LiAlH₄'],
+ expl:'KMnO₄ oxida la cadena lateral alquílica hasta ácido carboxílico sin importar su longitud. Ácido benzoico: conservante E210. La reacción oxida el Cα hasta CO₂ cuando la cadena es muy larga.'},
+{type:'rxnq',topic:'rxn_acidos',subtype:'producto',
+ q:'Hidrólisis ácida del estearato de etilo (éster):',
+ r:'CH₃(CH₂)₁₆COOC₂H₅',reactivo:'H₂O',condicion:'H₂SO₄, Δ',producto:'CH₃(CH₂)₁₆COOH + C₂H₅OH',
+ ans:'CH₃(CH₂)₁₆COOH + C₂H₅OH',
+ opts:['CH₃(CH₂)₁₆COOH + C₂H₅OH','CH₃(CH₂)₁₆COONa + C₂H₅OH','CH₃(CH₂)₁₆CHO + CO₂','Solo el ácido libre'],
+ expl:'Hidrólisis ácida de ésteres es reversible (↔). Produce el ácido libre + el alcohol. La saponificación (NaOH) produce la sal del ácido (carboxilato) + alcohol y es irreversible (base consume el ácido).'},
+
+// ─── DERIVADOS DE ACIDO (rxn_derivados) ──────────────────────────────────────
+{type:'rxnq',topic:'rxn_derivados',subtype:'producto',
+ q:'Hidrólisis del acetato de etilo con NaOH (saponificación):',
+ r:'CH₃COOC₂H₅',reactivo:'NaOH',condicion:'H₂O, Δ',producto:'CH₃COO⁻Na⁺ + C₂H₅OH',
+ ans:'CH₃COO⁻Na⁺ + C₂H₅OH',
+ opts:['CH₃COO⁻Na⁺ + C₂H₅OH','CH₃COOH + C₂H₅OH','CH₃COOH + NaOC₂H₅','CH₃OH + C₂H₅COONa'],
+ expl:'Saponificación: irreversible. El carboxilato (CH₃COO⁻) formado es la base conjugada del ácido débil → no reacciona con el alcohol. Diferente a la hidrólisis ácida (reversible).'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'reactivo',
+ q:'¿Qué nucleófilo convierte el cloruro de acetilo en amida?',
+ r:'CH₃COCl',reactivo:'???',condicion:null,producto:'CH₃CONH₂ + HCl',
+ ans:'NH₃ (2 moles)',
+ opts:['NH₃ (2 moles)','NaOH','CH₃OH','H₂O'],
+ expl:'CH₃COCl + 2 NH₃ → CH₃CONH₂ + NH₄Cl. Un mol de NH₃ ataca como nucleófilo al carbonilo; el segundo mol neutraliza el HCl liberado. La amida es el derivado menos reactivo de los ácidos.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'condicion',
+ q:'¿Qué condición se necesita para la hidrólisis de la amida primaria?',
+ r:'CH₃CONH₂',reactivo:'H₂O',condicion:'???',producto:'CH₃COOH + NH₄⁺',
+ ans:'H⁺ o OH⁻ fuerte + Δ (calor)',
+ opts:['H⁺ o OH⁻ fuerte + Δ (calor)','Temperatura ambiente','hν','Na metálico'],
+ expl:'Las amidas son los derivados más estables (NH₂ es mal grupo saliente). Se requiere ácido o base fuerte + calor para hidrolizarlas. Contrariamente, los cloruros de ácido se hidrolizan espontáneamente.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'producto',
+ q:'Transesterificación: acetato de etilo + metanol:',
+ r:'CH₃COOC₂H₅',reactivo:'CH₃OH',condicion:'H⁺ o OH⁻ cat.',producto:'CH₃COOCH₃ + C₂H₅OH',
+ ans:'CH₃COOCH₃ + C₂H₅OH',
+ opts:['CH₃COOCH₃ + C₂H₅OH','CH₃COOH + CH₃OC₂H₅','CH₃CH₂OH + CH₃COOCH₃','CH₃COOOH + C₂H₅OH'],
+ expl:'Transesterificación: intercambio del grupo OR. Éster + ROH → nuevo éster + ROH. Equilibrio. Biodiesel = transesterificación de triglicéridos (aceites vegetales) con metanol. Colombia es productor de palma.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'producto',
+ q:'Reducción del acetato de etilo con LiAlH₄:',
+ r:'CH₃COOC₂H₅',reactivo:'LiAlH₄',condicion:'éter seco → H₃O⁺',producto:'CH₃CH₂OH + C₂H₅OH',
+ ans:'CH₃CH₂OH + C₂H₅OH',
+ opts:['CH₃CH₂OH + C₂H₅OH','CH₃CHO + C₂H₅OH','CH₃COOH','CH₃CH₂OC₂H₅'],
+ expl:'LiAlH₄ reduce ésteres a dos alcoholes: el grupo acilo (CH₃CO−) → alcohol 1° (CH₃CH₂OH) y el OR′ (−OC₂H₅) → alcohol R′OH (C₂H₅OH). Siempre 2 moles de alcohol.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'reactivo',
+ q:'¿Con qué reacciona el anhídrido acético para obtener aspirina?',
+ r:'C₆H₄(OH)(COOH)',reactivo:'???',condicion:'H⁺ cat.',producto:'C₆H₄(OCOCH₃)(COOH) + CH₃COOH',
+ ans:'(CH₃CO)₂O (anhídrido acético)',
+ opts:['(CH₃CO)₂O (anhídrido acético)','CH₃COCl','CH₃COOH','CH₃OH'],
+ expl:'Aspirina = ácido acetilsalicílico. El OH del ácido salicílico reacciona con el anhídrido acético (acilación). El anhídrido es más reactivo que el ácido pero más seguro que el cloruro de ácido.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'condicion',
+ q:'¿Por qué la polimerización del nylon 6,6 requiere condiciones especiales?',
+ r:'HOOC(CH₂)₄COOH + H₂N(CH₂)₆NH₂',reactivo:null,condicion:'???',producto:'Nylon 6,6 + n H₂O',
+ ans:'Alta temperatura y vacío para eliminar el agua',
+ opts:['Alta temperatura y vacío para eliminar el agua','H₂SO₄ frío','hν + Cl₂','NaOH a 25 °C'],
+ expl:'La poliamidación (ácido + amina → amida) es equilibrio. Se elimina agua al vacío y alta T para desplazarlo. Nylon 6,6 = 1000s de unidades de amida. Fibra textil usada en vestimenta deportiva colombiana.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'producto',
+ q:'Reacción de Grignard con éster (2 equiv. de CH₃MgBr + CH₃COOC₂H₅):',
+ r:'CH₃COOC₂H₅',reactivo:'CH₃MgBr (2 equiv.)',condicion:'éter → H₃O⁺',producto:'(CH₃)₃COH + C₂H₅OH',
+ ans:'(CH₃)₃COH + C₂H₅OH',
+ opts:['(CH₃)₃COH + C₂H₅OH','CH₃COCH₃','CH₃CH₂OH + CH₃OH','CH₃COOH'],
+ expl:'1ª equiv RMgBr: ataca C=O del éster → cetona (CH₃COCH₃). 2ª equiv RMgBr: ataca la cetona → alcohol 3° con 2 grupos CH₃ iguales. Total: (CH₃)₃COH (t-butanol) + C₂H₅OH.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'producto',
+ q:'Hidrólisis del cloruro de benzoílo con agua:',
+ r:'C₆H₅COCl',reactivo:'H₂O',condicion:'T ambiente',producto:'C₆H₅COOH + HCl',
+ ans:'C₆H₅COOH + HCl',
+ opts:['C₆H₅COOH + HCl','C₆H₅COO⁻ + Cl⁻','C₆H₅CHO + HCl','C₆H₅CH₂OH'],
+ expl:'Los cloruros de ácido son muy reactivos: se hidrolizan espontáneamente con H₂O. Cl⁻ es el mejor grupo saliente. Ácido benzoico + HCl (gas irritante). Por esto se almacenan sin humedad.'},
+{type:'rxnq',topic:'rxn_derivados',subtype:'reactivo',
+ q:'¿Qué se usa para convertir un éster en una amida directamente (aminólisis)?',
+ r:'CH₃COOC₂H₅',reactivo:'???',condicion:'Δ',producto:'CH₃CONHCH₃ + C₂H₅OH',
+ ans:'CH₃NH₂ (metilamina)',
+ opts:['CH₃NH₂ (metilamina)','NH₄Cl','HNO₃','NaNH₂'],
+ expl:'Aminólisis de éster: RNH₂ desplaza OR′ del éster → amida. Requiere calor y no siempre es tan eficiente como usar cloruro de ácido. CH₃NH₂ ataca el C=O del éster.'},
+];
+QBANK.push(...QBANK_RXNQ);
+
+
 function nextQ(){qIdx++;loadQuestion();}
 
 // ════════════════════════════════════════════════════════
@@ -5444,7 +6177,7 @@ function retryErrors(){
   if(errPool.length===0)return;
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
   showScreen('s-game');
   loadQuestion();
 }
