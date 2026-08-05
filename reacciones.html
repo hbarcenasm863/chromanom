@@ -194,6 +194,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .gb-pill.cb{color:#b45309;border-color:#b45309;background:#fef3c7}
 .gb-pill.ac{color:#dc2626;border-color:#dc2626;background:#fee2e2}
 .gb-pill.dv{color:#1d4ed8;border-color:#3b82f6;background:#dbeafe}
+
+/* ── TIPO-CARD ── */
+.tipo-card{border-radius:var(--r);border:1.5px solid var(--brd);
+  padding:16px 20px;margin-bottom:16px;background:var(--surf2)}
+.tipo-card-title{font-family:'Fraunces',serif;font-size:1.15rem;
+  font-weight:700;margin-bottom:8px}
+.tipo-card-eq{font-family:'JetBrains Mono',monospace;font-size:.82rem;
+  background:var(--surf);border-radius:var(--rs);padding:8px 12px;
+  margin-bottom:10px;color:var(--dim);overflow-x:auto;white-space:nowrap}
+.tipo-card-rules{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.tipo-card-badge{font-size:.72rem;padding:3px 8px;border-radius:6px;
+  font-weight:600}
+.tipo-card-desc{font-size:.8rem;color:var(--dim);line-height:1.65;margin-top:8px}
 </style>
 </head>
 <body>
@@ -236,8 +249,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">CₙH₂ₙ</span>
     </div>
 
-    <div class="tipo-header">⚡ Sustitución Radical (SR)</div>
-    <p class="tipo-desc">Los alcanos y cicloalcanos son compuestos saturados; no reaccionan por adición. Su reacción típica es la <strong>sustitución homolítica</strong>, donde un H es reemplazado por otro átomo mediante radicales libres generados por luz (hν) o calor (Δ).</p>
+    <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
+      <div class="tipo-card-title" style="color:var(--c3t)">⚡ Sustitución Radical (SR)</div>
+      <div class="tipo-card-eq">R−H + X₂  →[hν / Δ]→  R−X + HX</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">hν o Δ</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">radical X•</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">Br₂ &gt; Cl₂ selectividad</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">4 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">Los alcanos y cicloalcanos son compuestos saturados; no reaccionan por adición. Su reacción típica es la <strong>sustitución homolítica</strong>, donde un H es reemplazado por otro átomo mediante radicales libres generados por luz (hν) o calor (Δ). Br₂ es más selectivo que Cl₂: prefiere el H terciario (radical más estable).</div>
+    </div>
 
     <div id="rxn-al-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('al-0')">
@@ -767,8 +789,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div style="font-size:.74rem;color:var(--c3t);font-family:'JetBrains Mono',monospace;background:rgba(180,83,9,.08);border-radius:var(--rs);padding:7px 11px">Estabilidad carbocatión: 3° &gt; 2° &gt; 1° · el H va al C con más H · el X va al C con más R</div>
     </div>
 
-    <div class="tipo-header">➕ Adición Electrofílica (AE)</div>
-    <p class="tipo-desc">El doble enlace C=C actúa como nucleófilo: la nube π dona electrones al electrófilo (E⁺). El nucleófilo (A⁻) se une al carbocatión intermedio. Regla de Markovnikov: el electrófilo va al carbono con más H (menos sustituido).</p>
+    <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
+      <div class="tipo-card-title" style="color:var(--c3t)">➕ Adición Electrofílica (AE)</div>
+      <div class="tipo-card-eq">R−CH=CH₂ + E−A  →[AE]→  R−CH(A)−CH₂(E)</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HX · H₂O · X₂ · H₂</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">O₃ · KMnO₄</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">Markovnikov: X → C más sustituido</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">6 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">El doble enlace C=C actúa como nucleófilo: la nube π dona electrones al electrófilo (E⁺). El nucleófilo (A⁻) se une al carbocatión intermedio. <strong>Regla de Markovnikov:</strong> el electrófilo va al carbono con más H (menos sustituido). Estabilidad carbocatión: 3° &gt; 2° &gt; 1°.</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-0')">
@@ -1492,8 +1523,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">CₙH₂ₙ₋₂ · triple enlace C≡C</span>
     </div>
 
-    <div class="tipo-header">➕➕ Adición al triple enlace (×1 y ×2)</div>
-    <p class="tipo-desc">El triple enlace puede adicionarse <strong>una</strong> o <strong>dos</strong> veces: la primera adición convierte el alquino en un alqueno; la segunda adición convierte el alqueno en alcano (o derivado). Las mismas reacciones de alquenos aplican, con la posibilidad de doble adición.</p>
+    <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
+      <div class="tipo-card-title" style="color:var(--c3t)">➕➕ Adición al Triple Enlace (×1 y ×2)</div>
+      <div class="tipo-card-eq">R−C≡C−R' + E−A →[×1]→ alqueno  →[×2]→ alcano / dihaluro</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HX ×1/×2</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">X₂ ×1/×2</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">Lindlar → cis selectivo</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">acidez terminal pKa≈25</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">5 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">El triple enlace puede adicionarse <strong>una</strong> o <strong>dos</strong> veces: la primera adición convierte el alquino en un alqueno; la segunda adición convierte el alqueno en alcano (o derivado). Lindlar (Pd envenenado) detiene en el <em>cis</em>-alqueno. Solo alquinos <strong>terminales</strong> (pKa ≈ 25) reaccionan como ácidos con NaNH₂.</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-0')">
@@ -2185,8 +2226,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">C₆H₅− · anillo de Hückel (4n+2 e⁻ π)</span>
     </div>
 
-    <div class="tipo-header">⚡ Sustitución Electrofílica Aromática (SEA)</div>
-    <p class="tipo-desc">El anillo bencénico es rico en electrones π (6 e⁻ deslocalidos). Reacciona con electrófilos fuertes (E⁺ generado por catalizador ácido de Lewis). A diferencia de alquenos, el producto es una <strong>sustitución</strong> (no adición) para mantener la aromaticidad.</p>
+    <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
+      <div class="tipo-card-title" style="color:var(--c4t)">⚡ Sustitución Electrofílica Aromática (SEA)</div>
+      <div class="tipo-card-eq">C₆H₆ + E⁺  →[Lewis]→  C₆H₅−E + H⁺  (aromaticidad conservada)</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">FeBr₃ · AlCl₃</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">HNO₃/H₂SO₄</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">RX · RCOCl</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">sustitución, no adición</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">5 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">El anillo bencénico (6 e⁻ π deslocalizados) reacciona con electrófilos fuertes generados por ácidos de Lewis. A diferencia de los alquenos, el producto es una <strong>sustitución</strong> (no adición) para conservar la aromaticidad. Mecanismo: E⁺ + C₆H₆ → complejo σ arenio → −H⁺ → areno sustituido.</div>
+    </div>
 
     <div class="attn">
       Mecanismo general SEA: E⁺ + benceno → complejo σ (arenio, pierde aromaticidad) → −H⁺ → producto areno sustituido (recupera aromaticidad)
@@ -2961,8 +3012,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−X  (X = F, Cl, Br, I)</span>
     </div>
 
-    <div class="tipo-header">🔄 Sustitución Nucleofílica (SN)</div>
-    <p class="tipo-desc">El nucleófilo (Nu:) desplaza el grupo saliente (X) del carbono sp³. Hay dos mecanismos: <strong>SN2</strong> (un paso concertado, inversión de Walden) y <strong>SN1</strong> (dos pasos vía carbocatión, racemización).</p>
+    <div class="tipo-card" style="border-color:#7c3aed;border-left:4px solid #7c3aed">
+      <div class="tipo-card-title" style="color:#7c3aed">🔄 Sustitución Nucleofílica (SN)</div>
+      <div class="tipo-card-eq">Nu:⁻ + R−X  →  Nu−R + X⁻</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:#ede9fe;color:#7c3aed">SN2: 1° · inversión · Nu fuerte</span>
+        <span class="tipo-card-badge" style="background:#ede9fe;color:#7c3aed">SN1: 3° · carbocatión · racemización</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">2 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">El nucleófilo (Nu:) desplaza el grupo saliente (X) del carbono sp³. <strong>SN2:</strong> un paso concertado, inversión de Walden, favorece sustrato 1°. <strong>SN1:</strong> dos pasos vía carbocatión (sp², plano), racemización, favorece sustrato 3°.</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-0')">
@@ -3224,8 +3283,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="tipo-header">✂️ Eliminación E2</div>
-    <p class="tipo-desc">Una base fuerte extrae un H β (adyacente al C portador del GS) mientras el grupo saliente se va simultáneamente, formando un doble enlace. Regla de Zaitsev: se prefiere el alqueno más sustituido (más estable).</p>
+    <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
+      <div class="tipo-card-title" style="color:var(--c3t)">✂️ Eliminación E2</div>
+      <div class="tipo-card-eq">Base + H−Cβ−Cα−X  →[anti-periplanar]→  Cβ=Cα + HBase + X⁻</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">KOH/EtOH · t-BuOK</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">anti-periplanar (180°)</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">Zaitsev: alqueno más sustituido</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">1 reacción</span>
+      </div>
+      <div class="tipo-card-desc">Una base fuerte extrae un H β (adyacente al C portador del GS) mientras el grupo saliente se va simultáneamente, formando un doble enlace. <strong>Regla de Zaitsev:</strong> se prefiere el alqueno más sustituido (termodinámicamente más estable). H y X deben ser anti-periplanares (180°).</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-2')">
@@ -3350,8 +3418,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−OH · grupo hidroxilo</span>
     </div>
 
-    <div class="tipo-header">🔄 Reacciones de los Alcoholes</div>
-    <p class="tipo-desc">Los alcoholes son versátiles: pueden deshidratarse (→ alquenos), oxidarse (→ aldehídos, cetonas, ácidos), convertirse en halogenuros o esterificarse. La reactividad depende del grado del carbono portador del −OH.</p>
+    <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
+      <div class="tipo-card-title" style="color:var(--c4t)">🔄 Reacciones de los Alcoholes</div>
+      <div class="tipo-card-eq">R−OH  →  alqueno (−H₂O) / R−X / RCOO−R' / R−C=O</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">deshidratación H₂SO₄/Δ</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">oxidación PCC · K₂Cr₂O₇</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">halogenación SOCl₂</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">esterificación · Fischer</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">4 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">Los alcoholes son versátiles: pueden deshidratarse (→ alquenos, Zaitsev), oxidarse (1° → aldehído → ácido; 2° → cetona; 3° no se oxida), convertirse en halogenuros (SOCl₂, PBr₃) o esterificarse (Fischer, reversible). La reactividad depende del grado del −OH.</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-0')">
@@ -3880,8 +3958,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−NH₂ · R₂NH · R₃N · ArNH₂</span>
     </div>
 
-    <div class="tipo-header">🔄 Reacciones de las Aminas</div>
-    <p class="tipo-desc">Las aminas son bases (el N tiene par libre) y nucleófilos. Sus reacciones incluyen neutralización (→ sales), alquilación, reducción de nitrocompuestos, y la importante diazotación de arilaminas (→ sales de diazonio, intermediarios en síntesis).</p>
+    <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
+      <div class="tipo-card-title" style="color:var(--c1t)">🔄 Reacciones de las Aminas</div>
+      <div class="tipo-card-eq">R−NH₂ + H⁺ → R−NH₃⁺  |  ArNH₂ + HNO₂ → Ar−N₂⁺ (diazonio)</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">neutralización</span>
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">alquilación · acilación</span>
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">diazotación 0–5 °C</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">3 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">Las aminas son bases (N tiene par libre) y nucleófilos. Sus reacciones incluyen neutralización (→ sales de amonio), alquilación/acilación, reducción de nitrocompuestos (NO₂ → NH₂), y la importante <strong>diazotación</strong> de arilaminas (→ sales de diazonio Ar−N₂⁺, intermediarios versátiles en síntesis).</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('am-0')">
@@ -4255,8 +4342,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−CHO · R₂C=O · grupo carbonilo</span>
     </div>
 
-    <div class="tipo-header">➕ Adición Nucleofílica al C=O</div>
-    <p class="tipo-desc">El carbono carbonílico (C=O) es deficiente en electrones (δ+). Los nucleófilos atacan ese C, mientras el O atrae densidad electrónica. Los aldehídos son más reactivos que las cetonas (menos impedimento, menos estabilización).</p>
+    <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
+      <div class="tipo-card-title" style="color:var(--c3t)">➕ Adición Nucleofílica al C=O</div>
+      <div class="tipo-card-eq">Nu:⁻ + R−C(δ+)=O  →  R−C(Nu)−O⁻  →[H⁺]→  R−C(Nu)−OH</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HCN → cianohidrina</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">LiAlH₄/NaBH₄ → alcohol</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">RMgBr → alcohol</span>
+        <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">condensación aldólica</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">4 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">El carbono carbonílico (C=O) es deficiente en electrones (δ+). Los nucleófilos atacan ese C, mientras el O atrae densidad electrónica. <strong>Los aldehídos son más reactivos que las cetonas</strong> (menos impedimento estérico, menor estabilización inductiva del C=O).</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-0')">
@@ -4816,8 +4913,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−COOH · grupo carboxilo</span>
     </div>
 
-    <div class="tipo-header">🔄 Reacciones de los Ácidos Carboxílicos</div>
-    <p class="tipo-desc">Los ácidos carboxílicos son ácidos débiles (pKa 4–5). Reaccionan con bases (→ sales), pueden convertirse en todos sus derivados y se obtienen por oxidación de alcoholes 1° o alquilbencenos.</p>
+    <div class="tipo-card" style="border-color:var(--err);border-left:4px solid var(--err)">
+      <div class="tipo-card-title" style="color:var(--errt)">🔄 Reacciones de los Ácidos Carboxílicos</div>
+      <div class="tipo-card-eq">RCOOH + Base → RCOO⁻ + H₂O  |  RCOOH + R'OH ⇌ RCOOR' + H₂O</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--errb);color:var(--errt)">neutralización</span>
+        <span class="tipo-card-badge" style="background:var(--errb);color:var(--errt)">esterificación Fischer</span>
+        <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">pKa ≈ 4–5 (resonancia RCOO⁻)</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">2 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">Los ácidos carboxílicos son ácidos débiles (pKa 4–5). Reaccionan con bases (→ sales de carboxilato, estabilizadas por resonancia), pueden convertirse en todos sus derivados (cloruros, ésteres, amidas) y se obtienen por oxidación de alcoholes 1° o alquilbencenos con KMnO₄.</div>
+    </div>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ac-0')">
@@ -5060,8 +5166,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">RCOCl · (RCO)₂O · RCOOR′ · RCONH₂</span>
     </div>
 
-    <div class="tipo-header">🔄 Reacciones de los Derivados de Ácidos</div>
-    <p class="tipo-desc">Los derivados se obtienen reemplazando el −OH del ácido por otro grupo. Su reactividad decrece: <strong>cloruro de ácido &gt; anhídrido &gt; éster &gt; amida</strong>. Todos reaccionan con nucleófilos por sustitución acílica nucleofílica (SAcN).</p>
+    <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
+      <div class="tipo-card-title" style="color:var(--c1t)">🔄 Reacciones de los Derivados de Ácidos</div>
+      <div class="tipo-card-eq">RC(=O)−L + Nu:  →  RC(=O)−Nu + L⁻  (SAcN)</div>
+      <div class="tipo-card-rules">
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">RCOCl &gt; anhídrido</span>
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">éster &gt; amida</span>
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">hidrólisis · aminólisis</span>
+        <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">LiAlH₄ → amina</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">3 reacciones</span>
+      </div>
+      <div class="tipo-card-desc">Los derivados se obtienen reemplazando el −OH del ácido por otro grupo (−Cl, −OCOR, −OR, −NHR). Su reactividad decrece: <strong>RCOCl &gt; anhídrido &gt; éster &gt; amida</strong> (Cl⁻ es el mejor grupo saliente). Todos reaccionan por sustitución acílica nucleofílica (SAcN).</div>
+    </div>
 
     <div class="attn">Reactividad: RCOCl &gt; (RCO)₂O &gt; RCOOR′ &gt; RCONH₂ — mayor GS = más reactivo</div>
 
