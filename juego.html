@@ -182,21 +182,28 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .qt-write{background:var(--c4b);color:var(--c4t)}
 .qt-rxnq{background:#fce7f3;color:#9d174d}
 /* RxnQ equation display */
-.rxnq-eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
-  background:var(--surf2,#f1f5f9);border-radius:10px;padding:12px 16px;margin:12px 0}
+.rxnq-eq{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+  background:var(--surf2,#f1f5f9);border-radius:10px;padding:14px 18px;margin:12px 0}
 .rxnq-mol-box{background:var(--surf,#fff);border:1.5px solid var(--brd,#e2e8f0);
   border-radius:8px;padding:10px 14px;display:flex;align-items:center;
   justify-content:center;min-width:80px}
 .rxnq-mol-box svg{width:auto;height:auto;max-width:260px;display:block}
 .rxnq-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.82rem;
   color:var(--tx);font-weight:600;text-align:center}
-.rxnq-ops{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:.83rem}
-.rxnq-reagent{color:#0369a1;font-weight:700}
-.rxnq-cond{font-size:.72rem;color:var(--dimmer,#94a3b8);font-style:italic}
-.rxnq-arrow{color:#059669;font-size:1.2rem;flex-shrink:0;align-self:center}
+/* Inline equation pieces — each is a direct flex child of rxnq-eq */
+.rxnq-plus{font-size:1.2rem;font-weight:700;color:#0369a1;
+  font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.rxnq-reagent{color:#0369a1;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;flex-shrink:0}
+/* Arrow column: condition label above the arrow */
+.rxnq-arrow-col{display:flex;flex-direction:column;align-items:center;
+  gap:2px;flex-shrink:0}
+.rxnq-cond{font-size:.72rem;color:var(--dimmer,#94a3b8);font-style:italic;
+  text-align:center;white-space:nowrap}
+.rxnq-arrow{color:#059669;font-size:1.2rem}
 .rxnq-blank-box{background:#fce7f3;border:2.5px dashed #9d174d;border-radius:8px;
-  padding:6px 18px;display:flex;align-items:center;justify-content:center;
-  min-width:80px;min-height:52px;color:#9d174d;font-weight:700;font-size:1.1rem}
+  padding:10px 22px;display:flex;align-items:center;justify-content:center;
+  min-width:70px;color:#9d174d;font-weight:700;font-size:1.1rem;flex-shrink:0}
 .rxnq-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .rxnq-opt{width:100%;text-align:left;padding:10px 14px;border-radius:8px;
   border:2px solid var(--brd,#e2e8f0);background:var(--surf,#fff);
@@ -4450,22 +4457,28 @@ window._rxnqMolBox=function(str){
 })();
 
 function buildRxnQ(q){
-  const condPart=q.condicion?`<span class="rxnq-cond">${q.condicion}</span>`:'';
+  // Arrow column: condition label sits above the arrow
+  function arrowCol(condText){
+    return`<div class="rxnq-arrow-col">${condText?`<span class="rxnq-cond">${condText}</span>`:''}<span class="rxnq-arrow">──→</span></div>`;
+  }
   let eqHtml='';
   if(q.subtype==='producto'){
     eqHtml=`${window._rxnqMolBox(q.r)}
-      <div class="rxnq-ops"><span class="rxnq-reagent">+&nbsp;${q.reactivo}</span>${condPart?`<br>${condPart}`:''}</div>
-      <span class="rxnq-arrow">──→</span>
+      <span class="rxnq-plus">+</span>
+      <span class="rxnq-reagent">${q.reactivo}</span>
+      ${arrowCol(q.condicion)}
       <div class="rxnq-blank-box">?</div>`;
   } else if(q.subtype==='reactivo'){
     eqHtml=`${window._rxnqMolBox(q.r)}
-      <div class="rxnq-ops"><span class="rxnq-reagent">+</span><div class="rxnq-blank-box" style="margin-top:4px">?</div>${condPart?`<br>${condPart}`:''}</div>
-      <span class="rxnq-arrow">──→</span>
+      <span class="rxnq-plus">+</span>
+      <div class="rxnq-blank-box">?</div>
+      ${arrowCol(q.condicion)}
       ${window._rxnqMolBox(q.producto)}`;
   } else {
     eqHtml=`${window._rxnqMolBox(q.r)}
-      <div class="rxnq-ops"><span class="rxnq-reagent">+&nbsp;${q.reactivo}</span><div class="rxnq-blank-box" style="margin-top:4px">???</div></div>
-      <span class="rxnq-arrow">──→</span>
+      <span class="rxnq-plus">+</span>
+      <span class="rxnq-reagent">${q.reactivo}</span>
+      <div class="rxnq-arrow-col"><div class="rxnq-blank-box" style="font-size:.82rem;padding:6px 12px">???</div><span class="rxnq-arrow">──→</span></div>
       ${window._rxnqMolBox(q.producto)}`;
   }
   const opts=shuffle(q.opts);
