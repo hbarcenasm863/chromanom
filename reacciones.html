@@ -157,6 +157,33 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .zai-box{background:var(--surf2);border:2px solid var(--brd);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
 .zai-title{font-weight:800;font-size:.85rem;color:var(--c2t);margin-bottom:10px}
 .zai-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+/* ── MECHANISM STEPPER ── */
+.mech-stepper{border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.mech-top{background:var(--surf2);padding:10px 14px;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--brd)}
+.mech-title-sm{font-weight:800;font-size:.76rem;color:var(--dim);font-family:'Outfit',sans-serif}
+.mech-nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mech-btn{background:var(--surf);border:1.5px solid var(--brd);border-radius:6px;padding:4px 12px;
+  font-size:.76rem;color:var(--tx);cursor:pointer;transition:background .15s;font-family:'Outfit',sans-serif}
+.mech-btn:hover:not(:disabled){background:var(--brd)}
+.mech-btn:disabled{opacity:.3;cursor:default}
+.mech-ctr{font-size:.7rem;color:var(--dimmer);min-width:68px;text-align:center;font-family:'Outfit',sans-serif}
+.mech-dots{display:flex;gap:6px;padding:8px 14px;background:var(--surf2)}
+.mech-dot{width:9px;height:9px;border-radius:50%;background:var(--brd);
+  transition:background .2s,transform .2s;cursor:pointer}
+.mech-dot.on{background:var(--c2t);transform:scale(1.25)}
+.mech-step{display:none;padding:14px 16px;border-top:1px solid var(--brd)}
+.mech-step.on{display:block;animation:bodySlide .2s ease}
+.mech-step-n{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--c2t);margin-bottom:4px}
+.mech-step-h{font-size:.88rem;font-weight:800;color:var(--tx);margin-bottom:9px;line-height:1.3}
+.mech-step-txt{font-size:.8rem;color:var(--dim);line-height:1.75;margin-bottom:12px}
+.mech-step-txt strong{color:var(--tx)}
+.mech-step-txt em{color:var(--c3t);font-style:normal;font-weight:700}
+.mech-step-txt .nc{color:var(--c2t);font-weight:700}
+.mech-vis{background:var(--surf2);border-radius:var(--rs);padding:12px 10px;
+  display:flex;justify-content:center;align-items:center;
+  min-height:85px;margin-bottom:12px;overflow-x:auto}
 .mk-title{font-family:'Fraunces',serif;font-weight:900;font-size:1rem;color:var(--c3t);margin-bottom:6px}
 .mk-eq{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:rgba(180,83,9,.07);border-radius:var(--rs);padding:10px 13px;white-space:pre;overflow-x:auto;margin-top:6px;color:var(--dim)}
 
@@ -2631,14 +2658,15 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-cb-0">▾</span>
       </div>
       <div class="rxn-body" id="body-cb-0">
+        <!-- Ecuación general -->
         <div class="meq">
           <div class="meq-side">
-            <span class="meq-mol">R−<span class="bp">CHO</span></span>
+            <span class="meq-mol">R−<span class="bp">C(=O)H</span></span>
             <span class="meq-plus">+</span>
             <span class="meq-reag">HCN</span>
           </div>
           <div class="meq-arr">
-            <span class="meq-cond">OH⁻ cat. → CN⁻</span>
+            <span class="meq-cond">OH⁻ cat.</span>
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
@@ -2646,27 +2674,162 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.7rem;color:var(--c2t);font-family:'Outfit',sans-serif">(cianohidrina)</span>
           </div>
         </div>
-        <div class="mol-cmp">
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">CH₃−<span class="bp">CHO</span></span>
-            <div class="mol-cmp-name">etanal (aldehído)</div>
+
+        <!-- ── STEPPER DE MECANISMO ── -->
+        <div class="mech-stepper" id="mech-cb-0">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Mecanismo paso a paso — Adición Nucleofílica al C=O</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-cb-0" onclick="mechStep('cb-0',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-cb-0">Paso 1 de 4</span>
+              <button class="mech-btn" id="mnext-cb-0" onclick="mechStep('cb-0',1)">Sig. →</button>
+            </div>
           </div>
-          <div class="mol-cmp-arr">
-            <div class="mol-cmp-reag">+ HCN / OH⁻</div>
-            <div>──[AN]──→</div>
+          <div class="mech-dots" id="dots-cb-0">
+            <span class="mech-dot on" onclick="mechDot('cb-0',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('cb-0',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('cb-0',2)" title="Paso 3"></span>
+            <span class="mech-dot" onclick="mechDot('cb-0',3)" title="Paso 4"></span>
           </div>
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">CH₃−CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
-            <div class="mol-cmp-name">lactonitrilo (nuevo C−C)</div>
+
+          <!-- PASO 1: Generación del nucleófilo CN⁻ -->
+          <div class="mech-step on" id="ms-cb-0-0">
+            <div class="mech-vis">
+              <svg viewBox="0 0 330 75" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:330px">
+                <text x="8" y="38" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0d2d42" font-weight="700">H−CN</text>
+                <text x="8" y="56" font-family="'Outfit',sans-serif" font-size="9" fill="#888">ácido cianhídrico (débil)</text>
+                <text x="56" y="38" font-family="'JetBrains Mono',monospace" font-size="14" fill="#888">+</text>
+                <text x="68" y="38" font-family="'JetBrains Mono',monospace" font-size="16" style="fill:var(--c3t)" font-weight="700">OH⁻</text>
+                <text x="68" y="56" font-family="'Outfit',sans-serif" font-size="9" fill="#888">catalizador base</text>
+                <line x1="112" y1="34" x2="142" y2="34" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+                <polygon points="147,34 140,29 140,39" style="fill:var(--c2t)"/>
+                <text x="152" y="38" font-family="'JetBrains Mono',monospace" font-size="16" fill="#888" font-weight="700">H₂O</text>
+                <text x="152" y="56" font-family="'Outfit',sans-serif" font-size="9" fill="#888">sale</text>
+                <text x="196" y="38" font-family="'JetBrains Mono',monospace" font-size="14" fill="#888">+</text>
+                <text x="208" y="38" font-family="'JetBrains Mono',monospace" font-size="16" style="fill:var(--c2t)" font-weight="700">:CN⁻</text>
+                <text x="208" y="56" font-family="'Outfit',sans-serif" font-size="9" style="fill:var(--c2t)" font-weight="700">nucleófilo real ✓</text>
+              </svg>
+            </div>
+            <div class="mech-step-n">Paso 1 de 4 — Generación del nucleófilo</div>
+            <div class="mech-step-h">El HCN solo no reacciona con el carbonilo — el OH⁻ genera el verdadero atacante: <span class="nc">CN⁻</span></div>
+            <div class="mech-step-txt">
+              El ácido cianhídrico (HCN) es un ácido débil. Cuando se le añade una pequeña cantidad de base (<em>OH⁻</em> como catalizador), el OH⁻ le arranca el H⁺ al HCN, liberando el <span class="nc">ión cianuro CN⁻</span>. Este CN⁻ tiene un <strong>par de electrones libre</strong> en el carbono del grupo nitrilo, que es lo que le permite atacar al carbonilo en el siguiente paso.<br><br>
+              <strong>¿Por qué no ataca el HCN directamente?</strong> Porque es neutro y el H del HCN bloquea el par libre del C. El CN⁻ aniónico es mucho más nucleofílico.
+            </div>
           </div>
-        </div>
-        <div class="rxn-cond">OH⁻ genera CN⁻ nucleófilo · CN⁻ ataca el C del C=O (δ+) · toma H⁺ del HCN → cianohidrina</div>
-        <div class="rxn-regla">📌 Nuevo enlace C−C: alarga la cadena en 1C · CN hidrolizable → ácido α-hidroxi</div>
-        <div class="rxn-ex-lbl">Ejemplo</div>
+
+          <!-- PASO 2: Ataque nucleofílico CN⁻ → C del C=O -->
+          <div class="mech-step" id="ms-cb-0-1">
+            <div class="mech-vis">
+              <svg viewBox="0 0 310 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:310px">
+                <!-- R-CH -->
+                <text x="8" y="60" font-family="'JetBrains Mono',monospace" font-size="16" fill="#0d2d42" font-weight="700">R−CH</text>
+                <!-- Double bond C=O -->
+                <line x1="60" y1="52" x2="74" y2="52" style="stroke:var(--c3t)" stroke-width="2.2"/>
+                <line x1="60" y1="59" x2="74" y2="59" style="stroke:var(--c3t)" stroke-width="2.2"/>
+                <!-- O -->
+                <text x="76" y="60" font-family="'JetBrains Mono',monospace" font-size="16" style="fill:var(--c3t)" font-weight="700">O</text>
+                <!-- δ+ on C -->
+                <text x="42" y="41" font-family="'JetBrains Mono',monospace" font-size="11" style="fill:var(--c3t)" font-weight="900">δ+</text>
+                <!-- δ- on O -->
+                <text x="76" y="41" font-family="'JetBrains Mono',monospace" font-size="11" style="fill:var(--c3t)" font-weight="900">δ–</text>
+                <!-- :CN⁻ below C (positioned at ~x=35, y=100) -->
+                <text x="22" y="105" font-family="'JetBrains Mono',monospace" font-size="14" style="fill:var(--c2t)" font-weight="700">:CN⁻</text>
+                <!-- Dashed approach: CN⁻ → C -->
+                <line x1="44" y1="92" x2="44" y2="70" style="stroke:var(--c2t)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <polygon points="44,64 40,72 48,72" style="fill:var(--c2t)"/>
+                <!-- Curved arrow: C=O bond electrons → O -->
+                <path d="M 63,52 Q 70,30 84,44" fill="none" style="stroke:var(--c3t)" stroke-width="1.5"/>
+                <polygon points="86,46 80,40 82,48" style="fill:var(--c3t)"/>
+                <!-- Labels right side -->
+                <text x="120" y="50" font-family="'Outfit',sans-serif" font-size="9" fill="#888">① CN⁻ ataca el C (δ+)</text>
+                <text x="120" y="65" font-family="'Outfit',sans-serif" font-size="9" fill="#888">② e⁻ del C=O migran al O</text>
+                <text x="120" y="80" font-family="'Outfit',sans-serif" font-size="9" style="fill:var(--c3t)">   (O más electronegativo)</text>
+                <text x="120" y="100" font-family="'Outfit',sans-serif" font-size="9" fill="#888">③ se forma enlace C−CN</text>
+              </svg>
+            </div>
+            <div class="mech-step-n">Paso 2 de 4 — Ataque nucleofílico al carbono del C=O</div>
+            <div class="mech-step-h">El <span class="nc">CN⁻</span> ataca al carbono del grupo carbonilo, que tiene carga parcial positiva (<em>δ+</em>)</div>
+            <div class="mech-step-txt">
+              El carbono del C=O tiene <em>carga parcial positiva (δ+)</em> porque el oxígeno, al ser muy electronegativo, jala los electrones del doble enlace hacia sí mismo. Ese δ+ actúa como un imán para el CN⁻, que se acerca <strong>desde abajo del plano del carbonilo</strong> (ataque por la cara menos impedida).<br><br>
+              En ese momento ocurren dos cosas simultáneamente:<br>
+              <strong>① El par libre del CN⁻</strong> forma un nuevo enlace C−C con el carbono del carbonilo.<br>
+              <strong>② Los electrones del doble enlace C=O</strong> se desplazan completamente hacia el oxígeno (que los acepta fácilmente porque tiene electronegatividad alta). El C=O doble <strong>se convierte en C−O simple</strong>, y el O queda con carga negativa.
+            </div>
+          </div>
+
+          <!-- PASO 3: Intermediario alcóxido -->
+          <div class="mech-step" id="ms-cb-0-2">
+            <div class="mech-vis">
+              <svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px">
+                <!-- O- at top -->
+                <text x="55" y="25" font-family="'JetBrains Mono',monospace" font-size="15" style="fill:var(--c4t)" font-weight="700">O⁻</text>
+                <text x="42" y="40" font-family="'Outfit',sans-serif" font-size="8" style="fill:var(--c4t)">alcóxido (inestable)</text>
+                <!-- Bond O-C -->
+                <line x1="62" y1="28" x2="62" y2="50" style="stroke:var(--c4t)" stroke-width="2"/>
+                <!-- R-CH central -->
+                <text x="15" y="65" font-family="'JetBrains Mono',monospace" font-size="15" fill="#0d2d42" font-weight="700">R−CH</text>
+                <!-- Bond C-CN -->
+                <line x1="62" y1="67" x2="62" y2="85" style="stroke:var(--c2t)" stroke-width="2"/>
+                <!-- CN -->
+                <text x="50" y="98" font-family="'JetBrains Mono',monospace" font-size="15" style="fill:var(--c2t)" font-weight="700">CN</text>
+                <text x="35" y="110" font-family="'Outfit',sans-serif" font-size="8" style="fill:var(--c2t)">nuevo enlace C−C ✓</text>
+                <!-- C is sp3 label -->
+                <text x="130" y="55" font-family="'Outfit',sans-serif" font-size="9" fill="#888">C ahora tiene</text>
+                <text x="130" y="68" font-family="'Outfit',sans-serif" font-size="9" fill="#888">4 enlaces (sp3)</text>
+                <!-- Bracket indicating intermediate -->
+                <rect x="8" y="15" width="105" height="98" rx="4" fill="none" style="stroke:var(--c4t)" stroke-width="1.5" stroke-dasharray="5 3"/>
+                <text x="40" y="6" font-family="'Outfit',sans-serif" font-size="8" style="fill:var(--c4t)">intermediario</text>
+              </svg>
+            </div>
+            <div class="mech-step-n">Paso 3 de 4 — Intermediario: el alcóxido</div>
+            <div class="mech-step-h">Se forma un intermediario aniónico inestable: <em>R−CH(O⁻)−CN</em></div>
+            <div class="mech-step-txt">
+              Después del ataque, el carbono que antes era del C=O ahora tiene <strong>cuatro enlaces distintos</strong>: R, H, O⁻ y CN. Ya no tiene doble enlace con el oxígeno — es un carbono <em>sp3 tetraédrico</em>.<br><br>
+              El oxígeno queda con <em>carga negativa (O⁻)</em>, formando lo que se llama un <strong>alcóxido</strong>. Este intermediario es muy inestable: el oxígeno con carga negativa quiere neutralizarse captando un H⁺ del entorno, que es exactamente lo que ocurre en el paso final.
+            </div>
+          </div>
+
+          <!-- PASO 4: Protonación → Cianohidrina -->
+          <div class="mech-step" id="ms-cb-0-3">
+            <div class="mech-vis">
+              <svg viewBox="0 0 320 85" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px">
+                <!-- Left: R-CH(O⁻)-CN -->
+                <text x="6" y="42" font-family="'JetBrains Mono',monospace" font-size="14" fill="#0d2d42" font-weight="700">R−CH(</text>
+                <text x="55" y="42" font-family="'JetBrains Mono',monospace" font-size="14" style="fill:var(--c4t)" font-weight="700">O⁻</text>
+                <text x="73" y="42" font-family="'JetBrains Mono',monospace" font-size="14" fill="#0d2d42" font-weight="700">)−CN</text>
+                <text x="18" y="57" font-family="'Outfit',sans-serif" font-size="9" fill="#888">alcóxido</text>
+                <!-- + H⁺ -->
+                <text x="113" y="42" font-family="'JetBrains Mono',monospace" font-size="13" fill="#888">+</text>
+                <text x="124" y="42" font-family="'JetBrains Mono',monospace" font-size="14" style="fill:var(--c3t)" font-weight="700">H⁺</text>
+                <text x="120" y="57" font-family="'Outfit',sans-serif" font-size="9" fill="#888">del HCN</text>
+                <!-- arrow -->
+                <line x1="148" y1="38" x2="178" y2="38" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+                <polygon points="183,38 176,33 176,43" style="fill:var(--c2t)"/>
+                <!-- Right: R-CH(OH)-CN PRODUCT -->
+                <text x="186" y="42" font-family="'JetBrains Mono',monospace" font-size="14" fill="#0d2d42" font-weight="700">R−CH(</text>
+                <text x="235" y="42" font-family="'JetBrains Mono',monospace" font-size="14" style="fill:var(--c4t)" font-weight="700">OH</text>
+                <text x="255" y="42" font-family="'JetBrains Mono',monospace" font-size="14" fill="#0d2d42" font-weight="700">)−</text>
+                <text x="272" y="42" font-family="'JetBrains Mono',monospace" font-size="14" style="fill:var(--c2t)" font-weight="700">CN</text>
+                <text x="195" y="75" font-family="'Outfit',sans-serif" font-size="9" style="fill:var(--c2t)" font-weight="700">CIANOHIDRINA ✓</text>
+                <text x="195" y="57" font-family="'Outfit',sans-serif" font-size="9" fill="#888">C−OH y C−CN en el mismo C</text>
+              </svg>
+            </div>
+            <div class="mech-step-n">Paso 4 de 4 — Protonación del O⁻ → producto final</div>
+            <div class="mech-step-h">El <em>O⁻</em> del alcóxido capta un H⁺ del HCN → se forma el grupo −<span class="nc">OH</span> de la cianohidrina</div>
+            <div class="mech-step-txt">
+              El alcóxido (O⁻) es básico y capta rápidamente un H⁺ del entorno, que proviene del HCN (o del agua del disolvente). Al hacerlo, el O⁻ pasa a ser <em>−OH</em> (grupo hidroxilo neutro), y el HCN que cedió el H⁺ se convierte de nuevo en CN⁻ — <strong>por eso el OH⁻ es catalítico</strong>: se regenera a lo largo del ciclo.<br><br>
+              El producto final es la <strong>cianohidrina</strong>: un único carbono tiene simultáneamente un −OH y un −CN. Es importante porque: <em>①</em> se formó un <strong>nuevo enlace C−C</strong> (la cadena creció en 1 carbono), y <em>②</em> el −CN se puede hidrolizar posteriormente para obtener un <strong>ácido α-hidroxi</strong> (útil en síntesis orgánica).
+            </div>
+          </div>
+        </div><!-- /mech-stepper -->
+
+        <div class="rxn-regla">📌 Resultado clave: nuevo enlace C−C · cadena crece 1C · −CN hidrolizable → ácido α-hidroxicarboxílico</div>
+        <div class="rxn-ex-lbl">Ejemplo completo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">CHO</span> + HCN →[OH⁻]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span><span class="hn">CN</span></span>
+          <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
           <span class="rxn-ex-nota">lactonitrilo (cianohidrina)</span>
         </div>
         <div class="quiz-sep"></div>
@@ -3308,7 +3471,22 @@ function mkArr(cond,w,compact){
     <polygon points="${w-2},${ay} ${lx2},${ay-hs} ${lx2},${ay+hs}" style="fill:var(--c2t)"/>
   </svg>`;
 }
+/* ── MECHANISM STEPPER ── */
+const MS={};
+function initMS(id,n){MS[id]={c:0,n};showMS(id);}
+function mechStep(id,d){const m=MS[id];m.c=Math.max(0,Math.min(m.n-1,m.c+d));showMS(id);}
+function mechDot(id,i){MS[id].c=i;showMS(id);}
+function showMS(id){
+  const m=MS[id];
+  document.getElementById('mctr-'+id).textContent=`Paso ${m.c+1} de ${m.n}`;
+  document.getElementById('mprev-'+id).disabled=m.c===0;
+  document.getElementById('mnext-'+id).disabled=m.c===m.n-1;
+  document.querySelectorAll('#mech-'+id+' .mech-dot').forEach((d,i)=>d.classList.toggle('on',i===m.c));
+  document.querySelectorAll('#mech-'+id+' .mech-step').forEach((s,i)=>s.classList.toggle('on',i===m.c));
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
+  initMS('cb-0',4);
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
