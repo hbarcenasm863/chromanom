@@ -270,21 +270,28 @@ body{
 .badge-d{background:#fff7ed;color:#c2410c}
 /* ── Tipo D — Reacciones ── */
 .tipo-d{border-left:3px solid #c2410c}
-.rxn-d-eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;
-  font-family:'JetBrains Mono',monospace;font-size:.88rem;
-  background:var(--bg2,#f8fafc);border-radius:8px;padding:10px 14px;margin:10px 0}
-.rxn-d-r{color:var(--tx,#1e293b);font-weight:600}
-.rxn-d-reagent{color:#0369a1;font-weight:700}
-.rxn-d-cond{font-size:.75rem;color:var(--dimmer,#94a3b8);font-style:italic}
-.rxn-d-arrow{color:#059669;font-size:1.1rem;flex-shrink:0}
-.rxn-d-blank{display:inline-block;min-width:90px;border-bottom:2px solid #c2410c;
-  color:#c2410c;font-weight:700;text-align:center;padding:0 6px;font-size:1rem}
-.rxn-d-product{color:#059669;font-weight:700}
+.rxn-d-eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+  background:var(--bg2,#f8fafc);border-radius:10px;padding:12px 16px;margin:10px 0}
+.rxn-d-mol-box{background:#fff;border:1.5px solid #e2e8f0;border-radius:8px;
+  padding:8px 12px;display:flex;align-items:center;justify-content:center;
+  min-width:80px;min-height:64px}
+.rxn-d-mol-box svg{max-height:72px;width:auto;max-width:200px;display:block}
+.rxn-d-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.83rem;
+  color:var(--tx,#1e293b);font-weight:600;text-align:center}
+.rxn-d-blank-box{background:#fff7ed;border:2px dashed #c2410c;border-radius:8px;
+  padding:8px 20px;display:flex;align-items:center;justify-content:center;
+  min-width:90px;min-height:64px;color:#c2410c;font-weight:700;font-size:1.1rem}
+.rxn-d-ops{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0}
+.rxn-d-reagent{color:#0369a1;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.rxn-d-cond{font-size:.73rem;color:var(--dimmer,#94a3b8);font-style:italic}
+.rxn-d-arrow{color:#059669;font-size:1.2rem;flex-shrink:0;align-self:center}
 .rxn-d-hint{font-size:.76rem;color:var(--dimmer,#94a3b8);margin-bottom:8px;font-style:italic}
 .rxn-d-fields{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .rxn-d-field{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--dim,#475569)}
 .rxn-d-field .ans-line{flex:1;min-width:80px}
-.rxn-d-cond-blank{font-size:.78rem;padding:2px 8px;min-width:70px}
+@media(prefers-color-scheme:dark){
+  .rxn-d-mol-box{background:#1e293b;border-color:#334155}
+}
 .ex-instruction{font-size:.84rem;color:var(--dim)}
 
 /* Tipo A */
@@ -2576,37 +2583,124 @@ function printMdecTableFull(parts){
   </table>`;
 }
 
+// ── Formula parser: text notation → mkDevSVG chain ──────────────────────────
+const _SUB={'₀':0,'₁':1,'₂':2,'₃':3,'₄':4,'₅':5,'₆':6,'₇':7,'₈':8,'₉':9};
+function _subInt(s){let n=0;for(const c of s){if(_SUB[c]!==undefined)n=n*10+_SUB[c];}return n;}
+
+function _parseBranch(s){
+  if(s==='OH')return{s:'O',h:1};
+  if(s==='NH₂')return{s:'N',h:2};
+  if(s==='Cl')return{s:'Cl',h:0};
+  if(s==='Br')return{s:'Br',h:0};
+  if(s==='F')return{s:'F',h:0};
+  if(s==='I')return{s:'I',h:0};
+  if(s==='NO₂')return{s:'N',h:0}; // approximate
+  return null;
+}
+
+function _parseAtomAt(s, i){
+  const HALOS=['Cl','Br','OH','NH₂','F','I'];
+  let haloPrefix=null;
+  for(const ha of HALOS){
+    if(s.startsWith(ha,i)&&s[i+ha.length]==='C'){haloPrefix=ha;i+=ha.length;break;}
+  }
+  if(i>=s.length||s[i]!=='C')return null;
+  i++;
+  let h=0;
+  if(i<s.length&&s[i]==='H'){
+    i++;
+    let ds='';
+    while(i<s.length&&_SUB[s[i]]!==undefined)ds+=s[i++];
+    h=ds?_subInt(ds):1;
+  }
+  const node={h};
+  const branches=[];
+  if(haloPrefix){const b=_parseBranch(haloPrefix);if(b)branches.push(b);}
+  while(i<s.length&&s[i]==='('){
+    i++;let b='';
+    while(i<s.length&&s[i]!==')')b+=s[i++];
+    if(i<s.length)i++;
+    const bn=_parseBranch(b);if(bn)branches.push(bn);
+  }
+  if(!haloPrefix){
+    for(const ha of HALOS){
+      if(s.startsWith(ha,i)&&(i+ha.length>=s.length||!'−─=≡'.includes(s[i+ha.length]))){
+        const b=_parseBranch(ha);if(b){branches.push(b);i+=ha.length;}
+        while(i<s.length&&_SUB[s[i]]!==undefined)i++;
+        break;
+      }
+    }
+  }
+  if(branches.length)node.bd=branches;
+  return{node,i};
+}
+
+function _parseChainStr(s){
+  s=s.replace(/\s*\([^()]{2,50}\)\s*$/,'').trim();
+  s=s.replace(/^\d+\s+/,'').trim();
+  if(!s||s.length>50||s.includes('C₆')||s.includes('???'))return null;
+  const chain=[];
+  let i=0,nextBond=1;
+  while(i<s.length){
+    while(i<s.length&&s[i]===' ')i++;
+    if(i>=s.length)break;
+    if('−─'.includes(s[i])){nextBond=1;i++;continue;}
+    if(s[i]==='='){nextBond=2;i++;continue;}
+    if(s[i]==='≡'){nextBond=3;i++;continue;}
+    if(chain.length>0)chain[chain.length-1].bn=nextBond;
+    nextBond=1;
+    const res=_parseAtomAt(s,i);
+    if(!res)return null;
+    chain.push(res.node);
+    i=res.i;
+  }
+  return chain.length?chain:null;
+}
+
+function _molBox(str, isSvg){
+  if(!str)return '';
+  // Try SVG rendering
+  try{
+    const chain=_parseChainStr(str);
+    if(chain&&chain.length){
+      const svg=mkDevSVG(chain);
+      if(svg)return`<div class="rxn-d-mol-box">${svg}</div>`;
+    }
+  }catch(e){}
+  // Fallback: styled text
+  return`<div class="rxn-d-mol-box"><span class="rxn-d-mol-txt">${str}</span></div>`;
+}
+
 function buildTipoDCard(rxn, num){
   let enunciado, eqHtml, fieldHtml;
-  const condStr = rxn.condicion
-    ? `<span class="rxn-d-cond">[${rxn.condicion}]</span>`
+  const condPart = rxn.condicion
+    ? `<span class="rxn-d-cond">${rxn.condicion}</span>`
+    : '';
+  const reagentPart = rxn.reactivo && rxn.reactivo!=='???'
+    ? `<div class="rxn-d-ops"><span class="rxn-d-reagent">+&nbsp;${rxn.reactivo}</span>${condPart?`<br>${condPart}`:''}</div>`
     : '';
 
   if(rxn.pregunta_tipo === 'producto'){
     enunciado = 'Predice el <strong>producto principal</strong> de la siguiente reacci&oacute;n:';
-    eqHtml = `<span class="rxn-d-r">${rxn.r}</span>
-      <span class="rxn-d-reagent">+&nbsp;${rxn.reactivo}</span>
-      ${condStr}
+    eqHtml = `${_molBox(rxn.r)}${reagentPart}
       <span class="rxn-d-arrow">──→</span>
-      <span class="rxn-d-blank">?</span>`;
+      <div class="rxn-d-blank-box">?</div>`;
     fieldHtml = `<div class="rxn-d-field"><span>Producto:</span><div class="ans-line"></div></div>`;
 
   } else if(rxn.pregunta_tipo === 'reactivo'){
     enunciado = 'Identifica el <strong>reactivo</strong> que falta para obtener el producto indicado:';
-    eqHtml = `<span class="rxn-d-r">${rxn.r}</span>
-      <span class="rxn-d-reagent">+&nbsp;<span class="rxn-d-blank">?</span></span>
-      ${condStr}
+    eqHtml = `${_molBox(rxn.r)}
+      <div class="rxn-d-ops"><span class="rxn-d-reagent">+</span>${condPart?`<br>${condPart}`:''}<div class="rxn-d-blank-box" style="margin-top:4px">?</div></div>
       <span class="rxn-d-arrow">──→</span>
-      <span class="rxn-d-product">${rxn.producto}</span>`;
+      ${_molBox(rxn.producto)}`;
     fieldHtml = `<div class="rxn-d-field"><span>Reactivo faltante:</span><div class="ans-line"></div></div>`;
 
   } else {
     enunciado = 'Indica las <strong>condiciones</strong> necesarias para que ocurra la reacci&oacute;n:';
-    eqHtml = `<span class="rxn-d-r">${rxn.r}</span>
-      <span class="rxn-d-reagent">+&nbsp;${rxn.reactivo}</span>
-      <span class="rxn-d-blank rxn-d-cond-blank">???</span>
+    eqHtml = `${_molBox(rxn.r)}
+      <div class="rxn-d-ops"><span class="rxn-d-reagent">+&nbsp;${rxn.reactivo}</span><br><div class="rxn-d-blank-box" style="margin-top:4px">???</div></div>
       <span class="rxn-d-arrow">──→</span>
-      <span class="rxn-d-product">${rxn.producto}</span>`;
+      ${_molBox(rxn.producto)}`;
     fieldHtml = `<div class="rxn-d-field"><span>Condiciones:</span><div class="ans-line"></div></div>`;
   }
 
@@ -2663,14 +2757,14 @@ function generate(){
   const tiposNom=tipos.filter(t=>t!=='D');
   const wantsTipoD=tipos.includes('D');
 
-  // ── Pool de moléculas (tipos A/B/C) ──────────────────────────────────────
+  // ── Pool de moléculas (tipos A/B/C) — solo si hay tipos no-D seleccionados ─
   const _seen=new Set();
-  const poolMol=MOLS.filter(m=>{
+  const poolMol=tiposNom.length ? MOLS.filter(m=>{
     if(!grupos.includes(m.topic)) return false;
     if(_seen.has(m.name)) return false;
     _seen.add(m.name);
     return true;
-  });
+  }) : [];
 
   // ── Pool de reacciones (tipo D) — filtrado por grupos seleccionados ───────
   const poolRxn=wantsTipoD ? shuffle(BANCO_RXN.filter(r=>grupos.includes(r.topic))) : [];
