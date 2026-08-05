@@ -267,6 +267,23 @@ body{
 .badge-a{background:#e0f2fe;color:#0369a1}
 .badge-b{background:#f0fdf4;color:#166534}
 .badge-c{background:#fdf4ff;color:#7e22ce}
+.badge-d{background:#fff7ed;color:#c2410c}
+/* ── Tipo D — Reacciones ── */
+.tipo-d{border-left:3px solid #c2410c}
+.rxn-d-eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;
+  font-family:'JetBrains Mono',monospace;font-size:.88rem;
+  background:var(--bg2,#f8fafc);border-radius:8px;padding:10px 14px;margin:10px 0}
+.rxn-d-r{color:var(--tx,#1e293b);font-weight:600}
+.rxn-d-reagent{color:#0369a1;font-weight:700}
+.rxn-d-cond{font-size:.75rem;color:var(--dimmer,#94a3b8);font-style:italic}
+.rxn-d-arrow{color:#059669;font-size:1.1rem;flex-shrink:0}
+.rxn-d-blank{display:inline-block;min-width:90px;border-bottom:2px solid #c2410c;
+  color:#c2410c;font-weight:700;text-align:center;padding:0 6px;font-size:1rem}
+.rxn-d-product{color:#059669;font-weight:700}
+.rxn-d-hint{font-size:.76rem;color:var(--dimmer,#94a3b8);margin-bottom:8px;font-style:italic}
+.rxn-d-fields{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.rxn-d-field{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--dim,#475569)}
+.rxn-d-field .ans-line{flex:1;min-width:80px}
 .ex-instruction{font-size:.84rem;color:var(--dim)}
 
 /* Tipo A */
@@ -586,6 +603,7 @@ body{
     <a href="./index.html" class="nav-link">&#127968; <span class="full">Inicio</span></a>
     <a href="./teoria.html" class="nav-link">&#9879;&#65039; <span class="full">Principios</span></a>
     <a href="./grupos.html" class="nav-link">&#128300; <span class="full">Grupos</span></a>
+    <a href="./reacciones.html" class="nav-link">&#129514; <span class="full">Reacciones</span></a>
     <a href="./juego.html" class="nav-link">&#127918; <span class="full">Juego</span></a>
     <a href="./generador.html" class="nav-link active">&#128196; <span class="full">Generador</span></a>
   </div>
@@ -622,6 +640,7 @@ body{
         <label class="cb-item"><input type="checkbox" name="grupo" value="nitrilos"> Nitrilos</label>
         <label class="cb-item"><input type="checkbox" name="grupo" value="aminas"> Aminas</label>
         <label class="cb-item"><input type="checkbox" name="grupo" value="benceno"> Arom&aacute;ticos (benceno)</label>
+        <label class="cb-item"><input type="checkbox" name="grupo" value="reacciones"> Reacciones org&aacute;nicas</label>
       </div>
     </div>
 
@@ -648,6 +667,13 @@ body{
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo C &mdash; An&aacute;lisis MDEC</div>
             <div class="tipo-item-desc">Se da el nombre coloreado por partes; el alumno identifica tipo y significado de cada fragmento.</div>
+          </div>
+        </label>
+        <label class="tipo-item">
+          <input type="checkbox" name="tipo" value="D">
+          <div class="tipo-item-body">
+            <div class="tipo-item-title">Tipo D &mdash; Reacciones org&aacute;nicas</div>
+            <div class="tipo-item-desc">Se muestra la ecuaci&oacute;n con un dato oculto; el alumno predice el producto o identifica el tipo de reacci&oacute;n. Requiere seleccionar &ldquo;Reacciones org&aacute;nicas&rdquo;.</div>
           </div>
         </label>
       </div>
@@ -1763,6 +1789,158 @@ const MOLS = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// BANCO_RXN — preguntas de reacciones orgánicas (Tipo D)
+// Campos: key, grupo_rxn, pregunta_tipo ('producto'|'tipo'), enunciado,
+//         r (reactante), reactivo, condicion, respuesta, nombre_rxn, regla
+// ─────────────────────────────────────────────────────────────────────────────
+const BANCO_RXN = [
+  // ── Adición en alquenos ───────────────────────────────────────────────────
+  {key:'rxn_01',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto principal de la siguiente reacción:',
+   r:'CH₃−CH=CH₂',reactivo:'+ HBr',condicion:null,
+   nombre_rxn:'Hidrohalogenación (adición de HBr)',
+   regla:'Regla de Markovnikov: el Br va al C2 (más sustituido).',
+   respuesta:'CH₃−CH(Br)−CH₃  (2-bromopropano)'},
+  {key:'rxn_02',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto principal de la siguiente reacción:',
+   r:'CH₃−CH=CH₂',reactivo:'+ HCl',condicion:null,
+   nombre_rxn:'Hidrohalogenación (adición de HCl)',
+   regla:'Markovnikov: Cl al C2 (más sustituido).',
+   respuesta:'CH₃−CH(Cl)−CH₃  (2-cloropropano)'},
+  {key:'rxn_03',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto de la siguiente reacción de halogenación:',
+   r:'CH₃−CH=CH−CH₃',reactivo:'+ Cl₂',condicion:null,
+   nombre_rxn:'Halogenación (adición de Cl₂)',
+   regla:'Los dos Cl se añaden uno a cada C del doble enlace.',
+   respuesta:'CH₃−CH(Cl)−CH(Cl)−CH₃  (2,3-diclorobutano)'},
+  {key:'rxn_04',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+   enunciado:'Escribe el producto de la hidrogenación de este alqueno:',
+   r:'CH₃−CH=CH₂',reactivo:'+ H₂',condicion:'cat. Ni / Pt / Pd',
+   nombre_rxn:'Hidrogenación catalítica',
+   regla:'El H₂ se adiciona al doble enlace; el catalizador activa el H₂.',
+   respuesta:'CH₃−CH₂−CH₃  (propano)'},
+  {key:'rxn_05',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+   enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
+   r:'CH₃−CH=CH₂',reactivo:'+ H₂O',condicion:'cat. H₂SO₄',
+   nombre_rxn:'Hidratación (adición de H₂O)',
+   regla:'Markovnikov: −OH al C2 (más sustituido).',
+   respuesta:'CH₃−CH(OH)−CH₃  (propan-2-ol)'},
+  {key:'rxn_06',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'tipo',
+   enunciado:'Identifica el tipo de reacción y la regla que determina el producto principal:',
+   r:'CH₃−CH=CH₂',reactivo:'+ HBr',condicion:null,
+   nombre_rxn:'Adición electrofílica — Hidrohalogenación',
+   regla:'Markovnikov: el H se une al C con más H; el Br al C más sustituido.',
+   respuesta:'Adición electrofílica de HBr (Hidrohalogenación). Regla de Markovnikov → 2-bromopropano.'},
+  // ── Sustitución radical en alcanos ────────────────────────────────────────
+  {key:'rxn_07',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+   enunciado:'Escribe los productos de la siguiente halogenación:',
+   r:'CH₄',reactivo:'+ Cl₂',condicion:'hν (luz UV) o Δ',
+   nombre_rxn:'Halogenación radical (cloraci&oacute;n de metano)',
+   regla:'Un H del alcano es sustituido por Cl; se libera HCl.',
+   respuesta:'CH₃Cl  (clorometano)  +  HCl'},
+  {key:'rxn_08',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+   enunciado:'¿Qué productos se obtienen al irradiar con luz esta mezcla?',
+   r:'CH₃−CH₃',reactivo:'+ Br₂',condicion:'hν',
+   nombre_rxn:'Halogenación radical (bromación de etano)',
+   regla:'Sustitución radical: un H se reemplaza por Br.',
+   respuesta:'CH₃−CH₂Br  (bromoetano)  +  HBr'},
+  {key:'rxn_09',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+   enunciado:'Escribe la ecuación completa de la combustión completa del butano:',
+   r:'2 C₄H₁₀',reactivo:'+ 13 O₂',condicion:'Δ (llama)',
+   nombre_rxn:'Combustión completa de alcano',
+   regla:'Combustión completa → CO₂ + H₂O (sin hollín).',
+   respuesta:'8 CO₂  +  10 H₂O'},
+  {key:'rxn_10',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'tipo',
+   enunciado:'Indica el tipo de reacción y las condiciones necesarias:',
+   r:'CH₄',reactivo:'+ Cl₂',condicion:'???',
+   nombre_rxn:'Sustitución radical (SR)',
+   regla:'Requiere energía (luz UV o calor) para generar radicales Cl•.',
+   respuesta:'Sustitución Radical (SR). Condición: luz UV (hν) o calor (Δ).'},
+  // ── SEA aromáticos ────────────────────────────────────────────────────────
+  {key:'rxn_11',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto de la halogenación de benceno:',
+   r:'C₆H₆',reactivo:'+ Cl₂',condicion:'cat. FeCl₃',
+   nombre_rxn:'SEA — Halogenación aromática',
+   regla:'FeCl₃ activa el Cl₂; el H del anillo se sustituye por Cl.',
+   respuesta:'C₆H₅Cl  (clorobenceno)  +  HCl'},
+  {key:'rxn_12',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+   enunciado:'Escribe el producto de la nitración del benceno:',
+   r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄ / Δ',
+   nombre_rxn:'SEA — Nitración aromática',
+   regla:'Mezcla nitrante (HNO₃ + H₂SO₄) genera el electrófilo NO₂⁺.',
+   respuesta:'C₆H₅NO₂  (nitrobenceno)  +  H₂O'},
+  {key:'rxn_13',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+   enunciado:'¿Qué compuesto se forma al sulfonar el benceno?',
+   r:'C₆H₆',reactivo:'+ H₂SO₄',condicion:'oleum / Δ',
+   nombre_rxn:'SEA — Sulfonaci&oacute;n aromática',
+   regla:'El SO₃ actúa como electrófilo; reacción reversible a alta temperatura.',
+   respuesta:'C₆H₅SO₃H  (ácido bencenosulf&oacute;nico)  +  H₂O'},
+  {key:'rxn_14',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto de la reacción de Friedel-Crafts (alquilación):',
+   r:'C₆H₆',reactivo:'+ CH₃Cl',condicion:'cat. AlCl₃',
+   nombre_rxn:'SEA — Alquilaci&oacute;n de Friedel-Crafts',
+   regla:'AlCl₃ genera el electrófilo CH₃⁺ (carbocatión metilo).',
+   respuesta:'C₆H₅CH₃  (tolueno / metilbenceno)  +  HCl'},
+  {key:'rxn_15',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+   enunciado:'Escribe el producto de la acilación de Friedel-Crafts:',
+   r:'C₆H₆',reactivo:'+ CH₃COCl',condicion:'cat. AlCl₃',
+   nombre_rxn:'SEA — Acilaci&oacute;n de Friedel-Crafts',
+   regla:'AlCl₃ activa el acilcloruro; el electrófilo es el acilio CH₃CO⁺.',
+   respuesta:'C₆H₅−CO−CH₃  (acetofenona)  +  HCl'},
+  {key:'rxn_16',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'tipo',
+   enunciado:'Clasifica la siguiente reacción e indica el electrófilo activo:',
+   r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄',
+   nombre_rxn:'Sustitución Electrófila Aromática (SEA) — Nitración',
+   regla:'El H₂SO₄ protona el HNO₃ y genera NO₂⁺ (ion nitronio).',
+   respuesta:'SEA — Nitración. Electrófilo activo: NO₂⁺ (ion nitronio).'},
+  // ── Adición en alquinos ───────────────────────────────────────────────────
+  {key:'rxn_17',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+   enunciado:'Predice el producto de la primera adición de HBr al acetileno:',
+   r:'CH≡CH',reactivo:'+ HBr',condicion:'(1 mol)',
+   nombre_rxn:'Adición de HBr a alquino (1ª adición)',
+   regla:'Markovnikov: H al C1 y Br al C2 del enlace triple.',
+   respuesta:'CH₂=CHBr  (bromoeteno / cloruro de vinilo)'},
+  {key:'rxn_18',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+   enunciado:'¿Qué producto se obtiene al añadir 2 moles de HBr al acetileno?',
+   r:'CH≡CH',reactivo:'+ 2 HBr',condicion:'(2 moles)',
+   nombre_rxn:'Adición de HBr a alquino (2ª adición)',
+   regla:'Segunda adición de HBr sobre el bromoeteno intermedio (Markovnikov).',
+   respuesta:'CH₃CHBr₂  (1,1-dibromoetano)'},
+  {key:'rxn_19',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+   enunciado:'Escribe el producto de la hidrogenación parcial del propino:',
+   r:'CH₃−C≡CH',reactivo:'+ H₂',condicion:'cat. Pd/CaCO₃ (Lindlar)',
+   nombre_rxn:'Hidrogenación parcial de alquino',
+   regla:'El catalizador de Lindlar da solo el alqueno cis; evita sobrereducción.',
+   respuesta:'CH₃−CH=CH₂  (propeno, isómero cis)'},
+  // ── Sustitución nucleofílica ─────────────────────────────────────────────
+  {key:'rxn_20',grupo_rxn:'Sustitución nucleofílica',pregunta_tipo:'producto',
+   enunciado:'Predice el producto de esta reacción SN2:',
+   r:'CH₃CH₂Br',reactivo:'+ NaOH',condicion:'solución acuosa',
+   nombre_rxn:'Sustitución Nucleofílica Bimolecular (SN2)',
+   regla:'OH⁻ ataca por la cara opuesta al Br; inversión de configuración (Walden).',
+   respuesta:'CH₃CH₂OH  (etanol)  +  NaBr'},
+  {key:'rxn_21',grupo_rxn:'Sustitución nucleofílica',pregunta_tipo:'tipo',
+   enunciado:'Clasifica la siguiente reacción e indica el nucleófilo y el grupo saliente:',
+   r:'(CH₃)₃CBr',reactivo:'+ H₂O',condicion:'temperatura ambiente',
+   nombre_rxn:'Sustitución Nucleofílica Unimolecular (SN1)',
+   regla:'El carbono terciario forma un carbocatión estable (SN1); el H₂O es el nucleófilo.',
+   respuesta:'SN1. Nucleófilo: H₂O. Grupo saliente: Br⁻. Producto: (CH₃)₃COH (2-metilpropan-2-ol).'},
+  // ── Eliminación ──────────────────────────────────────────────────────────
+  {key:'rxn_22',grupo_rxn:'Eliminación',pregunta_tipo:'producto',
+   enunciado:'Escribe el alqueno que se forma en la siguiente reacción E2:',
+   r:'CH₃−CH₂−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
+   nombre_rxn:'Eliminación Bimolecular (E2)',
+   regla:'La base KOH retira un H β; se forma el doble enlace (Saytzeff: alqueno más sustituido).',
+   respuesta:'CH₃−CH=CH₂  (propeno)  +  KBr  +  H₂O'},
+  {key:'rxn_23',grupo_rxn:'Eliminación',pregunta_tipo:'tipo',
+   enunciado:'Identifica el tipo de reacción y explica por qué se favorece la eliminación sobre la sustitución:',
+   r:'CH₃−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
+   nombre_rxn:'Eliminación E2 (condiciones básicas / calor)',
+   regla:'Base fuerte (KOH) + solvente aprótico + calor favorecen E2 sobre SN2.',
+   respuesta:'Eliminación E2. Condiciones básicas (KOH) y calor favorecen la pérdida de HBr para dar propeno.'},
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────────────────
 const MDEC_NAMES = {
@@ -1827,6 +2005,35 @@ function printMdecTableFull(parts){
   </table>`;
 }
 
+function buildTipoDCard(rxn, num){
+  const condStr = rxn.condicion ? `<span class="rxn-d-cond">${rxn.condicion}</span>` : '';
+  const askProducto = rxn.pregunta_tipo === 'producto';
+  return `<div class="exercise tipo-d">
+    <div class="ex-header">
+      <span class="ex-num">${num}.</span>
+      <span class="ex-badge badge-d">Reacci&oacute;n</span>
+      <span class="ex-instruction">${rxn.enunciado}</span>
+    </div>
+    <div class="rxn-d-eq">
+      <span class="rxn-d-r">${rxn.r}</span>
+      <span class="rxn-d-reagent">${rxn.reactivo}</span>
+      ${condStr}
+      <span class="rxn-d-arrow">──→</span>
+      ${askProducto
+        ? '<span class="rxn-d-blank">?</span>'
+        : `<span class="rxn-d-product">${rxn.respuesta}</span>`}
+    </div>
+    <div class="rxn-d-hint">&#128204; <em>${rxn.regla}</em></div>
+    <div class="rxn-d-fields">
+      ${askProducto
+        ? `<div class="rxn-d-field"><span>Producto principal:</span><div class="ans-line"></div></div>`
+        : `<div class="rxn-d-field"><span>Tipo de reacci&oacute;n:</span><div class="ans-line"></div></div>
+           <div class="rxn-d-field"><span>Reactivo activo / condici&oacute;n:</span><div class="ans-line"></div></div>`}
+      <div class="rxn-d-field"><span>Nombre de la reacci&oacute;n:</span><div class="ans-line"></div></div>
+    </div>
+  </div>`;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // UI — toggle checked style on checkbox labels
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1862,30 +2069,63 @@ function generate(){
     return;
   }
 
-  // Deduplicate by name within the filtered pool so the same compound
-  // never appears twice even if MOLS has entries with matching names.
-  const _seen=new Set();
-  const pool=MOLS.filter(m=>{
-    if(!grupos.includes(m.topic)) return false;
-    if(_seen.has(m.name)) return false;
-    _seen.add(m.name);
-    return true;
-  });
-  if(!pool.length){
-    warning.textContent='No hay moléculas disponibles para los grupos seleccionados.';
+  const wantsRxn=grupos.includes('reacciones');
+  const tiposNom=tipos.filter(t=>t!=='D');
+  const wantsTipoD=tipos.includes('D');
+
+  if(wantsTipoD && !wantsRxn){
+    warning.textContent='Tipo D requiere seleccionar "Reacciones orgánicas".';
+    warning.className='warning show';
+    return;
+  }
+  if(wantsRxn && !wantsTipoD && !tiposNom.length){
+    warning.textContent='Para reacciones selecciona Tipo D. Para moléculas selecciona Tipo A, B o C.';
     warning.className='warning show';
     return;
   }
 
-  const shuffled=shuffle(pool);
-  const count=Math.min(n, shuffled.length);
-  if(count<n){
-    warning.textContent=`Solo hay ${count} molécula(s) disponibles para la selección; se generarán ${count} ejercicio(s).`;
+  const gruposNom=grupos.filter(g=>g!=='reacciones');
+
+  // ── Pool de moléculas (tipos A/B/C) ──────────────────────────────────────
+  const _seen=new Set();
+  const poolMol=MOLS.filter(m=>{
+    if(!gruposNom.includes(m.topic)) return false;
+    if(_seen.has(m.name)) return false;
+    _seen.add(m.name);
+    return true;
+  });
+
+  // ── Pool de reacciones (tipo D) ───────────────────────────────────────────
+  const poolRxn=wantsRxn && wantsTipoD ? shuffle(BANCO_RXN) : [];
+
+  if(!poolMol.length && !poolRxn.length){
+    warning.textContent='No hay ejercicios disponibles para la selección actual.';
+    warning.className='warning show';
+    return;
+  }
+
+  // Mix: distribute n questions proportionally between mol and rxn pools
+  let countMol=0, countRxn=0;
+  if(poolMol.length && poolRxn.length){
+    countRxn=Math.max(1, Math.round(n*0.35));
+    countMol=n-countRxn;
+    countRxn=Math.min(countRxn, poolRxn.length);
+    countMol=Math.min(countMol, poolMol.length);
+  } else if(poolMol.length){
+    countMol=Math.min(n, poolMol.length);
+  } else {
+    countRxn=Math.min(n, poolRxn.length);
+  }
+
+  const total=countMol+countRxn;
+  if(total<n){
+    warning.textContent=`Solo hay ${total} ejercicio(s) disponibles para la selección; se generarán ${total}.`;
     warning.className='warning show';
   }
 
-  const chosen=shuffled.slice(0, count);
-  _generated=chosen.map((mol,idx)=>({mol, tipo: tipos[idx % tipos.length]}));
+  const chosenMol=shuffle(poolMol).slice(0, countMol).map((mol,idx)=>({mol, tipo:tiposNom.length?tiposNom[idx%tiposNom.length]:'A', kind:'mol'}));
+  const chosenRxn=poolRxn.slice(0, countRxn).map(rxn=>({rxn, tipo:'D', kind:'rxn'}));
+  _generated=shuffle([...chosenMol,...chosenRxn]);
 
   document.getElementById('config-panel').classList.add('hidden');
   renderSheet();
@@ -1916,46 +2156,49 @@ function renderSheet(){
   list.className='exercises-list'+(allA?' has-a':'');
 
   _generated.forEach((entry, idx)=>{
-    const {mol, tipo}=entry;
     const num=idx+1;
-    const svgHtml=getSVG(mol.key);
-
-    // ── Exercise card ──
     let exHtml='';
-    if(tipo==='A'){
-      const svgWrapCls='ex-svg-wrap'+(mol.topic==='benceno'?' ex-svg-tall':'');
-      exHtml=`<div class="exercise tipo-a">
-        <div class="ex-header">
-          <span class="ex-num">${num}.</span>
-          <span class="ex-badge badge-a">Nomenclatura</span>
-          <span class="ex-instruction">Escribe el nombre IUPAC de la siguiente estructura:</span>
-        </div>
-        <div class="${svgWrapCls}">${svgHtml}</div>
-        <div class="ex-answer-line">
-          <span>Nombre IUPAC:</span>
-          <div class="ans-line"></div>
-        </div>
-      </div>`;
-    } else if(tipo==='B'){
-      exHtml=`<div class="exercise tipo-b">
-        <div class="ex-header">
-          <span class="ex-num">${num}.</span>
-          <span class="ex-badge badge-b">Estructura</span>
-          <span class="ex-instruction">Dibuja la estructura esquelética del siguiente compuesto:</span>
-        </div>
-        <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre común: ${mol.name})</span>`:''}</div>
-        <div class="ex-draw-box"></div>
-      </div>`;
+
+    if(entry.kind==='rxn'){
+      exHtml=buildTipoDCard(entry.rxn, num);
     } else {
-      exHtml=`<div class="exercise tipo-c">
-        <div class="ex-header">
-          <span class="ex-num">${num}.</span>
-          <span class="ex-badge badge-c">Análisis MDEC</span>
-          <span class="ex-instruction">Identifica cada parte del nombre según el método MDEC:</span>
-        </div>
-        <div class="mdec-name-display">${mdecPills(mol.parts)}</div>
-        ${mdecTableBlank(mol.parts)}
-      </div>`;
+      const {mol, tipo}=entry;
+      const svgHtml=getSVG(mol.key);
+      if(tipo==='A'){
+        const svgWrapCls='ex-svg-wrap'+(mol.topic==='benceno'?' ex-svg-tall':'');
+        exHtml=`<div class="exercise tipo-a">
+          <div class="ex-header">
+            <span class="ex-num">${num}.</span>
+            <span class="ex-badge badge-a">Nomenclatura</span>
+            <span class="ex-instruction">Escribe el nombre IUPAC de la siguiente estructura:</span>
+          </div>
+          <div class="${svgWrapCls}">${svgHtml}</div>
+          <div class="ex-answer-line">
+            <span>Nombre IUPAC:</span>
+            <div class="ans-line"></div>
+          </div>
+        </div>`;
+      } else if(tipo==='B'){
+        exHtml=`<div class="exercise tipo-b">
+          <div class="ex-header">
+            <span class="ex-num">${num}.</span>
+            <span class="ex-badge badge-b">Estructura</span>
+            <span class="ex-instruction">Dibuja la estructura esquelética del siguiente compuesto:</span>
+          </div>
+          <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre común: ${mol.name})</span>`:''}</div>
+          <div class="ex-draw-box"></div>
+        </div>`;
+      } else {
+        exHtml=`<div class="exercise tipo-c">
+          <div class="ex-header">
+            <span class="ex-num">${num}.</span>
+            <span class="ex-badge badge-c">Análisis MDEC</span>
+            <span class="ex-instruction">Identifica cada parte del nombre según el método MDEC:</span>
+          </div>
+          <div class="mdec-name-display">${mdecPills(mol.parts)}</div>
+          ${mdecTableBlank(mol.parts)}
+        </div>`;
+      }
     }
     list.insertAdjacentHTML('beforeend', exHtml);
 
