@@ -207,6 +207,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .tipo-card-badge{font-size:.72rem;padding:3px 8px;border-radius:6px;
   font-weight:600}
 .tipo-card-desc{font-size:.8rem;color:var(--dim);line-height:1.65;margin-top:8px}
+
+/* ── RXN-VIDA (contexto real) ── */
+.rxn-vida{display:flex;gap:10px;align-items:flex-start;
+  background:var(--surf2);border-radius:var(--rs);padding:10px 14px;
+  margin-bottom:12px;font-size:.8rem;color:var(--dim);border-left:3px solid var(--c2t)}
+.rxn-vida-ico{font-size:1.4rem;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -218,6 +224,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
     <a href="reacciones.html" class="nav-link active">🧪 <span class="full">Reacciones</span></a>
     <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+    <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
   </div>
 </nav>
 
@@ -260,6 +267,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Los alcanos y cicloalcanos son compuestos saturados; no reaccionan por adición. Su reacción típica es la <strong>sustitución homolítica</strong>, donde un H es reemplazado por otro átomo mediante radicales libres generados por luz (hν) o calor (Δ). Br₂ es más selectivo que Cl₂: prefiere el H terciario (radical más estable).</div>
     </div>
+
+    <div class="tipo-header">⚡ Sustitución Radical (SR)</div>
+    <p class="tipo-desc">Los alcanos son moléculas muy "tranquilas" — sus enlaces C−H son fuertes y casi no reaccionan solos. Pero la luz ultravioleta (hν) o el calor intenso rompen el halógeno X₂ en dos <strong>radicales</strong> (átomos con un electrón libre desapareado, extremadamente agresivos). Esos radicales sí pueden arrancarle un H al alcano y poner X en su lugar. Al mirar las reacciones de abajo, sigue el <strong>mecanismo de 3 pasos</strong>: <em>iniciación</em> (nace el radical) → <em>propagación</em> (ciclo que se repite miles de veces) → <em>terminación</em> (dos radicales se chocan y mueren).</p>
 
     <div id="rxn-al-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('al-0')">
@@ -374,6 +384,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">c-C₆H₁₁<span class="hn">Cl</span> + HCl</span>
           <span class="rxn-ex-nota">clorociclohexano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🇨🇴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La halogenación de alcanos es la base para fabricar <strong>cloroformo (CHCl₃)</strong> — usado como disolvente en laboratorios colombianos — y el <strong>clorometano (CH₃Cl)</strong>, intermediario en la producción de siliconas y refrigerantes. También origina los clorofluorocarbonos (CFC), hoy prohibidos por su efecto en la capa de ozono.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-0-q0">
@@ -504,6 +518,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">3 CO₂ + 4 H₂O</span>
           <span class="rxn-ex-nota">propano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🇨🇴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> Cada vez que prendes la estufa de tu casa con <strong>gas propano</strong> (zonas rurales de Colombia) o gas natural (metano, ciudades), estás aprovechando la combustión completa de alcanos. El ACPM (diésel) que mueve los camiones de carga en Colombia es también una mezcla de alcanos de 12–20 carbonos que, al quemarse completo, libera la energía del motor.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-1-q0">
@@ -633,6 +651,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">2 CO + 4 H₂O</span>
           <span class="rxn-ex-nota">O₂ escaso → CO</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">⚠️</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La combustión incompleta en hogares con mala ventilación produce <strong>monóxido de carbono (CO)</strong> — gas inodoro e incoloro que causa intoxicaciones graves. En Colombia, los calentadores de agua a gas sin salida exterior son causa frecuente de accidentes. La <strong>llama amarilla</strong> del quemador es la señal visual de combustión incompleta: si ves esa llama, aumenta la ventilación.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-2-q0">
@@ -696,7 +718,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Tensión angular</div>
             <div class="mech-step-h">El ángulo C−C−C forzado a 60° (vs 109.5° ideal) hace al ciclopropano muy reactivo</div>
-            <div class="mech-step-txt">El carbono sp³ forma ángulos naturales de 109.5°. En ciclopropano (triángulo), los ángulos se fuerzan a <strong>60°</strong>, creando una enorme <em>tensión angular</em>. Esta tensión almacena energía que hace al anillo muy proclive a romperse, reaccionando por adición (no sustitución) como los alquenos.</div>
+            <div class="mech-step-txt">Un carbono unido a 4 grupos prefiere ángulos de <strong>109.5°</strong> entre sus enlaces — ese es su ángulo "cómodo" (como abrir los brazos en forma de estrella). En el ciclopropano, los tres carbonos forman un <strong>triángulo</strong>, y los ángulos se comprimen a solo <strong>60°</strong> — como doblar los brazos a la fuerza. Esa compresión almacena energía (tensión), y el anillo "quiere" abrirse para liberarla. Por eso reacciona como si tuviera un doble enlace: se abre y añade nuevos grupos en los extremos.</div>
           </div>
           <div class="mech-step" id="ms-al-3-1">
             <div class="mech-vis">
@@ -746,6 +768,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH₂−CH₂Br</span>
           <span class="rxn-ex-nota">1-bromopropano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💉</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> El <strong>ciclopropano</strong> fue el primer anestésico inhalado usado masivamente en cirugías del siglo XX. Hoy se reemplazó por anestésicos más seguros (isoflurano, sevoflurano), pero su historia ilustra cómo la inestabilidad química del anillo de tres carbonos tiene consecuencias biológicas directas. Los derivados de ciclopropano también aparecen en insecticidas piretroides (como la cipermetrina, usada en Colombia).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-3-q0">
@@ -800,6 +826,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">El doble enlace C=C actúa como nucleófilo: la nube π dona electrones al electrófilo (E⁺). El nucleófilo (A⁻) se une al carbocatión intermedio. <strong>Regla de Markovnikov:</strong> el electrófilo va al carbono con más H (menos sustituido). Estabilidad carbocatión: 3° &gt; 2° &gt; 1°.</div>
     </div>
+
+    <div class="tipo-header">➕ Adición Electrofílica (AE)</div>
+    <p class="tipo-desc">El doble enlace C=C tiene una nube de electrones "extra" (el enlace π) que atrae a moléculas con escasez de electrones — a esas moléculas las llamamos <strong>electrófilos</strong> (literalmente, "amantes de electrones", como H⁺, Br₂, H₂O). El electrófilo se 'pega' al doble enlace y lo rompe, añadiendo dos grupos nuevos al carbono. La <strong>Regla de Markovnikov</strong> (mnemónica: "el H va al C que ya tiene más H") te indica en cuál de los dos carbonos queda cada grupo — fíjate en eso al leer cada ejemplo.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-0')">
@@ -863,7 +892,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
             <div class="mech-step-h">El carbocatión se estabiliza por hiperconjugación e inducción de los grupos alquilo vecinos</div>
-            <div class="mech-step-txt">La estabilidad del carbocatión aumenta con más grupos alquilo: 3° > 2° > 1°. Los grupos alquilo <strong>donan densidad electrónica</strong> al carbono positivo por <em>hiperconjugación</em> e inducción. La reacción pasa por el carbocatión más estable (camino de menor energía).</div>
+            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>
           </div>
           <div class="mech-step" id="ms-aq-0-2">
             <div class="mech-vis">
@@ -909,6 +938,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH₂<span class="hn">Cl</span></span>
           <span class="rxn-ex-nota">cloroetano (simétrico → un solo producto)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧪</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La hidrohalogenación del propileno (CH₂=CH−CH₃ + HCl) produce <strong>cloruro de isopropilo</strong>, intermediario en la síntesis de ibuprofeno y otros antiinflamatorios genéricos. Colombia es el mayor productor de medicamentos genéricos de Latinoamérica, y estas reacciones de adición a dobles enlaces son pasos clave en sus rutas de síntesis.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-0-q0">
@@ -1032,6 +1065,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH<span class="hn">(Br)</span>−CH₂<span class="hn">Br</span></span>
           <span class="rxn-ex-nota">1,2-dibromopropano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏭</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La adición de Cl₂ al etileno produce <strong>1,2-dicloroetano</strong>, que al calentarse libera HCl y forma <strong>cloruro de vinilo (CH₂=CHCl)</strong>, el monómero del <strong>PVC</strong>. Las tuberías de agua potable, los impermeables y los pisos vinílicos de tu colegio son PVC — todo fabricado en industrias que emparten de esta reacción de halogenación de alquenos.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-1-q0">
@@ -1147,6 +1184,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−<span class="hn">CH₂</span>−<span class="hn">CH₃</span></span>
           <span class="rxn-ex-nota">propano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧈</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La hidrogenación de aceites vegetales líquidos (ricos en dobles enlaces) convierte sus cadenas insaturadas en saturadas, transformándolos en <strong>grasas sólidas</strong>. La margarina vegetal (<em>La Buena</em>, <em>Roma</em>) y la manteca para pastelería se fabrican así en Colombia. Hoy se controla la hidrogenación parcial para evitar grasas trans, que se forman si la reacción no es completa.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-2-q0">
@@ -1269,6 +1310,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH₂<span class="hn">OH</span></span>
           <span class="rxn-ex-nota">etanol (simétrico → único producto)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La hidratación catalítica del etileno produce <strong>etanol industrial</strong>, base para el <strong>alcohol de 70°</strong> (antiséptico hospitalario de uso masivo en Colombia) y para perfumes y cosméticos. También se produce etanol por fermentación de caña de azúcar (Valle del Cauca), que luego se mezcla con gasolina: <em>Gasolina con etanol</em> en las estaciones de servicio colombianas.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-3-q0">
@@ -1334,7 +1379,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Adición de O₃</div>
             <div class="mech-step-h">El ozono reacciona con el C=C formando el molozonida: un intermedio cíclico de 5 miembros</div>
-            <div class="mech-step-txt">El O₃ reacciona con el doble enlace en una <strong>cicloadición [4+2] concertada</strong> (aunque la mecanística real es más compleja). El molozonida (1,2,3-trioxolano) es muy inestable y se reorganiza espontáneamente.</div>
+            <div class="mech-step-txt">El ozono (O₃) es una molécula de tres oxígenos con muchos electrones disponibles. Al chocar con el doble enlace C=C, los tres oxígenos forman un <strong>anillo de 5 miembros</strong> con los dos carbonos — un anillo muy tenso que se reorganiza casi de inmediato. Piénsalo como un abrazo de los tres oxígenos al doble enlace: se enganchan, forman el anillo temporalmente inestable, y ese anillo pronto se rompe de otra forma para dar los productos del paso siguiente.</div>
           </div>
           <div class="mech-step" id="ms-aq-4-1">
             <div class="mech-vis">
@@ -1385,6 +1430,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><span class="hn">CH₃CHO</span> + <span class="hn">HCHO</span></span>
           <span class="rxn-ex-nota">etanal + metanal</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🔬</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La ozonólisis es la herramienta analítica para <strong>determinar la posición de los dobles enlaces</strong> en aceites vegetales (palma de aceite, cacao, aguacate — productos clave de Colombia). Al fragmentar los ácidos grasos insaturados y analizar los aldehídos o ácidos que resultan, el químico puede mapear la estructura exacta del aceite y detectar adulteraciones.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-4-q0">
@@ -1501,6 +1550,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">HO−CH₂−CH₂−<span class="hn">OH</span> + MnO₂</span>
           <span class="rxn-ex-nota">etilenglicol (1,2-etanodiol)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧫</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La prueba de Baeyer (decoloración del KMnO₄ violeta) es la <strong>prueba rápida de calidad</strong> para detectar si un aceite o grasa tiene dobles enlaces (está insaturado). Laboratorios de control de alimentos en Colombia la usan para verificar adulteración de aceites comestibles. También sirve para confirmar la presencia de alquenos e alquinos en muestras industriales de petroquímica.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-5-q0">
@@ -1535,6 +1588,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">El triple enlace puede adicionarse <strong>una</strong> o <strong>dos</strong> veces: la primera adición convierte el alquino en un alqueno; la segunda adición convierte el alqueno en alcano (o derivado). Lindlar (Pd envenenado) detiene en el <em>cis</em>-alqueno. Solo alquinos <strong>terminales</strong> (pKa ≈ 25) reaccionan como ácidos con NaNH₂.</div>
     </div>
+
+    <div class="tipo-header">➕➕ Adición al triple enlace (×1 y ×2)</div>
+    <p class="tipo-desc">El triple enlace (C≡C) es como una piscina de electrones aún más rica que el doble enlace — tiene <strong>dos nubes π</strong> disponibles. Eso significa que puede reaccionar <strong>una vez</strong> (queda un alqueno) o <strong>dos veces</strong> (queda un alcano o derivado). Reconocerás las mismas reacciones que viste en alquenos; aquí la novedad es que cada una puede aplicarse dos rondas. Al mirar los ejemplos, identifica si la reacción se detuvo en el alqueno intermedio (×1) o llegó hasta el producto final (×2).</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-0')">
@@ -1669,6 +1725,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH<span class="hn">Br₂</span></span>
           <span class="rxn-ex-nota">1,1-dibromoetano (×2)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏭</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La adición de HCl al acetileno produce <strong>cloruro de vinilo (CH₂=CHCl)</strong>, el monómero del PVC (policloruro de vinilo). A escala mundial, es una de las reacciones industriales más importantes. El PVC fabricado a partir de esta reacción se usa en tuberías de acueducto, perfiles de ventanas y membranas impermeabilizantes en construcciones colombianas.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ai-0-q0">
@@ -1807,6 +1867,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH<span class="hn">Br₂</span>−CH<span class="hn">Br₂</span></span>
           <span class="rxn-ex-nota">1,1,2,2-tetrabromoetano</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💊</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La halogenación de alquinos produce <strong>dihaloalquenos y tetrahaloalcanos</strong> que son intermediarios clave en la síntesis de <strong>anestésicos halogenados</strong> (halotano, isoflurano). Estos anestésicos se usan en todas las cirugías de Colombia y se importan desde plantas que parten de derivados halogenados de alquinos.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ai-1-q0">
@@ -1912,7 +1976,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Elección</div>
             <div class="mech-step-h">Lindlar → alqueno CIS; Na/NH₃ → alqueno TRANS; control estereoquímico preciso</div>
-            <div class="mech-step-txt">La elección del <strong>reductor determina la estereoquímica</strong> del producto. Esto es síntesis estereoselectiva: mismo reactivo de partida, distintos reactivos de reducción → enantiómeros/diastereómeros diferentes. Aplicación en síntesis de feromonas (geometría E o Z cambia la actividad biológica).</div>
+            <div class="mech-step-txt">El mismo alquino de partida puede dar dos productos distintos según el reductor: Lindlar → doble enlace <em>cis</em> (los dos grupos al mismo lado); Na/NH₃ → doble enlace <em>trans</em> (grupos en lados opuestos). Esa diferencia de geometría puede cambiar completamente la función de la molécula: por ejemplo, el cuerpo humano metaboliza de manera distinta los ácidos grasos cis y trans. En plaguicidas biológicos para café y banano, la geometría del doble enlace determina si la trampa de feromonas funciona o no.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1952,6 +2016,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−<span class="hn">CH₃</span></span>
           <span class="rxn-ex-nota">etano (×2 total)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🌿</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La reducción con catalizador de Lindlar produce alquenos <strong>cis (Z)</strong> con alta selectividad. Esto es crucial en síntesis de <strong>vitaminas</strong> (retinol — vitamina A — tiene varios dobles enlaces con geometría específica) y <strong>feromonas de insectos</strong> usadas en trampas de control biológico de plagas agrícolas en Colombia (café, banano).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ai-2-q0">
@@ -2088,6 +2156,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−<span class="hn">CHO</span></span>
           <span class="rxn-ex-nota">etanal (aldehído — caso especial)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧪</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La hidratación del propino produce <strong>acetona (propanona)</strong>, uno de los disolventes industriales más usados en Colombia: disuelve pinturas, barnices y resinas, y es el componente activo del quitaesmalte. Ecopetrol y sus filiales producen acetona como subproducto de la refinación del petróleo; también se obtiene del proceso de fermentación de ciertas bacterias.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ai-3-q0">
@@ -2154,7 +2226,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — ¿Por qué es ácido?</div>
             <div class="mech-step-h">El H en C sp (alquino terminal) es más ácido porque el orbital sp tiene más carácter s (50%)</div>
-            <div class="mech-step-txt">El orbital <strong>sp tiene 50% de carácter s</strong> (vs. 33% en sp², 25% en sp³). Mayor carácter s → el enlace está más cerca del núcleo → el par de electrones del carbanión queda más estabilizado → el H es <em>más fácil de extraer</em>. Pka ≈ 25: más ácido que un alcano (pKa ≈ 50) pero menos que el agua (pKa 15.7).</div>
+            <div class="mech-step-txt">El carbono del triple enlace sujeta los electrones de su enlace C−H <strong>más cerca del núcleo</strong> que en un doble o simple enlace. Eso hace que el H esté "menos protegido" por la nube electrónica y sea más fácil de arrancar con una base. En términos prácticos: el H terminal de un alquino es <strong>moderadamente ácido</strong> (escala pKa ≈ 25 — más ácido que el H de un alcano, pero menos ácido que el agua). Una base fuerte como NaNH₂ sí puede quitarle ese H, generando el anión acetiluro.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-1">
             <div class="mech-vis">
@@ -2166,7 +2238,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Formación del acetiluro</div>
             <div class="mech-step-h">Base fuerte (NaNH₂, BuLi) abstrae el H terminal → anión acetiluro R−C≡C⁻ (muy nucleófilo)</div>
-            <div class="mech-step-txt">Con <strong>NaNH₂</strong> (base fuerte, pKa NH₃ ≈ 38 > 25 del alquino) o BuLi, se abstrae el H terminal. El <strong>anión acetiluro R−C≡C⁻</strong> formado tiene el par libre en un orbital sp → nucleófilo muy potente (más que un carbanión sp³).</div>
+            <div class="mech-step-txt">La base fuerte <strong>NaNH₂</strong> (amiduro de sodio) tiene tanta "apetencia" por el H⁺ que puede arrancárselo al alquino terminal. El resultado es el <strong>anión acetiluro (R−C≡C⁻)</strong> — un carbono con carga negativa. Ese carbono negativo está muy "incómodo" y busca reaccionar: actúa como nucleófilo potente. En el siguiente paso verás cómo usa esa carga negativa para atacar a un halogenuro y formar un nuevo enlace C−C, alargando la cadena.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-2">
             <div class="mech-vis">
@@ -2204,6 +2276,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><span class="hn">Na</span>C≡CH + NH₃</span>
           <span class="rxn-ex-nota">acetiluro sódico (base conjugada)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">⚗️</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> Los acetiluros metálicos (NaC≡CR) obtenidos de alquinos terminales son <strong>nucleófilos de síntesis</strong> que permiten construir cadenas carbonadas más largas. Esta estrategia es la base de la síntesis de <strong>terpenos</strong> (aromas naturales como el linalool del cilantro colombiano), ácidos grasos poliinsaturados (omega-3) y vitaminas A y E.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ai-4-q0">
@@ -2238,6 +2314,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">El anillo bencénico (6 e⁻ π deslocalizados) reacciona con electrófilos fuertes generados por ácidos de Lewis. A diferencia de los alquenos, el producto es una <strong>sustitución</strong> (no adición) para conservar la aromaticidad. Mecanismo: E⁺ + C₆H₆ → complejo σ arenio → −H⁺ → areno sustituido.</div>
     </div>
+
+    <div class="tipo-header">⚡ Sustitución Electrofílica Aromática (SEA)</div>
+    <p class="tipo-desc">El benceno tiene 6 carbonos con una nube de electrones que circula por todo el anillo — eso es la <strong>aromaticidad</strong>, y le da una estabilidad extraordinaria (como un escudo invisible). Ese escudo es tan valioso que el anillo nunca lo sacrifica por una adición: prefiere <strong>sustituir</strong> un H por el nuevo grupo y mantener la nube intacta. Los <strong>catalizadores ácidos de Lewis</strong> (FeBr₃, AlCl₃) crean el electrófilo fuerte (E⁺) que puede perforar ese escudo. En todas las reacciones de abajo, fíjate que siempre <em>entra un grupo nuevo y sale un H⁺</em>.</p>
 
     <div class="attn">
       Mecanismo general SEA: E⁺ + benceno → complejo σ (arenio, pierde aromaticidad) → −H⁺ → producto areno sustituido (recupera aromaticidad)
@@ -2380,6 +2459,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c3t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br</text></svg> + HBr</span>
           <span class="rxn-ex-nota">bromobenceno</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🇨🇴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La bromación del benceno produce <strong>bromobenceno</strong>, intermediario en la fabricación de <strong>colorantes azo</strong> y pigmentos textiles. La industria textil de Medellín (Inexmoda, Fabricato) usa colorantes derivados de esta reacción para teñir telas. El <strong>Bromadiol</strong> (rodenticida muy usado en fincas colombianas) también proviene de halogenación aromática.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ar-0-q0">
@@ -2537,6 +2620,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text></svg> + H₂O</span>
           <span class="rxn-ex-nota">nitrobenceno</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">👗</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La nitración del benceno y sus derivados produce <strong>nitrocompuestos</strong> que son los precursores del <strong>nylon</strong> (poliamida) — fibra usada en medias, ropa deportiva y cuerdas de pesca. En la industria minera colombiana, el nitrotolueno (TNT) y otros nitroaromáticos se emplean como explosivos para voladuras controladas. Productores colombianos de químicos industriales fabrican estas materias primas.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ar-1-q0">
@@ -2690,6 +2777,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c2t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text></svg></span>
           <span class="rxn-ex-nota">ácido bencenosulfónico</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧼</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La sulfonación es el paso clave en la fabricación de <strong>detergentes líquidos</strong>. El dodecilbencenosulfonato de sodio (DDBS) — sulfonato de alquilbenceno — es el tensoactivo principal de <strong>Axión</strong>, <strong>Vel</strong> y otros detergentes para ropa y loza que se producen y consumen masivamente en Colombia. También está en los champús y jabones industriales.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ar-2-q0">
@@ -2840,6 +2931,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c1t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃</text></svg> + HCl</span>
           <span class="rxn-ex-nota">tolueno</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💊</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La alquilación del benceno con propileno produce <strong>cumeno (isopropilbenceno)</strong>, que al oxidarse genera <strong>fenol + acetona</strong>. El fenol es el precursor de la <strong>aspirina (ácido acetilsalicílico)</strong> y de resinas fenólicas (pegantes para madera). Colombia importa aspirina genérica producida a partir de estas rutas petroquímicas. El tolueno (metilbenceno) se usa como disolvente en pinturas y barnices.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ar-3-q0">
@@ -2990,6 +3085,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="7" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CO−CH₃</text></svg> + HCl</span>
           <span class="rxn-ex-nota">acetofenona (arilcetona)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🌸</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La acilación del benceno produce <strong>arilcetonas</strong> como la <strong>acetofenona</strong>, usada como fragancia floral en perfumería industrial (Yanbal, Belcorp — empresas con operaciones en Colombia). A diferencia de la alquilación, la acilación no da productos de transposición, por lo que es más precisa para síntesis farmacéutica.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ar-4-q0">
@@ -3022,6 +3121,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">El nucleófilo (Nu:) desplaza el grupo saliente (X) del carbono sp³. <strong>SN2:</strong> un paso concertado, inversión de Walden, favorece sustrato 1°. <strong>SN1:</strong> dos pasos vía carbocatión (sp², plano), racemización, favorece sustrato 3°.</div>
     </div>
+
+    <div class="tipo-header">🔄 Sustitución Nucleofílica (SN)</div>
+    <p class="tipo-desc">En un halogenuro de alquilo, el carbono unido al halógeno (X) queda ligeramente positivo — eso lo hace blanco de ataque para <strong>nucleófilos</strong> (moléculas ricas en electrones: OH⁻, CN⁻, NH₃). El nucleófilo "empuja" la salida del halógeno y ocupa su lugar. Hay dos caminos: <strong>SN2</strong> (el nucleófilo entra al mismo instante que el halógeno sale — un solo paso, favorecido cuando el carbono está poco bloqueado) y <strong>SN1</strong> (el halógeno se va primero formando un <strong>carbocatión</strong> — carbono con carga positiva — y luego llega el nucleófilo; favorecido en carbonos muy tapados por grupos alquilo).</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-0')">
@@ -3130,6 +3232,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃<span class="hn">CN</span> + Br⁻</span>
           <span class="rxn-ex-nota">nitrilo (alarga cadena en 1C)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💊</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La sustitución SN2 es la reacción más usada para <strong>ensamblar fármacos</strong> en laboratorio: enlaza nucleófilos (aminas, alcoholes, cianuro) a sustratos primarios con precisión estereoquímica. Laboratorios colombianos que producen <strong>medicamentos genéricos</strong> (analgésicos, antihipertensivos) usan reacciones SN2 para fabricar intermediarios de síntesis. La inversión de configuración es útil para obtener el enantiómero correcto de un fármaco quiral.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="hg-0-q0">
@@ -3231,7 +3337,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Carbocatión plano</div>
             <div class="mech-step-h">R⁺ es sp², tiene geometría trigonal plana → las dos caras son accesibles para el nucleófilo</div>
-            <div class="mech-step-txt">El carbocatión sp² es <strong>plano</strong>: sin cara bloqueada, el Nu puede atacar desde arriba o desde abajo con igual probabilidad. Esto genera una <em>mezcla racémica</em> (50% R / 50% S) cuando el C es quiral, a diferencia de la SN2 que da inversión exclusiva.</div>
+            <div class="mech-step-txt">Una vez formado el carbocatión, ese carbono positivo queda <strong>plano</strong> — como una moneda — con las dos caras igualmente accesibles. El nucleófilo puede llegar desde arriba o desde abajo con la misma probabilidad, lo que produce <strong>una mezcla de los dos productos en partes iguales</strong> (50% con una geometría, 50% con la contraria). Si el carbono era quiral (tenía 4 grupos distintos), esta mezcla 50/50 se llama mezcla racémica y no tiene actividad óptica.</div>
           </div>
           <div class="mech-step" id="ms-hg-1-2">
             <div class="mech-vis">
@@ -3269,6 +3375,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">(CH₃)₃C−<span class="hn">OH</span> + HBr</span>
           <span class="rxn-ex-nota">2-metil-2-propanol (SN1 en 3°)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🌱</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La sustitución SN1 ocurre naturalmente en la hidrólisis ácida de <strong>terpenos halogenados</strong> y en la biosíntesis de algunos metabolitos secundarios de plantas como el café y la caña de azúcar. En laboratorio se usa para preparar alcoholes terciarios y éteres que son intermediarios en la síntesis de <strong>fragancias y aromas</strong> para la industria colombiana de cosméticos.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="hg-1-q0">
@@ -3294,6 +3404,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Una base fuerte extrae un H β (adyacente al C portador del GS) mientras el grupo saliente se va simultáneamente, formando un doble enlace. <strong>Regla de Zaitsev:</strong> se prefiere el alqueno más sustituido (termodinámicamente más estable). H y X deben ser anti-periplanares (180°).</div>
     </div>
+
+    <div class="tipo-header">✂️ Eliminación E2</div>
+    <p class="tipo-desc">En lugar de reemplazar el halógeno (sustitución), una base fuerte como NaOH en caliente puede "empujar" al halogenuro a perder un H y el halógeno <em>al mismo tiempo</em>, formando un <strong>doble enlace</strong> C=C. Ese H que sale viene del carbono vecino al que tiene el halógeno (se le llama carbono β). La <strong>Regla de Zaitsev</strong> dice que el doble enlace se forma preferiblemente hacia el lado con más sustituyentes (ese alqueno es más estable, como un edificio con más columnas). En los ejemplos de abajo, identifica cuál carbono pierde el H y cuál pierde el X.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-2')">
@@ -3358,7 +3471,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Formación del π</div>
             <div class="mech-step-h">Los electrones del C−H migran al C−C para formar el doble enlace mientras X⁻ sale</div>
-            <div class="mech-step-txt">Los electrones del enlace <strong>Cβ−H migran al Cβ−Cα</strong> para formar el nuevo π, y simultáneamente el X⁻ se va. El C pasa de sp³ a sp². La regla de <em>Zaitsev</em> aplica cuando hay más de un Hβ: se elimina el del Cβ con <strong>menos H</strong> → alqueno más sustituido (más estable).</div>
+            <div class="mech-step-txt">En el único paso de la E2, ocurren tres cosas <em>a la vez</em>: ① la base arranca el H del carbono vecino (Cβ); ② los electrones de ese enlace C−H se mueven hacia el centro y forman el nuevo <strong>doble enlace</strong> C=C; ③ el halógeno (X) se va como X⁻. El resultado es el alqueno. Regla de <strong>Zaitsev</strong>: si hay varios H disponibles para eliminar, la base prefiere el del carbono con <em>menos H vecinos</em> — el doble enlace que se forma así es más estable (tiene más grupos alquilo alrededor).</div>
           </div>
           <div class="mech-step" id="ms-hg-2-2">
             <div class="mech-vis">
@@ -3396,6 +3509,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃−CH<span class="hn">=</span>CH−CH₃ + KBr</span>
           <span class="rxn-ex-nota">but-2-eno (Zaitsev)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏭</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La eliminación es la ruta industrial para producir <strong>etileno (CH₂=CH₂)</strong> y <strong>propileno (CH₂=CH−CH₃)</strong> — los dos monómeros más importantes del mundo. Ecopetrol y sus plantas petroquímicas procesan fracciones del petróleo colombiano mediante craqueo (pirolisis) para generar etileno, que luego se polimeriza a <strong>polietileno</strong> (bolsas, envases, tuberías).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="hg-2-q0">
@@ -3430,6 +3547,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Los alcoholes son versátiles: pueden deshidratarse (→ alquenos, Zaitsev), oxidarse (1° → aldehído → ácido; 2° → cetona; 3° no se oxida), convertirse en halogenuros (SOCl₂, PBr₃) o esterificarse (Fischer, reversible). La reactividad depende del grado del −OH.</div>
     </div>
+
+    <div class="tipo-header">🔄 Reacciones de los Alcoholes</div>
+    <p class="tipo-desc">El grupo −OH hace a los alcoholes muy reactivos y versátiles. Ese oxígeno puede convertirse en un buen grupo saliente (cuando se protona con ácido) o puede ceder electrones. Los alcoholes se transforman en <strong>alquenos</strong> (deshidratación — sale el OH con un H vecino), en <strong>aldehídos, cetonas o ácidos</strong> (oxidación — se añaden oxígenos), en <strong>halogenuros</strong> (se intercambia OH por X), o en <strong>ésteres</strong> (reaccionan con ácidos). El <strong>grado del carbono</strong> que lleva el −OH (primario, secundario o terciario) determina cuál camino es más fácil y qué producto se forma.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-0')">
@@ -3572,6 +3692,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH<span class="hn">=</span>CHCH₃ (ppal)</span>
           <span class="rxn-ex-nota">but-2-eno (Zaitsev)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🌿</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La deshidratación de <strong>etanol</strong> (obtenido de la fermentación de caña de azúcar del Valle del Cauca) produce <strong>etileno</strong>, con el que se pueden fabricar <strong>bioplásticos</strong> de origen renovable. Brasil ya usa esta ruta a escala industrial; Colombia tiene el potencial de hacer lo mismo con su excedente de etanol de caña. Es una alternativa sostenible al etileno de origen petroquímico.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ao-0-q0">
@@ -3645,7 +3769,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Mecanismo del oxidante</div>
             <div class="mech-step-h">El metal de transición (Mn⁷⁺ o Cr⁶⁺) acepta electrones del C−H del alcohol → compuesto carbonílico</div>
-            <div class="mech-step-txt">En la oxidación cromato/permanganato, el <strong>metal M(n+) acepta 2 electrones</strong> del enlace Cα−H a través de un éster metálico cíclico transitorio. El C−H se convierte en C=O y el metal se reduce (Mn⁷⁺→Mn⁵⁺→Mn⁴⁺ → MnO₂; Cr⁶⁺→Cr³⁺). El MnO₂ (pardo) o el Cr³⁺ (verde) son los subproductos reducidos.</div>
+            <div class="mech-step-txt">El KMnO₄ o el K₂Cr₂O₇ son <strong>oxidantes potentes</strong> — los átomos de manganeso (Mn) y cromo (Cr) están en estados muy positivos y "quieren" electrones. Al reaccionar con el alcohol, el metal acepta electrones del enlace C−H del alcohol y ese C−H se convierte en C=O (aldehído o ácido, según las condiciones). Una señal visual: el KMnO₄ es violeta intenso → el producto (MnO₂) es un <strong>precipitado pardo-café</strong>. El K₂Cr₂O₇ es naranja → el producto (Cr³⁺) es <strong>verde</strong>. Ese cambio de color es la confirmación visual de que ocurrió la oxidación.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -3698,6 +3822,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃<span class="hn">CO</span>CH₃</span>
           <span class="rxn-ex-nota">2-propanol → acetona (cetona)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🍶</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La oxidación del etanol (alcohol) produce <strong>ácido acético</strong> — la base del vinagre. El vinagre artesanal y de mesa que se consume en Colombia se fabrica por fermentación acética: bacterias <em>Acetobacter</em> oxidan el etanol con el oxígeno del aire. En laboratorio, el PCC (reactivo de oxidación suave) permite parar en el aldehído sin llegar al ácido, lo que es clave en síntesis de perfumes y fármacos.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ao-1-q0">
@@ -3821,6 +3949,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃<span class="hn">Cl</span> + SO₂↑ + HCl↑</span>
           <span class="rxn-ex-nota">clorometano (subproductos gaseosos)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🌾</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La conversión de alcoholes a halogenuros es el punto de partida para fabricar <strong>insecticidas piretroides</strong> (cipermetrina, permetrina), ampliamente usados en Colombia para el control de plagas en cultivos de arroz, maíz y café. El SOCl₂ (cloruro de tionilo) se prefiere industrialmente porque los subproductos (SO₂ y HCl) son gases que se eliminan solos, dejando el haluro puro.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ao-2-q0">
@@ -3936,6 +4068,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃<span class="hn">COO</span>C₂H₅ + H₂O</span>
           <span class="rxn-ex-nota">acetato de etilo (éster)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🍑</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La esterificación de Fischer produce los <strong>aromas frutales artificiales</strong> que están en dulces, refrescos y jugos colombianos: acetato de isoamilo (banana), acetato de etilo (manzana-pera), butirato de etilo (piña). También produce el <strong>acetato de etilo</strong> — disolvente en pinturas de uñas y barnices — y los ésteres del ácido láctico usados como conservantes en alimentos.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ao-3-q0">
@@ -3969,6 +4105,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Las aminas son bases (N tiene par libre) y nucleófilos. Sus reacciones incluyen neutralización (→ sales de amonio), alquilación/acilación, reducción de nitrocompuestos (NO₂ → NH₂), y la importante <strong>diazotación</strong> de arilaminas (→ sales de diazonio Ar−N₂⁺, intermediarios versátiles en síntesis).</div>
     </div>
+
+    <div class="tipo-header">🔄 Reacciones de las Aminas</div>
+    <p class="tipo-desc">Las aminas son como el amoniaco (NH₃) pero con grupos orgánicos en lugar de algunos H. El nitrógeno tiene un <strong>par de electrones libre</strong> que le permite ceder a un H⁺ (comportarse como base) o atacar un carbono electrofílico (comportarse como nucleófilo). La reacción más sencilla es la <strong>neutralización</strong> con un ácido → forma una sal de amonio. Para las <strong>arilaminas</strong> (con anillo bencénico), hay una reacción muy especial a 0–5°C llamada <strong>diazotación</strong>, que produce un intermediario muy versátil para fabricar colorantes y fármacos — mírala con atención.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('am-0')">
@@ -4077,6 +4216,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">C₆H₅<span class="hn">NH₃⁺</span> Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de anilinio</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏥</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> Las sales de amonio cuaternario (aminas completamente alquiladas) son <strong>desinfectantes hospitalarios</strong> de primera línea en Colombia. El <strong>cloruro de benzalconio</strong> y el cloruro de cetilpiridinio están en antisépticos, toallas húmedas hospitalarias y colutorios bucales. También son los principios activos de muchos aerosoles desinfectantes de uso doméstico.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="am-0-q0">
@@ -4192,6 +4335,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">C₆H₅<span class="hn">NH₂</span> + 2 H₂O</span>
           <span class="rxn-ex-nota">nitrobenceno → anilina</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💊</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La reducción del nitrobenceno a <strong>anilina</strong> es el primer paso para fabricar <strong>paracetamol (acetaminofén)</strong> — el analgésico más consumido en Colombia. La anilina también es precursora de colorantes azo (tintas para tejidos) y de la cadena de síntesis de sulfonamidas (antibacterianos de amplio uso en veterinaria colombiana).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="am-1-q0">
@@ -4280,7 +4427,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Sandmeyer</div>
             <div class="mech-step-h">Cu₂X₂ catalizador sustituye N₂⁺ por X (Cl, Br, CN, F, OH); N₂ gas se libera como impulsante</div>
-            <div class="mech-step-txt">La <strong>reacción de Sandmeyer</strong> usa Cu₂X₂ como catalizador para sustituir el grupo −N₂⁺ por haluros (−Cl, −Br), −CN o −OH. La liberación de <em>N₂ gas</em> (ΔS > 0) es la fuerza impulsante termodinámica. Aplicación: síntesis de arilos halogenados que no se pueden obtener directamente por SEA (ej. ArF via sal de Balz-Schiemann).</div>
+            <div class="mech-step-txt">La <strong>Reacción de Sandmeyer</strong> usa un catalizador de cobre para convertir el grupo −N₂⁺ del diazonio en otros grupos: −Cl, −Br, −CN o −OH. La razón por la que la reacción ocurre espontáneamente es simple: el producto estrella es el <strong>N₂ gaseoso</strong> — nitrógeno molecular —, que escapa de la solución irremediablemente y "jala" la reacción hacia adelante. Es como cuando se abre una botella de gaseosa: los gases salen y no hay quién los devuelva. Esta reacción permite introducir halogenos en posiciones del anillo aromático donde la sustitución directa es imposible o da mala selectividad.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -4320,6 +4467,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">C₆H₅<span class="hn">Cl</span> + N₂↑</span>
           <span class="rxn-ex-nota">clorobenceno (Sandmeyer)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🎨</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> Las sales de diazonio son los intermediarios de los <strong>colorantes azo</strong> — la familia de colorantes textiles más grande del mundo. La industria textil de <strong>Medellín</strong> (Inexmoda, Fabricato, Crystal) usa colorantes azo para teñir denim, algodón y poliéster. El colorante rojo carmesí de las camisetas de la Selección Colombia también tiene origen en la diazotación de arilaminas.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="am-2-q0">
@@ -4354,6 +4505,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">El carbono carbonílico (C=O) es deficiente en electrones (δ+). Los nucleófilos atacan ese C, mientras el O atrae densidad electrónica. <strong>Los aldehídos son más reactivos que las cetonas</strong> (menos impedimento estérico, menor estabilización inductiva del C=O).</div>
     </div>
+
+    <div class="tipo-header">➕ Adición Nucleofílica al C=O</div>
+    <p class="tipo-desc">El grupo carbonilo (C=O) tiene al oxígeno "jalando" los electrones del doble enlace hacia sí mismo, dejando el <strong>carbono con carga parcial positiva</strong> (δ+, como un polo positivo). Ese polo atrae moléculas ricas en electrones — los <strong>nucleófilos</strong> (CN⁻, H⁻, agua, reactivos de Grignard). El nucleófilo "cae" sobre el carbono del C=O y rompe el doble enlace: el carbono pasa de plano a tetraédrico, ganando un nuevo sustituyente. Los <strong>aldehídos</strong> (RCHO) reaccionan más rápido que las cetonas (R₂CO) porque el H es pequeño y no bloquea el acceso al carbono.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-0')">
@@ -4538,6 +4692,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
           <span class="rxn-ex-nota">lactonitrilo (cianohidrina)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏗️</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La adición de HCN a la acetona produce <strong>acetona-cianohidrina</strong>, intermediario clave para fabricar <strong>metacrilato de metilo (MMA)</strong> → <strong>acrílico (Plexiglás)</strong>. El acrílico se usa en señales viales, letreros luminosos y mamparas protectoras (muy usadas en Colombia pos-pandemia). También es la base de <strong>lentes de contacto blandos</strong>.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-0-q0">
@@ -4657,6 +4815,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
           <span class="rxn-ex-nota">acetona → 2-propanol (alcohol 2°)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💄</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La reducción de aldehídos y cetonas a alcoholes produce los <strong>alcoholes de cadena larga</strong> (cetil, estearil, bencílico) que son los emolientes y espesantes de <strong>cremas, lociones y cosméticos</strong> fabricados en Colombia (Yanbal, Belcorp, Vogue). También produce alcoholes farmacéuticos intermediarios en la síntesis de vitaminas A, E y algunos anestésicos locales.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-1-q0">
@@ -4771,6 +4933,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
           <span class="rxn-ex-nota">2-propanol (alcohol 2°)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">⚗️</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> El reactivo de Grignard es una herramienta de síntesis universal para construir enlaces C−C nuevos. Se usa en la fabricación de <strong>ibuprofeno</strong> (uno de los analgésicos genéricos más vendidos en Colombia), en la síntesis de <strong>vitaminas</strong> (retinol, tocoferol) y en la producción de <strong>perfumes sintéticos</strong> (linalool, nerol) derivados del aceite de palma africana cultivado en Colombia.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-2-q0">
@@ -4891,6 +5057,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₂CHO</span>
           <span class="rxn-ex-nota">3-hidroxibutanal (aldol)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La condensación aldólica de la acetona produce <strong>diacetona-alcohol</strong> y luego <strong>mesitil-óxido</strong>, disolventes usados en barnices y pinturas. Industrialmente, la condensación aldólica del butiraldehído produce <strong>2-etilhexanol</strong>, el plastificante del PVC (aporta flexibilidad a tuberías, mangueras y cueros sintéticos fabricados en Colombia).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-3-q0">
@@ -4924,6 +5094,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Los ácidos carboxílicos son ácidos débiles (pKa 4–5). Reaccionan con bases (→ sales de carboxilato, estabilizadas por resonancia), pueden convertirse en todos sus derivados (cloruros, ésteres, amidas) y se obtienen por oxidación de alcoholes 1° o alquilbencenos con KMnO₄.</div>
     </div>
+
+    <div class="tipo-header">🔄 Reacciones de los Ácidos Carboxílicos</div>
+    <p class="tipo-desc">El grupo carboxílico (−COOH) combina el carbonilo (C=O) y el alcohol (−OH) en un solo grupo funcional. Esa combinación hace al H del −OH más ácido de lo normal (pKa 4–5 — más ácido que un alcohol, pero mucho menos que el HCl). Con una base, el −COOH cede ese H y forma una <strong>sal de carboxilato</strong> (jabones y conservantes alimentarios son ejemplos). Con alcoholes y calor ácido, forma <strong>ésteres</strong> (los aromas frutales del jugo de mango artificial). En todas estas transformaciones, fíjate: <em>siempre es el −OH del ácido el grupo que se va o se reemplaza</em>.</p>
 
     <div class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ac-0')">
@@ -5031,6 +5204,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">C₁₇H₃₅<span class="hn">COO⁻Na⁺</span> + H₂O</span>
           <span class="rxn-ex-nota">estearato de sodio (jabón)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🧼</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> Las sales de ácidos carboxílicos de cadena larga (C₁₂−C₁₈) son los <strong>jabones</strong>: estearato de sodio, palmitato de sodio. El jabón artesanal colombiano (<em>jabón de tierra</em>, <em>jabón rey</em>) se hace hirviendo aceite o grasa con soda cáustica (NaOH) — eso es saponificación, la reacción de una ácido graso con una base fuerte. El propionato de calcio es el conservante antifúngico del pan industrial.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ac-0-q0">
@@ -5144,6 +5321,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">C₆H₅<span class="hn">COOH</span></span>
           <span class="rxn-ex-nota">tolueno → ácido benzoico</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🍶</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> La oxidación del etanol con bacteria <em>Acetobacter</em> produce <strong>ácido acético</strong> — el componente del vinagre (3–8% de concentración). El vinagre artesanal del Huila y de productores locales colombianos se hace exactamente así. El ácido benzoico (preservante E-210) y sus sales (benzoato de sodio, E-211) se producen por oxidación de tolueno y se encuentran en jugos, mermeladas y salsas vendidas en Colombia.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ac-1-q0">
@@ -5178,6 +5359,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
       <div class="tipo-card-desc">Los derivados se obtienen reemplazando el −OH del ácido por otro grupo (−Cl, −OCOR, −OR, −NHR). Su reactividad decrece: <strong>RCOCl &gt; anhídrido &gt; éster &gt; amida</strong> (Cl⁻ es el mejor grupo saliente). Todos reaccionan por sustitución acílica nucleofílica (SAcN).</div>
     </div>
+
+    <div class="tipo-header">🔄 Reacciones de los Derivados de Ácidos</div>
+    <p class="tipo-desc">Los derivados de ácidos son ácidos carboxílicos donde el −OH fue reemplazado por otro grupo: Cl (cloruro de ácido), −OOCR (anhídrido), −OR (éster) o −NHR (amida). Todos reaccionan con nucleófilos del mismo modo: el nucleófilo entra al carbono del C=O y el grupo saliente se va. La <strong>velocidad disminuye</strong> en ese orden: <em>cloruro &gt; anhídrido &gt; éster &gt; amida</em> — el cloruro reacciona casi explosivamente con agua; la amida apenas reacciona en condiciones normales. Al estudiar estos derivados, identifica <em>qué grupo entra y qué grupo sale</em> en cada transformación.</p>
 
     <div class="attn">Reactividad: RCOCl &gt; (RCO)₂O &gt; RCOOR′ &gt; RCONH₂ — mayor GS = más reactivo</div>
 
@@ -5288,6 +5472,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + C₂H₅<span class="hn">OH</span></span>
           <span class="rxn-ex-nota">dos alcoholes (reducción total)</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">♻️</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> El <strong>PET (polietilentereftalato)</strong> — la botella plástica de agua y bebidas gaseosas de Colombia — es un poliéster: miles de unidades de ácido tereftálico + etilenglicol unidas por enlaces éster. El proceso de reciclaje de botellas PET en Colombia (Recypet, posconsumo) rompe esos enlaces éster con agua (hidrólisis) para recuperar los monómeros. Los ésteres de frutas también están en las esencias artificiales de helados y dulces.</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="dv-0-q0">
@@ -5451,6 +5639,10 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
           <span class="rxn-ex-p">CH₃CONH₂ + NH₄Cl</span>
           <span class="rxn-ex-nota">cloruro de acetilo → acetamida</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">💊</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> El <strong>cloruro de acetilo (CH₃COCl)</strong> reacciona con ácido salicílico (un fenol) para producir <strong>aspirina (ácido acetilsalicílico)</strong> — uno de los medicamentos más vendidos en Colombia. Esta acilación es mucho más rápida y eficiente que la esterificación directa de Fischer. También se usa para introducir grupos protectores en síntesis de fármacos complejos (antibióticos, antirretrovirales).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="dv-1-q0">
@@ -5589,6 +5781,10 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
           <span class="rxn-ex-p">CH₃CH₂NH₂</span>
           <span class="rxn-ex-nota">acetamida → etilamina</span>
         </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🇨🇴</span>
+  <div><strong>¿Para qué sirve en la vida real?</strong> El <strong>paracetamol (acetaminofén)</strong> — el analgésico más consumido en Colombia — es una amida: el grupo acetilo (CH₃CO−) unido al nitrógeno de la anilina. El <strong>nylon (poliamida)</strong> — fibra de medias, ropa deportiva y cuerdas — está hecho de miles de enlaces amida repetidos. Las <strong>proteínas</strong> de tu cuerpo son también poliamidas naturales (cada enlace peptídico es un enlace amida).</div>
+</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="dv-2-q0">
