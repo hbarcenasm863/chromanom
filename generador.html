@@ -594,6 +594,40 @@ body{
   /* Answer key SVGs */
   .ak-svg svg{height:auto !important;max-height:80px;width:auto;max-width:100%}
 
+  /* ── Tipo D — Reacciones (print) ── */
+  .rxn-d-eq{
+    flex-wrap:wrap !important;
+    overflow:visible !important;
+    gap:5px 8px !important;
+    padding:8px 10px !important;
+    background:#f9f9f9 !important;
+    border:1px solid #ddd;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .rxn-d-mol-box{
+    min-width:80px !important;
+    max-width:160px !important;
+    padding:5px 8px !important;
+    border:1px solid #bbb !important;
+    background:#fff !important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .rxn-d-blank-box{
+    min-width:55px !important;
+    padding:5px 12px !important;
+    background:#fff7ed !important;
+    border:2px dashed #c2410c !important;
+    font-size:.85rem !important;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .rxn-d-plus{font-size:.95rem !important}
+  .rxn-d-reagent{font-size:.78rem !important}
+  .rxn-d-cond{font-size:.68rem !important}
+  .rxn-d-arrow{font-size:1rem !important}
+  .rxn-d-arrow-col{gap:1px !important}
+  .rxn-d-fields{margin-top:6px}
+  .rxn-d-field{font-size:.75rem !important}
+
   /* Show print-only answer key */
 
   .print-tag-c,.print-tag-g,.print-tag-i,.print-tag-r{
