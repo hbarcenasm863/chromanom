@@ -1305,6 +1305,25 @@ const MOLDES={
   build_etilciclohexano: {chain:[{bn:1,bu:[{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
   build_ciclohexanona: {chain:[{bn:1,bu:[{s:'O'}],buBn:2},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
   build_ciclopentanona: {chain:[{bn:1,bu:[{s:'O'}],buBn:2},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  // ── CICLOALCANOS SIN PREFIJO build_ — claves usadas por QBANK (mol:) ──
+  // Estructuralmente idénticos a sus homólogos build_*; el renderer skeletal (M)
+  // es la fuente de verdad visual; estas entradas garantizan que MOLDES[mol]
+  // exista para validación de grafos y _disp en RXNQ.
+  ciclohexano: {chain:[{bn:1},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  ciclopentano: {chain:[{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  ciclobutano: {chain:[{bn:1},{bn:1},{bn:1},{}], ring:[[3,0,1]]},
+  ciclohexanol: {chain:[{bn:1,bu:[{s:'O',h:1}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  ciclopentanol: {chain:[{bn:1,bu:[{s:'O',h:1}]},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  ciclobutanol: {chain:[{bn:1,bu:[{s:'O',h:1}]},{bn:1},{bn:1},{}], ring:[[3,0,1]]},
+  ciclohexanona: {chain:[{bn:1,bu:[{s:'O'}],buBn:2},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  ciclopentanona: {chain:[{bn:1,bu:[{s:'O'}],buBn:2},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  metilciclohexano: {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  metilciclopentano: {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  etilciclohexano: {chain:[{bn:1,bu:[{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  // ciclohexeno: doble enlace C0→C1 (bn:2 en el primer nodo de la cadena)
+  ciclohexeno: {chain:[{bn:2},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  // ciclohex-2-en-1-ol: OH en C0, doble enlace C1→C2 (bn:2 en el segundo nodo)
+  ciclohex2en1ol: {chain:[{bn:1,bu:[{s:'O',h:1}]},{bn:2},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
   // ── AROMÁTICOS (aromatic:true → requiere template rBz en el canvas) ──
   build_benceno: {chain:[{bn:1},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_tolueno: {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
@@ -1324,6 +1343,12 @@ const MOLDES={
   // ── ALQUIL-BENCENOS (cadena larga) ──
   build_propilbenceno:     {chain:[{bn:1,bu:[{bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_isopropilbenceno:  {chain:[{bn:1,bu:[{bn:1,bd:[{}]},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  // ── AROMÁTICOS SIN PREFIJO build_ — claves usadas por QBANK (mol:) ──
+  metilbenceno: {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  ortoXileno:   {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  metaXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  paraXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1,bu:[{}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  etilbenceno:  {chain:[{bn:1,bu:[{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
 };
 
 // ════════════════════════════════════════════════════════
@@ -4373,7 +4398,9 @@ function setMolView(view){
   if(fBtn)fBtn.classList.toggle('active',view==='form');
   card.style.opacity='0';card.style.transform='scale(0.96)';
   setTimeout(()=>{
-    if(view==='form'&&MOLDES[q.mol]){
+    // Solo usar mkDevSVG (fórmula semidesarrollada) cuando MOLDES tiene un array lineal.
+    // Para entradas en formato ring (objetos {chain,ring}), usar M[mol]() en ambas vistas.
+    if(view==='form'&&Array.isArray(MOLDES[q.mol])){
       card.innerHTML=`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`;
     } else {
       card.innerHTML=M[q.mol]?M[q.mol]():'';
@@ -4404,7 +4431,10 @@ function loadQuestion(){
 
   const isBuild=q.type==='build';
   const isRxnQ=q.type==='rxnq';
-  const hasFm=!isBuild&&!isRxnQ&&!!MOLDES[q.mol];
+  // hasFm: solo true cuando MOLDES tiene un array (fórmula semidesarrollada lineal).
+  // Los entries en formato ring ({chain,ring}) no generan toggle — la vista esqueletal
+  // (M[mol]()) es la única representación visual correcta para moléculas cíclicas.
+  const hasFm=!isBuild&&!isRxnQ&&Array.isArray(MOLDES[q.mol]);
   molView=hasFm?'form':'skel';
   const toggleHtml=hasFm?`<div class="view-toggle">
     <button class="vt-btn" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
@@ -4513,14 +4543,27 @@ window._rxnqMolBox=function(str){
 })();
 
 function buildRxnQ(q){
+  // Devuelve SVG para una clave de MOLDES.
+  // Si la entrada es un array lineal → mkDevSVG; si es objeto ring → M renderer.
+  function _molSvgForKey(key){
+    const entry=MOLDES[key];
+    if(!entry)return '';
+    if(Array.isArray(entry)){return mkDevSVG(entry);}
+    // Objeto ring/aromatic: usar M renderer (la clave sin 'build_' o via BUILD_MOL_MAP)
+    const molKey=(typeof BUILD_MOL_MAP!=='undefined'&&BUILD_MOL_MAP[key])||key.replace(/^build_/,'');
+    return M[molKey]?M[molKey]():'';
+  }
   // Prominent reactant display: tries MOLDES first, falls back to text parser
   function _disp(str,key){
     let inner='';
     if(key&&MOLDES[key]){
-      let sv=mkDevSVG(MOLDES[key]);
+      let sv=_molSvgForKey(key);
       if(sv){
-        const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
-        if(vb)sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+        // Para SVG de mkDevSVG (arrays lineales) ajustar width/height desde viewBox
+        if(sv.startsWith('<svg')&&!sv.includes('width="')){
+          const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+          if(vb)sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+        }
         inner=sv.replace('style="display:block;margin:auto"','style="display:block;overflow:visible"');
       }
     }
@@ -4530,10 +4573,12 @@ function buildRxnQ(q){
   // Small inline mol box for products shown in equation row
   function _small(str,key){
     if(key&&MOLDES[key]){
-      let sv=mkDevSVG(MOLDES[key]);
+      let sv=_molSvgForKey(key);
       if(sv){
-        const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
-        if(vb)sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+        if(sv.startsWith('<svg')&&!sv.includes('width="')){
+          const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+          if(vb)sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+        }
         sv=sv.replace('style="display:block;margin:auto"','style="display:block;overflow:visible;max-width:100%;height:auto"');
         return`<div class="rxnq-mol-box">${sv}</div>`;
       }
