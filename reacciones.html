@@ -220,7 +220,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-anim-step.on{display:block;animation:bodySlide .2s ease}
 .rxn-anim-vis{border-radius:var(--rs);padding:14px 16px;margin-bottom:10px;
   display:flex;justify-content:center;align-items:center;min-height:70px;
-  font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;
   text-align:center;line-height:1.5}
 .rxn-anim-vis.green{background:#dcfce7;color:#14532d;border:1.5px solid #86efac}
 .rxn-anim-vis.orange{background:#fef3c7;color:#92400e;border:1.5px solid #fcd34d}
@@ -379,7 +379,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Iniciación</div>
-            <div class="mech-step-h">La luz UV rompe el X−X homolíticamente: cada átomo retiene un electrón → radical X•</div>
+            <div class="mech-step-h">¿Cómo inicia la reacción?</div>
             <div class="mech-step-txt">El enlace Br−Br (o Cl−Cl) se rompe de forma <strong>homolítica</strong>: cada átomo se lleva <em>un</em> electrón, generando dos <strong>radicales libres X•</strong>. Este paso requiere <strong>energía luminosa (hν)</strong> o alta temperatura. Sin él la reacción no comienza.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
@@ -393,7 +393,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Propagación</div>
-            <div class="mech-step-h">X• arranca un H del alcano → R• que a su vez reacciona con X₂, regenerando X• (cadena)</div>
+            <div class="mech-step-h">¿Cómo se propaga la cadena?</div>
             <div class="mech-step-txt">La propagación son DOS pasos que se repiten: <strong>① Br• abstrae un H</strong> del alcano → forma HBr y el radical alquilo R•. <strong>② R• reacciona con Br₂</strong> → forma el producto R−Br y regenera Br•. Este ciclo se repite miles de veces por cada radical iniciado.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
@@ -407,7 +407,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Terminación</div>
-            <div class="mech-step-h">Dos radicales se combinan entre sí, consumiendo los radicales y deteniendo la cadena</div>
+            <div class="mech-step-h">¿Cómo termina la cadena de radicales?</div>
             <div class="mech-step-txt">Cuando dos radicales se encuentran se <strong>combinan formando un enlace covalente</strong> (ningún radical queda suelto). Los productos de terminación son R−X, R−R o X₂. La terminación es poco frecuente porque los radicales son muy reactivos y suelen propagar antes de terminar.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
@@ -970,7 +970,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
             <div class="mech-step-h">H⁺ del HX protona el carbono del doble enlace con MÁS hidrógenos (menos sustituido)</div>
-            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-aq-0-1">
@@ -984,7 +985,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
             <div class="mech-step-h">El carbocatión se estabiliza por hiperconjugación e inducción de los grupos alquilo vecinos</div>
-            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-aq-0-2">
@@ -2568,7 +2570,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — El catalizador crea el atacante (Br⁺)</div>
             <div class="mech-step-h">El FeBr₃ "activa" el Br₂ y produce Br⁺, que sí puede atacar el anillo</div>
-            <div class="mech-step-txt">Imagina el <strong>Br₂</strong> como una tijera cerrada: por sí sola no puede cortar el anillo de benceno. El <strong>FeBr₃</strong> actúa como una "llave" que jala tan fuerte de uno de los bromos que el enlace Br−Br se rompe, generando el <strong>Br⁺</strong> (un bromo con carga positiva, hambriento de electrones). Ese Br⁺ sí puede atacar la nube de electrones del anillo. <em>Sin FeBr₃, el Br₂ no reacciona con el benceno</em> (a diferencia de los alquenos, que sí reaccionan directo).</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Imagina el <strong>Br₂</strong> como una tijera cerrada: por sí sola no puede cortar el anillo de benceno. El <strong>FeBr₃</strong> actúa como una "llave" que jala tan fuerte de uno de los bromos que el enlace Br−Br se rompe, generando el <strong>Br⁺</strong> (un bromo con carga positiva, hambriento de electrones). Ese Br⁺ sí puede atacar la nube de electrones del anillo. <em>Sin FeBr₃, el Br₂ no reacciona con el benceno</em> (a diferencia de los alquenos, que sí reaccionan directo).</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-ar-0-1">
@@ -2582,7 +2585,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — El Br⁺ entra al anillo (intermediario)</div>
             <div class="mech-step-h">La nube de electrones del benceno atrae el Br⁺ y forman un enlace C−Br</div>
-            <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong> (6 electrones que "flotan" por todo el anillo como una corona invisible). El <strong>Br⁺</strong>, con carga positiva, es atraído por esa nube y forma un enlace nuevo con uno de los carbonos del anillo. En ese instante, el carbono que recibió el Br pasa a tener 4 enlaces y ya no puede participar en la nube circular → <em>la aromaticidad se rompe temporalmente</em>. Esta especie "incómoda" se llama intermediario y dura poquísimo (fracción de segundo) antes de pasar al siguiente paso.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong> (6 electrones que "flotan" por todo el anillo como una corona invisible). El <strong>Br⁺</strong>, con carga positiva, es atraído por esa nube y forma un enlace nuevo con uno de los carbonos del anillo. En ese instante, el carbono que recibió el Br pasa a tener 4 enlaces y ya no puede participar en la nube circular → <em>la aromaticidad se rompe temporalmente</em>. Esta especie "incómoda" se llama intermediario y dura poquísimo (fracción de segundo) antes de pasar al siguiente paso.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-ar-0-2">
@@ -3398,7 +3402,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Inversión de Walden</div>
             <div class="mech-step-h">La configuración del C quiral se invierte 180° (como paraguas que se da vuelta con el viento)</div>
-            <div class="mech-step-txt">Si el C es quiral, la SN2 produce <strong>inversión de configuración</strong> (inversión de Walden): el nucleófilo entra por una cara y los tres sustituyentes se "invierten" como un paraguas. Ejemplo: R → S o S → R. Esta estereoespecificidad es la firma diagnóstica de la SN2.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Si el C es quiral, la SN2 produce <strong>inversión de configuración</strong> (inversión de Walden): el nucleófilo entra por una cara y los tres sustituyentes se "invierten" como un paraguas. Ejemplo: R → S o S → R. Esta estereoespecificidad es la firma diagnóstica de la SN2.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
         </div><!-- /mech-stepper -->
