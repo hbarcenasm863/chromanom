@@ -213,6 +213,30 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   background:var(--surf2);border-radius:var(--rs);padding:10px 14px;
   margin-bottom:12px;font-size:.8rem;color:var(--dim);border-left:3px solid var(--c2t)}
 .rxn-vida-ico{font-size:1.4rem;flex-shrink:0}
+
+/* ── RXN-ANIM STEPPER ── */
+.rxn-anim-stepper{border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.rxn-anim-step{display:none;padding:14px 16px;border-top:1px solid var(--brd)}
+.rxn-anim-step.on{display:block;animation:bodySlide .2s ease}
+.rxn-anim-vis{border-radius:var(--rs);padding:14px 16px;margin-bottom:10px;
+  display:flex;justify-content:center;align-items:center;min-height:70px;
+  font-family:'JetBrains Mono',monospace;font-size:.88rem;font-weight:700;
+  text-align:center;line-height:1.5}
+.rxn-anim-vis.green{background:#dcfce7;color:#14532d;border:1.5px solid #86efac}
+.rxn-anim-vis.orange{background:#fef3c7;color:#92400e;border:1.5px solid #fcd34d}
+.rxn-anim-vis.blue{background:#dbeafe;color:#1d4ed8;border:1.5px solid #93c5fd}
+.rxn-anim-label{font-size:.8rem;color:var(--dim);line-height:1.7;margin-bottom:8px}
+.rxn-anim-nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.rxn-anim-dots{display:flex;gap:6px;align-items:center}
+.rxn-anim-dot{width:9px;height:9px;border-radius:50%;background:var(--brd);
+  transition:background .2s,transform .2s;cursor:pointer}
+.rxn-anim-dot.on{background:var(--c3t);transform:scale(1.25)}
+/* ── SPEAK BUTTON ── */
+.speak-btn{background:none;border:1.5px solid var(--brd);border-radius:20px;padding:4px 12px;
+  font-size:.72rem;cursor:pointer;color:var(--dimmer);transition:all .2s;display:inline-flex;
+  align-items:center;gap:5px;margin-top:8px}
+.speak-btn:hover{border-color:var(--c2t);color:var(--c2t)}
+.speak-btn.playing{border-color:var(--c3t);color:var(--c3t);background:var(--c3b)}
 </style>
 </head>
 <body>
@@ -299,6 +323,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <!-- Comparación molecular -->
 
+        <!-- ── RXN-ANIM STEPPER: Halogenación SR (Alcanos) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-al-0" onclick="rxnAnimStep('al-0',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-al-0" onclick="rxnAnimStep('al-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-al-0">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('al-0',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('al-0',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('al-0',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-al-0">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">R−H  +  X₂</div>
+              <div class="rxn-anim-label">Reactivos: Alcano (R−H) + halógeno (X₂)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">hν o Δ → 2 X•</div>
+              <div class="rxn-anim-label">Condición hν o Δ rompe X₂ → 2 radicales X•</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">R−X  +  HX</div>
+              <div class="rxn-anim-label">Producto: haloalcano R−X + subproducto HX</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
         <!-- ── STEPPER: Halogenación Radical SR — Mecanismo ── -->
         <div class="mech-stepper" id="mech-al-0">
           <div class="mech-top">
@@ -325,6 +381,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 1 de 3 — Iniciación</div>
             <div class="mech-step-h">La luz UV rompe el X−X homolíticamente: cada átomo retiene un electrón → radical X•</div>
             <div class="mech-step-txt">El enlace Br−Br (o Cl−Cl) se rompe de forma <strong>homolítica</strong>: cada átomo se lleva <em>un</em> electrón, generando dos <strong>radicales libres X•</strong>. Este paso requiere <strong>energía luminosa (hν)</strong> o alta temperatura. Sin él la reacción no comienza.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-1">
             <div class="mech-vis">
@@ -338,6 +395,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 2 de 3 — Propagación</div>
             <div class="mech-step-h">X• arranca un H del alcano → R• que a su vez reacciona con X₂, regenerando X• (cadena)</div>
             <div class="mech-step-txt">La propagación son DOS pasos que se repiten: <strong>① Br• abstrae un H</strong> del alcano → forma HBr y el radical alquilo R•. <strong>② R• reacciona con Br₂</strong> → forma el producto R−Br y regenera Br•. Este ciclo se repite miles de veces por cada radical iniciado.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-2">
             <div class="mech-vis">
@@ -351,6 +409,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 3 de 3 — Terminación</div>
             <div class="mech-step-h">Dos radicales se combinan entre sí, consumiendo los radicales y deteniendo la cadena</div>
             <div class="mech-step-txt">Cuando dos radicales se encuentran se <strong>combinan formando un enlace covalente</strong> (ningún radical queda suelto). Los productos de terminación son R−X, R−R o X₂. La terminación es poco frecuente porque los radicales son muy reactivos y suelen propagar antes de terminar.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -854,6 +913,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
+        <!-- ── RXN-ANIM STEPPER: Hidrohalogenación (Alquenos) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-aq-0" onclick="rxnAnimStep('aq-0',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-aq-0" onclick="rxnAnimStep('aq-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-aq-0">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('aq-0',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('aq-0',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('aq-0',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-aq-0">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">−C=C−  +  HX</div>
+              <div class="rxn-anim-label">Reactivos: Alqueno (C=C) + halogenuro de hidrógeno (HX)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">H⁺ → carbocatión en C más sustituido</div>
+              <div class="rxn-anim-label">H⁺ ataca el doble enlace: se forma carbocatión en el C más sustituido (Markovnikov)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">−CH−CX− (X en C más sustituido)</div>
+              <div class="rxn-anim-label">Producto: halogenuro de alquilo — X en el carbono más sustituido</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
         <!-- ── STEPPER: Hidrohalogenación — Mecanismo (Markovnikov) ── -->
         <div class="mech-stepper" id="mech-aq-0">
           <div class="mech-top">
@@ -879,7 +970,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
             <div class="mech-step-h">H⁺ del HX protona el carbono del doble enlace con MÁS hidrógenos (menos sustituido)</div>
-            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>
+            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+
           </div>
           <div class="mech-step" id="ms-aq-0-1">
             <div class="mech-vis">
@@ -892,7 +984,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
             <div class="mech-step-h">El carbocatión se estabiliza por hiperconjugación e inducción de los grupos alquilo vecinos</div>
-            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>
+            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+
           </div>
           <div class="mech-step" id="ms-aq-0-2">
             <div class="mech-vis">
@@ -905,6 +998,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 3 de 3 — Ataque de X⁻</div>
             <div class="mech-step-h">X⁻ ataca el carbocatión por cualquier cara → producto de Markovnikov (X en C más sustituido)</div>
             <div class="mech-step-txt">El haluro <strong>X⁻</strong> (nucleófilo) ataca el carbocatión plano por cualquier cara. El resultado es el <strong>haloalcano de Markovnikov</strong>: X en el carbono más sustituido (con menos H). Este mecanismo de dos pasos es la <em>adición electrofílica</em> clásica al doble enlace.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1636,6 +1730,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
+        <!-- ── RXN-ANIM STEPPER: Adición HX×1 (Alquinos) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-ai-0" onclick="rxnAnimStep('ai-0',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-ai-0" onclick="rxnAnimStep('ai-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-ai-0">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('ai-0',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('ai-0',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('ai-0',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-ai-0">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">−C≡C−  +  HX (1 mol)</div>
+              <div class="rxn-anim-label">Reactivos: Alquino (C≡C) + HX (1 mol)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">H⁺ → vinilo −C=C− intermedio</div>
+              <div class="rxn-anim-label">H⁺ ataca el triple enlace → vinilo − C=C intermediate</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">−CH=CX− (haloalqueno)</div>
+              <div class="rxn-anim-label">Producto: haloalqueno (solo 1 adición; aún queda doble enlace)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
         <!-- ── STEPPER: Hidrohalogenación de Alquinos — Mecanismo ×1 y ×2 ── -->
         <div class="mech-stepper" id="mech-ai-0">
           <div class="mech-top">
@@ -1662,6 +1788,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 1 de 3 — Adición ×1</div>
             <div class="mech-step-h">1 mol HX: H se une al C terminal (Markovnikov) → haloalqueno vinílico</div>
             <div class="mech-step-txt">La primera adición sigue <strong>Markovnikov</strong>: el H⁺ va al C con más H (terminal). El carbocatión vinílico resultante es captado por Br⁻. Producto: <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). El triple enlace queda reducido a doble.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-1">
             <div class="mech-vis">
@@ -1674,6 +1801,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 2 de 3 — Adición ×2</div>
             <div class="mech-step-h">2° mol HX: H al C con más H (ya tiene uno), X al C que ya lleva X → geminaldialuro</div>
             <div class="mech-step-txt">En la segunda adición, el H va al CH₂= (más H), dejando al C ya halogenado recibir el <strong>segundo Br</strong>. Resultado: <em>geminaldialuro</em> (ambos X en el MISMO carbono). Ej: CH≡CH + 2HBr → CH₃−CHBr₂ (1,1-dibromoetano, no el 1,2-).</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-2">
             <div class="mech-vis">
@@ -1686,6 +1814,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 3 de 3 — Resumen</div>
             <div class="mech-step-h">Triple enlace puede adicionar 1 o 2 moles de HX según la cantidad de reactivo disponible</div>
             <div class="mech-step-txt">El resultado depende de la <strong>relación molar HX : alquino</strong>. Con 1 equiv → haloalqueno (aislable). Con 2 equiv → geminaldialuro. La selectividad ×1 requiere controlar cuidadosamente la adición. Ej industrial: PVC se produce a partir de cloruro de vinilo (HC≡CH + HCl → CH₂=CHCl).</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2382,6 +2511,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
+        <!-- ── RXN-ANIM STEPPER: Halogenación SEA (Aromáticos) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-ar-0" onclick="rxnAnimStep('ar-0',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-ar-0" onclick="rxnAnimStep('ar-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-ar-0">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('ar-0',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('ar-0',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('ar-0',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-ar-0">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">C₆H₆  +  X₂  +  FeCl₃</div>
+              <div class="rxn-anim-label">Reactivos: Benceno (C₆H₆) + X₂ + ácido de Lewis (FeCl₃/AlCl₃)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">FeCl₃ activa X₂ → electrófilo X⁺</div>
+              <div class="rxn-anim-label">FeCl₃ activa X₂ → electrófilo X⁺; el anillo π lo ataca</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">C₆H₅X  +  HX</div>
+              <div class="rxn-anim-label">Producto: halobenceno (C₆H₅X) + HX — el anillo recupera aromaticidad</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
         <!-- ── STEPPER: Halogenación Aromática SEA — Mecanismo ── -->
         <div class="mech-stepper" id="mech-ar-0">
           <div class="mech-top">
@@ -2407,7 +2568,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — El catalizador crea el atacante (Br⁺)</div>
             <div class="mech-step-h">El FeBr₃ "activa" el Br₂ y produce Br⁺, que sí puede atacar el anillo</div>
-            <div class="mech-step-txt">Imagina el <strong>Br₂</strong> como una tijera cerrada: por sí sola no puede cortar el anillo de benceno. El <strong>FeBr₃</strong> actúa como una "llave" que jala tan fuerte de uno de los bromos que el enlace Br−Br se rompe, generando el <strong>Br⁺</strong> (un bromo con carga positiva, hambriento de electrones). Ese Br⁺ sí puede atacar la nube de electrones del anillo. <em>Sin FeBr₃, el Br₂ no reacciona con el benceno</em> (a diferencia de los alquenos, que sí reaccionan directo).</div>
+            <div class="mech-step-txt">Imagina el <strong>Br₂</strong> como una tijera cerrada: por sí sola no puede cortar el anillo de benceno. El <strong>FeBr₃</strong> actúa como una "llave" que jala tan fuerte de uno de los bromos que el enlace Br−Br se rompe, generando el <strong>Br⁺</strong> (un bromo con carga positiva, hambriento de electrones). Ese Br⁺ sí puede atacar la nube de electrones del anillo. <em>Sin FeBr₃, el Br₂ no reacciona con el benceno</em> (a diferencia de los alquenos, que sí reaccionan directo).</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+
           </div>
           <div class="mech-step" id="ms-ar-0-1">
             <div class="mech-vis">
@@ -2420,7 +2582,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — El Br⁺ entra al anillo (intermediario)</div>
             <div class="mech-step-h">La nube de electrones del benceno atrae el Br⁺ y forman un enlace C−Br</div>
-            <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong> (6 electrones que "flotan" por todo el anillo como una corona invisible). El <strong>Br⁺</strong>, con carga positiva, es atraído por esa nube y forma un enlace nuevo con uno de los carbonos del anillo. En ese instante, el carbono que recibió el Br pasa a tener 4 enlaces y ya no puede participar en la nube circular → <em>la aromaticidad se rompe temporalmente</em>. Esta especie "incómoda" se llama intermediario y dura poquísimo (fracción de segundo) antes de pasar al siguiente paso.</div>
+            <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong> (6 electrones que "flotan" por todo el anillo como una corona invisible). El <strong>Br⁺</strong>, con carga positiva, es atraído por esa nube y forma un enlace nuevo con uno de los carbonos del anillo. En ese instante, el carbono que recibió el Br pasa a tener 4 enlaces y ya no puede participar en la nube circular → <em>la aromaticidad se rompe temporalmente</em>. Esta especie "incómoda" se llama intermediario y dura poquísimo (fracción de segundo) antes de pasar al siguiente paso.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+
           </div>
           <div class="mech-step" id="ms-ar-0-2">
             <div class="mech-vis">
@@ -2434,6 +2597,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 3 de 3 — El anillo se "cura" y recupera su estabilidad</div>
             <div class="mech-step-h">El FeBr₄⁻ le quita el H⁺ al anillo → aromaticidad recuperada, FeBr₃ se regenera</div>
             <div class="mech-step-txt">El <strong>FeBr₄⁻</strong> actúa como una mini-aspiradora y le quita el <strong>H⁺</strong> al carbono que tiene el Br. Cuando ese H se va, los electrones del enlace C−H vuelven al anillo y la <strong>nube π circular se restaura</strong> (aromaticidad recuperada). Productos: <em>bromobenceno</em> (el anillo intacto pero con Br en vez de H) + HBr (gas). El FeBr₃ se <strong>regenera</strong> (es catalizador: no se gasta) y puede repetir el proceso con otra molécula de Br₂. Resumen: ¡el anillo siempre prefiere la sustitución (conservar la aromaticidad) a la adición (romperla)!</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -3151,6 +3315,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
+        <!-- ── RXN-ANIM STEPPER: SN2 (Halogenuros) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-hg-0" onclick="rxnAnimStep('hg-0',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-hg-0" onclick="rxnAnimStep('hg-0',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-hg-0">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('hg-0',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('hg-0',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('hg-0',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-hg-0">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">Nu:⁻  +  R−X</div>
+              <div class="rxn-anim-label">Reactivos: halogenuro de alquilo R−X + nucleófilo (Nu⁻)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">Nu⁻ → cara opuesta a X (concertado)</div>
+              <div class="rxn-anim-label">Nu⁻ ataca el C portador del halógeno por la cara opuesta (mecanismo concertado)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">Nu−R  +  X⁻</div>
+              <div class="rxn-anim-label">Producto: R−Nu + X⁻ (grupo saliente). C primario reacciona mejor por SN2.</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
         <!-- ── STEPPER: Sustitución Nucleofílica SN2 — Mecanismo ── -->
         <div class="mech-stepper" id="mech-hg-0">
           <div class="mech-top">
@@ -3177,6 +3373,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 1 de 3 — Ataque posterior</div>
             <div class="mech-step-h">El nucleófilo ataca el C portador del GS (X) por la cara OPUESTA a X (ataque por detrás)</div>
             <div class="mech-step-txt">La SN2 ocurre en <strong>un solo paso concertado</strong>: el Nu⁻ ataca por la cara opuesta al GS (ataque posterior, 180°). Simultáneamente, el enlace C−X se rompe. No hay intermediario (carbocatión). La velocidad depende de [R−X] y [Nu]: <em>bimolecular</em>.</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-1">
             <div class="mech-vis">
@@ -3189,6 +3386,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 2 de 3 — Estado de transición</div>
             <div class="mech-step-h">En el ET el C es pentacoordinado (trigonal bipiramidal): Nu a 120° del GS que sale</div>
             <div class="mech-step-txt">El <strong>estado de transición</strong> (no aislable) tiene el C central con 5 grupos: 3 sustituyentes existentes en plano ecuatorial, Nu y X en posiciones axiales. Este ET es el punto de mayor energía → determina la velocidad. Favorecido por C primario (1°, poco impedimento estérico).</div>
+            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-2">
             <div class="mech-vis">
@@ -3200,7 +3398,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Inversión de Walden</div>
             <div class="mech-step-h">La configuración del C quiral se invierte 180° (como paraguas que se da vuelta con el viento)</div>
-            <div class="mech-step-txt">Si el C es quiral, la SN2 produce <strong>inversión de configuración</strong> (inversión de Walden): el nucleófilo entra por una cara y los tres sustituyentes se "invierten" como un paraguas. Ejemplo: R → S o S → R. Esta estereoespecificidad es la firma diagnóstica de la SN2.</div>
+            <div class="mech-step-txt">Si el C es quiral, la SN2 produce <strong>inversión de configuración</strong> (inversión de Walden): el nucleófilo entra por una cara y los tres sustituyentes se "invierten" como un paraguas. Ejemplo: R → S o S → R. Esta estereoespecificidad es la firma diagnóstica de la SN2.</div>            <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
+
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -5979,6 +6178,50 @@ function rxnAnswer(btn,qid,correct){
     fb.textContent=data?(correct?data.ok:data.fail):(correct?'¡Correcto!':'Incorrecto, revisa la teoría.');
   }
 }
+/* ── RXN-ANIM STEPPER ── */
+const _rxnAnimState={};
+function rxnAnimStep(id,dir){
+  if(_rxnAnimState[id]===undefined)_rxnAnimState[id]=0;
+  const steps=document.querySelectorAll('#ras-'+id+' .rxn-anim-step');
+  const dots=document.querySelectorAll('#rdots-'+id+' .rxn-anim-dot');
+  if(steps[_rxnAnimState[id]])steps[_rxnAnimState[id]].classList.remove('on');
+  if(dots[_rxnAnimState[id]])dots[_rxnAnimState[id]].classList.remove('on');
+  _rxnAnimState[id]=Math.max(0,Math.min(steps.length-1,_rxnAnimState[id]+dir));
+  steps[_rxnAnimState[id]].classList.add('on');
+  dots[_rxnAnimState[id]].classList.add('on');
+  document.getElementById('raprev-'+id).disabled=_rxnAnimState[id]===0;
+  document.getElementById('ranext-'+id).disabled=_rxnAnimState[id]===steps.length-1;
+}
+function rxnAnimDot(id,i){
+  if(_rxnAnimState[id]===undefined)_rxnAnimState[id]=0;
+  const steps=document.querySelectorAll('#ras-'+id+' .rxn-anim-step');
+  const dots=document.querySelectorAll('#rdots-'+id+' .rxn-anim-dot');
+  if(steps[_rxnAnimState[id]])steps[_rxnAnimState[id]].classList.remove('on');
+  if(dots[_rxnAnimState[id]])dots[_rxnAnimState[id]].classList.remove('on');
+  _rxnAnimState[id]=Math.max(0,Math.min(steps.length-1,i));
+  steps[_rxnAnimState[id]].classList.add('on');
+  dots[_rxnAnimState[id]].classList.add('on');
+  document.getElementById('raprev-'+id).disabled=_rxnAnimState[id]===0;
+  document.getElementById('ranext-'+id).disabled=_rxnAnimState[id]===steps.length-1;
+}
+
+/* ── VOZ ── */
+let _tts=null;
+function speakStep(text){
+  if(!('speechSynthesis' in window))return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-CO'; u.rate=0.92; u.pitch=1;
+  const vs=window.speechSynthesis.getVoices();
+  const esp=vs.find(v=>v.lang.startsWith('es')&&v.name.toLowerCase().includes('female'))
+    ||vs.find(v=>v.lang.startsWith('es'))
+    ||null;
+  if(esp)u.voice=esp;
+  _tts=u;
+  window.speechSynthesis.speak(u);
+}
+function stopSpeak(){window.speechSynthesis.cancel();}
+
 </script>
 </body>
 </html>
