@@ -218,8 +218,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-anim-stepper{border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
 .rxn-anim-step{display:none;padding:14px 16px;border-top:1px solid var(--brd)}
 .rxn-anim-step.on{display:block;animation:bodySlide .2s ease}
-.rxn-anim-vis{border-radius:var(--rs);padding:14px 16px;margin-bottom:10px;
-  display:flex;justify-content:center;align-items:center;min-height:100px;
+.rxn-anim-vis{border-radius:var(--rs);padding:10px 12px;margin-bottom:10px;
+  display:flex;justify-content:center;align-items:center;min-height:110px;
   font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;
   text-align:center;line-height:1.5;overflow:hidden}
 .rxn-anim-vis.green{background:#dcfce7;color:#14532d;border:1.5px solid #86efac}
@@ -7318,6 +7318,7 @@ function mkDevSVG(ch,hiSet){
   const W=maxX-minX+P*2+32,Hh=maxY-minY+P*2+16;
   let sv=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" style="max-width:100%;height:auto;display:block;margin:auto">`;
   const C='#1a2a3a';
+  const bCol=o=>o===2?'#d97706':o===3?'#c8230a':C;
   const ln=(a,b,c,d,col)=>`<line x1="${a.toFixed(1)}" y1="${b.toFixed(1)}" x2="${c.toFixed(1)}" y2="${d.toFixed(1)}" stroke="${col||C}" stroke-width="1.8" stroke-linecap="round"/>`;
   for(const e of eds){
     const n1=nds.find(n=>n.x===e.x1&&n.y===e.y1),n2=nds.find(n=>n.x===e.x2&&n.y===e.y2);
@@ -7327,9 +7328,10 @@ function mkDevSVG(ch,hiSet){
     const p1=n1?(isV?9:n1.lb.length*4+4):14,p2=n2?(isV?9:n2.lb.length*4+4):14;
     const lx1=ax1+ux*p1,ly1=ay1+uy*p1,lx2=ax2-ux*p2,ly2=ay2-uy*p2;
     const px=-uy*2.8,py=ux*2.8;
-    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2);
-    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
-    else{sv+=ln(lx1,ly1,lx2,ly2);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py);}
+    const bc=bCol(e.o);
+    if(e.o===1)sv+=ln(lx1,ly1,lx2,ly2,bc);
+    else if(e.o===2){sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py,bc);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py,bc);}
+    else{sv+=ln(lx1,ly1,lx2,ly2,bc);sv+=ln(lx1+px,ly1+py,lx2+px,ly2+py,bc);sv+=ln(lx1-px,ly1-py,lx2-px,ly2-py,bc);}
   }
   for(const n of nds){
     const x=n.x+ox,y=n.y+oy;
@@ -7356,7 +7358,7 @@ function mkBenzSVG(subs){
     const isDbl=[0,2,4].includes(i);
     if(isDbl){
       const s=0.15;
-      sv+=`<line x1="${(x1+ux*len*s+px*OFF).toFixed(1)}" y1="${(y1+uy*len*s+py*OFF).toFixed(1)}" x2="${(x2-ux*len*s+px*OFF).toFixed(1)}" y2="${(y2-uy*len*s+py*OFF).toFixed(1)}" stroke="${C}" stroke-width="1.8" stroke-linecap="round"/>`;
+      sv+=`<line x1="${(x1+ux*len*s+px*OFF).toFixed(1)}" y1="${(y1+uy*len*s+py*OFF).toFixed(1)}" x2="${(x2-ux*len*s+px*OFF).toFixed(1)}" y2="${(y2-uy*len*s+py*OFF).toFixed(1)}" stroke="#d97706" stroke-width="1.8" stroke-linecap="round"/>`;
     }
     sv+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${C}" stroke-width="1.8" stroke-linecap="round"/>`;
   }
@@ -7708,7 +7710,15 @@ function initRxnAnims(){
       else if(d.r.eq)vis0.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${d.r.eq}</div>`;
     }
     const vis1=steps[1].querySelector('.rxn-anim-vis');
-    if(vis1&&d.eq)vis1.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.82rem;text-align:center;line-height:1.8">${d.eq}</div>`;
+    if(vis1){
+      const rSvg=d.r?(d.r.mol&&RM[d.r.mol]?mkDevSVG(RM[d.r.mol]):d.r.benz!=null?mkBenzSVG(d.r.benz):''):'';
+      const pSvg=d.p?(d.p.mol&&RM[d.p.mol]?mkDevSVG(RM[d.p.mol]):d.p.benz!=null?mkBenzSVG(d.p.benz):''):'';
+      vis1.innerHTML='<div style="display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;width:100%">'
+        +(rSvg?`<div style="max-width:110px;opacity:.7;flex-shrink:0">${rSvg}</div>`:'')
+        +(d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.72rem;text-align:center;line-height:1.7;flex-shrink:0">${d.eq}</div>`:'')
+        +(pSvg?`<div style="max-width:110px;opacity:.7;flex-shrink:0">${pSvg}</div>`:'')
+        +'</div>';
+    }
     const vis2=steps[2].querySelector('.rxn-anim-vis');
     if(vis2&&d.p){
       if(d.p.mol&&RM[d.p.mol])vis2.innerHTML=mkDevSVG(RM[d.p.mol]);
