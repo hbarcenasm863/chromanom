@@ -69,11 +69,23 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 
 /* RULES */
 .rules-list{display:flex;flex-direction:column;gap:5px}
-.rule{display:flex;gap:12px;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--rs);overflow:hidden}
-.rule-num{min-width:36px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;background:var(--c4b);color:var(--c4t)}
-.rule-body{padding:10px 12px;border-left:3px solid var(--c4)}
-.rule-body strong{font-size:.88rem;display:block;margin-bottom:2px;color:var(--tx)}
-.rule-body span{font-size:.8rem;color:var(--dim);line-height:1.6}
+/* ── reglas acordeón ── */
+.rule{display:block;background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--rs);overflow:hidden}
+.rule-head{display:flex;align-items:stretch;cursor:pointer;user-select:none;transition:background .15s}
+.rule-head:hover{background:var(--surf2)}
+.rule-num{min-width:36px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;background:var(--c4b);color:var(--c4t);flex-shrink:0}
+.rule-htitle{flex:1;padding:10px 12px;border-left:3px solid var(--c4)}
+.rule-htitle strong{font-size:.88rem;display:block;color:var(--tx)}
+.rule-chev{padding:0 10px;display:flex;align-items:center;color:var(--dimmer);font-size:.85rem;flex-shrink:0;transition:transform .2s}
+.rule-chev.open{transform:rotate(180deg)}
+.rule-speak{background:none;border:none;padding:0 8px;cursor:pointer;font-size:.85rem;color:var(--dimmer);flex-shrink:0;line-height:1}
+.rule-speak:hover{color:var(--c4t)}
+.rule-body{padding:10px 14px 12px;border-top:1px solid var(--brd);display:none}
+.rule-body.open{display:block;animation:up .15s ease}
+.rule-body span{font-size:.8rem;color:var(--dim);line-height:1.6;display:block}
+/* speak btn flotante en teoría */
+.grp-speak-btn{display:inline-flex;align-items:center;gap:5px;background:none;border:1.5px solid var(--brd);border-radius:100px;padding:4px 12px;font-size:.75rem;color:var(--dim);cursor:pointer;margin-top:8px;transition:border-color .15s,color .15s}
+.grp-speak-btn:hover{border-color:var(--c4);color:var(--c4t)}
 .attn-box{background:#fffbea;border:1px solid rgba(234,179,8,.3);border-radius:var(--rs);padding:10px 14px;margin-top:10px;font-size:.8rem;color:#92400e;line-height:1.6}
 
 /* EXAMPLES */
@@ -1064,7 +1076,8 @@ function showGroup(gid){
     + '</div></div></div>'
     + '<div class="sec-lbl">Las 4 partes en un ejemplo</div>'
     + '<div class="name-strip">' + buildNameStrip(g) + '</div>'
-    + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC</div>'
+    + '<button class="grp-speak-btn" onclick="speakGrp(\''+g.name.replace(/'/g,"\\'")+'. '+g.desc.replace(/'/g,"\\'")+'\')" >🔊 Escuchar descripción</button>'
+    + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dimmer);margin-left:4px">— clic para expandir</span></div>'
     + '<div class="rules-list">' + buildRules(g) + '</div>'
     + '<div class="iupac-note">&#128204; <strong>IUPAC:</strong> ' + g.iupac + '</div>'
     + (g.id==='benceno' ? buildCommonNames() : '');
@@ -1115,9 +1128,15 @@ function buildRules(g){
       }).join('');
       svgBlock = '<div class="rule-mols">' + items + '</div>';
     }
+    const speakTxt=(r.t+'. '+r.d).replace(/'/g,"\\'");
     return '<div class="rule">'
-      + '<div class="rule-num">' + (i+1) + '</div>'
-      + '<div class="rule-body"><strong>' + r.t + '</strong><span>' + r.d + '</span>' + svgBlock + '</div>'
+      + '<div class="rule-head" onclick="toggleRule(this)">'
+      + '<div class="rule-num">'+(i+1)+'</div>'
+      + '<div class="rule-htitle"><strong>'+r.t+'</strong></div>'
+      + '<button class="rule-speak" onclick="speakRuleBtn(event,\''+speakTxt+'\')" title="Escuchar regla">🔊</button>'
+      + '<span class="rule-chev">▾</span>'
+      + '</div>'
+      + '<div class="rule-body"><span>'+r.d+'</span>'+svgBlock+'</div>'
       + '</div>';
   }).join('');
 }
@@ -2081,6 +2100,35 @@ const MOLS={
 
 // ── INIT ──
 buildGallery();
+
+// ── REGLAS ACORDEÓN ──────────────────────────────────────────────────────────
+function toggleRule(head){
+  const body=head.nextElementSibling;
+  const chev=head.querySelector('.rule-chev');
+  const open=body.classList.toggle('open');
+  chev.classList.toggle('open',open);
+  chev.textContent=open?'▴':'▾';
+}
+
+// ── WEB SPEECH API ───────────────────────────────────────────────────────────
+let _grpTts=null;
+function _speak(text){
+  if(!('speechSynthesis' in window))return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='es-CO';u.rate=0.9;
+  function doSpeak(){
+    const vs=window.speechSynthesis.getVoices();
+    const fem=vs.find(v=>/es[-_](CO|ES|MX|AR|US)/i.test(v.lang)&&/female|woman|mujer/i.test(v.name))
+      ||vs.find(v=>/es[-_](CO|ES|MX|AR|US)/i.test(v.lang));
+    if(fem)u.voice=fem;
+    window.speechSynthesis.speak(u);
+  }
+  if(window.speechSynthesis.getVoices().length)doSpeak();
+  else window.speechSynthesis.addEventListener('voiceschanged',doSpeak,{once:true});
+}
+function speakGrp(text){_speak(text);}
+function speakRuleBtn(e,text){e.stopPropagation();_speak(text);}
 </script>
 
 <!-- FOOTER COPYRIGHT -->
