@@ -227,6 +227,15 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-anim-vis.blue{background:#dbeafe;color:#1d4ed8;border:1.5px solid #93c5fd}
 .rxn-anim-vis svg{max-width:100%;height:auto}
 .rxn-anim-vis.has-svg{padding:8px;min-height:90px;align-items:center}
+/* ── SVG molecule animations ── */
+@keyframes rxnBondIn{from{opacity:0}to{opacity:1}}
+@keyframes rxnAtomIn{from{opacity:0}to{opacity:1}}
+@keyframes rxnPiPulse{0%{opacity:0}45%{opacity:1}70%{opacity:.4}100%{opacity:1}}
+@keyframes rxnVisSlide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rxn-anim-step.on .rxn-anim-vis{animation:rxnVisSlide .25s cubic-bezier(.2,.8,.2,1)}
+.rxn-anim-step.on .rxn-bond{animation:rxnBondIn .18s ease-out backwards}
+.rxn-anim-step.on .rxn-atom{animation:rxnAtomIn .22s ease-out backwards}
+.rxn-anim-step.on .rxn-pi{animation:rxnPiPulse .65s ease-out backwards}
 .rxn-anim-label{font-size:.8rem;color:var(--dim);line-height:1.7;margin-bottom:8px}
 .rxn-anim-nav{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .rxn-anim-dots{display:flex;gap:6px;align-items:center}
@@ -7241,6 +7250,16 @@ function rxnAnswer(btn,qid,correct){
 }
 /* ── RXN-ANIM STEPPER ── */
 const _rxnAnimState={};
+function _rxnShow(id,newIdx,steps,dots){
+  // Force CSS animation restart so it replays every time the step is visited
+  const el=steps[newIdx];
+  el.classList.remove('on');
+  void el.offsetWidth; // trigger reflow
+  el.classList.add('on');
+  if(dots[newIdx])dots[newIdx].classList.add('on');
+  document.getElementById('raprev-'+id).disabled=newIdx===0;
+  document.getElementById('ranext-'+id).disabled=newIdx===steps.length-1;
+}
 function rxnAnimStep(id,dir){
   if(_rxnAnimState[id]===undefined)_rxnAnimState[id]=0;
   const steps=document.querySelectorAll('#ras-'+id+' .rxn-anim-step');
@@ -7248,10 +7267,7 @@ function rxnAnimStep(id,dir){
   if(steps[_rxnAnimState[id]])steps[_rxnAnimState[id]].classList.remove('on');
   if(dots[_rxnAnimState[id]])dots[_rxnAnimState[id]].classList.remove('on');
   _rxnAnimState[id]=Math.max(0,Math.min(steps.length-1,_rxnAnimState[id]+dir));
-  steps[_rxnAnimState[id]].classList.add('on');
-  dots[_rxnAnimState[id]].classList.add('on');
-  document.getElementById('raprev-'+id).disabled=_rxnAnimState[id]===0;
-  document.getElementById('ranext-'+id).disabled=_rxnAnimState[id]===steps.length-1;
+  _rxnShow(id,_rxnAnimState[id],steps,dots);
 }
 function rxnAnimDot(id,i){
   if(_rxnAnimState[id]===undefined)_rxnAnimState[id]=0;
@@ -7260,10 +7276,7 @@ function rxnAnimDot(id,i){
   if(steps[_rxnAnimState[id]])steps[_rxnAnimState[id]].classList.remove('on');
   if(dots[_rxnAnimState[id]])dots[_rxnAnimState[id]].classList.remove('on');
   _rxnAnimState[id]=Math.max(0,Math.min(steps.length-1,i));
-  steps[_rxnAnimState[id]].classList.add('on');
-  dots[_rxnAnimState[id]].classList.add('on');
-  document.getElementById('raprev-'+id).disabled=_rxnAnimState[id]===0;
-  document.getElementById('ranext-'+id).disabled=_rxnAnimState[id]===steps.length-1;
+  _rxnShow(id,_rxnAnimState[id],steps,dots);
 }
 
 /* ── VOZ ── */
@@ -7696,6 +7709,23 @@ const RF={
   }
 };
 
+// ─── STAGGERED SVG ANIMATOR ──────────────────────────────────────────────────
+// Post-processes an SVG string to add staggered animation-delay to every
+// bond (line) and atom (text) so the molecule "draws itself" left-to-right.
+function animateSVG(svg){
+  if(!svg)return svg;
+  let li=0;
+  svg=svg.replace(/<line ([^>]+?)\/>/g,(_,attrs)=>{
+    const pi=attrs.includes('#d97706')||attrs.includes('#c8230a');
+    const cls=`rxn-bond${pi?' rxn-pi':''}`;
+    const d=li++*22;
+    return `<line class="${cls}" style="animation-delay:${d}ms" ${attrs}/>`;
+  });
+  let ti=0;
+  svg=svg.replace(/<text /g,()=>`<text class="rxn-atom" style="animation-delay:${50+ti++*48}ms" `);
+  return svg;
+}
+
 // ─── RENDER ALL REACTION ANIMATION FRAMES ────────────────────────────────────
 function initRxnAnims(){
   for(const [id,d] of Object.entries(RF)){
@@ -7705,14 +7735,14 @@ function initRxnAnims(){
     if(steps.length<3)continue;
     const vis0=steps[0].querySelector('.rxn-anim-vis');
     if(vis0&&d.r){
-      if(d.r.mol&&RM[d.r.mol])vis0.innerHTML=mkDevSVG(RM[d.r.mol]);
-      else if(d.r.benz!=null)vis0.innerHTML=mkBenzSVG(d.r.benz);
+      if(d.r.mol&&RM[d.r.mol])vis0.innerHTML=animateSVG(mkDevSVG(RM[d.r.mol]));
+      else if(d.r.benz!=null)vis0.innerHTML=animateSVG(mkBenzSVG(d.r.benz));
       else if(d.r.eq)vis0.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${d.r.eq}</div>`;
     }
     const vis1=steps[1].querySelector('.rxn-anim-vis');
     if(vis1){
-      const rSvg=d.r?(d.r.mol&&RM[d.r.mol]?mkDevSVG(RM[d.r.mol]):d.r.benz!=null?mkBenzSVG(d.r.benz):''):'';
-      const pSvg=d.p?(d.p.mol&&RM[d.p.mol]?mkDevSVG(RM[d.p.mol]):d.p.benz!=null?mkBenzSVG(d.p.benz):''):'';
+      const rSvg=d.r?(d.r.mol&&RM[d.r.mol]?animateSVG(mkDevSVG(RM[d.r.mol])):d.r.benz!=null?animateSVG(mkBenzSVG(d.r.benz)):''):'';
+      const pSvg=d.p?(d.p.mol&&RM[d.p.mol]?animateSVG(mkDevSVG(RM[d.p.mol])):d.p.benz!=null?animateSVG(mkBenzSVG(d.p.benz)):''):'';
       vis1.innerHTML='<div style="display:flex;align-items:center;gap:8px;justify-content:center;flex-wrap:wrap;width:100%">'
         +(rSvg?`<div style="max-width:110px;opacity:.7;flex-shrink:0">${rSvg}</div>`:'')
         +(d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.72rem;text-align:center;line-height:1.7;flex-shrink:0">${d.eq}</div>`:'')
@@ -7721,8 +7751,8 @@ function initRxnAnims(){
     }
     const vis2=steps[2].querySelector('.rxn-anim-vis');
     if(vis2&&d.p){
-      if(d.p.mol&&RM[d.p.mol])vis2.innerHTML=mkDevSVG(RM[d.p.mol]);
-      else if(d.p.benz!=null)vis2.innerHTML=mkBenzSVG(d.p.benz);
+      if(d.p.mol&&RM[d.p.mol])vis2.innerHTML=animateSVG(mkDevSVG(RM[d.p.mol]));
+      else if(d.p.benz!=null)vis2.innerHTML=animateSVG(mkBenzSVG(d.p.benz));
       else if(d.p.eq)vis2.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${d.p.eq}</div>`;
     }
     if(d.labels){
