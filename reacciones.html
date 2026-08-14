@@ -53,6 +53,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .gb-pill.ar{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
 .gb-formula{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--dim);background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:5px 12px}
 
+/* ── PRERREQUISITOS (pre-training, Mayer P8) ── */
+.prereq-card{background:var(--surf2);border:1.5px dashed var(--brd);border-radius:var(--rs);
+  padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.prereq-icon{font-size:1.3rem;flex-shrink:0}
+.prereq-body{flex:1}
+.prereq-title{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--dim);margin-bottom:4px}
+.prereq-list{font-size:.8rem;color:var(--tx);line-height:1.6}
+.prereq-list a{color:var(--c1);font-weight:600;text-decoration:none;border-bottom:1px dotted var(--c1)}
+.prereq-list a:hover{border-bottom-style:solid}
+
 /* ── TIPO HEADER ── */
 .tipo-header{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:var(--c3t);margin:20px 0 4px;display:flex;align-items:center;gap:8px}
 .tipo-desc{font-size:.8rem;color:var(--dim);line-height:1.65;margin-bottom:12px}
@@ -289,6 +300,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">CₙH₂ₙ₊₂</span>
       <span class="gb-pill al2">Cicloalcanos</span>
       <span class="gb-formula">CₙH₂ₙ</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Que los alcanos solo tienen <strong>enlaces simples C−C</strong> (por eso son "saturados")
+          (repaso en <a href="teoria.html#enlaces">Principios → Tipos de enlace</a>)<br>
+          • Nombrar un alcano con IUPAC (<a href="grupos.html">Grupos → Alcanos</a>)<br>
+          • Qué es un <strong>radical libre</strong> y por qué la luz (hν) o el calor (Δ) lo generan
+        </div>
+      </div>
     </div>
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
@@ -955,6 +979,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="grupo-badge">
       <span class="gb-pill aq">Alquenos</span>
       <span class="gb-formula">CₙH₂ₙ · doble enlace C=C</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Qué es un <strong>doble enlace C=C</strong> y cómo se identifica en la fórmula semidesarrollada
+          (repaso en <a href="teoria.html#enlaces">Principios → Tipos de enlace</a>)<br>
+          • Cómo nombrar un <strong>alqueno</strong> con IUPAC (<a href="grupos.html">Grupos → Alquenos</a>)<br>
+          • Qué es un <strong>carbocatión</strong> y por qué 3° es más estable que 1°
+        </div>
+      </div>
     </div>
 
     <div class="mk-box">
@@ -1931,6 +1968,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">CₙH₂ₙ₋₂ · triple enlace C≡C</span>
     </div>
 
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Qué es un <strong>triple enlace C≡C</strong> y en qué se diferencia del doble enlace de un alqueno<br>
+          • Cómo funciona la adición electrofílica en alquenos (repaso en la pestaña
+          <strong>Alquenos</strong> de esta misma página)<br>
+          • Por qué un triple enlace puede aceptar <strong>dos adiciones</strong> (×1 → alqueno, ×2 → alcano)
+        </div>
+      </div>
+    </div>
+
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">➕➕ Adición al Triple Enlace (×1 y ×2)</div>
       <div class="tipo-card-eq">R−C≡C−R' + E−A →[×1]→ alqueno  →[×2]→ alcano / dihaluro</div>
@@ -2814,6 +2864,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="grupo-badge">
       <span class="gb-pill ar">Aromáticos</span>
       <span class="gb-formula">C₆H₅− · anillo de Hückel (4n+2 e⁻ π)</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Qué es la <strong>resonancia</strong> en el anillo bencénico (la nube π está deslocalizada
+          entre los 6 carbonos, no fija en 3 dobles enlaces)<br>
+          • Cómo nombrar compuestos aromáticos (<a href="grupos.html">Grupos → Aromáticos</a>)<br>
+          • Por qué el benceno prefiere <strong>sustitución</strong> (conserva la aromaticidad) en vez de
+          adición (la rompería), a diferencia de alquenos y alquinos
+        </div>
+      </div>
     </div>
 
     <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
@@ -3786,6 +3850,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−X  (X = F, Cl, Br, I)</span>
     </div>
 
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Que el halógeno (X) es más electronegativo que el carbono → el enlace C−X es polar
+          y el carbono queda parcialmente positivo (δ⁺), listo para ser atacado<br>
+          • Diferencia entre carbono <strong>1°, 2° y 3°</strong> (cuántos carbonos tiene unidos)<br>
+          • Qué es un <strong>nucleófilo</strong> (especie rica en electrones que ataca al C⁺)
+        </div>
+      </div>
+    </div>
+
     <div class="tipo-card" style="border-color:#7c3aed;border-left:4px solid #7c3aed">
       <div class="tipo-card-title" style="color:#7c3aed">🔄 Sustitución Nucleofílica (SN)</div>
       <div class="tipo-card-eq">Nu:⁻ + R−X  →  Nu−R + X⁻</div>
@@ -4306,6 +4383,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="grupo-badge">
       <span class="gb-pill ao">Alcoholes</span>
       <span class="gb-formula">R−OH · grupo hidroxilo</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Clasificar un alcohol como <strong>1°, 2° o 3°</strong> según el carbono que lleva el OH
+          (<a href="grupos.html">Grupos → Alcoholes</a>)<br>
+          • Que la <strong>hidratación de alquenos</strong> (pestaña Alquenos) es la reacción inversa a la
+          deshidratación de alcoholes que verás aquí<br>
+          • Diferencia entre oxidación parcial (a aldehído/cetona) y total (a ácido carboxílico)
+        </div>
+      </div>
     </div>
 
     <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
@@ -4991,6 +5082,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−NH₂ · R₂NH · R₃N · ArNH₂</span>
     </div>
 
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Clasificar una amina como <strong>1ª, 2ª o 3ª</strong> según cuántos carbonos reemplazan
+          H del NH₃ (<a href="grupos.html">Grupos → Aminas</a>)<br>
+          • Que el <strong>par de electrones libre</strong> en el nitrógeno es lo que hace a las aminas
+          básicas y nucleofílicas — igual que el −OH del agua es básico frente a un ácido<br>
+          • Qué diferencia una amina alifática (R−NH₂) de una aromática (Ar−NH₂, como la anilina)
+        </div>
+      </div>
+    </div>
+
     <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
       <div class="tipo-card-title" style="color:var(--c1t)">🔄 Reacciones de las Aminas</div>
       <div class="tipo-card-eq">R−NH₂ + H⁺ → R−NH₃⁺  |  ArNH₂ + HNO₂ → Ar−N₂⁺ (diazonio)</div>
@@ -5481,6 +5586,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="grupo-badge">
       <span class="gb-pill cb">Aldehídos y Cetonas</span>
       <span class="gb-formula">R−CHO · R₂C=O · grupo carbonilo</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Diferenciar aldehído (CHO, en el extremo de la cadena) de cetona (C=O interno)
+          (<a href="grupos.html">Grupos → Aldehídos y Cetonas</a>)<br>
+          • Que el oxígeno del carbonilo es más electronegativo → el carbono queda δ⁺ y es atacado
+          por nucleófilos (mismo principio que en halogenuros de alquilo)<br>
+          • Cómo se obtiene un aldehído/cetona por <strong>oxidación de un alcohol</strong>
+          (pestaña Alcoholes) — aquí verás la reacción inversa: reducirlos de vuelta a alcohol
+        </div>
+      </div>
     </div>
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
@@ -6197,6 +6317,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-formula">R−COOH · grupo carboxilo</span>
     </div>
 
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Que el grupo carboxilo (−COOH) combina un carbonilo (C=O) con un hidroxilo (−OH)
+          (<a href="grupos.html">Grupos → Ácidos Carboxílicos</a>)<br>
+          • Por qué el H del −COOH es <strong>ácido</strong> (se libera fácil como H⁺) frente al H de un alcohol<br>
+          • Qué es una <strong>esterificación de Fischer</strong> — la reacción con un alcohol que verás aquí
+          es la base para nombrar ésteres en el grupo de Derivados
+        </div>
+      </div>
+    </div>
+
     <div class="tipo-card" style="border-color:var(--err);border-left:4px solid var(--err)">
       <div class="tipo-card-title" style="color:var(--errt)">🔄 Reacciones de los Ácidos Carboxílicos</div>
       <div class="tipo-card-eq">RCOOH + Base → RCOO⁻ + H₂O  |  RCOOH + R'OH ⇌ RCOOR' + H₂O</div>
@@ -6521,6 +6655,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="grupo-badge">
       <span class="gb-pill dv">Derivados de AC</span>
       <span class="gb-formula">RCOCl · (RCO)₂O · RCOOR′ · RCONH₂</span>
+    </div>
+
+    <div class="prereq-card">
+      <span class="prereq-icon">🧩</span>
+      <div class="prereq-body">
+        <div class="prereq-title">Antes de empezar, deberías saber</div>
+        <div class="prereq-list">
+          • Identificar cloruro de acilo, anhídrido, éster y amida por su grupo saliente
+          (<a href="grupos.html">Grupos → Derivados de Ácidos</a>)<br>
+          • Que todos comparten el mismo carbonilo del ácido carboxílico, pero con distinto
+          "grupo saliente" (L) — por eso reaccionan igual (SAcN) pero con distinta reactividad<br>
+          • El orden de reactividad <strong>cloruro &gt; anhídrido &gt; éster &gt; amida</strong> —
+          repaso rápido en la pestaña Ácidos Carboxílicos
+        </div>
+      </div>
     </div>
 
     <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
