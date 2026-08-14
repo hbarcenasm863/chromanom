@@ -1,293 +1,230 @@
 // ============================================================
-//  Chromanom — Apps Script Analytics  v3
-//  Desplegar como: Aplicación web
-//  Ejecutar como:  Tu cuenta
-//  Acceso:         Cualquier persona (incluso anónima)
+//  Chromanom — Apps Script Analytics
+//  Desplegar como: Aplicación web → Cualquier usuario
+//  Método de acceso: Cualquier persona
 // ============================================================
 
-const SPREADSHEET_ID = '1PiLH_bdfmWBbYoOI9QpS7_RrtKhReQ0GaQ18CM9MghA';
-const SHEET_REGISTRO = 'Registro';
-const SHEET_STATS    = 'Estadísticas';
-const SHEET_CURSOS   = 'Resumen por Curso';
+const SPREADSHEET_NAME = 'Chromanom — Registro de estudiantes';
+const SHEET_REGISTRO   = 'Registro';
+const SHEET_STATS      = 'Estadísticas';
 
+// ── Cabeceras del Registro ──────────────────────────────────
 const HEADERS = [
   'Timestamp','Fecha','Hora','Nombre','Curso','Nivel','Sesión',
   'Correctas','Total','% Acierto',
-  'Errores MC','Errores Drag','Errores ID','Errores Write','Errores Build',
+  'Errores MC','Errores Drag','Errores ID','Errores Write',
   'Tiempo agotado',
   'Errores por tema','Aciertos por tema','Moléculas falladas',
-  'Anónimo','Trigger'
+  'Trigger'
 ];
 
-const C = {
-  timestamp:0, fecha:1, hora:2, nombre:3, curso:4, nivel:5, sesion:6,
-  correctas:7, total:8, pct:9,
-  err_mc:10, err_drag:11, err_id:12, err_write:13, err_build:14,
-  timeouts:15,
-  err_tema:16, ok_tema:17, mols:18,
-  anonimo:19, trigger:20
-};
-
+// ── Paleta de colores ───────────────────────────────────────
 const COLOR = {
-  header : '#1a1a2e',
-  hText  : '#ffffff',
-  green  : '#d9ead3',
-  blue   : '#cfe2f3',
-  yellow : '#fff2cc',
-  red    : '#fce8e6',
+  header  : '#1a1a2e',
+  hText   : '#ffffff',
+  green   : '#d9ead3',  // ≥ 90 %
+  blue    : '#cfe2f3',  // 70–89 %
+  yellow  : '#fff2cc',  // 50–69 %
+  red     : '#fce8e6',  // < 50 %
+  altRow  : '#f8f9fa',
+  border  : '#cccccc',
 };
 
-const NIVEL_KEYS = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
-
-// ── HTTP POST — guarda dato y actualiza stats ───────────────
+// ── Punto de entrada HTTP POST ──────────────────────────────
 function doPost(e) {
   try {
     const raw  = e.postData ? e.postData.contents : '{}';
     const data = JSON.parse(raw);
-    const ss   = getSpreadsheet();
+
+    const ss   = getOrCreateSpreadsheet();
     appendRow(ss, data);
-    // updateStats corre en try separado para que un error en stats
-    // no bloquee la respuesta ni pierda el dato del Registro
-    try { updateStats(ss); } catch(statErr) {
-      logError(ss, 'updateStats', statErr.message);
-    }
-    return jsonResponse({ ok: true });
+    updateStats(ss);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
-    return jsonResponse({ ok: false, error: err.message });
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
-// ── HTTP GET (diagnóstico) ──────────────────────────────────
+// ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
 function doGet() {
   return ContentService
-    .createTextOutput('Chromanom Analytics v3 — activo ✓')
+    .createTextOutput('Chromanom Analytics — activo ✓')
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
-function jsonResponse(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-// ── Reconstruye estadísticas manualmente desde el editor ────
-// Selecciona esta función y pulsa ▶ Ejecutar para forzar el recálculo
-function reconstruirEstadisticas() {
-  const ss = getSpreadsheet();
-  updateStats(ss);
-  console.log('✅ Estadísticas actualizadas correctamente — ' + new Date());
-}
-
-// ── Log de errores en hoja Diagnóstico ─────────────────────
-function logError(ss, fn, msg) {
-  let sh = ss.getSheetByName('Diagnóstico');
-  if (!sh) {
-    sh = ss.insertSheet('Diagnóstico');
-    sh.appendRow(['Timestamp','Función','Error']);
-    sh.getRange(1,1,1,3).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+// ── Obtiene o crea el spreadsheet ──────────────────────────
+function getOrCreateSpreadsheet() {
+  const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
+  if (files.hasNext()) {
+    return SpreadsheetApp.open(files.next());
   }
-  sh.appendRow([new Date(), fn, msg]);
-}
-
-// ── Abre el spreadsheet por ID ──────────────────────────────
-function getSpreadsheet() {
-  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-  if (!ss.getSheetByName(SHEET_REGISTRO)) {
-    initRegistroSheet(ss.insertSheet(SHEET_REGISTRO));
-  }
+  const ss = SpreadsheetApp.create(SPREADSHEET_NAME);
+  initRegistroSheet(ss.getSheets()[0]);
   return ss;
 }
 
-// ── Inicializa la hoja Registro ─────────────────────────────
+// ── Inicializa la hoja Registro con cabeceras ───────────────
 function initRegistroSheet(sh) {
   sh.setName(SHEET_REGISTRO);
   sh.appendRow(HEADERS);
-  sh.getRange(1, 1, 1, HEADERS.length)
-    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
-  sh.setFrozenRows(1);
-  const widths = [160,90,70,180,100,150,90,90,70,90,90,90,90,90,90,90,250,250,350,80,100];
-  widths.forEach((w, i) => sh.setColumnWidth(i + 1, w));
+  const hRange = sh.getRange(1, 1, 1, HEADERS.length);
+  hRange.setBackground(COLOR.header).setFontColor(COLOR.hText)
+        .setFontWeight('bold').setFrozenRows(1);
+  sh.setColumnWidth(1,  160);  // Timestamp
+  sh.setColumnWidth(2,  90);   // Fecha
+  sh.setColumnWidth(3,  70);   // Hora
+  sh.setColumnWidth(4,  180);  // Nombre
+  sh.setColumnWidth(5,  100);  // Curso
+  sh.setColumnWidth(6,  150);  // Nivel
+  sh.setColumnWidth(16, 250);  // Errores por tema
+  sh.setColumnWidth(17, 250);  // Aciertos por tema
+  sh.setColumnWidth(18, 350);  // Moléculas falladas
 }
 
 // ── Añade una fila al Registro ──────────────────────────────
 function appendRow(ss, d) {
   let sh = ss.getSheetByName(SHEET_REGISTRO);
-  if (!sh) { sh = ss.insertSheet(SHEET_REGISTRO); initRegistroSheet(sh); }
+  if (!sh) {
+    sh = ss.insertSheet(SHEET_REGISTRO);
+    initRegistroSheet(sh);
+  }
 
-  const pct = d.pct !== undefined
-    ? d.pct
-    : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
-
-  const safeJson = v => (typeof v === 'object' && v !== null) ? JSON.stringify(v) : (v || '');
-  const safeMols = v => Array.isArray(v) ? v.join(', ') : (v || '');
+  const pct = d.pct !== undefined ? d.pct : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
 
   const row = [
-    new Date(),
-    d.fecha         ?? '',
-    d.hora          ?? '',
-    d.nombre        ?? '',
-    d.curso         ?? '',
-    d.nivel         ?? '',
-    d.sesion        ?? '',
-    d.correctas     ?? '',
-    d.total         ?? '',
-    pct,
-    d.errores_mc    ?? '',
-    d.errores_drag  ?? '',
-    d.errores_id    ?? '',
-    d.errores_write ?? '',
-    d.errores_build ?? '',
-    d.timeouts      ?? '',
-    safeJson(d.errores_por_tema),
-    safeJson(d.aciertos_por_tema),
-    safeMols(d.moleculas_falladas),
-    d.anonimo ? true : false,
-    d.trigger       ?? '',
+    new Date(),                                     // Timestamp
+    d.fecha       || '',                            // Fecha
+    d.hora        || '',                            // Hora
+    d.nombre      || '',                            // Nombre
+    d.curso       || '',                            // Curso
+    d.nivel       || '',                            // Nivel
+    d.sesion      || '',                            // Sesión
+    d.correctas   !== undefined ? d.correctas : '', // Correctas
+    d.total       !== undefined ? d.total     : '', // Total
+    pct,                                            // % Acierto
+    d.errores_mc   !== undefined ? d.errores_mc   : '',
+    d.errores_drag !== undefined ? d.errores_drag : '',
+    d.errores_id   !== undefined ? d.errores_id   : '',
+    d.errores_write!== undefined ? d.errores_write: '',
+    d.timeouts     !== undefined ? d.timeouts     : '',
+    typeof d.errores_por_tema  === 'object' ? JSON.stringify(d.errores_por_tema)  : (d.errores_por_tema  || ''),
+    typeof d.aciertos_por_tema === 'object' ? JSON.stringify(d.aciertos_por_tema) : (d.aciertos_por_tema || ''),
+    Array.isArray(d.moleculas_falladas) ? d.moleculas_falladas.join(', ') : (d.moleculas_falladas || ''),
+    d.trigger || '',
   ];
 
   const lastRow = sh.getLastRow() + 1;
   sh.appendRow(row);
-  sh.getRange(lastRow, 1, 1, HEADERS.length).setBackground(rowColor(pct));
-  sh.getRange(lastRow, C.pct + 1).setNumberFormat('0"%"');
+
+  // Color de fila según % acierto
+  const bgColor = pct >= 90 ? COLOR.green
+                : pct >= 70 ? COLOR.blue
+                : pct >= 50 ? COLOR.yellow
+                :             COLOR.red;
+  sh.getRange(lastRow, 1, 1, HEADERS.length).setBackground(bgColor);
+
+  // Formato % (columna 10)
+  sh.getRange(lastRow, 10).setNumberFormat('0"%"');
 }
 
-// ── Carga y agrupa todos los datos de Registro ──────────────
-function loadData(ss) {
-  const reg = ss.getSheetByName(SHEET_REGISTRO);
-  if (!reg || reg.getLastRow() < 2) return { allData: [], namedData: [] };
-  // Lee tantas columnas como tenga la hoja (compatible con esquemas viejos)
-  const nCols = Math.max(reg.getLastColumn(), HEADERS.length);
-  const allData = reg.getRange(2, 1, reg.getLastRow() - 1, nCols).getValues();
-  // Excluye filas anónimas (columna 19) y filas sin nombre/curso
-  const namedData = allData.filter(r => {
-    const anon = r[C.anonimo];
-    if (anon === true || anon === 'TRUE') return false;
-    return r[C.nombre] && r[C.curso];
-  });
-  return { allData, namedData };
-}
-
-// ── Reconstruye todas las hojas de estadísticas ─────────────
+// ── Actualiza la hoja Estadísticas ─────────────────────────
 function updateStats(ss) {
-  const { allData, namedData } = loadData(ss);
-
-  buildEstadisticas(ss, namedData);
-  buildResumenCursos(ss, namedData);
-  updateTopicStats(ss, allData);
-
-  const cursos = [...new Set(namedData.map(r => r[C.curso]).filter(Boolean))];
-  cursos.forEach(curso => updateCursoSheet(ss, curso, namedData));
-}
-
-// ── Hoja Estadísticas: un alumno por fila ───────────────────
-function buildEstadisticas(ss, namedData) {
   let sh = ss.getSheetByName(SHEET_STATS);
   if (!sh) sh = ss.insertSheet(SHEET_STATS);
-  sh.clearContents(); sh.clearFormats();
+  sh.clearContents();
+  sh.clearFormats();
 
-  const hdrs = [
-    'Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
-    'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %'
-  ];
-  sh.appendRow(hdrs);
-  sh.getRange(1, 1, 1, hdrs.length)
-    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+  const reg = ss.getSheetByName(SHEET_REGISTRO);
+  if (!reg || reg.getLastRow() < 2) return;
+
+  const data = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
+
+  // Agrupación: por estudiante (nombre+curso)
+  const students = {};
+  data.forEach(r => {
+    const nombre  = r[3];
+    const curso   = r[4];
+    const nivel   = r[5];
+    const correctas = Number(r[7]) || 0;
+    const total     = Number(r[8]) || 0;
+    const pct       = Number(r[9]) || 0;
+    const key       = nombre + '||' + curso;
+    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {} };
+    const s = students[key];
+    s.sesiones++;
+    s.totalC += correctas;
+    s.totalT += total;
+    if (!s.niveles[nivel]) s.niveles[nivel] = { sesiones: 0, totalC: 0, totalT: 0 };
+    s.niveles[nivel].sesiones++;
+    s.niveles[nivel].totalC += correctas;
+    s.niveles[nivel].totalT += total;
+  });
+
+  // ── Tabla resumen por estudiante ───────────────────────────
+  const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
+                        'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %'];
+  sh.appendRow(statsHeaders);
+  const hRange = sh.getRange(1, 1, 1, statsHeaders.length);
+  hRange.setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
   sh.setFrozenRows(1);
 
-  const students = agruparEstudiantes(namedData);
+  const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
+
   let row = 2;
-  Object.values(students)
-    .sort((a, b) => String(a.curso).localeCompare(String(b.curso)) || String(a.nombre).localeCompare(String(b.nombre)))
+  Object.values(students).sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
     .forEach(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      const nivelPcts = NIVEL_KEYS.map(nk => {
+      const nivelPcts = nivelKeys.map(nk => {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
       sh.appendRow([s.nombre, s.curso, s.sesiones, s.totalT, globalPct, ...nivelPcts]);
-      sh.getRange(row, 1, 1, hdrs.length).setBackground(rowColor(globalPct));
+
+      const bgColor = globalPct >= 90 ? COLOR.green
+                    : globalPct >= 70 ? COLOR.blue
+                    : globalPct >= 50 ? COLOR.yellow
+                    :                   COLOR.red;
+      sh.getRange(row, 1, 1, statsHeaders.length).setBackground(bgColor);
       sh.getRange(row, 5).setNumberFormat('0"%"');
-      [6,7,8,9].forEach(c => {
-        if (sh.getRange(row, c).getValue() !== '') sh.getRange(row, c).setNumberFormat('0"%"');
-      });
+      [6,7,8,9].forEach(c => { if (sh.getRange(row, c).getValue() !== '') sh.getRange(row, c).setNumberFormat('0"%"'); });
       row++;
     });
 
-  [200,100,80,180,120,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i + 1, w));
+  // Anchos
+  [200,120,80,180,120,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
+
+  // ── Hoja resumen por tema (eficacia de la herramienta) ────
+  updateTopicStats(ss, data);
+
+  // ── Hojas individuales por curso ──────────────────────────
+  const cursos = [...new Set(data.map(r => r[4]).filter(Boolean))];
+  cursos.forEach(curso => updateCursoSheet(ss, curso, data));
 }
 
-// ── Hoja Resumen por Curso: un curso por fila ────────────────
-function buildResumenCursos(ss, namedData) {
-  let sh = ss.getSheetByName(SHEET_CURSOS);
-  if (!sh) sh = ss.insertSheet(SHEET_CURSOS, 1); // segunda pestaña
-  sh.clearContents(); sh.clearFormats();
-
-  const hdrs = [
-    'Curso','Estudiantes activos','Sesiones totales',
-    'Preguntas respondidas','% Acierto promedio',
-    'Hidrocarburos %','Oxigenados %','Nitrogenados %','Juego Completo %'
-  ];
-  sh.appendRow(hdrs);
-  sh.getRange(1, 1, 1, hdrs.length)
-    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
-  sh.setFrozenRows(1);
-
-  // Agrupar por curso
-  const cursos = {};
-  namedData.forEach(r => {
-    const curso = r[C.curso];
-    if (!curso) return;
-    if (!cursos[curso]) cursos[curso] = { alumnos: new Set(), sesiones:0, totalC:0, totalT:0, niveles:{} };
-    const c = cursos[curso];
-    c.alumnos.add(r[C.nombre]);
-    c.sesiones++;
-    c.totalC += Number(r[C.correctas]) || 0;
-    c.totalT += Number(r[C.total])     || 0;
-    const nk = r[C.nivel];
-    if (!c.niveles[nk]) c.niveles[nk] = { totalC:0, totalT:0 };
-    c.niveles[nk].totalC += Number(r[C.correctas]) || 0;
-    c.niveles[nk].totalT += Number(r[C.total])     || 0;
-  });
-
-  let row = 2;
-  Object.entries(cursos)
-    .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
-    .forEach(([curso, c]) => {
-      const pct = c.totalT ? Math.round(c.totalC / c.totalT * 100) : 0;
-      const nivelPcts = NIVEL_KEYS.map(nk => {
-        const nd = c.niveles[nk];
-        return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
-      });
-      sh.appendRow([curso, c.alumnos.size, c.sesiones, c.totalT, pct, ...nivelPcts]);
-      sh.getRange(row, 1, 1, hdrs.length).setBackground(rowColor(pct));
-      sh.getRange(row, 5).setNumberFormat('0"%"');
-      [6,7,8,9].forEach(col => {
-        if (sh.getRange(row, col).getValue() !== '') sh.getRange(row, col).setNumberFormat('0"%"');
-      });
-      row++;
-    });
-
-  [120,160,130,180,150,140,120,140,140].forEach((w, i) => sh.setColumnWidth(i + 1, w));
-}
-
-// ── Hoja Eficacia por tema ──────────────────────────────────
-function updateTopicStats(ss, allData) {
+// ── Estadísticas por tema ──────────────────────────────────
+function updateTopicStats(ss, data) {
   const SHEET_TOPICS = 'Eficacia por tema';
   let sh = ss.getSheetByName(SHEET_TOPICS);
   if (!sh) sh = ss.insertSheet(SHEET_TOPICS);
   sh.clearContents(); sh.clearFormats();
 
+  // Acumular desde los campos JSON
   const topicData = {};
-  allData.forEach(r => {
+  data.forEach(r => {
     let errTema = {}, okTema = {};
-    try { errTema = JSON.parse(r[C.err_tema]) || {}; } catch(e) {}
-    try { okTema  = JSON.parse(r[C.ok_tema])  || {}; } catch(e) {}
+    try { errTema = JSON.parse(r[15]) || {}; } catch(e) {}
+    try { okTema  = JSON.parse(r[16]) || {}; } catch(e) {}
     Object.entries(errTema).forEach(([t, v]) => {
-      if (!topicData[t]) topicData[t] = { err:0, ok:0 };
+      if (!topicData[t]) topicData[t] = { err: 0, ok: 0 };
       topicData[t].err += Number(v) || 0;
     });
     Object.entries(okTema).forEach(([t, v]) => {
-      if (!topicData[t]) topicData[t] = { err:0, ok:0 };
+      if (!topicData[t]) topicData[t] = { err: 0, ok: 0 };
       topicData[t].ok += Number(v) || 0;
     });
   });
@@ -296,82 +233,60 @@ function updateTopicStats(ss, allData) {
   sh.getRange(1,1,1,5).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
   sh.setFrozenRows(1);
 
+  const sorted = Object.entries(topicData).sort((a,b) => {
+    const totA = a[1].ok + a[1].err, totB = b[1].ok + b[1].err;
+    return totB - totA;
+  });
+
   let row = 2;
-  Object.entries(topicData)
-    .sort((a, b) => (b[1].ok + b[1].err) - (a[1].ok + a[1].err))
-    .forEach(([tema, d]) => {
-      const tot = d.ok + d.err;
-      const pct = tot ? Math.round(d.ok / tot * 100) : 0;
-      sh.appendRow([tema, d.ok, d.err, tot, pct]);
-      sh.getRange(row, 1, 1, 5).setBackground(rowColor(pct));
-      sh.getRange(row, 5).setNumberFormat('0"%"');
-      row++;
-    });
+  sorted.forEach(([tema, d]) => {
+    const tot = d.ok + d.err;
+    const pct = tot ? Math.round(d.ok / tot * 100) : 0;
+    sh.appendRow([tema, d.ok, d.err, tot, pct]);
+    const bg = pct >= 90 ? COLOR.green : pct >= 70 ? COLOR.blue : pct >= 50 ? COLOR.yellow : COLOR.red;
+    sh.getRange(row, 1, 1, 5).setBackground(bg);
+    sh.getRange(row, 5).setNumberFormat('0"%"');
+    row++;
+  });
 
   [200,100,100,140,100].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
 
-// ── Hoja individual por curso ───────────────────────────────
-function updateCursoSheet(ss, curso, data) {
+// ── Hoja individual por curso ──────────────────────────────
+function updateCursoSheet(ss, curso, allData) {
   const shName = 'Curso ' + curso;
   let sh = ss.getSheetByName(shName);
   if (!sh) sh = ss.insertSheet(shName);
   sh.clearContents(); sh.clearFormats();
 
+  const cursoData = allData.filter(r => r[4] === curso);
+
   sh.appendRow(['Nombre','Sesiones','Preguntas respondidas','% Acierto','Última sesión']);
   sh.getRange(1,1,1,5).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
   sh.setFrozenRows(1);
 
+  // Agrupación por nombre
   const students = {};
-  data.filter(r => r[C.curso] === curso).forEach(r => {
-    const nombre = r[C.nombre];
+  cursoData.forEach(r => {
+    const nombre = r[3];
     if (!students[nombre]) students[nombre] = { sesiones:0, totalC:0, totalT:0, lastDate:'' };
     const s = students[nombre];
     s.sesiones++;
-    s.totalC += Number(r[C.correctas]) || 0;
-    s.totalT += Number(r[C.total])     || 0;
-    const fecha = r[C.fecha] || '';
-    if (String(fecha) > String(s.lastDate)) s.lastDate = fecha;
+    s.totalC += Number(r[7]) || 0;
+    s.totalT += Number(r[8]) || 0;
+    const fecha = r[1] || '';
+    if (fecha > s.lastDate) s.lastDate = fecha;
   });
 
   let row = 2;
-  Object.entries(students)
-    .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
-    .forEach(([nombre, s]) => {
-      const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      sh.appendRow([nombre, s.sesiones, s.totalT, pct, s.lastDate]);
-      sh.getRange(row,1,1,5).setBackground(rowColor(pct));
-      sh.getRange(row,4).setNumberFormat('0"%"');
-      row++;
-    });
+  Object.entries(students).sort((a,b) => a[0].localeCompare(b[0])).forEach(([nombre, s]) => {
+    const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
+    sh.appendRow([nombre, s.sesiones, s.totalT, pct, s.lastDate]);
+    const bg = pct >= 90 ? COLOR.green : pct >= 70 ? COLOR.blue : pct >= 50 ? COLOR.yellow : COLOR.red;
+    sh.getRange(row,1,1,5).setBackground(bg);
+    sh.getRange(row,4).setNumberFormat('0"%"');
+    row++;
+  });
 
   [200,80,180,100,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
-}
-
-// ── Helpers ─────────────────────────────────────────────────
-function agruparEstudiantes(namedData) {
-  const students = {};
-  namedData.forEach(r => {
-    const key = r[C.nombre] + '||' + r[C.curso];
-    if (!students[key]) students[key] = {
-      nombre: r[C.nombre], curso: r[C.curso],
-      sesiones:0, totalC:0, totalT:0, niveles:{}
-    };
-    const s = students[key];
-    s.sesiones++;
-    s.totalC += Number(r[C.correctas]) || 0;
-    s.totalT += Number(r[C.total])     || 0;
-    const nk = r[C.nivel];
-    if (!s.niveles[nk]) s.niveles[nk] = { totalC:0, totalT:0 };
-    s.niveles[nk].totalC += Number(r[C.correctas]) || 0;
-    s.niveles[nk].totalT += Number(r[C.total])     || 0;
-  });
-  return students;
-}
-
-function rowColor(pct) {
-  return pct >= 90 ? COLOR.green
-       : pct >= 70 ? COLOR.blue
-       : pct >= 50 ? COLOR.yellow
-       :             COLOR.red;
 }
