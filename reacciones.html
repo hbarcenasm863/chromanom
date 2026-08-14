@@ -35,6 +35,26 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .page-header h1{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;letter-spacing:-.03em;margin-bottom:4px}
 .page-header p{color:var(--dim);font-size:.85rem;line-height:1.6}
 
+/* ── GLOSARIO DE CONCEPTOS PREVIOS (Mayer P8/P9) ── */
+.gloss-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);margin-bottom:20px;overflow:hidden;box-shadow:var(--sh)}
+.gloss-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;background:var(--surf2);transition:background .15s;gap:10px}
+.gloss-head:hover{background:var(--brd)}
+.gloss-head-l{display:flex;align-items:center;gap:12px;min-width:0}
+.gloss-icon{font-size:1.6rem;flex-shrink:0}
+.gloss-title{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:var(--tx)}
+.gloss-sub{font-size:.76rem;color:var(--dim);margin-top:2px}
+.gloss-chev{font-size:1.1rem;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.gloss-chev.open{transform:rotate(180deg)}
+.gloss-body{display:none;padding:16px 18px;border-top:1px solid var(--brd)}
+.gloss-body.open{display:block;animation:fadeIn .22s ease}
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.gloss-term{background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:10px 12px}
+.gloss-term-h{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.gloss-term-ico{font-size:1.05rem;flex-shrink:0}
+.gloss-term-n{font-weight:700;font-size:.82rem;color:var(--c1t)}
+.gloss-term-d{font-size:.76rem;color:var(--dim);line-height:1.55}
+.gloss-term-d b{color:var(--tx)}
+
 /* ── TABS ── */
 .tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
 .tab-btn{padding:8px 16px;border:1.5px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
@@ -278,6 +298,71 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <div class="page-header">
     <h1>🧪 Reacciones Orgánicas</h1>
     <p>Reacciones características de los grupos de hidrocarburos: esquema general, condiciones, ejemplos semi-desarrollados y práctica rápida.</p>
+  </div>
+
+  <div class="gloss-card">
+    <div class="gloss-head" onclick="toggleGlossary()">
+      <div class="gloss-head-l">
+        <span class="gloss-icon">📖</span>
+        <div>
+          <div class="gloss-title">Glosario de conceptos previos</div>
+          <div class="gloss-sub">12 términos que necesitas dominar antes de estudiar reacciones — clic para ver</div>
+        </div>
+      </div>
+      <span class="gloss-chev" id="gloss-chev">▾</span>
+    </div>
+    <div class="gloss-body" id="gloss-body">
+      <div class="gloss-grid">
+        <div class="gloss-term" id="g-enlaces">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🔗</span><span class="gloss-term-n">Enlace simple, doble y triple</span></div>
+          <div class="gloss-term-d">Un enlace simple (C−C) comparte 1 par de electrones (σ). Un doble enlace (C=C) comparte 2 pares (1σ + 1π). Un triple enlace (C≡C) comparte 3 pares (1σ + 2π). Los enlaces <b>π</b> son más reactivos porque su nube de electrones está más expuesta y accesible.</div>
+        </div>
+        <div class="gloss-term" id="g-saturacion">
+          <div class="gloss-term-h"><span class="gloss-term-ico">⚛️</span><span class="gloss-term-n">Saturado vs. insaturado</span></div>
+          <div class="gloss-term-d"><b>Saturado</b> = solo enlaces simples, con el máximo de hidrógenos posible (alcanos). <b>Insaturado</b> = tiene al menos un doble o triple enlace (alquenos, alquinos), con menos H que el máximo posible.</div>
+        </div>
+        <div class="gloss-term" id="g-radical">
+          <div class="gloss-term-h"><span class="gloss-term-ico">☢️</span><span class="gloss-term-n">Radical libre</span></div>
+          <div class="gloss-term-d">Átomo o fragmento con un <b>electrón desapareado</b>, muy inestable y reactivo. Se genera al romper un enlace de forma homolítica (cada átomo se lleva un electrón), típicamente con luz (hν) o calor (Δ). Es el motor de la sustitución radical en alcanos.</div>
+        </div>
+        <div class="gloss-term" id="g-carbocation">
+          <div class="gloss-term-h"><span class="gloss-term-ico">➕</span><span class="gloss-term-n">Carbocatión</span></div>
+          <div class="gloss-term-d">Carbono con solo 3 enlaces y carga positiva (le falta un par de electrones). Se estabiliza con los grupos alquilo vecinos que "donan" densidad electrónica: <b>3° &gt; 2° &gt; 1°</b> en estabilidad. Aparece como intermediario en la adición electrofílica.</div>
+        </div>
+        <div class="gloss-term" id="g-nucleofilo">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🎯</span><span class="gloss-term-n">Nucleófilo y electrófilo</span></div>
+          <div class="gloss-term-d">El <b>nucleófilo</b> ("amante del núcleo") tiene electrones de sobra y ataca zonas con carga positiva (ej: OH⁻, CN⁻, NH₃). El <b>electrófilo</b> ("amante del electrón") busca electrones porque tiene carga positiva o parcial (ej: H⁺, carbocatión, C del carbonilo).</div>
+        </div>
+        <div class="gloss-term" id="g-polaridad">
+          <div class="gloss-term-h"><span class="gloss-term-ico">⚡</span><span class="gloss-term-n">Polaridad δ+ / δ−</span></div>
+          <div class="gloss-term-d">Cuando dos átomos con distinta electronegatividad se enlazan (ej: C−O, C−X), los electrones se desplazan hacia el más electronegativo, que queda con carga parcial negativa (<b>δ−</b>) mientras el otro queda con carga parcial positiva (<b>δ+</b>). Los electrófilos atacan el δ+.</div>
+        </div>
+        <div class="gloss-term" id="g-clasific">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🔢</span><span class="gloss-term-n">Carbono 1°, 2°, 3° y 4°</span></div>
+          <div class="gloss-term-d">Se clasifica según cuántos <b>otros carbonos</b> tiene unidos directamente: 1° (un vecino C), 2° (dos vecinos), 3° (tres vecinos), 4° (cuatro vecinos). Determina la estabilidad de carbocationes y el mecanismo de sustitución (SN1 vs SN2).</div>
+        </div>
+        <div class="gloss-term" id="g-resonancia">
+          <div class="gloss-term-h"><span class="gloss-term-ico">💠</span><span class="gloss-term-n">Resonancia y aromaticidad</span></div>
+          <div class="gloss-term-d">En el benceno, los 6 electrones π no están fijos en 3 dobles enlaces alternados: están <b>deslocalizados</b> en todo el anillo, lo que lo hace mucho más estable que un alqueno normal. Por eso prefiere sustitución (mantiene el anillo) sobre adición (lo rompería).</div>
+        </div>
+        <div class="gloss-term" id="g-mecanismos">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🔀</span><span class="gloss-term-n">Sustitución vs. adición vs. eliminación</span></div>
+          <div class="gloss-term-d"><b>Sustitución</b>: un átomo/grupo reemplaza a otro (no cambia el grado de saturación). <b>Adición</b>: dos átomos se suman a un enlace múltiple (lo satura). <b>Eliminación</b>: se pierden átomos y se forma un enlace múltiple (lo opuesto a la adición).</div>
+        </div>
+        <div class="gloss-term" id="g-saliente">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🚪</span><span class="gloss-term-n">Grupo saliente</span></div>
+          <div class="gloss-term-d">Átomo o grupo que se desprende cuando un nucleófilo ataca (ej: el X⁻ en R−X, el Cl⁻ en un cloruro de acilo). Cuanto más estable es como ion libre, <b>mejor grupo saliente</b> es.</div>
+        </div>
+        <div class="gloss-term" id="g-redox">
+          <div class="gloss-term-h"><span class="gloss-term-ico">🔥</span><span class="gloss-term-n">Oxidación y reducción en orgánica</span></div>
+          <div class="gloss-term-d">En química orgánica, <b>oxidar</b> = ganar enlaces C−O (o perder C−H); <b>reducir</b> = ganar enlaces C−H (o perder C−O). Ejemplo: alcohol → aldehído → ácido carboxílico es una secuencia de oxidaciones sucesivas.</div>
+        </div>
+        <div class="gloss-term" id="g-markovnikov">
+          <div class="gloss-term-h"><span class="gloss-term-ico">📌</span><span class="gloss-term-n">Regla de Markovnikov</span></div>
+          <div class="gloss-term-d">En la adición de H−X (o H₂O) a un alqueno/alquino asimétrico, el <b>H</b> va al carbono con más hidrógenos (menos sustituido) y el <b>X</b> va al carbono más sustituido, porque la reacción pasa por el carbocatión más estable.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="tabs" id="tabs">
@@ -7294,6 +7379,14 @@ function switchTab(id){
   const tabOrder=['alcanos','alquenos','alquinos','aromaticos','halogenuros','alcoholes','aminas','carbonilo','acidos','derivados'];
   const idx=tabOrder.indexOf(id); if(idx<0) return;
   document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+/* ── GLOSARIO ── */
+function toggleGlossary(){
+  const body=document.getElementById('gloss-body');
+  const chev=document.getElementById('gloss-chev');
+  const open=body.classList.toggle('open');
+  chev.classList.toggle('open',open);
 }
 
 /* ── ACCORDION ── */
