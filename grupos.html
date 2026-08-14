@@ -1153,14 +1153,15 @@ function buildRules(g){
       svgBlock = '<div class="rule-mols">' + items + '</div>';
     }
     const speakTxt=(r.t+'. '+r.d).replace(/'/g,"\\'");
+    const openCls = i===0 ? ' open' : '';
     return '<div class="rule">'
       + '<div class="rule-head" onclick="toggleRule(this)">'
       + '<div class="rule-num">'+(i+1)+'</div>'
       + '<div class="rule-htitle"><strong>'+r.t+'</strong></div>'
       + '<button class="rule-speak" onclick="speakRuleBtn(event,\''+speakTxt+'\')" title="Escuchar regla">🔊</button>'
-      + '<span class="rule-chev">▾</span>'
+      + '<span class="rule-chev'+openCls+'">▾</span>'
       + '</div>'
-      + '<div class="rule-body"><span>'+r.d+'</span>'+svgBlock+'</div>'
+      + '<div class="rule-body'+openCls+'"><span>'+r.d+'</span>'+svgBlock+'</div>'
       + '</div>';
   }).join('');
 }
