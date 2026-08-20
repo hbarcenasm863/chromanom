@@ -2181,9 +2181,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₂=CH−Br  (bromoetileno)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Adición ×1</div>
-            <div class="mech-step-h">1 mol HX: H se une al C terminal (Markovnikov) → haloalqueno vinílico</div>
-            <div class="mech-step-txt">La primera adición sigue <strong>Markovnikov</strong>: el H⁺ va al C con más H (terminal). El carbocatión vinílico resultante es captado por Br⁻. Producto: <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). El triple enlace queda reducido a doble.</div>
+            <div class="mech-step-n">Paso 1 de 3 — La primera adición</div>
+            <div class="mech-step-h">1 mol de HX: el H se va al C con más H (Markovnikov, sí, la misma regla de siempre) → sale un haloalqueno vinílico</div>
+            <div class="mech-step-txt">Fíjense: esto es <strong>Markovnikov</strong> otra vez, la regla que ya conocen. El H⁺ se va al carbono que ya tiene más H (el terminal), y queda un carbocatión vinílico que el Br⁻ atrapa de inmediato. ¿Qué les queda? Un <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). Ojo con esto: el triple enlace no desaparece, solo baja a doble.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-1">
@@ -2194,9 +2194,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CHBr₂  (1,1-dibromoetano)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Adición ×2</div>
-            <div class="mech-step-h">2° mol HX: H al C con más H (ya tiene uno), X al C que ya lleva X → geminaldialuro</div>
-            <div class="mech-step-txt">En la segunda adición, el H va al CH₂= (más H), dejando al C ya halogenado recibir el <strong>segundo Br</strong>. Resultado: <em>geminaldialuro</em> (ambos X en el MISMO carbono). Ej: CH≡CH + 2HBr → CH₃−CHBr₂ (1,1-dibromoetano, no el 1,2-).</div>
+            <div class="mech-step-n">Paso 2 de 3 — Y ahora la segunda adición</div>
+            <div class="mech-step-h">El 2° mol de HX: el H sigue yendo al C con más H, y el X termina en el carbono que ya tenía uno → geminaldialuro</div>
+            <div class="mech-step-txt">Otra vez Markovnikov: el H se va al CH₂= (el que tiene más H), y eso deja al carbono que ya estaba halogenado recibiendo el <strong>segundo Br</strong>. ¿El resultado? Un <em>geminaldialuro</em> — los dos halógenos quedan en el MISMO carbono, no en carbonos vecinos. Truco de examen: CH≡CH + 2HBr da CH₃−CHBr₂ (1,1-dibromoetano), nunca el 1,2-.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-2">
@@ -2207,9 +2207,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">controlar por estequiometría</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Resumen</div>
-            <div class="mech-step-h">Triple enlace puede adicionar 1 o 2 moles de HX según la cantidad de reactivo disponible</div>
-            <div class="mech-step-txt">El resultado depende de la <strong>relación molar HX : alquino</strong>. Con 1 equiv → haloalqueno (aislable). Con 2 equiv → geminaldialuro. La selectividad ×1 requiere controlar cuidadosamente la adición. Ej industrial: PVC se produce a partir de cloruro de vinilo (HC≡CH + HCl → CH₂=CHCl).</div>
+            <div class="mech-step-n">Paso 3 de 3 — ¿Cómo controlan cuál producto sale?</div>
+            <div class="mech-step-h">Todo depende de cuánto HX le echen: con 1 mol paran en el haloalqueno, con 2 moles llegan al geminaldialuro</div>
+            <div class="mech-step-txt">Acá el control lo tienen ustedes: es pura <strong>estequiometría</strong>. Con 1 equivalente de HX se quedan en el haloalqueno (y sí, es aislable). Con 2 equivalentes, llegan al geminaldialuro. Eso sí, frenar justo en el ×1 exige controlar bien la cantidad que agregan — no es automático. Ejemplo que deben tener presente: el PVC sale de esta misma reacción, HC≡CH + HCl → CH₂=CHCl (cloruro de vinilo).</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
@@ -2235,8 +2235,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">1,1-dibromoetano (geminal)</div>
           </div>
         </div>
-        <div class="rxn-cond">1 mol HX → haloalqueno (aislable) · 2 mol HX → geminaldialuro (dos X en el mismo C)</div>
-        <div class="rxn-regla">📌 Markovnikov en cada paso · en la ×2 el X va al C ya halogenado</div>
+        <div class="rxn-cond">Con 1 mol de HX se quedan en el haloalqueno (aislable) · con 2 moles llegan al geminaldialuro (los dos X en el mismo C)</div>
+        <div class="rxn-regla">📌 Markovnikov manda en cada adición · y en la segunda, el X siempre cae en el C que ya estaba halogenado</div>
         <div class="rxn-ex-lbl">Resumen con acetileno</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + HBr (1 mol)</span>
@@ -2252,7 +2252,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🏭</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La adición de HCl al acetileno produce <strong>cloruro de vinilo (CH₂=CHCl)</strong>, el monómero del PVC (policloruro de vinilo). A escala mundial, es una de las reacciones industriales más importantes. El PVC fabricado a partir de esta reacción se usa en tuberías de acueducto, perfiles de ventanas y membranas impermeabilizantes en construcciones colombianas.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Cuando le agregan HCl al acetileno sale <strong>cloruro de vinilo (CH₂=CHCl)</strong>, y ese es el monómero del PVC. No es un dato menor: es una de las reacciones industriales más grandes del planeta. Ese mismo PVC termina en tuberías de acueducto, perfiles de ventanas y membranas impermeabilizantes en cualquier construcción colombiana que vean.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2364,9 +2364,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CHBr=CHBr  (trans-1,2-dibromoetileno)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Adición ×1</div>
-            <div class="mech-step-h">1 mol X₂: adición antiadición al triple enlace → dihaloalqueno trans-vicinal</div>
-            <div class="mech-step-txt">La primera adición de X₂ al triple enlace produce, por <strong>antiadición</strong> (igual que en alquenos), el <em>dihaloalqueno trans-vicinal</em>. Los dos X quedan en lados opuestos del doble enlace restante (configuración trans/E).</div>
+            <div class="mech-step-n">Paso 1 de 3 — La primera adición</div>
+            <div class="mech-step-h">1 mol de X₂ ataca el triple enlace por antiadición, igual que con los alquenos → sale un dihaloalqueno trans</div>
+            <div class="mech-step-txt">¿Se acuerdan de la antiadición en alquenos? Acá pasa exactamente lo mismo: el X₂ se suma al triple enlace por <strong>antiadición</strong> y les queda un <em>dihaloalqueno trans-vicinal</em>. Los dos X terminan en lados opuestos del doble enlace que sobra — configuración trans/E, no se les puede olvidar.</div>
           </div>
           <div class="mech-step" id="ms-ai-1-1">
             <div class="mech-vis">
@@ -2376,9 +2376,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">1,1,2,2-tetrabromoetano</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Adición ×2</div>
-            <div class="mech-step-h">Si hay exceso de X₂: segunda adición al doble enlace restante → tetrahaloalcano</div>
-            <div class="mech-step-txt">Con exceso de X₂, el dihaloalqueno reacciona como un alqueno normal: nueva antiadición → <strong>tetrahaloalcano</strong>. Ej: HC≡CH + 2Br₂ → CHBr₂−CHBr₂ (1,1,2,2-tetrabromoetano). El benceno no reacciona con Br₂ sin catalizador (diferencia clave: aromaticidad).</div>
+            <div class="mech-step-n">Paso 2 de 3 — Si les sobra X₂</div>
+            <div class="mech-step-h">Con exceso de X₂ el doble enlace que quedó también reacciona → llegan al tetrahaloalcano</div>
+            <div class="mech-step-txt">Si hay exceso de X₂, el dihaloalqueno ya no se comporta distinto a un alqueno cualquiera: otra antiadición y listo, <strong>tetrahaloalcano</strong>. Ej: HC≡CH + 2Br₂ → CHBr₂−CHBr₂ (1,1,2,2-tetrabromoetano). Y ojo con esto para que no se confundan: el benceno NO reacciona con Br₂ sin catalizador — esa es justo la diferencia que marca la aromaticidad.</div>
           </div>
           <div class="mech-step" id="ms-ai-1-2">
             <div class="mech-vis">
@@ -2388,9 +2388,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">triple enlace más reactivo que doble</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Resumen</div>
-            <div class="mech-step-h">1 equiv X₂ → dihaloalqueno trans · 2 equiv X₂ → tetrahaloalcano; igual que alquenos pero ×2 posible</div>
-            <div class="mech-step-txt">El triple enlace es <strong>más reactivo</strong> que el doble en adiciones electrofílicas porque tiene mayor densidad electrónica π disponible. La única diferencia con alquenos: puede adicionarse <em>dos veces</em>. Observación práctica: Br₂ decolora el alquino más rápido que el alqueno equivalente.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Lo que deben recordar</div>
+            <div class="mech-step-h">1 equivalente de X₂ da el dihaloalqueno trans, 2 equivalentes dan el tetrahaloalcano; es lo mismo que con alquenos, solo que acá se puede repetir</div>
+            <div class="mech-step-txt">El triple enlace es <strong>más reactivo</strong> que el doble frente a electrófilos, porque tiene más densidad electrónica π disponible para atacar. La única diferencia real con los alquenos es que acá el alquino se puede adicionar <em>dos veces</em>. Dato para el laboratorio: el Br₂ decolora un alquino más rápido que el alqueno equivalente, así que si ven eso, ya saben qué está pasando.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2425,7 +2425,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">💊</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La halogenación de alquinos produce <strong>dihaloalquenos y tetrahaloalcanos</strong> que son intermediarios clave en la síntesis de <strong>anestésicos halogenados</strong> (halotano, isoflurano). Estos anestésicos se usan en todas las cirugías de Colombia y se importan desde plantas que parten de derivados halogenados de alquinos.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Los <strong>dihaloalquenos y tetrahaloalcanos</strong> que salen de esta reacción son intermediarios clave para fabricar <strong>anestésicos halogenados</strong> (halotano, isoflurano). ¿Y saben qué? Esos mismos anestésicos son los que usan en todas las cirugías de Colombia, y las plantas que los producen parten justo de estos derivados halogenados de alquinos.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2537,9 +2537,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">⇒ cis-alqueno (Z)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Lindlar (cis)</div>
-            <div class="mech-step-h">Pd/CaCO₃ envenenado con Pb: H₂ se adiciona sin al triple enlace → alqueno CIS</div>
-            <div class="mech-step-txt">El catalizador de <strong>Lindlar</strong> (Pd/CaCO₃ + acetato de Pb) está "envenenado" para que solo reduzca triples a dobles (no más). La adsorción superficial entrega ambos H al <strong>mismo lado</strong> → alqueno <em>cis (Z)</em>. Ejemplo: dimetilacetileno → cis-2-buteno.</div>
+            <div class="mech-step-n">Paso 1 de 3 — Con Lindlar sale el cis</div>
+            <div class="mech-step-h">Pd/CaCO₃ envenenado con Pb: el H₂ se pega por el mismo lado del triple enlace → alqueno CIS</div>
+            <div class="mech-step-txt">Fíjense en el truco: el catalizador de <strong>Lindlar</strong> (Pd/CaCO₃ + acetato de Pb) está "envenenado" a propósito, justamente para que frene ahí — reduce el triple a doble y no sigue de largo hasta el alcano. Como los dos H se pegan desde la superficie del catalizador, entran por el <strong>mismo lado</strong> → les queda el alqueno <em>cis (Z)</em>. Ejemplo: dimetilacetileno → cis-2-buteno.</div>
           </div>
           <div class="mech-step" id="ms-ai-2-1">
             <div class="mech-vis">
@@ -2549,9 +2549,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c4t);font-weight:700;font-size:.82rem">⇒ trans-alqueno (E)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Na/NH₃ (trans)</div>
-            <div class="mech-step-h">Metal disuelto en amoníaco líquido reduce el triple enlace vía radical anión → alqueno TRANS</div>
-            <div class="mech-step-txt">El sodio metálico en amoníaco líquido disuelve electrones (electrones solvados) que reducen el triple enlace <strong>paso a paso</strong>: primero un e⁻ → radical anión vinílico; segundo H (del NH₃) se adiciona al radical → el intermedio más estable es el <em>trans</em>. Resultado: alqueno <strong>TRANS (E)</strong>.</div>
+            <div class="mech-step-n">Paso 2 de 3 — Y con Na/NH₃ sale el trans</div>
+            <div class="mech-step-h">El metal disuelto en amoníaco líquido reduce el triple enlace por otra vía, radical anión, y el resultado es el alqueno TRANS</div>
+            <div class="mech-step-txt">Acá cambia todo el mecanismo: el sodio metálico en amoníaco líquido suelta electrones solvados que van reduciendo el triple enlace <strong>paso a paso</strong> — primero entra un e⁻ y forma el radical anión vinílico, luego un H (del NH₃) se adiciona a ese radical. ¿Y por qué acá sale trans? Porque el intermedio más estable en el camino es justo el <em>trans</em>. Resultado: alqueno <strong>TRANS (E)</strong>.</div>
           </div>
           <div class="mech-step" id="ms-ai-2-2">
             <div class="mech-vis">
@@ -2561,9 +2561,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mismo alquino, ¡productos opuestos!</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Elección</div>
-            <div class="mech-step-h">Lindlar → alqueno CIS; Na/NH₃ → alqueno TRANS; control estereoquímico preciso</div>
-            <div class="mech-step-txt">El mismo alquino de partida puede dar dos productos distintos según el reductor: Lindlar → doble enlace <em>cis</em> (los dos grupos al mismo lado); Na/NH₃ → doble enlace <em>trans</em> (grupos en lados opuestos). Esa diferencia de geometría puede cambiar completamente la función de la molécula: por ejemplo, el cuerpo humano metaboliza de manera distinta los ácidos grasos cis y trans. En plaguicidas biológicos para café y banano, la geometría del doble enlace determina si la trampa de feromonas funciona o no.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Ustedes eligen la geometría</div>
+            <div class="mech-step-h">Lindlar da el alqueno CIS, Na/NH₃ da el alqueno TRANS: el mismo punto de partida, dos geometrías distintas según lo que elijan</div>
+            <div class="mech-step-txt">Este es el punto que quiero que se les quede grabado: el mismo alquino puede terminar en dos productos totalmente distintos, solo cambiando el reductor. Lindlar les da <em>cis</em> (los dos grupos del mismo lado); Na/NH₃ les da <em>trans</em> (grupos en lados opuestos). Y esa diferencia de geometría no es un detalle cosmético — cambia la función de la molécula por completo. El cuerpo humano metaboliza distinto los ácidos grasos cis y trans, y en los plaguicidas biológicos para café y banano, la geometría del doble enlace es la que decide si la trampa de feromonas funciona o no.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2588,8 +2588,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">etano (saturado)</div>
           </div>
         </div>
-        <div class="rxn-cond">Lindlar (Pd/CaCO₃ + acetato de Pb): envenenado → selectivo (solo ×1 → cis) · Ni/Pd sin envenenar → ×2 total → alcano</div>
-        <div class="rxn-regla">📌 Lindlar → cis (adición sin, mismo lado) · Na/NH₃(l) → trans-alqueno (adición anti)</div>
+        <div class="rxn-cond">Con Lindlar (Pd/CaCO₃ + acetato de Pb) envenenado se quedan en el cis, selectivo, solo ×1 · con Ni/Pd normal, sin envenenar, siguen de largo hasta el alcano (×2 total)</div>
+        <div class="rxn-regla">📌 Lindlar les da cis (adición por el mismo lado) · Na/NH₃(l) les da trans (adición por lados opuestos) — el mismo alquino, dos geometrías</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + H₂ →[Lindlar]</span>
@@ -2605,7 +2605,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🌿</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La reducción con catalizador de Lindlar produce alquenos <strong>cis (Z)</strong> con alta selectividad. Esto es crucial en síntesis de <strong>vitaminas</strong> (retinol — vitamina A — tiene varios dobles enlaces con geometría específica) y <strong>feromonas de insectos</strong> usadas en trampas de control biológico de plagas agrícolas en Colombia (café, banano).</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Con Lindlar consiguen alquenos <strong>cis (Z)</strong> con altísima selectividad, y eso es exactamente lo que necesitan para sintetizar <strong>vitaminas</strong> (el retinol, la vitamina A, tiene varios dobles enlaces con geometría muy específica) y <strong>feromonas de insectos</strong> — las mismas que usan en las trampas de control biológico de plagas en Colombia, para café y banano.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2702,9 +2702,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">(Markovnikov: OH al C interno)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Hidratación</div>
-            <div class="mech-step-h">H₂O + H⁺/Hg²⁺ se adiciona al triple enlace (Markovnikov) → enol inestable</div>
-            <div class="mech-step-txt">El catalizador de <strong>Hg²⁺/H₂SO₄</strong> activa el triple enlace. El agua se adiciona siguiendo Markovnikov: el OH va al carbono interno (más sustituido). El producto inmediato es un <strong>enol</strong> (OH en C con doble enlace), forma muy inestable.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El agua entra</div>
+            <div class="mech-step-h">El H₂O, con H⁺/Hg²⁺, se adiciona al triple enlace siguiendo Markovnikov → sale un enol inestable</div>
+            <div class="mech-step-txt">El catalizador de <strong>Hg²⁺/H₂SO₄</strong> activa el triple enlace para que el agua ataque. Y otra vez Markovnikov: el OH se va al carbono interno, el más sustituido. Pero ojo, lo que sale primero no es la cetona final — es un <strong>enol</strong> (OH sobre un carbono con doble enlace), y esa forma es muy inestable. No se queda ahí.</div>
           </div>
           <div class="mech-step" id="ms-ai-3-1">
             <div class="mech-vis">
@@ -2714,9 +2714,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio muy favorecido → ceto</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Tautomería</div>
-            <div class="mech-step-h">El enol tautomeriza espontáneamente: H migra del O al Cα → forma ceto (cetona o aldehído)</div>
-            <div class="mech-step-txt">La <strong>tautomería ceto-enólica</strong>: el H del −OH del enol migra al Cα (catalizando el H⁺ del medio), formando el grupo carbonilo C=O. El equilibrio está <strong>muy desplazado hacia la forma ceto</strong> (99.9% para la mayoría de cetonas). Es una reorganización de H, no una reacción de átomos distintos.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El enol no aguanta y se reacomoda</div>
+            <div class="mech-step-h">El enol tautomeriza solito: el H migra del O al Cα → ahí sí aparece la forma ceto (cetona o aldehído)</div>
+            <div class="mech-step-txt">Esto se llama <strong>tautomería ceto-enólica</strong>, y es más simple de lo que suena: el H del −OH del enol migra al carbono vecino (catalizado por el H⁺ del medio), y ahí se forma el grupo carbonilo C=O. Fíjense bien: no están entrando ni saliendo átomos nuevos, es solo un H que se mueve de lugar. Y el equilibrio queda <strong>muy inclinado hacia la forma ceto</strong> — cerca del 99.9% para la mayoría de las cetonas.</div>
           </div>
           <div class="mech-step" id="ms-ai-3-2">
             <div class="mech-vis">
@@ -2726,9 +2726,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HC≡CH + H₂O → CH₃CHO (etanal)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Producto final</div>
-            <div class="mech-step-h">Alquino interno → cetona · Alquino terminal (HC≡C−) → aldehído si HC≡CH o cetona si RC≡CH</div>
-            <div class="mech-step-txt">El producto final depende del alquino: <strong>alquino terminal RC≡CH</strong> → metil-cetona (RCOCH₃, Markovnikov). <strong>Acetileno (HC≡CH)</strong> → acetaldehído (CH₃CHO). Proceso industrial importante: síntesis de acetona (CH₃COCH₃) a partir de propino (CH₃C≡CH + H₂O).</div>
+            <div class="mech-step-n">Paso 3 de 3 — ¿Y cuál sale, cetona o aldehído?</div>
+            <div class="mech-step-h">Un alquino interno les da cetona; el único que da aldehído es el acetileno mismo, HC≡CH</div>
+            <div class="mech-step-txt">Ahí está el detalle que separa los casos: si el alquino es <strong>terminal RC≡CH</strong> (pero con un R distinto de H), sale una metil-cetona (RCOCH₃, siempre Markovnikov). El único caso especial es el <strong>acetileno (HC≡CH)</strong>, que da acetaldehído (CH₃CHO) — porque ahí no hay diferencia entre los dos carbonos para que Markovnikov elija. Proceso industrial importante para que lo recuerden: así se sintetiza acetona (CH₃COCH₃) a partir de propino (CH₃C≡CH + H₂O).</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2759,8 +2759,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">etanal (aldehído)</div>
           </div>
         </div>
-        <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ · mecanismo: C≡C + H₂O → enol → tautomería → carbonilo</div>
-        <div class="rxn-regla">📌 Alquino interno → cetona · solo HC≡CH → aldehído · Markovnikov: OH al C más sustituido</div>
+        <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ · el camino es siempre C≡C + H₂O → enol → tautomería → carbonilo</div>
+        <div class="rxn-regla">📌 Alquino interno → cetona · el único que da aldehído es HC≡CH · Markovnikov manda: el OH va al C más sustituido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">C≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
@@ -2776,7 +2776,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧪</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La hidratación del propino produce <strong>acetona (propanona)</strong>, uno de los disolventes industriales más usados en Colombia: disuelve pinturas, barnices y resinas, y es el componente activo del quitaesmalte. Ecopetrol y sus filiales producen acetona como subproducto de la refinación del petróleo; también se obtiene del proceso de fermentación de ciertas bacterias.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Cuando hidratan el propino sale <strong>acetona (propanona)</strong>, uno de los disolventes industriales más usados en Colombia — disuelve pinturas, barnices y resinas, y es el componente activo del quitaesmalte que seguramente tienen en la casa. Ecopetrol y sus filiales la producen como subproducto de la refinación del petróleo, y también se obtiene por fermentación de ciertas bacterias.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -2873,9 +2873,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mayor %s → mayor electronegatividad</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — ¿Por qué es ácido?</div>
-            <div class="mech-step-h">El H en C sp (alquino terminal) es más ácido porque el orbital sp tiene más carácter s (50%)</div>
-            <div class="mech-step-txt">El carbono del triple enlace sujeta los electrones de su enlace C−H <strong>más cerca del núcleo</strong> que en un doble o simple enlace. Eso hace que el H esté "menos protegido" por la nube electrónica y sea más fácil de arrancar con una base. En términos prácticos: el H terminal de un alquino es <strong>moderadamente ácido</strong> (escala pKa ≈ 25 — más ácido que el H de un alcano, pero menos ácido que el agua). Una base fuerte como NaNH₂ sí puede quitarle ese H, generando el anión acetiluro.</div>
+            <div class="mech-step-n">Paso 1 de 3 — ¿Por qué el alquino terminal es ácido?</div>
+            <div class="mech-step-h">El H sobre un C sp (alquino terminal) es más fácil de arrancar porque ese orbital sp tiene más carácter s (50%)</div>
+            <div class="mech-step-txt">Acá está la clave: el carbono del triple enlace sujeta los electrones del enlace C−H <strong>más cerca del núcleo</strong> que en un doble o simple enlace. ¿Qué significa eso para ustedes? Que el H queda "menos protegido" por la nube electrónica, y por lo tanto es más fácil de arrancar con una base. En números: el H terminal de un alquino es <strong>moderadamente ácido</strong> (pKa ≈ 25 — más ácido que el H de un alcano, pero bastante menos que el del agua). Y una base fuerte como NaNH₂ sí se lo puede llevar, dejando el anión acetiluro.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-1">
             <div class="mech-vis">
@@ -2885,9 +2885,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">acetiluro: nucleófilo fuerte</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Formación del acetiluro</div>
-            <div class="mech-step-h">Base fuerte (NaNH₂, BuLi) abstrae el H terminal → anión acetiluro R−C≡C⁻ (muy nucleófilo)</div>
-            <div class="mech-step-txt">La base fuerte <strong>NaNH₂</strong> (amiduro de sodio) tiene tanta "apetencia" por el H⁺ que puede arrancárselo al alquino terminal. El resultado es el <strong>anión acetiluro (R−C≡C⁻)</strong> — un carbono con carga negativa. Ese carbono negativo está muy "incómodo" y busca reaccionar: actúa como nucleófilo potente. En el siguiente paso verás cómo usa esa carga negativa para atacar a un halogenuro y formar un nuevo enlace C−C, alargando la cadena.</div>
+            <div class="mech-step-n">Paso 2 de 3 — Ahí nace el acetiluro</div>
+            <div class="mech-step-h">Una base fuerte (NaNH₂, BuLi) le arranca el H terminal → queda el anión acetiluro R−C≡C⁻, muy nucleófilo</div>
+            <div class="mech-step-txt">La base fuerte <strong>NaNH₂</strong> (amiduro de sodio) tiene tanta apetencia por el H⁺ que se lo arranca sin problema al alquino terminal. Lo que les queda es el <strong>anión acetiluro (R−C≡C⁻)</strong> — un carbono con carga negativa. Y ese carbono negativo no se queda quieto: está "incómodo" y busca con quién reaccionar, así que se comporta como un nucleófilo bien potente. Guarden esto: en el siguiente paso van a ver cómo usa esa carga negativa para atacar un halogenuro y armar un nuevo enlace C−C, alargando la cadena.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-2">
             <div class="mech-vis">
@@ -2897,9 +2897,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">cadena crece · alquino interno</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Síntesis</div>
-            <div class="mech-step-h">El acetiluro ataca electrófilos R'−X (SN2) formando alquinos internos → extensión de cadena en 1C</div>
-            <div class="mech-step-txt">El acetiluro ataca sustratos primarios (1°) por <strong>SN2</strong>: el par libre del C⁻ sp desplaza el haluro → nuevo enlace C−C. Esto <em>extiende la cadena</em> en 1 carbono. Estrategia de síntesis: HC≡CH → NaNH₂ → HC≡CNa → RX → RC≡CH (síntesis de alquinos de cadena larga).</div>
+            <div class="mech-step-n">Paso 3 de 3 — Para qué sirve todo esto: alargar cadenas</div>
+            <div class="mech-step-h">El acetiluro ataca electrófilos R'−X por SN2 y forma alquinos internos → así se extiende la cadena un carbono a la vez</div>
+            <div class="mech-step-txt">El acetiluro ataca sustratos primarios (1°) por <strong>SN2</strong>: el par libre del C⁻ sp desplaza al haluro y forma un nuevo enlace C−C. Con eso <em>extienden la cadena</em> un carbono. Truco de examen: esta es LA estrategia para armar alquinos de cadena larga en síntesis: HC≡CH → NaNH₂ → HC≡CNa → RX → RC≡CH.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2916,8 +2916,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">acetiluro sódico</div>
           </div>
         </div>
-        <div class="rxn-cond">pKa: alquino terminal ≈ 25 · alqueno ≈ 44 · alcano ≈ 50 · solo alquinos TERMINALES reaccionan</div>
-        <div class="rxn-regla">📌 C(sp) tiene 50% carácter s → mayor electronegatividad → enlace C−H más polar → H más ácido</div>
+        <div class="rxn-cond">pKa: alquino terminal ≈ 25 · alqueno ≈ 44 · alcano ≈ 50 · solo los alquinos TERMINALES reaccionan con la base</div>
+        <div class="rxn-regla">📌 El C(sp) tiene 50% de carácter s → más electronegatividad → enlace C−H más polar → H más fácil de arrancar</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">H</span>C≡CH + NaNH₂</span>
@@ -2927,7 +2927,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">⚗️</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> Los acetiluros metálicos (NaC≡CR) obtenidos de alquinos terminales son <strong>nucleófilos de síntesis</strong> que permiten construir cadenas carbonadas más largas. Esta estrategia es la base de la síntesis de <strong>terpenos</strong> (aromas naturales como el linalool del cilantro colombiano), ácidos grasos poliinsaturados (omega-3) y vitaminas A y E.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Los acetiluros metálicos (NaC≡CR) que sacan de alquinos terminales son <strong>nucleófilos de síntesis</strong>: con ellos construyen cadenas carbonadas más largas, un carbono a la vez. Esa es justo la estrategia detrás de la síntesis de <strong>terpenos</strong> (aromas naturales como el linalool del cilantro colombiano), de los ácidos grasos poliinsaturados (omega-3) y de las vitaminas A y E.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
