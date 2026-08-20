@@ -498,9 +498,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c4t);font-weight:700;font-size:.82rem">radical libre = muy reactivo</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Iniciación</div>
-            <div class="mech-step-h">¿Cómo inicia la reacción?</div>
-            <div class="mech-step-txt">El enlace Br−Br (o Cl−Cl) se rompe de forma <strong>homolítica</strong>: cada átomo se lleva <em>un</em> electrón, generando dos <strong>radicales libres X•</strong>. Este paso requiere <strong>energía luminosa (hν)</strong> o alta temperatura. Sin él la reacción no comienza.</div>
+            <div class="mech-step-n">Paso 1 de 3 — Iniciación: ¿de dónde sale el primer radical?</div>
+            <div class="mech-step-h">Fíjense: el enlace Br−Br (o Cl−Cl) se rompe homolíticamente con luz o calor → 2 radicales X•</div>
+            <div class="mech-step-txt">Acá está el arranque: el enlace <strong>Br−Br</strong> (o Cl−Cl) se rompe de forma <strong>homolítica</strong> — ojo, cada átomo se lleva <em>un solo</em> electrón, no los dos. Ahí nacen dos <strong>radicales libres X•</strong>, muy reactivos porque les falta completar el octeto. ¿Y qué necesitan para romperse así? <strong>Luz (hν)</strong> o calor. Sin esa energía, el enlace no se rompe y la cadena nunca arranca.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-1">
@@ -512,9 +512,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Br• se regenera → cadena continua</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Propagación</div>
-            <div class="mech-step-h">¿Cómo se propaga la cadena?</div>
-            <div class="mech-step-txt">La propagación son DOS pasos que se repiten: <strong>① Br• abstrae un H</strong> del alcano → forma HBr y el radical alquilo R•. <strong>② R• reacciona con Br₂</strong> → forma el producto R−Br y regenera Br•. Este ciclo se repite miles de veces por cada radical iniciado.</div>
+            <div class="mech-step-n">Paso 2 de 3 — Propagación: la cadena se sostiene sola</div>
+            <div class="mech-step-h">Dos pasos que se repiten: Br• le quita un H al alcano, luego R• le quita un Br al Br₂ — y así en bucle</div>
+            <div class="mech-step-txt">Truco de examen: la propagación son DOS pasos que se repiten en bucle. <strong>① Br• le abstrae un H</strong> al alcano → sale HBr y queda el radical alquilo R•. <strong>② Ese R• reacciona con Br₂</strong> → sale el producto R−Br y se regenera Br•. Fíjense que el radical con el que empezamos vuelve a aparecer al final — por eso el ciclo se sostiene solo, sin gastar más energía, y se repite miles de veces por cada radical que se inició.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-2">
@@ -526,9 +526,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ningún radical queda libre → cadena termina</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Terminación</div>
-            <div class="mech-step-h">¿Cómo termina la cadena de radicales?</div>
-            <div class="mech-step-txt">Cuando dos radicales se encuentran se <strong>combinan formando un enlace covalente</strong> (ningún radical queda suelto). Los productos de terminación son R−X, R−R o X₂. La terminación es poco frecuente porque los radicales son muy reactivos y suelen propagar antes de terminar.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Terminación: ¿cuándo para la cadena?</div>
+            <div class="mech-step-h">Cuando dos radicales se topan y se unen en un enlace covalente, ahí muere la cadena</div>
+            <div class="mech-step-txt">La cadena no dura para siempre: cuando dos radicales <strong>se encuentran</strong>, se combinan y forman un enlace covalente — ningún radical queda suelto. Pueden salir R−X, R−R o X₂, según quién se tope con quién. Ojo con esto: la terminación es rara, porque hay muchísimos más R−H y X₂ dando vueltas que radicales, así que casi siempre un radical propaga antes de encontrarse con otro.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
@@ -547,7 +547,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">① Iniciación: X₂ →[hν]→ 2 X•  ② Propagación: X• + R−H → R• + HX  |  R• + X₂ → R−X + X•  ③ Terminación: 2 R• → R−R</div>
-        <div class="rxn-regla">📌 Br₂ es más selectivo que Cl₂: prefiere el H terciario (radical más estable)</div>
+        <div class="rxn-regla">📌 Ojo con esto: Br₂ es mucho más selectivo que Cl₂ — va directo por el H terciario, porque ahí el radical que se forma es el más estable</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.08s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 28 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₄</tspan></text></svg></span>
@@ -565,7 +565,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🇨🇴</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La halogenación de alcanos es la base para fabricar <strong>cloroformo (CHCl₃)</strong> — usado como disolvente en laboratorios colombianos — y el <strong>clorometano (CH₃Cl)</strong>, intermediario en la producción de siliconas y refrigerantes. También origina los clorofluorocarbonos (CFC), hoy prohibidos por su efecto en la capa de ozono.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Con esta reacción se fabrica el <strong>cloroformo (CHCl₃)</strong> que usan como disolvente en laboratorios colombianos, y el <strong>clorometano (CH₃Cl)</strong>, que es materia prima para hacer siliconas y refrigerantes. Y de acá también salieron los clorofluorocarbonos (CFC) — esos que hoy están prohibidos porque le hacían hueco a la capa de ozono.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -671,9 +671,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c4t);font-weight:700;font-size:.82rem">TODOS los H → H₂O</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Condición</div>
-            <div class="mech-step-h">Exceso de O₂ y suficiente temperatura garantizan la oxidación total de todos los átomos</div>
-            <div class="mech-step-txt">Para que la combustión sea completa se necesita <strong>exceso de O₂</strong>. Con O₂ suficiente, cada átomo de carbono se oxida completamente hasta CO₂ y cada par de átomos de H forma H₂O. La llama es azulada o invisible (indicador visual de combustión completa).</div>
+            <div class="mech-step-n">Paso 1 de 3 — ¿Qué hace falta para que la combustión sea completa?</div>
+            <div class="mech-step-h">Exceso de O₂: con suficiente oxígeno, cada C llega hasta CO₂ y cada H termina en H₂O</div>
+            <div class="mech-step-txt">Acá la condición es una sola: <strong>exceso de O₂</strong>. Denle suficiente oxígeno al alcano y cada átomo de carbono se oxida hasta el final — CO₂ — y cada par de hidrógenos termina como H₂O. ¿Cómo saben si la combustión fue completa? Miren la llama: si es azulada o casi invisible, ahí está la pista.</div>
           </div>
           <div class="mech-step" id="ms-al-1-1">
             <div class="mech-vis">
@@ -683,9 +683,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₃H₈ + 5 O₂  →  3CO₂ + 4H₂O</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Balance</div>
-            <div class="mech-step-h">El balance estequiométrico requiere (3n+1)/2 moles de O₂ por mol de CₙH₂ₙ₊₂</div>
-            <div class="mech-step-txt">Fórmula práctica: CₙH₂ₙ₊₂ necesita <em>(3n+1)/2</em> mol O₂. <strong>Ejemplo CH₄</strong>: 1 C → 1 CO₂; 4 H → 2 H₂O; O₂ = (3·1+1)/2 = 2. <strong>C₃H₈</strong>: (3·3+1)/2 = 5 mol O₂.</div>
+            <div class="mech-step-n">Paso 2 de 3 — Truco de examen para balancear rápido</div>
+            <div class="mech-step-h">CₙH₂ₙ₊₂ siempre necesita (3n+1)/2 moles de O₂ — memoricen esta fórmula</div>
+            <div class="mech-step-txt">Truco de examen: no se pongan a tantear coeficientes — CₙH₂ₙ₊₂ siempre necesita <em>(3n+1)/2</em> mol de O₂. Verifíquenlo con <strong>CH₄</strong>: 1 C → 1 CO₂; 4 H → 2 H₂O; O₂ = (3·1+1)/2 = 2. Con <strong>C₃H₈</strong>: (3·3+1)/2 = 5 mol O₂. Aplíquenla y ahorran tiempo.</div>
           </div>
           <div class="mech-step" id="ms-al-1-2">
             <div class="mech-vis">
@@ -695,9 +695,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Aplicaciones: cocina, calefacción, motores</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Energía</div>
-            <div class="mech-step-h">La combustión libera energía (exotérmica) útil como combustible industrial y doméstico</div>
-            <div class="mech-step-txt">La combustión es <strong>exotérmica</strong>: los productos (CO₂, H₂O) tienen menor energía que los reactivos. La energía liberada es el calor de combustión. <strong>Uso práctico</strong>: gas natural (metano), propano (gas de cocina), gasolina (mezcla de alcanos C₅–C₁₂).</div>
+            <div class="mech-step-n">Paso 3 de 3 — ¿Y por qué nos sirve esto como combustible?</div>
+            <div class="mech-step-h">Es exotérmica: los productos quedan con menos energía que los reactivos, y esa diferencia se libera como calor</div>
+            <div class="mech-step-txt">Fíjense: la combustión es <strong>exotérmica</strong>, o sea que el CO₂ y el H₂O que quedan tienen menos energía que el alcano y el O₂ con que empezamos. Esa diferencia no desaparece — se libera como calor de combustión, y de ahí sale toda la energía útil. Por eso el gas natural, el propano de la estufa y la gasolina (una mezcla de alcanos C₅–C₁₂) son combustibles.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -714,7 +714,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">gases de combustión</div>
           </div>
         </div>
-        <div class="rxn-cond">Exceso de O₂ · exotérmica · CₙH₂ₙ (cicloalcano) usa 3n/2 mol O₂</div>
+        <div class="rxn-cond">Necesitan exceso de O₂ · es exotérmica · si es un cicloalcano CₙH₂ₙ, usa 3n/2 mol O₂</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₄ + 2 O₂</span>
@@ -730,7 +730,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🇨🇴</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> Cada vez que prendes la estufa de tu casa con <strong>gas propano</strong> (zonas rurales de Colombia) o gas natural (metano, ciudades), estás aprovechando la combustión completa de alcanos. El ACPM (diésel) que mueve los camiones de carga en Colombia es también una mezcla de alcanos de 12–20 carbonos que, al quemarse completo, libera la energía del motor.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Cada vez que prenden la estufa con <strong>gas propano</strong> (en el campo colombiano) o gas natural (metano, en las ciudades), están viendo esta combustión completa en acción. Y el ACPM (diésel) que mueve los camiones de carga acá también es una mezcla de alcanos de 12 a 20 carbonos: al quemarse completo, ahí sale la energía que mueve el motor.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -837,9 +837,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Si moderado: CO + H₂O</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — O₂ limitado</div>
-            <div class="mech-step-h">Con poco O₂ el carbono no alcanza a oxidarse completamente y se forman CO y/o C (hollín)</div>
-            <div class="mech-step-txt">Cuando el <strong>O₂ es insuficiente</strong>, el carbono no llega a oxidarse hasta CO₂. Dependiendo de cuánto O₂ hay: si es muy poco se deposita <strong>carbono sólido (hollín)</strong>; si es moderado se forma el gas tóxico <strong>CO (monóxido de carbono)</strong>.</div>
+            <div class="mech-step-n">Paso 1 de 3 — ¿Qué pasa cuando falta O₂?</div>
+            <div class="mech-step-h">Con poco O₂ el carbono se queda a mitad de camino: sale CO y/o C sólido (hollín)</div>
+            <div class="mech-step-txt">Acá el problema es sencillo: si el <strong>O₂ no alcanza</strong>, el carbono no llega hasta CO₂ — se queda a mitad de camino. Y cuánto O₂ haya define qué sale: si es muy poquito, se deposita <strong>carbono sólido</strong>, o sea hollín; si hay algo más pero sigue faltando, se forma el gas tóxico <strong>CO (monóxido de carbono)</strong>.</div>
           </div>
           <div class="mech-step" id="ms-al-2-1">
             <div class="mech-vis">
@@ -850,9 +850,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CO₂ (completa) + H₂O</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Productos</div>
-            <div class="mech-step-h">CO es inodoro, incoloro y extremadamente tóxico — se une a la hemoglobina bloqueando el O₂</div>
-            <div class="mech-step-txt">El CO es peligroso porque se une a la hemoglobina con <strong>200× más afinidad</strong> que el O₂, impidiendo el transporte de oxígeno (intoxicación por CO). El hollín (C) ensucia y tapa cañerías. La llama amarilla/naranja es <em>señal visual</em> de combustión incompleta.</div>
+            <div class="mech-step-n">Paso 2 de 3 — ¿Por qué el CO es tan peligroso?</div>
+            <div class="mech-step-h">Se pega a la hemoglobina con 200 veces más afinidad que el O₂ y le quita el puesto</div>
+            <div class="mech-step-txt">Ojo con esto, porque acá está el peligro real: el CO se une a la hemoglobina con <strong>200 veces más afinidad</strong> que el O₂. Le quita el puesto y bloquea el transporte de oxígeno en la sangre — de ahí la intoxicación. El hollín (C), aunque menos letal, tampoco es inofensivo: ensucia y tapa cañerías. ¿Cómo lo detectan a simple vista? La <em>llama amarilla o anaranjada</em> es la señal de que la combustión está incompleta.</div>
           </div>
           <div class="mech-step" id="ms-al-2-2">
             <div class="mech-vis">
@@ -862,9 +862,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Misma fórmula del hidrocarburo, distinto O₂</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Comparación</div>
-            <div class="mech-step-h">Completa → azul/invisible · Incompleta → amarilla/naranja; elige el combustible según el contexto</div>
-            <div class="mech-step-txt"><strong>Regla práctica</strong>: si la llama de un quemador es amarilla → ajustar el aire (más O₂). En motores, la combustión incompleta genera hollín que obstruye el catalizador. <strong>Aplicación</strong>: el análisis de los gases de escape revela si la combustión es completa o no.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Comparemos: llama azul contra llama amarilla</div>
+            <div class="mech-step-h">Completa → azul o invisible · Incompleta → amarilla o naranja; la llama les dice todo</div>
+            <div class="mech-step-txt">Regla práctica para el laboratorio o la casa: si la llama de un quemador sale amarilla, ábranle más aire — le falta O₂. En los motores, la combustión incompleta deja hollín que termina tapando el catalizador. Y así funciona la revisión de gases de escape del carro: analizando lo que sale del tubo, saben si la combustión fue completa o no.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -883,8 +883,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">hollín / tizne</div>
           </div>
         </div>
-        <div class="rxn-cond">Señal: llama anaranjada/amarilla con humo negro</div>
-        <div class="rxn-regla">⚠️ CO: incoloro, inodoro y tóxico — se une a la hemoglobina bloqueando el O₂</div>
+        <div class="rxn-cond">La señal es la llama: anaranjada o amarilla, con humo negro</div>
+        <div class="rxn-regla">⚠️ Ojo con esto: el CO es incoloro, inodoro y tóxico — se les pega a la hemoglobina y bloquea el transporte de O₂</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">2 CH₄ + 3 O₂</span>
@@ -894,7 +894,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">⚠️</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La combustión incompleta en hogares con mala ventilación produce <strong>monóxido de carbono (CO)</strong> — gas inodoro e incoloro que causa intoxicaciones graves. En Colombia, los calentadores de agua a gas sin salida exterior son causa frecuente de accidentes. La <strong>llama amarilla</strong> del quemador es la señal visual de combustión incompleta: si ves esa llama, aumenta la ventilación.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Esta es la reacción detrás de los accidentes por <strong>monóxido de carbono (CO)</strong> en casas con mala ventilación — un gas que no se ve ni se huele, y por eso mata sin avisar. En Colombia, los calentadores de agua a gas sin salida al exterior son la causa más frecuente. Guárdense esta señal: si ven la <strong>llama amarilla</strong> del quemador, esa es la combustión incompleta avisándoles — abran ventana ya.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -988,9 +988,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--c4t);font-weight:700;font-size:.82rem">energía de tensión: ~115 kJ/mol</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Tensión angular</div>
-            <div class="mech-step-h">El ángulo C−C−C forzado a 60° (vs 109.5° ideal) hace al ciclopropano muy reactivo</div>
-            <div class="mech-step-txt">Un carbono unido a 4 grupos prefiere ángulos de <strong>109.5°</strong> entre sus enlaces — ese es su ángulo "cómodo" (como abrir los brazos en forma de estrella). En el ciclopropano, los tres carbonos forman un <strong>triángulo</strong>, y los ángulos se comprimen a solo <strong>60°</strong> — como doblar los brazos a la fuerza. Esa compresión almacena energía (tensión), y el anillo "quiere" abrirse para liberarla. Por eso reacciona como si tuviera un doble enlace: se abre y añade nuevos grupos en los extremos.</div>
+            <div class="mech-step-n">Paso 1 de 3 — ¿Por qué el ciclopropano es tan raro entre los alcanos?</div>
+            <div class="mech-step-h">El ángulo C−C−C queda forzado a 60° en vez de los 109.5° cómodos, y eso lo deja tenso y reactivo</div>
+            <div class="mech-step-txt">Fíjense en esto: un carbono con 4 grupos quiere ángulos de <strong>109.5°</strong> entre sus enlaces — es su postura "cómoda". Pero en el ciclopropano, los tres carbonos están obligados a formar un <strong>triángulo</strong>, y ahí los ángulos se aprietan hasta <strong>60°</strong>. Imagínense doblar los brazos a la fuerza: eso guarda energía, tensión, y el anillo "quiere" liberarla abriéndose. Por eso, aunque es un alcano, se comporta como si tuviera un doble enlace: se abre y le entran grupos nuevos por los extremos.</div>
           </div>
           <div class="mech-step" id="ms-al-3-1">
             <div class="mech-vis">
@@ -1000,9 +1000,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ruptura del C−C más tenso</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Ataque</div>
-            <div class="mech-step-h">H⁺ del HX protona uno de los C del anillo; el enlace C−C opuesto se rompe heterolíticamente</div>
-            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> ataca uno de los carbonos del anillo. La tensión del anillo facilita la ruptura heterolítica del enlace C−C opuesto, generando un <strong>carbocatión en el extremo</strong>. Este paso es el determinante de la velocidad.</div>
+            <div class="mech-step-n">Paso 2 de 3 — El H⁺ ataca y el anillo cede</div>
+            <div class="mech-step-h">El H⁺ del HX protona un carbono del anillo, y esa misma tensión rompe el enlace C−C de enfrente</div>
+            <div class="mech-step-txt">Acá está la jugada: el <strong>H⁺ del HX</strong> ataca uno de los carbonos del anillo. Y como el anillo ya está tenso, esa tensión ayuda a que el enlace C−C opuesto se rompa heterolíticamente — sin mucho esfuerzo extra. Ahí queda un <strong>carbocatión en el extremo</strong>. Este es el paso que determina qué tan rápido va toda la reacción.</div>
           </div>
           <div class="mech-step" id="ms-al-3-2">
             <div class="mech-vis">
@@ -1012,9 +1012,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">1-bromopropano (cadena abierta)</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Cierre</div>
-            <div class="mech-step-h">X⁻ ataca el carbocatión → 1-haloalcano de cadena abierta (no se aplica Markovnikov en anillo simétrico)</div>
-            <div class="mech-step-txt">El <strong>X⁻</strong> (Br⁻, Cl⁻) ataca el carbocatión, cerrando el mecanismo. El producto es un <strong>haloalcano de cadena abierta</strong>. Nota: ciclopentano y superiores tienen ángulos más cercanos a 109.5° y <em>no</em> abren por adición (reaccionan como alcanos por SR).</div>
+            <div class="mech-step-n">Paso 3 de 3 — El X⁻ cierra el trato</div>
+            <div class="mech-step-h">X⁻ ataca el carbocatión y sale un haloalcano de cadena abierta — no hay Markovnikov aquí porque el anillo es simétrico</div>
+            <div class="mech-step-txt">El <strong>X⁻</strong> (Br⁻, Cl⁻) ataca ese carbocatión y ahí se cierra el mecanismo. ¿El resultado? Un <strong>haloalcano de cadena abierta</strong>, ya no un anillo. Y ojo con esto: ciclopentano y anillos más grandes tienen ángulos ya cercanos a 109.5°, así que <em>no</em> se abren por adición — esos se comportan como alcanos normales y reaccionan por SR.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1031,8 +1031,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">1-bromopropano (cadena abierta)</div>
           </div>
         </div>
-        <div class="rxn-cond">Ángulo ideal C−C−C = 109.5° · ciclopropano forzado a 60° → tensión extrema → apertura espontánea · ciclobutano y superiores son estables</div>
-        <div class="rxn-regla">📌 ≥4C cicloalcanos reaccionan como alcanos (SR) · solo ciclopropano abre por adición</div>
+        <div class="rxn-cond">El ángulo ideal C−C−C es 109.5° · el ciclopropano queda forzado a 60° → tensión extrema → se abre casi espontáneo · ciclobutano y superiores ya son estables</div>
+        <div class="rxn-regla">📌 Truco de examen: cicloalcanos de ≥4 carbonos reaccionan como alcanos normales (SR) — solo el ciclopropano abre por adición</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">c-C₃H₆ + HBr</span>
@@ -1042,7 +1042,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">💉</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> El <strong>ciclopropano</strong> fue el primer anestésico inhalado usado masivamente en cirugías del siglo XX. Hoy se reemplazó por anestésicos más seguros (isoflurano, sevoflurano), pero su historia ilustra cómo la inestabilidad química del anillo de tres carbonos tiene consecuencias biológicas directas. Los derivados de ciclopropano también aparecen en insecticidas piretroides (como la cipermetrina, usada en Colombia).</div>
+  <div><strong>¿Para qué les sirve esto?</strong> El <strong>ciclopropano</strong> fue el primer anestésico inhalado que se usó masivamente en cirugías del siglo XX. Hoy ya no se usa — lo reemplazaron anestésicos más seguros (isoflurano, sevoflurano) — pero su historia les muestra algo importante: esa inestabilidad química del anillo de tres carbonos que acabamos de ver tiene consecuencias biológicas reales. Y no crean que quedó solo en la historia: derivados de ciclopropano siguen apareciendo en insecticidas piretroides, como la cipermetrina que se usa acá en Colombia.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
