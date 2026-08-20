@@ -205,14 +205,19 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .rxnq-blank-box{background:#fce7f3;border:2.5px dashed #9d174d;border-radius:8px;
   padding:10px 22px;display:flex;align-items:center;justify-content:center;
   min-width:70px;color:#9d174d;font-weight:700;font-size:1.1rem;flex-shrink:0}
-.rxnq-opts{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-.rxnq-opt{width:100%;text-align:left;padding:10px 14px;border-radius:8px;
+.rxnq-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:4px}
+.rxnq-opt{width:100%;text-align:center;padding:10px 12px;border-radius:8px;
   border:2px solid var(--brd,#e2e8f0);background:var(--surf,#fff);
   cursor:pointer;font-size:.88rem;font-family:'JetBrains Mono',monospace;
-  transition:background .15s,border-color .15s;color:var(--tx)}
+  transition:background .15s,border-color .15s;color:var(--tx);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .rxnq-opt:hover:not(:disabled){background:var(--surf2);border-color:var(--c1)}
 .rxnq-opt.correct{background:#d1fae5;border-color:#059669;color:#065f46}
 .rxnq-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.rxnq-opt-mol{width:100%;display:flex;justify-content:center;align-items:center;min-height:52px}
+.rxnq-opt-mol svg{max-width:100%;height:auto;display:block;overflow:visible}
+.rxnq-opt-name{font-size:.72rem;color:var(--dimmer,#94a3b8);font-weight:600;text-align:center;font-family:'Outfit',sans-serif}
+.rxnq-opt-txt{font-size:.85rem;text-align:center}
 
 /* Rxnq prominent reactant display — like mol-card */
 .rxnq-mol-display{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r,12px);
@@ -4536,6 +4541,26 @@ window._rxnqSvg=function(str){
   }}catch(e){}
   return`<span class="rxnq-mol-txt">${str}</span>`;
 };
+// For an answer option like "CH₃−CH(Br)−CH₃ (2-bromopropano)": tries to render
+// the formula as a branching semi-developed structure (substituents as bonds
+// coming off the carbon, not "(Br)" text) plus the name as a caption below.
+// Returns null when the option isn't a parseable molecule (reagents, conditions,
+// reaction names) so the caller can fall back to plain text.
+window._rxnqOptContent=function(str){
+  const m=str.match(/^(.*?)\s*\(([^()]{2,60})\)\s*$/);
+  const formula=(m?m[1]:str).trim();
+  const name=m?m[2].trim():null;
+  try{const c=_pcs(formula);if(c&&c.length){
+    let sv=mkDevSVG(c);
+    if(sv){
+      const vb=sv.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+      if(vb)sv=sv.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+      sv=sv.replace('style="display:block;margin:auto"','style="display:block;overflow:visible;max-width:100%;height:auto"');
+      return{svg:sv,name};
+    }
+  }}catch(e){}
+  return null;
+};
 // Returns <div class="rxnq-mol-box">...</div> for inline/small use
 window._rxnqMolBox=function(str){
   return`<div class="rxnq-mol-box">${window._rxnqSvg(str)}</div>`;
@@ -4613,16 +4638,22 @@ function buildRxnQ(q){
       ${arrowCol(q.condicion)}
       ${_small(q.producto,q.mol_p)}`;
   }
+  function _escAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');}
+  function _optInner(o){
+    const rc=window._rxnqOptContent(o);
+    if(rc)return`<div class="rxnq-opt-mol">${rc.svg}</div>${rc.name?`<div class="rxnq-opt-name">${rc.name}</div>`:''}`;
+    return`<span class="rxnq-opt-txt">${o}</span>`;
+  }
   const opts=shuffle(q.opts);
   return`${reactantCard}<div class="rxnq-eq">${eqHtml}</div>
-    <div class="rxnq-opts">${opts.map(o=>`<button class="rxnq-opt" onclick="checkRxnQ('${o.replace(/'/,"\\'").replace(/\n/g,' ')}',this)">${o}</button>`).join('')}</div>`;
+    <div class="rxnq-opts">${opts.map(o=>`<button class="rxnq-opt" data-ans="${_escAttr(o)}" onclick="checkRxnQ(this.dataset.ans,this)">${_optInner(o)}</button>`).join('')}</div>`;
 }
 function checkRxnQ(ans,btn){
   if(answered)return;
   answered=true;stopTimer();
   const q=questions[qIdx];
   const allBtns=document.querySelectorAll('.rxnq-opt');
-  allBtns.forEach(b=>{b.disabled=true;if(b.textContent===q.ans)b.classList.add('correct');});
+  allBtns.forEach(b=>{b.disabled=true;if(b.dataset.ans===q.ans)b.classList.add('correct');});
   const ok=norm(ans)===norm(q.ans);
   if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
   else btn.classList.add('wrong');
