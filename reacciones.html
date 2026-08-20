@@ -1081,7 +1081,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="mk-box">
       <div class="mk-title">📌 Regla de Markovnikov</div>
-      <p style="font-size:.8rem;color:var(--c3t);margin-bottom:12px">En la adición de <strong>HX</strong> (o H₂O) a un alqueno asimétrico, el <strong>H</strong> va al carbono con <em>más H</em> (menos sustituido) y el <strong>X</strong> al carbono con <em>más sustituyentes</em> (más sustituido). El carbocatión más estable es el intermedio.</p>
+      <p style="font-size:.8rem;color:var(--c3t);margin-bottom:12px">Fíjense en esto, porque lo van a usar en casi todas las reacciones de esta pestaña: cuando le agregan <strong>HX</strong> (o H₂O) a un alqueno asimétrico, el <strong>H</strong> se va al carbono con <em>más H</em> (menos sustituido) y el <strong>X</strong> al carbono con <em>más sustituyentes</em> (más sustituido). ¿Por qué? Porque así se forma el carbocatión intermedio más estable.</p>
       <!-- Visual comparison: correcto vs incorrecto -->
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
         <div style="flex:1;min-width:200px;background:rgba(22,163,74,.1);border:1.5px solid #16a34a;border-radius:var(--rs);padding:10px 12px">
@@ -1196,7 +1196,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
             <div class="mech-step-h">H⁺ del HX protona el carbono del doble enlace con MÁS hidrógenos (menos sustituido)</div>
-            <div class="mech-step-txt">El <strong>H⁺ del HX</strong> se adiciona al carbono del doble enlace que tiene <em>más hidrógenos</em>. Esto genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. El H siempre va al C con más H porque el carbocatión resultante es el más estabilizado.</div>
+            <div class="mech-step-txt">Fíjense en esto: el <strong>H⁺ del HX</strong> no cae en cualquier carbono del doble enlace — se va al que tiene <em>más hidrógenos</em>. ¿Por qué? Porque así se genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. La reacción "elige" el camino más fácil, y ese camino es el que deja la carga positiva en el carbono más sustituido.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
@@ -1211,7 +1211,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Carbocatión</div>
             <div class="mech-step-h">El carbocatión se estabiliza por hiperconjugación e inducción de los grupos alquilo vecinos</div>
-            <div class="mech-step-txt">El carbono con carga positiva (carbocatión) es inestable — le faltan electrones. Los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor <strong>donan un poco de su densidad electrónica</strong> al carbono positivo, estabilizándolo como si fueran "vecinos solidarios". Más grupos alquilo = más solidaridad = más estabilidad: <strong>3° > 2° > 1°</strong>. La reacción siempre elige el camino que pasa por el carbocatión más estable — el que requiere menos energía para formarse.</div>
+            <div class="mech-step-txt">Ese carbono con carga positiva está incómodo — le faltan electrones. Y aquí el detalle que deben recordar: los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor le <strong>donan un poco de su densidad electrónica</strong>, como vecinos solidarios que le prestan una mano. Mientras más grupos alquilo tenga pegados, más ayuda recibe: <strong>3° > 2° > 1°</strong>. Y la reacción, como siempre, toma el camino más cómodo — el del carbocatión más estable.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
@@ -1225,7 +1225,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Ataque de X⁻</div>
             <div class="mech-step-h">X⁻ ataca el carbocatión por cualquier cara → producto de Markovnikov (X en C más sustituido)</div>
-            <div class="mech-step-txt">El haluro <strong>X⁻</strong> (nucleófilo) ataca el carbocatión plano por cualquier cara. El resultado es el <strong>haloalcano de Markovnikov</strong>: X en el carbono más sustituido (con menos H). Este mecanismo de dos pasos es la <em>adición electrofílica</em> clásica al doble enlace.</div>
+            <div class="mech-step-txt">Y aquí se cierra el trato: el haluro <strong>X⁻</strong> (nucleófilo) ataca ese carbocatión plano, y como es plano, le puede pegar por cualquier cara. ¿El resultado? El <strong>haloalcano de Markovnikov</strong>, con X en el carbono más sustituido. Ojo con esto: este mecanismo de dos pasos — protonación y ataque del nucleófilo — es la <em>adición electrofílica</em> clásica, la que van a ver una y otra vez en este tema.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
@@ -1243,8 +1243,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">2-bromopropano · Br al C más sustituido</div>
           </div>
         </div>
-        <div class="rxn-cond">Reactivo: HCl, HBr o HI · T° ambiente, sin catalizador · X = Cl, Br, I</div>
-        <div class="rxn-regla">📌 Markovnikov: H → C con más H (menos sustituido) · X → C con menos H (más sustituido)</div>
+        <div class="rxn-cond">Necesitan: HCl, HBr o HI · trabaja a T° ambiente, sin catalizador · X = Cl, Br, I</div>
+        <div class="rxn-regla">📌 Truco de examen: H → C con más H (menos sustituido) · X → C con menos H (más sustituido)</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -1262,7 +1262,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧪</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La hidrohalogenación del propileno (CH₂=CH−CH₃ + HCl) produce <strong>cloruro de isopropilo</strong>, intermediario en la síntesis de ibuprofeno y otros antiinflamatorios genéricos. Colombia es el mayor productor de medicamentos genéricos de Latinoamérica, y estas reacciones de adición a dobles enlaces son pasos clave en sus rutas de síntesis.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La hidrohalogenación del propileno (CH₂=CH−CH₃ + HCl) produce <strong>cloruro de isopropilo</strong>, intermediario en la síntesis de ibuprofeno y otros antiinflamatorios genéricos. Colombia es el mayor productor de medicamentos genéricos de Latinoamérica, así que esta reacción de adición que acaban de aprender es un paso clave en rutas de síntesis reales.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1367,7 +1367,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Polarización</div>
             <div class="mech-step-h">El doble enlace π polariza el X₂: un X se vuelve electrofílico (δ+) y el otro nucleofílico (δ−)</div>
-            <div class="mech-step-txt">El doble enlace π, rico en electrones, <strong>induce un dipolo</strong> en el Br₂: el Br más cercano adquiere carga parcial positiva (δ+) y el más lejano carga negativa (δ−). Este Br(δ+) actúa como electrófilo en el paso siguiente.</div>
+            <div class="mech-step-txt">Fíjense en esto: el Br₂ no tiene carga, pero cuando se acerca al doble enlace, la nube π —rica en electrones— <strong>lo polariza</strong>. El Br más cercano queda con carga parcial positiva (δ+) y el más lejano con δ−. Ese Br(δ+) es el que va a actuar como electrófilo en el paso siguiente.</div>
           </div>
           <div class="mech-step" id="ms-aq-1-1">
             <div class="mech-vis">
@@ -1379,7 +1379,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Ion halonio</div>
             <div class="mech-step-h">El π ataca al Br(δ+), formando un ión puente de bromonio cíclico de 3 miembros</div>
-            <div class="mech-step-txt">Los electrones π atacan al Br(δ+) formando el <strong>ión puente de bromonio</strong>: un catión cíclico de 3 miembros donde el Br comparte carga con ambos carbonos. El Br⁻ resultante queda libre en solución.</div>
+            <div class="mech-step-txt">Acá está la jugada: los electrones π atacan a ese Br(δ+) y forman el <strong>ión puente de bromonio</strong> — un catión cíclico de 3 miembros donde el Br queda "montado" sobre los dos carbonos a la vez, compartiendo carga con ambos. El Br⁻ que queda libre en solución va a ser clave en el siguiente paso.</div>
           </div>
           <div class="mech-step" id="ms-aq-1-2">
             <div class="mech-vis">
@@ -1391,7 +1391,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Antiadición</div>
             <div class="mech-step-h">Br⁻ ataca desde la cara OPUESTA al puente de bromonio → adición trans (antiadición)</div>
-            <div class="mech-step-txt">El ion bromonio bloquea una cara, por lo que el Br⁻ <strong>solo puede atacar por la cara opuesta</strong>. Esto produce la <em>antiadición</em> (trans): los dos Br quedan en lados opuestos del enlace. Resultado: 1,2-dihaloalcano <strong>trans-vicinal</strong> (comprobable por estereoquímica).</div>
+            <div class="mech-step-txt">Y ojo con esto: el propio ion bromonio está tapando una de las caras, así que el Br⁻ <strong>no tiene más opción que atacar por el lado opuesto</strong>. Eso es lo que llamamos <em>antiadición</em> (trans): los dos Br terminan en lados opuestos del enlace, no del mismo lado. El resultado es un 1,2-dihaloalcano <strong>trans-vicinal</strong>, y esto se puede comprobar con estereoquímica.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1408,8 +1408,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">1,2-dibromopropano (vicinal)</div>
           </div>
         </div>
-        <div class="rxn-cond">Reactivo: Cl₂ o Br₂ en CCl₄ · sin luz, sin calor · estereoquímica: adición anti (trans)</div>
-        <div class="rxn-regla">🧪 Test de Baeyer: Br₂/CCl₄ anaranjado → decoloración = insaturación confirmada</div>
+        <div class="rxn-cond">Necesitan: Cl₂ o Br₂ en CCl₄ · sin luz, sin calor · la estereoquímica es adición anti (trans)</div>
+        <div class="rxn-regla">🧪 Truco de examen — Test de Baeyer: Br₂/CCl₄ anaranjado → si se decolora, hay insaturación confirmada</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -1420,7 +1420,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🏭</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La adición de Cl₂ al etileno produce <strong>1,2-dicloroetano</strong>, que al calentarse libera HCl y forma <strong>cloruro de vinilo (CH₂=CHCl)</strong>, el monómero del <strong>PVC</strong>. Las tuberías de agua potable, los impermeables y los pisos vinílicos de tu colegio son PVC — todo fabricado en industrias que emparten de esta reacción de halogenación de alquenos.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La adición de Cl₂ al etileno produce <strong>1,2-dicloroetano</strong>, que al calentarse libera HCl y forma <strong>cloruro de vinilo (CH₂=CHCl)</strong>, el monómero del <strong>PVC</strong>. Las tuberías de agua potable, los impermeables y hasta los pisos vinílicos de su colegio son PVC — y todo parte de esta misma reacción de halogenación que acaban de ver.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1517,7 +1517,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Adsorción</div>
             <div class="mech-step-h">H₂ y el alqueno se adsorben en la superficie del catalizador metálico (Ni, Pd, Pt)</div>
-            <div class="mech-step-txt">El catalizador metálico (Ni, Pd, Pt) <strong>adsorbe el H₂</strong> en su superficie, rompiendo el enlace H−H en dos átomos de H enlazados débilmente al metal. Simultáneamente el alqueno se adsorbe con su cara π.</div>
+            <div class="mech-step-txt">Fíjense en esto: el H₂ no reacciona solo con el doble enlace, necesita un metal (Ni, Pd, Pt) que sirva de mesa de trabajo. El catalizador <strong>adsorbe el H₂</strong> en su superficie y rompe el enlace H−H en dos átomos de H pegados débilmente al metal. Al mismo tiempo, el alqueno se acomoda ahí con su cara π.</div>
           </div>
           <div class="mech-step" id="ms-aq-2-1">
             <div class="mech-vis">
@@ -1529,7 +1529,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Transferencia</div>
             <div class="mech-step-h">Los dos H migran al mismo lado del doble enlace (sin-adición) mientras está adsorbido en el metal</div>
-            <div class="mech-step-txt">Los dos átomos de H se transfieren <strong>simultáneamente desde la misma cara</strong> del doble enlace. Esto produce la <em>sin-adición</em> (o adición cis). El C=C desaparece y se forma el alcano.</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar: como los dos átomos de H y el alqueno están pegados a la misma superficie metálica, los dos H solo pueden pasar <strong>desde la misma cara</strong> del doble enlace. Eso es la <em>sin-adición</em> (o adición cis). El C=C desaparece y ya tenemos alcano.</div>
           </div>
           <div class="mech-step" id="ms-aq-2-2">
             <div class="mech-vis">
@@ -1541,7 +1541,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Desorción</div>
             <div class="mech-step-h">El alcano resultante se desorbe de la superficie; el catalizador queda regenerado y sin consumir</div>
-            <div class="mech-step-txt">El producto <strong>alcano se desorbe</strong> de la superficie metálica, dejando el catalizador libre para otra reacción. El catalizador no se consume (catálisis heterogénea). Aplicación industrial: hidrogenación de aceites vegetales → grasas sólidas (margarinas).</div>
+            <div class="mech-step-txt">Ya con el alcano formado, <strong>se despega</strong> de la superficie metálica y deja el catalizador libre, listo para trabajar de nuevo. Ojo con esto: el catalizador no se gasta (catálisis heterogénea), y por eso una industria puede reutilizarlo mil veces. Aplicación real: así se convierten aceites vegetales en grasas sólidas, como la margarina.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1558,8 +1558,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">propano (saturado)</div>
           </div>
         </div>
-        <div class="rxn-cond">Catalizador: Ni (Raney), Pd/C o Pt · adición sin (cis) por la superficie del metal</div>
-        <div class="rxn-regla">📌 Alqueno + H₂ → alcano (doble enlace saturado completamente)</div>
+        <div class="rxn-cond">Necesitan: Ni (Raney), Pd/C o Pt como catalizador · la adición es sin (cis) por la superficie del metal</div>
+        <div class="rxn-regla">📌 Truco de examen: alqueno + H₂ → alcano (doble enlace saturado por completo)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -1570,7 +1570,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧈</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La hidrogenación de aceites vegetales líquidos (ricos en dobles enlaces) convierte sus cadenas insaturadas en saturadas, transformándolos en <strong>grasas sólidas</strong>. La margarina vegetal (<em>La Buena</em>, <em>Roma</em>) y la manteca para pastelería se fabrican así en Colombia. Hoy se controla la hidrogenación parcial para evitar grasas trans, que se forman si la reacción no es completa.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La hidrogenación de aceites vegetales líquidos (ricos en dobles enlaces) convierte sus cadenas insaturadas en saturadas, y eso los transforma en <strong>grasas sólidas</strong>. La margarina vegetal (<em>La Buena</em>, <em>Roma</em>) y la manteca para pastelería se fabrican así en Colombia. Hoy se controla la hidrogenación parcial para evitar grasas trans, que se forman justamente cuando esta reacción no llega hasta el final.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1667,7 +1667,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Protonación</div>
             <div class="mech-step-h">H⁺ del H₂SO₄ se adiciona al C del doble enlace con más H (menos sustituido)</div>
-            <div class="mech-step-txt">El mecanismo es idéntico al de la hidrohalogenación: el <strong>H⁺</strong> protona el alqueno siguiendo la regla de Markovnikov. El carbocatión más sustituido (más estable) se forma en el carbono con menos H.</div>
+            <div class="mech-step-txt">Comparemos: este mecanismo es <strong>idéntico</strong> al de la hidrohalogenación que ya vimos. El <strong>H⁺</strong> protona el alqueno siguiendo Markovnikov, y el carbocatión más sustituido (el más estable) se forma en el carbono con menos H. Si ya entendieron esa reacción, esta es la misma jugada con otro reactivo.</div>
           </div>
           <div class="mech-step" id="ms-aq-3-1">
             <div class="mech-vis">
@@ -1679,7 +1679,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Ataque de H₂O</div>
             <div class="mech-step-h">La molécula de agua actúa como nucleófilo y ataca el carbocatión con su par libre del O</div>
-            <div class="mech-step-txt">El agua, aunque débil como nucleófilo, ataca el carbocatión <strong>donando un par libre del O</strong>. Se forma un oxonio (O con carga positiva) como intermediario. Este paso es posible porque el carbocatión es muy electrofílico.</div>
+            <div class="mech-step-txt">Acá está la jugada: el agua es un nucleófilo débil, pero el carbocatión está tan hambriento de electrones que igual la ataca — el O <strong>dona uno de sus pares libres</strong>. Se forma un oxonio (un O con carga positiva) como intermediario. Ese carbocatión electrofílico es lo que hace posible este paso.</div>
           </div>
           <div class="mech-step" id="ms-aq-3-2">
             <div class="mech-vis">
@@ -1691,7 +1691,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Desprotonación</div>
             <div class="mech-step-h">El oxonio pierde H⁺ al disolvente → alcohol con OH en el C más sustituido (Markovnikov)</div>
-            <div class="mech-step-txt">El oxonio pierde un <strong>H⁺ al agua</strong> del disolvente, completando la formación del grupo −OH. El H⁺ se regenera → el H₂SO₄ actúa como <em>catalizador</em> (no se consume). Producto: alcohol con OH en el carbono más sustituido.</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar: el oxonio suelta un <strong>H⁺</strong> al agua del disolvente y ahí queda formado el grupo −OH. Ese H⁺ que se regenera es la prueba de que el <strong>H₂SO₄ es catalizador</strong> — no se consume, solo ayuda. El resultado: alcohol con el OH en el carbono más sustituido.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1708,8 +1708,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">propan-2-ol · OH al C más sustituido</div>
           </div>
         </div>
-        <div class="rxn-cond">Reactivo: H₂O vapor · catalizador: H₃PO₄/SiO₂ · ~300 °C, alta presión (industrial) — o H₂SO₄ diluido en frío (laboratorio). No confundir con H₂SO₄ concentrado + calor, que deshidrata alcoholes (reacción inversa)</div>
-        <div class="rxn-regla">📌 Markovnikov: OH → C más sustituido (menos H) · misma lógica que HX</div>
+        <div class="rxn-cond">Necesitan: H₂O vapor · catalizador H₃PO₄/SiO₂ · ~300 °C y alta presión (industrial) — o H₂SO₄ diluido en frío (laboratorio). Ojo: no la confundan con H₂SO₄ concentrado + calor, que es la reacción inversa (deshidrata alcoholes)</div>
+        <div class="rxn-regla">📌 Truco de examen — Markovnikov: OH → C más sustituido (menos H), misma lógica que con HX</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -1727,7 +1727,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧴</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La hidratación catalítica del etileno produce <strong>etanol industrial</strong>, base para el <strong>alcohol de 70°</strong> (antiséptico hospitalario de uso masivo en Colombia) y para perfumes y cosméticos. También se produce etanol por fermentación de caña de azúcar (Valle del Cauca), que luego se mezcla con gasolina: <em>Gasolina con etanol</em> en las estaciones de servicio colombianas.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La hidratación catalítica del etileno produce <strong>etanol industrial</strong>, base para el <strong>alcohol de 70°</strong> (antiséptico hospitalario de uso masivo en Colombia) y para perfumes y cosméticos. También se produce etanol por fermentación de caña de azúcar (Valle del Cauca), que luego se mezcla con gasolina: <em>Gasolina con etanol</em> en las estaciones de servicio colombianas.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1825,7 +1825,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Adición de O₃</div>
             <div class="mech-step-h">El ozono reacciona con el C=C formando el molozonida: un intermedio cíclico de 5 miembros</div>
-            <div class="mech-step-txt">El ozono (O₃) es una molécula de tres oxígenos con muchos electrones disponibles. Al chocar con el doble enlace C=C, los tres oxígenos forman un <strong>anillo de 5 miembros</strong> con los dos carbonos — un anillo muy tenso que se reorganiza casi de inmediato. Piénsalo como un abrazo de los tres oxígenos al doble enlace: se enganchan, forman el anillo temporalmente inestable, y ese anillo pronto se rompe de otra forma para dar los productos del paso siguiente.</div>
+            <div class="mech-step-txt">Fíjense en esto: el ozono (O₃) es una molécula de tres oxígenos con muchos electrones disponibles, y cuando choca con el doble enlace C=C, los tres oxígenos se enganchan formando un <strong>anillo de 5 miembros</strong> con los dos carbonos. Es un anillo muy tenso — piénsenlo como un abrazo apretado que no dura — y se reorganiza casi de inmediato para dar paso al siguiente intermediario.</div>
           </div>
           <div class="mech-step" id="ms-aq-4-1">
             <div class="mech-vis">
@@ -1837,7 +1837,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Reordenamiento</div>
             <div class="mech-step-h">El molozonida se abre y recombina formando el ozonida más estable (1,2,4-trioxolano)</div>
-            <div class="mech-step-txt">El molozonida <strong>se fragmenta</strong> en un carbonil ylide y un fragmento carbonílico, que se recombinan formando el <strong>ozonida</strong> (1,2,4-trioxolano). Este intermediario es estable a bajas temperaturas pero explosivo puro — se trabaja en solución.</div>
+            <div class="mech-step-txt">Ese molozonida tenso no aguanta: <strong>se fragmenta</strong> en un carbonil ylide y un fragmento carbonílico, y ambos se recombinan formando el <strong>ozonida</strong> (1,2,4-trioxolano). Ojo con esto: este intermediario aguanta a bajas temperaturas, pero puro es explosivo — por eso en el laboratorio siempre se trabaja en solución.</div>
           </div>
           <div class="mech-step" id="ms-aq-4-2">
             <div class="mech-vis">
@@ -1849,7 +1849,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Ruptura final</div>
             <div class="mech-step-h">Reductora (Zn/H₂O) → aldehídos/cetonas · Oxidante (H₂O₂) → ácidos carboxílicos</div>
-            <div class="mech-step-txt">La ruptura del ozonida determina los productos: con <strong>Zn/H₂O</strong> (condiciones reductoras) se obtienen <em>aldehídos o cetonas</em>; con <strong>H₂O₂</strong> (oxidante) se oxidan los aldehídos a <em>ácidos carboxílicos</em>. Técnica clave para localizar dobles enlaces en moléculas desconocidas.</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar: lo que le agreguen al ozonida decide el producto final. Con <strong>Zn/H₂O</strong> (condiciones reductoras) se quedan en <em>aldehídos o cetonas</em>; con <strong>H₂O₂</strong> (oxidante) esos aldehídos se oxidan hasta <em>ácidos carboxílicos</em>. Esta es la técnica que usan para localizar exactamente dónde estaba el doble enlace en una molécula desconocida.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1867,7 +1867,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Paso 1: C=C + O₃ → ozonoide · Paso 2 reductora (Zn/H₂O) → aldehídos/cetonas · Paso 2 oxidante (H₂O₂) → ácidos carboxílicos</div>
-        <div class="rxn-regla">📌 El doble enlace se rompe por completo → útil para determinar su posición</div>
+        <div class="rxn-regla">📌 Truco de examen: el doble enlace se rompe por completo, así que esta reacción les sirve para ubicar exactamente dónde estaba</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span> + O₃</span>
@@ -1878,7 +1878,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🔬</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La ozonólisis es la herramienta analítica para <strong>determinar la posición de los dobles enlaces</strong> en aceites vegetales (palma de aceite, cacao, aguacate — productos clave de Colombia). Al fragmentar los ácidos grasos insaturados y analizar los aldehídos o ácidos que resultan, el químico puede mapear la estructura exacta del aceite y detectar adulteraciones.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La ozonólisis es la herramienta analítica para <strong>determinar la posición de los dobles enlaces</strong> en aceites vegetales (palma de aceite, cacao, aguacate — productos clave de Colombia). Al fragmentar los ácidos grasos insaturados y analizar los aldehídos o ácidos que resultan, el químico puede mapear la estructura exacta del aceite y detectar adulteraciones.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -1975,7 +1975,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 1 de 3 — Acción del MnO₄⁻</div>
             <div class="mech-step-h">El permanganato viola añade dos grupos OH simultáneamente al mismo lado del doble enlace</div>
-            <div class="mech-step-txt">El MnO₄⁻ se coordina <strong>simétricamente</strong> sobre el doble enlace formando un <em>éster cíclico de Mn</em> de 5 miembros (osmatato manganoso). Ambos oxígenos se transfieren al <strong>mismo lado</strong> de la molécula (sin-adición).</div>
+            <div class="mech-step-txt">Fíjense en esto: el MnO₄⁻ no se pega de un solo lado, se coordina <strong>simétricamente</strong> sobre el doble enlace y forma un <em>éster cíclico de Mn</em> de 5 miembros. Los dos oxígenos entran juntos, al <strong>mismo lado</strong> de la molécula — por eso es sin-adición, y ya con eso pueden anticipar la estereoquímica del producto.</div>
           </div>
           <div class="mech-step" id="ms-aq-5-1">
             <div class="mech-vis">
@@ -1987,7 +1987,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 2 de 3 — Formación del diol</div>
             <div class="mech-step-h">Hidrólisis del éster cíclico → diol vicinale cis (ambos OH al mismo lado)</div>
-            <div class="mech-step-txt">El éster cíclico de manganeso se hidroliza formando el <strong>diol vicinale cis</strong>: ambos grupos −OH están en el mismo lado del antiguo doble enlace. El Mn queda como <strong>MnO₂</strong> (sólido pardo).</div>
+            <div class="mech-step-txt">Acá está la jugada: el éster cíclico de manganeso se hidroliza y queda el <strong>diol vicinale cis</strong> — los dos grupos −OH en el mismo lado de donde estaba el doble enlace. Y el Mn no desaparece, queda como <strong>MnO₂</strong>, un sólido pardo que van a ver a simple vista.</div>
           </div>
           <div class="mech-step" id="ms-aq-5-2">
             <div class="mech-vis">
@@ -2000,7 +2000,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
             <div class="mech-step-n">Paso 3 de 3 — Señal visual</div>
             <div class="mech-step-h">KMnO₄ violeta → MnO₂ pardo + decoloración = prueba POSITIVA para insaturación</div>
-            <div class="mech-step-txt">La prueba de Baeyer es <em>positiva</em> cuando: <strong>① la solución violeta se decolora</strong> (MnO₄⁻ se consume) y <strong>② aparece un precipitado pardo-café de MnO₂</strong>. Los alcanos y benceno NO reaccionan (test negativo). Es la prueba cualitativa más usada para detectar insaturación.</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar para el examen: la prueba de Baeyer es <em>positiva</em> cuando pasan dos cosas juntas — <strong>① la solución violeta se decolora</strong> (el MnO₄⁻ se consume) y <strong>② aparece un precipitado pardo-café de MnO₂</strong>. Los alcanos y el benceno no reaccionan, así que ahí el test da negativo. Es la prueba cualitativa que más van a usar para detectar insaturación.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2019,7 +2019,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + <span style="color:#92400e;font-weight:700">MnO₂↓ pardo</span> · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura de C=C)</div>
-        <div class="rxn-regla">🧪 Positivo (+): solución violeta se decolora Y aparece precipitado pardo (MnO₂) · Alcanos (−): no reaccionan</div>
+        <div class="rxn-regla">🧪 Truco de examen — Positivo (+): la solución violeta se decolora Y aparece precipitado pardo (MnO₂) · Alcanos (−): no reaccionan</div>
         <div class="rxn-ex-lbl">Ejemplo (frío, diluido)</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span> + KMnO₄/H₂O</span>
@@ -2029,7 +2029,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧫</span>
-  <div><strong>¿Para qué sirve en la vida real?</strong> La prueba de Baeyer (decoloración del KMnO₄ violeta) es la <strong>prueba rápida de calidad</strong> para detectar si un aceite o grasa tiene dobles enlaces (está insaturado). Laboratorios de control de alimentos en Colombia la usan para verificar adulteración de aceites comestibles. También sirve para confirmar la presencia de alquenos e alquinos en muestras industriales de petroquímica.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La prueba de Baeyer (decoloración del KMnO₄ violeta) es la <strong>prueba rápida de calidad</strong> para detectar si un aceite o grasa tiene dobles enlaces (está insaturado). Laboratorios de control de alimentos en Colombia la usan para verificar adulteración de aceites comestibles. También sirve para confirmar la presencia de alquenos e alquinos en muestras industriales de petroquímica.</div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
