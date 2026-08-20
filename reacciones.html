@@ -6115,7 +6115,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
-        <!-- ── STEPPER: Condensación Aldólica — Mecanismo ── -->
+        <!-- ── STEPPER: Reacción de Grignard — Mecanismo ── -->
         <div class="rxn-anim-stepper">
           <div class="mech-top">
             <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
@@ -6149,7 +6149,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="mech-stepper" id="mech-cb-2">
           <div class="mech-top">
-            <span class="mech-title-sm">⚗️ Condensación Aldólica — Mecanismo</span>
+            <span class="mech-title-sm">⚗️ Reacción de Grignard — Mecanismo</span>
             <div class="mech-nav">
               <button class="mech-btn" id="mprev-cb-2" onclick="mechStep('cb-2',-1)" disabled>← Ant.</button>
               <span class="mech-ctr" id="mctr-cb-2">Paso 1 de 3</span>
@@ -6164,38 +6164,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <div class="mech-step on" id="ms-cb-2-0">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">OH⁻ + R−CH₂−CHO →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH⁻−CHO  (enolato)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C α con par libre: nucleófilo fuerte</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R′−MgBr (enlace muy polar)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R′^δ⁻ ··· Mg^δ⁺Br</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">el C se comporta como carbanión: nucleófilo/base fortísimo</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — Primero se forma el enolato</div>
-            <div class="mech-step-h">El OH⁻ abstrae el Hα (adyacente al C=O) del aldehído → enolato aniónico nucleófilo</div>
-            <div class="mech-step-txt">Fíjense: la base OH⁻ le quita el <strong>Hα</strong> (el H del carbono pegado al C=O), y nos queda un enolato con un carbanión estabilizado por resonancia con el grupo carbonilo. Ese enolato es el <em>nucleófilo</em> que va a atacar al segundo aldehído.</div>
+            <div class="mech-step-n">Paso 1 de 3 — El Grignard es casi un carbanión</div>
+            <div class="mech-step-h">El enlace C−Mg es tan polar que el carbono del R′ actúa como carbanión: nucleófilo y base muy fuertes</div>
+            <div class="mech-step-txt">Miren la clave de todo esto: el magnesio es mucho menos electronegativo que el carbono, así que el enlace C−Mg queda bien polarizado — el carbono se queda con casi toda la densidad electrónica. Prácticamente es un carbanión R′⁻ paseando con un MgBr⁺ al lado. Por eso el Grignard es de los nucleófilos más fuertes que van a ver en el curso. Ojo con esto: como es tan básico, reacciona instantáneo con cualquier H ácido — por eso se prepara y se usa en éter o THF bien secos, sin una gota de agua.</div>
           </div>
           <div class="mech-step" id="ms-cb-2-1">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enolato  +  R−CHO  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HO−C*−C−CHO (β-hidroxialdehído)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">enlace C−C nuevo formado ✓</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′⁻  +  R−C(=O)−R″  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−C(−O⁻MgBr⁺)(R)(R″)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">nuevo enlace C−C, alcóxido de magnesio</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — El enolato ataca el carbonilo</div>
-            <div class="mech-step-h">El enolato (nucleófilo) ataca el C=O de un segundo aldehído (electrófilo) → aldol β-hidroxi</div>
-            <div class="mech-step-txt">Acá está la jugada: el <strong>Cα⁻ del enolato</strong> le cae al C=O del segundo aldehído (que actúa como electrófilo). Ahí se forma un <em>enlace C−C nuevo</em> entre el Cα del primer aldehído y el carbono carbonílico del segundo. Lo que sale de inmediato es el alcóxido del aldol (β-hidroxialdehído).</div>
+            <div class="mech-step-n">Paso 2 de 3 — El carbanión ataca el carbonilo</div>
+            <div class="mech-step-h">El R′⁻ del Grignard ataca el C del C=O (electrófilo) → se forma el enlace C−C y un alcóxido de magnesio</div>
+            <div class="mech-step-txt">Acá está la jugada: el carbono del Grignard, cargado de electrones, le cae directo al carbono del carbonilo (que es δ+ porque el O le roba densidad). Los electrones del π C=O se van completos al oxígeno, y queda un alcóxido de magnesio. Fíjense en el detalle que deben recordar: en este paso se forma el enlace C−C nuevo — la razón por la que el Grignard es tan importante en síntesis.</div>
           </div>
           <div class="mech-step" id="ms-cb-2-2">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">β-OH−CH−CHO →[Δ]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">−CH=CH−CHO  (enal) + H₂O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">α,β-insaturado = conjugado, más estable</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">alcóxido + H₃O⁺ (o NH₄Cl/H₂O) →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−C(OH)(R)(R″) + sales de Mg</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">hidrólisis ácida: alcohol final</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Del aldol al enal</div>
-            <div class="mech-step-h">Al calentar, el aldol se deshidrata (β-elimina el OH y el Hα) → α,β-insaturado (enal o enona)</div>
-            <div class="mech-step-txt">Y aquí el detalle que deben recordar: si calientan el <strong>aldol</strong> (β-hidroxicarbonílico), se deshidrata — se eliminan el OH del Cβ y el Hα — y nos queda un alqueno conjugado con el carbonilo (<em>α,β-insaturado</em>). Ese sistema C=C−C=O es más estable gracias a la conjugación. A esa deshidratación, en sentido estricto, la llamamos condensación aldólica.</div>
+            <div class="mech-step-n">Paso 3 de 3 — La hidrólisis ácida da el alcohol</div>
+            <div class="mech-step-h">Con agua ácida (H₃O⁺ o NH₄Cl/H₂O) se protona el alcóxido → alcohol + sales de magnesio</div>
+            <div class="mech-step-txt">Truco de examen: nunca metan agua directo mientras el Grignard está reaccionando — se los apaga al toque. El agua entra AL FINAL, en la hidrólisis (el "workup"), después de que ya se formó el alcóxido. Ahí el H₃O⁺ protona el oxígeno y les queda el alcohol — primario, secundario o terciario, según de qué carbonilo hayan partido.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -6262,7 +6262,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
 
-        <!-- ── STEPPER: Formación de Iminas (Base de Schiff) — Mecanismo ── -->
+        <!-- ── STEPPER: Condensación Aldólica — Mecanismo ── -->
         <div class="rxn-anim-stepper">
           <div class="mech-top">
             <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
@@ -6296,7 +6296,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="mech-stepper" id="mech-cb-3">
           <div class="mech-top">
-            <span class="mech-title-sm">⚗️ Formación de Iminas (Base de Schiff) — Mecanismo</span>
+            <span class="mech-title-sm">⚗️ Condensación Aldólica — Mecanismo</span>
             <div class="mech-nav">
               <button class="mech-btn" id="mprev-cb-3" onclick="mechStep('cb-3',-1)" disabled>← Ant.</button>
               <span class="mech-ctr" id="mctr-cb-3">Paso 1 de 3</span>
@@ -6311,38 +6311,38 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <div class="mech-step on" id="ms-cb-3-0">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−NH₂  +  R'−C(=O)H  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−NH−C(OH)H−R'  (carbinolomina)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C ahora sp³ con OH y NHR</div>
+              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">OH⁻ + R−CH₂−CHO →</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH⁻−CHO  (enolato)</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C α con par libre: nucleófilo fuerte</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 1 de 3 — La amina ataca primero</div>
-            <div class="mech-step-h">El N de R−NH₂ (nucleófilo) ataca el C=O (electrófilo) del aldehído/cetona → carbinolomina</div>
-            <div class="mech-step-txt">Fíjense: el <strong>par libre del N</strong> de la amina primaria le cae al C=O del carbonilo. Nos queda la <em>carbinolomina</em> (aminoalcohol): el carbono pasa de sp² a sp³, con un −OH y un −NHR pegados. Este intermediario se forma rápido, pero ojo, es inestable.</div>
+            <div class="mech-step-n">Paso 1 de 3 — Primero se forma el enolato</div>
+            <div class="mech-step-h">El OH⁻ abstrae el Hα (adyacente al C=O) del aldehído → enolato aniónico nucleófilo</div>
+            <div class="mech-step-txt">Fíjense: la base OH⁻ le quita el <strong>Hα</strong> (el H del carbono pegado al C=O), y nos queda un enolato con un carbanión estabilizado por resonancia con el grupo carbonilo. Ese enolato es el <em>nucleófilo</em> que va a atacar al segundo aldehído.</div>
           </div>
           <div class="mech-step" id="ms-cb-3-1">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">carbinolomina →[H⁺]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−CH=N−R  +  H₂O</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">imina (base de Schiff)</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enolato  +  R−CHO  →</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HO−C*−C−CHO (β-hidroxialdehído)</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">enlace C−C nuevo formado ✓</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 2 de 3 — Ahora se deshidrata</div>
-            <div class="mech-step-h">La carbinolomina pierde agua (el H⁺ cataliza) → se forma el doble enlace C=N</div>
-            <div class="mech-step-txt">En medio <em>ligeramente ácido</em> (pH 4–5), el −OH de la carbinolomina se protona y se va como agua. Los electrones del N se acomodan para formar el <strong>doble enlace C=N</strong> de la imina. Truco de examen: el pH tiene que ser el justo — ni muy básico (ahí no se protona el N) ni muy ácido (porque entonces sí se protona el N y eso bloquea el ataque).</div>
+            <div class="mech-step-n">Paso 2 de 3 — El enolato ataca el carbonilo</div>
+            <div class="mech-step-h">El enolato (nucleófilo) ataca el C=O de un segundo aldehído (electrófilo) → aldol β-hidroxi</div>
+            <div class="mech-step-txt">Acá está la jugada: el <strong>Cα⁻ del enolato</strong> le cae al C=O del segundo aldehído (que actúa como electrófilo). Ahí se forma un <em>enlace C−C nuevo</em> entre el Cα del primer aldehído y el carbono carbonílico del segundo. Lo que sale de inmediato es el alcóxido del aldol (β-hidroxialdehído).</div>
           </div>
           <div class="mech-step" id="ms-cb-3-2">
             <div class="mech-vis">
               <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−CH=N−R (imina, C=N)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">+ H₂O ⇌ carbonilo + amina</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">reducción (NaBH₄) → amina secundaria</div>
+              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">β-OH−CH−CHO →[Δ]</div>
+              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">−CH=CH−CHO  (enal) + H₂O</div>
+              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">α,β-insaturado = conjugado, más estable</div>
             </div>
             </div>
-            <div class="mech-step-n">Paso 3 de 3 — Llegamos a la imina (Base de Schiff)</div>
-            <div class="mech-step-h">C=N es el grupo funcional de la imina; es reversible con H₂O → útil en síntesis y bioquímica</div>
-            <div class="mech-step-txt">La imina (R′−CH=N−R, la llamamos <em>base de Schiff</em>) es <strong>reversible</strong> en presencia de agua. ¿Y para qué les sirve? Para sintetizar <em>aminas secundarias</em> (reducen la imina con NaBH₄ y llegan a R′CH₂−NHR, lo que se conoce como aminación reductora). Y en bioquímica también aparece: el piridoxal fosfato (vitamina B6) forma iminas con los aminoácidos durante la catálisis enzimática.</div>
+            <div class="mech-step-n">Paso 3 de 3 — Del aldol al enal</div>
+            <div class="mech-step-h">Al calentar, el aldol se deshidrata (β-elimina el OH y el Hα) → α,β-insaturado (enal o enona)</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar: si calientan el <strong>aldol</strong> (β-hidroxicarbonílico), se deshidrata — se eliminan el OH del Cβ y el Hα — y nos queda un alqueno conjugado con el carbonilo (<em>α,β-insaturado</em>). Ese sistema C=C−C=O es más estable gracias a la conjugación. A esa deshidratación, en sentido estricto, la llamamos condensación aldólica.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
