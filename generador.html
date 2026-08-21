@@ -667,7 +667,6 @@ body{
         <label class="cb-item"><input type="checkbox" name="grupo" value="nitrilos"> Nitrilos</label>
         <label class="cb-item"><input type="checkbox" name="grupo" value="aminas"> Aminas</label>
         <label class="cb-item"><input type="checkbox" name="grupo" value="benceno"> Arom&aacute;ticos (benceno)</label>
-        <label class="cb-item"><input type="checkbox" name="grupo" value="reacciones"> Reacciones org&aacute;nicas</label>
       </div>
     </div>
 
@@ -700,7 +699,7 @@ body{
           <input type="checkbox" name="tipo" value="D">
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo D &mdash; Reacciones org&aacute;nicas</div>
-            <div class="tipo-item-desc">Se muestra la ecuaci&oacute;n con un dato oculto; el alumno predice el producto o identifica el tipo de reacci&oacute;n. Requiere seleccionar &ldquo;Reacciones org&aacute;nicas&rdquo;.</div>
+            <div class="tipo-item-desc">Se muestra la ecuaci&oacute;n con un dato oculto; el alumno predice el producto o identifica el tipo de reacci&oacute;n. Al marcar este tipo aparece un panel para elegir qu&eacute; grupos de reacciones repasar.</div>
           </div>
         </label>
       </div>
@@ -715,20 +714,20 @@ body{
         </span>
       </div>
       <div class="cb-grid" id="rxn-grupos-grid">
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcanos" checked> Alcanos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquenos" checked> Alquenos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquinos" checked> Alquinos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="benceno" checked> Arom&aacute;ticos (benceno)</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="halogenuros" checked> Halogenuros de alquilo</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcoholes" checked> Alcoholes</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aldehidos" checked> Alde&iacute;dos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="cetonas" checked> Cetonas</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="acidos" checked> &Aacute;cidos carbox&iacute;licos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="esteres" checked> &Eacute;steres</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="eteres" checked> &Eacute;teres</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="amidas" checked> Amidas</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="nitrilos" checked> Nitrilos</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aminas" checked> Aminas</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcanos"> Alcanos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquenos"> Alquenos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquinos"> Alquinos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="benceno"> Arom&aacute;ticos (benceno)</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="halogenuros"> Halogenuros de alquilo</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcoholes"> Alcoholes</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aldehidos"> Alde&iacute;dos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="cetonas"> Cetonas</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="acidos"> &Aacute;cidos carbox&iacute;licos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="esteres"> &Eacute;steres</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="eteres"> &Eacute;teres</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="amidas"> Amidas</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="nitrilos"> Nitrilos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aminas"> Aminas</label>
       </div>
       <div class="config-label" style="margin-top:14px">Reacciones &mdash; tipo de pregunta</div>
       <div class="cb-grid" id="rxn-pregtipo-grid">
@@ -2983,13 +2982,17 @@ function generate(){
   const tipos=[...document.querySelectorAll('input[name=tipo]:checked')].map(cb=>cb.value);
   const n=parseInt(document.getElementById('n-slider').value,10);
 
-  if(!grupos.length){
-    warning.textContent='Selecciona al menos un grupo funcional.';
+  if(!tipos.length){
+    warning.textContent='Selecciona al menos un tipo de ejercicio.';
     warning.className='warning show';
     return;
   }
-  if(!tipos.length){
-    warning.textContent='Selecciona al menos un tipo de ejercicio.';
+
+  const tiposNom=tipos.filter(t=>t!=='D');
+  const wantsTipoD=tipos.includes('D');
+
+  if(tiposNom.length && !grupos.length){
+    warning.textContent='Selecciona al menos un grupo funcional para Tipo A, B o C.';
     warning.className='warning show';
     return;
   }
@@ -2999,22 +3002,7 @@ function generate(){
     return;
   }
 
-  const wantsRxn=grupos.includes('reacciones');
-  const tiposNom=tipos.filter(t=>t!=='D');
-  const wantsTipoD=tipos.includes('D');
-
-  if(wantsTipoD && !wantsRxn){
-    warning.textContent='Tipo D requiere seleccionar "Reacciones orgánicas".';
-    warning.className='warning show';
-    return;
-  }
-  if(wantsRxn && !wantsTipoD && !tiposNom.length){
-    warning.textContent='Para reacciones selecciona Tipo D. Para moléculas selecciona Tipo A, B o C.';
-    warning.className='warning show';
-    return;
-  }
-
-  const gruposNom=grupos.filter(g=>g!=='reacciones');
+  const gruposNom=grupos;
 
   // ── Pool de moléculas (tipos A/B/C) — solo si se pidió alguno de esos tipos ──
   const _seen=new Set();
@@ -3040,7 +3028,7 @@ function generate(){
     return;
   }
 
-  const poolRxn=wantsRxn && wantsTipoD
+  const poolRxn=wantsTipoD
     ? shuffle(BANCO_RXN.filter(rxn=>gruposRxn.includes(rxn.topic) && preguntaTipos.includes(rxn.pregunta_tipo)))
     : [];
 
