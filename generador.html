@@ -706,6 +706,37 @@ body{
       </div>
     </div>
 
+    <!-- Filtro de Reacciones (solo aplica a Tipo D) -->
+    <div class="config-section" id="rxn-filter-section" style="display:none">
+      <div class="config-label">Reacciones &mdash; grupos a repasar
+        <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dimmer);font-size:.72rem;margin-left:6px">
+          (<a href="javascript:void(0)" onclick="setRxnGrupos(true)" style="color:var(--primary)">todos</a> &middot;
+           <a href="javascript:void(0)" onclick="setRxnGrupos(false)" style="color:var(--primary)">ninguno</a>)
+        </span>
+      </div>
+      <div class="cb-grid" id="rxn-grupos-grid">
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcanos" checked> Alcanos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquenos" checked> Alquenos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquinos" checked> Alquinos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="benceno" checked> Arom&aacute;ticos (benceno)</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="halogenuros" checked> Halogenuros de alquilo</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcoholes" checked> Alcoholes</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aldehidos" checked> Alde&iacute;dos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="cetonas" checked> Cetonas</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="acidos" checked> &Aacute;cidos carbox&iacute;licos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="esteres" checked> &Eacute;steres</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="eteres" checked> &Eacute;teres</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="amidas" checked> Amidas</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="nitrilos" checked> Nitrilos</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aminas" checked> Aminas</label>
+      </div>
+      <div class="config-label" style="margin-top:14px">Reacciones &mdash; tipo de pregunta</div>
+      <div class="cb-grid" id="rxn-pregtipo-grid">
+        <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="producto" checked> Predecir el producto</label>
+        <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="tipo" checked> Identificar el tipo de reacci&oacute;n</label>
+      </div>
+    </div>
+
     <!-- Numero de preguntas -->
     <div class="config-section">
       <div class="config-label">N&uacute;mero de preguntas</div>
@@ -2172,6 +2203,24 @@ document.querySelectorAll('.cb-item, .tipo-item').forEach(label=>{
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
+// UI — mostrar/ocultar el filtro de Reacciones según Tipo D esté marcado
+// ─────────────────────────────────────────────────────────────────────────────
+function syncRxnFilterVisibility(){
+  const tipoD=document.querySelector('input[name=tipo][value=D]');
+  const sec=document.getElementById('rxn-filter-section');
+  if(tipoD && sec) sec.style.display=tipoD.checked?'':'none';
+}
+document.querySelectorAll('input[name=tipo]').forEach(cb=>cb.addEventListener('change',syncRxnFilterVisibility));
+syncRxnFilterVisibility();
+
+function setRxnGrupos(checked){
+  document.querySelectorAll('input[name=grupo_rxn]').forEach(cb=>{
+    cb.checked=checked;
+    cb.closest('.cb-item').classList.toggle('checked', checked);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // GENERATOR
 // ─────────────────────────────────────────────────────────────────────────────
 let _generated=[];
@@ -2213,19 +2262,32 @@ function generate(){
 
   const gruposNom=grupos.filter(g=>g!=='reacciones');
 
-  // ── Pool de moléculas (tipos A/B/C) ──────────────────────────────────────
+  // ── Pool de moléculas (tipos A/B/C) — solo si se pidió alguno de esos tipos ──
   const _seen=new Set();
-  const poolMol=MOLS.filter(m=>{
+  const poolMol=tiposNom.length ? MOLS.filter(m=>{
     if(!gruposNom.includes(m.topic)) return false;
     if(_seen.has(m.name)) return false;
     _seen.add(m.name);
     return true;
-  });
+  }) : [];
 
-  // ── Pool de reacciones (tipo D) ───────────────────────────────────────────
-  const otherGrupos=grupos.filter(g=>g!=='reacciones');
+  // ── Pool de reacciones (tipo D) — filtro propio, independiente de "Grupos funcionales" ──
+  const gruposRxn=[...document.querySelectorAll('input[name=grupo_rxn]:checked')].map(cb=>cb.value);
+  const preguntaTipos=[...document.querySelectorAll('input[name=pregunta_tipo]:checked')].map(cb=>cb.value);
+
+  if(wantsTipoD && !gruposRxn.length){
+    warning.textContent='Selecciona al menos un grupo de reacciones para repasar.';
+    warning.className='warning show';
+    return;
+  }
+  if(wantsTipoD && !preguntaTipos.length){
+    warning.textContent='Selecciona al menos un tipo de pregunta de reacciones.';
+    warning.className='warning show';
+    return;
+  }
+
   const poolRxn=wantsRxn && wantsTipoD
-    ? shuffle(BANCO_RXN.filter(rxn=>!otherGrupos.length||otherGrupos.includes(rxn.topic)))
+    ? shuffle(BANCO_RXN.filter(rxn=>gruposRxn.includes(rxn.topic) && preguntaTipos.includes(rxn.pregunta_tipo)))
     : [];
 
   if(!poolMol.length && !poolRxn.length){
