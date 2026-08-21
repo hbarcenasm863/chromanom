@@ -1853,144 +1853,144 @@ const MOLS = [
 // ─────────────────────────────────────────────────────────────────────────────
 const BANCO_RXN = [
   // ── Adición en alquenos ───────────────────────────────────────────────────
-  {key:'rxn_01',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_01',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−CH=CH₂',reactivo:'+ HBr',condicion:null,
    nombre_rxn:'Hidrohalogenación (adición de HBr)',
    regla:'Regla de Markovnikov: el Br va al C2 (más sustituido).',
    respuesta:'CH₃−CH(Br)−CH₃  (2-bromopropano)'},
-  {key:'rxn_02',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_02',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−CH=CH₂',reactivo:'+ HCl',condicion:null,
    nombre_rxn:'Hidrohalogenación (adición de HCl)',
    regla:'Markovnikov: Cl al C2 (más sustituido).',
    respuesta:'CH₃−CH(Cl)−CH₃  (2-cloropropano)'},
-  {key:'rxn_03',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_03',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la siguiente reacción de halogenación:',
    r:'CH₃−CH=CH−CH₃',reactivo:'+ Cl₂',condicion:null,
    nombre_rxn:'Halogenación (adición de Cl₂)',
    regla:'Los dos Cl se añaden uno a cada C del doble enlace.',
    respuesta:'CH₃−CH(Cl)−CH(Cl)−CH₃  (2,3-diclorobutano)'},
-  {key:'rxn_04',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_04',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la hidrogenación de este alqueno:',
    r:'CH₃−CH=CH₂',reactivo:'+ H₂',condicion:'cat. Ni / Pt / Pd',
    nombre_rxn:'Hidrogenación catalítica',
    regla:'El H₂ se adiciona al doble enlace; el catalizador activa el H₂.',
    respuesta:'CH₃−CH₂−CH₃  (propano)'},
-  {key:'rxn_05',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_05',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
    enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
    r:'CH₃−CH=CH₂',reactivo:'+ H₂O',condicion:'cat. H₂SO₄',
    nombre_rxn:'Hidratación (adición de H₂O)',
    regla:'Markovnikov: −OH al C2 (más sustituido).',
    respuesta:'CH₃−CH(OH)−CH₃  (propan-2-ol)'},
-  {key:'rxn_06',topic:'alquenos',grupo_rxn:'Adición (alquenos)',pregunta_tipo:'tipo',
+  {key:'rxn_06',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y la regla que determina el producto principal:',
    r:'CH₃−CH=CH₂',reactivo:'+ HBr',condicion:null,
    nombre_rxn:'Adición electrofílica — Hidrohalogenación',
    regla:'Markovnikov: el H se une al C con más H; el Br al C más sustituido.',
    respuesta:'Adición electrofílica de HBr (Hidrohalogenación). Regla de Markovnikov → 2-bromopropano.'},
   // ── Sustitución radical en alcanos ────────────────────────────────────────
-  {key:'rxn_07',topic:'alcanos',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+  {key:'rxn_07',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
    enunciado:'Escribe los productos de la siguiente halogenación:',
    r:'CH₄',reactivo:'+ Cl₂',condicion:'hν (luz UV) o Δ',
    nombre_rxn:'Halogenación radical (cloraci&oacute;n de metano)',
    regla:'Un H del alcano es sustituido por Cl; se libera HCl.',
    respuesta:'CH₃Cl  (clorometano)  +  HCl'},
-  {key:'rxn_08',topic:'alcanos',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+  {key:'rxn_08',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
    enunciado:'¿Qué productos se obtienen al irradiar con luz esta mezcla?',
    r:'CH₃−CH₃',reactivo:'+ Br₂',condicion:'hν',
    nombre_rxn:'Halogenación radical (bromación de etano)',
    regla:'Sustitución radical: un H se reemplaza por Br.',
    respuesta:'CH₃−CH₂Br  (bromoetano)  +  HBr'},
-  {key:'rxn_09',topic:'alcanos',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+  {key:'rxn_09',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
    enunciado:'Escribe la ecuación completa de la combustión completa del butano:',
    r:'2 C₄H₁₀',reactivo:'+ 13 O₂',condicion:'Δ (llama)',
    nombre_rxn:'Combustión completa de alcano',
    regla:'Combustión completa → CO₂ + H₂O (sin hollín).',
    respuesta:'8 CO₂  +  10 H₂O'},
-  {key:'rxn_10',topic:'alcanos',grupo_rxn:'Sustitución radical (alcanos)',pregunta_tipo:'tipo',
+  {key:'rxn_10',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'tipo',
    enunciado:'Indica el tipo de reacción y las condiciones necesarias:',
    r:'CH₄',reactivo:'+ Cl₂',condicion:'???',
    nombre_rxn:'Sustitución radical (SR)',
    regla:'Requiere energía (luz UV o calor) para generar radicales Cl•.',
    respuesta:'Sustitución Radical (SR). Condición: luz UV (hν) o calor (Δ).'},
   // ── SEA aromáticos ────────────────────────────────────────────────────────
-  {key:'rxn_11',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+  {key:'rxn_11',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la halogenación de benceno:',
    r:'C₆H₆',reactivo:'+ Cl₂',condicion:'cat. FeCl₃',
    nombre_rxn:'SEA — Halogenación aromática',
    regla:'FeCl₃ activa el Cl₂; el H del anillo se sustituye por Cl.',
    respuesta:'C₆H₅Cl  (clorobenceno)  +  HCl'},
-  {key:'rxn_12',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+  {key:'rxn_12',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la nitración del benceno:',
    r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄ / Δ',
    nombre_rxn:'SEA — Nitración aromática',
    regla:'Mezcla nitrante (HNO₃ + H₂SO₄) genera el electrófilo NO₂⁺.',
    respuesta:'C₆H₅NO₂  (nitrobenceno)  +  H₂O'},
-  {key:'rxn_13',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+  {key:'rxn_13',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'producto',
    enunciado:'¿Qué compuesto se forma al sulfonar el benceno?',
    r:'C₆H₆',reactivo:'+ H₂SO₄',condicion:'oleum / Δ',
    nombre_rxn:'SEA — Sulfonaci&oacute;n aromática',
    regla:'El SO₃ actúa como electrófilo; reacción reversible a alta temperatura.',
    respuesta:'C₆H₅SO₃H  (ácido bencenosulf&oacute;nico)  +  H₂O'},
-  {key:'rxn_14',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+  {key:'rxn_14',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la reacción de Friedel-Crafts (alquilación):',
    r:'C₆H₆',reactivo:'+ CH₃Cl',condicion:'cat. AlCl₃',
    nombre_rxn:'SEA — Alquilaci&oacute;n de Friedel-Crafts',
    regla:'AlCl₃ genera el electrófilo CH₃⁺ (carbocatión metilo).',
    respuesta:'C₆H₅CH₃  (tolueno / metilbenceno)  +  HCl'},
-  {key:'rxn_15',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'producto',
+  {key:'rxn_15',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la acilación de Friedel-Crafts:',
    r:'C₆H₆',reactivo:'+ CH₃COCl',condicion:'cat. AlCl₃',
    nombre_rxn:'SEA — Acilaci&oacute;n de Friedel-Crafts',
    regla:'AlCl₃ activa el acilcloruro; el electrófilo es el acilio CH₃CO⁺.',
    respuesta:'C₆H₅−CO−CH₃  (acetofenona)  +  HCl'},
-  {key:'rxn_16',topic:'benceno',grupo_rxn:'SEA (aromáticos)',pregunta_tipo:'tipo',
+  {key:'rxn_16',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'tipo',
    enunciado:'Clasifica la siguiente reacción e indica el electrófilo activo:',
    r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄',
    nombre_rxn:'Sustitución Electrófila Aromática (SEA) — Nitración',
    regla:'El H₂SO₄ protona el HNO₃ y genera NO₂⁺ (ion nitronio).',
    respuesta:'SEA — Nitración. Electrófilo activo: NO₂⁺ (ion nitronio).'},
   // ── Adición en alquinos ───────────────────────────────────────────────────
-  {key:'rxn_17',topic:'alquinos',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+  {key:'rxn_17',topic:'alquinos',categoria:'Adición (alquinos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la primera adición de HBr al acetileno:',
    r:'CH≡CH',reactivo:'+ HBr',condicion:'(1 mol)',
    nombre_rxn:'Adición de HBr a alquino (1ª adición)',
    regla:'Markovnikov: H al C1 y Br al C2 del enlace triple.',
    respuesta:'CH₂=CHBr  (bromoeteno / cloruro de vinilo)'},
-  {key:'rxn_18',topic:'alquinos',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+  {key:'rxn_18',topic:'alquinos',categoria:'Adición (alquinos)',pregunta_tipo:'producto',
    enunciado:'¿Qué producto se obtiene al añadir 2 moles de HBr al acetileno?',
    r:'CH≡CH',reactivo:'+ 2 HBr',condicion:'(2 moles)',
    nombre_rxn:'Adición de HBr a alquino (2ª adición)',
    regla:'Segunda adición de HBr sobre el bromoeteno intermedio (Markovnikov).',
    respuesta:'CH₃CHBr₂  (1,1-dibromoetano)'},
-  {key:'rxn_19',topic:'alquinos',grupo_rxn:'Adición (alquinos)',pregunta_tipo:'producto',
+  {key:'rxn_19',topic:'alquinos',categoria:'Adición (alquinos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la hidrogenación parcial del propino:',
    r:'CH₃−C≡CH',reactivo:'+ H₂',condicion:'cat. Pd/CaCO₃ (Lindlar)',
    nombre_rxn:'Hidrogenación parcial de alquino',
    regla:'El catalizador de Lindlar da solo el alqueno cis; evita sobrereducción.',
    respuesta:'CH₃−CH=CH₂  (propeno, isómero cis)'},
   // ── Sustitución nucleofílica ─────────────────────────────────────────────
-  {key:'rxn_20',topic:'halogenuros',grupo_rxn:'Sustitución nucleofílica',pregunta_tipo:'producto',
+  {key:'rxn_20',topic:'halogenuros',categoria:'Sustitución nucleofílica',pregunta_tipo:'producto',
    enunciado:'Predice el producto de esta reacción SN2:',
    r:'CH₃CH₂Br',reactivo:'+ NaOH',condicion:'solución acuosa',
    nombre_rxn:'Sustitución Nucleofílica Bimolecular (SN2)',
    regla:'OH⁻ ataca por la cara opuesta al Br; inversión de configuración (Walden).',
    respuesta:'CH₃CH₂OH  (etanol)  +  NaBr'},
-  {key:'rxn_21',topic:'halogenuros',grupo_rxn:'Sustitución nucleofílica',pregunta_tipo:'tipo',
+  {key:'rxn_21',topic:'halogenuros',categoria:'Sustitución nucleofílica',pregunta_tipo:'tipo',
    enunciado:'Clasifica la siguiente reacción e indica el nucleófilo y el grupo saliente:',
    r:'(CH₃)₃CBr',reactivo:'+ H₂O',condicion:'temperatura ambiente',
    nombre_rxn:'Sustitución Nucleofílica Unimolecular (SN1)',
    regla:'El carbono terciario forma un carbocatión estable (SN1); el H₂O es el nucleófilo.',
    respuesta:'SN1. Nucleófilo: H₂O. Grupo saliente: Br⁻. Producto: (CH₃)₃COH (2-metilpropan-2-ol).'},
   // ── Eliminación ──────────────────────────────────────────────────────────
-  {key:'rxn_22',topic:'halogenuros',grupo_rxn:'Eliminación',pregunta_tipo:'producto',
+  {key:'rxn_22',topic:'halogenuros',categoria:'Eliminación',pregunta_tipo:'producto',
    enunciado:'Escribe el alqueno que se forma en la siguiente reacción E2:',
    r:'CH₃−CH₂−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
    nombre_rxn:'Eliminación Bimolecular (E2)',
    regla:'La base KOH retira un H β; se forma el doble enlace (Saytzeff: alqueno más sustituido).',
    respuesta:'CH₃−CH=CH₂  (propeno)  +  KBr  +  H₂O'},
-  {key:'rxn_23',topic:'halogenuros',grupo_rxn:'Eliminación',pregunta_tipo:'tipo',
+  {key:'rxn_23',topic:'halogenuros',categoria:'Eliminación',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y explica por qué se favorece la eliminación sobre la sustitución:',
    r:'CH₃−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
    nombre_rxn:'Eliminación E2 (condiciones básicas / calor)',
@@ -2244,6 +2244,11 @@ function generate(){
     warning.className='warning show';
     return;
   }
+  if(!Number.isFinite(n) || n<5 || n>50){
+    warning.textContent='El número de preguntas debe ser un número entre 5 y 50.';
+    warning.className='warning show';
+    return;
+  }
 
   const wantsRxn=grupos.includes('reacciones');
   const tiposNom=tipos.filter(t=>t!=='D');
@@ -2296,13 +2301,23 @@ function generate(){
     return;
   }
 
-  // Mix: distribute n questions proportionally between mol and rxn pools
+  // Mix: distribute n questions proportionally between mol and rxn pools,
+  // then backfill from whichever pool still has spare capacity so a thin
+  // filter selection (e.g. one small reaction category) doesn't shortchange
+  // the total when the other pool could easily cover it.
   let countMol=0, countRxn=0;
   if(poolMol.length && poolRxn.length){
-    countRxn=Math.max(1, Math.round(n*0.35));
-    countMol=n-countRxn;
-    countRxn=Math.min(countRxn, poolRxn.length);
-    countMol=Math.min(countMol, poolMol.length);
+    countRxn=Math.min(Math.max(1, Math.round(n*0.35)), poolRxn.length);
+    countMol=Math.min(n-countRxn, poolMol.length);
+    let shortfall=n-(countMol+countRxn);
+    if(shortfall>0){
+      const extraRxn=Math.min(shortfall, poolRxn.length-countRxn);
+      countRxn+=extraRxn; shortfall-=extraRxn;
+    }
+    if(shortfall>0){
+      const extraMol=Math.min(shortfall, poolMol.length-countMol);
+      countMol+=extraMol; shortfall-=extraMol;
+    }
   } else if(poolMol.length){
     countMol=Math.min(n, poolMol.length);
   } else {
