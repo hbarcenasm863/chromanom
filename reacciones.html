@@ -179,6 +179,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .mol-cmp-name{font-size:.62rem;color:var(--dimmer);margin-top:3px;font-family:'Outfit',sans-serif}
 .ox-badge{display:inline-block;font-size:.6rem;font-weight:800;font-family:'JetBrains Mono',monospace;
   color:var(--c3t);background:var(--c3b);border-radius:20px;padding:1px 8px;margin-top:4px}
+.rxn-extra{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.rxn-extra-box{display:flex;gap:8px;align-items:flex-start;padding:9px 12px;border-radius:var(--rs);font-size:.78rem;line-height:1.55}
+.rxn-extra-box.inquiry{background:var(--c1b);color:var(--c1t)}
+.rxn-extra-box.calc{background:var(--c2b);color:var(--c2t)}
+.rxn-extra-ico{flex-shrink:0;font-size:1rem}
+.calc-toggle{margin-left:6px;font-size:.68rem;padding:2px 9px;border-radius:20px;border:1px solid currentColor;background:none;color:inherit;cursor:pointer;font-weight:700}
+.calc-ans{margin-top:5px;font-family:'JetBrains Mono',monospace;font-weight:700;display:none}
+.calc-ans.open{display:block}
 .mol-cmp-arr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c2t);
   text-align:center;flex-shrink:0}
 .mol-cmp-reag{font-size:.65rem;color:var(--c3t);font-weight:700}
@@ -771,6 +779,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <span class="rxn-vida-ico">🇨🇴</span>
   <div><strong>¿Para qué les sirve esto?</strong> Con esta reacción se fabrica el <strong>cloroformo (CHCl₃)</strong> que usan como disolvente en laboratorios colombianos, y el <strong>clorometano (CH₃Cl)</strong>, que es materia prima para hacer siliconas y refrigerantes. Y de acá también salieron los clorofluorocarbonos (CFC) — esos que hoy están prohibidos porque le hacían hueco a la capa de ozono.</div>
 </div>
+        <div class="rxn-extra">
+          <div class="rxn-extra-box inquiry">
+            <span class="rxn-extra-ico">🔎</span>
+            <div><b>Para indagar:</b> el propano tiene 6 H primarios y solo 2 H secundarios, pero la bromación da casi exclusivamente 2-bromopropano. Investiga la estabilidad relativa de radicales 1°/2°/3° y explica por qué Br₂ es tan selectivo (compáralo con Cl₂, que sí da algo de 1-cloropropano).</div>
+          </div>
+          <div class="rxn-extra-box calc">
+            <span class="rxn-extra-ico">🧮</span>
+            <div><b>Para calcular:</b> haces reaccionar 3.0 mol de propano con exceso de Br₂ bajo luz UV (monobromación). ¿Cuántos moles de HBr se producen?
+              <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
+              <div class="calc-ans">3.0 mol de HBr — la SR es 1:1 (cada R−H sustituido libera exactamente 1 HX).</div>
+            </div>
+          </div>
+        </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-0-q0">
@@ -920,6 +941,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <span class="rxn-vida-ico">🇨🇴</span>
   <div><strong>¿Para qué les sirve esto?</strong> Cada vez que prenden la estufa con <strong>gas propano</strong> (en el campo colombiano) o gas natural (metano, en las ciudades), están viendo esta combustión completa en acción. Y el ACPM (diésel) que mueve los camiones de carga acá también es una mezcla de alcanos de 12 a 20 carbonos: al quemarse completo, ahí sale la energía que mueve el motor.</div>
 </div>
+        <div class="rxn-extra">
+          <div class="rxn-extra-box inquiry">
+            <span class="rxn-extra-ico">🔎</span>
+            <div><b>Para indagar:</b> observa la llama de un mechero Bunsen con la entrada de aire cerrada (amarilla, humeante) y abierta (azul). Investiga cómo cambia la relación O₂/combustible entre las dos y conéctalo con la combustión incompleta (siguiente tarjeta).</div>
+          </div>
+          <div class="rxn-extra-box calc">
+            <span class="rxn-extra-ico">🧮</span>
+            <div><b>Para calcular:</b> ¿cuántos moles de CO₂ se producen al quemar completamente 2.5 mol de butano (C₄H₁₀)?
+              <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
+              <div class="calc-ans">10 mol de CO₂ — cada C₄H₁₀ aporta 4 C, así que 2.5 mol × 4 = 10 mol CO₂.</div>
+            </div>
+          </div>
+        </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-1-q0">
@@ -1068,6 +1102,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   <span class="rxn-vida-ico">⚠️</span>
   <div><strong>¿Para qué les sirve esto?</strong> Esta es la reacción detrás de los accidentes por <strong>monóxido de carbono (CO)</strong> en casas con mala ventilación — un gas que no se ve ni se huele, y por eso mata sin avisar. En Colombia, los calentadores de agua a gas sin salida al exterior son la causa más frecuente. Guárdense esta señal: si ven la <strong>llama amarilla</strong> del quemador, esa es la combustión incompleta avisándoles — abran ventana ya.</div>
 </div>
+        <div class="rxn-extra">
+          <div class="rxn-extra-box inquiry">
+            <span class="rxn-extra-ico">🔎</span>
+            <div><b>Para indagar:</b> investiga por qué el CO se une a la hemoglobina con mucha más afinidad que el propio O₂ (busca el factor aproximado) y por qué eso es justo lo que bloquea el transporte de oxígeno en la sangre.</div>
+          </div>
+          <div class="rxn-extra-box calc">
+            <span class="rxn-extra-ico">🧮</span>
+            <div><b>Para calcular:</b> balancea la combustión incompleta del propano (C₃H₈) que produce SOLO CO y H₂O. ¿Cuántos moles de O₂ se necesitan por mol de propano?
+              <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
+              <div class="calc-ans">3.5 mol de O₂ — C₃H₈ + 3.5 O₂ → 3 CO + 4 H₂O (comprueba: 3 O en el CO + 4 O en el H₂O = 7 O = 3.5 O₂).</div>
+            </div>
+          </div>
+        </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-2-q0">
@@ -1200,6 +1247,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-vida">
   <span class="rxn-vida-ico">💉</span>
   <div><strong>¿Para qué les sirve esto?</strong> El <strong>ciclopropano</strong> fue el primer anestésico inhalado que se usó masivamente en cirugías del siglo XX. Hoy ya no se usa — lo reemplazaron anestésicos más seguros (isoflurano, sevoflurano) — pero su historia les muestra algo importante: esa inestabilidad química del anillo de tres carbonos que acabamos de ver tiene consecuencias biológicas reales. Y no crean que quedó solo en la historia: derivados de ciclopropano siguen apareciendo en insecticidas piretroides, como la cipermetrina que se usa acá en Colombia.</div>
+</div>
+        <div class="rxn-extra">
+          <div class="rxn-extra-box inquiry">
+            <span class="rxn-extra-ico">🔎</span>
+            <div><b>Para indagar:</b> el ciclopropano reacciona por adición como si tuviera un doble enlace, aunque solo tiene enlaces simples C−C. Investiga qué son los "enlaces banana" (bent bonds) del anillo tensionado y cómo explican esta reactividad inusual.</div>
+          </div>
+          <div class="rxn-extra-box calc">
+            <span class="rxn-extra-ico">🧮</span>
+            <div><b>Para calcular:</b> ¿cuántos gramos de HBr (M=80.9 g/mol) se necesitan para reaccionar completamente con 4.2 g de ciclopropano (C₃H₆, M=42 g/mol)?
+              <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
+              <div class="calc-ans">8.09 g de HBr — 4.2 g ÷ 42 g/mol = 0.1 mol de ciclopropano; como la relación es 1:1, se necesitan 0.1 mol × 80.9 g/mol = 8.09 g de HBr.</div>
+            </div>
+          </div>
+        </div>
 </div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
@@ -7256,6 +7317,11 @@ function toggleRxn(id){
       el.style.animation=`rxnFadeUp .35s ${0.05+i*.13}s forwards`;
     });
   }
+}
+function toggleCalc(btn){
+  const ans=btn.nextElementSibling;
+  const open=ans.classList.toggle('open');
+  btn.textContent=open?'Ocultar respuesta':'Ver respuesta';
 }
 
 /* ── QUIZ ── */
