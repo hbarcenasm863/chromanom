@@ -7198,18 +7198,18 @@ const RF={
     speaks:['Reactivo: bromometano. El carbono unido al bromo es positivo parcial y atrae nucleófilos.','Condición: sustitución nucleofílica. El ion hidróxido ataca al carbono electrofílico por la cara opuesta al bromo, en un mecanismo concertado SN2.','Producto: metanol y bromuro de sodio. El carbono invirtió su configuración como un paraguas al revés.']
   },
   'hg-1':{
+    r:{eq:'(CH₃)₃C−Br'},
+    eq:'(CH₃)₃C−Br<br>──[ionización lenta]──→<br>(CH₃)₃C⁺ + Br⁻ ──[Nu]──→ (CH₃)₃C−Nu',
+    p:{eq:'(CH₃)₃C−Nu (racémico)'},
+    labels:['Reactivo: haloalcano terciario — favorece la ionización','Condición: solvente prótico, Nu débil. Se ioniza solo, ANTES de que llegue el nucleófilo','Producto: mezcla racémica — el carbocatión plano deja atacar por cualquier cara'],
+    speaks:['Reactivo: un haloalcano terciario.','Condición: sustitución nucleofílica unimolecular. El sustrato se ioniza solo, formando un carbocatión plano, antes de que aparezca el nucleófilo.','Producto: mezcla racémica, porque el nucleófilo puede atacar por cualquiera de las dos caras del carbocatión.']
+  },
+  'hg-2':{
     r:{mol:'r2bromopropano'},
     eq:'CH₃−CHBr−CH₃ + KOH/etanol<br>──[Δ]──→<br>CH₃−CH=CH₂ + KBr + H₂O',
     p:{mol:'propeno'},
     labels:['Reactivo: haloalcano secundario (2-bromopropano)','Condición: base fuerte en disolvente no acuoso (KOH/etanol, Δ). La base extrae el H del C adyacente al que lleva el Br','Producto: alqueno (propeno). Regla de Zaitsev: preferido el alqueno más sustituido'],
     speaks:['Reactivo: 2-bromopropano, un haloalcano secundario.','Condición: eliminación E2. La base fuerte en disolvente alcohólico arranca un hidrógeno del carbono adyacente al bromo.','Producto: propeno. La regla de Zaitsev predice que se forma el alqueno más sustituido.']
-  },
-  'hg-2':{
-    r:{mol:'bromometano'},
-    eq:'CH₃Br + Mg<br>──[éter seco]──→<br>CH₃−MgBr',
-    p:{mol:'grignard'},
-    labels:['Reactivo: haloalcano (bromometano) + magnesio metálico','Condición: éter anhidro (sin agua). El enlace C−Mg es muy polar (C tiene carga parcial negativa δ⁻)','Producto: reactivo de Grignard (CH₃MgBr). El C es nucleófilo fuerte. Clave en síntesis de alcoholes'],
-    speaks:['Reactivo: bromometano y magnesio metálico.','Condición: reacción en éter seco. El agua destruiría el reactivo de Grignard. El enlace carbono magnesio es altamente polar.','Producto: metilmagnesio bromuro, el reactivo de Grignard. El carbono actúa como nucleófilo fuerte, esencial en síntesis orgánica.']
   },
   'ao-0':{
     r:{mol:'etanol'},
@@ -7226,39 +7226,39 @@ const RF={
     speaks:['Reactivo: etanol, un alcohol primario.','Condición: oxidación con dicromato de potasio. Un alcohol primario se oxida primero a aldeíhdo y luego a ácido carboxílico. El cambio de naranja a verde confirma la oxidación.','Producto: ácido etanoico, también llamado ácido acético. Es el ácido del vinagre.']
   },
   'ao-2':{
+    r:{mol:'etanol'},
+    eq:'CH₃CH₂OH + HCl<br>──[ZnCl₂]──→<br>CH₃CH₂Cl + H₂O',
+    p:{mol:'cloroetano'},
+    labels:['Reactivo: alcohol (etanol) + haluro de hidrógeno (o SOCl₂)','Condición: H⁺ activa el OH como grupo saliente. 1° va por SN2, 3° por SN1','Producto: haloalcano + H₂O — con SOCl₂ el subproducto es gas (SO₂ + HCl), más limpio'],
+    speaks:['Reactivo: etanol y ácido clorhídrico.','Condición: el protón activa el grupo hidroxilo como grupo saliente. Con cloruro de tionilo el resultado es más limpio.','Producto: cloroetano y agua. El alcohol se convirtió en haloalcano.']
+  },
+  'ao-3':{
     r:{mol:'acidoetanoico'},
     eq:'CH₃COOH + C₂H₅OH ⇌[H₂SO₄/Δ] CH₃COOC₂H₅ + H₂O',
     p:{mol:'acetatoetilo'},
     labels:['Reactivos: ácido carboxílico (CH₃COOH) + alcohol (C₂H₅OH)','Condición: catalizador ácido (H₂SO₄) y calor. Equilibrio → se retira H₂O para desplazarlo a productos','Producto: éster (acetato de etilo). Aroma afrutado. Reacción reversible (puede hidrolizarse)'],
     speaks:['Reactivos: ácido etanoico y etanol.','Condición: esterificación de Fischer con ácido sulfúrico. Es una reacción de equilibrio; retirar el agua desplaza el equilibrio hacia el éster.','Producto: acetato de etilo. Tiene olor afrutado y se usa como disolvente y en esmaltes de uñas.']
   },
-  'ao-3':{
-    r:{mol:'etanol'},
-    eq:'2 CH₃CH₂OH + 2 Na<br>──[T° amb]──→<br>2 CH₃CH₂O⁻Na⁺ + H₂↑',
-    p:{mol:'etoxidosodio'},
-    labels:['Reactivo: alcohol (etanol) + sodio metálico','Condición: Na metálico a temperatura ambiente. Libera H₂ (inflamable). Prueba de acidez del OH','Producto: etóxido de sodio (base fuerte) + hidrógeno gas. Los alcoholes son ácidos débiles'],
-    speaks:['Reactivo: etanol y sodio metálico.','Condición: reacción a temperatura ambiente. El sodio reacciona violentamente liberando hidrógeno. Esta reacción prueba que el grupo OH es ácido.','Producto: etóxido de sodio, una base muy fuerte, y gas hidrógeno inflamable.']
-  },
   'am-0':{
-    r:{mol:'metilamina'},
-    eq:'CH₃NH₂ + CH₃COCl<br>──[base]──→<br>CH₃−NH−CO−CH₃ + HCl',
-    p:{mol:'Nmetilacetamida'},
-    labels:['Reactivo: amina (metilamina CH₃−NH₂)','Condición: cloruro de acilo (reactivo de ácido carboxílico). El N del amino ataca el C del acilo (nucleófilo)','Producto: amida secundaria (N-metilacetamida). El enlace amida −CO−NH− es la base del enlace peptídico de proteínas'],
-    speaks:['Reactivo: metilamina, una amina primaria.','Condición: acilación. El nitrógeno nucleofídico ataca al carbono del cloruro de acilo.','Producto: N-metilacetamida. El enlace amida que se formó es el mismo enlace peptídico que une los aminoácidos en las proteínas.']
-  },
-  'am-1':{
     r:{mol:'metilamina'},
     eq:'CH₃NH₂ + HCl<br>──[T° amb]──→<br>CH₃NH₃⁺Cl⁻',
     p:{mol:'etilaminasalt'},
     labels:['Reactivo: amina (base de Lewis por el par libre del N)','Condición: ácido fuerte o débil. El par libre del N capta el H⁺ del ácido (reacción ácido-base de Brønsted)','Producto: sal de amonio (cloruro de metilamonio). Sólido iónico, soluble en agua. Reversible con base fuerte'],
     speaks:['Reactivo: metilamina, que tiene un par de electrones libres en el nitrógeno.','Condición: reacción con ácido clorhídrico a temperatura ambiente. El nitrógeno capta el protón del ácido.','Producto: cloruro de metilamonio, una sal. Con base fuerte se puede regenerar la amina libre.']
   },
+  'am-1':{
+    r:{eq:'C₆H₅NO₂'},
+    eq:'C₆H₅NO₂ + 3H₂<br>──[Pt o Pd/C]──→<br>C₆H₅NH₂ + 2H₂O',
+    p:{eq:'C₆H₅NH₂ (anilina)'},
+    labels:['Reactivo: nitrocompuesto aromático (nitrobenceno)','Condición: H₂/Pt o Pd/C (limpio) — o Sn/Fe + HCl (clásico). 3 etapas de 2e⁻ cada una','Producto: anilina + agua — puerta a colorantes, fármacos y polímeros'],
+    speaks:['Reactivo: nitrobenceno.','Condición: reducción catalítica con hidrógeno y platino, o con estaño y ácido clorhídrico.','Producto: anilina, el precursor de colorantes, fármacos como el paracetamol, y polímeros como el nailon.']
+  },
   'am-2':{
-    r:{mol:'metilamina'},
-    eq:'CH₃NH₂ + CH₃I<br>──[calor]──→<br>(CH₃)₂NH + HI',
-    p:{mol:'dimetilamina'},
-    labels:['Reactivo: amina primaria (metilamina). El N actúa como nucleófilo','Condición: haloalcano (CH₃I = yodometano) y calor. El N ataca al C del haloalcano (SN2)','Producto: amina secundaria (dimetilamina). Puede continuar → amina terciaria → sal cuaternaria'],
-    speaks:['Reactivo: metilamina con par libre en el nitrógeno.','Condición: N-alquilación. El yodometano reacciona con la amina en una sustitución nucleofílica.','Producto: dimetilamina, una amina secundaria. La reacción puede continuar formando amina terciaria y finalmente sal de amonio cuaternaria.']
+    r:{eq:'C₆H₅NH₂ + NaNO₂/HCl'},
+    eq:'C₆H₅NH₂ + NaNO₂/HCl<br>──[0–5°C]──→<br>C₆H₅N₂⁺Cl⁻ ──[Cu₂Cl₂]──→ C₆H₅Cl + N₂↑',
+    p:{eq:'C₆H₅Cl + N₂↑'},
+    labels:['Reactivo: arilamina (anilina) + ácido nitroso generado in situ','Condición: 0–5°C obligatorio — a T° ambiente el diazonio se descompone','Producto: sal de diazonio → con Cu₂X₂ (Sandmeyer) cambia el N₂⁺ por Cl, Br, CN...'],
+    speaks:['Reactivo: anilina con nitrito de sodio y ácido clorhídrico, en frío.','Condición: la temperatura entre cero y cinco grados es obligatoria, porque el diazonio es muy inestable.','Producto: la sal de diazonio, y con un catalizador de cobre, la reacción de Sandmeyer reemplaza el nitrógeno por cloro, bromo o cianuro.']
   },
   'cb-0':{
     r:{mol:'etanal'},
@@ -7269,59 +7269,59 @@ const RF={
   },
   'cb-1':{
     r:{mol:'etanal'},
-    eq:'2 CH₃CHO<br>──[NaOH/H₂O]──→<br>CH₃−CH(OH)−CH₂−CHO',
-    p:{mol:'aldol'},
-    labels:['Reactivos: 2 moléculas de aldeíhdo (etanal). Una actúa como nucleófilo y otra como electrófilo','Condición: base diluída (NaOH). Genera el enolato (α-C nucleofídico) que ataca el carbonilo del otro aldeíhdo','Producto: β-hidroxialdeíhdo (aldol = aldeíhdo + alcohol). Puede deshidratarse → α,β-insaturado (enal)'],
-    speaks:['Reactivos: dos moléculas de etanal.','Condición: condensación aldólica con base diluída. Una molécula pierde un hidrógeno alfa y ataca como nucleófilo al carbonilo de la otra.','Producto: 3-hidroxibutanal. Tiene a la vez un grupo alcohol y un grupo aldeíhdo. Puede deshidratarse para dar un compuesto insaturado.']
-  },
-  'cb-2':{
-    r:{mol:'etanal'},
     eq:'CH₃CHO + NaBH₄<br>──[H₂O]──→<br>CH₃−CH₂−OH',
     p:{mol:'etanol'},
     labels:['Reactivo: aldeíhdo o cetona (etanal)','Condición: NaBH₄ o LiAlH₄ (o H₂/Ni). El H⁻ (hidruro) ataca el C del carbonilo como nucleófilo','Producto: alcohol. Aldeíhdo → alcohol 1°; cetona → alcohol 2°. Reacción de reducción'],
     speaks:['Reactivo: etanal.','Condición: reducción con borohidruro de sodio. El ion hidruro actúa como nucleófilo atacando el carbono del carbonilo.','Producto: etanol. El carbonilo se redujo a alcohol. Los aldeídos dan alcoholes primarios y las cetonas dan alcoholes secundarios.']
   },
+  'cb-2':{
+    r:{mol:'grignard'},
+    eq:'CH₃MgBr + CH₃CHO<br>──[éter → H₃O⁺]──→<br>CH₃−CH(OH)−CH₃',
+    p:{eq:'CH₃−CH(OH)−CH₃'},
+    labels:['Reactivo: reactivo de Grignard (R′MgBr) + aldehído o cetona','Condición: éter seco — el carbono del Grignard actúa como carbanión, nucleófilo fuerte','Producto: alcohol (nuevo enlace C−C) tras la hidrólisis ácida (H₃O⁺)'],
+    speaks:['Reactivo: un reactivo de Grignard con un aldehído.','Condición: en éter seco, el carbono del Grignard ataca al carbonilo como si fuera un carbanión.','Producto: un alcohol con un enlace carbono carbono nuevo, tras la hidrólisis ácida final.']
+  },
   'cb-3':{
     r:{mol:'etanal'},
-    eq:'CH₃CHO + [Ag(NH₃)₂]⁺OH⁻<br>──[Δ]──→<br>CH₃COO⁻ + Ag↓ + NH₃',
-    p:{mol:'carboxilatoetanoico'},
-    labels:['Reactivo: aldeíhdo (etanal). OJO: las cetonas NO dan positivo en esta prueba','Condición: reactivo de Tollens (solución amoniacal de AgNO₃). El aldeíhdo oxida la plata Ag⁺ → Ag⁰','Producto: carboxilato (acetato) + espejo de plata Ag↓ en la pared del tubo. Prueba diagnóstica clave'],
-    speaks:['Reactivo: etanal. Solo los aldeídos dan positivo en la prueba de Tollens; las cetonas no reaccionan.','Condición: el reactivo de Tollens es plata amoniacal. El aldeíhdo se oxida y reduce la plata iónica a plata metálica.','Producto: ion acetato y espejo de plata en la pared del tubo. Esta prueba distingue aldeídos de cetonas.']
+    eq:'2 CH₃CHO<br>──[NaOH/H₂O]──→<br>CH₃−CH(OH)−CH₂−CHO',
+    p:{mol:'aldol'},
+    labels:['Reactivos: 2 moléculas de aldeíhdo (etanal). Una actúa como nucleófilo y otra como electrófilo','Condición: base diluída (NaOH). Genera el enolato (α-C nucleofídico) que ataca el carbonilo del otro aldeíhdo','Producto: β-hidroxialdeíhdo (aldol = aldeíhdo + alcohol). Puede deshidratarse → α,β-insaturado (enal)'],
+    speaks:['Reactivos: dos moléculas de etanal.','Condición: condensación aldólica con base diluída. Una molécula pierde un hidrógeno alfa y ataca como nucleófilo al carbonilo de la otra.','Producto: 3-hidroxibutanal. Tiene a la vez un grupo alcohol y un grupo aldeíhdo. Puede deshidratarse para dar un compuesto insaturado.']
   },
   'ac-0':{
     r:{mol:'acidoetanoico'},
-    eq:'CH₃COOH + C₂H₅OH ⇌[H₂SO₄/Δ] CH₃COOC₂H₅ + H₂O',
-    p:{mol:'acetatoetilo'},
-    labels:['Reactivos: ácido carboxílico (ácido etanoico) + alcohol (etanol)','Condición: catalizador ácido (H₂SO₄) + calor. El equilibrio se desplaza retirando el H₂O producido','Producto: éster (acetato de etilo) + agua. Reacción reversible base de perfumes, saborizantes y polímeros'],
-    speaks:['Reactivos: ácido etanoico y etanol.','Condición: esterificación de Fischer. El catalizador ácido y el calor favorecen la formación del éster. Retirar el agua desplaza el equilibrio.','Producto: acetato de etilo y agua. El éster tiene aroma afrutado y es muy usado como disolvente.']
+    eq:'CH₃COOH + NaOH<br>──→<br>CH₃COO⁻Na⁺ + H₂O',
+    p:{mol:'carboxilatoetanoico'},
+    labels:['Reactivo: ácido carboxílico (ácido etanoico) + base fuerte (NaOH)','Condición: neutralización ácido-base simple, sin catalizador','Producto: carboxilato de sodio (la base de los jabones) + agua. Muy estable por resonancia'],
+    speaks:['Reactivo: ácido etanoico e hidróxido de sodio.','Condición: neutralización ácido-base. El carboxilato que se forma es muy estable porque la carga negativa se reparte entre los dos oxígenos por resonancia.','Producto: acetato de sodio y agua. Esta es la reacción detrás de la fabricación de jabones.']
   },
   'ac-1':{
-    r:{mol:'acidoetanoico'},
-    eq:'CH₃COOH + NH₃<br>──[Δ]──→<br>CH₃CO−NH₂ + H₂O',
-    p:{mol:'etanamida'},
-    labels:['Reactivos: ácido carboxílico (CH₃COOH) + amoniaco (NH₃)','Condición: calor. Primero se forma la sal de amonio → luego pierde H₂O → amida','Producto: amida (etanamida / acetamida). El grupo −CONH₂ = enlace peptídico de las proteínas'],
-    speaks:['Reactivos: ácido etanoico y amoniaco.','Condición: calor fuerte. Primero se forma una sal de amonio que con más calor pierde agua.','Producto: etanamida. El enlace amida formado es idéntico al enlace peptídico que une los aminoácidos en las proteínas.']
+    r:{mol:'etanol'},
+    eq:'R−CH₂OH · Ar−R · R−C≡N<br>──[KMnO₄ ó H₂O/H⁺]──→<br>R−COOH',
+    p:{mol:'acidoetanoico'},
+    labels:['Reactivo: alcohol 1°, alquilbenceno o nitrilo — tres puntos de partida distintos','Condición: KMnO₄ fuerte oxida (alcohol o cadena lateral); H₂O/H⁺ hidroliza el nitrilo','Producto: ácido carboxílico — el mismo grupo funcional por tres rutas distintas'],
+    speaks:['Reactivo: puede ser un alcohol primario, un alquilbenceno o un nitrilo.','Condición: con oxidantes fuertes como el permanganato, o con hidrólisis ácida para el nitrilo.','Producto: ácido carboxílico. Tres caminos distintos que llegan al mismo grupo funcional.']
   },
   'dv-0':{
     r:{mol:'acetatoetilo'},
-    eq:'CH₃COOC₂H₅ + H₂O ⇌[H₂SO₄/Δ]⇌ CH₃COOH + C₂H₅OH',
-    p:{mol:'acidoetanoico'},
-    labels:['Reactivo: éster (acetato de etilo) + agua','Condición: ácido (H₂SO₄) + calor. Reacción inversa de la esterificación. Equilibrio','Producto: ácido carboxílico + alcohol. Es la hidólisis ácida del éster. Reversible'],
-    speaks:['Reactivo: acetato de etilo más agua.','Condición: hidólisis ácida con ácido sulfúrico y calor. Es la reacción inversa de la esterificación de Fischer.','Productos: ácido etanoico y etanol. La reacción es de equilibrio y se puede desplazar con exceso de agua.']
+    eq:'CH₃COOC₂H₅ + NaOH<br>──→<br>CH₃COO⁻Na⁺ + C₂H₅OH',
+    p:{mol:'carboxilatoetanoico'},
+    labels:['Reactivo: éster (acetato de etilo)','Condición: NaOH (saponificación, irreversible) · o H⁺/H₂O (reversible) · o LiAlH₄ (2 alcoholes)','Producto: carboxilato + alcohol — o dos alcoholes distintos si usan LiAlH₄'],
+    speaks:['Reactivo: acetato de etilo.','Condición: con NaOH es saponificación, irreversible. Con ácido y agua es hidrólisis, reversible. Con LiAlH cuatro se reduce por completo.','Producto: según la ruta, sale el carboxilato o el ácido, más el alcohol correspondiente.']
   },
   'dv-1':{
-    r:{mol:'etanamida'},
-    eq:'CH₃CONH₂ + H₂O<br>──[H₂SO₄/Δ]──→<br>CH₃COOH + NH₄⁺',
-    p:{mol:'acidoetanoico'},
-    labels:['Reactivo: amida (etanamida CH₃CONH₂) + agua','Condición: ácido fuerte (H₂SO₄) + calor (o base + calor). El enlace C−N se hidroliza','Producto: ácido carboxílico + ion amonio (NH₄⁺). Las proteínas se digieren por hidólisis de sus enlaces amida'],
-    speaks:['Reactivo: etanamida más agua.','Condición: hidólisis ácida con ácido sulfúrico y calor. El enlace amida se rompe con el agua.','Productos: ácido etanoico e ion amonio. Así se digieren las proteínas en el sistema digestivo.']
+    r:{eq:'R−C(=O)−Cl'},
+    eq:'R−COCl + Nu:<br>──[SAcN]──→<br>R−CO−Nu + Cl⁻',
+    p:{eq:'R−C(=O)−Nu'},
+    labels:['Reactivo: cloruro de ácido + casi cualquier nucleófilo (H₂O, ROH, RNH₂...)','Condición: sin catalizador — el Cl⁻ es tan buen grupo saliente que reacciona solo','Producto: ácido, éster, amida o anhídrido + Cl⁻, según el nucleófilo que usen'],
+    speaks:['Reactivo: cloruro de ácido con casi cualquier nucleófilo.','Condición: no necesita catalizador. El cloruro es el derivado más reactivo de todos.','Producto: puede dar ácido, éster, amida o anhídrido, según qué nucleófilo entra.']
   },
   'dv-2':{
-    r:{mol:'acetatoetilo'},
-    eq:'CH₃COOC₂H₅ + NaOH<br>──[H₂O/Δ]──→<br>CH₃COO⁻Na⁺ + C₂H₅OH',
-    p:{mol:'etanol'},
-    labels:['Reactivo: éster (acetato de etilo) + hidróxido de sodio (NaOH)','Condición: base fuerte (NaOH) + agua y calor. Reacción irreversible (la base consume el ácido formado)','Producto: sal del ácido (jabón) + alcohol. Saponificación = fabricación de jabón a partir de grasas'],
-    speaks:['Reactivo: acetato de etilo y soda cáustica.','Condición: saponificación o hidólisis básica. A diferencia de la hidólisis ácida, esta reacción es irreversible porque la base consume el ácido carboxílico formado.','Productos: acetato de sodio y etanol. El proceso de fabricación de jabón usa exactamente esta reacción con grasas y soda cáustica.']
+    r:{mol:'etanamida'},
+    eq:'CH₃CONH₂ + H₂O<br>──[H⁺/Δ fuerte]──→<br>CH₃COOH + NH₄⁺',
+    p:{mol:'acidoetanoico'},
+    labels:['Reactivo: amida — la más estable (menos reactiva) de los derivados','Condición: necesita H⁺/Δ fuerte para hidrolizarse — o LiAlH₄ para reducirse a amina','Producto: ácido + NH₄⁺ (hidrólisis) — o amina 1° con LiAlH₄, el único derivado que da amina'],
+    speaks:['Reactivo: una amida, el derivado menos reactivo de todos.','Condición: hidrólisis con ácido fuerte y calor intenso, porque el nitrógeno no se va fácil. O reducción con litio aluminio hidruro.','Producto: ácido carboxílico e ion amonio. Con litio aluminio hidruro se obtiene una amina primaria en su lugar.']
   }
 };
 
