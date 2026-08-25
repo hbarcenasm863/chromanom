@@ -6096,6 +6096,140 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('cb-4')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Tollens, Fehling y Yodoformo</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">Pruebas de identificación · aldehído vs. cetona</span>
+        </div>
+        <span class="rxn-chev" id="chev-cb-4">▾</span>
+      </div>
+      <div class="rxn-body" id="body-cb-4">
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">CHO</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">Ag(NH₃)₂⁺</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Δ (Tollens)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">COOH</span></span>
+            <span style="font-size:.7rem;color:#92400e;font-weight:700;background:#fef3c7;border-radius:4px;padding:1px 7px;font-family:'Outfit',sans-serif">+ Ag⁰↓ espejo</span>
+          </div>
+        </div>
+
+        <!-- ── STEPPER: Tollens/Fehling/Yodoformo — Visión general ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-cb-4" onclick="rxnAnimStep('cb-4',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-cb-4" onclick="rxnAnimStep('cb-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-cb-4">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('cb-4',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('cb-4',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('cb-4',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-cb-4">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">R−CHO + Ag(NH₃)₂⁺ (o Cu²⁺)</div>
+              <div class="rxn-anim-label">Reactivo: un aldehído con H sobre el carbonilo</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">Δ, medio básico</div>
+              <div class="rxn-anim-label">Condición: el aldehído se oxida; la cetona NO reacciona</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">Ag⁰↓ espejo (o Cu₂O↓ ladrillo)</div>
+              <div class="rxn-anim-label">Producto: −COOH + un precipitado metálico que se ve a simple vista</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
+        <div class="mech-stepper" id="mech-cb-4">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Tollens/Fehling — Mecanismo · Yodoformo — Ruta distinta</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-cb-4" onclick="mechStep('cb-4',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-cb-4">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-cb-4" onclick="mechStep('cb-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-cb-4">
+            <span class="mech-dot on" onclick="mechDot('cb-4',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('cb-4',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('cb-4',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-cb-4-0">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 5 200 95" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="50" text-anchor="start" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="28" y1="50" x2="48" y2="50" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="54" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="63" y1="46" x2="63" y2="26" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="57" y1="46" x2="57" y2="26" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="60" y="18" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">O</text><line x1="54" y1="58" x2="54" y2="72" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="54" y="80" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><text x="20" y="20" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH</text><circle cx="22.5" cy="16.8" r="1.9" fill="var(--c1t)"/><circle cx="17.5" cy="16.8" r="1.9" fill="var(--c1t)"/><path d="M24,18 Q44,24 50,44" fill="none" stroke="var(--c1t)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M60,34 Q72,32 72,20" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><circle cx="84" cy="16" r="6" fill="none" stroke="var(--c1t)" stroke-width="1.6"/><text x="84" y="19.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c1t)">-</text><text x="80" y="90" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OH⁻ ataca el C=O — se forma el gem-diolato</text></svg></div>
+            <div class="mech-step-n">Paso 1 de 3 — Adición nucleofílica de OH⁻</div>
+            <div class="mech-step-h">El OH⁻ del medio básico ataca el carbono carbonílico del aldehído → gem-diolato</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Tanto Tollens (Ag(NH₃)₂⁺ en medio amoniacal) como Fehling (Cu²⁺ en medio básico tartrato) empiezan igual: el <strong>OH⁻</strong> ataca el carbono del carbonilo con su par libre, mientras los electrones π del C=O se van al oxígeno. Queda un intermediario con <em>dos oxígenos</em> sobre el mismo carbono (gem-diolato) — y ojo, esto solo es posible porque el aldehído todavía tiene un <strong>H</strong> sobre ese carbono.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-4-1">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="105" viewBox="0 5 210 100" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="50" text-anchor="start" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="28" y1="50" x2="48" y2="50" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="54" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="60" y1="46" x2="60" y2="30" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="60" y="20" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OH</text><line x1="46" y1="58" x2="46" y2="72" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="46" y="20" text-anchor="middle" font-size="10" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O⁻</text><line x1="52" y1="58" x2="44" y2="66" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="54" y1="58" x2="54" y2="72" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="54" y="80" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><path d="M54,76 Q66,56 90,58" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><text x="100" y="55" text-anchor="middle" font-size="10" font-weight="700" style="fill:#7c3aed;font-family:'JetBrains Mono',monospace">Ag⁺</text><text x="100" y="78" text-anchor="middle" font-size="8.5" style="fill:#92400e;font-family:'JetBrains Mono',monospace">Ag⁰↓ (espejo)</text><text x="70" y="95" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el H (hidruro) reduce Ag⁺ → Ag⁰ · el C queda como −COOH</text></svg></div>
+            <div class="mech-step-n">Paso 2 de 3 — El H hace de hidruro</div>
+            <div class="mech-step-h">El H del gem-diolato transfiere sus 2 electrones al Ag⁺ (o Cu²⁺), reduciéndolo, mientras el C se oxida a −COOH</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Este es el paso clave del <em>redox</em>: el H que quedó sobre el gem-diolato se comporta como <strong>hidruro</strong> — sus 2 electrones se transfieren al metal (Ag⁺ → Ag⁰, o Cu²⁺ → Cu⁺ en Fehling), reduciéndolo. Al mismo tiempo, el carbono se queda con el enlace C=O regenerado, ahora como parte de un <strong>ácido carboxílico</strong>. Una cetona, sin ese H sobre el carbono, simplemente no tiene cómo dar este paso — por eso Tollens y Fehling distinguen aldehídos de cetonas.</div>
+          </div>
+          <div class="mech-step" id="ms-cb-4-2">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="230" height="108" viewBox="0 10 230 100" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="55" text-anchor="start" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="28" y1="55" x2="48" y2="55" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="54" y="55" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="63" y1="51" x2="63" y2="31" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="57" y1="51" x2="57" y2="31" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="60" y="23" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">O</text><line x1="60" y1="63" x2="60" y2="77" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="60" y="85" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">CI₃</text><text x="15" y="25" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH</text><path d="M20,23 Q41.5,28.4 50,49" fill="none" stroke="var(--c1t)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M58,65 Q57.7,79.3 72,80" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><text x="150" y="50" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH</text><text x="150" y="64" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">+ CHI₃↓ amarillo</text><text x="85" y="100" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OH⁻ ataca; el C−C se rompe (⁻CI₃ es buen saliente)</text></svg></div>
+            <div class="mech-step-n">Paso 3 de 3 — Yodoformo: una ruta completamente distinta</div>
+            <div class="mech-step-h">I₂/NaOH triyoda los 3 H del metilcetona (o metilcarbinol); luego OH⁻ rompe el C−C liberando CHI₃↓ amarillo</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">La prueba del yodoformo <strong>no es un redox</strong> como Tollens/Fehling — es otra familia de reacción. Solo funciona con <em>metilcetonas</em> (CH₃−CO−R) o alcoholes que se oxidan a metilcetona (CH₃−CH(OH)−R). Primero, I₂/NaOH sustituye los <strong>3 H</strong> del CH₃ por yodo (vía enolato, igual que en la halogenación de aldehídos/cetonas). Con el grupo −CI₃ ya formado, el <strong>OH⁻</strong> ataca el carbonilo y el enlace <strong>C−C</strong> se rompe — el ⁻CI₃ es un carbanión muy estable (3 yodos electronegativos) y sale como grupo saliente, que enseguida se protona a <strong>CHI₃</strong>, un sólido <em>amarillo</em> con olor característico.</div>
+          </div>
+        </div><!-- /mech-stepper -->
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃CHO</span>
+            <div class="mol-cmp-name">etanal (aldehído)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">Tollens/Fehling</div>
+            <div>──→ (+)</div>
+          </div>
+          <div class="mol-cmp-card" style="border-color:#92400e40">
+            <span class="mol-cmp-formula" style="color:#92400e;font-weight:700">Ag⁰ o Cu₂O↓</span>
+            <div class="mol-cmp-name">espejo / ladrillo</div>
+          </div>
+        </div>
+        <div class="rxn-cond">Tollens: Ag(NH₃)₂⁺, Δ → espejo de Ag⁰ · Fehling: Cu²⁺/tartrato, Δ → precipitado rojo-ladrillo Cu₂O · Yodoformo: I₂/NaOH, solo con CH₃CO−R o CH₃CH(OH)−R → CHI₃↓ amarillo</div>
+        <div class="rxn-regla">📌 Truco de examen — Tollens/Fehling (+) SOLO con aldehídos, nunca cetonas · Yodoformo (+) solo con el patrón metilcetona/metilcarbinol, sea aldehído, cetona o alcohol</div>
+        <div class="rxn-ex-lbl">Ejemplo (yodoformo)</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">CH₃<span class="bp">CO</span>CH₃ + I₂/NaOH</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃COO⁻ + <span class="hn">CHI₃↓</span></span>
+          <span class="rxn-ex-nota">acetona da (+) yodoformo</span>
+        </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🔬</span>
+  <div><strong>¿Para qué les sirve esto?</strong> Antes de tener espectrómetros, estas 3 pruebas eran (y en muchos laboratorios de colegio en Colombia siguen siendo) la forma más rápida de identificar un grupo funcional desconocido con solo mirar un cambio de color o un precipitado. Fehling todavía se usa en control de calidad para medir <strong>azúcares reductores</strong> en jugos y jarabes (la glucosa da Fehling positivo). Y la prueba del yodoformo distingue el etanol (da negativo) del isopropanol (da positivo) en control de alcoholes.</div>
+</div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="cb-4-q0">
+          <div class="quiz-q-text">¿Cuál de estas pruebas da POSITIVO con una cetona común (no metilcetona)?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'cb-4-q0',false)"><span class="quiz-opt-icon">○</span> Tollens (espejo de plata)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'cb-4-q0',false)"><span class="quiz-opt-icon">○</span> Fehling (precipitado rojo-ladrillo)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'cb-4-q0',true)"><span class="quiz-opt-icon">○</span> Ninguna: las cetonas no tienen H sobre el carbonilo</div>
+          </div>
+          <div class="quiz-fb" id="fb-cb-4-q0"></div>
+        </div>
+      </div>
+    </div>
   </div><!-- /tab-carbonilo -->
 
   <!-- ─────────────── ÁCIDOS CARBOXÍLICOS ─────────────── -->
@@ -6964,7 +7098,7 @@ function showMS(id){
 document.addEventListener('DOMContentLoaded',()=>{
   initMS('cb-0',4);
   // steppers for remaining bodies (3 steps each)
-  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
+  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','cb-4','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
@@ -7096,6 +7230,7 @@ const QUIZ_FB={
   'cb-1-q0':{ok:'Correcto — la cetona tiene 2 sustituyentes en el C=O; la reducción (H⁻ del LiAlH₄) da un alcohol 2° con los mismos 2 grupos.',fail:'Alcohol primario viene de reducir un aldehído (solo 1 sustituyente en C=O). Ácido requiere oxidación, no reducción.'},
   'cb-2-q0':{ok:'Correcto — RMgBr + cetona (R₂C=O): el reactivo de Grignard añade R′ al C del carbonilo → C queda con 3 grupos distintos → alcohol 3°.',fail:'Alcohol 1° viene de RMgBr + HCHO; alcohol 2° de RMgBr + aldehído (RCHO). Con cetona siempre es 3°.'},
   'cb-3-q0':{ok:'Correcto — el enolato del primer CH₃CHO ataca el C=O del segundo → se forma 3-hidroxibutanal (β-hidroxialdehído).',fail:'El ácido butanoico requeriría oxidación. La acetona es el producto de la autocondesación de... cetonas simétricas (no CH₃CHO).'},
+  'cb-4-q0':{ok:'Correcto — sin H sobre el carbono carbonílico, la cetona no puede dar el hidruro que reduce Ag⁺/Cu²⁺: Tollens y Fehling dan negativo.',fail:'Una cetona (sin metilcetona) no tiene H sobre el carbonilo — no puede reducir Ag⁺ ni Cu²⁺. Ambas pruebas dan negativo.'},
   /* Ácidos */
   'ac-0-q0':{ok:'Correcto — el anión carboxilato (RCOO⁻) tiene la carga negativa repartida entre 2 O por resonancia → más estable que el alcóxido (RO⁻, sin resonancia).',fail:'La acidez depende de la estabilidad del anión conjugado, no del número de carbonos ni de la electronegatividad directa del C=O.'},
   'ac-1-q0':{ok:'Correcto — el KMnO₄ es un oxidante fuerte: oxida la cadena lateral (con H bencílico) hasta COOH. El anillo aromático resiste.',fail:'Benzaldehído requeriría oxidación suave (PDC) de benzil alcohol. El fenol no se obtiene de esta oxidación.'},
