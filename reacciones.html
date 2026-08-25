@@ -4806,19 +4806,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-am-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R₃N: + H−A</div>
+              <div class="rxn-anim-label">Reactivo: amina (par libre en el N) + ácido</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">ácido-base, sin catalizador</div>
+              <div class="rxn-anim-label">Condición: el N dona su par libre al H⁺</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R₃NH⁺ A⁻</div>
+              <div class="rxn-anim-label">Producto: sal de amonio, soluble en agua</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4837,38 +4837,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('am-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-am-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R₃N:  (par libre en N sp³)</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">N dona e⁻ al H⁺ del ácido</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enlace N−H se forma</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="96" viewBox="0 0 170 96" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="50" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">N</text><circle cx="42.5" cy="53.2" r="1.9" fill="var(--c3t)"/><circle cx="47.5" cy="53.2" r="1.9" fill="var(--c3t)"/><line x1="55" y1="50" x2="50" y2="50" stroke="var(--tx)" stroke-width="1" stroke-linecap="round"/><text x="110" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">H</text><circle cx="120" cy="42" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="120" y="45.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><path d="M52,45 Q77.0,37.0 102,45" fill="none" stroke="var(--arr)" stroke-width="1.8" marker-end="url(#arrFull)"/><text x="80" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el N dona su par libre al H⁺</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El par libre del N es la clave de todo</div>
             <div class="mech-step-h">El N sp³ de la amina guarda un par libre que la vuelve base de Lewis y de Brønsted</div>
             <div class="mech-step-txt">Fíjense en el <strong>nitrógeno sp³</strong> de la amina: tiene un <em>par de electrones sin compartir</em> ahí guardado, listo para usar. Con ese par puede actuar como base (le da e⁻ a un H⁺) o como nucleófilo (le da e⁻ a un carbono electrofílico). Y algo que deben tener claro: las aminas son <strong>más básicas</strong> que los alcoholes y los éteres — el N es más básico que el O cuando hablamos de aminas alifáticas.</div>
           </div>
           <div class="mech-step" id="ms-am-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₃N: + H⁺ → R₃NH⁺  (rápido)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₃NH⁺ A⁻  (sal de amonio)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">soluble en agua</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="96" viewBox="0 0 170 96" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R₃N</text><line x1="65" y1="45" x2="80" y2="45" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="90" y="45" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">H</text><circle cx="97" cy="36" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="97" y="39.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="140" y="45" text-anchor="middle" font-size="11" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">A⁻</text><text x="90" y="85" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">sal de amonio — soluble en agua</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Se forma la sal</div>
             <div class="mech-step-h">El N dona su par libre al H⁺ del ácido (HCl, H₂SO₄, RCOOH) → sal de amonio R₃NH⁺ A⁻</div>
             <div class="mech-step-txt">Acá está la jugada, y es rápida: el par libre del N se pega al H⁺ del ácido y queda el ión amonio protonado R₃NH⁺. El anión A⁻ (Cl⁻, SO₄²⁻, RCOO⁻) completa la sal. Ojo con esto: las sales de amonio son <em>sólidas, solubles en agua y estables</em> — todo lo contrario a la amina de la que partieron, que muchas veces es un líquido apestoso e insoluble.</div>
           </div>
           <div class="mech-step" id="ms-am-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R₂NH  (2°): pKb ≈ 3.3</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RNH₂  (1°): pKb ≈ 3.4</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">ArNH₂ (arilamina): pKb ≈ 9.4</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">resonancia ArNH₂ deslocaliza par libre</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="85" viewBox="0 5 180 80" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="18" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">basicidad (más pKb = base más débil)</text><line x1="10" y1="35" x2="170" y2="35" stroke="var(--brd)" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="35" x2="60" y2="35" stroke="var(--c2t)" stroke-width="6" stroke-linecap="round"/><line x1="60" y1="35" x2="100" y2="35" stroke="var(--c4t)" stroke-width="6" stroke-linecap="round"/><line x1="100" y1="35" x2="170" y2="35" stroke="var(--err)" stroke-width="6" stroke-linecap="round"/><text x="35" y="55" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">2° (3.3)</text><text x="80" y="55" text-anchor="middle" font-size="8.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">1° (3.4)</text><text x="135" y="55" text-anchor="middle" font-size="8.5" style="fill:var(--err);font-family:'JetBrains Mono',monospace">ArNH₂ (9.4)</text><text x="90" y="75" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">resonancia deslocaliza el par libre en ArNH₂</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Cuál amina es más básica?</div>
             <div class="mech-step-h">2° > 1° (en agua) > 3° > NH₃ > arilaminas; la resonancia en ArNH₂ le baja la basicidad</div>
             <div class="mech-step-txt">En agua el orden es <em>2° > 1°</em> (efecto inductivo más solvatación). Las <em>3°</em> son menos básicas de lo que uno esperaría: el impedimento estérico no deja que el catión se solvate bien. Y las <em>arilaminas</em> (C₆H₅NH₂) quedan bastante rezagadas (pKb ≈ 9.4) — ¿por qué? Porque el par libre del N se mete en resonancia con el anillo aromático y queda menos disponible para agarrar un H⁺. Truco de examen: si ven un N pegado a un anillo bencénico, esperen basicidad baja.</div>
@@ -4962,19 +4943,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-am-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">Ar−NO₂</div>
+              <div class="rxn-anim-label">Reactivo: nitrocompuesto aromático</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H₂/Pt o Pd/C · o Sn/Fe + HCl</div>
+              <div class="rxn-anim-label">Condición: 3 etapas de reducción de 2e⁻ cada una</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">Ar−NH₂ + H₂O</div>
+              <div class="rxn-anim-label">Producto: arilamina — puerta a colorantes y fármacos</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4993,37 +4974,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('am-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-am-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Ar−NO₂ + 2H → Ar−NO + H₂O</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Ar−NO  + 2H → Ar−NHOH</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−NHOH + 2H → Ar−NH₂ + H₂O</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 5 210 100" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Ar−NO₂</text><line x1="10" y1="30" x2="60" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="60,30 52,26 52,34" fill="var(--dimmer)"/><text x="90" y="45" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Ar−NO</text><line x1="65" y1="55" x2="115" y2="55" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="115,55 107,51 107,59" fill="var(--dimmer)"/><text x="150" y="45" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Ar−NHOH</text><line x1="150" y1="55" x2="150" y2="70" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="150,70 146,62 154,62" fill="var(--dimmer)"/><text x="150" y="82" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Ar−NH₂</text><text x="90" y="95" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">3 etapas de 2 e⁻/2H⁺ cada una</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — No es un solo salto, son tres</div>
             <div class="mech-step-h">Ar−NO₂ se reduce con 6e⁻/6H⁺ en total, pasando por: NO₂ → NO → NHOH → NH₂</div>
             <div class="mech-step-txt">Ojo con esto: el grupo nitro no salta directo a amina, pasa por <strong>3 etapas de 2 electrones cada una</strong>: primero NO₂ se vuelve nitroso (ArNO), luego hidroxilamina (ArNHOH), y por fin amina (ArNH₂). En condiciones controladas hasta pueden aislar esos intermediarios. Y si hacen cuentas, el resultado neto es: pierden 2 oxígenos y ganan 3 H₂.</div>
           </div>
           <div class="mech-step" id="ms-am-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−NO₂ + 3H₂ →[Pd/C] Ar−NH₂ + 2H₂O</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Sn + HCl: e⁻ del Sn reducen NO₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Fe + HCl: mismo principio</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="75" viewBox="0 15 190 65" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">H₂ / Pt, Pd/C</text><text x="45" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">catalítico, limpio</text><text x="140" y="25" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Sn/HCl o Fe/HCl</text><text x="140" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">metal cede e⁻ (clásico)</text><text x="90" y="65" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">ambos caminos → misma amina</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Con qué reducen: gas o metal?</div>
             <div class="mech-step-h">H₂/Pt o Pd/C dan una amina limpia · Sn/HCl o Fe/HCl es el clásico de laboratorio</div>
             <div class="mech-step-txt">Tienen dos caminos. Con <strong>metales de transición (Pt, Pd/C)</strong> catalizan la hidrogenación con H₂ y les queda la amina limpia, sin residuos raros. Con <em>Sn/HCl</em> o <em>Fe/HCl</em> — la opción clásica que van a ver en el laboratorio — el metal en su forma activa (Sn⁰ o Fe⁰) hace de agente reductor, cediendo electrones al nitrocompuesto en medio ácido. Ambos caminos los llevan al mismo destino: la amina.</div>
           </div>
           <div class="mech-step" id="ms-am-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C₆H₅NO₂ + 3H₂ →[Pd] C₆H₅NH₂ + 2H₂O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anilina → colorantes azo</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">→ fármacos → polímeros</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="90" viewBox="0 5 200 85" style="overflow:visible;display:block;margin:0 auto" ><line x1="50.0" y1="21.0" x2="70.78460969082653" y2="33.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="70.78460969082653" y1="33.0" x2="70.78460969082653" y2="57.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="70.78460969082653" y1="57.0" x2="50.0" y2="69.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="50.0" y1="69.0" x2="29.215390309173472" y2="57.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="29.215390309173472" y1="57.0" x2="29.215390309173472" y2="33.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="29.215390309173472" y1="33.0" x2="50.0" y2="21.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="50" cy="45" r="15" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="50.0" y1="21.0" x2="50.0" y2="5.0" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="50.0" y="-3.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">NH₂</text><text x="130" y="30" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">anilina →</text><text x="130" y="44" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">colorantes, fármacos,</text><text x="130" y="58" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">polímeros (nailon)</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Por qué esta reacción es tan importante?</div>
             <div class="mech-step-h">Es la ruta a la anilina (C₆H₅NH₂) → colorantes, fármacos, polímeros (nailon, poliuretano)</div>
             <div class="mech-step-txt">La <strong>anilina (C₆H₅NH₂)</strong>, que sale de reducir el nitrobenceno, es de los compuestos más importantes de la industria química: de ahí salen los <em>colorantes azo</em> (diazotación → acoplamiento, la siguiente tarjeta), un montón de <em>fármacos</em> (paracetamol, sulfonamidas) y <em>polímeros</em> (nailon 6,6, el MDI del poliuretano). Y siempre por la misma puerta: reducir el −NO₂.</div>
@@ -5111,19 +5074,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-am-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">ArNH₂ + NaNO₂/HCl</div>
+              <div class="rxn-anim-label">Reactivo: arilamina + ácido nitroso (in situ)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">0–5°C obligatorio</div>
+              <div class="rxn-anim-label">Condición: a T° ambiente el diazonio se descompone</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">Ar−N₂⁺ Cl⁻ → Ar−X (Sandmeyer)</div>
+              <div class="rxn-anim-label">Producto: sal de diazonio, lista para cambiar el N₂⁺ por Cl, Br, CN...</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5142,37 +5105,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('am-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-am-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">NaNO₂ + HCl → HNO₂ (in situ)</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">ArNH₂ + HNO₂ →[0°C] Ar−N₂⁺ Cl⁻</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">0–5°C OBLIGATORIO</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="45.0" y1="23.0" x2="64.05255888325766" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="34.0" x2="64.05255888325766" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="56.0" x2="45.0" y2="67.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="45.0" y1="67.0" x2="25.947441116742347" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.947441116742347" y1="56.0" x2="25.94744111674235" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.94744111674235" y1="34.0" x2="45.0" y2="23.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="45" cy="45" r="14" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="45.0" y1="23.0" x2="45.0" y2="9.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="45.0" y="3.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">N</text><circle cx="42.5" cy="6.2" r="1.9" fill="var(--c3t)"/><circle cx="47.5" cy="6.2" r="1.9" fill="var(--c3t)"/><text x="115" y="1.0" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">N≡O</text><circle cx="128" cy="-7.0" r="5.5" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="128" y="-3.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c3t)">+</text><path d="M53.0,3.0 Q79.91971443376943,-6.97892653567035 108,-1.0" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="85" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">HNO₂ (in situ) ataca la amina, 0–5°C</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Arman el diazonio, pero con hielo al lado</div>
             <div class="mech-step-h">NaNO₂ + HCl generan HNO₂ in situ → reacciona con ArNH₂ a 0–5°C → Ar−N₂⁺ Cl⁻</div>
             <div class="mech-step-txt">El <strong>HNO₂</strong> se genera ahí mismo, en el momento — es inestable, no se puede guardar en frasco — y reacciona con el −NH₂ de la arilamina: el N del HNO₂ ataca el N de la amina y les queda la sal de diazonio <em>Ar−N₂⁺ Cl⁻</em>. Ojo con esto, es <strong>obligatorio</strong> trabajar entre 0 y 5°C: a temperatura ambiente el diazonio se les descompone al instante. Baño de hielo, siempre.</div>
           </div>
           <div class="mech-step" id="ms-am-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">0–5°C: Ar−N₂⁺ estable (horas)</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">T° amb.: Ar−N₂⁺ → ArOH + N₂↑</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">N₂ = mejor grupo saliente: pKa muy bajo</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="75" viewBox="0 15 190 65" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">0–5°C</text><text x="45" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Ar−N₂⁺ estable (horas)</text><text x="140" y="25" text-anchor="middle" font-size="10" style="fill:var(--err);font-family:'JetBrains Mono',monospace">T° ambiente</text><text x="140" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--err);font-family:'JetBrains Mono',monospace">→ ArOH + N₂↑</text><text x="90" y="65" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">N₂ es el mejor grupo saliente que existe</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Por qué es tan inestable el diazonio?</div>
             <div class="mech-step-h">A 0°C el Ar−N₂⁺ aguanta horas; a T° amb. se les vuelve ArOH + N₂↑</div>
             <div class="mech-step-txt">A 0°C el ión diazonio aromático se mantiene <em>relativamente estable</em> por horas, gracias a la resonancia con el anillo. Pero a temperatura ambiente se hidroliza solito → fenol + N₂↑. La razón de fondo: el N₂ molecular es el <strong>mejor grupo saliente que existe</strong> (el pKa del HN₂⁺ es como −15), así que el diazonio está desesperado por soltarlo.</div>
           </div>
           <div class="mech-step" id="ms-am-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + Cu₂Cl₂ → Ar−Cl + N₂↑</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + Cu₂Br₂ → Ar−Br + N₂↑</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Ar−N₂⁺ + CuCN  → Ar−CN + N₂↑</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="45.0" y1="23.0" x2="64.05255888325766" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="34.0" x2="64.05255888325766" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="56.0" x2="45.0" y2="67.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="45.0" y1="67.0" x2="25.947441116742347" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.947441116742347" y1="56.0" x2="25.94744111674235" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.94744111674235" y1="34.0" x2="45.0" y2="23.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="45" cy="45" r="14" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="45.0" y1="23.0" x2="45.0" y2="7.0" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="57.0" y="1.0" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">N₂⁺</text><line x1="90" y1="30" x2="120" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,30 112,26 112,34" fill="var(--dimmer)"/><text x="105" y="20" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Cu₂X₂</text><text x="150" y="25" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">X</text><text x="85" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Sandmeyer: N₂↑ se va, X entra</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Sandmeyer: aprovechan esa inestabilidad</div>
             <div class="mech-step-h">Con un catalizador de Cu₂X₂ cambian el N₂⁺ por X (Cl, Br, CN, F, OH); el N₂ que se escapa empuja la reacción</div>
             <div class="mech-step-txt">La <strong>Reacción de Sandmeyer</strong> usa cobre como catalizador para reemplazar ese −N₂⁺ por otros grupos: −Cl, −Br, −CN o −OH. ¿Por qué la reacción ocurre así de fácil? Porque el producto estrella es <strong>N₂ gaseoso</strong> — nitrógeno molecular — que se escapa de la solución sin vuelta atrás y "jala" todo hacia adelante. Es como destapar una gaseosa: el gas sale y ya no hay quién lo devuelva. Y este truco les sirve para meter halógenos exactamente donde la sustitución directa en el anillo no funciona o les da una mezcla horrible.</div>
