@@ -3698,19 +3698,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-hg-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">CH₃CH₂Br + OH⁻</div>
+              <div class="rxn-anim-label">Reactivo: bromoetano + nucleófilo fuerte</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">sustrato 1°, Nu fuerte</div>
+              <div class="rxn-anim-label">Condición: ataque por detrás, en un solo paso</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">CH₃CH₂OH + Br⁻</div>
+              <div class="rxn-anim-label">Producto: etanol, con inversión de configuración</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -3730,39 +3730,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('hg-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-hg-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Nu⁻  →→→  [C···X]  →  Nu−C  +  X⁻</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Nu ataca 180° opuesto a X</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">concertado: 1 solo estado de transición</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="96" viewBox="0 0 210 96" style="overflow:visible;display:block;margin:0 auto" ><text x="115" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="115" y1="50" x2="150" y2="32" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="158" y="28" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="115" y1="50" x2="150" y2="68" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="158" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="115" y1="50" x2="148" y2="50" stroke="var(--err)" stroke-width="1.8" stroke-linecap="round"/><text x="160" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><text x="45" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><circle cx="48.2" cy="52.5" r="1.9" fill="var(--c1t)"/><circle cx="48.2" cy="47.5" r="1.9" fill="var(--c1t)"/><path d="M56,50 Q82.0,42.0 108,50" fill="none" stroke="var(--arr)" stroke-width="1.9" marker-end="url(#arrFull)"/><text x="100" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Nu⁻ ataca 180° opuesto a X (por detrás)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Ataque por detrás</div>
             <div class="mech-step-h">El nucleófilo ataca el C portador del GS (X) por la cara OPUESTA a X (ataque por detrás)</div>
             <div class="mech-step-txt">Fíjense bien acá: la SN2 pasa en <strong>un solo paso concertado</strong>, sin escalas. El Nu⁻ no ataca por cualquier lado — entra exactamente por la cara opuesta al grupo saliente, a 180°. Y mientras entra, el enlace C−X se rompe al mismo tiempo. No hay ningún intermediario esperando en el camino, no hay carbocatión. ¿Por qué se llama bimolecular? Porque la velocidad depende de las dos concentraciones a la vez: [R−X] y [Nu].</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">ET: [Nu---C---X]⁻</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C con 5 "enlaces" parciales</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">geometría trigonal bipiramidal</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="96" viewBox="0 0 210 96" style="overflow:visible;display:block;margin:0 auto" ><text x="105" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><line x1="105" y1="50" x2="140" y2="32" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="148" y="28" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="105" y1="50" x2="140" y2="68" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="148" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="105" y1="50" x2="138" y2="50" stroke="var(--err)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="150" y="50" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><line x1="105" y1="50" x2="68" y2="50" stroke="var(--c1t)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="52" y="50" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><text x="105" y="18" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t)">‡</text><text x="100" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">estado de transición: 5 grupos, bipirámide trigonal</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El instante más apretado</div>
             <div class="mech-step-h">En el ET el C es pentacoordinado (trigonal bipiramidal): Nu a 120° del GS que sale</div>
             <div class="mech-step-txt">Ojo con esto: por un instante, ese carbono central queda rodeado de <strong>cinco grupos</strong> — los tres sustituyentes originales acomodados en el plano ecuatorial, y el Nu entrando por un lado mientras el X sale por el otro, en posiciones axiales. Este <em>estado de transición</em> no se puede aislar, pero es el punto de mayor energía de toda la reacción — ahí es donde se decide qué tan rápido va todo. Y por eso el tamaño del carbono importa tanto: si está muy tapado por grupos grandes, el Nu no cabe para acercarse. Por eso la SN2 favorece los carbonos primarios (1°), poco estorbados.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R-C*(A)(B)(X)  +  Nu⁻  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Nu-C*(A)(B)(...)  (config. INVERTIDA)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">R → S  o  S → R</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 0 210 100" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="45" y1="45" x2="45" y2="20" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="45" y="14" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">A</text><line x1="45" y1="45" x2="25" y2="60" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="15" y="68" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">B</text><line x1="45" y1="45" x2="70" y2="55" stroke="var(--err)" stroke-width="1.6" stroke-linecap="round"/><text x="80" y="58" text-anchor="middle" font-size="9" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><line x1="95" y1="45" x2="125" y2="45" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="125,45 117,41 117,49" fill="var(--dimmer)"/><text x="160" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="160" y1="45" x2="160" y2="70" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="160" y="82" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">A</text><line x1="160" y1="45" x2="180" y2="30" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="190" y="22" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">B</text><line x1="160" y1="45" x2="135" y2="35" stroke="var(--c1t)" stroke-width="1.6" stroke-linecap="round"/><text x="122" y="28" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><text x="100" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">configuración invertida — como un paraguas al voltearse</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Inversión de Walden</div>
             <div class="mech-step-h">La configuración del C quiral se invierte 180° (como paraguas que se da vuelta con el viento)</div>
             <div class="mech-step-txt">Y aquí el detalle que deben recordar: si el carbono es quiral, la SN2 <strong>siempre</strong> invierte su configuración. Piénsenlo como un paraguas que se da vuelta con un golpe de viento — el Nu entra por un lado y empuja a los tres sustituyentes para el otro lado, como si el paraguas se volteara de adentro hacia afuera. Un R se vuelve S, un S se vuelve R, sin excepción. Esta inversión de Walden es la firma que delata a la SN2 en cualquier examen: si ven inversión total, ya saben qué mecanismo fue.</div>
@@ -3883,19 +3865,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-hg-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">(CH₃)₃C−Br</div>
+              <div class="rxn-anim-label">Reactivo: haluro terciario</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">solvente prótico, sin Nu fuerte</div>
+              <div class="rxn-anim-label">Condición: se ioniza solo, antes de que llegue el Nu</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">(CH₃)₃C−OH (racémico)</div>
+              <div class="rxn-anim-label">Producto: mezcla racémica, el Nu ataca las dos caras</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -3914,37 +3896,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('hg-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-hg-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−X  →[ionización lenta]</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺  (sp², plano)  +  X⁻</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">favorecido: 3° > 2° · solvente prótico</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">R</text><line x1="60" y1="50" x2="95" y2="50" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="105" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><path d="M75,45 Q61.4,42.3 55,30" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><circle cx="50" cy="32" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="50" y="35.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="105" y="32" text-anchor="middle" font-size="10" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">X⁻</text><text x="90" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">ionización lenta y espontánea (paso lento)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Ionización (el paso lento)</div>
             <div class="mech-step-h">R−X se ioniza espontáneamente → carbocatión plano sp² + X⁻ (paso determinante)</div>
             <div class="mech-step-txt">Acá está la jugada diferente frente a la SN2: nadie ataca todavía. El enlace R−X simplemente se rompe solo, de manera heterolítica, y deja un <strong>carbocatión</strong> R⁺ (plano, sp²) más el X⁻ suelto. Este es el paso <em>lento y determinante</em> — el que marca el ritmo de toda la reacción — y por eso la velocidad depende únicamente de [R−X]: de ahí el nombre <em>unimolecular</em>, el nucleófilo ni siquiera aparece en esa cuenta. ¿Cuándo pasa esto con facilidad? Cuando el carbocatión que se forma es estable — o sea, en carbono 3° — y en solventes próticos (agua, etanol) que abrazan y estabilizan los iones que se están separando.</div>
           </div>
           <div class="mech-step" id="ms-hg-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R⁺  (plano, sp²)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Nu puede atacar cara A  o  cara B</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">con igual probabilidad</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="105" viewBox="0 5 190 100" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="45" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><circle cx="90" cy="28" r="6.5" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="90" y="31.5" text-anchor="middle" font-size="8.5" font-weight="800" style="fill:var(--c3t)">+</text><line x1="90" y1="45" x2="60" y2="60" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="90" y1="45" x2="120" y2="60" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="90" y1="45" x2="90" y2="65" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><path d="M55,25 Q90,10 125,25" fill="none" stroke="var(--c1t)" stroke-width="1.4" stroke-dasharray="3 2"/><path d="M55,68 Q90,85 125,68" fill="none" stroke="var(--c1t)" stroke-width="1.4" stroke-dasharray="3 2"/><text x="30" y="22" text-anchor="middle" font-size="8" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu (cara A)</text><text x="30" y="80" text-anchor="middle" font-size="8" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu (cara B)</text><text x="90" y="96" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">catión plano (sp²): ambas caras igual de accesibles</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El carbocatión queda plano</div>
             <div class="mech-step-h">R⁺ es sp², tiene geometría trigonal plana → las dos caras son accesibles para el nucleófilo</div>
             <div class="mech-step-txt">Fíjense en la geometría: ese carbono positivo queda <strong>plano</strong>, como una moneda parada de canto — sp², sin preferencia por ningún lado. Y ahí está la consecuencia: el nucleófilo puede llegar desde arriba o desde abajo con exactamente la misma probabilidad. Eso significa que van a salir <strong>los dos productos, mitad y mitad</strong> — 50% con una geometría, 50% con la contraria. Si ese carbono era quiral, esta mezcla 50/50 tiene un nombre: mezcla racémica, y no gira la luz polarizada porque los dos enantiómeros se cancelan.</div>
           </div>
           <div class="mech-step" id="ms-hg-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Nu + R⁺ → R−Nu (rápido)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">50% R + 50% S = racémico</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">vs SN2: inversión exclusiva</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 0 190 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="45" x2="41" y2="35" stroke="var(--c2t)" stroke-width="1.6" stroke-linecap="round"/><text x="55" y="25" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Nu</text><text x="35" y="72" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">50% (R)</text><line x1="120" y1="45" x2="146" y2="35" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><text x="160" y="49" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Nu</text><text x="140" y="72" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">50% (S)</text><text x="90" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">mezcla racémica: sin actividad óptica</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Llega el nucleófilo (rápido)</div>
             <div class="mech-step-h">Nu ataca ambas caras del R⁺ → racemización; favorece sustrato 3° y solventes polares próticos</div>
             <div class="mech-step-txt">Ahora sí entra el Nu (uno débil, tipo H₂O o ROH) y ataca las dos caras del carbocatión, dejando la <strong>mezcla racémica</strong>. Este paso es rápido — el que manda el ritmo ya pasó antes. Comparemos SN1 con SN2 para que les quede grabado: sustrato 3° con carbocatión estable, solvente prótico y Nu débil, todo eso apunta a SN1; sustrato 1°, Nu fuerte y solvente aprótico apuntan a SN2. Truco de examen: miren primero el tipo de carbono (1°, 2° o 3°) y ya tienen la mitad de la respuesta.</div>
@@ -4048,19 +4012,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-hg-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">Base + H−Cβ−Cα−X</div>
+              <div class="rxn-anim-label">Reactivo: base fuerte + haluro con Hβ disponible</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">KOH/EtOH, calor, anti-periplanar</div>
+              <div class="rxn-anim-label">Condición: H y X deben quedar a 180°</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">alqueno más sustituido + HBase + X⁻</div>
+              <div class="rxn-anim-label">Producto: gana el alqueno de Zaitsev</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4079,37 +4043,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('hg-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-hg-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Base:  +  H−Cβ−Cα−X  →</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H y X anti-periplanares (180°)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">1 solo paso concertado</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="105" viewBox="0 0 190 105" style="overflow:visible;display:block;margin:0 auto" ><text x="70" y="30" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="70" y1="36" x2="70" y2="55" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="70" y="62" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">Cβ</text><line x1="78" y1="62" x2="105" y2="62" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="112" y="62" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">Cα</text><line x1="120" y1="62" x2="120" y2="80" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="120" y="88" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><text x="35" y="20" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Base</text><circle cx="32.5" cy="23.2" r="1.9" fill="var(--c1t)"/><circle cx="37.5" cy="23.2" r="1.9" fill="var(--c1t)"/><path d="M45,24 Q57.635971965551924,22.39307359042619 66,32" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="90" y="10" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H y X anti-periplanares (180°)</text><text x="90" y="98" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">la base se acerca al Hβ</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — La base se acerca al Hβ</div>
             <div class="mech-step-h">Base fuerte (KOH/EtOH) se acerca al Hβ (adyacente al C que lleva X); H y X deben estar anti-periplanares</div>
             <div class="mech-step-txt">La E2, igual que la SN2, es <strong>concertada</strong>: todo pasa en un solo paso, la base arranca el Hβ mientras el X sale al mismo tiempo. Pero ojo con el requisito geométrico que aquí es clave: el H y el X tienen que quedar <em>anti-periplanares</em>, o sea con un ángulo diedro de 180° entre ellos. Si la molécula no puede acomodarse así, la E2 simplemente no ocurre — no es opcional, es obligatorio.</div>
           </div>
           <div class="mech-step" id="ms-hg-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Base−H  +  Cβ=Cα  +  X⁻</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">doble enlace formado en 1 paso</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Zaitsev: Hβ de Cβ con menos H</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="105" viewBox="0 5 190 100" style="overflow:visible;display:block;margin:0 auto" ><text x="70" y="55" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">Cβ</text><line x1="78" y1="55" x2="105" y2="55" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="112" y="55" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">Cα</text><line x1="70" y1="48" x2="70" y2="30" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="70" y="22" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><line x1="120" y1="55" x2="120" y2="75" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="120" y="83" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><text x="38" y="15" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Base</text><path d="M50,18 Q60.683281572999746,16.633436854000504 66,26" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><path d="M70,40 Q87.5298221281347,37.41053361559589 100,50" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><path d="M110,55 Q110.2442560653724,65.15826456509815 120,68" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="90" y="98" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">3 movimientos a la vez: 1 solo paso concertado</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Se arma el doble enlace</div>
             <div class="mech-step-h">Los electrones del C−H migran al C−C para formar el doble enlace mientras X⁻ sale</div>
             <div class="mech-step-txt">Acá está la jugada: en ese único paso de la E2 pasan tres cosas <em>al mismo tiempo</em> — la base arranca el H del carbono vecino (Cβ), los electrones de ese enlace C−H migran hacia el centro y arman el nuevo <strong>doble enlace</strong> C=C, y el halógeno se va como X⁻. Todo en un solo movimiento. Y aquí el detalle que deben recordar: si hay varios H disponibles para eliminar, la base va por el del carbono con <em>menos H vecinos</em> — esa es la regla de <strong>Zaitsev</strong> — porque el doble enlace que resulta queda más sustituido y por lo tanto más estable.</div>
           </div>
           <div class="mech-step" id="ms-hg-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">2-bromobutano + KOH/EtOH →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">but-2-eno (2 sust.) ✓ Zaitsev</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">but-1-eno (1 sust.) minoritario</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="95" viewBox="0 0 220 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="39" y2="44" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="38.00002869481629" y1="46.18175557494628" x2="62.00002869481629" y2="57.18175557494628" stroke="var(--c2t)" stroke-width="1.7" stroke-linecap="round"/><line x1="39.99997130518371" y1="41.81824442505372" x2="63.99997130518371" y2="52.81824442505372" stroke="var(--c2t)" stroke-width="1.7" stroke-linecap="round"/><line x1="63" y1="55" x2="87" y2="44" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="60" y="85" text-anchor="middle" font-size="8.3" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">but-2-eno · MAYORITARIO (Zaitsev)</text><line x1="115" y1="55" x2="139" y2="44" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="138.00002869481628" y1="46.18175557494628" x2="162.00002869481628" y2="57.18175557494628" stroke="var(--dimmer)" stroke-width="1.5" stroke-linecap="round"/><line x1="139.99997130518372" y1="41.81824442505372" x2="163.99997130518372" y2="52.81824442505372" stroke="var(--dimmer)" stroke-width="1.5" stroke-linecap="round"/><line x1="163" y1="55" x2="187" y2="44" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="160" y="85" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">but-1-eno · minoritario</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Cuál alqueno gana?</div>
             <div class="mech-step-h">Se forma el alqueno más sustituido (termodinámicamente más estable): más sustituyentes en el C=C</div>
             <div class="mech-step-txt">Miremos el 2-bromobutano: hay dos carbonos β posibles para eliminar, el C1 y el C3. Zaitsev predice que la base va a preferir el H del C3 → sale <strong>but-2-eno</strong>, con 2 sustituyentes en el doble enlace, el más estable. El but-1-eno (solo 1 sustituyente) también se forma, pero en menor cantidad. Truco de examen: si les cambian la base por una voluminosa (t-BuOK), esa base ya no cabe cerca del H más sustituido por el estorbo — y ahí el producto mayoritario se voltea al alqueno menos sustituido (producto Hofmann).</div>
