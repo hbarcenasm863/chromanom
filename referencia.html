@@ -258,6 +258,15 @@ code{
   .ref-title{font-size:1.1rem}
 }
 
+/* ── SITE NAV ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;background:#0d4a73;padding:0 20px;height:44px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.site-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:6px;transition:background .15s,color .15s;display:flex;align-items:center;gap:5px}
+.site-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
+.site-nav .nav-links{display:flex;gap:4px;align-items:center}
+.site-nav .nav-brand{color:#fff;font-weight:800;font-size:.88rem;font-style:italic;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+@media(max-width:600px){.site-nav a span.full{display:none}.site-nav a{padding:5px 8px;font-size:.72rem}.site-nav .nav-brand{font-size:.8rem}}
+
 /* ─────────────────────────────────────────
    PRINT STYLES
 ───────────────────────────────────────── */
@@ -265,6 +274,7 @@ code{
   @page{size:A4 landscape;margin:8mm 10mm}
 
   /* Hide interactive elements */
+  .site-nav,
   .back-link,
   .btn-print,
   .topbar{display:none!important}
@@ -342,6 +352,18 @@ code{
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+    <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+    <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+    <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+    <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+    <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
+    <a href="referencia.html" class="nav-link active">📋 <span class="full">Referencia</span></a>
+  </div>
+</nav>
 <div class="page">
 
   <!-- TOP BAR -->

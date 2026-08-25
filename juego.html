@@ -533,6 +533,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
 <a href="juego.html" class="nav-link active">🎮 <span class="full">Juego</span></a>
 <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
   </div>
 </nav>
 
@@ -4388,6 +4389,8 @@ function startGame(){
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
   writeAttempts=0;
   _analyticsSent=false;
+  _sessionId=Math.random().toString(36).slice(2,8);
+  sendSessionStart();
   showScreen('s-game');
   loadQuestion();
 }
@@ -5954,6 +5957,29 @@ document.getElementById('stat-banco').textContent=QBANK.length;
 const ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbwJwyRtUBmkc3ei93AI8RmM-T1Na6a0Q0Z2QoS0SS_UKJSYRQ4K4tHCQ-15T-6hPtLa/exec';
 
 let _analyticsSent = false;
+let _sessionId = '';
+
+// Se envía apenas el estudiante entra a jugar (startGame), sin esperar a que
+// responda ninguna pregunta ni a que cierre bien la sesión — así queda registro
+// de que ingresó aunque solo vea la primera pregunta y recargue o vuelva atrás.
+function sendSessionStart(){
+  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  const body=JSON.stringify({
+    fecha:     new Date().toISOString().slice(0,10),
+    hora:      new Date().toTimeString().slice(0,5),
+    sesion:    _sessionId,
+    nombre:    freeMode ? '(anónimo)' : studentName,
+    curso:     freeMode ? '(libre)'   : studentCourse,
+    codigo:    freeMode ? ''          : studentCode,
+    anonimo:   freeMode,
+    nivel:     NIVEL_LABELS[currentLevel]||currentLevel,
+    trigger:   'inicio',
+    correctas: 0, total: 0, timeouts: 0, pct: 0,
+    errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0,
+    errores_por_tema:'{}', aciertos_por_tema:'{}', moleculas_falladas:''
+  });
+  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true}).catch(()=>{});
+}
 
 function buildPayload(trigger){
   const topicErrors={}, topicOk={};
@@ -5964,7 +5990,7 @@ function buildPayload(trigger){
   return {
     fecha:     new Date().toISOString().slice(0,10),
     hora:      new Date().toTimeString().slice(0,5),
-    sesion:    Math.random().toString(36).slice(2,8),
+    sesion:    _sessionId,
     nombre:    freeMode ? '(anónimo)' : studentName,
     curso:     freeMode ? '(libre)'   : studentCourse,
     codigo:    freeMode ? ''          : studentCode,
