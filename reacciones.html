@@ -2028,19 +2028,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ai-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">HC≡CH + HBr</div>
+              <div class="rxn-anim-label">Reactivo: acetileno + haluro de hidrógeno</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">1 o 2 equivalentes</div>
+              <div class="rxn-anim-label">Condición: la cantidad de HX decide dónde para</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">CH₂=CHBr o CH₃CHBr₂</div>
+              <div class="rxn-anim-label">Producto: haloalqueno (×1) o dihaluro geminal (×2)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -2060,39 +2060,21 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HC≡CH  +  HBr (1 mol)  →</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H → C con más H (terminal)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₂=CH−Br  (bromoetileno)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="20" y1="50" x2="80" y2="50" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="20.0" y1="53.0" x2="80.0" y2="53.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="20.0" y1="47.0" x2="80.0" y2="47.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="20" y="64" text-anchor="middle" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="80" y="64" text-anchor="middle" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="120" y="32" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><circle cx="132" cy="24" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="132" y="27.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><path d="M70,45 Q91.07988393614343,30.686073451399793 116,36" fill="none" stroke="var(--arr)" stroke-width="1.8" marker-end="url(#arrFull)"/><text x="70" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H⁺ ataca el C terminal (más H) → catión vinílico</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — La primera adición</div>
             <div class="mech-step-h">1 mol de HX: el H se va al C con más H (Markovnikov, sí, la misma regla de siempre) → sale un haloalqueno vinílico</div>
             <div class="mech-step-txt">Fíjense: esto es <strong>Markovnikov</strong> otra vez, la regla que ya conocen. El H⁺ se va al carbono que ya tiene más H (el terminal), y queda un carbocatión vinílico que el Br⁻ atrapa de inmediato. ¿Qué les queda? Un <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). Ojo con esto: el triple enlace no desaparece, solo baja a doble.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₂=CH−Br  +  HBr (1 mol)  →</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Markovnikov: Br → C ya halogenado</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CHBr₂  (1,1-dibromoetano)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="20" y1="50" x2="50" y2="50" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="50.0" y1="52.6" x2="80.0" y2="52.6" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="50.0" y1="47.4" x2="80.0" y2="47.4" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><text x="80" y="34" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Br</text><text x="20" y="64" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="50" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">2ª HX: Br al C ya halogenado → CH₃−CHBr₂ (geminal)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Y ahora la segunda adición</div>
             <div class="mech-step-h">El 2° mol de HX: el H sigue yendo al C con más H, y el X termina en el carbono que ya tenía uno → geminaldialuro</div>
             <div class="mech-step-txt">Otra vez Markovnikov: el H se va al CH₂= (el que tiene más H), y eso deja al carbono que ya estaba halogenado recibiendo el <strong>segundo Br</strong>. ¿El resultado? Un <em>geminaldialuro</em> — los dos halógenos quedan en el MISMO carbono, no en carbonos vecinos. Truco de examen: CH≡CH + 2HBr da CH₃−CHBr₂ (1,1-dibromoetano), nunca el 1,2-.</div>
             <button class="speak-btn" onclick="speakStep(this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HC≡CH  +  1 HBr  →  CH₂=CHBr</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">HC≡CH  +  2 HBr  →  CH₃CHBr₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">controlar por estequiometría</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="130" height="100" viewBox="0 0 130 100" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">1 mol HX</text><text x="60" y="38" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">→ CH₂=CHBr</text><text x="60" y="60" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">2 mol HX</text><text x="60" y="73" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">→ CH₃CHBr₂</text><text x="60" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">todo depende de la estequiometría</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Cómo controlan cuál producto sale?</div>
             <div class="mech-step-h">Todo depende de cuánto HX le echen: con 1 mol paran en el haloalqueno, con 2 moles llegan al geminaldialuro</div>
             <div class="mech-step-txt">Acá el control lo tienen ustedes: es pura <strong>estequiometría</strong>. Con 1 equivalente de HX se quedan en el haloalqueno (y sí, es aislable). Con 2 equivalentes, llegan al geminaldialuro. Eso sí, frenar justo en el ×1 exige controlar bien la cantidad que agregan — no es automático. Ejemplo que deben tener presente: el PVC sale de esta misma reacción, HC≡CH + HCl → CH₂=CHCl (cloruro de vinilo).</div>
@@ -2212,19 +2194,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ai-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">HC≡CH + Br₂</div>
+              <div class="rxn-anim-label">Reactivo: acetileno + bromo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">1 o 2 equivalentes, anti</div>
+              <div class="rxn-anim-label">Condición: cada adición es anti (trans)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">CHBr=CHBr o CHBr₂−CHBr₂</div>
+              <div class="rxn-anim-label">Producto: dihaloalqueno trans (×1) o tetrahaloalcano (×2)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -2243,37 +2225,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HC≡CH  +  Br₂ (1 mol)  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">antiadición → configuración trans</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CHBr=CHBr  (trans-1,2-dibromoetileno)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="100" viewBox="0 0 180 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="20" y1="50" x2="80" y2="50" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="20.0" y1="53.0" x2="80.0" y2="53.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="20.0" y1="47.0" x2="80.0" y2="47.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="80" y="30" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Br</text><text x="110" y="60" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Br</text><path d="M70,45 Q72.67393926949201,33.77057219698757 84,36" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="70" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">antiadición: Br en lados opuestos → trans</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — La primera adición</div>
             <div class="mech-step-h">1 mol de X₂ ataca el triple enlace por antiadición, igual que con los alquenos → sale un dihaloalqueno trans</div>
             <div class="mech-step-txt">¿Se acuerdan de la antiadición en alquenos? Acá pasa exactamente lo mismo: el X₂ se suma al triple enlace por <strong>antiadición</strong> y les queda un <em>dihaloalqueno trans-vicinal</em>. Los dos X terminan en lados opuestos del doble enlace que sobra — configuración trans/E, no se les puede olvidar.</div>
           </div>
           <div class="mech-step" id="ms-ai-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CHBr=CHBr  +  Br₂  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CHBr₂−CHBr₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">1,1,2,2-tetrabromoetano</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="100" viewBox="0 0 180 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="20.0" y1="52.6" x2="80.0" y2="52.6" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="20.0" y1="47.4" x2="80.0" y2="47.4" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><text x="20" y="32" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Br</text><text x="80" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Br</text><text x="110" y="40" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Br</text><text x="130" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Br</text><path d="M60,47 Q86.44529980377477,35.51539646794588 114,44" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="70" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">exceso de X₂: 2ª antiadición → tetrahaloalcano</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Si les sobra X₂</div>
             <div class="mech-step-h">Con exceso de X₂ el doble enlace que quedó también reacciona → llegan al tetrahaloalcano</div>
             <div class="mech-step-txt">Si hay exceso de X₂, el dihaloalqueno ya no se comporta distinto a un alqueno cualquiera: otra antiadición y listo, <strong>tetrahaloalcano</strong>. Ej: HC≡CH + 2Br₂ → CHBr₂−CHBr₂ (1,1,2,2-tetrabromoetano). Y ojo con esto para que no se confundan: el benceno NO reacciona con Br₂ sin catalizador — esa es justo la diferencia que marca la aromaticidad.</div>
           </div>
           <div class="mech-step" id="ms-ai-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C≡C  + X₂ ×1 →  C(X)=C(X) trans</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C≡C  + X₂ ×2 →  CX₂−CX₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">triple enlace más reactivo que doble</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="92" viewBox="0 0 200 92" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="30" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">×1 X₂ → trans-dihaloalqueno</text><text x="60" y="55" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">×2 X₂ → tetrahaloalcano</text><text x="60" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">triple enlace: más reactivo que el doble</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Lo que deben recordar</div>
             <div class="mech-step-h">1 equivalente de X₂ da el dihaloalqueno trans, 2 equivalentes dan el tetrahaloalcano; es lo mismo que con alquenos, solo que acá se puede repetir</div>
             <div class="mech-step-txt">El triple enlace es <strong>más reactivo</strong> que el doble frente a electrófilos, porque tiene más densidad electrónica π disponible para atacar. La única diferencia real con los alquenos es que acá el alquino se puede adicionar <em>dos veces</em>. Dato para el laboratorio: el Br₂ decolora un alquino más rápido que el alqueno equivalente, así que si ven eso, ya saben qué está pasando.</div>
@@ -2385,19 +2349,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ai-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−C≡C−R' + H₂</div>
+              <div class="rxn-anim-label">Reactivo: alquino interno + hidrógeno</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">Lindlar (cis) o Na/NH₃ (trans)</div>
+              <div class="rxn-anim-label">Condición: el catalizador decide la geometría</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">cis- o trans-alqueno</div>
+              <div class="rxn-anim-label">Producto: mismo alquino, geometría opuesta según el reductor</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -2416,37 +2380,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−R' + H₂  →[Lindlar]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">ambos H al mismo lado</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">⇒ cis-alqueno (Z)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="110" height="92" viewBox="0 0 110 92" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="20" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Lindlar (Pd envenenado)</text><line x1="20" y1="45" x2="50" y2="45" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><line x1="50" y1="45" x2="80" y2="45" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="20" y="32" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R</text><text x="80" y="32" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R'</text><text x="35" y="60" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">H</text><text x="65" y="60" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">H</text><text x="50" y="80" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H, H mismo lado → cis (Z)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Con Lindlar sale el cis</div>
             <div class="mech-step-h">Pd/CaCO₃ envenenado con Pb: el H₂ se pega por el mismo lado del triple enlace → alqueno CIS</div>
             <div class="mech-step-txt">Fíjense en el truco: el catalizador de <strong>Lindlar</strong> (Pd/CaCO₃ + acetato de Pb) está "envenenado" a propósito, justamente para que frene ahí — reduce el triple a doble y no sigue de largo hasta el alcano. Como los dos H se pegan desde la superficie del catalizador, entran por el <strong>mismo lado</strong> → les queda el alqueno <em>cis (Z)</em>. Ejemplo: dimetilacetileno → cis-2-buteno.</div>
           </div>
           <div class="mech-step" id="ms-ai-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−R' + 2Na/NH₃  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">electrones solvados reducen</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">⇒ trans-alqueno (E)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="110" height="92" viewBox="0 0 110 92" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="20" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Na / NH₃(l)</text><line x1="20" y1="50" x2="50" y2="45" stroke="var(--c4t)" stroke-width="1.8" stroke-linecap="round"/><line x1="50" y1="45" x2="80" y2="50" stroke="var(--c4t)" stroke-width="1.8" stroke-linecap="round"/><text x="20" y="63" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R</text><text x="80" y="37" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R'</text><text x="50" y="30" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">H</text><text x="50" y="60" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">H</text><text x="50" y="80" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H, H lados opuestos → trans (E)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Y con Na/NH₃ sale el trans</div>
             <div class="mech-step-h">El metal disuelto en amoníaco líquido reduce el triple enlace por otra vía, radical anión, y el resultado es el alqueno TRANS</div>
             <div class="mech-step-txt">Acá cambia todo el mecanismo: el sodio metálico en amoníaco líquido suelta electrones solvados que van reduciendo el triple enlace <strong>paso a paso</strong> — primero entra un e⁻ y forma el radical anión vinílico, luego un H (del NH₃) se adiciona a ese radical. ¿Y por qué acá sale trans? Porque el intermedio más estable en el camino es justo el <em>trans</em>. Resultado: alqueno <strong>TRANS (E)</strong>.</div>
           </div>
           <div class="mech-step" id="ms-ai-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Lindlar → H₂ sin → cis-alqueno</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">Na/NH₃ → anti → trans-alqueno</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mismo alquino, ¡productos opuestos!</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="82" viewBox="0 0 220 82" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Lindlar → cis-alqueno</text><text x="60" y="45" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Na/NH₃ → trans-alqueno</text><text x="60" y="70" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">mismo alquino, geometría opuesta según el reductor</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Ustedes eligen la geometría</div>
             <div class="mech-step-h">Lindlar da el alqueno CIS, Na/NH₃ da el alqueno TRANS: el mismo punto de partida, dos geometrías distintas según lo que elijan</div>
             <div class="mech-step-txt">Este es el punto que quiero que se les quede grabado: el mismo alquino puede terminar en dos productos totalmente distintos, solo cambiando el reductor. Lindlar les da <em>cis</em> (los dos grupos del mismo lado); Na/NH₃ les da <em>trans</em> (grupos en lados opuestos). Y esa diferencia de geometría no es un detalle cosmético — cambia la función de la molécula por completo. El cuerpo humano metaboliza distinto los ácidos grasos cis y trans, y en los plaguicidas biológicos para café y banano, la geometría del doble enlace es la que decide si la trampa de feromonas funciona o no.</div>
@@ -2550,19 +2496,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ai-3">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−C≡CH + H₂O</div>
+              <div class="rxn-anim-label">Reactivo: alquino + agua</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H₂SO₄ / HgSO₄</div>
+              <div class="rxn-anim-label">Condición: cataliza la adición y la tautomería</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">cetona o aldehído</div>
+              <div class="rxn-anim-label">Producto: pasa por un enol inestable que tautomeriza a carbonilo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -2581,37 +2527,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-3',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-3-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡CH  +  H₂O  →[H⁺/Hg²⁺]</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">enol: R−C(OH)=CH₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">(Markovnikov: OH al C interno)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="100" viewBox="0 0 170 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="60" y2="55" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="15.0" y1="58.0" x2="60.0" y2="58.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="15.0" y1="52.0" x2="60.0" y2="52.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="15" y="70" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><text x="95" y="40" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><text x="85" y="26" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="105" y="26" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><path d="M90,50 Q75.0,42.0 60,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="70" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂O ataca (Hg²⁺/H⁺), Markovnikov: OH al C interno</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El agua entra</div>
             <div class="mech-step-h">El H₂O, con H⁺/Hg²⁺, se adiciona al triple enlace siguiendo Markovnikov → sale un enol inestable</div>
             <div class="mech-step-txt">El catalizador de <strong>Hg²⁺/H₂SO₄</strong> activa el triple enlace para que el agua ataque. Y otra vez Markovnikov: el OH se va al carbono interno, el más sustituido. Pero ojo, lo que sale primero no es la cetona final — es un <strong>enol</strong> (OH sobre un carbono con doble enlace), y esa forma es muy inestable. No se queda ahí.</div>
           </div>
           <div class="mech-step" id="ms-ai-3-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">enol: R−C(OH)=CH₂  ⇌</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">ceto: R−CO−CH₃</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio muy favorecido → ceto</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="98" viewBox="-5 -5 175 103" style="overflow:visible;display:block;margin:0 auto" ><line x1="20" y1="55" x2="50" y2="42" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="68" y="26" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="58" y="12" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">H</text><line x1="50" y1="42" x2="64" y2="30" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><path d="M60,18 Q33.94939449168523,24.753958294967497 28,51" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="90" y="26" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">O</text><text x="75" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">enol ⇌ ceto: el H migra del O al Cα</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El enol no aguanta y se reacomoda</div>
             <div class="mech-step-h">El enol tautomeriza solito: el H migra del O al Cα → ahí sí aparece la forma ceto (cetona o aldehído)</div>
             <div class="mech-step-txt">Esto se llama <strong>tautomería ceto-enólica</strong>, y es más simple de lo que suena: el H del −OH del enol migra al carbono vecino (catalizado por el H⁺ del medio), y ahí se forma el grupo carbonilo C=O. Fíjense bien: no están entrando ni saliendo átomos nuevos, es solo un H que se mueve de lugar. Y el equilibrio queda <strong>muy inclinado hacia la forma ceto</strong> — cerca del 99.9% para la mayoría de las cetonas.</div>
           </div>
           <div class="mech-step" id="ms-ai-3-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">CH₃−C≡C−CH₃ + H₂O  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">CH₃−CO−CH₂−CH₃ (butanona)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HC≡CH + H₂O → CH₃CHO (etanal)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="82" viewBox="0 0 220 82" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">alquino interno → cetona</text><text x="60" y="45" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">HC≡CH (único) → aldehído</text><text x="60" y="70" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">propino + H₂O → propanona (acetona)</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Y cuál sale, cetona o aldehído?</div>
             <div class="mech-step-h">Un alquino interno les da cetona; el único que da aldehído es el acetileno mismo, HC≡CH</div>
             <div class="mech-step-txt">Ahí está el detalle que separa los casos: si el alquino es <strong>terminal RC≡CH</strong> (pero con un R distinto de H), sale una metil-cetona (RCOCH₃, siempre Markovnikov). El único caso especial es el <strong>acetileno (HC≡CH)</strong>, que da acetaldehído (CH₃CHO) — porque ahí no hay diferencia entre los dos carbonos para que Markovnikov elija. Proceso industrial importante para que lo recuerden: así se sintetiza acetona (CH₃COCH₃) a partir de propino (CH₃C≡CH + H₂O).</div>
@@ -2720,19 +2648,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ai-4">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−C≡C−H + NaNH₂</div>
+              <div class="rxn-anim-label">Reactivo: alquino terminal + base fuerte</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">solo alquinos terminales</div>
+              <div class="rxn-anim-label">Condición: el H sobre C sp es el único suficientemente ácido</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−C≡C⁻ Na⁺ + NH₃</div>
+              <div class="rxn-anim-label">Producto: acetiluro, listo para alquilar y alargar la cadena</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -2751,38 +2679,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-4',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-4-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">pKa:  HC≡C−H  ≈ 25</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">       H₂C=CH₂  ≈ 44</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">       CH₃−CH₃   ≈ 50</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mayor %s → mayor electronegatividad</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="82" viewBox="0 0 200 82" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="14" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pKa (más bajo = más ácido)</text><line x1="10" y1="30" x2="180" y2="30" stroke="var(--brd)" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="30" x2="70" y2="30" stroke="var(--c3t)" stroke-width="6" stroke-linecap="round"/><text x="40" y="50" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">HC≡CH: 25</text><text x="115" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂C=CH₂: 44</text><text x="160" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₃CH₃: 50</text><text x="90" y="72" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">C(sp) 50% s → más electronegativo → H más ácido</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — ¿Por qué el alquino terminal es ácido?</div>
             <div class="mech-step-h">El H sobre un C sp (alquino terminal) es más fácil de arrancar porque ese orbital sp tiene más carácter s (50%)</div>
             <div class="mech-step-txt">Acá está la clave: el carbono del triple enlace sujeta los electrones del enlace C−H <strong>más cerca del núcleo</strong> que en un doble o simple enlace. ¿Qué significa eso para ustedes? Que el H queda "menos protegido" por la nube electrónica, y por lo tanto es más fácil de arrancar con una base. En números: el H terminal de un alquino es <strong>moderadamente ácido</strong> (pKa ≈ 25 — más ácido que el H de un alcano, pero bastante menos que el del agua). Y una base fuerte como NaNH₂ sí se lo puede llevar, dejando el anión acetiluro.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−C≡C−H  +  NaNH₂  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C⁻ Na⁺  +  NH₃</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">acetiluro: nucleófilo fuerte</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="92" viewBox="0 0 180 92" style="overflow:visible;display:block;margin:0 auto" ><text x="35" y="40" text-anchor="middle" font-size="11" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">H−C≡C−R</text><text x="90" y="30" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">NH₂</text><circle cx="86.8" cy="27.5" r="1.9" fill="var(--c1t)"/><circle cx="86.8" cy="32.5" r="1.9" fill="var(--c1t)"/><path d="M20,35 Q51.94674280069919,21.512760681815774 85,32" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="35" y="60" text-anchor="middle" font-size="11" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">⁻C≡C−R  (acetiluro)</text><text x="90" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">base fuerte arranca el H → nucleófilo fuerte</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Ahí nace el acetiluro</div>
             <div class="mech-step-h">Una base fuerte (NaNH₂, BuLi) le arranca el H terminal → queda el anión acetiluro R−C≡C⁻, muy nucleófilo</div>
             <div class="mech-step-txt">La base fuerte <strong>NaNH₂</strong> (amiduro de sodio) tiene tanta apetencia por el H⁺ que se lo arranca sin problema al alquino terminal. Lo que les queda es el <strong>anión acetiluro (R−C≡C⁻)</strong> — un carbono con carga negativa. Y ese carbono negativo no se queda quieto: está "incómodo" y busca con quién reaccionar, así que se comporta como un nucleófilo bien potente. Guarden esto: en el siguiente paso van a ver cómo usa esa carga negativa para atacar un halogenuro y armar un nuevo enlace C−C, alargando la cadena.</div>
           </div>
           <div class="mech-step" id="ms-ai-4-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C⁻  +  R'−Br  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C≡C−R'  +  Br⁻</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">cadena crece · alquino interno</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="10" y1="55" x2="35" y2="55" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="10.0" y1="58.0" x2="35.0" y2="58.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="10.0" y1="52.0" x2="35.0" y2="52.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><circle cx="1" cy="49" r="6" fill="none" stroke="var(--c1t)" stroke-width="1.6"/><text x="1" y="52.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c1t)">−</text><text x="70" y="47" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">Br</text><line x1="60" y1="55" x2="70" y2="47" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><path d="M10,51 Q33.79780494086806,37.50316777920109 57,52" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><line x1="63" y1="53" x2="70" y2="47" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="90" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">SN2: el acetiluro desplaza al Br⁻ → cadena crece</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Para qué sirve todo esto: alargar cadenas</div>
             <div class="mech-step-h">El acetiluro ataca electrófilos R'−X por SN2 y forma alquinos internos → así se extiende la cadena un carbono a la vez</div>
             <div class="mech-step-txt">El acetiluro ataca sustratos primarios (1°) por <strong>SN2</strong>: el par libre del C⁻ sp desplaza al haluro y forma un nuevo enlace C−C. Con eso <em>extienden la cadena</em> un carbono. Truco de examen: esta es LA estrategia para armar alquinos de cadena larga en síntesis: HC≡CH → NaNH₂ → HC≡CNa → RX → RC≡CH.</div>
