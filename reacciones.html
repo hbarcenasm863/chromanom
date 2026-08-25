@@ -4180,19 +4180,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ao-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CH₂−CH(OH)−R'</div>
+              <div class="rxn-anim-label">Reactivo: alcohol 2° o 3°</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H₂SO₄, ~180°C</div>
+              <div class="rxn-anim-label">Condición: protona el OH para que sea buen grupo saliente</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">alqueno (Zaitsev) + H₂O</div>
+              <div class="rxn-anim-label">Producto: el más sustituido, vía carbocatión (E1)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4211,37 +4211,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ao-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ao-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH  +  H⁺  →  R−OH₂⁺</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">OH₂⁺ = grupo saliente excelente</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">pKa H₃O⁺ = −1.7 (MUY buen GS)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="45" y2="41" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="45" y1="41" x2="75" y2="55" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><text x="45" y="21" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><text x="35" y="9" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="67" y="11" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><circle cx="77" cy="3" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="77" y="6.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><path d="M42,17 Q49.6520373792641,5.524098120568255 63,9" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="85" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂SO₄ protona el OH → −OH₂⁺ (buen GS)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El H₂SO₄ protona el OH</div>
             <div class="mech-step-h">H₂SO₄ protona el −OH del alcohol → −OH₂⁺ (buen grupo saliente: agua)</div>
             <div class="mech-step-txt">Primero lo primero: el −OH solo <em>no se va</em> de ahí, es mal grupo saliente. Entonces el <strong>H⁺ del H₂SO₄</strong> lo protona y lo convierte en −OH₂⁺. Fíjense en el truco: ahora lo que se va no es OH⁻, sino <em>agua neutra</em> — y el agua sí es un grupo saliente excelente. Con eso ya dejamos el alcohol listo para la eliminación.</div>
           </div>
           <div class="mech-step" id="ms-ao-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−OH₂⁺  →  R⁺  +  H₂O</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">carbocatión: sp², plano</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">puede trans-posicionarse</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="45" y2="41" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="45" y1="41" x2="75" y2="55" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><circle cx="45" cy="19" r="6.5" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="45" y="22.5" text-anchor="middle" font-size="8.5" font-weight="800" style="fill:var(--c3t)">+</text><line x1="51" y1="17" x2="75" y2="3" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="87" y="-3" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH₂</text><text x="85" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">se va el H₂O (lento) → carbocatión sp²</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El agua se va y queda el carbocatión</div>
             <div class="mech-step-h">El agua se va formando el carbocatión R⁺; puede reorganizarse si hay migración posible</div>
             <div class="mech-step-txt">Ahora la <strong>H₂O se despide</strong> — este es el paso lento, el que manda la velocidad de toda la reacción — y nos queda un carbocatión sp². ¿Con cuál alcohol funciona mejor esto? Con uno de C 3°, porque ahí el R⁺ queda muy estable; en C 1° el carbocatión es tan inestable que la reacción va lenta o de plano no ocurre. Ojo con esto: si un H o un grupo alquilo vecino puede migrar para dar un R⁺ más estable, se <em>trans-posiciona</em> — no se queden solo con el esqueleto original.</div>
           </div>
           <div class="mech-step" id="ms-ao-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R⁺  →  [HSO₄⁻ abstrae Hβ]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">alqueno más sustituido (Zaitsev)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">H₂SO₄ regenerado (catalítico)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="45" y2="41" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="43.90049779013908" y1="43.35607616398769" x2="73.90049779013908" y2="57.35607616398769" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><line x1="46.09950220986092" y1="38.64392383601231" x2="76.09950220986092" y2="52.64392383601231" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="25" y="33" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><line x1="19" y1="49" x2="23" y2="37" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="1" y="25" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">HSO₄⁻</text><path d="M21,41 Q10.512570837685422,40.88240082724041 7,31" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Zaitsev: sale el alqueno más sustituido</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Se pierde un H⁺ y manda Zaitsev</div>
             <div class="mech-step-h">HSO₄⁻ abstrae un Hβ → doble enlace · Zaitsev: elimina H del Cβ con menos H → alqueno más sustituido</div>
             <div class="mech-step-txt">Por último, el <strong>HSO₄⁻</strong> le arranca un Hβ al carbocatión y ahí se cierra el doble enlace. ¿Y si hay dos Cβ para escoger? Acá manda Zaitsev: el H se va del carbono que tiene <em>menos hidrógenos</em>, y así nos queda el alqueno más sustituido — el más estable, el mayoritario. El H₂SO₄ queda intacto al final, así que es puro catalizador. Truco de examen: a 180 °C se van por el alqueno; a 140 °C con exceso de ROH compite la formación de éter.</div>
@@ -4356,19 +4338,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ao-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CH₂OH o R₂CHOH</div>
+              <div class="rxn-anim-label">Reactivo: alcohol primario o secundario</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">PCC (suave) o KMnO₄/K₂Cr₂O₇ (fuerte)</div>
+              <div class="rxn-anim-label">Condición: el oxidante decide dónde para</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">aldehído/ácido o cetona</div>
+              <div class="rxn-anim-label">Producto: 3° no reacciona — no tiene H en el C−OH</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4387,37 +4369,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ao-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ao-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">1°: R−CH₂OH → RCHO → RCOOH</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">2°: R₂CHOH → R₂C=O (cetona)</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">3°: R₃COH → NO REACCIONA</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100" style="overflow:visible;display:block;margin:0 auto" ><text x="30" y="20" text-anchor="middle" font-size="9.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">1° R−CH₂OH</text><text x="30" y="32" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">→ RCHO → RCOOH</text><text x="100" y="50" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">2° R₂CHOH</text><text x="100" y="62" text-anchor="middle" font-size="8.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">→ R₂C=O (cetona)</text><text x="160" y="80" text-anchor="middle" font-size="9.5" style="fill:var(--err);font-family:'JetBrains Mono',monospace">3° R₃COH</text><text x="160" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--err);font-family:'JetBrains Mono',monospace">→ NO reacciona</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — ¿Cuáles alcoholes se dejan oxidar?</div>
             <div class="mech-step-h">Solo alcoholes 1° y 2° se oxidan; los 3° no (no tienen H en el Cα del −OH)</div>
             <div class="mech-step-txt">Primera pregunta que deben hacerse: ¿ese carbono con el OH tiene un H pegado? Si no lo tiene, no hay oxidación posible — así de simple. Los alcoholes <em>1°</em> sí lo tienen y dan aldehídos (con un oxidante suave como PCC) o ácidos (con KMnO₄ fuerte). Los <em>2°</em> también lo tienen y siempre dan cetonas. Y los <em>3°</em>, ojo con esto, no tienen ese H en el Cα — no se oxidan por esta vía, punto.</div>
           </div>
           <div class="mech-step" id="ms-ao-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">PCC: 1° → RCHO (se detiene)</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">KMnO₄: 1° → RCHO → RCOOH</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">KMnO₄: 2° → R₂C=O (cetona)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">PCC</text><text x="50" y="34" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">1° → RCHO (para ahí)</text><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">KMnO₄ / K₂Cr₂O₇</text><text x="150" y="34" text-anchor="middle" font-size="8.3" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">1° → RCOOH · 2° → R₂C=O</text><line x1="10" y1="50" x2="190" y2="50" stroke="var(--brd)" stroke-width="1.5"/><text x="100" y="68" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">oxidante suave detiene; oxidante fuerte sobreoxida</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Con qué oxidante se quedan?</div>
             <div class="mech-step-h">PCC (suave): para detenerse en aldehído · KMnO₄/K₂Cr₂O₇ (fuerte): hasta ácido carboxílico</div>
             <div class="mech-step-txt">Acá está la jugada para controlar el producto: si quieren quedarse en el aldehído, usan <strong>PCC</strong> (clorocromato de piridinio) en CH₂Cl₂, en condición anhidra — sin agua de por medio, se detiene ahí y no sigue. Si en cambio usan <strong>KMnO₄ caliente/ácido</strong>, este es un oxidante tan fuerte que sobreoxida el aldehído hasta ácido carboxílico, no lo pueden parar a la mitad. El <strong>K₂Cr₂O₇</strong> en H₂SO₄ se comporta parecido al KMnO₄, así que en la práctica ven a los dos.</div>
           </div>
           <div class="mech-step" id="ms-ao-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">C−H del Cα del alcohol + Mn⁷⁺ →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">C=O  +  Mn⁵⁺ → Mn⁴⁺ → MnO₂</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">2e⁻ transferidos por oxidación</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="88" viewBox="0 10 190 78" style="overflow:visible;display:block;margin:0 auto" ><circle cx="45" cy="35" r="16" fill="#7c3aed" opacity=".7"/><text x="45" y="60" text-anchor="middle" font-size="8.5" style="fill:#7c3aed;font-family:'JetBrains Mono',monospace">KMnO₄ violeta</text><line x1="75" y1="35" x2="100" y2="35" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="100,35 92,31 92,39" fill="var(--dimmer)"/><circle cx="135" cy="35" r="11" fill="#92400e" opacity=".8"/><text x="135" y="60" text-anchor="middle" font-size="8.5" style="fill:#92400e;font-family:'JetBrains Mono',monospace">MnO₂ pardo</text><text x="90" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">2 e⁻ transferidos del C−H al metal</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Por qué el metal hace el trabajo</div>
             <div class="mech-step-h">El metal de transición (Mn⁷⁺ o Cr⁶⁺) acepta electrones del C−H del alcohol → compuesto carbonílico</div>
             <div class="mech-step-txt">¿Por qué el KMnO₄ y el K₂Cr₂O₇ son tan buenos oxidantes? Porque el manganeso y el cromo están en estados de oxidación muy altos y literalmente "necesitan" electrones. Cuando se topan con el alcohol, le quitan electrones al enlace C−H, y ese carbono termina como C=O — aldehído o ácido, según las condiciones que usen. Y aquí el detalle que deben recordar para el laboratorio: el KMnO₄ arranca violeta intenso y termina en un <strong>precipitado pardo-café</strong> (MnO₂); el K₂Cr₂O₇ arranca naranja y termina <strong>verde</strong> (Cr³⁺). Ese cambio de color ES la prueba visual de que la oxidación ocurrió — no necesitan nada más para confirmarlo.</div>
@@ -4549,19 +4513,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ao-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−OH + HX o SOCl₂</div>
+              <div class="rxn-anim-label">Reactivo: alcohol + agente halogenante</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H⁺ activa el OH como grupo saliente</div>
+              <div class="rxn-anim-label">Condición: SN1 en 3°, SN2 en 1°</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−X + H₂O (o SO₂+HCl)</div>
+              <div class="rxn-anim-label">Producto: SOCl₂ da el haluro más puro</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4580,37 +4544,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ao-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ao-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH + HX → R−OH₂⁺ + X⁻</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">1°: SN2 → R−X + H₂O (inversión)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">3°: SN1 → R−X + H₂O (racémico)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 0 190 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="43" y2="42" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><circle cx="43" cy="22" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="43" y="25.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="43" y="12" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH₂</text><text x="88" y="34" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">X</text><circle cx="85.5" cy="37.2" r="1.9" fill="var(--c3t)"/><circle cx="90.5" cy="37.2" r="1.9" fill="var(--c3t)"/><path d="M81,28 Q66.53215208419019,19.017718737147128 51,26" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><line x1="43" y1="34" x2="43" y2="22" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">1°→SN2 (inversión) · 3°→SN1 (racémico)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Con HX: protonan y sustituyen</div>
             <div class="mech-step-h">H⁺ protona el OH → H₂O es el grupo saliente; X⁻ ataca (SN1 en 3°, SN2 en 1°)</div>
             <div class="mech-step-txt">Fíjense que esto ya lo conocen: mismo truco de siempre, el H⁺ convierte el OH en un buen grupo saliente. Y de ahí para adelante, el mecanismo depende del grado del sustrato. <strong>1° → SN2</strong>: el X⁻ ataca por detrás y hay inversión de configuración. <strong>3° → SN1</strong>: se forma un carbocatión plano y sale mezcla racémica. Ojo con la reactividad de los HX: HI > HBr > HCl, porque el I⁻ es mejor nucleófilo y el HI es el más ácido.</div>
           </div>
           <div class="mech-step" id="ms-ao-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−OH + SOCl₂ → R−O−SOCl + HCl</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−O−SOCl → R−Cl + SO₂↑</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">sin agua de subproducto en el medio</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="88" viewBox="0 15 190 75" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">R−OH + SOCl₂</text><line x1="15" y1="35" x2="150" y2="35" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="150,35 142,31 142,39" fill="var(--dimmer)"/><text x="80" y="30" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">−HCl</text><text x="45" y="55" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R−O−S(=O)Cl</text><text x="45" y="75" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">clorosulfito (Cl⁻ interno ataca)</text><text x="150" y="55" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R−Cl + SO₂↑</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Con SOCl₂ el asunto queda más limpio</div>
             <div class="mech-step-h">SOCl₂ forma el intermediario clorosulfito R−O−SOCl → Cl⁻ interno desplaza el −OSO → R−Cl</div>
             <div class="mech-step-txt">Acá está la jugada con <strong>SOCl₂</strong>: el −OH primero se convierte en el clorosulfito R−O−SOCl, y luego el Cl⁻ (interno o libre) desplaza ese −OSO. ¿Y por qué preferimos esta ruta? Porque el <strong>SO₂ y el HCl salen como gases</strong> — se van solos, no dejan residuo en el medio. Así el R−Cl les queda puro, sin mezclarse con agua.</div>
           </div>
           <div class="mech-step" id="ms-ao-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">HX: simple, mezcla con H₂O</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">SOCl₂: gas SO₂ + HCl salen solos</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">PBr₃: igual lógica, para bromuro</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="75" viewBox="0 10 190 65" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="25" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">HX: simple</text><text x="50" y="40" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">mezcla con H₂O</text><text x="140" y="25" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">SOCl₂: limpio</text><text x="140" y="40" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">gases salen solos</text><text x="95" y="65" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">reactividad: HI > HBr > HCl</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Con cuál se quedan?</div>
             <div class="mech-step-h">HX: sencillo pero lento con 1° y posible racemización en 3° · SOCl₂: más limpio y controlado</div>
             <div class="mech-step-txt">Comparemos: el HX es simple y sirve si no les importa el control estereoquímico. Pero si están en síntesis orgánica y necesitan producto limpio, el <strong>SOCl₂</strong> (o el PBr₃, misma lógica) es la mejor opción. Truco de examen: en el laboratorio suelen usar SOCl₂ con piridina, porque la piridina neutraliza el HCl que se libera y así obtienen el R−Cl con alta pureza.</div>
@@ -4691,19 +4637,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ao-3">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−COOH + R'−OH</div>
+              <div class="rxn-anim-label">Reactivo: ácido carboxílico + alcohol</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H⁺ (catalizador), calor, reversible</div>
+              <div class="rxn-anim-label">Condición: pasa por un intermediario tetraédrico</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−COO−R' + H₂O</div>
+              <div class="rxn-anim-label">Producto: éster — exceso de ROH desplaza el equilibrio</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -4722,37 +4668,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ao-3',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ao-3-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOH + H⁺ → RC(OH)₂⁺ (catión)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">O del alcohol ataca el C electrofílico</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">nuevo enlace O−C formado</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="100" viewBox="0 0 170 100" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="50" y1="50" x2="50" y2="25" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="50" y="18" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><circle cx="60" cy="10" r="5.5" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="60" y="13.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c3t)">+</text><text x="50" y="32" text-anchor="middle" font-size="8" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><line x1="50" y1="50" x2="25" y2="65" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="15" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="50" y1="50" x2="75" y2="65" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="88" y="68" text-anchor="middle" font-size="9" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">OH</text><text x="115" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><text x="105" y="30" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><circle cx="118.2" cy="47.5" r="1.9" fill="var(--c1t)"/><circle cx="118.2" cy="42.5" r="1.9" fill="var(--c1t)"/><text x="130" y="55" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R'</text><path d="M107,45 Q82.44213945406477,37.556110868208876 60,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="80" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el O del alcohol ataca el C protonado (δ+)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Activan el carbonilo</div>
             <div class="mech-step-h">H⁺ protona el C=O del ácido → carbono más electrofílico (δ+); el OH del alcohol ataca</div>
             <div class="mech-step-txt">El H⁺ protona el C=O del ácido carboxílico y con eso el <strong>carbono queda mucho más electrofílico</strong> — hambriento de electrones. Ahí es cuando el oxígeno del alcohol, que es nucleófilo, entra y ataca ese carbono formando el nuevo enlace O−C. Sin esa protonación previa, el alcohol no ataca con la misma facilidad.</div>
           </div>
           <div class="mech-step" id="ms-ao-3-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C (sp²) + OH del alcohol →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C (sp³): R, OH, OH, OR' (tetraédrico)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">2 grupos −OH en el mismo C</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="100" viewBox="0 5 170 95" style="overflow:visible;display:block;margin:0 auto" ><text x="85" y="45" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><line x1="85" y1="45" x2="55" y2="30" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="45" y="25" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="85" y1="45" x2="55" y2="60" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="45" y="68" text-anchor="middle" font-size="9" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">OH</text><line x1="85" y1="45" x2="115" y2="30" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="125" y="25" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">OH₂⁺</text><line x1="85" y1="45" x2="115" y2="60" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="125" y="68" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OR'</text><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">intermediario tetraédrico (sp³) — inestable</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Se forma el intermediario tetraédrico</div>
             <div class="mech-step-h">El carbono del ácido pasa de sp² (3 grupos) a sp³ (4 grupos): intermediario tetraédrico</div>
             <div class="mech-step-txt">Fíjense en lo que pasó con ese carbono: antes tenía 3 grupos (sp²), ahora tiene 4 (sp³) — R, −OH del ácido, −OH₂⁺ protonado, y −OR' del alcohol. Este <strong>intermediario tetraédrico</strong> es inestable, no se van a quedar ahí, pero es la etapa clave: de aquí en adelante toca perder agua para llegar al éster.</div>
           </div>
           <div class="mech-step" id="ms-ao-3-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">tetraédrico → pierde H₂O</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−CO−OR' (éster) + H₂O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">equilibrio reversible; exceso ROH → éster</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="105" viewBox="0 5 190 100" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="45" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="62.6" y1="45.0" x2="62.6" y2="20.0" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><line x1="57.4" y1="45.0" x2="57.4" y2="20.0" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="60" y="12" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">O</text><line x1="60" y1="45" x2="30" y2="60" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="20" y="68" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="60" y1="45" x2="95" y2="45" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="108" y="45" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="115" y1="45" x2="140" y2="55" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="150" y="60" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R'</text><line x1="60" y1="58" x2="45" y2="72" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="35" y="80" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H₂O</text><text x="90" y="95" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pierde H₂O → C=O se regenera: el éster</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Se pierde agua y sale el éster</div>
             <div class="mech-step-h">Uno de los dos −OH se protona → pierde H₂O → se regenera el C=O ahora con O−R': el éster</div>
             <div class="mech-step-txt">Uno de esos −OH se protona a −OH₂⁺ y se va como agua; los electrones que quedan arman de nuevo el <strong>doble enlace C=O, pero ahora del éster</strong>. El H⁺ se regenera al final, así que es puro catalizador. Ojo con esto: la reacción es <em>reversible</em>, así que si quieren empujarla hacia el éster, usen exceso de alcohol, saquen el agua (trampa Dean-Stark) o retiren el éster a medida que se forma.</div>
