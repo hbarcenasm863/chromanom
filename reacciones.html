@@ -2039,6 +2039,139 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+
+    <div class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('aq-6')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c4t)">Polimerización</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">Adición en cadena · radical libre</span>
+        </div>
+        <span class="rxn-chev" id="chev-aq-6">▾</span>
+      </div>
+      <div class="rxn-body" id="body-aq-6">
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">n <span class="bp">CH₂=CH₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">iniciador (R−O−O−R)</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Δ o presión</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">−<span class="hn">(CH₂−CH₂)</span>ₙ−</span>
+          </div>
+        </div>
+
+        <!-- ── STEPPER: Polimerización — Visión general ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-aq-6" onclick="rxnAnimStep('aq-6',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-aq-6" onclick="rxnAnimStep('aq-6',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-aq-6">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('aq-6',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('aq-6',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('aq-6',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-aq-6">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">n CH₂=CH₂ + R−O−O−R</div>
+              <div class="rxn-anim-label">Reactivo: miles de monómeros con C=C + un iniciador radical</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">Δ o alta presión</div>
+              <div class="rxn-anim-label">Condición: el iniciador se rompe y arranca una reacción en cadena</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">−(CH₂−CH₂)ₙ−</div>
+              <div class="rxn-anim-label">Producto: polietileno — una cadena gigante de n unidades repetidas</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
+        <div class="mech-stepper" id="mech-aq-6">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Polimerización por adición — Mecanismo radicalario</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-aq-6" onclick="mechStep('aq-6',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-aq-6">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-aq-6" onclick="mechStep('aq-6',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-aq-6">
+            <span class="mech-dot on" onclick="mechDot('aq-6',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('aq-6',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('aq-6',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-aq-6-0">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="95" viewBox="0 0 200 95" style="overflow:visible;display:block;margin:0 auto" ><text x="20" y="45" text-anchor="start" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="32" y1="45" x2="52" y2="45" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="58" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">O</text><line x1="66" y1="45" x2="90" y2="45" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="96" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">O</text><line x1="104" y1="45" x2="122" y2="45" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="130" y="45" text-anchor="start" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><path d="M70,42 Q56.5,43.6 56,30" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><path d="M86,42 Q99.5,43.6 100,30" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><circle cx="58" cy="25" r="2.6" fill="var(--c4t)"/><circle cx="96" cy="25" r="2.6" fill="var(--c4t)"/><text x="78" y="15" text-anchor="middle" font-size="9.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">hν o Δ</text><text x="78" y="85" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">homólisis O−O → 2 RO•</text></svg></div>
+            <div class="mech-step-n">Paso 1 de 3 — Iniciación</div>
+            <div class="mech-step-h">El iniciador (peróxido R−O−O−R) se rompe homolíticamente con luz o calor → 2 radicales RO•</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Todo empieza igual que en la sustitución radical de los alcanos: un <strong>iniciador</strong> (típicamente un peróxido orgánico R−O−O−R) rompe su enlace O−O de forma <em>homolítica</em> con luz o calor, y cada oxígeno se lleva un electrón. Nacen así <strong>2 radicales RO•</strong>, extremadamente reactivos, listos para atacar el primer monómero.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-6-1">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="95" viewBox="0 0 220 95" style="overflow:visible;display:block;margin:0 auto" ><text x="25" y="40" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">RO•</text><line x1="42" y1="40" x2="58" y2="40" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="70" y="40" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="78" y1="43" x2="98" y2="43" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="78" y1="37" x2="98" y2="37" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="106" y="40" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><text x="70" y="55" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂</text><text x="106" y="55" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂</text><path d="M35,37 Q48.6,22.7 66,32" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><path d="M88,36 Q95.6,22.6 110,28" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><circle cx="112" cy="22" r="2.6" fill="var(--c4t)"/><text x="150" y="40" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RO−CH₂−CH₂•</text><text x="80" y="85" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el radical ataca el π; nace un radical nuevo — la cadena crece</text></svg></div>
+            <div class="mech-step-n">Paso 2 de 3 — Propagación</div>
+            <div class="mech-step-h">RO• ataca el π del eteno con un electrón; nace un nuevo radical en la punta de la cadena, y se repite miles de veces</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">El radical RO• ataca el enlace <strong>π</strong> del primer monómero con un electrón (flecha de anzuelo, 1 e⁻), formando un enlace nuevo RO−CH₂− y dejando el electrón desapareado en el <em>otro</em> extremo: <strong>−CH₂•</strong>. Ese nuevo radical ataca al siguiente monómero, y así <strong>miles de veces</strong> — cada ataque alarga la cadena en 2 carbonos y traslada el radical a la nueva punta. Por eso se llama polimerización <em>en cadena</em>.</div>
+          </div>
+          <div class="mech-step" id="ms-aq-6-2">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="95" viewBox="0 0 220 95" style="overflow:visible;display:block;margin:0 auto" ><text x="18" y="40" text-anchor="start" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">~~~CH₂−CH₂</text><circle cx="100" cy="32" r="2.6" fill="var(--c4t)"/><text x="145" y="40" text-anchor="start" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₂−CH₂~~~</text><circle cx="140" cy="32" r="2.6" fill="var(--c4t)"/><path d="M102,30 Q120,16 138,30" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><path d="M140,30 Q120.5,16 101,30" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><line x1="103" y1="40" x2="138" y2="40" stroke="var(--c2t)" stroke-width="2.6" stroke-linecap="round"/><text x="115" y="85" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">dos radicales se unen → termina el crecimiento</text></svg></div>
+            <div class="mech-step-n">Paso 3 de 3 — Terminación</div>
+            <div class="mech-step-h">Dos cadenas con radical en la punta se encuentran y se unen en un enlace covalente — ahí muere esa cadena</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">La reacción en cadena no dura para siempre: cuando dos cadenas que llevan un radical en la punta se chocan, sus electrones desapareados se combinan en un <strong>enlace covalente nuevo</strong> — igual que en la terminación de la sustitución radical de los alcanos. Ahí termina el crecimiento de esas dos cadenas, con un peso molecular que depende de cuántas veces se repitió la propagación.</div>
+          </div>
+        </div><!-- /mech-stepper -->
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">n CH₂=CH₂</span>
+            <div class="mol-cmp-name">eteno (monómero)</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">iniciador, Δ</div>
+            <div>──────→</div>
+          </div>
+          <div class="mol-cmp-card" style="border-color:#A0527F40">
+            <span class="mol-cmp-formula"><span class="hn">−(CH₂−CH₂)ₙ−</span></span>
+            <div class="mol-cmp-name">polietileno (PE)</div>
+          </div>
+        </div>
+        <div class="rxn-cond"><b>Adición</b> (radical o iónica): monómeros con C=C — eteno → PE, cloruro de vinilo → PVC, propeno → PP — no se pierde ningún átomo. <b>Condensación</b>: monómeros bifuncionales que se unen liberando una molécula pequeña (H₂O) en cada enlace — ácido tereftálico + etilenglicol → PET, diácido + diamina → nailon 6,6.</div>
+        <div class="rxn-regla">📌 Truco de examen — en adición el polímero pesa EXACTAMENTE n × (peso del monómero) · en condensación siempre falta la masa de las moléculas de H₂O liberadas</div>
+        <div class="rxn-ex-lbl">Ejemplo (adición)</div>
+        <div class="rxn-ex" style="animation-delay:.05s">
+          <span class="rxn-ex-r">n <span class="bp">CH₂=CHCl</span> + peróxido</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">−<span class="hn">(CH₂−CHCl)</span>ₙ−</span>
+          <span class="rxn-ex-nota">PVC (policloruro de vinilo)</span>
+        </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏭</span>
+  <div><strong>¿Para qué les sirve esto?</strong> Casi todo lo que llaman "plástico" sale de aquí. El <strong>PE</strong> (bolsas, tubos) y el <strong>PP</strong> (empaques, tapas) se producen por adición en las plantas petroquímicas de Barrancabermeja y Cartagena. El <strong>PVC</strong> (tubería de acueducto) también es adición. El <strong>PET</strong> (botellas de gaseosa) y el <strong>nailon</strong> (fibras textiles) son condensación — por eso se pueden despolimerizar con agua/calor (hidrólisis), lo que los hace más reciclables que el PE o el PVC.</div>
+</div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="aq-6-q0">
+          <div class="quiz-q-text">¿Cuál de estos monómeros forma un polímero por CONDENSACIÓN?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-6-q0',false)"><span class="quiz-opt-icon">○</span> Eteno (CH₂=CH₂)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-6-q0',true)"><span class="quiz-opt-icon">○</span> Ácido tereftálico + etilenglicol</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'aq-6-q0',false)"><span class="quiz-opt-icon">○</span> Cloruro de vinilo (CH₂=CHCl)</div>
+          </div>
+          <div class="quiz-fb" id="fb-aq-6-q0"></div>
+        </div>
+      </div>
+    </div>
   </div><!-- /tab-alquenos -->
 
   <!-- ─────────────── ALQUINOS ─────────────── -->
@@ -6831,7 +6964,7 @@ function showMS(id){
 document.addEventListener('DOMContentLoaded',()=>{
   initMS('cb-0',4);
   // steppers for remaining bodies (3 steps each)
-  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
+  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
@@ -6933,6 +7066,7 @@ const QUIZ_FB={
   'aq-3-q0':{ok:'Correcto — Markovnikov: OH al C2 (más sustituido). Producto: propan-2-ol.',fail:'Propan-1-ol sería anti-Markovnikov. Propanona resultaría de oxidación, no hidratación de alqueno.'},
   'aq-4-q0':{ok:'Correcto — HCHO (metanal) del CH₂= y CH₃CHO (etanal) del =CH−CH₃.',fail:'CO₂+H₂O es combustión, no ozonólisis. Los ácidos serían de condiciones oxidantes.'},
   'aq-5-q0':{ok:'Correcto — decoloración del KMnO₄ púrpura indica que el compuesto tiene insaturación (+ para alquenos y alquinos).',fail:'La solución se vuelve MÁS incolora, no más violeta.'},
+  'aq-6-q0':{ok:'Correcto — dos monómeros bifuncionales (ácido + alcohol) se unen liberando H₂O en cada enlace: condensación.',fail:'Eteno y cloruro de vinilo tienen C=C: polimerizan por adición (radical), sin perder ningún átomo.'},
   'ai-0-q0':{ok:'Correcto — doble adición de HBr a HC≡CH: 1ª → CH₂=CHBr, 2ª → CH₃CHBr₂ (geminaldialuro).',fail:'CH₂Br−CH₂Br es la doble halogenación con Br₂ (1,2-dibromo). El geminaldialuro lleva ambos Br en el mismo C.'},
   'ai-1-q0':{ok:'Correcto — 1 mol X₂ → dihaloalqueno; 2 mol X₂ → tetrahaloalcano.',fail:'1 mol da el dihaloalqueno (×1). Para llegar al tetrahaloalcano se necesitan 2 moles.'},
   'ai-2-q0':{ok:'Correcto — Lindlar es un Pd envenenado (CaCO₃ + acetato de Pb) que detiene en el cis-alqueno.',fail:'Para trans-alqueno se usa Na/NH₃(l) (Birch). Para ir directo a alcano se usa Ni sin envenenar.'},
