@@ -531,10 +531,23 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod-icon">🧪</span>
       <div class="mod-paso" style="color:rgba(255,255,255,.75)">④ Reacciones de los grupos</div>
       <div class="mod-title">Reacciones Orgánicas</div>
-      <div class="mod-desc" style="color:rgba(255,255,255,.85)">Reacciones características de hidrocarburos: alcanos, alquenos, alquinos y aromáticos. Esquema general, condiciones, ejemplos y mini-quiz por cada tipo.</div>
+      <div class="mod-desc" style="color:rgba(255,255,255,.85)">Reacciones características de alcanos, cicloalcanos, alquenos, alquinos, aromáticos, halogenuros, alcoholes, aminas, carbonílicos, ácidos y sus derivados. Mecanismo paso a paso, condiciones, ejemplos y mini-quiz por cada tipo.</div>
     </div>
     <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
-      <div class="mod-chips"><span class="mc">4 grupos</span><span class="mc">20 reacciones</span><span class="mc">Mini-quiz</span></div>
+      <div class="mod-chips"><span class="mc">10 pestañas</span><span class="mc">39 reacciones</span><span class="mc">Mini-quiz</span></div>
+      <span class="mod-arrow">→</span>
+    </div>
+  </a>
+
+  <a class="mod-card" href="generador.html" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);border-color:#7c3aed;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
+    <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
+      <span class="mod-icon">📄</span>
+      <div class="mod-paso" style="color:rgba(255,255,255,.75)">⑤ Genera tu propia hoja</div>
+      <div class="mod-title">Generador de Ejercicios</div>
+      <div class="mod-desc" style="color:rgba(255,255,255,.85)">Crea hojas de trabajo personalizadas: elige grupos funcionales, tipo de ejercicio (nombrar, dibujar, MDEC o reacciones) y cantidad. Para reacciones puedes filtrar por grupo y tipo de pregunta. Imprime o descarga en PDF.</div>
+    </div>
+    <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
+      <div class="mod-chips"><span class="mc">4 tipos</span><span class="mc">Filtros ajustables</span><span class="mc">PDF</span></div>
       <span class="mod-arrow">→</span>
     </div>
   </a>
@@ -685,6 +698,28 @@ const TOUR=[
       <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
   },
   {
+    title:'④ Reacciones Orgánicas',
+    hdrColor:'linear-gradient(135deg,#0e7490,#0891b2)',
+    body:`
+      <p>El módulo de <strong>Reacciones</strong> explica cómo reaccionan los grupos funcionales: 10 pestañas, 39 reacciones, con mecanismo paso a paso animado.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>⚗️ Mecanismo animado</strong>Cada reacción se dibuja átomo por átomo: reactivo → condición → producto.</div>
+        <div class="tour-feat"><strong>📖 Glosario previo</strong>12 conceptos clave (carbocatión, nucleófilo, Markovnikov...) antes de entrar al detalle.</div>
+      </div>
+      <p style="margin-top:8px">Cubre alcanos, cicloalcanos, alquenos, alquinos, aromáticos, halogenuros de alquilo, alcoholes, aminas, carbonílicos, ácidos carboxílicos y sus derivados — con mini-quiz al final de cada una.</p>`
+  },
+  {
+    title:'⑤ Generador de Ejercicios',
+    hdrColor:'linear-gradient(135deg,#5b21b6,#7c3aed)',
+    body:`
+      <p>El <strong>Generador</strong> crea hojas de trabajo personalizadas para imprimir o practicar en clase.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>🎛️ Todo ajustable</strong>Grupo funcional, tipo de ejercicio y cantidad de preguntas — tú eliges.</div>
+        <div class="tour-feat"><strong>⚗️ Filtro de reacciones</strong>Para el Tipo D puedes escoger justo qué grupos de reacciones repasar y si son de producto o de tipo de reacción.</div>
+      </div>
+      <p style="margin-top:8px">Ideal para armar un taller o una guía de repaso enfocada solo en los temas que tu curso necesita.</p>`
+  },
+  {
     title:'¡Listo para empezar!',
     hdrColor:'linear-gradient(135deg,#0d4a73,#357a1f)',
     body:`
@@ -693,6 +728,10 @@ const TOUR=[
         <a class="tour-link az" href="teoria.html">⚗️ <span>① Principios<br><small style="font-weight:400;opacity:.85">Empieza aquí</small></span></a>
         <a class="tour-link vd" href="grupos.html">🔬 <span>② Grupos<br><small style="font-weight:400;opacity:.85">Luego aquí</small></span></a>
         <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Pon a prueba</small></span></a>
+      </div>
+      <div class="tour-links" style="margin-top:8px">
+        <a class="tour-link" style="background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">Profundiza</small></span></a>
+        <a class="tour-link" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff" href="generador.html">📄 <span>⑤ Generador<br><small style="font-weight:400;opacity:.85">Crea tu hoja</small></span></a>
       </div>
       <p style="margin-top:14px;font-size:.8rem;color:var(--dimmer)">Puedes volver a ver este tutorial pulsando el botón <strong>"▶ ¿Cómo funciona?"</strong> de la portada en cualquier momento.</p>`
   }
