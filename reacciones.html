@@ -5259,19 +5259,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-cb-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CHO + HCN</div>
+              <div class="rxn-anim-label">Reactivo: aldehído o cetona + ácido cianhídrico</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">OH⁻ (catalítico)</div>
+              <div class="rxn-anim-label">Condición: el CN⁻ ataca el C del carbonilo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−CH(OH)−CN</div>
+              <div class="rxn-anim-label">Producto: cianohidrina — nuevo enlace C−C</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5475,19 +5475,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-cb-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CHO o R₂C=O</div>
+              <div class="rxn-anim-label">Reactivo: aldehído o cetona</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">LiAlH₄ / NaBH₄</div>
+              <div class="rxn-anim-label">Condición: fuente de H⁻ (hidruro nucleofílico)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">alcohol 1° o 2°</div>
+              <div class="rxn-anim-label">Producto: aldehído da 1°, cetona da 2°</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5506,37 +5506,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('cb-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-cb-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">LiAlH₄ → H⁻ (hidruro)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">H⁻ ataca el C=O (δ+)</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">los e⁻ del C=O migran al O</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="100" viewBox="0 5 170 95" style="overflow:visible;display:block;margin:0 auto" ><text x="70" y="55" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="72.6" y1="55.0" x2="72.6" y2="31.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="67.4" y1="55.0" x2="67.4" y2="31.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="70" y="23" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="70" y1="55" x2="45" y2="68" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="35" y="75" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="70" y1="55" x2="95" y2="68" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="105" y="75" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="115" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><circle cx="128" cy="38" r="5.5" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="128" y="41.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c3t)">−</text><path d="M112,45 Q93.83604807604135,39.585126917081176 78,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><path d="M70,38 Q78.0,31.5 70,25" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="80" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H⁻ (de LiAlH₄/NaBH₄) ataca el C (δ+)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Primero necesitamos el H⁻</div>
             <div class="mech-step-h">LiAlH₄ o NaBH₄ entregan H⁻ (hidruro), que ataca el C=O (δ+) como nucleófilo</div>
             <div class="mech-step-txt">Fíjense: el <strong>LiAlH₄</strong> (o el NaBH₄, que es más suave) actúa como fuente de <em>H⁻ (hidruro)</em>. Ese H⁻ es un nucleófilo bien potente y ataca el carbono del C=O, que tiene carga parcial positiva (δ+). Truco de examen: el NaBH₄ es más selectivo — reduce solo el C=O y deja tranquilo al C=C —, mientras que el LiAlH₄ es más agresivo y también reduce ésteres, ácidos y amidas.</div>
           </div>
           <div class="mech-step" id="ms-cb-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−C(=O)H  +  H⁻  →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH(O⁻)  (alcóxido)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C ahora sp³ con 4 grupos</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="100" viewBox="0 5 160 95" style="overflow:visible;display:block;margin:0 auto" ><text x="70" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><line x1="70" y1="50" x2="70" y2="28" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><text x="70" y="20" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><circle cx="80" cy="14" r="5.5" fill="none" stroke="var(--c4t)" stroke-width="1.6"/><text x="80" y="17.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c4t)">−</text><line x1="70" y1="50" x2="45" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="35" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="70" y1="50" x2="95" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="105" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="70" y1="50" x2="70" y2="68" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="70" y="80" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="80" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">alcóxido (sp³, 4 grupos)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Nos queda el alcóxido</div>
             <div class="mech-step-h">El H⁻ se une al C del C=O; los electrones del doble enlace migran al O → alcóxido R−CH(O⁻)−</div>
             <div class="mech-step-txt">Tras el ataque del H⁻, el <strong>carbono del C=O pasa de sp² a sp³</strong>: ahora carga 4 grupos (R, H, O⁻, y el H que acaba de entrar). El oxígeno queda con la carga negativa — eso es el alcóxido. Ojo con esto: este intermediario es muy básico y reacciona fácil con el agua, así que ni se les ocurra mezclar LiAlH₄ con agua todavía.</div>
           </div>
           <div class="mech-step" id="ms-cb-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">alcóxido + H₂O → alcohol + OH⁻</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCHO + H⁻ → RCH₂OH  (1°)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R₂CO + H⁻ → R₂CHOH  (2°)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="75" viewBox="0 15 190 65" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">RCHO + H⁻</text><text x="45" y="40" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">→ RCH₂OH (1°)</text><text x="130" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R₂C=O + H⁻</text><text x="130" y="40" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">→ R₂CHOH (2°)</text><text x="90" y="65" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₃O⁺ protona el alcóxido → alcohol</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Se protona y sale el alcohol</div>
             <div class="mech-step-h">El H₂O (trabajo en ácido) protona el alcóxido O⁻ → alcohol · Aldehído → 1° · Cetona → 2°</div>
             <div class="mech-step-txt">En el trabajo en ácido (H₂O/H₃O⁺), el <strong>alcóxido se protona</strong> y ahí sale el alcohol. Regla que deben memorizar: <em>aldehído → alcohol 1°</em> (CH₂OH); <em>cetona → alcohol 2°</em> (CHOH). Un detalle práctico: con NaBH₄ pueden trabajar directo en MeOH/H₂O, pero con LiAlH₄ no — reacciona violento con el agua, así que se usa THF y hay que tener cuidado en el montaje.</div>
@@ -5644,19 +5626,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-cb-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R'MgBr + R−C(=O)−R″</div>
+              <div class="rxn-anim-label">Reactivo: reactivo de Grignard + carbonilo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">éter seco, luego H₃O⁺</div>
+              <div class="rxn-anim-label">Condición: nunca agua mientras reacciona</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R'−C(OH)(R)(R″)</div>
+              <div class="rxn-anim-label">Producto: alcohol — nuevo enlace C−C</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5675,37 +5657,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('cb-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-cb-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R′−MgBr (enlace muy polar)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R′^δ⁻ ··· Mg^δ⁺Br</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">el C se comporta como carbanión: nucleófilo/base fortísimo</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 5 190 91" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R'</text><text x="50" y="64" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">δ−</text><line x1="62" y1="50" x2="95" y2="50" stroke="var(--tx)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="115" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Mg</text><text x="115" y="64" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">δ+</text><line x1="128" y1="50" x2="150" y2="50" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="160" y="52" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Br</text><text x="90" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">C−Mg muy polar: R' actúa como carbanión</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El Grignard es casi un carbanión</div>
             <div class="mech-step-h">El enlace C−Mg es tan polar que el carbono del R′ actúa como carbanión: nucleófilo y base muy fuertes</div>
             <div class="mech-step-txt">Miren la clave de todo esto: el magnesio es mucho menos electronegativo que el carbono, así que el enlace C−Mg queda bien polarizado — el carbono se queda con casi toda la densidad electrónica. Prácticamente es un carbanión R′⁻ paseando con un MgBr⁺ al lado. Por eso el Grignard es de los nucleófilos más fuertes que van a ver en el curso. Ojo con esto: como es tan básico, reacciona instantáneo con cualquier H ácido — por eso se prepara y se usa en éter o THF bien secos, sin una gota de agua.</div>
           </div>
           <div class="mech-step" id="ms-cb-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′⁻  +  R−C(=O)−R″  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−C(−O⁻MgBr⁺)(R)(R″)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">nuevo enlace C−C, alcóxido de magnesio</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><circle cx="30" cy="45" r="6" fill="none" stroke="var(--c4t)" stroke-width="1.6"/><text x="30" y="48.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c4t)">−</text><text x="30" y="58" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">R'</text><text x="80" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="82.6" y1="50.0" x2="82.6" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="77.4" y1="50.0" x2="77.4" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="80" y="18" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="80" y1="50" x2="105" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="115" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R″</text><line x1="80" y1="50" x2="55" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="45" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><path d="M35,42 Q53.38480020497203,38.22519915449036 68,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><path d="M80,38 Q88.0,31.5 80,25" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="90" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R'⁻ ataca el C=O → nuevo enlace C−C</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El carbanión ataca el carbonilo</div>
             <div class="mech-step-h">El R′⁻ del Grignard ataca el C del C=O (electrófilo) → se forma el enlace C−C y un alcóxido de magnesio</div>
             <div class="mech-step-txt">Acá está la jugada: el carbono del Grignard, cargado de electrones, le cae directo al carbono del carbonilo (que es δ+ porque el O le roba densidad). Los electrones del π C=O se van completos al oxígeno, y queda un alcóxido de magnesio. Fíjense en el detalle que deben recordar: en este paso se forma el enlace C−C nuevo — la razón por la que el Grignard es tan importante en síntesis.</div>
           </div>
           <div class="mech-step" id="ms-cb-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">alcóxido + H₃O⁺ (o NH₄Cl/H₂O) →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R′−C(OH)(R)(R″) + sales de Mg</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">hidrólisis ácida: alcohol final</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="65" viewBox="0 15 220 55" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">alcóxido−MgBr</text><line x1="15" y1="35" x2="130" y2="35" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="130,35 122,31 122,39" fill="var(--dimmer)"/><text x="70" y="30" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H₃O⁺ (workup)</text><text x="155" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R′−C(OH)(R)(R″)</text><text x="90" y="55" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">nunca agua mientras reacciona el Grignard — solo al final</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — La hidrólisis ácida da el alcohol</div>
             <div class="mech-step-h">Con agua ácida (H₃O⁺ o NH₄Cl/H₂O) se protona el alcóxido → alcohol + sales de magnesio</div>
             <div class="mech-step-txt">Truco de examen: nunca metan agua directo mientras el Grignard está reaccionando — se los apaga al toque. El agua entra AL FINAL, en la hidrólisis (el "workup"), después de que ya se formó el alcóxido. Ahí el H₃O⁺ protona el oxígeno y les queda el alcohol — primario, secundario o terciario, según de qué carbonilo hayan partido.</div>
@@ -5791,19 +5755,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-cb-3">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">2 R−CH₂−CHO</div>
+              <div class="rxn-anim-label">Reactivo: dos moléculas de aldehído con Hα</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">NaOH diluido, luego Δ</div>
+              <div class="rxn-anim-label">Condición: forma el enolato, luego deshidrata</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">aldol → enal (α,β-insaturado)</div>
+              <div class="rxn-anim-label">Producto: nuevo enlace C−C, la cadena crece</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5822,37 +5786,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('cb-3',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-cb-3-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">OH⁻ + R−CH₂−CHO →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">R−CH⁻−CHO  (enolato)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">C α con par libre: nucleófilo fuerte</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="-10 5 200 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="60" x2="43" y2="47" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="44.499268114130615" y1="48.874085142663276" x2="64.49926811413062" y2="32.874085142663276" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="41.500731885869385" y1="45.125914857336724" x2="61.500731885869385" y2="29.125914857336728" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="71" y="25" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><text x="23" y="42" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><text x="-1" y="30" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH⁻</text><path d="M9,34 Q18.609327677584254,36.15889360201312 19,46" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><path d="M17,56 Q20.98565093522952,47.552243692997294 30,50" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><circle cx="15" cy="58" r="5.5" fill="none" stroke="var(--c4t)" stroke-width="1.6"/><text x="15" y="61.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c4t)">−</text><text x="80" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OH⁻ quita el Hα → enolato (resonancia)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Primero se forma el enolato</div>
             <div class="mech-step-h">El OH⁻ abstrae el Hα (adyacente al C=O) del aldehído → enolato aniónico nucleófilo</div>
             <div class="mech-step-txt">Fíjense: la base OH⁻ le quita el <strong>Hα</strong> (el H del carbono pegado al C=O), y nos queda un enolato con un carbanión estabilizado por resonancia con el grupo carbonilo. Ese enolato es el <em>nucleófilo</em> que va a atacar al segundo aldehído.</div>
           </div>
           <div class="mech-step" id="ms-cb-3-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">enolato  +  R−CHO  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">HO−C*−C−CHO (β-hidroxialdehído)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">enlace C−C nuevo formado ✓</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><circle cx="25" cy="50" r="6" fill="none" stroke="var(--c4t)" stroke-width="1.6"/><text x="25" y="53.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c4t)">−</text><text x="25" y="63" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Cα</text><text x="75" y="52" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="77.6" y1="52.0" x2="77.6" y2="28.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="72.4" y1="52.0" x2="72.4" y2="28.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="75" y="20" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="75" y1="52" x2="100" y2="66" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="112" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><path d="M32,46 Q49.02017525252689,41.14576119527775 63,52" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><path d="M75,40 Q83.0,33.0 75,26" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="85" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el enolato ataca otro C=O → nuevo C−C</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El enolato ataca el carbonilo</div>
             <div class="mech-step-h">El enolato (nucleófilo) ataca el C=O de un segundo aldehído (electrófilo) → aldol β-hidroxi</div>
             <div class="mech-step-txt">Acá está la jugada: el <strong>Cα⁻ del enolato</strong> le cae al C=O del segundo aldehído (que actúa como electrófilo). Ahí se forma un <em>enlace C−C nuevo</em> entre el Cα del primer aldehído y el carbono carbonílico del segundo. Lo que sale de inmediato es el alcóxido del aldol (β-hidroxialdehído).</div>
           </div>
           <div class="mech-step" id="ms-cb-3-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">β-OH−CH−CHO →[Δ]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">−CH=CH−CHO  (enal) + H₂O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">α,β-insaturado = conjugado, más estable</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="60" x2="43" y2="47" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="43" y1="47" x2="71" y2="60" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="43" y="27" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">OH</text><text x="21" y="42" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><line x1="43" y1="41" x2="43" y2="31" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><path d="M19,46 Q28.976833630141,44.79054114725324 33,54" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><path d="M37,58 Q34.27850400919515,46.69321179237742 43,39" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pierde H₂O → C=C conjugado con el C=O</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Del aldol al enal</div>
             <div class="mech-step-h">Al calentar, el aldol se deshidrata (β-elimina el OH y el Hα) → α,β-insaturado (enal o enona)</div>
             <div class="mech-step-txt">Y aquí el detalle que deben recordar: si calientan el <strong>aldol</strong> (β-hidroxicarbonílico), se deshidrata — se eliminan el OH del Cβ y el Hα — y nos queda un alqueno conjugado con el carbonilo (<em>α,β-insaturado</em>). Ese sistema C=C−C=O es más estable gracias a la conjugación. A esa deshidratación, en sentido estricto, la llamamos condensación aldólica.</div>
