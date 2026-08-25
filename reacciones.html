@@ -465,7 +465,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="prereq-title">Antes de empezar, deberías saber</div>
         <div class="prereq-list">
           • Que los alcanos solo tienen <strong>enlaces simples C−C</strong> (por eso son "saturados")
-          (repaso en <a href="teoria.html#enlaces">Principios → Tipos de enlace</a>)<br>
+          (repaso en el glosario de arriba: "Enlace simple, doble y triple")<br>
           • Nombrar un alcano con IUPAC (<a href="grupos.html">Grupos → Alcanos</a>)<br>
           • Qué es un <strong>radical libre</strong> y por qué la luz (hν) o el calor (Δ) lo generan
         </div>
@@ -1068,7 +1068,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="prereq-title">Antes de empezar, deberías saber</div>
         <div class="prereq-list">
           • Qué es un <strong>doble enlace C=C</strong> y cómo se identifica en la fórmula semidesarrollada
-          (repaso en <a href="teoria.html#enlaces">Principios → Tipos de enlace</a>)<br>
+          (repaso en el glosario de arriba: "Enlace simple, doble y triple")<br>
           • Cómo nombrar un <strong>alqueno</strong> con IUPAC (<a href="grupos.html">Grupos → Alquenos</a>)<br>
           • Qué es un <strong>carbocatión</strong> y por qué 3° es más estable que 1°
         </div>
@@ -1543,7 +1543,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-reag">H₂O</span>
           </div>
           <div class="meq-arr">
-            <span class="meq-cond">H₂SO₄, ~300 °C</span>
+            <span class="meq-cond">H₃PO₄/SiO₂, 300°C (o H₂SO₄ dil., frío)</span>
             <span class="meq-line">──────→</span>
           </div>
           <div class="meq-side">
@@ -2400,34 +2400,40 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
-            <div class="mol-cmp-name">acetileno</div>
+            <span class="mol-cmp-formula">CH₃−<span class="bp">C≡C</span>−CH₃</span>
+            <div class="mol-cmp-name">but-2-ino (dimetilacetileno)</div>
           </div>
           <div class="mol-cmp-arr">
             <div class="mol-cmp-reag">Lindlar</div>
             <div>──→ (×1)</div>
           </div>
           <div class="mol-cmp-card">
-            <span class="mol-cmp-formula"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 104 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--c2t)">cis</tspan><tspan style="fill:var(--tx)">-CH₂</tspan><tspan style="fill:var(--c2t)">=</tspan><tspan style="fill:var(--tx)">CH₂</tspan></text></svg></span>
-            <div class="mol-cmp-name">etileno cis</div>
+            <span class="mol-cmp-formula"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 150 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--c2t)">cis</tspan><tspan style="fill:var(--tx)">-CH₃−CH</tspan><tspan style="fill:var(--c2t)">=</tspan><tspan style="fill:var(--tx)">CH−CH₃</tspan></text></svg></span>
+            <div class="mol-cmp-name">cis-but-2-eno</div>
+          </div>
+        </div>
+        <div class="mol-cmp" style="margin-top:-6px">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula"><span class="bp">HC≡CH</span></span>
+            <div class="mol-cmp-name">acetileno</div>
           </div>
           <div class="mol-cmp-arr">
-            <div class="mol-cmp-reag">+ H₂ / Ni</div>
-            <div>──→ (×2)</div>
+            <div class="mol-cmp-reag">+ 2 H₂ / Ni</div>
+            <div>──→ (×2 total)</div>
           </div>
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="hn">CH₃</span></span>
-            <div class="mol-cmp-name">etano (saturado)</div>
+            <div class="mol-cmp-name">etano (saturado — sin catalizador envenenado, no hay geometría que controlar)</div>
           </div>
         </div>
         <div class="rxn-cond">Con Lindlar (Pd/CaCO₃ + acetato de Pb) envenenado se quedan en el cis, selectivo, solo ×1 · con Ni/Pd normal, sin envenenar, siguen de largo hasta el alcano (×2 total)</div>
-        <div class="rxn-regla">📌 Lindlar les da cis (adición por el mismo lado) · Na/NH₃(l) les da trans (adición por lados opuestos) — el mismo alquino, dos geometrías</div>
+        <div class="rxn-regla">📌 Lindlar les da cis (adición por el mismo lado) · Na/NH₃(l) les da trans (adición por lados opuestos) — el mismo alquino, dos geometrías. Ojo: un alquino terminal como el acetileno da un alqueno sin cis/trans posible</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + H₂ →[Lindlar]</span>
+          <span class="rxn-ex-r">CH₃−<span class="bp">C≡C</span>−CH₃ + H₂ →[Lindlar]</span>
           <span class="rxn-arrow">──→</span>
-          <span class="rxn-ex-p"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 104 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--c2t)">cis</tspan><tspan style="fill:var(--tx)">-CH₂</tspan><tspan style="fill:var(--c2t)">=</tspan><tspan style="fill:var(--tx)">CH₂</tspan></text></svg></span>
-          <span class="rxn-ex-nota">cis-etileno (×1)</span>
+          <span class="rxn-ex-p"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 150 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--c2t)">cis</tspan><tspan style="fill:var(--tx)">-CH₃−CH</tspan><tspan style="fill:var(--c2t)">=</tspan><tspan style="fill:var(--tx)">CH−CH₃</tspan></text></svg></span>
+          <span class="rxn-ex-nota">cis-but-2-eno (×1)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + 2 H₂ →[Ni]</span>
@@ -2539,16 +2545,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Esto se llama <strong>tautomería ceto-enólica</strong>, y es más simple de lo que suena: el H del −OH del enol migra al carbono vecino (catalizado por el H⁺ del medio), y ahí se forma el grupo carbonilo C=O. Fíjense bien: no están entrando ni saliendo átomos nuevos, es solo un H que se mueve de lugar. Y el equilibrio queda <strong>muy inclinado hacia la forma ceto</strong> — cerca del 99.9% para la mayoría de las cetonas.</div>
           </div>
           <div class="mech-step" id="ms-ai-3-2">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="82" viewBox="0 0 220 82" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">alquino interno → cetona</text><text x="60" y="45" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">HC≡CH (único) → aldehído</text><text x="60" y="70" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">propino + H₂O → propanona (acetona)</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="82" viewBox="0 0 220 82" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">terminal (R≠H) → cetona</text><text x="60" y="45" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">HC≡CH (único) → aldehído</text><text x="60" y="70" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">propino + H₂O → propanona (acetona)</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — ¿Y cuál sale, cetona o aldehído?</div>
-            <div class="mech-step-h">Un alquino interno les da cetona; el único que da aldehído es el acetileno mismo, HC≡CH</div>
+            <div class="mech-step-h">Un alquino terminal (con R≠H) les da cetona; el único que da aldehído es el acetileno mismo, HC≡CH</div>
             <div class="mech-step-txt">Ahí está el detalle que separa los casos: si el alquino es <strong>terminal RC≡CH</strong> (pero con un R distinto de H), sale una metil-cetona (RCOCH₃, siempre Markovnikov). El único caso especial es el <strong>acetileno (HC≡CH)</strong>, que da acetaldehído (CH₃CHO) — porque ahí no hay diferencia entre los dos carbonos para que Markovnikov elija. Proceso industrial importante para que lo recuerden: así se sintetiza acetona (CH₃COCH₃) a partir de propino (CH₃C≡CH + H₂O).</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">C≡CH</span></span>
-            <div class="mol-cmp-name">propino (interno)</div>
+            <div class="mol-cmp-name">propino (terminal, R≠H)</div>
           </div>
           <div class="mol-cmp-arr">
             <div class="mol-cmp-reag">H₂O/HgSO₄</div>
@@ -2574,7 +2580,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ · el camino es siempre C≡C + H₂O → enol → tautomería → carbonilo</div>
-        <div class="rxn-regla">📌 Alquino interno → cetona · el único que da aldehído es HC≡CH · Markovnikov manda: el OH va al C más sustituido</div>
+        <div class="rxn-regla">📌 Alquino terminal (R≠H) → cetona · el único que da aldehído es HC≡CH · alquino interno simétrico → cetona única · Markovnikov manda: el OH va al C más sustituido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">C≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
@@ -3565,7 +3571,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="92" viewBox="0 0 190 92" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="25" text-anchor="middle" font-size="10.5" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">R−COCl + AlCl₃</text><line x1="30" y1="40" x2="150" y2="40" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="150,40 142,36 142,44" fill="var(--dimmer)"/><text x="90" y="34" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">ácido de Lewis</text><text x="90" y="58" text-anchor="middle" font-size="11" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">R−CO⁺ + AlCl₄⁻</text><text x="90" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">ión acilio, estabilizado por resonancia</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El AlCl₃ arma el catión acilio</div>
             <div class="mech-step-h">El AlCl₃ le quita el Cl al cloruro de acilo → catión acilio RC≡O⁺, que no se reorganiza</div>
-            <div class="mech-step-txt">Acá está la jugada: el <strong>AlCl₃</strong> le arranca el Cl al RCOCl y deja el <em>catión acilio RC≡O⁺</em>. ¿Por qué no usamos un carbocatión R⁺ normal, como en la alquilación? Porque este es <strong>más estable</strong> — la carga positiva se reparte entre el carbono y el oxígeno (resonancia: R−C⁺=O ↔ R−C=O) — y al ser más estable, <em>no se reorganiza</em>. Siempre el mismo electrófilo, siempre el mismo producto. Ahí está la ventaja frente a la alquilación.</div>
+            <div class="mech-step-txt">Acá está la jugada: el <strong>AlCl₃</strong> le arranca el Cl al RCOCl y deja el <em>catión acilio RC≡O⁺</em>. ¿Por qué no usamos un carbocatión R⁺ normal, como en la alquilación? Porque este es <strong>más estable</strong> — la carga positiva se reparte entre el carbono y el oxígeno (resonancia: R−C⁺=O ↔ R−C≡O⁺) — y al ser más estable, <em>no se reorganiza</em>. Siempre el mismo electrófilo, siempre el mismo producto. Ahí está la ventaja frente a la alquilación.</div>
           </div>
           <div class="mech-step" id="ms-ar-4-1">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="170" height="108" viewBox="0 0 170 108" style="overflow:visible;display:block;margin:0 auto" ><line x1="55.0" y1="24.0" x2="77.51666049839541" y2="37.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="77.51666049839541" y1="37.0" x2="77.51666049839541" y2="63.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="77.51666049839541" y1="63.0" x2="55.0" y2="76.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="55.0" y1="76.0" x2="32.48333950160459" y2="63.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="32.48333950160459" y1="63.0" x2="32.4833395016046" y2="37.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="32.4833395016046" y1="37.0" x2="55.0" y2="24.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="55" cy="50" r="16.12" fill="none" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4 3" opacity=".55"/><path d="M55,58 Q67.00822113339163,38.14294520298726 90,35" fill="none" stroke="var(--arr)" stroke-width="1.8" marker-end="url(#arrFull)"/><text x="105" y="28" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">COR</text><line x1="55.0" y1="24.0" x2="69.0" y2="8.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="77.0" y="2.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">COR</text><circle cx="55" cy="80" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="55" y="83.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="55" y="98" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">catión arenio — estabilizado por resonancia</text></svg></div>
@@ -5114,13 +5120,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="75" viewBox="0 15 190 65" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">0–5°C</text><text x="45" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Ar−N₂⁺ estable (horas)</text><text x="140" y="25" text-anchor="middle" font-size="10" style="fill:var(--err);font-family:'JetBrains Mono',monospace">T° ambiente</text><text x="140" y="40" text-anchor="middle" font-size="8.5" style="fill:var(--err);font-family:'JetBrains Mono',monospace">→ ArOH + N₂↑</text><text x="90" y="65" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">N₂ es el mejor grupo saliente que existe</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Por qué es tan inestable el diazonio?</div>
             <div class="mech-step-h">A 0°C el Ar−N₂⁺ aguanta horas; a T° amb. se les vuelve ArOH + N₂↑</div>
-            <div class="mech-step-txt">A 0°C el ión diazonio aromático se mantiene <em>relativamente estable</em> por horas, gracias a la resonancia con el anillo. Pero a temperatura ambiente se hidroliza solito → fenol + N₂↑. La razón de fondo: el N₂ molecular es el <strong>mejor grupo saliente que existe</strong> (el pKa del HN₂⁺ es como −15), así que el diazonio está desesperado por soltarlo.</div>
+            <div class="mech-step-txt">A 0°C el ión diazonio aromático se mantiene <em>relativamente estable</em> por horas, gracias a la resonancia con el anillo. Pero a temperatura ambiente se hidroliza solito → fenol + N₂↑. La razón de fondo: el N₂ molecular es un gas estable y neutro — el <strong>mejor grupo saliente que existe</strong> — así que el diazonio está desesperado por soltarlo.</div>
           </div>
           <div class="mech-step" id="ms-am-2-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><line x1="45.0" y1="23.0" x2="64.05255888325766" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="34.0" x2="64.05255888325766" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="64.05255888325766" y1="56.0" x2="45.0" y2="67.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="45.0" y1="67.0" x2="25.947441116742347" y2="56.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.947441116742347" y1="56.0" x2="25.94744111674235" y2="34.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="25.94744111674235" y1="34.0" x2="45.0" y2="23.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="45" cy="45" r="14" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="45.0" y1="23.0" x2="45.0" y2="7.0" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="57.0" y="1.0" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">N₂⁺</text><line x1="90" y1="30" x2="120" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,30 112,26 112,34" fill="var(--dimmer)"/><text x="105" y="20" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Cu₂X₂</text><text x="150" y="25" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">X</text><text x="85" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Sandmeyer: N₂↑ se va, X entra</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Sandmeyer: aprovechan esa inestabilidad</div>
-            <div class="mech-step-h">Con un catalizador de Cu₂X₂ cambian el N₂⁺ por X (Cl, Br, CN, F, OH); el N₂ que se escapa empuja la reacción</div>
-            <div class="mech-step-txt">La <strong>Reacción de Sandmeyer</strong> usa cobre como catalizador para reemplazar ese −N₂⁺ por otros grupos: −Cl, −Br, −CN o −OH. ¿Por qué la reacción ocurre así de fácil? Porque el producto estrella es <strong>N₂ gaseoso</strong> — nitrógeno molecular — que se escapa de la solución sin vuelta atrás y "jala" todo hacia adelante. Es como destapar una gaseosa: el gas sale y ya no hay quién lo devuelva. Y este truco les sirve para meter halógenos exactamente donde la sustitución directa en el anillo no funciona o les da una mezcla horrible.</div>
+            <div class="mech-step-h">Con un catalizador de Cu(I) (Cu₂X₂) cambian el N₂⁺ por X (Cl, Br o CN); el N₂ que se escapa empuja la reacción</div>
+            <div class="mech-step-txt">La <strong>Reacción de Sandmeyer</strong> usa sales de cobre(I) como catalizador para reemplazar ese −N₂⁺ por otros grupos: −Cl, −Br o −CN. ¿Por qué la reacción ocurre así de fácil? Porque el producto estrella es <strong>N₂ gaseoso</strong> — nitrógeno molecular — que se escapa de la solución sin vuelta atrás y "jala" todo hacia adelante. Es como destapar una gaseosa: el gas sale y ya no hay quién lo devuelva. Ojo con esto: para meter −F se usa otra reacción (Balz-Schiemann, con HBF₄ y calor), y para −OH basta con hidrolizar en agua caliente, sin cobre de por medio — el cobre es específico de Sandmeyer.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -5146,7 +5152,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Necesitan: 0–5 °C obligatorio (a T° ambiente el diazonio se descompone → ArOH + N₂) · NaNO₂ + HCl → HNO₂ in situ</div>
-        <div class="rxn-regla">📌 Sandmeyer: el N₂⁺ se cambia por −Cl, −Br, −CN, −F, −OH · el N₂ es el mejor grupo saliente que hay</div>
+        <div class="rxn-regla">📌 Sandmeyer (Cu⁺): el N₂⁺ se cambia por −Cl, −Br o −CN · −F es aparte (Balz-Schiemann) y −OH es hidrólisis simple, sin cobre · el N₂ es el mejor grupo saliente que hay</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">NH₂</span> + NaNO₂ + HCl →[0°C]</span>
@@ -6466,24 +6472,24 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <div class="mol-cmp-card" style="flex:1;min-width:160px">
-              <span class="mol-cmp-formula"><span class="bp">LiAlH₄</span>  (reductora)</span>
-              <div class="mol-cmp-name">reducción controlada</div>
+              <span class="mol-cmp-formula"><span class="bp">LiAlH(OtBu)₃</span>  (reductor débil)</span>
+              <div class="mol-cmp-name">hidruro impedido, se detiene en C=O</div>
             </div>
             <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
             <div class="mol-cmp-card" style="flex:1;min-width:160px">
               <span class="mol-cmp-formula">R−<span class="hn">CHO</span></span>
-              <div class="mol-cmp-name">aldehído (se para en C=O)</div>
+              <div class="mol-cmp-name">aldehído (LiAlH₄ normal sobre-reduce hasta RCH₂OH)</div>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <div class="mol-cmp-card" style="flex:1;min-width:160px">
-              <span class="mol-cmp-formula"><span class="bp">R′MgBr</span>  (Grignard)</span>
-              <div class="mol-cmp-name">adición organometálica</div>
+              <span class="mol-cmp-formula"><span class="bp">R′₂CuLi</span>  (cuprato de Gilman)</span>
+              <div class="mol-cmp-name">organometálico suave</div>
             </div>
             <div class="mol-cmp-arr"><div class="mol-cmp-reag">+ RCOCl</div><div>──→</div></div>
             <div class="mol-cmp-card" style="flex:1;min-width:160px">
               <span class="mol-cmp-formula">R−<span class="hn">COR′</span></span>
-              <div class="mol-cmp-name">cetona</div>
+              <div class="mol-cmp-name">cetona (un Grignard normal seguiría reaccionando hasta alcohol 3°)</div>
             </div>
           </div>
         </div>
@@ -7072,11 +7078,11 @@ const RF={
     speaks:['Reactivo: metano con poco oxígeno.','Condición: combustión incompleta. El oxígeno no alcanza para oxidar todo el carbono a CO2.','Productos: monóxido de carbono venenoso o hollín de carbono. La llama es amarilla y humeante.']
   },
   'al-3':{
-    r:{mol:'butano'},
-    eq:'CH₃CH₂CH₂CH₃<br>──[T° / cat]──→<br>CH₄ + CH₃−CH=CH₂',
-    p:{mol:'propeno'},
-    labels:['Reactivo: alcano de cadena larga (butano C₄H₁₀)','Condición: temperatura > 400°C y/o catalizador (craqueo catalítico)','Productos: alcanos + alquenos de cadena corta. Base de la industria del petróleo'],
-    speaks:['Reactivo: butano, un alcano de 4 carbonos.','Condición: craqueo catalítico o térmico. Alta temperatura rompe los enlaces carbono carbono.','Productos: moléculas más pequeñas como metano y propeno. Proceso clave en refinerías de petróleo.']
+    r:{eq:'△C₃H₆ + HBr'},
+    eq:'△C₃H₆ + HX<br>──[tensión de anillo]──→<br>CH₃−CH₂−CH₂X',
+    p:{eq:'CH₃−CH₂−CH₂X'},
+    labels:['Reactivo: ciclopropano (anillo tensionado a 60°) + haluro de hidrógeno','Condición: no necesita catalizador — la tensión del anillo basta para abrirlo','Producto: halopropano de cadena abierta, ya no un anillo'],
+    speaks:['Reactivo: ciclopropano, con sus carbonos forzados a un ángulo de sesenta grados.','Condición: esa tensión de anillo es tan fuerte que el anillo se abre sin necesitar catalizador.','Producto: un halopropano de cadena abierta. El anillo desapareció por completo.']
   },
   'aq-0':{
     r:{mol:'propeno'},
@@ -7107,39 +7113,39 @@ const RF={
     speaks:['Reactivo: eteno.','Condición: hidratación con ácido sulfúrico. El agua se adiciona al doble enlace siguiendo la regla de Markovnikov.','Producto: etanol. Esta reacción produce el alcohol etílico de forma industrial.']
   },
   'aq-4':{
-    r:{mol:'eteno'},
-    eq:'CH₂=CH₂ + KMnO₄/H₂O<br>──[frío, diluído]──→<br>HOCH₂−CH₂OH',
-    p:{mol:'etilenglicol'},
-    labels:['Reactivo: alqueno (eteno)','Condición: KMnO₄ frío y diluído (solución lila). La solución se decolora → prueba positiva de insaturación','Producto: diol (etilenglicol). Un −OH en cada carbono del ex-doble enlace. Base del anticongelante'],
-    speaks:['Reactivo: eteno.','Condición: oxidación suave con permanganato de potasio frío. La solución lila se vuelve incolora confirmando el doble enlace.','Producto: etilenglicol o 1,2 etanodiol. Es el anticongelante de los automóviles.']
+    r:{mol:'propeno'},
+    eq:'CH₃−CH=CH₂ + O₃<br>──[Zn/H₂O]──→<br>CH₃CHO + HCHO',
+    p:{eq:'CH₃CHO + HCHO'},
+    labels:['Reactivo: alqueno (propeno) + ozono','Condición: el O₃ forma un ozónido cíclico que se rompe con Zn/H₂O (reductor) o H₂O₂ (oxidante)','Producto: dos fragmentos carbonílicos — el doble enlace queda cortado por completo'],
+    speaks:['Reactivo: propeno y ozono.','Condición: se forma un anillo de cinco miembros inestable que se reordena y se rompe con zinc y agua.','Producto: etanal y metanal, dos moléculas más pequeñas con grupo carbonilo. Sirve para ubicar dónde estaba el doble enlace.']
   },
   'aq-5':{
     r:{mol:'eteno'},
-    eq:'n CH₂=CH₂<br>──[cat / T, P]──→<br>(−CH₂−CH₂−)n',
-    p:{mol:'polietileno4'},
-    labels:['Reactivo: monómero alqueno (n moléculas de eteno)','Condición: catalizador (Ziegler-Natta) + temperatura y presión altas. Los dobles enlaces se abren','Producto: polietileno (PE). Cadena larga de −CH₂− repetidos. Plástico más producido del mundo'],
-    speaks:['Reactivo: eteno, el monómero del polietileno.','Condición: polimerización por adición con catalizadores. Los dobles enlaces se rompen y forman la cadena.','Producto: polietileno. Una cadena largísima de grupos metileno. Es el plástico más común del mundo.']
+    eq:'CH₂=CH₂ + KMnO₄/H₂O<br>──[frío, diluido]──→<br>HOCH₂−CH₂OH',
+    p:{mol:'etilenglicol'},
+    labels:['Reactivo: alqueno (eteno)','Condición: KMnO₄ frío y diluido (solución violeta). La solución se decolora → prueba positiva de insaturación','Producto: diol (etilenglicol). Un −OH en cada carbono del ex-doble enlace. Base del anticongelante'],
+    speaks:['Reactivo: eteno.','Condición: oxidación suave con permanganato de potasio frío. La solución violeta se vuelve incolora confirmando el doble enlace.','Producto: etilenglicol o 1,2 etanodiol. Es el anticongelante de los automóviles.']
   },
   'ai-0':{
     r:{mol:'etino'},
     eq:'HC≡CH + HBr (1 mol)<br>──[Markovnikov]──→<br>CH₂=CHBr',
     p:{mol:'bromoeteno'},
-    labels:['Reactivo: alquino (etino HC≡CH). El triple enlace puede reaccionar 1 o 2 veces','Condición: 1 mol de HX. El triple enlace pasa a doble enlace (Markovnikov)','Producto: haloalqueno (bromoeteno / cloroetileno). Monómero del PVC'],
-    speaks:['Reactivo: etino con triple enlace.','Condición: hidrohalogenación con un mol de ácido bromhídrico. El triple enlace pierde una insaturación.','Producto: bromoeteno. Este compuesto es el monómero del policloruro de vinilo, el PVC.']
+    labels:['Reactivo: alquino (etino HC≡CH). El triple enlace puede reaccionar 1 o 2 veces','Condición: 1 mol de HX. El triple enlace pasa a doble enlace (Markovnikov)','Producto: haloalqueno vinílico. Con HCl da cloruro de vinilo, el monómero del PVC'],
+    speaks:['Reactivo: etino con triple enlace.','Condición: hidrohalogenación con un mol de ácido, que puede ser bromhídrico o clorhídrico. El triple enlace pierde una insaturación.','Producto: un haloalqueno vinílico. Con ácido clorhídrico se obtiene el cloruro de vinilo, el monómero del PVC.']
   },
   'ai-1':{
     r:{mol:'etino'},
-    eq:'HC≡CH + 2HBr<br>──[exceso HX]──→<br>CH₃−CHBr₂',
-    p:{mol:'11dibromoetano'},
-    labels:['Reactivo: alquino (etino)','Condición: exceso de HX (2 moles). El triple enlace se satura completamente (gem-adición)','Producto: gem-dihaloalcano (1,1-dibromoetano). Los dos Br en el mismo carbono (gem = gemelo)'],
-    speaks:['Reactivo: etino.','Condición: exceso de ácido bromhídrico, dos moles. El triple enlace se rompe completamente.','Producto: 1,1-dibromoetano. Los dos átomos de bromo quedaron en el mismo carbono, por la regla de Markovnikov.']
+    eq:'HC≡CH + Br₂ (1 o 2 mol)<br>──[anti-adición]──→<br>CHBr=CHBr  ó  CHBr₂−CHBr₂',
+    p:{mol:'1122tetrabromoetano'},
+    labels:['Reactivo: alquino (etino) + bromo','Condición: 1 mol de Br₂ da el dihaloalqueno trans; con exceso (2 mol) se llega al tetrahaloalcano','Producto: con exceso de Br₂, 1,1,2,2-tetrabromoetano — cada adición es anti (lados opuestos)'],
+    speaks:['Reactivo: etino y bromo.','Condición: con un mol de bromo se detiene en el dihaloalqueno trans; con exceso llega al tetrahaloalcano.','Producto: 1,1,2,2-tetrabromoetano. Cuatro átomos de bromo en solo dos carbonos.']
   },
   'ai-2':{
-    r:{mol:'propino'},
-    eq:'CH₃−C≡CH + H₂ (1 mol)<br>──[Pd/C Lindlar]──→<br>CH₃−CH=CH₂',
-    p:{mol:'propeno'},
-    labels:['Reactivo: alquino (propino CH₃−C≡CH)','Condición: catalizador Lindlar (Pd envenenado). Solo se adiciona 1 mol de H₂ → el triple pasa a doble','Producto: alqueno cis (propeno). Con catalizador ordinario se obtiene el alcano (2 moles de H₂)'],
-    speaks:['Reactivo: propino.','Condición: hidrogenación parcial con catalizador Lindlar de paladio envenenado. Solo reacciona un mol de hidrógeno.','Producto: propeno. El alquino se redujo a alqueno. Con otro catalizador seguiría reaccionando hasta propano.']
+    r:{eq:'CH₃−C≡C−CH₃'},
+    eq:'CH₃−C≡C−CH₃ + H₂ (1 mol)<br>──[Pd/C Lindlar]──→<br>cis-CH₃−CH=CH−CH₃',
+    p:{eq:'cis-CH₃−CH=CH−CH₃'},
+    labels:['Reactivo: alquino interno (but-2-ino CH₃−C≡C−CH₃)','Condición: catalizador Lindlar (Pd envenenado). Solo se adiciona 1 mol de H₂ → el triple pasa a doble','Producto: alqueno cis (cis-but-2-eno). Con catalizador ordinario se obtiene el alcano (2 moles de H₂)'],
+    speaks:['Reactivo: but-2-ino, un alquino interno.','Condición: hidrogenación parcial con catalizador Lindlar de paladio envenenado. Solo reacciona un mol de hidrógeno.','Producto: cis-but-2-eno. El alquino se redujo a alqueno conservando la geometría cis. Con otro catalizador seguiría reaccionando hasta butano.']
   },
   'ai-3':{
     r:{mol:'propino'},
@@ -7149,11 +7155,11 @@ const RF={
     speaks:['Reactivo: propino.','Condición: hidratación de Markovnikov. El ácido sulfúrico y el sulfato de mercurio catalizan la reacción. Se forma un enol que se reorganiza.','Producto: acetona o propan-2-ona. Es la cetona más simple y el disolvente más usado en laboratorio.']
   },
   'ai-4':{
-    r:{mol:'etino'},
-    eq:'HC≡CH + 2Br₂<br>──[exceso Br₂]──→<br>CHBr₂−CHBr₂',
-    p:{mol:'1122tetrabromoetano'},
-    labels:['Reactivo: alquino (etino)','Condición: exceso de Br₂. Se pueden adicionar 1 o 2 moles según la proporción','Producto: tetrahaloalcano (1,1,2,2-tetrabromoetano). El Br₂ rojo se decolora → prueba de insaturación'],
-    speaks:['Reactivo: etino.','Condición: halogenación con exceso de bromo. Con un mol se obtiene el dihaloalqueno; con dos moles el tetrahaloalcano.','Producto: 1,1,2,2-tetrabromoetano. Cuatro átomos de bromo en solo dos carbonos.']
+    r:{mol:'propino'},
+    eq:'R−C≡C−H + NaNH₂<br>──[base fuerte]──→<br>R−C≡C⁻ Na⁺ + NH₃',
+    p:{eq:'R−C≡C⁻ Na⁺ + NH₃'},
+    labels:['Reactivo: alquino terminal (H sobre C sp) + base fuerte','Condición: NaNH₂ — solo el alquino terminal tiene un H lo bastante ácido (pKa≈25)','Producto: acetiluro — un nucleófilo fuerte, listo para alargar la cadena por SN2'],
+    speaks:['Reactivo: un alquino terminal y amiduro de sodio.','Condición: solo el hidrógeno sobre un carbono con hibridación sp es suficientemente ácido para reaccionar.','Producto: el anión acetiluro, un nucleófilo muy fuerte que sirve para construir cadenas más largas.']
   },
   'ar-0':{
     r:{benz:[]},
@@ -7242,7 +7248,7 @@ const RF={
   'am-0':{
     r:{mol:'metilamina'},
     eq:'CH₃NH₂ + HCl<br>──[T° amb]──→<br>CH₃NH₃⁺Cl⁻',
-    p:{mol:'etilaminasalt'},
+    p:{eq:'CH₃NH₃⁺ Cl⁻'},
     labels:['Reactivo: amina (base de Lewis por el par libre del N)','Condición: ácido fuerte o débil. El par libre del N capta el H⁺ del ácido (reacción ácido-base de Brønsted)','Producto: sal de amonio (cloruro de metilamonio). Sólido iónico, soluble en agua. Reversible con base fuerte'],
     speaks:['Reactivo: metilamina, que tiene un par de electrones libres en el nitrógeno.','Condición: reacción con ácido clorhídrico a temperatura ambiente. El nitrógeno capta el protón del ácido.','Producto: cloruro de metilamonio, una sal. Con base fuerte se puede regenerar la amina libre.']
   },
