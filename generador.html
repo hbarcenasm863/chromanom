@@ -3198,9 +3198,7 @@ function toggleHelp(){
 })();
 </script>
 
-<script>
-if('serviceWorker' in navigator)
-  navigator.serviceWorker.register('./sw.js',{scope:'/chromanom/'}).catch(()=>{});
-</script>
+<script src="pwa-install.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

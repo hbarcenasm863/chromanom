@@ -1,7 +1,9 @@
-// ChromaNom Service Worker — v6.0
-// Cache-first para uso offline completo, incluyendo Google Fonts
+// ChromaNom Service Worker — v7.0
+// Páginas HTML: red primero (siempre la versión más reciente si hay conexión).
+// Assets estáticos (JS/CSS/íconos) y fuentes: stale-while-revalidate (rápido y se
+// autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v6';
+const CACHE = 'chromanom-v7';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -9,7 +11,10 @@ const ASSETS = [
   './index.html',
   './teoria.html',
   './grupos.html',
+  './reacciones.html',
   './juego.html',
+  './generador.html',
+  './referencia.html',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -41,14 +46,14 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-// Fetch: caché primero, red como respaldo
+// Fetch
 self.addEventListener('fetch', e => {
   const url = e.request.url;
 
   // No interceptar requests a Google Apps Script (analytics)
   if (url.includes('script.google.com')) return;
 
-  // Google Fonts: caché primero, luego red (stale-while-revalidate ligero)
+  // Google Fonts: stale-while-revalidate
   if (url.includes('fonts.googleapis.com') || url.includes('fonts.gstatic.com')) {
     e.respondWith(
       caches.open(FONT_CACHE).then(cache =>
@@ -66,19 +71,38 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Todo lo demás: caché primero, red como respaldo
   if (!url.startsWith(self.location.origin)) return;
 
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(response => {
-        if (response && response.status === 200 && response.type === 'basic') {
+  // Navegación a páginas HTML: red primero, para que los cambios recientes
+  // lleguen de inmediato con conexión; si falla (sin red) usa el caché.
+  const isNavigation = e.request.mode === 'navigate' ||
+    (e.request.method === 'GET' && e.request.headers.get('accept')?.includes('text/html'));
+  if (isNavigation) {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        if (response && response.status === 200) {
           const clone = response.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
         return response;
-      });
-    })
+      }).catch(() => caches.match(e.request).then(cached => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // Todo lo demás (JS, CSS, íconos): stale-while-revalidate — responde rápido
+  // desde caché y actualiza en segundo plano para la próxima visita.
+  e.respondWith(
+    caches.open(CACHE).then(cache =>
+      cache.match(e.request).then(cached => {
+        const networkFetch = fetch(e.request).then(response => {
+          if (response && response.status === 200 && response.type === 'basic') {
+            cache.put(e.request, response.clone());
+          }
+          return response;
+        }).catch(() => cached);
+        return cached || networkFetch;
+      })
+    )
   );
 });

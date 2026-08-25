@@ -8010,5 +8010,7 @@ function initRxnAnims(){
 document.addEventListener('DOMContentLoaded',initRxnAnims);
 
 </script>
+<script src="pwa-install.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
