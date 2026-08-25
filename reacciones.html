@@ -2856,19 +2856,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ar-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">C₆H₆ + Br₂</div>
+              <div class="rxn-anim-label">Reactivo: benceno + bromo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">FeBr₃ (ácido de Lewis)</div>
+              <div class="rxn-anim-label">Condición: el catalizador activa el Br2 y genera Br⁺</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">C₆H₅Br + HBr</div>
+              <div class="rxn-anim-label">Producto: bromobenceno, con la aromaticidad recuperada</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5932,19 +5932,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ac-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−COOH + NaOH</div>
+              <div class="rxn-anim-label">Reactivo: ácido carboxílico + base fuerte</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">neutralización ácido-base</div>
+              <div class="rxn-anim-label">Condición: el carboxilato es muy estable (resonancia)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">RCOO⁻Na⁺ + H₂O</div>
+              <div class="rxn-anim-label">Producto: sal de carboxilato — la base de los jabones</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -5963,37 +5963,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ac-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ac-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOH  ⇌  RCOO⁻  +  H⁺</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">pKa ≈ 4–5  (ácido débil)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">en agua: < 5% ionizado</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="85" viewBox="0 15 220 70" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="30" text-anchor="middle" font-size="11" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">R−COOH</text><line x1="10" y1="42" x2="120" y2="42" stroke="var(--dimmer)" stroke-width="1.4" stroke-dasharray="3 2"/><polygon points="120,42 112,38 112,46" fill="var(--dimmer)"/><line x1="120" y1="50" x2="10" y2="50" stroke="var(--dimmer)" stroke-width="1.4" stroke-dasharray="3 2"/><polygon points="10,50 18,46 18,54" fill="var(--dimmer)"/><text x="150" y="42" text-anchor="middle" font-size="11" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">RCOO⁻ + H⁺</text><text x="80" y="75" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pKa ≈ 4–5: solo un poquito se ioniza</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El ácido se ioniza (poquito)</div>
             <div class="mech-step-h">RCOOH ⇌ RCOO⁻ + H⁺ · ácido débil (pKa 4–5): ionización parcial en agua</div>
             <div class="mech-step-txt">Primero, ojo: los ácidos carboxílicos son <strong>ácidos débiles</strong> — en agua el equilibrio queda cargado hacia la izquierda, la mayoría se queda sin ionizar. Pero fíjense en la comparación: son muchísimo más ácidos que los alcoholes (pKa ≈ 16) o el agua (pKa 15.7). ¿Por qué? Porque el carboxilato RCOO⁻ que queda al soltar el H⁺ está <em>estabilizado por resonancia</em>. Ahí está la clave, y la vemos en el siguiente paso.</div>
           </div>
           <div class="mech-step" id="ms-ac-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOO⁻: estructura real:</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C(=O—)−O⁻  ↔  R−C(−O⁻)=O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">ambos O equivalentes (−1/2 cada uno)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><text x="55" y="50" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">C</text><line x1="55" y1="50" x2="55" y2="28" stroke="var(--c2t)" stroke-width="1.6" stroke-linecap="round"/><text x="55" y="20" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">O</text><line x1="55" y1="50" x2="90" y2="60" stroke="var(--c2t)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="102" y="64" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">O</text><path d="M55,32 Q43.81953090508079,46.47401502063461 60,55" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="30" y="68" text-anchor="middle" font-size="8" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">−½</text><text x="112" y="74" text-anchor="middle" font-size="8" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">−½</text><text x="75" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">resonancia: carga repartida en 2 O → muy estable</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Por qué el carboxilato es tan estable</div>
             <div class="mech-step-h">RCOO⁻ se estabiliza por resonancia: los dos C−O son equivalentes (1.5 entre simple y doble)</div>
             <div class="mech-step-txt">Acá está la jugada: el <strong>anión carboxilato RCOO⁻</strong> no tiene la carga negativa clavada en un solo oxígeno — la reparte entre los dos por resonancia. Ningún O carga el peso completo, cada uno lleva −½. Esa deslocalización <em>estabiliza el anión</em> y por eso la ionización sí es favorable, aunque sea parcial. De hecho, los dos enlaces C−O terminan siendo idénticos, de longitud intermedia entre uno simple y uno doble — eso es lo que confirma que la carga está repartida, no localizada.</div>
           </div>
           <div class="mech-step" id="ms-ac-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOOH + NaOH → RCOO⁻Na⁺ + H₂O</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">jabones = RCOO⁻Na⁺ (ácidos grasos)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anfipáticos: cabeza polar + cola apolar</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="90" viewBox="0 5 220 85" style="overflow:visible;display:block;margin:0 auto" ><circle cx="55" cy="55" r="11" fill="var(--c1t)" opacity=".8"/><line x1="70" y1="55" x2="92" y2="45" stroke="var(--c3t)" stroke-width="2" stroke-linecap="round"/><line x1="92" y1="45" x2="114" y2="55" stroke="var(--c3t)" stroke-width="2" stroke-linecap="round"/><line x1="114" y1="55" x2="136" y2="45" stroke="var(--c3t)" stroke-width="2" stroke-linecap="round"/><text x="55" y="80" text-anchor="middle" font-size="8" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">cabeza polar</text><text x="130" y="80" text-anchor="middle" font-size="8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">cola apolar (grasa)</text><text x="95" y="20" text-anchor="middle" font-size="10" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">RCOO⁻Na⁺ = jabón</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Con una base fuerte, la neutralización es total</div>
             <div class="mech-step-h">RCOOH + NaOH → RCOONa + H₂O (cuantitativa); jabones, aplicación industrial</div>
             <div class="mech-step-txt">Con NaOH la cosa cambia: como el agua (pKa 15.7) es un ácido mucho más débil que el nuestro (pKa 4-5), la neutralización va <strong>hasta el final</strong>, no queda en equilibrio a medias. Y aquí el detalle que deben recordar: si R es una cadena larga (C₁₂–C₁₈), el carboxilato de sodio que sale es ni más ni menos que un <em>jabón</em> — cola apolar que se mete en la grasa, cabeza polar que se lleva bien con el agua. Por eso hervir grasa (que son triésteres) con NaOH — la saponificación — les da jabón.</div>
@@ -6071,19 +6053,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-ac-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CH₂OH · Ar−R · R−CN</div>
+              <div class="rxn-anim-label">Reactivo: tres puntos de partida distintos</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">KMnO₄ fuerte, o H₂O/H⁺</div>
+              <div class="rxn-anim-label">Condición: cada ruta oxida o hidroliza hasta −COOH</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−COOH</div>
+              <div class="rxn-anim-label">Producto: mismo grupo funcional por tres caminos distintos</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -6102,37 +6084,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ac-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ac-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">R−CH₂OH →[KMnO₄] R−CHO → RCOOH</div>
-              <div style="color:var(--err);font-weight:700;font-size:.82rem">no se detiene en RCHO con oxidante fuerte</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">PCC → RCHO (se detiene)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="76" viewBox="0 5 190 70" style="overflow:visible;display:block;margin:0 auto" ><text x="35" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">R−CH₂OH</text><line x1="10" y1="30" x2="60" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="60,30 52,26 52,34" fill="var(--dimmer)"/><text x="90" y="20" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">RCHO</text><line x1="65" y1="30" x2="115" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="115,30 107,26 107,34" fill="var(--dimmer)"/><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH</text><text x="80" y="50" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">KMnO₄ fuerte no para en el aldehído</text><text x="80" y="66" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">PCC sí para ahí ✓</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Oxidar un alcohol 1° hasta el final</div>
             <div class="mech-step-h">KMnO₄ fuerte (o K₂Cr₂O₇/H₂SO₄) oxida alcohol 1° → aldehído → RCOOH (sobreoxidación)</div>
             <div class="mech-step-txt">Primera vía: con <strong>KMnO₄ caliente/ácido o K₂Cr₂O₇/H₂SO₄</strong>, el alcohol 1° no se queda a medio camino. Se oxida a aldehído, y como el aldehído sigue siendo reactivo frente a estos oxidantes fuertes en medio acuoso, sigue de largo hasta ácido carboxílico. Ojo con esto: si en el examen les piden detenerse justo en el aldehído, ese reactivo no sirve — ahí necesitan <em>PCC</em>, que trabaja en condiciones suaves y anhidras y sí frena en RCHO.</div>
           </div>
           <div class="mech-step" id="ms-ac-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Ar−CH₂−R + KMnO₄/OH⁻/Δ →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">Ar−COOH + productos de C</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">anillo bencénico resistente a oxidación</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="96" viewBox="0 5 200 91" style="overflow:visible;display:block;margin:0 auto" ><line x1="45.0" y1="25.0" x2="62.32050807568878" y2="35.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="62.32050807568878" y1="35.0" x2="62.32050807568878" y2="55.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="62.32050807568878" y1="55.0" x2="45.0" y2="65.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="45.0" y1="65.0" x2="27.679491924311225" y2="55.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="27.679491924311225" y1="55.0" x2="27.67949192431123" y2="35.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="27.67949192431123" y1="35.0" x2="45.0" y2="25.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="45" cy="45" r="13" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="45.0" y1="25.0" x2="45.0" y2="11.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="45.0" y1="11.0" x2="45.0" y2="-1.0" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="45.0" y="-7.0" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="90" y1="30" x2="120" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,30 112,26 112,34" fill="var(--dimmer)"/><text x="105" y="20" text-anchor="middle" font-size="8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">KMnO₄/OH⁻/Δ</text><text x="150" y="21.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">COOH</text><text x="90" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">la cadena se oxida; el anillo queda intacto</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Oxidando un anillo con cola</div>
             <div class="mech-step-h">KMnO₄ alc./Δ oxida la cadena lateral R de Ar−R hasta −COOH; el anillo aromático no se toca</div>
             <div class="mech-step-txt">Segunda vía, y esta la deben tener muy clara: el <strong>anillo aromático resiste</strong> al KMnO₄ ácido o básico — no le pasa nada. Pero la cadena lateral que cuelga de él sí se oxida, y se oxida completa, hasta −COOH, sin importar qué tan larga sea. ¿Truco de examen? Si les dan tolueno (C₆H₅CH₃) y KMnO₄/OH⁻/Δ, el resultado siempre va a ser ácido benzoico — no importa si la cadena tuviera 1 carbono o 5, el anillo queda intacto y la cadena termina en COOH.</div>
           </div>
           <div class="mech-step" id="ms-ac-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−CN + 2H₂O →[H⁺/Δ] R−COOH + NH₃</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">cadena crece en 1C (el C del CN)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">útil en síntesis de extensión de cadena</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="85" viewBox="0 20 210 65" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="45" text-anchor="start" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="30" y1="45" x2="65" y2="45" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="30.0" y1="48.0" x2="65.0" y2="48.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="30.0" y1="42.0" x2="65.0" y2="42.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="75" y="45" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">N</text><line x1="90" y1="45" x2="120" y2="45" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,45 112,41 112,49" fill="var(--dimmer)"/><text x="105" y="35" text-anchor="middle" font-size="8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H₂O/H⁺</text><text x="155" y="45" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH + NH₃</text><text x="90" y="75" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">la cadena crece en 1 carbono (el del CN)</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — La ruta que además les alarga la cadena</div>
             <div class="mech-step-h">R−CN + H₂O / H⁺ (o OH⁻) → RCOOH + NH₃ (extiende la cadena en 1 carbono)</div>
             <div class="mech-step-txt">Tercera vía, y esta tiene un truco escondido: la <strong>hidrólisis del nitrilo R−CN</strong>. En ácido o base acuosa con calor, el triple enlace C≡N se va hidrolizando — pasa por amida como intermedio y termina en ácido carboxílico más NH₃ (o NH₄⁺). Fíjense bien en la contabilidad de carbonos: el C que ya estaba en el CN se convierte en el COOH del producto, así que la cadena <em>crece en 1 carbono</em> respecto al haluro de partida. Por eso esta ruta (R−X + CN⁻ → R−CN → hidrólisis) es tan usada cuando necesitan alargar una cadena y no solo oxidarla.</div>
@@ -6260,19 +6224,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-dv-0">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−COOR′</div>
+              <div class="rxn-anim-label">Reactivo: éster</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">NaOH (irreversible) · H⁺/H₂O (reversible) · LiAlH₄</div>
+              <div class="rxn-anim-label">Condición: tres formas distintas de romperlo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">RCOO⁻/RCOOH + R′OH · o 2 alcoholes</div>
+              <div class="rxn-anim-label">Producto: depende del reactivo que usen</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -6291,37 +6255,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('dv-0',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-dv-0-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOR' + NaOH  →</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOO⁻Na⁺ + R'OH</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">irreversible: RCOO⁻ no reacciona con ROH</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><circle cx="25" cy="45" r="6" fill="none" stroke="var(--c1t)" stroke-width="1.6"/><text x="25" y="48.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c1t)">−</text><text x="25" y="58" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">OH</text><text x="75" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="77.6" y1="50.0" x2="77.6" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="72.4" y1="50.0" x2="72.4" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="75" y="18" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="75" y1="50" x2="100" y2="64" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="112" y="70" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OR′</text><line x1="75" y1="50" x2="50" y2="64" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="40" y="70" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><path d="M32,42 Q51.73544366254925,38.190503518528374 68,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><path d="M75,38 Q83.0,31.5 75,25" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="90" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">OH⁻ ataca; luego sale R′O⁻ → irreversible</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Saponificación: aquí no hay vuelta atrás</div>
             <div class="mech-step-h">Éster + NaOH → carboxilato Na⁺ + alcohol (OH⁻ ataca C=O del éster)</div>
             <div class="mech-step-txt">Empecemos con la <strong>saponificación</strong>: éster más OH⁻ (NaOH). El OH⁻ ataca el C=O, se forma el intermediario tetraédrico, se rompe el enlace C−O del alcohol y quedan carboxilato más alcohol libre. Ojo con esto: es <em>irreversible</em>. ¿Por qué? Porque el carboxilato es un anión, y un alcohol neutro no tiene forma de atacarlo de vuelta.</div>
           </div>
           <div class="mech-step" id="ms-dv-0-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RCOOR' + H₂O →[H⁺] ⇌</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">RCOOH + R'OH</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">mecanismo inverso a la esterificación Fischer</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="70" viewBox="0 10 210 60" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="25" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">RCOOR′ + H₂O</text><line x1="90" y1="30" x2="120" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,30 112,26 112,34" fill="var(--dimmer)"/><line x1="120" y1="40" x2="90" y2="40" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="90,40 98,36 98,44" fill="var(--dimmer)"/><text x="105" y="20" text-anchor="middle" font-size="8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H⁺</text><text x="165" y="35" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH + R′OH</text><text x="90" y="60" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">igual que Fischer, pero al revés (reversible)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Hidrólisis ácida: la misma película al revés</div>
             <div class="mech-step-h">Éster + H₂O/H⁺ ⇌ ácido carboxílico + alcohol (inverso de Fischer)</div>
             <div class="mech-step-txt">Comparemos con la ruta ácida: con H⁺ y H₂O el éster se hidroliza a ácido y alcohol, y esto es literalmente el <strong>inverso de la esterificación de Fischer</strong> — mismo mecanismo (H⁺ activa el carbonilo, H₂O ataca, intermediario tetraédrico, se pierde ROH), pero corriendo al revés. Y como todo es reversible acá, con exceso de agua pueden empujar el equilibrio hacia el ácido.</div>
           </div>
           <div class="mech-step" id="ms-dv-0-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCOOR' + 2LiAlH₄ →[THF]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCH₂OH  +  R'OH</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">2 alcoholes distintos formados</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="82" viewBox="0 10 190 72" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">RCOOR′</text><line x1="15" y1="30" x2="65" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="65,30 57,26 57,34" fill="var(--dimmer)"/><text x="45" y="45" text-anchor="middle" font-size="8.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">LiAlH₄ ×2</text><text x="115" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCH₂OH</text><text x="115" y="35" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">+</text><text x="115" y="50" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R′OH</text><text x="90" y="72" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">salen DOS alcoholes distintos</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — LiAlH₄ no deja nada del éster en pie</div>
             <div class="mech-step-h">LiAlH₄ reduce el éster hasta DOS alcoholes: R−CH₂OH y R'−OH</div>
             <div class="mech-step-txt">Y con <strong>LiAlH₄</strong> la cosa va más allá: reduce en 2 pasos, primero el C=O a aldehído, luego el aldehído a alcohol primario. Al romperse el enlace C−O también sale libre el <em>R'OH</em>. Truco de examen: de un éster con LiAlH₄ siempre salen <strong>dos alcoholes</strong>, uno por cada mitad de la molécula. Y no confundan con NaBH₄ — ese es demasiado suave y no le hace nada a un éster.</div>
@@ -6434,19 +6380,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div id="ras-dv-1">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−COCl + Nu:</div>
+              <div class="rxn-anim-label">Reactivo: cloruro de ácido + casi cualquier nucleófilo</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">sin catalizador — reacciona solo</div>
+              <div class="rxn-anim-label">Condición: el Cl⁻ es tan buen GS que no necesita ayuda</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">R−CO−Nu + Cl⁻</div>
+              <div class="rxn-anim-label">Producto: ácido, éster, amida o anhídrido, según el Nu</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -6465,38 +6411,19 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('dv-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-dv-1-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">Nu + R−C(=O)−Cl →</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">intermediario tetraédrico [Nu−C(O⁻)(Cl)−R]</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C pasa de sp² a sp³</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="100" viewBox="0 5 190 95" style="overflow:visible;display:block;margin:0 auto" ><text x="25" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><circle cx="21.8" cy="42.5" r="1.9" fill="var(--c1t)"/><circle cx="21.8" cy="47.5" r="1.9" fill="var(--c1t)"/><text x="75" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="77.6" y1="50.0" x2="77.6" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="72.4" y1="50.0" x2="72.4" y2="26.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="75" y="18" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="75" y1="50" x2="105" y2="60" stroke="var(--err)" stroke-width="1.6" stroke-linecap="round"/><text x="118" y="64" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">Cl</text><line x1="75" y1="50" x2="50" y2="64" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="40" y="70" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><path d="M32,42 Q51.73544366254925,38.190503518528374 68,50" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><path d="M75,38 Q83.0,31.5 75,25" fill="none" stroke="var(--arr)" stroke-width="1.7" marker-end="url(#arrFull)"/><text x="90" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Nu ataca el C=O (δ+) → intermediario sp³</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — El nucleófilo entra sin pensarlo dos veces</div>
             <div class="mech-step-h">El Nu (H₂O, ROH, R'NH₂, RCOO⁻, NH₃) ataca el C=O del cloruro de ácido (altamente electrofílico)</div>
             <div class="mech-step-txt">Empecemos por el porqué: el C=O del cloruro de ácido queda muy <em>activado</em> porque el Cl le retira electrones al carbono. Entonces cualquier <strong>nucleófilo</strong> que aparezca — H₂O, ROH, RNH₂, RCOO⁻, NH₃ — ataca ese carbono casi de inmediato y forma el intermediario tetraédrico. Este primer paso es rápido, y la razón es doble: el C=O es muy electrofílico, y el Cl⁻ que va a salir es un grupo saliente excelente.</div>
           </div>
           <div class="mech-step" id="ms-dv-1-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">[Nu−C(O⁻)(Cl)−R] →  Cl⁻ se va</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">R−C(=O)−Nu  +  Cl⁻</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">Cl⁻ = mejor GS → máxima reactividad</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="105" viewBox="0 5 190 100" style="overflow:visible;display:block;margin:0 auto" ><text x="70" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><line x1="70" y1="50" x2="70" y2="28" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><text x="70" y="20" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><circle cx="80" cy="14" r="5.5" fill="none" stroke="var(--c4t)" stroke-width="1.6"/><text x="80" y="17.5" text-anchor="middle" font-size="7.5" font-weight="800" style="fill:var(--c4t)">−</text><line x1="70" y1="50" x2="45" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="35" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="70" y1="50" x2="95" y2="65" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="105" y="72" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><line x1="70" y1="54" x2="95" y2="68" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="112" y="80" text-anchor="middle" font-size="9" style="fill:var(--err);font-family:'JetBrains Mono',monospace">Cl</text><path d="M70,25 Q81.3233031891709,16.61651594585448 95,20" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="80" y="95" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el O⁻ empuja y expulsa Cl⁻ (mejor GS)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Ese intermediario no dura nada</div>
             <div class="mech-step-h">El C con 4 grupos (R, O⁻, Nu, Cl) expulsa el Cl⁻ (mejor GS) restaurando el C=O</div>
             <div class="mech-step-txt">Acá está la jugada: ese intermediario tetraédrico con cuatro grupos alrededor del carbono <strong>expulsa el Cl⁻</strong> — y de todos los derivados de ácido, el cloruro es el mejor grupo saliente que hay. Al irse el Cl⁻, el par de electrones del oxígeno vuelve a formar el C=O. Resultado neto: el Cl fue reemplazado por el Nu. Y por eso el RCOCl es, sin discusión, el derivado más reactivo de todos.</div>
           </div>
           <div class="mech-step" id="ms-dv-1-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">+ H₂O → RCOOH (ácido)</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">+ ROH → RCOOR (éster)</div>
-              <div style="color:var(--c4t);font-weight:700;font-size:.82rem">+ RNH₂ → RCONHR (amida)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">+ RCOO⁻ → (RCO)₂O (anhídrido)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="66" viewBox="0 8 210 58" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="18" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">+ H₂O → RCOOH</text><text x="50" y="34" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">+ ROH → RCOOR</text><text x="140" y="18" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">+ RNH₂ → RCONHR</text><text x="140" y="34" text-anchor="middle" font-size="9.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">+ RCOO⁻ → anhídrido</text><text x="95" y="55" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el cloruro reacciona con TODOS estos nucleófilos</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Un solo reactivo, cinco destinos posibles</div>
             <div class="mech-step-h">5 posibles productos según el nucleófilo: ácido · éster · amida · anhídrido · aldehído</div>
             <div class="mech-step-txt">Y aquí está lo que hace tan útil al cloruro de ácido: es el derivado más versátil que tienen. Cambien el <strong>nucleófilo</strong> y cambian el producto — ácido, éster, amida, anhídrido, hasta un aldehído si usan un reductor controlado. No olviden la jerarquía: RCOCl > (RCO)₂O > RCOOR' > RCONH₂. Por eso en síntesis, cuando necesitan un derivado específico rápido y sin rodeos, arrancan del RCOCl.</div>
@@ -6648,19 +6575,19 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
           </div>
           <div id="ras-dv-2">
             <div class="rxn-anim-step on">
-              <div class="rxn-anim-vis green"></div>
-              <div class="rxn-anim-label">Reactivo</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis green">R−CONH₂</div>
+              <div class="rxn-anim-label">Reactivo: amida — la más estable de los derivados</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange"></div>
-              <div class="rxn-anim-label">Condición</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis orange">H⁺/Δ fuerte, o LiAlH₄</div>
+              <div class="rxn-anim-label">Condición: el N dona su par al C=O y lo desactiva</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis blue"></div>
-              <div class="rxn-anim-label">Producto</div>
-              <button class="speak-btn" onclick="speakStep('.')">🔊 Escuchar</button>
+              <div class="rxn-anim-vis blue">RCOOH+NH₄⁺ · o RCH₂NH₂</div>
+              <div class="rxn-anim-label">Producto: hidrólisis da ácido; LiAlH₄ da amina (único caso)</div>
+              <button class="speak-btn" onclick="speakStep(this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
           </div>
         </div>
@@ -6679,37 +6606,19 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
             <span class="mech-dot" onclick="mechDot('dv-2',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-dv-2-0">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">RCONH₂: resonancia N → C=O</div>
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">N dona par libre → C menos δ+</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">→ menor electrofilia → menor reactividad</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 5 200 95" style="overflow:visible;display:block;margin:0 auto" ><text x="75" y="55" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="77.6" y1="55.0" x2="77.6" y2="31.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="72.4" y1="55.0" x2="72.4" y2="31.0" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><text x="75" y="23" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O</text><line x1="75" y1="55" x2="105" y2="68" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="118" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">N</text><circle cx="121.2" cy="74.5" r="1.9" fill="var(--c3t)"/><circle cx="121.2" cy="69.5" r="1.9" fill="var(--c3t)"/><path d="M112,68 Q98.38619994508757,55.36416017571976 80,58" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="75" y="25" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">δ+ más chico</text><text x="90" y="92" text-anchor="middle" font-size="8.2" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">el N dona su par al C=O → menos δ+ → menos reactivo</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Por qué la amida es la más tranquila de todas</div>
             <div class="mech-step-h">La amida es el menos reactivo de los derivados por resonancia N→C=O que blinda el carbono</div>
             <div class="mech-step-txt">Fíjense en esto: el <strong>par libre del N</strong> de la amida está conjugado con el C=O — hay resonancia N−C=O, el nitrógeno le cede electrones al carbono. ¿Qué logra eso? Que el carbono quede <em>menos electrofílico</em> que en cualquier otro derivado, y por eso la amida es el derivado menos reactivo de todos, con diferencia. Ojo con este detalle extra: el enlace C−N de la amida termina con algo de carácter de doble enlace, así que gira lento — eso es justo lo que le da rigidez a las proteínas.</div>
           </div>
           <div class="mech-step" id="ms-dv-2-1">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCONH₂ + H₂O →[H⁺/Δ]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCOOH + NH₄⁺</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">requiere condiciones drásticas (ácido + calor)</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="65" viewBox="0 10 220 55" style="overflow:visible;display:block;margin:0 auto" ><text x="40" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">RCONH₂ + H₂O</text><line x1="90" y1="30" x2="130" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="130,30 122,26 122,34" fill="var(--dimmer)"/><text x="108" y="20" text-anchor="middle" font-size="8" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H⁺, Δ fuerte</text><text x="175" y="25" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH + NH₄⁺</text><text x="105" y="55" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">condiciones drásticas — el N no se va fácil</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Aquí toca forzar la mano</div>
             <div class="mech-step-h">RCONH₂ + H₂O/H⁺/Δ → RCOOH + NH₄⁺ (el N se protona y sale como NH₄⁺)</div>
             <div class="mech-step-txt">Como consecuencia directa del paso anterior, hidrolizar una amida no es tan fácil: necesitan <strong>condiciones drásticas</strong>, H⁺ concentrado y calor prolongado, justo porque el carbonilo está blindado por la resonancia. El truco es que el H⁺ protona el N, eso rompe la resonancia que lo protegía, y ahí sí el agua puede atacar y dar ácido más NH₄⁺. Ejemplo real y extremo de esto: las proteínas se hidrolizan con HCl concentrado a 110°C durante 24 horas — nada de esto es suave.</div>
           </div>
           <div class="mech-step" id="ms-dv-2-2">
-            <div class="mech-vis">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;width:100%;text-align:center">
-              <div style="color:var(--c3t);font-weight:700;font-size:.82rem">RCONH₂ + 4H⁻ →[LiAlH₄]</div>
-              <div style="color:var(--c2t);font-weight:700;font-size:.82rem">RCH₂NH₂  (amina primaria)</div>
-              <div style="color:var(--dimmer);font-weight:400;font-size:.72rem">C=O reducido a CH₂ · N queda unido</div>
-            </div>
-            </div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="68" viewBox="0 10 180 58" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">RCONH₂</text><line x1="15" y1="30" x2="65" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="65,30 57,26 57,34" fill="var(--dimmer)"/><text x="45" y="45" text-anchor="middle" font-size="8.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">LiAlH₄ ×4[H]</text><text x="115" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCH₂NH₂</text><text x="90" y="58" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">único derivado que da AMINA (C=O → CH₂)</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — El único derivado que se convierte en amina</div>
             <div class="mech-step-h">RCONH₂ + LiAlH₄ → RCH₂NH₂ (amina primaria); 4 H⁻ entregados: C=O → CH₂</div>
             <div class="mech-step-txt">Con <strong>LiAlH₄</strong> sí hay reducción completa: el C=O pasa a −CH₂− y el nitrógeno se queda pegado ahí. El resultado es una <em>amina primaria RCH₂NH₂</em>, no un alcohol como con los otros derivados. Truco de examen: esta es la ruta clásica para fabricar aminas alargando la cadena — RCOOH → RCOCl → RCONH₂ → (LiAlH₄) → RCH₂NH₂. Si les piden esa síntesis, ya saben la secuencia completa.</div>
