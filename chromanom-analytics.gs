@@ -132,6 +132,38 @@ function appendRow(ss, d) {
   sh.getRange(lastRow, 10).setNumberFormat('0"%"');
 }
 
+// ── Helpers de escritura por lotes ──────────────────────────
+// Evitan cientos de llamadas individuales a appendRow/getRange/setBackground
+// (lentas y propensas a agotar el límite de ejecución de Apps Script a medida
+// que el Registro crece); en su lugar arman los datos en memoria y hacen una
+// sola llamada setValues()/setBackgrounds() por hoja.
+function colorForPct(pct) {
+  return pct >= 90 ? COLOR.green : pct >= 70 ? COLOR.blue : pct >= 50 ? COLOR.yellow : COLOR.red;
+}
+
+function writeSheetBatch(sh, headers, rows, pctColIndexes) {
+  sh.getRange(1, 1, 1, headers.length).setValues([headers])
+    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+  sh.setFrozenRows(1);
+
+  if (!rows.length) return;
+
+  sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
+
+  // Colores de fila según la primera columna % (o el índice indicado)
+  const mainPctCol = pctColIndexes[0];
+  const bgMatrix = rows.map(r => {
+    const c = colorForPct(Number(r[mainPctCol]) || 0);
+    return headers.map(() => c);
+  });
+  sh.getRange(2, 1, rows.length, headers.length).setBackgrounds(bgMatrix);
+
+  // Formato "0%" en las columnas porcentuales indicadas
+  pctColIndexes.forEach(ci => {
+    sh.getRange(2, ci + 1, rows.length, 1).setNumberFormat('0"%"');
+  });
+}
+
 // ── Actualiza la hoja Estadísticas ─────────────────────────
 function updateStats(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
@@ -152,7 +184,6 @@ function updateStats(ss) {
     const nivel   = r[5];
     const correctas = Number(r[7]) || 0;
     const total     = Number(r[8]) || 0;
-    const pct       = Number(r[9]) || 0;
     const key       = nombre + '||' + curso;
     if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {} };
     const s = students[key];
@@ -168,42 +199,50 @@ function updateStats(ss) {
   // ── Tabla resumen por estudiante ───────────────────────────
   const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
                         'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %'];
-  sh.appendRow(statsHeaders);
-  const hRange = sh.getRange(1, 1, 1, statsHeaders.length);
-  hRange.setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
-  sh.setFrozenRows(1);
-
   const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
 
-  let row = 2;
-  Object.values(students).sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
-    .forEach(s => {
+  const rows = Object.values(students)
+    .sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
+    .map(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
       const nivelPcts = nivelKeys.map(nk => {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
-      sh.appendRow([s.nombre, s.curso, s.sesiones, s.totalT, globalPct, ...nivelPcts]);
-
-      const bgColor = globalPct >= 90 ? COLOR.green
-                    : globalPct >= 70 ? COLOR.blue
-                    : globalPct >= 50 ? COLOR.yellow
-                    :                   COLOR.red;
-      sh.getRange(row, 1, 1, statsHeaders.length).setBackground(bgColor);
-      sh.getRange(row, 5).setNumberFormat('0"%"');
-      [6,7,8,9].forEach(c => { if (sh.getRange(row, c).getValue() !== '') sh.getRange(row, c).setNumberFormat('0"%"'); });
-      row++;
+      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, ...nivelPcts];
     });
+
+  writeSheetBatch(sh, statsHeaders, rows, [4,5,6,7,8]);
 
   // Anchos
   [200,120,80,180,120,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────
-  updateTopicStats(ss, data);
+  // Envuelto en try/catch: un fallo aquí (o en una hoja de curso) no debe
+  // impedir que las demás hojas de estadísticas terminen de actualizarse.
+  try { updateTopicStats(ss, data); } catch (err) { logStatsError_(ss, 'updateTopicStats', err); }
 
   // ── Hojas individuales por curso ──────────────────────────
   const cursos = [...new Set(data.map(r => r[4]).filter(Boolean))];
-  cursos.forEach(curso => updateCursoSheet(ss, curso, data));
+  cursos.forEach(curso => {
+    try { updateCursoSheet(ss, curso, data); }
+    catch (err) { logStatsError_(ss, 'updateCursoSheet(' + curso + ')', err); }
+  });
+}
+
+// ── Registra errores de actualización de estadísticas en una hoja visible ──
+// (antes fallaban en silencio: doPost() atrapa cualquier excepción y el
+// frontend solo revisa el status HTTP, nunca el cuerpo JSON de la respuesta,
+// así que una falla aquí nunca se veía en ningún lado).
+function logStatsError_(ss, where, err) {
+  let sh = ss.getSheetByName('Errores');
+  if (!sh) {
+    sh = ss.insertSheet('Errores');
+    sh.appendRow(['Timestamp', 'Función', 'Error']);
+    sh.getRange(1,1,1,3).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+    sh.setFrozenRows(1);
+  }
+  sh.appendRow([new Date(), where, String(err && err.message || err)]);
 }
 
 // ── Estadísticas por tema ──────────────────────────────────
@@ -229,25 +268,18 @@ function updateTopicStats(ss, data) {
     });
   });
 
-  sh.appendRow(['Tema','Correctas','Errores','Total intentos','% Acierto']);
-  sh.getRange(1,1,1,5).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
-  sh.setFrozenRows(1);
-
   const sorted = Object.entries(topicData).sort((a,b) => {
     const totA = a[1].ok + a[1].err, totB = b[1].ok + b[1].err;
     return totB - totA;
   });
 
-  let row = 2;
-  sorted.forEach(([tema, d]) => {
+  const rows = sorted.map(([tema, d]) => {
     const tot = d.ok + d.err;
     const pct = tot ? Math.round(d.ok / tot * 100) : 0;
-    sh.appendRow([tema, d.ok, d.err, tot, pct]);
-    const bg = pct >= 90 ? COLOR.green : pct >= 70 ? COLOR.blue : pct >= 50 ? COLOR.yellow : COLOR.red;
-    sh.getRange(row, 1, 1, 5).setBackground(bg);
-    sh.getRange(row, 5).setNumberFormat('0"%"');
-    row++;
+    return [tema, d.ok, d.err, tot, pct];
   });
+
+  writeSheetBatch(sh, ['Tema','Correctas','Errores','Total intentos','% Acierto'], rows, [4]);
 
   [200,100,100,140,100].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
@@ -260,10 +292,6 @@ function updateCursoSheet(ss, curso, allData) {
   sh.clearContents(); sh.clearFormats();
 
   const cursoData = allData.filter(r => r[4] === curso);
-
-  sh.appendRow(['Nombre','Sesiones','Preguntas respondidas','% Acierto','Última sesión']);
-  sh.getRange(1,1,1,5).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
-  sh.setFrozenRows(1);
 
   // Agrupación por nombre
   const students = {};
@@ -278,15 +306,14 @@ function updateCursoSheet(ss, curso, allData) {
     if (fecha > s.lastDate) s.lastDate = fecha;
   });
 
-  let row = 2;
-  Object.entries(students).sort((a,b) => a[0].localeCompare(b[0])).forEach(([nombre, s]) => {
-    const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-    sh.appendRow([nombre, s.sesiones, s.totalT, pct, s.lastDate]);
-    const bg = pct >= 90 ? COLOR.green : pct >= 70 ? COLOR.blue : pct >= 50 ? COLOR.yellow : COLOR.red;
-    sh.getRange(row,1,1,5).setBackground(bg);
-    sh.getRange(row,4).setNumberFormat('0"%"');
-    row++;
-  });
+  const rows = Object.entries(students)
+    .sort((a,b) => a[0].localeCompare(b[0]))
+    .map(([nombre, s]) => {
+      const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
+      return [nombre, s.sesiones, s.totalT, pct, s.lastDate];
+    });
+
+  writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Última sesión'], rows, [3]);
 
   [200,80,180,100,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }

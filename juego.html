@@ -6018,7 +6018,11 @@ function sendAnalytics(trigger){
   const body=JSON.stringify(buildPayload(trigger));
   // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
   fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-    .then(r=>{ if(r.ok) _updateSheetsStatus('ok'); })
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    // Apps Script siempre responde HTTP 200; el éxito real va en el campo
+    // "ok" del cuerpo JSON — revisar solo r.ok (status HTTP) ocultaba fallas
+    // internas (p. ej. al reconstruir las hojas de estadísticas).
+    .then(j=>{ if(j&&j.ok) _updateSheetsStatus('ok'); else { _analyticsSent=false; _updateSheetsStatus('error'); } })
     .catch(()=>{ _analyticsSent=false; _updateSheetsStatus('error'); });
 }
 
@@ -6045,8 +6049,9 @@ function sendToSheets(){
   if(btn){btn.disabled=true;btn.innerHTML='⏳ Enviando…';}
   _analyticsSent=false;
   fetch(ANALYTICS_URL,{method:'POST',body:JSON.stringify(buildPayload('manual')),headers:{'Content-Type':'text/plain'}})
-    .then(r=>r.ok?r.text():Promise.reject(r.status))
-    .then(()=>{
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(j=>{
+      if(!j||!j.ok) return Promise.reject(j&&j.error||'respuesta sin ok');
       _analyticsSent=true;
       if(btn){btn.style.display='none';}
       if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
