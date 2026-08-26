@@ -77,6 +77,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .tab-panel.active{display:block;animation:fadeIn .22s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
+/* ── SUB-NAV dentro de cada categoría: volver + saltar a una reacción ── */
+.rxn-subnav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 18px;padding:10px 12px;background:var(--surf2);border:1.5px solid var(--brd);border-radius:var(--rs)}
+.rxn-subnav-back{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.rxn-subnav-back:hover{border-color:var(--c3);color:var(--c3t);transform:translateY(-1px)}
+.rxn-subnav-sep{width:1.5px;align-self:stretch;background:var(--brd);flex-shrink:0}
+.rxn-subnav-chips{display:flex;flex-wrap:wrap;gap:6px}
+.rxn-subnav-chip{padding:6px 12px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--tx);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s}
+.rxn-subnav-chip:hover{border-color:var(--c3);background:var(--c3b);color:var(--c3t);transform:translateY(-1px)}
+.tab-back-bottom{display:flex;align-items:center;gap:6px;margin:26px 0 4px;padding:10px 16px;border-radius:var(--rs);border:1.5px dashed var(--brd);background:var(--surf2);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;width:fit-content}
+.tab-back-bottom:hover{border-color:var(--c3);color:var(--c3t)}
+
 /* ── GRUPO BADGE ── */
 .grupo-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
 .gb-pill{padding:4px 14px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;border:1.5px solid}
@@ -614,6 +625,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill al2">Cicloalcanos</span>
       <span class="gb-formula">CₙH₂ₙ</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-0')">Halogenación</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-1')">Combustión completa</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-2')">Combustión incompleta</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-3')">Apertura de anillo — Ciclopropano</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -1257,7 +1279,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="al-3-q0">
@@ -1271,6 +1292,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-alcanos -->
 
   <!-- ─────────────── ALQUENOS ─────────────── -->
@@ -1279,6 +1302,20 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill aq">Alquenos</span>
       <span class="gb-formula">CₙH₂ₙ · doble enlace C=C</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-0')">Hidrohalogenación</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-1')">Halogenación</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-2')">Hidrogenación (reducción)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-3')">Hidratación (síntesis de alcoholes)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-4')">Ozonólisis</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-5')">Prueba de Baeyer (KMnO₄)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-6')">Polimerización</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -1329,7 +1366,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">➕ Adición Electrofílica (AE)</div>
     <p class="tipo-desc">El doble enlace C=C tiene una nube de electrones "extra" (el enlace π) que atrae a moléculas con escasez de electrones — a esas moléculas las llamamos <strong>electrófilos</strong> (literalmente, "amantes de electrones", como H⁺, Br₂, H₂O). El electrófilo se 'pega' al doble enlace y lo rompe, añadiendo dos grupos nuevos al carbono. La <strong>Regla de Markovnikov</strong> (mnemónica: "el H va al C que ya tiene más H") les indica en cuál de los dos carbonos queda cada grupo — fíjense en eso al leer cada ejemplo.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Hidrohalogenación</span>
@@ -1495,7 +1532,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Halogenación</span>
@@ -1642,7 +1679,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Hidrogenación (reducción)</span>
@@ -1790,7 +1827,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-3" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-3')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Hidratación (síntesis de alcoholes)</span>
@@ -1945,7 +1982,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-4" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-4')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Ozonólisis</span>
@@ -2094,7 +2131,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-5" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-5')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Prueba de Baeyer (KMnO₄)</span>
@@ -2242,7 +2279,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-aq-6" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('aq-6')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Polimerización</span>
@@ -2387,6 +2424,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-alquenos -->
 
   <!-- ─────────────── ALQUINOS ─────────────── -->
@@ -2395,6 +2434,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill aq">Alquinos</span>
       <span class="gb-formula">CₙH₂ₙ₋₂ · triple enlace C≡C</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-0')">Hidrohalogenación (×1 y ×2)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-1')">Halogenación (×1 y ×2)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-2')">Hidrogenación (×1 Lindlar · ×2 total)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-3')">Hidratación (Markovnikov → cetona / aldehído)</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-4')">Acidez de alquinos terminales</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -2425,7 +2476,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">➕➕ Adición al triple enlace (×1 y ×2)</div>
     <p class="tipo-desc">El triple enlace (C≡C) es como una piscina de electrones aún más rica que el doble enlace — tiene <strong>dos nubes π</strong> disponibles. Eso significa que puede reaccionar <strong>una vez</strong> (queda un alqueno) o <strong>dos veces</strong> (queda un alcano o derivado). Reconocerás las mismas reacciones que viste en alquenos; aquí la novedad es que cada una puede aplicarse dos rondas. Al mirar los ejemplos, identifiquen si la reacción se detuvo en el alqueno intermedio (×1) o llegó hasta el producto final (×2).</p>
 
-    <div class="rxn-card">
+    <div id="rxn-ai-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Hidrohalogenación (×1 y ×2)</span>
@@ -2606,7 +2657,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ai-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Halogenación (×1 y ×2)</span>
@@ -2777,7 +2828,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ai-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Hidrogenación (×1 Lindlar · ×2 total)</span>
@@ -2961,7 +3012,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ai-3" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-3')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Hidratación (Markovnikov → cetona / aldehído)</span>
@@ -3130,7 +3181,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ai-4" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ai-4')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Acidez de alquinos terminales</span>
@@ -3277,6 +3328,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-alquinos -->
 
   <!-- ─────────────── AROMÁTICOS ─────────────── -->
@@ -3285,6 +3338,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill ar">Aromáticos</span>
       <span class="gb-formula">C₆H₅− · anillo de Hückel (4n+2 e⁻ π)</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-0')">Halogenación</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-1')">Nitración</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-2')">Sulfonación</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-3')">Alquilación de Friedel-Crafts</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-4')">Acilación de Friedel-Crafts</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -3320,7 +3385,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       Mecanismo general SEA: E⁺ + benceno → complejo σ (arenio, pierde aromaticidad) → −H⁺ → producto areno sustituido (recupera aromaticidad)
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ar-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ar-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Halogenación</span>
@@ -3505,7 +3570,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ar-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ar-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Nitración</span>
@@ -3693,7 +3758,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ar-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ar-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Sulfonación</span>
@@ -3876,7 +3941,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ar-3" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ar-3')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c1t)">Alquilación de Friedel-Crafts</span>
@@ -4057,7 +4122,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ar-4" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ar-4')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Acilación de Friedel-Crafts</span>
@@ -4237,6 +4302,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-aromaticos -->
 
   <!-- ─────────────── HALOGENUROS DE ALQUILO ─────────────── -->
@@ -4245,6 +4312,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill hg">Halogenuros de Alquilo</span>
       <span class="gb-formula">R−X  (X = F, Cl, Br, I)</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-0')">SN2 — Sustitución Nucleofílica Bimolecular</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-1')">SN1 — Sustitución Nucleofílica Unimolecular</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-2')">Eliminación E2</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -4273,7 +4350,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">🔄 Sustitución Nucleofílica (SN)</div>
     <p class="tipo-desc">En un halogenuro de alquilo, el carbono unido al halógeno (X) queda ligeramente positivo — eso lo hace blanco de ataque para <strong>nucleófilos</strong> (moléculas ricas en electrones: OH⁻, CN⁻, NH₃). El nucleófilo "empuja" la salida del halógeno y ocupa su lugar. Hay dos caminos: <strong>SN2</strong> (el nucleófilo entra al mismo instante que el halógeno sale — un solo paso, favorecido cuando el carbono está poco bloqueado) y <strong>SN1</strong> (el halógeno se va primero formando un <strong>carbocatión</strong> — carbono con carga positiva — y luego llega el nucleófilo; favorecido en carbonos muy tapados por grupos alquilo).</p>
 
-    <div class="rxn-card">
+    <div id="rxn-hg-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#7c3aed">SN2 — Sustitución Nucleofílica Bimolecular</span>
@@ -4438,7 +4515,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-hg-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#7c3aed">SN1 — Sustitución Nucleofílica Unimolecular</span>
@@ -4616,7 +4693,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">✂️ Eliminación E2</div>
     <p class="tipo-desc">En lugar de reemplazar el halógeno (sustitución), una base fuerte como NaOH en caliente puede "empujar" al halogenuro a perder un H y el halógeno <em>al mismo tiempo</em>, formando un <strong>doble enlace</strong> C=C. Ese H que sale viene del carbono vecino al que tiene el halógeno (se le llama carbono β). La <strong>Regla de Zaitsev</strong> dice que el doble enlace se forma preferiblemente hacia el lado con más sustituyentes (ese alqueno es más estable, como un edificio con más columnas). En los ejemplos de abajo, identifiquen cuál carbono pierde el H y cuál pierde el X.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-hg-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Eliminación E2</span>
@@ -4750,7 +4827,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="hg-2-q0">
@@ -4764,6 +4840,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-halogenuros -->
 
   <!-- ─────────────── ALCOHOLES ─────────────── -->
@@ -4772,6 +4850,17 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill ao">Alcoholes</span>
       <span class="gb-formula">R−OH · grupo hidroxilo</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-0')">Deshidratación → Alqueno</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-1')">Oxidación de Alcoholes</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-2')">Conversión a Haluro de Alquilo</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-3')">Esterificación de Fischer</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -4803,7 +4892,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">🔄 Reacciones de los Alcoholes</div>
     <p class="tipo-desc">El grupo −OH hace a los alcoholes muy reactivos y versátiles. Ese oxígeno puede convertirse en un buen grupo saliente (cuando se protona con ácido) o puede ceder electrones. Los alcoholes se transforman en <strong>alquenos</strong> (deshidratación — sale el OH con un H vecino), en <strong>aldehídos, cetonas o ácidos</strong> (oxidación — se añaden oxígenos), en <strong>halogenuros</strong> (se intercambia OH por X), o en <strong>ésteres</strong> (reaccionan con ácidos). El <strong>grado del carbono</strong> que lleva el −OH (primario, secundario o terciario) determina cuál camino es más fácil y qué producto se forma.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-ao-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Deshidratación → Alqueno</span>
@@ -4991,7 +5080,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ao-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Oxidación de Alcoholes</span>
@@ -5156,7 +5245,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ao-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Conversión a Haluro de Alquilo</span>
@@ -5312,7 +5401,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ao-3" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ao-3')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c1t)">Esterificación de Fischer</span>
@@ -5459,6 +5548,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-alcoholes -->
 
   <!-- ─────────────── AMINAS ─────────────── -->
@@ -5467,6 +5558,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill am">Aminas</span>
       <span class="gb-formula">R−NH₂ · R₂NH · R₃N · ArNH₂</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-0')">Sales de Amonio</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-1')">Reducción de Nitrocompuestos</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-2')">Diazotación y Sales de Diazonio</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -5497,7 +5598,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">🔄 Reacciones de las Aminas</div>
     <p class="tipo-desc">Las aminas son como el amoniaco (NH₃) pero con grupos orgánicos en lugar de algunos H. El nitrógeno tiene un <strong>par de electrones libre</strong> que le permite ceder a un H⁺ (comportarse como base) o atacar un carbono electrofílico (comportarse como nucleófilo). La reacción más sencilla es la <strong>neutralización</strong> con un ácido → forma una sal de amonio. Para las <strong>arilaminas</strong> (con anillo bencénico), hay una reacción muy especial a 0–5°C llamada <strong>diazotación</strong>, que produce un intermediario muy versátil para fabricar colorantes y fármacos — mírala con atención.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-am-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('am-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#0369a1">Sales de Amonio</span>
@@ -5650,7 +5751,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-am-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('am-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Reducción de Nitrocompuestos</span>
@@ -5798,7 +5899,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-am-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('am-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Diazotación y Sales de Diazonio</span>
@@ -5945,7 +6046,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="am-2-q0">
@@ -5959,6 +6059,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-aminas -->
 
   <!-- ─────────────── ALDEHÍDOS Y CETONAS ─────────────── -->
@@ -5967,6 +6069,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill cb">Aldehídos y Cetonas</span>
       <span class="gb-formula">R−CHO · R₂C=O · grupo carbonilo</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-0')">Adición de HCN → Cianohidrina</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-1')">Reducción → Alcohol</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-2')">Reacción de Grignard</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-3')">Condensación Aldólica</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-4')">Tollens, Fehling y Yodoformo</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -5999,7 +6113,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">➕ Adición Nucleofílica al C=O</div>
     <p class="tipo-desc">El grupo carbonilo (C=O) tiene al oxígeno "jalando" los electrones del doble enlace hacia sí mismo, dejando el <strong>carbono con carga parcial positiva</strong> (δ+, como un polo positivo). Ese polo atrae moléculas ricas en electrones — los <strong>nucleófilos</strong> (CN⁻, H⁻, agua, reactivos de Grignard). El nucleófilo "cae" sobre el carbono del C=O y rompe el doble enlace: el carbono pasa de plano a tetraédrico, ganando un nuevo sustituyente. Los <strong>aldehídos</strong> (RCHO) reaccionan más rápido que las cetonas (R₂CO) porque el H es pequeño y no bloquea el acceso al carbono.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-cb-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Adición de HCN → Cianohidrina</span>
@@ -6157,7 +6271,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-0-q0">
@@ -6172,7 +6285,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-cb-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Reducción → Alcohol</span>
@@ -6310,7 +6423,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-1-q0">
@@ -6325,7 +6437,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-cb-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c4t)">Reacción de Grignard</span>
@@ -6458,7 +6570,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-2-q0">
@@ -6473,7 +6584,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-cb-3" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-3')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c1t)">Condensación Aldólica</span>
@@ -6626,7 +6737,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-cb-4" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('cb-4')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Tollens, Fehling y Yodoformo</span>
@@ -6772,6 +6883,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-carbonilo -->
 
   <!-- ─────────────── ÁCIDOS CARBOXÍLICOS ─────────────── -->
@@ -6780,6 +6893,15 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill ac">Ácidos Carboxílicos</span>
       <span class="gb-formula">R−COOH · grupo carboxilo</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ac-0')">Sales de Carboxilato</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('ac-1')">Preparación de Ácidos Carboxílicos</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -6810,7 +6932,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tipo-header">🔄 Reacciones de los Ácidos Carboxílicos</div>
     <p class="tipo-desc">El grupo carboxílico (−COOH) combina el carbonilo (C=O) y el alcohol (−OH) en un solo grupo funcional. Esa combinación hace al H del −OH más ácido de lo normal (pKa 4–5 — más ácido que un alcohol, pero mucho menos que el HCl). Con una base, el −COOH cede ese H y forma una <strong>sal de carboxilato</strong> (jabones y conservantes alimentarios son ejemplos). Con alcoholes y calor ácido, forma <strong>ésteres</strong> (los aromas frutales del jugo de mango artificial). En todas estas transformaciones, fíjense: <em>siempre es el −OH del ácido el grupo que se va o se reemplaza</em>.</p>
 
-    <div class="rxn-card">
+    <div id="rxn-ac-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ac-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#dc2626">Sales de Carboxilato</span>
@@ -6963,7 +7085,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-ac-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('ac-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Preparación de Ácidos Carboxílicos</span>
@@ -7095,7 +7217,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="ac-1-q0">
@@ -7109,6 +7230,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-acidos -->
 
   <!-- ─────────────── DERIVADOS DE ÁCIDOS CARBOXÍLICOS ─────────────── -->
@@ -7117,6 +7240,16 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <span class="gb-pill dv">Derivados de AC</span>
       <span class="gb-formula">RCOCl · (RCO)₂O · RCOOR′ · RCONH₂</span>
     </div>
+    <div class="rxn-subnav">
+      <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
+      <div class="rxn-subnav-sep"></div>
+      <div class="rxn-subnav-chips">
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-0')">Ésteres — Síntesis y Reacciones</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-1')">Cloruros de Ácido — el más reactivo</button>
+          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-2')">Amidas — el menos reactivo</button>
+      </div>
+    </div>
+
 
     <div class="prereq-card">
       <span class="prereq-icon">🧩</span>
@@ -7151,7 +7284,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="attn">Reactividad: RCOCl &gt; (RCO)₂O &gt; RCOOR′ &gt; RCONH₂ — mayor GS = más reactivo</div>
 
-    <div class="rxn-card">
+    <div id="rxn-dv-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('dv-0')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#1d4ed8">Ésteres — Síntesis y Reacciones</span>
@@ -7305,7 +7438,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-dv-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('dv-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#1d4ed8">Cloruros de Ácido — el más reactivo</span>
@@ -7500,7 +7633,7 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
       </div>
     </div>
 
-    <div class="rxn-card">
+    <div id="rxn-dv-2" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('dv-2')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:#1d4ed8">Amidas — el menos reactivo</span>
@@ -7657,7 +7790,6 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
             </div>
           </div>
         </div>
-</div>
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="dv-2-q0">
@@ -7671,6 +7803,8 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
         </div>
       </div>
     </div>
+  
+    <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-derivados -->
 
 </div><!-- /app -->
@@ -7742,10 +7876,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 /* ── TABS ── */
+function scrollToEl(el){
+  if(!el)return;
+  const y=el.getBoundingClientRect().top+window.scrollY-54;
+  window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+}
 function switchTab(id){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-  document.getElementById('tab-'+id).classList.add('active');
+  const panel=document.getElementById('tab-'+id);
+  panel.classList.add('active');
+  scrollToEl(panel);
+}
+function backToMenu(){
+  scrollToEl(document.getElementById('tabs'));
+}
+function jumpToRxn(id){
+  const card=document.getElementById('rxn-'+id);
+  if(!card)return;
+  const body=document.getElementById('body-'+id);
+  if(body&&!body.classList.contains('open'))toggleRxn(id);
+  scrollToEl(card);
 }
 
 /* ── GLOSARIO ── */
