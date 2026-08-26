@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChromaNom · Reacciones Orgánicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -22,12 +24,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 /* ── NAV ── */
 .site-nav{display:flex;align-items:center;justify-content:space-between;background:#0d4a73;padding:0 20px;height:44px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-.site-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:6px;transition:background .15s,color .15s;display:flex;align-items:center;gap:5px}
+.site-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:600;padding:11px 10px;border-radius:6px;transition:background .15s,color .15s;display:flex;align-items:center;gap:5px}
 .site-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
 .site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
 .site-nav .nav-links{display:flex;gap:4px;align-items:center}
 .site-nav .nav-brand{color:#fff;font-weight:800;font-size:.88rem;font-style:italic;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
-@media(max-width:480px){.site-nav a span.full{display:none}.site-nav a{padding:5px 8px;font-size:.72rem}.site-nav .nav-brand{font-size:.8rem}}
+@media(max-width:480px){.site-nav a span.full{display:none}.site-nav a{padding:11px 9px;font-size:.72rem}.site-nav .nav-brand{font-size:.8rem}.site-nav .nav-links{flex-wrap:wrap;gap:2px}.site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}}
 
 .app{max-width:900px;margin:0 auto;padding:20px 18px 80px;position:relative;z-index:1}
 
@@ -66,12 +68,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .tabs-cat-lbl{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:8px;padding-left:2px}
 .tabs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
 .tab-btn{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:11px 13px;border:1.5px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;cursor:pointer;transition:all .18s;text-align:left;width:100%}
-.tab-btn:hover{border-color:var(--c3);transform:translateY(-2px);box-shadow:var(--sh)}
+.tab-btn:hover{transform:translateY(-2px);box-shadow:var(--sh)}
 .tab-btn.active{background:var(--c3b);border-color:var(--c3);color:var(--c3t)}
 .tab-ico{font-size:1.25rem;line-height:1}
 .tab-name{font-size:.83rem;font-weight:700;color:var(--tx)}
 .tab-btn.active .tab-name{color:var(--c3t)}
-.tab-desc{font-size:.68rem;color:var(--dimmer);line-height:1.35}
+.tab-desc{font-size:.82rem;color:var(--dimmer);line-height:1.35}
 .tab-count{font-size:.63rem;color:var(--dim);opacity:.75;margin-top:1px}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeIn .22s ease}
@@ -79,17 +81,18 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
 /* ── SUB-NAV dentro de cada categoría: volver + saltar a una reacción ── */
 .rxn-subnav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 18px;padding:10px 12px;background:var(--surf2);border:1.5px solid var(--brd);border-radius:var(--rs)}
-.rxn-subnav-back{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
+.rxn-subnav-back{display:flex;align-items:center;gap:5px;padding:13px 16px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap;flex-shrink:0}
 .rxn-subnav-back:hover{border-color:var(--c3);color:var(--c3t);transform:translateY(-1px)}
 .rxn-subnav-sep{width:1.5px;align-self:stretch;background:var(--brd);flex-shrink:0}
 .rxn-subnav-chips{display:flex;flex-wrap:wrap;gap:6px}
-.rxn-subnav-chip{padding:6px 12px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--tx);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s}
+.rxn-subnav-chip{padding:13px 16px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--tx);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s}
 .rxn-subnav-chip:hover{border-color:var(--c3);background:var(--c3b);color:var(--c3t);transform:translateY(-1px)}
-.tab-back-bottom{display:flex;align-items:center;gap:6px;margin:26px 0 4px;padding:10px 16px;border-radius:var(--rs);border:1.5px dashed var(--brd);background:var(--surf2);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;width:fit-content}
+.rxn-subnav-chip.current{border-color:var(--c3);background:var(--c3b);color:var(--c3t);font-weight:700}
+.tab-back-bottom{display:flex;align-items:center;gap:6px;margin:26px 0 4px;padding:13px 18px;border-radius:var(--rs);border:1.5px dashed var(--brd);background:var(--surf2);color:var(--dim);font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s;width:fit-content}
 .tab-back-bottom:hover{border-color:var(--c3);color:var(--c3t)}
 
 /* ── GRUPO BADGE ── */
-.grupo-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.grupo-badge{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
 .gb-pill{padding:4px 14px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;border:1.5px solid}
 .gb-pill.al{color:var(--c2t);border-color:var(--c2);background:var(--c2b)}
 .gb-pill.al2{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
@@ -147,7 +150,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .quiz-q{margin-bottom:14px}
 .quiz-q-text{font-size:.82rem;color:var(--tx);margin-bottom:8px;line-height:1.5}
 .quiz-opts{display:flex;flex-direction:column;gap:5px}
-.quiz-opt{display:flex;align-items:center;gap:9px;padding:8px 12px;border:1.5px solid var(--brd);border-radius:var(--rs);cursor:pointer;font-size:.8rem;color:var(--dim);background:var(--surf);transition:all .18s;user-select:none}
+.quiz-opt{display:flex;align-items:center;gap:9px;padding:13px 12px;border:1.5px solid var(--brd);border-radius:var(--rs);cursor:pointer;font-size:.8rem;color:var(--dim);background:var(--surf);transition:all .18s;user-select:none}
 .quiz-opt:hover:not(.answered){border-color:var(--c3);color:var(--c3t);background:var(--c3b)}
 .quiz-opt.correct{border-color:#16a34a!important;background:#f0fdf4!important;color:#14532d!important;font-weight:600}
 .quiz-opt.wrong{border-color:var(--err)!important;background:var(--errb)!important;color:var(--errt)!important}
@@ -629,10 +632,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-0')">Halogenación</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-1')">Combustión completa</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-2')">Combustión incompleta</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('al-3')">Apertura de anillo — Ciclopropano</button>
+          <button class="rxn-subnav-chip" data-rxn="al-0" onclick="jumpToRxn('al-0')">Halogenación</button>
+          <button class="rxn-subnav-chip" data-rxn="al-1" onclick="jumpToRxn('al-1')">Combustión completa</button>
+          <button class="rxn-subnav-chip" data-rxn="al-2" onclick="jumpToRxn('al-2')">Combustión incompleta</button>
+          <button class="rxn-subnav-chip" data-rxn="al-3" onclick="jumpToRxn('al-3')">Apertura de anillo — Ciclopropano</button>
       </div>
     </div>
 
@@ -806,7 +809,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> haces reaccionar 3.0 mol de propano con exceso de Br₂ bajo luz UV (monobromación). ¿Cuántos moles de HBr se producen?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">3.0 mol de HBr — la SR es 1:1 (cada R−H sustituido libera exactamente 1 HX).</div>
+              <div class="calc-ans">la SR es 1:1 (cada R−H sustituido libera exactamente 1 HX). <strong>→ Respuesta: 3.0 mol de HBr</strong></div>
             </div>
           </div>
         </div>
@@ -968,7 +971,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos moles de CO₂ se producen al quemar completamente 2.5 mol de butano (C₄H₁₀)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">10 mol de CO₂ — cada C₄H₁₀ aporta 4 C, así que 2.5 mol × 4 = 10 mol CO₂.</div>
+              <div class="calc-ans">cada C₄H₁₀ aporta 4 C, así que 2.5 mol × 4 = 10 mol CO₂. <strong>→ Respuesta: 10 mol de CO₂</strong></div>
             </div>
           </div>
         </div>
@@ -1129,7 +1132,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> balancea la combustión incompleta del propano (C₃H₈) que produce SOLO CO y H₂O. ¿Cuántos moles de O₂ se necesitan por mol de propano?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">3.5 mol de O₂ — C₃H₈ + 3.5 O₂ → 3 CO + 4 H₂O (comprueba: 3 O en el CO + 4 O en el H₂O = 7 O = 3.5 O₂).</div>
+              <div class="calc-ans">C₃H₈ + 3.5 O₂ → 3 CO + 4 H₂O (comprueba: 3 O en el CO + 4 O en el H₂O = 7 O = 3.5 O₂). <strong>→ Respuesta: 3.5 mol de O₂</strong></div>
             </div>
           </div>
         </div>
@@ -1275,7 +1278,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de HBr (M=80.9 g/mol) se necesitan para reaccionar completamente con 4.2 g de ciclopropano (C₃H₆, M=42 g/mol)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">8.09 g de HBr — 4.2 g ÷ 42 g/mol = 0.1 mol de ciclopropano; como la relación es 1:1, se necesitan 0.1 mol × 80.9 g/mol = 8.09 g de HBr.</div>
+              <div class="calc-ans">4.2 g ÷ 42 g/mol = 0.1 mol de ciclopropano; como la relación es 1:1, se necesitan 0.1 mol × 80.9 g/mol = 8.09 g de HBr. <strong>→ Respuesta: 8.09 g de HBr</strong></div>
             </div>
           </div>
         </div>
@@ -1306,13 +1309,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-0')">Hidrohalogenación</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-1')">Halogenación</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-2')">Hidrogenación (reducción)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-3')">Hidratación (síntesis de alcoholes)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-4')">Ozonólisis</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-5')">Prueba de Baeyer (KMnO₄)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('aq-6')">Polimerización</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-0" onclick="jumpToRxn('aq-0')">Hidrohalogenación</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-1" onclick="jumpToRxn('aq-1')">Halogenación</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-2" onclick="jumpToRxn('aq-2')">Hidrogenación (reducción)</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-3" onclick="jumpToRxn('aq-3')">Hidratación (síntesis de alcoholes)</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-4" onclick="jumpToRxn('aq-4')">Ozonólisis</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-5" onclick="jumpToRxn('aq-5')">Prueba de Baeyer (KMnO₄)</button>
+          <button class="rxn-subnav-chip" data-rxn="aq-6" onclick="jumpToRxn('aq-6')">Polimerización</button>
       </div>
     </div>
 
@@ -1505,7 +1508,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de 2-bromopropano (M=123 g/mol) se obtienen a partir de 8.4 g de propeno (M=42 g/mol) con HBr en exceso y rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">24.6 g — 8.4 g ÷ 42 g/mol = 0.2 mol de propeno; 1:1 con el producto → 0.2 mol × 123 g/mol = 24.6 g.</div>
+              <div class="calc-ans">8.4 g ÷ 42 g/mol = 0.2 mol de propeno; 1:1 con el producto → 0.2 mol × 123 g/mol = 24.6 g. <strong>→ Respuesta: 24.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -1661,7 +1664,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de Br₂ (M=160 g/mol) se necesitan para reaccionar completamente con 4.2 g de propeno (M=42 g/mol)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">16 g de Br₂ — 4.2 g ÷ 42 g/mol = 0.1 mol de propeno; 1:1 con Br₂ → 0.1 mol × 160 g/mol = 16 g.</div>
+              <div class="calc-ans">4.2 g ÷ 42 g/mol = 0.1 mol de propeno; 1:1 con Br₂ → 0.1 mol × 160 g/mol = 16 g. <strong>→ Respuesta: 16 g de Br₂</strong></div>
             </div>
           </div>
         </div>
@@ -1809,7 +1812,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿qué volumen de H₂ gaseoso (en condiciones normales, 22.4 L/mol) se necesita para hidrogenar completamente 0.5 mol de propeno?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">11.2 L — la relación alqueno:H₂ es 1:1, así que 0.5 mol de H₂ × 22.4 L/mol = 11.2 L.</div>
+              <div class="calc-ans">la relación alqueno:H₂ es 1:1, así que 0.5 mol de H₂ × 22.4 L/mol = 11.2 L. <strong>→ Respuesta: 11.2 L</strong></div>
             </div>
           </div>
         </div>
@@ -1964,7 +1967,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de propan-2-ol (M=60 g/mol) se producen a partir de 2.1 g de propeno (M=42 g/mol) con exceso de agua y H⁺?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">3.0 g — 2.1 g ÷ 42 g/mol = 0.05 mol de propeno; 1:1 con el producto → 0.05 mol × 60 g/mol = 3.0 g.</div>
+              <div class="calc-ans">2.1 g ÷ 42 g/mol = 0.05 mol de propeno; 1:1 con el producto → 0.05 mol × 60 g/mol = 3.0 g. <strong>→ Respuesta: 3.0 g</strong></div>
             </div>
           </div>
         </div>
@@ -2113,7 +2116,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ozonolizas (Zn/H₂O) 5.6 g de 2-buteno (CH₃−CH=CH−CH₃, M=56 g/mol), un alqueno simétrico. ¿Cuántos gramos de etanal (M=44 g/mol) se obtienen?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">8.8 g — 5.6 g ÷ 56 g/mol = 0.1 mol de 2-buteno. Como es simétrico, cada mol da 2 mol de etanal (0.2 mol) × 44 g/mol = 8.8 g.</div>
+              <div class="calc-ans">5.6 g ÷ 56 g/mol = 0.1 mol de 2-buteno. Como es simétrico, cada mol da 2 mol de etanal (0.2 mol) × 44 g/mol = 8.8 g. <strong>→ Respuesta: 8.8 g</strong></div>
             </div>
           </div>
         </div>
@@ -2261,7 +2264,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de etilenglicol (M=62 g/mol) se producen a partir de 1.4 g de eteno (M=28 g/mol) con KMnO₄ frío en exceso?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">3.1 g — 1.4 g ÷ 28 g/mol = 0.05 mol de eteno; 1:1 con el diol → 0.05 mol × 62 g/mol = 3.1 g.</div>
+              <div class="calc-ans">1.4 g ÷ 28 g/mol = 0.05 mol de eteno; 1:1 con el diol → 0.05 mol × 62 g/mol = 3.1 g. <strong>→ Respuesta: 3.1 g</strong></div>
             </div>
           </div>
         </div>
@@ -2407,7 +2410,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> un polietileno tiene una masa molar promedio de 280 000 g/mol. ¿Aproximadamente cuántas unidades de monómero (CH₂=CH₂, M=28 g/mol) tiene cada cadena (n)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">n ≈ 10 000 — 280 000 g/mol ÷ 28 g/mol por unidad = 10 000 unidades repetidas por cadena.</div>
+              <div class="calc-ans">280 000 g/mol ÷ 28 g/mol por unidad = 10 000 unidades repetidas por cadena. <strong>→ Respuesta: n ≈ 10 000</strong></div>
             </div>
           </div>
         </div>
@@ -2438,11 +2441,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-0')">Hidrohalogenación (×1 y ×2)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-1')">Halogenación (×1 y ×2)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-2')">Hidrogenación (×1 Lindlar · ×2 total)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-3')">Hidratación (Markovnikov → cetona / aldehído)</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ai-4')">Acidez de alquinos terminales</button>
+          <button class="rxn-subnav-chip" data-rxn="ai-0" onclick="jumpToRxn('ai-0')">Hidrohalogenación (×1 y ×2)</button>
+          <button class="rxn-subnav-chip" data-rxn="ai-1" onclick="jumpToRxn('ai-1')">Halogenación (×1 y ×2)</button>
+          <button class="rxn-subnav-chip" data-rxn="ai-2" onclick="jumpToRxn('ai-2')">Hidrogenación (×1 Lindlar · ×2 total)</button>
+          <button class="rxn-subnav-chip" data-rxn="ai-3" onclick="jumpToRxn('ai-3')">Hidratación (Markovnikov → cetona / aldehído)</button>
+          <button class="rxn-subnav-chip" data-rxn="ai-4" onclick="jumpToRxn('ai-4')">Acidez de alquinos terminales</button>
       </div>
     </div>
 
@@ -2639,7 +2642,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de HBr (M=81 g/mol) se necesitan para convertir 2.6 g de acetileno (C₂H₂, M=26 g/mol) completamente en 1,1-dibromoetano (2 adiciones de HBr por triple enlace)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">16.2 g — 2.6 g ÷ 26 g/mol = 0.1 mol de acetileno; se necesitan 2 mol de HBr por cada mol de alquino → 0.2 mol × 81 g/mol = 16.2 g.</div>
+              <div class="calc-ans">2.6 g ÷ 26 g/mol = 0.1 mol de acetileno; se necesitan 2 mol de HBr por cada mol de alquino → 0.2 mol × 81 g/mol = 16.2 g. <strong>→ Respuesta: 16.2 g</strong></div>
             </div>
           </div>
         </div>
@@ -2810,7 +2813,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de 1,1,2,2-tetrabromoetano (M=346 g/mol) se obtienen a partir de 1.3 g de acetileno (M=26 g/mol) con Br₂ en exceso?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">17.3 g — 1.3 g ÷ 26 g/mol = 0.05 mol de acetileno; 1:1 con el producto final → 0.05 mol × 346 g/mol = 17.3 g.</div>
+              <div class="calc-ans">1.3 g ÷ 26 g/mol = 0.05 mol de acetileno; 1:1 con el producto final → 0.05 mol × 346 g/mol = 17.3 g. <strong>→ Respuesta: 17.3 g</strong></div>
             </div>
           </div>
         </div>
@@ -2994,7 +2997,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos litros de H₂ (en condiciones normales, 22.4 L/mol) se consumen para reducir 0.25 mol de but-2-ino completamente hasta butano (2 mol de H₂ por mol de alquino, sin Lindlar)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">11.2 L — 0.25 mol de alquino × 2 mol H₂ = 0.5 mol de H₂; 0.5 mol × 22.4 L/mol = 11.2 L.</div>
+              <div class="calc-ans">0.25 mol de alquino × 2 mol H₂ = 0.5 mol de H₂; 0.5 mol × 22.4 L/mol = 11.2 L. <strong>→ Respuesta: 11.2 L</strong></div>
             </div>
           </div>
         </div>
@@ -3163,7 +3166,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de propanona (M=58 g/mol) se obtienen a partir de 4.0 g de propino (M=40 g/mol) con H₂O/H⁺/Hg²⁺ y rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">5.8 g — 4.0 g ÷ 40 g/mol = 0.1 mol de propino; 1:1 con el producto → 0.1 mol × 58 g/mol = 5.8 g.</div>
+              <div class="calc-ans">4.0 g ÷ 40 g/mol = 0.1 mol de propino; 1:1 con el producto → 0.1 mol × 58 g/mol = 5.8 g. <strong>→ Respuesta: 5.8 g</strong></div>
             </div>
           </div>
         </div>
@@ -3311,7 +3314,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de NaNH₂ (M=39 g/mol) se necesitan para desprotonar completamente 2.6 g de acetileno (HC≡CH, M=26 g/mol, un solo H terminal como en el ejemplo)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">3.9 g — 2.6 g ÷ 26 g/mol = 0.1 mol de acetileno; 1:1 con NaNH₂ → 0.1 mol × 39 g/mol = 3.9 g.</div>
+              <div class="calc-ans">2.6 g ÷ 26 g/mol = 0.1 mol de acetileno; 1:1 con NaNH₂ → 0.1 mol × 39 g/mol = 3.9 g. <strong>→ Respuesta: 3.9 g</strong></div>
             </div>
           </div>
         </div>
@@ -3342,11 +3345,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-0')">Halogenación</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-1')">Nitración</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-2')">Sulfonación</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-3')">Alquilación de Friedel-Crafts</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ar-4')">Acilación de Friedel-Crafts</button>
+          <button class="rxn-subnav-chip" data-rxn="ar-0" onclick="jumpToRxn('ar-0')">Halogenación</button>
+          <button class="rxn-subnav-chip" data-rxn="ar-1" onclick="jumpToRxn('ar-1')">Nitración</button>
+          <button class="rxn-subnav-chip" data-rxn="ar-2" onclick="jumpToRxn('ar-2')">Sulfonación</button>
+          <button class="rxn-subnav-chip" data-rxn="ar-3" onclick="jumpToRxn('ar-3')">Alquilación de Friedel-Crafts</button>
+          <button class="rxn-subnav-chip" data-rxn="ar-4" onclick="jumpToRxn('ar-4')">Acilación de Friedel-Crafts</button>
       </div>
     </div>
 
@@ -3552,7 +3555,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de bromobenceno (M=157 g/mol) se obtienen a partir de 7.8 g de benceno (M=78 g/mol) con Br₂/FeBr₃ y rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">15.7 g — 7.8 g ÷ 78 g/mol = 0.1 mol de benceno; 1:1 con el producto → 0.1 mol × 157 g/mol = 15.7 g.</div>
+              <div class="calc-ans">7.8 g ÷ 78 g/mol = 0.1 mol de benceno; 1:1 con el producto → 0.1 mol × 157 g/mol = 15.7 g. <strong>→ Respuesta: 15.7 g</strong></div>
             </div>
           </div>
         </div>
@@ -3740,7 +3743,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de nitrobenceno (M=123 g/mol) se obtienen a partir de 3.9 g de benceno (M=78 g/mol) con mezcla nitrante y rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">6.15 g — 3.9 g ÷ 78 g/mol = 0.05 mol de benceno; 1:1 con el producto → 0.05 mol × 123 g/mol = 6.15 g.</div>
+              <div class="calc-ans">3.9 g ÷ 78 g/mol = 0.05 mol de benceno; 1:1 con el producto → 0.05 mol × 123 g/mol = 6.15 g. <strong>→ Respuesta: 6.15 g</strong></div>
             </div>
           </div>
         </div>
@@ -3923,7 +3926,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de ácido bencenosulfónico (M=158 g/mol) se obtienen a partir de 15.6 g de benceno (M=78 g/mol) con SO₃/H₂SO₄ en exceso?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">31.6 g — 15.6 g ÷ 78 g/mol = 0.2 mol de benceno; 1:1 con el producto → 0.2 mol × 158 g/mol = 31.6 g.</div>
+              <div class="calc-ans">15.6 g ÷ 78 g/mol = 0.2 mol de benceno; 1:1 con el producto → 0.2 mol × 158 g/mol = 31.6 g. <strong>→ Respuesta: 31.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -4104,7 +4107,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de tolueno (M=92 g/mol) se obtienen a partir de 7.8 g de benceno (M=78 g/mol) con CH₃Cl/AlCl₃ en exceso (monoalquilación, rendimiento 100%)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">9.2 g — 7.8 g ÷ 78 g/mol = 0.1 mol de benceno; 1:1 con el producto → 0.1 mol × 92 g/mol = 9.2 g.</div>
+              <div class="calc-ans">7.8 g ÷ 78 g/mol = 0.1 mol de benceno; 1:1 con el producto → 0.1 mol × 92 g/mol = 9.2 g. <strong>→ Respuesta: 9.2 g</strong></div>
             </div>
           </div>
         </div>
@@ -4285,7 +4288,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de acetofenona (M=120 g/mol) se obtienen a partir de 3.9 g de benceno (M=78 g/mol) con CH₃COCl/AlCl₃ y rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">6.0 g — 3.9 g ÷ 78 g/mol = 0.05 mol de benceno; 1:1 con el producto → 0.05 mol × 120 g/mol = 6.0 g.</div>
+              <div class="calc-ans">3.9 g ÷ 78 g/mol = 0.05 mol de benceno; 1:1 con el producto → 0.05 mol × 120 g/mol = 6.0 g. <strong>→ Respuesta: 6.0 g</strong></div>
             </div>
           </div>
         </div>
@@ -4316,9 +4319,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-0')">SN2 — Sustitución Nucleofílica Bimolecular</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-1')">SN1 — Sustitución Nucleofílica Unimolecular</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('hg-2')">Eliminación E2</button>
+          <button class="rxn-subnav-chip" data-rxn="hg-0" onclick="jumpToRxn('hg-0')">SN2 — Sustitución Nucleofílica Bimolecular</button>
+          <button class="rxn-subnav-chip" data-rxn="hg-1" onclick="jumpToRxn('hg-1')">SN1 — Sustitución Nucleofílica Unimolecular</button>
+          <button class="rxn-subnav-chip" data-rxn="hg-2" onclick="jumpToRxn('hg-2')">Eliminación E2</button>
       </div>
     </div>
 
@@ -4488,7 +4491,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de etanol (M=46 g/mol) se obtienen a partir de 10.9 g de bromoetano (M=109 g/mol) con NaOH en exceso vía SN2, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">4.6 g — 10.9 g ÷ 109 g/mol = 0.1 mol de bromoetano; 1:1 con el producto → 0.1 mol × 46 g/mol = 4.6 g.</div>
+              <div class="calc-ans">10.9 g ÷ 109 g/mol = 0.1 mol de bromoetano; 1:1 con el producto → 0.1 mol × 46 g/mol = 4.6 g. <strong>→ Respuesta: 4.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -4660,7 +4663,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de 2-metil-2-propanol (M=74 g/mol) se obtienen a partir de 13.7 g de 2-bromo-2-metilpropano (M=137 g/mol) vía SN1 con exceso de H₂O, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">7.4 g — 13.7 g ÷ 137 g/mol = 0.1 mol del bromuro; 1:1 con el producto → 0.1 mol × 74 g/mol = 7.4 g.</div>
+              <div class="calc-ans">13.7 g ÷ 137 g/mol = 0.1 mol del bromuro; 1:1 con el producto → 0.1 mol × 74 g/mol = 7.4 g. <strong>→ Respuesta: 7.4 g</strong></div>
             </div>
           </div>
         </div>
@@ -4823,7 +4826,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de but-2-eno (M=56 g/mol) se obtienen a partir de 13.7 g de 2-bromobutano (M=137 g/mol) con KOH/EtOH, asumiendo que todo el producto es but-2-eno?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">5.6 g — 13.7 g ÷ 137 g/mol = 0.1 mol de 2-bromobutano; 1:1 con el producto → 0.1 mol × 56 g/mol = 5.6 g.</div>
+              <div class="calc-ans">13.7 g ÷ 137 g/mol = 0.1 mol de 2-bromobutano; 1:1 con el producto → 0.1 mol × 56 g/mol = 5.6 g. <strong>→ Respuesta: 5.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -4854,10 +4857,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-0')">Deshidratación → Alqueno</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-1')">Oxidación de Alcoholes</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-2')">Conversión a Haluro de Alquilo</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ao-3')">Esterificación de Fischer</button>
+          <button class="rxn-subnav-chip" data-rxn="ao-0" onclick="jumpToRxn('ao-0')">Deshidratación → Alqueno</button>
+          <button class="rxn-subnav-chip" data-rxn="ao-1" onclick="jumpToRxn('ao-1')">Oxidación de Alcoholes</button>
+          <button class="rxn-subnav-chip" data-rxn="ao-2" onclick="jumpToRxn('ao-2')">Conversión a Haluro de Alquilo</button>
+          <button class="rxn-subnav-chip" data-rxn="ao-3" onclick="jumpToRxn('ao-3')">Esterificación de Fischer</button>
       </div>
     </div>
 
@@ -5062,7 +5065,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de eteno (M=28 g/mol) se obtienen a partir de 9.2 g de etanol (M=46 g/mol) con H₂SO₄ a 180 °C, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">5.6 g — 9.2 g ÷ 46 g/mol = 0.2 mol de etanol; 1:1 con el producto → 0.2 mol × 28 g/mol = 5.6 g.</div>
+              <div class="calc-ans">9.2 g ÷ 46 g/mol = 0.2 mol de etanol; 1:1 con el producto → 0.2 mol × 28 g/mol = 5.6 g. <strong>→ Respuesta: 5.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -5227,7 +5230,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de ácido etanoico (M=60 g/mol) se obtienen a partir de 4.6 g de etanol (M=46 g/mol) con KMnO₄ en exceso (oxidación completa), rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">6.0 g — 4.6 g ÷ 46 g/mol = 0.1 mol de etanol; 1:1 con el producto → 0.1 mol × 60 g/mol = 6.0 g.</div>
+              <div class="calc-ans">4.6 g ÷ 46 g/mol = 0.1 mol de etanol; 1:1 con el producto → 0.1 mol × 60 g/mol = 6.0 g. <strong>→ Respuesta: 6.0 g</strong></div>
             </div>
           </div>
         </div>
@@ -5383,7 +5386,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de bromoetano (M=109 g/mol) se obtienen a partir de 2.3 g de etanol (M=46 g/mol) con HBr en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">5.45 g — 2.3 g ÷ 46 g/mol = 0.05 mol de etanol; 1:1 con el producto → 0.05 mol × 109 g/mol = 5.45 g.</div>
+              <div class="calc-ans">2.3 g ÷ 46 g/mol = 0.05 mol de etanol; 1:1 con el producto → 0.05 mol × 109 g/mol = 5.45 g. <strong>→ Respuesta: 5.45 g</strong></div>
             </div>
           </div>
         </div>
@@ -5531,7 +5534,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de acetato de etilo (M=88 g/mol) se forman a partir de 6.0 g de ácido acético (M=60 g/mol) con etanol en exceso, si el rendimiento real es del 75% (por ser un equilibrio)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">6.6 g — 6.0 g ÷ 60 g/mol = 0.1 mol de ácido; rendimiento teórico = 0.1 mol × 88 g/mol = 8.8 g; con 75% real → 8.8 g × 0.75 = 6.6 g.</div>
+              <div class="calc-ans">6.0 g ÷ 60 g/mol = 0.1 mol de ácido; rendimiento teórico = 0.1 mol × 88 g/mol = 8.8 g; con 75% real → 8.8 g × 0.75 = 6.6 g. <strong>→ Respuesta: 6.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -5562,9 +5565,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-0')">Sales de Amonio</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-1')">Reducción de Nitrocompuestos</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('am-2')">Diazotación y Sales de Diazonio</button>
+          <button class="rxn-subnav-chip" data-rxn="am-0" onclick="jumpToRxn('am-0')">Sales de Amonio</button>
+          <button class="rxn-subnav-chip" data-rxn="am-1" onclick="jumpToRxn('am-1')">Reducción de Nitrocompuestos</button>
+          <button class="rxn-subnav-chip" data-rxn="am-2" onclick="jumpToRxn('am-2')">Diazotación y Sales de Diazonio</button>
       </div>
     </div>
 
@@ -5733,7 +5736,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de cloruro de metilamonio (M=67.5 g/mol) se forman al neutralizar 3.1 g de metilamina (M=31 g/mol) con HCl en exceso?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">6.75 g — 3.1 g ÷ 31 g/mol = 0.1 mol de metilamina; 1:1 con la sal → 0.1 mol × 67.5 g/mol = 6.75 g.</div>
+              <div class="calc-ans">3.1 g ÷ 31 g/mol = 0.1 mol de metilamina; 1:1 con la sal → 0.1 mol × 67.5 g/mol = 6.75 g. <strong>→ Respuesta: 6.75 g</strong></div>
             </div>
           </div>
         </div>
@@ -5881,7 +5884,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de anilina (M=93 g/mol) se obtienen a partir de 12.3 g de nitrobenceno (M=123 g/mol) con H₂/Pt en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">9.3 g — 12.3 g ÷ 123 g/mol = 0.1 mol de nitrobenceno; 1:1 con el producto → 0.1 mol × 93 g/mol = 9.3 g.</div>
+              <div class="calc-ans">12.3 g ÷ 123 g/mol = 0.1 mol de nitrobenceno; 1:1 con el producto → 0.1 mol × 93 g/mol = 9.3 g. <strong>→ Respuesta: 9.3 g</strong></div>
             </div>
           </div>
         </div>
@@ -6042,7 +6045,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de cloruro de bencendiazonio (M=140.5 g/mol) se forman a partir de 9.3 g de anilina (M=93 g/mol) con NaNO₂/HCl en exceso a 0–5 °C?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">14.05 g — 9.3 g ÷ 93 g/mol = 0.1 mol de anilina; 1:1 con la sal de diazonio → 0.1 mol × 140.5 g/mol = 14.05 g.</div>
+              <div class="calc-ans">9.3 g ÷ 93 g/mol = 0.1 mol de anilina; 1:1 con la sal de diazonio → 0.1 mol × 140.5 g/mol = 14.05 g. <strong>→ Respuesta: 14.05 g</strong></div>
             </div>
           </div>
         </div>
@@ -6073,11 +6076,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-0')">Adición de HCN → Cianohidrina</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-1')">Reducción → Alcohol</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-2')">Reacción de Grignard</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-3')">Condensación Aldólica</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('cb-4')">Tollens, Fehling y Yodoformo</button>
+          <button class="rxn-subnav-chip" data-rxn="cb-0" onclick="jumpToRxn('cb-0')">Adición de HCN → Cianohidrina</button>
+          <button class="rxn-subnav-chip" data-rxn="cb-1" onclick="jumpToRxn('cb-1')">Reducción → Alcohol</button>
+          <button class="rxn-subnav-chip" data-rxn="cb-2" onclick="jumpToRxn('cb-2')">Reacción de Grignard</button>
+          <button class="rxn-subnav-chip" data-rxn="cb-3" onclick="jumpToRxn('cb-3')">Condensación Aldólica</button>
+          <button class="rxn-subnav-chip" data-rxn="cb-4" onclick="jumpToRxn('cb-4')">Tollens, Fehling y Yodoformo</button>
       </div>
     </div>
 
@@ -6267,7 +6270,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de lactonitrilo (M=71 g/mol) se obtienen a partir de 4.4 g de etanal (M=44 g/mol) con HCN/OH⁻ en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">7.1 g — 4.4 g ÷ 44 g/mol = 0.1 mol de etanal; 1:1 con el producto → 0.1 mol × 71 g/mol = 7.1 g.</div>
+              <div class="calc-ans">4.4 g ÷ 44 g/mol = 0.1 mol de etanal; 1:1 con el producto → 0.1 mol × 71 g/mol = 7.1 g. <strong>→ Respuesta: 7.1 g</strong></div>
             </div>
           </div>
         </div>
@@ -6419,7 +6422,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de etanol (M=46 g/mol) se obtienen a partir de 8.8 g de etanal (M=44 g/mol) con NaBH₄ en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">9.2 g — 8.8 g ÷ 44 g/mol = 0.2 mol de etanal; 1:1 con el producto → 0.2 mol × 46 g/mol = 9.2 g.</div>
+              <div class="calc-ans">8.8 g ÷ 44 g/mol = 0.2 mol de etanal; 1:1 con el producto → 0.2 mol × 46 g/mol = 9.2 g. <strong>→ Respuesta: 9.2 g</strong></div>
             </div>
           </div>
         </div>
@@ -6566,7 +6569,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de 2-propanol (M=60 g/mol) se obtienen a partir de 0.15 mol de CH₃MgBr reaccionando con etanal en exceso, seguido de hidrólisis, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">9.0 g — la relación Grignard:producto es 1:1 → 0.15 mol × 60 g/mol = 9.0 g.</div>
+              <div class="calc-ans">la relación Grignard:producto es 1:1 → 0.15 mol × 60 g/mol = 9.0 g. <strong>→ Respuesta: 9.0 g</strong></div>
             </div>
           </div>
         </div>
@@ -6719,7 +6722,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de but-2-enal (M=70 g/mol) se obtienen a partir de 8.8 g de etanal (M=44 g/mol), vía condensación aldólica + deshidratación, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">7.0 g — 8.8 g ÷ 44 g/mol = 0.2 mol de etanal; como se necesitan 2 mol de etanal por cada mol de producto, 0.2 ÷ 2 = 0.1 mol × 70 g/mol = 7.0 g.</div>
+              <div class="calc-ans">8.8 g ÷ 44 g/mol = 0.2 mol de etanal; como se necesitan 2 mol de etanal por cada mol de producto, 0.2 ÷ 2 = 0.1 mol × 70 g/mol = 7.0 g. <strong>→ Respuesta: 7.0 g</strong></div>
             </div>
           </div>
         </div>
@@ -6866,7 +6869,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> si 0.02 mol de un aldehído reaccionan completamente con reactivo de Tollens en exceso (cada aldehído reduce 2 Ag⁺), ¿cuántos gramos de Ag⁰ (M=108 g/mol) se depositan como espejo?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">4.32 g — 0.02 mol de aldehído × 2 mol de Ag⁺ reducidos = 0.04 mol de Ag⁰; 0.04 mol × 108 g/mol = 4.32 g.</div>
+              <div class="calc-ans">0.02 mol de aldehído × 2 mol de Ag⁺ reducidos = 0.04 mol de Ag⁰; 0.04 mol × 108 g/mol = 4.32 g. <strong>→ Respuesta: 4.32 g</strong></div>
             </div>
           </div>
         </div>
@@ -6897,8 +6900,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ac-0')">Sales de Carboxilato</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('ac-1')">Preparación de Ácidos Carboxílicos</button>
+          <button class="rxn-subnav-chip" data-rxn="ac-0" onclick="jumpToRxn('ac-0')">Sales de Carboxilato</button>
+          <button class="rxn-subnav-chip" data-rxn="ac-1" onclick="jumpToRxn('ac-1')">Preparación de Ácidos Carboxílicos</button>
       </div>
     </div>
 
@@ -7067,7 +7070,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de estearato de sodio (M=306 g/mol) se obtienen a partir de 28.4 g de ácido esteárico (M=284 g/mol) con NaOH en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">30.6 g — 28.4 g ÷ 284 g/mol = 0.1 mol de ácido esteárico; 1:1 con la sal → 0.1 mol × 306 g/mol = 30.6 g.</div>
+              <div class="calc-ans">28.4 g ÷ 284 g/mol = 0.1 mol de ácido esteárico; 1:1 con la sal → 0.1 mol × 306 g/mol = 30.6 g. <strong>→ Respuesta: 30.6 g</strong></div>
             </div>
           </div>
         </div>
@@ -7213,7 +7216,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de ácido benzoico (M=122 g/mol) se obtienen a partir de 9.2 g de tolueno (M=92 g/mol) con KMnO₄/OH⁻/Δ en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">12.2 g — 9.2 g ÷ 92 g/mol = 0.1 mol de tolueno; 1:1 con el producto → 0.1 mol × 122 g/mol = 12.2 g.</div>
+              <div class="calc-ans">9.2 g ÷ 92 g/mol = 0.1 mol de tolueno; 1:1 con el producto → 0.1 mol × 122 g/mol = 12.2 g. <strong>→ Respuesta: 12.2 g</strong></div>
             </div>
           </div>
         </div>
@@ -7244,9 +7247,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <button class="rxn-subnav-back" onclick="backToMenu()">← Volver al menú</button>
       <div class="rxn-subnav-sep"></div>
       <div class="rxn-subnav-chips">
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-0')">Ésteres — Síntesis y Reacciones</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-1')">Cloruros de Ácido — el más reactivo</button>
-          <button class="rxn-subnav-chip" onclick="jumpToRxn('dv-2')">Amidas — el menos reactivo</button>
+          <button class="rxn-subnav-chip" data-rxn="dv-0" onclick="jumpToRxn('dv-0')">Ésteres — Síntesis y Reacciones</button>
+          <button class="rxn-subnav-chip" data-rxn="dv-1" onclick="jumpToRxn('dv-1')">Cloruros de Ácido — el más reactivo</button>
+          <button class="rxn-subnav-chip" data-rxn="dv-2" onclick="jumpToRxn('dv-2')">Amidas — el menos reactivo</button>
       </div>
     </div>
 
@@ -7420,7 +7423,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de acetato de sodio (M=82 g/mol) se forman al saponificar 8.8 g de acetato de etilo (M=88 g/mol) con NaOH en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">8.2 g — 8.8 g ÷ 88 g/mol = 0.1 mol de acetato de etilo; 1:1 con la sal → 0.1 mol × 82 g/mol = 8.2 g.</div>
+              <div class="calc-ans">8.8 g ÷ 88 g/mol = 0.1 mol de acetato de etilo; 1:1 con la sal → 0.1 mol × 82 g/mol = 8.2 g. <strong>→ Respuesta: 8.2 g</strong></div>
             </div>
           </div>
         </div>
@@ -7615,7 +7618,7 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de acetamida (M=59 g/mol) se obtienen a partir de 7.85 g de cloruro de acetilo (M=78.5 g/mol) con NH₃ en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">5.9 g — 7.85 g ÷ 78.5 g/mol = 0.1 mol de cloruro de acetilo; 1:1 con la amida → 0.1 mol × 59 g/mol = 5.9 g.</div>
+              <div class="calc-ans">7.85 g ÷ 78.5 g/mol = 0.1 mol de cloruro de acetilo; 1:1 con la amida → 0.1 mol × 59 g/mol = 5.9 g. <strong>→ Respuesta: 5.9 g</strong></div>
             </div>
           </div>
         </div>
@@ -7674,9 +7677,6 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
             <span class="meq-prod">R−<span class="hn">CH₂NH₂</span></span>
           </div>
         </div>
-        <!-- Condensación de Claisen -->
-        <div style="font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px">Condensación de Claisen (autocondensación de éster)</div>
-
         <!-- ── STEPPER: Amidas — Hidrólisis y Reacciones ── -->
         <div class="rxn-anim-stepper">
           <div class="mech-top">
@@ -7745,21 +7745,25 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
             <div class="mech-step-txt">Con <strong>LiAlH₄</strong> sí hay reducción completa: el C=O pasa a −CH₂− y el nitrógeno se queda pegado ahí. El resultado es una <em>amina primaria RCH₂NH₂</em>, no un alcohol como con los otros derivados. Truco de examen: esta es la ruta clásica para fabricar aminas alargando la cadena — RCOOH → RCOCl → RCONH₂ → (LiAlH₄) → RCH₂NH₂. Si les piden esa síntesis, ya saben la secuencia completa.</div>
           </div>
         </div><!-- /mech-stepper -->
-        <div class="mol-cmp">
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">2  CH₃−<span class="bp">COOC₂H₅</span></span>
-            <div class="mol-cmp-name">éster (acetato de etilo ×2)</div>
-          </div>
-          <div class="mol-cmp-arr"><div class="mol-cmp-reag">NaOEt</div><div>──→</div></div>
-          <div class="mol-cmp-card">
-            <span class="mol-cmp-formula">CH₃−CO−<span class="hn">CH₂</span>−COOC₂H₅</span>
-            <div class="mol-cmp-name">β-cetoéster + EtOH</div>
-          </div>
-        </div>
         <div class="rxn-cond">Amidas: NH₂ es mal grupo saliente → las menos reactivas de los derivados
 Hidrólisis requiere condición fuerte (H⁺ o OH⁻ + calor)
 LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</div>
-        <div class="rxn-regla">📌 No lo confundan: con LiAlH₄ una amida da amina (no alcohol) — el N se queda pegado y sale RCH₂NH₂. Aparte, en la condensación de Claisen el enolato de un éster ataca el C=O de otro → β-cetoéster</div>
+        <div class="rxn-regla">📌 No lo confundan: con LiAlH₄ una amida da amina (no alcohol) — el N se queda pegado y sale RCH₂NH₂</div>
+        <div class="attn">
+          <div style="font-size:.7rem;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">🔍 Dato relacionado — no es de amidas: Condensación de Claisen</div>
+          Así se autocondensa un <strong>éster</strong> (un pariente de la amida, no la amida misma): el enolato de una molécula de éster ataca el C=O de otra → β-cetoéster.
+          <div class="mol-cmp" style="margin-top:8px">
+            <div class="mol-cmp-card">
+              <span class="mol-cmp-formula">2  CH₃−<span class="bp">COOC₂H₅</span></span>
+              <div class="mol-cmp-name">éster (acetato de etilo ×2)</div>
+            </div>
+            <div class="mol-cmp-arr"><div class="mol-cmp-reag">NaOEt</div><div>──→</div></div>
+            <div class="mol-cmp-card">
+              <span class="mol-cmp-formula">CH₃−CO−<span class="hn">CH₂</span>−COOC₂H₅</span>
+              <div class="mol-cmp-name">β-cetoéster + EtOH</div>
+            </div>
+          </div>
+        </div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 76 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c3t)">NH₂</tspan></text></svg> + H₂O/H⁺/Δ</span>
@@ -7786,7 +7790,7 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
             <span class="rxn-extra-ico">🧮</span>
             <div><b>Para calcular:</b> ¿cuántos gramos de etilamina (M=45 g/mol) se obtienen a partir de 5.9 g de acetamida (M=59 g/mol) con LiAlH₄ en exceso, rendimiento del 100%?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">4.5 g — 5.9 g ÷ 59 g/mol = 0.1 mol de acetamida; 1:1 con la amina → 0.1 mol × 45 g/mol = 4.5 g.</div>
+              <div class="calc-ans">5.9 g ÷ 59 g/mol = 0.1 mol de acetamida; 1:1 con la amina → 0.1 mol × 45 g/mol = 4.5 g. <strong>→ Respuesta: 4.5 g</strong></div>
             </div>
           </div>
         </div>
@@ -7839,6 +7843,17 @@ function showMS(id){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
+  /* Primera visita: abrir automáticamente la leyenda de mecanismo para que quien llega directo a una reacción no se la salte.
+     El setItem se retrasa porque el primer registro del service worker puede recargar la página una vez;
+     si eso pasa antes de que se guarde la bandera, la recarga vuelve a intentarlo en vez de quedarse cerrada. */
+  try{
+    if(!localStorage.getItem('chromanom_legend_seen')){
+      const lbody=document.getElementById('legend-body');
+      const lchev=document.getElementById('legend-chev');
+      if(lbody&&lchev){lbody.classList.add('open');lchev.classList.add('open');}
+      setTimeout(()=>{try{localStorage.setItem('chromanom_legend_seen','1');}catch(e){}},1200);
+    }
+  }catch(e){}
   initMS('cb-0',4);
   // steppers for remaining bodies (3 steps each)
   ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','cb-4','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
@@ -7898,6 +7913,32 @@ function jumpToRxn(id){
   if(body&&!body.classList.contains('open'))toggleRxn(id);
   scrollToEl(card);
 }
+/* Marca en la barra de chips cuál reacción está a la vista, para no perder la orientación al hacer scroll */
+document.addEventListener('DOMContentLoaded',()=>{
+  const chipMap={};
+  document.querySelectorAll('.rxn-subnav-chip').forEach(c=>{chipMap[c.dataset.rxn]=c;});
+  const visible=new Set();
+  function updateCurrent(){
+    let bestId=null,bestDist=Infinity;
+    const mid=window.innerHeight/2;
+    visible.forEach(cid=>{
+      const el=document.getElementById('rxn-'+cid);
+      if(!el)return;
+      const r=el.getBoundingClientRect();
+      const dist=Math.abs((r.top+r.bottom)/2-mid);
+      if(dist<bestDist){bestDist=dist;bestId=cid;}
+    });
+    Object.keys(chipMap).forEach(cid=>chipMap[cid].classList.toggle('current',cid===bestId));
+  }
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const cid=e.target.id.replace('rxn-','');
+      if(e.isIntersecting)visible.add(cid);else visible.delete(cid);
+    });
+    updateCurrent();
+  },{rootMargin:'-45% 0px -45% 0px'});
+  document.querySelectorAll('.rxn-card').forEach(c=>obs.observe(c));
+});
 
 /* ── GLOSARIO ── */
 function toggleGlossary(){
