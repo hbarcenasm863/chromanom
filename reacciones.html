@@ -7777,7 +7777,21 @@ function toggleRxn(id){
   const body=document.getElementById('body-'+id);
   const chev=document.getElementById('chev-'+id);
   const isOpen=body.classList.contains('open');
-  if(isOpen)stopSpeak();
+  if(isOpen){
+    stopSpeak();
+    /* reset steppers to paso 1 so re-opening the card doesn't resume mid-mechanism */
+    if(MS[id]){MS[id].c=0;showMS(id);}
+    const steps=document.querySelectorAll('#ras-'+id+' .rxn-anim-step');
+    if(steps.length){
+      const dots=document.querySelectorAll('#rdots-'+id+' .rxn-anim-dot');
+      if(_rxnAnimState[id]){
+        if(steps[_rxnAnimState[id]])steps[_rxnAnimState[id]].classList.remove('on');
+        if(dots[_rxnAnimState[id]])dots[_rxnAnimState[id]].classList.remove('on');
+      }
+      _rxnAnimState[id]=0;
+      _rxnShow(id,0,steps,dots);
+    }
+  }
   body.classList.toggle('open',!isOpen);
   chev.classList.toggle('open',!isOpen);
   if(chev.parentElement)chev.parentElement.setAttribute('aria-expanded',String(!isOpen));
@@ -7916,15 +7930,20 @@ function rxnAnimDot(id,i){
 }
 
 /* ── VOZ ── */
-let _tts=null, _ttsBtn=null;
+let _tts=null, _ttsBtn=null, _voicesCache=[];
+if('speechSynthesis' in window){
+  _voicesCache=window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=()=>{_voicesCache=window.speechSynthesis.getVoices();};
+}
 function speakStep(btn,text){
   if(!('speechSynthesis' in window))return;
   window.speechSynthesis.cancel();
   if(_ttsBtn)_ttsBtn.classList.remove('playing');
   const u=new SpeechSynthesisUtterance(text);
   u.lang='es-CO'; u.rate=0.92; u.pitch=1;
-  const vs=window.speechSynthesis.getVoices();
-  const esp=vs.find(v=>v.lang.startsWith('es')&&v.name.toLowerCase().includes('female'))
+  /* getVoices() puede llegar vacío la primera vez (carga asíncrona): usar el caché si ya se pobló */
+  const vs=_voicesCache.length?_voicesCache:window.speechSynthesis.getVoices();
+  const esp=vs.find(v=>v.lang.startsWith('es')&&/female|mujer/i.test(v.name))
     ||vs.find(v=>v.lang.startsWith('es'))
     ||null;
   if(esp)u.voice=esp;
