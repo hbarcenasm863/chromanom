@@ -295,7 +295,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-anim-vis.orange{background:#fef3c7;color:#92400e;border:1.5px solid #fcd34d}
 .rxn-anim-vis.blue{background:#dbeafe;color:#1d4ed8;border:1.5px solid #93c5fd}
 .rxn-anim-vis svg{max-width:100%;height:auto}
-.rxn-anim-vis.has-svg{padding:8px;min-height:90px;align-items:center}
 /* ── SVG molecule animations ── */
 @keyframes rxnBondIn{from{opacity:0}to{opacity:1}}
 @keyframes rxnAtomIn{from{opacity:0}to{opacity:1}}
@@ -725,7 +724,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">Fíjense: el enlace Br−Br (o Cl−Cl) se rompe <a href="#g-homolisis" class="gloss-ref" onclick="jumpToGloss('g-homolisis');return false;">homolíticamente</a> con luz o calor → 2 radicales X•</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Acá está el arranque: el enlace <strong>Br−Br</strong> (o Cl−Cl) se rompe de forma <strong>homolítica</strong> — ojo, cada átomo se lleva <em>un solo</em> electrón, no los dos. Ahí nacen dos <strong>radicales libres X•</strong>, muy reactivos porque les falta completar el octeto. ¿Y qué necesitan para romperse así? <strong>Luz (hν)</strong> o calor. Sin esa energía, el enlace no se rompe y la cadena nunca arranca.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-1">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="330" height="92" viewBox="-5 0 335 92" style="overflow:visible;display:block;margin:0 auto"><g transform="translate(0,0)"><line x1="14" y1="58" x2="40" y2="45" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="40" y1="45" x2="66" y2="58" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="40" y1="45" x2="40" y2="28" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><text x="40" y="22" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><text x="80" y="32" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Br</text><circle cx="80" cy="21" r="2.4" fill="var(--c4t)"/><path d="M40,32 Q49.2,10.6 58,25" fill="none" stroke="var(--c4t)" stroke-width="1.7" marker-end="url(#arrFish)"/><path d="M76,21 Q65.1,15.2 60,28" fill="none" stroke="var(--c4t)" stroke-width="1.7" marker-end="url(#arrFish)"/></g><line x1="148" y1="30" x2="178" y2="30" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="178,30 170,26 170,34" fill="var(--dimmer)"/><text x="165" y="46" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">luego</text><g transform="translate(190,0)"><line x1="4" y1="58" x2="30" y2="45" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="30" y1="45" x2="56" y2="58" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><circle cx="30" cy="43" r="2.6" fill="var(--c4t)"/><line x1="80" y1="28" x2="80" y2="54" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="80" y="22" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Br</text><text x="80" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">Br</text><path d="M36,46 Q59,38.2 72,54" fill="none" stroke="var(--c4t)" stroke-width="1.7" marker-end="url(#arrFish)"/><path d="M80,42 Q89,33.4 80,28" fill="none" stroke="var(--c4t)" stroke-width="1.7" marker-end="url(#arrFish)"/></g><text x="70" y="84" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">① Br• arranca un H</text><text x="255" y="84" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">② R• toma un Br del Br₂</text></svg></div>
@@ -733,7 +731,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">Dos pasos que se repiten: Br• le quita un H al alcano, luego R• le quita un Br al Br₂ — y así en bucle</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Truco de examen: la propagación son DOS pasos que se repiten en bucle. <strong>① Br• le abstrae un H</strong> al alcano → sale HBr y queda el radical alquilo R•. <strong>② Ese R• reacciona con Br₂</strong> → sale el producto R−Br y se regenera Br•. Fíjense que el radical con el que empezamos vuelve a aparecer al final — por eso el ciclo se sostiene solo, sin gastar más energía, y se repite miles de veces por cada radical que se inició.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-al-0-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="230" height="100" viewBox="-5 0 235 100" style="overflow:visible;display:block;margin:0 auto"><line x1="14" y1="55" x2="40" y2="42" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="40" y1="42" x2="66" y2="55" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><circle cx="40" cy="27" r="2.6" fill="var(--c4t)"/><text x="95" y="34" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">Br</text><circle cx="106" cy="23" r="2.6" fill="var(--c4t)"/><path d="M43,29 Q60.7,22.7 70,39" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><path d="M102,23 Q82.9,18.6 74,36" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><text x="95" y="92" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">dos radicales se combinan → cadena termina</text></svg></div>
@@ -741,7 +738,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">Cuando dos radicales se topan y se unen en un enlace covalente, ahí muere la cadena</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">La cadena no dura para siempre: cuando dos radicales <strong>se encuentran</strong>, se combinan y forman un enlace covalente — ningún radical queda suelto. Pueden salir R−X, R−R o X₂, según quién se tope con quién. Ojo con esto: la terminación es rara, porque hay muchísimos más R−H y X₂ dando vueltas que radicales, así que casi siempre un radical propaga antes de encontrarse con otro.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -1410,7 +1406,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">H⁺ del HX protona el carbono del doble enlace con MÁS hidrógenos (menos sustituido)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Fíjense en esto: el <strong>H⁺ del HX</strong> no cae en cualquier carbono del doble enlace — se va al que tiene <em>más hidrógenos</em>. ¿Por qué? Porque así se genera el <strong>carbocatión más estable</strong>: 3° > 2° > 1°. La reacción "elige" el camino más fácil, y ese camino es el que deja la carga positiva en el carbono más sustituido.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-aq-0-1">
@@ -1419,7 +1414,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">El carbocatión se estabiliza por <a href="#g-inductivo" class="gloss-ref" onclick="jumpToGloss('g-inductivo');return false;">hiperconjugación</a> e inducción de los grupos alquilo vecinos</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Ese carbono con carga positiva está incómodo — le faltan electrones. Y aquí el detalle que deben recordar: los grupos alquilo (CH₃, CH₂−, etc.) que están alrededor le <strong>donan un poco de su densidad electrónica</strong>, como vecinos solidarios que le prestan una mano. Mientras más grupos alquilo tenga pegados, más ayuda recibe: <strong>3° > 2° > 1°</strong>. Y la reacción, como siempre, toma el camino más cómodo — el del carbocatión más estable.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-aq-0-2">
@@ -1428,7 +1422,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">X⁻ ataca el carbocatión por cualquier cara → producto de Markovnikov (X en C más sustituido)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Y aquí se cierra el trato: el haluro <strong>X⁻</strong> (<a href="#g-nucleofilo" class="gloss-ref" onclick="jumpToGloss('g-nucleofilo');return false;">nucleófilo</a>) ataca ese carbocatión plano, y como es plano, le puede pegar por cualquier cara. ¿El resultado? El <strong>haloalcano de Markovnikov</strong>, con X en el carbono más sustituido. Ojo con esto: este mecanismo de dos pasos — protonación y ataque del nucleófilo — es la <em>adición electrofílica</em> clásica, la que van a ver una y otra vez en este tema.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2529,7 +2522,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">1 mol de HX: el H se va al C con más H (Markovnikov, sí, la misma regla de siempre) → sale un haloalqueno vinílico</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Fíjense: esto es <strong>Markovnikov</strong> otra vez, la regla que ya conocen. El H⁺ se va al carbono que ya tiene más H (el terminal), y queda un carbocatión vinílico que el Br⁻ atrapa de inmediato. ¿Qué les queda? Un <em>haloalqueno vinílico</em> (ej. CH₂=CHBr). Ojo con esto: el triple enlace no desaparece, solo baja a doble.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-1">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="20" y1="50" x2="50" y2="50" stroke="var(--tx)" stroke-width="1.8" stroke-linecap="round"/><line x1="50.0" y1="52.6" x2="80.0" y2="52.6" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="50.0" y1="47.4" x2="80.0" y2="47.4" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><text x="80" y="34" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">Br</text><text x="20" y="64" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><text x="50" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">2ª HX: Br al C ya halogenado → CH₃−CHBr₂ (geminal)</text></svg></div>
@@ -2537,7 +2529,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">El 2° mol de HX: el H sigue yendo al C con más H, y el X termina en el carbono que ya tenía uno → dihaluro geminal</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Otra vez Markovnikov: el H se va al CH₂= (el que tiene más H), y eso deja al carbono que ya estaba halogenado recibiendo el <strong>segundo Br</strong>. ¿El resultado? Un <em>dihaluro geminal</em> — los dos halógenos quedan en el MISMO carbono, no en carbonos vecinos. Truco de examen: CH≡CH + 2HBr da CH₃−CHBr₂ (1,1-dibromoetano), nunca el 1,2-.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-ai-0-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="130" height="100" viewBox="0 0 130 100" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="25" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">1 mol HX</text><text x="60" y="38" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">→ CH₂=CHBr</text><text x="60" y="60" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">2 mol HX</text><text x="60" y="73" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">→ CH₃CHBr₂</text><text x="60" y="92" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">todo depende de la estequiometría</text></svg></div>
@@ -2545,7 +2536,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">Todo depende de cuánto HX le echen: con 1 mol paran en el haloalqueno, con 2 moles llegan al dihaluro geminal</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Acá el control lo tienen ustedes: es pura <strong>estequiometría</strong>. Con 1 equivalente de HX se quedan en el haloalqueno (y sí, es aislable). Con 2 equivalentes, llegan al dihaluro geminal. Eso sí, frenar justo en el ×1 exige controlar bien la cantidad que agregan — no es automático. Ejemplo que deben tener presente: el PVC sale de esta misma reacción, HC≡CH + HCl → CH₂=CHCl (cloruro de vinilo).</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -3443,7 +3433,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">El FeBr₃ "activa" el Br₂ y produce Br⁺, el único que sí puede atacar el anillo</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Piensen en el <strong>Br₂</strong> como una tijera cerrada: solo, no le hace nada al anillo de benceno. Ahí entra el <strong>FeBr₃</strong>: jala tan fuerte de uno de los bromos que rompe el enlace Br−Br y suelta el <strong>Br⁺</strong>, un bromo con carga positiva, hambriento de electrones. Ese sí ataca. Fíjense en el detalle que deben recordar: <em>sin FeBr₃, el Br₂ no le hace nada al benceno</em> — muy distinto a los alquenos, que reaccionan directo, sin necesitar catalizador.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-ar-0-1">
@@ -3452,7 +3441,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">La nube π del benceno atrae al Br⁺ y forman un enlace C−Br</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">El benceno tiene una <strong>nube de electrones π</strong>: 6 electrones "flotando" por todo el anillo, como una corona invisible. El <strong>Br⁺</strong> con su carga positiva se ve atraído por esa nube y forma un enlace nuevo con uno de los carbonos. Y aquí el detalle que deben recordar: ese carbono pasa a tener 4 enlaces y ya no puede seguir en la nube circular → <em>la aromaticidad se rompe, por un momento</em>. Ese "intermediario" incómodo dura una fracción de segundo antes de pasar al siguiente paso.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
           <div class="mech-step" id="ms-ar-0-2">
@@ -3461,7 +3449,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">El FeBr₄⁻ le quita el H⁺ al anillo → aromaticidad recuperada, FeBr₃ se regenera</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Ahora el <strong>FeBr₄⁻</strong> hace de mini-aspiradora y le arranca el <strong>H⁺</strong> al carbono que tiene el Br. Ese H se va, los electrones del enlace C−H regresan al anillo y la <strong>nube π circular se restaura</strong> — aromaticidad recuperada. Nos quedan <em>bromobenceno</em> (el anillo intacto, con Br en vez de H) más HBr gaseoso. Y el FeBr₃ se <strong>regenera</strong> — es catalizador, no se gasta — así que sigue trabajando con la siguiente molécula de Br₂. Muévanse con esto claro: el anillo siempre prefiere sustituir (conservar la aromaticidad) antes que adicionar (romperla).</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -4365,7 +4352,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">El nucleófilo ataca el C portador del GS (X) por la cara OPUESTA a X (ataque por detrás)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Fíjense bien acá: la SN2 pasa en <strong>un solo paso concertado</strong>, sin escalas. El Nu⁻ no ataca por cualquier lado — entra exactamente por la cara opuesta al <a href="#g-saliente" class="gloss-ref" onclick="jumpToGloss('g-saliente');return false;">grupo saliente</a>, a 180°. Y mientras entra, el enlace C−X se rompe al mismo tiempo. No hay ningún intermediario esperando en el camino, no hay carbocatión. ¿Por qué se llama bimolecular? Porque la velocidad depende de las dos concentraciones a la vez: [R−X] y [Nu].</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-1">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="96" viewBox="0 0 210 96" style="overflow:visible;display:block;margin:0 auto" ><text x="105" y="50" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><line x1="105" y1="50" x2="140" y2="32" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="148" y="28" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="105" y1="50" x2="140" y2="68" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="148" y="72" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H</text><line x1="105" y1="50" x2="138" y2="50" stroke="var(--err)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="150" y="50" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><line x1="105" y1="50" x2="68" y2="50" stroke="var(--c1t)" stroke-width="1.6" stroke-dasharray="3 2" stroke-linecap="round"/><text x="52" y="50" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><text x="105" y="18" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c4t)">‡</text><text x="100" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">estado de transición: 5 grupos, bipirámide trigonal</text></svg></div>
@@ -4373,7 +4359,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">En el ET el C es pentacoordinado (trigonal bipiramidal): Nu a 120° del GS que sale</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Ojo con esto: por un instante, ese carbono central queda rodeado de <strong>cinco grupos</strong> — los tres sustituyentes originales acomodados en el plano ecuatorial, y el Nu entrando por un lado mientras el X sale por el otro, en posiciones axiales. Este <em>estado de transición</em> no se puede aislar, pero es el punto de mayor energía de toda la reacción — ahí es donde se decide qué tan rápido va todo. Y por eso el tamaño del carbono importa tanto: si está muy tapado por grupos grandes, el Nu no cabe para acercarse. Por eso la SN2 favorece los carbonos primarios (1°), poco estorbados.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
           </div>
           <div class="mech-step" id="ms-hg-0-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 0 210 100" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="45" y1="45" x2="45" y2="20" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="45" y="14" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">A</text><line x1="45" y1="45" x2="25" y2="60" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="15" y="68" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">B</text><line x1="45" y1="45" x2="70" y2="55" stroke="var(--err)" stroke-width="1.6" stroke-linecap="round"/><text x="80" y="58" text-anchor="middle" font-size="9" style="fill:var(--err);font-family:'JetBrains Mono',monospace">X</text><line x1="95" y1="45" x2="125" y2="45" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="125,45 117,41 117,49" fill="var(--dimmer)"/><text x="160" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><line x1="160" y1="45" x2="160" y2="70" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="160" y="82" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">A</text><line x1="160" y1="45" x2="180" y2="30" stroke="var(--tx)" stroke-width="1.4" stroke-linecap="round"/><text x="190" y="22" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">B</text><line x1="160" y1="45" x2="135" y2="35" stroke="var(--c1t)" stroke-width="1.6" stroke-linecap="round"/><text x="122" y="28" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">Nu</text><text x="100" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">configuración invertida — como un paraguas al voltearse</text></svg></div>
@@ -4381,7 +4366,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-h">La configuración del C <a href="#g-quiralidad" class="gloss-ref" onclick="jumpToGloss('g-quiralidad');return false;">quiral</a> se invierte 180° (como paraguas que se da vuelta con el viento)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Y aquí el detalle que deben recordar: si el carbono es quiral, la SN2 <strong>siempre</strong> invierte su configuración. Piénsenlo como un paraguas que se da vuelta con un golpe de viento — el Nu entra por un lado y empuja a los tres sustituyentes para el otro lado, como si el paraguas se volteara de adentro hacia afuera. Un R se vuelve S, un S se vuelve R, sin excepción. Esta inversión de <a href="#g-walden" class="gloss-ref" onclick="jumpToGloss('g-walden');return false;">Walden</a> es la firma que delata a la SN2 en cualquier examen: si ven inversión total, ya saben qué mecanismo fue.</div>
-            <button class="speak-btn" onclick="speakStep(this,this.closest('.' + 'mech-step').querySelector('.' + 'mech-step-txt').innerText)">🔊 Escuchar</button>
 
           </div>
         </div><!-- /mech-stepper -->
@@ -8049,42 +8033,30 @@ function mkBenzSVG(subs){
 }
 
 // ─── MOLECULE CHAIN DATA (para rxn-anim-stepper) ─────────────────────────────
-const _C3=[{h:3}],_O0=[{s:'O',h:0}],_O1=[{s:'O',h:1}],_N2=[{s:'N',h:2}],_N1=[{s:'N',h:1}];
-const _Cl=[{s:'Cl',h:0}],_Br=[{s:'Br',h:0}];
 const RM={
   metano:[{h:4}],
-  etano:[{h:3,bn:1},{h:3}],
   propano:[{h:3,bn:1},{h:2,bn:1},{h:3}],
-  butano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
-  clorometano:[{h:3,bn:1},{s:'Cl',h:0}],
   bromometano:[{h:3,bn:1},{s:'Br',h:0}],
   cloroetano:[{h:3,bn:1},{h:2,bn:1},{s:'Cl',h:0}],
   'r2cloropropano':[{h:3,bn:1},{h:1,bn:1,bu:[{s:'Cl',h:0}]},{h:3}],
   'r2bromopropano':[{h:3,bn:1},{h:1,bn:1,bu:[{s:'Br',h:0}]},{h:3}],
   '12dibromoetano':[{h:2,bn:1,bu:[{s:'Br',h:0}]},{h:2,bu:[{s:'Br',h:0}]}],
-  '11dibromoetano':[{h:3,bn:1},{h:1,bu:[{s:'Br',h:0}],bd:[{s:'Br',h:0}]}],
   '1122tetrabromoetano':[{h:1,bn:1,bu:[{s:'Br',h:0}],bd:[{s:'Br',h:0}]},{h:1,bu:[{s:'Br',h:0}],bd:[{s:'Br',h:0}]}],
   eteno:[{h:2,bn:2},{h:2}],
   propeno:[{h:3,bn:1},{h:1,bn:2},{h:2}],
   bromoeteno:[{h:2,bn:2},{h:1,bu:[{s:'Br',h:0}]}],
   etilenglicol:[{h:2,bn:1,bu:[{s:'O',h:1}]},{h:2,bu:[{s:'O',h:1}]}],
-  polietileno4:[{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2}],
   etino:[{h:1,bn:3},{h:1}],
   propino:[{h:3,bn:1},{h:0,bn:3},{h:1}],
   etanol:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:1}],
   metanol:[{h:3,bn:1},{s:'O',h:1}],
-  propan2ol:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:1}]},{h:3}],
   etanal:[{h:3,bn:1},{h:1,bu:[{s:'O',h:0}],buBn:2}],
   propanona:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'O',h:0}],buBn:2},{h:3}],
   acidoetanoico:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'O',h:1}]}],
   acetatoetilo:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'O',h:0}],buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
   etanamida:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'N',h:2}]}],
   metilamina:[{h:3,bn:1},{s:'N',h:2}],
-  dimetilamina:[{h:3,bn:1},{s:'N',h:1,bn:1},{h:3}],
-  Nmetilacetamida:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'O',h:0}],buBn:2},{s:'N',h:1,bn:1},{h:3}],
-  etilaminasalt:[{h:3,bn:1},{h:2,bn:1},{s:'N',h:3}],
   grignard:[{h:3,bn:1},{s:'Mg',h:0,bn:1},{s:'Br',h:0}],
-  etoxidosodio:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{s:'Na',h:0}],
   carboxilatoetanoico:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'O',h:0}]}],
   aldol:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:1}]},{h:2,bn:1},{h:1,bu:[{s:'O',h:0}],buBn:2}],
   cianohidrina:[{h:3,bn:1},{h:1,bn:1,bu:[{s:'O',h:1}]},{s:'C',h:0,bn:3},{s:'N',h:0}],
