@@ -4621,12 +4621,15 @@ function buildRxnQ(q){
   function arrowCol(condText){
     return`<div class="rxnq-arrow-col">${condText?`<span class="rxnq-cond">${condText}</span>`:''}<span class="rxnq-arrow">──→</span></div>`;
   }
+  // q.reactivo already starts with "+ " in the data (e.g. '+ HBr'); strip it so it
+  // isn't duplicated after the literal "+" span below.
+  function cleanReactivo(r){return r?r.replace(/^\s*\+\s*/,''):r;}
   // Reactant shown prominently above the equation row
   const reactantCard=_disp(q.r,q.mol_r);
   let eqHtml='';
   if(q.subtype==='producto'){
     eqHtml=`<span class="rxnq-plus">+</span>
-      <span class="rxnq-reagent">${q.reactivo}</span>
+      <span class="rxnq-reagent">${cleanReactivo(q.reactivo)}</span>
       ${arrowCol(q.condicion)}
       <div class="rxnq-blank-box">?</div>`;
   } else if(q.subtype==='reactivo'){
@@ -4636,13 +4639,13 @@ function buildRxnQ(q){
       ${_small(q.producto,q.mol_p)}`;
   } else if(q.subtype==='condicion'){
     eqHtml=`<span class="rxnq-plus">+</span>
-      <span class="rxnq-reagent">${q.reactivo}</span>
+      <span class="rxnq-reagent">${cleanReactivo(q.reactivo)}</span>
       <div class="rxnq-arrow-col"><div class="rxnq-blank-box" style="font-size:.82rem;padding:5px 10px">???</div><span class="rxnq-arrow">──→</span></div>
       ${_small(q.producto,q.mol_p)}`;
   } else {
     // nombre — complete equation shown, ask for reaction name
     eqHtml=`<span class="rxnq-plus">+</span>
-      <span class="rxnq-reagent">${q.reactivo}</span>
+      <span class="rxnq-reagent">${cleanReactivo(q.reactivo)}</span>
       ${arrowCol(q.condicion)}
       ${_small(q.producto,q.mol_p)}`;
   }
