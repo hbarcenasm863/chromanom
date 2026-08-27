@@ -1360,6 +1360,14 @@ const MOLDES={
   metaXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   paraXileno:   {chain:[{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1,bu:[{}]},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   etilbenceno:  {chain:[{bn:1,bu:[{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  // ── PRODUCTOS DE REACCIÓN (para el constructor molecular — preguntas "build" de rxn_*) ──
+  clorometano: [{h:3,bd:[{s:'Cl',h:0}]}],
+  bromoetano: [{h:3,bn:1},{h:2,bd:[{s:'Br',h:0}]}],
+  bromopropano1: [{h:2,bn:1,bd:[{s:'Br',h:0}]},{h:2,bn:1},{h:3}],
+  bromopropano2: [{h:3,bn:1},{h:1,bn:1,bd:[{s:'Br',h:0}]},{h:3}],
+  clorobutano2: [{h:3,bn:1},{h:1,bn:1,bd:[{s:'Cl',h:0}]},{h:2,bn:1},{h:3}],
+  dibromopropano12: [{h:2,bn:1,bd:[{s:'Br',h:0}]},{h:1,bn:1,bd:[{s:'Br',h:0}]},{h:3}],
+  dibromoetano11: [{h:3,bn:1},{h:1,bu:[{s:'Br',h:0}],bd:[{s:'Br',h:0}]}],
 };
 
 // ════════════════════════════════════════════════════════
@@ -6150,6 +6158,38 @@ const QBANK_RXNQ=[
    expl:'El ácido y el amoníaco forman primero la sal amónica; al calentar fuerte, se deshidrata formando la amida (etanamida) + agua.'},
 ];
 QBANK.push(...QBANK_RXNQ);
+
+// ── QBANK_RXN_BUILD — dibuja el producto con el constructor molecular ─────────
+// Reutiliza el mismo lienzo (buildBuild/checkBuild) que las preguntas de
+// nomenclatura ('type:build'), pero aquí buildKey apunta al PRODUCTO de la
+// reacción descrita en q, no a una molécula dada por su nombre IUPAC.
+const QBANK_RXN_BUILD=[
+  {type:'build',buildKey:'clorometano',topic:'rxn_alcanos',
+   q:'Dibuja el <strong>producto</strong> de esta reacción: CH₄ + Cl₂ (hν) → ? (fórmula: CH₃Cl)'},
+  {type:'build',buildKey:'bromoetano',topic:'rxn_alcanos',
+   q:'Dibuja el <strong>producto</strong> de esta reacción: CH₃−CH₃ + Br₂ (hν) → ? (fórmula: C₂H₅Br)'},
+  {type:'build',buildKey:'bromopropano2',topic:'rxn_alquenos',
+   q:'Dibuja el <strong>producto principal</strong> (Markovnikov) de: CH₂=CH−CH₃ + HBr → ? (fórmula: C₃H₇Br)'},
+  {type:'build',buildKey:'clorobutano2',topic:'rxn_alquenos',
+   q:'Dibuja el <strong>producto principal</strong> (Markovnikov) de: CH₂=CH−CH₂−CH₃ + HCl → ? (fórmula: C₄H₉Cl)'},
+  {type:'build',buildKey:'dibromopropano12',topic:'rxn_alquenos',
+   q:'Dibuja el <strong>producto</strong> de la halogenación: CH₂=CH−CH₃ + Br₂ → ? (fórmula: C₃H₆Br₂)'},
+  {type:'build',buildKey:'propano',topic:'rxn_alquenos',
+   q:'Dibuja el <strong>producto</strong> de hidrogenar: CH₂=CH−CH₃ + H₂ (cat. Ni) → ? (fórmula: C₃H₈)'},
+  {type:'build',buildKey:'butan2ol',topic:'rxn_alquenos',
+   q:'Dibuja el <strong>alcohol</strong> que se forma por hidratación de Markovnikov: CH₂=CH−CH₂−CH₃ + H₂O (cat. H₂SO₄) → ? (fórmula: C₄H₁₀O)'},
+  {type:'build',buildKey:'dibromoetano11',topic:'rxn_alquinos',
+   q:'Dibuja el <strong>producto</strong> de adicionar 2 mol de HBr: HC≡CH + 2 HBr → ? (fórmula: C₂H₄Br₂, ambos Br en el mismo carbono)'},
+  {type:'build',buildKey:'propano',topic:'rxn_alquinos',
+   q:'Dibuja el <strong>producto</strong> de la hidrogenación completa: HC≡C−CH₃ + 2 H₂ (cat. Ni) → ? (fórmula: C₃H₈)'},
+  {type:'build',buildKey:'etanol',topic:'rxn_halogenuros',
+   q:'Dibuja el <strong>producto</strong> de esta SN2: CH₃−CH₂−Br + NaOH (ac.) → ? (fórmula: C₂H₆O)'},
+  {type:'build',buildKey:'prop1eno',topic:'rxn_halogenuros',
+   q:'Dibuja el <strong>alqueno</strong> que se forma por eliminación E2: CH₃−CH₂−CH₂Br + KOH (EtOH, Δ) → ? (fórmula: C₃H₆)'},
+  {type:'build',buildKey:'bromopropano1',topic:'rxn_alcoholes',
+   q:'Dibuja el <strong>producto</strong> de esta sustitución: CH₃−CH₂−CH₂OH + HBr → ? (fórmula: C₃H₇Br)'},
+];
+QBANK.push(...QBANK_RXN_BUILD);
 
 // ── Rxn group picker ──
 let _rxnGrupos=[];
