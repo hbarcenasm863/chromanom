@@ -2912,7 +2912,9 @@ function buildTipoDCard(rxn, num){
     return `<div class="rxn-d-arrow-col">${condText?`<span class="rxn-d-cond">${condText}</span>`:''}<span class="rxn-d-arrow">──→</span></div>`;
   }
   function reagentSpan(reactivo){
-    return reactivo ? `<span class="rxn-d-plus">+</span><span class="rxn-d-reagent">${reactivo}</span>` : '';
+    if(!reactivo)return'';
+    const clean=reactivo.replace(/^\s*\+\s*/,'');
+    return `<span class="rxn-d-plus">+</span><span class="rxn-d-reagent">${clean}</span>`;
   }
   let enunciado=rxn.enunciado, eqHtml, fieldHtml;
   if(rxn.pregunta_tipo==='producto'){
