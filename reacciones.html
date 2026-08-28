@@ -234,6 +234,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .calc-toggle{margin-left:6px;font-size:.68rem;padding:2px 9px;border-radius:20px;border:1px solid currentColor;background:none;color:inherit;cursor:pointer;font-weight:700}
 .calc-ans{margin-top:5px;font-family:'JetBrains Mono',monospace;font-weight:700;display:none}
 .calc-ans.open{display:block}
+.rxn-adv-toggle{margin:10px 0 2px;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;font-size:.72rem;font-weight:700;padding:7px 12px;border-radius:20px;border:1px dashed var(--dimmer);background:none;color:var(--dimmer);cursor:pointer;font-family:inherit}
+.rxn-adv-toggle:hover{color:var(--tx);border-color:var(--tx)}
+.rxn-adv-body{display:none;margin-top:8px}
+.rxn-adv-body.open{display:block}
 .mol-cmp-arr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c2t);
   text-align:center;flex-shrink:0}
 .mol-cmp-reag{font-size:.65rem;color:var(--c3t);font-weight:700}
@@ -329,6 +333,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   background:var(--surf2);border-radius:var(--rs);padding:10px 14px;
   margin-bottom:12px;font-size:.8rem;color:var(--dim);border-left:3px solid var(--c2t)}
 .rxn-vida-ico{font-size:1.4rem;flex-shrink:0}
+.rxn-exc-note{display:flex;gap:8px;align-items:flex-start;background:var(--surf2);
+  border-radius:var(--rs);padding:8px 12px;margin-bottom:12px;font-size:.76rem;
+  color:var(--dim);border-left:3px solid var(--dimmer)}
 
 /* ── RXN-ANIM STEPPER ── */
 .rxn-anim-stepper{border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
@@ -373,9 +380,6 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 </marker>
 <marker id="arrFish" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
   <path d="M0,1 L10,5 L0,6 Z" fill="var(--c4t)"/>
-</marker>
-<marker id="arrFullErr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-  <path d="M0,0 L10,5 L0,10 Z" fill="var(--err)"/>
 </marker>
 </defs>
 </svg>
@@ -535,13 +539,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     </div>
   </div>
 
-  <div class="legend-card">
+  <div class="legend-card" id="legend-card">
     <div class="legend-head" onclick="toggleLegend()">
       <div class="legend-head-l">
         <span class="gloss-icon">🧭</span>
         <div>
           <div class="legend-title">Cómo leer los diagramas de mecanismo</div>
-          <div class="legend-sub">El mismo código de color se usa en 37 de las 39 reacciones — apréndelo una vez, léelo en casi todas. (Las 2 excepciones: combustión e hidrogenación catalítica, que no se enseñan con flechas de electrones a este nivel.)</div>
+          <div class="legend-sub">El mismo código de color se usa en 38 de las 41 reacciones — apréndelo una vez, léelo en casi todas. (Las 3 excepciones: combustión completa, combustión incompleta e hidrogenación catalítica, que no se enseñan con flechas de electrones a este nivel.)</div>
         </div>
       </div>
       <span class="gloss-chev" id="legend-chev">▾</span>
@@ -813,7 +817,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">① Iniciación: X₂ →[hν]→ 2 X•  ② Propagación: X• + R−H → R• + HX  |  R• + X₂ → R−X + X•  ③ Terminación: 2 R• → R−R</div>
-        <div class="rxn-regla">📌 Ojo con esto: Br₂ es mucho más selectivo que Cl₂ — va directo por el H terciario, porque ahí el radical que se forma es el más estable</div>
+        <div class="rxn-regla">📌 Ojo con esto: Br₂ es mucho más selectivo que Cl₂ — va directo por el H más sustituido disponible (3° &gt; 2° &gt; 1°), porque ahí el radical que se forma es el más estable. El propano del ejemplo no tiene C terciario, así que Br₂ va por el 2° (más sustituido que el 1°) — por eso sale 2-bromopropano casi exclusivamente</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.08s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 28 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₄</tspan></text></svg></span>
@@ -878,6 +882,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-al-1">▾</span>
       </div>
       <div class="rxn-body" id="body-al-1">
+        <div class="rxn-exc-note">🧭 <div>Esta es una de las <b>3 excepciones</b> al código de flechas de electrones — <a href="#" class="gloss-ref" onclick="jumpToLegend();return false;">ver la leyenda</a> para repasar por qué la combustión no se enseña con ese lenguaje.</div></div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol">CₙH₂ₙ₊₂</span>
@@ -1040,6 +1045,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-al-2">▾</span>
       </div>
       <div class="rxn-body" id="body-al-2">
+        <div class="rxn-exc-note">🧭 <div>Esta es una de las <b>3 excepciones</b> al código de flechas de electrones — <a href="#" class="gloss-ref" onclick="jumpToLegend();return false;">ver la leyenda</a> para repasar por qué la combustión no se enseña con ese lenguaje.</div></div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol">CₙH₂ₙ₊₂</span>
@@ -1113,7 +1119,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Acá el problema es sencillo: si el <strong>O₂ no alcanza</strong>, el carbono no llega hasta CO₂ — se queda a mitad de camino. Y cuánto O₂ haya define qué sale: si es muy poquito, se deposita <strong>carbono sólido</strong>, o sea hollín; si hay algo más pero sigue faltando, se forma el gas tóxico <strong>CO (monóxido de carbono)</strong>.</div>
           </div>
           <div class="mech-step" id="ms-al-2-1">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="76" viewBox="0 -6 190 82" style="overflow:visible;display:block;margin:0 auto" ><text x="105" y="54" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">afinidad por la hemoglobina</text><rect x="10" y="20" width="18" height="34" rx="3" fill="var(--c1b)" stroke="var(--c1t)" stroke-width="1.3"/><text x="19" y="64" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O₂ ×1</text><rect x="150" y="0" width="18" height="54" rx="3" fill="var(--c3b)" stroke="var(--c3t)" stroke-width="1.3"/><text x="159" y="64" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">CO ×200</text><path d="M35,36 Q86.96989728782603,5.192050118633148 145,22" fill="none" stroke="var(--err)" stroke-width="1.8" marker-end="url(#arrFullErr)"/><text x="90" y="8" text-anchor="middle" font-size="8" style="fill:var(--err);font-family:'JetBrains Mono',monospace">le quita el puesto</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="76" viewBox="0 -6 190 82" style="overflow:visible;display:block;margin:0 auto" ><text x="105" y="54" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">afinidad por la hemoglobina</text><rect x="10" y="20" width="18" height="34" rx="3" fill="var(--c1b)" stroke="var(--c1t)" stroke-width="1.3"/><text x="19" y="64" text-anchor="middle" font-size="9" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">O₂ ×1</text><rect x="150" y="0" width="18" height="54" rx="3" fill="var(--c3b)" stroke="var(--c3t)" stroke-width="1.3"/><text x="159" y="64" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">CO ×200</text><line x1="35" y1="28" x2="140" y2="12" stroke="var(--err)" stroke-width="1.8" stroke-dasharray="4 3" stroke-linecap="round"/><polygon points="146,10.5 137.5,8.7 139.3,17.1" fill="var(--err)"/><text x="90" y="4" text-anchor="middle" font-size="8" style="fill:var(--err);font-family:'JetBrains Mono',monospace">le quita el puesto (no es una flecha de electrones)</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Por qué el CO es tan peligroso?</div>
             <div class="mech-step-h">Se pega a la hemoglobina con 200 veces más afinidad que el O₂ y le quita el puesto</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
@@ -1261,11 +1267,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Fíjense en esto: un carbono con 4 grupos quiere ángulos de <strong>109.5°</strong> entre sus enlaces — es su postura "cómoda". Pero en el ciclopropano, los tres carbonos están obligados a formar un <strong>triángulo</strong>, y ahí los ángulos se aprietan hasta <strong>60°</strong>. Imagínense doblar los brazos a la fuerza: eso guarda energía, tensión, y el anillo "quiere" liberarla abriéndose. Por eso, aunque es un alcano, se comporta como si tuviera un doble enlace: se abre y le entran grupos nuevos por los extremos.</div>
           </div>
           <div class="mech-step" id="ms-al-3-1">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="240" height="105" viewBox="0 0 240 105" style="overflow:visible;display:block;margin:0 auto" ><line x1="60" y1="20" x2="20" y2="75" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="75" x2="100" y2="75" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><line x1="100" y1="75" x2="60" y2="20" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><text x="150" y="20" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><circle cx="163" cy="12" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="163" y="15.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><path d="M60,45 Q96.60450124949134,21.418004997965355 140,25" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M60,60 Q70.0,50.0 60,40" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><text x="20" y="90" text-anchor="middle" font-size="11" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C⁺</text><circle cx="20" cy="80" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="20" y="83.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="130" y="95" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H⁺ ataca → se rompe el C−C opuesto</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="240" height="105" viewBox="0 0 240 105" style="overflow:visible;display:block;margin:0 auto" ><line x1="60" y1="20" x2="20" y2="75" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="75" x2="100" y2="75" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><line x1="100" y1="75" x2="60" y2="20" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><text x="150" y="20" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H</text><circle cx="163" cy="12" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="163" y="15.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><path d="M60,45 Q96.60450124949134,21.418004997965355 140,25" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M60,60 Q70.0,50.0 60,40" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><text x="20" y="90" text-anchor="middle" font-size="11" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C⁺</text><circle cx="20" cy="80" r="6" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="20" y="83.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c3t)">+</text><text x="130" y="95" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H⁺ ataca → se rompe uno de los enlaces C−C</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — El H⁺ ataca y el anillo cede</div>
-            <div class="mech-step-h">El H⁺ del HX protona un carbono del anillo, y esa misma tensión rompe el enlace C−C de enfrente</div>
+            <div class="mech-step-h">El H⁺ del HX protona un carbono del anillo, y esa misma tensión rompe uno de los enlaces C−C del anillo</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Acá está la jugada: el <strong>H⁺ del HX</strong> ataca uno de los carbonos del anillo. Y como el anillo ya está tenso, esa tensión ayuda a que el enlace C−C opuesto se rompa heterolíticamente — sin mucho esfuerzo extra. Ahí queda un <strong><a href="#g-carbocation" class="gloss-ref" onclick="jumpToGloss('g-carbocation');return false;">carbocatión</a> en el extremo</strong>. Este es el paso que determina qué tan rápido va toda la reacción.</div>
+            <div class="mech-step-txt">Acá está la jugada: el <strong>H⁺ del HX</strong> ataca uno de los carbonos del anillo. Y como el anillo ya está tenso, esa tensión ayuda a que uno de los enlaces C−C se rompa heterolíticamente — sin mucho esfuerzo extra. Ahí queda un <strong><a href="#g-carbocation" class="gloss-ref" onclick="jumpToGloss('g-carbocation');return false;">carbocatión</a> en el extremo</strong>. Este es el paso que determina qué tan rápido va toda la reacción.</div>
           </div>
           <div class="mech-step" id="ms-al-3-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 0 210 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="60" y1="20" x2="110" y2="55" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><line x1="60" y1="20" x2="20" y2="75" stroke="var(--tx)" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="80" r="7" fill="none" stroke="var(--c3t)" stroke-width="1.6"/><text x="20" y="83.5" text-anchor="middle" font-size="9" font-weight="800" style="fill:var(--c3t)">+</text><text x="170" y="45" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">X</text><circle cx="166.8" cy="42.5" r="1.9" fill="var(--c1t)"/><circle cx="166.8" cy="47.5" r="1.9" fill="var(--c1t)"/><circle cx="172.5" cy="41.8" r="1.9" fill="var(--c1t)"/><circle cx="167.5" cy="41.8" r="1.9" fill="var(--c1t)"/><path d="M163,50 Q92.37979037900317,44.42900430026502 30,78" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><line x1="60" y1="20" x2="110" y2="55" stroke="var(--c2t)" stroke-width="2.6" stroke-linecap="round"/><text x="90" y="95" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">X⁻ ataca el C⁺ → cadena abierta</text></svg></div>
@@ -1724,6 +1730,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="rxn-chev" id="chev-aq-2">▾</span>
       </div>
       <div class="rxn-body" id="body-aq-2">
+        <div class="rxn-exc-note">🧭 <div>Esta es una de las <b>3 excepciones</b> al código de flechas de electrones — <a href="#" class="gloss-ref" onclick="jumpToLegend();return false;">ver la leyenda</a> para repasar por qué la hidrogenación catalítica no se enseña con ese lenguaje.</div></div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol">−<span class="bp">C=C</span>−</span>
@@ -2938,6 +2945,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
+        <button class="rxn-adv-toggle" onclick="toggleAdv(this)">▸ Ver mecanismo avanzado (opcional)</button>
+        <div class="rxn-adv-body">
         <div class="mech-stepper" id="mech-ai-2">
           <div class="mech-top">
             <span class="mech-title-sm">⚗️ Hidrogenación Selectiva de Alquinos</span>
@@ -2974,6 +2983,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Este es el punto que quiero que se les quede grabado: el mismo alquino puede terminar en dos productos totalmente distintos, solo cambiando el reductor. Lindlar les da <em>cis</em> (los dos grupos del mismo lado); Na/NH₃ les da <em>trans</em> (grupos en lados opuestos). Y esa diferencia de geometría no es un detalle cosmético — cambia la función de la molécula por completo. El cuerpo humano metaboliza distinto los ácidos grasos cis y trans, y en los plaguicidas biológicos para café y banano, la geometría del doble enlace es la que decide si la trampa de feromonas funciona o no.</div>
           </div>
         </div><!-- /mech-stepper -->
+        </div><!-- /rxn-adv-body -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃−<span class="bp">C≡C</span>−CH₃</span>
@@ -3765,7 +3775,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">👗</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Con la nitración del benceno y sus derivados salen <strong>nitrocompuestos</strong> que son los precursores del <strong>nylon</strong> — la fibra que usan en medias, ropa deportiva y cuerdas de pesca. En la minería colombiana, el nitrotolueno (TNT) y otros nitroaromáticos se usan como explosivos para voladuras controladas. Y sí, productores colombianos de químicos industriales fabrican estas materias primas.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Con la nitración del benceno y sus derivados salen <strong>nitrocompuestos</strong> que, reducidos a aminas aromáticas, son el punto de partida de <strong>colorantes industriales</strong> y de intermediarios usados en algunas rutas de síntesis de poliamidas como el <strong>nylon</strong> (la fibra que usan en medias, ropa deportiva y cuerdas de pesca). En la minería colombiana, el nitrotolueno (TNT) y otros nitroaromáticos se usan como explosivos para voladuras controladas. Y sí, productores colombianos de químicos industriales fabrican estas materias primas.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -5013,11 +5023,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Ahora la <strong>H₂O se despide</strong> — este es el paso lento, el que manda la velocidad de toda la reacción — y nos queda un carbocatión sp². ¿Con cuál alcohol funciona mejor esto? Con uno de C 3°, porque ahí el R⁺ queda muy estable; en C 1° el carbocatión es tan inestable que la reacción va lenta o de plano no ocurre. Ojo con esto: si un H o un grupo alquilo vecino puede migrar para dar un R⁺ más estable, se <em>trans-posiciona</em> — no se queden solo con el esqueleto original.</div>
           </div>
           <div class="mech-step" id="ms-ao-0-2">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="45" y2="41" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="43.90049779013908" y1="43.35607616398769" x2="73.90049779013908" y2="57.35607616398769" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><line x1="46.09950220986092" y1="38.64392383601231" x2="76.09950220986092" y2="52.64392383601231" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="25" y="33" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><line x1="19" y1="49" x2="23" y2="37" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="1" y="25" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">HSO₄⁻</text><path d="M21,41 Q10.512570837685422,40.88240082724041 7,31" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">Zaitsev: sale el alqueno más sustituido</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="96" viewBox="0 0 190 96" style="overflow:visible;display:block;margin:0 auto" ><line x1="15" y1="55" x2="45" y2="41" stroke="var(--tx)" stroke-width="1.7" stroke-linecap="round"/><line x1="43.90049779013908" y1="43.35607616398769" x2="73.90049779013908" y2="57.35607616398769" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><line x1="46.09950220986092" y1="38.64392383601231" x2="76.09950220986092" y2="52.64392383601231" stroke="var(--c2t)" stroke-width="1.8" stroke-linecap="round"/><text x="25" y="33" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><line x1="19" y1="49" x2="23" y2="37" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="1" y="25" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">HSO₄⁻</text><circle cx="10" cy="18" r="1.7" fill="var(--c1t)"/><circle cx="15" cy="15" r="1.7" fill="var(--c1t)"/><path d="M12,17 Q18,25 23,33" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><path d="M22,38 Q35,46 48,50" fill="none" stroke="var(--arr)" stroke-width="1.6" marker-end="url(#arrFull)"/><text x="85" y="90" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">2 movimientos a la vez: HSO₄⁻ ataca H, el C−H forma el π · Zaitsev: el más sustituido</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Se pierde un H⁺ y manda Zaitsev</div>
-            <div class="mech-step-h">HSO₄⁻ abstrae un Hβ → doble enlace · Zaitsev: elimina H del Cβ con menos H → alqueno más sustituido</div>
+            <div class="mech-step-h">Dos movimientos a la vez: HSO₄⁻ ataca el Hβ mientras el enlace C−H forma el π → doble enlace · Zaitsev: el más sustituido</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Por último, el <strong>HSO₄⁻</strong> le arranca un Hβ al carbocatión y ahí se cierra el doble enlace. ¿Y si hay dos Cβ para escoger? Acá manda Zaitsev: el H se va del carbono que tiene <em>menos hidrógenos</em>, y así nos queda el alqueno más sustituido — el más estable, el mayoritario. El H₂SO₄ queda intacto al final, así que es puro catalizador. Truco de examen: a 180 °C se van por el alqueno; a 140 °C con exceso de ROH compite la formación de éter.</div>
+            <div class="mech-step-txt">Por último, dos cosas pasan casi a la vez: el <strong>HSO₄⁻</strong> le arranca un Hβ al carbocatión, y en el mismo instante el par de electrones de ese enlace C−H se corre para formar el nuevo enlace π — ahí se cierra el doble enlace. ¿Y si hay dos Cβ para escoger? Acá manda Zaitsev: el H se va del carbono que tiene <em>menos hidrógenos</em>, y así nos queda el alqueno más sustituido — el más estable, el mayoritario. El H₂SO₄ queda intacto al final, así que es puro catalizador. Truco de examen: a 180 °C se van por el alqueno; a 140 °C con exceso de ROH compite la formación de éter.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -5992,6 +6002,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
+        <button class="rxn-adv-toggle" onclick="toggleAdv(this)">▸ Ver mecanismo avanzado (opcional)</button>
+        <div class="rxn-adv-body">
         <div class="mech-stepper" id="mech-am-2">
           <div class="mech-top">
             <span class="mech-title-sm">⚗️ Diazotación y Reacción de Sandmeyer</span>
@@ -6028,6 +6040,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">La <strong>Reacción de Sandmeyer</strong> usa sales de cobre(I) como catalizador para reemplazar ese −N₂⁺ por otros grupos: −Cl, −Br o −CN. ¿Por qué la reacción ocurre así de fácil? Porque el producto estrella es <strong>N₂ gaseoso</strong> — nitrógeno molecular — que se escapa de la solución sin vuelta atrás y "jala" todo hacia adelante. Es como destapar una gaseosa: el gas sale y ya no hay quién lo devuelva. Ojo con esto: para meter −F se usa otra reacción (Balz-Schiemann, con HBF₄ y calor), y para −OH basta con hidrolizar en agua caliente, sin cobre de por medio — el cobre es específico de Sandmeyer.</div>
           </div>
         </div><!-- /mech-stepper -->
+        </div><!-- /rxn-adv-body -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">C₆H₅<span class="bp">NH₂</span> + NaNO₂/HCl</span>
@@ -6530,6 +6543,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
+        <button class="rxn-adv-toggle" onclick="toggleAdv(this)">▸ Ver mecanismo avanzado (opcional)</button>
+        <div class="rxn-adv-body">
         <div class="mech-stepper" id="mech-cb-2">
           <div class="mech-top">
             <span class="mech-title-sm">⚗️ Reacción de Grignard — Mecanismo</span>
@@ -6566,6 +6581,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Truco de examen: nunca metan agua directo mientras el Grignard está reaccionando — se los apaga al toque. El agua entra AL FINAL, en la hidrólisis (el "workup"), después de que ya se formó el alcóxido. Ahí el H₃O⁺ protona el oxígeno y les queda el alcohol — primario, secundario o terciario, según de qué carbonilo hayan partido.</div>
           </div>
         </div><!-- /mech-stepper -->
+        </div><!-- /rxn-adv-body -->
         <div class="mol-cmp">
           <div class="mol-cmp-card">
             <span class="mol-cmp-formula">CH₃<span class="bp">MgBr</span>  +  CH₃<span class="bp">CHO</span></span>
@@ -7605,6 +7621,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <div class="mol-cmp-name">amida (2° NH₃ neutraliza HCl)</div>
             </div>
           </div>
+        </div>
+        <button class="rxn-adv-toggle" onclick="toggleAdv(this)">▸ Ver mecanismo avanzado (opcional)</button>
+        <div class="rxn-adv-body">
+        <div class="mol-cmp" style="flex-direction:column;gap:6px;align-items:stretch">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <div class="mol-cmp-card" style="flex:1;min-width:160px">
               <span class="mol-cmp-formula"><span class="bp">LiAlH(OtBu)₃</span>  (reductor débil)</span>
@@ -7628,6 +7648,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             </div>
           </div>
         </div>
+        </div><!-- /rxn-adv-body -->
         <div class="rxn-cond">Cl⁻ es el mejor grupo saliente de los derivados: los cloruros son los más reactivos
 Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
         <div class="rxn-regla">📌 Ojo con la estequiometría de la aminólisis: hacen falta 2 NH₃, uno forma la amida y el otro neutraliza el HCl que se libera</div>
@@ -7782,6 +7803,8 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
 Hidrólisis requiere condición fuerte (H⁺ o OH⁻ + calor)
 LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</div>
         <div class="rxn-regla">📌 No lo confundan: con LiAlH₄ una amida da amina (no alcohol) — el N se queda pegado y sale RCH₂NH₂</div>
+        <button class="rxn-adv-toggle" onclick="toggleAdv(this)">▸ Ver mecanismo avanzado (opcional)</button>
+        <div class="rxn-adv-body">
         <div class="attn">
           <div style="font-size:.7rem;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">🔍 Dato relacionado — no es de amidas: Condensación de Claisen</div>
           Así se autocondensa un <strong>éster</strong> (un pariente de la amida, no la amida misma): el enolato de una molécula de éster ataca el C=O de otra → β-cetoéster.
@@ -7797,6 +7820,7 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
             </div>
           </div>
         </div>
+        </div><!-- /rxn-adv-body -->
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 76 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c3t)">NH₂</tspan></text></svg> + H₂O/H⁺/Δ</span>
@@ -7996,6 +8020,12 @@ function toggleLegend(){
   const open=body.classList.toggle('open');
   chev.classList.toggle('open',open);
 }
+function jumpToLegend(){
+  const body=document.getElementById('legend-body');
+  const chev=document.getElementById('legend-chev');
+  if(!body.classList.contains('open')){body.classList.add('open');chev.classList.add('open');}
+  document.getElementById('legend-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
 
 /* ── ACCORDION ── */
 function toggleRxn(id){
@@ -8033,6 +8063,11 @@ function toggleCalc(btn){
   const ans=btn.nextElementSibling;
   const open=ans.classList.toggle('open');
   btn.textContent=open?'Ocultar respuesta':'Ver respuesta';
+}
+function toggleAdv(btn){
+  const body=btn.nextElementSibling;
+  const open=body.classList.toggle('open');
+  btn.textContent=(open?'▾ Ocultar':'▸ Ver')+' mecanismo avanzado (opcional)';
 }
 
 /* ── QUIZ ── */
