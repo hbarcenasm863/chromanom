@@ -62,19 +62,51 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .gloss-term-d{font-size:.76rem;color:var(--dim);line-height:1.55}
 .gloss-term-d b{color:var(--tx)}
 
-/* ── TABS ── */
-.tabs-menu{margin-bottom:20px}
+/* ── TABS (vidrio esmerilado, estilo iOS) ── */
+.tabs-menu{margin-bottom:20px;position:relative}
+.tabs-menu::before{
+  content:'';position:absolute;inset:-20px -12px;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle 220px at 8% 0%,rgba(22,101,52,.10),transparent),
+    radial-gradient(circle 220px at 95% 15%,rgba(180,83,9,.10),transparent),
+    radial-gradient(circle 220px at 15% 95%,rgba(124,58,237,.08),transparent),
+    radial-gradient(circle 220px at 90% 90%,rgba(204,121,167,.10),transparent);
+  filter:blur(6px);
+}
 .tabs-cat{margin-bottom:16px}
 .tabs-cat-lbl{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:8px;padding-left:2px}
 .tabs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.tab-btn{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:11px 13px;border:1.5px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-family:'Outfit',sans-serif;cursor:pointer;transition:all .18s;text-align:left;width:100%}
-.tab-btn:hover{transform:translateY(-2px);box-shadow:var(--sh)}
+.tab-btn{
+  display:flex;flex-direction:column;align-items:flex-start;gap:3px;
+  padding:12px 14px;border:1px solid rgba(255,255,255,.6);border-radius:16px;
+  background:rgba(255,255,255,.6);color:var(--dim);font-family:'Outfit',sans-serif;
+  cursor:pointer;text-align:left;width:100%;
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 14px rgba(26,110,168,.07);
+  transition:background .18s,box-shadow .18s,border-color .18s,transform .16s cubic-bezier(.34,1.56,.64,1);
+}
+.tab-btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 10px 26px rgba(26,110,168,.14)}
+.tab-btn:active{transform:scale(.98)}
 .tab-btn.active{background:var(--c3b);border-color:var(--c3);color:var(--c3t)}
-.tab-ico{font-size:1.25rem;line-height:1}
+.tab-ico{
+  font-size:1.15rem;line-height:1;width:36px;height:36px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;border-radius:11px;
+  margin-bottom:2px;box-shadow:inset 0 1px 1px rgba(255,255,255,.5),inset 0 -2px 3px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.12);
+}
 .tab-name{font-size:.83rem;font-weight:700;color:var(--tx)}
 .tab-btn.active .tab-name{color:var(--c3t)}
 .tab-desc{font-size:.82rem;color:var(--dimmer);line-height:1.35}
 .tab-count{font-size:.63rem;color:var(--dim);opacity:.75;margin-top:1px}
+/* Insignia de color por grupo (coincide con el .gb-pill que se ve al abrir cada tarjeta) */
+.tb-al .tab-ico{background:linear-gradient(135deg,var(--c2b),var(--c2))}
+.tb-aq .tab-ico{background:linear-gradient(135deg,var(--c3b),var(--c3))}
+.tb-ar .tab-ico{background:linear-gradient(135deg,var(--c4b),var(--c4))}
+.tb-hg .tab-ico{background:linear-gradient(135deg,#ede9fe,#7c3aed)}
+.tb-ao .tab-ico{background:linear-gradient(135deg,var(--c4b),var(--c4))}
+.tb-am .tab-ico{background:linear-gradient(135deg,#e0f2fe,#0ea5e9)}
+.tb-cb .tab-ico{background:linear-gradient(135deg,#fef3c7,#b45309)}
+.tb-ac .tab-ico{background:linear-gradient(135deg,#fee2e2,#dc2626)}
+.tb-dv .tab-ico{background:linear-gradient(135deg,#dbeafe,#3b82f6)}
 .tab-panel{display:none}
 .tab-panel.active{display:block;animation:fadeIn .22s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -551,22 +583,22 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tabs-cat">
       <div class="tabs-cat-lbl">🔗 Hidrocarburos</div>
       <div class="tabs-grid">
-        <button class="tab-btn active" data-tab="alcanos" onclick="switchTab('alcanos')">
+        <button class="tab-btn active tb-al" data-tab="alcanos" onclick="switchTab('alcanos')">
           <span class="tab-ico">🔗</span><span class="tab-name">Alcanos &amp; Cicloalcanos</span>
           <span class="tab-desc">Sustitución radical, combustión</span>
           <span class="tab-count">4 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="alquenos" onclick="switchTab('alquenos')">
+        <button class="tab-btn tb-aq" data-tab="alquenos" onclick="switchTab('alquenos')">
           <span class="tab-ico">⚡</span><span class="tab-name">Alquenos</span>
           <span class="tab-desc">Adición electrofílica, oxidación, polimerización</span>
           <span class="tab-count">7 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="alquinos" onclick="switchTab('alquinos')">
+        <button class="tab-btn tb-aq" data-tab="alquinos" onclick="switchTab('alquinos')">
           <span class="tab-ico">⚛️</span><span class="tab-name">Alquinos</span>
           <span class="tab-desc">Adición al triple enlace</span>
           <span class="tab-count">5 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="aromaticos" onclick="switchTab('aromaticos')">
+        <button class="tab-btn tb-ar" data-tab="aromaticos" onclick="switchTab('aromaticos')">
           <span class="tab-ico">🔬</span><span class="tab-name">Aromáticos</span>
           <span class="tab-desc">Sustitución electrofílica aromática (SEA)</span>
           <span class="tab-count">5 reacciones</span>
@@ -576,7 +608,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tabs-cat">
       <div class="tabs-cat-lbl">🧊 Halogenados</div>
       <div class="tabs-grid">
-        <button class="tab-btn" data-tab="halogenuros" onclick="switchTab('halogenuros')">
+        <button class="tab-btn tb-hg" data-tab="halogenuros" onclick="switchTab('halogenuros')">
           <span class="tab-ico">🧊</span><span class="tab-name">Halogenuros</span>
           <span class="tab-desc">Sustitución (SN1/SN2) y eliminación (E1/E2)</span>
           <span class="tab-count">3 reacciones</span>
@@ -586,22 +618,22 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tabs-cat">
       <div class="tabs-cat-lbl">💧 Compuestos Oxigenados</div>
       <div class="tabs-grid">
-        <button class="tab-btn" data-tab="alcoholes" onclick="switchTab('alcoholes')">
+        <button class="tab-btn tb-ao" data-tab="alcoholes" onclick="switchTab('alcoholes')">
           <span class="tab-ico">🍶</span><span class="tab-name">Alcoholes</span>
           <span class="tab-desc">Oxidación, deshidratación, sustitución</span>
           <span class="tab-count">4 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="carbonilo" onclick="switchTab('carbonilo')">
+        <button class="tab-btn tb-cb" data-tab="carbonilo" onclick="switchTab('carbonilo')">
           <span class="tab-ico">✨</span><span class="tab-name">Aldehídos y Cetonas</span>
           <span class="tab-desc">Adición nucleofílica, Tollens/Fehling, aldol</span>
           <span class="tab-count">5 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="acidos" onclick="switchTab('acidos')">
+        <button class="tab-btn tb-ac" data-tab="acidos" onclick="switchTab('acidos')">
           <span class="tab-ico">🧪</span><span class="tab-name">Ácidos Carboxílicos</span>
           <span class="tab-desc">Esterificación, reducción, formación de derivados</span>
           <span class="tab-count">2 reacciones</span>
         </button>
-        <button class="tab-btn" data-tab="derivados" onclick="switchTab('derivados')">
+        <button class="tab-btn tb-dv" data-tab="derivados" onclick="switchTab('derivados')">
           <span class="tab-ico">🔗</span><span class="tab-name">Derivados de Ácidos</span>
           <span class="tab-desc">Hidrólisis, transesterificación</span>
           <span class="tab-count">3 reacciones</span>
@@ -611,7 +643,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div class="tabs-cat">
       <div class="tabs-cat-lbl">🧬 Compuestos Nitrogenados</div>
       <div class="tabs-grid">
-        <button class="tab-btn" data-tab="aminas" onclick="switchTab('aminas')">
+        <button class="tab-btn tb-am" data-tab="aminas" onclick="switchTab('aminas')">
           <span class="tab-ico">🧬</span><span class="tab-name">Aminas</span>
           <span class="tab-desc">Basicidad, reducción de nitro, diazotación</span>
           <span class="tab-count">3 reacciones</span>
