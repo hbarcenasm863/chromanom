@@ -198,32 +198,32 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .attn{background:#fffbea;border:1px solid rgba(234,179,8,.35);border-radius:var(--rs);padding:10px 14px;font-size:.79rem;color:#92400e;line-height:1.6;margin-bottom:12px}
 
 /* ── VISUAL EQUATION (meq) ── */
-.meq{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  padding:13px 15px;background:var(--surf);border:1.5px solid var(--brd);
+.meq{display:flex;align-items:center;justify-content:center;gap:18px;row-gap:14px;flex-wrap:wrap;
+  padding:22px 20px;background:var(--surf);border:1.5px solid var(--brd);
   border-radius:var(--r);margin-bottom:13px}
-.meq-side{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.meq-mol{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--tx)}
-.meq-plus{font-size:.82rem;color:var(--dimmer);padding:0 1px}
-.meq-reag{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--c3t);
-  font-weight:700;background:var(--c3b);border-radius:5px;padding:2px 9px}
+.meq-side{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+.meq-mol{font-family:'JetBrains Mono',monospace;font-size:1.32rem;font-weight:700;color:var(--tx)}
+.meq-plus{font-size:1.2rem;color:var(--dimmer);padding:0 2px}
+.meq-reag{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--c3t);
+  font-weight:700;background:var(--c3b);border-radius:6px;padding:3px 12px}
 .meq-arr{display:flex;align-items:center;flex-shrink:0}
 .meq-cond{display:none} /* replaced by SVG */
 .meq-line{display:none} /* replaced by SVG */
-.meq-prod{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--c2t);font-weight:700}
+.meq-prod{font-family:'JetBrains Mono',monospace;font-size:1.32rem;color:var(--c2t);font-weight:700}
 /* Atom highlight classes */
 .bp{color:var(--c3t);font-weight:900;text-decoration:none} /* π bond / breaking bond */
 .hn{color:var(--c4t);font-weight:900;background:var(--c4b);
   border-radius:3px;padding:0 3px;font-style:normal} /* new/changed atom or group */
 
 /* ── MOLECULE COMPARISON CARD ── */
-.mol-cmp{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+.mol-cmp{display:flex;align-items:center;justify-content:center;gap:12px;row-gap:10px;flex-wrap:wrap;
   background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);
-  padding:10px 12px;margin-bottom:13px;overflow-x:auto}
+  padding:16px 14px;margin-bottom:13px;overflow-x:auto}
 .mol-cmp-card{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--rs);
-  padding:9px 13px;text-align:center;flex-shrink:0}
-.mol-cmp-formula{font-family:'JetBrains Mono',monospace;font-size:.86rem;color:var(--tx);
+  padding:11px 16px;text-align:center;flex-shrink:0}
+.mol-cmp-formula{font-family:'JetBrains Mono',monospace;font-size:1.08rem;font-weight:700;color:var(--tx);
   line-height:1.6;display:block}
-.mol-cmp-name{font-size:.62rem;color:var(--dimmer);margin-top:3px;font-family:'Outfit',sans-serif}
+.mol-cmp-name{font-size:.68rem;color:var(--dimmer);margin-top:3px;font-family:'Outfit',sans-serif}
 .ox-badge{display:inline-block;font-size:.6rem;font-weight:800;font-family:'JetBrains Mono',monospace;
   color:var(--c3t);background:var(--c3b);border-radius:20px;padding:1px 8px;margin-top:4px}
 .rxn-extra{display:flex;flex-direction:column;gap:8px;margin:12px 0}
@@ -238,9 +238,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-adv-toggle:hover{color:var(--tx);border-color:var(--tx)}
 .rxn-adv-body{display:none;margin-top:8px}
 .rxn-adv-body.open{display:block}
-.mol-cmp-arr{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c2t);
+.mol-cmp-arr{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--c2t);
   text-align:center;flex-shrink:0}
-.mol-cmp-reag{font-size:.65rem;color:var(--c3t);font-weight:700}
+.mol-cmp-reag{font-size:.72rem;color:var(--c3t);font-weight:700}
 
 /* ── ACCORDION OPEN ANIMATION ── */
 .rxn-body.open{display:block;animation:bodySlide .22s ease}
@@ -286,10 +286,10 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .mech-step-txt strong{color:var(--tx)}
 .mech-step-txt em{color:var(--c3t);font-style:normal;font-weight:700}
 .mech-step-txt .nc{color:var(--c2t);font-weight:700}
-.mech-vis{background:var(--surf2);border-radius:var(--rs);padding:12px 10px;
+.mech-vis{background:var(--surf2);border-radius:var(--rs);padding:16px 12px;
   display:flex;justify-content:center;align-items:center;
   min-height:85px;margin-bottom:12px;overflow-x:auto}
-.mech-vis svg{flex-shrink:0}
+.mech-vis svg{flex-shrink:0;zoom:1.35}
 /* ── LEYENDA DE DIAGRAMAS (Mayer: señalización + pre-training) ── */
 .legend-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);margin-bottom:20px;overflow:hidden;box-shadow:var(--sh)}
 .legend-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;background:var(--surf2);transition:background .15s;gap:10px}
@@ -7873,15 +7873,15 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 <script>
 /* ── SVG ARROWS ── */
 function mkArr(cond,w,compact){
-  const H=compact?28:36, ay=compact?20:26, hs=compact?5:7, fs=compact?7.5:8.5;
+  const H=compact?34:48, ay=compact?24:34, hs=compact?7:10, fs=compact?9.5:12.5;
   const lx2=w-hs*2-3;
   const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const condEl=cond
-    ?`<text x="${w/2}" y="${ay-7}" text-anchor="middle" font-size="${fs}" style="fill:var(--dimmer)" font-family="'JetBrains Mono',monospace">${esc(cond)}</text>`
+    ?`<text x="${w/2}" y="${ay-9}" text-anchor="middle" font-size="${fs}" font-weight="700" style="fill:var(--c3t)" font-family="'JetBrains Mono',monospace">${esc(cond)}</text>`
     :'';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${H}" viewBox="0 0 ${w} ${H}" style="flex-shrink:0;overflow:visible;display:block">
     ${condEl}
-    <line x1="3" y1="${ay}" x2="${lx2}" y2="${ay}" style="stroke:var(--c2t)" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="3" y1="${ay}" x2="${lx2}" y2="${ay}" style="stroke:var(--c2t)" stroke-width="2.4" stroke-linecap="round"/>
     <polygon points="${w-2},${ay} ${lx2},${ay-hs} ${lx2},${ay+hs}" style="fill:var(--c2t)"/>
   </svg>`;
 }
@@ -7917,7 +7917,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
-    el.innerHTML=mkArr(cond,110,false);
+    el.innerHTML=mkArr(cond,175,false);
   });
   /* 2. Extraer →[cond] de .rxn-ex-ea y marcar el siguiente .rxn-arrow */
   document.querySelectorAll('.rxn-ex-ea').forEach(el=>{
@@ -7931,7 +7931,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
   /* 3. .rxn-arrow → SVG (con condición si existe) */
   document.querySelectorAll('.rxn-arrow').forEach(el=>{
-    el.innerHTML=mkArr(el.dataset.cond||'',70,true);
+    el.innerHTML=mkArr(el.dataset.cond||'',100,true);
   });
   /* 4. .mol-cmp-arr: reemplazar ──[X]──→ y ──────→ por SVG */
   document.querySelectorAll('.mol-cmp-arr > div:not(.mol-cmp-reag)').forEach(d=>{
@@ -7940,7 +7940,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const m=t.match(/──(?:\[([^\]]+)\])?──?→/)||t.match(/^[─]+→$/);
       if(m){
         const cond=m[1]||'';
-        d.innerHTML=mkArr(cond,68,true);
+        d.innerHTML=mkArr(cond,95,true);
         d.style.cssText='display:flex;align-items:center;justify-content:center';
       }
     }
