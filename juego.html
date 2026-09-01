@@ -718,7 +718,19 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <summary class="drill-summary">🏗️ Practicar constructor por familia ▾</summary>
       <div class="drill-pills">
         <button class="drill-pill" onclick="openLevelModal('constructor')">Todas las moléculas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Solo aromáticos (construir)</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_alcanos')">Alcanos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_alquenos')">Alquenos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_alquinos')">Alquinos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_alcoholes')">Alcoholes</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_cetonas')">Cetonas</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_aldehidos')">Aldehídos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_acidos')">Ácidos Carboxílicos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_esteres')">Ésteres</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_eteres')">Éteres</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_amidas')">Amidas</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_nitrilos')">Nitrilos</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_aminas')">Aminas</button>
+        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Aromáticos (construir)</button>
       </div>
     </details>
     <details class="drill-section">
@@ -4327,6 +4339,18 @@ const NIVEL_TOPICS={
   nitrogenados: ['amidas','nitrilos','aminas'],
   completo:     null,
   constructor:  ['constructor'],
+  constructor_alcanos:    null,
+  constructor_alquenos:   null,
+  constructor_alquinos:   null,
+  constructor_alcoholes:  null,
+  constructor_aldehidos:  null,
+  constructor_cetonas:    null,
+  constructor_acidos:     null,
+  constructor_esteres:    null,
+  constructor_eteres:     null,
+  constructor_amidas:     null,
+  constructor_nitrilos:   null,
+  constructor_aminas:     null,
   // Por grupo funcional individual
   alcanos:    ['alcanos'],
   alquenos:   ['alquenos'],
@@ -4376,6 +4400,18 @@ const NIVEL_LABELS={
   aminas:    'Aminas',
   benceno:   'Aromáticos',
   constructor_aromaticos: '🏗️ Constructor — Solo Aromáticos',
+  constructor_alcanos:    '🏗️ Constructor — Alcanos',
+  constructor_alquenos:   '🏗️ Constructor — Alquenos',
+  constructor_alquinos:   '🏗️ Constructor — Alquinos',
+  constructor_alcoholes:  '🏗️ Constructor — Alcoholes',
+  constructor_aldehidos:  '🏗️ Constructor — Aldehídos',
+  constructor_cetonas:    '🏗️ Constructor — Cetonas',
+  constructor_acidos:     '🏗️ Constructor — Ácidos Carboxílicos',
+  constructor_esteres:    '🏗️ Constructor — Ésteres',
+  constructor_eteres:     '🏗️ Constructor — Éteres',
+  constructor_amidas:     '🏗️ Constructor — Amidas',
+  constructor_nitrilos:   '🏗️ Constructor — Nitrilos',
+  constructor_aminas:     '🏗️ Constructor — Aminas',
   reacciones:      '🧪 Reacciones Orgánicas',
   rxn_hc:          '🧪 Reacciones — Hidrocarburos',
   rxn_alcanos:     '🧪 Reacciones — Alcanos',
@@ -4389,6 +4425,13 @@ const NIVEL_LABELS={
   rxn_acidos:      '🧪 Reacciones — Ácidos Carboxílicos',
   rxn_derivados:   '🧪 Reacciones — Derivados de AC',
 };
+// Mapea el sufijo de nivel 'constructor_<familia>' al topic real de las preguntas 'build'
+const CONSTRUCTOR_FAMILIA_TOPIC={
+  constructor_aromaticos: 'benceno',
+};
+// Topics de familia válidos para preguntas 'build' de construcción de moléculas
+// (excluye los topics rxn_* usados por el constructor dentro del módulo de reacciones)
+const CONSTRUCTOR_FAMILIAS=['alcanos','alquenos','alquinos','alcoholes','aldehidos','cetonas','acidos','esteres','eteres','amidas','nitrilos','aminas','benceno'];
 
 const CIRCUMFERENCE=138.2;
 
@@ -4497,8 +4540,11 @@ function startGame(){
   } else if(currentLevel.startsWith('rxn_')||currentLevel==='reacciones'){
     const _t=NIVEL_TOPICS[currentLevel]||[currentLevel];
     pool=QBANK.filter(q=>q.type==='rxnq'&&_t.includes(q.topic));
-  } else if(currentLevel==='constructor_aromaticos'){
-    pool=QBANK.filter(q=>q.type==='build'&&q.topic==='benceno');
+  } else if(currentLevel.startsWith('constructor_')){
+    const _fam=CONSTRUCTOR_FAMILIA_TOPIC[currentLevel]||currentLevel.slice('constructor_'.length);
+    pool=QBANK.filter(q=>q.type==='build'&&q.topic===_fam);
+  } else if(currentLevel==='constructor'){
+    pool=QBANK.filter(q=>q.type==='build'&&CONSTRUCTOR_FAMILIAS.includes(q.topic));
   } else {
     pool=NIVEL_TOPICS[currentLevel]
       ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
@@ -5512,68 +5558,68 @@ document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='z'){
 // ── QBANK: build questions ──
 const QBANK_BUILD=[
   // Alcanos
-  {type:'build',buildKey:'etano',topic:'constructor',q:'Construye la estructura del <strong>etano</strong> (C₂H₆)'},
-  {type:'build',buildKey:'propano',topic:'constructor',q:'Construye la estructura del <strong>propano</strong> (C₃H₈)'},
-  {type:'build',buildKey:'butano',topic:'constructor',q:'Construye la estructura del <strong>butano</strong> (C₄H₁₀)'},
-  {type:'build',buildKey:'pentano',topic:'constructor',q:'Construye la estructura del <strong>pentano</strong> (C₅H₁₂)'},
-  {type:'build',buildKey:'hexano',topic:'constructor',q:'Construye la estructura del <strong>hexano</strong> (C₆H₁₄)'},
-  {type:'build',buildKey:'metilbutano',topic:'constructor',q:'Construye la estructura del <strong>2-metilbutano</strong> (C₅H₁₂)'},
-  {type:'build',buildKey:'metilpentano',topic:'constructor',q:'Construye la estructura del <strong>2-metilpentano</strong> (C₆H₁₄)'},
-  {type:'build',buildKey:'metilpentano3',topic:'constructor',q:'Construye la estructura del <strong>3-metilpentano</strong> (C₆H₁₄)'},
-  {type:'build',buildKey:'dimetilpropano',topic:'constructor',q:'Construye la estructura del <strong>2,2-dimetilpropano</strong> (C₅H₁₂)'},
-  {type:'build',buildKey:'dimetilpentano24',topic:'constructor',q:'Construye la estructura del <strong>2,4-dimetilpentano</strong> (C₇H₁₆)'},
+  {type:'build',buildKey:'etano',topic:'alcanos',q:'Construye la estructura del <strong>etano</strong> (C₂H₆)'},
+  {type:'build',buildKey:'propano',topic:'alcanos',q:'Construye la estructura del <strong>propano</strong> (C₃H₈)'},
+  {type:'build',buildKey:'butano',topic:'alcanos',q:'Construye la estructura del <strong>butano</strong> (C₄H₁₀)'},
+  {type:'build',buildKey:'pentano',topic:'alcanos',q:'Construye la estructura del <strong>pentano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'hexano',topic:'alcanos',q:'Construye la estructura del <strong>hexano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'metilbutano',topic:'alcanos',q:'Construye la estructura del <strong>2-metilbutano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'metilpentano',topic:'alcanos',q:'Construye la estructura del <strong>2-metilpentano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'metilpentano3',topic:'alcanos',q:'Construye la estructura del <strong>3-metilpentano</strong> (C₆H₁₄)'},
+  {type:'build',buildKey:'dimetilpropano',topic:'alcanos',q:'Construye la estructura del <strong>2,2-dimetilpropano</strong> (C₅H₁₂)'},
+  {type:'build',buildKey:'dimetilpentano24',topic:'alcanos',q:'Construye la estructura del <strong>2,4-dimetilpentano</strong> (C₇H₁₆)'},
   // Alquenos
-  {type:'build',buildKey:'prop1eno',topic:'constructor',q:'Construye la estructura del <strong>prop-1-eno</strong> (C₃H₆)'},
-  {type:'build',buildKey:'but1eno',topic:'constructor',q:'Construye la estructura del <strong>but-1-eno</strong> (C₄H₈)'},
-  {type:'build',buildKey:'but2eno',topic:'constructor',q:'Construye la estructura del <strong>but-2-eno</strong> (C₄H₈)'},
-  {type:'build',buildKey:'pent2eno',topic:'constructor',q:'Construye la estructura del <strong>pent-2-eno</strong> (C₅H₁₀)'},
-  {type:'build',buildKey:'buta13dieno',topic:'constructor',q:'Construye la estructura del <strong>buta-1,3-dieno</strong> (C₄H₆)'},
+  {type:'build',buildKey:'prop1eno',topic:'alquenos',q:'Construye la estructura del <strong>prop-1-eno</strong> (C₃H₆)'},
+  {type:'build',buildKey:'but1eno',topic:'alquenos',q:'Construye la estructura del <strong>but-1-eno</strong> (C₄H₈)'},
+  {type:'build',buildKey:'but2eno',topic:'alquenos',q:'Construye la estructura del <strong>but-2-eno</strong> (C₄H₈)'},
+  {type:'build',buildKey:'pent2eno',topic:'alquenos',q:'Construye la estructura del <strong>pent-2-eno</strong> (C₅H₁₀)'},
+  {type:'build',buildKey:'buta13dieno',topic:'alquenos',q:'Construye la estructura del <strong>buta-1,3-dieno</strong> (C₄H₆)'},
   // Alquinos
-  {type:'build',buildKey:'but2ino',topic:'constructor',q:'Construye la estructura del <strong>but-2-ino</strong> (C₄H₆)'},
-  {type:'build',buildKey:'pent1ino',topic:'constructor',q:'Construye la estructura del <strong>pent-1-ino</strong> (C₅H₈)'},
-  {type:'build',buildKey:'hex1ino',topic:'constructor',q:'Construye la estructura del <strong>hex-1-ino</strong> (C₆H₁₀)'},
-  {type:'build',buildKey:'hex3ino',topic:'constructor',q:'Construye la estructura del <strong>hex-3-ino</strong> (C₆H₁₀)'},
+  {type:'build',buildKey:'but2ino',topic:'alquinos',q:'Construye la estructura del <strong>but-2-ino</strong> (C₄H₆)'},
+  {type:'build',buildKey:'pent1ino',topic:'alquinos',q:'Construye la estructura del <strong>pent-1-ino</strong> (C₅H₈)'},
+  {type:'build',buildKey:'hex1ino',topic:'alquinos',q:'Construye la estructura del <strong>hex-1-ino</strong> (C₆H₁₀)'},
+  {type:'build',buildKey:'hex3ino',topic:'alquinos',q:'Construye la estructura del <strong>hex-3-ino</strong> (C₆H₁₀)'},
   // Alcoholes
-  {type:'build',buildKey:'etanol',topic:'constructor',q:'Construye la estructura del <strong>etanol</strong> (C₂H₆O)'},
-  {type:'build',buildKey:'propan1ol',topic:'constructor',q:'Construye la estructura del <strong>propan-1-ol</strong> (C₃H₈O)'},
-  {type:'build',buildKey:'propan2ol',topic:'constructor',q:'Construye la estructura del <strong>propan-2-ol</strong> (C₃H₈O)'},
-  {type:'build',buildKey:'butan1ol',topic:'constructor',q:'Construye la estructura del <strong>butan-1-ol</strong> (C₄H₁₀O)'},
-  {type:'build',buildKey:'butan2ol',topic:'constructor',q:'Construye la estructura del <strong>butan-2-ol</strong> (C₄H₁₀O)'},
-  {type:'build',buildKey:'pentan2ol',topic:'constructor',q:'Construye la estructura del <strong>pentan-2-ol</strong> (C₅H₁₂O)'},
+  {type:'build',buildKey:'etanol',topic:'alcoholes',q:'Construye la estructura del <strong>etanol</strong> (C₂H₆O)'},
+  {type:'build',buildKey:'propan1ol',topic:'alcoholes',q:'Construye la estructura del <strong>propan-1-ol</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'propan2ol',topic:'alcoholes',q:'Construye la estructura del <strong>propan-2-ol</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'butan1ol',topic:'alcoholes',q:'Construye la estructura del <strong>butan-1-ol</strong> (C₄H₁₀O)'},
+  {type:'build',buildKey:'butan2ol',topic:'alcoholes',q:'Construye la estructura del <strong>butan-2-ol</strong> (C₄H₁₀O)'},
+  {type:'build',buildKey:'pentan2ol',topic:'alcoholes',q:'Construye la estructura del <strong>pentan-2-ol</strong> (C₅H₁₂O)'},
   // Aldehídos
-  {type:'build',buildKey:'etanal',topic:'constructor',q:'Construye la estructura del <strong>etanal</strong> (C₂H₄O)'},
-  {type:'build',buildKey:'propanal',topic:'constructor',q:'Construye la estructura del <strong>propanal</strong> (C₃H₆O)'},
-  {type:'build',buildKey:'butanal',topic:'constructor',q:'Construye la estructura del <strong>butanal</strong> (C₄H₈O)'},
-  {type:'build',buildKey:'pentanal',topic:'constructor',q:'Construye la estructura del <strong>pentanal</strong> (C₅H₁₀O)'},
+  {type:'build',buildKey:'etanal',topic:'aldehidos',q:'Construye la estructura del <strong>etanal</strong> (C₂H₄O)'},
+  {type:'build',buildKey:'propanal',topic:'aldehidos',q:'Construye la estructura del <strong>propanal</strong> (C₃H₆O)'},
+  {type:'build',buildKey:'butanal',topic:'aldehidos',q:'Construye la estructura del <strong>butanal</strong> (C₄H₈O)'},
+  {type:'build',buildKey:'pentanal',topic:'aldehidos',q:'Construye la estructura del <strong>pentanal</strong> (C₅H₁₀O)'},
   // Cetonas
-  {type:'build',buildKey:'propan2ona',topic:'constructor',q:'Construye la estructura de la <strong>propan-2-ona</strong> (C₃H₆O)'},
-  {type:'build',buildKey:'butan2ona',topic:'constructor',q:'Construye la estructura de la <strong>butan-2-ona</strong> (C₄H₈O)'},
-  {type:'build',buildKey:'pentan3ona',topic:'constructor',q:'Construye la estructura de la <strong>pentan-3-ona</strong> (C₅H₁₀O)'},
-  {type:'build',buildKey:'cuatroMetilpentan2ona',topic:'constructor',q:'Construye la estructura de la <strong>4-metilpentan-2-ona</strong> (C₆H₁₂O)'},
+  {type:'build',buildKey:'propan2ona',topic:'cetonas',q:'Construye la estructura de la <strong>propan-2-ona</strong> (C₃H₆O)'},
+  {type:'build',buildKey:'butan2ona',topic:'cetonas',q:'Construye la estructura de la <strong>butan-2-ona</strong> (C₄H₈O)'},
+  {type:'build',buildKey:'pentan3ona',topic:'cetonas',q:'Construye la estructura de la <strong>pentan-3-ona</strong> (C₅H₁₀O)'},
+  {type:'build',buildKey:'cuatroMetilpentan2ona',topic:'cetonas',q:'Construye la estructura de la <strong>4-metilpentan-2-ona</strong> (C₆H₁₂O)'},
   // Ácidos
-  {type:'build',buildKey:'acidoetanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido etanoico</strong> (C₂H₄O₂)'},
-  {type:'build',buildKey:'acidopropanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido propanoico</strong> (C₃H₆O₂)'},
-  {type:'build',buildKey:'acidobutanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido butanoico</strong> (C₄H₈O₂)'},
-  {type:'build',buildKey:'acidopentanoico',topic:'constructor',q:'Construye la estructura del <strong>ácido pentanoico</strong> (C₅H₁₀O₂)'},
+  {type:'build',buildKey:'acidoetanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido etanoico</strong> (C₂H₄O₂)'},
+  {type:'build',buildKey:'acidopropanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido propanoico</strong> (C₃H₆O₂)'},
+  {type:'build',buildKey:'acidobutanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido butanoico</strong> (C₄H₈O₂)'},
+  {type:'build',buildKey:'acidopentanoico',topic:'acidos',q:'Construye la estructura del <strong>ácido pentanoico</strong> (C₅H₁₀O₂)'},
   // Ésteres
-  {type:'build',buildKey:'etanoatoMetilo',topic:'constructor',q:'Construye la estructura del <strong>etanoato de metilo</strong> (C₃H₆O₂)'},
-  {type:'build',buildKey:'etanoatoEtilo',topic:'constructor',q:'Construye la estructura del <strong>etanoato de etilo</strong> (C₄H₈O₂)'},
-  {type:'build',buildKey:'propanoatoMetilo',topic:'constructor',q:'Construye la estructura del <strong>propanoato de metilo</strong> (C₄H₈O₂)'},
+  {type:'build',buildKey:'etanoatoMetilo',topic:'esteres',q:'Construye la estructura del <strong>etanoato de metilo</strong> (C₃H₆O₂)'},
+  {type:'build',buildKey:'etanoatoEtilo',topic:'esteres',q:'Construye la estructura del <strong>etanoato de etilo</strong> (C₄H₈O₂)'},
+  {type:'build',buildKey:'propanoatoMetilo',topic:'esteres',q:'Construye la estructura del <strong>propanoato de metilo</strong> (C₄H₈O₂)'},
   // Éteres
-  {type:'build',buildKey:'metoximetano',topic:'constructor',q:'Construye la estructura del <strong>metoximetano</strong> (C₂H₆O)'},
-  {type:'build',buildKey:'metoxietano',topic:'constructor',q:'Construye la estructura del <strong>metoxietano</strong> (C₃H₈O)'},
-  {type:'build',buildKey:'etoxietano',topic:'constructor',q:'Construye la estructura del <strong>etoxietano</strong> (C₄H₁₀O)'},
+  {type:'build',buildKey:'metoximetano',topic:'eteres',q:'Construye la estructura del <strong>metoximetano</strong> (C₂H₆O)'},
+  {type:'build',buildKey:'metoxietano',topic:'eteres',q:'Construye la estructura del <strong>metoxietano</strong> (C₃H₈O)'},
+  {type:'build',buildKey:'etoxietano',topic:'eteres',q:'Construye la estructura del <strong>etoxietano</strong> (C₄H₁₀O)'},
   // Amidas
-  {type:'build',buildKey:'etanamida',topic:'constructor',q:'Construye la estructura de la <strong>etanamida</strong> (C₂H₅NO)'},
-  {type:'build',buildKey:'propanamida',topic:'constructor',q:'Construye la estructura de la <strong>propanamida</strong> (C₃H₇NO)'},
-  {type:'build',buildKey:'butanamida',topic:'constructor',q:'Construye la estructura de la <strong>butanamida</strong> (C₄H₉NO)'},
+  {type:'build',buildKey:'etanamida',topic:'amidas',q:'Construye la estructura de la <strong>etanamida</strong> (C₂H₅NO)'},
+  {type:'build',buildKey:'propanamida',topic:'amidas',q:'Construye la estructura de la <strong>propanamida</strong> (C₃H₇NO)'},
+  {type:'build',buildKey:'butanamida',topic:'amidas',q:'Construye la estructura de la <strong>butanamida</strong> (C₄H₉NO)'},
   // Nitrilos
-  {type:'build',buildKey:'etanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>etanonitrilo</strong> (C₂H₃N)'},
-  {type:'build',buildKey:'propanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>propanonitrilo</strong> (C₃H₅N)'},
-  {type:'build',buildKey:'butanonitrilo',topic:'constructor',q:'Construye la estructura del <strong>butanonitrilo</strong> (C₄H₇N)'},
+  {type:'build',buildKey:'etanonitrilo',topic:'nitrilos',q:'Construye la estructura del <strong>etanonitrilo</strong> (C₂H₃N)'},
+  {type:'build',buildKey:'propanonitrilo',topic:'nitrilos',q:'Construye la estructura del <strong>propanonitrilo</strong> (C₃H₅N)'},
+  {type:'build',buildKey:'butanonitrilo',topic:'nitrilos',q:'Construye la estructura del <strong>butanonitrilo</strong> (C₄H₇N)'},
   // Aminas
-  {type:'build',buildKey:'metilamina',topic:'constructor',q:'Construye la estructura de la <strong>metilamina</strong> (CH₅N)'},
-  {type:'build',buildKey:'etanamina',topic:'constructor',q:'Construye la estructura de la <strong>etanamina</strong> (C₂H₇N)'},
+  {type:'build',buildKey:'metilamina',topic:'aminas',q:'Construye la estructura de la <strong>metilamina</strong> (CH₅N)'},
+  {type:'build',buildKey:'etanamina',topic:'aminas',q:'Construye la estructura de la <strong>etanamina</strong> (C₂H₇N)'},
   // Cicloalcanos
   {type:'build',buildKey:'build_ciclobutano',topic:'alcanos',q:'Construye la estructura del <strong>ciclobutano</strong> (C₄H₈) — usa el template de anillo rC4'},
   {type:'build',buildKey:'build_ciclopentano',topic:'alcanos',q:'Construye la estructura del <strong>ciclopentano</strong> (C₅H₁₀) — usa el template de anillo rC5'},
