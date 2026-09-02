@@ -206,6 +206,37 @@ function pickDisplayName_(actual, candidato) {
   return actual;
 }
 
+// ── Colapsa filas duplicadas del mismo código de sesión ─────────────────
+// Filas ya existentes en el Registro (guardadas ANTES del fix de upsert en
+// appendRow) pueden tener el mismo código de sesión repetido varias veces
+// ("inicio" + "fin_partida" + reintentos). Antes de calcular Estadísticas,
+// nos quedamos con una sola fila por código de sesión — la de mayor
+// 'Total' (la más completa) — para que esas sesiones ya guardadas no se
+// cuenten dos o más veces. Filas sin código de sesión (registros muy
+// antiguos) se conservan tal cual, ya que no hay forma de fusionarlas.
+function dedupeBySesion_(data) {
+  const bySesion = new Map();
+  const sinSesion = [];
+  data.forEach(r => {
+    const sesion = r[6];
+    if (!sesion) { sinSesion.push(r); return; }
+    const prev = bySesion.get(sesion);
+    if (!prev || (Number(r[8]) || 0) > (Number(prev[8]) || 0)) {
+      bySesion.set(sesion, r);
+    }
+  });
+  return [...bySesion.values(), ...sinSesion];
+}
+
+// ── Función de un clic: fuerza el recálculo de Estadísticas ahora mismo ──
+// Ejecútala manualmente desde el editor de Apps Script (▶ Ejecutar, eligiendo
+// "recalcularAhora") para aplicar la deduplicación a los datos que YA están
+// en el Registro, sin esperar a que otro estudiante juegue.
+function recalcularAhora() {
+  const ss = getOrCreateSpreadsheet();
+  updateStats(ss);
+}
+
 // ── Actualiza la hoja Estadísticas ─────────────────────────
 function updateStats(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
@@ -216,7 +247,8 @@ function updateStats(ss) {
   const reg = ss.getSheetByName(SHEET_REGISTRO);
   if (!reg || reg.getLastRow() < 2) return;
 
-  const data = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
+  const rawData = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
+  const data = dedupeBySesion_(rawData);
 
   // Agrupación: por estudiante (nombre+curso), con nombre normalizado para
   // que variantes de mayúsculas/tildes/orden de la misma persona no se
