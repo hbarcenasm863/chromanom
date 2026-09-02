@@ -86,7 +86,23 @@ function initRegistroSheet(sh) {
   sh.setColumnWidth(18, 350);  // Moléculas falladas
 }
 
-// ── Añade una fila al Registro ──────────────────────────────
+// ── Busca una fila existente por código de sesión (columna 'Sesión') ──
+// Un mismo código de sesión llega en varias peticiones (evento "inicio" al
+// entrar, "fin_partida" al terminar, "cierre" si cierra la pestaña, reintentos
+// manuales de envío): sin esta búsqueda cada una añadía una fila nueva,
+// duplicando el código de sesión en el Registro e inflando el conteo de
+// "Sesiones" en Estadísticas.
+function findRowBySession(sh, sesion) {
+  const lastRow = sh.getLastRow();
+  if (lastRow < 2) return -1;
+  const col = sh.getRange(2, 7, lastRow - 1, 1).getValues(); // columna 7 = 'Sesión'
+  for (let i = 0; i < col.length; i++) {
+    if (col[i][0] === sesion) return i + 2;
+  }
+  return -1;
+}
+
+// ── Añade o actualiza (upsert) la fila del Registro para una sesión ────
 function appendRow(ss, d) {
   let sh = ss.getSheetByName(SHEET_REGISTRO);
   if (!sh) {
@@ -96,8 +112,13 @@ function appendRow(ss, d) {
 
   const pct = d.pct !== undefined ? d.pct : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
 
+  const existingRow = d.sesion ? findRowBySession(sh, d.sesion) : -1;
+  // Conserva el timestamp original (momento del "inicio") en vez de pisarlo
+  // con el de cada actualización posterior de la misma sesión.
+  const timestamp = existingRow > 0 ? sh.getRange(existingRow, 1).getValue() : new Date();
+
   const row = [
-    new Date(),                                     // Timestamp
+    timestamp,                                      // Timestamp
     d.fecha       || '',                            // Fecha
     d.hora        || '',                            // Hora
     d.nombre      || '',                            // Nombre
@@ -118,18 +139,14 @@ function appendRow(ss, d) {
     d.trigger || '',
   ];
 
-  const lastRow = sh.getLastRow() + 1;
-  sh.appendRow(row);
+  const targetRow = existingRow > 0 ? existingRow : sh.getLastRow() + 1;
+  sh.getRange(targetRow, 1, 1, HEADERS.length).setValues([row]);
 
   // Color de fila según % acierto
-  const bgColor = pct >= 90 ? COLOR.green
-                : pct >= 70 ? COLOR.blue
-                : pct >= 50 ? COLOR.yellow
-                :             COLOR.red;
-  sh.getRange(lastRow, 1, 1, HEADERS.length).setBackground(bgColor);
+  sh.getRange(targetRow, 1, 1, HEADERS.length).setBackground(colorForPct(pct));
 
   // Formato % (columna 10)
-  sh.getRange(lastRow, 10).setNumberFormat('0"%"');
+  sh.getRange(targetRow, 10).setNumberFormat('0"%"');
 }
 
 // ── Helpers de escritura por lotes ──────────────────────────
@@ -164,6 +181,31 @@ function writeSheetBatch(sh, headers, rows, pctColIndexes) {
   });
 }
 
+// ── Normaliza un nombre para agrupar estudiantes de forma robusta ──────
+// El mismo estudiante puede llegar con distinto formato: mayúsculas o
+// minúsculas, con o sin tildes, o en orden "Nombres Apellidos" vs.
+// "Apellidos Nombres" (así llegaban los registros del juego_v2.html
+// antiguo, con nombre libre, frente al juego.html actual que usa el
+// nombre oficial del curso). Sin esto, updateStats() agrupaba a la misma
+// persona en 2-3 "estudiantes" distintos, multiplicando sus sesiones y
+// repartiendo su % de acierto entre identidades separadas.
+function normalizeName_(nombre) {
+  const sinTildes = String(nombre || '')
+    .toUpperCase()
+    .replace(/[ÁÀÄÂ]/g, 'A').replace(/[ÉÈËÊ]/g, 'E').replace(/[ÍÌÏÎ]/g, 'I')
+    .replace(/[ÓÒÖÔ]/g, 'O').replace(/[ÚÙÜÛ]/g, 'U').replace(/Ñ/g, 'N');
+  return sinTildes.split(/\s+/).filter(Boolean).sort().join(' ');
+}
+
+// Elige qué variante de nombre mostrar cuando hay varias para la misma
+// persona: prioriza la que viene en mayúsculas (formato oficial del curso).
+function pickDisplayName_(actual, candidato) {
+  if (!actual) return candidato;
+  const actualEsMayus = actual === actual.toUpperCase();
+  if (!actualEsMayus && candidato === candidato.toUpperCase()) return candidato;
+  return actual;
+}
+
 // ── Actualiza la hoja Estadísticas ─────────────────────────
 function updateStats(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
@@ -176,7 +218,9 @@ function updateStats(ss) {
 
   const data = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
 
-  // Agrupación: por estudiante (nombre+curso)
+  // Agrupación: por estudiante (nombre+curso), con nombre normalizado para
+  // que variantes de mayúsculas/tildes/orden de la misma persona no se
+  // cuenten como estudiantes distintos.
   const students = {};
   data.forEach(r => {
     const nombre  = r[3];
@@ -184,9 +228,10 @@ function updateStats(ss) {
     const nivel   = r[5];
     const correctas = Number(r[7]) || 0;
     const total     = Number(r[8]) || 0;
-    const key       = nombre + '||' + curso;
+    const key       = normalizeName_(nombre) + '||' + curso;
     if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {} };
     const s = students[key];
+    s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += correctas;
     s.totalT += total;
@@ -293,12 +338,14 @@ function updateCursoSheet(ss, curso, allData) {
 
   const cursoData = allData.filter(r => r[4] === curso);
 
-  // Agrupación por nombre
+  // Agrupación por nombre normalizado (ver normalizeName_)
   const students = {};
   cursoData.forEach(r => {
     const nombre = r[3];
-    if (!students[nombre]) students[nombre] = { sesiones:0, totalC:0, totalT:0, lastDate:'' };
-    const s = students[nombre];
+    const key = normalizeName_(nombre);
+    if (!students[key]) students[key] = { nombre, sesiones:0, totalC:0, totalT:0, lastDate:'' };
+    const s = students[key];
+    s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += Number(r[7]) || 0;
     s.totalT += Number(r[8]) || 0;
@@ -306,11 +353,11 @@ function updateCursoSheet(ss, curso, allData) {
     if (fecha > s.lastDate) s.lastDate = fecha;
   });
 
-  const rows = Object.entries(students)
-    .sort((a,b) => a[0].localeCompare(b[0]))
-    .map(([nombre, s]) => {
+  const rows = Object.values(students)
+    .sort((a,b) => a.nombre.localeCompare(b.nombre))
+    .map(s => {
       const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      return [nombre, s.sesiones, s.totalT, pct, s.lastDate];
+      return [s.nombre, s.sesiones, s.totalT, pct, s.lastDate];
     });
 
   writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Última sesión'], rows, [3]);

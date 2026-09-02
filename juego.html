@@ -6451,6 +6451,12 @@ function retryErrors(){
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+  // Nueva sesión propia para la ronda de repaso: si se reutilizara _sessionId
+  // de la partida anterior, sendAnalytics() la ignoraría (_analyticsSent ya
+  // en true) y los resultados de esta ronda nunca llegarían a la hoja.
+  _analyticsSent=false;
+  _sessionId=Math.random().toString(36).slice(2,8);
+  sendSessionStart();
   showScreen('s-game');
   loadQuestion();
 }

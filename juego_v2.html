@@ -5072,9 +5072,14 @@ document.getElementById('stat-banco').textContent=QBANK.length;
 
 // ════════════════════════════════════════════════════════
 // ANALYTICS → Google Sheets via Apps Script
-// Pega la URL del Web App de tu Apps Script aquí:
-// ════════════════════════════════════════════════════════
-const ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbwJwyRtUBmkc3ei93AI8RmM-T1Na6a0Q0Z2QoS0SS_UKJSYRQ4K4tHCQ-15T-6hPtLa/exec';
+// Este archivo (juego_v2.html) es la versión anterior del juego, ya
+// reemplazada por juego.html (que usa código de curso en vez de nombre
+// libre). Se deshabilita el envío de analíticas aquí para que quien
+// entre por un enlace viejo no siga registrando nombres en formato libre
+// en la misma hoja que juego.html — eso fragmentaba a un mismo estudiante
+// en varias "identidades" distintas en Estadísticas (mayúsculas/orden
+// distintos = agrupaciones distintas).
+const ANALYTICS_URL = '';
 
 let _analyticsSent = false;
 
