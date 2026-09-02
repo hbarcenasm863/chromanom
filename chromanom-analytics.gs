@@ -250,6 +250,16 @@ function updateStats(ss) {
   const rawData = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
   const data = dedupeBySesion_(rawData);
 
+  // Google Sheets puede guardar "Nombre"/"Curso" como número si alguna vez
+  // se escribió un valor puramente numérico (p. ej. un código de curso como
+  // 1101) — getValues() los devuelve como Number, no como String, y
+  // .localeCompare() más abajo falla sobre un número. Se normalizan a texto
+  // aquí, una sola vez, para todo lo que use `data` de aquí en adelante.
+  data.forEach(r => {
+    r[3] = String(r[3] == null ? '' : r[3]);
+    r[4] = String(r[4] == null ? '' : r[4]);
+  });
+
   // Agrupación: por estudiante (nombre+curso), con nombre normalizado para
   // que variantes de mayúsculas/tildes/orden de la misma persona no se
   // cuenten como estudiantes distintos.
