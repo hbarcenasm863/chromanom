@@ -232,9 +232,55 @@ function dedupeBySesion_(data) {
 // Ejecútala manualmente desde el editor de Apps Script (▶ Ejecutar, eligiendo
 // "recalcularAhora") para aplicar la deduplicación a los datos que YA están
 // en el Registro, sin esperar a que otro estudiante juegue.
+// OJO: esto solo recalcula "Estadísticas" y las hojas "Curso X" — NO borra
+// las filas duplicadas de "Registro" (esa hoja es la bitácora cruda). Para
+// eso usar limpiarRegistroDuplicados().
 function recalcularAhora() {
   const ss = getOrCreateSpreadsheet();
   updateStats(ss);
+}
+
+// ── Función de un clic: borra en "Registro" las filas duplicadas ────────
+// por código de sesión, dejando solo la más completa (mayor 'Total') de
+// cada sesión. A diferencia de recalcularAhora(), esta SÍ modifica
+// permanentemente la hoja "Registro" (elimina filas). Úsala una sola vez
+// para limpiar el historial acumulado antes del fix de appendRow; una vez
+// que la Web App esté redesplegada con la versión nueva del código, no
+// debería volver a generar duplicados nuevos.
+// Ejecútala desde el editor: selecciona "limpiarRegistroDuplicados" y ▶.
+function limpiarRegistroDuplicados() {
+  const ss = getOrCreateSpreadsheet();
+  const sh = ss.getSheetByName(SHEET_REGISTRO);
+  if (!sh || sh.getLastRow() < 3) return 'Nada que limpiar.';
+
+  const numRows = sh.getLastRow() - 1;
+  const values = sh.getRange(2, 1, numRows, HEADERS.length).getValues();
+
+  // Para cada código de sesión, se guarda el índice (dentro de `values`)
+  // de la fila con mayor 'Total' — esa es la que se conserva.
+  const bestIndexBySesion = new Map();
+  values.forEach((r, i) => {
+    const sesion = r[6];
+    if (!sesion) return; // sin código de sesión: se conserva, no se toca
+    const total = Number(r[8]) || 0;
+    const bestIdx = bestIndexBySesion.get(sesion);
+    if (bestIdx === undefined || total > (Number(values[bestIdx][8]) || 0)) {
+      bestIndexBySesion.set(sesion, i);
+    }
+  });
+  const keepIndexes = new Set(bestIndexBySesion.values());
+
+  // El resto de filas que sí tienen sesión pero no son la "mejor" se borran.
+  const rowsToDelete = [];
+  values.forEach((r, i) => {
+    if (r[6] && !keepIndexes.has(i)) rowsToDelete.push(i);
+  });
+
+  // De abajo hacia arriba para no desfasar los números de fila al borrar.
+  rowsToDelete.sort((a, b) => b - a).forEach(i => sh.deleteRow(i + 2));
+
+  updateStats(ss);
+  return 'Filas eliminadas: ' + rowsToDelete.length;
 }
 
 // ── Actualiza la hoja Estadísticas ─────────────────────────
