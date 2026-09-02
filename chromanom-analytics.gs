@@ -283,6 +283,37 @@ function limpiarRegistroDuplicados() {
   return 'Filas eliminadas: ' + rowsToDelete.length;
 }
 
+// ── Función de diagnóstico: lista los valores reales de "Curso" ─────────
+// que hay en Registro y cuántas filas tiene cada uno, tal cual están
+// guardados (sin normalizar). Si un curso como "1006" aparece con muy
+// pocas filas comparado con lo esperado, esto ayuda a ver si el problema
+// es que casi no ha jugado nadie de ese curso, o si sus filas quedaron
+// guardadas con un valor de Curso distinto (espacios de más, mayúsculas,
+// número en vez de texto, etc.) que no coincide con "1006".
+// Ejecutar desde el editor (▶, eligiendo "diagnosticoCursos") y revisar el
+// resultado en Ver → Registros de ejecución (o el valor que devuelve).
+function diagnosticoCursos() {
+  const ss = getOrCreateSpreadsheet();
+  const reg = ss.getSheetByName(SHEET_REGISTRO);
+  if (!reg || reg.getLastRow() < 2) return 'Registro vacío.';
+
+  const data = reg.getRange(2, 1, reg.getLastRow() - 1, HEADERS.length).getValues();
+  const counts = {};
+  data.forEach(r => {
+    const raw = r[4];
+    const key = JSON.stringify(raw) + '  (tipo: ' + typeof raw + ')';
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  const lines = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([k, v]) => v + ' fila(s) → Curso = ' + k);
+
+  const resultado = lines.join('\n');
+  Logger.log(resultado);
+  return resultado;
+}
+
 // ── Actualiza la hoja Estadísticas ─────────────────────────
 function updateStats(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
