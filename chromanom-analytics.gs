@@ -18,6 +18,17 @@ const HEADERS = [
   'Trigger'
 ];
 
+// ── Nota de juego (0-5) por periodo ─────────────────────────
+// Los cursos ingresan 2 veces por semana; se espera que cada estudiante
+// juegue SESIONES_ESPERADAS veces entre FECHA_INICIO_PERIODO y
+// FECHA_FIN_PERIODO. Cada sesión jugada aporta una nota (% Acierto / 20,
+// o sea 100% = 5.0); lo que falte por jugar cuenta como 0 en el promedio.
+// Para cambiar de periodo (siguiente corte), solo hay que editar estas
+// tres constantes.
+const FECHA_INICIO_PERIODO = '2026-08-31';
+const FECHA_FIN_PERIODO    = '2026-10-30';
+const SESIONES_ESPERADAS   = 22;
+
 // ── Paleta de colores ───────────────────────────────────────
 const COLOR = {
   header  : '#1a1a2e',
@@ -206,6 +217,33 @@ function pickDisplayName_(actual, candidato) {
   return actual;
 }
 
+// ── Normaliza la columna "Fecha" a texto 'yyyy-MM-dd' ────────────────────
+// Igual que con Curso (ver más abajo), Sheets puede guardar un texto tipo
+// fecha ISO como un objeto Date real en vez de como String al escribirlo
+// vía setValues(). Sin esto, comparar r[1] contra FECHA_INICIO_PERIODO /
+// FECHA_FIN_PERIODO (strings) sería comparar un Date con un String y daría
+// resultados incorrectos.
+function toISODate_(v) {
+  if (v instanceof Date) {
+    return Utilities.formatDate(v, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return String(v || '');
+}
+
+// ── Calcula la nota de juego (0-5) a partir de los % de acierto de las ──
+// sesiones jugadas dentro del periodo.
+// - Si jugó SESIONES_ESPERADAS veces o menos: se divide entre
+//   SESIONES_ESPERADAS, así que lo que falte por jugar cuenta como 0.
+// - Si jugó MÁS de SESIONES_ESPERADAS veces: se divide entre el número
+//   real de sesiones jugadas (promedio total de todas, sin tope) — no se
+//   descarta ninguna sesión.
+function calcularNotaJuego_(porcentajesEnPeriodo) {
+  const notas = porcentajesEnPeriodo.map(pct => pct / 20); // 100% de acierto → 5.0
+  const divisor = Math.max(SESIONES_ESPERADAS, notas.length);
+  const suma = notas.reduce((a, b) => a + b, 0);
+  return Math.round((suma / divisor) * 10) / 10;
+}
+
 // ── Colapsa filas duplicadas del mismo código de sesión ─────────────────
 // Filas ya existentes en el Registro (guardadas ANTES del fix de upsert en
 // appendRow) pueden tener el mismo código de sesión repetido varias veces
@@ -330,9 +368,12 @@ function updateStats(ss) {
   // Google Sheets puede guardar "Nombre"/"Curso" como número si alguna vez
   // se escribió un valor puramente numérico (p. ej. un código de curso como
   // 1101) — getValues() los devuelve como Number, no como String, y
-  // .localeCompare() más abajo falla sobre un número. Se normalizan a texto
-  // aquí, una sola vez, para todo lo que use `data` de aquí en adelante.
+  // .localeCompare() más abajo falla sobre un número. También normaliza
+  // "Fecha" a texto 'yyyy-MM-dd' (ver toISODate_) para poder compararla con
+  // el periodo de la nota de juego. Todo esto una sola vez, para todo lo
+  // que use `data` de aquí en adelante.
   data.forEach(r => {
+    r[1] = toISODate_(r[1]);
     r[3] = String(r[3] == null ? '' : r[3]);
     r[4] = String(r[4] == null ? '' : r[4]);
   });
@@ -345,15 +386,18 @@ function updateStats(ss) {
     const nombre  = r[3];
     const curso   = r[4];
     const nivel   = r[5];
+    const fecha     = r[1];
     const correctas = Number(r[7]) || 0;
     const total     = Number(r[8]) || 0;
+    const pct       = Number(r[9]) || 0;
     const key       = normalizeName_(nombre) + '||' + curso;
-    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {} };
+    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [] };
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += correctas;
     s.totalT += total;
+    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) s.notasPeriodo.push(pct);
     if (!s.niveles[nivel]) s.niveles[nivel] = { sesiones: 0, totalC: 0, totalT: 0 };
     s.niveles[nivel].sesiones++;
     s.niveles[nivel].totalC += correctas;
@@ -362,6 +406,7 @@ function updateStats(ss) {
 
   // ── Tabla resumen por estudiante ───────────────────────────
   const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
+                        'Nota juego (0-5)',
                         'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %'];
   const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
 
@@ -369,17 +414,22 @@ function updateStats(ss) {
     .sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
     .map(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
+      const notaJuego = calcularNotaJuego_(s.notasPeriodo);
       const nivelPcts = nivelKeys.map(nk => {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
-      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, ...nivelPcts];
+      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts];
     });
 
-  writeSheetBatch(sh, statsHeaders, rows, [4,5,6,7,8]);
+  // Columnas porcentuales (para el color de fondo y formato "0%"): la
+  // columna de Nota (índice 5, escala 0-5) queda fuera de esta lista, se
+  // formatea aparte más abajo.
+  writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9]);
+  if (rows.length) sh.getRange(2, 6, rows.length, 1).setNumberFormat('0.0');
 
   // Anchos
-  [200,120,80,180,120,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
+  [200,120,80,180,120,110,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────
   // Envuelto en try/catch: un fallo aquí (o en una hoja de curso) no debe
@@ -461,14 +511,16 @@ function updateCursoSheet(ss, curso, allData) {
   const students = {};
   cursoData.forEach(r => {
     const nombre = r[3];
+    const fecha  = r[1] || '';
+    const pct    = Number(r[9]) || 0;
     const key = normalizeName_(nombre);
-    if (!students[key]) students[key] = { nombre, sesiones:0, totalC:0, totalT:0, lastDate:'' };
+    if (!students[key]) students[key] = { nombre, sesiones:0, totalC:0, totalT:0, lastDate:'', notasPeriodo: [] };
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += Number(r[7]) || 0;
     s.totalT += Number(r[8]) || 0;
-    const fecha = r[1] || '';
+    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) s.notasPeriodo.push(pct);
     if (fecha > s.lastDate) s.lastDate = fecha;
   });
 
@@ -476,10 +528,12 @@ function updateCursoSheet(ss, curso, allData) {
     .sort((a,b) => a.nombre.localeCompare(b.nombre))
     .map(s => {
       const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      return [s.nombre, s.sesiones, s.totalT, pct, s.lastDate];
+      const notaJuego = calcularNotaJuego_(s.notasPeriodo);
+      return [s.nombre, s.sesiones, s.totalT, pct, notaJuego, s.lastDate];
     });
 
-  writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Última sesión'], rows, [3]);
+  writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Nota juego (0-5)','Última sesión'], rows, [3]);
+  if (rows.length) sh.getRange(2, 5, rows.length, 1).setNumberFormat('0.0');
 
-  [200,80,180,100,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
+  [200,80,180,100,110,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
