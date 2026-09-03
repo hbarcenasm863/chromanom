@@ -25,7 +25,7 @@ const HEADERS = [
 // o sea 100% = 5.0); lo que falte por jugar cuenta como 0 en el promedio.
 // Para cambiar de periodo (siguiente corte), solo hay que editar estas
 // tres constantes.
-const FECHA_INICIO_PERIODO = '2026-08-31';
+const FECHA_INICIO_PERIODO = '2026-08-10';
 const FECHA_FIN_PERIODO    = '2026-10-30';
 const SESIONES_ESPERADAS   = 22;
 
@@ -281,6 +281,39 @@ function dedupeBySesion_(data) {
 function recalcularAhora() {
   const ss = getOrCreateSpreadsheet();
   updateStats(ss);
+}
+
+// ── Actualización automática (sin tener que ejecutar recalcularAhora) ──
+// doPost() ya recalcula Estadísticas cada vez que llega una partida nueva,
+// pero eso deja las hojas "congeladas" entre partidas: si nadie juega, la
+// nota y las sesiones no reflejan cambios recientes (p. ej. después de
+// correr limpiarRegistroDuplicados a mano, o si se editó algo en Registro
+// directamente). Este disparador de tiempo hace que el recálculo se
+// repita solo, cada hora, sin depender de que alguien juegue o de que el
+// profesor entre a ejecutar nada manualmente.
+const NOMBRE_FUNCION_AUTO = 'actualizarEstadisticasAutomatico';
+
+function actualizarEstadisticasAutomatico() {
+  const ss = getOrCreateSpreadsheet();
+  updateStats(ss);
+}
+
+// ── Ejecutar UNA SOLA VEZ desde el editor para instalar el disparador ───
+// automático de arriba. Es idempotente: si ya existe un disparador para
+// actualizarEstadisticasAutomatico lo reemplaza en vez de duplicarlo (el
+// mismo tipo de duplicado que ya nos dio problemas con las sesiones, pero
+// aquí con disparadores de Apps Script).
+function instalarActualizacionAutomatica() {
+  ScriptApp.getProjectTriggers()
+    .filter(t => t.getHandlerFunction() === NOMBRE_FUNCION_AUTO)
+    .forEach(t => ScriptApp.deleteTrigger(t));
+
+  ScriptApp.newTrigger(NOMBRE_FUNCION_AUTO)
+    .timeBased()
+    .everyHours(1)
+    .create();
+
+  return 'Disparador automático instalado: Estadísticas se recalculará sola cada hora.';
 }
 
 // ── Función de un clic: borra en "Registro" las filas duplicadas ────────
