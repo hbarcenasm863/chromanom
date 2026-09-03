@@ -1269,7 +1269,12 @@ function showEx(idx,btn){
   document.querySelectorAll('.ex-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('ex-'+idx).classList.add('active');
   btn.classList.add('active');
-  stopAuto(idx); steps[idx]=0; render(idx);
+  // Detener TODOS los autoplays, no solo el del ejemplo al que se navega:
+  // antes, si quedaba un "▶ Auto" corriendo en otro ejemplo, su setInterval
+  // seguía vivo indefinidamente en segundo plano (aunque su tarjeta quedara
+  // oculta), acumulándose si el usuario repetía esto con varios ejemplos.
+  for(let i=0;i<timers.length;i++)stopAuto(i);
+  steps[idx]=0; render(idx);
 }
 
 // init all

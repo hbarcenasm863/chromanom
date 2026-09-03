@@ -1392,7 +1392,12 @@ function checkEx(gid){
     inp.classList.add('ok');
     st.ok++; const pts=Math.max(10-st.hints*2-st.tries*2,2); st.score+=pts;
     document.getElementById('eok-'+gid).textContent=st.ok;
-    document.getElementById('ex-pts') && (document.querySelector('.ex-pts').textContent=`⭐ ${st.score} pts`);
+    // El contador de puntos se crea con class="ex-pts", nunca con id="ex-pts"
+    // — getElementById('ex-pts') siempre devolvía null y el && cortaba antes
+    // de actualizar el texto, así que el puntaje visible quedaba congelado
+    // hasta el próximo renderExercise() completo.
+    const exPtsEl=document.querySelector('.ex-pts');
+    if(exPtsEl)exPtsEl.textContent=`⭐ ${st.score} pts`;
     fb.classList.add('ok');
     fb.innerHTML=`<div class="fb-head ok">✓ ¡Correcto! +${pts} pts</div><div class="fb-body">${ex.expl}<div class="name-breakdown">${buildBd(ex)}</div></div>`;
   } else {
