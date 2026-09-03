@@ -112,57 +112,73 @@ function findRowBySession(sh, sesion) {
   const lastRow = sh.getLastRow();
   if (lastRow < 2) return -1;
   const col = sh.getRange(2, 7, lastRow - 1, 1).getValues(); // columna 7 = 'Sesión'
+  // Comparación como texto: si un código de sesión generado al azar resulta
+  // ser todo dígitos (ej. "048213"), Sheets lo guarda como Number al
+  // escribirlo con setValues(), y "048213" === 48213 sería false con ===
+  // estricto — la sesión nunca se encontraría y se duplicaría la fila.
+  const buscado = String(sesion);
   for (let i = 0; i < col.length; i++) {
-    if (col[i][0] === sesion) return i + 2;
+    if (String(col[i][0]) === buscado) return i + 2;
   }
   return -1;
 }
 
 // ── Añade o actualiza (upsert) la fila del Registro para una sesión ────
+// Envuelta en LockService: sin esto, dos peticiones concurrentes (p. ej.
+// dos estudiantes iniciando partida casi al mismo tiempo) podían leer
+// getLastRow() antes de que ninguna hubiera escrito, calcular la misma
+// fila destino, y la segunda escritura sobrescribía silenciosamente los
+// datos de la primera en vez de añadir una fila nueva.
 function appendRow(ss, d) {
-  let sh = ss.getSheetByName(SHEET_REGISTRO);
-  if (!sh) {
-    sh = ss.insertSheet(SHEET_REGISTRO);
-    initRegistroSheet(sh);
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    let sh = ss.getSheetByName(SHEET_REGISTRO);
+    if (!sh) {
+      sh = ss.insertSheet(SHEET_REGISTRO);
+      initRegistroSheet(sh);
+    }
+
+    const pct = d.pct !== undefined ? d.pct : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
+
+    const existingRow = d.sesion ? findRowBySession(sh, d.sesion) : -1;
+    // Conserva el timestamp original (momento del "inicio") en vez de pisarlo
+    // con el de cada actualización posterior de la misma sesión.
+    const timestamp = existingRow > 0 ? sh.getRange(existingRow, 1).getValue() : new Date();
+
+    const row = [
+      timestamp,                                      // Timestamp
+      d.fecha       || '',                            // Fecha
+      d.hora        || '',                            // Hora
+      d.nombre      || '',                            // Nombre
+      d.curso       || '',                            // Curso
+      d.nivel       || '',                            // Nivel
+      d.sesion      || '',                            // Sesión
+      d.correctas   !== undefined ? d.correctas : '', // Correctas
+      d.total       !== undefined ? d.total     : '', // Total
+      pct,                                            // % Acierto
+      d.errores_mc   !== undefined ? d.errores_mc   : '',
+      d.errores_drag !== undefined ? d.errores_drag : '',
+      d.errores_id   !== undefined ? d.errores_id   : '',
+      d.errores_write!== undefined ? d.errores_write: '',
+      d.timeouts     !== undefined ? d.timeouts     : '',
+      typeof d.errores_por_tema  === 'object' ? JSON.stringify(d.errores_por_tema)  : (d.errores_por_tema  || ''),
+      typeof d.aciertos_por_tema === 'object' ? JSON.stringify(d.aciertos_por_tema) : (d.aciertos_por_tema || ''),
+      Array.isArray(d.moleculas_falladas) ? d.moleculas_falladas.join(', ') : (d.moleculas_falladas || ''),
+      d.trigger || '',
+    ];
+
+    const targetRow = existingRow > 0 ? existingRow : sh.getLastRow() + 1;
+    sh.getRange(targetRow, 1, 1, HEADERS.length).setValues([row]);
+
+    // Color de fila según % acierto
+    sh.getRange(targetRow, 1, 1, HEADERS.length).setBackground(colorForPct(pct));
+
+    // Formato % (columna 10)
+    sh.getRange(targetRow, 10).setNumberFormat('0"%"');
+  } finally {
+    lock.releaseLock();
   }
-
-  const pct = d.pct !== undefined ? d.pct : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
-
-  const existingRow = d.sesion ? findRowBySession(sh, d.sesion) : -1;
-  // Conserva el timestamp original (momento del "inicio") en vez de pisarlo
-  // con el de cada actualización posterior de la misma sesión.
-  const timestamp = existingRow > 0 ? sh.getRange(existingRow, 1).getValue() : new Date();
-
-  const row = [
-    timestamp,                                      // Timestamp
-    d.fecha       || '',                            // Fecha
-    d.hora        || '',                            // Hora
-    d.nombre      || '',                            // Nombre
-    d.curso       || '',                            // Curso
-    d.nivel       || '',                            // Nivel
-    d.sesion      || '',                            // Sesión
-    d.correctas   !== undefined ? d.correctas : '', // Correctas
-    d.total       !== undefined ? d.total     : '', // Total
-    pct,                                            // % Acierto
-    d.errores_mc   !== undefined ? d.errores_mc   : '',
-    d.errores_drag !== undefined ? d.errores_drag : '',
-    d.errores_id   !== undefined ? d.errores_id   : '',
-    d.errores_write!== undefined ? d.errores_write: '',
-    d.timeouts     !== undefined ? d.timeouts     : '',
-    typeof d.errores_por_tema  === 'object' ? JSON.stringify(d.errores_por_tema)  : (d.errores_por_tema  || ''),
-    typeof d.aciertos_por_tema === 'object' ? JSON.stringify(d.aciertos_por_tema) : (d.aciertos_por_tema || ''),
-    Array.isArray(d.moleculas_falladas) ? d.moleculas_falladas.join(', ') : (d.moleculas_falladas || ''),
-    d.trigger || '',
-  ];
-
-  const targetRow = existingRow > 0 ? existingRow : sh.getLastRow() + 1;
-  sh.getRange(targetRow, 1, 1, HEADERS.length).setValues([row]);
-
-  // Color de fila según % acierto
-  sh.getRange(targetRow, 1, 1, HEADERS.length).setBackground(colorForPct(pct));
-
-  // Formato % (columna 10)
-  sh.getRange(targetRow, 10).setNumberFormat('0"%"');
 }
 
 // ── Helpers de escritura por lotes ──────────────────────────
@@ -217,6 +233,10 @@ function normalizeName_(nombre) {
 // persona: prioriza la que viene en mayúsculas (formato oficial del curso).
 function pickDisplayName_(actual, candidato) {
   if (!actual) return candidato;
+  // Un candidato vacío ('' === ''.toUpperCase() es true) no debe poder
+  // reemplazar un nombre ya guardado — un envío con d.nombre vacío no
+  // debe borrar el nombre real del estudiante en Estadísticas.
+  if (!candidato) return actual;
   const actualEsMayus = actual === actual.toUpperCase();
   if (!actualEsMayus && candidato === candidato.toUpperCase()) return candidato;
   return actual;
@@ -289,7 +309,7 @@ function recalcularAhora() {
 // nota y las sesiones no reflejan cambios recientes (p. ej. después de
 // correr limpiarRegistroDuplicados a mano, o si se editó algo en Registro
 // directamente). Este disparador de tiempo hace que el recálculo se
-// repita solo, cada hora, sin depender de que alguien juegue o de que el
+// repita solo, cada 30 minutos, sin depender de que alguien juegue o de que el
 // profesor entre a ejecutar nada manualmente.
 const NOMBRE_FUNCION_AUTO = 'actualizarEstadisticasAutomatico';
 
