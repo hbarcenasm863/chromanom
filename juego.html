@@ -629,6 +629,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .drill-pill:hover{background:rgba(255,255,255,.18);border-color:rgba(252,211,77,.6);color:#fcd34d;transform:translateY(-1px)}
 .drill-pill:active{transform:scale(.95)}
 .rb-type.build{background:#fff2e8;color:#f97316}
+.rb-type.rxnq{background:#fce7f3;color:#9d174d}
 
 </style>
 </head>
@@ -3530,7 +3531,7 @@ const QBANK = [
 
   {type:'id', mol:'metoxietano',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
-   name:'metoxietano', highlight:{text:'et',cls:'c'}, correct:'c',
+   name:'metoxietano', highlight:{text:'et',cls:'c',at:6}, correct:'c',
    opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
    expl:'"et" es la <b>cadena principal</b> (etano, 2C) a la que se une el metoxi.', topic:'eteres'},
 
@@ -4126,6 +4127,11 @@ let history=[];
 let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
+// true durante una ronda de "Repetir errores": showResults() no debe usar
+// esa ronda (un subconjunto pequeño y no representativo de preguntas) para
+// actualizar el "Mejor puntaje" guardado en localStorage — podría superar
+// el récord real de una partida completa del mismo nivel y sobrescribirlo.
+let isRetryRound=false;
 let studentName='', studentCourse='', studentCode='';
 const STUDENTS={
   '100307':'LANDERO VEGA SHARITH ALEJANDRA',
@@ -4530,6 +4536,7 @@ function startGame(){
   streak=0; bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
   writeAttempts=0;
+  isRetryRound=false;
   _analyticsSent=false;
   _sessionId=Math.random().toString(36).slice(2,8);
   sendSessionStart();
@@ -4624,7 +4631,7 @@ function loadQuestion(){
 // ── MC ──
 function buildMC(q){
   const opts=shuffle(q.opts);
-  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/,"\\'")}',this)">${o}</button>`).join('')}</div>`;
+  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;
@@ -4941,7 +4948,12 @@ function checkDrag(){
 function buildID(q){
   const name=q.name;
   const hl=q.highlight.text;
-  const idx=name.indexOf(hl);
+  // Si el highlight trae "at" (posición explícita), se usa esa en vez de la
+  // primera ocurrencia — necesario cuando el fragmento a resaltar aparece
+  // más de una vez en el nombre (ej. "et" en "metoxietano" aparece dentro
+  // de "met" en el índice 1 Y como la cadena principal real en el índice 6;
+  // indexOf() siempre encontraba la ocurrencia equivocada).
+  const idx=q.highlight.at!==undefined ? q.highlight.at : name.indexOf(hl);
   let nameHtml='';
   // Para preguntas con doble rol (bencen) mostramos un pequeño aviso
   const isDual=Array.isArray(q.correct)&&q.correct.length>1;
@@ -5995,7 +6007,7 @@ const QBANK_EXTRA=[
   {type:'id', mol:'metoxietano',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
    name:'metoxietano',
-   highlight:{text:'et',cls:'c'},
+   highlight:{text:'et',cls:'c',at:6},
    correct:'c',
    expl:'"et" es la <b>Cadena principal</b> — 2 carbonos (etano).', topic:'eteres'},
   {type:'id', mol:'metoxipropano',
@@ -6938,7 +6950,10 @@ function showResults(){
   const err=history.filter(h=>!h.ok&&!h.timeout).length;
   const tout=history.filter(h=>h.timeout).length;
   const pct=Math.round(ok/total*100);
-  const isRecord=saveBest(currentLevel,pct,score);
+  // Una ronda de "Repetir errores" es un subconjunto pequeño y no
+  // representativo de preguntas — no debe poder sobrescribir el récord de
+  // una partida completa del mismo nivel.
+  const isRecord=isRetryRound?false:saveBest(currentLevel,pct,score);
   renderBests();
 
   // Header
@@ -6966,8 +6981,8 @@ function showResults(){
   document.getElementById('r-time').textContent=tout;
 
   // By type
-  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor'};
-  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build'};
+  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
+  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
   let rbHtml='';
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
@@ -7010,12 +7025,12 @@ function showResults(){
   history.forEach((h,i)=>{
     const icon=h.ok?'✓':h.timeout?'⏰':'✗';
     const cls=h.ok?'ok':h.timeout?'time':'err';
-    const tnames={mc:'MC',drag:'Drag',id:'ID',write:'Escr.'};
+    const tnames={mc:'MC',drag:'Drag',id:'ID',write:'Escr.',build:'Constr.',rxnq:'Reac.'};
     hlHtml+=`<div class="hl-item ${cls}">
       <span class="hl-icon">${icon}</span>
       <span class="rb-type ${h.type}" style="font-size:.6rem;padding:2px 7px">${tnames[h.type]}</span>
       <span class="hl-q">${h.ans}</span>
-      ${!h.ok&&h.given!=='(arrastrar)'?`<span class="hl-a" style="color:var(--c1);font-size:.72rem">${h.given}</span>`:''}
+      ${!h.ok&&h.given!=='(colocar)'?`<span class="hl-a" style="color:var(--c1);font-size:.72rem">${h.given}</span>`:''}
     </div>`;
   });
   document.getElementById('history-list').innerHTML=hlHtml;
@@ -7036,6 +7051,7 @@ function retryErrors(){
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+  isRetryRound=true;
   // Nueva sesión propia para la ronda de repaso: si se reutilizara _sessionId
   // de la partida anterior, sendAnalytics() la ignoraría (_analyticsSent ya
   // en true) y los resultados de esta ronda nunca llegarían a la hoja.

@@ -52,7 +52,7 @@
   }
 
   function closeSheet() {
-    ['pwa-sheet-native','pwa-sheet-android','pwa-sheet-ios'].forEach(id => {
+    ['pwa-sheet-native','pwa-sheet-android','pwa-sheet-ios','pwa-sheet-desktop'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.remove();
     });
@@ -109,6 +109,22 @@
     ov.querySelector('#pwa-android-skip').addEventListener('click', () => ov.remove());
   }
 
+  // ── Sheet 3b: escritorio sin prompt nativo (Firefox, Safari macOS, etc.) ──
+  function showDesktopSheet() {
+    const ov = showSheet(`
+      <div class="pwa-card">
+        ${header()}
+        <p style="font-size:.84rem;line-height:1.6;margin-bottom:16px;color:#2a3f52">
+          Busca la opción <strong>"Instalar ChromaNom…"</strong> o <strong>"Agregar a la pantalla de inicio"</strong> en el menú de tu navegador (usualmente en la barra de direcciones o en el menú principal ⋮/☰).
+        </p>
+        <button class="pwa-btn-main" id="pwa-desktop-ok">Entendido</button>
+        <button class="pwa-btn-skip" id="pwa-desktop-skip">Ahora no</button>
+      </div>`, 'pwa-sheet-desktop');
+    if (!ov) return;
+    ov.querySelector('#pwa-desktop-ok').addEventListener('click', () => ov.remove());
+    ov.querySelector('#pwa-desktop-skip').addEventListener('click', () => ov.remove());
+  }
+
   // ── Sheet 3: iOS Safari ──────────────────────────────────────────────────
   function showIOSSheet() {
     const ov = showSheet(`
@@ -128,10 +144,15 @@
   }
 
   // ── Decide qué mostrar al pulsar el botón ────────────────────────────────
+  // OJO: antes caía directo a showAndroidSheet() para cualquier plataforma
+  // sin prompt nativo (Firefox/Safari de escritorio, Chrome de escritorio
+  // antes de que dispare beforeinstallprompt), mostrando instrucciones
+  // táctiles ("toca el menú ⋮…") que no aplican fuera de Android.
   function onInstallClick() {
     if (isIOS) { showIOSSheet(); return; }
     if (deferredPrompt) { showNativeSheet(); return; }
-    showAndroidSheet();
+    if (isAndroid) { showAndroidSheet(); return; }
+    showDesktopSheet();
   }
 
   // ── Modal automático en primera visita (una vez por sesión) ──────────────

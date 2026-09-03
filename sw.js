@@ -21,15 +21,29 @@ const ASSETS = [
   './icons/icon-192-maskable.png',
   './icons/icon-512-maskable.png',
   './icons/icon-180.png',
-  './pwa-install.js'
+  './pwa-install.js',
+  './text-zoom.js'
 ];
 
-// Instalar: guardar todos los archivos en caché
+// Instalar: guardar todos los archivos en caché.
+// OJO: NO se llama self.skipWaiting() aquí. pwa-install.js muestra un banner
+// "Nueva versión disponible" y solo llama skipWaiting() (vía postMessage,
+// ver el listener 'message' más abajo) cuando el usuario pulsa "Actualizar".
+// Antes se llamaba aquí de forma incondicional, así que el SW nuevo tomaba
+// control solo, disparaba 'controllerchange' y forzaba location.reload() en
+// pwa-install.js sin que nadie lo pidiera — si un estudiante estaba a mitad
+// de una partida cuando se publicaba una versión nueva, la página se
+// recargaba sola y perdía el progreso del ejercicio.
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE).then(c => c.addAll(ASSETS))
   );
-  self.skipWaiting();
+});
+
+// Permite que pwa-install.js difiera la activación hasta que el usuario
+// pulse "Actualizar" en el banner (worker.postMessage('SKIP_WAITING')).
+self.addEventListener('message', e => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 // Activar: borrar cachés antiguas (mantener fuentes)
