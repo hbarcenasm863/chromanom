@@ -18,8 +18,6 @@ const ASSETS = [
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './icons/icon-192-maskable.png',
-  './icons/icon-512-maskable.png',
   './icons/icon-180.png',
   './pwa-install.js',
   './text-zoom.js'
