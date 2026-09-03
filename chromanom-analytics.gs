@@ -310,10 +310,10 @@ function instalarActualizacionAutomatica() {
 
   ScriptApp.newTrigger(NOMBRE_FUNCION_AUTO)
     .timeBased()
-    .everyHours(1)
+    .everyMinutes(30)
     .create();
 
-  return 'Disparador automático instalado: Estadísticas se recalculará sola cada hora.';
+  return 'Disparador automático instalado: Estadísticas se recalculará sola cada 30 minutos.';
 }
 
 // ── Función de un clic: borra en "Registro" las filas duplicadas ────────
