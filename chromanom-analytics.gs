@@ -112,7 +112,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-errores-build-rxnq-v1';
+const BUILD_TAG = '2026-09-04-ensure-headers-v1';
 
 // ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
 function doGet() {
@@ -148,6 +148,20 @@ function initRegistroSheet(sh) {
   sh.setColumnWidth(16, 250);  // Errores por tema
   sh.setColumnWidth(17, 250);  // Aciertos por tema
   sh.setColumnWidth(18, 350);  // Moléculas falladas
+}
+
+// ── Mantiene la fila de cabeceras al día en una hoja "Registro" YA ─────
+// existente. Cuando se agregan columnas nuevas a HEADERS (como pasó con
+// "Errores Build"/"Errores Rxnq"), initRegistroSheet() no vuelve a
+// ejecutarse porque la hoja ya existe — appendRow() igual empezaría a
+// escribir esas columnas nuevas al final de cada fila, pero sin este
+// chequeo la fila de títulos (fila 1) se quedaría corta y esas columnas
+// aparecerían sin nombre. Es barato (una sola lectura de getLastColumn())
+// y no hace nada si la hoja ya tiene todas las cabeceras.
+function ensureHeaders_(sh) {
+  if (sh.getLastColumn() >= HEADERS.length) return;
+  sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS])
+    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
 }
 
 // ── Busca una fila existente por código de sesión (columna 'Sesión') ──
@@ -190,6 +204,8 @@ function appendRow(ss, d) {
     if (!sh) {
       sh = ss.insertSheet(SHEET_REGISTRO);
       initRegistroSheet(sh);
+    } else {
+      ensureHeaders_(sh);
     }
 
     const pct = d.pct !== undefined ? d.pct : (d.total ? Math.round(d.correctas / d.total * 100) : 0);
