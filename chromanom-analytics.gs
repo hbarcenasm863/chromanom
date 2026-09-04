@@ -312,13 +312,13 @@ function recalcularAhora() {
 }
 
 // ── Actualización automática (sin tener que ejecutar recalcularAhora) ──
-// doPost() ya recalcula Estadísticas cada vez que llega una partida nueva,
-// pero eso deja las hojas "congeladas" entre partidas: si nadie juega, la
-// nota y las sesiones no reflejan cambios recientes (p. ej. después de
-// correr limpiarRegistroDuplicados a mano, o si se editó algo en Registro
-// directamente). Este disparador de tiempo hace que el recálculo se
-// repita solo, cada 30 minutos, sin depender de que alguien juegue o de que el
-// profesor entre a ejecutar nada manualmente.
+// doPost() YA NO recalcula Estadísticas en cada partida (ver el comentario
+// en doPost más arriba — se quitó por sobrecarga con clases completas
+// jugando a la vez). Este disparador de tiempo es ahora la única forma en
+// que Estadísticas se mantiene al día sola, cada 30 minutos, sin depender
+// de que alguien juegue o de que el profesor entre a ejecutar nada
+// manualmente (recalcularAhora() sigue disponible para forzarlo al
+// instante cuando se necesite).
 const NOMBRE_FUNCION_AUTO = 'actualizarEstadisticasAutomatico';
 
 function actualizarEstadisticasAutomatico() {
