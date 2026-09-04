@@ -112,7 +112,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-ensure-headers-v1';
+const BUILD_TAG = '2026-09-04-timezone-bogota-v1';
 
 // ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
 function doGet() {
@@ -121,14 +121,32 @@ function doGet() {
     .setMimeType(ContentService.MimeType.TEXT);
 }
 
+// Zona horaria fija de Bogotá. No se usa Session.getScriptTimeZone() porque
+// esa depende de la configuración del PROYECTO de Apps Script (Configuración
+// del proyecto → Zona horaria), que es independiente de la zona horaria de
+// la HOJA de cálculo (Archivo → Configuración) — si cualquiera de las dos
+// queda mal configurada (o se resetea sola, como pasó), las horas quedan en
+// UTC/Pacífico en vez de Bogotá sin que el código lo note. Fijarla aquí como
+// constante saca esa dependencia de la ecuación.
+const ZONA_HORARIA = 'America/Bogota';
+
 // ── Obtiene o crea el spreadsheet ──────────────────────────
 function getOrCreateSpreadsheet() {
   const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
+  let ss;
   if (files.hasNext()) {
-    return SpreadsheetApp.open(files.next());
+    ss = SpreadsheetApp.open(files.next());
+  } else {
+    ss = SpreadsheetApp.create(SPREADSHEET_NAME);
+    initRegistroSheet(ss.getSheets()[0]);
   }
-  const ss = SpreadsheetApp.create(SPREADSHEET_NAME);
-  initRegistroSheet(ss.getSheets()[0]);
+  // Defensivo: si la zona horaria de la hoja se desconfiguró (o nunca se fijó
+  // explícitamente), la vuelve a dejar en Bogotá. getSpreadsheetTimeZone() es
+  // barato (metadata, no lee datos), así que comparar antes de escribir no
+  // agrega carga real en cada doPost().
+  if (ss.getSpreadsheetTimeZone() !== ZONA_HORARIA) {
+    ss.setSpreadsheetTimeZone(ZONA_HORARIA);
+  }
   return ss;
 }
 
@@ -245,6 +263,14 @@ function appendRow(ss, d) {
     // Color de fila según % acierto
     sh.getRange(targetRow, 1, 1, HEADERS.length).setBackground(colorForPct(pct));
 
+    // Formato de fecha y hora explícito en Timestamp (columna 1): sin esto,
+    // Sheets decide el formato de cada celda "a ojo" según lo que haya al
+    // lado, y una fila puede terminar mostrando solo la fecha sin hora
+    // aunque el valor sí tenga la hora completa guardada — se ve como si no
+    // se estuviera registrando la hora de la sesión, cuando el dato está
+    // bien pero el formato visual quedó inconsistente entre filas.
+    sh.getRange(targetRow, 1).setNumberFormat('M/d/yyyy H:mm:ss');
+
     // Formato % (columna 10)
     sh.getRange(targetRow, 10).setNumberFormat('0"%"');
   } finally {
@@ -321,7 +347,7 @@ function pickDisplayName_(actual, candidato) {
 // resultados incorrectos.
 function toISODate_(v) {
   if (v instanceof Date) {
-    return Utilities.formatDate(v, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    return Utilities.formatDate(v, ZONA_HORARIA, 'yyyy-MM-dd');
   }
   return String(v || '');
 }
