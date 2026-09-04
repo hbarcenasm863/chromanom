@@ -160,7 +160,12 @@ function findRowBySession(sh, sesion) {
 // datos de la primera en vez de añadir una fila nueva.
 function appendRow(ss, d) {
   const lock = LockService.getScriptLock();
-  lock.waitLock(60000);
+  // Espera corta (no 60s): junto con los 3 reintentos de doPost() esto da
+  // varias oportunidades cortas de tomar el lock en vez de una sola espera
+  // larga — si updateStats() sigue ocupado, es mejor fallar rápido y que
+  // doPost() reintente, que quedarse esperando cerca del límite de
+  // ejecución de Apps Script (6 min) en un solo intento.
+  lock.waitLock(15000);
   try {
     let sh = ss.getSheetByName(SHEET_REGISTRO);
     if (!sh) {
@@ -461,7 +466,8 @@ function updateStats(ss) {
 
 function updateStats_(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
-  if (!sh) sh = ss.insertSheet(SHEET_STATS);
+  const esNueva = !sh;
+  if (esNueva) sh = ss.insertSheet(SHEET_STATS);
   sh.clearContents();
   sh.clearFormats();
 
@@ -534,8 +540,14 @@ function updateStats_(ss) {
   writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9]);
   if (rows.length) sh.getRange(2, 6, rows.length, 1).setNumberFormat('0.0');
 
-  // Anchos
-  [200,120,80,180,120,110,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
+  // Anchos: solo la primera vez que se crea la hoja — no cambian entre
+  // ejecuciones y clearFormats() no los borra (es formato de celda, no
+  // ancho de columna), así que fijarlos en cada recálculo es puro
+  // desperdicio de llamadas a la API de Sheets. Menos llamadas = el
+  // bloqueo compartido con appendRow() se libera más rápido.
+  if (esNueva) {
+    [200,120,80,180,120,110,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
+  }
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────
   // Envuelto en try/catch: un fallo aquí (o en una hoja de curso) no debe
@@ -569,7 +581,8 @@ function logStatsError_(ss, where, err) {
 function updateTopicStats(ss, data) {
   const SHEET_TOPICS = 'Eficacia por tema';
   let sh = ss.getSheetByName(SHEET_TOPICS);
-  if (!sh) sh = ss.insertSheet(SHEET_TOPICS);
+  const esNueva = !sh;
+  if (esNueva) sh = ss.insertSheet(SHEET_TOPICS);
   sh.clearContents(); sh.clearFormats();
 
   // Acumular desde los campos JSON
@@ -601,14 +614,15 @@ function updateTopicStats(ss, data) {
 
   writeSheetBatch(sh, ['Tema','Correctas','Errores','Total intentos','% Acierto'], rows, [4]);
 
-  [200,100,100,140,100].forEach((w,i) => sh.setColumnWidth(i+1, w));
+  if (esNueva) [200,100,100,140,100].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
 
 // ── Hoja individual por curso ──────────────────────────────
 function updateCursoSheet(ss, curso, allData) {
   const shName = 'Curso ' + curso;
   let sh = ss.getSheetByName(shName);
-  if (!sh) sh = ss.insertSheet(shName);
+  const esNueva = !sh;
+  if (esNueva) sh = ss.insertSheet(shName);
   sh.clearContents(); sh.clearFormats();
 
   const cursoData = allData.filter(r => r[4] === curso);
@@ -641,5 +655,5 @@ function updateCursoSheet(ss, curso, allData) {
   writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Nota juego (0-5)','Última sesión'], rows, [3]);
   if (rows.length) sh.getRange(2, 5, rows.length, 1).setNumberFormat('0.0');
 
-  [200,80,180,100,110,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
+  if (esNueva) [200,80,180,100,110,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
