@@ -9,13 +9,18 @@ const SHEET_REGISTRO   = 'Registro';
 const SHEET_STATS      = 'Estadísticas';
 
 // ── Cabeceras del Registro ──────────────────────────────────
+// Errores Build/Rxnq van AL FINAL (no intercalados con Errores Write) para
+// no correr el índice de las columnas siguientes — updateTopicStats() y
+// otras funciones leen columnas de Registro por posición fija (r[15],
+// r[16], etc.), y moverlas habría exigido re-numerar todas esas lecturas.
 const HEADERS = [
   'Timestamp','Fecha','Hora','Nombre','Curso','Nivel','Sesión',
   'Correctas','Total','% Acierto',
   'Errores MC','Errores Drag','Errores ID','Errores Write',
   'Tiempo agotado',
   'Errores por tema','Aciertos por tema','Moléculas falladas',
-  'Trigger'
+  'Trigger',
+  'Errores Build','Errores Rxnq'
 ];
 
 // ── Nota de juego (0-5) por periodo ─────────────────────────
@@ -107,7 +112,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-retry-jitter-v1';
+const BUILD_TAG = '2026-09-04-errores-build-rxnq-v1';
 
 // ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
 function doGet() {
@@ -214,6 +219,8 @@ function appendRow(ss, d) {
       typeof d.aciertos_por_tema === 'object' ? JSON.stringify(d.aciertos_por_tema) : (d.aciertos_por_tema || ''),
       Array.isArray(d.moleculas_falladas) ? d.moleculas_falladas.join(', ') : (d.moleculas_falladas || ''),
       d.trigger || '',
+      d.errores_build!== undefined ? d.errores_build: '',
+      d.errores_rxnq !== undefined ? d.errores_rxnq : '',
     ];
 
     const targetRow = existingRow > 0 ? existingRow : sh.getLastRow() + 1;

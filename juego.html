@@ -7169,7 +7169,7 @@ function sendSessionStart(){
     nivel:     NIVEL_LABELS[currentLevel]||currentLevel,
     trigger:   'inicio',
     correctas: 0, total: 0, timeouts: 0, pct: 0,
-    errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0,
+    errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0, errores_rxnq:0,
     errores_por_tema:'{}', aciertos_por_tema:'{}', moleculas_falladas:''
   });
   fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true}).catch(()=>{});
@@ -7198,6 +7198,7 @@ function buildPayload(trigger){
     errores_id:    typeStats.id.tot   -typeStats.id.ok,
     errores_write: typeStats.write.tot-typeStats.write.ok,
     errores_build: typeStats.build.tot-typeStats.build.ok,
+    errores_rxnq:  typeStats.rxnq.tot -typeStats.rxnq.ok,
     errores_por_tema:   JSON.stringify(topicErrors),
     aciertos_por_tema:  JSON.stringify(topicOk),
     moleculas_falladas: failedMols
