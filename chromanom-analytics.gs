@@ -42,6 +42,15 @@ const COLOR = {
 };
 
 // ── Punto de entrada HTTP POST ──────────────────────────────
+// OJO: ya NO llama updateStats() en cada envío. Antes recalculaba TODAS
+// las hojas de Estadísticas (por estudiante, por tema, y una por curso)
+// en cada partida — con una clase completa jugando a la vez, eso saturaba
+// la ejecución del script y provocaba errores de envío ("puede haber
+// error en la URL de Apps Script") que en realidad eran timeouts/fallos
+// por sobrecarga, no un problema de la URL. Guardar la fila (appendRow)
+// es rápido y sigue pasando al instante; el recálculo pesado de
+// Estadísticas lo hace ahora solo el disparador automático cada 30 min
+// (ver actualizarEstadisticasAutomatico) o recalcularAhora() manualmente.
 function doPost(e) {
   try {
     const raw  = e.postData ? e.postData.contents : '{}';
@@ -49,7 +58,6 @@ function doPost(e) {
 
     const ss   = getOrCreateSpreadsheet();
     appendRow(ss, data);
-    updateStats(ss);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -131,7 +139,7 @@ function findRowBySession(sh, sesion) {
 // datos de la primera en vez de añadir una fila nueva.
 function appendRow(ss, d) {
   const lock = LockService.getScriptLock();
-  lock.waitLock(30000);
+  lock.waitLock(60000);
   try {
     let sh = ss.getSheetByName(SHEET_REGISTRO);
     if (!sh) {
