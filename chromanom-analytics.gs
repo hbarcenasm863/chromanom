@@ -419,7 +419,26 @@ function diagnosticoCursos() {
 }
 
 // ── Actualiza la hoja Estadísticas ─────────────────────────
+// Envuelta en el MISMO LockService que appendRow(): sin esto, el
+// disparador automático (cada 30 min) podía disparar updateStats() justo
+// mientras varios estudiantes seguían enviando partidas (appendRow), y
+// ambas cosas tocando la hoja de cálculo al mismo tiempo producía el
+// error real de Google "Too many simultaneous invocations: Spreadsheets"
+// (visible en la hoja "Errores") — que el frontend del estudiante mostraba
+// como el mensaje genérico "Error al enviar. Verifica la URL del Apps
+// Script.", sin relación real con la URL. Con el mismo lock, appendRow()
+// y updateStats() quedan serializados: nunca corren a la vez.
 function updateStats(ss) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(60000);
+  try {
+    updateStats_(ss);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function updateStats_(ss) {
   let sh = ss.getSheetByName(SHEET_STATS);
   if (!sh) sh = ss.insertSheet(SHEET_STATS);
   sh.clearContents();
