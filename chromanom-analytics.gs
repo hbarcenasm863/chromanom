@@ -107,7 +107,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-02-nota-upsert-v1';
+const BUILD_TAG = '2026-09-04-retry-jitter-v1';
 
 // ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
 function doGet() {
