@@ -51,13 +51,34 @@ const COLOR = {
 // es rápido y sigue pasando al instante; el recálculo pesado de
 // Estadísticas lo hace ahora solo el disparador automático cada 30 min
 // (ver actualizarEstadisticasAutomatico) o recalcularAhora() manualmente.
+//
+// appendRow() y updateStats() comparten el mismo LockService (ver más
+// abajo) para no chocar entre sí, pero eso significa que un envío de
+// partida puede quedar esperando detrás de un recálculo largo de
+// Estadísticas que esté en curso. Si esa espera se agota (o Google
+// devuelve su error transitorio de cuota "Too many simultaneous
+// invocations: Spreadsheets"), reintentamos aquí unas pocas veces con una
+// breve pausa antes de rendirnos — así un tropiezo momentáneo de un par de
+// segundos no le llega al estudiante como un error real.
 function doPost(e) {
   try {
     const raw  = e.postData ? e.postData.contents : '{}';
     const data = JSON.parse(raw);
-
     const ss   = getOrCreateSpreadsheet();
-    appendRow(ss, data);
+
+    const INTENTOS = 3;
+    let ultimoError;
+    for (let intento = 0; intento < INTENTOS; intento++) {
+      try {
+        appendRow(ss, data);
+        ultimoError = null;
+        break;
+      } catch (err) {
+        ultimoError = err;
+        if (intento < INTENTOS - 1) Utilities.sleep(2000 * (intento + 1));
+      }
+    }
+    if (ultimoError) throw ultimoError;
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
