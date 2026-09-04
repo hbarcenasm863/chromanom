@@ -813,6 +813,21 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
+<!-- Modal grande de estado de envío (éxito/error) — visible e imposible de -->
+<!-- pasar por alto, para que el estudiante sepa con certeza si su partida -->
+<!-- quedó guardada o si debe avisarle al profesor. -->
+<div id="modal-envio" class="modal-overlay">
+  <div class="modal-box" style="max-width:360px;text-align:center">
+    <div id="modal-envio-icon" style="font-size:2.8rem;margin-bottom:10px">✅</div>
+    <div id="modal-envio-title" class="modal-title" style="font-size:1.05rem">¡Resultados guardados!</div>
+    <p id="modal-envio-msg" style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:18px">
+      Tu partida se guardó correctamente en la hoja de tu profesor.
+    </p>
+    <button id="modal-envio-retry" class="btn-modal-start" style="display:none" onclick="sendToSheets()">🔁 Reintentar envío</button>
+    <button onclick="closeEnvioModal()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cerrar</button>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════════
      SCREEN 2: JUEGO
 ══════════════════════════════════════════ -->
@@ -7154,14 +7169,52 @@ function sendAnalytics(trigger){
 function _updateSheetsStatus(state){
   const btn=document.getElementById('btn-sheets');
   const status=document.getElementById('sheets-status');
-  if(!status) return;
-  if(state==='ok'){
-    status.textContent='✅ Resultados guardados en Google Sheets.';
-    if(btn){btn.style.display='none';}
-  } else {
-    status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
-    if(btn){btn.style.display='flex';}
+  if(status){
+    if(state==='ok'){
+      status.textContent='✅ Resultados guardados en Google Sheets.';
+      if(btn){btn.style.display='none';}
+    } else {
+      status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
+      if(btn){btn.style.display='flex';}
+    }
   }
+  showEnvioModal(state);
+}
+
+// ── Modal grande de estado de envío ─────────────────────────
+// Antes el único indicador de éxito/error era un texto pequeño debajo del
+// botón "Enviar a Sheets" (fácil de no ver, sobre todo en celular). Este
+// modal es imposible de pasar por alto: se abre solo cada vez que se sabe
+// si el envío funcionó o no, para que el estudiante pueda avisarle al
+// profesor de inmediato si falló, en vez de asumir que todo quedó guardado.
+function showEnvioModal(state, mensajeError){
+  const modal=document.getElementById('modal-envio');
+  if(!modal) return;
+  const icon=document.getElementById('modal-envio-icon');
+  const title=document.getElementById('modal-envio-title');
+  const msg=document.getElementById('modal-envio-msg');
+  const retryBtn=document.getElementById('modal-envio-retry');
+  if(state==='ok'){
+    icon.textContent='✅';
+    title.textContent='¡Resultados guardados!';
+    msg.textContent='Tu partida se guardó correctamente en la hoja de tu profesor.';
+    if(retryBtn) retryBtn.style.display='none';
+    modal.classList.add('open');
+    // Éxito: se cierra solo, no requiere que el estudiante haga nada.
+    setTimeout(()=>{ modal.classList.remove('open'); }, 2600);
+  } else {
+    icon.textContent='⚠️';
+    title.textContent='No se pudo guardar tu partida';
+    msg.textContent='Hubo un problema al enviar tus resultados a la hoja del profesor.'
+      +(mensajeError?(' ('+mensajeError+')'):'')
+      +' Pulsa "Reintentar envío". Si sigue fallando, muéstrale esta pantalla a tu profesor.';
+    if(retryBtn) retryBtn.style.display='block';
+    modal.classList.add('open');
+  }
+}
+function closeEnvioModal(){
+  const modal=document.getElementById('modal-envio');
+  if(modal) modal.classList.remove('open');
 }
 
 function sendToSheets(){
@@ -7180,10 +7233,12 @@ function sendToSheets(){
       _analyticsSent=true;
       if(btn){btn.style.display='none';}
       if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
+      showEnvioModal('ok');
     })
-    .catch(()=>{
+    .catch(err=>{
+      showEnvioModal('error', typeof err==='string'?err:(err&&err.message));
       if(btn){btn.disabled=false;btn.innerHTML='📊 Reintentar envío';btn.style.display='flex';}
-      if(status) status.textContent='⚠ Error al enviar. Verifica la URL del Apps Script.';
+      if(status) status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
     });
 }
 
