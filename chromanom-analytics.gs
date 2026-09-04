@@ -55,18 +55,28 @@ const COLOR = {
 // appendRow() y updateStats() comparten el mismo LockService (ver más
 // abajo) para no chocar entre sí, pero eso significa que un envío de
 // partida puede quedar esperando detrás de un recálculo largo de
-// Estadísticas que esté en curso. Si esa espera se agota (o Google
-// devuelve su error transitorio de cuota "Too many simultaneous
-// invocations: Spreadsheets"), reintentamos aquí unas pocas veces con una
-// breve pausa antes de rendirnos — así un tropiezo momentáneo de un par de
-// segundos no le llega al estudiante como un error real.
+// Estadísticas que esté en curso, o detrás de otros estudiantes enviando
+// al mismo tiempo. Si esa espera se agota (o Google devuelve su error
+// transitorio de cuota "Too many simultaneous invocations: Spreadsheets"),
+// reintentamos aquí varias veces con una pausa creciente y aleatoria
+// (jitter) antes de rendirnos.
+//
+// El jitter es clave con un curso completo enviando a la vez: sin él,
+// todos los intentos que fallan al mismo tiempo esperan exactamente el
+// mismo tiempo fijo y vuelven a chocar juntos en el siguiente intento
+// ("efecto manada"); con una pausa aleatoria se reparten en el tiempo y
+// se destraban solos. En el peor caso (6 intentos, esperando hasta 15s
+// por el lock en cada uno, más las pausas entre intentos) esto tarda
+// como mucho ~2 minutos, muy por debajo del límite de ejecución de
+// Apps Script (6 minutos) — así un tropiezo momentáneo de la hoja no le
+// llega al estudiante como un error real.
 function doPost(e) {
   try {
     const raw  = e.postData ? e.postData.contents : '{}';
     const data = JSON.parse(raw);
     const ss   = getOrCreateSpreadsheet();
 
-    const INTENTOS = 3;
+    const INTENTOS = 6;
     let ultimoError;
     for (let intento = 0; intento < INTENTOS; intento++) {
       try {
@@ -75,7 +85,11 @@ function doPost(e) {
         break;
       } catch (err) {
         ultimoError = err;
-        if (intento < INTENTOS - 1) Utilities.sleep(2000 * (intento + 1));
+        if (intento < INTENTOS - 1) {
+          const base   = 1200 * Math.pow(1.7, intento);
+          const jitter = Math.random() * 1000;
+          Utilities.sleep(Math.min(base + jitter, 8000));
+        }
       }
     }
     if (ultimoError) throw ultimoError;
@@ -160,11 +174,11 @@ function findRowBySession(sh, sesion) {
 // datos de la primera en vez de añadir una fila nueva.
 function appendRow(ss, d) {
   const lock = LockService.getScriptLock();
-  // Espera corta (no 60s): junto con los 3 reintentos de doPost() esto da
-  // varias oportunidades cortas de tomar el lock en vez de una sola espera
-  // larga — si updateStats() sigue ocupado, es mejor fallar rápido y que
-  // doPost() reintente, que quedarse esperando cerca del límite de
-  // ejecución de Apps Script (6 min) en un solo intento.
+  // Espera corta (no 60s): junto con los 6 reintentos con jitter de
+  // doPost() esto da varias oportunidades cortas de tomar el lock en vez
+  // de una sola espera larga — si updateStats() sigue ocupado, es mejor
+  // fallar rápido y que doPost() reintente, que quedarse esperando cerca
+  // del límite de ejecución de Apps Script (6 min) en un solo intento.
   lock.waitLock(15000);
   try {
     let sh = ss.getSheetByName(SHEET_REGISTRO);
