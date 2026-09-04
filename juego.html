@@ -188,6 +188,21 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .btn-sheets{width:100%;padding:13px;margin-top:6px;background:linear-gradient(135deg,#1e6f40,#27ae60);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:16px;font-family:var(--sans);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 18px rgba(30,111,64,.25)}
 .btn-sheets:hover{transform:translateY(-2px)}
 .btn-sheets:active{transform:scale(.97)}
+.modal-box-premio{max-width:380px;text-align:center;border:1.5px solid rgba(251,191,36,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 20px 60px rgba(0,0,0,.55),0 0 40px rgba(251,191,36,.15)}
+.premio-badge{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1a1206;background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:100px;padding:5px 14px;margin-bottom:14px;animation:premioPulse 1.8s ease-in-out infinite}
+.premio-trophy{font-size:3.2rem;margin-bottom:6px;animation:premioBounce 1.6s ease-in-out infinite}
+.premio-title{font-family:var(--serif);font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:2px;line-height:1.25}
+.premio-title b{color:#fbbf24}
+.premio-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:14px 16px;margin:16px 0 18px;text-align:left}
+.premio-row{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:9px}
+.premio-row:last-child{margin-bottom:0}
+.premio-row span.n{color:#fbbf24;font-weight:800;flex-shrink:0}
+.premio-foot{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:10px}
+.btn-premio{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#dc2626);color:#fff;border:none;border-radius:12px;font-family:var(--sans);font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 22px rgba(245,158,11,.35)}
+.btn-premio:hover{transform:translateY(-2px)}
+.btn-premio:active{transform:scale(.97)}
+@keyframes premioPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}50%{box-shadow:0 0 0 6px rgba(251,191,36,0)}}
+@keyframes premioBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .btn-sheets:hover{filter:brightness(1.1);transform:translateY(-1px)}.btn-sheets:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .sheets-status{font-size:.73rem;color:var(--dimmer);text-align:center;margin-top:5px;min-height:1.1em}
 .portada-stats{display:flex;gap:20px;justify-content:center;margin-top:20px}
@@ -825,6 +840,25 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     </p>
     <button id="modal-envio-retry" class="btn-modal-start" style="display:none" onclick="sendToSheets()">🔁 Reintentar envío</button>
     <button onclick="closeEnvioModal()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cerrar</button>
+  </div>
+</div>
+
+<!-- Modal promocional: reto de la coordinación por 1000 preguntas al 80%+ -->
+<!-- de acierto. Aparece al iniciar cada partida (antes del cronómetro de la -->
+<!-- primera pregunta) para no restar tiempo de juego; se limita a una vez -->
+<!-- por día por dispositivo para no volverse molesto. -->
+<div id="modal-premio" class="modal-overlay">
+  <div class="modal-box modal-box-premio">
+    <div class="premio-badge">🔥 Reto especial de la coordinación</div>
+    <div class="premio-trophy">🏆</div>
+    <div class="premio-title">¡Gánate un <b>premio especial</b>!</div>
+    <div class="premio-box">
+      <div class="premio-row"><span class="n">1.</span><span>Sé el <b style="color:#fff">primer estudiante</b> en responder <b style="color:#fbbf24">1.000 preguntas</b> en el juego.</span></div>
+      <div class="premio-row"><span class="n">2.</span><span>Mantén un <b style="color:#fbbf24">80% de acierto o más</b> en el total.</span></div>
+      <div class="premio-row"><span class="n">3.</span><span>La coordinación entregará el premio en cuanto se cumpla la meta. 🎁</span></div>
+    </div>
+    <button class="btn-premio" onclick="closePromoModal()">🚀 ¡Acepto el reto — a jugar!</button>
+    <div class="premio-foot">Cada partida cuenta. ¡Tú puedes ser el primero! 💪</div>
   </div>
 </div>
 
@@ -4555,8 +4589,28 @@ function startGame(){
   _analyticsSent=false;
   _sessionId=Math.random().toString(36).slice(2,8);
   sendSessionStart();
-  showScreen('s-game');
-  loadQuestion();
+  maybeShowPromoModal(()=>{ showScreen('s-game'); loadQuestion(); });
+}
+
+// ── Modal promocional del reto de coordinación (1000 preguntas, 80%+) ──
+// Se dispara al iniciar cada partida nueva (no en la ronda de repaso de
+// retryErrors), ANTES de mostrar la pantalla de juego, para no comerse
+// tiempo del cronómetro de la primera pregunta (ese arranca dentro de
+// loadQuestion()). Limitado a una vez por día por dispositivo para que
+// recuerde la meta sin volverse molesto en cada sesión.
+let _promoPendingCb=null;
+function maybeShowPromoModal(cb){
+  let seenToday=false;
+  try{ seenToday = localStorage.getItem('chromanom_promo_seen')===new Date().toDateString(); }catch(err){}
+  if(seenToday){ cb(); return; }
+  _promoPendingCb=cb;
+  document.getElementById('modal-premio').classList.add('open');
+}
+function closePromoModal(){
+  document.getElementById('modal-premio').classList.remove('open');
+  try{ localStorage.setItem('chromanom_promo_seen', new Date().toDateString()); }catch(err){}
+  const cb=_promoPendingCb; _promoPendingCb=null;
+  if(cb)cb();
 }
 
 function setMolView(view){
