@@ -3673,7 +3673,7 @@ const QBANK = [
    parts:[{t:'propanoato',cls:'c',l:'Acilo 3C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
 
   {type:'mc', mol:'etanoatoMetilo', q:'¿Qué orden sigue el nombre de un éster?',
-   ans:'Primero el acilo (...oato), luego "de", luego el grupo del alcohol (...ilo)', opts:['Primero el acilo (...oato), luego "de", luego el grupo del alcohol (...ilo)','Primero el alcohol y luego el ácido','Solo el nombre del ácido','Solo el nombre del alcohol'],
+   ans:'Primero el acilo (...oato), luego el conector de, luego el grupo del alcohol (...ilo)', opts:['Primero el acilo (...oato), luego el conector de, luego el grupo del alcohol (...ilo)','Primero el alcohol y luego el ácido','Solo el nombre del ácido','Solo el nombre del alcohol'],
    expl:'Estructura del nombre: <b>...oato de ...ilo</b> — la parte del ácido va primero (acilo), seguida del grupo alquilo del alcohol.',
    parts:[{t:'etanoato',cls:'c',l:'Acilo 2C'},{t:'de ',cls:'g',l:'Enlace éster'},{t:'metilo',cls:'r',l:'Alcohol'}], topic:'esteres'},
 
@@ -3933,7 +3933,7 @@ const QBANK = [
    parts:[{t:'etan',cls:'c',l:'2C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
 
   {type:'mc', mol:'propanamina', q:'¿Qué orden se usa para los sustituyentes sobre el nitrógeno frente a los de la cadena?',
-   ans:'Los del nitrógeno llevan el prefijo "N-" para distinguirlos', opts:['Los del nitrógeno llevan el prefijo "N-" para distinguirlos','Se numeran igual que los de la cadena','Se omiten siempre','Llevan el prefijo "O-"'],
+   ans:'Los del nitrógeno llevan el prefijo N- para distinguirlos', opts:['Los del nitrógeno llevan el prefijo N- para distinguirlos','Se numeran igual que los de la cadena','Se omiten siempre','Llevan el prefijo O-'],
    expl:'Para señalar que un sustituyente está sobre el nitrógeno (no sobre un carbono) se usa el localizador <b>N-</b>, p. ej. N-metil.',
    parts:[{t:'propan',cls:'c',l:'3C'},{t:'amina',cls:'g',l:'NH₂'}], topic:'aminas'},
 
@@ -4622,9 +4622,76 @@ function loadQuestion(){
 }
 
 // ── MC ──
+// ── Colorización de nombres IUPAC (modelo cromático r/c/i/g de ChromaNom) ──
+// Reparte un nombre en sus zonas de sustituyente(azul), cadena(verde),
+// insaturación(dorado) y grupo funcional(rosa) para pintarlo tal como se
+// pinta ya en la retroalimentación (parts) y en el modo arrastrar. Si el
+// texto no encaja con el patrón de un nombre IUPAC (p.ej. una respuesta
+// conceptual como "Sustitución radical (SR)") se deja sin colorear.
+const _CLS_VAR={r:'c1',c:'c2',i:'c3',g:'c4'};
+const _NAME_SUBST_WORDS=[
+  'trifluormetil','triclorometil','tribromometil',
+  'isopropil','isobutil','secbutil','tercbutil',
+  'ciclohexil','ciclopentil',
+  'metoxi','etoxi','propoxi','fenoxi','acetoxi',
+  'metil','etil','propil','butil','pentil','hexil','fenil','vinil',
+  'cloro','bromo','yodo','iodo','fluor','flúor',
+  'nitro','ciano','hidroxi','amino','oxo',
+].sort((a,b)=>b.length-a.length);
+const _NAME_SUBST_RE=new RegExp(`^((?:n,n-)?(?:n-)?(?:\\d+(?:,\\d+)*-)?(?:di|tri|tetra)?(?:${_NAME_SUBST_WORDS.join('|')}))`);
+const _NAME_UNSAT_RE=/^(\d+(?:,\d+)*-)?(di|tri)?(en|in)/;
+const _NAME_DIENE_LOOKAHEAD_RE=/^-\d+(?:,\d+)*-(di|tri)(en|in)/;
+const _NAME_ROOTS=['ciclohept','ciclohex','ciclopent','ciclobut','cicloprop','bencen','anilin','fen','hept','hex','pent','but','prop','et','met','oct','non','dec'];
+const _NAME_SUFFIXES=['diamina','diol','amina','amida','nitrilo','oico','oato','ona','ol','al','o'];
+const _NAME_BARE_SUFFIX_BY_ROOT={anilin:'a'};
+const _NAME_ESTER_RE=/^oato de (metilo|etilo|propilo|butilo|isopropilo|isobutilo)/;
+function _nameFoldDash(low,end){return low[end]==='-'?end+1:end;}
+function parseNameZones(s){
+  const low=s.toLowerCase();
+  let pos=0; const zones=[];
+  if(/^-[a-záéíóúñ]+$/.test(low) && _NAME_SUFFIXES.includes(low.slice(1))) return [{start:0,end:s.length,cls:'g'}];
+  const am=/^ácido\s+/.exec(low);
+  if(am){ zones.push({start:0,end:am[0].length,cls:'g'}); pos=am[0].length; }
+  while(true){
+    const mm=_NAME_SUBST_RE.exec(low.slice(pos));
+    if(!mm)break;
+    let end=_nameFoldDash(low,pos+mm[1].length);
+    zones.push({start:pos,end,cls:'r'}); pos=end;
+  }
+  let root=null;
+  for(const w of _NAME_ROOTS){ if(low.startsWith(w,pos)){ root=w; break; } }
+  if(!root) return null;
+  let rootEnd=pos+root.length;
+  if(low.startsWith('an',rootEnd)) rootEnd+=2;
+  if(low[rootEnd]==='o'){
+    const after=low.slice(rootEnd+1);
+    if(after.startsWith('nitrilo') || /^-\d+(?:,\d+)*-(diol|diamina)$/.test(after)) rootEnd+=1;
+  }
+  if(low[rootEnd]==='a' && _NAME_DIENE_LOOKAHEAD_RE.test(low.slice(rootEnd+1))) rootEnd+=1;
+  rootEnd=_nameFoldDash(low,rootEnd);
+  zones.push({start:pos,end:rootEnd,cls:'c'}); pos=rootEnd;
+  const um=_NAME_UNSAT_RE.exec(low.slice(pos));
+  if(um){ let end=_nameFoldDash(low,pos+um[0].length); zones.push({start:pos,end,cls:'i'}); pos=end; }
+  const rest=low.slice(pos);
+  let ok=false;
+  if(_NAME_SUFFIXES.includes(rest)) ok=true;
+  else if(_NAME_ESTER_RE.test(rest)) ok=true;
+  else if(_NAME_BARE_SUFFIX_BY_ROOT[root]===rest) ok=true;
+  else { for(const suf of _NAME_SUFFIXES){ if(new RegExp('^\\d+(?:,\\d+)*-'+suf+'$').test(rest)){ ok=true; break; } } }
+  if(!ok) return null;
+  zones.push({start:pos,end:s.length,cls:'g'});
+  return zones;
+}
+// Devuelve HTML con spans de color, o null si `s` no se reconoce como nombre IUPAC.
+function colorizeName(s){
+  const zones=parseNameZones(s);
+  if(!zones) return null;
+  return zones.map(z=>`<span style="color:var(--${_CLS_VAR[z.cls]}t)">${s.slice(z.start,z.end)}</span>`).join('');
+}
+
 function buildMC(q){
   const opts=shuffle(q.opts);
-  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/,"\\'")}',this)">${o}</button>`).join('')}</div>`;
+  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${colorizeName(o)||o}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;
