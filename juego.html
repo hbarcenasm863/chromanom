@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>NomOrg — Juego de Nomenclatura v2</title>
 <style>
 :root{
@@ -188,6 +188,21 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .btn-sheets{width:100%;padding:13px;margin-top:6px;background:linear-gradient(135deg,#1e6f40,#27ae60);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:16px;font-family:var(--sans);font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 18px rgba(30,111,64,.25)}
 .btn-sheets:hover{transform:translateY(-2px)}
 .btn-sheets:active{transform:scale(.97)}
+.modal-box-premio{max-width:380px;text-align:center;border:1.5px solid rgba(251,191,36,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 20px 60px rgba(0,0,0,.55),0 0 40px rgba(251,191,36,.15)}
+.premio-badge{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1a1206;background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:100px;padding:5px 14px;margin-bottom:14px;animation:premioPulse 1.8s ease-in-out infinite}
+.premio-trophy{font-size:3.2rem;margin-bottom:6px;animation:premioBounce 1.6s ease-in-out infinite}
+.premio-title{font-family:var(--serif);font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:2px;line-height:1.25}
+.premio-title b{color:#fbbf24}
+.premio-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:14px;padding:14px 16px;margin:16px 0 18px;text-align:left}
+.premio-row{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:9px}
+.premio-row:last-child{margin-bottom:0}
+.premio-row span.n{color:#fbbf24;font-weight:800;flex-shrink:0}
+.premio-foot{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:10px}
+.btn-premio{width:100%;padding:15px;background:linear-gradient(135deg,#f59e0b,#dc2626);color:#fff;border:none;border-radius:12px;font-family:var(--sans);font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s cubic-bezier(.34,1.56,.64,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 22px rgba(245,158,11,.35)}
+.btn-premio:hover{transform:translateY(-2px)}
+.btn-premio:active{transform:scale(.97)}
+@keyframes premioPulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,.5)}50%{box-shadow:0 0 0 6px rgba(251,191,36,0)}}
+@keyframes premioBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .btn-sheets:hover{filter:brightness(1.1);transform:translateY(-1px)}.btn-sheets:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .sheets-status{font-size:.73rem;color:var(--dimmer);text-align:center;margin-top:5px;min-height:1.1em}
 .portada-stats{display:flex;gap:20px;justify-content:center;margin-top:20px}
@@ -629,6 +644,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .drill-pill:hover{background:rgba(255,255,255,.18);border-color:rgba(252,211,77,.6);color:#fcd34d;transform:translateY(-1px)}
 .drill-pill:active{transform:scale(.95)}
 .rb-type.build{background:#fff2e8;color:#f97316}
+.rb-type.rxnq{background:#fce7f3;color:#9d174d}
 
 </style>
 </head>
@@ -809,6 +825,40 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     </div>
     <button class="btn-modal-start" onclick="acceptConsent()">Aceptar y continuar</button>
     <button onclick="closeConsent()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cancelar</button>
+  </div>
+</div>
+
+<!-- Modal grande de estado de envío (éxito/error) — visible e imposible de -->
+<!-- pasar por alto, para que el estudiante sepa con certeza si su partida -->
+<!-- quedó guardada o si debe avisarle al profesor. -->
+<div id="modal-envio" class="modal-overlay">
+  <div class="modal-box" style="max-width:360px;text-align:center">
+    <div id="modal-envio-icon" style="font-size:2.8rem;margin-bottom:10px">✅</div>
+    <div id="modal-envio-title" class="modal-title" style="font-size:1.05rem">¡Resultados guardados!</div>
+    <p id="modal-envio-msg" style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:18px">
+      Tu partida se guardó correctamente en la hoja de tu profesor.
+    </p>
+    <button id="modal-envio-retry" class="btn-modal-start" style="display:none" onclick="sendToSheets()">🔁 Reintentar envío</button>
+    <button onclick="closeEnvioModal()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cerrar</button>
+  </div>
+</div>
+
+<!-- Modal promocional: reto de la coordinación por 1000 preguntas al 80%+ -->
+<!-- de acierto. Aparece al iniciar cada partida (antes del cronómetro de la -->
+<!-- primera pregunta) para no restar tiempo de juego; se limita a una vez -->
+<!-- por día por dispositivo para no volverse molesto. -->
+<div id="modal-premio" class="modal-overlay">
+  <div class="modal-box modal-box-premio">
+    <div class="premio-badge">🔥 Reto especial de la coordinación</div>
+    <div class="premio-trophy">🏆</div>
+    <div class="premio-title">¡Gánate un <b>premio especial</b>!</div>
+    <div class="premio-box">
+      <div class="premio-row"><span class="n">1.</span><span>Sé el <b style="color:#fff">primer estudiante</b> en responder <b style="color:#fbbf24">1.000 preguntas</b> en el juego.</span></div>
+      <div class="premio-row"><span class="n">2.</span><span>Mantén un <b style="color:#fbbf24">80% de acierto o más</b> en el total.</span></div>
+      <div class="premio-row"><span class="n">3.</span><span>La coordinación entregará el premio en cuanto se cumpla la meta. 🎁</span></div>
+    </div>
+    <button class="btn-premio" onclick="closePromoModal()">🚀 ¡Acepto el reto — a jugar!</button>
+    <div class="premio-foot">Cada partida cuenta. ¡Tú puedes ser el primero! 💪</div>
   </div>
 </div>
 
@@ -3530,7 +3580,7 @@ const QBANK = [
 
   {type:'id', mol:'metoxietano',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
-   name:'metoxietano', highlight:{text:'et',cls:'c'}, correct:'c',
+   name:'metoxietano', highlight:{text:'et',cls:'c',at:6}, correct:'c',
    opts:[{id:'r',label:'Ramificaciones/sustituyentes'},{id:'c',label:'Cadena principal'},{id:'i',label:'Insaturaciones'},{id:'g',label:'Grupo funcional'}],
    expl:'"et" es la <b>cadena principal</b> (etano, 2C) a la que se une el metoxi.', topic:'eteres'},
 
@@ -4126,6 +4176,11 @@ let history=[];
 let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
+// true durante una ronda de "Repetir errores": showResults() no debe usar
+// esa ronda (un subconjunto pequeño y no representativo de preguntas) para
+// actualizar el "Mejor puntaje" guardado en localStorage — podría superar
+// el récord real de una partida completa del mismo nivel y sobrescribirlo.
+let isRetryRound=false;
 let studentName='', studentCourse='', studentCode='';
 const STUDENTS={
   '100307':'LANDERO VEGA SHARITH ALEJANDRA',
@@ -4530,11 +4585,32 @@ function startGame(){
   streak=0; bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
   writeAttempts=0;
+  isRetryRound=false;
   _analyticsSent=false;
   _sessionId=Math.random().toString(36).slice(2,8);
   sendSessionStart();
-  showScreen('s-game');
-  loadQuestion();
+  maybeShowPromoModal(()=>{ showScreen('s-game'); loadQuestion(); });
+}
+
+// ── Modal promocional del reto de coordinación (1000 preguntas, 80%+) ──
+// Se dispara al iniciar cada partida nueva (no en la ronda de repaso de
+// retryErrors), ANTES de mostrar la pantalla de juego, para no comerse
+// tiempo del cronómetro de la primera pregunta (ese arranca dentro de
+// loadQuestion()). Limitado a una vez por día por dispositivo para que
+// recuerde la meta sin volverse molesto en cada sesión.
+let _promoPendingCb=null;
+function maybeShowPromoModal(cb){
+  let seenToday=false;
+  try{ seenToday = localStorage.getItem('chromanom_promo_seen')===new Date().toDateString(); }catch(err){}
+  if(seenToday){ cb(); return; }
+  _promoPendingCb=cb;
+  document.getElementById('modal-premio').classList.add('open');
+}
+function closePromoModal(){
+  document.getElementById('modal-premio').classList.remove('open');
+  try{ localStorage.setItem('chromanom_promo_seen', new Date().toDateString()); }catch(err){}
+  const cb=_promoPendingCb; _promoPendingCb=null;
+  if(cb)cb();
 }
 
 function setMolView(view){
@@ -5008,7 +5084,12 @@ function checkDrag(){
 function buildID(q){
   const name=q.name;
   const hl=q.highlight.text;
-  const idx=name.indexOf(hl);
+  // Si el highlight trae "at" (posición explícita), se usa esa en vez de la
+  // primera ocurrencia — necesario cuando el fragmento a resaltar aparece
+  // más de una vez en el nombre (ej. "et" en "metoxietano" aparece dentro
+  // de "met" en el índice 1 Y como la cadena principal real en el índice 6;
+  // indexOf() siempre encontraba la ocurrencia equivocada).
+  const idx=q.highlight.at!==undefined ? q.highlight.at : name.indexOf(hl);
   let nameHtml='';
   // Para preguntas con doble rol (bencen) mostramos un pequeño aviso
   const isDual=Array.isArray(q.correct)&&q.correct.length>1;
@@ -6062,7 +6143,7 @@ const QBANK_EXTRA=[
   {type:'id', mol:'metoxietano',
    q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
    name:'metoxietano',
-   highlight:{text:'et',cls:'c'},
+   highlight:{text:'et',cls:'c',at:6},
    correct:'c',
    expl:'"et" es la <b>Cadena principal</b> — 2 carbonos (etano).', topic:'eteres'},
   {type:'id', mol:'metoxipropano',
@@ -7005,7 +7086,10 @@ function showResults(){
   const err=history.filter(h=>!h.ok&&!h.timeout).length;
   const tout=history.filter(h=>h.timeout).length;
   const pct=Math.round(ok/total*100);
-  const isRecord=saveBest(currentLevel,pct,score);
+  // Una ronda de "Repetir errores" es un subconjunto pequeño y no
+  // representativo de preguntas — no debe poder sobrescribir el récord de
+  // una partida completa del mismo nivel.
+  const isRecord=isRetryRound?false:saveBest(currentLevel,pct,score);
   renderBests();
 
   // Header
@@ -7033,8 +7117,8 @@ function showResults(){
   document.getElementById('r-time').textContent=tout;
 
   // By type
-  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor'};
-  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build'};
+  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
+  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
   let rbHtml='';
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
@@ -7077,12 +7161,12 @@ function showResults(){
   history.forEach((h,i)=>{
     const icon=h.ok?'✓':h.timeout?'⏰':'✗';
     const cls=h.ok?'ok':h.timeout?'time':'err';
-    const tnames={mc:'MC',drag:'Drag',id:'ID',write:'Escr.'};
+    const tnames={mc:'MC',drag:'Drag',id:'ID',write:'Escr.',build:'Constr.',rxnq:'Reac.'};
     hlHtml+=`<div class="hl-item ${cls}">
       <span class="hl-icon">${icon}</span>
       <span class="rb-type ${h.type}" style="font-size:.6rem;padding:2px 7px">${tnames[h.type]}</span>
       <span class="hl-q">${h.ans}</span>
-      ${!h.ok&&h.given!=='(arrastrar)'?`<span class="hl-a" style="color:var(--c1);font-size:.72rem">${h.given}</span>`:''}
+      ${!h.ok&&h.given!=='(colocar)'?`<span class="hl-a" style="color:var(--c1);font-size:.72rem">${h.given}</span>`:''}
     </div>`;
   });
   document.getElementById('history-list').innerHTML=hlHtml;
@@ -7103,6 +7187,13 @@ function retryErrors(){
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+  isRetryRound=true;
+  // Nueva sesión propia para la ronda de repaso: si se reutilizara _sessionId
+  // de la partida anterior, sendAnalytics() la ignoraría (_analyticsSent ya
+  // en true) y los resultados de esta ronda nunca llegarían a la hoja.
+  _analyticsSent=false;
+  _sessionId=Math.random().toString(36).slice(2,8);
+  sendSessionStart();
   showScreen('s-game');
   loadQuestion();
 }
@@ -7124,7 +7215,7 @@ document.getElementById('stat-banco').textContent=QBANK.length;
 // ANALYTICS → Google Sheets via Apps Script
 // Pega la URL del Web App de tu Apps Script aquí:
 // ════════════════════════════════════════════════════════
-const ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbwJwyRtUBmkc3ei93AI8RmM-T1Na6a0Q0Z2QoS0SS_UKJSYRQ4K4tHCQ-15T-6hPtLa/exec';
+const ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbytswW_s0fKiTK3Ed8TxoFkl8HcmeBuUfz7rVFQa9r-iLzCgRQIDbZDBmlhQKBSfqqE/exec';
 
 let _analyticsSent = false;
 let _sessionId = '';
@@ -7145,7 +7236,7 @@ function sendSessionStart(){
     nivel:     NIVEL_LABELS[currentLevel]||currentLevel,
     trigger:   'inicio',
     correctas: 0, total: 0, timeouts: 0, pct: 0,
-    errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0,
+    errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0, errores_rxnq:0,
     errores_por_tema:'{}', aciertos_por_tema:'{}', moleculas_falladas:''
   });
   fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true}).catch(()=>{});
@@ -7174,6 +7265,7 @@ function buildPayload(trigger){
     errores_id:    typeStats.id.tot   -typeStats.id.ok,
     errores_write: typeStats.write.tot-typeStats.write.ok,
     errores_build: typeStats.build.tot-typeStats.build.ok,
+    errores_rxnq:  typeStats.rxnq.tot -typeStats.rxnq.ok,
     errores_por_tema:   JSON.stringify(topicErrors),
     aciertos_por_tema:  JSON.stringify(topicOk),
     moleculas_falladas: failedMols
@@ -7199,14 +7291,52 @@ function sendAnalytics(trigger){
 function _updateSheetsStatus(state){
   const btn=document.getElementById('btn-sheets');
   const status=document.getElementById('sheets-status');
-  if(!status) return;
-  if(state==='ok'){
-    status.textContent='✅ Resultados guardados en Google Sheets.';
-    if(btn){btn.style.display='none';}
-  } else {
-    status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
-    if(btn){btn.style.display='flex';}
+  if(status){
+    if(state==='ok'){
+      status.textContent='✅ Resultados guardados en Google Sheets.';
+      if(btn){btn.style.display='none';}
+    } else {
+      status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
+      if(btn){btn.style.display='flex';}
+    }
   }
+  showEnvioModal(state);
+}
+
+// ── Modal grande de estado de envío ─────────────────────────
+// Antes el único indicador de éxito/error era un texto pequeño debajo del
+// botón "Enviar a Sheets" (fácil de no ver, sobre todo en celular). Este
+// modal es imposible de pasar por alto: se abre solo cada vez que se sabe
+// si el envío funcionó o no, para que el estudiante pueda avisarle al
+// profesor de inmediato si falló, en vez de asumir que todo quedó guardado.
+function showEnvioModal(state, mensajeError){
+  const modal=document.getElementById('modal-envio');
+  if(!modal) return;
+  const icon=document.getElementById('modal-envio-icon');
+  const title=document.getElementById('modal-envio-title');
+  const msg=document.getElementById('modal-envio-msg');
+  const retryBtn=document.getElementById('modal-envio-retry');
+  if(state==='ok'){
+    icon.textContent='✅';
+    title.textContent='¡Resultados guardados!';
+    msg.textContent='Tu partida se guardó correctamente en la hoja de tu profesor.';
+    if(retryBtn) retryBtn.style.display='none';
+    modal.classList.add('open');
+    // Éxito: se cierra solo, no requiere que el estudiante haga nada.
+    setTimeout(()=>{ modal.classList.remove('open'); }, 2600);
+  } else {
+    icon.textContent='⚠️';
+    title.textContent='No se pudo guardar tu partida';
+    msg.textContent='Hubo un problema al enviar tus resultados a la hoja del profesor.'
+      +(mensajeError?(' ('+mensajeError+')'):'')
+      +' Pulsa "Reintentar envío". Si sigue fallando, muéstrale esta pantalla a tu profesor.';
+    if(retryBtn) retryBtn.style.display='block';
+    modal.classList.add('open');
+  }
+}
+function closeEnvioModal(){
+  const modal=document.getElementById('modal-envio');
+  if(modal) modal.classList.remove('open');
 }
 
 function sendToSheets(){
@@ -7225,10 +7355,12 @@ function sendToSheets(){
       _analyticsSent=true;
       if(btn){btn.style.display='none';}
       if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
+      showEnvioModal('ok');
     })
-    .catch(()=>{
+    .catch(err=>{
+      showEnvioModal('error', typeof err==='string'?err:(err&&err.message));
       if(btn){btn.disabled=false;btn.innerHTML='📊 Reintentar envío';btn.style.display='flex';}
-      if(status) status.textContent='⚠ Error al enviar. Verifica la URL del Apps Script.';
+      if(status) status.textContent='⚠ No se pudo enviar. Pulsa el botón para reintentar.';
     });
 }
 

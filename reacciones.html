@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Reacciones Orgánicas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -7937,9 +7943,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.mol-cmp-arr > div:not(.mol-cmp-reag)').forEach(d=>{
     const t=d.textContent.trim();
     if(/[─→]/.test(t)){
-      const m=t.match(/──(?:\[([^\]]+)\])?──?→/)||t.match(/^[─]+→$/);
+      // Antes exigía al menos 4 guiones antes de la flecha (o que la flecha
+      // fuera todo el contenido, sin texto después) — tarjetas con solo 2
+      // guiones ("──→") o con una anotación después de la flecha
+      // ("──→ (menos O₂)", "──→ aldol") no matcheaban ningún patrón y la
+      // flecha se quedaba como texto plano con guiones ASCII sin cabeza.
+      const m=t.match(/^─+(?:\[([^\]]+)\])?─*→\s*(.*)$/);
       if(m){
-        const cond=m[1]||'';
+        const cond=m[1]||m[2]||'';
         d.innerHTML=mkArr(cond,95,true);
         d.style.cssText='display:flex;align-items:center;justify-content:center';
       }
@@ -8213,7 +8224,12 @@ function speakStep(btn,text){
   window.speechSynthesis.speak(u);
 }
 function stopSpeak(){
-  window.speechSynthesis.cancel();
+  // Sin esta guarda, en navegadores/webviews sin Web Speech API
+  // window.speechSynthesis es undefined y .cancel() lanza TypeError —
+  // stopSpeak() se llama al inicio de mechStep/mechDot/toggleRxn/
+  // rxnAnimStep/rxnAnimDot, así que ese error cortaba en seco la navegación
+  // de pasos de mecanismo e incluso el botón para cerrar una tarjeta.
+  if('speechSynthesis' in window)window.speechSynthesis.cancel();
   if(_ttsBtn){_ttsBtn.classList.remove('playing');_ttsBtn=null;}
 }
 
