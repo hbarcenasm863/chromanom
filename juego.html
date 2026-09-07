@@ -4168,7 +4168,7 @@ const QBANK = [
 // ════════════════════════════════════════════════════════
 // GAME STATE
 // ════════════════════════════════════════════════════════
-let questions=[], qIdx=0, score=0, timer=null, timeLeft=49;
+let questions=[], qIdx=0, score=0, timer=null, timeLeft=49, timeMax=60;
 let streak=0, bestStreak=0;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
@@ -5233,8 +5233,13 @@ function checkWrite(){
 }
 
 // ── TIMER ──
+// Constructor Molecular (type 'build') da 90s en vez de 60: hay que ubicar
+// átomos y enlaces uno por uno, así que 60s se quedaba corto y los
+// estudiantes reportaban "muy poco tiempo" en ese modo específico.
 function startTimer(){
-  timeLeft=60;
+  const q=questions[qIdx];
+  timeMax=(q&&q.type==='build')?90:60;
+  timeLeft=timeMax;
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
   updateTimer();
@@ -5266,9 +5271,12 @@ function updateTimer(){
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
   if(!fg||!txt)return;
-  const pct=timeLeft/60;
+  const pct=timeLeft/timeMax;
   fg.style.strokeDashoffset=CIRCUMFERENCE*(1-pct);
-  fg.style.stroke=timeLeft>15?'#fcd34d':timeLeft>7?'var(--c2)':'var(--c1)';
+  // Umbrales de color por porcentaje (no segundos absolutos) para que el
+  // aviso visual de "se acaba el tiempo" se sienta igual en los 60s
+  // normales y en los 90s de Constructor Molecular.
+  fg.style.stroke=pct>0.25?'#fcd34d':pct>0.117?'var(--c2)':'var(--c1)';
   txt.textContent=timeLeft;
 }
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
