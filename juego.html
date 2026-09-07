@@ -4552,10 +4552,16 @@ function setModo(modo){
 }
 
 function openLevelModal(nivel){
-  // Segunda capa de defensa: con una partida ya en curso, ignorar
-  // cualquier disparo espurio de este flujo (ver el fix de foco en
-  // showScreen() para la causa raíz).
-  if(gameActive)return;
+  // Segunda capa de defensa: con una partida ya en curso, O ya iniciándose
+  // (esperando la consulta de progreso, modal de progreso/reto en
+  // pantalla), ignorar cualquier disparo espurio de este flujo — faltaba
+  // el chequeo de _iniciandoPartida aquí, y su ausencia permitía reabrir
+  // este modal de código MIENTRAS el anterior seguía en curso, dejando el
+  // botón "Comenzar" del modal nuevo con pinta de habilitado pero sin
+  // ningún efecto al pulsarlo (confirmStartGame() lo bloqueaba en
+  // silencio). Ver el fix de foco en showScreen() para la causa raíz de
+  // por qué este modal se reabría solo.
+  if(gameActive||_iniciandoPartida)return;
   currentLevel=nivel;
   if(freeMode){
     studentName=''; studentCourse=''; studentCode='';
@@ -4631,6 +4637,14 @@ function confirmStartGame(){
   if(cod.substring(0,4)!==sel){document.getElementById('modal-codigo').focus();return;}
   if(_iniciandoPartida||gameActive)return;
   _iniciandoPartida=true;
+  // Red de seguridad: startGame() libera este candado apenas arranca la
+  // partida de verdad, pero si por lo que sea eso nunca llega a pasar
+  // (el estudiante se queda mirando el modal de progreso sin tocar
+  // "Continuar", algún error inesperado, etc.), sin esto el candado
+  // podía quedar pegado para siempre — el botón "Comenzar" se ve
+  // habilitado pero no responde a los clics, sin ninguna forma de
+  // recuperarse salvo recargar la página. A los 15s se libera solo.
+  setTimeout(()=>{_iniciandoPartida=false;},15000);
   studentName=STUDENTS[cod]; studentCourse=sel; studentCode=cod;
   closeModal(); mostrarProgresoYJugar();
 }
