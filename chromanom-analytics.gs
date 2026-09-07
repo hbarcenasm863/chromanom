@@ -118,7 +118,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-retry-hardening-v2';
+const BUILD_TAG = '2026-09-05-audited-v1';
 
 function jsonOut_(obj) {
   return ContentService
@@ -181,9 +181,16 @@ function getOrCreateSpreadsheet() {
 function initRegistroSheet(sh) {
   sh.setName(SHEET_REGISTRO);
   sh.appendRow(HEADERS);
+  // setFrozenRows() es un método de Sheet, no de Range — encadenado detrás
+  // de setFontWeight() (que sí es de Range) revienta con
+  // "setFrozenRows is not a function" en cuanto haya que crear la hoja
+  // "Registro" desde cero (spreadsheet nuevo, o el actual borrado alguna
+  // vez). Pasó desapercibido porque la hoja actual ya existe desde hace
+  // meses y esta función nunca se había vuelto a ejecutar sobre una hoja
+  // nueva — lo detectó una prueba funcional, no la lectura del código.
   const hRange = sh.getRange(1, 1, 1, HEADERS.length);
-  hRange.setBackground(COLOR.header).setFontColor(COLOR.hText)
-        .setFontWeight('bold').setFrozenRows(1);
+  hRange.setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+  sh.setFrozenRows(1);
   sh.setColumnWidth(1,  160);  // Timestamp
   sh.setColumnWidth(2,  90);   // Fecha
   sh.setColumnWidth(3,  70);   // Hora
@@ -591,7 +598,24 @@ function updateStats(ss) {
   }
 }
 
+// Envoltorio delgado sobre updateStatsCore_(): si algo inesperado revienta
+// a mitad de la agrupación de estudiantes (antes de llegar a los try/catch
+// puntuales de updateTopicStats/updateCursoSheet, que ya se protegen solos),
+// sin esto la hoja "Estadísticas" podía quedar en blanco (clearContents() ya
+// corrió) hasta el siguiente disparador 30 min después, sin ningún rastro
+// del motivo. Se registra en "Errores" y se re-lanza la excepción para que
+// el aviso automático de fallo de disparador de Apps Script siga llegando
+// igual — este log es un extra, no un reemplazo.
 function updateStats_(ss) {
+  try {
+    updateStatsCore_(ss);
+  } catch (err) {
+    logStatsError_(ss, 'updateStats_', err);
+    throw err;
+  }
+}
+
+function updateStatsCore_(ss) {
   // Defensivo: si la zona horaria de la hoja se desconfiguró (o nunca se
   // fijó explícitamente en una hoja creada antes de este chequeo), la
   // vuelve a dejar en Bogotá. Va aquí y no en getOrCreateSpreadsheet()
