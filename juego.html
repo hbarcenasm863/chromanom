@@ -4496,7 +4496,14 @@ function norm(s){
     .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u')
     .replace(/[–—−]/g,'-')
     .replace(/\./g,',')
-    .replace(/\s*-\s*/g,'-').replace(/ /g,'')
+    // Guion y espacio se tratan como el MISMO separador (o su ausencia):
+    // "meta-xileno", "meta xileno" y "metaxileno" deben ser equivalentes.
+    // Antes solo el espacio se borraba y el guion se conservaba, así que
+    // una respuesta correcta escrita con espacio en vez de guion (muy
+    // común: "1,3 diol" en vez de "1,3-diol", "m xileno" en vez de
+    // "m-xileno") no coincidía con la respuesta aceptada aunque fuera
+    // exactamente el mismo nombre.
+    .replace(/[\s-]+/g,'')
     .replace(/[.,;:!?]+$/,'');
 }
 
