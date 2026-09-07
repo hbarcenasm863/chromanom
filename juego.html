@@ -4610,12 +4610,23 @@ function acceptConsent(){
 function closeConsent(){
   document.getElementById('modal-consent').classList.remove('open');
 }
+// true entre el momento en que se confirma el código y el momento en que
+// startGame() realmente arranca la partida (puede tardar hasta 4s por la
+// consulta de progreso). Sin esto, un estudiante impaciente que toca varias
+// veces mientras no ve nada en pantalla —el modal ya se cerró, así que el
+// toque cae sobre la tarjeta de nivel de la portada y vuelve a abrir el
+// modal con el código ya validado— dispara confirmStartGame() 2 o 3 veces
+// seguidas, y el modal de progreso terminaba apareciendo esa misma
+// cantidad de veces.
+let _iniciandoPartida=false;
 function confirmStartGame(){
   const sel=document.getElementById('modal-curso-sel').value;
   const cod=document.getElementById('modal-codigo').value.trim();
   if(!sel){document.getElementById('modal-curso-sel').focus();return;}
   if(cod.length<6||!STUDENTS[cod]){document.getElementById('modal-codigo').focus();return;}
   if(cod.substring(0,4)!==sel){document.getElementById('modal-codigo').focus();return;}
+  if(_iniciandoPartida)return;
+  _iniciandoPartida=true;
   studentName=STUDENTS[cod]; studentCourse=sel; studentCode=cod;
   closeModal(); mostrarProgresoYJugar();
 }
@@ -4649,6 +4660,7 @@ function closeProgresoModal(){
   startGame();
 }
 function startGame(){
+  _iniciandoPartida=false; // la partida ya arrancó de verdad: libera el candado de confirmStartGame()
   let pool;
   if(currentLevel==='rxn_mixto'){
     pool=QBANK.filter(q=>q.type==='rxnq'&&_rxnGrupos.includes(q.topic));
