@@ -112,10 +112,30 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-timezone-bogota-v1';
+const BUILD_TAG = '2026-09-04-progreso-v1';
 
-// ── Punto de entrada HTTP GET (diagnóstico) ─────────────────
-function doGet() {
+function jsonOut_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── Punto de entrada HTTP GET ────────────────────────────────
+// Además del diagnóstico de siempre, atiende ?accion=progreso&nombre=...&curso=...
+// para que juego.html muestre al estudiante, apenas entra con su código,
+// cuántas sesiones lleva jugadas, cuántas preguntas ha respondido y su %
+// de acierto — así puede hacer seguimiento de su propio avance.
+//
+// Lee de la hoja "Estadísticas" (ya calculada por el disparador automático
+// cada 30 min), NO recalcula nada al vuelo: recalcular en cada consulta
+// competiría por el mismo LockService que usan appendRow()/updateStats()
+// y volvería a arriesgar el mismo tipo de sobrecarga que ya causó errores
+// de envío con varios estudiantes jugando a la vez. El dato puede tener
+// hasta ~30 min de rezago, aceptable para un resumen de "cómo voy".
+function doGet(e) {
+  if (e && e.parameter && e.parameter.accion === 'progreso') {
+    return handleProgreso_(e);
+  }
   return ContentService
     .createTextOutput('Chromanom Analytics — activo ✓ (build ' + BUILD_TAG + ')')
     .setMimeType(ContentService.MimeType.TEXT);
@@ -474,6 +494,43 @@ function limpiarRegistroDuplicados() {
 
   updateStats(ss);
   return 'Filas eliminadas: ' + rowsToDelete.length;
+}
+
+// ── Progreso personal de un estudiante (sesiones, preguntas, % acierto) ──
+// Busca en "Estadísticas" la fila de ese Nombre+Curso, con el mismo
+// normalizeName_() que usa updateStats_() para agrupar estudiantes — así
+// una búsqueda por "Ana Perez" encuentra la fila aunque el Registro tenga
+// el nombre en otro orden/mayúsculas/tildes. Sin lock: es una lectura
+// puntual y poco frecuente (una vez por estudiante que entra, no por cada
+// pregunta), así que no vale la pena competir por el mismo LockService que
+// usan appendRow()/updateStats() para escrituras.
+function handleProgreso_(e) {
+  try {
+    const nombre = e.parameter.nombre || '';
+    const curso  = e.parameter.curso  || '';
+    if (!nombre || !curso) return jsonOut_({ ok: true, encontrado: false });
+
+    const ss = getOrCreateSpreadsheet();
+    const sh = ss.getSheetByName(SHEET_STATS);
+    if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
+
+    // Columnas de "Estadísticas": Nombre, Curso, Sesiones, Preguntas
+    // respondidas, % Acierto global, Nota juego (0-5), ...
+    const data = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+    const buscado = normalizeName_(nombre) + '||' + String(curso);
+    for (let i = 0; i < data.length; i++) {
+      const r = data[i];
+      if (normalizeName_(r[0]) + '||' + String(r[1]) === buscado) {
+        return jsonOut_({
+          ok: true, encontrado: true,
+          sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5]
+        });
+      }
+    }
+    return jsonOut_({ ok: true, encontrado: false });
+  } catch (err) {
+    return jsonOut_({ ok: false, error: err.message });
+  }
 }
 
 // ── Función de diagnóstico: lista los valores reales de "Curso" ─────────
