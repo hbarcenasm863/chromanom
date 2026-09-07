@@ -79,12 +79,18 @@ function doPost(e) {
   try {
     const raw  = e.postData ? e.postData.contents : '{}';
     const data = JSON.parse(raw);
-    const ss   = getOrCreateSpreadsheet();
 
     const INTENTOS = 6;
     let ultimoError;
     for (let intento = 0; intento < INTENTOS; intento++) {
       try {
+        // getOrCreateSpreadsheet() TAMBIÉN va dentro del bucle de reintentos,
+        // no solo appendRow(): es una llamada al servicio de Spreadsheets
+        // igual que las demás, y por eso puede toparse con el mismo error
+        // transitorio de cuota. Dejarla afuera (como estaba antes) significa
+        // que un solo tropiezo ahí se le devuelve al estudiante como error
+        // real, sin ninguno de los reintentos que sí protegen a appendRow().
+        const ss = getOrCreateSpreadsheet();
         appendRow(ss, data);
         ultimoError = null;
         break;
@@ -112,7 +118,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-04-progreso-v1';
+const BUILD_TAG = '2026-09-04-retry-hardening-v2';
 
 function jsonOut_(obj) {
   return ContentService
@@ -151,22 +157,23 @@ function doGet(e) {
 const ZONA_HORARIA = 'America/Bogota';
 
 // ── Obtiene o crea el spreadsheet ──────────────────────────
+// OJO: esta función corre en CADA doPost/doGet (varias veces por segundo
+// con una clase completa jugando), así que solo hace las llamadas mínimas
+// indispensables al servicio de Spreadsheets. El chequeo/corrección de
+// zona horaria (defensivo, por si se desconfigura sola) NO va aquí — se
+// hizo antes y esas dos llamadas extra por request sumaban justo al tipo
+// de saturación que causó errores de envío. Ese chequeo vive en
+// updateStats_() (ver más abajo), que ya corre bajo el mismo lock cada 30
+// min o al llamar recalcularAhora(), así se sigue autocorrigiendo sin
+// agregar carga a la ruta caliente de guardar una partida.
 function getOrCreateSpreadsheet() {
   const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
-  let ss;
   if (files.hasNext()) {
-    ss = SpreadsheetApp.open(files.next());
-  } else {
-    ss = SpreadsheetApp.create(SPREADSHEET_NAME);
-    initRegistroSheet(ss.getSheets()[0]);
+    return SpreadsheetApp.open(files.next());
   }
-  // Defensivo: si la zona horaria de la hoja se desconfiguró (o nunca se fijó
-  // explícitamente), la vuelve a dejar en Bogotá. getSpreadsheetTimeZone() es
-  // barato (metadata, no lee datos), así que comparar antes de escribir no
-  // agrega carga real en cada doPost().
-  if (ss.getSpreadsheetTimeZone() !== ZONA_HORARIA) {
-    ss.setSpreadsheetTimeZone(ZONA_HORARIA);
-  }
+  const ss = SpreadsheetApp.create(SPREADSHEET_NAME);
+  initRegistroSheet(ss.getSheets()[0]);
+  ss.setSpreadsheetTimeZone(ZONA_HORARIA);
   return ss;
 }
 
@@ -585,6 +592,16 @@ function updateStats(ss) {
 }
 
 function updateStats_(ss) {
+  // Defensivo: si la zona horaria de la hoja se desconfiguró (o nunca se
+  // fijó explícitamente en una hoja creada antes de este chequeo), la
+  // vuelve a dejar en Bogotá. Va aquí y no en getOrCreateSpreadsheet()
+  // porque esto corre bajo lock cada 30 min (o al llamar recalcularAhora()
+  // manualmente) — no en cada partida guardada — así se autocorrige sin
+  // sumar llamadas al servicio de Spreadsheets en la ruta caliente de
+  // doPost(), que es justo lo que antes causó errores de envío.
+  if (ss.getSpreadsheetTimeZone() !== ZONA_HORARIA) {
+    ss.setSpreadsheetTimeZone(ZONA_HORARIA);
+  }
   let sh = ss.getSheetByName(SHEET_STATS);
   const esNueva = !sh;
   if (esNueva) sh = ss.insertSheet(SHEET_STATS);
