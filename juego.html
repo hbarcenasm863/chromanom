@@ -4625,6 +4625,10 @@ function validarCodigoInline(){
   document.getElementById('wi-course').textContent='Curso '+studentCourse+' · Código '+studentCode;
   actualizarPanelesEstudiante();
   cargarProgresoInline();
+  // El reto de la coordinación se muestra aquí, al reconocer al estudiante
+  // por su código — no al arrancar el juego, para que se vea apenas entra
+  // y no cada vez que elige un nivel nuevo en la misma visita.
+  maybeShowPromoModal(()=>{});
 }
 function cambiarEstudiante(){
   studentName=''; studentCourse=''; studentCode='';
@@ -4693,15 +4697,24 @@ function startGame(){
   sendSessionStart();
   gameActive=true;
   armExitGuard();
-  maybeShowPromoModal(()=>{ showScreen('s-game'); loadQuestion(); });
+  if(freeMode){
+    // En modo colegio el reto ya se mostró (o se descartó por el tope de
+    // una vez al día) al reconocer al estudiante en validarCodigoInline().
+    // En modo libre no hay ese paso previo, así que se muestra aquí, antes
+    // de entrar a jugar.
+    maybeShowPromoModal(()=>{ showScreen('s-game'); loadQuestion(); });
+  } else {
+    showScreen('s-game'); loadQuestion();
+  }
 }
 
 // ── Modal promocional del reto de coordinación (1000 preguntas, 80%+) ──
-// Se dispara al iniciar cada partida nueva (no en la ronda de repaso de
-// retryErrors), ANTES de mostrar la pantalla de juego, para no comerse
-// tiempo del cronómetro de la primera pregunta (ese arranca dentro de
-// loadQuestion()). Limitado a una vez por día por dispositivo para que
-// recuerde la meta sin volverse molesto en cada sesión.
+// En modo colegio se dispara al reconocer al estudiante por su código
+// (validarCodigoInline); en modo libre, al iniciar la partida, ANTES de
+// mostrar la pantalla de juego, para no comerse tiempo del cronómetro de
+// la primera pregunta (ese arranca dentro de loadQuestion()). Limitado a
+// una vez por día por dispositivo para que recuerde la meta sin volverse
+// molesto en cada sesión.
 let _promoPendingCb=null;
 function maybeShowPromoModal(cb){
   let seenToday=false;
