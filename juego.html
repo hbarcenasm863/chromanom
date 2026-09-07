@@ -4627,8 +4627,11 @@ function validarCodigoInline(){
   cargarProgresoInline();
   // El reto de la coordinación se muestra aquí, al reconocer al estudiante
   // por su código — no al arrancar el juego, para que se vea apenas entra
-  // y no cada vez que elige un nivel nuevo en la misma visita.
-  maybeShowPromoModal(()=>{});
+  // y no cada vez que elige un nivel nuevo en la misma visita. A diferencia
+  // del modo libre, aquí se muestra SIEMPRE (sin el tope de una vez al día):
+  // cada estudiante que se identifica en el equipo debe verlo, aunque ya se
+  // le haya mostrado a otro compañero antes ese mismo día en el mismo salón.
+  abrirPromoModal(()=>{});
 }
 function cambiarEstudiante(){
   studentName=''; studentCourse=''; studentCode='';
@@ -4710,18 +4713,23 @@ function startGame(){
 
 // ── Modal promocional del reto de coordinación (1000 preguntas, 80%+) ──
 // En modo colegio se dispara al reconocer al estudiante por su código
-// (validarCodigoInline); en modo libre, al iniciar la partida, ANTES de
-// mostrar la pantalla de juego, para no comerse tiempo del cronómetro de
-// la primera pregunta (ese arranca dentro de loadQuestion()). Limitado a
-// una vez por día por dispositivo para que recuerde la meta sin volverse
-// molesto en cada sesión.
+// (validarCodigoInline) — SIEMPRE, vía abrirPromoModal(), porque cada
+// estudiante que se identifica en un equipo compartido debe verlo, aunque
+// ya se le haya mostrado a otro compañero ese mismo día. En modo libre, en
+// cambio, se dispara al iniciar la partida vía maybeShowPromoModal(), que sí
+// respeta un tope de una vez por día por dispositivo (ahí no hay un
+// "estudiante" distinto de por medio, y mostrarlo en cada partida sería
+// molesto).
 let _promoPendingCb=null;
+function abrirPromoModal(cb){
+  _promoPendingCb=cb;
+  document.getElementById('modal-premio').classList.add('open');
+}
 function maybeShowPromoModal(cb){
   let seenToday=false;
   try{ seenToday = localStorage.getItem('chromanom_promo_seen')===new Date().toDateString(); }catch(err){}
   if(seenToday){ cb(); return; }
-  _promoPendingCb=cb;
-  document.getElementById('modal-premio').classList.add('open');
+  abrirPromoModal(cb);
 }
 function closePromoModal(){
   document.getElementById('modal-premio').classList.remove('open');
