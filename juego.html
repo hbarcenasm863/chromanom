@@ -880,6 +880,21 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
+<!-- Modal de confirmación de salida: se muestra cuando el estudiante -->
+<!-- presiona "atrás" en el celular a mitad de una partida, para que no -->
+<!-- pierda el progreso por un gesto o toque accidental. -->
+<div id="modal-salir" class="modal-overlay">
+  <div class="modal-box" style="max-width:340px;text-align:center">
+    <div style="font-size:2.4rem;margin-bottom:6px">⚠️</div>
+    <div class="modal-title" style="font-size:1.05rem">¿Salir de la partida?</div>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:18px">
+      Si sales ahora perderás el progreso de esta partida. ¿Fue sin querer?
+    </p>
+    <button class="btn-modal-start" onclick="closeExitModal()">↩️ Seguir jugando</button>
+    <button onclick="confirmExitGame()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Salir de todas formas</button>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════════
      SCREEN 2: JUEGO
 ══════════════════════════════════════════ -->
@@ -4188,6 +4203,11 @@ const QBANK = [
 // ════════════════════════════════════════════════════════
 let questions=[], qIdx=0, score=0, timer=null, timeLeft=49, timeMax=60;
 let streak=0, bestStreak=0;
+// true mientras el estudiante está jugando una partida (desde startGame()/
+// retryErrors() hasta que se muestran los resultados o vuelve a la
+// portada). Se usa para armar la confirmación de salida accidental — ver
+// armExitGuard()/beforeunload más abajo.
+let gameActive=false;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
 let history=[];
@@ -4655,6 +4675,8 @@ function startGame(){
   _analyticsSent=false;
   _sessionId=Math.random().toString(36).slice(2,8);
   sendSessionStart();
+  gameActive=true;
+  armExitGuard();
   maybeShowPromoModal(()=>{ showScreen('s-game'); loadQuestion(); });
 }
 
@@ -7154,6 +7176,10 @@ function renderBests(){
 }
 
 function showResults(){
+  // La partida ya terminó y sus resultados ya se guardaron (sendAnalytics
+  // más abajo) — de aquí en adelante recargar o volver atrás no pierde
+  // nada, así que ya no hace falta la confirmación de salida.
+  gameActive=false;
   showScreen('s-resumen');
   const total=questions.length;
   const ok=history.filter(h=>h.ok).length;
@@ -7268,6 +7294,8 @@ function retryErrors(){
   _analyticsSent=false;
   _sessionId=Math.random().toString(36).slice(2,8);
   sendSessionStart();
+  gameActive=true;
+  armExitGuard();
   showScreen('s-game');
   loadQuestion();
 }
@@ -7276,6 +7304,10 @@ function retryErrors(){
 // UTILS
 // ════════════════════════════════════════════════════════
 function showScreen(id){
+  // Volver a la portada (por el botón "← Volver al inicio" o cualquier
+  // otro) es una salida DELIBERADA — ya no hay partida en curso que
+  // proteger contra un "atrás" o recarga accidental.
+  if(id==='s-portada') gameActive=false;
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
@@ -7438,7 +7470,55 @@ function sendToSheets(){
     });
 }
 
-window.addEventListener('beforeunload',()=>sendAnalytics('cierre'));
+// ── Protección contra salida accidental de la partida ───────────────────
+// Los estudiantes reportaron salir sin querer al recargar o presionar
+// "atrás" en el celular, perdiendo el progreso de la partida en curso.
+// Dos mecanismos complementarios (uno solo no cubre todos los navegadores):
+//
+// 1) beforeunload: diálogo NATIVO del navegador al recargar/cerrar la
+//    pestaña. Los navegadores modernos ignoran el texto personalizado por
+//    seguridad, pero igual muestran su propio aviso de confirmación — con
+//    que exista, ya sirve de freno. Solo se activa con gameActive=true
+//    (partida en curso), para no molestar en la portada ni tras terminar.
+// 2) popstate + pushState: el botón/gesto "atrás" del celular no siempre
+//    dispara beforeunload de forma confiable (sobre todo el gesto de
+//    borde de iOS Safari). armExitGuard() agrega una entrada extra al
+//    historial al iniciar la partida; si el estudiante presiona "atrás"
+//    mientras gameActive=true, se intercepta, se vuelve a armar la
+//    trampa (para que la URL no cambie todavía) y se muestra el modal
+//    propio en vez de dejar que el navegador salga en silencio.
+window.addEventListener('beforeunload', (e) => {
+  sendAnalytics('cierre');
+  if (gameActive) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// OJO: usar window.history (no "history" a secas) — el juego ya tiene su
+// propia variable global "history" (el arreglo de respuestas de la
+// partida, ver "let history=[]" más arriba) que tapa al objeto History
+// del navegador. "history.pushState(...)" fallaría con
+// "history.pushState is not a function" al llamar el método sobre el
+// arreglo en vez del objeto real del navegador.
+function armExitGuard(){
+  window.history.pushState({ chromanomGuard: true }, '', location.href);
+}
+window.addEventListener('popstate', () => {
+  if (gameActive) {
+    window.history.pushState({ chromanomGuard: true }, '', location.href);
+    document.getElementById('modal-salir').classList.add('open');
+  }
+});
+function closeExitModal(){
+  document.getElementById('modal-salir').classList.remove('open');
+}
+function confirmExitGame(){
+  gameActive = false;
+  closeExitModal();
+  sendAnalytics('cierre');
+  showScreen('s-portada');
+}
 </script>
 
 <!-- FOOTER COPYRIGHT -->
