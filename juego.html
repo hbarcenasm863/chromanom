@@ -4552,6 +4552,10 @@ function setModo(modo){
 }
 
 function openLevelModal(nivel){
+  // Segunda capa de defensa: con una partida ya en curso, ignorar
+  // cualquier disparo espurio de este flujo (ver el fix de foco en
+  // showScreen() para la causa raíz).
+  if(gameActive)return;
   currentLevel=nivel;
   if(freeMode){
     studentName=''; studentCourse=''; studentCode='';
@@ -4625,7 +4629,7 @@ function confirmStartGame(){
   if(!sel){document.getElementById('modal-curso-sel').focus();return;}
   if(cod.length<6||!STUDENTS[cod]){document.getElementById('modal-codigo').focus();return;}
   if(cod.substring(0,4)!==sel){document.getElementById('modal-codigo').focus();return;}
-  if(_iniciandoPartida)return;
+  if(_iniciandoPartida||gameActive)return;
   _iniciandoPartida=true;
   studentName=STUDENTS[cod]; studentCourse=sel; studentCode=cod;
   closeModal(); mostrarProgresoYJugar();
@@ -7320,6 +7324,17 @@ function showScreen(id){
   // otro) es una salida DELIBERADA — ya no hay partida en curso que
   // proteger contra un "atrás" o recarga accidental.
   if(id==='s-portada') gameActive=false;
+  if(id==='s-game'){
+    // Limpiar el foco al entrar a jugar: los botones de los modales
+    // previos (código de estudiante, progreso, reto de coordinación)
+    // quedan con el foco del teclado tras hacer clic en ellos, aunque
+    // ya estén ocultos. Si ese foco sobrevive, presionar luego Enter o
+    // Espacio durante la partida (muy normal al responder una pregunta
+    // de "escribir") reactiva ese botón invisible como si se hiciera
+    // clic de nuevo — reabriendo el modal de código o el de progreso a
+    // mitad de la partida, como reportó una estudiante.
+    if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  }
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
