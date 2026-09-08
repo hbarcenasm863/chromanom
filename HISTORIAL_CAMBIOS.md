@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 (2) — Sesiones y preguntas del periodo en la hoja "Estadísticas"
+
+### Contexto
+La docente pidió que la hoja "Estadísticas" muestre, además del total
+histórico de siempre, cuántas veces ha ingresado cada estudiante y cuántas
+preguntas ha respondido **dentro del periodo académico vigente**
+(`FECHA_INICIO_PERIODO`/`FECHA_FIN_PERIODO`, ya usadas para la Nota de
+juego) — para poder distinguir la actividad de este periodo de lo jugado
+en periodos anteriores.
+
+### Cambios
+- `chromanom-analytics.gs` (`updateStatsCore_`): se agregan dos columnas
+  nuevas al final de la hoja "Estadísticas" — **"Sesiones en el periodo"**
+  y **"Preguntas en el periodo"** — calculadas con el mismo filtro de
+  fecha que ya usa la Nota de juego. Van al final (después de las columnas
+  de % por nivel), no intercaladas, para no correr el índice de columnas
+  fijas que ya lee `handleProgreso_()` (Nombre, Curso, Sesiones, Preguntas,
+  % Acierto, Nota siguen en las columnas 1-6).
+- Como la hoja "Estadísticas" se reconstruye por completo en cada
+  recálculo (no es incremental como "Registro"), las columnas nuevas
+  aparecen solas la próxima vez que corra el disparador automático (cada
+  30 min) o se ejecute `recalcularAhora()` — no requiere ningún ajuste
+  manual sobre la hoja.
+- Agregada una prueba al arnés de Node (`gs_test.js`, en el scratchpad de
+  la sesión) que confirma que una sesión anterior al inicio del periodo
+  cuenta en el total histórico pero NO en los conteos del periodo.
+
+### Pendiente
+- **Requiere redesplegar `chromanom-analytics.gs`** en el editor de Apps
+  Script (Implementar → Administrar implementaciones → Nueva versión)
+  para que las columnas nuevas empiecen a calcularse. El ancho de columna
+  de las 2 nuevas no se ajusta solo en la hoja ya existente (solo pasa al
+  crear la hoja desde cero) — es cosmético, se puede ajustar a mano si se
+  ven muy angostas.
+
+---
+
 ## 2026-09-08 — El progreso personal se quedaba en "–" o mostraba 0 durante clase
 
 ### Contexto

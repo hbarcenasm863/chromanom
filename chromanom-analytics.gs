@@ -684,13 +684,17 @@ function updateStatsCore_(ss) {
     const total     = Number(r[8]) || 0;
     const pct       = Number(r[9]) || 0;
     const key       = normalizeName_(nombre) + '||' + curso;
-    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [] };
+    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [], sesionesPeriodo: 0, preguntasPeriodo: 0 };
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += correctas;
     s.totalT += total;
-    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) s.notasPeriodo.push(pct);
+    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) {
+      s.notasPeriodo.push(pct);
+      s.sesionesPeriodo++;
+      s.preguntasPeriodo += total;
+    }
     if (!s.niveles[nivel]) s.niveles[nivel] = { sesiones: 0, totalC: 0, totalT: 0 };
     s.niveles[nivel].sesiones++;
     s.niveles[nivel].totalC += correctas;
@@ -698,9 +702,15 @@ function updateStatsCore_(ss) {
   });
 
   // ── Tabla resumen por estudiante ───────────────────────────
+  // "Sesiones en el periodo" y "Preguntas en el periodo" van al FINAL,
+  // después de las columnas por nivel — igual que "Errores Build"/"Errores
+  // Rxnq" en HEADERS — para no correr el índice de columnas que ya lee
+  // handleProgreso_() (Nombre, Curso, Sesiones, Preguntas, % Acierto, Nota
+  // están fijos en las columnas 1-6).
   const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
                         'Nota juego (0-5)',
-                        'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %'];
+                        'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %',
+                        'Sesiones en el periodo','Preguntas en el periodo'];
   const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
 
   const rows = Object.values(students)
@@ -712,12 +722,13 @@ function updateStatsCore_(ss) {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
-      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts];
+      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts, s.sesionesPeriodo, s.preguntasPeriodo];
     });
 
   // Columnas porcentuales (para el color de fondo y formato "0%"): la
-  // columna de Nota (índice 5, escala 0-5) queda fuera de esta lista, se
-  // formatea aparte más abajo.
+  // columna de Nota (índice 5, escala 0-5) y las dos nuevas del periodo
+  // (índices 10 y 11, son conteos, no porcentajes) quedan fuera de esta
+  // lista.
   writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9]);
   if (rows.length) sh.getRange(2, 6, rows.length, 1).setNumberFormat('0.0');
 
@@ -727,7 +738,7 @@ function updateStatsCore_(ss) {
   // desperdicio de llamadas a la API de Sheets. Menos llamadas = el
   // bloqueo compartido con appendRow() se libera más rápido.
   if (esNueva) {
-    [200,120,80,180,120,110,160,200,200,120].forEach((w, i) => sh.setColumnWidth(i+1, w));
+    [200,120,80,180,120,110,160,200,200,120,150,170].forEach((w, i) => sh.setColumnWidth(i+1, w));
   }
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────
