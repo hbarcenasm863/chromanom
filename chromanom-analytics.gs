@@ -118,7 +118,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-08-progreso-con-reintento';
+const BUILD_TAG = '2026-09-08-progreso-con-periodo';
 
 function jsonOut_(obj) {
   return ContentService
@@ -542,15 +542,20 @@ function handleProgreso_(e) {
       if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
 
       // Columnas de "Estadísticas": Nombre, Curso, Sesiones, Preguntas
-      // respondidas, % Acierto global, Nota juego (0-5), ...
-      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+      // respondidas, % Acierto global, Nota juego (0-5), ...(% por nivel)...,
+      // Sesiones en el periodo (col. 11), Preguntas en el periodo (col. 12).
+      // Se leen las 12 para poder devolver también el desglose del periodo,
+      // no solo el total histórico — así el estudiante ve ambos en su
+      // tarjeta de progreso, igual que la docente en la hoja Estadísticas.
+      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 12).getValues();
       const buscado = normalizeName_(nombre) + '||' + String(curso);
       for (let i = 0; i < data.length; i++) {
         const r = data[i];
         if (normalizeName_(r[0]) + '||' + String(r[1]) === buscado) {
           return jsonOut_({
             ok: true, encontrado: true,
-            sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5]
+            sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5],
+            sesionesPeriodo: r[10], preguntasPeriodo: r[11]
           });
         }
       }

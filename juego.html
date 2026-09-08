@@ -721,10 +721,16 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
           <div class="wi-course" id="wi-course"></div>
         </div>
       </div>
-      <div class="premio-box" style="margin:14px 0 4px">
+      <div class="modal-label" style="margin:14px 0 6px">Total histórico</div>
+      <div class="premio-box" style="margin:0 0 12px">
         <div class="premio-row"><span class="n">🎮</span><span><b id="progreso-sesiones">–</b> sesiones jugadas</span></div>
         <div class="premio-row"><span class="n">📝</span><span><b id="progreso-preguntas">–</b> preguntas respondidas</span></div>
-        <div class="premio-row"><span class="n">✅</span><span><b id="progreso-pct">–</b> de acierto</span></div>
+        <div class="premio-row" style="margin-bottom:0"><span class="n">✅</span><span><b id="progreso-pct">–</b> de acierto</span></div>
+      </div>
+      <div class="modal-label" style="margin-bottom:6px">Este periodo académico</div>
+      <div class="premio-box" style="margin:0 0 4px">
+        <div class="premio-row"><span class="n">📅</span><span><b id="progreso-sesiones-periodo">–</b> sesiones jugadas</span></div>
+        <div class="premio-row"><span class="n">📝</span><span><b id="progreso-preguntas-periodo">–</b> preguntas respondidas</span></div>
         <div class="premio-row" style="margin-bottom:0"><span class="n">🏅</span><span>Nota juego actual: <b id="progreso-nota">–</b> / 5.0</span></div>
       </div>
       <button class="wi-change" onclick="cambiarEstudiante()">Cambiar de estudiante</button>
@@ -4649,7 +4655,7 @@ function cambiarEstudiante(){
 // tarda, o el estudiante todavía no tiene sesiones registradas, se muestra
 // "0" sin bloquear nunca que el estudiante elija nivel y juegue.
 function cargarProgresoInline(){
-  ['progreso-sesiones','progreso-preguntas','progreso-pct','progreso-nota'].forEach(id=>{
+  ['progreso-sesiones','progreso-preguntas','progreso-pct','progreso-nota','progreso-sesiones-periodo','progreso-preguntas-periodo'].forEach(id=>{
     document.getElementById(id).textContent='–';
   });
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
@@ -4667,11 +4673,19 @@ function cargarProgresoInline(){
         document.getElementById('progreso-preguntas').textContent=data.preguntas;
         document.getElementById('progreso-pct').textContent=data.pct+'%';
         document.getElementById('progreso-nota').textContent=data.nota;
+        // Sesiones/preguntas en el periodo académico vigente (además del
+        // total histórico de arriba) — llegan vacías desde un .gs sin
+        // redesplegar todavía, así que se cae a "0" en vez de mostrar
+        // "undefined".
+        document.getElementById('progreso-sesiones-periodo').textContent=data.sesionesPeriodo!=null?data.sesionesPeriodo:'0';
+        document.getElementById('progreso-preguntas-periodo').textContent=data.preguntasPeriodo!=null?data.preguntasPeriodo:'0';
       } else {
         document.getElementById('progreso-sesiones').textContent='0';
         document.getElementById('progreso-preguntas').textContent='0';
         document.getElementById('progreso-pct').textContent='—';
         document.getElementById('progreso-nota').textContent='—';
+        document.getElementById('progreso-sesiones-periodo').textContent='0';
+        document.getElementById('progreso-preguntas-periodo').textContent='0';
       }
     });
 }

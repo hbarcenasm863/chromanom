@@ -7,6 +7,45 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 (3) — El estudiante también ve su progreso del periodo, no solo el total
+
+### Contexto
+La sesión anterior agregó "Sesiones en el periodo" y "Preguntas en el
+periodo" a la hoja "Estadísticas" (para la docente), pero la tarjeta de
+progreso que ve el ESTUDIANTE al entrar con su código seguía mostrando solo
+el total histórico — la docente probó tras redesplegar y recalcular, y la
+tarjeta del estudiante no había cambiado. Faltaba conectar esos dos datos
+nuevos hacia el frontend: `handleProgreso_()` solo leía las primeras 6
+columnas de "Estadísticas" y nunca los exponía.
+
+### Cambios
+- `chromanom-analytics.gs` (`handleProgreso_`): ahora lee las 12 columnas
+  de "Estadísticas" (antes solo 6) y devuelve también `sesionesPeriodo` y
+  `preguntasPeriodo` en la respuesta JSON. `BUILD_TAG` actualizado a
+  `2026-09-08-progreso-con-periodo`.
+- `juego.html`: la tarjeta de bienvenida ahora separa claramente dos
+  bloques — **"Total histórico"** (sesiones, preguntas, % de acierto de
+  siempre) y **"Este periodo académico"** (sesiones y preguntas del
+  periodo vigente, más la Nota de juego, que ya era del periodo). Si el
+  `.gs` desplegado todavía fuera una versión vieja sin estos dos campos,
+  se muestra "0" en vez de "undefined" — no revienta ni queda a medias.
+- Confirmado con la docente que el periodo configurado (10 de agosto al
+  30 de octubre de 2026) ya coincide exactamente con
+  `FECHA_INICIO_PERIODO`/`FECHA_FIN_PERIODO` en el `.gs` — no hizo falta
+  ajustar esas fechas.
+- Probado en navegador (Playwright): la tarjeta muestra ambos bloques con
+  datos reales, y no se rompe si el backend todavía no tiene los campos
+  nuevos.
+
+### Pendiente
+- **Requiere redesplegar `chromanom-analytics.gs`** otra vez (Implementar
+  → Administrar implementaciones → Nueva versión) para que
+  `handleProgreso_` empiece a devolver los campos del periodo. Se puede
+  confirmar revisando el `build` en la URL del Apps Script:
+  `2026-09-08-progreso-con-periodo`.
+
+---
+
 ## 2026-09-08 (2) — Sesiones y preguntas del periodo en la hoja "Estadísticas"
 
 ### Contexto
