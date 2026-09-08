@@ -20,19 +20,31 @@ const HEADERS = [
   'Tiempo agotado',
   'Errores por tema','Aciertos por tema','Moléculas falladas',
   'Trigger',
-  'Errores Build','Errores Rxnq'
+  'Errores Build','Errores Rxnq',
+  'Nivel (clave)'
 ];
 
 // ── Nota de juego (0-5) por periodo ─────────────────────────
 // Los cursos ingresan 2 veces por semana; se espera que cada estudiante
 // juegue SESIONES_ESPERADAS veces entre FECHA_INICIO_PERIODO y
-// FECHA_FIN_PERIODO. Cada sesión jugada aporta una nota (% Acierto / 20,
-// o sea 100% = 5.0); lo que falte por jugar cuenta como 0 en el promedio.
-// Para cambiar de periodo (siguiente corte), solo hay que editar estas
-// tres constantes.
+// FECHA_FIN_PERIODO. La nota pondera por PREGUNTAS respondidas, no por
+// sesiones (ver calcularNotaJuego_ más abajo) — una práctica corta de 3
+// preguntas al 100% no debe pesar igual que una sesión completa de 20
+// preguntas al 100%. Para cambiar de periodo (siguiente corte), solo hay
+// que editar estas tres constantes.
 const FECHA_INICIO_PERIODO = '2026-08-10';
 const FECHA_FIN_PERIODO    = '2026-10-30';
 const SESIONES_ESPERADAS   = 22;
+
+// ── Categorías de práctica "por grupo" (desglose adicional en Estadísticas) ──
+// Las mismas claves de nivel que usa juego.html en NIVEL_TOPICS/openLevelModal,
+// para clasificar de forma confiable las prácticas cortas por grupo funcional
+// individual, por familia en el Constructor Molecular, o por grupo de
+// reacciones — sin depender del nombre bonito que ve el estudiante (columna
+// "Nivel"), que es más frágil si cambia la redacción de una etiqueta.
+const GRUPO_FUNCIONAL_KEYS = ['alcanos','alquenos','alquinos','alcoholes','cetonas','aldehidos','acidos','esteres','eteres','amidas','nitrilos','aminas','benceno'];
+const CONSTRUCTOR_FAMILIA_KEYS = ['constructor_alcanos','constructor_alquenos','constructor_alquinos','constructor_alcoholes','constructor_aldehidos','constructor_cetonas','constructor_acidos','constructor_esteres','constructor_eteres','constructor_amidas','constructor_nitrilos','constructor_aminas','constructor_aromaticos'];
+const REACCIONES_GRUPO_KEYS = ['rxn_hc','rxn_alcanos','rxn_alquenos','rxn_alquinos','rxn_aromaticos','rxn_halogenuros','rxn_alcoholes','rxn_aminas','rxn_carbonilo','rxn_acidos','rxn_derivados'];
 
 // ── Paleta de colores ───────────────────────────────────────
 const COLOR = {
@@ -118,7 +130,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-08-progreso-pct-y-fechas-periodo';
+const BUILD_TAG = '2026-09-08-nota-ponderada-y-desglose-practicas';
 
 function jsonOut_(obj) {
   return ContentService
@@ -289,6 +301,13 @@ function appendRow(ss, d) {
       d.trigger || '',
       d.errores_build!== undefined ? d.errores_build: '',
       d.errores_rxnq !== undefined ? d.errores_rxnq : '',
+      // Clave interna del nivel (p. ej. 'constructor_nitrilos', 'rxn_halogenuros'),
+      // distinta de d.nivel (el nombre bonito que se muestra al estudiante).
+      // Se usa en updateStatsCore_ para clasificar de forma confiable las
+      // prácticas por grupo funcional/constructor por familia/reacciones por
+      // grupo — clasificar por el texto del nombre bonito sería frágil si
+      // algún día cambia una etiqueta en juego.html.
+      d.nivelKey || '',
     ];
 
     const targetRow = existingRow > 0 ? existingRow : sh.getLastRow() + 1;
@@ -386,18 +405,28 @@ function toISODate_(v) {
   return String(v || '');
 }
 
-// ── Calcula la nota de juego (0-5) a partir de los % de acierto de las ──
-// sesiones jugadas dentro del periodo.
-// - Si jugó SESIONES_ESPERADAS veces o menos: se divide entre
-//   SESIONES_ESPERADAS, así que lo que falte por jugar cuenta como 0.
-// - Si jugó MÁS de SESIONES_ESPERADAS veces: se divide entre el número
-//   real de sesiones jugadas (promedio total de todas, sin tope) — no se
-//   descarta ninguna sesión.
-function calcularNotaJuego_(porcentajesEnPeriodo) {
-  const notas = porcentajesEnPeriodo.map(pct => pct / 20); // 100% de acierto → 5.0
-  const divisor = Math.max(SESIONES_ESPERADAS, notas.length);
-  const suma = notas.reduce((a, b) => a + b, 0);
-  return Math.round((suma / divisor) * 10) / 10;
+// ── Calcula la nota de juego (0-5) dentro del periodo ───────────────────
+// Pondera por PREGUNTAS respondidas, no por sesiones: antes cada sesión
+// aportaba su propio %Acierto/20 sin importar cuántas preguntas tuviera,
+// así que una práctica corta de 3 preguntas al 100% pesaba exactamente
+// igual que una sesión completa de 20 preguntas al 100% — inflando la
+// nota de quien mezcla muchas prácticas cortas y fáciles con pocas
+// sesiones completas. Ahora se usa el % de acierto REAL del periodo
+// (total de preguntas correctas / total de preguntas respondidas, sin
+// importar en cuántas sesiones se repartieron), multiplicado por qué
+// tanto del número de sesiones esperadas ya se jugó (tope en 1: jugar de
+// más no sigue subiendo la nota, solo termina de definir el %Acierto).
+// - correctasPeriodo / preguntasPeriodo: % de acierto real, ponderado por
+//   volumen de preguntas.
+// - sesionesJugadas / SESIONES_ESPERADAS (tope en 1): mientras no se
+//   alcancen las sesiones esperadas, lo que falte por jugar sigue
+//   bajando la nota — jugar solo un puñado de preguntas muy fácil no
+//   basta para sacar 5.0 si aún faltan sesiones por completar.
+function calcularNotaJuego_(correctasPeriodo, preguntasPeriodo, sesionesJugadas) {
+  if (!preguntasPeriodo) return 0;
+  const pctAcierto = correctasPeriodo / preguntasPeriodo;
+  const factorSesiones = Math.min(1, sesionesJugadas / SESIONES_ESPERADAS);
+  return Math.round(pctAcierto * 5 * factorSesiones * 10) / 10;
 }
 
 // ── Colapsa filas duplicadas del mismo código de sesión ─────────────────
@@ -690,19 +719,26 @@ function updateStatsCore_(ss) {
     const nombre  = r[3];
     const curso   = r[4];
     const nivel   = r[5];
+    const nivelKey  = String(r[21] || ''); // '' en filas guardadas antes de agregar esta columna
     const fecha     = r[1];
     const correctas = Number(r[7]) || 0;
     const total     = Number(r[8]) || 0;
-    const pct       = Number(r[9]) || 0;
     const key       = normalizeName_(nombre) + '||' + curso;
-    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [], sesionesPeriodo: 0, preguntasPeriodo: 0, correctasPeriodo: 0 };
+    if (!students[key]) {
+      students[key] = {
+        nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {},
+        sesionesPeriodo: 0, preguntasPeriodo: 0, correctasPeriodo: 0,
+        grupoFuncional: { totalC: 0, totalT: 0 },
+        constructorFamilia: { totalC: 0, totalT: 0 },
+        reaccionesGrupo: { totalC: 0, totalT: 0 },
+      };
+    }
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
     s.totalC += correctas;
     s.totalT += total;
     if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) {
-      s.notasPeriodo.push(pct);
       s.sesionesPeriodo++;
       s.preguntasPeriodo += total;
       s.correctasPeriodo += correctas;
@@ -711,38 +747,55 @@ function updateStatsCore_(ss) {
     s.niveles[nivel].sesiones++;
     s.niveles[nivel].totalC += correctas;
     s.niveles[nivel].totalT += total;
+    // Desglose adicional por categoría de práctica (grupo funcional
+    // individual, constructor por familia, reacciones por grupo) — igual
+    // espíritu que el desglose por nivel de arriba, pero clasificado por
+    // la clave interna, no por el nombre bonito.
+    if (GRUPO_FUNCIONAL_KEYS.indexOf(nivelKey) !== -1) {
+      s.grupoFuncional.totalC += correctas; s.grupoFuncional.totalT += total;
+    } else if (CONSTRUCTOR_FAMILIA_KEYS.indexOf(nivelKey) !== -1) {
+      s.constructorFamilia.totalC += correctas; s.constructorFamilia.totalT += total;
+    } else if (REACCIONES_GRUPO_KEYS.indexOf(nivelKey) !== -1) {
+      s.reaccionesGrupo.totalC += correctas; s.reaccionesGrupo.totalT += total;
+    }
   });
 
   // ── Tabla resumen por estudiante ───────────────────────────
-  // "Sesiones en el periodo" y "Preguntas en el periodo" van al FINAL,
-  // después de las columnas por nivel — igual que "Errores Build"/"Errores
-  // Rxnq" en HEADERS — para no correr el índice de columnas que ya lee
+  // "Sesiones en el periodo" en adelante van al FINAL, después de las
+  // columnas por nivel — igual que "Errores Build"/"Errores Rxnq" en
+  // HEADERS — para no correr el índice de columnas que ya lee
   // handleProgreso_() (Nombre, Curso, Sesiones, Preguntas, % Acierto, Nota
   // están fijos en las columnas 1-6).
   const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
                         'Nota juego (0-5)',
                         'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %',
-                        'Sesiones en el periodo','Preguntas en el periodo','% Acierto en el periodo'];
+                        'Sesiones en el periodo','Preguntas en el periodo','% Acierto en el periodo',
+                        'Grupo funcional (práctica) %','Constructor por familia (práctica) %','Reacciones por grupo (práctica) %'];
   const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
 
   const rows = Object.values(students)
     .sort((a, b) => a.curso.localeCompare(b.curso) || a.nombre.localeCompare(b.nombre))
     .map(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      const notaJuego = calcularNotaJuego_(s.notasPeriodo);
+      const notaJuego = calcularNotaJuego_(s.correctasPeriodo, s.preguntasPeriodo, s.sesionesPeriodo);
       const pctPeriodo = s.preguntasPeriodo ? Math.round(s.correctasPeriodo / s.preguntasPeriodo * 100) : 0;
       const nivelPcts = nivelKeys.map(nk => {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
-      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts, s.sesionesPeriodo, s.preguntasPeriodo, pctPeriodo];
+      const pctGrupoFuncional     = s.grupoFuncional.totalT     ? Math.round(s.grupoFuncional.totalC     / s.grupoFuncional.totalT     * 100) : '';
+      const pctConstructorFamilia = s.constructorFamilia.totalT ? Math.round(s.constructorFamilia.totalC / s.constructorFamilia.totalT * 100) : '';
+      const pctReaccionesGrupo    = s.reaccionesGrupo.totalT    ? Math.round(s.reaccionesGrupo.totalC    / s.reaccionesGrupo.totalT    * 100) : '';
+      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts,
+              s.sesionesPeriodo, s.preguntasPeriodo, pctPeriodo,
+              pctGrupoFuncional, pctConstructorFamilia, pctReaccionesGrupo];
     });
 
   // Columnas porcentuales (para el color de fondo y formato "0%"): la
   // columna de Nota (índice 5, escala 0-5) y las dos primeras del periodo
   // (índices 10 y 11, son conteos, no porcentajes) quedan fuera de esta
-  // lista; el % Acierto en el periodo (índice 12) sí es un porcentaje.
-  writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9,12]);
+  // lista; el resto (12 a 15) sí son porcentajes.
+  writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9,12,13,14,15]);
   if (rows.length) sh.getRange(2, 6, rows.length, 1).setNumberFormat('0.0');
 
   // Anchos: solo la primera vez que se crea la hoja — no cambian entre
@@ -751,7 +804,7 @@ function updateStatsCore_(ss) {
   // desperdicio de llamadas a la API de Sheets. Menos llamadas = el
   // bloqueo compartido con appendRow() se libera más rápido.
   if (esNueva) {
-    [200,120,80,180,120,110,160,200,200,120,150,170,150].forEach((w, i) => sh.setColumnWidth(i+1, w));
+    [200,120,80,180,120,110,160,200,200,120,150,170,150,190,220,200].forEach((w, i) => sh.setColumnWidth(i+1, w));
   }
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────
@@ -832,20 +885,28 @@ function updateCursoSheet(ss, curso, allData) {
 
   const cursoData = allData.filter(r => r[4] === curso);
 
-  // Agrupación por nombre normalizado (ver normalizeName_)
+  // Agrupación por nombre normalizado (ver normalizeName_). La Nota usa la
+  // MISMA fórmula (ponderada por preguntas) que la hoja "Estadísticas" —
+  // ver calcularNotaJuego_ — para que un mismo estudiante no vea dos notas
+  // distintas según en qué hoja se mire.
   const students = {};
   cursoData.forEach(r => {
     const nombre = r[3];
     const fecha  = r[1] || '';
-    const pct    = Number(r[9]) || 0;
+    const correctas = Number(r[7]) || 0;
+    const total     = Number(r[8]) || 0;
     const key = normalizeName_(nombre);
-    if (!students[key]) students[key] = { nombre, sesiones:0, totalC:0, totalT:0, lastDate:'', notasPeriodo: [] };
+    if (!students[key]) students[key] = { nombre, sesiones:0, totalC:0, totalT:0, lastDate:'', sesionesPeriodo:0, preguntasPeriodo:0, correctasPeriodo:0 };
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
-    s.totalC += Number(r[7]) || 0;
-    s.totalT += Number(r[8]) || 0;
-    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) s.notasPeriodo.push(pct);
+    s.totalC += correctas;
+    s.totalT += total;
+    if (fecha >= FECHA_INICIO_PERIODO && fecha <= FECHA_FIN_PERIODO) {
+      s.sesionesPeriodo++;
+      s.preguntasPeriodo += total;
+      s.correctasPeriodo += correctas;
+    }
     if (fecha > s.lastDate) s.lastDate = fecha;
   });
 
@@ -853,7 +914,7 @@ function updateCursoSheet(ss, curso, allData) {
     .sort((a,b) => a.nombre.localeCompare(b.nombre))
     .map(s => {
       const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
-      const notaJuego = calcularNotaJuego_(s.notasPeriodo);
+      const notaJuego = calcularNotaJuego_(s.correctasPeriodo, s.preguntasPeriodo, s.sesionesPeriodo);
       return [s.nombre, s.sesiones, s.totalT, pct, notaJuego, s.lastDate];
     });
 

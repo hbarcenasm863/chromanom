@@ -7,6 +7,94 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 (6) — Nota ponderada por preguntas y desglose de prácticas por grupo
+
+### Contexto
+Tras confirmar que las prácticas por grupo funcional, constructor por
+familia y reacciones por grupo ya contaban como sesión para el periodo
+(sesión anterior), la docente pidió dos cosas más:
+1. Que esas 3 categorías de práctica también aparezcan desglosadas en la
+   hoja "Estadísticas" (como ya pasa con Hidrocarburos/Oxigenados/
+   Nitrogenados/Juego Completo).
+2. Que la Nota de juego tenga en cuenta el **% de acierto real ponderado
+   por número de preguntas respondidas**, no solo la sesión como unidad —
+   para que sea "más certera".
+
+### El problema con la fórmula anterior
+Antes, cada SESIÓN aportaba su propio `% acierto / 20` al promedio, sin
+importar cuántas preguntas tuviera esa sesión. Una práctica cortica de 3
+preguntas al 100% pesaba exactamente igual que una sesión completa de 20
+preguntas al 100% — y, peor aún, igual de "barato" era subir el promedio
+con varias prácticas cortas y fáciles que con sesiones completas más
+exigentes.
+
+### Cómo queda la nota ahora
+`calcularNotaJuego_(correctasEnElPeriodo, preguntasEnElPeriodo, sesionesJugadas)`:
+
+```
+% de acierto real  =  correctasEnElPeriodo / preguntasEnElPeriodo
+factor de sesiones =  mín(1, sesionesJugadas / 22)   ← 22 = SESIONES_ESPERADAS
+Nota = % de acierto real × 5 × factor de sesiones     (redondeada a 1 decimal)
+```
+
+- El **% de acierto** ahora es el real: todas las preguntas correctas del
+  periodo sobre todas las preguntas respondidas, sin importar en cuántas
+  sesiones se repartieron. Una práctica corta ya no "cuenta como sesión
+  completa" para la nota — aporta exactamente las preguntas que tuvo, ni
+  más ni menos.
+- El **factor de sesiones** sigue existiendo para no perder el incentivo
+  original de jugar seguido: si aún faltan sesiones por completar (menos
+  de 22 en el periodo), la nota se reduce proporcionalmente aunque el
+  acierto sea perfecto. Jugar MÁS de 22 sesiones ya no sigue subiendo la
+  nota por sí solo (el factor se topa en 1) — solo terminar de definir
+  mejor el % de acierto real.
+- Ejemplo concreto que muestra la diferencia: un estudiante con una
+  sesión completa de 20 preguntas al 40% (le fue mal) y una práctica
+  cortica de 3 preguntas al 100% — antes el promedio por sesión daba
+  (2.0+5.0)/22 ≈ 0.3; ahora, el % real ponderado es 11/23 ≈ 48%, dando
+  ≈ 0.2. La práctica fácil corta ya no "tapa" que le fue mal en la
+  sesión que de verdad importa.
+- Se aplicó la MISMA fórmula en la hoja "Curso X" (antes solo estaba en
+  "Estadísticas"), para que un estudiante no vea dos notas distintas
+  según en qué hoja se mire.
+
+### Desglose nuevo por categoría de práctica
+- 3 columnas nuevas al final de "Estadísticas": **"Grupo funcional
+  (práctica) %"**, **"Constructor por familia (práctica) %"**,
+  **"Reacciones por grupo (práctica) %"** — mismo espíritu que las 4
+  columnas de nivel que ya existían, pero para las prácticas cortas por
+  grupo.
+- Para clasificar de forma confiable (sin depender del texto exacto de
+  la etiqueta que ve el estudiante), se agregó una columna nueva al
+  Registro, **"Nivel (clave)"**, con la clave interna del nivel tal cual
+  la usa `juego.html` (p. ej. `constructor_nitrilos`, `rxn_halogenuros`).
+  `juego.html` ahora envía esa clave (`nivelKey`) junto con el nombre
+  bonito en cada partida.
+
+### Pruebas
+Se amplió el arnés de Node (scratchpad de la sesión) con casos que
+verifican: la fórmula nueva coincide con la vieja cuando todas las
+sesiones tienen el mismo % (no cambia nada en ese caso), difiere
+correctamente cuando se mezclan sesiones grandes y chicas con distinto
+acierto (el caso que motivó el cambio), los bordes (0 preguntas → nota 0;
+más sesiones de las esperadas → tope en 1), y que las 3 columnas nuevas
+clasifican bien según la clave real del nivel. También se confirmó en
+navegador (Playwright) que `juego.html` sí envía `nivelKey` en cada
+partida.
+
+### Pendiente
+- **Requiere redesplegar `chromanom-analytics.gs`** (Implementar →
+  Administrar implementaciones → Nueva versión) Y luego ejecutar
+  `recalcularAhora()` para que la hoja "Estadísticas" recalcule con la
+  fórmula y las columnas nuevas (redesplegar ≠ recalcular, ver CLAUDE.md).
+  Confirmar con el build: `2026-09-08-nota-ponderada-y-desglose-practicas`.
+- Las partidas guardadas ANTES de este cambio no tienen "Nivel (clave)"
+  (columna en blanco) — simplemente no se clasifican en ninguna de las 3
+  categorías nuevas de práctica, pero sí siguen contando en todo lo demás
+  (sesiones, preguntas, nota).
+
+---
+
 ## 2026-09-08 (5) — El "% de acierto en el periodo" salía en blanco (aclaración: redesplegar ≠ recalcular)
 
 ### Contexto
