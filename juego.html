@@ -4696,12 +4696,16 @@ function cargarProgresoInline(){
         document.getElementById('progreso-pct').textContent=data.pct+'%';
         document.getElementById('progreso-nota').textContent=data.nota;
         // Sesiones/preguntas/% de acierto EN EL PERIODO (además del total
-        // histórico de arriba) — llegan vacíos desde un .gs sin
-        // redesplegar todavía, así que se cae a "0"/"—" en vez de mostrar
-        // "undefined".
-        document.getElementById('progreso-sesiones-periodo').textContent=data.sesionesPeriodo!=null?data.sesionesPeriodo:'0';
-        document.getElementById('progreso-preguntas-periodo').textContent=data.preguntasPeriodo!=null?data.preguntasPeriodo:'0';
-        document.getElementById('progreso-pct-periodo').textContent=data.pctPeriodo!=null?(data.pctPeriodo+'%'):'—';
+        // histórico de arriba). Pueden llegar como '' (no undefined) si la
+        // hoja "Estadísticas" todavía no tiene esas columnas escritas —
+        // redesplegar el .gs actualiza el código que corre, pero esas
+        // columnas solo se ESCRIBEN cuando corre recalcularAhora() (o el
+        // disparador de 30 min) con ese código nuevo. Tratamos '' igual
+        // que null/undefined para no mostrar un "0" o un "%" sueltos.
+        const hayValor=v=>v!=null&&v!=='';
+        document.getElementById('progreso-sesiones-periodo').textContent=hayValor(data.sesionesPeriodo)?data.sesionesPeriodo:'0';
+        document.getElementById('progreso-preguntas-periodo').textContent=hayValor(data.preguntasPeriodo)?data.preguntasPeriodo:'0';
+        document.getElementById('progreso-pct-periodo').textContent=hayValor(data.pctPeriodo)?(data.pctPeriodo+'%'):'—';
       } else {
         document.getElementById('progreso-sesiones').textContent='0';
         document.getElementById('progreso-preguntas').textContent='0';

@@ -7,6 +7,48 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 (5) — El "% de acierto en el periodo" salía en blanco (aclaración: redesplegar ≠ recalcular)
+
+### Contexto
+Tras redesplegar el `.gs` con el % de acierto del periodo, la docente
+reportó (con captura) que la tarjeta mostraba bien las fechas, sesiones y
+preguntas del periodo, pero el % de acierto salía vacío (un "%" suelto,
+sin número).
+
+### Diagnóstico
+No fue un bug de cálculo: **redesplegar el `.gs` actualiza el código que
+corre el Web App, pero NO vuelve a escribir la hoja "Estadísticas".** Esa
+hoja solo se regenera cuando se ejecuta `recalcularAhora()` (▶ Ejecutar en
+el editor) o pasa el disparador automático de 30 minutos — y eso hay que
+hacerlo con el código ya actualizado. Como la última recalculación había
+corrido con una versión anterior (que ya tenía sesiones/preguntas del
+periodo pero todavía no la columna "% Acierto en el periodo"), esa
+columna simplemente no existía aún en la hoja real. `getRange()` sobre una
+columna que no existe en Sheets no da error: devuelve `''` (cadena vacía,
+no `undefined`), y el frontend mostraba ese `''` seguido de "%" — de ahí
+el símbolo suelto.
+
+### Cambios
+- `juego.html` (`cargarProgresoInline`): ahora trata `''` igual que
+  `null`/`undefined` en sesiones/preguntas/% del periodo, así que mientras
+  la hoja no tenga esas columnas escritas se ve "0"/"—" con claridad, en
+  vez de un "%" o un espacio en blanco que parece un error.
+- No hizo falta ningún cambio en `chromanom-analytics.gs` — el cálculo ya
+  era correcto (verificado de nuevo con Playwright, simulando exactamente
+  este caso: sesiones/preguntas del periodo con valor real y `pctPeriodo`
+  vacío).
+
+### Pendiente
+- La docente debe volver a ejecutar `recalcularAhora()` desde el editor de
+  Apps Script (▶ Ejecutar) — o esperar al disparador automático de 30
+  min — para que la hoja "Estadísticas" termine de escribir la columna
+  "% Acierto en el periodo" con el código ya desplegado. **A partir de
+  ahora, cada vez que se cambie algo que afecte esa hoja, avisar
+  explícitamente que hacen falta DOS pasos: redesplegar Y recalcular —
+  no solo uno.**
+
+---
+
 ## 2026-09-08 (4) — % de acierto del periodo y fechas visibles para el estudiante
 
 ### Contexto

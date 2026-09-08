@@ -47,3 +47,10 @@ hace falta registrar nada.
 - `chromanom-analytics.gs` sí necesita redespliegue manual en el editor de
   Apps Script (Implementar → Administrar implementaciones → Nueva versión)
   después de cada cambio — avisar siempre que se toque este archivo.
+- **Redesplegar ≠ recalcular.** Redesplegar actualiza el código que corre
+  el Web App (`doPost`/`doGet`), pero la hoja "Estadísticas" (y "Curso X",
+  "Eficacia por tema") solo se vuelve a ESCRIBIR cuando corre
+  `recalcularAhora()` (▶ Ejecutar en el editor) o el disparador automático
+  de 30 min. Si un cambio agrega/modifica columnas que lee esa hoja (como
+  `handleProgreso_`), avisar los DOS pasos por separado — redesplegar y
+  recalcular — no dar por hecho que uno implica el otro.
