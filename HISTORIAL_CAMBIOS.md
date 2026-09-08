@@ -7,6 +7,51 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 — El progreso personal se quedaba en "–" o mostraba 0 durante clase
+
+### Contexto
+La docente reportó que hoy, con el curso completo jugando, el recuadro de
+progreso (sesiones/preguntas/% acierto/nota) que se agregó ayer se quedaba
+en rayitas mucho tiempo o terminaba mostrando 0 para todos, cuando ayer
+funcionó bien. No se había tocado nada del `.gs` ni de `juego.html` hoy.
+
+### Diagnóstico
+Con la clase completa entrando su código casi al mismo tiempo al arrancar
+la sesión, la consulta de progreso (`accion=progreso` → `handleProgreso_`)
+puede toparse con el mismo error transitorio de "demasiadas invocaciones
+simultáneas" al Spreadsheet que ya afectaba el guardado de resultados
+antes de la auditoría — pero a diferencia de `doPost()`, `handleProgreso_`
+no tenía ningún reintento, y el frontend solo esperaba 4 segundos antes de
+rendirse y mostrar "0/—". En las pruebas (una sola sesión a la vez) esto
+nunca se manifestaba — solo aparece con carga real de varios estudiantes
+simultáneos.
+
+### Cambios
+- `chromanom-analytics.gs` (`handleProgreso_`): agregado un reintento corto
+  con backoff (hasta 3 intentos, igual que `doPost()` pero con pausas más
+  cortas por ser una simple consulta de lectura) ante fallos transitorios
+  del Spreadsheet. `BUILD_TAG` actualizado a
+  `2026-09-08-progreso-con-reintento` para verificar el despliegue.
+- `juego.html` (`cargarProgresoInline`): el tiempo de espera del lado del
+  navegador subió de 4 a 9 segundos, para no cortar la consulta antes de
+  que el servidor (con su propio reintento) alcance a responder.
+- Agregadas 2 pruebas al arnés de Node (`gs_test.js`, en el scratchpad de
+  la sesión, no en el repositorio): que `handleProgreso_` se recupera de
+  fallos transitorios, y que un fallo persistente sigue devolviendo
+  `ok:false` sin reventar. Probado también en navegador (Playwright)
+  simulando una respuesta de ~6.5s, confirmando que con el timeout viejo
+  de 4s se habría perdido y con el nuevo de 9s sí se muestra el dato real.
+
+### Pendiente
+- **Este cambio requiere redesplegar `chromanom-analytics.gs`** en el
+  editor de Apps Script (Implementar → Administrar implementaciones →
+  Nueva versión) para que tenga efecto — el archivo en el repositorio por
+  sí solo no actualiza el Web App en producción. Se puede confirmar que
+  quedó desplegado abriendo la URL del Apps Script en el navegador y
+  verificando que el texto diga `build 2026-09-08-progreso-con-reintento`.
+
+---
+
 ## 2026-09-07 — Panel de estudiante inline, reto de la coordinación y protecciones del juego
 
 ### Contexto

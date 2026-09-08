@@ -118,7 +118,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-05-audited-v1';
+const BUILD_TAG = '2026-09-08-progreso-con-reintento';
 
 function jsonOut_(obj) {
   return ContentService
@@ -518,33 +518,53 @@ function limpiarRegistroDuplicados() {
 // puntual y poco frecuente (una vez por estudiante que entra, no por cada
 // pregunta), así que no vale la pena competir por el mismo LockService que
 // usan appendRow()/updateStats() para escrituras.
+//
+// SÍ lleva un pequeño reintento con backoff, igual que doPost(): cuando
+// toda una clase entra su código casi al mismo tiempo al arrancar la
+// sesión, esta consulta puede toparse con el mismo error transitorio de
+// "demasiadas invocaciones simultáneas" al Spreadsheet que ya se veía en
+// el envío de resultados. Sin reintento, el primer tropiezo devolvía
+// ok:false de inmediato y el estudiante se quedaba viendo "–" hasta que
+// el frontend, tras su propio tope de espera, mostraba 0/— aunque sí
+// tuviera sesiones jugadas — detectado tras un reporte real de clase, no
+// en las pruebas (con una sola sesión a la vez nunca se topa con esto).
 function handleProgreso_(e) {
-  try {
-    const nombre = e.parameter.nombre || '';
-    const curso  = e.parameter.curso  || '';
-    if (!nombre || !curso) return jsonOut_({ ok: true, encontrado: false });
+  const nombre = e.parameter.nombre || '';
+  const curso  = e.parameter.curso  || '';
+  if (!nombre || !curso) return jsonOut_({ ok: true, encontrado: false });
 
-    const ss = getOrCreateSpreadsheet();
-    const sh = ss.getSheetByName(SHEET_STATS);
-    if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
+  const INTENTOS = 3;
+  let ultimoError;
+  for (let intento = 0; intento < INTENTOS; intento++) {
+    try {
+      const ss = getOrCreateSpreadsheet();
+      const sh = ss.getSheetByName(SHEET_STATS);
+      if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
 
-    // Columnas de "Estadísticas": Nombre, Curso, Sesiones, Preguntas
-    // respondidas, % Acierto global, Nota juego (0-5), ...
-    const data = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
-    const buscado = normalizeName_(nombre) + '||' + String(curso);
-    for (let i = 0; i < data.length; i++) {
-      const r = data[i];
-      if (normalizeName_(r[0]) + '||' + String(r[1]) === buscado) {
-        return jsonOut_({
-          ok: true, encontrado: true,
-          sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5]
-        });
+      // Columnas de "Estadísticas": Nombre, Curso, Sesiones, Preguntas
+      // respondidas, % Acierto global, Nota juego (0-5), ...
+      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 6).getValues();
+      const buscado = normalizeName_(nombre) + '||' + String(curso);
+      for (let i = 0; i < data.length; i++) {
+        const r = data[i];
+        if (normalizeName_(r[0]) + '||' + String(r[1]) === buscado) {
+          return jsonOut_({
+            ok: true, encontrado: true,
+            sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5]
+          });
+        }
+      }
+      return jsonOut_({ ok: true, encontrado: false });
+    } catch (err) {
+      ultimoError = err;
+      if (intento < INTENTOS - 1) {
+        const base   = 400 * Math.pow(1.8, intento);
+        const jitter = Math.random() * 300;
+        Utilities.sleep(Math.min(base + jitter, 1500));
       }
     }
-    return jsonOut_({ ok: true, encontrado: false });
-  } catch (err) {
-    return jsonOut_({ ok: false, error: err.message });
   }
+  return jsonOut_({ ok: false, error: ultimoError.message });
 }
 
 // ── Función de diagnóstico: lista los valores reales de "Curso" ─────────

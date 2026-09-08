@@ -4654,7 +4654,12 @@ function cargarProgresoInline(){
   });
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const url=ANALYTICS_URL+'?accion=progreso&nombre='+encodeURIComponent(studentName)+'&curso='+encodeURIComponent(studentCourse);
-  const timeout=new Promise(res=>setTimeout(()=>res(null),4000));
+  // 9s en vez de 4s: con toda la clase entrando su código casi al mismo
+  // tiempo, el .gs puede tardar más (incluye su propio reintento con
+  // backoff ante contención del Spreadsheet) — 4s cortaba la consulta
+  // antes de que el servidor alcanzara a responder, mostrando "0/—" aunque
+  // el estudiante sí tuviera sesiones jugadas.
+  const timeout=new Promise(res=>setTimeout(()=>res(null),9000));
   Promise.race([fetch(url).then(r=>r.ok?r.json():null).catch(()=>null), timeout])
     .then(data=>{
       if(data && data.ok && data.encontrado){
