@@ -7,6 +7,46 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-08 (4) — % de acierto del periodo y fechas visibles para el estudiante
+
+### Contexto
+Tras conectar sesiones/preguntas del periodo hacia la tarjeta del
+estudiante, la docente pidió dos cosas más: que también se vea el **%
+de acierto dentro del periodo** (no solo el histórico), y que las
+**fechas del periodo** (10 de agosto al 30 de octubre) aparezcan en la
+tarjeta para que el estudiante sepa a qué rango corresponden esos datos.
+
+### Cambios
+- `chromanom-analytics.gs`:
+  - `updateStatsCore_`: se agrega `correctasPeriodo` a la agrupación por
+    estudiante y una columna nueva **"% Acierto en el periodo"** al final
+    de la hoja "Estadísticas" (columna 13), calculada solo con las
+    sesiones dentro del periodo — distinta del "% Acierto global"
+    histórico de la columna 5.
+  - `handleProgreso_`: ahora lee las 13 columnas y devuelve también
+    `pctPeriodo`. Además, **todas** las respuestas `ok:true` (haya o no
+    datos aún) incluyen `periodoInicio`/`periodoFin` (las mismas
+    `FECHA_INICIO_PERIODO`/`FECHA_FIN_PERIODO` del código), para que el
+    frontend muestre el rango de fechas sin duplicarlas como constante
+    aparte. `BUILD_TAG` → `2026-09-08-progreso-pct-y-fechas-periodo`.
+- `juego.html`: la tarjeta de bienvenida ahora muestra, bajo el título
+  "Este periodo académico", el rango de fechas en formato corto ("10 ago
+  – 30 oct") y una fila más de "% de acierto" del periodo. Si el `.gs`
+  desplegado fuera uno viejo sin estos campos, la línea de fechas queda
+  en blanco y el % en "—", sin mostrar "undefined".
+- Pruebas agregadas (Node y Playwright, en el scratchpad de la sesión):
+  que el % de acierto del periodo se calcula distinto del histórico
+  (caso de prueba con 73% histórico vs. 85% en el periodo), que las
+  fechas llegan y se formatean bien, y que nada se rompe con una
+  respuesta de un `.gs` todavía no redesplegado.
+
+### Pendiente
+- **Requiere redesplegar `chromanom-analytics.gs`** una vez más
+  (Implementar → Administrar implementaciones → Nueva versión). Confirmar
+  con el `build`: `2026-09-08-progreso-pct-y-fechas-periodo`.
+
+---
+
 ## 2026-09-08 (3) — El estudiante también ve su progreso del periodo, no solo el total
 
 ### Contexto

@@ -118,7 +118,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-08-progreso-con-periodo';
+const BUILD_TAG = '2026-09-08-progreso-pct-y-fechas-periodo';
 
 function jsonOut_(obj) {
   return ContentService
@@ -531,7 +531,12 @@ function limpiarRegistroDuplicados() {
 function handleProgreso_(e) {
   const nombre = e.parameter.nombre || '';
   const curso  = e.parameter.curso  || '';
-  if (!nombre || !curso) return jsonOut_({ ok: true, encontrado: false });
+  // Fechas del periodo vigente: se devuelven en TODAS las respuestas
+  // ok:true (haya o no datos aún) para que juego.html pueda mostrarle al
+  // estudiante a qué periodo corresponde lo que ve, sin duplicar estas
+  // fechas como constante aparte en el frontend.
+  const conPeriodo = obj => Object.assign({ periodoInicio: FECHA_INICIO_PERIODO, periodoFin: FECHA_FIN_PERIODO }, obj);
+  if (!nombre || !curso) return jsonOut_(conPeriodo({ ok: true, encontrado: false }));
 
   const INTENTOS = 3;
   let ultimoError;
@@ -539,27 +544,28 @@ function handleProgreso_(e) {
     try {
       const ss = getOrCreateSpreadsheet();
       const sh = ss.getSheetByName(SHEET_STATS);
-      if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
+      if (!sh || sh.getLastRow() < 2) return jsonOut_(conPeriodo({ ok: true, encontrado: false }));
 
       // Columnas de "Estadísticas": Nombre, Curso, Sesiones, Preguntas
       // respondidas, % Acierto global, Nota juego (0-5), ...(% por nivel)...,
-      // Sesiones en el periodo (col. 11), Preguntas en el periodo (col. 12).
-      // Se leen las 12 para poder devolver también el desglose del periodo,
-      // no solo el total histórico — así el estudiante ve ambos en su
-      // tarjeta de progreso, igual que la docente en la hoja Estadísticas.
-      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 12).getValues();
+      // Sesiones en el periodo (col. 11), Preguntas en el periodo (col. 12),
+      // % Acierto en el periodo (col. 13). Se leen las 13 para devolver
+      // también el desglose del periodo, no solo el total histórico — así
+      // el estudiante ve ambos en su tarjeta de progreso, igual que la
+      // docente en la hoja Estadísticas.
+      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 13).getValues();
       const buscado = normalizeName_(nombre) + '||' + String(curso);
       for (let i = 0; i < data.length; i++) {
         const r = data[i];
         if (normalizeName_(r[0]) + '||' + String(r[1]) === buscado) {
-          return jsonOut_({
+          return jsonOut_(conPeriodo({
             ok: true, encontrado: true,
             sesiones: r[2], preguntas: r[3], pct: r[4], nota: r[5],
-            sesionesPeriodo: r[10], preguntasPeriodo: r[11]
-          });
+            sesionesPeriodo: r[10], preguntasPeriodo: r[11], pctPeriodo: r[12]
+          }));
         }
       }
-      return jsonOut_({ ok: true, encontrado: false });
+      return jsonOut_(conPeriodo({ ok: true, encontrado: false }));
     } catch (err) {
       ultimoError = err;
       if (intento < INTENTOS - 1) {
@@ -689,7 +695,7 @@ function updateStatsCore_(ss) {
     const total     = Number(r[8]) || 0;
     const pct       = Number(r[9]) || 0;
     const key       = normalizeName_(nombre) + '||' + curso;
-    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [], sesionesPeriodo: 0, preguntasPeriodo: 0 };
+    if (!students[key]) students[key] = { nombre, curso, sesiones: 0, totalC: 0, totalT: 0, niveles: {}, notasPeriodo: [], sesionesPeriodo: 0, preguntasPeriodo: 0, correctasPeriodo: 0 };
     const s = students[key];
     s.nombre = pickDisplayName_(s.nombre, nombre);
     s.sesiones++;
@@ -699,6 +705,7 @@ function updateStatsCore_(ss) {
       s.notasPeriodo.push(pct);
       s.sesionesPeriodo++;
       s.preguntasPeriodo += total;
+      s.correctasPeriodo += correctas;
     }
     if (!s.niveles[nivel]) s.niveles[nivel] = { sesiones: 0, totalC: 0, totalT: 0 };
     s.niveles[nivel].sesiones++;
@@ -715,7 +722,7 @@ function updateStatsCore_(ss) {
   const statsHeaders = ['Nombre','Curso','Sesiones','Preguntas respondidas','% Acierto global',
                         'Nota juego (0-5)',
                         'Hidrocarburos %','Compuestos Oxigenados %','Compuestos Nitrogenados %','Juego Completo %',
-                        'Sesiones en el periodo','Preguntas en el periodo'];
+                        'Sesiones en el periodo','Preguntas en el periodo','% Acierto en el periodo'];
   const nivelKeys = ['Hidrocarburos','Compuestos Oxigenados','Compuestos Nitrogenados','Juego Completo'];
 
   const rows = Object.values(students)
@@ -723,18 +730,19 @@ function updateStatsCore_(ss) {
     .map(s => {
       const globalPct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
       const notaJuego = calcularNotaJuego_(s.notasPeriodo);
+      const pctPeriodo = s.preguntasPeriodo ? Math.round(s.correctasPeriodo / s.preguntasPeriodo * 100) : 0;
       const nivelPcts = nivelKeys.map(nk => {
         const nd = s.niveles[nk];
         return nd && nd.totalT ? Math.round(nd.totalC / nd.totalT * 100) : '';
       });
-      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts, s.sesionesPeriodo, s.preguntasPeriodo];
+      return [s.nombre, s.curso, s.sesiones, s.totalT, globalPct, notaJuego, ...nivelPcts, s.sesionesPeriodo, s.preguntasPeriodo, pctPeriodo];
     });
 
   // Columnas porcentuales (para el color de fondo y formato "0%"): la
-  // columna de Nota (índice 5, escala 0-5) y las dos nuevas del periodo
+  // columna de Nota (índice 5, escala 0-5) y las dos primeras del periodo
   // (índices 10 y 11, son conteos, no porcentajes) quedan fuera de esta
-  // lista.
-  writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9]);
+  // lista; el % Acierto en el periodo (índice 12) sí es un porcentaje.
+  writeSheetBatch(sh, statsHeaders, rows, [4,6,7,8,9,12]);
   if (rows.length) sh.getRange(2, 6, rows.length, 1).setNumberFormat('0.0');
 
   // Anchos: solo la primera vez que se crea la hoja — no cambian entre
@@ -743,7 +751,7 @@ function updateStatsCore_(ss) {
   // desperdicio de llamadas a la API de Sheets. Menos llamadas = el
   // bloqueo compartido con appendRow() se libera más rápido.
   if (esNueva) {
-    [200,120,80,180,120,110,160,200,200,120,150,170].forEach((w, i) => sh.setColumnWidth(i+1, w));
+    [200,120,80,180,120,110,160,200,200,120,150,170,150].forEach((w, i) => sh.setColumnWidth(i+1, w));
   }
 
   // ── Hoja resumen por tema (eficacia de la herramienta) ────

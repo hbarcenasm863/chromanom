@@ -727,10 +727,12 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
         <div class="premio-row"><span class="n">📝</span><span><b id="progreso-preguntas">–</b> preguntas respondidas</span></div>
         <div class="premio-row" style="margin-bottom:0"><span class="n">✅</span><span><b id="progreso-pct">–</b> de acierto</span></div>
       </div>
-      <div class="modal-label" style="margin-bottom:6px">Este periodo académico</div>
+      <div class="modal-label" style="margin-bottom:2px">Este periodo académico</div>
+      <div class="premio-foot" style="margin:0 0 6px" id="progreso-periodo-fechas"></div>
       <div class="premio-box" style="margin:0 0 4px">
         <div class="premio-row"><span class="n">📅</span><span><b id="progreso-sesiones-periodo">–</b> sesiones jugadas</span></div>
         <div class="premio-row"><span class="n">📝</span><span><b id="progreso-preguntas-periodo">–</b> preguntas respondidas</span></div>
+        <div class="premio-row"><span class="n">✅</span><span><b id="progreso-pct-periodo">–</b> de acierto</span></div>
         <div class="premio-row" style="margin-bottom:0"><span class="n">🏅</span><span>Nota juego actual: <b id="progreso-nota">–</b> / 5.0</span></div>
       </div>
       <button class="wi-change" onclick="cambiarEstudiante()">Cambiar de estudiante</button>
@@ -4654,10 +4656,23 @@ function cambiarEstudiante(){
 // vea de un vistazo cómo va. Es solo informativo: si la consulta falla,
 // tarda, o el estudiante todavía no tiene sesiones registradas, se muestra
 // "0" sin bloquear nunca que el estudiante elija nivel y juegue.
+// Convierte 'yyyy-MM-dd' a algo legible como "10 ago" para mostrarle al
+// estudiante a qué periodo corresponde su progreso, sin duplicar las
+// fechas como constante aparte en el frontend (llegan del .gs, que es
+// donde vive FECHA_INICIO_PERIODO/FECHA_FIN_PERIODO).
+const MESES_CORTOS=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+function formatFechaCorta_(iso){
+  if(!iso||typeof iso!=='string') return '';
+  const partes=iso.split('-');
+  if(partes.length!==3) return '';
+  const mes=MESES_CORTOS[parseInt(partes[1],10)-1];
+  return mes?(parseInt(partes[2],10)+' '+mes):'';
+}
 function cargarProgresoInline(){
-  ['progreso-sesiones','progreso-preguntas','progreso-pct','progreso-nota','progreso-sesiones-periodo','progreso-preguntas-periodo'].forEach(id=>{
+  ['progreso-sesiones','progreso-preguntas','progreso-pct','progreso-nota','progreso-sesiones-periodo','progreso-preguntas-periodo','progreso-pct-periodo'].forEach(id=>{
     document.getElementById(id).textContent='–';
   });
+  document.getElementById('progreso-periodo-fechas').textContent='';
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const url=ANALYTICS_URL+'?accion=progreso&nombre='+encodeURIComponent(studentName)+'&curso='+encodeURIComponent(studentCourse);
   // 9s en vez de 4s: con toda la clase entrando su código casi al mismo
@@ -4668,17 +4683,25 @@ function cargarProgresoInline(){
   const timeout=new Promise(res=>setTimeout(()=>res(null),9000));
   Promise.race([fetch(url).then(r=>r.ok?r.json():null).catch(()=>null), timeout])
     .then(data=>{
+      // Las fechas del periodo llegan en toda respuesta ok:true (haya o no
+      // datos aún); si el .gs desplegado todavía no las manda (versión
+      // vieja), simplemente se deja la línea en blanco en vez de "undefined".
+      if(data && data.ok && (data.periodoInicio || data.periodoFin)){
+        const ini=formatFechaCorta_(data.periodoInicio), fin=formatFechaCorta_(data.periodoFin);
+        document.getElementById('progreso-periodo-fechas').textContent=(ini&&fin)?(ini+' – '+fin):'';
+      }
       if(data && data.ok && data.encontrado){
         document.getElementById('progreso-sesiones').textContent=data.sesiones;
         document.getElementById('progreso-preguntas').textContent=data.preguntas;
         document.getElementById('progreso-pct').textContent=data.pct+'%';
         document.getElementById('progreso-nota').textContent=data.nota;
-        // Sesiones/preguntas en el periodo académico vigente (además del
-        // total histórico de arriba) — llegan vacías desde un .gs sin
-        // redesplegar todavía, así que se cae a "0" en vez de mostrar
+        // Sesiones/preguntas/% de acierto EN EL PERIODO (además del total
+        // histórico de arriba) — llegan vacíos desde un .gs sin
+        // redesplegar todavía, así que se cae a "0"/"—" en vez de mostrar
         // "undefined".
         document.getElementById('progreso-sesiones-periodo').textContent=data.sesionesPeriodo!=null?data.sesionesPeriodo:'0';
         document.getElementById('progreso-preguntas-periodo').textContent=data.preguntasPeriodo!=null?data.preguntasPeriodo:'0';
+        document.getElementById('progreso-pct-periodo').textContent=data.pctPeriodo!=null?(data.pctPeriodo+'%'):'—';
       } else {
         document.getElementById('progreso-sesiones').textContent='0';
         document.getElementById('progreso-preguntas').textContent='0';
@@ -4686,6 +4709,7 @@ function cargarProgresoInline(){
         document.getElementById('progreso-nota').textContent='—';
         document.getElementById('progreso-sesiones-periodo').textContent='0';
         document.getElementById('progreso-preguntas-periodo').textContent='0';
+        document.getElementById('progreso-pct-periodo').textContent='—';
       }
     });
 }
