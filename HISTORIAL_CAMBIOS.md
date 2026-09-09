@@ -7,6 +7,42 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-09 (8) — Vista semidesarrollada para las 37 estructuras nuevas
+
+### Contexto
+Después de agregar las 37 estructuras nuevas de la entrada anterior (7),
+la docente notó que a esos compuestos no les aparecía el botón para
+alternar entre "⬡ Esqueletal" y "— Semidesarrollada" que sí tienen los
+compuestos antiguos, y pidió agregarlo.
+
+### La causa
+Ese botón solo aparece cuando el compuesto tiene una entrada en
+`MOLDES` (la estructura tipo fórmula condensada, CH₃—CH₂—...). Al
+agregar las 37 moléculas nuevas se dibujó su estructura esqueletal
+(`M`), pero se dejó `MOLDES` sin llenar a propósito porque no era
+obligatorio para que las preguntas de nomenclatura funcionaran — solo
+faltaba el botón de vista alterna.
+
+### Qué se agregó
+Se agregó la entrada `MOLDES` para las 37 moléculas nuevas de la sesión
+anterior (alquenos, alquinos, alcoholes, cetonas, aldehídos, ácidos,
+ésteres, éteres, amidas y nitrilos), siguiendo el mismo formato que las
+demás. Cada una se verificó por separado: que renderice sin errores, que
+el conteo de hidrógenos coincida con la fórmula molecular real del
+compuesto, y visualmente que no haya textos superpuestos. También se
+probó en el juego real que el botón de alternar aparece y que la
+fórmula semidesarrollada se ve correcta (por ejemplo, heptan-2-ona).
+
+### Archivos
+- **`juego.html`**: se agregaron 37 entradas nuevas al objeto `MOLDES`,
+  justo antes de su cierre. No se tocó nada más.
+
+### Pendientes
+- Ninguno. Cambio solo de `juego.html`, no requiere redesplegar ni
+  recalcular nada — basta con el push a `main`.
+
+---
+
 ## 2026-09-09 (7) — 50 preguntas de nomenclatura por cada grupo funcional
 
 ### Contexto

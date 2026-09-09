@@ -1641,6 +1641,63 @@ const MOLDES={
   clorobutano2: [{h:3,bn:1},{h:1,bn:1,bd:[{s:'Cl',h:0}]},{h:2,bn:1},{h:3}],
   dibromopropano12: [{h:2,bn:1,bd:[{s:'Br',h:0}]},{h:1,bn:1,bd:[{s:'Br',h:0}]},{h:3}],
   dibromoetano11: [{h:3,bn:1},{h:1,bu:[{s:'Br',h:0}],bd:[{s:'Br',h:0}]}],
+
+  // ── ALQUENOS (ampliación a 50) ──
+  hex2eno:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hex3eno:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:2},{h:1,bn:1},{h:2,bn:1},{h:3}],
+  metilpropeno:[{h:2,bn:2},{h:0,bn:1,bu:_C3},{h:3}],
+
+  // ── ALQUINOS (ampliación a 50) ──
+  hex2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hept1ino:[{h:1,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  hept2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilpent2ino:[{h:3,bn:1},{h:0,bn:3},{h:0,bn:1},{h:1,bn:1,bu:_C3},{h:3}],
+
+  // ── ALCOHOLES (ampliación a 50) ──
+  hexan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:1}],
+  heptan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+
+  // ── CETONAS (ampliación a 50) ──
+  heptan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  heptan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  heptan4ona:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metilbutan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:1,bn:1,bd:_C3},{h:3}],
+
+  // ── ALDEHÍDOS (ampliación a 50) ──
+  heptanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  metilpropanal:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:1,bu:_O0,buBn:2}],
+  metilbutanal2:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_C3},{h:1,bu:_O0,buBn:2}],
+  metilbutanal3:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+
+  // ── ÁCIDOS (ampliación a 50) ──
+  acidoHeptanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoMetilpropanoico:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoMetilbutanoico2:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bu:_C3},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoMetilbutanoico3:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+
+  // ── ÉSTERES (ampliación a 50) ──
+  propanoatoEtilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  metanoatoMetilo:[{h:1,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  metanoatoEtilo:[{h:1,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+  butanoatoEtilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
+
+  // ── ÉTERES (ampliación a 50) ──
+  etoxipropano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metoxibutano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  metoxipentano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  etoxibutano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+
+  // ── AMIDAS (ampliación a 50) ──
+  heptanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  metilpropanamida:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  metilbutanamida2:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bu:_C3},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  metilbutanamida3:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+
+  // ── NITRILOS (ampliación a 50) ──
+  heptanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
+  metilpropanonitrilo:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:0,bn:3},{s:'N',h:0}],
+  metilbutanonitrilo2:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bu:_C3},{h:0,bn:3},{s:'N',h:0}],
+  metilbutanonitrilo3:[{h:3,bn:1},{h:1,bn:1,bu:_C3},{h:2,bn:1},{h:0,bn:3},{s:'N',h:0}],
 };
 
 // ════════════════════════════════════════════════════════
