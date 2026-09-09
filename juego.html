@@ -8625,6 +8625,16 @@ let _sessionId = '';
 // Se envía apenas el estudiante entra a jugar (startGame), sin esperar a que
 // responda ninguna pregunta ni a que cierre bien la sesión — así queda registro
 // de que ingresó aunque solo vea la primera pregunta y recargue o vuelva atrás.
+//
+// A diferencia de sendAnalytics() (que si falla le muestra un aviso grande al
+// estudiante con botón "Reintentar envío"), este envío es silencioso: si el
+// estudiante nunca llega a responder ninguna pregunta, este "inicio" es la
+// ÚNICA oportunidad de que quede registro de que entró a ese nivel — no hay
+// una segunda ocasión más adelante para reintentar como con sendAnalytics().
+// Por eso reintenta solo, en silencio, ante un tropiezo momentáneo de wifi
+// (típico en un salón con muchos dispositivos a la vez): un solo intento sin
+// reintentos, como estaba antes, podía perder ese registro para siempre sin
+// que nadie —ni el estudiante ni la docente— se enterara de que algo falló.
 function sendSessionStart(){
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const body=JSON.stringify({
@@ -8642,7 +8652,15 @@ function sendSessionStart(){
     errores_mc:0, errores_drag:0, errores_id:0, errores_write:0, errores_build:0, errores_rxnq:0,
     errores_por_tema:'{}', aciertos_por_tema:'{}', moleculas_falladas:''
   });
-  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true}).catch(()=>{});
+  const INTENTOS=3;
+  function intentar(n){
+    fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
+      .then(r=>{ if(!r.ok) throw new Error('http '+r.status); })
+      .catch(()=>{
+        if(n<INTENTOS-1) setTimeout(()=>intentar(n+1), 1500*(n+1));
+      });
+  }
+  intentar(0);
 }
 
 function buildPayload(trigger){

@@ -7,6 +7,66 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-09 (9) — Reintento automático al registrar que un estudiante entró a jugar
+
+### Contexto
+La docente reportó que una estudiante que practicó **solo alcanos** le dijo
+que "no se registró", y al revisar la hoja "Registro" no aparece ninguna
+sesión de ella con ese grupo.
+
+### Lo que encontré
+No es un bug de "alcanos" en particular — el código no distingue entre
+grupos funcionales al guardar una sesión, así que le pudo pasar con
+cualquier grupo. Lo que sí encontré es una debilidad real en el envío que
+marca "el estudiante entró a jugar" (`sendSessionStart`, dispara apenas se
+elige un nivel, ANTES de responder cualquier pregunta):
+
+- Cuando termina una partida, si el envío a la hoja falla, el estudiante
+  ve un aviso grande ("⚠️ No se pudo guardar tu partida") con un botón
+  para reintentar — así ella (o la docente) se entera si algo salió mal.
+- Pero el envío de "entró a jugar" no tenía nada de eso: un solo intento,
+  sin reintento y sin ningún aviso si fallaba. Si justo en ese momento
+  hubo un tropiezo de wifi (típico en un salón con muchos celulares
+  conectados a la vez), ese registro se perdía en silencio — y si la
+  estudiante además no alcanzó a responder ninguna pregunta antes de
+  salir o cerrar la práctica, no queda ninguna otra oportunidad de
+  guardar nada de esa sesión.
+
+Esto explica el reporte sin necesidad de que haya nada raro con el grupo
+"alcanos" específicamente: probablemente fue justo esa combinación (un
+tropiezo de conexión al entrar + salir antes de responder preguntas).
+
+### Qué se corrigió
+`sendSessionStart()` ahora reintenta sola hasta 3 veces (con una pausa
+creciente entre intentos) si el envío falla, en vez de rendirse con el
+primer tropiezo. Esto es automático y no requiere que el estudiante haga
+nada ni vea ningún aviso — simplemente hace más difícil que un problema
+momentáneo de wifi borre el registro de que entró a practicar.
+
+### Qué NO resuelve esto
+Si una estudiante cierra la app/pestaña de golpe (botón de inicio del
+celular, cambiar de app) antes de que el reintento termine, o si no hay
+conexión en absoluto durante toda la práctica, el registro se puede
+seguir perdiendo — eso ya no es un problema de código sino de conexión
+real en el momento. Si el problema persiste con este cambio, vale la
+pena preguntarle a la estudiante si alcanzó a ver la pantalla de
+resultados (el resumen con el puntaje) al terminar, o si jugó en "modo
+libre" en vez de con su código (en ese caso su sesión queda guardada
+como "(anónimo)", no con su nombre, y no aparece al buscarla por nombre).
+
+### Archivos
+- **`juego.html`**: se agregó reintento (hasta 3 intentos) a
+  `sendSessionStart()`. No se tocó nada más.
+
+### Pendientes
+- Ninguno de código. Cambio solo de `juego.html`, no requiere
+  redesplegar ni recalcular nada — basta con el push a `main`.
+- Pendiente de la docente: confirmar con la estudiante si terminó la
+  práctica y vio la pantalla de resultados, o si jugó en modo libre —
+  ayudaría a confirmar si este cambio resuelve el caso reportado.
+
+---
+
 ## 2026-09-09 (8) — Vista semidesarrollada para las 37 estructuras nuevas
 
 ### Contexto
