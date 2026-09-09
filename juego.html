@@ -1365,6 +1365,63 @@ const M = {
     s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'Cl'); // Cl en v[1] (C2)
     s+=ln(0,r,0,D);s+=atm(0,D,'Cl');       // Cl en v[3] (C4)
     return mkSVG(s);},
+
+  // ── ALQUENOS (ampliación a 50) ──
+  hex2eno(){_pts=[];const p=zz(0,0,6);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+dbl(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  hex3eno(){_pts=[];const p=zz(0,0,6);let s='';for(let i=0;i<p.length-1;i++){if(i===2)s+=dbl(p[i].x,p[i].y,p[i+1].x,p[i+1].y);else s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);}return mkSVG(s);},
+  metilpropeno(){_pts=[];const p=zz(0,0,3);let s=dbl(p[0].x,p[0].y,p[1].x,p[1].y)+ln(p[1].x,p[1].y,p[2].x,p[2].y);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y+BL);return mkSVG(s);},
+
+  // ── ALQUINOS (ampliación a 50) ──
+  hex2ino(){_pts=[];const p=zz(0,0,6);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  hept1ino(){_pts=[];const p=zz(0,0,7);let s=tri(p[0].x,p[0].y,p[1].x,p[1].y);for(let i=1;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  hept2ino(){_pts=[];const p=zz(0,0,7);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);return mkSVG(s);},
+  metilpent2ino(){_pts=[];const p=zz(0,0,5);let s=ln(p[0].x,p[0].y,p[1].x,p[1].y)+tri(p[1].x,p[1].y,p[2].x,p[2].y);for(let i=2;i<p.length-1;i++)s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);s+=ln(p[3].x,p[3].y,p[3].x,p[3].y+BL);return mkSVG(s);},
+
+  // ── ALCOHOLES (ampliación a 50) ──
+  hexan1ol(){_pts=[];const p=zz(0,0,6,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'OH');return mkSVG(s);},
+  heptan2ol(){_pts=[];const p=zz(0,0,7);let s=chain(p);s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'OH');return mkSVG(s);},
+
+  // ── CETONAS (ampliación a 50) ──
+  heptan2ona(){_pts=[];const p=zz(0,0,7);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');return mkSVG(s);},
+  heptan3ona(){_pts=[];const p=zz(0,0,7);let s=chain(p);s+=dbl(p[2].x,p[2].y,p[2].x,p[2].y-BL);s+=atm(p[2].x,p[2].y-BL,'O');return mkSVG(s);},
+  heptan4ona(){_pts=[];const p=zz(0,0,7);let s=chain(p);s+=dbl(p[3].x,p[3].y,p[3].x,p[3].y-BL);s+=atm(p[3].x,p[3].y-BL,'O');return mkSVG(s);},
+  metilbutan2ona(){_pts=[];const p=zz(0,0,4);let s=chain(p);s+=dbl(p[1].x,p[1].y,p[1].x,p[1].y-BL);s+=atm(p[1].x,p[1].y-BL,'O');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
+
+  // ── ALDEHÍDOS (ampliación a 50) ──
+  heptanal(){_pts=[];const p=zz(0,0,7,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  metilpropanal(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanal2(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanal3(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
+
+  // ── ÁCIDOS (ampliación a 50) ──
+  acidoHeptanoico(){_pts=[];const p=zz(0,0,7,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidoMetilpropanoico(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  acidoMetilbutanoico2(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  acidoMetilbutanoico3(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
+
+  // ── ÉSTERES (ampliación a 50) ──
+  propanoatoEtilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  metanoatoMetilo(){_pts=[];let s=dbl(0,0,0,-BL);const ox=0,oy=BL;s+=ln(0,0,ox,oy);const mx=ox+BL*COS30,my=oy+BL*SIN30;s+=ln(ox,oy,mx,my);s+=atm(0,-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  metanoatoEtilo(){_pts=[];let s=dbl(0,0,0,-BL);const ox=0,oy=BL;s+=ln(0,0,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);s+=atm(0,-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  butanoatoEtilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+
+  // ── ÉTERES (ampliación a 50) ──
+  etoxipropano(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y-BL;const e1x=ox-BL*COS30,e1y=oy-BL*SIN30,e2x=ox-2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);s+=atm(ox,oy,'O');return mkSVG(s);},
+  metoxibutano(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  metoxipentano(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'O');return mkSVG(s);},
+  etoxibutano(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y-BL;const e1x=ox-BL*COS30,e1y=oy-BL*SIN30,e2x=ox-2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);s+=atm(ox,oy,'O');return mkSVG(s);},
+
+  // ── AMIDAS (ampliación a 50) ──
+  heptanamida(){_pts=[];const p=zz(0,0,7,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  metilpropanamida(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanamida2(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanamida3(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
+
+  // ── NITRILOS (ampliación a 50) ──
+  heptanonitrilo(){_pts=[];const p=zz(0,0,7,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');return mkSVG(s);},
+  metilpropanonitrilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanonitrilo2(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');s+=ln(p[1].x,p[1].y,p[1].x,p[1].y-BL);return mkSVG(s);},
+  metilbutanonitrilo3(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=tri(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'N');s+=ln(p[2].x,p[2].y,p[2].x,p[2].y+BL);return mkSVG(s);},
 };
 
 // ════════════════════════════════════════════════════════
@@ -6516,6 +6573,1087 @@ const QBANK_EXTRA=[
    parts:[{t:'isopropil',cls:'r',l:'Sustit.'},{t:'bencen',cls:'c',l:'Anillo'},{t:'o',cls:'g',l:'Aromático'}], topic:'benceno'},
 ];
 QBANK.push(...QBANK_EXTRA);
+
+const QBANK_NOMENCLATURA_50=[
+// ════════════════════════════════════════════════════════
+// AMPLIACIÓN A 50 PREGUNTAS POR GRUPO FUNCIONAL (solo nomenclatura)
+// ════════════════════════════════════════════════════════
+
+// ── ALQUENOS ──
+{type:'mc', mol:'hex2eno', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hex-2-eno', opts:['hex-2-eno','hex-1-eno','hex-3-eno','hexano'],
+ expl:'6C, doble enlace entre C2-C3 (más cercano a un extremo) → <b>hex-2-eno</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+{type:'drag', mol:'hex2eno', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hex-2-eno',
+ slots:[
+   {id:'na1',label:'Cadena principal',correct:'hex',cls:'c'},
+   {id:'na2',label:'Localizador + insaturación',correct:'2-en',cls:'i'},
+   {id:'na3',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'hex',cls:'c'},{text:'2-en',cls:'i'},{text:'o',cls:'g'},{text:'pent',cls:'c'},{text:'3-en',cls:'i'},{text:'ol',cls:'g'}],
+ expl:'6C, doble enlace entre C2-C3 → <b>hex-2-eno</b>.', topic:'alquenos'},
+
+{type:'id', mol:'hex2eno',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hex-2-eno',
+ highlight:{text:'2-en',cls:'i'},
+ correct:'i',
+ expl:'"2-en" es la <b>Insaturación</b> — doble enlace entre C2 y C3.', topic:'alquenos'},
+
+{type:'write', mol:'hex2eno', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 6 carbonos con un doble enlace','El doble enlace está entre C2 y C3, no en el extremo'],
+ ans:'hex-2-eno', accepted:['hex-2-eno','2-hexeno','hex2eno','2hexeno'],
+ expl:'6C, doble enlace entre C2-C3 → <b>hex-2-eno</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+{type:'mc', mol:'hex3eno', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hex-3-eno', opts:['hex-3-eno','hex-2-eno','hex-1-eno','hexano'],
+ expl:'6C, doble enlace en el centro de la cadena (C3-C4) → <b>hex-3-eno</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'3-en',cls:'i',l:'Doble enlace en C3'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+{type:'drag', mol:'hex3eno', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hex-3-eno',
+ slots:[
+   {id:'nb1',label:'Cadena principal',correct:'hex',cls:'c'},
+   {id:'nb2',label:'Localizador + insaturación',correct:'3-en',cls:'i'},
+   {id:'nb3',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'hex',cls:'c'},{text:'3-en',cls:'i'},{text:'o',cls:'g'},{text:'pent',cls:'c'},{text:'2-en',cls:'i'},{text:'al',cls:'g'}],
+ expl:'6C, doble enlace en C3-C4 → <b>hex-3-eno</b>.', topic:'alquenos'},
+
+{type:'id', mol:'hex3eno',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hex-3-eno',
+ highlight:{text:'hex',cls:'c'},
+ correct:'c',
+ expl:'"hex" es la <b>Cadena principal</b> — 6 carbonos en la cadena.', topic:'alquenos'},
+
+{type:'write', mol:'hex3eno', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 6 carbonos con un doble enlace','El doble enlace está exactamente en el centro de la cadena'],
+ ans:'hex-3-eno', accepted:['hex-3-eno','3-hexeno','hex3eno','3hexeno'],
+ expl:'6C, doble enlace entre C3-C4 → <b>hex-3-eno</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'3-en',cls:'i',l:'Doble enlace en C3'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+{type:'mc', mol:'metilpropeno', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'2-metilpropeno', opts:['2-metilpropeno','1-metilpropeno','propeno','2-metilpropano'],
+ expl:'Doble enlace C1=C2 con un metilo en C2 → <b>2-metilpropeno</b> (isobutileno).',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'en',cls:'i',l:'Doble enlace'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+{type:'drag', mol:'metilpropeno', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'2-metilpropeno',
+ slots:[
+   {id:'nc1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'nc2',label:'Cadena principal',correct:'prop',cls:'c'},
+   {id:'nc3',label:'Insaturación + terminación',correct:'eno',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'prop',cls:'c'},{text:'eno',cls:'g'},{text:'1-metil',cls:'r'},{text:'but',cls:'c'},{text:'ano',cls:'c'}],
+ expl:'Metilo en C2, doble enlace C1=C2 → <b>2-metilpropeno</b> (isobutileno).', topic:'alquenos'},
+
+{type:'id', mol:'metilpropeno',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilpropeno',
+ highlight:{text:'2-metil',cls:'r'},
+ correct:'r',
+ expl:'"2-metil" es la <b>Ramificación</b> — un metilo unido al C2 de la cadena.', topic:'alquenos'},
+
+{type:'write', mol:'metilpropeno', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Doble enlace entre C1 y C2, con un metilo en C2','Nombre común: isobutileno'],
+ ans:'2-metilpropeno', accepted:['2-metilpropeno','2metilpropeno','isobutileno'],
+ oldNames:['isobutileno'],
+ expl:'Doble enlace C1=C2 con metilo en C2 → <b>2-metilpropeno</b>. "Isobutileno" es el nombre funcional anterior.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'en',cls:'i',l:'Doble enlace'},{t:'o',cls:'g',l:'Alqueno'}], topic:'alquenos'},
+
+// ── ALQUINOS ──
+{type:'mc', mol:'hex2ino', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hex-2-ino', opts:['hex-2-ino','hex-1-ino','hex-3-ino','hexano'],
+ expl:'6C, triple enlace entre C2-C3 → <b>hex-2-ino</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'drag', mol:'hex2ino', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hex-2-ino',
+ slots:[
+   {id:'nd1',label:'Cadena principal',correct:'hex',cls:'c'},
+   {id:'nd2',label:'Localizador + insaturación',correct:'2-in',cls:'i'},
+   {id:'nd3',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'hex',cls:'c'},{text:'2-in',cls:'i'},{text:'o',cls:'g'},{text:'hept',cls:'c'},{text:'1-in',cls:'i'},{text:'a',cls:'g'}],
+ expl:'6C, triple enlace entre C2-C3 → <b>hex-2-ino</b>.', topic:'alquinos'},
+
+{type:'id', mol:'hex2ino',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hex-2-ino',
+ highlight:{text:'2-in',cls:'i'},
+ correct:'i',
+ expl:'"2-in" es la <b>Insaturación</b> — triple enlace entre C2 y C3.', topic:'alquinos'},
+
+{type:'write', mol:'hex2ino', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 6 carbonos con un triple enlace','El triple enlace está entre C2 y C3'],
+ ans:'hex-2-ino', accepted:['hex-2-ino','2-hexino','hex2ino','2hexino'],
+ expl:'6C, triple enlace entre C2-C3 → <b>hex-2-ino</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'mc', mol:'hept1ino', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hept-1-ino', opts:['hept-1-ino','hept-2-ino','heptano','hept-1-eno'],
+ expl:'7C, triple enlace en el extremo de la cadena (C1) → <b>hept-1-ino</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'drag', mol:'hept1ino', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hept-1-ino',
+ slots:[
+   {id:'ne1',label:'Cadena principal',correct:'hept',cls:'c'},
+   {id:'ne2',label:'Localizador + insaturación',correct:'1-in',cls:'i'},
+   {id:'ne3',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'1-in',cls:'i'},{text:'o',cls:'g'},{text:'hex',cls:'c'},{text:'2-in',cls:'i'},{text:'ano',cls:'c'}],
+ expl:'7C, triple enlace en C1 → <b>hept-1-ino</b>.', topic:'alquinos'},
+
+{type:'id', mol:'hept1ino',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hept-1-ino',
+ highlight:{text:'hept',cls:'c'},
+ correct:'c',
+ expl:'"hept" es la <b>Cadena principal</b> — 7 carbonos en la cadena.', topic:'alquinos'},
+
+{type:'write', mol:'hept1ino', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 7 carbonos con un triple enlace','El triple enlace está en el extremo (C1)'],
+ ans:'hept-1-ino', accepted:['hept-1-ino','1-heptino','hept1ino','1heptino'],
+ expl:'7C, triple enlace en C1 → <b>hept-1-ino</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'mc', mol:'hept2ino', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hept-2-ino', opts:['hept-2-ino','hept-1-ino','hept-3-ino','heptano'],
+ expl:'7C, triple enlace entre C2-C3 → <b>hept-2-ino</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'drag', mol:'hept2ino', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hept-2-ino',
+ slots:[
+   {id:'nf1',label:'Cadena principal',correct:'hept',cls:'c'},
+   {id:'nf2',label:'Localizador + insaturación',correct:'2-in',cls:'i'},
+   {id:'nf3',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'2-in',cls:'i'},{text:'o',cls:'g'},{text:'hex',cls:'c'},{text:'1-in',cls:'i'},{text:'al',cls:'g'}],
+ expl:'7C, triple enlace entre C2-C3 → <b>hept-2-ino</b>.', topic:'alquinos'},
+
+{type:'id', mol:'hept2ino',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hept-2-ino',
+ highlight:{text:'2-in',cls:'i'},
+ correct:'i',
+ expl:'"2-in" es la <b>Insaturación</b> — triple enlace entre C2 y C3.', topic:'alquinos'},
+
+{type:'write', mol:'hept2ino', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 7 carbonos con un triple enlace','El triple enlace está entre C2 y C3'],
+ ans:'hept-2-ino', accepted:['hept-2-ino','2-heptino','hept2ino','2heptino'],
+ expl:'7C, triple enlace entre C2-C3 → <b>hept-2-ino</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'mc', mol:'metilpent2ino', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'4-metilpent-2-ino', opts:['4-metilpent-2-ino','2-metilpent-3-ino','4-metilpent-3-ino','pent-2-ino'],
+ expl:'Cadena de 5C con triple enlace en C2 y metilo en C4 → <b>4-metilpent-2-ino</b>.',
+ parts:[{t:'4-metil',cls:'r',l:'Ramificación en C4'},{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+{type:'drag', mol:'metilpent2ino', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'4-metilpent-2-ino',
+ slots:[
+   {id:'ng1',label:'Ramificación',correct:'4-metil',cls:'r'},
+   {id:'ng2',label:'Cadena principal',correct:'pent',cls:'c'},
+   {id:'ng3',label:'Localizador + insaturación',correct:'2-in',cls:'i'},
+   {id:'ng4',label:'Terminación',correct:'o',cls:'g'},
+ ],
+ tokens:[{text:'4-metil',cls:'r'},{text:'pent',cls:'c'},{text:'2-in',cls:'i'},{text:'o',cls:'g'},{text:'2-metil',cls:'r'},{text:'3-in',cls:'i'}],
+ expl:'Metilo en C4, triple enlace en C2 → <b>4-metilpent-2-ino</b>.', topic:'alquinos'},
+
+{type:'id', mol:'metilpent2ino',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'4-metilpent-2-ino',
+ highlight:{text:'4-metil',cls:'r'},
+ correct:'r',
+ expl:'"4-metil" es la <b>Ramificación</b> — un metilo unido al C4 de la cadena.', topic:'alquinos'},
+
+{type:'write', mol:'metilpent2ino', q:'Escribe el nombre IUPAC de esta estructura.',
+ hints:['Cadena de 5 carbonos con triple enlace en C2','Hay un metilo en C4'],
+ ans:'4-metilpent-2-ino', accepted:['4-metilpent-2-ino','4metilpent-2-ino','4-metilpent2ino','4metilpent2ino'],
+ expl:'5C, triple enlace en C2, metilo en C4 → <b>4-metilpent-2-ino</b>.',
+ parts:[{t:'4-metil',cls:'r',l:'Ramificación en C4'},{t:'pent',cls:'c',l:'5C'},{t:'2-in',cls:'i',l:'Triple enlace en C2'},{t:'o',cls:'g',l:'Alquino'}], topic:'alquinos'},
+
+// ── ALCOHOLES ──
+{type:'mc', mol:'hexan1ol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'hexan-1-ol', opts:['hexan-1-ol','hexan-2-ol','hexan-3-ol','hexanal'],
+ expl:'6C, −OH en el extremo (C1) → <b>hexan-1-ol</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
+
+{type:'drag', mol:'hexan1ol', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'hexan-1-ol',
+ slots:[
+   {id:'nh1',label:'Prefijo cadena',correct:'hex',cls:'c'},
+   {id:'nh2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nh3',label:'Grupo funcional',correct:'1-ol',cls:'g'},
+ ],
+ tokens:[{text:'hex',cls:'c'},{text:'an',cls:'c'},{text:'1-ol',cls:'g'},{text:'pent',cls:'c'},{text:'2-ol',cls:'g'},{text:'al',cls:'g'}],
+ expl:'6C, −OH en C1 → <b>hexan-1-ol</b>.', topic:'alcoholes'},
+
+{type:'id', mol:'hexan1ol',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'hexan-1-ol',
+ highlight:{text:'1-ol',cls:'g'},
+ correct:'g',
+ expl:'"1-ol" es el <b>Grupo funcional</b> — alcohol (−OH) en C1.', topic:'alcoholes'},
+
+{type:'write', mol:'hexan1ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
+ hints:['Cadena de 6 carbonos con −OH','El −OH está en el extremo de la cadena (C1)'],
+ ans:'hexan-1-ol', accepted:['hexan-1-ol','1-hexanol','hexan1ol','1hexanol'],
+ expl:'6C, −OH en C1 → <b>hexan-1-ol</b>.',
+ parts:[{t:'hex',cls:'c',l:'6C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'1-ol',cls:'g',l:'OH en C1'}], topic:'alcoholes'},
+
+{type:'mc', mol:'heptan2ol', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'heptan-2-ol', opts:['heptan-2-ol','heptan-1-ol','heptan-3-ol','heptanal'],
+ expl:'7C, −OH en C2 → <b>heptan-2-ol</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-ol',cls:'g',l:'OH en C2'}], topic:'alcoholes'},
+
+{type:'drag', mol:'heptan2ol', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'heptan-2-ol',
+ slots:[
+   {id:'ni1',label:'Prefijo cadena',correct:'hept',cls:'c'},
+   {id:'ni2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'ni3',label:'Grupo funcional',correct:'2-ol',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'2-ol',cls:'g'},{text:'hex',cls:'c'},{text:'1-ol',cls:'g'},{text:'al',cls:'g'}],
+ expl:'7C, −OH en C2 → <b>heptan-2-ol</b>.', topic:'alcoholes'},
+
+{type:'id', mol:'heptan2ol',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptan-2-ol',
+ highlight:{text:'hept',cls:'c'},
+ correct:'c',
+ expl:'"hept" es la <b>Cadena principal</b> — 7 carbonos en la cadena.', topic:'alcoholes'},
+
+{type:'write', mol:'heptan2ol', q:'Escribe el nombre IUPAC completo de esta estructura.',
+ hints:['Cadena de 7 carbonos con −OH','El −OH está en C2, no en el extremo'],
+ ans:'heptan-2-ol', accepted:['heptan-2-ol','2-heptanol','heptan2ol','2heptanol'],
+ expl:'7C, −OH en C2 → <b>heptan-2-ol</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-ol',cls:'g',l:'OH en C2'}], topic:'alcoholes'},
+
+// ── CETONAS ──
+{type:'mc', mol:'heptan2ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
+ ans:'heptan-2-ona', opts:['heptan-2-ona','heptan-3-ona','heptan-4-ona','heptanal'],
+ expl:'7C, C=O en C2 → <b>heptan-2-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'drag', mol:'heptan2ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'heptan-2-ona',
+ slots:[
+   {id:'nj1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'nj2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nj3',label:'Localizador + GF',correct:'2-ona',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'2-ona',cls:'g'},{text:'hex',cls:'c'},{text:'3-ona',cls:'g'},{text:'al',cls:'g'}],
+ expl:'7C, C=O en C2 → <b>heptan-2-ona</b>.', topic:'cetonas'},
+
+{type:'id', mol:'heptan2ona',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptan-2-ona',
+ highlight:{text:'2-on',cls:'g'},
+ correct:'g',
+ expl:'"2-on" es el <b>Grupo funcional</b> + localizador — indica cetona (C=O) en C2.', topic:'cetonas'},
+
+{type:'write', mol:'heptan2ona', q:'Escribe el nombre IUPAC de esta cetona.',
+ hints:['Cadena de 7 carbonos con C=O','El carbonilo está en C2'],
+ ans:'heptan-2-ona', accepted:['heptan-2-ona','heptan2ona','2-heptanona','2heptanona'],
+ expl:'7C, C=O en C2 → <b>heptan-2-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'mc', mol:'heptan3ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
+ ans:'heptan-3-ona', opts:['heptan-3-ona','heptan-2-ona','heptan-4-ona','heptanal'],
+ expl:'7C, C=O en C3 → <b>heptan-3-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-on',cls:'g',l:'C=O en C3'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'drag', mol:'heptan3ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'heptan-3-ona',
+ slots:[
+   {id:'nk1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'nk2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nk3',label:'Localizador + GF',correct:'3-ona',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'3-ona',cls:'g'},{text:'hex',cls:'c'},{text:'2-ona',cls:'g'},{text:'al',cls:'g'}],
+ expl:'7C, C=O en C3 → <b>heptan-3-ona</b>.', topic:'cetonas'},
+
+{type:'id', mol:'heptan3ona',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptan-3-ona',
+ highlight:{text:'hept',cls:'c'},
+ correct:'c',
+ expl:'"hept" es la <b>Cadena principal</b> — 7 carbonos.', topic:'cetonas'},
+
+{type:'write', mol:'heptan3ona', q:'Escribe el nombre IUPAC de esta cetona.',
+ hints:['Cadena de 7 carbonos con C=O','El carbonilo está en C3'],
+ ans:'heptan-3-ona', accepted:['heptan-3-ona','heptan3ona','3-heptanona','3heptanona'],
+ expl:'7C, C=O en C3 → <b>heptan-3-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'3-on',cls:'g',l:'C=O en C3'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'mc', mol:'heptan4ona', q:'¿Cuál es el nombre IUPAC de esta cetona?',
+ ans:'heptan-4-ona', opts:['heptan-4-ona','heptan-3-ona','heptan-2-ona','heptanal'],
+ expl:'7C, C=O en el centro de la cadena (C4) → <b>heptan-4-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'4-on',cls:'g',l:'C=O en C4'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'drag', mol:'heptan4ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'heptan-4-ona',
+ slots:[
+   {id:'nl1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'nl2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nl3',label:'Localizador + GF',correct:'4-ona',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'4-ona',cls:'g'},{text:'hex',cls:'c'},{text:'3-ona',cls:'g'},{text:'al',cls:'g'}],
+ expl:'7C, C=O en C4 (posición simétrica) → <b>heptan-4-ona</b>.', topic:'cetonas'},
+
+{type:'id', mol:'heptan4ona',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptan-4-ona',
+ highlight:{text:'4-on',cls:'g'},
+ correct:'g',
+ expl:'"4-on" es el <b>Grupo funcional</b> + localizador — cetona (C=O) en C4, el único localizador posible por ser el centro de la cadena.', topic:'cetonas'},
+
+{type:'write', mol:'heptan4ona', q:'Escribe el nombre IUPAC de esta cetona.',
+ hints:['Cadena de 7 carbonos con C=O','El carbonilo está justo en el centro de la cadena'],
+ ans:'heptan-4-ona', accepted:['heptan-4-ona','heptan4ona','4-heptanona','4heptanona'],
+ expl:'7C, C=O en C4 (única posición posible por simetría) → <b>heptan-4-ona</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'4-on',cls:'g',l:'C=O en C4'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'mc', mol:'metilbutan2ona', q:'¿Cuál es el nombre IUPAC de esta cetona ramificada?',
+ ans:'3-metilbutan-2-ona', opts:['3-metilbutan-2-ona','2-metilbutan-3-ona','3-metilbutan-1-ona','butan-2-ona'],
+ expl:'Cadena de 4C con C=O en C2 y metilo en C3 → <b>3-metilbutan-2-ona</b>.',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+{type:'drag', mol:'metilbutan2ona', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'3-metilbutan-2-ona',
+ slots:[
+   {id:'nm1',label:'Ramificación',correct:'3-metil',cls:'r'},
+   {id:'nm2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'nm3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nm4',label:'Localizador + GF',correct:'2-ona',cls:'g'},
+ ],
+ tokens:[{text:'3-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'2-ona',cls:'g'},{text:'2-metil',cls:'r'},{text:'3-ona',cls:'g'}],
+ expl:'Metilo en C3, C=O en C2 → <b>3-metilbutan-2-ona</b>.', topic:'cetonas'},
+
+{type:'id', mol:'metilbutan2ona',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'3-metilbutan-2-ona',
+ highlight:{text:'3-metil',cls:'r'},
+ correct:'r',
+ expl:'"3-metil" es la <b>Ramificación</b> — un metilo unido al C3.', topic:'cetonas'},
+
+{type:'write', mol:'metilbutan2ona', q:'Escribe el nombre IUPAC de esta cetona ramificada.',
+ hints:['Cadena de 4 carbonos con C=O en C2','Hay un metilo en C3'],
+ ans:'3-metilbutan-2-ona', accepted:['3-metilbutan-2-ona','3-metilbutan2ona','3metilbutan-2-ona','3metilbutan2ona'],
+ expl:'4C, C=O en C2, metilo en C3 → <b>3-metilbutan-2-ona</b>.',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'2-on',cls:'g',l:'C=O en C2'},{t:'a',cls:'g',l:'Cetona'}], topic:'cetonas'},
+
+// ── ALDEHÍDOS ──
+{type:'mc', mol:'heptanal', q:'¿Cuál es el nombre IUPAC de este aldehído?',
+ ans:'heptanal', opts:['heptanal','hexanal','heptan-2-ona','heptanol'],
+ expl:'7C con −CHO terminal → <b>heptanal</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'drag', mol:'heptanal', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'heptanal',
+ slots:[
+   {id:'nn1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'nn2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nn3',label:'Grupo funcional',correct:'al',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'hex',cls:'c'},{text:'ona',cls:'g'},{text:'ol',cls:'g'}],
+ expl:'7C con −CHO terminal → <b>heptanal</b>.', topic:'aldehidos'},
+
+{type:'id', mol:'heptanal',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptanal',
+ highlight:{text:'al',cls:'g'},
+ correct:'g',
+ expl:'"al" es el <b>Grupo funcional</b> — indica aldehído (−CHO), siempre en C1.', topic:'aldehidos'},
+
+{type:'write', mol:'heptanal', q:'Escribe el nombre IUPAC de este aldehído.',
+ hints:['Cadena de 7 carbonos con −CHO','El −CHO siempre está en el extremo (C1)'],
+ ans:'heptanal', accepted:['heptanal'],
+ expl:'7C con −CHO terminal → <b>heptanal</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'mc', mol:'metilpropanal', q:'¿Cuál es el nombre IUPAC de este aldehído ramificado?',
+ ans:'2-metilpropanal', opts:['2-metilpropanal','3-metilpropanal','butanal','2-metilpropanol'],
+ expl:'Cadena de 3C con −CHO en C1 y metilo en C2 → <b>2-metilpropanal</b> (isobutiraldehído).',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'drag', mol:'metilpropanal', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'2-metilpropanal',
+ slots:[
+   {id:'no1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'no2',label:'Cadena',correct:'prop',cls:'c'},
+   {id:'no3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'no4',label:'Grupo funcional',correct:'al',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'3-metil',cls:'r'},{text:'but',cls:'c'}],
+ expl:'Metilo en C2, −CHO en C1 → <b>2-metilpropanal</b>.', topic:'aldehidos'},
+
+{type:'id', mol:'metilpropanal',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilpropanal',
+ highlight:{text:'2-metil',cls:'r'},
+ correct:'r',
+ expl:'"2-metil" es la <b>Ramificación</b> — un metilo unido al C2.', topic:'aldehidos'},
+
+{type:'write', mol:'metilpropanal', q:'Escribe el nombre IUPAC de este aldehído ramificado.',
+ hints:['Cadena de 3 carbonos con −CHO en C1','Hay un metilo en C2','Nombre común: isobutiraldehído'],
+ ans:'2-metilpropanal', accepted:['2-metilpropanal','2metilpropanal','isobutiraldehído','isobutiraldehido'],
+ oldNames:['isobutiraldehído','isobutiraldehido'],
+ expl:'3C, −CHO en C1, metilo en C2 → <b>2-metilpropanal</b>. "Isobutiraldehído" es el nombre funcional anterior.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'mc', mol:'metilbutanal2', q:'¿Cuál es el nombre IUPAC de este aldehído ramificado?',
+ ans:'2-metilbutanal', opts:['2-metilbutanal','3-metilbutanal','pentanal','2-metilbutanol'],
+ expl:'Cadena de 4C con −CHO en C1 y metilo en C2 → <b>2-metilbutanal</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'drag', mol:'metilbutanal2', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'2-metilbutanal',
+ slots:[
+   {id:'np1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'np2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'np3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'np4',label:'Grupo funcional',correct:'al',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'3-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C2, −CHO en C1 → <b>2-metilbutanal</b>.', topic:'aldehidos'},
+
+{type:'id', mol:'metilbutanal2',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilbutanal',
+ highlight:{text:'but',cls:'c'},
+ correct:'c',
+ expl:'"but" es la <b>Cadena principal</b> — 4 carbonos.', topic:'aldehidos'},
+
+{type:'write', mol:'metilbutanal2', q:'Escribe el nombre IUPAC de este aldehído ramificado.',
+ hints:['Cadena de 4 carbonos con −CHO en C1','Hay un metilo en C2'],
+ ans:'2-metilbutanal', accepted:['2-metilbutanal','2metilbutanal'],
+ expl:'4C, −CHO en C1, metilo en C2 → <b>2-metilbutanal</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'mc', mol:'metilbutanal3', q:'¿Cuál es el nombre IUPAC de este aldehído ramificado?',
+ ans:'3-metilbutanal', opts:['3-metilbutanal','2-metilbutanal','pentanal','3-metilbutanol'],
+ expl:'Cadena de 4C con −CHO en C1 y metilo en C3 → <b>3-metilbutanal</b> (isovaleraldehído).',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+{type:'drag', mol:'metilbutanal3', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'3-metilbutanal',
+ slots:[
+   {id:'nq1',label:'Ramificación',correct:'3-metil',cls:'r'},
+   {id:'nq2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'nq3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'nq4',label:'Grupo funcional',correct:'al',cls:'g'},
+ ],
+ tokens:[{text:'3-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'al',cls:'g'},{text:'2-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C3, −CHO en C1 → <b>3-metilbutanal</b>.', topic:'aldehidos'},
+
+{type:'id', mol:'metilbutanal3',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'3-metilbutanal',
+ highlight:{text:'3-metil',cls:'r'},
+ correct:'r',
+ expl:'"3-metil" es la <b>Ramificación</b> — un metilo unido al C3.', topic:'aldehidos'},
+
+{type:'write', mol:'metilbutanal3', q:'Escribe el nombre IUPAC de este aldehído ramificado.',
+ hints:['Cadena de 4 carbonos con −CHO en C1','Hay un metilo en C3','Nombre común: isovaleraldehído'],
+ ans:'3-metilbutanal', accepted:['3-metilbutanal','3metilbutanal','isovaleraldehído','isovaleraldehido'],
+ oldNames:['isovaleraldehído','isovaleraldehido'],
+ expl:'4C, −CHO en C1, metilo en C3 → <b>3-metilbutanal</b>. "Isovaleraldehído" es el nombre funcional anterior.',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'al',cls:'g',l:'Aldehído'}], topic:'aldehidos'},
+
+// ── ÁCIDOS ──
+{type:'mc', mol:'acidoHeptanoico', q:'¿Cuál es el nombre IUPAC de este compuesto?',
+ ans:'ácido heptanoico', opts:['ácido heptanoico','ácido hexanoico','ácido pentanoico','heptanoato'],
+ expl:'7C con −COOH → <b>ácido heptanoico</b>.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'drag', mol:'acidoHeptanoico', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'ácido heptanoico',
+ slots:[
+   {id:'nr1',label:'Prefijo GF',correct:'ácido',cls:'g'},
+   {id:'nr2',label:'Prefijo cadena',correct:'hept',cls:'c'},
+   {id:'nr3',label:'Saturación + GF',correct:'anoico',cls:'g'},
+ ],
+ tokens:[{text:'ácido',cls:'g'},{text:'hept',cls:'c'},{text:'anoico',cls:'g'},{text:'hex',cls:'c'},{text:'pent',cls:'c'},{text:'anoato',cls:'g'}],
+ expl:'7C con −COOH → <b>ácido heptanoico</b>.', topic:'acidos'},
+
+{type:'id', mol:'acidoHeptanoico',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'ácido heptanoico',
+ highlight:{text:'hept',cls:'c'},
+ correct:'c',
+ expl:'"hept" es la <b>Cadena principal</b> — 7 carbonos (incluido el del COOH).', topic:'acidos'},
+
+{type:'write', mol:'acidoHeptanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico.',
+ hints:['Cadena de 7 carbonos con −COOH','El −COOH siempre está en C1'],
+ ans:'ácido heptanoico', accepted:['ácido heptanoico','acido heptanoico'],
+ expl:'7C con −COOH → <b>ácido heptanoico</b>.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'mc', mol:'acidoMetilpropanoico', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico ramificado?',
+ ans:'ácido 2-metilpropanoico', opts:['ácido 2-metilpropanoico','ácido 3-metilpropanoico','ácido butanoico','2-metilpropanoato'],
+ expl:'3C con −COOH y metilo en C2 → <b>ácido 2-metilpropanoico</b> (ácido isobutírico).',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'drag', mol:'acidoMetilpropanoico', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'ácido 2-metilpropanoico',
+ slots:[
+   {id:'ns1',label:'Prefijo GF',correct:'ácido',cls:'g'},
+   {id:'ns2',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'ns3',label:'Prefijo cadena',correct:'prop',cls:'c'},
+   {id:'ns4',label:'Saturación + GF',correct:'oico',cls:'g'},
+ ],
+ tokens:[{text:'ácido',cls:'g'},{text:'2-metil',cls:'r'},{text:'prop',cls:'c'},{text:'oico',cls:'g'},{text:'3-metil',cls:'r'},{text:'but',cls:'c'}],
+ expl:'Metilo en C2, −COOH en C1 → <b>ácido 2-metilpropanoico</b>.', topic:'acidos'},
+
+{type:'id', mol:'acidoMetilpropanoico',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'ácido 2-metilpropanoico',
+ highlight:{text:'2-metil',cls:'r'},
+ correct:'r',
+ expl:'"2-metil" es la <b>Ramificación</b> — un metilo unido al C2.', topic:'acidos'},
+
+{type:'write', mol:'acidoMetilpropanoico', q:'Escribe el nombre IUPAC de este ácido carboxílico ramificado.',
+ hints:['Cadena de 3 carbonos con −COOH en C1','Hay un metilo en C2','Nombre común: ácido isobutírico'],
+ ans:'ácido 2-metilpropanoico', accepted:['ácido 2-metilpropanoico','acido 2-metilpropanoico','ácido isobutírico','acido isobutirico'],
+ oldNames:['ácido isobutírico','acido isobutirico'],
+ expl:'3C, −COOH en C1, metilo en C2 → <b>ácido 2-metilpropanoico</b>. "Ácido isobutírico" es el nombre funcional anterior.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'mc', mol:'acidoMetilbutanoico2', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico ramificado?',
+ ans:'ácido 2-metilbutanoico', opts:['ácido 2-metilbutanoico','ácido 3-metilbutanoico','ácido pentanoico','2-metilbutanoato'],
+ expl:'4C con −COOH y metilo en C2 → <b>ácido 2-metilbutanoico</b>.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'drag', mol:'acidoMetilbutanoico2', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'ácido 2-metilbutanoico',
+ slots:[
+   {id:'nt1',label:'Prefijo GF',correct:'ácido',cls:'g'},
+   {id:'nt2',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'nt3',label:'Prefijo cadena',correct:'but',cls:'c'},
+   {id:'nt4',label:'Saturación + GF',correct:'oico',cls:'g'},
+ ],
+ tokens:[{text:'ácido',cls:'g'},{text:'2-metil',cls:'r'},{text:'but',cls:'c'},{text:'oico',cls:'g'},{text:'3-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C2, −COOH en C1 → <b>ácido 2-metilbutanoico</b>.', topic:'acidos'},
+
+{type:'id', mol:'acidoMetilbutanoico2',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'ácido 2-metilbutanoico',
+ highlight:{text:'but',cls:'c'},
+ correct:'c',
+ expl:'"but" es la <b>Cadena principal</b> — 4 carbonos.', topic:'acidos'},
+
+{type:'write', mol:'acidoMetilbutanoico2', q:'Escribe el nombre IUPAC de este ácido carboxílico ramificado.',
+ hints:['Cadena de 4 carbonos con −COOH en C1','Hay un metilo en C2'],
+ ans:'ácido 2-metilbutanoico', accepted:['ácido 2-metilbutanoico','acido 2-metilbutanoico'],
+ expl:'4C, −COOH en C1, metilo en C2 → <b>ácido 2-metilbutanoico</b>.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'mc', mol:'acidoMetilbutanoico3', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico ramificado?',
+ ans:'ácido 3-metilbutanoico', opts:['ácido 3-metilbutanoico','ácido 2-metilbutanoico','ácido pentanoico','3-metilbutanoato'],
+ expl:'4C con −COOH y metilo en C3 → <b>ácido 3-metilbutanoico</b> (ácido isovalérico).',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+{type:'drag', mol:'acidoMetilbutanoico3', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'ácido 3-metilbutanoico',
+ slots:[
+   {id:'nu1',label:'Prefijo GF',correct:'ácido',cls:'g'},
+   {id:'nu2',label:'Ramificación',correct:'3-metil',cls:'r'},
+   {id:'nu3',label:'Prefijo cadena',correct:'but',cls:'c'},
+   {id:'nu4',label:'Saturación + GF',correct:'oico',cls:'g'},
+ ],
+ tokens:[{text:'ácido',cls:'g'},{text:'3-metil',cls:'r'},{text:'but',cls:'c'},{text:'oico',cls:'g'},{text:'2-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C3, −COOH en C1 → <b>ácido 3-metilbutanoico</b>.', topic:'acidos'},
+
+{type:'id', mol:'acidoMetilbutanoico3',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'ácido 3-metilbutanoico',
+ highlight:{text:'3-metil',cls:'r'},
+ correct:'r',
+ expl:'"3-metil" es la <b>Ramificación</b> — un metilo unido al C3.', topic:'acidos'},
+
+{type:'write', mol:'acidoMetilbutanoico3', q:'Escribe el nombre IUPAC de este ácido carboxílico ramificado.',
+ hints:['Cadena de 4 carbonos con −COOH en C1','Hay un metilo en C3','Nombre común: ácido isovalérico'],
+ ans:'ácido 3-metilbutanoico', accepted:['ácido 3-metilbutanoico','acido 3-metilbutanoico','ácido isovalérico','acido isovalerico'],
+ oldNames:['ácido isovalérico','acido isovalerico'],
+ expl:'4C, −COOH en C1, metilo en C3 → <b>ácido 3-metilbutanoico</b>. "Ácido isovalérico" es el nombre funcional anterior.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
+// ── ÉSTERES ──
+{type:'mc', mol:'propanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+ ans:'propanoato de etilo', opts:['propanoato de etilo','etanoato de etilo','propanoato de metilo','butanoato de etilo'],
+ expl:'Ácido propanoico (3C) + etanol → <b>propanoato de etilo</b> (nombre funcional: <em>propionato de etilo</em>).', topic:'esteres'},
+
+{type:'drag', mol:'propanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+ ans:'propanoato de etilo',
+ slots:[
+   {id:'nv1',label:'Ácido derivado',correct:'propanoato',cls:'g'},
+   {id:'nv2',label:'Alquilo',correct:'de etilo',cls:'r'},
+ ],
+ tokens:[{text:'propanoato',cls:'g'},{text:'de etilo',cls:'r'},{text:'etanoato',cls:'g'},{text:'de metilo',cls:'r'}],
+ expl:'Ácido propanoico + etanol → <b>propanoato de etilo</b>.',
+ parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'id', mol:'propanoatoEtilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'propanoato de etilo',
+ highlight:{text:' de etilo',cls:'r'},
+ correct:'r',
+ expl:'"de etilo" es la parte <b>alquílica</b> del éster — el grupo etilo del alcohol de origen (etanol).', topic:'esteres'},
+
+{type:'write', mol:'propanoatoEtilo', q:'Escribe el nombre IUPAC de este éster.',
+ hints:['El ácido de origen tiene 3 carbonos: ácido propanoico','El alcohol de origen es el etanol'],
+ ans:'propanoato de etilo', accepted:['propanoato de etilo','propionato de etilo'],
+ oldNames:['propionato de etilo'],
+ expl:'CH₃CH₂COO−C₂H₅: ácido propanoico + etanol → <b>propanoato de etilo</b>. "Propionato de etilo" es el nombre funcional anterior.',
+ parts:[{t:'prop',cls:'c',l:'3C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'mc', mol:'metanoatoMetilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+ ans:'metanoato de metilo', opts:['metanoato de metilo','etanoato de metilo','metanoato de etilo','ácido metanoico'],
+ expl:'Ácido metanoico (1C) + metanol → <b>metanoato de metilo</b> (nombre funcional: <em>formiato de metilo</em>).', topic:'esteres'},
+
+{type:'drag', mol:'metanoatoMetilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+ ans:'metanoato de metilo',
+ slots:[
+   {id:'nw1',label:'Ácido derivado',correct:'metanoato',cls:'g'},
+   {id:'nw2',label:'Alquilo',correct:'de metilo',cls:'r'},
+ ],
+ tokens:[{text:'metanoato',cls:'g'},{text:'de metilo',cls:'r'},{text:'etanoato',cls:'g'},{text:'de etilo',cls:'r'}],
+ expl:'Ácido metanoico + metanol → <b>metanoato de metilo</b>.',
+ parts:[{t:'met',cls:'c',l:'1C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'id', mol:'metanoatoMetilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'metanoato de metilo',
+ highlight:{text:'met',cls:'c'},
+ correct:'c',
+ expl:'"met" es la <b>Cadena principal</b> del ácido de origen — indica 1 carbono (ácido metanoico).', topic:'esteres'},
+
+{type:'write', mol:'metanoatoMetilo', q:'Escribe el nombre IUPAC de este éster, el más simple de la serie.',
+ hints:['El ácido de origen tiene 1 carbono: ácido metanoico','El alcohol de origen es el metanol'],
+ ans:'metanoato de metilo', accepted:['metanoato de metilo','formiato de metilo'],
+ oldNames:['formiato de metilo'],
+ expl:'HCOO−CH₃: ácido metanoico + metanol → <b>metanoato de metilo</b>. "Formiato de metilo" es el nombre funcional anterior.',
+ parts:[{t:'met',cls:'c',l:'1C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'mc', mol:'metanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+ ans:'metanoato de etilo', opts:['metanoato de etilo','etanoato de etilo','metanoato de metilo','ácido etanoico'],
+ expl:'Ácido metanoico (1C) + etanol → <b>metanoato de etilo</b> (nombre funcional: <em>formiato de etilo</em>).', topic:'esteres'},
+
+{type:'drag', mol:'metanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+ ans:'metanoato de etilo',
+ slots:[
+   {id:'nx1',label:'Ácido derivado',correct:'metanoato',cls:'g'},
+   {id:'nx2',label:'Alquilo',correct:'de etilo',cls:'r'},
+ ],
+ tokens:[{text:'metanoato',cls:'g'},{text:'de etilo',cls:'r'},{text:'etanoato',cls:'g'},{text:'de metilo',cls:'r'}],
+ expl:'Ácido metanoico + etanol → <b>metanoato de etilo</b>.',
+ parts:[{t:'met',cls:'c',l:'1C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'id', mol:'metanoatoEtilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'metanoato de etilo',
+ highlight:{text:'anoato',cls:'g'},
+ correct:'g',
+ expl:'"anoato" es el <b>Grupo funcional</b> — sufijo que indica éster.', topic:'esteres'},
+
+{type:'write', mol:'metanoatoEtilo', q:'Escribe el nombre IUPAC de este éster.',
+ hints:['El ácido de origen tiene 1 carbono: ácido metanoico','El alcohol de origen es el etanol'],
+ ans:'metanoato de etilo', accepted:['metanoato de etilo','formiato de etilo'],
+ oldNames:['formiato de etilo'],
+ expl:'HCOO−C₂H₅: ácido metanoico + etanol → <b>metanoato de etilo</b>. "Formiato de etilo" es el nombre funcional anterior.',
+ parts:[{t:'met',cls:'c',l:'1C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'mc', mol:'butanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
+ ans:'butanoato de etilo', opts:['butanoato de etilo','butanoato de metilo','propanoato de etilo','ácido butanoico'],
+ expl:'Ácido butanoico (4C) + etanol → <b>butanoato de etilo</b> (nombre funcional: <em>butirato de etilo</em>).', topic:'esteres'},
+
+{type:'drag', mol:'butanoatoEtilo', q:'Arrastra los fragmentos para formar el nombre IUPAC del éster.',
+ ans:'butanoato de etilo',
+ slots:[
+   {id:'ny1',label:'Ácido derivado',correct:'butanoato',cls:'g'},
+   {id:'ny2',label:'Alquilo',correct:'de etilo',cls:'r'},
+ ],
+ tokens:[{text:'butanoato',cls:'g'},{text:'de etilo',cls:'r'},{text:'propanoato',cls:'g'},{text:'de metilo',cls:'r'}],
+ expl:'Ácido butanoico + etanol → <b>butanoato de etilo</b>.',
+ parts:[{t:'but',cls:'c',l:'4C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'id', mol:'butanoatoEtilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'butanoato de etilo',
+ highlight:{text:'but',cls:'c'},
+ correct:'c',
+ expl:'"but" es la <b>Cadena principal</b> del ácido de origen — indica 4 carbonos (ácido butanoico).', topic:'esteres'},
+
+{type:'write', mol:'butanoatoEtilo', q:'Escribe el nombre IUPAC de este éster.',
+ hints:['El ácido de origen tiene 4 carbonos: ácido butanoico','El alcohol de origen es el etanol'],
+ ans:'butanoato de etilo', accepted:['butanoato de etilo','butirato de etilo'],
+ oldNames:['butirato de etilo'],
+ expl:'CH₃CH₂CH₂COO−C₂H₅: ácido butanoico + etanol → <b>butanoato de etilo</b>. "Butirato de etilo" es el nombre funcional anterior.',
+ parts:[{t:'but',cls:'c',l:'4C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+// ── ÉTERES ──
+{type:'mc', mol:'etoxipropano', q:'¿Cuál es el nombre IUPAC de este éter?',
+ ans:'etoxipropano', opts:['etoxipropano','metoxipropano','propoxietano','etoxietano'],
+ expl:'Grupo etoxi (−OC₂H₅) sobre una cadena de propano (la mayor) → <b>etoxipropano</b>.', topic:'eteres'},
+
+{type:'drag', mol:'etoxipropano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+ ans:'etoxipropano',
+ slots:[
+   {id:'nz1',label:'Grupo éter',correct:'etoxi',cls:'g'},
+   {id:'nz2',label:'Cadena',correct:'prop',cls:'c'},
+   {id:'nz3',label:'Clase',correct:'ano',cls:'g'},
+ ],
+ tokens:[{text:'etoxi',cls:'g'},{text:'prop',cls:'c'},{text:'ano',cls:'g'},{text:'metoxi',cls:'g'},{text:'but',cls:'c'}],
+ expl:'C₂H₅−O−C₃H₇: etoxi (menor) + propano (mayor) → <b>etoxipropano</b>.',
+ parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'prop',cls:'c',l:'3C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'id', mol:'etoxipropano',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'etoxipropano',
+ highlight:{text:'prop',cls:'c'},
+ correct:'c',
+ expl:'"prop" es la <b>Cadena principal</b> — 3 carbonos, la cadena más larga.', topic:'eteres'},
+
+{type:'write', mol:'etoxipropano', q:'Escribe el nombre IUPAC de este éter.',
+ hints:['Un grupo etilo y una cadena de propano unidos por O','El grupo menor (etilo) es el prefijo: etoxi-'],
+ ans:'etoxipropano', accepted:['etoxipropano','éter etil propílico','eter etil propilico'],
+ oldNames:['éter etil propílico','eter etil propilico'],
+ expl:'C₂H₅−O−C₃H₇: etoxi + propano → <b>etoxipropano</b>.',
+ parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'prop',cls:'c',l:'3C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'mc', mol:'metoxibutano', q:'¿Cuál es el nombre IUPAC de este éter?',
+ ans:'metoxibutano', opts:['metoxibutano','etoxibutano','metoxipropano','butoxietano'],
+ expl:'Grupo metoxi (−OCH₃) sobre una cadena de butano (la mayor) → <b>metoxibutano</b>.', topic:'eteres'},
+
+{type:'drag', mol:'metoxibutano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+ ans:'metoxibutano',
+ slots:[
+   {id:'oa1',label:'Grupo éter',correct:'metoxi',cls:'g'},
+   {id:'oa2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'oa3',label:'Clase',correct:'ano',cls:'g'},
+ ],
+ tokens:[{text:'metoxi',cls:'g'},{text:'but',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'pent',cls:'c'}],
+ expl:'CH₃−O−C₄H₉: metoxi + butano → <b>metoxibutano</b>.',
+ parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'but',cls:'c',l:'4C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'id', mol:'metoxibutano',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'metoxibutano',
+ highlight:{text:'metoxi',cls:'g'},
+ correct:'g',
+ expl:'"metoxi" es el <b>Grupo funcional</b> — indica el grupo −O−CH₃ (metoxilo).', topic:'eteres'},
+
+{type:'write', mol:'metoxibutano', q:'Escribe el nombre IUPAC de este éter.',
+ hints:['Un grupo metilo y una cadena de butano unidos por O','El grupo menor (metilo) es el prefijo: metoxi-'],
+ ans:'metoxibutano', accepted:['metoxibutano','éter metil butílico','eter metil butilico'],
+ oldNames:['éter metil butílico','eter metil butilico'],
+ expl:'CH₃−O−C₄H₉: metoxi + butano → <b>metoxibutano</b>.',
+ parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'but',cls:'c',l:'4C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'mc', mol:'metoxipentano', q:'¿Cuál es el nombre IUPAC de este éter?',
+ ans:'metoxipentano', opts:['metoxipentano','etoxipentano','metoxibutano','pentoximetano'],
+ expl:'Grupo metoxi (−OCH₃) sobre una cadena de pentano (la mayor) → <b>metoxipentano</b>.', topic:'eteres'},
+
+{type:'drag', mol:'metoxipentano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+ ans:'metoxipentano',
+ slots:[
+   {id:'ob1',label:'Grupo éter',correct:'metoxi',cls:'g'},
+   {id:'ob2',label:'Cadena',correct:'pent',cls:'c'},
+   {id:'ob3',label:'Clase',correct:'ano',cls:'g'},
+ ],
+ tokens:[{text:'metoxi',cls:'g'},{text:'pent',cls:'c'},{text:'ano',cls:'g'},{text:'etoxi',cls:'g'},{text:'but',cls:'c'}],
+ expl:'CH₃−O−C₅H₁₁: metoxi + pentano → <b>metoxipentano</b>.',
+ parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'id', mol:'metoxipentano',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'metoxipentano',
+ highlight:{text:'pent',cls:'c'},
+ correct:'c',
+ expl:'"pent" es la <b>Cadena principal</b> — 5 carbonos, la cadena más larga.', topic:'eteres'},
+
+{type:'write', mol:'metoxipentano', q:'Escribe el nombre IUPAC de este éter.',
+ hints:['Un grupo metilo y una cadena de pentano unidos por O','El grupo menor (metilo) es el prefijo: metoxi-'],
+ ans:'metoxipentano', accepted:['metoxipentano','éter metil pentílico','eter metil pentilico'],
+ oldNames:['éter metil pentílico','eter metil pentilico'],
+ expl:'CH₃−O−C₅H₁₁: metoxi + pentano → <b>metoxipentano</b>.',
+ parts:[{t:'metoxi',cls:'g',l:'−OCH₃'},{t:'pent',cls:'c',l:'5C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'mc', mol:'etoxibutano', q:'¿Cuál es el nombre IUPAC de este éter?',
+ ans:'etoxibutano', opts:['etoxibutano','metoxibutano','etoxipropano','butoxietano'],
+ expl:'Grupo etoxi (−OC₂H₅) sobre una cadena de butano (la mayor) → <b>etoxibutano</b>.', topic:'eteres'},
+
+{type:'drag', mol:'etoxibutano', q:'Arrastra los fragmentos para formar el nombre IUPAC del éter.',
+ ans:'etoxibutano',
+ slots:[
+   {id:'oc1',label:'Grupo éter',correct:'etoxi',cls:'g'},
+   {id:'oc2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'oc3',label:'Clase',correct:'ano',cls:'g'},
+ ],
+ tokens:[{text:'etoxi',cls:'g'},{text:'but',cls:'c'},{text:'ano',cls:'g'},{text:'metoxi',cls:'g'},{text:'pent',cls:'c'}],
+ expl:'C₂H₅−O−C₄H₉: etoxi + butano → <b>etoxibutano</b>.',
+ parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'but',cls:'c',l:'4C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+{type:'id', mol:'etoxibutano',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'etoxibutano',
+ highlight:{text:'etoxi',cls:'g'},
+ correct:'g',
+ expl:'"etoxi" es el <b>Grupo funcional</b> — indica el grupo −O−C₂H₅ (etoxilo).', topic:'eteres'},
+
+{type:'write', mol:'etoxibutano', q:'Escribe el nombre IUPAC de este éter.',
+ hints:['Un grupo etilo y una cadena de butano unidos por O','El grupo etoxi- es el prefijo'],
+ ans:'etoxibutano', accepted:['etoxibutano','éter etil butílico','eter etil butilico'],
+ oldNames:['éter etil butílico','eter etil butilico'],
+ expl:'C₂H₅−O−C₄H₉: etoxi + butano → <b>etoxibutano</b>.',
+ parts:[{t:'etoxi',cls:'g',l:'−OC₂H₅'},{t:'but',cls:'c',l:'4C'},{t:'ano',cls:'g',l:'Alcano'}], topic:'eteres'},
+
+// ── AMIDAS ──
+{type:'mc', mol:'heptanamida', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'heptanamida', opts:['heptanamida','hexanamida','ácido heptanoico','heptanal'],
+ expl:'7C con −CONH₂ → <b>heptanamida</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'drag', mol:'heptanamida', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'heptanamida',
+ slots:[
+   {id:'od1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'od2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'od3',label:'Grupo funcional',correct:'amida',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'hex',cls:'c'},{text:'oico',cls:'g'}],
+ expl:'7C con −CONH₂ → <b>heptanamida</b>.', topic:'amidas'},
+
+{type:'id', mol:'heptanamida',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptanamida',
+ highlight:{text:'amid',cls:'g'},
+ correct:'g',
+ expl:'"amida" es el <b>Grupo funcional</b> — indica el grupo −CONH₂.', topic:'amidas'},
+
+{type:'write', mol:'heptanamida', q:'Escribe el nombre IUPAC de esta amida.',
+ hints:['Cadena de 7 carbonos con −CONH₂','El −CONH₂ siempre está en C1'],
+ ans:'heptanamida', accepted:['heptanamida'],
+ expl:'7C con −CONH₂ → <b>heptanamida</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'mc', mol:'metilpropanamida', q:'¿Cuál es el nombre IUPAC de esta amida ramificada?',
+ ans:'2-metilpropanamida', opts:['2-metilpropanamida','3-metilpropanamida','butanamida','2-metilpropanoato'],
+ expl:'3C con −CONH₂ y metilo en C2 → <b>2-metilpropanamida</b> (isobutiramida).',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'drag', mol:'metilpropanamida', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'2-metilpropanamida',
+ slots:[
+   {id:'oe1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'oe2',label:'Cadena',correct:'prop',cls:'c'},
+   {id:'oe3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'oe4',label:'Grupo funcional',correct:'amida',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'3-metil',cls:'r'},{text:'but',cls:'c'}],
+ expl:'Metilo en C2, −CONH₂ en C1 → <b>2-metilpropanamida</b>.', topic:'amidas'},
+
+{type:'id', mol:'metilpropanamida',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilpropanamida',
+ highlight:{text:'2-metil',cls:'r'},
+ correct:'r',
+ expl:'"2-metil" es la <b>Ramificación</b> — un metilo unido al C2.', topic:'amidas'},
+
+{type:'write', mol:'metilpropanamida', q:'Escribe el nombre IUPAC de esta amida ramificada.',
+ hints:['Cadena de 3 carbonos con −CONH₂ en C1','Hay un metilo en C2','Nombre común: isobutiramida'],
+ ans:'2-metilpropanamida', accepted:['2-metilpropanamida','2metilpropanamida','isobutiramida'],
+ oldNames:['isobutiramida'],
+ expl:'3C, −CONH₂ en C1, metilo en C2 → <b>2-metilpropanamida</b>. "Isobutiramida" es el nombre funcional anterior.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'mc', mol:'metilbutanamida2', q:'¿Cuál es el nombre IUPAC de esta amida ramificada?',
+ ans:'2-metilbutanamida', opts:['2-metilbutanamida','3-metilbutanamida','pentanamida','2-metilbutanoato'],
+ expl:'4C con −CONH₂ y metilo en C2 → <b>2-metilbutanamida</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'drag', mol:'metilbutanamida2', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'2-metilbutanamida',
+ slots:[
+   {id:'of1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'of2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'of3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'of4',label:'Grupo funcional',correct:'amida',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'3-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C2, −CONH₂ en C1 → <b>2-metilbutanamida</b>.', topic:'amidas'},
+
+{type:'id', mol:'metilbutanamida2',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilbutanamida',
+ highlight:{text:'but',cls:'c'},
+ correct:'c',
+ expl:'"but" es la <b>Cadena principal</b> — 4 carbonos.', topic:'amidas'},
+
+{type:'write', mol:'metilbutanamida2', q:'Escribe el nombre IUPAC de esta amida ramificada.',
+ hints:['Cadena de 4 carbonos con −CONH₂ en C1','Hay un metilo en C2'],
+ ans:'2-metilbutanamida', accepted:['2-metilbutanamida','2metilbutanamida'],
+ expl:'4C, −CONH₂ en C1, metilo en C2 → <b>2-metilbutanamida</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'mc', mol:'metilbutanamida3', q:'¿Cuál es el nombre IUPAC de esta amida ramificada?',
+ ans:'3-metilbutanamida', opts:['3-metilbutanamida','2-metilbutanamida','pentanamida','3-metilbutanoato'],
+ expl:'4C con −CONH₂ y metilo en C3 → <b>3-metilbutanamida</b> (isovaleramida).',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'drag', mol:'metilbutanamida3', q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',
+ ans:'3-metilbutanamida',
+ slots:[
+   {id:'og1',label:'Ramificación',correct:'3-metil',cls:'r'},
+   {id:'og2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'og3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'og4',label:'Grupo funcional',correct:'amida',cls:'g'},
+ ],
+ tokens:[{text:'3-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'amida',cls:'g'},{text:'2-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C3, −CONH₂ en C1 → <b>3-metilbutanamida</b>.', topic:'amidas'},
+
+{type:'id', mol:'metilbutanamida3',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'3-metilbutanamida',
+ highlight:{text:'3-metil',cls:'r'},
+ correct:'r',
+ expl:'"3-metil" es la <b>Ramificación</b> — un metilo unido al C3.', topic:'amidas'},
+
+{type:'write', mol:'metilbutanamida3', q:'Escribe el nombre IUPAC de esta amida ramificada.',
+ hints:['Cadena de 4 carbonos con −CONH₂ en C1','Hay un metilo en C3','Nombre común: isovaleramida'],
+ ans:'3-metilbutanamida', accepted:['3-metilbutanamida','3metilbutanamida','isovaleramida'],
+ oldNames:['isovaleramida'],
+ expl:'4C, −CONH₂ en C1, metilo en C3 → <b>3-metilbutanamida</b>. "Isovaleramida" es el nombre funcional anterior.',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+// ── NITRILOS ──
+{type:'mc', mol:'heptanonitrilo', q:'¿Cuál es el nombre IUPAC de esta estructura?',
+ ans:'heptanonitrilo', opts:['heptanonitrilo','hexanonitrilo','heptanamida','ácido heptanoico'],
+ expl:'7C con −C≡N → <b>heptanonitrilo</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'drag', mol:'heptanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'heptanonitrilo',
+ slots:[
+   {id:'oh1',label:'Cadena',correct:'hept',cls:'c'},
+   {id:'oh2',label:'Saturación',correct:'an',cls:'c'},
+   {id:'oh3',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+ ],
+ tokens:[{text:'hept',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'hex',cls:'c'},{text:'amida',cls:'g'}],
+ expl:'7C con −C≡N → <b>heptanonitrilo</b>.', topic:'nitrilos'},
+
+{type:'id', mol:'heptanonitrilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'heptanonitrilo',
+ highlight:{text:'nitrilo',cls:'g'},
+ correct:'g',
+ expl:'"nitrilo" es el <b>Grupo funcional</b> — indica el grupo −C≡N.', topic:'nitrilos'},
+
+{type:'write', mol:'heptanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo.',
+ hints:['Cadena de 7 carbonos con −C≡N','El carbono del −C≡N se cuenta como C1'],
+ ans:'heptanonitrilo', accepted:['heptanonitrilo'],
+ expl:'7C con −C≡N → <b>heptanonitrilo</b>.',
+ parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'mc', mol:'metilpropanonitrilo', q:'¿Cuál es el nombre IUPAC de este nitrilo ramificado?',
+ ans:'2-metilpropanonitrilo', opts:['2-metilpropanonitrilo','3-metilpropanonitrilo','butanonitrilo','2-metilpropanamida'],
+ expl:'3C con −C≡N y metilo en C2 → <b>2-metilpropanonitrilo</b> (isobutironitrilo).',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'drag', mol:'metilpropanonitrilo', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'2-metilpropanonitrilo',
+ slots:[
+   {id:'oi1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'oi2',label:'Cadena',correct:'prop',cls:'c'},
+   {id:'oi3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'oi4',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'prop',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'3-metil',cls:'r'},{text:'but',cls:'c'}],
+ expl:'Metilo en C2, −C≡N en C1 → <b>2-metilpropanonitrilo</b>.', topic:'nitrilos'},
+
+{type:'id', mol:'metilpropanonitrilo',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilpropanonitrilo',
+ highlight:{text:'2-metil',cls:'r'},
+ correct:'r',
+ expl:'"2-metil" es la <b>Ramificación</b> — un metilo unido al C2.', topic:'nitrilos'},
+
+{type:'write', mol:'metilpropanonitrilo', q:'Escribe el nombre IUPAC de este nitrilo ramificado.',
+ hints:['Cadena de 3 carbonos con −C≡N en C1','Hay un metilo en C2','Nombre común: isobutironitrilo'],
+ ans:'2-metilpropanonitrilo', accepted:['2-metilpropanonitrilo','2metilpropanonitrilo','isobutironitrilo'],
+ oldNames:['isobutironitrilo'],
+ expl:'3C, −C≡N en C1, metilo en C2 → <b>2-metilpropanonitrilo</b>. "Isobutironitrilo" es el nombre funcional anterior.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'mc', mol:'metilbutanonitrilo2', q:'¿Cuál es el nombre IUPAC de este nitrilo ramificado?',
+ ans:'2-metilbutanonitrilo', opts:['2-metilbutanonitrilo','3-metilbutanonitrilo','pentanonitrilo','2-metilbutanamida'],
+ expl:'4C con −C≡N y metilo en C2 → <b>2-metilbutanonitrilo</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'drag', mol:'metilbutanonitrilo2', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'2-metilbutanonitrilo',
+ slots:[
+   {id:'oj1',label:'Ramificación',correct:'2-metil',cls:'r'},
+   {id:'oj2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'oj3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'oj4',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+ ],
+ tokens:[{text:'2-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'3-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C2, −C≡N en C1 → <b>2-metilbutanonitrilo</b>.', topic:'nitrilos'},
+
+{type:'id', mol:'metilbutanonitrilo2',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'2-metilbutanonitrilo',
+ highlight:{text:'but',cls:'c'},
+ correct:'c',
+ expl:'"but" es la <b>Cadena principal</b> — 4 carbonos.', topic:'nitrilos'},
+
+{type:'write', mol:'metilbutanonitrilo2', q:'Escribe el nombre IUPAC de este nitrilo ramificado.',
+ hints:['Cadena de 4 carbonos con −C≡N en C1','Hay un metilo en C2'],
+ ans:'2-metilbutanonitrilo', accepted:['2-metilbutanonitrilo','2metilbutanonitrilo'],
+ expl:'4C, −C≡N en C1, metilo en C2 → <b>2-metilbutanonitrilo</b>.',
+ parts:[{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'mc', mol:'metilbutanonitrilo3', q:'¿Cuál es el nombre IUPAC de este nitrilo ramificado?',
+ ans:'3-metilbutanonitrilo', opts:['3-metilbutanonitrilo','2-metilbutanonitrilo','pentanonitrilo','3-metilbutanamida'],
+ expl:'4C con −C≡N y metilo en C3 → <b>3-metilbutanonitrilo</b> (isovaleronitrilo).',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+{type:'drag', mol:'metilbutanonitrilo3', q:'Arrastra los fragmentos para formar el nombre IUPAC.',
+ ans:'3-metilbutanonitrilo',
+ slots:[
+   {id:'ok1',label:'Ramificación',correct:'3-metil',cls:'r'},
+   {id:'ok2',label:'Cadena',correct:'but',cls:'c'},
+   {id:'ok3',label:'Saturación',correct:'an',cls:'c'},
+   {id:'ok4',label:'Grupo funcional',correct:'onitrilo',cls:'g'},
+ ],
+ tokens:[{text:'3-metil',cls:'r'},{text:'but',cls:'c'},{text:'an',cls:'c'},{text:'onitrilo',cls:'g'},{text:'2-metil',cls:'r'},{text:'pent',cls:'c'}],
+ expl:'Metilo en C3, −C≡N en C1 → <b>3-metilbutanonitrilo</b>.', topic:'nitrilos'},
+
+{type:'id', mol:'metilbutanonitrilo3',
+ q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+ name:'3-metilbutanonitrilo',
+ highlight:{text:'3-metil',cls:'r'},
+ correct:'r',
+ expl:'"3-metil" es la <b>Ramificación</b> — un metilo unido al C3.', topic:'nitrilos'},
+
+{type:'write', mol:'metilbutanonitrilo3', q:'Escribe el nombre IUPAC de este nitrilo ramificado.',
+ hints:['Cadena de 4 carbonos con −C≡N en C1','Hay un metilo en C3','Nombre común: isovaleronitrilo'],
+ ans:'3-metilbutanonitrilo', accepted:['3-metilbutanonitrilo','3metilbutanonitrilo','isovaleronitrilo'],
+ oldNames:['isovaleronitrilo'],
+ expl:'4C, −C≡N en C1, metilo en C3 → <b>3-metilbutanonitrilo</b>. "Isovaleronitrilo" es el nombre funcional anterior.',
+ parts:[{t:'3-metil',cls:'r',l:'Ramificación en C3'},{t:'but',cls:'c',l:'4C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'o',cls:'c',l:'Enlace'},{t:'nitrilo',cls:'g',l:'Grupo −CN'}], topic:'nitrilos'},
+
+];
+QBANK.push(...QBANK_NOMENCLATURA_50);
 
 
 const QBANK_REACCIONES=[

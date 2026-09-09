@@ -7,6 +7,75 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-09 (7) — 50 preguntas de nomenclatura por cada grupo funcional
+
+### Contexto
+La docente pidió aumentar el banco de preguntas de nomenclatura IUPAC:
+que cada grupo funcional individual (alquenos, alquinos, alcoholes,
+cetonas, aldehídos, ácidos, ésteres, éteres, amidas, nitrilos) llegue a
+**50 preguntas** en su práctica, dejando intactos los que ya tenían 50 o
+más (alcanos, aminas, benceno). Se acotó el alcance explícitamente a
+**solo nomenclatura** (opción múltiple, arrastrar, identificar y
+escribir) — sin tocar "Constructor por familia" ni "Reacciones por
+grupo", que quedan igual que antes.
+
+### Qué se agregó
+131 preguntas nuevas de nomenclatura (más algunas de sobra para no dejar
+compuestos a medias) repartidas en 10 grupos funcionales, cada una con su
+estructura química nueva dibujada (37 moléculas nuevas en total) y sus 4
+preguntas asociadas (opción múltiple, arrastrar, identificar, escribir):
+
+- **Alquenos** (+3 moléculas): hex-2-eno, hex-3-eno, 2-metilpropeno.
+- **Alquinos** (+4): hex-2-ino, hept-1-ino, hept-2-ino, 4-metilpent-2-ino.
+- **Alcoholes** (+2): hexan-1-ol, heptan-2-ol.
+- **Cetonas** (+4): heptan-2-ona, heptan-3-ona, heptan-4-ona,
+  3-metilbutan-2-ona.
+- **Aldehídos** (+4): heptanal, 2-metilpropanal, 2-metilbutanal,
+  3-metilbutanal.
+- **Ácidos** (+4): ácido heptanoico, ácido 2-metilpropanoico, ácido
+  2-metilbutanoico, ácido 3-metilbutanoico.
+- **Ésteres** (+4): propanoato de etilo, metanoato de metilo, metanoato
+  de etilo, butanoato de etilo.
+- **Éteres** (+4): etoxipropano, metoxibutano, metoxipentano,
+  etoxibutano.
+- **Amidas** (+4): heptanamida, 2-metilpropanamida, 2-metilbutanamida,
+  3-metilbutanamida.
+- **Nitrilos** (+4): heptanonitrilo, 2-metilpropanonitrilo,
+  2-metilbutanonitrilo, 3-metilbutanonitrilo.
+
+Cada compuesto nuevo se verificó contra el inventario existente para no
+repetir ningún nombre ni estructura. Todos los grupos quedan en 50
+preguntas o un poco más (por ejemplo alquinos queda en 53) porque las
+moléculas se agregaron en paquetes de 4 preguntas cada una.
+
+### Archivos
+- **`juego.html`**: se agregaron 37 funciones nuevas al objeto `M`
+  (dibujo de cada estructura) y un nuevo bloque `QBANK_NOMENCLATURA_50`
+  con las 148 preguntas nuevas (37 moléculas × 4 tipos de pregunta),
+  fusionado al banco principal con `QBANK.push(...)`. No se tocó
+  `MOLDES` (no hace falta para preguntas de nomenclatura pura) ni las
+  preguntas de "Constructor por familia"/"Reacciones por grupo".
+
+### Verificación
+- Cada una de las 37 estructuras nuevas se probó por separado (sin
+  errores de JavaScript, SVG válido) y se revisó visualmente que no haya
+  líneas superpuestas ni átomos mal ubicados.
+- Se validó automáticamente que ninguna respuesta nueva choque con una
+  respuesta ya existente en el juego, que las 4 preguntas de cada
+  molécula sean consistentes entre sí (opción correcta entre las
+  opciones, fragmentos de arrastrar completos, etc.), y que los 10
+  grupos funcionales lleguen a 50 preguntas o más en la práctica real.
+- Se jugó una ronda completa (opción múltiple, arrastrar, identificar,
+  escribir) con una de las cetonas nuevas directamente en el juego para
+  confirmar que se ve y se puntúa bien.
+
+### Pendientes
+- Ninguno. Este cambio es solo de `juego.html`: no requiere redesplegar
+  `chromanom-analytics.gs` ni recalcular nada, basta con el push a
+  `main` (GitHub Pages lo sirve directo).
+
+---
+
 ## 2026-09-08 (6) — Nota ponderada por preguntas y desglose de prácticas por grupo
 
 ### Contexto
