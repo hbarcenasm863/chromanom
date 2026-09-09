@@ -7,6 +7,59 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-09 (10) — Rediseño del menú de la portada: todos los modos visibles
+
+### Contexto
+La docente notó que "Constructor por Familia" y "Practicar por Grupo
+Funcional" quedaban muy escondidos: eran menús desplegables (`<details>`)
+mucho más chicos que las 6 tarjetas principales, y varios estudiantes ni
+se daban cuenta de que existían. Pidió una reorganización para que se
+vea todo lo que se puede jugar, sin nada escondido.
+
+### La solución
+Se elevaron las 3 secciones que antes eran menús desplegables
+("Practicar por grupo funcional", "Practicar constructor por familia",
+"Practicar reacciones por grupo") a 3 tarjetas nuevas, **del mismo
+tamaño y estilo** que las 6 tarjetas principales (Hidrocarburos,
+Oxigenados, Nitrogenados, Juego Completo, Constructor Molecular,
+Reacciones Orgánicas). Ahora la portada tiene 9 tarjetas visibles de
+entrada, todas del mismo peso visual, sin ningún menú colapsado.
+
+Cada una de las 3 tarjetas nuevas abre una pantalla propia con sus
+opciones en una cuadrícula de **2 columnas** (como se sugirió), en vez
+de la fila de "píldoras" pequeñas de antes. Esto reutiliza exactamente
+el mismo patrón que ya usaba la tarjeta "Reacciones Orgánicas" (que
+abre su propio selector de grupos) — no se inventó una interacción
+nueva, solo se aplicó el mismo patrón ya probado a las otras 3
+categorías. Se eligió este enfoque (tarjeta → pantalla dedicada) en vez
+de listar las 37 opciones sueltas en la portada para no saturar la
+pantalla principal, sobre todo en celular: la portada sigue siendo
+fácil de escanear, y cada categoría muestra sus opciones en su propio
+espacio, ya sin necesidad de desplegar nada.
+
+Se probó en el navegador (incluyendo pantallas angostas de celular,
+360px) que las 3 pantallas nuevas se ven bien, que cada botón arranca
+la partida correcta con un solo toque, y que nada del resto del juego
+se rompió.
+
+### Archivos
+- **`juego.html`**:
+  - 3 tarjetas nuevas en la portada: "Practicar por Grupo Funcional"
+    (🧬), "Constructor por Familia" (🧩), "Reacciones por Grupo" (🔬),
+    con sus propios colores de ícono.
+  - Nueva pantalla `s-drill-picker`, reutilizada por las 3 categorías,
+    con botón "← Volver" y cuadrícula de 2 columnas.
+  - Nueva función `openDrillPicker(categoria)` y los datos de las 3
+    categorías (`DRILL_CATEGORIES`) en el script.
+  - Se eliminaron los 3 menús `<details>` (colapsados) y su CSS, ya sin
+    uso.
+
+### Pendientes
+- Ninguno. Cambio solo de `juego.html`, no requiere redesplegar ni
+  recalcular nada — basta con el push a `main`.
+
+---
+
 ## 2026-09-09 (9) — Reintento automático al registrar que un estudiante entró a jugar
 
 ### Contexto

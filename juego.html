@@ -170,6 +170,9 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .nivel-card.cp .nivel-icon{background:linear-gradient(135deg,#fde68a,#f59e0b)}
 .nivel-card.ct .nivel-icon{background:linear-gradient(135deg,#fdba74,#ea580c)}
 .nivel-card.rx .nivel-icon{background:linear-gradient(135deg,#fda4af,#e11d48)}
+.nivel-card.gf .nivel-icon{background:linear-gradient(135deg,#5eead4,#0d9488)}
+.nivel-card.cf .nivel-icon{background:linear-gradient(135deg,#93c5fd,#2563eb)}
+.nivel-card.rg .nivel-icon{background:linear-gradient(135deg,#f0abfc,#c026d3)}
 .nivel-icon{
   font-size:1.5rem;width:46px;height:46px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
@@ -306,12 +309,13 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .rxnq-mol-display svg{max-width:100%;height:auto;display:block;overflow:visible}
 .rxnq-eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
   background:var(--surf2,#f1f5f9);border-radius:10px;padding:12px 16px;margin-bottom:4px}
-/* Rxn group picker — mismo vidrio/aurora oscuro de la portada */
-#s-rxn-grupos{
+/* Rxn group picker y selector de grupo genérico — mismo vidrio/aurora
+   oscuro de la portada */
+#s-rxn-grupos,#s-drill-picker{
   background:linear-gradient(145deg,#0d2d42 0%,#0d4a73 50%,#0a3d5e 100%);
   position:relative;overflow-x:hidden;overflow-y:auto;min-height:100%;
 }
-#s-rxn-grupos::before{
+#s-rxn-grupos::before,#s-drill-picker::before{
   content:'';position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(circle 420px at 85% 10%,rgba(56,189,248,.28),transparent),
@@ -320,7 +324,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   filter:blur(10px);
   animation:auroraDrift 22s ease-in-out infinite alternate;
 }
-@media(prefers-reduced-motion:reduce){#s-rxn-grupos::before{animation:none}}
+@media(prefers-reduced-motion:reduce){#s-rxn-grupos::before,#s-drill-picker::before{animation:none}}
 .rxn-grupos-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;
   padding:32px 16px 40px;max-width:480px;margin:0 auto;width:100%;position:relative;z-index:1}
 .rxn-grupos-wrap h2{color:#fff}
@@ -650,13 +654,16 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .bld-btn.erase-btn{color:#c0392b}.bld-btn.erase-btn.active{background:#c0392b;border-color:#c0392b;color:#fff}
 .bld-sep{width:1px;height:20px;background:var(--brd);margin:0 2px}
 .build-canvas{width:100%;height:260px;display:block;background:#fafaf8;border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r);cursor:crosshair}
-.drill-section{width:100%;margin-bottom:14px}
-.drill-summary{list-style:none;color:rgba(255,255,255,.8);font-size:.78rem;font-weight:700;cursor:pointer;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:20px;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;user-select:none;-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);background:rgba(255,255,255,.06)}
-.drill-section[open] .drill-summary{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35)}
-.drill-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;justify-content:center}
-.drill-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:100px;color:rgba(255,255,255,.85);font-size:.72rem;font-weight:700;padding:6px 14px;cursor:pointer;transition:all .18s;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
-.drill-pill:hover{background:rgba(255,255,255,.18);border-color:rgba(252,211,77,.6);color:#fcd34d;transform:translateY(-1px)}
-.drill-pill:active{transform:scale(.95)}
+/* Cuadrícula de 2 columnas para las pantallas de selección de grupo
+   (grupo funcional / constructor por familia / reacciones por grupo).
+   Reemplaza al viejo <details> colapsado: ahora cada opción vive en su
+   propia pantalla dedicada (mismo patrón que ya usaba Reacciones
+   Orgánicas), siempre visible sin necesidad de desplegar nada. */
+.drill-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.drill-grid-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;color:rgba(255,255,255,.9);font-size:.82rem;font-weight:700;padding:14px 10px;min-height:46px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:all .18s;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.drill-grid-item:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.4);transform:translateY(-1px)}
+.drill-grid-item:active{transform:scale(.96)}
+.drill-grid-item.special{border-color:rgba(251,191,36,.4);color:#fbbf24}
 .rb-type.build{background:#fff2e8;color:#f97316}
 .rb-type.rxnq{background:#fce7f3;color:#9d174d}
 
@@ -763,60 +770,19 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
         <div class="nivel-icon">🧪</div>
         <div><div class="nivel-name">Reacciones Orgánicas</div><div class="nivel-desc">Mecanismos, productos y condiciones de todos los grupos</div><div class="nivel-count">102 preguntas · 20 por sesión</div></div>
       </button>
+      <button class="nivel-card gf" onclick="openDrillPicker('funcional')">
+        <div class="nivel-icon">🧬</div>
+        <div><div class="nivel-name">Practicar por Grupo Funcional</div><div class="nivel-desc">Nomenclatura de un solo grupo: alcanos, alcoholes, cetonas...</div><div class="nivel-count">13 grupos · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card cf" onclick="openDrillPicker('constructor')">
+        <div class="nivel-icon">🧩</div>
+        <div><div class="nivel-name">Constructor por Familia</div><div class="nivel-desc">Dibuja estructuras de un solo grupo funcional</div><div class="nivel-count">13 familias · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card rg" onclick="openDrillPicker('reacciones')">
+        <div class="nivel-icon">🔬</div>
+        <div><div class="nivel-name">Reacciones por Grupo</div><div class="nivel-desc">Reacciones de un solo grupo funcional</div><div class="nivel-count">11 grupos · 20 por sesión</div></div>
+      </button>
     </div>
-    <details class="drill-section">
-      <summary class="drill-summary">🎯 Practicar por grupo funcional ▾</summary>
-      <div class="drill-pills">
-        <button class="drill-pill" onclick="openLevelModal('alcanos')">Alcanos</button>
-        <button class="drill-pill" onclick="openLevelModal('alquenos')">Alquenos</button>
-        <button class="drill-pill" onclick="openLevelModal('alquinos')">Alquinos</button>
-        <button class="drill-pill" onclick="openLevelModal('alcoholes')">Alcoholes</button>
-        <button class="drill-pill" onclick="openLevelModal('cetonas')">Cetonas</button>
-        <button class="drill-pill" onclick="openLevelModal('aldehidos')">Aldehídos</button>
-        <button class="drill-pill" onclick="openLevelModal('acidos')">Ácidos Carboxílicos</button>
-        <button class="drill-pill" onclick="openLevelModal('esteres')">Ésteres</button>
-        <button class="drill-pill" onclick="openLevelModal('eteres')">Éteres</button>
-        <button class="drill-pill" onclick="openLevelModal('amidas')">Amidas</button>
-        <button class="drill-pill" onclick="openLevelModal('nitrilos')">Nitrilos</button>
-        <button class="drill-pill" onclick="openLevelModal('aminas')">Aminas</button>
-        <button class="drill-pill" onclick="openLevelModal('benceno')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Aromáticos</button>
-      </div>
-    </details>
-    <details class="drill-section">
-      <summary class="drill-summary">🏗️ Practicar constructor por familia ▾</summary>
-      <div class="drill-pills">
-        <button class="drill-pill" onclick="openLevelModal('constructor')">Todas las moléculas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_alcanos')">Alcanos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_alquenos')">Alquenos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_alquinos')">Alquinos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_alcoholes')">Alcoholes</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_cetonas')">Cetonas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_aldehidos')">Aldehídos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_acidos')">Ácidos Carboxílicos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_esteres')">Ésteres</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_eteres')">Éteres</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_amidas')">Amidas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_nitrilos')">Nitrilos</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_aminas')">Aminas</button>
-        <button class="drill-pill" onclick="openLevelModal('constructor_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Aromáticos (construir)</button>
-      </div>
-    </details>
-    <details class="drill-section">
-      <summary class="drill-summary">🧪 Practicar reacciones por grupo ▾</summary>
-      <div class="drill-pills">
-        <button class="drill-pill" onclick="openLevelModal('rxn_hc')">Hidrocarburos (RXN)</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_alcanos')">Alcanos</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_alquenos')">Alquenos</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_alquinos')">Alquinos</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_aromaticos')" style="border-color:rgba(251,191,36,.4);color:#fbbf24">Aromáticos</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_halogenuros')">Halogenuros</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_alcoholes')">Alcoholes</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_aminas')">Aminas</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_carbonilo')">Aldehídos y Cetonas</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_acidos')">Ácidos Carboxílicos</button>
-        <button class="drill-pill" onclick="openLevelModal('rxn_derivados')">Derivados AC</button>
-      </div>
-    </details>
     <div class="portada-stats">
       <div class="ps"><div class="ps-n" id="stat-banco">329</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
@@ -926,6 +892,18 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_derivados')">Derivados (Ésteres/Amidas)</button>
     </div>
     <button class="rxn-continuar" id="rxn-continuar" onclick="openRxnMixto()">Comenzar →</button>
+  </div>
+</div>
+<!-- Selector genérico de grupo — usado por "Practicar por Grupo Funcional",
+     "Constructor por Familia" y "Reacciones por Grupo" (ver openDrillPicker()
+     en el script). A diferencia de s-rxn-grupos, aquí cada opción arranca la
+     partida directo con un solo toque (no hay selección múltiple). -->
+<div id="s-drill-picker" class="screen">
+  <div class="rxn-grupos-wrap">
+    <button class="rxn-back" onclick="showScreen('s-portada')">← Volver</button>
+    <h2 id="dp-title" style="font-family:'Fraunces',serif;font-size:1.4rem;margin:0;text-align:center"></h2>
+    <p id="dp-desc" style="color:var(--dim);font-size:.88rem;text-align:center;margin:0"></p>
+    <div class="drill-grid" id="dp-grid"></div>
   </div>
 </div>
 <div id="s-game" class="screen">
@@ -8425,6 +8403,63 @@ function toggleRxnGrupo(btn,topic){
 function openRxnMixto(){
   if(!_rxnGrupos.length)return;
   openLevelModal('rxn_mixto');
+}
+
+// ── Selector genérico de grupo (practicar por grupo funcional /
+// constructor por familia / reacciones por grupo) ──────────────────────
+// Antes estas 13+13+11 opciones vivían escondidas en 3 menús <details>
+// colapsados, mucho más chicos que las 6 tarjetas principales — muchos
+// estudiantes ni se daban cuenta de que existían. Ahora las 3 categorías
+// tienen su propia tarjeta grande (mismo tamaño que las demás) y abren
+// esta pantalla dedicada con todas sus opciones visibles de una vez, en
+// 2 columnas. Cada botón arranca la partida directo con un solo toque
+// (a diferencia de s-rxn-grupos, que permite elegir varios grupos a la
+// vez para el modo Reto combinado).
+const DRILL_CATEGORIES={
+  funcional:{
+    titulo:'🧬 Practicar por Grupo Funcional', desc:'Elige un grupo para practicar solo su nomenclatura IUPAC.',
+    items:[
+      {label:'Alcanos',nivel:'alcanos'},{label:'Alquenos',nivel:'alquenos'},{label:'Alquinos',nivel:'alquinos'},
+      {label:'Alcoholes',nivel:'alcoholes'},{label:'Cetonas',nivel:'cetonas'},{label:'Aldehídos',nivel:'aldehidos'},
+      {label:'Ácidos Carboxílicos',nivel:'acidos'},{label:'Ésteres',nivel:'esteres'},{label:'Éteres',nivel:'eteres'},
+      {label:'Amidas',nivel:'amidas'},{label:'Nitrilos',nivel:'nitrilos'},{label:'Aminas',nivel:'aminas'},
+      {label:'Aromáticos',nivel:'benceno',especial:true},
+    ]
+  },
+  constructor:{
+    titulo:'🧩 Constructor por Familia', desc:'Elige una familia para practicar solo su construcción de estructuras.',
+    items:[
+      {label:'Todas las moléculas',nivel:'constructor'},
+      {label:'Alcanos',nivel:'constructor_alcanos'},{label:'Alquenos',nivel:'constructor_alquenos'},
+      {label:'Alquinos',nivel:'constructor_alquinos'},{label:'Alcoholes',nivel:'constructor_alcoholes'},
+      {label:'Cetonas',nivel:'constructor_cetonas'},{label:'Aldehídos',nivel:'constructor_aldehidos'},
+      {label:'Ácidos Carboxílicos',nivel:'constructor_acidos'},{label:'Ésteres',nivel:'constructor_esteres'},
+      {label:'Éteres',nivel:'constructor_eteres'},{label:'Amidas',nivel:'constructor_amidas'},
+      {label:'Nitrilos',nivel:'constructor_nitrilos'},{label:'Aminas',nivel:'constructor_aminas'},
+      {label:'Aromáticos (construir)',nivel:'constructor_aromaticos',especial:true},
+    ]
+  },
+  reacciones:{
+    titulo:'🔬 Reacciones por Grupo', desc:'Elige un grupo para practicar solo sus reacciones orgánicas.',
+    items:[
+      {label:'Hidrocarburos (RXN)',nivel:'rxn_hc'},{label:'Alcanos',nivel:'rxn_alcanos'},
+      {label:'Alquenos',nivel:'rxn_alquenos'},{label:'Alquinos',nivel:'rxn_alquinos'},
+      {label:'Aromáticos',nivel:'rxn_aromaticos',especial:true},{label:'Halogenuros',nivel:'rxn_halogenuros'},
+      {label:'Alcoholes',nivel:'rxn_alcoholes'},{label:'Aminas',nivel:'rxn_aminas'},
+      {label:'Aldehídos y Cetonas',nivel:'rxn_carbonilo'},{label:'Ácidos Carboxílicos',nivel:'rxn_acidos'},
+      {label:'Derivados AC',nivel:'rxn_derivados'},
+    ]
+  },
+};
+function openDrillPicker(cat){
+  const c=DRILL_CATEGORIES[cat];
+  if(!c)return;
+  document.getElementById('dp-title').textContent=c.titulo;
+  document.getElementById('dp-desc').textContent=c.desc;
+  document.getElementById('dp-grid').innerHTML=c.items.map(it=>
+    `<button class="drill-grid-item${it.especial?' special':''}" onclick="openLevelModal('${it.nivel}')">${it.label}</button>`
+  ).join('');
+  showScreen('s-drill-picker');
 }
 
 function nextQ(){qIdx++;loadQuestion();}
