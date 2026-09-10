@@ -7,6 +7,73 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (19) — Hoja impresa/PDF: una sola columna, tamaño carta y estructuras más grandes
+
+### Contexto
+La docente descargó una hoja del Generador y notó que algunas
+moléculas se veían muy pequeñas y que, aunque la doble columna se veía
+bien en pantalla, al imprimir/exportar a PDF los SVG no se
+redimensionaban bien y las tablas de Análisis MDEC (Tipo C) se
+recortaban. Pidió: tamaño carta por defecto, 5 preguntas por página en
+una sola columna, y redimensionar los SVG para que se vean bien.
+
+### La causa
+El CSS de impresión (`@media print`) acomodaba los ejercicios en **2
+columnas de ~280px** de ancho (`grid-template-columns:repeat(auto-fill,
+minmax(280px,1fr))`), y dentro de esa columna angosta las estructuras
+SVG se topaban con un tope de tamaño (`max-height:100px`) y las tablas
+MDEC (que tienen una columna "Significado" con texto largo) no tenían
+espacio para acomodarse — de ahí lo "pequeño" y lo "recortado". Además
+`@page` no fijaba el tamaño de papel (dependía de lo que cada
+impresora/navegador tuviera configurado por defecto), y `.app` (el
+contenedor general, con `padding:28px 20px 80px` pensado para la
+pantalla) no se anulaba en impresión, robando espacio útil de cada
+página.
+
+### Qué se corrigió (en `generador.html`, dentro de `@media print`)
+- **Tamaño de papel**: `@page{size:letter;margin:1.5cm 1.4cm}` — carta
+  por defecto, sin depender de la configuración de la impresora.
+- **Una sola columna siempre**: se quitó la grilla de 2 columnas
+  (`repeat(auto-fill,minmax(280px,1fr))`) — ahora todo, incluyendo
+  ejercicios de reacciones (antes ya iban en 1 columna), usa el ancho
+  completo de la hoja.
+- **`.app` ya no roba espacio en impresión**: se anuló su padding
+  pensado para pantalla, que quitaba ~28px arriba de cada hoja.
+- **SVG y tablas ya no se recortan**: al tener ~3× más ancho
+  disponible por ejercicio, las estructuras (incluidas cadenas largas
+  como los aldehídos de más carbonos) y las tablas MDEC ya caben sin
+  comprimirse. De paso se subió un poco el tope de alto de los SVG
+  (100px → 105px) y se ajustaron paddings/márgenes para aprovechar
+  mejor el espacio.
+- **5 preguntas por página**: en vez de forzar un salto de página cada
+  N elementos (que en la práctica dejaba páginas a medias cuando un
+  tipo de ejercicio más alto no cabía igual de apretado), se ajustó el
+  espaciado para que el flujo natural de impresión (con "evitar cortar
+  un ejercicio entre dos páginas") deje exactamente 5 por página en
+  Tipo A y Tipo B. El Tipo C (Análisis MDEC, con tabla) cabe ~4 por
+  página — quedó así a propósito: forzar el 5° ahí habría vuelto a
+  achicar la tabla, que es justo lo que se quería evitar.
+
+### Verificación (antes de dar por resuelto)
+Con Playwright, generando PDFs reales (`page.pdf({preferCSSPageSize:
+true})`) y contando páginas para distintas cantidades de preguntas:
+- Confirmé que el tamaño de página generado es carta (612×792pt).
+- Con solo Tipo A o Tipo B: 5, 10, 15 preguntas → exactamente 1, 2, 3
+  páginas (5 por página, sin excepción, incluida la primera página).
+- Con Tipo C (tablas MDEC): ~4 por página, sin ningún recorte
+  horizontal (lo comprobé revisando que ningún elemento se saliera del
+  ancho de su tarjeta).
+- Revisé visualmente (captura de pantalla en modo impresión) una hoja
+  mixta de Tipo A/B/C y una de Tipo D (reacciones): estructuras claras,
+  tablas completas, una sola columna en todos los casos.
+
+### Pasos pendientes
+Ninguno — es un cambio solo de CSS en `generador.html`, que se sirve
+directo por GitHub Pages. El botón "PDF" y "Imprimir" usan el mismo
+CSS, así que ambos quedan corregidos con este cambio.
+
+---
+
 ## 2026-09-10 (18) — Auditoría de ortografía y nomenclatura IUPAC en todo el sitio
 
 ### Contexto

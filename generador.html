@@ -528,7 +528,7 @@ body{
 
 /* ── PRINT STYLES ── */
 @media print{
-  @page{margin:1.5cm 1.4cm}
+  @page{size:letter;margin:1.5cm 1.4cm}
   body{background:#fff !important;color:#000 !important}
 
   /* Hide screen-only elements */
@@ -541,6 +541,10 @@ body{
 
   /* Show sheet */
   #exercise-sheet{display:block !important}
+  /* .app trae padding pensado para la pantalla (28px arriba, 80px abajo para
+     la barra flotante) — en impresión eso resta espacio útil de la página
+     y ya está cubierto por el margen de @page, así que se anula. */
+  .app{padding:0 !important;max-width:none !important}
 
   .sheet-header{
     box-shadow:none;border:1.5px solid #000;
@@ -550,24 +554,33 @@ body{
   .sheet-title{color:#000;font-size:1rem}
   .sheet-meta{font-size:.72rem}
 
-  /* Exercises — 2 columns normally, 1 column when reactions are present */
-  .exercises-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .exercises-list.has-rxn{grid-template-columns:1fr}
+  /* Exercises — siempre una sola columna (evita que las estructuras y las
+     tablas MDEC se compriman/recorten en columnas angostas) */
+  .exercises-list{display:grid;gap:6px;grid-template-columns:1fr}
   .exercise{
     box-shadow:none;border:1px solid #aaa;
-    padding:9px 11px;
+    padding:6px 10px;
     break-inside:avoid;page-break-inside:avoid;
   }
-  /* Page break every 4 exercises when reactions are present (≈ 4-5 per page) */
-  .has-rxn .exercise:nth-child(4n){break-after:page;page-break-after:always}
+  .ex-header{margin-bottom:3px}
+  /* Sin salto de página forzado: con el tamaño ya ajustado, el flujo natural
+     (con "evitar cortar" en cada .exercise) ya deja 5 ejercicios de Tipo A
+     por página. Forzar un salto cada 5 elementos, sin importar el tipo,
+     dejaba páginas a medias cuando un tipo más alto (Tipo C, con tabla MDEC)
+     no cabía igual de apretado. */
 
-  /* SVG sizing — 4 per page on letter */
-  .ex-svg-wrap{min-height:0;margin:4px 0;display:flex;justify-content:center}
-  .ex-svg-wrap svg{height:auto !important;max-height:100px;width:auto;max-width:100%}
+  /* SVG sizing — con una sola columna hay ancho de sobra para que las
+     estructuras se vean con claridad */
+  .ex-svg-wrap{min-height:0;margin:2px 0;display:flex;justify-content:center}
+  .ex-svg-wrap svg{height:auto !important;max-height:105px;width:auto;max-width:100%}
   .ex-svg-tall svg{max-height:160px !important}
 
   /* Draw box — compact */
-  .ex-draw-box{width:100%;height:80px;margin:4px auto 0}
+  .ex-draw-box{width:100%;height:70px;margin:3px auto 0}
+
+  /* Answer line — un poco más compacta para dejarle espacio a la molécula */
+  .ex-answer-line{margin-top:5px !important}
+  .ex-answer-line .ans-line{height:14px}
 
   /* Text sizes */
   .ex-num{font-size:.85rem}
