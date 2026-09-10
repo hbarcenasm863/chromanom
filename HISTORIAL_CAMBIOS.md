@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (24) — Corregir el ejemplo de "Éteres cíclicos: prefijo oxa−" en Grupos
+
+### Contexto
+La docente encontró que en `grupos.html`, en el tema Éteres, la regla 5
+("Éteres cíclicos: prefijo oxa−") explicaba correctamente que el −O− del
+anillo reemplaza un −CH₂− (ciclopropano→oxaciclopropano,
+ciclopentano→oxaciclopentano/tetrahidrofurano), pero el ejemplo visual que
+acompañaba la regla era **metoxiciclohexano** — un compuesto totalmente
+distinto: ahí el oxígeno está AFUERA del anillo (un −OCH₃ colgando de un
+ciclohexano normal), no reemplazando un carbono del ciclo. El ejemplo no
+correspondía con lo que decía la regla. También pidió agregar los epóxidos
+y el oxano (nombrados o como regla aparte).
+
+### Qué se cambió (`grupos.html`)
+- Se agregaron 3 dibujos nuevos a `MOLS` (siguiendo el mismo estilo que ya
+  usan `ciclopentano`/`dimetilCicloHexano`, con el O rotulado directo sobre
+  un vértice del anillo): `oxaciclopropano` (3 miembros), `oxaciclopentano`
+  (5 miembros) y `oxaciclohexano` (6 miembros).
+- La regla 5 ahora usa esos 3 ejemplos (antes solo tenía uno, y ni siquiera
+  el correcto) y el texto menciona explícitamente que el anillo de 3
+  miembros es un **epóxido** (oxirano) y el de 6 es el **oxano**
+  (tetrahidropirano, THP) — junto con el ya mencionado tetrahidrofurano (THF)
+  de 5 miembros.
+- Se agregaron 3 ejercicios de práctica nuevos (oxaciclopropano/oxirano,
+  oxaciclopentano/THF, oxaciclohexano/THP) a la lista de ejercicios de
+  Éteres, aceptando tanto el nombre sistemático oxa- como los nombres
+  comunes (oxirano, THF, THP, oxano, óxido de etileno).
+- Verificado con Playwright: los 3 dibujos se ven bien, la regla ya
+  corresponde con sus ejemplos, y probé el ejercicio nuevo de oxirano
+  respondiendo "oxirano" — lo marca correcto y muestra la explicación.
+
+### Pendiente / sin resolver
+Ninguno. No hace falta ningún paso de despliegue: `grupos.html` se sirve
+directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (23) — Las estructuras del PDF ya no salen diminutas en algunos ejercicios
 
 ### Contexto
