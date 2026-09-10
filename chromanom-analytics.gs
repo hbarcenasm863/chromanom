@@ -7,6 +7,7 @@
 const SPREADSHEET_NAME = 'Chromanom — Registro de estudiantes';
 const SHEET_REGISTRO   = 'Registro';
 const SHEET_STATS      = 'Estadísticas';
+const SHEET_ESTUDIANTES = 'Estudiantes';
 
 // ── Cabeceras del Registro ──────────────────────────────────
 // Errores Build/Rxnq van AL FINAL (no intercalados con Errores Write) para
@@ -134,7 +135,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-10-nota-tope-5-minimo-22-sesiones';
+const BUILD_TAG = '2026-09-10-lookup-estudiantes-por-codigo';
 
 function jsonOut_(obj) {
   return ContentService
@@ -157,6 +158,9 @@ function jsonOut_(obj) {
 function doGet(e) {
   if (e && e.parameter && e.parameter.accion === 'progreso') {
     return handleProgreso_(e);
+  }
+  if (e && e.parameter && e.parameter.accion === 'estudiante') {
+    return handleEstudiante_(e);
   }
   return ContentService
     .createTextOutput('Chromanom Analytics — activo ✓ (build ' + BUILD_TAG + ')')
@@ -608,6 +612,79 @@ function handleProgreso_(e) {
         }
       }
       return jsonOut_(conPeriodo({ ok: true, encontrado: false }));
+    } catch (err) {
+      ultimoError = err;
+      if (intento < INTENTOS - 1) {
+        const base   = 400 * Math.pow(1.8, intento);
+        const jitter = Math.random() * 300;
+        Utilities.sleep(Math.min(base + jitter, 1500));
+      }
+    }
+  }
+  return jsonOut_({ ok: false, error: ultimoError.message });
+}
+
+// ── Hoja "Estudiantes" (Código | Nombre) ────────────────────────────────
+// El listado de estudiantes ya NO vive en el código de juego.html (estaba
+// ahí en texto plano — nombres reales de menores, visibles para cualquiera
+// que abriera "ver código fuente" de una página pública, y además quedaban
+// en el historial de git de un repositorio público). Vive SOLO en esta
+// hoja de este spreadsheet de Google, que es privada: este script la
+// consulta por código, pero nunca la contiene en su propio texto.
+//
+// Paso manual (una sola vez, o cada vez que cambie el curso): abrir esta
+// hoja de cálculo, ir a la pestaña "Estudiantes" (se crea sola la primera
+// vez que alguien consulta un código) y pegar ahí el listado oficial:
+// columna A = código de 6 dígitos, columna B = nombre completo.
+function ensureEstudiantesSheet_(ss) {
+  let sh = ss.getSheetByName(SHEET_ESTUDIANTES);
+  if (sh) return sh;
+  try {
+    sh = ss.insertSheet(SHEET_ESTUDIANTES);
+    sh.appendRow(['Código', 'Nombre']);
+    sh.getRange(1, 1, 1, 2).setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+    sh.setFrozenRows(1);
+    sh.setColumnWidth(1, 100);
+    sh.setColumnWidth(2, 220);
+    return sh;
+  } catch (err) {
+    // Carrera: otra petición concurrente ya la creó entre el
+    // getSheetByName de arriba y este insertSheet.
+    return ss.getSheetByName(SHEET_ESTUDIANTES);
+  }
+}
+
+// ── Busca el nombre de un estudiante por su código (?accion=estudiante) ──
+// juego.html llama esto al validar el código de 6 dígitos en la portada,
+// en vez de mirar un listado embebido en su propio HTML. Mismo patrón de
+// reintento con backoff que handleProgreso_: con toda una clase entrando
+// su código casi al mismo tiempo, puede toparse con el mismo error
+// transitorio de "demasiadas invocaciones simultáneas" al Spreadsheet.
+function handleEstudiante_(e) {
+  const codigo = String((e.parameter && e.parameter.codigo) || '').trim();
+  if (!codigo) return jsonOut_({ ok: true, encontrado: false });
+
+  const INTENTOS = 3;
+  let ultimoError;
+  for (let intento = 0; intento < INTENTOS; intento++) {
+    try {
+      const ss = getOrCreateSpreadsheet();
+      const sh = ensureEstudiantesSheet_(ss);
+      if (!sh || sh.getLastRow() < 2) return jsonOut_({ ok: true, encontrado: false });
+
+      const data = sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues();
+      for (let i = 0; i < data.length; i++) {
+        // Comparación como texto: un código como "100307" puede quedar
+        // guardado como Number en la hoja (mismo caso que ya se maneja
+        // para "Sesión" en findRowBySession) — comparar con === estricto
+        // entre String y Number nunca encontraría el código.
+        if (String(data[i][0]).trim() === codigo) {
+          const nombre = String(data[i][1] || '').trim();
+          if (!nombre) return jsonOut_({ ok: true, encontrado: false });
+          return jsonOut_({ ok: true, encontrado: true, nombre: nombre });
+        }
+      }
+      return jsonOut_({ ok: true, encontrado: false });
     } catch (err) {
       ultimoError = err;
       if (intento < INTENTOS - 1) {

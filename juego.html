@@ -4322,186 +4322,6 @@ let currentLevel='completo';
 // el récord real de una partida completa del mismo nivel y sobrescribirlo.
 let isRetryRound=false;
 let studentName='', studentCourse='', studentCode='';
-const STUDENTS={
-  '100307':'LANDERO VEGA SHARITH ALEJANDRA',
-  '100401':'ACUÑA SANTOS JOSILENNY',
-  '100402':'AMARIS TORRES LITZY DAYANA',
-  '100403':'BARRAGAN SOLORZANO DANNA BRIGITTE',
-  '100404':'BELTRAN FUENTES KAREN JULIANA',
-  '100405':'CASTAÑEDA MORERA JHOAN DAVID',
-  '100406':'CHAVES CHAUTA CIELO ESMERALDA',
-  '100407':'CORTES APONTE JHON ALEXANDER',
-  '100408':'GALLARDO FERNANDEZ CRISTIAN CAMILO',
-  '100409':'GARCIA MUÑOZ JUAN DIEGO',
-  '100410':'GOMEZ MACIAS BRAYAN STIVEN',
-  '100411':'HERNANDEZ VALENCIA LUCIANA',
-  '100412':'LEMOS ROBLEDO JUAN CAMILO',
-  '100413':'MOLINA MOTTA LAUREN ESTEFANY',
-  '100414':'MONTAÑO CABARCAS JULIAN ESTEBAN',
-  '100415':'MORENO FONQUE VALERY TATIANA',
-  '100416':'PIRELA GONZALEZ MARIANGELES MANUELA',
-  '100417':'RAMOS OLIVARES NICOLLE JULIETH',
-  '100418':'RODRIGUEZ LEIVA MARIA VALENTINA',
-  '100419':'RODRIGUEZ PEÑA KEVIN ANDRES',
-  '100420':'SANCHEZ MOLINA SARA ISABELA',
-  '100421':'SANCHEZ SUAREZ SARA ISABELLA',
-  '100422':'SEGURA GARCIA LAURA SOFIA',
-  '100423':'SOTILLO MEDINA SANYA MICHELL',
-  '100424':'SUAREZ MENDEZ JUAN SEBASTIAN',
-  '100425':'TORO GIL LUISA FERNANDA',
-  '100426':'TORRECILLA GARCIA DANGLIS DAYANNA',
-  '100501':'ALVAREZ TORRES MAILY TATIANA',
-  '100502':'ARCILA MARTIN MARIA JULIANA',
-  '100503':'AROCA VILLAREAL FREDY SANTIAGO',
-  '100504':'ASPRILLA PEREZ KRISTHOPHER SMITH',
-  '100505':'CAMARGO MONTERO MARIANA',
-  '100506':'CARRILLO MEDINA BRAYAN ANDRES',
-  '100507':'DIAZ GUZMAN ISABELA',
-  '100508':'DUARTE OSORIO MARIA CAMILA',
-  '100509':'FLOREZ AROCA MARIANA',
-  '100510':'GONGORA NEUTA DANIEL SANTIAGO',
-  '100511':'GONZALEZ MARTINEZ LUIS ALEJANDRO',
-  '100513':'MARTINEZ PARRA JUAN CAMILO',
-  '100514':'MEDINA MACHADO FLORELIS DEL VALLE',
-  '100515':'MUÑOZ SANABRIA MEYLEEN SOFIA',
-  '100516':'NOVOA SUAREZ DANNA SOFIA',
-  '100517':'OROZCO OLIVARES ANDRES DAVID',
-  '100518':'OTALORA PICO SAMUEL',
-  '100519':'PARDO DUARTE CRISTIAN CAMILO',
-  '100520':'PINZON GARCES KAROL DAYANA',
-  '100521':'RODRIGUEZ PULIDO JOSTIN ALEJANDRO',
-  '100522':'RUEDA SALAZAR SOBEIDA',
-  '100523':'SANCHEZ GARZON MIGUEL ANGEL',
-  '100524':'TORRES NAVARRO FELIPE ANDRES',
-  '100525':'VILLAMIL RAMIREZ ASHLIN MALENA',
-  '100526':'AYALA DUARTE SHARICK VANESA',
-  '100601':'ALVAREZ ESTRELLA YULISSA',
-  '100602':'BALLESTEROS VANEGAS DANIEL SANTIAGO',
-  '100603':'CALDERON VERGARA MARINELA JULIETH',
-  '100604':'CASTILLO MARIAN SOFIA',
-  '100605':'COGOLLO RODRIGUEZ FLORENS BEATRIZ',
-  '100606':'CUEVAS PINZON JUAN JOSE',
-  '100607':'DIAZ LADINO MICHAEL DAVID',
-  '100608':'GOMEZ NARVAEZ ARIANA',
-  '100609':'LEMUS FUENTES KEVIN DANIEL',
-  '100610':'LINAREZ DOS REIS ANNAIRETH NIKOLL',
-  '100611':'MEDINA CUBILLOS ELKIN SANTIAGO',
-  '100612':'MELENGUE QUINCHANEGUA MANUEL ESTEBAN',
-  '100613':'MUÑOZ ZAMBRANO KEVIN TOMAS',
-  '100614':'MUÑOZ LARA IZABELLA',
-  '100615':'PANQUEVA LOPEZ DAVID STEVEN',
-  '100616':'PEÑA CRUZ SARA DAILYN',
-  '100617':'PEREZ PEÑALVER YESIBEL LUCIA',
-  '100618':'QUINTANA OVIEDO SERGIO ANDRES',
-  '100619':'RENGIFO MONTILLA ASHLEY MARGARETH',
-  '100620':'RUIZ BALAGUERA LAURA VALENTINA',
-  '100621':'SARMIENTO ROJANO LEIDY CAROLINA',
-  '100622':'SILVA OLIVEROS JUAN FELIPE',
-  '100623':'VANEGAS SALAS KIMBERLY SOFIA',
-  '100624':'YATE MOYANO SANTIAGO',
-  '100625':'ZAMORA SANTAMARIA LENNON SANTIAGO',
-  '100626':'ANGULO SALCEDO HANSEL RAQNSES',
-  '100627':'HERRAN FORERO SAILY GISETH',
-  '100628':'ALARCON LOZZADA ARAIDNYZ DEL CARMEN',
-  '100629':'BANGUERO CANTOR ANGIE LIZETH',
-  '110101':'AMARIS ARAUJO ALANYS LISETH',
-  '110102':'BETANCOURT MORENO LIAM YACETH',
-  '110103':'DIAZ DURAN SAMUEL SANTIAGO',
-  '110104':'DIAZ MELO NICOLE SOFIA',
-  '110105':'GALLEGO MARIN ANDRU YAZIL',
-  '110106':'GARCIA ERAZO LAURA SOFIA',
-  '110107':'JARA LOSADA LAURA CAMILA',
-  '110108':'LEAL GONZALEZ BRAINER DACCIR',
-  '110109':'MEDINA ORTIZ SANTIAGO',
-  '110110':'MELENDEZ CONTRERAS ESTEFANY',
-  '110111':'MORERA VARGAS SARA JULIETH',
-  '110112':'NARVAES NARVAEZ SARA MICHELL',
-  '110113':'PACHON HERNANDEZ NICOLLE VANESSA',
-  '110114':'PATIÑO GUTIERREZ JUAN SEBASTIAN',
-  '110115':'PEREA MOSQUERA INGRID YOHANA',
-  '110116':'PEREZ TORRES YERALDIN',
-  '110117':'PERILLA VALLES LINDA ESTEFANY',
-  '110118':'PORTILLA SILVA KAROL XIMENA',
-  '110120':'SANTAMARIA CUENCA LUIS ALEJANDRO',
-  '110121':'SEGURA URREGO ALEX JULIETH',
-  '110122':'TORRES MAHECHA JOHAN SANTIAGO',
-  '110124':'ZAMBRANO MARIN SUSANA',
-  '110130':'RIOS MUÑETON MARIA FERNANDA',
-  '110201':'ANGARITA OLIVAREZ LUIS ANGEL',
-  '110202':'AVENDAÑO RAMIREZ DERLYE JOHANNA',
-  '110203':'BERRIO ROBAYO DAVID SANTIAGO',
-  '110204':'BUSTOS BENAVIDES SHAROM ALEJANDRA',
-  '110205':'CASTAÑEDA RIVEROS YURI TATIANA',
-  '110206':'GALINDO SABOGAL JHON FREDY',
-  '110207':'GARAY DIAZ ANA VALENTINA',
-  '110208':'JARA LOZADA KAREN LIZETH',
-  '110209':'LEON CONTRERAS NICOLETTE STEPHANIE',
-  '110210':'LOAIZA VERGARA NICOLE',
-  '110211':'LOPEZ SALCEDO JAVIER MATEO',
-  '110212':'MAESTRE CEBALLOS FREYDER JOSE',
-  '110213':'MEJIA MARCHAN ZAIN MISAEL',
-  '110214':'MOLINA RAMOS PABLO',
-  '110215':'PEREZ PEÑALVER ALBERT JOSE',
-  '110216':'RAMIREZ CALDERON JHONATAN',
-  '110217':'RINCON GUZMAN DANNA VALENTINA',
-  '110218':'RIOS MUÑETON MARIA FERNANDA',
-  '110219':'RIVERA MENDEZ JUAN CAMILO',
-  '110220':'ROMERO TABARES SHERIL SNEIGY',
-  '110221':'RUIZ BALAGUERA MARIA FERNANDA',
-  '110222':'SANCHEZ SUAREZ DANIEL SANTIAGO',
-  '110223':'VARGAS HERNANDEZ SAHARA DANIELA',
-  '110226':'VASQUEZ SARMIENTO DILAN STIVEN',
-  '110228':'RODRIGUEZ PEDREROS SANTIAGO',
-  '110301':'ARISMENDI PEREZ ADRIANA',
-  '110302':'BONILLA MONROY JUAN ESTEBAN',
-  '110303':'CALA SANCHEZ DYLAN YESID',
-  '110304':'DELAROSA DIAZ ALEJANDRA',
-  '110305':'GALVIZ SANTAMARIA ALISSON DAYAN',
-  '110306':'GARCIA ACOSTA VALERIA SOFIA',
-  '110307':'GARZON GARZON VALERY ESTEFANIA',
-  '110309':'GORDILLO TAPIAS DANIELA',
-  '110310':'GUTIERREZ ESPINOSA JHON FREDY',
-  '110311':'MAHECHA LIZARAZO EMILYN YHOZARA',
-  '110312':'MARTINEZ DELOSRIOS AMMY GABRIELA',
-  '110313':'MERCADO BENAVIDES STIVEN DANIEL',
-  '110314':'MERCADO FORNARIS YESUA STIVEN',
-  '110315':'NOSA BELTRAN DANIEL RICARDO',
-  '110316':'OCAMPO SEPULVEDA ALEX DAVID',
-  '110317':'PERDOMO GUTIERREZ YESICA PAOLA',
-  '110318':'RAMIREZ CORTES ANA MARIA',
-  '110319':'RAMOS PORTO JULIO CESAR',
-  '110320':'RUA CASTRO VALENTINA',
-  '110321':'SANCHEZ SANCHEZ DANNA MICHELL',
-  '110322':'VARGAS SANTACRUZ HANNAH VANESSA',
-  '110323':'VENEGAS MENDOZA KAROL LIZETH',
-  '110324':'AREVALO SANCHEZ DANA SOFIA',
-  '110401':'ALVARADO LUNA YUDENNIS DANIELIZ',
-  '110402':'ANGEL GUTIERREZ OSCAR DAVID',
-  '110403':'ARENILLA GALVAN LINA MARCELA',
-  '110404':'BAUTISTA PEÑA MARIAN SOFIA',
-  '110405':'BUSTOS NEUSA PABLO JULIAN',
-  '110406':'CARRILLO SANCHEZ JUAN SEBASTIAN',
-  '110407':'CASTILLO COBOS ANYI JULIETH',
-  '110408':'CRUZ HERNANDEZ EDINDSON ARLEY',
-  '110409':'CUEVAS MONTAÑA DANNA ALEJANDRA',
-  '110410':'DIAZ MARIN DAYANNA',
-  '110411':'FORERO CAICEDO SANTIAGO',
-  '110412':'FRANCO DIAZ JUAN MIGUEL',
-  '110413':'GARCIA GOMEZ JOSE MANUEL',
-  '110414':'GRANADOS TELLEZ ANA MARIA',
-  '110415':'GUTIERREZ NIÑO ALEJANDRO',
-  '110416':'LEON CONTRERAS GABRIEL ALEJANDRO',
-  '110417':'MENDEZ BENAVIDES OLIVER DAVID',
-  '110418':'NINCO VARGAS IVETH CAMILA',
-  '110419':'NIÑO CELY JULIAN MATEO',
-  '110420':'PONTON LIZARAZO SHAIRA ALEJANDRA',
-  '110421':'SAENZ HONTIBON SEBASTIAN',
-  '110422':'TORRES MARTINEZ YULI ESTEFANIA',
-  '110423':'RUIZ MARIA ALEJANDRA',
-  '110424':'BELLO GONZALEZ LAURA VALENTINA',
-  '110425':'LOZANO NOSA PAULA ALEJANDRA'
-};
-
 const NIVEL_TOPICS={
   hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
   oxigenados:   ['alcoholes','cetonas','aldehidos','acidos','esteres','eteres'],
@@ -4706,7 +4526,14 @@ function closeConsent(){
 let _iniciandoPartida=false;
 
 // ── Identificación de estudiante inline (reemplaza el modal) ──
+// El nombre ya NO viene de un listado embebido en este archivo (antes,
+// cualquiera podía ver el curso completo con "ver código fuente" de esta
+// página pública). Se consulta al Apps Script (?accion=estudiante&codigo=…),
+// que lo busca en la hoja "Estudiantes" — esa hoja vive solo en el Google
+// Sheet privado de la docente, nunca en este código.
+let _verificandoCodigo=false;
 function validarCodigoInline(){
+  if(_verificandoCodigo) return;
   const inp=document.getElementById('code-inp');
   const cod=inp.value.trim();
   const errDiv=document.getElementById('code-err');
@@ -4715,23 +4542,43 @@ function validarCodigoInline(){
     errDiv.textContent='Ingresa tus 6 dígitos.';
     errDiv.style.display='block'; return;
   }
-  const name=STUDENTS[cod];
-  if(!name){
-    errDiv.textContent='Código no encontrado. Verifica con tu docente.';
+  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'){
+    errDiv.textContent='No se pudo verificar el código: falta configurar ANALYTICS_URL.';
     errDiv.style.display='block'; return;
   }
-  studentName=name; studentCourse=cod.substring(0,4); studentCode=cod;
-  document.getElementById('wi-name').textContent='✓ '+studentName;
-  document.getElementById('wi-course').textContent='Curso '+studentCourse+' · Código '+studentCode;
-  actualizarPanelesEstudiante();
-  cargarProgresoInline();
-  // El reto de la coordinación se muestra aquí, al reconocer al estudiante
-  // por su código — no al arrancar el juego, para que se vea apenas entra
-  // y no cada vez que elige un nivel nuevo en la misma visita. A diferencia
-  // del modo libre, aquí se muestra SIEMPRE (sin el tope de una vez al día):
-  // cada estudiante que se identifica en el equipo debe verlo, aunque ya se
-  // le haya mostrado a otro compañero antes ese mismo día en el mismo salón.
-  abrirPromoModal(()=>{});
+  const btn=document.querySelector('#login-panel .btn-modal-start');
+  _verificandoCodigo=true;
+  if(btn){btn.disabled=true;btn.textContent='Verificando…';}
+  const url=ANALYTICS_URL+'?accion=estudiante&codigo='+encodeURIComponent(cod);
+  // 9s, igual que cargarProgresoInline: con toda la clase entrando su
+  // código casi al mismo tiempo, el .gs puede tardar más (incluye su
+  // propio reintento con backoff ante contención del Spreadsheet).
+  const timeout=new Promise(res=>setTimeout(()=>res(null),9000));
+  Promise.race([fetch(url).then(r=>r.ok?r.json():null).catch(()=>null), timeout])
+    .then(data=>{
+      _verificandoCodigo=false;
+      if(btn){btn.disabled=false;btn.textContent='Entrar →';}
+      if(!data||!data.ok){
+        errDiv.textContent='No se pudo verificar el código. Revisa tu conexión e inténtalo de nuevo.';
+        errDiv.style.display='block'; return;
+      }
+      if(!data.encontrado){
+        errDiv.textContent='Código no encontrado. Verifica con tu docente.';
+        errDiv.style.display='block'; return;
+      }
+      studentName=data.nombre; studentCourse=cod.substring(0,4); studentCode=cod;
+      document.getElementById('wi-name').textContent='✓ '+studentName;
+      document.getElementById('wi-course').textContent='Curso '+studentCourse+' · Código '+studentCode;
+      actualizarPanelesEstudiante();
+      cargarProgresoInline();
+      // El reto de la coordinación se muestra aquí, al reconocer al estudiante
+      // por su código — no al arrancar el juego, para que se vea apenas entra
+      // y no cada vez que elige un nivel nuevo en la misma visita. A diferencia
+      // del modo libre, aquí se muestra SIEMPRE (sin el tope de una vez al día):
+      // cada estudiante que se identifica en el equipo debe verlo, aunque ya se
+      // le haya mostrado a otro compañero antes ese mismo día en el mismo salón.
+      abrirPromoModal(()=>{});
+    });
 }
 function cambiarEstudiante(){
   studentName=''; studentCourse=''; studentCode='';

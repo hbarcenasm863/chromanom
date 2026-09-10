@@ -7,6 +7,75 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (20) — Los nombres de los estudiantes ya no viven en el código público
+
+### Contexto
+Tras la auditoría de `teoria.html`/`juego.html` (ver "Hallazgo crítico" del
+informe de esa sesión), la docente pidió corregir todo empezando por esto:
+`juego.html` tenía un objeto `STUDENTS` con 177 pares código→nombre completo
+real, embebido en el HTML que sirve GitHub Pages — visible para cualquiera
+con "ver código fuente", sin iniciar sesión, y conservado además en el
+historial de git de un repositorio público.
+
+### Qué se cambió
+- **`juego.html`**: se borró por completo el objeto `STUDENTS` (177 líneas).
+  `validarCodigoInline()` ahora es asíncrona: en vez de mirar un listado
+  local, consulta `ANALYTICS_URL + '?accion=estudiante&codigo=...'` y usa el
+  nombre que responda el backend. Mientras espera muestra "Verificando…" en
+  el botón; si el código no existe muestra el mismo mensaje de siempre
+  ("Código no encontrado..."), y si falla la conexión muestra un mensaje
+  distinto ("No se pudo verificar el código...") en vez de confundir un
+  problema de red con un código inválido. `studentCourse` se sigue
+  calculando igual que antes (los primeros 4 dígitos del código) — eso no
+  dependía del listado.
+- **`chromanom-analytics.gs`**: nueva acción `?accion=estudiante&codigo=...`
+  (función `handleEstudiante_`), que busca el código en una hoja nueva
+  **"Estudiantes"** (columnas: Código, Nombre) dentro del mismo spreadsheet
+  de "Chromanom — Registro de estudiantes". Esa hoja se crea sola (vacía,
+  con encabezados) la primera vez que alguien consulta un código, si todavía
+  no existe. El código de este archivo **nunca contiene los nombres reales**
+  — solo la lógica para buscarlos en la hoja. `BUILD_TAG` actualizado a
+  `2026-09-10-lookup-estudiantes-por-codigo`.
+
+### Verificación (antes de dar por resuelto)
+Con Playwright, contra un backend simulado (no se tocó el Apps Script real
+de la docente en esta prueba):
+- Código válido → muestra el nombre y el curso correctos, y el panel de
+  progreso ("el cálculo") se sigue llenando igual que antes.
+- Código inexistente → mismo mensaje de siempre.
+- Backend caído/sin red → mensaje distinto, no se confunde con "código no
+  encontrado".
+- Iniciar una partida después de identificarse → carga las 20 preguntas y
+  arranca el juego con normalidad (no se tocó nada de esa lógica).
+- Verifiqué con un parser de JavaScript aparte que tanto `juego.html` como
+  `chromanom-analytics.gs` siguen siendo código válido tras los cambios.
+
+### Pendiente — pasos manuales (¡leer completo!)
+1. **Poblar la hoja "Estudiantes"**: te envié aparte un archivo
+   `estudiantes_para_sheets.tsv` con el listado actual (código + nombre,
+   extraído de lo que ya había en `juego.html` antes de borrarlo). Abre la
+   hoja de cálculo "Chromanom — Registro de estudiantes" en Google Sheets,
+   entra a la pestaña **Estudiantes** (aparece sola la primera vez que
+   alguien consulte un código — si aún no ha pasado, créala tú misma con
+   encabezados "Código" y "Nombre" en la fila 1) y pega ahí el contenido del
+   archivo (dos columnas, tal cual).
+2. **Redesplegar**: como se tocó `chromanom-analytics.gs`, hay que ir a
+   Implementar → Administrar implementaciones → Nueva versión en el editor
+   de Apps Script. Sin este paso, `juego.html` seguirá llamando a la versión
+   vieja del script, que no conoce la acción `estudiante` y el login de
+   estudiantes dejaría de funcionar (no por este cambio de código, sino por
+   faltar el redespliegue).
+3. **No hace falta "recalcular"** para esto — `recalcularAhora()` solo
+   reconstruye "Estadísticas"/"Curso X", que no tienen que ver con la nueva
+   hoja "Estudiantes".
+4. **El historial de git sigue teniendo los nombres viejos.** Borrarlos del
+   archivo actual no los borra de commits anteriores del repositorio. Si el
+   repositorio es público, purgar ese historial es una decisión aparte
+   (reescribir historia es una operación delicada) — dejarlo pendiente de
+   que la docente decida cómo proceder.
+
+---
+
 ## 2026-09-10 (19) — Hoja impresa/PDF: una sola columna, tamaño carta y estructuras más grandes
 
 ### Contexto
