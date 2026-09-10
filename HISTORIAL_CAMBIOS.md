@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (22) — Reemplazar el 1,4-dioxano por oxirano en Éteres
+
+### Contexto
+Tras la auditoría de nomenclatura de la sesión anterior, la docente señaló
+que el 1,4-dioxano (aunque nombrado correctamente) es un compuesto raro para
+introducir éteres cíclicos: su nombre no muestra la cantidad de carbonos de
+forma reconocible (viene de "oxano", no de una raíz como "et-/prop-/but-"),
+lo que puede confundir a los estudiantes que están aprendiendo a contar
+carbonos en el nombre. Pidió quitarlo del generador y buscar otro éter
+cíclico que sí muestre el conteo de carbonos.
+
+### Qué se cambió (`generador.html`)
+- Se quitó por completo el 1,4-dioxano (la función de dibujo `dioxano()` y su
+  tarjeta MDEC).
+- Se agregó en su lugar el **oxirano** (óxido de etileno), nombrado como
+  **"1,2-epoxietano (oxirano)"** — el prefijo "epoxi-" indica el puente de
+  oxígeno entre C1 y C2, y la raíz "etano" deja ver directamente que son 2
+  carbonos, igual que el resto de los éteres de esta sección
+  (metoxietano, etoxibutano, etc.) que ya siguen ese patrón de "prefijo +
+  cadena con conteo de carbonos".
+- Se probó visualmente con Playwright/Chromium: el triángulo de 3 miembros
+  (2 carbonos + O) se dibuja correctamente con el oxígeno rotulado en un
+  vértice.
+
+### Pendiente / sin resolver
+Ninguno. No se tocó `juego.html` (el dioxano no estaba ahí). No hace falta
+ningún paso de despliegue: `generador.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (21) — Auditoría de nomenclatura IUPAC en `generador.html`
 
 ### Contexto
