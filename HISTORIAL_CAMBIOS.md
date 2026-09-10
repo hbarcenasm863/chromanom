@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (15) — Completar la corrección "Aldeídos" → "Aldehídos" en reacciones.html
+
+### Contexto
+Sesión aparte que atendió el mismo reporte de la docente (captura del
+Generador de Ejercicios con "Aldeídos" en vez de "Aldehídos"). Al
+revisar el repositorio completo con Playwright, encontré que la entrada
+(14) ya había corregido las 2 apariciones en `generador.html`, pero el
+mismo error seguía sin corregir en `reacciones.html` — esa entrada (14)
+ya lo había señalado como pendiente dentro de "la revisión general en
+curso".
+
+### Qué se corrigió
+- **`reacciones.html`**: en la explicación de la reacción de formación
+  de cianohidrina (adición nucleofílica sobre aldehídos/cetonas),
+  "Aldeídos más reactivos que cetonas" → "Aldehídos más reactivos que
+  cetonas".
+
+Confirmé con una búsqueda en todo el repositorio (`.html` y `.gs`) que
+no queda ninguna otra aparición de "Aldeídos" sin la h.
+
+### Pendiente
+Si la "revisión general de ortografía" mencionada en la entrada (14)
+sigue en curso en otra sesión, esta entrada no la reemplaza — solo
+cierra el punto específico de `reacciones.html` que quedó señalado ahí.
+
+---
+
 ## 2026-09-10 (14) — Corrección ortográfica: "Aldeídos" → "Aldehídos"
 
 ### Contexto
