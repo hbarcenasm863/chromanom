@@ -7,6 +7,72 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (13) — Portada lenta y pesada: logo gigante incrustado duplicado
+
+### Contexto
+La docente reportó que la portada del juego se sentía muy pesada y
+lenta, tardaba en dejar hacer scroll.
+
+### La causa (reproducida antes de tocar nada)
+`juego.html` tenía el logo "ChromaNom" incrustado directamente como
+texto base64 dentro del HTML (en vez de un archivo de imagen aparte),
+**duplicado dos veces** (una para la portada, otra para el encabezado
+del juego). Cada copia eran ~222 KB decodificados de una imagen de
+1536×1024 px — enorme para un logo que se muestra a 40-48 px de alto.
+Eso eran casi 600 KB de puro texto base64 (la mitad del archivo
+completo, que pesaba 1.2 MB) que el navegador tiene que descargar y
+procesar como parte del HTML en CADA carga de la página — a diferencia
+de un archivo de imagen normal, esto no se guarda en caché aparte, así
+que se repetía la descarga completa cada vez.
+
+De paso encontré un bug visual real causado por lo mismo: el logo
+del encabezado del juego tenía un filtro para verse blanco
+(`brightness(0) invert(1)`), pero como la imagen no tenía fondo
+transparente (fondo blanco sólido), ese filtro convertía TODO el
+rectángulo en un cuadro blanco — el logo del encabezado se veía como un
+cuadro blanco liso en vez del nombre "ChromaNom".
+
+### Qué se corrigió
+- Se extrajo el logo, se le quitó el fondo blanco (ahora es transparente
+  de verdad), se recortó al contenido real y se redujo a un tamaño
+  razonable para pantalla (nuevo archivo `logo-chromanom.png`, 7.8 KB —
+  antes eran 222 KB × 2 = 444 KB).
+- Las dos copias incrustadas en el HTML se reemplazaron por una sola
+  referencia a ese archivo externo (`<img src="logo-chromanom.png">`),
+  que el navegador sí guarda en caché entre cargas de página.
+- De regalo, esto corrigió el cuadro blanco del encabezado: ahora se ve
+  el logo en blanco correctamente, como estaba pensado.
+- Se agregó `logo-chromanom.png` a la lista de archivos que el Service
+  Worker guarda para que funcione offline (`sw.js`, versión de caché
+  subida a v8 para que se actualice sola).
+
+### Medición (antes de dar el problema por resuelto)
+Con una conexión simulada tipo wifi de salón saturado (~400 kbps, 150ms
+de latencia — similar a un salón con muchos celulares conectados a la
+vez): la carga de `juego.html` bajó de **~26 segundos a ~13
+segundos**, y el peso del archivo de **1.2 MB a 631 KB**.
+
+### Archivos
+- **`juego.html`**: las dos imágenes incrustadas reemplazadas por
+  referencias a `logo-chromanom.png`.
+- **`logo-chromanom.png`** (nuevo): logo con fondo transparente, 7.8 KB.
+- **`sw.js`**: `logo-chromanom.png` agregado a `ASSETS`; caché subida a
+  `chromanom-v8`.
+
+### Pendiente — mismo problema en otras páginas del sitio
+El mismo logo gigante está incrustado (una vez cada una, no duplicado)
+en `index.html`, `grupos.html` y `teoria.html` — esas páginas se
+beneficiarían del mismo arreglo, pero no se tocaron en esta sesión
+porque lo pedido era específicamente la portada del juego. Si se
+confirma que ayudó, vale la pena aplicar el mismo cambio ahí.
+
+### Pasos de despliegue
+Ninguno especial más allá del push a `main` — no se tocó
+`chromanom-analytics.gs`, así que no hace falta redesplegar ni
+recalcular nada. GitHub Pages sirve los archivos directo.
+
+---
+
 ## 2026-09-10 (12) — Tope explícito de 5.0 en la Nota
 
 ### Contexto
