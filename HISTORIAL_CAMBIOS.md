@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (16) — La corrección de "Aldeídos" faltaba en 29 lugares más de generador.html
+
+### Contexto
+Al confirmar visualmente la entrada (15) generando un ejercicio real en
+el navegador, encontré que mi búsqueda anterior solo cubría la forma en
+plural ("Aldeídos"). Repetí la búsqueda con la forma en singular
+("Aldeído") en todo el repositorio y aparecieron 29 casos más, todos en
+`generador.html`: 28 en el texto
+de "Aldeído terminal (−CHO)" que ve el alumno en cada ejercicio Tipo C
+(Análisis MDEC) de aldehídos — es decir, el error estaba en el
+contenido que efectivamente se genera para el estudiante, no solo en
+el checkbox — y 1 más en la tabla de "Referencia rápida" (sufijos por
+grupo funcional).
+
+### Qué se corrigió
+- **`generador.html`**: las 28 apariciones de "Aldeído terminal" en el
+  banco de moléculas (`MOLS`, usado por Tipo C) → "Aldehído terminal";
+  y "Alde&iacute;do (&minus;CHO)" en la tabla de referencia rápida →
+  "Aldeh&iacute;do (&minus;CHO)".
+
+Verifiqué con una búsqueda de la forma singular y plural, sin la h, en
+todos los `.html` del repositorio: ya no queda ninguna. También generé
+en el navegador (con Playwright) un ejercicio Tipo C de aldehídos para
+confirmar el texto correcto.
+
+### Pendiente
+Aparte encontré, sin buscarlo, que la página se recarga sola poco
+después de cargar (por el mecanismo normal de actualización del
+Service Worker en `pwa-install.js`: cuando se activa una versión nueva,
+hace `location.reload()`). Si esto coincide con el momento en que el
+estudiante o la docente está marcando casillas, se le borra toda la
+configuración sin aviso. No lo toqué porque no era lo que se pidió en
+esta sesión, pero vale la pena revisarlo aparte si se sigue reportando
+que "se desmarcan" casillas solas.
+
+---
+
 ## 2026-09-10 (15) — Completar la corrección "Aldeídos" → "Aldehídos" en reacciones.html
 
 ### Contexto
