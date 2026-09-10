@@ -7,6 +7,38 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (12) — Tope explícito de 5.0 en la Nota
+
+### Contexto
+Al revisar la fórmula nueva de la entrada anterior (11), la docente
+pidió dejar explícito que la Nota nunca debe pasar de 5.0, el máximo de
+la escala.
+
+### Qué se agregó
+Matemáticamente la fórmula actual ya no debería poder pasar de 5.0
+(los aciertos son un subconjunto de las preguntas respondidas, así que
+el % de acierto no puede pasar de 100%) — pero se agregó de todas
+formas un `Math.min(5, ...)` explícito al final de `calcularNotaJuego_`,
+como cinturón de seguridad ante cualquier dato anómalo (por ejemplo, si
+algún día una fila del Registro queda con más "Correctas" que "Total"
+por algún error de captura). Probé el caso normal (100% de acierto → 5)
+y un caso de dato corrupto a propósito (correctas mayor que preguntas)
+para confirmar que el tope funciona en ambos.
+
+### Archivos
+- **`chromanom-analytics.gs`**: `calcularNotaJuego_()` ahora limita el
+  resultado a 5 como máximo. `BUILD_TAG` actualizado a
+  `2026-09-10-nota-tope-5-minimo-22-sesiones`.
+
+### Pasos pendientes (manuales, en Apps Script)
+Mismos dos pasos de siempre, por separado:
+1. **Redesplegar**: Implementar → Administrar implementaciones → Nueva
+   versión.
+2. **Recalcular**: ▶ Ejecutar `recalcularAhora()` en el editor (o
+   esperar el disparador automático de 30 min).
+
+---
+
 ## 2026-09-10 (11) — Nota del periodo: mínimo de 22 sesiones, sin techo
 
 ### Contexto

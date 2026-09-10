@@ -134,7 +134,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-10-nota-sin-techo-minimo-22-sesiones';
+const BUILD_TAG = '2026-09-10-nota-tope-5-minimo-22-sesiones';
 
 function jsonOut_(obj) {
   return ContentService
@@ -422,16 +422,24 @@ function toISODate_(v) {
 //   PREGUNTAS_POR_SESION preguntas cada una) — así jugar menos de lo
 //   esperado sigue penalizando la nota, aunque el % de lo que sí jugó
 //   sea perfecto.
-// - Una vez alcanzado ese mínimo, no hay techo: si el estudiante sigue
-//   jugando y su % de acierto real mejora, la nota sigue subiendo sin
-//   límite de sesiones — no se congela por haber llegado a las sesiones
-//   esperadas mientras todavía quede periodo por delante.
+// - Una vez alcanzado ese mínimo, no hay techo de SESIONES: si el
+//   estudiante sigue jugando y su % de acierto real mejora, la nota
+//   sigue subiendo sin límite de sesiones — no se congela por haber
+//   llegado a las sesiones esperadas mientras todavía quede periodo por
+//   delante.
+// Ojo: "sin techo de sesiones" no es lo mismo que "sin techo en la
+// nota" — la nota SÍ tiene un límite fijo, que es el máximo de la
+// escala (5.0). Matemáticamente correctasPeriodo nunca debería superar
+// a preguntasAjustadas (son aciertos dentro de lo respondido), así que
+// pctAcierto no debería pasar de 1 — pero se deja el Math.min(5, ...)
+// como cinturón de seguridad explícito, no como algo que se espere que
+// dispare en uso normal.
 function calcularNotaJuego_(correctasPeriodo, preguntasPeriodo, sesionesJugadas) {
   const sesionesFaltantes = Math.max(0, SESIONES_ESPERADAS - sesionesJugadas);
   const preguntasAjustadas = preguntasPeriodo + sesionesFaltantes * PREGUNTAS_POR_SESION;
   if (!preguntasAjustadas) return 0;
   const pctAcierto = correctasPeriodo / preguntasAjustadas;
-  return Math.round(pctAcierto * 5 * 10) / 10;
+  return Math.min(5, Math.round(pctAcierto * 5 * 10) / 10);
 }
 
 // ── Colapsa filas duplicadas del mismo código de sesión ─────────────────
