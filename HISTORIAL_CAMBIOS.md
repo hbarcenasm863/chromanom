@@ -7,6 +7,42 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (25) — Agregar el 1,4-dioxano como ejemplo (con nomenclatura paso a paso) en Grupos
+
+### Contexto
+Después de corregir la regla de "Éteres cíclicos: prefijo oxa−" en la
+sesión anterior (que hasta entonces mostraba mal el ejemplo), la docente
+pidió específicamente que el 1,4-dioxano se quedara dentro de esa regla,
+con un ejemplo claro y su nomenclatura explicada paso a paso — a diferencia
+de la sesión anterior en `generador.html`, donde se había sacado el dioxano
+por no mostrar el conteo de carbonos; aquí en `grupos.html` el pedido es lo
+contrario: dejarlo, pero bien explicado.
+
+### Qué se cambió (`grupos.html`)
+- Se agregó un 4° dibujo a `MOLS`: `dioxano()` — el mismo hexágono de
+  `oxaciclohexano` pero con DOS oxígenos, uno en cada vértice opuesto
+  (posiciones 1 y 4).
+- El texto de la regla 5 ahora explica, después de los tres ejemplos de un
+  solo oxígeno, qué pasa cuando el ciclo tiene más de uno: se usa el
+  prefijo di− (o tri−, etc.), y se numera dando los localizadores más bajos
+  a los oxígenos. Se agregó una explicación paso a paso con el 1,4-dioxano:
+  1) se parte del ciclohexano; 2) se reemplazan DOS −CH₂− opuestos por −O−;
+  3) se numera — como el anillo es simétrico, los oxígenos quedan en C1 y
+  C4 sin importar el sentido; 4) se arma el nombre 1,4-dioxaciclohexano,
+  contraído en el uso común a 1,4-dioxano.
+- Se agregó el dibujo del 1,4-dioxano como 4° ejemplo visual de la regla
+  (con su desglose: 1,4-di / oxa / ciclohexan / o) y un ejercicio de
+  práctica nuevo (acepta "1,4-dioxano", "dioxano" y "1,4-dioxaciclohexano").
+- Verificado con Playwright: el dibujo se ve bien (los dos oxígenos
+  enfrentados en el anillo), el texto explicativo se lee completo, y el
+  ejercicio nuevo (14/14) acepta "1,4-dioxano" como respuesta correcta.
+
+### Pendiente / sin resolver
+Ninguno. No hace falta ningún paso de despliegue: `grupos.html` se sirve
+directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (24) — Corregir el ejemplo de "Éteres cíclicos: prefijo oxa−" en Grupos
 
 ### Contexto
