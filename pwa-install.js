@@ -293,6 +293,7 @@
 
     banner.querySelector('#pwa-upd-btn').addEventListener('click', () => {
       banner.remove();
+      updateConfirmedByUser = true;
       worker.postMessage('SKIP_WAITING');
     });
     banner.querySelector('#pwa-upd-close').addEventListener('click', () => {
@@ -300,10 +301,18 @@
     });
   }
 
-  // Cuando el SW activo cambia (tras skipWaiting) → recarga la página
+  // Cuando el SW activo cambia → recarga la página, PERO solo si el cambio
+  // vino de que el usuario pulsó "Actualizar" en el banner (skipWaiting).
+  // OJO: 'controllerchange' también se dispara la PRIMERA vez que se instala
+  // el Service Worker en un dispositivo (self.clients.claim() en sw.js hace
+  // que tome control de la pestaña ya abierta, aunque no haya ninguna versión
+  // previa que "actualizar"). Sin este guard, cualquier primera visita
+  // recargaba la página sola a los pocos cientos de ms de abrirla — si el
+  // estudiante o la docente ya habían empezado a marcar algo, se les borraba.
   let reloading = false;
+  let updateConfirmedByUser = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (reloading) return;
+    if (reloading || !updateConfirmedByUser) return;
     reloading = true;
     location.reload();
   });

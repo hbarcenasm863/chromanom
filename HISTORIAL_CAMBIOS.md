@@ -7,6 +7,65 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (17) — La página se recargaba sola en la primera visita de cada dispositivo
+
+### Contexto
+Al revisar el typo de "Aldeídos" de la entrada anterior, encontré (sin
+buscarlo) que la página a veces se recarga sola justo después de
+abrirla, lo que puede borrar checkboxes recién marcados. Se lo conté a
+la docente y pidió que lo revisara.
+
+### La causa (reproducida con Playwright antes de tocar nada)
+Con un perfil de navegador nuevo (simula el celular/computador de un
+estudiante o docente abriendo el sitio por primera vez, o cualquiera
+que haya borrado datos del sitio), la página navega dos veces en vez de
+una: la carga normal, y ~100-300 ms después una recarga automática no
+pedida por nadie. Con un perfil que ya tenía el sitio instalado de
+antes, esto NO pasaba — solo ocurre en la primera visita.
+
+La causa: `self.clients.claim()` en `sw.js` (evento `activate`) hace
+que el Service Worker recién instalado tome control de la pestaña que
+ya estaba abierta — esto es normal y deseable, pero pasa también la
+PRIMERISIMA vez que se instala, sin que exista ninguna versión anterior
+que "actualizar". Ese cambio de control dispara el evento
+`controllerchange`, y el listener en `pwa-install.js` reaccionaba a
+CUALQUIER `controllerchange` recargando la página de inmediato — sin
+distinguir "primera instalación" de "el usuario aceptó actualizar" en
+el banner "Nueva versión disponible".
+
+(Esto es un problema distinto al que ya se había corregido antes —ver
+el comentario en `sw.js` sobre no llamar `self.skipWaiting()` en
+`install`—, aunque relacionado: aquel evitaba la recarga automática en
+actualizaciones reales; este cubre el caso de la primera instalación.)
+
+### Qué se corrigió
+- **`pwa-install.js`**: el listener de `controllerchange` ahora solo
+  recarga la página si el usuario ya pulsó "Actualizar" en el banner
+  (se guarda en una bandera `updateConfirmedByUser`, activada justo
+  antes de mandar `SKIP_WAITING` al Service Worker). Cualquier otro
+  `controllerchange` (como el de la primera instalación) ya no
+  provoca recarga.
+
+### Verificación
+Con Playwright, antes del cambio: perfil nuevo → 2 navegaciones (carga
++ recarga sola). Después del cambio: perfil nuevo → 1 navegación (sin
+recarga), y el checkbox que se marca justo después de cargar la página
+ya no se pierde. Además comprobé que el flujo real de actualización
+sigue funcionando: serví una versión con la caché renombrada
+(simulando un despliegue nuevo), apareció el banner "Nueva versión
+disponible", y al pulsar "Actualizar" sí recargó y activó la caché
+nueva — solo cuando el usuario lo pide.
+
+### Pasos pendientes
+Ninguno — `pwa-install.js` se sirve directo por GitHub Pages junto con
+las demás páginas, el cambio queda activo en cuanto se hace push a
+`main`. Como el Service Worker en sí (`sw.js`) no cambió, los
+dispositivos que ya tienen el sitio instalado recibirán este arreglo
+la próxima vez que se detecte una actualización normal (no hace falta
+ningún paso manual).
+
+---
+
 ## 2026-09-10 (16) — La corrección de "Aldeídos" faltaba en 29 lugares más de generador.html
 
 ### Contexto
