@@ -7,6 +7,89 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (18) — Auditoría de ortografía y nomenclatura IUPAC en todo el sitio
+
+### Contexto
+La docente pidió revisar la ortografía de las 7 páginas del sitio
+(nomenclatura IUPAC correcta y español de Colombia, incluido el texto
+que se lee en voz alta), a raíz del typo de "Aldeídos" que encontró.
+Lancé una auditoría en segundo plano sobre las 7 páginas; esta entrada
+recoge las correcciones aplicadas a partir de ese reporte. (Nota:
+mientras esta auditoría corría, otra sesión de Claude Code trabajó en
+paralelo en el mismo repositorio y ya corrigió — con commits propios —
+el resto de apariciones de "Aldeído/Aldeídos" sin h en `generador.html`
+y `reacciones.html`; esta entrada no repite esas, solo cubre lo nuevo
+que encontró la auditoría.)
+
+### Hallazgo principal: bloque de tildes faltantes en grupos.html
+Las reglas de **Ésteres, Amidas, Nitrilos y Aminas** en `grupos.html`
+(las tarjetas de reglas, incluido el texto que se lee en voz con el
+botón 🔊) tenían un patrón sistemático de tildes faltantes — a
+diferencia del resto del archivo (Alcanos–Anhídridos), que sí las
+llevaba bien. Se corrigieron ~35 palabras en 14 reglas: "ácido",
+"éster/ésteres", "cíclico/cíclica/cíclicos/cíclicas", "número",
+"numeración", "terminación", "nitrógeno", "carboxílico", "también",
+"más", "ambigüedad", "implícito".
+
+### Error de nomenclatura real (no solo tilde)
+En la regla "Aminas N-sustituidas en ciclos" de `grupos.html`, el
+ejemplo resaltado mostraba **"N-metilciclohexanoamina"** y
+**"N,N-dimetilciclopentanoamina"** (con una "o" de más) — la propia
+regla, dos frases antes, ya daba la forma correcta. Se corrigió a
+**"N-metilciclohexanamina"** y **"N,N-dimetilciclopentanamina"**: la
+"o" final de "ciclohexano"/"ciclopentano" se elide ante el sufijo
+"-amina", que empieza por vocal.
+
+### Otros errores de nomenclatura puntuales
+- **`referencia.html`**: "iodo-" → **"yodo-"** (el prefijo en
+  español/IUPAC es con y, no con i — quedó inconsistente con otra fila
+  de la misma tabla que ya decía "yodo-" bien). También
+  "hex-1-en" → **"hex-1-eno"** (le faltaba la "o" final; tal como
+  estaba no era un nombre IUPAC válido).
+- **`reacciones.html`**: "del metilcetona" → **"de la metilcetona"**
+  (concordancia de género, en un paso de mecanismo que se lee en voz);
+  "molozonida"/"ozonida" → **"molozónida"/"ozónida"** (esdrújulas, en
+  3 lugares, dos de ellos en texto que se lee en voz — quedó
+  inconsistente con la etiqueta del propio dibujo SVG del paso, que sí
+  las llevaba bien).
+- **`juego.html`**: una opción incorrecta (distractor) de la pregunta
+  sobre TNT decía **"tetran itrotolueno"** (con un espacio de más) →
+  **"tetranitrotolueno"**.
+
+### Qué NO se encontró
+La auditoría no encontró vocabulario de España (vosotros, "ordenador",
+"tío", "vale", etc.) — el registro de español colombiano ("ustedes",
+tono neutro) está bien logrado en todo el sitio. Tampoco encontró
+problemas en `teoria.html` ni `index.html`.
+
+### Archivos
+- **`grupos.html`**: ~35 tildes + 2 correcciones de nomenclatura real
+  (elisión de "o" en ciclohexanamina/ciclopentanamina).
+- **`reacciones.html`**: concordancia de género + 3 tildes en
+  "molozónida"/"ozónida".
+- **`referencia.html`**: "yodo-" y "hex-1-eno".
+- **`juego.html`**: distractor "tetranitrotolueno" sin espacio.
+
+Verificado con un parser de JavaScript aparte (sin depender del
+navegador) que los 4 archivos siguen siendo HTML/JS válido después de
+los cambios, y releído el texto final de las reglas corregidas en
+`grupos.html` para confirmar que las tildes y la corrección de
+nomenclatura quedaron exactamente donde debían.
+
+### Pendiente
+Quedan dos hallazgos menores de la auditoría, de prioridad baja, sin
+tocar a propósito: dos dobles espacios cosméticos (uno en
+`generador.html`, otro en `reacciones.html`) y una variante con espacio
+mal puesto dentro del arreglo de respuestas toleradas de
+`juego.html:3298` (no afecta lo que ve el estudiante como respuesta
+correcta, solo amplía qué se acepta al calificar).
+
+### Pasos de despliegue
+Ninguno especial — solo push a `main`, no se tocó
+`chromanom-analytics.gs`.
+
+---
+
 ## 2026-09-10 (17) — La página se recargaba sola en la primera visita de cada dispositivo
 
 ### Contexto
