@@ -305,7 +305,7 @@ body{
   margin:10px 0;
   min-height:90px;
 }
-.ex-svg-wrap svg{height:90px;width:auto;max-width:100%}
+.ex-svg-wrap svg{height:auto;width:auto;max-width:100%}
 .ex-answer-line{
   display:flex;align-items:center;gap:8px;
   margin-top:14px;
@@ -489,9 +489,6 @@ body{
 .btn-pdf{background:#1a7a3c;color:#fff;box-shadow:0 3px 12px rgba(26,122,60,.25)}
 .btn-pdf:hover{background:#145f2f}
 
-/* Benzene SVGs need more vertical room (substituent above ring inflates viewBox) */
-.ex-svg-tall svg{height:160px}
-
 .ak-item{
   display:flex;align-items:flex-start;gap:14px;
   padding:12px 14px;
@@ -570,10 +567,12 @@ body{
      no cabía igual de apretado. */
 
   /* SVG sizing — con una sola columna hay ancho de sobra para que las
-     estructuras se vean con claridad */
+     estructuras se vean con claridad. El ancho de cada estructura se
+     calcula en JS (ver generate()) a partir de su viewBox real, así que
+     aquí solo dejamos que la altura siga la proporción y evitamos que
+     se desborde del ancho disponible. */
   .ex-svg-wrap{min-height:0;margin:2px 0;display:flex;justify-content:center}
-  .ex-svg-wrap svg{height:auto !important;max-height:105px;width:auto;max-width:100%}
-  .ex-svg-tall svg{max-height:160px !important}
+  .ex-svg-wrap svg{height:auto !important;width:auto;max-width:100%}
 
   /* Draw box — compact */
   .ex-draw-box{width:100%;height:70px;margin:3px auto 0}
@@ -3125,14 +3124,13 @@ function renderSheet(){
       const {mol, tipo}=entry;
       const svgHtml=getSVG(mol.key);
       if(tipo==='A'){
-        const svgWrapCls='ex-svg-wrap'+(mol.topic==='benceno'?' ex-svg-tall':'');
         exHtml=`<div class="exercise tipo-a">
           <div class="ex-header">
             <span class="ex-num">${num}.</span>
             <span class="ex-badge badge-a">Nomenclatura</span>
             <span class="ex-instruction">Escribe el nombre IUPAC de la siguiente estructura:</span>
           </div>
-          <div class="${svgWrapCls}">${svgHtml}</div>
+          <div class="ex-svg-wrap">${svgHtml}</div>
           <div class="ex-answer-line">
             <span>Nombre IUPAC:</span>
             <div class="ans-line"></div>
@@ -3164,6 +3162,24 @@ function renderSheet(){
 
   });
 
+  // Cada estructura tiene una proporción distinta (una cadena larga es ancha
+  // y baja; un anillo con un sustituyente es angosto y alto). Si a todas se
+  // les impusiera la misma altura fija, las angostas quedarían diminutas e
+  // ilegibles. En vez de eso, se calcula el ancho de cada una a partir de su
+  // viewBox real, ajustándola dentro de una caja máxima (ancho×alto) y
+  // dejando que la altura siga la proporción — así cada molécula usa el
+  // espacio disponible de la forma más legible posible.
+  list.querySelectorAll('.ex-svg-wrap svg').forEach(svg=>{
+    const vb=svg.getAttribute('viewBox');
+    if(!vb)return;
+    const parts=vb.trim().split(/\s+/).map(Number);
+    const vw=parts[2],vh=parts[3];
+    if(!vw||!vh)return;
+    const W_MAX=480,H_MAX=180,SCALE_CAP=1.5;
+    const scale=Math.min(W_MAX/vw,H_MAX/vh,SCALE_CAP);
+    svg.style.width=(vw*scale).toFixed(1)+'px';
+    svg.style.height='auto';
+  });
 
   sheet.className='show';
   document.getElementById('action-bar').className='action-bar show';

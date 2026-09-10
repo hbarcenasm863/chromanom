@@ -7,6 +7,58 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (23) — Las estructuras del PDF ya no salen diminutas en algunos ejercicios
+
+### Contexto
+La docente compartió capturas de una hoja generada en PDF: en el ejercicio 2
+la estructura salía casi ilegible (muy pequeña), y además sobraba bastante
+espacio en blanco al final de las hojas.
+
+### Causa (confirmada probando con Playwright/Chromium, no solo leyendo el código)
+Cada estructura tiene una proporción distinta: una cadena larga es ancha y
+baja, pero un anillo con un solo sustituyente (o un ácido con el −COOH hacia
+arriba y abajo) es angosto y alto. El CSS de impresión le imponía a **todas**
+la misma altura máxima fija (105px, o 160px solo para benceno) y dejaba que
+el ancho se ajustara "en proporción" — así que a las estructuras angostas y
+altas el ancho les quedaba reducido a casi nada (medí anchos reales de
+41–65px para cosas como paracetamol, ácido benzoico, ácido oxálico, ciertos
+derivados de ciclohexano, etc., contra 300–450px de las cadenas largas).
+
+### Qué se cambió (`generador.html`)
+- En `generate()`, después de insertar los ejercicios en la hoja, se agregó
+  un paso que lee el `viewBox` real de cada estructura (Tipo A) y calcula su
+  ancho ajustándola dentro de una caja de hasta 480×180px (con un tope de
+  1.5× para no agrandar de más las moléculas ya pequeñas) — dejando que la
+  altura siga la proporción real, en vez de imponer una altura fija a
+  todas por igual.
+- Se quitó la regla especial `.ex-svg-tall` (que solo aplicaba más alto a
+  "benceno" y aun así se quedaba corta para casos como el paracetamol) — ya
+  no hace falta, el cálculo ahora es por estructura, no por tema.
+- CSS de pantalla e impresión simplificado: el ancho/alto de cada `<svg>` ya
+  no se fuerza por CSS a un valor fijo; se respeta el que calculó el JS,
+  con `max-width:100%` como tope de seguridad.
+- Verificado con Playwright: antes del cambio, el ejercicio más angosto de
+  una hoja de prueba medía 41–58px de ancho; después, el más angosto midió
+  ~100px, y la mayoría 170–480px. Se revisó tanto la vista de pantalla como
+  el PDF exportado.
+
+### Sobre el espacio en blanco al final de las hojas
+Es, en parte, inevitable: la **última** página de cualquier hoja va a tener
+espacio libre si el contenido no alcanza a llenarla completa (no hay forma
+de evitarlo sin rellenar con contenido de más). Medí la paginación real: las
+páginas intermedias quedan bastante bien aprovechadas (menos de 40px libres
+en la mayoría), y ya no hay estructuras que "desperdicien" su propio espacio
+por salir chiquitas. Puede quedar algo de espacio de sobra en alguna página
+intermedia según qué ejercicios caigan juntos (varía según el tema y tipo
+elegidos) — si al imprimir se ve mucho espacio suelto en un caso puntual,
+decírmelo con ese caso para ajustarlo más.
+
+### Pendiente / sin resolver
+Ninguno de fondo. No hace falta ningún paso de despliegue:
+`generador.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (22) — Reemplazar el 1,4-dioxano por oxirano en Éteres
 
 ### Contexto
