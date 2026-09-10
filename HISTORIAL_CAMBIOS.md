@@ -7,6 +7,64 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (21) — Auditoría de nomenclatura IUPAC en `generador.html`
+
+### Contexto
+El profesor reportó que le había salido un ejercicio "pentan-3-ol" y pensaba
+que era imposible (creía que debía renombrarse a "pentan-2-ol"). Pedí una
+auditoría completa de nomenclatura antes de tocar nada.
+
+### Verificación del caso reportado
+**Pentan-3-ol SÍ es correcto y no se tocó.** En una cadena de 5 carbonos, el
+−OH en el carbono central es C3 se numere desde cualquiera de los dos
+extremos (5−3+1=3): no existe una numeración que dé un localizador más bajo.
+Es el nombre real de un alcohol simétrico (3-pentanol / dietilcarbinol). Se
+confirmó que la estructura dibujada por `pentan3ol()` coincide con el nombre
+en ambos archivos (`generador.html` y `juego.html`).
+
+### Auditoría completa (subagente + verificación manual)
+Se revisaron ~360 compuestos con localizador numérico de `generador.html`
+(estructura real contra nombre declarado) y ~130 pares estructura/respuesta
+de `juego.html`. Se encontraron y corrigieron:
+
+**Errores reales de numeración (2), solo en `generador.html`:**
+- Clave `dosDosMetilHex4ino` → renombrada a `cincoCincoDimetilHex2ino`.
+  Nombre incorrecto "2,2-dimetilhex-4-ino"; el triple enlace (grupo
+  principal) debe llevar el localizador más bajo → correcto:
+  **5,5-dimetilhex-2-ino**.
+- Clave `acidoTresMetilhexanoico` → renombrada a `acidoCuatroMetilhexanoico`.
+  Nombre incorrecto "ácido 3-metilhexanoico"; contando desde el −COOH (que
+  siempre es C1), el metilo está en C4, no C3 → correcto:
+  **ácido 4-metilhexanoico**.
+
+**Nombres triviales sin su equivalente IUPAC sistemático (a pedido del
+profesor: "que sean nombres IUPAC todos"), en `generador.html`:**
+- Tarjetas de descomposición: `metilamina` (+ iupac: metanamina),
+  `trimetilamina` (+ iupac: N,N-dimetilmetanamina), `trietilamina`
+  (+ iupac: N,N-dietiletanamina).
+- Respuestas del banco de reacciones (`BANCO_RXN`): se agregó el nombre
+  sistemático junto al trivial en acetofenona (1-feniletan-1-ona),
+  1-feniletanol→1-feniletan-1-ol (le faltaba el localizador explícito),
+  diacetona alcohol (4-hidroxi-4-metilpentan-2-ona), óxido de mesitilo
+  (4-metilpent-3-en-2-ona), acetato de etilo/potasio/metilo/sodio
+  (etanoato de ...), alcohol bencílico (fenilmetanol), bencilamina
+  (fenilmetanamina, 3 apariciones), acetonitrilo (etanonitrilo), ácido
+  acético (ácido etanoico, 4 apariciones), formaldehído (metanal).
+
+No se tocaron nombres triviales que ya tenían su IUPAC al lado (ácido
+salicílico, aspirina, paracetamol, ácido pícrico, anisol, vainillina, TNT) ni
+casos donde el nombre común es también el nombre IUPAC retenido (fenol,
+acetona ya emparejada con propanona en su propia entrada, etc.).
+
+### Pendiente / sin resolver
+Ninguno. `juego.html` no se modificó — la auditoría no encontró errores ahí
+(ya usa el nombre sistemático como respuesta principal en los casos de
+aminas trimetiladas/bencílicas, con el trivial solo como alternativa
+aceptada). No hace falta ningún paso de despliegue: `generador.html` se
+sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (20) — Los nombres de los estudiantes ya no viven en el código público
 
 ### Contexto
