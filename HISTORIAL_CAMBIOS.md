@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (13) — Corregir typo "Aldeídos" → "Aldehídos" en el generador
+
+### Contexto
+La docente reportó, con una captura del Generador de Ejercicios, que
+"no dice aldehidos como debería". El checkbox se veía marcado y en la
+posición correcta, así que al principio no era obvio qué estaba mal;
+al preguntarle directamente confirmó que era un error de escritura: el
+texto decía "Aldeídos" (sin la "h") en vez de "Aldehídos".
+
+### Qué se corrigió
+Faltaba la "h" de "Aldehídos" en tres lugares del repositorio:
+- **`generador.html`**: el checkbox de grupos funcionales (línea ~663)
+  y el checkbox del filtro de reacciones de Tipo D (línea ~724), ambos
+  con `Alde&iacute;dos` → corregidos a `Aldeh&iacute;dos`.
+- **`reacciones.html`**: una explicación de la reacción de formación de
+  cianohidrina ("Aldeídos más reactivos que cetonas") → corregida a
+  "Aldehídos más reactivos que cetonas".
+
+Revisé con Playwright que no quedara el mismo typo en ningún otro
+archivo `.html`/`.gs` del repositorio, y confirmé visualmente en el
+navegador que el checkbox ahora muestra "Aldehídos" bien escrito.
+
+### Pasos pendientes
+Ninguno — ambos archivos (`generador.html`, `reacciones.html`) se
+sirven directo por GitHub Pages, así que el cambio queda activo en
+cuanto se hace push a `main`.
+
+---
+
 ## 2026-09-10 (12) — Tope explícito de 5.0 en la Nota
 
 ### Contexto
