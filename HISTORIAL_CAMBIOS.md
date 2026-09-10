@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (14) — Corrección ortográfica: "Aldeídos" → "Aldehídos"
+
+### Contexto
+La docente pidió revisar la ortografía de todo el sitio (nomenclatura
+IUPAC correcta y español de Colombia, incluido el texto que se lee en
+voz alta). Mandó una captura de `generador.html` señalando el error.
+Lancé además una revisión más amplia del resto del sitio en segundo
+plano (aún en curso); esta entrada cubre solo el primer error puntual
+que ya se corrigió mientras esa revisión termina.
+
+### El error
+En "Generador de Ejercicios", la casilla del grupo funcional decía
+**"Aldeídos"** (sin H) en vez de **"Aldehídos"** (con H, como
+corresponde: viene de "aldehído"). Aparecía dos veces en
+`generador.html`, codificado como entidad HTML (`Alde&iacute;dos`): una
+en la lista de grupos para generar ejercicios de nomenclatura, y otra
+en la lista de grupos para ejercicios de reacciones.
+
+### Archivos
+- **`generador.html`**: `Alde&iacute;dos` → `Aldeh&iacute;dos` en las
+  2 apariciones. Verificado visualmente en el navegador.
+
+### Pendiente
+La revisión general del resto de páginas (ortografía, nomenclatura
+IUPAC, registro de español colombiano, y el texto leído en voz alta en
+`reacciones.html`/`grupos.html`) sigue en curso — se agregará una
+entrada aparte con lo que arroje esa revisión.
+
+---
+
 ## 2026-09-10 (13) — Portada lenta y pesada: logo gigante incrustado duplicado
 
 ### Contexto
