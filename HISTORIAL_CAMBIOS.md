@@ -7,6 +7,66 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-10 (11) — Nota del periodo: mínimo de 22 sesiones, sin techo
+
+### Contexto
+Al explicarle la fórmula de la Nota (la de la sesión anterior, con
+"factor de sesiones" con tope en 1), la docente hizo notar un problema:
+ya tiene estudiantes que jugaron más de las 22 sesiones esperadas y
+todavía queda más de un mes de periodo — con el tope en 1, esos
+estudiantes dejaban de ver subir su nota por seguir practicando, lo cual
+le pareció injusto. Pidió el cambio contrario: que haya un **mínimo** de
+22 sesiones (las que falten deberían contar como 0), pero **sin
+máximo** — jugar de más nunca debería dejar de poder subir la nota.
+
+### Cómo queda la fórmula ahora
+```
+sesiones que faltan  =  máximo(0, 22 − sesiones jugadas)
+preguntas ajustadas  =  preguntas respondidas + (sesiones que faltan × 20)
+% de acierto         =  correctas / preguntas ajustadas
+Nota = % de acierto × 5     (redondeada a 1 decimal)
+```
+
+- Si un estudiante **no ha llegado** a 22 sesiones, cada sesión que le
+  falte se cuenta como si la hubiera jugado y fallado TODA (0 aciertos
+  de 20 preguntas) — así jugar menos de lo esperado sigue penalizando la
+  nota, aunque lo poco que jugó lo haya hecho perfecto.
+- Una vez que **llega o pasa** las 22 sesiones, ya no se agrega ninguna
+  penalización — la nota queda determinada por su % de acierto real
+  sobre TODO lo que ha jugado en el periodo, sin importar cuánto sea.
+  Si sigue practicando y su % de acierto mejora, la nota sigue subiendo;
+  si baja, la nota baja — nunca se "congela".
+
+Ejemplo: un estudiante con 30 sesiones, 550 preguntas y 450 correctas
+(81.8% de acierto) tiene Nota 4.1. Si sigue practicando hasta 40
+sesiones y su acierto sube a 86.7%, la Nota sube a 4.3 — antes, con el
+tope en 1, ambos casos habrían dado el mismo resultado porque el factor
+de sesiones ya estaba "topado" desde la sesión 22.
+
+Verifiqué la fórmula con varios casos (0 sesiones, exactamente 22, más
+de 22 con mejora de acierto, muchas sesiones con acierto bajo, una sola
+sesión perfecta) antes de darla por buena.
+
+### Archivos
+- **`chromanom-analytics.gs`**: se reescribió `calcularNotaJuego_()` (ya
+  no usa un "factor de sesiones" con tope) y se agregó la constante
+  `PREGUNTAS_POR_SESION = 20` (tamaño estándar de una sesión, usado para
+  calcular cuánto penalizar las sesiones faltantes). `BUILD_TAG`
+  actualizado a `2026-09-10-nota-sin-techo-minimo-22-sesiones`.
+
+### Pasos pendientes (manuales, en Apps Script)
+Este cambio SÍ toca `chromanom-analytics.gs` — hacen falta los dos pasos
+de siempre, por separado:
+1. **Redesplegar**: Implementar → Administrar implementaciones → Nueva
+   versión (para que el Web App use este código nuevo).
+2. **Recalcular**: ▶ Ejecutar `recalcularAhora()` en el editor (o
+   esperar el disparador automático de 30 min) — la hoja "Estadísticas"
+   y "Curso X" no se re-escriben solas con el redespliegue, necesitan
+   este paso aparte para que las notas ya guardadas se recalculen con la
+   fórmula nueva.
+
+---
+
 ## 2026-09-09 (10) — Rediseño del menú de la portada: todos los modos visibles
 
 ### Contexto

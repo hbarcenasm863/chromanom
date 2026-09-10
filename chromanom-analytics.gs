@@ -35,6 +35,10 @@ const HEADERS = [
 const FECHA_INICIO_PERIODO = '2026-08-10';
 const FECHA_FIN_PERIODO    = '2026-10-30';
 const SESIONES_ESPERADAS   = 22;
+// Tamaño estándar de una sesión (ver "const n=Math.min(pool.length,20)" en
+// juego.html) — se usa para penalizar las sesiones que le falten a un
+// estudiante para llegar a SESIONES_ESPERADAS (ver calcularNotaJuego_).
+const PREGUNTAS_POR_SESION = 20;
 
 // ── Categorías de práctica "por grupo" (desglose adicional en Estadísticas) ──
 // Las mismas claves de nivel que usa juego.html en NIVEL_TOPICS/openLevelModal,
@@ -130,7 +134,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-08-nota-ponderada-y-desglose-practicas';
+const BUILD_TAG = '2026-09-10-nota-sin-techo-minimo-22-sesiones';
 
 function jsonOut_(obj) {
   return ContentService
@@ -406,27 +410,28 @@ function toISODate_(v) {
 }
 
 // ── Calcula la nota de juego (0-5) dentro del periodo ───────────────────
-// Pondera por PREGUNTAS respondidas, no por sesiones: antes cada sesión
-// aportaba su propio %Acierto/20 sin importar cuántas preguntas tuviera,
-// así que una práctica corta de 3 preguntas al 100% pesaba exactamente
-// igual que una sesión completa de 20 preguntas al 100% — inflando la
-// nota de quien mezcla muchas prácticas cortas y fáciles con pocas
-// sesiones completas. Ahora se usa el % de acierto REAL del periodo
-// (total de preguntas correctas / total de preguntas respondidas, sin
-// importar en cuántas sesiones se repartieron), multiplicado por qué
-// tanto del número de sesiones esperadas ya se jugó (tope en 1: jugar de
-// más no sigue subiendo la nota, solo termina de definir el %Acierto).
-// - correctasPeriodo / preguntasPeriodo: % de acierto real, ponderado por
-//   volumen de preguntas.
-// - sesionesJugadas / SESIONES_ESPERADAS (tope en 1): mientras no se
-//   alcancen las sesiones esperadas, lo que falte por jugar sigue
-//   bajando la nota — jugar solo un puñado de preguntas muy fácil no
-//   basta para sacar 5.0 si aún faltan sesiones por completar.
+// Se usa el % de acierto REAL del periodo (total de preguntas correctas /
+// total de preguntas respondidas, sin importar en cuántas sesiones se
+// repartieron) — una práctica corta de 3 preguntas al 100% no pesa igual
+// que una sesión completa de 20 preguntas al 100%, porque ambas entran a
+// la misma bolsa de correctas/preguntas en vez de promediarse por sesión.
+//
+// Hay un MÍNIMO de SESIONES_ESPERADAS sesiones, pero NO un máximo:
+// - Si el estudiante NO ha llegado a esas sesiones, las que le faltan se
+//   cuentan como si las hubiera jugado y fallado TODAS (0 aciertos de
+//   PREGUNTAS_POR_SESION preguntas cada una) — así jugar menos de lo
+//   esperado sigue penalizando la nota, aunque el % de lo que sí jugó
+//   sea perfecto.
+// - Una vez alcanzado ese mínimo, no hay techo: si el estudiante sigue
+//   jugando y su % de acierto real mejora, la nota sigue subiendo sin
+//   límite de sesiones — no se congela por haber llegado a las sesiones
+//   esperadas mientras todavía quede periodo por delante.
 function calcularNotaJuego_(correctasPeriodo, preguntasPeriodo, sesionesJugadas) {
-  if (!preguntasPeriodo) return 0;
-  const pctAcierto = correctasPeriodo / preguntasPeriodo;
-  const factorSesiones = Math.min(1, sesionesJugadas / SESIONES_ESPERADAS);
-  return Math.round(pctAcierto * 5 * factorSesiones * 10) / 10;
+  const sesionesFaltantes = Math.max(0, SESIONES_ESPERADAS - sesionesJugadas);
+  const preguntasAjustadas = preguntasPeriodo + sesionesFaltantes * PREGUNTAS_POR_SESION;
+  if (!preguntasAjustadas) return 0;
+  const pctAcierto = correctasPeriodo / preguntasAjustadas;
+  return Math.round(pctAcierto * 5 * 10) / 10;
 }
 
 // ── Colapsa filas duplicadas del mismo código de sesión ─────────────────
