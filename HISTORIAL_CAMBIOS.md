@@ -7,6 +7,86 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-11 (26) — Ofuscar las respuestas correctas en el código fuente de `juego.html`
+
+### Contexto
+La docente preguntó si los estudiantes podían ver las respuestas correctas
+mirando el código fuente del juego (Ctrl+U). Confirmé que sí: todo el banco
+de preguntas vive como texto plano en el JS del propio `juego.html`, con el
+nombre correcto directamente en campos como `ans`, `accepted`, `expl`,
+`hints`, etc. Le expliqué que una solución robusta requeriría mover la
+validación al backend (Apps Script), y pidió algo más simple. Acordamos:
+ofuscar (no cifrar de verdad — no es posible del todo en un sitio 100%
+estático) los campos que revelan la respuesta, para que dejen de leerse a
+simple vista en "Ver código fuente".
+
+### Qué se cambió (`juego.html`)
+
+**Ofuscación de datos (script de una sola vez, no hay build step nuevo):**
+Se escribió un script de Node (no se guardó en el repo, era de un solo uso)
+que recorrió los 4 bancos de preguntas que sí contienen una respuesta oculta
+— `QBANK`, `QBANK_EXTRA`, `QBANK_REACCIONES`, `QBANK_RXNQ` (685 preguntas en
+total) — y codificó en base64 los campos que delatan la respuesta antes de
+que el alumno conteste: `mol` (la clave con la que se dibuja la estructura —
+a menudo el nombre IUPAC concatenado, ej. `pentan3ol`), `ans`, `accepted`,
+`expl`, `hints`, `correct`, `producto`, `mol_p`, y dentro de los objetos
+anidados `highlight.cls` y cada `parts[].t` (los fragmentos del desglose
+MDEC, que juntos deletrean el nombre). Justo después de cada arreglo se
+agregó una función `_decodeQBank(...)` que los decodifica una sola vez, al
+cargar la página, antes de que corra cualquier otra lógica — así toda la
+comparición de respuestas (`norm(ans)===norm(q.ans)`, etc.) sigue
+funcionando exactamente igual que antes, sin tocar esa lógica.
+
+Se dejaron sin tocar, a propósito:
+- `opts` (las 4 opciones de opción múltiple) — el alumno necesita leerlas
+  para elegir; solo `ans` dice cuál es la correcta, y ese sí quedó oculto.
+- `name` e `highlight.text` en las preguntas tipo `id` — ahí el nombre
+  completo YA se le muestra al alumno como parte del enunciado (le preguntan
+  a qué categoría pertenece un fragmento resaltado del nombre), así que
+  ocultarlo no protegía nada.
+- `QBANK_BUILD` y `QBANK_RXN_BUILD` (el modo "Constructor Molecular") — ahí
+  el nombre del compuesto ya viene escrito en el propio enunciado
+  ("Construye la estructura del **etano**"), no hay nada que ocultar.
+
+**Fuga adicional que no era de código fuente sino del DOM en vivo:** en el
+modo de arrastrar/tocar fragmentos (`type:'drag'`), cada casilla se
+renderizaba con `data-correct="${s.correct}"` — la respuesta correcta quedaba
+visible con solo "Inspeccionar elemento", sin ni siquiera mirar el código
+fuente, y **antes de contestar**. Revisé `checkDrag()` y esa función ya
+comparaba contra `q.slots` directamente (no contra el atributo del DOM), así
+que el atributo `data-correct` no lo usaba nadie — se quitó sin más.
+
+### Qué NO se logró (límite real, ya avisado)
+Esto no es seguridad de verdad: cualquiera con la consola del navegador
+puede escribir `QBANK` después de que cargue la página y ver todo ya
+decodificado en memoria. Solo evita el caso más común — Ctrl+U / "Ver código
+fuente" mostrando el nombre correcto en texto plano de entrada.
+
+### Costo del cambio (para la próxima sesión que edite estas preguntas)
+Los 4 arreglos se reescribieron en una sola línea por pregunta (antes tenían
+formato de varias líneas con comentarios de sección tipo
+`// ── ALCANOS (extra) ──`); esos comentarios de sección se perdieron dentro
+de esas 4 arreglos. El resto del archivo (`MOLDES`, `M`, `QBANK_BUILD`,
+`QBANK_RXN_BUILD`, toda la lógica del juego, CSS) no se tocó.
+
+### Verificación
+Con Playwright: cargué el juego en modo libre y jugué preguntas reales de
+los 5 tipos (`mc`, `write`, `id`, `rxnq`, `drag`) leyendo la respuesta ya
+decodificada desde el propio estado en memoria del juego (`questions[qIdx]`)
+— las 5 marcaron correcto sin ningún error de consola. Confirmé además que
+`grep` sobre el archivo ya no encuentra nombres de compuestos en texto plano
+dentro de esos 4 arreglos (solo quedan visibles donde ya eran parte del
+enunciado: `opts`, `name` de tipo `id`, y dos comentarios de desarrollador
+en las funciones de dibujo que no delatan nada sin decodificar primero el
+`mol` correspondiente).
+
+### Pendiente / sin resolver
+Ninguno de fondo — es el límite esperado de cualquier ofuscación del lado
+del cliente, ya explicado arriba. No hace falta ningún paso de despliegue:
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-10 (25) — Agregar el 1,4-dioxano como ejemplo (con nomenclatura paso a paso) en Grupos
 
 ### Contexto
