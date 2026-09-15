@@ -7,6 +7,100 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (27) — Colores consistentes reactivo↔producto, flechas animadas y legibilidad en `reacciones.html`
+
+### Contexto
+La docente estaba revisando `reacciones.html` (repasando las reacciones
+antes de usarlas con estudiantes) y señaló, con la Hidrohalogenación como
+ejemplo concreto, que el color del HX no se notaba y no tenía relación con
+el color del H y el X ya puestos en el producto — el estudiante no podía
+"seguir" con la vista dónde quedó cada átomo. Pidió: (1) que el reactivo
+tenga un color distintivo y sea el MISMO color donde ese átomo aparece en
+el producto, (2) que esa misma lógica se aplique a todas las reacciones y
+grupos funcionales, no solo a esta, y (3) que el paso a paso del mecanismo
+muestre el movimiento (flechas o algo tipo GIF) con texto que acompañe. Al
+revisar ejemplos adicionales (Hidrogenación, Hidratación) encontró además
+dos problemas de legibilidad: texto de condiciones/catalizador encimado con
+la fórmula, y un diagrama de mecanismo con los átomos amontonados e
+ilegibles — pidió revisar que nada se vea amontonado y que la letra/dibujos
+se lean bien tanto en computador como en celular.
+
+### Qué se cambió (`reacciones.html`)
+
+**Color reactivo↔producto, en TODAS las reacciones (cambio global, una sola
+regla CSS):** el recuadro del reactivo (`.meq-reag`, ej. la cajita "X₂",
+"H₂O", "KMnO₄", "HX"...) ahora usa el mismo color rosado que ya se usaba
+para resaltar el grupo nuevo en el producto (`.hn`). Antes eran colores
+distintos (reactivo en ámbar, resaltado del producto en rosado) sin
+relación visual entre sí; ahora, en cualquier reacción del sitio, lo que
+entra y lo que se resalta en el producto se ven del mismo color.
+
+**Hidrohalogenación (alquenos), caso puntual pedido:** en el esquema
+general (−C=C− + H−X → −CH−CX−) el H y el X del reactivo y del producto
+ahora están coloreados por separado y de forma consistente (H en ámbar, X
+en cian — los mismos colores que ya usaba el mecanismo de al lado), para
+que se note claramente dónde quedó cada uno. Se aplicó lo mismo en la caja
+"Regla de Markovnikov" y en los ejemplos con propeno/eteno, pero solo
+resaltando el X (Br, Cl): resaltar el H específico ahí habría sido
+engañoso, porque en fórmulas condensadas como "CH₃" no se puede señalar
+cuál de los hidrógenos es el que realmente se agregó en la reacción sin
+inventar una posición.
+
+**Flechas de mecanismo "se dibujan solas" (cambio global):** las flechas
+curvas de todos los mecanismos paso a paso (las que ya existían, mostrando
+el movimiento de electrones) ahora tienen una animación corta que las
+"dibuja" cada vez que se abre ese paso, en vez de aparecer ya completas y
+estáticas — se nota el movimiento sin necesitar un GIF de verdad. Se
+respeta la preferencia de "reducir movimiento" del sistema operativo.
+
+**Paso "Condición" del resumen de 3 pasos (🎬 Visión general), en TODAS las
+reacciones:** antes mezclaba dos dibujos miniatura desvanecidos (donde el
+doble enlace quedaba minúsculo e ilegible) con el texto de la ecuación
+completa a letra pequeña — quedaba amontonado. Se quitaron los dibujos
+duplicados (la molécula ya se ve grande y completa en el paso anterior y
+en el siguiente) y se agrandó el texto de la ecuación; además, los enlaces
+dobles (=) y triples (≡) que aparecen en ese texto ahora se resaltan en
+morado subrayado para que se note el cambio, sea adición, eliminación o
+sustitución.
+
+**Bug corregido — texto de condición largo se encimaba:** la flecha
+central de la ecuación (−C=C− + reactivo →condición→ producto) se dibujaba
+con un ancho fijo; con condiciones cortas ("Δ", "Ni/Pd/Pt") no se notaba,
+pero con una condición larga (ej. Hidratación: "H₃PO₄/SiO₂, 300°C (o H₂SO₄
+dil., frío)") el texto se salía del recuadro y quedaba encima de la fórmula
+de al lado. Ahora el ancho de esa flecha se ajusta según el largo del
+texto. Este bug ya existía antes de esta sesión y afectaba a cualquier
+reacción con una condición larga, no solo a Hidratación.
+
+**Bug corregido — diagrama de mecanismo amontonado (Hidratación, paso 3
+"Desprotonación"):** los átomos (O, +, H que se va, flecha) estaban todos
+apretados en un espacio de unos 20×20 píxeles y se veían como un garabato
+sin poder distinguirse. Se separaron dentro de un lienzo más alto, sin
+cambiar qué representa cada elemento.
+
+### Verificación
+Se probaron los cambios con Playwright (Chromium) en ancho de escritorio y
+de celular, abriendo cada pestaña y cada reacción del sitio: no aparecieron
+errores en consola. Se revisaron con capturas de pantalla los casos
+puntuales mencionados arriba (antes/después) para confirmar que ya no se
+encimaban.
+
+### Pendiente / limitación conocida
+No se revisó diagrama por diagrama el resto de mecanismos del sitio (son
+más de 200 dibujos SVG hechos a mano, uno por paso de cada reacción)
+buscando el mismo problema de amontonamiento del caso de Hidratación —
+solo se corrigieron los casos puntuales que se encontraron al probar. Si al
+seguir revisando aparece otro diagrama amontonado o con letra muy pequeña,
+avisen cuál es (nombre de la reacción y paso) y se corrige puntualmente;
+una revisión exhaustiva de los +200 diagramas es un trabajo más grande que
+convendría planear aparte.
+
+No hay ningún paso manual pendiente: `reacciones.html` se sirve directo por
+GitHub Pages, igual que `juego.html` — el cambio queda activo en cuanto se
+hace push a `main`.
+
+---
+
 ## 2026-09-11 (26) — Ofuscar las respuestas correctas en el código fuente de `juego.html`
 
 ### Contexto
