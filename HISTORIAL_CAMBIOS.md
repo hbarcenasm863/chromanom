@@ -7,6 +7,49 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (33) — Puente concepto→notación en las tarjetas "Antes de empezar"
+
+### Contexto
+Último pendiente del informe de la auditoría de Mayer: las tarjetas
+"Antes de empezar, deberías saber" ya explicaban BIEN el concepto (qué es
+un nucleófilo, qué es δ+, qué es un carbocatión...) pero nunca decían
+cómo se ESCRIBE ese concepto en las ecuaciones — el estudiante entendía la
+idea y después se topaba con "Nu⁻" o "δ+" en una fórmula sin que nadie le
+hubiera dicho que esa es justamente la forma abreviada de lo que ya
+había leído. La docente pidió seguir con explicaciones paso a paso que
+mantengan el rigor químico pero se sientan cercanas.
+
+### Qué se cambió (`reacciones.html`)
+
+Se agregó una viñeta "Así se escribe: ..." al final de la tarjeta de
+prerrequisitos en las 5 pestañas donde la auditoría señaló el vacío:
+
+- **Alquenos:** conecta "carbocatión" con el símbolo <strong>R⁺</strong>
+  que van a ver en cada mecanismo de adición electrofílica.
+- **Halogenuros:** conecta "nucleófilo" con <strong>Nu</strong> / 
+  <strong>Nu⁻</strong>, aclarando que la carga solo se escribe cuando de
+  verdad la tiene.
+- **Aromáticos:** conecta "electrófilo" con <strong>E⁺</strong>.
+- **Carbonilo:** aclara que <strong>δ⁺</strong> no es una carga completa
+  como la de un ion, sino una carga parcial de un enlace polar.
+- **Derivados de ácido:** conecta "grupo saliente" con la
+  <strong>L</strong> genérica de las ecuaciones, y explica qué sigla es
+  <strong>SAcN</strong>.
+
+No se tocaron las otras 5 pestañas (Alcanos, Alquinos, Alcoholes, Aminas,
+Ácidos) porque la auditoría no señaló notación sin explicar ahí.
+
+### Verificación
+Playwright (Chromium): las 10 pestañas siguen sin errores de consola;
+capturas de pantalla de las 3 tarjetas más cargadas (Halogenuros,
+Carbonilo, Derivados) confirmando que el texto nuevo se lee bien y no
+rompe el diseño de la tarjeta.
+
+### Sin pasos manuales pendientes
+`reacciones.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (32) — Se aplican los pendientes de la auditoría de Mayer
 
 ### Contexto
