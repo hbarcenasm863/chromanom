@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (29) — Última inconsistencia visual: `cb-1` y `ac-1` sin ecuación
+
+### Contexto
+Tras el resumen del informe de Chem Student, la docente pidió aplicar las
+correcciones a nivel visual antes de que los estudiantes empiecen a
+repasar, y specíficamente: como la sección de Aromáticos quedó calificada
+como "la mejor lograda", buscar qué la hace así y aplicar esa misma lógica
+a todas las demás reacciones.
+
+Comparé estructuralmente Aromáticos contra el resto del sitio: las 10
+pestañas ya tienen la misma "receta" (tarjeta de prerrequisitos + tarjeta
+de tipo de reacción + por cada reacción: ecuación grande, resumen de 3
+pasos, mecanismo paso a paso) — eso ya estaba parejo. La única reacción de
+las 41 que rompía ese patrón, en cualquier pestaña, eran dos: **`cb-1`
+(Reducción de aldehídos/cetonas)** y **`ac-1`** (Preparación de ácidos
+carboxílicos), que no tenían la ecuación grande de arriba — pasaban
+directo del título al resumen de 3 pasos. En la sesión anterior ese
+faltante se había dejado así a propósito (el informe lo llamó "menor"),
+pero con este pedido explícito de nivelar todo contra Aromáticos, se
+corrigió.
+
+### Qué se cambió (`reacciones.html`)
+
+- **`cb-1` (Reducción → Alcohol):** se agregó la ecuación "R−CHO o R₂C=O +
+  H⁻ →[LiAlH₄ o NaBH₄]→ R−CH₂OH o R₂CHOH", usando el mismo color ámbar
+  (`.at-h`) ya establecido para el hidruro/H que ya se usa en
+  Hidrohalogenación — aquí encaja perfecto porque el H⁻ del hidruro es
+  justo el átomo que se agrega al carbono del carbonilo.
+- **`ac-1` (Preparación de ácidos carboxílicos):** tiene 3 puntos de
+  partida distintos que convergen al mismo producto (alcohol 1°,
+  alquilbenceno, nitrilo → ácido carboxílico), así que no cabía en una
+  ecuación de una sola línea como las demás; se armó una versión con los 3
+  reactivos apilados a la izquierda, misma flecha y mismo estilo que el
+  resto, resaltando el grupo −COOH nuevo en el producto.
+
+### Verificación
+Capturas de pantalla en escritorio (1000px) y celular (390px) de ambas
+ecuaciones — se ven limpias, sin encimarse, igual de legibles que las
+demás. Se corrió de nuevo la pasada por las 10 pestañas con Playwright:
+sin errores de consola.
+
+### Pendiente
+Ninguno. `reacciones.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (28) — Auditoría "Chem Student" de `reacciones.html` y correcciones puntuales
 
 ### Contexto
