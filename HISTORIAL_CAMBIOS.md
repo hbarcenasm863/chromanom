@@ -7,6 +7,96 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (31) — Rediseño estilo libro de texto (Timberlake) en las 41 reacciones
+
+### Contexto
+La docente mandó dos páginas de su libro de Timberlake (hidrólisis de
+ésteres y formación de amidas) como referencia de la calidad que quiere:
+moléculas dibujadas con enlaces reales (el C=O parado, con doble línea
+hacia arriba, no "(=O)" en texto), cada molécula en su propio recuadro de
+color, el mismo color para el átomo que se seguía entre reactivo y
+producto, y el nombre en español debajo de cada recuadro. Confirmó:
+colores estándar de átomo (no hace falta inventar una paleta nueva),
+reemplazar también la ecuación grande de arriba de cada tarjeta (no solo
+el paso "Condición"), aplicarlo a las 41 reacciones, y fondos claros para
+que los colores de los átomos resalten.
+
+En paralelo se había lanzado una auditoría de diseño instruccional
+(principios de Mayer) pedida por la docente — su informe llegó a mitad de
+esta sesión y aportó dos cosas: confirmó que el problema era sistemático
+(no solo la reacción puntual que la docente había señalado) y encontró un
+bug real de software (no solo de diseño) que se describe abajo.
+
+### Qué se cambió (`reacciones.html`)
+
+**Nueva "tarjeta de molécula" reutilizable:** se creó `.rxn-molcard` (CSS)
+y las funciones `mkMolCard()` / `mkReactionEq()` (JS) que arman una
+reacción completa — reactivo dibujado en recuadro verde claro, flecha con
+la condición, producto en recuadro azul claro, con el nombre en español
+debajo de cada uno — usando el motor de dibujo que YA existía en el sitio
+(`mkDevSVG`), que ya sabía dibujar enlaces verticales (branches "arriba"/
+"abajo") pero no se estaba aprovechando en la ecuación grande de arriba ni
+en el paso "Condición". Se agregó una tabla `MOL_NAMES` con el nombre en
+español de las ~30 moléculas ya catalogadas en el sitio.
+
+**Aplicado a las 41 reacciones:** tanto la ecuación grande de cada tarjeta
+como el paso "🎬 Condición" del resumen de 3 pasos ahora usan esta misma
+tarjeta — mismo dibujo en los dos lugares. Cuando el reactivo/producto
+tiene una estructura real en el catálogo del sitio, se dibuja con enlaces
+(sin paréntesis). Cuando no (una fórmula con "R" genérico que de verdad no
+se puede dibujar), se mantiene como texto, ahora dentro del mismo
+recuadro de color en vez de texto suelto.
+
+**Se completaron 4 moléculas que antes se mostraban en texto genérico con
+paréntesis** — se agregaron al catálogo de estructuras y ahora se dibujan:
+- `hg-1` (SN1): bromuro de terc-butilo → terc-butanol (con agua como
+  nucleófilo concreto, en vez del "Nu" genérico — ya se usaba agua en los
+  ejemplos de la misma tarjeta).
+- `cb-2` (Grignard): el producto (propan-2-ol) ahora se dibuja.
+- `dv-1` (cloruros de ácido): se cambió el "R−COCl" genérico por el
+  ejemplo concreto cloruro de acetilo + agua → ácido acético — el texto
+  ya explicaba que "casi cualquier nucleófilo sirve", eso se mantiene.
+- `am-1` y `am-2` (nitrobenceno→anilina, anilina→clorobenceno): ahora
+  reusan el mismo dibujo de anillo aromático que ya se usaba en la pestaña
+  de Aromáticos (`mkBenzSVG`), en vez de la fórmula molecular en texto.
+
+### Dos bugs corregidos (encontrados por la auditoría de Mayer y por la
+### propia docente probando en el celular)
+
+1. **HTML roto cuando una fórmula sin dibujo tenía triple enlace (≡):**
+   la función que resalta `=` y `≡` en morado hacía dos `.replace()`
+   seguidos; el primero insertaba una etiqueta `<span style="...">` que
+   tiene un `=` adentro (el de `style=`), y el segundo `.replace` volvía a
+   envolver ESE `=`, partiendo la etiqueta — se veía código crudo en
+   pantalla en vez de la fórmula (pasaba en Hidrogenación de Lindlar y en
+   Acidez de alquinos terminales, pestaña Alquinos). Se corrigió a un solo
+   `.replace()` que resalta cualquiera de los dos símbolos de una vez.
+2. **"+NH₃" aparecía duplicado:** cuando una molécula quedaba en texto de
+   respaldo (sin dibujo), ese texto ya incluía el "+ NH₃" (o cualquier
+   subproducto), pero el código además lo volvía a sacar aparte como
+   etiqueta extra — se veía dos veces. Ahora esa etiqueta extra solo se
+   agrega cuando la tarjeta es un dibujo real, no cuando ya es texto.
+
+### Verificación
+Playwright (Chromium) en escritorio y celular sobre una decena de
+reacciones representativas de distintas pestañas (incluidas las 5 que se
+completaron con estructura nueva), más una pasada por las 10 pestañas
+completas confirmando cero errores de consola después de cada cambio.
+
+### Pendiente (del informe de la auditoría Mayer, no aplicado todavía)
+El informe completo se le compartió a la docente en el chat, no se guardó
+en el repo. Señaló, además de lo ya corregido acá, que las 10 tarjetas de
+"tipo de reacción" (la cajita al principio de cada pestaña, ej. "Nu:⁻ +
+R−C(δ+)=O → ...") siguen usando notación muy abstracta (Lewis, δ+, R/Nu
+genéricos) — es lo primero que ve el estudiante en cada pestaña y afecta
+a las 41 reacciones por igual — y sugirió ajustes de paleta (el amarillo
+de "Condición" se ve muy saturado, el rojo de "Ácidos Carboxílicos"
+choca con el rojo de error de los quices, dos reacciones más sin dibujo
+en Alcanos/Halogenuros). Queda para una próxima sesión, priorizando según
+lo que decida la docente.
+
+---
+
 ## 2026-09-15 (30) — El paso "Condición" vuelve a mostrar enlaces dibujados, no paréntesis
 
 ### Contexto

@@ -228,6 +228,28 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .at-x{color:var(--c1t);font-weight:900;background:var(--c1b);border-radius:3px;padding:0 3px;font-style:normal}
 .meq-reag .at-h,.meq-reag .at-x{background:none;padding:0} /* dentro del recuadro de reactivo no hace falta doble fondo */
 
+/* ── TARJETA DE MOLÉCULA ESTILO LIBRO DE TEXTO (Timberlake) ──
+   Enlaces dibujados de verdad (línea arriba/abajo para el C=O, no "(=O)"),
+   colores de átomo estándar (O rojo, N azul, Cl verde, Br marrón — ya los
+   pone mkDevSVG), fondo pastel claro para que esos colores resalten, y el
+   nombre en español debajo, igual que en un libro de texto de secundaria. */
+.rxn-molcard{border-radius:12px;padding:10px 14px 8px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;flex-shrink:0;min-width:70px}
+.rxn-molcard svg{max-width:100%;height:auto}
+.rxn-molcard-name{font-size:.66rem;font-weight:600;text-align:center;line-height:1.35;
+  font-family:'Outfit',sans-serif;max-width:150px}
+.rxn-molcard.c1{background:var(--c1b);border:2px solid var(--c1)}
+.rxn-molcard.c1 .rxn-molcard-name{color:var(--c1t)}
+.rxn-molcard.c2{background:var(--c2b);border:2px solid var(--c2)}
+.rxn-molcard.c2 .rxn-molcard-name{color:var(--c2t)}
+.rxn-molcard.c3{background:var(--c3b);border:2px solid var(--c3)}
+.rxn-molcard.c3 .rxn-molcard-name{color:var(--c3t)}
+.rxn-molcard.c4{background:var(--c4b);border:2px solid var(--c4)}
+.rxn-molcard.c4 .rxn-molcard-name{color:var(--c4t)}
+.rxn-molcard-extra{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--dim);white-space:nowrap}
+.rxn-eq-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;width:100%}
+.rxn-eq-plus{font-size:1.1rem;color:var(--dimmer);font-weight:700;flex-shrink:0}
+
 /* ── MOLECULE COMPARISON CARD ── */
 .mol-cmp{display:flex;align-items:center;justify-content:center;gap:12px;row-gap:10px;flex-wrap:wrap;
   background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);
@@ -8403,6 +8425,10 @@ const RM={
   carboxilatoetanoico:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'O',h:0}]}],
   aldol:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:1}]},{h:2,bn:1},{h:1,bu:[{s:'O',h:0}],buBn:2}],
   cianohidrina:[{h:3,bn:1},{h:1,bn:1,bu:[{s:'O',h:1}]},{s:'C',h:0,bn:3},{s:'N',h:0}],
+  tbutilbromuro:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'C',h:3}],bd:[{s:'Br',h:0}]},{h:3}],
+  tbutanol:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'C',h:3}],bd:[{s:'O',h:1}]},{h:3}],
+  propan2ol:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:1}]},{h:3}],
+  cloruroacetilo:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'Cl',h:0}]}],
 };
 
 // ─── REACTION ANIMATION FRAME DATA ───────────────────────────────────────────
@@ -8555,11 +8581,11 @@ const RF={
     speaks:['Reactivo: bromometano. El carbono unido al bromo es positivo parcial y atrae nucleófilos.','Condición: sustitución nucleofílica. El ion hidróxido ataca al carbono electrofílico por la cara opuesta al bromo, en un mecanismo concertado SN2.','Producto: metanol y bromuro de sodio. El carbono invirtió su configuración como un paraguas al revés.']
   },
   'hg-1':{
-    r:{eq:'(CH₃)₃C−Br'},
-    eq:'(CH₃)₃C−Br<br>──[ionización lenta]──→<br>(CH₃)₃C⁺ + Br⁻ ──[Nu]──→ (CH₃)₃C−Nu',
-    p:{eq:'(CH₃)₃C−Nu (racémico)'},
-    labels:['Reactivo: haloalcano terciario — favorece la ionización','Condición: solvente prótico, Nu débil. Se ioniza solo, ANTES de que llegue el nucleófilo','Producto: mezcla racémica — el carbocatión plano deja atacar por cualquier cara'],
-    speaks:['Reactivo: un haloalcano terciario.','Condición: sustitución nucleofílica unimolecular. El sustrato se ioniza solo, formando un carbocatión plano, antes de que aparezca el nucleófilo.','Producto: mezcla racémica, porque el nucleófilo puede atacar por cualquiera de las dos caras del carbocatión.']
+    r:{mol:'tbutilbromuro'},
+    eq:'(CH₃)₃C−Br + H₂O<br>──[SN1, lento]──→<br>(CH₃)₃C−OH + HBr',
+    p:{mol:'tbutanol'},
+    labels:['Reactivo: haloalcano terciario — favorece la ionización','Condición: solvente prótico (agua). Se ioniza solo, ANTES de que llegue el nucleófilo','Producto: alcohol terciario, como mezcla racémica si el C era un centro quiral — el carbocatión plano deja atacar por cualquier cara'],
+    speaks:['Reactivo: un haloalcano terciario.','Condición: sustitución nucleofílica unimolecular. El sustrato se ioniza solo, formando un carbocatión plano, antes de que aparezca el nucleófilo.','Producto: el alcohol correspondiente. Si el carbono de partida fuera un centro quiral, saldría mezcla racémica, porque el nucleófilo puede atacar por cualquiera de las dos caras del carbocatión.']
   },
   'hg-2':{
     r:{mol:'r2bromopropano'},
@@ -8604,16 +8630,16 @@ const RF={
     speaks:['Reactivo: metilamina, que tiene un par de electrones libres en el nitrógeno.','Condición: reacción con ácido clorhídrico a temperatura ambiente. El nitrógeno capta el protón del ácido.','Producto: cloruro de metilamonio, una sal. Con base fuerte se puede regenerar la amina libre.']
   },
   'am-1':{
-    r:{eq:'C₆H₅NO₂'},
+    r:{benz:[{pos:0,label:'NO₂',color:'#c8230a'}]},
     eq:'C₆H₅NO₂ + 3H₂<br>──[Pt o Pd/C]──→<br>C₆H₅NH₂ + 2H₂O',
-    p:{eq:'C₆H₅NH₂ (anilina)'},
+    p:{benz:[{pos:0,label:'NH₂',color:'#0033aa'}]},
     labels:['Reactivo: nitrocompuesto aromático (nitrobenceno)','Condición: H₂/Pt o Pd/C (limpio) — o Sn/Fe + HCl (clásico). 3 etapas de 2e⁻ cada una','Producto: anilina + agua — puerta a colorantes, fármacos y polímeros'],
     speaks:['Reactivo: nitrobenceno.','Condición: reducción catalítica con hidrógeno y platino, o con estaño y ácido clorhídrico.','Producto: anilina, el precursor de colorantes, fármacos como el paracetamol, y polímeros como el nailon.']
   },
   'am-2':{
-    r:{eq:'C₆H₅NH₂ + NaNO₂/HCl'},
-    eq:'C₆H₅NH₂ + NaNO₂/HCl<br>──[0–5°C]──→<br>C₆H₅N₂⁺Cl⁻ ──[Cu₂Cl₂]──→ C₆H₅Cl + N₂↑',
-    p:{eq:'C₆H₅Cl + N₂↑'},
+    r:{benz:[{pos:0,label:'NH₂',color:'#0033aa'}]},
+    eq:'C₆H₅NH₂ + NaNO₂/HCl<br>──[0–5°C, luego Cu₂Cl₂]──→<br>C₆H₅Cl + N₂↑',
+    p:{benz:[{pos:0,label:'Cl',color:'#1a7a1a'}]},
     labels:['Reactivo: arilamina (anilina) + ácido nitroso generado in situ','Condición: 0–5°C obligatorio — a T° ambiente el diazonio se descompone','Producto: sal de diazonio → con Cu₂X₂ (Sandmeyer) cambia el N₂⁺ por Cl, Br, CN...'],
     speaks:['Reactivo: anilina con nitrito de sodio y ácido clorhídrico, en frío.','Condición: la temperatura entre cero y cinco grados es obligatoria, porque el diazonio es muy inestable.','Producto: la sal de diazonio, y con un catalizador de cobre, la reacción de Sandmeyer reemplaza el nitrógeno por cloro, bromo o cianuro.']
   },
@@ -8634,7 +8660,7 @@ const RF={
   'cb-2':{
     r:{mol:'grignard'},
     eq:'CH₃MgBr + CH₃CHO<br>──[éter → H₃O⁺]──→<br>CH₃−CH(OH)−CH₃',
-    p:{eq:'CH₃−CH(OH)−CH₃'},
+    p:{mol:'propan2ol'},
     labels:['Reactivo: reactivo de Grignard (R′MgBr) + aldehído o cetona','Condición: éter seco — el carbono del Grignard actúa como carbanión, nucleófilo fuerte','Producto: alcohol (nuevo enlace C−C) tras la hidrólisis ácida (H₃O⁺)'],
     speaks:['Reactivo: un reactivo de Grignard con un aldehído.','Condición: en éter seco, el carbono del Grignard ataca al carbonilo como si fuera un carbanión.','Producto: un alcohol con un enlace carbono carbono nuevo, tras la hidrólisis ácida final.']
   },
@@ -8667,10 +8693,10 @@ const RF={
     speaks:['Reactivo: acetato de etilo.','Condición: con NaOH es saponificación, irreversible. Con ácido y agua es hidrólisis, reversible. Con LiAlH cuatro se reduce por completo.','Producto: según la ruta, sale el carboxilato o el ácido, más el alcohol correspondiente.']
   },
   'dv-1':{
-    r:{eq:'R−C(=O)−Cl'},
-    eq:'R−COCl + Nu:<br>──[SAcN]──→<br>R−CO−Nu + Cl⁻',
-    p:{eq:'R−C(=O)−Nu'},
-    labels:['Reactivo: cloruro de ácido + casi cualquier nucleófilo (H₂O, ROH, RNH₂...)','Condición: sin catalizador — el Cl⁻ es tan buen grupo saliente que reacciona solo','Producto: ácido, éster, amida o anhídrido + Cl⁻, según el nucleófilo que usen'],
+    r:{mol:'cloruroacetilo'},
+    eq:'CH₃COCl + H₂O<br>──[SAcN]──→<br>CH₃COOH + HCl',
+    p:{mol:'acidoetanoico'},
+    labels:['Reactivo: cloruro de ácido (acá cloruro de acetilo) + un nucleófilo — casi cualquiera sirve (H₂O, ROH, RNH₂...)','Condición: sin catalizador — el Cl⁻ es tan buen grupo saliente que reacciona solo','Producto: con agua da el ácido (como acá) — con un alcohol da éster, con una amina da amida'],
     speaks:['Reactivo: cloruro de ácido con casi cualquier nucleófilo.','Condición: no necesita catalizador. El cloruro es el derivado más reactivo de todos.','Producto: puede dar ácido, éster, amida o anhídrido, según qué nucleófilo entra.']
   },
   'dv-2':{
@@ -8688,10 +8714,17 @@ const RF={
 function highlightBonds(s){
   if(!s)return s;
   // morado (el mismo de las flechas de mecanismo) para que resalte igual
-  // sobre fondo verde, naranja o azul — un tono ámbar se perdía sobre naranja
-  const st='color:#7c3aed;font-weight:900;text-decoration:underline;text-decoration-thickness:2px';
-  return s.replace(/≡/g,`<span style="${st}">≡</span>`)
-          .replace(/=/g,`<span style="${st}">=</span>`);
+  // sobre fondo verde, naranja o azul — un tono ámbar se perdía sobre naranja.
+  // Sin subrayado: con un "=" ya el subrayado se veía como un tercer trazo,
+  // fácil de confundir con un triple enlace (≡).
+  const st='color:#7c3aed;font-weight:900';
+  // Un solo paso: encadenar dos .replace() (uno para ≡, otro para =) rompía
+  // el HTML cuando el texto tenía ambos — el primer .replace mete un
+  // atributo style="..." que SÍ tiene un "=", y el segundo .replace lo
+  // volvía a envolver, partiendo la etiqueta (se veía el código crudo en
+  // pantalla). Con un solo regex que matchea cualquiera de los dos
+  // caracteres, cada uno se envuelve una sola vez.
+  return s.replace(/[≡=]/g,m=>`<span style="${st}">${m}</span>`);
 }
 // Saca el "+ algo" que acompaña al reactivo/producto principal en el texto
 // de una ecuación (ej. "Cl₂" en "CH₃−CH₂−CH₃ + Cl₂", o "HCl" en el producto),
@@ -8699,6 +8732,72 @@ function highlightBonds(s){
 function splitExtra(part){
   const i=(part||'').indexOf(' + ');
   return i>=0?part.slice(i):'';
+}
+
+// ─── NOMBRES EN ESPAÑOL PARA CADA MOLÉCULA DE RM (para la tarjeta) ───────────
+const MOL_NAMES={
+  metano:'Metano', propano:'Propano', eteno:'Eteno (etileno)', propeno:'Propeno',
+  etino:'Etino (acetileno)', propino:'Propino',
+  cloroetano:'Cloroetano', bromometano:'Bromometano', bromoeteno:'Bromoeteno (bromuro de vinilo)',
+  r2cloropropano:'2-cloropropano', r2bromopropano:'2-bromopropano',
+  '12dibromoetano':'1,2-dibromoetano', '1122tetrabromoetano':'1,1,2,2-tetrabromoetano',
+  etanol:'Etanol', metanol:'Metanol', etilenglicol:'Etilenglicol (1,2-etanodiol)',
+  etanal:'Etanal (acetaldehído)', propanona:'Propanona (acetona)',
+  acidoetanoico:'Ácido etanoico (ácido acético)', carboxilatoetanoico:'Etanoato (acetato)',
+  acetatoetilo:'Etanoato de etilo (acetato de etilo)',
+  cianohidrina:'Cianohidrina (2-hidroxipropanonitrilo)',
+  etanamida:'Etanamida (acetamida)', metilamina:'Metilamina',
+  grignard:'Bromuro de metilmagnesio', aldol:'3-hidroxibutanal (producto aldólico)',
+  tbutilbromuro:'2-bromo-2-metilpropano (bromuro de terc-butilo)',
+  tbutanol:'2-metil-2-propanol (terc-butanol)',
+  propan2ol:'Propan-2-ol (isopropanol)',
+  cloruroacetilo:'Cloruro de etanoílo (cloruro de acetilo)'
+};
+// Nombres puntuales para reacciones con benceno (RF['ar-N'].p.benz no trae
+// nombre propio) — clave = id de la reacción.
+const RXN_NAMES={
+  'ar-0':{r:'Benceno',p:'Clorobenceno'}, 'ar-1':{r:'Benceno',p:'Nitrobenceno'},
+  'ar-2':{r:'Benceno',p:'Ácido bencenosulfónico'}, 'ar-3':{r:'Benceno',p:'Etilbenceno'},
+  'ar-4':{r:'Benceno',p:'Acetofenona'},
+  'am-1':{r:'Nitrobenceno',p:'Anilina'}, 'am-2':{r:'Anilina',p:'Clorobenceno'}
+};
+// ─── TARJETA DE UNA MOLÉCULA (dibujo con enlaces + recuadro + nombre) ────────
+// spec: {mol:'clave-RM'} | {benz:[...]} | {eq:'texto'} — igual que r/p en RF.
+// colorIdx: 1-4 (ver .rxn-molcard.c1..c4). name: texto debajo, o '' para omitir.
+function mkMolCard(spec,colorIdx,name){
+  if(!spec)return '';
+  let inner='';
+  if(spec.mol&&RM[spec.mol])inner=animateSVG(mkDevSVG(RM[spec.mol]));
+  else if(spec.benz!=null)inner=animateSVG(mkBenzSVG(spec.benz));
+  else if(spec.eq)inner=`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--tx)">${highlightBonds(spec.eq)}</div>`;
+  if(!inner)return '';
+  return `<div class="rxn-molcard c${colorIdx}">${inner}${name?`<div class="rxn-molcard-name">${name}</div>`:''}</div>`;
+}
+// ─── ECUACIÓN COMPLETA CON TARJETAS (reactivo → condición → producto) ────────
+// Se usa tanto para el paso "Condición" del resumen de 3 pasos como para la
+// ecuación grande de arriba de cada tarjeta — mismo dibujo en los dos sitios.
+function mkReactionEq(id,d,arrW){
+  if(!d||!d.eq)return '';
+  const names=RXN_NAMES[id]||{};
+  const rName=names.r||(d.r&&d.r.mol?MOL_NAMES[d.r.mol]:'')||'';
+  const pName=names.p||(d.p&&d.p.mol?MOL_NAMES[d.p.mol]:'')||'';
+  const rCard=mkMolCard(d.r,2,rName), pCard=mkMolCard(d.p,1,pName);
+  if(!rCard&&!pCard)return ''; // ninguna estructura dibujable: que el llamador use el texto
+  const eqParts=d.eq.split('<br>');
+  const condM=(eqParts[1]||'').match(/──\[([^\]]+)\]──→/);
+  const arrowSvg=mkArr(condM?condM[1]:'',arrW||90,true);
+  // El "+ algo" solo se saca aparte cuando la tarjeta es un dibujo real
+  // (mol/benz): si quedó en texto de respaldo, ese "+ algo" YA viene
+  // incluido en ese texto y sacarlo de nuevo lo duplicaba en pantalla.
+  const rDrawn=!!(d.r&&(d.r.mol||d.r.benz!=null)), pDrawn=!!(d.p&&(d.p.mol||d.p.benz!=null));
+  const extraR=rDrawn?splitExtra(eqParts[0]||''):'', extraP=pDrawn?splitExtra(eqParts[2]||''):'';
+  return '<div class="rxn-eq-row">'
+    +(rCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[0]||'')}</div>`)
+    +(extraR?`<div class="rxn-molcard-extra">${highlightBonds(extraR)}</div>`:'')
+    +`<div style="flex-shrink:0">${arrowSvg}</div>`
+    +(pCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[2]||'')}</div>`)
+    +(extraP?`<div class="rxn-molcard-extra">${highlightBonds(extraP)}</div>`:'')
+    +'</div>';
 }
 
 // ─── STAGGERED SVG ANIMATOR ──────────────────────────────────────────────────
@@ -8733,35 +8832,28 @@ function initRxnAnims(){
     }
     const vis1=steps[1].querySelector('.rxn-anim-vis');
     if(vis1){
-      // Reactivo dibujado con enlaces (mismo estilo que el paso 1 y el 3) +
-      // flecha con la condición + producto dibujado con enlaces — así se ve
+      // Reactivo y producto dibujados con enlaces reales (mismo estilo que el
+      // paso 1 y el 3), cada uno en su tarjeta con nombre debajo — así se ve
       // como una reacción de verdad, no como texto plano con "CH(Cl)" entre
       // paréntesis (la profesora no enseña así en el tablero).
-      const rSvg=d.r?(d.r.mol&&RM[d.r.mol]?animateSVG(mkDevSVG(RM[d.r.mol])):d.r.benz!=null?animateSVG(mkBenzSVG(d.r.benz)):''):'';
-      const pSvg=d.p?(d.p.mol&&RM[d.p.mol]?animateSVG(mkDevSVG(RM[d.p.mol])):d.p.benz!=null?animateSVG(mkBenzSVG(d.p.benz)):''):'';
-      if(rSvg||pSvg){
-        const eqParts=(d.eq||'').split('<br>');
-        const condM=(eqParts[1]||'').match(/──\[([^\]]+)\]──→/);
-        const arrowSvg=mkArr(condM?condM[1]:'',90,true);
-        const extraR=splitExtra(eqParts[0]||''), extraP=splitExtra(eqParts[2]||'');
-        const sideStyle='flex:1 1 0;min-width:80px;max-width:220px;display:flex;flex-direction:column;align-items:center;gap:3px';
-        const extraStyle="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--dim);white-space:nowrap";
-        vis1.innerHTML='<div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;width:100%">'
-          +`<div style="${sideStyle}">${rSvg||`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem">${highlightBonds(eqParts[0]||'')}</div>`}${extraR?`<div style="${extraStyle}">${highlightBonds(extraR)}</div>`:''}</div>`
-          +`<div style="flex-shrink:0">${arrowSvg}</div>`
-          +`<div style="${sideStyle}">${pSvg||`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem">${highlightBonds(eqParts[2]||'')}</div>`}${extraP?`<div style="${extraStyle}">${highlightBonds(extraP)}</div>`:''}</div>`
-          +'</div>';
-      }else{
-        // Sin dibujo disponible (reacciones con R genérico, ej. R−COCl): se
-        // mantiene la ecuación en texto, con los enlaces = / ≡ resaltados.
-        vis1.innerHTML=d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;text-align:center;line-height:2;white-space:pre-line">${highlightBonds(d.eq)}</div>`:'';
-      }
+      const built=mkReactionEq(id,d,90);
+      vis1.innerHTML=built||(d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;text-align:center;line-height:2;white-space:pre-line">${highlightBonds(d.eq)}</div>`:'');
     }
     const vis2=steps[2].querySelector('.rxn-anim-vis');
     if(vis2&&d.p){
       if(d.p.mol&&RM[d.p.mol])vis2.innerHTML=animateSVG(mkDevSVG(RM[d.p.mol]));
       else if(d.p.benz!=null)vis2.innerHTML=animateSVG(mkBenzSVG(d.p.benz));
       else if(d.p.eq)vis2.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${highlightBonds(d.p.eq)}</div>`;
+    }
+    // Ecuación grande de arriba de la tarjeta (.meq): mismo dibujo con
+    // tarjetas que el paso "Condición" — reemplaza el texto/notación que
+    // hubiera ahí a mano, para que las dos vistas de la reacción coincidan.
+    // Si no hay estructura dibujable (reactivos con R genérico), se deja tal
+    // cual estaba escrito en el HTML.
+    const meqBox=document.querySelector('#rxn-'+id+' .meq');
+    if(meqBox){
+      const builtTop=mkReactionEq(id,d,175);
+      if(builtTop)meqBox.innerHTML=builtTop;
     }
     if(d.labels){
       const labs=box.querySelectorAll('.rxn-anim-label');
