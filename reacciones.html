@@ -589,7 +589,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="gloss-icon">🧭</span>
         <div>
           <div class="legend-title">Cómo leer los diagramas de mecanismo</div>
-          <div class="legend-sub">El mismo código de color se usa en 38 de las 41 reacciones — apréndelo una vez, léelo en casi todas. (Las 3 excepciones: combustión completa, combustión incompleta e hidrogenación catalítica, que no se enseñan con flechas de electrones a este nivel.)</div>
+          <div class="legend-sub">El mismo código de color se usa en 39 de las 42 reacciones — apréndelo una vez, léelo en casi todas. (Las 3 excepciones: combustión completa, combustión incompleta e hidrogenación catalítica, que no se enseñan con flechas de electrones a este nivel.)</div>
         </div>
       </div>
       <span class="gloss-chev" id="legend-chev">▾</span>
@@ -717,6 +717,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <button class="rxn-subnav-chip" data-rxn="al-1" onclick="jumpToRxn('al-1')">Combustión completa</button>
           <button class="rxn-subnav-chip" data-rxn="al-2" onclick="jumpToRxn('al-2')">Combustión incompleta</button>
           <button class="rxn-subnav-chip" data-rxn="al-3" onclick="jumpToRxn('al-3')">Apertura de anillo — Ciclopropano</button>
+          <button class="rxn-subnav-chip" data-rxn="al-4" onclick="jumpToRxn('al-4')">Nitración</button>
       </div>
     </div>
 
@@ -741,7 +742,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">hν o Δ</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">radical X•</span>
         <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">Br₂ &gt; Cl₂ selectividad</span>
-        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">4 reacciones</span>
+        <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">5 reacciones</span>
       </div>
       <div class="tipo-card-desc">Los alcanos y cicloalcanos son compuestos saturados; no reaccionan por adición. Su reacción típica es la <strong>sustitución homolítica</strong>, donde un H es reemplazado por otro átomo mediante <a href="#g-radical" class="gloss-ref" onclick="jumpToGloss('g-radical');return false;">radicales libres</a> generados por luz (hν) o calor (Δ). Br₂ es más selectivo que Cl₂: prefiere el H terciario (radical más estable).</div>
     </div>
@@ -1378,7 +1379,173 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
       </div>
     </div>
-  
+
+    <div id="rxn-al-4" class="rxn-card">
+      <div class="rxn-head" onclick="toggleRxn('al-4')">
+        <div class="rxn-head-left">
+          <span class="rxn-title" style="color:var(--c3t)">Nitración</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">SR · Δ 400-450°C (vapor)</span>
+        </div>
+        <span class="rxn-chev" id="chev-al-4">▾</span>
+      </div>
+      <div class="rxn-body" id="body-al-4">
+        <div class="meq">
+          <div class="meq-side">
+            <span class="meq-mol">R−<span class="bp">H</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-reag">HNO₃</span>
+          </div>
+          <div class="meq-arr">
+            <span class="meq-cond">Δ (400-450°C, vapor)</span>
+            <span class="meq-line">──────→</span>
+          </div>
+          <div class="meq-side">
+            <span class="meq-prod">R−<span class="hn">NO₂</span></span>
+            <span class="meq-plus">+</span>
+            <span class="meq-prod">H₂O</span>
+          </div>
+        </div>
+
+        <!-- ── RXN-ANIM STEPPER: Nitración radical (Alcanos) ── -->
+        <div class="rxn-anim-stepper">
+          <div class="mech-top">
+            <span class="mech-title-sm">🎬 Visión general — 3 pasos</span>
+            <div class="rxn-anim-nav">
+              <button class="mech-btn" id="raprev-al-4" onclick="rxnAnimStep('al-4',-1)" disabled>← Ant.</button>
+              <button class="mech-btn" id="ranext-al-4" onclick="rxnAnimStep('al-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots rxn-anim-dots" id="rdots-al-4">
+            <span class="rxn-anim-dot on" onclick="rxnAnimDot('al-4',0)" title="Paso 1"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('al-4',1)" title="Paso 2"></span>
+            <span class="rxn-anim-dot" onclick="rxnAnimDot('al-4',2)" title="Paso 3"></span>
+          </div>
+          <div id="ras-al-4">
+            <div class="rxn-anim-step on">
+              <div class="rxn-anim-vis green">R−H  +  HNO₃</div>
+              <div class="rxn-anim-label">Reactivos: alcano (R−H) + ácido nítrico</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis orange">Δ 400-450°C → •OH + •NO₂</div>
+              <div class="rxn-anim-label">Condición: calor muy alto rompe el HNO₃ en radicales</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+            <div class="rxn-anim-step">
+              <div class="rxn-anim-vis blue">R−NO₂  +  H₂O</div>
+              <div class="rxn-anim-label">Producto: nitroalcano R−NO₂ + agua</div>
+              <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
+            </div>
+          </div>
+        </div>
+        <!-- ── STEPPER: Nitración Radical — Mecanismo ── -->
+        <div class="mech-stepper" id="mech-al-4">
+          <div class="mech-top">
+            <span class="mech-title-sm">⚗️ Nitración Radical — Mecanismo</span>
+            <div class="mech-nav">
+              <button class="mech-btn" id="mprev-al-4" onclick="mechStep('al-4',-1)" disabled>← Ant.</button>
+              <span class="mech-ctr" id="mctr-al-4">Paso 1 de 3</span>
+              <button class="mech-btn" id="mnext-al-4" onclick="mechStep('al-4',1)">Sig. →</button>
+            </div>
+          </div>
+          <div class="mech-dots" id="dots-al-4">
+            <span class="mech-dot on" onclick="mechDot('al-4',0)" title="Paso 1"></span>
+            <span class="mech-dot" onclick="mechDot('al-4',1)" title="Paso 2"></span>
+            <span class="mech-dot" onclick="mechDot('al-4',2)" title="Paso 3"></span>
+          </div>
+          <div class="mech-step on" id="ms-al-4-0">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="250" height="95" viewBox="-5 -5 260 100" style="overflow:visible;display:block;margin:0 auto"><text x="60" y="50" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">HO</text><text x="180" y="50" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">NO₂</text><line x1="80" y1="50" x2="158" y2="50" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><path d="M105,47 Q83.7,53.5 73,33" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><path d="M135,47 Q156.3,53.5 167,33" fill="none" stroke="var(--c4t)" stroke-width="2.1" marker-end="url(#arrFish)"/><text x="120" y="18" text-anchor="middle" font-size="11" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">Δ 400-450°C</text><line x1="120" y1="22" x2="120" y2="38" stroke="var(--c3t)" stroke-width="1.6" stroke-dasharray="2 2" stroke-linecap="round"/><circle cx="60" cy="30" r="2.6" fill="var(--c4t)"/><circle cx="180" cy="30" r="2.6" fill="var(--c4t)"/><text x="120" y="80" text-anchor="middle" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">ruptura homolítica del enlace O−N del HNO₃</text></svg></div>
+            <div class="mech-step-n">Paso 1 de 3 — Iniciación: ¿de dónde sale el primer radical?</div>
+            <div class="mech-step-h">El enlace O−N del HNO₃ se rompe homolíticamente con MUCHO calor (400-450°C) → •OH + •NO₂</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Acá el arranque es parecido al de la halogenación, pero mucho más exigente: el enlace <strong>O−N</strong> del HNO₃ (HO−NO₂) se rompe de forma <strong>homolítica</strong>, dando dos radicales: <strong>•OH</strong> y <strong>•NO₂</strong>. ¿Por qué hace falta tanto calor (400-450°C) y no basta con luz UV como en la halogenación? Porque ese enlace O−N es bastante más fuerte que el enlace X−X de un halógeno — se necesita mucha más energía para romperlo.</div>
+          </div>
+          <div class="mech-step" id="ms-al-4-1">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="300" height="90" viewBox="0 0 300 90" style="overflow:visible;display:block;margin:0 auto"><rect x="15" y="6" width="270" height="28" rx="6" fill="var(--c3b)" stroke="var(--c3t)" stroke-width="1.4"/><text x="150" y="25" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">•OH + R−H → R• + H₂O</text><text x="150" y="50" text-anchor="middle" font-size="10" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">luego</text><rect x="15" y="58" width="270" height="28" rx="6" fill="var(--c2b)" stroke="var(--c2t)" stroke-width="1.4"/><text x="150" y="77" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R• + HNO₃ → R−NO₂ + •OH</text></svg></div>
+            <div class="mech-step-n">Paso 2 de 3 — Propagación: la cadena se sostiene sola</div>
+            <div class="mech-step-h">•OH le quita un H al alcano, luego R• reacciona con otra molécula de HNO₃ y regenera •OH — el ciclo se repite</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Igual que en la halogenación, la propagación son DOS pasos en bucle. <strong>① •OH le abstrae un H</strong> al alcano → sale H₂O y queda el radical alquilo R•. <strong>② Ese R• reacciona con otra molécula de HNO₃</strong> → sale el producto R−NO₂ y se regenera el radical •OH, listo para arrancar otro H. Por eso una sola chispa de calor puede nitrar muchísimas moléculas antes de que la cadena termine.</div>
+          </div>
+          <div class="mech-step" id="ms-al-4-2">
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="280" height="95" viewBox="0 0 280 95" style="overflow:visible;display:block;margin:0 auto"><text x="70" y="30" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">CH₃−CH₂−CH₃</text><line x1="70" y1="38" x2="70" y2="55" stroke="var(--err)" stroke-width="2" stroke-dasharray="3 2"/><text x="70" y="70" text-anchor="middle" font-size="9" style="fill:var(--err);font-family:'JetBrains Mono',monospace">¡puede romperse acá!</text><text x="210" y="30" text-anchor="middle" font-size="9.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₃NO₂ + CH₃CH₂NO₂ +</text><text x="210" y="46" text-anchor="middle" font-size="9.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₃CH₂CH₂NO₂ + CH₃CH(NO₂)CH₃</text><line x1="130" y1="30" x2="160" y2="30" stroke="var(--dimmer)" stroke-width="1.6"/><polygon points="160,30 152,26 152,34" fill="var(--dimmer)"/></svg></div>
+            <div class="mech-step-n">Paso 3 de 3 — ¿Por qué esta reacción es "menos limpia" que la halogenación?</div>
+            <div class="mech-step-h">A 400-450°C también se rompen enlaces C−C: por eso la nitración industrial de un alcano da una MEZCLA de nitroalcanos, algunos más cortos que el reactivo original</div>
+            <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
+            <div class="mech-step-txt">Ojo con esto: a 400-450°C no solo se rompen enlaces C−H — también hay suficiente energía para romper algunos enlaces <strong>C−C</strong> ("craqueo"). Por eso, cuando la industria nitra propano, no obtiene solo 1-nitropropano y 2-nitropropano (sustitución directa): también salen nitrometano y nitroetano, productos de cadenas más cortas. Para uso industrial esto no es un problema — de hecho es una ventaja, porque de una sola pasada se obtienen varios nitroalcanos comerciales a la vez.</div>
+          </div>
+        </div><!-- /mech-stepper -->
+        <div class="mol-cmp">
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₄</span>
+            <div class="mol-cmp-name">metano</div>
+          </div>
+          <div class="mol-cmp-arr">
+            <div class="mol-cmp-reag">+ HNO₃</div>
+            <div>──[Δ 400-450°C]──→</div>
+          </div>
+          <div class="mol-cmp-card">
+            <span class="mol-cmp-formula">CH₃<span class="hn">NO₂</span></span>
+            <div class="mol-cmp-name">nitrometano + H₂O</div>
+          </div>
+        </div>
+        <div class="rxn-cond">① Iniciación: HNO₃ →[Δ]→ •OH + •NO₂  ② Propagación: •OH + R−H → R• + H₂O  |  R• + HNO₃ → R−NO₂ + •OH  ③ También hay ruptura de C−C a esta temperatura (craqueo)</div>
+        <div class="rxn-regla">📌 Ojo con esto: a diferencia de la halogenación (que conserva el esqueleto de carbonos), la nitración en fase vapor SÍ puede romper enlaces C−C — por eso el producto real es siempre una MEZCLA de nitroalcanos, no un solo compuesto puro</div>
+        <div class="rxn-ex-lbl">Más ejemplos</div>
+        <div class="rxn-ex" style="animation-delay:.08s">
+          <span class="rxn-ex-r">CH₃−CH₃</span>
+          <span class="rxn-ex-ea">+ HNO₃ →[Δ]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">CH₃CH₂<span class="hn">NO₂</span> + H₂O</span>
+          <span class="rxn-ex-nota">nitroetano</span>
+        </div>
+        <div class="rxn-ex" style="animation-delay:.23s">
+          <span class="rxn-ex-r">CH₃−CH₂−CH₃</span>
+          <span class="rxn-ex-ea">+ HNO₃ →[Δ]</span>
+          <span class="rxn-arrow">──→</span>
+          <span class="rxn-ex-p">mezcla: CH₃NO₂ + CH₃CH₂NO₂ + CH₃CH₂CH₂<span class="hn">NO₂</span> + CH₃CH(NO₂)CH₃</span>
+          <span class="rxn-ex-nota">nitrometano + nitroetano + 1- y 2-nitropropano</span>
+        </div>
+        <div class="rxn-vida">
+  <span class="rxn-vida-ico">🏎️</span>
+  <div><strong>¿Para qué les sirve esto?</strong> Este proceso industrial en fase vapor (llamado <strong>proceso Hass</strong>) es la forma en que se fabrican a gran escala los <strong>nitroalcanos comerciales</strong>: nitrometano, nitroetano, 1-nitropropano y 2-nitropropano. El <strong>nitrometano</strong> es un solvente industrial importante y también el combustible especial que usan los autos de <em>drag racing</em> y los motores de aeromodelismo — arde liberando muchísima energía porque ya trae oxígeno "empacado" en el grupo −NO₂. Los nitroalcanos también son materia prima para fabricar aminas (reduciendo el −NO₂ a −NH₂, la reacción inversa que van a ver en Aminas).</div>
+</div>
+        <div class="rxn-extra">
+          <div class="rxn-extra-box inquiry">
+            <span class="rxn-extra-ico">🔎</span>
+            <div><b>Para indagar:</b> la halogenación de alcanos puede iniciarse con luz UV a temperatura ambiente, pero la nitración necesita calentar hasta 400-450°C. Investiguen la energía del enlace O−N del HNO₃ frente a la del enlace X−X de un halógeno, y expliquen por qué esa diferencia obliga a usar tanto calor.</div>
+          </div>
+          <div class="rxn-extra-box calc">
+            <span class="rxn-extra-ico">🧮</span>
+            <div><b>Para calcular:</b> se hacen reaccionar 4.0 mol de metano con exceso de HNO₃ a 420°C (nitración simple, sin fragmentación). ¿Cuántos moles de H₂O se producen?
+              <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
+              <div class="calc-ans">la nitración es 1:1 (cada R−H nitrado libera exactamente 1 H₂O). <strong>→ Respuesta: 4.0 mol de H₂O</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="quiz-sep"></div>
+        <div class="quiz-lbl">🎯 Práctica rápida</div>
+        <div class="quiz-q" data-qid="al-4-q0">
+          <div class="quiz-q-text">¿Qué condición activa la nitración radical de alcanos?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q0',false)"><span class="quiz-opt-icon">○</span> Luz UV a temperatura ambiente</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q0',true)"><span class="quiz-opt-icon">○</span> Calor muy alto (400-450°C, fase vapor)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q0',false)"><span class="quiz-opt-icon">○</span> Catalizador ácido H₂SO₄ frío</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-4-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="al-4-q1">
+          <div class="quiz-q-text">¿Por qué la nitración industrial de propano da una MEZCLA de varios nitroalcanos?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q1',false)"><span class="quiz-opt-icon">○</span> Porque el HNO₃ reacciona dos veces con la misma molécula</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q1',true)"><span class="quiz-opt-icon">○</span> Porque a esa temperatura también se rompen enlaces C−C (craqueo)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'al-4-q1',false)"><span class="quiz-opt-icon">○</span> Porque el propano tiene dos grupos −OH</div>
+          </div>
+          <div class="quiz-fb" id="fb-al-4-q1"></div>
+        </div>
+      </div>
+    </div>
+
     <button class="tab-back-bottom" onclick="backToMenu()">↑ Volver al menú de categorías</button>
   </div><!-- /tab-alcanos -->
 
@@ -8001,7 +8168,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }catch(e){}
   initMS('cb-0',4);
   // steppers for remaining bodies (3 steps each)
-  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','cb-4','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
+  ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','al-4','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','cb-4','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
   /* 1. .meq-arr → SVG con condición encima */
   document.querySelectorAll('.meq-arr').forEach(el=>{
     const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
@@ -8171,6 +8338,8 @@ const QUIZ_FB={
   'al-1-q1':{ok:'Correcto — C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O. Fórmula: (3n+1)/2 O₂ con n=3: 5.',fail:'Recuerda la fórmula: CₙH₂ₙ₊₂ necesita (3n+1)/2 O₂. Con n=3: 5 moles.'},
   'al-2-q0':{ok:'Correcto — O₂ escaso → CO (o C negro) en lugar de CO₂.',fail:'CO₂+H₂O es combustión completa; O₃ no es producto de combustión.'},
   'al-3-q0':{ok:'Correcto — el ciclopropano tiene tensión angular extrema (60°) y reacciona por adición.',fail:'Ciclopentano y ciclohexano son estables y reaccionan por sustitución (SR) como alcanos.'},
+  'al-4-q0':{ok:'Correcto — el enlace O−N del HNO₃ es fuerte y necesita mucho calor (400-450°C, fase vapor) para romperse homolíticamente.',fail:'La luz UV a temperatura ambiente basta para la halogenación, pero el enlace O−N del HNO₃ es más fuerte y necesita mucho más calor.'},
+  'al-4-q1':{ok:'Correcto — a 400-450°C también se rompen enlaces C−C (craqueo), por eso salen nitroalcanos más cortos además del producto de sustitución directa.',fail:'No: el HNO₃ reacciona una sola vez por cadena de propagación, y el propano no tiene grupos −OH.'},
   'aq-0-q0':{ok:'Correcto — Markovnikov: HCl, H va al CH=, Cl va al CH₃−CH< (más sustituido).',fail:'No: la adición anti-Markovnikov (Cl al C1) requiere radicales (peróxidos).'},
   'aq-0-q1':{ok:'Correcto — el halógeno (electrófilo X) se une al carbono con más sustituyentes (carbocatión más estable).',fail:'No: el H es el que va al C con más H (menos sustituido).'},
   'aq-1-q0':{ok:'Correcto — la decoloración del Br₂ (naranja→incoloro) indica reacción con el doble enlace.',fail:'No: el Br₂ es naranja/marrón, no verde. No hay gas en esta reacción.'},

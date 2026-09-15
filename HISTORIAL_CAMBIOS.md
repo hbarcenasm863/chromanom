@@ -7,6 +7,81 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (37) — Banco de reacciones ampliado a 20 por grupo + nitración de alcanos
+
+### Contexto
+La docente notó que en el modo "Reacciones" del juego solo salían 11
+preguntas por sesión de práctica de un grupo funcional (en vez de las 20
+que arma cada sesión normal), y pidió ampliar el banco hasta que cada
+grupo funcional tuviera 20 ejercicios de reacción, además de agregar la
+nitración a las reacciones de alcanos (en la página de reacciones, con
+explicación completa, y en el banco de preguntas del juego).
+
+### La causa
+El banco de preguntas tipo "reacción" (`QBANK_RXNQ` en `juego.html`) tenía
+menos de 20 preguntas en los 10 grupos funcionales — el más completo
+(alquenos) tenía 11, y el más corto (aminas) solo 5. Como cada sesión de
+práctica toma `Math.min(preguntas_disponibles, 20)`, el grupo con menos
+preguntas determinaba cuántas salían en esa práctica.
+
+### Qué se agregó
+
+**`reacciones.html`** — nueva reacción "Nitración" en Alcanos (tarjeta
+`al-4`, con ecuación, mecanismo radical de 3 pasos, ejemplos, uso
+industrial y 2 preguntas de práctica), siguiendo el mismo formato que las
+demás reacciones. Se actualizaron los contadores de la página (chip de
+navegación, "5 reacciones" en la tarjeta de tipo, y "39 de las 42
+reacciones" en la leyenda).
+
+**`juego.html`** — 115 preguntas nuevas de tipo reacción, repartidas para
+que los 10 grupos funcionales de reacciones queden con exactamente 20
+cada uno:
+
+| Grupo | Antes | Ahora |
+|---|---|---|
+| Alcanos | 9 | 20 |
+| Alquenos | 11 | 20 |
+| Alquinos | 8 | 20 |
+| Aromáticos | 9 | 20 |
+| Halogenuros | 7 | 20 |
+| Alcoholes | 9 | 20 |
+| Aminas | 5 | 20 |
+| Carbonilo (aldehídos/cetonas) | 9 | 20 |
+| Ácidos carboxílicos | 9 | 20 |
+| Derivados de ácido | 9 | 20 |
+
+Se completaron varios grupos con reacciones que ya se enseñan en
+`reacciones.html` pero que todavía no tenían NINGUNA pregunta en el
+juego: ozonólisis, prueba de Baeyer y polimerización (alquenos); adición
+de HCN y condensación aldólica (carbonilo); apertura de anillo del
+ciclopropano y nitración (alcanos); hidrólisis del diazonio a fenol y
+reacción de Sandmeyer (aminas); reacciones de los cloruros de ácido
+(derivados). El resto son variantes con sustratos distintos (cadenas más
+largas, otros haluros/nucleófilos) de reacciones que ya estaban, igual
+que hace el resto del banco.
+
+Se pidió explícitamente NO usar reactivos organometálicos (reactivo de
+Grignard): las 3 preguntas que inicialmente se agregaron con Grignard
+en Carbonilo se reemplazaron por 2 preguntas de la prueba de Fehling y 1
+de reducción con NaBH₄ de una cadena más larga (pentanal), manteniendo
+el grupo en 20.
+
+### Verificación
+Con Playwright: se generaron y verificaron las 115 preguntas (cada
+`ans` coincide exactamente con una de sus opciones, decodificación
+base64 correcta), se confirmó que los 10 grupos quedan en 20/20 dentro
+de `QBANK` ya cargado en el navegador, se renderizaron varias preguntas
+nuevas de cada grupo sin errores de consola, y se jugó una partida
+completa de un grupo (aminas, antes el más corto) de principio a fin
+(20/20 preguntas respondidas, llega a la pantalla de resultados sin
+errores). También se verificó visualmente la tarjeta nueva de Nitración
+en `reacciones.html` (mecanismo, quiz, chip de navegación).
+
+### Sin pasos manuales pendientes
+Ambos archivos se sirven directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (36) — Bug real: resultados de partida que se perdían en silencio + regla de éteres que faltaba
 
 ### Contexto
