@@ -7,6 +7,85 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (28) — Auditoría "Chem Student" de `reacciones.html` y correcciones puntuales
+
+### Contexto
+Después de la sesión anterior (colores, animaciones y legibilidad), la
+docente pidió crear un auditor con persona propia — "Chem Student", un
+estudiante colombiano de 17 años que ya sabe nomenclatura pero recién
+empieza a estudiar reacciones — para revisar TODAS las reacciones de
+`reacciones.html` una por una (las 41 tarjetas, en las 10 pestañas) y dar
+un informe de qué mejorar. Se delegó esa auditoría a un subagente con esa
+persona, que navegó la página con Playwright (escritorio y celular) y leyó
+cada mecanismo paso a paso como si fuera la primera vez que ve el tema.
+
+El informe completo de Chem Student (con el detalle de las 41 reacciones)
+se le compartió a la docente en el chat; no se guardó como archivo del
+repo porque es un documento de una sola revisión, no contenido del sitio.
+
+De los hallazgos, uno resultó ser un falso positivo: el auditor reportó
+`aq-3` (Hidratación) con el texto de condición todavía encimado, pero ese
+caso ya se había corregido en la sesión anterior — el subagente auditó una
+copia (worktree) que se creó justo antes de que esa corrección llegara a
+`main`, así que revisó una versión ligeramente vieja del archivo. Se
+verificó de nuevo con Playwright sobre el código actual y `aq-3` ya se ve
+bien, en escritorio y celular — no se tocó nada ahí en esta sesión.
+
+### Qué se corrigió (hallazgos reales del informe)
+
+**`reacciones.html`:**
+- **Typo visual en `ai-2`** (Hidrogenación selectiva de alquinos, Lindlar):
+  el producto de la reacción ×1 se mostraba como `cis--CH=CH-` (doble
+  guion) por un guion de más pegado a "cis-"; ahora dice `cis-CH=CH-`.
+- **Enlaces de glosario faltantes para "heterolítica"** en `al-3`
+  (Apertura de anillo del ciclopropano) y `hg-1` (SN1): la palabra
+  "homolítica" ya enlazaba al glosario (término "Homólisis y heterólisis")
+  en otras reacciones, pero su opuesta "heterolítica" aparecía sin ese
+  enlace en estas dos — un estudiante que la veía por primera ahí se
+  quedaba sin poder consultarla. Se agregó el mismo enlace.
+- **Migración de carbocationes (desplazamiento 1,2) sin explicar el
+  mecanismo**, en `ao-0` (Deshidratación de alcoholes) y `ar-3`
+  (Alquilación de Friedel-Crafts): el texto decía que un H "migra" o "se
+  transpone" para dar un carbocatión más estable, pero no explicaba cómo.
+  Se agregó una frase corta aclarando que el H se mueve con su par de
+  electrones hacia el carbono con la carga positiva.
+- **Jerga sin explicar, casos puntuales:** "carbonil ylide" (`aq-4`,
+  Ozonólisis) y "radical anión vinílico" (`ai-2`, hidrogenación con
+  Na/NH₃) aparecían sin ninguna aclaración. Se agregó una frase corta
+  entre paréntesis explicando qué es cada uno, sin alargar el texto.
+
+**`text-zoom.js`** (el botón flotante A−/100%/A+ de tamaño de texto,
+compartido entre `teoria.html`, `grupos.html`, `reacciones.html` y
+`referencia.html`): Chem Student notó que ese botón, al quedar fijo en la
+esquina inferior derecha mientras se hace scroll, a veces tapaba las
+últimas palabras de un párrafo o parte de un diagrama, sobre todo en
+celular. Ahora el botón queda semitransparente (55% de opacidad) en
+reposo y recupera opacidad completa al tocarlo o pasar el mouse — sigue
+ahí y se ve, pero estorba menos.
+
+### No se tocó (revisado y descartado a propósito)
+- `cb-1` y `ac-1` no tienen la ecuación grande de arriba que sí tienen las
+  otras 39 reacciones — es porque tienen varios reactivos de partida
+  posibles (no cabe una sola ecuación) y el propio informe lo consideró
+  una inconsistencia menor, no un error. Se dejó así.
+- La sugerencia de agregar un dibujo de la geometría anti-periplanar en
+  `hg-2` (E2) — es una mejora visual más grande (un diagrama 3D nuevo), no
+  una corrección puntual; queda para una sesión aparte si la docente la
+  quiere.
+
+### Verificación
+Se probó con Playwright (Chromium) que las 10 pestañas siguen sin errores
+de consola después de los cambios, y se revisó con capturas de pantalla el
+typo de `ai-2` corregido.
+
+### Pendiente
+Ninguno de los cambios de esta sesión son en `chromanom-analytics.gs`, así
+que no hace falta redesplegar ni recalcular nada en Apps Script.
+`reacciones.html` y `text-zoom.js` se sirven directo por GitHub Pages — el
+cambio queda activo en cuanto se hace push a `main`.
+
+---
+
 ## 2026-09-15 (27) — Colores consistentes reactivo↔producto, flechas animadas y legibilidad en `reacciones.html`
 
 ### Contexto

@@ -28,13 +28,18 @@
   function injectUI(){
     var style=document.createElement('style');
     style.textContent=
+      /* Semitransparente en reposo para no tapar texto/diagramas al hacer scroll
+         (sobre todo en celular, donde queda encima del contenido) — recupera
+         opacidad completa al tocarlo o pasar el mouse. */
       '#text-zoom-widget{position:fixed;bottom:18px;right:18px;z-index:999;'+
         'display:flex;align-items:center;gap:2px;'+
         'background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.75);'+
         'border-radius:100px;padding:5px;'+
         '-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);'+
         'box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 6px 18px rgba(26,110,168,.16);'+
-        'font-family:Outfit,system-ui,sans-serif}'+
+        'font-family:Outfit,system-ui,sans-serif;'+
+        'opacity:.55;transition:opacity .2s ease}'+
+      '#text-zoom-widget:hover,#text-zoom-widget:focus-within,#text-zoom-widget:active{opacity:1}'+
       '#text-zoom-widget button{width:30px;height:30px;border-radius:50%;border:none;'+
         'background:rgba(255,255,255,.65);color:#0d2d42;font-weight:800;cursor:pointer;'+
         'display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;'+
