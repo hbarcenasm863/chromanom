@@ -8861,8 +8861,12 @@ function initRxnAnims(){
     // tarjetas que el paso "Condición" — reemplaza el texto/notación que
     // hubiera ahí a mano, para que las dos vistas de la reacción coincidan.
     // Si no hay estructura dibujable (reactivos con R genérico), se deja tal
-    // cual estaba escrito en el HTML.
-    const meqBox=document.querySelector('#rxn-'+id+' .meq');
+    // cual estaba escrito en el HTML. Excepción: 'hg-1' no tiene una sola
+    // ecuación arriba — son dos PASOS de un mismo mecanismo (ionización,
+    // luego ataque del nucleófilo), no dos reacciones completas como en
+    // ai-0/ao-2/dv-2, así que meterle ahí la reacción neta (con agua y
+    // producto final) en el primer paso sería incorrecto — se deja tal cual.
+    const meqBox=id==='hg-1'?null:document.querySelector('#rxn-'+id+' .meq');
     if(meqBox){
       const builtTop=mkReactionEq(id,d,175);
       if(builtTop)meqBox.innerHTML=builtTop;

@@ -7,6 +7,56 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (34) — Bug: la ecuación neta se metía en el "Paso 1" de SN1
+
+### Contexto
+La docente preguntó si cada reacción explica bien lo que pasa, en
+lenguaje claro para un estudiante que recién empieza. Antes de responder,
+revisé a fondo cómo quedó `hg-1` (SN1) después del rediseño con tarjetas,
+porque esa reacción tiene una estructura distinta a las demás: en vez de
+una sola ecuación grande arriba, tiene dos ecuaciones separadas, una por
+cada paso del mecanismo ("Paso 1: ionización", "Paso 2: ataque del
+nucleófilo").
+
+Encontré que el auto-render de la sesión anterior (que reemplaza la
+ecuación de arriba por las tarjetas dibujadas) tomaba SIEMPRE la primera
+`.meq` de la tarjeta y le metía ahí la reacción neta completa (bromuro de
+terc-butilo + agua → terc-butanol + HBr). Para las reacciones con dos
+ecuaciones "alternativas" completas (ai-0, ai-1, ai-2, ao-2, dv-2) eso es
+correcto — cada `.meq` es una reacción distinta y completa. Pero en
+`hg-1` las dos ecuaciones NO son alternativas: son dos pasos secuenciales
+del MISMO mecanismo, y "Paso 1" debía mostrar solo la ionización
+(R−X → R⁺ + X⁻), no la reacción completa con agua y el producto final ya
+formado — eso confundía la secuencia en vez de aclararla.
+
+### Qué se cambió (`reacciones.html`)
+Se excluyó `hg-1` del auto-render de la ecuación de arriba — para esa
+reacción se deja tal cual estaba escrita a mano (el desglose correcto en
+dos pasos). El resto de la tarjeta (el resumen "🎬 Visión general" y la
+tarjeta de comparación al final) ya mostraban el ejemplo concreto
+correctamente y no se tocaron.
+
+### Verificación
+Se inspeccionó el DOM de `hg-1` directamente (no solo capturas de
+pantalla) para confirmar que "Paso 1" y "Paso 2" volvieron a mostrar el
+contenido correcto, y se revisaron las otras 5 reacciones con dos
+ecuaciones (`ai-0`, `ai-1`, `ai-2`, `ao-2`, `dv-2`) confirmando que la
+suya SÍ es del tipo "dos reacciones completas" y no tienen este problema.
+Pasada por las 10 pestañas sin errores de consola.
+
+### Respuesta a la pregunta de la docente
+Sí — el contenido de "qué sucede en cada reacción" ya se revisó a fondo
+en la auditoría "Chem Student" de una sesión anterior (las 41 reacciones,
+una por una, con la persona de un estudiante de bachillerato que recién
+empieza reacciones): la voz explica el *por qué* no solo el *qué*, y los
+pocos huecos que encontró (enlaces de glosario faltantes, migración de
+carbocationes sin explicar, un par de términos sueltos) ya se corrigieron
+en sesiones posteriores. El rediseño visual de las últimas sesiones no
+tocó esas explicaciones — solo las ecuaciones/colores — excepto por este
+bug puntual en `hg-1`, ya corregido.
+
+---
+
 ## 2026-09-15 (33) — Puente concepto→notación en las tarjetas "Antes de empezar"
 
 ### Contexto
