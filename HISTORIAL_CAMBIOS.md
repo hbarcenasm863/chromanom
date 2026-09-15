@@ -7,6 +7,62 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (38) — La retroalimentación final ahora dice el NOMBRE de la reacción a repasar
+
+### Contexto
+La docente pidió que, al terminar una partida, la pantalla de resultados
+diga cuáles reacciones (por nombre) o qué grupo funcional repasar — antes,
+si la partida era de "Reacciones", la recomendación mostraba la clave
+interna sin traducir (ej. "rxn_alcanos" en vez de un nombre legible) y,
+peor aún, el consejo que la acompañaba ("enfócate en el localizador antes
+del sufijo") es un consejo de NOMENCLATURA que no tiene sentido para un
+error de reacción.
+
+### Qué se hizo (`juego.html`)
+
+1. Se etiquetó cada una de las 200 preguntas de reacción (`QBANK_RXNQ`)
+   con el nombre de la reacción específica que evalúa (`rxn:'...'`), por
+   ejemplo `'Halogenación radical'`, `'Nitración radical'`, `'Apertura de
+   anillo (ciclopropano)'`, `'Esterificación de Fischer'`, `'Sustitución
+   SN2'`, etc. — 19 nombres distintos de reacción repartidos en los 10
+   grupos funcionales.
+2. `checkRxnQ()` ahora guarda ese nombre en el historial de la partida
+   (`history`) junto con cada respuesta.
+3. La sección de recomendaciones de `showResults()` separa los errores en
+   dos grupos: los de **nomenclatura** (sigue mostrando el grupo
+   funcional, como antes) y los de **reacciones** (ahora muestra el
+   nombre de la reacción + el grupo entre paréntesis, ej. "Repasa
+   *Nitración radical (Alcanos)* — 3 errores", con el consejo "repasa el
+   mecanismo, las condiciones y el producto de esta reacción" en vez del
+   consejo de IUPAC). Ambos tipos de error se combinan en un solo ranking
+   por cantidad de errores, así que si una partida mezcla preguntas de
+   nomenclatura y de reacción, salen las 3 más frecuentes de cualquiera
+   de los dos tipos.
+
+### Verificación
+Con Playwright: se jugaron partidas completas de práctica por reacción
+(alcanos, y una mezcla de varios grupos vía "reacciones") respondiendo a
+propósito y se confirmó que la recomendación final nombra la reacción
+correcta con su grupo entre paréntesis (ej. "Hidrohalogenación
+(Alquenos)" vs. "Hidrohalogenación (Alquinos)", distinguiendo
+correctamente la misma reacción en dos grupos distintos). También se
+jugó una partida de nomenclatura pura para confirmar que ese
+comportamiento (grupo funcional + consejo IUPAC) sigue igual que antes.
+
+Al etiquetar las 200 preguntas se encontraron y corrigieron varios
+errores del clasificador automático que habría asignado el nombre de
+reacción equivocado a algunas preguntas (por ejemplo, confundir una
+oxidación de alcohol con esterificación porque el producto de esa
+oxidación es un ácido que contiene "COOH", o confundir la hidrólisis de
+un nitrilo con "formación de amida" porque esa hidrólisis libera NH₃
+como subproducto) — se revisó el listado completo de las 200 etiquetas
+a mano antes de darlo por bueno.
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (37) — Banco de reacciones ampliado a 20 por grupo + nitración de alcanos
 
 ### Contexto
