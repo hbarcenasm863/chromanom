@@ -7,6 +7,86 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (36) — Bug real: resultados de partida que se perdían en silencio + regla de éteres que faltaba
+
+### Contexto
+Varios estudiantes reportaron que no les quedaban guardados los
+resultados de su partida al entrar a jugar por primera vez. Una
+estudiante dio un dato muy concreto: en la hoja de cálculo SÍ aparecía
+su sesión, pero con los resultados en 0 — no lo que en verdad respondió.
+Se investigó el código de "inicio de sesión" (`sendSessionStart`) y el
+de "entrega de resultados" (`sendAnalytics`) en `juego.html`, y se
+reprodujo el bug con pruebas automatizadas (Playwright) simulando una
+respuesta típica de sobrecarga del Google Sheet.
+
+### La causa (`juego.html`)
+Google Apps Script (el que recibe y guarda los resultados) SIEMPRE
+responde con código HTTP 200 ("todo bien"), incluso cuando el guardado
+falló por dentro (por ejemplo, cuando todo un curso entra o envía
+resultados casi al mismo tiempo y la hoja de cálculo se satura) — en ese
+caso responde 200 pero con un mensaje interno de "ok: false".
+
+- `sendSessionStart()` (la fila de "inicio", que se crea apenas el
+  estudiante entra a un nivel) solo revisaba el código HTTP, nunca ese
+  mensaje interno. Un fallo por saturación se interpretaba como éxito y
+  el envío se daba por hecho sin haberse guardado — sin ningún aviso,
+  porque este envío es intencionalmente silencioso.
+- `sendAnalytics()` (la que guarda los resultados reales al terminar la
+  partida) sí revisaba correctamente ese mensaje interno, pero ante un
+  fallo hacía UN solo intento y le dejaba la decisión de reintentar al
+  estudiante (botón "Reintentar envío" en el modal de aviso). Si el
+  estudiante cerraba ese aviso sin pulsar el botón — muy fácil que pase,
+  hay un botón "Cerrar" al lado — sus resultados reales se perdían para
+  siempre, y en la hoja solo quedaba la fila de "inicio" con 0 en todo.
+
+Esto explica exactamente lo que describió la estudiante: la sesión
+existe (se creó al entrar) pero sus respuestas reales nunca llegaron a
+sobrescribir esa fila.
+
+### La corrección
+- `sendSessionStart()` ahora también revisa el mensaje interno de Apps
+  Script antes de dar el envío por exitoso, igual que ya hacía
+  `sendAnalytics()`.
+- `sendAnalytics()` ahora reintenta automáticamente hasta 3 veces (en
+  silencio, con una pausa creciente) antes de mostrarle al estudiante el
+  aviso de error — así un tropiezo momentáneo (típico cuando todo el
+  curso juega a la vez) se resuelve solo, sin depender de que el
+  estudiante entienda y pulse "Reintentar envío".
+
+Se verificó con Playwright, simulando que el Google Sheet falla las
+primeras 2 veces y responde bien a la 3ª: con el código anterior, ambas
+funciones se rendían después de UN solo intento fallido (dándolo por
+bueno en `sendSessionStart`, o mostrando el aviso de error de inmediato
+en `sendAnalytics`); con la corrección, ambas reintentan y terminan
+guardando el resultado correctamente.
+
+### Además: regla de nomenclatura de éteres que faltaba (`grupos.html`)
+La docente notó que en el tema de Éteres todas las reglas y ejemplos
+mostraban solo la forma con "radicales oxi" (metoxi-, etoxi-, IUPAC
+sustitutivo), pero no explicaban cómo se arma el nombre clásico
+"(radical)-il (radical)-il éter" (ej. "etil metil éter", "metil propil
+éter"), aunque esa forma ya se aceptaba como respuesta válida en varios
+ejercicios. Se reescribió esa regla explicando el orden alfabético de
+los radicales, la palabra "éter" al final, y el caso de radicales
+iguales (prefijo "di-"), con tres moléculas dibujadas de ejemplo
+(dimetil éter, metil propil éter, dipropil éter). Verificado visualmente
+con Playwright.
+
+### Sin pasos manuales pendientes
+Ambos archivos (`juego.html`, `grupos.html`) se sirven directo por
+GitHub Pages — el cambio queda activo con el push, sin tocar el editor
+de Apps Script.
+
+### Pendiente / limitación conocida
+El reintento automático de `sendAnalytics()` reduce mucho el riesgo,
+pero no lo elimina del todo: si un estudiante cierra el navegador en los
+segundos exactos en que están corriendo los reintentos (antes de que
+termine el último), esos resultados sí se pueden perder — es un
+límite del navegador (deja de ejecutar JavaScript en cuanto la pestaña
+se cierra), no algo que se pueda arreglar solo con más reintentos.
+
+---
+
 ## 2026-09-15 (35) — Verificación completa de las 41 reacciones: 4 bugs más corregidos
 
 ### Contexto

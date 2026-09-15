@@ -5431,8 +5431,17 @@ function sendSessionStart(){
   });
   const INTENTOS=3;
   function intentar(n){
+    // Igual que sendAnalytics(): Apps Script siempre responde HTTP 200,
+    // incluso cuando el guardado falló internamente (ej. saturación del
+    // Spreadsheet con toda la clase entrando a la vez) — devuelve
+    // {ok:false,...} con status 200. Revisar solo r.ok (como hacía antes
+    // este envío) daba por exitoso un "inicio" que en realidad nunca se
+    // guardó, y como es silencioso, nadie se enteraba de que se había
+    // perdido. Por eso también hay que leer el "ok" del cuerpo JSON antes
+    // de dar el intento por bueno.
     fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-      .then(r=>{ if(!r.ok) throw new Error('http '+r.status); })
+      .then(r=>r.ok?r.json():Promise.reject(new Error('http '+r.status)))
+      .then(j=>{ if(!j||!j.ok) throw new Error(j&&j.error||'respuesta sin ok'); })
       .catch(()=>{
         if(n<INTENTOS-1) setTimeout(()=>intentar(n+1), 1500*(n+1));
       });
@@ -5471,20 +5480,41 @@ function buildPayload(trigger){
   };
 }
 
+// Reintentos automáticos (silenciosos) antes de darle al estudiante el modal
+// de error: antes, un solo tropiezo de red o de saturación del Spreadsheet
+// (toda la clase entrando/enviando a la vez) mostraba de inmediato el modal
+// de "no se pudo guardar" con el botón "Reintentar envío" — y si el
+// estudiante lo cerraba sin pulsar ese botón (o no entendía qué significaba),
+// sus resultados reales quedaban perdidos para siempre: en la hoja solo
+// sobrevivía la fila del "inicio" (con Correctas/Total en 0), nunca la de
+// "fin_partida" con lo que de verdad respondió. Reintentar solo nosotros
+// primero, como ya hace sendSessionStart(), recupera la mayoría de esos
+// tropiezos momentáneos sin depender de que el estudiante actúe.
+const _ANALYTICS_INTENTOS=3;
 function sendAnalytics(trigger){
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   if(_analyticsSent) return;
   if(history.length===0) return;
   _analyticsSent=true;
   const body=JSON.stringify(buildPayload(trigger));
-  // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
-  fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-    .then(r=>r.ok?r.json():Promise.reject(r.status))
-    // Apps Script siempre responde HTTP 200; el éxito real va en el campo
-    // "ok" del cuerpo JSON — revisar solo r.ok (status HTTP) ocultaba fallas
-    // internas (p. ej. al reconstruir las hojas de estadísticas).
-    .then(j=>{ if(j&&j.ok) _updateSheetsStatus('ok'); else { _analyticsSent=false; _updateSheetsStatus('error'); } })
-    .catch(()=>{ _analyticsSent=false; _updateSheetsStatus('error'); });
+  function intentar(n){
+    // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
+    fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
+      .then(r=>r.ok?r.json():Promise.reject(r.status))
+      // Apps Script siempre responde HTTP 200; el éxito real va en el campo
+      // "ok" del cuerpo JSON — revisar solo r.ok (status HTTP) ocultaba fallas
+      // internas (p. ej. al reconstruir las hojas de estadísticas).
+      .then(j=>{
+        if(j&&j.ok){ _updateSheetsStatus('ok'); return; }
+        if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
+        _analyticsSent=false; _updateSheetsStatus('error');
+      })
+      .catch(()=>{
+        if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
+        _analyticsSent=false; _updateSheetsStatus('error');
+      });
+  }
+  intentar(0);
 }
 
 function _updateSheetsStatus(state){
