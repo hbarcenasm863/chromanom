@@ -7,6 +7,62 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (32) — Se aplican los pendientes de la auditoría de Mayer
+
+### Contexto
+Después del rediseño estilo Timberlake, la docente pidió seguir con lo
+que había quedado pendiente del informe de la auditoría de diseño
+instruccional (principios de Mayer) de la sesión anterior.
+
+### Qué se cambió (`reacciones.html`)
+
+**Las 10 tarjetas "tipo de reacción"** (la cajita al principio de cada
+pestaña, lo primero que ve el estudiante) usaban notación de química
+universitaria que ningún profesor de colegio escribe en el tablero:
+Lewis-dot (`Nu:⁻`), carga parcial (`δ+`), electrófilo genérico (`E⁺`), y
+sustituyentes genéricos (`R`, `A`, `L`) metidos entre paréntesis dentro de
+la fórmula. Se reemplazaron las 10 por un ejemplo concreto real (la
+mayoría reutilizando el mismo ejemplo que ya usa alguna de las
+reacciones de esa pestaña, para no introducir un caso nuevo sin explicar):
+Alcanos, Alquenos, Alquinos, Aromáticos, Halogenuros (SN), Eliminación E2,
+Alcoholes, Aminas, Carbonilo y Derivados de ácido.
+
+**Color de "Ácidos Carboxílicos" (señalización contradictoria):** esa
+tarjeta usaba el mismo rojo que las respuestas incorrectas de los quices
+y la caja "✗ Anti-Markovnikov" — un estudiante podía leerlo como "alerta
+de error" sin serlo. Se le asignó un color propio (azul grisáceo, nuevo
+en la paleta como `--c5`), en vez de reciclar el rojo de error.
+
+**Recuadro "Condición" menos saturado:** el amarillo/naranja intenso del
+paso "🎬 Condición" (en las 41 reacciones) se leía como alerta de
+aplicación, no como libro de texto. Se bajó a un crema más suave
+(`#fdf6e3` con texto `#5c4a1a`), sin tocar el verde/azul de los otros dos
+pasos.
+
+**El morado deja de ser el color de la pestaña "Sustitución Nucleofílica
+(SN)":** ese morado (`#7c3aed`) es el mismo que usan las flechas curvas
+de todos los mecanismos del sitio — al reusarlo también como identidad de
+la pestaña SN, dejaba de significar una sola cosa. Se le asignó a esa
+pestaña el rosado ya usado en Aromáticos/Alcoholes (tarjeta de tipo,
+títulos y insignias de SN1/SN2), dejando el morado únicamente para las
+flechas de mecanismo.
+
+### Verificación
+Playwright (Chromium): pasada por las 10 pestañas sin errores de consola,
+y capturas de pantalla de las tarjetas cambiadas (Carbonilo, Ácidos,
+Halogenuros, Alquinos) y del recuadro "Condición" ya desaturado.
+
+### Pendiente (del informe de Mayer, quedó fuera de esta sesión)
+El puente explícito "esto se escribe así" entre el concepto (ya explicado
+en las tarjetas "Antes de empezar") y su notación (`Nu⁻`, `δ+`, etc.) — es
+una tarea de redacción más que de diseño, para cuando la docente quiera
+retomarla.
+
+### Sin pasos manuales pendientes
+`reacciones.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (31) — Rediseño estilo libro de texto (Timberlake) en las 41 reacciones
 
 ### Contexto

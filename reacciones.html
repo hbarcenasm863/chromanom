@@ -18,9 +18,9 @@
 :root{
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
-  --c1:#0891b2;--c2:#166534;--c3:#b45309;--c4:#CC79A7;
-  --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
-  --c1t:#0e7490;--c2t:#14532d;--c3t:#92400e;--c4t:#A0527F;
+  --c1:#0891b2;--c2:#166534;--c3:#b45309;--c4:#CC79A7;--c5:#5b7c99;
+  --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;--c5b:#e8eef3;
+  --c1t:#0e7490;--c2t:#14532d;--c3t:#92400e;--c4t:#A0527F;--c5t:#3d5a73;
   --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
   --arr:#7c3aed;--arrb:#ede9fe;
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
@@ -381,7 +381,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
   font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;
   text-align:center;line-height:1.5;overflow:hidden}
 .rxn-anim-vis.green{background:#dcfce7;color:#14532d;border:1.5px solid #86efac}
-.rxn-anim-vis.orange{background:#fef3c7;color:#92400e;border:1.5px solid #fcd34d}
+.rxn-anim-vis.orange{background:#fdf6e3;color:#5c4a1a;border:1.5px solid #e8dcae} /* menos saturado que el amarillo original — se leía como alerta de app, no como libro de texto */
 .rxn-anim-vis.blue{background:#dbeafe;color:#1d4ed8;border:1.5px solid #93c5fd}
 .rxn-anim-vis svg{max-width:100%;height:auto}
 /* ── SVG molecule animations ── */
@@ -736,7 +736,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">⚡ Sustitución Radical (SR)</div>
-      <div class="tipo-card-eq">R−H + X₂  →[hν / Δ]→  R−X + HX</div>
+      <div class="tipo-card-eq">CH₄ + Cl₂  →[hν / Δ]→  CH₃Cl + HCl</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">hν o Δ</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">radical X•</span>
@@ -1439,7 +1439,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">➕ Adición Electrofílica (AE)</div>
-      <div class="tipo-card-eq">R−CH=CH₂ + E−A  →[AE]→  R−CH(A)−CH₂(E)</div>
+      <div class="tipo-card-eq">CH₃−CH=CH₂ + HBr  →[Markovnikov]→  CH₃−CHBr−CH₃</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HX · H₂O · X₂ · H₂</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">O₃ · KMnO₄</span>
@@ -2549,7 +2549,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">➕➕ Adición al Triple Enlace (×1 y ×2)</div>
-      <div class="tipo-card-eq">R−C≡C−R' + E−A →[×1]→ alqueno  →[×2]→ alcano / dihaluro</div>
+      <div class="tipo-card-eq">CH₃−C≡C−CH₃ + H₂ →[×1, Lindlar]→ cis-alqueno →[×2, Ni]→ alcano</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HX ×1/×2</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">X₂ ×1/×2</span>
@@ -3457,7 +3457,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
       <div class="tipo-card-title" style="color:var(--c4t)">⚡ Sustitución Electrofílica Aromática (SEA)</div>
-      <div class="tipo-card-eq">C₆H₆ + E⁺  →[Lewis]→  C₆H₅−E + H⁺  (aromaticidad conservada)</div>
+      <div class="tipo-card-eq">C₆H₆ + Br⁺  →[Lewis]→  C₆H₅−Br + H⁺  (aromaticidad conservada)</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">FeBr₃ · AlCl₃</span>
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">HNO₃/H₂SO₄</span>
@@ -4426,12 +4426,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="tipo-card" style="border-color:#7c3aed;border-left:4px solid #7c3aed">
-      <div class="tipo-card-title" style="color:#7c3aed">🔄 Sustitución Nucleofílica (SN)</div>
-      <div class="tipo-card-eq">Nu:⁻ + R−X  →  Nu−R + X⁻</div>
+    <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
+      <div class="tipo-card-title" style="color:var(--c4t)">🔄 Sustitución Nucleofílica (SN)</div>
+      <div class="tipo-card-eq">OH⁻ + CH₃−Br  →  CH₃−OH + Br⁻</div>
       <div class="tipo-card-rules">
-        <span class="tipo-card-badge" style="background:#ede9fe;color:#7c3aed">SN2: 1° · inversión · Nu fuerte</span>
-        <span class="tipo-card-badge" style="background:#ede9fe;color:#7c3aed">SN1: 3° · carbocatión · racemización</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">SN2: 1° · inversión · Nu fuerte</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">SN1: 3° · carbocatión · racemización</span>
         <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">2 reacciones</span>
       </div>
       <div class="tipo-card-desc">El nucleófilo (Nu:) desplaza el grupo saliente (X) del carbono sp³. <strong>SN2:</strong> un paso concertado, inversión de Walden, favorece sustrato 1°. <strong>SN1:</strong> dos pasos vía carbocatión (sp², plano), racemización, favorece sustrato 3°.</div>
@@ -4443,8 +4443,8 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div id="rxn-hg-0" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-0')">
         <div class="rxn-head-left">
-          <span class="rxn-title" style="color:#7c3aed">SN2 — Sustitución Nucleofílica Bimolecular</span>
-          <span class="rxn-badge" style="background:#ede9fe;color:#7c3aed">1 paso · inversión · favorece 1°</span>
+          <span class="rxn-title" style="color:var(--c4t)">SN2 — Sustitución Nucleofílica Bimolecular</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">1 paso · inversión · favorece 1°</span>
         </div>
         <span class="rxn-chev" id="chev-hg-0">▾</span>
       </div>
@@ -4608,13 +4608,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
     <div id="rxn-hg-1" class="rxn-card">
       <div class="rxn-head" onclick="toggleRxn('hg-1')">
         <div class="rxn-head-left">
-          <span class="rxn-title" style="color:#7c3aed">SN1 — Sustitución Nucleofílica Unimolecular</span>
-          <span class="rxn-badge" style="background:#ede9fe;color:#7c3aed">2 pasos · carbocatión · favorece 3°</span>
+          <span class="rxn-title" style="color:var(--c4t)">SN1 — Sustitución Nucleofílica Unimolecular</span>
+          <span class="rxn-badge" style="background:var(--c4b);color:var(--c4t)">2 pasos · carbocatión · favorece 3°</span>
         </div>
         <span class="rxn-chev" id="chev-hg-1">▾</span>
       </div>
       <div class="rxn-body" id="body-hg-1">
-        <div style="font-size:.7rem;font-weight:700;color:#7c3aed;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 1 (lento — determinante)</div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c4t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 1 (lento — determinante)</div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol">R−<span class="bp">X</span></span>
@@ -4629,7 +4629,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="meq-prod"><span class="hn">X⁻</span></span>
           </div>
         </div>
-        <div style="font-size:.7rem;font-weight:700;color:#7c3aed;margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 2 (rápido)</div>
+        <div style="font-size:.7rem;font-weight:700;color:var(--c4t);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em">Paso 2 (rápido)</div>
         <div class="meq">
           <div class="meq-side">
             <span class="meq-mol"><span class="bp">R⁺</span></span>
@@ -4770,7 +4770,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">✂️ Eliminación E2</div>
-      <div class="tipo-card-eq">Base + H−Cβ−Cα−X  →[anti-periplanar]→  Cβ=Cα + HBase + X⁻</div>
+      <div class="tipo-card-eq">CH₃−CHBr−CH₃ + KOH  →[anti-periplanar]→  CH₃−CH=CH₂ + KBr + H₂O</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">KOH/EtOH · t-BuOK</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">anti-periplanar (180°)</span>
@@ -4968,7 +4968,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c4);border-left:4px solid var(--c4)">
       <div class="tipo-card-title" style="color:var(--c4t)">🔄 Reacciones de los Alcoholes</div>
-      <div class="tipo-card-eq">R−OH  →  alqueno (−H₂O) / R−X / RCOO−R' / R−C=O</div>
+      <div class="tipo-card-eq">CH₃CH₂OH  →  alqueno (−H₂O) / haloalcano / éster / aldehído</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">deshidratación H₂SO₄/Δ</span>
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">oxidación PCC · K₂Cr₂O₇</span>
@@ -5675,7 +5675,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
       <div class="tipo-card-title" style="color:var(--c1t)">🔄 Reacciones de las Aminas</div>
-      <div class="tipo-card-eq">R−NH₂ + H⁺ → R−NH₃⁺  |  ArNH₂ + HNO₂ → Ar−N₂⁺ (diazonio)</div>
+      <div class="tipo-card-eq">CH₃NH₂ + H⁺ → CH₃NH₃⁺  |  C₆H₅NH₂ + HNO₂ → C₆H₅N₂⁺ (diazonio)</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">neutralización</span>
         <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">alquilación · acilación</span>
@@ -6192,7 +6192,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c3);border-left:4px solid var(--c3)">
       <div class="tipo-card-title" style="color:var(--c3t)">➕ Adición Nucleofílica al C=O</div>
-      <div class="tipo-card-eq">Nu:⁻ + R−C(δ+)=O  →  R−C(Nu)−O⁻  →[H⁺]→  R−C(Nu)−OH</div>
+      <div class="tipo-card-eq">CN⁻ + CH₃CHO  →[H⁺]→  cianohidrina</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">HCN → cianohidrina</span>
         <span class="tipo-card-badge" style="background:var(--c3b);color:var(--c3t)">LiAlH₄/NaBH₄ → alcohol</span>
@@ -7027,12 +7027,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       </div>
     </div>
 
-    <div class="tipo-card" style="border-color:var(--err);border-left:4px solid var(--err)">
-      <div class="tipo-card-title" style="color:var(--errt)">🔄 Reacciones de los Ácidos Carboxílicos</div>
-      <div class="tipo-card-eq">RCOOH + Base → RCOO⁻ + H₂O  |  RCOOH + R'OH ⇌ RCOOR' + H₂O</div>
+    <div class="tipo-card" style="border-color:var(--c5);border-left:4px solid var(--c5)">
+      <div class="tipo-card-title" style="color:var(--c5t)">🔄 Reacciones de los Ácidos Carboxílicos</div>
+      <div class="tipo-card-eq">CH₃COOH + NaOH → CH₃COO⁻Na⁺ + H₂O  |  CH₃COOH + CH₃CH₂OH ⇌ CH₃COOCH₂CH₃ + H₂O</div>
       <div class="tipo-card-rules">
-        <span class="tipo-card-badge" style="background:var(--errb);color:var(--errt)">neutralización</span>
-        <span class="tipo-card-badge" style="background:var(--errb);color:var(--errt)">esterificación Fischer</span>
+        <span class="tipo-card-badge" style="background:var(--c5b);color:var(--c5t)">neutralización</span>
+        <span class="tipo-card-badge" style="background:var(--c5b);color:var(--c5t)">esterificación Fischer</span>
         <span class="tipo-card-badge" style="background:var(--surf);color:var(--dimmer);border:1px solid var(--brd)">pKa ≈ 4–5 (resonancia RCOO⁻)</span>
         <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">2 reacciones</span>
       </div>
@@ -7392,7 +7392,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
     <div class="tipo-card" style="border-color:var(--c1);border-left:4px solid var(--c1)">
       <div class="tipo-card-title" style="color:var(--c1t)">🔄 Reacciones de los Derivados de Ácidos</div>
-      <div class="tipo-card-eq">RC(=O)−L + Nu:  →  RC(=O)−Nu + L⁻  (SAcN)</div>
+      <div class="tipo-card-eq">CH₃COCl + H₂O  →[SAcN]→  CH₃COOH + HCl</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">RCOCl &gt; anhídrido</span>
         <span class="tipo-card-badge" style="background:var(--c1b);color:var(--c1t)">éster &gt; amida</span>
