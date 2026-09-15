@@ -8693,6 +8693,13 @@ function highlightBonds(s){
   return s.replace(/≡/g,`<span style="${st}">≡</span>`)
           .replace(/=/g,`<span style="${st}">=</span>`);
 }
+// Saca el "+ algo" que acompaña al reactivo/producto principal en el texto
+// de una ecuación (ej. "Cl₂" en "CH₃−CH₂−CH₃ + Cl₂", o "HCl" en el producto),
+// para mostrarlo como etiqueta chiquita junto al dibujo de la molécula principal.
+function splitExtra(part){
+  const i=(part||'').indexOf(' + ');
+  return i>=0?part.slice(i):'';
+}
 
 // ─── STAGGERED SVG ANIMATOR ──────────────────────────────────────────────────
 // Post-processes an SVG string to add staggered animation-delay to every
@@ -8726,10 +8733,29 @@ function initRxnAnims(){
     }
     const vis1=steps[1].querySelector('.rxn-anim-vis');
     if(vis1){
-      // Solo la ecuación completa (reactivo → condición → producto), con los
-      // enlaces = / ≡ resaltados en color — antes se duplicaba con mini-SVGs
-      // diminutos y desvanecidos que hacían el doble enlace ilegible.
-      vis1.innerHTML=d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;text-align:center;line-height:2;white-space:pre-line">${highlightBonds(d.eq)}</div>`:'';
+      // Reactivo dibujado con enlaces (mismo estilo que el paso 1 y el 3) +
+      // flecha con la condición + producto dibujado con enlaces — así se ve
+      // como una reacción de verdad, no como texto plano con "CH(Cl)" entre
+      // paréntesis (la profesora no enseña así en el tablero).
+      const rSvg=d.r?(d.r.mol&&RM[d.r.mol]?animateSVG(mkDevSVG(RM[d.r.mol])):d.r.benz!=null?animateSVG(mkBenzSVG(d.r.benz)):''):'';
+      const pSvg=d.p?(d.p.mol&&RM[d.p.mol]?animateSVG(mkDevSVG(RM[d.p.mol])):d.p.benz!=null?animateSVG(mkBenzSVG(d.p.benz)):''):'';
+      if(rSvg||pSvg){
+        const eqParts=(d.eq||'').split('<br>');
+        const condM=(eqParts[1]||'').match(/──\[([^\]]+)\]──→/);
+        const arrowSvg=mkArr(condM?condM[1]:'',90,true);
+        const extraR=splitExtra(eqParts[0]||''), extraP=splitExtra(eqParts[2]||'');
+        const sideStyle='flex:1 1 0;min-width:80px;max-width:220px;display:flex;flex-direction:column;align-items:center;gap:3px';
+        const extraStyle="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--dim);white-space:nowrap";
+        vis1.innerHTML='<div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;width:100%">'
+          +`<div style="${sideStyle}">${rSvg||`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem">${highlightBonds(eqParts[0]||'')}</div>`}${extraR?`<div style="${extraStyle}">${highlightBonds(extraR)}</div>`:''}</div>`
+          +`<div style="flex-shrink:0">${arrowSvg}</div>`
+          +`<div style="${sideStyle}">${pSvg||`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem">${highlightBonds(eqParts[2]||'')}</div>`}${extraP?`<div style="${extraStyle}">${highlightBonds(extraP)}</div>`:''}</div>`
+          +'</div>';
+      }else{
+        // Sin dibujo disponible (reacciones con R genérico, ej. R−COCl): se
+        // mantiene la ecuación en texto, con los enlaces = / ≡ resaltados.
+        vis1.innerHTML=d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;text-align:center;line-height:2;white-space:pre-line">${highlightBonds(d.eq)}</div>`:'';
+      }
     }
     const vis2=steps[2].querySelector('.rxn-anim-vis');
     if(vis2&&d.p){

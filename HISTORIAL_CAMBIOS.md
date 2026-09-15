@@ -7,6 +7,54 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (30) — El paso "Condición" vuelve a mostrar enlaces dibujados, no paréntesis
+
+### Contexto
+La docente recargó la página y siguió viendo el paso "Condición" del
+resumen de 3 pasos como puro texto plano ("CH₃-CH₂-CH₃ + Cl₂ / —[hν /
+Δ]—→ / CH₃-CH(Cl)-CH₃ + HCl"): dijo que no se ve como una reacción, que
+los colores no ayudan, y sobre todo que ella no enseña con notación entre
+paréntesis como "CH(Cl)" — en el tablero dibuja los enlaces arriba y
+abajo, y quiere que la página haga lo mismo.
+
+Esto expone un error de la sesión anterior: para arreglar el problema de
+texto de condición encimado (sesión 27) quité los mini-dibujos de
+estructura de este paso porque salían diminutos y desvanecidos, dejando
+solo la ecuación en texto — pero el texto usa notación semidesarrollada
+con paréntesis, que es justo lo que la docente no quiere. La solución
+correcta no era quitar el dibujo, sino arreglar su tamaño.
+
+### Qué se cambió (`reacciones.html`)
+
+El paso "Condición" ahora arma la reacción igual que el paso 1 (reactivo)
+y el paso 3 (producto): dibuja la molécula con sus enlaces (líneas hacia
+arriba/abajo para los sustituyentes, igual que en el pizarrón) a tamaño
+completo — no el mini-dibujo desvanecido de antes — con una flecha y la
+condición en el medio, y el reactivo/subproducto secundario (ej. "Cl₂",
+"HCl") como etiqueta pequeña al lado. Cuando la reacción no tiene una
+estructura específica para dibujar (los pocos casos con un "R" genérico,
+como cloruro de ácido + nucleófilo), se mantiene el texto como respaldo.
+
+### Verificación
+Probado con Playwright en escritorio y celular en Halogenación de alcanos
+(el caso que reportó la docente) — ya se ven los enlaces dibujados, sin
+paréntesis. Se revisó también un caso sin dibujo disponible (cloruros de
+ácido) para confirmar que el respaldo en texto sigue funcionando. Pasada
+completa por las 10 pestañas sin errores de consola.
+
+### Pendiente
+La docente señaló, además, que el fondo amarillo con letra roja/marrón de
+este paso "no se ve como un libro de texto", y que la tarjeta de
+introducción de cada tipo de reacción (ej. "Nu:⁻ + R-C(δ+)=O → ...") es
+demasiado abstracta/técnica y desconectada para estudiantes de
+secundaria. Pidió una auditoría nueva enfocada en los principios de Mayer
+de aprendizaje multimedia y en si la página es coherente con lo que se le
+va a enseñar a estudiantes de secundaria en Colombia — se lanzó esa
+auditoría (ver próxima entrada) antes de seguir cambiando colores a
+ciegas, para no hacer y deshacer.
+
+---
+
 ## 2026-09-15 (29) — Última inconsistencia visual: `cb-1` y `ac-1` sin ecuación
 
 ### Contexto
