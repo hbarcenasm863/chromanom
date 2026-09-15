@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-15 (35) — Verificación completa de las 41 reacciones: 4 bugs más corregidos
+
+### Contexto
+Después de corregir el bug de `hg-1`, la docente pidió revisar que todo
+lo demás quedara bien. Se delegó una verificación de solo lectura de las
+41 reacciones (comparando cada tarjeta generada contra sus datos fuente,
+no solo si se veía bien), que encontró 4 problemas reales más.
+
+### Qué se corrigió (`reacciones.html`)
+
+1. **`ai-1` (Halogenación de alquinos) — mismo patrón que `hg-1`.** Esta
+   reacción también tiene dos ecuaciones que son PASOS secuenciales
+   (adición ×1 → dihaloalqueno, luego ×2 sobre ese producto → tetrahaloalcano),
+   no alternativas completas. El auto-render le estaba dibujando el
+   producto final ×2 en el recuadro rotulado "×1", igual que había pasado
+   en `hg-1`. Se excluyó del mismo modo.
+2. **`ao-1` (Oxidación de alcoholes) y `ao-3` (Esterificación de Fischer)
+   — bug de datos, no del auto-render.** Estas eran las únicas 2 de las
+   41 entradas cuyo texto de ecuación no usaba el separador `<br>` que
+   usan las otras 39 — en `ao-3` eso rompía el recuadro por completo
+   (aparecía texto crudo sin formato, una flecha sin condición y sin
+   apuntar a nada); en `ao-1` el único síntoma visible era que la flecha
+   se quedaba sin la etiqueta de condición. Se les agregó el mismo
+   formato que usan las demás.
+3. **`mkReactionEq()` (la función que arma las tarjetas): pérdida de
+   información en el caso de respaldo en texto.** Cuando una molécula no
+   tiene dibujo disponible (ej. `ai-2`, el alquino interno todavía no
+   está en el catálogo de estructuras), la tarjeta de texto usaba un
+   campo más corto que a veces no incluía el reactivo que la acompaña
+   (le faltaba el "+ H₂ (1 mol)"). Ahora usa siempre la línea completa de
+   la ecuación.
+4. **`ai-4` (Acidez de alquinos terminales) — dos etiquetas de la gráfica
+   de pKa se encimaban** ("H₂C=CH₂: 44" y "CH₃CH₃: 50"). Se separaron
+   dándole más ancho a esa gráfica SVG puntual.
+
+### Verificación
+Se re-verificaron las 5 correcciones con Playwright y capturas de
+pantalla, y se confirmó que las otras 36 reacciones (revisadas una por
+una en la verificación) y las 10 pestañas quedaron sin problemas — sin
+errores de consola.
+
+### Sin pasos manuales pendientes
+`reacciones.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (34) — Bug: la ecuación neta se metía en el "Paso 1" de SN1
 
 ### Contexto

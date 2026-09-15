@@ -3347,7 +3347,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ai-4',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ai-4-0">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="82" viewBox="0 0 200 82" style="overflow:visible;display:block;margin:0 auto" ><text x="90" y="14" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pKa (más bajo = más ácido)</text><line x1="10" y1="30" x2="180" y2="30" stroke="var(--brd)" stroke-width="6" stroke-linecap="round"/><line x1="10" y1="30" x2="70" y2="30" stroke="var(--c3t)" stroke-width="6" stroke-linecap="round"/><text x="40" y="50" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">HC≡CH: 25</text><text x="115" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂C=CH₂: 44</text><text x="160" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₃CH₃: 50</text><text x="90" y="72" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">C(sp) 50% s → más electronegativo → H más ácido</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="230" height="82" viewBox="0 0 230 82" style="overflow:visible;display:block;margin:0 auto" ><text x="115" y="14" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">pKa (más bajo = más ácido)</text><line x1="15" y1="30" x2="215" y2="30" stroke="var(--brd)" stroke-width="6" stroke-linecap="round"/><line x1="15" y1="30" x2="85" y2="30" stroke="var(--c3t)" stroke-width="6" stroke-linecap="round"/><text x="45" y="50" text-anchor="middle" font-size="9" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">HC≡CH: 25</text><text x="128" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂C=CH₂: 44</text><text x="197" y="50" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">CH₃CH₃: 50</text><text x="115" y="72" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">C(sp) 50% s → más electronegativo → H más ácido</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — ¿Por qué el alquino terminal es ácido?</div>
             <div class="mech-step-h">El H sobre un C sp (alquino terminal) es más fácil de arrancar porque ese orbital sp tiene más carácter s (50%)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
@@ -8615,7 +8615,7 @@ const RF={
   },
   'ao-1':{
     r:{mol:'etanol'},
-    eq:'CH₃CH₂OH →[K₂Cr₂O₇/H₂SO₄]→ CH₃CHO →[O]→ CH₃COOH',
+    eq:'CH₃CH₂OH<br>──[K₂Cr₂O₇/H₂SO₄, exceso]──→<br>CH₃COOH',
     p:{mol:'acidoetanoico'},
     labels:['Reactivo: alcohol primario (etanol)','Condición: oxidante fuerte (K₂Cr₂O₇ o KMnO₄). 1° alcohol → aldehído → ácido; 2° alcohol → cetona; 3° no se oxida','Producto: ácido carboxílico (ácido etanoico = ácido acético). El Cr(VI) naranja → Cr(III) verde'],
     speaks:['Reactivo: etanol, un alcohol primario.','Condición: oxidación con dicromato de potasio. Un alcohol primario se oxida primero a aldehído y luego a ácido carboxílico. El cambio de naranja a verde confirma la oxidación.','Producto: ácido etanoico, también llamado ácido acético. Es el ácido del vinagre.']
@@ -8629,7 +8629,7 @@ const RF={
   },
   'ao-3':{
     r:{mol:'acidoetanoico'},
-    eq:'CH₃COOH + C₂H₅OH ⇌[H₂SO₄/Δ] CH₃COOC₂H₅ + H₂O',
+    eq:'CH₃COOH + C₂H₅OH<br>──[H₂SO₄, Δ, reversible]──→<br>CH₃COOC₂H₅ + H₂O',
     p:{mol:'acetatoetilo'},
     labels:['Reactivos: ácido carboxílico (CH₃COOH) + alcohol (C₂H₅OH)','Condición: catalizador ácido (H₂SO₄) y calor. Equilibrio → se retira H₂O para desplazarlo a productos','Producto: éster (acetato de etilo). Aroma afrutado. Reacción reversible (puede hidrolizarse)'],
     speaks:['Reactivos: ácido etanoico y etanol.','Condición: esterificación de Fischer con ácido sulfúrico. Es una reacción de equilibrio; retirar el agua desplaza el equilibrio hacia el éster.','Producto: acetato de etilo. Tiene olor afrutado y se usa como disolvente y en esmaltes de uñas.']
@@ -8793,15 +8793,20 @@ function mkReactionEq(id,d,arrW){
   const names=RXN_NAMES[id]||{};
   const rName=names.r||(d.r&&d.r.mol?MOL_NAMES[d.r.mol]:'')||'';
   const pName=names.p||(d.p&&d.p.mol?MOL_NAMES[d.p.mol]:'')||'';
-  const rCard=mkMolCard(d.r,2,rName), pCard=mkMolCard(d.p,1,pName);
-  if(!rCard&&!pCard)return ''; // ninguna estructura dibujable: que el llamador use el texto
   const eqParts=d.eq.split('<br>');
+  const rDrawn=!!(d.r&&(d.r.mol||d.r.benz!=null)), pDrawn=!!(d.p&&(d.p.mol||d.p.benz!=null));
+  // Si no hay dibujo, la tarjeta de texto usa la línea COMPLETA de la
+  // ecuación (eqParts), no d.r.eq/d.p.eq — ese campo a veces es más corto
+  // (solo la molécula principal, sin el "+ H₂" o el reactivo que la
+  // acompaña), y se perdía esa parte en pantalla.
+  const rCard=rDrawn?mkMolCard(d.r,2,rName):mkMolCard({eq:eqParts[0]},2,rName);
+  const pCard=pDrawn?mkMolCard(d.p,1,pName):mkMolCard({eq:eqParts[2]},1,pName);
+  if(!rCard&&!pCard)return ''; // ninguna estructura dibujable: que el llamador use el texto
   const condM=(eqParts[1]||'').match(/──\[([^\]]+)\]──→/);
   const arrowSvg=mkArr(condM?condM[1]:'',arrW||90,true);
   // El "+ algo" solo se saca aparte cuando la tarjeta es un dibujo real
   // (mol/benz): si quedó en texto de respaldo, ese "+ algo" YA viene
   // incluido en ese texto y sacarlo de nuevo lo duplicaba en pantalla.
-  const rDrawn=!!(d.r&&(d.r.mol||d.r.benz!=null)), pDrawn=!!(d.p&&(d.p.mol||d.p.benz!=null));
   const extraR=rDrawn?splitExtra(eqParts[0]||''):'', extraP=pDrawn?splitExtra(eqParts[2]||''):'';
   return '<div class="rxn-eq-row">'
     +(rCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[0]||'')}</div>`)
@@ -8861,12 +8866,14 @@ function initRxnAnims(){
     // tarjetas que el paso "Condición" — reemplaza el texto/notación que
     // hubiera ahí a mano, para que las dos vistas de la reacción coincidan.
     // Si no hay estructura dibujable (reactivos con R genérico), se deja tal
-    // cual estaba escrito en el HTML. Excepción: 'hg-1' no tiene una sola
-    // ecuación arriba — son dos PASOS de un mismo mecanismo (ionización,
-    // luego ataque del nucleófilo), no dos reacciones completas como en
-    // ai-0/ao-2/dv-2, así que meterle ahí la reacción neta (con agua y
-    // producto final) en el primer paso sería incorrecto — se deja tal cual.
-    const meqBox=id==='hg-1'?null:document.querySelector('#rxn-'+id+' .meq');
+    // cual estaba escrito en el HTML. Excepciones: 'hg-1' y 'ai-1' no tienen
+    // una sola ecuación arriba — tienen dos PASOS de un mismo mecanismo
+    // (hg-1: ionización, luego ataque del nucleófilo; ai-1: adición ×1,
+    // luego ×2 sobre el producto del ×1), no dos reacciones alternativas
+    // completas como en ai-0/ao-2/dv-2 — meterles ahí el dato de la reacción
+    // "resumen" (que en RF apunta al resultado final ×2) en el primer paso
+    // (×1) mostraría el producto equivocado, así que se dejan tal cual.
+    const meqBox=(id==='hg-1'||id==='ai-1')?null:document.querySelector('#rxn-'+id+' .meq');
     if(meqBox){
       const builtTop=mkReactionEq(id,d,175);
       if(builtTop)meqBox.innerHTML=builtTop;
