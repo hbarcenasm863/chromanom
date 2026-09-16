@@ -5416,8 +5416,11 @@ function showResults(){
   const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)'};
   const RXN_GROUP_SHORT={rxn_alcanos:'Alcanos',rxn_alquenos:'Alquenos',rxn_alquinos:'Alquinos',rxn_aromaticos:'Aromáticos',rxn_halogenuros:'Halogenuros de alquilo',rxn_alcoholes:'Alcoholes',rxn_aminas:'Aminas',rxn_carbonilo:'Aldehídos y cetonas',rxn_acidos:'Ácidos carboxílicos',rxn_derivados:'Derivados de ácido'};
 
-  const errTopics={};    // nomenclatura: clave = topic (alcanos, alquenos, ...)
-  const errReactions={}; // reacciones: clave = "Nombre de la reacción (Grupo)"
+  // Object.create(null): un topic literal "constructor" (usado por el modo
+  // Constructor Molecular) choca con Object.prototype.constructor en un {}
+  // normal — ver la nota igual en buildPayload().
+  const errTopics=Object.create(null);    // nomenclatura: clave = topic (alcanos, alquenos, ...)
+  const errReactions=Object.create(null); // reacciones: clave = "Nombre de la reacción (Grupo)"
   history.filter(h=>!h.ok).forEach(h=>{
     if(h.type==='rxnq'&&h.rxn){
       const group=RXN_GROUP_SHORT[h.topic]||h.topic;
@@ -5591,7 +5594,14 @@ function sendSessionStart(){
 }
 
 function buildPayload(trigger){
-  const topicErrors={}, topicOk={};
+  // Object.create(null) en vez de {}: el modo Constructor Molecular usa el
+  // topic 'constructor' para varias preguntas, y ese nombre choca con la
+  // propiedad heredada Object.prototype.constructor — con un objeto {}
+  // normal, topicOk['constructor'] no arrancaba en undefined sino en esa
+  // función heredada, y "(topicOk[t]||0)+1" la convertía a texto en vez de
+  // sumar (quedaba algo como "function Object() { [native code] }111" en
+  // "Aciertos por tema" en la hoja). Sin prototipo, ese choque no puede pasar.
+  const topicErrors=Object.create(null), topicOk=Object.create(null);
   history.filter(h=>!h.ok).forEach(h=>{const t=h.topic||'sin_tema';topicErrors[t]=(topicErrors[t]||0)+1;});
   history.filter(h=>h.ok).forEach(h=>{const t=h.topic||'sin_tema';topicOk[t]=(topicOk[t]||0)+1;});
   const failedMols=[...new Set(history.filter(h=>!h.ok).map(h=>h.ans))].join(', ');

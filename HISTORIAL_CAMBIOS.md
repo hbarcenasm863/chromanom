@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (41) — Auditoría completa de la hoja "Registro" + bug de "Aciertos por tema" corrupto
+
+### Contexto
+La docente pidió seguir revisando si había más sesiones con el patrón de
+"queda atascada". Con permiso de lectura sobre su Google Sheet
+("Chromanom — Registro de estudiantes"), se descargó y analizó la hoja
+"Registro" completa (1,280 filas, desde el 9 de junio hasta el 15 de
+septiembre) para medir el alcance real de los bugs corregidos hoy.
+
+### Lo que confirmó la auditoría
+- **101 de 1,280 sesiones (≈8%)** quedaron atascadas en `Trigger: inicio`
+  sin ningún `cierre` ni `fin_partida` después — repartidas entre
+  decenas de estudiantes distintos, varios cursos, y prácticamente
+  todos los niveles del juego (Hidrocarburos, Compuestos Oxigenados,
+  Nitrogenados, Constructor Molecular, varias Reacciones, Juego
+  Completo, incluso en modo libre/anónimo). La fecha más reciente fue
+  el 15 de septiembre, un día antes del arreglo — ninguna sesión del
+  16 de septiembre en adelante muestra este patrón. Esto confirma que
+  los dos bugs corregidos hoy (envío de "inicio" que se daba por
+  exitoso sin estarlo, y "cierre" que se omitía si no había ninguna
+  respuesta) eran reales y afectaban a una fracción importante de las
+  partidas, no un caso aislado.
+- **994 de 1,280 filas (≈78%)** sí tienen `Trigger: fin_partida`
+  (partida completada normalmente) y 200 más `Trigger: cierre` con
+  datos parciales — es decir, la gran mayoría de las partidas siempre
+  se guardó bien; el problema afectaba específicamente a las que se
+  cerraban sin ninguna respuesta.
+
+### Bug nuevo encontrado durante la auditoría: "Aciertos por tema" corrupto (`juego.html`)
+En 25 filas históricas (la más reciente del 2 de septiembre), la
+columna "Aciertos por tema" o "Errores por tema" mostraba un valor sin
+sentido como `{"constructor":"function Object() { [native code] }111"}`
+en vez de un número. Causa: el modo Constructor Molecular usa (o usó)
+`"constructor"` como nombre de tema para agrupar estadísticas, y ese
+nombre es también una propiedad heredada de cualquier objeto JavaScript
+normal (`{}`) — `Object.prototype.constructor`. Al hacer
+`topicOk['constructor'] = (topicOk['constructor']||0)+1` sobre un `{}`
+normal, en vez de partir de `undefined` partía de esa función heredada
+(que es "truthy", así que `||0` no la reemplazaba), y sumarle 1 la
+convertía a texto en vez de incrementarla numéricamente.
+
+Se corrigió construyendo esos diccionarios con `Object.create(null)` (un
+objeto sin prototipo heredado) en las 4 partes del código que agrupan
+"por tema" — `buildPayload()` (lo que se envía a la hoja) y la
+recomendación final en pantalla — así ningún nombre de tema futuro
+("constructor", "toString", "valueOf", etc.) puede volver a chocar con
+una propiedad heredada. No se encontró ninguna pregunta actual con ese
+tema exacto (parece que ya se había corregido el catálogo de preguntas
+en algún momento entre el 2 y el 16 de septiembre), pero la protección
+queda para que no vuelva a pasar con ningún nombre de tema futuro.
+
+Verificado con Playwright reproduciendo exactamente el caso (varias
+respuestas con `topic:'constructor'`): antes del arreglo se veía el
+mismo texto corrupto que en la hoja; después, el conteo queda correcto
+(`{"constructor":3}`).
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages. Las filas ya guardadas
+en la hoja con el patrón viejo (atascadas en "inicio", o con el texto
+corrupto de "Aciertos por tema") no se pueden corregir retroactivamente
+solas — quedan como están, pero no deberían volver a aparecer de aquí
+en adelante.
+
+---
+
 ## 2026-09-16 (40) — Bug real confirmado: sesiones con 0 respuestas se quedaban en "inicio" para siempre
 
 ### Contexto
