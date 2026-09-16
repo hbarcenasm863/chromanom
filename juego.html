@@ -2125,7 +2125,10 @@ let gameActive=false;
 let answered=false;
 let molView='skel'; // 'skel' | 'form'
 let history=[];
-let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0}};
+// startGame()/retryErrors() siempre reasignan este objeto (con 'rxnq'
+// incluido) antes de cargar cualquier pregunta — este valor inicial solo
+// existe para que la variable no quede undefined antes del primer juego.
+let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
 // true durante una ronda de "Repetir errores": showResults() no debe usar
@@ -5359,7 +5362,10 @@ function showResults(){
   const ok=history.filter(h=>h.ok).length;
   const err=history.filter(h=>!h.ok&&!h.timeout).length;
   const tout=history.filter(h=>h.timeout).length;
-  const pct=Math.round(ok/total*100);
+  // total===0 (una selección que terminó sin ninguna pregunta disponible)
+  // daría ok/0 = NaN — "NaN% de aciertos" en la pantalla del estudiante.
+  // buildPayload() ya se protege igual para lo que se envía a la hoja.
+  const pct=total>0?Math.round(ok/total*100):0;
   // Una ronda de "Repetir errores" es un subconjunto pequeño y no
   // representativo de preguntas — no debe poder sobrescribir el récord de
   // una partida completa del mismo nivel.

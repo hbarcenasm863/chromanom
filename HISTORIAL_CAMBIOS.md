@@ -7,6 +7,59 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (42) — Auditoría completa de la recolección y envío de notas
+
+### Contexto
+La docente pidió revisar todo `juego.html` en busca de más bugs
+relacionados con cómo se recolectan y envían las notas de los
+estudiantes, después de los hallazgos de sesiones de hoy.
+
+### Qué se revisó
+Se repasó de punta a punta el camino completo de una nota: cada función
+`check*()` (mc, reacción, arrastrar, identificar, escribir, construir)
+que suma puntaje y marca correcto/incorrecto; `buildPayload()` (lo que
+se arma para enviar); `sendAnalytics()`/`sendToSheets()` (cómo se
+envía); y `showResults()` (lo que ve el estudiante en pantalla). Además,
+se verificó con un script automatizado, cargando el banco de preguntas
+real en el navegador, que las **1,034 preguntas** del juego tengan
+respuestas consistentes: que la respuesta correcta de cada pregunta de
+opción múltiple/reacción exista de verdad entre sus opciones, que cada
+casilla de "arrastrar" tenga una ficha que la complete, que cada
+respuesta de "escribir" esté en su propia lista de aceptadas, y que
+cada pregunta de "construir" tenga su estructura de referencia — **cero
+problemas encontrados** ahí (el sistema de calificación en sí está
+sano).
+
+### Dos bugs pequeños encontrados y corregidos (`juego.html`)
+1. **"NaN% de aciertos" posible en pantalla.** `showResults()` calculaba
+   el porcentaje como `ok/total` usando `questions.length` sin
+   protegerse contra `total=0` (una selección que termine sin ninguna
+   pregunta disponible) — a diferencia de `buildPayload()`, que sí tenía
+   esa protección para lo que se envía a la hoja. No se encontró ninguna
+   forma de llegar a ese caso hoy en el menú actual (el selector de
+   "Reacciones — Selección personalizada" ya exige elegir al menos un
+   grupo), pero se corrigió como red de seguridad para que ningún cambio
+   futuro en el menú pueda mostrarle "NaN%" a un estudiante.
+2. **Variable `typeStats` inicial incompleta.** Al cargar la página,
+   antes de que empiece cualquier partida, `typeStats` no incluía la
+   clave `rxnq` (se agregó cuando se sumaron las preguntas de reacción,
+   pero se les olvidó actualizar este valor inicial). `startGame()` y
+   `retryErrors()` siempre la reemplazan completa antes de cargar
+   cualquier pregunta, así que en la práctica nunca se llegó a usar este
+   valor incompleto — pero se corrigió para que no quede ahí como una
+   trampa para el futuro.
+
+### Verificación
+Con Playwright: la auditoría de las 1,034 preguntas (mc, reacción,
+arrastrar, identificar, escribir, construir); una partida completa de
+20 preguntas de principio a fin sin errores de consola, con las
+correcciones ya aplicadas.
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-16 (41) — Auditoría completa de la hoja "Registro" + bug de "Aciertos por tema" corrupto
 
 ### Contexto
