@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (45) — Nota anti-IA: menos visible para el estudiante
+
+### Contexto
+La docente pidió que la nota agregada en la entrada anterior (44) fuera
+más difícil de notar para el estudiante que juega normal, sin dejar de
+ser legible para una IA que procese una foto/captura.
+
+### Qué se hizo (`juego.html`)
+Se ajustó el mismo texto (sin cambiar su contenido) en tres aspectos:
+- **Posición**: de centrado debajo del dibujo → esquina inferior derecha
+  (menos "al centro de la vista").
+- **Tamaño**: más pequeño (de 5-7 a 3.5-5 según el tipo de dibujo).
+- **Contraste**: gris más claro (`#dedede`, casi el mismo tono que el
+  fondo blanco de la tarjeta) en vez del gris anterior (`#b0b0b0`).
+
+Se verificó con Playwright, tomando una captura de una tarjeta real del
+juego (fondo blanco real, no una prueba aislada): a tamaño normal el
+texto es prácticamente imperceptible a simple vista, pero al hacer zoom
+sobre la esquina se lee con claridad completa. Se repitió también la
+auditoría de las 1,100 preguntas y las 60 partidas simuladas de
+Hidrocarburos — sin errores.
+
+### Límite importante (ya explicado a la docente)
+No es posible que el texto sea invisible para el estudiante pero visible
+en la foto — una foto captura lo mismo que ve el ojo en pantalla. Este
+ajuste acerca la nota todo lo posible a "difícil de notar" sin cruzar a
+"ilegible", pero sigue siendo, técnicamente, visible.
+
+---
+
 ## 2026-09-16 (44) — Nota ética anti-IA en las imágenes de moléculas
 
 ### Contexto
