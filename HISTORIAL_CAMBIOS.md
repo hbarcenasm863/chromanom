@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (40) — Bug real confirmado: sesiones con 0 respuestas se quedaban en "inicio" para siempre
+
+### Contexto
+La docente compartió dos filas de la misma estudiante (Valeria Sofía
+García Acosta, curso 1103, 14 de septiembre): una sesión normal de
+"Hidrocarburos" (`Trigger: cierre`, 8 preguntas) y, 20 minutos después,
+una sesión de "Compuestos Oxigenados" que quedó SOLO con
+`Trigger: inicio` y todo en 0 — sin ningún `cierre` ni `fin_partida`
+después. Esta sí era la falla real de "todo en 0" que faltaba confirmar.
+
+### La causa (`juego.html`)
+`sendAnalytics()` (la función que envía el `cierre` al salir de una
+partida) tenía esta línea: `if(history.length===0) return;` — es decir,
+si la estudiante entraba a un nivel y cerraba la app sin alcanzar a
+responder (ni siquiera que se le acabara el tiempo en) NINGUNA pregunta,
+la función simplemente no enviaba nada. La fila de "inicio" (creada al
+entrar) se quedaba sola para siempre, indistinguible en la hoja de un
+envío que de verdad hubiera fallado por un problema técnico.
+
+### La corrección
+Se cambió esa condición por `if(!_sessionId) return;` — ahora solo se
+omite el envío cuando NUNCA se inició ningún nivel en esa visita (evita
+filas basura de alguien que solo pasó a mirar la página sin jugar). Si
+sí se inició un nivel (existe `_sessionId`), el `cierre` se envía
+siempre al salir, aunque la estudiante no haya respondido nada — así la
+fila pasa de `Trigger: inicio` a `Trigger: cierre` y queda clara la
+diferencia entre "no alcanzó a responder nada" (ahora visible) y un
+fallo de envío real (que ya se cubre con los reintentos automáticos
+agregados antes).
+
+Verificado con Playwright: cerrar la pestaña sin haber entrado a ningún
+nivel sigue sin enviar nada (0 peticiones); iniciar un nivel y salir sin
+responder nada ahora sí manda el `cierre` (antes solo mandaba el
+`inicio` y ninguna petición más); una partida completa normal sigue
+funcionando igual que antes.
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-16 (39) — Investigación de sesiones "cortas": bug menor en timeout + confirmación de datos viejos
 
 ### Contexto

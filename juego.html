@@ -5635,7 +5635,16 @@ const _ANALYTICS_INTENTOS=3;
 function sendAnalytics(trigger){
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   if(_analyticsSent) return;
-  if(history.length===0) return;
+  // OJO: antes se descartaba el envío si history estaba vacío (0 preguntas
+  // respondidas), pensando que "no hay nada que guardar". Pero eso dejaba a
+  // la docente sin forma de distinguir "la estudiante entró y cerró sin
+  // tocar nada" de "el envío de verdad falló" — en ambos casos la hoja
+  // se quedaba con la fila de "inicio" sola y ningún "cierre" después.
+  // Ahora, mientras SÍ se haya iniciado un nivel en esta visita (_sessionId
+  // ya asignado por startGame()/retryErrors()), se envía igual el "cierre"
+  // aunque history esté vacío, para actualizar esa fila y dejar constancia
+  // clara de que la estudiante no alcanzó a responder nada.
+  if(!_sessionId) return;
   _analyticsSent=true;
   const body=JSON.stringify(buildPayload(trigger));
   function intentar(n){
