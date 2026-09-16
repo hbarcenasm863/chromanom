@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (46) — Se quita la nota anti-IA (prueba real mostró que no sirve)
+
+### Contexto
+La docente probó la nota (entradas 44 y 45) en una conversación real con
+ChatGPT: le subió la foto de una molécula y le preguntó el nombre
+directamente. ChatGPT respondió con el nombre correcto sin problema —
+la nota no lo detuvo. Al preguntarle por qué, ChatGPT explicó que trató
+el texto de la imagen como *contenido para analizar*, no como una
+instrucción que debía obedecer, porque la pregunta directa del usuario
+tiene prioridad. Esto confirma con un caso real la limitación que ya se
+había explicado de antemano: es una protección de seguridad estándar en
+las IA (no dejar que texto dentro de una imagen les cambie el
+comportamiento), y por eso mismo la nota nunca iba a frenar el caso más
+común (un estudiante preguntando directo). La docente pidió quitarla.
+
+### Qué se hizo (`juego.html`)
+Se revirtieron por completo los cambios de las entradas 44 y 45: se
+quitó el texto `AI_NOTE_TEXT`, la función auxiliar `_aiNoteWidth()`, y
+todo el código en `mkSVG()` y `mkDevSVG()` que reservaba espacio y
+dibujaba esa nota. Ambas funciones quedaron idénticas a como estaban
+antes de la entrada 44 (se verificó con `diff` contra esa versión: cero
+diferencias). La ampliación del banco de Hidrocarburos (entrada 43) no
+se tocó y sigue intacta.
+
+### Verificación
+Se repitió la auditoría completa de las 1,100 preguntas (cero problemas)
+y las 60 partidas simuladas de Hidrocarburos (1,200 preguntas
+renderizadas, cero errores) después de quitar el código.
+
+### Lección para el futuro
+Cualquier mecanismo que dependa de que una IA *obedezca* una instrucción
+metida dentro de una imagen es poco confiable, porque las IA están
+diseñadas a propósito para no priorizar ese tipo de instrucciones sobre
+lo que pide el usuario directamente. Si en el futuro se quiere seguir
+por el camino de dificultar el uso de IA externas, conviene enfocarse en
+lo que sí demostró funcionar antes en este proyecto: el patrón de
+velocidad/precisión en las analíticas (caso Daniel) y la verificación en
+persona, no trucos dentro de la imagen.
+
+---
+
 ## 2026-09-16 (45) — Nota anti-IA: menos visible para el estudiante
 
 ### Contexto
