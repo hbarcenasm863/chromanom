@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (48) — Corregido: doble-toque en "Siguiente" sacaba a estudiantes a mitad de partida
+
+### Contexto
+Varios estudiantes reportaron que, jugando normal, "de repente salta
+partida guardada" y los saca del juego sin haber terminado la sesión.
+Siguiendo la regla del proyecto de reproducir el bug antes de darlo por
+resuelto, se armó una prueba automatizada (Playwright, con reloj
+simulado para poder avanzar minutos de "tiempo de juego" en segundos) en
+vez de solo revisar el código a ojo.
+
+### Qué se encontró (causa raíz confirmada, no solo sospecha)
+Cada pregunta tiene su propio cronómetro (60s, o 90s en Constructor
+Molecular). Al tocar "Siguiente pregunta →" dos veces muy rápido — algo
+común en celular con un doble-toque accidental — el juego:
+1. Saltaba una pregunta completa sin que el estudiante la respondiera
+   (el contador de pregunta avanzaba de más).
+2. El cronómetro de esa pregunta saltada **seguía corriendo solo**,
+   sin que nada lo detuviera.
+3. Minutos después, ese cronómetro "fantasma" se agotaba y disparaba su
+   aviso de "¡Tiempo!" — pero contra la pregunta que el estudiante
+   tuviera activa EN ESE MOMENTO, no la que realmente se saltó. Eso
+   congelaba sus respuestas y le marcaba mal una pregunta que ni
+   siquiera había terminado de leer.
+4. Si esto pasaba varias veces en una partida, el contador de preguntas
+   llegaba a 20 mucho antes de que el estudiante respondiera 20 de
+   verdad, así que el juego cerraba la sesión y mostraba "¡Resultados
+   guardados!" — sacándolo antes de sentir que había terminado.
+
+Se confirmó con la prueba automatizada: doble-toque en "Siguiente" sin
+responder nada → el contador salta de la pregunta 0 a la 2 (saltándose
+la 1); al simular que pasan 65 segundos, el cronómetro huérfano de la
+pregunta 1 efectivamente interrumpe la pregunta 2, la marca como
+fallada por "tiempo agotado" y avanza la sesión sin que el estudiante
+hubiera hecho nada.
+
+### Qué se corrigió (`juego.html`)
+1. `loadQuestion()` ahora detiene cualquier cronómetro anterior
+   (`stopTimer()`) apenas empieza a cargar una pregunta nueva — así,
+   aunque algo la llame dos veces, nunca queda un cronómetro corriendo
+   de más.
+2. `nextQ()` (el botón "Siguiente pregunta") ahora ignora una segunda
+   pulsación si llega a menos de medio segundo de la anterior, para que
+   un doble-toque no salte una pregunta de entrada. Se usa una ventana
+   de tiempo real (no una bandera simple) porque una bandera que se
+   libera dentro de `loadQuestion()` no alcanza a frenar el segundo
+   toque — `loadQuestion()` ya terminó de correr antes de que ese
+   segundo toque llegue.
+
+### Verificación
+Se repitió la prueba automatizada tras la corrección: el doble-toque ya
+no salta ninguna pregunta, y el cronómetro de la pregunta que sí queda
+sin responder se agota de forma normal contra sí misma (ya no contra
+otra). Se corrieron también la auditoría completa de las 1,127
+preguntas (cero problemas), la simulación de 30 partidas por nivel en
+Hidrocarburos/Oxigenados/Nitrogenados/Completo (cero errores), y una
+partida completa simulada con pausas de lectura realistas para
+confirmar que el juego normal (responder → Siguiente) sigue avanzando
+sin bloquearse.
+
+---
+
 ## 2026-09-16 (47) — Números de la portada actualizados + 5% más en Oxigenados/Nitrogenados
 
 ### Contexto

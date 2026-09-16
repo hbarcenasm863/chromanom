@@ -2663,6 +2663,14 @@ function setMolView(view){
 }
 
 function loadQuestion(){
+  // Detiene cualquier cronómetro de la pregunta anterior antes de seguir. Sin
+  // esto, si loadQuestion() se llama dos veces seguidas sin que la pregunta de
+  // en medio se responda (p. ej. doble-toque en "Siguiente pregunta" en
+  // celular), ese cronómetro queda huérfano corriendo en segundo plano y,
+  // cuando se agota minutos después, dispara su "tiempo agotado" contra la
+  // pregunta que esté activa en ESE momento — congelándola y terminando la
+  // sesión antes de tiempo sin que el estudiante haya hecho nada mal.
+  stopTimer();
   if(qIdx>=questions.length){showResults();return;}
   answered=false;
   writeAttempts=0;
@@ -5531,7 +5539,20 @@ function openDrillPicker(cat){
   showScreen('s-drill-picker');
 }
 
-function nextQ(){qIdx++;loadQuestion();}
+// _lastNextQAt evita que un doble-toque/doble-clic en "Siguiente pregunta"
+// (común en celular) dispare nextQ() dos veces casi al mismo tiempo, lo que
+// saltaría una pregunta sin responder de por medio. Un candado que se
+// libera dentro de loadQuestion() no sirve aquí: loadQuestion() termina de
+// forma síncrona antes de que el segundo toque llegue, así que igual se
+// colaría. Por eso se usa una ventana de tiempo real en vez de una bandera.
+let _lastNextQAt=0;
+function nextQ(){
+  const now=Date.now();
+  if(now-_lastNextQAt<500)return;
+  _lastNextQAt=now;
+  qIdx++;
+  loadQuestion();
+}
 
 // ════════════════════════════════════════════════════════
 // RESULTS
