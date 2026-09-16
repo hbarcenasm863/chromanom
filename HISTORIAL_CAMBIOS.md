@@ -7,6 +7,39 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (39) — Investigación de sesiones "cortas": bug menor en timeout + confirmación de datos viejos
+
+### Contexto
+La docente reportó, sesión por sesión, tres patrones raros en la hoja:
+sesiones de 11 preguntas, sesiones de 8-9 "que cerraban el juego", y una
+estudiante con todo en 0. Compartió una fila concreta de la hoja
+(sesión `h7bme1`, 8 de septiembre, `Trigger: cierre`, `Total: 1`,
+`Tiempo agotado: 1`) para investigar.
+
+### Diagnóstico de esa fila
+Es un cierre real, no una falla técnica: la estudiante dejó correr el
+cronómetro en la primera pregunta (una reacción de Alcanos), avanzó a
+una segunda pregunta, y cerró la app antes de responderla — el sistema
+sí guardó ese estado parcial correctamente (`Trigger: cierre` presente,
+a diferencia del patrón de "todo en 0" donde solo queda el `inicio`).
+Los tres patrones que describió coinciden con datos de ANTES de los
+arreglos de esta semana (grupos de reacciones con pocas preguntas,
+envío de "inicio" que se daba por exitoso sin estarlo) — no encontramos
+evidencia de una causa nueva.
+
+### Bug real encontrado de paso (`juego.html`)
+Al revisar esa fila se notó que `startTimer()` — el camino de "se acabó
+el tiempo" — no guardaba `rxn:q.rxn` en el historial de la partida,
+a diferencia de `checkRxnQ()` (respuesta normal), que sí lo hace desde
+el cambio de ayer (39/38). Por eso una reacción fallada por tiempo se
+iba a contar en la recomendación final como error genérico del grupo
+funcional, no con el nombre específico de la reacción. Corregido.
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-15 (38) — La retroalimentación final ahora dice el NOMBRE de la reacción a repasar
 
 ### Contexto
