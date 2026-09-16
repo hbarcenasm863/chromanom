@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (49) — Nombre funcional clásico ("(radical)(radical) éter") en Éteres
+
+### Contexto
+La docente pidió agregar, para los éteres del banco de preguntas,
+preguntas que pidan el nombre funcional/clásico ("etil metil éter",
+"dietil éter", etc. — dos radicales en orden alfabético + la palabra
+"éter" aparte, con "di-" cuando son iguales) además del nombre IUPAC
+sustitutivo que ya se preguntaba (metoxietano, etoxipropano, etc.).
+Esto retoma la regla de nomenclatura clásica que ya se había agregado a
+`grupos.html` en una sesión anterior.
+
+### Qué se hizo (`juego.html`)
+Se agregaron 11 preguntas nuevas de opción múltiple (una por cada éter
+que ya existía en el banco, incluyendo los 3 agregados hoy mismo:
+metoxihexano, etoxipentano, propoxipropano), preguntando específicamente
+por el nombre funcional clásico:
+- metoximetano → dimetil éter
+- metoxietano → etil metil éter
+- metoxipropano → metil propil éter
+- etoxietano → dietil éter
+- etoxipropano → etil propil éter
+- metoxibutano → butil metil éter
+- metoxipentano → metil pentil éter
+- etoxibutano → butil etil éter
+- metoxihexano → hexil metil éter
+- etoxipentano → etil pentil éter
+- propoxipropano → dipropil éter
+
+Los distractores incluyen errores típicos: invertir el orden alfabético,
+usar un radical vecino (una cadena más o menos larga) y, en los éteres
+simétricos, olvidar el prefijo "di-".
+
+### Verificación
+Auditoría completa de las 1,138 preguntas del banco (cero problemas) y
+simulación de 30 partidas por nivel en Hidrocarburos/Oxigenados/
+Nitrogenados/Completo (cero errores). Se actualizaron también los
+números de la portada afectados: Compuestos Oxigenados (328→339),
+Juego Completo y "En el banco" (1127→1138).
+
+---
+
 ## 2026-09-16 (48) — Corregido: doble-toque en "Siguiente" sacaba a estudiantes a mitad de partida
 
 ### Contexto

@@ -752,7 +752,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">328 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">339 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
@@ -760,7 +760,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">1127 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">1138 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ct" onclick="openLevelModal('constructor')">
         <div class="nivel-icon">🏗️</div>
@@ -784,7 +784,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
     </div>
     <div class="portada-stats">
-      <div class="ps"><div class="ps-n" id="stat-banco">1127</div><div class="ps-l">En el banco</div></div>
+      <div class="ps"><div class="ps-n" id="stat-banco">1138</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
@@ -5111,6 +5111,22 @@ const QBANK_OXINITRO_EXTRA=[
 ];
 QBANK.push(...QBANK_OXINITRO_EXTRA);
 _decodeQBank(QBANK_OXINITRO_EXTRA);
+
+const QBANK_ETERES_CLASICO=[
+  {type:'mc',mol:'bWV0b3hpbWV0YW5v',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZGltZXRpbCDDqXRlcg==',opts:['dimetil éter','metil éter','etil metil éter','dietil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBkaW1ldGlsIMOpdGVyLiBTaSBsb3MgZG9zIHJhZGljYWxlcyBzb24gaWd1YWxlcywgc2UgdXNhIGVsIHByZWZpam8gImRpLSIu',topic:'eteres'},
+  {type:'mc',mol:'bWV0b3hpZXRhbm8=',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZXRpbCBtZXRpbCDDqXRlcg==',opts:['metil etil éter','dietil éter','etil metil éter','dimetil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBldGlsIG1ldGlsIMOpdGVyLiBTaSBsb3MgZG9zIHJhZGljYWxlcyBzb24gaWd1YWxlcywgc2UgdXNhIGVsIHByZWZpam8gImRpLSIu',topic:'eteres'},
+  {type:'mc',mol:'bWV0b3hpcHJvcGFubw==',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'bWV0aWwgcHJvcGlsIMOpdGVy',opts:['dimetil éter','metil propil éter','propil metil éter','butil metil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBtZXRpbCBwcm9waWwgw6l0ZXIuIFNpIGxvcyBkb3MgcmFkaWNhbGVzIHNvbiBpZ3VhbGVzLCBzZSB1c2EgZWwgcHJlZmlqbyAiZGktIi4=',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGlldGFubw==',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZGlldGlsIMOpdGVy',opts:['etil propil éter','etil metil éter','dietil éter','etil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBkaWV0aWwgw6l0ZXIuIFNpIGxvcyBkb3MgcmFkaWNhbGVzIHNvbiBpZ3VhbGVzLCBzZSB1c2EgZWwgcHJlZmlqbyAiZGktIi4=',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGlwcm9wYW5v',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZXRpbCBwcm9waWwgw6l0ZXI=',opts:['butil etil éter','etil propil éter','metil propil éter','propil etil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBldGlsIHByb3BpbCDDqXRlci4gU2kgbG9zIGRvcyByYWRpY2FsZXMgc29uIGlndWFsZXMsIHNlIHVzYSBlbCBwcmVmaWpvICJkaS0iLg==',topic:'eteres'},
+  {type:'mc',mol:'bWV0b3hpYnV0YW5v',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'YnV0aWwgbWV0aWwgw6l0ZXI=',opts:['butil metil éter','butil etil éter','metil propil éter','metil butil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBidXRpbCBtZXRpbCDDqXRlci4gU2kgbG9zIGRvcyByYWRpY2FsZXMgc29uIGlndWFsZXMsIHNlIHVzYSBlbCBwcmVmaWpvICJkaS0iLg==',topic:'eteres'},
+  {type:'mc',mol:'bWV0b3hpcGVudGFubw==',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'bWV0aWwgcGVudGlsIMOpdGVy',opts:['hexil metil éter','pentil metil éter','dimetil éter','metil pentil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBtZXRpbCBwZW50aWwgw6l0ZXIuIFNpIGxvcyBkb3MgcmFkaWNhbGVzIHNvbiBpZ3VhbGVzLCBzZSB1c2EgZWwgcHJlZmlqbyAiZGktIi4=',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGlidXRhbm8=',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'YnV0aWwgZXRpbCDDqXRlcg==',opts:['butil propil éter','etil propil éter','butil etil éter','etil butil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBidXRpbCBldGlsIMOpdGVyLiBTaSBsb3MgZG9zIHJhZGljYWxlcyBzb24gaWd1YWxlcywgc2UgdXNhIGVsIHByZWZpam8gImRpLSIu',topic:'eteres'},
+  {type:'mc',mol:'bWV0b3hpaGV4YW5v',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'aGV4aWwgbWV0aWwgw6l0ZXI=',opts:['metil hexil éter','metil pentil éter','etil hexil éter','hexil metil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBoZXhpbCBtZXRpbCDDqXRlci4gU2kgbG9zIGRvcyByYWRpY2FsZXMgc29uIGlndWFsZXMsIHNlIHVzYSBlbCBwcmVmaWpvICJkaS0iLg==',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGlwZW50YW5v',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZXRpbCBwZW50aWwgw6l0ZXI=',opts:['pentil etil éter','etil hexil éter','metil pentil éter','etil pentil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBldGlsIHBlbnRpbCDDqXRlci4gU2kgbG9zIGRvcyByYWRpY2FsZXMgc29uIGlndWFsZXMsIHNlIHVzYSBlbCBwcmVmaWpvICJkaS0iLg==',topic:'eteres'},
+  {type:'mc',mol:'cHJvcG94aXByb3Bhbm8=',q:'¿Cuál es el nombre funcional (clásico) de este éter?',ans:'ZGlwcm9waWwgw6l0ZXI=',opts:['dipropil éter','etil propil éter','butil propil éter','propil éter'],expl:'Tm9tYnJlIGZ1bmNpb25hbCAoY2zDoXNpY28pOiBzZSBub21icmFuIGxvcyBkb3MgcmFkaWNhbGVzIHVuaWRvcyBhbCBveMOtZ2VubyBlbiBvcmRlbiBhbGZhYsOpdGljbywgc2VndWlkb3MgZGUgbGEgcGFsYWJyYSAiw6l0ZXIiIOKAlCBkaXByb3BpbCDDqXRlci4gU2kgbG9zIGRvcyByYWRpY2FsZXMgc29uIGlndWFsZXMsIHNlIHVzYSBlbCBwcmVmaWpvICJkaS0iLg==',topic:'eteres'},
+];
+QBANK.push(...QBANK_ETERES_CLASICO);
+_decodeQBank(QBANK_ETERES_CLASICO);
 
 
 const QBANK_REACCIONES=[
