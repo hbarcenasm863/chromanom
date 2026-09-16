@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (43) — Ampliación del banco de Hidrocarburos a 150+ moléculas
+
+### Contexto
+Al revisar el caso puntual de un estudiante con 117 sesiones y un
+porcentaje muy alto (sesión anterior de hoy), se encontró que aunque el
+juego mostraba 20 preguntas "nuevas" cada partida, el nivel de
+Hidrocarburos en realidad solo tenía **88 moléculas distintas** detrás
+de esas preguntas — con cientos de sesiones jugadas, era fácil terminar
+memorizando esas 88 estructuras en vez de aprender a nombrarlas. La
+docente pidió reforzar ese banco a **al menos 150 moléculas y 150
+preguntas** para que el juego genere partidas más variadas y sea más
+difícil de "ganar" por pura repetición.
+
+### Qué se hizo (`juego.html`)
+- Se agregaron **66 moléculas nuevas** a la sección de Hidrocarburos
+  (alcanos, alquenos, alquinos y benceno), todas siguiendo la instrucción
+  de no usar reacciones ni compuestos organometálicos/Grignard — son
+  solo hidrocarburos comunes, variando el largo de la cadena y la
+  posición de ramificaciones/dobles-triples enlaces, tal como se pidió:
+  - **24 alcanos**: cadenas rectas de 8 a 12 carbonos (octano … dodecano)
+    y ramificados (metil-, dimetil- y el clásico 2,2,4-trimetilpentano
+    o "isooctano").
+  - **18 alquenos**: posiciones nuevas de doble enlace en cadenas de 7-8
+    carbonos, ramificados, y 4 dienos (incluyendo el isopreno).
+  - **10 alquinos**: posiciones nuevas de triple enlace y ramificados.
+  - **14 derivados del benceno**: butil-, isobutil-, terc-butil-,
+    pentilbenceno, mono- y di-halogenados (flúor, yodo, dicloro en las
+    3 posiciones), dietilbenceno, y bencenos con 4-5 metilos.
+- Cada molécula nueva quedó con su propia pregunta: las 52 de
+  alcanos/alquenos/alquinos son de opción múltiple (nombre IUPAC
+  correcto); las 14 de benceno son del tipo "construir" (el estudiante
+  arma la molécula en el lienzo).
+- Se verificó **por script** que las 66 estructuras nuevas tengan la
+  fórmula molecular correcta (conteo de C e H) antes de tocar el juego,
+  y luego, cargando el juego real en el navegador (Playwright): que las
+  1,100 preguntas totales (no solo las nuevas) sigan pasando el chequeo
+  de consistencia respuesta/opciones sin errores; que las 14 moléculas
+  de benceno nuevas generen un grafo válido y se reconozcan a sí mismas
+  por comparación de estructura; y que 60 partidas simuladas del nivel
+  Hidrocarburos (1,200 preguntas renderizadas) no arrojen ni un solo
+  error de pantalla, viendo en esas 60 partidas 147 de las 154 moléculas
+  distintas ahora disponibles.
+- Se corrigió además un detalle técnico propio de esta ampliación: al
+  banco nuevo le faltaba una línea de "decodificación" de respuestas
+  (el mismo mecanismo que ya usan otras secciones del juego para que
+  "Ver código fuente" no muestre la respuesta en texto plano) — sin esa
+  línea, las 52 preguntas de opción múltiple habrían aparecido con la
+  respuesta correcta "en clave" y el juego nunca las habría podido
+  calificar bien. Se detectó y corrigió antes de terminar la sesión.
+
+### Resultado
+Hidrocarburos pasó de 252 preguntas / 88 moléculas a **318 preguntas /
+154 moléculas**, cumpliendo el pedido de 150+ en ambos frentes.
+
+### Pendiente / aviso importante
+Esta sesión desarrolló y probó el cambio en la rama
+`claude/keen-brown-vmmpyi` (no directamente en `main`, por configuración
+de esta sesión de trabajo en la nube). **El cambio no estará visible
+para los estudiantes en GitHub Pages hasta que esa rama se combine
+(merge) con `main`.** No se tocó `chromanom-analytics.gs`, así que no
+hace falta redesplegar ni recalcular nada en Apps Script por este
+cambio.
+
+---
+
 ## 2026-09-16 (42) — Auditoría completa de la recolección y envío de notas
 
 ### Contexto
