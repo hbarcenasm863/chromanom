@@ -3183,7 +3183,7 @@ function startTimer(){
           history.push({type:q.type,ok:false,ans:q.buildKey,given:'(tiempo)',topic:q.topic,timeout:true});
         } else {
           showFeedback(null,q.expl,q.ans);
-          history.push({type:q.type,ok:false,ans:q.ans,given:'(tiempo)',topic:q.topic,timeout:true});
+          history.push({type:q.type,ok:false,ans:q.ans,given:'(tiempo)',topic:q.topic,timeout:true,rxn:q.rxn});
         }
       }
     }
