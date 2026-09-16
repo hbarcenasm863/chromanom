@@ -7,6 +7,54 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (50) — Nombre funcional clásico de éteres también en generador.html
+
+### Contexto
+Después de agregar en `juego.html` (entrada 49) las preguntas del
+nombre funcional/clásico de éteres, la docente pidió sumar lo mismo al
+banco de datos de `generador.html` (la herramienta de hojas de
+trabajo), que es un archivo y un banco de moléculas totalmente aparte
+del juego.
+
+### Qué se hizo (`generador.html`)
+Se revisó primero el banco `MOLS` de este archivo: ya tenía **29
+éteres** cargados (bastantes más que `juego.html`, incluyendo cadenas
+más largas como butoxibutano y propoxihexano). Se agregaron **15
+entradas nuevas** reutilizando esas mismas moléculas (misma clave,
+mismo dibujo) pero pidiendo el nombre funcional clásico en vez del
+IUPAC sustitutivo — igual que se explicó en la sesión de `grupos.html`:
+- metoximetano → dimetil éter
+- metoxietano → etil metil éter
+- etoxietano → dietil éter
+- metoxipropano → metil propil éter
+- etoxipropano → etil propil éter
+- propoxipropano → dipropil éter
+- metoxibutano → butil metil éter
+- etoxibutano → butil etil éter
+- propoxibutano → butil propil éter
+- butoxibutano → dibutil éter
+- metoxipentano → metil pentil éter
+- etoxipentan → etil pentil éter
+- metoxihexano → hexil metil éter
+- etoxihexano → etil hexil éter
+- propoxihexano → hexil propil éter
+
+Se dejaron fuera a propósito los éteres cíclicos (THF, THP, oxirano),
+los aromáticos (etoxibenceno, propoxibenceno, etc.) y los que tienen
+radicales ramificados o dos grupos éter (MTBE, dimetoxietano,
+diisopropílico, los "2-etoxi/2-metoxi..." con radical secundario) —
+esos no siguen la regla simple de "(radical)(radical) éter" sin entrar
+en casos especiales de nomenclatura que no se pidieron.
+
+### Verificación
+Se cargó `generador.html` real en el navegador (Playwright) y se
+generó una hoja de ejercicios pidiendo solo el grupo Éteres con los
+tres tipos de pregunta (Estructura, Nomenclatura, Análisis MDEC): los
+15 nombres nuevos aparecen y se generan sin errores, mezclados con los
+ejercicios existentes de nombre IUPAC para las mismas moléculas.
+
+---
+
 ## 2026-09-16 (49) — Nombre funcional clásico ("(radical)(radical) éter") en Éteres
 
 ### Contexto
