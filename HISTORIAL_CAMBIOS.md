@@ -7,6 +7,92 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (50) — Generador: fórmulas desarrolladas completas en las preguntas de reacción (no más abreviaturas ni H₂SO₄ como "reactivo")
+
+### Contexto
+La docente reportó, con capturas del PDF generado, dos problemas de
+calidad en las preguntas de Tipo D (Reacciones) del Generador de
+Ejercicios (`generador.html`):
+1. El H₂SO₄ aparecía escrito como "+ H₂SO₄" (reactivo consumido) en
+   vez de mostrarse como catalizador sobre la flecha, en reacciones
+   donde en realidad actúa como catalizador (deshidratación de
+   alcoholes).
+2. Varios compuestos se mostraban con notación condensada entre
+   paréntesis (ej. "(CH₃)₃C−OH") o como fórmula molecular pura (ej.
+   "C₆H₁₁OH" para un "alcohol cíclico"), en vez de la fórmula
+   desarrollada completa "con calidad de libro de texto" — incluyendo
+   los grupos aldehído, cetona y ácido carboxílico, que no debían
+   abreviarse (CHO, CO, COOH) sino dibujarse completos con su doble
+   enlace C=O.
+
+### Qué se hizo (`generador.html`)
+**H₂SO₄ como catalizador, no como reactivo** — en las 3 preguntas de
+deshidratación de alcoholes donde H₂SO₄ estaba en `reactivo` (con
+"+"), se movió a `condicion` (se muestra sobre la flecha junto con la
+temperatura, como corresponde a un catalizador que no se consume):
+pentan-2-ol → but-2-eno, ciclohexanol → ciclohexeno, y
+pentan-2-ol → pent-2-eno (esta última es de tipo "identifica la
+condición", así que ahora no revela el catalizador de una vez).
+
+**Reescritura del intérprete de fórmulas** (funciones `_parseAtomAt`,
+`_parseBranch`, `_parseChainStr`, todas dentro del motor de dibujo de
+`generador.html`) para que dibuje la estructura completa en vez de caer
+a texto plano abreviado:
+- Soporta ramificaciones con dos sustituyentes por átomo (ej.
+  `C(CH₃)(Br)`), que antes se dibujaban mal encadenadas una debajo de
+  la otra en vez de una arriba y otra abajo del carbono central.
+- Soporta el prefijo "(CH₃)₃C…" (terc-butilo) reescribiéndolo a la
+  notación de cadena que el motor ya entendía, para que compuestos
+  como (CH₃)₃C−OH o (CH₃)₃C−Br se dibujen completos (3 metilos sobre
+  un carbono central), no como texto entre paréntesis.
+- Soporta grupos terminales o intermedios sueltos sin necesidad de ir
+  pegados a la letra "C" anterior: −OH, −NH₂, −NH−, −Cl, −Br, −F, −I,
+  −O− (éter), −ONa, −N (nitrilo). Antes varias moléculas con estos
+  grupos separados por guion (ej. "CH₃−CH₂−CH₂−OH", "CH₃−CH₂−NH₂",
+  cualquier éter) no se podían dibujar y caían a texto.
+- Soporta CHO (aldehído), COOH (ácido carboxílico), CO (cetona/amida)
+  y COO (éster) como grupos funcionales completos: se dibujan con su
+  carbono, el doble enlace C=O y, en el caso del ácido, también el
+  −OH — igual que las moléculas ya dibujadas a mano en el banco de
+  Tipo A/B/C, en vez de aparecer como texto plano "CH₃−CHO".
+- Se corrigió un caso donde un sustituyente (ej. Br en
+  "CH₃−CHBr−CH₃") podía interpretarse mal como si continuara la
+  cadena principal en vez de colgar del carbono, lo que habría dibujado
+  una molécula distinta a la real.
+
+**Compuestos con anillo bencénico o cíclicos**: se agregó una tabla de
+alias (`_RXN_ALIASES`) que reconoce los reactivos de benceno
+(C₆H₆, anilina, nitrobenceno, tolueno, ácido benzoico, benzamida,
+benzonitrilo, ésteres de bencilo, anisol, formaldehído "H−CHO") y los
+redirige a los dibujos de anillo que ya existían en el banco de
+moléculas, en vez de intentar interpretarlos como cadena lineal (donde
+fallaban siempre). Se agregaron dos dibujos nuevos que faltaban:
+fenolato de sodio (C₆H₅−ONa) y sal de diazonio (C₆H₅−N₂⁺Cl⁻).
+"C₆H₁₁OH" (alcohol cíclico) ahora se redirige al dibujo de
+ciclohexanol (anillo de 6 carbonos con −OH) que ya existía.
+
+### Verificación
+Se generó, en un navegador headless (Playwright/Chromium), el dibujo
+de las 145 preguntas del banco de reacciones (`BANCO_RXN`) llamando
+directamente a `_molBox` sobre cada una: 138 ahora se dibujan como
+estructura completa (antes muchas menos), y las 7 restantes son casos
+donde el texto plano sigue siendo lo correcto por convención química
+(ecuaciones de combustión con fórmula molecular como "C₃H₈", una
+comparación de acidez con "vs.", una sal de acetiluro y una
+polimerización "n CH₂=CH₂") — no quedó ningún caso que debiera
+dibujarse y no se dibuje. También se generó una hoja completa de 40
+ejercicios (Tipo A + D, todos los grupos y categorías) desde la
+interfaz real sin errores de consola y sin ningún texto sin dibujar.
+
+### Pendiente / sin resolver
+Ninguno para esta sesión. Quedan sin dibujar (a propósito, por
+convención) los 7 casos mencionados arriba; si en el futuro se agregan
+más preguntas con "vs.", flechas dentro del campo `r`, o notación "n
+molécula" de polimerización, van a caer al mismo texto plano de
+respaldo.
+
+---
+
 ## 2026-09-16 (49) — Nombre funcional clásico ("(radical)(radical) éter") en Éteres
 
 ### Contexto
