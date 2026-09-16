@@ -748,27 +748,27 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     <div class="portada-modes">
       <button class="nivel-card hc" onclick="openLevelModal('hidrocarburos')">
         <div class="nivel-icon">🔗</div>
-        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">93 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">318 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, éteres</div><div class="nivel-count">100 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">328 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
-        <div><div class="nivel-name">Compuestos Nitrogenados</div><div class="nivel-desc">Amidas y nitrilos</div><div class="nivel-count">34 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Nitrogenados</div><div class="nivel-desc">Amidas, nitrilos y aminas</div><div class="nivel-count">167 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">227 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">1127 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ct" onclick="openLevelModal('constructor')">
         <div class="nivel-icon">🏗️</div>
-        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">74 moléculas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">88 moléculas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card rx" onclick="openRxnPicker()">
         <div class="nivel-icon">🧪</div>
-        <div><div class="nivel-name">Reacciones Orgánicas</div><div class="nivel-desc">Mecanismos, productos y condiciones de todos los grupos</div><div class="nivel-count">102 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Reacciones Orgánicas</div><div class="nivel-desc">Mecanismos, productos y condiciones de todos los grupos</div><div class="nivel-count">200 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card gf" onclick="openDrillPicker('funcional')">
         <div class="nivel-icon">🧬</div>
@@ -784,7 +784,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
     </div>
     <div class="portada-stats">
-      <div class="ps"><div class="ps-n" id="stat-banco">329</div><div class="ps-l">En el banco</div></div>
+      <div class="ps"><div class="ps-n" id="stat-banco">1127</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
@@ -1748,6 +1748,35 @@ const MOLDES={
   build_metiletilbencenoOrto: {chain:[{bn:1,bu:[{bn:1},{}]},{bn:1,bu:[{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
   build_tetrametilbenceno1245: {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1},{bn:1,bu:[{}]},{bn:1,bu:[{}]},{}], ring:[[5,0,1]], aromatic:true},
   build_pentametilbenceno: {chain:[{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1,bu:[{}]},{bn:1,bu:[{}]},{}], ring:[[5,0,1]], aromatic:true},
+
+  // ── OXIGENADOS/NITROGENADOS: +3 por subtema (>=5% mas, tras ampliar Hidrocarburos) ──
+  heptan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"O",h:1}],
+  heptan3ol:[{h:3,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octan2ol:[{h:3,bn:1},{h:1,bn:1,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octan4ona:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  nonanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  decanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
+  acidoOctanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoNonanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoDecanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  pentanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:"O",h:0,bn:1},{h:3}],
+  pentanoatoEtilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:"O",h:0,bn:1},{h:2,bn:1},{h:3}],
+  hexanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:"O",h:0,bn:1},{h:3}],
+  metoxihexano:[{h:3,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  etoxipentano:[{h:3,bn:1},{h:2,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  propoxipropano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  octanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  nonanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  decanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  octanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:"N",h:0}],
+  nonanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:"N",h:0}],
+  decanonitrilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:3},{s:"N",h:0}],
+  pentan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
+  hexan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
+  heptan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
 };
 
 // ════════════════════════════════════════════════════════
@@ -5042,6 +5071,38 @@ const QBANK_HIDRO150=[
 ];
 QBANK.push(...QBANK_HIDRO150);
 _decodeQBank(QBANK_HIDRO150);
+
+const QBANK_OXINITRO_EXTRA=[
+  {type:'mc',mol:'aGVwdGFuMW9s',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'aGVwdGFuLTEtb2w=',opts:['heptan-2-ol','heptan-1-ol','hexan-1-ol','octan-1-ol'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBoZXB0YW4tMS1vbC4=',topic:'alcoholes'},
+  {type:'mc',mol:'aGVwdGFuM29s',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'aGVwdGFuLTMtb2w=',opts:['hexan-3-ol','heptan-3-ol','heptan-4-ol','octan-3-ol'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBoZXB0YW4tMy1vbC4=',topic:'alcoholes'},
+  {type:'mc',mol:'b2N0YW4yb2w=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW4tMi1vbA==',opts:['heptan-2-ol','nonan-2-ol','octan-3-ol','octan-2-ol'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3Rhbi0yLW9sLg==',topic:'alcoholes'},
+  {type:'mc',mol:'b2N0YW4yb25h',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW4tMi1vbmE=',opts:['octan-2-ona','octan-3-ona','nonan-2-ona','heptan-2-ona'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3Rhbi0yLW9uYS4=',topic:'cetonas'},
+  {type:'mc',mol:'b2N0YW4zb25h',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW4tMy1vbmE=',opts:['octan-3-ona','heptan-3-ona','octan-4-ona','nonan-3-ona'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3Rhbi0zLW9uYS4=',topic:'cetonas'},
+  {type:'mc',mol:'b2N0YW40b25h',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW4tNC1vbmE=',opts:['nonan-4-ona','octan-4-ona','heptan-4-ona','octan-5-ona'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3Rhbi00LW9uYS4=',topic:'cetonas'},
+  {type:'mc',mol:'b2N0YW5hbA==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW5hbA==',opts:['heptanal','nonanal','octanal','octanol'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3RhbmFsLg==',topic:'aldehidos'},
+  {type:'mc',mol:'bm9uYW5hbA==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bm9uYW5hbA==',opts:['nonanol','nonanal','decanal','octanal'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBub25hbmFsLg==',topic:'aldehidos'},
+  {type:'mc',mol:'ZGVjYW5hbA==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZGVjYW5hbA==',opts:['decanol','decanal','undecanal','nonanal'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBkZWNhbmFsLg==',topic:'aldehidos'},
+  {type:'mc',mol:'YWNpZG9PY3Rhbm9pY28=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'w6FjaWRvIG9jdGFub2ljbw==',opts:['ácido heptanoico','ácido nonanoico','ácido octanoico','ácido octananal'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiDDoWNpZG8gb2N0YW5vaWNvLg==',topic:'acidos'},
+  {type:'mc',mol:'YWNpZG9Ob25hbm9pY28=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'w6FjaWRvIG5vbmFub2ljbw==',opts:['ácido nonanoico','ácido octanoico','ácido nonananal','ácido decanoico'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiDDoWNpZG8gbm9uYW5vaWNvLg==',topic:'acidos'},
+  {type:'mc',mol:'YWNpZG9EZWNhbm9pY28=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'w6FjaWRvIGRlY2Fub2ljbw==',opts:['ácido undecanoico','ácido decananal','ácido nonanoico','ácido decanoico'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiDDoWNpZG8gZGVjYW5vaWNvLg==',topic:'acidos'},
+  {type:'mc',mol:'cGVudGFub2F0b01ldGlsbw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'cGVudGFub2F0byBkZSBtZXRpbG8=',opts:['hexanoato de metilo','pentanoato de etilo','butanoato de metilo','pentanoato de metilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBwZW50YW5vYXRvIGRlIG1ldGlsby4=',topic:'esteres'},
+  {type:'mc',mol:'cGVudGFub2F0b0V0aWxv',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'cGVudGFub2F0byBkZSBldGlsbw==',opts:['pentanoato de metilo','hexanoato de etilo','pentanoato de etilo','butanoato de etilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBwZW50YW5vYXRvIGRlIGV0aWxvLg==',topic:'esteres'},
+  {type:'mc',mol:'aGV4YW5vYXRvTWV0aWxv',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'aGV4YW5vYXRvIGRlIG1ldGlsbw==',opts:['heptanoato de metilo','pentanoato de metilo','hexanoato de etilo','hexanoato de metilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBoZXhhbm9hdG8gZGUgbWV0aWxvLg==',topic:'esteres'},
+  {type:'mc',mol:'bWV0b3hpaGV4YW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bWV0b3hpaGV4YW5v',opts:['metilhexano','metoxipentano','metoxiheptano','metoxihexano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBtZXRveGloZXhhbm8u',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGlwZW50YW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZXRveGlwZW50YW5v',opts:['etoxipentano','etilpentano','etoxibutano','etoxihexano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBldG94aXBlbnRhbm8u',topic:'eteres'},
+  {type:'mc',mol:'cHJvcG94aXByb3Bhbm8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'cHJvcG94aXByb3Bhbm8=',opts:['propilpropano','propoxietano','propoxibutano','propoxipropano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBwcm9wb3hpcHJvcGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'b2N0YW5hbWlkYQ==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW5hbWlkYQ==',opts:['heptanamida','octanamida','nonanamida','octanonitrilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3RhbmFtaWRhLg==',topic:'amidas'},
+  {type:'mc',mol:'bm9uYW5hbWlkYQ==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bm9uYW5hbWlkYQ==',opts:['nonanonitrilo','decanamida','nonanamida','octanamida'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBub25hbmFtaWRhLg==',topic:'amidas'},
+  {type:'mc',mol:'ZGVjYW5hbWlkYQ==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZGVjYW5hbWlkYQ==',opts:['nonanamida','decanamida','undecanamida','decanonitrilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBkZWNhbmFtaWRhLg==',topic:'amidas'},
+  {type:'mc',mol:'b2N0YW5vbml0cmlsbw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'b2N0YW5vbml0cmlsbw==',opts:['octanonitrilo','nonanonitrilo','heptanonitrilo','octanamida'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBvY3Rhbm9uaXRyaWxvLg==',topic:'nitrilos'},
+  {type:'mc',mol:'bm9uYW5vbml0cmlsbw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bm9uYW5vbml0cmlsbw==',opts:['nonanamida','nonanonitrilo','octanonitrilo','decanonitrilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBub25hbm9uaXRyaWxvLg==',topic:'nitrilos'},
+  {type:'mc',mol:'ZGVjYW5vbml0cmlsbw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZGVjYW5vbml0cmlsbw==',opts:['decanonitrilo','decanamida','nonanonitrilo','undecanonitrilo'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBkZWNhbm9uaXRyaWxvLg==',topic:'nitrilos'},
+  {type:'mc',mol:'cGVudGFuMWFtaW5h',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'cGVudGFuLTEtYW1pbmE=',opts:['pentan-2-amina','butan-1-amina','pentan-1-amina','hexan-1-amina'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBwZW50YW4tMS1hbWluYS4=',topic:'aminas'},
+  {type:'mc',mol:'aGV4YW4xYW1pbmE=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'aGV4YW4tMS1hbWluYQ==',opts:['hexan-1-amina','heptan-1-amina','hexan-2-amina','pentan-1-amina'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBoZXhhbi0xLWFtaW5hLg==',topic:'aminas'},
+  {type:'mc',mol:'aGVwdGFuMWFtaW5h',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'aGVwdGFuLTEtYW1pbmE=',opts:['hexan-1-amina','octan-1-amina','heptan-2-amina','heptan-1-amina'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBoZXB0YW4tMS1hbWluYS4=',topic:'aminas'},
+];
+QBANK.push(...QBANK_OXINITRO_EXTRA);
+_decodeQBank(QBANK_OXINITRO_EXTRA);
 
 
 const QBANK_REACCIONES=[

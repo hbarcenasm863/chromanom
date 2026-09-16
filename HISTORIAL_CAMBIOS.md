@@ -7,6 +7,73 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-16 (47) — Números de la portada actualizados + 5% más en Oxigenados/Nitrogenados
+
+### Contexto
+La docente notó que los números de preguntas que se muestran en la
+portada (tarjetas de cada nivel) estaban muy desactualizados — llevaban
+varias sesiones sin corregirse mientras el banco crecía por detrás — y
+pidió corregirlos, y de paso subirle a los demás grupos (Oxigenados y
+Nitrogenados) al menos un 5% más de preguntas, para compensar el salto
+grande que tuvo Hidrocarburos en la sesión de hoy.
+
+### Qué se hizo (`juego.html`)
+
+**1. Números de la portada corregidos** (estaban fijos en el HTML, no se
+actualizaban solos):
+| Tarjeta | Decía | Dice ahora |
+|---|---|---|
+| Hidrocarburos | 93 | 318 |
+| Compuestos Oxigenados | 100 | 328 |
+| Compuestos Nitrogenados | 34 | 167 |
+| Juego Completo | 227 | 1127 |
+| Constructor Molecular | 74 moléculas | 88 moléculas |
+| Reacciones Orgánicas | 102 | 200 |
+| "En el banco" (pie de página) | 329 | 1127 |
+
+De paso se corrigió la descripción de "Compuestos Nitrogenados", que
+decía "Amidas y nitrilos" y le faltaba mencionar Aminas (el nivel sí
+incluye las tres familias, solo la descripción estaba incompleta).
+
+**2. +27 moléculas nuevas** (3 por cada uno de los 9 subtemas de
+Oxigenados/Nitrogenados), con su pregunta de opción múltiple (nombre
+IUPAC) cada una, usando la misma estrategia seguida con Hidrocarburos
+(aumentar el largo de cadena, sin organometálicos ni Grignard):
+- Alcoholes: heptan-1-ol, heptan-3-ol, octan-2-ol
+- Cetonas: octan-2-ona, octan-3-ona, octan-4-ona
+- Aldehídos: octanal, nonanal, decanal
+- Ácidos: ácido octanoico, nonanoico, decanoico
+- Ésteres: pentanoato de metilo, pentanoato de etilo, hexanoato de metilo
+- Éteres: metoxihexano, etoxipentano, propoxipropano
+- Amidas: octanamida, nonanamida, decanamida
+- Nitrilos: octanonitrilo, nonanonitrilo, decanonitrilo
+- Aminas: pentan-1-amina, hexan-1-amina, heptan-1-amina
+
+Resultado: Oxigenados pasó de 310 a 328 preguntas (+5.8%) y
+Nitrogenados de 158 a 167 (+5.7%) — cada subtema individual también
+subió al menos un 5%.
+
+### Verificación
+Se comprobaron las 27 fórmulas moleculares por script antes de tocar el
+juego (fórmula química exacta, no solo que "se viera bien"), y luego con
+el juego real cargado en el navegador (Playwright): las 1,127 preguntas
+totales pasan el chequeo de consistencia respuesta/opciones sin
+problemas, y se simularon 30 partidas de cada nivel (Hidrocarburos,
+Oxigenados, Nitrogenados, Juego Completo) — 2,400 preguntas renderizadas
+en total, cero errores.
+
+### Nota para la docente (no es un cambio, es una observación)
+Al revisar el código para corregir el número de "Juego Completo" se
+confirmó que ese modo efectivamente toma preguntas de **todo** el banco
+(incluyendo Reacciones y Constructor, no solo nomenclatura), por eso su
+número (1,127) es tan alto comparado con los otros — no es un error de
+este cambio, así estaba programado desde antes; se deja anotado por si
+en el futuro se prefiere que "Juego Completo" sea solo nomenclatura de
+los tres grupos (como su descripción "Todos los grupos funcionales"
+podría sugerir).
+
+---
+
 ## 2026-09-16 (46) — Se quita la nota anti-IA (prueba real mostró que no sirve)
 
 ### Contexto
