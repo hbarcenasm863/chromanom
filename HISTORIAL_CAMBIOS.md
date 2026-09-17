@@ -7,6 +7,50 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (66) — Grupos: agranda TODAS las cajas (no solo las de las reglas) y las moléculas de los ejercicios
+
+### Contexto
+Después de agrandar las cajas de ejemplo de las reglas IUPAC (entrada
+65), la docente pidió que el mismo criterio se aplicara a **todas** las
+cajas de `grupos.html` que aprovechan poco el espacio en PC, y que las
+moléculas (las estructuras dibujadas) también se vieran más grandes —
+no solo esa sección puntual.
+
+### Cambios (`grupos.html`)
+- **Caja de la molécula en Ejercicios** (donde se dibuja la estructura
+  a nombrar/completar): la caja pasó de 160px a 260px de alto mínimo,
+  y el límite de tamaño de la estructura (`max-height`) subió de
+  140–150px a 280px — la estructura ahora se dibuja notablemente más
+  grande dentro de la caja. Se agregó un tope más chico solo para
+  celular (190px) para que no quede con espacio vacío de sobra en
+  pantallas angostas.
+- **Fragmentos de la respuesta revelada** ("but" + "ano", etc., debajo
+  de la molécula): letra de 0.95rem→1.15rem y de la etiqueta de
+  0.52rem→0.64rem, con más espacio entre píldoras.
+- **Tarjetas de selección de grupo** (la cuadrícula "Alcanos,
+  Alquenos, Alquinos…" de la portada de Grupos): tarjetas más anchas
+  (170px→210px mínimo), más separación, ícono más grande, y nombre/
+  fórmula con letra más grande.
+- **Cuadrícula de ejemplos** (compuestos de muestra dentro de la
+  teoría de cada grupo, ej. "Tolueno, Fenol, Anilina…"): tarjetas más
+  anchas (200px→230px) y letra más grande.
+
+### Verificación
+Con Playwright: se recorrieron 8 grupos distintos (alcanos, alquenos,
+alcoholes, éteres, cetonas, ésteres, benceno, aminas) sin errores de
+consola; se compararon capturas de pantalla en escritorio (1366px) y
+celular (390px) de la portada de grupos, de un ejercicio con molécula
+lineal (butano) y uno con anillo aromático (benceno), y de la
+respuesta revelada con las píldoras del desglose — todo se ve más
+grande y proporcional al espacio disponible, sin desbordarse ni verse
+distorsionado en ningún tamaño de pantalla probado.
+
+### Pendiente
+Ninguno. `grupos.html` se sirve directo por GitHub Pages: no necesita
+ningún paso de despliegue aparte de este push a `main`.
+
+---
+
 ## 2026-09-17 (65) — Grupos: las cajas de ejemplo de las reglas IUPAC se veían diminutas en PC
 
 ### Contexto
