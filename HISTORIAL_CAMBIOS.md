@@ -7,6 +7,114 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (52) — Auditoría química del banco de reacciones de `generador.html` y correcciones encontradas
+
+### Contexto
+Después de la sesión anterior (rediseño del dibujo de estructuras en
+Tipo D — Reacciones), la docente pidió una auditoría dedicada que
+revisara, entrada por entrada, que las 145 preguntas del banco
+`BANCO_RXN` fueran correctas químicamente (no solo que se dibujaran
+bien) y sin errores de calidad, y que los cambios importantes
+quedaran en `main`.
+
+### Qué se hizo
+Se lanzó una auditoría independiente (modelo con razonamiento
+extendido) que revisó las 145 entradas una por una contra las reglas
+estándar de química orgánica (Markovnikov, Zaitsev, SN1/SN2/E1/E2,
+oxidación de alcoholes según grado, Grignard, sustitución electrófila
+aromática, hidrólisis de ésteres/amidas/nitrilos, balanceo de
+combustión), y además renderizó una muestra cubriendo los 14 grupos
+funcionales para comparar la estructura realmente dibujada contra lo
+que dice el texto. Se encontraron y corrigieron en `generador.html`:
+
+**Errores de química (respuesta o regla equivocada):**
+- `rxn_23` (bromoetano + KOH/EtOH/Δ, E2): la respuesta decía
+  "propeno" — imposible con un sustrato de 2 carbonos. Corregido a
+  **eteno**. También decía que el etanol es "solvente aprótico" (es
+  prótico); se corrigió la explicación.
+- `rxn_71` (acetato de etilo + LiAlH₄): decía que daba
+  "etanol + metanol". El lado ácido (acetilo) también da etanol, no
+  metanol. Corregido a **2 × etanol**.
+- `rxn_17` (HBr + acetileno, 1ª adición): el producto CH₂=CHBr se
+  llamaba "cloruro de vinilo" (que es CH₂=CHCl, otro compuesto).
+  Corregido a **bromuro de vinilo**.
+- `rxn_19` (Lindlar sobre propino): decía que el propeno resultante
+  era el "isómero cis", pero el propeno no tiene isómeros cis/trans
+  (alquino de partida terminal). Se corrigió la respuesta y se aclaró
+  la regla.
+- `rxn_91` (acetamida + SOCl₂ → nitrilo): la ecuación decía que
+  liberaba H₂O, pero el SOCl₂ la consume; libera SO₂ + 2 HCl.
+  Corregido.
+
+**Etiquetas/categorías engañosas** (campo `categoria`, solo
+organizativo, no afecta el filtro por grupo que usa `topic`):
+`rxn_09` (combustión del butano, etiquetada como "Sustitución
+radical"), `rxn_114` (ozonólisis, etiquetada como "Adición" siendo en
+realidad una ruptura oxidativa), `rxn_133` (alquilación de acetiluro,
+etiquetada como "Acidez" siendo una síntesis por SN2), y `rxn_97`
+(mostraba el nombre del mecanismo "Sustitución nucleofílica (SN2)"
+donde debía ir el disolvente — se cambió a "DMSO", igual que su
+gemelo `rxn_143`).
+
+**Problemas de dibujo (viendo la estructura renderizada, no el
+texto):**
+- Cuando la fórmula del reactivo empezaba con un coeficiente ("2
+  CH₄", "2 CH₃−CO−CH₃"), el intérprete de fórmulas lo descartaba
+  silenciosamente y dibujaba una sola molécula — dejando una ecuación
+  que no cuadraba con la respuesta esperada (2 CO + 4 H₂O a partir de
+  "una" CH₄, por ejemplo). Se corrigió `_molBox` para que muestre el
+  coeficiente como un número antes de la estructura dibujada
+  (`rxn_118`, `rxn_48`).
+- El tolueno (`C₆H₅−CH₃`), al reutilizarse el dibujo esquelético ya
+  existente en el banco de nomenclatura, aparecía con el metilo como
+  una simple raya sin etiqueta — inconsistente con el resto de la
+  hoja, donde todas las cadenas y anillos llevan sus grupos rotulados.
+  Se agregó una variante rotulada (`metilbencenoEtiquetado`) usada
+  solo en las preguntas de Reacciones (`rxn_58`, `rxn_124`,
+  `rxn_127`); el dibujo esquelético original de nomenclatura no se
+  tocó.
+- `rxn_53` (condensación aldólica de la acetona, pregunta de "tipo")
+  mostraba la ecuación completa "2 acetona → producto aldólico" *dentro*
+  del campo que ya dibuja una flecha propia, quedando dos flechas
+  seguidas. Se reescribió para que el campo dibujado sea solo el
+  producto aldólico (ahora se dibuja completo, con sus dos metilos y
+  el −OH) y el contexto ("se obtuvo de 2 moléculas de acetona") se
+  movió al enunciado.
+
+### Verificación
+Se repitió la misma verificación automática de la sesión anterior
+(las 145 entradas renderizadas sin errores de consola, ahora 139/145
+como estructura completa) y se generó de nuevo una hoja de 40
+ejercicios mixta desde la interfaz real sin errores.
+
+### Lo que la auditoría revisó y encontró correcto
+Las 140 entradas restantes (adición a alquenos, alcanos/combustión,
+aromáticos, alquinos, halogenuros, alcoholes, aldehídos/cetonas,
+ácidos/ésteres/éteres, amidas/nitrilos/aminas) se verificaron
+correctas: productos, regioquímica y condiciones concuerdan con las
+reglas estándar. Las 6 fórmulas que siguen apareciendo como texto
+plano (combustión con fórmula molecular, una comparación de acidez,
+una polimerización "n CH₂=CH₂", una sal de acetiluro) se confirmaron
+como la notación correcta por convención química, no como casos sin
+resolver.
+
+### Pendiente / sin resolver
+`reacciones.html` (la página de animaciones/quiz de reacciones del
+Juego, un motor completamente aparte de `generador.html`, ~9.000
+líneas) **no se auditó a fondo** — quedó fuera de esta sesión. Un
+muestreo rápido (las 39 ecuaciones y las 31 estructuras de su banco
+interno, más 8 respuestas numéricas resueltas) no encontró errores de
+química de fondo, salvo una ecuación de combustión sin balancear en un
+panel de resultado y una inconsistencia menor con `generador.html`
+sobre si la cloración del propano da un solo producto o una mezcla.
+Ese archivo tiene bastante más contenido verificable que
+`generador.html` (fichas completas, ejemplos extra, retroalimentación
+de 47 preguntas de opción múltiple, cálculos resueltos, guiones de
+voz) y ameritaría su propia sesión de auditoría, más larga, si se
+quiere la misma garantía de "cero errores químicos" ahí también.
+
+---
+
 ## 2026-09-16 (51) — Generador: fórmulas desarrolladas completas en las preguntas de reacción (no más abreviaturas ni H₂SO₄ como "reactivo")
 
 ### Contexto

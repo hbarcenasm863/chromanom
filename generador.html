@@ -277,6 +277,8 @@ body{
   padding:10px 14px;display:flex;align-items:center;justify-content:center;
   min-width:160px;max-width:300px;flex:0 0 auto}
 .rxn-d-mol-box svg{max-width:100%;height:auto;display:block;overflow:visible}
+.rxn-d-coef{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;
+  color:var(--tx,#1e293b);margin-right:6px;flex-shrink:0}
 .rxn-d-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.83rem;
   color:var(--tx,#1e293b);font-weight:600;text-align:center}
 .rxn-d-blank-box{background:#fff7ed;border:2px dashed #c2410c;border-radius:8px;
@@ -975,6 +977,7 @@ const M = {
   etanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);_reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
   butanoatoMetilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
   metilbenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);return mkSVG(s);},
+  metilbencenoEtiquetado(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'CH₃');return mkSVG(s);},
   ortoXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);const a1=-Math.PI/2+Math.PI/3;const dx1=Math.cos(a1),dy1=Math.sin(a1);s+=ln(v[1].x,v[1].y,v[1].x+BL*dx1,v[1].y+BL*dy1);_reg(v[1].x+BL*dx1,v[1].y+BL*dy1);return mkSVG(s);},
   metaXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);const a2=-Math.PI/2+2*Math.PI/3;const dx2=Math.cos(a2),dy2=Math.sin(a2);s+=ln(v[2].x,v[2].y,v[2].x+BL*dx2,v[2].y+BL*dy2);_reg(v[2].x+BL*dx2,v[2].y+BL*dy2);return mkSVG(s);},
   paraXileno(){_pts=[];let s=bnzRing(0,0);const r=28,v=[0,1,2,3,4,5].map(i=>({x:r*Math.cos(-Math.PI/2+i*Math.PI/3),y:r*Math.sin(-Math.PI/2+i*Math.PI/3)}));s+=ln(v[0].x,v[0].y,v[0].x,v[0].y-BL);_reg(v[0].x,v[0].y-BL);s+=ln(v[3].x,v[3].y,v[3].x,v[3].y+BL);_reg(v[3].x,v[3].y+BL);return mkSVG(s);},
@@ -1932,7 +1935,7 @@ const BANCO_RXN = [
    nombre_rxn:'Halogenación radical (bromación de etano)',
    regla:'Sustitución radical: un H se reemplaza por Br.',
    respuesta:'CH₃−CH₂Br  (bromoetano)  +  HBr'},
-  {key:'rxn_09',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'producto',
+  {key:'rxn_09',topic:'alcanos',categoria:'Combustión (alcanos)',pregunta_tipo:'producto',
    enunciado:'Escribe la ecuación completa de la combustión completa del butano:',
    r:'2 C₄H₁₀',reactivo:'+ 13 O₂',condicion:'Δ (llama)',
    nombre_rxn:'Combustión completa de alcano',
@@ -1987,7 +1990,7 @@ const BANCO_RXN = [
    r:'CH≡CH',reactivo:'+ HBr',condicion:'(1 mol)',
    nombre_rxn:'Adición de HBr a alquino (1ª adición)',
    regla:'Markovnikov: H al C1 y Br al C2 del enlace triple.',
-   respuesta:'CH₂=CHBr  (bromoeteno / cloruro de vinilo)'},
+   respuesta:'CH₂=CHBr  (bromoeteno / bromuro de vinilo)'},
   {key:'rxn_18',topic:'alquinos',categoria:'Adición (alquinos)',pregunta_tipo:'producto',
    enunciado:'¿Qué producto se obtiene al añadir 2 moles de HBr al acetileno?',
    r:'CH≡CH',reactivo:'+ 2 HBr',condicion:'(2 moles)',
@@ -1998,8 +2001,8 @@ const BANCO_RXN = [
    enunciado:'Escribe el producto de la hidrogenación parcial del propino:',
    r:'CH₃−C≡CH',reactivo:'+ H₂',condicion:'cat. Pd/CaCO₃ (Lindlar)',
    nombre_rxn:'Hidrogenación parcial de alquino',
-   regla:'El catalizador de Lindlar da solo el alqueno cis; evita sobrereducción.',
-   respuesta:'CH₃−CH=CH₂  (propeno, isómero cis)'},
+   regla:'El catalizador de Lindlar detiene la hidrogenación en el alqueno (adición syn → isómero cis en un alquino interno). El propino es un alquino terminal, así que su producto no tiene isómeros cis/trans.',
+   respuesta:'CH₃−CH=CH₂  (propeno)'},
   // ── Sustitución nucleofílica ─────────────────────────────────────────────
   {key:'rxn_20',topic:'halogenuros',categoria:'Sustitución nucleofílica',pregunta_tipo:'producto',
    enunciado:'Predice el producto de esta reacción SN2:',
@@ -2018,14 +2021,14 @@ const BANCO_RXN = [
    enunciado:'Escribe el alqueno que se forma en la siguiente reacción E2:',
    r:'CH₃−CH₂−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
    nombre_rxn:'Eliminación Bimolecular (E2)',
-   regla:'La base KOH retira un H β; se forma el doble enlace (Saytzeff: alqueno más sustituido).',
+   regla:'La base KOH retira un H del carbono β; se forma el doble enlace.',
    respuesta:'CH₃−CH=CH₂  (propeno)  +  KBr  +  H₂O'},
   {key:'rxn_23',topic:'halogenuros',categoria:'Eliminación',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y explica por qué se favorece la eliminación sobre la sustitución:',
    r:'CH₃−CH₂Br',reactivo:'+ KOH',condicion:'EtOH / Δ',
    nombre_rxn:'Eliminación E2 (condiciones básicas / calor)',
-   regla:'Base fuerte (KOH) + solvente aprótico + calor favorecen E2 sobre SN2.',
-   respuesta:'Eliminación E2. Condiciones básicas (KOH) y calor favorecen la pérdida de HBr para dar propeno.'},
+   regla:'Base fuerte concentrada (KOH) en medio alcohólico (no acuoso) + calor favorecen E2 sobre SN2.',
+   respuesta:'Eliminación E2. Las condiciones básicas (KOH) en medio alcohólico y con calor favorecen la pérdida de HBr para dar eteno (CH₂=CH₂).'},
   // ── Alcoholes ────────────────────────────────────────────────────────────
   {key:'rxn_24',topic:'alcoholes',categoria:'Deshidratación (alcoholes)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
@@ -2206,8 +2209,8 @@ const BANCO_RXN = [
    regla:'El carbono carbonílico de la cetona ya tiene dos sustituyentes; al recibir el grupo del Grignard queda con tres → alcohol terciario.',
    respuesta:'Se obtiene un alcohol terciario: CH₃−C(OH)(C₆H₅)−CH₃ (2-fenilpropan-2-ol). Regla: cetona + Grignard → siempre alcohol terciario.'},
   {key:'rxn_53',topic:'cetonas',categoria:'Condensación aldólica (cetonas)',pregunta_tipo:'tipo',
-   enunciado:'Identifica el tipo de reacción y la condición necesaria para pasar del producto aldólico a la enona:',
-   r:'2 CH₃−CO−CH₃  →  (CH₃)₂C(OH)−CH₂−CO−CH₃',reactivo:null,condicion:'???',
+   enunciado:'Este compuesto se obtuvo por condensación aldólica de 2 moléculas de acetona (CH₃−CO−CH₃). Identifica el tipo de reacción y la condición necesaria para pasar de este producto aldólico a la enona:',
+   r:'CH₃−C(CH₃)(OH)−CH₂−CO−CH₃',reactivo:null,condicion:'???',
    nombre_rxn:'Deshidratación del producto aldólico',
    regla:'La β-hidroxicetona formada en frío se deshidrata al calentar, dando la cetona α,β-insaturada (enona) más estable.',
    respuesta:'Deshidratación ácida/básica con calor (Δ). Producto: (CH₃)₂C=CH−CO−CH₃ (óxido de mesitilo / 4-metilpent-3-en-2-ona).'},
@@ -2320,7 +2323,7 @@ const BANCO_RXN = [
    r:'CH₃−COO−CH₂−CH₃',reactivo:'+ LiAlH₄',condicion:null,
    nombre_rxn:'Reducción de éster con LiAlH₄',
    regla:'El éster se reduce a DOS alcoholes: uno proviene del lado ácido, otro del lado alcohol.',
-   respuesta:'CH₃−CH₂−OH  (etanol)  +  CH₃−OH  (metanol)'},
+   respuesta:'2 CH₃−CH₂−OH  (etanol; el lado ácido —acetilo— y el lado alcohol —etoxi— dan el mismo alcohol)'},
   {key:'rxn_72',topic:'esteres',categoria:'Reducción de ésteres',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−CH₂−COO−CH₃',reactivo:'+ LiAlH₄',condicion:null,
@@ -2441,8 +2444,8 @@ const BANCO_RXN = [
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−CO−NH₂',reactivo:'+ SOCl₂',condicion:'Δ (deshidratación)',
    nombre_rxn:'Deshidratación de amida a nitrilo',
-   regla:'Un agente deshidratante fuerte elimina H₂O de la amida primaria y forma el triple enlace C≡N.',
-   respuesta:'CH₃−C≡N  (acetonitrilo / etanonitrilo)  +  H₂O'},
+   regla:'El SOCl₂ elimina el oxígeno y el H₂O de la amida primaria (consumiéndola él mismo) y forma el triple enlace C≡N.',
+   respuesta:'CH₃−C≡N  (acetonitrilo / etanonitrilo)  +  SO₂  +  2 HCl'},
   {key:'rxn_92',topic:'amidas',categoria:'Hidrólisis (amidas)',pregunta_tipo:'tipo',
    enunciado:'Indica el tipo de reacción y las condiciones necesarias:',
    r:'CH₃−CH₂−CO−NH₂',reactivo:'+ H₂O',condicion:'???',
@@ -2476,7 +2479,7 @@ const BANCO_RXN = [
    respuesta:'C₆H₅−CH₂−NH₂  (bencilamina / fenilmetanamina)'},
   {key:'rxn_97',topic:'nitrilos',categoria:'Síntesis de nitrilos',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−Br',reactivo:'+ NaCN',condicion:'Sustitución nucleofílica (SN2)',
+   r:'CH₃−CH₂−Br',reactivo:'+ NaCN',condicion:'DMSO',
    nombre_rxn:'Síntesis de nitrilos a partir de haluros',
    regla:'El CN⁻ desplaza al halógeno; esta ruta alarga la cadena en un carbono.',
    respuesta:'CH₃−CH₂−C≡N  (propanonitrilo)  +  NaBr'},
@@ -2608,7 +2611,7 @@ const BANCO_RXN = [
    regla:'El nitrógeno de la amina usa su par libre para aceptar el H⁺ del ácido.',
    respuesta:'Neutralización ácido-base → CH₃−CH₂−NH₃⁺Cl⁻ (cloruro de etilamonio).'},
   // ── Nuevas reacciones — alquenos (oxidación / polimerización) ─────────────
-  {key:'rxn_114',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'producto',
+  {key:'rxn_114',topic:'alquenos',categoria:'Oxidación (alquenos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₂=CH−CH₂−CH₃',reactivo:'+ O₃, luego Zn/H₂O',condicion:null,
    nombre_rxn:'Ozonólisis',
@@ -2725,7 +2728,7 @@ const BANCO_RXN = [
    nombre_rxn:'Formación de acetiluro (acidez del alquino terminal)',
    regla:'El H unido al carbono sp es ácido (pKa≈25); una base fuerte como NaNH₂ lo desprotona.',
    respuesta:'CH₃−CH₂−C≡C⁻ Na⁺  (acetiluro de sodio)  +  NH₃'},
-  {key:'rxn_133',topic:'alquinos',categoria:'Acidez (alquinos)',pregunta_tipo:'producto',
+  {key:'rxn_133',topic:'alquinos',categoria:'Síntesis de alquinos (alquilación de acetiluro)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la alquilación de este acetiluro:',
    r:'CH₃−C≡C⁻ Na⁺',reactivo:'+ CH₃−CH₂−Br',condicion:null,
    nombre_rxn:'Alquilación de acetiluro (síntesis de alquinos)',
@@ -2970,7 +2973,7 @@ function _parseChainStr(s){
 const _RXN_ALIASES={
   'C₆H₆':()=>getSVG('benceno'),
   'C₆H₅−CHO':()=>getSVG('benzaldehido'),
-  'C₆H₅−CH₃':()=>getSVG('metilbenceno'),
+  'C₆H₅−CH₃':()=>getSVG('metilbencenoEtiquetado'),
   'C₆H₅−COOH':()=>getSVG('acidobenzoico'),
   'C₆H₅−COO−CH₂−CH₃':()=>getSVG('benzoatoEtilo'),
   'C₆H₅−COO−CH₃':()=>getSVG('benzoatoMetilo'),
@@ -3003,12 +3006,17 @@ function _molBox(str, isSvg){
       if(svg)return`<div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
     }catch(e){}
   }
+  // A leading stoichiometric coefficient (e.g. "2 CH₄") is stripped by
+  // _parseChainStr before parsing — keep it as a visible prefix so the drawn
+  // equation still matches the coefficients used in the answer key.
+  const coefMatch=str.match(/^(\d+)\s+/);
+  const coefPrefix=(coefMatch&&coefMatch[1]!=='1')?`<span class="rxn-d-coef">${coefMatch[1]}</span>`:'';
   // Try SVG rendering
   try{
     const chain=_parseChainStr(str);
     if(chain&&chain.length){
       const svg=mkDevSVG(chain);
-      if(svg)return`<div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
+      if(svg)return`<div class="rxn-d-mol-box">${coefPrefix}${_sizeSvg(svg)}</div>`;
     }
   }catch(e){}
   // Fallback: styled text
