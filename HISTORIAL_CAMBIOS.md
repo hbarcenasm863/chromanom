@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-09-17 (53) — Auditoría química del banco de reacciones de `generador.html` y correcciones encontradas
+## 2026-09-17 (54) — Auditoría química del banco de reacciones de `generador.html` y correcciones encontradas
 
 ### Contexto
 Después de la sesión anterior (rediseño del dibujo de estructuras en
@@ -112,6 +112,49 @@ Ese archivo tiene bastante más contenido verificable que
 de 47 preguntas de opción múltiple, cálculos resueltos, guiones de
 voz) y ameritaría su propia sesión de auditoría, más larga, si se
 quiere la misma garantía de "cero errores químicos" ahí también.
+
+---
+
+## 2026-09-17 (53) — Nombre clásico "(radical)(radical) éter" para los 18 éteres nuevos
+
+### Contexto
+La entrada anterior (52) dejó pendiente a propósito el nombre funcional
+clásico para los 18 éteres agregados esa misma sesión. La docente pidió
+completarlo para que "varias" de esas preguntas también usen la regla
+"(radical)(radical) éter".
+
+### Qué se hizo (`juego.html`)
+Se agregaron **9 preguntas** nuevas de nombre funcional clásico —de los
+18 éteres nuevos, se dejaron fuera los que no tienen un nombre
+"(radical)(radical) éter" simple: los dos diéteres (dimetoxietano,
+dimetoximetano, que tienen DOS grupos éter, no uno) y los 7
+cíclicos/aromáticos (que tienen nombre propio: fenetol, THF, THP, etc.,
+no un nombre de dos radicales):
+
+- propoxibutano → butil propil éter
+- butoxibutano → dibutil éter
+- etoxihexano → etil hexil éter
+- propoxihexano → hexil propil éter
+- diisopropiloxter → diisopropil éter
+- 2-etoxipropano → etil isopropil éter
+- 2-metoxibutano → sec-butil metil éter
+- 2-etoxibutano → sec-butil etil éter
+- 2-metoxi-2-metilpropano → **metil terc-butil éter (MTBE)**
+
+Los últimos 4 son radicales ramificados (isopropilo, sec-butilo,
+terc-butilo) — se aprovechó para enseñar la regla de que los prefijos
+en cursiva "sec-"/"terc-" no cuentan para el orden alfabético (por eso
+"sec-butil metil éter", no "metil sec-butil éter"). El MTBE es la
+excepción a propósito: por ser un compuesto tan conocido por su
+acrónimo, se mantiene el orden "metil terc-butil éter" en vez del
+estrictamente alfabético, y se explica esto en la retroalimentación de
+esa pregunta.
+
+### Verificación
+Auditoría completa de las 1,165 preguntas (cero problemas) y 30
+partidas simuladas por nivel en Hidrocarburos/Oxigenados/Nitrogenados/
+Completo (cero errores). Números de portada actualizados: Oxigenados
+(357→366), Juego Completo y "En el banco" (1156→1165).
 
 ---
 
