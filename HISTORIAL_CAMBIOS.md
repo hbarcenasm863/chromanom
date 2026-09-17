@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-09-17 (62) — Auditoría química de `reacciones.html`: bug de coeficientes y 13 errores de contenido corregidos
+## 2026-09-17 (63) — Auditoría química de `reacciones.html`: bug de coeficientes y 13 errores de contenido corregidos
 
 ### Contexto
 Con el mismo criterio de la auditoría de `grupos.html` ("que revise la
@@ -117,6 +117,54 @@ puntuales — sería una auditoría aparte, más visual que química. Tampoco
 se revisaron las posiciones de sustituyentes de `mkBenzSVG` en anillos
 disustituidos (riesgo bajo: ninguna de las 39 animaciones `RF` usa un
 anillo con dos sustituyentes).
+
+---
+
+## 2026-09-17 (62) — Generador: corregido el Análisis MDEC de éteres (faltaba la insaturación) y de cetonas (partía "-ona" en "-on"+"a")
+
+### Contexto
+La docente reportó, sobre un taller ya impreso, dos preguntas de
+"Análisis MDEC" con resultados extraños:
+- Pregunta 6 (éter, p. ej. `1-propoxipropano`): las píldoras mostraban
+  solo `1-propoxi | propan | o` — la cadena principal no mostraba la
+  insaturación (`-an-`) por separado, a diferencia de como sí se hace
+  en alcoholes, ácidos, ésteres, aminas, etc.
+- Pregunta 8 (cetona, `3,3-dimetilbutan-2-ona`): las píldoras partían
+  el sufijo en `2-on` y `a` por separado, en vez de mostrar `2-ona`
+  como un solo fragmento.
+
+### Diagnóstico
+Ambos eran errores sistemáticos en el banco `MOLS` de `generador.html`
+(no solo de esas dos moléculas puntuales):
+- **Todas** las 26+ entradas de cetonas (`topic:'cetonas'`) tenían el
+  sufijo `-ona` partido en dos píldoras separadas (`2-on` + `a`,
+  `3-on` + `a`, `2,4-dion` + `a`, etc.).
+- **Todas** las entradas de éteres de nomenclatura sustitutiva (alcoxi +
+  alcano — `topic:'eteres'`, sin contar los nombres funcionales tipo
+  "etil propil éter" ni los cíclicos/aromáticos como oxolano, oxano o
+  etoxibenceno) tenían la cadena principal fusionada con el `-an-`
+  (`propan`, `butan`, `hexan`, `metan`...) sin separar la insaturación,
+  a diferencia del resto de familias (alcoholes, ácidos, ésteres,
+  amidas, aminas, nitrilos) que sí la separan.
+
+### Cambios (`generador.html`)
+- Cetonas: se fusionaron los dos fragmentos del sufijo en uno solo
+  (`2-on`+`a` → `2-ona`, `2,4-dion`+`a` → `2,4-diona`, etc.) en las
+  ~28 entradas afectadas (incluye cetonas cíclicas y dicetonas).
+- Éteres (nomenclatura sustitutiva, 23 entradas): se separó la cadena
+  principal en carbono(s) + insaturación, p. ej. `propan` → `prop` (C) +
+  `an` (I, "Sin insaturaciones"), igual que en las demás familias.
+  No se tocaron los éteres cíclicos/aromáticos (oxolano, oxano,
+  metoxiciclopentano, etoxibenceno...) ni los nombres funcionales
+  ("etil propil éter", "dimetil éter"...), que ya seguían su propio
+  patrón consistente en el resto del archivo.
+- Verificado en navegador (Playwright) que `MOLS` sigue siendo JS
+  válido (401 moléculas) y que las píldoras/tabla MDEC de
+  `1-propoxipropano` y `3,3-dimetilbutan-2-ona` ya se ven correctas.
+
+### Pendiente
+Ninguno. `juego.html` no se tocó, así que no aplica ningún paso de
+despliegue aparte de este push a `main`.
 
 ---
 
