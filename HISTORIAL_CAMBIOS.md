@@ -7,6 +7,60 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (55) — Generador: las flechas de Reacciones se veían cortadas en el celular; PCC/CH₂Cl₂ mal etiquetados
+
+### Contexto
+La docente reportó, con una captura desde el celular, que en las
+preguntas de Tipo D (Reacciones) la flecha de la ecuación se veía
+"cortada" y que algunos compuestos que en realidad son catalizadores
+aparecían con "+" como si fueran un reactivo consumido.
+
+### Qué se hizo (`generador.html`)
+**Flechas cortadas en pantallas angostas** — la fila de la ecuación
+(`.rxn-d-eq`: estructura + reactivo + flecha/condición + caja "?")
+solo tenía diseño adaptable a pantalla angosta dentro de
+`@media print` (para el PDF); en el navegador normal usaba
+`flex-wrap:nowrap` + `overflow-x:auto`, es decir, en un celular el
+contenido que no cabía quedaba recortado a la derecha sin ninguna
+pista visual de que había más (ni barra de scroll visible). Se agregó
+la misma regla de "pasar a la siguiente línea" dentro del bloque
+`@media(max-width:480px)` que ya existía para el menú, y se verificó
+en un viewport de celular (412px) con Playwright: ahora nada se corta,
+la fila pasa a 2-3 líneas cuando no cabe. La vista de escritorio y el
+PDF (que ya tenían su propia regla) no cambiaron.
+
+**PCC/CH₂Cl₂ mal etiquetados** — en la oxidación suave de un alcohol
+primario (`rxn_26`), la condición mostrada era "CH₂Cl₂ (oxidante
+suave)", lo cual es químicamente incorrecto: el diclorometano es
+apenas el disolvente; el oxidante (suave) es el PCC. Se movió la
+etiqueta: ahora el reactivo dice "+ PCC (oxidante suave)" y la
+condición dice "CH₂Cl₂ (disolvente)". Se corrigió el mismo problema
+de fondo, más leve, en la oxidación fuerte (`rxn_27`): "Δ (oxidante
+fuerte)" pasó a "+ KMnO₄ / H⁺ (oxidante fuerte)" con condición solo
+"Δ" — el calor no es el oxidante, el KMnO₄ sí. Se revisaron las demás
+~60 combinaciones reactivo/condición del banco (HBr, HCl, KOH, NaOH,
+LiAlH₄, NaBH₄, Grignards, KMnO₄, K₂Cr₂O₇, Tollens, Fehling, etc.): son
+reactivos reales que sí se consumen, correctamente mostrados con "+";
+solo esos dos tenían la etiqueta en el campo equivocado.
+
+### Verificación
+Las 145 preguntas se generaron de nuevo sin errores de consola
+(139/145 con estructura dibujada, igual que antes — este cambio no
+tocó el intérprete de fórmulas). Se comprobó por separado que la
+regla de "pasar a la siguiente línea" aplica en pantalla angosta
+(412px) y que el PDF (`@media print`) sigue envolviendo igual que
+antes.
+
+### Pendiente / sin resolver
+El resto del Generador (los paneles de configuración, las tarjetas de
+Tipo A/B/C) tampoco tiene reglas de pantalla angosta más allá del menú
+— hasta ahora nadie había reportado que se vieran mal en celular. Si
+aparecen más quejas de "se corta"/"no cabe" en otras partes de la
+herramienta (no solo Reacciones), valdría la pena revisar el diseño
+responsive del Generador completo en una sesión aparte.
+
+---
+
 ## 2026-09-17 (54) — Auditoría química del banco de reacciones de `generador.html` y correcciones encontradas
 
 ### Contexto
