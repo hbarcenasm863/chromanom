@@ -381,6 +381,8 @@ body{
 .pill-g{background:var(--c-g)}
 .pill-i{background:var(--c-i)}
 .pill-r{background:var(--c-r)}
+/* Doble rol (ej. el anillo bencénico: es cadena Y grupo funcional a la vez) */
+.pill-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
 
 .mdec-table{
   width:100%;border-collapse:collapse;
@@ -532,10 +534,12 @@ body{
 .ak-table td:first-child{font-family:'Courier New',monospace;font-weight:700}
 .ak-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700;color:#fff;margin-right:4px}
 .tag-c{background:var(--c-c)}.tag-g{background:var(--c-g)}.tag-i{background:var(--c-i)}.tag-r{background:var(--c-r)}
+.tag-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
 .cls-name-c{color:var(--c-c);font-weight:700}
 .cls-name-g{color:var(--c-g);font-weight:700}
 .cls-name-i{color:var(--c-i);font-weight:700}
 .cls-name-r{color:var(--c-r);font-weight:700}
+.cls-name-cg{background:linear-gradient(90deg,var(--c-c),var(--c-g));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
 
 /* ── PRINT-ONLY answer key section (hidden on screen) ── */
 
@@ -617,6 +621,7 @@ body{
   .pill-g{background:#b5176b !important}
   .pill-i{background:#d97200 !important}
   .pill-r{background:#1156a8 !important}
+  .pill-cg{background:linear-gradient(135deg,#1b8a3a 50%,#b5176b 50%) !important}
 
   .mdec-table th,.mdec-table td{border-color:#aaa}
 
@@ -634,6 +639,7 @@ body{
   .print-tag-g{background:#b5176b}
   .print-tag-i{background:#d97200}
   .print-tag-r{background:#1156a8}
+  .print-tag-cg{background:linear-gradient(135deg,#1b8a3a 50%,#b5176b 50%)}
 
   /* Tipo D — reactions in print */
   .rxn-d-eq{overflow:visible !important;flex-wrap:wrap !important;gap:6px 10px !important;
@@ -873,6 +879,7 @@ body{
         <tr><td><span class="mdec-dot" style="background:#CC79A7"></span></td><td><strong>Grupo func. (G)</strong></td><td>Sufijo que indica el grupo funcional principal</td></tr>
         <tr><td><span class="mdec-dot" style="background:#b45309"></span></td><td><strong>Insaturaci&oacute;n (I)</strong></td><td>Infijo -en- / -in- con indicador de posici&oacute;n</td></tr>
         <tr><td><span class="mdec-dot" style="background:#0891b2"></span></td><td><strong>Ramificaci&oacute;n (R)</strong></td><td>Sustituyentes: metilos, etilos, halogens, etc.</td></tr>
+        <tr><td><span class="mdec-dot" style="background:linear-gradient(135deg,#166534 50%,#CC79A7 50%)"></span></td><td><strong>Doble rol (C+G)</strong></td><td>El anillo arom&aacute;tico (benceno, tolueno&hellip;) act&uacute;a a la vez como cadena principal y como grupo funcional</td></tr>
       </tbody>
     </table>
   </div>
@@ -1470,18 +1477,18 @@ const MOLDES={
 // MOLS DATASET
 // ─────────────────────────────────────────────────────────────────────────────
 const MOLS = [
-  {key:'butano',name:'butano',topic:'alcanos',parts:[{t:'but',cls:'c',l:'4 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'propano',name:'propano',topic:'alcanos',parts:[{t:'prop',cls:'c',l:'3 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'hexano',name:'hexano',topic:'alcanos',parts:[{t:'hex',cls:'c',l:'6 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'heptano',name:'heptano',topic:'alcanos',parts:[{t:'hept',cls:'c',l:'7 carbonos en cadena'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'metilbutano',name:'2-metilbutano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'dimetilpropano',name:'2,2-dimetilpropano',topic:'alcanos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'metilpentano',name:'2-metilpentano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'ciclohexano',name:'ciclohexano',topic:'alcanos',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
-  {key:'ciclobutano',name:'ciclobutano',topic:'alcanos',parts:[{t:'ciclobut',cls:'c',l:'Anillo de 4 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
-  {key:'ciclopentano',name:'ciclopentano',topic:'alcanos',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'ano',cls:'g',l:'Alcano (cicloalifático)'}]},
-  {key:'metilciclopentano',name:'metilciclopentano',topic:'alcanos',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'etilciclohexano',name:'etilciclohexano',topic:'alcanos',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'butano',name:'butano',topic:'alcanos',parts:[{t:'but',cls:'c',l:'4 carbonos en cadena'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'propano',name:'propano',topic:'alcanos',parts:[{t:'prop',cls:'c',l:'3 carbonos en cadena'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'hexano',name:'hexano',topic:'alcanos',parts:[{t:'hex',cls:'c',l:'6 carbonos en cadena'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'heptano',name:'heptano',topic:'alcanos',parts:[{t:'hept',cls:'c',l:'7 carbonos en cadena'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'metilbutano',name:'2-metilbutano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'dimetilpropano',name:'2,2-dimetilpropano',topic:'alcanos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'metilpentano',name:'2-metilpentano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'ciclohexano',name:'ciclohexano',topic:'alcanos',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'ciclobutano',name:'ciclobutano',topic:'alcanos',parts:[{t:'ciclobut',cls:'c',l:'Anillo de 4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'ciclopentano',name:'ciclopentano',topic:'alcanos',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (cicloalifático)'}]},
+  {key:'metilciclopentano',name:'metilciclopentano',topic:'alcanos',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'ciclopent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'etilciclohexano',name:'etilciclohexano',topic:'alcanos',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
   {key:'but1eno',name:'but-1-eno',topic:'alquenos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'1-en',cls:'i',l:'Doble enlace en C1'},{t:'o',cls:'g',l:'Alqueno'}]},
   {key:'but2eno',name:'but-2-eno',topic:'alquenos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'g',l:'Alqueno'}]},
   {key:'prop1eno',name:'prop-1-eno',topic:'alquenos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'1-en',cls:'i',l:'Doble enlace en C1'},{t:'o',cls:'g',l:'Alqueno'}]},
@@ -1507,8 +1514,8 @@ const MOLS = [
   {key:'pentan2ona',name:'pentan-2-ona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'butan2ona',name:'butan-2-ona',topic:'cetonas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'pentan3ona',name:'pentan-3-ona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-ona',cls:'g',l:'C=O en C3 (cetona)'}]},
-  {key:'ciclopentanona',name:'ciclopentanona',topic:'cetonas',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'on',cls:'g',l:'C=O (cetona cíclica)'},{t:'a',cls:'g',l:'Cetona'}]},
-  {key:'ciclohexanona',name:'ciclohexanona',topic:'cetonas',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'on',cls:'g',l:'C=O (cetona cíclica)'},{t:'a',cls:'g',l:'Cetona'}]},
+  {key:'ciclopentanona',name:'ciclopentanona',topic:'cetonas',parts:[{t:'ciclopent',cls:'c',l:'Anillo de 5C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'ona',cls:'g',l:'C=O (cetona cíclica)'}]},
+  {key:'ciclohexanona',name:'ciclohexanona',topic:'cetonas',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'ona',cls:'g',l:'C=O (cetona cíclica)'}]},
   {key:'etanal',name:'etanal',topic:'aldehidos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'propanal',name:'propanal',topic:'aldehidos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'butanal',name:'butanal',topic:'aldehidos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
@@ -1526,33 +1533,33 @@ const MOLS = [
   {key:'metoxietano',name:'metoxietano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'etoxietano',name:'etoxietano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'metoxipropano',name:'metoxipropano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'etanamida',name:'etanamida',topic:'amidas',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'propanamida',name:'propanamida',topic:'amidas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'butanamida',name:'butanamida',topic:'amidas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'pentanamida',name:'pentanamida',topic:'amidas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'etanonitrilo',name:'etanonitrilo',topic:'nitrilos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'propanonitrilo',name:'propanonitrilo',topic:'nitrilos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'butanonitrilo',name:'butanonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'pentanonitrilo',name:'pentanonitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'etanamina',name:'etanamina',topic:'aminas',parts:[{t:'etan',cls:'c',l:'2 carbonos'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'propanamina',name:'propanamina',topic:'aminas',parts:[{t:'propan',cls:'c',l:'3 carbonos'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'butan1amina',name:'butan-1-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'butan2amina',name:'butan-2-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'−NH₂ en C2'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'pentano15diamina',name:'pentano-1,5-diamina',topic:'aminas',parts:[{t:'pentan',cls:'c',l:'5 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'1,5-diamin',cls:'g',l:'−NH₂ en C1 y C5'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'metilbenceno',name:'metilbenceno',topic:'benceno',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'etilbenceno',name:'etilbenceno',topic:'benceno',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'propilbenceno',name:'propilbenceno',topic:'benceno',parts:[{t:'propil',cls:'r',l:'Sustituyente propilo (3C)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'ortoXileno',name:'1,2-dimetilbenceno',topic:'benceno',parts:[{t:'1,2-dimetil',cls:'r',l:'Dos metilos en C1 y C2 (orto)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'metaXileno',name:'1,3-dimetilbenceno',topic:'benceno',parts:[{t:'1,3-dimetil',cls:'r',l:'Dos metilos en C1 y C3 (meta)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'paraXileno',name:'1,4-dimetilbenceno',topic:'benceno',parts:[{t:'1,4-dimetil',cls:'r',l:'Dos metilos en C1 y C4 (para)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'etanamida',name:'etanamida',topic:'amidas',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'propanamida',name:'propanamida',topic:'amidas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'butanamida',name:'butanamida',topic:'amidas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'pentanamida',name:'pentanamida',topic:'amidas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'etanonitrilo',name:'etanonitrilo',topic:'nitrilos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'propanonitrilo',name:'propanonitrilo',topic:'nitrilos',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'butanonitrilo',name:'butanonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'pentanonitrilo',name:'pentanonitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'etanamina',name:'etanamina',topic:'aminas',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−NH₂)'}]},
+  {key:'propanamina',name:'propanamina',topic:'aminas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−NH₂)'}]},
+  {key:'butan1amina',name:'butan-1-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH₂ en C1'}]},
+  {key:'butan2amina',name:'butan-2-amina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'−NH₂ en C2'}]},
+  {key:'pentano15diamina',name:'pentano-1,5-diamina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o1,5-diamina',cls:'g',l:'−NH₂ en C1 y C5'}]},
+  {key:'metilbenceno',name:'metilbenceno',topic:'benceno',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'etilbenceno',name:'etilbenceno',topic:'benceno',parts:[{t:'etil',cls:'r',l:'Sustituyente etilo (2C)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'propilbenceno',name:'propilbenceno',topic:'benceno',parts:[{t:'propil',cls:'r',l:'Sustituyente propilo (3C)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'ortoXileno',name:'1,2-dimetilbenceno',topic:'benceno',parts:[{t:'1,2-dimetil',cls:'r',l:'Dos metilos en C1 y C2 (orto)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'metaXileno',name:'1,3-dimetilbenceno',topic:'benceno',parts:[{t:'1,3-dimetil',cls:'r',l:'Dos metilos en C1 y C3 (meta)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'paraXileno',name:'1,4-dimetilbenceno',topic:'benceno',parts:[{t:'1,4-dimetil',cls:'r',l:'Dos metilos en C1 y C4 (para)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
   // ── alcanos adicionales ──
-  {key:'etano',name:'etano',topic:'alcanos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'pentano',name:'pentano',topic:'alcanos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano (sin insaturaciones)'}]},
-  {key:'dimetilbutano',name:'2,3-dimetilbutano',topic:'alcanos',parts:[{t:'2,3-dimetil',cls:'r',l:'Metilos en C2 y C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'dimetilpentano24',name:'2,4-dimetilpentano',topic:'alcanos',parts:[{t:'2,4-dimetil',cls:'r',l:'Metilos en C2 y C4'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'metilpentano3',name:'3-metilpentano',topic:'alcanos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'etilmetilpentano',name:'3-etil-2-metilpentano',topic:'alcanos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'-2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
-  {key:'metilciclohexano',name:'metilciclohexano',topic:'alcanos',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'ano',cls:'g',l:'Alcano'}]},
+  {key:'etano',name:'etano',topic:'alcanos',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'pentano',name:'pentano',topic:'alcanos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (sin insaturaciones)'}]},
+  {key:'dimetilbutano',name:'2,3-dimetilbutano',topic:'alcanos',parts:[{t:'2,3-dimetil',cls:'r',l:'Metilos en C2 y C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'dimetilpentano24',name:'2,4-dimetilpentano',topic:'alcanos',parts:[{t:'2,4-dimetil',cls:'r',l:'Metilos en C2 y C4'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'metilpentano3',name:'3-metilpentano',topic:'alcanos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'etilmetilpentano',name:'3-etil-2-metilpentano',topic:'alcanos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'-2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'metilciclohexano',name:'metilciclohexano',topic:'alcanos',parts:[{t:'metil',cls:'r',l:'Sustituyente metilo'},{t:'ciclohex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
   // ── alquenos adicionales ──
   {key:'pent13dieno',name:'penta-1,3-dieno',topic:'alquenos',parts:[{t:'penta',cls:'c',l:'5 carbonos'},{t:'1,3-dien',cls:'i',l:'Dobles en C1 y C3'},{t:'o',cls:'g',l:'Alqueno (dieno)'}]},
   {key:'ciclohex2en1ol',name:'ciclohex-2-en-1-ol',topic:'alquenos',parts:[{t:'ciclohex',cls:'c',l:'Anillo 6C'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
@@ -1574,33 +1581,33 @@ const MOLS = [
   {key:'acidoHexanoico',name:'ácido hexanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidobenzoico',name:'ácido benzoico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'benzo',cls:'c',l:'Benceno'},{t:'ico',cls:'g',l:'Ácido carboxílico'}]},
   // ── amidas adicionales ──
-  {key:'metanamida',name:'metanamida',topic:'amidas',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'hexanamida',name:'hexanamida',topic:'amidas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
+  {key:'metanamida',name:'metanamida',topic:'amidas',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'hexanamida',name:'hexanamida',topic:'amidas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
   // ── nitrilos adicionales ──
-  {key:'hexanonitrilo',name:'hexanonitrilo',topic:'nitrilos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'hexanonitrilo',name:'hexanonitrilo',topic:'nitrilos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   // ── aminas adicionales ──
-  {key:'metilamina',name:'metilamina',iupac:'metanamina',topic:'aminas',parts:[{t:'metan',cls:'c',l:'1 carbono (metano)'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'trimetilamina',name:'trimetilamina',iupac:'N,N-dimetilmetanamina',topic:'aminas',parts:[{t:'N,N-dimetil',cls:'r',l:'Dos metilos sobre el nitrógeno'},{t:'metan',cls:'c',l:'1 carbono (cadena principal)'},{t:'amin',cls:'g',l:'Grupo amino (−N)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'nMetilPropan1amina',name:'N-metilpropan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'propan',cls:'c',l:'3 carbonos'},{t:'1-amin',cls:'g',l:'−NH en C1'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'nMetilButan1amina',name:'N-metilbutan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'1-amin',cls:'g',l:'−NH en C1'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'metilamina',name:'metilamina',iupac:'metanamina',topic:'aminas',parts:[{t:'met',cls:'c',l:'1 carbono (metano)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−NH₂)'}]},
+  {key:'trimetilamina',name:'trimetilamina',iupac:'N,N-dimetilmetanamina',topic:'aminas',parts:[{t:'N,N-dimetil',cls:'r',l:'Dos metilos sobre el nitrógeno'},{t:'met',cls:'c',l:'1 carbono (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−N)'}]},
+  {key:'nMetilPropan1amina',name:'N-metilpropan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH en C1'}]},
+  {key:'nMetilButan1amina',name:'N-metilbutan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH en C1'}]},
   // ── aromáticos adicionales ──
-  {key:'isopropilbenceno',name:'isopropilbenceno',topic:'benceno',parts:[{t:'isopropil',cls:'r',l:'Sustituyente isopropilo'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'nitrobenceno',name:'nitrobenceno',topic:'benceno',parts:[{t:'nitro',cls:'r',l:'Grupo nitro (−NO₂)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'isopropilbenceno',name:'isopropilbenceno',topic:'benceno',parts:[{t:'isopropil',cls:'r',l:'Sustituyente isopropilo'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'nitrobenceno',name:'nitrobenceno',topic:'benceno',parts:[{t:'nitro',cls:'r',l:'Grupo nitro (−NO₂)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
   {key:'benzaldehido',name:'benzaldehído',topic:'benceno',parts:[{t:'benz',cls:'c',l:'Benceno'},{t:'ald',cls:'g',l:'Aldehído'},{t:'ehído',cls:'g',l:'Terminación'}]},
   {key:'anilina',name:'anilina',topic:'benceno',parts:[{t:'anil',cls:'c',l:'Benceno con NH₂'},{t:'ina',cls:'g',l:'Amina aromática'}]},
-  {key:'anisol',name:'metoxibenceno',topic:'benceno',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'ortoNitrotolueno',name:'2-nitrotolueno',topic:'benceno',parts:[{t:'2-nitro',cls:'r',l:'Grupo NO₂ en C2'},{t:'tolu',cls:'c',l:'Metilbenceno'},{t:'eno',cls:'g',l:'Aromático'}]},
+  {key:'anisol',name:'metoxibenceno',topic:'benceno',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'ortoNitrotolueno',name:'2-nitrotolueno',topic:'benceno',parts:[{t:'2-nitro',cls:'r',l:'Grupo NO₂ en C2'},{t:'tolueno',cls:'cg',l:'Anillo aromático (metilbenceno) — cadena principal y grupo funcional a la vez'}]},
   {key:'paraCresol',name:'4-metilfenol',topic:'benceno',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'fen',cls:'c',l:'Fenol'},{t:'ol',cls:'g',l:'−OH (fenol)'}]},
-  {key:'resorcinol',name:'benceno-1,3-diol',topic:'benceno',parts:[{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'},{t:'1,3-diol',cls:'g',l:'−OH en C1 y C3'}]},
+  {key:'resorcinol',name:'benceno-1,3-diol',topic:'benceno',parts:[{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'},{t:'1,3-diol',cls:'g',l:'−OH en C1 y C3'}]},
   {key:'paraCloroanilina',name:'4-cloroanilina',topic:'benceno',parts:[{t:'4-cloro',cls:'r',l:'Cloro en C4'},{t:'anil',cls:'c',l:'Anilina (amino-benceno)'},{t:'ina',cls:'g',l:'Amina aromática'}]},
-  {key:'triclorobenceno124',name:'1,2,4-triclorobenceno',topic:'benceno',parts:[{t:'1,2,4-tricloro',cls:'r',l:'Tres átomos de Cl'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'trimetilbenceno123',name:'1,2,3-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,3-trimetil',cls:'r',l:'Tres metilos consecutivos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'trimetilbenceno124',name:'1,2,4-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,4-trimetil',cls:'r',l:'Tres metilos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
-  {key:'trimetilbenceno135',name:'1,3,5-trimetilbenceno',topic:'benceno',parts:[{t:'1,3,5-trimetil',cls:'r',l:'Tres metilos alternos'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Aromático'}]},
+  {key:'triclorobenceno124',name:'1,2,4-triclorobenceno',topic:'benceno',parts:[{t:'1,2,4-tricloro',cls:'r',l:'Tres átomos de Cl'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'trimetilbenceno123',name:'1,2,3-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,3-trimetil',cls:'r',l:'Tres metilos consecutivos'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'trimetilbenceno124',name:'1,2,4-trimetilbenceno',topic:'benceno',parts:[{t:'1,2,4-trimetil',cls:'r',l:'Tres metilos'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
+  {key:'trimetilbenceno135',name:'1,3,5-trimetilbenceno',topic:'benceno',parts:[{t:'1,3,5-trimetil',cls:'r',l:'Tres metilos alternos'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez'}]},
   {key:'acidoSalicilico',name:'ácido salicílico',iupac:'ácido 2-hidroxibenzoico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-hidroxi',cls:'r',l:'−OH en C2'},{t:'benzo',cls:'c',l:'Benceno'},{t:'ico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'aspirina',name:'ácido acetilsalicílico',iupac:'ácido 2-(acetiloxi)benzoico',topic:'benceno',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'acetil',cls:'r',l:'Grupo acetilo'},{t:'salicílico',cls:'g',l:'2-OH benzoico'}]},
-  {key:'paracetamol',name:'paracetamol',iupac:'N-(4-hidroxifenil)etanamida',topic:'benceno',parts:[{t:'N-(4-hidroxifenil)',cls:'r',l:'Sustituyente N-(4-hidroxifenil)'},{t:'etan',cls:'c',l:'2 carbonos (cadena)'},{t:'amida',cls:'g',l:'Amida'}]},
-  {key:'TNT',name:'2,4,6-trinitrotolueno',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'tolu',cls:'c',l:'Metilbenceno'},{t:'eno',cls:'g',l:'Aromático'}]},
+  {key:'paracetamol',name:'paracetamol',iupac:'N-(4-hidroxifenil)etanamida',topic:'benceno',parts:[{t:'N-(4-hidroxifenil)',cls:'r',l:'Sustituyente N-(4-hidroxifenil)'},{t:'et',cls:'c',l:'2 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Amida'}]},
+  {key:'TNT',name:'2,4,6-trinitrotolueno',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'tolueno',cls:'cg',l:'Anillo aromático (metilbenceno) — cadena principal y grupo funcional a la vez'}]},
   {key:'acidoPicrico',name:'ácido pícrico',iupac:'2,4,6-trinitrofenol',topic:'benceno',parts:[{t:'2,4,6-trinitro',cls:'r',l:'Tres grupos NO₂'},{t:'fen',cls:'c',l:'Fenol'},{t:'ol',cls:'g',l:'−OH (fenol)'}]},
   {key:'vainillina',name:'vainillina',iupac:'4-hidroxi-3-metoxibenzaldehído',topic:'benceno',parts:[{t:'4-hidroxi-3-metoxi',cls:'r',l:'−OH en C4, −OCH₃ en C3'},{t:'benz',cls:'c',l:'Anillo bencénico'},{t:'aldehído',cls:'g',l:'Grupo −CHO'}]},
   {key:'acidoHeptanoico',name:'ácido heptanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'hept',cls:'c',l:'7 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
@@ -1608,10 +1615,10 @@ const MOLS = [
   {key:'acidoDosMetilpropanoico',name:'ácido 2-metilpropanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoCuatroMetilhexanoico',name:'ácido 4-metilhexanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoDosTresDimetilbutanoico',name:'ácido 2,3-dimetilbutanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2,3-dimetil',cls:'r',l:'Metilos en C2 y C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
-  {key:'acidoCiclohexanocarboxilico',name:'ácido ciclohexanocarboxílico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'ano',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'carboxílico',cls:'g',l:'Grupo −COOH'}]},
-  {key:'acidoHexanodioico',name:'ácido hexanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hexan',cls:'c',l:'6 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioico',cls:'g',l:'Dos grupos −COOH'}]},
+  {key:'acidoCiclohexanocarboxilico',name:'ácido ciclohexanocarboxílico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'ocarboxílico',cls:'g',l:'Grupo −COOH'}]},
+  {key:'acidoHexanodioico',name:'ácido hexanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'odioico',cls:'g',l:'Dos grupos −COOH'}]},
   {key:'acidoBut2enoico',name:'ácido but-2-enoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'oico',cls:'g',l:'Ácido carboxílico insaturado'}]},
-  {key:'acidoEtanodioico',name:'ácido etanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'etan',cls:'c',l:'2 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioico',cls:'g',l:'Dos grupos −COOH'}]},
+  {key:'acidoEtanodioico',name:'ácido etanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'odioico',cls:'g',l:'Dos grupos −COOH'}]},
   {key:'acidoDosHidroxipropanoico',name:'ácido 2-hidroxipropanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-hidroxi',cls:'r',l:'−OH en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoDosCloropropanoico',name:'ácido 2-cloropropanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-cloro',cls:'r',l:'−Cl en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidoDosDosDimetilbutanoico',name:'ácido 2,2-dimetilbutanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
@@ -1623,7 +1630,7 @@ const MOLS = [
   {key:'heptan1ol',name:'heptan-1-ol',topic:'alcoholes',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
   {key:'tresMetilbutan2ol',name:'3-metilbutan-2-ol',topic:'alcoholes',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ol',cls:'g',l:'−OH en C2'}]},
   {key:'dosDosDimetilpropan1ol',name:'2,2-dimetilpropan-1-ol',topic:'alcoholes',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
-  {key:'propano123triol',name:'propano-1,2,3-triol',topic:'alcoholes',parts:[{t:'propan',cls:'c',l:'3 carbonos'},{t:'o',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1,2,3-triol',cls:'g',l:'−OH en C1, C2 y C3 (glicerol)'}]},
+  {key:'propano123triol',name:'propano-1,2,3-triol',topic:'alcoholes',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o1,2,3-triol',cls:'g',l:'−OH en C1, C2 y C3 (glicerol)'}]},
   {key:'dosMetilpentan1ol',name:'2-metilpentan-1-ol',topic:'alcoholes',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-ol',cls:'g',l:'−OH en C1'}]},
   {key:'metanal',name:'metanal',topic:'aldehidos',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'heptanal',name:'heptanal',topic:'aldehidos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
@@ -1631,7 +1638,7 @@ const MOLS = [
   {key:'tresMetilbutanal',name:'3-metilbutanal',topic:'aldehidos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'dosMetilbutanal',name:'2-metilbutanal',topic:'aldehidos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'dosDosDimetilpropanal',name:'2,2-dimetilpropanal',topic:'aldehidos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
-  {key:'hexanodial',name:'hexanodial',topic:'aldehidos',parts:[{t:'hexan',cls:'c',l:'6 carbonos'},{t:'o',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'dial',cls:'g',l:'Dos grupos −CHO'}]},
+  {key:'hexanodial',name:'hexanodial',topic:'aldehidos',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'odial',cls:'g',l:'Dos grupos −CHO'}]},
   {key:'but2enal',name:'but-2-enal',topic:'aldehidos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'tresMetilpentanal',name:'3-metilpentanal',topic:'aldehidos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'dosMetilpentanal',name:'2-metilpentanal',topic:'aldehidos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
@@ -1667,32 +1674,32 @@ const MOLS = [
   {key:'tresMetilhex1ino',name:'3-metilhex-1-ino',topic:'alquinos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'1-in',cls:'i',l:'Triple enlace en C1'},{t:'o',cls:'g',l:'Alquino'}]},
   {key:'cincoMetilhex3ino',name:'2-metilhex-3-ino',topic:'alquinos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'3-in',cls:'i',l:'Triple enlace en C3'},{t:'o',cls:'g',l:'Alquino'}]},
   {key:'oct3ino',name:'oct-3-ino',topic:'alquinos',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'3-in',cls:'i',l:'Triple enlace en C3'},{t:'o',cls:'g',l:'Alquino'}]},
-  {key:'heptanamida',name:'heptanamida',topic:'amidas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'dosMetilpropanamida',name:'2-metilpropanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'tresMetilbutanamida',name:'3-metilbutanamida',topic:'amidas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'dosMetilbutanamida',name:'2-metilbutanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'benzamida',name:'benzamida',topic:'amidas',parts:[{t:'benz',cls:'c',l:'Benceno'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'nMetilAcetamida',name:'N-metilacetamida',topic:'amidas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amid',cls:'g',l:'Grupo amida'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'nEtilnMetilAcetamida',name:'N-etil-N-metilacetamida',topic:'amidas',parts:[{t:'N-etil-N-metil',cls:'r',l:'Etilo y metilo sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amid',cls:'g',l:'Grupo amida'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'nEtilPropanamida',name:'N-etilpropanamida',topic:'amidas',parts:[{t:'N-etil',cls:'r',l:'Etilo sobre N'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'hexanodiamida',name:'hexanodioamida',topic:'amidas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioamida',cls:'g',l:'Dos grupos −CONH₂'}]},
-  {key:'nnDimetilFormamida',name:'N,N-dimetilformamida',topic:'amidas',parts:[{t:'N,N-dimetil',cls:'r',l:'Dos metilos sobre N'},{t:'form',cls:'c',l:'1 carbono (formil)'},{t:'amid',cls:'g',l:'Grupo amida'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'dosDosDimetilpropanamida',name:'2,2-dimetilpropanamida',topic:'amidas',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'dosMetilpentanamida',name:'2-metilpentanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amid',cls:'g',l:'Grupo amida (−CONH₂)'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'ciclohexanocarboxamida',name:'ciclohexanocarboxamida',topic:'amidas',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'ano',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'carboxamida',cls:'g',l:'Grupo −CONH₂'}]},
-  {key:'nnDietilAcetamida',name:'N,N-dietilacetamida',topic:'amidas',parts:[{t:'N,N-dietil',cls:'r',l:'Dos etilos sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amid',cls:'g',l:'Grupo amida'},{t:'a',cls:'g',l:'Terminación femenina'}]},
-  {key:'propan2amina',name:'propan-2-amina',topic:'aminas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'−NH₂ en C2'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'pentan1amina',name:'pentan-1-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'pentan3amina',name:'pentan-3-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-amin',cls:'g',l:'−NH₂ en C3'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'nMetilmetanamina',name:'N-metilmetanamina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'metan',cls:'c',l:'1 carbono'},{t:'amin',cls:'g',l:'Grupo amino (−NH)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'hexan1amina',name:'hexan-1-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'hexan3amina',name:'hexan-3-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-amin',cls:'g',l:'−NH₂ en C3'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'dosMetilpropan1amina',name:'2-metilpropan-1-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'dosMetilpropan2amina',name:'2-metilpropan-2-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'−NH₂ en C2'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'trietilamina',name:'trietilamina',iupac:'N,N-dietiletanamina',topic:'aminas',parts:[{t:'N,N-dietil',cls:'r',l:'Dos etilos sobre el nitrógeno'},{t:'etan',cls:'c',l:'2 carbonos (cadena principal)'},{t:'amin',cls:'g',l:'Grupo amino (−N)'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'tresMetilbutan2amina',name:'3-metilbutan-2-amina',topic:'aminas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'−NH₂ en C2'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'butano14diamina',name:'butano-1,4-diamina',topic:'aminas',parts:[{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1,4-diamin',cls:'g',l:'−NH₂ en C1 y C4'},{t:'a',cls:'g',l:'Terminación'}]},
-  {key:'dosMetilpentan1amina',name:'2-metilpentan-1-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'−NH₂ en C1'},{t:'a',cls:'g',l:'Terminación'}]},
+  {key:'heptanamida',name:'heptanamida',topic:'amidas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'dosMetilpropanamida',name:'2-metilpropanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'tresMetilbutanamida',name:'3-metilbutanamida',topic:'amidas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'dosMetilbutanamida',name:'2-metilbutanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'benzamida',name:'benzamida',topic:'amidas',parts:[{t:'benz',cls:'c',l:'Benceno'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'nMetilAcetamida',name:'N-metilacetamida',topic:'amidas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amida',cls:'g',l:'Grupo amida'}]},
+  {key:'nEtilnMetilAcetamida',name:'N-etil-N-metilacetamida',topic:'amidas',parts:[{t:'N-etil-N-metil',cls:'r',l:'Etilo y metilo sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amida',cls:'g',l:'Grupo amida'}]},
+  {key:'nEtilPropanamida',name:'N-etilpropanamida',topic:'amidas',parts:[{t:'N-etil',cls:'r',l:'Etilo sobre N'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida'}]},
+  {key:'hexanodiamida',name:'hexanodioamida',topic:'amidas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odioamida',cls:'g',l:'Dos grupos −CONH₂'}]},
+  {key:'nnDimetilFormamida',name:'N,N-dimetilformamida',topic:'amidas',parts:[{t:'N,N-dimetil',cls:'r',l:'Dos metilos sobre N'},{t:'form',cls:'c',l:'1 carbono (formil)'},{t:'amida',cls:'g',l:'Grupo amida'}]},
+  {key:'dosDosDimetilpropanamida',name:'2,2-dimetilpropanamida',topic:'amidas',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'dosMetilpentanamida',name:'2-metilpentanamida',topic:'amidas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
+  {key:'ciclohexanocarboxamida',name:'ciclohexanocarboxamida',topic:'amidas',parts:[{t:'ciclohex',cls:'c',l:'Anillo de 6C'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'ocarboxamida',cls:'g',l:'Grupo −CONH₂'}]},
+  {key:'nnDietilAcetamida',name:'N,N-dietilacetamida',topic:'amidas',parts:[{t:'N,N-dietil',cls:'r',l:'Dos etilos sobre N'},{t:'acet',cls:'c',l:'2 carbonos (acetil)'},{t:'amida',cls:'g',l:'Grupo amida'}]},
+  {key:'propan2amina',name:'propan-2-amina',topic:'aminas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'−NH₂ en C2'}]},
+  {key:'pentan1amina',name:'pentan-1-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH₂ en C1'}]},
+  {key:'pentan3amina',name:'pentan-3-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-amina',cls:'g',l:'−NH₂ en C3'}]},
+  {key:'nMetilmetanamina',name:'N-metilmetanamina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo sobre N'},{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−NH)'}]},
+  {key:'hexan1amina',name:'hexan-1-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH₂ en C1'}]},
+  {key:'hexan3amina',name:'hexan-3-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-amina',cls:'g',l:'−NH₂ en C3'}]},
+  {key:'dosMetilpropan1amina',name:'2-metilpropan-1-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH₂ en C1'}]},
+  {key:'dosMetilpropan2amina',name:'2-metilpropan-2-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'−NH₂ en C2'}]},
+  {key:'trietilamina',name:'trietilamina',iupac:'N,N-dietiletanamina',topic:'aminas',parts:[{t:'N,N-dietil',cls:'r',l:'Dos etilos sobre el nitrógeno'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amina',cls:'g',l:'Grupo amino (−N)'}]},
+  {key:'tresMetilbutan2amina',name:'3-metilbutan-2-amina',topic:'aminas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'−NH₂ en C2'}]},
+  {key:'butano14diamina',name:'butano-1,4-diamina',topic:'aminas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o1,4-diamina',cls:'g',l:'−NH₂ en C1 y C4'}]},
+  {key:'dosMetilpentan1amina',name:'2-metilpentan-1-amina',topic:'aminas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'−NH₂ en C1'}]},
   {key:'heptan2ona',name:'heptan-2-ona',topic:'cetonas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'heptan3ona',name:'heptan-3-ona',topic:'cetonas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-ona',cls:'g',l:'C=O en C3 (cetona)'}]},
   {key:'heptan4ona',name:'heptan-4-ona',topic:'cetonas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'4-ona',cls:'g',l:'C=O en C4 (cetona)'}]},
@@ -1702,7 +1709,7 @@ const MOLS = [
   {key:'tresMetilhexan2ona',name:'3-metilhexan-2-ona',topic:'cetonas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'cuatroMetilhexan2ona',name:'4-metilhexan-2-ona',topic:'cetonas',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'but3en2ona',name:'but-3-en-2-ona',topic:'cetonas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'3-en',cls:'i',l:'Doble enlace en C3'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
-  {key:'pentano24diona',name:'pentano-2,4-diona',topic:'cetonas',parts:[{t:'pentan',cls:'c',l:'5 carbonos'},{t:'o',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2,4-diona',cls:'g',l:'C=O en C2 y C4 (cetona)'}]},
+  {key:'pentano24diona',name:'pentano-2,4-diona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o2,4-diona',cls:'g',l:'C=O en C2 y C4 (cetona)'}]},
   {key:'propanoatoEtilo',name:'propanoato de etilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
   {key:'butanoatoEtilo',name:'butanoato de etilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
   {key:'propanoatoPropilo',name:'propanoato de propilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propoxi'}]},
@@ -1723,7 +1730,7 @@ const MOLS = [
   {key:'propoxibutano',name:'1-propoxibutano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'butoxibutano',name:'1-butoxibutano',topic:'eteres',parts:[{t:'1-butoxi',cls:'r',l:'Grupo butoxi (−OC₄H₉)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'diisopropiloxter',name:'2-isopropoxipropano',topic:'eteres',parts:[{t:'2-isopropoxi',cls:'r',l:'Grupo isopropoxi'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'etoxibenceno',name:'etoxibenceno',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Éter aromático'}]},
+  {key:'etoxibenceno',name:'etoxibenceno',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Éter aromático)'}]},
   {key:'tetrahidrofurano',name:'oxolano (THF)',topic:'eteres',parts:[{t:'ox',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'olan',cls:'c',l:'Anillo de 5 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
   {key:'tetrahidropirano',name:'oxano (THP)',topic:'eteres',parts:[{t:'oxa',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'n',cls:'c',l:'Anillo saturado de 6 miembros'},{t:'o',cls:'g',l:'Éter cíclico'}]},
   {key:'oxirano',name:'1,2-epoxietano (oxirano)',topic:'eteres',parts:[{t:'1,2-epoxi',cls:'g',l:'Puente de oxígeno entre C1 y C2 (éter cíclico)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación de alcano'}]},
@@ -1739,32 +1746,32 @@ const MOLS = [
   {key:'metoxipentano',name:'1-metoxipentano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'dimetoximetano',name:'dimetoximetano',topic:'eteres',parts:[{t:'dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'met',cls:'c',l:'1 carbono (puente)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   // ── nitrilos adicionales ──
-  {key:'metanonitrilo',name:'metanonitrilo',topic:'nitrilos',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'heptanonitrilo',name:'heptanonitrilo',topic:'nitrilos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'octanonitrilo',name:'octanonitrilo',topic:'nitrilos',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'nonanonitrilo',name:'nonanonitrilo',topic:'nitrilos',parts:[{t:'non',cls:'c',l:'9 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosMetilPropanonitrilo',name:'2-metilpropanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'propan',cls:'c',l:'3 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'tresMetilButanonitrilo',name:'3-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosMetilButanonitrilo',name:'2-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosDosMetilPropanonitrilo',name:'2,2-dimetilpropanonitrilo',topic:'nitrilos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'propan',cls:'c',l:'3 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'butanodinitrilo',name:'butanodinitrilo',topic:'nitrilos',parts:[{t:'butan',cls:'c',l:'4 carbonos (cadena)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
-  {key:'hexanodinitrilo',name:'hexanodinitrilo',topic:'nitrilos',parts:[{t:'hexan',cls:'c',l:'6 carbonos (cadena)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
-  {key:'but2enonitrilo',name:'but-2-enonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'metanonitrilo',name:'metanonitrilo',topic:'nitrilos',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'heptanonitrilo',name:'heptanonitrilo',topic:'nitrilos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'octanonitrilo',name:'octanonitrilo',topic:'nitrilos',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'nonanonitrilo',name:'nonanonitrilo',topic:'nitrilos',parts:[{t:'non',cls:'c',l:'9 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosMetilPropanonitrilo',name:'2-metilpropanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'tresMetilButanonitrilo',name:'3-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosMetilButanonitrilo',name:'2-metilbutanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosDosMetilPropanonitrilo',name:'2,2-dimetilpropanonitrilo',topic:'nitrilos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'butanodinitrilo',name:'butanodinitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'odinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
+  {key:'hexanodinitrilo',name:'hexanodinitrilo',topic:'nitrilos',parts:[{t:'hex',cls:'c',l:'6 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'odinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
+  {key:'but2enonitrilo',name:'but-2-enonitrilo',topic:'nitrilos',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'benzonitrilo',name:'benzonitrilo',topic:'nitrilos',parts:[{t:'benzo',cls:'c',l:'Benceno'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'ciclohexanocarbonitrilo',name:'ciclohexanocarbonitrilo',topic:'nitrilos',parts:[{t:'ciclohexano',cls:'c',l:'Anillo de 6C'},{t:'carbo',cls:'c',l:'Carbono adicional'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'tresMetilHexanonitrilo',name:'3-metilhexanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hexan',cls:'c',l:'6 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosEtilButanonitrilo',name:'2-etilbutanonitrilo',topic:'nitrilos',parts:[{t:'2-etil',cls:'r',l:'Etilo en C2'},{t:'butan',cls:'c',l:'4 carbonos'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'tresMetilHexanonitrilo',name:'3-metilhexanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosEtilButanonitrilo',name:'2-etilbutanonitrilo',topic:'nitrilos',parts:[{t:'2-etil',cls:'r',l:'Etilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   // ── alcanos adicionales ──
   {key:'octano',name:'octano',topic:'alcanos',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
   {key:'nonano',name:'nonano',topic:'alcanos',parts:[{t:'non',cls:'c',l:'9 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'dosMHexano',name:'2-metilhexano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'hexan',cls:'c',l:'6 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'tresMHexano',name:'3-metilhexano',topic:'alcanos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hexan',cls:'c',l:'6 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'dosDosMetilPentano',name:'2,2-dimetilpentano',topic:'alcanos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'pentan',cls:'c',l:'5 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'tresTresMetilPentano',name:'3,3-dimetilpentano',topic:'alcanos',parts:[{t:'3,3-dimetil',cls:'r',l:'Dos metilos en C3'},{t:'pentan',cls:'c',l:'5 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'dosCuatroMetilHexano',name:'2,4-dimetilhexano',topic:'alcanos',parts:[{t:'2,4-dimetil',cls:'r',l:'Metilos en C2 y C4'},{t:'hexan',cls:'c',l:'6 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'tresEtilHexano',name:'3-etilhexano',topic:'alcanos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'hexan',cls:'c',l:'6 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano'}]},
-  {key:'dosDosMetilCuatroTrimPentano',name:'2,2,4-trimetilpentano',topic:'alcanos',parts:[{t:'2,2,4-trimetil',cls:'r',l:'Tres metilos en C2,C2,C4'},{t:'pentan',cls:'c',l:'5 carbonos (cadena principal)'},{t:'o',cls:'g',l:'Alcano (isooctano)'}]},
-  {key:'propilciclopentano',name:'propilciclopentano',topic:'alcanos',parts:[{t:'propil',cls:'r',l:'Grupo propilo'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pentan',cls:'c',l:'Anillo de 5 carbonos'},{t:'o',cls:'g',l:'Alcano cíclico'}]},
+  {key:'dosMHexano',name:'2-metilhexano',topic:'alcanos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'tresMHexano',name:'3-metilhexano',topic:'alcanos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'dosDosMetilPentano',name:'2,2-dimetilpentano',topic:'alcanos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'tresTresMetilPentano',name:'3,3-dimetilpentano',topic:'alcanos',parts:[{t:'3,3-dimetil',cls:'r',l:'Dos metilos en C3'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'dosCuatroMetilHexano',name:'2,4-dimetilhexano',topic:'alcanos',parts:[{t:'2,4-dimetil',cls:'r',l:'Metilos en C2 y C4'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'tresEtilHexano',name:'3-etilhexano',topic:'alcanos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano'}]},
+  {key:'dosDosMetilCuatroTrimPentano',name:'2,2,4-trimetilpentano',topic:'alcanos',parts:[{t:'2,2,4-trimetil',cls:'r',l:'Tres metilos en C2,C2,C4'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano (isooctano)'}]},
+  {key:'propilciclopentano',name:'propilciclopentano',topic:'alcanos',parts:[{t:'propil',cls:'r',l:'Grupo propilo'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Alcano cíclico'}]},
   // ── alquenos adicionales ──
   {key:'hept2eno',name:'hept-2-eno',topic:'alquenos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace C2−C3'},{t:'o',cls:'g',l:'Alqueno'}]},
   {key:'hept3eno',name:'hept-3-eno',topic:'alquenos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'3-en',cls:'i',l:'Doble enlace C3−C4'},{t:'o',cls:'g',l:'Alqueno'}]},
@@ -1786,7 +1793,7 @@ const MOLS = [
   {key:'octan1ol',name:'octan-1-ol',topic:'alcoholes',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-ol',cls:'g',l:'Hidroxilo en C1'}]},
   {key:'heptan2ol',name:'heptan-2-ol',topic:'alcoholes',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ol',cls:'g',l:'Hidroxilo en C2'}]},
   {key:'hexan3ol',name:'hexan-3-ol',topic:'alcoholes',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'3-ol',cls:'g',l:'Hidroxilo en C3'}]},
-  {key:'butano13diol',name:'butano-1,3-diol',topic:'alcoholes',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'1,3-diol',cls:'g',l:'Dos grupos OH (C1 y C3)'}]},
+  {key:'butano13diol',name:'butano-1,3-diol',topic:'alcoholes',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o1,3-diol',cls:'g',l:'Dos grupos OH (C1 y C3)'}]},
   {key:'tresMPent1ol',name:'3-metilpentan-1-ol',topic:'alcoholes',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-ol',cls:'g',l:'Hidroxilo en C1'}]},
   {key:'dosTresMetilButan1ol',name:'2,3-dimetilbutan-1-ol',topic:'alcoholes',parts:[{t:'2,3-dimetil',cls:'r',l:'Metilos en C2 y C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-ol',cls:'g',l:'Hidroxilo en C1'}]},
   // ── cetonas adicionales ──
@@ -1799,7 +1806,7 @@ const MOLS = [
   {key:'dosMCiclopent1ona',name:'2-metilciclopentan-1-ona',topic:'cetonas',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-ona',cls:'g',l:'C=O en C1 (cetona)'}]},
   {key:'tresMCiclohex1ona',name:'3-metilciclohexan-1-ona',topic:'cetonas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-ona',cls:'g',l:'C=O en C1 (cetona)'}]},
   {key:'cuatroMCiclohex1ona',name:'4-metilciclohexan-1-ona',topic:'cetonas',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-ona',cls:'g',l:'C=O en C1 (cetona)'}]},
-  {key:'pentano23diona',name:'pentano-2,3-diona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'2,3-diona',cls:'g',l:'Dos C=O (C2 y C3) (cetona)'}]},
+  {key:'pentano23diona',name:'pentano-2,3-diona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o2,3-diona',cls:'g',l:'Dos C=O (C2 y C3) (cetona)'}]},
   // ── aldehidos adicionales ──
   {key:'decanal',name:'decanal',topic:'aldehidos',parts:[{t:'dec',cls:'c',l:'10 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'cuatroMPentanal',name:'4-metilpentanal',topic:'aldehidos',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
@@ -1817,9 +1824,9 @@ const MOLS = [
   {key:'acido4MPentanoico',name:'ácido 4-metilpentanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'pent',cls:'c',l:'5 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acido2EHexanoico',name:'ácido 2-etilhexanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'2-etil',cls:'r',l:'Etilo en C2'},{t:'hex',cls:'c',l:'6 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acido22MetilPropanoico',name:'ácido 2,2-dimetilpropanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'prop',cls:'c',l:'3 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
-  {key:'acidoPropanodioico',name:'ácido propanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioico',cls:'g',l:'Dos grupos −COOH'}]},
-  {key:'acidoButanodioico',name:'ácido butanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioico',cls:'g',l:'Dos grupos −COOH'}]},
-  {key:'acidoPentanodioico',name:'ácido pentanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioico',cls:'g',l:'Dos grupos −COOH'}]},
+  {key:'acidoPropanodioico',name:'ácido propanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odioico',cls:'g',l:'Dos grupos −COOH'}]},
+  {key:'acidoButanodioico',name:'ácido butanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odioico',cls:'g',l:'Dos grupos −COOH'}]},
+  {key:'acidoPentanodioico',name:'ácido pentanodioico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odioico',cls:'g',l:'Dos grupos −COOH'}]},
   {key:'acidoProp2enoico',name:'ácido prop-2-enoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acido2CloroButanoico',name:'ácido 2-clorobutanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'2-cloro',cls:'r',l:'Cloro en C2 (sustituyente halógeno)'},{t:'but',cls:'c',l:'4 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   // ── esteres adicionales ──
@@ -1837,12 +1844,12 @@ const MOLS = [
   {key:'metoxihexano',name:'1-metoxihexano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'etoxihexano',name:'1-etoxihexano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'propoxihexano',name:'1-propoxihexano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'metoxiciclopentano',name:'metoxiciclopentano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pentan',cls:'c',l:'Anillo de 5 carbonos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
-  {key:'etoxiciclohexano',name:'etoxiciclohexano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hexan',cls:'c',l:'Anillo de 6 carbonos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
+  {key:'metoxiciclopentano',name:'metoxiciclopentano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter cíclico'}]},
+  {key:'etoxiciclohexano',name:'etoxiciclohexano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter cíclico'}]},
   {key:'dosEtoxiPropano',name:'2-etoxipropano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'dosMetoxiButano',name:'2-metoxibutano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2 (−OCH₃)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
   {key:'dosEtoxiButano',name:'2-etoxibutano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'propoxibenceno',name:'propoxibenceno',topic:'eteres',parts:[{t:'propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Éter aromático'}]},
+  {key:'propoxibenceno',name:'propoxibenceno',topic:'eteres',parts:[{t:'propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Éter aromático)'}]},
 
   // ── nombre funcional/clásico "(radical)(radical) éter" (mismas moléculas de arriba) ──
   {key:'metoximetano',name:'dimetil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos radicales iguales'},{t:'metil',cls:'c',l:'Radical alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
@@ -1868,35 +1875,35 @@ const MOLS = [
   {key:'nPropilEtanamida',name:'N-propiletanamida',topic:'amidas',parts:[{t:'N-propil',cls:'r',l:'N-propilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amida',cls:'g',l:'Amida N-sustituida'}]},
   {key:'nButilEtanamida',name:'N-butiletanamida',topic:'amidas',parts:[{t:'N-butil',cls:'r',l:'N-butilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amida',cls:'g',l:'Amida N-sustituida'}]},
   {key:'dosEButanamida',name:'2-etilbutanamida',topic:'amidas',parts:[{t:'2-etil',cls:'r',l:'Etilo en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
-  {key:'pentanodioamida',name:'pentanodioamida',topic:'amidas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dioamida',cls:'g',l:'Dos grupos −CONH₂'}]},
+  {key:'pentanodioamida',name:'pentanodioamida',topic:'amidas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odioamida',cls:'g',l:'Dos grupos −CONH₂'}]},
   {key:'nMetilButanamida',name:'N-metilbutanamida',topic:'amidas',parts:[{t:'N-metil',cls:'r',l:'N-metilo en nitrógeno'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amida',cls:'g',l:'Amida N-sustituida'}]},
   {key:'nMetilPentanamida',name:'N-metilpentanamida',topic:'amidas',parts:[{t:'N-metil',cls:'r',l:'N-metilo en nitrógeno'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amida',cls:'g',l:'Amida N-sustituida'}]},
   // ── nitrilos adicionales ──
-  {key:'decanonitrilo',name:'decanonitrilo',topic:'nitrilos',parts:[{t:'dec',cls:'c',l:'10 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosMHexanonitrilo',name:'2-metilhexanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'tresMPentanonitrilo',name:'3-metilpentanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'cuatroMPentanonitrilo',name:'4-metilpentanonitrilo',topic:'nitrilos',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'pentanodinitrilo',name:'pentanodinitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
-  {key:'heptanodinitrilo',name:'heptanodinitrilo',topic:'nitrilos',parts:[{t:'hept',cls:'c',l:'7 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'dinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
-  {key:'pent4enonitrilo',name:'pent-4-enonitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'4-en',cls:'i',l:'Doble enlace en C4'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'decanonitrilo',name:'decanonitrilo',topic:'nitrilos',parts:[{t:'dec',cls:'c',l:'10 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosMHexanonitrilo',name:'2-metilhexanonitrilo',topic:'nitrilos',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'tresMPentanonitrilo',name:'3-metilpentanonitrilo',topic:'nitrilos',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'cuatroMPentanonitrilo',name:'4-metilpentanonitrilo',topic:'nitrilos',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'pentanodinitrilo',name:'pentanodinitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
+  {key:'heptanodinitrilo',name:'heptanodinitrilo',topic:'nitrilos',parts:[{t:'hept',cls:'c',l:'7 carbonos (cadena)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'odinitrilo',cls:'g',l:'Dos grupos −C≡N'}]},
+  {key:'pent4enonitrilo',name:'pent-4-enonitrilo',topic:'nitrilos',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'4-en',cls:'i',l:'Doble enlace en C4'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'cuatroCloroBenzonitrilo',name:'4-clorobenzonitrilo',topic:'nitrilos',parts:[{t:'4-cloro',cls:'r',l:'Cloro en posición 4'},{t:'benzo',cls:'c',l:'Benceno'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'tresEPentanonitrilo',name:'3-etilpentanonitrilo',topic:'nitrilos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
-  {key:'dosDosMetilButanonitrilo',name:'2,2-dimetilbutanonitrilo',topic:'nitrilos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'o',cls:'c',l:'Vocal de enlace'},{t:'nitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'tresEPentanonitrilo',name:'3-etilpentanonitrilo',topic:'nitrilos',parts:[{t:'3-etil',cls:'r',l:'Etilo en C3'},{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
+  {key:'dosDosMetilButanonitrilo',name:'2,2-dimetilbutanonitrilo',topic:'nitrilos',parts:[{t:'2,2-dimetil',cls:'r',l:'Dos metilos en C2'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   // ── aminas adicionales ──
-  {key:'heptan1amina',name:'heptan-1-amina',topic:'aminas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'Amino en C1 (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria'}]},
-  {key:'octan1amina',name:'octan-1-amina',topic:'aminas',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amin',cls:'g',l:'Amino en C1 (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria'}]},
-  {key:'hexan2amina',name:'hexan-2-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'Amino en C2 (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria'}]},
-  {key:'pentan2amina',name:'pentan-2-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amin',cls:'g',l:'Amino en C2 (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria'}]},
-  {key:'nMetilEtanamina',name:'N-metiletanamina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amin',cls:'g',l:'Amina secundaria'},{t:'a',cls:'g',l:'Amina'}]},
-  {key:'nEtilEtanamina',name:'N-etiletanamina',topic:'aminas',parts:[{t:'N-etil',cls:'r',l:'Etilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amin',cls:'g',l:'Amina secundaria'},{t:'a',cls:'g',l:'Amina'}]},
-  {key:'nMetilHexan1amina',name:'N-metilhexan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo en nitrógeno'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-amin',cls:'g',l:'Amino en C1'},{t:'a',cls:'g',l:'Amina secundaria'}]},
-  {key:'tresMButan1amina',name:'3-metilbutan-1-amina',topic:'aminas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-amin',cls:'g',l:'Amino en C1 (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria'}]},
-  {key:'ciclohexanamina',name:'ciclohexanamina',topic:'aminas',parts:[{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amin',cls:'g',l:'Grupo amino (−NH₂)'},{t:'a',cls:'g',l:'Amina primaria cíclica'}]},
+  {key:'heptan1amina',name:'heptan-1-amina',topic:'aminas',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'Amino en C1 (−NH₂)'}]},
+  {key:'octan1amina',name:'octan-1-amina',topic:'aminas',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'1-amina',cls:'g',l:'Amino en C1 (−NH₂)'}]},
+  {key:'hexan2amina',name:'hexan-2-amina',topic:'aminas',parts:[{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'Amino en C2 (−NH₂)'}]},
+  {key:'pentan2amina',name:'pentan-2-amina',topic:'aminas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-amina',cls:'g',l:'Amino en C2 (−NH₂)'}]},
+  {key:'nMetilEtanamina',name:'N-metiletanamina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amina',cls:'g',l:'Amina secundaria'}]},
+  {key:'nEtilEtanamina',name:'N-etiletanamina',topic:'aminas',parts:[{t:'N-etil',cls:'r',l:'Etilo en nitrógeno'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amina',cls:'g',l:'Amina secundaria'}]},
+  {key:'nMetilHexan1amina',name:'N-metilhexan-1-amina',topic:'aminas',parts:[{t:'N-metil',cls:'r',l:'Metilo en nitrógeno'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-amina',cls:'g',l:'Amino en C1'}]},
+  {key:'tresMButan1amina',name:'3-metilbutan-1-amina',topic:'aminas',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'1-amina',cls:'g',l:'Amino en C1 (−NH₂)'}]},
+  {key:'ciclohexanamina',name:'ciclohexanamina',topic:'aminas',parts:[{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'amina',cls:'g',l:'Grupo amino (−NH₂)'}]},
   // ── benceno adicionales ──
-  {key:'clorobenceno',name:'clorobenceno',topic:'benceno',parts:[{t:'cloro',cls:'r',l:'Sustituyente cloro (−Cl)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Areno'}]},
-  {key:'bromobenceno',name:'bromobenceno',topic:'benceno',parts:[{t:'bromo',cls:'r',l:'Sustituyente bromo (−Br)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Areno'}]},
-  {key:'unoCloro4MetilBenceno',name:'1-cloro-4-metilbenceno',topic:'benceno',parts:[{t:'1-cloro-',cls:'r',l:'Cloro en C1'},{t:'4-metil',cls:'r',l:'Metilo en C4 (para)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Areno disustituido'}]},
-  {key:'etenilbenceno',name:'etenilbenceno',topic:'benceno',parts:[{t:'etenil',cls:'r',l:'Grupo vinilo (−CH=CH₂)'},{t:'bencen',cls:'c',l:'Anillo bencénico'},{t:'o',cls:'g',l:'Areno (estireno)'}]},
+  {key:'clorobenceno',name:'clorobenceno',topic:'benceno',parts:[{t:'cloro',cls:'r',l:'Sustituyente cloro (−Cl)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Areno)'}]},
+  {key:'bromobenceno',name:'bromobenceno',topic:'benceno',parts:[{t:'bromo',cls:'r',l:'Sustituyente bromo (−Br)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Areno)'}]},
+  {key:'unoCloro4MetilBenceno',name:'1-cloro-4-metilbenceno',topic:'benceno',parts:[{t:'1-cloro-',cls:'r',l:'Cloro en C1'},{t:'4-metil',cls:'r',l:'Metilo en C4 (para)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Areno disustituido)'}]},
+  {key:'etenilbenceno',name:'etenilbenceno',topic:'benceno',parts:[{t:'etenil',cls:'r',l:'Grupo vinilo (−CH=CH₂)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Areno (estireno))'}]},
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2806,8 +2813,11 @@ const MDEC_NAMES = {
   c:'Cadena principal',
   g:'Grupo funcional',
   i:'Insaturación',
-  r:'Ramificación'
+  r:'Ramificación',
+  cg:'Cadena + Grupo funcional (doble rol)'
 };
+// Etiqueta corta para la insignia de tipo (CG en vez de "cg" en mayúsculas raras)
+function mdecTagLabel(cls){ return cls==='cg' ? 'C+G' : cls.toUpperCase(); }
 
 function shuffle(arr){
   const a=[...arr];
@@ -2843,7 +2853,7 @@ function mdecTableBlank(parts){
 function mdecTableFull(parts){
   const rows=parts.map(p=>`<tr>
     <td>${p.t}</td>
-    <td><span class="ak-tag tag-${p.cls}">${p.cls.toUpperCase()}</span> <span class="cls-name-${p.cls}">${MDEC_NAMES[p.cls]}</span></td>
+    <td><span class="ak-tag tag-${p.cls}">${mdecTagLabel(p.cls)}</span> <span class="cls-name-${p.cls}">${MDEC_NAMES[p.cls]}</span></td>
     <td>${p.l}</td>
   </tr>`).join('');
   return `<table class="ak-table">
@@ -2855,7 +2865,7 @@ function mdecTableFull(parts){
 function printMdecTableFull(parts){
   const rows=parts.map(p=>`<tr>
     <td>${p.t}</td>
-    <td><span class="print-tag-${p.cls}">${p.cls.toUpperCase()}</span> ${MDEC_NAMES[p.cls]}</td>
+    <td><span class="print-tag-${p.cls}">${mdecTagLabel(p.cls)}</span> ${MDEC_NAMES[p.cls]}</td>
     <td>${p.l}</td>
   </tr>`).join('');
   return `<table class="print-ak-table">

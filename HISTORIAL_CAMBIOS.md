@@ -7,6 +7,80 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (64) — Generador: auditoría completa del Análisis MDEC (119 entradas corregidas) + doble color para el anillo bencénico
+
+### Contexto
+Después de corregir las preguntas 6 y 8 del taller (ver entrada 62), la
+docente pidió revisar **todas** las preguntas de "Análisis MDEC" del
+generador — no solo esas dos — y usar doble color (como ya hace
+`juego.html`) cuando el corte de una palabra tenga un significado doble.
+
+### Auditoría de las 401 moléculas del banco `MOLS`
+Se escribió un script que reconstruye el nombre IUPAC de cada molécula
+uniendo sus fragmentos (`parts`) y lo compara contra `name`/`iupac`, y
+otro que revisa que cada fragmento tenga una categoría MDEC válida
+(C/G/I/R). Encontró que el mismo tipo de bug de la sesión anterior
+(cadena fusionada con el `-an-` sin separar la insaturación, o sufijo
+partido en dos piezas en vez de una) se repetía en otras 119 entradas
+más, en varias familias:
+- **Alcanos** (butano, propano, ciclohexano, 2-metilhexano…): sin
+  píldora de insaturación en absoluto.
+- **Aminas y amidas** (etanamina, butanamida…): igual que las cetonas
+  de la sesión pasada, partían "amin"+"a" / "amid"+"a" en dos piezas
+  en vez de "amina"/"amida".
+- **Nitrilos**: la vocal de enlace "o" antes de "-nitrilo" estaba
+  etiquetada como si fuera parte de la cadena ("Vocal de enlace"), no
+  como grupo funcional.
+- **Ácidos dicarboxílicos, diaminas, dialdehídos, dicetonas cíclicas**
+  (ácido hexanodioico, butano-1,4-diamina, hexanodial…): mezcla de los
+  dos problemas anteriores.
+
+Se corrigieron las 119 automáticamente con un script (mismo criterio
+que la sesión anterior: separar cadena + insaturación, fusionar sufijos
+partidos en una sola pieza) más 2 casos especiales a mano (ácido
+ciclohexanocarboxílico y ciclohexanocarboxamida). Se verificó de nuevo
+que las 401 moléculas reconstruyen su nombre exacto y que no quedó
+ninguna categoría inválida.
+
+### Doble color para el anillo bencénico (nuevo, como en `juego.html`)
+Al revisar `juego.html` se encontró que en 3 preguntas puntuales
+(identificar fragmento en metilbenceno/etilbenceno/1,2-dimetilbenceno)
+ya enseña que el anillo bencénico actúa **a la vez** como cadena
+principal y como grupo funcional (sistema aromático), y acepta ambas
+respuestas como correctas. El generador, en cambio, separaba "bencen"
+(cadena) y "o" (grupo funcional) en dos píldoras de un solo color cada
+una. Se le preguntó a la docente cuál criterio prefería y pidió
+alinear el generador con el criterio del juego.
+
+**Cambios:**
+- Se fusionaron "bencen"+"o" → una sola píldora "benceno" con clase
+  nueva `cg` (22 entradas: benceno, tolueno/TNT y sus derivados —
+  xilenos, halobencenos, éteres aromáticos, estireno, etc.).
+- Esa píldora se dibuja con degradado verde→rosa (mitad cadena, mitad
+  grupo funcional), tanto en pantalla como en la vista de impresión, y
+  en la tabla de respuestas muestra una insignia "C+G" con el texto en
+  degradado.
+- Se agregó una fila nueva en el modal "Colores MDEC" explicando el
+  doble rol, y una entrada en `MDEC_NAMES` para el texto combinado.
+- Se dejaron intactos los casos donde el sufijo del anillo SÍ marca un
+  grupo funcional real y distinto de la aromaticidad (fenol "-ol",
+  anilina "-ina", ácido benzoico "-ico"): esos siguen con un solo rol,
+  igual que en el juego.
+
+### Verificación
+Con Playwright: la página carga sin errores de consola; se generó un
+taller real filtrado a "Aromáticos" + "Tipo C" y se confirmó (con
+captura de pantalla) que la píldora "benceno" sale con el degradado
+correcto tanto en el bloque de nombre como en la tabla de respuestas
+(pantalla e impresión). Las 401 moléculas siguen reconstruyendo su
+nombre exacto tras todos los cambios.
+
+### Pendiente
+Ninguno. `juego.html` no se tocó, así que no aplica ningún paso de
+despliegue aparte de este push a `main`.
+
+---
+
 ## 2026-09-17 (63) — Auditoría química de `reacciones.html`: bug de coeficientes y 13 errores de contenido corregidos
 
 ### Contexto
