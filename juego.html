@@ -752,7 +752,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">339 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">357 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
@@ -760,11 +760,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">1138 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Juego Completo</div><div class="nivel-desc">Todos los grupos funcionales</div><div class="nivel-count">1156 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ct" onclick="openLevelModal('constructor')">
         <div class="nivel-icon">🏗️</div>
-        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">88 moléculas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">95 moléculas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card rx" onclick="openRxnPicker()">
         <div class="nivel-icon">🧪</div>
@@ -784,7 +784,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       </button>
     </div>
     <div class="portada-stats">
-      <div class="ps"><div class="ps-n" id="stat-banco">1138</div><div class="ps-l">En el banco</div></div>
+      <div class="ps"><div class="ps-n" id="stat-banco">1156</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
       <div class="ps"><div class="ps-n">4</div><div class="ps-l">Tipos de reto</div></div>
     </div>
@@ -1777,6 +1777,27 @@ const MOLDES={
   pentan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
   hexan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
   heptan1amina:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"N",h:2}],
+
+  // ── ÉTERES: ampliación a la misma cantidad que generador.html (29) ──
+  propoxibutano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  butoxibutano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  diisopropiloxter:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{s:"O",h:0,bn:1},{h:1,bn:1,bd:_C3},{h:3}],
+  dimetoxietano:[{h:3,bn:1},{s:"O",h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{s:"O",h:0,bn:1},{h:3}],
+  dosMetoxi2Metilpropano:[{h:3,bn:1},{h:0,bn:1,bu:_C3,bd:_C3},{s:"O",h:0,bn:1},{h:3}],
+  dimetoximetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:3}],
+  etoxihexano:[{h:3,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  propoxihexano:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  dosEtoxiPropano:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}]},{h:3}],
+  dosMetoxiButano:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:0,bn:1},{h:3}]},{h:2,bn:1},{h:3}],
+  dosEtoxiButano:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}]},{h:2,bn:1},{h:3}],
+  // ── ÉTERES cíclicos/aromáticos (formato ring/aromatic, preguntas tipo build) ──
+  build_oxirano: {chain:[{bn:1},{bn:1},{s:'O'}], ring:[[2,0,1]]},
+  build_tetrahidrofurano: {chain:[{bn:1},{bn:1},{bn:1},{bn:1},{s:'O'}], ring:[[4,0,1]]},
+  build_tetrahidropirano: {chain:[{bn:1},{bn:1},{bn:1},{bn:1},{bn:1},{s:'O'}], ring:[[5,0,1]]},
+  build_metoxiciclopentano: {chain:[{bn:1,bu:[{s:'O',bn:1},{}]},{bn:1},{bn:1},{bn:1},{}], ring:[[4,0,1]]},
+  build_etoxiciclohexano: {chain:[{bn:1,bu:[{s:'O',bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]]},
+  build_etoxibenceno: {chain:[{bn:1,bu:[{s:'O',bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
+  build_propoxibenceno: {chain:[{bn:1,bu:[{s:'O',bn:1},{bn:1},{bn:1},{}]},{bn:1},{bn:1},{bn:1},{bn:1},{}], ring:[[5,0,1]], aromatic:true},
 };
 
 // ════════════════════════════════════════════════════════
@@ -5127,6 +5148,31 @@ const QBANK_ETERES_CLASICO=[
 ];
 QBANK.push(...QBANK_ETERES_CLASICO);
 _decodeQBank(QBANK_ETERES_CLASICO);
+
+const QBANK_ETERES_PARITY=[
+  // ── Éteres lineales/ramificados nuevos (nombre IUPAC, tipo mc) ──
+  {type:'mc',mol:'cHJvcG94aWJ1dGFubw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'MS1wcm9wb3hpYnV0YW5v',opts:['1-propoxibutano','1-propoxipentano','1-butoxipropano','1-metoxibutano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAxLXByb3BveGlidXRhbm8u',topic:'eteres'},
+  {type:'mc',mol:'YnV0b3hpYnV0YW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'MS1idXRveGlidXRhbm8=',opts:['1-butoxipentano','1-propoxibutano','dibutil éter (mal escrito con guion)','1-butoxibutano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAxLWJ1dG94aWJ1dGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZGlpc29wcm9waWxveHRlcg==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Mi1pc29wcm9wb3hpcHJvcGFubw==',opts:['2-isopropoxipropano','2-etoxipropano','2-metoxipropano','propoxipropano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAyLWlzb3Byb3BveGlwcm9wYW5vLg==',topic:'eteres'},
+  {type:'mc',mol:'ZGltZXRveGlldGFubw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'MSwyLWRpbWV0b3hpZXRhbm8=',opts:['1,1-dimetoxietano','1,2-dimetoxietano','1,2-dietoxietano','metoxietano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAxLDItZGltZXRveGlldGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZG9zTWV0b3hpMk1ldGlscHJvcGFubw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Mi1tZXRveGktMi1tZXRpbHByb3Bhbm8=',opts:['2-metoxi-2-metilpropano','2-metoxibutano','2-etoxi-2-metilpropano','1-metoxi-2-metilpropano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAyLW1ldG94aS0yLW1ldGlscHJvcGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZGltZXRveGltZXRhbm8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZGltZXRveGltZXRhbm8=',opts:['1,1-dimetoxietano','dimetoximetano','dietoximetano','metoximetano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiBkaW1ldG94aW1ldGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZXRveGloZXhhbm8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'MS1ldG94aWhleGFubw==',opts:['1-etoxihexano','1-propoxihexano','1-etoxipentano','1-metoxihexano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAxLWV0b3hpaGV4YW5vLg==',topic:'eteres'},
+  {type:'mc',mol:'cHJvcG94aWhleGFubw==',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'MS1wcm9wb3hpaGV4YW5v',opts:['1-propoxihexano','1-propoxipentano','1-etoxihexano','1-metoxihexano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAxLXByb3BveGloZXhhbm8u',topic:'eteres'},
+  {type:'mc',mol:'ZG9zRXRveGlQcm9wYW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Mi1ldG94aXByb3Bhbm8=',opts:['2-etoxipropano','1-etoxipropano','2-metoxipropano','2-etoxibutano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAyLWV0b3hpcHJvcGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZG9zTWV0b3hpQnV0YW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Mi1tZXRveGlidXRhbm8=',opts:['2-etoxibutano','1-metoxibutano','2-metoxipentano','2-metoxibutano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAyLW1ldG94aWJ1dGFuby4=',topic:'eteres'},
+  {type:'mc',mol:'ZG9zRXRveGlCdXRhbm8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Mi1ldG94aWJ1dGFubw==',opts:['1-etoxibutano','2-metoxibutano','2-etoxipentano','2-etoxibutano'],expl:'Tm9tYnJlIElVUEFDIGNvcnJlY3RvOiAyLWV0b3hpYnV0YW5vLg==',topic:'eteres'},
+  // ── Éteres cíclicos/aromáticos nuevos (tipo build) ──
+  {type:'build',buildKey:'build_oxirano',topic:'eteres',q:'Construye la estructura del <strong>oxirano</strong> (C₂H₄O) — anillo de 3 miembros (2 carbonos + 1 oxígeno) — el epóxido más simple'},
+  {type:'build',buildKey:'build_tetrahidrofurano',topic:'eteres',q:'Construye la estructura del <strong>tetrahidrofurano (oxolano, THF)</strong> (C₄H₈O) — anillo saturado de 5 miembros (4 carbonos + 1 oxígeno)'},
+  {type:'build',buildKey:'build_tetrahidropirano',topic:'eteres',q:'Construye la estructura del <strong>tetrahidropirano (oxano, THP)</strong> (C₅H₁₀O) — anillo saturado de 6 miembros (5 carbonos + 1 oxígeno)'},
+  {type:'build',buildKey:'build_metoxiciclopentano',topic:'eteres',q:'Construye la estructura del <strong>metoxiciclopentano</strong> (C₆H₁₂O) — anillo de ciclopentano con un grupo −OCH₃'},
+  {type:'build',buildKey:'build_etoxiciclohexano',topic:'eteres',q:'Construye la estructura del <strong>etoxiciclohexano</strong> (C₈H₁₆O) — anillo de ciclohexano con un grupo −OC₂H₅'},
+  {type:'build',buildKey:'build_etoxibenceno',topic:'eteres',q:'Construye la estructura del <strong>etoxibenceno (fenetol)</strong> (C₈H₁₀O) — anillo aromático con un grupo −OC₂H₅ (éter aromático)'},
+  {type:'build',buildKey:'build_propoxibenceno',topic:'eteres',q:'Construye la estructura del <strong>propoxibenceno</strong> (C₉H₁₂O) — anillo aromático con un grupo −OC₃H₇ (éter aromático)'},
+];
+QBANK.push(...QBANK_ETERES_PARITY);
+_decodeQBank(QBANK_ETERES_PARITY);
 
 
 const QBANK_REACCIONES=[
