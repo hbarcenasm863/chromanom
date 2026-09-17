@@ -7,6 +7,51 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (58) — Generador: las reacciones con Grignard quedan como "avanzadas", ocultas por defecto
+
+### Contexto
+La docente aclaró que en clase no se vieron reactivos organometálicos
+ni de Grignard — el curso se quedó en reacciones más simples. Pidió
+que esas preguntas del banco se traten como nivel avanzado y que el
+Generador dé la opción de incluirlas o no, para que por defecto solo
+salgan las que sí corresponden a lo que se explicó.
+
+### Qué se hizo (`generador.html`)
+Se marcaron las **7 preguntas** del banco que usan un reactivo de
+Grignard (`rxn_36`, `rxn_38`, `rxn_43`, `rxn_46`, `rxn_47`, `rxn_52` —
+adición de R'MgX a un aldehído o cetona— y `rxn_139` — formación del
+reactivo de Grignard a partir de un haluro + Mg) con un campo nuevo
+`nivel:'avanzado'`. Se agregó una sección "Reacciones — nivel" al
+panel del Generador con una casilla "Incluir avanzadas
+(organometálicos / Grignard)", **desmarcada por defecto**, con una
+nota explicando cuántas preguntas quedan ocultas. El filtro de
+`generate()` ahora excluye las preguntas `nivel:'avanzado'` salvo que
+esa casilla esté marcada — así que con la configuración de fábrica
+(sin tocar nada nuevo) esas 7 preguntas nunca aparecen, y solo entran
+en juego si la docente decide repasarlas explícitamente.
+
+No se tocó LiAlH₄/NaBH₄/SOCl₂/P₂O₅ (de la sesión anterior) porque no
+son organometálicos ni Grignard — son reactivos de nivel intermedio
+que sí se explicaron en clase según lo indicado hasta ahora; si
+también se quiere ocultarlos por defecto, se puede extender el mismo
+campo `nivel` a esas preguntas.
+
+### Verificación
+Se generaron 50 preguntas de Reacciones con todos los grupos marcados
+y la casilla de avanzadas sin marcar: cero de las 7 preguntas de
+Grignard aparecieron. Con la casilla marcada, sí volvieron a aparecer
+en generaciones repetidas. Se repitió también la verificación general
+(139/145 con estructura dibujada, cero errores de consola) para
+confirmar que el resto del banco no cambió.
+
+### Pendiente / sin resolver
+Si la docente decide que LiAlH₄/NaBH₄/SOCl₂/P₂O₅/reducciones con
+hidruro tampoco se vieron en clase, avisar para marcarlas también
+como avanzadas — hoy solo Grignard/organometálicos quedaron ocultos
+por defecto, tal como se pidió.
+
+---
+
 ## 2026-09-17 (57) — Reacciones: la flecha ahora mide lo que mide su condición, y LiAlH₄/NaBH₄/Grignard/SOCl₂/P₂O₅ van sobre la flecha, no como "+reactivo"
 
 ### Contexto

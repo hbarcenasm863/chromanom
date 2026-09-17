@@ -764,6 +764,11 @@ body{
         <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="producto" checked> Predecir el producto</label>
         <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="tipo" checked> Identificar el tipo de reacci&oacute;n</label>
       </div>
+      <div class="config-label" style="margin-top:14px">Reacciones &mdash; nivel</div>
+      <div class="cb-grid" id="rxn-nivel-grid">
+        <label class="cb-item"><input type="checkbox" name="rxn_avanzado" value="avanzado"> Incluir avanzadas (organomet&aacute;licos / Grignard)</label>
+      </div>
+      <div style="font-size:.72rem;color:var(--dimmer);margin-top:4px">Desmarcado por defecto: 7 preguntas del banco usan un reactivo de Grignard (RMgX) y no entran en la selecci&oacute;n a menos que marques esta casilla.</div>
     </div>
 
     <!-- Numero de preguntas -->
@@ -2119,7 +2124,7 @@ const BANCO_RXN = [
    nombre_rxn:'Reducción de aldehído',
    regla:'Los aldehídos se reducen siempre a alcoholes primarios.',
    respuesta:'CH₃−CH₂−CH₂OH  (propan-1-ol)'},
-  {key:'rxn_36',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
+  {key:'rxn_36',nivel:'avanzado',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
    r:'C₆H₅−CHO',reactivo:null,condicion:'1) CH₃MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre aldehído',
@@ -2131,7 +2136,7 @@ const BANCO_RXN = [
    nombre_rxn:'Oxidación suave (prueba de Tollens)',
    regla:'Los aldehídos se oxidan fácilmente (tienen H en el carbonilo); se reduce Ag⁺ a Ag⁰ (espejo de plata).',
    respuesta:'CH₃−CH₂−CH₂−COOH  (ácido butanoico)  +  Ag⁰ (espejo de plata)'},
-  {key:'rxn_38',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
+  {key:'rxn_38',nivel:'avanzado',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de esta reacción de Grignard (caso especial):',
    r:'H−CHO',reactivo:null,condicion:'1) CH₃CH₂MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre formaldehído (excepción)',
@@ -2161,7 +2166,7 @@ const BANCO_RXN = [
    nombre_rxn:'Oxidación suave (prueba de Tollens)',
    regla:'Un aldehído reduce el Ag⁺ del reactivo de Tollens a Ag⁰ metálico, que se deposita como espejo de plata en el tubo.',
    respuesta:'Oxidación (prueba de Tollens, positiva para aldehídos). Evidencia: formación de un espejo de plata en las paredes del tubo.'},
-  {key:'rxn_43',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'tipo',
+  {key:'rxn_43',nivel:'avanzado',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'tipo',
    enunciado:'Indica qué tipo de alcohol se obtiene en la siguiente reacción y por qué:',
    r:'C₆H₅−CHO',reactivo:null,condicion:'1) C₂H₅MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre aldehído',
@@ -2181,13 +2186,13 @@ const BANCO_RXN = [
    nombre_rxn:'Reducción de cetona',
    regla:'Las cetonas se reducen siempre a alcoholes secundarios.',
    respuesta:'CH₃−CH(OH)−CH₂−CH₃  (butan-2-ol)'},
-  {key:'rxn_46',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
+  {key:'rxn_46',nivel:'avanzado',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
    enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
    r:'CH₃−CO−CH₂−CH₂−CH₃',reactivo:null,condicion:'1) CH₃MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
    regla:'Una cetona + reactivo de Grignard da siempre un alcohol terciario.',
    respuesta:'CH₃−C(OH)(CH₃)−CH₂−CH₂−CH₃  (2-metilpentan-2-ol)'},
-  {key:'rxn_47',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
+  {key:'rxn_47',nivel:'avanzado',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la siguiente reacción de Grignard:',
    r:'CH₃−CO−CH₃',reactivo:null,condicion:'1) CH₃CH₂MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
@@ -2217,7 +2222,7 @@ const BANCO_RXN = [
    nombre_rxn:'Prueba de Tollens en cetonas (resultado negativo)',
    regla:'Las cetonas no tienen H sobre el carbonilo y no se oxidan fácilmente; la prueba de Tollens da negativa, a diferencia de los aldehídos.',
    respuesta:'No hay reacción (prueba negativa, no se forma espejo de plata). A diferencia de un aldehído, la cetona no tiene H en el carbono carbonílico para oxidarse.'},
-  {key:'rxn_52',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'tipo',
+  {key:'rxn_52',nivel:'avanzado',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'tipo',
    enunciado:'Indica qué tipo de alcohol se obtiene en la siguiente reacción y justifica la regla general:',
    r:'CH₃−CO−CH₃',reactivo:null,condicion:'1) C₆H₅MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
@@ -2780,7 +2785,7 @@ const BANCO_RXN = [
    nombre_rxn:'Eliminación Unimolecular (E1)',
    regla:'Se forma el mismo carbocatión que en SN1; una base débil retira un H β para dar el alqueno más sustituido (Saytzeff). Compite con la SN1.',
    respuesta:'CH₂=C(CH₃)₂  (2-metilpropeno / isobutileno)  +  HBr'},
-  {key:'rxn_139',topic:'halogenuros',categoria:'Grignard',pregunta_tipo:'producto',
+  {key:'rxn_139',nivel:'avanzado',topic:'halogenuros',categoria:'Grignard',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la siguiente reacción con magnesio:',
    r:'CH₃−CH₂−Br',reactivo:'+ Mg',condicion:'éter etílico seco',
    nombre_rxn:'Formación de reactivo de Grignard',
@@ -3150,6 +3155,7 @@ function generate(){
   // ── Pool de reacciones (tipo D) — filtro propio, independiente de "Grupos funcionales" ──
   const gruposRxn=[...document.querySelectorAll('input[name=grupo_rxn]:checked')].map(cb=>cb.value);
   const preguntaTipos=[...document.querySelectorAll('input[name=pregunta_tipo]:checked')].map(cb=>cb.value);
+  const incluirAvanzadas=document.querySelector('input[name=rxn_avanzado]')?.checked || false;
 
   if(wantsTipoD && !gruposRxn.length){
     warning.textContent='Selecciona al menos un grupo de reacciones para repasar.';
@@ -3163,7 +3169,11 @@ function generate(){
   }
 
   const poolRxn=wantsTipoD
-    ? shuffle(BANCO_RXN.filter(rxn=>gruposRxn.includes(rxn.topic) && preguntaTipos.includes(rxn.pregunta_tipo)))
+    ? shuffle(BANCO_RXN.filter(rxn=>
+        gruposRxn.includes(rxn.topic) &&
+        preguntaTipos.includes(rxn.pregunta_tipo) &&
+        (incluirAvanzadas || rxn.nivel!=='avanzado')
+      ))
     : [];
 
   if(!poolMol.length && !poolRxn.length){
