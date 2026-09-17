@@ -170,8 +170,8 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 
 /* RULE MOLECULE EXAMPLES */
 .rule-mols{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-.rule-mol-item{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:8px 10px;min-width:80px;}
-.rule-mol-svg{width:90px;height:70px;display:flex;align-items:center;justify-content:center;}
+.rule-mol-item{display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:8px 10px;min-width:80px;max-width:220px;}
+.rule-mol-svg{width:170px;max-width:100%;height:78px;display:flex;align-items:center;justify-content:center;}
 .rule-mol-svg svg{width:100%;height:100%;overflow:visible;}
 .rule-mol-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--c4t);font-weight:700;text-align:center;line-height:1.3;}
 /* NAME STRUCTURE IN RULES */
@@ -948,6 +948,8 @@ const MOLDES_G={
   hexan3ona:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
   metilButan2ona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:1,bn:1,bd:_C3},{h:3}],
   heptan4ona:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:3}],
+  pentano24diona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:3}],
+  hexano25diona:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{h:3}],
   // ── ÉTERES ──
   metoxiMetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:3}],
   etoxiMetano:[{h:3,bn:1},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
@@ -970,6 +972,7 @@ const MOLDES_G={
   acidoPentanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acido3MetilButanoico:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acidoBut2enoico:[{h:3,bn:1},{h:1,bn:2},{h:1,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoButanodioico:[{h:0,bn:1,bu:_O0,buBn:2,bd:_O1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   // ── HALUROS DE ACILO ──
   cloruoMetanoilo:[{h:1,bu:_O0,buBn:2,bd:_Cl}],
   cloruroEtanoilo:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_Cl}],
@@ -1153,7 +1156,10 @@ function buildRules(g){
     let svgBlock = '';
     if(r.svgs && r.svgs.length){
       const items = r.svgs.map(key=>{
-        const svg = MOLS[key] ? MOLS[key]() : '';
+        // Prefer the semi-developed (comb-style, no abbreviations) drawing
+        // when this molecule has one; only ring/aromatic compounds — which
+        // this linear chain engine can't draw — fall back to the skeletal one.
+        const svg = MOLDES_G[key] ? mkDevSVG(MOLDES_G[key]) : (MOLS[key] ? MOLS[key]() : '');
         const rawLabel = r.svgLabels && r.svgLabels[key] ? r.svgLabels[key] : '';
         // Clean label (remove newlines for display)
         const label = rawLabel.replace(/\n/g,'<br>');

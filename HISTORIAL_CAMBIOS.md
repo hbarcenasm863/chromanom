@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (59) — Grupos: las moléculas de ejemplo en "Reglas IUPAC" ahora son semidesarrolladas (misma calidad que Generador), no esqueléticas
+
+### Contexto
+La docente pidió que, en `grupos.html`, las moléculas de ejemplo
+dentro de cada regla IUPAC (el acordeón "Reglas IUPAC" de cada grupo
+funcional) usaran fórmulas semidesarrolladas —con el mismo nivel de
+detalle que se dejó en el Generador (sin abreviar grupos funcionales
+entre paréntesis, con ramificaciones dibujadas hacia arriba y hacia
+abajo del carbono)— en vez de las estructuras esqueléticas que se
+usaban antes.
+
+### Qué se hizo (`grupos.html`)
+Investigando antes de tocar nada: `grupos.html` **ya tenía** el mismo
+motor de dibujo semidesarrollado que `generador.html`
+(`mkDevSVG` + un banco `MOLDES_G` con 113 moléculas en esa notación),
+pero solo se usaba en la sección de Ejercicios (con un botón para
+alternar "Esqueletal ⇄ Semidesarrollada"); la sección de Reglas IUPAC
+llamaba directo al banco esqueletal (`MOLS`), ignorando `MOLDES_G`
+por completo.
+
+- **`buildRules()`** ahora usa `MOLDES_G[key]` + `mkDevSVG(...)`
+  cuando existe una versión semidesarrollada de esa molécula, y solo
+  cae al dibujo esqueletal (`MOLS[key]()`) cuando no la hay — que en
+  la práctica es únicamente para anillos (ciclohexano, ciclopentano,
+  benceno, fenoles, éteres cíclicos...), porque ese motor dibuja
+  cadenas lineales y no sabe dibujar un anillo; ahí lo esqueletal
+  sigue siendo lo correcto (como en los libros de texto: un anillo se
+  dibuja como anillo, no como cadena "estirada").
+- Se agregaron a `MOLDES_G` las **3 moléculas de cadena abierta** que
+  usaban las reglas y todavía no tenían versión semidesarrollada:
+  ácido butanodioico (diácido), pentano-2,4-diona y hexano-2,5-diona
+  (diacetonas) — las únicas moléculas acíclicas del banco de reglas
+  que faltaban.
+- Se agrandó la caja de cada ejemplo (`.rule-mol-svg`, de 90×70px a
+  170×78px máx.) porque una fórmula semidesarrollada horizontal
+  necesita más ancho que un dibujo esqueletal compacto; las moléculas
+  pequeñas se siguen viendo centradas y a su tamaño natural, no
+  estiradas.
+
+### Verificación
+Se abrieron con Playwright las 17 secciones de grupos funcionales
+(las 153 moléculas de ejemplo que hay en total, repartidas en sus
+reglas), con todos los acordeones expandidos: las 153 tienen un SVG
+válido (cero rotas), 89 ahora se dibujan semidesarrolladas y 64 siguen
+esqueletales — se confirmó a mano que esas 64 son, sin excepción,
+anillos o compuestos con un anillo como parte de la cadena principal.
+Se revisó visualmente en escritorio (Cetonas, Ácidos, Ésteres,
+Amidas, Alcoholes, Aldehídos) y en un viewport de celular (412px), sin
+errores de consola y sin desbordes.
+
+### Pendiente / sin resolver
+Quedan sin semidesarrollar (a propósito, porque son anillos) las
+moléculas cíclicas de cada regla. Si en el futuro se quiere una
+versión "desarrollada" de un anillo abierto en su lugar de sustitución
+(por ejemplo, mostrar el ciclohexano como hexágono pero con el
+sustituyente etiquetado igual que en un dibujo semidesarrollado), eso
+requeriría extender el motor de dibujo para mezclar anillo + notación
+de cadena, que es un trabajo aparte.
+
+---
+
 ## 2026-09-17 (58) — Generador: las reacciones con Grignard quedan como "avanzadas", ocultas por defecto
 
 ### Contexto
