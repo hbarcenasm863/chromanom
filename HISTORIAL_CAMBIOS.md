@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (65) — Grupos: las cajas de ejemplo de las reglas IUPAC se veían diminutas en PC
+
+### Contexto
+La docente reportó (con captura de pantalla) que en `grupos.html`, dentro
+de cada regla IUPAC expandida (ej. "Cadena principal" en Éteres), las
+cajas con la estructura y el desglose de fragmentos ("metoxi met ano",
+etc.) se veían muy pequeñas en computador — texto casi ilegible y cajas
+minúsculas dejando mucho espacio vacío alrededor.
+
+### Diagnóstico
+Las clases CSS de esas cajas (`.rule-mol-item`, `.rule-mol-svg`,
+`.rule-mol-label`, `.rmb-word`, `.rmb-lbl`) tenían tamaños fijos muy
+pequeños (fuente de 0.42rem–0.58rem, caja de solo 170px) pensados para
+que cupieran varias en una fila en pantallas angostas, pero el archivo
+no tiene ningún `@media` que las agrande en pantallas anchas — a
+diferencia de la tira "Las 4 partes en un ejemplo" de más arriba en la
+misma página, que usa una fuente 2 a 3 veces más grande para el mismo
+tipo de elemento (palabra + etiqueta de color).
+
+### Cambios (`grupos.html`)
+Se aumentó el tamaño base de esas cajas (ahora es el tamaño por
+defecto, pensado para pantallas de escritorio): estructura más grande
+(170px→250px), nombre de la molécula y fragmentos con fuente casi el
+doble (0.5rem→0.85rem los fragmentos, 0.42rem→0.62rem las etiquetas).
+Se agregó un `@media(max-width:600px)` nuevo que vuelve a achicarlas
+(aunque no tanto como antes) para que sigan cabiendo bien en el
+celular.
+
+### Verificación
+Con Playwright: se generó una captura de la regla "Identificar los
+grupos R" de Éteres en un viewport de escritorio (1366px) — las cajas
+ahora se ven proporcionales al resto de la página — y otra en viewport
+de celular (390px) confirmando que el texto sigue siendo legible sin
+desbordarse. 0 errores de consola/página en ambos casos.
+
+### Pendiente
+Ninguno. `grupos.html` se sirve directo por GitHub Pages: no necesita
+ningún paso de despliegue aparte de este push a `main`.
+
+---
+
 ## 2026-09-17 (64) — Generador: auditoría completa del Análisis MDEC (119 entradas corregidas) + doble color para el anillo bencénico
 
 ### Contexto
