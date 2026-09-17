@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (60) — Grupos: corregido el nombre solapado sobre la estructura en las moléculas altas (ramas arriba y abajo)
+
+### Contexto
+La docente reportó, con capturas, que en algunos ejemplos de "Reglas
+IUPAC" el nombre quedaba escrito encima de la estructura en vez de
+debajo — casos concretos: 2,2-dimetilpropano (Alcanos, regla 4) y
+ácido etanoico / ácido butanoico (Ácidos, regla 1).
+
+### Causa
+Justo la sesión anterior, al pasar los ejemplos de esqueletales a
+semidesarrollados, se le dio a la caja de cada estructura
+(`.rule-mol-svg`) una altura **fija** de 78px. Eso funciona para una
+cadena simple, pero una molécula con una ramificación hacia arriba
+*y* otra hacia abajo del mismo carbono —el carbono central del
+2,2-dimetilpropano con dos metilos, o el carbono del −COOH con el
+=O arriba y el −OH abajo— necesita más alto que eso. Como el SVG
+tiene `overflow:visible`, la estructura simplemente se salía de la
+caja de 78px hacia abajo y quedaba encima del nombre, que iba
+inmediatamente después en el mismo flujo.
+
+### Qué se hizo (`grupos.html`)
+Se cambió `.rule-mol-svg` de una altura fija (`height:78px`) a una
+altura mínima que crece con el contenido (`min-height:70px`, sin
+`height` fijo) — así la caja siempre es tan alta como la estructura
+que tiene dentro, sin importar cuántas ramas tenga hacia arriba o
+hacia abajo.
+
+### Verificación
+Se revisó automáticamente, con el navegador, la posición de las 153
+moléculas de ejemplo de los 17 grupos (comparando el borde inferior
+del SVG contra el borde superior de su nombre): **cero solapamientos**
+en un viewport de celular (412px, el mismo ancho de las capturas) y
+también en escritorio. Se confirmó visualmente que los dos casos
+reportados (2,2-dimetilpropano y los ácidos etanoico/butanoico) ya
+se ven con el nombre claramente separado debajo de la estructura.
+
+### Pendiente / sin resolver
+Ninguno.
+
+---
+
 ## 2026-09-17 (59) — Grupos: las moléculas de ejemplo en "Reglas IUPAC" ahora son semidesarrolladas (misma calidad que Generador), no esqueléticas
 
 ### Contexto
