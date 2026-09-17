@@ -7,6 +7,64 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (57) — Reacciones: la flecha ahora mide lo que mide su condición, y LiAlH₄/NaBH₄/Grignard/SOCl₂/P₂O₅ van sobre la flecha, no como "+reactivo"
+
+### Contexto
+La docente envió capturas del libro de texto ("Resumen de reacciones"
+de cada capítulo) mostrando cómo se ven las ecuaciones en clase: el
+catalizador/reactivo que actúa sobre una sola molécula (LiAlH₄,
+NaBH₄, un reactivo de Grignard, SOCl₂, PX₃, KMnO₄, CrO₃/H⁺...) va
+escrito **sobre la flecha** (a veces en dos pasos numerados "1) ...
+2) H₃O⁺" cuando hay una hidrólisis/protonación final), nunca como un
+"+reactivo" aparte; el "+" solo se usa cuando de verdad hay dos
+moléculas orgánicas reaccionando entre sí (agua en una hidrólisis,
+un alcohol en una esterificación, HCN, H₂, un haluro de alquilo en
+una SN2, etc.). Además pidió que la flecha dibujada sea tan larga
+como el texto que lleva encima, no un tamaño fijo.
+
+### Qué se hizo (`generador.html`)
+**Flecha de largo variable** — antes la flecha era literalmente el
+texto fijo "──→"; ahora es una línea (`div` con `border-bottom`) que
+ocupa el 100% del ancho de su columna, la cual a su vez se ajusta al
+texto de la condición (que ya no hace salto de línea). El resultado:
+una condición larga como "K₂Cr₂O₇ / H₂SO₄, Δ" dibuja una flecha larga
+que cubre todo el texto, igual que en las fotos del libro; una
+condición corta dibuja una flecha corta.
+
+**LiAlH₄ / NaBH₄ / Grignard / SOCl₂ / P₂O₅ sobre la flecha** — se
+revisaron las 19 preguntas del banco que mostraban alguno de estos
+reactivos como "+reactivo" (reducciones de aldehídos/cetonas/
+ésteres/amidas/nitrilos con LiAlH₄ o NaBH₄, adición de reactivos de
+Grignard a aldehídos/cetonas, cloración de un alcohol con SOCl₂,
+deshidratación de una amida con P₂O₅ o SOCl₂) y se movieron a
+`condicion`, sin "+". Cuando la reacción real tiene un paso de
+hidrólisis/protonación posterior (Grignard, LiAlH₄ sobre aldehído/
+cetona/nitrilo), se escribió como dos pasos numerados
+("1) CH₃MgBr, éter seco  2) H₃O⁺"), igual que en el resumen del
+libro. Los reactivos que sí son un segundo reactivo real (HCN, H₂,
+H₂O, NaCN, KOH, etc. — confirmados también en las imágenes del
+libro, donde SÍ aparecen con "+") se dejaron intactos.
+
+**Pregunta "tipo" sin flecha doble** — de paso se notó que las
+preguntas de "identifica el tipo de reacción" dibujaban dos flechas
+seguidas (la flecha de la ecuación + un "→ ?" de texto suelto
+después). Con la flecha ahora dibujada de verdad, esa duplicación se
+veía peor que antes; se dejó solo una flecha seguida de la caja "?"
+punteada, igual que las preguntas de "predice el producto".
+
+### Verificación
+Se revisó que no quedara ningún LiAlH₄/NaBH₄/Grignard/SOCl₂/P₂O₅
+como "+reactivo" en las 145 preguntas. Se repitió la generación
+completa (139/145 con estructura dibujada, cero errores de consola,
+igual que antes — este cambio no tocó el intérprete de fórmulas) y se
+revisó visualmente en escritorio, en un viewport de celular (412px) y
+con varias combinaciones de reactivo/condición largas y cortas.
+
+### Pendiente / sin resolver
+Ninguno.
+
+---
+
 ## 2026-09-17 (56) — KMnO₄/K₂Cr₂O₇ como oxidante sobre la flecha, no como "+ reactivo", igual que se enseña en clase
 
 ### Contexto

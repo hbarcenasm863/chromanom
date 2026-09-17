@@ -297,12 +297,19 @@ body{
   font-family:'JetBrains Mono',monospace;flex-shrink:0}
 .rxn-d-reagent{color:#0369a1;font-weight:700;
   font-family:'JetBrains Mono',monospace;font-size:.85rem;flex-shrink:0}
-/* Arrow column: condition text above the arrow */
-.rxn-d-arrow-col{display:flex;flex-direction:column;align-items:center;
+/* Arrow column: condition text above the arrow — the arrow line itself
+   stretches to the width of that text (min 40px) instead of being a fixed
+   short glyph, so a long catalyst/medium label is never wider than the
+   arrow underneath it (as in a textbook reaction scheme). */
+.rxn-d-arrow-col{display:flex;flex-direction:column;align-items:stretch;
   gap:2px;flex-shrink:0}
 .rxn-d-cond{font-size:.73rem;color:var(--dimmer,#94a3b8);font-style:italic;
-  text-align:center;white-space:nowrap}
-.rxn-d-arrow{color:#059669;font-size:1.2rem}
+  text-align:center;white-space:nowrap;padding:0 4px}
+.rxn-d-arrow-line{position:relative;min-width:40px;height:14px;
+  border-bottom:2px solid #059669;margin-top:2px}
+.rxn-d-arrow-line::after{content:'';position:absolute;right:-1px;bottom:-5px;
+  border-style:solid;border-width:5px 0 5px 8px;
+  border-color:transparent transparent transparent #059669}
 .rxn-d-hint{font-size:.76rem;color:var(--dimmer,#94a3b8);margin-bottom:8px;font-style:italic}
 .rxn-d-fields{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .rxn-d-field{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--dim,#475569)}
@@ -2076,7 +2083,7 @@ const BANCO_RXN = [
    respuesta:'Sustitución nucleofílica SN1, a temperatura ambiente (sin necesidad de calor). Producto: (CH₃)₃C−Br + H₂O.'},
   {key:'rxn_30',topic:'alcoholes',categoria:'Sustitución nucleofílica (alcoholes)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la siguiente conversión a haluro:',
-   r:'CH₃−CH₂−CH₂OH',reactivo:'+ SOCl₂',condicion:'piridina (opcional)',
+   r:'CH₃−CH₂−CH₂OH',reactivo:null,condicion:'SOCl₂, piridina (opcional)',
    nombre_rxn:'Conversión a haluro con cloruro de tionilo',
    regla:'El SOCl₂ da el cloroalcano limpio, liberando SO₂ y HCl gaseosos (evita reordenamientos).',
    respuesta:'CH₃−CH₂−CH₂Cl  (1-cloropropano)  +  SO₂  +  HCl'},
@@ -2108,13 +2115,13 @@ const BANCO_RXN = [
    respuesta:'CH₃−CH(OH)−CN  (2-hidroxipropanonitrilo, cianohidrina)'},
   {key:'rxn_35',topic:'aldehidos',categoria:'Reducción (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la siguiente reducción:',
-   r:'CH₃−CH₂−CHO',reactivo:'+ NaBH₄',condicion:'MeOH / H₂O',
+   r:'CH₃−CH₂−CHO',reactivo:null,condicion:'NaBH₄ / MeOH, H₂O',
    nombre_rxn:'Reducción de aldehído',
    regla:'Los aldehídos se reducen siempre a alcoholes primarios.',
    respuesta:'CH₃−CH₂−CH₂OH  (propan-1-ol)'},
   {key:'rxn_36',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
-   r:'C₆H₅−CHO',reactivo:'+ CH₃MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'C₆H₅−CHO',reactivo:null,condicion:'1) CH₃MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre aldehído',
    regla:'Un aldehído + reactivo de Grignard da siempre un alcohol secundario (excepto el formaldehído, que da uno primario).',
    respuesta:'C₆H₅−CH(OH)−CH₃  (1-feniletan-1-ol)'},
@@ -2126,7 +2133,7 @@ const BANCO_RXN = [
    respuesta:'CH₃−CH₂−CH₂−COOH  (ácido butanoico)  +  Ag⁰ (espejo de plata)'},
   {key:'rxn_38',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de esta reacción de Grignard (caso especial):',
-   r:'H−CHO',reactivo:'+ CH₃CH₂MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'H−CHO',reactivo:null,condicion:'1) CH₃CH₂MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre formaldehído (excepción)',
    regla:'El formaldehído (sin sustituyente) es la única excepción: con Grignard da un alcohol primario, no secundario.',
    respuesta:'CH₃−CH₂−CH₂OH  (propan-1-ol)'},
@@ -2138,7 +2145,7 @@ const BANCO_RXN = [
    respuesta:'C₆H₅−CH(OH)−CN  (mandelonitrilo, 2-hidroxi-2-feniletanonitrilo)'},
   {key:'rxn_40',topic:'aldehidos',categoria:'Reducción (aldehídos)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la siguiente reducción:',
-   r:'CH₃−CH(CH₃)−CHO',reactivo:'+ LiAlH₄',condicion:'éter seco, luego H₂O',
+   r:'CH₃−CH(CH₃)−CHO',reactivo:null,condicion:'1) LiAlH₄, éter seco  2) H₂O',
    nombre_rxn:'Reducción de aldehído',
    regla:'Los aldehídos se reducen siempre a alcoholes primarios, sin importar la ramificación.',
    respuesta:'CH₃−CH(CH₃)−CH₂OH  (2-metilpropan-1-ol)'},
@@ -2156,7 +2163,7 @@ const BANCO_RXN = [
    respuesta:'Oxidación (prueba de Tollens, positiva para aldehídos). Evidencia: formación de un espejo de plata en las paredes del tubo.'},
   {key:'rxn_43',topic:'aldehidos',categoria:'Reacción de Grignard (aldehídos)',pregunta_tipo:'tipo',
    enunciado:'Indica qué tipo de alcohol se obtiene en la siguiente reacción y por qué:',
-   r:'C₆H₅−CHO',reactivo:'+ C₂H₅MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'C₆H₅−CHO',reactivo:null,condicion:'1) C₂H₅MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre aldehído',
    regla:'El carbono carbonílico del aldehído ya tiene un sustituyente (R); al recibir el grupo del Grignard queda con dos sustituyentes y un H → alcohol secundario.',
    respuesta:'Se obtiene un alcohol secundario: C₆H₅−CH(OH)−CH₂CH₃ (1-fenilpropan-1-ol), porque el carbono del carbonilo conserva un H.'},
@@ -2170,19 +2177,19 @@ const BANCO_RXN = [
    respuesta:'CH₃−C(OH)(CN)−CH₃  (2-hidroxi-2-metilpropanonitrilo)'},
   {key:'rxn_45',topic:'cetonas',categoria:'Reducción (cetonas)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la siguiente reducción:',
-   r:'CH₃−CO−CH₂−CH₃',reactivo:'+ NaBH₄',condicion:'MeOH',
+   r:'CH₃−CO−CH₂−CH₃',reactivo:null,condicion:'NaBH₄ / MeOH',
    nombre_rxn:'Reducción de cetona',
    regla:'Las cetonas se reducen siempre a alcoholes secundarios.',
    respuesta:'CH₃−CH(OH)−CH₂−CH₃  (butan-2-ol)'},
   {key:'rxn_46',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
    enunciado:'Predice el alcohol que se forma en la siguiente reacción:',
-   r:'CH₃−CO−CH₂−CH₂−CH₃',reactivo:'+ CH₃MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'CH₃−CO−CH₂−CH₂−CH₃',reactivo:null,condicion:'1) CH₃MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
    regla:'Una cetona + reactivo de Grignard da siempre un alcohol terciario.',
    respuesta:'CH₃−C(OH)(CH₃)−CH₂−CH₂−CH₃  (2-metilpentan-2-ol)'},
   {key:'rxn_47',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto de la siguiente reacción de Grignard:',
-   r:'CH₃−CO−CH₃',reactivo:'+ CH₃CH₂MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'CH₃−CO−CH₃',reactivo:null,condicion:'1) CH₃CH₂MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
    regla:'Una cetona + reactivo de Grignard da siempre un alcohol terciario.',
    respuesta:'CH₃−C(OH)(CH₂CH₃)−CH₃  (2-metilbutan-2-ol)'},
@@ -2200,7 +2207,7 @@ const BANCO_RXN = [
    respuesta:'CH₃−C(OH)(CN)−CH₂−CH₃  (2-hidroxi-2-metilbutanonitrilo)'},
   {key:'rxn_50',topic:'cetonas',categoria:'Reducción (cetonas)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la siguiente reducción:',
-   r:'CH₃−CH₂−CO−CH₂−CH₃',reactivo:'+ LiAlH₄',condicion:'éter seco, luego H₂O',
+   r:'CH₃−CH₂−CO−CH₂−CH₃',reactivo:null,condicion:'1) LiAlH₄, éter seco  2) H₂O',
    nombre_rxn:'Reducción de cetona',
    regla:'Las cetonas se reducen siempre a alcoholes secundarios.',
    respuesta:'CH₃−CH₂−CH(OH)−CH₂−CH₃  (pentan-3-ol)'},
@@ -2212,7 +2219,7 @@ const BANCO_RXN = [
    respuesta:'No hay reacción (prueba negativa, no se forma espejo de plata). A diferencia de un aldehído, la cetona no tiene H en el carbono carbonílico para oxidarse.'},
   {key:'rxn_52',topic:'cetonas',categoria:'Reacción de Grignard (cetonas)',pregunta_tipo:'tipo',
    enunciado:'Indica qué tipo de alcohol se obtiene en la siguiente reacción y justifica la regla general:',
-   r:'CH₃−CO−CH₃',reactivo:'+ C₆H₅MgBr',condicion:'éter seco, luego H₃O⁺',
+   r:'CH₃−CO−CH₃',reactivo:null,condicion:'1) C₆H₅MgBr, éter seco  2) H₃O⁺',
    nombre_rxn:'Reacción de Grignard sobre cetona',
    regla:'El carbono carbonílico de la cetona ya tiene dos sustituyentes; al recibir el grupo del Grignard queda con tres → alcohol terciario.',
    respuesta:'Se obtiene un alcohol terciario: CH₃−C(OH)(C₆H₅)−CH₃ (2-fenilpropan-2-ol). Regla: cetona + Grignard → siempre alcohol terciario.'},
@@ -2328,13 +2335,13 @@ const BANCO_RXN = [
    respuesta:'Hidrólisis ácida. Condición: H⁺ (catalizador). Es reversible ⇌ CH₃−CH₂−COOH + CH₃−OH.'},
   {key:'rxn_71',topic:'esteres',categoria:'Reducción de ésteres',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−COO−CH₂−CH₃',reactivo:'+ LiAlH₄',condicion:null,
+   r:'CH₃−COO−CH₂−CH₃',reactivo:null,condicion:'LiAlH₄',
    nombre_rxn:'Reducción de éster con LiAlH₄',
    regla:'El éster se reduce a DOS alcoholes: uno proviene del lado ácido, otro del lado alcohol.',
    respuesta:'2 CH₃−CH₂−OH  (etanol; el lado ácido —acetilo— y el lado alcohol —etoxi— dan el mismo alcohol)'},
   {key:'rxn_72',topic:'esteres',categoria:'Reducción de ésteres',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−COO−CH₃',reactivo:'+ LiAlH₄',condicion:null,
+   r:'CH₃−CH₂−COO−CH₃',reactivo:null,condicion:'LiAlH₄',
    nombre_rxn:'Reducción de éster con LiAlH₄',
    regla:'El éster se reduce a DOS alcoholes: uno proviene del lado ácido, otro del lado alcohol.',
    respuesta:'CH₃−CH₂−CH₂−OH  (1-propanol)  +  CH₃−OH  (metanol)'},
@@ -2432,25 +2439,25 @@ const BANCO_RXN = [
    respuesta:'CH₃−CH₂−CH₂−COONa  (butanoato de sodio)  +  NH₃'},
   {key:'rxn_88',topic:'amidas',categoria:'Reducción (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CO−NH₂',reactivo:'+ LiAlH₄',condicion:'éter seco / Δ',
+   r:'CH₃−CO−NH₂',reactivo:null,condicion:'LiAlH₄, éter seco / Δ',
    nombre_rxn:'Reducción de amida a amina',
    regla:'LiAlH₄ reduce el C=O de la amida por completo a CH₂; el oxígeno se pierde y el N permanece.',
    respuesta:'CH₃−CH₂−NH₂  (etilamina)'},
   {key:'rxn_89',topic:'amidas',categoria:'Reducción (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'C₆H₅−CO−NH₂',reactivo:'+ LiAlH₄',condicion:'éter seco / Δ',
+   r:'C₆H₅−CO−NH₂',reactivo:null,condicion:'LiAlH₄, éter seco / Δ',
    nombre_rxn:'Reducción de amida a amina',
    regla:'LiAlH₄ reduce el C=O de la amida por completo a CH₂; el oxígeno se pierde y el N permanece.',
    respuesta:'C₆H₅−CH₂−NH₂  (bencilamina / fenilmetanamina)'},
   {key:'rxn_90',topic:'amidas',categoria:'Deshidratación (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−CO−NH₂',reactivo:'+ P₂O₅',condicion:'Δ (deshidratación)',
+   r:'CH₃−CH₂−CO−NH₂',reactivo:null,condicion:'P₂O₅, Δ (deshidratación)',
    nombre_rxn:'Deshidratación de amida a nitrilo',
    regla:'Un agente deshidratante fuerte elimina H₂O de la amida primaria y forma el triple enlace C≡N.',
    respuesta:'CH₃−CH₂−C≡N  (propanonitrilo)  +  H₂O'},
   {key:'rxn_91',topic:'amidas',categoria:'Deshidratación (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CO−NH₂',reactivo:'+ SOCl₂',condicion:'Δ (deshidratación)',
+   r:'CH₃−CO−NH₂',reactivo:null,condicion:'SOCl₂, Δ (deshidratación)',
    nombre_rxn:'Deshidratación de amida a nitrilo',
    regla:'El SOCl₂ elimina el oxígeno y el H₂O de la amida primaria (consumiéndola él mismo) y forma el triple enlace C≡N.',
    respuesta:'CH₃−C≡N  (acetonitrilo / etanonitrilo)  +  SO₂  +  2 HCl'},
@@ -2462,7 +2469,7 @@ const BANCO_RXN = [
    respuesta:'Hidrólisis ácida. Condición: H⁺ / Δ (reflujo) → ácido propanoico + NH₄⁺.'},
   {key:'rxn_93',topic:'amidas',categoria:'Reducción (amidas)',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y la regla que determina el producto principal:',
-   r:'C₆H₅−CO−NH₂',reactivo:'+ LiAlH₄',condicion:null,
+   r:'C₆H₅−CO−NH₂',reactivo:null,condicion:'LiAlH₄',
    nombre_rxn:'Reducción de amida a amina',
    regla:'A diferencia del éster (que da alcohol), en la amida el LiAlH₄ reduce el C=O completo y el N se conserva como amina.',
    respuesta:'Reducción con hidruro (LiAlH₄) → C₆H₅−CH₂−NH₂ (bencilamina / fenilmetanamina).'},
@@ -2505,7 +2512,7 @@ const BANCO_RXN = [
    respuesta:'C₆H₅−COOH  (ácido benzoico)  +  NH₄⁺'},
   {key:'rxn_142',topic:'nitrilos',categoria:'Reducción (nitrilos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−C≡N',reactivo:'+ LiAlH₄',condicion:'éter seco, luego H₂O',
+   r:'CH₃−CH₂−C≡N',reactivo:null,condicion:'1) LiAlH₄, éter seco  2) H₂O',
    nombre_rxn:'Reducción de nitrilo con LiAlH₄',
    regla:'El LiAlH₄ satura el triple enlace C≡N hasta CH₂−NH₂, igual que con H₂/Ni pero sin necesitar presión.',
    respuesta:'CH₃−CH₂−CH₂−NH₂  (propan-1-amina)'},
@@ -3033,7 +3040,7 @@ function _molBox(str, isSvg){
 
 function buildTipoDCard(rxn, num){
   function arrowCol(condText){
-    return `<div class="rxn-d-arrow-col">${condText?`<span class="rxn-d-cond">${condText}</span>`:''}<span class="rxn-d-arrow">──→</span></div>`;
+    return `<div class="rxn-d-arrow-col">${condText?`<span class="rxn-d-cond">${condText}</span>`:''}<div class="rxn-d-arrow-line"></div></div>`;
   }
   function reagentSpan(reactivo){
     if(!reactivo)return'';
@@ -3052,7 +3059,7 @@ function buildTipoDCard(rxn, num){
     eqHtml=`${_molBox(rxn.r)}
       ${reagentSpan(rxn.reactivo)}
       ${arrowCol(rxn.condicion==='???' ? null : rxn.condicion)}
-      <span class="rxn-d-reagent">→ ?</span>`;
+      <div class="rxn-d-blank-box">?</div>`;
     fieldHtml=`<div class="rxn-d-field"><span>Tipo de reacci&oacute;n:</span><div class="ans-line"></div></div>
       <div class="rxn-d-field"><span>Condiciones / catalizador:</span><div class="ans-line"></div></div>`;
   }
