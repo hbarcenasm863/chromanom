@@ -996,6 +996,8 @@ const M = {
   anilina(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'NH₂');return mkSVG(s);},
   clorobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Cl');return mkSVG(s);},
   bromobenceno(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'Br');return mkSVG(s);},
+  fenolato(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'ONa');return mkSVG(s);},
+  salDiazonio(){_pts=[];let s=bnzRing(0,0);const r=28,v0y=-r;s+=ln(0,v0y,0,v0y-BL);_reg(0,v0y-BL);s+=atm(0,v0y-BL,'N₂⁺Cl⁻');return mkSVG(s);},
   trimetilamina(){_pts=[];let s=ln(0,0,0,-BL);s+=ln(0,0,BL*COS30,BL*SIN30);s+=ln(0,0,-BL*COS30,BL*SIN30);_reg(0,-BL);_reg(BL*COS30,BL*SIN30);_reg(-BL*COS30,BL*SIN30);s+=atm(0,0,'N');return mkSVG(s);},
   nMetilPropan1amina(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'NH');return mkSVG(s);},
   nMetilButan1amina(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=ln(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=ln(p[0].x,p[0].y-BL,p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);_reg(p[0].x-BL*COS30,p[0].y-BL-BL*SIN30);s+=atm(p[0].x,p[0].y-BL,'NH');return mkSVG(s);},
@@ -2027,13 +2029,13 @@ const BANCO_RXN = [
   // ── Alcoholes ────────────────────────────────────────────────────────────
   {key:'rxn_24',topic:'alcoholes',categoria:'Deshidratación (alcoholes)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−CH(OH)−CH₃',reactivo:'+ H₂SO₄',condicion:'Δ (calor)',
+   r:'CH₃−CH₂−CH(OH)−CH₃',reactivo:null,condicion:'H₂SO₄, Δ (calor)',
    nombre_rxn:'Deshidratación de alcohol',
    regla:'Regla de Zaitsev: se forma el alqueno más sustituido.',
    respuesta:'CH₃−CH=CH−CH₃  (but-2-eno, mayoritario)'},
   {key:'rxn_25',topic:'alcoholes',categoria:'Deshidratación (alcoholes)',pregunta_tipo:'producto',
    enunciado:'Escribe el producto de la deshidratación de este alcohol cíclico:',
-   r:'C₆H₁₁OH',reactivo:'+ H₂SO₄',condicion:'Δ (170-180°C)',
+   r:'C₆H₁₁OH',reactivo:null,condicion:'H₂SO₄, Δ (170-180°C)',
    nombre_rxn:'Deshidratación de alcohol (cíclico)',
    regla:'Se elimina H₂O intramolecular; en un anillo simétrico solo hay un alqueno posible.',
    respuesta:'Ciclohexeno (C₆H₁₀)  +  H₂O'},
@@ -2075,7 +2077,7 @@ const BANCO_RXN = [
    respuesta:'CH₃COOCH₂CH₃  (acetato de etilo / etanoato de etilo)  +  H₂O'},
   {key:'rxn_32',topic:'alcoholes',categoria:'Deshidratación (alcoholes)',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y la condición necesaria para que ocurra:',
-   r:'CH₃−CH(OH)−CH₂−CH₂−CH₃',reactivo:'+ H₂SO₄',condicion:'???',
+   r:'CH₃−CH(OH)−CH₂−CH₂−CH₃',reactivo:null,condicion:'???',
    nombre_rxn:'Deshidratación de alcohol',
    regla:'Se necesita ácido concentrado y calor (~170-180°C) para eliminar H₂O y formar el alqueno más sustituido (Zaitsev).',
    respuesta:'Deshidratación ácida. Condición: H₂SO₄ concentrado + Δ (~170-180°C). Producto mayoritario: CH₃−CH=CH−CH₂−CH₃ (pent-2-eno).'},
@@ -2843,22 +2845,56 @@ function printMdecTableFull(parts){
 const _SUB={'₀':0,'₁':1,'₂':2,'₃':3,'₄':4,'₅':5,'₆':6,'₇':7,'₈':8,'₉':9};
 function _subInt(s){let n=0;for(const c of s){if(_SUB[c]!==undefined)n=n*10+_SUB[c];}return n;}
 
+// Groups recognized as a whole atom/substituent on their own — order matters:
+// longer/more-specific strings must be checked before a shorter string they start with
+// (e.g. 'NH₂' before 'NH' before bare 'N'; 'ONa'/'OH' before bare 'O').
+const _GROUPS=['NH₂','NH','NO₂','ONa','OH','O','Cl','Br','F','I','N'];
 function _parseBranch(s){
   if(s==='OH')return{s:'O',h:1};
+  if(s==='O')return{s:'O',h:0};
+  if(s==='ONa')return{s:'ONa',h:0};
   if(s==='NH₂')return{s:'N',h:2};
+  if(s==='NH')return{s:'N',h:1};
+  if(s==='N')return{s:'N',h:0};
   if(s==='Cl')return{s:'Cl',h:0};
   if(s==='Br')return{s:'Br',h:0};
   if(s==='F')return{s:'F',h:0};
   if(s==='I')return{s:'I',h:0};
   if(s==='NO₂')return{s:'N',h:0}; // approximate
+  if(s==='CH₃')return{h:3};
   return null;
 }
 
+// Fresh (never shared/mutated-in-place) node builders for carbonyl-bearing carbons
+// written in compact functional-group notation (aldehyde / ketone / acid / ester).
+function _aldehydeNode(){return{h:1,bu:[{s:'O',h:0}],buBn:2};}
+function _ketoNode(){return{h:0,bu:[{s:'O',h:0}],buBn:2};}
+function _acidNode(){return{h:0,bu:[{s:'O',h:0}],bd:[{s:'O',h:1}],buBn:2};}
+
 function _parseAtomAt(s, i){
-  const HALOS=['Cl','Br','OH','NH₂','F','I'];
+  // Carboxylic acid / aldehyde / ester / ketone carbons, written as compact
+  // functional-group shorthand (COOH, CHO, COO-, -CO-) rather than spelled
+  // out atom-by-atom — expand them into a full developed (=O shown) node.
+  if(s.startsWith('COOH',i))return{node:_acidNode(),i:i+4};
+  if(s.startsWith('COO',i)){
+    const acyl=_ketoNode();acyl.bn=1;
+    return{nodes:[acyl,{s:'O',h:0}],i:i+3};
+  }
+  if(s.startsWith('CHO',i))return{node:_aldehydeNode(),i:i+3};
+  if(s.startsWith('CO',i)&&s[i+2]!=='O'&&s[i+2]!=='H')return{node:_ketoNode(),i:i+2};
+
   let haloPrefix=null;
-  for(const ha of HALOS){
-    if(s.startsWith(ha,i)&&s[i+ha.length]==='C'){haloPrefix=ha;i+=ha.length;break;}
+  for(const ha of _GROUPS){
+    if(s.startsWith(ha,i)){
+      if(s[i+ha.length]==='C'){haloPrefix=ha;i+=ha.length;}
+      else{
+        // Standalone group: this token IS the whole atom (terminal −OH, −Br,
+        // mid-chain −NH−, ether −O−, nitrile ≡N, etc.), not a carbon-bearing atom.
+        const b=_parseBranch(ha);
+        if(b)return{node:{...b},i:i+ha.length};
+      }
+      break;
+    }
   }
   if(i>=s.length||s[i]!=='C')return null;
   i++;
@@ -2878,23 +2914,37 @@ function _parseAtomAt(s, i){
     if(i<s.length)i++;
     const bn=_parseBranch(b);if(bn)branches.push(bn);
   }
-  if(!haloPrefix){
-    for(const ha of HALOS){
-      if(s.startsWith(ha,i)&&(i+ha.length>=s.length||!'−─=≡'.includes(s[i+ha.length]))){
+  if(!haloPrefix&&branches.length===0){
+    for(const ha of _GROUPS){
+      if(s.startsWith(ha,i)){
         const b=_parseBranch(ha);if(b){branches.push(b);i+=ha.length;}
         while(i<s.length&&_SUB[s[i]]!==undefined)i++;
         break;
       }
     }
   }
-  if(branches.length)node.bd=branches;
+  // Up to two branch positions per backbone atom: first goes down, second up
+  // (this engine draws a single line up and a single line down per atom).
+  if(branches.length===1)node.bd=[branches[0]];
+  else if(branches.length>=2){node.bd=[branches[0]];node.bu=[branches[1]];}
   return{node,i};
 }
 
+// "(CH₃)₃C…" (tert-butyl written with a leading multiplier) → rewritten as the
+// equivalent "CH₃−C(CH₃)(CH₃)…" chain notation the atom-by-atom parser already
+// understands, so it renders as a full developed structure instead of falling
+// back to plain condensed text.
+function _normalizeLeadingMulti(s){
+  const m=s.match(/^\(CH₃\)₃C/);
+  if(!m)return s;
+  return 'CH₃−C(CH₃)(CH₃)'+s.slice(m[0].length);
+}
+
 function _parseChainStr(s){
+  s=_normalizeLeadingMulti(s.trim());
   s=s.replace(/\s*\([^()]{2,50}\)\s*$/,'').trim();
   s=s.replace(/^\d+\s+/,'').trim();
-  if(!s||s.length>50||s.includes('C₆')||s.includes('???'))return null;
+  if(!s||s.length>50||s.includes('???'))return null;
   const chain=[];
   let i=0,nextBond=1;
   while(i<s.length){
@@ -2907,28 +2957,58 @@ function _parseChainStr(s){
     nextBond=1;
     const res=_parseAtomAt(s,i);
     if(!res)return null;
-    chain.push(res.node);
+    if(res.nodes)chain.push(...res.nodes);
+    else chain.push(res.node);
     i=res.i;
   }
   return chain.length?chain:null;
 }
 
+// Literal reactant strings from BANCO_RXN that are better rendered by reusing an
+// already hand-drawn structure (benzene ring compounds, a named cyclic alcohol,
+// formaldehyde) than by the linear atom-by-atom chain parser above.
+const _RXN_ALIASES={
+  'C₆H₆':()=>getSVG('benceno'),
+  'C₆H₅−CHO':()=>getSVG('benzaldehido'),
+  'C₆H₅−CH₃':()=>getSVG('metilbenceno'),
+  'C₆H₅−COOH':()=>getSVG('acidobenzoico'),
+  'C₆H₅−COO−CH₂−CH₃':()=>getSVG('benzoatoEtilo'),
+  'C₆H₅−COO−CH₃':()=>getSVG('benzoatoMetilo'),
+  'C₆H₅−CO−NH₂':()=>getSVG('benzamida'),
+  'C₆H₅−C≡N':()=>getSVG('benzonitrilo'),
+  'C₆H₅−NH₂':()=>getSVG('anilina'),
+  'C₆H₅−NO₂':()=>getSVG('nitrobenceno'),
+  'C₆H₅−O−CH₃':()=>getSVG('anisol'),
+  'C₆H₅−ONa':()=>getSVG('fenolato'),
+  'C₆H₅−N₂⁺Cl⁻':()=>getSVG('salDiazonio'),
+  'C₆H₁₁OH':()=>getSVG('ciclohexanol'),
+  'H−CHO':()=>mkDevSVG([{h:2,bu:[{s:'O',h:0}],buBn:2}]),
+};
+
+function _sizeSvg(svg){
+  // Set explicit width/height from viewBox so the SVG has a real intrinsic size.
+  // Then CSS max-width:100% scales it down to fit the container without a
+  // circular dependency (which happens when width:100% meets an unsized container).
+  const vb=svg.match(/viewBox="[-\d.]+ [-\d.]+ ([\d.]+) ([\d.]+)"/);
+  if(vb)svg=svg.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
+  svg=svg.replace('style="display:block;margin:auto"','style="display:block;overflow:visible"');
+  return svg;
+}
+
 function _molBox(str, isSvg){
   if(!str)return '';
+  if(_RXN_ALIASES[str]){
+    try{
+      const svg=_RXN_ALIASES[str]();
+      if(svg)return`<div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
+    }catch(e){}
+  }
   // Try SVG rendering
   try{
     const chain=_parseChainStr(str);
     if(chain&&chain.length){
-      let svg=mkDevSVG(chain);
-      if(svg){
-        // Set explicit width/height from viewBox so the SVG has a real intrinsic size.
-        // Then CSS max-width:100% scales it down to fit the container without a
-        // circular dependency (which happens when width:100% meets an unsized container).
-        const vb=svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
-        if(vb) svg=svg.replace('<svg',`<svg width="${vb[1]}" height="${vb[2]}"`);
-        svg=svg.replace('style="display:block;margin:auto"','style="display:block;overflow:visible"');
-        return`<div class="rxn-d-mol-box">${svg}</div>`;
-      }
+      const svg=mkDevSVG(chain);
+      if(svg)return`<div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
     }
   }catch(e){}
   // Fallback: styled text
