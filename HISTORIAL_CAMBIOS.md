@@ -7,6 +7,110 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (61) — Auditoría química de `grupos.html`: 9 estructuras/nombres corregidos
+
+### Contexto
+La docente pidió una auditoría de `grupos.html` que revisara que
+cada estructura dibujada coincidiera de verdad con su nombre IUPAC
+(no solo que la molécula fuera "plausible"), y que no hubiera
+errores químicos ni alucinaciones. Se lanzó una auditoría
+independiente que decodificó a mano las 116 cadenas semidesarrolladas
+de `MOLDES_G` (comprobando valencias) y revisó visualmente las ~72
+estructuras esqueléticas de anillos.
+
+### Resultado de la auditoría
+El motor nuevo (semidesarrollado, de la sesión de ayer) salió limpio:
+**0 errores de valencia en las 116 entradas de `MOLDES_G`**, y solo 1
+error de contenido en todo ese banco. Casi todo lo demás estaba en
+dibujos esqueléticos de anillos ya existentes desde antes — no algo
+que se rompiera esta semana, pero sí algo que corregir ahora que se
+revisó a fondo.
+
+### Qué se corrigió (`grupos.html`)
+**Discordancias estructura ↔ nombre:**
+- `cloro2MetilBenceno` (Benceno): el Cl estaba en posición meta pero
+  el nombre decía "1-cloro-2-metilbenceno" (orto) — corregida la
+  posición del Cl.
+- `trimetilBenceno` (ejercicio Benceno): los 3 metilos estaban en
+  1,3,5 pero la respuesta pedía 1,2,4 — corregidas las posiciones.
+- `pentano15diamina` (Aminas): a la cadena le faltaba un carbono
+  (dibujaba butano-1,4-diamina en vez de pentano-1,5-diamina).
+- `propilHexano` "3-propilhexano" (Alcanos): la cadena más larga real
+  era de 7C, no 6 — el nombre correcto es 4-propilheptano. Este era
+  el más grave: enseñaba a violar la regla 1 ("la cadena más larga")
+  dentro de la propia regla 4. Se corrigió la estructura (ahora sí
+  tiene 7C de cadena principal) y el nombre en regla + ejercicio.
+- `metilCicloHexeno` "1-metilciclohex-2-eno" (Alquenos): numeración
+  imposible (el doble enlace siempre es C1-C2; con esa posición del
+  metilo el nombre correcto es 3-metilciclohex-1-eno).
+- `formilCiclohexanocarboxilico` (Aldehídos): el CHO estaba dibujado
+  en posición para (4) pero el nombre decía "3-formil"; además al
+  grupo COOH le faltaba el carbono del carboxilo (un enlace duplicado
+  dejaba el anillo pegado directo al oxígeno). Se corrigieron ambas
+  cosas.
+- `metoxiBenceno` y `etoxiBenceno` (ejercicios Éteres): un error de
+  programación (`bnzRing(0,0)` devuelve un objeto, no una cadena de
+  texto) hacía que el anillo no se dibujara y apareciera literalmente
+  el texto "[object Object]" en el SVG. Corregido.
+- Sección "Nombres comunes" — **estireno**: el dibujo tenía un doble
+  enlace directo del anillo a un solo carbono (imposible en un
+  aromático); le faltaba el segundo carbono del grupo vinilo
+  (anillo−CH=CH₂). Es la lámina de referencia más copiada por los
+  alumnos, así que era la de mayor prioridad visual.
+
+**Errores de química en el texto de las reglas:**
+- Ácidos, regla "COOH como sustituyente en ciclos": decía que un
+  éster le gana en prioridad al ácido carboxílico — es al revés (el
+  ácido es el grupo más prioritario de la tabla de la propia app). Se
+  reescribió la regla y el ejemplo (ahora el COOH manda y el éster
+  pasa a sustituyente "(metoxicarbonil)−"), y se corrigió también el
+  molde `carboxiCiclohexanocarboxilatoMetilo` para que el dibujo
+  coincida con la explicación correcta.
+- Aldehídos, regla "Aldehídos integrados en el ciclo": afirmaba que
+  el carbono del CHO puede formar parte del anillo (imposible —
+  sería una cetona) y decía que en el furfural el C=O sí pertenece al
+  anillo (falso: el furfural tiene el CHO colgando afuera, por eso
+  usa el sufijo −carbaldehído). Además ilustraba la regla con los
+  mismos dos dibujos de la regla anterior, que ni siquiera mostraban
+  lo que el texto describía. Se reescribió como una aclaración
+  correcta: "el C=O nunca puede quedar dentro del anillo de un
+  aldehído", contrastando ciclohexanocarbaldehído (aldehído) con
+  ciclohexanona (cetona).
+
+**Detalle menor:** un chip de nomenclatura en un ejercicio de amidas
+decía "ciclopent"+"an"+"carboxamid"+"a" (le faltaba la "o": el propio
+campo de respuesta correcta ya decía "ciclopentanocarboxamida").
+
+### Lo que la auditoría confirmó correcto (no se tocó)
+Los otros 16 grupos funcionales, sus ~86 reglas y ~181 ejercicios: 0
+errores de valencia en las 116 cadenas de `MOLDES_G`, sin referencias
+rotas. Las secciones "Las 4 partes en un ejemplo" (los 17 grupos) y
+"Nombres comunes reconocidos por IUPAC" (5 de 6 —tolueno, fenol,
+anilina, anisol, ácido benzoico— ya estaban correctas). La tabla
+global de prioridades reproduce bien la jerarquía IUPAC.
+
+### Verificación
+Después de corregir: las 153 moléculas de ejemplo de los 17 grupos
+siguen sin solapamientos ni SVGs rotos (mismo chequeo automático de
+sesiones anteriores), los 6 dibujos tocados no generan "[object
+Object]" ni excepciones, y las cadenas corregidas en `MOLDES_G` miden
+lo que deben medir (`pentano15diamina`: 7 nodos = 5C + 2N;
+`propilHexano`: 7C de cadena principal + rama de 3C). Se comprobó que
+los 8 ejercicios afectados siguen aceptando su nueva respuesta
+correcta.
+
+### Pendiente / sin resolver
+El auditor señaló también algunos puntos menores "no urgentes" (una
+convención clásica vs. IUPAC 2013 estricta en un par de reglas de
+alquenos/benceno, un par de ejemplos donde el texto de la regla nombra
+un compuesto sustituido pero el dibujo adjunto es el compuesto sin
+sustituir, y una molécula de Haluros que solo tiene versión
+esquelética) que no se corrigieron esta sesión por ser de bajo
+impacto — quedan anotados por si se quiere una pasada de pulido más
+adelante.
+
+---
+
 ## 2026-09-17 (60) — Grupos: corregido el nombre solapado sobre la estructura en las moléculas altas (ramas arriba y abajo)
 
 ### Contexto
