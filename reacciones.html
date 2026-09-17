@@ -247,6 +247,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-molcard.c4{background:var(--c4b);border:2px solid var(--c4)}
 .rxn-molcard.c4 .rxn-molcard-name{color:var(--c4t)}
 .rxn-molcard-extra{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--dim);white-space:nowrap}
+.rxn-eq-coef{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:800;color:var(--tx);flex-shrink:0}
 .rxn-eq-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;width:100%}
 .rxn-eq-plus{font-size:1.1rem;color:var(--dimmer);font-weight:700;flex-shrink:0}
 
@@ -1750,7 +1751,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧪</span>
-  <div><strong>¿Para qué les sirve esto?</strong> La hidrohalogenación del propileno (CH₂=CH−CH₃ + HCl) produce <strong>cloruro de isopropilo</strong>, intermediario en la síntesis de ibuprofeno y otros antiinflamatorios genéricos. Colombia es el mayor productor de medicamentos genéricos de Latinoamérica, así que esta reacción de adición que acaban de aprender es un paso clave en rutas de síntesis reales.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La hidrohalogenación del propileno (CH₂=CH−CH₃ + HCl) produce <strong>cloruro de isopropilo</strong>, un agente alquilante que en Friedel-Crafts fabrica <strong>cumeno (isopropilbenceno)</strong> — la materia prima del proceso industrial que produce fenol y acetona a la vez. Colombia es el mayor productor de medicamentos genéricos de Latinoamérica, así que estas reacciones de adición que acaban de aprender son pasos clave en rutas de síntesis reales.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -1792,7 +1793,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="rxn-head" onclick="toggleRxn('aq-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c3t)">Halogenación</span>
-          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">AE · X₂ · test Baeyer</span>
+          <span class="rxn-badge" style="background:var(--c3b);color:var(--c3t)">AE · X₂ · prueba del bromo</span>
         </div>
         <span class="rxn-chev" id="chev-aq-1">▾</span>
       </div>
@@ -1895,7 +1896,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Necesitan: Cl₂ o Br₂ en CCl₄ · sin luz, sin calor · la estereoquímica es adición anti (trans)</div>
-        <div class="rxn-regla">🧪 Truco de examen — Test de Baeyer: Br₂/CCl₄ anaranjado → si se decolora, hay insaturación confirmada</div>
+        <div class="rxn-regla">🧪 Truco de examen — Prueba del bromo: Br₂/CCl₄ anaranjado → si se decolora, hay insaturación confirmada (no confundir con la prueba de Baeyer, que es con KMnO₄)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
@@ -1924,7 +1925,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="aq-1-q0">
-          <div class="quiz-q-text">¿Qué observación confirma un alqueno con el test de Baeyer (Br₂/CCl₄)?</div>
+          <div class="quiz-q-text">¿Qué observación confirma un alqueno con la prueba del bromo (Br₂/CCl₄)?</div>
           <div class="quiz-opts">
             <div class="quiz-opt" onclick="rxnAnswer(this,'aq-1-q0',false)"><span class="quiz-opt-icon">○</span> El líquido se vuelve verde</div>
             <div class="quiz-opt" onclick="rxnAnswer(this,'aq-1-q0',true)"><span class="quiz-opt-icon">○</span> El color anaranjado del Br₂ desaparece</div>
@@ -2312,25 +2313,25 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('aq-4',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-aq-4-0">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="105" viewBox="0 5 220 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="60.0" y1="19.0" x2="84.727469423674" y2="36.96555814625137" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="84.727469423674" y1="36.96555814625137" x2="75.2824165596043" y2="66.03444185374863" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="75.2824165596043" y1="66.03444185374863" x2="44.7175834403957" y2="66.03444185374863" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="44.7175834403957" y1="66.03444185374863" x2="35.272530576326005" y2="36.96555814625137" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="35.272530576326005" y1="36.96555814625137" x2="60.0" y2="19.0" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><text x="60.0" y="19.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="84.727469423674" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="75.2824165596043" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="44.7175834403957" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><text x="35.272530576326005" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><path d="M60.0,19.0 Q67.07366744120473,35.263932022500214 84.727469423674,36.96555814625137" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M84.727469423674,36.96555814625137 Q71.44543434498277,48.71884705062547 75.2824165596043,66.03444185374863" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M75.2824165596043,66.03444185374863 Q60.0,57.03444185374863 44.7175834403957,66.03444185374863" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M44.7175834403957,66.03444185374863 Q48.554565655017235,48.71884705062547 35.272530576326005,36.96555814625137" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M35.272530576326005,36.96555814625137 Q52.92633255879526,35.263932022500214 60.0,19.0" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><text x="150" y="45" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">molozónida</text><text x="150" y="60" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">(inestable)</text><text x="85" y="95" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">cicloadición pericíclica concertada (3+2)</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="220" height="105" viewBox="0 5 220 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="60.0" y1="19.0" x2="84.727469423674" y2="36.96555814625137" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="84.727469423674" y1="36.96555814625137" x2="75.2824165596043" y2="66.03444185374863" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="75.2824165596043" y1="66.03444185374863" x2="44.7175834403957" y2="66.03444185374863" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="44.7175834403957" y1="66.03444185374863" x2="35.272530576326005" y2="36.96555814625137" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><line x1="35.272530576326005" y1="36.96555814625137" x2="60.0" y2="19.0" stroke="var(--c4t)" stroke-width="1.6" stroke-linecap="round"/><text x="60.0" y="19.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="84.727469423674" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="75.2824165596043" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">O</text><text x="44.7175834403957" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><text x="35.272530576326005" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C</text><path d="M60.0,19.0 Q67.07366744120473,35.263932022500214 84.727469423674,36.96555814625137" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M84.727469423674,36.96555814625137 Q71.44543434498277,48.71884705062547 75.2824165596043,66.03444185374863" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M75.2824165596043,66.03444185374863 Q60.0,57.03444185374863 44.7175834403957,66.03444185374863" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M44.7175834403957,66.03444185374863 Q48.554565655017235,48.71884705062547 35.272530576326005,36.96555814625137" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><path d="M35.272530576326005,36.96555814625137 Q52.92633255879526,35.263932022500214 60.0,19.0" fill="none" stroke="var(--arr)" stroke-width="1.3" marker-end="url(#arrFull)"/><text x="150" y="45" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">molozónido</text><text x="150" y="60" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">(inestable)</text><text x="85" y="95" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">cicloadición pericíclica concertada (3+2)</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Adición de O₃</div>
             <div class="mech-step-h">El ozono reacciona con el C=C en una cicloadición <a href="#g-periciclica" class="gloss-ref" onclick="jumpToGloss('g-periciclica');return false;">pericíclica</a>: los 5 átomos se unen en un solo paso concertado</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Fíjense en esto: el ozono (O₃) es una molécula de tres oxígenos con muchos electrones disponibles, y cuando choca con el doble enlace C=C, los tres oxígenos se enganchan formando un <strong>anillo de 5 miembros</strong> con los dos carbonos — el molozónida. Esto es una <strong>cicloadición pericíclica</strong>: a diferencia de SN2, E2 o la adición electrofílica, aquí no hay un nucleófilo ni un electrófilo por separado — los enlaces se forman y se rompen <em>todos a la vez</em>, en un solo <a href="#g-transicion" class="gloss-ref" onclick="jumpToGloss('g-transicion');return false;">estado de transición</a> cíclico (por eso las flechas forman un círculo cerrado, no una cadena). Es un anillo muy tenso — piénsenlo como un abrazo apretado que no dura — y se reorganiza casi de inmediato para dar paso al siguiente intermediario.</div>
+            <div class="mech-step-txt">Fíjense en esto: el ozono (O₃) es una molécula de tres oxígenos con muchos electrones disponibles, y cuando choca con el doble enlace C=C, los tres oxígenos se enganchan formando un <strong>anillo de 5 miembros</strong> con los dos carbonos — el molozónido. Esto es una <strong>cicloadición pericíclica</strong>: a diferencia de SN2, E2 o la adición electrofílica, aquí no hay un nucleófilo ni un electrófilo por separado — los enlaces se forman y se rompen <em>todos a la vez</em>, en un solo <a href="#g-transicion" class="gloss-ref" onclick="jumpToGloss('g-transicion');return false;">estado de transición</a> cíclico (por eso las flechas forman un círculo cerrado, no una cadena). Es un anillo muy tenso — piénsenlo como un abrazo apretado que no dura — y se reorganiza casi de inmediato para dar paso al siguiente intermediario.</div>
           </div>
           <div class="mech-step" id="ms-aq-4-1">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 0 210 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="60.0" y1="19.0" x2="35.272530576326005" y2="36.96555814625137" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="35.272530576326005" y1="36.96555814625137" x2="44.7175834403957" y2="66.03444185374863" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="44.7175834403957" y1="66.03444185374863" x2="75.2824165596043" y2="66.03444185374863" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="75.2824165596043" y1="66.03444185374863" x2="84.727469423674" y2="36.965558146251375" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="84.727469423674" y1="36.965558146251375" x2="60.0" y2="19.0" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><text x="60.0" y="19.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="35.272530576326005" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="44.7175834403957" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C</text><text x="75.2824165596043" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="84.727469423674" y="36.965558146251375" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C</text><text x="150" y="45" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">ozónida</text><text x="150" y="60" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">(1,2,4-trioxolano)</text><text x="80" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">se reordena a la forma más estable</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="100" viewBox="0 0 210 100" style="overflow:visible;display:block;margin:0 auto" ><line x1="60.0" y1="19.0" x2="35.272530576326005" y2="36.96555814625137" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="35.272530576326005" y1="36.96555814625137" x2="44.7175834403957" y2="66.03444185374863" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="44.7175834403957" y1="66.03444185374863" x2="75.2824165596043" y2="66.03444185374863" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="75.2824165596043" y1="66.03444185374863" x2="84.727469423674" y2="36.965558146251375" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><line x1="84.727469423674" y1="36.965558146251375" x2="60.0" y2="19.0" stroke="var(--c3t)" stroke-width="1.6" stroke-linecap="round"/><text x="60.0" y="19.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="35.272530576326005" y="36.96555814625137" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="44.7175834403957" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C</text><text x="75.2824165596043" y="66.03444185374863" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">O</text><text x="84.727469423674" y="36.965558146251375" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C</text><text x="150" y="45" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">ozónido</text><text x="150" y="60" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">(1,2,4-trioxolano)</text><text x="80" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">se reordena a la forma más estable</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — Reordenamiento</div>
-            <div class="mech-step-h">El molozónida se abre y recombina formando el ozónida más estable (1,2,4-trioxolano)</div>
+            <div class="mech-step-h">El molozónido se abre y recombina formando el ozónido más estable (1,2,4-trioxolano)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Ese molozónida tenso no aguanta: <strong>se fragmenta</strong> en un carbonil ylide (un fragmento con carga separada, C=O⁺−C⁻, muy reactivo) y un fragmento carbonílico, y ambos se recombinan formando el <strong>ozónida</strong> (1,2,4-trioxolano). Ojo con esto: este intermediario aguanta a bajas temperaturas, pero puro es explosivo — por eso en el laboratorio siempre se trabaja en solución.</div>
+            <div class="mech-step-txt">Ese molozónido tenso no aguanta: <strong>se fragmenta</strong> en un óxido de carbonilo (el intermediario de Criegee: un fragmento con carga separada, C=O⁺−O⁻, muy reactivo) y un fragmento carbonílico, y ambos se recombinan formando el <strong>ozónido</strong> (1,2,4-trioxolano). Ojo con esto: este intermediario aguanta a bajas temperaturas, pero puro es explosivo — por eso en el laboratorio siempre se trabaja en solución.</div>
           </div>
           <div class="mech-step" id="ms-aq-4-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="92" viewBox="0 0 210 92" style="overflow:visible;display:block;margin:0 auto" ><text x="30" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R−CHO</text><text x="30" y="60" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">(Zn/H₂O)</text><line x1="70" y1="45" x2="95" y2="45" stroke="var(--dimmer)" stroke-width="1.4"/><text x="140" y="45" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">R'−CHO</text><text x="105" y="20" text-anchor="middle" font-size="8.5" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">ruptura total del C=C</text><text x="90" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">oxidante (H₂O₂) → −COOH en vez de −CHO</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Ruptura final</div>
             <div class="mech-step-h">Reductora (Zn/H₂O) → aldehídos/cetonas · Oxidante (H₂O₂) → ácidos carboxílicos</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Y aquí el detalle que deben recordar: lo que le agreguen al ozónida decide el producto final. Con <strong>Zn/H₂O</strong> (condiciones reductoras) se quedan en <em>aldehídos o cetonas</em>; con <strong>H₂O₂</strong> (oxidante) esos aldehídos se oxidan hasta <em>ácidos carboxílicos</em>. Esta es la técnica que usan para localizar exactamente dónde estaba el doble enlace en una molécula desconocida.</div>
+            <div class="mech-step-txt">Y aquí el detalle que deben recordar: lo que le agreguen al ozónido decide el producto final. Con <strong>Zn/H₂O</strong> (condiciones reductoras) se quedan en <em>aldehídos o cetonas</em>; con <strong>H₂O₂</strong> (oxidante) esos aldehídos se oxidan hasta <em>ácidos carboxílicos</em>. Esta es la técnica que usan para localizar exactamente dónde estaba el doble enlace en una molécula desconocida.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -2347,7 +2348,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">etanal + metanal</div>
           </div>
         </div>
-        <div class="rxn-cond">Paso 1: C=C + O₃ → ozonoide · Paso 2 reductora (Zn/H₂O) → aldehídos/cetonas · Paso 2 oxidante (H₂O₂) → ácidos carboxílicos</div>
+        <div class="rxn-cond">Paso 1: C=C + O₃ → ozónido · Paso 2 reductora (Zn/H₂O) → aldehídos/cetonas · Paso 2 oxidante (H₂O₂) → ácidos carboxílicos</div>
         <div class="rxn-regla">📌 Truco de examen: el doble enlace se rompe por completo, así que esta reacción les sirve para ubicar exactamente dónde estaba</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
@@ -2507,7 +2508,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧫</span>
-  <div><strong>¿Para qué les sirve esto?</strong> La prueba de Baeyer (decoloración del KMnO₄ violeta) es la <strong>prueba rápida de calidad</strong> para detectar si un aceite o grasa tiene dobles enlaces (está insaturado). Laboratorios de control de alimentos en Colombia la usan para verificar adulteración de aceites comestibles. También sirve para confirmar la presencia de alquenos e alquinos en muestras industriales de petroquímica.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> La prueba de Baeyer (decoloración del KMnO₄ violeta) es la <strong>prueba rápida de calidad</strong> para detectar si un aceite o grasa tiene dobles enlaces (está insaturado). Laboratorios de control de alimentos en Colombia la usan para verificar adulteración de aceites comestibles. También sirve para confirmar la presencia de alquenos y alquinos en muestras industriales de petroquímica.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -3017,11 +3018,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Si hay exceso de X₂, el dihaloalqueno ya no se comporta distinto a un alqueno cualquiera: otra antiadición y listo, <strong>tetrahaloalcano</strong>. Ej: HC≡CH + 2Br₂ → CHBr₂−CHBr₂ (1,1,2,2-tetrabromoetano). Y ojo con esto para que no se confundan: el benceno NO reacciona con Br₂ sin catalizador — esa es justo la diferencia que marca la aromaticidad.</div>
           </div>
           <div class="mech-step" id="ms-ai-1-2">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="92" viewBox="0 0 200 92" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="30" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">×1 X₂ → trans-dihaloalqueno</text><text x="60" y="55" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">×2 X₂ → tetrahaloalcano</text><text x="60" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">triple enlace: más reactivo que el doble</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="92" viewBox="0 0 200 92" style="overflow:visible;display:block;margin:0 auto" ><text x="60" y="30" text-anchor="middle" font-size="9" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">×1 X₂ → trans-dihaloalqueno</text><text x="60" y="55" text-anchor="middle" font-size="9" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">×2 X₂ → tetrahaloalcano</text><text x="60" y="80" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">triple enlace: menos reactivo que el doble</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — Lo que deben recordar</div>
             <div class="mech-step-h">1 equivalente de X₂ da el dihaloalqueno trans, 2 equivalentes dan el tetrahaloalcano; es lo mismo que con alquenos, solo que acá se puede repetir</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">El triple enlace es <strong>más reactivo</strong> que el doble frente a electrófilos, porque tiene más densidad electrónica π disponible para atacar. La única diferencia real con los alquenos es que acá el alquino se puede adicionar <em>dos veces</em>. Dato para el laboratorio: el Br₂ decolora un alquino más rápido que el alqueno equivalente, así que si ven eso, ya saben qué está pasando.</div>
+            <div class="mech-step-txt">El triple enlace, a pesar de tener más electrones π, es en realidad <strong>menos reactivo</strong> que el doble frente a electrófilos: el carbono sp los sujeta con más fuerza y el catión vinílico intermedio es mucho menos estable que un catión alquílico. La diferencia real con los alquenos es que acá la adición se puede repetir <em>dos veces</em>.</div>
           </div>
         </div><!-- /mech-stepper -->
         <div class="mol-cmp">
@@ -3569,9 +3570,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
           <div class="rxn-extra-box calc">
             <span class="rxn-extra-ico">🧮</span>
-            <div><b>Para calcular:</b> ¿cuántos gramos de NaNH₂ (M=39 g/mol) se necesitan para desprotonar completamente 2.6 g de acetileno (HC≡CH, M=26 g/mol, un solo H terminal como en el ejemplo)?
+            <div><b>Para calcular:</b> ¿cuántos gramos de NaNH₂ (M=39 g/mol) se necesitan para desprotonar completamente 4.0 g de propino (HC≡C−CH₃, M=40 g/mol, un solo H terminal ácido)?
               <button class="calc-toggle" onclick="toggleCalc(this)">Ver respuesta</button>
-              <div class="calc-ans">2.6 g ÷ 26 g/mol = 0.1 mol de acetileno; 1:1 con NaNH₂ → 0.1 mol × 39 g/mol = 3.9 g. <strong>→ Respuesta: 3.9 g</strong></div>
+              <div class="calc-ans">4.0 g ÷ 40 g/mol = 0.1 mol de propino; 1:1 con NaNH₂ → 0.1 mol × 39 g/mol = 3.9 g. <strong>→ Respuesta: 3.9 g</strong></div>
             </div>
           </div>
         </div>
@@ -3803,7 +3804,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🇨🇴</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Con la bromación del benceno sale el <strong>bromobenceno</strong>, que es intermediario para fabricar <strong>colorantes azo</strong> y pigmentos textiles. La industria textil de Medellín — Inexmoda, Fabricato — usa colorantes que salen de esta reacción para teñir telas. Y el <strong>Bromadiol</strong>, el rodenticida que tanto se usa en fincas colombianas, también sale de una halogenación aromática.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Con la bromación del benceno sale el <strong>bromobenceno</strong>, que es intermediario para fabricar <strong>colorantes azo</strong> y pigmentos textiles. La industria textil de Medellín — Inexmoda, Fabricato — usa colorantes que salen de esta reacción para teñir telas.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -3991,7 +3992,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">👗</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Con la nitración del benceno y sus derivados salen <strong>nitrocompuestos</strong> que, reducidos a aminas aromáticas, son el punto de partida de <strong>colorantes industriales</strong> y de intermediarios usados en algunas rutas de síntesis de poliamidas como el <strong>nylon</strong> (la fibra que usan en medias, ropa deportiva y cuerdas de pesca). En la minería colombiana, el nitrotolueno (TNT) y otros nitroaromáticos se usan como explosivos para voladuras controladas. Y sí, productores colombianos de químicos industriales fabrican estas materias primas.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Con la nitración del benceno y sus derivados salen <strong>nitrocompuestos</strong> que, reducidos a aminas aromáticas, son el punto de partida de <strong>colorantes industriales</strong> y de intermediarios usados en algunas rutas de síntesis de poliamidas como el <strong>nylon</strong> (la fibra que usan en medias, ropa deportiva y cuerdas de pesca). En la minería colombiana, el trinitrotolueno (TNT) y otros nitroaromáticos se usan como explosivos para voladuras controladas. Y sí, productores colombianos de químicos industriales fabrican estas materias primas.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -5065,7 +5066,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">but-2-eno (más sustituido)</div>
           </div>
         </div>
-        <div class="rxn-cond">Necesitan: base fuerte voluminosa (KOH/EtOH o t-BuOK) · T° alta favorece E2 · H y X deben ser anti-periplanares (180°)</div>
+        <div class="rxn-cond">Necesitan: base fuerte (KOH/EtOH, NaOEt) — ojo: con base voluminosa (t-BuOK) el producto mayoritario se voltea a Hofmann · T° alta favorece E2 · H y X deben ser anti-periplanares (180°)</div>
         <div class="rxn-regla">📌 Zaitsev: el H se elimina del Cβ con menos H → sale el alqueno más sustituido (el más estable)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
@@ -6841,7 +6842,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">⚗️</span>
-  <div><strong>¿Para qué les sirve esto?</strong> El reactivo de Grignard es de las herramientas más versátiles que tienen para construir enlaces C−C nuevos. Con él se fabrica el <strong>ibuprofeno</strong> (uno de los analgésicos genéricos más vendidos acá en Colombia), se sintetizan <strong>vitaminas</strong> (retinol, tocoferol) y se producen <strong>perfumes sintéticos</strong> (linalool, nerol) derivados del aceite de palma africana que se cultiva en el país.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> El reactivo de Grignard es de las herramientas más versátiles que tienen para construir enlaces C−C nuevos. Con él se sintetizan <strong>vitaminas</strong> (retinol, tocoferol) y se producen <strong>perfumes sintéticos</strong> (linalool, nerol) derivados del aceite de palma africana que se cultiva en el país.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -6994,7 +6995,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🧴</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Si le hacen la condensación aldólica a la acetona, sale <strong>diacetona-alcohol</strong> y de ahí <strong>mesitil-óxido</strong> — disolventes que se usan en barnices y pinturas. Y a nivel industrial, la condensación aldólica del butiraldehído da <strong>2-etilhexanol</strong>, el plastificante del PVC — el que le da flexibilidad a las tuberías, mangueras y cueros sintéticos que se fabrican acá en Colombia.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Si le hacen la condensación aldólica a la acetona, sale <strong>diacetona-alcohol</strong> y de ahí <strong>mesitil-óxido</strong> — disolventes que se usan en barnices y pinturas. Y a nivel industrial, la condensación aldólica del butiraldehído da <strong>2-etilhexanol</strong>, la materia prima del plastificante del PVC (DEHP) — el que le da flexibilidad a las tuberías, mangueras y cueros sintéticos que se fabrican acá en Colombia.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -7141,7 +7142,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🔬</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Antes de tener espectrómetros, estas 3 pruebas eran (y en muchos laboratorios de colegio en Colombia siguen siendo) la forma más rápida de identificar un grupo funcional desconocido con solo mirar un cambio de color o un precipitado. Fehling todavía se usa en control de calidad para medir <strong>azúcares reductores</strong> en jugos y jarabes (la glucosa da Fehling positivo). Y la prueba del yodoformo distingue el etanol (da negativo) del isopropanol (da positivo) en control de alcoholes.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Antes de tener espectrómetros, estas 3 pruebas eran (y en muchos laboratorios de colegio en Colombia siguen siendo) la forma más rápida de identificar un grupo funcional desconocido con solo mirar un cambio de color o un precipitado. Fehling todavía se usa en control de calidad para medir <strong>azúcares reductores</strong> en jugos y jarabes (la glucosa da Fehling positivo). Y la prueba del yodoformo distingue el metanol y el propan-1-ol (negativos) del etanol y el isopropanol (positivos) en control de alcoholes.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -7159,7 +7160,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="quiz-sep"></div>
         <div class="quiz-lbl">🎯 Práctica rápida</div>
         <div class="quiz-q" data-qid="cb-4-q0">
-          <div class="quiz-q-text">¿Cuál de estas pruebas da POSITIVO con una cetona común (no metilcetona)?</div>
+          <div class="quiz-q-text">¿Cuál de estas pruebas da POSITIVO con una cetona común (Tollens y Fehling, no yodoformo)?</div>
           <div class="quiz-opts">
             <div class="quiz-opt" onclick="rxnAnswer(this,'cb-4-q0',false)"><span class="quiz-opt-icon">○</span> Tollens (espejo de plata)</div>
             <div class="quiz-opt" onclick="rxnAnswer(this,'cb-4-q0',false)"><span class="quiz-opt-icon">○</span> Fehling (precipitado rojo-ladrillo)</div>
@@ -7456,9 +7457,9 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-txt">Segunda vía, y esta la deben tener muy clara: el <strong>anillo aromático resiste</strong> al KMnO₄ ácido o básico — no le pasa nada. Pero la cadena lateral que cuelga de él sí se oxida, y se oxida completa, hasta −COOH, sin importar qué tan larga sea. ¿Truco de examen? Si les dan tolueno (C₆H₅CH₃) y KMnO₄/OH⁻/Δ, el resultado siempre va a ser ácido benzoico — no importa si la cadena tuviera 1 carbono o 5, el anillo queda intacto y la cadena termina en COOH.</div>
           </div>
           <div class="mech-step" id="ms-ac-1-2">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="85" viewBox="0 5 210 75" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="42" text-anchor="start" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="28" y1="42" x2="50" y2="42" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="54" y1="38" x2="74" y2="38" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="54" y1="42" x2="74" y2="42" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="54" y1="46" x2="74" y2="46" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="50" y="46" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><text x="80" y="42" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">N</text><text x="30" y="12" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">H₂O</text><circle cx="32.5" cy="8.8" r="1.9" fill="var(--c1t)"/><circle cx="27.5" cy="8.8" r="1.9" fill="var(--c1t)"/><path d="M30,18 Q45,21 50,36" fill="none" stroke="var(--c1t)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M64,40 Q68,28 80,34" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><circle cx="96" cy="30" r="6" fill="none" stroke="var(--c1t)" stroke-width="1.6"/><text x="96" y="33.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c1t)">-</text><text x="50" y="66" text-anchor="middle" font-size="7.8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂O ataca el C; el N⁻ se protona a NH</text><line x1="112" y1="42" x2="140" y2="42" stroke="var(--dimmer)" stroke-width="1.4" stroke-linecap="round"/><polygon points="140,42 132,38 132,46" fill="var(--dimmer)"/><text x="126" y="32" text-anchor="middle" font-size="7.8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H₂O/H⁺</text><text x="175" y="42" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH + NH₃</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="210" height="85" viewBox="0 5 210 75" style="overflow:visible;display:block;margin:0 auto" ><text x="15" y="42" text-anchor="start" font-size="9" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="28" y1="42" x2="50" y2="42" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="54" y1="38" x2="74" y2="38" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="54" y1="42" x2="74" y2="42" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><line x1="54" y1="46" x2="74" y2="46" stroke="var(--tx)" stroke-width="1.5" stroke-linecap="round"/><text x="50" y="46" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--tx);font-family:'JetBrains Mono',monospace">C</text><text x="80" y="42" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">N</text><text x="30" y="12" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--c1t);font-family:'JetBrains Mono',monospace">H₂O</text><circle cx="32.5" cy="8.8" r="1.9" fill="var(--c1t)"/><circle cx="27.5" cy="8.8" r="1.9" fill="var(--c1t)"/><path d="M30,18 Q45,21 50,36" fill="none" stroke="var(--c1t)" stroke-width="2.1" marker-end="url(#arrFull)"/><path d="M64,40 Q68,28 80,34" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><circle cx="96" cy="30" r="6" fill="none" stroke="var(--c1t)" stroke-width="1.6"/><text x="96" y="33.5" text-anchor="middle" font-size="8" font-weight="800" style="fill:var(--c1t)">-</text><text x="50" y="66" text-anchor="middle" font-size="7.8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">H₂O ataca el C; el N⁻ se protona a NH</text><line x1="112" y1="42" x2="140" y2="42" stroke="var(--dimmer)" stroke-width="1.4" stroke-linecap="round"/><polygon points="140,42 132,38 132,46" fill="var(--dimmer)"/><text x="126" y="32" text-anchor="middle" font-size="7.8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">H₂O/H⁺</text><text x="175" y="42" text-anchor="middle" font-size="9.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH + NH₄⁺</text></svg></div>
             <div class="mech-step-n">Paso 3 de 3 — La ruta que además les alarga la cadena</div>
-            <div class="mech-step-h">R−CN + H₂O / H⁺ (o OH⁻) → RCOOH + NH₃ (extiende la cadena en 1 carbono)</div>
+            <div class="mech-step-h">R−CN + H₂O / H⁺ (o OH⁻) → RCOOH + NH₄⁺ (extiende la cadena en 1 carbono)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
             <div class="mech-step-txt">Tercera vía, y esta tiene un truco escondido: la <strong>hidrólisis del nitrilo R−CN</strong>. En ácido o base acuosa con calor, el triple enlace C≡N se va hidrolizando — pasa por amida como intermedio y termina en ácido carboxílico más NH₃ (o NH₄⁺). Fíjense bien en la contabilidad de carbonos: el C que ya estaba en el CN se convierte en el COOH del producto, así que la cadena <em>crece en 1 carbono</em> respecto al haluro de partida. Por eso esta ruta (R−X + CN⁻ → R−CN → hidrólisis) es tan usada cuando necesitan alargar una cadena y no solo oxidarla.</div>
           </div>
@@ -7491,7 +7492,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mol-cmp-name">ácido aromático (anillo intacto)</div>
           </div>
         </div>
-        <div class="rxn-cond">Alcohol 1° + KMnO₄ fuerte → ácido (sin detenerse en aldehído) · Alquilbenceno: cadena lateral → COOH (anillo no se oxida) · R−CN + H₂O/H⁺ → RCOOH + NH₃</div>
+        <div class="rxn-cond">Alcohol 1° + KMnO₄ fuerte → ácido (sin detenerse en aldehído) · Alquilbenceno: cadena lateral → COOH (anillo no se oxida) · R−CN + H₂O/H⁺ → RCOOH + NH₄⁺</div>
         <div class="rxn-regla">📌 Con KMnO₄ fuerte el alcohol 1° siempre llega hasta RCOOH — si necesitan quedarse en RCHO, cambien a PCC</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
@@ -7683,7 +7684,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <div class="meq-side">
             <span class="meq-mol">R−<span class="bp">COOR′</span></span>
             <span class="meq-plus">+</span>
-            <span class="meq-reag">2 LiAlH₄</span>
+            <span class="meq-reag">LiAlH₄ (exceso)</span>
           </div>
           <div class="meq-arr">
             <span class="meq-cond">reducción total</span>
@@ -7705,7 +7706,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <span class="rxn-ex-nota">saponificación (jabón/base)</span>
         </div>
         <div class="rxn-ex" style="animation-delay:.18s">
-          <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + 2 LiAlH₄</span>
+          <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + LiAlH₄ (exceso)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + C₂H₅<span class="hn">OH</span></span>
           <span class="rxn-ex-nota">dos alcoholes (reducción total)</span>
@@ -8040,7 +8041,7 @@ Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
             <div class="mech-step-n">Paso 2 de 3 — Aquí toca forzar la mano</div>
             <div class="mech-step-h">RCONH₂ + H₂O/H⁺/Δ → RCOOH + NH₄⁺ (el N se protona y sale como NH₄⁺)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Como consecuencia directa del paso anterior, hidrolizar una amida no es tan fácil: necesitan <strong>condiciones drásticas</strong>, H⁺ concentrado y calor prolongado, justo porque el carbonilo está blindado por la resonancia. El truco es que el H⁺ protona el N, eso rompe la resonancia que lo protegía, y ahí sí el agua puede atacar y dar ácido más NH₄⁺. Ejemplo real y extremo de esto: las proteínas se hidrolizan con HCl concentrado a 110°C durante 24 horas — nada de esto es suave.</div>
+            <div class="mech-step-txt">Como consecuencia directa del paso anterior, hidrolizar una amida no es tan fácil: necesitan <strong>condiciones drásticas</strong>, H⁺ concentrado y calor prolongado, justo porque el carbonilo está blindado por la resonancia. El truco es que el H⁺ protona primero el <strong>oxígeno del carbonilo</strong> (eso rompe la resonancia que lo protegía y deja al carbono suficientemente electrofílico), el agua ataca ese carbono, y solo al final el nitrógeno se protona y sale como NH₄⁺. Ejemplo real y extremo de esto: las proteínas se hidrolizan con HCl concentrado a 110°C durante 24 horas — nada de esto es suave.</div>
           </div>
           <div class="mech-step" id="ms-dv-2-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="180" height="68" viewBox="0 10 180 58" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">RCONH₂</text><line x1="15" y1="30" x2="65" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="65,30 57,26 57,34" fill="var(--dimmer)"/><text x="45" y="45" text-anchor="middle" font-size="8.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">LiAlH₄ ×4[H]</text><text x="115" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCH₂NH₂</text><text x="90" y="58" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">único derivado que da AMINA (C=O → CH₂)</text></svg></div>
@@ -8340,7 +8341,7 @@ const QUIZ_FB={
   'al-3-q0':{ok:'Correcto — el ciclopropano tiene tensión angular extrema (60°) y reacciona por adición.',fail:'Ciclopentano y ciclohexano son estables y reaccionan por sustitución (SR) como alcanos.'},
   'al-4-q0':{ok:'Correcto — el enlace O−N del HNO₃ es fuerte y necesita mucho calor (400-450°C, fase vapor) para romperse homolíticamente.',fail:'La luz UV a temperatura ambiente basta para la halogenación, pero el enlace O−N del HNO₃ es más fuerte y necesita mucho más calor.'},
   'al-4-q1':{ok:'Correcto — a 400-450°C también se rompen enlaces C−C (craqueo), por eso salen nitroalcanos más cortos además del producto de sustitución directa.',fail:'No: el HNO₃ reacciona una sola vez por cadena de propagación, y el propano no tiene grupos −OH.'},
-  'aq-0-q0':{ok:'Correcto — Markovnikov: HCl, H va al CH=, Cl va al CH₃−CH< (más sustituido).',fail:'No: la adición anti-Markovnikov (Cl al C1) requiere radicales (peróxidos).'},
+  'aq-0-q0':{ok:'Correcto — Markovnikov: el H va al =CH₂ terminal (el que ya tiene más H) y el Cl al CH del medio, más sustituido → CH₃−CHCl−CH₃.',fail:'No: la adición anti-Markovnikov (Cl al C1) requiere radicales (peróxidos).'},
   'aq-0-q1':{ok:'Correcto — el halógeno (electrófilo X) se une al carbono con más sustituyentes (carbocatión más estable).',fail:'No: el H es el que va al C con más H (menos sustituido).'},
   'aq-1-q0':{ok:'Correcto — la decoloración del Br₂ (naranja→incoloro) indica reacción con el doble enlace.',fail:'No: el Br₂ es naranja/marrón, no verde. No hay gas en esta reacción.'},
   'aq-2-q0':{ok:'Correcto — el doble enlace se satura con H₂ → alcano.',fail:'Un alquino requeriría quitar H, no añadir. El alcohol requiere agua (hidratación), no H₂.'},
@@ -8350,8 +8351,8 @@ const QUIZ_FB={
   'aq-6-q0':{ok:'Correcto — dos monómeros bifuncionales (ácido + alcohol) se unen liberando H₂O en cada enlace: condensación.',fail:'Eteno y cloruro de vinilo tienen C=C: polimerizan por adición (radical), sin perder ningún átomo.'},
   'ai-0-q0':{ok:'Correcto — doble adición de HBr a HC≡CH: 1ª → CH₂=CHBr, 2ª → CH₃CHBr₂ (dihaluro geminal).',fail:'CH₂Br−CH₂Br es la doble halogenación con Br₂ (1,2-dibromo). El dihaluro geminal lleva ambos Br en el mismo C.'},
   'ai-1-q0':{ok:'Correcto — 1 mol X₂ → dihaloalqueno; 2 mol X₂ → tetrahaloalcano.',fail:'1 mol da el dihaloalqueno (×1). Para llegar al tetrahaloalcano se necesitan 2 moles.'},
-  'ai-2-q0':{ok:'Correcto — Lindlar es un Pd envenenado (CaCO₃ + acetato de Pb) que detiene en el cis-alqueno.',fail:'Para trans-alqueno se usa Na/NH₃(l) (Birch). Para ir directo a alcano se usa Ni sin envenenar.'},
-  'ai-3-q0':{ok:'Correcto — Markovnikov: OH al C2 (más sustituido) → enol → tautomeriza a cetona CH₃COCH₃.',fail:'El alcohol requeriría condiciones de hidratación sin tautomerización. El aldehído solo se forma con HC≡CH (etino terminal simétrico).'},
+  'ai-2-q0':{ok:'Correcto — Lindlar es un Pd envenenado (CaCO₃ + acetato de Pb) que detiene en el cis-alqueno.',fail:'Para trans-alqueno se usa Na/NH₃(l) (reducción con metal disuelto). Para ir directo a alcano se usa Ni sin envenenar.'},
+  'ai-3-q0':{ok:'Correcto — Markovnikov: OH al C2 (más sustituido) → enol → tautomeriza a cetona CH₃COCH₃.',fail:'La hidratación de un alquino nunca se queda en el enol — siempre tautomeriza. Un alcohol secundario sale de hidratar el propeno (alqueno), no el propino. El aldehído solo se forma con HC≡CH (etino terminal simétrico).'},
   'ai-4-q0':{ok:'Correcto — solo los alquinos terminales (H unido al C del triple enlace) son suficientemente ácidos.',fail:'El alquino interno no tiene H en el triple enlace. El etano (alcano) tiene pKa ≈ 50, mucho menos ácido.'},
   'ar-0-q0':{ok:'Correcto — el anillo aromático es muy estable. El catalizador genera un electrófilo más fuerte (X⁺) capaz de atacar.',fail:'No: el benceno es MENOS reactivo que los alquenos por la estabilización aromática. El FeBr₃ activa el Br₂, no dona H.'},
   'ar-1-q0':{ok:'Correcto — el H₂SO₄ genera NO₂⁺ (nitronio) a partir de HNO₃; el NO₂⁺ ataca el anillo.',fail:'NO₃⁻ es el anión nitrato, no el electrófilo. H₂SO₄ actúa como ácido para generar NO₂⁺.'},
@@ -8369,14 +8370,14 @@ const QUIZ_FB={
   'ao-2-q0':{ok:'Correcto — SO₂ y HCl son gases que burbujean y salen de la mezcla, dejando el RCl puro sin necesidad de separación adicional.',fail:'HCl sí puede clorar alcoholes (ROH + HCl → RCl + H₂O), pero el subproducto H₂O queda en solución y complica la purificación.'},
   'ao-3-q0':{ok:'Correcto — Le Chatelier: exceso de alcohol (o eliminación del H₂O producido) desplaza el equilibrio hacia la formación de más éster.',fail:'Añadir agua desplaza el equilibrio hacia los reactivos (más ácido + alcohol, no más éster). El calor favorece la eliminación pero no es lo más importante.'},
   /* Aminas */
-  'am-0-q0':{ok:'Correcto — el N tiene un par de electrones libres que dona al H⁺ del ácido: es una reacción ácido-base de Lewis.',fail:'SR es de alcanos; E2 involucra bases y halogenuros. La amina aquí actúa como base (Lewis).'},
+  'am-0-q0':{ok:'Correcto — el N tiene un par de electrones libres que capta el H⁺ del ácido: es una reacción ácido-base de Brønsted (transferencia de protón); la amina también es base de Lewis por ese par libre.',fail:'SR es de alcanos; E2 involucra bases y halogenuros. La amina aquí actúa como base.'},
   'am-1-q0':{ok:'Correcto — nitración (SEAr) para introducir −NO₂, luego reducción (H₂/Pt o Sn/HCl) para convertir −NO₂ → −NH₂.',fail:'La alquilación FC pone grupos alquilo, no aminos. La halogenación+amoniólisis es posible pero menos usada para arilaminas.'},
   'am-2-q0':{ok:'Correcto — el ion diazonio Ar−N₂⁺ pierde N₂ fácilmente a T ambiente, formando un fenol. En frío (0–5°C) se estabiliza lo suficiente para ser usado.',fail:'El NaNO₂ reacciona bien entre 0–5°C; más temperatura descompone el diazonio, no lo favorece.'},
   /* Carbonilo */
   'cb-0-q0':{ok:'Correcto — una cianohidrina tiene −OH y −CN en el mismo carbono (antes C=O), resultado de la adición de CN⁻ al carbonilo.',fail:'Un acetal tiene dos −OR en el mismo C (de la adición de 2 alcoholes). La cianohidrina es la adición de HCN.'},
   'cb-1-q0':{ok:'Correcto — la cetona tiene 2 sustituyentes en el C=O; la reducción (H⁻ del LiAlH₄) da un alcohol 2° con los mismos 2 grupos.',fail:'Alcohol primario viene de reducir un aldehído (solo 1 sustituyente en C=O). Ácido requiere oxidación, no reducción.'},
-  'cb-2-q0':{ok:'Correcto — RMgBr + cetona (R₂C=O): el reactivo de Grignard añade R′ al C del carbonilo → C queda con 3 grupos distintos → alcohol 3°.',fail:'Alcohol 1° viene de RMgBr + HCHO; alcohol 2° de RMgBr + aldehído (RCHO). Con cetona siempre es 3°.'},
-  'cb-3-q0':{ok:'Correcto — el enolato del primer CH₃CHO ataca el C=O del segundo → se forma 3-hidroxibutanal (β-hidroxialdehído).',fail:'El ácido butanoico requeriría oxidación. La acetona es el producto de la autocondensación de... cetonas simétricas (no CH₃CHO).'},
+  'cb-2-q0':{ok:'Correcto — RMgBr + cetona (R₂C=O): el reactivo de Grignard añade R′ al C del carbonilo → ese C queda con 3 grupos alquilo → alcohol 3°.',fail:'Alcohol 1° viene de RMgBr + HCHO; alcohol 2° de RMgBr + aldehído (RCHO). Con cetona siempre es 3°.'},
+  'cb-3-q0':{ok:'Correcto — el enolato del primer CH₃CHO ataca el C=O del segundo → se forma 3-hidroxibutanal (β-hidroxialdehído).',fail:'El ácido butanoico requeriría oxidación. La acetona no sale de una condensación aldólica: se obtiene oxidando propan-2-ol o hidratando propino.'},
   'cb-4-q0':{ok:'Correcto — sin H sobre el carbono carbonílico, la cetona no puede dar el hidruro que reduce Ag⁺/Cu²⁺: Tollens y Fehling dan negativo.',fail:'Una cetona (sin metilcetona) no tiene H sobre el carbonilo — no puede reducir Ag⁺ ni Cu²⁺. Ambas pruebas dan negativo.'},
   /* Ácidos */
   'ac-0-q0':{ok:'Correcto — el anión carboxilato (RCOO⁻) tiene la carga negativa repartida entre 2 O por resonancia → más estable que el alcóxido (RO⁻, sin resonancia).',fail:'La acidez depende de la estabilidad del anión conjugado, no del número de carbonos ni de la electronegatividad directa del C=O.'},
@@ -8384,7 +8385,7 @@ const QUIZ_FB={
   /* Derivados */
   'dv-0-q0':{ok:'Correcto — hidrólisis ácida: RCOOH + R′OH en equilibrio. Saponificación: RCOO⁻ formado es la base conjugada débil → no reacciona con R′OH → irreversible.',fail:'Es al revés: la saponificación usa NaOH, la hidrólisis ácida usa H₂O/H⁺. La reversibilidad es la diferencia clave.'},
   'dv-1-q0':{ok:'Correcto — Cl⁻ es el mejor grupo saliente de los derivados de AC. Sale más fácilmente que RCOO⁻, RO⁻ o NH₂⁻ → mayor reactividad.',fail:'El tamaño del Cl no bloquea el Nu; al contrario, es pequeño y accesible. La clave es que Cl⁻ es el mejor GS.'},
-  'dv-2-q0':{ok:'Correcto — LiAlH₄ reduce tanto el C=O de la amida como el enlace C−N → el producto es RCH₂NH₂ (amina, no alcohol).',fail:'El alcohol se formaría si se redujera un ácido o éster. La amida + LiAlH₄ da amina porque el N se queda en el producto.'},
+  'dv-2-q0':{ok:'Correcto — LiAlH₄ le quita el oxígeno al carbonilo (C=O → CH₂) y deja intacto el enlace C−N → el producto es RCH₂NH₂ (amina, no alcohol).',fail:'El alcohol se formaría si se redujera un ácido o éster. La amida + LiAlH₄ da amina porque el N se queda en el producto.'},
 };
 
 function rxnAnswer(btn,qid,correct){
@@ -8603,7 +8604,7 @@ const RM={
   etanamida:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'N',h:2}]}],
   metilamina:[{h:3,bn:1},{s:'N',h:2}],
   grignard:[{h:3,bn:1},{s:'Mg',h:0,bn:1},{s:'Br',h:0}],
-  carboxilatoetanoico:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'O',h:0}]}],
+  carboxilatoetanoico:[{h:3,bn:1},{h:0,bu:[{s:'O',h:0}],buBn:2,bd:[{s:'O⁻',h:0}]}],
   aldol:[{h:3,bn:1},{h:1,bn:1,bd:[{s:'O',h:1}]},{h:2,bn:1},{h:1,bu:[{s:'O',h:0}],buBn:2}],
   cianohidrina:[{h:3,bn:1},{h:1,bn:1,bu:[{s:'O',h:1}]},{s:'C',h:0,bn:3},{s:'N',h:0}],
   tbutilbromuro:[{h:3,bn:1},{h:0,bn:1,bu:[{s:'C',h:3}],bd:[{s:'Br',h:0}]},{h:3}],
@@ -8616,10 +8617,10 @@ const RM={
 const RF={
   'al-0':{
     r:{mol:'propano'},
-    eq:'CH₃−CH₂−CH₃ + Cl₂<br>──[hν / Δ]──→<br>CH₃−CH(Cl)−CH₃ + HCl',
-    p:{mol:'r2cloropropano'},
-    labels:['Reactivo: alcano (propano). Solo enlaces simples C−C','Condición: luz (hν) o calor (Δ) rompe Cl−Cl → 2 radicales Cl•','Producto: haloalcano (2-cloropropano). Cl sustituye un H en el C secundario'],
-    speaks:['Reactivo: propano. Los alcanos tienen solo enlaces simples carbono carbono y son poco reactivos.','Condición: halogenación radical. La luz ultravioleta o el calor rompen el Cloro 2 formando dos radicales Cloro punto altamente reactivos.','Producto: 2-cloropropano. El cloro sustituyó un hidrógeno del carbono secundario. Este proceso se llama sustitución radical.']
+    eq:'CH₃−CH₂−CH₃ + Br₂<br>──[hν / Δ]──→<br>CH₃−CH(Br)−CH₃ + HBr',
+    p:{mol:'r2bromopropano'},
+    labels:['Reactivo: alcano (propano). Solo enlaces simples C−C','Condición: luz (hν) o calor (Δ) rompe Br−Br → 2 radicales Br•','Producto: haloalcano (2-bromopropano). El Br₂ es muy selectivo y ataca casi solo el C secundario'],
+    speaks:['Reactivo: propano. Los alcanos tienen solo enlaces simples carbono carbono y son poco reactivos.','Condición: halogenación radical. La luz ultravioleta o el calor rompen el Bromo dos formando dos radicales Bromo punto altamente reactivos.','Producto: 2-bromopropano. El bromo sustituyó casi siempre el hidrógeno del carbono secundario, porque el Br₂ es muy selectivo. Este proceso se llama sustitución radical.']
   },
   'al-1':{
     r:{mol:'metano'},
@@ -8829,14 +8830,14 @@ const RF={
     eq:'CH₃CHO + HCN<br>──[CN⁻/H⁺]──→<br>CH₃−CH(OH)−CN',
     p:{mol:'cianohidrina'},
     labels:['Reactivo: aldehído (etanal CH₃CHO). El C del carbonilo es electrófilo (δ⁺)','Condición: HCN o KCN + H⁺. El CN⁻ (nucleófilo) ataca el C del carbonilo. Aldehídos más reactivos que cetonas','Producto: cianohidrina. Se amplía la cadena en 1 C → base para síntesis de aminoácidos'],
-    speaks:['Reactivo: etanal. El carbono del carbonilo tiene carga parcial positiva y atrae nucleófilos.','Condición: adición nucleofílica. El ion cianuro ataca el carbono del carbonilo. Los aldeídos reaccionan más fácilmente que las cetonas.','Producto: cianohidrina. La cadena creció un carbono. Esta reacción es clave para sintetizar aminoácidos.']
+    speaks:['Reactivo: etanal. El carbono del carbonilo tiene carga parcial positiva y atrae nucleófilos.','Condición: adición nucleofílica. El ion cianuro ataca el carbono del carbonilo. Los aldehídos reaccionan más fácilmente que las cetonas.','Producto: cianohidrina. La cadena creció un carbono. Esta reacción es clave para sintetizar aminoácidos.']
   },
   'cb-1':{
     r:{mol:'etanal'},
     eq:'CH₃CHO + NaBH₄<br>──[H₂O]──→<br>CH₃−CH₂−OH',
     p:{mol:'etanol'},
-    labels:['Reactivo: aldehído o cetona (etanal)','Condición: NaBH₄ o LiAlH₄ (o H₂/Ni). El H⁻ (hidruro) ataca el C del carbonilo como nucleófilo','Producto: alcohol. Aldeíhdo → alcohol 1°; cetona → alcohol 2°. Reacción de reducción'],
-    speaks:['Reactivo: etanal.','Condición: reducción con borohidruro de sodio. El ion hidruro actúa como nucleófilo atacando el carbono del carbonilo.','Producto: etanol. El carbonilo se redujo a alcohol. Los aldeídos dan alcoholes primarios y las cetonas dan alcoholes secundarios.']
+    labels:['Reactivo: aldehído o cetona (etanal)','Condición: NaBH₄ o LiAlH₄ (o H₂/Ni). El H⁻ (hidruro) ataca el C del carbonilo como nucleófilo','Producto: alcohol. Aldehído → alcohol 1°; cetona → alcohol 2°. Reacción de reducción'],
+    speaks:['Reactivo: etanal.','Condición: reducción con borohidruro de sodio. El ion hidruro actúa como nucleófilo atacando el carbono del carbonilo.','Producto: etanol. El carbonilo se redujo a alcohol. Los aldehídos dan alcoholes primarios y las cetonas dan alcoholes secundarios.']
   },
   'cb-2':{
     r:{mol:'grignard'},
@@ -8849,7 +8850,7 @@ const RF={
     r:{mol:'etanal'},
     eq:'2 CH₃CHO<br>──[NaOH/H₂O]──→<br>CH₃−CH(OH)−CH₂−CHO',
     p:{mol:'aldol'},
-    labels:['Reactivos: 2 moléculas de aldehído (etanal). Una actúa como nucleófilo y otra como electrófilo','Condición: base diluida (NaOH). Genera el enolato (α-C nucleofídico) que ataca el carbonilo del otro aldehído','Producto: β-hidroxialdehído (aldol = aldehído + alcohol). Puede deshidratarse → α,β-insaturado (enal)'],
+    labels:['Reactivos: 2 moléculas de aldehído (etanal). Una actúa como nucleófilo y otra como electrófilo','Condición: base diluida (NaOH). Genera el enolato (α-C nucleofílico) que ataca el carbonilo del otro aldehído','Producto: β-hidroxialdehído (aldol = aldehído + alcohol). Puede deshidratarse → α,β-insaturado (enal)'],
     speaks:['Reactivos: dos moléculas de etanal.','Condición: condensación aldólica con base diluida. Una molécula pierde un hidrógeno alfa y ataca como nucleófilo al carbonilo de la otra.','Producto: 3-hidroxibutanal. Tiene a la vez un grupo alcohol y un grupo aldehído. Puede deshidratarse para dar un compuesto insaturado.']
   },
   'ac-0':{
@@ -8957,6 +8958,12 @@ function mkMolCard(spec,colorIdx,name){
 // ─── ECUACIÓN COMPLETA CON TARJETAS (reactivo → condición → producto) ────────
 // Se usa tanto para el paso "Condición" del resumen de 3 pasos como para la
 // ecuación grande de arriba de cada tarjeta — mismo dibujo en los dos sitios.
+function leadingCoef(s){
+  // Coeficiente estequiométrico inicial ("2 CH₄" → "2"); se pierde si no se
+  // rescata aparte, porque la tarjeta dibuja una sola molécula de RM/benz.
+  const m=(s||'').match(/^\s*(\d+(?:[.,]\d+)?)\s+/);
+  return m?m[1]:'';
+}
 function mkReactionEq(id,d,arrW){
   if(!d||!d.eq)return '';
   const names=RXN_NAMES[id]||{};
@@ -8977,10 +8984,15 @@ function mkReactionEq(id,d,arrW){
   // (mol/benz): si quedó en texto de respaldo, ese "+ algo" YA viene
   // incluido en ese texto y sacarlo de nuevo lo duplicaba en pantalla.
   const extraR=rDrawn?splitExtra(eqParts[0]||''):'', extraP=pDrawn?splitExtra(eqParts[2]||''):'';
+  // Solo cuando la tarjeta es un dibujo real hace falta rescatar el
+  // coeficiente aparte: el texto de respaldo ya lo trae escrito tal cual.
+  const coefR=rDrawn?leadingCoef(eqParts[0]||''):'', coefP=pDrawn?leadingCoef(eqParts[2]||''):'';
   return '<div class="rxn-eq-row">'
+    +(coefR?`<span class="rxn-eq-coef">${coefR}</span>`:'')
     +(rCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[0]||'')}</div>`)
     +(extraR?`<div class="rxn-molcard-extra">${highlightBonds(extraR)}</div>`:'')
     +`<div style="flex-shrink:0">${arrowSvg}</div>`
+    +(coefP?`<span class="rxn-eq-coef">${coefP}</span>`:'')
     +(pCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[2]||'')}</div>`)
     +(extraP?`<div class="rxn-molcard-extra">${highlightBonds(extraP)}</div>`:'')
     +'</div>';

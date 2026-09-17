@@ -7,6 +7,119 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (62) — Auditoría química de `reacciones.html`: bug de coeficientes y 13 errores de contenido corregidos
+
+### Contexto
+Con el mismo criterio de la auditoría de `grupos.html` ("que revise la
+integridad... y que no hayan errores químicos ni alucinaciones"), la
+docente pidió aplicar la misma revisión a `reacciones.html`: las 42
+tarjetas de reacción, las 39 animaciones paso a paso (`RF`) y las 47
+preguntas de opción múltiple con su retroalimentación.
+
+### Resultado de la auditoría
+Encontró un bug de programación que borraba silenciosamente el
+coeficiente estequiométrico cuando un reactivo/producto se dibuja como
+tarjeta de molécula (afectaba 2 reacciones), un error químico de fondo
+en la tarjeta de halogenación de alcanos (mostraba Cl₂ mientras el
+resto de la misma tarjeta ya hablaba de Br₂), y una docena larga de
+imprecisiones dispersas en textos de mecanismo, retroalimentación de
+quiz y las cajas "¿Para qué sirve esto?".
+
+### Qué se corrigió (`reacciones.html`)
+
+**Bug de código — `mkReactionEq()` perdía el coeficiente:**
+Cuando una molécula se dibuja como tarjeta (no como texto plano), la
+función descartaba el número que la precedía en la ecuación (`2 CH₄`
+quedaba como `CH₄`). Se agregó `leadingCoef()` y un `<span
+class="rxn-eq-coef">` que antepone el coeficiente a la tarjeta. Afectaba
+a **al-2** (combustión: ahora sí se ve "2 CH₄ ... → 2 CO + 4 H₂O") y
+**cb-3** (condensación aldólica: "2 CH₃CHO ...").
+
+**Error químico de fondo — al-0 (halogenación de alcanos):**
+La ecuación central (`RF['al-0']`) usaba Cl₂ → 2-cloropropano, pero el
+resto de la tarjeta (comparación de moléculas, "Ojo con esto", "Para
+indagar") ya hablaba correctamente de Br₂ y de su alta selectividad por
+el carbono secundario. Se reescribió `RF['al-0']` para usar Br₂ →
+2-bromopropano de forma consistente en toda la tarjeta.
+
+**Errores de química en mecanismos y retroalimentación de quiz:**
+- `carboxilatoetanoico` (RM): el oxígeno del carboxilato no tenía carga
+  (`{s:'O'}`) pese a llamarse "etanoato/acetato" — corregido a `O⁻`.
+- ai-1, paso 3 del mecanismo: decía que el Br₂ decolora más rápido un
+  alquino que un alqueno — es al revés (el catión vinilo es menos
+  estable); se corrigió la etiqueta del SVG y el texto del mecanismo.
+- aq-4, paso 2: "carbonil ylide" con notación de carga C=O⁺−C⁻ no
+  corresponde al intermediario real; corregido a "óxido de carbonilo
+  (intermediario de Criegee)" con la notación correcta C=O⁺−O⁻.
+- dv-2, paso 2 del mecanismo: la hidrólisis ácida de amidas protona
+  primero el oxígeno del carbonilo, no el nitrógeno — orden corregido.
+- ac-1: la condición es ácida (H⁺), así que el producto de la reacción
+  ácido-base es NH₄⁺, no NH₃ — corregido en 3 lugares (etiqueta del
+  SVG, paso del mecanismo, resumen de condición).
+- hg-2, resumen de condición: afirmación incorrecta sobre base
+  voluminosa/Hofmann vs. Zaitsev — corregida.
+- am-0-q0: mezclaba las etiquetas Lewis/Brønsted para la misma reacción
+  — unificado a Brønsted (coherente con `RF`), mencionando aparte que
+  la amina también es base de Lewis.
+- Preguntas de quiz con texto de retroalimentación (ok/fail) incorrecto,
+  corregidas: `ai-2-q0` ("Birch" no aplica aquí → "reducción con metal
+  disuelto"), `cb-3-q0` (afirmación falsa sobre autocondensación de
+  acetona), `ai-3-q0` (la hidratación de alquinos siempre tautomeriza,
+  no hay excepción), `aq-0-q0` (regioquímica Markovnikov de H/Cl estaba
+  invertida), `cb-2-q0` ("3 grupos distintos" → "3 grupos alquilo").
+
+**Datos y afirmaciones de contexto ("¿Para qué sirve esto?") corregidos:**
+- aq-0: se quitó la afirmación falsa de que el cloruro de isopropilo se
+  usa para hacer ibuprofeno; se reemplazó por el proceso real
+  cumeno→fenol/acetona.
+- cb-2: se quitó la afirmación falsa de ibuprofeno vía Grignard.
+- ar-0: se quitó por completo una afirmación falsa sobre
+  Bromadiolona/halogenación aromática.
+- ar-1: "nitrotolueno (TNT)" → "trinitrotolueno (TNT)" (el TNT lleva 3
+  grupos nitro, no 1).
+- cb-3: "2-etilhexanol, el plastificante del PVC" → "la materia prima
+  del plastificante del PVC (DEHP)" (el 2-etilhexanol no es el
+  plastificante final).
+- ai-4, caja "Para calcular": el ejemplo usaba acetileno (que no tiene
+  "un solo H terminal", tiene dos) — se cambió a propino, con la
+  aritmética recalculada (mismo resultado final, 3.9 g).
+- aq-1: "Test/test de Baeyer" (badge, callout y pregunta de quiz)
+  corregido a "prueba del bromo" — el test de Baeyer es con KMnO₄ y ya
+  se usa correctamente en otra tarjeta (aq-5).
+- cb-4: se corrigió una afirmación invertida sobre el yodoformo con
+  etanol/isopropanol, y el texto de una pregunta de quiz que decía
+  "(no metilcetona)" cuando el criterio real es "(Tollens y Fehling, no
+  yodoformo)".
+
+**Ortografía:** "Aldeíhdo"→"Aldehído", "aldeídos"→"aldehídos" (2
+veces), "nucleofídico"→"nucleofílico", "alquenos e
+alquinos"→"alquenos y alquinos", "molozónida"→"molozónido",
+"ozónida"→"ozónido" (2 veces), "ozonoide"→"ozónido".
+
+### Verificación
+Con Playwright: las 39 entradas de `RF` construyen su ecuación vía
+`mkReactionEq` sin excepciones; se abrieron programáticamente las 39
+tarjetas de reacción y se comprobó que su ecuación (`.meq`) no contiene
+texto roto (`[object Object]`, `NaN`, `undefined` reales — se
+descartaron falsos positivos como "NaNH₂"/"NaNO₂", que son fórmulas
+químicas válidas); se respondieron las 47 preguntas de quiz y las 47
+mostraron su retroalimentación ok/fail correctamente; 0 errores de
+página/consola en todo el recorrido. Además, verificación puntual:
+al-0 ahora muestra Br en toda la tarjeta (ecuación, comparación de
+moléculas y paso 1 del mecanismo — confirmado también con captura de
+pantalla), y al-2/cb-3 ahora muestran el coeficiente "2" antes de la
+tarjeta de molécula correspondiente.
+
+### Pendiente / sin resolver
+No se revisó la geometría de las flechas de los ~40 SVGs de mecanismo
+dibujados a mano (127 pasos en total) más allá de 3 verificaciones
+puntuales — sería una auditoría aparte, más visual que química. Tampoco
+se revisaron las posiciones de sustituyentes de `mkBenzSVG` en anillos
+disustituidos (riesgo bajo: ninguna de las 39 animaciones `RF` usa un
+anillo con dos sustituyentes).
+
+---
+
 ## 2026-09-17 (61) — Auditoría química de `grupos.html`: 9 estructuras/nombres corregidos
 
 ### Contexto
