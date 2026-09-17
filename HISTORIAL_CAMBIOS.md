@@ -7,6 +7,54 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (51) — Éteres de juego.html ampliados a la misma cantidad que generador.html
+
+### Contexto
+Al revisar `generador.html` para la entrada anterior (50), se notó que
+esa herramienta ya tenía **29 éteres** cargados (contra los 11 que
+había en `juego.html`, incluyendo los 3 agregados el día anterior). La
+docente pidió ampliar `juego.html` a la misma cantidad.
+
+### Qué se hizo (`juego.html`)
+Se agregaron los **18 éteres que faltaban** para llegar a 29, tomando
+las estructuras ya existentes y probadas en `generador.html` (no se
+inventaron moléculas nuevas, se reutilizó lo que ya estaba ahí):
+
+**11 lineales/ramificados** (pregunta de opción múltiple, nombre
+IUPAC): 1-propoxibutano, 1-butoxibutano, 2-isopropoxipropano,
+1,2-dimetoxietano, 2-metoxi-2-metilpropano (MTBE), dimetoximetano,
+1-etoxihexano, 1-propoxihexano, 2-etoxipropano, 2-metoxibutano,
+2-etoxibutano.
+
+**7 cíclicos/aromáticos** (pregunta tipo "construir", ya que
+`generador.html` solo los tenía como dibujo — sin una estructura de
+grafo detrás — y el juego sí necesita esa estructura para poder validar
+que el estudiante la construya bien): oxirano, tetrahidrofurano (THF),
+tetrahidropirano (THP), metoxiciclopentano, etoxiciclohexano,
+etoxibenceno (fenetol) y propoxibenceno. Estos también se sumaron
+automáticamente al modo Constructor Molecular (88→95 moléculas), ya
+que "éteres" es una de sus familias.
+
+Quedó pendiente (a propósito, no es un olvido): no se agregaron los
+éteres con radical ramificado usando el nombre funcional clásico
+"(radical)(radical) éter" de la entrada 49/50 — esos 18 nuevos solo
+tienen pregunta de nombre IUPAC sustitutivo, igual que ya pasaba en
+`generador.html`.
+
+### Verificación
+Se comprobaron las 11 fórmulas moleculares lineales por script antes de
+tocar el juego, y las 7 estructuras cíclicas/aromáticas con el mismo
+método de auto-comparación por grafo usado en la ampliación de
+Hidrocarburos (todas coinciden consigo mismas y con la fórmula
+esperada). Luego, con el juego real cargado: las 1,156 preguntas totales
+pasan la auditoría de consistencia respuesta/opciones sin problemas, y
+se simularon 30 partidas por nivel en Hidrocarburos/Oxigenados/
+Nitrogenados/Completo — cero errores. Se actualizaron los números de la
+portada: Oxigenados (339→357), Juego Completo y "En el banco"
+(1138→1156), Constructor Molecular (88→95 moléculas).
+
+---
+
 ## 2026-09-16 (50) — Nombre funcional clásico de éteres también en generador.html
 
 ### Contexto
