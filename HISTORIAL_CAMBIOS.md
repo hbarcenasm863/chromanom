@@ -7,6 +7,80 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (67) — Regla de cetonas con anillos + corrige colores MDEC en Grupos y Juego (más de 350 fragmentos)
+
+### Contexto
+La docente notó que en Cetonas (Grupos) no existía la regla de nombre
+funcional/clásico "(radical)-il (radical)-il cetona" cuando alguno de
+los radicales es un anillo (ciclohexilo) o un anillo aromático (fenilo)
+— sí existía para Éteres, pero nunca se agregó para Cetonas. Pidió esa
+regla, luego pidió agregar ejercicios del Juego con este tipo de
+nomenclatura, y de paso avisó "ten cuidado con los colores del MDEC" al
+ver la captura de la regla nueva.
+
+### Regla nueva (`grupos.html`, Cetonas)
+Se agregó la 6ª regla de Cetonas: "Nombre funcional: (radical)-il
+(radical)-il cetona", con dos moléculas de ejemplo nuevas dibujadas a
+mano (el motor de cadenas lineales no puede dibujar anillos):
+- **ciclohexil metil cetona** (= 1-ciclohexiletan-1-ona): anillo de
+  ciclohexano unido por enlace sencillo a un carbonilo externo + metilo.
+- **fenil metil cetona** (acetofenona): mismo esquema con anillo
+  aromático.
+
+La regla explica que el anillo se nombra como cualquier otro radical
+(orden alfabético, prefijo "di-" si son iguales) aunque no sea cadena
+abierta, y que el C=O queda *fuera* del anillo (a diferencia de
+ciclohexanona, donde el C=O es parte del anillo).
+
+### Auditoría de colores MDEC ("ten cuidado con los colores")
+Revisando esa captura se confirmó que el mismo bug corregido en el
+generador (sesión 64) también existía, sin corregir, en `grupos.html`
+y en `juego.html`:
+- El fragmento "an" (insaturación) estaba etiquetado como cadena
+  (verde) en vez de insaturación (naranja) — **94 casos en
+  `grupos.html`**, **85 + 21 + 3 + 43 = 152 casos en `juego.html`**
+  (repartidos entre las tres formas en que el juego guarda una
+  pregunta: `bd`/`parts` codificados en base64, y los tipos
+  `drag`/`write` con la clase en texto plano).
+- La cadena fusionada con "-ano" sin separar la insaturación (ej.
+  "butan" como una sola pieza) — **5 casos en `grupos.html`**, **45 en
+  `juego.html`**.
+- El sufijo de cetona partido en dos piezas ("-on" + "a" en vez de
+  "-ona") — **11 casos en `grupos.html`**, **24 en `juego.html`**
+  (cetonas y amidas).
+- La vocal de enlace de nitrilos ("o" antes de "-nitrilo") mal
+  etiquetada como cadena — **1 caso en `grupos.html`**, **13 en
+  `juego.html`**.
+
+Se corrigieron todos con scripts (mismo criterio que la sesión 64),
+verificando en cada caso que el nombre reconstruido no cambiara y que
+la página cargara sin errores.
+
+### Ejercicios nuevos (`juego.html`)
+Se agregaron 3 preguntas nuevas (bloque `QBANK_CETONAS_CLASICO`), con
+dos moléculas nuevas dibujadas a mano (mismo esquema que en Grupos):
+- 2 de opción múltiple: "¿Cuál es el nombre funcional (clásico) de
+  esta cetona?" para ciclohexil metil cetona y fenil metil cetona
+  (con distractores de orden alfabético invertido y contracción "di-"
+  incorrecta).
+- 1 de escribir el nombre: el mismo compuesto cíclico pero pidiendo el
+  nombre IUPAC sustitutivo (1-ciclohexiletan-1-ona), aceptando también
+  el nombre funcional como respuesta válida.
+
+### Verificación
+Con Playwright: las 401→ahora 1168 preguntas del banco cargan sin
+errores; se jugaron las 3 preguntas nuevas de principio a fin
+(capturas de pantalla) confirmando que la estructura se dibuja bien,
+que la respuesta correcta se acepta y que el desglose final muestra
+los colores correctos (incluida la píldora "an" ahora en naranja). Se
+recorrieron 9 grupos de `grupos.html` sin errores de consola.
+
+### Pendiente
+Ninguno. Ni `grupos.html` ni `juego.html` necesitan paso de despliegue
+aparte de este push a `main`.
+
+---
+
 ## 2026-09-17 (66) — Grupos: agranda TODAS las cajas (no solo las de las reglas) y las moléculas de los ejercicios
 
 ### Contexto
