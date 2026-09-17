@@ -7,6 +7,51 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-17 (56) — KMnO₄/K₂Cr₂O₇ como oxidante sobre la flecha, no como "+ reactivo", igual que se enseña en clase
+
+### Contexto
+La docente corrigió el cambio de la entrada anterior: en clase, la
+oxidación con KMnO₄ (alcohol 1° → ácido, cadena lateral de
+alquilbenceno → ácido benzoico) se enseña con el KMnO₄ escrito
+**sobre la flecha**, porque no se revisan los subproductos inorgánicos
+(MnO₂, KOH, etc.) — no como un reactivo "+" aparte. El ejemplo
+concreto que reportó fue la oxidación de la cadena lateral del
+tolueno (`rxn_124`), pero explicó que el criterio es general para ese
+tipo de oxidaciones fuertes.
+
+### Qué se hizo (`generador.html`)
+Se movió el oxidante de `reactivo` a `condicion` (sin "+", junto con
+la temperatura) en las tres reacciones que aún lo mostraban como
+reactivo consumido:
+- `rxn_27` (butan-1-ol → ácido butanoico, KMnO₄/H⁺): esta entrada la
+  había tocado la sesión anterior en sentido contrario (moví el
+  rótulo "oxidante fuerte" pero dejé KMnO₄ como "+ reactivo"); se
+  revierte a `condicion:'KMnO₄ / H⁺, Δ (oxidante fuerte)'`.
+- `rxn_28` (propan-2-ol → acetona, K₂Cr₂O₇/H₂SO₄): mismo criterio,
+  ahora `condicion:'K₂Cr₂O₇ / H₂SO₄, Δ'`.
+- `rxn_124` (tolueno → ácido benzoico, KMnO₄/H⁺): la reportada en la
+  captura; ahora `condicion:'KMnO₄, H⁺, Δ'`, igual que su gemela
+  `rxn_58` (la misma reacción, con otro tipo de pregunta), que ya
+  tenía el estilo correcto.
+
+**Lo que NO se tocó, a propósito:** las dos preguntas de la prueba de
+Baeyer (`rxn_115`, `rxn_117` — KMnO₄ frío y diluido sobre un alqueno)
+siguen mostrando "+ KMnO₄ (frío, diluido)" como reactivo, porque ahí
+el precipitado de MnO₂ pardo y la decoloración del permanganato SON
+el resultado que se está enseñando (está explícito en `regla`), no un
+subproducto que se pueda ignorar.
+
+### Verificación
+Se revisó que no quedara ninguna otra entrada con KMnO₄/K₂Cr₂O₇ como
+"+ reactivo" fuera de esas dos pruebas de Baeyer, y se repitió la
+generación de las 145 preguntas (mismo resultado que antes: 139/145
+con estructura dibujada, cero errores de consola).
+
+### Pendiente / sin resolver
+Ninguno.
+
+---
+
 ## 2026-09-17 (55) — Generador: las flechas de Reacciones se veían cortadas en el celular; PCC/CH₂Cl₂ mal etiquetados
 
 ### Contexto
