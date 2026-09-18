@@ -894,7 +894,7 @@ function mkDevSVG(ch){
   }
   for(const n of nds){
     const x=n.x+ox,y=n.y+oy;
-    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
   }
   sv+='</svg>';return sv;
 }

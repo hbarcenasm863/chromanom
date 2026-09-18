@@ -8537,7 +8537,7 @@ function mkDevSVG(ch,hiSet){
   }
   for(const n of nds){
     const x=n.x+ox,y=n.y+oy;
-    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
   }
   sv+='</svg>';return sv;
 }
@@ -8568,13 +8568,13 @@ function mkBenzSVG(subs){
   for(let i=0;i<6;i++){
     if(subPos.has(i))continue;
     const lx=cx+(r+14)*Math.cos(ang(i)),ly=cy+(r+14)*Math.sin(ang(i));
-    sv+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="11" fill="#0d2d42">H</text>`;
+    sv+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'JetBrains Mono',monospace" font-size="11" fill="#0d2d42">H</text>`;
   }
   for(const sub of subs){
     const lx=cx+outR*Math.cos(ang(sub.pos)),ly=cy+outR*Math.sin(ang(sub.pos));
     const col=sub.color||'#0d2d42';
     sv+=`<line x1="${vx(sub.pos).toFixed(1)}" y1="${vy(sub.pos).toFixed(1)}" x2="${(cx+(r+8)*Math.cos(ang(sub.pos))).toFixed(1)}" y2="${(cy+(r+8)*Math.sin(ang(sub.pos))).toFixed(1)}" stroke="${C}" stroke-width="1.6"/>`;
-    sv+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="11" font-weight="700" fill="${col}">${sub.label}</text>`;
+    sv+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="700" fill="${col}">${sub.label}</text>`;
   }
   sv+='</svg>';return sv;
 }

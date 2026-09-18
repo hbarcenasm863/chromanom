@@ -7,6 +7,74 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-18 (68) — Auditoría UX/UI para adolescentes + unifica tipografía y agranda el texto por defecto
+
+### Contexto
+La docente pidió una auditoría UX/UI enfocada en adolescentes de secundaria
+en Colombia sobre todo el sitio (portal, juego y páginas de contenido),
+solo informe, sin cambios. Se hizo con tres subagentes en paralelo (portal,
+juego, páginas de contenido) y se entregó un informe con hallazgos por
+severidad. De esos hallazgos, la docente pidió avanzar ya con dos:
+**unificar la tipografía** entre páginas y **agrandar el tamaño de texto
+por defecto**, porque "siempre empieza muy pequeña y es necesario hacer
+zoom".
+
+### Diagnóstico
+El sitio tenía tres sistemas tipográficos mezclados:
+- `index.html`, `juego.html`, `teoria.html`: fuentes de sistema (Trebuchet
+  MS / Georgia / Courier New) sin cargar ninguna fuente web.
+- `grupos.html`, `reacciones.html`: Fraunces (títulos) + Outfit (cuerpo) +
+  JetBrains Mono (fórmulas/código), cargadas desde Google Fonts.
+- `referencia.html`: solo Inter, sin relación con ninguno de los dos
+  sistemas anteriores.
+
+Además, el control de tamaño de texto (widget "A− / A+", `text-zoom.js`)
+ya existía y funcionaba bien en teoria/grupos/reacciones/referencia, pero
+**faltaba por completo en `index.html` y `juego.html`** — las dos páginas
+más usadas —, y su valor por defecto (100%, el tamaño normal del
+navegador) resultaba pequeño para el público real: muchos textos de la
+interfaz están en 0.65–0.8rem.
+
+### Cambios
+- **Tipografía unificada en las 6 páginas** (`index.html`, `juego.html`,
+  `teoria.html`, `grupos.html`, `reacciones.html`, `referencia.html`):
+  ahora todas cargan y usan Fraunces (títulos) + Outfit (cuerpo) +
+  JetBrains Mono (fórmulas, etiquetas de átomos en las moléculas
+  dibujadas). Se dejó intacto el popup de impresión de `teoria.html`
+  (usa su propio HTML/CSS aparte para una ventana nueva, es contenido para
+  imprimir, no pantalla) y `generador.html` (no estaba dentro del alcance
+  de la auditoría pedida).
+- **Widget de tamaño de texto agregado a `index.html` y `juego.html`**
+  (antes solo en las otras 4 páginas) — mismo mecanismo compartido
+  (`text-zoom.js`, guarda la preferencia en `localStorage` bajo la misma
+  clave, por lo que el ajuste del estudiante se respeta entre páginas).
+- **Tamaño de texto por defecto subido de 100% a 115%** en `text-zoom.js`
+  (afecta a las 6 páginas ahora que todas lo cargan). Solo cambia el punto
+  de partida cuando no hay preferencia guardada — a quien ya haya ajustado
+  su tamaño con el widget no se le toca nada.
+
+### Verificación
+Con Playwright (servidor local + Chromium, viewport de celular 390px) se
+cargaron las 6 páginas sin errores de JavaScript; se confirmó que las 6
+aplican `font-family: Outfit` al body, que el widget de tamaño de texto
+aparece en las 6 (mostrando 115% por defecto), y que `html{font-size}`
+queda en 18.4px (= 115% de 16px) en todas. Se revisaron capturas de
+pantalla de portal, juego, teoría y referencia sin desbordes ni ruptura de
+diseño visibles.
+
+### Pendiente
+Ninguno de estos archivos (`index.html`, `juego.html`, `teoria.html`,
+`grupos.html`, `reacciones.html`, `referencia.html`, `text-zoom.js`)
+necesita paso de despliegue aparte de este push a `main` — se sirven
+directo por GitHub Pages.
+
+El resto de los hallazgos del informe de auditoría (mensajes tipo examen
+antes de jugar, el timer que no se pausa durante las pistas, botones
+táctiles pequeños, falta de sonido, etc.) quedaron solo documentados,
+pendientes de que la docente decida cuáles abordar.
+
+---
+
 ## 2026-09-17 (67) — Regla de cetonas con anillos + corrige colores MDEC en Grupos y Juego (más de 350 fragmentos)
 
 ### Contexto

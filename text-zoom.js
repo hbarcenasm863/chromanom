@@ -6,7 +6,7 @@
    de inmediato (antes de este archivo) para evitar parpadeo de tamaño. */
 (function(){
   var KEY='chromanom_text_zoom';
-  var MIN=90, MAX=160, STEP=10, DEFAULT=100;
+  var MIN=90, MAX=160, STEP=10, DEFAULT=115;
 
   function clamp(v){ return Math.min(MAX, Math.max(MIN, v)); }
   function getZoom(){

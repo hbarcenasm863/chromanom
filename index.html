@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
 <meta name="theme-color" content="#0d4a73">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -10,6 +11,9 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>Nomenclatura Orgánica Fácil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ── PALETA DEL LOGO ──
    Azul libro:    #1a6ea8
@@ -51,7 +55,7 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--tx);
-  font-family: 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+  font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
   min-height:100vh;
   overflow-x:hidden;
 }
@@ -170,7 +174,7 @@ header{
   margin-bottom:12px;align-items:flex-end;
 }
 .np{display:flex;flex-direction:column;align-items:center;gap:5px}
-.nw{font-family:'Courier New',monospace;font-size:1.3rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
+.nw{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
 .nw.r{color:var(--c1);background:var(--c1b)}
 .nw.c{color:var(--c2);background:var(--c2b)}
 .nw.i{color:var(--c3);background:var(--c3b)}
@@ -229,7 +233,7 @@ header{
 .pri-tbl td{padding:7px 11px;border-bottom:1px solid #e0eff8;vertical-align:middle}
 .pri-tbl tr:nth-child(even) td{background:#f3f9fe}
 .pri-tbl tr:hover td{background:var(--azul-l);cursor:default}
-.num-badge{font-family:'Courier New',monospace;font-size:.7rem;font-weight:700;background:var(--azul-l);border:1px solid var(--brd);padding:1px 7px;border-radius:100px;color:var(--azul-d)}
+.num-badge{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;background:var(--azul-l);border:1px solid var(--brd);padding:1px 7px;border-radius:100px;color:var(--azul-d)}
 
 /* ── TUTORIAL TOUR ── */
 .tour-ov{position:fixed;inset:0;background:rgba(10,30,50,.82);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(3px)}
@@ -253,7 +257,7 @@ header{
 .tour-chip.vd{color:var(--verde-d);border-color:var(--verde);background:var(--verde-l)}
 .tour-chip.or{color:#a04000;border-color:var(--naranja);background:var(--naranja-l)}
 .tour-name-demo{display:flex;flex-wrap:wrap;gap:3px;background:#f0f7ff;border:1.5px solid var(--brd);border-radius:10px;padding:12px 16px;margin:12px 0;align-items:flex-end}
-.tnw{font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;padding:2px 6px;border-radius:5px;line-height:1}
+.tnw{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;padding:2px 6px;border-radius:5px;line-height:1}
 .tnw.r{color:var(--c1);background:var(--c1b)}
 .tnw.c{color:var(--c2);background:var(--c2b)}
 .tnw.i{color:var(--c3);background:var(--c3b)}
@@ -351,7 +355,7 @@ footer span{color:var(--naranja);font-weight:700}
 .rs.r1{border-color:var(--azul);background:#e6f2ff;color:var(--azul-d)}
 .rs.r2{border-color:var(--verde);background:#e6f7f2;color:#006b4f}
 .rs.r3{border-color:var(--naranja);background:#fff3e6;color:#a04000}
-.rs-n{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;flex-shrink:0;line-height:1}
+.rs-n{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;flex-shrink:0;line-height:1}
 .rs-title{font-size:.88rem;font-weight:800;margin-bottom:2px}
 .rs-desc{font-size:.72rem;line-height:1.45;opacity:.8}
 .rs-arr{font-size:1.1rem;color:var(--dim);flex-shrink:0;font-weight:700}
@@ -585,23 +589,23 @@ footer span{color:var(--naranja);font-weight:700}
     <table class="pri-tbl">
       <thead><tr><th>#</th><th>Grupo funcional</th><th>Fórmula</th><th>Sufijo IUPAC</th><th>Como sustituyente</th></tr></thead>
       <tbody>
-        <tr><td><span class="num-badge">1</span></td><td style="font-weight:700;color:var(--c4t)">Carboxilatos (sales)</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COO⁻</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">ácido -carboxilato / -oato</td><td style="font-size:.78rem;color:var(--tx)">carboxilato-</td></tr>
-        <tr><td><span class="num-badge">2</span></td><td style="font-weight:700;color:var(--c4t)">Ácidos carboxílicos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOH</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">ácido -carboxílico / ácido -oico</td><td style="font-size:.78rem;color:var(--tx)">carboxi-</td></tr>
-        <tr><td><span class="num-badge">3</span></td><td style="font-weight:700;color:var(--c4t)">Ésteres</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COOR'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carboxilato de R / -oato de R</td><td style="font-size:.78rem;color:var(--tx)">(R)oxicarbonil-</td></tr>
-        <tr><td><span class="num-badge">4</span></td><td style="font-weight:700;color:var(--c4t)">Haluros de ácido</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−COX</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">haluro de -carbonilo / haluro de -oilo</td><td style="font-size:.78rem;color:var(--tx)">halocarbonil-</td></tr>
-        <tr><td><span class="num-badge">5</span></td><td style="font-weight:700;color:var(--c4t)">Amidas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CONH₂</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carboxamida / -amida</td><td style="font-size:.78rem;color:var(--tx)">carbamoil-</td></tr>
-        <tr><td><span class="num-badge">6</span></td><td style="font-weight:700;color:var(--azul)">Nitrilos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−C≡N</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carbonitrilo / -nitrilo</td><td style="font-size:.78rem;color:var(--tx)">ciano-</td></tr>
-        <tr><td><span class="num-badge">7</span></td><td style="font-weight:700;color:var(--naranja)">Aldehídos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CHO</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carbaldehído / -al</td><td style="font-size:.78rem;color:var(--tx)">formil- / oxo-</td></tr>
-        <tr><td><span class="num-badge">8</span></td><td style="font-weight:700;color:var(--naranja)">Cetonas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−CO−R'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ona</td><td style="font-size:.78rem;color:var(--tx)">oxo-</td></tr>
-        <tr><td><span class="num-badge">9</span></td><td style="font-weight:700;color:var(--tx)">Alcoholes</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−OH</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ol</td><td style="font-size:.78rem;color:var(--tx)">hidroxi-</td></tr>
-        <tr><td><span class="num-badge">10</span></td><td style="font-weight:700;color:var(--tx)">Tioles</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−SH</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-tiol</td><td style="font-size:.78rem;color:var(--tx)">sulfanil- (no mercapto)</td></tr>
-        <tr><td><span class="num-badge">11</span></td><td style="font-weight:700;color:var(--tx)">Aminas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−NH₂</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-amina</td><td style="font-size:.78rem;color:var(--tx)">amino-</td></tr>
-        <tr><td><span class="num-badge">12</span></td><td style="font-weight:700;color:var(--tx)">Iminas</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R₂C=NR</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-imina</td><td style="font-size:.78rem;color:var(--tx)">imino-</td></tr>
-        <tr><td><span class="num-badge">13</span></td><td style="font-weight:700;color:var(--tx)">Éteres</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−O−R'</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">alcoxi- (sust.) / éter (func.)</td><td style="font-size:.78rem;color:var(--tx)">(R)oxi-</td></tr>
-        <tr><td><span class="num-badge">14</span></td><td style="font-weight:700;color:var(--tx)">Haloderivados</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">R−X</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">haluro de …-ilo</td><td style="font-size:.78rem;color:var(--tx)">flúor/cloro/bromo/iodo-</td></tr>
-        <tr><td><span class="num-badge">15</span></td><td style="font-weight:700;color:var(--azul)">Alquinos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">−C≡C−</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ino</td><td style="font-size:.78rem;color:var(--tx)">…-inil-</td></tr>
-        <tr><td><span class="num-badge">16</span></td><td style="font-weight:700;color:var(--azul)">Alquenos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">−C=C−</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-eno</td><td style="font-size:.78rem;color:var(--tx)">…-enil-</td></tr>
-        <tr><td><span class="num-badge">17</span></td><td style="font-weight:700;color:var(--tx)">Alcanos</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--dim)">−C−C−</td><td style="font-family:'Courier New',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ano</td><td style="font-size:.78rem;color:var(--tx)">…-il-</td></tr>
+        <tr><td><span class="num-badge">1</span></td><td style="font-weight:700;color:var(--c4t)">Carboxilatos (sales)</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−COO⁻</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">ácido -carboxilato / -oato</td><td style="font-size:.78rem;color:var(--tx)">carboxilato-</td></tr>
+        <tr><td><span class="num-badge">2</span></td><td style="font-weight:700;color:var(--c4t)">Ácidos carboxílicos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−COOH</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">ácido -carboxílico / ácido -oico</td><td style="font-size:.78rem;color:var(--tx)">carboxi-</td></tr>
+        <tr><td><span class="num-badge">3</span></td><td style="font-weight:700;color:var(--c4t)">Ésteres</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−COOR'</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carboxilato de R / -oato de R</td><td style="font-size:.78rem;color:var(--tx)">(R)oxicarbonil-</td></tr>
+        <tr><td><span class="num-badge">4</span></td><td style="font-weight:700;color:var(--c4t)">Haluros de ácido</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−COX</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">haluro de -carbonilo / haluro de -oilo</td><td style="font-size:.78rem;color:var(--tx)">halocarbonil-</td></tr>
+        <tr><td><span class="num-badge">5</span></td><td style="font-weight:700;color:var(--c4t)">Amidas</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−CONH₂</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carboxamida / -amida</td><td style="font-size:.78rem;color:var(--tx)">carbamoil-</td></tr>
+        <tr><td><span class="num-badge">6</span></td><td style="font-weight:700;color:var(--azul)">Nitrilos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−C≡N</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carbonitrilo / -nitrilo</td><td style="font-size:.78rem;color:var(--tx)">ciano-</td></tr>
+        <tr><td><span class="num-badge">7</span></td><td style="font-weight:700;color:var(--naranja)">Aldehídos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−CHO</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-carbaldehído / -al</td><td style="font-size:.78rem;color:var(--tx)">formil- / oxo-</td></tr>
+        <tr><td><span class="num-badge">8</span></td><td style="font-weight:700;color:var(--naranja)">Cetonas</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−CO−R'</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ona</td><td style="font-size:.78rem;color:var(--tx)">oxo-</td></tr>
+        <tr><td><span class="num-badge">9</span></td><td style="font-weight:700;color:var(--tx)">Alcoholes</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−OH</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ol</td><td style="font-size:.78rem;color:var(--tx)">hidroxi-</td></tr>
+        <tr><td><span class="num-badge">10</span></td><td style="font-weight:700;color:var(--tx)">Tioles</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−SH</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-tiol</td><td style="font-size:.78rem;color:var(--tx)">sulfanil- (no mercapto)</td></tr>
+        <tr><td><span class="num-badge">11</span></td><td style="font-weight:700;color:var(--tx)">Aminas</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−NH₂</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-amina</td><td style="font-size:.78rem;color:var(--tx)">amino-</td></tr>
+        <tr><td><span class="num-badge">12</span></td><td style="font-weight:700;color:var(--tx)">Iminas</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R₂C=NR</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-imina</td><td style="font-size:.78rem;color:var(--tx)">imino-</td></tr>
+        <tr><td><span class="num-badge">13</span></td><td style="font-weight:700;color:var(--tx)">Éteres</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−O−R'</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">alcoxi- (sust.) / éter (func.)</td><td style="font-size:.78rem;color:var(--tx)">(R)oxi-</td></tr>
+        <tr><td><span class="num-badge">14</span></td><td style="font-weight:700;color:var(--tx)">Haloderivados</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">R−X</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">haluro de …-ilo</td><td style="font-size:.78rem;color:var(--tx)">flúor/cloro/bromo/iodo-</td></tr>
+        <tr><td><span class="num-badge">15</span></td><td style="font-weight:700;color:var(--azul)">Alquinos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">−C≡C−</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ino</td><td style="font-size:.78rem;color:var(--tx)">…-inil-</td></tr>
+        <tr><td><span class="num-badge">16</span></td><td style="font-weight:700;color:var(--azul)">Alquenos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">−C=C−</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-eno</td><td style="font-size:.78rem;color:var(--tx)">…-enil-</td></tr>
+        <tr><td><span class="num-badge">17</span></td><td style="font-weight:700;color:var(--tx)">Alcanos</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--dim)">−C−C−</td><td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--c4t);font-weight:700">-ano</td><td style="font-size:.78rem;color:var(--tx)">…-il-</td></tr>
       </tbody>
     </table>
   </div>
@@ -785,6 +789,7 @@ function tourRender(){
 </script>
 
 <script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
