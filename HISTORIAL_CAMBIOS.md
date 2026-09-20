@@ -7,6 +7,45 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (70) — Referencia: dibuja la fórmula semidesarrollada real en los 7 grupos con carbonilo
+
+### Contexto
+La docente mandó una foto de su cuaderno mostrando cómo quiere las
+fórmulas "semidesarrolladas" de la tarjeta 68/69: no el texto plano
+"R−CHO", sino el dibujo con el O arriba de la C unido por doble enlace
+(dos líneas) y los grupos R a los lados unidos por guiones — igual a como
+se enseña en clase (ej. su ejemplo de Aldehído: R−C(=O)−H con el O
+arriba).
+
+### Cambios (`referencia.html`)
+En los 7 grupos funcionales que tienen carbonilo (Carboxilatos,
+Ácidos carboxílicos, Ésteres, Haluros de ácido, Amidas, Aldehídos,
+Cetonas), la fórmula de la tarjeta pasó de texto plano (`<code>R−CHO</code>`)
+a un pequeño SVG dibujado a mano: R — C — (H/OH/R'/X/NH₂/O⁻/O−R'), con
+el O en doble enlace (dos líneas verticales) arriba de la C, resaltado en
+rosa (el color de "grupo funcional" del sitio). Los otros 10 grupos
+(Alcoholes, Éteres, Aminas, Tioles, Haloderivados, Nitrilos, Iminas,
+Alquenos, Alquinos, Alcanos) se dejaron con su notación plana actual
+(R−OH, R−NH₂, etc.) porque no tienen carbonilo que dibujar — coincide con
+el propio ejemplo de la docente, que también dejó "Alcohol R-OH" sin
+desarrollar.
+
+Se agregó una regla de impresión para que estos dibujos se vean
+compactos y sigan cabiendo en la hoja A4 apaisada de una sola página,
+igual que el resto de la tabla.
+
+### Verificación
+Con Playwright: capturas de pantalla (ampliadas sobre la cuadrícula de
+grupos) en modo normal y en modo impresión (`emulateMedia('print')`) —
+los 7 dibujos se ven correctamente con el doble enlace arriba, sin
+desbordarse ni romper el diseño de las tarjetas, sin errores de
+JavaScript.
+
+### Pendiente
+Ninguno. `referencia.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-20 (69) — Quita la tabla de prioridad del portal y la vuelve tarjetas en Referencia
 
 ### Contexto
