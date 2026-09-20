@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (73) — Referencia: la C del carbonilo también va en rosa (grupo funcional)
+
+### Contexto
+La docente aceptó la mejora opcional que había dejado señalada el
+auditor en la entrada 72: que la C del carbonilo se pintara del mismo
+rosa que la O, para que "grupo funcional" se vea como una sola unidad
+visual (C=O) y coincida con la convención del sitio de que todo el
+sufijo (ácido…oico, …al, …ona) se considera grupo funcional.
+
+### Cambios (`referencia.html`)
+En los 7 dibujos semidesarrollados de grupos con carbonilo, la "C" pasó
+de la clase `.gs-a` (neutra) a `.gs-o` (rosa, `var(--c4t)`) — la misma
+clase que ya usaba la O. Las líneas del doble enlace se dejaron neutras,
+igual que el resto de los enlaces del sitio (el color solo marca átomos/
+fragmentos, no los enlaces).
+
+### Verificación
+Con Playwright: capturas en pantalla y en modo impresión — la C y la O se
+ven ahora como una sola unidad rosa, la R sigue en azul, sin errores de
+consola ni problemas de tamaño en impresión (la C ya usa la clase que
+tenía el ajuste de tamaño corregido en la entrada 72).
+
+### Pendiente
+Ninguno. `referencia.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-20 (72) — Corrige tamaño de la "R" al imprimir (hallazgo de la auditoría)
 
 ### Contexto
