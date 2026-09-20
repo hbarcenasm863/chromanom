@@ -7,6 +7,48 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (74) — Juego: foco de teclado visible + botones "físicos" al presionar
+
+### Contexto
+Siguiendo con los hallazgos de la auditoría UX/UI (entradas 68-72), la
+docente eligió avanzar con dos de las opciones de mejora propuestas:
+(3) foco de teclado visible + `aria-label` en los botones del juego y del
+constructor molecular (la auditoría había encontrado cero `aria-label` en
+todo `juego.html`), y (4) que las opciones de respuesta y los botones de
+la caja de herramientas del constructor "se hundan" un poco al tocarlos/
+hacer clic, en vez de solo cambiar de color.
+
+### Cambios (`juego.html`)
+- **Foco de teclado**: se agregó una regla global `:focus-visible{outline:3px
+  solid var(--c4);outline-offset:2px}` que aplica a todo el juego —
+  se activa solo al navegar con teclado (Tab), no al hacer clic con mouse,
+  así no cambia la apariencia para quien juega con mouse/táctil.
+- **Botón físico**: se agregó una sombra inferior en reposo a las
+  opciones de respuesta (`.mc-opt`), los botones de "identificar partes"
+  (`.id-btn`), el botón "Verificar →" (`.btn-check`) y los botones del
+  constructor molecular (`.bld-btn`); al presionarlos, el botón baja
+  2-3px y la sombra desaparece, simulando que se hunde.
+- **`aria-label` en la caja de herramientas del constructor molecular**:
+  los 14 botones (átomos C/O/N/Cl/Br/F, enlaces sencillo/doble/triple,
+  anillos benceno/ciclohexano/ciclopentano/ciclobutano, borrar/deshacer/
+  limpiar) ahora tienen `aria-label` además del `title` que ya tenían
+  algunos — antes varios solo tenían el símbolo o ícono sin ningún texto
+  accesible (los de enlace no tenían ni `title`).
+
+### Verificación
+Con Playwright: se creó un botón de prueba con la clase `.mc-opt` y se
+navegó a él con la tecla Tab real (no `.focus()` por JS, que no activa
+`:focus-visible` de forma confiable) — se confirmó visualmente el aro
+rosa de foco en la captura de pantalla. Se verificó con mouse real
+(`mouse.down()` sostenido) que la sombra se reduce y el botón se
+desplaza hacia abajo durante la pulsación. Se recorrió el flujo real del
+juego (portada → modo libre → nivel) sin errores de consola.
+
+### Pendiente
+Ninguno. `juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-20 (73) — Referencia: la C del carbonilo también va en rosa (grupo funcional)
 
 ### Contexto

@@ -41,6 +41,18 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100%;overflow-x:hidden}
 
+/* ── ACCESIBILIDAD: foco visible al navegar con teclado ── */
+:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
+
+/* ── BOTÓN FÍSICO: las opciones de respuesta y la caja de herramientas
+   del constructor se "hunden" un poco al tocarlas, no solo cambian de color ── */
+.mc-opt,.id-btn,.btn-check{box-shadow:0 3px 0 rgba(13,45,66,.14)}
+.mc-opt:active:not(:disabled),.id-btn:active:not(:disabled),.btn-check:active:not(:disabled){
+  transform:translateY(3px);box-shadow:0 0 0 rgba(13,45,66,0);
+}
+.bld-btn{box-shadow:0 2px 0 rgba(13,45,66,.14)}
+.bld-btn:active{transform:translateY(2px);box-shadow:0 0 0 rgba(13,45,66,0)}
+
 /* ── SCREENS ── */
 .screen{display:none;min-height:100%}
 .screen.active{display:flex;flex-direction:column}
@@ -3658,27 +3670,27 @@ function buildBuild(q){
   return tutHtml+`<div class="build-wrap">
     <div class="build-toolbar">
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Átomo:</span>
-      <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')">C</button>
-      <button class="bld-btn bE" id="bld-t-O" onclick="bldSetTool('O')">O</button>
-      <button class="bld-btn bN" id="bld-t-N" onclick="bldSetTool('N')">N</button>
-      <button class="bld-btn bCl" id="bld-t-Cl" onclick="bldSetTool('Cl')">Cl</button>
-      <button class="bld-btn bBr" id="bld-t-Br" onclick="bldSetTool('Br')">Br</button>
-      <button class="bld-btn bF" id="bld-t-F" onclick="bldSetTool('F')">F</button>
+      <button class="bld-btn" id="bld-t-C" onclick="bldSetTool('C')" aria-label="Carbono" title="Carbono">C</button>
+      <button class="bld-btn bE" id="bld-t-O" onclick="bldSetTool('O')" aria-label="Oxígeno" title="Oxígeno">O</button>
+      <button class="bld-btn bN" id="bld-t-N" onclick="bldSetTool('N')" aria-label="Nitrógeno" title="Nitrógeno">N</button>
+      <button class="bld-btn bCl" id="bld-t-Cl" onclick="bldSetTool('Cl')" aria-label="Cloro" title="Cloro">Cl</button>
+      <button class="bld-btn bBr" id="bld-t-Br" onclick="bldSetTool('Br')" aria-label="Bromo" title="Bromo">Br</button>
+      <button class="bld-btn bF" id="bld-t-F" onclick="bldSetTool('F')" aria-label="Flúor" title="Flúor">F</button>
       <div class="bld-sep"></div>
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Enlace:</span>
-      <button class="bld-btn" id="bld-t-bond1" onclick="bldSetTool('bond1')">─</button>
-      <button class="bld-btn" id="bld-t-bond2" onclick="bldSetTool('bond2')">═</button>
-      <button class="bld-btn" id="bld-t-bond3" onclick="bldSetTool('bond3')">≡</button>
+      <button class="bld-btn" id="bld-t-bond1" onclick="bldSetTool('bond1')" aria-label="Enlace sencillo" title="Enlace sencillo">─</button>
+      <button class="bld-btn" id="bld-t-bond2" onclick="bldSetTool('bond2')" aria-label="Enlace doble" title="Enlace doble">═</button>
+      <button class="bld-btn" id="bld-t-bond3" onclick="bldSetTool('bond3')" aria-label="Enlace triple" title="Enlace triple">≡</button>
       <div class="bld-sep"></div>
       <span style="font-size:.62rem;font-weight:700;color:var(--dim)">Anillo:</span>
-      <button class="bld-btn" id="bld-t-rBz" onclick="bldSetTool('rBz')" title="Benceno — anillo deslocalizado" style="font-size:.65rem">⬡Bz</button>
-      <button class="bld-btn" id="bld-t-rC6" onclick="bldSetTool('rC6')" title="Ciclohexano" style="font-size:.65rem">⬡C6</button>
-      <button class="bld-btn" id="bld-t-rC5" onclick="bldSetTool('rC5')" title="Ciclopentano" style="font-size:.65rem">⬠C5</button>
-      <button class="bld-btn" id="bld-t-rC4" onclick="bldSetTool('rC4')" title="Ciclobutano" style="font-size:.65rem">⬜C4</button>
+      <button class="bld-btn" id="bld-t-rBz" onclick="bldSetTool('rBz')" aria-label="Benceno — anillo deslocalizado" title="Benceno — anillo deslocalizado" style="font-size:.65rem">⬡Bz</button>
+      <button class="bld-btn" id="bld-t-rC6" onclick="bldSetTool('rC6')" aria-label="Ciclohexano" title="Ciclohexano" style="font-size:.65rem">⬡C6</button>
+      <button class="bld-btn" id="bld-t-rC5" onclick="bldSetTool('rC5')" aria-label="Ciclopentano" title="Ciclopentano" style="font-size:.65rem">⬠C5</button>
+      <button class="bld-btn" id="bld-t-rC4" onclick="bldSetTool('rC4')" aria-label="Ciclobutano" title="Ciclobutano" style="font-size:.65rem">⬜C4</button>
       <span style="flex:1"></span>
-      <button class="bld-btn erase-btn" id="bld-t-del" onclick="bldSetTool('del')" title="Borrar átomo">🗑</button>
-      <button class="bld-btn" onclick="bldUndo()" title="Deshacer (Ctrl+Z)">↩</button>
-      <button class="bld-btn" onclick="bldClearAll()" title="Limpiar todo">✕</button>
+      <button class="bld-btn erase-btn" id="bld-t-del" onclick="bldSetTool('del')" aria-label="Borrar átomo" title="Borrar átomo">🗑</button>
+      <button class="bld-btn" onclick="bldUndo()" aria-label="Deshacer" title="Deshacer (Ctrl+Z)">↩</button>
+      <button class="bld-btn" onclick="bldClearAll()" aria-label="Limpiar todo" title="Limpiar todo">✕</button>
     </div>
     <svg id="bld-svg" class="build-canvas" onclick="bldClickBg(event)"></svg>
     <div style="font-size:.67rem;color:var(--dim);padding:5px 10px;background:var(--surf);border:1.5px solid var(--brd);border-top:none;border-radius:0 0 var(--r) var(--r)">
