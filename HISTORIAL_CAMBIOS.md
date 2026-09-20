@@ -7,6 +7,41 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (72) — Corrige tamaño de la "R" al imprimir (hallazgo de la auditoría)
+
+### Contexto
+Se pidió verificar con un auditor independiente (subagente) los 7 dibujos
+semidesarrollados agregados en las entradas 70-71. El auditor confirmó
+que las 7 fórmulas son químicamente correctas y que el color de la "R"
+(azul/teal) y del O del carbonilo (rosa) coinciden con el esquema MDEC
+del sitio, pero encontró un bug real: la regla de impresión que achica el
+texto de los átomos (`.gs-a`, `.gs-o` → 11px) no incluía la clase nueva
+`.gs-r`, así que al imprimir/guardar PDF la "R"/"R'" se veía más grande
+(15px) que el resto de los átomos — desproporcionado.
+
+También sugirió, como mejora opcional (no bug), que la C del carbonilo
+podría pintarse de rosa igual que la O, para alinearse con la convención
+del sitio de que todo el sufijo (ácido…oico, …al, …ona) es "grupo
+funcional". Queda pendiente de que la docente decida si quiere ese
+cambio — por ahora la C se dejó neutra.
+
+### Cambios (`referencia.html`)
+Se agregó `.gs-r` a la regla de impresión de línea ~388, quedando
+`.grupo-struct .gs-a,.grupo-struct .gs-o,.grupo-struct .gs-r{font-size:11px}`.
+
+### Verificación
+Con Playwright en modo impresión (`emulateMedia('print')`): se confirmó
+por código (`getComputedStyle` → `11px`) y con captura de pantalla que
+las 9 apariciones de "R"/"R'" ya se ven del mismo tamaño que el resto de
+los átomos.
+
+### Pendiente
+Decisión de la docente sobre si pintar también la C del carbonilo de
+rosa (mejora opcional del auditor, no aplicada). `referencia.html` se
+sirve directo por GitHub Pages, sin paso de despliegue aparte.
+
+---
+
 ## 2026-09-20 (71) — Referencia: la "R" de sustituyente usa el azul MDEC real
 
 ### Contexto
