@@ -207,6 +207,26 @@ code{
 /* Suffix column highlight */
 .suf{color:var(--c4t);font-family:var(--mono);font-size:.68rem;font-weight:700}
 
+/* ── GRUPOS FUNCIONALES (tarjetas semi-desarrolladas) ── */
+.grupos-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:1px;
+  background:var(--brd);
+}
+.grupo-card{
+  background:var(--surf);
+  padding:10px 13px 11px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.grupo-top{display:flex;align-items:center;gap:8px}
+.grupo-top .pri-n{font-size:.7rem;padding:2px 8px}
+.grupo-name{font-weight:800;font-size:.85rem;color:var(--tx);line-height:1.25}
+.grupo-formula{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--dim)}
+.grupo-field{display:flex;flex-wrap:wrap;column-gap:6px;row-gap:0;align-items:baseline;font-size:.74rem;line-height:1.4}
+.grupo-lbl{text-transform:uppercase;letter-spacing:.06em;font-size:.58rem;font-weight:800;color:var(--dim);opacity:.6;flex-shrink:0}
+.grupo-sub{color:var(--dim);font-weight:600}
+
 /* ── SUBSTITUENTS GRID ── */
 .subs-grid{
   display:grid;
@@ -264,6 +284,7 @@ code{
 @media(max-width:680px){
   .grid-top,.grid-bottom{grid-template-columns:1fr}
   .subs-grid{grid-template-columns:repeat(2,1fr)}
+  .grupos-grid{grid-template-columns:1fr}
   .ref-title{font-size:1.1rem}
 }
 
@@ -347,6 +368,15 @@ code{
 
   /* Substituents 3-col stays */
   .subs-grid{grid-template-columns:repeat(3,1fr)}
+
+  /* Grupos funcionales: vuelve a 3 columnas compactas para que quepa en la hoja */
+  .grupos-grid{grid-template-columns:repeat(3,1fr);page-break-inside:avoid}
+  .grupo-card{padding:3px 7px;gap:1px;page-break-inside:avoid}
+  .grupo-top .pri-n{font-size:.58rem;padding:1px 5px}
+  .grupo-name{font-size:.68rem}
+  .grupo-formula{font-size:.64rem}
+  .grupo-field{font-size:.58rem}
+  .grupo-lbl{min-width:44px}
 
   /* Rules 2-col for print space */
   .rules-cols{
@@ -455,36 +485,25 @@ code{
       <span class="sec-num c4">4</span>
       Grupos funcionales (orden de prioridad IUPAC ↓)
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Grupo funcional</th>
-          <th>Fórmula</th>
-          <th>Sufijo IUPAC</th>
-          <th>Como sustituyente</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td><span class="pri-n">1</span></td><td><strong>Carboxilatos (sales)</strong></td><td><code>R−COO⁻</code></td><td><span class="suf">ácido -carboxilato / -oato</span></td><td>carboxilato-</td></tr>
-        <tr><td><span class="pri-n">2</span></td><td><strong>Ácidos carboxílicos</strong></td><td><code>R−COOH</code></td><td><span class="suf">ácido -carboxílico / ácido -oico</span></td><td>carboxi-</td></tr>
-        <tr><td><span class="pri-n">3</span></td><td><strong>Ésteres</strong></td><td><code>R−COOR'</code></td><td><span class="suf">-carboxilato de R / -oato de R</span></td><td>(R)oxicarbonil-</td></tr>
-        <tr><td><span class="pri-n">4</span></td><td><strong>Haluros de ácido</strong></td><td><code>R−COX</code></td><td><span class="suf">haluro de -carbonilo / haluro de -oilo</span></td><td>halocarbonil-</td></tr>
-        <tr><td><span class="pri-n">5</span></td><td><strong>Amidas</strong></td><td><code>R−CONH₂</code></td><td><span class="suf">-carboxamida / -amida</span></td><td>carbamoil-</td></tr>
-        <tr><td><span class="pri-n">6</span></td><td><strong>Nitrilos</strong></td><td><code>R−C≡N</code></td><td><span class="suf">-carbonitrilo / -nitrilo</span></td><td>ciano-</td></tr>
-        <tr><td><span class="pri-n">7</span></td><td><strong>Aldehídos</strong></td><td><code>R−CHO</code></td><td><span class="suf">-carbaldehído / -al</span></td><td>formil- / oxo-</td></tr>
-        <tr><td><span class="pri-n">8</span></td><td><strong>Cetonas</strong></td><td><code>R−CO−R'</code></td><td><span class="suf">-ona</span></td><td>oxo-</td></tr>
-        <tr><td><span class="pri-n">9</span></td><td><strong>Alcoholes</strong></td><td><code>R−OH</code></td><td><span class="suf">-ol</span></td><td>hidroxi-</td></tr>
-        <tr><td><span class="pri-n">10</span></td><td><strong>Tioles</strong></td><td><code>R−SH</code></td><td><span class="suf">-tiol</span></td><td>sulfanil-</td></tr>
-        <tr><td><span class="pri-n">11</span></td><td><strong>Aminas</strong></td><td><code>R−NH₂</code></td><td><span class="suf">-amina</span></td><td>amino-</td></tr>
-        <tr><td><span class="pri-n">12</span></td><td><strong>Iminas</strong></td><td><code>R₂C=NR</code></td><td><span class="suf">-imina</span></td><td>imino-</td></tr>
-        <tr><td><span class="pri-n">13</span></td><td><strong>Éteres</strong></td><td><code>R−O−R'</code></td><td><span class="suf">alcoxi- (sust.)</span></td><td>(R)oxi-</td></tr>
-        <tr><td><span class="pri-n">14</span></td><td><strong>Haloderivados</strong></td><td><code>R−X</code></td><td><span class="suf">haluro de …-ilo</span></td><td>flúor/cloro/bromo/yodo-</td></tr>
-        <tr><td><span class="pri-n">15</span></td><td><strong>Alquinos</strong></td><td><code>−C≡C−</code></td><td><span class="suf">-ino</span></td><td>…-inil-</td></tr>
-        <tr><td><span class="pri-n">16</span></td><td><strong>Alquenos</strong></td><td><code>−C=C−</code></td><td><span class="suf">-eno</span></td><td>…-enil-</td></tr>
-        <tr><td><span class="pri-n">17</span></td><td><strong>Alcanos</strong></td><td><code>−C−C−</code></td><td><span class="suf">-ano</span></td><td>…-il-</td></tr>
-      </tbody>
-    </table>
+    <div class="grupos-grid">
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">1</span><span class="grupo-name">Carboxilatos (sales)</span></div><code class="grupo-formula">R−COO⁻</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">ácido -carboxilato / -oato</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carboxilato-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">2</span><span class="grupo-name">Ácidos carboxílicos</span></div><code class="grupo-formula">R−COOH</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">ácido -carboxílico / ácido -oico</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carboxi-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">3</span><span class="grupo-name">Ésteres</span></div><code class="grupo-formula">R−COOR'</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carboxilato de R / -oato de R</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">(R)oxicarbonil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">4</span><span class="grupo-name">Haluros de ácido</span></div><code class="grupo-formula">R−COX</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">haluro de -carbonilo / haluro de -oilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">halocarbonil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">5</span><span class="grupo-name">Amidas</span></div><code class="grupo-formula">R−CONH₂</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carboxamida / -amida</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carbamoil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">6</span><span class="grupo-name">Nitrilos</span></div><code class="grupo-formula">R−C≡N</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carbonitrilo / -nitrilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">ciano-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">7</span><span class="grupo-name">Aldehídos</span></div><code class="grupo-formula">R−CHO</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carbaldehído / -al</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">formil- / oxo-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">8</span><span class="grupo-name">Cetonas</span></div><code class="grupo-formula">R−CO−R'</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ona</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">oxo-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">9</span><span class="grupo-name">Alcoholes</span></div><code class="grupo-formula">R−OH</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ol</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">hidroxi-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">10</span><span class="grupo-name">Tioles</span></div><code class="grupo-formula">R−SH</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-tiol</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">sulfanil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">11</span><span class="grupo-name">Aminas</span></div><code class="grupo-formula">R−NH₂</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-amina</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">amino-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">12</span><span class="grupo-name">Iminas</span></div><code class="grupo-formula">R₂C=NR</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-imina</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">imino-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">13</span><span class="grupo-name">Éteres</span></div><code class="grupo-formula">R−O−R'</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">alcoxi- (sust.)</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">(R)oxi-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">14</span><span class="grupo-name">Haloderivados</span></div><code class="grupo-formula">R−X</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">haluro de …-ilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">flúor/cloro/bromo/yodo-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">15</span><span class="grupo-name">Alquinos</span></div><code class="grupo-formula">−C≡C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ino</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-inil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">16</span><span class="grupo-name">Alquenos</span></div><code class="grupo-formula">−C=C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-eno</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-enil-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">17</span><span class="grupo-name">Alcanos</span></div><code class="grupo-formula">−C−C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ano</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-il-</span></div></div>
+    </div>
   </div>
 
   <!-- BOTTOM GRID: Section 4 + Section 5 -->

@@ -7,6 +7,50 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (69) — Quita la tabla de prioridad del portal y la vuelve tarjetas en Referencia
+
+### Contexto
+Siguiendo con los hallazgos de la auditoría UX/UI de la sesión anterior
+(entrada 68), la docente pidió avanzar con el hallazgo "importante #5":
+la tabla de prioridad de 17 grupos funcionales no debería estar en el
+portal (`index.html`) — ya existe la misma tabla en `referencia.html`,
+así que estaba duplicada y hacía sentir el portal "de examen" antes de
+jugar. Además pidió que en `referencia.html` esa tabla dejara de verse
+condensada (una fila angosta por grupo, texto de 0.78rem) y pasara a un
+formato "semidesarrollado" — más espacioso — para que los estudiantes
+encuentren la referencia que buscan más fácil.
+
+### Cambios
+- **`index.html`**: se eliminó por completo la sección "Tabla de
+  prioridad de grupos funcionales" (tarjeta `.pri-card` con la tabla
+  `.pri-tbl`, ~30 líneas de HTML) y su CSS asociado (`.pri-card`,
+  `.pri-tbl`, `.num-badge`), que solo se usaban ahí. La tarjeta "Hoja de
+  referencia" que ya enlazaba a `referencia.html` para este contenido se
+  dejó igual.
+- **`referencia.html`**: la sección "Grupos funcionales (orden de
+  prioridad IUPAC)" pasó de una tabla de 5 columnas muy angosta a una
+  cuadrícula de 17 tarjetas (`.grupos-grid` / `.grupo-card`), una por
+  grupo, con el número de prioridad, el nombre, la fórmula en fuente
+  monoespaciada más grande, y el sufijo/sustituyente con etiqueta
+  ("SUFIJO", "SUSTITUYENTE") en vez de columnas de tabla sin marcar. En
+  pantalla se acomodan solas en 2–5 columnas según el ancho (1 columna en
+  celular). Para impresión/PDF se agregó una regla que las vuelve a
+  compactar a 3 columnas con texto pequeño, para que seguir cabiendo en
+  una sola hoja A4 apaisada, igual que antes.
+
+### Verificación
+Con Playwright: se revisaron capturas de `index.html` (portal ya sin la
+tabla, con el pie de página fluyendo bien después de la tarjeta "Hoja de
+referencia") y `referencia.html` en escritorio, celular, y en modo
+impresión (`emulateMedia('print')`) — las tarjetas se ven espaciosas y
+fáciles de escanear en pantalla, y compactas sin desbordarse en la vista
+de impresión. Sin errores de JavaScript en ninguna página.
+
+### Pendiente
+Ninguno. Ambos archivos se sirven directo por GitHub Pages.
+
+---
+
 ## 2026-09-18 (68) — Auditoría UX/UI para adolescentes + unifica tipografía y agranda el texto por defecto
 
 ### Contexto
