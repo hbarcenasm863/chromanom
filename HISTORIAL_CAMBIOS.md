@@ -7,6 +7,38 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-20 (71) — Referencia: la "R" de sustituyente usa el azul MDEC real
+
+### Contexto
+Sobre el dibujo semidesarrollado agregado en la entrada 70, la docente
+pidió que la "R" (el sustituyente genérico a la izquierda del carbonilo,
+y la "R'" cuando aparece del otro lado en ésteres/cetonas) usara el color
+azul/teal real que el sitio ya usa para "sustituyente" en su esquema de 4
+colores (el mismo de la sección "Sustituyentes comunes" de la misma
+página), en vez del gris-azulado neutro que tenía.
+
+### Cambios (`referencia.html`)
+Se agregó la clase `.gs-r` (`color: var(--c1t)`, el teal oscuro de
+"ramificación/sustituyente") y se aplicó a las 9 apariciones de "R"/"R'"
+en los 7 dibujos SVG de grupos con carbonilo. El resto de los átomos (C,
+H, X, OH, NH₂, O⁻, la O intermedia del éster) se dejó sin cambios,
+pendiente de lo que confirme la auditoría en curso sobre si la C del
+carbonilo también debería llevar el rosa de "grupo funcional".
+
+### Verificación
+Con Playwright: captura de la cuadrícula de grupos confirmando que las 9
+"R"/"R'" se ven en azul/teal, sin errores de consola. Se lanzó además un
+auditor independiente (subagente) para verificar la corrección química de
+las 7 fórmulas y el uso completo del código de colores MDEC — su reporte
+se registrará en una entrada aparte si arroja cambios adicionales.
+
+### Pendiente
+Resultado de la auditoría en curso (corrección química de las 7 fórmulas
++ si la C del carbonilo debería colorearse también). `referencia.html` se
+sirve directo por GitHub Pages, sin paso de despliegue aparte.
+
+---
+
 ## 2026-09-20 (70) — Referencia: dibuja la fórmula semidesarrollada real en los 7 grupos con carbonilo
 
 ### Contexto
