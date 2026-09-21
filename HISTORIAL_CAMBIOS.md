@@ -7,6 +7,42 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-21 (77) — Juego: se retira el modal de premiación de las 1000 preguntas
+
+### Contexto
+La docente pidió quitar del juego el modal promocional del "reto de la
+coordinación" (responder 1.000 preguntas con 80% de acierto o más para
+ganar un premio).
+
+### Qué se hizo (`juego.html`)
+- Se eliminó el modal `#modal-premio` (el recuadro con el trofeo 🏆, el
+  texto del reto y el botón "🚀 ¡Acepto el reto — a jugar!").
+- Se eliminaron las funciones que lo controlaban: `abrirPromoModal()`,
+  `maybeShowPromoModal()` y `closePromoModal()`, junto con los dos puntos
+  donde se disparaba — al validar el código del estudiante en modo
+  colegio (`validarCodigoInline`) y al arrancar una partida en modo libre
+  (`startGame`) — que ahora van directo a mostrar la pregunta, sin pasar
+  por el modal.
+- Se eliminó el CSS exclusivo del modal (`.modal-box-premio`,
+  `.premio-badge`, `.premio-trophy`, `.premio-title`, `.btn-premio` y sus
+  animaciones `premioPulse`/`premioBounce`). Las clases `.premio-box`,
+  `.premio-row` y `.premio-foot` se dejaron intactas porque las sigue
+  usando el modal de "Progreso personal" (sesiones jugadas, preguntas
+  respondidas, % de acierto), que es una función aparte.
+- No se tocó el localStorage `chromanom_promo_seen` que el modal usaba
+  para no repetirse el mismo día — queda como una llave vieja sin uso en
+  los dispositivos de los estudiantes, inofensiva.
+
+### Verificación
+Playwright (Chromium): se confirmó que `#modal-premio` ya no existe en el
+DOM y que `startGame()` corre sin errores de consola, mostrando la
+primera pregunta directamente (antes había que cerrar el modal primero).
+
+### Sin pasos manuales pendientes
+`juego.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-21 (76) — Reacciones: la tarjeta "Comparación molecular" también dibuja enlaces, sin paréntesis
 
 ### Contexto
