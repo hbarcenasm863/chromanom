@@ -7,6 +7,75 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-21 (76) — Reacciones: la tarjeta "Comparación molecular" también dibuja enlaces, sin paréntesis
+
+### Contexto
+La docente mandó una captura de `reacciones.html` (Alcanos → Halogenación)
+mostrando la tarjeta "Comparación molecular" con "CH₃-CH(Br)-CH₃" en texto
+plano — justo la notación entre paréntesis que ya se había acordado NO
+usar (sesión 30: los enlaces se dibujan arriba/abajo, como en el tablero,
+no con "CH(Cl)"). Pidió auditar todo el archivo para encontrar cualquier
+otro lugar con el mismo problema antes de arreglar.
+
+### Causa
+Las sesiones 30 y 31 corrigieron la ecuación grande de arriba de cada
+tarjeta y el paso "Condición" del resumen de 3 pasos, pero dejaron sin
+tocar una tercera tarjeta más abajo en cada reacción — "Comparación
+molecular" (`.mol-cmp-card`, justo debajo del mecanismo paso a paso) —
+que seguía siendo texto estático escrito a mano con paréntesis.
+
+### Auditoría
+Se revisaron las 41 reacciones completas. Se encontraron **8** con esta
+violación en "Comparación molecular": `al-0` (halogenación alcanos, el
+caso de la captura), `aq-0` (hidrohalogenación), `aq-1` (halogenación de
+alqueno), `aq-3` (hidratación Markovnikov), `ao-0` (deshidratación /
+Zaitsev), `cb-2` (Grignard), `cb-3` (aldólica) y `hg-1` (SN1 terc-butilo).
+Se descartaron como "no es lo mismo": las ecuaciones genéricas con "R" o
+notación de polímero `-(CH₂-CH₂)ₙ-` (esquemas abstractos sin molécula
+concreta que dibujar, ya aceptados desde la sesión 31), y la lista
+compacta "Más ejemplos" de cada reacción (mismo texto abreviado en las 41
+reacciones del sitio, no solo estas 8 — cambiarla aquí sería
+inconsistente con el resto). Quedó pendiente, fuera de esta sesión, el
+recuadro "Regla de Zaitsev" de `ao-0`: también escribe "CH(OH)", pero es
+un diagrama con colores y etiquetas Cβ1/Cβ2 hechas a mano, no la tarjeta
+de comparación — arreglarlo bien significa rehacer ese dibujo específico,
+no reusar el motor automático.
+
+### Qué se hizo (`reacciones.html`)
+- Se agregaron 3 moléculas nuevas al catálogo de dibujo (`RM`):
+  `r12dibromopropano` (1,2-dibromopropano), `butan2ol` (2-butanol) y
+  `buteno2` (but-2-eno) — las otras 5 reacciones ya tenían sus moléculas
+  catalogadas (propano, propeno, 2-bromopropano, propan-2-ol, aldol,
+  terc-butanol, bromuro de terc-butilo).
+- Se le puso `id` a cada fórmula de "Comparación molecular" que tenía el
+  problema (14 en total — 2 por reacción, menos en `cb-2`/`cb-3` donde
+  solo el producto lo tenía) y se agregó `MCF` + `renderMolCmpFormulas()`:
+  al cargar la página, reemplaza cada una por el dibujo real con
+  `mkDevSVG` (el mismo motor que ya dibuja la ecuación grande y el paso
+  "Condición"), incluyendo los casos donde había un "+ H₂O" o "+ HBr"
+  pegado a la fórmula (se mantiene como texto al lado del dibujo, no
+  dentro de él).
+
+### Verificación
+Playwright (Chromium): se abrieron las 8 reacciones (cambiando de pestaña
+según corresponda: Alcanos, Alquenos, Alcoholes, Carbonilo, Haluros) y se
+capturó cada tarjeta "Comparación molecular" — las 8 muestran los enlaces
+dibujados (líneas arriba/abajo para cada sustituyente), cero texto con
+paréntesis, y las fórmulas de las moléculas nuevas salen químicamente
+correctas (2-butanol con el OH en el C2, but-2-eno con el doble enlace
+entre C2-C3, 1,2-dibromopropano con un Br en cada uno de esos carbonos).
+Sin errores de consola nuevos.
+
+### Sin pasos manuales pendientes
+`reacciones.html` se sirve directo por GitHub Pages.
+
+### Pendiente
+El recuadro "Regla de Zaitsev" de `ao-0` (ver Auditoría arriba) — mismo
+problema de fondo, pero es un dibujo manual con anotaciones de color, no
+la tarjeta de comparación estándar.
+
+---
+
 ## 2026-09-21 (75) — Las 7 mejoras de UI pendientes en el resto del sitio (todas menos el juego)
 
 ### Contexto
