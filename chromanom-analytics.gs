@@ -48,7 +48,6 @@ const PREGUNTAS_POR_SESION = 20;
 // por fuera del juego — ver updatePremioSheet_() más abajo, que arma la
 // hoja "Premio 1000 preguntas" con quién llegó primero a la meta.
 const PREGUNTAS_META_PREMIO = 1000;
-const PCT_META_PREMIO       = 80;
 
 // ── Categorías de práctica "por grupo" (desglose adicional en Estadísticas) ──
 // Las mismas claves de nivel que usa juego.html en NIVEL_TOPICS/openLevelModal,
@@ -1039,23 +1038,19 @@ function updateCursoSheet(ss, curso, allData) {
 // ── Hoja "Premio 1000 preguntas" (para la coordinación) ─────────────────
 // El reto ya no se anuncia dentro del juego (se quitó el modal), pero el
 // premio lo sigue entregando la coordinación por fuera — a quien conteste
-// PREGUNTAS_META_PREMIO preguntas o más manteniendo PCT_META_PREMIO % de
-// acierto. Esta hoja lista, para cada estudiante que ya llegó a la meta,
-// la FECHA en que la cruzó (recorriendo sus sesiones en orden cronológico
-// y acumulando preguntas hasta pasar de la meta), para poder clasificar
-// quién llegó primero — no solo quién tiene más preguntas hoy. El % de
-// acierto que se muestra y se compara contra PCT_META_PREMIO es el global
-// de toda su historia (igual que "% Acierto global" en "Estadísticas"),
-// no el que tenía justo al llegar a la meta, porque el reto pide
-// MANTENER ese porcentaje, no solo alcanzarlo una vez.
+// PREGUNTAS_META_PREMIO preguntas o más. Esta hoja lista, para cada
+// estudiante que ya llegó a la meta, Curso, Nombre y la FECHA en que la
+// cruzó (recorriendo sus sesiones en orden cronológico y acumulando
+// preguntas hasta pasar de la meta), ordenada del logro MÁS ANTIGUO al
+// MÁS NUEVO — así la coordinación ve de un vistazo quién llegó primero.
 function updatePremioSheet_(ss, data) {
   const porEstudiante = {};
   data.forEach(r => {
     const nombre = r[3], curso = r[4], fecha = r[1];
-    const total = Number(r[8]) || 0, correctas = Number(r[7]) || 0;
+    const total = Number(r[8]) || 0;
     const key = normalizeName_(nombre) + '||' + curso;
     if (!porEstudiante[key]) porEstudiante[key] = { nombre, curso, sesiones: [] };
-    porEstudiante[key].sesiones.push({ fecha, total, correctas });
+    porEstudiante[key].sesiones.push({ fecha, total });
   });
 
   const rows = [];
@@ -1063,29 +1058,28 @@ function updatePremioSheet_(ss, data) {
     // Orden cronológico por fecha; los empates del mismo día quedan en el
     // orden en que ya venían del Registro (de por sí cronológico).
     est.sesiones.sort((a, b) => a.fecha < b.fecha ? -1 : a.fecha > b.fecha ? 1 : 0);
-    let acumPreguntas = 0, acumCorrectas = 0, fechaLogro = '';
+    let acumPreguntas = 0, fechaLogro = '';
     est.sesiones.forEach(s => {
       acumPreguntas += s.total;
-      acumCorrectas += s.correctas;
       if (!fechaLogro && acumPreguntas >= PREGUNTAS_META_PREMIO) fechaLogro = s.fecha;
     });
     if (!fechaLogro) return; // todavía no llega a la meta — no sale en esta hoja
-    const pctGlobal = acumPreguntas ? Math.round(acumCorrectas / acumPreguntas * 100) : 0;
-    const cumplePct = pctGlobal >= PCT_META_PREMIO;
-    rows.push([est.nombre, est.curso, acumPreguntas, pctGlobal, fechaLogro, cumplePct ? 'Sí' : 'No']);
+    rows.push([est.curso, est.nombre, fechaLogro]);
   });
 
-  // Orden de premiación: quien llegó primero a la meta, arriba.
-  rows.sort((a, b) => a[4] < b[4] ? -1 : a[4] > b[4] ? 1 : 0);
+  // Del logro más antiguo al más nuevo — quien llegó primero, arriba.
+  rows.sort((a, b) => a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
 
   let sh = ss.getSheetByName(SHEET_PREMIO);
   const esNueva = !sh;
   if (esNueva) sh = ss.insertSheet(SHEET_PREMIO);
   sh.clearContents(); sh.clearFormats();
 
-  writeSheetBatch(sh, ['Nombre','Curso','Preguntas totales',
-                       '% Acierto global','Fecha en que llegó a 1.000','¿Cumple ' + PCT_META_PREMIO + '%+?'],
-                  rows, [3]);
+  const headers = ['Curso', 'Nombre', 'Fecha del logro (' + PREGUNTAS_META_PREMIO + '+ preguntas)'];
+  sh.getRange(1, 1, 1, headers.length).setValues([headers])
+    .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
+  sh.setFrozenRows(1);
+  if (rows.length) sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
 
-  if (esNueva) [200,120,140,140,190,140].forEach((w,i) => sh.setColumnWidth(i+1, w));
+  if (esNueva) [120, 200, 220].forEach((w, i) => sh.setColumnWidth(i + 1, w));
 }

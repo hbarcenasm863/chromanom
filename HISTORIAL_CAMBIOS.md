@@ -45,6 +45,14 @@ se quedaban calculados y sin usar. Solo la hoja consolidada
   coordinación vea de un vistazo quién sí califica para el premio y quién
   todavía no, aunque ya haya llegado a las 1.000 preguntas.
 
+### Ajuste (mismo día): la hoja de premio se simplifica a 3 columnas
+Después de ver la primera versión (Nombre, Curso, Preguntas totales, %
+Acierto global, Fecha, ¿Cumple 80%+?), la docente pidió algo más simple:
+solo **Curso, Nombre y Fecha del logro** (en ese orden), sin el % de
+acierto ni la columna de cumplimiento — el criterio para salir en la
+lista queda en llegar a las 1.000 preguntas, sin más. Se quitó también
+la constante `PCT_META_PREMIO`, que ya no se usa en ningún lado.
+
 ### Verificación
 Se corrió `updateCursoSheet()`, `updatePremioSheet_()` y el flujo completo
 `updateStatsCore_()` con datos sintéticos en Node (simulando las hojas de
@@ -52,8 +60,9 @@ Google Sheets), no en el editor de Apps Script real: 3 estudiantes de
 prueba (uno que cruza 1.000 preguntas con 85% de acierto, otro que las
 cruza con solo 60%, y uno que se queda en 400) — la hoja de curso mostró
 las tres columnas nuevas con los números correctos, y la hoja de premio
-solo listó a los dos que sí llegaron a 1.000, en el orden correcto por
-fecha de logro, con "Sí"/"No" acertado según su 80%. Sin errores.
+(ya en su versión final de 3 columnas) solo listó a los dos que sí
+llegaron a 1.000, ordenados del logro más antiguo al más nuevo. Sin
+errores.
 
 ### Pasos manuales pendientes
 1. **Pegar el código actualizado** de `chromanom-analytics.gs` en el
