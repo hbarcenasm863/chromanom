@@ -45,13 +45,19 @@ se quedaban calculados y sin usar. Solo la hoja consolidada
   coordinación vea de un vistazo quién sí califica para el premio y quién
   todavía no, aunque ya haya llegado a las 1.000 preguntas.
 
-### Ajuste (mismo día): la hoja de premio se simplifica a 3 columnas
+### Ajustes (mismo día) a la hoja de premio
 Después de ver la primera versión (Nombre, Curso, Preguntas totales, %
 Acierto global, Fecha, ¿Cumple 80%+?), la docente pidió algo más simple:
-solo **Curso, Nombre y Fecha del logro** (en ese orden), sin el % de
-acierto ni la columna de cumplimiento — el criterio para salir en la
-lista queda en llegar a las 1.000 preguntas, sin más. Se quitó también
-la constante `PCT_META_PREMIO`, que ya no se usa en ningún lado.
+**Curso, Nombre y Fecha del logro** (en ese orden), sin la columna de
+cumplimiento — el criterio para salir en la lista queda en llegar a las
+1.000 preguntas, sin más. Se quitó la constante `PCT_META_PREMIO`
+(el chequeo del 80%) por completo.
+
+Después de esa simplificación, pidió que el **% de acierto sí se dejara**
+— se agregó de vuelta como 4ª columna ("% Acierto global"), con formato
+de porcentaje, sin volver a agregar la columna de cumplimiento del 80%
+(esa sí se quitó a propósito y no vuelve). La hoja final queda: Curso,
+Nombre, Fecha del logro, % Acierto global.
 
 ### Verificación
 Se corrió `updateCursoSheet()`, `updatePremioSheet_()` y el flujo completo
