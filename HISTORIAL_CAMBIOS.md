@@ -56,8 +56,12 @@ cumplimiento — el criterio para salir en la lista queda en llegar a las
 Después de esa simplificación, pidió que el **% de acierto sí se dejara**
 — se agregó de vuelta como 4ª columna ("% Acierto global"), con formato
 de porcentaje, sin volver a agregar la columna de cumplimiento del 80%
-(esa sí se quitó a propósito y no vuelve). La hoja final queda: Curso,
-Nombre, Fecha del logro, % Acierto global.
+(esa sí se quitó a propósito y no vuelve).
+
+Por último, pidió agregar **cuántas preguntas contestó** cada uno — se
+agregó "Preguntas contestadas" (el total acumulado, no solo las 1.000 de
+la meta) entre "Nombre" y "Fecha del logro". La hoja final queda: Curso,
+Nombre, Preguntas contestadas, Fecha del logro, % Acierto global.
 
 ### Verificación
 Se corrió `updateCursoSheet()`, `updatePremioSheet_()` y el flujo completo

@@ -1039,12 +1039,12 @@ function updateCursoSheet(ss, curso, allData) {
 // El reto ya no se anuncia dentro del juego (se quitó el modal), pero el
 // premio lo sigue entregando la coordinación por fuera — a quien conteste
 // PREGUNTAS_META_PREMIO preguntas o más. Esta hoja lista, para cada
-// estudiante que ya llegó a la meta, Curso, Nombre, la FECHA en que la
-// cruzó (recorriendo sus sesiones en orden cronológico y acumulando
-// preguntas hasta pasar de la meta) y su % de acierto global (el de toda
-// su historia, igual que "% Acierto global" en "Estadísticas") — ordenada
-// del logro MÁS ANTIGUO al MÁS NUEVO, así la coordinación ve de un
-// vistazo quién llegó primero.
+// estudiante que ya llegó a la meta, Curso, Nombre, cuántas preguntas ha
+// contestado en total, la FECHA en que cruzó la meta (recorriendo sus
+// sesiones en orden cronológico y acumulando preguntas hasta pasar de
+// ella) y su % de acierto global (el de toda su historia, igual que "%
+// Acierto global" en "Estadísticas") — ordenada del logro MÁS ANTIGUO al
+// MÁS NUEVO, así la coordinación ve de un vistazo quién llegó primero.
 function updatePremioSheet_(ss, data) {
   const porEstudiante = {};
   data.forEach(r => {
@@ -1068,25 +1068,26 @@ function updatePremioSheet_(ss, data) {
     });
     if (!fechaLogro) return; // todavía no llega a la meta — no sale en esta hoja
     const pctGlobal = acumPreguntas ? Math.round(acumCorrectas / acumPreguntas * 100) : 0;
-    rows.push([est.curso, est.nombre, fechaLogro, pctGlobal]);
+    rows.push([est.curso, est.nombre, acumPreguntas, fechaLogro, pctGlobal]);
   });
 
   // Del logro más antiguo al más nuevo — quien llegó primero, arriba.
-  rows.sort((a, b) => a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
+  rows.sort((a, b) => a[3] < b[3] ? -1 : a[3] > b[3] ? 1 : 0);
 
   let sh = ss.getSheetByName(SHEET_PREMIO);
   const esNueva = !sh;
   if (esNueva) sh = ss.insertSheet(SHEET_PREMIO);
   sh.clearContents(); sh.clearFormats();
 
-  const headers = ['Curso', 'Nombre', 'Fecha del logro (' + PREGUNTAS_META_PREMIO + '+ preguntas)', '% Acierto global'];
+  const headers = ['Curso', 'Nombre', 'Preguntas contestadas',
+                   'Fecha del logro (' + PREGUNTAS_META_PREMIO + '+ preguntas)', '% Acierto global'];
   sh.getRange(1, 1, 1, headers.length).setValues([headers])
     .setBackground(COLOR.header).setFontColor(COLOR.hText).setFontWeight('bold');
   sh.setFrozenRows(1);
   if (rows.length) {
     sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
-    sh.getRange(2, 4, rows.length, 1).setNumberFormat('0"%"');
+    sh.getRange(2, 5, rows.length, 1).setNumberFormat('0"%"');
   }
 
-  if (esNueva) [120, 200, 220, 130].forEach((w, i) => sh.setColumnWidth(i + 1, w));
+  if (esNueva) [120, 200, 160, 220, 130].forEach((w, i) => sh.setColumnWidth(i + 1, w));
 }
