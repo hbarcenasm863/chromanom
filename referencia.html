@@ -31,6 +31,7 @@
 /* ── RESET ── */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
 body{
   background:var(--bg);
   color:var(--tx);
@@ -109,6 +110,18 @@ body{
 .lp.i{color:var(--c3t);border-color:var(--c3);background:var(--c3b)}
 .lp.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* ── BUSCADOR ── */
+.ref-search-wrap{display:flex;align-items:center;gap:10px;margin-top:14px}
+.ref-search{
+  flex:1;max-width:420px;padding:10px 14px;
+  border:2px solid var(--brd);border-radius:100px;
+  font-family:inherit;font-size:.82rem;color:var(--tx);
+  background:var(--bg);outline:none;transition:border-color .15s;
+}
+.ref-search:focus{border-color:var(--c1)}
+.ref-search-count{font-size:.72rem;color:var(--dim);font-weight:700;white-space:nowrap}
+.ref-hidden{display:none!important}
 
 /* ── SECTIONS GRID ── */
 .grid-top{
@@ -302,7 +315,7 @@ code{
 .site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
 .site-nav .nav-links{display:flex;gap:4px;align-items:center}
 .site-nav .nav-brand{color:#fff;font-weight:800;font-size:.88rem;font-style:italic;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
-@media(max-width:600px){.site-nav a span.full{display:none}.site-nav a{padding:5px 8px;font-size:.72rem}.site-nav .nav-brand{font-size:.8rem}}
+@media(max-width:600px){.site-nav a span.full{display:none}.site-nav a{padding:11px 9px;font-size:.72rem;min-height:44px}.site-nav .nav-brand{font-size:.8rem}.site-nav .nav-links{flex-wrap:wrap;gap:2px}.site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}}
 
 /* ─────────────────────────────────────────
    PRINT STYLES
@@ -314,6 +327,7 @@ code{
   .site-nav,
   .back-link,
   .btn-print,
+  .ref-search-wrap,
   .topbar{display:none!important}
 
   html,body{background:#fff!important;font-size:11px!important}
@@ -430,6 +444,10 @@ code{
       <span class="lp c"><span class="dot" style="background:var(--c2)"></span>② Cadena principal</span>
       <span class="lp i"><span class="dot" style="background:var(--c3)"></span>③ Insaturaciones</span>
       <span class="lp g"><span class="dot" style="background:var(--c4)"></span>④ Grupo funcional</span>
+    </div>
+    <div class="ref-search-wrap">
+      <input type="search" id="ref-search" class="ref-search" placeholder="🔍 Buscar (ej. amida, -ol, R-OH, tri-)…" aria-label="Buscar en la hoja de referencia" oninput="refSearch(this.value)">
+      <span id="ref-search-count" class="ref-search-count" aria-live="polite"></span>
     </div>
   </div>
 
@@ -587,6 +605,25 @@ code{
   </div>
 
 </div><!-- /page -->
+<script>
+function refNorm(s){
+  return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+}
+function refSearch(q){
+  const term = refNorm(q.trim());
+  const items = document.querySelectorAll(
+    '.grid-top tbody tr, .sec-full.s4 .grupo-card, .subs-grid .sub-item, .rules-cols .rule-item'
+  );
+  let shown = 0;
+  items.forEach(el=>{
+    const match = term==='' || refNorm(el.textContent).includes(term);
+    el.classList.toggle('ref-hidden', !match);
+    if(match) shown++;
+  });
+  const countEl = document.getElementById('ref-search-count');
+  countEl.textContent = term==='' ? '' : (shown + (shown===1?' resultado':' resultados'));
+}
+</script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>

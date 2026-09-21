@@ -31,6 +31,8 @@
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
 body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-height:100%;position:relative}
 body::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 
@@ -219,8 +221,10 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
 }
 @media(max-width:480px){
   .site-nav a span.full{display:none}
-  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav a{padding:11px 9px;font-size:.72rem;min-height:44px}
   .site-nav .nav-brand{font-size:.8rem}
+  .site-nav .nav-links{flex-wrap:wrap;gap:2px}
+  .site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}
 }
 
 
@@ -234,7 +238,19 @@ header{padding:24px 0 18px;border-bottom:2px solid var(--brd);margin-bottom:24px
   padding:5px 9px;border-radius:0 5px 5px 0;line-height:1.4;}
 
 /* ── GALERÍA DE GRUPOS (vidrio esmerilado, estilo iOS) ── */
-.gallery-section{margin-bottom:18px;position:relative}
+.cat-nav{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;
+  position:sticky;top:48px;z-index:60;
+  background:var(--bg);padding:8px 0;
+  scroll-margin-top:100px;
+}
+.cat-chip{
+  padding:7px 16px;border-radius:100px;border:1.5px solid var(--brd);
+  background:var(--surf);color:var(--dim);font-size:.78rem;font-weight:700;
+  text-decoration:none;transition:all .15s;white-space:nowrap;
+}
+.cat-chip:hover{border-color:var(--c1);color:var(--c1t);background:var(--c1b)}
+.gallery-section{margin-bottom:18px;position:relative;scroll-margin-top:100px}
 .gallery-section-label{font-size:.6rem;font-weight:700;text-transform:uppercase;
   letter-spacing:.14em;color:var(--dimmer);margin-bottom:8px;
   padding:0 2px;display:flex;align-items:center;gap:8px}
@@ -1060,10 +1076,16 @@ function buildGallery(){
   intro.style.cssText = 'font-size:.82rem;color:var(--dimmer);margin-bottom:18px;line-height:1.6;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--rs);padding:11px 14px;';
   intro.innerHTML = '<strong style="color:var(--tx)">Selecciona un grupo funcional</strong> para ver su teoria IUPAC y practicar ejercicios de nomenclatura organica.';
   ga.appendChild(intro);
+  // Chips de navegación rápida entre categorías
+  const nav = document.createElement('div');
+  nav.className = 'cat-nav';
+  nav.innerHTML = CATS.map((cat,i)=>'<a href="#cat-'+i+'" class="cat-chip">'+cat.label+'</a>').join('');
+  ga.appendChild(nav);
   // Categories
-  CATS.forEach(cat=>{
+  CATS.forEach((cat,catIdx)=>{
     const sec = document.createElement('div');
     sec.className = 'gallery-section';
+    sec.id = 'cat-'+catIdx;
     const lbl = document.createElement('div');
     lbl.className = 'gallery-section-label';
     lbl.textContent = cat.label;
@@ -1198,7 +1220,7 @@ function buildRules(g){
       + '<div class="rule-head" onclick="toggleRule(this)">'
       + '<div class="rule-num">'+(i+1)+'</div>'
       + '<div class="rule-htitle"><strong>'+r.t+'</strong></div>'
-      + '<button class="rule-speak" onclick="speakRuleBtn(event,\''+speakTxt+'\')" title="Escuchar regla">🔊</button>'
+      + '<button class="rule-speak" onclick="speakRuleBtn(event,\''+speakTxt+'\')" aria-label="Escuchar regla" title="Escuchar regla">🔊</button>'
       + '<span class="rule-chev'+openCls+'">▾</span>'
       + '</div>'
       + '<div class="rule-body'+openCls+'"><span>'+r.d+'</span>'+svgBlock+'</div>'

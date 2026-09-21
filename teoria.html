@@ -36,6 +36,7 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
 body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100%;line-height:1.6}
 body::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 .app{max-width:1100px;margin:0 auto;padding:0 18px 80px}
@@ -322,8 +323,10 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 }
 @media(max-width:480px){
   .site-nav a span.full{display:none}
-  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav a{padding:11px 9px;font-size:.72rem;min-height:44px}
   .site-nav .nav-brand{font-size:.8rem}
+  .site-nav .nav-links{flex-wrap:wrap;gap:2px}
+  .site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}
 }
 .view-toggle-t{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
 .vt-btn-t{background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--dim);transition:all .15s}
@@ -1955,7 +1958,7 @@ td{border-bottom:1px solid #e8e8e8}
         <div class="prac-sec-lbl" id="pm-sec"></div>
         <div class="prac-mol-name" id="pm-titulo"></div>
       </div>
-      <button class="prac-x" onclick="pmClose()">✕</button>
+      <button class="prac-x" onclick="pmClose()" aria-label="Cerrar">✕</button>
     </div>
     <div class="prac-mol-area" id="pm-mol"></div>
     <div class="prac-body">

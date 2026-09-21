@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
 <title>ChromaNom — Generador de Ejercicios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#0d4a73">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,10 +39,11 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid var(--c-g);outline-offset:2px;border-radius:4px}
 body{
   background:var(--surface);
   color:var(--tx);
-  font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  font-family:'Outfit',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
   min-height:100vh;
 }
 
@@ -71,9 +76,11 @@ body{
 .site-nav .nav-brand img{height:28px;width:auto;object-fit:contain}
 @media(max-width:480px){
   .site-nav a span.full{display:none}
-  .site-nav a{padding:5px 8px;font-size:.72rem}
+  .site-nav a{padding:11px 9px;font-size:.72rem;min-height:44px}
   .site-nav .nav-brand{font-size:.8rem}
   .site-nav .nav-brand img{height:22px}
+  .site-nav .nav-links{flex-wrap:wrap;gap:2px}
+  .site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}
   /* Tipo D — en pantallas angostas la ecuación (estructura + reactivo +
      flecha + caja "?") no cabe en una sola fila; sin esto quedaba cortada
      a la derecha (solo se veía con scroll horizontal, sin ninguna pista
@@ -102,7 +109,7 @@ body{
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
-.page-title h1{font-size:1.45rem;font-weight:800;color:var(--primary);letter-spacing:-.02em}
+.page-title h1{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:800;color:var(--primary);letter-spacing:-.02em}
 .page-title p{font-size:.83rem;color:var(--dim);margin-top:3px}
 
 /* ── CONFIG PANEL ── */
@@ -373,7 +380,7 @@ body{
   padding:4px 10px;
   border-radius:6px;
   font-size:.9rem;font-weight:700;
-  font-family:'Courier New',monospace;
+  font-family:'JetBrains Mono',monospace;
   letter-spacing:.01em;
   color:#fff;
 }
@@ -403,7 +410,7 @@ body{
   font-size:.82rem;
 }
 .mdec-table td:first-child{
-  font-family:'Courier New',monospace;
+  font-family:'JetBrains Mono',monospace;
   font-weight:700;
   color:var(--tx);
   white-space:nowrap;
@@ -501,7 +508,7 @@ body{
 .ref-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:4px}
 .ref-table th{background:var(--surface);color:var(--dim);font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;padding:5px 9px;border:1px solid var(--border);text-align:left}
 .ref-table td{border:1px solid var(--border);padding:6px 9px}
-.ref-table td:first-child{font-family:'Courier New',monospace;font-weight:700;color:var(--tx)}
+.ref-table td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--tx)}
 .mdec-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
 
 /* ── PDF button ── */
@@ -531,7 +538,7 @@ body{
   padding:5px 8px;border:1px solid var(--border);text-align:left;
 }
 .ak-table td{border:1px solid var(--border);padding:6px 8px}
-.ak-table td:first-child{font-family:'Courier New',monospace;font-weight:700}
+.ak-table td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700}
 .ak-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:700;color:#fff;margin-right:4px}
 .tag-c{background:var(--c-c)}.tag-g{background:var(--c-g)}.tag-i{background:var(--c-i)}.tag-r{background:var(--c-r)}
 .tag-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
@@ -837,7 +844,7 @@ body{
 <!-- Help / reference modal -->
 <div class="modal-overlay" id="help-modal" onclick="if(event.target===this)toggleHelp()">
   <div class="modal-box">
-    <button class="modal-close" onclick="toggleHelp()" title="Cerrar">&times;</button>
+    <button class="modal-close" onclick="toggleHelp()" aria-label="Cerrar" title="Cerrar">&times;</button>
     <div class="modal-h">&#9432; Referencia r&aacute;pida &mdash; Nomenclatura IUPAC</div>
 
     <div class="modal-section-label">Prefijos de cadena (carbonos)</div>
@@ -903,7 +910,7 @@ function _reg(x,y,pad=6){_pts.push({x,y,pad});}
 function ln(x1,y1,x2,y2){_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
 function dbl(x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1,ox=-dy/len*2.5,oy=dx/len*2.5;_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1+ox}" y1="${y1+oy}" x2="${x2+ox}" y2="${y2+oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1-ox}" y1="${y1-oy}" x2="${x2-ox}" y2="${y2-oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
 function tri(x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy)||1,ox=-dy/len*3.5,oy=dx/len*3.5;_reg(x1,y1);_reg(x2,y2);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1+ox}" y1="${y1+oy}" x2="${x2+ox}" y2="${y2+oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/><line x1="${x1-ox}" y1="${y1-oy}" x2="${x2-ox}" y2="${y2-oy}" stroke="#1a1714" stroke-width="2.2" stroke-linecap="round"/>`;}
-function atm(x,y,t){const w=t.length*6.5+10,h=18;_reg(x,y,w/2+2);return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="4" fill="white" stroke="#1a1714" stroke-width="1.2"/><text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="'Courier New',monospace" font-weight="700" font-size="9.5" fill="#1a1714">${t}</text>`;}
+function atm(x,y,t){const w=t.length*6.5+10,h=18;_reg(x,y,w/2+2);return `<rect x="${x-w/2}" y="${y-h/2}" width="${w}" height="${h}" rx="4" fill="white" stroke="#1a1714" stroke-width="1.2"/><text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-weight="700" font-size="9.5" fill="#1a1714">${t}</text>`;}
 function zz(x,y,n,up=true){const pts=[];for(let i=0;i<n;i++){if(i===0)pts.push({x,y});else{const prev=pts[i-1];const goUp=(i%2===1)?up:!up;pts.push({x:prev.x+BL*COS30,y:prev.y+(goUp?-BL*SIN30:BL*SIN30)});}}return pts;}
 function chain(p){let s='';for(let i=0;i<p.length-1;i++){s+=ln(p[i].x,p[i].y,p[i+1].x,p[i+1].y);_reg(p[i].x,p[i].y);}if(p.length)_reg(p[p.length-1].x,p[p.length-1].y);return s;}
 function bnzRing(cx,cy){let s='';const r=28;const v=[0,1,2,3,4,5].map(i=>({x:cx+r*Math.cos(-Math.PI/2+i*Math.PI/3),y:cy+r*Math.sin(-Math.PI/2+i*Math.PI/3)}));v.forEach((vi,i)=>{const n=v[(i+1)%6];s+=ln(vi.x,vi.y,n.x,n.y);_reg(vi.x,vi.y,3);});s+=`<circle cx="${cx}" cy="${cy}" r="13" fill="none" stroke="#1a1714" stroke-width="1.4"/>`;return s;}
@@ -1141,7 +1148,7 @@ function mkDevSVG(ch){
   }
   for(const n of nds){
     const x=n.x+ox,y=n.y+oy;
-    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'Courier New',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
+    sv+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" fill="${n.cl}">${n.lb}</text>`;
   }
   sv+='</svg>';return sv;
 }
@@ -3370,6 +3377,7 @@ function toggleHelp(){
 </script>
 
 <script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

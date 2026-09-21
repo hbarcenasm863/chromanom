@@ -7,6 +7,87 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-21 (75) — Las 7 mejoras de UI pendientes en el resto del sitio (todas menos el juego)
+
+### Contexto
+Cerrando la ronda de auditoría UX/UI (entradas 68-74), la docente pidió
+qué mejoras de interfaz faltaban en las páginas distintas al juego. Se
+verificó el estado real del código (no solo lo que decía el informe
+original) y se propusieron 7 puntos concretos; la docente pidió
+implementarlos todos.
+
+### 1 — `generador.html` puesto a la par del resto del sitio
+Era la única página que había quedado fuera de la unificación de
+tipografía de la entrada 68: no cargaba Fraunces/Outfit/JetBrains Mono
+(usaba fuentes de sistema y tenía 'Courier New' sin cargar, silenciosamente
+mal), y no tenía el widget de tamaño de texto. Se agregó el mismo Google
+Fonts link, se cambió `body` a Outfit, el título principal a Fraunces, se
+reemplazaron los 6 usos de 'Courier New' por 'JetBrains Mono', y se agregó
+`text-zoom.js` + el script inline anti-parpadeo.
+
+### 2 — Foco de teclado + `aria-label` en las 6 páginas que no eran el juego
+Mismo patrón que ya se había validado en `juego.html` (entrada 74):
+regla global `:focus-visible{outline:3px solid var(--c4)...}` (o
+`var(--c-g)` en `generador.html`, que usa su propio nombre de variable)
+en `index.html`, `teoria.html`, `grupos.html`, `reacciones.html`,
+`referencia.html` y `generador.html`. Se agregó `aria-label` a los
+botones que solo tenían un ícono sin texto accesible: `.tour-close` (✕)
+en el portal, `.prac-x` (✕) en teoria, `.rule-speak` (🔊) en grupos, y
+`.modal-close` (&times;) en el generador.
+
+### 3 — Objetivos táctiles del menú móvil unificados
+`reacciones.html` ya tenía resuelto el problema (padding más grande +
+`min-height:44px` en el contenedor), pero las otras 5 páginas seguían con
+`padding:5px 8px` en el breakpoint móvil — por debajo del tamaño táctil
+recomendado. Se llevó el mismo ajuste a `index.html`, `teoria.html`,
+`grupos.html`, `referencia.html` y `generador.html`, y además se agregó
+`min-height:44px` directo en `.site-nav a` (no solo en el contenedor) en
+las 6 páginas — al probar se encontró que el `padding` solo no bastaba en
+algunas páginas por diferencias de `line-height` heredado del body, así
+que el `min-height` explícito lo garantiza sin depender de eso.
+
+### 4 — Contraste del texto de licencia en el pie de página
+`index.html` y `juego.html` tenían el texto de licencia en
+`rgba(255,255,255,.3)` sobre fondo oscuro (contraste ~2.7:1, por debajo
+de WCAG AA). Se subió a `.5` (contraste ~5.25:1, calculado con la fórmula
+de luminancia relativa de WCAG) — visible pero sigue de fondo.
+
+### 5 — `hero-stats` visible en celular (`index.html`)
+El bloque "16 grupos / 160+ ejercicios / IUPAC" se ocultaba por completo
+bajo 600px. En vez de ocultarlo, se redujo su tamaño (padding, fuente) para
+que quepan las 3 tarjetas sin desbordar — probado sin overflow horizontal
+en 360px, 375px y 414px de ancho.
+
+### 6 — Chips de navegación rápida entre categorías (`grupos.html`)
+La galería de 16 grupos ya estaba organizada en 4 categorías
+(Hidrocarburos, Oxigenados neutros, Ácidos y derivados, Con nitrógeno),
+pero sin forma de saltar directo a una desde el principio. Se agregó una
+fila de chips ("Hidrocarburos · Oxigenados neutros · ...") justo debajo
+de la intro, con scroll suave a la sección correspondiente
+(`scroll-margin-top` para que no quede tapada por el menú fijo).
+
+### 7 — Buscador simple en `referencia.html`
+Se agregó un campo de búsqueda en el encabezado que filtra en vivo (sin
+recargar) las filas de las tablas de prefijos, las tarjetas de grupos
+funcionales, los sustituyentes comunes y las reglas clave — comparación
+sin distinguir mayúsculas ni tildes. Se oculta al imprimir (no aparece en
+el PDF).
+
+### Verificación
+Con Playwright: las 7 páginas (más `juego.html`, sin tocar en esta
+sesión) cargan sin errores de consola. Se probó cada cambio por
+separado — tamaño real de los botones del menú (44px confirmado por
+código, no solo visualmente), el buscador filtrando y despejando
+correctamente, los chips de `grupos.html` haciendo scroll con el offset
+correcto, y `hero-stats` sin desbordar en tres anchos de celular.
+
+### Pendiente
+Ninguno de los archivos tocados (`index.html`, `teoria.html`,
+`grupos.html`, `reacciones.html`, `referencia.html`, `generador.html`,
+`juego.html`) necesita paso de despliegue aparte de este push a `main`.
+
+---
+
 ## 2026-09-20 (74) — Juego: foco de teclado visible + botones "físicos" al presionar
 
 ### Contexto
