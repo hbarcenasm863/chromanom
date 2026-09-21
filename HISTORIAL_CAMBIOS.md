@@ -63,6 +63,16 @@ agregó "Preguntas contestadas" (el total acumulado, no solo las 1.000 de
 la meta) entre "Nombre" y "Fecha del logro". La hoja final queda: Curso,
 Nombre, Preguntas contestadas, Fecha del logro, % Acierto global.
 
+### Bug encontrado por la docente: "Preguntas contestadas" se veía como fecha
+Tras pegar el código y recalcular, la columna "Preguntas contestadas"
+mostraba valores como "1902-12-23" en vez de 1902. Causa: en la versión
+anterior de esta misma hoja (antes de agregar esta columna), esa 3ª
+columna había sido "Fecha del logro" — Google Sheets recuerda el formato
+que tuvo una columna aunque `clearFormats()` borre el de la ejecución
+actual, así que siguió mostrando los números nuevos con pinta de fecha.
+Se corrigió forzando formato de número plano (`setNumberFormat('0')`) en
+esa columna, igual que ya se hacía con el % de acierto.
+
 ### Verificación
 Se corrió `updateCursoSheet()`, `updatePremioSheet_()` y el flujo completo
 `updateStatsCore_()` con datos sintéticos en Node (simulando las hojas de

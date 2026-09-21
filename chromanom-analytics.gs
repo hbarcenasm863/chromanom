@@ -1086,6 +1086,13 @@ function updatePremioSheet_(ss, data) {
   sh.setFrozenRows(1);
   if (rows.length) {
     sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
+    // "Preguntas contestadas" a veces salía con pinta de fecha (ej.
+    // "1902-12-23" en vez de 1902): esa columna había tenido antes la
+    // fecha del logro (antes de que se agregara esta columna), y Sheets
+    // reconoce el formato de una columna por lo que tuvo, no solo por lo
+    // que clearFormats() borra. Forzamos número plano para que siempre se
+    // vea como lo que es: una cantidad de preguntas, no una fecha.
+    sh.getRange(2, 3, rows.length, 1).setNumberFormat('0');
     sh.getRange(2, 5, rows.length, 1).setNumberFormat('0"%"');
   }
 
