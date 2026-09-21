@@ -7,6 +7,69 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-21 (78) — Apps Script: arregla "Sesiones/Preguntas en el periodo" en Curso X + nueva hoja de premiación por 1.000 preguntas
+
+### Contexto
+La docente pidió dos cosas sobre `chromanom-analytics.gs`:
+1. Un arreglo para que se muestre el número de sesiones y preguntas en el
+   periodo (ya existía en la hoja consolidada "Estadísticas", pero no en
+   las hojas individuales "Curso X").
+2. Poder ver quiénes llegaron a más de 1.000 preguntas en el juego,
+   clasificados por fecha, para el premio del reto de la coordinación
+   (el mismo reto cuyo aviso emergente se quitó de `juego.html` en la
+   sesión anterior — el premio en sí lo sigue entregando la coordinación
+   por fuera del juego).
+
+### Causa del primer problema
+`updateCursoSheet()` ya calculaba `sesionesPeriodo`, `preguntasPeriodo` y
+`correctasPeriodo` por estudiante (los necesita para la Nota de juego),
+pero al armar la fila final para escribir en la hoja nunca los incluía —
+se quedaban calculados y sin usar. Solo la hoja consolidada
+"Estadísticas" sí los escribía, porque ese código se había hecho aparte.
+
+### Qué se hizo (`chromanom-analytics.gs`)
+- **`updateCursoSheet()`**: ahora escribe también "Sesiones en el
+  periodo", "Preguntas en el periodo" y "% Acierto en el periodo" (las
+  tres, para que la hoja de un curso individual coincida con lo que ya
+  mostraba la hoja "Estadísticas"), entre "Nota juego" y "Última sesión".
+- **Nueva hoja "Premio 1000 preguntas"** (`updatePremioSheet_()`, se
+  agrega a la misma corrida de `recalcularAhora()`/el disparador
+  automático de 30 min): recorre las sesiones de cada estudiante en
+  orden cronológico, acumulando preguntas hasta encontrar la fecha exacta
+  en la que cruzó las 1.000 (constante `PREGUNTAS_META_PREMIO`) — así
+  la lista queda ordenada por quién llegó PRIMERO, no por quién tiene más
+  preguntas hoy. Muestra también el % de acierto global de cada uno (el
+  de toda su historia, no el que tenía justo al llegar a la meta, porque
+  el reto pide *mantener* el 80% — constante `PCT_META_PREMIO` — no solo
+  alcanzarlo una vez) y una columna "¿Cumple 80%+?" (Sí/No) para que la
+  coordinación vea de un vistazo quién sí califica para el premio y quién
+  todavía no, aunque ya haya llegado a las 1.000 preguntas.
+
+### Verificación
+Se corrió `updateCursoSheet()`, `updatePremioSheet_()` y el flujo completo
+`updateStatsCore_()` con datos sintéticos en Node (simulando las hojas de
+Google Sheets), no en el editor de Apps Script real: 3 estudiantes de
+prueba (uno que cruza 1.000 preguntas con 85% de acierto, otro que las
+cruza con solo 60%, y uno que se queda en 400) — la hoja de curso mostró
+las tres columnas nuevas con los números correctos, y la hoja de premio
+solo listó a los dos que sí llegaron a 1.000, en el orden correcto por
+fecha de logro, con "Sí"/"No" acertado según su 80%. Sin errores.
+
+### Pasos manuales pendientes
+1. **Pegar el código actualizado** de `chromanom-analytics.gs` en el
+   editor de Apps Script (reemplazando el actual) y guardar.
+2. Ejecutar `recalcularAhora()` una vez (▶ Ejecutar en el editor) para
+   que las columnas nuevas de "Curso X" y la hoja "Premio 1000 preguntas"
+   se llenen de inmediato — si no, aparecen vacías hasta el próximo
+   disparador automático de 30 min.
+3. **No hace falta** el redespliegue de "Implementar → Administrar
+   implementaciones → Nueva versión" esta vez: esta sesión no tocó
+   `doPost`/`doGet` (lo que el juego llama por internet), solo las
+   funciones que corren al recalcular — que siempre usan el código
+   guardado más reciente, sin necesidad de una nueva versión publicada.
+
+---
+
 ## 2026-09-21 (77) — Juego: se retira el modal de premiación de las 1000 preguntas
 
 ### Contexto

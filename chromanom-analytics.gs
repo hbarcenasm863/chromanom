@@ -8,6 +8,7 @@ const SPREADSHEET_NAME = 'Chromanom — Registro de estudiantes';
 const SHEET_REGISTRO   = 'Registro';
 const SHEET_STATS      = 'Estadísticas';
 const SHEET_ESTUDIANTES = 'Estudiantes';
+const SHEET_PREMIO     = 'Premio 1000 preguntas';
 
 // ── Cabeceras del Registro ──────────────────────────────────
 // Errores Build/Rxnq van AL FINAL (no intercalados con Errores Write) para
@@ -40,6 +41,14 @@ const SESIONES_ESPERADAS   = 22;
 // juego.html) — se usa para penalizar las sesiones que le falten a un
 // estudiante para llegar a SESIONES_ESPERADAS (ver calcularNotaJuego_).
 const PREGUNTAS_POR_SESION = 20;
+
+// ── Meta del "reto de la coordinación" (premio por 1.000 preguntas) ────
+// El aviso del reto ya no vive en juego.html (se quitó del modal de
+// bienvenida), pero el premio en sí lo sigue entregando la coordinación
+// por fuera del juego — ver updatePremioSheet_() más abajo, que arma la
+// hoja "Premio 1000 preguntas" con quién llegó primero a la meta.
+const PREGUNTAS_META_PREMIO = 1000;
+const PCT_META_PREMIO       = 80;
 
 // ── Categorías de práctica "por grupo" (desglose adicional en Estadísticas) ──
 // Las mismas claves de nivel que usa juego.html en NIVEL_TOPICS/openLevelModal,
@@ -908,6 +917,9 @@ function updateStatsCore_(ss) {
     try { updateCursoSheet(ss, curso, data); }
     catch (err) { logStatsError_(ss, 'updateCursoSheet(' + curso + ')', err); }
   });
+
+  // ── Hoja "Premio 1000 preguntas" (para la coordinación) ────
+  try { updatePremioSheet_(ss, data); } catch (err) { logStatsError_(ss, 'updatePremioSheet_', err); }
 }
 
 // ── Registra errores de actualización de estadísticas en una hoja visible ──
@@ -1005,11 +1017,75 @@ function updateCursoSheet(ss, curso, allData) {
     .map(s => {
       const pct = s.totalT ? Math.round(s.totalC / s.totalT * 100) : 0;
       const notaJuego = calcularNotaJuego_(s.correctasPeriodo, s.preguntasPeriodo, s.sesionesPeriodo);
-      return [s.nombre, s.sesiones, s.totalT, pct, notaJuego, s.lastDate];
+      const pctPeriodo = s.preguntasPeriodo ? Math.round(s.correctasPeriodo / s.preguntasPeriodo * 100) : 0;
+      return [s.nombre, s.sesiones, s.totalT, pct, notaJuego,
+              s.sesionesPeriodo, s.preguntasPeriodo, pctPeriodo, s.lastDate];
     });
 
-  writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Nota juego (0-5)','Última sesión'], rows, [3]);
+  // "Sesiones en el periodo"/"Preguntas en el periodo"/"% Acierto en el
+  // periodo" ya se calculaban arriba (se usan para la Nota de juego) pero
+  // se quedaban sin escribir en esta hoja — solo la hoja consolidada
+  // "Estadísticas" (con todos los cursos juntos) las mostraba. Se agregan
+  // aquí también, en el mismo orden, para que la docente las vea igual en
+  // la hoja de un curso individual.
+  writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Nota juego (0-5)',
+                       'Sesiones en el periodo','Preguntas en el periodo','% Acierto en el periodo',
+                       'Última sesión'], rows, [3,7]);
   if (rows.length) sh.getRange(2, 5, rows.length, 1).setNumberFormat('0.0');
 
-  if (esNueva) [200,80,180,100,110,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
+  if (esNueva) [200,80,180,100,110,150,170,150,120].forEach((w,i) => sh.setColumnWidth(i+1, w));
+}
+
+// ── Hoja "Premio 1000 preguntas" (para la coordinación) ─────────────────
+// El reto ya no se anuncia dentro del juego (se quitó el modal), pero el
+// premio lo sigue entregando la coordinación por fuera — a quien conteste
+// PREGUNTAS_META_PREMIO preguntas o más manteniendo PCT_META_PREMIO % de
+// acierto. Esta hoja lista, para cada estudiante que ya llegó a la meta,
+// la FECHA en que la cruzó (recorriendo sus sesiones en orden cronológico
+// y acumulando preguntas hasta pasar de la meta), para poder clasificar
+// quién llegó primero — no solo quién tiene más preguntas hoy. El % de
+// acierto que se muestra y se compara contra PCT_META_PREMIO es el global
+// de toda su historia (igual que "% Acierto global" en "Estadísticas"),
+// no el que tenía justo al llegar a la meta, porque el reto pide
+// MANTENER ese porcentaje, no solo alcanzarlo una vez.
+function updatePremioSheet_(ss, data) {
+  const porEstudiante = {};
+  data.forEach(r => {
+    const nombre = r[3], curso = r[4], fecha = r[1];
+    const total = Number(r[8]) || 0, correctas = Number(r[7]) || 0;
+    const key = normalizeName_(nombre) + '||' + curso;
+    if (!porEstudiante[key]) porEstudiante[key] = { nombre, curso, sesiones: [] };
+    porEstudiante[key].sesiones.push({ fecha, total, correctas });
+  });
+
+  const rows = [];
+  Object.values(porEstudiante).forEach(est => {
+    // Orden cronológico por fecha; los empates del mismo día quedan en el
+    // orden en que ya venían del Registro (de por sí cronológico).
+    est.sesiones.sort((a, b) => a.fecha < b.fecha ? -1 : a.fecha > b.fecha ? 1 : 0);
+    let acumPreguntas = 0, acumCorrectas = 0, fechaLogro = '';
+    est.sesiones.forEach(s => {
+      acumPreguntas += s.total;
+      acumCorrectas += s.correctas;
+      if (!fechaLogro && acumPreguntas >= PREGUNTAS_META_PREMIO) fechaLogro = s.fecha;
+    });
+    if (!fechaLogro) return; // todavía no llega a la meta — no sale en esta hoja
+    const pctGlobal = acumPreguntas ? Math.round(acumCorrectas / acumPreguntas * 100) : 0;
+    const cumplePct = pctGlobal >= PCT_META_PREMIO;
+    rows.push([est.nombre, est.curso, acumPreguntas, pctGlobal, fechaLogro, cumplePct ? 'Sí' : 'No']);
+  });
+
+  // Orden de premiación: quien llegó primero a la meta, arriba.
+  rows.sort((a, b) => a[4] < b[4] ? -1 : a[4] > b[4] ? 1 : 0);
+
+  let sh = ss.getSheetByName(SHEET_PREMIO);
+  const esNueva = !sh;
+  if (esNueva) sh = ss.insertSheet(SHEET_PREMIO);
+  sh.clearContents(); sh.clearFormats();
+
+  writeSheetBatch(sh, ['Nombre','Curso','Preguntas totales',
+                       '% Acierto global','Fecha en que llegó a 1.000','¿Cumple ' + PCT_META_PREMIO + '%+?'],
+                  rows, [3]);
+
+  if (esNueva) [200,120,140,140,190,140].forEach((w,i) => sh.setColumnWidth(i+1, w));
 }
