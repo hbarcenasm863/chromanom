@@ -3067,6 +3067,24 @@ function buildTipoDCard(rxn, num){
   function reagentSpan(reactivo){
     if(!reactivo)return'';
     const clean=reactivo.replace(/^\s*\+\s*/,'');
+    // Si el segundo reactivo es una molécula orgánica que el parser reconoce
+    // (ej. "CH₃COCl"), se dibuja con enlaces reales — igual que ya se dibuja
+    // el reactivo principal (rxn.r) — en vez de dejarlo solo en texto. Los
+    // reactivos inorgánicos simples (H₂O, NaOH, Cl₂...) o texto de condición
+    // (ej. "H₂/Ni") no los reconoce el parser y caen solos al texto de siempre.
+    if(_RXN_ALIASES[clean]){
+      try{
+        const svg=_RXN_ALIASES[clean]();
+        if(svg)return `<span class="rxn-d-plus">+</span><div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
+      }catch(e){}
+    }
+    try{
+      const chain=_parseChainStr(clean);
+      if(chain&&chain.length){
+        const svg=mkDevSVG(chain);
+        if(svg)return `<span class="rxn-d-plus">+</span><div class="rxn-d-mol-box">${_sizeSvg(svg)}</div>`;
+      }
+    }catch(e){}
     return `<span class="rxn-d-plus">+</span><span class="rxn-d-reagent">${clean}</span>`;
   }
   let enunciado=rxn.enunciado, eqHtml, fieldHtml;

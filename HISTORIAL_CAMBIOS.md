@@ -7,6 +7,59 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-21 (79) — Generador de Ejercicios: el segundo reactivo también se dibuja con enlaces
+
+### Contexto
+La docente mandó una captura del Generador de Ejercicios (Tipo D —
+Reacción, ejercicio de acilación de Friedel-Crafts) señalando que "ya
+habíamos establecido que deben ser semidesarrolladas completas con
+enlaces arriba y abajo donde corresponda" — la misma regla ya aplicada en
+`reacciones.html`, mostrando que se estaba violando también acá.
+
+### Causa
+En `buildTipoDCard()` (la tarjeta de un ejercicio de reacción), el
+reactivo PRINCIPAL (`rxn.r`, ej. benceno) sí pasa por `_molBox()` —la
+función que dibuja el enlace real reusando `mkDevSVG`/`_parseChainStr`, ya
+usada en el resto del Generador— pero el SEGUNDO reactivo (`rxn.reactivo`,
+el que va después del "+", ej. "CH₃COCl") se armaba con `reagentSpan()`,
+que SIEMPRE lo dejaba en texto plano coloreado, sin intentar dibujarlo,
+sin importar si era una molécula orgánica perfectamente dibujable.
+
+### Qué se hizo (`generador.html`)
+`reagentSpan()` ahora intenta dibujar el segundo reactivo con el mismo
+mecanismo que ya usa `_molBox()` (alias de `_RXN_ALIASES` primero, luego
+`_parseChainStr` + `mkDevSVG`) antes de caer al texto de siempre. No se
+tocó `_molBox()` en sí (se mantiene su estilo de texto de respaldo para
+sus otros usos) — se reimplicó la misma lógica de intento localmente en
+`reagentSpan()` para poder conservar el estilo de texto plano (sin caja)
+que ya tenía cuando no se puede dibujar.
+
+Se auditaron las 145 reacciones del banco (`BANCO_RXN`): de las 111 que
+tienen un segundo reactivo con "+", **13 ahora se dibujan** con enlaces
+reales (CH₃COCl, CH₃COOH, etanol, metanol, bromometano, cloroetano,
+yodometano, etc. — moléculas orgánicas con esqueleto de carbono) y **98
+siguen en texto**, correctamente: son reactivos inorgánicos o iones/
+catalizadores que ningún libro dibuja con enlaces (HBr, HCl, Cl₂, H₂O,
+NaOH, KMnO₄, Ag(NH₃)₂⁺, Na, Mg, etc.) — el mismo criterio de "solo se
+dibuja lo que de verdad es una molécula orgánica con esqueleto de
+carbono" que ya se usa en el resto del sitio.
+
+### Verificación
+Playwright (Chromium): se generó la tarjeta del ejercicio de la captura
+(acilación de Friedel-Crafts) — CH₃COCl ahora sale dibujado con el C=O
+hacia arriba y el Cl hacia abajo — y dos ejercicios más de control: uno
+con HBr (reactivo inorgánico, confirmado que sigue en texto) y uno de
+esterificación (ácido acético + etanol, ambos reactivos orgánicos,
+confirmado que los dos se dibujan). Se recorrieron programáticamente las
+145 reacciones del banco confirmando que ninguna quedó rota y que la
+clasificación dibujar/texto coincide con el criterio esperado en los 111
+casos con segundo reactivo. Sin errores de consola nuevos.
+
+### Sin pasos manuales pendientes
+`generador.html` se sirve directo por GitHub Pages.
+
+---
+
 ## 2026-09-21 (78) — Apps Script: arregla "Sesiones/Preguntas en el periodo" en Curso X + nueva hoja de premiación por 1.000 preguntas
 
 ### Contexto
