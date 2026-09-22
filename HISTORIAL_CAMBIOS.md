@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (80) — Generador: corrige la pregunta rxn_81 de éteres, que no era una reacción real
+
+### Contexto
+La docente reportó que una de las preguntas de "Reacciones" del generador
+(éteres) no tenía que ver con una reacción: preguntaba "¿qué papel cumple
+este compuesto en reacciones de Grignard y de reducción?" (esperando la
+respuesta "disolvente"), pero la tarjeta siempre muestra un reactivo →
+flecha → producto oculto, con campos "Tipo de reacción" / "Condiciones",
+y esta pregunta no tenía reactivo ni producto — no calzaba en la plantilla.
+
+Para confirmar cuáles son las reacciones reales de los éteres (y no
+inventar una), la docente envió fotos del "Resumen de reacciones" de su
+libro de texto (varios capítulos). La sección de éteres (9.7.C) solo lista
+dos reacciones propias del éter: ruptura con HX, 1 equivalente en frío
+(ruptura parcial: alcohol + haluro) o en exceso con calor (ruptura total:
+2 haluros + agua). El papel de "disolvente" en Grignard/LiAlH₄ es real
+pero no es una reacción del éter en sí — por eso no debía estar en el
+banco de preguntas de reacciones.
+
+### Cambios
+- `generador.html`: la entrada `rxn_81` (categoría "Éteres como
+  solventes") se reemplazó por una reacción real de ruptura parcial de
+  éter (`CH₃−O−CH₂−CH₃ + HBr, 1 eq., en frío`), tipo "identificar el tipo
+  de reacción" — variante que faltaba en el banco (la ruptura parcial ya
+  existía como pregunta de "predecir el producto" en `rxn_78`, pero no
+  como "tipo").
+- Se verificó con Playwright (Chromium) generando la hoja con solo el
+  grupo "Éteres" marcado en Tipo D — la nueva tarjeta se ve correcta:
+  reactivo real, flecha a producto oculto, y los campos de tipo/condición
+  ahora sí aplican.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-21 (79) — Generador de Ejercicios: el segundo reactivo también se dibuja con enlaces
 
 ### Contexto
