@@ -776,12 +776,13 @@ body{
       <div class="cb-grid" id="rxn-pregtipo-grid">
         <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="producto" checked> Predecir el producto</label>
         <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="tipo" checked> Identificar el tipo de reacci&oacute;n</label>
+        <label class="cb-item"><input type="checkbox" name="pregunta_tipo" value="reactivo" checked> Hallar el reactivo / catalizador</label>
       </div>
       <div class="config-label" style="margin-top:14px">Reacciones &mdash; nivel</div>
       <div class="cb-grid" id="rxn-nivel-grid">
         <label class="cb-item"><input type="checkbox" name="rxn_avanzado" value="avanzado"> Incluir avanzadas (organomet&aacute;licos / Grignard)</label>
       </div>
-      <div style="font-size:.72rem;color:var(--dimmer);margin-top:4px">Desmarcado por defecto: 9 preguntas del banco usan un reactivo de Grignard (RMgX) y no entran en la selecci&oacute;n a menos que marques esta casilla.</div>
+      <div style="font-size:.72rem;color:var(--dimmer);margin-top:4px">Desmarcado por defecto: 10 preguntas del banco usan un reactivo de Grignard (RMgX) y no entran en la selecci&oacute;n a menos que marques esta casilla.</div>
     </div>
 
     <!-- Numero de preguntas -->
@@ -1046,6 +1047,7 @@ const M = {
   acidobenzoico(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'COOH');return mkSVG(s);},
   benzaldehido(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'CHO');return mkSVG(s);},
   anisol(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'OCH₃');return mkSVG(s);},
+  acetofenona(){_pts=[];let s=bnzRing(0,0);const r=28;s+=ln(0,-r,0,-r-BL);s+=atm(0,-r-BL,'COCH₃');return mkSVG(s);},
   ortoNitrotolueno(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;s+=ln(0,-r,0,-D);_reg(0,-D);s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'NO₂');return mkSVG(s);},
   acidoSalicilico(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;s+=ln(0,-r,0,-D);s+=atm(0,-D,'COOH');s+=ln(r*COS30,-r*SIN30,D*COS30,-D*SIN30);s+=atm(D*COS30,-D*SIN30,'OH');return mkSVG(s);},
   paraCresol(){_pts=[];let s=bnzRing(0,0);const r=28,D=r+BL;s+=ln(0,-r,0,-D);s+=atm(0,-D,'OH');s+=ln(0,r,0,D);_reg(0,D);return mkSVG(s);},
@@ -2863,6 +2865,91 @@ const BANCO_RXN = [
    nombre_rxn:'Sustitución Nucleofílica (SN2) — reacción de Finkelstein',
    regla:'El I⁻ es mejor nucleófilo y el NaBr formado precipita en acetona, desplazando el equilibrio hacia el producto yodado.',
    respuesta:'CH₃−CHI−CH₃  (2-yodopropano)  +  NaBr↓'},
+  // ── Nuevas reacciones — "Hallar el reactivo/catalizador" (producto dado) ───
+  {key:'rxn_154',topic:'alcanos',categoria:'Sustitución radical (alcanos)',pregunta_tipo:'reactivo',
+   enunciado:'Este es el producto principal de una halogenación radical. Predice el alcano de partida:',
+   reactivo:'+ Cl₂',condicion:'hν',producto:'CH₃−CH₂−CH₂−Cl',
+   nombre_rxn:'Halogenación radical (identificar el alcano de partida)',
+   regla:'El Cl sustituyó un H terminal sin alterar el esqueleto de carbono; el número de carbonos del producto indica el alcano de partida.',
+   respuesta:'CH₃−CH₂−CH₃  (propano)'},
+  {key:'rxn_155',topic:'alquenos',categoria:'Adición (alquenos)',pregunta_tipo:'reactivo',
+   enunciado:'Este alcohol se formó por hidratación de Markovnikov. Predice el alqueno de partida:',
+   reactivo:'+ H₂O',condicion:'cat. H₂SO₄',producto:'CH₃−CH(OH)−CH₃',
+   nombre_rxn:'Hidratación (identificar el alqueno de partida)',
+   regla:'Por Markovnikov, el −OH quedó en el carbono más sustituido; el doble enlace del alqueno de partida estaba entre esos dos carbonos.',
+   respuesta:'CH₃−CH=CH₂  (propeno)'},
+  {key:'rxn_156',topic:'alquinos',categoria:'Adición (alquinos)',pregunta_tipo:'reactivo',
+   enunciado:'Esta cetona se formó por hidratación de Markovnikov de un alquino terminal. Predice el alquino de partida:',
+   reactivo:'+ H₂O',condicion:'cat. H₂SO₄/HgSO₄',producto:'CH₃−CH₂−CO−CH₃',
+   nombre_rxn:'Hidratación de alquino (identificar el alquino de partida)',
+   regla:'Por Markovnikov, el oxígeno queda en el carbono más sustituido del triple enlace; el alquino de partida era terminal.',
+   respuesta:'CH₃−CH₂−C≡CH  (but-1-ino)'},
+  {key:'rxn_157',topic:'benceno',categoria:'SEA (aromáticos)',pregunta_tipo:'reactivo',
+   enunciado:'Esta cetona aromática se formó por acilación de Friedel-Crafts. Predice el cloruro de ácido que reaccionó con el benceno:',
+   r:'C₆H₆',reactivo:'???',condicion:'cat. AlCl₃',producto:'C₆H₅−CO−CH₃',
+   nombre_rxn:'Acilación de Friedel-Crafts (identificar el reactivo)',
+   regla:'El grupo acilo del producto (−CO−CH₃) proviene directamente del cloruro de acilo usado como electrófilo.',
+   respuesta:'CH₃−CO−Cl  (cloruro de acetilo)'},
+  {key:'rxn_158',topic:'halogenuros',categoria:'Síntesis de Williamson',pregunta_tipo:'reactivo',
+   enunciado:'Este éter se formó por síntesis de Williamson. Predice el haluro de alquilo que reaccionó con el metóxido de sodio:',
+   r:'CH₃−ONa',reactivo:'???',condicion:null,producto:'CH₃−O−CH₂−CH₂−CH₃',
+   nombre_rxn:'Síntesis de Williamson (identificar el haluro de partida)',
+   regla:'El grupo alquilo que no vino del alcóxido (CH₃O⁻) llegó como haluro de alquilo (SN2); el resto de la cadena del éter indica cuál era.',
+   respuesta:'CH₃−CH₂−CH₂−Br  (1-bromopropano — o el cloruro/yoduro equivalente)'},
+  {key:'rxn_159',topic:'alcoholes',categoria:'Oxidación (alcoholes)',pregunta_tipo:'reactivo',
+   enunciado:'Este aldehído se obtuvo por oxidación suave. Predice el alcohol de partida:',
+   reactivo:'+ CCP',condicion:'CH₂Cl₂',producto:'CH₃−CH₂−CH₂−CHO',
+   nombre_rxn:'Oxidación suave (identificar el alcohol de partida)',
+   regla:'El CCP oxida un alcohol 1° hasta aldehído sin cambiar el número de carbonos.',
+   respuesta:'CH₃−CH₂−CH₂−CH₂OH  (butan-1-ol)'},
+  {key:'rxn_160',topic:'aldehidos',categoria:'Adición nucleofílica (aldehídos)',pregunta_tipo:'reactivo',
+   enunciado:'Esta cianohidrina se formó por adición de HCN. Predice el aldehído de partida:',
+   reactivo:'+ HCN',condicion:'traza de base (CN⁻)',producto:'CH₃−CH₂−CH(OH)−CN',
+   nombre_rxn:'Adición nucleofílica de HCN (identificar el aldehído de partida)',
+   regla:'El CN⁻ y luego el H se suman al carbono que tenía el C=O; ese carbono es el que estaba en el aldehído de partida.',
+   respuesta:'CH₃−CH₂−CHO  (propanal)'},
+  {key:'rxn_161',topic:'cetonas',categoria:'Reducción (cetonas)',pregunta_tipo:'reactivo',
+   enunciado:'Este alcohol secundario se formó por reducción con NaBH₄. Predice la cetona de partida:',
+   condicion:'NaBH₄ / MeOH',producto:'CH₃−CH(OH)−CH₂−CH₃',
+   nombre_rxn:'Reducción de cetona (identificar la cetona de partida)',
+   regla:'La reducción de una cetona da siempre un alcohol secundario; el carbono con el OH era el carbono carbonílico.',
+   respuesta:'CH₃−CO−CH₂−CH₃  (butanona)'},
+  {key:'rxn_162',topic:'acidos',categoria:'Esterificación de Fischer',pregunta_tipo:'reactivo',
+   enunciado:'Este éster se formó por esterificación de Fischer. Predice el ácido carboxílico de partida:',
+   reactivo:'+ CH₃−OH',condicion:'H⁺',producto:'CH₃−CH₂−COO−CH₃',
+   nombre_rxn:'Esterificación de Fischer (identificar el ácido de partida)',
+   regla:'El grupo −OR del éster viene del alcohol; el resto (R−CO−) viene del ácido carboxílico de partida.',
+   respuesta:'CH₃−CH₂−COOH  (ácido propanoico)'},
+  {key:'rxn_163',nivel:'avanzado',topic:'esteres',categoria:'Reacción de Grignard (ésteres)',pregunta_tipo:'reactivo',
+   enunciado:'Este alcohol terciario se formó al tratar un éster con 2 equivalentes de CH₃MgBr. Predice el éster de partida:',
+   condicion:'1) 2 CH₃MgBr, éter seco  2) H₃O⁺',producto:'CH₃−CH₂−C(CH₃)(CH₃)−OH',
+   nombre_rxn:'Reacción de Grignard sobre éster (identificar el éster de partida)',
+   regla:'El éster reacciona 2 veces con el Grignard; los dos grupos CH₃ que llegaron al carbono con OH provienen de las 2 moléculas de CH₃MgBr, y el resto de la cadena proviene del lado ácido del éster original.',
+   respuesta:'CH₃−CH₂−COO−CH₃  (propanoato de metilo — o cualquier éster CH₃−CH₂−COOR′)'},
+  {key:'rxn_164',topic:'eteres',categoria:'Ruptura de éteres',pregunta_tipo:'reactivo',
+   enunciado:'Esta ruptura parcial de éter (1 eq. de HBr, en frío) liberó este alcohol. Predice el éter de partida:',
+   reactivo:'+ HBr (1 eq., en frío)',condicion:null,producto:'CH₃−CH₂−OH',
+   nombre_rxn:'Ruptura de éter (identificar el éter de partida)',
+   regla:'Con 1 eq. de HX en frío, el grupo alquilo más pequeño sale como haluro; el otro lado queda como alcohol.',
+   respuesta:'CH₃−O−CH₂−CH₃  (etil metil éter, metoxietano)'},
+  {key:'rxn_165',topic:'amidas',categoria:'Hidrólisis (amidas)',pregunta_tipo:'reactivo',
+   enunciado:'Este ácido carboxílico se obtuvo por hidrólisis ácida. Predice la amida de partida:',
+   reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',producto:'CH₃−CH₂−COOH',
+   nombre_rxn:'Hidrólisis de amida (identificar la amida de partida)',
+   regla:'La hidrólisis reemplaza el −NH₂ por −OH sin cambiar el resto de la cadena.',
+   respuesta:'CH₃−CH₂−CO−NH₂  (propanamida)'},
+  {key:'rxn_166',topic:'nitrilos',categoria:'Reducción (nitrilos)',pregunta_tipo:'reactivo',
+   enunciado:'Esta amina primaria se formó por reducción con LiAlH₄. Predice el nitrilo de partida:',
+   condicion:'1) LiAlH₄, éter seco  2) H₂O',producto:'CH₃−CH₂−CH₂−NH₂',
+   nombre_rxn:'Reducción de nitrilo (identificar el nitrilo de partida)',
+   regla:'El LiAlH₄ satura el triple enlace C≡N hasta CH₂−NH₂ sin cambiar el número de carbonos.',
+   respuesta:'CH₃−CH₂−C≡N  (propanonitrilo)'},
+  {key:'rxn_167',topic:'aminas',categoria:'Reducción de nitrocompuestos',pregunta_tipo:'reactivo',
+   enunciado:'Esta amina aromática se formó por reducción catalítica. Predice el compuesto de partida:',
+   reactivo:'+ H₂',condicion:'cat. Pt',producto:'C₆H₅−NH₂',
+   nombre_rxn:'Reducción de nitrocompuesto (identificar el compuesto de partida)',
+   regla:'El H₂/Pt reduce el grupo −NO₂ hasta −NH₂ sin tocar el anillo aromático.',
+   respuesta:'C₆H₅−NO₂  (nitrobenceno)'},
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -3073,6 +3160,7 @@ const _RXN_ALIASES={
   'C₆H₅−O−CH₃':()=>getSVG('anisol'),
   'C₆H₅−ONa':()=>getSVG('fenolato'),
   'C₆H₅−Cl':()=>getSVG('clorobenceno'),
+  'C₆H₅−CO−CH₃':()=>getSVG('acetofenona'),
   'C₆H₅−N₂⁺Cl⁻':()=>getSVG('salDiazonio'),
   'C₆H₁₁OH':()=>getSVG('ciclohexanol'),
   'H−CHO':()=>mkDevSVG([{h:2,bu:[{s:'O',h:0}],buBn:2}]),
@@ -3147,6 +3235,21 @@ function buildTipoDCard(rxn, num){
       ${arrowCol(rxn.condicion)}
       <div class="rxn-d-blank-box">?</div>`;
     fieldHtml=`<div class="rxn-d-field"><span>Producto principal:</span><div class="ans-line"></div></div>`;
+  } else if(rxn.pregunta_tipo==='reactivo'){
+    // 'reactivo' — the product is given (drawn); the student must supply the
+    // missing starting material and/or catalyst. The blank box sits on the
+    // LEFT (reactant side) instead of the right; a second reagent field is
+    // only drawn/shown when it's actually known (rxn.reactivo truthy and not
+    // the '???' sentinel) — otherwise it's folded into the same blank ask.
+    const leftHtml=rxn.r ? _molBox(rxn.r) : '<div class="rxn-d-blank-box">?</div>';
+    const reagentHtml=(rxn.reactivo && rxn.reactivo!=='???') ? reagentSpan(rxn.reactivo)
+      : (rxn.reactivo==='???' ? '<span class="rxn-d-plus">+</span><div class="rxn-d-blank-box">?</div>' : '');
+    eqHtml=`${leftHtml}
+      ${reagentHtml}
+      ${arrowCol(rxn.condicion==='???' ? null : rxn.condicion)}
+      ${_molBox(rxn.producto)}`;
+    fieldHtml=`<div class="rxn-d-field"><span>Reactivo(s) necesario(s):</span><div class="ans-line"></div></div>
+      <div class="rxn-d-field"><span>Condiciones / catalizador:</span><div class="ans-line"></div></div>`;
   } else {
     // 'tipo' — full equation visible; student writes the reaction type
     eqHtml=`${_molBox(rxn.r)}

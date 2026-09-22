@@ -7,6 +7,55 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (88) — Generador: nuevo tipo de pregunta "Hallar el reactivo/catalizador" (producto dado, retrosíntesis)
+
+### Contexto
+La docente pidió un tercer tipo de pregunta para el banco de reacciones:
+en vez de partir siempre de los reactivos y pedir el producto, que
+también haya preguntas donde se dé el **producto** ya formado y el
+estudiante deba deducir qué reactivo y/o catalizador lo produjo.
+
+### Qué se hizo (`generador.html`)
+- Nueva casilla en "Reacciones — tipo de pregunta": **"Hallar el
+  reactivo / catalizador"** (marcada por defecto, junto a "Predecir el
+  producto" e "Identificar el tipo de reacción").
+- Nueva rama de armado de tarjeta (`buildTipoDCard`) para
+  `pregunta_tipo:'reactivo'`: dibuja el **producto** (nuevo campo
+  `producto`, mismo motor de dibujo que ya usa `r`) a la derecha, y pone
+  el cuadro "?" a la **izquierda** en el lugar del reactivo — invirtiendo
+  la flecha respecto a las preguntas de "Predecir el producto". Cuando
+  además hay un segundo reactivo desconocido (p. ej. el cloruro de
+  ácido en una acilación), también se muestra como "?" en vez de
+  dibujarse. Los campos de respuesta son "Reactivo(s) necesario(s):" y
+  "Condiciones / catalizador:".
+- **14 preguntas nuevas** (`rxn_154`–`rxn_167`), una por cada tema
+  existente (alcanos, alquenos, alquinos, benceno, halogenuros,
+  alcoholes, aldehídos, cetonas, ácidos, ésteres —avanzada, con
+  Grignard—, éteres, amidas, nitrilos, aminas), todas con enunciado de
+  predicción pura ("Predice el/la... de partida"), sin pedir
+  explicaciones.
+- Se agregó el dibujo de **acetofenona** (`C₆H₅−CO−CH₃`) a la librería de
+  moléculas del generador — no existía — para poder dibujar el producto
+  de la pregunta de acilación de Friedel-Crafts.
+- El aviso de preguntas con Grignard se actualizó de "9" a **"10"** (la
+  nueva de ésteres, `rxn_163`, quedó marcada `avanzado`).
+
+### Verificación
+Playwright (Chromium): sin errores de sintaxis; **0** reactivos
+principales y **0** productos caen a texto plano en las 167 preguntas del
+banco (antes 153); **0** pares con reactivo+condición+producto idénticos
+en ningún tema; se regeneraron 300 preguntas (6 tandas de 50, con
+avanzadas) sin errores de consola. Se revisaron visualmente 4 tarjetas
+del nuevo tipo (alcanos, acilación de benceno, Williamson, Grignard
+sobre éster) — todas muestran el producto dibujado y el "?" del lado del
+reactivo, con el layout de la flecha invertido correctamente.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (87) — Generador: quita todo enunciado que pida "explicar/justificar" — solo identificación y predicción
 
 ### Contexto
