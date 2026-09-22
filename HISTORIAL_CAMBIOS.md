@@ -7,6 +7,66 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (85) — Generador: corrige preguntas "duplicadas" de aromáticos + agrega orientación orto/para vs. meta
+
+### Contexto
+La docente reportó que al generar reacciones de "Aromáticos" le salieron
+2 preguntas prácticamente iguales; luego confirmó que era la acilación de
+Friedel-Crafts. También pidió ampliar el banco con aromáticos ya
+monosustituidos para que, de paso, se evaluara la orientación de la
+sustitución (orto/para vs. meta) — contenido que sí está en el resumen de
+su libro (capítulo 6) pero que el banco no probaba porque todas las
+reacciones de benceno partían del anillo sin sustituir.
+
+### Causa de las "duplicadas"
+`rxn_15` (pregunta tipo "producto") y `rxn_125` (pregunta tipo "tipo")
+usaban exactamente el mismo reactivo y condición: `C₆H₆ + CH₃COCl, cat.
+AlCl₃`. Cuando el generador elegía ambas al azar para la misma hoja, se
+veían como la misma pregunta repetida (solo cambiaba, en letra pequeña,
+si pedía el producto o el tipo de reacción). Se encontró el mismo patrón
+en otros dos pares del banco:
+- `rxn_12`/`rxn_16` (nitración de benceno, ambas con `C₆H₆ + HNO₃/H₂SO₄`).
+- `rxn_01`/`rxn_06` (alquenos, ambas con `CH₃−CH=CH₂ + HBr`).
+
+### Qué se hizo (`generador.html`)
+- Se le cambió el sustrato a una de cada pareja para que ya no coincidan:
+  `rxn_125` (acilación) y `rxn_16` (nitración) ahora parten de **tolueno**
+  en vez de benceno — y de paso, como el −CH₃ ya es un grupo director,
+  esas preguntas ahora también piden identificar hacia dónde dirige la
+  sustitución. `rxn_06` (alquenos) ahora usa but-1-eno en vez de propeno.
+- Se agregaron **6 preguntas nuevas** de "Aromáticos" con anillos ya
+  monosustituidos, cubriendo los casos que lista el resumen del libro
+  (activante/orto-para vs. desactivante/meta):
+  - `rxn_148`: nitrobenceno + Br₂ (−NO₂, desactivante, director meta).
+  - `rxn_149`: ácido benzoico + HNO₃ (−COOH, desactivante, director meta).
+  - `rxn_150`: anisol + Br₂ (−OCH₃, activante fuerte, orto/para).
+  - `rxn_151`: clorobenceno + HNO₃ (−Cl, el caso especial: desactivante
+    pero director orto/para por resonancia — se pide explicar la
+    aparente contradicción).
+  - `rxn_152`: anilina + Br₂ sin catalizador (−NH₂, activante tan fuerte
+    que sustituye directamente las 3 posiciones orto/para → tribromación).
+  - `rxn_153`: pregunta comparativa (tolueno vs. nitrobenceno) sobre cuál
+    dirige a meta y por qué.
+- Se verificó **todo el banco completo** (no solo aromáticos) buscando el
+  mismo patrón de "mismo reactivo + misma condición, distinto tipo de
+  pregunta" — no quedó ninguna otra pareja así en ningún tema.
+
+### Verificación
+Playwright (Chromium): sin errores de sintaxis; se confirmó
+programáticamente que ya no hay ningún par de preguntas con reactivo +
+condición idénticos en todo `BANCO_RXN` (153 preguntas, antes 147). Se
+revisaron las tarjetas nuevas generadas: tolueno, anilina y ácido
+benzoico se dibujan bien con su sustituyente; clorobenceno cae a
+notación de texto limpia (C₆H₅−Cl), que es el comportamiento normal del
+sitio para sustituyentes que el motor de dibujo aún no soporta — no es
+un error.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (84) — Juego: sincroniza CCP/H⁺ con el generador + Generador: la síntesis de nitrilos deja de aparecer al marcar solo "Nitrilos"
 
 ### Contexto
