@@ -729,7 +729,7 @@ body{
           <input type="checkbox" name="tipo" value="B">
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo B &mdash; Trazar estructura</div>
-            <div class="tipo-item-desc">Se da el nombre IUPAC; el alumno dibuja la estructura esquel&eacute;tica.</div>
+            <div class="tipo-item-desc">Se da el nombre IUPAC; el alumno elige c&oacute;mo dibujar la estructura (esquel&eacute;tica o semidesarrollada).</div>
           </div>
         </label>
         <label class="tipo-item">
@@ -3476,7 +3476,7 @@ function renderSheet(){
           <div class="ex-header">
             <span class="ex-num">${num}.</span>
             <span class="ex-badge badge-b">Estructura</span>
-            <span class="ex-instruction">Dibuja la estructura esquelética del siguiente compuesto:</span>
+            <span class="ex-instruction">Dibuja la estructura del siguiente compuesto (esquel&eacute;tica o semidesarrollada, a tu elecci&oacute;n):</span>
           </div>
           <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre común: ${mol.name})</span>`:''}</div>
           <div class="ex-draw-box"></div>
