@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (83) — Generador: la síntesis de Williamson deja de aparecer al marcar solo "Éteres"
+
+### Contexto
+La docente mandó una captura de una pregunta ("CH₃CH₂ONa + CH₃CH₂Cl → ?",
+tipo Williamson) y avisó que le estaban saliendo muchas preguntas así al
+evaluar con "Éteres" marcado, y que no las encontraba en la sección de su
+libro que usa como base para evaluar.
+
+### Causa
+De las 10 preguntas bajo `topic:'eteres'`, 4 eran de síntesis de
+Williamson (`rxn_74`, `rxn_75`, `rxn_76`, `rxn_82` — 2 alifáticas, 1 de
+"tipo" y 1 aromática). Revisando otra vez las fotos del libro: la sección
+"G. Reacciones de éteres con halogenuros de alquilo" (cap. 9) **solo**
+muestra la ruptura del éter (ROR + HX → RX + ROH/2RX+H₂O) — no muestra
+cómo se forma el éter. La síntesis de Williamson (alcóxido + haluro →
+éter) es, en el libro de la docente, un caso particular de la sustitución
+nucleofílica genérica del capítulo 8 (donde "⁻OR" aparece listado como
+nucleófilo), no una "reacción de éteres" propia del capítulo 9. Por eso,
+al marcar solo "Éteres" para evaluar, salían preguntas que no están en esa
+sección específica del libro.
+
+### Qué se hizo (`generador.html`)
+Se cambió `topic:'eteres'` → `topic:'halogenuros'` en las 4 preguntas de
+Williamson (`rxn_74`, `rxn_75`, `rxn_76`, `rxn_82`), sin tocar su
+contenido, categoría ni nada más — solo bajo qué casilla de "Reacciones —
+grupos a repasar" aparecen. Ya existía una pregunta de Williamson bajo
+`halogenuros` (`rxn_136`), así que quedan agrupadas con esa. Se dejó un
+comentario en el código explicando por qué.
+
+Resultado: "Éteres" ahora muestra 6 preguntas (todas de ruptura o baja
+reactividad frente a bases — exactamente lo que cubre esa sección del
+libro), y "Halogenuros de alquilo" gana las 4 de Williamson (respaldadas
+por el capítulo 8 del mismo libro).
+
+### Verificación
+Playwright (Chromium): sin errores de sintaxis; se confirmó con el banco
+cargado que `topic:'eteres'` quedó en 6 preguntas y las 4 de Williamson
+pasaron a `topic:'halogenuros'`; se generó una hoja marcando solo "Éteres"
+y ninguna de las 6 preguntas mencionó "Williamson".
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (82) — Reacciones: sincroniza la sigla CCP (antes PCC) con la corrección del generador
 
 ### Contexto

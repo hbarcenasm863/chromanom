@@ -2383,19 +2383,23 @@ const BANCO_RXN = [
    regla:'A diferencia de un aldehído o cetona (que reaccionan una sola vez), el éster reacciona DOS veces con el Grignard: primero se forma una cetona intermedia, que luego reacciona con el segundo equivalente. Por eso el alcohol resultante siempre es terciario y con dos grupos R′ iguales.',
    respuesta:'Se necesitan 2 equivalentes de CH₃MgBr. Se obtiene un alcohol terciario: CH₃−CH₂−C(OH)(CH₃)₂ (2-metilbutan-2-ol) + CH₃−OH (metanol).'},
   // ── Éteres ───────────────────────────────────────────────────────────────
-  {key:'rxn_74',topic:'eteres',categoria:'Síntesis de Williamson',pregunta_tipo:'producto',
+  // (rxn_74/75/76/82: síntesis de Williamson — topic:'halogenuros' a propósito.
+  //  El libro de la docente solo trata la formación del éter como sustitución
+  //  nucleofílica genérica del cap. 8 —OR⁻ como nucleófilo—, no como una
+  //  "reacción de éteres" propia del cap. 9; ese capítulo solo cubre la ruptura.)
+  {key:'rxn_74',topic:'halogenuros',categoria:'Síntesis de Williamson',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−CH₂−ONa',reactivo:'+ CH₃−Br',condicion:null,
    nombre_rxn:'Síntesis de Williamson',
    regla:'El alcóxido actúa como nucleófilo y desplaza al haluro (SN2) formando el éter.',
    respuesta:'CH₃−CH₂−O−CH₃  (etil metil éter, metoxietano)  +  NaBr'},
-  {key:'rxn_75',topic:'eteres',categoria:'Síntesis de Williamson',pregunta_tipo:'producto',
+  {key:'rxn_75',topic:'halogenuros',categoria:'Síntesis de Williamson',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'CH₃−ONa',reactivo:'+ CH₃−CH₂−CH₂−Br',condicion:null,
    nombre_rxn:'Síntesis de Williamson',
    regla:'El alcóxido actúa como nucleófilo y desplaza al haluro (SN2) formando el éter.',
    respuesta:'CH₃−O−CH₂−CH₂−CH₃  (1-metoxipropano)  +  NaBr'},
-  {key:'rxn_76',topic:'eteres',categoria:'Síntesis de Williamson',pregunta_tipo:'tipo',
+  {key:'rxn_76',topic:'halogenuros',categoria:'Síntesis de Williamson',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y el mecanismo implicado:',
    r:'CH₃−CH₂−ONa',reactivo:'+ CH₃−CH₂−Cl',condicion:'???',
    nombre_rxn:'Síntesis de Williamson',
@@ -2431,7 +2435,7 @@ const BANCO_RXN = [
    nombre_rxn:'Ruptura parcial de éter con HX (1 equivalente)',
    regla:'Con solo 1 equivalente de HX y en frío, el enlace C−O se rompe una sola vez: se forma un alcohol y un haluro de alquilo, no dos haluros.',
    respuesta:'Ruptura de éter (parcial). Con 1 eq. de HBr en frío: CH₃−Br  (bromometano)  +  CH₃−CH₂−OH  (etanol).'},
-  {key:'rxn_82',topic:'eteres',categoria:'Síntesis de Williamson (aromático)',pregunta_tipo:'producto',
+  {key:'rxn_82',topic:'halogenuros',categoria:'Síntesis de Williamson (aromático)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
    r:'C₆H₅−ONa',reactivo:'+ CH₃−I',condicion:null,
    nombre_rxn:'Síntesis de Williamson',
