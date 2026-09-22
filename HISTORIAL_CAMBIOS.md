@@ -7,6 +7,56 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (82) — Reacciones: sincroniza la sigla CCP (antes PCC) con la corrección del generador
+
+### Contexto
+Después de la auditoría de catalizadores en `generador.html` (sesión
+anterior), la docente pidió revisar también `reacciones.html` para que
+coincidiera con esas correcciones.
+
+### Revisión hecha
+Se comparó `reacciones.html` contra las mismas fotos del libro y contra
+los cambios ya aplicados en `generador.html`:
+
+- **Esterificación de Fischer / hidrólisis de éster**: ya usaba **H⁺**
+  (no H₂SO₄) — coincide, no hacía falta tocar nada.
+- **Éster + Grignard (2 eq.) → alcohol 3°**: ya está mencionado en la
+  tarjeta de "Ésteres — Reacciones Clave" (línea de condiciones), aunque
+  solo como mención breve, sin mecanismo paso a paso propio como sí lo
+  tienen aldehídos/cetonas. Se deja así por ahora — agregar un mecanismo
+  completo nuevo es un cambio de alcance mayor, no una corrección; se
+  puede hacer en otra sesión si la docente lo pide.
+- **Sigla "PCC"**: `reacciones.html` usaba la sigla en inglés ("PCC",
+  clorocromato de piridinio) en 17 lugares (insignias, mecanismos,
+  tarjetas de comparación, preguntas de práctica). El libro de la docente
+  usa la sigla en español, **"CCP"** — igual que se corrigió en el
+  generador. Se reemplazó en las 17 apariciones.
+- **KMnO₄ / K₂Cr₂O₇ como oxidantes fuertes** y el **oleum** en la
+  sulfonación de benceno: se dejaron **sin tocar** a propósito. A
+  diferencia del generador (donde el "catalizador" de cada pregunta debe
+  calzar exacto con la respuesta esperada), acá son explicaciones más
+  profundas que ya son químicamente correctas — el oleum sí es lo que se
+  necesita en la práctica para sulfonar (el resumen del libro solo lo
+  simplifica a "H₂SO₄"), y KMnO₄/K₂Cr₂O₇ son oxidantes fuertes válidos
+  para el alcohol 1°→ácido con su propio cambio de color como prueba
+  visual (violeta→pardo, naranja→verde), contenido que no estaba mal, solo
+  no era lo que mostraba esa imagen puntual del resumen del libro.
+
+### Cambios (`reacciones.html`)
+Reemplazo de "PCC" por "CCP" en las 17 apariciones (insignias, texto de
+mecanismos, tarjetas de comparación molecular, opciones y
+retroalimentación de las preguntas de práctica rápida).
+
+### Verificación
+Playwright (Chromium): la página carga sin errores de consola y ya no
+queda ningún "PCC" visible en el texto renderizado.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (81) — Generador: auditoría completa de catalizadores/reactivos del banco de reacciones contra el libro de texto
 
 ### Contexto

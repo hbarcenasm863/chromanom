@@ -5147,7 +5147,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="tipo-card-eq">CH₃CH₂OH  →  alqueno (−H₂O) / haloalcano / éster / aldehído</div>
       <div class="tipo-card-rules">
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">deshidratación H₂SO₄/Δ</span>
-        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">oxidación PCC · K₂Cr₂O₇</span>
+        <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">oxidación CCP · K₂Cr₂O₇</span>
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">halogenación SOCl₂</span>
         <span class="tipo-card-badge" style="background:var(--c4b);color:var(--c4t)">esterificación · Fischer</span>
         <span class="tipo-card-badge" style="background:var(--c2b);color:var(--c2t)">4 reacciones</span>
@@ -5350,7 +5350,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
       <div class="rxn-head" onclick="toggleRxn('ao-1')">
         <div class="rxn-head-left">
           <span class="rxn-title" style="color:var(--c2t)">Oxidación de Alcoholes</span>
-          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">KMnO₄ · K₂Cr₂O₇ · PCC</span>
+          <span class="rxn-badge" style="background:var(--c2b);color:var(--c2t)">KMnO₄ · K₂Cr₂O₇ · CCP</span>
         </div>
         <span class="rxn-chev" id="chev-ao-1">▾</span>
       </div>
@@ -5377,7 +5377,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
               <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
             <div class="rxn-anim-step">
-              <div class="rxn-anim-vis orange">PCC (suave) o KMnO₄/K₂Cr₂O₇ (fuerte)</div>
+              <div class="rxn-anim-vis orange">CCP (suave) o KMnO₄/K₂Cr₂O₇ (fuerte)</div>
               <div class="rxn-anim-label">Condición: el oxidante decide dónde para</div>
               <button class="speak-btn" onclick="speakStep(this,this.closest('.rxn-anim-step').querySelector('.rxn-anim-label').innerText)">🔊 Escuchar</button>
             </div>
@@ -5407,14 +5407,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="mech-step-n">Paso 1 de 3 — ¿Cuáles alcoholes se dejan oxidar?</div>
             <div class="mech-step-h">Solo alcoholes 1° y 2° se oxidan; los 3° no (no tienen H en el Cα del −OH)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Primera pregunta que deben hacerse: ¿ese carbono con el OH tiene un H pegado? Si no lo tiene, no hay oxidación posible — así de simple. Los alcoholes <em>1°</em> sí lo tienen y dan aldehídos (con un oxidante suave como PCC) o ácidos (con KMnO₄ fuerte). Los <em>2°</em> también lo tienen y siempre dan cetonas. Y los <em>3°</em>, ojo con esto, no tienen ese H en el Cα — no se oxidan por esta vía, punto.</div>
+            <div class="mech-step-txt">Primera pregunta que deben hacerse: ¿ese carbono con el OH tiene un H pegado? Si no lo tiene, no hay oxidación posible — así de simple. Los alcoholes <em>1°</em> sí lo tienen y dan aldehídos (con un oxidante suave como CCP) o ácidos (con KMnO₄ fuerte). Los <em>2°</em> también lo tienen y siempre dan cetonas. Y los <em>3°</em>, ojo con esto, no tienen ese H en el Cα — no se oxidan por esta vía, punto.</div>
           </div>
           <div class="mech-step" id="ms-ao-1-1">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">PCC</text><text x="50" y="34" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">1° → RCHO (para ahí)</text><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">KMnO₄ / K₂Cr₂O₇</text><text x="150" y="34" text-anchor="middle" font-size="8.3" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">1° → RCOOH · 2° → R₂C=O</text><line x1="10" y1="50" x2="190" y2="50" stroke="var(--brd)" stroke-width="1.5"/><text x="100" y="68" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">oxidante suave detiene; oxidante fuerte sobreoxida</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" style="overflow:visible;display:block;margin:0 auto" ><text x="50" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">CCP</text><text x="50" y="34" text-anchor="middle" font-size="8.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">1° → RCHO (para ahí)</text><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">KMnO₄ / K₂Cr₂O₇</text><text x="150" y="34" text-anchor="middle" font-size="8.3" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">1° → RCOOH · 2° → R₂C=O</text><line x1="10" y1="50" x2="190" y2="50" stroke="var(--brd)" stroke-width="1.5"/><text x="100" y="68" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">oxidante suave detiene; oxidante fuerte sobreoxida</text></svg></div>
             <div class="mech-step-n">Paso 2 de 3 — ¿Con qué oxidante se quedan?</div>
-            <div class="mech-step-h">PCC (suave): para detenerse en aldehído · KMnO₄/K₂Cr₂O₇ (fuerte): hasta ácido carboxílico</div>
+            <div class="mech-step-h">CCP (suave): para detenerse en aldehído · KMnO₄/K₂Cr₂O₇ (fuerte): hasta ácido carboxílico</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Acá está la jugada para controlar el producto: si quieren quedarse en el aldehído, usan <strong>PCC</strong> (clorocromato de piridinio) en CH₂Cl₂, en condición anhidra — sin agua de por medio, se detiene ahí y no sigue. Si en cambio usan <strong>KMnO₄ caliente/ácido</strong>, este es un oxidante tan fuerte que sobreoxida el aldehído hasta ácido carboxílico, no lo pueden parar a la mitad. El <strong>K₂Cr₂O₇</strong> en H₂SO₄ se comporta parecido al KMnO₄, así que en la práctica ven a los dos.</div>
+            <div class="mech-step-txt">Acá está la jugada para controlar el producto: si quieren quedarse en el aldehído, usan <strong>CCP</strong> (clorocromato de piridinio) en CH₂Cl₂, en condición anhidra — sin agua de por medio, se detiene ahí y no sigue. Si en cambio usan <strong>KMnO₄ caliente/ácido</strong>, este es un oxidante tan fuerte que sobreoxida el aldehído hasta ácido carboxílico, no lo pueden parar a la mitad. El <strong>K₂Cr₂O₇</strong> en H₂SO₄ se comporta parecido al KMnO₄, así que en la práctica ven a los dos.</div>
           </div>
           <div class="mech-step" id="ms-ao-1-2">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="88" viewBox="0 3 190 85" style="overflow:visible;display:block;margin:0 auto" ><text x="45" y="14" text-anchor="middle" font-size="10" font-weight="800" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">C</text><line x1="45" y1="18" x2="45" y2="30" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="45" y="40" text-anchor="middle" font-size="11" font-weight="800" style="fill:var(--err);font-family:'JetBrains Mono',monospace">H</text><path d="M45,36 Q31,30 45,24" fill="none" stroke="var(--arr)" stroke-width="2.1" marker-end="url(#arrFull)"/><circle cx="45" cy="58" r="16" fill="#7c3aed" opacity=".7"/><text x="45" y="83" text-anchor="middle" font-size="8.5" style="fill:#7c3aed;font-family:'JetBrains Mono',monospace">KMnO₄ violeta</text><line x1="75" y1="58" x2="100" y2="58" stroke="var(--dimmer)" stroke-width="1.5"/><polygon points="100,58 92,54 92,62" fill="var(--dimmer)"/><circle cx="135" cy="58" r="11" fill="#92400e" opacity=".8"/><text x="135" y="83" text-anchor="middle" font-size="8.5" style="fill:#92400e;font-family:'JetBrains Mono',monospace">MnO₂ pardo</text><text x="90" y="8" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">2 e⁻ del C−H reducen al metal</text></svg></div>
@@ -5431,7 +5431,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <div class="ox-badge">C: −1</div>
           </div>
           <div class="mol-cmp-arr">
-            <div class="mol-cmp-reag">PCC</div>
+            <div class="mol-cmp-reag">CCP</div>
             <div>──→</div>
           </div>
           <div class="mol-cmp-card">
@@ -5464,12 +5464,12 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span style="font-size:.65rem;color:var(--c3t);font-family:'JetBrains Mono',monospace;font-weight:800">(C: +2)</span>
           </div>
         </div>
-        <div class="rxn-cond">Escojan el oxidante según el producto: PCC → aldehído (1°, controlado) · KMnO₄/K₂Cr₂O₇ → ácido (1°, fuerte) / cetona (2°) · 3° no reacciona (no tiene H en C−OH)</div>
+        <div class="rxn-cond">Escojan el oxidante según el producto: CCP → aldehído (1°, controlado) · KMnO₄/K₂Cr₂O₇ → ácido (1°, fuerte) / cetona (2°) · 3° no reacciona (no tiene H en C−OH)</div>
         <div class="rxn-regla" style="background:var(--c3b);color:var(--c3t)">🔢 Número de oxidación del carbono (cuenta: C−H = −1, C−O = +1 por cada enlace, C−C = 0): cada paso de esta escalera sube el estado de oxidación en <b>+2</b>, porque cada oxidación transfiere 2 electrones. Por eso el alcohol 1° (−1) → aldehído (+1) → ácido (+3), y el 2° (0) → cetona (+2), nunca saltan de a 1.</div>
-        <div class="rxn-regla">📌 Recuerden esto: PCC detiene en aldehído · KMnO₄ no perdona, sobreoxida el 1° hasta ácido</div>
+        <div class="rxn-regla">📌 Recuerden esto: CCP detiene en aldehído · KMnO₄ no perdona, sobreoxida el 1° hasta ácido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
         <div class="rxn-ex" style="animation-delay:.05s">
-          <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[PCC]</span>
+          <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[CCP]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">CHO</span></span>
           <span class="rxn-ex-nota">etanol → etanal (aldehído)</span>
@@ -5482,7 +5482,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-vida">
   <span class="rxn-vida-ico">🍶</span>
-  <div><strong>¿Para qué les sirve esto?</strong> Cuando oxidan etanol llegan a <strong>ácido acético</strong> — la base del vinagre. El vinagre de mesa que consumimos en Colombia se hace exactamente así: bacterias <em>Acetobacter</em> oxidan el etanol con el oxígeno del aire. Y en el laboratorio, si necesitan parar a la mitad del camino, el PCC les deja el aldehído sin dejarlos llegar al ácido — clave cuando están sintetizando perfumes o fármacos.</div>
+  <div><strong>¿Para qué les sirve esto?</strong> Cuando oxidan etanol llegan a <strong>ácido acético</strong> — la base del vinagre. El vinagre de mesa que consumimos en Colombia se hace exactamente así: bacterias <em>Acetobacter</em> oxidan el etanol con el oxígeno del aire. Y en el laboratorio, si necesitan parar a la mitad del camino, el CCP les deja el aldehído sin dejarlos llegar al ácido — clave cuando están sintetizando perfumes o fármacos.</div>
 </div>
         <div class="rxn-extra">
           <div class="rxn-extra-box inquiry">
@@ -5503,7 +5503,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           <div class="quiz-q-text">¿Qué oxidante permite obtener un aldehído a partir de un alcohol 1° sin sobreoxidar?</div>
           <div class="quiz-opts">
             <div class="quiz-opt" onclick="rxnAnswer(this,'ao-1-q0',false)"><span class="quiz-opt-icon">○</span> KMnO₄ en frío</div>
-            <div class="quiz-opt" onclick="rxnAnswer(this,'ao-1-q0',true)"><span class="quiz-opt-icon">○</span> PCC (clorocromato de piridinio)</div>
+            <div class="quiz-opt" onclick="rxnAnswer(this,'ao-1-q0',true)"><span class="quiz-opt-icon">○</span> CCP (clorocromato de piridinio)</div>
             <div class="quiz-opt" onclick="rxnAnswer(this,'ao-1-q0',false)"><span class="quiz-opt-icon">○</span> K₂Cr₂O₇/H₂SO₄</div>
           </div>
           <div class="quiz-fb" id="fb-ao-1-q0"></div>
@@ -7444,11 +7444,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
             <span class="mech-dot" onclick="mechDot('ac-1',2)" title="Paso 3"></span>
           </div>
           <div class="mech-step on" id="ms-ac-1-0">
-            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="76" viewBox="0 5 190 70" style="overflow:visible;display:block;margin:0 auto" ><text x="35" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">R−CH₂OH</text><text x="35" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C: −1</text><line x1="10" y1="38" x2="60" y2="38" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="60,38 52,34 52,42" fill="var(--dimmer)"/><text x="90" y="20" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">RCHO</text><text x="90" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C: +1</text><line x1="65" y1="38" x2="115" y2="38" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="115,38 107,34 107,42" fill="var(--dimmer)"/><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH</text><text x="150" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">C: +3</text><text x="80" y="55" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">KMnO₄ fuerte no para en el aldehído</text><text x="80" y="68" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">PCC sí para ahí ✓</text></svg></div>
+            <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="190" height="76" viewBox="0 5 190 70" style="overflow:visible;display:block;margin:0 auto" ><text x="35" y="20" text-anchor="middle" font-size="10" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">R−CH₂OH</text><text x="35" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">C: −1</text><line x1="10" y1="38" x2="60" y2="38" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="60,38 52,34 52,42" fill="var(--dimmer)"/><text x="90" y="20" text-anchor="middle" font-size="10" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">RCHO</text><text x="90" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c4t);font-family:'JetBrains Mono',monospace">C: +1</text><line x1="65" y1="38" x2="115" y2="38" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="115,38 107,34 107,42" fill="var(--dimmer)"/><text x="150" y="20" text-anchor="middle" font-size="10" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">RCOOH</text><text x="150" y="30" text-anchor="middle" font-size="7.5" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">C: +3</text><text x="80" y="55" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">KMnO₄ fuerte no para en el aldehído</text><text x="80" y="68" text-anchor="middle" font-size="8.5" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">CCP sí para ahí ✓</text></svg></div>
             <div class="mech-step-n">Paso 1 de 3 — Oxidar un alcohol 1° hasta el final</div>
             <div class="mech-step-h">KMnO₄ fuerte (o K₂Cr₂O₇/H₂SO₄) oxida alcohol 1° → aldehído → RCOOH (sobreoxidación)</div>
             <button class="speak-btn" onclick="speakStep(this,this.closest('.mech-step').querySelector('.mech-step-h').innerText)">🔊 Escuchar</button>
-            <div class="mech-step-txt">Primera vía: con <strong>KMnO₄ caliente/ácido o K₂Cr₂O₇/H₂SO₄</strong>, el alcohol 1° no se queda a medio camino. Se oxida a aldehído, y como el aldehído sigue siendo reactivo frente a estos oxidantes fuertes en medio acuoso, sigue de largo hasta ácido carboxílico. Ojo con esto: si en el examen les piden detenerse justo en el aldehído, ese reactivo no sirve — ahí necesitan <em>PCC</em>, que trabaja en condiciones suaves y anhidras y sí frena en RCHO. Fíjense en el <b>número de oxidación</b> del carbono: sube de a <strong>2 en 2</strong> (−1 → +1 → +3) porque cada oxidante fuerte retira 2 electrones — nunca queda a medias.</div>
+            <div class="mech-step-txt">Primera vía: con <strong>KMnO₄ caliente/ácido o K₂Cr₂O₇/H₂SO₄</strong>, el alcohol 1° no se queda a medio camino. Se oxida a aldehído, y como el aldehído sigue siendo reactivo frente a estos oxidantes fuertes en medio acuoso, sigue de largo hasta ácido carboxílico. Ojo con esto: si en el examen les piden detenerse justo en el aldehído, ese reactivo no sirve — ahí necesitan <em>CCP</em>, que trabaja en condiciones suaves y anhidras y sí frena en RCHO. Fíjense en el <b>número de oxidación</b> del carbono: sube de a <strong>2 en 2</strong> (−1 → +1 → +3) porque cada oxidante fuerte retira 2 electrones — nunca queda a medias.</div>
           </div>
           <div class="mech-step" id="ms-ac-1-1">
             <div class="mech-vis"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="96" viewBox="0 5 200 91" style="overflow:visible;display:block;margin:0 auto" ><line x1="45.0" y1="25.0" x2="62.32050807568878" y2="35.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="62.32050807568878" y1="35.0" x2="62.32050807568878" y2="55.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="62.32050807568878" y1="55.0" x2="45.0" y2="65.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="45.0" y1="65.0" x2="27.679491924311225" y2="55.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="27.679491924311225" y1="55.0" x2="27.67949192431123" y2="35.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><line x1="27.67949192431123" y1="35.0" x2="45.0" y2="25.0" stroke="#1d4ed8" stroke-width="2.2" stroke-linecap="round"/><circle cx="45" cy="45" r="13" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 3"/><line x1="45.0" y1="25.0" x2="45.0" y2="11.0" stroke="var(--tx)" stroke-width="1.6" stroke-linecap="round"/><line x1="45.0" y1="11.0" x2="45.0" y2="-1.0" stroke="var(--err)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round" opacity=".85"/><text x="45.0" y="-7.0" text-anchor="middle" font-size="8" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">R</text><line x1="90" y1="30" x2="120" y2="30" stroke="var(--dimmer)" stroke-width="1.4"/><polygon points="120,30 112,26 112,34" fill="var(--dimmer)"/><text x="105" y="20" text-anchor="middle" font-size="8" style="fill:var(--c3t);font-family:'JetBrains Mono',monospace">KMnO₄/OH⁻/Δ</text><text x="150" y="21.0" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--c2t);font-family:'JetBrains Mono',monospace">COOH</text><text x="90" y="88" text-anchor="middle" font-size="8.3" style="fill:var(--dimmer);font-family:'JetBrains Mono',monospace">la cadena se oxida; el anillo queda intacto</text></svg></div>
@@ -7494,7 +7494,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-cond">Alcohol 1° + KMnO₄ fuerte → ácido (sin detenerse en aldehído) · Alquilbenceno: cadena lateral → COOH (anillo no se oxida) · R−CN + H₂O/H⁺ → RCOOH + NH₄⁺</div>
-        <div class="rxn-regla">📌 Con KMnO₄ fuerte el alcohol 1° siempre llega hasta RCOOH — si necesitan quedarse en RCHO, cambien a PCC</div>
+        <div class="rxn-regla">📌 Con KMnO₄ fuerte el alcohol 1° siempre llega hasta RCOOH — si necesitan quedarse en RCHO, cambien a CCP</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
         <div class="rxn-ex" style="animation-delay:.05s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">CH₃</span> + KMnO₄/OH⁻/Δ</span>
@@ -8367,7 +8367,7 @@ const QUIZ_FB={
   'hg-2-q0':{ok:'Correcto — la Regla de Zaitsev: el alqueno más sustituido (más estable por más sustituyentes en el doble enlace) es el producto principal de E2.',fail:'El alqueno menos sustituido sería el producto de la Regla de Hofmann (con bases muy voluminosas). Zaitsev favorece el más sustituido.'},
   /* Alcoholes */
   'ao-0-q0':{ok:'Correcto — Zaitsev: el H se elimina del C3 (solo 2H disponibles frente a C1 con 3H) → 2-buteno (más sustituido, más estable).',fail:'1-buteno sería el producto anti-Zaitsev. El butano se formaría por hidrogenación, no deshidratación.'},
-  'ao-1-q0':{ok:'Correcto — PCC detiene la oxidación en aldehído. KMnO₄ o K₂Cr₂O₇ sobreoxidan hasta ácido.',fail:'KMnO₄ en frío oxida alquenos (→ diol), no es selectivo para aldehído. K₂Cr₂O₇ sobreoxida a ácido.'},
+  'ao-1-q0':{ok:'Correcto — CCP detiene la oxidación en aldehído. KMnO₄ o K₂Cr₂O₇ sobreoxidan hasta ácido.',fail:'KMnO₄ en frío oxida alquenos (→ diol), no es selectivo para aldehído. K₂Cr₂O₇ sobreoxida a ácido.'},
   'ao-2-q0':{ok:'Correcto — SO₂ y HCl son gases que burbujean y salen de la mezcla, dejando el RCl puro sin necesidad de separación adicional.',fail:'HCl sí puede clorar alcoholes (ROH + HCl → RCl + H₂O), pero el subproducto H₂O queda en solución y complica la purificación.'},
   'ao-3-q0':{ok:'Correcto — Le Chatelier: exceso de alcohol (o eliminación del H₂O producido) desplaza el equilibrio hacia la formación de más éster.',fail:'Añadir agua desplaza el equilibrio hacia los reactivos (más ácido + alcohol, no más éster). El calor favorece la eliminación pero no es lo más importante.'},
   /* Aminas */
