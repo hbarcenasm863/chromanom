@@ -7,6 +7,76 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (84) — Juego: sincroniza CCP/H⁺ con el generador + Generador: la síntesis de nitrilos deja de aparecer al marcar solo "Nitrilos"
+
+### Contexto
+La docente pidió dos cosas: (1) revisar también `juego.html` para que
+coincida con las correcciones de catalizadores hechas en el generador y
+en reacciones.html, y (2) una auditoría completa de libro vs. generador
+para que no aparecieran más errores del tipo "esta pregunta no está en la
+sección del libro que uso para evaluar" (el caso de Williamson en éteres
+de la sesión anterior).
+
+### Parte 1 — `juego.html`
+`juego.html` tiene su propio banco de 314 preguntas de reacciones
+(`QBANK_REACCIONES`, `QBANK_RXNQ`, `QBANK_RXN_BUILD`), independiente del
+`BANCO_RXN` del generador, con las respuestas y explicaciones codificadas
+en base64 (para que no se vean respondiendo con "ver código fuente").
+Se decodificó y revisó el banco completo contra el mismo resumen del
+libro:
+
+- **Sigla "PCC" → "CCP"**: aparecía en 5 preguntas (opciones de
+  respuesta, la respuesta correcta y las explicaciones) — se corrigió en
+  las 9 apariciones codificadas + las de texto plano, igual que en
+  generador.html y reacciones.html.
+- **Esterificación de Fischer con "H₂SO₄" → "H⁺"**: 6 preguntas usaban
+  H₂SO₄ como catalizador (en el campo de condición y en explicaciones/
+  opciones) en vez de H⁺ (el libro usa H⁺ genérico) — corregidas.
+- Se revisó si existía alguna pregunta de síntesis de Williamson mal
+  ubicada (como pasó en el generador) — no hay ninguna: el juego no tiene
+  un tema "éteres" en su banco de reacciones, así que ese problema no
+  aplica acá.
+- Se dejaron **sin tocar** (a propósito, mismo criterio que en
+  reacciones.html) las preguntas que usan KMnO₄/K₂Cr₂O₇ como oxidantes
+  fuertes del alcohol 1° y la mención de "oleum" en la sulfonación del
+  benceno: son química válida y más detallada que la imagen puntual del
+  resumen del libro, no catalizadores equivocados.
+
+### Parte 2 — Auditoría libro vs. generador: mismo problema en "Nitrilos"
+Revisando cada tema del generador contra el resumen del libro (buscando
+específicamente reacciones que un tema incluye pero que, según el libro,
+pertenecen a un capítulo distinto — el mismo tipo de error de Williamson),
+se encontró un caso más:
+
+- **Síntesis de nitrilos a partir de haluros** (`R−X + CN⁻ → R−C≡N`,
+  `rxn_97`, `rxn_98`, `rxn_143` — 3 de las 10 preguntas de "Nitrilos").
+  En el libro de la docente, esto es sustitución nucleofílica genérica
+  del capítulo 8 (⁻CN aparece listado como nucleófilo, igual que ⁻OR en
+  el caso de Williamson) — el capítulo de nitrilos solo trata su
+  hidrólisis y reducción, nunca su síntesis desde un haluro.
+- Se cambió `topic:'nitrilos'` → `topic:'halogenuros'` en esas 3
+  preguntas (mismo tratamiento que Williamson), sin tocar su contenido.
+  "Nitrilos" queda con 7 preguntas (hidrólisis + reducción, que sí están
+  en esa sección del libro).
+- Se revisaron uno por uno el resto de los temas (alcoholes, ácidos,
+  ésteres, aldehídos/cetonas, benceno, aminas, amidas) buscando el mismo
+  patrón — no se encontró ningún otro caso. Alcanos, alquenos y alquinos
+  no se pudieron auditar porque ninguna de las fotos que envió la docente
+  cubre esos capítulos.
+
+### Verificación
+Playwright (Chromium): ambos archivos cargan sin errores de consola.
+`generador.html`: 147 preguntas totales, "Nitrilos" quedó en 7 (ninguna
+menciona "Síntesis"), "Halogenuros" ganó las 3 nuevas. `juego.html`: ya
+no queda ningún "PCC" (ni en texto plano ni decodificando el base64) en
+todo el archivo.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (83) — Generador: la síntesis de Williamson deja de aparecer al marcar solo "Éteres"
 
 ### Contexto
