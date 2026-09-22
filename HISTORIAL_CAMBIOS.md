@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (81) — Generador: auditoría completa de catalizadores/reactivos del banco de reacciones contra el libro de texto
+
+### Contexto
+Tras corregir `rxn_81`, la docente pidió revisar TODAS las demás reacciones
+del generador (147 preguntas del banco `BANCO_RXN`) para que fueran exactas
+contra las mismas fotos del "Resumen de reacciones" de su libro de texto
+(capítulos 6, 8, 9, 10, 11, 12 y 13), y ajustar todos los catalizadores a
+los que aparecen ahí — recordando que las reacciones de Grignard/
+organometálicos deben seguir marcadas como avanzadas.
+
+### Revisión hecha
+Se releyeron con cuidado las 13 fotos y se comparó, tema por tema, cada
+una de las 145 preguntas existentes contra el resumen oficial del libro
+(éteres, alcoholes, ácidos, ésteres, aldehídos/cetonas, aminas, benceno,
+halogenuros — los únicos temas que el generador cubre). La mayoría ya
+coincidía; se encontraron y corrigieron estos casos:
+
+- **Sulfonación de benceno** (`rxn_13`): se quitó "oleum" como condición
+  — el libro muestra la reacción directa con H₂SO₄, sin catalizador aparte.
+- **Oxidación suave de alcohol 1° a aldehído** (`rxn_26`, `rxn_33`): el
+  libro usa la sigla en español **"CCP"** (clorocromato de piridinio), no
+  "PCC" (la sigla en inglés) — se corrigió en las 2 preguntas y en sus
+  explicaciones.
+- **Oxidación fuerte de alcohol 1° a ácido** (`rxn_27`, `rxn_56`,
+  `rxn_57`): el libro usa **CrO₃/H⁺** para esta transformación, no KMnO₄
+  — se corrigieron las 3 preguntas (el KMnO₄ para oxidar la cadena lateral
+  de un alquilbenceno en `rxn_58`/`rxn_124` sí es el catalizador correcto
+  según el libro, esas no se tocaron).
+- **Oxidación de alcohol 2° a cetona** (`rxn_28`): K₂Cr₂O₇/H₂SO₄ → **CCP o
+  CrO₃/H⁺**, tal como lo muestra el libro.
+- **Esterificación de Fischer** (`rxn_31`, `rxn_61`, `rxn_62`, `rxn_64`,
+  `rxn_65`): el libro cataliza siempre con **H⁺** (no especifica H₂SO₄) —
+  se corrigieron las 5 preguntas que decían "H₂SO₄"/"cat. H₂SO₄".
+- **Ésteres + reactivo de Grignard**: esta reacción SÍ está en el resumen
+  del libro (un éster + 2 equivalentes de Grignard da un alcohol terciario)
+  pero no existía ninguna pregunta de este tipo en el banco de ésteres —
+  se agregaron `rxn_146` y `rxn_147` (una de "producto" y una de "tipo"),
+  **marcadas `nivel:'avanzado'`** igual que las demás de Grignard, para que
+  no aparezcan por defecto.
+
+### Cambios (`generador.html`)
+- 12 preguntas existentes con catalizador/condición corregidos (detalle
+  arriba).
+- 2 preguntas nuevas de Grignard sobre ésteres (avanzadas).
+- El aviso "7 preguntas del banco usan un reactivo de Grignard..." se
+  actualizó a **9** (7 anteriores + las 2 nuevas de ésteres).
+- Se verificó con Playwright (Chromium): banco completo sin errores de
+  sintaxis, 147 preguntas totales, 9 marcadas avanzadas (todas con
+  Grignard/organometálicos), la nueva tarjeta de éster+Grignard se dibuja
+  bien, y ya no aparece "PCC" ni "oleum" en ninguna hoja generada.
+
+### Fuera de alcance (a propósito)
+No se agregaron reacciones de capítulos que el generador no cubre en
+absoluto (cloruros de ácido, anhídridos de ácido) — esos temas no tienen
+casilla propia en "Reacciones — grupos a repasar", así que agregarlos
+sería un cambio de alcance mayor, no una corrección. Tampoco se tocaron
+alcanos/alquenos/alquinos: ninguna de las 13 fotos que envió la docente
+cubre esos capítulos, así que no había con qué verificarlos.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (80) — Generador: corrige la pregunta rxn_81 de éteres, que no era una reacción real
 
 ### Contexto
