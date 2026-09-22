@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (87) — Generador: quita todo enunciado que pida "explicar/justificar" — solo identificación y predicción
+
+### Contexto
+Revisando las capturas de las preguntas de orientación aromática, la
+docente notó que algunos enunciados pedían "explica por qué..." — eso
+sigue siendo teoría aunque la reacción sea real, porque no es una tarea
+de predicción/identificación sino de redacción abierta. Se le preguntó
+si el alcance era solo las 2 preguntas de la captura o todo el banco;
+pidió **todo el banco**.
+
+### Qué se hizo (`generador.html`)
+Se buscaron todos los enunciados con "explica", "por qué", "justifica" o
+"la regla que determina el producto principal" (esta última tampoco
+tiene dónde responderse: la tarjeta de tipo "tipo" solo tiene los campos
+fijos "Tipo de reacción:" y "Condiciones / catalizador:", nunca un campo
+de explicación). Se encontraron **17 preguntas** con este problema —
+la mayoría ya existía desde antes de esta sesión, no solo las 2 agregadas
+hoy. Se reescribió cada enunciado para pedir solo identificación directa
+(tipo de reacción, condición, catalizador, tipo de alcohol, etc.), sin
+pedir razones ni comparaciones abiertas. Ejemplos:
+- `rxn_23`: "...y explica por qué se favorece la eliminación..." →
+  "...y las condiciones que la favorecen:"
+- `rxn_43`/`rxn_52`: "...y por qué" / "...y justifica la regla general" →
+  "Indica qué tipo de alcohol (1°, 2° o 3°) se obtiene..."
+- `rxn_125` (acilación de tolueno) y `rxn_151` (clorobenceno, agregadas
+  esta sesión): se les quitó el "Explica..." y quedaron en identificación
+  directa del tipo de reacción y la orientación.
+
+El contenido explicativo (la regla, el razonamiento) se conserva en el
+campo `regla` de cada pregunta, que es contenido interno de la clave de
+respuestas — nunca se mostró al estudiante en la tarjeta, así que no se
+pierde nada, solo se deja de *pedir por escrito* algo que la tarjeta no
+tenía dónde responder.
+
+### Verificación
+Playwright (Chromium): sin errores de sintaxis; se confirmó que ningún
+enunciado del banco contiene ya "explica", "por qué", "justifica" ni "la
+regla que determina"; se regeneraron 300 preguntas (6 tandas de 50, con
+avanzadas) sin errores de consola.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (86) — Generador: todas las moléculas del banco de reacciones quedan dibujadas en semidesarrollada (cero texto plano) + elimina preguntas de teoría pura
 
 ### Contexto
