@@ -7,6 +7,60 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (89) — Generador: muestra los subproductos deducibles en 81 de las 167 tarjetas de reacción
+
+### Contexto
+La docente vio la tarjeta de síntesis de Williamson ("Hallar el reactivo")
+y notó que faltaba el subproducto (NaBr) — dijo que en la mayoría de las
+tarjetas pasaba lo mismo, y que verlo ayuda a identificar exactamente qué
+reacción es y evita confundirla con otras. Se le preguntó si el cambio
+era solo para las tarjetas nuevas de "Hallar el reactivo" o para todo el
+banco; pidió **todo el banco**.
+
+### Criterio usado
+Se revisaron las 167 preguntas una por una. Se agrega el subproducto
+**solo** cuando:
+1. Es deducible directamente de lo que YA se muestra (reactivos
+   conocidos), sin necesitar la respuesta oculta — p. ej. en
+   `CH₃−CH₂−Br + NaOH → ?`, el NaBr ya se sabe con certeza sin importar
+   cuál sea el producto orgánico.
+2. No es, en sí mismo, lo que la pregunta está pidiendo — se dejó
+   afuera en los pocos casos donde el subproducto (espejo de plata,
+   burbujas de CO₂, decoloración de KMnO₄) es exactamente la evidencia
+   que el enunciado pide identificar (`rxn_42`, `rxn_51`, `rxn_63`,
+   `rxn_80`, `rxn_117`) — mostrarlo ahí sería regalar la respuesta.
+3. Se mantuvo la misma convención que ya usaba el banco: nunca se
+   inventan subproductos de Cr/Mn para oxidaciones fuertes con
+   CrO₃/KMnO₄/K₂Cr₂O₇ (esos productos nunca aparecieron en la clave de
+   respuestas original), ni sales de litio/aluminio/magnesio para
+   LiAlH₄/NaBH₄/Grignard — solo se usan subproductos que ya estaban
+   documentados o son quimicamente obvios (HCl, HBr, H₂O, NaX, NH₃/NH₄⁺,
+   N₂, SO₂+HCl, Ag⁰, Cu₂O, MnO₂ en la prueba de Baeyer).
+
+### Qué se hizo (`generador.html`)
+- Nuevo campo `subproducto` en 81 de las 167 preguntas.
+- `buildTipoDCard` ahora muestra el subproducto junto al lado ya
+  conocido de la ecuación: después del "?" en las preguntas de
+  "Predecir el producto"/"Identificar el tipo", y después del producto
+  dibujado en las de "Hallar el reactivo". Estilo visual más tenue
+  (gris) que el resto de la ecuación, para que se lea como información
+  de apoyo y no como parte de "la respuesta".
+
+### Verificación
+Playwright (Chromium): sin errores de sintaxis; se regeneraron 300
+preguntas (6 tandas de 50, con avanzadas) sin errores de consola. Se
+revisaron visualmente 5 tarjetas de los 3 tipos de pregunta (SN2 con
+NaBr, halogenación de benceno con HCl, hidrólisis de amida con NH₄⁺, y
+2 de "Hallar el reactivo": acilación con HCl, halogenación radical con
+HCl) — el subproducto aparece correctamente sin tapar ni revelar el
+cuadro "?".
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (88) — Generador: nuevo tipo de pregunta "Hallar el reactivo/catalizador" (producto dado, retrosíntesis)
 
 ### Contexto
