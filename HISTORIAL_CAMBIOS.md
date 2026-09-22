@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-22 (86) — Generador: todas las moléculas del banco de reacciones quedan dibujadas en semidesarrollada (cero texto plano) + elimina preguntas de teoría pura
+
+### Contexto
+La docente pidió que **todas** las moléculas del generador se vean
+dibujadas en semidesarrollada (como en el juego), no como texto plano, y
+que el banco de reacciones no tenga preguntas de teoría/comparación —
+solo ejercicios con una reacción real.
+
+### Auditoría hecha
+Se recorrió programáticamente el reactivo principal (`r`) de las 153
+preguntas de `BANCO_RXN`, pasándolo por la misma función que usa la
+tarjeta (`_molBox`) para ver cuáles caían al texto plano en vez de
+dibujarse. Se encontraron 8 casos:
+
+1. **`rxn_09`, `rxn_119`, `rxn_122`** (combustión de butano/propano):
+   el reactivo estaba escrito como fórmula molecular cruda (`C₄H₁₀`,
+   `C₃H₈`), que el parser no sabe dibujar (solo entiende notación de
+   cadena con guiones, `CH₃−CH₂−...`). Se reescribieron en esa notación.
+2. **`rxn_116`** (polimerización del eteno): el prefijo `"n "` delante
+   de la fórmula (`n CH₂=CH₂`) rompía el parser, que solo reconoce
+   coeficientes numéricos. Se quitó el prefijo del reactivo dibujado y
+   se movió la aclaración "(n moléculas de monómero)" al enunciado —
+   la respuesta ya mostraba correctamente el polímero `−(CH₂−CH₂)ₙ−`.
+3. **`rxn_151`** (clorobenceno): el dibujo de clorobenceno ya existía en
+   la librería de moléculas del generador, pero le faltaba el alias que
+   conecta el texto `"C₆H₅−Cl"` con ese dibujo — se agregó.
+4. **`rxn_133`** (alquilación de acetiluro): el reactivo escrito era el
+   ion ya formado (`CH₃−C≡C⁻ Na⁺`), y el parser no sabe dibujar cargas
+   ni contraiones. Se reescribió como una reacción de dos pasos que
+   parte del alquino neutro y forma el acetiluro dentro de la condición
+   (`1) NaNH₂, NH₃(l)  2) CH₃−CH₂−Br`) — el mismo patrón que ya se usa
+   para Grignard, y ahora sí se dibuja.
+5. **`rxn_63`** (comparación de acidez "CH₃COOH vs. CH₃CH₂OH") y
+   **`rxn_153`** (comparación de orientación "C₆H₅CH₃ vs. C₆H₅NO₂",
+   agregada en la sesión anterior): estas eran justo el otro problema
+   que pidió corregir la docente — preguntas de teoría/comparación sin
+   una reacción real, así que ni tenían una molécula única que dibujar.
+   Se reemplazaron por ejercicios reales:
+   - `rxn_63` → prueba de acidez real: `CH₃−COOH + NaHCO₃` (efervescencia
+     de CO₂, evidencia de que el ácido sí reacciona y el alcohol no).
+   - `rxn_153` → cloración real del nitrobenceno (`C₆H₅−NO₂ + Cl₂,
+     cat. FeCl₃`), pidiendo identificar la orientación meta — mismo
+     concepto que antes, ahora con una reacción real y dibujable.
+6. Se revisó también el segundo reactivo (`reactivo`) de las 153
+   preguntas por si algún compuesto orgánico caía a texto ahí — ninguno.
+
+### Verificación
+Playwright (Chromium): tras los cambios, **0 de 153** reactivos
+principales caen a texto plano (antes 8) y **0** preguntas quedan sin una
+reacción real con producto oculto. Se regeneraron 300 preguntas (6 tandas
+de 50, con avanzadas incluidas) sin errores de consola. Se revisaron
+visualmente las 7 tarjetas corregidas — todas dibujan la estructura
+completa (butano, ácido acético con C=O/OH, eteno con doble enlace,
+propino con triple enlace, clorobenceno, nitrobenceno con −NO₂).
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada.
+
+---
+
 ## 2026-09-22 (85) — Generador: corrige preguntas "duplicadas" de aromáticos + agrega orientación orto/para vs. meta
 
 ### Contexto
