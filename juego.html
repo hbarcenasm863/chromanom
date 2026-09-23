@@ -1083,12 +1083,26 @@ const M = {
 
   // ── ÁCIDOS CARBOXÍLICOS ──
   acidoetanoico(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
+  acidoCianoetanoico(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);
+    s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');
+    s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');
+    const bcx=p[1].x,bcy=p[1].y-BL;s+=ln(p[1].x,p[1].y,bcx,bcy);
+    const nx=bcx,ny=bcy-BL;s+=tri(bcx,bcy,nx,ny);s+=atm(nx,ny,'N');
+    return mkSVG(s);
+  },
   acidopropanoico(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   acidobutanoico(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
   acidopentanoico(){_pts=[];const p=zz(0,0,5,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'OH');return mkSVG(s);},
 
   // ── AMIDAS ──
   etanamida(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
+  cianoetanamida(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);
+    s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');
+    s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');
+    const bcx=p[1].x,bcy=p[1].y-BL;s+=ln(p[1].x,p[1].y,bcx,bcy);
+    const nx=bcx,ny=bcy-BL;s+=tri(bcx,bcy,nx,ny);s+=atm(nx,ny,'N');
+    return mkSVG(s);
+  },
   propanamida(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
   butanamida(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);s+=atm(p[0].x,p[0].y-BL,'O');s+=ln(p[0].x,p[0].y,p[0].x,p[0].y+BL);s+=atm(p[0].x,p[0].y+BL,'NH₂');return mkSVG(s);},
 
@@ -1199,6 +1213,17 @@ const M = {
   etanoatoMetilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
   propanoatoMetilo(){_pts=[];const p=zz(0,0,3,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
   etanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);_reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
+  cianoetanoatoEtilo(){_pts=[];const p=zz(0,0,2,true);let s=chain(p);
+    s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);
+    const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);
+    const e1x=ox+BL*COS30,e1y=oy+BL*SIN30,e2x=ox+2*BL*COS30,e2y=oy;
+    s+=ln(ox,oy,e1x,e1y);s+=ln(e1x,e1y,e2x,e2y);
+    _reg(e1x,e1y);_reg(e2x,e2y);_reg(ox,oy);
+    s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');
+    const bcx=p[1].x,bcy=p[1].y-BL;s+=ln(p[1].x,p[1].y,bcx,bcy);
+    const nx=bcx,ny=bcy-BL;s+=tri(bcx,bcy,nx,ny);s+=atm(nx,ny,'N');
+    return mkSVG(s);
+  },
   butanoatoMetilo(){_pts=[];const p=zz(0,0,4,true);let s=chain(p);s+=dbl(p[0].x,p[0].y,p[0].x,p[0].y-BL);const ox=p[0].x,oy=p[0].y+BL;s+=ln(p[0].x,p[0].y,ox,oy);s+=ln(ox,oy,ox+BL*COS30,oy+BL*SIN30);_reg(ox+BL*COS30,oy+BL*SIN30);_reg(ox,oy);s+=atm(p[0].x,p[0].y-BL,'O');s+=atm(ox,oy,'O');return mkSVG(s);},
 
   // ── AROMÁTICOS EXTRA ──
@@ -1457,7 +1482,7 @@ function mkDevSVG(ch){
 }
 // Descriptores: [{s,h,bn,bu,buBn,bd,bdBn},...]
 // h=H a colocar; bn=orden enlace al siguiente(def.1); bu/bd=ramas arriba/abajo
-const _C3=[{h:3}],_O0=[{s:'O',h:0}],_O1=[{s:'O',h:1}],_N2=[{s:'N',h:2}];
+const _C3=[{h:3}],_O0=[{s:'O',h:0}],_O1=[{s:'O',h:1}],_N2=[{s:'N',h:2}],_CN=[{h:0,bn:3},{s:'N',h:0}];
 const MOLDES={
   // ── ALCANOS ──
   etano:[{h:3,bn:1},{h:3}],
@@ -1519,12 +1544,14 @@ const MOLDES={
   // ── ÁCIDOS CARBOXÍLICOS ──
   acidoMetanoico:[{h:1,bu:_O0,buBn:2,bd:_O1}],
   acidoetanoico:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
+  acidoCianoetanoico:[{h:2,bn:1,bd:_CN},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acidopropanoico:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acidobutanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acidopentanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   acidoHexanoico:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_O1}],
   // ── ÉSTERES ──
   etanoatoMetilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
+  cianoetanoatoEtilo:[{h:2,bn:1,bd:_CN},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
   etanoatoEtilo:[{h:3,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:2,bn:1},{h:3}],
   propanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
   butanoatoMetilo:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bn:1,bu:_O0,buBn:2},{s:'O',h:0,bn:1},{h:3}],
@@ -1536,6 +1563,7 @@ const MOLDES={
   // ── AMIDAS ──
   metanamida:[{h:1,bu:_O0,buBn:2,bd:_N2}],
   etanamida:[{h:3,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
+  cianoetanamida:[{h:2,bn:1,bd:_CN},{h:0,bu:_O0,buBn:2,bd:_N2}],
   propanamida:[{h:3,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
   butanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
   pentanamida:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:0,bu:_O0,buBn:2,bd:_N2}],
@@ -4458,6 +4486,11 @@ const QBANK_NOMENCLATURA_50=[
  expl:'3C, −COOH en C1, metilo en C2 → <b>ácido 2-metilpropanoico</b>. "Ácido isobutírico" es el nombre funcional anterior.',
  parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-metil',cls:'r',l:'Ramificación en C2'},{t:'prop',cls:'c',l:'3C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
 
+{type:'mc', mol:'acidoCianoetanoico', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico con un sustituyente ciano?',
+ ans:'ácido 2-cianoetanoico', opts:['ácido 2-cianoetanoico','ácido cianoetanoico','ácido 2-aminoetanoico','ácido propanodioico'],
+ expl:'2C con −COOH (C1) y −C≡N (ciano) en C2 → <b>ácido 2-cianoetanoico</b> (ácido cianoacético). El nitrilo es un sustituyente porque el ácido carboxílico tiene mayor prioridad IUPAC.',
+ parts:[{t:'ácido ',cls:'g',l:'Prefijo'},{t:'2-ciano',cls:'r',l:'Sustituyente en C2'},{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oico',cls:'g',l:'Ác. carboxílico'}], topic:'acidos'},
+
 {type:'mc', mol:'acidoMetilbutanoico2', q:'¿Cuál es el nombre IUPAC de este ácido carboxílico ramificado?',
  ans:'ácido 2-metilbutanoico', opts:['ácido 2-metilbutanoico','ácido 3-metilbutanoico','ácido pentanoico','2-metilbutanoato'],
  expl:'4C con −COOH y metilo en C2 → <b>ácido 2-metilbutanoico</b>.',
@@ -4573,6 +4606,11 @@ const QBANK_NOMENCLATURA_50=[
  oldNames:['formiato de metilo'],
  expl:'HCOO−CH₃: ácido metanoico + metanol → <b>metanoato de metilo</b>. "Formiato de metilo" es el nombre funcional anterior.',
  parts:[{t:'met',cls:'c',l:'1C'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Alquilo'}], topic:'esteres'},
+
+{type:'mc', mol:'cianoetanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster con un sustituyente ciano?',
+ ans:'2-cianoetanoato de etilo', opts:['2-cianoetanoato de etilo','cianoacetato de metilo','2-aminoetanoato de etilo','etanoato de cianoetilo'],
+ expl:'La cadena del ácido (2C) lleva −C≡N en C2; el alcohol es etanol → <b>2-cianoetanoato de etilo</b> (cianoacetato de etilo). El sufijo -oato de R indica éster.',
+ parts:[{t:'2-ciano',cls:'r',l:'Sustituyente en C2'},{t:'et',cls:'c',l:'2C (ácido)'},{t:'an',cls:'c',l:'Sin ins.'},{t:'oato de etilo',cls:'g',l:'Éster'}], topic:'esteres'},
 
 {type:'mc', mol:'metanoatoEtilo', q:'¿Cuál es el nombre IUPAC de este éster?',
  ans:'metanoato de etilo', opts:['metanoato de etilo','etanoato de etilo','metanoato de metilo','ácido etanoico'],
@@ -4775,6 +4813,11 @@ const QBANK_NOMENCLATURA_50=[
  ans:'heptanamida', accepted:['heptanamida'],
  expl:'7C con −CONH₂ → <b>heptanamida</b>.',
  parts:[{t:'hept',cls:'c',l:'7C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amid',cls:'g',l:'Amida'},{t:'a',cls:'g',l:'Terminación'}], topic:'amidas'},
+
+{type:'mc', mol:'cianoetanamida', q:'¿Cuál es el nombre IUPAC de esta amida con un sustituyente ciano?',
+ ans:'2-cianoetanamida', opts:['2-cianoetanamida','cianoacetonitrilo','2-aminoetanamida','etanodinitrilo'],
+ expl:'2C con −CONH₂ (C1) y −C≡N (ciano) en C2 → <b>2-cianoetanamida</b> (cianoacetamida). La amida tiene mayor prioridad IUPAC que el nitrilo, así que este va como sustituyente.',
+ parts:[{t:'2-ciano',cls:'r',l:'Sustituyente en C2'},{t:'et',cls:'c',l:'2C'},{t:'an',cls:'c',l:'Sin ins.'},{t:'amida',cls:'g',l:'Amida'}], topic:'amidas'},
 
 {type:'mc', mol:'metilpropanamida', q:'¿Cuál es el nombre IUPAC de esta amida ramificada?',
  ans:'2-metilpropanamida', opts:['2-metilpropanamida','3-metilpropanamida','butanamida','2-metilpropanoato'],

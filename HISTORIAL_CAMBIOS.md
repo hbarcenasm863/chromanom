@@ -7,6 +7,55 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-23 (92) — Juego: ejercicios nuevos con el sustituyente −CN (ciano) en ácidos, ésteres y amidas
+
+### Contexto
+La docente pidió agregar ejercicios de nomenclatura en `juego.html` para
+grupos funcionales que puedan llevar el sustituyente −CN (ciano). El
+−CN solo tiene sentido como SUSTITUYENTE (no como grupo principal) en
+compuestos cuyo grupo principal tenga mayor prioridad IUPAC que el
+nitrilo: ácidos carboxílicos, ésteres, haluros de ácido y amidas. Se
+descartaron alcoholes y otros grupos de menor prioridad (ahí el nitrilo
+sería el sufijo principal, no un sustituyente ciano), así como
+haluros de ácido (para no sumar una cuarta variante compleja en esta
+tanda).
+
+### Qué se hizo
+- `juego.html`: se agregaron 3 moléculas nuevas, cada una con su
+  registro en `MOLDES` (vista semidesarrollada) y su función en `M[]`
+  (vista esquelética, con enlace triple C≡N dibujado con `tri()`):
+  - `acidoCianoetanoico` — ácido 2-cianoetanoico (ácido cianoacético).
+  - `cianoetanoatoEtilo` — 2-cianoetanoato de etilo (cianoacetato de
+    etilo).
+  - `cianoetanamida` — 2-cianoetanamida (cianoacetamida).
+- Se agregó la constante de rama `_CN=[{h:0,bn:3},{s:'N',h:0}]` al
+  lado de `_C3`/`_O0`/`_O1`/`_N2` para representar el grupo ciano en
+  el formato de cadena de `MOLDES`.
+- Se agregó una pregunta tipo `mc` (opción múltiple) por cada molécula,
+  ubicada junto a los ejemplos ya existentes de ácidos/ésteres/amidas
+  ramificados (`acidoMetilpropanoico`, la sección de ésteres con
+  `metanoatoMetilo`, `metilpropanamida`), con `topic:'acidos'`,
+  `'esteres'` y `'amidas'` respectivamente, siguiendo el mismo formato
+  de texto plano (sin base64) que esos ejemplos vecinos.
+
+### Verificación
+Con Node se revisó que los 5 bloques `<script>` del archivo compilan
+sin errores de sintaxis. Con Playwright (Chromium) se cargó
+`juego.html` y se confirmó en consola del navegador que:
+- Las 3 funciones `M[...]()` generan SVG válido (vista esquelética).
+- Los 3 registros `MOLDES[...]` generan SVG válido vía `mkDevSVG()`
+  (vista semidesarrollada).
+- Las 3 preguntas nuevas están en `QBANK` con el `topic` correcto y la
+  respuesta (`ans`) coincide con una de las opciones (`opts`).
+No se hizo un playthrough manual completo del juego (las preguntas se
+sortean al azar dentro del tema), pero las comprobaciones anteriores
+cubren que la molécula se dibuja bien y la pregunta es jugable.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-09-23 (91) — index.html, teoria.html, grupos.html: logo embebido en base64 reemplazado por el PNG del repositorio
 
 ### Contexto
