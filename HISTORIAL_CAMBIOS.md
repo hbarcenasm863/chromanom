@@ -7,6 +7,86 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-23 (90) — Juego: faltaba el yodo en el constructor molecular + preguntas nuevas de sustitución con yodo
+
+### Contexto
+La docente reportó que en el modo Constructor (arrastrar/colocar átomos
+para armar una estructura) no había forma de colocar yodo, aunque
+algunas preguntas de construcción sí lo piden. Luego pidió agregar más
+preguntas de sustitución con yodo en los grupos donde tenga sentido
+químico.
+
+### Reproducción del bug (antes de arreglar, como pide `CLAUDE.md`)
+Con Playwright se saltó directo a la pregunta `build_yodobenceno`
+("Construye la estructura del yodobenceno C₆H₅I") y se confirmó: la
+paleta de átomos del constructor solo tenía C, O, N, Cl, Br, F — sin
+botón de Yodo — haciendo esa pregunta (y cualquier otra que pida yodo)
+imposible de responder.
+
+### Qué se hizo (`juego.html`)
+**Arreglo del constructor** — se agregó Yodo (I) en los 7 lugares que
+tenían la lista de átomos disponibles hardcodeada y que, al revisarlos
+uno por uno, le faltaba yodo a todos:
+1. Botón "I" nuevo en la barra de herramientas del constructor.
+2. `BLD_PLACEMENT_TOOLS`: agregado `'I'`.
+3. `VALENCE` (tabla de valencias para validar la estructura): agregado
+   `I:1` — sin esto, aunque hubiera botón, el yodo se habría validado
+   con la valencia por defecto (4) en vez de 1, permitiendo enlaces
+   químicamente imposibles.
+4. Color propio para el átomo de yodo (violeta, `#6a3d9a`) en el CSS y
+   en la función que colorea los átomos dibujados (`aCol`).
+5. Los dos textos de ayuda del constructor ("Primera vez: clic para
+   colocar átomos (C, O, N, Cl, Br, F)" y la leyenda del pie
+   "C/O/N/Cl/Br/F: clic para añadir átomo") actualizados para incluir
+   la I — antes de esto, ni siquiera las instrucciones mencionaban que
+   el yodo fuera una opción.
+
+**7 preguntas nuevas de sustitución con yodo** (banco `QBANK`, tipo
+`rxnq`), solo en los grupos donde la química es correcta y se enseña
+en bachillerato — se evitó a propósito la sustitución radical de
+alcanos con I₂ (no ocurre en la práctica, a diferencia de Cl₂/Br₂) y
+la yodación directa de aromáticos (necesita un oxidante adicional, más
+avanzado de lo que cubre el curso):
+- **Halogenuros de alquilo** (3 preguntas) — reacción de Finkelstein:
+  R−Cl + NaI (acetona) → R−I + NaCl↓, con el ejemplo del
+  1-cloropropano. Cubre "predecir producto", "identificar la
+  reacción" e "identificar el reactivo que falta" (NaI), explicando
+  que el I⁻ es mejor nucleófilo y que el NaCl insoluble en acetona
+  desplaza el equilibrio.
+- **Alcoholes** (2 preguntas) — conversión a yoduro de alquilo con
+  PI₃ (más limpio que HI directo, que puede dar reordenamientos):
+  CH₃CH₂CH₂OH + PI₃ → CH₃CH₂CH₂I. Cubre "predecir producto" e
+  "identificar el reactivo".
+- **Alquenos** (2 preguntas) — hidrohalogenación de Markovnikov con
+  HI: CH₃−CH=CH₂ + HI → CH₃−CHI−CH₃ (2-yodopropano, mayoritario, vía
+  el carbocatión secundario). Cubre "predecir producto" e
+  "identificar la reacción".
+
+Los campos `ans`, `expl` y `producto` de estas preguntas se codificaron
+en base64 (mismo esquema `btoa(unescape(encodeURIComponent(...)))` que
+ya usa el resto del banco desde que se ofuscaron las respuestas
+correctas, para que no se puedan leer en "Ver código fuente").
+
+### Verificación
+Con Playwright (Chromium): se reprodujo el bug original antes de
+arreglarlo; tras el arreglo, se colocó un átomo de yodo en el lienzo y
+se confirmó que se registra correctamente (`bldAtoms` con `el:'I'`) y
+se dibuja en violeta, igual que Cl/Br se dibujan en su color — sin
+errores de consola. Para las 7 preguntas nuevas: se verificó que las
+17 preguntas del banco relacionadas con yodo (las 7 nuevas + 10 que ya
+existían, incluida la prueba del yodoformo) decodifican correctamente
+y que la respuesta correcta (`ans`) siempre coincide exactamente con
+una de las opciones (`opts`) — y se jugó la pregunta de Finkelstein de
+principio a fin, confirmando que resalta la opción correcta en verde
+con la explicación ya decodificada.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada. `juego.html` se sirve directo por
+GitHub Pages: basta con el push a `main`.
+
+---
+
 ## 2026-09-22 (89) — Generador: muestra los subproductos deducibles en 81 de las 167 tarjetas de reacción
 
 ### Contexto
