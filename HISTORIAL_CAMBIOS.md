@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-09-23 (91) — index.html, teoria.html, grupos.html: logo embebido en base64 reemplazado por el PNG del repositorio
+
+### Contexto
+El logo en el encabezado de estas 3 páginas estaba embebido directo en
+el HTML como `data:image/png;base64,...` — un blob de ~304 KB por
+página (era un PNG con metadatos de procedencia/C2PA muy pesados), en
+vez de referenciar el archivo `logo-chromanom.png` que ya vive en la
+carpeta del repositorio (8 KB). La docente pidió usar ese archivo en
+vez del base64.
+
+### Qué se hizo
+- `index.html`, `teoria.html`, `grupos.html`: el único `<img>` del
+  logo en cada archivo pasó de `src="data:image/png;base64,..."` a
+  `src="logo-chromanom.png"`. Ningún otro atributo del `<img>` (clase,
+  estilo, alt) se tocó.
+- Efecto colateral bueno: cada uno de estos 3 archivos bajó ~300 KB de
+  peso (menos para descargar, y ese logo ahora se cachea una sola vez
+  en vez de repetirse embebido en cada página).
+
+### Verificación
+Con Playwright (Chromium): las 3 páginas cargan el logo correctamente
+(`naturalWidth` > 0, sin error de red) y se ven visualmente idénticas
+a antes; balance de `<div>`/`</div>` verificado en las 3.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-09-23 (90) — Juego: faltaba el yodo en el constructor molecular + preguntas nuevas de sustitución con yodo
 
 ### Contexto
