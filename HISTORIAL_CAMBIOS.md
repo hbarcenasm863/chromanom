@@ -7,6 +7,37 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (96) — Referencia: la impresión salía en 5 páginas con mucho espacio en blanco
+
+### Contexto
+La docente imprimió la Hoja de Referencia (Guardar como PDF) y el
+maquetado salía mal: 5 páginas, la primera medio vacía y una página con
+solo el título de la sección nueva de ramificaciones clásicas.
+
+### Causa (reproducida generando el PDF con Playwright)
+Las reglas de impresión pedían no partir ninguna sección ni tabla
+(`page-break-inside:avoid` en `.sec-full`, `.grupos-grid` y `table`): cuando
+una sección grande no cabía en lo que quedaba de la hoja, saltaba entera a
+la siguiente dejando el hueco. La tabla de ramificaciones (entrada 93)
+además se imprimía con los dibujos a tamaño de pantalla (2 páginas solas).
+
+### Cambios (`referencia.html`, solo `@media print` salvo la regla 1)
+- Solo las secciones pequeñas (`.sec`) se mantienen enteras; las grandes
+  continúan en la página siguiente. Nunca se parte una fila ni una tarjeta
+  de grupo funcional, y el título de sección no queda solo al final de hoja.
+- La tabla de ramificaciones clásicas se imprime en 2 columnas de fichas
+  compactas (dibujo de 30 px, sin la fórmula condensada repetida).
+- La cuadrícula de grupos funcionales ya no deja un recuadro celeste vacío.
+- "Reglas clave" n.º 1 decía "la más larga que contenga el grupo funcional
+  e insaturaciones" (regla anterior a 2013) → ahora coincide con la
+  convención IUPAC 2013 del sitio.
+Resultado: 2 páginas A4 horizontales, sin huecos.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-16 (95) — Juego en tema claro, marca de agua de moléculas y logo animado en la portada
 
 ### Contexto

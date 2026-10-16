@@ -397,8 +397,12 @@ code{
   .sec,.sec-full{
     box-shadow:none!important;
     border:1.5px solid #aaa!important;
-    page-break-inside:avoid;
   }
+  /* Solo las secciones pequeñas se mantienen enteras. Las grandes (grupos
+     funcionales, ramificaciones clásicas) pueden continuar en la página
+     siguiente: antes saltaban completas y dejaban media hoja en blanco. */
+  .sec{page-break-inside:avoid;break-inside:avoid}
+  .sec-hdr{page-break-after:avoid;break-after:avoid}
 
   /* Keep section header colors for cue */
   .sec-hdr.c2{background:var(--c2b)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -416,16 +420,31 @@ code{
   .rule-item{padding:4px 0}
   .rules-body{padding:8px 12px}
 
-  /* Tables don't break across pages */
-  table{page-break-inside:avoid}
-  tr{page-break-inside:avoid}
+  /* Las tablas pequeñas no se parten; las filas nunca */
+  .sec table{page-break-inside:avoid}
+  tr{page-break-inside:avoid;break-inside:avoid}
 
   /* Substituents 3-col stays */
   .subs-grid{grid-template-columns:repeat(3,1fr)}
 
   /* Grupos funcionales: vuelve a 3 columnas compactas para que quepa en la hoja */
-  .grupos-grid{grid-template-columns:repeat(3,1fr);page-break-inside:avoid}
+  .grupos-grid{grid-template-columns:repeat(3,1fr);background:#fff!important}
+  .grupo-card{border-right:1px solid #ddd;border-bottom:1px solid #ddd}
   .grupo-card{padding:3px 7px;gap:1px;page-break-inside:avoid}
+  .grupo-card{break-inside:avoid}
+  /* Ramificaciones clásicas vs. IUPAC: 2 columnas de fichas compactas */
+  .clasico-intro{padding:5px 10px;font-size:.62rem}
+  .clasico-tbl thead{display:none}
+  .clasico-tbl tbody{display:grid;grid-template-columns:1fr 1fr;column-gap:0}
+  .clasico-tbl tr{display:grid;grid-template-columns:1fr 1.15fr auto;grid-template-areas:"cl iu fm" "al al fm";align-items:center;gap:0 8px;padding:1px 8px;border-bottom:1px solid #ddd;break-inside:avoid;page-break-inside:avoid}
+  .clasico-tbl tbody tr:nth-child(odd){border-right:1px solid #ddd}
+  .clasico-tbl td{padding:0!important;border:none!important;background:none!important;font-size:.62rem}
+  .clasico-tbl td.cl{grid-area:cl}.clasico-tbl td.iu{grid-area:iu}.clasico-tbl td.al{grid-area:al;font-size:.56rem}
+  .clasico-tbl td.fm{grid-area:fm;padding:2px 0!important}
+  .clasico-tbl td.iu small{font-size:.54rem}
+  .clasico-tbl .sub-svg{height:30px;width:auto;max-width:130px}
+  .clasico-tbl .fm-cond{display:none}
+  .clasico-nota{padding:5px 10px;font-size:.6rem}
   .grupo-top .pri-n{font-size:.58rem;padding:1px 5px}
   .grupo-name{font-size:.68rem}
   .grupo-formula{font-size:.64rem}
@@ -609,7 +628,7 @@ code{
         <div class="rules-cols">
           <div class="rule-item">
             <span class="rule-n">1</span>
-            <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional e insaturaciones.</span>
+            <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional (IUPAC 2013: la longitud manda sobre las insaturaciones).</span>
           </div>
           <div class="rule-item">
             <span class="rule-n">2</span>
