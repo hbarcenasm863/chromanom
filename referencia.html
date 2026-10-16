@@ -31,7 +31,7 @@
 /* ── RESET ── */
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
 body{
   background:var(--bg);
   color:var(--tx);
@@ -224,6 +224,9 @@ tr:nth-child(even) td{background:#f7fbfe}
   .clasico-tbl tr{grid-template-columns:minmax(0,1fr) 8.8rem}
   .clasico-tbl td.iu{white-space:nowrap;font-size:.72rem}
   .clasico-tbl td.iu small{white-space:normal;max-width:12em}
+  .double-tbl{flex-direction:column}
+  .double-tbl table:first-child td,.double-tbl table:first-child th{border-right:none}
+  .grid-top .sec{overflow-x:auto}
 }
 
 /* Two-column chain prefix table */
@@ -693,6 +696,7 @@ function refSearch(q){
 </script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

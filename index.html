@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<title>Nomenclatura Orgánica Fácil</title>
+<title>ChromaNom · Nomenclatura orgánica IUPAC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
 body{
   background:var(--bg);
   color:var(--tx);
@@ -101,10 +101,10 @@ header{
   border:2px solid;font-size:.72rem;font-weight:700;
   letter-spacing:.03em;
 }
-.lp.r{color:var(--c1);border-color:var(--c1);background:var(--c1b)}
+.lp.r{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
 .lp.c{color:var(--c2);border-color:var(--c2);background:var(--c2b)}
 .lp.i{color:var(--c3);border-color:var(--c3);background:var(--c3b)}
-.lp.g{color:var(--c4);border-color:var(--c4);background:var(--c4b)}
+.lp.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
 .dot{width:7px;height:7px;border-radius:50%}
 
 /* ── HERO CARD ── */
@@ -176,10 +176,10 @@ header{
 }
 .np{display:flex;flex-direction:column;align-items:center;gap:5px}
 .nw{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
-.nw.r{color:var(--c1);background:var(--c1b)}
+.nw.r{color:var(--c1t);background:var(--c1b)}
 .nw.c{color:var(--c2);background:var(--c2b)}
-.nw.i{color:var(--c3);background:var(--c3b)}
-.nw.g{color:var(--c4);background:var(--c4b)}
+.nw.i{color:var(--c3t);background:var(--c3b)}
+.nw.g{color:var(--c4t);background:var(--c4b)}
 .nw.sep{background:transparent;color:var(--dimmer);font-size:1rem}
 .nl{font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;white-space:nowrap}
 .nl.r{color:var(--c1t)}.nl.c{color:var(--c2t)}.nl.i{color:var(--c3t)}.nl.g{color:var(--c4t)}
@@ -288,6 +288,23 @@ header{
   backdrop-filter:blur(2px);
 }
 .btn-tour:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55);transform:translateY(-1px)}
+
+/* ── LLAMADA A LA ACCIÓN ── */
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.cta-row .btn-tour{margin-top:0}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--rs);background:#fff;color:var(--azul-d);font-weight:800;font-size:.92rem;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.18);transition:transform .18s,box-shadow .18s}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.24)}
+.social-proof{margin-top:12px;font-size:.74rem;color:rgba(255,255,255,.85)}
+/* ── TU AVANCE ── */
+.avance-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:18px 22px;box-shadow:var(--sh);margin-bottom:24px;display:none}
+.avance-card.on{display:block}
+.avance-card h2{font-size:1rem;font-weight:800;color:var(--azul-d);margin-bottom:4px}
+.avance-card p{font-size:.8rem;color:var(--dim);margin-bottom:12px}
+.av-row{display:grid;grid-template-columns:minmax(0,9rem) 1fr 3.2rem;gap:10px;align-items:center;margin:7px 0;font-size:.8rem}
+.av-bar{height:10px;border-radius:99px;background:var(--azul-l);overflow:hidden}
+.av-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--azul),#1e8ac8)}
+.av-pct{font-weight:800;color:var(--azul-d);text-align:right}
+.av-empty{color:var(--dimmer)}
 
 /* ── FOOTER ── */
 footer{
@@ -400,12 +417,16 @@ footer span{color:var(--naranja);font-weight:700}
       <div class="fp i">③ Insaturaciones</div>
       <div class="fp g">④ Grupo funcional</div>
     </div>
-    <button class="btn-tour" onclick="tourOpen()">▶ ¿Cómo funciona ChromaNom?</button>
+    <div class="cta-row">
+      <a class="btn-cta" href="juego.html">🎮 Empieza a practicar</a>
+      <button class="btn-tour" onclick="tourOpen()">▶ ¿Cómo funciona?</button>
+    </div>
+    <div class="social-proof">🏫 Usado en clase en el Colegio Rufino José Cuervo · Gratis · Sin registro</div>
   </div>
   <div class="hero-stats">
-    <div class="hs"><div class="hs-n">16</div><div class="hs-l">Grupos</div></div>
-    <div class="hs"><div class="hs-n">160+</div><div class="hs-l">Ejercicios</div></div>
-    <div class="hs"><div class="hs-n">IUPAC</div><div class="hs-l"></div></div>
+    <div class="hs"><div class="hs-n">17</div><div class="hs-l">Grupos funcionales</div></div>
+    <div class="hs"><div class="hs-n">1.100+</div><div class="hs-l">Preguntas de práctica</div></div>
+    <div class="hs"><div class="hs-n">42</div><div class="hs-l">Reacciones</div></div>
   </div>
 </div>
 
@@ -445,6 +466,13 @@ footer span{color:var(--naranja);font-weight:700}
   </div>
 </div>
 
+<!-- TU AVANCE (solo aparece si el estudiante ya jugó en este dispositivo) -->
+<div class="avance-card" id="avance-card" aria-live="polite">
+  <h2>📈 Tu avance</h2>
+  <p>Tu mejor resultado en cada nivel del juego, guardado en este dispositivo.</p>
+  <div id="avance-rows"></div>
+</div>
+
 <!-- MÓDULOS -->
 <div class="ruta-card">
   <div class="ruta-hdr">¿Por dónde empiezo? — Ruta recomendada</div>
@@ -461,7 +489,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="rs-n">②</span>
       <div>
         <div class="rs-title">Grupos funcionales</div>
-        <div class="rs-desc">Explora cada grupo con su estructura, reglas IUPAC y 10 ejercicios específicos.</div>
+        <div class="rs-desc">Explora cada grupo con su estructura, reglas IUPAC y ejercicios específicos.</div>
       </div>
     </a>
     <span class="rs-arr">→</span>
@@ -501,12 +529,12 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod-icon">🔬</span>
       <div class="mod-paso">② Luego aquí</div>
       <div class="mod-title">Grupos Funcionales</div>
-      <div class="mod-desc">Los 16 grupos funcionales con sus reglas IUPAC, estructuras dibujadas y 10 ejercicios por grupo. 160 ejercicios en total.</div>
+      <div class="mod-desc">Los 17 grupos funcionales con sus reglas IUPAC, estructuras dibujadas y ejercicios por grupo: más de 180 en total.</div>
     </div>
     <div class="mod-bottom">
       <div class="mod-chips">
-        <span class="mc">16 grupos</span>
-        <span class="mc">160 ejercicios</span>
+        <span class="mc">17 grupos</span>
+        <span class="mc">180+ ejercicios</span>
         <span class="mc">Estructuras dibujadas</span>
       </div>
       <span class="mod-arrow">→</span>
@@ -518,11 +546,11 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod-icon">🎮</span>
       <div class="mod-paso">③ Pon a prueba lo aprendido</div>
       <div class="mod-title">Juego de Práctica</div>
-      <div class="mod-desc">Pon a prueba lo aprendido con 4 tipos de retos interactivos: opción múltiple, arrastrar partes, identificar fragmentos y escribir nombres completos. 60 segundos por pregunta.</div>
+      <div class="mod-desc">Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres, construir moléculas y reacciones. 60 segundos por pregunta.</div>
     </div>
     <div class="mod-bottom">
       <div class="mod-chips">
-        <span class="mc">4 modos</span>
+        <span class="mc">6 tipos de reto</span>
         <span class="mc">20 preguntas</span>
         <span class="mc">Cronometrado</span>
         <span class="mc">Resultados</span>
@@ -531,7 +559,7 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
   </a>
 
-  <a class="mod-card" href="reacciones.html" style="background:linear-gradient(135deg,#0e7490,#0891b2);border-color:#0891b2;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
+  <a class="mod-card" href="reacciones.html" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-color:#2563eb;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
     <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
       <span class="mod-icon">🧪</span>
       <div class="mod-paso" style="color:rgba(255,255,255,.75)">④ Reacciones de los grupos</div>
@@ -539,7 +567,7 @@ footer span{color:var(--naranja);font-weight:700}
       <div class="mod-desc" style="color:rgba(255,255,255,.85)">Reacciones características de alcanos, cicloalcanos, alquenos, alquinos, aromáticos, halogenuros, alcoholes, aminas, carbonílicos, ácidos y sus derivados. Mecanismo paso a paso, condiciones, ejemplos y mini-quiz por cada tipo.</div>
     </div>
     <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
-      <div class="mod-chips"><span class="mc">10 pestañas</span><span class="mc">41 reacciones</span><span class="mc">Mini-quiz</span></div>
+      <div class="mod-chips"><span class="mc">10 pestañas</span><span class="mc">42 reacciones</span><span class="mc">Mini-quiz</span></div>
       <span class="mod-arrow">→</span>
     </div>
   </a>
@@ -562,7 +590,7 @@ footer span{color:var(--naranja);font-weight:700}
 <!-- HOJA DE REFERENCIA -->
 <div class="sec-lbl">Recursos descargables</div>
 <div style="margin-bottom:28px">
-  <a class="mod-card" href="referencia.html" style="background:linear-gradient(135deg,var(--c2t),var(--c2));border-color:var(--c2);text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s;border:2px solid var(--c2)" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
+  <a class="mod-card" href="referencia.html" style="background:linear-gradient(135deg,#1e293b,#475569);border-color:#475569;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s;border:2px solid #475569" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
     <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
       <span class="mod-icon">📄</span>
       <div class="mod-title">Hoja de referencia</div>
@@ -576,8 +604,8 @@ footer span{color:var(--naranja);font-weight:700}
 </div>
 
 <!-- FOOTER COPYRIGHT -->
-<div style="text-align:center;padding:16px;font-size:.72rem;color:rgba(255,255,255,.5);background:var(--tx,#1a1714);margin-top:auto">
-  <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
 
 </div>
@@ -641,10 +669,10 @@ const TOUR=[
     title:'② Grupos Funcionales',
     hdrColor:'linear-gradient(135deg,#357a1f,#4aaa2e)',
     body:`
-      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 16 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
+      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 17 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>16 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con diagrama de prioridad IUPAC.</div>
-        <div class="tour-feat"><strong>160 ejercicios</strong>10 ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
+        <div class="tour-feat"><strong>17 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con su prioridad IUPAC.</div>
+        <div class="tour-feat"><strong>180+ ejercicios</strong>Ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
       </div>
       <p>Las estructuras se dibujan como en los exámenes: puedes verlas en fórmula semidesarrollada.</p>
       <div class="tour-chips">
@@ -661,22 +689,22 @@ const TOUR=[
     title:'③ Juego de Práctica',
     hdrColor:'linear-gradient(135deg,#c45c0c,#f07c1e)',
     body:`
-      <p>El <strong>Juego</strong> te pone a prueba con moléculas reales, cronómetro de 60 segundos y 4 tipos de preguntas.</p>
+      <p>El <strong>Juego</strong> te pone a prueba con moléculas reales, cronómetro de 60 segundos y varios tipos de preguntas.</p>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>🔵 Opción múltiple</strong>Elige el nombre correcto entre 4 opciones. Rápido y directo.</div>
-        <div class="tour-feat"><strong>🟠 Arrastrar partes</strong>Arrastra cada parte del nombre al hueco que corresponde.</div>
+        <div class="tour-feat"><strong>🔘 Opción múltiple</strong>Elige el nombre correcto entre 4 opciones. Rápido y directo.</div>
+        <div class="tour-feat"><strong>✋ Arrastrar partes</strong>Arrastra cada parte del nombre al hueco que corresponde.</div>
       </div>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>🟢 Identificar</strong>Señala qué parte de la molécula es la cadena, el sustituyente o el grupo.</div>
-        <div class="tour-feat"><strong>🩷 Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
+        <div class="tour-feat"><strong>🎯 Identificar</strong>Señala qué parte de la molécula es la cadena, el sustituyente o el grupo.</div>
+        <div class="tour-feat"><strong>✍️ Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
       </div>
       <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
   },
   {
     title:'④ Reacciones Orgánicas',
-    hdrColor:'linear-gradient(135deg,#0e7490,#0891b2)',
+    hdrColor:'linear-gradient(135deg,#1e3a8a,#2563eb)',
     body:`
-      <p>El módulo de <strong>Reacciones</strong> explica cómo reaccionan los grupos funcionales: 10 pestañas, 41 reacciones, con mecanismo paso a paso animado.</p>
+      <p>El módulo de <strong>Reacciones</strong> explica cómo reaccionan los grupos funcionales: 10 pestañas, 42 reacciones, con mecanismo paso a paso animado.</p>
       <div class="tour-feat-row">
         <div class="tour-feat"><strong>⚗️ Mecanismo animado</strong>Cada reacción se dibuja átomo por átomo: reactivo → condición → producto.</div>
         <div class="tour-feat"><strong>📖 Glosario previo</strong>30 conceptos clave (carbocatión, nucleófilo, Markovnikov...) antes de entrar al detalle.</div>
@@ -705,7 +733,7 @@ const TOUR=[
         <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Pon a prueba</small></span></a>
       </div>
       <div class="tour-links" style="margin-top:8px">
-        <a class="tour-link" style="background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">Profundiza</small></span></a>
+        <a class="tour-link" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">Profundiza</small></span></a>
         <a class="tour-link" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff" href="generador.html">📄 <span>⑤ Generador<br><small style="font-weight:400;opacity:.85">Crea tu hoja</small></span></a>
       </div>
       <p style="margin-top:14px;font-size:.8rem;color:var(--dimmer)">Puedes volver a ver este tutorial pulsando el botón <strong>"▶ ¿Cómo funciona?"</strong> de la portada en cualquier momento.</p>`
@@ -713,6 +741,23 @@ const TOUR=[
 ];
 
 let tourStep=0;
+
+// ── TU AVANCE: lee los mejores puntajes que el juego guarda en este dispositivo ──
+(function renderAvance(){
+  const NOMBRES={hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Juego completo',constructor:'Constructor molecular'};
+  const filas=[];
+  try{
+    Object.keys(NOMBRES).forEach(k=>{
+      const b=JSON.parse(localStorage.getItem('chromanom_best_'+k)||'null');
+      if(b&&typeof b.pct==='number')filas.push([NOMBRES[k],Math.max(0,Math.min(100,b.pct))]);
+    });
+  }catch(e){return;}
+  if(!filas.length)return;
+  document.getElementById('avance-rows').innerHTML=filas.map(([n,p])=>
+    `<div class="av-row"><span>${n}</span><div class="av-bar" role="img" aria-label="${n}: ${p}%"><i style="width:${p}%"></i></div><span class="av-pct">${p}%</span></div>`).join('')
+    +'<a class="btn-cta" href="juego.html" style="margin-top:10px;background:var(--azul);color:#fff;font-size:.82rem;padding:9px 16px">Seguir practicando →</a>';
+  document.getElementById('avance-card').classList.add('on');
+})();
 
 function tourOpen(){
   tourStep=0;
@@ -754,6 +799,7 @@ function tourRender(){
 
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
