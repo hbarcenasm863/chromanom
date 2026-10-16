@@ -77,6 +77,8 @@ body::before{
 /* ── PORTADA (rediseño 2026-10) ── */
 .app{max-width:1120px}
 .hero2{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 0 32px}
+.hero-logo{display:block;width:clamp(200px,26vw,300px);height:auto;margin:0 0 18px -6px;filter:drop-shadow(0 8px 22px rgba(26,110,168,.22));animation:floatLogo 4s ease-in-out infinite}
+@keyframes floatLogo{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(-1deg)}}
 .hero2 h1{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.025em;color:var(--cn-tx);margin:10px 0 14px}
 .hero2 h1 span{color:var(--cn-brand)}
 .hero2-sub{font-size:1.08rem;line-height:1.65;color:var(--cn-tx2);max-width:46ch}
@@ -157,6 +159,7 @@ body::before{
 @media (max-width:560px){
   .app{padding:0 16px 40px!important}
   .hero2{padding:22px 0 12px}
+  .hero-logo{margin:0 auto 14px}
   .hero2-cta .cn-btn{flex:1 1 100%}
   .metodo-grid{grid-template-columns:1fr 1fr;gap:8px}.mt-card{padding:12px}.mt-card p{font-size:.82rem}.mt-card code{font-size:.7rem;white-space:normal}
   .mods2{grid-template-columns:1fr}
@@ -315,6 +318,7 @@ footer span{color:var(--naranja);font-weight:700}
 <!-- ── PRESENTACIÓN ── -->
 <section class="hero2" aria-labelledby="hero-title">
   <div class="hero2-txt">
+    <img class="hero-logo" src="logo-chromanom.png" alt="ChromaNom — Nomenclatura Orgánica Fácil" width="423" height="120">
     <div class="cn-eyebrow">Nomenclatura orgánica IUPAC · Bachillerato</div>
     <h1 id="hero-title">Domina la nomenclatura orgánica, <span>paso a paso</span></h1>
     <p class="hero2-sub">De la estructura molecular al nombre IUPAC con un método visual de <strong>4 partes</strong>: cada parte del nombre tiene siempre el mismo color.</p>

@@ -153,7 +153,15 @@
   var tAvisos=null;
   function programarAvisos(){ clearTimeout(tAvisos); tAvisos=setTimeout(avisosTablas,250); }
 
+  // Marca de agua de moléculas al fondo (estilos en chromanom.css).
+  function fondo(){
+    if(document.getElementById('cn-mol-bg')) return;
+    var d=document.createElement('div'); d.id='cn-mol-bg'; d.setAttribute('aria-hidden','true');
+    document.body.insertBefore(d,document.body.firstChild);
+  }
+
   function start(){
+    fondo();
     build();
     programarAvisos();
     window.addEventListener('resize',programarAvisos);

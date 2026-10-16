@@ -112,3 +112,18 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 /* Encabezado de página dentro del contenedor .app de cada página */
 .cn-page-head.cn-in{max-width:none;padding:28px 0 18px;margin:0 0 18px;border-bottom:1px solid var(--cn-brd)}
 @media (max-width:640px){.cn-page-head.cn-in{padding:18px 0 14px}}
+
+/* ── Marca de agua de moléculas (colores MDEC) al lado izquierdo ─────────
+   La inserta site-ui.js como #cn-mol-bg. Queda fija detrás de todo el
+   contenido (z-index:-1) y no recibe clics. Las moléculas son reales
+   (fórmula esqueletal) — ver fondo-moleculas.svg. */
+#cn-mol-bg{
+  position:fixed;top:0;bottom:0;left:0;width:min(360px,46vw);
+  background:url(fondo-moleculas.svg) left 24px top 70px/300px auto repeat-y;
+  opacity:.24;z-index:-1;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,#000 55%,transparent);mask-image:linear-gradient(90deg,#000 55%,transparent);
+}
+@media (max-width:640px){
+  #cn-mol-bg{width:70vw;opacity:.12;background-size:240px auto;background-position:left 4px top 60px}
+}
+@media print{#cn-mol-bg{display:none!important}}

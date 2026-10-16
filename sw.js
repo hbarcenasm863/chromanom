@@ -1,9 +1,9 @@
-// ChromaNom Service Worker — v9.0
+// ChromaNom Service Worker — v10.0
 // Páginas HTML: red primero (siempre la versión más reciente si hay conexión).
 // Assets estáticos (JS/CSS/íconos) y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v9';
+const CACHE = 'chromanom-v10';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -23,7 +23,8 @@ const ASSETS = [
   './pwa-install.js',
   './text-zoom.js',
   './site-ui.js',
-  './chromanom.css'
+  './chromanom.css',
+  './fondo-moleculas.svg'
 ];
 
 // Instalar: guardar todos los archivos en caché.

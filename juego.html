@@ -710,6 +710,72 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 @media(max-width:360px){
   .site-nav .nav-brand{display:none}
 }
+
+/* ════════════════════════════════
+   TEMA CLARO UNIFICADO (2026-10)
+   La portada del juego, los selectores de grupo y las ventanas emergentes
+   tenían un tema oscuro propio ("aurora"); ahora usan el mismo tema claro
+   que el resto del sitio (ver chromanom.css). Azul del logo = acción.
+════════════════════════════════ */
+#s-portada,#s-rxn-grupos,#s-drill-picker{background:transparent}
+#s-portada::before,#s-portada::after,#s-rxn-grupos::before,#s-drill-picker::before{display:none}
+.portada-badge{background:#e8f4fb;border-color:#b9dcf2;color:#0d4a73}
+.portada-title{color:var(--tx)}
+.portada-title em{color:#1a6ea8}
+.portada-sub{color:var(--dim)}
+.modo-btn{background:#fff;border:1.5px solid var(--brd);box-shadow:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);color:var(--dim);-webkit-backdrop-filter:none;backdrop-filter:none}
+.modo-btn .mb-title{color:var(--tx)}
+.modo-btn .mb-sub{color:var(--dimmer)}
+.modo-btn:hover{background:#f4f9fd;border-color:#1a6ea8}
+.modo-btn.active-libre,.modo-btn.active-colegio{background:#e8f4fb;border-color:#1a6ea8;color:#0d4a73;box-shadow:0 0 0 3px rgba(26,110,168,.15)}
+.modo-divider{opacity:1}
+.modo-divider::before,.modo-divider::after{background:var(--brd)}
+.modo-divider span{color:var(--dimmer)}
+.inline-card{background:#fff;border:1px solid var(--brd);box-shadow:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);-webkit-backdrop-filter:none;backdrop-filter:none}
+.wi-avatar{background:#e8f4fb}
+.wi-name{color:var(--tx)}
+.wi-course{color:var(--dim)}
+.wi-change{color:#1a6ea8}
+.modal-school{color:#1a6ea8}
+.btn-start{background:#1a6ea8;border-color:transparent;box-shadow:0 4px 14px rgba(26,110,168,.25)}
+.btn-start:hover{background:#0d4a73;box-shadow:0 8px 22px rgba(26,110,168,.3)}
+.nivel-card{background:#fff;border:1px solid var(--brd);box-shadow:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);-webkit-backdrop-filter:none;backdrop-filter:none}
+.nivel-card:hover{background:#fff;border-color:#1a6ea8;box-shadow:0 2px 4px rgba(13,34,51,.06),0 12px 28px rgba(13,34,51,.10)}
+.nivel-name{color:var(--tx)}
+.nivel-desc{color:var(--dim)}
+.nivel-count{color:var(--dimmer)!important}
+.modal-overlay{background:rgba(13,34,51,.45)}
+.modal-box{background:#fff;border:1px solid var(--brd);box-shadow:0 20px 60px rgba(13,34,51,.25);-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--tx)}
+.modal-title{color:var(--tx)}
+.modal-label{color:var(--dimmer)}
+.modal-input{background:#fff;border-color:var(--brd);color:var(--tx)}
+.modal-input:focus{border-color:#1a6ea8}
+.modal-input::placeholder{color:#7b8a99}
+.btn-modal-start{background:#1a6ea8;color:#fff}
+.btn-modal-start:hover:not(:disabled){background:#0d4a73}
+.rxn-grupos-wrap h2{color:var(--tx)}
+.rxn-grupos-wrap>p{color:var(--dim)!important}
+.rxn-grupo-chip,.drill-grid-item{background:#fff;border:1px solid var(--brd);color:var(--tx);box-shadow:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);-webkit-backdrop-filter:none;backdrop-filter:none}
+.rxn-grupo-chip:hover,.drill-grid-item:hover{background:#f4f9fd;border-color:#1a6ea8}
+.drill-grid-item.special{border-color:#f0b429;color:#92400e}
+.gh-bar{background:linear-gradient(90deg,#1a6ea8,#4aaa2e)}
+.ps-n{color:#0d4a73}
+.ps-l{color:var(--dimmer)}
+.premio-box{background:#fffbeb;border-color:#f6d77a}
+.premio-row{color:var(--tx)}
+.premio-row span.n{color:#92400e}
+.premio-foot{color:var(--dimmer)}
+.modal-input select,.modal-input option{background:#fff;color:var(--tx)}
+.rxn-grupo-chip.on{background:#e8f4fb;border-color:#1a6ea8;color:#0d4a73;box-shadow:0 0 0 3px rgba(26,110,168,.15)}
+.rxn-continuar{background:#1a6ea8;border-color:transparent;box-shadow:0 4px 14px rgba(26,110,168,.25)}
+.rxn-back{background:#fff;border-color:var(--brd);color:var(--tx)}
+.rxn-back:hover{background:#f4f9fd;border-color:#1a6ea8}
+.mode-card{background:#fff;border-color:var(--brd)}
+.mode-name{color:var(--tx)}.mode-desc{color:var(--dim)}
+/* Botón "Comprobar" de las preguntas de escribir: color de acción, no el rosa del grupo funcional */
+.btn-check{background:#1a6ea8}
+.btn-check:hover:not(:disabled){background:#0d4a73}
+.write-input:focus{border-color:#1a6ea8}
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
@@ -840,25 +906,25 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   <div class="modal-box" style="max-width:360px">
     <div style="font-size:1.6rem;margin-bottom:8px">🌐</div>
     <div class="modal-title" style="font-size:1rem">Modo libre (anónimo)</div>
-    <p style="font-size:.8rem;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:16px;text-align:left">
+    <p style="font-size:.8rem;color:var(--dim);line-height:1.7;margin-bottom:16px;text-align:left">
       Al usar este modo, aceptas que la aplicación registre información sobre tu actividad para mejorar la herramienta.
     </p>
     <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px;text-align:left">
-      <div style="font-size:.78rem;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start">
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
         <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
         <span>No se recopilan datos personales.</span>
       </div>
-      <div style="font-size:.78rem;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start">
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
         <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
         <span>Se guardan únicamente resultados de los ejercicios (respuestas, aciertos, errores, tiempo).</span>
       </div>
-      <div style="font-size:.78rem;color:rgba(255,255,255,.72);display:flex;gap:8px;align-items:flex-start">
+      <div style="font-size:.78rem;color:var(--dim);display:flex;gap:8px;align-items:flex-start">
         <span style="color:var(--ok);font-weight:700;flex-shrink:0">✔</span>
         <span>Los datos se usan con fines educativos y de mejora de la aplicación.</span>
       </div>
     </div>
     <button class="btn-modal-start" onclick="acceptConsent()">Aceptar y continuar</button>
-    <button onclick="closeConsent()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cancelar</button>
+    <button onclick="closeConsent()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid var(--brd);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:var(--dim)">Cancelar</button>
   </div>
 </div>
 
@@ -869,11 +935,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   <div class="modal-box" style="max-width:360px;text-align:center">
     <div id="modal-envio-icon" style="font-size:2.8rem;margin-bottom:10px">✅</div>
     <div id="modal-envio-title" class="modal-title" style="font-size:1.05rem">¡Resultados guardados!</div>
-    <p id="modal-envio-msg" style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:18px">
+    <p id="modal-envio-msg" style="font-size:.85rem;color:var(--dim);line-height:1.6;margin-bottom:18px">
       Tu partida se guardó correctamente en la hoja de tu profesor.
     </p>
     <button id="modal-envio-retry" class="btn-modal-start" style="display:none" onclick="sendToSheets()">🔁 Reintentar envío</button>
-    <button onclick="closeEnvioModal()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Cerrar</button>
+    <button onclick="closeEnvioModal()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid var(--brd);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:var(--dim)">Cerrar</button>
   </div>
 </div>
 
@@ -888,11 +954,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   <div class="modal-box" style="max-width:340px;text-align:center">
     <div style="font-size:2.4rem;margin-bottom:6px">⚠️</div>
     <div class="modal-title" style="font-size:1.05rem">¿Salir de la partida?</div>
-    <p style="font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:18px">
+    <p style="font-size:.85rem;color:var(--dim);line-height:1.6;margin-bottom:18px">
       Si sales ahora perderás el progreso de esta partida. ¿Fue sin querer?
     </p>
     <button class="btn-modal-start" onclick="closeExitModal()">↩️ Seguir jugando</button>
-    <button onclick="confirmExitGame()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid rgba(255,255,255,.18);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:rgba(255,255,255,.6)">Salir de todas formas</button>
+    <button onclick="confirmExitGame()" style="width:100%;margin-top:8px;padding:10px;background:none;border:1.5px solid var(--brd);border-radius:var(--rs);font-family:var(--sans);font-size:.85rem;cursor:pointer;color:var(--dim)">Salir de todas formas</button>
   </div>
 </div>
 

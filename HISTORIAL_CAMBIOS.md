@@ -7,6 +7,51 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (95) — Juego en tema claro, marca de agua de moléculas y logo animado en la portada
+
+### Contexto
+Revisando el rediseño (entrada 94), la docente pidió: (1) unificar también
+la portada del juego ("Modo Reto"), que seguía con fondo azul oscuro;
+(2) que el sitio no fuera "del todo blanco", con moléculas de fondo hacia el
+lado izquierdo, detrás del contenido, como marca de agua y con los colores
+del MDEC; (3) recuperar el logo de ChromaNom con movimiento en la portada,
+porque daba identidad a la página.
+
+### Cambios
+- `juego.html`: bloque "TEMA CLARO UNIFICADO" que pasa al tema claro la
+  portada del juego, los selectores de grupo (práctica por grupo y
+  reacciones), las ventanas emergentes (consentimiento, código, salida,
+  envío), el panel de progreso/premio y las cifras del pie. Los botones de
+  acción ("Entrar", "Aceptar y continuar", "Comenzar", "Comprobar") usan el
+  azul del logo; la barra de progreso de la partida ya no usa los colores
+  del método. La barra superior de la partida sigue en azul noche (marcador).
+- `fondo-moleculas.svg` (nuevo): 8 moléculas reales en esqueletal
+  (2-metilpentano, pent-2-eno, benceno, butan-2-ol, ácido propanoico,
+  metilciclohexano, butan-2-ona, but-2-ino) coloreadas con el código MDEC
+  (verde cadena, turquesa ramificación, dorado insaturación, rosa grupo
+  funcional).
+- `chromanom.css` + `site-ui.js`: capa fija `#cn-mol-bg` al lado izquierdo,
+  detrás de todo el contenido, que se desvanece hacia la derecha; más tenue
+  en celular; no se imprime.
+- `index.html`: vuelve el logo de ChromaNom arriba del titular, con la
+  animación de flotación (se detiene si el dispositivo pide reducir
+  movimiento).
+- `sw.js`: caché v10 con el SVG nuevo.
+
+### Verificación
+Playwright: las 7 páginas a 360/390/414/820/1366 px sin errores ni
+desbordamiento; banco del juego (1.178) sin problemas; partidas en modo
+libre a 360/390/1366 px (envío a Apps Script bloqueado en la prueba);
+capturas de portada, selectores, ventana de consentimiento y resumen del
+juego en tema claro; animación del logo activa.
+
+### Pendiente
+- Se probó subir la intensidad de la marca de agua (de 0,17 a 0,24) pero la
+  docente detuvo ese cambio; quedó en 0,17 (PC) y 0,09 (celular).
+- No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-16 (94) — Todos los arreglos de las auditorías + rediseño visual integral
 
 ### Contexto
