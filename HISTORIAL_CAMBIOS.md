@@ -7,6 +7,39 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (100) — Marca de agua: las moléculas se cruzaban entre sí
+
+### Contexto
+Tras reforzar la marca de agua (entrada 98), la docente notó que algunas
+moléculas del fondo se cruzaban: se veía desordenado y, además,
+químicamente incorrecto (parecían enlaces entre moléculas distintas).
+
+### Causa
+En la entrada 98 se pusieron dos capas del mismo dibujo encimadas
+(desplazadas y a distinto tamaño) para cubrir todo el fondo; las dos capas
+se superponían y las moléculas de una atravesaban las de la otra.
+
+### Cambios
+- `fondo-moleculas.svg` rehecho: un solo mosaico de 720×1320 con dos
+  columnas intercaladas (16 moléculas: las mismas 8 en distinto orden y
+  rotación), cada una con su propio espacio.
+- Comprobado automáticamente (cajas de cada molécula medidas en el
+  navegador, incluidas las copias vecinas del mosaico): ninguna molécula
+  queda a menos de 18 px de otra, ni dentro del dibujo ni al repetirse.
+- `chromanom.css`: una sola capa (`600px` en PC, `460px` en celular),
+  opacidad igual que en la entrada 98 (0,30 / 0,16). Comentario en el CSS
+  para no volver a superponer capas.
+- `sw.js`: caché v11.
+
+### Verificación
+Playwright: las 7 páginas a 360/390/414/820/1366 px sin errores ni
+desbordamiento; capturas de la portada en PC y celular.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-16 (99) — Portada: la numeración de módulos saltaba del 2 al 4
 
 ### Contexto

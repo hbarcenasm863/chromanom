@@ -116,18 +116,16 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 /* ── Marca de agua de moléculas (colores MDEC) en todo el fondo ─────────
    La inserta site-ui.js como #cn-mol-bg. Queda fija detrás de todo el
    contenido (z-index:-1) y no recibe clics. Las moléculas son reales
-   (fórmula esqueletal) — ver fondo-moleculas.svg. Dos capas del mismo
-   dibujo, desplazadas y a distinto tamaño, para que el patrón no se note
-   repetido al cubrir todo el ancho. */
+   (fórmula esqueletal) — ver fondo-moleculas.svg: un solo mosaico de dos
+   columnas intercaladas, comprobado para que ninguna molécula se cruce con
+   otra, ni dentro del dibujo ni al repetirse. (No superponer capas: dos
+   copias encimadas hacían que las moléculas se atravesaran.) */
 #cn-mol-bg{
   position:fixed;inset:0;
-  background-image:url(fondo-moleculas.svg),url(fondo-moleculas.svg);
-  background-size:300px auto,250px auto;
-  background-position:left 24px top 70px,left 210px top 560px;
-  background-repeat:repeat,repeat;
+  background:url(fondo-moleculas.svg) left 10px top 40px/600px auto repeat;
   opacity:.3;z-index:-1;pointer-events:none;
 }
 @media (max-width:640px){
-  #cn-mol-bg{opacity:.16;background-size:230px auto,190px auto;background-position:left 4px top 60px,left 150px top 420px}
+  #cn-mol-bg{opacity:.16;background-size:460px auto;background-position:left 0 top 30px}
 }
 @media print{#cn-mol-bg{display:none!important}}
