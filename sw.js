@@ -22,7 +22,8 @@ const ASSETS = [
   './icons/icon-180.png',
   './pwa-install.js',
   './text-zoom.js',
-  './site-ui.js'
+  './site-ui.js',
+  './chromanom.css'
 ];
 
 // Instalar: guardar todos los archivos en caché.

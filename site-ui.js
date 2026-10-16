@@ -28,20 +28,21 @@
       '#bnav,#bnav-sheet,#bnav-backdrop{display:none}'+
       '@media(max-width:640px){'+
         '.site-nav .nav-links>a{display:none!important}'+
-        '.site-nav{flex-wrap:nowrap!important;min-height:48px!important;height:48px!important;padding:0 14px!important}'+
+        '.site-nav{flex-wrap:nowrap!important;min-height:52px!important;height:52px!important;padding:0 14px!important}'+
+        '.site-nav .nav-brand img{height:26px!important}'+
         '.site-nav .nav-links{flex-wrap:nowrap!important}'+
         'body.has-bnav{padding-bottom:calc(64px + env(safe-area-inset-bottom))}'+
         '#bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:1000;'+
-          'background:#0d4a73;box-shadow:0 -2px 12px rgba(0,0,0,.22);'+
+          'background:rgba(255,255,255,.96);border-top:1px solid #dfe7ef;box-shadow:0 -4px 16px rgba(13,34,51,.06);'+
           'padding:4px 2px calc(4px + env(safe-area-inset-bottom));justify-content:space-around}'+
         '#bnav a,#bnav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;'+
           'min-height:52px;padding:4px 1px;border:none;background:none;border-radius:10px;cursor:pointer;'+
-          'color:rgba(255,255,255,.82);text-decoration:none;font-family:Outfit,system-ui,sans-serif;'+
+          'color:#3d5166;text-decoration:none;font-family:Outfit,system-ui,sans-serif;'+
           'font-size:10.5px;font-weight:600;line-height:1.1}'+
         '#bnav .bi{font-size:19px;line-height:1}'+
         '#bnav .bt{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}'+
-        '#bnav .on{background:rgba(255,255,255,.18);color:#fff}'+
-        '#bnav a:focus-visible,#bnav button:focus-visible{outline:3px solid #fff;outline-offset:-3px}'+
+        '#bnav .on{background:#e8f4fb;color:#0d4a73;font-weight:800}'+
+        '#bnav a:focus-visible,#bnav button:focus-visible{outline:3px solid #1a6ea8;outline-offset:-3px}'+
         'body.bnav-hide #bnav{display:none}'+
         'body.bnav-hide.has-bnav{padding-bottom:0}'+
         '#bnav-backdrop.open{display:block;position:fixed;inset:0;background:rgba(10,30,50,.45);z-index:1001}'+
@@ -72,6 +73,11 @@
   function build(){
     if(!document.querySelector('.site-nav')) return;
     css();
+    // Marca: el logo real en el menú de todas las páginas.
+    var brand=document.querySelector('.site-nav .nav-brand');
+    if(brand&&!brand.querySelector('img[data-cn-logo]')){
+      brand.innerHTML='<img data-cn-logo src="logo-chromanom.png" alt="ChromaNom — inicio" width="106" height="30">';
+    }
     var nav=document.createElement('nav');
     nav.id='bnav';
     nav.setAttribute('aria-label','Menú principal');

@@ -39,7 +39,7 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-:focus-visible{outline:3px solid var(--c-g);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
 body{
   background:var(--surface);
   color:var(--tx);
@@ -661,6 +661,7 @@ body{
     -webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
+<link rel="stylesheet" href="chromanom.css">
 </head>
 <body>
 
@@ -682,14 +683,12 @@ body{
 
 <div class="app">
 
-  <div class="page-title">
-    <div class="page-title-icon">&#128196;</div>
-    <div style="flex:1">
-      <h1>Generador de Ejercicios</h1>
-      <p>Crea hojas de trabajo personalizadas para nomenclatura org&aacute;nica IUPAC</p>
-    </div>
-    <button class="btn-help" onclick="toggleHelp()">&#9432; Referencia</button>
-  </div>
+  <div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Herramienta · Docentes y estudiantes</div>
+  <h1>Generador de ejercicios</h1>
+  <p>Arma una hoja de trabajo: elige los grupos funcionales, el tipo de ejercicio y la cantidad. Se imprime o se guarda en PDF.</p>
+  <button class="cn-btn cn-btn--secondary btn-help" style="margin-top:14px" onclick="toggleHelp()">ⓘ Ver referencia rápida</button>
+</div>
 
   <!-- Config panel (screen only) -->
   <div class="config-panel" id="config-panel">
@@ -3566,6 +3565,7 @@ function toggleHelp(){
 
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

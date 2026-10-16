@@ -74,158 +74,95 @@ body::before{
 
 .app{max-width:1000px;margin:0 auto;padding:0 20px 80px;position:relative;z-index:1}
 
-/* ── HEADER ── */
-header{
-  display:flex;align-items:center;justify-content:center;
-  padding:40px 0 10px;
-  flex-direction:column;
-  gap:0;
-}
-.logo-img{width:220px;height:auto;filter:drop-shadow(0 6px 20px rgba(26,110,168,.2));animation:floatLogo 4s ease-in-out infinite}
-@keyframes floatLogo{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.tagline{
-  font-size:.88rem;color:var(--dim);
-  letter-spacing:.06em;text-align:center;
-  margin-top:4px;
-}
-.tagline strong{color:var(--azul)}
-
-/* ── LEGEND 4 PARTES ── */
-.legend{
-  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
-  margin:24px 0 0;
-}
-.lp{
-  display:flex;align-items:center;gap:6px;
-  padding:5px 14px;border-radius:100px;
-  border:2px solid;font-size:.72rem;font-weight:700;
-  letter-spacing:.03em;
-}
-.lp.r{color:var(--c1t);border-color:var(--c1);background:var(--c1b)}
-.lp.c{color:var(--c2);border-color:var(--c2);background:var(--c2b)}
-.lp.i{color:var(--c3);border-color:var(--c3);background:var(--c3b)}
-.lp.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
-.dot{width:7px;height:7px;border-radius:50%}
-
-/* ── HERO CARD ── */
-.hero{
-  background:linear-gradient(135deg, var(--azul-d) 0%, var(--azul) 60%, #1e8ac8 100%);
-  border-radius:var(--r);
-  padding:36px 40px;
-  margin:28px 0 24px;
-  color:#fff;
-  position:relative;
-  overflow:hidden;
-  box-shadow:var(--sh2);
-}
-.hero::after{
-  content:'';position:absolute;top:-40px;right:-40px;
-  width:200px;height:200px;
-  border-radius:50%;
-  background:rgba(255,255,255,.05);
-  pointer-events:none;
-}
-.hero::before{
-  content:'';position:absolute;bottom:-60px;left:-20px;
-  width:160px;height:160px;border-radius:50%;
-  background:rgba(255,255,255,.04);pointer-events:none;
-}
-.hero h1{
-  font-size:1.7rem;font-weight:900;
-  line-height:1.2;margin-bottom:10px;
-  font-style:italic;
-}
-.hero h1 span{color:var(--naranja)}
-.hero p{font-size:.9rem;color:rgba(255,255,255,.92);line-height:1.75;max-width:100%;margin-bottom:20px}
-.four-parts{display:flex;gap:8px;flex-wrap:wrap}
-.fp{
-  padding:6px 14px;border-radius:100px;
-  font-size:.73rem;font-weight:700;
-  border:1.5px solid;letter-spacing:.02em;
-}
-.fp.r{color:#67e8f9;border-color:#67e8f9;background:rgba(8,145,178,.18)}
-.fp.c{color:#86efac;border-color:#86efac;background:rgba(22,101,52,.18)}
-.fp.i{color:#fcd34d;border-color:#fcd34d;background:rgba(180,83,9,.18)}
-.fp.g{color:#f9a8d4;border-color:#f9a8d4;background:rgba(204,121,167,.18)}
-.hero-stats{
-  display:flex;flex-direction:row;gap:10px;
-  flex-wrap:wrap;margin-top:22px;
-}
-.hs{
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.2);
-  border-radius:var(--rs);padding:12px 20px;text-align:center;
-  backdrop-filter:blur(4px);
-}
-.hs-n{font-size:2rem;font-weight:900;color:#fff;line-height:1}
-.hs-l{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.6);margin-top:2px}
-
-/* ── DEMO NOMBRE ── */
-.demo-card{
-  background:var(--surf);border:2px solid var(--brd);
-  border-radius:var(--r);padding:24px 28px;
-  box-shadow:var(--sh);margin-bottom:24px;
-}
-.demo-card h2{font-size:1rem;font-weight:800;color:var(--azul-d);margin-bottom:4px}
-.demo-card p{font-size:.82rem;color:var(--dim);margin-bottom:16px;line-height:1.6}
-.name-row{
-  display:flex;flex-wrap:wrap;gap:3px;
-  background:#f0f7ff;border-radius:var(--rs);
-  padding:16px 20px;border:1.5px solid var(--brd);
-  margin-bottom:12px;align-items:flex-end;
-}
+/* ── PORTADA (rediseño 2026-10) ── */
+.app{max-width:1120px}
+.hero2{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 0 32px}
+.hero2 h1{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.025em;color:var(--cn-tx);margin:10px 0 14px}
+.hero2 h1 span{color:var(--cn-brand)}
+.hero2-sub{font-size:1.08rem;line-height:1.65;color:var(--cn-tx2);max-width:46ch}
+.hero2-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero2-tour{margin-top:8px}
+.hero2-proof{margin-top:14px;font-size:.8rem;color:var(--cn-tx3)}
+.hero2-fig{margin:0;padding:18px 18px 16px}
+.hero-mol{display:block;width:100%;height:auto;margin:4px 0 6px}
+.hero-mol .mt{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;dominant-baseline:central}
+.hero-mol .mt.c{fill:var(--c2t)}.hero-mol .mt.g{fill:var(--c4t)}.hero-mol .mt.r{fill:var(--c1t)}
+.hero-mol .mb{stroke:#64748b;stroke-width:1.6;stroke-linecap:round}
+.hero-mol .mb.i{stroke:var(--c3);stroke-width:2.2}.hero-mol .mb.g{stroke:var(--c4);stroke-width:2}.hero-mol .mb.r{stroke:var(--c1);stroke-width:2}
+.hero-mol .mn{font-family:'Outfit',sans-serif;font-size:10px;font-weight:800;fill:var(--c2t)}
+.hero2-fig figcaption{font-size:.8rem;color:var(--cn-tx2);margin-top:10px;line-height:1.5}
+.name-row{display:flex;flex-wrap:wrap;gap:4px;align-items:flex-end;justify-content:center;background:var(--cn-surf2);border-radius:var(--cn-r-s);padding:12px 10px}
 .np{display:flex;flex-direction:column;align-items:center;gap:5px}
-.nw{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
-.nw.r{color:var(--c1t);background:var(--c1b)}
-.nw.c{color:var(--c2);background:var(--c2b)}
-.nw.i{color:var(--c3t);background:var(--c3b)}
-.nw.g{color:var(--c4t);background:var(--c4b)}
-.nw.sep{background:transparent;color:var(--dimmer);font-size:1rem}
-.nl{font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;white-space:nowrap}
+.nw{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
+.nw.r{color:var(--c1t);background:var(--c1b)}.nw.c{color:var(--c2t);background:var(--c2b)}
+.nw.i{color:var(--c3t);background:var(--c3b)}.nw.g{color:var(--c4t);background:var(--c4b)}
+.nl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
 .nl.r{color:var(--c1t)}.nl.c{color:var(--c2t)}.nl.i{color:var(--c3t)}.nl.g{color:var(--c4t)}
-.more-examples{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.me{background:#f8feff;border:1px solid var(--brd);border-radius:var(--rs);padding:10px 14px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end}
 
-/* ── SECCIÓN MÓDULOS ── */
-.sec-lbl{
-  font-size:.65rem;font-weight:800;text-transform:uppercase;
-  letter-spacing:.15em;color:var(--dimmer);margin-bottom:14px;
-}
-.modules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
-@media(max-width:600px){.modules{grid-template-columns:1fr}.more-examples{grid-template-columns:1fr}
-  .hero-stats{gap:7px}
-  .hs{padding:9px 12px;flex:1;min-width:86px}
-  .hs-n{font-size:1.35rem}
-  .hs-l{font-size:.52rem}
-}
+.stats2{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 36px}
+.st2{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);padding:16px;text-align:center}
+.st2 b{display:block;font-family:'Fraunces',Georgia,serif;font-size:1.9rem;font-weight:800;color:var(--cn-brand-d);line-height:1.1}
+.st2 span{font-size:.8rem;color:var(--cn-tx2)}
 
-.mod-card{
-  border-radius:var(--r);overflow:hidden;
-  box-shadow:var(--sh);
-  cursor:pointer;text-decoration:none;
-  display:flex;flex-direction:column;
-  transition:transform .22s, box-shadow .22s;
-  border:2px solid transparent;
-}
-.mod-card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
-.mod-card.azul{background:linear-gradient(135deg,var(--azul-d),var(--azul));border-color:var(--azul)}
-.mod-card.verde{background:linear-gradient(135deg,var(--verde-d),var(--verde));border-color:var(--verde)}
-.mod-card.naranja{background:linear-gradient(135deg,#c45c0c,var(--naranja));border-color:var(--naranja);grid-column:1/-1}
-.mod-top{padding:28px 28px 20px;flex:1;color:#fff}
-.mod-icon{font-size:2.4rem;margin-bottom:12px;display:block}
-.mod-title{font-size:1.2rem;font-weight:900;margin-bottom:6px;line-height:1.2}
-.mod-desc{font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.65}
-.mod-bottom{
-  padding:12px 28px;
-  background:rgba(0,0,0,.18);
-  display:flex;align-items:center;justify-content:space-between;
-  color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700;
-}
-.mod-arrow{font-size:1.1rem;transition:transform .2s}
-.mod-card:hover .mod-arrow{transform:translateX(5px)}
-.mod-chips{display:flex;gap:6px;flex-wrap:wrap}
-.mc{padding:2px 9px;border-radius:100px;font-size:.65rem;font-weight:700;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25)}
+.sec2{margin:0 0 44px}
+.sec2-head{margin-bottom:18px}
+.sec2-head h2{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(1.45rem,3vw,1.9rem);letter-spacing:-.02em;color:var(--cn-tx);margin:6px 0 6px;line-height:1.15}
+.sec2-head p{color:var(--cn-tx2);font-size:.98rem;max-width:62ch;line-height:1.6}
 
+.metodo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.mt-card{background:var(--cn-surf);border:1px solid var(--cn-brd);border-top:5px solid;border-radius:var(--cn-r);padding:16px}
+.mt-card.r{border-top-color:var(--c1)}.mt-card.c{border-top-color:var(--c2)}.mt-card.i{border-top-color:var(--c3)}.mt-card.g{border-top-color:var(--c4)}
+.mt-n{font-size:1.3rem;font-weight:800}
+.mt-card.r .mt-n,.mt-card.r h3{color:var(--c1t)}.mt-card.c .mt-n,.mt-card.c h3{color:var(--c2t)}
+.mt-card.i .mt-n,.mt-card.i h3{color:var(--c3t)}.mt-card.g .mt-n,.mt-card.g h3{color:var(--c4t)}
+.mt-card h3{font-size:1.05rem;font-weight:800;margin:4px 0 6px}
+.mt-card p{font-size:.88rem;color:var(--cn-tx2);line-height:1.5;margin-bottom:10px}
+.mt-card code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--cn-surf2);padding:3px 7px;border-radius:6px;color:var(--cn-tx)}
+.more-examples{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.me{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r-s);padding:12px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;justify-content:center}
+.me .nw{font-size:.95rem}
+
+.ruta2{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:none;padding:0}
+.ruta2 a{display:flex;gap:12px;align-items:flex-start;height:100%;padding:16px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,box-shadow .15s,transform .15s}
+.ruta2 a:hover{border-color:var(--cn-brand);box-shadow:var(--cn-sh-h);transform:translateY(-2px)}
+.r2-n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--cn-brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ruta2 b{display:block;font-size:1rem;margin-bottom:3px}
+.ruta2 small{display:block;font-size:.84rem;color:var(--cn-tx2);line-height:1.45}
+
+.mods2{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.mods2>.mod2{grid-column:span 2}
+.mods2>.mod2:nth-last-child(-n+2){grid-column:span 3}
+.mod2{position:relative;display:flex;flex-direction:column;padding:20px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);box-shadow:var(--cn-sh);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,box-shadow .15s,transform .15s}
+.mod2:hover{border-color:var(--cn-brand);box-shadow:var(--cn-sh-h);transform:translateY(-3px)}
+.mods2>.mod2.destacado{grid-column:1/-1}
+.mod2.destacado{background:linear-gradient(120deg,#0d4a73 0%,#1a6ea8 100%);color:#fff;border-color:transparent}
+.mod2.destacado p{color:rgba(255,255,255,.9)}
+.mod2.destacado .mod2-tag{background:rgba(255,255,255,.18);color:#fff}
+.mod2.destacado .mod2-go{background:#fff;color:var(--cn-brand-d);padding:10px 16px;border-radius:var(--cn-r-s);align-self:flex-start}
+.mod2-ico{font-size:1.6rem;width:48px;height:48px;border-radius:12px;background:var(--cn-brand-l);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.mod2.destacado .mod2-ico{background:rgba(255,255,255,.16)}
+.mod2-tag{position:absolute;top:18px;right:18px;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cn-brand-d);background:var(--cn-brand-l);padding:4px 9px;border-radius:999px}
+.mod2 h3{font-size:1.12rem;font-weight:800;margin-bottom:6px;line-height:1.25}
+.mod2 p{font-size:.9rem;color:var(--cn-tx2);line-height:1.55;flex:1}
+.mod2-go{margin-top:14px;font-weight:800;font-size:.9rem;color:var(--cn-brand)}
+
+@media (max-width:900px){
+  .hero2{grid-template-columns:1fr;gap:24px;padding:32px 0 20px}
+  .metodo-grid{grid-template-columns:1fr 1fr}
+  .mods2{grid-template-columns:1fr 1fr}.mods2>.mod2,.mods2>.mod2:nth-last-child(-n+2){grid-column:auto}.mods2>.mod2.destacado{grid-column:1/-1}
+  .ruta2{grid-template-columns:1fr}
+  .stats2{grid-template-columns:repeat(2,1fr)}
+  .more-examples{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .app{padding:0 16px 40px!important}
+  .hero2{padding:22px 0 12px}
+  .hero2-cta .cn-btn{flex:1 1 100%}
+  .metodo-grid{grid-template-columns:1fr 1fr;gap:8px}.mt-card{padding:12px}.mt-card p{font-size:.82rem}.mt-card code{font-size:.7rem;white-space:normal}
+  .mods2{grid-template-columns:1fr}
+  .nw{font-size:1rem}
+  .stats2{gap:8px}.st2{padding:12px 8px}.st2 b{font-size:1.5rem}
+}
 
 /* ── TUTORIAL TOUR ── */
 .tour-ov{position:fixed;inset:0;background:rgba(10,30,50,.82);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(3px)}
@@ -277,26 +214,9 @@ header{
 .tour-btn.next{background:var(--azul);color:#fff}
 .tour-btn.next:hover{background:var(--azul-d)}
 /* tour trigger button */
-.btn-tour{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:10px 20px;border-radius:var(--rs);
-  border:1.5px solid rgba(255,255,255,.35);
-  background:rgba(255,255,255,.1);
-  color:#fff;font-family:inherit;
-  font-size:.82rem;font-weight:700;cursor:pointer;
-  transition:all .2s;margin-top:16px;
-  backdrop-filter:blur(2px);
-}
-.btn-tour:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.55);transform:translateY(-1px)}
 
-/* ── LLAMADA A LA ACCIÓN ── */
-.cta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}
-.cta-row .btn-tour{margin-top:0}
-.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--rs);background:#fff;color:var(--azul-d);font-weight:800;font-size:.92rem;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.18);transition:transform .18s,box-shadow .18s}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.24)}
-.social-proof{margin-top:12px;font-size:.74rem;color:rgba(255,255,255,.85)}
 /* ── TU AVANCE ── */
-.avance-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:18px 22px;box-shadow:var(--sh);margin-bottom:24px;display:none}
+.avance-card{padding:20px 22px;margin:0 0 40px;display:none}
 .avance-card.on{display:block}
 .avance-card h2{font-size:1rem;font-weight:800;color:var(--azul-d);margin-bottom:4px}
 .avance-card p{font-size:.8rem;color:var(--dim);margin-bottom:12px}
@@ -318,8 +238,6 @@ footer span{color:var(--naranja);font-weight:700}
 
 /* ── ANIMACIONES ENTRADA ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.hero{animation:fadeUp .5s ease both}
-.demo-card{animation:fadeUp .5s .1s ease both}
 .mod-card:nth-child(1){animation:fadeUp .5s .15s ease both}
 .mod-card:nth-child(2){animation:fadeUp .5s .2s ease both}
 .mod-card:nth-child(3){animation:fadeUp .5s .25s ease both}
@@ -377,6 +295,7 @@ footer span{color:var(--naranja);font-weight:700}
 .temas-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .tema-chip{padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:600;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25)}
 </style>
+<link rel="stylesheet" href="chromanom.css">
 </head>
 <body>
 <nav class="site-nav">
@@ -391,223 +310,157 @@ footer span{color:var(--naranja);font-weight:700}
 <a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
   </div>
 </nav>
-<div class="app">
+<main class="app" id="contenido">
 
-<!-- HEADER -->
-<header>
-  <img class="logo-img" src="logo-chromanom.png" alt="Nomenclatura Orgánica Fácil">
-  <div class="tagline">Aprende nomenclatura orgánica IUPAC · <strong>Bachillerato</strong></div>
-  
-</header>
+<!-- ── PRESENTACIÓN ── -->
+<section class="hero2" aria-labelledby="hero-title">
+  <div class="hero2-txt">
+    <div class="cn-eyebrow">Nomenclatura orgánica IUPAC · Bachillerato</div>
+    <h1 id="hero-title">Domina la nomenclatura orgánica, <span>paso a paso</span></h1>
+    <p class="hero2-sub">De la estructura molecular al nombre IUPAC con un método visual de <strong>4 partes</strong>: cada parte del nombre tiene siempre el mismo color.</p>
+    <div class="hero2-cta">
+      <a class="cn-btn cn-btn--primary" id="cta-principal" href="teoria.html">Comenzar a aprender →</a>
+      <a class="cn-btn cn-btn--secondary" href="#modulos">Explorar módulos</a>
+    </div>
+    <button type="button" class="cn-btn cn-btn--ghost hero2-tour" onclick="tourOpen()">▶ ¿Cómo funciona ChromaNom? (1 min)</button>
+    <p class="hero2-proof">🏫 Usado en clase en el Colegio Rufino José Cuervo · Gratis · Sin registro · Funciona en el celular</p>
+  </div>
 
-<!-- HERO -->
-<div class="hero">
-  <div>
-    <h1>La forma <span>visual</span> de aprender<br>nomenclatura orgánica</h1>
-    <p>ChromaNom te enseña a nombrar compuestos orgánicos según la nomenclatura <strong>IUPAC</strong> — desde alcanos hasta amidas y nitrilos — con un método visual en 4 partes. Diseñado para bachillerato: sin instalaciones, sin registro, todo en el navegador.</p>
-    <div class="temas-row">
-      <span class="tema-chip">Alcanos · Alquenos · Alquinos</span>
-      <span class="tema-chip">Alcoholes · Cetonas · Aldehídos</span>
-      <span class="tema-chip">Ácidos · Ésteres · Éteres</span>
-      <span class="tema-chip">Amidas · Nitrilos</span>
+  <figure class="hero2-fig cn-card" aria-labelledby="hero-fig-cap">
+    <div class="hero2-fig-top">
+      <span class="cn-eyebrow" style="color:var(--cn-tx3)">Así se lee una molécula</span>
     </div>
-    <div class="four-parts" style="margin-top:14px">
-      <div class="fp r">① Ramificaciones</div>
-      <div class="fp c">② Cadena principal</div>
-      <div class="fp i">③ Insaturaciones</div>
-      <div class="fp g">④ Grupo funcional</div>
+    <svg class="hero-mol" viewBox="0 0 370 125" role="img" aria-label="Estructura semidesarrollada del 5-metilhex-3-en-2-ol con sus 4 partes coloreadas"><line class="mb b" x1="64.0" y1="70" x2="90.8" y2="70"/><line class="mb b" x1="113.6" y1="70" x2="148.8" y2="70"/><line class="mb i" x1="171.6" y1="67.4" x2="206.8" y2="67.4"/><line class="mb i" x1="171.6" y1="72.6" x2="206.8" y2="72.6"/><line class="mb b" x1="229.6" y1="70" x2="264.8" y2="70"/><line class="mb b" x1="287.6" y1="70" x2="322.8" y2="70"/><line class="mb g" x1="98" y1="40" x2="98" y2="60"/><line class="mb r" x1="272" y1="80" x2="272" y2="100"/><text class="mt c" x="35.8" y="70">CH₃</text><text class="mt c" x="93.8" y="70">CH</text><text class="mt c" x="151.8" y="70">CH</text><text class="mt c" x="209.8" y="70">CH</text><text class="mt c" x="267.8" y="70">CH</text><text class="mt c" x="325.8" y="70">CH₃</text><text class="mt g" x="93.8" y="30">OH</text><text class="mt r" x="267.8" y="110">CH₃</text><text class="mn" x="48.4" y="92" text-anchor="middle">1</text><text class="mn" x="102.2" y="92" text-anchor="middle">2</text><text class="mn" x="160.2" y="92" text-anchor="middle">3</text><text class="mn" x="218.2" y="92" text-anchor="middle">4</text><text class="mn" x="286.6" y="54" text-anchor="start">5</text><text class="mn" x="338.4" y="92" text-anchor="middle">6</text></svg>
+    <div class="name-row hero2-name" aria-label="Nombre: 5-metilhex-3-en-2-ol">
+      <div class="np"><span class="nw r">5-metil</span><span class="nl r">① Ramificación</span></div>
+      <div class="np"><span class="nw c">hex</span><span class="nl c">② Cadena 6 C</span></div>
+      <div class="np"><span class="nw i">-3-en-</span><span class="nl i">③ Doble enlace</span></div>
+      <div class="np"><span class="nw g">2-ol</span><span class="nl g">④ Alcohol</span></div>
     </div>
-    <div class="cta-row">
-      <a class="btn-cta" href="juego.html">🎮 Empieza a practicar</a>
-      <button class="btn-tour" onclick="tourOpen()">▶ ¿Cómo funciona?</button>
-    </div>
-    <div class="social-proof">🏫 Usado en clase en el Colegio Rufino José Cuervo · Gratis · Sin registro</div>
-  </div>
-  <div class="hero-stats">
-    <div class="hs"><div class="hs-n">17</div><div class="hs-l">Grupos funcionales</div></div>
-    <div class="hs"><div class="hs-n">1.100+</div><div class="hs-l">Preguntas de práctica</div></div>
-    <div class="hs"><div class="hs-n">42</div><div class="hs-l">Reacciones</div></div>
-  </div>
-</div>
+    <figcaption id="hero-fig-cap">Cada color de la estructura corresponde a una parte del nombre: <strong>5-metilhex-3-en-2-ol</strong>.</figcaption>
+  </figure>
+</section>
 
-<!-- DEMO ESTÁTICA -->
-<div class="demo-card">
-  <h2>Las 4 partes en acción</h2>
-  <p>Así se descompone cualquier nombre en sus 4 partes. Cada color corresponde a una parte del esquema.</p>
-  <div class="name-row">
-    <div class="np"><span class="nw g" style="font-style:italic;opacity:.85">ácido </span><span class="nl g">Grupo func.</span></div>
-    <div class="np"><span class="nw r">5-etil</span><span class="nl r">Ramificación</span></div>
-    <div class="np"><span class="nw c">non</span><span class="nl c">Cadena 9C</span></div>
-    <div class="np"><span class="nw i">6-en</span><span class="nl i">Insaturación C6</span></div>
-    <div class="np"><span class="nw g">oico</span><span class="nl g">Grupo funcional</span></div>
-  </div>
-  <div class="more-examples">
-    <div class="me">
-      <div class="np"><span class="nw r" style="font-size:1rem">2-metil</span><span class="nl r">Ramif.</span></div>
-      <div class="np"><span class="nw c" style="font-size:1rem">pent</span><span class="nl c">5C</span></div>
-      <div class="np"><span class="nw g" style="font-size:1rem">ano</span><span class="nl g">Alcano</span></div>
-    </div>
-    <div class="me">
-      <div class="np"><span class="nw c" style="font-size:1rem">but</span><span class="nl c">4C</span></div>
-      <div class="np"><span class="nw i" style="font-size:1rem">1-en</span><span class="nl i">Doble C1</span></div>
-      <div class="np"><span class="nw g" style="font-size:1rem">o</span><span class="nl g">Alqueno</span></div>
-    </div>
-    <div class="me">
-      <div class="np"><span class="nw r" style="font-size:1rem">5-metil</span><span class="nl r">Ramif.</span></div>
-      <div class="np"><span class="nw c" style="font-size:1rem">hex</span><span class="nl c">6C</span></div>
-      <div class="np"><span class="nw i" style="font-size:1rem">3-en</span><span class="nl i">Doble C3</span></div>
-      <div class="np"><span class="nw g" style="font-size:1rem">2-ol</span><span class="nl g">Alcohol C2</span></div>
-    </div>
-    <div class="me">
-      <div class="np"><span class="nw g" style="font-style:italic;font-size:.95rem;opacity:.85">ácido </span><span class="nl g">Grupo func.</span></div>
-      <div class="np"><span class="nw c" style="font-size:1rem">prop</span><span class="nl c">3C</span></div>
-      <div class="np"><span class="nw g" style="font-size:1rem">oico</span><span class="nl g">Ác. carboxílico</span></div>
-    </div>
-  </div>
-</div>
+<!-- ── CIFRAS REALES ── -->
+<section class="stats2" aria-label="ChromaNom en cifras">
+  <div class="st2"><b>17</b><span>grupos funcionales</span></div>
+  <div class="st2"><b>1.100+</b><span>preguntas en el juego</span></div>
+  <div class="st2"><b>42</b><span>reacciones explicadas</span></div>
+  <div class="st2"><b>4</b><span>tipos de hoja imprimible</span></div>
+</section>
 
-<!-- TU AVANCE (solo aparece si el estudiante ya jugó en este dispositivo) -->
-<div class="avance-card" id="avance-card" aria-live="polite">
+<!-- ── TU AVANCE (solo aparece si el estudiante ya jugó en este dispositivo) ── -->
+<section class="avance-card cn-card" id="avance-card" aria-live="polite">
   <h2>📈 Tu avance</h2>
   <p>Tu mejor resultado en cada nivel del juego, guardado en este dispositivo.</p>
   <div id="avance-rows"></div>
-</div>
+</section>
 
-<!-- MÓDULOS -->
-<div class="ruta-card">
-  <div class="ruta-hdr">¿Por dónde empiezo? — Ruta recomendada</div>
-  <div class="ruta-steps">
-    <a class="rs r1" href="teoria.html">
-      <span class="rs-n">①</span>
-      <div>
-        <div class="rs-title">Principios</div>
-        <div class="rs-desc">El sistema de 4 colores, el algoritmo de 5 pasos y las tablas de referencia. Empieza aquí si no conoces IUPAC.</div>
-      </div>
+<!-- ── EL MÉTODO ── -->
+<section class="sec2" aria-labelledby="metodo-title">
+  <div class="sec2-head">
+    <div class="cn-eyebrow">El método ChromaNom</div>
+    <h2 id="metodo-title">Todo nombre orgánico tiene 4 partes</h2>
+    <p>Aprende a reconocer cada una y podrás leer — y construir — cualquier nombre, por largo que sea.</p>
+  </div>
+  <div class="metodo-grid">
+    <div class="mt-card r"><span class="mt-n">①</span><h3>Ramificaciones</h3><p>Cadenas laterales con su número de posición, en orden alfabético.</p><code>2-metil · 3-etil</code></div>
+    <div class="mt-card c"><span class="mt-n">②</span><h3>Cadena principal</h3><p>Cuántos carbonos tiene la cadena principal.</p><code>met · et · prop · but</code></div>
+    <div class="mt-card i"><span class="mt-n">③</span><h3>Insaturaciones</h3><p>Dobles o triples enlaces, o ninguno.</p><code>-an- · -en- · -in-</code></div>
+    <div class="mt-card g"><span class="mt-n">④</span><h3>Grupo funcional</h3><p>El sufijo que dice qué tipo de compuesto es.</p><code>-ol · -al · -ona · -oico</code></div>
+  </div>
+  <div class="more-examples">
+    <div class="me">
+      <div class="np"><span class="nw r">2-metil</span><span class="nl r">Ramif.</span></div>
+      <div class="np"><span class="nw c">pent</span><span class="nl c">5 C</span></div>
+      <div class="np"><span class="nw i">an</span><span class="nl i">Sin insat.</span></div>
+      <div class="np"><span class="nw g">o</span><span class="nl g">Alcano</span></div>
+    </div>
+    <div class="me">
+      <div class="np"><span class="nw c">but</span><span class="nl c">4 C</span></div>
+      <div class="np"><span class="nw i">-1-en</span><span class="nl i">Doble C1</span></div>
+      <div class="np"><span class="nw g">o</span><span class="nl g">Alqueno</span></div>
+    </div>
+    <div class="me">
+      <div class="np"><span class="nw g" style="font-style:italic">ácido </span><span class="nl g">Grupo func.</span></div>
+      <div class="np"><span class="nw r">5-etil</span><span class="nl r">Ramif.</span></div>
+      <div class="np"><span class="nw c">non</span><span class="nl c">9 C</span></div>
+      <div class="np"><span class="nw i">-6-en</span><span class="nl i">Doble C6</span></div>
+      <div class="np"><span class="nw g">oico</span><span class="nl g">Ácido</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RUTA RECOMENDADA ── -->
+<section class="sec2" aria-labelledby="ruta-title">
+  <div class="sec2-head">
+    <div class="cn-eyebrow">¿Por dónde empiezo?</div>
+    <h2 id="ruta-title">Ruta recomendada</h2>
+    <p>Todos los módulos están abiertos; este es el orden que mejor funciona si vas empezando.</p>
+  </div>
+  <ol class="ruta2">
+    <li><a href="teoria.html"><span class="r2-n">1</span><span><b>Principios</b><small>Las 4 partes, el algoritmo de 5 pasos y las reglas de desempate.</small></span></a></li>
+    <li><a href="grupos.html"><span class="r2-n">2</span><span><b>Grupos funcionales</b><small>Cada grupo con su estructura, sus reglas y ejercicios.</small></span></a></li>
+    <li><a href="juego.html"><span class="r2-n">3</span><span><b>Juego de práctica</b><small>Pon a prueba lo aprendido con preguntas cronometradas.</small></span></a></li>
+  </ol>
+</section>
+
+<!-- ── MÓDULOS ── -->
+<section class="sec2" id="modulos" aria-labelledby="mod-title">
+  <div class="sec2-head">
+    <div class="cn-eyebrow">Módulos</div>
+    <h2 id="mod-title">Todo lo que puedes hacer en ChromaNom</h2>
+  </div>
+  <div class="mods2">
+    <a class="mod2 destacado" href="juego.html">
+      <span class="mod2-ico" aria-hidden="true">🎮</span>
+      <span class="mod2-tag">Practicar</span>
+      <h3>Juego de práctica</h3>
+      <p>Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres, construir moléculas y reacciones. 20 preguntas por partida, 60 segundos cada una.</p>
+      <span class="mod2-go">Jugar ahora →</span>
     </a>
-    <span class="rs-arr">→</span>
-    <a class="rs r2" href="grupos.html">
-      <span class="rs-n">②</span>
-      <div>
-        <div class="rs-title">Grupos funcionales</div>
-        <div class="rs-desc">Explora cada grupo con su estructura, reglas IUPAC y ejercicios específicos.</div>
-      </div>
+    <a class="mod2" href="teoria.html">
+      <span class="mod2-ico" aria-hidden="true">⚗️</span>
+      <span class="mod2-tag">Módulo 1</span>
+      <h3>Principios de nomenclatura</h3>
+      <p>Las 4 partes, el algoritmo paso a paso, tablas de referencia y ejercicios guiados.</p>
+      <span class="mod2-go">Abrir →</span>
     </a>
-    <span class="rs-arr">→</span>
-    <a class="rs r3" href="juego.html">
-      <span class="rs-n">③</span>
-      <div>
-        <div class="rs-title">Juego de práctica</div>
-        <div class="rs-desc">Pon a prueba lo aprendido con preguntas aleatorias, cronometradas y de distintos tipos.</div>
-      </div>
+    <a class="mod2" href="grupos.html">
+      <span class="mod2-ico" aria-hidden="true">🔬</span>
+      <span class="mod2-tag">Módulo 2</span>
+      <h3>Grupos funcionales</h3>
+      <p>Los 17 grupos con su prioridad IUPAC, estructuras dibujadas y más de 180 ejercicios.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <a class="mod2" href="reacciones.html">
+      <span class="mod2-ico" aria-hidden="true">🧪</span>
+      <span class="mod2-tag">Módulo 4</span>
+      <h3>Reacciones orgánicas</h3>
+      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y mini-quiz.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <a class="mod2" href="generador.html">
+      <span class="mod2-ico" aria-hidden="true">📄</span>
+      <span class="mod2-tag">Herramienta</span>
+      <h3>Generador de ejercicios</h3>
+      <p>Hojas de trabajo a tu medida: nombrar, dibujar, análisis MDEC o reacciones. Imprime o guarda en PDF.</p>
+      <span class="mod2-go">Crear hoja →</span>
+    </a>
+    <a class="mod2" href="referencia.html">
+      <span class="mod2-ico" aria-hidden="true">📋</span>
+      <span class="mod2-tag">Recurso</span>
+      <h3>Hoja de referencia</h3>
+      <p>Prefijos, multiplicadores, prioridad de grupos, ramificaciones clásicas vs. IUPAC y reglas clave. Imprimible.</p>
+      <span class="mod2-go">Abrir →</span>
     </a>
   </div>
-</div>
+</section>
 
-<div class="sec-lbl">Módulos de aprendizaje</div>
-<div class="modules">
+</main>
 
-  <a class="mod-card azul" href="teoria.html">
-    <div class="mod-top">
-      <span class="mod-icon">⚗️</span>
-      <div class="mod-paso">① Empieza aquí</div>
-      <div class="mod-title">Principios de Nomenclatura</div>
-      <div class="mod-desc">Las 4 partes, el algoritmo paso a paso, tablas de referencia completas y ejercicios de identificación y escritura de nombres.</div>
-    </div>
-    <div class="mod-bottom">
-      <div class="mod-chips">
-        <span class="mc">Las 4 Partes</span>
-        <span class="mc">Paso a Paso</span>
-        <span class="mc">Tablas</span>
-        <span class="mc">Ejercicios</span>
-      </div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-
-  <a class="mod-card verde" href="grupos.html">
-    <div class="mod-top">
-      <span class="mod-icon">🔬</span>
-      <div class="mod-paso">② Luego aquí</div>
-      <div class="mod-title">Grupos Funcionales</div>
-      <div class="mod-desc">Los 17 grupos funcionales con sus reglas IUPAC, estructuras dibujadas y ejercicios por grupo: más de 180 en total.</div>
-    </div>
-    <div class="mod-bottom">
-      <div class="mod-chips">
-        <span class="mc">17 grupos</span>
-        <span class="mc">180+ ejercicios</span>
-        <span class="mc">Estructuras dibujadas</span>
-      </div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-
-  <a class="mod-card naranja" href="juego.html">
-    <div class="mod-top">
-      <span class="mod-icon">🎮</span>
-      <div class="mod-paso">③ Pon a prueba lo aprendido</div>
-      <div class="mod-title">Juego de Práctica</div>
-      <div class="mod-desc">Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres, construir moléculas y reacciones. 60 segundos por pregunta.</div>
-    </div>
-    <div class="mod-bottom">
-      <div class="mod-chips">
-        <span class="mc">6 tipos de reto</span>
-        <span class="mc">20 preguntas</span>
-        <span class="mc">Cronometrado</span>
-        <span class="mc">Resultados</span>
-      </div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-
-  <a class="mod-card" href="reacciones.html" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-color:#2563eb;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
-    <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
-      <span class="mod-icon">🧪</span>
-      <div class="mod-paso" style="color:rgba(255,255,255,.75)">④ Reacciones de los grupos</div>
-      <div class="mod-title">Reacciones Orgánicas</div>
-      <div class="mod-desc" style="color:rgba(255,255,255,.85)">Reacciones características de alcanos, cicloalcanos, alquenos, alquinos, aromáticos, halogenuros, alcoholes, aminas, carbonílicos, ácidos y sus derivados. Mecanismo paso a paso, condiciones, ejemplos y mini-quiz por cada tipo.</div>
-    </div>
-    <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
-      <div class="mod-chips"><span class="mc">10 pestañas</span><span class="mc">42 reacciones</span><span class="mc">Mini-quiz</span></div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-
-  <a class="mod-card" href="generador.html" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);border-color:#7c3aed;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
-    <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
-      <span class="mod-icon">📄</span>
-      <div class="mod-paso" style="color:rgba(255,255,255,.75)">⑤ Genera tu propia hoja</div>
-      <div class="mod-title">Generador de Ejercicios</div>
-      <div class="mod-desc" style="color:rgba(255,255,255,.85)">Crea hojas de trabajo personalizadas: elige grupos funcionales, tipo de ejercicio (nombrar, dibujar, MDEC o reacciones) y cantidad. Para reacciones puedes filtrar por grupo y tipo de pregunta. Imprime o descarga en PDF.</div>
-    </div>
-    <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
-      <div class="mod-chips"><span class="mc">4 tipos</span><span class="mc">Filtros ajustables</span><span class="mc">PDF</span></div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-
-</div>
-
-<!-- HOJA DE REFERENCIA -->
-<div class="sec-lbl">Recursos descargables</div>
-<div style="margin-bottom:28px">
-  <a class="mod-card" href="referencia.html" style="background:linear-gradient(135deg,#1e293b,#475569);border-color:#475569;text-decoration:none;display:flex;flex-direction:column;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .22s,box-shadow .22s;border:2px solid #475569" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--sh)'">
-    <div class="mod-top" style="padding:22px 28px 16px;flex:1;color:#fff">
-      <span class="mod-icon">📄</span>
-      <div class="mod-title">Hoja de referencia</div>
-      <div class="mod-desc">Prefijos de cadena, multiplicadores, los 17 grupos funcionales con prioridad IUPAC, sustituyentes comunes y reglas clave — imprimible como PDF.</div>
-    </div>
-    <div class="mod-bottom" style="padding:10px 28px;background:rgba(0,0,0,.18);display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.9);font-size:.8rem;font-weight:700">
-      <div class="mod-chips"><span class="mc">Imprimir</span><span class="mc">Guardar PDF</span><span class="mc">Offline</span></div>
-      <span class="mod-arrow">→</span>
-    </div>
-  </a>
-</div>
-
-<!-- FOOTER COPYRIGHT -->
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
-</div>
-
 </div>
 
 <!-- TUTORIAL TOUR OVERLAY -->
@@ -755,7 +608,10 @@ let tourStep=0;
   if(!filas.length)return;
   document.getElementById('avance-rows').innerHTML=filas.map(([n,p])=>
     `<div class="av-row"><span>${n}</span><div class="av-bar" role="img" aria-label="${n}: ${p}%"><i style="width:${p}%"></i></div><span class="av-pct">${p}%</span></div>`).join('')
-    +'<a class="btn-cta" href="juego.html" style="margin-top:10px;background:var(--azul);color:#fff;font-size:.82rem;padding:9px 16px">Seguir practicando →</a>';
+    +'<a class="cn-btn cn-btn--primary" href="juego.html" style="margin-top:12px">Seguir practicando →</a>';
+  // Si ya practicó, la acción principal de la portada lo lleva de vuelta al juego.
+  const cta=document.getElementById('cta-principal');
+  if(cta){cta.textContent='Continuar practicando →';cta.href='juego.html';}
   document.getElementById('avance-card').classList.add('on');
 })();
 

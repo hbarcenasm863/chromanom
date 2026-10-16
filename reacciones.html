@@ -26,7 +26,7 @@
   --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
 body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-height:100%}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 
@@ -417,6 +417,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .speak-btn:hover{border-color:var(--c2t);color:var(--c2t)}
 .speak-btn.playing{border-color:var(--c3t);color:var(--c3t);background:var(--c3b)}
 </style>
+<link rel="stylesheet" href="chromanom.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -443,10 +444,11 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 </nav>
 
 <div class="app">
-  <div class="page-header">
-    <h1>🧪 Reacciones Orgánicas</h1>
-    <p>Reacciones características de hidrocarburos, halogenuros, alcoholes, aldehídos y cetonas, ácidos carboxílicos y sus derivados, y aminas: esquema general, condiciones, ejemplos semidesarrollados y práctica rápida.</p>
-  </div>
+  <div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Módulo 4 · Reacciones</div>
+  <h1>Reacciones orgánicas</h1>
+  <p>Reacciones características de hidrocarburos, halogenuros, alcoholes, aldehídos y cetonas, ácidos carboxílicos y sus derivados, y aminas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida.</p>
+</div>
 
   <div class="gloss-card">
     <div class="gloss-head" onclick="toggleGlossary()">
@@ -9135,6 +9137,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

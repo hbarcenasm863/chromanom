@@ -1,0 +1,115 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ChromaNom — sistema de diseño compartido
+   Se carga en TODAS las páginas, después de su <style> propio, para que el
+   menú, el pie de página, los botones, el foco y los encabezados de página
+   se vean igual en todo el sitio.
+
+   Reglas del sistema:
+   - El AZUL de la marca (el del logo) es el color de acción: botones,
+     pestañas activas, enlaces, foco.
+   - Los 4 colores del método (turquesa, verde, dorado, rosa) se reservan
+     SOLO para las 4 partes del nombre. Nunca como color de botón.
+   - Para TEXTO se usan siempre las versiones oscuras (--c1t…--c4t), que
+     cumplen contraste WCAG AA sobre blanco.
+   ════════════════════════════════════════════════════════════════════════ */
+:root{
+  /* Marca */
+  --cn-brand:#1a6ea8;      /* azul del logo: acción principal */
+  --cn-brand-d:#0d4a73;    /* azul noche: hover, encabezados */
+  --cn-brand-l:#e8f4fb;    /* fondo suave de marca */
+  --cn-verde:#4aaa2e;      /* acentos del logo (decorativos) */
+  --cn-naranja:#f07c1e;
+  /* Superficies y texto */
+  --cn-bg:#f6f9fc;
+  --cn-surf:#ffffff;
+  --cn-surf2:#f1f5f9;
+  --cn-tx:#0d2233;
+  --cn-tx2:#3d5166;
+  --cn-tx3:#5b6b7b;
+  --cn-brd:#dfe7ef;
+  /* Estados (distintos de los 4 colores del método, siempre con ícono) */
+  --cn-ok:#15803d; --cn-ok-l:#dcfce7;
+  --cn-err:#b42318; --cn-err-l:#fee4e2;
+  /* Forma */
+  --cn-r:16px; --cn-r-s:10px; --cn-r-pill:999px;
+  --cn-sh:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);
+  --cn-sh-h:0 2px 4px rgba(13,34,51,.06),0 12px 28px rgba(13,34,51,.10);
+  /* Espaciado (múltiplos de 4px) */
+  --cn-s1:4px;--cn-s2:8px;--cn-s3:12px;--cn-s4:16px;--cn-s5:24px;--cn-s6:32px;--cn-s7:48px;
+  /* Tipografía */
+  --cn-serif:'Fraunces',Georgia,serif;
+  --cn-sans:'Outfit','Segoe UI',system-ui,sans-serif;
+  --cn-mono:'JetBrains Mono','Courier New',monospace;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+html{-webkit-text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:focus-visible{outline:3px solid var(--cn-brand)!important;outline-offset:2px}
+::selection{background:#cfe6f7;color:var(--cn-tx)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ── Menú superior (todas las páginas) ───────────────────────────────── */
+.site-nav{
+  background:rgba(255,255,255,.92)!important;
+  -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--cn-brd);
+  box-shadow:none!important;
+  height:60px!important;padding:0 24px!important;
+  font-family:var(--cn-sans);
+}
+.site-nav .nav-brand{display:flex!important;align-items:center;gap:8px;color:var(--cn-brand-d)!important;font-style:normal!important;font-size:0!important;padding:0!important;background:none!important}
+.site-nav .nav-brand img{height:30px!important;width:auto;display:block}
+.site-nav .nav-links{gap:2px!important}
+.site-nav .nav-links a{color:var(--cn-tx2)!important;font-weight:600!important;font-size:.8rem!important;padding:8px 12px!important;border-radius:var(--cn-r-s)!important;min-height:40px}
+.site-nav .nav-links a:hover{background:var(--cn-surf2)!important;color:var(--cn-tx)!important}
+.site-nav .nav-links a.active{background:var(--cn-brand-l)!important;color:var(--cn-brand-d)!important}
+#pwa-install-btn{background:var(--cn-brand)!important;border:none!important;color:#fff!important;border-radius:var(--cn-r-s)!important;padding:8px 14px!important;font-weight:700!important;margin-left:6px}
+#pwa-install-btn:hover{background:var(--cn-brand-d)!important}
+@media (max-width:1100px) and (min-width:641px){
+  .site-nav .nav-links a span.full{display:none}
+  .site-nav .nav-links a{padding:8px 10px!important}
+}
+
+/* ── Encabezado de página (páginas internas) ─────────────────────────── */
+.cn-page-head{max-width:1100px;margin:0 auto;padding:28px 20px 8px;font-family:var(--cn-sans)}
+.cn-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cn-brand)}
+.cn-page-head h1{font-family:var(--cn-serif);font-weight:800;font-size:clamp(1.7rem,4.2vw,2.5rem);line-height:1.12;letter-spacing:-.02em;color:var(--cn-tx);margin:6px 0 8px}
+.cn-page-head p{font-size:1rem;color:var(--cn-tx2);line-height:1.6;max-width:68ch;margin:0}
+.cn-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+
+/* Chips del método de 4 colores (texto oscuro AA sobre fondo claro) */
+.cn-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:var(--cn-r-pill);font-size:.74rem;font-weight:700;border:1.5px solid;line-height:1.3;font-family:var(--cn-sans)}
+.cn-chip::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0}
+.cn-chip.r{color:#0e7490;border-color:#0891b2;background:#ecfeff}
+.cn-chip.c{color:#14532d;border-color:#166534;background:#f0fdf4}
+.cn-chip.i{color:#92400e;border-color:#b45309;background:#fffbeb}
+.cn-chip.g{color:#A0527F;border-color:#CC79A7;background:#fdf2f8}
+
+/* ── Botones ──────────────────────────────────────────────────────────── */
+.cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 20px;border-radius:var(--cn-r-s);font-family:var(--cn-sans);font-weight:700;font-size:.92rem;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s;line-height:1.2}
+.cn-btn:active{transform:translateY(1px)}
+.cn-btn--primary{background:var(--cn-brand);color:#fff}
+.cn-btn--primary:hover{background:var(--cn-brand-d);box-shadow:var(--cn-sh-h)}
+.cn-btn--secondary{background:var(--cn-surf);color:var(--cn-brand-d);border-color:var(--cn-brd)}
+.cn-btn--secondary:hover{border-color:var(--cn-brand);background:var(--cn-brand-l)}
+.cn-btn--ghost{background:transparent;color:var(--cn-brand-d);padding-left:6px;padding-right:6px}
+.cn-btn--ghost:hover{text-decoration:underline}
+
+/* ── Tarjetas ─────────────────────────────────────────────────────────── */
+.cn-card{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);box-shadow:var(--cn-sh)}
+
+/* ── Pie de página ────────────────────────────────────────────────────── */
+.site-footer{background:var(--cn-brand-d)!important;color:rgba(255,255,255,.9)!important;font-family:var(--cn-sans)}
+.site-footer a{color:#fff!important}
+
+/* ── Impresión: nada de la interfaz del sitio en el papel ────────────── */
+@media print{
+  .site-nav,.site-footer,#bnav,#bnav-sheet,#text-zoom-widget,.scroll-hint,#pwa-install-btn{display:none!important}
+}
+
+/* Encabezado de página dentro del contenedor .app de cada página */
+.cn-page-head.cn-in{max-width:none;padding:28px 0 18px;margin:0 0 18px;border-bottom:1px solid var(--cn-brd)}
+@media (max-width:640px){.cn-page-head.cn-in{padding:18px 0 14px}}
