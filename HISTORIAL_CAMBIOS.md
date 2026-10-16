@@ -7,6 +7,79 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (93) — Auditoría de contenido + auditoría visual/marketing; tabla de ramificaciones clásicas en Referencia
+
+### Contexto
+La docente pidió, después de un tiempo sin revisiones, (1) una auditoría de
+que el contenido químico sea correcto y (2) una auditoría visual y de
+marketing según las tendencias actuales en sitios y OVAs educativos. Durante
+la sesión pidió además una sección en Referencia con las ramificaciones de
+nombre clásico (isopropil, *sec*-butil, *tert*-butil…) frente a su nombre
+IUPAC actual, dibujadas para que se vea su forma (en T o en Y). Las
+auditorías se hicieron con 3 agentes en paralelo (juego; grupos/reacciones/
+generador; visual) más una revisión propia de teoria/referencia/portal. Se
+entregó un informe de posibles cambios; solo se aplicaron las correcciones
+claras y la sección pedida.
+
+### Cambios aplicados
+- `referencia.html`: nueva sección "Ramificaciones: nombre clásico vs.
+  IUPAC actual" (14 filas: propil, isopropil, butil, isobutil, sec-butil,
+  tert-butil, isopentil, neopentil, tert-pentil, vinil, alil, isopropenil,
+  bencil, fenil). Cada fila tiene la estructura dibujada en semidesarrollada
+  con enlaces, línea ondulada en el punto de unión, C-1 resaltado y la
+  numeración de la cadena que da el nombre; además, la letra que cuenta para
+  el orden alfabético. En celular se ve como tarjetas. Se incluye en el
+  buscador. También: sales "-carboxilato/-oato de [metal]" (antes decía
+  "ácido -carboxilato"), "fluoro-" en vez de "flúor-".
+- `teoria.html`:
+  - El ejemplo "5-(1,2-dimetilpropil)nonano (antiguo: 5-isopropilnonano)"
+    igualaba dos moléculas distintas → ahora 5-(1-metiletil)nonano.
+  - El "Ejemplo aplicado — criterio A3" y su práctica eran de dirección de
+    numeración (criterios B), no de elección de cadena → reetiquetados a
+    B1/B2/B3 y corregidas las frases ("2 < 3", no "2 < 4").
+  - Criterio A4 reescrito (repetía A3 con una frase contradictoria).
+  - Tabla 3: sales sin "ácido"; fluoro/yodo.
+  - Afirmaciones sobre nombres tradicionales matizadas (la IUPAC 2013 aún
+    conserva ácido acético, acetona, acetonitrilo, *tert*-butil…);
+    "estereodescriptores" → "prefijos estructurales en cursiva".
+  - Los íconos 🔴🟠🔵🟣 de los pasos no coincidían con el código de 4
+    colores → ahora ①②③④ sobre el fondo del color correcto.
+- `juego.html`: los conteos de cada nivel ("366 preguntas", "95
+  moléculas"…) estaban escritos a mano y desactualizados; ahora se calculan
+  del banco real al cargar.
+- `index.html`: cronómetro de 60 s (decía 45), glosario de 30 términos
+  (decía 12), sin jerga en inglés ("SVG skeletal"), chips del tour de
+  grupos funcionales con el color de "grupo funcional".
+
+### Verificación
+Playwright (Chromium) a 390 px y 1366 px: las páginas tocadas cargan sin
+errores de JavaScript, la tabla nueva no desborda y el buscador la filtra;
+los conteos del juego muestran 318/371/168/1178/107/207.
+
+### Pendiente (informe entregado a la docente, sin aplicar)
+- Auditoría química de `juego.html`: 17 errores (ej. butan-2-amina llamada
+  "secundaria", TNT mal numerado, putrescina dibujada como cadaverina,
+  propino dibujado como propeno, Br₂ "en solución acuosa", MTBE con orden
+  alfabético contrario a la regla, "capramida"), más dudosos sobre éteres sin
+  localizador y nombres retenidos usados como distractores.
+- Auditoría de `grupos.html`/`reacciones.html`/`generador.html`: ~16
+  errores (cloración del propano, cianohidrina, Lindlar "Pd/C", peróxidos con
+  HCl, pent-4-en-1-ino, ciclopentanal, "hexanodioamida", aceptación de
+  nombres de éteres/cetonas con orden alfabético contrario) y cifras
+  contradictorias (17 grupos/181 ejercicios vs. "16/160" en el portal;
+  42 reacciones vs. "41"; insignias de pestañas).
+- Decisión pendiente de la docente: convención IUPAC 2013 vs. reglas
+  anteriores en grupos.html (cadena con doble enlace, anillo vs. cadena).
+- Auditoría visual: contraste del pie de página y del título "4 partes",
+  desbordamiento del juego en celular, molécula semidesarrollada ilegible en
+  celular, colores del código usados como color de botones, menú móvil solo
+  con íconos, widget A−/A+ tapando texto, encabezados distintos por página;
+  propuestas de barra inferior móvil, color de acción propio, panel "Tu
+  avance" y portal con llamada a la acción principal.
+- No se tocó `chromanom-analytics.gs` (no hace falta redesplegar).
+
+---
+
 ## 2026-09-23 (92) — Juego: ejercicios nuevos con el sustituyente −CN (ciano) en ácidos, ésteres y amidas
 
 ### Contexto
