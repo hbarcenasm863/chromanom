@@ -7,6 +7,93 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (94) — Todos los arreglos de las auditorías + rediseño visual integral
+
+### Contexto
+Después del informe de la sesión 93, la docente pidió "todos los arreglos
+correspondientes" y luego compartió un prompt de rediseño visual integral
+(sistema de diseño, portada, módulos, móvil, accesibilidad). Decisiones de
+la docente (preguntadas explícitamente):
+- **Se conservan los 4 colores actuales del método** (turquesa, verde,
+  dorado, rosa) — no se adoptó la paleta violeta/turquesa/ámbar/coral del
+  prompt para no romper lo que los estudiantes ya memorizaron.
+- **Marca: azul del logo + Fraunces/Outfit** (no violeta + Inter/Manrope).
+- **Publicar al terminar** (push a main, como siempre).
+Convención fijada para todo el sitio: **IUPAC 2013** (la cadena más larga
+manda; el anillo tiene prioridad sobre la cadena; nombres retenidos como
+tolueno, anilina, ácido acético son válidos y no se usan como distractores;
+éteres con localizador "1-metoxipropano", aceptando también sin él al
+escribir).
+
+### Correcciones de contenido (hechas por agentes, revisadas e integradas)
+- `juego.html` (38 puntos): butan-2-amina es primaria; Br₂ en CCl₄; pregunta
+  con dos respuestas correctas; Cl₂ (no HCl) con alcanos; MTBE = terc-butil
+  metil éter; TNT = 2-metil-1,3,5-trinitrobenceno; moléculas nuevas
+  (putrescina `butano14diamina`, propino `prop1ino`, N-metilanilina
+  `nMetilBencenamina`); distractores que eran el mismo compuesto
+  reemplazados; éteres con localizador; capramida → caproamida; adición vs.
+  condensación aldólica; Lindlar, Finkelstein, CCP; nombres retenidos; el
+  botón "Esqueletal" ya no deja la tarjeta vacía en las ~90 moléculas sin
+  dibujo esqueletal.
+- `grupos.html` (18 puntos): ciclopentanal y pent-4-en-1-ino eliminados,
+  ciclohexan-1-amina, respuestas aceptadas de éteres/cetonas en orden
+  alfabético, escala de prioridad coherente (1–13), reglas de cadena/anillo
+  IUPAC 2013 (heptilbenceno, 3-metilidenhexano), HCN no es "metanonitrilo",
+  Dicetonas, píldoras MDEC alineadas con el Generador, tildes.
+- `reacciones.html` + `generador.html` (24 puntos): cloración del propano →
+  bromación selectiva, cianohidrina, Lindlar Pd/CaCO₃, peróxidos solo con
+  HBr, hexanodiamida, 2-etilbut-1-eno → 2,3-dimetilbut-2-eno, ecuaciones
+  balanceadas, Tollens/Fehling dan carboxilato, conteos de reacciones reales
+  (42) calculados solos, catalizadores alineados con la entrada 81.
+
+### Rediseño visual
+- **`chromanom.css` (nuevo, compartido por las 7 páginas):** tokens de
+  color (azul del logo = acción; los 4 colores del método solo para las
+  partes del nombre; versiones oscuras para texto), botones, tarjetas,
+  chips del método, menú superior blanco con el logo, pie de página, foco
+  visible, `prefers-reduced-motion`.
+- **`site-ui.js` (nuevo):** en celular, barra inferior con ícono + texto
+  (Inicio, Teoría, Grupos, Reacciones, Juego, Más); "Más" trae Generador,
+  Referencia y el tamaño de texto (ya no flota encima del contenido); se
+  oculta durante una partida del juego; aviso "↔ desliza" en tablas anchas.
+- **Portada (`index.html`) rehecha:** titular "Domina la nomenclatura
+  orgánica, paso a paso", acciones "Comenzar a aprender" / "Explorar
+  módulos" (cambia a "Continuar practicando" si hay progreso guardado),
+  molécula real 5-metilhex-3-en-2-ol coloreada por partes, cifras reales,
+  el método de 4 partes, ruta recomendada, módulos en tarjetas y panel "Tu
+  avance" (solo con datos reales de `chromanom_best_*`).
+- **Encabezado común** en Teoría, Grupos, Reacciones y Generador.
+- Pie de página legible y en español; títulos de pestaña "ChromaNom · …".
+- Juego: sin desbordamiento a 360–414 px, fórmulas legibles en celular
+  (escala mínima ≈12 px con deslizamiento, o vista esqueletal), opciones
+  sin colorear antes de responder, retroalimentación con el nombre
+  coloreado por partes, botones de acción blancos (ya no rosa).
+- `sw.js`: caché v9 con los dos archivos nuevos.
+
+### Verificación
+Playwright (Chromium): las 7 páginas a 360, 390, 414, 820 y 1366 px sin
+errores de JavaScript, sin desbordamiento horizontal y sin recursos locales
+rotos. Banco del juego: 1.178 preguntas, ninguna respuesta fuera de sus
+opciones, sin opciones repetidas, toda molécula existe. Partidas reales en
+modo libre a 360/390/1366 px (con el envío a Apps Script bloqueado en la
+prueba para no escribir en la hoja real). Tour de la portada, botón
+"Continuar practicando", menú "Más" y tamaño de texto probados. Hoja del
+Generador en vista de impresión: solo los ejercicios.
+
+### Pendiente / para decidir
+- La portada del juego ("Modo Reto") conserva su fondo azul oscuro; el
+  resto del sitio es claro. Se dejó así como "modo juego"; si se quiere
+  unificar es un trabajo aparte (muchos estilos del juego dependen del fondo
+  oscuro).
+- Quedan algunos nombres de estilo antiguo ("2-metil-2-buteno") en
+  distractores de reacciones del juego, y distractores con orden alfabético
+  incorrecto que se dejaron a propósito porque enseñan esa regla.
+- `teoria.html`/`referencia.html` ponen alquinos y alquenos en filas 15 y 16
+  de la tabla de prioridad (grupos.html los pone en el mismo rango).
+- No se tocó `chromanom-analytics.gs` (no hay que redesplegar ni recalcular).
+
+---
+
 ## 2026-10-16 (93) — Auditoría de contenido + auditoría visual/marketing; tabla de ramificaciones clásicas en Referencia
 
 ### Contexto

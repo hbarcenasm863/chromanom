@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<title>NomOrg — Juego de Nomenclatura v2</title>
+<title>ChromaNom · Juego de práctica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100%;overflow-x:hidden}
 
 /* ── ACCESIBILIDAD: foco visible al navegar con teclado ── */
-:focus-visible{outline:3px solid var(--c4);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
 
 /* ── BOTÓN FÍSICO: las opciones de respuesta y la caja de herramientas
    del constructor se "hunden" un poco al tocarlas, no solo cambian de color ── */
@@ -418,12 +418,13 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 
 /* ── TYPE A: OPCIÓN MÚLTIPLE ── */
 .mc-options{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.fd-hint{font-size:.72rem;font-weight:600;color:#3d5166;text-align:right;margin:0 4px 4px}
 .mc-opt{
   padding:12px 16px;border:2px solid var(--brd);border-radius:var(--rs);
   background:var(--surf);cursor:pointer;font-family:var(--mono);
   font-size:.88rem;transition:all .18s;text-align:left;width:100%;color:var(--tx);
 }
-.mc-opt:hover:not(:disabled){background:var(--c4b);border-color:var(--c4);color:var(--c4)}
+@media (hover:hover){.mc-opt:hover:not(:disabled){background:#e8f4fb;border-color:#1a6ea8;color:#0d4a73}}
 .mc-opt.correct{background:var(--okb)!important;border-color:var(--ok)!important;color:var(--ok)!important;font-weight:700}
 .mc-opt.wrong{background:var(--errb)!important;border-color:var(--err)!important;color:var(--errt)!important}
 .mc-opt:disabled{cursor:default;opacity:.75}
@@ -592,7 +593,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
 }
-.btn-home:hover{border-color:var(--c4);color:var(--c4)}
+.btn-home:hover{border-color:#1a6ea8;color:#0d4a73}
 .history-list{display:flex;flex-direction:column;gap:6px;margin-top:14px}
 .hl-item{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;border:1px solid var(--brd);background:rgba(255,255,255,.55);font-size:.79rem;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .medal-banner{display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(255,255,255,.1);border-radius:16px;padding:14px 20px;margin:14px 0;border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
@@ -673,7 +674,44 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .rb-type.build{background:#fff2e8;color:#f97316}
 .rb-type.rxnq{background:#fce7f3;color:#9d174d}
 
+
+/* ════════════════════════════════
+   AJUSTES DE LEGIBILIDAD Y CELULAR (auditoría 2026-10)
+════════════════════════════════ */
+/* Las tarjetas de nivel son <button>: sin esto el navegador les pone su
+   fuente por defecto (Arial) en vez de la del sitio (Outfit). */
+.nivel-card{font-family:var(--sans)}
+.nivel-count{font-size:.7rem;color:rgba(255,255,255,.95)}
+/* Botón "Entrar →": blanco sobre el magenta claro daba 3:1; con el magenta
+   oscuro del sitio el contraste pasa de 5:1. */
+.btn-modal-start{background:#fff;color:#0d4a73}
+.btn-modal-start:hover:not(:disabled){background:#e8f4fb}
+/* Fórmula semidesarrollada que no cabe a tamaño legible: se desplaza con el dedo. */
+.formula-display{min-width:0}
+.formula-display.fd-scroll{-webkit-overflow-scrolling:touch;padding-bottom:10px}
+.mol-card:has(.fd-hint){flex-direction:column;align-items:stretch}
+@media(max-width:480px){
+  /* Menú superior: en 360-414 px los 7 enlaces + "Instalar" no cabían y
+     empujaban toda la página hacia la derecha (scroll horizontal). */
+  .site-nav{padding:0 8px;gap:6px}
+  .site-nav .nav-brand{font-size:.74rem;flex-shrink:0}
+  .site-nav .nav-links{gap:0;min-width:0;flex:1 1 auto;justify-content:flex-end;overflow-x:auto;scrollbar-width:none}
+  .site-nav .nav-links::-webkit-scrollbar{display:none}
+  .site-nav a{padding:5px 6px;flex-shrink:0}
+  #pwa-install-btn{padding:4px 7px!important;flex-shrink:0;margin-left:2px}
+  /* Cabecera del juego: logo más pequeño (ya está el del menú), barra de
+     progreso en su propia fila y cronómetro completo dentro de la pantalla. */
+  .game-header{padding:8px 12px;gap:10px;flex-wrap:wrap}
+  .gh-logo{display:flex;align-items:center;margin-right:auto}
+  .gh-logo img{height:22px!important}
+  .gh-progress{order:10;flex:1 1 100%}
+  .timer-ring{width:44px;height:44px}
+}
+@media(max-width:360px){
+  .site-nav .nav-brand{display:none}
+}
 </style>
+<link rel="stylesheet" href="chromanom.css">
 </head>
 <body>
 <nav class="site-nav">
@@ -1888,7 +1926,7 @@ const QBANK=[
   {type:'mc',mol:'YWNpZG9ldGFub2ljbw==',q:'¿Cuál es el nombre IUPAC de este compuesto?',ans:'w6FjaWRvIGV0YW5vaWNv',opts:['ácido etanoico','ácido metanoico','ácido propanoico','etanoato'],expl:'MkMgY29uIOKIkkNPT0gg4oaSIDxiPsOhY2lkbyBldGFub2ljbzwvYj4gKMOhY2lkbyBhY8OpdGljbyku',parts:[{t:'w6FjaWRvIA==',cls:'g',l:'Prefijo'},{t:'ZXQ=',cls:'c',l:'2C'},{t:'YW4=',cls:'i',l:'Sin ins.'},{t:'b2ljbw==',cls:'g',l:'Ác. carboxílico'}],topic:'acidos'},
   {type:'mc',mol:'ZXRhbmFtaWRh',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'ZXRhbmFtaWRh',opts:['etanamida','propanamida','etanoato','N-metilmetanamida'],expl:'MkMgY29uIOKIkkNPTkjigoIg4oaSIDxiPmV0YW5hbWlkYTwvYj4u',parts:[{t:'ZXQ=',cls:'c',l:'2C'},{t:'YW4=',cls:'i',l:'Sin ins.'},{t:'YW1pZGE=',cls:'g',l:'Amida'}],topic:'amidas'},
   {type:'mc',mol:'cHJvcGFub25pdHJpbG8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'cHJvcGFub25pdHJpbG8=',opts:['propanonitrilo','etanonitrilo','butanonitrilo','propanamida'],expl:'M0MgY29uIOKIkkPiiaFOIOKGkiA8Yj5wcm9wYW5vbml0cmlsbzwvYj4u',parts:[{t:'cHJvcA==',cls:'c',l:'3C'},{t:'YW4=',cls:'i',l:'Sin ins.'},{t:'b25pdHJpbG8=',cls:'g',l:'Grupo −CN'}],topic:'nitrilos'},
-  {type:'mc',mol:'bWV0aWxiZW5jZW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bWV0aWxiZW5jZW5v',opts:['metilbenceno','etilbenceno','benceno','metilciclohexano'],expl:'QmVuY2VubyBjb24gdW4gbWV0aWxvIOKGkiA8Yj5tZXRpbGJlbmNlbm88L2I+ICh0b2x1ZW5vIGVuIG5vbWJyZSBjb23Dum4pLg==',parts:[{t:'bWV0aWw=',cls:'r',l:'Sustit.'},{t:'YmVuY2Vu',cls:'c',l:'Anillo'},{t:'bw==',cls:'g',l:'Aromático'}],topic:'benceno'},
+  {type:'mc',mol:'bWV0aWxiZW5jZW5v',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'bWV0aWxiZW5jZW5v',opts:['metilbenceno','etilbenceno','benceno','metilciclohexano'],expl:'QmVuY2VubyBjb24gdW4gbWV0aWxvIOKGkiA8Yj5tZXRpbGJlbmNlbm88L2I+ICg8ZW0+dG9sdWVubzwvZW0+IGVzIHN1IG5vbWJyZSByZXRlbmlkbywgdGFtYmnDqW4gYWNlcHRhZG8gcG9yIGxhIElVUEFDKS4=',parts:[{t:'bWV0aWw=',cls:'r',l:'Sustit.'},{t:'YmVuY2Vu',cls:'c',l:'Anillo'},{t:'bw==',cls:'g',l:'Aromático'}],topic:'benceno'},
   {type:'mc',mol:'Y2ljbG9oZXhhbm8=',q:'¿Cuál es el nombre IUPAC de esta estructura?',ans:'Y2ljbG9oZXhhbm8=',opts:['ciclohexano','ciclopentano','benceno','cicloheptano'],expl:'QW5pbGxvIGRlIDZDIHNpbiBpbnNhdHVyYWNpb25lcyDihpIgPGI+Y2ljbG9oZXhhbm88L2I+Lg==',parts:[{t:'Y2ljbG9oZXg=',cls:'c',l:'Ciclo 6C'},{t:'YW4=',cls:'i',l:'Sin ins.'},{t:'bw==',cls:'g',l:'Alcano'}],topic:'alcanos'},
   {type:'drag',mol:'bWV0aWxwZW50YW5v',q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',ans:'Mi1tZXRpbHBlbnRhbm8=',slots:[{id:'s1',label:'Ramificación',correct:'Mi1tZXRpbA==',cls:'r'},{id:'s2',label:'Prefijo cadena',correct:'cGVudA==',cls:'c'},{id:'s3',label:'Saturación',correct:'YW4=',cls:'i'},{id:'s4',label:'Grupo funcional',correct:'bw==',cls:'g'}],tokens:[{text:'2-metil',cls:'r'},{text:'pent',cls:'c'},{text:'an',cls:'i'},{text:'o',cls:'g'},{text:'but',cls:'c'},{text:'3-metil',cls:'r'}],expl:'TWV0aWxvIGVuIEMyLCBjYWRlbmEgZGUgNUMg4oaSIDxiPjItbWV0aWxwZW50YW5vPC9iPi4=',topic:'alcanos'},
   {type:'drag',mol:'YnV0M2VuMm9s',q:'Arrastra cada fragmento a su posición en el nombre IUPAC.',ans:'YnV0LTMtZW4tMi1vbA==',slots:[{id:'d1',label:'Cadena principal',correct:'YnV0',cls:'c'},{id:'d2',label:'Localizador + insaturación',correct:'My1lbg==',cls:'i'},{id:'d3',label:'Localizador + GF',correct:'Mi1vbA==',cls:'g'}],tokens:[{text:'but',cls:'c'},{text:'3-en',cls:'i'},{text:'2-ol',cls:'g'},{text:'pent',cls:'c'},{text:'2-en',cls:'i'},{text:'1-ol',cls:'g'}],expl:'NEMsIOKIkk9IIGVuIEMyIChwcmlvcmlkYWQgc29icmUgZG9ibGUgZW5sYWNlKSwgZG9ibGUgZW5sYWNlIGVuIEMzIOKGkiA8Yj5idXQtMy1lbi0yLW9sPC9iPi4=',topic:'alcoholes'},
@@ -2651,6 +2689,40 @@ function startGame(){
   showScreen('s-game'); loadQuestion();
 }
 
+// ── Legibilidad de la fórmula semidesarrollada en pantallas angostas ──
+// mkDevSVG dibuja cada carbono a 72 unidades de distancia con letras de ~13
+// unidades; si el SVG se encoge para caber en el ancho de un celular, una
+// cadena de 7-8 C deja los "CH₂" de 4-5 px. FORMULA_MIN_SCALE fija la escala
+// mínima aceptable (≈9 px de letra).
+const FORMULA_MIN_SCALE=0.92; // ≈12 px de letra: legible en celular
+function _formulaAvailWidth(){
+  const vw=Math.min(window.innerWidth||document.documentElement.clientWidth||800,760);
+  return vw-80; // márgenes de la zona de pregunta + relleno de la tarjeta
+}
+function _svgVB(svg){const m=String(svg).match(/viewBox="[-\d.]+ [-\d.]+ ([\d.]+) ([\d.]+)"/);return m?{w:+m[1],h:+m[2]}:null;}
+function _formulaTooWide(moldes){
+  try{const vb=_svgVB(mkDevSVG(moldes));return !!vb&&vb.w*FORMULA_MIN_SCALE>_formulaAvailWidth();}catch(e){return false;}
+}
+// Si la fórmula no cabe a escala legible, se le da un ancho mínimo y la
+// caja .formula-display se desplaza horizontalmente (con el dedo).
+function _fitFormula(){
+  document.querySelectorAll('#q-area .formula-display').forEach(box=>{
+    const svg=box.querySelector('svg');if(!svg)return;
+    const vb=svg.viewBox&&svg.viewBox.baseVal;if(!vb||!vb.width)return;
+    const minW=vb.width*FORMULA_MIN_SCALE;
+    if(minW>box.clientWidth){
+      svg.style.width=Math.round(minW)+'px';
+      svg.style.maxWidth='none';svg.style.maxHeight='none';svg.style.height='auto';
+      svg.style.flexShrink='0';svg.style.margin='0 auto';
+      box.style.justifyContent='flex-start';
+      box.classList.add('fd-scroll');
+      if(!box.previousElementSibling||!box.previousElementSibling.classList.contains('fd-hint')){
+        const h=document.createElement('div');h.className='fd-hint';h.textContent='↔ Desliza para ver toda la estructura';
+        box.parentElement.insertBefore(h,box);
+      }
+    }
+  });
+}
 function setMolView(view){
   molView=view;
   const q=questions[qIdx];
@@ -2666,8 +2738,9 @@ function setMolView(view){
     // Para entradas en formato ring (objetos {chain,ring}), usar M[mol]() en ambas vistas.
     if(view==='form'&&Array.isArray(MOLDES[q.mol])){
       card.innerHTML=`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`;
-    } else {
-      card.innerHTML=M[q.mol]?M[q.mol]():'';
+      _fitFormula();
+    } else if(M[q.mol]){
+      card.innerHTML=M[q.mol]();
     }
     card.style.opacity='1';card.style.transform='scale(1)';
   },140);
@@ -2707,12 +2780,20 @@ function loadQuestion(){
   // Los entries en formato ring ({chain,ring}) no generan toggle — la vista esqueletal
   // (M[mol]()) es la única representación visual correcta para moléculas cíclicas.
   const hasFm=!isBuild&&!isRxnQ&&Array.isArray(MOLDES[q.mol]);
-  molView=hasFm?'form':'skel';
-  const toggleHtml=hasFm?`<div class="view-toggle">
-    <button class="vt-btn" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
-    <button class="vt-btn active" id="vt-form" onclick="setMolView('form')">— Semidesarrollada</button>
+  // hasSk: existe dibujo esqueletal (M[mol]). Varias moléculas solo tienen la
+  // fórmula semidesarrollada (MOLDES) — para ellas no se ofrece el botón
+  // "Esqueletal", porque al pulsarlo la tarjeta quedaba vacía.
+  const hasSk=!isBuild&&!isRxnQ&&!!M[q.mol];
+  // En celular, una semidesarrollada muy larga (cadenas de 7-8 C con
+  // ramificaciones) se encoge hasta quedar ilegible: si hay vista esqueletal,
+  // se arranca en esa; si no, la semidesarrollada se muestra con un tamaño
+  // mínimo legible y desplazamiento horizontal (ver _fitFormula).
+  molView=hasFm?((hasSk&&_formulaTooWide(MOLDES[q.mol]))?'skel':'form'):'skel';
+  const toggleHtml=(hasFm&&hasSk)?`<div class="view-toggle">
+    <button class="vt-btn${molView==='skel'?' active':''}" id="vt-skel" onclick="setMolView('skel')">⬡ Esqueletal</button>
+    <button class="vt-btn${molView==='form'?' active':''}" id="vt-form" onclick="setMolView('form')">— Semidesarrollada</button>
   </div>`:'';
-  const molInner=hasFm?`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`:(M[q.mol]?M[q.mol]():'');
+  const molInner=(molView==='form')?`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`:(M[q.mol]?M[q.mol]():'');
 
   let html=`<div class="q-type-badge ${typeCls[q.type]||'qt-mc'}">${typeBadge[q.type]||''}</div>`;
   html+=`<div class="q-title">${q.q}</div>`;
@@ -2729,6 +2810,7 @@ function loadQuestion(){
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
 
   area.innerHTML=html;
+  _fitFormula();
 
   if(q.type==='drag') initDrag(q);
   if(q.type==='write'){
@@ -2812,8 +2894,12 @@ function colorizeName(s){
 }
 
 function buildMC(q){
+  // Las opciones se muestran SIN colorear: colorizeName() solo logra pintar
+  // los nombres que sabe descomponer, así que colorear unas sí y otras no
+  // delataba cuáles eran nombres IUPAC bien formados (pista involuntaria).
+  // El color por partes se muestra después, en la retroalimentación.
   const opts=shuffle(q.opts);
-  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${colorizeName(o)||o}</button>`).join('')}</div>`;
+  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;
@@ -3331,13 +3417,19 @@ function disableAll(){
 }
 
 // ── FEEDBACK ──
+// Respuesta correcta coloreada por partes (ramificación / cadena / insaturación /
+// grupo funcional) cuando colorizeName() la reconoce; si no, texto normal.
+function _colorAns(ans){
+  if(!ans) return '';
+  try{ return colorizeName(String(ans))||ans; }catch(e){ return ans; }
+}
 function showFeedback(ok,expl,ans,pts,given){
   const fb=document.getElementById('feedback');
   const nxt=document.getElementById('q-next');
   const ptsVal=(pts!==undefined)?pts:10;
   if(ok===null){
     fb.className='feedback time';
-    fb.innerHTML=`⏰ <strong>¡Tiempo!</strong> La respuesta era: <strong>${ans}</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
+    fb.innerHTML=`⏰ <strong>¡Tiempo!</strong> La respuesta era: <strong>${_colorAns(ans)}</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`;
   } else if(ok==='old'){
     fb.className='feedback ok';
     fb.innerHTML=`✓ <strong>Aceptado. +${ptsVal} pts</strong><br><span style="font-size:.8rem;opacity:.85">${expl}</span>`
@@ -3353,10 +3445,13 @@ function showFeedback(ok,expl,ans,pts,given){
     if(given && given!=='(tiempo)'){
       cmpHtml=`<div style="font-family:var(--mono);font-size:.78rem;background:rgba(0,0,0,.08);padding:7px 10px;border-radius:6px;margin:6px 0;line-height:1.9">
         <span style="opacity:.55">Tu respuesta: </span><strong style="color:var(--c1)">${given}</strong><br>
-        <span style="opacity:.55">Respuesta correcta: </span><strong style="color:#16a34a">${ans}</strong>
+        <span style="opacity:.55">Respuesta correcta: </span><strong>${_colorAns(ans)}</strong>
       </div>`;
     }
-    fb.innerHTML=`✗ <strong>Incorrecto.</strong>${cmpHtml}<span style="font-size:.8rem;opacity:.85">${expl}</span>`;
+    if(!cmpHtml && ans){
+      cmpHtml=`<div style="font-size:.85rem;margin:6px 0"><span style="opacity:.7">Respuesta correcta: </span><strong style="font-family:var(--mono)">${_colorAns(ans)}</strong></div>`;
+    }
+    fb.innerHTML=`✗ <strong>Incorrecto.</strong> ${cmpHtml}<span style="font-size:.8rem;opacity:.85">${expl}</span>`;
   }
   nxt.classList.add('show');
   // Show name breakdown if available
@@ -6151,11 +6246,12 @@ function confirmExitGame(){
 </script>
 
 <!-- FOOTER COPYRIGHT -->
-<div style="text-align:center;padding:16px;font-size:.72rem;color:rgba(255,255,255,.5);background:var(--tx,#1a1714);margin-top:auto">
-  <a href="https://hbarcenasm863.github.io/chromanom/">Chromanom</a> © 2026 by <a href="https://hbarcenasm863.github.io/chromanom/">Harvey Barcenas Morales</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="" style="max-width:1em;max-height:1em;margin-left:.2em;vertical-align:middle">
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
