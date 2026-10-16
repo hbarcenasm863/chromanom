@@ -7,6 +7,34 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (102) — Pie de página con la licencia CC en todas las páginas
+
+### Contexto
+El docente pidió que todas las páginas tengan el pie de página con la
+licencia Creative Commons. Solo lo tenían Inicio, Principios, Grupos y
+Juego; faltaba en Reacciones, Generador y Referencia.
+
+### Cambios
+- `reacciones.html`, `generador.html`, `referencia.html`: el mismo
+  `.site-footer` de las demás páginas ("ChromaNom © 2026 · Harvey Barcenas
+  Morales · Licencia CC BY-NC 4.0 (uso libre sin fines comerciales, citando
+  al autor)"), al final de la página y a todo el ancho.
+- `referencia.html`: como el pie del sitio no se imprime, la línea final de
+  la hoja (`.ref-footer`) ahora incluye "© 2026 Harvey Barcenas Morales ·
+  Licencia CC BY-NC 4.0" y solo aparece al imprimir (en pantalla ya está el
+  pie del sitio, para no repetirla).
+
+### Verificación
+Playwright: el pie aparece a todo el ancho al final de las 7 páginas (PC y
+celular, sin quedar tapado por la barra inferior); las 7 páginas sin
+errores ni desbordamiento; la Referencia impresa sigue en 2 páginas con la
+licencia al pie; la hoja del Generador impresa sigue sin pie.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-16 (101) — Corrección: el docente es hombre ("el docente", no "la docente")
 
 ### Contexto

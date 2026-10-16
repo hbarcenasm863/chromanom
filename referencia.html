@@ -330,6 +330,8 @@ code{
 }
 
 /* ── FOOTER ── */
+/* En pantalla la licencia ya va en el pie del sitio; esta línea solo sale al imprimir */
+@media screen{.ref-footer{display:none}}
 .ref-footer{
   text-align:center;padding:20px 0 0;
   font-size:.72rem;color:var(--dim);
@@ -697,7 +699,7 @@ code{
 
   <!-- FOOTER -->
   <div class="ref-footer">
-    ChromaNom · Nomenclatura Orgánica IUPAC · bachillerato
+    ChromaNom · Nomenclatura Orgánica IUPAC · bachillerato · © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0
   </div>
 
 </div><!-- /page -->
@@ -720,6 +722,10 @@ function refSearch(q){
   countEl.textContent = term==='' ? '' : (shown + (shown===1?' resultado':' resultados'));
 }
 </script>
+<!-- PIE DE PÁGINA: licencia Creative Commons (igual en todas las páginas) -->
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
