@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (98) — Marca de agua de moléculas reforzada y distribuida en todo el fondo
+
+### Contexto
+La docente pidió reforzar un poco la marca de agua de moléculas y que
+quedara distribuida por todo el fondo (antes solo ocupaba la franja
+izquierda y se desvanecía hacia el centro).
+
+### Cambios (`chromanom.css`)
+- `#cn-mol-bg` ahora cubre toda la ventana (`inset:0`), sin el degradado
+  que la ocultaba hacia la derecha.
+- Dos capas del mismo `fondo-moleculas.svg`, desplazadas y a distinto
+  tamaño (300 px y 250 px), repetidas en ambas direcciones, para que el
+  patrón no se vea como una cuadrícula repetida.
+- Opacidad: 0,30 en PC y 0,16 en celular (antes 0,24 y 0,12).
+- Corrección al historial: la entrada 95 dice que la opacidad "quedó en
+  0,17/0,09", pero el archivo publicado en esa entrada ya tenía 0,24/0,12.
+
+### Verificación
+Playwright: las 7 páginas a 360/390/414/820/1366 px sin errores ni
+desbordamiento; capturas de portada, juego y teoría (PC y celular) con el
+texto legible sobre el fondo. Sigue sin imprimirse.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-16 (97) — Referencia: logo de ChromaNom a la derecha del título
 
 ### Contexto
