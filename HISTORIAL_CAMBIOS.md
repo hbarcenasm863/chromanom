@@ -7,6 +7,28 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (99) — Portada: la numeración de módulos saltaba del 2 al 4
+
+### Contexto
+La docente notó que en las tarjetas de módulos de la portada aparecían
+"Módulo 1", "Módulo 2" y "Módulo 4": la tarjeta del juego (que es el
+módulo 3 en la ruta recomendada) decía solo "Practicar".
+
+### Cambios
+- `index.html`: tarjeta del juego → "Módulo 3 · Practicar"; Generador →
+  "Módulo 5 · Herramienta" (como en la numeración original ①–⑤).
+- `generador.html`: etiqueta del encabezado → "Módulo 5 · Herramienta para
+  docentes y estudiantes".
+
+### Verificación
+Playwright a 390/820/1366 px: la etiqueta no se monta sobre el ícono y no
+hay desbordamiento.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-16 (98) — Marca de agua de moléculas reforzada y distribuida en todo el fondo
 
 ### Contexto
