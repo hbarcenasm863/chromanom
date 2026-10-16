@@ -75,7 +75,11 @@ body{
 .btn-print:hover{background:var(--c1t);transform:translateY(-1px);box-shadow:0 4px 16px rgba(8,145,178,.45)}
 
 /* ── HEADER ── */
+/* Logo de la marca a la derecha del título (pantalla e impresión) */
+.ref-logo{position:absolute;top:16px;right:24px;width:200px;height:auto}
+@media(max-width:640px){.ref-logo{position:static;width:150px;margin:0 0 10px}}
 .ref-header{
+  position:relative;
   background:var(--surf);
   border:2px solid var(--brd);
   border-radius:var(--r);
@@ -354,6 +358,7 @@ code{
    PRINT STYLES
 ───────────────────────────────────────── */
 @media print{
+  .ref-logo{position:absolute;top:8px;right:14px;width:150px}
   @page{size:A4 landscape;margin:8mm 10mm}
 
   /* Hide interactive elements */
@@ -490,6 +495,7 @@ code{
 
   <!-- HEADER -->
   <div class="ref-header">
+    <img class="ref-logo" src="logo-chromanom.png" alt="ChromaNom" width="423" height="120">
     <div class="ref-title">Nomenclatura Orgánica IUPAC — Hoja de Referencia</div>
     <div class="ref-sub">ChromaNom · bachillerato</div>
     <div class="legend">

@@ -7,6 +7,28 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (97) — Referencia: logo de ChromaNom a la derecha del título
+
+### Contexto
+Tras arreglar la impresión (entrada 96), la docente pidió aprovechar el
+espacio en blanco a la derecha del título de la Hoja de Referencia para
+poner el logo de ChromaNom.
+
+### Cambios (`referencia.html`)
+- `<img class="ref-logo">` (logo-chromanom.png) dentro de `.ref-header`,
+  ubicado arriba a la derecha (200 px en pantalla, 150 px al imprimir). En
+  celular pasa arriba del título para no montarse sobre el texto.
+
+### Verificación
+Playwright: captura del encabezado a 1366 y 390 px (sin desbordamiento) y
+PDF A4 horizontal: el logo sale a la derecha del título y la hoja sigue en
+2 páginas.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-16 (96) — Referencia: la impresión salía en 5 páginas con mucho espacio en blanco
 
 ### Contexto
