@@ -195,6 +195,28 @@ tr:nth-child(even) td{background:#f7fbfe}
 .sec.s3 th{background:var(--c3);color:#fff}
 .sec.s4 th{background:var(--c4);color:#fff}
 .sec.s1 th{background:var(--c1);color:#fff}
+.sec-full.s1 th{background:var(--c1);color:#fff}
+/* Tabla nombres clásicos vs IUPAC */
+.clasico-intro{padding:8px 14px;font-size:.74rem;color:var(--dim);line-height:1.5;border-bottom:1px solid var(--brd)}
+.clasico-tbl td.cl{font-family:'JetBrains Mono',monospace;color:var(--dim);font-style:italic}
+.clasico-tbl td.iu{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--c1t)}
+.clasico-tbl td.iu small{display:block;font-weight:400;color:var(--dim);font-size:.68rem}
+.clasico-tbl td.fm{font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.clasico-tbl td.al{font-size:.7rem;color:var(--dim)}
+.clasico-tbl td.al b{color:var(--c1t)}
+.clasico-nota{padding:8px 14px;font-size:.7rem;color:var(--dim);background:var(--c1b);line-height:1.5}
+@media(max-width:640px){
+  .clasico-tbl thead{display:none}
+  .clasico-tbl tr{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;padding:8px 12px;border-bottom:1px solid var(--brd)}
+  .clasico-tbl td{border:none;padding:0;background:none!important}
+  .clasico-tbl td.cl::before{content:'Clásico';}
+  .clasico-tbl td.iu::before{content:'IUPAC';}
+  .clasico-tbl td.cl::before,.clasico-tbl td.iu::before{display:block;font-family:'Outfit',sans-serif;font-style:normal;font-weight:800;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+  .clasico-tbl td.fm,.clasico-tbl td.al{grid-column:1/-1}
+  .clasico-tbl tr{grid-template-columns:minmax(0,1fr) 8.8rem}
+  .clasico-tbl td.iu{white-space:nowrap;font-size:.72rem}
+  .clasico-tbl td.iu small{white-space:normal;max-width:12em}
+}
 
 /* Two-column chain prefix table */
 .double-tbl{display:flex}
@@ -514,7 +536,7 @@ code{
       Grupos funcionales (orden de prioridad IUPAC ↓)
     </div>
     <div class="grupos-grid">
-      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">1</span><span class="grupo-name">Carboxilatos (sales)</span></div><svg viewBox="0 0 118 50" class="grupo-struct" aria-hidden="true"><text x="14" y="36" text-anchor="middle" class="gs-r">R</text><line x1="26" y1="32" x2="42" y2="32"/><text x="54" y="36" text-anchor="middle" class="gs-o">C</text><line x1="51" y1="26" x2="51" y2="12"/><line x1="57" y1="26" x2="57" y2="12"/><text x="54" y="10" text-anchor="middle" class="gs-o">O</text><line x1="66" y1="32" x2="82" y2="32"/><text x="100" y="36" text-anchor="middle" class="gs-a">O⁻</text></svg><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">ácido -carboxilato / -oato</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carboxilato-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">1</span><span class="grupo-name">Carboxilatos (sales)</span></div><svg viewBox="0 0 118 50" class="grupo-struct" aria-hidden="true"><text x="14" y="36" text-anchor="middle" class="gs-r">R</text><line x1="26" y1="32" x2="42" y2="32"/><text x="54" y="36" text-anchor="middle" class="gs-o">C</text><line x1="51" y1="26" x2="51" y2="12"/><line x1="57" y1="26" x2="57" y2="12"/><text x="54" y="10" text-anchor="middle" class="gs-o">O</text><line x1="66" y1="32" x2="82" y2="32"/><text x="100" y="36" text-anchor="middle" class="gs-a">O⁻</text></svg><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carboxilato / -oato de [metal]</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carboxilato-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">2</span><span class="grupo-name">Ácidos carboxílicos</span></div><svg viewBox="0 0 118 50" class="grupo-struct" aria-hidden="true"><text x="14" y="36" text-anchor="middle" class="gs-r">R</text><line x1="26" y1="32" x2="42" y2="32"/><text x="54" y="36" text-anchor="middle" class="gs-o">C</text><line x1="51" y1="26" x2="51" y2="12"/><line x1="57" y1="26" x2="57" y2="12"/><text x="54" y="10" text-anchor="middle" class="gs-o">O</text><line x1="66" y1="32" x2="82" y2="32"/><text x="100" y="36" text-anchor="middle" class="gs-a">OH</text></svg><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">ácido -carboxílico / ácido -oico</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">carboxi-</span></div><div class="grupo-field"><span class="grupo-lbl">Con anillo</span><span class="grupo-sub">usa &quot;carboxílico&quot;: <code>ácido ciclohexanocarboxílico</code> (no ciclohexanoico)</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">3</span><span class="grupo-name">Ésteres</span></div><svg viewBox="0 0 158 50" class="grupo-struct" aria-hidden="true"><text x="14" y="36" text-anchor="middle" class="gs-r">R</text><line x1="26" y1="32" x2="42" y2="32"/><text x="54" y="36" text-anchor="middle" class="gs-o">C</text><line x1="51" y1="26" x2="51" y2="12"/><line x1="57" y1="26" x2="57" y2="12"/><text x="54" y="10" text-anchor="middle" class="gs-o">O</text><line x1="66" y1="32" x2="82" y2="32"/><text x="94" y="36" text-anchor="middle" class="gs-a">O</text><line x1="106" y1="32" x2="122" y2="32"/><text x="140" y="36" text-anchor="middle" class="gs-r">R'</text></svg><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-carboxilato de R / -oato de R</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">(R)oxicarbonil-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">4</span><span class="grupo-name">Haluros de ácido</span></div><svg viewBox="0 0 112 50" class="grupo-struct" aria-hidden="true"><text x="14" y="36" text-anchor="middle" class="gs-r">R</text><line x1="26" y1="32" x2="42" y2="32"/><text x="54" y="36" text-anchor="middle" class="gs-o">C</text><line x1="51" y1="26" x2="51" y2="12"/><line x1="57" y1="26" x2="57" y2="12"/><text x="54" y="10" text-anchor="middle" class="gs-o">O</text><line x1="66" y1="32" x2="82" y2="32"/><text x="98" y="36" text-anchor="middle" class="gs-a">X</text></svg><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">haluro de -carbonilo / haluro de -oilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">halocarbonil-</span></div><div class="grupo-field"><span class="grupo-lbl">Con anillo</span><span class="grupo-sub">usa &quot;carbonilo&quot;: <code>cloruro de ciclohexanocarbonilo</code></span></div></div>
@@ -527,7 +549,7 @@ code{
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">11</span><span class="grupo-name">Aminas</span></div><code class="grupo-formula">R−NH₂</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-amina</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">amino-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">12</span><span class="grupo-name">Iminas</span></div><code class="grupo-formula">R₂C=NR</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-imina</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">imino-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">13</span><span class="grupo-name">Éteres</span></div><code class="grupo-formula">R−O−R'</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">alcoxi- (sust.)</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">(R)oxi-</span></div></div>
-      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">14</span><span class="grupo-name">Haloderivados</span></div><code class="grupo-formula">R−X</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">haluro de …-ilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">flúor/cloro/bromo/yodo-</span></div></div>
+      <div class="grupo-card"><div class="grupo-top"><span class="pri-n">14</span><span class="grupo-name">Haloderivados</span></div><code class="grupo-formula">R−X</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">haluro de …-ilo</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">fluoro/cloro/bromo/yodo-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">15</span><span class="grupo-name">Alquinos</span></div><code class="grupo-formula">−C≡C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ino</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-inil-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">16</span><span class="grupo-name">Alquenos</span></div><code class="grupo-formula">−C=C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-eno</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-enil-</span></div></div>
       <div class="grupo-card"><div class="grupo-top"><span class="pri-n">17</span><span class="grupo-name">Alcanos</span></div><code class="grupo-formula">−C−C−</code><div class="grupo-field"><span class="grupo-lbl">Sufijo</span><span class="suf">-ano</span></div><div class="grupo-field"><span class="grupo-lbl">Sustituyente</span><span class="grupo-sub">…-il-</span></div></div>
@@ -557,7 +579,7 @@ code{
         <div class="sub-item"><span class="sub-name">alil-</span><span class="sub-form">−CH₂CH=CH₂</span></div>
         <div class="sub-item"><span class="sub-name">cloro-</span><span class="sub-form">−Cl</span></div>
         <div class="sub-item"><span class="sub-name">bromo-</span><span class="sub-form">−Br</span></div>
-        <div class="sub-item"><span class="sub-name">flúor-</span><span class="sub-form">−F</span></div>
+        <div class="sub-item"><span class="sub-name">fluoro-</span><span class="sub-form">−F</span></div>
         <div class="sub-item"><span class="sub-name">yodo-</span><span class="sub-form">−I</span></div>
         <div class="sub-item"><span class="sub-name">nitro-</span><span class="sub-form">−NO₂</span></div>
         <div class="sub-item"><span class="sub-name">amino-</span><span class="sub-form">−NH₂</span></div>
@@ -599,6 +621,42 @@ code{
 
   </div><!-- /grid-bottom -->
 
+  <!-- SECTION — Ramificaciones: nombre clásico vs IUPAC -->
+  <div class="sec-full s1" id="nombres-clasicos">
+    <div class="sec-hdr c1">
+      <span class="sec-num c1">1</span>
+      Ramificaciones: nombre clásico vs. IUPAC actual
+    </div>
+    <div class="clasico-intro">
+      Muchos libros todavía usan nombres clásicos (isopropil, <em>sec</em>-butil, <em>tert</em>-butil…). La IUPAC (recomendaciones 2013) prefiere el nombre <strong>sistemático</strong>: el carbono unido a la cadena principal es el C-1 de la ramificación y, si la ramificación es a su vez ramificada, el nombre va <strong>entre paréntesis</strong>.
+    </div>
+    <div style="overflow-x:auto">
+      <table class="clasico-tbl">
+        <thead><tr><th>Nombre clásico</th><th>Nombre IUPAC actual</th><th>Estructura (− = punto de unión)</th><th>Orden alfabético por…</th></tr></thead>
+        <tbody>
+          <tr><td class="cl">n-propil</td><td class="iu">propil</td><td class="fm">−CH₂CH₂CH₃</td><td class="al">«<b>p</b>» en los dos</td></tr>
+          <tr><td class="cl">isopropil</td><td class="iu">(1-metiletil)<small>también: propan-2-il</small></td><td class="fm">−CH(CH₃)₂</td><td class="al">clásico «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
+          <tr><td class="cl">n-butil</td><td class="iu">butil</td><td class="fm">−CH₂CH₂CH₂CH₃</td><td class="al">«<b>b</b>» en los dos</td></tr>
+          <tr><td class="cl">isobutil</td><td class="iu">(2-metilpropil)</td><td class="fm">−CH₂CH(CH₃)₂</td><td class="al">clásico «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
+          <tr><td class="cl">sec-butil (s-butil)</td><td class="iu">(1-metilpropil)<small>también: butan-2-il</small></td><td class="fm">−CH(CH₃)CH₂CH₃</td><td class="al">clásico «<b>b</b>» (sec no cuenta) · IUPAC «<b>m</b>»</td></tr>
+          <tr><td class="cl">tert-butil (ter-butil, t-butil)</td><td class="iu">(1,1-dimetiletil)<small>también: tert-butil (se conserva)</small></td><td class="fm">−C(CH₃)₃</td><td class="al">clásico «<b>b</b>» (tert no cuenta) · IUPAC «<b>d</b>»</td></tr>
+          <tr><td class="cl">isopentil (isoamil)</td><td class="iu">(3-metilbutil)</td><td class="fm">−CH₂CH₂CH(CH₃)₂</td><td class="al">clásico «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
+          <tr><td class="cl">neopentil</td><td class="iu">(2,2-dimetilpropil)</td><td class="fm">−CH₂C(CH₃)₃</td><td class="al">clásico «<b>n</b>» · IUPAC «<b>d</b>»</td></tr>
+          <tr><td class="cl">tert-pentil (ter-amil)</td><td class="iu">(1,1-dimetilpropil)<small>también: 2-metilbutan-2-il</small></td><td class="fm">−C(CH₃)₂CH₂CH₃</td><td class="al">clásico «<b>p</b>» · IUPAC «<b>d</b>»</td></tr>
+          <tr><td class="cl">vinil</td><td class="iu">etenil</td><td class="fm">−CH=CH₂</td><td class="al">clásico «<b>v</b>» · IUPAC «<b>e</b>»</td></tr>
+          <tr><td class="cl">alil</td><td class="iu">prop-2-en-1-il</td><td class="fm">−CH₂−CH=CH₂</td><td class="al">clásico «<b>a</b>» · IUPAC «<b>p</b>»</td></tr>
+          <tr><td class="cl">isopropenil</td><td class="iu">(1-metiletenil)<small>también: prop-1-en-2-il</small></td><td class="fm">−C(CH₃)=CH₂</td><td class="al">clásico «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
+          <tr><td class="cl">bencil</td><td class="iu">fenilmetil<small>también: bencil (se conserva)</small></td><td class="fm">−CH₂−C₆H₅</td><td class="al">clásico «<b>b</b>» · IUPAC «<b>f</b>»</td></tr>
+          <tr><td class="cl">fenil</td><td class="iu">fenil<small>(no cambia)</small></td><td class="fm">−C₆H₅</td><td class="al">«<b>f</b>»</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clasico-nota">
+      <strong>Ejemplo:</strong> 4-isopropilheptano (clásico) = <strong>4-(1-metiletil)heptano</strong> (IUPAC).<br>
+      <strong>Orden alfabético:</strong> los prefijos <em>sec-</em> y <em>tert-</em> no cuentan; <em>iso-</em> y <em>neo-</em> sí. Dentro de un nombre entre paréntesis se cuenta la <strong>primera letra del nombre completo</strong>, aunque sea un multiplicador: (1,1-dimetiletil) se ordena por «d».
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <div class="ref-footer">
     ChromaNom · Nomenclatura Orgánica IUPAC · bachillerato
@@ -612,7 +670,7 @@ function refNorm(s){
 function refSearch(q){
   const term = refNorm(q.trim());
   const items = document.querySelectorAll(
-    '.grid-top tbody tr, .sec-full.s4 .grupo-card, .subs-grid .sub-item, .rules-cols .rule-item'
+    '.grid-top tbody tr, .sec-full.s4 .grupo-card, .subs-grid .sub-item, .rules-cols .rule-item, .clasico-tbl tbody tr'
   );
   let shown = 0;
   items.forEach(el=>{

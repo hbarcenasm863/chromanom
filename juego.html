@@ -5857,6 +5857,20 @@ function showScreen(id){
 
 // Fix drag API
 document.addEventListener('dragover',e=>e.preventDefault());
+// Los conteos de las tarjetas de nivel se calculan del banco real: antes
+// estaban escritos a mano y se desactualizaban cada vez que se agregaban
+// preguntas (ej. "366 preguntas" cuando ya había más).
+function actualizarConteosNiveles(){
+  const pon=(sel,txt)=>{const el=document.querySelector(sel);if(el)el.textContent=txt+' · 20 por sesión';};
+  ['hidrocarburos','oxigenados','nitrogenados'].forEach(nv=>{
+    const n=QBANK.filter(q=>NIVEL_TOPICS[nv].includes(q.topic)).length;
+    pon(`.nivel-card[onclick*="'${nv}'"] .nivel-count`,n+' preguntas');
+  });
+  pon(`.nivel-card[onclick*="'completo'"] .nivel-count`,QBANK.length+' preguntas');
+  pon('#stat-build-count',QBANK.filter(q=>q.type==='build').length+' moléculas');
+  pon('.nivel-card[onclick*="openRxnPicker"] .nivel-count',QBANK.filter(q=>q.type==='rxnq').length+' preguntas');
+}
+actualizarConteosNiveles();
 renderBests();
 document.getElementById('stat-banco').textContent=QBANK.length;
 actualizarPanelesEstudiante();
