@@ -2603,7 +2603,7 @@ let _iniciandoPartida=false;
 // cualquiera podía ver el curso completo con "ver código fuente" de esta
 // página pública). Se consulta al Apps Script (?accion=estudiante&codigo=…),
 // que lo busca en la hoja "Estudiantes" — esa hoja vive solo en el Google
-// Sheet privado de la docente, nunca en este código.
+// Sheet privado del docente, nunca en este código.
 let _verificandoCodigo=false;
 function validarCodigoInline(){
   if(_verificandoCodigo) return;
@@ -6062,7 +6062,7 @@ let _sessionId = '';
 // Por eso reintenta solo, en silencio, ante un tropiezo momentáneo de wifi
 // (típico en un salón con muchos dispositivos a la vez): un solo intento sin
 // reintentos, como estaba antes, podía perder ese registro para siempre sin
-// que nadie —ni el estudiante ni la docente— se enterara de que algo falló.
+// que nadie —ni el estudiante ni el docente— se enterara de que algo falló.
 function sendSessionStart(){
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const body=JSON.stringify({
@@ -6154,7 +6154,7 @@ function sendAnalytics(trigger){
   if(_analyticsSent) return;
   // OJO: antes se descartaba el envío si history estaba vacío (0 preguntas
   // respondidas), pensando que "no hay nada que guardar". Pero eso dejaba a
-  // la docente sin forma de distinguir "la estudiante entró y cerró sin
+  // el docente sin forma de distinguir "la estudiante entró y cerró sin
   // tocar nada" de "el envío de verdad falló" — en ambos casos la hoja
   // se quedaba con la fila de "inicio" sola y ningún "cierre" después.
   // Ahora, mientras SÍ se haya iniciado un nivel en esta visita (_sessionId

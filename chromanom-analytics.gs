@@ -1025,7 +1025,7 @@ function updateCursoSheet(ss, curso, allData) {
   // periodo" ya se calculaban arriba (se usan para la Nota de juego) pero
   // se quedaban sin escribir en esta hoja — solo la hoja consolidada
   // "Estadísticas" (con todos los cursos juntos) las mostraba. Se agregan
-  // aquí también, en el mismo orden, para que la docente las vea igual en
+  // aquí también, en el mismo orden, para que el docente las vea igual en
   // la hoja de un curso individual.
   writeSheetBatch(sh, ['Nombre','Sesiones','Preguntas respondidas','% Acierto','Nota juego (0-5)',
                        'Sesiones en el periodo','Preguntas en el periodo','% Acierto en el periodo',

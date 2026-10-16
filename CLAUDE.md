@@ -38,6 +38,9 @@ hace falta registrar nada.
 - El usuario es docente de química (no necesariamente técnico); las
   explicaciones y los mensajes de commit deben ser claros, en español, y
   evitar jerga innecesaria.
+- El docente es hombre: referirse a él siempre en masculino ("el docente",
+  "al docente", "del docente"), nunca "la docente" — también en
+  `HISTORIAL_CAMBIOS.md`, en comentarios del código y en mensajes de commit.
 - Antes de dar por resuelto un bug reportado como "no funciona" o "salió
   este error", reproducirlo primero (Playwright con Chromium está
   disponible) en vez de solo razonar sobre el código — varios bugs de este

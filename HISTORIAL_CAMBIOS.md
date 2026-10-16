@@ -7,10 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-16 (101) — Corrección: el docente es hombre ("el docente", no "la docente")
+
+### Contexto
+El docente señaló que en los mensajes de Claude y en todo el historial se
+le nombraba como "la docente", cuando es hombre (cis). El error venía de
+sesiones anteriores y se había repetido sin verificar.
+
+### Cambios
+- `HISTORIAL_CAMBIOS.md`: todas las referencias pasaron a masculino ("el
+  docente", "al docente", "del docente", "él").
+- Comentarios del código con la misma referencia corregidos en
+  `juego.html`, `generador.html`, `reacciones.html`, `pwa-install.js` y
+  `chromanom-analytics.gs` (solo comentarios, no cambia ningún
+  comportamiento; el `.gs` NO necesita redespliegue por esto).
+- `CLAUDE.md`: nueva regla para que las próximas sesiones se refieran a él
+  siempre en masculino.
+
+### Verificación
+Las 7 páginas siguen cargando sin errores (Playwright, 5 anchos).
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-16 (100) — Marca de agua: las moléculas se cruzaban entre sí
 
 ### Contexto
-Tras reforzar la marca de agua (entrada 98), la docente notó que algunas
+Tras reforzar la marca de agua (entrada 98), el docente notó que algunas
 moléculas del fondo se cruzaban: se veía desordenado y, además,
 químicamente incorrecto (parecían enlaces entre moléculas distintas).
 
@@ -43,7 +68,7 @@ Ninguno.
 ## 2026-10-16 (99) — Portada: la numeración de módulos saltaba del 2 al 4
 
 ### Contexto
-La docente notó que en las tarjetas de módulos de la portada aparecían
+El docente notó que en las tarjetas de módulos de la portada aparecían
 "Módulo 1", "Módulo 2" y "Módulo 4": la tarjeta del juego (que es el
 módulo 3 en la ruta recomendada) decía solo "Practicar".
 
@@ -65,7 +90,7 @@ Ninguno.
 ## 2026-10-16 (98) — Marca de agua de moléculas reforzada y distribuida en todo el fondo
 
 ### Contexto
-La docente pidió reforzar un poco la marca de agua de moléculas y que
+El docente pidió reforzar un poco la marca de agua de moléculas y que
 quedara distribuida por todo el fondo (antes solo ocupaba la franja
 izquierda y se desvanecía hacia el centro).
 
@@ -92,7 +117,7 @@ Ninguno. No se tocó `chromanom-analytics.gs`.
 ## 2026-10-16 (97) — Referencia: logo de ChromaNom a la derecha del título
 
 ### Contexto
-Tras arreglar la impresión (entrada 96), la docente pidió aprovechar el
+Tras arreglar la impresión (entrada 96), el docente pidió aprovechar el
 espacio en blanco a la derecha del título de la Hoja de Referencia para
 poner el logo de ChromaNom.
 
@@ -114,7 +139,7 @@ Ninguno.
 ## 2026-10-16 (96) — Referencia: la impresión salía en 5 páginas con mucho espacio en blanco
 
 ### Contexto
-La docente imprimió la Hoja de Referencia (Guardar como PDF) y el
+El docente imprimió la Hoja de Referencia (Guardar como PDF) y el
 maquetado salía mal: 5 páginas, la primera medio vacía y una página con
 solo el título de la sección nueva de ramificaciones clásicas.
 
@@ -145,7 +170,7 @@ Ninguno. No se tocó `chromanom-analytics.gs`.
 ## 2026-10-16 (95) — Juego en tema claro, marca de agua de moléculas y logo animado en la portada
 
 ### Contexto
-Revisando el rediseño (entrada 94), la docente pidió: (1) unificar también
+Revisando el rediseño (entrada 94), el docente pidió: (1) unificar también
 la portada del juego ("Modo Reto"), que seguía con fondo azul oscuro;
 (2) que el sitio no fuera "del todo blanco", con moléculas de fondo hacia el
 lado izquierdo, detrás del contenido, como marca de agua y con los colores
@@ -190,10 +215,10 @@ juego en tema claro; animación del logo activa.
 ## 2026-10-16 (94) — Todos los arreglos de las auditorías + rediseño visual integral
 
 ### Contexto
-Después del informe de la sesión 93, la docente pidió "todos los arreglos
+Después del informe de la sesión 93, el docente pidió "todos los arreglos
 correspondientes" y luego compartió un prompt de rediseño visual integral
 (sistema de diseño, portada, módulos, móvil, accesibilidad). Decisiones de
-la docente (preguntadas explícitamente):
+el docente (preguntadas explícitamente):
 - **Se conservan los 4 colores actuales del método** (turquesa, verde,
   dorado, rosa) — no se adoptó la paleta violeta/turquesa/ámbar/coral del
   prompt para no romper lo que los estudiantes ya memorizaron.
@@ -277,7 +302,7 @@ Generador en vista de impresión: solo los ejercicios.
 ## 2026-10-16 (93) — Auditoría de contenido + auditoría visual/marketing; tabla de ramificaciones clásicas en Referencia
 
 ### Contexto
-La docente pidió, después de un tiempo sin revisiones, (1) una auditoría de
+El docente pidió, después de un tiempo sin revisiones, (1) una auditoría de
 que el contenido químico sea correcto y (2) una auditoría visual y de
 marketing según las tendencias actuales en sitios y OVAs educativos. Durante
 la sesión pidió además una sección en Referencia con las ramificaciones de
@@ -323,7 +348,7 @@ Playwright (Chromium) a 390 px y 1366 px: las páginas tocadas cargan sin
 errores de JavaScript, la tabla nueva no desborda y el buscador la filtra;
 los conteos del juego muestran 318/371/168/1178/107/207.
 
-### Pendiente (informe entregado a la docente, sin aplicar)
+### Pendiente (informe entregado al docente, sin aplicar)
 - Auditoría química de `juego.html`: 17 errores (ej. butan-2-amina llamada
   "secundaria", TNT mal numerado, putrescina dibujada como cadaverina,
   propino dibujado como propeno, Br₂ "en solución acuosa", MTBE con orden
@@ -335,7 +360,7 @@ los conteos del juego muestran 318/371/168/1178/107/207.
   nombres de éteres/cetonas con orden alfabético contrario) y cifras
   contradictorias (17 grupos/181 ejercicios vs. "16/160" en el portal;
   42 reacciones vs. "41"; insignias de pestañas).
-- Decisión pendiente de la docente: convención IUPAC 2013 vs. reglas
+- Decisión pendiente del docente: convención IUPAC 2013 vs. reglas
   anteriores en grupos.html (cadena con doble enlace, anillo vs. cadena).
 - Auditoría visual: contraste del pie de página y del título "4 partes",
   desbordamiento del juego en celular, molécula semidesarrollada ilegible en
@@ -350,7 +375,7 @@ los conteos del juego muestran 318/371/168/1178/107/207.
 ## 2026-09-23 (92) — Juego: ejercicios nuevos con el sustituyente −CN (ciano) en ácidos, ésteres y amidas
 
 ### Contexto
-La docente pidió agregar ejercicios de nomenclatura en `juego.html` para
+El docente pidió agregar ejercicios de nomenclatura en `juego.html` para
 grupos funcionales que puedan llevar el sustituyente −CN (ciano). El
 −CN solo tiene sentido como SUSTITUYENTE (no como grupo principal) en
 compuestos cuyo grupo principal tenga mayor prioridad IUPAC que el
@@ -403,7 +428,7 @@ El logo en el encabezado de estas 3 páginas estaba embebido directo en
 el HTML como `data:image/png;base64,...` — un blob de ~304 KB por
 página (era un PNG con metadatos de procedencia/C2PA muy pesados), en
 vez de referenciar el archivo `logo-chromanom.png` que ya vive en la
-carpeta del repositorio (8 KB). La docente pidió usar ese archivo en
+carpeta del repositorio (8 KB). El docente pidió usar ese archivo en
 vez del base64.
 
 ### Qué se hizo
@@ -428,7 +453,7 @@ Ninguno. No se tocó `chromanom-analytics.gs`.
 ## 2026-09-23 (90) — Juego: faltaba el yodo en el constructor molecular + preguntas nuevas de sustitución con yodo
 
 ### Contexto
-La docente reportó que en el modo Constructor (arrastrar/colocar átomos
+El docente reportó que en el modo Constructor (arrastrar/colocar átomos
 para armar una estructura) no había forma de colocar yodo, aunque
 algunas preguntas de construcción sí lo piden. Luego pidió agregar más
 preguntas de sustitución con yodo en los grupos donde tenga sentido
@@ -508,7 +533,7 @@ GitHub Pages: basta con el push a `main`.
 ## 2026-09-22 (89) — Generador: muestra los subproductos deducibles en 81 de las 167 tarjetas de reacción
 
 ### Contexto
-La docente vio la tarjeta de síntesis de Williamson ("Hallar el reactivo")
+El docente vio la tarjeta de síntesis de Williamson ("Hallar el reactivo")
 y notó que faltaba el subproducto (NaBr) — dijo que en la mayoría de las
 tarjetas pasaba lo mismo, y que verlo ayuda a identificar exactamente qué
 reacción es y evita confundirla con otras. Se le preguntó si el cambio
@@ -562,7 +587,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (88) — Generador: nuevo tipo de pregunta "Hallar el reactivo/catalizador" (producto dado, retrosíntesis)
 
 ### Contexto
-La docente pidió un tercer tipo de pregunta para el banco de reacciones:
+El docente pidió un tercer tipo de pregunta para el banco de reacciones:
 en vez de partir siempre de los reactivos y pedir el producto, que
 también haya preguntas donde se dé el **producto** ya formado y el
 estudiante deba deducir qué reactivo y/o catalizador lo produjo.
@@ -657,7 +682,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (86) — Generador: todas las moléculas del banco de reacciones quedan dibujadas en semidesarrollada (cero texto plano) + elimina preguntas de teoría pura
 
 ### Contexto
-La docente pidió que **todas** las moléculas del generador se vean
+El docente pidió que **todas** las moléculas del generador se vean
 dibujadas en semidesarrollada (como en el juego), no como texto plano, y
 que el banco de reacciones no tenga preguntas de teoría/comparación —
 solo ejercicios con una reacción real.
@@ -689,7 +714,7 @@ dibujarse. Se encontraron 8 casos:
 5. **`rxn_63`** (comparación de acidez "CH₃COOH vs. CH₃CH₂OH") y
    **`rxn_153`** (comparación de orientación "C₆H₅CH₃ vs. C₆H₅NO₂",
    agregada en la sesión anterior): estas eran justo el otro problema
-   que pidió corregir la docente — preguntas de teoría/comparación sin
+   que pidió corregir el docente — preguntas de teoría/comparación sin
    una reacción real, así que ni tenían una molécula única que dibujar.
    Se reemplazaron por ejercicios reales:
    - `rxn_63` → prueba de acidez real: `CH₃−COOH + NaHCO₃` (efervescencia
@@ -718,7 +743,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (85) — Generador: corrige preguntas "duplicadas" de aromáticos + agrega orientación orto/para vs. meta
 
 ### Contexto
-La docente reportó que al generar reacciones de "Aromáticos" le salieron
+El docente reportó que al generar reacciones de "Aromáticos" le salieron
 2 preguntas prácticamente iguales; luego confirmó que era la acilación de
 Friedel-Crafts. También pidió ampliar el banco con aromáticos ya
 monosustituidos para que, de paso, se evaluara la orientación de la
@@ -778,7 +803,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (84) — Juego: sincroniza CCP/H⁺ con el generador + Generador: la síntesis de nitrilos deja de aparecer al marcar solo "Nitrilos"
 
 ### Contexto
-La docente pidió dos cosas: (1) revisar también `juego.html` para que
+El docente pidió dos cosas: (1) revisar también `juego.html` para que
 coincida con las correcciones de catalizadores hechas en el generador y
 en reacciones.html, y (2) una auditoría completa de libro vs. generador
 para que no aparecieran más errores del tipo "esta pregunta no está en la
@@ -818,7 +843,7 @@ se encontró un caso más:
 
 - **Síntesis de nitrilos a partir de haluros** (`R−X + CN⁻ → R−C≡N`,
   `rxn_97`, `rxn_98`, `rxn_143` — 3 de las 10 preguntas de "Nitrilos").
-  En el libro de la docente, esto es sustitución nucleofílica genérica
+  En el libro del docente, esto es sustitución nucleofílica genérica
   del capítulo 8 (⁻CN aparece listado como nucleófilo, igual que ⁻OR en
   el caso de Williamson) — el capítulo de nitrilos solo trata su
   hidrólisis y reducción, nunca su síntesis desde un haluro.
@@ -829,7 +854,7 @@ se encontró un caso más:
 - Se revisaron uno por uno el resto de los temas (alcoholes, ácidos,
   ésteres, aldehídos/cetonas, benceno, aminas, amidas) buscando el mismo
   patrón — no se encontró ningún otro caso. Alcanos, alquenos y alquinos
-  no se pudieron auditar porque ninguna de las fotos que envió la docente
+  no se pudieron auditar porque ninguna de las fotos que envió el docente
   cubre esos capítulos.
 
 ### Verificación
@@ -848,7 +873,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (83) — Generador: la síntesis de Williamson deja de aparecer al marcar solo "Éteres"
 
 ### Contexto
-La docente mandó una captura de una pregunta ("CH₃CH₂ONa + CH₃CH₂Cl → ?",
+El docente mandó una captura de una pregunta ("CH₃CH₂ONa + CH₃CH₂Cl → ?",
 tipo Williamson) y avisó que le estaban saliendo muchas preguntas así al
 evaluar con "Éteres" marcado, y que no las encontraba en la sección de su
 libro que usa como base para evaluar.
@@ -860,7 +885,7 @@ Williamson (`rxn_74`, `rxn_75`, `rxn_76`, `rxn_82` — 2 alifáticas, 1 de
 "G. Reacciones de éteres con halogenuros de alquilo" (cap. 9) **solo**
 muestra la ruptura del éter (ROR + HX → RX + ROH/2RX+H₂O) — no muestra
 cómo se forma el éter. La síntesis de Williamson (alcóxido + haluro →
-éter) es, en el libro de la docente, un caso particular de la sustitución
+éter) es, en el libro del docente, un caso particular de la sustitución
 nucleofílica genérica del capítulo 8 (donde "⁻OR" aparece listado como
 nucleófilo), no una "reacción de éteres" propia del capítulo 9. Por eso,
 al marcar solo "Éteres" para evaluar, salían preguntas que no están en esa
@@ -895,7 +920,7 @@ redesplegar ni recalcular nada.
 
 ### Contexto
 Después de la auditoría de catalizadores en `generador.html` (sesión
-anterior), la docente pidió revisar también `reacciones.html` para que
+anterior), el docente pidió revisar también `reacciones.html` para que
 coincidiera con esas correcciones.
 
 ### Revisión hecha
@@ -909,10 +934,10 @@ los cambios ya aplicados en `generador.html`:
   solo como mención breve, sin mecanismo paso a paso propio como sí lo
   tienen aldehídos/cetonas. Se deja así por ahora — agregar un mecanismo
   completo nuevo es un cambio de alcance mayor, no una corrección; se
-  puede hacer en otra sesión si la docente lo pide.
+  puede hacer en otra sesión si el docente lo pide.
 - **Sigla "PCC"**: `reacciones.html` usaba la sigla en inglés ("PCC",
   clorocromato de piridinio) en 17 lugares (insignias, mecanismos,
-  tarjetas de comparación, preguntas de práctica). El libro de la docente
+  tarjetas de comparación, preguntas de práctica). El libro del docente
   usa la sigla en español, **"CCP"** — igual que se corrigió en el
   generador. Se reemplazó en las 17 apariciones.
 - **KMnO₄ / K₂Cr₂O₇ como oxidantes fuertes** y el **oleum** en la
@@ -944,7 +969,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (81) — Generador: auditoría completa de catalizadores/reactivos del banco de reacciones contra el libro de texto
 
 ### Contexto
-Tras corregir `rxn_81`, la docente pidió revisar TODAS las demás reacciones
+Tras corregir `rxn_81`, el docente pidió revisar TODAS las demás reacciones
 del generador (147 preguntas del banco `BANCO_RXN`) para que fueran exactas
 contra las mismas fotos del "Resumen de reacciones" de su libro de texto
 (capítulos 6, 8, 9, 10, 11, 12 y 13), y ajustar todos los catalizadores a
@@ -997,7 +1022,7 @@ No se agregaron reacciones de capítulos que el generador no cubre en
 absoluto (cloruros de ácido, anhídridos de ácido) — esos temas no tienen
 casilla propia en "Reacciones — grupos a repasar", así que agregarlos
 sería un cambio de alcance mayor, no una corrección. Tampoco se tocaron
-alcanos/alquenos/alquinos: ninguna de las 13 fotos que envió la docente
+alcanos/alquenos/alquinos: ninguna de las 13 fotos que envió el docente
 cubre esos capítulos, así que no había con qué verificarlos.
 
 ### Pendiente
@@ -1009,7 +1034,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-22 (80) — Generador: corrige la pregunta rxn_81 de éteres, que no era una reacción real
 
 ### Contexto
-La docente reportó que una de las preguntas de "Reacciones" del generador
+El docente reportó que una de las preguntas de "Reacciones" del generador
 (éteres) no tenía que ver con una reacción: preguntaba "¿qué papel cumple
 este compuesto en reacciones de Grignard y de reducción?" (esperando la
 respuesta "disolvente"), pero la tarjeta siempre muestra un reactivo →
@@ -1017,7 +1042,7 @@ flecha → producto oculto, con campos "Tipo de reacción" / "Condiciones",
 y esta pregunta no tenía reactivo ni producto — no calzaba en la plantilla.
 
 Para confirmar cuáles son las reacciones reales de los éteres (y no
-inventar una), la docente envió fotos del "Resumen de reacciones" de su
+inventar una), el docente envió fotos del "Resumen de reacciones" de su
 libro de texto (varios capítulos). La sección de éteres (9.7.C) solo lista
 dos reacciones propias del éter: ruptura con HX, 1 equivalente en frío
 (ruptura parcial: alcohol + haluro) o en exceso con calor (ruptura total:
@@ -1046,7 +1071,7 @@ redesplegar ni recalcular nada.
 ## 2026-09-21 (79) — Generador de Ejercicios: el segundo reactivo también se dibuja con enlaces
 
 ### Contexto
-La docente mandó una captura del Generador de Ejercicios (Tipo D —
+El docente mandó una captura del Generador de Ejercicios (Tipo D —
 Reacción, ejercicio de acilación de Friedel-Crafts) señalando que "ya
 habíamos establecido que deben ser semidesarrolladas completas con
 enlaces arriba y abajo donde corresponda" — la misma regla ya aplicada en
@@ -1099,7 +1124,7 @@ casos con segundo reactivo. Sin errores de consola nuevos.
 ## 2026-09-21 (78) — Apps Script: arregla "Sesiones/Preguntas en el periodo" en Curso X + nueva hoja de premiación por 1.000 preguntas
 
 ### Contexto
-La docente pidió dos cosas sobre `chromanom-analytics.gs`:
+El docente pidió dos cosas sobre `chromanom-analytics.gs`:
 1. Un arreglo para que se muestre el número de sesiones y preguntas en el
    periodo (ya existía en la hoja consolidada "Estadísticas", pero no en
    las hojas individuales "Curso X").
@@ -1136,7 +1161,7 @@ se quedaban calculados y sin usar. Solo la hoja consolidada
 
 ### Ajustes (mismo día) a la hoja de premio
 Después de ver la primera versión (Nombre, Curso, Preguntas totales, %
-Acierto global, Fecha, ¿Cumple 80%+?), la docente pidió algo más simple:
+Acierto global, Fecha, ¿Cumple 80%+?), el docente pidió algo más simple:
 **Curso, Nombre y Fecha del logro** (en ese orden), sin la columna de
 cumplimiento — el criterio para salir en la lista queda en llegar a las
 1.000 preguntas, sin más. Se quitó la constante `PCT_META_PREMIO`
@@ -1152,7 +1177,7 @@ agregó "Preguntas contestadas" (el total acumulado, no solo las 1.000 de
 la meta) entre "Nombre" y "Fecha del logro". La hoja final queda: Curso,
 Nombre, Preguntas contestadas, Fecha del logro, % Acierto global.
 
-### Bug encontrado por la docente: "Preguntas contestadas" se veía como fecha
+### Bug encontrado por el docente: "Preguntas contestadas" se veía como fecha
 Tras pegar el código y recalcular, la columna "Preguntas contestadas"
 mostraba valores como "1902-12-23" en vez de 1902. Causa: en la versión
 anterior de esta misma hoja (antes de agregar esta columna), esa 3ª
@@ -1191,7 +1216,7 @@ errores.
 ## 2026-09-21 (77) — Juego: se retira el modal de premiación de las 1000 preguntas
 
 ### Contexto
-La docente pidió quitar del juego el modal promocional del "reto de la
+El docente pidió quitar del juego el modal promocional del "reto de la
 coordinación" (responder 1.000 preguntas con 80% de acierto o más para
 ganar un premio).
 
@@ -1227,7 +1252,7 @@ primera pregunta directamente (antes había que cerrar el modal primero).
 ## 2026-09-21 (76) — Reacciones: la tarjeta "Comparación molecular" también dibuja enlaces, sin paréntesis
 
 ### Contexto
-La docente mandó una captura de `reacciones.html` (Alcanos → Halogenación)
+El docente mandó una captura de `reacciones.html` (Alcanos → Halogenación)
 mostrando la tarjeta "Comparación molecular" con "CH₃-CH(Br)-CH₃" en texto
 plano — justo la notación entre paréntesis que ya se había acordado NO
 usar (sesión 30: los enlaces se dibujan arriba/abajo, como en el tablero,
@@ -1296,10 +1321,10 @@ la tarjeta de comparación estándar.
 ## 2026-09-21 (75) — Las 7 mejoras de UI pendientes en el resto del sitio (todas menos el juego)
 
 ### Contexto
-Cerrando la ronda de auditoría UX/UI (entradas 68-74), la docente pidió
+Cerrando la ronda de auditoría UX/UI (entradas 68-74), el docente pidió
 qué mejoras de interfaz faltaban en las páginas distintas al juego. Se
 verificó el estado real del código (no solo lo que decía el informe
-original) y se propusieron 7 puntos concretos; la docente pidió
+original) y se propusieron 7 puntos concretos; el docente pidió
 implementarlos todos.
 
 ### 1 — `generador.html` puesto a la par del resto del sitio
@@ -1419,7 +1444,7 @@ Ninguno. `juego.html` se sirve directo por GitHub Pages.
 ## 2026-09-20 (73) — Referencia: la C del carbonilo también va en rosa (grupo funcional)
 
 ### Contexto
-La docente aceptó la mejora opcional que había dejado señalada el
+El docente aceptó la mejora opcional que había dejado señalada el
 auditor en la entrada 72: que la C del carbonilo se pintara del mismo
 rosa que la O, para que "grupo funcional" se vea como una sola unidad
 visual (C=O) y coincida con la convención del sitio de que todo el
@@ -1458,7 +1483,7 @@ texto de los átomos (`.gs-a`, `.gs-o` → 11px) no incluía la clase nueva
 También sugirió, como mejora opcional (no bug), que la C del carbonilo
 podría pintarse de rosa igual que la O, para alinearse con la convención
 del sitio de que todo el sufijo (ácido…oico, …al, …ona) es "grupo
-funcional". Queda pendiente de que la docente decida si quiere ese
+funcional". Queda pendiente de que el docente decida si quiere ese
 cambio — por ahora la C se dejó neutra.
 
 ### Cambios (`referencia.html`)
@@ -1472,7 +1497,7 @@ las 9 apariciones de "R"/"R'" ya se ven del mismo tamaño que el resto de
 los átomos.
 
 ### Pendiente
-Decisión de la docente sobre si pintar también la C del carbonilo de
+Decisión del docente sobre si pintar también la C del carbonilo de
 rosa (mejora opcional del auditor, no aplicada). `referencia.html` se
 sirve directo por GitHub Pages, sin paso de despliegue aparte.
 
@@ -1481,7 +1506,7 @@ sirve directo por GitHub Pages, sin paso de despliegue aparte.
 ## 2026-09-20 (71) — Referencia: la "R" de sustituyente usa el azul MDEC real
 
 ### Contexto
-Sobre el dibujo semidesarrollado agregado en la entrada 70, la docente
+Sobre el dibujo semidesarrollado agregado en la entrada 70, el docente
 pidió que la "R" (el sustituyente genérico a la izquierda del carbonilo,
 y la "R'" cuando aparece del otro lado en ésteres/cetonas) usara el color
 azul/teal real que el sitio ya usa para "sustituyente" en su esquema de 4
@@ -1513,7 +1538,7 @@ sirve directo por GitHub Pages, sin paso de despliegue aparte.
 ## 2026-09-20 (70) — Referencia: dibuja la fórmula semidesarrollada real en los 7 grupos con carbonilo
 
 ### Contexto
-La docente mandó una foto de su cuaderno mostrando cómo quiere las
+El docente mandó una foto de su cuaderno mostrando cómo quiere las
 fórmulas "semidesarrolladas" de la tarjeta 68/69: no el texto plano
 "R−CHO", sino el dibujo con el O arriba de la C unido por doble enlace
 (dos líneas) y los grupos R a los lados unidos por guiones — igual a como
@@ -1530,7 +1555,7 @@ rosa (el color de "grupo funcional" del sitio). Los otros 10 grupos
 (Alcoholes, Éteres, Aminas, Tioles, Haloderivados, Nitrilos, Iminas,
 Alquenos, Alquinos, Alcanos) se dejaron con su notación plana actual
 (R−OH, R−NH₂, etc.) porque no tienen carbonilo que dibujar — coincide con
-el propio ejemplo de la docente, que también dejó "Alcohol R-OH" sin
+el propio ejemplo del docente, que también dejó "Alcohol R-OH" sin
 desarrollar.
 
 Se agregó una regla de impresión para que estos dibujos se vean
@@ -1553,7 +1578,7 @@ Ninguno. `referencia.html` se sirve directo por GitHub Pages.
 
 ### Contexto
 Siguiendo con los hallazgos de la auditoría UX/UI de la sesión anterior
-(entrada 68), la docente pidió avanzar con el hallazgo "importante #5":
+(entrada 68), el docente pidió avanzar con el hallazgo "importante #5":
 la tabla de prioridad de 17 grupos funcionales no debería estar en el
 portal (`index.html`) — ya existe la misma tabla en `referencia.html`,
 así que estaba duplicada y hacía sentir el portal "de examen" antes de
@@ -1596,11 +1621,11 @@ Ninguno. Ambos archivos se sirven directo por GitHub Pages.
 ## 2026-09-18 (68) — Auditoría UX/UI para adolescentes + unifica tipografía y agranda el texto por defecto
 
 ### Contexto
-La docente pidió una auditoría UX/UI enfocada en adolescentes de secundaria
+El docente pidió una auditoría UX/UI enfocada en adolescentes de secundaria
 en Colombia sobre todo el sitio (portal, juego y páginas de contenido),
 solo informe, sin cambios. Se hizo con tres subagentes en paralelo (portal,
 juego, páginas de contenido) y se entregó un informe con hallazgos por
-severidad. De esos hallazgos, la docente pidió avanzar ya con dos:
+severidad. De esos hallazgos, el docente pidió avanzar ya con dos:
 **unificar la tipografía** entre páginas y **agrandar el tamaño de texto
 por defecto**, porque "siempre empieza muy pequeña y es necesario hacer
 zoom".
@@ -1657,14 +1682,14 @@ directo por GitHub Pages.
 El resto de los hallazgos del informe de auditoría (mensajes tipo examen
 antes de jugar, el timer que no se pausa durante las pistas, botones
 táctiles pequeños, falta de sonido, etc.) quedaron solo documentados,
-pendientes de que la docente decida cuáles abordar.
+pendientes de que el docente decida cuáles abordar.
 
 ---
 
 ## 2026-09-17 (67) — Regla de cetonas con anillos + corrige colores MDEC en Grupos y Juego (más de 350 fragmentos)
 
 ### Contexto
-La docente notó que en Cetonas (Grupos) no existía la regla de nombre
+El docente notó que en Cetonas (Grupos) no existía la regla de nombre
 funcional/clásico "(radical)-il (radical)-il cetona" cuando alguno de
 los radicales es un anillo (ciclohexilo) o un anillo aromático (fenilo)
 — sí existía para Éteres, pero nunca se agregó para Cetonas. Pidió esa
@@ -1739,7 +1764,7 @@ aparte de este push a `main`.
 
 ### Contexto
 Después de agrandar las cajas de ejemplo de las reglas IUPAC (entrada
-65), la docente pidió que el mismo criterio se aplicara a **todas** las
+65), el docente pidió que el mismo criterio se aplicara a **todas** las
 cajas de `grupos.html` que aprovechan poco el espacio en PC, y que las
 moléculas (las estructuras dibujadas) también se vieran más grandes —
 no solo esa sección puntual.
@@ -1782,7 +1807,7 @@ ningún paso de despliegue aparte de este push a `main`.
 ## 2026-09-17 (65) — Grupos: las cajas de ejemplo de las reglas IUPAC se veían diminutas en PC
 
 ### Contexto
-La docente reportó (con captura de pantalla) que en `grupos.html`, dentro
+El docente reportó (con captura de pantalla) que en `grupos.html`, dentro
 de cada regla IUPAC expandida (ej. "Cadena principal" en Éteres), las
 cajas con la estructura y el desglose de fragmentos ("metoxi met ano",
 etc.) se veían muy pequeñas en computador — texto casi ilegible y cajas
@@ -1862,7 +1887,7 @@ ya enseña que el anillo bencénico actúa **a la vez** como cadena
 principal y como grupo funcional (sistema aromático), y acepta ambas
 respuestas como correctas. El generador, en cambio, separaba "bencen"
 (cadena) y "o" (grupo funcional) en dos píldoras de un solo color cada
-una. Se le preguntó a la docente cuál criterio prefería y pidió
+una. Se le preguntó al docente cuál criterio prefería y pidió
 alinear el generador con el criterio del juego.
 
 **Cambios:**
@@ -2010,7 +2035,7 @@ anillo con dos sustituyentes).
 ## 2026-09-17 (62) — Generador: corregido el Análisis MDEC de éteres (faltaba la insaturación) y de cetonas (partía "-ona" en "-on"+"a")
 
 ### Contexto
-La docente reportó, sobre un taller ya impreso, dos preguntas de
+El docente reportó, sobre un taller ya impreso, dos preguntas de
 "Análisis MDEC" con resultados extraños:
 - Pregunta 6 (éter, p. ej. `1-propoxipropano`): las píldoras mostraban
   solo `1-propoxi | propan | o` — la cadena principal no mostraba la
@@ -2058,7 +2083,7 @@ despliegue aparte de este push a `main`.
 ## 2026-09-17 (61) — Auditoría química de `grupos.html`: 9 estructuras/nombres corregidos
 
 ### Contexto
-La docente pidió una auditoría de `grupos.html` que revisara que
+El docente pidió una auditoría de `grupos.html` que revisara que
 cada estructura dibujada coincidiera de verdad con su nombre IUPAC
 (no solo que la molécula fuera "plausible"), y que no hubiera
 errores químicos ni alucinaciones. Se lanzó una auditoría
@@ -2162,7 +2187,7 @@ adelante.
 ## 2026-09-17 (60) — Grupos: corregido el nombre solapado sobre la estructura en las moléculas altas (ramas arriba y abajo)
 
 ### Contexto
-La docente reportó, con capturas, que en algunos ejemplos de "Reglas
+El docente reportó, con capturas, que en algunos ejemplos de "Reglas
 IUPAC" el nombre quedaba escrito encima de la estructura en vez de
 debajo — casos concretos: 2,2-dimetilpropano (Alcanos, regla 4) y
 ácido etanoico / ácido butanoico (Ácidos, regla 1).
@@ -2203,7 +2228,7 @@ Ninguno.
 ## 2026-09-17 (59) — Grupos: las moléculas de ejemplo en "Reglas IUPAC" ahora son semidesarrolladas (misma calidad que Generador), no esqueléticas
 
 ### Contexto
-La docente pidió que, en `grupos.html`, las moléculas de ejemplo
+El docente pidió que, en `grupos.html`, las moléculas de ejemplo
 dentro de cada regla IUPAC (el acordeón "Reglas IUPAC" de cada grupo
 funcional) usaran fórmulas semidesarrolladas —con el mismo nivel de
 detalle que se dejó en el Generador (sin abreviar grupos funcionales
@@ -2264,7 +2289,7 @@ de cadena, que es un trabajo aparte.
 ## 2026-09-17 (58) — Generador: las reacciones con Grignard quedan como "avanzadas", ocultas por defecto
 
 ### Contexto
-La docente aclaró que en clase no se vieron reactivos organometálicos
+El docente aclaró que en clase no se vieron reactivos organometálicos
 ni de Grignard — el curso se quedó en reacciones más simples. Pidió
 que esas preguntas del banco se traten como nivel avanzado y que el
 Generador dé la opción de incluirlas o no, para que por defecto solo
@@ -2282,7 +2307,7 @@ nota explicando cuántas preguntas quedan ocultas. El filtro de
 `generate()` ahora excluye las preguntas `nivel:'avanzado'` salvo que
 esa casilla esté marcada — así que con la configuración de fábrica
 (sin tocar nada nuevo) esas 7 preguntas nunca aparecen, y solo entran
-en juego si la docente decide repasarlas explícitamente.
+en juego si el docente decide repasarlas explícitamente.
 
 No se tocó LiAlH₄/NaBH₄/SOCl₂/P₂O₅ (de la sesión anterior) porque no
 son organometálicos ni Grignard — son reactivos de nivel intermedio
@@ -2299,7 +2324,7 @@ en generaciones repetidas. Se repitió también la verificación general
 confirmar que el resto del banco no cambió.
 
 ### Pendiente / sin resolver
-Si la docente decide que LiAlH₄/NaBH₄/SOCl₂/P₂O₅/reducciones con
+Si el docente decide que LiAlH₄/NaBH₄/SOCl₂/P₂O₅/reducciones con
 hidruro tampoco se vieron en clase, avisar para marcarlas también
 como avanzadas — hoy solo Grignard/organometálicos quedaron ocultos
 por defecto, tal como se pidió.
@@ -2309,7 +2334,7 @@ por defecto, tal como se pidió.
 ## 2026-09-17 (57) — Reacciones: la flecha ahora mide lo que mide su condición, y LiAlH₄/NaBH₄/Grignard/SOCl₂/P₂O₅ van sobre la flecha, no como "+reactivo"
 
 ### Contexto
-La docente envió capturas del libro de texto ("Resumen de reacciones"
+El docente envió capturas del libro de texto ("Resumen de reacciones"
 de cada capítulo) mostrando cómo se ven las ecuaciones en clase: el
 catalizador/reactivo que actúa sobre una sola molécula (LiAlH₄,
 NaBH₄, un reactivo de Grignard, SOCl₂, PX₃, KMnO₄, CrO₃/H⁺...) va
@@ -2367,7 +2392,7 @@ Ninguno.
 ## 2026-09-17 (56) — KMnO₄/K₂Cr₂O₇ como oxidante sobre la flecha, no como "+ reactivo", igual que se enseña en clase
 
 ### Contexto
-La docente corrigió el cambio de la entrada anterior: en clase, la
+El docente corrigió el cambio de la entrada anterior: en clase, la
 oxidación con KMnO₄ (alcohol 1° → ácido, cadena lateral de
 alquilbenceno → ácido benzoico) se enseña con el KMnO₄ escrito
 **sobre la flecha**, porque no se revisan los subproductos inorgánicos
@@ -2412,7 +2437,7 @@ Ninguno.
 ## 2026-09-17 (55) — Generador: las flechas de Reacciones se veían cortadas en el celular; PCC/CH₂Cl₂ mal etiquetados
 
 ### Contexto
-La docente reportó, con una captura desde el celular, que en las
+El docente reportó, con una captura desde el celular, que en las
 preguntas de Tipo D (Reacciones) la flecha de la ecuación se veía
 "cortada" y que algunos compuestos que en realidad son catalizadores
 aparecían con "+" como si fueran un reactivo consumido.
@@ -2467,7 +2492,7 @@ responsive del Generador completo en una sesión aparte.
 
 ### Contexto
 Después de la sesión anterior (rediseño del dibujo de estructuras en
-Tipo D — Reacciones), la docente pidió una auditoría dedicada que
+Tipo D — Reacciones), el docente pidió una auditoría dedicada que
 revisara, entrada por entrada, que las 145 preguntas del banco
 `BANCO_RXN` fueran correctas químicamente (no solo que se dibujaran
 bien) y sin errores de calidad, y que los cambios importantes
@@ -2575,7 +2600,7 @@ quiere la misma garantía de "cero errores químicos" ahí también.
 
 ### Contexto
 La entrada anterior (52) dejó pendiente a propósito el nombre funcional
-clásico para los 18 éteres agregados esa misma sesión. La docente pidió
+clásico para los 18 éteres agregados esa misma sesión. El docente pidió
 completarlo para que "varias" de esas preguntas también usen la regla
 "(radical)(radical) éter".
 
@@ -2665,7 +2690,7 @@ portada: Oxigenados (339→357), Juego Completo y "En el banco"
 ## 2026-09-16 (51) — Generador: fórmulas desarrolladas completas en las preguntas de reacción (no más abreviaturas ni H₂SO₄ como "reactivo")
 
 ### Contexto
-La docente reportó, con capturas del PDF generado, dos problemas de
+El docente reportó, con capturas del PDF generado, dos problemas de
 calidad en las preguntas de Tipo D (Reacciones) del Generador de
 Ejercicios (`generador.html`):
 1. El H₂SO₄ aparecía escrito como "+ H₂SO₄" (reactivo consumido) en
@@ -2752,7 +2777,7 @@ respaldo.
 
 ### Contexto
 Después de agregar en `juego.html` (entrada 49) las preguntas del
-nombre funcional/clásico de éteres, la docente pidió sumar lo mismo al
+nombre funcional/clásico de éteres, el docente pidió sumar lo mismo al
 banco de datos de `generador.html` (la herramienta de hojas de
 trabajo), que es un archivo y un banco de moléculas totalmente aparte
 del juego.
@@ -2799,7 +2824,7 @@ ejercicios existentes de nombre IUPAC para las mismas moléculas.
 ## 2026-09-16 (49) — Nombre funcional clásico ("(radical)(radical) éter") en Éteres
 
 ### Contexto
-La docente pidió agregar, para los éteres del banco de preguntas,
+El docente pidió agregar, para los éteres del banco de preguntas,
 preguntas que pidan el nombre funcional/clásico ("etil metil éter",
 "dietil éter", etc. — dos radicales en orden alfabético + la palabra
 "éter" aparte, con "di-" cuando son iguales) además del nombre IUPAC
@@ -2901,7 +2926,7 @@ sin bloquearse.
 ## 2026-09-16 (47) — Números de la portada actualizados + 5% más en Oxigenados/Nitrogenados
 
 ### Contexto
-La docente notó que los números de preguntas que se muestran en la
+El docente notó que los números de preguntas que se muestran en la
 portada (tarjetas de cada nivel) estaban muy desactualizados — llevaban
 varias sesiones sin corregirse mientras el banco crecía por detrás — y
 pidió corregirlos, y de paso subirle a los demás grupos (Oxigenados y
@@ -2953,7 +2978,7 @@ problemas, y se simularon 30 partidas de cada nivel (Hidrocarburos,
 Oxigenados, Nitrogenados, Juego Completo) — 2,400 preguntas renderizadas
 en total, cero errores.
 
-### Nota para la docente (no es un cambio, es una observación)
+### Nota para el docente (no es un cambio, es una observación)
 Al revisar el código para corregir el número de "Juego Completo" se
 confirmó que ese modo efectivamente toma preguntas de **todo** el banco
 (incluyendo Reacciones y Constructor, no solo nomenclatura), por eso su
@@ -2968,7 +2993,7 @@ podría sugerir).
 ## 2026-09-16 (46) — Se quita la nota anti-IA (prueba real mostró que no sirve)
 
 ### Contexto
-La docente probó la nota (entradas 44 y 45) en una conversación real con
+El docente probó la nota (entradas 44 y 45) en una conversación real con
 ChatGPT: le subió la foto de una molécula y le preguntó el nombre
 directamente. ChatGPT respondió con el nombre correcto sin problema —
 la nota no lo detuvo. Al preguntarle por qué, ChatGPT explicó que trató
@@ -2978,7 +3003,7 @@ tiene prioridad. Esto confirma con un caso real la limitación que ya se
 había explicado de antemano: es una protección de seguridad estándar en
 las IA (no dejar que texto dentro de una imagen les cambie el
 comportamiento), y por eso mismo la nota nunca iba a frenar el caso más
-común (un estudiante preguntando directo). La docente pidió quitarla.
+común (un estudiante preguntando directo). El docente pidió quitarla.
 
 ### Qué se hizo (`juego.html`)
 Se revirtieron por completo los cambios de las entradas 44 y 45: se
@@ -3009,7 +3034,7 @@ persona, no trucos dentro de la imagen.
 ## 2026-09-16 (45) — Nota anti-IA: menos visible para el estudiante
 
 ### Contexto
-La docente pidió que la nota agregada en la entrada anterior (44) fuera
+El docente pidió que la nota agregada en la entrada anterior (44) fuera
 más difícil de notar para el estudiante que juega normal, sin dejar de
 ser legible para una IA que procese una foto/captura.
 
@@ -3028,7 +3053,7 @@ sobre la esquina se lee con claridad completa. Se repitió también la
 auditoría de las 1,100 preguntas y las 60 partidas simuladas de
 Hidrocarburos — sin errores.
 
-### Límite importante (ya explicado a la docente)
+### Límite importante (ya explicado al docente)
 No es posible que el texto sea invisible para el estudiante pero visible
 en la foto — una foto captura lo mismo que ve el ojo en pantalla. Este
 ajuste acerca la nota todo lo posible a "difícil de notar" sin cruzar a
@@ -3046,7 +3071,7 @@ pantalla a una pregunta para resolverla con otro dispositivo. Se le
 explicaron dos variantes: (1) inducir a la IA a dar una respuesta falsa
 (una trampa para *detectar* trampa) y (2) pedirle explícitamente que no
 revele la respuesta (una barrera para *prevenir*, sin engañar a la IA).
-La docente eligió la opción más ética: solo la (2).
+El docente eligió la opción más ética: solo la (2).
 
 ### Qué se hizo (`juego.html`)
 - Se agregó un texto pequeño y visible (no oculto) en la parte inferior
@@ -3066,7 +3091,7 @@ La docente eligió la opción más ética: solo la (2).
   normal del estudiante, y el dibujo se ensancha automáticamente si la
   molécula es muy angosta para que el texto nunca quede cortado.
 
-### Limitaciones (importante que la docente las tenga presentes)
+### Limitaciones (importante que el docente las tenga presentes)
 - Solo cubre el **dibujo** de la molécula. El texto de la pregunta y
   las opciones de respuesta siguen siendo texto normal de la página, así
   que un estudiante puede copiarlos y pegarlos en una IA sin necesidad
@@ -3155,7 +3180,7 @@ cambio.
 ## 2026-09-16 (42) — Auditoría completa de la recolección y envío de notas
 
 ### Contexto
-La docente pidió revisar todo `juego.html` en busca de más bugs
+El docente pidió revisar todo `juego.html` en busca de más bugs
 relacionados con cómo se recolectan y envían las notas de los
 estudiantes, después de los hallazgos de sesiones de hoy.
 
@@ -3208,7 +3233,7 @@ correcciones ya aplicadas.
 ## 2026-09-16 (41) — Auditoría completa de la hoja "Registro" + bug de "Aciertos por tema" corrupto
 
 ### Contexto
-La docente pidió seguir revisando si había más sesiones con el patrón de
+El docente pidió seguir revisando si había más sesiones con el patrón de
 "queda atascada". Con permiso de lectura sobre su Google Sheet
 ("Chromanom — Registro de estudiantes"), se descargó y analizó la hoja
 "Registro" completa (1,280 filas, desde el 9 de junio hasta el 15 de
@@ -3273,7 +3298,7 @@ en adelante.
 ## 2026-09-16 (40) — Bug real confirmado: sesiones con 0 respuestas se quedaban en "inicio" para siempre
 
 ### Contexto
-La docente compartió dos filas de la misma estudiante (Valeria Sofía
+El docente compartió dos filas de la misma estudiante (Valeria Sofía
 García Acosta, curso 1103, 14 de septiembre): una sesión normal de
 "Hidrocarburos" (`Trigger: cierre`, 8 preguntas) y, 20 minutos después,
 una sesión de "Compuestos Oxigenados" que quedó SOLO con
@@ -3314,7 +3339,7 @@ funcionando igual que antes.
 ## 2026-09-16 (39) — Investigación de sesiones "cortas": bug menor en timeout + confirmación de datos viejos
 
 ### Contexto
-La docente reportó, sesión por sesión, tres patrones raros en la hoja:
+El docente reportó, sesión por sesión, tres patrones raros en la hoja:
 sesiones de 11 preguntas, sesiones de 8-9 "que cerraban el juego", y una
 estudiante con todo en 0. Compartió una fila concreta de la hoja
 (sesión `h7bme1`, 8 de septiembre, `Trigger: cierre`, `Total: 1`,
@@ -3347,7 +3372,7 @@ funcional, no con el nombre específico de la reacción. Corregido.
 ## 2026-09-15 (38) — La retroalimentación final ahora dice el NOMBRE de la reacción a repasar
 
 ### Contexto
-La docente pidió que, al terminar una partida, la pantalla de resultados
+El docente pidió que, al terminar una partida, la pantalla de resultados
 diga cuáles reacciones (por nombre) o qué grupo funcional repasar — antes,
 si la partida era de "Reacciones", la recomendación mostraba la clave
 interna sin traducir (ej. "rxn_alcanos" en vez de un nombre legible) y,
@@ -3403,7 +3428,7 @@ a mano antes de darlo por bueno.
 ## 2026-09-15 (37) — Banco de reacciones ampliado a 20 por grupo + nitración de alcanos
 
 ### Contexto
-La docente notó que en el modo "Reacciones" del juego solo salían 11
+El docente notó que en el modo "Reacciones" del juego solo salían 11
 preguntas por sesión de práctica de un grupo funcional (en vez de las 20
 que arma cada sesión normal), y pidió ampliar el banco hasta que cada
 grupo funcional tuviera 20 ejercicios de reacción, además de agregar la
@@ -3529,7 +3554,7 @@ en `sendAnalytics`); con la corrección, ambas reintentan y terminan
 guardando el resultado correctamente.
 
 ### Además: regla de nomenclatura de éteres que faltaba (`grupos.html`)
-La docente notó que en el tema de Éteres todas las reglas y ejemplos
+El docente notó que en el tema de Éteres todas las reglas y ejemplos
 mostraban solo la forma con "radicales oxi" (metoxi-, etoxi-, IUPAC
 sustitutivo), pero no explicaban cómo se arma el nombre clásico
 "(radical)-il (radical)-il éter" (ej. "etil metil éter", "metil propil
@@ -3558,7 +3583,7 @@ se cierra), no algo que se pueda arreglar solo con más reintentos.
 ## 2026-09-15 (35) — Verificación completa de las 41 reacciones: 4 bugs más corregidos
 
 ### Contexto
-Después de corregir el bug de `hg-1`, la docente pidió revisar que todo
+Después de corregir el bug de `hg-1`, el docente pidió revisar que todo
 lo demás quedara bien. Se delegó una verificación de solo lectura de las
 41 reacciones (comparando cada tarjeta generada contra sus datos fuente,
 no solo si se veía bien), que encontró 4 problemas reales más.
@@ -3604,7 +3629,7 @@ errores de consola.
 ## 2026-09-15 (34) — Bug: la ecuación neta se metía en el "Paso 1" de SN1
 
 ### Contexto
-La docente preguntó si cada reacción explica bien lo que pasa, en
+El docente preguntó si cada reacción explica bien lo que pasa, en
 lenguaje claro para un estudiante que recién empieza. Antes de responder,
 revisé a fondo cómo quedó `hg-1` (SN1) después del rediseño con tarjetas,
 porque esa reacción tiene una estructura distinta a las demás: en vez de
@@ -3638,7 +3663,7 @@ ecuaciones (`ai-0`, `ai-1`, `ai-2`, `ao-2`, `dv-2`) confirmando que la
 suya SÍ es del tipo "dos reacciones completas" y no tienen este problema.
 Pasada por las 10 pestañas sin errores de consola.
 
-### Respuesta a la pregunta de la docente
+### Respuesta a la pregunta del docente
 Sí — el contenido de "qué sucede en cada reacción" ya se revisó a fondo
 en la auditoría "Chem Student" de una sesión anterior (las 41 reacciones,
 una por una, con la persona de un estudiante de bachillerato que recién
@@ -3660,7 +3685,7 @@ un nucleófilo, qué es δ+, qué es un carbocatión...) pero nunca decían
 cómo se ESCRIBE ese concepto en las ecuaciones — el estudiante entendía la
 idea y después se topaba con "Nu⁻" o "δ+" en una fórmula sin que nadie le
 hubiera dicho que esa es justamente la forma abreviada de lo que ya
-había leído. La docente pidió seguir con explicaciones paso a paso que
+había leído. El docente pidió seguir con explicaciones paso a paso que
 mantengan el rigor químico pero se sientan cercanas.
 
 ### Qué se cambió (`reacciones.html`)
@@ -3697,7 +3722,7 @@ rompe el diseño de la tarjeta.
 ## 2026-09-15 (32) — Se aplican los pendientes de la auditoría de Mayer
 
 ### Contexto
-Después del rediseño estilo Timberlake, la docente pidió seguir con lo
+Después del rediseño estilo Timberlake, el docente pidió seguir con lo
 que había quedado pendiente del informe de la auditoría de diseño
 instruccional (principios de Mayer) de la sesión anterior.
 
@@ -3742,7 +3767,7 @@ Halogenuros, Alquinos) y del recuadro "Condición" ya desaturado.
 ### Pendiente (del informe de Mayer, quedó fuera de esta sesión)
 El puente explícito "esto se escribe así" entre el concepto (ya explicado
 en las tarjetas "Antes de empezar") y su notación (`Nu⁻`, `δ+`, etc.) — es
-una tarea de redacción más que de diseño, para cuando la docente quiera
+una tarea de redacción más que de diseño, para cuando el docente quiera
 retomarla.
 
 ### Sin pasos manuales pendientes
@@ -3753,7 +3778,7 @@ retomarla.
 ## 2026-09-15 (31) — Rediseño estilo libro de texto (Timberlake) en las 41 reacciones
 
 ### Contexto
-La docente mandó dos páginas de su libro de Timberlake (hidrólisis de
+El docente mandó dos páginas de su libro de Timberlake (hidrólisis de
 ésteres y formación de amidas) como referencia de la calidad que quiere:
 moléculas dibujadas con enlaces reales (el C=O parado, con doble línea
 hacia arriba, no "(=O)" en texto), cada molécula en su propio recuadro de
@@ -3765,9 +3790,9 @@ el paso "Condición"), aplicarlo a las 41 reacciones, y fondos claros para
 que los colores de los átomos resalten.
 
 En paralelo se había lanzado una auditoría de diseño instruccional
-(principios de Mayer) pedida por la docente — su informe llegó a mitad de
+(principios de Mayer) pedida por el docente — su informe llegó a mitad de
 esta sesión y aportó dos cosas: confirmó que el problema era sistemático
-(no solo la reacción puntual que la docente había señalado) y encontró un
+(no solo la reacción puntual que el docente había señalado) y encontró un
 bug real de software (no solo de diseño) que se describe abajo.
 
 ### Qué se cambió (`reacciones.html`)
@@ -3827,7 +3852,7 @@ completaron con estructura nueva), más una pasada por las 10 pestañas
 completas confirmando cero errores de consola después de cada cambio.
 
 ### Pendiente (del informe de la auditoría Mayer, no aplicado todavía)
-El informe completo se le compartió a la docente en el chat, no se guardó
+El informe completo se le compartió al docente en el chat, no se guardó
 en el repo. Señaló, además de lo ya corregido acá, que las 10 tarjetas de
 "tipo de reacción" (la cajita al principio de cada pestaña, ej. "Nu:⁻ +
 R−C(δ+)=O → ...") siguen usando notación muy abstracta (Lewis, δ+, R/Nu
@@ -3836,17 +3861,17 @@ a las 41 reacciones por igual — y sugirió ajustes de paleta (el amarillo
 de "Condición" se ve muy saturado, el rojo de "Ácidos Carboxílicos"
 choca con el rojo de error de los quices, dos reacciones más sin dibujo
 en Alcanos/Halogenuros). Queda para una próxima sesión, priorizando según
-lo que decida la docente.
+lo que decida el docente.
 
 ---
 
 ## 2026-09-15 (30) — El paso "Condición" vuelve a mostrar enlaces dibujados, no paréntesis
 
 ### Contexto
-La docente recargó la página y siguió viendo el paso "Condición" del
+El docente recargó la página y siguió viendo el paso "Condición" del
 resumen de 3 pasos como puro texto plano ("CH₃-CH₂-CH₃ + Cl₂ / —[hν /
 Δ]—→ / CH₃-CH(Cl)-CH₃ + HCl"): dijo que no se ve como una reacción, que
-los colores no ayudan, y sobre todo que ella no enseña con notación entre
+los colores no ayudan, y sobre todo que él no enseña con notación entre
 paréntesis como "CH(Cl)" — en el tablero dibuja los enlaces arriba y
 abajo, y quiere que la página haga lo mismo.
 
@@ -3854,7 +3879,7 @@ Esto expone un error de la sesión anterior: para arreglar el problema de
 texto de condición encimado (sesión 27) quité los mini-dibujos de
 estructura de este paso porque salían diminutos y desvanecidos, dejando
 solo la ecuación en texto — pero el texto usa notación semidesarrollada
-con paréntesis, que es justo lo que la docente no quiere. La solución
+con paréntesis, que es justo lo que el docente no quiere. La solución
 correcta no era quitar el dibujo, sino arreglar su tamaño.
 
 ### Qué se cambió (`reacciones.html`)
@@ -3870,13 +3895,13 @@ como cloruro de ácido + nucleófilo), se mantiene el texto como respaldo.
 
 ### Verificación
 Probado con Playwright en escritorio y celular en Halogenación de alcanos
-(el caso que reportó la docente) — ya se ven los enlaces dibujados, sin
+(el caso que reportó el docente) — ya se ven los enlaces dibujados, sin
 paréntesis. Se revisó también un caso sin dibujo disponible (cloruros de
 ácido) para confirmar que el respaldo en texto sigue funcionando. Pasada
 completa por las 10 pestañas sin errores de consola.
 
 ### Pendiente
-La docente señaló, además, que el fondo amarillo con letra roja/marrón de
+El docente señaló, además, que el fondo amarillo con letra roja/marrón de
 este paso "no se ve como un libro de texto", y que la tarjeta de
 introducción de cada tipo de reacción (ej. "Nu:⁻ + R-C(δ+)=O → ...") es
 demasiado abstracta/técnica y desconectada para estudiantes de
@@ -3891,7 +3916,7 @@ ciegas, para no hacer y deshacer.
 ## 2026-09-15 (29) — Última inconsistencia visual: `cb-1` y `ac-1` sin ecuación
 
 ### Contexto
-Tras el resumen del informe de Chem Student, la docente pidió aplicar las
+Tras el resumen del informe de Chem Student, el docente pidió aplicar las
 correcciones a nivel visual antes de que los estudiantes empiecen a
 repasar, y specíficamente: como la sección de Aromáticos quedó calificada
 como "la mejor lograda", buscar qué la hace así y aplicar esa misma lógica
@@ -3947,7 +3972,7 @@ persona, que navegó la página con Playwright (escritorio y celular) y leyó
 cada mecanismo paso a paso como si fuera la primera vez que ve el tema.
 
 El informe completo de Chem Student (con el detalle de las 41 reacciones)
-se le compartió a la docente en el chat; no se guardó como archivo del
+se le compartió al docente en el chat; no se guardó como archivo del
 repo porque es un documento de una sola revisión, no contenido del sitio.
 
 De los hallazgos, uno resultó ser un falso positivo: el auditor reportó
@@ -3997,7 +4022,7 @@ ahí y se ve, pero estorba menos.
   una inconsistencia menor, no un error. Se dejó así.
 - La sugerencia de agregar un dibujo de la geometría anti-periplanar en
   `hg-2` (E2) — es una mejora visual más grande (un diagrama 3D nuevo), no
-  una corrección puntual; queda para una sesión aparte si la docente la
+  una corrección puntual; queda para una sesión aparte si el docente la
   quiere.
 
 ### Verificación
@@ -4016,7 +4041,7 @@ cambio queda activo en cuanto se hace push a `main`.
 ## 2026-09-15 (27) — Colores consistentes reactivo↔producto, flechas animadas y legibilidad en `reacciones.html`
 
 ### Contexto
-La docente estaba revisando `reacciones.html` (repasando las reacciones
+El docente estaba revisando `reacciones.html` (repasando las reacciones
 antes de usarlas con estudiantes) y señaló, con la Hidrohalogenación como
 ejemplo concreto, que el color del HX no se notaba y no tenía relación con
 el color del H y el X ya puestos en el producto — el estudiante no podía
@@ -4110,7 +4135,7 @@ hace push a `main`.
 ## 2026-09-11 (26) — Ofuscar las respuestas correctas en el código fuente de `juego.html`
 
 ### Contexto
-La docente preguntó si los estudiantes podían ver las respuestas correctas
+El docente preguntó si los estudiantes podían ver las respuestas correctas
 mirando el código fuente del juego (Ctrl+U). Confirmé que sí: todo el banco
 de preguntas vive como texto plano en el JS del propio `juego.html`, con el
 nombre correcto directamente en campos como `ans`, `accepted`, `expl`,
@@ -4191,7 +4216,7 @@ del cliente, ya explicado arriba. No hace falta ningún paso de despliegue:
 
 ### Contexto
 Después de corregir la regla de "Éteres cíclicos: prefijo oxa−" en la
-sesión anterior (que hasta entonces mostraba mal el ejemplo), la docente
+sesión anterior (que hasta entonces mostraba mal el ejemplo), el docente
 pidió específicamente que el 1,4-dioxano se quedara dentro de esa regla,
 con un ejemplo claro y su nomenclatura explicada paso a paso — a diferencia
 de la sesión anterior en `generador.html`, donde se había sacado el dioxano
@@ -4226,7 +4251,7 @@ directo por GitHub Pages.
 ## 2026-09-10 (24) — Corregir el ejemplo de "Éteres cíclicos: prefijo oxa−" en Grupos
 
 ### Contexto
-La docente encontró que en `grupos.html`, en el tema Éteres, la regla 5
+El docente encontró que en `grupos.html`, en el tema Éteres, la regla 5
 ("Éteres cíclicos: prefijo oxa−") explicaba correctamente que el −O− del
 anillo reemplaza un −CH₂− (ciclopropano→oxaciclopropano,
 ciclopentano→oxaciclopentano/tetrahidrofurano), pero el ejemplo visual que
@@ -4263,7 +4288,7 @@ directo por GitHub Pages.
 ## 2026-09-10 (23) — Las estructuras del PDF ya no salen diminutas en algunos ejercicios
 
 ### Contexto
-La docente compartió capturas de una hoja generada en PDF: en el ejercicio 2
+El docente compartió capturas de una hoja generada en PDF: en el ejercicio 2
 la estructura salía casi ilegible (muy pequeña), y además sobraba bastante
 espacio en blanco al final de las hojas.
 
@@ -4315,7 +4340,7 @@ Ninguno de fondo. No hace falta ningún paso de despliegue:
 ## 2026-09-10 (22) — Reemplazar el 1,4-dioxano por oxirano en Éteres
 
 ### Contexto
-Tras la auditoría de nomenclatura de la sesión anterior, la docente señaló
+Tras la auditoría de nomenclatura de la sesión anterior, el docente señaló
 que el 1,4-dioxano (aunque nombrado correctamente) es un compuesto raro para
 introducir éteres cíclicos: su nombre no muestra la cantidad de carbonos de
 forma reconocible (viene de "oxano", no de una raíz como "et-/prop-/but-"),
@@ -4404,7 +4429,7 @@ sirve directo por GitHub Pages.
 
 ### Contexto
 Tras la auditoría de `teoria.html`/`juego.html` (ver "Hallazgo crítico" del
-informe de esa sesión), la docente pidió corregir todo empezando por esto:
+informe de esa sesión), el docente pidió corregir todo empezando por esto:
 `juego.html` tenía un objeto `STUDENTS` con 177 pares código→nombre completo
 real, embebido en el HTML que sirve GitHub Pages — visible para cualquiera
 con "ver código fuente", sin iniciar sesión, y conservado además en el
@@ -4432,7 +4457,7 @@ historial de git de un repositorio público.
 
 ### Verificación (antes de dar por resuelto)
 Con Playwright, contra un backend simulado (no se tocó el Apps Script real
-de la docente en esta prueba):
+del docente en esta prueba):
 - Código válido → muestra el nombre y el curso correctos, y el panel de
   progreso ("el cálculo") se sigue llenando igual que antes.
 - Código inexistente → mismo mensaje de siempre.
@@ -4465,14 +4490,14 @@ de la docente en esta prueba):
    archivo actual no los borra de commits anteriores del repositorio. Si el
    repositorio es público, purgar ese historial es una decisión aparte
    (reescribir historia es una operación delicada) — dejarlo pendiente de
-   que la docente decida cómo proceder.
+   que el docente decida cómo proceder.
 
 ---
 
 ## 2026-09-10 (19) — Hoja impresa/PDF: una sola columna, tamaño carta y estructuras más grandes
 
 ### Contexto
-La docente descargó una hoja del Generador y notó que algunas
+El docente descargó una hoja del Generador y notó que algunas
 moléculas se veían muy pequeñas y que, aunque la doble columna se veía
 bien en pantalla, al imprimir/exportar a PDF los SVG no se
 redimensionaban bien y las tablas de Análisis MDEC (Tipo C) se
@@ -4539,7 +4564,7 @@ CSS, así que ambos quedan corregidos con este cambio.
 ## 2026-09-10 (18) — Auditoría de ortografía y nomenclatura IUPAC en todo el sitio
 
 ### Contexto
-La docente pidió revisar la ortografía de las 7 páginas del sitio
+El docente pidió revisar la ortografía de las 7 páginas del sitio
 (nomenclatura IUPAC correcta y español de Colombia, incluido el texto
 que se lee en voz alta), a raíz del typo de "Aldeídos" que encontró.
 Lancé una auditoría en segundo plano sobre las 7 páginas; esta entrada
@@ -4625,7 +4650,7 @@ Ninguno especial — solo push a `main`, no se tocó
 Al revisar el typo de "Aldeídos" de la entrada anterior, encontré (sin
 buscarlo) que la página a veces se recarga sola justo después de
 abrirla, lo que puede borrar checkboxes recién marcados. Se lo conté a
-la docente y pidió que lo revisara.
+el docente y pidió que lo revisara.
 
 ### La causa (reproducida con Playwright antes de tocar nada)
 Con un perfil de navegador nuevo (simula el celular/computador de un
@@ -4708,7 +4733,7 @@ Aparte encontré, sin buscarlo, que la página se recarga sola poco
 después de cargar (por el mecanismo normal de actualización del
 Service Worker en `pwa-install.js`: cuando se activa una versión nueva,
 hace `location.reload()`). Si esto coincide con el momento en que el
-estudiante o la docente está marcando casillas, se le borra toda la
+estudiante o el docente está marcando casillas, se le borra toda la
 configuración sin aviso. No lo toqué porque no era lo que se pidió en
 esta sesión, pero vale la pena revisarlo aparte si se sigue reportando
 que "se desmarcan" casillas solas.
@@ -4718,7 +4743,7 @@ que "se desmarcan" casillas solas.
 ## 2026-09-10 (15) — Completar la corrección "Aldeídos" → "Aldehídos" en reacciones.html
 
 ### Contexto
-Sesión aparte que atendió el mismo reporte de la docente (captura del
+Sesión aparte que atendió el mismo reporte del docente (captura del
 Generador de Ejercicios con "Aldeídos" en vez de "Aldehídos"). Al
 revisar el repositorio completo con Playwright, encontré que la entrada
 (14) ya había corregido las 2 apariciones en `generador.html`, pero el
@@ -4745,7 +4770,7 @@ cierra el punto específico de `reacciones.html` que quedó señalado ahí.
 ## 2026-09-10 (14) — Corrección ortográfica: "Aldeídos" → "Aldehídos"
 
 ### Contexto
-La docente pidió revisar la ortografía de todo el sitio (nomenclatura
+El docente pidió revisar la ortografía de todo el sitio (nomenclatura
 IUPAC correcta y español de Colombia, incluido el texto que se lee en
 voz alta). Mandó una captura de `generador.html` señalando el error.
 Lancé además una revisión más amplia del resto del sitio en segundo
@@ -4775,7 +4800,7 @@ entrada aparte con lo que arroje esa revisión.
 ## 2026-09-10 (13) — Portada lenta y pesada: logo gigante incrustado duplicado
 
 ### Contexto
-La docente reportó que la portada del juego se sentía muy pesada y
+El docente reportó que la portada del juego se sentía muy pesada y
 lenta, tardaba en dejar hacer scroll.
 
 ### La causa (reproducida antes de tocar nada)
@@ -4841,7 +4866,7 @@ recalcular nada. GitHub Pages sirve los archivos directo.
 ## 2026-09-10 (12) — Tope explícito de 5.0 en la Nota
 
 ### Contexto
-Al revisar la fórmula nueva de la entrada anterior (11), la docente
+Al revisar la fórmula nueva de la entrada anterior (11), el docente
 pidió dejar explícito que la Nota nunca debe pasar de 5.0, el máximo de
 la escala.
 
@@ -4874,7 +4899,7 @@ Mismos dos pasos de siempre, por separado:
 
 ### Contexto
 Al explicarle la fórmula de la Nota (la de la sesión anterior, con
-"factor de sesiones" con tope en 1), la docente hizo notar un problema:
+"factor de sesiones" con tope en 1), el docente hizo notar un problema:
 ya tiene estudiantes que jugaron más de las 22 sesiones esperadas y
 todavía queda más de un mes de periodo — con el tope en 1, esos
 estudiantes dejaban de ver subir su nota por seguir practicando, lo cual
@@ -4933,7 +4958,7 @@ de siempre, por separado:
 ## 2026-09-09 (10) — Rediseño del menú de la portada: todos los modos visibles
 
 ### Contexto
-La docente notó que "Constructor por Familia" y "Practicar por Grupo
+El docente notó que "Constructor por Familia" y "Practicar por Grupo
 Funcional" quedaban muy escondidos: eran menús desplegables (`<details>`)
 mucho más chicos que las 6 tarjetas principales, y varios estudiantes ni
 se daban cuenta de que existían. Pidió una reorganización para que se
@@ -4986,7 +5011,7 @@ se rompió.
 ## 2026-09-09 (9) — Reintento automático al registrar que un estudiante entró a jugar
 
 ### Contexto
-La docente reportó que una estudiante que practicó **solo alcanos** le dijo
+El docente reportó que una estudiante que practicó **solo alcanos** le dijo
 que "no se registró", y al revisar la hoja "Registro" no aparece ninguna
 sesión de ella con ese grupo.
 
@@ -4999,7 +5024,7 @@ elige un nivel, ANTES de responder cualquier pregunta):
 
 - Cuando termina una partida, si el envío a la hoja falla, el estudiante
   ve un aviso grande ("⚠️ No se pudo guardar tu partida") con un botón
-  para reintentar — así ella (o la docente) se entera si algo salió mal.
+  para reintentar — así el estudiante (o el docente) se entera si algo salió mal.
 - Pero el envío de "entró a jugar" no tenía nada de eso: un solo intento,
   sin reintento y sin ningún aviso si fallaba. Si justo en ese momento
   hubo un tropiezo de wifi (típico en un salón con muchos celulares
@@ -5037,7 +5062,7 @@ como "(anónimo)", no con su nombre, y no aparece al buscarla por nombre).
 ### Pendientes
 - Ninguno de código. Cambio solo de `juego.html`, no requiere
   redesplegar ni recalcular nada — basta con el push a `main`.
-- Pendiente de la docente: confirmar con la estudiante si terminó la
+- Pendiente del docente: confirmar con la estudiante si terminó la
   práctica y vio la pantalla de resultados, o si jugó en modo libre —
   ayudaría a confirmar si este cambio resuelve el caso reportado.
 
@@ -5047,7 +5072,7 @@ como "(anónimo)", no con su nombre, y no aparece al buscarla por nombre).
 
 ### Contexto
 Después de agregar las 37 estructuras nuevas de la entrada anterior (7),
-la docente notó que a esos compuestos no les aparecía el botón para
+el docente notó que a esos compuestos no les aparecía el botón para
 alternar entre "⬡ Esqueletal" y "— Semidesarrollada" que sí tienen los
 compuestos antiguos, y pidió agregarlo.
 
@@ -5082,7 +5107,7 @@ fórmula semidesarrollada se ve correcta (por ejemplo, heptan-2-ona).
 ## 2026-09-09 (7) — 50 preguntas de nomenclatura por cada grupo funcional
 
 ### Contexto
-La docente pidió aumentar el banco de preguntas de nomenclatura IUPAC:
+El docente pidió aumentar el banco de preguntas de nomenclatura IUPAC:
 que cada grupo funcional individual (alquenos, alquinos, alcoholes,
 cetonas, aldehídos, ácidos, ésteres, éteres, amidas, nitrilos) llegue a
 **50 preguntas** en su práctica, dejando intactos los que ya tenían 50 o
@@ -5153,7 +5178,7 @@ moléculas se agregaron en paquetes de 4 preguntas cada una.
 ### Contexto
 Tras confirmar que las prácticas por grupo funcional, constructor por
 familia y reacciones por grupo ya contaban como sesión para el periodo
-(sesión anterior), la docente pidió dos cosas más:
+(sesión anterior), el docente pidió dos cosas más:
 1. Que esas 3 categorías de práctica también aparezcan desglosadas en la
    hoja "Estadísticas" (como ya pasa con Hidrocarburos/Oxigenados/
    Nitrogenados/Juego Completo).
@@ -5239,7 +5264,7 @@ partida.
 ## 2026-09-08 (5) — El "% de acierto en el periodo" salía en blanco (aclaración: redesplegar ≠ recalcular)
 
 ### Contexto
-Tras redesplegar el `.gs` con el % de acierto del periodo, la docente
+Tras redesplegar el `.gs` con el % de acierto del periodo, el docente
 reportó (con captura) que la tarjeta mostraba bien las fechas, sesiones y
 preguntas del periodo, pero el % de acierto salía vacío (un "%" suelto,
 sin número).
@@ -5268,7 +5293,7 @@ el símbolo suelto.
   vacío).
 
 ### Pendiente
-- La docente debe volver a ejecutar `recalcularAhora()` desde el editor de
+- El docente debe volver a ejecutar `recalcularAhora()` desde el editor de
   Apps Script (▶ Ejecutar) — o esperar al disparador automático de 30
   min — para que la hoja "Estadísticas" termine de escribir la columna
   "% Acierto en el periodo" con el código ya desplegado. **A partir de
@@ -5282,7 +5307,7 @@ el símbolo suelto.
 
 ### Contexto
 Tras conectar sesiones/preguntas del periodo hacia la tarjeta del
-estudiante, la docente pidió dos cosas más: que también se vea el **%
+estudiante, el docente pidió dos cosas más: que también se vea el **%
 de acierto dentro del periodo** (no solo el histórico), y que las
 **fechas del periodo** (10 de agosto al 30 de octubre) aparezcan en la
 tarjeta para que el estudiante sepa a qué rango corresponden esos datos.
@@ -5322,9 +5347,9 @@ tarjeta para que el estudiante sepa a qué rango corresponden esos datos.
 
 ### Contexto
 La sesión anterior agregó "Sesiones en el periodo" y "Preguntas en el
-periodo" a la hoja "Estadísticas" (para la docente), pero la tarjeta de
+periodo" a la hoja "Estadísticas" (para el docente), pero la tarjeta de
 progreso que ve el ESTUDIANTE al entrar con su código seguía mostrando solo
-el total histórico — la docente probó tras redesplegar y recalcular, y la
+el total histórico — el docente probó tras redesplegar y recalcular, y la
 tarjeta del estudiante no había cambiado. Faltaba conectar esos dos datos
 nuevos hacia el frontend: `handleProgreso_()` solo leía las primeras 6
 columnas de "Estadísticas" y nunca los exponía.
@@ -5340,7 +5365,7 @@ columnas de "Estadísticas" y nunca los exponía.
   periodo vigente, más la Nota de juego, que ya era del periodo). Si el
   `.gs` desplegado todavía fuera una versión vieja sin estos dos campos,
   se muestra "0" en vez de "undefined" — no revienta ni queda a medias.
-- Confirmado con la docente que el periodo configurado (10 de agosto al
+- Confirmado con el docente que el periodo configurado (10 de agosto al
   30 de octubre de 2026) ya coincide exactamente con
   `FECHA_INICIO_PERIODO`/`FECHA_FIN_PERIODO` en el `.gs` — no hizo falta
   ajustar esas fechas.
@@ -5360,7 +5385,7 @@ columnas de "Estadísticas" y nunca los exponía.
 ## 2026-09-08 (2) — Sesiones y preguntas del periodo en la hoja "Estadísticas"
 
 ### Contexto
-La docente pidió que la hoja "Estadísticas" muestre, además del total
+El docente pidió que la hoja "Estadísticas" muestre, además del total
 histórico de siempre, cuántas veces ha ingresado cada estudiante y cuántas
 preguntas ha respondido **dentro del periodo académico vigente**
 (`FECHA_INICIO_PERIODO`/`FECHA_FIN_PERIODO`, ya usadas para la Nota de
@@ -5397,7 +5422,7 @@ en periodos anteriores.
 ## 2026-09-08 — El progreso personal se quedaba en "–" o mostraba 0 durante clase
 
 ### Contexto
-La docente reportó que hoy, con el curso completo jugando, el recuadro de
+El docente reportó que hoy, con el curso completo jugando, el recuadro de
 progreso (sesiones/preguntas/% acierto/nota) que se agregó ayer se quedaba
 en rayitas mucho tiempo o terminaba mostrando 0 para todos, cuando ayer
 funcionó bien. No se había tocado nada del `.gs` ni de `juego.html` hoy.
@@ -5446,7 +5471,7 @@ Sesión larga enfocada en tres frentes: (1) endurecer el backend de
 analíticas para que nunca se pierda una partida por un error transitorio,
 (2) corregir bugs reales de calificación de respuestas reportados por
 estudiantes, y (3) rediseñar cómo se identifica el estudiante al entrar al
-juego, a pedido de la docente, siguiendo el patrón usado en el proyecto
+juego, a pedido del docente, siguiendo el patrón usado en el proyecto
 hermano `ionom`.
 
 ### Backend — `chromanom-analytics.gs`
@@ -5496,7 +5521,7 @@ hermano `ionom`.
   (`gameActive`, `_iniciandoPartida`) con liberación automática a los 15s
   por si algo queda inconsistente.
 
-### Rediseño del ingreso de estudiante (a pedido de la docente)
+### Rediseño del ingreso de estudiante (a pedido del docente)
 - Reemplazado el flujo de dos modales (código → progreso) por un panel fijo
   en la portada, igual al patrón de `hbarcenasm863.github.io/ionom`: se
   ingresa el código una sola vez (el curso se deduce de los primeros 4
@@ -5522,7 +5547,7 @@ hermano `ionom`.
 - Cada cambio a `chromanom-analytics.gs` requiere redesplegar manualmente
   en el editor de Apps Script (Implementar → Administrar implementaciones
   → Nueva versión) — no se sirve solo por estar en el repositorio.
-- Se entregó a la docente un prompt para replicar en `ionom` la parte de
+- Se entregó al docente un prompt para replicar en `ionom` la parte de
   analíticas (sesiones/preguntas/% acierto/nota) sobre su panel de código
   inline, que en ese repo ya existía pero sin esa información.
 

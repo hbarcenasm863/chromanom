@@ -308,7 +308,7 @@
   // que tome control de la pestaña ya abierta, aunque no haya ninguna versión
   // previa que "actualizar"). Sin este guard, cualquier primera visita
   // recargaba la página sola a los pocos cientos de ms de abrirla — si el
-  // estudiante o la docente ya habían empezado a marcar algo, se les borraba.
+  // estudiante o el docente ya habían empezado a marcar algo, se les borraba.
   let reloading = false;
   let updateConfirmedByUser = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
