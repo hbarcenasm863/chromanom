@@ -40,10 +40,16 @@
   --cn-serif:'Fraunces',Georgia,serif;
   --cn-sans:'Outfit','Segoe UI',system-ui,sans-serif;
   --cn-mono:'JetBrains Mono','Courier New',monospace;
+  /* Rosa del método para TEXTO (④ grupo funcional): #9a4a78 da ≥4,5:1
+     también sobre el fondo rosado claro (#fce8f4). Este archivo se carga
+     después del <style> de cada página, así que manda en todo el sitio. */
+  --c4t:#9a4a78;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
 html{-webkit-text-size-adjust:100%}
+/* Los botones y campos no heredan la fuente por defecto (salían en Arial). */
+button,input,select,textarea{font-family:inherit}
 body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 :focus-visible{outline:3px solid var(--cn-brand)!important;outline-offset:2px}
 ::selection{background:#cfe6f7;color:var(--cn-tx)}
@@ -66,7 +72,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .site-nav .nav-links a{color:var(--cn-tx2)!important;font-weight:600!important;font-size:.8rem!important;padding:8px 12px!important;border-radius:var(--cn-r-s)!important;min-height:40px}
 .site-nav .nav-links a:hover{background:var(--cn-surf2)!important;color:var(--cn-tx)!important}
 .site-nav .nav-links a.active{background:var(--cn-brand-l)!important;color:var(--cn-brand-d)!important}
-#pwa-install-btn{background:var(--cn-brand)!important;border:none!important;color:#fff!important;border-radius:var(--cn-r-s)!important;padding:8px 14px!important;font-weight:700!important;margin-left:6px}
+#pwa-install-btn{background:var(--cn-brand)!important;border:none!important;color:#fff!important;border-radius:var(--cn-r-s)!important;padding:8px 14px!important;font-weight:700!important;margin-left:6px;min-height:44px!important}
 #pwa-install-btn:hover{background:var(--cn-brand-d)!important}
 @media (max-width:1100px) and (min-width:641px){
   .site-nav .nav-links a span.full{display:none}
@@ -85,7 +91,7 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .cn-chip.r{color:#0e7490;border-color:#0891b2;background:#ecfeff}
 .cn-chip.c{color:#14532d;border-color:#166534;background:#f0fdf4}
 .cn-chip.i{color:#92400e;border-color:#b45309;background:#fffbeb}
-.cn-chip.g{color:#A0527F;border-color:#CC79A7;background:#fdf2f8}
+.cn-chip.g{color:#9a4a78;border-color:#CC79A7;background:#fdf2f8}
 
 /* ── Botones ──────────────────────────────────────────────────────────── */
 .cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 20px;border-radius:var(--cn-r-s);font-family:var(--cn-sans);font-weight:700;font-size:.92rem;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:background .15s,color .15s,border-color .15s,transform .15s,box-shadow .15s;line-height:1.2}
@@ -113,11 +119,11 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .cn-page-head.cn-in{max-width:none;padding:28px 0 18px;margin:0 0 18px;border-bottom:1px solid var(--cn-brd)}
 @media (max-width:640px){.cn-page-head.cn-in{padding:18px 0 14px}}
 
-/* ── Fondo premium: degradado suave + marca de agua de moléculas MDEC ────
+/* ── Fondo premium: degradado suave + marca de agua de moléculas ─────────
    1) body: degradado muy tenue con el azul de la marca y toques de los
       colores del método en las esquinas (fijo al hacer scroll).
    2) #cn-mol-bg (lo inserta site-ui.js): mosaico de moléculas reales en
-      esqueletal (fondo-moleculas.svg, trazo fino con nodos en los carbonos,
+      fórmula esquelética (fondo-moleculas.svg, trazo fino con nodos en los carbonos,
       distintos tamaños para dar profundidad). Se ve con más fuerza en los
       bordes y se desvanece hacia el centro, donde está el texto.
    Regla: UNA sola capa del mosaico — dos copias encimadas hacían que las
@@ -135,8 +141,10 @@ body{
   position:fixed;inset:0;
   background:url(fondo-moleculas.svg) left -40px top 10px/780px auto repeat;
   opacity:.5;z-index:-1;pointer-events:none;
-  -webkit-mask-image:radial-gradient(ellipse 55% 60% at 50% 48%,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 45%,#000 100%);
-          mask-image:radial-gradient(ellipse 55% 60% at 50% 48%,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 45%,#000 100%);
+  /* Franja central ancha y casi transparente (titulares, logo, botones);
+     las moléculas recuperan fuerza solo cerca de los bordes. */
+  -webkit-mask-image:radial-gradient(ellipse 68% 72% at 50% 44%,rgba(0,0,0,.05) 0%,rgba(0,0,0,.1) 52%,rgba(0,0,0,.55) 74%,#000 100%);
+          mask-image:radial-gradient(ellipse 68% 72% at 50% 44%,rgba(0,0,0,.05) 0%,rgba(0,0,0,.1) 52%,rgba(0,0,0,.55) 74%,#000 100%);
 }
 @media (max-width:640px){
   #cn-mol-bg{opacity:.32;background-size:560px auto;background-position:left -30px top 10px;

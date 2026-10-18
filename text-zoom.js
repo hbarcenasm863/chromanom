@@ -28,29 +28,27 @@
   function injectUI(){
     var style=document.createElement('style');
     style.textContent=
-      /* Semitransparente en reposo para no tapar texto/diagramas al hacer scroll
-         (sobre todo en celular, donde queda encima del contenido) — recupera
-         opacidad completa al tocarlo o pasar el mouse. */
+      /* Opaco siempre: semitransparente se leía mal ("115%" gris claro).
+         En celular (≤640px) no flota: pasa al menú "Más" de site-ui.js. */
       '#text-zoom-widget{position:fixed;bottom:18px;right:18px;z-index:999;'+
         'display:flex;align-items:center;gap:2px;'+
-        'background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.75);'+
+        'background:rgba(255,255,255,.96);border:1px solid #dfe7ef;'+
         'border-radius:100px;padding:5px;'+
         '-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);'+
         'box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 6px 18px rgba(26,110,168,.16);'+
         'font-family:Outfit,system-ui,sans-serif;'+
-        'opacity:.55;transition:opacity .2s ease}'+
-      '#text-zoom-widget:hover,#text-zoom-widget:focus-within,#text-zoom-widget:active{opacity:1}'+
-      '#text-zoom-widget button{width:30px;height:30px;border-radius:50%;border:none;'+
-        'background:rgba(255,255,255,.65);color:#0d2d42;font-weight:800;cursor:pointer;'+
-        'display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;'+
+        'opacity:1}'+
+      '#text-zoom-widget button{width:42px;height:42px;border-radius:50%;border:none;'+
+        'background:#f1f5f9;color:#0d2d42;font-weight:800;cursor:pointer;font-family:inherit;'+
+        'display:flex;align-items:center;justify-content:center;font-size:15px;line-height:1;'+
         'transition:background .15s,color .15s,transform .15s cubic-bezier(.34,1.56,.64,1)}'+
-      '#text-zoom-widget button:hover:not(:disabled){background:#CC79A7;color:#fff;transform:scale(1.08)}'+
+      '#text-zoom-widget button:hover:not(:disabled){background:#1a6ea8;color:#fff;transform:scale(1.08)}'+
       '#text-zoom-widget button:active:not(:disabled){transform:scale(.92)}'+
       '#text-zoom-widget button:disabled{opacity:.35;cursor:default}'+
-      '#tz-label{font-size:11px;font-weight:700;color:#3a5568;min-width:32px;text-align:center;'+
+      '#tz-label{font-size:13px;font-weight:700;color:#0d2233;min-width:40px;text-align:center;'+
         'font-family:"JetBrains Mono",monospace;user-select:none}'+
       '@media(max-width:480px){#text-zoom-widget{bottom:12px;right:12px}'+
-        '#text-zoom-widget button{width:27px;height:27px;font-size:12px}}'+
+        '#text-zoom-widget button{width:40px;height:40px;font-size:14px}}'+
       '@media print{#text-zoom-widget{display:none}}';
     document.head.appendChild(style);
 
@@ -62,7 +60,7 @@
       '<button type="button" id="tz-minus" aria-label="Reducir tamaño de texto" title="Reducir texto">A−</button>'+
       '<span id="tz-label" aria-live="polite"></span>'+
       '<button type="button" id="tz-plus" aria-label="Aumentar tamaño de texto" title="Aumentar texto">A+</button>'+
-      '<button type="button" id="tz-reset" aria-label="Restablecer tamaño de texto" title="Restablecer (100%)">↺</button>';
+      '<button type="button" id="tz-reset" aria-label="Restablecer tamaño de texto" title="Restablecer (115%)">↺</button>';
     document.body.appendChild(wrap);
 
     document.getElementById('tz-minus').addEventListener('click',function(){ applyZoom(getZoom()-STEP); });

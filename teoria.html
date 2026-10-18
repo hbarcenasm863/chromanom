@@ -24,7 +24,7 @@
   --c1t:#0e7490;  /* teal oscuro */
   --c2t:#14532d;  /* verde oscuro */
   --c3t:#92400e;  /* dorado oscuro */
-  --c4t:#A0527F;  /* magenta oscuro 5.2:1 */
+  --c4t:#9a4a78;  /* rosa oscuro: ≥4,5:1 también sobre el fondo rosado */
   --err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
   --bg:#f6fafe;--surf:#fff;--brd:#d0e6f5;
   --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
@@ -88,9 +88,9 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 
 /* EXAMPLE NAV */
 .ex-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.ex-btn{padding:7px 16px;border:2px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .2s}
-.ex-btn:hover{border-color:var(--c4);color:var(--c4)}
-.ex-btn.active{background:var(--c4);border-color:var(--c4);color:#fff;font-weight:700}
+.ex-btn{min-height:44px;padding:7px 16px;border:2px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .2s}
+.ex-btn:hover{border-color:var(--cn-brand);color:var(--cn-brand-d)}
+.ex-btn.active{background:var(--cn-brand);border-color:var(--cn-brand);color:#fff;font-weight:700}
 
 /* EXAMPLE CARD */
 .ex-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:28px;display:none}
@@ -132,10 +132,11 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 .steps-row{display:flex;gap:0;margin-bottom:18px;border-radius:var(--rs);overflow:hidden;border:2px solid var(--brd)}
 .step-tab{flex:1;padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s;border-right:1px solid var(--brd);font-size:.7rem;font-weight:700;color:var(--dimmer);background:#f0ede6}
 .step-tab:last-child{border-right:none}
-.step-tab.r.on{background:var(--c1);color:#fff}
-.step-tab.c.on{background:var(--c2t);color:#fff}
-.step-tab.i.on{background:var(--c3t);color:#fff}
-.step-tab.g.on{background:var(--c4t);color:#fff}
+.step-tab.on{background:var(--cn-brand-l);color:var(--cn-brand-d);box-shadow:inset 0 -4px 0 var(--cn-brand)}
+.step-tab.r.on{box-shadow:inset 0 -4px 0 var(--c1)}
+.step-tab.c.on{box-shadow:inset 0 -4px 0 var(--c2)}
+.step-tab.i.on{box-shadow:inset 0 -4px 0 var(--c3)}
+.step-tab.g.on{box-shadow:inset 0 -4px 0 var(--c4)}
 .step-tab:hover:not(.on){background:var(--bg);color:var(--tx)}
 .step-num{font-size:.55rem;display:block;opacity:.7;margin-bottom:2px}
 
@@ -171,26 +172,23 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 
 /* CONTROLS */
 .controls{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
-.btn-p,.btn-n,.btn-a{padding:9px 18px;border-radius:var(--rs);font-family:var(--sans);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;border:none}
+.btn-p,.btn-n,.btn-a{min-height:44px;padding:9px 18px;border-radius:var(--rs);font-family:var(--sans);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;border:none}
 .btn-p{background:var(--bg);border:2px solid var(--brd);color:var(--dim)}
-.btn-p:hover{border-color:var(--c4);color:var(--c4)}
-.btn-n{background:var(--c4);color:#fff}
-.btn-n:hover{background:#a84f87;transform:translateY(-1px)}
-.btn-a{background:var(--tx);color:#fff}
-.btn-a:hover{background:#333}
-.btn-a.on{background:var(--c1)}
+.btn-p:hover{border-color:var(--cn-brand);color:var(--cn-brand-d)}
+.btn-n{background:var(--cn-brand);color:#fff}
+.btn-n:hover{background:var(--cn-brand-d);transform:translateY(-1px)}
+.btn-a{background:var(--surf);border:2px solid var(--cn-brand)!important;color:var(--cn-brand-d)}
+.btn-a:hover{background:var(--cn-brand-l)}
+.btn-a.on{background:var(--cn-brand-l)}
 
 /* RULES */
 .rule-card{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh);margin-bottom:10px;display:flex;gap:14px}
 .rule-n{min-width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;font-weight:700;flex-shrink:0}
-.rule-n.r{background:var(--c1);color:#fff}.rule-n.c{background:var(--c2);color:#fff}
-.rule-n.i{background:var(--c3);color:#fff}.rule-n.g{background:var(--c4);color:#fff}
-.rule-body strong{font-size:.88rem;display:block;margin-bottom:3px}
-.rule-body.r strong{color:var(--c1t)}.rule-body.c strong{color:var(--c2t)}
-.rule-body.i strong{color:var(--c3t)}.rule-body.g strong{color:var(--c4t)}
+/* Los números de los pasos no son partes del nombre: un solo color de marca */
+.rule-n{background:var(--cn-brand);color:#fff}
+.rule-body > strong{font-size:.88rem;display:block;margin-bottom:3px;color:var(--cn-brand-d)}
 .rule-body p{font-size:.81rem;color:var(--dim);line-height:1.68}
 
-footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-size:.77rem;color:var(--dimmer);margin-top:16px}
 
 @media(max-width:580px){
   .parts-grid{grid-template-columns:1fr}
@@ -210,7 +208,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .prac-head-info{flex:1;min-width:0}
 .prac-sec-lbl{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-bottom:3px}
 .prac-mol-name{font-family:var(--serif);font-size:1rem;font-weight:700;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.prac-x{background:rgba(255,255,255,.12);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+.prac-x{background:rgba(255,255,255,.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .prac-x:hover{background:rgba(255,255,255,.26)}
 .prac-mol-area{background:#fafaf8;border-bottom:2px solid var(--brd);min-height:130px;display:flex;align-items:center;justify-content:center;padding:16px 20px}
 .prac-mol-area svg{width:100%;max-height:120px;overflow:visible}
@@ -219,25 +217,25 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .prac-step-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .prac-badge{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:50%;color:#fff;font-family:var(--serif);font-size:.85rem;font-weight:700;flex-shrink:0}
 .prac-step-title{font-size:.9rem;font-weight:700;color:var(--tx)}
-.prac-expl{font-size:.8rem;color:var(--dim);line-height:1.65;margin-bottom:12px;padding:10px 14px;background:var(--c4b);border-radius:var(--rs);border-left:3px solid var(--c4)}
+.prac-expl{font-size:.8rem;color:var(--dim);line-height:1.65;margin-bottom:12px;padding:10px 14px;background:var(--cn-brand-l);border-radius:var(--rs);border-left:3px solid var(--cn-brand)}
 .prac-q{font-size:.86rem;font-weight:600;color:var(--tx);margin-bottom:11px}
 .prac-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
-.prac-opt{padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-size:.81rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
-.prac-opt:hover:not(:disabled){border-color:var(--c4);color:var(--c4t)}
-.prac-opt.correct{border-color:var(--c3)!important;background:var(--c3b)!important;color:var(--c3t)!important;font-weight:700}
+.prac-opt{min-height:44px;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);background:var(--surf);color:var(--dim);font-size:.81rem;cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.prac-opt:hover:not(:disabled){border-color:var(--cn-brand);color:var(--cn-brand-d)}
+.prac-opt.correct{border-color:var(--cn-ok)!important;background:var(--cn-ok-l)!important;color:var(--cn-ok)!important;font-weight:700}
 .prac-opt.wrong{border-color:var(--err)!important;background:var(--errb)!important;color:var(--errt)!important}
 .prac-write-row{display:none;gap:8px;margin-bottom:10px;align-items:center}
 .prac-write-row.show{display:flex}
 .prac-inp{flex:1;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);font-family:var(--mono);font-size:.85rem;outline:none;transition:border-color .15s}
-.prac-inp:focus{border-color:var(--c4)}
-.prac-inp.ok{border-color:var(--c3);background:var(--c3b)}
+.prac-inp:focus{border-color:var(--cn-brand)}
+.prac-inp.ok{border-color:var(--cn-ok);background:var(--cn-ok-l)}
 .prac-inp.err{border-color:var(--err);background:var(--errb)}
-.prac-check{padding:10px 18px;background:var(--c4);color:#fff;border:none;border-radius:var(--rs);font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0}
-.prac-check:hover:not(:disabled){background:var(--c4t)}
+.prac-check{min-height:44px;padding:10px 18px;background:var(--cn-brand);color:#fff;border:none;border-radius:var(--rs);font-weight:700;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0}
+.prac-check:hover:not(:disabled){background:var(--cn-brand-d)}
 .prac-check:disabled{opacity:.5;cursor:not-allowed}
 .prac-fb{font-size:.8rem;line-height:1.65;padding:10px 14px;border-radius:var(--rs);margin-bottom:14px;display:none}
 .prac-fb.show{display:block}
-.prac-fb.ok{background:var(--c3b);border-left:3px solid var(--c3);color:var(--c3t)}
+.prac-fb.ok{background:var(--cn-ok-l);border-left:3px solid var(--cn-ok);color:var(--cn-ok)}
 .prac-fb.err{background:var(--errb);border-left:3px solid var(--err);color:var(--errt)}
 .prac-nb{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:10px 14px;background:var(--bg);border-radius:var(--rs)}
 .prac-nb-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dimmer);width:100%;margin-bottom:3px}
@@ -249,17 +247,17 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .pnp.g{color:var(--c4t);border-color:var(--c4);background:var(--c4b)}
 .pnp.p{color:#6d28d9;border-color:#7c3aed;background:#ede9fe}
 .prac-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:2px solid var(--brd);background:#fafaf8;border-radius:0 0 var(--r) var(--r)}
-.prac-nav{padding:8px 18px;border:2px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
-.prac-nav:hover:not(:disabled){border-color:var(--c4);color:var(--c4t)}
+.prac-nav{min-height:44px;padding:8px 18px;border:2px solid var(--brd);border-radius:100px;background:var(--surf);color:var(--dim);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s}
+.prac-nav:hover:not(:disabled){border-color:var(--cn-brand);color:var(--cn-brand-d)}
 .prac-nav:disabled{opacity:.3;cursor:not-allowed}
-.prac-nav.go{background:var(--c4);border-color:var(--c4);color:#fff}
-.prac-nav.go:hover:not(:disabled){background:var(--c4t)}
+.prac-nav.go{background:var(--cn-brand);border-color:var(--cn-brand);color:#fff}
+.prac-nav.go:hover:not(:disabled){background:var(--cn-brand-d)}
 .prac-dots-row{display:flex;gap:6px;align-items:center}
 .prac-dot{width:8px;height:8px;border-radius:50%;background:var(--brd);transition:all .2s}
-.prac-dot.done{background:var(--c3)}
-.prac-dot.cur{background:var(--c4);transform:scale(1.35)}
+.prac-dot.done{background:var(--cn-ok)}
+.prac-dot.cur{background:var(--cn-brand);transform:scale(1.35)}
 /* Trigger button */
-.prac-trigger{padding:5px 14px;border-radius:100px;border:2px solid #1a6ea8;background:transparent;color:#0d4a73;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;flex-shrink:0}
+.prac-trigger{min-height:44px;padding:5px 14px;border-radius:100px;border:2px solid #1a6ea8;background:transparent;color:#0d4a73;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;flex-shrink:0}
 .prac-trigger:hover{background:#1a6ea8;color:#fff}
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .sec-hdr .slbl{margin-bottom:0}
@@ -280,7 +278,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 .toc-nav::-webkit-scrollbar{display:none}
 .toc-pill{
   display:inline-flex;align-items:center;gap:5px;
-  padding:5px 14px;border-radius:100px;
+  min-height:44px;padding:5px 14px;border-radius:100px;
   border:2px solid var(--brd);background:var(--surf);
   color:var(--dim);font-size:.72rem;font-weight:600;
   cursor:pointer;text-decoration:none;
@@ -322,8 +320,13 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   .site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}
 }
 .view-toggle-t{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
-.vt-btn-t{background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--dim);transition:all .15s}
-.vt-btn-t.active{background:var(--c1);border-color:var(--c1);color:#fff}
+.vt-btn-t{min-height:44px;background:#fff;border:1.5px solid var(--brd);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--dim);transition:all .15s}
+.vt-btn-t.active{background:var(--cn-brand);border-color:var(--cn-brand);color:#fff}
+/* Aviso del método: se escribe ①②③④, se resuelve desde ④ */
+.orden-note{background:var(--surf);border:2px solid var(--brd);border-left:5px solid var(--cn-brand);border-radius:var(--rs);padding:14px 18px;margin:-18px 0 32px;font-size:.84rem;color:var(--dim);line-height:1.65}
+.orden-note strong{color:var(--tx)}
+.btn-pdf{display:flex;align-items:center;gap:6px;min-height:44px;padding:7px 15px;background:var(--cn-brand);color:#fff;border:none;border-radius:20px;font-size:.76rem;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:background .15s}
+.btn-pdf:hover{background:var(--cn-brand-d)}
 
 </style>
 <link rel="stylesheet" href="chromanom.css">
@@ -363,9 +366,9 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div id="esquema"></div>
 <div class="intro-card">
   <h1>Todo nombre orgánico tiene <span>4 partes</span></h1>
-  <p>Siempre en el mismo orden. Aprende a identificar cada parte y podrás nombrar — o descifrar — cualquier compuesto orgánico, sin importar el grupo funcional.</p>
+  <p>Se escriben siempre en el orden ①②③④ (excepción: en ácidos, ésteres y haluros de ácido una palabra del grupo funcional va aparte — <em>ácido</em> …, … <em>de metilo</em>, <em>cloruro de</em> …). Aprende a identificar cada parte y podrás nombrar — o descifrar — cualquier compuesto orgánico, sin importar el grupo funcional.</p>
   <div class="four-tags">
-    <div class="ft r">① Ramificaciones</div>
+    <div class="ft r">① Sustituyentes</div>
     <div class="ft c">② Cadena principal</div>
     <div class="ft i">③ Insaturaciones</div>
     <div class="ft g">④ Grupo funcional</div>
@@ -376,25 +379,26 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="parts-grid">
   <div class="part-card r" data-num="1">
     <div class="part-num">Parte ①</div>
-    <div class="part-title">Ramificaciones</div>
-    <div class="part-desc">Cadenas laterales unidas a la principal. Se nombran con su localizador y nombre (metil, etil…) en <strong>orden alfabético</strong>. Los prefijos di-, tri- no cuentan para el orden.</div>
+    <div class="part-title">Sustituyentes</div>
+    <div class="part-desc">Todo lo que cuelga de la cadena principal y se nombra como prefijo: ramificaciones alquilo (metil, etil…), halógenos (cloro, bromo…), alcoxi (metoxi, etoxi…), nitro, amino… Se nombran con su localizador en <strong>orden alfabético</strong>. Los prefijos di-, tri- no cuentan para el orden.</div>
   </div>
   <div class="part-card c" data-num="2">
     <div class="part-num">Parte ②</div>
     <div class="part-title">Cadena principal</div>
-    <div class="part-desc">La cadena más larga que contiene el grupo funcional. Determina el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
+    <div class="part-desc">La cadena más larga que contiene el grupo funcional (si dos empatan: la de más enlaces múltiples y luego la de más sustituyentes). Determina el <strong>prefijo</strong>: met, et, prop, but, pent, hex, hept, oct, non, dec…</div>
   </div>
   <div class="part-card i" data-num="3">
     <div class="part-num">Parte ③</div>
     <div class="part-title">Insaturaciones</div>
-    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Se indica el localizador del primer carbono que los forma. Dobles + triples = eninos.</div>
+    <div class="part-desc">Dobles <strong>(en-)</strong> o triples <strong>(in-)</strong> enlaces. Se indica el localizador del primer carbono que los forma. Dobles + triples = eninos (si hay empate al numerar, el doble enlace recibe el número menor).</div>
   </div>
   <div class="part-card g" data-num="4">
     <div class="part-num">Parte ④</div>
     <div class="part-title">Grupo funcional</div>
-    <div class="part-desc">Determina el <strong>sufijo</strong> final y tiene la máxima prioridad. Consulta la tabla de jerarquía cuando hay varios grupos funcionales en la misma molécula.</div>
+    <div class="part-desc">Determina el <strong>sufijo</strong> final y tiene la máxima prioridad. Consulta la tabla de jerarquía cuando hay varios grupos funcionales en la misma molécula. En los hidrocarburos el sufijo es solo <strong>-o</strong>: <em>-an-</em> (③) + <em>-o</em> (④) = <em>-ano</em>.</div>
   </div>
 </div>
+<div class="orden-note">✍️ El nombre se <strong>escribe</strong> en el orden ① ② ③ ④, pero se <strong>resuelve</strong> empezando por ④: primero identificas el grupo funcional, luego eliges y numeras la cadena, y al final nombras los sustituyentes.</div>
 
 <div id="ejemplos"></div>
 <div class="slbl">Paso a paso — selecciona un ejemplo</div>
@@ -437,19 +441,19 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(0,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(0,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(0,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(0,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(0,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Ramificación: etilo en C5</strong><p>Hay una cadena lateral de 2 carbonos (etilo) unida al C5. Se nombra con su localizador y va al inicio del nombre.</p></div></div>
-    <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 9 carbonos → non</strong><p>La cadena más larga que contiene el COOH tiene 9 carbonos. El C del COOH es siempre C1. Prefijo: <strong>non</strong>.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sustituyente: etilo en C5</strong><p>Hay una cadena lateral de 2 carbonos (etilo) unida al C5. Se nombra con su localizador y va al inicio del nombre.</p></div></div>
+    <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 9 carbonos → non</strong><p>La cadena más larga que contiene el COOH tiene 9 carbonos. En cadenas abiertas, el C del COOH es siempre C1. Prefijo: <strong>non</strong>.</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Doble enlace en C6 → 6-en</strong><p>Las dos líneas paralelas = doble enlace C=C entre C6 y C7. IUPAC: localizador antes del sufijo → <strong>non-6-enoico</strong>.</p></div></div>
     <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Grupo funcional: ácido carboxílico → ácido…oico</strong><p>El −COOH tiene la máxima prioridad. Siempre es C1. El nombre empieza con <strong>ácido</strong> y termina en <strong>oico</strong>.</p></div></div>
     <div class="name-build">
       <div class="nb-lbl">Nombre en construcción</div>
       <div class="np show" id="e0p"><span class="nw pre">ácido </span><span class="nl g">Grupo func.</span></div>
-      <div class="np" id="e0r"><span class="nw r">5-etil</span><span class="nl r">Ramificación</span></div>
+      <div class="np" id="e0r"><span class="nw r">5-etil</span><span class="nl r">Sustituyente</span></div>
       <div class="np" id="e0c"><span class="nw c">non</span><span class="nl c">Cadena 9C</span></div>
       <div class="np" id="e0i"><span class="nw i">6-en</span><span class="nl i">Doble enlace C6</span></div>
       <div class="np" id="e0g"><span class="nw g">oico</span><span class="nl g">Grupo func.</span></div>
@@ -476,18 +480,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(1,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(1,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(1,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(1,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(1,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Ramificación: metilo en C2</strong><p>La línea vertical es una cadena lateral de 1 carbono (metilo). Está en C2 de la cadena principal.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sustituyente: metilo en C2</strong><p>La línea vertical es una cadena lateral de 1 carbono (metilo). Está en C2 de la cadena principal.</p></div></div>
     <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 5 carbonos → pent</strong><p>5 carbonos en la cadena más larga. Se numera desde el extremo más cercano al metilo → metilo en C2 (localizador más bajo).</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Sin insaturaciones → an</strong><p>No hay dobles ni triples enlaces. La cadena es saturada. La terminación del hidruro progenitor es <strong>an</strong>.</p></div></div>
-    <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Sin grupo funcional → alcano</strong><p>Sin grupo funcional, el compuesto es un alcano. Terminación: <strong>o</strong>. Nombre completo: <strong>2-metilpentano</strong>.</p></div></div>
+    <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Sin grupo funcional → alcano</strong><p>Sin grupo funcional, el compuesto es un hidrocarburo (aquí, un alcano). Terminación: <strong>-o</strong> (-an- + -o = -ano). Nombre completo: <strong>2-metilpentano</strong>.</p></div></div>
     <div class="name-build">
       <div class="nb-lbl">Nombre en construcción</div>
-      <div class="np" id="e1r"><span class="nw r">2-metil</span><span class="nl r">Ramificación</span></div>
+      <div class="np" id="e1r"><span class="nw r">2-metil</span><span class="nl r">Sustituyente</span></div>
       <div class="np" id="e1c"><span class="nw c">pent</span><span class="nl c">Cadena 5C</span></div>
       <div class="np" id="e1i"><span class="nw i">an</span><span class="nl i">Sin insatur.</span></div>
       <div class="np" id="e1g"><span class="nw g">o</span><span class="nl g">Alcano</span></div>
@@ -513,12 +517,12 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(2,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(2,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(2,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(2,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(2,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sin ramificaciones</strong><p>No hay cadenas laterales. La molécula es completamente lineal.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sin sustituyentes</strong><p>No hay cadenas laterales ni otros grupos como prefijo. La molécula es completamente lineal.</p></div></div>
     <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 4 carbonos → but</strong><p>4 carbonos en cadena lineal. Se numera desde el extremo más cercano al doble enlace → doble enlace en C1.</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Doble enlace en C1 → 1-en</strong><p>Las dos líneas paralelas = doble enlace C=C entre C1 y C2. IUPAC: localizador va antes del sufijo → but-<strong>1-en</strong>o.</p></div></div>
     <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Sin grupo funcional → terminación o</strong><p>No hay grupo funcional adicional. El alqueno termina simplemente en <strong>o</strong>. Nombre: <strong>but-1-eno</strong>.</p></div></div>
@@ -553,12 +557,12 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(3,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(3,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(3,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(3,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(3,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sin ramificaciones</strong><p>No hay cadenas laterales. La cadena principal es completamente lineal.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sin sustituyentes</strong><p>No hay cadenas laterales ni otros grupos como prefijo. La cadena principal es completamente lineal.</p></div></div>
     <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 5 carbonos → pent</strong><p>5 carbonos en la cadena continua. Se numera desde el extremo más cercano al C=O para darle el localizador más bajo.</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Sin insaturaciones en la cadena → an</strong><p>El C=O es el grupo funcional (cetona), no una insaturación de la cadena. La cadena es saturada → terminación <strong>an</strong>.</p></div></div>
     <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Grupo funcional: cetona en C2 → 2-ona</strong><p>C=O en posición interior = cetona. IUPAC: localizador antes del sufijo → <strong>pentan-2-ona</strong>.</p></div></div>
@@ -598,18 +602,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(4,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(4,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(4,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(4,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(4,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Ramificaciones: 3-etil y 2-metil</strong><p>Etilo (2C) en C3 y metilo (1C) en C2. Orden <strong>alfabético</strong>: etil (e) antes que metil (m). Los prefijos di-, tri- no cuentan para el orden.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sustituyentes: 3-etil y 2-metil</strong><p>Etilo (2C) en C3 y metilo (1C) en C2. Orden <strong>alfabético</strong>: etil (e) antes que metil (m). Los prefijos di-, tri- no cuentan para el orden.</p></div></div>
     <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 5 carbonos → pent</strong><p>La cadena más larga con el −OH tiene 5 carbonos. El −OH tiene prioridad → la numeración empieza en el extremo del OH = C1.</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Sin insaturaciones → an</strong><p>No hay dobles ni triples enlaces. La cadena principal es saturada. Terminación: <strong>an</strong>.</p></div></div>
     <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Grupo funcional: alcohol en C1 → 1-ol</strong><p>El −OH es un alcohol, prioridad en numeración. IUPAC: localizador antes del sufijo → <strong>pentan-1-ol</strong>.</p></div></div>
     <div class="name-build">
       <div class="nb-lbl">Nombre en construcción</div>
-      <div class="np" id="e4r"><span class="nw r">3-etil-2-metil</span><span class="nl r">Ramificaciones</span></div>
+      <div class="np" id="e4r"><span class="nw r">3-etil-2-metil</span><span class="nl r">Sustituyentes</span></div>
       <div class="np" id="e4c"><span class="nw c">pent</span><span class="nl c">Cadena 5C</span></div>
       <div class="np" id="e4i"><span class="nw i">an</span><span class="nl i">Sin insatur.</span></div>
       <div class="np" id="e4g"><span class="nw g">1-ol</span><span class="nl g">Alcohol C1</span></div>
@@ -644,18 +648,18 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   </div>
   <div class="steps-area">
     <div class="steps-row">
-      <div class="step-tab r" onclick="S(5,0)"><span class="step-num">① PARTE</span>Ramif.</div>
+      <div class="step-tab r" onclick="S(5,0)"><span class="step-num">① PARTE</span>Sust.</div>
       <div class="step-tab c" onclick="S(5,1)"><span class="step-num">② PARTE</span>Cadena</div>
       <div class="step-tab i" onclick="S(5,2)"><span class="step-num">③ PARTE</span>Insatur.</div>
       <div class="step-tab g" onclick="S(5,3)"><span class="step-num">④ PARTE</span>Grupo func.</div>
     </div>
-    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Ramificación: 5-metil</strong><p>Hay un metilo (1C) en C5 de la cadena principal. Es la única ramificación: <strong>5-metil</strong>.</p></div></div>
-    <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 6 carbonos → hex</strong><p>La cadena más larga que contiene el −OH y el doble enlace tiene 6C. El −OH tiene prioridad en la numeración → queda en C2.</p></div></div>
+    <div class="step-desc r"><div class="step-icon">①</div><div class="step-text"><strong>Sustituyente: 5-metil</strong><p>Hay un metilo (1C) en C5 de la cadena principal. Es el único sustituyente: <strong>5-metil</strong>.</p></div></div>
+    <div class="step-desc c"><div class="step-icon">②</div><div class="step-text"><strong>Cadena principal: 6 carbonos → hex</strong><p>La cadena más larga que contiene el −OH tiene 6C (y además incluye el doble enlace). El −OH tiene prioridad en la numeración → queda en C2.</p></div></div>
     <div class="step-desc i"><div class="step-icon">③</div><div class="step-text"><strong>Doble enlace en C3 → 3-en</strong><p>El doble enlace C=C está entre C3 y C4. El localizador es el primer carbono = <strong>3-en</strong>. IUPAC: antes del sufijo.</p></div></div>
     <div class="step-desc g"><div class="step-icon">④</div><div class="step-text"><strong>Grupo funcional: alcohol en C2 → 2-ol</strong><p>El −OH es un alcohol con máxima prioridad. IUPAC: localizador antes del sufijo → <strong>5-metilhex-3-en-2-ol</strong>.</p></div></div>
     <div class="name-build">
       <div class="nb-lbl">Nombre en construcción — ¡Las 4 partes presentes!</div>
-      <div class="np" id="e5r"><span class="nw r">5-metil</span><span class="nl r">Ramificación</span></div>
+      <div class="np" id="e5r"><span class="nw r">5-metil</span><span class="nl r">Sustituyente</span></div>
       <div class="np" id="e5c"><span class="nw c">hex</span><span class="nl c">Cadena 6C</span></div>
       <div class="np" id="e5i"><span class="nw i">3-en</span><span class="nl i">Doble enlace C3</span></div>
       <div class="np" id="e5g"><span class="nw g">2-ol</span><span class="nl g">Alcohol C2</span></div>
@@ -670,17 +674,17 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 
 <div id="algoritmo"></div>
 <div class="slbl" style="margin-top:8px">El algoritmo de 5 pasos</div>
-<div class="rule-card"><div class="rule-n g">1</div><div class="rule-body g"><strong>Identificar el grupo funcional principal</strong><p>El que aparece más arriba en la tabla de jerarquía (IUPAC) determina el sufijo y la numeración. Si no hay grupo funcional → alcano.</p></div></div>
-<div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Determinar la cadena principal</strong><p>La más larga que contenga el grupo funcional e insaturaciones. La longitud tiene prioridad sobre las insaturaciones (IUPAC).</p></div></div>
-<div class="rule-card"><div class="rule-n g">3</div><div class="rule-body g"><strong>Numerar la cadena</strong><p>Desde el extremo que dé el localizador más bajo al grupo funcional. COOH y CHO siempre son C1. IUPAC: localizador inmediatamente antes del sufijo: <strong>butan-2-ol</strong>, no 2-butanol.</p></div></div>
-<div class="rule-card"><div class="rule-n r">4</div><div class="rule-body r"><strong>Identificar ramificaciones e insaturaciones</strong><p>Ramificaciones en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino).</p></div></div>
-<div class="rule-card"><div class="rule-n c">5</div><div class="rule-body c"><strong>Construir el nombre</strong><p>Ramificaciones (alfabético) + prefijo cadena + insaturaciones + sufijo grupo funcional. Todo junto, siempre en ese orden.</p></div></div>
+<div class="rule-card"><div class="rule-n">1</div><div class="rule-body"><strong>Identificar el grupo funcional principal (④)</strong><p>El que aparece más arriba en la tabla de jerarquía (IUPAC) determina el sufijo y la numeración. Si no hay grupo funcional → hidrocarburo (alcano, alqueno o alquino). Por eso el nombre se <strong>resuelve</strong> empezando por ④, aunque se <strong>escribe</strong> en el orden ①②③④.</p></div></div>
+<div class="rule-card"><div class="rule-n">2</div><div class="rule-body"><strong>Determinar la cadena principal (②)</strong><p>La más larga que contenga el grupo funcional. Si dos cadenas empatan en longitud, gana la que tenga más enlaces múltiples (dobles o triples); si siguen empatadas, la que tenga más sustituyentes (IUPAC 2013).</p></div></div>
+<div class="rule-card"><div class="rule-n">3</div><div class="rule-body"><strong>Numerar la cadena</strong><p>Desde el extremo que dé el localizador más bajo al grupo funcional. En cadenas abiertas, COOH y CHO siempre son C1. IUPAC: localizador inmediatamente antes del sufijo: <strong>butan-2-ol</strong> (nombre tradicional: 2-butanol).</p></div></div>
+<div class="rule-card"><div class="rule-n">4</div><div class="rule-body"><strong>Identificar sustituyentes (①) e insaturaciones (③)</strong><p>Sustituyentes en orden <strong>alfabético</strong>. Los prefijos di-, tri-, tetra- no cuentan para el orden. Dobles + triples = eninos: primero los dobles (-en), luego los triples (-ino). Se numera para dar los localizadores más bajos al conjunto de enlaces múltiples; si hay empate, el doble enlace recibe el número menor.</p></div></div>
+<div class="rule-card"><div class="rule-n">5</div><div class="rule-body"><strong>Construir el nombre</strong><p>Sustituyentes (alfabético) + prefijo de cadena + insaturaciones + sufijo del grupo funcional, en ese orden y sin espacios. Excepción: en ácidos, ésteres y haluros de ácido una palabra del grupo funcional va aparte (<em>ácido</em> etanoico, etanoato <em>de metilo</em>, <em>cloruro de</em> etanoílo).</p></div></div>
 
 <div id="tablas"></div>
 <!-- ════════ TABLAS DE REFERENCIA ════════ -->
 <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:32px;margin-bottom:16px">
   <div style="font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)">Tablas de referencia</div>
-  <button onclick="printTables()" style="display:flex;align-items:center;gap:6px;padding:7px 15px;background:var(--c1);color:#fff;border:none;border-radius:20px;font-size:.76rem;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:opacity .15s" onmouseover="this.style.opacity='.82'" onmouseout="this.style.opacity='1'">⬇ Guardar como PDF</button>
+  <button class="btn-pdf" onclick="printTables()">⬇ Guardar como PDF</button>
 </div>
 
 <!-- TABLA 1: PREFIJOS DE CADENA -->
@@ -700,51 +704,51 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">1</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">met-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">1</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">met-</td>
           <td style="padding:8px 14px;color:var(--dim)">metano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">7</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">hept-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">7</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">hept-</td>
           <td style="padding:8px 14px;color:var(--dim)">heptano</td>
         </tr>
         <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">2</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">et-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">2</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">et-</td>
           <td style="padding:8px 14px;color:var(--dim)">etano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">8</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">oct-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">8</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">oct-</td>
           <td style="padding:8px 14px;color:var(--dim)">octano</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">3</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">prop-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">3</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">prop-</td>
           <td style="padding:8px 14px;color:var(--dim)">propano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">9</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">non-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">9</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">non-</td>
           <td style="padding:8px 14px;color:var(--dim)">nonano</td>
         </tr>
         <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">4</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">but-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">4</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">but-</td>
           <td style="padding:8px 14px;color:var(--dim)">butano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">10</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">dec-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">10</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">dec-</td>
           <td style="padding:8px 14px;color:var(--dim)">decano</td>
         </tr>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">5</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">pent-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">5</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">pent-</td>
           <td style="padding:8px 14px;color:var(--dim)">pentano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">11</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">undec-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">11</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">undec-</td>
           <td style="padding:8px 14px;color:var(--dim)">undecano</td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">6</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">hex-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">6</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">hex-</td>
           <td style="padding:8px 14px;color:var(--dim)">hexano</td>
-          <td style="padding:8px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">12</td>
-          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono)">dodec-</td>
+          <td style="padding:8px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">12</td>
+          <td style="padding:8px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">dodec-</td>
           <td style="padding:8px 14px;color:var(--dim)">dodecano</td>
         </tr>
       </tbody>
@@ -766,11 +770,11 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">2</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">di-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">bis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">dicloro, dimetil… / bis(clorometil)</td></tr>
-        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">3</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">tri-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tris-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tricloro, trimetil…</td></tr>
-        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">4</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">tetra-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tetrakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tetracloro…</td></tr>
-        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">5</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">penta-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">pentakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">pentacloro…</td></tr>
-        <tr><td style="padding:7px 14px;color:var(--c3t);font-weight:700;font-family:var(--mono)">6</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--c2t)">hexa-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">hexakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">hexacloro…</td></tr>
+        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">2</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--tx)">di-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">bis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">dicloro, dimetil… / bis(clorometil)</td></tr>
+        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">3</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--tx)">tri-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tris-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tricloro, trimetil…</td></tr>
+        <tr style="border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">4</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--tx)">tetra-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">tetrakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">tetracloro…</td></tr>
+        <tr style="background:#f8f7f4;border-bottom:1px solid var(--brd)"><td style="padding:7px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">5</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--tx)">penta-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">pentakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">pentacloro…</td></tr>
+        <tr><td style="padding:7px 14px;color:var(--dim);font-weight:700;font-family:var(--mono)">6</td><td style="padding:7px 14px;font-weight:700;font-family:var(--mono);color:var(--tx)">hexa-</td><td style="padding:7px 14px;font-family:var(--mono);color:var(--dim)">hexakis-</td><td style="padding:7px 14px;color:var(--dim);font-size:.77rem">hexacloro…</td></tr>
       </tbody>
     </table>
   </div>
@@ -798,7 +802,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    ↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre. Los demás se nombran como sustituyentes usando su nombre secundario.
+    ↑ Mayor prioridad arriba (1 = mayor). El grupo de mayor prioridad determina el sufijo del nombre; los demás se nombran como prefijo (columna «Como sustituyente», parte ①). Alquenos y alquinos comparten el rango 12. Los haluros de alquilo no tienen rango: el halógeno siempre se nombra como prefijo. Es la misma escala que usa el módulo Grupos funcionales.
   </div>
 </div>
 
@@ -811,7 +815,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Cuándo hay empate?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
     A veces <strong style="color:#fcd34d">dos o más cadenas tienen la misma longitud</strong>, o bien dos sentidos de numeración producen el mismo conjunto de localizadores.
-    La IUPAC define <strong style="color:#fcd34d">5 criterios de desempate para elegir la cadena principal</strong> y <strong style="color:#fcd34d">4 criterios para elegir la dirección de numeración</strong>, que se aplican
+    La IUPAC define <strong style="color:#fcd34d">7 criterios para elegir la cadena principal</strong> y <strong style="color:#fcd34d">4 criterios para elegir la dirección de numeración</strong>, que se aplican
     <em>en ese orden</em>: en cuanto uno rompe el empate, se detiene el proceso.
   </p>
 </div>
@@ -820,44 +824,60 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="slbl" style="margin-bottom:10px">Parte A — Desempate para elegir la cadena principal</div>
 
 <div class="rule-card">
-  <div class="rule-n c">A1</div>
-  <div class="rule-body c">
+  <div class="rule-n">A0</div>
+  <div class="rule-body">
+    <strong>Contiene el grupo funcional principal</strong>
+    <p>Antes que nada, la cadena principal debe contener el máximo número de grupos principales (los que dan el sufijo: −OH, C=O, −COOH…). Solo se comparan las cadenas que cumplen esto.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n">A1</div>
+  <div class="rule-body">
     <strong>Mayor número de carbonos en la cadena</strong>
     <p>La cadena más larga gana. Si hay varias cadenas de la misma longitud máxima, pasa al criterio A2. (En la práctica, si existe una única cadena más larga, el desempate termina aquí.)</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n c">A2</div>
-  <div class="rule-body c">
-    <strong>Mayor número de ramificaciones (sustituyentes)</strong>
-    <p>Entre dos cadenas de igual longitud, gana la que tiene <em>más</em> sustituyentes unidos a ella.
-    Ejemplo: si la cadena α tiene 3 ramas y la cadena β tiene 2 ramas, se elige la cadena α.</p>
+  <div class="rule-n">A2</div>
+  <div class="rule-body">
+    <strong>Mayor número de enlaces múltiples</strong>
+    <p>Entre cadenas de igual longitud, gana la que tenga <em>más</em> dobles y triples enlaces (IUPAC 2013: la longitud manda primero; las insaturaciones solo desempatan).</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n c">A3</div>
-  <div class="rule-body c">
-    <strong>Menor conjunto de localizadores de ramificaciones</strong>
-    <p>Si el número de ramificaciones es igual, se comparan los conjuntos de localizadores como sets ordenados de menor a mayor.
+  <div class="rule-n">A3</div>
+  <div class="rule-body">
+    <strong>Mayor número de sustituyentes</strong>
+    <p>Entre dos cadenas de igual longitud, gana la que tiene <em>más</em> sustituyentes unidos a ella.
+    Ejemplo: si la cadena α tiene 3 sustituyentes y la cadena β tiene 2, se elige la cadena α.</p>
+  </div>
+</div>
+
+<div class="rule-card">
+  <div class="rule-n">A4</div>
+  <div class="rule-body">
+    <strong>Menor conjunto de localizadores de los sustituyentes</strong>
+    <p>Si el número de sustituyentes es igual, se comparan los conjuntos de localizadores ordenados de menor a mayor.
     Gana el conjunto con el valor más bajo en la primera posición en que difieran.
     Ejemplo: {2, 3} &lt; {2, 5}, por lo que gana la cadena con localizadores {2, 3}.</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n c">A4</div>
-  <div class="rule-body c">
-    <strong>Ramificaciones menos ramificadas</strong>
-    <p>Si los localizadores también empatan, gana la cadena cuyas ramificaciones sean más sencillas (menos ramificadas).
+  <div class="rule-n">A5</div>
+  <div class="rule-body">
+    <strong>Sustituyentes menos ramificados</strong>
+    <p>Si los localizadores también empatan, gana la cadena cuyos sustituyentes sean más sencillos (menos ramificados).
     Ejemplo: entre una cadena que lleva un propilo y otra que lleva un (1-metiletil) en la misma posición, se prefiere la del propilo.</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n c">A5</div>
-  <div class="rule-body c">
+  <div class="rule-n">A6</div>
+  <div class="rule-body">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
     <p>Si todo lo anterior sigue empatado, se considera el orden alfabético de los nombres de los sustituyentes (sin tener en cuenta los prefijos multiplicativos di-, tri-, etc.).
     El primer sustituyente alfabético debe tener el menor localizador posible.</p>
@@ -868,32 +888,32 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
 <div class="slbl" style="margin-top:24px;margin-bottom:10px">Parte B — Desempate para elegir la dirección de numeración</div>
 
 <div class="rule-card">
-  <div class="rule-n r">B1</div>
-  <div class="rule-body r">
+  <div class="rule-n">B1</div>
+  <div class="rule-body">
     <strong>Menor localizador al grupo funcional principal</strong>
-    <p>El grupo funcional de mayor prioridad (COOH, CHO, C=O, OH, NH₂…) debe recibir el menor localizador posible. Los ácidos carboxílicos y aldehídos terminales siempre son C1; esto resuelve el desempate automáticamente en esos casos.</p>
+    <p>El grupo funcional de mayor prioridad (COOH, CHO, C=O, OH, NH₂…) debe recibir el menor localizador posible. En cadenas abiertas, los ácidos carboxílicos y aldehídos siempre son C1; esto resuelve el desempate automáticamente en esos casos.</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n r">B2</div>
-  <div class="rule-body r">
+  <div class="rule-n">B2</div>
+  <div class="rule-body">
     <strong>Menor localizador al conjunto de insaturaciones</strong>
-    <p>Si el grupo funcional no rompe el empate, se asigna el menor conjunto de localizadores a los dobles y triples enlaces (en conjunto, tratados como un solo set). Gana la dirección que produce el set más bajo comparado posición a posición.</p>
+    <p>Si el grupo funcional no rompe el empate, se asigna el menor conjunto de localizadores a los dobles y triples enlaces (todos juntos, como un solo conjunto). Gana la dirección que produce el conjunto más bajo comparado posición a posición. Si aun así hay empate entre un doble y un triple enlace, el <strong>doble enlace</strong> recibe el localizador menor.</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n r">B3</div>
-  <div class="rule-body r">
+  <div class="rule-n">B3</div>
+  <div class="rule-body">
     <strong>Menor localizador al conjunto de sustituyentes</strong>
-    <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de todas las ramificaciones como un conjunto ordenado. Gana la dirección que produce el conjunto con el menor valor en la primera posición discrepante.</p>
+    <p>Si las insaturaciones no rompen el empate, se comparan los localizadores de todos los sustituyentes como un conjunto ordenado. Gana la dirección que produce el conjunto con el menor valor en la primera posición discrepante.</p>
   </div>
 </div>
 
 <div class="rule-card">
-  <div class="rule-n r">B4</div>
-  <div class="rule-body r">
+  <div class="rule-n">B4</div>
+  <div class="rule-body">
     <strong>Menor localizador al primer sustituyente en orden alfabético</strong>
     <p>Si aún hay empate, el sustituyente citado primero alfabéticamente debe tener el menor localizador posible. Este criterio rara vez se necesita en cadenas simples, pero aparece en moléculas con muchos sustituyentes distintos.</p>
   </div>
@@ -915,10 +935,10 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       </thead>
       <tbody>
         <tr style="border-bottom:1px solid var(--brd)">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c3t)">✓ Correcta</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--cn-ok)">✓ Correcta</td>
           <td style="padding:9px 14px;font-family:var(--mono)">3-etil-<strong>2</strong>-metilpentano</td>
           <td style="padding:9px 14px">{ 2, 3 }</td>
-          <td style="padding:9px 14px;color:var(--c3t);font-size:.78rem">Primera posición: 2 &lt; 3 → este set gana</td>
+          <td style="padding:9px 14px;color:var(--cn-ok);font-size:.78rem">Primera posición: 2 &lt; 3 → este conjunto gana</td>
         </tr>
         <tr>
           <td style="padding:9px 14px;font-weight:700;color:var(--errt)">✗ Incorrecta</td>
@@ -930,19 +950,19 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    Ambas opciones usan la misma cadena de 5 C con los mismos dos sustituyentes; solo cambia el sentido en que se numera. No hay grupo funcional (B1) ni insaturaciones (B2), así que decide el criterio B3: se comparan los sets {2,3} y {3,4} posición a posición — en la primera posición 2 &lt; 3, por lo que se elige <strong>3-etil-2-metilpentano</strong>.
+    Ambas opciones usan la misma cadena de 5 C con los mismos dos sustituyentes; solo cambia el sentido en que se numera. No hay grupo funcional (B1) ni insaturaciones (B2), así que decide el criterio B3: se comparan los conjuntos {2,3} y {3,4} posición a posición — en la primera posición 2 &lt; 3, por lo que se elige <strong>3-etil-2-metilpentano</strong>.
   </div>
 </div>
 
 <div id="comparacion"></div>
 <!-- SECCIÓN: COMPARACIÓN DE NOMENCLATURAS -->
-<div class="slbl" style="margin-top:32px">Comparación de nomenclaturas — IUPAC actual vs. nomenclatura funcional pre-2005</div>
+<div class="slbl" style="margin-top:32px">Comparación de nomenclaturas — IUPAC actual vs. nombres tradicionales y funcionales clásicos</div>
 
 <div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
   <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Por qué cambiaron los nombres?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:620px">
-    La IUPAC actualizó sus recomendaciones en 2013 para eliminar ambigüedades: los nombres triviales como <em style="color:rgba(255,255,255,.5)">acetona</em> o <em style="color:rgba(255,255,255,.5)">éter etílico</em> eran aceptados, pero no eran deducibles de la estructura.
+    Las recomendaciones IUPAC 2013 buscan nombres sin ambigüedad. Algunos nombres tradicionales (<em style="color:rgba(255,255,255,.75)">acetona</em>, <em style="color:rgba(255,255,255,.75)">ácido acético</em>) siguen siendo válidos, pero no se deducen de la estructura.
     La nomenclatura sistemática permite <strong style="color:#fcd34d">construir cualquier nombre desde cero</strong> conociendo solo las reglas.
     En libros y exámenes de bachillerato conviven ambas; aquí encontrarás las equivalencias más frecuentes.
   </p>
@@ -957,29 +977,29 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         <tr style="background:var(--tx);color:#fff">
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Regla</th>
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Pre-2005 / funcional</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre tradicional / funcional clásico</th>
         </tr>
       </thead>
       <tbody>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Posición del localizador</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Posición del localizador</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Antes del sufijo</strong>: butan-<strong>2</strong>-ol, hex-<strong>1</strong>-eno, butan-<strong>2</strong>-ona</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Al inicio: <em>2</em>-butanol, <em>1</em>-hexeno, <em>2</em>-butanona</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Espacios en el nombre</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Nunca</strong>: el nombre es una sola palabra continua</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Permitidos: <em>metil etil cetona</em>, <em>éter etílico</em></td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Espacios en el nombre</td>
+          <td style="padding:9px 14px;font-size:.78rem">En los nombres sustitutivos <strong>no hay espacios</strong>: <span style="font-family:var(--mono)">3-etil-2-metilpentano</span>. Excepciones: ácidos (<em>ácido</em> etanoico), ésteres y sales (etanoato <em>de</em> metilo), haluros de ácido (<em>cloruro de</em> etanoílo) y nombres funcionales clásicos.</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Nombres funcionales clásicos con espacios: <em>etil metil cetona</em>, <em>dietil éter</em></td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Guiones</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Guiones</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Solo entre número y sufijo/prefijo: <strong>but-1-eno</strong>, <strong>2-metil</strong></td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Solo antes del localizador inicial: <em>2-butanol</em></td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-weight:700;color:var(--c1t)">Nombres triviales</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Muy pocos se conservan</strong> (benceno, y algunos como ácido acético o acetona); en clase se usa el nombre sistemático</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Aceptados: <em>acetona</em>, <em>glicerol</em>, <em>cloroformo</em>…</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Nombres tradicionales</td>
+          <td style="padding:9px 14px;font-size:.78rem">Algunos siguen siendo válidos (benceno, ácido acético, acetona); en clase usamos el nombre sistemático porque se deduce de la estructura</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Muy usados: <em>acetona</em>, <em>glicerol</em>, <em>cloroformo</em>…</td>
         </tr>
       </tbody>
     </table>
@@ -994,8 +1014,8 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
       <thead>
         <tr style="background:var(--tx);color:#fff">
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;width:130px">Grupo</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre trivial / pre-2005</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre tradicional / funcional clásico</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre sistemático (el que usamos en clase)</th>
         </tr>
       </thead>
       <tbody id="cmp-body">
@@ -1003,37 +1023,37 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    * Los nombres en cursiva son nombres tradicionales. La IUPAC todavía conserva unos pocos (ácido fórmico, ácido acético, acetona, acetonitrilo), pero en clase usamos el nombre sistemático porque se deduce directamente de la estructura. En bachillerato suelen admitirse ambos.
+    * Los nombres en cursiva son nombres tradicionales o funcionales clásicos (estos últimos, con los grupos alquilo en orden alfabético: etil metil cetona). Algunos tradicionales siguen siendo válidos (ácido fórmico, ácido acético, acetona, acetonitrilo), pero en clase usamos el nombre sistemático porque se deduce directamente de la estructura.
   </div>
 </div>
 
 <div id="sustituyentes"></div>
 <!-- SECCIÓN: SUSTITUYENTES COMPLEJOS -->
-<div class="slbl" style="margin-top:32px">Sustituyentes complejos — IUPAC actual vs. nomenclatura funcional pre-2005</div>
+<div class="slbl" style="margin-top:32px">Sustituyentes complejos — nombre sistemático vs. nombre tradicional</div>
 
 <div style="background:var(--tx);border-radius:var(--r);padding:24px 28px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden">
   <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none"></div>
   <div style="font-family:var(--serif);font-size:1.05rem;font-weight:700;font-style:italic;margin-bottom:8px">¿Qué es un sustituyente complejo?</div>
   <p style="font-size:.84rem;color:rgba(255,255,255,.78);line-height:1.75;max-width:600px">
-    Un <strong style="color:#fcd34d">sustituyente complejo</strong> es aquel cuya cadena es ramificada o cuyo nombre trivial resulta ambiguo.
-    IUPAC (recomendaciones 2013) exige nombrarlo sistemáticamente: el carbono de unión a la cadena principal es <strong style="color:#7dd3fc">C-1</strong> del sustituyente,
+    Un <strong style="color:#fcd34d">sustituyente complejo</strong> es aquel cuya cadena es ramificada.
+    Su nombre sistemático se construye así: el carbono de unión a la cadena principal es <strong style="color:#7dd3fc">C-1</strong> del sustituyente,
     se toma la cadena más larga desde ese punto, el nombre termina en <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">-il</code>
     y se encierra entre paréntesis en el nombre final.
     Ejemplo: <code style="background:rgba(255,255,255,.18);padding:1px 6px;border-radius:3px;font-size:.85em">5-(1-metiletil)nonano</code>
-    (antiguo: <em style="color:rgba(255,255,255,.5)">5-isopropilnonano</em>).
+    (nombre tradicional, también válido: <em style="color:rgba(255,255,255,.75)">5-isopropilnonano</em>).
   </p>
 </div>
 
 <!-- Procedimiento paso a paso -->
 <div class="slbl">Cómo nombrar un sustituyente complejo — paso a paso</div>
-<div class="rule-card"><div class="rule-n r">1</div><div class="rule-body r"><strong>Identificar el carbono de unión</strong><p>El carbono del sustituyente que se une a la cadena principal es C-1. Siempre se numera desde ahí hacia adentro del sustituyente.</p></div></div>
-<div class="rule-card"><div class="rule-n c">2</div><div class="rule-body c"><strong>Buscar la cadena más larga desde C-1</strong><p>Desde el carbono de unión, sigue la cadena continua más larga. Su longitud da el prefijo base: etil (2C), propil (3C), butil (4C)…</p></div></div>
-<div class="rule-card"><div class="rule-n i">3</div><div class="rule-body i"><strong>Nombrar las ramificaciones internas</strong><p>Cualquier cadena lateral dentro del sustituyente recibe su propio localizador según la numeración interna (C-1 = punto de unión). Ejemplo: metilo en C1 y C2 → <strong>1,2-dimetil…</strong></p></div></div>
-<div class="rule-card"><div class="rule-n g">4</div><div class="rule-body g"><strong>Encerrar entre paréntesis en el nombre final</strong><p>El nombre completo del sustituyente va entre paréntesis: <strong>(1,2-dimetilpropil)</strong>. Solo se omiten los paréntesis para sustituyentes simples sin ramificación (metil, etil, propil…).</p></div></div>
-<div class="rule-card"><div class="rule-n r">5</div><div class="rule-body r"><strong>Insertar con localizador en la cadena principal</strong><p>El guion une el localizador con el paréntesis, sin espacios: <strong>5-(1,2-dimetilpropil)nonano</strong>. El nombre completo es una sola palabra.</p></div></div>
+<div class="rule-card"><div class="rule-n">1</div><div class="rule-body"><strong>Identificar el carbono de unión</strong><p>El carbono del sustituyente que se une a la cadena principal es C-1. Siempre se numera desde ahí hacia adentro del sustituyente.</p></div></div>
+<div class="rule-card"><div class="rule-n">2</div><div class="rule-body"><strong>Buscar la cadena más larga desde C-1</strong><p>Desde el carbono de unión, sigue la cadena continua más larga. Su longitud da el prefijo base: etil (2C), propil (3C), butil (4C)…</p></div></div>
+<div class="rule-card"><div class="rule-n">3</div><div class="rule-body"><strong>Nombrar las ramificaciones internas</strong><p>Cualquier cadena lateral dentro del sustituyente recibe su propio localizador según la numeración interna (C-1 = punto de unión). Ejemplo: metilo en C1 y C2 → <strong>1,2-dimetil…</strong></p></div></div>
+<div class="rule-card"><div class="rule-n">4</div><div class="rule-body"><strong>Encerrar entre paréntesis en el nombre final</strong><p>El nombre completo del sustituyente va entre paréntesis: <strong>(1,2-dimetilpropil)</strong>. Solo se omiten los paréntesis para sustituyentes simples sin ramificación (metil, etil, propil…).</p></div></div>
+<div class="rule-card"><div class="rule-n">5</div><div class="rule-body"><strong>Insertar con localizador en la cadena principal</strong><p>El guion une el localizador con el paréntesis, sin espacios: <strong>5-(1,2-dimetilpropil)nonano</strong>.</p></div></div>
 
 <!-- Tabla: reglas de escritura IUPAC vs funcional -->
-<div class="slbl" style="margin-top:24px">Tabla 4 — Reglas de escritura: IUPAC actual vs. nomenclatura funcional (pre-2005)</div>
+<div class="slbl" style="margin-top:24px">Tabla 4 — Reglas de escritura: IUPAC actual vs. nombre tradicional</div>
 <div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:20px">
   <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:.82rem">
@@ -1041,98 +1061,98 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         <tr style="background:var(--tx);color:#fff">
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Aspecto</th>
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">IUPAC actual (2013)</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nomenclatura funcional (pre-2005)</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre tradicional / funcional clásico</th>
         </tr>
       </thead>
       <tbody>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Guiones (−)</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Guiones (−)</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Solo entre localizador y nombre: <strong>2-metil</strong>, <strong>5-(1,2-dimetilpropil)</strong>. El compuesto va todo junto: <strong>3-etilpentano</strong></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Se incluía en el nombre trivial: <em>sec-butil</em>, <em>tert-butil</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Forman parte del nombre tradicional: <em>sec</em>-butil, <em>terc</em>-butil</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Espacios</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><strong>Nunca.</strong> El nombre IUPAC es una sola palabra: <strong>3-etil-2-metilpentano</strong></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Permitidos: <em>metil etil cetona</em>, <em>éter dietílico</em></td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Espacios</td>
+          <td style="padding:9px 14px;font-size:.78rem">En los nombres sustitutivos <strong>no hay espacios</strong>: <span style="font-family:var(--mono)">3-etil-2-metilpentano</span>. Excepciones: ácidos (<em>ácido</em> …), ésteres y sales (… <em>de</em> metilo), haluros de ácido (<em>cloruro de</em> …) y nombres funcionales clásicos.</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Nombres funcionales clásicos: <em>etil metil cetona</em>, <em>dietil éter</em></td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Paréntesis</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Paréntesis</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Obligatorios para sustituyentes ramificados: <strong>5-(1-metiletil)nonano</strong></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Se omitían gracias a los nombres triviales: <em>5-isopropilnonano</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">No hacen falta con el nombre tradicional (también válido): <em>5-isopropilnonano</em></td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Localizadores</td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Localizadores</td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Inmediatamente antes del sufijo: <strong>butan-2-ol</strong>, <strong>hex-1-en-3-ol</strong></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Al inicio: <em>2-butanol</em>, <em>1-hexen-3-ol</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Al inicio (nombre tradicional): <em>2-butanol</em>, <em>1-hexen-3-ol</em></td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-weight:700;color:var(--c4t)">Nombre del sustituyente</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem">Sistemático: <strong>(1-metiletil)</strong>, <strong>(1,1-dimetiletil)</strong></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Trivial aceptado: <em>isopropil</em>, <em>ter-butil</em></td>
+          <td style="padding:9px 14px;font-weight:700;color:var(--tx)">Nombre del sustituyente</td>
+          <td style="padding:9px 14px;font-size:.78rem">Sistemático: <strong>(1-metiletil)</strong> o <strong>propan-2-il</strong>, <strong>(1,1-dimetiletil)</strong>. Ambas formas son válidas; la IUPAC 2013 prefiere la sistemática en nombres oficiales (pero conserva <em>terc</em>-butil como preferido).</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer)">Tradicional (válido): <em>isopropil</em>, <em>terc</em>-butil</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    ℹ En publicaciones y libros de texto pre-2005 es habitual encontrar la nomenclatura funcional. Ambas conviven; en exámenes de bachillerato se suele aceptar la forma funcional, pero la IUPAC es la correcta.
+    ℹ En muchos libros de texto todavía se encuentran nombres tradicionales y funcionales clásicos. Conviene reconocerlos; en esta página escribimos siempre la forma IUPAC actual.
   </div>
 </div>
 
-<!-- Tabla: nombres triviales vs IUPAC -->
-<div class="slbl">Tabla 5 — Sustituyentes: nombre trivial (pre-2005) → nombre IUPAC sistemático</div>
+<!-- Tabla: nombres tradicionales vs IUPAC -->
+<div class="slbl">Tabla 5 — Sustituyentes: nombre tradicional → nombre sistemático</div>
 <div style="background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:20px">
   <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:.82rem">
       <thead>
         <tr style="background:var(--tx);color:#fff">
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre trivial (pre-2005)</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre IUPAC sistemático</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre tradicional</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Nombre sistemático</th>
           <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Estructura (desde C-1)</th>
-          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Orden alfabético</th>
+          <th style="padding:9px 14px;text-align:left;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700">Orden alfabético (tradicional · sistemático)</th>
         </tr>
       </thead>
       <tbody>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isopropil</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1-metiletil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">isopropil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(1-metiletil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1 unido a CH₃ y CH₃ → etilo + metilo en C1</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → «i» · (1-metiletil) → «m»</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isobutil</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(2-metilpropil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">isobutil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(2-metilpropil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1 — C — C(CH₃)— → propilo + metilo en C2</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → «i» · (2-metilpropil) → «m»</td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">sec-butil</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1-metilpropil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">sec-butil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(1-metilpropil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1(CH₃)—C—C— → propilo + metilo en C1</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>sec-</em> <strong>NO</strong> cuenta → ordena por «b»</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>sec-</em> <strong>NO</strong> cuenta → «b» · (1-metilpropil) → «m»</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">ter-butil <em style="font-size:.7rem">(tert-butil)</em></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(1,1-dimetiletil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)"><em>terc</em>-butil <em style="font-size:.7rem">(tert-butil)</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(1,1-dimetiletil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1(CH₃)₂— → etilo + dos metilos en C1</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>tert-</em> <strong>NO</strong> cuenta → ordena por «b»</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>terc-</em> <strong>NO</strong> cuenta → «b» · (1,1-dimetiletil) → «d»</td>
         </tr>
         <tr style="background:#f8f7f4">
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">neopentil</td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(2,2-dimetilpropil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">neopentil</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(2,2-dimetilpropil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1—C(CH₃)₂— → propilo + dos metilos en C2</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)">ordena por «n» (neo sin equivalente IUPAC)</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>neo</em> <strong>SÍ</strong> cuenta → «n» · (2,2-dimetilpropil) → «d»</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c2t)">isopentil <em style="font-size:.7rem">(isoamil)</em></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c3t)">(3-metilbutil)</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">isopentil <em style="font-size:.7rem">(isoamil)</em></td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">(3-metilbutil)</td>
           <td style="padding:9px 14px;font-size:.78rem">C-1—C—C(CH₃)— → butilo + metilo en C3</td>
-          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → ordena por «i»</td>
+          <td style="padding:9px 14px;font-size:.76rem;color:var(--dimmer)"><em>iso</em> <strong>SÍ</strong> cuenta → «i» · (3-metilbutil) → «m»</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    ⚠ La IUPAC 2013 prefiere los nombres sistemáticos entre paréntesis. <strong>isopropil</strong> y <strong>ter-butil</strong> todavía se aceptan en uso general, pero en clase escribe la forma sistemática: (1-metiletil), (1,1-dimetiletil).
+    ⚠ Ambas formas son válidas y se aceptan en los ejercicios: <strong>isopropil</strong> = (1-metiletil), <strong><em>terc</em>-butil</strong> = (1,1-dimetiletil). La IUPAC 2013 prefiere la forma sistemática en nombres oficiales (para isopropil, <em>propan-2-il</em>), aunque conserva <em>terc</em>-butil como nombre preferido. Ojo con el orden alfabético: cambia según la forma que uses.
   </div>
 </div>
 
@@ -1158,7 +1178,7 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
         </tr>
         <tr>
           <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">iso-</td>
-          <td style="padding:9px 14px;text-align:center"><span style="background:#d9ead3;color:#166534;padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">SÍ</span></td>
+          <td style="padding:9px 14px;text-align:center"><span style="background:var(--cn-ok-l);color:var(--cn-ok);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">SÍ</span></td>
           <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>iso</em>butil vs etil → etil antes (e &lt; i)</td>
           <td style="padding:9px 14px;font-size:.78rem">«i» de iso (forma parte del nombre)</td>
         </tr>
@@ -1169,9 +1189,9 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
           <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
         </tr>
         <tr>
-          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)">tert-</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;color:var(--c1t)"><em>terc</em>-</td>
           <td style="padding:9px 14px;text-align:center"><span style="background:var(--errb);color:var(--errt);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700">NO</span></td>
-          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>tert-</em>butil → se ignora «tert-»</td>
+          <td style="padding:9px 14px;font-family:var(--mono);font-size:.78rem"><em>terc</em>-butil → se ignora «terc-»</td>
           <td style="padding:9px 14px;font-size:.78rem">«b» de butil</td>
         </tr>
         <tr style="background:#f8f7f4">
@@ -1184,14 +1204,16 @@ footer{text-align:center;padding:24px 0;border-top:1px solid var(--brd);font-siz
     </table>
   </div>
   <div style="padding:10px 14px;font-size:.75rem;color:var(--dim);background:#fafaf8;border-top:1px solid var(--brd)">
-    Regla mnemotécnica: los prefijos <strong>multiplicadores</strong> (di-, tri-…) y los prefijos <strong>estructurales en cursiva</strong> (<em>sec</em>-, <em>tert</em>-) no cuentan. El prefijo <strong>iso-</strong> es parte del nombre, no un descriptor, por eso sí cuenta.
+    Regla mnemotécnica: los prefijos <strong>multiplicadores</strong> (di-, tri-…) y los prefijos <strong>estructurales en cursiva</strong> (<em>sec</em>-, <em>terc</em>-) no cuentan. El prefijo <strong>iso-</strong> es parte del nombre, no un descriptor, por eso sí cuenta.
   </div>
 </div>
 
 <!-- FOOTER COPYRIGHT -->
+</div><!-- /app -->
+
+<!-- PIE DE PÁGINA: a todo el ancho, fuera del contenedor (igual que en las demás páginas) -->
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
-</div>
 </div>
 
 <script>
@@ -1275,27 +1297,25 @@ function showEx(idx,btn){
 for(let i=0;i<6;i++) render(i);
 
 // ── TABLA 3: Grupos funcionales ──
+// Escala ÚNICA de prioridad del sitio (la misma de grupos.html, 1–13).
+// Alquenos y alquinos comparten el rango 12. Los haluros de alquilo no tienen
+// rango (n:'—'): el halógeno siempre se nombra como prefijo (parte ①).
 const T3=[
-  {n:1, cls:'c1',  name:'Carboxilatos (sales)',  fm:'R−COO⁻',    sf:'-carboxilato de [metal] / -oato de [metal] (ej. etanoato de sodio)',             ss:'carboxilato-'},
-  {n:2, cls:'c1',  name:'Ácidos carboxílicos',   fm:'R−COOH',     sf:'ácido -carboxílico / ácido -oico',      ss:'carboxi-'},
-  {n:3, cls:'c1',  name:'Ésteres',               fm:"R−COOR'",    sf:'-carboxilato de R / -oato de R',        ss:'(R)oxicarbonil-'},
-  {n:4, cls:'c1',  name:'Haluros de ácido',      fm:'R−COX',      sf:'haluro de -carbonilo / haluro de -oilo',ss:'halocarbonil-'},
-  {n:5, cls:'c1',  name:'Amidas',                fm:'R−CONH₂',    sf:'-carboxamida / -amida',                 ss:'carbamoil-'},
-  {n:6, cls:'c3',  name:'Nitrilos',              fm:'R−C≡N',      sf:'-carbonitrilo / -nitrilo',              ss:'ciano-'},
-  {n:7, cls:'c4',  name:'Aldehídos',             fm:'R−CHO',      sf:'-carbaldehído / -al',                   ss:'formil- / oxo-'},
-  {n:8, cls:'c4',  name:'Cetonas',               fm:"R−CO−R'",    sf:'-ona',                                  ss:'oxo-'},
-  {n:9, cls:'c4',  name:'Alcoholes',             fm:'R−OH',       sf:'-ol',                                   ss:'hidroxi-'},
-  {n:10,cls:'c4',  name:'Tioles',                fm:'R−SH',       sf:'-tiol',                                 ss:'sulfanil-'},
-  {n:11,cls:'c4',  name:'Aminas',                fm:'R−NH₂',      sf:'-amina',                                ss:'amino-'},
-  {n:12,cls:'c4',  name:'Iminas',                fm:'R₂C=NR',     sf:'-imina',                                ss:'imino-'},
-  {n:13,cls:'dim', name:'Éteres',                fm:"R−O−R'",     sf:'alcoxi- / éter',                        ss:'(R)oxi-'},
-  {n:14,cls:'dim', name:'Haloderivados',         fm:'R−X',        sf:'haluro de …-ilo',                       ss:'fluoro/cloro/bromo/yodo-'},
-  {n:15,cls:'c3',  name:'Alquinos',              fm:'−C≡C−',      sf:'-ino',                                  ss:'…-inil-'},
-  {n:16,cls:'c3',  name:'Alquenos',              fm:'−C=C−',      sf:'-eno',                                  ss:'…-enil-'},
-  {n:17,cls:'dim', name:'Alcanos',               fm:'−C−C−',      sf:'-ano',                                  ss:'…-il-'},
+  {n:1,  name:'Ácidos carboxílicos',  fm:'R−COOH',          sf:'ácido …-oico / ácido …carboxílico',                     ss:'carboxi-'},
+  {n:2,  name:'Anhídridos',           fm:"R−CO−O−CO−R'",    sf:'anhídrido …-oico (ej. anhídrido etanoico)',             ss:'—'},
+  {n:3,  name:'Ésteres',              fm:"R−COO−R'",        sf:'…-oato de alquilo (ej. etanoato de metilo) / …carboxilato de alquilo', ss:'alcoxicarbonil-'},
+  {n:4,  name:'Haluros de ácido',     fm:'R−COX',           sf:'haluro de …-oílo / haluro de …carbonilo',               ss:'halocarbonil-'},
+  {n:5,  name:'Amidas',               fm:'R−CONH₂',         sf:'-amida / -carboxamida',                                 ss:'carbamoil-'},
+  {n:6,  name:'Nitrilos',             fm:'R−C≡N',           sf:'-nitrilo / -carbonitrilo',                              ss:'ciano-'},
+  {n:7,  name:'Aldehídos',            fm:'R−CHO',           sf:'-al / -carbaldehído',                                   ss:'formil- / oxo-'},
+  {n:8,  name:'Cetonas',              fm:"R−CO−R'",         sf:'-ona',                                                  ss:'oxo-'},
+  {n:9,  name:'Alcoholes y fenoles',  fm:'R−OH · Ar−OH',    sf:'-ol',                                                   ss:'hidroxi-'},
+  {n:10, name:'Aminas',               fm:'R−NH₂',           sf:'-amina',                                                ss:'amino-'},
+  {n:11, name:'Éteres',               fm:"R−O−R'",          sf:'sin sufijo propio: alcoxi + alcano (ej. metoxietano)',  ss:'alcoxi- (metoxi-, etoxi-)'},
+  {n:12, name:'Alquenos y alquinos',  fm:'−C=C− · −C≡C−',   sf:'-en- + -o (= -eno) · -in- + -o (= -ino)',               ss:'…-enil- · …-inil-'},
+  {n:13, name:'Hidrocarburos sin grupo funcional (alcanos, cicloalcanos, benceno)', fm:'−C−C−', sf:'-an- + -o (= -ano)', ss:'…-il- (metil, etil…)'},
+  {n:'—',name:'Haluros de alquilo (sin rango)', fm:'R−X',   sf:'sin sufijo: siempre prefijo',                           ss:'fluoro-, cloro-, bromo-, yodo-'},
 ];
-const CC={c1:'var(--c1)',c3:'var(--c3)',c4:'var(--c4)',dim:'var(--dimmer)'};
-const CB={c1:'var(--c1b)',c3:'var(--c3b)',c4:'var(--c4b)',dim:'var(--bg)'};
 const tb=document.getElementById('tabla3-body');
 // ── Tabla comparación de nomenclaturas ──
 const CMP=[
@@ -1308,10 +1328,10 @@ const CMP=[
   {g:'',           old:'caproaldehído',                      neu:'hexanal'},
   // CETONAS
   {g:'Cetonas',    old:'acetona / dimetil cetona',           neu:'propan-2-ona'},
-  {g:'',           old:'metil etil cetona',                  neu:'butan-2-ona'},
+  {g:'',           old:'etil metil cetona',                  neu:'butan-2-ona'},
   {g:'',           old:'metil propil cetona',                neu:'pentan-2-ona'},
   {g:'',           old:'dietil cetona',                      neu:'pentan-3-ona'},
-  {g:'',           old:'metil isobutil cetona',              neu:'4-metilpentan-2-ona'},
+  {g:'',           old:'isobutil metil cetona',              neu:'4-metilpentan-2-ona'},
   // ÁCIDOS CARBOXÍLICOS
   {g:'Ácidos',     old:'ácido fórmico',                      neu:'ácido metanoico'},
   {g:'',           old:'ácido acético',                      neu:'ácido etanoico'},
@@ -1325,10 +1345,10 @@ const CMP=[
   {g:'',           old:'propionato de metilo',               neu:'propanoato de metilo'},
   {g:'',           old:'butirato de metilo',                 neu:'butanoato de metilo'},
   // ÉTERES
-  {g:'Éteres',     old:'éter dimetílico / óxido de metilo',  neu:'metoximetano'},
-  {g:'',           old:'éter metil etílico',                 neu:'metoxietano'},
-  {g:'',           old:'éter dietílico / éter etílico',      neu:'etoxietano'},
-  {g:'',           old:'éter metil propílico',               neu:'metoxipropano'},
+  {g:'Éteres',     old:'dimetil éter / éter dimetílico',     neu:'metoximetano'},
+  {g:'',           old:'etil metil éter',                    neu:'metoxietano'},
+  {g:'',           old:'dietil éter / éter etílico',         neu:'etoxietano'},
+  {g:'',           old:'metil propil éter',                  neu:'1-metoxipropano'},
   // AMIDAS
   {g:'Amidas',     old:'formamida',                          neu:'metanamida'},
   {g:'',           old:'acetamida',                          neu:'etanamida'},
@@ -1349,16 +1369,7 @@ const CMP=[
   {g:'',           old:'2-butanol',                          neu:'butan-2-ol'},
   {g:'',           old:'glicerol / glicerina',               neu:'propano-1,2,3-triol'},
 ];
-const GC={
-  'Aldehídos':'var(--c4t)','Cetonas':'var(--c4t)','Ácidos':'var(--c1t)',
-  'Ésteres':'var(--c1t)','Éteres':'var(--c3t)','Amidas':'var(--c2t)',
-  'Nitrilos':'var(--c2t)','Alcoholes':'var(--c3t)'
-};
-const GB={
-  'Aldehídos':'var(--c4b)','Cetonas':'var(--c4b)','Ácidos':'var(--c1b)',
-  'Ésteres':'var(--c1b)','Éteres':'var(--c3b)','Amidas':'var(--c2b)',
-  'Nitrilos':'var(--c2b)','Alcoholes':'var(--c3b)'
-};
+// Todas las familias con el mismo tono: el rosa oscuro es el color del grupo funcional (④).
 const cmpTb=document.getElementById('cmp-body');
 if(cmpTb){
   let curG='',alt=false;
@@ -1366,12 +1377,12 @@ if(cmpTb){
     const isHeader=r.g!=='';
     if(isHeader){curG=r.g;alt=false;}
     const tr=document.createElement('tr');
-    const bg=isHeader?GB[curG]:(alt?'#f8f7f4':'#fff');
+    const bg=isHeader?'var(--c4b)':(alt?'#f8f7f4':'#fff');
     tr.style.cssText=`border-bottom:1px solid var(--brd);background:${bg}`;
     tr.innerHTML=`
-      <td style="padding:8px 14px;font-weight:700;font-size:.75rem;color:${GC[curG]||'var(--dim)'}">${r.g}</td>
+      <td style="padding:8px 14px;font-weight:700;font-size:.75rem;color:var(--c4t)">${r.g}</td>
       <td style="padding:8px 14px;font-family:var(--mono);font-size:.78rem;color:var(--dimmer);font-style:italic">${r.old}</td>
-      <td style="padding:8px 14px;font-family:var(--mono);font-size:.78rem;font-weight:700;color:${GC[curG]||'var(--dim)'}">${r.neu}</td>`;
+      <td style="padding:8px 14px;font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--tx)">${r.neu}</td>`;
     cmpTb.appendChild(tr);
     if(!isHeader)alt=!alt;
   });
@@ -1382,12 +1393,12 @@ const PD={
   esquema:{sec:'Las 4 partes del nombre',titulo:'2-metilpentano',mol:'ex-1',
     nb:{r:'2-metil',c:'pent',i:'an',g:'o'},
     pasos:[
-      {n:1,titulo:'Grupo funcional',expl:'El grupo funcional determina el sufijo. Si no hay ninguno, la molécula es un alcano.',
+      {n:1,titulo:'Grupo funcional',expl:'El grupo funcional determina el sufijo. Si no hay ninguno, la molécula es un hidrocarburo (alcano, alqueno o alquino).',
        q:'¿Hay algún grupo funcional (−OH, C=O, −COOH)?',tipo:'mc',
        ops:['Sí, alcohol (−OH) → -ol','Sí, cetona (C=O) → -ona','No — alcano → sufijo -o','Sí, ácido → -oico'],
        resp:'No — alcano → sufijo -o',parte:'g',
        fb:'Los alcanos no tienen heteroátomos. El sufijo es siempre <strong>-o</strong>.'},
-      {n:2,titulo:'Cadena principal',expl:'La cadena más larga de carbonos contiguos, incluyendo el mayor número de ramificaciones.',
+      {n:2,titulo:'Cadena principal',expl:'La cadena más larga de carbonos contiguos; si dos cadenas empatan en longitud, la que tenga más sustituyentes.',
        q:'¿Cuántos C tiene la cadena más larga?',tipo:'mc',
        ops:['3C → prop-','4C → but-','5C → pent-','6C → hex-'],
        resp:'5C → pent-',parte:'c',
@@ -1397,15 +1408,15 @@ const PD={
        ops:['Sí, doble C=C → -en-','Sí, triple C≡C → -in-','No → -an-'],
        resp:'No → -an-',parte:'i',
        fb:'No hay insaturaciones → <strong>-an-</strong>. Cadena base: <em>pentan-</em>.'},
-      {n:4,titulo:'Ramificaciones',expl:'Cada rama lleva localizador. Se ordenan alfabéticamente (los prefijos di-/tri- no cuentan).',
-       q:'¿Qué ramificación hay y en qué carbono?',tipo:'mc',
+      {n:4,titulo:'Sustituyentes',expl:'Cada sustituyente lleva localizador. Se ordenan alfabéticamente (los prefijos di-/tri- no cuentan).',
+       q:'¿Qué sustituyente hay y en qué carbono?',tipo:'mc',
        ops:['1-metil','2-metil','3-metil','2-etil'],
        resp:'2-metil',parte:'r',
        fb:'El CH₃ lateral está en <strong>C2</strong> (numerando para dar el menor localizador posible) → <strong>2-metil</strong>.'},
-      {n:5,titulo:'Construir el nombre',expl:'[Ramificaciones] + [cadena] + [insaturación] + [sufijo]. Todo junto, sin espacios.',
+      {n:5,titulo:'Construir el nombre',expl:'[Sustituyentes] + [cadena] + [insaturación] + [sufijo]. Todo junto, sin espacios.',
        q:'Escribe el nombre IUPAC completo:',tipo:'write',
        resp:'2-metilpentano',parte:null,
-       fb:'✓ <strong>2-metilpentano</strong>: rama + cadena + sin insaturación + alcano.'}
+       fb:'<strong>2-metilpentano</strong>: sustituyente + cadena + sin insaturación + alcano.'}
     ]},
   ejemplos:{sec:'Ejemplos interactivos',titulo:'pentan-2-ona',mol:'ex-3',
     nb:{r:'',c:'pent',i:'an',g:'2-ona'},
@@ -1420,20 +1431,20 @@ const PD={
        ops:['3C → prop-','4C → but-','5C → pent-','6C → hex-'],
        resp:'5C → pent-',parte:'c',
        fb:'La cadena continua por el C=O tiene <strong>5 C</strong> → <strong>pent-</strong>.'},
-      {n:3,titulo:'Insaturaciones y ramas',expl:'El C=O ya está capturado en el sufijo. Busca solo dobles/triples C=C o C≡C y ramas.',
-       q:'¿Hay insaturaciones adicionales o ramificaciones?',tipo:'mc',
-       ops:['Sí, doble C=C → -en-','Sí, una ramificación','No → -an- y sin prefijos'],
+      {n:3,titulo:'Insaturaciones y sustituyentes',expl:'El C=O ya está capturado en el sufijo. Busca solo dobles/triples C=C o C≡C y sustituyentes.',
+       q:'¿Hay insaturaciones adicionales o sustituyentes?',tipo:'mc',
+       ops:['Sí, doble C=C → -en-','Sí, un sustituyente','No → -an- y sin prefijos'],
        resp:'No → -an- y sin prefijos',parte:'i',
        fb:'Nada más → <strong>-an-</strong>. Nombre parcial: <em>pentan-</em>.'},
       {n:4,titulo:'Posición del C=O',expl:'IUPAC: el localizador va justo antes del sufijo que modifica. Numera desde el extremo que dé menor localizador al C=O.',
        q:'¿En qué posición queda el C=O?',tipo:'mc',
        ops:['C1 (imposible: sería aldehído)','C2 → 2-ona','C3 → 3-ona','C4'],
        resp:'C2 → 2-ona',parte:'g',
-       fb:'C=O en <strong>C2</strong> (localizador 2 < 4 desde el otro extremo). Sufijo IUPAC: <strong>-2-ona</strong> (antes: 2-pentanona).'},
+       fb:'C=O en <strong>C2</strong> (localizador 2 < 4 desde el otro extremo). Sufijo IUPAC: <strong>-2-ona</strong> (nombre tradicional: 2-pentanona).'},
       {n:5,titulo:'Nombre completo',expl:'Sin ramas + cadena + sin insaturación extra + localizador antes del sufijo.',
        q:'Escribe el nombre IUPAC:',tipo:'write',
        resp:'pentan-2-ona',parte:null,
-       fb:'✓ <strong>pentan-2-ona</strong>. Notación pre-2005: "2-pentanona" — hoy el localizador va antes del sufijo.'}
+       fb:'<strong>pentan-2-ona</strong>. Nombre tradicional: "2-pentanona" — en IUPAC actual el localizador va antes del sufijo.'}
     ]},
   algoritmo:{sec:'El algoritmo de 5 pasos',titulo:'3-etil-2-metilpentan-1-ol',mol:'ex-4',
     nb:{r:'3-etil-2-metil',c:'pent',i:'an',g:'1-ol'},
@@ -1443,25 +1454,25 @@ const PD={
        ops:['Cetona (C=O interior) → -ona','Alcohol (−OH) → -ol','Éter (R−O−R) → alcoxi-','Alcano → -o'],
        resp:'Alcohol (−OH) → -ol',parte:'g',
        fb:'El <strong>−OH</strong> (alcohol) tiene la mayor prioridad aquí → sufijo <strong>-ol</strong>. La numeración empieza desde el extremo más cercano al −OH.'},
-      {n:2,titulo:'Paso 2 — Cadena principal',expl:'La más larga que contenga el grupo funcional y el mayor número de ramificaciones.',
-       q:'¿Cuántos C tiene la cadena principal (con el −OH y pasando por más ramas)?',tipo:'mc',
+      {n:2,titulo:'Paso 2 — Cadena principal',expl:'La más larga que contenga el grupo funcional; si hay empate, la de más enlaces múltiples y luego la de más sustituyentes.',
+       q:'¿Cuántos C tiene la cadena principal (la más larga que contiene el −OH)?',tipo:'mc',
        ops:['4C → but-','5C → pent-','6C → hex-','7C → hept-'],
        resp:'5C → pent-',parte:'c',
        fb:'La cadena C1(−OH)−C2−C3−C4−C5 tiene <strong>5 C</strong> y recoge las dos ramas. El etilo y el metilo son sustituyentes → <strong>pent-</strong>.'},
-      {n:3,titulo:'Paso 3 — Numeración',expl:'Numera desde el extremo que dé el menor localizador al grupo funcional. COOH y CHO siempre son C1.',
+      {n:3,titulo:'Paso 3 — Numeración',expl:'Numera desde el extremo que dé el menor localizador al grupo funcional. En cadenas abiertas, COOH y CHO siempre son C1.',
        q:'¿En qué posición queda el −OH al numerar correctamente?',tipo:'mc',
        ops:['C1 (desde el extremo con −OH)','C2','C3','C5'],
        resp:'C1 (desde el extremo con −OH)',parte:'g',
        fb:'Numerando desde el extremo con −OH: C1(−OH)−C2−C3−C4−C5. Sufijo: <strong>-1-ol</strong> → pentan-1-...'},
-      {n:4,titulo:'Paso 4 — Ramificaciones (orden alfabético)',expl:'Las ramas se listan alfabéticamente. Los prefijos di-, tri-… no cuentan; iso- sí cuenta.',
-       q:'¿Cuál es el orden alfabético correcto de las ramas?',tipo:'mc',
+      {n:4,titulo:'Paso 4 — Sustituyentes (orden alfabético)',expl:'Los sustituyentes se listan alfabéticamente. Los prefijos di-, tri-… no cuentan; iso- sí cuenta.',
+       q:'¿Cuál es el orden alfabético correcto de los sustituyentes?',tipo:'mc',
        ops:['2-metil-3-etil (m antes que e — incorrecto)','3-etil-2-metil (e antes que m)','Solo 3-etil','Solo 2-metil'],
        resp:'3-etil-2-metil (e antes que m)',parte:'r',
        fb:'<strong>e</strong>til va antes que <strong>m</strong>etil → <strong>3-etil-2-metil</strong>. C3 para el etilo y C2 para el metilo.'},
-      {n:5,titulo:'Paso 5 — Nombre completo',expl:'[Ramas alfabético] + [cadena] + [-an-] + [localizador-sufijo]. Una sola palabra.',
+      {n:5,titulo:'Paso 5 — Nombre completo',expl:'[Sustituyentes en orden alfabético] + [cadena] + [-an-] + [localizador-sufijo]. Sin espacios.',
        q:'Escribe el nombre IUPAC completo:',tipo:'write',
        resp:'3-etil-2-metilpentan-1-ol',parte:null,
-       fb:'✓ <strong>3-etil-2-metilpentan-1-ol</strong>. Los 5 pasos aplicados: grupo → cadena → numeración → ramas → ensamblar.'}
+       fb:'<strong>3-etil-2-metilpentan-1-ol</strong>. Los 5 pasos aplicados: grupo → cadena → numeración → sustituyentes → ensamblar.'}
     ]},
   tablas:{sec:'Tablas de referencia',titulo:'5-metilhex-3-en-2-ol',mol:'ex-5',
     nb:{r:'5-metil',c:'hex',i:'3-en',g:'2-ol'},
@@ -1471,30 +1482,30 @@ const PD={
        ops:['Alqueno (C=C) → sufijo -eno','Alcohol (−OH) → sufijo -ol','Cetona (C=O) → sufijo -ona','Alcano → -o'],
        resp:'Alcohol (−OH) → sufijo -ol',parte:'g',
        fb:'El <strong>−OH</strong> (alcohol) supera al C=C en la jerarquía IUPAC → sufijo <strong>-ol</strong>. El doble enlace se indicará con <strong>-en-</strong>.'},
-      {n:2,titulo:'Cadena principal',expl:'Debe contener el grupo funcional principal (−OH) Y la insaturación (C=C). Busca la más larga que los incluya a ambos.',
-       q:'¿Cuántos C tiene la cadena con −OH y C=C?',tipo:'mc',
+      {n:2,titulo:'Cadena principal',expl:'Debe contener el grupo funcional principal (−OH) y ser la más larga posible. Solo si dos cadenas empatan en longitud gana la que tenga más enlaces múltiples.',
+       q:'¿Cuántos C tiene la cadena más larga que contiene el −OH?',tipo:'mc',
        ops:['5C → pent-','6C → hex-','7C → hept-','4C → but-'],
        resp:'6C → hex-',parte:'c',
-       fb:'La cadena C1−C2(−OH)−C3=C4−C5−C6 contiene el −OH y el C=C: <strong>6 C</strong> → <strong>hex-</strong>. El metilo en C5 es rama.'},
+       fb:'La cadena más larga con el −OH es C1−C2(−OH)−C3=C4−C5−C6: <strong>6 C</strong> → <strong>hex-</strong> (y además incluye el C=C). El metilo en C5 es sustituyente.'},
       {n:3,titulo:'Numeración y localizadores',expl:'Numera para el menor localizador al grupo de mayor prioridad (−OH). IUPAC: localizadores antes del sufijo que modifican.',
        q:'Al numerar correctamente, ¿dónde quedan −OH y C=C?',tipo:'mc',
        ops:['−OH en C5, C=C en C3-C4','−OH en C2, C=C en C3-C4 → hex-3-en-2-ol','−OH en C1','−OH en C3'],
        resp:'−OH en C2, C=C en C3-C4 → hex-3-en-2-ol',parte:'i',
        fb:'Desde el extremo con −OH más cercano: C1−C2(−OH)−C3=C4−C5−C6. −OH en <strong>C2</strong>, C=C entre <strong>C3-C4</strong> → <strong>hex-3-en-2-ol</strong>.'},
-      {n:4,titulo:'Ramificación',expl:'Con la numeración fijada, identifica el localizador del metilo.',
+      {n:4,titulo:'Sustituyente',expl:'Con la numeración fijada, identifica el localizador del metilo.',
        q:'¿En qué carbono está el metilo lateral?',tipo:'mc',
        ops:['C4','C5','C2','C6'],
        resp:'C5',parte:'r',
        fb:'Con C2 = −OH, el CH₃ lateral cae en <strong>C5</strong> → prefijo <strong>5-metil</strong>.'},
-      {n:5,titulo:'Nombre completo',expl:'Rama + cadena + infijo -en- con localizador + sufijo -ol con localizador.',
+      {n:5,titulo:'Nombre completo',expl:'Sustituyente + cadena + infijo -en- con localizador + sufijo -ol con localizador.',
        q:'Escribe el nombre IUPAC completo:',tipo:'write',
        resp:'5-metilhex-3-en-2-ol',parte:null,
-       fb:'✓ <strong>5-metilhex-3-en-2-ol</strong>. Localizadores antes de cada sufijo: hex-<strong>3</strong>-en-<strong>2</strong>-ol.'}
+       fb:'<strong>5-metilhex-3-en-2-ol</strong>. Localizadores antes de cada sufijo: hex-<strong>3</strong>-en-<strong>2</strong>-ol.'}
     ]},
   comparacion:{sec:'Comparación de nomenclaturas',titulo:'"metil propil cetona" → IUPAC',mol:'ex-3',
     nb:{r:'',c:'pent',i:'an',g:'2-ona'},
     pasos:[
-      {n:1,titulo:'Identificar el tipo por el nombre funcional',expl:'En nomenclatura funcional (pre-2005) el tipo de compuesto aparece al final: "… cetona", "… alcohol", "éter …".',
+      {n:1,titulo:'Identificar el tipo por el nombre funcional',expl:'En el nombre funcional clásico el tipo de compuesto aparece como palabra aparte: "… cetona", "… éter", "alcohol …".',
        q:'¿Qué tipo de compuesto es "metil propil cetona"?',tipo:'mc',
        ops:['Alcohol','Éter','Cetona','Aldehído'],
        resp:'Cetona',parte:'g',
@@ -1509,15 +1520,15 @@ const PD={
        ops:['Sí, doble C=C → -en-','Sí, triple C≡C → -in-','No → -an-'],
        resp:'No → -an-',parte:'i',
        fb:'Sin insaturaciones extra → <strong>-an-</strong>.'},
-      {n:4,titulo:'Posición del C=O y regla IUPAC 2013',expl:'En nomenclatura pre-2005 el localizador iba al inicio: "2-pentanona". En IUPAC 2013 va antes del sufijo.',
+      {n:4,titulo:'Posición del C=O y regla IUPAC 2013',expl:'En el nombre tradicional el localizador va al inicio: "2-pentanona". En IUPAC 2013 va antes del sufijo.',
        q:'¿Cómo se escribe el localizador del C=O en IUPAC actual?',tipo:'mc',
-       ops:['Al inicio: 2-pentanona (pre-2005)','Antes del sufijo: pentan-2-ona','Al final: pentanona-2','No se indica'],
+       ops:['Al inicio: 2-pentanona (nombre tradicional)','Antes del sufijo: pentan-2-ona','Al final: pentanona-2','No se indica'],
        resp:'Antes del sufijo: pentan-2-ona',parte:'g',
-       fb:'IUPAC 2013: localizador <strong>antes del sufijo</strong> que modifica → <strong>pentan-2-ona</strong>. La forma "2-pentanona" es nomenclatura pre-2005.'},
+       fb:'IUPAC 2013: localizador <strong>antes del sufijo</strong> que modifica → <strong>pentan-2-ona</strong>. La forma "2-pentanona" es el nombre tradicional.'},
       {n:5,titulo:'Nombre IUPAC equivalente',expl:'Aplica todo lo aprendido para convertir el nombre funcional.',
        q:'Escribe el nombre IUPAC de "metil propil cetona":',tipo:'write',
        resp:'pentan-2-ona',parte:null,
-       fb:'✓ <strong>pentan-2-ona</strong>. Tabla de equivalencias: acetona → propan-2-ona; metil etil cetona → butan-2-ona; metil propil cetona → pentan-2-ona.'}
+       fb:'<strong>pentan-2-ona</strong>. Tabla de equivalencias: acetona → propan-2-ona; etil metil cetona → butan-2-ona; metil propil cetona → pentan-2-ona.'}
     ]},
   sustituyentes:{sec:'Sustituyentes complejos',titulo:'Nombrar −CH(CH₃)₂',mol:null,
     svgHtml:'<div class="prac-struct">CH₃<br>│<br><strong style="color:var(--c4t);font-size:1.1em">C</strong>H —— (unión a cadena principal)<br>│<br>CH₃<br><span style="font-size:.72rem;color:var(--dimmer)">El CH marcado es el C-1</span></div>',
@@ -1538,19 +1549,19 @@ const PD={
        ops:['No hay ramas','Sí, CH₃ en C-1','Sí, CH₃ en C-2','Sí, dos CH₃ en C-2'],
        resp:'Sí, CH₃ en C-1',parte:'r',
        fb:'El segundo CH₃ está unido al propio C-1 → <strong>metilo en C-1</strong> → localizador: 1-metil.'},
-      {n:4,titulo:'Nombre IUPAC del sustituyente',expl:'Se construye como un nombre normal: rama + cadena + sufijo -il. Al ser ramificado, va entre paréntesis en el nombre del compuesto.',
-       q:'¿Cuál es el nombre IUPAC correcto?',tipo:'mc',
-       ops:['propil','isopropil (trivial, no IUPAC)','(1-metiletil)','(2-metiletil)'],
+      {n:4,titulo:'Nombre sistemático del sustituyente',expl:'Se construye como un nombre normal: rama + cadena + sufijo -il. Al ser ramificado, va entre paréntesis en el nombre del compuesto.',
+       q:'¿Cuál es el nombre sistemático (el que se construye desde C-1)?',tipo:'mc',
+       ops:['propil','(2-metiletil)','(1-metiletil)','(1-metilpropil)'],
        resp:'(1-metiletil)',parte:'g',
-       fb:'Etil (2C) + metilo en C-1 → <strong>1-metiletil</strong>. Entre paréntesis porque es ramificado: <strong>(1-metiletil)</strong>. "Isopropil" es el nombre trivial pre-2005.'},
-      {n:5,titulo:'Equivalencia con nombre trivial',expl:'Conocer los pares trivial ↔ IUPAC permite leer libros pre-2005 sin confusión.',
-       q:'¿Cómo se llamaba (1-metiletil) antes de 2005?',tipo:'mc',
+       fb:'Etil (2C) + metilo en C-1 → <strong>1-metiletil</strong>. Entre paréntesis porque es ramificado: <strong>(1-metiletil)</strong>. También es válido el nombre tradicional <strong>isopropil</strong>; la IUPAC 2013 prefiere la forma sistemática en nombres oficiales (propan-2-il).'},
+      {n:5,titulo:'Equivalencia con el nombre tradicional',expl:'Conocer los pares tradicional ↔ sistemático te permite leer cualquier libro sin confusión. Ambas formas son válidas.',
+       q:'¿Cuál es el nombre tradicional de (1-metiletil)?',tipo:'mc',
        ops:['sec-butil','isobutil','isopropil','neopentil'],
        resp:'isopropil',parte:null,
-       fb:'<strong>isopropil = (1-metiletil)</strong>. Otros pares clave: isobutil = (2-metilpropil); sec-butil = (1-metilpropil); ter-butil = (1,1-dimetiletil). El prefijo <em>iso-</em> SÍ cuenta en el orden alfabético.'}
+       fb:'<strong>isopropil = (1-metiletil)</strong> — ambos válidos. Otros pares clave: isobutil = (2-metilpropil); sec-butil = (1-metilpropil); <em>terc</em>-butil = (1,1-dimetiletil). El prefijo <em>iso-</em> SÍ cuenta en el orden alfabético.'}
     ]},
   desempate:{sec:'Reglas de desempate',titulo:'3-etil-2-metilpentano',mol:null,
-    svgHtml:'<div class="prac-struct" style="font-size:.78rem;line-height:2.2;text-align:center">Cadena de 5C con etilo y metilo<br><span style="color:var(--c1)">Num. A:</span> metilo en C<strong>2</strong>, etilo en C<strong>3</strong> → set {2, 3}<br><span style="color:var(--c2t)">Num. B:</span> metilo en C<strong>4</strong>, etilo en C<strong>3</strong> → set {3, 4}<br><span style="font-size:.68rem;color:var(--dimmer)">Misma cadena, dos sentidos de numeración — ¿cuál gana?</span></div>',
+    svgHtml:'<div class="prac-struct" style="font-size:.78rem;line-height:2.2;text-align:center">Cadena de 5C con etilo y metilo<br><span style="color:var(--cn-brand-d)">Num. A:</span> metilo en C<strong>2</strong>, etilo en C<strong>3</strong> → conjunto {2, 3}<br><span style="color:var(--cn-brand-d)">Num. B:</span> metilo en C<strong>4</strong>, etilo en C<strong>3</strong> → conjunto {3, 4}<br><span style="font-size:.68rem;color:var(--dimmer)">Misma cadena, dos sentidos de numeración — ¿cuál gana?</span></div>',
     nb:{r:'3-etil-2-metil',c:'pent',i:'an',g:'o'},
     pasos:[
       {n:1,titulo:'Criterio B1 — Grupo funcional',expl:'Primero se numera para dar el menor localizador al grupo funcional principal. Si no hay grupo funcional, se pasa a B2.',
@@ -1560,29 +1571,29 @@ const PD={
        fb:'Sin grupo funcional, B1 no decide → se aplica el <strong>criterio B2</strong>: menor localizador a dobles y triples enlaces.'},
       {n:2,titulo:'Criterio B2 — Insaturaciones',expl:'Se da el menor localizador a los dobles y triples enlaces. Si no hay, se pasa a B3.',
        q:'La cadena no tiene dobles ni triples enlaces. ¿Qué sigue?',tipo:'mc',
-       ops:['B2 resuelve — numerar desde la derecha','Pasar al criterio B3 (localizadores de las ramificaciones)','Pasar al criterio B4 (orden alfabético)','El nombre tiene dos formas válidas'],
-       resp:'Pasar al criterio B3 (localizadores de las ramificaciones)',parte:null,
-       fb:'Sin insaturaciones, B2 no decide → se aplica el <strong>criterio B3</strong>: comparar los sets de localizadores de las ramificaciones posición a posición.'},
-      {n:3,titulo:'Criterio B3 — Sets de localizadores',expl:'Se ordenan los localizadores de menor a mayor y se comparan posición a posición. Gana el set cuyo primer localizador diferente sea el más bajo.',
-       q:'Sets a comparar: {2, 3} vs {3, 4}. ¿Cuál set es el más bajo?',tipo:'mc',
+       ops:['B2 resuelve — numerar desde la derecha','Pasar al criterio B3 (localizadores de los sustituyentes)','Pasar al criterio B4 (orden alfabético)','El nombre tiene dos formas válidas'],
+       resp:'Pasar al criterio B3 (localizadores de los sustituyentes)',parte:null,
+       fb:'Sin insaturaciones, B2 no decide → se aplica el <strong>criterio B3</strong>: comparar los conjuntos de localizadores de los sustituyentes posición a posición.'},
+      {n:3,titulo:'Criterio B3 — Conjuntos de localizadores',expl:'Se ordenan los localizadores de menor a mayor y se comparan posición a posición. Gana el conjunto cuyo primer localizador diferente sea el más bajo.',
+       q:'Conjuntos a comparar: {2, 3} vs {3, 4}. ¿Cuál es el más bajo?',tipo:'mc',
        ops:['{3, 4} — la suma (7) supera a la de {2, 3} (5)','{2, 3} — primer localizador diferente: 2 < 3','Son equivalentes — se usa la suma total','{3, 4} — el localizador mayor (4) da más opciones'],
        resp:'{2, 3} — primer localizador diferente: 2 < 3',parte:'r',
-       fb:'Posición a posición: primera diferencia 2 vs 3 → <strong>2 < 3</strong> → gana el set <strong>{2, 3}</strong>. Nunca se suman localizadores; solo importa la primera posición diferente.'},
-      {n:4,titulo:'Cadena base e insaturación',expl:'Con B3 resuelto (set {2,3}), se identifica la cadena principal: 5 carbonos sin dobles ni triples enlaces.',
+       fb:'Posición a posición: primera diferencia 2 vs 3 → <strong>2 < 3</strong> → gana el conjunto <strong>{2, 3}</strong>. Nunca se suman localizadores; solo importa la primera posición diferente.'},
+      {n:4,titulo:'Cadena base e insaturación',expl:'Con B3 resuelto (conjunto {2,3}), se identifica la cadena principal: 5 carbonos sin dobles ni triples enlaces.',
        q:'¿Cuál es el prefijo de cadena e infijo de insaturación para 5C sin dobles ni triples enlaces?',tipo:'mc',
        ops:['but- y -en-','pent- y -an-','hex- y -in-','pent- y -en-'],
        resp:'pent- y -an-',parte:'c',
        fb:'5 carbonos → prefijo <strong>pent-</strong>; sin insaturaciones → infijo <strong>-an-</strong>. Base parcial: <em>pentan-</em>.'},
-      {n:5,titulo:'Nombre IUPAC completo',expl:'Ramas en orden alfabético (e antes que m) con localizadores del set {2,3}: etilo en C3, metilo en C2.',
+      {n:5,titulo:'Nombre IUPAC completo',expl:'Ramas en orden alfabético (e antes que m) con localizadores del conjunto {2,3}: etilo en C3, metilo en C2.',
        q:'Escribe el nombre IUPAC completo de la molécula:',tipo:'write',
        resp:'3-etil-2-metilpentano',parte:'i',
-       fb:'✓ <strong>3-etil-2-metilpentano</strong>. B3 eligió {2,3}; orden alfabético: <em>etil</em> (e) antes que <em>metil</em> (m) → 3-etil- y 2-metil-.'}
+       fb:'<strong>3-etil-2-metilpentano</strong>. B3 eligió {2,3}; orden alfabético: <em>etil</em> (e) antes que <em>metil</em> (m) → 3-etil- y 2-metil-.'}
     ]}
 };
 
 // ── CONTROLADOR DEL MODAL ──
 const PM={sec:null,step:0,ans:[],data:null};
-const PASO_BG=['','var(--c4)','var(--c2)','var(--c4)','var(--c1)','var(--c2)'];
+const PASO_BG=['','var(--cn-brand)','var(--cn-brand)','var(--cn-brand)','var(--cn-brand)','var(--cn-brand)'];
 
 function pmOpen(secId){
   const d=PD[secId]; if(!d) return;
@@ -1617,7 +1628,7 @@ function pmRender(){
   document.getElementById('pm-expl').textContent=paso.expl;
   document.getElementById('pm-q').textContent=paso.q;
   const badge=document.getElementById('pm-badge');
-  badge.textContent=paso.n; badge.style.background=PASO_BG[paso.n]||'var(--c4)';
+  badge.textContent=paso.n; badge.style.background=PASO_BG[paso.n]||'var(--cn-brand)';
   const fb=document.getElementById('pm-fb');
   fb.className='prac-fb'; fb.innerHTML='';
   const optsEl=document.getElementById('pm-opts');
@@ -1643,7 +1654,7 @@ function pmRender(){
     writeEl.className='prac-write-row show';
     if(done){inp.className='prac-inp ok';inp.value=paso.resp;inp.disabled=true;chk.disabled=true;}
   }
-  if(done){fb.innerHTML='✓ '+paso.fb;fb.className='prac-fb show ok';}
+  if(done){fb.innerHTML='✓ '+pmFbTxt(paso.fb);fb.className='prac-fb show ok';}
   pmNB(); pmDots(); pmNavBtns();
 }
 
@@ -1652,7 +1663,7 @@ function pmSelect(btn,val,paso){
   const ok=val===paso.resp;
   btn.classList.add(ok?'correct':'wrong');
   if(!ok){document.querySelectorAll('.prac-opt').forEach(b=>{if(b.textContent===paso.resp)b.classList.add('correct');});}
-  pmFb(ok,paso.fb); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
+  pmFb(ok,paso); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
 }
 
 function pmCheck(){
@@ -1661,12 +1672,15 @@ function pmCheck(){
   const ok=pmNorm(inp.value)===pmNorm(paso.resp);
   inp.className='prac-inp '+(ok?'ok':'err');
   inp.disabled=true; document.getElementById('pm-check').disabled=true;
-  pmFb(ok,paso.fb); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
+  pmFb(ok,paso); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
 }
 
-function pmFb(ok,txt){
+// Quita un "✓" inicial del texto de retroalimentación (para no repetirlo ni mostrarlo en un error)
+function pmFbTxt(t){return String(t||'').replace(/^\s*✓\s*/,'');}
+function pmFb(ok,paso){
   const fb=document.getElementById('pm-fb');
-  fb.innerHTML=(ok?'✓ ':'✗ Respuesta correcta: ')+txt;
+  fb.innerHTML=ok?('✓ '+pmFbTxt(paso.fb))
+    :('✗ No es correcto. La respuesta es <strong>'+paso.resp+'</strong>. '+pmFbTxt(paso.fb));
   fb.className='prac-fb show '+(ok?'ok':'err');
 }
 
@@ -1756,10 +1770,11 @@ if(tb){T3.forEach((r,i)=>{
   const tr=document.createElement('tr');
   if(i%2)tr.style.background='#f8f7f4';
   tr.style.borderBottom='1px solid var(--brd)';
-  tr.innerHTML=`<td style="padding:7px 12px;text-align:center"><span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:${CB[r.cls]};color:${CC[r.cls]};padding:2px 7px;border-radius:100px;border:1px solid ${CC[r.cls]}">${r.n}</span></td>
-  <td style="padding:7px 12px;font-weight:700;color:${CC[r.cls]}">${r.name}</td>
+  // Familias sin colores del método: solo el sufijo (④ grupo funcional) va en rosa oscuro.
+  tr.innerHTML=`<td style="padding:7px 12px;text-align:center"><span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:var(--bg);color:var(--dim);padding:2px 7px;border-radius:100px;border:1px solid var(--brd)">${r.n}</span></td>
+  <td style="padding:7px 12px;font-weight:700;color:var(--tx)">${r.name}</td>
   <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;color:var(--dim)">${r.fm}</td>
-  <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;font-weight:700;color:${CC[r.cls]}">${r.sf}</td>
+  <td style="padding:7px 12px;font-family:var(--mono);font-size:.77rem;font-weight:700;color:var(--c4t)">${r.sf}</td>
   <td style="padding:7px 12px;font-size:.76rem;color:var(--dimmer)">${r.ss}</td>`;
   tb.appendChild(tr);
 });}
@@ -1852,7 +1867,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const bar=document.createElement('div');
     bar.className='view-toggle-t';
     bar.id='vtbar-'+id;
-    bar.innerHTML=`<button class="vt-btn-t active" onclick="tTeoria('${id}','skel')">⬡ Esqueletal</button><button class="vt-btn-t" onclick="tTeoria('${id}','form')">— Semidesarrollada</button>`;
+    bar.innerHTML=`<button class="vt-btn-t active" onclick="tTeoria('${id}','skel')">⬡ Esquelética</button><button class="vt-btn-t" onclick="tTeoria('${id}','form')">— Semidesarrollada</button>`;
     area.parentNode.insertBefore(bar,area);
   });
 });
@@ -1925,10 +1940,10 @@ td{border-bottom:1px solid #e8e8e8}
 <h2>Tabla 3 — Grupos funcionales (orden de prioridad IUPAC ↓)</h2>
 <table><thead><tr><th>#</th><th>Clase</th><th>Fórmula</th><th>Sufijo principal</th><th>Como sustituyente</th></tr></thead>
 <tbody>${T3html}</tbody></table>
-<div class="note">↑ Mayor prioridad arriba. El grupo de mayor prioridad determina el sufijo del nombre.</div>
+<div class="note">↑ Mayor prioridad arriba (1 = mayor). Alquenos y alquinos comparten el rango 12; los haluros de alquilo no tienen rango (siempre prefijo).</div>
 
-<h2>Equivalencias — nombres triviales vs. IUPAC actual</h2>
-<table><thead><tr><th>Grupo</th><th>Nombre trivial / pre-2005</th><th>IUPAC actual</th></tr></thead>
+<h2>Equivalencias — nombres tradicionales vs. IUPAC actual</h2>
+<table><thead><tr><th>Grupo</th><th>Nombre tradicional / funcional clásico</th><th>Nombre sistemático</th></tr></thead>
 <tbody>${CMPhtml}</tbody></table>
 <div class="note">* Los nombres en cursiva son nombres tradicionales; la IUPAC conserva unos pocos (ácido acético, acetona…), pero en clase se usa el sistemático.</div>
 

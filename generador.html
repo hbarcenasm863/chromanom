@@ -31,7 +31,8 @@
   --r:14px;--rs:8px;
   --sh:0 2px 12px rgba(13,74,115,.10);
   --sh2:0 6px 32px rgba(13,74,115,.16);
-  /* MDEC colors — alineados con grupos.html/teoria.html */
+  /* Colores del método de 4 colores — alineados con grupos.html/teoria.html */
+  --c4t:#9a4a78; /* rosa para TEXTO (contraste AA) */
   --c-c:#166534;
   --c-g:#CC79A7;
   --c-i:#b45309;
@@ -146,16 +147,17 @@ body{
   background:var(--surface);
   border:1.5px solid var(--border);
   border-radius:20px;
-  padding:5px 12px;
+  padding:8px 14px;
+  min-height:44px;
   cursor:pointer;
-  font-size:.8rem;font-weight:600;
+  font-size:.84rem;font-weight:600;
   color:var(--dim);
   user-select:none;
   transition:all .15s;
 }
 .cb-item:hover{border-color:var(--primary);color:var(--primary)}
 .cb-item input[type=checkbox]{
-  width:15px;height:15px;
+  width:20px;height:20px;flex-shrink:0;
   accent-color:var(--primary);
   cursor:pointer;
 }
@@ -179,7 +181,7 @@ body{
 }
 .tipo-item:hover{border-color:var(--primary)}
 .tipo-item.checked{background:var(--primary-l);border-color:var(--primary)}
-.tipo-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);cursor:pointer;margin-top:2px;flex-shrink:0}
+.tipo-item input[type=checkbox]{width:20px;height:20px;accent-color:var(--primary);cursor:pointer;margin-top:2px;flex-shrink:0}
 .tipo-item-body{flex:1}
 .tipo-item-title{font-size:.84rem;font-weight:700;color:var(--tx)}
 .tipo-item-desc{font-size:.75rem;color:var(--dimmer);margin-top:2px}
@@ -201,17 +203,18 @@ body{
 /* Generate button */
 .btn-generate{
   display:block;width:100%;
-  padding:14px 24px;
-  background:var(--primary);
+  padding:14px 24px;min-height:48px;
+  background:var(--cn-brand,#1a6ea8);
   color:#fff;
   border:none;border-radius:var(--r);
+  font-family:var(--cn-sans,'Outfit',system-ui,sans-serif);
   font-size:1rem;font-weight:800;
   cursor:pointer;
   transition:background .18s,transform .1s,box-shadow .18s;
   box-shadow:0 4px 16px rgba(13,74,115,.28);
   letter-spacing:.01em;
 }
-.btn-generate:hover{background:#0d2d42;box-shadow:0 6px 24px rgba(13,74,115,.36)}
+.btn-generate:hover{background:var(--cn-brand-d,#0d4a73);box-shadow:0 6px 24px rgba(13,74,115,.36)}
 .btn-generate:active{transform:scale(.99)}
 
 /* Warning */
@@ -224,7 +227,7 @@ body{
 .warning.show{display:block}
 
 /* ── EXERCISE SHEET ── */
-#exercise-sheet{display:none}
+#exercise-sheet{display:none;scroll-margin-top:72px}
 #exercise-sheet.show{display:block}
 
 .sheet-header{
@@ -279,12 +282,11 @@ body{
   padding:3px 10px;border-radius:100px;
   text-transform:uppercase;letter-spacing:.07em;
 }
-.badge-a{background:#e0f2fe;color:#0369a1}
-.badge-b{background:#f0fdf4;color:#166534}
-.badge-c{background:#fdf4ff;color:#7e22ce}
-.badge-d{background:#fff7ed;color:#c2410c}
+/* Insignias de tipo: azul de marca / neutro. Los 4 colores del método
+   (turquesa, verde, dorado, rosa) se reservan para las partes del nombre. */
+.badge-a,.badge-b,.badge-c,.badge-d{background:var(--cn-brand-l,#e8f4fb);color:var(--cn-brand-d,#0d4a73)}
 /* ── Tipo D — Reacciones ── */
-.tipo-d{border-left:3px solid #c2410c}
+.tipo-d{border-left:3px solid var(--cn-brand,#1a6ea8)}
 .rxn-d-eq{display:flex;flex-wrap:nowrap;align-items:center;gap:10px 14px;
   background:var(--bg2,#f8fafc);border-radius:10px;padding:14px 18px;margin:10px 0;
   overflow-x:auto}
@@ -296,9 +298,9 @@ body{
   color:var(--tx,#1e293b);margin-right:6px;flex-shrink:0}
 .rxn-d-mol-txt{font-family:'JetBrains Mono',monospace;font-size:.83rem;
   color:var(--tx,#1e293b);font-weight:600;text-align:center}
-.rxn-d-blank-box{background:#fff7ed;border:2px dashed #c2410c;border-radius:8px;
+.rxn-d-blank-box{background:#f8fafc;border:2px dashed #64748b;border-radius:8px;
   padding:10px 22px;display:flex;align-items:center;justify-content:center;
-  min-width:80px;color:#c2410c;font-weight:700;font-size:1.1rem;flex-shrink:0}
+  min-width:80px;color:#334155;font-weight:700;font-size:1.1rem;flex-shrink:0}
 /* Inline items inside the equation row */
 .rxn-d-plus{font-size:1.2rem;font-weight:700;color:#0369a1;
   font-family:'JetBrains Mono',monospace;flex-shrink:0}
@@ -314,23 +316,26 @@ body{
 .rxn-d-cond{font-size:.73rem;color:var(--dimmer,#94a3b8);font-style:italic;
   text-align:center;white-space:nowrap;padding:0 4px}
 .rxn-d-arrow-line{position:relative;min-width:40px;height:14px;
-  border-bottom:2px solid #059669;margin-top:2px}
+  border-bottom:2px solid #334155;margin-top:2px}
 .rxn-d-arrow-line::after{content:'';position:absolute;right:-1px;bottom:-5px;
   border-style:solid;border-width:5px 0 5px 8px;
-  border-color:transparent transparent transparent #059669}
+  border-color:transparent transparent transparent #334155}
 .rxn-d-hint{font-size:.76rem;color:var(--dimmer,#94a3b8);margin-bottom:8px;font-style:italic}
 .rxn-d-fields{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .rxn-d-field{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--dim,#475569)}
-.rxn-d-field .ans-line{flex:1;min-width:80px}
+.rxn-d-field .ans-line{flex:1;min-width:80px;border-bottom:1.5px solid #aaa;height:22px}
 .ex-instruction{font-size:.84rem;color:var(--dim)}
 
 /* Tipo A */
 .ex-svg-wrap{
-  display:flex;justify-content:center;align-items:center;
+  display:flex;align-items:center;
   margin:10px 0;
   min-height:90px;
+  overflow-x:auto;
 }
-.ex-svg-wrap svg{height:auto;width:auto;max-width:100%}
+/* margin:auto centra la molécula; si es más ancha que la pantalla (celular)
+   se desliza en vez de encogerse hasta quedar ilegible. */
+.ex-svg-wrap svg{height:auto;width:auto;max-width:none;margin:0 auto;flex-shrink:0}
 .ex-answer-line{
   display:flex;align-items:center;gap:8px;
   margin-top:14px;
@@ -391,6 +396,11 @@ body{
 .pill-r{background:var(--c-r)}
 /* Doble rol (ej. el anillo bencénico: es cadena Y grupo funcional a la vez) */
 .pill-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
+/* Hoja del estudiante: fragmentos SIN color (gris neutro) — si salieran
+   coloreados, el color le regalaría la respuesta. El color solo aparece
+   en la clave de respuestas. */
+.mdec-pill.pill-n{background:#eef2f6;color:#0d2233;border:1.5px solid #94a3b8}
+.mdec-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 
 .mdec-table{
   width:100%;border-collapse:collapse;
@@ -416,6 +426,7 @@ body{
   color:var(--tx);
   white-space:nowrap;
 }
+.mdec-table td.blank-line{min-width:90px}
 .mdec-table td.blank-line{
   color:#bbb;
   font-size:.7rem;
@@ -439,16 +450,25 @@ body{
   padding:10px 22px;
   border-radius:var(--r);
   font-size:.88rem;font-weight:700;
+  min-height:44px;
+  font-family:inherit;
   cursor:pointer;
   transition:all .15s;
   border:none;
 }
+/* Celular: la barra de navegación inferior (site-ui.js, z-index 1000) tapaba
+   estos botones — la barra de acciones se sube justo encima de ella. */
+@media (max-width:640px){
+  .action-bar{bottom:calc(61px + env(safe-area-inset-bottom));padding:8px 10px;gap:8px;z-index:1001}
+  .btn-action{padding:10px 8px;flex:1 1 auto;font-size:.82rem;white-space:nowrap}
+  #exercise-sheet.show{padding-bottom:72px}
+}
 .btn-print{
-  background:var(--primary);
+  background:var(--cn-brand,#1a6ea8);
   color:#fff;
   box-shadow:0 3px 12px rgba(13,74,115,.25);
 }
-.btn-print:hover{background:#0d2d42}
+.btn-print:hover{background:var(--cn-brand-d,#0d4a73)}
 .btn-reset{
   background:var(--surface);
   border:1.5px solid var(--border);
@@ -464,7 +484,7 @@ body{
 .student-field{display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
 .student-field label{font-size:.72rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.07em}
 .student-field input{
-  padding:7px 10px;font-size:.88rem;
+  padding:9px 12px;font-size:.92rem;min-height:44px;
   border:1.5px solid var(--border);border-radius:var(--rs);
   background:var(--surface);color:var(--tx);
   outline:none;font-family:inherit;width:100%;
@@ -512,9 +532,9 @@ body{
 .ref-table td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--tx)}
 .mdec-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
 
-/* ── PDF button ── */
-.btn-pdf{background:#1a7a3c;color:#fff;box-shadow:0 3px 12px rgba(26,122,60,.25)}
-.btn-pdf:hover{background:#145f2f}
+/* ── PDF button (secundario, azul de marca — no el verde del método) ── */
+.btn-pdf{background:#fff;color:var(--cn-brand-d,#0d4a73);border:1.5px solid var(--cn-brand,#1a6ea8)}
+.btn-pdf:hover{background:var(--cn-brand-l,#e8f4fb)}
 
 .ak-item{
   display:flex;align-items:flex-start;gap:14px;
@@ -525,11 +545,11 @@ body{
   font-size:.83rem;
 }
 .ak-num{font-weight:900;color:var(--primary);min-width:24px;flex-shrink:0;padding-top:2px}
-.ak-body{flex:1}
+.ak-body{flex:1;min-width:0}
 .ak-label{font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
 .ak-name{font-weight:700;color:var(--tx);font-size:.88rem;margin-bottom:4px}
-.ak-svg{display:flex;justify-content:flex-start}
-.ak-svg svg{height:80px;width:auto}
+.ak-svg{display:flex;justify-content:flex-start;overflow-x:auto}
+.ak-svg svg{height:80px;width:auto;max-width:100%}
 .ak-table{
   width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px;
 }
@@ -544,12 +564,20 @@ body{
 .tag-c{background:var(--c-c)}.tag-g{background:var(--c-g)}.tag-i{background:var(--c-i)}.tag-r{background:var(--c-r)}
 .tag-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
 .cls-name-c{color:var(--c-c);font-weight:700}
-.cls-name-g{color:var(--c-g);font-weight:700}
+.cls-name-g{color:var(--c4t);font-weight:700}
 .cls-name-i{color:var(--c-i);font-weight:700}
 .cls-name-r{color:var(--c-r);font-weight:700}
 .cls-name-cg{background:linear-gradient(90deg,var(--c-c),var(--c-g));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
 
-/* ── PRINT-ONLY answer key section (hidden on screen) ── */
+/* ── Clave de respuestas (opcional, al final de la hoja) ── */
+.answer-key{margin-top:28px;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
+.answer-key h2{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:4px}
+.answer-key .ak-note{font-size:.78rem;color:var(--dimmer);margin-bottom:12px}
+.ak-list{display:flex;flex-direction:column;gap:8px}
+.ak-table-wrap{overflow-x:auto;max-width:100%}
+.ak-pills{display:flex;flex-wrap:wrap;gap:2px;margin:2px 0 4px}
+.ak-pills .mdec-pill{font-size:.78rem;padding:2px 8px}
+.ak-rxn-r{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--tx)}
 
 
 /* ── PRINT STYLES ── */
@@ -568,7 +596,12 @@ body{
   .modal-overlay{display:none !important}
 
   /* Show sheet */
-  #exercise-sheet{display:block !important}
+  #exercise-sheet{display:block !important;padding-bottom:0 !important}
+  .ex-svg-wrap{overflow:visible !important}
+  .answer-key{box-shadow:none;border:none;padding:0;margin-top:0;break-before:page;page-break-before:always}
+  .answer-key h2{color:#000}
+  .ak-item{break-inside:avoid;page-break-inside:avoid;background:#fff;border-color:#aaa}
+  .ak-tag,.print-tag-cg{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   /* .app trae padding pensado para la pantalla (28px arriba, 80px abajo para
      la barra flotante) — en impresión eso resta espacio útil de la página
      y ya está cubierto por el margen de @page, así que se anula. */
@@ -583,7 +616,7 @@ body{
   .sheet-meta{font-size:.72rem}
 
   /* Exercises — siempre una sola columna (evita que las estructuras y las
-     tablas MDEC se compriman/recorten en columnas angostas) */
+     tablas del análisis por partes se compriman/recorten en columnas angostas) */
   .exercises-list{display:grid;gap:6px;grid-template-columns:1fr}
   .exercise{
     box-shadow:none;border:1px solid #aaa;
@@ -594,7 +627,7 @@ body{
   /* Sin salto de página forzado: con el tamaño ya ajustado, el flujo natural
      (con "evitar cortar" en cada .exercise) ya deja 5 ejercicios de Tipo A
      por página. Forzar un salto cada 5 elementos, sin importar el tipo,
-     dejaba páginas a medias cuando un tipo más alto (Tipo C, con tabla MDEC)
+     dejaba páginas a medias cuando un tipo más alto (Tipo C, con su tabla)
      no cabía igual de apretado. */
 
   /* SVG sizing — con una sola columna hay ancho de sobra para que las
@@ -625,8 +658,11 @@ body{
   .ex-draw-box{background:#fff;border-color:#999}
   .mdec-name-display{background:#f9f9f9;border-color:#aaa}
 
-  /* Force MDEC colors in print */
+  /* Colores del método en la impresión (solo clave de respuestas) */
   .mdec-pill{color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .mdec-pill.pill-n{color:#000 !important;background:#fff !important;border:1px solid #777 !important}
+  .mdec-table-wrap,.ak-table-wrap{overflow:visible !important}
+  .mdec-table td.blank-line{height:22px}
   .pill-c{background:#1b8a3a !important}
   .pill-g{background:#b5176b !important}
   .pill-i{background:#d97200 !important}
@@ -655,10 +691,15 @@ body{
   .rxn-d-eq{overflow:visible !important;flex-wrap:wrap !important;gap:6px 10px !important;
     background:#f9f9f9 !important;border:1px solid #ddd;
     -webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .rxn-d-mol-box{min-width:80px !important;max-width:180px !important;
+  /* Antes max-width:180px dejaba las moléculas en ~4 pt: ilegibles. */
+  .rxn-d-mol-box{min-width:80px !important;max-width:none !important;
     padding:6px 10px !important;border:1px solid #bbb !important;background:#fff !important;
     -webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .rxn-d-blank-box{background:#fff7ed !important;border:2px dashed #c2410c !important;
+  .rxn-d-mol-box svg{max-width:100% !important;min-height:44px}
+  .rxn-d-fields{gap:10px}
+  .rxn-d-field{font-size:.8rem;color:#000}
+  .rxn-d-field .ans-line{border-bottom:1px solid #444 !important;height:18px}
+  .rxn-d-blank-box{background:#fff !important;border:2px dashed #555 !important;color:#000 !important;
     min-width:55px !important;padding:5px 12px !important;font-size:.9rem !important;
     -webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -723,28 +764,28 @@ body{
           <input type="checkbox" name="tipo" value="A">
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo A &mdash; Nombrar mol&eacute;cula</div>
-            <div class="tipo-item-desc">Se muestra la estructura; el alumno escribe el nombre IUPAC.</div>
+            <div class="tipo-item-desc">Se muestra la estructura; el estudiante escribe el nombre IUPAC.</div>
           </div>
         </label>
         <label class="tipo-item">
           <input type="checkbox" name="tipo" value="B">
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo B &mdash; Trazar estructura</div>
-            <div class="tipo-item-desc">Se da el nombre IUPAC; el alumno elige c&oacute;mo dibujar la estructura (esquel&eacute;tica o semidesarrollada).</div>
+            <div class="tipo-item-desc">Se da el nombre IUPAC; el estudiante elige c&oacute;mo dibujar la estructura (esquel&eacute;tica o semidesarrollada).</div>
           </div>
         </label>
         <label class="tipo-item">
           <input type="checkbox" name="tipo" value="C">
           <div class="tipo-item-body">
-            <div class="tipo-item-title">Tipo C &mdash; An&aacute;lisis MDEC</div>
-            <div class="tipo-item-desc">Se da el nombre coloreado por partes; el alumno identifica tipo y significado de cada fragmento.</div>
+            <div class="tipo-item-title">Tipo C &mdash; An&aacute;lisis por partes (m&eacute;todo de 4 colores)</div>
+            <div class="tipo-item-desc">Se da el nombre dividido en fragmentos (sin colores, para no regalar la respuesta); el estudiante identifica a qu&eacute; parte del m&eacute;todo pertenece cada uno (&#9312; Sustituyentes, &#9313; Cadena principal, &#9314; Insaturaci&oacute;n, &#9315; Grupo funcional) y qu&eacute; significa.</div>
           </div>
         </label>
         <label class="tipo-item">
           <input type="checkbox" name="tipo" value="D">
           <div class="tipo-item-body">
             <div class="tipo-item-title">Tipo D &mdash; Reacciones org&aacute;nicas</div>
-            <div class="tipo-item-desc">Se muestra la ecuaci&oacute;n con un dato oculto; el alumno predice el producto o identifica el tipo de reacci&oacute;n. Al marcar este tipo aparece un panel para elegir qu&eacute; grupos de reacciones repasar.</div>
+            <div class="tipo-item-desc">Se muestra la ecuaci&oacute;n con un dato oculto; el estudiante predice el producto o identifica el tipo de reacci&oacute;n. Al marcar este tipo aparece un panel para elegir qu&eacute; grupos de reacciones repasar.</div>
           </div>
         </label>
       </div>
@@ -763,7 +804,7 @@ body{
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquenos"> Alquenos</label>
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alquinos"> Alquinos</label>
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="benceno"> Arom&aacute;ticos (benceno)</label>
-        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="halogenuros"> Halogenuros de alquilo</label>
+        <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="halogenuros"> Haluros de alquilo</label>
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="alcoholes"> Alcoholes</label>
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="aldehidos"> Aldeh&iacute;dos</label>
         <label class="cb-item"><input type="checkbox" name="grupo_rxn" value="cetonas"> Cetonas</label>
@@ -816,6 +857,14 @@ body{
       </div>
     </div>
 
+    <!-- Clave de respuestas -->
+    <div class="config-section">
+      <div class="config-label">Clave de respuestas</div>
+      <div class="cb-grid">
+        <label class="cb-item"><input type="checkbox" id="incluir-clave"> Incluir la clave de respuestas al final (en una p&aacute;gina aparte, para el docente)</label>
+      </div>
+    </div>
+
     <!-- Warning -->
     <div class="warning" id="gen-warning"></div>
 
@@ -839,6 +888,7 @@ body{
       </div>
     </div>
     <div class="exercises-list" id="exercises-list"></div>
+    <div id="answer-key"></div>
 
   </div>
 
@@ -866,30 +916,31 @@ body{
     <table class="ref-table">
       <thead><tr><th>Sufijo / Patr&oacute;n</th><th>Grupo funcional</th><th>Ejemplo</th></tr></thead>
       <tbody>
-        <tr><td>-ano</td><td>Alcano</td><td>propano</td></tr>
-        <tr><td>-eno</td><td>Alqueno (C=C)</td><td>prop-1-eno</td></tr>
-        <tr><td>-ino</td><td>Alquino (C&equiv;C)</td><td>but-1-ino</td></tr>
+        <tr><td>-an- + -o (= -ano)</td><td>Alcano</td><td>propano</td></tr>
+        <tr><td>-en- + -o (= -eno)</td><td>Alqueno (C=C)</td><td>propeno</td></tr>
+        <tr><td>-in- + -o (= -ino)</td><td>Alquino (C&equiv;C)</td><td>but-1-ino</td></tr>
         <tr><td>-ol</td><td>Alcohol (&minus;OH)</td><td>propan-1-ol</td></tr>
         <tr><td>-al</td><td>Aldeh&iacute;do (&minus;CHO)</td><td>propanal</td></tr>
         <tr><td>-ona</td><td>Cetona (C=O interior)</td><td>propan-2-ona</td></tr>
         <tr><td>&aacute;cido &hellip;-oico</td><td>&Aacute;cido carbox&iacute;lico (&minus;COOH)</td><td>&aacute;cido propanoico</td></tr>
         <tr><td>&hellip;-oato de &hellip;</td><td>&Eacute;ster</td><td>etanoato de metilo</td></tr>
-        <tr><td>-oxi&hellip;</td><td>&Eacute;ter (&minus;O&minus;)</td><td>metoxietano</td></tr>
+        <tr><td>alcoxi- (prefijo &#9312;)</td><td>&Eacute;ter (&minus;O&minus;)</td><td>metoxietano</td></tr>
         <tr><td>-amida</td><td>Amida (&minus;CONH&sub2;)</td><td>etanamida</td></tr>
         <tr><td>-nitrilo</td><td>Nitrilo (&minus;C&equiv;N)</td><td>etanonitrilo</td></tr>
         <tr><td>-amina</td><td>Amina (&minus;NH&sub2;)</td><td>etanamina</td></tr>
       </tbody>
     </table>
+    <p style="font-size:.74rem;color:var(--dimmer);margin:6px 0 0">En el m&eacute;todo, -ano/-eno/-ino juntan dos partes: &#9314; la insaturaci&oacute;n (-an-, -en-, -in-) y &#9315; la terminaci&oacute;n -o. En los &eacute;teres el grupo alcoxi (metoxi, etoxi&hellip;) es &#9312; Sustituyentes.</p>
 
-    <div class="modal-section-label">Colores MDEC</div>
+    <div class="modal-section-label">Colores del m&eacute;todo (an&aacute;lisis por partes)</div>
     <table class="ref-table">
       <thead><tr><th colspan="2">Categor&iacute;a</th><th>Qu&eacute; identifica</th></tr></thead>
       <tbody>
-        <tr><td style="width:26px"><span class="mdec-dot" style="background:#166534"></span></td><td><strong>Cadena (C)</strong></td><td>Prefijo num&eacute;rico &mdash; carbonos de la cadena principal</td></tr>
-        <tr><td><span class="mdec-dot" style="background:#CC79A7"></span></td><td><strong>Grupo func. (G)</strong></td><td>Sufijo que indica el grupo funcional principal</td></tr>
-        <tr><td><span class="mdec-dot" style="background:#b45309"></span></td><td><strong>Insaturaci&oacute;n (I)</strong></td><td>Infijo -en- / -in- con indicador de posici&oacute;n</td></tr>
-        <tr><td><span class="mdec-dot" style="background:#0891b2"></span></td><td><strong>Ramificaci&oacute;n (R)</strong></td><td>Sustituyentes: metilos, etilos, halogens, etc.</td></tr>
-        <tr><td><span class="mdec-dot" style="background:linear-gradient(135deg,#166534 50%,#CC79A7 50%)"></span></td><td><strong>Doble rol (C+G)</strong></td><td>El anillo arom&aacute;tico (benceno, tolueno&hellip;) act&uacute;a a la vez como cadena principal y como grupo funcional</td></tr>
+        <tr><td style="width:26px"><span class="mdec-dot" style="background:#0891b2"></span></td><td><strong>&#9312; Sustituyentes</strong></td><td>Grupos alquilo (metil, etil&hellip;), hal&oacute;genos, alcoxi (metoxi&hellip;), nitro, el &laquo;de metilo&raquo; de los &eacute;steres, etc.</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#166534"></span></td><td><strong>&#9313; Cadena principal</strong></td><td>Prefijo de n&uacute;mero de carbonos (met-, et-, prop-&hellip;)</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#b45309"></span></td><td><strong>&#9314; Insaturaci&oacute;n</strong></td><td>-an- / -en- / -in- con su localizador</td></tr>
+        <tr><td><span class="mdec-dot" style="background:#CC79A7"></span></td><td><strong>&#9315; Grupo funcional</strong></td><td>Sufijo (-ol, -al, -ona, -oico&hellip;) o terminaci&oacute;n -o de los hidrocarburos</td></tr>
+        <tr><td><span class="mdec-dot" style="background:linear-gradient(135deg,#166534 50%,#CC79A7 50%)"></span></td><td><strong>Doble rol (&#9313;+&#9315;)</strong></td><td>El anillo arom&aacute;tico (benceno, tolueno&hellip;) act&uacute;a a la vez como cadena principal y como grupo funcional</td></tr>
       </tbody>
     </table>
   </div>
@@ -1263,7 +1314,7 @@ const MOLDES={
   dosDosDimetilpropan1ol:[{h:3,bn:1},{h:0,bn:1,bu:_C3,bd:_C3},{h:2,bn:1},{s:"O",h:1}],
   propano123triol:[{h:2,bn:1,bd:_O1},{h:1,bn:1,bd:_O1},{h:2,bn:1,bd:_O1}],
   dosMetilpentan1ol:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{s:"O",h:1}],
-  metanal:[{h:1,bu:_O0,buBn:2}],
+  metanal:[{h:2,bu:_O0,buBn:2}],
   heptanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
   octanal:[{h:3,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
   tresMetilbutanal:[{h:3,bn:1},{h:1,bn:1,bd:_C3},{h:2,bn:1},{h:1,bu:_O0,buBn:2}],
@@ -1536,14 +1587,14 @@ const MOLS = [
   {key:'acidopropanoico',name:'ácido propanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidobutanoico',name:'ácido butanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'but',cls:'c',l:'4 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acidopentanoico',name:'ácido pentanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'pent',cls:'c',l:'5 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
-  {key:'etanoatoMetilo',name:'etanoato de metilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
-  {key:'propanoatoMetilo',name:'propanoato de metilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster (del ácido propanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
-  {key:'etanoatoEtilo',name:'etanoato de etilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de etilo',cls:'r',l:'Grupo alcoxi (etanol)'}]},
-  {key:'butanoatoMetilo',name:'butanoato de metilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster (del ácido butanoico)'},{t:' de metilo',cls:'r',l:'Grupo alcoxi (metanol)'}]},
-  {key:'metoximetano',name:'metoximetano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'met',cls:'c',l:'1 carbono (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'metoxietano',name:'metoxietano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'etoxietano',name:'etoxietano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'metoxipropano',name:'1-metoxipropano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃) en C1'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'etanoatoMetilo',name:'etanoato de metilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'propanoatoMetilo',name:'propanoato de metilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster (del ácido propanoico)'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'etanoatoEtilo',name:'etanoato de etilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster (del ácido etanoico)'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'butanoatoMetilo',name:'butanoato de metilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster (del ácido butanoico)'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'metoximetano',name:'metoximetano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'met',cls:'c',l:'1 carbono (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'metoxietano',name:'metoxietano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'etoxietano',name:'etoxietano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'metoxipropano',name:'1-metoxipropano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃) en C1'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
   {key:'etanamida',name:'etanamida',topic:'amidas',parts:[{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
   {key:'propanamida',name:'propanamida',topic:'amidas',parts:[{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
   {key:'butanamida',name:'butanamida',topic:'amidas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
@@ -1721,41 +1772,41 @@ const MOLS = [
   {key:'cuatroMetilhexan2ona',name:'4-metilhexan-2-ona',topic:'cetonas',parts:[{t:'4-metil',cls:'r',l:'Metilo en C4'},{t:'hex',cls:'c',l:'6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'but3en2ona',name:'but-3-en-2-ona',topic:'cetonas',parts:[{t:'but',cls:'c',l:'4 carbonos'},{t:'3-en',cls:'i',l:'Doble enlace en C3'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
   {key:'pentano24diona',name:'pentano-2,4-diona',topic:'cetonas',parts:[{t:'pent',cls:'c',l:'5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o2,4-diona',cls:'g',l:'C=O en C2 y C4 (cetona)'}]},
-  {key:'propanoatoEtilo',name:'propanoato de etilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
-  {key:'butanoatoEtilo',name:'butanoato de etilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
-  {key:'propanoatoPropilo',name:'propanoato de propilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propoxi'}]},
-  {key:'etanoatoButilo',name:'etanoato de butilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de butilo',cls:'r',l:'Grupo butoxi'}]},
-  {key:'hexanoatoMetilo',name:'hexanoato de metilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'Cadena ácida (6C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi'}]},
-  {key:'dosMetilpropanoatoMetilo',name:'2-metilpropanoato de metilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi'}]},
-  {key:'etanoatoIsopropilo',name:'etanoato de isopropilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de isopropilo',cls:'r',l:'Grupo isopropoxi'}]},
-  {key:'benzoatoMetilo',name:'benzoato de metilo',topic:'esteres',parts:[{t:'benzo',cls:'c',l:'Cadena ácida (benceno)'},{t:'ato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi'}]},
-  {key:'benzoatoEtilo',name:'benzoato de etilo',topic:'esteres',parts:[{t:'benzo',cls:'c',l:'Cadena ácida (benceno)'},{t:'ato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
-  {key:'tresMetilbutanoatoEtilo',name:'3-metilbutanoato de etilo',topic:'esteres',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
-  {key:'propanoatoTercButilo',name:'propanoato de terc-butilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de terc-butilo',cls:'r',l:'Grupo terc-butoxi'}]},
-  {key:'heptanoatoMetilo',name:'heptanoato de metilo',topic:'esteres',parts:[{t:'hept',cls:'c',l:'Cadena ácida (7C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi'}]},
-  {key:'etanoatoHexilo',name:'etanoato de hexilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de hexilo',cls:'r',l:'Grupo hexiloxi'}]},
-  {key:'dosMetilpentanoatoEtilo',name:'2-metilpentanoato de etilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'Cadena ácida (5C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi'}]},
-  {key:'etanoatoCiclohexilo',name:'etanoato de ciclohexilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de ciclohexilo',cls:'r',l:'Grupo ciclohexiloxi'}]},
-  {key:'formiatoButilo',name:'metanoato de butilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido metanoico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de butilo',cls:'r',l:'Grupo butoxi'}]},
-  {key:'etoxibutano',name:'1-etoxibutano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'propoxibutano',name:'1-propoxibutano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'butoxibutano',name:'1-butoxibutano',topic:'eteres',parts:[{t:'1-butoxi',cls:'r',l:'Grupo butoxi (−OC₄H₉)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'diisopropiloxter',name:'2-isopropoxipropano',topic:'eteres',parts:[{t:'2-isopropoxi',cls:'r',l:'Grupo isopropoxi'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'propanoatoEtilo',name:'propanoato de etilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'butanoatoEtilo',name:'butanoato de etilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'propanoatoPropilo',name:'propanoato de propilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propilo (del alcohol)'}]},
+  {key:'etanoatoButilo',name:'etanoato de butilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de butilo',cls:'r',l:'Grupo butilo (del alcohol)'}]},
+  {key:'hexanoatoMetilo',name:'hexanoato de metilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'Cadena ácida (6C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'dosMetilpropanoatoMetilo',name:'2-metilpropanoato de metilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'etanoatoIsopropilo',name:'etanoato de isopropilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de isopropilo',cls:'r',l:'Grupo isopropilo (del alcohol)'}]},
+  {key:'benzoatoMetilo',name:'benzoato de metilo',topic:'esteres',parts:[{t:'benzo',cls:'c',l:'Cadena ácida (benceno)'},{t:'ato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'benzoatoEtilo',name:'benzoato de etilo',topic:'esteres',parts:[{t:'benzo',cls:'c',l:'Cadena ácida (benceno)'},{t:'ato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'tresMetilbutanoatoEtilo',name:'3-metilbutanoato de etilo',topic:'esteres',parts:[{t:'3-metil',cls:'r',l:'Metilo en C3'},{t:'but',cls:'c',l:'Cadena ácida (4C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'propanoatoTercButilo',name:'propanoato de terc-butilo',topic:'esteres',parts:[{t:'prop',cls:'c',l:'Cadena ácida (3C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de terc-butilo',cls:'r',l:'Grupo terc-butilo (del alcohol)'}]},
+  {key:'heptanoatoMetilo',name:'heptanoato de metilo',topic:'esteres',parts:[{t:'hept',cls:'c',l:'Cadena ácida (7C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'etanoatoHexilo',name:'etanoato de hexilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de hexilo',cls:'r',l:'Grupo hexilo (del alcohol)'}]},
+  {key:'dosMetilpentanoatoEtilo',name:'2-metilpentanoato de etilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'pent',cls:'c',l:'Cadena ácida (5C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'etanoatoCiclohexilo',name:'etanoato de ciclohexilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'Cadena ácida (2C)'},{t:'anoato',cls:'g',l:'Éster'},{t:' de ciclohexilo',cls:'r',l:'Grupo ciclohexilo (del alcohol)'}]},
+  {key:'formiatoButilo',name:'metanoato de butilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido metanoico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de butilo',cls:'r',l:'Grupo butilo (del alcohol)'}]},
+  {key:'etoxibutano',name:'1-etoxibutano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'propoxibutano',name:'1-propoxibutano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'butoxibutano',name:'1-butoxibutano',topic:'eteres',parts:[{t:'1-butoxi',cls:'r',l:'Grupo butoxi (−OC₄H₉)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'diisopropiloxter',name:'2-isopropoxipropano',topic:'eteres',parts:[{t:'2-isopropoxi',cls:'r',l:'Grupo isopropoxi'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
   {key:'etoxibenceno',name:'etoxibenceno',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Éter aromático)'}]},
   {key:'tetrahidrofurano',name:'oxolano (THF)',topic:'eteres',parts:[{t:'ox',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'olan',cls:'c',l:'Anillo de 5 átomos'},{t:'o',cls:'g',l:'Éter cíclico'}]},
   {key:'tetrahidropirano',name:'oxano (THP)',topic:'eteres',parts:[{t:'oxa',cls:'g',l:'Oxígeno heteroatómico (éter)'},{t:'n',cls:'c',l:'Anillo saturado de 6 miembros'},{t:'o',cls:'g',l:'Éter cíclico'}]},
-  {key:'oxirano',name:'1,2-epoxietano (oxirano)',topic:'eteres',parts:[{t:'1,2-epoxi',cls:'g',l:'Puente de oxígeno entre C1 y C2 (éter cíclico)'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación de alcano'}]},
-  {key:'dimetoxietano',name:'1,2-dimetoxietano',topic:'eteres',parts:[{t:'1,2-dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'dosMetoxi2Metilpropano',name:'2-metoxi-2-metilpropano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2'},{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter (MTBE)'}]},
-  {key:'etoxipentan',name:'1-etoxipentano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'oxirano',name:'oxirano',alt:'1,2-epoxietano',topic:'eteres',parts:[{t:'1,2-epoxi',cls:'r',l:'Puente de oxígeno (epoxi) entre C1 y C2: prefijo del éter cíclico'},{t:'et',cls:'c',l:'2 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación de alcano'}]},
+  {key:'dimetoxietano',name:'1,2-dimetoxietano',topic:'eteres',parts:[{t:'1,2-dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'et',cls:'c',l:'2 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'dosMetoxi2Metilpropano',name:'2-metoxi-2-metilpropano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2'},{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'etoxipentan',name:'1-etoxipentano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
   {key:'acidoOctanoico',name:'ácido octanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'oct',cls:'c',l:'8 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'nonanal',name:'nonanal',topic:'aldehidos',parts:[{t:'non',cls:'c',l:'9 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'al',cls:'g',l:'Aldehído terminal (−CHO)'}]},
   {key:'octan2ona',name:'octan-2-ona',topic:'cetonas',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'2-ona',cls:'g',l:'C=O en C2 (cetona)'}]},
-  {key:'metoxibutano',name:'1-metoxibutano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'etoxipropano',name:'1-etoxipropano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'propoxipropano',name:'1-propoxipropano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'metoxipentano',name:'1-metoxipentano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'dimetoximetano',name:'dimetoximetano',topic:'eteres',parts:[{t:'dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'met',cls:'c',l:'1 carbono (puente)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'metoxibutano',name:'1-metoxibutano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'but',cls:'c',l:'4 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'etoxipropano',name:'1-etoxipropano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'propoxipropano',name:'1-propoxipropano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'prop',cls:'c',l:'3 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'metoxipentano',name:'1-metoxipentano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'pent',cls:'c',l:'5 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'dimetoximetano',name:'dimetoximetano',topic:'eteres',parts:[{t:'dimetoxi',cls:'r',l:'Dos grupos metoxi'},{t:'met',cls:'c',l:'1 carbono (puente)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
   // ── nitrilos adicionales ──
   {key:'metanonitrilo',name:'metanonitrilo',topic:'nitrilos',parts:[{t:'met',cls:'c',l:'1 carbono'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
   {key:'heptanonitrilo',name:'heptanonitrilo',topic:'nitrilos',parts:[{t:'hept',cls:'c',l:'7 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'onitrilo',cls:'g',l:'Grupo nitrilo (−C≡N)'}]},
@@ -1841,43 +1892,43 @@ const MOLS = [
   {key:'acidoProp2enoico',name:'ácido prop-2-enoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'2-en',cls:'i',l:'Doble enlace en C2'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   {key:'acido2CloroButanoico',name:'ácido 2-clorobutanoico',topic:'acidos',parts:[{t:'ácido ',cls:'g',l:'Prefijo de ácido'},{t:'2-cloro',cls:'r',l:'Cloro en C2 (sustituyente halógeno)'},{t:'but',cls:'c',l:'4 carbonos (incluye −COOH)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oico',cls:'g',l:'Ácido carboxílico'}]},
   // ── esteres adicionales ──
-  {key:'pentanoatoMetilo',name:'pentanoato de metilo',topic:'esteres',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi (−OCH₃)'}]},
-  {key:'pentanoatoEtilo',name:'pentanoato de etilo',topic:'esteres',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi (−OC₂H₅)'}]},
-  {key:'hexanoatoEtilo',name:'hexanoato de etilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'6 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi (−OC₂H₅)'}]},
-  {key:'octanoatoMetilo',name:'octanoato de metilo',topic:'esteres',parts:[{t:'oct',cls:'c',l:'8 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi (−OCH₃)'}]},
-  {key:'etanoatoPropilo',name:'etanoato de propilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'2 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propoxi (−OC₃H₇)'}]},
-  {key:'butanoatoPropilo',name:'butanoato de propilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'4 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propoxi (−OC₃H₇)'}]},
-  {key:'metanoatoEtilo',name:'metanoato de etilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido fórmico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etoxi (−OC₂H₅)'}]},
-  {key:'metanoatoPropilo',name:'metanoato de propilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido fórmico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propoxi (−OC₃H₇)'}]},
-  {key:'hexanoatoIsopropilo',name:'hexanoato de isopropilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'6 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de isopropilo',cls:'r',l:'Grupo isopropoxi'}]},
-  {key:'dosMButanoatoMetilo',name:'2-metilbutanoato de metilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metoxi (−OCH₃)'}]},
+  {key:'pentanoatoMetilo',name:'pentanoato de metilo',topic:'esteres',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'pentanoatoEtilo',name:'pentanoato de etilo',topic:'esteres',parts:[{t:'pent',cls:'c',l:'5 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'hexanoatoEtilo',name:'hexanoato de etilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'6 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'octanoatoMetilo',name:'octanoato de metilo',topic:'esteres',parts:[{t:'oct',cls:'c',l:'8 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
+  {key:'etanoatoPropilo',name:'etanoato de propilo',topic:'esteres',parts:[{t:'et',cls:'c',l:'2 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propilo (del alcohol)'}]},
+  {key:'butanoatoPropilo',name:'butanoato de propilo',topic:'esteres',parts:[{t:'but',cls:'c',l:'4 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propilo (del alcohol)'}]},
+  {key:'metanoatoEtilo',name:'metanoato de etilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido fórmico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de etilo',cls:'r',l:'Grupo etilo (del alcohol)'}]},
+  {key:'metanoatoPropilo',name:'metanoato de propilo',topic:'esteres',parts:[{t:'met',cls:'c',l:'1 carbono (ácido fórmico)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de propilo',cls:'r',l:'Grupo propilo (del alcohol)'}]},
+  {key:'hexanoatoIsopropilo',name:'hexanoato de isopropilo',topic:'esteres',parts:[{t:'hex',cls:'c',l:'6 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de isopropilo',cls:'r',l:'Grupo isopropilo (del alcohol)'}]},
+  {key:'dosMButanoatoMetilo',name:'2-metilbutanoato de metilo',topic:'esteres',parts:[{t:'2-metil',cls:'r',l:'Metilo en C2'},{t:'but',cls:'c',l:'4 carbonos (cadena ácida)'},{t:'an',cls:'i',l:'Sin insaturaciones'},{t:'oato',cls:'g',l:'Éster'},{t:' de metilo',cls:'r',l:'Grupo metilo (del alcohol)'}]},
   // ── eteres adicionales ──
-  {key:'metoxihexano',name:'1-metoxihexano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'etoxihexano',name:'1-etoxihexano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'propoxihexano',name:'1-propoxihexano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'metoxiciclopentano',name:'metoxiciclopentano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter cíclico'}]},
-  {key:'etoxiciclohexano',name:'etoxiciclohexano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter cíclico'}]},
-  {key:'dosEtoxiPropano',name:'2-etoxipropano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'dosMetoxiButano',name:'2-metoxibutano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2 (−OCH₃)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
-  {key:'dosEtoxiButano',name:'2-etoxibutano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Éter'}]},
+  {key:'metoxihexano',name:'1-metoxihexano',topic:'eteres',parts:[{t:'1-metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'etoxihexano',name:'1-etoxihexano',topic:'eteres',parts:[{t:'1-etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'propoxihexano',name:'1-propoxihexano',topic:'eteres',parts:[{t:'1-propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'hex',cls:'c',l:'6 carbonos (cadena principal)'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'metoxiciclopentano',name:'metoxiciclopentano',topic:'eteres',parts:[{t:'metoxi',cls:'r',l:'Grupo metoxi (−OCH₃)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'pent',cls:'c',l:'Anillo de 5 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'etoxiciclohexano',name:'etoxiciclohexano',topic:'eteres',parts:[{t:'etoxi',cls:'r',l:'Grupo etoxi (−OC₂H₅)'},{t:'ciclo',cls:'c',l:'Prefijo cíclico'},{t:'hex',cls:'c',l:'Anillo de 6 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'dosEtoxiPropano',name:'2-etoxipropano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'prop',cls:'c',l:'3 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'dosMetoxiButano',name:'2-metoxibutano',topic:'eteres',parts:[{t:'2-metoxi',cls:'r',l:'Grupo metoxi en C2 (−OCH₃)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
+  {key:'dosEtoxiButano',name:'2-etoxibutano',topic:'eteres',parts:[{t:'2-etoxi',cls:'r',l:'Grupo etoxi en C2 (−OC₂H₅)'},{t:'but',cls:'c',l:'4 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'o',cls:'g',l:'Terminación -o (el éter se nombra con el prefijo alcoxi, ①)'}]},
   {key:'propoxibenceno',name:'propoxibenceno',topic:'eteres',parts:[{t:'propoxi',cls:'r',l:'Grupo propoxi (−OC₃H₇)'},{t:'benceno',cls:'cg',l:'Anillo aromático — cadena principal y grupo funcional a la vez (Éter aromático)'}]},
 
-  // ── nombre funcional/clásico "(radical)(radical) éter" (mismas moléculas de arriba) ──
-  {key:'metoximetano',name:'dimetil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos radicales iguales'},{t:'metil',cls:'c',l:'Radical alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'metoxietano',name:'etil metil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'etoxietano',name:'dietil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos radicales iguales'},{t:'etil',cls:'c',l:'Radical alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'metoxipropano',name:'metil propil éter',topic:'eteres',parts:[{t:'metil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'etoxipropano',name:'etil propil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'propoxipropano',name:'dipropil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos radicales iguales'},{t:'propil',cls:'c',l:'Radical alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'metoxibutano',name:'butil metil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'etoxibutano',name:'butil etil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' etil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'propoxibutano',name:'butil propil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'butoxibutano',name:'dibutil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos radicales iguales'},{t:'butil',cls:'c',l:'Radical alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'metoxipentano',name:'metil pentil éter',topic:'eteres',parts:[{t:'metil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' pentil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'etoxipentan',name:'etil pentil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' pentil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'metoxihexano',name:'hexil metil éter',topic:'eteres',parts:[{t:'hexil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'etoxihexano',name:'etil hexil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' hexil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
-  {key:'propoxihexano',name:'hexil propil éter',topic:'eteres',parts:[{t:'hexil',cls:'r',l:'Primer radical (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo radical'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  // ── nombre funcional clásico "(grupo 1) (grupo 2) éter" (mismas moléculas de arriba) ──
+  {key:'metoximetano',name:'dimetil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos grupos alquilo iguales'},{t:'metil',cls:'r',l:'Grupo alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'metoxietano',name:'etil metil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'etoxietano',name:'dietil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos grupos alquilo iguales'},{t:'etil',cls:'r',l:'Grupo alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'metoxipropano',name:'metil propil éter',topic:'eteres',parts:[{t:'metil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'etoxipropano',name:'etil propil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'propoxipropano',name:'dipropil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos grupos alquilo iguales'},{t:'propil',cls:'r',l:'Grupo alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'metoxibutano',name:'butil metil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'etoxibutano',name:'butil etil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' etil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'propoxibutano',name:'butil propil éter',topic:'eteres',parts:[{t:'butil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'butoxibutano',name:'dibutil éter',topic:'eteres',parts:[{t:'di',cls:'r',l:'Dos grupos alquilo iguales'},{t:'butil',cls:'r',l:'Grupo alquilo (×2)'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'metoxipentano',name:'metil pentil éter',topic:'eteres',parts:[{t:'metil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' pentil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'etoxipentan',name:'etil pentil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' pentil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'metoxihexano',name:'hexil metil éter',topic:'eteres',parts:[{t:'hexil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' metil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'etoxihexano',name:'etil hexil éter',topic:'eteres',parts:[{t:'etil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' hexil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
+  {key:'propoxihexano',name:'hexil propil éter',topic:'eteres',parts:[{t:'hexil',cls:'r',l:'Primer grupo alquilo (orden alfabético)'},{t:' propil',cls:'r',l:'Segundo grupo alquilo'},{t:' éter',cls:'g',l:'Grupo éter (nombre funcional)'}]},
   // ── amidas adicionales ──
   {key:'octanamida',name:'octanamida',topic:'amidas',parts:[{t:'oct',cls:'c',l:'8 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
   {key:'nonanamida',name:'nonanamida',topic:'amidas',parts:[{t:'non',cls:'c',l:'9 carbonos'},{t:'an',cls:'i',l:'Sin insaturaciones (−an−)'},{t:'amida',cls:'g',l:'Grupo amida (−CONH₂)'}]},
@@ -2454,7 +2505,7 @@ const BANCO_RXN = [
   // ── Hidrólisis / reducción / deshidratación (amidas) ──────────────────────
   {key:'rxn_84',topic:'amidas',categoria:'Hidrólisis (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CO−NH₂',reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',
+   r:'CH₃−CO−NH₂',reactivo:'+ H₃O⁺',condicion:'Δ (reflujo)',
    nombre_rxn:'Hidrólisis ácida de amida',
    regla:'Condiciones drásticas (ácido fuerte + calor) rompen el enlace amida.',
    respuesta:'CH₃−COOH  (ácido acético / etanoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
@@ -2957,15 +3008,17 @@ const BANCO_RXN = [
 // ─────────────────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────────────────
+// Partes del método de 4 colores (análisis por partes): ① Sustituyentes,
+// ② Cadena principal, ③ Insaturación, ④ Grupo funcional.
 const MDEC_NAMES = {
   c:'Cadena principal',
   g:'Grupo funcional',
   i:'Insaturación',
-  r:'Ramificación',
-  cg:'Cadena + Grupo funcional (doble rol)'
+  r:'Sustituyentes',
+  cg:'Cadena principal + Grupo funcional (doble rol)'
 };
-// Etiqueta corta para la insignia de tipo (CG en vez de "cg" en mayúsculas raras)
-function mdecTagLabel(cls){ return cls==='cg' ? 'C+G' : cls.toUpperCase(); }
+// Etiqueta corta para la insignia: el número de la parte del método.
+function mdecTagLabel(cls){ return ({r:'①',c:'②',i:'③',g:'④',cg:'②+④'})[cls]||cls; }
 
 function shuffle(arr){
   const a=[...arr];
@@ -2982,8 +3035,9 @@ function getSVG(key){
   return `<svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg"><text x="40" y="30" text-anchor="middle" font-size="9" fill="#999">${key}</text></svg>`;
 }
 
-function mdecPills(parts){
-  return parts.map(p=>`<span class="mdec-pill pill-${p.cls}">${p.t}</span>`).join('');
+// neutral=true → hoja del estudiante: fragmentos en gris (el color sería la respuesta).
+function mdecPills(parts, neutral){
+  return parts.map(p=>`<span class="mdec-pill pill-${neutral?'n':p.cls}">${p.t}</span>`).join('');
 }
 
 function mdecTableBlank(parts){
@@ -2992,10 +3046,10 @@ function mdecTableBlank(parts){
     <td class="blank-line">&mdash;</td>
     <td class="blank-line">&mdash;</td>
   </tr>`).join('');
-  return `<table class="mdec-table">
-    <thead><tr><th>Fragmento</th><th>Tipo (Cadena/GF/Insaturaci&oacute;n/Ramif.)</th><th>Significado</th></tr></thead>
+  return `<div class="mdec-table-wrap"><table class="mdec-table">
+    <thead><tr><th>Fragmento</th><th>Parte (&#9312;&ndash;&#9315;)</th><th>Significado</th></tr></thead>
     <tbody>${rows}</tbody>
-  </table>`;
+  </table></div>`;
 }
 
 function mdecTableFull(parts){
@@ -3004,10 +3058,10 @@ function mdecTableFull(parts){
     <td><span class="ak-tag tag-${p.cls}">${mdecTagLabel(p.cls)}</span> <span class="cls-name-${p.cls}">${MDEC_NAMES[p.cls]}</span></td>
     <td>${p.l}</td>
   </tr>`).join('');
-  return `<table class="ak-table">
-    <thead><tr><th>Fragmento</th><th>Tipo MDEC</th><th>Significado</th></tr></thead>
+  return `<div class="ak-table-wrap"><table class="ak-table">
+    <thead><tr><th>Fragmento</th><th>Parte del m&eacute;todo</th><th>Significado</th></tr></thead>
     <tbody>${rows}</tbody>
-  </table>`;
+  </table></div>`;
 }
 
 function printMdecTableFull(parts){
@@ -3017,7 +3071,7 @@ function printMdecTableFull(parts){
     <td>${p.l}</td>
   </tr>`).join('');
   return `<table class="print-ak-table">
-    <thead><tr><th>Fragmento</th><th>Tipo MDEC</th><th>Significado</th></tr></thead>
+    <thead><tr><th>Fragmento</th><th>Parte del m&eacute;todo</th><th>Significado</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
 }
@@ -3479,17 +3533,17 @@ function renderSheet(){
             <span class="ex-badge badge-b">Estructura</span>
             <span class="ex-instruction">Dibuja la estructura del siguiente compuesto (esquel&eacute;tica o semidesarrollada, a tu elecci&oacute;n):</span>
           </div>
-          <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre común: ${mol.name})</span>`:''}</div>
+          <div class="ex-compound-name">${mol.iupac||mol.name}${mol.iupac?`<span class="ex-compound-iupac">(nombre tradicional: ${mol.name})</span>`:''}</div>
           <div class="ex-draw-box"></div>
         </div>`;
       } else {
         exHtml=`<div class="exercise tipo-c">
           <div class="ex-header">
             <span class="ex-num">${num}.</span>
-            <span class="ex-badge badge-c">Análisis MDEC</span>
-            <span class="ex-instruction">Identifica cada parte del nombre según el método MDEC:</span>
+            <span class="ex-badge badge-c">Análisis por partes</span>
+            <span class="ex-instruction">Indica a qué parte del método de 4 colores pertenece cada fragmento y qué significa (①&nbsp;Sustituyentes, ②&nbsp;Cadena principal, ③&nbsp;Insaturación, ④&nbsp;Grupo funcional):</span>
           </div>
-          <div class="mdec-name-display">${mdecPills(mol.parts)}</div>
+          <div class="mdec-name-display">${mdecPills(mol.parts, true)}</div>
           ${mdecTableBlank(mol.parts)}
         </div>`;
       }
@@ -3517,13 +3571,56 @@ function renderSheet(){
     svg.style.height='auto';
   });
 
+  renderAnswerKey();
+
   sheet.className='show';
   document.getElementById('action-bar').className='action-bar show';
   sheet.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
+// Clave de respuestas (opcional): va al final, en página aparte al imprimir.
+// Aquí SÍ se usan los colores del método (en la hoja del estudiante no).
+function renderAnswerKey(){
+  const box=document.getElementById('answer-key');
+  const chk=document.getElementById('incluir-clave');
+  if(!box) return;
+  if(!chk||!chk.checked){ box.className=''; box.innerHTML=''; return; }
+  const items=_generated.map((entry, idx)=>{
+    const num=idx+1;
+    if(entry.kind==='rxn'){
+      const r=entry.rxn;
+      const cond=(r.condicion&&r.condicion!=='???')?` &middot; Condiciones: ${r.condicion}`:'';
+      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
+        <div class="ak-label">Reacci&oacute;n</div>
+        <div class="ak-name">${r.respuesta}</div>
+        <div class="ak-rxn-r">${r.nombre_rxn}${cond}</div></div></div>`;
+    }
+    const {mol, tipo}=entry;
+    const principal=mol.iupac||mol.name;
+    const extra=(mol.iupac?`<div class="ak-rxn-r">Nombre tradicional: ${mol.name}</div>`:'')
+      +(mol.alt?`<div class="ak-rxn-r">Tambi&eacute;n v&aacute;lido: ${mol.alt}</div>`:'');
+    if(tipo==='A'){
+      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
+        <div class="ak-label">Nomenclatura</div><div class="ak-name">${principal}</div>${extra}</div></div>`;
+    }
+    if(tipo==='B'){
+      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
+        <div class="ak-label">Estructura &mdash; ${principal}</div><div class="ak-svg">${getSVG(mol.key)}</div></div></div>`;
+    }
+    return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
+      <div class="ak-label">An&aacute;lisis por partes</div>
+      <div class="ak-pills">${mdecPills(mol.parts)}</div>
+      ${mdecTableFull(mol.parts)}</div></div>`;
+  }).join('');
+  box.className='answer-key';
+  box.innerHTML=`<h2>Clave de respuestas</h2>
+    <div class="ak-note">Para el docente. En la vista de impresi&oacute;n sale en una p&aacute;gina aparte: si vas a entregar la hoja a los estudiantes, no imprimas esa p&aacute;gina.</div>
+    <div class="ak-list">${items}</div>`;
+}
+
 function resetSheet(){
   document.getElementById('exercise-sheet').className='';
+  const ak=document.getElementById('answer-key'); if(ak){ak.className='';ak.innerHTML='';}
   document.getElementById('action-bar').className='action-bar';
   document.getElementById('exercises-list').innerHTML='';
   document.getElementById('gen-warning').className='warning';
@@ -3535,12 +3632,17 @@ function resetSheet(){
 function exportPDF(){
   const styles=document.querySelector('style').textContent;
   const body=document.getElementById('exercise-sheet').innerHTML;
+  // Las fuentes (Outfit, JetBrains Mono, Fraunces) se enlazan con URL
+  // absoluta: la ventana nueva es un blob: y no resuelve rutas relativas.
+  const fonts=document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+  const fontsLink=fonts?'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="'+fonts.href+'">':'';
   const html='<!DOCTYPE html><html lang="es"><head>'
     +'<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
     +'<title>ChromaNom — Ejercicios</title>'
+    +fontsLink
     +'<style>'+styles+'</style></head>'
     +'<body><div id="exercise-sheet" class="show">'+body+'</div>'
-    +'<scr'+'ipt>window.onload=function(){setTimeout(function(){window.print();},400);};<\/scr'+'ipt>'
+    +'<scr'+'ipt>window.onload=function(){var f=(document.fonts&&document.fonts.ready)||Promise.resolve();f.then(function(){setTimeout(function(){window.print();},300);});};<\/scr'+'ipt>'
     +'</body></html>';
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
