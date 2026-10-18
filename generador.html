@@ -397,8 +397,8 @@ body{
 /* Doble rol (ej. el anillo bencénico: es cadena Y grupo funcional a la vez) */
 .pill-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
 /* Hoja del estudiante: fragmentos SIN color (gris neutro) — si salieran
-   coloreados, el color le regalaría la respuesta. El color solo aparece
-   en la clave de respuestas. */
+   coloreados, el color le regalaría la respuesta. (No hay clave de
+   respuestas a propósito: los estudiantes también generan sus hojas.) */
 .mdec-pill.pill-n{background:#eef2f6;color:#0d2233;border:1.5px solid #94a3b8}
 .mdec-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 
@@ -569,15 +569,6 @@ body{
 .cls-name-r{color:var(--c-r);font-weight:700}
 .cls-name-cg{background:linear-gradient(90deg,var(--c-c),var(--c-g));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
 
-/* ── Clave de respuestas (opcional, al final de la hoja) ── */
-.answer-key{margin-top:28px;background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
-.answer-key h2{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:4px}
-.answer-key .ak-note{font-size:.78rem;color:var(--dimmer);margin-bottom:12px}
-.ak-list{display:flex;flex-direction:column;gap:8px}
-.ak-table-wrap{overflow-x:auto;max-width:100%}
-.ak-pills{display:flex;flex-wrap:wrap;gap:2px;margin:2px 0 4px}
-.ak-pills .mdec-pill{font-size:.78rem;padding:2px 8px}
-.ak-rxn-r{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--tx)}
 
 
 /* ── PRINT STYLES ── */
@@ -598,8 +589,6 @@ body{
   /* Show sheet */
   #exercise-sheet{display:block !important;padding-bottom:0 !important}
   .ex-svg-wrap{overflow:visible !important}
-  .answer-key{box-shadow:none;border:none;padding:0;margin-top:0;break-before:page;page-break-before:always}
-  .answer-key h2{color:#000}
   .ak-item{break-inside:avoid;page-break-inside:avoid;background:#fff;border-color:#aaa}
   .ak-tag,.print-tag-cg{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   /* .app trae padding pensado para la pantalla (28px arriba, 80px abajo para
@@ -658,7 +647,7 @@ body{
   .ex-draw-box{background:#fff;border-color:#999}
   .mdec-name-display{background:#f9f9f9;border-color:#aaa}
 
-  /* Colores del método en la impresión (solo clave de respuestas) */
+  /* Colores del método en la impresión */
   .mdec-pill{color:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .mdec-pill.pill-n{color:#000 !important;background:#fff !important;border:1px solid #777 !important}
   .mdec-table-wrap,.ak-table-wrap{overflow:visible !important}
@@ -857,14 +846,6 @@ body{
       </div>
     </div>
 
-    <!-- Clave de respuestas -->
-    <div class="config-section">
-      <div class="config-label">Clave de respuestas</div>
-      <div class="cb-grid">
-        <label class="cb-item"><input type="checkbox" id="incluir-clave"> Incluir la clave de respuestas al final (en una p&aacute;gina aparte, para el docente)</label>
-      </div>
-    </div>
-
     <!-- Warning -->
     <div class="warning" id="gen-warning"></div>
 
@@ -888,7 +869,6 @@ body{
       </div>
     </div>
     <div class="exercises-list" id="exercises-list"></div>
-    <div id="answer-key"></div>
 
   </div>
 
@@ -3561,7 +3541,6 @@ function renderSheet(){
   // espacio disponible de la forma más legible posible.
   sizeMolSvgs(list.querySelectorAll('.ex-svg-wrap svg'));
 
-  renderAnswerKey();
 
   sheet.className='show';
   document.getElementById('action-bar').className='action-bar show';
@@ -3586,50 +3565,8 @@ function sizeMolSvgs(svgs){
   });
 }
 
-// Clave de respuestas (opcional): va al final, en página aparte al imprimir.
-// Aquí SÍ se usan los colores del método (en la hoja del estudiante no).
-function renderAnswerKey(){
-  const box=document.getElementById('answer-key');
-  const chk=document.getElementById('incluir-clave');
-  if(!box) return;
-  if(!chk||!chk.checked){ box.className=''; box.innerHTML=''; return; }
-  const items=_generated.map((entry, idx)=>{
-    const num=idx+1;
-    if(entry.kind==='rxn'){
-      const r=entry.rxn;
-      const cond=(r.condicion&&r.condicion!=='???')?` &middot; Condiciones: ${r.condicion}`:'';
-      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
-        <div class="ak-label">Reacci&oacute;n</div>
-        <div class="ak-name">${r.respuesta}</div>
-        <div class="ak-rxn-r">${r.nombre_rxn}${cond}</div></div></div>`;
-    }
-    const {mol, tipo}=entry;
-    const principal=mol.iupac||mol.name;
-    const extra=(mol.iupac?`<div class="ak-rxn-r">Nombre tradicional: ${mol.name}</div>`:'')
-      +(mol.alt?`<div class="ak-rxn-r">Tambi&eacute;n v&aacute;lido: ${mol.alt}</div>`:'');
-    if(tipo==='A'){
-      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
-        <div class="ak-label">Nomenclatura</div><div class="ak-name">${principal}</div>${extra}</div></div>`;
-    }
-    if(tipo==='B'){
-      return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
-        <div class="ak-label">Estructura &mdash; ${principal}</div><div class="ak-svg">${getSVG(mol.key)}</div></div></div>`;
-    }
-    return `<div class="ak-item"><div class="ak-num">${num}.</div><div class="ak-body">
-      <div class="ak-label">An&aacute;lisis por partes</div>
-      <div class="ak-pills">${mdecPills(mol.parts)}</div>
-      ${mdecTableFull(mol.parts)}</div></div>`;
-  }).join('');
-  box.className='answer-key';
-  box.innerHTML=`<h2>Clave de respuestas</h2>
-    <div class="ak-note">Para el docente. En la vista de impresi&oacute;n sale en una p&aacute;gina aparte: si vas a entregar la hoja a los estudiantes, no imprimas esa p&aacute;gina.</div>
-    <div class="ak-list">${items}</div>`;
-  sizeMolSvgs(box.querySelectorAll('.ak-svg svg'));
-}
-
 function resetSheet(){
   document.getElementById('exercise-sheet').className='';
-  const ak=document.getElementById('answer-key'); if(ak){ak.className='';ak.innerHTML='';}
   document.getElementById('action-bar').className='action-bar';
   document.getElementById('exercises-list').innerHTML='';
   document.getElementById('gen-warning').className='warning';
