@@ -7,6 +7,46 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-18 (103) — Fondo "premium": moléculas más finas, profundidad y degradado suave
+
+### Contexto
+Al docente le gustaba la marca de agua de moléculas, pero pidió un acabado
+más premium.
+
+### Cambios
+- `fondo-moleculas.svg` regenerado (13 moléculas reales en esqueletal:
+  2-metilpentano, pent-2-eno, benceno, butan-2-ol, ácido propanoico,
+  metilciclohexano, butan-2-ona, but-2-ino, propan-1-amina, but-1-eno):
+  - trazo fino (2,4) con un pequeño nodo en cada átomo de carbono (estilo
+    modelo molecular); O, OH y NH₂ como etiquetas discretas, con el enlace
+    recortado antes de la letra;
+  - tamaños y opacidades distintos (profundidad), mosaico de 900×1100 con
+    más espacio entre moléculas;
+  - colores MDEC: verde cadena, turquesa ramificación, dorado
+    insaturación, rosa grupo funcional.
+- `herramientas/generar_fondo_moleculas.py` (nuevo): el script que genera el
+  SVG a partir de átomos y enlaces, para poder cambiar las moléculas sin
+  dibujarlas a mano. Verificado: ninguna molécula a menos de 24 px de otra,
+  incluidas las copias vecinas del mosaico.
+- `chromanom.css`:
+  - degradado muy suave en el fondo (azul de la marca arriba a la
+    izquierda y toques de turquesa, rosa y dorado en las otras esquinas);
+  - la marca de agua se ve más en los bordes y se desvanece hacia el
+    centro, donde está el texto (en celular, más suave en el centro de la
+    pantalla);
+  - nada de esto se imprime.
+- `sw.js`: caché v12.
+
+### Verificación
+Playwright: las 7 páginas a 360/390/414/820/1366 px sin errores ni
+desbordamiento; banco del juego sin problemas; capturas de portada y
+Principios en PC y celular.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-16 (102) — Pie de página con la licencia CC en todas las páginas
 
 ### Contexto

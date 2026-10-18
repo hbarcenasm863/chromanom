@@ -113,19 +113,35 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .cn-page-head.cn-in{max-width:none;padding:28px 0 18px;margin:0 0 18px;border-bottom:1px solid var(--cn-brd)}
 @media (max-width:640px){.cn-page-head.cn-in{padding:18px 0 14px}}
 
-/* ── Marca de agua de moléculas (colores MDEC) en todo el fondo ─────────
-   La inserta site-ui.js como #cn-mol-bg. Queda fija detrás de todo el
-   contenido (z-index:-1) y no recibe clics. Las moléculas son reales
-   (fórmula esqueletal) — ver fondo-moleculas.svg: un solo mosaico de dos
-   columnas intercaladas, comprobado para que ninguna molécula se cruce con
-   otra, ni dentro del dibujo ni al repetirse. (No superponer capas: dos
-   copias encimadas hacían que las moléculas se atravesaran.) */
+/* ── Fondo premium: degradado suave + marca de agua de moléculas MDEC ────
+   1) body: degradado muy tenue con el azul de la marca y toques de los
+      colores del método en las esquinas (fijo al hacer scroll).
+   2) #cn-mol-bg (lo inserta site-ui.js): mosaico de moléculas reales en
+      esqueletal (fondo-moleculas.svg, trazo fino con nodos en los carbonos,
+      distintos tamaños para dar profundidad). Se ve con más fuerza en los
+      bordes y se desvanece hacia el centro, donde está el texto.
+   Regla: UNA sola capa del mosaico — dos copias encimadas hacían que las
+   moléculas se atravesaran. El SVG se genera con un script que comprueba
+   que ninguna molécula toque a otra, ni al repetirse. */
+body{
+  background-image:
+    radial-gradient(900px 700px at -10% -10%,rgba(26,110,168,.10),transparent 60%),
+    radial-gradient(700px 600px at 110% 5%,rgba(8,145,178,.07),transparent 60%),
+    radial-gradient(800px 700px at 105% 105%,rgba(204,121,167,.07),transparent 60%),
+    radial-gradient(700px 600px at -5% 100%,rgba(180,83,9,.05),transparent 60%)!important;
+  background-attachment:fixed!important;
+}
 #cn-mol-bg{
   position:fixed;inset:0;
-  background:url(fondo-moleculas.svg) left 10px top 40px/600px auto repeat;
-  opacity:.3;z-index:-1;pointer-events:none;
+  background:url(fondo-moleculas.svg) left -40px top 10px/780px auto repeat;
+  opacity:.5;z-index:-1;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 55% 60% at 50% 48%,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 45%,#000 100%);
+          mask-image:radial-gradient(ellipse 55% 60% at 50% 48%,rgba(0,0,0,.22) 0%,rgba(0,0,0,.45) 45%,#000 100%);
 }
 @media (max-width:640px){
-  #cn-mol-bg{opacity:.16;background-size:460px auto;background-position:left 0 top 30px}
+  #cn-mol-bg{opacity:.32;background-size:560px auto;background-position:left -30px top 10px;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.55) 40%,rgba(0,0,0,.55) 70%,#000 100%);
+            mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.55) 40%,rgba(0,0,0,.55) 70%,#000 100%)}
 }
+@media print{body{background-image:none!important}}
 @media print{#cn-mol-bg{display:none!important}}

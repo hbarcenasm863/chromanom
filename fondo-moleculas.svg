@@ -1,114 +1,185 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1320" viewBox="0 0 720 1320">
-<!-- Marca de agua de ChromaNom: moléculas reales en fórmula esqueletal,
-     coloreadas con el código MDEC:
-     verde = cadena principal · turquesa = ramificación ·
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
+<!-- Marca de agua de ChromaNom (versión premium): moléculas reales en fórmula
+     esqueletal, trazo fino con nodos en los átomos de carbono, coloreadas con
+     el código MDEC: verde = cadena · turquesa = ramificación ·
      dorado = insaturación · rosa = grupo funcional.
-     Dos columnas intercaladas; cada molécula tiene su propio espacio y el
-     patrón se repite (ver chromanom.css) sin que ninguna se cruce con otra. -->
-<g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" font-family="Outfit, Arial, sans-serif" font-weight="700" font-size="26">
-  <!-- 2-metilpentano -->
-  <g class="mol" transform="translate(36 70) rotate(-8)">
-    <polyline points="0,40 44,15 88,40 132,15 176,40" stroke="#166534"/>
-    <line x1="44" y1="15" x2="44" y2="-35" stroke="#0891b2"/>
-  </g>
-  <!-- pent-2-eno -->
-  <g class="mol" transform="translate(70 230) rotate(6)">
-    <polyline points="0,15 44,40" stroke="#166534"/>
-    <line x1="44" y1="40" x2="88" y2="15" stroke="#b45309"/>
-    <line x1="49" y1="49" x2="91" y2="25" stroke="#b45309"/>
-    <polyline points="88,15 132,40 176,15" stroke="#166534"/>
-  </g>
+     Generado con un script: cada molécula tiene su propio espacio y el mosaico
+     se repite sin que ninguna se cruce con otra (comprobado midiendo en el
+     navegador). Distintos tamaños/opacidades dan sensación de profundidad. -->
+<g fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" font-family="Outfit, Arial, sans-serif" font-weight="600" font-size="17">
   <!-- benceno -->
-  <g class="mol" transform="translate(110 380) rotate(0)">
-    <polygon points="44,0 82,22 82,66 44,88 6,66 6,22" stroke="#166534"/>
-    <circle cx="44" cy="44" r="25" stroke="#CC79A7"/>
-  </g>
-  <!-- butan-2-ol -->
-  <g class="mol" transform="translate(30 590) rotate(-5)">
-    <polyline points="0,40 44,15 88,40 132,15" stroke="#166534"/>
-    <line x1="44" y1="15" x2="44" y2="-25" stroke="#CC79A7"/>
-    <text x="28" y="-34" fill="#CC79A7" stroke="none">OH</text>
-  </g>
-  <!-- ácido propanoico -->
-  <g class="mol" transform="translate(150 740) rotate(4)">
-    <polyline points="0,40 44,15 88,40" stroke="#166534"/>
-    <line x1="88" y1="40" x2="88" y2="-5" stroke="#CC79A7"/>
-    <line x1="98" y1="40" x2="98" y2="-5" stroke="#CC79A7"/>
-    <line x1="88" y1="40" x2="128" y2="63" stroke="#CC79A7"/>
-    <text x="84" y="-14" fill="#CC79A7" stroke="none">O</text>
-    <text x="132" y="78" fill="#CC79A7" stroke="none">OH</text>
-  </g>
-  <!-- metilciclohexano -->
-  <g class="mol" transform="translate(40 910) rotate(-10)">
-    <polygon points="44,0 82,22 82,66 44,88 6,66 6,22" stroke="#166534"/>
-    <line x1="82" y1="22" x2="124" y2="0" stroke="#0891b2"/>
-  </g>
-  <!-- butan-2-ona -->
-  <g class="mol" transform="translate(170 1080) rotate(8)">
-    <polyline points="0,40 44,15 88,40 132,15" stroke="#166534"/>
-    <line x1="39" y1="15" x2="39" y2="-30" stroke="#CC79A7"/>
-    <line x1="49" y1="15" x2="49" y2="-30" stroke="#CC79A7"/>
-    <text x="34" y="-38" fill="#CC79A7" stroke="none">O</text>
-  </g>
-  <!-- but-2-ino -->
-  <g class="mol" transform="translate(30 1230) rotate(-4)">
-    <line x1="0" y1="20" x2="44" y2="20" stroke="#166534"/>
-    <line x1="44" y1="20" x2="100" y2="20" stroke="#b45309"/>
-    <line x1="44" y1="10" x2="100" y2="10" stroke="#b45309"/>
-    <line x1="44" y1="30" x2="100" y2="30" stroke="#b45309"/>
-    <line x1="100" y1="20" x2="144" y2="20" stroke="#166534"/>
-  </g>
-  <!-- benceno -->
-  <g class="mol" transform="translate(470 70) rotate(0)">
-    <polygon points="44,0 82,22 82,66 44,88 6,66 6,22" stroke="#166534"/>
-    <circle cx="44" cy="44" r="25" stroke="#CC79A7"/>
+  <g class="mol" opacity="0.55" transform="translate(110 120) rotate(0) scale(1.5) translate(-0.0 0.0)">
+    <line x1="0.0" y1="-23.0" x2="19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="19.9" y1="-11.5" x2="19.9" y2="11.5" stroke="#166534"/>
+    <line x1="19.9" y1="11.5" x2="0.0" y2="23.0" stroke="#166534"/>
+    <line x1="0.0" y1="23.0" x2="-19.9" y2="11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="11.5" x2="-19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="-11.5" x2="0.0" y2="-23.0" stroke="#166534"/>
+    <circle cx="0" cy="0" r="13" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="-23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="0.0" cy="23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
   </g>
   <!-- 2-metilpentano -->
-  <g class="mol" transform="translate(420 300) rotate(6)">
-    <polyline points="0,40 44,15 88,40 132,15 176,40" stroke="#166534"/>
-    <line x1="44" y1="15" x2="44" y2="-35" stroke="#0891b2"/>
-  </g>
-  <!-- but-2-ino -->
-  <g class="mol" transform="translate(470 430) rotate(3)">
-    <line x1="0" y1="20" x2="44" y2="20" stroke="#166534"/>
-    <line x1="44" y1="20" x2="100" y2="20" stroke="#b45309"/>
-    <line x1="44" y1="10" x2="100" y2="10" stroke="#b45309"/>
-    <line x1="44" y1="30" x2="100" y2="30" stroke="#b45309"/>
-    <line x1="100" y1="20" x2="144" y2="20" stroke="#166534"/>
-  </g>
-  <!-- ácido propanoico -->
-  <g class="mol" transform="translate(420 540) rotate(-4)">
-    <polyline points="0,40 44,15 88,40" stroke="#166534"/>
-    <line x1="88" y1="40" x2="88" y2="-5" stroke="#CC79A7"/>
-    <line x1="98" y1="40" x2="98" y2="-5" stroke="#CC79A7"/>
-    <line x1="88" y1="40" x2="128" y2="63" stroke="#CC79A7"/>
-    <text x="84" y="-14" fill="#CC79A7" stroke="none">O</text>
-    <text x="132" y="78" fill="#CC79A7" stroke="none">OH</text>
-  </g>
-  <!-- pent-2-eno -->
-  <g class="mol" transform="translate(450 700) rotate(-6)">
-    <polyline points="0,15 44,40" stroke="#166534"/>
-    <line x1="44" y1="40" x2="88" y2="15" stroke="#b45309"/>
-    <line x1="49" y1="49" x2="91" y2="25" stroke="#b45309"/>
-    <polyline points="88,15 132,40 176,15" stroke="#166534"/>
+  <g class="mol" opacity="1" transform="translate(420 90) rotate(-8) scale(1.0) translate(-63.5 16.7)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="103.9" y1="-20.0" x2="138.6" y2="0.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="34.6" y2="-60.0" stroke="#0891b2"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="138.6" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-60.0" r="3" fill="#0891b2" stroke="none"/>
   </g>
   <!-- butan-2-ona -->
-  <g class="mol" transform="translate(430 880) rotate(-6)">
-    <polyline points="0,40 44,15 88,40 132,15" stroke="#166534"/>
-    <line x1="39" y1="15" x2="39" y2="-30" stroke="#CC79A7"/>
-    <line x1="49" y1="15" x2="49" y2="-30" stroke="#CC79A7"/>
-    <text x="34" y="-38" fill="#CC79A7" stroke="none">O</text>
+  <g class="mol" opacity="0.8" transform="translate(740 150) rotate(6) scale(1.15) translate(-48.5 20.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="32.0" y1="-20.0" x2="32.0" y2="-49.0" stroke="#CC79A7"/>
+    <line x1="37.2" y1="-20.0" x2="37.2" y2="-49.0" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <text x="34.6" y="-60.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(-6 34.6 -60.0)">O</text>
   </g>
-  <!-- metilciclohexano -->
-  <g class="mol" transform="translate(500 990) rotate(8)">
-    <polygon points="44,0 82,22 82,66 44,88 6,66 6,22" stroke="#166534"/>
-    <line x1="82" y1="22" x2="124" y2="0" stroke="#0891b2"/>
+  <!-- but-2-ino -->
+  <g class="mol" opacity="1" transform="translate(280 300) rotate(-12) scale(1.0) translate(-60.0 -0.0)">
+    <line x1="0.0" y1="0.0" x2="40.0" y2="0.0" stroke="#166534"/>
+    <line x1="40.0" y1="-4.0" x2="80.0" y2="-4.0" stroke="#b45309"/>
+    <line x1="40.0" y1="0.0" x2="80.0" y2="0.0" stroke="#b45309"/>
+    <line x1="40.0" y1="4.0" x2="80.0" y2="4.0" stroke="#b45309"/>
+    <line x1="80.0" y1="0.0" x2="120.0" y2="0.0" stroke="#166534"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="40.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="80.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="120.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+  </g>
+  <!-- ácido propanoico -->
+  <g class="mol" opacity="0.6" transform="translate(620 360) rotate(4) scale(1.3) translate(-55.4 8.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="66.7" y1="0.0" x2="66.7" y2="-29.0" stroke="#CC79A7"/>
+    <line x1="71.9" y1="0.0" x2="71.9" y2="-29.0" stroke="#CC79A7"/>
+    <line x1="69.3" y1="0.0" x2="91.8" y2="13.0" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <text x="69.3" y="-40.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(-4 69.3 -40.0)">O</text>
+    <text x="103.9" y="20.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(-4 103.9 20.0)">OH</text>
   </g>
   <!-- butan-2-ol -->
-  <g class="mol" transform="translate(440 1170) rotate(5)">
-    <polyline points="0,40 44,15 88,40 132,15" stroke="#166534"/>
-    <line x1="44" y1="15" x2="44" y2="-25" stroke="#CC79A7"/>
-    <text x="28" y="-34" fill="#CC79A7" stroke="none">OH</text>
+  <g class="mol" opacity="0.8" transform="translate(110 470) rotate(-6) scale(1.15) translate(-48.5 20.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="34.6" y2="-46.0" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <text x="34.6" y="-60.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(6 34.6 -60.0)">OH</text>
+  </g>
+  <!-- metilciclohexano -->
+  <g class="mol" opacity="0.55" transform="translate(420 560) rotate(10) scale(1.35) translate(-7.8 4.5)">
+    <line x1="0.0" y1="-23.0" x2="19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="19.9" y1="-11.5" x2="19.9" y2="11.5" stroke="#166534"/>
+    <line x1="19.9" y1="11.5" x2="0.0" y2="23.0" stroke="#166534"/>
+    <line x1="0.0" y1="23.0" x2="-19.9" y2="11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="11.5" x2="-19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="-11.5" x2="0.0" y2="-23.0" stroke="#166534"/>
+    <line x1="19.9" y1="-11.5" x2="54.6" y2="-31.5" stroke="#0891b2"/>
+    <circle cx="0.0" cy="-23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="0.0" cy="23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="54.6" cy="-31.5" r="3" fill="#0891b2" stroke="none"/>
+  </g>
+  <!-- propan-1-amina -->
+  <g class="mol" opacity="1" transform="translate(770 600) rotate(-4) scale(1.05) translate(-52.0 10.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="91.8" y2="-13.0" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <text x="103.9" y="-20.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(4 103.9 -20.0)">NH₂</text>
+  </g>
+  <!-- pent-2-eno -->
+  <g class="mol" opacity="0.65" transform="translate(230 760) rotate(6) scale(1.25) translate(-69.3 8.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="35.9" y1="-22.3" x2="70.6" y2="-2.3" stroke="#b45309"/>
+    <line x1="33.3" y1="-17.7" x2="68.0" y2="2.3" stroke="#b45309"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="103.9" y1="-20.0" x2="138.6" y2="0.0" stroke="#166534"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="138.6" cy="0.0" r="3" fill="#166534" stroke="none"/>
+  </g>
+  <!-- but-1-eno -->
+  <g class="mol" opacity="1" transform="translate(600 820) rotate(-10) scale(1.0) translate(-52.0 10.0)">
+    <line x1="-1.3" y1="-2.3" x2="33.3" y2="-22.3" stroke="#b45309"/>
+    <line x1="1.3" y1="2.3" x2="35.9" y2="-17.7" stroke="#b45309"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+  </g>
+  <!-- benceno -->
+  <g class="mol" opacity="1" transform="translate(820 980) rotate(0) scale(1.0) translate(-0.0 0.0)">
+    <line x1="0.0" y1="-23.0" x2="19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="19.9" y1="-11.5" x2="19.9" y2="11.5" stroke="#166534"/>
+    <line x1="19.9" y1="11.5" x2="0.0" y2="23.0" stroke="#166534"/>
+    <line x1="0.0" y1="23.0" x2="-19.9" y2="11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="11.5" x2="-19.9" y2="-11.5" stroke="#166534"/>
+    <line x1="-19.9" y1="-11.5" x2="0.0" y2="-23.0" stroke="#166534"/>
+    <circle cx="0" cy="0" r="13" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="-23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="0.0" cy="23.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="11.5" r="3" fill="#166534" stroke="none"/>
+    <circle cx="-19.9" cy="-11.5" r="3" fill="#166534" stroke="none"/>
+  </g>
+  <!-- butan-2-ona -->
+  <g class="mol" opacity="1" transform="translate(120 980) rotate(-4) scale(0.95) translate(-48.5 20.0)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="32.0" y1="-20.0" x2="32.0" y2="-49.0" stroke="#CC79A7"/>
+    <line x1="37.2" y1="-20.0" x2="37.2" y2="-49.0" stroke="#CC79A7"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <text x="34.6" y="-60.0" fill="#CC79A7" stroke="none" text-anchor="middle" dominant-baseline="central" transform="rotate(4 34.6 -60.0)">O</text>
+  </g>
+  <!-- 2-metilpentano -->
+  <g class="mol" opacity="0.55" transform="translate(460 1010) rotate(8) scale(1.3) translate(-63.5 16.7)">
+    <line x1="0.0" y1="0.0" x2="34.6" y2="-20.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="69.3" y2="0.0" stroke="#166534"/>
+    <line x1="69.3" y1="0.0" x2="103.9" y2="-20.0" stroke="#166534"/>
+    <line x1="103.9" y1="-20.0" x2="138.6" y2="0.0" stroke="#166534"/>
+    <line x1="34.6" y1="-20.0" x2="34.6" y2="-60.0" stroke="#0891b2"/>
+    <circle cx="0.0" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="69.3" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="103.9" cy="-20.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="138.6" cy="0.0" r="3" fill="#166534" stroke="none"/>
+    <circle cx="34.6" cy="-60.0" r="3" fill="#0891b2" stroke="none"/>
   </g>
 </g>
 </svg>
