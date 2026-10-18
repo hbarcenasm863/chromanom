@@ -150,7 +150,7 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 .step-desc.i .step-icon{background:var(--c3b)}
 .step-desc.g .step-icon{background:var(--c4b)}
 .step-text strong{font-size:.88rem;display:block;margin-bottom:3px}
-.step-desc.r .step-text strong{color:var(--c1)}
+.step-desc.r .step-text strong{color:var(--c1t)}
 .step-desc.c .step-text strong{color:var(--c2t)}
 .step-desc.i .step-text strong{color:var(--c3t)}
 .step-desc.g .step-text strong{color:var(--c4t)}
@@ -162,11 +162,11 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 .np{display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;transform:translateY(8px);transition:all .4s ease}
 .np.show{opacity:1;transform:translateY(0)}
 .nw{font-family:var(--mono);font-size:1.25rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
-.nw.r{color:var(--c1);background:var(--c1b)}
-.nw.c{color:var(--c2);background:var(--c2b)}
-.nw.i{color:var(--c3);background:var(--c3b)}
-.nw.g{color:var(--c4);background:var(--c4b)}
-.nw.pre{color:var(--c4);background:var(--c4b);font-style:italic;opacity:.85}
+.nw.r{color:var(--c1t);background:var(--c1b)}
+.nw.c{color:var(--c2t);background:var(--c2b)}
+.nw.i{color:var(--c3t);background:var(--c3b)}
+.nw.g{color:var(--c4t);background:var(--c4b)}
+.nw.pre{color:var(--c4t);background:var(--c4b);font-style:italic}
 .nl{font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;white-space:nowrap}
 .nl.r{color:var(--c1t)}.nl.c{color:var(--c2t)}.nl.i{color:var(--c3t)}.nl.g{color:var(--c4t)}
 
@@ -1679,8 +1679,11 @@ function pmCheck(){
 function pmFbTxt(t){return String(t||'').replace(/^\s*✓\s*/,'');}
 function pmFb(ok,paso){
   const fb=document.getElementById('pm-fb');
-  fb.innerHTML=ok?('✓ '+pmFbTxt(paso.fb))
-    :('✗ No es correcto. La respuesta es <strong>'+paso.resp+'</strong>. '+pmFbTxt(paso.fb));
+  const t=pmFbTxt(paso.fb);
+  // Si la explicación ya empieza con la respuesta (ejercicios de escribir), no se repite.
+  const yaDice=t.replace(/<[^>]+>/g,'').trim().startsWith(paso.resp);
+  fb.innerHTML=ok?('✓ '+t)
+    :('✗ No es correcto. '+(yaDice?'La respuesta es: ':'La respuesta es <strong>'+paso.resp+'</strong>. ')+t);
   fb.className='prac-fb show '+(ok?'ok':'err');
 }
 

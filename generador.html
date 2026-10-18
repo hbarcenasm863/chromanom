@@ -549,7 +549,7 @@ body{
 .ak-label{font-size:.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
 .ak-name{font-weight:700;color:var(--tx);font-size:.88rem;margin-bottom:4px}
 .ak-svg{display:flex;justify-content:flex-start;overflow-x:auto}
-.ak-svg svg{height:80px;width:auto;max-width:100%}
+.ak-svg svg{height:auto;width:auto;max-width:100%}
 .ak-table{
   width:100%;border-collapse:collapse;font-size:.78rem;margin-top:6px;
 }
@@ -672,7 +672,7 @@ body{
   .mdec-table th,.mdec-table td{border-color:#aaa}
 
   /* Answer key SVGs */
-  .ak-svg svg{height:auto !important;max-height:80px;width:auto;max-width:100%}
+  .ak-svg svg{height:auto !important;width:auto;max-width:100%}
 
   /* Show print-only answer key */
 
@@ -2336,7 +2336,7 @@ const BANCO_RXN = [
    respuesta:'C₆H₅−COOH  (ácido benzoico)'},
   {key:'rxn_59',topic:'acidos',categoria:'Preparación de ácidos carboxílicos',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−C≡N',reactivo:'+ H₂O',condicion:'H⁺, Δ',
+   r:'CH₃−CH₂−C≡N',reactivo:'+ 2 H₂O + H⁺',condicion:'Δ',
    nombre_rxn:'Hidrólisis ácida de nitrilo',
    regla:'El grupo −C≡N se hidroliza a −COOH liberando NH₄⁺.',
    respuesta:'CH₃−CH₂−COOH  (ácido propanoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
@@ -2511,7 +2511,7 @@ const BANCO_RXN = [
    respuesta:'CH₃−COOH  (ácido acético / etanoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
   {key:'rxn_85',topic:'amidas',categoria:'Hidrólisis (amidas)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−CH₂−CO−NH₂',reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',
+   r:'CH₃−CH₂−CO−NH₂',reactivo:'+ H₃O⁺',condicion:'Δ (reflujo)',
    nombre_rxn:'Hidrólisis ácida de amida',
    regla:'Condiciones drásticas (ácido fuerte + calor) rompen el enlace amida.',
    respuesta:'CH₃−CH₂−COOH  (ácido propanoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
@@ -2566,7 +2566,7 @@ const BANCO_RXN = [
   // ── Hidrólisis / reducción / síntesis (nitrilos) ───────────────────────────
   {key:'rxn_94',topic:'nitrilos',categoria:'Hidrólisis (nitrilos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'CH₃−C≡N',reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',
+   r:'CH₃−C≡N',reactivo:'+ 2 H₂O + H⁺',condicion:'Δ (reflujo)',
    nombre_rxn:'Hidrólisis ácida de nitrilo',
    regla:'El nitrilo se hidrata a amida y, con exceso de agua y calor, sigue hasta ácido carboxílico.',
    respuesta:'CH₃−COOH  (ácido acético / etanoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
@@ -2596,7 +2596,7 @@ const BANCO_RXN = [
    respuesta:'Sustitución nucleofílica (SN2). Condición: disolvente polar aprótico → CH₃−CH₂−CH₂−C≡N + KCl.',subproducto:'KCl'},
   {key:'rxn_141',topic:'nitrilos',categoria:'Hidrólisis (nitrilos)',pregunta_tipo:'producto',
    enunciado:'Predice el producto principal de la siguiente reacción:',
-   r:'C₆H₅−C≡N',reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',
+   r:'C₆H₅−C≡N',reactivo:'+ 2 H₂O + H⁺',condicion:'Δ (reflujo)',
    nombre_rxn:'Hidrólisis ácida de nitrilo (aromático)',
    regla:'El nitrilo aromático se hidroliza igual que uno alifático: pasa por la amida hasta el ácido carboxílico.',
    respuesta:'C₆H₅−COOH  (ácido benzoico)  +  NH₄⁺',subproducto:'NH₄⁺'},
@@ -2614,7 +2614,7 @@ const BANCO_RXN = [
    respuesta:'CH₃−CH₂−CH₂−CH₂−C≡N  (pentanonitrilo)  +  NaI',subproducto:'NaI'},
   {key:'rxn_144',topic:'nitrilos',categoria:'Hidrólisis (nitrilos)',pregunta_tipo:'tipo',
    enunciado:'Identifica el tipo de reacción y las condiciones necesarias:',
-   r:'CH₃−CH₂−C≡N',reactivo:'+ H₂O',condicion:'H⁺ / Δ',
+   r:'CH₃−CH₂−C≡N',reactivo:'+ 2 H₂O + H⁺',condicion:'Δ',
    nombre_rxn:'Hidrólisis ácida de nitrilo (vs. básica)',
    regla:'La hidrólisis ácida da directamente el ácido carboxílico (+ NH₄⁺); la básica da la sal de carboxilato (+ NH₃), no el ácido libre.',
    respuesta:'Hidrólisis ácida. Con H⁺ el producto final es CH₃−CH₂−COOH + NH₄⁺; con NaOH sería CH₃−CH₂−COONa + NH₃.',subproducto:'NH₄⁺'},
@@ -2987,7 +2987,7 @@ const BANCO_RXN = [
    respuesta:'CH₃−O−CH₂−CH₃  (etil metil éter, metoxietano)',subproducto:'CH₃Br'},
   {key:'rxn_165',topic:'amidas',categoria:'Hidrólisis (amidas)',pregunta_tipo:'reactivo',
    enunciado:'Este ácido carboxílico se obtuvo por hidrólisis ácida. Predice la amida de partida:',
-   reactivo:'+ H₂O',condicion:'H⁺ / Δ (reflujo)',producto:'CH₃−CH₂−COOH',
+   reactivo:'+ H₃O⁺',condicion:'Δ (reflujo)',producto:'CH₃−CH₂−COOH',
    nombre_rxn:'Hidrólisis de amida (identificar la amida de partida)',
    regla:'La hidrólisis reemplaza el −NH₂ por −OH sin cambiar el resto de la cadena.',
    respuesta:'CH₃−CH₂−CO−NH₂  (propanamida)',subproducto:'NH₄⁺'},
@@ -3559,23 +3559,31 @@ function renderSheet(){
   // viewBox real, ajustándola dentro de una caja máxima (ancho×alto) y
   // dejando que la altura siga la proporción — así cada molécula usa el
   // espacio disponible de la forma más legible posible.
-  list.querySelectorAll('.ex-svg-wrap svg').forEach(svg=>{
-    const vb=svg.getAttribute('viewBox');
-    if(!vb)return;
-    const parts=vb.trim().split(/\s+/).map(Number);
-    const vw=parts[2],vh=parts[3];
-    if(!vw||!vh)return;
-    const W_MAX=480,H_MAX=180,SCALE_CAP=1.5;
-    const scale=Math.min(W_MAX/vw,H_MAX/vh,SCALE_CAP);
-    svg.style.width=(vw*scale).toFixed(1)+'px';
-    svg.style.height='auto';
-  });
+  sizeMolSvgs(list.querySelectorAll('.ex-svg-wrap svg'));
 
   renderAnswerKey();
 
   sheet.className='show';
   document.getElementById('action-bar').className='action-bar show';
   sheet.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// Escala de cada estructura. SCALE_MIN evita que una semidesarrollada larga
+// quede con letras diminutas (antes llegaban a ~4 px): si así no cabe en un
+// celular, se desliza (overflow-x en .ex-svg-wrap); al imprimir, max-width:100%
+// la ajusta al ancho de la hoja.
+function sizeMolSvgs(svgs){
+  svgs.forEach(svg=>{
+    const vb=svg.getAttribute('viewBox');
+    if(!vb)return;
+    const parts=vb.trim().split(/\s+/).map(Number);
+    const vw=parts[2],vh=parts[3];
+    if(!vw||!vh)return;
+    const W_MAX=480,H_MAX=180,SCALE_CAP=1.5,SCALE_MIN=1.1;
+    const scale=Math.max(Math.min(W_MAX/vw,H_MAX/vh,SCALE_CAP),SCALE_MIN);
+    svg.style.width=(vw*scale).toFixed(1)+'px';
+    svg.style.height='auto';
+  });
 }
 
 // Clave de respuestas (opcional): va al final, en página aparte al imprimir.
@@ -3616,6 +3624,7 @@ function renderAnswerKey(){
   box.innerHTML=`<h2>Clave de respuestas</h2>
     <div class="ak-note">Para el docente. En la vista de impresi&oacute;n sale en una p&aacute;gina aparte: si vas a entregar la hoja a los estudiantes, no imprimas esa p&aacute;gina.</div>
     <div class="ak-list">${items}</div>`;
+  sizeMolSvgs(box.querySelectorAll('.ak-svg svg'));
 }
 
 function resetSheet(){

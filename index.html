@@ -39,7 +39,7 @@
   --c1t:#0e7490;  /* teal oscuro */
   --c2t:#14532d;  /* verde oscuro */
   --c3t:#92400e;  /* dorado oscuro */
-  --c4t:#A0527F;  /* rosa oscuro */
+  --c4t:#9a4a78;  /* rosa oscuro (≥4,5:1 también sobre el fondo rosado) */
   --bg:     #f6fafe;
   --surf:   #ffffff;
   --brd:    #d0e6f5;
@@ -95,7 +95,7 @@ body::before{
 .hero2-fig figcaption{font-size:.8rem;color:var(--cn-tx2);margin-top:10px;line-height:1.5}
 .name-row{display:flex;flex-wrap:wrap;gap:4px;align-items:flex-end;justify-content:center;background:var(--cn-surf2);border-radius:var(--cn-r-s);padding:12px 10px}
 .np{display:flex;flex-direction:column;align-items:center;gap:5px}
-.nw{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1}
+.nw{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;padding:3px 7px;border-radius:6px;line-height:1;white-space:nowrap}
 .nw.r{color:var(--c1t);background:var(--c1b)}.nw.c{color:var(--c2t);background:var(--c2b)}
 .nw.i{color:var(--c3t);background:var(--c3b)}.nw.g{color:var(--c4t);background:var(--c4b)}
 .nl{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap}
@@ -119,12 +119,16 @@ body::before{
 .mt-card.i .mt-n,.mt-card.i h3{color:var(--c3t)}.mt-card.g .mt-n,.mt-card.g h3{color:var(--c4t)}
 .mt-card h3{font-size:1.05rem;font-weight:800;margin:4px 0 6px}
 .mt-card p{font-size:.88rem;color:var(--cn-tx2);line-height:1.5;margin-bottom:10px}
-.mt-card code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--cn-surf2);padding:3px 7px;border-radius:6px;color:var(--cn-tx)}
-.more-examples{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.me{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r-s);padding:12px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;justify-content:center}
+.mt-card code{font-family:'JetBrains Mono',monospace;font-size:.78rem;background:var(--cn-surf2);padding:3px 7px;border-radius:6px;color:var(--cn-tx);display:inline-block}
+.mt-card code span{white-space:nowrap}
+.hero2-fig figcaption strong{white-space:nowrap}
+.orden-note{margin-top:12px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-left:5px solid var(--cn-brand);border-radius:var(--cn-r-s);padding:12px 16px;font-size:.9rem;line-height:1.6;color:var(--cn-tx2)}
+.orden-note strong{color:var(--cn-tx)}
+.more-examples{display:grid;grid-template-columns:1fr .8fr 1.4fr;gap:10px;margin-top:12px}
+.me{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r-s);padding:12px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;align-content:center;justify-content:center}
 .me .nw{font-size:.95rem}
 
-.ruta2{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:none;padding:0}
+.ruta2{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:none;padding:0}
 .ruta2 a{display:flex;gap:12px;align-items:flex-start;height:100%;padding:16px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,box-shadow .15s,transform .15s}
 .ruta2 a:hover{border-color:var(--cn-brand);box-shadow:var(--cn-sh-h);transform:translateY(-2px)}
 .r2-n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--cn-brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
@@ -152,7 +156,7 @@ body::before{
   .hero2{grid-template-columns:1fr;gap:24px;padding:32px 0 20px}
   .metodo-grid{grid-template-columns:1fr 1fr}
   .mods2{grid-template-columns:1fr 1fr}.mods2>.mod2,.mods2>.mod2:nth-last-child(-n+2){grid-column:auto}.mods2>.mod2.destacado{grid-column:1/-1}
-  .ruta2{grid-template-columns:1fr}
+  .ruta2{grid-template-columns:1fr 1fr}
   .stats2{grid-template-columns:repeat(2,1fr)}
   .more-examples{grid-template-columns:1fr}
 }
@@ -163,20 +167,21 @@ body::before{
   .hero2-cta .cn-btn{flex:1 1 100%}
   .metodo-grid{grid-template-columns:1fr 1fr;gap:8px}.mt-card{padding:12px}.mt-card p{font-size:.82rem}.mt-card code{font-size:.7rem;white-space:normal}
   .mods2{grid-template-columns:1fr}
+  .ruta2{grid-template-columns:1fr}
   .nw{font-size:1rem}
   .stats2{gap:8px}.st2{padding:12px 8px}.st2 b{font-size:1.5rem}
 }
 
 /* ── TUTORIAL TOUR ── */
-.tour-ov{position:fixed;inset:0;background:rgba(10,30,50,.82);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(3px)}
+.tour-ov{position:fixed;inset:0;background:rgba(10,30,50,.82);display:none;align-items:center;justify-content:center;z-index:9999;padding:20px;backdrop-filter:blur(3px);overflow-y:auto}
 .tour-ov.open{display:flex}
-.tour-modal{background:var(--surf);border-radius:22px;max-width:480px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:hidden;position:relative;animation:fadeUp .3s ease both}
-.tour-header{background:linear-gradient(135deg,var(--azul-d),var(--azul));padding:22px 28px 18px;color:#fff;position:relative}
+.tour-modal{background:var(--surf);border-radius:22px;max-width:480px;width:100%;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:hidden;position:relative;animation:fadeUp .3s ease both}
+.tour-header{background:linear-gradient(135deg,var(--azul-d),var(--azul));padding:22px 64px 18px 28px;color:#fff;position:relative;flex-shrink:0}
 .tour-step-lbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.55);margin-bottom:4px}
 .tour-title{font-size:1.25rem;font-weight:900;line-height:1.2;font-style:italic}
-.tour-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.tour-close{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:44px;height:44px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .tour-close:hover{background:rgba(255,255,255,.3)}
-.tour-body{padding:22px 28px 18px;min-height:160px}
+.tour-body{padding:22px 28px 18px;min-height:0;overflow-y:auto;flex:1 1 auto}
 .tour-body p{font-size:.88rem;color:var(--dim);line-height:1.7;margin-bottom:10px}
 .tour-body p:last-child{margin-bottom:0}
 .tour-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -190,10 +195,11 @@ body::before{
 .tour-chip.or{color:#a04000;border-color:var(--naranja);background:var(--naranja-l)}
 .tour-name-demo{display:flex;flex-wrap:wrap;gap:3px;background:#f0f7ff;border:1.5px solid var(--brd);border-radius:10px;padding:12px 16px;margin:12px 0;align-items:flex-end}
 .tnw{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;padding:2px 6px;border-radius:5px;line-height:1}
-.tnw.r{color:var(--c1);background:var(--c1b)}
-.tnw.c{color:var(--c2);background:var(--c2b)}
-.tnw.i{color:var(--c3);background:var(--c3b)}
-.tnw.g{color:var(--c4);background:var(--c4b)}
+.tnw.r{color:var(--c1t);background:var(--c1b)}
+.tnw.c{color:var(--c2t);background:var(--c2b)}
+.tnw.i{color:var(--c3t);background:var(--c3b)}
+.tnw.g{color:var(--c4t);background:var(--c4b)}
+.tnw{white-space:nowrap}
 .tnl{font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .tnl.r{color:var(--c1t)}.tnl.c{color:var(--c2t)}.tnl.i{color:var(--c3t)}.tnl.g{color:var(--c4t)}
 .tnp{display:flex;flex-direction:column;align-items:center;gap:4px}
@@ -206,17 +212,28 @@ body::before{
 .tour-link.az{background:linear-gradient(135deg,var(--azul-d),var(--azul));color:#fff}
 .tour-link.vd{background:linear-gradient(135deg,var(--verde-d),var(--verde));color:#fff}
 .tour-link.or{background:linear-gradient(135deg,#c45c0c,var(--naranja));color:#fff}
-.tour-footer{padding:14px 28px 22px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--brd)}
-.tour-dots{display:flex;gap:6px}
-.tour-dot{width:8px;height:8px;border-radius:50%;background:var(--brd);border:none;cursor:pointer;transition:all .2s;padding:0}
-.tour-dot.active{background:var(--azul);width:20px;border-radius:4px}
+.tour-footer{padding:8px 28px 18px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;border-top:1px solid var(--brd);flex-shrink:0}
+/* Puntos: el área que se toca mide 44×44 px; el punto visible sigue siendo pequeño */
+.tour-dots{display:flex;gap:0;width:100%;justify-content:center}
+.tour-dot{width:44px;height:44px;border-radius:50%;background:transparent;border:none;cursor:pointer;padding:0;position:relative}
+.tour-dot::before{content:'';position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--brd);transition:all .2s}
+.tour-dot.active::before{background:var(--azul);width:20px;margin-left:-10px;border-radius:4px}
+.tour-navs{margin-left:auto}
 .tour-navs{display:flex;gap:8px}
-.tour-btn{padding:8px 18px;border-radius:var(--rs);border:none;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s}
+.tour-btn{min-height:44px;padding:8px 18px;border-radius:var(--rs);border:none;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;transition:all .18s}
 .tour-btn.prev{background:var(--bg);color:var(--dim);border:1.5px solid var(--brd)}
 .tour-btn.prev:hover{background:var(--brd)}
 .tour-btn.next{background:var(--azul);color:#fff}
 .tour-btn.next:hover{background:var(--azul-d)}
-/* tour trigger button */
+@media(max-width:400px){
+  .tour-ov{padding:12px}
+  .tour-modal{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px)}
+  .tour-header{padding:16px 60px 14px 18px}
+  .tour-body{padding:16px 18px 12px}
+  .tour-footer{padding:10px 16px 12px}
+  .tour-dots{display:none}
+  .tour-btn{padding:8px 14px}
+}
 
 /* ── TU AVANCE ── */
 .avance-card{padding:20px 22px;margin:0 0 40px;display:none}
@@ -336,7 +353,7 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
     <svg class="hero-mol" viewBox="0 0 370 125" role="img" aria-label="Estructura semidesarrollada del 5-metilhex-3-en-2-ol con sus 4 partes coloreadas"><line class="mb b" x1="64.0" y1="70" x2="90.8" y2="70"/><line class="mb b" x1="113.6" y1="70" x2="148.8" y2="70"/><line class="mb i" x1="171.6" y1="67.4" x2="206.8" y2="67.4"/><line class="mb i" x1="171.6" y1="72.6" x2="206.8" y2="72.6"/><line class="mb b" x1="229.6" y1="70" x2="264.8" y2="70"/><line class="mb b" x1="287.6" y1="70" x2="322.8" y2="70"/><line class="mb g" x1="98" y1="40" x2="98" y2="60"/><line class="mb r" x1="272" y1="80" x2="272" y2="100"/><text class="mt c" x="35.8" y="70">CH₃</text><text class="mt c" x="93.8" y="70">CH</text><text class="mt c" x="151.8" y="70">CH</text><text class="mt c" x="209.8" y="70">CH</text><text class="mt c" x="267.8" y="70">CH</text><text class="mt c" x="325.8" y="70">CH₃</text><text class="mt g" x="93.8" y="30">OH</text><text class="mt r" x="267.8" y="110">CH₃</text><text class="mn" x="48.4" y="92" text-anchor="middle">1</text><text class="mn" x="102.2" y="92" text-anchor="middle">2</text><text class="mn" x="160.2" y="92" text-anchor="middle">3</text><text class="mn" x="218.2" y="92" text-anchor="middle">4</text><text class="mn" x="286.6" y="54" text-anchor="start">5</text><text class="mn" x="338.4" y="92" text-anchor="middle">6</text></svg>
     <div class="name-row hero2-name" aria-label="Nombre: 5-metilhex-3-en-2-ol">
-      <div class="np"><span class="nw r">5-metil</span><span class="nl r">① Ramificación</span></div>
+      <div class="np"><span class="nw r">5-metil</span><span class="nl r">① Sustituyente</span></div>
       <div class="np"><span class="nw c">hex</span><span class="nl c">② Cadena 6 C</span></div>
       <div class="np"><span class="nw i">-3-en-</span><span class="nl i">③ Doble enlace</span></div>
       <div class="np"><span class="nw g">2-ol</span><span class="nl g">④ Alcohol</span></div>
@@ -368,14 +385,15 @@ footer span{color:var(--naranja);font-weight:700}
     <p>Aprende a reconocer cada una y podrás leer — y construir — cualquier nombre, por largo que sea.</p>
   </div>
   <div class="metodo-grid">
-    <div class="mt-card r"><span class="mt-n">①</span><h3>Ramificaciones</h3><p>Cadenas laterales con su número de posición, en orden alfabético.</p><code>2-metil · 3-etil</code></div>
-    <div class="mt-card c"><span class="mt-n">②</span><h3>Cadena principal</h3><p>Cuántos carbonos tiene la cadena principal.</p><code>met · et · prop · but</code></div>
-    <div class="mt-card i"><span class="mt-n">③</span><h3>Insaturaciones</h3><p>Dobles o triples enlaces, o ninguno.</p><code>-an- · -en- · -in-</code></div>
-    <div class="mt-card g"><span class="mt-n">④</span><h3>Grupo funcional</h3><p>El sufijo que dice qué tipo de compuesto es.</p><code>-ol · -al · -ona · -oico</code></div>
+    <div class="mt-card r"><span class="mt-n">①</span><h3>Sustituyentes</h3><p>Ramificaciones (metil, etil…), halógenos y otros grupos con su número de posición, en orden alfabético.</p><code><span>3-etil</span> · <span>2-metil</span></code></div>
+    <div class="mt-card c"><span class="mt-n">②</span><h3>Cadena principal</h3><p>Cuántos carbonos tiene la cadena principal.</p><code><span>met</span> · <span>et</span> · <span>prop</span> · <span>but</span></code></div>
+    <div class="mt-card i"><span class="mt-n">③</span><h3>Insaturaciones</h3><p>Dobles o triples enlaces, o ninguno.</p><code><span>-an-</span> · <span>-en-</span> · <span>-in-</span></code></div>
+    <div class="mt-card g"><span class="mt-n">④</span><h3>Grupo funcional</h3><p>El sufijo que dice qué tipo de compuesto es (en hidrocarburos, solo <b>-o</b>).</p><code><span>-o</span> · <span>-ol</span> · <span>-al</span> · <span>-ona</span> · <span>-oico</span></code></div>
   </div>
+  <p class="orden-note">✍️ El nombre se <strong>escribe</strong> en el orden ① ② ③ ④, pero se <strong>resuelve</strong> empezando por ④: primero el grupo funcional, luego la cadena y su numeración, y al final los sustituyentes. En ácidos, ésteres y haluros de ácido una palabra del grupo funcional va aparte (<em>ácido</em> …, … <em>de metilo</em>, <em>cloruro de</em> …).</p>
   <div class="more-examples">
     <div class="me">
-      <div class="np"><span class="nw r">2-metil</span><span class="nl r">Ramif.</span></div>
+      <div class="np"><span class="nw r">2-metil</span><span class="nl r">Sust.</span></div>
       <div class="np"><span class="nw c">pent</span><span class="nl c">5 C</span></div>
       <div class="np"><span class="nw i">an</span><span class="nl i">Sin insat.</span></div>
       <div class="np"><span class="nw g">o</span><span class="nl g">Alcano</span></div>
@@ -387,7 +405,7 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
     <div class="me">
       <div class="np"><span class="nw g" style="font-style:italic">ácido </span><span class="nl g">Grupo func.</span></div>
-      <div class="np"><span class="nw r">5-etil</span><span class="nl r">Ramif.</span></div>
+      <div class="np"><span class="nw r">5-etil</span><span class="nl r">Sust.</span></div>
       <div class="np"><span class="nw c">non</span><span class="nl c">9 C</span></div>
       <div class="np"><span class="nw i">-6-en</span><span class="nl i">Doble C6</span></div>
       <div class="np"><span class="nw g">oico</span><span class="nl g">Ácido</span></div>
@@ -405,7 +423,8 @@ footer span{color:var(--naranja);font-weight:700}
   <ol class="ruta2">
     <li><a href="teoria.html"><span class="r2-n">1</span><span><b>Principios</b><small>Las 4 partes, el algoritmo de 5 pasos y las reglas de desempate.</small></span></a></li>
     <li><a href="grupos.html"><span class="r2-n">2</span><span><b>Grupos funcionales</b><small>Cada grupo con su estructura, sus reglas y ejercicios.</small></span></a></li>
-    <li><a href="juego.html"><span class="r2-n">3</span><span><b>Juego de práctica</b><small>Pon a prueba lo aprendido con preguntas cronometradas.</small></span></a></li>
+    <li><a href="juego.html"><span class="r2-n">3</span><span><b>Juego: nomenclatura</b><small>Pon a prueba lo aprendido con preguntas cronometradas de nombres.</small></span></a></li>
+    <li><a href="reacciones.html"><span class="r2-n">4</span><span><b>Reacciones y juego completo</b><small>Aprende las reacciones y luego juega el modo «Juego completo: nomenclatura + reacciones».</small></span></a></li>
   </ol>
 </section>
 
@@ -420,7 +439,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-ico" aria-hidden="true">🎮</span>
       <span class="mod2-tag">Módulo 3 · Practicar</span>
       <h3>Juego de práctica</h3>
-      <p>Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres, construir moléculas y reacciones. 20 preguntas por partida, 60 segundos cada una.</p>
+      <p>Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (paso 3). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
       <span class="mod2-go">Jugar ahora →</span>
     </a>
     <a class="mod2" href="teoria.html">
@@ -439,23 +458,23 @@ footer span{color:var(--naranja);font-weight:700}
     </a>
     <a class="mod2" href="reacciones.html">
       <span class="mod2-ico" aria-hidden="true">🧪</span>
-      <span class="mod2-tag">Módulo 4</span>
+      <span class="mod2-tag">Módulo 4 · Paso 4</span>
       <h3>Reacciones orgánicas</h3>
-      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y mini-quiz.</p>
+      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida. Paso 4 de la ruta, junto con el juego completo.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
     <a class="mod2" href="generador.html">
       <span class="mod2-ico" aria-hidden="true">📄</span>
       <span class="mod2-tag">Módulo 5 · Herramienta</span>
       <h3>Generador de ejercicios</h3>
-      <p>Hojas de trabajo a tu medida: nombrar, dibujar, análisis MDEC o reacciones. Imprime o guarda en PDF.</p>
+      <p>Hojas de trabajo a tu medida: nombrar, dibujar, análisis por partes (método de 4 colores) o reacciones. Imprime o guarda en PDF.</p>
       <span class="mod2-go">Crear hoja →</span>
     </a>
     <a class="mod2" href="referencia.html">
       <span class="mod2-ico" aria-hidden="true">📋</span>
       <span class="mod2-tag">Recurso</span>
       <h3>Hoja de referencia</h3>
-      <p>Prefijos, multiplicadores, prioridad de grupos, ramificaciones clásicas vs. IUPAC y reglas clave. Imprimible.</p>
+      <p>Prefijos, multiplicadores, prioridad de grupos, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave. Imprimible.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
   </div>
@@ -494,14 +513,14 @@ const TOUR=[
     body:`
       <p>ChromaNom te enseña a nombrar compuestos orgánicos según la IUPAC usando un método visual de <strong>4 colores</strong>. Cada parte del nombre tiene un color fijo.</p>
       <div class="tour-name-demo">
-        <div class="tnp"><span class="tnw r">2-etil</span><span class="tnl r">① Ramif.</span></div>
+        <div class="tnp"><span class="tnw r">2-etil</span><span class="tnl r">① Sust.</span></div>
         <div class="tnp"><span class="tnw c">hex</span><span class="tnl c">② Cadena 6C</span></div>
         <div class="tnp"><span class="tnw i">3-en</span><span class="tnl i">③ Insatur.</span></div>
         <div class="tnp"><span class="tnw g">1-ol</span><span class="tnl g">④ Grupo func.</span></div>
       </div>
       <p>Una vez que internalizas los 4 colores, cualquier nombre — por largo que sea — se vuelve legible de un vistazo.</p>
       <div class="tour-chips">
-        <span class="tour-chip r">① Ramificaciones</span>
+        <span class="tour-chip r">① Sustituyentes</span>
         <span class="tour-chip c">② Cadena principal</span>
         <span class="tour-chip i">③ Insaturaciones</span>
         <span class="tour-chip g">④ Grupo funcional</span>
@@ -518,7 +537,7 @@ const TOUR=[
       </div>
       <div class="tour-feat-row">
         <div class="tour-feat"><strong>⚖️ Reglas de desempate</strong>Cuándo dos cadenas o dos numeraciones son posibles — cuál escoger.</div>
-        <div class="tour-feat"><strong>📖 Comparación IUPAC</strong>Tabla de 40 diferencias entre nomenclatura 2013 y la anterior a 2005.</div>
+        <div class="tour-feat"><strong>📖 Comparación IUPAC</strong>Equivalencias entre el nombre IUPAC actual y el nombre tradicional (2-butanol, acetona…).</div>
       </div>
       <p style="margin-top:10px">Cada sección tiene un botón <strong>Practicar</strong> con ejercicios integrados paso a paso.</p>`
   },
@@ -552,10 +571,10 @@ const TOUR=[
         <div class="tour-feat"><strong>✋ Arrastrar partes</strong>Arrastra cada parte del nombre al hueco que corresponde.</div>
       </div>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>🎯 Identificar</strong>Señala qué parte de la molécula es la cadena, el sustituyente o el grupo.</div>
+        <div class="tour-feat"><strong>🎯 Identificar</strong>Señala qué parte de la molécula es la cadena, un sustituyente o el grupo funcional.</div>
         <div class="tour-feat"><strong>✍️ Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
       </div>
-      <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual.</p>`
+      <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual. Cuando llegues a reacciones (paso 4), prueba el modo <strong>«Juego completo: nomenclatura + reacciones»</strong>.</p>`
   },
   {
     title:'④ Reacciones Orgánicas',
@@ -566,7 +585,7 @@ const TOUR=[
         <div class="tour-feat"><strong>⚗️ Mecanismo animado</strong>Cada reacción se dibuja átomo por átomo: reactivo → condición → producto.</div>
         <div class="tour-feat"><strong>📖 Glosario previo</strong>30 conceptos clave (carbocatión, nucleófilo, Markovnikov...) antes de entrar al detalle.</div>
       </div>
-      <p style="margin-top:8px">Cubre alcanos, cicloalcanos, alquenos, alquinos, aromáticos, halogenuros de alquilo, alcoholes, aminas, carbonílicos, ácidos carboxílicos y sus derivados — con mini-quiz al final de cada una.</p>`
+      <p style="margin-top:8px">Cubre alcanos, cicloalcanos, alquenos, alquinos, aromáticos, haluros de alquilo, alcoholes, aminas, carbonílicos, ácidos carboxílicos y sus derivados — con práctica rápida al final de cada una. Es el paso 4 de la ruta: después, juega el modo «Nomenclatura + reacciones».</p>`
   },
   {
     title:'⑤ Generador de Ejercicios',
@@ -587,12 +606,12 @@ const TOUR=[
       <div class="tour-links">
         <a class="tour-link az" href="teoria.html">⚗️ <span>① Principios<br><small style="font-weight:400;opacity:.85">Empieza aquí</small></span></a>
         <a class="tour-link vd" href="grupos.html">🔬 <span>② Grupos<br><small style="font-weight:400;opacity:.85">Luego aquí</small></span></a>
-        <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Pon a prueba</small></span></a>
+        <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Nomenclatura</small></span></a>
       </div>
       <div class="tour-links" style="margin-top:8px">
-        <a class="tour-link" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">Profundiza</small></span></a>
-        <a class="tour-link" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff" href="generador.html">📄 <span>⑤ Generador<br><small style="font-weight:400;opacity:.85">Crea tu hoja</small></span></a>
+        <a class="tour-link" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">+ juego completo: nomenclatura + reacciones</small></span></a>
       </div>
+      <p style="margin-top:10px;font-size:.82rem">Herramienta para el docente y para repasar: <a href="generador.html">📄 Generador de ejercicios</a>.</p>
       <p style="margin-top:14px;font-size:.8rem;color:var(--dimmer)">Puedes volver a ver este tutorial pulsando el botón <strong>"▶ ¿Cómo funciona?"</strong> de la portada en cualquier momento.</p>`
   }
 ];
@@ -601,7 +620,7 @@ let tourStep=0;
 
 // ── TU AVANCE: lee los mejores puntajes que el juego guarda en este dispositivo ──
 (function renderAvance(){
-  const NOMBRES={hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Juego completo',constructor:'Constructor molecular'};
+  const NOMBRES={hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Nomenclatura + reacciones',constructor:'Constructor molecular'};
   const filas=[];
   try{
     Object.keys(NOMBRES).forEach(k=>{
