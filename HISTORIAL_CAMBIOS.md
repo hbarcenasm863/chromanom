@@ -24,6 +24,7 @@ tener dos tablas de referencia diferentes.
   fuentes y abre el diálogo de imprimir / guardar en PDF de la hoja
   oficial; luego quita el parámetro de la dirección para que recargar no
   vuelva a abrirlo.
+- `sw.js`: caché `chromanom-v15` para que la app instalada tome el cambio.
 
 ### Verificación
 Playwright (390 px): clic en el botón de Principios → abre
