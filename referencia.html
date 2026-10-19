@@ -517,7 +517,11 @@ code{
   .clasico-intro,.clasico-nota{font-size:.7rem}
   .clasico-tbl tr{grid-template-columns:1fr 1fr auto;grid-template-areas:"cl iu fm" "al iu fm";padding:2px 8px}
   .clasico-tbl td.iu small{display:block}
-  .clasico-tbl .sub-svg{height:auto;width:auto;max-width:none;zoom:.56}
+  .clasico-tbl .sub-svg{height:auto;width:auto;max-width:none;zoom:.5}
+  /* Reglas clave: un poco más ancha que sustituyentes para que sus textos
+     largos no alarguen la segunda hoja */
+  .grid-bottom{grid-template-columns:1fr 1.2fr}
+  .rule-item{font-size:.72rem;padding:3px 0}
 }
 </style>
 <link rel="stylesheet" href="chromanom.css">
@@ -693,11 +697,11 @@ code{
         <div class="rules-cols">
           <div class="rule-item">
             <span class="rule-n">1</span>
-            <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional; si empatan en longitud, la de más enlaces múltiples; luego, la de más sustituyentes (IUPAC 2013).</span>
+            <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional; si empatan en longitud, la de más enlaces múltiples (y luego, más dobles); luego, la de más sustituyentes (IUPAC 2013).</span>
           </div>
           <div class="rule-item">
             <span class="rule-n">2</span>
-            <span><strong>Numeración:</strong> número más bajo al grupo funcional; luego a los enlaces múltiples (en empate, el doble antes que el triple); luego a los sustituyentes.</span>
+            <span><strong>Numeración:</strong> número más bajo al grupo funcional; luego a los enlaces múltiples (en empate, el doble antes que el triple); luego a los sustituyentes; si aún empatan, al primero en orden alfabético. Los números se comparan uno por uno; nunca se suman.</span>
           </div>
           <div class="rule-item">
             <span class="rule-n">3</span>

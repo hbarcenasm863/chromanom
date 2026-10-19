@@ -7,6 +7,88 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (109) — Desempate: ejemplos de A0, A4 y A6 + auditoría química y didáctica de los criterios de cadena y numeración
+
+### Contexto
+El docente pidió dibujar también los ejemplos de A4, A5 y A6, y luego
+auditar todos los criterios para elegir y numerar la cadena, para que
+quedaran química y didácticamente perfectos. Para verificar contra la
+fuente oficial, el docente subió el Blue Book (IUPAC 2013) a su Drive. El
+archivo pesa 29 MB y solo se pudo leer su índice. Ese índice confirmó:
+- P-44.4.1.1 (más enlaces múltiples) → P-44.4.1.2 (más dobles enlaces);
+- luego, localizadores del grupo funcional y de en/in;
+- P-45.2 tiene solo 3 criterios (más sustituyentes, localizadores más
+  bajos, orden de cita). No existe el criterio "menos ramificados".
+
+### Cambios — `teoria.html` (Principios › Reglas de desempate)
+- Ejemplos dibujados nuevos:
+  - A0: 2-etilhexan-1-ol vs. 3-(hidroximetil)heptano. Muestra que la
+    cadena debe contener el grupo funcional, aunque haya otra más larga.
+  - A4: 4-sec-butil-2-metiloctano vs. 4-isobutil-3-metiloctano.
+  - A6: 2-cloro-4-isobutiloctano vs. 4-(2-cloropropil)-2-metiloctano.
+  Se verificaron con un script que aplica los criterios uno por uno.
+- A5 quedó marcado como "regla tradicional" (IUPAC 1979), con tarjeta
+  atenuada y punteada. No lleva ejemplo: IUPAC 2013 no lo incluye.
+- Recuadro inicial reescrito:
+  - ya no dice "la IUPAC define 7 criterios";
+  - agrega "Cómo usar esta lista" (elegir la cadena antes de numerar,
+    recorrer los criterios en orden y detenerse en el primero que decide);
+  - agrega un mini glosario (sustituyente/rama, localizador,
+    insaturaciones).
+- Tarjetas de criterios:
+  - A0: aclara que la cadena debe contener el grupo funcional aunque haya
+    otra más larga, y que sin grupo funcional se pasa a A1.
+  - A2: agrega "si empatan, gana la de más dobles enlaces".
+  - A3: "igual longitud y mismos enlaces múltiples". Se quitaron α/β. Nota
+    sobre los localizadores del grupo funcional y de los en/in, que se
+    revisan antes de contar ramas.
+  - A4, B2 y B3: una sola forma de comparar números ("uno por uno, como en
+    el diccionario; el primer número distinto decide; nunca se suman").
+  - A6 y B4: redacción más clara (sec-, terc- y di- no cuentan; un nombre
+    entre paréntesis se ordena por su primera letra).
+  - B1: "C=O de cetona".
+  - B2: ejemplo pent-1-en-4-ino.
+  - B3: aclara que cuentan todos los sustituyentes (ramas, halógenos,
+    nitro).
+- Explicaciones de los ejemplos: cada una dice qué criterios anteriores
+  empatan. Se cambió "aunque doble" (se confundía con doble enlace). En
+  A4 se agregó una nota: *sec-* no cuenta en el orden alfabético.
+- Algoritmo de 5 pasos:
+  - el paso 3 (numerar) ahora trae el orden completo B1→B4;
+  - el paso 4 ya no repite la regla de numeración;
+  - el paso 2 agrega lo de más dobles enlaces y enlaza a los criterios.
+- Práctica "Reglas de desempate":
+  - se corrigió un error: la "o" final del nombre nunca aparecía;
+  - el paso 4 ya no dice "infijo" y no contradice el orden cadena →
+    numeración;
+  - se unificó metil/etil, "5 C" y la forma de escribir los números entre
+    llaves.
+
+### Cambios — `referencia.html`
+- Reglas clave 1 y 2: agregan "más dobles" y el orden alfabético, y
+  aclaran "los números se comparan uno por uno; nunca se suman".
+- Impresión: Reglas clave un poco más ancha, con letra de .72rem, y
+  dibujos de la tabla tradicional a escala .5. Así la hoja 2 sigue
+  cabiendo completa.
+
+### Cambios — `sw.js`
+- Caché `chromanom-v18`.
+
+### Verificación
+- La práctica de desempate, recorrida completa con Playwright, arma el
+  nombre entero (3-etil-2-metil + pent + an + o).
+- Los 10 ejemplos se ven bien a 390 y 1100 px, sin errores.
+- La Hoja de Referencia en PDF Carta horizontal sale en 2 páginas sin
+  contenido cortado.
+- Revisión general: 7 páginas y el banco del juego sin problemas.
+
+### Pendiente
+- Para citar el texto completo de P-44/P-45 hace falta subir a Drive solo
+  esas páginas del Blue Book (menos de 10 MB) o habilitar
+  `iupac.qmul.ac.uk` en el acceso a red del entorno.
+
+---
+
 ## 2026-10-19 (108) — Desempate con estructuras en todos los criterios + Hoja de Referencia que llena 2 hojas horizontales
 
 ### Contexto
