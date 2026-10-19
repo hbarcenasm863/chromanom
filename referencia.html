@@ -751,6 +751,21 @@ function refSearch(q){
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
+<script>
+// Llegando desde "Guardar como PDF" de Principios (referencia.html?imprimir=1):
+// abrir directamente el diálogo de imprimir / guardar en PDF de ESTA hoja,
+// que es la hoja de referencia oficial (con logo y en 2 páginas).
+(function(){
+  try{
+    if(new URLSearchParams(location.search).get('imprimir')!=='1') return;
+    var go=function(){ setTimeout(function(){ window.print(); },400); };
+    var listo=function(){ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go); };
+    if(document.readyState==='complete') listo(); else window.addEventListener('load',listo);
+    // quitar el parámetro para que recargar no vuelva a abrir el diálogo
+    history.replaceState(null,'',location.pathname);
+  }catch(e){}
+})();
+</script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>

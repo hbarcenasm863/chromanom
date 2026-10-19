@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (106) — Una sola hoja de referencia: "Guardar como PDF" de Principios usa la oficial
+
+### Contexto
+En Principios → "Tablas de referencia", el botón "Guardar como PDF" armaba
+su propia hoja (una ventana aparte con otro diseño), distinta de la Hoja
+de Referencia oficial (`referencia.html`, con logo y en 2 páginas). El
+docente prefiere la oficial y pidió que ese botón descargue esa, para no
+tener dos tablas de referencia diferentes.
+
+### Cambios
+- `teoria.html`: el botón ahora es un enlace "⬇ Guardar como PDF (hoja de
+  referencia)" a `referencia.html?imprimir=1`. Se eliminó la función
+  `printTables()` que generaba la hoja alternativa.
+- `referencia.html`: si llega con `?imprimir=1`, espera a que carguen las
+  fuentes y abre el diálogo de imprimir / guardar en PDF de la hoja
+  oficial; luego quita el parámetro de la dirección para que recargar no
+  vuelva a abrirlo.
+
+### Verificación
+Playwright (390 px): clic en el botón de Principios → abre
+`referencia.html` (con el logo) y lanza la impresión una sola vez; al
+recargar no se repite. Las 7 páginas sin errores; banco del juego sin
+problemas.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-19 (105) — Revisión: ¿todo cumple el código MDEC de 4 colores?
 
 ### Contexto
