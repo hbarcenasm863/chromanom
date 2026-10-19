@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Esta página se fusionó con docente.html («Generador de guías», que incluye
+// TODO lo que ofrecía este Generador —tipos A-D por grupo funcional— más los
+// temas del Juego, evaluaciones y guías completas). Si alguien entra aquí
+// directamente (o por un enlace/marcador viejo), lo mandamos a docente.html.
+// OJO: docente.html carga ESTA página en un iframe oculto para leer su banco
+// de moléculas (MOLS/BANCO_RXN) — por eso el redirect solo corre cuando esta
+// página es la ventana de arriba (self===top), nunca dentro de ese iframe.
+if(window.self===window.top){location.replace('docente.html');}
+</script>
 <script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
 <title>ChromaNom · Generador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">

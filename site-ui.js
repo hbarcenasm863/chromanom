@@ -4,8 +4,9 @@
    por todas las páginas, lo reemplaza en celular por:
      - arriba: solo la marca "ChromaNom" y el botón Instalar (una fila delgada);
      - abajo: una barra fija con ícono + texto (Inicio, Teoría, Grupos,
-       Reacciones, Juego, Más). "Más" abre Generador, Referencia, Isomería, Docente y el control
-       de tamaño de texto (que en celular deja de flotar encima del contenido).
+       Reacciones, Juego, Más). "Más" abre Referencia, Isomería, Docente (que
+       fusiona el antiguo Generador) y el control de tamaño de texto (que en
+       celular deja de flotar encima del contenido).
    En PC no cambia nada. En el juego la barra se oculta durante la partida
    para no tapar las respuestas. */
 (function(){
@@ -17,7 +18,6 @@
     {href:'juego.html',ico:'🎮',txt:'Juego'}
   ];
   var MAS=[
-    {href:'generador.html',ico:'📄',txt:'Generador de ejercicios'},
     {href:'referencia.html',ico:'📋',txt:'Hoja de referencia'},
     {href:'isomeria.html',ico:'🔀',txt:'Isomería'},
     {href:'docente.html',ico:'📘',txt:'Docente: guías y evaluaciones'}

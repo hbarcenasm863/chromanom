@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (118) — Se fusionan Generador y Docente en una sola página
+
+### Contexto
+El docente preguntó si la nueva página `docente.html` (guías, talleres y
+evaluaciones) también se alimentaba del banco gigante de `juego.html`
+ampliado en la entrada anterior. Al investigar encontré que **sí** — eso
+ya lo había dejado armado otra sesión reciente (commit `b061575`):
+`docente.html` carga `juego.html` y `generador.html` en dos iframes
+ocultos y lee sus bancos en vivo, así que mis 160 preguntas nuevas ya
+entraban solas (lo confirmé generando una vista previa real con
+Playwright: salieron ejercicios de "Cazar errores" con mis preguntas
+nuevas, sin tocar nada). Entonces el docente pidió un paso más: que
+`generador.html` (el Generador de ejercicios original, standalone, que NO
+lee el banco del Juego) y `docente.html` queden fusionados en una sola
+página desde el punto de vista del usuario.
+
+### Cambios
+- **`generador.html`**: se le agregó un redirect al inicio de `<head>`
+  que manda a `docente.html` apenas alguien entra a esta página
+  directamente (`location.replace('docente.html')`). El redirect
+  **solo** corre si la página es la ventana de arriba
+  (`window.self===window.top`): como `docente.html` sigue cargando
+  `generador.html` en un iframe oculto para leer su banco de moléculas
+  (`MOLS`/`BANCO_RXN`), dentro de ese iframe el redirect nunca se
+  dispara y todo sigue funcionando igual que antes. El archivo en sí
+  no se tocó más — sigue siendo la fuente de datos técnica.
+- **Navegación** (`docente.html`, `grupos.html`, `index.html`,
+  `isomeria.html`, `juego.html`, `reacciones.html`, `referencia.html`,
+  `teoria.html`, y el menú "Más" de celular en `site-ui.js`): se quitó
+  el enlace "Generador" del menú superior y del menú móvil en las 8
+  páginas — ya no tiene sentido un ítem de menú aparte que solo
+  redirige a otro ítem del mismo menú.
+- **`index.html`**: se quitó la tarjeta "Módulo 5 · Generador de
+  ejercicios" de la portada (ahora redundante) y se renumeró Isomería
+  de "Módulo 6" a "Módulo 5"; la tarjeta "Para el docente" se amplió
+  para mencionar que también arma una hoja de ejercicios suelta (Tipo
+  A-D, 5 a 50 preguntas), no solo guías completas. También se actualizó
+  el enlace del tour de bienvenida.
+- **`docente.html`**: en el "Mapa del sitio" (pestaña Orientaciones) se
+  quitó la tarjeta separada de "Generador" y se amplió la tarjeta
+  "Docente (esta página)" para explicar que incluye los mismos tipos de
+  ejercicio del antiguo Generador.
+- **`sw.js`**: versión de caché `v20`→`v21` para que el cambio llegue a
+  quienes ya instalaron la PWA (¡redesplegar como Web App no aplica
+  aquí, `sw.js` se sirve directo igual que el resto del sitio!).
+
+### Verificado con Playwright
+- Las 8 páginas cargan con el menú superior correcto (8 ítems, sin
+  "Generador") y sin errores de página.
+- Visitar `generador.html` directo redirige a `docente.html`.
+- `docente.html` sigue leyendo bien los bancos (401 moléculas y 167
+  reacciones del Generador + 1.338 preguntas del Juego) — el redirect
+  no rompió el iframe oculto.
+- Se generó una hoja completa de verdad (taller con los 3 temas nuevos)
+  después de estos cambios y salió igual que antes, sin errores.
+- El menú móvil "Más" quedó con 3 ítems (Referencia, Isomería, Docente),
+  sin "Generador".
+
+### Pendiente
+Sigue pendiente, de la sesión anterior, que el docente confirme desde un
+dispositivo real que el banco ampliado de "Retos de nomenclatura" se ve
+y juega bien.
+
+---
+
 ## 2026-10-19 (117) — Retos de nomenclatura: banco ampliado de 70 a 160 preguntas
 
 ### Contexto
