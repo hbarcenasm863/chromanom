@@ -7,6 +7,95 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (104) — Tres auditorías (UX, didáctica, química) y corrección de todo lo encontrado
+
+### Contexto
+El docente pidió tres agentes auditores: diseño UX ("que todo se vea
+perfecto"), didáctica (coherencia de lenguaje y explicación para
+estudiantes colombianos de 13 a 18 años) y química (coherencia y
+corrección). Encontraron 35 + 37 + 30 hallazgos. El docente decidió:
+1. El "de metilo/de etilo" de los ésteres y el alcoxi de los éteres son
+   parte ① (no ④).
+2. Formas antiguas: solo "nombre tradicional" y "nombre funcional clásico".
+3. Isopropil/(1-metiletil)/propan-2-il (y análogos): ambas formas se
+   aceptan en todo el sitio; la respuesta mostrada no cambia.
+4. La parte ① del método se llama **"Sustituyentes"** (antes
+   "Ramificaciones") en todo el sitio.
+5. "Juego completo" pasa a ser el paso 4 de la ruta: "Nomenclatura +
+   reacciones".
+6. NO debe haber clave de respuestas en el Generador: los estudiantes
+   también generan sus hojas (para reponer trabajos), así que se retiró la
+   que un agente había agregado.
+Las correcciones se hicieron con 4 agentes en paralelo (un grupo de
+archivos cada uno) y se integraron y verificaron al final.
+
+### Química (principales)
+- Dibujos corregidos: cadaverina con 5 C (juego), hex-4-enonitrilo ya no
+  parece triple enlace, butanoato/etanoato de etilo con 2 C tras el O,
+  3-metilbutan-2-ona (grupos), metanal CH₂=O (generador).
+- Juego: distractor idéntico a la respuesta, distractor con C de 5
+  enlaces, combustión incompleta balanceada, oxidantes según el libro del
+  docente (CrO₃/H⁺, CCP), tipos de reacción mal rotulados (SN1, halogenación),
+  sulfonación sin oleum, nombres IUPAC 2013 (but-2-eno, propan-2-ol…),
+  yodo, diazotación balanceada, hidrólisis ácida de amidas con H₃O⁺ (juego,
+  generador y reacciones).
+- Una sola escala de prioridad (1–13, la de grupos) en Teoría, Referencia y
+  Grupos; regla de eninos (en empate gana el doble enlace); algoritmo y
+  desempate de Teoría alineados con IUPAC 2013 (A0–A6); "Espacios" con sus
+  excepciones; nombres funcionales clásicos en orden alfabético;
+  1-metoxipropano; terc-butil; propan-2-il como nombre preferido.
+
+### Didáctica (principales)
+- Pregunta de identificar mal calificada (alcoxi) corregida; ésteres y
+  éteres coherentes en las 4 páginas que los usan.
+- Vocabulario unificado: tú (Reacciones dejó el "ustedes"), estudiante,
+  sustituyente, esquelética, conjunto, haluro, -oílo, práctica rápida;
+  "radical" solo en su sentido químico (Reacciones).
+- Teoría/portada/referencia explican "se escribe ①②③④, se resuelve
+  desde ④" y la excepción de ácidos, ésteres y haluros de ácido;
+  "-an- + -o (= -ano)".
+- Retroalimentación: el juego da mensajes por tipo de error (numeración,
+  orden alfabético, cadena, forma tradicional…) en 657 distractores, y las
+  107 preguntas de construir tienen explicación; Grupos cuenta por
+  ejercicio (no por intento) y al tercer fallo muestra la explicación;
+  mensajes de error de Teoría reescritos; mensaje final del juego según
+  el modo.
+- Generador tipo C: fragmentos en gris (el color regalaba la respuesta).
+
+### UX (principales)
+- Juego: cronómetro y marcador visibles al iniciar (scroll arriba +
+  cabecera fija), contraste de "¡Correcto!" y de la retroalimentación,
+  constructor con botones de 44 px, fragmentos de arrastrar sin color
+  hasta verificar, resultados ("Sin tiempo", récord solo si >0).
+- Generador: barra de Imprimir/PDF ya no tapada por el menú inferior del
+  celular, tabla del tipo C sin desbordar, tipo D impreso legible y con
+  renglones, Exportar PDF con las fuentes.
+- Portada: el tour cabe en 360 px. Reacciones: mecanismos sin recortes.
+- Teoría y Grupos: los grupos funcionales siempre en rosa (no turquesa/
+  dorado/verde por familias); botones de acción en azul de marca en todo el
+  sitio; botones con la fuente del sitio; controles de ≥44 px; rosa de texto
+  #9a4a78 (contraste AA); búsqueda de Referencia con mensaje "Sin
+  resultados"; text-zoom más legible; marca de agua más tenue al centro.
+- Grupos: la etiqueta "alcoxi-" de Éteres en turquesa (①).
+- `sw.js`: caché v13.
+
+### Verificación
+Playwright: las 7 páginas a 360/390/414/820/1366 px sin errores de
+JavaScript ni desbordamiento; banco del juego (1.178 preguntas) sin
+problemas; partidas reales en modo libre (envío a Apps Script bloqueado en
+la prueba); Referencia impresa en 2 páginas; Generador tipos A–D sin
+clave de respuestas.
+
+### Pendiente / para decidir
+- Las etiquetas internas que el juego envía a la hoja ("Juego Completo",
+  "🧪 Reacciones — Halogenuros") NO se cambiaron porque
+  `chromanom-analytics.gs` agrupa las estadísticas por ellas; en pantalla
+  ya dicen "Nomenclatura + reacciones" y "Haluros". Cambiarlas exigiría
+  modificar el `.gs`, redesplegar y recalcular.
+- No se tocó `chromanom-analytics.gs` (no hay que redesplegar).
+
+---
+
 ## 2026-10-18 (103) — Fondo "premium": moléculas más finas, profundidad y degradado suave
 
 ### Contexto

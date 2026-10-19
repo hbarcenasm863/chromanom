@@ -589,6 +589,8 @@ const GROUPS = [
     id:'eteres', icon:'🔀', name:'Éteres', priority:11,
     formula:'R−O−R\'', badge:'alcoxi-', suffix:'alcoxi- (sust.)', secondary:'(R)oxi-',
     color:'var(--c4)', colorb:'var(--c4b)',
+    // alcoxi- es un prefijo: parte ① Sustituyentes (turquesa), no ④
+    badgeColor:'var(--c1)', badgeColorb:'var(--c1b)',
     desc:'Compuestos con enlace C−O−C. IUPAC los nombra como alcoxialcanos: el grupo OR más pequeño es el prefijo alcoxi-.',
     iupac:'IUPAC: nombre sustitutivo: el grupo −OR menor se nombra como alcoxi- (metoxi-, etoxi-, propoxi-) y va como prefijo sobre la cadena principal (la de más carbonos).',
     rules:[
@@ -1141,7 +1143,7 @@ function buildGallery(){
         + '</div>'
         + '<span class="gc-formula" style="color:' + txtColor(g.color) + ';border-color:' + g.color + ';background:' + g.colorb + '">'
         + g.formula + '</span>'
-        + '<span class="gc-badge">' + g.badge + '</span>';
+        + '<span class="gc-badge"' + (g.badgeColor ? ' style="color:' + txtColor(g.badgeColor) + '"' : '') + '>' + g.badge + '</span>';
       card.onclick = function(){ showGroup(id); };
       card.onkeydown = function(e){ if(e.key==='Enter'||e.key===' '){ showGroup(id); } };
       grid.appendChild(card);
@@ -1190,7 +1192,7 @@ function showGroup(gid){
     + '<p style="margin-bottom:8px">' + g.desc + '</p>'
     + '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
     + '<span class="group-formula">' + g.formula + '</span>'
-    + '<span class="group-badge" style="color:' + txtColor(g.color) + ';border-color:' + g.color + ';background:' + g.colorb + '">' + g.badge + '</span>'
+    + '<span class="group-badge" style="color:' + txtColor(g.badgeColor||g.color) + ';border-color:' + (g.badgeColor||g.color) + ';background:' + (g.badgeColorb||g.colorb) + '">' + g.badge + '</span>'
     + '<span class="priority-tag" title="1 = mayor prioridad para elegir el sufijo">Prioridad ' + g.priority + ' de ' + MAX_PRIORITY + (g.priorityNote ? ' · ' + g.priorityNote : '') + '</span>'
     + '</div></div></div>'
     + '<div class="sec-lbl">Las 4 partes en un ejemplo</div>'
