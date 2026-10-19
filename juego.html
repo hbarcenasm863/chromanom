@@ -6584,6 +6584,9 @@ function sendSessionStart(){
     errores_por_tema:'{}', aciertos_por_tema:'{}', moleculas_falladas:''
   });
   const INTENTOS=3;
+  function reintentar(n){
+    if(n<INTENTOS-1) setTimeout(()=>intentar(n+1), 1500*(n+1));
+  }
   function intentar(n){
     // Igual que sendAnalytics(): Apps Script siempre responde HTTP 200,
     // incluso cuando el guardado falló internamente (ej. saturación del
@@ -6593,12 +6596,22 @@ function sendSessionStart(){
     // guardó, y como es silencioso, nadie se enteraba de que se había
     // perdido. Por eso también hay que leer el "ok" del cuerpo JSON antes
     // de dar el intento por bueno.
-    fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-      .then(r=>r.ok?r.json():Promise.reject(new Error('http '+r.status)))
-      .then(j=>{ if(!j||!j.ok) throw new Error(j&&j.error||'respuesta sin ok'); })
-      .catch(()=>{
-        if(n<INTENTOS-1) setTimeout(()=>intentar(n+1), 1500*(n+1));
-      });
+    //
+    // OJO iOS: algunas versiones de Safari (y Chrome/iOS, que usa el mismo
+    // motor WebKit) lanzan el error AL LLAMAR fetch(...,{keepalive:true})
+    // en vez de solo rechazar la promesa — sin este try/catch, eso
+    // interrumpía startGame() a mitad de camino, antes de mostrar la
+    // pantalla del juego, sin ningún aviso (el estudiante solo veía que
+    // tocar el nivel "no hacía nada"). Si pasa, se reintenta igual que
+    // cualquier otro fallo.
+    try{
+      fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
+        .then(r=>r.ok?r.json():Promise.reject(new Error('http '+r.status)))
+        .then(j=>{ if(!j||!j.ok) throw new Error(j&&j.error||'respuesta sin ok'); })
+        .catch(()=>reintentar(n));
+    }catch(e){
+      reintentar(n);
+    }
   }
   intentar(0);
 }
@@ -6668,21 +6681,31 @@ function sendAnalytics(trigger){
   _analyticsSent=true;
   const body=JSON.stringify(buildPayload(trigger));
   function intentar(n){
-    // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
-    fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
-      .then(r=>r.ok?r.json():Promise.reject(r.status))
-      // Apps Script siempre responde HTTP 200; el éxito real va en el campo
-      // "ok" del cuerpo JSON — revisar solo r.ok (status HTTP) ocultaba fallas
-      // internas (p. ej. al reconstruir las hojas de estadísticas).
-      .then(j=>{
-        if(j&&j.ok){ _updateSheetsStatus('ok'); return; }
-        if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
-        _analyticsSent=false; _updateSheetsStatus('error');
-      })
-      .catch(()=>{
-        if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
-        _analyticsSent=false; _updateSheetsStatus('error');
-      });
+    // OJO iOS: algunas versiones de Safari (y Chrome/iOS, mismo motor
+    // WebKit) lanzan el error AL LLAMAR fetch(...,{keepalive:true}) en vez
+    // de solo rechazar la promesa (ver el mismo comentario, más detallado,
+    // en sendSessionStart()). El try/catch evita que eso se propague y
+    // rompa lo que esté corriendo en ese momento (ej. el cierre del juego).
+    try{
+      // fetch con keepalive sigue redirecciones (sendBeacon no lo hace) y funciona en beforeunload
+      fetch(ANALYTICS_URL,{method:'POST',body,headers:{'Content-Type':'text/plain'},keepalive:true})
+        .then(r=>r.ok?r.json():Promise.reject(r.status))
+        // Apps Script siempre responde HTTP 200; el éxito real va en el campo
+        // "ok" del cuerpo JSON — revisar solo r.ok (status HTTP) ocultaba fallas
+        // internas (p. ej. al reconstruir las hojas de estadísticas).
+        .then(j=>{
+          if(j&&j.ok){ _updateSheetsStatus('ok'); return; }
+          if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
+          _analyticsSent=false; _updateSheetsStatus('error');
+        })
+        .catch(()=>{
+          if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
+          _analyticsSent=false; _updateSheetsStatus('error');
+        });
+    }catch(e){
+      if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
+      _analyticsSent=false; _updateSheetsStatus('error');
+    }
   }
   intentar(0);
 }
