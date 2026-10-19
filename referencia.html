@@ -138,12 +138,6 @@ body{
   gap:16px;
   margin-bottom:16px;
 }
-.grid-bottom{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:16px;
-}
 
 /* ── SECTION CARD ── */
 .sec{
@@ -214,8 +208,6 @@ tr:nth-child(even) td{background:#f7fbfe}
 .sub-svg .sv-w{fill:none;stroke:var(--c1);stroke-width:1.6;stroke-linecap:round}
 .sub-svg .sv-r{fill:none;stroke:var(--tx);stroke-width:1.4}
 .fm-cond{display:block;font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--dim);margin-top:3px}
-.clasico-tbl td.al{font-size:.7rem;color:var(--dim)}
-.clasico-tbl td.al b{color:var(--c1t)}
 .clasico-nota{padding:8px 14px;font-size:.7rem;color:var(--dim);background:var(--c1b);line-height:1.5}
 @media(max-width:640px){
   .clasico-tbl thead{display:none}
@@ -224,7 +216,7 @@ tr:nth-child(even) td{background:#f7fbfe}
   .clasico-tbl td.cl::before{content:'Tradicional';}
   .clasico-tbl td.iu::before{content:'IUPAC';}
   .clasico-tbl td.cl::before,.clasico-tbl td.iu::before{display:block;font-family:'Outfit',sans-serif;font-style:normal;font-weight:800;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
-  .clasico-tbl td.fm,.clasico-tbl td.al{grid-column:1/-1}
+  .clasico-tbl td.fm{grid-column:1/-1}
   .clasico-tbl tr{grid-template-columns:minmax(0,1fr) 8.8rem}
   .clasico-tbl td.iu{white-space:nowrap;font-size:.72rem}
   .clasico-tbl td.iu small{white-space:normal;max-width:12em}
@@ -284,21 +276,6 @@ code{
 .grupo-struct .gs-r{font-family:var(--mono);font-size:15px;font-weight:700;fill:var(--c1t)}
 .grupo-struct line{stroke:var(--dim);stroke-width:1.6}
 
-/* ── SUBSTITUENTS GRID ── */
-.subs-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  background:var(--brd);
-}
-.sub-item{
-  background:var(--surf);
-  padding:6px 10px;
-  display:flex;flex-direction:column;gap:2px;
-}
-.sub-name{font-size:.73rem;font-weight:800;color:var(--c1t)}
-.sub-form{font-family:var(--mono);font-size:.66rem;color:var(--dim)}
-
 /* ── RULES ── */
 .rules-body{padding:12px 16px}
 .rule-item{
@@ -341,8 +318,7 @@ code{
 
 /* ── RESPONSIVE (mobile) ── */
 @media(max-width:680px){
-  .grid-top,.grid-bottom{grid-template-columns:1fr}
-  .subs-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-top{grid-template-columns:1fr}
   .grupos-grid{grid-template-columns:1fr}
   .ref-title{font-size:1.1rem}
 }
@@ -394,11 +370,6 @@ code{
     gap:10px;
     margin-bottom:10px;
   }
-  .grid-bottom{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:10px;
-  }
 
   /* No shadows, minimal borders */
   .sec,.sec-full{
@@ -422,7 +393,6 @@ code{
 
   /* Compact rows */
   td,th{padding:3px 7px!important}
-  .sub-item{padding:4px 7px}
   .rule-item{padding:4px 0}
   .rules-body{padding:8px 12px}
 
@@ -430,8 +400,6 @@ code{
   .sec table{page-break-inside:avoid}
   tr{page-break-inside:avoid;break-inside:avoid}
 
-  /* Substituents 3-col stays */
-  .subs-grid{grid-template-columns:repeat(3,1fr)}
 
   /* Grupos funcionales: vuelve a 3 columnas compactas para que quepa en la hoja */
   .grupos-grid{grid-template-columns:repeat(3,1fr);background:#fff!important}
@@ -439,18 +407,18 @@ code{
   .grupo-card{padding:3px 7px;gap:1px;page-break-inside:avoid}
   .grupo-card{break-inside:avoid}
   /* Sustituyentes: nombre tradicional vs. IUPAC: 2 columnas de fichas compactas */
-  .clasico-intro{padding:5px 10px;font-size:.62rem}
+  .clasico-intro{padding:3px 10px;font-size:.62rem}
   .clasico-tbl thead{display:none}
   .clasico-tbl tbody{display:grid;grid-template-columns:1fr 1fr;column-gap:0}
-  .clasico-tbl tr{display:grid;grid-template-columns:1fr 1.15fr auto;grid-template-areas:"cl iu fm" "al al fm";align-items:center;gap:0 8px;padding:1px 8px;border-bottom:1px solid #ddd;break-inside:avoid;page-break-inside:avoid}
+  .clasico-tbl tr{display:grid;grid-template-columns:1fr 1.15fr auto;grid-template-areas:"cl iu fm";align-items:center;gap:0 8px;padding:1px 8px;border-bottom:1px solid #ddd;break-inside:avoid;page-break-inside:avoid}
   .clasico-tbl tbody tr:nth-child(odd){border-right:1px solid #ddd}
   .clasico-tbl td{padding:0!important;border:none!important;background:none!important;font-size:.62rem}
-  .clasico-tbl td.cl{grid-area:cl}.clasico-tbl td.iu{grid-area:iu}.clasico-tbl td.al{grid-area:al;font-size:.56rem}
+  .clasico-tbl td.cl{grid-area:cl}.clasico-tbl td.iu{grid-area:iu}
   .clasico-tbl td.fm{grid-area:fm;padding:2px 0!important}
   .clasico-tbl td.iu small{font-size:.54rem}
   .clasico-tbl .sub-svg{height:30px;width:auto;max-width:130px}
   .clasico-tbl .fm-cond{display:none}
-  .clasico-nota{padding:5px 10px;font-size:.6rem}
+  .clasico-nota{padding:2px 10px;font-size:.6rem}
   .grupo-top .pri-n{font-size:.58rem;padding:1px 5px}
   .grupo-name{font-size:.68rem}
   .grupo-formula{font-size:.64rem}
@@ -480,11 +448,11 @@ code{
   .hoja{gap:3mm}
   .hoja-1>.sec-full,.hoja-2>.sec-full{flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
   .hoja-1>.sec-full>.grupos-grid{flex:1;grid-auto-rows:auto;align-content:stretch}
-  .hoja-2>.sec-full>div[style*="overflow"]{flex:1;display:flex;flex-direction:column}
-  .hoja-2 .clasico-tbl{display:flex;flex-direction:column;flex:1;width:100%}
-  .hoja-2 .clasico-tbl tbody{flex:1;grid-auto-rows:auto;align-content:stretch}
-  .grid-top .sec,.grid-bottom .sec{display:flex;flex-direction:column}
-  .grid-top .sec>table,.grid-top .sec>div:not(.sec-hdr),.grid-bottom .sec>div:not(.sec-hdr){flex:1}
+  .hoja-2>.sec-full>div[style*="overflow"]{flex:1;display:flex;flex-direction:column;min-height:0}
+  .hoja-2 .clasico-tbl{display:flex;flex-direction:column;flex:1;width:100%;min-height:0}
+  .hoja-2 .clasico-tbl tbody{flex:1;grid-auto-rows:auto;align-content:stretch;min-height:0}
+  .grid-top .sec{display:flex;flex-direction:column}
+  .grid-top .sec>table,.grid-top .sec>div:not(.sec-hdr){flex:1}
   .grid-top table{height:100%}
 
   /* Letra más grande y bloques más compactos (medido para que las dos
@@ -508,19 +476,13 @@ code{
   .grupo-field{font-size:.74rem}
   .grupo-struct{height:36px}
   .grupo-top .pri-n{font-size:.7rem}
-  /* Sustituyentes comunes: nombre y fórmula en la misma línea */
-  .sub-item{flex-direction:row;flex-wrap:wrap;gap:0 6px;align-items:baseline}
-  .grid-bottom{align-items:start}
   /* Tradicional vs. IUPAC: letra más grande y todos los dibujos a la misma escala */
   .clasico-tbl td{font-size:.78rem}
-  .clasico-tbl td.al,.clasico-tbl td.iu small{font-size:.66rem}
+  .clasico-tbl td.iu small{font-size:.66rem}
   .clasico-intro,.clasico-nota{font-size:.7rem}
-  .clasico-tbl tr{grid-template-columns:1fr 1fr auto;grid-template-areas:"cl iu fm" "al iu fm";padding:2px 8px}
+  .clasico-tbl tr{grid-template-columns:1fr 1fr auto;grid-template-areas:"cl iu fm";padding:1px 8px}
   .clasico-tbl td.iu small{display:block}
   .clasico-tbl .sub-svg{height:auto;width:auto;max-width:none;zoom:.5}
-  /* Reglas clave: un poco más ancha que sustituyentes para que sus textos
-     largos no alarguen la segunda hoja */
-  .grid-bottom{grid-template-columns:1fr 1.2fr}
   .rule-item{font-size:.72rem;padding:3px 0}
 }
 </style>
@@ -658,79 +620,48 @@ code{
 
   <!-- HOJA 2 (al imprimir) -->
   <div class="hoja hoja-2">
-  <div class="grid-bottom">
-
-    <!-- SECTION 4 — Sustituyentes comunes -->
-    <div class="sec s1">
-      <div class="sec-hdr c1">
-        <span class="sec-num">4</span>
-        Sustituyentes comunes (①)
-      </div>
-      <div class="subs-grid">
-        <div class="sub-item"><span class="sub-name">metil-</span><span class="sub-form">−CH₃</span></div>
-        <div class="sub-item"><span class="sub-name">etil-</span><span class="sub-form">−C₂H₅</span></div>
-        <div class="sub-item"><span class="sub-name">propil-</span><span class="sub-form">−C₃H₇</span></div>
-        <div class="sub-item"><span class="sub-name">isopropil-</span><span class="sub-form">−CH(CH₃)₂ · = propan-2-il</span></div>
-        <div class="sub-item"><span class="sub-name">butil-</span><span class="sub-form">−C₄H₉</span></div>
-        <div class="sub-item"><span class="sub-name"><em>sec</em>-butil-</span><span class="sub-form">−CH(CH₃)C₂H₅ · = butan-2-il</span></div>
-        <div class="sub-item"><span class="sub-name"><em>terc</em>-butil-</span><span class="sub-form">−C(CH₃)₃ (tert-butil)</span></div>
-        <div class="sub-item"><span class="sub-name">fenil-</span><span class="sub-form">−C₆H₅</span></div>
-        <div class="sub-item"><span class="sub-name">bencil-</span><span class="sub-form">−CH₂C₆H₅</span></div>
-        <div class="sub-item"><span class="sub-name">vinil-</span><span class="sub-form">−CH=CH₂</span></div>
-        <div class="sub-item"><span class="sub-name">alil-</span><span class="sub-form">−CH₂CH=CH₂</span></div>
-        <div class="sub-item"><span class="sub-name">cloro-</span><span class="sub-form">−Cl</span></div>
-        <div class="sub-item"><span class="sub-name">bromo-</span><span class="sub-form">−Br</span></div>
-        <div class="sub-item"><span class="sub-name">fluoro-</span><span class="sub-form">−F</span></div>
-        <div class="sub-item"><span class="sub-name">yodo-</span><span class="sub-form">−I</span></div>
-        <div class="sub-item"><span class="sub-name">nitro-</span><span class="sub-form">−NO₂</span></div>
-        <div class="sub-item"><span class="sub-name">amino-</span><span class="sub-form">−NH₂</span></div>
-        <div class="sub-item"><span class="sub-name">hidroxi-</span><span class="sub-form">−OH</span></div>
-      </div>
-      <div class="note">Ambas formas son válidas: isopropil = (1-metiletil) = propan-2-il; <em>terc</em>-butil = (1,1-dimetiletil). La IUPAC 2013 prefiere la sistemática en nombres oficiales, pero conserva <em>terc</em>-butil como preferido.</div>
+  <!-- SECTION 4 — Reglas clave (ancho completo: ya no comparte fila con
+       Sustituyentes comunes, que se unió a la tabla de abajo) -->
+  <div class="sec">
+    <div class="sec-hdr rules">
+      <span class="sec-num">4</span>
+      Reglas clave
     </div>
-
-    <!-- SECTION 5 — Reglas clave -->
-    <div class="sec">
-      <div class="sec-hdr rules">
-        <span class="sec-num">5</span>
-        Reglas clave
-      </div>
-      <div class="rules-body">
-        <div class="rules-cols">
-          <div class="rule-item">
-            <span class="rule-n">1</span>
-            <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional; si empatan en longitud, la de más enlaces múltiples (y luego, más dobles); luego, la de más sustituyentes (IUPAC 2013).</span>
-          </div>
-          <div class="rule-item">
-            <span class="rule-n">2</span>
-            <span><strong>Numeración:</strong> número más bajo al grupo funcional; luego a los enlaces múltiples (en empate, el doble antes que el triple); luego a los sustituyentes; si aún empatan, al primero en orden alfabético. Los números se comparan uno por uno; nunca se suman.</span>
-          </div>
-          <div class="rule-item">
-            <span class="rule-n">3</span>
-            <span><strong>Sufijo:</strong> determina el grupo funcional de mayor prioridad (ver tabla ↑).</span>
-          </div>
-          <div class="rule-item">
-            <span class="rule-n">4</span>
-            <span><strong>Sustituyentes:</strong> orden alfabético ignorando di-, tri-, tetra-, <em>sec</em>-, <em>terc</em>-.</span>
-          </div>
-          <div class="rule-item">
-            <span class="rule-n">5</span>
-            <span><strong>Localizadores IUPAC 2013:</strong> <code>butan-2-ol</code>, <code>hex-1-eno</code> (nombres tradicionales: 2-butanol, 1-hexeno).</span>
-          </div>
-          <div class="rule-item">
-            <span class="rule-n">6</span>
-            <span><strong>Orden del nombre:</strong> se escribe ①②③④ sin espacios, pero se resuelve empezando por ④. En ácidos, ésteres y haluros de ácido una palabra va aparte: <code>ácido …</code>, <code>… de metilo</code>, <code>cloruro de …</code>.</span>
-          </div>
+    <div class="rules-body">
+      <div class="rules-cols">
+        <div class="rule-item">
+          <span class="rule-n">1</span>
+          <span><strong>Cadena principal:</strong> la más larga que contenga el grupo funcional; si empatan en longitud, la de más enlaces múltiples (y luego, más dobles); luego, la de más sustituyentes (IUPAC 2013).</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-n">2</span>
+          <span><strong>Numeración:</strong> número más bajo al grupo funcional; luego a los enlaces múltiples (en empate, el doble antes que el triple); luego a los sustituyentes; si aún empatan, al primero en orden alfabético. Los números se comparan uno por uno; nunca se suman.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-n">3</span>
+          <span><strong>Sufijo:</strong> determina el grupo funcional de mayor prioridad (ver tabla ↑).</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-n">4</span>
+          <span><strong>Sustituyentes:</strong> orden alfabético ignorando di-, tri-, tetra-, <em>sec</em>-, <em>terc</em>-.</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-n">5</span>
+          <span><strong>Localizadores IUPAC 2013:</strong> <code>butan-2-ol</code>, <code>hex-1-eno</code> (nombres tradicionales: 2-butanol, 1-hexeno).</span>
+        </div>
+        <div class="rule-item">
+          <span class="rule-n">6</span>
+          <span><strong>Orden del nombre:</strong> se escribe ①②③④ sin espacios, pero se resuelve empezando por ④. En ácidos, ésteres y haluros de ácido una palabra va aparte: <code>ácido …</code>, <code>… de metilo</code>, <code>cloruro de …</code>.</span>
         </div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /grid-bottom -->
-
-  <!-- SECTION — Sustituyentes: nombre tradicional vs IUPAC -->
+  <!-- SECTION — Sustituyentes: nombre tradicional vs IUPAC (incluye los
+       sustituyentes simples, antes en una tarjeta aparte que se unió aquí) -->
   <div class="sec-full s1" id="nombres-clasicos">
     <div class="sec-hdr c1">
-      <span class="sec-num">6</span>
+      <span class="sec-num">5</span>
       Sustituyentes: nombre tradicional vs. IUPAC actual
     </div>
     <div class="clasico-intro">
@@ -738,22 +669,32 @@ code{
     </div>
     <div style="overflow-x:auto">
       <table class="clasico-tbl">
-        <thead><tr><th>Nombre tradicional</th><th>Nombre sistemático</th><th>Estructura (〰 = unión a la cadena principal)</th><th>Orden alfabético por…</th></tr></thead>
+        <thead><tr><th>Nombre tradicional</th><th>Nombre sistemático</th><th>Estructura (〰 = unión a la cadena principal)</th></tr></thead>
         <tbody>
-          <tr><td class="cl">n-propil</td><td class="iu">propil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 32" width="155" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text></svg><span class="fm-cond">−CH₂CH₂CH₃</span></td><td class="al">«<b>p</b>» en los dos</td></tr>
-          <tr><td class="cl">isopropil</td><td class="iu">(1-metiletil)<small>preferido IUPAC 2013: propan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 61" width="109" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₃</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−CH(CH₃)₂</span></td><td class="al">trad. «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
-          <tr><td class="cl">n-butil</td><td class="iu">butil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 201 32" width="201" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="147.5" y1="0" x2="166.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₂</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="168.1" y="0">CH₃</text><text class="sv-n" x="193.0" y="-8">4</text></svg><span class="fm-cond">−CH₂CH₂CH₂CH₃</span></td><td class="al">«<b>b</b>» en los dos</td></tr>
-          <tr><td class="cl">isobutil</td><td class="iu">(2-metilpropil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 61" width="155" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="93.7" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="80" y1="9" x2="80" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH</text><text class="sv-n" x="93.2" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="76.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂CH(CH₃)₂</span></td><td class="al">trad. «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
-          <tr><td class="cl"><em>sec</em>-butil (s-butil)</td><td class="iu">(1-metilpropil)<small>también: butan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 61" width="155" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−CH(CH₃)CH₂CH₃</span></td><td class="al">trad. «<b>b</b>» (<em>sec</em> no cuenta) · IUPAC «<b>m</b>»</td></tr>
-          <tr><td class="cl"><em>terc</em>-butil (tert-, ter-, t-butil)</td><td class="iu">(1,1-dimetiletil)<small><em>terc</em>-butil: preferido IUPAC 2013</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -42 109 84" width="109" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="34" y1="-21" x2="34" y2="-9"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="42.9" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₃</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="-30">CH₃</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)₃</span></td><td class="al">trad. «<b>b</b>» (<em>terc</em> no cuenta) · IUPAC «<b>d</b>»</td></tr>
-          <tr><td class="cl">isopentil (isoamil)</td><td class="iu">(3-metilbutil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 201 61" width="201" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="139.7" y1="0" x2="166.1" y2="0"/><line class="sv-b" x1="126" y1="9" x2="126" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH</text><text class="sv-n" x="139.2" y="-8">3</text><text class="sv-t" x="168.1" y="0">CH₃</text><text class="sv-n" x="193.0" y="-8">4</text><text class="sv-t" x="122.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂CH₂CH(CH₃)₂</span></td><td class="al">trad. «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
-          <tr><td class="cl">neopentil</td><td class="iu">(2,2-dimetilpropil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -42 155 84" width="155" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="85.9" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="80" y1="-21" x2="80" y2="-9"/><line class="sv-b" x1="80" y1="9" x2="80" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">C</text><text class="sv-n" x="88.9" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="76.1" y="-30">CH₃</text><text class="sv-t" x="76.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂C(CH₃)₃</span></td><td class="al">trad. «<b>n</b>» · IUPAC «<b>d</b>»</td></tr>
-          <tr><td class="cl"><em>terc</em>-pentil (<em>terc</em>-amil)</td><td class="iu">(1,1-dimetilpropil)<small>también: 2-metilbutan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -42 155 84" width="155" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="34" y1="-21" x2="34" y2="-9"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="42.9" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="30.1" y="-30">CH₃</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)₂CH₂CH₃</span></td><td class="al">trad. «<b>p</b>» · IUPAC «<b>d</b>»</td></tr>
-          <tr><td class="cl">vinil</td><td class="iu">etenil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 32" width="109" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="-2.2" x2="74.1" y2="-2.2"/><line class="sv-b" x1="47.7" y1="2.2" x2="74.1" y2="2.2"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text></svg><span class="fm-cond">−CH=CH₂</span></td><td class="al">trad. «<b>v</b>» · IUPAC «<b>e</b>»</td></tr>
-          <tr><td class="cl">alil</td><td class="iu">prop-2-en-1-il</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 32" width="155" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="93.7" y1="-2.2" x2="120.1" y2="-2.2"/><line class="sv-b" x1="93.7" y1="2.2" x2="120.1" y2="2.2"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH</text><text class="sv-n" x="93.2" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₂</text><text class="sv-n" x="147.0" y="-8">3</text></svg><span class="fm-cond">−CH₂−CH=CH₂</span></td><td class="al">trad. «<b>a</b>» · IUPAC «<b>p</b>»</td></tr>
-          <tr><td class="cl">isopropenil</td><td class="iu">(1-metiletenil)<small>también: prop-1-en-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 61" width="109" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="-2.2" x2="74.1" y2="-2.2"/><line class="sv-b" x1="39.9" y1="2.2" x2="74.1" y2="2.2"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="39.4" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)=CH₂</span></td><td class="al">trad. «<b>i</b>» · IUPAC «<b>m</b>»</td></tr>
-          <tr><td class="cl">bencil</td><td class="iu">fenilmetil<small>también: bencil (se conserva)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 104 38" width="104" height="38" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><line class="sv-b" x1="55.5" y1="0" x2="71.5" y2="0"/><polygon class="sv-r" points="71.5,0.0 79.0,-13.0 94.0,-13.0 101.5,-0.0 94.0,13.0 79.0,13.0"/><circle class="sv-r" cx="86.5" cy="0" r="8.5"/></svg><span class="fm-cond">−CH₂−C₆H₅</span></td><td class="al">trad. «<b>b</b>» · IUPAC «<b>f</b>»</td></tr>
-          <tr><td class="cl">fenil</td><td class="iu">fenil<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="3 -19 63 38" width="63" height="38" aria-hidden="true"><path class="sv-w" d="M10.0,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="10.0" y1="0" x2="32.0" y2="0"/><polygon class="sv-r" points="32.0,0.0 39.5,-13.0 54.5,-13.0 62.0,-0.0 54.5,13.0 39.5,13.0"/><circle class="sv-r" cx="47.0" cy="0" r="8.5"/></svg><span class="fm-cond">−C₆H₅</span></td><td class="al">«<b>f</b>»</td></tr>
+          <tr><td class="cl">metil</td><td class="iu">metil<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 85 32" width="85" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₃</text></svg><span class="fm-cond">−CH₃</span></td></tr>
+          <tr><td class="cl">etil</td><td class="iu">etil<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 32" width="109" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₃</text></svg><span class="fm-cond">−CH₂CH₃</span></td></tr>
+          <tr><td class="cl">n-propil</td><td class="iu">propil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 32" width="155" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text></svg><span class="fm-cond">−CH₂CH₂CH₃</span></td></tr>
+          <tr><td class="cl">isopropil</td><td class="iu">(1-metiletil)<small>preferido IUPAC 2013: propan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 61" width="109" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₃</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−CH(CH₃)₂</span></td></tr>
+          <tr><td class="cl">n-butil</td><td class="iu">butil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 201 32" width="201" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="147.5" y1="0" x2="166.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₂</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="168.1" y="0">CH₃</text><text class="sv-n" x="193.0" y="-8">4</text></svg><span class="fm-cond">−CH₂CH₂CH₂CH₃</span></td></tr>
+          <tr><td class="cl">isobutil</td><td class="iu">(2-metilpropil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 61" width="155" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="93.7" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="80" y1="9" x2="80" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH</text><text class="sv-n" x="93.2" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="76.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂CH(CH₃)₂</span></td></tr>
+          <tr><td class="cl"><em>sec</em>-butil (s-butil)</td><td class="iu">(1-metilpropil)<small>también: butan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 61" width="155" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−CH(CH₃)CH₂CH₃</span></td></tr>
+          <tr><td class="cl"><em>terc</em>-butil (tert-, ter-, t-butil)</td><td class="iu">(1,1-dimetiletil)<small><em>terc</em>-butil: preferido IUPAC 2013</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -42 109 84" width="109" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="34" y1="-21" x2="34" y2="-9"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="42.9" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₃</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="-30">CH₃</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)₃</span></td></tr>
+          <tr><td class="cl">isopentil (isoamil)</td><td class="iu">(3-metilbutil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 201 61" width="201" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="139.7" y1="0" x2="166.1" y2="0"/><line class="sv-b" x1="126" y1="9" x2="126" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH</text><text class="sv-n" x="139.2" y="-8">3</text><text class="sv-t" x="168.1" y="0">CH₃</text><text class="sv-n" x="193.0" y="-8">4</text><text class="sv-t" x="122.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂CH₂CH(CH₃)₂</span></td></tr>
+          <tr><td class="cl">neopentil</td><td class="iu">(2,2-dimetilpropil)</td><td class="fm"><svg class="sub-svg" viewBox="1 -42 155 84" width="155" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="85.9" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="80" y1="-21" x2="80" y2="-9"/><line class="sv-b" x1="80" y1="9" x2="80" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">C</text><text class="sv-n" x="88.9" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="76.1" y="-30">CH₃</text><text class="sv-t" x="76.1" y="30">CH₃</text></svg><span class="fm-cond">−CH₂C(CH₃)₃</span></td></tr>
+          <tr><td class="cl"><em>terc</em>-pentil (<em>terc</em>-amil)</td><td class="iu">(1,1-dimetilpropil)<small>también: 2-metilbutan-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -42 155 84" width="155" height="84" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="101.5" y1="0" x2="120.1" y2="0"/><line class="sv-b" x1="34" y1="-21" x2="34" y2="-9"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="42.9" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₃</text><text class="sv-n" x="147.0" y="-8">3</text><text class="sv-t" x="30.1" y="-30">CH₃</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)₂CH₂CH₃</span></td></tr>
+          <tr><td class="cl">vinil</td><td class="iu">etenil</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 32" width="109" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="47.7" y1="-2.2" x2="74.1" y2="-2.2"/><line class="sv-b" x1="47.7" y1="2.2" x2="74.1" y2="2.2"/><text class="sv-t sv-c1" x="30.1" y="0">CH</text><text class="sv-n" x="47.2" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text></svg><span class="fm-cond">−CH=CH₂</span></td></tr>
+          <tr><td class="cl">alil</td><td class="iu">prop-2-en-1-il</td><td class="fm"><svg class="sub-svg" viewBox="1 -19 155 32" width="155" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="55.5" y1="0" x2="74.1" y2="0"/><line class="sv-b" x1="93.7" y1="-2.2" x2="120.1" y2="-2.2"/><line class="sv-b" x1="93.7" y1="2.2" x2="120.1" y2="2.2"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH</text><text class="sv-n" x="93.2" y="-8">2</text><text class="sv-t" x="122.1" y="0">CH₂</text><text class="sv-n" x="147.0" y="-8">3</text></svg><span class="fm-cond">−CH₂−CH=CH₂</span></td></tr>
+          <tr><td class="cl">isopropenil</td><td class="iu">(1-metiletenil)<small>también: prop-1-en-2-il</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 109 61" width="109" height="61" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><line class="sv-b" x1="39.9" y1="-2.2" x2="74.1" y2="-2.2"/><line class="sv-b" x1="39.9" y1="2.2" x2="74.1" y2="2.2"/><line class="sv-b" x1="34" y1="9" x2="34" y2="21"/><text class="sv-t sv-c1" x="30.1" y="0">C</text><text class="sv-n" x="39.4" y="-8">1</text><text class="sv-t" x="76.1" y="0">CH₂</text><text class="sv-n" x="101.0" y="-8">2</text><text class="sv-t" x="30.1" y="30">CH₃</text></svg><span class="fm-cond">−C(CH₃)=CH₂</span></td></tr>
+          <tr><td class="cl">bencil</td><td class="iu">fenilmetil<small>también: bencil (se conserva)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 104 38" width="104" height="38" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">CH₂</text><text class="sv-n" x="55.0" y="-8">1</text><line class="sv-b" x1="55.5" y1="0" x2="71.5" y2="0"/><polygon class="sv-r" points="71.5,0.0 79.0,-13.0 94.0,-13.0 101.5,-0.0 94.0,13.0 79.0,13.0"/><circle class="sv-r" cx="86.5" cy="0" r="8.5"/></svg><span class="fm-cond">−CH₂−C₆H₅</span></td></tr>
+          <tr><td class="cl">fenil</td><td class="iu">fenil<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="3 -19 63 38" width="63" height="38" aria-hidden="true"><path class="sv-w" d="M10.0,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="10.0" y1="0" x2="32.0" y2="0"/><polygon class="sv-r" points="32.0,0.0 39.5,-13.0 54.5,-13.0 62.0,-0.0 54.5,13.0 39.5,13.0"/><circle class="sv-r" cx="47.0" cy="0" r="8.5"/></svg><span class="fm-cond">−C₆H₅</span></td></tr>
+          <tr><td class="cl">cloro</td><td class="iu">cloro<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 62 32" width="62" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">Cl</text></svg><span class="fm-cond">−Cl</span></td></tr>
+          <tr><td class="cl">bromo</td><td class="iu">bromo<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 62 32" width="62" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">Br</text></svg><span class="fm-cond">−Br</span></td></tr>
+          <tr><td class="cl">flúor</td><td class="iu">flúor<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 50 32" width="50" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">F</text></svg><span class="fm-cond">−F</span></td></tr>
+          <tr><td class="cl">yodo</td><td class="iu">yodo<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 46 32" width="46" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">I</text></svg><span class="fm-cond">−I</span></td></tr>
+          <tr><td class="cl">nitro</td><td class="iu">nitro<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 78 32" width="78" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">NO₂</text></svg><span class="fm-cond">−NO₂</span></td></tr>
+          <tr><td class="cl">amino</td><td class="iu">amino<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 78 32" width="78" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">NH₂</text></svg><span class="fm-cond">−NH₂</span></td></tr>
+          <tr><td class="cl">hidroxi</td><td class="iu">hidroxi<small>(no cambia)</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 62 32" width="62" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">OH</text></svg><span class="fm-cond">−OH</span></td></tr>
+          <tr><td class="cl">mercapto</td><td class="iu">sulfanil<small>preferido IUPAC 2013</small></td><td class="fm"><svg class="sub-svg" viewBox="1 -19 62 32" width="62" height="32" aria-hidden="true"><path class="sv-w" d="M8.1,-10 q4,2.5 0,5 q-4,2.5 0,5 q4,2.5 0,5 q-4,2.5 0,5"/><line class="sv-b" x1="8.1" y1="0" x2="28.1" y2="0"/><text class="sv-t sv-c1" x="30.1" y="0">SH</text></svg><span class="fm-cond">−SH</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -780,7 +721,7 @@ function refSearch(q){
   const raw = q.trim();
   const term = refNorm(raw);
   const items = document.querySelectorAll(
-    '.grid-top tbody tr, .sec-full.s4 .grupo-card, .subs-grid .sub-item, .rules-cols .rule-item, .clasico-tbl tbody tr'
+    '.grid-top tbody tr, .sec-full.s4 .grupo-card, .rules-cols .rule-item, .clasico-tbl tbody tr'
   );
   let shown = 0;
   items.forEach(el=>{
@@ -794,7 +735,7 @@ function refSearch(q){
     t.classList.toggle('ref-hidden', term!=='' && !t.querySelector('tbody tr:not(.ref-hidden)'));
   });
   document.querySelectorAll('.page .sec, .page .sec-full').forEach(sec=>{
-    const its = sec.querySelectorAll('tbody tr, .grupo-card, .sub-item, .rule-item');
+    const its = sec.querySelectorAll('tbody tr, .grupo-card, .rule-item');
     if(!its.length) return;
     const any = Array.from(its).some(e=>!e.classList.contains('ref-hidden'));
     sec.classList.toggle('ref-hidden', term!=='' && !any);

@@ -7,6 +7,63 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (116) — Referencia: se unen las dos tablas de sustituyentes
+
+### Contexto
+El docente pidió, con una captura de la tabla "Sustituyentes: nombre
+tradicional vs. IUPAC actual" de `referencia.html`: quitar la última
+columna ("Orden alfabético por…"), unir esa tabla con la sección aparte
+y más pequeña "Sustituyentes comunes" (ya que las dos tablas mostraban
+información redundante), aprovechar el espacio liberado para darle más
+ancho a "Reglas clave", y agregar a la tabla unida sustituyentes que
+solo estaban en "Sustituyentes comunes" y no en la tabla grande —puso
+"nitro" como ejemplo concreto de uno que faltaba.
+
+### Cambios (`referencia.html`)
+- Se eliminó la columna "Orden alfabético por…" de la tabla grande
+  (`clasico-tbl`): se quitó el `<th>` y la celda `<td class="al">` de
+  las 14 filas originales, junto con todo el CSS que dependía de esa
+  cuarta columna (en pantalla, en móvil y en las dos variantes de la
+  hoja impresa).
+- Se eliminó por completo la sección aparte "Sustituyentes comunes"
+  (la cuadrícula `.subs-grid` de 18 fichas simples) y su CSS, y se
+  quitaron sus referencias del buscador (`refSearch()`).
+- Esas 18 entradas se fusionaron dentro de `clasico-tbl`, evitando
+  duplicar las que ya estaban (metil, etil, fenil, bencil ya existían
+  en forma de "n-propil/isopropil" etc. en la tabla grande, así que
+  solo se agregaron las que faltaban): se añadieron **metil** y
+  **etil** al inicio, y **cloro, bromo, flúor, yodo, nitro, amino,
+  hidroxi** después de fenil — cada una con su propio dibujo SVG de
+  fórmula semidesarrollada, igual que las demás filas. Se agregó
+  también **mercapto (sulfanil)** como par tradicional/IUPAC adicional
+  que tampoco aparecía. Total: de 14 a 24 filas.
+- "Reglas clave" salió de la cuadrícula de 2 columnas que compartía con
+  la tabla de sustituyentes (`.grid-bottom`) y pasó a ser una sección
+  normal de ancho completo, ya que esa cuadrícula dejó de tener sentido
+  al desaparecer la tabla pequeña de al lado.
+- **Bug encontrado y corregido durante la prueba con Playwright en modo
+  impresión**: al crecer la tabla a 24 filas, la última fila
+  ("hidroxi"/"mercapto") quedaba tapada por el cuadro de nota de abajo
+  ("Cómo leer el dibujo…"). La causa real era doble: (1) al div que
+  envuelve la tabla le faltaba `min-height:0` en la cadena de
+  `flex:1` anidados, así que no medía bien el alto real de la tabla; y
+  (2) una vez corregido eso, la tabla con 24 filas simplemente
+  necesitaba más alto del que quedaba disponible en esa hoja. Se
+  recuperó ese espacio recortando un poco el relleno vertical de las
+  filas y de los cuadros de introducción/nota (sin tocar el tamaño de
+  letra, que ya se había agrandado a propósito en una sesión
+  anterior). Verificado con Playwright: las 24 filas se ven completas
+  y legibles, sin superposición, y la página 2 impresa sigue llenándose
+  por completo de borde a borde (sin franja en blanco al final, por el
+  pedido explícito del docente de que "llene toda la página 2").
+
+### Pendiente
+- Ampliar a 40+ preguntas cada una las secciones nuevas de `juego.html`
+  ("Encuentra la cadena", "Cazadores de errores", "Haluros de alquilo",
+  "Polifuncionales") — pedido explícito del docente, aún no iniciado.
+
+---
+
 ## 2026-10-19 (115) — La causa real del bloqueo en iOS: pushState falla en su dispositivo
 
 ### Contexto
