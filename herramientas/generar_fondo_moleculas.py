@@ -6,7 +6,7 @@
 Cada molécula se define con átomos (x,y en unidades de enlace) y enlaces;
 los colores siguen el código MDEC. Todas son estructuras reales."""
 import math, sys
-G='#166534'; T='#0891b2'; D='#b45309'; P='#CC79A7'   # cadena, ramificación, insaturación, grupo funcional
+G='#166534'; T='#0891b2'; D='#b45309'; P='#CC79A7'   # cadena, sustituyentes, insaturación, grupo funcional
 L=40  # longitud de enlace
 def zig(n,start=(0,0),up=True):
     pts=[];x,y=start
@@ -83,7 +83,7 @@ body=[render(*p) for p in P_]
 svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <!-- Marca de agua de ChromaNom (versión premium): moléculas reales en fórmula
      esqueletal, trazo fino con nodos en los átomos de carbono, coloreadas con
-     el código MDEC: verde = cadena · turquesa = ramificación ·
+     el código MDEC: verde = cadena · turquesa = sustituyentes ·
      dorado = insaturación · rosa = grupo funcional.
      Generado con un script: cada molécula tiene su propio espacio y el mosaico
      se repite sin que ninguna se cruce con otra (comprobado midiendo en el

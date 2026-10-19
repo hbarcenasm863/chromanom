@@ -7,6 +7,57 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (105) — Revisión: ¿todo cumple el código MDEC de 4 colores?
+
+### Contexto
+El docente preguntó si todo el sitio cumple el MDEC (① Sustituyentes
+turquesa, ② Cadena verde, ③ Insaturaciones dorado, ④ Grupo funcional
+rosa). Se revisó con un script todos los fragmentos coloreados (≈5.180)
+de juego, grupos, generador, teoría y portada, más los colores de cada
+página. Resultado: los colores eran idénticos en las 7 páginas, pero había
+fragmentos que juntaban dos partes en un solo color. Se corrigieron con el
+criterio del método: **cadena (②) + an/en/in (③) + terminación (④)**.
+
+### Corregido
+- `juego.html`:
+  - 65 "an" marcados como ② → ③.
+  - "ano", "anoato", "anoico" juntos en ④ → "an" (③) + terminación (④)
+    (desgloses, huecos y fichas de arrastrar).
+  - "butanoato", "etanoato", "propanoato"… enteros → cadena + an +
+    oato; "etan", "propan", "butan"… → cadena + an; "eno", "ino",
+    "dieno", "1-eno"… → en/in (③) + o (④).
+  - La "o" de "-onitrilo" ya no es ② (cadena), es ④.
+  - 8 preguntas de "identifica la parte" que resaltaban fragmentos
+    mixtos ahora resaltan una sola parte (p. ej. "but" en butanonitrilo,
+    "oato" en los ésteres, "in" en hex-1-ino) con su explicación.
+  - 3 preguntas de arrastrar de ácidos ramificados no tenían el hueco
+    "an"; el desglose del ácido benzoico decía "bencen + oico" (→ "benz +
+    oico") y el del paracetamol describía otro nombre.
+- `grupos.html`: anhídridos ("etanoico", "propanoico"… enteros en verde)
+  → et + an + oico.
+- `generador.html`: "anoato" junto → an + oato.
+- Comentarios del fondo de moléculas: "turquesa = sustituyentes".
+- `sw.js`: caché v14.
+
+### Se deja así (correcto según el método)
+- La "a" de enlace de buta-1,3-dieno va con la cadena; la "o" eufónica
+  de propano-1,2-diol y ciclohexanocarbaldehído va con el "an"; en
+  cetonas "2-on" + "a" son ambos ④; el benceno conserva su doble rol
+  (② y ④).
+
+### Verificación
+Script de revisión MDEC: 0 fragmentos con partes mezcladas (solo quedan
+falsas alarmas del propio script). En el navegador: todas las preguntas
+de arrastrar tienen ficha para cada hueco y los huecos forman el nombre;
+todos los resaltados caen dentro del nombre; todos los desgloses forman la
+respuesta. Las 7 páginas a 5 anchos sin errores; banco (1.178) sin
+problemas.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-19 (104) — Tres auditorías (UX, didáctica, química) y corrección de todo lo encontrado
 
 ### Contexto

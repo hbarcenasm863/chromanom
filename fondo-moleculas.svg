@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
 <!-- Marca de agua de ChromaNom (versión premium): moléculas reales en fórmula
      esqueletal, trazo fino con nodos en los átomos de carbono, coloreadas con
-     el código MDEC: verde = cadena · turquesa = ramificación ·
+     el código MDEC: verde = cadena · turquesa = sustituyentes ·
      dorado = insaturación · rosa = grupo funcional.
      Generado con un script: cada molécula tiene su propio espacio y el mosaico
      se repite sin que ninguna se cruce con otra (comprobado midiendo en el
