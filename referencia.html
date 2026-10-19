@@ -331,7 +331,7 @@ code{
 
 /* ── FOOTER ── */
 /* En pantalla la licencia ya va en el pie del sitio; esta línea solo sale al imprimir */
-@media screen{.ref-footer{display:none}}
+@media screen{.ref-footer{display:none}.hoja{display:contents}}
 .ref-footer{
   text-align:center;padding:20px 0 0;
   font-size:.72rem;color:var(--dim);
@@ -361,14 +361,14 @@ code{
 ───────────────────────────────────────── */
 @media print{
   .ref-logo{position:absolute;top:8px;right:14px;width:150px}
-  @page{size:A4 landscape;margin:8mm 10mm}
+  @page{size:letter landscape;margin:7mm 9mm}
 
   /* Hide interactive elements */
   .site-nav,
   .back-link,
   .btn-print,
   .ref-search-wrap,
-  .topbar{display:none!important}
+  .topbar,.topbar-nota{display:none!important}
 
   html,body{background:#fff!important;font-size:11px!important}
 
@@ -457,7 +457,7 @@ code{
   .grupo-field{font-size:.58rem}
   .grupo-lbl{min-width:44px}
   .grupo-struct{height:26px}
-  .grupo-struct .gs-a,.grupo-struct .gs-o,.grupo-struct .gs-r{font-size:11px}
+  .grupo-struct .gs-a,.grupo-struct .gs-o,.grupo-struct .gs-r{font-size:14px}
   .grupo-struct line{stroke-width:1.2}
 
   /* Rules 2-col for print space */
@@ -469,6 +469,55 @@ code{
 
   .ref-footer{padding:8px 0 0;font-size:.65rem}
   .note{font-size:.6rem;padding:4px 10px}
+
+  /* ── Dos hojas horizontales llenas ─────────────────────────────────
+     Cada .hoja mide el alto útil de una hoja Carta horizontal (el tamaño
+     que se usa en Colombia) y sus secciones grandes se estiran para ocupar todo el espacio
+     sobrante, en vez de dejar una franja en blanco al final. */
+  .hoja{display:flex;flex-direction:column;height:200mm;overflow:hidden;break-after:page;page-break-after:always}
+  .hoja-2{break-after:auto;page-break-after:auto}
+  .hoja>*{flex:none;margin-bottom:0!important}
+  .hoja{gap:3mm}
+  .hoja-1>.sec-full,.hoja-2>.sec-full{flex:1 1 auto;display:flex;flex-direction:column;min-height:0}
+  .hoja-1>.sec-full>.grupos-grid{flex:1;grid-auto-rows:auto;align-content:stretch}
+  .hoja-2>.sec-full>div[style*="overflow"]{flex:1;display:flex;flex-direction:column}
+  .hoja-2 .clasico-tbl{display:flex;flex-direction:column;flex:1;width:100%}
+  .hoja-2 .clasico-tbl tbody{flex:1;grid-auto-rows:auto;align-content:stretch}
+  .grid-top .sec,.grid-bottom .sec{display:flex;flex-direction:column}
+  .grid-top .sec>table,.grid-top .sec>div:not(.sec-hdr),.grid-bottom .sec>div:not(.sec-hdr){flex:1}
+  .grid-top table{height:100%}
+
+  /* Letra más grande y bloques más compactos (medido para que las dos
+     hojas queden llenas sin que nada se corte). */
+  html,body{font-size:12.5px!important}
+  .ref-header{display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;padding:8px 14px!important}
+  .ref-header>.ref-title{flex:0 0 100%;font-size:1.3rem}
+  .ref-header>.ref-sub{flex:0 0 100%;margin:0}
+  .ref-header .legend{margin-top:6px}
+  .ref-header .ref-orden{margin:6px 0 0!important;font-size:.8rem!important}
+  .ref-logo{width:140px;top:10px}
+  .grid-top td{font-size:.82rem}
+  .grid-top th{font-size:.64rem}
+  /* Grupos funcionales: la estructura va a la derecha del nombre */
+  .grupo-card{display:grid;grid-template-columns:1fr auto;align-content:start;column-gap:8px}
+  .grupo-top{grid-column:1;grid-row:1;align-self:center}
+  .grupo-struct,.grupo-formula{grid-column:2;grid-row:1;align-self:center;margin:0}
+  .grupo-field{grid-column:1 / -1}
+  .grupo-name{font-size:.86rem}
+  .grupo-formula{font-size:.8rem}
+  .grupo-field{font-size:.74rem}
+  .grupo-struct{height:36px}
+  .grupo-top .pri-n{font-size:.7rem}
+  /* Sustituyentes comunes: nombre y fórmula en la misma línea */
+  .sub-item{flex-direction:row;flex-wrap:wrap;gap:0 6px;align-items:baseline}
+  .grid-bottom{align-items:start}
+  /* Tradicional vs. IUPAC: letra más grande y todos los dibujos a la misma escala */
+  .clasico-tbl td{font-size:.78rem}
+  .clasico-tbl td.al,.clasico-tbl td.iu small{font-size:.66rem}
+  .clasico-intro,.clasico-nota{font-size:.7rem}
+  .clasico-tbl tr{grid-template-columns:1fr 1fr auto;grid-template-areas:"cl iu fm" "al iu fm";padding:2px 8px}
+  .clasico-tbl td.iu small{display:block}
+  .clasico-tbl .sub-svg{height:auto;width:auto;max-width:none;zoom:.56}
 }
 </style>
 <link rel="stylesheet" href="chromanom.css">
@@ -493,7 +542,10 @@ code{
     
     <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
   </div>
+  <p class="topbar-nota" style="font-size:.74rem;color:var(--dim);margin:-6px 0 12px;text-align:right">📱 En el celular: en las opciones de impresión (⌄) elige <strong>Orientación: Horizontal</strong> para que salga en 2 hojas completas.</p>
 
+  <!-- HOJA 1 (al imprimir) -->
+  <div class="hoja hoja-1">
   <!-- HEADER -->
   <div class="ref-header">
     <img class="ref-logo" src="logo-chromanom.png" alt="ChromaNom" width="423" height="120">
@@ -596,6 +648,10 @@ code{
   </div>
 
   <!-- BOTTOM GRID: Section 4 + Section 5 -->
+  </div><!-- /hoja-1 -->
+
+  <!-- HOJA 2 (al imprimir) -->
+  <div class="hoja hoja-2">
   <div class="grid-bottom">
 
     <!-- SECTION 4 — Sustituyentes comunes -->
@@ -706,6 +762,7 @@ code{
   <div class="ref-footer">
     ChromaNom · Nomenclatura Orgánica IUPAC · bachillerato · © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0
   </div>
+  </div><!-- /hoja-2 -->
 
 </div><!-- /page -->
 <script>

@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (108) — Desempate con estructuras en todos los criterios + Hoja de Referencia que llena 2 hojas horizontales
+
+### Contexto
+1. Después de dibujar el ejemplo del criterio B3, el docente pidió hacer lo
+   mismo con los demás criterios de desempate.
+2. Al guardar la Hoja de Referencia en PDF desde el celular, quedaba mucho
+   espacio en blanco y la letra se veía muy pequeña. El docente pidió que
+   saliera en horizontal, con las secciones ampliadas para llenar cada hoja
+   y verse mejor.
+
+### Cambios — `teoria.html` (Principios › Desempate)
+- Debajo de cada criterio hay un ejemplo dibujado (fórmula esquelética),
+  con una tarjeta verde "✓ correcta" y una roja "✗ incorrecta" sobre la
+  MISMA molécula, más una explicación corta:
+  - A1 (cadena más larga): 3-etilhexano vs. 3-propilpentano.
+  - A2 (más enlaces múltiples): 3-etilpent-1-eno vs. 3-etenilpentano.
+  - A3 (más sustituyentes): 3-etil-2-metilhexano vs. 3-isopropilhexano.
+  - B1 (grupo funcional): pentan-2-ol vs. pentan-4-ol.
+  - B2 (insaturaciones antes que ramas): 4-metilpent-1-eno vs.
+    2-metilpent-4-eno.
+  - B3: el ejemplo que ya existía se movió justo debajo de su criterio.
+  - B4 (orden alfabético): 3-etil-5-metilheptano vs. 5-etil-3-metilheptano.
+  Colores del MDEC: cadena principal verde ②, doble enlace dorado ③,
+  ramas turquesa ①, −OH rosado ④. Los carbonos que deciden van resaltados.
+  A4, A5 y A6 siguen solo con texto: sus ejemplos necesitan moléculas
+  grandes y casi nunca aparecen en bachillerato.
+- Bajo el botón "Guardar como PDF" se agregó un aviso: en el celular hay
+  que elegir Orientación: Horizontal en las opciones de impresión. Android
+  no gira la hoja por su cuenta, y por eso la hoja salía encogida en
+  vertical.
+
+### Cambios — `referencia.html` (impresión)
+- Hoja Carta horizontal (`@page size: letter landscape`), el tamaño que se
+  usa en Colombia.
+- El contenido quedó agrupado en dos bloques, `.hoja-1` y `.hoja-2`. Cada
+  uno mide el alto útil de una hoja, y las secciones grandes se estiran
+  para llenarlo; en pantalla, los bloques no cambian nada.
+- Letra más grande (base de 11 → 12,5 px; grupos funcionales, sustituyentes
+  y tabla tradicional vs. IUPAC también más grandes). Encabezado más
+  compacto.
+- En grupos funcionales, la estructura va a la derecha del nombre. En
+  sustituyentes comunes, el nombre y la fórmula van en la misma línea. En
+  la tabla tradicional vs. IUPAC, todos los dibujos quedan a la misma
+  escala.
+- Se agregó el mismo aviso de orientación horizontal (solo en pantalla).
+
+### Cambios — `sw.js`
+- Caché `chromanom-v17`.
+
+### Verificación
+- PDF con Chromium (Carta horizontal): 2 páginas; ambas llenas hasta
+  ~95 % del alto y sin contenido cortado.
+- Ejemplos de desempate a 390 y 1100 px: sin errores ni desplazamiento
+  horizontal.
+- Revisión general: 7 páginas sin problemas; banco del juego sin problemas.
+
+### Pendiente
+- Si el docente lo quiere, dibujar también ejemplos para A4–A6.
+
+---
+
 ## 2026-10-19 (107) — Principios › Desempate: estructuras numeradas en el ejemplo del criterio B3
 
 ### Contexto
