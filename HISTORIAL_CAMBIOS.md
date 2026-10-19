@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (107) — Principios › Desempate: estructuras numeradas en el ejemplo del criterio B3
+
+### Contexto
+En "Ejemplo aplicado — criterio B3 en acción" solo aparecían los nombres
+(3-etil-2-metilpentano vs. 3-etil-4-metilpentano). El docente pidió
+mostrar primero la molécula dibujada para que se vea la numeración
+correcta y la incorrecta.
+
+### Cambios
+- `teoria.html`: antes de la tabla del ejemplo se agregaron dos tarjetas
+  con la estructura esquelética de la MISMA molécula (cadena de 5 C en
+  verde ②, metil y etil en turquesa ①):
+  - "✓ Numeración correcta" (fondo verde): numerada de izquierda a
+    derecha; los carbonos con sustituyente (2 y 3) resaltados → {2,3}.
+  - "✗ Numeración incorrecta" (fondo rojo): numerada de derecha a
+    izquierda → {3,4}.
+  - Nota: la cadena y los sustituyentes son los mismos; solo cambia el
+    extremo por el que se empieza a contar.
+  En PC quedan lado a lado; en celular, una debajo de la otra.
+- `sw.js`: caché `chromanom-v16`.
+
+### Verificación
+Playwright a 390 px y 1200 px: sin errores ni desplazamiento horizontal.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-10-19 (106) — Una sola hoja de referencia: "Guardar como PDF" de Principios usa la oficial
 
 ### Contexto
