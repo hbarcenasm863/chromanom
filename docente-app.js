@@ -76,7 +76,7 @@ function tamSvg(svg,wMax,hMax,sMax,sMin){
   var vb=svg.match(/viewBox="\s*([-\d.]+)[\s,]+([-\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/);
   if(!vb)return svg;
   var vw=+vb[3],vh=+vb[4];if(!vw||!vh)return svg;
-  var s=Math.max(Math.min(wMax/vw,hMax/vh,sMax||1.4),sMin||0.5);
+  var s=Math.max(Math.min(wMax/vw,hMax/vh,sMax||1.4),sMin||0.7);
   s=Math.min(s,wMax/vw,hMax/vh);
   return svg.replace(/<svg\b([^>]*)>/,function(all,attrs){
     attrs=attrs.replace(/\s(width|height)="[^"]*"/g,'').replace(/style="[^"]*"/,'');
@@ -141,7 +141,7 @@ function poolEjercicios(temas){
       var nom=m.iupac||m.name;
       addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador'});
       addB(nom,{k:'B',nombre:nom,fuente:'Generador'});
-      if(m.parts&&m.parts.length)addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador'});
+      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador'});
     });
     // 2) Juego
     if(t.jue)B.jue.forEach(function(q){
@@ -150,7 +150,7 @@ function poolEjercicios(temas){
       if(q.mol&&(q.type==='mc'||q.type==='write')&&/nombre IUPAC/i.test(qt)&&!/cl[aá]sico|funcional \(/i.test(qt)&&typeof q.ans==='string'){
         addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego'});
         addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego'});
-        if(Array.isArray(q.parts)&&q.parts.length)addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego'});
+        if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego'});
       }else if(q.type==='build'){
         var mm=String(q.q||'').match(/<strong>([^<]+)<\/strong>/);
         if(mm)addB(mm[1],{k:'B',nombre:mm[1],fuente:'Juego'});
@@ -199,12 +199,10 @@ function pintarTemas(){
 function pintarTipos(){
   var cont=$('f-tipos');if(!cont)return;
   var P=poolEjercicios(temasSel());
-  var prev={};document.querySelectorAll('input[name=tipoej]').forEach(function(c){prev[c.value]=c.checked;});
-  var hayPrev=Object.keys(prev).length>0;
+  var prev={};document.querySelectorAll('input[name=tipoej]:not(:disabled)').forEach(function(c){prev[c.value]=c.checked;});
   cont.innerHTML=TIPOS_EJ.map(function(x){
     var n=P[x.k].length,dis=!n;
-    var chk=hayPrev?(prev[x.k]!==false&&!dis):(!dis&&x.k!=='X');
-    if(hayPrev&&prev[x.k]===undefined)chk=!dis;
+    var chk=!dis&&(prev[x.k]===undefined?true:prev[x.k]);
     return '<label class="opt'+(dis?' dis':'')+'"><input type="checkbox" name="tipoej" value="'+x.k+'"'+(chk?' checked':'')+(dis?' disabled':'')+'> <span>'+esc(x.t)+' <small>('+n+' disponibles)</small></span></label>';
   }).join('');
 }
@@ -315,7 +313,7 @@ var INSTR={
 };
 var TIT={A:'Nombrar',B:'Dibujar',C:'Análisis por partes (MDEC)',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
 function htmlEjercicio(it,num){
-  if(it.k==='A')return '<div class="ej mitad"><span class="num">'+num+'</span>'+figura(it.fig,300,120)+'<div class="resp">Nombre IUPAC:<i></i></div></div>';
+  if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div><div class="dibujo"></div></div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,true)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
   if(it.k==='D'){var h='';try{h=B.G.tipoD(it.rxn,num);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
@@ -339,10 +337,20 @@ function bloquesEjercicios(sel,numIni){
     var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(INSTR[g.k])+'</small></h4>';
     var primero=true;
     if(g.k==='A'||g.k==='B'){
-      for(var i=0;i<g.items.length;i+=2){
-        var fila='<div class="fila2">'+htmlEjercicio(g.items[i],num++)+(g.items[i+1]?htmlEjercicio(g.items[i+1],num++):'')+'</div>';
+      // Estructuras muy anchas (cadenas largas semidesarrolladas) van en una
+      // fila completa para que no queden con letra diminuta.
+      var items=g.items.map(function(it){
+        if(it.k!=='A')return it;
+        var c=Object.assign({},it),ancha=figura(it.fig,640,120),m=ancha.match(/width="([\d.]+)"/);
+        if(m&&+m[1]>330){c._ancho=true;c._fig=ancha;}else{c._fig=figura(it.fig,330,120);}
+        return c;
+      });
+      var anchos=items.filter(function(x){return x._ancho;}),medios=items.filter(function(x){return !x._ancho;});
+      for(var i=0;i<medios.length;i+=2){
+        var fila='<div class="fila2">'+htmlEjercicio(medios[i],num++)+(medios[i+1]?htmlEjercicio(medios[i+1],num++):'')+'</div>';
         out.push((primero?tit:'')+fila);primero=false;
       }
+      anchos.forEach(function(it){out.push((primero?tit:'')+htmlEjercicio(it,num++));primero=false;});
     }else{
       g.items.forEach(function(it){out.push((primero?tit:'')+htmlEjercicio(it,num++));primero=false;});
     }

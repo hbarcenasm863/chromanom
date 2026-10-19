@@ -710,7 +710,7 @@ var ABIERTAS={
  aromaticos:['Dibuja y nombra los tres isómeros del dimetilbenceno e indica cuál corresponde a orto, meta y para.',
    'Explica por qué el benceno prefiere las reacciones de sustitución y no las de adición.',
    'Escribe dos productos de uso diario que contengan compuestos aromáticos y un riesgo para la salud asociado a uno de ellos.'],
- haluros:[{q:'Escribe el nombre IUPAC del compuesto y clasifícalo como haluro primario, secundario o terciario. Justifica.',f:'CH₃−CH(Br)−CH₂−CH₃'},
+ haluros:[{q:'Escribe el nombre IUPAC del compuesto y clasifícalo como haluro primario, secundario o terciario. Justifica.',f:'CH₂Br−CH(CH₃)−CH₃'},
    'Compara lo que ocurre al calentar 2-bromopropano con NaOH acuoso y con KOH en etanol. Escribe el producto y el tipo de reacción de cada caso.',
    'Explica cómo los CFC destruyen el ozono de la estratosfera y por qué su efecto dura décadas después de haberse prohibido.'],
  alcoholes:['Explica, usando los puentes de hidrógeno, por qué el etanol se mezcla con el agua en cualquier proporción y el hexano no.',

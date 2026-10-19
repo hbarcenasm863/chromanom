@@ -8,10 +8,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
-<meta name="description" content="Guía para el docente: cómo usar ChromaNom en clase de química orgánica — secuencia de clases, alineación curricular, rúbricas y seguimiento.">
+<meta name="description" content="Generador de guías, talleres y evaluaciones tipo Saber 11 para el docente de química orgánica, alineado con los aprendizajes priorizados, y orientaciones para usar ChromaNom en clase.">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
-<title>ChromaNom · Guía para el docente</title>
+<title>ChromaNom · Docente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -145,16 +145,203 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
   .card,.cn-card.pag{break-inside:avoid;page-break-inside:avoid}
   .grid3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
+/* ════ GENERADOR DE GUÍAS ════ */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px;border-bottom:1px solid #dfe7ef}
+.tabs button{min-height:46px;padding:10px 18px;border:none;background:none;font-weight:700;font-size:.95rem;color:#3d5166;border-bottom:3px solid transparent;cursor:pointer;font-family:inherit}
+.tabs button[aria-selected="true"]{color:#0d4a73;border-bottom-color:#1a6ea8}
+.tabs button:hover{color:#0d4a73}
+.panel[hidden]{display:none!important}
+.gen-grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:1000px){.gen-grid{grid-template-columns:1fr}}
+#gen-form{padding:18px 18px 20px}
+#gen-form fieldset{border:none;border-top:1px solid #dfe7ef;padding:14px 0 6px;margin:0}
+#gen-form fieldset:first-of-type{border-top:none;padding-top:0}
+#gen-form legend{font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#1a6ea8;padding:0 0 6px}
+#gen-form .ayuda{font-size:.8rem;color:#3d5166;margin:0 0 8px}
+.opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;font-size:.88rem;cursor:pointer;line-height:1.35}
+.opt:hover{background:#f1f5f9}
+.opt input{margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:#1a6ea8}
+.opt small{display:block;color:#5b6b7b;font-size:.76rem}
+.opt small.comp{display:inline;font-weight:800;color:#0d4a73}
+.opt.dis{opacity:.5;cursor:default}
+.lista-opts{max-height:300px;overflow-y:auto;border:1px solid #dfe7ef;border-radius:10px;padding:4px;background:#fff}
+.radios{display:flex;flex-wrap:wrap;gap:6px}
+.radios .opt{border:1px solid #dfe7ef;background:#fff}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:420px){.campos{grid-template-columns:1fr}}
+.campos label,.campo{display:flex;flex-direction:column;gap:3px;font-size:.78rem;font-weight:700;color:#3d5166}
+.campos input,.campo input,.campo select,#f-sed{min-height:42px;border:1.5px solid #d0e6f5;border-radius:8px;padding:8px 10px;font-size:.9rem;font-family:inherit;color:#0d2d42;background:#fff;width:100%;min-width:0}
+#f-sed{font-size:.82rem}
+#f-sed-texto{font-size:.8rem;color:#2a3f52;background:#f6fafe;border-left:3px solid #1a6ea8;padding:8px 10px;border-radius:6px;margin:6px 0}
+.sub-leg{font-size:.78rem;font-weight:800;color:#0d2d42;margin:10px 0 2px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.acciones .cn-btn{flex:1 1 160px}
+.cn-btn[disabled]{opacity:.55;cursor:not-allowed}
+#f-estado{font-size:.78rem;color:#3d5166;margin-top:12px;line-height:1.5}
+body.sin-ej .solo-ej{display:none}
+body.sin-eval .solo-eval{display:none}
+#vista-wrap{min-width:0}
+#vista-info .aviso{margin:0 0 8px}
+.aviso.ok{border-left-color:#15803d;background:#dcfce7}
+.nota-sin-clave{font-size:.78rem;color:#5b6b7b;margin:0 0 10px}
+.vista-vacia{border:2px dashed #d0e6f5;border-radius:14px;padding:28px 20px;text-align:center;color:#3d5166;background:rgba(255,255,255,.7)}
+#vista{transform-origin:top left}
+#medidor{position:absolute;left:-12000px;top:0;visibility:hidden}
+
+/* ── Hoja tamaño carta (816×1056 px = 8,5×11 in) ── */
+.hoja{width:816px;height:1056px;background:#fff;color:#111;box-shadow:0 2px 14px rgba(13,34,51,.18);margin:0 auto 18px;padding:38px 46px 30px;display:flex;flex-direction:column;font-family:'Outfit','Segoe UI',Arial,sans-serif;font-size:13px;line-height:1.42;overflow:hidden;position:relative}
+.hoja *{box-sizing:border-box}
+.hoja-cab{font-size:10px;color:#555;border-bottom:1px solid #bbb;padding-bottom:4px;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hoja-cuerpo{flex:1;overflow:hidden;min-height:0}
+.hoja-pie{display:flex;justify-content:space-between;gap:10px;font-size:9.5px;color:#555;border-top:1px solid #bbb;padding-top:4px;margin-top:6px}
+.hoja-pie .pie-n{font-weight:800;color:#111}
+.hoja .blq{padding:0 0 7px}
+.hoja p{margin:0 0 4px}
+.hoja table{border-collapse:collapse;width:100%;font-size:11.5px;min-width:0}
+.hoja th,.hoja td{border:1px solid #999;padding:4px 6px;text-align:left;vertical-align:top;background:#fff;color:#111;position:static;font-size:11.5px}
+.hoja thead th{background:#e9eef3;font-weight:700}
+.hoja tbody tr:nth-child(even) td{background:#fff}
+.hoja .ei{border:1.5px solid #333;border-radius:8px;padding:8px 10px;margin-bottom:8px}
+.hoja .ei-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.hoja .ei-tipo{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1a6ea8}
+.hoja .ei-tit{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:19px;line-height:1.15;color:#0d2233}
+.hoja .ei-der{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.hoja .ei-der img{width:110px;height:auto}
+.hoja .ei-forma{font-weight:800;font-size:11px;border:1.5px solid #333;border-radius:999px;padding:1px 10px}
+.hoja .ei-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 14px;margin-top:6px}
+.hoja .ei-c{display:flex;gap:5px;align-items:flex-end;font-size:11px;min-width:0}
+.hoja .ei-c span{color:#555;white-space:nowrap}
+.hoja .ei-c b{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hoja .ei-c i,.hoja .est-lin i,.hoja .resp i{flex:1;border-bottom:1px solid #333;min-width:30px;height:13px}
+.hoja .est-lin{display:flex;gap:14px;margin:4px 0 8px;font-size:12px}
+.hoja .est-lin>div{display:flex;gap:6px;align-items:flex-end;flex:3}
+.hoja .est-lin>div.corta{flex:1}
+.hoja table.alin th{width:23%;background:#f2f6fa;font-size:10.5px}
+.hoja table.alin th small{display:block;font-weight:400;color:#555;font-size:9.5px}
+.hoja table.alin td{font-size:10.5px}
+.hoja table.alin td div+div{margin-top:3px}
+.hoja .nota{font-size:10px;color:#555}
+.hoja .fuente{font-size:9px;color:#555;margin:3px 0 0}
+.hoja .ruta{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 0 2px}
+.hoja .ruta span{border:1px solid #1a6ea8;border-radius:6px;padding:4px 6px;font-size:10.5px;font-weight:700;color:#0d4a73;text-align:center}
+.hoja .ses{display:flex;align-items:center;gap:8px;font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:800;color:#0d2233;border-bottom:2px solid #1a6ea8;padding-bottom:3px;margin:6px 0 4px}
+.hoja .ses span{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#1a6ea8;color:#fff;font-family:'Outfit',sans-serif;font-size:13px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .intro{font-size:12px;color:#333;font-style:italic}
+.hoja .sub{font-size:13px;font-weight:800;color:#0d4a73;margin:4px 0 4px}
+.hoja .sub small{font-weight:500;color:#444;font-size:11px;margin-left:4px}
+.hoja .lista{margin:0;padding-left:18px}
+.hoja .lista li{margin:2px 0}
+.hoja .lista.ctx{list-style:none;padding-left:0}
+.hoja .amb{display:inline-block;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;border:1px solid #1a6ea8;color:#0d4a73;border-radius:999px;padding:0 7px;margin-right:4px}
+.hoja .chips{display:flex;flex-wrap:wrap;gap:4px}
+.hoja .chips span{border:1px solid #999;border-radius:999px;padding:1px 9px;font-size:11.5px}
+.hoja .act{font-size:12.5px}
+.hoja .lin{border-bottom:1px solid #aaa;height:20px}
+.hoja .lect{text-align:justify;font-size:12.5px}
+.hoja .mapa{border:1.5px solid #1a6ea8;border-radius:10px;padding:8px}
+.hoja .mapa-raiz{text-align:center;font-weight:800;font-size:13px;background:#e8f4fb;border-radius:6px;padding:4px;margin-bottom:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .mapa-ramas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.hoja .mapa-rama{border:1px solid #999;border-radius:6px;padding:5px 6px;font-size:11px}
+.hoja .mapa-rama b{display:block;color:#0d4a73;font-size:11.5px;margin-bottom:2px}
+.hoja .mapa-rama ul{margin:0;padding-left:13px}
+.hoja .mdec-ej{border:1px solid #bbb;border-radius:8px;padding:6px 8px}
+.hoja .pills{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:4px 0}
+.hoja .pill{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;border:2px solid;border-radius:6px;padding:1px 7px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .p-r{color:#0e7490;border-color:#0891b2;background:#ecfeff}
+.hoja .p-c{color:#14532d;border-color:#166534;background:#f0fdf4}
+.hoja .p-i{color:#92400e;border-color:#b45309;background:#fffbeb}
+.hoja .p-g{color:#9a4a78;border-color:#CC79A7;background:#fdf2f8}
+.hoja .p-cg{color:#14532d;border-color:#CC79A7;background:linear-gradient(135deg,#f0fdf4 50%,#fdf2f8 50%)}
+.hoja .p-n{color:#111;border-color:#888;background:#fff}
+.hoja .mdec-tab td:first-child{width:30%;text-align:center}
+.hoja .mdec-tab td{padding:5px 6px}
+.hoja .mdec-ej .nota{margin-top:5px}
+.hoja .mdec-tab.blanco td{height:22px}
+.hoja .mdec-tab.blanco td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700}
+.hoja .pares{display:flex;gap:16px;justify-content:center;text-align:center}
+.hoja .fig{display:flex;justify-content:center;margin:3px 0}
+.hoja .fig svg{max-width:100%}
+.hoja .fig-txt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+.hoja .fila2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hoja .ej{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px 6px 30px;min-width:0}
+.hoja .ej .num{position:absolute;left:6px;top:5px;font-weight:800;font-size:12px}
+.hoja .ej.rx{padding:0;border:none}
+.hoja .resp{display:flex;gap:6px;align-items:flex-end;font-size:11.5px;margin-top:4px}
+.hoja .nom{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;padding:2px 0 4px}
+.hoja .dibujo{height:105px;border:1px dashed #999;border-radius:6px}
+.hoja .x-fila{display:flex;gap:10px;align-items:center}
+.hoja .x-fila .fig{flex:0 0 auto}
+.hoja .x-txt{flex:1;font-size:12px}
+.hoja .enun{font-size:12.5px}
+.hoja .espacio{height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
+/* tarjeta de reacción del Generador */
+.hoja .exercise{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px}
+.hoja .ex-header{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:12px}
+.hoja .ex-num{font-weight:800}
+.hoja .ex-badge{font-size:9.5px;font-weight:800;text-transform:uppercase;border:1px solid #1a6ea8;color:#0d4a73;border-radius:999px;padding:0 7px}
+.hoja .rxn-d-eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:6px 4px;margin:4px 0}
+.hoja .rxn-d-mol-box{border:1px solid #ccc;border-radius:6px;padding:4px 8px;display:flex;align-items:center;max-width:300px}
+.hoja .rxn-d-mol-box svg{max-width:280px;height:auto;max-height:110px}
+.hoja .rxn-d-mol-txt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px}
+.hoja .rxn-d-coef{font-family:'JetBrains Mono',monospace;font-weight:700;margin-right:4px}
+.hoja .rxn-d-blank-box{border:2px dashed #555;border-radius:6px;padding:6px 18px;font-weight:800}
+.hoja .rxn-d-plus,.hoja .rxn-d-reagent{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px}
+.hoja .rxn-d-subproducto{color:#555}
+.hoja .rxn-d-arrow-col{display:flex;flex-direction:column;align-items:stretch;gap:1px}
+.hoja .rxn-d-cond{font-size:10px;font-style:italic;text-align:center;white-space:nowrap;color:#333}
+.hoja .rxn-d-arrow-line{position:relative;min-width:40px;height:10px;border-bottom:2px solid #333}
+.hoja .rxn-d-arrow-line::after{content:'';position:absolute;right:-1px;bottom:-5px;border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #333}
+.hoja .rxn-d-fields{display:flex;flex-direction:column;gap:4px}
+.hoja .rxn-d-field{display:flex;gap:6px;align-items:flex-end;font-size:11.5px}
+.hoja .rxn-d-field .ans-line{flex:1;border-bottom:1px solid #333;height:14px}
+/* evaluación */
+.hoja .instr{font-size:11.5px;border:1px solid #999;border-radius:6px;padding:5px 8px;background:#f7f9fb}
+.hoja .sq{border-bottom:1px solid #ccc;padding-bottom:5px}
+.hoja .sq-cab{display:flex;gap:8px;align-items:center}
+.hoja .sq-cab .num{font-weight:800;font-size:13px;border:1.5px solid #111;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.hoja .sq-tag{font-size:9.5px;color:#444;text-transform:uppercase;letter-spacing:.04em}
+.hoja .sq-ctx{font-size:12.5px;margin:3px 0}
+.hoja .sq-q{font-weight:700;font-size:12.5px}
+.hoja .sq-ops{list-style:none;margin:2px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:2px 14px}
+.hoja .sq-ops.dos{grid-template-columns:1fr 1fr}
+.hoja .sq-ops li{font-size:12px;display:flex;gap:6px;align-items:flex-start}
+.hoja .let{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1.2px solid #111;border-radius:50%;font-weight:800;font-size:10.5px}
+.hoja .ab{font-size:12.5px}
+.hoja .hr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px 20px}
+.hoja .hr-f{display:flex;gap:7px;align-items:center;font-size:11.5px;border-bottom:1px dotted #bbb;padding:2px 0}
+.hoja .hr-f b{width:22px;text-align:right}
+.hoja .bur{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border:1.2px solid #111;border-radius:50%;font-size:10px;font-weight:700}
+.hoja table.auto td{height:20px}
+.hoja table.auto th:not(:first-child),.hoja table.auto td:not(:first-child){width:13%}
+.hoja .ses-anexo{margin-top:0}
+.hoja .tbl-wrap{border:none;margin:0;overflow:visible}
+.hoja .t-rub{min-width:0}
+
+@page hoja{size:letter;margin:0}
+@media print{
+  body.tab-gen .site-nav,body.tab-gen .cn-page-head,body.tab-gen .tabs,body.tab-gen #gen-form,body.tab-gen #vista-info,body.tab-gen .site-footer,body.tab-gen #panel-ori,body.tab-gen .vista-vacia,body.tab-gen #cn-mol-bg{display:none!important}
+  body.tab-gen{display:block;background:#fff!important}
+  body.tab-gen .app{padding:0!important;margin:0!important;max-width:none!important}
+  body.tab-gen .gen-grid{display:block}
+  body.tab-gen #vista{zoom:1!important;transform:none!important}
+  body.tab-gen .hoja{page:hoja;box-shadow:none;margin:0;break-after:page;page-break-after:always;height:1055px}
+  body.tab-gen .hoja:last-child{break-after:auto;page-break-after:auto}
+  .hoja *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.tab-ori #panel-gen,body.tab-ori .tabs{display:none!important}
+}
+.hoja .t-rub th{color:#fff}
+.hoja .t-rub th:first-child{background:#0d4a73;color:#fff}
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
-<body>
+<body class="tab-gen">
 <nav class="site-nav">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
     <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
     <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+    <a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
     <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
     <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
     <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
@@ -165,10 +352,10 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
 
 <div class="app">
   <header class="cn-page-head cn-in">
-    <span class="cn-eyebrow">📘 Recurso · Para docentes</span>
-    <h1>Guía para el docente</h1>
-    <p>Cómo usar ChromaNom en la clase de química orgánica: qué hace cada página, una secuencia de clases lista para adaptar, la relación con los referentes del MEN y del Icfes, rúbricas con la escala del Decreto 1290 y cómo leer el seguimiento del juego.</p>
-    <div class="cn-legend" aria-label="Colores del método">
+    <span class="cn-eyebrow">📘 Para docentes</span>
+    <h1>Guías, talleres y evaluaciones</h1>
+    <p>Arme en minutos una guía de 4 sesiones (aprendizajes previos, información, trabajo práctico y evaluación aparte), un taller o una evaluación tipo Saber 11, con los ejercicios de ChromaNom y alineada con los aprendizajes priorizados, los Estándares y los DBA.</p>
+    <div class="cn-legend" aria-label="Colores del método MDEC">
       <span class="cn-chip r">① Sustituyentes</span>
       <span class="cn-chip c">② Cadena principal</span>
       <span class="cn-chip i">③ Insaturaciones</span>
@@ -176,6 +363,97 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
     </div>
   </header>
 
+  <div class="tabs" role="tablist" aria-label="Secciones de la página">
+    <button type="button" role="tab" id="tab-gen" aria-controls="panel-gen" aria-selected="true">🛠️ Generador de guías</button>
+    <button type="button" role="tab" id="tab-ori" aria-controls="panel-ori" aria-selected="false">🧭 Orientaciones para usar ChromaNom</button>
+  </div>
+
+  <section class="panel" id="panel-gen" role="tabpanel" aria-labelledby="tab-gen">
+    <div class="gen-grid">
+      <form id="gen-form" class="cn-card" onsubmit="return false" aria-label="Configuración del documento">
+        <fieldset>
+          <legend>1 · Documento</legend>
+          <div class="radios">
+            <label class="opt"><input type="radio" name="tipodoc" value="guia" checked> <span><b>Guía completa</b><small>4 sesiones + evaluación en hojas aparte</small></span></label>
+            <label class="opt"><input type="radio" name="tipodoc" value="taller"> <span><b>Solo taller</b><small>Ejercicios de práctica</small></span></label>
+            <label class="opt"><input type="radio" name="tipodoc" value="evaluacion"> <span><b>Solo evaluación</b><small>Tipo Saber 11 + abiertas</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>2 · Tema(s)</legend>
+          <p class="ayuda">Los ejercicios salen de los bancos del Juego y del Generador; los temas nuevos del Juego aparecen solos.</p>
+          <div class="lista-opts" id="f-temas"></div>
+        </fieldset>
+        <fieldset>
+          <legend>3 · Grado y alineación curricular</legend>
+          <div class="radios">
+            <label class="opt"><input type="radio" name="grado" value="11" checked> <span>Grado 11.º</span></label>
+            <label class="opt"><input type="radio" name="grado" value="10"> <span>Grado 10.º</span></label>
+          </div>
+          <p class="sub-leg">Aprendizaje priorizado (SED Bogotá, 2025)</p>
+          <select id="f-sed" aria-label="Aprendizaje priorizado"></select>
+          <p id="f-sed-texto"></p>
+          <p class="sub-leg">Evidencias de aprendizaje (texto literal)</p>
+          <div class="lista-opts" id="f-ev"></div>
+          <p class="sub-leg">Estándar (MEN)</p>
+          <div id="f-est"></div>
+          <p class="sub-leg">DBA</p>
+          <div id="f-dba"></div>
+          <button type="button" class="cn-btn cn-btn--ghost" id="btn-sugerida">↺ Usar la alineación sugerida para el tema</button>
+          <p class="ayuda">En la priorización de la SED la química orgánica aparece en 11.º; para 10.º se ofrecen las evidencias de enlace químico.</p>
+        </fieldset>
+        <fieldset class="solo-ej">
+          <legend>4 · Trabajo práctico</legend>
+          <div id="f-tipos"></div>
+          <label class="campo">Número de ejercicios <input type="number" id="f-nej" min="2" max="40" value="12" inputmode="numeric"></label>
+        </fieldset>
+        <fieldset class="solo-eval">
+          <legend>5 · Evaluación</legend>
+          <div class="campos">
+            <label>Preguntas tipo Saber 11 <input type="number" id="f-nsaber" min="0" max="30" value="8" inputmode="numeric"></label>
+            <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="6" value="2" inputmode="numeric"></label>
+          </div>
+          <label class="opt"><input type="checkbox" id="f-hr" checked> <span>Incluir hoja de respuestas (círculos A–D)</span></label>
+          <label class="opt"><input type="checkbox" id="f-rub"> <span>Anexar rúbricas (hoja aparte)</span></label>
+          <p class="ayuda">Las evaluaciones no llevan clave de respuestas: los estudiantes también entran a esta página.</p>
+        </fieldset>
+        <fieldset>
+          <legend>6 · Forma (para evitar copia)</legend>
+          <div class="radios">
+            <label class="opt"><input type="radio" name="forma" value="A" checked> <span>Forma A</span></label>
+            <label class="opt"><input type="radio" name="forma" value="B"> <span>Forma B</span></label>
+          </div>
+          <label class="campo">Código de variante <input type="text" id="f-var" value="1" maxlength="12"></label>
+          <p class="ayuda">Con el mismo código, la misma forma sale igual cada vez. Cambie el código para obtener otra selección de ejercicios.</p>
+        </fieldset>
+        <fieldset>
+          <legend>7 · Encabezado institucional (opcional)</legend>
+          <div class="campos">
+            <label>Institución <input type="text" id="f-colegio" autocomplete="organization"></label>
+            <label>Docente <input type="text" id="f-docente" autocomplete="name"></label>
+            <label>Área <input type="text" id="f-area" value="Ciencias Naturales — Química"></label>
+            <label>Grado / curso <input type="text" id="f-curso" placeholder="Ej: 1101"></label>
+            <label>Periodo <input type="text" id="f-periodo" placeholder="Ej: III"></label>
+            <label>Fecha <input type="date" id="f-fecha"></label>
+          </div>
+        </fieldset>
+        <div class="acciones">
+          <button type="button" class="cn-btn cn-btn--primary" id="btn-generar" disabled>⚙️ Generar vista previa</button>
+          <button type="button" class="cn-btn cn-btn--secondary" id="btn-imprimir" disabled>🖨️ Imprimir / Guardar PDF</button>
+          <button type="button" class="cn-btn cn-btn--ghost" id="btn-forma-b">⇄ Cambiar a la otra forma</button>
+        </div>
+        <p id="f-estado">⏳ Cargando bancos de ejercicios…</p>
+      </form>
+      <div id="vista-wrap">
+        <div id="vista-info"><div class="vista-vacia">Configure el documento y pulse <b>Generar vista previa</b>. Aquí aparecerán las hojas tal como se imprimen (tamaño carta).</div></div>
+        <div id="vista" aria-label="Vista previa del documento"></div>
+        <div id="medidor" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-ori" role="tabpanel" aria-labelledby="tab-ori" hidden>
+    <div class="aviso" style="margin:0 0 16px">Esta sección resume cómo usar ChromaNom en clase. Puede imprimirla completa o solo la secuencia y las rúbricas.</div>
   <div class="doc-tools">
     <button type="button" class="cn-btn cn-btn--primary" onclick="imprimir(false)">🖨️ Imprimir toda la guía</button>
     <button type="button" class="cn-btn cn-btn--secondary" onclick="imprimir(true)">🖨️ Imprimir solo secuencia y rúbricas</button>
@@ -196,8 +474,8 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
 
   <!-- ═════════ 1. MÉTODO ═════════ -->
   <section class="sec" id="metodo">
-    <h2><span class="n">1</span> ChromaNom y el método de 4 partes en una pantalla</h2>
-    <p class="lead">ChromaNom es un sitio gratuito, sin registro, que enseña nomenclatura orgánica IUPAC (recomendaciones de 2013) a estudiantes de bachillerato. Funciona en el celular y se puede instalar como aplicación. Su idea central: <strong>todo nombre orgánico tiene 4 partes y cada parte tiene siempre el mismo color</strong>, en todas las páginas, en el juego y en las hojas impresas.</p>
+    <h2><span class="n">1</span> ChromaNom y el método MDEC en una pantalla</h2>
+    <p class="lead">ChromaNom es un sitio gratuito, sin registro, que enseña nomenclatura orgánica IUPAC (recomendaciones de 2013) a estudiantes de bachillerato. Funciona en el celular y se puede instalar como aplicación. Su idea central, el <strong>método MDEC</strong>: <strong>todo nombre orgánico tiene 4 partes y cada parte tiene siempre el mismo color</strong>, en todas las páginas, en el juego y en las hojas impresas.</p>
     <div class="card cn-card">
       <h3>Ejemplo: un nombre separado en sus 4 partes</h3>
       <div class="nombre-color" aria-label="5-metilhex-3-en-2-ol separado en sus 4 partes">
@@ -251,12 +529,12 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
         <p>Prefijos de cadena, multiplicadores, prioridad de grupos funcionales, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave, con buscador. Se imprime en 2 hojas horizontales.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Material de consulta permanente; puede permitirse en evaluaciones.</p>
         <a class="ir" href="referencia.html">Abrir Referencia →</a></div>
-      <div class="pag cn-card"><span class="ico" aria-hidden="true">🔀</span><h3>Isomería <span class="tag warn">En construcción</span></h3>
-        <p>Página nueva en preparación: isomería estructural (de cadena, de posición y de función), isomería cis/trans y una introducción a la quiralidad. Mientras se termina, puede que algunas secciones aún no estén disponibles.</p>
+      <div class="pag cn-card"><span class="ico" aria-hidden="true">🔀</span><h3>Isomería <span class="tag ok">Nueva</span></h3>
+        <p>Qué es un isómero, isomería de cadena, de posición y de función, cis/trans y carbono quiral, con un resumen final y los nombres IUPAC 2013 de cada isómero.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Después de los grupos funcionales, antes de reacciones.</p>
         <a class="ir" href="isomeria.html">Abrir Isomería →</a></div>
-      <div class="pag cn-card"><span class="ico" aria-hidden="true">📘</span><h3>Guía para el docente</h3>
-        <p>Esta página: planeación, alineación curricular, rúbricas y seguimiento. Pensada para imprimirse.</p>
+      <div class="pag cn-card"><span class="ico" aria-hidden="true">📘</span><h3>Docente (esta página)</h3>
+        <p>Generador de guías de 4 sesiones, talleres y evaluaciones tipo Saber 11 con los bancos del Juego y del Generador, alineadas con los aprendizajes priorizados; y estas orientaciones.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Al planear el periodo.</p></div>
     </div>
   </section>
@@ -277,7 +555,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
           <tr><td class="n">6</td><td><strong>Aldehídos y cetonas</strong></td><td>Distinguir –CHO (siempre C1) de C=O interior y nombrarlos con -al y -ona.</td><td>Grupos → Aldehídos, Cetonas; Principios → Comparación</td><td>Nombres tradicionales vs. IUPAC (acetona, formaldehído) en productos del hogar.</td><td>Tabla de equivalencias completada por cada estudiante.</td><td>Juego → Constructor por familia: Aldehídos o Cetonas.</td></tr>
           <tr><td class="n">7</td><td><strong>Ácidos carboxílicos y derivados</strong></td><td>Nombrar ácidos, ésteres, haluros de ácido y anhídridos, incluida la palabra que va aparte.</td><td>Grupos → Ácidos, Ésteres, Haluros de ácido, Anhídridos</td><td>Ésteres de aromas (frutas): del nombre comercial a la estructura.</td><td>Juego → nivel Compuestos Oxigenados (partida completa).</td><td>Generador Tipo B (dibujar) con ácidos y ésteres.</td></tr>
           <tr><td class="n">8</td><td><strong>Compuestos nitrogenados y jerarquía</strong></td><td>Nombrar aminas, amidas y nitrilos y decidir qué grupo manda cuando hay varios.</td><td>Grupos → Aminas, Amidas, Nitrilos; Referencia (tabla de prioridad)</td><td>“¿Quién manda?”: moléculas con 2 grupos; se justifica con la tabla de prioridad.</td><td>Explicación escrita de 2 casos de jerarquía.</td><td>Juego → nivel Compuestos Nitrogenados.</td></tr>
-          <tr><td class="n">9</td><td><strong>Isomería</strong></td><td>Reconocer isómeros de cadena, posición y función, y distinguir cis/trans en alquenos.</td><td>Isomería <span class="tag warn">en construcción</span>; Grupos</td><td>Con una fórmula molecular (p. ej. C₄H₁₀O) cada pareja busca y nombra todos los isómeros posibles.</td><td>Lista de isómeros nombrados y clasificados.</td><td>Repaso libre en el Juego (nivel a elección).</td></tr>
+          <tr><td class="n">9</td><td><strong>Isomería</strong></td><td>Reconocer isómeros de cadena, posición y función, y distinguir cis/trans en alquenos.</td><td>Isomería; Grupos</td><td>Con una fórmula molecular (p. ej. C₄H₁₀O) cada pareja busca y nombra todos los isómeros posibles.</td><td>Lista de isómeros nombrados y clasificados.</td><td>Repaso libre en el Juego (nivel a elección).</td></tr>
           <tr><td class="n">10</td><td><strong>Reacciones orgánicas (introducción)</strong></td><td>Predecir el producto de reacciones básicas (combustión, adición a alquenos con Markovnikov, oxidación de alcoholes, esterificación) y nombrarlo.</td><td>Reacciones → Glosario y pestañas elegidas</td><td>Se proyecta el mecanismo paso a paso; los estudiantes predicen antes de avanzar.</td><td>Generador Tipo D (reacciones) como quiz.</td><td>Juego → Reacciones por grupo y, al final, “Nomenclatura + reacciones”.</td></tr>
         </tbody>
       </table>
@@ -308,7 +586,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
   <!-- ═════════ 4. CURRÍCULO ═════════ -->
   <section class="sec sec-break" id="curriculo">
     <h2><span class="n">4</span> Alineación curricular</h2>
-    <p class="lead">Relación de ChromaNom con los referentes nacionales. <strong>Importante:</strong> los enunciados se transcriben solo cuando se encontraron citados de forma coincidente en otras fuentes; aun así, verifique siempre la redacción en los documentos oficiales del MEN y del Icfes antes de copiarlos en su plan de área.</p>
+    <p class="lead">Relación de ChromaNom con los referentes nacionales. En el <b>Generador de guías</b> (pestaña anterior) puede elegir además los <b>aprendizajes priorizados y evidencias de la Secretaría de Educación de Bogotá (2025)</b>, citados textualmente con su fuente y licencia (CC BY-NC-ND 4.0). <strong>Importante:</strong> los enunciados se transcriben solo cuando se encontraron citados de forma coincidente en otras fuentes; aun así, verifique siempre la redacción en los documentos oficiales del MEN y del Icfes antes de copiarlos en su plan de área.</p>
     <div class="tbl-wrap">
       <table class="t-cur">
         <thead><tr><th>Referente</th><th>Enunciado</th><th>Estado del texto</th><th>Cómo lo trabaja ChromaNom</th><th>Clases</th></tr></thead>
@@ -334,7 +612,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
     <h2><span class="n">5</span> Rúbricas</h2>
     <p class="lead">Niveles de desempeño de la escala nacional del Decreto 1290 de 2009 (Superior, Alto, Básico, Bajo). La equivalencia numérica de cada nivel la define el Sistema Institucional de Evaluación (SIEE) de su colegio.</p>
 
-    <div class="rub-title"><span class="cn-chip g">④</span><span class="cn-chip i">③</span><span class="cn-chip c">②</span><span class="cn-chip r">①</span><h3 style="margin:0">A. Nombrar compuestos (de la estructura al nombre)</h3></div>
+    <div class="rub-title" id="rub-a"><span class="cn-chip g">④</span><span class="cn-chip i">③</span><span class="cn-chip c">②</span><span class="cn-chip r">①</span><h3 style="margin:0">A. Nombrar compuestos (de la estructura al nombre)</h3></div>
     <div class="tbl-wrap"><table class="t-rub">
       <thead><tr><th>Criterio</th><th class="sup">Superior</th><th class="alt">Alto</th><th class="bas">Básico</th><th class="baj">Bajo</th></tr></thead>
       <tbody>
@@ -344,7 +622,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
         <tr><td>Escritura IUPAC 2013</td><td>Guiones, comas y localizador antes del sufijo (butan-2-ol) siempre bien.</td><td>Formato correcto casi siempre.</td><td>Mezcla formato tradicional (2-butanol) e IUPAC.</td><td>El nombre no es interpretable.</td></tr>
       </tbody></table></div>
 
-    <div class="rub-title"><h3 style="margin:0">B. Dibujar estructuras desde el nombre</h3></div>
+    <div class="rub-title" id="rub-b"><h3 style="margin:0">B. Dibujar estructuras desde el nombre</h3></div>
     <div class="tbl-wrap"><table class="t-rub">
       <thead><tr><th>Criterio</th><th class="sup">Superior</th><th class="alt">Alto</th><th class="bas">Básico</th><th class="baj">Bajo</th></tr></thead>
       <tbody>
@@ -353,7 +631,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
         <tr><td>Valencia</td><td>Todos los carbonos con 4 enlaces (hidrógenos correctos en la semidesarrollada).</td><td>Un error de hidrógenos.</td><td>Varios carbonos con valencia incorrecta.</td><td>No respeta la tetravalencia.</td></tr>
       </tbody></table></div>
 
-    <div class="rub-title"><span class="cn-chip c">②</span><h3 style="margin:0">C. Elegir y numerar la cadena principal</h3></div>
+    <div class="rub-title" id="rub-c"><span class="cn-chip c">②</span><h3 style="margin:0">C. Elegir y numerar la cadena principal</h3></div>
     <div class="tbl-wrap"><table class="t-rub">
       <thead><tr><th>Criterio</th><th class="sup">Superior</th><th class="alt">Alto</th><th class="bas">Básico</th><th class="baj">Bajo</th></tr></thead>
       <tbody>
@@ -362,7 +640,7 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
         <tr><td>Justificación</td><td>Explica por escrito por qué otra cadena o numeración es incorrecta.</td><td>Explica su elección con ayuda de la tabla.</td><td>Describe lo que hizo sin justificarlo.</td><td>No explica.</td></tr>
       </tbody></table></div>
 
-    <div class="rub-title"><h3 style="margin:0">D. Reacciones orgánicas</h3></div>
+    <div class="rub-title" id="rub-d"><h3 style="margin:0">D. Reacciones orgánicas</h3></div>
     <div class="tbl-wrap"><table class="t-rub">
       <thead><tr><th>Criterio</th><th class="sup">Superior</th><th class="alt">Alto</th><th class="bas">Básico</th><th class="baj">Bajo</th></tr></thead>
       <tbody>
@@ -462,10 +740,11 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
     <details class="faq cn-card"><summary>¿Qué nomenclatura usa?</summary><div class="r">Las recomendaciones IUPAC de 2013: localizador inmediatamente antes del sufijo (butan-2-ol, but-1-eno). La pestaña Comparación de Principios muestra las equivalencias con los nombres tradicionales (2-butanol, acetona…), que siguen apareciendo en libros y exámenes.</div></details>
     <details class="faq cn-card"><summary>Soy de otro colegio. ¿Puedo ver los resultados de mis estudiantes?</summary><div class="r">No con la versión publicada: la hoja de seguimiento pertenece al colegio del autor, y en modo libre los resultados llegan como anónimos a esa hoja. Para tener su propio seguimiento necesita una copia del sitio con su propia hoja de Google y su propio Apps Script (en el código del juego se cambia la dirección <code>ANALYTICS_URL</code>), y cargar los códigos de sus estudiantes en la hoja “Estudiantes”. Requiere algo de manejo técnico. Sin eso, puede usar todo lo demás y evaluar con el Generador y las rúbricas.</div></details>
     <details class="faq cn-card"><summary>¿Puedo modificar o compartir el material?</summary><div class="r">Sí, con la licencia CC BY-NC 4.0: uso y adaptación libres sin fines comerciales, citando al autor (Harvey Barcenas Morales).</div></details>
-    <details class="faq cn-card"><summary>¿Por qué el Generador no da las respuestas?</summary><div class="r">Porque los estudiantes también lo usan para practicar; una clave visible les daría la respuesta. Por eso las hojas de análisis por partes (Tipo C) tampoco muestran los colores.</div></details>
+    <details class="faq cn-card"><summary>¿Por qué el Generador y las evaluaciones del docente no dan las respuestas?</summary><div class="r">Porque los estudiantes también entran a estas páginas para practicar; una clave visible les daría la respuesta. Por eso ni el Generador de ejercicios ni las guías y evaluaciones de esta página traen clave. Por eso las hojas de análisis por partes (Tipo C) tampoco muestran los colores.</div></details>
     <details class="faq cn-card"><summary>Un estudiante dice que su partida “no se guardó”.</summary><div class="r">Al terminar, el juego muestra un aviso grande de “¡Resultados guardados!” o “No se pudo guardar” con botón “Reintentar envío”. Pídale que le muestre esa pantalla. Recuerde que Estadísticas y Curso X tardan hasta 30 minutos en actualizarse; en la hoja Registro la fila aparece de inmediato.</div></details>
     <details class="faq cn-card"><summary>¿Sirve en celulares sencillos?</summary><div class="r">Sí. Está diseñado primero para celular, con letra ajustable (control “A− / A+”) y menú inferior. El Constructor Molecular es más cómodo en pantallas medianas o grandes.</div></details>
     <details class="faq cn-card"><summary>¿Incluye haluros de alquilo?</summary><div class="r">Los halógenos se nombran como sustituyentes (① cloro, bromo…) y la pestaña Halogenuros de Reacciones trata sus reacciones (sustitución y eliminación); no tienen una ficha propia entre los 17 grupos funcionales.</div></details>
+  </section>
   </section>
 </div>
 
@@ -488,6 +767,28 @@ window.addEventListener('afterprint',function(){
   document.querySelectorAll('details.faq[data-cerrar]').forEach(function(d){ d.open=false; delete d.dataset.cerrar; });
 });
 </script>
+<script>
+// Pestañas: Generador de guías / Orientaciones (#orientaciones abre la segunda).
+(function(){
+  function abrir(cual){
+    var gen=cual!=='ori';
+    document.getElementById('panel-gen').hidden=!gen;
+    document.getElementById('panel-ori').hidden=gen;
+    document.getElementById('tab-gen').setAttribute('aria-selected',gen);
+    document.getElementById('tab-ori').setAttribute('aria-selected',!gen);
+    document.body.classList.toggle('tab-gen',gen);
+    document.body.classList.toggle('tab-ori',!gen);
+    if(window.DocenteGen&&gen)window.dispatchEvent(new Event('resize'));
+  }
+  document.getElementById('tab-gen').addEventListener('click',function(){abrir('gen');history.replaceState(null,'',location.pathname);});
+  document.getElementById('tab-ori').addEventListener('click',function(){abrir('ori');history.replaceState(null,'','#orientaciones');});
+  var oriIds=['orientaciones','metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
+  function porHash(){var h=location.hash.slice(1);if(oriIds.indexOf(h)>=0){abrir('ori');var el=document.getElementById(h);if(el&&h!=='orientaciones')el.scrollIntoView();}}
+  window.addEventListener('hashchange',porHash);porHash();
+})();
+</script>
+<script src="docente-datos.js"></script>
+<script src="docente-app.js"></script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
