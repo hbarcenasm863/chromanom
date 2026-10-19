@@ -328,6 +328,40 @@ header{padding:18px 0 14px;border-bottom:2px solid var(--brd);margin-bottom:20px
 .btn-pdf{display:flex;align-items:center;gap:6px;min-height:44px;padding:7px 15px;background:var(--cn-brand);color:#fff;border:none;border-radius:20px;font-size:.76rem;font-weight:700;cursor:pointer;letter-spacing:.02em;transition:background .15s}
 .btn-pdf:hover{background:var(--cn-brand-d)}
 
+/* CP-CSS-INICIO */
+/* ── Practica este criterio (desempate) ── */
+.cp-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 14px;border-top:1px solid var(--brd);background:var(--surf)}
+.cp-btn{min-height:44px;padding:8px 16px;border-radius:100px;border:2px solid #1a6ea8;background:#1a6ea8;color:#fff;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .18s}
+.cp-btn:hover{background:#0d4a73;border-color:#0d4a73}
+.cp-btn span{font-weight:600;opacity:.9}
+.cp-estado{font-size:.74rem;color:var(--dim)}
+.cp-estado.dom{color:var(--cn-ok);font-weight:700}
+.cp-tit{white-space:normal!important}
+.cp-prog{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;font-size:.74rem;color:var(--dim);font-weight:700}
+.cp-dots{margin-bottom:12px}
+.cp-nivel{padding:2px 10px;border-radius:100px;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em}
+.cp-nivel.f{background:#dcfce7;color:#14532d}.cp-nivel.i{background:#fef3c7;color:#92400e}.cp-nivel.d{background:#fee2e2;color:#991b1b}
+.cp-figs{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}
+.cp-figs.dos{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.cp-fig{margin:0;border:2px solid var(--brd);border-radius:var(--rs);background:#fafaf8;padding:8px 10px;min-width:0}
+.cp-fig-t{font-weight:800;font-size:.78rem;color:var(--tx);margin-bottom:4px}
+.cp-fig-p{font-family:var(--mono);font-size:.76rem;color:var(--tx);text-align:center;margin-top:4px;overflow-wrap:anywhere}
+.cp-foot{flex-wrap:wrap;gap:8px}
+.cp-ayuda{font-size:.7rem;color:var(--dim);flex:1;min-width:150px}
+.cp-res-lbl{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:4px}
+.cp-res-big{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--tx);margin-bottom:6px}
+.cp-res-msg{font-size:.84rem;color:var(--tx);line-height:1.6;margin-bottom:6px}
+.cp-res-list{list-style:none;padding:0;margin:8px 0 14px;display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--tx)}
+.cp-ok{color:var(--cn-ok);font-weight:800}.cp-re{color:#b45309;font-weight:800}
+.cp-glob{padding:12px 14px;background:var(--bg);border-radius:var(--rs)}
+.cp-glob-t{font-size:.8rem;font-weight:700;color:var(--tx)}
+.cp-glob-n{font-size:.7rem;color:var(--dim);margin-top:8px;line-height:1.5}
+.cp-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cp-chip{min-height:40px;font-size:.74rem;font-weight:700;padding:4px 12px;border-radius:100px;border:2px solid var(--brd);color:var(--dim);background:var(--surf);cursor:pointer}
+.cp-chip.dom{border-color:var(--cn-ok);background:var(--cn-ok-l);color:var(--cn-ok)}
+.cp-chip.prac{border-color:#d97706;background:#fef3c7;color:#92400e}
+.pm-resumen{margin-top:8px;padding-top:8px;border-top:1px solid currentColor;font-weight:700}
+/* CP-CSS-FIN */
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
@@ -1600,21 +1634,33 @@ const PD={
        q:'Esta molécula es un alcano (sin grupo funcional). ¿Qué se hace?',tipo:'mc',
        ops:['Numerar desde la izquierda siempre','Pasar al criterio B2 (insaturaciones)','Pasar directamente al criterio B4 (orden alfabético)','El nombre tiene dos formas correctas'],
        resp:'Pasar al criterio B2 (insaturaciones)',parte:null,
+       fbo:{'Numerar desde la izquierda siempre':'No existe una regla de «izquierda» o «derecha»: el sentido lo decide la molécula, criterio por criterio.',
+            'Pasar directamente al criterio B4 (orden alfabético)':'No se pueden saltar criterios: después de B1 viene B2 (dobles y triples enlaces); B3 y B4 van después.',
+            'El nombre tiene dos formas correctas':'Cada molécula tiene un solo nombre correcto: los criterios B sirven justamente para elegirlo.'},
        fb:'Sin grupo funcional, B1 no decide → se aplica el <strong>criterio B2</strong>: menor localizador a dobles y triples enlaces.'},
       {n:2,titulo:'Criterio B2 — Insaturaciones',expl:'Se da el menor localizador a los dobles y triples enlaces. Si no hay, se pasa a B3.',
        q:'La cadena no tiene dobles ni triples enlaces. ¿Qué sigue?',tipo:'mc',
        ops:['B2 resuelve — numerar desde la derecha','Pasar al criterio B3 (localizadores de los sustituyentes)','Pasar al criterio B4 (orden alfabético)','El nombre tiene dos formas válidas'],
        resp:'Pasar al criterio B3 (localizadores de los sustituyentes)',parte:null,
+       fbo:{'B2 resuelve — numerar desde la derecha':'B2 solo decide cuando hay dobles o triples enlaces, y esta cadena no tiene ninguno.',
+            'Pasar al criterio B4 (orden alfabético)':'Antes de B4 va B3: primero se comparan los números de las ramas; el alfabeto solo se usa si esos números empatan.',
+            'El nombre tiene dos formas válidas':'Cada molécula tiene un solo nombre correcto: hay que seguir bajando por los criterios hasta que uno decida.'},
        fb:'Sin insaturaciones, B2 no decide → se aplica el <strong>criterio B3</strong>: comparar uno por uno los números de los sustituyentes.'},
       {n:3,titulo:'Criterio B3 — Conjuntos de localizadores',expl:'Se escriben los números de menor a mayor y se comparan uno por uno. Gana el que tenga más bajo el primer número distinto.',
        q:'Conjuntos a comparar: {2, 3} vs {3, 4}. ¿Cuál es el más bajo?',tipo:'mc',
        ops:['{3, 4} — la suma (7) supera a la de {2, 3} (5)','{2, 3} — primer localizador diferente: 2 < 3','Son equivalentes — se usa la suma total','{3, 4} — el localizador mayor (4) da más opciones'],
        resp:'{2, 3} — primer localizador diferente: 2 < 3',parte:'r',
+       fbo:{'{3, 4} — la suma (7) supera a la de {2, 3} (5)':'Los números nunca se suman: se comparan uno por uno, como en el diccionario, y el primero distinto decide (2 frente a 3).',
+            'Son equivalentes — se usa la suma total':'No son equivalentes: el primer número ya es distinto (2 frente a 3). Y los números no se suman.',
+            '{3, 4} — el localizador mayor (4) da más opciones':'Se busca el conjunto más bajo, no el más alto: compara el primer número de cada conjunto, 2 frente a 3.'},
        fb:'Uno por uno: el primer número distinto es 2 vs 3 → <strong>2 < 3</strong> → gana el conjunto <strong>{2, 3}</strong>. Nunca se suman localizadores; solo importa la primera posición diferente.'},
       {n:4,titulo:'Cadena ② e insaturaciones ③',expl:'Ya teníamos la cadena (5 C, sin dobles ni triples enlaces). Ahora pon sus partes ② y ③.',
        q:'¿Qué va en ② (cadena) y en ③ (insaturaciones) para 5 C sin dobles ni triples enlaces?',tipo:'mc',
        ops:['but- y -en-','pent- y -an-','hex- y -in-','pent- y -en-'],
        resp:'pent- y -an-',parte:'c i',
+       fbo:{'but- y -en-':'Cuenta otra vez: la cadena tiene 5 C (pent-, no but-) y no tiene dobles enlaces (-an-, no -en-).',
+            'hex- y -in-':'La cadena tiene 5 C (pent-, no hex-) y ningún triple enlace (-an-, no -in-).',
+            'pent- y -en-':'La cadena sí es pent- (5 C), pero no tiene dobles enlaces: sin dobles ni triples la parte ③ es -an-.'},
        fb:'5 carbonos → ② <strong>pent</strong>; sin dobles ni triples → ③ <strong>an</strong>. Base parcial: <em>pentan-</em>.'},
       {n:5,titulo:'Nombre IUPAC completo',expl:'Ramas en orden alfabético (e antes que m) con los números {2, 3}: etil en C3, metil en C2. La terminación ④ de un alcano es «o».',
        q:'Escribe el nombre IUPAC completo de la molécula:',tipo:'write',
@@ -1631,6 +1677,7 @@ function pmOpen(secId){
   const d=PD[secId]; if(!d) return;
   PM.sec=secId; PM.step=0; PM.data=d;
   PM.ans=new Array(d.pasos.length).fill(false);
+  PM.miss=new Array(d.pasos.length).fill(0);   // errores en cada paso (para el resumen)
   document.getElementById('pm-sec').textContent=d.sec;
   document.getElementById('pm-titulo').textContent=d.titulo;
   const molEl=document.getElementById('pm-mol');
@@ -1690,12 +1737,22 @@ function pmRender(){
   pmNB(); pmDots(); pmNavBtns();
 }
 
+// Elegir una opción: si es incorrecta se explica el error y se deja elegir otra vez
+// (no se revela la respuesta); el paso queda resuelto solo al acertar.
 function pmSelect(btn,val,paso){
-  document.querySelectorAll('.prac-opt').forEach(b=>{b.disabled=true;b.onclick=null;});
   const ok=val===paso.resp;
-  btn.classList.add(ok?'correct':'wrong');
-  if(!ok){document.querySelectorAll('.prac-opt').forEach(b=>{if(b.textContent===paso.resp)b.classList.add('correct');});}
-  pmFb(ok,paso); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
+  if(!ok){
+    btn.classList.add('wrong'); btn.disabled=true; btn.onclick=null;
+    PM.miss[PM.step]++;
+    const fb=document.getElementById('pm-fb');
+    const esp=paso.fbo&&paso.fbo[val];
+    fb.innerHTML='✗ '+(esp||'Esa no es. Vuelve a leer la explicación de arriba.')+' <strong>Intenta otra vez.</strong>';
+    fb.className='prac-fb show err';
+    return;
+  }
+  document.querySelectorAll('#pm-opts .prac-opt').forEach(b=>{b.disabled=true;b.onclick=null;});
+  btn.classList.add('correct');
+  pmFb(true,paso); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
 }
 
 function pmCheck(){
@@ -1703,6 +1760,16 @@ function pmCheck(){
   const inp=document.getElementById('pm-inp');
   const ok=pmNorm(inp.value)===pmNorm(paso.resp);
   inp.className='prac-inp '+(ok?'ok':'err');
+  if(!ok&&PM.miss[PM.step]<1){
+    // Primer error al escribir: se avisa y se deja corregir; al segundo se muestra la respuesta
+    PM.miss[PM.step]++;
+    const fb=document.getElementById('pm-fb');
+    fb.innerHTML='✗ Todavía no. Revisa los números, los guiones y el orden alfabético de los prefijos. <strong>Intenta otra vez.</strong>';
+    fb.className='prac-fb show err';
+    inp.focus();
+    return;
+  }
+  if(!ok)PM.miss[PM.step]++;
   inp.disabled=true; document.getElementById('pm-check').disabled=true;
   pmFb(ok,paso); PM.ans[PM.step]=true; if(paso.parte)pmReveal(paso.parte); pmNavBtns(); pmNB();
 }
@@ -1755,6 +1822,16 @@ function pmNavBtns(){
   nxt.disabled=!done;
   nxt.textContent=last?'Cerrar':'Siguiente →';
   nxt.className='prac-nav'+(done?' go':'');
+  // Al resolver el último paso: resumen de aciertos al primer intento
+  if(last&&done&&PM.miss){
+    const fb=document.getElementById('pm-fb');
+    if(fb&&!fb.querySelector('.pm-resumen')){
+      const tot=d.pasos.length, ac=PM.miss.filter(m=>m===0).length;
+      const r=document.createElement('div'); r.className='pm-resumen';
+      r.textContent='Resumen: acertaste '+ac+' de '+tot+' pasos al primer intento.';
+      fb.appendChild(r);
+    }
+  }
 }
 
 function pmPrev(){if(PM.step>0){PM.step--;pmRender();}}
@@ -1953,6 +2030,220 @@ function tTeoria(id,view){
     </div>
   </div>
 </div>
+<!-- CP-INICIO -->
+<script>
+const CP={"A0":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"k1":[80,54],"O1":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","k1",1],["k1","O1",1]],"lab":{"O1":"OH"},"w":300,"ch":["h1","h2","h3","h4","h5","h6"],"t":"Opción A","p":"3-(hidroximetil)hexano"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"k1":[80,54],"O1":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","k1",1],["k1","O1",1]],"lab":{"O1":"OH"},"w":300,"ch":["k1","h3","h4","h5","h6"],"t":"Opción B","p":"2-etilpentan-1-ol"}],"ops":[{"t":"A, por A1: es la cadena más larga (6 C)","fb":"Elegiste A: contaste la cadena más larga, pero A1 solo se mira <strong>después</strong> de A0. La cadena A deja el carbono del −OH por fuera, en una rama: el −OH se volvería un simple prefijo (hidroximetil) y se perdería la terminación -ol.","ok":false},{"t":"B, por A0: es la única que contiene el carbono del −OH","fb":"¡Exacto! A0 va primero: solo compiten las cadenas que contienen el carbono unido al −OH (④), aunque haya otra más larga. Entre ellas, la más larga tiene 5 C → <strong>2-etilpentan-1-ol</strong>.","ok":true},{"t":"B, por A3: tiene más sustituyentes","fb":"La cadena es la correcta, pero el motivo no: las dos tienen <strong>una sola</strong> rama (A un hidroximetil, B un etil), así que A3 no las separa. Lo que decide es A0: B contiene el carbono del −OH.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto de esta cetona?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"z7":[240,20],"z8":[280,0],"k":[160,54],"O1":[194,74],"km":[126,74]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z6","z7",1],["z7","z8",1],["z5","k",1],["k","O1",2],["k","km",1]],"lab":{"O1":"O"},"w":300}],"ops":[{"t":"4-acetiloctano","fb":"Elegiste la cadena más larga (8 C), pero deja el carbono del C=O por fuera, en una rama (acetil). A0 se revisa antes que la longitud: la cadena tiene que pasar por el carbono del C=O.","ok":false},{"t":"3-butilhexan-2-ona","fb":"Sí incluiste el C=O (A0 bien), pero no tomaste la más larga de las cadenas que lo contienen: hay una de 7 C y tú contaste 6. Después de A0 sigue A1, entre las cadenas que quedan.","ok":false},{"t":"3-propilheptan-2-ona","fb":"¡Correcto! Primero A0: la cadena debe contener el carbono del C=O. Entre las que lo contienen, la más larga tiene 7 C (A1) → hept-. El C=O queda en el C2 y el propil en el C3 → <strong>3-propilheptan-2-ona</strong>.","ok":true}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto de este ácido?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"z7":[240,20],"z8":[280,0],"k":[160,54],"O1":[194,74],"O2":[126,74]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z6","z7",1],["z7","z8",1],["z5","k",1],["k","O1",2],["k","O2",1]],"lab":{"O1":"O","O2":"OH"},"w":300}],"ops":[{"t":"ácido 2-butilpentanoico","fb":"Incluiste el −COOH (bien), pero escogiste el brazo corto: con el butil la cadena llega a 6 C y tú contaste 5. Después de A0, entre las cadenas que contienen el grupo funcional gana la más larga (A1).","ok":false},{"t":"ácido 2-propilhexanoico","fb":"¡Bien! El carbono del −COOH tiene que estar en la cadena (A0), y además es el C1. La cadena más larga que lo contiene tiene 6 C → hexanoico, con un propil en el C2 → <strong>ácido 2-propilhexanoico</strong>.","ok":true},{"t":"ácido octano-4-carboxílico","fb":"Elegiste la cadena más larga (8 C), que deja el carbono del −COOH por fuera. En una cadena abierta, el carbono del −COOH debe formar parte de la cadena principal (A0) y se nombra con la terminación -oico.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"O1":[-36,2],"d1":[80,54],"O2":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h1","O1",1],["h3","d1",1],["d1","O2",1]],"lab":{"O1":"OH","O2":"OH"},"w":300}],"ops":[{"t":"3-(hidroximetil)heptan-1-ol","fb":"Tomaste la cadena más larga que contiene <strong>un</strong> −OH, pero la molécula tiene dos. A0 pide la cadena con el <strong>mayor número</strong> de grupos funcionales principales, aunque sea más corta.","ok":false},{"t":"2-(2-hidroxietil)hexan-1-ol","fb":"Esta cadena también contiene un solo −OH: el otro queda en la rama (2-hidroxietil). A0 prefiere la cadena que contiene los dos.","ok":false},{"t":"2-butilbutano-1,4-diol","fb":"¡Excelente! Solo una cadena contiene los <strong>dos</strong> carbonos con −OH: la de 4 C. A0 decide antes que la longitud, aunque haya cadenas de 6 y 7 C. Los −OH quedan en 1 y 4 desde los dos lados, y el butil recibe el 2 → <strong>2-butilbutano-1,4-diol</strong>.","ok":true}]}],"A1":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"e1":[40,-34],"e2":[74,-54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h2","e1",1],["e1","e2",1]],"lab":{},"w":300,"ch":["h1","h2","h3","h4"],"t":"Opción A","p":"2-etilbutano"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"e1":[40,-34],"e2":[74,-54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h2","e1",1],["e1","e2",1]],"lab":{},"w":300,"ch":["e2","e1","h2","h3","h4"],"t":"Opción B","p":"3-metilpentano"}],"ops":[{"t":"A, porque es la línea recta del dibujo","fb":"Elegiste A: contaste la línea recta. La cadena principal no tiene que ser recta: puede doblar por una rama. Siguiendo por el etil se llega a 5 C.","ok":false},{"t":"B, por A1: tiene 5 C y A solo 4","fb":"¡Correcto! No hay grupo funcional (A0 no descarta nada), así que decide A1: la cadena más larga. B tiene 5 C → <strong>3-metilpentano</strong>. Pista: un «2-etil» en un nombre casi siempre indica que la cadena se podía alargar.","ok":true},{"t":"Las dos sirven: es la misma molécula","fb":"Es la misma molécula, pero tiene un solo nombre correcto. Cuenta los carbonos verdes: A tiene 4 y B tiene 5; gana la más larga (A1).","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"r1":[80,54],"r2":[114,74],"r3":[114,108],"r4":[148,128]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","r1",1],["r1","r2",1],["r2","r3",1],["r3","r4",1]],"lab":{},"w":300}],"ops":[{"t":"3-butilhexano","fb":"Contaste la línea recta (6 C). La cadena puede doblar por la rama de 4 C: así llega a 8 C.","ok":false},{"t":"3-propilheptano","fb":"Bien que doblaste por la rama, pero saliste por el lado corto: esa cadena tiene 7 C. Saliendo por el otro lado se llega a 8 C.","ok":false},{"t":"4-etiloctano","fb":"¡Exacto! La cadena más larga recorre la rama de abajo y los 4 carbonos de la derecha: 8 C (A1). Queda un etil en el C4 → <strong>4-etiloctano</strong>.","ok":true}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"e1":[40,-34],"e2":[74,-54],"p1":[120,-34],"p2":[154,-54],"p3":[154,-88]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","e1",1],["e1","e2",1],["h4","p1",1],["p1","p2",1],["p2","p3",1]],"lab":{},"w":300}],"ops":[{"t":"2-etil-4-propilpentano","fb":"Contaste solo la línea de abajo (5 C). Un etil en el C2 o un propil en el C4 son señales de que la cadena se puede alargar por esas ramas.","ok":false},{"t":"2-etil-4-metilheptano","fb":"Alargaste por la rama de la derecha (7 C), pero te faltó la de la izquierda: entrando por una rama y saliendo por la otra, la cadena tiene 8 C.","ok":false},{"t":"3,5-dimetiloctano","fb":"¡Muy bien! La cadena más larga entra por una rama, cruza y sale por la otra: 2 + 3 + 3 = 8 C (A1). Quedan dos metil, en 3 y 5 → <strong>3,5-dimetiloctano</strong>.","ok":true}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"m1":[80,54]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z3","m1",2]],"lab":{},"w":300}],"ops":[{"t":"2-etilpent-1-eno","fb":"Metiste el doble enlace en la cadena antes de mirar la longitud: así era la regla antigua. Con IUPAC 2013 primero va A1 (la cadena más larga, 6 C); los enlaces múltiples (A2) solo desempatan entre cadenas igual de largas.","ok":false},{"t":"3-metilidenhexano","fb":"¡Correcto! No hay grupo funcional. La cadena más larga tiene 6 C y no incluye el doble enlace, que queda como rama «metilideno» (=CH₂). A1 manda antes que A2 → <strong>3-metilidenhexano</strong>.","ok":true},{"t":"2-propilbut-1-eno","fb":"Esa cadena incluye el doble enlace, pero solo tiene 4 C. Primero se cuentan los carbonos: gana la de 6 C (A1).","ok":false}]}],"A2":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"t1":[80,54],"t2":[80,88]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z3","t1",1],["t1","t2",3]],"lab":{},"w":300,"ch":["t2","t1","z3","z4","z5","z6"],"t":"Opción A","p":"3-etilhex-1-ino"},{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"t1":[80,54],"t2":[80,88]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z3","t1",1],["t1","t2",3]],"lab":{},"w":300,"ch":["z1","z2","z3","z4","z5","z6"],"t":"Opción B","p":"3-etinilhexano"}],"ops":[{"t":"A, por A2: contiene el triple enlace","fb":"¡Bien! Las dos cadenas tienen 6 C (empatan en A1). Desempata A2: gana la que tiene más enlaces múltiples, la que pasa por el triple enlace → <strong>3-etilhex-1-ino</strong>.","ok":true},{"t":"B, por A1: es más larga","fb":"Cuenta otra vez: las dos tienen 6 C, así que A1 empata. Además, B deja el triple enlace en una rama (etinil).","ok":false},{"t":"B, porque es la línea recta","fb":"La línea recta del dibujo no tiene ningún privilegio. Como las dos miden 6 C, se pasa a A2: gana la que contiene el triple enlace.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"e1":[80,54],"e2":[114,74]},"b":[["z1","z2",2],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",2],["z3","e1",1],["e1","e2",1]],"lab":{},"w":300}],"ops":[{"t":"4-etenilhex-1-eno","fb":"Esa cadena tiene 6 C pero solo <strong>un</strong> doble enlace; el otro quedó en la rama (etenil). Hay otra cadena de 6 C con los dos dobles enlaces, y A2 prefiere esa.","ok":false},{"t":"3-(prop-2-en-1-il)pent-1-eno","fb":"Esa cadena tiene solo 5 C. Antes de contar enlaces dobles, la cadena tiene que ser la más larga (A1): hay cadenas de 6 C.","ok":false},{"t":"3-etilhexa-1,5-dieno","fb":"¡Correcto! Hay dos cadenas de 6 C (empate en A1). A2: gana la que tiene más enlaces múltiples, 2 dobles contra 1 → <strong>3-etilhexa-1,5-dieno</strong>.","ok":true}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"t1":[80,54],"t2":[80,88]},"b":[["z1","z2",2],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z3","t1",1],["t1","t2",3]],"lab":{},"w":300}],"ops":[{"t":"3-propilpent-1-en-4-ino","fb":"Esa cadena tiene dos enlaces múltiples, pero solo 5 C. La longitud manda primero (A1): hay cadenas de 6 C.","ok":false},{"t":"3-etenilhex-1-ino","fb":"Tiene 6 C y un enlace múltiple, igual que la otra cadena de 6 C: empatan en el número de enlaces múltiples. Entonces decide la segunda parte de A2: gana la que tiene más enlaces <strong>dobles</strong>.","ok":false},{"t":"3-etinilhex-1-eno","fb":"¡Excelente! Hay dos cadenas de 6 C (A1 empata), cada una con un enlace múltiple (empata la primera parte de A2). Desempata la segunda parte de A2: más enlaces <strong>dobles</strong> → la cadena con el C=C → <strong>3-etinilhex-1-eno</strong>.","ok":true}]}],"A3":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"m1":[40,-34],"e1":[80,54],"e2":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","m1",1],["h3","e1",1],["e1","e2",1]],"lab":{},"w":300,"ch":["e2","e1","h3","h4","h5"],"t":"Opción A","p":"3-isopropilpentano"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"m1":[40,-34],"e1":[80,54],"e2":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","m1",1],["h3","e1",1],["e1","e2",1]],"lab":{},"w":300,"ch":["h1","h2","h3","h4","h5"],"t":"Opción B","p":"3-etil-2-metilpentano"}],"ops":[{"t":"A, porque su rama es más grande","fb":"Elegiste A: pensaste que una rama grande es mejor. Es al revés: A3 prefiere la cadena con <strong>más</strong> ramas, aunque sean pequeñas.","ok":false},{"t":"B, por A3: tiene 2 sustituyentes y A solo 1","fb":"¡Correcto! Las dos tienen 5 C y ningún enlace múltiple (empatan en A1 y A2). Gana la de más sustituyentes → <strong>3-etil-2-metilpentano</strong>.","ok":true},{"t":"B, por A1: es más larga","fb":"Cuenta los carbonos verdes: las dos tienen 5 C, así que A1 empata. Lo que las separa es el número de ramas (A3).","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"m1":[40,-34],"m2":[120,-34],"e1":[80,54],"e2":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","m1",1],["h4","m2",1],["h3","e1",1],["e1","e2",1]],"lab":{},"w":300}],"ops":[{"t":"3-isopropil-2-metilpentano","fb":"Esa cadena también tiene 5 C, pero solo 2 ramas. Hay otra de 5 C con 3 ramas, y A3 prefiere la de más sustituyentes.","ok":false},{"t":"3-etil-2,4-dimetilpentano","fb":"¡Muy bien! Todas las cadenas posibles tienen 5 C y ningún enlace múltiple. A3: gana la de más sustituyentes, 3 contra 2 → <strong>3-etil-2,4-dimetilpentano</strong>.","ok":true},{"t":"2,4-dimetil-3-etilpentano","fb":"La cadena es la correcta, pero el orden no: los prefijos van en orden alfabético y «di» no cuenta, así que <strong>e</strong>til va antes que <strong>m</strong>etil.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"m1":[14,-30],"m3":[66,-30],"e1":[80,54],"e2":[114,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","m1",1],["h2","m3",1],["h3","e1",1],["e1","e2",1]],"lab":{},"w":300}],"ops":[{"t":"3-terc-butilpentano","fb":"Elegiste una sola rama grande (terc-butil). Si la cadena pasa por uno de los metilos de ese grupo, también mide 5 C y deja 3 ramas: 3 sustituyentes contra 1 (A3).","ok":false},{"t":"3-etil-2,2-dimetilpentano","fb":"¡Exacto! Las cadenas candidatas tienen 5 C. A3: la que pasa por uno de los metilos del grupo grande deja 3 ramas (un etil y dos metil) → <strong>3-etil-2,2-dimetilpentano</strong>. Varias ramas pequeñas ganan a una grande.","ok":true},{"t":"2,2-dimetil-3-etilpentano","fb":"La cadena es la correcta, pero el orden de los prefijos no: «di» no cuenta, así que <strong>e</strong>til va antes que <strong>m</strong>etil.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"m1":[40,-34],"s1":[120,-34],"s2":[154,-54],"s3":[154,-88],"sm":[86,-54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h2","m1",1],["h4","s1",1],["s1","s2",1],["s2","s3",1],["s1","sm",1]],"lab":{},"w":300}],"ops":[{"t":"4-sec-butil-2-metilheptano","fb":"Elegiste la línea de abajo del dibujo: 7 C con 2 ramas. Si desde la izquierda subes por la rama de arriba también tienes 7 C, pero con <strong>3</strong> ramas, y A3 prefiere esa.","ok":false},{"t":"4-isobutil-3-metilheptano","fb":"Esa cadena tiene 7 C y 2 ramas. Hay otra de 7 C con 3 ramas: la que empieza a la izquierda y sube por la rama de arriba.","ok":false},{"t":"2,5-dimetil-4-propilheptano","fb":"¡Excelente! Hay tres cadenas de 7 C sin enlaces múltiples (empate en A1 y A2). Dos tienen 2 ramas y una tiene 3: gana esa (A3). Numerada para dar {2, 4, 5} → <strong>2,5-dimetil-4-propilheptano</strong>.","ok":true}]}],"A4":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"b1":[120,-34],"b2":[154,-54],"bm":[86,-54],"Cl1":[240,20]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z4","b1",1],["b1","b2",1],["b1","bm",1],["z6","Cl1",1]],"lab":{"Cl1":"Cl"},"w":300,"ch":["b2","b1","z4","z3","z2","z1"],"t":"Opción A","p":"3-(2-cloroetil)-2-metilhexano"},{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"b1":[120,-34],"b2":[154,-54],"bm":[86,-54],"Cl1":[240,20]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z4","b1",1],["b1","b2",1],["b1","bm",1],["z6","Cl1",1]],"lab":{"Cl1":"Cl"},"w":300,"ch":["z6","z5","z4","z3","z2","z1"],"t":"Opción B","p":"1-cloro-3-isopropilhexano"}],"ops":[{"t":"A, por A3: tiene más sustituyentes","fb":"Cuenta las ramas: A tiene un metil y un cloroetil (2); B tiene un cloro y un isopropil (2). Empatan en A3, así que se pasa a A4.","ok":false},{"t":"A, porque el cloro no cuenta como sustituyente","fb":"Los halógenos (−Cl, −Br…) sí son sustituyentes ①: se cuentan y se numeran igual que las ramas de carbono. Contando el cloro, B tiene los números {1, 3}, más bajos que los {2, 3} de A.","ok":false},{"t":"B, por A4: sus sustituyentes van en {1, 3} y los de A en {2, 3}","fb":"¡Correcto! Las dos cadenas tienen 6 C, ningún enlace múltiple y 2 sustituyentes (empatan en A1, A2 y A3). A4: se comparan los números uno por uno y el primero ya es distinto, 1 &lt; 2 → <strong>1-cloro-3-isopropilhexano</strong>.","ok":true}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"b1":[120,-34],"b2":[154,-54],"Cl2":[86,-54],"Cl1":[240,20]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z4","b1",1],["b1","b2",1],["b1","Cl2",1],["z6","Cl1",1]],"lab":{"Cl2":"Cl","Cl1":"Cl"},"w":300}],"ops":[{"t":"2-cloro-3-(2-cloroetil)hexano","fb":"Esa cadena también tiene 6 C y 2 sustituyentes, pero sus números son {2, 3}. La otra cadena da {1, 3}: el primer número decide, 1 &lt; 2 (A4).","ok":false},{"t":"1-cloro-3-(1-cloroetil)hexano","fb":"¡Bien! Hay dos cadenas de 6 C, sin enlaces múltiples y con 2 sustituyentes cada una. A4: {1, 3} gana a {2, 3} porque el primer número distinto es 1 &lt; 2 → <strong>1-cloro-3-(1-cloroetil)hexano</strong>.","ok":true},{"t":"Cualquiera de los dos: tienen los mismos átomos","fb":"Es la misma molécula, pero solo uno de los nombres es correcto. Las dos cadenas empatan hasta A3, y A4 compara los números: {1, 3} contra {2, 3}.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"m1":[40,-34],"i1":[120,-34],"i2":[154,-54],"i3":[154,-88],"i4":[188,-34],"m2":[160,54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h2","m1",1],["h4","i1",1],["i1","i2",1],["i2","i3",1],["i2","i4",1],["h5","m2",1]],"lab":{},"w":300}],"ops":[{"t":"4-sec-butil-2,6-dimetilheptano","fb":"Comparaste solo los primeros números. {2, 4, 6} y {2, 4, 5} empatan en el 2 y en el 4; el <strong>tercero</strong> decide: 5 &lt; 6.","ok":false},{"t":"4-isobutil-2,5-dimetilheptano","fb":"¡Excelente! Hay cadenas de 7 C con 3 ramas cada una (empate en A1, A2 y A3). A4, uno por uno: 2 = 2, 4 = 4 y en el tercero 5 &lt; 6 → <strong>4-isobutil-2,5-dimetilheptano</strong>. ¡Nunca se suman!","ok":true},{"t":"Cualquiera: los dos empiezan con 2 y 4","fb":"Si los primeros números empatan, se sigue comparando: el tercero es 5 en un nombre y 6 en el otro. Solo hay un nombre correcto.","ok":false}]}],"A6":[{"nivel":"Fácil","q":"¿Cuál cadena (en verde) es la correcta y qué criterio decide?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"b1":[120,-34],"b2":[154,-54],"Br1":[154,-88],"Cl1":[240,20]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z4","b1",1],["b1","b2",1],["b2","Br1",1],["z6","Cl1",1]],"lab":{"Br1":"Br","Cl1":"Cl"},"w":300,"ch":["z6","z5","z4","z3","z2","z1"],"t":"Opción A","p":"3-(2-bromoetil)-1-clorohexano"},{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"b1":[120,-34],"b2":[154,-54],"Br1":[154,-88],"Cl1":[240,20]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z4","b1",1],["b1","b2",1],["b2","Br1",1],["z6","Cl1",1]],"lab":{"Br1":"Br","Cl1":"Cl"},"w":300,"ch":["b2","b1","z4","z3","z2","z1"],"t":"Opción B","p":"1-bromo-3-(2-cloroetil)hexano"}],"ops":[{"t":"A, por A4: sus números son más bajos","fb":"Mira los números: las dos tienen {1, 3}, así que A4 empata. Por eso hay que bajar hasta A6.","ok":false},{"t":"A, porque el cloro va antes que el bromo","fb":"Al revés: en el alfabeto la <strong>b</strong> de bromo va antes que la <strong>c</strong> de cloro. Aquí solo importa el orden alfabético de los nombres.","ok":false},{"t":"B, por A6: el primero en orden alfabético (bromo) queda en el C1","fb":"¡Correcto! Empatan en todo hasta A4: 6 C, sin enlaces múltiples, 2 sustituyentes y números {1, 3}. A6: en B el primero del alfabeto es <em>bromo</em> y está en el C1; en A el primero es <em>(2-bromoetil)</em>, en el C3. 1 &lt; 3 → <strong>1-bromo-3-(2-cloroetil)hexano</strong>.","ok":true}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"z7":[240,20],"z8":[280,0],"b1":[160,54],"b2":[126,74],"b3":[126,108],"Cl1":[92,64],"F1":[240,54]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z6","z7",1],["z7","z8",1],["z5","b1",1],["b1","b2",1],["b2","b3",1],["b2","Cl1",1],["z7","F1",1]],"lab":{"Cl1":"Cl","F1":"F"},"w":320}],"ops":[{"t":"4-(2-cloropropil)-2-fluorooctano","fb":"En este nombre el primero en orden alfabético es <em>(2-cloropropil)</em> (va por la «c») y está en el C4. En el otro nombre el primero es <em>cloro</em>, en el C2. A6: 2 &lt; 4.","ok":false},{"t":"2-cloro-4-(2-fluoropropil)octano","fb":"¡Muy bien! Las dos cadenas tienen 8 C, 2 sustituyentes y números {2, 4} (empate hasta A4). A6: el sustituyente que se escribe primero es <em>cloro</em> (C2) en un caso y <em>(2-cloropropil)</em> (C4) en el otro → gana <strong>2-cloro-4-(2-fluoropropil)octano</strong>.","ok":true},{"t":"2-fluoro-4-(2-cloropropil)octano","fb":"Los prefijos se escriben en orden alfabético: (2-cloropropil) va por la «c», antes que fluoro. Además, A6 prefiere la otra cadena, donde el cloro queda en el C2.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"z1":[0,20],"z2":[40,0],"z3":[80,20],"z4":[120,0],"z5":[160,20],"z6":[200,0],"z7":[240,20],"z8":[280,0],"b1":[160,54],"b2":[126,74],"b3":[126,108],"Cl1":[92,64],"Cl2":[96,98],"n1":[222,54],"n2":[258,54]},"b":[["z1","z2",1],["z2","z3",1],["z3","z4",1],["z4","z5",1],["z5","z6",1],["z6","z7",1],["z7","z8",1],["z5","b1",1],["b1","b2",1],["b2","b3",1],["b2","Cl1",1],["b2","Cl2",1],["z7","n1",1],["z7","n2",1]],"lab":{"Cl1":"Cl","Cl2":"Cl"},"w":320}],"ops":[{"t":"4-(2,2-dicloropropil)-2,2-dimetiloctano","fb":"Te fijaste en que los metil quedan en el C2, pero <em>metil</em> no es el primero en orden alfabético. Dentro de un paréntesis el «di» sí cuenta, así que <em>(2,2-dicloropropil)</em> va por la «d» y se escribe primero… y está en el C4.","ok":false},{"t":"2,2-dicloro-4-(2,2-dimetilpropil)octano","fb":"¡Excelente! Empate hasta A4: 8 C, 3 sustituyentes y {2, 2, 4} en las dos cadenas. A6: aquí el primero es <em>cloro</em> («di» no cuenta: va por la «c») y está en el C2; en el otro nombre el primero es <em>(2,2-dicloropropil)</em> (va por la «d», porque dentro del paréntesis sí cuenta), en el C4. 2 &lt; 4.","ok":true},{"t":"Los dos: empatan en {2, 2, 4}","fb":"Empatar en A4 no basta: todavía queda A6. Solo uno de los nombres da el número más bajo al sustituyente que se escribe primero.","ok":false}]}],"B1":[{"nivel":"Fácil","q":"Dos estudiantes numeraron la misma cadena en sentidos opuestos. ¿Cuál numeración es correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"O1":[80,54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","O1",1]],"lab":{"O1":"OH"},"w":300,"ch":["h1","h2","h3","h4","h5","h6"],"t":"Opción A","p":"hexan-3-ol"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"O1":[80,54]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","O1",1]],"lab":{"O1":"OH"},"w":300,"ch":["h6","h5","h4","h3","h2","h1"],"t":"Opción B","p":"hexan-4-ol"}],"ops":[{"t":"A, por B1: el −OH queda en el C3 (3 &lt; 4)","fb":"¡Correcto! El grupo funcional (④) manda en la numeración: se cuenta desde el extremo más cercano al −OH → <strong>hexan-3-ol</strong>.","ok":true},{"t":"B, porque se numera de derecha a izquierda","fb":"No hay una regla de izquierda o derecha: el sentido lo decide la molécula. Por B1 se cuenta desde el extremo más cercano al −OH: en A queda en 3 y en B en 4.","ok":false},{"t":"Las dos: el −OH está en el centro","fb":"Cuenta los carbonos a cada lado del −OH: hay 2 a un lado y 3 al otro. No está en el centro, así que un sentido da 3 y el otro da 4.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"O1":[40,-34],"m1":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","O1",1],["h4","m1",1]],"lab":{"O1":"OH"},"w":300}],"ops":[{"t":"2-metilpentan-4-ol","fb":"Le diste el número bajo al metil (①), pero el grupo funcional (④) se mira primero: por B1 el −OH debe tener el número más bajo, 2 &lt; 4.","ok":false},{"t":"4-metilpentan-2-ol","fb":"¡Bien! B1: se numera desde el extremo más cercano al −OH, que queda en el C2; el metil queda en el C4 → <strong>4-metilpentan-2-ol</strong>.","ok":true},{"t":"1,3-dimetilbutan-1-ol","fb":"Esa cadena no es la más larga: un «1-metil» significa que la cadena se podía alargar. La cadena principal tiene 5 C.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"O1":[40,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",2],["h2","O1",1]],"lab":{"O1":"OH"},"w":300}],"ops":[{"t":"pent-1-en-4-ol","fb":"Le diste el número bajo al doble enlace (③), pero el grupo funcional (④) va primero: B1 antes que B2. Contando desde el otro extremo, el −OH queda en el 2.","ok":false},{"t":"pent-4-en-2-ol","fb":"¡Correcto! B1 manda: el −OH recibe el número más bajo (2). El doble enlace queda donde caiga, entre el C4 y el C5 → <strong>pent-4-en-2-ol</strong>.","ok":true},{"t":"pent-4-en-2-ona","fb":"La numeración está bien, pero la terminación no: -ona es para el C=O de las cetonas. Aquí hay un −OH → -ol.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"O1":[40,-34],"O2":[160,54],"m1":[200,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h2","O1",1],["h5","O2",1],["h6","m1",1]],"lab":{"O1":"OH","O2":"OH"},"w":300}],"ops":[{"t":"2-metilheptano-3,6-diol","fb":"Te dejaste llevar por el metil. Los −OH van primero (B1) y se comparan como un conjunto: {2, 5} contra {3, 6}; el primer número ya decide, 2 &lt; 3.","ok":false},{"t":"6-metilheptano-2,5-diol","fb":"¡Excelente! Los dos −OH se comparan como un conjunto: {2, 5} contra {3, 6}, y el primer número distinto es 2 &lt; 3 (B1). El metil queda en el 6, aunque desde el otro lado tendría el 2 → <strong>6-metilheptano-2,5-diol</strong>.","ok":true},{"t":"6-metilheptan-2,5-diol","fb":"Casi: la numeración es correcta, pero ante «diol» se conserva la «o» de heptano: <em>heptano-2,5-diol</em>. La «o» solo se quita ante una vocal, como en hexan-3-ol.","ok":false}]}],"B2":[{"nivel":"Fácil","q":"Dos estudiantes numeraron la misma cadena en sentidos opuestos. ¿Cuál numeración es correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"m1":[160,54]},"b":[["h1","h2",1],["h2","h3",2],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h5","m1",1]],"lab":{},"w":300,"ch":["h1","h2","h3","h4","h5","h6"],"t":"Opción A","p":"5-metilhex-2-eno"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"m1":[160,54]},"b":[["h1","h2",1],["h2","h3",2],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h5","m1",1]],"lab":{},"w":300,"ch":["h6","h5","h4","h3","h2","h1"],"t":"Opción B","p":"2-metilhex-4-eno"}],"ops":[{"t":"A, por B2: el doble enlace queda en el C2 (2 &lt; 4)","fb":"¡Correcto! No hay grupo funcional (B1 no decide). B2: el doble enlace recibe el número más bajo, aunque el metil quede en el 5 → <strong>5-metilhex-2-eno</strong>.","ok":true},{"t":"B, por B3: el metil queda en el C2","fb":"Elegiste B: le diste prioridad al metil (①). Las insaturaciones (③) se miran antes que las ramas: B2 va antes que B3.","ok":false},{"t":"A, por B1","fb":"La numeración A es la correcta, pero no por B1: la molécula no tiene grupo funcional (es un alqueno). Decide B2: el doble enlace lleva el número más bajo.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"m1":[200,-34]},"b":[["h1","h2",2],["h2","h3",1],["h3","h4",1],["h4","h5",2],["h5","h6",1],["h6","h7",1],["h6","m1",1]],"lab":{},"w":300}],"ops":[{"t":"2-metilhepta-3,6-dieno","fb":"Numeraste desde el metil. Primero van los dobles enlaces (B2), todos juntos: {1, 4} contra {3, 6}; 1 &lt; 3.","ok":false},{"t":"6-metilhepta-1,4-dieno","fb":"¡Muy bien! Los dos dobles enlaces se toman como un conjunto: {1, 4} gana a {3, 6} (B2). El metil queda en el 6 → <strong>6-metilhepta-1,4-dieno</strong>.","ok":true},{"t":"Cualquiera de los dos: hay dos dobles enlaces","fb":"Que haya dos dobles enlaces no hace que valgan los dos nombres. Se comparan sus números como un conjunto, {1, 4} contra {3, 6}, y gana el más bajo.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,40],"m1":[120,-34]},"b":[["h1","h2",2],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",3],["h4","m1",1]],"lab":{},"w":300}],"ops":[{"t":"3-metilhex-5-en-1-ino","fb":"Desde cualquier extremo los enlaces múltiples quedan en {1, 5}: hay empate. Para ese empate B2 dice que el <strong>doble</strong> enlace recibe el número menor; las ramas (B3) se miran después.","ok":false},{"t":"4-metilhex-1-en-5-ino","fb":"¡Excelente! B1 no aplica (no hay grupo funcional). B2: los enlaces múltiples quedan en {1, 5} desde los dos lados (empate) y, en ese caso, el doble enlace se lleva el 1. El metil queda en el 4, aunque desde el otro lado tendría el 3 → <strong>4-metilhex-1-en-5-ino</strong>.","ok":true},{"t":"Cualquiera: los dos dan {1, 5}","fb":"Hay empate en {1, 5}, pero B2 tiene una regla para eso: el doble enlace recibe el número más bajo. Solo un nombre es correcto.","ok":false}]}],"B3":[{"nivel":"Fácil","q":"Dos estudiantes numeraron la misma cadena en sentidos opuestos. ¿Cuál numeración es correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"m1":[40,-34],"m2":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h2","m1",1],["h4","m2",1]],"lab":{},"w":300,"ch":["h6","h5","h4","h3","h2","h1"],"t":"Opción A","p":"3,5-dimetilhexano"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"m1":[40,-34],"m2":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h2","m1",1],["h4","m2",1]],"lab":{},"w":300,"ch":["h1","h2","h3","h4","h5","h6"],"t":"Opción B","p":"2,4-dimetilhexano"}],"ops":[{"t":"A, por B2","fb":"No hay dobles ni triples enlaces, así que B2 no decide. Compara los números de las ramas: {3, 5} en A y {2, 4} en B.","ok":false},{"t":"B, por B3: {2, 4} es más bajo que {3, 5}","fb":"¡Correcto! Sin grupo funcional (B1) ni enlaces múltiples (B2), deciden los números de las ramas: el primero ya es distinto, 2 &lt; 3 → <strong>2,4-dimetilhexano</strong>.","ok":true},{"t":"Las dos son iguales","fb":"Los conjuntos son distintos: {3, 5} y {2, 4}. El primer número ya decide: 2 &lt; 3.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"O1":[80,54],"m1":[40,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h3","O1",1],["h2","m1",1]],"lab":{"O1":"OH"},"w":300}],"ops":[{"t":"4-metilpentan-3-ol","fb":"El −OH queda en el 3 desde los dos lados: B1 empata. Entonces se sigue bajando: no hay enlaces múltiples (B2) y decide B3: el metil debe tener el número más bajo, 2 &lt; 4.","ok":false},{"t":"2-metilpentan-3-ol","fb":"¡Bien! B1 empata (el −OH está en el 3 desde ambos lados) y no hay enlaces múltiples (B2). B3: el metil recibe el número más bajo → <strong>2-metilpentan-3-ol</strong>.","ok":true},{"t":"Cualquiera de los dos: el −OH queda en 3","fb":"Que B1 empate no termina el desempate: hay que seguir con B2 y B3. El metil decide: 2 &lt; 4.","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"Cl1":[80,54],"m1":[160,54],"m2":[200,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h3","Cl1",1],["h5","m1",1],["h6","m2",1]],"lab":{"Cl1":"Cl"},"w":300}],"ops":[{"t":"3-cloro-5,6-dimetilheptano","fb":"Trataste el cloro como si fuera el grupo funcional. Los halógenos son prefijos (①), como las ramas: se juntan todos los números y se comparan, {2, 3, 5} contra {3, 5, 6}.","ok":false},{"t":"5-cloro-2,3-dimetilheptano","fb":"¡Muy bien! Los halógenos no son grupo funcional principal; son sustituyentes. Se juntan todos los números: {2, 3, 5} gana a {3, 5, 6} → <strong>5-cloro-2,3-dimetilheptano</strong>.","ok":true},{"t":"2,3-dimetil-5-cloroheptano","fb":"La numeración es correcta, pero el orden no: «di» no cuenta, así que se comparan <strong>c</strong>loro y <strong>m</strong>etil, y cloro va primero.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"h8":[280,0],"h9":[320,20],"h10":[360,0],"m1":[40,-34],"m2":[240,54],"m3":[280,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h7","h8",1],["h8","h9",1],["h9","h10",1],["h2","m1",1],["h7","m2",1],["h8","m3",1]],"lab":{},"w":340}],"ops":[{"t":"3,4,9-trimetildecano","fb":"Sumaste: 3 + 4 + 9 = 16 es menos que 2 + 7 + 8 = 17. Pero los números no se suman: se comparan uno por uno, y el primero ya decide, 2 &lt; 3.","ok":false},{"t":"2,7,8-trimetildecano","fb":"¡Excelente! Uno por uno, como en el diccionario: {2, 7, 8} contra {3, 4, 9}; el primer número distinto es 2 &lt; 3 → <strong>2,7,8-trimetildecano</strong>. ¡Nunca se suman!","ok":true},{"t":"2,3,8-trimetildecano","fb":"Esos números no salen contando desde ningún extremo. Cuenta de nuevo la posición de cada metil desde el extremo más cercano al primero.","ok":false}]}],"B4":[{"nivel":"Fácil","q":"Dos estudiantes numeraron la misma cadena en sentidos opuestos. ¿Cuál numeración es correcta y qué criterio decide?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"e1":[80,54],"e2":[114,74],"m1":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","e1",1],["e1","e2",1],["h4","m1",1]],"lab":{},"w":300,"ch":["h1","h2","h3","h4","h5","h6"],"t":"Opción A","p":"3-etil-4-metilhexano"},{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"e1":[80,54],"e2":[114,74],"m1":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h3","e1",1],["e1","e2",1],["h4","m1",1]],"lab":{},"w":300,"ch":["h6","h5","h4","h3","h2","h1"],"t":"Opción B","p":"4-etil-3-metilhexano"}],"ops":[{"t":"A, por B4: etil va antes que metil en el alfabeto y recibe el 3","fb":"¡Correcto! Los dos sentidos dan {3, 4} (B3 empata). B4: el que va primero en el alfabeto, <strong>e</strong>til, recibe el número menor → <strong>3-etil-4-metilhexano</strong>.","ok":true},{"t":"B, porque el metil es más pequeño","fb":"El tamaño de la rama no importa para numerar. Con {3, 4} en los dos sentidos, decide el orden alfabético: e (etil) antes que m (metil).","ok":false},{"t":"A, por B3","fb":"La numeración A es la correcta, pero B3 no decide: los dos sentidos dan {3, 4}. El empate lo rompe B4 (orden alfabético).","ok":false}]},{"nivel":"Intermedio","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"Br1":[40,-34],"Cl1":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","Br1",1],["h4","Cl1",1]],"lab":{"Br1":"Br","Cl1":"Cl"},"w":300}],"ops":[{"t":"4-bromo-2-cloropentano","fb":"Los dos sentidos dan {2, 4}. Entonces el primero del alfabeto recibe el número menor: <strong>b</strong>romo va antes que <strong>c</strong>loro.","ok":false},{"t":"2-cloro-4-bromopentano","fb":"Los prefijos se escriben en orden alfabético: bromo antes que cloro. Y como los números empatan en {2, 4}, el bromo también recibe el número menor.","ok":false},{"t":"2-bromo-4-cloropentano","fb":"¡Bien! B1 y B2 no aplican y B3 empata ({2, 4} en los dos sentidos). B4: el bromo, primero en el alfabeto, recibe el 2 → <strong>2-bromo-4-cloropentano</strong>.","ok":true}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"h6":[200,0],"h7":[240,20],"h8":[280,0],"t":[120,-34],"t1":[120,-68],"t2":[86,-48],"t3":[154,-48],"e1":[160,54],"e2":[194,74]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h5","h6",1],["h6","h7",1],["h7","h8",1],["h4","t",1],["t","t1",1],["t","t2",1],["t","t3",1],["h5","e1",1],["e1","e2",1]],"lab":{},"w":300}],"ops":[{"t":"5-terc-butil-4-etiloctano","fb":"Ordenaste terc-butil por la «t». Los prefijos sec- y terc- no cuentan para el orden alfabético: se ordena por la «b» de butil, que va antes que la «e» de etil.","ok":false},{"t":"4-terc-butil-5-etiloctano","fb":"¡Excelente! Los dos sentidos dan {4, 5} (B3 empata). B4: «terc-» no cuenta, así que terc-butil va por la «b», antes que etil, y recibe el 4 → <strong>4-terc-butil-5-etiloctano</strong>.","ok":true},{"t":"5-etil-4-terc-butiloctano","fb":"La numeración es correcta, pero el orden de escritura no: terc-butil va por la «b» y se escribe antes que etil.","ok":false}]},{"nivel":"Difícil","q":"¿Cuál es el nombre correcto?","figs":[{"a":{"h1":[0,20],"h2":[40,0],"h3":[80,20],"h4":[120,0],"h5":[160,20],"Cl1":[40,-34],"O1":[80,54],"m1":[120,-34]},"b":[["h1","h2",1],["h2","h3",1],["h3","h4",1],["h4","h5",1],["h2","Cl1",1],["h3","O1",1],["h4","m1",1]],"lab":{"Cl1":"Cl","O1":"OH"},"w":300}],"ops":[{"t":"4-cloro-2-metilpentan-3-ol","fb":"El −OH queda en el 3 desde los dos lados (B1 empata), no hay enlaces múltiples (B2) y los prefijos quedan en {2, 4} en los dos sentidos (B3 empata). B4: cloro (c) va antes que metil (m) y recibe el 2.","ok":false},{"t":"2-cloro-4-metilpentan-3-ol","fb":"¡Muy bien! Recorriste todo: B1 empata (−OH en 3), B2 no aplica y B3 empata ({2, 4}). B4 decide: el cloro, primero en el alfabeto, recibe el 2 → <strong>2-cloro-4-metilpentan-3-ol</strong>.","ok":true},{"t":"Cualquiera: el −OH está en el centro","fb":"Que el −OH esté en el centro solo hace empatar B1. Después vienen B2, B3 y B4: el orden alfabético decide.","ok":false}]}]};
+// ── PRÁCTICA POR CRITERIO DE DESEMPATE ("Practica este criterio") ──
+// Los datos (CP) se generan con un script que verifica cada molécula: en cada
+// ejercicio los criterios anteriores empatan y decide el criterio practicado.
+const CP_ORDEN=['A0','A1','A2','A3','A4','A6','B1','B2','B3','B4'];
+const CP_NOM={A0:'La cadena contiene el grupo funcional',A1:'La cadena más larga',A2:'Más enlaces múltiples',
+  A3:'Más sustituyentes',A4:'Números más bajos para las ramas (cadena)',A6:'Orden alfabético (cadena)',
+  B1:'El grupo funcional manda',B2:'Los dobles y triples enlaces, juntos',B3:'Todos los prefijos, juntos',B4:'Orden alfabético (numeración)'};
+const CP_KEY='chromanom_desempate_criterios_v1';
+let CP_MEM={}, CP_LS_OK=true;
+const CPS={crit:null,i:0,ej:[],res:[],miss:0,volver:null};
+
+function cpLeer(){
+  let d={};
+  try{const v=JSON.parse(localStorage.getItem(CP_KEY)||'{}');if(v&&typeof v==='object')d=v;}catch(e){CP_LS_OK=false;}
+  Object.keys(CP_MEM).forEach(k=>{d[k]=CP_MEM[k];});
+  return d;
+}
+function cpGuardar(crit,ac,tot){
+  const d=cpLeer(), prev=d[crit]||{};
+  const r={ult:ac,tot:tot,mej:Math.max(ac,prev.mej||0),fecha:Date.now()};
+  CP_MEM[crit]=r; d[crit]=r;
+  try{localStorage.setItem(CP_KEY,JSON.stringify(d));CP_LS_OK=true;}catch(e){CP_LS_OK=false;}
+}
+// Dominado: al menos el 75 % al primer intento (3 de 3, 3 de 4, 4 de 5) en algún intento
+function cpDomina(r){return !!(r&&r.tot&&r.mej>=Math.ceil(r.tot*0.75));}
+
+// ── Dibujo de las estructuras (mismo estilo que los ejemplos de la sección) ──
+function cpSVG(f){
+  const CH='#166534',SU='#0891b2',DB='#b45309',FG='#CC79A7',FGT='#9a4a78',TEAL='#0e7490',NEU='#475569';
+  const A=f.a, ch=f.ch||[], inC=new Set(ch), neutral=!ch.length, L=[];
+  const het=k=>/^(O|Cl|Br|F|I)/.test(k), isO=k=>/^O/.test(k);
+  const r=v=>Math.round(v*10)/10;
+  const nb={}; Object.keys(A).forEach(k=>nb[k]=[]);
+  f.b.forEach(([p,q])=>{nb[p].push(q);nb[q].push(p);});
+  const xs=[],ys=[]; Object.values(A).forEach(([x,y])=>{xs.push(x);ys.push(y);});
+  const ln=(x1,y1,x2,y2,c)=>`<line x1="${r(x1)}" y1="${r(y1)}" x2="${r(x2)}" y2="${r(y2)}" stroke="${c}" stroke-width="3" stroke-linecap="round"/>`;
+  f.b.forEach(([p,q,o])=>{
+    let [x1,y1]=A[p],[x2,y2]=A[q];
+    const d=Math.hypot(x2-x1,y2-y1),ux=(x2-x1)/d,uy=(y2-y1)/d;
+    if(het(p)){x1+=ux*9;y1+=uy*9;} if(het(q)){x2-=ux*9;y2-=uy*9;}
+    let col;
+    if(isO(p)||isO(q))col=FG; else if(het(p)||het(q))col=SU;
+    else if(neutral)col=o>1?DB:NEU; else col=(inC.has(p)&&inC.has(q))?(o>1?DB:CH):SU;
+    L.push(ln(x1,y1,x2,y2,col));
+    const dx=x2-x1,dy=y2-y1;
+    if(o===2){
+      let px=-uy*5,py=ux*5; if(py<0){px=-px;py=-py;}
+      L.push(ln(x1+px+dx*.15,y1+py+dy*.15,x2+px-dx*.15,y2+py-dy*.15,col));
+    } else if(o===3){
+      [1,-1].forEach(s=>{const px=-uy*4.5*s,py=ux*4.5*s;L.push(ln(x1+px+dx*.1,y1+py+dy*.1,x2+px-dx*.1,y2+py-dy*.1,col));});
+    }
+  });
+  Object.keys(f.lab||{}).forEach(k=>{
+    const [x,y]=A[k],t=f.lab[k]; xs.push(x-t.length*4-4,x+t.length*4+4); ys.push(y-8,y+8);
+    L.push(`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="700" fill="${isO(k)?FGT:TEAL}">${t}</text>`);
+  });
+  const T=2*Math.PI;
+  ch.forEach((k,i)=>{
+    const [x,y]=A[k];
+    const ang=nb[k].map(j=>Math.atan2(A[j][1]-y,A[j][0]-x)).sort((a,b)=>a-b);
+    let t;
+    if(ang.length===1)t=ang[0]+Math.PI;
+    else{
+      let g=-1,a0=0;
+      ang.forEach((a,n)=>{let gg=((ang[(n+1)%ang.length]-a)%T+T)%T||T; if(gg>g||(gg===g&&a>a0)){g=gg;a0=a;}});
+      t=a0+g/2;
+    }
+    const nx=x+Math.cos(t)*19,ny=y+Math.sin(t)*19; xs.push(nx);ys.push(ny);
+    L.push(`<circle cx="${r(nx)}" cy="${r(ny)}" r="9" fill="#fff" stroke="${CH}" stroke-width="1.5"/><text x="${r(nx)}" y="${r(ny)}" text-anchor="middle" dominant-baseline="central" font-size="10.5" font-weight="800" fill="${CH}">${i+1}</text>`);
+  });
+  const x0=Math.min(...xs)-12,x1=Math.max(...xs)+12,y0=Math.min(...ys)-12,y1=Math.max(...ys)+12;
+  const aria=(f.t?f.t+': ':'')+(f.p||'estructura de la molécula');
+  return `<svg viewBox="${Math.round(x0)} ${Math.round(y0)} ${Math.round(x1-x0)} ${Math.round(y1-y0)}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${aria}" style="width:100%;max-width:${f.w||300}px;height:auto;display:block;margin:0 auto;font-family:'JetBrains Mono',monospace">${L.join('')}</svg>`;
+}
+
+function cpMezclar(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function cpCrearModal(){
+  if(document.getElementById('cp-overlay'))return;
+  const ov=document.createElement('div');
+  ov.id='cp-overlay'; ov.className='prac-overlay';
+  ov.addEventListener('click',e=>{if(e.target===ov)cpClose();});
+  ov.innerHTML=`<div class="prac-modal cp-modal" role="dialog" aria-modal="true" aria-labelledby="cp-titulo">
+    <div class="prac-head"><div class="prac-head-info"><div class="prac-sec-lbl" id="cp-sec"></div><div class="prac-mol-name cp-tit" id="cp-titulo"></div></div>
+    <button class="prac-x" id="cp-x" type="button" aria-label="Cerrar">✕</button></div>
+    <div class="prac-body" id="cp-body"></div>
+    <div class="prac-foot cp-foot" id="cp-foot"></div></div>`;
+  document.body.appendChild(ov);
+  document.getElementById('cp-x').onclick=cpClose;
+}
+
+function cpOpen(crit){
+  if(!CP[crit])return;
+  cpCrearModal();
+  CPS.volver=document.activeElement;
+  CPS.crit=crit; CPS.i=0; CPS.res=[]; CPS.miss=0;
+  CPS.ej=CP[crit].map(e=>Object.assign({},e,{ops:cpMezclar(e.ops.slice())}));
+  document.getElementById('cp-sec').textContent='Practica el criterio '+crit;
+  document.getElementById('cp-titulo').textContent=crit+' — '+CP_NOM[crit];
+  cpRender();
+  document.getElementById('cp-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('cp-x').focus();
+}
+function cpClose(){
+  const ov=document.getElementById('cp-overlay'); if(!ov)return;
+  ov.classList.remove('open'); document.body.style.overflow='';
+  cpEstados();
+  if(CPS.volver&&CPS.volver.focus)CPS.volver.focus();
+}
+
+function cpRender(){
+  const n=CPS.ej.length, e=CPS.ej[CPS.i], body=document.getElementById('cp-body');
+  const niv={'Fácil':'f','Intermedio':'i','Difícil':'d'}[e.nivel]||'f';
+  const dots=CPS.ej.map((_,k)=>`<span class="prac-dot${k<CPS.i?' done':''}${k===CPS.i?' cur':''}"></span>`).join('');
+  const figs=e.figs.map(f=>`<figure class="cp-fig">${f.t?`<figcaption class="cp-fig-t">${f.t}</figcaption>`:''}${cpSVG(f)}${f.p?`<div class="cp-fig-p">→ ${f.p}</div>`:''}</figure>`).join('');
+  body.innerHTML=`<div class="cp-prog"><span>Ejercicio ${CPS.i+1} de ${n}</span><span class="cp-nivel ${niv}">${e.nivel}</span></div>
+    <div class="prac-dots-row cp-dots" aria-hidden="true">${dots}</div>
+    <div class="cp-figs${e.figs.length>1?' dos':''}">${figs}</div>
+    <div class="prac-q">${e.q}</div>
+    <div class="prac-opts" id="cp-opts"></div>
+    <div class="prac-fb" id="cp-fb" aria-live="polite"></div>`;
+  const opts=document.getElementById('cp-opts');
+  e.ops.forEach((o,k)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='prac-opt'; b.innerHTML=o.t;
+    b.onclick=()=>cpElegir(k,b); opts.appendChild(b);
+  });
+  const last=CPS.i===n-1;
+  document.getElementById('cp-foot').innerHTML=`<span class="cp-ayuda">Puedes equivocarte: lee la pista y vuelve a elegir.</span><button type="button" class="prac-nav" id="cp-next" disabled>${last?'Ver resumen':'Siguiente →'}</button>`;
+  document.getElementById('cp-next').onclick=cpSiguiente;
+  const m=document.querySelector('#cp-overlay .prac-modal'); if(m)m.scrollTop=0;
+}
+
+function cpElegir(k,btn){
+  const e=CPS.ej[CPS.i], o=e.ops[k], fb=document.getElementById('cp-fb');
+  if(o.ok){
+    document.querySelectorAll('#cp-opts .prac-opt').forEach(b=>{b.disabled=true;b.onclick=null;});
+    btn.classList.add('correct');
+    CPS.res[CPS.i]=CPS.miss===0;
+    fb.innerHTML=(CPS.miss===0?'✓ <strong>¡Al primer intento!</strong> ':'✓ ')+o.fb;
+    fb.className='prac-fb show ok';
+    const nx=document.getElementById('cp-next'); nx.disabled=false; nx.className='prac-nav go'; nx.focus();
+  } else {
+    btn.classList.add('wrong'); btn.disabled=true; btn.onclick=null;
+    CPS.miss++;
+    fb.innerHTML='✗ '+o.fb+' <strong>Intenta otra vez.</strong>';
+    fb.className='prac-fb show err';
+  }
+}
+function cpSiguiente(){
+  CPS.i++; CPS.miss=0;
+  if(CPS.i>=CPS.ej.length)cpResumen(); else cpRender();
+}
+
+function cpResumen(){
+  const crit=CPS.crit, tot=CPS.ej.length, ac=CPS.res.filter(Boolean).length;
+  cpGuardar(crit,ac,tot);
+  const d=cpLeer(), dom=CP_ORDEN.filter(c=>cpDomina(d[c]));
+  const msg=ac===tot?`¡Dominas el criterio ${crit}!`
+    :ac>=Math.ceil(tot*0.75)?`¡Muy bien! Ya casi no te equivocas con ${crit}.`
+    :`Repasa la tarjeta de ${crit} y su ejemplo, y vuelve a intentarlo: los ejercicios cambian de orden.`;
+  const lista=CPS.ej.map((e,k)=>`<li>${CPS.res[k]?'<span class="cp-ok">✓</span>':'<span class="cp-re">↺</span>'} Ejercicio ${k+1} (${e.nivel.toLowerCase()}): ${CPS.res[k]?'al primer intento':'con reintento'}</li>`).join('');
+  const chips=CP_ORDEN.map(c=>{const r=d[c];const cl=cpDomina(r)?'dom':(r?'prac':'');
+    const t=cpDomina(r)?'✓ '+c:(r?c+' · '+r.mej+'/'+r.tot:c);
+    return `<button type="button" class="cp-chip ${cl}" data-c="${c}" title="${CP_NOM[c]}">${t}</button>`;}).join('');
+  const sig=CP_ORDEN[CP_ORDEN.indexOf(crit)+1];
+  document.getElementById('cp-body').innerHTML=`<div class="cp-res">
+    <div class="cp-res-lbl">Resumen</div>
+    <div class="cp-res-big">Acertaste ${ac} de ${tot} al primer intento</div>
+    <p class="cp-res-msg">${msg}</p>
+    <ul class="cp-res-list">${lista}</ul>
+    <div class="cp-glob"><div class="cp-glob-t">Tu avance en las reglas de desempate: dominas ${dom.length} de ${CP_ORDEN.length} criterios</div>
+    <div class="cp-chips">${chips}</div>
+    <div class="cp-glob-n">✓ = dominado (75 % o más al primer intento: 3 de 3 o 3 de 4). Toca un criterio para practicarlo. ${CP_LS_OK?'Tu avance se guarda solo en este navegador.':'Este navegador no deja guardar el avance: se conserva mientras la página esté abierta.'}</div></div></div>`;
+  document.querySelectorAll('#cp-body .cp-chip').forEach(b=>b.onclick=()=>cpOpen(b.dataset.c));
+  document.getElementById('cp-foot').innerHTML=`<button type="button" class="prac-nav" id="cp-rep">↺ Repetir</button>${sig?`<button type="button" class="prac-nav go" id="cp-sig">Practicar ${sig} →</button>`:`<button type="button" class="prac-nav go" id="cp-fin">Cerrar</button>`}`;
+  document.getElementById('cp-rep').onclick=()=>cpOpen(crit);
+  if(sig)document.getElementById('cp-sig').onclick=()=>cpOpen(sig); else document.getElementById('cp-fin').onclick=cpClose;
+  const m=document.querySelector('#cp-overlay .prac-modal'); if(m)m.scrollTop=0;
+}
+
+// Estado de cada botón "Practica este criterio" (dominado / mejor resultado)
+function cpEstados(){
+  const d=cpLeer();
+  document.querySelectorAll('.cp-estado').forEach(s=>{
+    const r=d[s.dataset.crit];
+    s.className='cp-estado'+(cpDomina(r)?' dom':'');
+    s.textContent=!r?'':cpDomina(r)?`✓ Dominado (mejor: ${r.mej} de ${r.tot})`:`Tu mejor resultado: ${r.mej} de ${r.tot} al primer intento`;
+  });
+}
+
+// Botón "Practica este criterio" al pie de cada ejemplo dibujado
+(function cpBotones(){
+  document.querySelectorAll('#desempate ~ .desemp-ej, .desemp-ej').forEach(ej=>{
+    if(ej.querySelector('.cp-bar'))return;
+    const m=(ej.firstElementChild&&ej.firstElementChild.textContent||'').match(/criterio\s+([AB]\d)/);
+    if(!m||!CP[m[1]])return;
+    const c=m[1], bar=document.createElement('div'); bar.className='cp-bar';
+    bar.innerHTML=`<button type="button" class="cp-btn">🎯 Practica este criterio <span>· ${CP[c].length} ejercicios</span></button><span class="cp-estado" data-crit="${c}"></span>`;
+    bar.querySelector('button').onclick=()=>cpOpen(c);
+    ej.appendChild(bar);
+  });
+  cpEstados();
+  document.addEventListener('keydown',e=>{
+    const ov=document.getElementById('cp-overlay');
+    if(e.key==='Escape'&&ov&&ov.classList.contains('open'))cpClose();
+  });
+})();
+
+</script>
+<!-- CP-FIN -->
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>

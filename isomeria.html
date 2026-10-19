@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Isomería</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
+  --tx:#0d2d42;--dim:#2a3f52;--dimmer:#3a5568;
+  /* Colores del método MDEC (iguales en todo el sitio) */
+  --c1:#0891b2;  /* ① sustituyentes - turquesa */
+  --c2:#166534;  /* ② cadena principal - verde */
+  --c3:#b45309;  /* ③ insaturaciones - dorado */
+  --c4:#CC79A7;  /* ④ grupo funcional - rosado */
+  --c1b:#cffafe;--c2b:#dcfce7;--c3b:#fef3c7;--c4b:#fce8f4;
+  --c1t:#0e7490;--c2t:#14532d;--c3t:#92400e;--c4t:#9a4a78;
+  --brand:var(--cn-brand,#1a6ea8);--brand-d:var(--cn-brand-d,#0d4a73);--brand-l:var(--cn-brand-l,#e8f4fb);
+  --ok:#15803d;--okb:#f0fdf4;--err:#dc2626;--errb:#fee2e2;--errt:#b91c1c;
+  --r:14px;--rs:9px;--sh:0 2px 14px rgba(26,110,168,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:focus-visible{outline:3px solid #1a6ea8;outline-offset:2px;border-radius:4px}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-height:100%;position:relative}
+.app{max-width:1100px;margin:0 auto;padding:0 18px 80px}
+
+/* ── NAV BAR (igual a las demás páginas) ── */
+.site-nav{display:flex;align-items:center;justify-content:space-between;background:#0d4a73;padding:0 20px;height:48px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.site-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:8px;transition:background .15s,color .15s;display:flex;align-items:center;gap:5px}
+.site-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.site-nav a.active{background:rgba(255,255,255,.2);color:#fff}
+.site-nav .nav-links{display:flex;gap:4px;align-items:center}
+.site-nav .nav-brand{color:#fff;font-weight:800;font-size:.88rem;font-style:italic;letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+@media(max-width:480px){
+  .site-nav a span.full{display:none}
+  .site-nav a{padding:11px 9px;font-size:.72rem;min-height:44px}
+  .site-nav .nav-brand{font-size:.8rem}
+  .site-nav .nav-links{flex-wrap:wrap;gap:2px}
+  .site-nav{height:auto;min-height:44px;flex-wrap:wrap;padding:6px 12px}
+}
+
+/* ── ÍNDICE ── */
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.toc a{display:inline-flex;align-items:center;min-height:44px;padding:7px 16px;border-radius:100px;border:1.5px solid var(--brd);background:var(--surf);color:var(--dim);font-size:.8rem;font-weight:700;text-decoration:none;transition:all .15s}
+.toc a:hover{border-color:var(--brand);color:var(--brand-d);background:var(--brand-l)}
+
+/* ── TARJETAS DE SECCIÓN ── */
+.sec{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:22px;box-shadow:var(--sh);margin-bottom:16px;scroll-margin-top:76px}
+.sec-kicker{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--brand);margin-bottom:4px}
+.sec h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;margin-bottom:8px;line-height:1.2}
+.sec h3{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:800;margin:18px 0 6px;color:var(--tx)}
+.sec p,.sec li{color:var(--dim);font-size:.9rem;line-height:1.7}
+.sec p{margin-bottom:10px}
+.sec ul,.sec ol{padding-left:20px;margin-bottom:10px}
+.sec b,.sec strong{color:var(--tx)}
+.key{background:var(--brand-l);border:1px solid rgba(26,110,168,.25);border-left:4px solid var(--brand);border-radius:var(--rs);padding:11px 14px;font-size:.88rem;line-height:1.65;color:var(--tx);margin:12px 0}
+.warn{background:#fffbea;border:1px solid rgba(234,179,8,.35);border-left:4px solid #f59e0b;border-radius:var(--rs);padding:11px 14px;font-size:.86rem;line-height:1.65;color:#5c3b06;margin:12px 0}
+.life{background:linear-gradient(135deg,#f0fdf4,#ecfeff);border:1px solid #bbf7d0;border-radius:var(--rs);padding:14px 16px;margin:16px 0 4px}
+.life-h{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--c2t);margin-bottom:6px}
+.life p{font-size:.88rem;margin-bottom:8px}
+.life p:last-child{margin-bottom:0}
+
+/* Nombre con los 4 colores */
+.nm{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.92rem;white-space:normal;overflow-wrap:break-word}
+.nm span{white-space:nowrap}
+.nm .r{color:var(--c1t)}.nm .c{color:var(--c2t)}.nm .i{color:var(--c3t)}.nm .g{color:var(--c4t)}
+.nm.pill span{padding:1px 1px}
+.nm.pill span:first-child{border-radius:4px 0 0 4px;padding-left:4px}.nm.pill span:last-child{border-radius:0 4px 4px 0;padding-right:4px}
+.nm.pill .r{background:var(--c1b)}.nm.pill .c{background:var(--c2b)}.nm.pill .i{background:var(--c3b)}.nm.pill .g{background:var(--c4b)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.86em}
+
+/* ── ÁRBOL DE TIPOS ── */
+.tree{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 4px}
+.tree-root{grid-column:1/-1;text-align:center;font-family:'Fraunces',serif;font-weight:900;font-size:1.05rem;background:var(--brand-d);color:#fff;border-radius:var(--rs);padding:10px}
+.tree-col{border:1.5px solid var(--brd);border-radius:var(--rs);padding:12px;background:var(--surf2)}
+.tree-col h4{font-size:.92rem;font-weight:800;margin-bottom:4px;color:var(--brand-d)}
+.tree-col p{font-size:.8rem;margin-bottom:8px;line-height:1.5}
+.tree-leaf{display:block;background:#fff;border:1px solid var(--brd);border-radius:8px;padding:7px 10px;margin-top:6px;font-size:.8rem;line-height:1.45;color:var(--dim);text-decoration:none}
+.tree-leaf b{color:var(--tx)}
+a.tree-leaf:hover{border-color:var(--brand)}
+
+/* ── FIGURAS ── */
+.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:12px 0}
+.figs.two{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.figs.one{grid-template-columns:minmax(0,620px)}
+@media(max-width:600px){.figs.one{grid-template-columns:1fr}}
+.fig.fa svg{max-height:230px;width:auto}
+.fig{background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:12px 12px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig-cap{text-align:center;line-height:1.35}
+.fig-sub{font-size:.74rem;color:var(--dimmer);text-align:center;line-height:1.45}
+.fig.yes{border-color:#86efac;background:#fbfffc}
+.fig.no{border-color:#fecaca;background:#fffbfb}
+.tag{display:inline-block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-radius:100px;padding:2px 9px}
+.tag.yes{background:#dcfce7;color:#14532d}.tag.no{background:#fee2e2;color:#991b1b}
+.tag.info{background:var(--brand-l);color:var(--brand-d)}
+
+/* Tabla */
+.tbl-wrap{overflow-x:auto;margin:10px 0;border:1px solid var(--brd);border-radius:var(--rs)}
+table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--brd);text-align:left;vertical-align:top;line-height:1.45}
+.tbl th{background:var(--surf2);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dimmer)}
+.tbl tr:last-child td{border-bottom:none}
+
+/* ── PRÁCTICA ── */
+.prac{margin-top:20px;border-top:2px dashed var(--brd);padding-top:16px}
+.prac-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.prac-title{font-family:'Fraunces',serif;font-weight:900;font-size:1.08rem}
+.prac-score{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--brand-d);background:var(--brand-l);border:1px solid rgba(26,110,168,.25);padding:5px 12px;border-radius:100px}
+.pq{border:1.5px solid var(--brd);border-radius:var(--rs);padding:14px;margin-bottom:12px;background:#fcfeff}
+.pq.done-ok{border-color:#86efac}
+.pq-n{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmer);margin-bottom:4px}
+.pq-q{font-size:.92rem;font-weight:600;color:var(--tx);line-height:1.55;margin-bottom:10px}
+.pq-fig{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:4px 0 12px}
+.pq-fig .fig{flex:1 1 200px;max-width:340px}
+.pq-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.opt{min-height:44px;text-align:left;padding:10px 14px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fff;color:var(--tx);font-size:.86rem;font-weight:600;cursor:pointer;line-height:1.4;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--brand);background:var(--brand-l)}
+.opt.no{border-color:#fca5a5;background:var(--errb);color:#7f1d1d;cursor:not-allowed}
+.opt.no::before{content:'✗ ';font-weight:800}
+.opt.si{border-color:#22c55e;background:#dcfce7;color:#14532d}
+.opt.si::before{content:'✓ ';font-weight:800}
+.opt:disabled:not(.no):not(.si){opacity:.55;cursor:default}
+.pq-fb{display:none;margin-top:10px;border-radius:var(--rs);padding:10px 14px;font-size:.85rem;line-height:1.6}
+.pq-fb.show{display:block;animation:pop .25s ease}
+.pq-fb.ok{background:var(--okb);border:1.5px solid rgba(22,163,74,.3);color:var(--dim)}
+.pq-fb.fail{background:var(--errb);border:1.5px solid rgba(220,38,38,.2);color:var(--dim)}
+.pq-fb .h{font-weight:800;display:block;margin-bottom:2px}
+.pq-fb.ok .h{color:var(--ok)}.pq-fb.fail .h{color:var(--errt)}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;min-height:44px;background:transparent;border:1.5px solid var(--brd);border-radius:var(--rs);color:var(--dim);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-sm:hover{border-color:var(--brand);color:var(--brand-d)}
+.pq-actions{margin-top:8px;display:none}
+.pq-actions.show{display:block}
+
+.links-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+
+@media(max-width:600px){
+  .sec{padding:16px 14px}
+  .sec h2{font-size:1.18rem}
+  .tree{grid-template-columns:1fr}
+  .figs{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+  .figs.two{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .pq{padding:12px 10px}
+  .pq-opts{grid-template-columns:1fr}
+  .tbl th,.tbl td{padding:7px 7px;font-size:.78rem}
+}
+
+/* ── IMPRESIÓN ── */
+@media print{
+  body{background:#fff!important}
+  .app{max-width:none;padding:0}
+  .toc,.pq-fb,.pq-actions,.prac-score,.btn-sm{display:none!important}
+  .sec{box-shadow:none;border:1px solid #bbb;break-inside:auto;padding:12px;margin-bottom:10px}
+  .fig,.pq,.life,.key,.warn,.tree,.tbl-wrap{break-inside:avoid}
+  .opt{border:1px solid #888!important;background:#fff!important;color:#000!important}
+  .opt::before{content:'○ '!important}
+  .sec h2,.sec h3{break-after:avoid}
+  .fig svg{max-height:130px;width:auto}
+  .fig.fa svg{max-height:150px}
+  .figs,.figs.two{grid-template-columns:repeat(3,1fr)}
+  .figs.one{grid-template-columns:1fr}
+  .pq-opts{grid-template-columns:repeat(2,1fr)}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+<link rel="stylesheet" href="chromanom.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link active">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Módulo · Isomería</div>
+  <h1>Isomería: misma fórmula, distinta molécula</h1>
+  <p>Dos compuestos pueden tener exactamente los mismos átomos y aun así ser sustancias diferentes, con otro punto de ebullición, otro olor o hasta otro efecto en el cuerpo. Aquí aprendes a reconocer cada tipo de isomería y a nombrar los isómeros con IUPAC 2013.</p>
+  <div class="cn-legend" aria-label="Código de colores del método"><span class="cn-chip r">① Sustituyentes</span><span class="cn-chip c">② Cadena principal</span><span class="cn-chip i">③ Insaturaciones</span><span class="cn-chip g">④ Grupo funcional</span></div>
+</div>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#intro">¿Qué es un isómero?</a>
+  <a href="#cadena">De cadena</a>
+  <a href="#posfun">De posición y de función</a>
+  <a href="#geometrica">Cis / trans</a>
+  <a href="#optica">Carbono quiral</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+
+<!-- ═══════════════ 0. INTRODUCCIÓN ═══════════════ -->
+<section class="sec" id="intro">
+  <div class="sec-kicker">Punto de partida</div>
+  <h2>¿Qué es un isómero?</h2>
+  <p><b>Isómeros</b> son compuestos que tienen la <b>misma fórmula molecular</b> (los mismos átomos, en la misma cantidad) pero los átomos están <b>organizados de otra manera</b>. Por eso son sustancias distintas y tienen nombres IUPAC distintos.</p>
+  <div class="key">🔑 <b>Prueba rápida:</b> para saber si dos compuestos son isómeros, cuenta los átomos de cada uno. Si la fórmula molecular es igual (por ejemplo, los dos son C₄H₁₀) y los nombres IUPAC son diferentes, son isómeros. Si la fórmula cambia aunque sea en un H, <b>no</b> son isómeros.</div>
+  <div class="tree" role="group" aria-label="Tipos de isomería">
+    <div class="tree-root">Isomería</div>
+    <div class="tree-col">
+      <h4>Estructural (constitucional)</h4>
+      <p>Los átomos están <b>unidos en otro orden</b>. Cambia el "esqueleto" o el lugar del grupo.</p>
+      <a class="tree-leaf" href="#cadena"><b>De cadena:</b> distinta cadena principal o ramificación.</a>
+      <a class="tree-leaf" href="#posfun"><b>De posición:</b> el mismo grupo en otro carbono.</a>
+      <a class="tree-leaf" href="#posfun"><b>De función:</b> un grupo funcional distinto.</a>
+    </div>
+    <div class="tree-col">
+      <h4>Estereoisomería</h4>
+      <p>Los átomos están unidos <b>en el mismo orden</b>, pero <b>ubicados distinto en el espacio</b> (3D).</p>
+      <a class="tree-leaf" href="#geometrica"><b>Geométrica (cis/trans, E/Z):</b> por un doble enlace que no gira.</a>
+      <a class="tree-leaf" href="#optica"><b>Óptica (enantiómeros):</b> por un carbono quiral; son imágenes en el espejo.</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 1. ISOMERÍA DE CADENA ═══════════════ -->
+<section class="sec" id="cadena">
+  <div class="sec-kicker">Isomería estructural · 1</div>
+  <h2>Isomería de cadena</h2>
+  <p>Los isómeros de cadena tienen el mismo grupo funcional (o ninguno, como los alcanos), pero su <b style="color:var(--c2t)">cadena principal ②</b> es distinta: una es lineal y otra tiene <b style="color:var(--c1t)">ramificaciones ①</b>.</p>
+
+  <h3>El ejemplo más sencillo: C₄H₁₀</h3>
+  <div class="figs two" id="fig-c4"></div>
+  <p>El butano y el 2-metilpropano (nombre común: <i>isobutano</i>) son los dos gases del encendedor y de la pipeta de gas (GLP). Tienen los mismos 4 C y 10 H, pero el butano hierve a −0,5 °C y el 2-metilpropano a −11,7 °C: <b>más ramificación → molécula más compacta → menor punto de ebullición</b>.</p>
+
+  <h3>Los 5 isómeros de C₆H₁₄</h3>
+  <p>Todos tienen 6 carbonos y 14 hidrógenos. Fíjate cómo la cadena principal ② se acorta a medida que aparecen ramas ①:</p>
+  <div class="figs" id="fig-c6"></div>
+
+  <div class="warn">⚠️ <b>Trampas frecuentes al buscar isómeros:</b>
+    <ul style="margin:6px 0 0">
+      <li><b>Doblar la cadena no crea un isómero.</b> El hexano dibujado en zigzag, en "U" o en línea recta es el mismo compuesto: lo que importa es el orden en que se unen los átomos.</li>
+      <li><b>Un metilo en el extremo no es una rama</b>: alarga la cadena. "1-metilpentano" en realidad es hexano.</li>
+      <li><b>Un etilo en C2 tampoco es rama</b>: "2-etilbutano" es en realidad <span class="nm"><span class="r">3-metil</span><span class="c">pent</span><span class="i">an</span><span class="g">o</span></span>, porque la cadena más larga tiene 5 C.</li>
+      <li><b>Numerar al revés no crea otro isómero</b>: "3-metilbutano" y "2-metilbutano" son la misma molécula; el nombre correcto es el de localizador más bajo (2-metilbutano).</li>
+    </ul>
+  </div>
+  <div class="key">🧭 <b>Método para encontrarlos todos:</b> (1) dibuja la cadena lineal; (2) quita un carbono y ponlo como metilo en cada posición interna distinta (sin repetir por simetría); (3) quita dos carbonos y ponlos como dos metilos o un etilo; (4) en cada dibujo, busca de nuevo la cadena más larga y nómbralo: si dos dibujos dan el mismo nombre, son la misma molécula.</div>
+
+  <div class="prac" id="prac-cadena"></div>
+</section>
+
+<!-- ═══════════════ 2. POSICIÓN Y FUNCIÓN ═══════════════ -->
+<section class="sec" id="posfun">
+  <div class="sec-kicker">Isomería estructural · 2 y 3</div>
+  <h2>Isomería de posición y de función</h2>
+
+  <h3>De posición: el mismo grupo, en otro carbono</h3>
+  <p>La cadena ② y el grupo funcional ④ (o la insaturación ③) son los mismos; solo cambia el <b>localizador</b>, es decir, el carbono donde está el grupo.</p>
+  <div class="figs two" id="fig-pos"></div>
+  <p>El propan-2-ol es el <i>alcohol isopropílico</i> de los botiquines (antiséptico). Hierve a 82 °C, mientras que el propan-1-ol hierve a 97 °C. Con el doble enlace ocurre lo mismo: but-1-eno y but-2-eno son isómeros de posición (C₄H₈).</p>
+  <div class="figs two" id="fig-pos2"></div>
+
+  <h3>De función: otro grupo funcional</h3>
+  <p>La fórmula molecular es la misma, pero los átomos forman un <b>grupo funcional ④ distinto</b>, y por eso el compuesto pertenece a otra familia (con otro sufijo o con otra forma de nombrarse).</p>
+  <div class="figs two" id="fig-fun1"></div>
+  <p>El etanol (el alcohol de las bebidas y del gel antibacterial) es líquido y hierve a 78 °C; el metoximetano (éter dimetílico, usado como gas propelente en aerosoles) hierve a −24 °C. ¡Mismos átomos, C₂H₆O, y uno es líquido y el otro gas!</p>
+  <div class="figs two" id="fig-fun2"></div>
+  <p>La propanona es la <i>acetona</i> del quitaesmalte. Las parejas más comunes de isómeros de función son: <b>alcohol ↔ éter</b>, <b>aldehído ↔ cetona</b> y <b>ácido carboxílico ↔ éster</b> (por ejemplo, ácido propanoico y etanoato de metilo, ambos C₃H₆O₂).</p>
+
+  <div class="prac" id="prac-estructural"></div>
+</section>
+
+<!-- ═══════════════ 3. GEOMÉTRICA ═══════════════ -->
+<section class="sec" id="geometrica">
+  <div class="sec-kicker">Estereoisomería · 1</div>
+  <h2>Isomería geométrica (cis / trans)</h2>
+  <p>Un enlace sencillo C−C gira libremente, pero un <b style="color:var(--c3t)">doble enlace C=C ③ no puede girar</b>. Los dos carbonos del doble enlace y los cuatro átomos unidos a ellos quedan en un mismo <b>plano</b>, con ángulos de unos 120°. Por eso los grupos pueden quedar <b>del mismo lado</b> (cis) o <b>en lados opuestos</b> (trans) del doble enlace, y son dos compuestos distintos.</p>
+  <div class="figs two" id="fig-cistrans"></div>
+  <p>El <i>cis</i>-but-2-eno hierve a 3,7 °C y el <i>trans</i>-but-2-eno a 0,9 °C: son sustancias diferentes con la misma fórmula (C₄H₈) y la misma conectividad.</p>
+
+  <h3>¿Cuándo existe isomería cis/trans?</h3>
+  <div class="key">🔑 <b>Regla:</b> hay isomería cis/trans solo si <b>cada uno de los dos carbonos del doble enlace tiene dos sustituyentes distintos entre sí</b>. Si alguno de los dos carbonos tiene dos grupos iguales (por ejemplo, dos H o dos CH₃), no hay isomería geométrica.</div>
+  <div class="figs two" id="fig-nocistrans"></div>
+
+  <h3>La notación general de IUPAC: E y Z</h3>
+  <p><i>Cis</i> y <i>trans</i> funcionan bien cuando cada carbono del doble enlace tiene un H. Para casos más complejos (por ejemplo, tres o cuatro grupos distintos), IUPAC 2013 usa la notación <b>E/Z</b>: en cada carbono del doble enlace se elige el grupo de <b>mayor prioridad</b> (el átomo directamente unido con mayor número atómico; Br &gt; Cl &gt; O &gt; C &gt; H).</p>
+  <ul>
+    <li><b>Z</b> (del alemán <i>zusammen</i>, "juntos"): los dos grupos de mayor prioridad están del mismo lado.</li>
+    <li><b>E</b> (<i>entgegen</i>, "opuestos"): están en lados opuestos.</li>
+  </ul>
+  <p>Para el but-2-eno coinciden: <span class="nm"><span>(Z)-</span><span class="c">but</span><span class="i">-2-en</span><span class="g">o</span></span> = cis y <span class="nm"><span>(E)-</span><span class="c">but</span><span class="i">-2-en</span><span class="g">o</span></span> = trans. El descriptor va entre paréntesis al inicio del nombre.</p>
+
+  <div class="life">
+    <div class="life-h">🍞 En la vida diaria: grasas trans y visión</div>
+    <div class="figs one" id="fig-grasas" style="margin-top:4px"></div>
+    <p>Los aceites vegetales tienen ácidos grasos con dobles enlaces <b>cis</b>, como el <b>ácido oleico</b> del aceite de oliva: el doble enlace cis hace un "codo" en la cadena, las moléculas no se acomodan bien entre sí y el aceite es líquido. Cuando la industria <b>hidrogena parcialmente</b> los aceites para fabricar margarinas y mantecas, algunos dobles enlaces pasan a <b>trans</b> (como el <b>ácido elaídico</b>): la cadena queda casi recta, las moléculas se empacan mejor y la grasa es sólida a temperatura ambiente.</p>
+    <p>Las <b>grasas trans</b> aumentan el colesterol "malo" (LDL) y el riesgo de enfermedades del corazón; por eso la OMS recomienda eliminarlas de los alimentos y en Colombia su contenido está regulado. Revisa la etiqueta nutricional: "grasas trans: 0 g".</p>
+    <p>👁️ Tus ojos usan isomería cis/trans: en la retina, la luz convierte el <b>11-<i>cis</i>-retinal</b> en <b><i>trans</i>-retinal</b>; ese cambio de forma es la señal que el cerebro interpreta como "veo luz".</p>
+  </div>
+
+  <div class="prac" id="prac-geometrica"></div>
+</section>
+
+<!-- ═══════════════ 4. ÓPTICA ═══════════════ -->
+<section class="sec" id="optica">
+  <div class="sec-kicker">Estereoisomería · 2</div>
+  <h2>Carbono quiral y enantiómeros</h2>
+  <p>Mira tus manos: son iguales en todo, pero una es la <b>imagen en el espejo</b> de la otra y no puedes superponerlas (un guante derecho no le sirve a la mano izquierda). Algunas moléculas son así: se llaman <b>quirales</b> (del griego <i>cheir</i>, mano).</p>
+  <div class="key">🔑 <b>Carbono quiral (o asimétrico):</b> un carbono unido a <b>cuatro sustituyentes diferentes</b>. Se marca con un asterisco: C*. Una molécula con un solo carbono quiral existe como <b>dos enantiómeros</b>: dos moléculas que son imagen especular una de la otra y no se pueden superponer.</div>
+
+  <h3>Ejemplo 1: butan-2-ol</h3>
+  <p>El C2 del <span class="nm"><span class="c">butan</span><span class="g">-2-ol</span></span> está unido a <b>H</b>, <b style="color:var(--c4t)">OH</b>, <b style="color:var(--c2t)">CH₃</b> y <b style="color:var(--c2t)">CH₂CH₃</b>: cuatro grupos distintos, así que es quiral. En el dibujo, la <b>cuña llena</b> (▶) indica un enlace que sale hacia ti y la <b>cuña rayada</b> uno que va hacia atrás del papel.</p>
+  <div class="figs one" id="fig-but2ol"></div>
+
+  <h3>Ejemplo 2: ácido láctico y alanina</h3>
+  <p>El <b>ácido láctico</b> (el que se forma en los músculos durante el ejercicio intenso y en el yogur) se llama en IUPAC <span class="nm"><span class="g">ácido </span><span class="r">2-hidroxi</span><span class="c">prop</span><span class="i">an</span><span class="g">oico</span></span>. Su C2 tiene H, OH, CH₃ y COOH.</p>
+  <div class="figs one" id="fig-lactico"></div>
+  <p>La <b>alanina</b>, un aminoácido de las proteínas, es el <span class="nm"><span class="g">ácido </span><span class="r">2-amino</span><span class="c">prop</span><span class="i">an</span><span class="g">oico</span></span>: su C2 tiene H, NH₂, CH₃ y COOH. Casi todos los aminoácidos son quirales; la excepción es la <b>glicina</b> (ácido aminoetanoico), cuyo C2 tiene dos H.</p>
+  <div class="figs one" id="fig-alanina"></div>
+
+  <h3>¿Cuándo NO hay carbono quiral?</h3>
+  <p>Basta con que dos de los cuatro grupos sean iguales. Revisa siempre los grupos completos, no solo el primer átomo:</p>
+  <div class="figs two" id="fig-noquiral"></div>
+
+  <h3>¿En qué se diferencian dos enantiómeros?</h3>
+  <p>Tienen el mismo punto de ebullición, la misma densidad y la misma solubilidad. Se diferencian en dos cosas: <b>desvían la luz polarizada en sentidos opuestos</b> (por eso a esta isomería se le llama <i>óptica</i>) y <b>reaccionan distinto con otras moléculas quirales</b>, como los receptores del olfato o las enzimas del cuerpo. Una mezcla 50 % / 50 % de los dos se llama <b>mezcla racémica</b>.</p>
+  <p><b>Para saber más — R y S:</b> para nombrar cada enantiómero por separado, IUPAC usa los descriptores <b>(R)</b> y <b>(S)</b>, que se asignan ordenando los cuatro grupos por prioridad (reglas CIP, que se estudian más adelante). Por ejemplo, el ácido láctico de los músculos es el ácido (S)-2-hidroxipropanoico, y la alanina de nuestras proteínas es la (S)-alanina (también llamada L-alanina).</p>
+
+  <div class="life">
+    <div class="life-h">👃 En la vida diaria: olores, medicamentos y una lección histórica</div>
+    <p><b>Carvona:</b> un enantiómero, la (R)-carvona, huele a <b>hierbabuena</b>; su imagen especular, la (S)-carvona, huele a <b>alcaravea y eneldo</b>. Los receptores de la nariz son quirales y "sienten" la diferencia, como un guante distingue las manos.</p>
+    <p><b>Limoneno:</b> el (R)-limoneno da el olor de la cáscara de <b>naranja</b>; el (S)-limoneno tiene un olor más parecido al del pino o la trementina.</p>
+    <p><b>Talidomida:</b> entre 1957 y 1961 se recetó a mujeres embarazadas contra las náuseas. Uno de sus enantiómeros calmaba las náuseas, pero el otro causaba malformaciones graves, y miles de bebés nacieron afectados; además, el cuerpo convierte un enantiómero en el otro. Esta tragedia cambió las reglas: hoy cada enantiómero de un medicamento nuevo debe estudiarse por separado antes de aprobarlo. Por eso entender la quiralidad no es un detalle: es parte de la seguridad de los medicamentos.</p>
+  </div>
+
+  <div class="prac" id="prac-optica"></div>
+</section>
+
+<!-- ═══════════════ 5. RESUMEN ═══════════════ -->
+<section class="sec" id="resumen">
+  <div class="sec-kicker">Para repasar</div>
+  <h2>Resumen</h2>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>Tipo</th><th>¿Qué cambia?</th><th>Ejemplo (misma fórmula)</th></tr></thead>
+    <tbody>
+      <tr><td><b>De cadena</b></td><td>La cadena principal ② y sus ramas ①</td><td>butano / 2-metilpropano (C₄H₁₀)</td></tr>
+      <tr><td><b>De posición</b></td><td>El localizador del grupo ④ o de la insaturación ③</td><td>propan-1-ol / propan-2-ol (C₃H₈O)</td></tr>
+      <tr><td><b>De función</b></td><td>El grupo funcional ④ (otra familia)</td><td>etanol / metoximetano (C₂H₆O); propanal / propanona (C₃H₆O)</td></tr>
+      <tr><td><b>Geométrica</b></td><td>La posición en el espacio respecto a un C=C que no gira</td><td><i>cis</i>-but-2-eno / <i>trans</i>-but-2-eno; (Z) / (E)</td></tr>
+      <tr><td><b>Óptica</b></td><td>La imagen especular alrededor de un C con 4 grupos distintos</td><td>los dos enantiómeros del butan-2-ol; (R) / (S)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>¿Quieres repasar cómo se nombran los grupos funcionales que aparecen aquí (alcoholes, éteres, aldehídos, cetonas, ácidos, aminas)?</p>
+  <div class="links-row">
+    <a class="cn-btn cn-btn--secondary" href="grupos.html">🔬 Ir a Grupos funcionales</a>
+    <a class="cn-btn cn-btn--secondary" href="teoria.html">⚗️ Repasar los principios</a>
+  </div>
+</section>
+
+</div><!-- /app -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// MOTOR DE DIBUJO SVG (fórmulas esqueléticas y semidesarrolladas)
+// Colores del método MDEC: c = cadena ② verde, r = sustituyentes ① turquesa,
+// i = insaturación ③ dorado, g = grupo funcional ④ rosado, n = neutro (H).
+// ═══════════════════════════════════════════════════════════
+const L=40, DX=34.64, DY=20;
+const COL={c:'#166534',r:'#0891b2',i:'#b45309',g:'#CC79A7',n:'#64748b'};
+const TCOL={c:'#14532d',r:'#0e7490',i:'#92400e',g:'#9a4a78',n:'#3d5166'};
+const f1=n=>Math.round(n*10)/10;
+function lw(t){return t.length*7.8+5;}
+
+class Mol{
+  constructor(){this.a=[];this.b=[];this.n=[];this.st=[];this.x='';this.bx=[];}
+  at(x,y,l,r){this.a.push({x,y,l:l||'',r:r||'c'});return this.a.length-1;}
+  bd(i,j,o,r,s){this.b.push({i,j,o:o||1,r:r||'c',s:s||''});return this;}
+  set(i,j,o,r){const b=this.b.find(b=>(b.i===i&&b.j===j)||(b.i===j&&b.j===i));if(b){b.o=o;if(r)b.r=r;}return this;}
+  num(i,t,dx,dy){this.n.push({i,t,dx,dy});return this;}
+  star(i){this.st.push(i);return this;}
+  pt(x,y){this.bx.push([x,y]);}
+  svg(aria,scale){
+    scale=scale||1.45;
+    let s='';
+    for(const i of this.st){const A=this.a[i];
+      s+=`<circle cx="${f1(A.x)}" cy="${f1(A.y)}" r="13" fill="#e8f4fb" stroke="#1a6ea8" stroke-width="1.3" stroke-dasharray="3 2"/>`;
+      s+=`<text x="${f1(A.x)}" y="${f1(A.y-15)}" text-anchor="middle" font-family="Outfit,sans-serif" font-size="15" font-weight="800" fill="#0d4a73">*</text>`;
+      this.pt(A.x,A.y-24);
+    }
+    for(const b of this.b){
+      const A=this.a[b.i],B=this.a[b.j],col=COL[b.r];
+      const dx=B.x-A.x,dy=B.y-A.y,len=Math.hypot(dx,dy),px=-dy/len,py=dx/len;
+      const line=(x1,y1,x2,y2,w)=>`<line x1="${f1(x1)}" y1="${f1(y1)}" x2="${f1(x2)}" y2="${f1(y2)}" stroke="${col}" stroke-width="${w||2.4}" stroke-linecap="round"/>`;
+      if(b.s==='w'){
+        s+=`<polygon points="${f1(A.x)},${f1(A.y)} ${f1(B.x+px*4.5)},${f1(B.y+py*4.5)} ${f1(B.x-px*4.5)},${f1(B.y-py*4.5)}" fill="${col}"/>`;
+      }else if(b.s==='h'){
+        for(let k=1;k<=7;k++){const t=k/7.4,cx=A.x+dx*t,cy=A.y+dy*t,h=.6+4*t;s+=line(cx+px*h,cy+py*h,cx-px*h,cy-py*h,1.5);}
+      }else if(b.o===2){
+        s+=line(A.x+px*3.2,A.y+py*3.2,B.x+px*3.2,B.y+py*3.2,2.2)+line(A.x-px*3.2,A.y-py*3.2,B.x-px*3.2,B.y-py*3.2,2.2);
+      }else if(b.o===3){
+        s+=line(A.x,A.y,B.x,B.y,2)+line(A.x+px*4.2,A.y+py*4.2,B.x+px*4.2,B.y+py*4.2,1.7)+line(A.x-px*4.2,A.y-py*4.2,B.x-px*4.2,B.y-py*4.2,1.7);
+      }else s+=line(A.x,A.y,B.x,B.y);
+    }
+    for(const A of this.a){
+      if(!A.l){this.pt(A.x-4,A.y-4);this.pt(A.x+4,A.y+4);continue;}
+      const w=lw(A.l);
+      s+=`<rect x="${f1(A.x-w/2)}" y="${f1(A.y-9.5)}" width="${f1(w)}" height="19" rx="4" fill="#fff"/>`;
+      s+=`<text x="${f1(A.x)}" y="${f1(A.y)}" text-anchor="middle" dominant-baseline="central" font-family="'JetBrains Mono',monospace" font-size="13.5" font-weight="700" fill="${TCOL[A.r]}">${A.l}</text>`;
+      this.pt(A.x-w/2,A.y-10);this.pt(A.x+w/2,A.y+10);
+    }
+    for(const n of this.n){
+      const A=this.a[n.i],x=A.x+n.dx,y=A.y+n.dy;
+      s+=`<text x="${f1(x)}" y="${f1(y)}" text-anchor="middle" dominant-baseline="central" font-family="Outfit,sans-serif" font-size="10.5" font-weight="700" fill="#5b6b7b">${n.t}</text>`;
+      this.pt(x-6,y-7);this.pt(x+6,y+7);
+    }
+    s+=this.x;
+    const P=10,xs=this.bx.map(p=>p[0]),ys=this.bx.map(p=>p[1]);
+    const x0=Math.min(...xs)-P,y0=Math.min(...ys)-P,W=Math.max(...xs)-x0+P,H=Math.max(...ys)-y0+P;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${f1(x0)} ${f1(y0)} ${f1(W)} ${f1(H)}" width="${f1(W*scale)}" role="img" aria-label="${aria}">${s}</svg>`;
+  }
+}
+// Cadena en zigzag (primer enlace hacia arriba).
+function zz(n,x0,y0){x0=x0||0;y0=y0||0;const p=[{x:x0,y:y0}];for(let i=1;i<n;i++){const q=p[i-1];p.push({x:q.x+DX,y:q.y+(i%2?-DY:DY)});}return p;}
+function chainOn(m,p,r){const id=p.map(q=>m.at(q.x,q.y,'',r||'c'));for(let i=0;i<id.length-1;i++)m.bd(id[i],id[i+1],1,r||'c');return id;}
+// Números de los carbonos: picos → arriba, valles → abajo (salvo excepciones).
+function nums(m,id,p,ov,labels){ov=ov||{};id.forEach((a,k)=>{if(ov[k]===false)return;const peak=p[k].y<p[0].y||(k%2===1);const d=ov[k]||[0,peak?-13:14];m.num(a,labels?labels[k]:String(k+1),d[0],d[1]);});}
+// Rama desde el átomo idx: dirección 'u' (arriba), 'd' (abajo), 'ul','ur','dl','dr'.
+const DIRS={u:[0,-L],d:[0,L],ul:[-20,-34.64],ur:[20,-34.64],dl:[-20,34.64],dr:[20,34.64],e:[DX,-DY],e2:[DX,DY]};
+function branch(m,from,dir,lab,r,o){const A=m.a[from],v=DIRS[dir];const k=m.at(A.x+v[0],A.y+v[1],lab||'',r);m.bd(from,k,o||1,r);return k;}
+// Nombre coloreado: 'r:2-metil|c:pent|i:an|g:o'
+function nm(spec,pill){return `<span class="nm${pill?' pill':''}">`+spec.split('|').map(p=>{const i=p.indexOf(':');return `<span class="${p.slice(0,i)}">${p.slice(i+1)}</span>`;}).join('')+'</span>';}
+function fig(svg,name,sub,cls,tag){return `<div class="fig${cls?' '+cls:''}">${svg}<div class="fig-cap">${name}</div>${tag||''}${sub?`<div class="fig-sub">${sub}</div>`:''}</div>`;}
+
+// ── Moléculas esqueléticas ──
+const F={
+  butano(){const m=new Mol(),p=zz(4),id=chainOn(m,p);nums(m,id,p);return m.svg('butano');},
+  metilpropano(){const m=new Mol(),p=zz(3),id=chainOn(m,p);branch(m,id[1],'u','', 'r');nums(m,id,p,{1:[-14,-8]});return m.svg('2-metilpropano');},
+  pentano(){const m=new Mol(),p=zz(5),id=chainOn(m,p);nums(m,id,p);return m.svg('pentano');},
+  pentanoU(){const m=new Mol();const p=[{x:0,y:0},{x:DX,y:-DY},{x:2*DX,y:0},{x:2*DX,y:L},{x:3*DX,y:L+DY}];const id=chainOn(m,p);m.num(id[0],'1',0,14).num(id[1],'2',0,-13).num(id[2],'3',12,-6).num(id[3],'4',-12,6).num(id[4],'5',0,14);return m.svg('pentano dibujado doblado');},
+  metilbutano(){const m=new Mol(),p=zz(4),id=chainOn(m,p);branch(m,id[1],'u','','r');nums(m,id,p,{1:[-14,-8]});return m.svg('2-metilbutano');},
+  dimetilpropano(){const m=new Mol(),p=zz(3),id=chainOn(m,p);branch(m,id[1],'ul','','r');branch(m,id[1],'ur','','r');nums(m,id,p,{1:[0,16]});return m.svg('2,2-dimetilpropano');},
+  hexano(){const m=new Mol(),p=zz(6),id=chainOn(m,p);nums(m,id,p);return m.svg('hexano');},
+  metilpentano2(){const m=new Mol(),p=zz(5),id=chainOn(m,p);branch(m,id[1],'u','','r');nums(m,id,p,{1:[-14,-8]});return m.svg('2-metilpentano');},
+  metilpentano3(){const m=new Mol(),p=zz(5),id=chainOn(m,p);branch(m,id[2],'d','','r');nums(m,id,p,{2:[-14,8]});return m.svg('3-metilpentano');},
+  dimetilbutano22(){const m=new Mol(),p=zz(4),id=chainOn(m,p);branch(m,id[1],'ul','','r');branch(m,id[1],'ur','','r');nums(m,id,p,{1:[0,16]});return m.svg('2,2-dimetilbutano');},
+  dimetilbutano23(){const m=new Mol(),p=zz(4),id=chainOn(m,p);branch(m,id[1],'u','','r');branch(m,id[2],'d','','r');nums(m,id,p,{1:[-14,-8],2:[14,8]});return m.svg('2,3-dimetilbutano');},
+  metilhexano3(){const m=new Mol(),p=zz(6),id=chainOn(m,p);branch(m,id[2],'d','','r');nums(m,id,p,{2:[-14,8]});return m.svg('3-metilhexano');},
+  metilhexano2(){const m=new Mol(),p=zz(6),id=chainOn(m,p);branch(m,id[1],'u','','r');nums(m,id,p,{1:[-14,-8]});return m.svg('2-metilhexano');},
+  propan1ol(){const m=new Mol(),p=zz(4),id=chainOn(m,p.slice(0,3));const o=m.at(p[3].x,p[3].y,'OH','g');m.bd(id[2],o,1,'g');nums(m,id,p.slice(0,3),{},['3','2','1']);return m.svg('propan-1-ol');},
+  propan2ol(){const m=new Mol(),p=zz(3),id=chainOn(m,p);branch(m,id[1],'u','OH','g');nums(m,id,p,{1:[0,16]});return m.svg('propan-2-ol');},
+  but1eno(){const m=new Mol(),p=zz(4),id=chainOn(m,p);m.set(id[0],id[1],2,'i');nums(m,id,p);return m.svg('but-1-eno');},
+  but2eno(){const m=new Mol(),p=zz(4),id=chainOn(m,p);m.set(id[1],id[2],2,'i');nums(m,id,p);return m.svg('but-2-eno');},
+  etanol(){const m=new Mol(),p=zz(3),id=chainOn(m,p.slice(0,2));const o=m.at(p[2].x,p[2].y,'OH','g');m.bd(id[1],o,1,'g');nums(m,id,p.slice(0,2),{},['2','1']);return m.svg('etanol');},
+  metoximetano(){const m=new Mol(),p=zz(3);const a=m.at(p[0].x,p[0].y,'','r'),o=m.at(p[1].x,p[1].y,'O','g'),b=m.at(p[2].x,p[2].y,'','c');m.bd(a,o,1,'r').bd(o,b,1,'g');return m.svg('metoximetano');},
+  propanal(){const m=new Mol(),p=zz(4),id=chainOn(m,p.slice(0,3));const o=m.at(p[3].x,p[3].y,'O','g');m.bd(id[2],o,2,'g');nums(m,id,p.slice(0,3),{},['3','2','1']);return m.svg('propanal');},
+  propanona(){const m=new Mol(),p=zz(3),id=chainOn(m,p);branch(m,id[1],'u','O','g',2);nums(m,id,p,{1:[0,16]});return m.svg('propanona');},
+  butan2olNum(){const m=new Mol(),p=zz(4),id=chainOn(m,p);branch(m,id[1],'u','OH','g');nums(m,id,p,{1:[0,16]});return m.svg('butan-2-ol con carbonos numerados');},
+  alaninaNum(){const m=new Mol(),p=zz(4),id=chainOn(m,p.slice(0,3));branch(m,id[1],'u','NH₂','r');m.set(id[1],id[2],1,'c');const od=m.at(p[2].x,p[2].y+L,'O','g');m.bd(id[2],od,2,'g');const oh=m.at(p[3].x,p[3].y,'OH','g');m.bd(id[2],oh,1,'g');m.num(id[0],'3',0,14).num(id[1],'2',-14,-8).num(id[2],'1',-13,8);return m.svg('alanina con carbonos numerados');},
+  propan2olQ(){const m=new Mol(),p=zz(3),id=chainOn(m,p);branch(m,id[1],'u','OH','g');nums(m,id,p,{1:[0,16]});return m.svg('propan-2-ol');},
+  pentan3ol(){const m=new Mol(),p=zz(5),id=chainOn(m,p);branch(m,id[2],'d','OH','g');nums(m,id,p,{2:[0,-13]});return m.svg('pentan-3-ol');},
+};
+
+// ── Doble enlace en el plano (cis/trans), semidesarrollada ──
+// o = {lt,lb,rt,rb: {t, tl?, r}, same:{l:true,r:true}}
+function planar(o,aria){
+  const m=new Mol();const a=m.at(0,0,'C','c'),b=m.at(46,0,'C','c');m.bd(a,b,2,'i');
+  const P={lt:[-1,-1],lb:[-1,1],rt:[1,-1],rb:[1,1]};const pos={};
+  for(const k of ['lt','lb','rt','rb']){const s=o[k],left=P[k][0]<0;const t=left&&s.tl?s.tl:s.t;const extra=Math.max(0,lw(t)/2-11);
+    const x=(left?0:46)+P[k][0]*(24+extra),y=P[k][1]*40;const idx=m.at(x,y,t,s.r||'c');m.bd(left?a:b,idx,1,s.r==='n'?'n':(s.r||'c'));pos[k]={x,y,w:lw(t)};}
+  const same=o.same||{};
+  for(const side of ['l','r']){if(!same[side])continue;const T=pos[side+'t'],B=pos[side+'b'];const w=Math.max(T.w,B.w)+10,cx=(T.x+B.x)/2;
+    m.x+=`<rect x="${f1(cx-w/2)}" y="${f1(T.y-15)}" width="${f1(w)}" height="${f1(B.y-T.y+30)}" rx="9" fill="none" stroke="#b42318" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+    const tx=side==='l'?cx-w/2-4:cx+w/2+4;
+    m.x+=`<text x="${f1(tx)}" y="2" text-anchor="${side==='l'?'end':'start'}" dominant-baseline="central" font-family="Outfit,sans-serif" font-size="11" font-weight="800" fill="#b42318">iguales</text>`;
+    m.pt(side==='l'?tx-44:tx+44,0);m.pt(cx-w/2,T.y-16);m.pt(cx+w/2,B.y+16);}
+  return m.svg(aria,1.35);
+}
+const H={t:'H',r:'n'},ME={t:'CH₃',tl:'H₃C',r:'c'};
+const P2={
+  cis:()=>planar({lt:ME,rt:ME,lb:H,rb:H},'cis-but-2-eno'),
+  trans:()=>planar({lt:ME,rb:ME,lb:H,rt:H},'trans-but-2-eno'),
+  but1eno:()=>planar({lt:H,lb:H,rt:H,rb:{t:'CH₂CH₃',r:'c'},same:{l:true}},'but-1-eno'),
+  metilprop:()=>planar({lt:H,lb:H,rt:{t:'CH₃',r:'c'},rb:{t:'CH₃',r:'r'},same:{l:true,r:true}},'2-metilprop-1-eno'),
+  dicloroTrans:()=>planar({lt:{t:'Cl',r:'r'},rb:{t:'Cl',r:'r'},lb:H,rt:H},'1,2-dicloroeteno, isómero del ejercicio'),
+  pent2enoCis:()=>planar({lt:ME,rt:{t:'CH₂CH₃',r:'c'},lb:H,rb:H},'cis-pent-2-eno'),
+};
+
+// ── Carbono quiral en 3D: cuñas, con su imagen en el espejo ──
+function drawQ(m,cx,S,sg){
+  const c=m.at(cx,0,'C','c');m.star(c);
+  const D={ul:[-.86,-.5],ur:[.86,-.5],w:[-.5,.87],h:[.5,.87]};
+  for(const k of ['ul','ur','w','h']){const s=S[k],d=[D[k][0]*sg,D[k][1]];const t=d[0]<0&&s.tl?s.tl:s.t;const hw=lw(t)/2;
+    const len=50+Math.max(0,hw-9)*Math.abs(d[0]);const i=m.at(cx+d[0]*len,d[1]*len,t,s.r);m.bd(c,i,1,s.r,k==='w'?'w':k==='h'?'h':'');}
+}
+function quiralPar(S,aria){
+  const m=new Mol();drawQ(m,0,S,1);drawQ(m,240,S,-1);
+  m.x+=`<line x1="120" y1="-62" x2="120" y2="66" stroke="#1a6ea8" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+  m.x+=`<text x="120" y="-70" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="800" fill="#0d4a73">espejo</text>`;
+  m.pt(120,-82);m.pt(120,70);
+  return m.svg(aria,1.3);
+}
+const Q={
+  but2ol:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'CH₂CH₃',tl:'CH₃CH₂',r:'c'},w:{t:'OH',tl:'HO',r:'g'},h:{t:'H',r:'n'}},'los dos enantiómeros del butan-2-ol, uno frente al otro como en un espejo'),
+  lactico:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'COOH',tl:'HOOC',r:'g'},w:{t:'OH',tl:'HO',r:'r'},h:{t:'H',r:'n'}},'los dos enantiómeros del ácido láctico'),
+  alanina:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'COOH',tl:'HOOC',r:'g'},w:{t:'NH₂',tl:'H₂N',r:'r'},h:{t:'H',r:'n'}},'los dos enantiómeros de la alanina'),
+};
+
+// ── Ácido graso cis / trans (18 C, doble enlace C9=C10) ──
+function acidoGraso(cis){
+  const m=new Mol();const p=[{x:0,y:0}];const h0=cis?0:-30;let h=h0,t=60;
+  for(let i=1;i<18;i++){const q=p[i-1];p.push({x:q.x+L*Math.cos(h*Math.PI/180),y:q.y+L*Math.sin(h*Math.PI/180)});
+    // giro en el átomo i: alterna; en un doble enlace cis (C9=C10) se repite el giro
+    if(!(cis&&i===9))t=-t;
+    if(i===1)t=60;
+    h+=t;}
+  const id=chainOn(m,p);m.set(id[8],id[9],2,'i');
+  const rad=d=>d*Math.PI/180;const od=m.at(L*Math.cos(rad(h0+120)),L*Math.sin(rad(h0+120)),'O','g');m.bd(id[0],od,2,'g');const oh=m.at(L*Math.cos(rad(h0+240)),L*Math.sin(rad(h0+240)),'HO','g');m.bd(id[0],oh,1,'g');
+  return m.svg(cis?'ácido oleico, con doble enlace cis':'ácido elaídico, con doble enlace trans',1);
+}
+
+// ── Pintar las figuras ──
+function put(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+put('fig-c4',
+  fig(F.butano(),nm('c:but|i:an|g:o',1),'C₄H₁₀ · cadena lineal de 4 C · eb. −0,5 °C')+
+  fig(F.metilpropano(),nm('r:2-metil|c:prop|i:an|g:o',1),'C₄H₁₀ · cadena de 3 C + 1 metilo (isobutano) · eb. −11,7 °C'));
+put('fig-c6',
+  fig(F.hexano(),nm('c:hex|i:an|g:o',1),'cadena de 6 C · eb. 69 °C')+
+  fig(F.metilpentano2(),nm('r:2-metil|c:pent|i:an|g:o',1),'cadena de 5 C · eb. 60 °C')+
+  fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1),'cadena de 5 C · eb. 63 °C')+
+  fig(F.dimetilbutano22(),nm('r:2,2-dimetil|c:but|i:an|g:o',1),'cadena de 4 C · eb. 50 °C')+
+  fig(F.dimetilbutano23(),nm('r:2,3-dimetil|c:but|i:an|g:o',1),'cadena de 4 C · eb. 58 °C'));
+put('fig-pos',
+  fig(F.propan1ol(),nm('c:prop|i:an|g:-1-ol',1),'C₃H₈O · OH en el C1 · eb. 97 °C')+
+  fig(F.propan2ol(),nm('c:prop|i:an|g:-2-ol',1),'C₃H₈O · OH en el C2 · eb. 82 °C'));
+put('fig-pos2',
+  fig(F.but1eno(),nm('c:but|i:-1-en|g:o',1),'C₄H₈ · doble enlace en C1')+
+  fig(F.but2eno(),nm('c:but|i:-2-en|g:o',1),'C₄H₈ · doble enlace en C2'));
+put('fig-fun1',
+  fig(F.etanol(),nm('c:et|i:an|g:ol',1),'C₂H₆O · alcohol (−OH) · eb. 78 °C')+
+  fig(F.metoximetano(),nm('r:metoxi|c:met|i:an|g:o',1),'C₂H₆O · éter (−O−) · eb. −24 °C'));
+put('fig-fun2',
+  fig(F.propanal(),nm('c:prop|i:an|g:al',1),'C₃H₆O · aldehído (−CHO, en el extremo) · eb. 48 °C')+
+  fig(F.propanona(),nm('c:prop|i:an|g:ona',1),'C₃H₆O · cetona (C=O interior) · eb. 56 °C'));
+put('fig-cistrans',
+  fig(P2.cis(),'<i>cis</i>-'+nm('c:but|i:-2-en|g:o',1)+'<br><span class="fig-sub">= (Z)-but-2-eno</span>','Los dos CH₃ están del <b>mismo lado</b> del doble enlace.','','<span class="tag info">cis = mismo lado</span>')+
+  fig(P2.trans(),'<i>trans</i>-'+nm('c:but|i:-2-en|g:o',1)+'<br><span class="fig-sub">= (E)-but-2-eno</span>','Los dos CH₃ están en <b>lados opuestos</b>.','','<span class="tag info">trans = lados opuestos</span>'));
+put('fig-nocistrans',
+  fig(P2.but1eno(),nm('c:but|i:-1-en|g:o',1),'El C1 tiene <b>dos H</b>: si intercambias los grupos, obtienes la misma molécula.','no','<span class="tag no">sin cis/trans</span>')+
+  fig(P2.metilprop(),nm('r:2-metil|c:prop|i:-1-en|g:o',1),'El C1 tiene dos H y el C2 tiene dos CH₃.','no','<span class="tag no">sin cis/trans</span>'));
+put('fig-grasas',
+  fig(acidoGraso(true),'ácido oleico (doble enlace <i>cis</i>)','Cadena con "codo": aceite de oliva, líquido (funde a 13 °C).','yes fa')+
+  fig(acidoGraso(false),'ácido elaídico (doble enlace <i>trans</i>)','Cadena casi recta: grasa trans, sólida (funde a 44 °C).','no fa'));
+put('fig-but2ol',fig(Q.but2ol(),'los dos enantiómeros del '+nm('c:butan|g:-2-ol',1),'C* unido a H, OH, CH₃ y CH₂CH₃. Por más que gires una molécula, no coincide con la otra.'));
+put('fig-lactico',fig(Q.lactico(),nm('g:ácido |r:2-hidroxi|c:prop|i:an|g:oico',1)+' (ácido láctico)','El OH es aquí un sustituyente ① (hidroxi-) porque el grupo principal ④ es el COOH.'));
+put('fig-alanina',
+  fig(Q.alanina(),nm('g:ácido |r:2-amino|c:prop|i:an|g:oico',1)+' (alanina)','C* unido a H, NH₂, CH₃ y COOH.'));
+put('fig-noquiral',
+  fig(F.propan2olQ(),nm('c:prop|i:an|g:-2-ol',1),'El C2 tiene dos CH₃ iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
+  fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1),'El C3 tiene dos grupos etilo (−CH₂CH₃) iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
+  fig(F.pentan3ol(),nm('c:pent|i:an|g:-3-ol',1),'El C3 tiene H, OH y dos etilos iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
+  fig(F.metilhexano3(),nm('r:3-metil|c:hex|i:an|g:o',1),'En cambio aquí el C3 tiene H, CH₃, etilo y propilo: <b>sí</b> es quiral.','yes','<span class="tag yes">C3 quiral</span>'));
+
+// ═══════════════════════════════════════════════════════════
+// PRÁCTICAS (opción múltiple con retroalimentación por opción)
+// ═══════════════════════════════════════════════════════════
+const ISO=['De cadena','De posición','De función','No son isómeros'];
+function isoOpts(ok,fbs){return ISO.map((t,i)=>({t,ok:i===ok,fb:fbs[i]||''}));}
+const PRACT={
+  cadena:{titulo:'Práctica: isomería de cadena',qs:[
+    {q:'¿Cuántos isómeros de cadena tiene el pentano, C₅H₁₂?',opts:[
+      {t:'2',fb:'Te faltó uno. Además de pentano y 2-metilbutano, puedes poner <b>dos metilos en el mismo carbono</b> de una cadena de 3 C.'},
+      {t:'3',ok:true},
+      {t:'4',fb:'Seguramente contaste dos veces la misma molécula: "3-metilbutano" es 2-metilbutano numerado al revés, y "2-etilpropano" es en realidad 2-metilbutano.'},
+      {t:'5',fb:'5 es el número de isómeros del <b>C₆H₁₄</b> (un carbono más). Con 5 carbonos hay menos posibilidades.'}],
+     ok:'Son <b>pentano</b>, <b>2-metilbutano</b> y <b>2,2-dimetilpropano</b> (neopentano). Los tres son C₅H₁₂.',
+     after:()=>fig(F.pentano(),nm('c:pent|i:an|g:o',1))+fig(F.metilbutano(),nm('r:2-metil|c:but|i:an|g:o',1))+fig(F.dimetilpropano(),nm('r:2,2-dimetil|c:prop|i:an|g:o',1))},
+    {q:'¿Cuál de estos compuestos <b>NO</b> es isómero del hexano (C₆H₁₄)?',opts:[
+      {t:'2-metilpentano',fb:'Cuenta: 5 C de la cadena + 1 C del metilo = 6 C. Es C₆H₁₄, sí es isómero.'},
+      {t:'2,3-dimetilbutano',fb:'4 C + 2 C de los metilos = 6 C. Es C₆H₁₄, sí es isómero.'},
+      {t:'2-metilhexano',ok:true},
+      {t:'3-metilpentano',fb:'5 C + 1 C = 6 C. Es C₆H₁₄, sí es isómero.'}],
+     ok:'El <b>2-metilhexano</b> tiene 6 + 1 = 7 carbonos: es C₇H₁₆. No tiene la misma fórmula, así que no es isómero del hexano.'},
+    {q:'Estas dos estructuras, ¿qué relación tienen?',fig:()=>fig(F.pentano(),'estructura A')+fig(F.pentanoU(),'estructura B'),opts:[
+      {t:'Son isómeros de cadena',fb:'Fíjate que en las dos la cadena es continua de 5 C sin ramas. Solo cambia la forma del dibujo.'},
+      {t:'Son el mismo compuesto',ok:true},
+      {t:'Son isómeros de posición',fb:'No hay ningún grupo funcional que cambie de lugar; ambos son alcanos de 5 C sin ramas.'},
+      {t:'No tienen la misma fórmula',fb:'Cuenta los vértices y extremos: ambas tienen 5 C, así que las dos son C₅H₁₂.'}],
+     ok:'Ambas son <b>pentano</b>: 5 C unidos en fila. Los enlaces sencillos giran, así que la cadena puede "doblarse" sin convertirse en otra molécula.'},
+    {q:'Un estudiante nombró un isómero del C₆H₁₄ como "2-etilbutano". ¿Cuál es su nombre correcto?',opts:[
+      {t:'2-etilbutano (está bien)',fb:'Revisa la cadena más larga: si sigues por el etilo, la cadena tiene 5 C, no 4. La cadena principal siempre debe ser la más larga.'},
+      {t:'3-metilpentano',ok:true},
+      {t:'2-metilpentano',fb:'Casi: la cadena sí es de 5 C, pero el metilo queda en el C3 (justo en el centro), no en el C2.'},
+      {t:'hexano',fb:'El hexano no tiene ramas. Aquí sí queda un metilo en la cadena de 5 C.'}],
+     ok:'Si se toma el etilo como parte de la cadena, la cadena más larga tiene 5 C y queda un metilo en el C3 → <b>3-metilpentano</b>.'},
+  ]},
+  estructural:{titulo:'Práctica: ¿son isómeros? ¿de qué tipo?',qs:[
+    {q:'<b>butan-1-ol</b> (CH₃−CH₂−CH₂−CH₂−OH) y <b>butan-2-ol</b> (CH₃−CH(OH)−CH₂−CH₃)',opts:isoOpts(1,[
+      'Las dos cadenas son lineales de 4 C; no cambia la ramificación.',null,
+      'Los dos son alcoholes (−OH): el grupo funcional es el mismo.',
+      'Cuenta: ambos son C₄H₁₀O. Sí son isómeros.']),
+     ok:'Misma cadena y mismo grupo −OH; solo cambia el carbono donde está el OH (C1 o C2) → <b>isómeros de posición</b>.'},
+    {q:'<b>butanal</b> (CH₃−CH₂−CH₂−CHO) y <b>butanona</b> (CH₃−CO−CH₂−CH₃)',opts:isoOpts(2,[
+      'Ambas cadenas tienen 4 C sin ramas; lo que cambia es otra cosa.',
+      'No es solo un cambio de lugar: un C=O en el extremo es un <b>aldehído</b> y uno interior es una <b>cetona</b>, otra familia con otro sufijo.',null,
+      'Ambos son C₄H₈O: sí son isómeros.']),
+     ok:'Los dos son C₄H₈O, pero uno es aldehído (sufijo -al) y el otro cetona (sufijo -ona) → <b>isómeros de función</b>.'},
+    {q:'<b>propan-1-ol</b> (CH₃−CH₂−CH₂−OH) y <b>propanal</b> (CH₃−CH₂−CHO)',opts:isoOpts(3,[
+      'Antes de clasificar, cuenta los H: no tienen la misma fórmula.',
+      'Antes de clasificar, cuenta los H: no tienen la misma fórmula.',
+      'Es verdad que son de familias distintas, pero primero hay que revisar la fórmula: el propan-1-ol es C₃H₈O y el propanal C₃H₆O.']),
+     ok:'El propan-1-ol es C₃H₈O y el propanal C₃H₆O: tienen 2 H de diferencia → <b>no son isómeros</b>.'},
+    {q:'<b>pentano</b> y <b>2,2-dimetilpropano</b>',opts:isoOpts(0,[null,
+      'No hay grupo funcional que cambie de lugar; lo que cambia es la forma de la cadena.',
+      'Los dos son alcanos; no hay grupos funcionales distintos.',
+      'Cuenta: 5 C en ambos (3 + 2 metilos). Los dos son C₅H₁₂.']),
+     ok:'Ambos son C₅H₁₂: uno lineal (5 C) y otro con cadena de 3 C y dos metilos → <b>isómeros de cadena</b>.'},
+    {q:'<b>etanol</b> (CH₃−CH₂−OH) y <b>metoximetano</b> (CH₃−O−CH₃)',opts:isoOpts(2,[
+      'La diferencia no está en las ramas, sino en dónde está el oxígeno y qué grupo forma.',
+      'El oxígeno no solo cambió de carbono: en uno forma −OH (alcohol) y en el otro −O− entre dos carbonos (éter).',null,
+      'Los dos son C₂H₆O: sí son isómeros.']),
+     ok:'C₂H₆O en ambos: alcohol frente a éter → <b>isómeros de función</b>.'},
+    {q:'<b>but-1-eno</b> (CH₂=CH−CH₂−CH₃) y <b>but-2-eno</b> (CH₃−CH=CH−CH₃)',opts:isoOpts(1,[
+      'Las dos cadenas son de 4 C sin ramas.',null,
+      'Los dos son alquenos: tienen el mismo tipo de insaturación ③.',
+      'Los dos son C₄H₈: sí son isómeros.']),
+     ok:'Solo cambia el localizador del doble enlace (C1 o C2) → <b>isómeros de posición</b>.'},
+  ]},
+  geometrica:{titulo:'Práctica: ¿tiene isomería cis/trans?',qs:[
+    {q:'¿El <b>pent-2-eno</b> (CH₃−CH=CH−CH₂−CH₃) tiene isomería cis/trans?',opts:[
+      {t:'Sí',ok:true},
+      {t:'No, porque el C1 tiene tres H',fb:'El C1 no forma parte del doble enlace. Solo importan los dos carbonos del C=C: el C2 y el C3.'},
+      {t:'No, porque los dos lados son distintos',fb:'¡Que sean distintos no es un problema! Lo que impide la isomería es tener dos grupos <b>iguales en el mismo carbono</b> del doble enlace.'}],
+     ok:'C2: H y CH₃ (distintos). C3: H y CH₂CH₃ (distintos). Existen <i>cis</i>-pent-2-eno y <i>trans</i>-pent-2-eno.',
+     after:()=>fig(P2.pent2enoCis(),'<i>cis</i>-pent-2-eno')},
+    {q:'¿El <b>propeno</b> (CH₂=CH−CH₃) tiene isomería cis/trans?',opts:[
+      {t:'Sí, cis-propeno y trans-propeno',fb:'Mira el C1 del doble enlace: es CH₂, tiene <b>dos H iguales</b>. Si los intercambias, obtienes la misma molécula.'},
+      {t:'No',ok:true},
+      {t:'Solo si se calienta',fb:'La isomería depende de la estructura, no de la temperatura. Revisa los grupos del C1.'}],
+     ok:'El C1 tiene dos H → <b>no hay isomería cis/trans</b>.'},
+    {q:'¿El <b>2-metilbut-2-eno</b> (CH₃−C(CH₃)=CH−CH₃) tiene isomería cis/trans?',opts:[
+      {t:'Sí, porque el C3 tiene H y CH₃',fb:'El C3 sí cumple, pero la regla exige que <b>los dos</b> carbonos del doble enlace cumplan. Revisa el C2.'},
+      {t:'No, porque el C2 tiene dos CH₃',ok:true},
+      {t:'No, porque tiene una ramificación',fb:'Tener ramas no impide la isomería cis/trans. El problema es otro: mira qué grupos tiene el C2.'}],
+     ok:'El C2 está unido a dos CH₃ iguales (el C1 y el metilo) → <b>no hay isomería cis/trans</b>.'},
+    {q:'¿El <b>1,2-dicloroeteno</b> (ClCH=CHCl) tiene isomería cis/trans?',opts:[
+      {t:'Sí',ok:true},
+      {t:'No, porque los dos carbonos son iguales',fb:'Que los dos carbonos se parezcan no importa. Lo que se revisa es si <b>cada carbono</b> tiene dos grupos distintos: aquí cada uno tiene H y Cl.'},
+      {t:'No, porque el cloro no es un grupo alquilo',fb:'La regla vale para cualquier sustituyente: halógenos, OH, alquilos… Solo importa que en cada carbono los dos grupos sean distintos.'}],
+     ok:'Cada carbono del doble enlace tiene H y Cl → existen el <i>cis</i>- y el <i>trans</i>-1,2-dicloroeteno.'},
+    {q:'Este dibujo del 1,2-dicloroeteno, ¿corresponde al isómero cis o al trans?',fig:()=>fig(P2.dicloroTrans(),'1,2-dicloroeteno'),opts:[
+      {t:'cis',fb:'Mira de qué lado del doble enlace está cada Cl: uno está arriba y el otro abajo. "Cis" significa del mismo lado.'},
+      {t:'trans',ok:true},
+      {t:'Ninguno: no tiene isomería',fb:'Sí tiene: cada carbono está unido a H y a Cl, dos grupos distintos.'}],
+     ok:'Los dos Cl están en lados opuestos → <b><i>trans</i>-1,2-dicloroeteno</b>, que en notación IUPAC es <b>(E)-1,2-dicloroeteno</b>.'},
+    {q:'En la notación IUPAC general, ¿qué descriptor corresponde al <i>trans</i>-but-2-eno?',opts:[
+      {t:'(E)',ok:true},
+      {t:'(Z)',fb:'Z viene de <i>zusammen</i>, "juntos": corresponde al cis, con los dos CH₃ del mismo lado.'},
+      {t:'(R)',fb:'R y S se usan para carbonos quirales (enantiómeros), no para dobles enlaces.'},
+      {t:'(S)',fb:'R y S se usan para carbonos quirales (enantiómeros), no para dobles enlaces.'}],
+     ok:'E viene de <i>entgegen</i>, "opuestos": <b>(E)-but-2-eno</b> = <i>trans</i>-but-2-eno.'},
+  ]},
+  optica:{titulo:'Práctica: carbono quiral',qs:[
+    {q:'En el <b>butan-2-ol</b>, ¿cuál carbono es quiral?',fig:()=>fig(F.butan2olNum(),nm('c:butan|g:-2-ol',1)),opts:[
+      {t:'C1',fb:'El C1 es un CH₃: está unido a <b>tres H iguales</b>. Nunca puede ser quiral.'},
+      {t:'C2',ok:true},
+      {t:'C3',fb:'El C3 es un CH₂: tiene <b>dos H iguales</b>.'},
+      {t:'Ninguno',fb:'Revisa el C2 con cuidado: está unido a H, OH, CH₃ y CH₂CH₃. ¿Hay alguno repetido?'}],
+     ok:'El C2 tiene cuatro grupos distintos: H, OH, CH₃ y CH₂CH₃ → es el <b>C*</b>.'},
+    {q:'En el <b>3-metilhexano</b>, ¿cuál carbono es quiral?',fig:()=>fig(F.metilhexano3(),nm('r:3-metil|c:hex|i:an|g:o',1)),opts:[
+      {t:'C2',fb:'El C2 es un CH₂: tiene dos H iguales.'},
+      {t:'C3',ok:true},
+      {t:'C4',fb:'El C4 es un CH₂: tiene dos H iguales.'},
+      {t:'Ninguno',fb:'Mira los cuatro grupos del C3: H, CH₃, un etilo (C1–C2) y un propilo (C4–C6). ¿Alguno se repite?'}],
+     ok:'El C3 está unido a H, CH₃, CH₂CH₃ (etilo) y CH₂CH₂CH₃ (propilo): cuatro grupos distintos → <b>C3 es quiral</b>.'},
+    {q:'¿El <b>3-metilpentano</b> tiene algún carbono quiral?',fig:()=>fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1)),opts:[
+      {t:'Sí, el C3',fb:'Revisa los grupos del C3: H, CH₃, y hacia cada lado un <b>etilo</b> (C1–C2 y C4–C5). Los dos etilos son iguales.'},
+      {t:'Sí, el C2',fb:'El C2 es un CH₂: tiene dos H iguales.'},
+      {t:'No tiene',ok:true}],
+     ok:'El único candidato es el C3, pero está unido a dos etilos iguales → <b>no hay carbono quiral</b>. Compara con el 3-metilhexano, que sí tiene.'},
+    {q:'En la <b>alanina</b> (ácido 2-aminopropanoico), ¿cuál carbono es quiral?',fig:()=>fig(F.alaninaNum(),nm('g:ácido |r:2-amino|c:prop|i:an|g:oico',1)),opts:[
+      {t:'C1 (el del COOH)',fb:'El C1 tiene un doble enlace con O: solo está unido a <b>tres</b> grupos (=O, OH y C2). Un carbono quiral necesita cuatro sustituyentes distintos con enlaces sencillos.'},
+      {t:'C2',ok:true},
+      {t:'C3 (el CH₃)',fb:'El C3 es un CH₃: tres H iguales.'},
+      {t:'El nitrógeno',fb:'En este nivel buscamos <b>carbonos</b> quirales. Mira el C2.'}],
+     ok:'El C2 está unido a H, NH₂, CH₃ y COOH → <b>C2 es quiral</b>, y por eso la alanina tiene dos enantiómeros.'},
+    {q:'¿Cuál de estas moléculas tiene un carbono quiral?',opts:[
+      {t:'propan-2-ol',fb:'Su C2 tiene dos CH₃ iguales.'},
+      {t:'2-bromobutano',ok:true},
+      {t:'2-cloropropano',fb:'Su C2 tiene dos CH₃ iguales, igual que el propan-2-ol.'},
+      {t:'glicina (ácido aminoetanoico)',fb:'El C2 de la glicina es un CH₂: tiene dos H. Es el único aminoácido de las proteínas que no es quiral.'}],
+     ok:'En el 2-bromobutano, CH₃−CHBr−CH₂−CH₃, el C2 tiene H, Br, CH₃ y CH₂CH₃ → <b>es quiral</b>.'},
+    {q:'¿En qué se diferencian dos enantiómeros?',opts:[
+      {t:'En su punto de ebullición',fb:'Los enantiómeros tienen el mismo punto de ebullición, de fusión y la misma densidad.'},
+      {t:'En su fórmula molecular',fb:'Son isómeros: la fórmula molecular es exactamente la misma.'},
+      {t:'En cómo desvían la luz polarizada y en cómo actúan con moléculas quirales del cuerpo',ok:true},
+      {t:'En el orden en que están unidos los átomos',fb:'Eso sería isomería estructural. En los enantiómeros el orden de unión es el mismo; cambia la disposición en el espacio.'}],
+     ok:'Desvían la luz polarizada en sentidos opuestos y pueden tener olores o efectos distintos en el cuerpo (carvona, talidomida).'},
+  ]},
+};
+
+function renderPractice(key){
+  const box=document.getElementById('prac-'+key),P=PRACT[key];if(!box)return;
+  P.first=P.qs.map(()=>null);
+  let h=`<div class="prac-head"><div class="prac-title">✏️ ${P.titulo}</div><div class="prac-score" id="ps-${key}" aria-live="polite"></div></div>`;
+  P.qs.forEach((q,i)=>{
+    h+=`<div class="pq" id="pq-${key}-${i}"><div class="pq-n">Pregunta ${i+1} de ${P.qs.length}</div><div class="pq-q">${q.q}</div>`
+      +(q.fig?`<div class="pq-fig">${q.fig()}</div>`:'')
+      +`<div class="pq-opts">`+q.opts.map((o,j)=>`<button type="button" class="opt" data-k="${key}" data-q="${i}" data-o="${j}">${o.t}</button>`).join('')+`</div>`
+      +`<div class="pq-fb" id="pf-${key}-${i}" aria-live="polite"></div>`
+      +`<div class="pq-actions" id="pa-${key}-${i}"><button type="button" class="btn-sm" data-retry="${key}" data-q="${i}">↺ Reintentar esta pregunta</button></div></div>`;
+  });
+  h+=`<button type="button" class="btn-sm" data-reset="${key}">↺ Reiniciar toda la práctica</button>`;
+  box.innerHTML=h;updScore(key);
+}
+function updScore(key){const P=PRACT[key],el=document.getElementById('ps-'+key);if(!el)return;
+  const done=P.first.filter(x=>x!==null).length,ok=P.first.filter(x=>x===true).length;
+  el.textContent=`Al primer intento: ${ok} de ${P.qs.length}`+(done<P.qs.length?` · faltan ${P.qs.length-done}`:' · ¡terminaste!');}
+function answer(key,i,j){
+  const P=PRACT[key],q=P.qs[i],o=q.opts[j],card=document.getElementById(`pq-${key}-${i}`),fb=document.getElementById(`pf-${key}-${i}`);
+  const btn=card.querySelector(`.opt[data-o="${j}"]`);
+  if(o.ok){
+    btn.classList.add('si');card.querySelectorAll('.opt').forEach(b=>b.disabled=true);card.classList.add('done-ok');
+    if(P.first[i]===null)P.first[i]=true;
+    fb.className='pq-fb show ok';fb.innerHTML=`<span class="h">✓ ¡Correcto!</span>${q.ok}`+(q.after?`<div class="figs" style="margin-bottom:0">${q.after()}</div>`:'');
+    document.getElementById(`pa-${key}-${i}`).classList.add('show');
+  }else{
+    btn.classList.add('no');btn.disabled=true;
+    if(P.first[i]===null)P.first[i]=false;
+    fb.className='pq-fb show fail';fb.innerHTML=`<span class="h">✗ «${o.t}» no es correcto — inténtalo otra vez</span>${o.fb}`;
+  }
+  updScore(key);
+}
+function retry(key,i){
+  const card=document.getElementById(`pq-${key}-${i}`);
+  card.querySelectorAll('.opt').forEach(b=>{b.disabled=false;b.classList.remove('si','no');});card.classList.remove('done-ok');
+  const fb=document.getElementById(`pf-${key}-${i}`);fb.className='pq-fb';fb.innerHTML='';
+  document.getElementById(`pa-${key}-${i}`).classList.remove('show');
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.classList.contains('opt')&&!b.disabled)answer(b.dataset.k,+b.dataset.q,+b.dataset.o);
+  else if(b.dataset.retry)retry(b.dataset.retry,+b.dataset.q);
+  else if(b.dataset.reset){renderPractice(b.dataset.reset);document.getElementById('prac-'+b.dataset.reset).scrollIntoView({behavior:'smooth',block:'start'});}
+});
+Object.keys(PRACT).forEach(renderPractice);
+</script>
+
+<!-- FOOTER COPYRIGHT -->
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>
