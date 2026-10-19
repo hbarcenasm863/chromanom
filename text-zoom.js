@@ -10,7 +10,7 @@
 
   function clamp(v){ return Math.min(MAX, Math.max(MIN, v)); }
   function getZoom(){
-    var v=parseInt(localStorage.getItem(KEY),10);
+    var v; try{ v=parseInt(localStorage.getItem(KEY),10); }catch(e){ v=NaN; }
     return isNaN(v) ? DEFAULT : clamp(v);
   }
   function applyZoom(v){

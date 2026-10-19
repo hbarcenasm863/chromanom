@@ -101,7 +101,7 @@ var ALINEACION={
    ────────────────────────────────────────────────────────────────────── */
 var TEMAS=[
  {id:'cadena',titulo:'Cadena principal, numeración y desempate',corto:'Cadena principal y desempate',
-  gen:['alcanos'],jue:/cadena|desempate/i,rxn:[],soloRamificados:true,nomenclatura:true,
+  gen:['alcanos'],jue:/cadena|desempate|error/i,rxn:[],soloRamificados:true,nomenclatura:true,
   alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
   previos:{
    curiosos:['El índice de octano de la gasolina se mide comparándola con dos alcanos: el heptano (valor 0) y el 2,2,4-trimetilpentano, llamado «isooctano» (valor 100). Con casi los mismos átomos, la forma de la cadena cambia mucho el comportamiento en el motor.',
