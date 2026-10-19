@@ -55,7 +55,7 @@ const PREGUNTAS_META_PREMIO = 1000;
 // individual, por familia en el Constructor Molecular, o por grupo de
 // reacciones — sin depender del nombre bonito que ve el estudiante (columna
 // "Nivel"), que es más frágil si cambia la redacción de una etiqueta.
-const GRUPO_FUNCIONAL_KEYS = ['alcanos','alquenos','alquinos','alcoholes','cetonas','aldehidos','acidos','esteres','eteres','amidas','nitrilos','aminas','benceno'];
+const GRUPO_FUNCIONAL_KEYS = ['alcanos','alquenos','alquinos','alcoholes','cetonas','aldehidos','acidos','esteres','eteres','amidas','nitrilos','aminas','benceno','haluros','polifuncionales'];
 const CONSTRUCTOR_FAMILIA_KEYS = ['constructor_alcanos','constructor_alquenos','constructor_alquinos','constructor_alcoholes','constructor_aldehidos','constructor_cetonas','constructor_acidos','constructor_esteres','constructor_eteres','constructor_amidas','constructor_nitrilos','constructor_aminas','constructor_aromaticos'];
 const REACCIONES_GRUPO_KEYS = ['rxn_hc','rxn_alcanos','rxn_alquenos','rxn_alquinos','rxn_aromaticos','rxn_halogenuros','rxn_alcoholes','rxn_aminas','rxn_carbonilo','rxn_acidos','rxn_derivados'];
 
