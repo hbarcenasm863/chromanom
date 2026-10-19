@@ -7,6 +7,64 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (111) — Arregla el juego "congelado" en iOS: la nota carga pero ningún nivel entra
+
+### Contexto
+Una estudiante reportó (en iPhone/iPad) que al ingresar su código de
+acceso sí le mostraba su nota, pero no podía entrar a ninguna prueba —
+tocar cualquier tarjeta de nivel no hacía nada, sin mensaje de error ni
+nada visible.
+
+### Diagnóstico
+`juego.html` usa una bandera `gameActive` para bloquear que se abra un
+nivel nuevo mientras hay una partida en curso (`openLevelModal()` revisa
+`if(gameActive||_iniciandoPartida)return;` como primera línea). Esa
+bandera se pone en `true` al empezar una partida y solo se vuelve a
+`false` en tres sitios: al terminar la partida, al volver a la portada, o
+al confirmar "salir". Si la estudiante sale de en medio de una partida de
+otra forma — cambia de app, el celular se bloquea, pierde señal — nunca
+se vuelve a poner en `false`.
+
+En computador esto no se nota porque recargar la página reinicia todas
+las variables de JavaScript desde cero. Pero iOS Safari restaura páginas
+desde su caché (bfcache) al volver de otra app o al deslizar "atrás" SIN
+volver a ejecutar el script — las variables quedan exactamente como
+estaban. Resultado: la próxima vez que abre el juego, la página se ve
+"nueva" (el código y la nota se consultan aparte y sí cargan), pero
+`gameActive` sigue en `true` de la partida abandonada, y cualquier toque
+en un nivel se ignora en silencio para siempre, hasta que cierra la
+pestaña del todo.
+
+Se reprodujo el error exacto con Playwright (forzando `gameActive=true` y
+confirmando que `openLevelModal()` no hacía nada) antes de aplicar el
+arreglo, siguiendo la regla del repositorio de reproducir antes de dar
+por resuelto.
+
+### Cambios (`juego.html`)
+Se agregó un listener de `pageshow` (junto a los de `beforeunload` y
+`popstate` que ya protegían la salida accidental de una partida) que
+revisa `event.persisted` —la señal estándar de que la página se restauró
+desde el bfcache en vez de cargar de cero— y en ese caso destraba
+`gameActive`, `_iniciandoPartida` y `_verificandoCodigo`, y cierra el
+modal de "salir" por si había quedado abierto.
+
+### Verificación
+Con Playwright: se reprodujo el bloqueo manualmente (`gameActive=true` →
+`openLevelModal()` no cambiaba de nivel), se disparó el evento real
+`pageshow` con `persisted:true` (el mismo que usa iOS Safari al
+restaurar), y se confirmó que las banderas se destraban y que
+`openLevelModal()` vuelve a funcionar normalmente. Se recorrieron además
+las 7 páginas del sitio sin errores de consola, para confirmar que el
+cambio no afecta nada más.
+
+### Pendiente
+Ninguno. `juego.html` se sirve directo por GitHub Pages — el arreglo
+queda activo apenas se haga push, sin ningún paso de despliegue aparte.
+Vale la pena pedirle a la estudiante (o a quien más haya reportado algo
+parecido) que lo pruebe de nuevo.
+
+---
+
 ## 2026-10-19 (110) — Diagnóstico didáctico: práctica de la cadena, prácticas por criterio, Isomería y generador del docente
 
 ### Contexto

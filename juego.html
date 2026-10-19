@@ -6788,6 +6788,29 @@ window.addEventListener('beforeunload', (e) => {
   }
 });
 
+// ── Recuperar el juego "congelado" al volver en iOS (Safari) ──────────
+// Una estudiante reportó: entra su código, ve su nota, pero ningún nivel
+// responde al tocarlo. Causa: iOS Safari restaura la página desde su
+// caché (bfcache) al volver de otra app o al deslizar "atrás", SIN
+// volver a ejecutar el script — las variables de JavaScript quedan
+// exactamente como estaban cuando salió. Si salió con una partida a
+// medias (cambió de app, la llamada se perdió, etc.), `gameActive` o
+// `_iniciandoPartida` quedan en `true` para siempre, y openLevelModal()
+// los usa para ignorar el toque en cualquier tarjeta de nivel — por eso
+// la página se ve normal (la nota sí carga, es una consulta aparte) pero
+// ningún nivel entra. El evento 'pageshow' con persisted=true detecta
+// justo esa restauración desde caché y destraba las banderas.
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    gameActive = false;
+    _iniciandoPartida = false;
+    _verificandoCodigo = false;
+    const btn = document.querySelector('#login-panel .btn-modal-start');
+    if (btn) { btn.disabled = false; btn.textContent = 'Entrar →'; }
+    closeExitModal();
+  }
+});
+
 // OJO: usar window.history (no "history" a secas) — el juego ya tiene su
 // propia variable global "history" (el arreglo de respuestas de la
 // partida, ver "let history=[]" más arriba) que tapa al objeto History
