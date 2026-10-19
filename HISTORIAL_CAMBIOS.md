@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (117) — Retos de nomenclatura: banco ampliado de 70 a 160 preguntas
+
+### Contexto
+El docente pidió que las 4 secciones nuevas de "Retos de nomenclatura" en
+`juego.html` (Encuentra la cadena, Cazadores de errores, Haluros de
+alquilo, Polifuncionales) tuvieran al menos 40 preguntas cada una, en vez
+de las 17/16/19/18 con las que habían quedado en una sesión anterior.
+
+### Cambios (`juego.html`)
+Se agregaron 90 preguntas nuevas (23+24+21+22), repartidas así:
+
+- **Encuentra la cadena principal** (17→40): moléculas nuevas con el mismo
+  truco geométrico que las originales —un tronco recto que se dobla hacia
+  una rama más larga—, variando el sustituyente (metil/etil/propil), el
+  largo de la cadena principal (de hexano a dodecano) y el localizador.
+- **Cazadores de errores** (16→40): reutilizan esas mismas moléculas
+  nuevas con un nombre "de compañero" que puede tener tres tipos de error
+  (no eligió la cadena más larga, numeró desde el extremo equivocado) o,
+  como truco, estar correcto — sin necesitar dibujos nuevos.
+- **Haluros de alquilo** (19→40): cadenas rectas nuevas con 1-3
+  halógenos (cloro, bromo, flúor, yodo) y/o un sustituyente alquilo, en
+  distintas posiciones — con numeración de menor localizador y orden
+  alfabético de sustituyentes calculados programáticamente, no a mano.
+- **Polifuncionales** (18→40): cadenas nuevas con dos grupos funcionales
+  (ácido+oxo, ácido+hidroxi, ácido+amino, aldehído+oxo/hidroxi/amino,
+  cetona+hidroxi/amino, alcohol+amino), respetando el orden de prioridad
+  IUPAC (ácido > aldehído > cetona > alcohol > amina) para decidir cuál
+  grupo da la terminación y cuál va como prefijo.
+
+Cada molécula nueva se generó con un script que calcula la cadena más
+larga, el localizador más bajo y el orden alfabético por fórmula (no a
+ojo), para minimizar el riesgo de un nombre IUPAC mal construido. Se
+verificó con Playwright: las 66 moléculas nuevas renderizan sin errores
+(vista esquelética y semidesarrollada), un barrido automático de las 160
+preguntas no encontró opciones duplicadas, respuestas fuera de las
+opciones, ni piezas de "arrastrar" faltantes en su banco; y se jugaron de
+verdad sesiones completas de las 4 secciones en vista móvil (clic en
+opción, escribir el nombre, arrastrar fragmentos, identificar partes) sin
+ningún error de página.
+
+### Pendiente
+Falta la confirmación del docente de que el banco ampliado se ve y juega
+bien desde un dispositivo real (esto se probó solo con Playwright).
+
+---
+
 ## 2026-10-19 (116) — Referencia: se unen las dos tablas de sustituyentes
 
 ### Contexto
