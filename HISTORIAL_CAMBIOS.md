@@ -7,6 +7,56 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (114) — El bloqueo en iOS sigue: ahora el error se muestra en vez de quedar en silencio
+
+### Contexto
+El docente confirmó que, después del arreglo de `fetch(keepalive)` de la
+entrada 113, el problema sigue exactamente igual en iOS (sigue
+funcionando bien en Android). Esa hipótesis no era la causa completa —o
+no era la única.
+
+### Cambio de estrategia
+Sin un iPhone/iPad real para probar, seguir adivinando causas de
+WebKit una por una (ya van tres intentos: `pageshow`/bfcache, versión de
+caché, `fetch(keepalive)`) tiene rendimientos cada vez más bajos. En vez
+de seguir a ciegas, se instrumentó el punto exacto donde se traba para
+que, si vuelve a fallar, la estudiante vea el error real en pantalla —
+así la próxima pista no es una conjetura sino el mensaje tal cual lo
+reporta su propio navegador.
+
+### Cambios (`juego.html`)
+`openLevelModal()` y `acceptConsent()` (las dos puertas de entrada a
+`startGame()`, modo colegio y modo libre) ahora envuelven toda la cadena
+de arranque en `try/catch`. Si algo falla en cualquier punto —
+`startGame`, `sendSessionStart`, `armExitGuard`, `showScreen`,
+`loadQuestion`, lo que sea—, en vez de quedarse en silencio (el síntoma
+reportado: "se pulsa la opción y no pasa nada"):
+- se destraban `gameActive` y `_iniciandoPartida` para que se pueda
+  volver a intentar sin recargar la página;
+- se le muestra a la estudiante un aviso con el mensaje de error exacto
+  ("avísale a tu docente con este mensaje…"), para que lo pueda relatar
+  o fotografiar.
+
+### Verificación
+Con Playwright: se confirmó que el flujo normal sigue funcionando igual
+que antes (sin regresión). Se simuló un error cualquiera en medio de la
+cadena (`sendSessionStart` lanzando una excepción) y se confirmó que: (1)
+aparece el aviso con el mensaje de error correcto, (2) no queda ningún
+error sin capturar en la consola, (3) las banderas se destraban y un
+segundo intento sí logra arrancar el nivel una vez que el problema
+simulado se quita. Se recorrieron además las 7 páginas del sitio sin
+errores de consola.
+
+### Pendiente
+**Este es el paso clave:** pedirle a la estudiante que lo intente de
+nuevo. Si vuelve a fallar, el mensaje que le aparezca en el aviso ("con
+este mensaje exacto…") es la pista que hace falta para el próximo
+arreglo — hay que pedirle que lo copie o lo fotografíe tal cual. Ninguno
+de los archivos tocados necesita paso de despliegue aparte de este push
+a `main`.
+
+---
+
 ## 2026-10-19 (113) — Encuentra y arregla la causa real del bloqueo en Safari/iOS
 
 ### Contexto

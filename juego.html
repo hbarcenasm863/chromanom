@@ -2621,7 +2621,26 @@ function actualizarPanelesEstudiante(){
   document.getElementById('welcome-inline').style.display = mostrarWelcome ? 'block' : 'none';
 }
 
+// Varios intentos de arreglar el bloqueo reportado en iOS (Safari y
+// Chrome/iOS, que comparten motor) a ciegas no funcionaron — sin un iPhone/
+// iPad real para probar, hace falta ver el error de verdad. Este envoltorio
+// atrapa cualquier excepción que ocurra en toda la cadena de arranque
+// (openLevelModal → startGame → sendSessionStart → armExitGuard →
+// showScreen → loadQuestion) y, en vez de dejar al estudiante tocando un
+// botón que "no hace nada", muestra el mensaje de error tal cual para que
+// lo pueda relatar o fotografiar — así se sabe la causa real en vez de
+// seguir adivinando.
 function openLevelModal(nivel){
+  try{
+    _openLevelModalInner(nivel);
+  }catch(err){
+    gameActive=false;
+    _iniciandoPartida=false;
+    console.error('Error al iniciar el nivel:', err);
+    alert('No se pudo entrar al nivel por un error técnico. Por favor avísale a tu docente con este mensaje exacto:\n\n'+(err&&(err.name+': '+err.message)||String(err)));
+  }
+}
+function _openLevelModalInner(nivel){
   // Con una partida ya en curso, o ya iniciándose (esperando la consulta
   // de progreso), ignorar cualquier disparo espurio de este flujo.
   if(gameActive||_iniciandoPartida)return;
@@ -2653,7 +2672,14 @@ function openLevelModal(nivel){
 function acceptConsent(){
   freeConsent=true;
   document.getElementById('modal-consent').classList.remove('open');
-  startGame();
+  try{
+    startGame();
+  }catch(err){
+    gameActive=false;
+    _iniciandoPartida=false;
+    console.error('Error al iniciar el nivel (modo libre):', err);
+    alert('No se pudo entrar al nivel por un error técnico. Por favor avísale a tu docente con este mensaje exacto:\n\n'+(err&&(err.name+': '+err.message)||String(err)));
+  }
 }
 function closeConsent(){
   document.getElementById('modal-consent').classList.remove('open');
