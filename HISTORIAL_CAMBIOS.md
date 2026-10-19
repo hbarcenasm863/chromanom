@@ -7,6 +7,58 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (115) — La causa real del bloqueo en iOS: pushState falla en su dispositivo
+
+### Contexto
+Gracias al aviso de error agregado en la entrada 114, el docente
+consiguió el mensaje exacto que le aparecía a la estudiante:
+**"can only call history.pushState on instances of History"** — un
+`TypeError` propio de WebKit (por eso fallaba igual en Safari y en
+Chrome/iOS, y nunca en Android).
+
+### Diagnóstico
+Ese error viene de `armExitGuard()`, la función que arma la protección
+"¿seguro que quieres salir?" al iniciar una partida
+(`window.history.pushState({chromanomGuard:true},'',location.href)`).
+Por alguna razón específica de su navegador/dispositivo —no se pudo
+determinar el motivo exacto sin un iPhone/iPad real para depurar, pero
+el error es 100% reproducible ahí— esa llamada lanza esa excepción cada
+vez. Como `armExitGuard()` se llama desde dentro de `startGame()`, y el
+aviso de la entrada 114 ya envolvía toda esa cadena en `try/catch`, el
+error ya no se perdía en silencio, pero **tampoco dejaba avanzar**: cada
+intento volvía a fallar exactamente igual, así que mostraba el aviso una
+y otra vez sin que la estudiante pudiera entrar nunca.
+
+Se confirmó con Playwright simulando el error exacto reportado
+(`window.history.pushState` lanzando ese mismo `TypeError`) y
+reproduciendo que, antes de este arreglo, eso bloqueaba el inicio de la
+partida.
+
+### Cambios (`juego.html`)
+`armExitGuard()` y el re-armado dentro del listener de `popstate` ahora
+envuelven su propia llamada a `pushState` en `try/catch`. Si falla
+(como en el dispositivo de la estudiante), se pierde solo la protección
+de "¿seguro que quieres salir?" —no es algo esencial para jugar— y la
+partida arranca con normalidad de todas formas, en vez de quedar
+atascada repitiendo el mismo error.
+
+### Verificación
+Con Playwright: se simuló el error EXACTO que reportó la estudiante
+(`history.pushState` lanzando "can only call history.pushState on
+instances of History") y se confirmó que, con el arreglo, la partida
+arranca igual (`pantalla activa: s-game`, `gameActive: true`, sin avisos
+de error ni errores de consola) — antes del arreglo esto bloqueaba
+`startGame()` por completo. Se confirmó también que el flujo normal
+(sin el error) sigue funcionando igual, y se recorrieron las 7 páginas
+del sitio sin errores de consola.
+
+### Pendiente
+Confirmar con la estudiante que ya puede entrar a jugar con normalidad.
+Ninguno de los archivos tocados necesita paso de despliegue aparte de
+este push a `main`.
+
+---
+
 ## 2026-10-19 (114) — El bloqueo en iOS sigue: ahora el error se muestra en vez de quedar en silencio
 
 ### Contexto

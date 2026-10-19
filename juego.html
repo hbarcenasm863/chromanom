@@ -6866,12 +6866,31 @@ window.addEventListener('pageshow', (e) => {
 // del navegador. "history.pushState(...)" fallaría con
 // "history.pushState is not a function" al llamar el método sobre el
 // arreglo en vez del objeto real del navegador.
+// OJO iOS: una estudiante reportó el error real "can only call
+// history.pushState on instances of History" — un TypeError de WebKit al
+// llamar pushState (no se pudo determinar la causa exacta sin un
+// iPhone/iPad real para depurar, pero el error es reproducible siempre en
+// su dispositivo). Como esto quedaba envuelto por el try/catch de
+// openLevelModal()/acceptConsent(), ya no bloqueaba en silencio, pero SÍ
+// la dejaba atascada reintentando: cada toque volvía a fallar exactamente
+// igual. armExitGuard() en sí solo protege contra salir sin querer de la
+// partida (un "nice to have", no algo esencial) — así que si pushState
+// falla, mejor perder esa protección en ese dispositivo y dejar que la
+// partida arranque igual, en vez de bloquear todo el juego por ella.
 function armExitGuard(){
-  window.history.pushState({ chromanomGuard: true }, '', location.href);
+  try{
+    window.history.pushState({ chromanomGuard: true }, '', location.href);
+  }catch(e){
+    console.error('No se pudo armar la protección de salida (pushState):', e);
+  }
 }
 window.addEventListener('popstate', () => {
   if (gameActive) {
-    window.history.pushState({ chromanomGuard: true }, '', location.href);
+    try{
+      window.history.pushState({ chromanomGuard: true }, '', location.href);
+    }catch(e){
+      console.error('No se pudo reforzar la protección de salida (pushState):', e);
+    }
     document.getElementById('modal-salir').classList.add('open');
   }
 });
