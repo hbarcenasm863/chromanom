@@ -7,6 +7,115 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (110) — Diagnóstico didáctico: práctica de la cadena, prácticas por criterio, Isomería y generador del docente
+
+### Contexto
+Se pidió a un agente de didáctica un diagnóstico de qué le falta a todo el
+sitio. Sus hallazgos principales:
+- En el juego, la cadena principal siempre era la línea recta del dibujo,
+  así que nunca se practicaba el error más común.
+- Los criterios de desempate casi no se practicaban.
+- La retroalimentación no dependía del error cometido.
+- Faltaban isomería, nomenclatura de haluros y compuestos polifuncionales.
+- No había material para el docente.
+
+El docente eligió implementar las 4 primeras prioridades. Además pidió que
+la página del docente fuera un GENERADOR de guías, talleres y evaluaciones,
+alineado con los Estándares, los DBA y los Aprendizajes priorizados de la
+SED Bogotá (2025), documento que él mismo envió. La guía debe tener 4
+sesiones: aprendizajes previos, información, trabajo práctico y evaluación
+en hojas aparte, con preguntas tipo Saber 11 y abiertas. Decisión del
+docente: SIN clave de respuestas.
+
+### Cambios
+- `juego.html`: tarjeta nueva «🧠 Retos de nomenclatura», con 70 preguntas
+  (el banco pasa de 1178 a 1248):
+  - «🔎 Encuentra la cadena» (17): moléculas dibujadas con la cadena
+    principal doblada. Al responder, la cadena se resalta en verde.
+  - «🕵️ Cazadores de errores» (16): nombres mal escritos por «un
+    compañero» para identificar el error.
+  - «Haluros de alquilo» (19) y «Polifuncionales» (18).
+  - Campo opcional `optfb`: retroalimentación propia para cada opción
+    incorrecta.
+  Las etiquetas existentes de la hoja no cambiaron.
+- `teoria.html`:
+  - Botón «🎯 Practica este criterio» en los 10 criterios de desempate:
+    36 ejercicios graduados y verificados con un programa. Cada error
+    tiene su explicación, se puede reintentar y al final hay un resumen
+    con el avance por criterio (se guarda en el celular).
+  - Las 7 prácticas antiguas también permiten reintentar.
+  - En celular, la barra de navegación inferior ya no tapa el botón
+    «Siguiente» de las prácticas.
+- `isomeria.html` (nueva): isomería de cadena, posición y función,
+  cis/trans (E/Z) y carbono quiral. Tiene dibujos MDEC, 22 preguntas con
+  explicación por opción y ejemplos de la vida diaria (grasas trans,
+  carvona, talidomida).
+- `grupos.html`: grupos nuevos «Haluros de alquilo» (sin rango de
+  prioridad; siempre prefijo) y «Compuestos polifuncionales», con 10
+  ejercicios cada uno y vista esquelética y semidesarrollada.
+- `docente.html` + `docente-datos.js` + `docente-app.js` (nuevos):
+  - Pestaña «Generador de guías»:
+    - Formulario: tipo de documento (guía completa / solo taller / solo
+      evaluación), 12 temas, grado, alineación (aprendizaje priorizado,
+      evidencia, estándar y DBA), cantidades, Forma A/B y encabezado
+      institucional.
+    - Ejercicios: se leen en vivo de los bancos del juego y del
+      Generador.
+    - Banco nuevo de 96 preguntas tipo Saber 11 (8 por tema, con
+      contexto colombiano) y 36 preguntas abiertas.
+    - Impresión en tamaño Carta: guía de 4 sesiones con numeración
+      propia y evaluación en hojas aparte con su propia numeración, hoja
+      de respuestas y rúbricas opcionales. Sin clave de respuestas.
+  - Pestaña «Orientaciones»: mapa del sitio, secuencia de clases,
+    rúbricas (Decreto 1290), cómo leer la hoja de seguimiento y preguntas
+    frecuentes.
+  - Los textos de la SED Bogotá van citados literalmente, con fuente y
+    licencia. Los Estándares y DBA del MEN que no se pudieron verificar
+    van marcados como paráfrasis o «verificar redacción oficial».
+- Integración:
+  - menú de las 9 páginas con 🔀 Isomería y 📘 Docente;
+  - barra «Más» del celular (`site-ui.js`);
+  - portada: tarjetas de Isomería y Docente, cifras actualizadas y
+    cuadrícula ajustada;
+  - `chromanom.css`: hasta 1280 px el menú muestra solo íconos, para que
+    quepa;
+  - `text-zoom.js`: ya no falla si el navegador bloquea el
+    almacenamiento;
+  - `sw.js`: caché `chromanom-v19`, con las páginas nuevas para usarlas
+    sin internet.
+- `chromanom-analytics.gs`: `haluros` y `polifuncionales` agregados a
+  `GRUPO_FUNCIONAL_KEYS`, para que cuenten en «Grupo funcional
+  (práctica) %».
+
+### Pasos manuales pendientes (Apps Script)
+1. REDESPLEGAR `chromanom-analytics.gs`: pegar el código → Implementar →
+   Administrar implementaciones → Nueva versión. Se le entregó al docente
+   como .txt.
+2. RECALCULAR: ejecutar `recalcularAhora()`, o esperar el disparador de
+   30 min.
+
+### Verificación
+Revisión general con Playwright: 9 páginas × 5 anchos sin errores ni
+desplazamiento horizontal, y banco del juego (1248) sin problemas. Cada
+agente probó además sus prácticas fallando, reintentando y acertando. Se
+revisaron los PDF de la guía, el taller y la evaluación del generador del
+docente.
+
+### Pendiente
+- El docente debe cotejar los textos de Estándares y DBA del MEN marcados
+  como paráfrasis.
+- En `docente-datos.js`, la primera opción de cada pregunta tipo Saber es
+  la correcta (al imprimir se barajan). Alguien que lea el código fuente
+  podría verla.
+- Revisar los olores de carvona y limoneno y la mención a la regulación
+  colombiana de grasas trans en Isomería.
+- En celular, la vista previa del generador del docente sale en miniatura
+  (la impresión es normal).
+- Prioridad 5 del diagnóstico, sin hacer: «Propiedades y usos» por grupo,
+  preguntas Saber en el juego y registro por habilidad.
+
+---
+
 ## 2026-10-19 (109) — Desempate: ejemplos de A0, A4 y A6 + auditoría química y didáctica de los criterios de cadena y numeración
 
 ### Contexto

@@ -137,7 +137,7 @@ body::before{
 
 .mods2{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
 .mods2>.mod2{grid-column:span 2}
-.mods2>.mod2:nth-last-child(-n+2){grid-column:span 3}
+.mods2>.mod2:nth-last-child(-n+4){grid-column:span 3}
 .mod2{position:relative;display:flex;flex-direction:column;padding:20px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);box-shadow:var(--cn-sh);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,box-shadow .15s,transform .15s}
 .mod2:hover{border-color:var(--cn-brand);box-shadow:var(--cn-sh-h);transform:translateY(-3px)}
 .mods2>.mod2.destacado{grid-column:1/-1}
@@ -155,7 +155,7 @@ body::before{
 @media (max-width:900px){
   .hero2{grid-template-columns:1fr;gap:24px;padding:32px 0 20px}
   .metodo-grid{grid-template-columns:1fr 1fr}
-  .mods2{grid-template-columns:1fr 1fr}.mods2>.mod2,.mods2>.mod2:nth-last-child(-n+2){grid-column:auto}.mods2>.mod2.destacado{grid-column:1/-1}
+  .mods2{grid-template-columns:1fr 1fr}.mods2>.mod2,.mods2>.mod2:nth-last-child(-n+4){grid-column:auto}.mods2>.mod2.destacado{grid-column:1/-1}
   .ruta2{grid-template-columns:1fr 1fr}
   .stats2{grid-template-columns:repeat(2,1fr)}
   .more-examples{grid-template-columns:1fr}
@@ -324,10 +324,12 @@ footer span{color:var(--naranja);font-weight:700}
 <a href="index.html" class="nav-link active">🏠 <span class="full">Inicio</span></a>
 <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
 <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
 <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
 <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
 <a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
   </div>
 </nav>
 <main class="app" id="contenido">
@@ -439,7 +441,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-ico" aria-hidden="true">🎮</span>
       <span class="mod2-tag">Módulo 3 · Practicar</span>
       <h3>Juego de práctica</h3>
-      <p>Más de 1.100 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (paso 3). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
+      <p>Más de 1.200 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (paso 3). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
       <span class="mod2-go">Jugar ahora →</span>
     </a>
     <a class="mod2" href="teoria.html">
@@ -453,7 +455,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-ico" aria-hidden="true">🔬</span>
       <span class="mod2-tag">Módulo 2</span>
       <h3>Grupos funcionales</h3>
-      <p>Los 17 grupos con su prioridad IUPAC, estructuras dibujadas y más de 180 ejercicios.</p>
+      <p>Los 19 grupos (incluidos haluros y polifuncionales) con su prioridad IUPAC, estructuras dibujadas y más de 200 ejercicios.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
     <a class="mod2" href="reacciones.html">
@@ -475,6 +477,20 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-tag">Recurso</span>
       <h3>Hoja de referencia</h3>
       <p>Prefijos, multiplicadores, prioridad de grupos, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave. Imprimible.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <a class="mod2" href="isomeria.html">
+      <span class="mod2-ico" aria-hidden="true">🔀</span>
+      <span class="mod2-tag">Módulo 6</span>
+      <h3>Isomería</h3>
+      <p>Misma fórmula, distinta molécula: isómeros de cadena, posición y función, cis/trans y carbono quiral, con práctica y ejemplos de la vida diaria.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <a class="mod2" href="docente.html">
+      <span class="mod2-ico" aria-hidden="true">📘</span>
+      <span class="mod2-tag">Para el docente</span>
+      <h3>Guías y evaluaciones</h3>
+      <p>Genera guías de 4 sesiones, talleres y evaluaciones tipo Saber 11 alineadas con estándares, DBA y aprendizajes priorizados. Incluye orientaciones de uso.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
   </div>
