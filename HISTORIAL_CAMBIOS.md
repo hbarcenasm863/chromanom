@@ -7,6 +7,64 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-19 (112) — Investigación del bloqueo en Safari: sigue pasando tras el arreglo anterior
+
+### Contexto
+El docente avisó que, tras el arreglo de la entrada 111 (el `pageshow`
+para destrabar `gameActive`), el problema seguía pasando en Safari: "no
+deja pasar de la portada".
+
+### Investigación
+Con Playwright se probó el flujo completo simulando toques reales (no
+clics de mouse) con perfiles de **iPhone 13** y **iPad (gen 7)**,
+incluida la vista reducida de Safari (con la barra de direcciones
+visible, no la pantalla completa):
+- Ruta "Modo libre" → tarjeta de nivel → modal de consentimiento →
+  "Entrar al juego" → arranca la partida (`s-game`). Funciona.
+- Ruta "Acceso estudiante" (código ya validado) → tarjeta de nivel →
+  arranca la partida directo. Funciona.
+- Se revisó también el elemento que realmente recibe el toque en cada
+  botón (`elementFromPoint`) para descartar que la barra de navegación
+  inferior nueva (`site-ui.js`, agregada hoy mismo por otra sesión) o su
+  fondo quedaran tapando algo — no se encontró ningún elemento de más
+  encima de los botones.
+
+No se logró reproducir el bloqueo en Chromium con emulación de iOS —
+esto no descarta que sea un problema real, solo confirma que es
+específico del motor de Safari (WebKit), que no está disponible para
+probar en este entorno (no se puede instalar por restricción del
+entorno de ejecución).
+
+### Sospecha principal: versión vieja atascada en caché
+Si la estudiante agregó el juego a la pantalla de inicio del iPhone/iPad
+(como app), Safari puede quedarse sirviendo una versión guardada de
+`juego.html` de hace días o semanas — de antes de CUALQUIERA de los
+arreglos recientes — sin que el aviso de "Nueva versión disponible" le
+llegue a tiempo. Como medida segura e inmediata (no depende de confirmar
+la causa exacta):
+
+### Cambios (`sw.js`)
+Se subió la versión del Service Worker de `chromanom-v19` a
+`chromanom-v20`. Esto fuerza a que todos los dispositivos —estén o no
+atascados en una versión vieja— detecten la actualización la próxima vez
+que abran el juego con conexión, sin esperar ningún otro paso.
+
+### Pendiente
+Falta confirmar con la estudiante (o el docente) los detalles exactos
+para seguir investigando si el problema persiste después de esto:
+- ¿Agregó el juego a la pantalla de inicio (ícono propio, sin barra de
+  Safari) o lo abre siempre desde Safari normal?
+- ¿En qué paso exacto se traba ahora — antes de poder ingresar el
+  código, o después, al tocar un nivel?
+- ¿Probó cerrando Safari por completo (deslizando hacia arriba para
+  quitarla de las apps recientes, no solo minimizarla) antes de volver a
+  entrar?
+
+Ninguno de los archivos tocados (`juego.html`, `sw.js`) necesita paso de
+despliegue aparte de este push a `main`.
+
+---
+
 ## 2026-10-19 (111) — Arregla el juego "congelado" en iOS: la nota carga pero ningún nivel entra
 
 ### Contexto
