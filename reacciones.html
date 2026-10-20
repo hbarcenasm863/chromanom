@@ -193,6 +193,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-ex.fx-on+.rxn-ex.fx-on{border-top:1px dashed var(--brd)}
 .fx-t{display:inline-flex;align-items:center;white-space:nowrap;color:var(--tx)}
 .fx-pl{color:var(--dimmer)}
+.fx-t.w{white-space:normal}
 .fx-rhs{display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.55em;row-gap:2.4em;border-radius:6px;transition:filter .2s}
 .fx-rhs .fx-t{color:var(--c2t);font-weight:600}
 .rxn-ex sub,.rxn-ex sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
@@ -204,7 +205,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .fx-lab{line-height:1.05;white-space:nowrap}
 .fx-bd{display:block;width:1.4px;height:.55em;background:currentColor}
 .fx-bd.dbl{width:5px;background:none;border-left:1.4px solid currentColor;border-right:1.4px solid currentColor}
-.fx-st.rg .fx-bd{height:.12em}
+.fx-st.rg .fx-bd{height:.3em}
 .fx-ring{height:2.15em;width:2em;display:block}
 .fx-cprop{height:1.7em;width:1.9em;display:block}
 .fx-arr{display:inline-flex;flex-direction:column;align-items:stretch;min-width:3.6em;font-family:'Outfit',sans-serif;font-size:.68em;text-align:center}
@@ -214,12 +215,39 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-ex .hn{font-weight:700}
 .rxn-ex-nota{white-space:normal}
 /* Modo práctica: el producto queda borroso hasta que el estudiante lo toque */
-body.fx-practice .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user-select:none;outline:1.5px dashed var(--brd);outline-offset:6px}
+body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user-select:none;outline:1.5px dashed var(--brd);outline-offset:6px}
 .fx-lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
 .fx-lblrow .rxn-ex-lbl{margin-bottom:0}
 .fx-prac{font:600 .72rem 'Outfit',sans-serif;color:var(--c1t);background:var(--c1b);border:1px solid transparent;border-radius:20px;padding:4px 11px;cursor:pointer}
 .fx-prac[aria-pressed="true"]{background:var(--c1t);color:#fff}
 @media(max-width:520px){.rxn-ex.fx-on{font-size:1rem}}
+
+/* ── MODELO "LIBRO" EN LAS REACCIONES EXPLICATIVAS (ecuación grande,
+   visión general, comparación molecular, tarjetas de tipo) ── */
+.fx-mol{font-family:'STIX Two Text','Times New Roman',serif;display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:.45em;row-gap:2.3em;font-size:1.25rem;font-weight:400;line-height:1.2;color:var(--tx);letter-spacing:0}
+.fx-mol.fx-hs{padding:1.45em 0 1.3em}
+.fx-mol.fx-big{font-size:1.5rem}
+.fx-mol.fx-sm{font-size:1.08rem}
+.fx-mol .fx-t{color:inherit}
+.fx-mol sub,.fx-mol sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
+.fx-mol sub{top:.28em}.fx-mol sup{top:-.45em}
+.rxn-cond{font-family:'STIX Two Text','Times New Roman',serif!important;font-size:.98rem!important;line-height:1.55}
+.fx-mol .hn,.fx-mol .bp{font-weight:600}
+.rxn-molcard .fx-mol{font-size:1.3rem}
+.rxn-molcard-extra .fx-mol{font-size:1.2rem}
+.meq.fx-meq{display:flex;justify-content:center}
+.meq.fx-meq .fx-mol{font-size:1.45rem}
+.meq.fx-meq .fx-rhs .fx-t{color:var(--c2t)}
+.mol-cmp-formula.fx-done{font-weight:400}
+.mol-cmp-formula.fx-done .fx-mol{font-size:1.2rem}
+.mol-cmp-arr.fx-done{font-family:'Outfit',sans-serif}
+.tipo-card-eq.fx-done{font-family:'STIX Two Text','Times New Roman',serif;display:flex;flex-direction:column;align-items:flex-start;gap:.3em}
+.tipo-card-eq.fx-done .fx-mol{justify-content:flex-start;font-size:1.12rem}
+.fx-arr.eqm i{height:1.4px;margin:.08em 0}
+.fx-arr.eqm i::after{top:-4px;border-left-width:8px;border-top:0;border-bottom:4.5px solid transparent;top:-4.5px}
+.fx-arr.eqm i.back::after{left:-1px;right:auto;border-left:0;border-right:8px solid var(--c2t);border-top:4.5px solid transparent;border-bottom:0;top:0}
+.fx-arr .ab,.fx-arr .be{white-space:normal;max-width:14em;line-height:1.15}
+@media(max-width:520px){.fx-mol.fx-big,.meq.fx-meq .fx-mol{font-size:1.2rem}.rxn-molcard .fx-mol{font-size:1.1rem}}
 
 /* ── MINI-QUIZ ── */
 .quiz-sep{height:1px;background:var(--brd);margin:14px 0 12px}
@@ -8224,10 +8252,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   // steppers for remaining bodies (3 steps each)
   ['ac-0','ac-1','ai-0','ai-1','ai-2','ai-3','ai-4','al-0','al-1','al-2','al-3','al-4','am-0','am-1','am-2','ao-0','ao-1','ao-2','ao-3','aq-0','aq-1','aq-2','aq-3','aq-4','aq-5','aq-6','ar-0','ar-1','ar-2','ar-3','ar-4','cb-1','cb-2','cb-3','cb-4','dv-0','dv-1','dv-2','hg-0','hg-1','hg-2'].forEach(id=>initMS(id,3));
   /* 1. .meq-arr → SVG con condición encima */
-  document.querySelectorAll('.meq-arr').forEach(el=>{
-    const cond=el.querySelector('.meq-cond')?.textContent.trim()||'';
-    el.innerHTML=mkArr(cond,175,false);
-  });
+  // (Las flechas de .meq las dibuja ahora fxExplicativas(), con el
+  // mismo modelo de los ejemplos: condición encima/debajo de la flecha.)
   /* 2. Extraer →[cond] de .rxn-ex-ea y marcar el siguiente .rxn-arrow */
   document.querySelectorAll('.rxn-ex-ea').forEach(el=>{
     const m=el.innerHTML.match(/^([\s\S]*?)\s*→\[([^\]]+)\]\s*$/);
@@ -8242,23 +8268,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.rxn-arrow').forEach(el=>{
     el.innerHTML=mkArr(el.dataset.cond||'',100,true);
   });
-  /* 4. .mol-cmp-arr: reemplazar ──[X]──→ y ──────→ por SVG */
-  document.querySelectorAll('.mol-cmp-arr > div:not(.mol-cmp-reag)').forEach(d=>{
-    const t=d.textContent.trim();
-    if(/[─→]/.test(t)){
-      // Antes exigía al menos 4 guiones antes de la flecha (o que la flecha
-      // fuera todo el contenido, sin texto después) — tarjetas con solo 2
-      // guiones ("──→") o con una anotación después de la flecha
-      // ("──→ (menos O₂)", "──→ aldol") no matcheaban ningún patrón y la
-      // flecha se quedaba como texto plano con guiones ASCII sin cabeza.
-      const m=t.match(/^─+(?:\[([^\]]+)\])?─*→\s*(.*)$/);
-      if(m){
-        const cond=m[1]||m[2]||'';
-        d.innerHTML=mkArr(cond,95,true);
-        d.style.cssText='display:flex;align-items:center;justify-content:center';
-      }
-    }
-  });
+  /* 4. .mol-cmp-arr: ahora las dibuja fxExplicativas() */
 });
 
 /* ── TABS ── */
@@ -9026,9 +9036,8 @@ const RXN_NAMES={
 function mkMolCard(spec,colorIdx,name){
   if(!spec)return '';
   let inner='';
-  if(spec.mol&&RM[spec.mol])inner=animateSVG(mkDevSVG(RM[spec.mol]));
-  else if(spec.benz!=null)inner=animateSVG(mkBenzSVG(spec.benz));
-  else if(spec.eq)inner=`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--tx)">${highlightBonds(spec.eq)}</div>`;
+  const n=fxSpec(spec);
+  if(n)inner=fxBlock(n);
   if(!inner)return '';
   return `<div class="rxn-molcard c${colorIdx}">${inner}${name?`<div class="rxn-molcard-name">${name}</div>`:''}</div>`;
 }
@@ -9056,7 +9065,8 @@ function mkReactionEq(id,d,arrW){
   const pCard=pDrawn?mkMolCard(d.p,1,pName):mkMolCard({eq:eqParts[2]},1,pName);
   if(!rCard&&!pCard)return ''; // ninguna estructura dibujable: que el llamador use el texto
   const condM=(eqParts[1]||'').match(/──\[([^\]]+)\]──→/);
-  const arrowSvg=mkArr(condM?condM[1]:'',arrW||90,true);
+  const cc=fxCondSplit(condM?condM[1]:'');
+  const arrowSvg=`<span class="fx-mol">${FX.arrowHTML(cc[0],cc[1])}</span>`;
   // El "+ algo" solo se saca aparte cuando la tarjeta es un dibujo real
   // (mol/benz): si quedó en texto de respaldo, ese "+ algo" YA viene
   // incluido en ese texto y sacarlo de nuevo lo duplicaba en pantalla.
@@ -9066,12 +9076,12 @@ function mkReactionEq(id,d,arrW){
   const coefR=rDrawn?leadingCoef(eqParts[0]||''):'', coefP=pDrawn?leadingCoef(eqParts[2]||''):'';
   return '<div class="rxn-eq-row">'
     +(coefR?`<span class="rxn-eq-coef">${coefR}</span>`:'')
-    +(rCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[0]||'')}</div>`)
-    +(extraR?`<div class="rxn-molcard-extra">${highlightBonds(extraR)}</div>`:'')
+    +(rCard||`<div class="rxn-molcard-extra">${fxBlock(fxNorm(eqParts[0]||''))}</div>`)
+    +(extraR?`<div class="rxn-molcard-extra">${fxBlock(fxNorm(extraR))}</div>`:'')
     +`<div style="flex-shrink:0">${arrowSvg}</div>`
     +(coefP?`<span class="rxn-eq-coef">${coefP}</span>`:'')
-    +(pCard||`<div class="rxn-molcard-extra">${highlightBonds(eqParts[2]||'')}</div>`)
-    +(extraP?`<div class="rxn-molcard-extra">${highlightBonds(extraP)}</div>`:'')
+    +(pCard||`<div class="rxn-molcard-extra">${fxBlock(fxNorm(eqParts[2]||''))}</div>`)
+    +(extraP?`<div class="rxn-molcard-extra">${fxBlock(fxNorm(extraP))}</div>`:'')
     +'</div>';
 }
 
@@ -9100,11 +9110,7 @@ function initRxnAnims(){
     const steps=box.querySelectorAll('.rxn-anim-step');
     if(steps.length<3)continue;
     const vis0=steps[0].querySelector('.rxn-anim-vis');
-    if(vis0&&d.r){
-      if(d.r.mol&&RM[d.r.mol])vis0.innerHTML=animateSVG(mkDevSVG(RM[d.r.mol]));
-      else if(d.r.benz!=null)vis0.innerHTML=animateSVG(mkBenzSVG(d.r.benz));
-      else if(d.r.eq)vis0.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${highlightBonds(d.r.eq)}</div>`;
-    }
+    if(vis0&&d.r){const n=fxSpec(d.r);if(n)vis0.innerHTML=fxBlock(n,'fx-big');}
     const vis1=steps[1].querySelector('.rxn-anim-vis');
     if(vis1){
       // Reactivo y producto dibujados con enlaces reales (mismo estilo que el
@@ -9112,14 +9118,10 @@ function initRxnAnims(){
       // como una reacción de verdad, no como texto plano con "CH(Cl)" entre
       // paréntesis (la profesora no enseña así en el tablero).
       const built=mkReactionEq(id,d,90);
-      vis1.innerHTML=built||(d.eq?`<div style="font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;text-align:center;line-height:2;white-space:pre-line">${highlightBonds(d.eq)}</div>`:'');
+      vis1.innerHTML=built||(d.eq?fxBlock(fxNorm(d.eq.replace(/<br>/g,' ')),'',true):'');
     }
     const vis2=steps[2].querySelector('.rxn-anim-vis');
-    if(vis2&&d.p){
-      if(d.p.mol&&RM[d.p.mol])vis2.innerHTML=animateSVG(mkDevSVG(RM[d.p.mol]));
-      else if(d.p.benz!=null)vis2.innerHTML=animateSVG(mkBenzSVG(d.p.benz));
-      else if(d.p.eq)vis2.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;text-align:center;line-height:1.8;white-space:pre-line">${highlightBonds(d.p.eq)}</div>`;
-    }
+    if(vis2&&d.p){const n=fxSpec(d.p);if(n)vis2.innerHTML=fxBlock(n,'fx-big');}
     // Ecuación grande de arriba de la tarjeta (.meq): mismo dibujo con
     // tarjetas que el paso "Condición" — reemplaza el texto/notación que
     // hubiera ahí a mano, para que las dos vistas de la reacción coincidan.
@@ -9164,9 +9166,9 @@ const MCF={
 function renderMolCmpFormulas(){
   for(const [id,d] of Object.entries(MCF)){
     const el=document.getElementById(id);
-    if(!el||!RM[d.mol])continue;
-    const svg=animateSVG(mkDevSVG(RM[d.mol]));
-    el.innerHTML=d.extra?`<span style="display:inline-block;vertical-align:middle">${svg}</span>  ${d.extra}`:svg;
+    if(!el||!FXM[d.mol])continue;
+    el.innerHTML=fxBlock(FXM[d.mol]+(d.extra?' '+d.extra:''));
+    el.classList.add('fx-done');
   }
 }
 document.addEventListener('DOMContentLoaded',renderMolCmpFormulas);
@@ -9193,7 +9195,11 @@ const FX=(function(){
   const txt=s=>esc(s)
     .replace(/_(\d+|n)/g,'<sub>$1</sub>')
     .replace(/\^(\d?[+\-−])/g,(m,a)=>'<sup>'+a.replace('-','−')+'</sup>')
-    .replace(/«([^»]*)»/g,'<span class="hn">$1</span>');
+    // «…» = grupo nuevo (rosado, .hn); ‹…› = enlace/átomo que se rompe
+    // (naranja, .bp). Se abren y cierran por separado para que el resaltado
+    // pueda envolver también un grupo apilado ⟦…⟧.
+    .replace(/«/g,'<span class="hn">').replace(/»/g,'</span>')
+    .replace(/‹/g,'<span class="bp">').replace(/›/g,'</span>');
   function part(p,kind){
     if(!p)return '';
     let dbl=false,lab=p;
@@ -9215,13 +9221,14 @@ const FX=(function(){
     }).join('');
   }
   function arrow(p){
-    let a='',b='';
-    if(p!=='->'){const m=p.slice(2,-3).split('|');a=m[0]||'';b=m[1]||''}
-    return `<span class="fx-arr"><span class="ab">${txt(a)}</span><i></i><span class="be">${txt(b)}</span></span>`;
+    let a='',b='';const eqm=p.endsWith('<=>');
+    if(p!=='->'&&p!=='<=>'){const m=p.slice(2,eqm?-4:-3).split('|');a=m[0]||'';b=m[1]||''}
+    return arrowHTML(a,b,eqm);
   }
-  const terms=p=>p.split(/ \+ /).map(t=>`<span class="fx-t">${mol(t)}</span>`).join('<span class="fx-pl">+</span>');
+  const arrowHTML=(a,b,eqm)=>`<span class="fx-arr${eqm?' eqm':''}"><span class="ab">${mol(a||'')}</span>${eqm?'<i></i><i class="back"></i>':'<i></i>'}<span class="be">${mol(b||'')}</span></span>`;
+  const terms=p=>p.split(/ \+ /).map(t=>`<span class="fx-t${(t.length>26&&!/[⟦@]/.test(t))?' w':''}">${mol(t)}</span>`).join('<span class="fx-pl">+</span>');
   function eq(s){
-    const parts=s.split(/(-\[[^\]]*\]->|->)/);let out='';
+    const parts=s.split(/(-\[[^\]]*\](?:->|<=>)|->|<=>)/);let out='';
     parts.forEach((p,i)=>{
       if(i%2===1)out+=arrow(p);
       else if(p.trim()){
@@ -9231,7 +9238,7 @@ const FX=(function(){
     });
     return out;
   }
-  return {eq};
+  return {eq,mol,terms,arrowHTML};
 })();
 function renderEjemplos(){
   document.querySelectorAll('.rxn-ex[data-eq]').forEach(ex=>{
@@ -9255,20 +9262,175 @@ function renderEjemplos(){
   const setPractice=on=>{
     document.body.classList.toggle('fx-practice',on);
     document.querySelectorAll('.fx-rhs.show').forEach(e=>e.classList.remove('show'));
-    document.querySelectorAll('.fx-rhs').forEach(e=>{if(on){e.setAttribute('tabindex','0');e.setAttribute('role','button')}else{e.removeAttribute('tabindex');e.removeAttribute('role')}});
+    document.querySelectorAll('.rxn-ex .fx-rhs').forEach(e=>{if(on){e.setAttribute('tabindex','0');e.setAttribute('role','button')}else{e.removeAttribute('tabindex');e.removeAttribute('role')}});
     document.querySelectorAll('.fx-prac').forEach(b=>{b.setAttribute('aria-pressed',on);b.textContent=on?'🎯 Modo práctica activo — toca un producto para verlo':'🎯 Modo práctica: ocultar productos'});
   };
   document.addEventListener('click',e=>{
     if(e.target.closest('.fx-prac')){setPractice(!document.body.classList.contains('fx-practice'));return}
-    const r=e.target.closest('.fx-rhs');
+    const r=e.target.closest('.rxn-ex .fx-rhs');
     if(r&&document.body.classList.contains('fx-practice'))r.classList.toggle('show');
   });
   document.addEventListener('keydown',e=>{
-    const r=e.target.closest&&e.target.closest('.fx-rhs');
+    const r=e.target.closest&&e.target.closest('.rxn-ex .fx-rhs');
     if(r&&(e.key==='Enter'||e.key===' ')&&document.body.classList.contains('fx-practice')){e.preventDefault();r.classList.toggle('show')}
   });
 }
 document.addEventListener('DOMContentLoaded',renderEjemplos);
+
+// ─── MODELO "LIBRO" PARA LAS REACCIONES EXPLICATIVAS ─────────────────────────
+// Lo mismo que los ejemplos, pero para la ecuación grande de cada tarjeta, la
+// "Visión general" (3 pasos), la comparación molecular y las tarjetas de tipo.
+// Las moléculas con nombre fijo (RM) tienen su fórmula escrita a mano en FXM;
+// el resto del texto (R−COOR′, CH₃−CH(OH)−CH₃…) se convierte solo con fxNorm.
+const FXM={
+  metano:'CH_4', propano:'CH_3—CH_2—CH_3', bromometano:'CH_3—Br', cloroetano:'CH_3—CH_2—Cl',
+  r2cloropropano:'CH_3—⟦Cl|CH⟧—CH_3', r2bromopropano:'CH_3—⟦Br|CH⟧—CH_3',
+  '12dibromoetano':'⟦Br|CH_2⟧—⟦Br|CH_2⟧', '1122tetrabromoetano':'⟦Br|CH|Br⟧—⟦Br|CH|Br⟧',
+  eteno:'CH_2=CH_2', propeno:'CH_3—CH=CH_2', bromoeteno:'CH_2=CH—Br',
+  etilenglicol:'⟦OH|CH_2⟧—⟦OH|CH_2⟧', etino:'HC≡CH', propino:'CH_3—C≡CH',
+  etanol:'CH_3—CH_2—OH', metanol:'CH_3—OH', etanal:'CH_3—⟦=O|C⟧—H',
+  propanona:'CH_3—⟦=O|C⟧—CH_3', acidoetanoico:'CH_3—⟦=O|C⟧—OH',
+  acetatoetilo:'CH_3—⟦=O|C⟧—O—CH_2—CH_3', etanamida:'CH_3—⟦=O|C⟧—NH_2',
+  metilamina:'CH_3—NH_2', grignard:'CH_3—MgBr', carboxilatoetanoico:'CH_3—⟦=O|C⟧—O^-',
+  aldol:'CH_3—⟦OH|CH⟧—CH_2—⟦=O|C⟧—H', cianohidrina:'CH_3—⟦OH|CH⟧—C≡N',
+  tbutilbromuro:'CH_3—⟦CH_3|C|Br⟧—CH_3', tbutanol:'CH_3—⟦CH_3|C|OH⟧—CH_3',
+  propan2ol:'CH_3—⟦OH|CH⟧—CH_3', cloruroacetilo:'CH_3—⟦=O|C⟧—Cl',
+  r12dibromopropano:'CH_3—⟦Br|CH⟧—⟦Br|CH_2⟧', butan2ol:'CH_3—⟦OH|CH⟧—CH_2—CH_3',
+  buteno2:'CH_3—CH=CH—CH_3'
+};
+// Texto con subíndices Unicode → notación FX: bonos "−" como raya larga,
+// sustituyentes entre paréntesis sobre un C apilados encima, y los grupos
+// carbonilo condensados (CHO, COOH, COO, COCl, CONH₂, −CO−) con el C=O dibujado.
+function fxNorm(s){
+  s=String(s||'').replace(/\s+/g,' ').trim().replace(/−/g,'—');
+  s=s.replace(/(^|[^A-Za-z])(C(?:H[₂₃]?)?)([«‹]?)\(([^()]+)\)([»›]?)/g,(m,pre,at,o,inner,c)=>`${pre}⟦${o}${inner}${c}|${at}⟧`);
+  s=s.replace(/CHO(?![A-Za-z₀-₉])/g,'⟦=O|C⟧H');
+  // −CHBr− / −CH(«Cl»)− condensado → halógeno (u OH) colgando del CH
+  s=s.replace(/—CH([«‹]?)(Br|Cl|I|X|OH)([»›]?)(?=—)/g,'—⟦$1$2$3|CH⟧');
+  s=s.replace(/CO(?=[»›]?(?:O|Cl|NH|N|—|C|R|Nu))/g,'⟦=O|C⟧');
+  // Un resaltado no puede cruzar un " + " (cada término es su propia caja):
+  // se cierra antes y se reabre después.
+  let out='',open='';
+  for(let i=0;i<s.length;i++){
+    const ch=s[i];
+    if(ch==='«'||ch==='‹')open=ch; else if(ch==='»'||ch==='›')open='';
+    if(open&&s.startsWith(' + ',i)){const cl=open==='«'?'»':'›';out+=cl+' + '+open;i+=2;continue}
+    out+=ch;
+  }
+  return out;
+}
+const fxHas=n=>/[⟦@]/.test(n);
+function fxBlock(n,cls,isEq){
+  const body=isEq?FX.eq(n):FX.terms(n);
+  return `<div class="fx-mol${fxHas(n)?' fx-hs':''}${cls?' '+cls:''}">${body}</div>`;
+}
+function fxBenz(list){
+  if(!list||!list.length)return '@ring';
+  const l=list.map(b=>b.label);
+  if(l.length===1&&/C(H?)O/.test(l[0]))return fxNorm('@ring—'+l[0]);
+  return `⟦${l[0]}|@ring${l[1]?'|'+l[1]:''}⟧`;
+}
+function fxSpec(spec){
+  if(!spec)return '';
+  if(spec.mol&&FXM[spec.mol])return FXM[spec.mol];
+  if(spec.benz!=null)return fxBenz(spec.benz);
+  if(spec.eq)return fxNorm(spec.eq.replace(/<br>/g,' '));
+  return '';
+}
+// Condición larga ("éter → H₃O⁺", "H₃PO₄/SiO₂, 300°C") → una parte encima
+// y otra debajo de la flecha, para que la flecha no quede kilométrica.
+function fxCondSplit(c){
+  c=(c||'').trim();if(!c)return ['',''];
+  let m=c.match(/^(.+?)\s+→\s+(.+)$/);if(m)return [m[1],m[2]];
+  if(c.length>14){m=c.match(/^(.+?),\s+(.+)$/)||c.match(/^(.+?)\s+(\(.+\))$/);if(m)return [m[1],m[2]];}
+  return [c,''];
+}
+// Elemento del HTML → notación (los <span class="hn|bp|at-x|at-h"> pasan a
+// «…»/‹…›; el benceno SVG viejo pasa a @ring con su sustituyente).
+// Devuelve null si encuentra algo que no sabe convertir: ahí se deja igual.
+function fxFromEl(el){
+  let out='';
+  for(const n of el.childNodes){
+    if(n.nodeType===3){out+=n.textContent;continue}
+    if(n.nodeType!==1)continue;
+    const tag=n.tagName.toLowerCase();
+    if(tag==='svg'){
+      if(!n.querySelector('polygon')){out+=n.textContent;continue}
+      const up=[],dn=[];
+      n.querySelectorAll('text').forEach(t=>{const v=t.textContent.trim();if(v)(+t.getAttribute('y')<20?up:dn).push(v)});
+      if(up.length>1||dn.length>1)return null;
+      // Grupo carbonilo en el anillo (CO−CH₃, CHO…): se escribe al lado
+      // (@ring—CO…) para que fxNorm le dibuje el C=O con su propio apilado.
+      if(up.length===1&&!dn.length&&/C(H?)O/.test(up[0])){out+=` @ring—${up[0]} `;continue}
+      out+=(up.length||dn.length)?` ⟦${up[0]||''}|@ring|${dn[0]||''}⟧ `:' @ring ';
+      continue;
+    }
+    if(tag==='br'){out+=' ';continue}
+    if(tag==='span'||tag==='b'||tag==='strong'||tag==='em'){
+      const inner=fxFromEl(n);if(inner===null)return null;
+      const c=n.className&&n.className.baseVal===undefined?n.className:'';
+      if(/\b(hn|at-x|meq-reag)\b/.test(c))out+='«'+inner+'»';
+      else if(/\b(bp|at-h)\b/.test(c))out+='‹'+inner+'›';
+      else out+=inner;
+      continue;
+    }
+    return null;
+  }
+  return out;
+}
+function fxArrFromText(t){
+  // "──[hν]──→ extra", "──────→", "────⇌────"
+  t=(t||'').replace(/\s+/g,' ').trim();
+  const eqm=/⇌/.test(t);
+  const m=t.match(/^─*(?:\[([^\]]+)\])?─*[→⇌]─*\s*(.*)$/);
+  if(!m)return null;
+  return {cond:m[1]||'',extra:m[2]||'',eqm};
+}
+function fxExplicativas(){
+  // 1) Ecuaciones grandes (.meq) que no reemplazó mkReactionEq
+  document.querySelectorAll('.meq').forEach(meq=>{
+    if(meq.querySelector('.rxn-eq-row')||meq.classList.contains('fx-meq'))return;
+    const sides=meq.querySelectorAll(':scope > .meq-side'),arr=meq.querySelector(':scope > .meq-arr');
+    if(sides.length!==2||!arr)return;
+    const cond=(arr.querySelector('.meq-cond')||{}).textContent||'';
+    const line=(arr.querySelector('.meq-line')||{}).textContent||'';
+    const cc=fxCondSplit(cond),eqm=/⇌/.test(line);
+    const l=fxFromEl(sides[0]),r=fxFromEl(sides[1]);
+    if(l===null||r===null){arr.innerHTML=`<span class="fx-mol">${FX.arrowHTML(cc[0],cc[1],eqm)}</span>`;return}
+    const n=fxNorm(l)+` -[${cc[0]}|${cc[1]}]${eqm?'<=>':'->'} `+fxNorm(r);
+    meq.innerHTML=fxBlock(n,'',true);meq.classList.add('fx-meq');
+  });
+  // 2) Comparación molecular: fórmulas y flechas
+  document.querySelectorAll('.mol-cmp-formula:not(.fx-done)').forEach(el=>{
+    const t=fxFromEl(el);if(t===null)return;
+    el.innerHTML=fxBlock(fxNorm(t));el.classList.add('fx-done');
+  });
+  document.querySelectorAll('.mol-cmp-arr').forEach(box=>{
+    let top=[],bot=[],pre='',eqm=false,ok=false;
+    for(const d of box.children){
+      if(d.classList.contains('mol-cmp-reag')){
+        // reactivo con dibujo (p. ej. "+ benceno"): va antes de la flecha, no encima
+        if(d.querySelector('svg')){const n=fxFromEl(d);if(n!==null){pre+=fxNorm(n);continue}}
+        top.push(d.textContent.trim());continue}
+      const a=fxArrFromText(d.textContent);
+      if(!a){top.push(d.textContent.trim());continue}
+      ok=true;eqm=a.eqm;if(a.cond)bot.push(a.cond);if(a.extra)bot.push(a.extra);
+    }
+    if(!ok)return;
+    box.innerHTML=(pre?fxBlock(pre):'')+`<span class="fx-mol fx-sm">${FX.arrowHTML(top.join(' '),bot.join(' '),eqm)}</span>`;
+    if(pre)box.style.cssText='display:flex;align-items:center;gap:.5em';
+    box.classList.add('fx-done');
+  });
+  // 3) Tarjetas de tipo (resumen arriba de cada grupo)
+  document.querySelectorAll('.tipo-card-eq').forEach(el=>{
+    const t=fxFromEl(el);if(t===null)return;
+    const lines=t.split(/\s\|\s/).map(x=>fxNorm(x
+      .replace(/→\[([^\]]+)\]→/g,(m,c)=>` -[${fxCondSplit(c).join('|')}]-> `)
+      .replace(/\s*⇌\s*/g,' <=> ').replace(/\s→\s/g,' -> ')));
+    el.innerHTML=lines.map(x=>fxBlock(x,'',true)).join('');el.classList.add('fx-done');
+  });
+}
+document.addEventListener('DOMContentLoaded',fxExplicativas);
 
 /* ── ACCESIBILIDAD: teclado + lectores de pantalla ── */
 document.addEventListener('DOMContentLoaded',()=>{

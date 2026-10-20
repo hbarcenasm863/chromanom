@@ -7,6 +7,61 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (121) — Reacciones: el modelo "libro" también en las reacciones explicativas
+
+### Contexto
+Después de pasar los ejemplos al modelo del "Mapa de Reacciones Orgánicas"
+(sesión 120), el docente pidió que las reacciones explicativas de cada
+tarjeta también usaran ese modelo de moléculas y esa tipografía. Hasta ahora
+la ecuación grande, la "Visión general" y la comparación molecular se veían
+en letra de máquina de escribir (JetBrains Mono), con fórmulas tipo
+`CH₃−CH(OH)−CH₃` o dibujos de enlaces largos.
+
+### Cambios (`reacciones.html`)
+- **Ecuación grande de cada tarjeta y paso 2 de la "Visión general"**: las
+  tarjetas de reactivo/producto (con su nombre) se mantienen, pero la
+  molécula de adentro ahora se dibuja con el modelo del libro (letra STIX
+  Two Text, grupos colgando arriba/abajo con su enlace, C=O dibujado,
+  benceno de Kekulé) y la flecha lleva la condición encima/debajo.
+  Las fórmulas de las moléculas con nombre se escribieron a mano (`FXM`).
+- **Pasos 1 y 3 de la "Visión general"** (reactivo y producto solos): mismo
+  modelo.
+- **Ecuaciones generales con R** (las de `.meq` que no tienen molécula
+  concreta, p. ej. `R−COOR′ + LiAlH₄`), **comparación molecular**
+  (`.mol-cmp`, 104 fórmulas y 55 flechas) y **tarjetas de tipo** de cada
+  grupo: se convierten solas con `fxNorm()`, que toma el texto actual y
+  (1) pone los sustituyentes entre paréntesis encima del carbono
+  (`CH(OH)` → OH colgando), (2) dibuja los carbonilos condensados (`CHO`,
+  `COOH`, `COO⁻`, `COCl`, `CONH₂`, `−CO−`), (3) cambia `−CHBr−` por el Br
+  colgando, (4) conserva los resaltados de color (grupo nuevo en rosado,
+  enlace que se rompe en naranja) y (5) cambia los bencenos azules viejos por
+  el hexágono de Kekulé.
+- La línea de condiciones (`.rxn-cond`) pasó a la misma letra tipo libro.
+- El modo práctica (productos borrosos) sigue aplicándose solo a los
+  ejemplos, no a las explicaciones.
+
+### Otros
+- `sw.js`: caché `v22`→`v23`.
+
+### Verificado con Playwright
+- Sin errores de página; las 104 fórmulas de comparación, las 48 ecuaciones
+  grandes y las 11 tarjetas de tipo quedaron convertidas, sin símbolos de
+  la notación interna sueltos en pantalla.
+- A 390 px (celular), con todas las tarjetas abiertas en las 10 pestañas,
+  nada se sale de la pantalla y no hay scroll horizontal.
+- Se revisaron capturas de cianohidrina, nitración, acilación de
+  Friedel-Crafts, oxidación de alcoholes, eliminación E2, diazonio,
+  KMnO₄, aldólica y amidas.
+
+### Pendiente
+- Los diagramas de mecanismo paso a paso (flechas curvas de electrones) y
+  el esquema azul de "anillo + electrófilo" de los aromáticos siguen con
+  su dibujo propio en letra monoespaciada: son dibujos hechos a mano, y
+  pasarlos al modelo libro requiere redibujarlos uno por uno. Se puede hacer
+  si el docente lo pide.
+
+---
+
 ## 2026-10-20 (120) — Reacciones: ejemplos dibujados como en el libro + modo práctica
 
 ### Contexto
