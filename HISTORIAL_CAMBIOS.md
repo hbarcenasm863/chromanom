@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (124) — Docente: el número de versiones funciona siempre y ya no se marca "Alcoholes" solo
+
+### Contexto
+El docente reportó dos problemas en `docente.html`: (1) en "6 · Versiones
+(para evitar copia)" no lo dejaba escribir el número de versiones, y (2)
+el tema "Alcoholes" aparecía siempre marcado, como si fuera un valor por
+defecto. Se reprodujeron los dos con Playwright antes de corregirlos.
+
+### Causa
+1. El tipo de documento por defecto es "Guía completa", y para la guía el
+   campo de versiones se **bloqueaba** a propósito (sesión 119: "una guía
+   siempre sale en una sola versión"), sin ningún aviso en pantalla. Como
+   la página abre en "Guía completa", el campo parecía dañado.
+2. `pintarTemas()` marcaba "alcoholes" cada vez que no había ningún tema
+   marcado (al cargar la página y al desmarcar todo).
+
+### Cambios
+- **`docente-app.js`**: el número de versiones funciona con los tres tipos
+  de documento. En la **guía completa** las sesiones de estudio salen una
+  sola vez (sin rótulo de versión) y la **evaluación** de las hojas aparte
+  sale en N versiones, cada una con distinto orden de preguntas y
+  opciones y marcada "Versión X de N". Taller y evaluación sueltos salen
+  N veces completos, como antes.
+- **`docente-app.js`**: se quitó la preselección de "Alcoholes"; la página
+  empieza sin temas marcados y, si se genera sin ninguno, avisa "Marca al
+  menos un tema".
+- **`docente.html`**: la ayuda debajo del campo de versiones cambia según
+  el tipo de documento y explica qué se versiona.
+- `sw.js`: caché `v25`→`v26`.
+
+### Verificado con Playwright (servidor local, como en GitHub Pages)
+- Al cargar: ningún tema marcado y campo de versiones habilitado.
+- Guía + Alcoholes + 3 versiones → Guía (5 páginas) + Evaluación 1/3,
+  2/3 y 3/3, con preguntas en distinto orden en cada versión.
+- Taller ×3 y Evaluación ×3 → 3 documentos cada uno, rotulados.
+- Nota: abriendo `docente.html` como archivo local (file://) los bancos
+  del Generador y del Juego no cargan y los tipos de ejercicio salen
+  bloqueados; eso es del navegador, no del sitio publicado.
+
+---
+
 ## 2026-10-20 (123) — Reacciones: rediseño de navegación y densidad (UX/UI)
 
 ### Contexto

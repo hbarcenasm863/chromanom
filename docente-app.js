@@ -187,7 +187,6 @@ function temasSel(){return TEMAS.filter(function(t){var c=document.querySelector
 function pintarTemas(){
   var cont=$('f-temas');if(!cont)return;
   var previos={};document.querySelectorAll('input[name=tema]:checked').forEach(function(c){previos[c.value]=1;});
-  if(!Object.keys(previos).length)previos={alcoholes:1};
   cont.innerHTML=TEMAS.map(function(t){
     var P=poolEjercicios([t]);var nEj=P.A.length+P.B.length+P.C.length+P.D.length+P.X.length+P.E.length;
     var nS=(D.SABER[t.id]||[]).length;
@@ -425,7 +424,7 @@ function leerForm(){
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),area:$('f-area').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
-function construirVersion(F,verIdx,verTotal){
+function construirVersion(F,verIdx,verTotal,soloEval){
   var avisos=[];
   var nombreTemas=F.temas.map(function(t){return t.corto;}).join(' · ');
   var semilla=[F.variante,verIdx,F.tipo,F.temas.map(function(t){return t.id;}).join(',')].join('|');
@@ -439,11 +438,11 @@ function construirVersion(F,verIdx,verTotal){
 
   // Ejercicios
   var selEj=null;
-  if(F.tipo!=='evaluacion'){
+  if(F.tipo!=='evaluacion'&&!soloEval){
     if(!tipos.length)avisos.push('No hay ejercicios disponibles para los tipos marcados en este tema.');
     else{selEj=elegirEjercicios(P,tipos,F.nEj,rng(semilla+'|ej'));if(selEj.total<F.nEj)avisos.push('Solo hay '+selEj.total+' ejercicios disponibles para esta selección.');}
   }
-  if(F.tipo==='guia'){
+  if(F.tipo==='guia'&&!soloEval){
     var b=[];
     b.push('<div class="ruta"><span>Sesión 1 · Aprendizajes previos</span><span>Sesión 2 · Información</span><span>Sesión 3 · Trabajo práctico</span><span>Sesión 4 · Evaluación (hojas aparte)</span></div>');
     b.push('<h3 class="ses"><span>1</span> Aprendizajes previos</h3><p class="intro">Antes de empezar, recordemos lo que ya sabes y dónde aparece este tema en tu vida.</p>');
@@ -455,8 +454,9 @@ function construirVersion(F,verIdx,verTotal){
     b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca cómo te sientes con lo aprendido:</p>'+
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
-    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante()+cajaAlineacion(F.alin);
-    docs.push({clase:'guia',etiqueta:verTotal>1?'Guía '+verIdx+'/'+verTotal:'Guía',cab:cabCorta('Guía'),primera:prim,bloques:b});
+    // La guía sale una sola vez (es igual para todos): no lleva rótulo de versión.
+    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º','')+lineaEstudiante()+cajaAlineacion(F.alin);
+    docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía',true),primera:prim,bloques:b});
   }
   if(F.tipo==='taller'){
     var bt=selEj?bloquesEjercicios(selEj,1):[];
@@ -489,15 +489,15 @@ function construirVersion(F,verIdx,verTotal){
   }
   return {docs:docs,avisos:avisos};
 }
-// «Guía completa» es un documento de estudio único (sesiones 1-2 estáticas);
-// las versiones solo tienen sentido para repartir talleres o evaluaciones
-// distintas entre estudiantes sentados cerca. Por eso una guía ignora
-// nVersiones y siempre sale en una sola versión.
+// «Guía completa»: las sesiones 1-3 son de estudio y salen una sola vez;
+// lo que se reparte para evitar copia es la evaluación (hojas aparte), así
+// que con N versiones la guía sale 1 vez y la evaluación sale N veces.
+// Taller y evaluación sueltos salen N veces completos.
 function construirTodas(F){
-  var N=F.tipo==='guia'?1:F.nVersiones;
+  var N=F.nVersiones;
   var avisos=[],docs=[];
   for(var i=1;i<=N;i++){
-    var R=construirVersion(F,i,N);
+    var R=construirVersion(F,i,N,F.tipo==='guia'&&i>1);
     docs=docs.concat(R.docs);
     R.avisos.forEach(function(a){if(avisos.indexOf(a)<0)avisos.push(a);});
   }
@@ -509,7 +509,7 @@ function generar(){
   var F=leerForm();
   var info=$('vista-info');
   if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marca al menos un tema.</p>';return Promise.resolve();}
-  info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.tipo!=='guia'&&F.nVersiones>1?'s':'')+'…</p>';
+  info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.nVersiones>1?'s':'')+'…</p>';
   return bancosListos.then(function(){return (document.fonts&&document.fonts.ready)||null;}).then(function(){
     var R=construirTodas(F);
     var medidor=$('medidor');medidor.innerHTML='';
@@ -558,13 +558,12 @@ function syncTipoDoc(){
   document.body.classList.toggle('sin-eval',t==='taller');
   if(t==='taller'&&+$('f-nej').value<16)$('f-nej').value=20;
   if(t==='guia'&&+$('f-nej').value>16)$('f-nej').value=12;
-  // La guía completa es un documento de estudio único: no tiene sentido
-  // generar «versiones» distintas de las sesiones 1-2 (son siempre iguales).
-  var nver=$('f-nver');
-  if(nver){
-    nver.disabled=(t==='guia');
-    if(t==='guia')nver.value='1';
-  }
+  // El número de versiones funciona con los tres tipos (en la guía completa
+  // aplica a la evaluación de las hojas aparte); solo cambia la ayuda.
+  var ay=$('f-nver-ayuda');
+  if(ay)ay.textContent=t==='guia'
+    ?'Guía completa: las sesiones de estudio salen una sola vez y la evaluación (hojas aparte) sale en esa cantidad de versiones, cada una con distinto orden de preguntas y de opciones, marcada «Versión X de N».'
+    :'Genera esa cantidad de '+(t==='taller'?'talleres':'evaluaciones')+' de una vez —cada versión con distinto orden de preguntas y de opciones, y marcada «Versión X de N»—, listas para imprimir juntas en la misma vista.';
 }
 window.DocenteGen={generar:generar,bancos:function(){return bancosListos;},_B:B};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();
