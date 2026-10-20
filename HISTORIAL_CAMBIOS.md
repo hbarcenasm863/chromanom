@@ -7,6 +7,56 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (120) — Reacciones: ejemplos dibujados como en el libro + modo práctica
+
+### Contexto
+El docente compartió una página propia ("Mapa de Reacciones Orgánicas") y
+pidió revisar qué se podía aprovechar de ella para mejorar `reacciones.html`,
+sobre todo la forma de dibujar las moléculas, que le pareció mucho mejor:
+los grupos (=O, OH, Br…) colgando arriba o abajo del carbono con su enlace,
+el benceno como hexágono, y los reactivos/condiciones encima y debajo de la
+flecha. En `reacciones.html` los bloques "Ejemplos / Más ejemplos" estaban en
+texto plano monoespaciado (`CH₃CH(OH)CH₃`, `+ HCN →[OH⁻] ──→`).
+
+### Cambios (`reacciones.html`)
+- Los **60 ejemplos** de todas las pestañas se reescribieron en la notación
+  de esa página (atributo `data-eq` en cada `.rxn-ex`) y se dibujan con un
+  renderizador nuevo (`FX` / `renderEjemplos()`): fórmula semidesarrollada
+  en letra tipo libro (STIX Two Text), sustituyentes apilados con su enlace
+  (doble enlace dibujado como doble raya), benceno de Kekulé, ciclohexano y
+  ciclopropano como polígonos, y condiciones arriba/abajo de la flecha
+  (p. ej. "1) LiAlH₄ / 2) H₂O").
+- Se conserva el resaltado rosado (`.hn`) del grupo nuevo en el producto y
+  la etiqueta con el nombre.
+- Algunos ejemplos quedaron más completos de paso: deshidrohalogenación con
+  KOH/etanol ahora muestra el H₂O; la diazotación pone NaNO₂/HCl y 0 °C
+  sobre la flecha; las reducciones muestran los dos pasos (hidruro, luego
+  H₂O).
+- **Modo práctica** (también tomado de esa página): junto a cada título de
+  ejemplos hay un botón "🎯 Modo práctica: ocultar productos"; al activarlo,
+  los productos de todos los ejemplos quedan borrosos y el estudiante los
+  revela tocándolos (también con teclado: Enter/Espacio).
+- El texto viejo de cada ejemplo sigue en el HTML como respaldo si el
+  JavaScript no corre.
+
+### Otros
+- `sw.js`: caché `v21`→`v22` para que el cambio llegue a quien tenga la app
+  instalada.
+
+### Verificado con Playwright
+- Los 60 ejemplos se dibujan sin errores de página en las 10 pestañas.
+- A 390 px de ancho (celular) ningún ejemplo se sale de la pantalla y no hay
+  scroll horizontal.
+- Modo práctica: el producto queda borroso y se revela al tocarlo.
+
+### Pendiente
+- Nada obligatorio. Lo demás de la página del docente (buscador global,
+  organización por capítulos del libro con números de problemas) no se
+  trasladó porque `reacciones.html` ya tiene su propia organización por
+  pestañas; se puede agregar si el docente lo pide.
+
+---
+
 ## 2026-10-20 (119) — Varias versiones por generación y banco Saber 11 ampliado a 240
 
 ### Contexto

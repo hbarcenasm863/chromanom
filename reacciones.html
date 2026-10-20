@@ -13,7 +13,7 @@
 <title>ChromaNom · Reacciones</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
@@ -183,6 +183,43 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .rxn-arrow{display:inline-flex;align-items:center;flex-shrink:0}
 .rxn-ex-p{color:var(--c2t);font-weight:700}
 .rxn-ex-nota{font-size:.7rem;color:var(--dimmer);font-style:italic;font-family:'Outfit',sans-serif;background:var(--surf2);border-radius:4px;padding:1px 7px}
+
+/* ── EJEMPLOS DIBUJADOS (fórmula semidesarrollada estilo libro) ──
+   Los grupos que cuelgan de un carbono (=O, OH, Br…) se dibujan ARRIBA o
+   ABAJO del átomo con su enlace, el benceno como hexágono de Kekulé, y los
+   reactivos/condiciones encima y debajo de la flecha — como en el tablero. */
+.rxn-ex.fx-on{font-family:'STIX Two Text','Times New Roman',serif;font-size:1.12rem;gap:.5em .55em;margin-bottom:6px;padding:.25em 0}
+.rxn-ex.fx-hs{padding:1.7em 0 1.5em;row-gap:2.4em}
+.rxn-ex.fx-on+.rxn-ex.fx-on{border-top:1px dashed var(--brd)}
+.fx-t{display:inline-flex;align-items:center;white-space:nowrap;color:var(--tx)}
+.fx-pl{color:var(--dimmer)}
+.fx-rhs{display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.55em;row-gap:2.4em;border-radius:6px;transition:filter .2s}
+.fx-rhs .fx-t{color:var(--c2t);font-weight:600}
+.rxn-ex sub,.rxn-ex sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
+.rxn-ex sub{top:.28em}.rxn-ex sup{top:-.45em}
+.fx-st{position:relative;display:inline-block}
+.fx-st>svg:first-child{display:block}
+.fx-bu,.fx-bl{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.fx-bu{bottom:100%}.fx-bl{top:100%}
+.fx-lab{line-height:1.05;white-space:nowrap}
+.fx-bd{display:block;width:1.4px;height:.55em;background:currentColor}
+.fx-bd.dbl{width:5px;background:none;border-left:1.4px solid currentColor;border-right:1.4px solid currentColor}
+.fx-st.rg .fx-bd{height:.12em}
+.fx-ring{height:2.15em;width:2em;display:block}
+.fx-cprop{height:1.7em;width:1.9em;display:block}
+.fx-arr{display:inline-flex;flex-direction:column;align-items:stretch;min-width:3.6em;font-family:'Outfit',sans-serif;font-size:.68em;text-align:center}
+.fx-arr .ab,.fx-arr .be{min-height:1.25em;padding:0 .35em;white-space:nowrap;color:var(--c3t);font-weight:700}
+.fx-arr i{position:relative;display:block;height:1.6px;background:var(--c2t);margin:.2em 0}
+.fx-arr i::after{content:"";position:absolute;right:-1px;top:-4px;border-left:9px solid var(--c2t);border-top:4.8px solid transparent;border-bottom:4.8px solid transparent}
+.rxn-ex .hn{font-weight:700}
+.rxn-ex-nota{white-space:normal}
+/* Modo práctica: el producto queda borroso hasta que el estudiante lo toque */
+body.fx-practice .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user-select:none;outline:1.5px dashed var(--brd);outline-offset:6px}
+.fx-lblrow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.fx-lblrow .rxn-ex-lbl{margin-bottom:0}
+.fx-prac{font:600 .72rem 'Outfit',sans-serif;color:var(--c1t);background:var(--c1b);border:1px solid transparent;border-radius:20px;padding:4px 11px;cursor:pointer}
+.fx-prac[aria-pressed="true"]{background:var(--c1t);color:#fff}
+@media(max-width:520px){.rxn-ex.fx-on{font-size:1rem}}
 
 /* ── MINI-QUIZ ── */
 .quiz-sep{height:1px;background:var(--brd);margin:14px 0 12px}
@@ -881,14 +918,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">① Iniciación: X₂ →[hν]→ 2 X•  ② Propagación: X• + R−H → R• + HX  |  R• + X₂ → R−X + X•  ③ Terminación: 2 R• → R−R</div>
         <div class="rxn-regla">📌 Ojo con esto: Br₂ es mucho más selectivo que Cl₂ — va directo por el H más sustituido disponible (3° &gt; 2° &gt; 1°), porque ahí el radical que se forma es el más estable. El propano del ejemplo no tiene C terciario, así que Br₂ va por el 2° (más sustituido que el 1°) — por eso sale 2-bromopropano casi exclusivamente</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.08s">
+        <div class="rxn-ex" data-eq="CH_4 + Cl_2 -[hν]-&gt; CH_3«Cl» + HCl" style="animation-delay:.08s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 28 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₄</tspan></text></svg></span>
           <span class="rxn-ex-ea">+ Cl₂ →[hν]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">Cl</span> + HCl</span>
           <span class="rxn-ex-nota">clorometano</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.23s">
+        <div class="rxn-ex" data-eq="@chex + Cl_2 -[hν]-&gt; ⟦«Cl»|@chex⟧ + HCl" style="animation-delay:.23s">
           <span class="rxn-ex-r">c-C₆H₁₂</span>
           <span class="rxn-ex-ea">+ Cl₂ →[hν]</span>
           <span class="rxn-arrow">──→</span>
@@ -1046,13 +1083,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-cond">Necesitan exceso de O₂ · es exotérmica · si es un cicloalcano CₙH₂ₙ, usa 3n/2 mol O₂</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_4 + 2O_2 -&gt; CO_2 + 2H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₄ + 2 O₂</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CO₂ + 2 H₂O</span>
           <span class="rxn-ex-nota">metano</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.15s">
+        <div class="rxn-ex" data-eq="C_3H_8 + 5O_2 -&gt; 3CO_2 + 4H_2O" style="animation-delay:.15s">
           <span class="rxn-ex-r">C₃H₈ + 5 O₂</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">3 CO₂ + 4 H₂O</span>
@@ -1214,7 +1251,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">La señal es la llama: anaranjada o amarilla, con humo negro</div>
         <div class="rxn-regla">⚠️ Ojo con esto: el CO es incoloro, inodoro y tóxico — se te pega a la hemoglobina y bloquea el transporte de O₂</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="2CH_4 + 3O_2 -[O_2 escaso]-&gt; 2CO + 4H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">2 CH₄ + 3 O₂</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">2 CO + 4 H₂O</span>
@@ -1360,7 +1397,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">El ángulo ideal C−C−C es 109.5° · el ciclopropano queda forzado a 60° → tensión extrema → se abre casi espontáneo · ciclobutano y superiores ya son estables</div>
         <div class="rxn-regla">📌 Truco de examen: cicloalcanos de ≥4 carbonos reaccionan como alcanos normales (SR) — solo el ciclopropano abre por adición</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@cprop + HBr -&gt; CH_3—CH_2—CH_2«Br»" style="animation-delay:.05s">
           <span class="rxn-ex-r">c-C₃H₆ + HBr</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−CH₂−CH₂Br</span>
@@ -1509,14 +1546,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">① Iniciación: HNO₃ →[Δ]→ •OH + •NO₂  ② Propagación: •OH + R−H → R• + H₂O  |  R• + HNO₃ → R−NO₂ + •OH  ③ También hay ruptura de C−C a esta temperatura (craqueo)</div>
         <div class="rxn-regla">📌 Ojo con esto: a diferencia de la halogenación (que conserva el esqueleto de carbonos), la nitración en fase vapor SÍ puede romper enlaces C−C — por eso el producto real es siempre una MEZCLA de nitroalcanos, no un solo compuesto puro</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.08s">
+        <div class="rxn-ex" data-eq="CH_3—CH_3 + HNO_3 -[Δ]-&gt; CH_3—CH_2«NO_2» + H_2O" style="animation-delay:.08s">
           <span class="rxn-ex-r">CH₃−CH₃</span>
           <span class="rxn-ex-ea">+ HNO₃ →[Δ]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">NO₂</span> + H₂O</span>
           <span class="rxn-ex-nota">nitroetano</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.23s">
+        <div class="rxn-ex" data-eq="CH_3—CH_2—CH_3 + HNO_3 -[Δ]-&gt; CH_3NO_2 + CH_3CH_2NO_2 + CH_3CH_2CH_2«NO_2» + CH_3⟦«NO_2»|CH⟧CH_3" style="animation-delay:.23s">
           <span class="rxn-ex-r">CH₃−CH₂−CH₃</span>
           <span class="rxn-ex-ea">+ HNO₃ →[Δ]</span>
           <span class="rxn-arrow">──→</span>
@@ -1751,14 +1788,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: HCl, HBr o HI · trabaja a T° ambiente, sin catalizador · X = Cl, Br, I</div>
         <div class="rxn-regla">📌 Truco de examen: H → C con más H (menos sustituido) · X → C con menos H (más sustituido)</div>
         <div class="rxn-ex-lbl">Más ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH=CH_2 + HBr -&gt; CH_3—⟦«Br»|CH⟧—CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ <span class="at-h">H</span><span class="at-x">Br</span></span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−CH<span class="at-x">(Br)</span>−CH₃</span>
           <span class="rxn-ex-nota">Br al C2 (más sustituido)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.2s">
+        <div class="rxn-ex" data-eq="CH_2=CH_2 + HCl -&gt; CH_3—CH_2«Cl»" style="animation-delay:.2s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span></span>
           <span class="rxn-ex-ea">+ <span class="at-h">H</span><span class="at-x">Cl</span></span>
           <span class="rxn-arrow">──→</span>
@@ -1914,7 +1951,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: Cl₂ o Br₂ en CCl₄ · sin luz, sin calor · la estereoquímica es adición anti (trans)</div>
         <div class="rxn-regla">🧪 Truco de examen — Prueba del bromo: Br₂/CCl₄ anaranjado → si se decolora, hay insaturación confirmada (no confundir con la prueba de Baeyer, que es con KMnO₄)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH=CH_2 + Br_2 -&gt; CH_3—⟦«Br»|CH⟧—CH_2«Br»" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ Br₂</span>
           <span class="rxn-arrow">──→</span>
@@ -2063,7 +2100,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: Ni (Raney), Pd/C o Pt como catalizador · la adición es sin (cis) por la superficie del metal</div>
         <div class="rxn-regla">📌 Truco de examen: alqueno + H₂ → alcano (doble enlace saturado por completo)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH=CH_2 + H_2 -[Ni]-&gt; CH_3—CH_2—CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂ →[Ni]</span>
           <span class="rxn-arrow">──→</span>
@@ -2211,14 +2248,14 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: H₂O vapor · catalizador H₃PO₄/SiO₂ · ~300 °C y alta presión (industrial) — o H₂SO₄ diluido en frío (laboratorio). Ojo: no la confundan con H₂SO₄ concentrado + calor, que es la reacción inversa (deshidrata alcoholes)</div>
         <div class="rxn-regla">📌 Truco de examen — Markovnikov: OH → C más sustituido (menos H), misma lógica que con HX</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH=CH_2 + H_2O -[H^+]-&gt; CH_3—⟦«OH»|CH⟧—CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−CH<span class="hn">(OH)</span>−CH₃</span>
           <span class="rxn-ex-nota">propan-2-ol (Markovnikov)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_2=CH_2 + H_2O -[H^+]-&gt; CH_3—CH_2«OH»" style="animation-delay:.18s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span></span>
           <span class="rxn-ex-ea">+ H₂O →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
@@ -2367,7 +2404,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Paso 1: C=C + O₃ → ozónido · Paso 2 reductora (Zn/H₂O) → aldehídos/cetonas · Paso 2 oxidante (H₂O₂) → ácidos carboxílicos</div>
         <div class="rxn-regla">📌 Truco de examen: el doble enlace se rompe por completo, así que esta reacción te sirve para ubicar exactamente dónde estaba</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH=CH_2 -[1) O_3|2) Zn/H_2O]-&gt; CH_3⟦«=O»|C⟧H + H⟦«=O»|C⟧H" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">CH=CH₂</span> + O₃</span>
           <span class="rxn-ex-ea">→[Zn/H₂O]</span>
           <span class="rxn-arrow">──→</span>
@@ -2516,7 +2553,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Frío/diluido → diol (1,2-diol) + <span style="color:#92400e;font-weight:700">MnO₂↓ pardo</span> · Caliente/conc. → ácidos carboxílicos o CO₂ (ruptura de C=C)</div>
         <div class="rxn-regla">🧪 Truco de examen — Positivo (+): la solución violeta se decolora Y aparece precipitado pardo (MnO₂) · Alcanos (−): no reaccionan</div>
         <div class="rxn-ex-lbl">Ejemplo (frío, diluido)</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_2=CH_2 -[KMnO_4|H_2O, frío]-&gt; ⟦«OH»|CH_2⟧—⟦«OH»|CH_2⟧ + MnO_2" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH₂=CH₂</span> + KMnO₄/H₂O</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">HO−CH₂−CH₂−<span class="hn">OH</span> + MnO₂</span>
@@ -2662,7 +2699,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond"><b>Adición</b> (radical o iónica): monómeros con C=C — eteno → PE, cloruro de vinilo → PVC, propeno → PP — no se pierde ningún átomo. <b>Condensación</b>: monómeros bifuncionales que se unen liberando una molécula pequeña (H₂O) en cada enlace — ácido tereftálico + etilenglicol → PET, diácido + diamina → nailon 6,6.</div>
         <div class="rxn-regla">📌 Truco de examen — en adición el polímero pesa EXACTAMENTE n × (peso del monómero) · en condensación siempre falta la masa de las moléculas de H₂O liberadas</div>
         <div class="rxn-ex-lbl">Ejemplo (adición)</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="nCH_2=CHCl -[Peróxido]-&gt; —(CH_2—⟦«Cl»|CH⟧)_n—" style="animation-delay:.05s">
           <span class="rxn-ex-r">n <span class="bp">CH₂=CHCl</span> + peróxido</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">−<span class="hn">(CH₂−CHCl)</span>ₙ−</span>
@@ -2888,13 +2925,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Con 1 mol de HX se quedan en el haloalqueno (aislable) · con 2 moles llegan al dihaluro geminal (los dos X en el mismo C)</div>
         <div class="rxn-regla">📌 Markovnikov manda en cada adición · y en la segunda, el X siempre cae en el C que ya estaba halogenado</div>
         <div class="rxn-ex-lbl">Resumen con acetileno</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="HC≡CH + HBr -[1 mol]-&gt; CH_2=CH«Br»" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + HBr (1 mol)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₂=CH<span class="hn">Br</span></span>
           <span class="rxn-ex-nota">bromoetileno (×1)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="HC≡CH + 2HBr -&gt; CH_3—⟦«Br»|CH|«Br»⟧" style="animation-delay:.18s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + HBr (2 mol)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−CH<span class="hn">Br₂</span></span>
@@ -3065,7 +3102,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         </div>
         <div class="rxn-cond">×1 → trans-dihaloalqueno (geometría anti preferente) · ×2 → tetrahaloalcano (4 halógenos totales)</div>
         <div class="rxn-ex-lbl">Resumen</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="HC≡CH + 2Br_2 -&gt; ⟦«Br»|CH|«Br»⟧—⟦«Br»|CH|«Br»⟧" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + Br₂ (2 mol)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH<span class="hn">Br₂</span>−CH<span class="hn">Br₂</span></span>
@@ -3246,13 +3283,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Con Lindlar (Pd/CaCO₃ + acetato de Pb) envenenado se quedan en el cis, selectivo, solo ×1 · con Ni/Pd normal, sin envenenar, siguen de largo hasta el alcano (×2 total)</div>
         <div class="rxn-regla">📌 Lindlar te da cis (adición por el mismo lado) · Na/NH₃(l) te da trans (adición por lados opuestos) — el mismo alquino, dos geometrías. Ojo: un alquino terminal como el acetileno da un alqueno sin <a href="#g-cistrans" class="gloss-ref" onclick="jumpToGloss('g-cistrans');return false;">cis/trans</a> posible</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—C≡C—CH_3 + H_2 -[Lindlar]-&gt; cis-CH_3—CH«=»CH—CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">C≡C</span>−CH₃ + H₂ →[Lindlar]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 150 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--c2t)">cis</tspan><tspan style="fill:var(--tx)">-CH₃−CH</tspan><tspan style="fill:var(--c2t)">=</tspan><tspan style="fill:var(--tx)">CH−CH₃</tspan></text></svg></span>
           <span class="rxn-ex-nota">cis-but-2-eno (×1)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="HC≡CH + 2H_2 -[Ni]-&gt; CH_3—CH_3" style="animation-delay:.18s">
           <span class="rxn-ex-r"><span class="bp">CH≡CH</span> + 2 H₂ →[Ni]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−<span class="hn">CH₃</span></span>
@@ -3415,13 +3452,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Catalizador: H₂SO₄ / HgSO₄ · el camino es siempre C≡C + H₂O → enol → tautomería → carbonilo</div>
         <div class="rxn-regla">📌 Alquino terminal (R≠H) → cetona · el único que da aldehído es HC≡CH · alquino interno simétrico → cetona única · Markovnikov manda: el OH va al C más sustituido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—C≡CH + H_2O -[H^+/Hg^2+]-&gt; CH_3—⟦«=O»|C⟧—CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−<span class="bp">C≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−<span class="hn">CO</span>−CH₃</span>
           <span class="rxn-ex-nota">propanona (cetona)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="HC≡CH + H_2O -[H^+/Hg^2+]-&gt; CH_3—⟦«=O»|C⟧—H" style="animation-delay:.18s">
           <span class="rxn-ex-r"><span class="bp">HC≡CH</span> + H₂O →[H⁺/Hg²⁺]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−<span class="hn">CHO</span></span>
@@ -3569,7 +3606,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">pKa: alquino terminal ≈ 25 · alqueno ≈ 44 · alcano ≈ 50 · solo los alquinos TERMINALES reaccionan con la base</div>
         <div class="rxn-regla">📌 El C(sp) tiene 50% de carácter s → más electronegatividad → enlace C−H más polar → H más fácil de arrancar</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="HC≡CH + NaNH_2 -&gt; «Na»C≡CH + NH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r"><span class="bp">H</span>C≡CH + NaNH₂</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><span class="hn">Na</span>C≡CH + NH₃</span>
@@ -3812,7 +3849,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Sin catalizador, esto no arranca · necesitas FeBr₃ (para Br₂) o AlCl₃ (para Cl₂) para generar el electrófilo X⁺</div>
         <div class="rxn-regla">📌 Ojo con esto: la SEA no necesita luz — ahí está la diferencia clave con la SR de alcanos — porque el anillo se sustituye, no se adiciona</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring + Br_2 -[FeBr_3]-&gt; ⟦«Br»|@ring⟧ + HBr" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + Br₂ →[FeBr₃]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c3t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="9" fill="var(--c3t)" font-weight="700" font-family="'JetBrains Mono',monospace">Br</text></svg> + HBr</span>
@@ -4000,7 +4037,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan mezcla nitrante: HNO₃ conc. + H₂SO₄ conc. (50-60 °C) · a T° baja: monosustitución · a T° alta: di/trinitración</div>
         <div class="rxn-regla">📌 El TNT no es más que tolueno con triple nitración · y ojo, el electrófilo es el NO₂⁺, no el HNO₃ directamente</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring + HNO_3 -[H_2SO_4]-&gt; ⟦«NO_2»|@ring⟧ + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + HNO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">NO₂</text></svg> + H₂O</span>
@@ -4183,7 +4220,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">El electrófilo es el SO₃ que se forma del propio H₂SO₄ concentrado · reversible: calentando en H₂O → desulfonación → benceno</div>
         <div class="rxn-regla">📌 Es la SEA reversible más típica — usa el −SO₃H como grupo bloqueante temporal en síntesis</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring + SO_3 -[H_2SO_4]-&gt; ⟦«SO_3H»|@ring⟧" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + SO₃ →[H₂SO₄]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c2t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c2t)" font-weight="700" font-family="'JetBrains Mono',monospace">SO₃H</text></svg></span>
@@ -4364,7 +4401,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">El AlCl₃ activa R−X → carbocatión R⁺ · ojo: el alquilbenceno producto es más reactivo → polialquilación · solución: exceso de C₆H₆</div>
         <div class="rxn-regla">📌 Cuidado: el R⁺ se puede reorganizar y darles un producto distinto — la FC-acilación evita este problema</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring + CH_3Cl -[AlCl_3]-&gt; ⟦«CH_3»|@ring⟧ + HCl" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + CH₃Cl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c1t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="8" fill="var(--c1t)" font-weight="700" font-family="'JetBrains Mono',monospace">CH₃</text></svg> + HCl</span>
@@ -4545,7 +4582,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: cloruro de acilo (RCOCl) o un anhídrido, más AlCl₃ en cantidad estequiométrica (≥ 1 mol, porque se consume) · el −C=O que queda desactiva el anillo → no hay poliacilación</div>
         <div class="rxn-regla">📌 La ventaja frente a la alquilación: un solo producto, limpio — el acilio no se reorganiza y el anillo queda desactivado</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring + CH_3⟦=O|C⟧Cl -[AlCl_3]-&gt; @ring—⟦«=O»|C⟧—CH_3 + HCl" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="38" viewBox="0 0 44 46" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/></svg> + CH₃COCl →[AlCl₃]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg xmlns="http://www.w3.org/2000/svg" width="34" height="54" viewBox="0 -16 44 62" style="display:inline-block;vertical-align:middle;margin:0 1px;overflow:visible"><polygon points="22,4 37,13 37,31 22,40 7,31 7,13" fill="none" stroke="#1d4ed8" stroke-width="2.2" stroke-linejoin="round"/><circle cx="22" cy="22" r="9" fill="none" stroke="#1d4ed8" stroke-width="1.4" stroke-dasharray="4 2.5"/><line x1="22" y1="4" x2="22" y2="-5" stroke="var(--c4t)" stroke-width="2"/><text x="22" y="-7" text-anchor="middle" font-size="7" fill="var(--c4t)" font-weight="700" font-family="'JetBrains Mono',monospace">CO−CH₃</text></svg> + HCl</span>
@@ -4744,13 +4781,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: sustrato 1° (poco impedimento) · Nu fuerte y pequeño (OH⁻, CN⁻, I⁻, RS⁻) · solvente aprótico polar (DMSO, acetona) · v = k[R−X][Nu]</div>
         <div class="rxn-regla">📌 El Nu ataca por la cara opuesta al GS → la configuración se INVIERTE (inversión de Walden), algo que solo se puede observar cuando el carbono atacado es quiral</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3CH_2Br + OH^- -&gt; CH_3CH_2«OH» + Br^-" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃CH₂<span class="bp">Br</span> + <span class="bp">OH⁻</span></span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + Br⁻</span>
           <span class="rxn-ex-nota">bromoetano → etanol (SN2)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3Br + CN^- -&gt; CH_3«CN» + Br^-" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃<span class="bp">Br</span> + <span class="bp">CN⁻</span></span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">CN</span> + Br⁻</span>
@@ -4922,7 +4959,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: sustrato 3° (R⁺ más estable) · solvente prótico polar (H₂O, EtOH) que estabilice los iones · Nu débil (H₂O, ROH) · v = k[R−X]</div>
         <div class="rxn-regla">📌 R⁺ (sp²) es plano → el Nu ataca por ambas caras → producto RACÉMICO</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—⟦CH_3|C|CH_3⟧—Br + H_2O -&gt; CH_3—⟦CH_3|C|CH_3⟧—«OH» + HBr" style="animation-delay:.05s">
           <span class="rxn-ex-r">(CH₃)₃C−<span class="bp">Br</span> + H₂O</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">(CH₃)₃C−<span class="hn">OH</span> + HBr</span>
@@ -5085,7 +5122,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: base fuerte (KOH/EtOH, NaOEt) — ojo: con base voluminosa (t-BuOK) el producto mayoritario se voltea a Hofmann · T° alta favorece E2 · H y X deben ser anti-periplanares (180°)</div>
         <div class="rxn-regla">📌 Zaitsev: el H se elimina del Cβ con menos H → sale el alqueno más sustituido (el más estable)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3—CH_2—⟦Br|CH⟧—CH_3 + KOH -[Etanol]-&gt; CH_3—CH«=»CH—CH_3 + KBr + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃−CH₂−CH<span class="bp">Br</span>−CH₃ + KOH/EtOH</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃−CH<span class="hn">=</span>CH−CH₃ + KBr</span>
@@ -5318,13 +5355,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
           </div>
         </div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3CH_2OH -[H_2SO_4|180 °C]-&gt; CH_2«=»CH_2 + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[H₂SO₄, 180°C]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₂<span class="hn">=</span>CH₂ + H₂O</span>
           <span class="rxn-ex-nota">eteno (1 Cβ posible)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3—⟦OH|CH⟧—CH_2—CH_3 -[H_2SO_4|Δ]-&gt; CH_3—CH«=»CH—CH_3 + H_2O" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃CH<span class="bp">(OH)</span>CH₂CH₃ →[H₂SO₄, Δ]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH<span class="hn">=</span>CHCH₃ (ppal)</span>
@@ -5483,13 +5520,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-regla" style="background:var(--c3b);color:var(--c3t)">🔢 Número de oxidación del carbono (cuenta: C−H = −1, C−O = +1 por cada enlace, C−C = 0): cada paso de esta escalera sube el estado de oxidación en <b>+2</b>, porque cada oxidación transfiere 2 electrones. Por eso el alcohol 1° (−1) → aldehído (+1) → ácido (+3), y el 2° (0) → cetona (+2), nunca saltan de a 1.</div>
         <div class="rxn-regla">📌 Recuerda esto: CCP detiene en aldehído · CrO₃/H⁺ no perdona, sobreoxida el 1° hasta ácido</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3CH_2OH -[CCP]-&gt; CH_3⟦«=O»|C⟧H" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> →[CCP]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">CHO</span></span>
           <span class="rxn-ex-nota">etanol → etanal (aldehído)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3⟦OH|CH⟧CH_3 -[CrO_3/H^+]-&gt; CH_3⟦«=O»|C⟧CH_3" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃CH<span class="bp">(OH)</span>CH₃ →[CrO₃/H⁺]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">CO</span>CH₃</span>
@@ -5639,13 +5676,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Recuerda: HX → 3° va por SN1 rápido, 1° va por SN2 · reactividad HI &gt; HBr &gt; HCl · SOCl₂ es más limpio (los subproductos son gases)</div>
         <div class="rxn-regla">📌 SOCl₂ es el mejor método para llegar a R−Cl: queda puro, sin mezclarse con agua</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3CH_2OH + HBr -&gt; CH_3CH_2«Br» + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃CH₂<span class="bp">OH</span> + HBr</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">Br</span> + H₂O</span>
           <span class="rxn-ex-nota">bromoetano (SN2)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3OH + SOCl_2 -&gt; CH_3«Cl» + SO_2↑ + HCl↑" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃<span class="bp">OH</span> + SOCl₂</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">Cl</span> + SO₂↑ + HCl↑</span>
@@ -5793,7 +5830,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: H⁺ como catalizador (cualquier ácido fuerte, por ejemplo H₂SO₄) · es reversible, un equilibrio · para más rendimiento: exceso de alcohol o destilar el H₂O</div>
         <div class="rxn-regla">📌 Truco de Le Chatelier: exceso de alcohol o sacar el H₂O desplaza el equilibrio → más éster</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧OH + HOCH_2CH_3 -[H^+]-&gt; CH_3⟦=O|C⟧—«O»—CH_2CH_3 + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">COOH</span> + CH₃CH₂<span class="bp">OH</span> →[H⁺]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">COO</span>C₂H₅ + H₂O</span>
@@ -5989,13 +6026,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: el N dona su par libre al H⁺ · pKb aminas ≈ 3–5 (bases débiles) · HCl, H₂SO₄, RCOOH las neutralizan sin problema</div>
         <div class="rxn-regla">📌 Basicidad en agua: amina 2° &gt; 1° &gt; 3° &gt; NH₃ &gt; arilaminas (la resonancia le baja la basicidad a ArNH₂)</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3NH_2 + HCl -&gt; CH_3«NH_3^+» Cl^-" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">NH₂</span> + HCl</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">NH₃⁺</span> Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de metilamonio</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="@ring—NH_2 + HCl -&gt; @ring—«NH_3^+» Cl^-" style="animation-delay:.18s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">NH₂</span> + HCl</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₆H₅<span class="hn">NH₃⁺</span> Cl⁻</span>
@@ -6143,7 +6180,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Método 1: H₂/Pt o Pd/C (catalítico, limpio) · Método 2: Sn o Fe + HCl → sal de amonio → después NaOH libera la arilamina</div>
         <div class="rxn-regla">📌 La ruta a las arilaminas siempre es la misma: nitración SEAr (→ −NO₂) y después reducción (→ −NH₂)</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring—NO_2 + 3H_2 -[Pt]-&gt; @ring—«NH_2» + 2H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">NO₂</span> + 3 H₂ →[Pt]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₆H₅<span class="hn">NH₂</span> + 2 H₂O</span>
@@ -6301,13 +6338,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: 0–5 °C obligatorio (a T° ambiente el diazonio se descompone → ArOH + N₂) · NaNO₂ + HCl → HNO₂ in situ</div>
         <div class="rxn-regla">📌 Sandmeyer (Cu⁺): el N₂⁺ se cambia por −Cl, −Br o −CN · −F es aparte (Balz-Schiemann) y −OH es hidrólisis simple, sin cobre · el N₂ es el mejor grupo saliente que hay</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring—NH_2 -[NaNO_2, HCl|0 °C]-&gt; @ring—«N_2^+» Cl^-" style="animation-delay:.05s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">NH₂</span> + NaNO₂ + HCl →[0°C]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₆H₅<span class="hn">N₂⁺</span>Cl⁻</span>
           <span class="rxn-ex-nota">cloruro de bencendiazonio</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="@ring—N_2^+ Cl^- -[CuCl]-&gt; @ring—«Cl» + N_2↑" style="animation-delay:.18s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">N₂⁺</span> + CuCl</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₆H₅<span class="hn">Cl</span> + N₂↑</span>
@@ -6534,7 +6571,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 
         <div class="rxn-regla">📌 Ojo con esto: queda un enlace C−C nuevo, la cadena crece 1C, y el −CN se puede hidrolizar hasta un ácido α-hidroxicarboxílico</div>
         <div class="rxn-ex-lbl">Ejemplo completo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧H + HCN -[OH^-]-&gt; CH_3⟦«OH»|CH⟧—«CN»" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">CHO</span> + HCN →[OH⁻]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>−<span class="hn">CN</span></span>
@@ -6694,13 +6731,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitas: LiAlH₄ (éter) si quieres reducir C=O, ácidos y ésteres · NaBH₄ (H₂O/MeOH) si quieres ir solo por el C=O · H₂/Ni para hidrogenación catalítica</div>
         <div class="rxn-regla">📌 Ojo con esto: el H⁻ siempre ataca el C del C=O (δ+) · Aldehído → alcohol 1° · Cetona → alcohol 2°</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧H -[1) NaBH_4|2) H_2O]-&gt; CH_3CH_2«OH»" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">CHO</span> + NaBH₄</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span></span>
           <span class="rxn-ex-nota">etanal → etanol (alcohol 1°)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧CH_3 -[1) LiAlH_4|2) H_2O]-&gt; CH_3⟦«OH»|CH⟧CH_3" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃<span class="bp">CO</span>CH₃ + LiAlH₄</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
@@ -6850,7 +6887,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Regla que no falla: HCHO → alcohol 1° · RCHO → alcohol 2° · R₂C=O → alcohol 3° · usa solvente éter seco · para la hidrólisis: H₂O/NH₄Cl</div>
         <div class="rxn-regla">📌 Ojo con esto: el Grignard forma un enlace C−C nuevo — es tu herramienta para sintetizar alcoholes de cualquier grado</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧H -[1) CH_3MgBr, éter|2) H_2O]-&gt; CH_3⟦«OH»|CH⟧CH_3" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">MgBr</span> + CH₃<span class="bp">CHO</span> →[éter, H₂O]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₃</span>
@@ -7003,7 +7040,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Necesitan: NaOH diluida para que el enolato ataque el C=O de otra molécula · si calientan el aldol → α,β-insaturado + H₂O · y sí o sí necesitan un H en el Cα</div>
         <div class="rxn-regla">📌 Ojo con esto: forma un enlace C−C nuevo — así se alarga la cadena en síntesis, y por eso es tan usada en bioquímica</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="2CH_3⟦=O|C⟧H -[NaOH]-&gt; CH_3⟦«OH»|CH⟧CH_2⟦=O|C⟧H" style="animation-delay:.05s">
           <span class="rxn-ex-r">2 CH₃<span class="bp">CHO</span> →[NaOH]</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH<span class="hn">(OH)</span>CH₂CHO</span>
@@ -7150,7 +7187,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Tollens: Ag(NH₃)₂⁺, Δ → espejo de Ag⁰ · Fehling: Cu²⁺/tartrato, Δ → precipitado rojo-ladrillo Cu₂O · Yodoformo: I₂/NaOH, solo con CH₃CO−R o CH₃CH(OH)−R → CHI₃↓ amarillo</div>
         <div class="rxn-regla">📌 Truco de examen — Tollens/Fehling (+) SOLO con aldehídos, nunca cetonas · Yodoformo (+) solo con el patrón metilcetona/metilcarbinol, sea aldehído, cetona o alcohol</div>
         <div class="rxn-ex-lbl">Ejemplo (yodoformo)</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧CH_3 -[I_2|NaOH]-&gt; CH_3⟦=O|C⟧O^- + «CHI_3»↓" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">CO</span>CH₃ + I₂/NaOH</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃COO⁻ + <span class="hn">CHI₃↓</span></span>
@@ -7345,13 +7382,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">RCOO⁻ estabilizado por resonancia (carga entre 2 O) · pKa ácidos carboxílicos ≈ 4–5 · jabón = ácidos grasos + NaOH</div>
         <div class="rxn-regla">📌 Truco de examen: la neutralización con base fuerte es total (el carboxilato es más estable que el ácido) — con cadena larga (C₁₂–C₁₈) esa sal es un jabón</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧OH + NaOH -&gt; CH_3⟦=O|C⟧«O^-Na^+» + H_2O" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">COOH</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">COO⁻Na⁺</span> + H₂O</span>
           <span class="rxn-ex-nota">acetato de sodio</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="C_17H_35⟦=O|C⟧OH + NaOH -&gt; C_17H_35⟦=O|C⟧«O^-Na^+» + H_2O" style="animation-delay:.18s">
           <span class="rxn-ex-r">C₁₇H₃₅<span class="bp">COOH</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₁₇H₃₅<span class="hn">COO⁻Na⁺</span> + H₂O</span>
@@ -7511,7 +7548,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Alcohol 1° + CrO₃/H⁺ → ácido (sin detenerse en aldehído) · Alquilbenceno + KMnO₄: cadena lateral → COOH (anillo no se oxida) · R−CN + 2 H₂O + H⁺ → RCOOH + NH₄⁺</div>
         <div class="rxn-regla">📌 Con CrO₃/H⁺ el alcohol 1° siempre llega hasta RCOOH — si necesitas quedarte en RCHO, cambia a CCP</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="@ring—CH_3 -[KMnO_4, OH^-|Δ]-&gt; @ring—«COOH»" style="animation-delay:.05s">
           <span class="rxn-ex-r">C₆H₅<span class="bp">CH₃</span> + KMnO₄/OH⁻/Δ</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">C₆H₅<span class="hn">COOH</span></span>
@@ -7715,13 +7752,13 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
         <div class="rxn-cond">Fischer: RCOOH + R′OH ⇌ RCOOR′ + H₂O [H⁺] · Hidrólisis ácida: reversible · Saponificación NaOH: irreversible · Grignard (2 eq) → alcohol 3°</div>
         <div class="rxn-regla">📌 Ojo con la diferencia: con NaOH la reacción no da marcha atrás (RCOO⁻ ya no reacciona con R′OH) — con H⁺ sí es reversible, como en Fischer</div>
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧OCH_2CH_3 + NaOH -&gt; CH_3⟦=O|C⟧«O^-Na^+» + CH_3CH_2OH" style="animation-delay:.05s">
           <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + NaOH</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃<span class="hn">COO⁻Na⁺</span> + C₂H₅OH</span>
           <span class="rxn-ex-nota">saponificación (jabón/base)</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧OCH_2CH_3 -[1) LiAlH_4 (exceso)|2) H_2O]-&gt; CH_3CH_2«OH» + CH_3CH_2«OH»" style="animation-delay:.18s">
           <span class="rxn-ex-r">CH₃<span class="bp">COOC₂H₅</span> + LiAlH₄ (exceso)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂<span class="hn">OH</span> + C₂H₅<span class="hn">OH</span></span>
@@ -7921,7 +7958,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 Reaccionan rápidamente con agua, alcoholes, aminas, LiAlH₄ y Grignard</div>
         <div class="rxn-regla">📌 Ojo con la estequiometría de la aminólisis: hacen falta 2 NH₃, uno forma la amida y el otro neutraliza el HCl que se libera</div>
         <div class="rxn-ex-lbl">Ejemplo</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧Cl + 2NH_3 -&gt; CH_3⟦=O|C⟧«NH_2» + NH_4Cl" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 60 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c3t)">Cl</tspan></text></svg> + 2NH₃</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 76 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c2t)">NH₂</tspan></text></svg> + NH₄Cl</span>
@@ -8090,13 +8127,13 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
         </div>
         </div><!-- /rxn-adv-body -->
         <div class="rxn-ex-lbl">Ejemplos</div>
-        <div class="rxn-ex" style="animation-delay:.05s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧NH_2 + H_3O^+ -[Δ]-&gt; CH_3⟦=O|C⟧«OH» + NH_4^+" style="animation-delay:.05s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 76 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c3t)">NH₂</tspan></text></svg> + H₃O⁺ (Δ)</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 68 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃</tspan><tspan style="fill:var(--c2t)">COOH</tspan></text></svg> + NH₄⁺</span>
           <span class="rxn-ex-nota">acetamida → ácido acético</span>
         </div>
-        <div class="rxn-ex" style="animation-delay:.18s">
+        <div class="rxn-ex" data-eq="CH_3⟦=O|C⟧NH_2 -[1) LiAlH_4|2) H_2O]-&gt; CH_3CH_2«NH_2»" style="animation-delay:.18s">
           <span class="rxn-ex-r"><svg style="display:inline-block;vertical-align:middle;overflow:visible" height="16" viewBox="0 0 76 16"><text y="12" font-family="'JetBrains Mono',monospace" font-size="13"><tspan style="fill:var(--tx)">CH₃CO</tspan><tspan style="fill:var(--c3t)">NH₂</tspan></text></svg> + LiAlH₄</span>
           <span class="rxn-arrow">──→</span>
           <span class="rxn-ex-p">CH₃CH₂NH₂</span>
@@ -9133,6 +9170,105 @@ function renderMolCmpFormulas(){
   }
 }
 document.addEventListener('DOMContentLoaded',renderMolCmpFormulas);
+
+// ─── EJEMPLOS DIBUJADOS: notación compacta → fórmula semidesarrollada ───────
+// Cada .rxn-ex trae data-eq con la ecuación en una notación corta:
+//   A + B -[arriba|abajo]-> P + Q   (condiciones encima/debajo de la flecha)
+//   ⟦arriba|átomo|abajo⟧            (grupo colgando del átomo; "=O" = doble enlace)
+//   @ring / @chex / @cprop           (benceno, ciclohexano, ciclopropano)
+//   _2  ^+  ^-  ^2+                  (subíndices y cargas)
+//   «X»                              (grupo nuevo, resaltado como .hn)
+// El texto viejo queda en el HTML como respaldo si el JS no corre.
+const FX=(function(){
+  const pts=(cx,cy,r,n,a0)=>Array.from({length:n},(_,i)=>{const a=(a0+360/n*i)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)]});
+  const path=v=>v.map((p,i)=>{const q=v[(i+1)%v.length];return `M${p[0].toFixed(2)} ${p[1].toFixed(2)}L${q[0].toFixed(2)} ${q[1].toFixed(2)}`}).join('');
+  function hexSVG(kek){
+    const c=[20,22],v=pts(20,22,16,6,-90);let d=path(v);
+    if(kek)for(const i of [0,2,4]){const f=x=>[c[0]+(x[0]-c[0])*.74,c[1]+(x[1]-c[1])*.74],a=f(v[i]),b=f(v[(i+1)%6]);d+=`M${a[0].toFixed(2)} ${a[1].toFixed(2)}L${b[0].toFixed(2)} ${b[1].toFixed(2)}`}
+    return `<svg class="fx-ring" viewBox="0 0 40 44" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+  }
+  const SV={ring:hexSVG(true),chex:hexSVG(false),
+    cprop:`<svg class="fx-cprop" viewBox="0 0 40 36" aria-hidden="true"><path d="${path(pts(20,20,15,3,-90))}" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`};
+  const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const txt=s=>esc(s)
+    .replace(/_(\d+|n)/g,'<sub>$1</sub>')
+    .replace(/\^(\d?[+\-−])/g,(m,a)=>'<sup>'+a.replace('-','−')+'</sup>')
+    .replace(/«([^»]*)»/g,'<span class="hn">$1</span>');
+  function part(p,kind){
+    if(!p)return '';
+    let dbl=false,lab=p;
+    if(p[0]==='='){dbl=true;lab=p.slice(1)}
+    else if(p.startsWith('«=')){dbl=true;lab='«'+p.slice(2)}
+    const b=`<span class="fx-bd${dbl?' dbl':''}"></span>`,l=`<span class="fx-lab">${txt(lab)}</span>`;
+    return kind==='u'?`<span class="fx-bu">${l}${b}</span>`:`<span class="fx-bl">${b}${l}</span>`;
+  }
+  function stack(s){
+    const a=s.split('|'),base=mol(a[1]||'');
+    return `<span class="fx-st${base.includes('<svg')?' rg':''}">${base}${part(a[0],'u')}${part(a[2],'d')}</span>`;
+  }
+  function mol(s){
+    return s.split(/(⟦[^⟧]*⟧|@\w+)/).map(p=>{
+      if(!p)return '';
+      if(p[0]==='⟦')return stack(p.slice(1,-1));
+      if(p[0]==='@')return SV[p.slice(1)]||'';
+      return txt(p);
+    }).join('');
+  }
+  function arrow(p){
+    let a='',b='';
+    if(p!=='->'){const m=p.slice(2,-3).split('|');a=m[0]||'';b=m[1]||''}
+    return `<span class="fx-arr"><span class="ab">${txt(a)}</span><i></i><span class="be">${txt(b)}</span></span>`;
+  }
+  const terms=p=>p.split(/ \+ /).map(t=>`<span class="fx-t">${mol(t)}</span>`).join('<span class="fx-pl">+</span>');
+  function eq(s){
+    const parts=s.split(/(-\[[^\]]*\]->|->)/);let out='';
+    parts.forEach((p,i)=>{
+      if(i%2===1)out+=arrow(p);
+      else if(p.trim()){
+        const t=terms(p.trim());
+        out+=(i===parts.length-1&&parts.length>1)?`<span class="fx-rhs" aria-label="Producto">${t}</span>`:t;
+      }
+    });
+    return out;
+  }
+  return {eq};
+})();
+function renderEjemplos(){
+  document.querySelectorAll('.rxn-ex[data-eq]').forEach(ex=>{
+    const nota=ex.querySelector('.rxn-ex-nota');
+    const s=ex.getAttribute('data-eq');
+    ex.innerHTML=FX.eq(s)+(nota?nota.outerHTML:'');
+    ex.classList.add('fx-on');
+    if(/[⟦@]/.test(s))ex.classList.add('fx-hs');
+  });
+  // Botón "Modo práctica" junto a cada título de ejemplos (todos controlan
+  // el mismo estado: al activarlo, los productos de TODOS los ejemplos se
+  // ponen borrosos y el estudiante debe predecirlos antes de tocarlos).
+  document.querySelectorAll('.rxn-ex-lbl').forEach(lbl=>{
+    if(!(lbl.nextElementSibling&&lbl.nextElementSibling.classList.contains('fx-on')))return;
+    const row=document.createElement('div');row.className='fx-lblrow';
+    lbl.parentNode.insertBefore(row,lbl);row.appendChild(lbl);
+    const b=document.createElement('button');b.type='button';b.className='fx-prac';
+    b.setAttribute('aria-pressed','false');b.textContent='🎯 Modo práctica: ocultar productos';
+    row.appendChild(b);
+  });
+  const setPractice=on=>{
+    document.body.classList.toggle('fx-practice',on);
+    document.querySelectorAll('.fx-rhs.show').forEach(e=>e.classList.remove('show'));
+    document.querySelectorAll('.fx-rhs').forEach(e=>{if(on){e.setAttribute('tabindex','0');e.setAttribute('role','button')}else{e.removeAttribute('tabindex');e.removeAttribute('role')}});
+    document.querySelectorAll('.fx-prac').forEach(b=>{b.setAttribute('aria-pressed',on);b.textContent=on?'🎯 Modo práctica activo — toca un producto para verlo':'🎯 Modo práctica: ocultar productos'});
+  };
+  document.addEventListener('click',e=>{
+    if(e.target.closest('.fx-prac')){setPractice(!document.body.classList.contains('fx-practice'));return}
+    const r=e.target.closest('.fx-rhs');
+    if(r&&document.body.classList.contains('fx-practice'))r.classList.toggle('show');
+  });
+  document.addEventListener('keydown',e=>{
+    const r=e.target.closest&&e.target.closest('.fx-rhs');
+    if(r&&(e.key==='Enter'||e.key===' ')&&document.body.classList.contains('fx-practice')){e.preventDefault();r.classList.toggle('show')}
+  });
+}
+document.addEventListener('DOMContentLoaded',renderEjemplos);
 
 /* ── ACCESIBILIDAD: teclado + lectores de pantalla ── */
 document.addEventListener('DOMContentLoaded',()=>{
