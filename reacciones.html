@@ -422,6 +422,92 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 .tp-chip:hover{border-color:var(--tc)}
 .tp-quiz{padding:14px 16px}
 .tp-qeq{margin:0 0 10px;background:var(--surf2);border-radius:10px;padding:6px 8px;overflow-x:auto}
+
+/* ════════ REDISEÑO DE NAVEGACIÓN Y DENSIDAD (body.rx-v2, lo pone el JS) ════════
+   1) Barra fija de pestañas en vez del menú de tarjetas.
+   2) Glosario y leyenda en un panel lateral.
+   3) Tarjeta de reacción en 3 bloques: ecuación → mecanismo → ejemplos y
+      práctica; lo complementario va en "Profundiza".
+   4) Dos familias tipográficas (Outfit para la interfaz, STIX para las
+      fórmulas; Fraunces solo en el título) y nada por debajo de 12 px. */
+.rx-v2 .tabs-menu,.rx-v2 .rxn-subnav-back,.rx-v2 .rxn-subnav-sep,.rx-v2 .tab-back-bottom,
+.rx-v2 .rxn-anim-stepper,.rx-v2 .tipo-card-desc,.rx-v2 .tipo-header{display:none!important}
+.rx-v2 .cn-page-head.cn-in{padding:18px 0 12px;margin-bottom:0;border-bottom:0}
+.rx-v2 .cn-page-head p{font-size:.95rem}
+.rx-bar{position:sticky;z-index:90;display:flex;align-items:center;gap:8px;margin:0 -18px 18px;padding:8px 18px;
+  background:rgba(246,250,254,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--brd)}
+.rx-tabs{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;padding:2px 0;
+  -webkit-mask-image:linear-gradient(90deg,#000 92%,transparent);mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.rx-chip{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 13px;border-radius:999px;border:1.5px solid var(--brd);
+  background:var(--surf);color:var(--dim);font:600 .85rem 'Outfit',sans-serif;cursor:pointer;white-space:nowrap}
+.rx-chip:hover{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73)}
+.rx-chip[aria-current="true"]{background:var(--cn-brand-d,#0d4a73);border-color:var(--cn-brand-d,#0d4a73);color:#fff}
+.rx-chip .n{font-size:.72rem;opacity:.7;font-weight:500}
+.rx-chip.start:not([aria-current="true"]){background:var(--c1b);border-color:var(--c1);color:var(--c1t)}
+.rx-tools{flex:none;display:flex;gap:6px}
+.rx-tool{min-height:40px;padding:6px 12px;border-radius:10px;border:1.5px solid var(--brd);background:var(--surf);color:var(--tx);font:600 .82rem 'Outfit',sans-serif;cursor:pointer;white-space:nowrap}
+.rx-tool:hover{border-color:var(--cn-brand,#1a6ea8)}
+@media(max-width:700px){.rx-tool .t{display:none}.rx-tool{padding:6px 10px;font-size:1rem}.rx-bar{margin:0 -18px 14px;padding:8px 12px}}
+/* panel lateral */
+.rx-drawer{position:fixed;inset:0;z-index:1200;display:none}
+.rx-drawer.open{display:block}
+.rx-drawer-bg{position:absolute;inset:0;background:rgba(10,30,50,.45)}
+.rx-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--bg);overflow-y:auto;padding:14px 16px 90px;box-shadow:-8px 0 30px rgba(0,0,0,.2)}
+.rx-drawer-head{position:sticky;top:-14px;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bg);padding:6px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--brd)}
+.rx-drawer-head b{font:800 1.05rem 'Outfit',sans-serif}
+.rx-drawer-close{min-width:44px;min-height:44px;border-radius:10px;border:1.5px solid var(--brd);background:var(--surf);font-size:1.1rem;cursor:pointer}
+.rx-drawer .gloss-card,.rx-drawer .legend-card{display:none;margin:0;box-shadow:none}
+.rx-drawer[data-show="gloss"] .gloss-card,.rx-drawer[data-show="legend"] .legend-card{display:block}
+.rx-drawer .gloss-head,.rx-drawer .legend-head{display:none}
+.rx-drawer .gloss-body,.rx-drawer .legend-body{display:block!important;border-top:0}
+.rx-drawer .gloss-grid{grid-template-columns:1fr}
+/* tarjeta de reacción: menos cajas y menos colores */
+.rx-v2 .rxn-card{box-shadow:0 1px 6px rgba(26,110,168,.06)}
+.rx-v2 .rxn-body .meq{background:none;border:0;box-shadow:none;padding:6px 0 2px}
+.rx-v2 .mech-stepper{background:var(--surf);border:1.5px solid var(--brd);box-shadow:none}
+.rx-v2 .mech-top{background:var(--surf2)}
+.rx-v2 .mech-vis{background:var(--surf);border:1px solid var(--brd)}
+.rx-v2 .mech-vis svg{width:100%!important;max-width:340px;height:auto!important;max-height:190px}
+.rx-v2 .mech-vis{padding:8px}
+.rx-v2 .rxn-body>.rxn-ex-lbl,.rx-v2 .fx-lblrow .rxn-ex-lbl{display:none}
+.rx-v2 .fx-lblrow{justify-content:flex-end}
+.rx-v2 .quiz-opt{padding:9px 12px}
+.rx-v2 .quiz-q{margin-bottom:10px}
+.rx-v2 .speak-btn{margin:4px 0}
+.rx-v2 .mech-step-h{display:none}
+@media(max-width:700px){
+  .rx-v2 .rxn-subnav{flex-wrap:nowrap;overflow-x:auto;padding:8px;gap:6px}
+  .rx-v2 .rxn-subnav-chips{flex-wrap:nowrap}
+  .rx-v2 .rxn-subnav-chip{flex:none;white-space:nowrap}
+  .rx-v2 .cn-page-head h1{font-size:1.6rem}
+  .rx-v2 .cn-page-head p{font-size:.9rem}
+}
+.rx-v2 .mech-vis svg text{font-family:'Outfit',sans-serif!important}
+.rx-v2 .rxn-sec{font:800 .75rem 'Outfit',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmer);margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.rx-v2 .rxn-sec::after{content:"";flex:1;height:1px;background:var(--brd)}
+.rx-more{margin:16px 0 4px;border:1.5px solid var(--brd);border-radius:var(--rs);background:var(--surf)}
+.rx-more>summary{cursor:pointer;list-style:none;padding:12px 14px;font:700 .9rem 'Outfit',sans-serif;color:var(--c5t);display:flex;align-items:center;gap:8px}
+.rx-more>summary::-webkit-details-marker{display:none}
+.rx-more>summary::after{content:"▾";margin-left:auto;transition:transform .2s}
+.rx-more[open]>summary::after{transform:rotate(180deg)}
+.rx-more>.rx-more-body{padding:0 14px 14px}
+.rx-more .mol-cmp{margin-top:4px}
+.rx-next{display:flex;justify-content:flex-end;margin:16px 0 4px}
+.rx-next button{min-height:44px;padding:8px 16px;border-radius:999px;border:0;background:var(--cn-brand-d,#0d4a73);color:#fff;font:700 .88rem 'Outfit',sans-serif;cursor:pointer;text-align:left}
+.rx-next button small{display:block;font-weight:500;opacity:.8;font-size:.75rem}
+/* tipografía: dos familias y mínimo 12 px */
+.rx-v2 .gloss-title,.rx-v2 .legend-title,.rx-v2 .tipo-card-title,.rx-v2 .tp-title,.rx-v2 .tp-sub,.rx-v2 .tp-name,.rx-v2 .mk-title{font-family:'Outfit',sans-serif!important;font-weight:800!important;letter-spacing:-.01em}
+.rx-v2 .rxn-badge,.rx-v2 .gb-pill,.rx-v2 .tipo-card-badge,.rx-v2 .ox-badge,.rx-v2 .sea-cond,.rx-v2 .calc-ans,.rx-v2 .rxn-molcard-extra{font-family:'Outfit',sans-serif!important}
+.rx-v2 .gb-formula,.rx-v2 .rxn-eq,.rx-v2 .mk-eq,.rx-v2 .rxn-eq-coef{font-family:'STIX Two Text','Times New Roman',serif!important}
+.rx-v2 .rxn-badge{font-size:.75rem}
+.rx-v2 .rxn-ex-lbl,.rx-v2 .quiz-lbl,.rx-v2 .sec-lbl,.rx-v2 .tp-lbl{font-size:.75rem}
+.rx-v2 .quiz-q-text{font-size:.92rem}.rx-v2 .quiz-opt{font-size:.88rem}
+.rx-v2 .rxn-ex-nota,.rx-v2 .mol-cmp-name,.rx-v2 .tab-count,.rx-v2 .ox-badge,.rx-v2 .sea-cond,.rx-v2 .rxn-molcard-name{font-size:.75rem}
+.rx-v2 .rxn-regla,.rx-v2 .rxn-extra-box{font-size:.85rem}
+.rx-v2 .rxn-vida{font-size:.88rem}
+/* control de tamaño de letra: discreto hasta que se usa */
+.rx-v2 #text-zoom-widget{opacity:.5;transform:scale(.85);transform-origin:bottom right;transition:opacity .2s}
+.rx-v2 #text-zoom-widget:hover,.rx-v2 #text-zoom-widget:focus-within{opacity:1}
 /* ── TEXTO EXPLICATIVO CON PRINCIPIOS DE MAYER ──
    Señalización: "Idea clave" primero. Segmentación: pasos cortos en lista.
    Coherencia: lo accesorio va plegado en "Para saber más". */
@@ -572,7 +658,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
   <div class="cn-page-head cn-in">
   <div class="cn-eyebrow">Módulo 4 · Reacciones</div>
   <h1>Reacciones orgánicas</h1>
-  <p>Reacciones características de hidrocarburos, haluros, alcoholes, aldehídos y cetonas, ácidos carboxílicos y sus derivados, y aminas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida.</p>
+  <p>Elige un grupo funcional en la barra: para cada reacción verás la ecuación, el mecanismo paso a paso, ejemplos y práctica.</p>
 </div>
 
   <div class="gloss-card">
@@ -1036,7 +1122,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
         <div class="prereq-title">Antes de empezar, deberías saber</div>
         <div class="prereq-list">
           • Que los alcanos solo tienen <strong>enlaces simples C−C</strong> (por eso son "saturados")
-          (repaso en el glosario de arriba: "Enlace simple, doble y triple")<br>
+          (repaso en el 📖 Glosario de la barra superior: "Enlace simple, doble y triple")<br>
           • Nombrar un alcano con IUPAC (<a href="grupos.html">Grupos → Alcanos</a>)<br>
           • Qué es un <strong>radical libre</strong> y por qué la luz (hν) o el calor (Δ) lo generan
         </div>
@@ -1884,7 +1970,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
         <div class="prereq-title">Antes de empezar, deberías saber</div>
         <div class="prereq-list">
           • Qué es un <strong>doble enlace C=C</strong> y cómo se identifica en la fórmula semidesarrollada
-          (repaso en el glosario de arriba: "Enlace simple, doble y triple")<br>
+          (repaso en el 📖 Glosario de la barra superior: "Enlace simple, doble y triple")<br>
           • Cómo nombrar un <strong>alqueno</strong> con IUPAC (<a href="grupos.html">Grupos → Alquenos</a>)<br>
           • Qué es un <strong>carbocatión</strong> y por qué 3° es más estable que 1°<br>
           • Así se escribe: cuando veas <strong>R⁺</strong> en un mecanismo, es justamente ese
@@ -8453,7 +8539,7 @@ document.addEventListener('DOMContentLoaded',()=>{
      El setItem se retrasa porque el primer registro del service worker puede recargar la página una vez;
      si eso pasa antes de que se guarde la bandera, la recarga vuelve a intentarlo en vez de quedarse cerrada. */
   try{
-    if(!localStorage.getItem('chromanom_legend_seen')){
+    if(!document.body.classList.contains('rx-v2')&&!localStorage.getItem('chromanom_legend_seen')){
       const lbody=document.getElementById('legend-body');
       const lchev=document.getElementById('legend-chev');
       if(lbody&&lchev){lbody.classList.add('open');lchev.classList.add('open');}
@@ -8486,7 +8572,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ── TABS ── */
 function scrollToEl(el){
   if(!el)return;
-  const y=el.getBoundingClientRect().top+window.scrollY-54;
+  const y=el.getBoundingClientRect().top+window.scrollY-rxOffset();
   window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
 }
 // Conteos de reacciones calculados del propio contenido (no a mano), para
@@ -8510,14 +8596,16 @@ function actualizarConteosRxn(){
   }catch(e){}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',actualizarConteosRxn);else actualizarConteosRxn();
-function switchTab(id){
+function switchTab(id,noScroll){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
   const panel=document.getElementById('tab-'+id);
   panel.classList.add('active');
-  scrollToEl(panel);
+  if(typeof rxMarkTab==='function'&&document.body.classList.contains('rx-v2'))rxMarkTab(id);
+  if(!noScroll)scrollToEl(panel);
 }
 function backToMenu(){
+  if(document.body.classList.contains('rx-v2')){window.scrollTo({top:0,behavior:'smooth'});return;}
   scrollToEl(document.getElementById('tabs'));
 }
 function jumpToRxn(id){
@@ -8562,6 +8650,11 @@ function toggleGlossary(){
   chev.classList.toggle('open',open);
 }
 function jumpToGloss(id){
+  if(document.body.classList.contains('rx-v2')&&rxOpenDrawer('gloss')){
+    const el=document.getElementById(id);if(!el)return;
+    setTimeout(()=>{el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('gloss-flash');setTimeout(()=>el.classList.remove('gloss-flash'),1600);},60);
+    return;
+  }
   const body=document.getElementById('gloss-body');
   const chev=document.getElementById('gloss-chev');
   if(!body.classList.contains('open')){body.classList.add('open');chev.classList.add('open');}
@@ -8578,6 +8671,7 @@ function toggleLegend(){
   chev.classList.toggle('open',open);
 }
 function jumpToLegend(){
+  if(document.body.classList.contains('rx-v2')&&rxOpenDrawer('legend'))return;
   const body=document.getElementById('legend-body');
   const chev=document.getElementById('legend-chev');
   if(!body.classList.contains('open')){body.classList.add('open');chev.classList.add('open');}
@@ -9645,6 +9739,109 @@ function fxExplicativas(){
   });
 }
 document.addEventListener('DOMContentLoaded',fxExplicativas);
+
+// ════════ REDISEÑO DE NAVEGACIÓN Y DENSIDAD ════════
+const RX_SHORT={tipos:'Tipos de reacción',alcanos:'Alcanos',alquenos:'Alquenos',alquinos:'Alquinos',aromaticos:'Aromáticos',
+  halogenuros:'Haluros',alcoholes:'Alcoholes',carbonilo:'Aldehídos y cetonas',acidos:'Ácidos',derivados:'Derivados de ácido',aminas:'Aminas'};
+function rxOffset(){
+  const nav=document.querySelector('.site-nav'),bar=document.getElementById('rxbar');
+  return (nav?nav.offsetHeight:0)+(bar?bar.offsetHeight:0)+8;
+}
+function rxOpenDrawer(which){
+  const d=document.getElementById('rxdrawer');if(!d)return false;
+  d.dataset.show=which;d.classList.add('open');
+  d.querySelector('.rx-drawer-head b').textContent=which==='gloss'?'📖 Glosario de conceptos previos':'🧭 Cómo leer los diagramas de mecanismo';
+  d.querySelector('.rx-drawer-close').focus();
+  return true;
+}
+function rxCloseDrawer(){const d=document.getElementById('rxdrawer');if(d)d.classList.remove('open');}
+function rxMarkTab(id){
+  document.querySelectorAll('.rx-chip').forEach(c=>{
+    const on=c.dataset.tab===id;c.setAttribute('aria-current',on?'true':'false');
+    if(on)c.scrollIntoView({block:'nearest',inline:'center'});
+  });
+  try{history.replaceState(null,'','#'+id);localStorage.setItem('chromanom_rx_tab',id);}catch(e){}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const app=document.querySelector('.app'),menu=document.getElementById('tabs');
+  if(!app||!menu)return;
+  document.body.classList.add('rx-v2');
+  // 1) barra fija de pestañas
+  const bar=document.createElement('div');bar.className='rx-bar';bar.id='rxbar';
+  const tabs=document.createElement('div');tabs.className='rx-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Grupos de reacciones');
+  menu.querySelectorAll('.tab-btn[data-tab]').forEach(b=>{
+    const id=b.dataset.tab,ico=(b.querySelector('.tab-ico')||{}).textContent||'';
+    const n=document.querySelectorAll('#tab-'+id+' .rxn-card[id^="rxn-"]').length;
+    const c=document.createElement('button');c.type='button';c.className='rx-chip'+(id==='tipos'?' start':'');c.dataset.tab=id;c.setAttribute('role','tab');
+    c.innerHTML=`<span aria-hidden="true">${ico}</span>${RX_SHORT[id]||b.querySelector('.tab-name').textContent}${n?` <span class="n">${n}</span>`:''}`;
+    c.addEventListener('click',()=>switchTab(id));
+    tabs.appendChild(c);
+  });
+  const tools=document.createElement('div');tools.className='rx-tools';
+  tools.innerHTML='<button type="button" class="rx-tool" data-d="gloss" title="Glosario de conceptos previos">📖<span class="t"> Glosario</span></button><button type="button" class="rx-tool" data-d="legend" title="Cómo leer los diagramas de mecanismo">🧭<span class="t"> Cómo leer mecanismos</span></button>';
+  tools.querySelectorAll('.rx-tool').forEach(t=>t.addEventListener('click',()=>rxOpenDrawer(t.dataset.d)));
+  bar.appendChild(tabs);bar.appendChild(tools);
+  const head=app.querySelector('.cn-page-head');
+  app.insertBefore(bar,head?head.nextSibling:app.firstChild);
+  const nav=document.querySelector('.site-nav');
+  const setTop=()=>{bar.style.top=(nav?nav.offsetHeight:0)+'px';};setTop();addEventListener('resize',setTop);
+  // 2) glosario y leyenda en un panel lateral
+  const dr=document.createElement('div');dr.className='rx-drawer';dr.id='rxdrawer';dr.setAttribute('role','dialog');dr.setAttribute('aria-modal','true');
+  dr.innerHTML='<div class="rx-drawer-bg"></div><div class="rx-drawer-panel"><div class="rx-drawer-head"><b></b><button type="button" class="rx-drawer-close" aria-label="Cerrar">✕</button></div></div>';
+  const panel=dr.querySelector('.rx-drawer-panel');
+  const g=app.querySelector('.gloss-card'),l=document.getElementById('legend-card');
+  if(g)panel.appendChild(g);if(l)panel.appendChild(l);
+  document.body.appendChild(dr);
+  dr.querySelector('.rx-drawer-bg').addEventListener('click',rxCloseDrawer);
+  dr.querySelector('.rx-drawer-close').addEventListener('click',rxCloseDrawer);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')rxCloseDrawer();});
+  // 3) tarjetas de reacción: ecuación → mecanismo → ejemplos y práctica; lo demás en "Profundiza"
+  const cards=[...document.querySelectorAll('.rxn-card[id^="rxn-"]')];
+  cards.forEach((card,i)=>{
+    const body=card.querySelector('.rxn-body');if(!body)return;
+    const kids=[...body.children];
+    const more=kids.filter(k=>k.matches('.mol-cmp,.rxn-vida,.rxn-extra'));
+    if(more.length){
+      const det=document.createElement('details');det.className='rx-more';
+      det.innerHTML='<summary>🔍 Profundiza: '+[more.some(k=>k.matches('.mol-cmp'))?'comparación':null,more.some(k=>k.matches('.rxn-vida'))?'para qué sirve':null,more.some(k=>k.matches('.rxn-extra'))?'indagar y calcular':null].filter(Boolean).join(', ')+'</summary><div class="rx-more-body"></div>';
+      const sep=body.querySelector(':scope > .quiz-sep');
+      body.insertBefore(det,sep||null);
+      more.forEach(k=>det.querySelector('.rx-more-body').appendChild(k));
+    }
+    // títulos de sección
+    const mech=body.querySelector(':scope > .mech-stepper, :scope > .rxn-adv-toggle');
+    const exl=body.querySelector(':scope > .rxn-ex-lbl, :scope > .fx-lblrow');
+    const mk=(t)=>{const d=document.createElement('div');d.className='rxn-sec';d.textContent=t;return d;};
+    if(mech&&mech.classList.contains('mech-stepper'))body.insertBefore(mk('Mecanismo paso a paso'),mech);
+    const cond=body.querySelector(':scope > .rxn-cond');
+    if(cond)body.insertBefore(mk('Condiciones y reglas'),cond);
+    if(exl)body.insertBefore(mk('Ejemplos y práctica'),exl);
+    // siguiente reacción
+    const next=cards[i+1];
+    if(next){
+      const panelOf=c=>c.closest('.tab-panel').id.replace('tab-','');
+      const nt=(next.querySelector('.rxn-title')||{}).textContent||'';
+      const same=panelOf(next)===panelOf(card);
+      const box=document.createElement('div');box.className='rx-next';
+      box.innerHTML=`<button type="button"><small>${same?'Siguiente reacción':'Siguiente grupo: '+(RX_SHORT[panelOf(next)]||'')}</small>${nt} →</button>`;
+      box.querySelector('button').addEventListener('click',()=>{
+        const id=next.id.slice(4);
+        if(same){toggleRxn(card.id.slice(4));jumpToRxn(id);}else goRxn(panelOf(next),id);
+      });
+      body.appendChild(box);
+    }
+  });
+  // el titular de cada paso repetía la "Idea clave": se oculta y el botón
+  // 🔊 lee la explicación completa del paso (idea clave + pasos)
+  document.querySelectorAll('.mech-step .speak-btn').forEach(bt=>{
+    if(bt.closest('.mech-step').querySelector('.mech-step-txt.mx'))
+      bt.setAttribute('onclick',"speakStep(this,this.closest('.mech-step').querySelector('.mech-step-txt').innerText.replace(/💡 IDEA CLAVE|📝 PARA EL EXAMEN|🔍 Para saber más/gi,''))");
+  });
+  // 4) abrir la pestaña del enlace (#alquenos) o la última visitada; la primera vez, "Tipos de reacción"
+  let start='tipos';
+  try{const h=(location.hash||'').slice(1);if(h&&document.getElementById('tab-'+h))start=h;else{const m=localStorage.getItem('chromanom_rx_tab');if(m&&document.getElementById('tab-'+m))start=m;}}catch(e){}
+  switchTab(start,true);
+});
 
 // ─── PESTAÑA "TIPOS DE REACCIÓN": dibuja las ecuaciones y conecta los botones
 // "Dónde la vas a ver" con la reacción correspondiente en su pestaña.

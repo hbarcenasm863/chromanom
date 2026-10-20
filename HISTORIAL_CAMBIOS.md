@@ -7,6 +7,69 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (123) — Reacciones: rediseño de navegación y densidad (UX/UI)
+
+### Contexto
+El docente pidió una opinión de experto en diseño UX/UI sobre la página de
+reacciones. El diagnóstico fue que la estética estaba bien encaminada, pero
+la navegación y la densidad no: en celular la primera reacción empezaba a
+3.014 px (3,5 pantallas de scroll), cada reacción se repetía 4-5 veces en la
+misma tarjeta (ecuación, visión general, mecanismo, comparación,
+ejemplos), había dos visores con sus propios botones, demasiadas cajas de
+colores, cuatro tipografías y textos de 8-9 px. Luego pidió aplicar los
+cambios recomendados.
+
+### Cambios (`reacciones.html`)
+Todo el rediseño cuelga de la clase `rx-v2` que pone el JavaScript al
+cargar: si el JS no corre, la página se ve como antes.
+- **Barra fija de pestañas** (debajo de la barra del sitio) con los 11
+  grupos como botones horizontales, con conteo de reacciones. Reemplaza el
+  menú de tarjetas grandes y los botones "Volver al menú".
+- **Glosario y "Cómo leer mecanismos" en un panel lateral**, abierto desde
+  dos botones de la barra (📖, 🧭). Los enlaces de glosario dentro de los
+  textos abren el panel y resaltan el término. Se cierra con ✕, Esc o
+  tocando afuera. La leyenda ya no se abre sola la primera vez.
+- **La página recuerda la última pestaña** y acepta enlaces directos
+  (`reacciones.html#alquenos`). La primera visita abre en "Tipos de
+  reacción".
+- **Tarjeta de reacción en bloques con títulos de sección**: ecuación →
+  "Mecanismo paso a paso" → "Condiciones y reglas" → "Ejemplos y
+  práctica". Se quitó la "Visión general — 3 pasos" (repetía la ecuación
+  de arriba); la comparación molecular, el "¿Para qué te sirve?", "Para
+  indagar" y "Para calcular" pasaron a un desplegable "🔍 Profundiza". Al
+  final, botón **"Siguiente reacción →"** (o "Siguiente grupo").
+- Se ocultó el titular de cada paso del mecanismo, que repetía la "Idea
+  clave"; el botón 🔊 Escuchar ahora lee la explicación completa del paso.
+- Se ocultaron la descripción duplicada de la tarjeta de tipo y el título
+  repetido ("Sustitución Radical (SR)" aparecía dos veces).
+- **Tipografía**: interfaz en Outfit y fórmulas en STIX (Fraunces solo en
+  el título de la página; JetBrains Mono fuera de insignias, etiquetas y
+  dibujos de mecanismo). Etiquetas pequeñas subidas a 12 px como mínimo;
+  los dibujos de mecanismo se ven más grandes.
+- Menos cajas y colores en la tarjeta, opciones de quiz más compactas,
+  botones de reacción en una sola fila deslizable en celular, encabezado
+  más corto y control de tamaño de letra más discreto.
+- "repaso en el glosario de arriba" → "el 📖 Glosario de la barra
+  superior".
+
+### Resultados medidos (Chromium)
+- Primera reacción visible: celular 3.014 px → 326 px; computador
+  1.700 px → 333 px.
+- Tarjeta abierta (Hidrohalogenación): celular 3.241 px → 2.195 px;
+  computador 2.271 px → 1.739 px (-32 % y -23 %). Lo que queda es
+  contenido: el texto del mecanismo y las dos preguntas de práctica.
+- Sin errores de página ni scroll horizontal en las 11 pestañas a 390 px;
+  glosario, "Siguiente reacción" y pestaña recordada probados.
+
+### Otros
+- `sw.js`: caché `v24`→`v25`.
+
+### Pendiente
+- Los dibujos de los mecanismos (flechas de electrones) siguen siendo los
+  originales, solo agrandados y con la letra cambiada.
+
+---
+
 ## 2026-10-20 (122) — Reacciones: textos con diseño multimedia de Mayer, pestaña "Tipos de reacción" y auditoría química
 
 ### Contexto
