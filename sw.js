@@ -1,9 +1,9 @@
-// ChromaNom Service Worker — v23.0
+// ChromaNom Service Worker — v24.0
 // Páginas HTML: red primero (siempre la versión más reciente si hay conexión).
 // Assets estáticos (JS/CSS/íconos) y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v23';
+const CACHE = 'chromanom-v24';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [

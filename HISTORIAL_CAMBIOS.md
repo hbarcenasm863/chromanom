@@ -7,6 +7,101 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (122) — Reacciones: textos con diseño multimedia de Mayer, pestaña "Tipos de reacción" y auditoría química
+
+### Contexto
+El docente pidió (1) rediseñar el texto de las explicaciones de
+`reacciones.html` con los principios de diseño multimedia de Mayer, para
+que sean accesibles a estudiantes de bachillerato; (2) crear una pestaña
+nueva que explique los tipos de reacción orgánica (sustitución, adición,
+eliminación, etc.); y (3) pasar después un auditor que revisara cada
+reacción en coherencia, cohesión, didáctica y veracidad química.
+
+### 1. Textos de los mecanismos con estructura de Mayer
+- Los **127 pasos de mecanismo** (las 42 reacciones) y las **11
+  introducciones de grupo** se reescribieron con la misma estructura:
+  **💡 Idea clave** (una frase: señalización) → **pasos cortos en lista**
+  (segmentación, una idea por viñeta) → **📝 Para el examen** (cuando
+  aplica) → **🔍 Para saber más** plegable (coherencia: los datos curiosos y
+  la jerga universitaria salen del camino principal, pero no se pierden).
+  Las introducciones terminan con **👀 Mientras lees las reacciones, fíjate
+  en…**.
+- Se eliminaron las muletillas repetidas ("Fíjate en esto", "Acá está la
+  jugada", "Ojo con esto"…) y se unificó el **tuteo** (antes se mezclaban
+  "tú" y "ustedes" en toda la página).
+- Letra más grande en las explicaciones (de .8rem a .9rem).
+- Los títulos de paso ya no van en MAYÚSCULAS automáticas: convertían
+  δ+ en Δ+ (que significa calor), AlCl₃ en ALCL₃, Na en NA, etc.
+
+### 2. Pestaña nueva "🧭 Tipos de reacción" (categoría "Empieza aquí")
+Entrenamiento previo (Mayer): aparece de primera en el menú. Incluye:
+- Guía de **7 preguntas** para reconocer el tipo de una reacción.
+- **8 tarjetas**: sustitución, adición, eliminación, oxidación y
+  reducción, ácido-base, condensación, hidrólisis y polimerización. Cada
+  una con definición en una frase, esquema general, pistas para
+  reconocerla, un ejemplo real dibujado con el modelo libro y botones
+  "Dónde la vas a ver" que llevan a la reacción correspondiente en su
+  pestaña.
+- Recuadro "Una reacción puede tener dos nombres" (hidrogenación =
+  adición + reducción, etc.) y, plegado, los reordenamientos.
+- Práctica de **6 preguntas** "¿Qué tipo es?" con retroalimentación.
+
+### 3. Auditoría (6 auditores en paralelo, uno por par de pestañas)
+Encontraron ~190 hallazgos; se aplicaron casi todos. Los más importantes
+(errores químicos o contradicciones):
+- **Deshidratación de alcoholes**: el ejemplo usa etanol (1°), que va por
+  E2, pero el mecanismo era E1 sin aclararlo → ahora dice "alcoholes 2° y
+  3° (E1)" y explica que el etanol va por E2.
+- **Nitración de alcanos**: decía que el enlace O−N del HNO₃ es más fuerte
+  que el de un halógeno (es al revés) → corregido, también el "Para
+  indagar".
+- **Hidratación de alquinos**: decía que Ecopetrol produce la acetona por
+  refinación → casi toda sale del proceso del cumeno.
+- **Tollens**: ecuación sin balancear y con ácido en vez de carboxilato →
+  2 Ag(NH₃)₂⁺ … → RCOO⁻ + 2 Ag.
+- **Ozonólisis**: decía que los tres oxígenos del O₃ se unen a los carbonos
+  (solo los dos de los extremos); el H₂O₂ no oxida las cetonas.
+- **Hidratación de alquenos**: "el H⁺ que sale es el mismo que entró"
+  (no es el mismo átomo; el balance sí se conserva).
+- Halogenación de benceno y Friedel-Crafts: la ecuación grande usaba otro
+  reactivo distinto al del mecanismo, ejemplo y quiz (Cl₂/cloroetano frente
+  a Br₂/clorometano) → unificado.
+- Datos de contexto ("¿Para qué te sirve esto?") sin respaldo o falsos:
+  anestésico ciclopropano "el primero", linalool del aceite de palma,
+  cumeno por cloruro de isopropilo, PMMA en lentes blandos, Inexmoda como
+  tintorera, camiseta de la Selección, Recypet, piretroides vía SOCl₂,
+  trampas de feromonas en café, nailon a partir de anilina, aspirina con
+  cloruro de acetilo, paracetamol "de la anilina", etc. → corregidos o
+  reformulados sin afirmar lo que no se puede sostener.
+- SN2/E2: se aclara que los "3 pasos" del visor muestran un único paso en
+  cámara lenta; la inversión de Walden no es "girar 180°" y R/S no
+  siempre cambia; la SN1 solo da racémica si el carbono es quiral.
+- Reacciones reversibles (esterificación, hidrólisis ácida) ahora se
+  dibujan con flecha de equilibrio ⇌.
+- Hallazgos descartados tras verificarlos: "C(O)" con enlace simple y
+  "benceno en vez de ciclohexano" eran artefactos de cómo se extrajo el
+  texto para la auditoría; en pantalla el C=O sí lleva doble enlace y el
+  ciclohexano se dibuja sin dobles enlaces.
+
+### Otros
+- `sw.js`: caché `v23`→`v24`.
+
+### Verificado con Playwright
+- Sin errores de página; las 11 pestañas (con todas las tarjetas abiertas)
+  sin desbordes ni scroll horizontal a 390 px; ningún símbolo de la
+  notación interna suelto en pantalla.
+- Los botones "Dónde la vas a ver" abren la pestaña y la reacción
+  correctas; la práctica "¿Qué tipo es?" marca y retroalimenta bien.
+
+### Pendiente
+- Los dibujos de los mecanismos (flechas de electrones) siguen siendo los
+  de antes, en letra monoespaciada.
+- Varios datos de contexto colombianos que quedan en los recuadros "¿Para
+  qué te sirve esto?" no se pudieron verificar uno por uno; conviene que
+  el docente les dé una mirada.
+
+---
+
 ## 2026-10-20 (121) — Reacciones: el modelo "libro" también en las reacciones explicativas
 
 ### Contexto
