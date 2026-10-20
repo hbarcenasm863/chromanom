@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (119) — Varias versiones por generación y banco Saber 11 ampliado a 240
+
+### Contexto
+El docente pidió dos cosas para `docente.html`: (1) poder elegir un número
+de versiones y que se generen de una vez esa cantidad de talleres o
+evaluaciones (en vez de tener que cambiar manualmente entre "Forma A" y
+"Forma B"), y (2) ampliar el banco de preguntas tipo Saber 11 (opción
+múltiple) a por lo menos 20 por tema — antes había solo 8 por tema (96 en
+total).
+
+### Cambios — número de versiones (`docente.html`, `docente-app.js`)
+- Se reemplazó el selector "Forma A / Forma B" por un campo **"Número de
+  versiones"** (1 a 8). Al generar, `docente-app.js` arma esa cantidad de
+  talleres o evaluaciones completos, cada uno con su propia semilla
+  aleatoria (distinto orden de preguntas y de opciones), y los concatena
+  en la misma vista previa, listos para imprimir juntos. Cada hoja queda
+  marcada "Versión X de N" en el encabezado.
+- La **guía completa** (4 sesiones) ignora este campo y siempre genera 1
+  sola versión: las sesiones 1 y 2 son el mismo contenido de estudio para
+  toda la clase, así que "varias versiones" no tendría sentido ahí; el
+  campo se deshabilita automáticamente al elegir ese tipo de documento.
+- El **anexo de rúbricas**, cuando se piden varias versiones de una
+  evaluación, se agrega una sola vez al final (no se repite por versión,
+  porque el criterio de calificación es el mismo para todas).
+- Se quitó el botón "Cambiar a la otra forma", que ya no aplica.
+
+### Cambios — banco Saber 11 (`docente-datos.js`)
+Se agregaron 144 preguntas nuevas tipo Saber 11 (12 por cada uno de los 12
+temas: cadena, alcanos, alquenos, aromáticos, haluros, alcoholes,
+carbonilos, ácidos, nitrogenados, polifuncionales, isomería y
+reacciones), manteniendo el mismo estilo de las 96 originales — contexto
+real (muchos con ejemplos colombianos: biogás de la PTAR El Salitre, gas
+natural de La Guajira, aguardiente antioqueño, banano de Urabá, biodiésel
+de palma, caucho del Caquetá y el Meta, GABA, limoneno, etc.), cuatro
+opciones con una sola correcta, y las etiquetas de competencia (uso
+comprensivo / explicación de fenómenos / indagación) y componente
+(químico / CTS) de la prueba Saber 11. El banco total pasó de 96 a 240
+preguntas (20 por tema).
+
+### Verificado con Playwright
+- Las 240 preguntas cargan sin error: estructura completa (contexto,
+  enunciado, 4 opciones sin duplicados, etiquetas válidas) y las 49 que
+  llevan una figura (fórmula en texto, arreglo de átomos o molécula del
+  Generador) dibujan bien — se encontró y corrigió una fórmula
+  (`HOOC−CH₂−CH₂−COOH`) que el lector de texto no reconocía por empezar
+  con "HOOC" en vez de "COOH".
+- Se generó una evaluación real de 20 preguntas Saber de un solo tema
+  (Ácidos y ésteres) en 3 versiones a la vez: 60 preguntas en total, sin
+  el aviso de "el banco no alcanza", cada versión con una pregunta
+  distinta al inicio de cada hoja, sin errores de página.
+- Se probó también "Solo taller" con 3 versiones y una evaluación con
+  rúbrica y 2 versiones (la rúbrica aparece una sola vez, al final, sin
+  el rótulo de versión).
+
+### Pendiente
+Sigue pendiente, de sesiones anteriores, que el docente confirme desde un
+dispositivo real que el banco ampliado de "Retos de nomenclatura" (en el
+Juego) se ve y juega bien.
+
+---
+
 ## 2026-10-19 (118) — Se fusionan Generador y Docente en una sola página
 
 ### Contexto

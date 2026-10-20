@@ -417,13 +417,13 @@ body.sin-eval .solo-eval{display:none}
           <p class="ayuda">Las evaluaciones no llevan clave de respuestas: los estudiantes también entran a esta página.</p>
         </fieldset>
         <fieldset>
-          <legend>6 · Forma (para evitar copia)</legend>
-          <div class="radios">
-            <label class="opt"><input type="radio" name="forma" value="A" checked> <span>Forma A</span></label>
-            <label class="opt"><input type="radio" name="forma" value="B"> <span>Forma B</span></label>
-          </div>
+          <legend>6 · Versiones (para evitar copia)</legend>
+          <label class="campo">Número de versiones
+            <input type="number" id="f-nver" min="1" max="8" value="1" inputmode="numeric">
+          </label>
+          <p class="ayuda">Genera esa cantidad de talleres o evaluaciones de una vez —cada versión con distinto orden de preguntas y de opciones, y marcada «Versión X de N»—, listas para imprimir juntas en la misma vista.</p>
           <label class="campo">Código de variante <input type="text" id="f-var" value="1" maxlength="12"></label>
-          <p class="ayuda">Con el mismo código, la misma forma sale igual cada vez. Cambie el código para obtener otra selección de ejercicios.</p>
+          <p class="ayuda">Con el mismo código, salen las mismas versiones cada vez. Cambie el código para obtener otra selección de ejercicios.</p>
         </fieldset>
         <fieldset>
           <legend>7 · Encabezado institucional (opcional)</legend>
@@ -439,7 +439,6 @@ body.sin-eval .solo-eval{display:none}
         <div class="acciones">
           <button type="button" class="cn-btn cn-btn--primary" id="btn-generar" disabled>⚙️ Generar vista previa</button>
           <button type="button" class="cn-btn cn-btn--secondary" id="btn-imprimir" disabled>🖨️ Imprimir / Guardar PDF</button>
-          <button type="button" class="cn-btn cn-btn--ghost" id="btn-forma-b">⇄ Cambiar a la otra forma</button>
         </div>
         <p id="f-estado">⏳ Cargando bancos de ejercicios…</p>
       </form>

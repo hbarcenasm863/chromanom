@@ -257,7 +257,7 @@ var NOMBRE_PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insatura
 function encabezadoInst(e,titulo,sub,forma){
   function campo(l,v){return '<div class="ei-c"><span>'+l+'</span>'+(v?'<b>'+esc(v)+'</b>':'<i></i>')+'</div>';}
   return '<div class="ei"><div class="ei-top"><div><div class="ei-tipo">'+esc(sub)+'</div><div class="ei-tit">'+esc(titulo)+'</div></div>'+
-    '<div class="ei-der"><img src="logo-chromanom.png" alt="ChromaNom" width="120" height="34">'+(forma?'<span class="ei-forma">Forma '+forma+'</span>':'')+'</div></div>'+
+    '<div class="ei-der"><img src="logo-chromanom.png" alt="ChromaNom" width="120" height="34">'+(forma?'<span class="ei-forma">'+esc(forma)+'</span>':'')+'</div></div>'+
     '<div class="ei-grid">'+campo('Institución',e.colegio)+campo('Docente',e.docente)+campo('Área',e.area)+campo('Grado / curso',e.curso)+campo('Periodo',e.periodo)+campo('Fecha',e.fecha)+'</div></div>';
 }
 function lineaEstudiante(){return '<div class="est-lin"><div><span>Nombre del estudiante</span><i></i></div><div class="corta"><span>Curso</span><i></i></div></div>';}
@@ -421,18 +421,21 @@ function leerForm(){
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
     nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(6,+$('f-nab').value||0)),
-    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,forma:valor('forma')||'A',variante:($('f-var').value||'1').trim(),
+    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),area:$('f-area').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
-function construir(F){
+function construirVersion(F,verIdx,verTotal){
   var avisos=[];
   var nombreTemas=F.temas.map(function(t){return t.corto;}).join(' · ');
-  var semilla=[F.variante,F.forma,F.tipo,F.temas.map(function(t){return t.id;}).join(',')].join('|');
+  var semilla=[F.variante,verIdx,F.tipo,F.temas.map(function(t){return t.id;}).join(',')].join('|');
   var P=poolEjercicios(F.temas);
   var tipos=F.tipos.filter(function(k){return (P[k]||[]).length;});
   var docs=[];
-  var cabCorta=function(lbl){return esc(lbl)+' · '+esc(nombreTemas)+(F.enc.colegio?' · '+esc(F.enc.colegio):'')+' · Forma '+F.forma;};
+  // Con una sola versión no hace falta el rótulo; con varias, cada hoja dice
+  // «Versión X de N» para que el docente reparta/corte sin confundirlas.
+  var verLbl=verTotal>1?('Versión '+verIdx+' de '+verTotal):'';
+  var cabCorta=function(lbl,sinVersion){return esc(lbl)+' · '+esc(nombreTemas)+(F.enc.colegio?' · '+esc(F.enc.colegio):'')+(verLbl&&!sinVersion?' · '+verLbl:'');};
 
   // Ejercicios
   var selEj=null;
@@ -452,13 +455,13 @@ function construir(F){
     b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca cómo te sientes con lo aprendido:</p>'+
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
-    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º',F.forma)+lineaEstudiante()+cajaAlineacion(F.alin);
-    docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía'),primera:prim,bloques:b});
+    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante()+cajaAlineacion(F.alin);
+    docs.push({clase:'guia',etiqueta:verTotal>1?'Guía '+verIdx+'/'+verTotal:'Guía',cab:cabCorta('Guía'),primera:prim,bloques:b});
   }
   if(F.tipo==='taller'){
     var bt=selEj?bloquesEjercicios(selEj,1):[];
-    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',F.forma)+lineaEstudiante()+cajaAlineacion(F.alin,true);
-    docs.push({clase:'taller',etiqueta:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
+    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante()+cajaAlineacion(F.alin,true);
+    docs.push({clase:'taller',etiqueta:verTotal>1?'Taller '+verIdx+'/'+verTotal:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
   }
   if(F.tipo==='guia'||F.tipo==='evaluacion'){
     var poolS=[];F.temas.forEach(function(t){poolS=poolS.concat(D.SABER[t.id]||[]);});
@@ -473,13 +476,30 @@ function construir(F){
     be=be.concat(bloquesAbiertas(ab,qs.length+1));
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
-    var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',F.forma)+
+    var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
       '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div><div class="corta"><span>Fecha</span><i></i></div></div>'+cajaAlineacion(F.alin,true);
-    docs.push({clase:'eval',etiqueta:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
-    if(F.rubrica){
+    docs.push({clase:'eval',etiqueta:verTotal>1?'Evaluación '+verIdx+'/'+verTotal:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
+    // El anexo de rúbricas no depende de la semilla (es el mismo criterio de
+    // evaluación para todas las versiones): con varias versiones solo se
+    // agrega una vez, al final, para no repetir la misma hoja N veces.
+    if(F.rubrica&&verIdx===verTotal){
       var br=bloquesRubricas(F.temas);
-      if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas'),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
+      if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas',true),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
     }
+  }
+  return {docs:docs,avisos:avisos};
+}
+// «Guía completa» es un documento de estudio único (sesiones 1-2 estáticas);
+// las versiones solo tienen sentido para repartir talleres o evaluaciones
+// distintas entre estudiantes sentados cerca. Por eso una guía ignora
+// nVersiones y siempre sale en una sola versión.
+function construirTodas(F){
+  var N=F.tipo==='guia'?1:F.nVersiones;
+  var avisos=[],docs=[];
+  for(var i=1;i<=N;i++){
+    var R=construirVersion(F,i,N);
+    docs=docs.concat(R.docs);
+    R.avisos.forEach(function(a){if(avisos.indexOf(a)<0)avisos.push(a);});
   }
   return {docs:docs,avisos:avisos};
 }
@@ -489,9 +509,9 @@ function generar(){
   var F=leerForm();
   var info=$('vista-info');
   if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marca al menos un tema.</p>';return Promise.resolve();}
-  info.innerHTML='<p class="aviso">⏳ Armando el documento…</p>';
+  info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.tipo!=='guia'&&F.nVersiones>1?'s':'')+'…</p>';
   return bancosListos.then(function(){return (document.fonts&&document.fonts.ready)||null;}).then(function(){
-    var R=construir(F);
+    var R=construirTodas(F);
     var medidor=$('medidor');medidor.innerHTML='';
     var vista=$('vista');vista.innerHTML='';
     var resumen=[];
@@ -529,7 +549,6 @@ function iniciar(){
   syncTipoDoc();
   $('btn-generar').addEventListener('click',function(){generar().then(function(){var v=$('vista-wrap');if(v&&v.scrollIntoView)v.scrollIntoView({behavior:'smooth',block:'start'});});});
   $('btn-imprimir').addEventListener('click',imprimir);
-  $('btn-forma-b').addEventListener('click',function(){var b=document.querySelector('input[name=forma][value='+(valor('forma')==='A'?'B':'A')+']');if(b){b.checked=true;generar();}});
   window.addEventListener('resize',ajustarZoom);
   pintarEstado();$('btn-generar').disabled=false;
 }
@@ -539,6 +558,13 @@ function syncTipoDoc(){
   document.body.classList.toggle('sin-eval',t==='taller');
   if(t==='taller'&&+$('f-nej').value<16)$('f-nej').value=20;
   if(t==='guia'&&+$('f-nej').value>16)$('f-nej').value=12;
+  // La guía completa es un documento de estudio único: no tiene sentido
+  // generar «versiones» distintas de las sesiones 1-2 (son siempre iguales).
+  var nver=$('f-nver');
+  if(nver){
+    nver.disabled=(t==='guia');
+    if(t==='guia')nver.value='1';
+  }
 }
 window.DocenteGen={generar:generar,bancos:function(){return bancosListos;},_B:B};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();
