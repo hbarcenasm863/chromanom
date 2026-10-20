@@ -274,7 +274,12 @@ function cajaAlineacion(al,compacta){
   if(sed)h+='<p class="fuente">Fuente de los aprendizajes y evidencias: '+esc(D.ALINEACION.fuenteSED)+'</p>';
   return h;
 }
-function lineas(n){var s='';for(var i=0;i<n;i++)s+='<div class="lin"></div>';return s;}
+// Espacio para escribir: cuadrícula de cuaderno (cuadros de 5 mm). Arranca
+// con un tamaño mínimo y, al paginar, crece de a un cuadro para llenar el
+// espacio que sobra en la hoja (ver llenarHoja).
+var CUADRO=18.9;
+function cuad(n,cls){return '<div class="cuad'+(cls?' '+cls:'')+'" style="height:'+(n*CUADRO).toFixed(1)+'px"></div>';}
+function lineas(n){return cuad(Math.max(3,Math.round(n*1.3)));}
 function pastillas(partes,neutral){return '<div class="pills">'+partes.map(function(p){var t=Array.isArray(p)?p[0]:p.t,c=Array.isArray(p)?p[1]:p.cls;return '<span class="pill p-'+(neutral?'n':c)+'">'+esc(t)+'</span>';}).join('')+'</div>';}
 
 function bloquesPrevios(t){
@@ -313,11 +318,11 @@ var INSTR={
 var TIT={A:'Nombrar',B:'Dibujar',C:'Análisis por partes (MDEC)',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
 function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
-  if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div><div class="dibujo"></div></div>';
+  if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,true)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
   if(it.k==='D'){var h='';try{h=B.G.tipoD(it.rxn,num);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
-  if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+'<div class="espacio"></div></div>';
+  if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+cuad(7,'espacio')+'</div>';
   return '';
 }
 /* Elige n ejercicios repartidos entre los tipos marcados. */
@@ -361,10 +366,11 @@ function bloquesSaber(qs,r){
   return qs.map(function(q,i){
     var ops=barajar(q.o,r);
     var cortas=ops.every(function(o){return o.length<=34;});
+    var muyCortas=ops.every(function(o){return o.length<=16;});
     var fig=(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},300,110):'';
     return '<div class="sq"><div class="sq-cab"><span class="num">'+(i+1)+'</span><span class="sq-tag">'+esc(COMP[q.c])+' · '+esc(COMPO[q.k])+'</span></div>'+
       '<p class="sq-ctx">'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
-      '<ol class="sq-ops'+(cortas?' dos':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
+      '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
   });
 }
 function bloqueHojaRespuestas(n){
@@ -391,6 +397,46 @@ function bloquesRubricas(temas){
 }
 
 /* ── Paginación en hojas tamaño carta ────────────────────────────────── */
+// Llena el espacio que sobra al final de una hoja: lo reparte, de a un
+// cuadro, entre los espacios cuadriculados de esa hoja (los que quedan en la
+// misma fila crecen juntos). Si la hoja no tiene ninguno y sobra bastante,
+// agrega un recuadro cuadriculado de notas / borrador.
+function llenarHoja(h,clase,ultima){
+  var c=h.querySelector('.hoja-cuerpo');
+  function libre(){var u=c.lastElementChild;if(!u)return c.clientHeight;return c.getBoundingClientRect().bottom-u.getBoundingClientRect().bottom-3;}
+  var areas=[].slice.call(c.querySelectorAll('.cuad'));
+  if(!areas.length){
+    if(clase==='anexo'||c.querySelector('.hr'))return;
+    var n=Math.floor((libre()-30)/CUADRO);
+    if(n<4)return;
+    var w=document.createElement('div');w.className='blq';
+    w.innerHTML='<div class="notas-tit">'+(clase==='eval'?'Borrador y cálculos (no se califica)':'Notas')+'</div>'+cuad(n,'notas');
+    c.appendChild(w);
+    while(c.scrollHeight>c.clientHeight+1&&n>2){n--;w.querySelector('.cuad').style.height=(n*CUADRO).toFixed(1)+'px';}
+    return;
+  }
+  var filas=[];
+  areas.forEach(function(a){var t=Math.round(a.getBoundingClientRect().top);var f=null;filas.forEach(function(x){if(Math.abs(x.t-t)<8)f=x;});if(f)f.a.push(a);else filas.push({t:t,a:[a]});});
+  var pasos=Math.floor(libre()/CUADRO),k=0,hechos=[];
+  while(pasos>0&&k<400){
+    var f=filas[k%filas.length];k++;
+    if(parseFloat(f.a[0].style.height)>=26*CUADRO)continue;
+    f.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)+CUADRO).toFixed(1)+'px';});
+    hechos.push(f);pasos--;
+  }
+  while(c.scrollHeight>c.clientHeight+1&&hechos.length){
+    var g=hechos.pop();g.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)-CUADRO).toFixed(1)+'px';});
+  }
+  // Si la hoja ya venía desbordada (un bloque más alto que la hoja), se
+  // encogen los cuadriculados hasta un mínimo de 2 cuadros para que no
+  // queden cortados en el borde inferior.
+  var guard=0;
+  while(c.scrollHeight>c.clientHeight+1&&guard++<200){
+    var mayor=null;filas.forEach(function(x){var hh=parseFloat(x.a[0].style.height);if(hh>2.5*CUADRO&&(!mayor||hh>parseFloat(mayor.a[0].style.height)))mayor=x;});
+    if(!mayor)break;
+    mayor.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)-CUADRO).toFixed(1)+'px';});
+  }
+}
 function paginar(doc,medidor){
   var hojas=[];
   function nueva(){
@@ -400,13 +446,27 @@ function paginar(doc,medidor){
   }
   var cuerpo=nueva();
   if(doc.primera){cuerpo.parentNode.querySelector('.hoja-cab').style.display='none';}
+  // Las preguntas de selección múltiple (tipo Saber) van a doble columna:
+  // se agrupan en un contenedor .cols2 por hoja; si la siguiente no cabe,
+  // se abre otra hoja con su propio contenedor.
+  function contenedorCols(){
+    var u=cuerpo.lastElementChild;
+    if(u&&u.classList.contains('cols2'))return u;
+    var c=document.createElement('div');c.className='blq cols2';cuerpo.appendChild(c);return c;
+  }
   doc.bloques.forEach(function(html,i){
     var w=document.createElement('div');w.className='blq';w.innerHTML=(i===0&&doc.primera?doc.primera:'')+html;
-    cuerpo.appendChild(w);
-    if(cuerpo.scrollHeight>cuerpo.clientHeight+1&&cuerpo.children.length>1){
-      cuerpo.removeChild(w);cuerpo=nueva();cuerpo.appendChild(w);
+    var enCols=!(i===0&&doc.primera)&&/^<div class="sq"/.test(html);
+    var dest=enCols?contenedorCols():cuerpo;
+    dest.appendChild(w);
+    if(cuerpo.scrollHeight>cuerpo.clientHeight+1&&(cuerpo.children.length>1||dest.children.length>1)){
+      dest.removeChild(w);
+      if(enCols&&!dest.children.length)cuerpo.removeChild(dest);
+      cuerpo=nueva();
+      (enCols?contenedorCols():cuerpo).appendChild(w);
     }
   });
+  hojas.forEach(function(h,i){llenarHoja(h,doc.clase,i===hojas.length-1);});
   hojas.forEach(function(h,i){h.querySelector('.pie-n').textContent=doc.etiqueta+' — página '+(i+1)+' de '+hojas.length;});
   return hojas;
 }
@@ -455,12 +515,12 @@ function construirVersion(F,verIdx,verTotal,soloEval){
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
     // La guía sale una sola vez (es igual para todos): no lleva rótulo de versión.
-    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º','')+lineaEstudiante()+cajaAlineacion(F.alin);
+    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º','')+lineaEstudiante();
     docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía',true),primera:prim,bloques:b});
   }
   if(F.tipo==='taller'){
     var bt=selEj?bloquesEjercicios(selEj,1):[];
-    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante()+cajaAlineacion(F.alin,true);
+    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante();
     docs.push({clase:'taller',etiqueta:verTotal>1?'Taller '+verIdx+'/'+verTotal:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
   }
   if(F.tipo==='guia'||F.tipo==='evaluacion'){
@@ -477,7 +537,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
     var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
-      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div><div class="corta"><span>Fecha</span><i></i></div></div>'+cajaAlineacion(F.alin,true);
+      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div><div class="corta"><span>Fecha</span><i></i></div></div>';
     docs.push({clase:'eval',etiqueta:verTotal>1?'Evaluación '+verIdx+'/'+verTotal:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
     // El anexo de rúbricas no depende de la semilla (es el mismo criterio de
     // evaluación para todas las versiones): con varias versiones solo se
@@ -510,7 +570,13 @@ function generar(){
   var info=$('vista-info');
   if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marca al menos un tema.</p>';return Promise.resolve();}
   info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.nVersiones>1?'s':'')+'…</p>';
-  return bancosListos.then(function(){return (document.fonts&&document.fonts.ready)||null;}).then(function(){
+  return bancosListos.then(function(){
+    // La letra de libro (STIX) se descarga solo cuando se usa: hay que
+    // pedirla ANTES de medir las páginas, o se mide con la letra de
+    // reemplazo y después el texto crece y desborda la hoja.
+    if(!document.fonts||!document.fonts.load)return null;
+    return Promise.all(['400 13.5px "STIX Two Text"','700 13.5px "STIX Two Text"','italic 400 13.5px "STIX Two Text"','600 13.5px "STIX Two Text"'].map(function(f){return document.fonts.load(f).catch(function(){});})).then(function(){return document.fonts.ready;});
+  }).then(function(){
     var R=construirTodas(F);
     var medidor=$('medidor');medidor.innerHTML='';
     var vista=$('vista');vista.innerHTML='';

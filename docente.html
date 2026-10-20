@@ -14,7 +14,7 @@
 <title>ChromaNom · Docente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --c1:#0891b2;--c1t:#0e7490;--c1b:#ecfeff;   /* ① sustituyentes - turquesa */
@@ -237,6 +237,23 @@ body.sin-eval .solo-eval{display:none}
 .hoja .chips span{border:1px solid #999;border-radius:999px;padding:1px 9px;font-size:11.5px}
 .hoja .act{font-size:12.5px}
 .hoja .lin{border-bottom:1px solid #aaa;height:20px}
+/* Espacio para escribir: cuadrícula de cuaderno escolar (cuadros de 5 mm) */
+.hoja .cuad{border:1px solid #8fb1d6;border-radius:3px;margin-top:4px;background-color:#fff;
+  background-image:linear-gradient(#cddff2 1px,transparent 1px),linear-gradient(90deg,#cddff2 1px,transparent 1px);
+  background-size:18.9px 18.9px;background-position:-1px -1px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .notas-tit{font-size:11px;font-weight:700;color:#4a5f73;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+/* Preguntas de selección múltiple a doble columna */
+.hoja .cols2{column-count:2;column-gap:20px;column-rule:1px solid #ddd}
+.hoja .cols2>.blq{break-inside:avoid;page-break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%}
+.hoja .cols2 .sq-ops.dos{grid-template-columns:1fr}
+.hoja .cols2 .sq-ops.dos.mc{grid-template-columns:1fr 1fr}
+.hoja .cols2 svg{max-width:100%;height:auto}
+/* Tipografía tipo libro (la misma de reacciones.html) */
+.hoja{font-family:'STIX Two Text','Times New Roman',serif!important;font-size:13.5px!important}
+.hoja .ei-tit,.hoja .ses{font-family:'STIX Two Text','Times New Roman',serif!important;font-weight:700!important}
+.hoja .pill,.hoja .mdec-tab.blanco td:first-child,.hoja .fig-txt,.hoja .nom,.hoja .rxn-d-mol-txt{font-family:'STIX Two Text','Times New Roman',serif!important}
+.hoja svg text{font-family:'STIX Two Text','Times New Roman',serif!important}
+.hoja .hoja-cab,.hoja .hoja-pie,.hoja .sq-tag,.hoja .ei-c span,.hoja .est-lin span,.hoja .notas-tit{font-family:'Outfit','Segoe UI',Arial,sans-serif}
 .hoja .lect{text-align:justify;font-size:12.5px}
 .hoja .mapa{border:1.5px solid #1a6ea8;border-radius:10px;padding:8px}
 .hoja .mapa-raiz{text-align:center;font-weight:800;font-size:13px;background:#e8f4fb;border-radius:6px;padding:4px;margin-bottom:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -268,12 +285,12 @@ body.sin-eval .solo-eval{display:none}
 .hoja .ej.rx{padding:0;border:none}
 .hoja .resp{display:flex;gap:6px;align-items:flex-end;font-size:11.5px;margin-top:4px}
 .hoja .nom{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;padding:2px 0 4px}
-.hoja .dibujo{height:105px;border:1px dashed #999;border-radius:6px}
+.hoja .dibujo:not(.cuad){height:105px;border:1px dashed #999;border-radius:6px}
 .hoja .x-fila{display:flex;gap:10px;align-items:center}
 .hoja .x-fila .fig{flex:0 0 auto}
 .hoja .x-txt{flex:1;font-size:12px}
 .hoja .enun{font-size:12.5px}
-.hoja .espacio{height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
+.hoja .espacio:not(.cuad){height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
 /* tarjeta de reacción del Generador */
 .hoja .exercise{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px}
 .hoja .ex-header{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:12px}
@@ -384,11 +401,15 @@ body.sin-eval .solo-eval{display:none}
           <div class="lista-opts" id="f-temas"></div>
         </fieldset>
         <fieldset>
-          <legend>3 · Grado y alineación curricular</legend>
+          <legend>3 · Grado</legend>
           <div class="radios">
             <label class="opt"><input type="radio" name="grado" value="11" checked> <span>Grado 11.º</span></label>
             <label class="opt"><input type="radio" name="grado" value="10"> <span>Grado 10.º</span></label>
           </div>
+          <!-- La alineación curricular (SED, MEN, DBA) ya no se imprime en los
+               documentos (pedido del docente: queda implícita en el contenido).
+               Los controles se conservan ocultos para no romper el código. -->
+          <div hidden>
           <p class="sub-leg">Aprendizaje priorizado (SED Bogotá, 2025)</p>
           <select id="f-sed" aria-label="Aprendizaje priorizado"></select>
           <p id="f-sed-texto"></p>
@@ -400,6 +421,7 @@ body.sin-eval .solo-eval{display:none}
           <div id="f-dba"></div>
           <button type="button" class="cn-btn cn-btn--ghost" id="btn-sugerida">↺ Usar la alineación sugerida para el tema</button>
           <p class="ayuda">En la priorización de la SED la química orgánica aparece en 11.º; para 10.º se ofrecen las evidencias de enlace químico.</p>
+          </div>
         </fieldset>
         <fieldset class="solo-ej">
           <legend>4 · Trabajo práctico</legend>

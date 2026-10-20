@@ -7,6 +7,66 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-20 (125) — Docente: cuadrícula de cuaderno, hojas sin huecos, Saber a doble columna, letra de libro y sin alineación curricular
+
+### Contexto
+El docente pidió para los documentos de `docente.html`: (1) que los
+espacios para escribir sean cuadrícula, como un cuaderno escolar; (2) que
+esos espacios se ajusten para ocupar el máximo de cada hoja, evitando
+huecos en blanco grandes entre páginas, con las evaluaciones siempre en
+hojas aparte; (3) las preguntas de selección múltiple a doble columna;
+(4) la tipografía tipo libro de `reacciones.html`; y (5) quitar de los
+documentos lo referente a DBA, lineamientos MEN y aprendizajes
+priorizados, conservando el espacio para el nombre del estudiante (los
+objetivos quedan implícitos en el contenido).
+
+### Cambios (`docente-app.js`, `docente.html`)
+- **Cuadrícula de cuaderno** (cuadros de 5 mm, azul claro, con
+  `print-color-adjust` para que salga al imprimir aunque no se active
+  "gráficos de fondo"): reemplaza los renglones de las preguntas de
+  activación y abiertas, los recuadros punteados para dibujar y los
+  espacios de los ejercicios abiertos (`cuad()`).
+- **Hojas llenas** (`llenarHoja()`): después de paginar, el espacio que
+  sobra en cada hoja se reparte, de a un cuadro, entre los espacios
+  cuadriculados de esa hoja (los que están en la misma fila crecen juntos;
+  máximo 26 cuadros cada uno). Si la hoja no tiene ninguno y sobran 4
+  cuadros o más, se agrega un recuadro cuadriculado de "Notas" (o
+  "Borrador y cálculos (no se califica)" en la evaluación); no se agrega
+  en la hoja de respuestas ni en el anexo de rúbricas. Si una hoja ya venía
+  desbordada, los cuadriculados se encogen hasta 2 cuadros.
+- Cada documento (guía, taller, cada versión de evaluación) sigue
+  empezando en hoja nueva.
+- **Preguntas tipo Saber a doble columna**: se agrupan por hoja en un
+  contenedor de 2 columnas, sin partir ninguna pregunta; las opciones van
+  en una sola columna dentro de cada columna salvo que sean muy cortas.
+- **Letra tipo libro (STIX Two Text)** en todo el documento, incluidos
+  títulos, fórmulas y dibujos de moléculas; encabezado/pie de página y
+  rótulos pequeños siguen en Outfit. El generador ahora **espera a que
+  cargue esa letra antes de medir las páginas**: sin esto se medía con la
+  letra de reemplazo y después el texto crecía y desbordaba la hoja.
+- **Sin alineación curricular** en guía, taller y evaluación (se quitó el
+  recuadro de aprendizaje priorizado, evidencias, estándar MEN y DBA). Se
+  conservan el encabezado institucional y la línea de nombre del
+  estudiante. En el formulario, el paso 3 quedó solo como "Grado" (los
+  controles de alineación siguen ocultos en el HTML para no romper el
+  código). La pestaña informativa "Alineación curricular" de la página del
+  docente no se tocó.
+- `sw.js`: caché `v26`→`v27`.
+
+### Verificado con Playwright (servidor local)
+- Guía (Alcoholes) + 2 versiones de evaluación, taller y evaluación de 12
+  preguntas Saber + 3 abiertas: ninguna hoja desbordada; espacio libre al
+  final de cada hoja entre 0 y ~60 px, salvo la hoja de respuestas
+  cuando cae sola en una página.
+- PDF de prueba: la cuadrícula se imprime.
+
+### Pendiente
+- Confirmar con el docente si también quiere quitar la pestaña informativa
+  "Alineación curricular" de `docente.html` (solo se quitó de los
+  documentos).
+
+---
+
 ## 2026-10-20 (124) — Docente: el número de versiones funciona siempre y ya no se marca "Alcoholes" solo
 
 ### Contexto
