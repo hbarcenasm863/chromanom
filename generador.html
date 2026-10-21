@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Esta página se fusionó con docente.html («Generador de guías», que incluye
+// TODO lo que ofrecía este Generador —tipos A-D por grupo funcional— más los
+// temas del Juego, evaluaciones y guías completas). Si alguien entra aquí
+// directamente (o por un enlace/marcador viejo), lo mandamos a docente.html.
+// OJO: docente.html carga ESTA página en un iframe oculto para leer su banco
+// de moléculas (MOLS/BANCO_RXN) — por eso el redirect solo corre cuando esta
+// página es la ventana de arriba (self===top), nunca dentro de ese iframe.
+if(window.self===window.top){location.replace('docente.html');}
+</script>
 <script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
 <title>ChromaNom · Generador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -396,9 +406,8 @@ body{
 .pill-r{background:var(--c-r)}
 /* Doble rol (ej. el anillo bencénico: es cadena Y grupo funcional a la vez) */
 .pill-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
-/* Hoja del estudiante: fragmentos SIN color (gris neutro) — si salieran
-   coloreados, el color le regalaría la respuesta. (No hay clave de
-   respuestas a propósito: los estudiantes también generan sus hojas.) */
+/* Gris neutro (sin uso por ahora): el docente prefirió que los ejercicios
+   de análisis por partes salgan con los colores del método. */
 .mdec-pill.pill-n{background:#eef2f6;color:#0d2233;border:1.5px solid #94a3b8}
 .mdec-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 
@@ -2280,7 +2289,7 @@ const BANCO_RXN = [
    regla:'El carbono carbonílico de la cetona ya tiene dos sustituyentes; al recibir el grupo del Grignard queda con tres → alcohol terciario.',
    respuesta:'Se obtiene un alcohol terciario: CH₃−C(OH)(C₆H₅)−CH₃ (2-fenilpropan-2-ol). Regla: cetona + Grignard → siempre alcohol terciario.'},
   {key:'rxn_53',topic:'cetonas',categoria:'Condensación aldólica (cetonas)',pregunta_tipo:'tipo',
-   enunciado:'Este compuesto se obtuvo por condensación aldólica de 2 moléculas de acetona (CH₃−CO−CH₃). Identifica el tipo de reacción y la condición necesaria para pasar de este producto aldólico a la enona:',
+   enunciado:'Este compuesto se obtuvo por adición aldólica de 2 moléculas de acetona (CH₃−CO−CH₃). Identifica el tipo de reacción y la condición necesaria para pasar de este producto aldólico a la enona (condensación aldólica):',
    r:'CH₃−C(CH₃)(OH)−CH₂−CO−CH₃',reactivo:null,condicion:'???',
    nombre_rxn:'Deshidratación del producto aldólico',
    regla:'La β-hidroxicetona formada en frío se deshidrata al calentar, dando la cetona α,β-insaturada (enona) más estable.',
@@ -3525,7 +3534,7 @@ function renderSheet(){
             <span class="ex-badge badge-c">Análisis por partes</span>
             <span class="ex-instruction">Indica a qué parte del método de 4 colores pertenece cada fragmento y qué significa (①&nbsp;Sustituyentes, ②&nbsp;Cadena principal, ③&nbsp;Insaturación, ④&nbsp;Grupo funcional):</span>
           </div>
-          <div class="mdec-name-display">${mdecPills(mol.parts, true)}</div>
+          <div class="mdec-name-display">${mdecPills(mol.parts, false)}</div>
           ${mdecTableBlank(mol.parts)}
         </div>`;
       }

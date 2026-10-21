@@ -14,7 +14,7 @@
 <title>ChromaNom · Docente</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --c1:#0891b2;--c1t:#0e7490;--c1b:#ecfeff;   /* ① sustituyentes - turquesa */
@@ -237,6 +237,28 @@ body.sin-eval .solo-eval{display:none}
 .hoja .chips span{border:1px solid #999;border-radius:999px;padding:1px 9px;font-size:11.5px}
 .hoja .act{font-size:12.5px}
 .hoja .lin{border-bottom:1px solid #aaa;height:20px}
+/* Espacio para escribir: cuadrícula de cuaderno escolar (cuadros de 5 mm) */
+.hoja .cuad{border:1px solid #8fb1d6;border-radius:3px;margin-top:4px;background-color:#fff;
+  background-image:linear-gradient(#cddff2 1px,transparent 1px),linear-gradient(90deg,#cddff2 1px,transparent 1px);
+  background-size:18.9px 18.9px;background-position:-1px -1px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .ab-tag{display:inline-block;font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1a4f7a;border:1px solid #8fb1d6;border-radius:999px;padding:0 7px;vertical-align:1px}
+.hoja .ab-nom{text-align:center;font-size:16px;font-weight:700;margin:5px 0 4px}
+.hoja .ab-mdec td{height:24px}
+.hoja .ab-mdec td:first-child{white-space:nowrap;font-weight:600;width:28%}
+.hoja .ab-est{font-size:12px;font-weight:600;margin-top:5px}
+.hoja .notas-tit{font-size:11px;font-weight:700;color:#4a5f73;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+/* Preguntas de selección múltiple a doble columna */
+.hoja .cols2{column-count:2;column-gap:20px;column-rule:1px solid #ddd}
+.hoja .cols2>.blq{break-inside:avoid;page-break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%}
+.hoja .cols2 .sq-ops.dos{grid-template-columns:1fr}
+.hoja .cols2 .sq-ops.dos.mc{grid-template-columns:1fr 1fr}
+.hoja .cols2 svg{max-width:100%;height:auto}
+/* Tipografía tipo libro (la misma de reacciones.html) */
+.hoja{font-family:'STIX Two Text','Times New Roman',serif!important;font-size:13.5px!important}
+.hoja .ei-tit,.hoja .ses{font-family:'STIX Two Text','Times New Roman',serif!important;font-weight:700!important}
+.hoja .pill,.hoja .mdec-tab.blanco td:first-child,.hoja .fig-txt,.hoja .nom,.hoja .rxn-d-mol-txt{font-family:'STIX Two Text','Times New Roman',serif!important}
+.hoja svg text{font-family:'STIX Two Text','Times New Roman',serif!important}
+.hoja .hoja-cab,.hoja .hoja-pie,.hoja .ei-c span,.hoja .est-lin span,.hoja .notas-tit{font-family:'Outfit','Segoe UI',Arial,sans-serif}
 .hoja .lect{text-align:justify;font-size:12.5px}
 .hoja .mapa{border:1.5px solid #1a6ea8;border-radius:10px;padding:8px}
 .hoja .mapa-raiz{text-align:center;font-weight:800;font-size:13px;background:#e8f4fb;border-radius:6px;padding:4px;margin-bottom:6px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -247,11 +269,12 @@ body.sin-eval .solo-eval{display:none}
 .hoja .mdec-ej{border:1px solid #bbb;border-radius:8px;padding:6px 8px}
 .hoja .pills{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:4px 0}
 .hoja .pill{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;border:2px solid;border-radius:6px;padding:1px 7px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.hoja .p-r{color:#0e7490;border-color:#0891b2;background:#ecfeff}
-.hoja .p-c{color:#14532d;border-color:#166534;background:#f0fdf4}
-.hoja .p-i{color:#92400e;border-color:#b45309;background:#fffbeb}
-.hoja .p-g{color:#9a4a78;border-color:#CC79A7;background:#fdf2f8}
-.hoja .p-cg{color:#14532d;border-color:#CC79A7;background:linear-gradient(135deg,#f0fdf4 50%,#fdf2f8 50%)}
+/* Mismos colores sólidos del código MDEC en todo el sitio (generador, grupos…) */
+.hoja .p-r{color:#fff;border-color:#0891b2;background:#0891b2}
+.hoja .p-c{color:#fff;border-color:#166534;background:#166534}
+.hoja .p-i{color:#fff;border-color:#b45309;background:#b45309}
+.hoja .p-g{color:#fff;border-color:#CC79A7;background:#CC79A7}
+.hoja .p-cg{color:#fff;border-color:#166534;background:linear-gradient(135deg,#166534 50%,#CC79A7 50%)}
 .hoja .p-n{color:#111;border-color:#888;background:#fff}
 .hoja .mdec-tab td:first-child{width:30%;text-align:center}
 .hoja .mdec-tab td{padding:5px 6px}
@@ -268,12 +291,12 @@ body.sin-eval .solo-eval{display:none}
 .hoja .ej.rx{padding:0;border:none}
 .hoja .resp{display:flex;gap:6px;align-items:flex-end;font-size:11.5px;margin-top:4px}
 .hoja .nom{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;padding:2px 0 4px}
-.hoja .dibujo{height:105px;border:1px dashed #999;border-radius:6px}
+.hoja .dibujo:not(.cuad){height:105px;border:1px dashed #999;border-radius:6px}
 .hoja .x-fila{display:flex;gap:10px;align-items:center}
 .hoja .x-fila .fig{flex:0 0 auto}
 .hoja .x-txt{flex:1;font-size:12px}
 .hoja .enun{font-size:12.5px}
-.hoja .espacio{height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
+.hoja .espacio:not(.cuad){height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
 /* tarjeta de reacción del Generador */
 .hoja .exercise{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px}
 .hoja .ex-header{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:12px}
@@ -297,9 +320,7 @@ body.sin-eval .solo-eval{display:none}
 /* evaluación */
 .hoja .instr{font-size:11.5px;border:1px solid #999;border-radius:6px;padding:5px 8px;background:#f7f9fb}
 .hoja .sq{border-bottom:1px solid #ccc;padding-bottom:5px}
-.hoja .sq-cab{display:flex;gap:8px;align-items:center}
-.hoja .sq-cab .num{font-weight:800;font-size:13px;border:1.5px solid #111;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
-.hoja .sq-tag{font-size:9.5px;color:#444;text-transform:uppercase;letter-spacing:.04em}
+.hoja .sq-ctx .num{margin-right:7px;vertical-align:1px;font-weight:800;font-size:13px;border:1.5px solid #111;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
 .hoja .sq-ctx{font-size:12.5px;margin:3px 0}
 .hoja .sq-q{font-weight:700;font-size:12.5px}
 .hoja .sq-ops{list-style:none;margin:2px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:2px 14px}
@@ -344,7 +365,6 @@ body.sin-eval .solo-eval{display:none}
     <a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
     <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
     <a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
-    <a href="generador.html" class="nav-link">📄 <span class="full">Generador</span></a>
     <a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
     <a href="docente.html" class="nav-link active" aria-current="page">📘 <span class="full">Docente</span></a>
   </div>
@@ -385,11 +405,15 @@ body.sin-eval .solo-eval{display:none}
           <div class="lista-opts" id="f-temas"></div>
         </fieldset>
         <fieldset>
-          <legend>3 · Grado y alineación curricular</legend>
+          <legend>3 · Grado</legend>
           <div class="radios">
             <label class="opt"><input type="radio" name="grado" value="11" checked> <span>Grado 11.º</span></label>
             <label class="opt"><input type="radio" name="grado" value="10"> <span>Grado 10.º</span></label>
           </div>
+          <!-- La alineación curricular (SED, MEN, DBA) ya no se imprime en los
+               documentos (pedido del docente: queda implícita en el contenido).
+               Los controles se conservan ocultos para no romper el código. -->
+          <div hidden>
           <p class="sub-leg">Aprendizaje priorizado (SED Bogotá, 2025)</p>
           <select id="f-sed" aria-label="Aprendizaje priorizado"></select>
           <p id="f-sed-texto"></p>
@@ -401,6 +425,7 @@ body.sin-eval .solo-eval{display:none}
           <div id="f-dba"></div>
           <button type="button" class="cn-btn cn-btn--ghost" id="btn-sugerida">↺ Usar la alineación sugerida para el tema</button>
           <p class="ayuda">En la priorización de la SED la química orgánica aparece en 11.º; para 10.º se ofrecen las evidencias de enlace químico.</p>
+          </div>
         </fieldset>
         <fieldset class="solo-ej">
           <legend>4 · Trabajo práctico</legend>
@@ -411,20 +436,20 @@ body.sin-eval .solo-eval{display:none}
           <legend>5 · Evaluación</legend>
           <div class="campos">
             <label>Preguntas tipo Saber 11 <input type="number" id="f-nsaber" min="0" max="30" value="8" inputmode="numeric"></label>
-            <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="6" value="2" inputmode="numeric"></label>
+            <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="6" value="3" inputmode="numeric"></label>
           </div>
           <label class="opt"><input type="checkbox" id="f-hr" checked> <span>Incluir hoja de respuestas (círculos A–D)</span></label>
           <label class="opt"><input type="checkbox" id="f-rub"> <span>Anexar rúbricas (hoja aparte)</span></label>
           <p class="ayuda">Las evaluaciones no llevan clave de respuestas: los estudiantes también entran a esta página.</p>
         </fieldset>
         <fieldset>
-          <legend>6 · Forma (para evitar copia)</legend>
-          <div class="radios">
-            <label class="opt"><input type="radio" name="forma" value="A" checked> <span>Forma A</span></label>
-            <label class="opt"><input type="radio" name="forma" value="B"> <span>Forma B</span></label>
-          </div>
+          <legend>6 · Versiones (para evitar copia)</legend>
+          <label class="campo">Número de versiones
+            <input type="number" id="f-nver" min="1" max="8" value="1" inputmode="numeric">
+          </label>
+          <p class="ayuda" id="f-nver-ayuda">Genera esa cantidad de talleres o evaluaciones de una vez —cada versión con distinto orden de preguntas y de opciones, y marcada «Versión X de N»—, listas para imprimir juntas en la misma vista.</p>
           <label class="campo">Código de variante <input type="text" id="f-var" value="1" maxlength="12"></label>
-          <p class="ayuda">Con el mismo código, la misma forma sale igual cada vez. Cambie el código para obtener otra selección de ejercicios.</p>
+          <p class="ayuda">Con el mismo código, salen las mismas versiones cada vez. Cambie el código para obtener otra selección de ejercicios.</p>
         </fieldset>
         <fieldset>
           <legend>7 · Encabezado institucional (opcional)</legend>
@@ -440,7 +465,6 @@ body.sin-eval .solo-eval{display:none}
         <div class="acciones">
           <button type="button" class="cn-btn cn-btn--primary" id="btn-generar" disabled>⚙️ Generar vista previa</button>
           <button type="button" class="cn-btn cn-btn--secondary" id="btn-imprimir" disabled>🖨️ Imprimir / Guardar PDF</button>
-          <button type="button" class="cn-btn cn-btn--ghost" id="btn-forma-b">⇄ Cambiar a la otra forma</button>
         </div>
         <p id="f-estado">⏳ Cargando bancos de ejercicios…</p>
       </form>
@@ -487,11 +511,11 @@ body.sin-eval .solo-eval{display:none}
         <div class="parte p3"><b>③ Insaturaciones</b>-an- (ninguna), -en- (doble), -in- (triple), con su localizador.</div>
         <div class="parte p4"><b>④ Grupo funcional</b>El sufijo que dice qué tipo de compuesto es: -ol, -al, -ona, -oico… (en hidrocarburos, solo -o).</div>
       </div>
-      <div class="aviso"><strong>La clave didáctica:</strong> el nombre se <em>escribe</em> en el orden ① ② ③ ④, pero se <em>resuelve</em> empezando por ④: primero el grupo funcional, luego la cadena y su numeración, y al final los sustituyentes. Es el “algoritmo de 5 pasos” de la página Principios. En ácidos, ésteres y haluros de ácido una palabra del grupo funcional va aparte (<span class="mono">ácido …</span>, <span class="mono">… de metilo</span>, <span class="mono">cloruro de …</span>).</div>
+      <div class="aviso"><strong>La clave didáctica:</strong> el nombre se <em>escribe</em> en el orden ① ② ③ ④, pero se <em>resuelve</em> empezando por ④: primero el grupo funcional, luego la cadena y su numeración, y al final los sustituyentes. Es el “algoritmo de 5 pasos” de la página Principios. En ácidos, anhídridos, ésteres y haluros de ácido una palabra del grupo funcional va aparte (<span class="mono">ácido …</span>, <span class="mono">anhídrido …</span>, <span class="mono">… de metilo</span>, <span class="mono">cloruro de …</span>).</div>
     </div>
     <div class="grid3" style="margin-top:14px">
       <div class="card cn-card"><h3>¿Por qué funciona en clase?</h3><p>Convierte un nombre largo en 4 decisiones pequeñas. El estudiante que se equivoca puede ver <em>en qué parte</em> se equivocó (¿eligió mal la cadena?, ¿numeró mal?, ¿olvidó la insaturación?).</p></div>
-      <div class="card cn-card"><h3>Qué cubre</h3><p>17 grupos funcionales, del alcano a los haluros de ácido; 42 reacciones; más de 1.100 preguntas en el juego; 4 tipos de hoja imprimible.</p></div>
+      <div class="card cn-card"><h3>Qué cubre</h3><p>19 fichas de grupos funcionales (del alcano a los compuestos polifuncionales, incluidos los haluros de alquilo); 42 reacciones; más de 1.300 preguntas en el juego; guías, talleres y evaluaciones imprimibles, y la Hoja de referencia.</p></div>
       <div class="card cn-card"><h3>Qué no reemplaza</h3><p>El laboratorio, la discusión en clase y la explicación del docente. ChromaNom es para practicar y dar retroalimentación inmediata, no para sustituir la clase.</p></div>
     </div>
   </section>
@@ -499,7 +523,7 @@ body.sin-eval .solo-eval{display:none}
   <!-- ═════════ 2. MAPA ═════════ -->
   <section class="sec" id="mapa">
     <h2><span class="n">2</span> Mapa del sitio: qué hace cada página</h2>
-    <p class="lead">Todos los módulos están abiertos desde el primer día. La columna “¿cuándo usarla?” indica el momento de la clase en que mejor funciona.</p>
+    <p class="lead">Todos los módulos están abiertos desde el primer día. La línea «¿Cuándo?» de cada tarjeta indica el momento de la clase en que mejor funciona.</p>
     <div class="grid3">
       <div class="pag cn-card"><span class="ico" aria-hidden="true">🏠</span><h3>Inicio</h3>
         <p>Presenta el método con una molécula coloreada, la ruta recomendada (Principios → Grupos → Juego → Reacciones), un recorrido guiado de 1 minuto y el panel “Tu avance” (mejor resultado por nivel, guardado solo en ese dispositivo).</p>
@@ -510,21 +534,17 @@ body.sin-eval .solo-eval{display:none}
         <p class="cuando"><strong>¿Cuándo?</strong> Explicación inicial y cada vez que surja una duda de cadena o numeración.</p>
         <a class="ir" href="teoria.html">Abrir Principios →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">🔬</span><h3>Grupos funcionales</h3>
-        <p>Los 17 grupos (alcanos, cicloalcanos, alquenos, alquinos, aromáticos, alcoholes, fenoles, éteres, aldehídos, cetonas, ácidos carboxílicos, ésteres, haluros de ácido, anhídridos, amidas, aminas y nitrilos) con su prioridad IUPAC, reglas con ejemplos dibujados y más de 180 ejercicios.</p>
+        <p>Las 19 fichas (alcanos, cicloalcanos, alquenos, alquinos, aromáticos, alcoholes, fenoles, éteres, aldehídos, cetonas, ácidos carboxílicos, ésteres, haluros de ácido, anhídridos, amidas, aminas, nitrilos, haluros de alquilo y compuestos polifuncionales) con su prioridad IUPAC, reglas con ejemplos dibujados y más de 180 ejercicios.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Una o dos familias por clase: explicación + práctica guiada.</p>
         <a class="ir" href="grupos.html">Abrir Grupos →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">🧪</span><h3>Reacciones</h3>
-        <p>Glosario de 30 conceptos previos (carbocatión, nucleófilo, Markovnikov…) y 42 reacciones en 10 pestañas (alcanos, alquenos, alquinos, aromáticos, halogenuros, alcoholes, aldehídos y cetonas, ácidos, derivados, aminas): condiciones, mecanismo paso a paso, ejemplos y práctica rápida.</p>
+        <p>Glosario de 30 conceptos previos (carbocatión, nucleófilo, Markovnikov…) y 42 reacciones en 10 pestañas de grupo (alcanos, alquenos, alquinos, aromáticos, halogenuros, alcoholes, aldehídos y cetonas, ácidos, derivados, aminas), más una pestaña «Tipos de reacción»: condiciones, mecanismo paso a paso, ejemplos y práctica rápida.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Después de dominar la nomenclatura; ideal con proyector.</p>
         <a class="ir" href="reacciones.html">Abrir Reacciones →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">🎮</span><h3>Juego</h3>
         <p>20 preguntas por partida, 60 s cada una, 6 tipos de pregunta (opción múltiple, arrastrar partes, identificar fragmentos, escribir el nombre, construir la molécula y reacciones). Niveles por familia, por grupo, Constructor Molecular y Reacciones. Al final permite repetir las preguntas falladas. Es la <strong>única página que envía resultados</strong> a la hoja del docente.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Cierre de clase (10–15 min) o tarea; evidencia de práctica.</p>
         <a class="ir" href="juego.html">Abrir Juego →</a></div>
-      <div class="pag cn-card"><span class="ico" aria-hidden="true">📄</span><h3>Generador</h3>
-        <p>Arma hojas de trabajo de 5 a 50 preguntas eligiendo grupos: Tipo A (nombrar la estructura), Tipo B (dibujar desde el nombre), Tipo C (análisis por partes con el método de 4 colores) y Tipo D (reacciones: predecir producto, tipo de reacción o reactivo). Se imprime o se guarda en PDF.</p>
-        <p class="cuando"><strong>¿Cuándo?</strong> Talleres, tareas impresas, quices sin dispositivos.</p>
-        <a class="ir" href="generador.html">Abrir Generador →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">📋</span><h3>Hoja de referencia</h3>
         <p>Prefijos de cadena, multiplicadores, prioridad de grupos funcionales, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave, con buscador. Se imprime en 2 hojas horizontales.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Material de consulta permanente; puede permitirse en evaluaciones.</p>
@@ -534,8 +554,8 @@ body.sin-eval .solo-eval{display:none}
         <p class="cuando"><strong>¿Cuándo?</strong> Después de los grupos funcionales, antes de reacciones.</p>
         <a class="ir" href="isomeria.html">Abrir Isomería →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">📘</span><h3>Docente (esta página)</h3>
-        <p>Generador de guías de 4 sesiones, talleres y evaluaciones tipo Saber 11 con los bancos del Juego y del Generador, alineadas con los aprendizajes priorizados; y estas orientaciones.</p>
-        <p class="cuando"><strong>¿Cuándo?</strong> Al planear el periodo.</p></div>
+        <p>Guías de 4 sesiones, talleres y evaluaciones tipo Saber 11, armados con los bancos del Juego y del antiguo Generador, ahora fusionados aquí. Seis tipos de ejercicio (nombrar, dibujar, análisis por partes MDEC, reacciones, cazar errores y ejercicios abiertos), de 2 a 40 ejercicios por documento, por tema. Se imprime o se guarda en PDF.</p>
+        <p class="cuando"><strong>¿Cuándo?</strong> Al planear el periodo, para talleres y tareas impresas.</p></div>
     </div>
   </section>
 
@@ -547,16 +567,16 @@ body.sin-eval .solo-eval{display:none}
       <table class="t-seq">
         <thead><tr><th>#</th><th>Tema</th><th>Al terminar, el estudiante podrá…</th><th>Página(s)</th><th>Actividad en clase</th><th>Evidencia de aprendizaje</th><th>Tarea</th></tr></thead>
         <tbody>
-          <tr><td class="n">1</td><td><strong>El carbono y las 4 partes del nombre</strong></td><td>Explicar por qué el carbono forma cadenas (tetravalencia) e identificar las 4 partes en un nombre dado.</td><td>Inicio; Principios → Esquema y Ejemplos</td><td>Diagnóstico corto. Se proyectan los ejemplos paso a paso; los estudiantes colorean nombres con 4 colores en el cuaderno.</td><td>Ticket de salida: separar y colorear 3 nombres.</td><td>Generador Tipo C (análisis por partes), 10 preguntas, alcanos y alquenos.</td></tr>
+          <tr><td class="n">1</td><td><strong>El carbono y las 4 partes del nombre</strong></td><td>Explicar por qué el carbono forma cadenas (tetravalencia) e identificar las 4 partes en un nombre dado.</td><td>Inicio; Principios → Esquema y Ejemplos</td><td>Diagnóstico corto. Se proyectan los ejemplos paso a paso; los estudiantes colorean nombres con 4 colores en el cuaderno.</td><td>Ticket de salida: separar y colorear 3 nombres.</td><td>Taller de esta página con «Análisis por partes MDEC», 10 ejercicios, temas Alcanos y Alquenos.</td></tr>
           <tr><td class="n">2</td><td><strong>Alcanos: cadena principal y numeración</strong></td><td>Elegir la cadena más larga, numerarla por el extremo correcto y nombrar alcanos ramificados.</td><td>Principios → Algoritmo y Desempate; Grupos → Alcanos</td><td>Trabajo en parejas con los criterios de desempate; errores típicos discutidos en el tablero.</td><td>5 alcanos nombrados con la cadena resaltada en verde.</td><td>Juego → Practicar por grupo: Alcanos (1 partida).</td></tr>
           <tr><td class="n">3</td><td><strong>Alquenos y alquinos (③)</strong></td><td>Ubicar dobles y triples enlaces, darles el localizador más bajo y escribir el infijo -en-/-in- en su lugar.</td><td>Grupos → Alquenos, Alquinos</td><td>Del nombre a la estructura: dibujar en el cuaderno y comparar con la página.</td><td>Dibujos de 4 estructuras a partir del nombre.</td><td>Juego → Constructor por familia: Alquenos.</td></tr>
-          <tr><td class="n">4</td><td><strong>Cicloalcanos y aromáticos</strong></td><td>Nombrar anillos sustituidos y reconocer el benceno como cadena y grupo a la vez.</td><td>Grupos → Cicloalcanos, Aromáticos</td><td>Estaciones: cada grupo resuelve una ficha y la explica.</td><td>Juego → nivel Hidrocarburos (partida completa) como quiz formativo.</td><td>Generador Tipo A con hidrocarburos.</td></tr>
-          <tr><td class="n">5</td><td><strong>Alcoholes, fenoles y éteres</strong></td><td>Escribir el sufijo -ol, numerar dando prioridad al –OH y nombrar éteres con el prefijo alcoxi (①).</td><td>Grupos → Alcoholes, Fenoles, Éteres; Referencia (prioridad)</td><td>Comparar etanol y metoximetano: misma fórmula, distinto grupo (abre la puerta a isomería).</td><td>Mini-quiz impreso (Generador Tipo A, 6 preguntas).</td><td>Juego → Practicar por grupo: Alcoholes o Éteres.</td></tr>
-          <tr><td class="n">6</td><td><strong>Aldehídos y cetonas</strong></td><td>Distinguir –CHO (siempre C1) de C=O interior y nombrarlos con -al y -ona.</td><td>Grupos → Aldehídos, Cetonas; Principios → Comparación</td><td>Nombres tradicionales vs. IUPAC (acetona, formaldehído) en productos del hogar.</td><td>Tabla de equivalencias completada por cada estudiante.</td><td>Juego → Constructor por familia: Aldehídos o Cetonas.</td></tr>
-          <tr><td class="n">7</td><td><strong>Ácidos carboxílicos y derivados</strong></td><td>Nombrar ácidos, ésteres, haluros de ácido y anhídridos, incluida la palabra que va aparte.</td><td>Grupos → Ácidos, Ésteres, Haluros de ácido, Anhídridos</td><td>Ésteres de aromas (frutas): del nombre comercial a la estructura.</td><td>Juego → nivel Compuestos Oxigenados (partida completa).</td><td>Generador Tipo B (dibujar) con ácidos y ésteres.</td></tr>
+          <tr><td class="n">4</td><td><strong>Cicloalcanos y aromáticos</strong></td><td>Nombrar anillos sustituidos y reconocer el benceno como cadena y grupo a la vez.</td><td>Grupos → Cicloalcanos, Aromáticos</td><td>Estaciones: cada grupo resuelve una ficha y la explica.</td><td>Juego → nivel Hidrocarburos (partida completa) como quiz formativo.</td><td>Taller con «Nombrar» de hidrocarburos.</td></tr>
+          <tr><td class="n">5</td><td><strong>Alcoholes, fenoles y éteres</strong></td><td>Escribir el sufijo -ol, numerar dando prioridad al −OH y nombrar éteres con el prefijo alcoxi (①).</td><td>Grupos → Alcoholes, Fenoles, Éteres; Referencia (prioridad)</td><td>Comparar etanol y metoximetano: misma fórmula, distinto grupo (abre la puerta a isomería).</td><td>Mini-quiz impreso (taller con «Nombrar», 6 ejercicios).</td><td>Juego → Practicar por grupo: Alcoholes o Éteres.</td></tr>
+          <tr><td class="n">6</td><td><strong>Aldehídos y cetonas</strong></td><td>Distinguir −CHO (siempre C1) de C=O interior y nombrarlos con -al y -ona.</td><td>Grupos → Aldehídos, Cetonas; Principios → Comparación</td><td>Nombres tradicionales vs. IUPAC (acetona, formaldehído) en productos del hogar.</td><td>Tabla de equivalencias completada por cada estudiante.</td><td>Juego → Constructor por familia: Aldehídos o Cetonas.</td></tr>
+          <tr><td class="n">7</td><td><strong>Ácidos carboxílicos y derivados</strong></td><td>Nombrar ácidos, ésteres, haluros de ácido y anhídridos, incluida la palabra que va aparte.</td><td>Grupos → Ácidos, Ésteres, Haluros de ácido, Anhídridos</td><td>Ésteres de aromas (frutas): del nombre comercial a la estructura.</td><td>Juego → nivel Compuestos Oxigenados (partida completa).</td><td>Taller con «Dibujar», tema Ácidos carboxílicos y ésteres.</td></tr>
           <tr><td class="n">8</td><td><strong>Compuestos nitrogenados y jerarquía</strong></td><td>Nombrar aminas, amidas y nitrilos y decidir qué grupo manda cuando hay varios.</td><td>Grupos → Aminas, Amidas, Nitrilos; Referencia (tabla de prioridad)</td><td>“¿Quién manda?”: moléculas con 2 grupos; se justifica con la tabla de prioridad.</td><td>Explicación escrita de 2 casos de jerarquía.</td><td>Juego → nivel Compuestos Nitrogenados.</td></tr>
           <tr><td class="n">9</td><td><strong>Isomería</strong></td><td>Reconocer isómeros de cadena, posición y función, y distinguir cis/trans en alquenos.</td><td>Isomería; Grupos</td><td>Con una fórmula molecular (p. ej. C₄H₁₀O) cada pareja busca y nombra todos los isómeros posibles.</td><td>Lista de isómeros nombrados y clasificados.</td><td>Repaso libre en el Juego (nivel a elección).</td></tr>
-          <tr><td class="n">10</td><td><strong>Reacciones orgánicas (introducción)</strong></td><td>Predecir el producto de reacciones básicas (combustión, adición a alquenos con Markovnikov, oxidación de alcoholes, esterificación) y nombrarlo.</td><td>Reacciones → Glosario y pestañas elegidas</td><td>Se proyecta el mecanismo paso a paso; los estudiantes predicen antes de avanzar.</td><td>Generador Tipo D (reacciones) como quiz.</td><td>Juego → Reacciones por grupo y, al final, “Nomenclatura + reacciones”.</td></tr>
+          <tr><td class="n">10</td><td><strong>Reacciones orgánicas (introducción)</strong></td><td>Predecir el producto de reacciones básicas (combustión, adición a alquenos con Markovnikov, oxidación de alcoholes, esterificación) y nombrarlo.</td><td>Reacciones → Glosario y pestañas elegidas</td><td>Se proyecta el mecanismo paso a paso; los estudiantes predicen antes de avanzar.</td><td>Taller con «Reacciones» como quiz.</td><td>Juego → Reacciones por grupo y, al final, “Nomenclatura + reacciones”.</td></tr>
         </tbody>
       </table>
     </div>
@@ -575,7 +595,7 @@ body.sin-eval .solo-eval{display:none}
         <h3>Sugerencias generales</h3>
         <ul class="lst">
           <li>Pida que el cuaderno use los mismos 4 colores: facilita revisar y corregir.</li>
-          <li>Empiece cada clase con 5 min de una hoja Tipo C (análisis por partes) del Generador.</li>
+          <li>Empiece cada clase con 5 min de un taller corto de «Análisis por partes MDEC».</li>
           <li>Use “Repetir preguntas falladas” del Juego como tarea diferenciada.</li>
           <li>La Hoja de referencia impresa puede quedar pegada en el cuaderno todo el periodo.</li>
         </ul>
@@ -586,7 +606,7 @@ body.sin-eval .solo-eval{display:none}
   <!-- ═════════ 4. CURRÍCULO ═════════ -->
   <section class="sec sec-break" id="curriculo">
     <h2><span class="n">4</span> Alineación curricular</h2>
-    <p class="lead">Relación de ChromaNom con los referentes nacionales. En el <b>Generador de guías</b> (pestaña anterior) puede elegir además los <b>aprendizajes priorizados y evidencias de la Secretaría de Educación de Bogotá (2025)</b>, citados textualmente con su fuente y licencia (CC BY-NC-ND 4.0). <strong>Importante:</strong> los enunciados se transcriben solo cuando se encontraron citados de forma coincidente en otras fuentes; aun así, verifique siempre la redacción en los documentos oficiales del MEN y del Icfes antes de copiarlos en su plan de área.</p>
+    <p class="lead">Relación de ChromaNom con los referentes nacionales. Esta tabla sirve como apoyo para su plan de área; los documentos del <b>Generador de guías</b> no imprimen la alineación curricular, que queda implícita en lo que desarrollan la guía y la evaluación. <strong>Importante:</strong> los enunciados se transcriben solo cuando se encontraron citados de forma coincidente en otras fuentes; aun así, verifique siempre la redacción en los documentos oficiales del MEN y del Icfes antes de copiarlos en su plan de área.</p>
     <div class="tbl-wrap">
       <table class="t-cur">
         <thead><tr><th>Referente</th><th>Enunciado</th><th>Estado del texto</th><th>Cómo lo trabaja ChromaNom</th><th>Clases</th></tr></thead>
@@ -635,7 +655,7 @@ body.sin-eval .solo-eval{display:none}
     <div class="tbl-wrap"><table class="t-rub">
       <thead><tr><th>Criterio</th><th class="sup">Superior</th><th class="alt">Alto</th><th class="bas">Básico</th><th class="baj">Bajo</th></tr></thead>
       <tbody>
-        <tr><td>Elección de la cadena</td><td>Elige la cadena que contiene el grupo funcional y aplica los desempates (más enlaces múltiples, más sustituyentes) justificándolos.</td><td>Elige bien la cadena; justifica de forma incompleta.</td><td>Elige la cadena más larga aunque no contenga el grupo funcional.</td><td>Toma la cadena “dibujada en línea recta” sin analizar.</td></tr>
+        <tr><td>Elección de la cadena</td><td>Elige la cadena que contiene el grupo funcional y aplica los desempates en orden (la más larga; si empatan, la de más enlaces múltiples; luego, la de más sustituyentes), justificándolos.</td><td>Elige bien la cadena; justifica de forma incompleta.</td><td>Elige la cadena más larga aunque no contenga el grupo funcional.</td><td>Toma la cadena “dibujada en línea recta” sin analizar.</td></tr>
         <tr><td>Numeración</td><td>Numera aplicando el orden de prioridad: grupo funcional → insaturaciones → sustituyentes → orden alfabético.</td><td>Numera bien en casos simples; falla en un empate.</td><td>Numera desde el extremo más cercano a cualquier ramificación, sin jerarquía.</td><td>Numera al azar o no numera.</td></tr>
         <tr><td>Justificación</td><td>Explica por escrito por qué otra cadena o numeración es incorrecta.</td><td>Explica su elección con ayuda de la tabla.</td><td>Describe lo que hizo sin justificarlo.</td><td>No explica.</td></tr>
       </tbody></table></div>
@@ -712,12 +732,12 @@ body.sin-eval .solo-eval{display:none}
       <div class="card cn-card">
         <h3>Ideas de evaluación</h3>
         <ul class="lst">
-          <li><strong>Quiz impreso:</strong> Generador con los grupos vistos (Tipo A + Tipo B), calificado con las rúbricas A y B.</li>
+          <li><strong>Quiz impreso:</strong> taller con «Nombrar» + «Dibujar» de los grupos vistos, calificado con las rúbricas A y B.</li>
           <li><strong>Explicación escrita:</strong> dé un nombre <em>incorrecto</em> y pida encontrar y explicar el error usando las 4 partes.</li>
           <li><strong>Del juego a la clase:</strong> revise “Eficacia por tema” antes de clase y abra con los 2 temas de menor acierto.</li>
           <li><strong>Reto de constancia:</strong> número mínimo de partidas en el periodo (columna “Sesiones en el periodo”).</li>
           <li><strong>Autoevaluación:</strong> el estudiante compara su “Tu avance” (Inicio) al principio y al final de la unidad.</li>
-          <li><strong>Coevaluación:</strong> parejas intercambian hojas Tipo C y corrigen con los colores.</li>
+          <li><strong>Coevaluación:</strong> las parejas intercambian ejercicios de análisis por partes y los corrigen con la Hoja de referencia.</li>
         </ul>
       </div>
       <div class="card cn-card">
@@ -725,9 +745,9 @@ body.sin-eval .solo-eval{display:none}
         <ul class="lst">
           <li>ChromaNom se puede <strong>instalar</strong> (botón “Instalar” del menú o “Agregar a la pantalla de inicio” del navegador) y funciona sin conexión.</li>
           <li>Abra cada página al menos una vez con internet: así queda guardada en el dispositivo.</li>
-          <li>Sin conexión funcionan Principios, Grupos, Reacciones, Referencia, el Generador y el Juego en <strong>modo libre</strong> (el mejor resultado queda solo en ese dispositivo).</li>
+          <li>Sin conexión funcionan Principios, Grupos, Reacciones, Isomería, Referencia, esta página Docente y el Juego en <strong>modo libre</strong> (el mejor resultado queda solo en ese dispositivo).</li>
           <li>Sin conexión <strong>no</strong> funciona el acceso con código ni el envío a la hoja del docente.</li>
-          <li>Para salones sin dispositivos: imprima hojas del Generador y la Hoja de referencia (2 hojas horizontales), o proyecte la página desde un solo computador.</li>
+          <li>Para salones sin dispositivos: imprima guías o talleres de esta página y la Hoja de referencia (2 hojas horizontales), o proyecte la página desde un solo computador.</li>
         </ul>
       </div>
     </div>
@@ -740,10 +760,10 @@ body.sin-eval .solo-eval{display:none}
     <details class="faq cn-card"><summary>¿Qué nomenclatura usa?</summary><div class="r">Las recomendaciones IUPAC de 2013: localizador inmediatamente antes del sufijo (butan-2-ol, but-1-eno). La pestaña Comparación de Principios muestra las equivalencias con los nombres tradicionales (2-butanol, acetona…), que siguen apareciendo en libros y exámenes.</div></details>
     <details class="faq cn-card"><summary>Soy de otro colegio. ¿Puedo ver los resultados de mis estudiantes?</summary><div class="r">No con la versión publicada: la hoja de seguimiento pertenece al colegio del autor, y en modo libre los resultados llegan como anónimos a esa hoja. Para tener su propio seguimiento necesita una copia del sitio con su propia hoja de Google y su propio Apps Script (en el código del juego se cambia la dirección <code>ANALYTICS_URL</code>), y cargar los códigos de sus estudiantes en la hoja “Estudiantes”. Requiere algo de manejo técnico. Sin eso, puede usar todo lo demás y evaluar con el Generador y las rúbricas.</div></details>
     <details class="faq cn-card"><summary>¿Puedo modificar o compartir el material?</summary><div class="r">Sí, con la licencia CC BY-NC 4.0: uso y adaptación libres sin fines comerciales, citando al autor (Harvey Barcenas Morales).</div></details>
-    <details class="faq cn-card"><summary>¿Por qué el Generador y las evaluaciones del docente no dan las respuestas?</summary><div class="r">Porque los estudiantes también entran a estas páginas para practicar; una clave visible les daría la respuesta. Por eso ni el Generador de ejercicios ni las guías y evaluaciones de esta página traen clave. Por eso las hojas de análisis por partes (Tipo C) tampoco muestran los colores.</div></details>
+    <details class="faq cn-card"><summary>¿Por qué las guías y evaluaciones del docente no dan las respuestas?</summary><div class="r">Porque los estudiantes también entran a esta página para practicar, y una clave visible les daría la respuesta. Por eso ni las guías, ni los talleres, ni las evaluaciones traen clave.</div></details>
     <details class="faq cn-card"><summary>Un estudiante dice que su partida “no se guardó”.</summary><div class="r">Al terminar, el juego muestra un aviso grande de “¡Resultados guardados!” o “No se pudo guardar” con botón “Reintentar envío”. Pídale que le muestre esa pantalla. Recuerde que Estadísticas y Curso X tardan hasta 30 minutos en actualizarse; en la hoja Registro la fila aparece de inmediato.</div></details>
     <details class="faq cn-card"><summary>¿Sirve en celulares sencillos?</summary><div class="r">Sí. Está diseñado primero para celular, con letra ajustable (control “A− / A+”) y menú inferior. El Constructor Molecular es más cómodo en pantallas medianas o grandes.</div></details>
-    <details class="faq cn-card"><summary>¿Incluye haluros de alquilo?</summary><div class="r">Los halógenos se nombran como sustituyentes (① cloro, bromo…) y la pestaña Halogenuros de Reacciones trata sus reacciones (sustitución y eliminación); no tienen una ficha propia entre los 17 grupos funcionales.</div></details>
+    <details class="faq cn-card"><summary>¿Incluye haluros de alquilo?</summary><div class="r">Sí. Tienen su ficha en Grupos (siempre se nombran como prefijo ①: cloro, bromo…, porque no tienen sufijo) y la pestaña Halogenuros de Reacciones trata sus reacciones (sustitución y eliminación).</div></details>
   </section>
   </section>
 </div>

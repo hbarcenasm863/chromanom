@@ -139,18 +139,18 @@ function poolEjercicios(temas){
       if((t.gen||[]).indexOf(m.topic)<0)return;
       if(t.soloRamificados&&(!/\d/.test(m.name)||/^ciclo|ciclo/.test(m.name)))return;
       var nom=m.iupac||m.name;
-      addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador'});
-      addB(nom,{k:'B',nombre:nom,fuente:'Generador'});
-      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador'});
+      addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador',sub:m.topic});
+      addB(nom,{k:'B',nombre:nom,fuente:'Generador',sub:m.topic});
+      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador',sub:m.topic});
     });
     // 2) Juego
     if(t.jue)B.jue.forEach(function(q){
       if(/^rxn_/.test(q.topic)||!t.jue.test(q.topic))return;
       var qt=quitaHtml(q.q);
       if(q.mol&&(q.type==='mc'||q.type==='write')&&/nombre IUPAC/i.test(qt)&&!/cl[aá]sico|funcional \(/i.test(qt)&&typeof q.ans==='string'){
-        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego'});
-        addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego'});
-        if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego'});
+        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego',sub:q.topic});
+        addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego',sub:q.topic});
+        if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego',sub:q.topic});
       }else if(q.type==='build'){
         var mm=String(q.q||'').match(/<strong>([^<]+)<\/strong>/);
         if(mm)addB(mm[1],{k:'B',nombre:mm[1],fuente:'Juego'});
@@ -164,9 +164,15 @@ function poolEjercicios(temas){
       addB(p.n,{k:'B',nombre:p.n,fuente:'Docente'});
     });
     // 4) Reacciones (Generador, tipo D)
+    // Se omiten las reacciones de nivel universitario (sales de diazonio,
+    // aldólica, acetiluros, Na/NH₃) y las repetidas: dos fichas con el mismo
+    // reactivo y el mismo producto cuentan como un solo ejercicio.
     B.genRxn.forEach(function(r){
-      if((t.rxn||[]).indexOf(r.topic)<0||r.nivel==='avanzado'||rx[r.key])return;
-      rx[r.key]=1;P.D.push({k:'D',rxn:r,fuente:'Generador'});
+      if((t.rxn||[]).indexOf(r.topic)<0||r.nivel==='avanzado'||rx[r.key]||RXN_FUERA.test(r.categoria||''))return;
+      var prod=String(r.respuesta||'').split(/\s{2}|\s\(|\s→/)[0];
+      var s1=r.r+'|'+prod,s2=r.r+'|'+(r.reactivo||'')+'|'+(r.nombre_rxn||'');
+      if(rx[s1]||rx[s2])return;
+      rx[r.key]=rx[s1]=rx[s2]=1;P.D.push({k:'D',rxn:r,fuente:'Generador'});
     });
     // 5) Ejercicios abiertos del tema
     (t.abiertos||[]).forEach(function(a){P.E.push({k:'E',q:typeof a==='string'?a:a.q,fig:typeof a==='string'?null:{f:a.f},fuente:'Docente'});});
@@ -187,7 +193,6 @@ function temasSel(){return TEMAS.filter(function(t){var c=document.querySelector
 function pintarTemas(){
   var cont=$('f-temas');if(!cont)return;
   var previos={};document.querySelectorAll('input[name=tema]:checked').forEach(function(c){previos[c.value]=1;});
-  if(!Object.keys(previos).length)previos={alcoholes:1};
   cont.innerHTML=TEMAS.map(function(t){
     var P=poolEjercicios([t]);var nEj=P.A.length+P.B.length+P.C.length+P.D.length+P.X.length+P.E.length;
     var nS=(D.SABER[t.id]||[]).length;
@@ -242,7 +247,7 @@ function restaurar(){try{var o=JSON.parse(localStorage.getItem('chromanom_docent
 
 function pintarEstado(){
   var el=$('f-estado');if(!el)return;
-  var g=B.estado.gen==='ok'?'✅ Generador: '+B.genMols.length+' moléculas y '+B.genRxn.length+' reacciones':(B.estado.gen==='cargando'?'⏳ Cargando el banco del Generador…':'⚠️ No se pudo leer el banco del Generador');
+  var g=B.estado.gen==='ok'?'✅ Generador: '+B.genMols.length+' moléculas y '+B.genRxn.length+' ejercicios de reacción':(B.estado.gen==='cargando'?'⏳ Cargando el banco del Generador…':'⚠️ No se pudo leer el banco del Generador');
   var j=B.estado.jue==='ok'?'✅ Juego: '+B.jue.length+' preguntas':(B.estado.jue==='cargando'?'⏳ Cargando el banco del Juego…':'⚠️ No se pudo leer el banco del Juego');
   var s=0;Object.keys(D.SABER).forEach(function(k){s+=D.SABER[k].length;});
   el.innerHTML=g+'<br>'+j+'<br>✅ Preguntas tipo Saber 11: '+s+' en '+Object.keys(D.SABER).length+' temas';
@@ -250,14 +255,12 @@ function pintarEstado(){
 }
 
 /* ── Piezas HTML de los documentos ───────────────────────────────────── */
-var COMP={uso:'Uso comprensivo del conocimiento científico',exp:'Explicación de fenómenos',ind:'Indagación'};
-var COMPO={Q:'Componente químico',CTS:'Ciencia, tecnología y sociedad'};
 var NOMBRE_PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturaciones',g:'④ Grupo funcional',cg:'②+④ Anillo aromático'};
 
 function encabezadoInst(e,titulo,sub,forma){
   function campo(l,v){return '<div class="ei-c"><span>'+l+'</span>'+(v?'<b>'+esc(v)+'</b>':'<i></i>')+'</div>';}
   return '<div class="ei"><div class="ei-top"><div><div class="ei-tipo">'+esc(sub)+'</div><div class="ei-tit">'+esc(titulo)+'</div></div>'+
-    '<div class="ei-der"><img src="logo-chromanom.png" alt="ChromaNom" width="120" height="34">'+(forma?'<span class="ei-forma">Forma '+forma+'</span>':'')+'</div></div>'+
+    '<div class="ei-der"><img src="logo-chromanom.png" alt="ChromaNom" width="120" height="34">'+(forma?'<span class="ei-forma">'+esc(forma)+'</span>':'')+'</div></div>'+
     '<div class="ei-grid">'+campo('Institución',e.colegio)+campo('Docente',e.docente)+campo('Área',e.area)+campo('Grado / curso',e.curso)+campo('Periodo',e.periodo)+campo('Fecha',e.fecha)+'</div></div>';
 }
 function lineaEstudiante(){return '<div class="est-lin"><div><span>Nombre del estudiante</span><i></i></div><div class="corta"><span>Curso</span><i></i></div></div>';}
@@ -275,7 +278,12 @@ function cajaAlineacion(al,compacta){
   if(sed)h+='<p class="fuente">Fuente de los aprendizajes y evidencias: '+esc(D.ALINEACION.fuenteSED)+'</p>';
   return h;
 }
-function lineas(n){var s='';for(var i=0;i<n;i++)s+='<div class="lin"></div>';return s;}
+// Espacio para escribir: cuadrícula de cuaderno (cuadros de 5 mm). Arranca
+// con un tamaño mínimo y, al paginar, crece de a un cuadro para llenar el
+// espacio que sobra en la hoja (ver llenarHoja).
+var CUADRO=18.9;
+function cuad(n,cls){return '<div class="cuad'+(cls?' '+cls:'')+'" style="height:'+(n*CUADRO).toFixed(1)+'px"></div>';}
+function lineas(n){return cuad(Math.max(3,Math.round(n*1.3)));}
 function pastillas(partes,neutral){return '<div class="pills">'+partes.map(function(p){var t=Array.isArray(p)?p[0]:p.t,c=Array.isArray(p)?p[1]:p.cls;return '<span class="pill p-'+(neutral?'n':c)+'">'+esc(t)+'</span>';}).join('')+'</div>';}
 
 function bloquesPrevios(t){
@@ -306,24 +314,32 @@ function bloquesInfo(t){
 var INSTR={
   A:'Escribe el nombre IUPAC de cada estructura.',
   B:'Dibuja la estructura de cada compuesto (fórmula esquelética o semidesarrollada).',
-  C:'Escribe a qué parte del método MDEC pertenece cada fragmento (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) y qué significa.',
-  D:'Completa cada reacción según lo que se pide.',
+  C:'Escribe a qué parte del método MDEC pertenece cada fragmento (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
+  D:'Completa cada reacción según lo que se pide. Cuando se pida el producto, dibuja su estructura y escribe su nombre IUPAC.',
   X:'Un compañero cometió un error al nombrar cada estructura. Explica el error y escribe el nombre correcto.',
   E:'Resuelve en el espacio indicado.'
 };
 var TIT={A:'Nombrar',B:'Dibujar',C:'Análisis por partes (MDEC)',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
 function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
-  if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div><div class="dibujo"></div></div>';
-  if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,true)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
-  if(it.k==='D'){var h='';try{h=B.G.tipoD(it.rxn,num);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
+  if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
+  if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,false)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
+  if(it.k==='D'){var h='';try{h=camposRxn(B.G.tipoD(it.rxn,num),it.rxn);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
-  if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+'<div class="espacio"></div></div>';
+  if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+cuad(7,'espacio')+'</div>';
   return '';
 }
 /* Elige n ejercicios repartidos entre los tipos marcados. */
+// Reparte la cola de un tipo por subtema (alcohol, fenol, éter…) de forma
+// alterna, para que la selección no quede cargada a un solo subtema.
+function alternarSub(lista){
+  var g={},orden=[];lista.forEach(function(x){var s=x.sub||'';if(!g[s]){g[s]=[];orden.push(s);}g[s].push(x);});
+  if(orden.length<2)return lista;
+  var out=[],i=0;while(out.length<lista.length){orden.forEach(function(s){if(g[s][i])out.push(g[s][i]);});i++;}
+  return out;
+}
 function elegirEjercicios(P,tipos,n,r){
-  var colas={};tipos.forEach(function(k){colas[k]=barajar(P[k]||[],r);});
+  var colas={};tipos.forEach(function(k){colas[k]=alternarSub(barajar(P[k]||[],r));});
   var orden=tipos.filter(function(k){return colas[k].length;});
   var cuenta={};orden.forEach(function(k){cuenta[k]=0;});
   var total=0,avanza=true;
@@ -362,10 +378,11 @@ function bloquesSaber(qs,r){
   return qs.map(function(q,i){
     var ops=barajar(q.o,r);
     var cortas=ops.every(function(o){return o.length<=34;});
+    var muyCortas=ops.every(function(o){return o.length<=16;});
     var fig=(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},300,110):'';
-    return '<div class="sq"><div class="sq-cab"><span class="num">'+(i+1)+'</span><span class="sq-tag">'+esc(COMP[q.c])+' · '+esc(COMPO[q.k])+'</span></div>'+
-      '<p class="sq-ctx">'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
-      '<ol class="sq-ops'+(cortas?' dos':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
+    // Sin rótulo de competencia: el número va al inicio del contexto.
+    return '<div class="sq"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
+      '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
   });
 }
 function bloqueHojaRespuestas(n){
@@ -373,12 +390,80 @@ function bloqueHojaRespuestas(n){
   for(var i=1;i<=n;i++){h+='<div class="hr-f"><b>'+i+'</b>'+['A','B','C','D'].map(function(l){return '<span class="bur">'+l+'</span>';}).join('')+'</div>';}
   return h+'</div></div>';
 }
-function bloquesAbiertas(as,ini){
-  return as.map(function(a,i){var q=typeof a==='string'?a:a.q;var f=typeof a==='string'?null:a.f;
-    return (i===0?'<h4 class="sub">Preguntas abiertas <small>Responde con tus palabras y justifica.</small></h4>':'')+'<div class="ab"><b>'+(ini+i)+'.</b> '+esc(q)+(f?figura({f:f},280,100):'')+lineas(5)+'</div>';});
+// Preguntas abiertas: tres tipos (reacción, nomenclatura, MDEC), cada una con
+// su rótulo. La MDEC trae una tabla para separar el nombre en sus 4 partes.
+var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'MDEC'};
+// Categorías de reacción que superan el nivel de bachillerato.
+var RXN_FUERA=/diazo|aldólica|acetiluro|Acidez \(alquinos\)|Reducción \(alquinos\)/i;
+// La tarjeta del Generador trae campos fijos según el tipo de pregunta; aquí
+// se ajustan a lo que pide cada enunciado, para que el estudiante tenga dónde
+// escribir exactamente lo que se le pregunta.
+function camposRxn(h,r){
+  var e=String(r.enunciado||''),c=null;
+  function f(l){return '<div class="rxn-d-field"><span>'+l+'</span><div class="ans-line"></div></div>';}
+  var REGLAS=[
+    [/nucle[oó]filo.*saliente/i,['Tipo de reacción:','Nucleófilo:','Grupo saliente:']],
+    [/electr[oó]filo.*posici/i,['Tipo de reacción:','Electrófilo:','Posiciones a las que dirige:']],
+    [/activante o desactivante/i,['Activante o desactivante:','Posiciones a las que dirige:']],
+    [/posici[oó]n/i,['Tipo de reacción:','Posición en el anillo:']],
+    [/no ocurre/i,['¿Ocurre reacción? Producto o explicación:']],
+    [/evidencia|observaci[oó]n|qué se observa/i,[/tipo de reacci|clasifica/i.test(e)?'Tipo de reacción:':null,'Observación:']],
+    [/equivalentes/i,['Equivalentes de Grignard:','Tipo de alcohol (1°, 2° o 3°):']],
+    [/tipo de alcohol/i,['Tipo de alcohol (1°, 2° o 3°):']],
+    [/tipo de combusti[oó]n/i,['Tipo de combustión:','Condición de oxígeno:']],
+    [/qué oxidante/i,['Oxidante:']],
+    [/mecanismo/i,['Tipo de reacción:','Mecanismo:']],
+    [/característica/i,['Tipo de reacción:','Característica clave:']],
+    [/reactivo necesario/i,['Tipo de reacción:','Reactivo necesario:']],
+    [/catalizador necesario/i,['Tipo de reacción:','Catalizador:']],
+    [/reacción que ocurre:$/i,['Tipo de reacción:']]
+  ];
+  if(r.pregunta_tipo==='tipo'){
+    for(var i=0;i<REGLAS.length;i++)if(REGLAS[i][0].test(e)){c=REGLAS[i][1].filter(Boolean).map(f).join('');break;}
+  }else if(r.pregunta_tipo==='reactivo'&&/de partida/i.test(e)){
+    c=f('Compuesto de partida:')+(r.condicion==='???'?f('Condiciones / catalizador:'):'');
+  }else if(r.pregunta_tipo==='producto'){
+    if(/ecuaci[oó]n/i.test(e))c=f('Ecuación completa y balanceada:');
+    else if(/productos/i.test(e))c=f('Productos:');
+  }
+  if(!c)return h;
+  return h.replace(/<div class="rxn-d-fields">[\s\S]*?<\/div>\s*<\/div>\s*$/,'<div class="rxn-d-fields">'+c+'</div>\n  </div>');
 }
-function bloquesRubricas(temas){
-  var ids={};temas.forEach(function(t){
+function htmlAbierta(a,num){
+  if(typeof a==='string')return '<div class="ab"><b>'+num+'.</b> '+esc(a)+lineas(5)+'</div>';
+  var tag='<span class="ab-tag">'+(TIPO_AB[a.t]||'')+'</span>';
+  if(a.t==='mdec'){
+    var filas=[['①','Sustituyentes'],['②','Cadena principal'],['③','Insaturaciones'],['④','Grupo funcional']];
+    return '<div class="ab"><b>'+num+'.</b> '+tag+' Separa el nombre en sus partes con el método MDEC, explica qué indica cada una y dibuja la estructura. Si una parte no aparece en el nombre, escribe «no tiene».'+
+      '<div class="ab-nom">'+esc(a.n)+'</div>'+
+      '<table class="mdec-tab blanco ab-mdec"><thead><tr><th>Parte</th><th>Fragmento del nombre</th><th>¿Qué indica?</th></tr></thead><tbody>'+
+      filas.map(function(f){return '<tr><td>'+f[0]+' '+f[1]+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
+      '<div class="ab-est">Estructura:</div>'+cuad(4)+'</div>';
+  }
+  return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(a.q)+(a.f?figura({f:a.f},280,100):'')+lineas(5)+'</div>';
+}
+function bloquesAbiertas(as,ini){
+  return as.map(function(a,i){
+    return (i===0?'<h4 class="sub">Preguntas abiertas <small>Escribe estructuras, nombres y productos en la cuadrícula; justifica cuando se pida.</small></h4>':'')+htmlAbierta(a,ini+i);});
+}
+// Elige n preguntas abiertas repartidas entre los tres tipos (reacción,
+// nomenclatura, MDEC), en ronda, para que no salgan todas del mismo tipo.
+function elegirAbiertas(pool,n,r){
+  var orden=['rx','nom','mdec'],colas={};
+  orden.forEach(function(t){colas[t]=barajar(pool.filter(function(a){return a&&a.t===t;}),r);});
+  var otras=barajar(pool.filter(function(a){return !a||orden.indexOf(a.t)<0;}),r);
+  var out=[],k=0,guard=0;
+  while(out.length<n&&guard++<200){
+    var t=orden[k%orden.length];k++;
+    if(colas[t].length)out.push(colas[t].shift());
+    else if(!colas.rx.length&&!colas.nom.length&&!colas.mdec.length){if(otras.length)out.push(otras.shift());else break;}
+  }
+  return out;
+}
+function bloquesRubricas(temas,conAbiertas){
+  // Toda evaluación con preguntas abiertas lleva al menos una de reacción,
+  // así que se anexa también la rúbrica D para calificarla.
+  var ids=conAbiertas?{'rub-d':1}:{};temas.forEach(function(t){
     var m={cadena:['rub-a','rub-c'],reacciones:['rub-d'],haluros:['rub-a','rub-b','rub-d'],isomeria:['rub-a','rub-b']}[t.id]||['rub-a','rub-b'];
     m.forEach(function(x){ids[x]=1;});
   });
@@ -392,6 +477,46 @@ function bloquesRubricas(temas){
 }
 
 /* ── Paginación en hojas tamaño carta ────────────────────────────────── */
+// Llena el espacio que sobra al final de una hoja: lo reparte, de a un
+// cuadro, entre los espacios cuadriculados de esa hoja (los que quedan en la
+// misma fila crecen juntos). Si la hoja no tiene ninguno y sobra bastante,
+// agrega un recuadro cuadriculado de notas / borrador.
+function llenarHoja(h,clase,ultima){
+  var c=h.querySelector('.hoja-cuerpo');
+  function libre(){var u=c.lastElementChild;if(!u)return c.clientHeight;return c.getBoundingClientRect().bottom-u.getBoundingClientRect().bottom-3;}
+  var areas=[].slice.call(c.querySelectorAll('.cuad'));
+  if(!areas.length){
+    if(clase==='anexo'||c.querySelector('.hr'))return;
+    var n=Math.floor((libre()-30)/CUADRO);
+    if(n<4)return;
+    var w=document.createElement('div');w.className='blq';
+    w.innerHTML='<div class="notas-tit">'+(clase==='eval'?'Borrador y cálculos (no se califica)':'Notas')+'</div>'+cuad(n,'notas');
+    c.appendChild(w);
+    while(c.scrollHeight>c.clientHeight+1&&n>2){n--;w.querySelector('.cuad').style.height=(n*CUADRO).toFixed(1)+'px';}
+    return;
+  }
+  var filas=[];
+  areas.forEach(function(a){var t=Math.round(a.getBoundingClientRect().top);var f=null;filas.forEach(function(x){if(Math.abs(x.t-t)<8)f=x;});if(f)f.a.push(a);else filas.push({t:t,a:[a]});});
+  var pasos=Math.floor(libre()/CUADRO),k=0,hechos=[];
+  while(pasos>0&&k<400){
+    var f=filas[k%filas.length];k++;
+    if(parseFloat(f.a[0].style.height)>=26*CUADRO)continue;
+    f.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)+CUADRO).toFixed(1)+'px';});
+    hechos.push(f);pasos--;
+  }
+  while(c.scrollHeight>c.clientHeight+1&&hechos.length){
+    var g=hechos.pop();g.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)-CUADRO).toFixed(1)+'px';});
+  }
+  // Si la hoja ya venía desbordada (un bloque más alto que la hoja), se
+  // encogen los cuadriculados hasta un mínimo de 2 cuadros para que no
+  // queden cortados en el borde inferior.
+  var guard=0;
+  while(c.scrollHeight>c.clientHeight+1&&guard++<200){
+    var mayor=null;filas.forEach(function(x){var hh=parseFloat(x.a[0].style.height);if(hh>2.5*CUADRO&&(!mayor||hh>parseFloat(mayor.a[0].style.height)))mayor=x;});
+    if(!mayor)break;
+    mayor.a.forEach(function(a){a.style.height=(parseFloat(a.style.height)-CUADRO).toFixed(1)+'px';});
+  }
+}
 function paginar(doc,medidor){
   var hojas=[];
   function nueva(){
@@ -401,13 +526,27 @@ function paginar(doc,medidor){
   }
   var cuerpo=nueva();
   if(doc.primera){cuerpo.parentNode.querySelector('.hoja-cab').style.display='none';}
+  // Las preguntas de selección múltiple (tipo Saber) van a doble columna:
+  // se agrupan en un contenedor .cols2 por hoja; si la siguiente no cabe,
+  // se abre otra hoja con su propio contenedor.
+  function contenedorCols(){
+    var u=cuerpo.lastElementChild;
+    if(u&&u.classList.contains('cols2'))return u;
+    var c=document.createElement('div');c.className='blq cols2';cuerpo.appendChild(c);return c;
+  }
   doc.bloques.forEach(function(html,i){
     var w=document.createElement('div');w.className='blq';w.innerHTML=(i===0&&doc.primera?doc.primera:'')+html;
-    cuerpo.appendChild(w);
-    if(cuerpo.scrollHeight>cuerpo.clientHeight+1&&cuerpo.children.length>1){
-      cuerpo.removeChild(w);cuerpo=nueva();cuerpo.appendChild(w);
+    var enCols=!(i===0&&doc.primera)&&/^<div class="sq"/.test(html);
+    var dest=enCols?contenedorCols():cuerpo;
+    dest.appendChild(w);
+    if(cuerpo.scrollHeight>cuerpo.clientHeight+1&&(cuerpo.children.length>1||dest.children.length>1)){
+      dest.removeChild(w);
+      if(enCols&&!dest.children.length)cuerpo.removeChild(dest);
+      cuerpo=nueva();
+      (enCols?contenedorCols():cuerpo).appendChild(w);
     }
   });
+  hojas.forEach(function(h,i){llenarHoja(h,doc.clase,i===hojas.length-1);});
   hojas.forEach(function(h,i){h.querySelector('.pie-n').textContent=doc.etiqueta+' — página '+(i+1)+' de '+hojas.length;});
   return hojas;
 }
@@ -421,26 +560,29 @@ function leerForm(){
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
     nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(6,+$('f-nab').value||0)),
-    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,forma:valor('forma')||'A',variante:($('f-var').value||'1').trim(),
+    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),area:$('f-area').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
-function construir(F){
+function construirVersion(F,verIdx,verTotal,soloEval){
   var avisos=[];
   var nombreTemas=F.temas.map(function(t){return t.corto;}).join(' · ');
-  var semilla=[F.variante,F.forma,F.tipo,F.temas.map(function(t){return t.id;}).join(',')].join('|');
+  var semilla=[F.variante,verIdx,F.tipo,F.temas.map(function(t){return t.id;}).join(',')].join('|');
   var P=poolEjercicios(F.temas);
   var tipos=F.tipos.filter(function(k){return (P[k]||[]).length;});
   var docs=[];
-  var cabCorta=function(lbl){return esc(lbl)+' · '+esc(nombreTemas)+(F.enc.colegio?' · '+esc(F.enc.colegio):'')+' · Forma '+F.forma;};
+  // Con una sola versión no hace falta el rótulo; con varias, cada hoja dice
+  // «Versión X de N» para que el docente reparta/corte sin confundirlas.
+  var verLbl=verTotal>1?('Versión '+verIdx+' de '+verTotal):'';
+  var cabCorta=function(lbl,sinVersion){return esc(lbl)+' · '+esc(nombreTemas)+(F.enc.colegio?' · '+esc(F.enc.colegio):'')+(verLbl&&!sinVersion?' · '+verLbl:'');};
 
   // Ejercicios
   var selEj=null;
-  if(F.tipo!=='evaluacion'){
-    if(!tipos.length)avisos.push('No hay ejercicios disponibles para los tipos marcados en este tema.');
+  if(F.tipo!=='evaluacion'&&!soloEval){
+    if(!tipos.length)avisos.push('No hay ejercicios disponibles para los tipos marcados en los temas elegidos.');
     else{selEj=elegirEjercicios(P,tipos,F.nEj,rng(semilla+'|ej'));if(selEj.total<F.nEj)avisos.push('Solo hay '+selEj.total+' ejercicios disponibles para esta selección.');}
   }
-  if(F.tipo==='guia'){
+  if(F.tipo==='guia'&&!soloEval){
     var b=[];
     b.push('<div class="ruta"><span>Sesión 1 · Aprendizajes previos</span><span>Sesión 2 · Información</span><span>Sesión 3 · Trabajo práctico</span><span>Sesión 4 · Evaluación (hojas aparte)</span></div>');
     b.push('<h3 class="ses"><span>1</span> Aprendizajes previos</h3><p class="intro">Antes de empezar, recordemos lo que ya sabes y dónde aparece este tema en tu vida.</p>');
@@ -449,16 +591,17 @@ function construir(F){
     F.temas.forEach(function(t){b=b.concat(bloquesInfo(t));});
     b.push('<h3 class="ses"><span>3</span> Trabajo práctico</h3><p class="intro">Resuelve en esta guía. Puedes consultar la Hoja de referencia de ChromaNom.</p>');
     if(selEj)b=b.concat(bloquesEjercicios(selEj,1));
-    b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca cómo te sientes con lo aprendido:</p>'+
+    b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca con una X qué tan bien puedes hacer cada cosa:</p>'+
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
-    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º',F.forma)+lineaEstudiante()+cajaAlineacion(F.alin);
-    docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía'),primera:prim,bloques:b});
+    // La guía sale una sola vez (es igual para todos): no lleva rótulo de versión.
+    var prim=encabezadoInst(F.enc,'Guía de aprendizaje: '+F.temas.map(function(t){return t.titulo;}).join(' · '),'Química orgánica · Grado '+F.grado+'.º','')+lineaEstudiante();
+    docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía',true),primera:prim,bloques:b});
   }
   if(F.tipo==='taller'){
     var bt=selEj?bloquesEjercicios(selEj,1):[];
-    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',F.forma)+lineaEstudiante()+cajaAlineacion(F.alin,true);
-    docs.push({clase:'taller',etiqueta:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
+    var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante();
+    docs.push({clase:'taller',etiqueta:verTotal>1?'Taller '+verIdx+'/'+verTotal:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
   }
   if(F.tipo==='guia'||F.tipo==='evaluacion'){
     var poolS=[];F.temas.forEach(function(t){poolS=poolS.concat(D.SABER[t.id]||[]);});
@@ -466,20 +609,37 @@ function construir(F){
     var qs=barajar(poolS,r).slice(0,F.nSaber);
     if(F.nSaber&&qs.length<F.nSaber)avisos.push(poolS.length?'El banco tiene '+poolS.length+' preguntas tipo Saber para este tema; se usan todas.':'Este tema todavía no tiene preguntas tipo Saber; la evaluación lleva solo preguntas abiertas.');
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat(D.ABIERTAS[t.id]||[]);});
-    var ab=barajar(poolA,rng(semilla+'|abiertas')).slice(0,F.nAb);
+    var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
-    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola en la hoja de respuestas.'+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
+    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
     be=be.concat(bloquesSaber(qs,r));
     be=be.concat(bloquesAbiertas(ab,qs.length+1));
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
-    var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',F.forma)+
-      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div><div class="corta"><span>Fecha</span><i></i></div></div>'+cajaAlineacion(F.alin,true);
-    docs.push({clase:'eval',etiqueta:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
-    if(F.rubrica){
-      var br=bloquesRubricas(F.temas);
-      if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas'),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
+    var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
+      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div>'+(F.enc&&F.enc.fecha?'':'<div class="corta"><span>Fecha</span><i></i></div>')+'</div>';
+    docs.push({clase:'eval',etiqueta:verTotal>1?'Evaluación '+verIdx+'/'+verTotal:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
+    // El anexo de rúbricas no depende de la semilla (es el mismo criterio de
+    // evaluación para todas las versiones): con varias versiones solo se
+    // agrega una vez, al final, para no repetir la misma hoja N veces.
+    if(F.rubrica&&verIdx===verTotal){
+      var br=bloquesRubricas(F.temas,F.nAb>0);
+      if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas',true),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
     }
+  }
+  return {docs:docs,avisos:avisos};
+}
+// «Guía completa»: las sesiones 1-3 son de estudio y salen una sola vez;
+// lo que se reparte para evitar copia es la evaluación (hojas aparte), así
+// que con N versiones la guía sale 1 vez y la evaluación sale N veces.
+// Taller y evaluación sueltos salen N veces completos.
+function construirTodas(F){
+  var N=F.nVersiones;
+  var avisos=[],docs=[];
+  for(var i=1;i<=N;i++){
+    var R=construirVersion(F,i,N,F.tipo==='guia'&&i>1);
+    docs=docs.concat(R.docs);
+    R.avisos.forEach(function(a){if(avisos.indexOf(a)<0)avisos.push(a);});
   }
   return {docs:docs,avisos:avisos};
 }
@@ -488,17 +648,23 @@ var ultimo=null;
 function generar(){
   var F=leerForm();
   var info=$('vista-info');
-  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marca al menos un tema.</p>';return Promise.resolve();}
-  info.innerHTML='<p class="aviso">⏳ Armando el documento…</p>';
-  return bancosListos.then(function(){return (document.fonts&&document.fonts.ready)||null;}).then(function(){
-    var R=construir(F);
+  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marque al menos un tema.</p>';return Promise.resolve();}
+  info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.nVersiones>1?'s':'')+'…</p>';
+  return bancosListos.then(function(){
+    // La letra de libro (STIX) se descarga solo cuando se usa: hay que
+    // pedirla ANTES de medir las páginas, o se mide con la letra de
+    // reemplazo y después el texto crece y desborda la hoja.
+    if(!document.fonts||!document.fonts.load)return null;
+    return Promise.all(['400 13.5px "STIX Two Text"','700 13.5px "STIX Two Text"','italic 400 13.5px "STIX Two Text"','600 13.5px "STIX Two Text"','700 12px "JetBrains Mono"','400 12px "Outfit"','700 12px "Outfit"'].map(function(f){return document.fonts.load(f).catch(function(){});})).then(function(){return document.fonts.ready;});
+  }).then(function(){
+    var R=construirTodas(F);
     var medidor=$('medidor');medidor.innerHTML='';
     var vista=$('vista');vista.innerHTML='';
     var resumen=[];
     R.docs.forEach(function(doc){var hs=paginar(doc,medidor);resumen.push(doc.etiqueta+': '+hs.length+' página'+(hs.length>1?'s':''));hs.forEach(function(h){vista.appendChild(h);});});
     medidor.innerHTML='';
     ultimo=F;
-    info.innerHTML='<p class="aviso ok">✅ '+esc(resumen.join(' · '))+'. Revisa la vista previa y luego usa <b>Imprimir / Guardar PDF</b> (tamaño carta).</p>'+
+    info.innerHTML='<p class="aviso ok">✅ '+esc(resumen.join(' · '))+'. Revise la vista previa y luego use <b>Imprimir / Guardar PDF</b> (tamaño carta).</p>'+
       R.avisos.map(function(a){return '<p class="aviso warn">'+esc(a)+'</p>';}).join('')+
       '<p class="nota-sin-clave">Por decisión del docente, las evaluaciones no llevan clave de respuestas.</p>';
     $('btn-imprimir').disabled=false;
@@ -529,7 +695,6 @@ function iniciar(){
   syncTipoDoc();
   $('btn-generar').addEventListener('click',function(){generar().then(function(){var v=$('vista-wrap');if(v&&v.scrollIntoView)v.scrollIntoView({behavior:'smooth',block:'start'});});});
   $('btn-imprimir').addEventListener('click',imprimir);
-  $('btn-forma-b').addEventListener('click',function(){var b=document.querySelector('input[name=forma][value='+(valor('forma')==='A'?'B':'A')+']');if(b){b.checked=true;generar();}});
   window.addEventListener('resize',ajustarZoom);
   pintarEstado();$('btn-generar').disabled=false;
 }
@@ -539,6 +704,12 @@ function syncTipoDoc(){
   document.body.classList.toggle('sin-eval',t==='taller');
   if(t==='taller'&&+$('f-nej').value<16)$('f-nej').value=20;
   if(t==='guia'&&+$('f-nej').value>16)$('f-nej').value=12;
+  // El número de versiones funciona con los tres tipos (en la guía completa
+  // aplica a la evaluación de las hojas aparte); solo cambia la ayuda.
+  var ay=$('f-nver-ayuda');
+  if(ay)ay.textContent=t==='guia'
+    ?'Guía completa: las sesiones de estudio salen una sola vez y la evaluación (hojas aparte) sale en esa cantidad de versiones, cada una con distinto orden de preguntas y de opciones, marcada «Versión X de N».'
+    :'Genera esa cantidad de '+(t==='taller'?'talleres':'evaluaciones')+' de una vez —cada versión con distinto orden de preguntas y de opciones, y marcada «Versión X de N»—, listas para imprimir juntas en la misma vista.';
 }
 window.DocenteGen={generar:generar,bancos:function(){return bancosListos;},_B:B};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();

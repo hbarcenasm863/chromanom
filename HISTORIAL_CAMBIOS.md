@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-10-21 (111) — Juego: vuelve el color y el sombreado MDEC en las opciones de respuesta
+## 2026-10-21 (131) — Juego: vuelve el color y el sombreado MDEC en las opciones de respuesta
 
 ### Contexto
 Una estudiante notó que, tras el rediseño, el juego perdió la esencia de
@@ -35,7 +35,7 @@ opción sin color (por ejemplo, «isobutano») delataba que era incorrecta.
   retroalimentación.
 
 ### Otros
-- `sw.js`: caché `chromanom-v20`.
+- `sw.js`: caché `chromanom-v32`.
 
 ### Verificación
 - Recorrido de las 493 preguntas de opción múltiple: ninguna queda con
@@ -47,6 +47,1092 @@ opción sin color (por ejemplo, «isobutano») delataba que era incorrecta.
 - Las preguntas de identificar y de arrastrar siguen sin colorear el
   nombre. Si se coloreara, la respuesta saldría a la vista (siempre fue
   así).
+## 2026-10-21 (130) — Análisis por partes MDEC con los colores del método
+
+### Contexto
+El docente notó que en `docente.html` los ejercicios de análisis por partes
+(MDEC) salían con los fragmentos en gris, sin los colores propios del sitio.
+Era una decisión del 18 de octubre (entrada 104: «el color regalaba la
+respuesta»). Se le explicó el motivo y eligió volver a los colores.
+
+### Cambios
+- `docente-app.js`: los fragmentos de los ejercicios de análisis por partes
+  salen con su color (① turquesa, ② verde, ③ dorado, ④ rosado).
+- `docente.html`: las pastillas de las hojas usan ahora los colores sólidos
+  con letra blanca, iguales a los del generador y del resto del sitio (antes
+  eran tonos pálidos). Se quitó de la pregunta frecuente la frase «los
+  fragmentos salen sin colores» y se ajustó la coevaluación (se corrige con
+  la Hoja de referencia).
+- `generador.html`: el tipo C también vuelve a mostrar los colores.
+- `sw.js`: caché `chromanom-v31`.
+- Comprobado con Playwright: taller de alquenos solo con análisis por partes,
+  pastillas con color y sin desbordes.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada. Nota didáctica: con color, el ejercicio pasa a ser de reconocer qué
+  significa cada parte más que de clasificarla.
+
+---
+
+## 2026-10-21 (129) — Documento con la lógica de docente.html (para IoNom)
+
+### Contexto
+El docente pidió un archivo .md que explique la lógica del generador de
+`docente.html`, para construir algo igual en IoNom.
+
+### Cambios
+- `LOGICA_DOCENTE.md` (nuevo): explica la carga de bancos desde el juego y
+  el generador, el formato de `docente-datos.js` (temas, preguntas Saber y
+  abiertas, con las reglas de calidad), las versiones con semilla, la
+  selección de ejercicios, la paginación, la cuadrícula que llena las hojas,
+  la impresión y una tabla para adaptarlo a química inorgánica.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
+## 2026-10-21 (128) — Docente: preguntas tipo Saber sin el rótulo de competencia
+
+### Contexto
+El docente pidió quitar de las preguntas tipo Saber 11 el título con la
+competencia y el componente que se evalúan (por ejemplo, «Uso comprensivo
+del conocimiento científico · Componente químico»), que salía encima de cada
+pregunta en la evaluación impresa.
+
+### Cambios
+- `docente-app.js`: cada pregunta ya no lleva el rótulo; el número va al
+  inicio del contexto, lo que además ahorra una línea por pregunta. Se
+  quitaron las tablas de nombres de competencia que ya no se usaban. Las
+  etiquetas `c` y `k` se conservan en `docente-datos.js` por si se necesitan
+  después.
+- `docente.html`: estilos ajustados (número junto al contexto; se borraron
+  los estilos del rótulo).
+- `sw.js`: caché `chromanom-v30`.
+- Comprobado con Playwright: el rótulo ya no aparece y ninguna página se
+  desborda.
+
+### Pasos manuales
+- Ninguno (se publica con el push a `main`).
+
+### Pendiente
+- Nada.
+
+---
+
+## 2026-10-21 (127) — Docente: auditoría completa (química, didáctica e instrucciones)
+
+### Contexto
+El docente pidió una auditoría completa de `docente.html` para que todo
+quedara didáctica y químicamente correcto, con instrucciones, información y
+secciones sin errores. Se revisaron las 240 preguntas tipo Saber, las 12
+guías por tema, el banco de preguntas abiertas, la pestaña Orientaciones y los
+documentos que arma el generador (guía, taller y evaluación), y se
+comprobaron funcionalmente con Playwright.
+
+### Cambios
+
+**`docente-datos.js` — preguntas tipo Saber (unas 100 correcciones)**
+- Errores químicos y nombres: monómero del PVC (la pregunta ya no da el nombre
+  en el enunciado), ácido benzoico (se quitó el distractor inventado «ácido
+  benzoico oico»), «benzonitrilo», «etoxietano», «pentan-3-al» en lugar de
+  «dietilcetona» (nombre aceptado, era discutible como incorrecto),
+  «2-metilpropanona» en lugar de «metilpropanal» (también correcto),
+  «etil metil cetona», «29 °GL», punto de ebullición del éter (7 °C) y otros.
+- Explicaciones corregidas: llama del acetileno (molécula de alta energía,
+  no «el triple enlace guarda energía»), HFC y ozono, GLP licuado (≈8 atm),
+  combustión del octano, evaporación del alcohol, dímeros de ácidos, jabón,
+  puntos de ebullición de ácido frente a éster (con datos reales).
+- Preguntas rehechas porque no medían lo que decían: masa molar promedio del
+  gas natural, fuga de GLP frente a gas natural, prueba con bicarbonato,
+  experimento de control de variables (ya no repite el de esterificación),
+  etanol carburante del Valle del Cauca (ya no repite la ecuación de la
+  fermentación).
+- Respuestas correctas que se delataban por ser mucho más largas que los
+  distractores: se acortaron o se alargaron los distractores en unas 25
+  preguntas.
+- Competencia (uso / explicación / indagación) y componente (químico / CTS)
+  reclasificados donde no correspondían.
+- Benceno: los experimentos con benceno quedan como «reportados en un libro»,
+  porque es cancerígeno y no se usa en el colegio.
+
+**`docente-datos.js` — guías y preguntas abiertas**
+- Las preguntas abiertas de nomenclatura y MDEC ya no repiten el ejemplo
+  resuelto de la guía ni se dan la respuesta entre sí dentro de la misma
+  evaluación (se cambiaron fórmulas y nombres en los 12 temas).
+- Pistas en las preguntas de reacción que se evalúan (Lindlar, Markovnikov,
+  NaCN, SN1, KMnO₄, PCC frente a CrO₃) y nueva pregunta de hidrólisis de amidas
+  en lugar de la reducción del nitrobenceno.
+- Lecturas: sustitución del −OH con HBr (se evaluaba sin enseñarse),
+  oxidante suave/fuerte en aldehídos, enantiómeros (mismas propiedades físicas
+  salvo la luz polarizada), dímeros de ácidos, Protocolo de Montreal, yuca
+  amarga, cafeína, Faraday, «tíner», «el maracuyá», «oxidorreducción».
+- Nombre corto del tema: «Alcoholes, fenoles y éteres».
+
+**`docente.html` — pestaña Orientaciones**
+- Datos actualizados: 19 fichas de grupos (con haluros de alquilo y
+  polifuncionales), más de 1.300 preguntas en el juego, pestaña «Tipos de
+  reacción», 2 a 40 ejercicios, seis tipos de ejercicio.
+- Se quitaron las referencias al antiguo Generador y a las hojas «Tipo A–D»
+  en la secuencia de clases, la evaluación y las preguntas frecuentes.
+- La sección de alineación curricular ya no dice que los documentos la
+  imprimen (queda como apoyo para el plan de área).
+- Rúbrica C: desempate de la cadena según IUPAC 2013 (primero la más larga).
+- Pregunta frecuente de haluros de alquilo corregida (ahora sí tienen ficha).
+
+**`docente-app.js` — documentos generados**
+- Las tarjetas de reacción muestran los campos que pide cada enunciado
+  (nucleófilo y grupo saliente, observación, posición, compuesto de partida,
+  ecuación…), no siempre «Tipo de reacción / Condiciones».
+- Se excluyen del taller las reacciones de nivel universitario (sales de
+  diazonio, aldólica, acetiluros, Na/NH₃) y las fichas repetidas (mismo
+  reactivo y mismo producto).
+- Los ejercicios de un tema se reparten entre sus subtemas (por ejemplo,
+  alcoholes y éteres), en vez de salir casi todos de uno.
+- La evaluación anexa la rúbrica D cuando trae preguntas abiertas (siempre
+  hay una de reacción).
+- Instrucción de la evaluación según haya o no hoja de respuestas; la línea
+  del estudiante ya no repite «Fecha» si el encabezado la trae; instrucción
+  de reacciones y de MDEC más precisas; autoevaluación de la sesión 4 con
+  «marca con una X»; avisos al docente en «usted».
+- Se precargan también las fuentes JetBrains Mono y Outfit antes de medir
+  las páginas.
+
+**Otros**
+- `generador.html`: «adición aldólica» en el enunciado del producto aldólico
+  (la condensación es el paso siguiente).
+- `sw.js`: caché `chromanom-v29`.
+
+### Pasos manuales
+- Ninguno: los cambios se publican con el push a `main` (GitHub Pages).
+
+### Pendiente
+- Nada obligatorio. En pantalla, la vista previa reducida puede mostrar unos
+  píxeles de recorte por el redondeo del zoom; al imprimir (tamaño real) las
+  páginas no se desbordan.
+
+---
+
+## 2026-10-21 (126) — Docente: banco nuevo de preguntas abiertas (reacciones, nomenclatura y MDEC)
+
+### Contexto
+El docente pidió cambiar las preguntas abiertas de las evaluaciones de
+`docente.html` (eran 3 por tema, casi todas de explicación general o de
+contexto) por un banco que pregunte específicamente: resultados de
+reacciones de los grupos funcionales, nomenclatura, o identificación de
+las partes del MDEC.
+
+### Cambios
+- **`docente-datos.js`**: `ABIERTAS` se reemplazó por un banco de **98
+  preguntas** (8-9 por tema, en los 12 temas), de tres tipos:
+  - **Reacción** (`t:'rx'`): se dan reactivos y condiciones; el
+    estudiante escribe la estructura del producto, lo nombra y, cuando se
+    pide, el tipo de reacción (Markovnikov, oxidación de alcoholes,
+    SN1/SN2/E2, SEA, esterificación, saponificación, Grignard, Tollens,
+    reducción con hidruros, aminas, etc.).
+  - **Nomenclatura** (`t:'nom'`): nombrar una estructura dibujada con el
+    motor del Generador, o dibujar la estructura de un nombre dado.
+  - **MDEC** (`t:'mdec'`): se da un nombre y el estudiante completa una
+    tabla con ① sustituyentes, ② cadena principal, ③ insaturaciones y
+    ④ grupo funcional (fragmento y qué indica), y dibuja la estructura;
+    las partes siguen la misma convención de los ejemplos MDEC del sitio.
+- **`docente-app.js`**: cada pregunta lleva un rótulo con su tipo; la de
+  MDEC trae la tabla de 4 filas y una cuadrícula para la estructura. Las
+  preguntas se eligen **en ronda entre los tres tipos** (reacción →
+  nomenclatura → MDEC → …) para que no salgan todas del mismo tipo; cada
+  versión de la evaluación elige con su propia semilla.
+- **`docente.html`**: el número de preguntas abiertas por defecto pasó de
+  2 a 3 (una de cada tipo); estilos del rótulo y de la tabla MDEC.
+- `sw.js`: caché `v27`→`v28`.
+
+### Verificado con Playwright (servidor local)
+- Evaluaciones de Alcoholes, Polifuncionales, Cadena principal y
+  Aromáticos con 6 abiertas: salen 2 de cada tipo, sin hojas desbordadas.
+- Las 11 fórmulas del banco que llevan figura se dibujan con el motor del
+  Generador (se revisaron visualmente: C=O, −OH, −Br y ramificaciones en
+  su sitio).
+
+### Pendiente
+- Las preguntas no llevan clave de respuestas impresa (por decisión del
+  docente, las evaluaciones no la llevan); si quiere una clave aparte solo
+  para él, se puede agregar al banco.
+
+---
+
+## 2026-10-20 (125) — Docente: cuadrícula de cuaderno, hojas sin huecos, Saber a doble columna, letra de libro y sin alineación curricular
+
+### Contexto
+El docente pidió para los documentos de `docente.html`: (1) que los
+espacios para escribir sean cuadrícula, como un cuaderno escolar; (2) que
+esos espacios se ajusten para ocupar el máximo de cada hoja, evitando
+huecos en blanco grandes entre páginas, con las evaluaciones siempre en
+hojas aparte; (3) las preguntas de selección múltiple a doble columna;
+(4) la tipografía tipo libro de `reacciones.html`; y (5) quitar de los
+documentos lo referente a DBA, lineamientos MEN y aprendizajes
+priorizados, conservando el espacio para el nombre del estudiante (los
+objetivos quedan implícitos en el contenido).
+
+### Cambios (`docente-app.js`, `docente.html`)
+- **Cuadrícula de cuaderno** (cuadros de 5 mm, azul claro, con
+  `print-color-adjust` para que salga al imprimir aunque no se active
+  "gráficos de fondo"): reemplaza los renglones de las preguntas de
+  activación y abiertas, los recuadros punteados para dibujar y los
+  espacios de los ejercicios abiertos (`cuad()`).
+- **Hojas llenas** (`llenarHoja()`): después de paginar, el espacio que
+  sobra en cada hoja se reparte, de a un cuadro, entre los espacios
+  cuadriculados de esa hoja (los que están en la misma fila crecen juntos;
+  máximo 26 cuadros cada uno). Si la hoja no tiene ninguno y sobran 4
+  cuadros o más, se agrega un recuadro cuadriculado de "Notas" (o
+  "Borrador y cálculos (no se califica)" en la evaluación); no se agrega
+  en la hoja de respuestas ni en el anexo de rúbricas. Si una hoja ya venía
+  desbordada, los cuadriculados se encogen hasta 2 cuadros.
+- Cada documento (guía, taller, cada versión de evaluación) sigue
+  empezando en hoja nueva.
+- **Preguntas tipo Saber a doble columna**: se agrupan por hoja en un
+  contenedor de 2 columnas, sin partir ninguna pregunta; las opciones van
+  en una sola columna dentro de cada columna salvo que sean muy cortas.
+- **Letra tipo libro (STIX Two Text)** en todo el documento, incluidos
+  títulos, fórmulas y dibujos de moléculas; encabezado/pie de página y
+  rótulos pequeños siguen en Outfit. El generador ahora **espera a que
+  cargue esa letra antes de medir las páginas**: sin esto se medía con la
+  letra de reemplazo y después el texto crecía y desbordaba la hoja.
+- **Sin alineación curricular** en guía, taller y evaluación (se quitó el
+  recuadro de aprendizaje priorizado, evidencias, estándar MEN y DBA). Se
+  conservan el encabezado institucional y la línea de nombre del
+  estudiante. En el formulario, el paso 3 quedó solo como "Grado" (los
+  controles de alineación siguen ocultos en el HTML para no romper el
+  código). La pestaña informativa "Alineación curricular" de la página del
+  docente no se tocó.
+- `sw.js`: caché `v26`→`v27`.
+
+### Verificado con Playwright (servidor local)
+- Guía (Alcoholes) + 2 versiones de evaluación, taller y evaluación de 12
+  preguntas Saber + 3 abiertas: ninguna hoja desbordada; espacio libre al
+  final de cada hoja entre 0 y ~60 px, salvo la hoja de respuestas
+  cuando cae sola en una página.
+- PDF de prueba: la cuadrícula se imprime.
+
+### Pendiente
+- Confirmar con el docente si también quiere quitar la pestaña informativa
+  "Alineación curricular" de `docente.html` (solo se quitó de los
+  documentos).
+
+---
+
+## 2026-10-20 (124) — Docente: el número de versiones funciona siempre y ya no se marca "Alcoholes" solo
+
+### Contexto
+El docente reportó dos problemas en `docente.html`: (1) en "6 · Versiones
+(para evitar copia)" no lo dejaba escribir el número de versiones, y (2)
+el tema "Alcoholes" aparecía siempre marcado, como si fuera un valor por
+defecto. Se reprodujeron los dos con Playwright antes de corregirlos.
+
+### Causa
+1. El tipo de documento por defecto es "Guía completa", y para la guía el
+   campo de versiones se **bloqueaba** a propósito (sesión 119: "una guía
+   siempre sale en una sola versión"), sin ningún aviso en pantalla. Como
+   la página abre en "Guía completa", el campo parecía dañado.
+2. `pintarTemas()` marcaba "alcoholes" cada vez que no había ningún tema
+   marcado (al cargar la página y al desmarcar todo).
+
+### Cambios
+- **`docente-app.js`**: el número de versiones funciona con los tres tipos
+  de documento. En la **guía completa** las sesiones de estudio salen una
+  sola vez (sin rótulo de versión) y la **evaluación** de las hojas aparte
+  sale en N versiones, cada una con distinto orden de preguntas y
+  opciones y marcada "Versión X de N". Taller y evaluación sueltos salen
+  N veces completos, como antes.
+- **`docente-app.js`**: se quitó la preselección de "Alcoholes"; la página
+  empieza sin temas marcados y, si se genera sin ninguno, avisa "Marca al
+  menos un tema".
+- **`docente.html`**: la ayuda debajo del campo de versiones cambia según
+  el tipo de documento y explica qué se versiona.
+- `sw.js`: caché `v25`→`v26`.
+
+### Verificado con Playwright (servidor local, como en GitHub Pages)
+- Al cargar: ningún tema marcado y campo de versiones habilitado.
+- Guía + Alcoholes + 3 versiones → Guía (5 páginas) + Evaluación 1/3,
+  2/3 y 3/3, con preguntas en distinto orden en cada versión.
+- Taller ×3 y Evaluación ×3 → 3 documentos cada uno, rotulados.
+- Nota: abriendo `docente.html` como archivo local (file://) los bancos
+  del Generador y del Juego no cargan y los tipos de ejercicio salen
+  bloqueados; eso es del navegador, no del sitio publicado.
+
+---
+
+## 2026-10-20 (123) — Reacciones: rediseño de navegación y densidad (UX/UI)
+
+### Contexto
+El docente pidió una opinión de experto en diseño UX/UI sobre la página de
+reacciones. El diagnóstico fue que la estética estaba bien encaminada, pero
+la navegación y la densidad no: en celular la primera reacción empezaba a
+3.014 px (3,5 pantallas de scroll), cada reacción se repetía 4-5 veces en la
+misma tarjeta (ecuación, visión general, mecanismo, comparación,
+ejemplos), había dos visores con sus propios botones, demasiadas cajas de
+colores, cuatro tipografías y textos de 8-9 px. Luego pidió aplicar los
+cambios recomendados.
+
+### Cambios (`reacciones.html`)
+Todo el rediseño cuelga de la clase `rx-v2` que pone el JavaScript al
+cargar: si el JS no corre, la página se ve como antes.
+- **Barra fija de pestañas** (debajo de la barra del sitio) con los 11
+  grupos como botones horizontales, con conteo de reacciones. Reemplaza el
+  menú de tarjetas grandes y los botones "Volver al menú".
+- **Glosario y "Cómo leer mecanismos" en un panel lateral**, abierto desde
+  dos botones de la barra (📖, 🧭). Los enlaces de glosario dentro de los
+  textos abren el panel y resaltan el término. Se cierra con ✕, Esc o
+  tocando afuera. La leyenda ya no se abre sola la primera vez.
+- **La página recuerda la última pestaña** y acepta enlaces directos
+  (`reacciones.html#alquenos`). La primera visita abre en "Tipos de
+  reacción".
+- **Tarjeta de reacción en bloques con títulos de sección**: ecuación →
+  "Mecanismo paso a paso" → "Condiciones y reglas" → "Ejemplos y
+  práctica". Se quitó la "Visión general — 3 pasos" (repetía la ecuación
+  de arriba); la comparación molecular, el "¿Para qué te sirve?", "Para
+  indagar" y "Para calcular" pasaron a un desplegable "🔍 Profundiza". Al
+  final, botón **"Siguiente reacción →"** (o "Siguiente grupo").
+- Se ocultó el titular de cada paso del mecanismo, que repetía la "Idea
+  clave"; el botón 🔊 Escuchar ahora lee la explicación completa del paso.
+- Se ocultaron la descripción duplicada de la tarjeta de tipo y el título
+  repetido ("Sustitución Radical (SR)" aparecía dos veces).
+- **Tipografía**: interfaz en Outfit y fórmulas en STIX (Fraunces solo en
+  el título de la página; JetBrains Mono fuera de insignias, etiquetas y
+  dibujos de mecanismo). Etiquetas pequeñas subidas a 12 px como mínimo;
+  los dibujos de mecanismo se ven más grandes.
+- Menos cajas y colores en la tarjeta, opciones de quiz más compactas,
+  botones de reacción en una sola fila deslizable en celular, encabezado
+  más corto y control de tamaño de letra más discreto.
+- "repaso en el glosario de arriba" → "el 📖 Glosario de la barra
+  superior".
+
+### Resultados medidos (Chromium)
+- Primera reacción visible: celular 3.014 px → 326 px; computador
+  1.700 px → 333 px.
+- Tarjeta abierta (Hidrohalogenación): celular 3.241 px → 2.195 px;
+  computador 2.271 px → 1.739 px (-32 % y -23 %). Lo que queda es
+  contenido: el texto del mecanismo y las dos preguntas de práctica.
+- Sin errores de página ni scroll horizontal en las 11 pestañas a 390 px;
+  glosario, "Siguiente reacción" y pestaña recordada probados.
+
+### Otros
+- `sw.js`: caché `v24`→`v25`.
+
+### Pendiente
+- Los dibujos de los mecanismos (flechas de electrones) siguen siendo los
+  originales, solo agrandados y con la letra cambiada.
+
+---
+
+## 2026-10-20 (122) — Reacciones: textos con diseño multimedia de Mayer, pestaña "Tipos de reacción" y auditoría química
+
+### Contexto
+El docente pidió (1) rediseñar el texto de las explicaciones de
+`reacciones.html` con los principios de diseño multimedia de Mayer, para
+que sean accesibles a estudiantes de bachillerato; (2) crear una pestaña
+nueva que explique los tipos de reacción orgánica (sustitución, adición,
+eliminación, etc.); y (3) pasar después un auditor que revisara cada
+reacción en coherencia, cohesión, didáctica y veracidad química.
+
+### 1. Textos de los mecanismos con estructura de Mayer
+- Los **127 pasos de mecanismo** (las 42 reacciones) y las **11
+  introducciones de grupo** se reescribieron con la misma estructura:
+  **💡 Idea clave** (una frase: señalización) → **pasos cortos en lista**
+  (segmentación, una idea por viñeta) → **📝 Para el examen** (cuando
+  aplica) → **🔍 Para saber más** plegable (coherencia: los datos curiosos y
+  la jerga universitaria salen del camino principal, pero no se pierden).
+  Las introducciones terminan con **👀 Mientras lees las reacciones, fíjate
+  en…**.
+- Se eliminaron las muletillas repetidas ("Fíjate en esto", "Acá está la
+  jugada", "Ojo con esto"…) y se unificó el **tuteo** (antes se mezclaban
+  "tú" y "ustedes" en toda la página).
+- Letra más grande en las explicaciones (de .8rem a .9rem).
+- Los títulos de paso ya no van en MAYÚSCULAS automáticas: convertían
+  δ+ en Δ+ (que significa calor), AlCl₃ en ALCL₃, Na en NA, etc.
+
+### 2. Pestaña nueva "🧭 Tipos de reacción" (categoría "Empieza aquí")
+Entrenamiento previo (Mayer): aparece de primera en el menú. Incluye:
+- Guía de **7 preguntas** para reconocer el tipo de una reacción.
+- **8 tarjetas**: sustitución, adición, eliminación, oxidación y
+  reducción, ácido-base, condensación, hidrólisis y polimerización. Cada
+  una con definición en una frase, esquema general, pistas para
+  reconocerla, un ejemplo real dibujado con el modelo libro y botones
+  "Dónde la vas a ver" que llevan a la reacción correspondiente en su
+  pestaña.
+- Recuadro "Una reacción puede tener dos nombres" (hidrogenación =
+  adición + reducción, etc.) y, plegado, los reordenamientos.
+- Práctica de **6 preguntas** "¿Qué tipo es?" con retroalimentación.
+
+### 3. Auditoría (6 auditores en paralelo, uno por par de pestañas)
+Encontraron ~190 hallazgos; se aplicaron casi todos. Los más importantes
+(errores químicos o contradicciones):
+- **Deshidratación de alcoholes**: el ejemplo usa etanol (1°), que va por
+  E2, pero el mecanismo era E1 sin aclararlo → ahora dice "alcoholes 2° y
+  3° (E1)" y explica que el etanol va por E2.
+- **Nitración de alcanos**: decía que el enlace O−N del HNO₃ es más fuerte
+  que el de un halógeno (es al revés) → corregido, también el "Para
+  indagar".
+- **Hidratación de alquinos**: decía que Ecopetrol produce la acetona por
+  refinación → casi toda sale del proceso del cumeno.
+- **Tollens**: ecuación sin balancear y con ácido en vez de carboxilato →
+  2 Ag(NH₃)₂⁺ … → RCOO⁻ + 2 Ag.
+- **Ozonólisis**: decía que los tres oxígenos del O₃ se unen a los carbonos
+  (solo los dos de los extremos); el H₂O₂ no oxida las cetonas.
+- **Hidratación de alquenos**: "el H⁺ que sale es el mismo que entró"
+  (no es el mismo átomo; el balance sí se conserva).
+- Halogenación de benceno y Friedel-Crafts: la ecuación grande usaba otro
+  reactivo distinto al del mecanismo, ejemplo y quiz (Cl₂/cloroetano frente
+  a Br₂/clorometano) → unificado.
+- Datos de contexto ("¿Para qué te sirve esto?") sin respaldo o falsos:
+  anestésico ciclopropano "el primero", linalool del aceite de palma,
+  cumeno por cloruro de isopropilo, PMMA en lentes blandos, Inexmoda como
+  tintorera, camiseta de la Selección, Recypet, piretroides vía SOCl₂,
+  trampas de feromonas en café, nailon a partir de anilina, aspirina con
+  cloruro de acetilo, paracetamol "de la anilina", etc. → corregidos o
+  reformulados sin afirmar lo que no se puede sostener.
+- SN2/E2: se aclara que los "3 pasos" del visor muestran un único paso en
+  cámara lenta; la inversión de Walden no es "girar 180°" y R/S no
+  siempre cambia; la SN1 solo da racémica si el carbono es quiral.
+- Reacciones reversibles (esterificación, hidrólisis ácida) ahora se
+  dibujan con flecha de equilibrio ⇌.
+- Hallazgos descartados tras verificarlos: "C(O)" con enlace simple y
+  "benceno en vez de ciclohexano" eran artefactos de cómo se extrajo el
+  texto para la auditoría; en pantalla el C=O sí lleva doble enlace y el
+  ciclohexano se dibuja sin dobles enlaces.
+
+### Otros
+- `sw.js`: caché `v23`→`v24`.
+
+### Verificado con Playwright
+- Sin errores de página; las 11 pestañas (con todas las tarjetas abiertas)
+  sin desbordes ni scroll horizontal a 390 px; ningún símbolo de la
+  notación interna suelto en pantalla.
+- Los botones "Dónde la vas a ver" abren la pestaña y la reacción
+  correctas; la práctica "¿Qué tipo es?" marca y retroalimenta bien.
+
+### Pendiente
+- Los dibujos de los mecanismos (flechas de electrones) siguen siendo los
+  de antes, en letra monoespaciada.
+- Varios datos de contexto colombianos que quedan en los recuadros "¿Para
+  qué te sirve esto?" no se pudieron verificar uno por uno; conviene que
+  el docente les dé una mirada.
+
+---
+
+## 2026-10-20 (121) — Reacciones: el modelo "libro" también en las reacciones explicativas
+
+### Contexto
+Después de pasar los ejemplos al modelo del "Mapa de Reacciones Orgánicas"
+(sesión 120), el docente pidió que las reacciones explicativas de cada
+tarjeta también usaran ese modelo de moléculas y esa tipografía. Hasta ahora
+la ecuación grande, la "Visión general" y la comparación molecular se veían
+en letra de máquina de escribir (JetBrains Mono), con fórmulas tipo
+`CH₃−CH(OH)−CH₃` o dibujos de enlaces largos.
+
+### Cambios (`reacciones.html`)
+- **Ecuación grande de cada tarjeta y paso 2 de la "Visión general"**: las
+  tarjetas de reactivo/producto (con su nombre) se mantienen, pero la
+  molécula de adentro ahora se dibuja con el modelo del libro (letra STIX
+  Two Text, grupos colgando arriba/abajo con su enlace, C=O dibujado,
+  benceno de Kekulé) y la flecha lleva la condición encima/debajo.
+  Las fórmulas de las moléculas con nombre se escribieron a mano (`FXM`).
+- **Pasos 1 y 3 de la "Visión general"** (reactivo y producto solos): mismo
+  modelo.
+- **Ecuaciones generales con R** (las de `.meq` que no tienen molécula
+  concreta, p. ej. `R−COOR′ + LiAlH₄`), **comparación molecular**
+  (`.mol-cmp`, 104 fórmulas y 55 flechas) y **tarjetas de tipo** de cada
+  grupo: se convierten solas con `fxNorm()`, que toma el texto actual y
+  (1) pone los sustituyentes entre paréntesis encima del carbono
+  (`CH(OH)` → OH colgando), (2) dibuja los carbonilos condensados (`CHO`,
+  `COOH`, `COO⁻`, `COCl`, `CONH₂`, `−CO−`), (3) cambia `−CHBr−` por el Br
+  colgando, (4) conserva los resaltados de color (grupo nuevo en rosado,
+  enlace que se rompe en naranja) y (5) cambia los bencenos azules viejos por
+  el hexágono de Kekulé.
+- La línea de condiciones (`.rxn-cond`) pasó a la misma letra tipo libro.
+- El modo práctica (productos borrosos) sigue aplicándose solo a los
+  ejemplos, no a las explicaciones.
+
+### Otros
+- `sw.js`: caché `v22`→`v23`.
+
+### Verificado con Playwright
+- Sin errores de página; las 104 fórmulas de comparación, las 48 ecuaciones
+  grandes y las 11 tarjetas de tipo quedaron convertidas, sin símbolos de
+  la notación interna sueltos en pantalla.
+- A 390 px (celular), con todas las tarjetas abiertas en las 10 pestañas,
+  nada se sale de la pantalla y no hay scroll horizontal.
+- Se revisaron capturas de cianohidrina, nitración, acilación de
+  Friedel-Crafts, oxidación de alcoholes, eliminación E2, diazonio,
+  KMnO₄, aldólica y amidas.
+
+### Pendiente
+- Los diagramas de mecanismo paso a paso (flechas curvas de electrones) y
+  el esquema azul de "anillo + electrófilo" de los aromáticos siguen con
+  su dibujo propio en letra monoespaciada: son dibujos hechos a mano, y
+  pasarlos al modelo libro requiere redibujarlos uno por uno. Se puede hacer
+  si el docente lo pide.
+
+---
+
+## 2026-10-20 (120) — Reacciones: ejemplos dibujados como en el libro + modo práctica
+
+### Contexto
+El docente compartió una página propia ("Mapa de Reacciones Orgánicas") y
+pidió revisar qué se podía aprovechar de ella para mejorar `reacciones.html`,
+sobre todo la forma de dibujar las moléculas, que le pareció mucho mejor:
+los grupos (=O, OH, Br…) colgando arriba o abajo del carbono con su enlace,
+el benceno como hexágono, y los reactivos/condiciones encima y debajo de la
+flecha. En `reacciones.html` los bloques "Ejemplos / Más ejemplos" estaban en
+texto plano monoespaciado (`CH₃CH(OH)CH₃`, `+ HCN →[OH⁻] ──→`).
+
+### Cambios (`reacciones.html`)
+- Los **60 ejemplos** de todas las pestañas se reescribieron en la notación
+  de esa página (atributo `data-eq` en cada `.rxn-ex`) y se dibujan con un
+  renderizador nuevo (`FX` / `renderEjemplos()`): fórmula semidesarrollada
+  en letra tipo libro (STIX Two Text), sustituyentes apilados con su enlace
+  (doble enlace dibujado como doble raya), benceno de Kekulé, ciclohexano y
+  ciclopropano como polígonos, y condiciones arriba/abajo de la flecha
+  (p. ej. "1) LiAlH₄ / 2) H₂O").
+- Se conserva el resaltado rosado (`.hn`) del grupo nuevo en el producto y
+  la etiqueta con el nombre.
+- Algunos ejemplos quedaron más completos de paso: deshidrohalogenación con
+  KOH/etanol ahora muestra el H₂O; la diazotación pone NaNO₂/HCl y 0 °C
+  sobre la flecha; las reducciones muestran los dos pasos (hidruro, luego
+  H₂O).
+- **Modo práctica** (también tomado de esa página): junto a cada título de
+  ejemplos hay un botón "🎯 Modo práctica: ocultar productos"; al activarlo,
+  los productos de todos los ejemplos quedan borrosos y el estudiante los
+  revela tocándolos (también con teclado: Enter/Espacio).
+- El texto viejo de cada ejemplo sigue en el HTML como respaldo si el
+  JavaScript no corre.
+
+### Otros
+- `sw.js`: caché `v21`→`v22` para que el cambio llegue a quien tenga la app
+  instalada.
+
+### Verificado con Playwright
+- Los 60 ejemplos se dibujan sin errores de página en las 10 pestañas.
+- A 390 px de ancho (celular) ningún ejemplo se sale de la pantalla y no hay
+  scroll horizontal.
+- Modo práctica: el producto queda borroso y se revela al tocarlo.
+
+### Pendiente
+- Nada obligatorio. Lo demás de la página del docente (buscador global,
+  organización por capítulos del libro con números de problemas) no se
+  trasladó porque `reacciones.html` ya tiene su propia organización por
+  pestañas; se puede agregar si el docente lo pide.
+
+---
+
+## 2026-10-20 (119) — Varias versiones por generación y banco Saber 11 ampliado a 240
+
+### Contexto
+El docente pidió dos cosas para `docente.html`: (1) poder elegir un número
+de versiones y que se generen de una vez esa cantidad de talleres o
+evaluaciones (en vez de tener que cambiar manualmente entre "Forma A" y
+"Forma B"), y (2) ampliar el banco de preguntas tipo Saber 11 (opción
+múltiple) a por lo menos 20 por tema — antes había solo 8 por tema (96 en
+total).
+
+### Cambios — número de versiones (`docente.html`, `docente-app.js`)
+- Se reemplazó el selector "Forma A / Forma B" por un campo **"Número de
+  versiones"** (1 a 8). Al generar, `docente-app.js` arma esa cantidad de
+  talleres o evaluaciones completos, cada uno con su propia semilla
+  aleatoria (distinto orden de preguntas y de opciones), y los concatena
+  en la misma vista previa, listos para imprimir juntos. Cada hoja queda
+  marcada "Versión X de N" en el encabezado.
+- La **guía completa** (4 sesiones) ignora este campo y siempre genera 1
+  sola versión: las sesiones 1 y 2 son el mismo contenido de estudio para
+  toda la clase, así que "varias versiones" no tendría sentido ahí; el
+  campo se deshabilita automáticamente al elegir ese tipo de documento.
+- El **anexo de rúbricas**, cuando se piden varias versiones de una
+  evaluación, se agrega una sola vez al final (no se repite por versión,
+  porque el criterio de calificación es el mismo para todas).
+- Se quitó el botón "Cambiar a la otra forma", que ya no aplica.
+
+### Cambios — banco Saber 11 (`docente-datos.js`)
+Se agregaron 144 preguntas nuevas tipo Saber 11 (12 por cada uno de los 12
+temas: cadena, alcanos, alquenos, aromáticos, haluros, alcoholes,
+carbonilos, ácidos, nitrogenados, polifuncionales, isomería y
+reacciones), manteniendo el mismo estilo de las 96 originales — contexto
+real (muchos con ejemplos colombianos: biogás de la PTAR El Salitre, gas
+natural de La Guajira, aguardiente antioqueño, banano de Urabá, biodiésel
+de palma, caucho del Caquetá y el Meta, GABA, limoneno, etc.), cuatro
+opciones con una sola correcta, y las etiquetas de competencia (uso
+comprensivo / explicación de fenómenos / indagación) y componente
+(químico / CTS) de la prueba Saber 11. El banco total pasó de 96 a 240
+preguntas (20 por tema).
+
+### Verificado con Playwright
+- Las 240 preguntas cargan sin error: estructura completa (contexto,
+  enunciado, 4 opciones sin duplicados, etiquetas válidas) y las 49 que
+  llevan una figura (fórmula en texto, arreglo de átomos o molécula del
+  Generador) dibujan bien — se encontró y corrigió una fórmula
+  (`HOOC−CH₂−CH₂−COOH`) que el lector de texto no reconocía por empezar
+  con "HOOC" en vez de "COOH".
+- Se generó una evaluación real de 20 preguntas Saber de un solo tema
+  (Ácidos y ésteres) en 3 versiones a la vez: 60 preguntas en total, sin
+  el aviso de "el banco no alcanza", cada versión con una pregunta
+  distinta al inicio de cada hoja, sin errores de página.
+- Se probó también "Solo taller" con 3 versiones y una evaluación con
+  rúbrica y 2 versiones (la rúbrica aparece una sola vez, al final, sin
+  el rótulo de versión).
+
+### Pendiente
+Sigue pendiente, de sesiones anteriores, que el docente confirme desde un
+dispositivo real que el banco ampliado de "Retos de nomenclatura" (en el
+Juego) se ve y juega bien.
+
+---
+
+## 2026-10-19 (118) — Se fusionan Generador y Docente en una sola página
+
+### Contexto
+El docente preguntó si la nueva página `docente.html` (guías, talleres y
+evaluaciones) también se alimentaba del banco gigante de `juego.html`
+ampliado en la entrada anterior. Al investigar encontré que **sí** — eso
+ya lo había dejado armado otra sesión reciente (commit `b061575`):
+`docente.html` carga `juego.html` y `generador.html` en dos iframes
+ocultos y lee sus bancos en vivo, así que mis 160 preguntas nuevas ya
+entraban solas (lo confirmé generando una vista previa real con
+Playwright: salieron ejercicios de "Cazar errores" con mis preguntas
+nuevas, sin tocar nada). Entonces el docente pidió un paso más: que
+`generador.html` (el Generador de ejercicios original, standalone, que NO
+lee el banco del Juego) y `docente.html` queden fusionados en una sola
+página desde el punto de vista del usuario.
+
+### Cambios
+- **`generador.html`**: se le agregó un redirect al inicio de `<head>`
+  que manda a `docente.html` apenas alguien entra a esta página
+  directamente (`location.replace('docente.html')`). El redirect
+  **solo** corre si la página es la ventana de arriba
+  (`window.self===window.top`): como `docente.html` sigue cargando
+  `generador.html` en un iframe oculto para leer su banco de moléculas
+  (`MOLS`/`BANCO_RXN`), dentro de ese iframe el redirect nunca se
+  dispara y todo sigue funcionando igual que antes. El archivo en sí
+  no se tocó más — sigue siendo la fuente de datos técnica.
+- **Navegación** (`docente.html`, `grupos.html`, `index.html`,
+  `isomeria.html`, `juego.html`, `reacciones.html`, `referencia.html`,
+  `teoria.html`, y el menú "Más" de celular en `site-ui.js`): se quitó
+  el enlace "Generador" del menú superior y del menú móvil en las 8
+  páginas — ya no tiene sentido un ítem de menú aparte que solo
+  redirige a otro ítem del mismo menú.
+- **`index.html`**: se quitó la tarjeta "Módulo 5 · Generador de
+  ejercicios" de la portada (ahora redundante) y se renumeró Isomería
+  de "Módulo 6" a "Módulo 5"; la tarjeta "Para el docente" se amplió
+  para mencionar que también arma una hoja de ejercicios suelta (Tipo
+  A-D, 5 a 50 preguntas), no solo guías completas. También se actualizó
+  el enlace del tour de bienvenida.
+- **`docente.html`**: en el "Mapa del sitio" (pestaña Orientaciones) se
+  quitó la tarjeta separada de "Generador" y se amplió la tarjeta
+  "Docente (esta página)" para explicar que incluye los mismos tipos de
+  ejercicio del antiguo Generador.
+- **`sw.js`**: versión de caché `v20`→`v21` para que el cambio llegue a
+  quienes ya instalaron la PWA (¡redesplegar como Web App no aplica
+  aquí, `sw.js` se sirve directo igual que el resto del sitio!).
+
+### Verificado con Playwright
+- Las 8 páginas cargan con el menú superior correcto (8 ítems, sin
+  "Generador") y sin errores de página.
+- Visitar `generador.html` directo redirige a `docente.html`.
+- `docente.html` sigue leyendo bien los bancos (401 moléculas y 167
+  reacciones del Generador + 1.338 preguntas del Juego) — el redirect
+  no rompió el iframe oculto.
+- Se generó una hoja completa de verdad (taller con los 3 temas nuevos)
+  después de estos cambios y salió igual que antes, sin errores.
+- El menú móvil "Más" quedó con 3 ítems (Referencia, Isomería, Docente),
+  sin "Generador".
+
+### Pendiente
+Sigue pendiente, de la sesión anterior, que el docente confirme desde un
+dispositivo real que el banco ampliado de "Retos de nomenclatura" se ve
+y juega bien.
+
+---
+
+## 2026-10-19 (117) — Retos de nomenclatura: banco ampliado de 70 a 160 preguntas
+
+### Contexto
+El docente pidió que las 4 secciones nuevas de "Retos de nomenclatura" en
+`juego.html` (Encuentra la cadena, Cazadores de errores, Haluros de
+alquilo, Polifuncionales) tuvieran al menos 40 preguntas cada una, en vez
+de las 17/16/19/18 con las que habían quedado en una sesión anterior.
+
+### Cambios (`juego.html`)
+Se agregaron 90 preguntas nuevas (23+24+21+22), repartidas así:
+
+- **Encuentra la cadena principal** (17→40): moléculas nuevas con el mismo
+  truco geométrico que las originales —un tronco recto que se dobla hacia
+  una rama más larga—, variando el sustituyente (metil/etil/propil), el
+  largo de la cadena principal (de hexano a dodecano) y el localizador.
+- **Cazadores de errores** (16→40): reutilizan esas mismas moléculas
+  nuevas con un nombre "de compañero" que puede tener tres tipos de error
+  (no eligió la cadena más larga, numeró desde el extremo equivocado) o,
+  como truco, estar correcto — sin necesitar dibujos nuevos.
+- **Haluros de alquilo** (19→40): cadenas rectas nuevas con 1-3
+  halógenos (cloro, bromo, flúor, yodo) y/o un sustituyente alquilo, en
+  distintas posiciones — con numeración de menor localizador y orden
+  alfabético de sustituyentes calculados programáticamente, no a mano.
+- **Polifuncionales** (18→40): cadenas nuevas con dos grupos funcionales
+  (ácido+oxo, ácido+hidroxi, ácido+amino, aldehído+oxo/hidroxi/amino,
+  cetona+hidroxi/amino, alcohol+amino), respetando el orden de prioridad
+  IUPAC (ácido > aldehído > cetona > alcohol > amina) para decidir cuál
+  grupo da la terminación y cuál va como prefijo.
+
+Cada molécula nueva se generó con un script que calcula la cadena más
+larga, el localizador más bajo y el orden alfabético por fórmula (no a
+ojo), para minimizar el riesgo de un nombre IUPAC mal construido. Se
+verificó con Playwright: las 66 moléculas nuevas renderizan sin errores
+(vista esquelética y semidesarrollada), un barrido automático de las 160
+preguntas no encontró opciones duplicadas, respuestas fuera de las
+opciones, ni piezas de "arrastrar" faltantes en su banco; y se jugaron de
+verdad sesiones completas de las 4 secciones en vista móvil (clic en
+opción, escribir el nombre, arrastrar fragmentos, identificar partes) sin
+ningún error de página.
+
+### Pendiente
+Falta la confirmación del docente de que el banco ampliado se ve y juega
+bien desde un dispositivo real (esto se probó solo con Playwright).
+
+---
+
+## 2026-10-19 (116) — Referencia: se unen las dos tablas de sustituyentes
+
+### Contexto
+El docente pidió, con una captura de la tabla "Sustituyentes: nombre
+tradicional vs. IUPAC actual" de `referencia.html`: quitar la última
+columna ("Orden alfabético por…"), unir esa tabla con la sección aparte
+y más pequeña "Sustituyentes comunes" (ya que las dos tablas mostraban
+información redundante), aprovechar el espacio liberado para darle más
+ancho a "Reglas clave", y agregar a la tabla unida sustituyentes que
+solo estaban en "Sustituyentes comunes" y no en la tabla grande —puso
+"nitro" como ejemplo concreto de uno que faltaba.
+
+### Cambios (`referencia.html`)
+- Se eliminó la columna "Orden alfabético por…" de la tabla grande
+  (`clasico-tbl`): se quitó el `<th>` y la celda `<td class="al">` de
+  las 14 filas originales, junto con todo el CSS que dependía de esa
+  cuarta columna (en pantalla, en móvil y en las dos variantes de la
+  hoja impresa).
+- Se eliminó por completo la sección aparte "Sustituyentes comunes"
+  (la cuadrícula `.subs-grid` de 18 fichas simples) y su CSS, y se
+  quitaron sus referencias del buscador (`refSearch()`).
+- Esas 18 entradas se fusionaron dentro de `clasico-tbl`, evitando
+  duplicar las que ya estaban (metil, etil, fenil, bencil ya existían
+  en forma de "n-propil/isopropil" etc. en la tabla grande, así que
+  solo se agregaron las que faltaban): se añadieron **metil** y
+  **etil** al inicio, y **cloro, bromo, flúor, yodo, nitro, amino,
+  hidroxi** después de fenil — cada una con su propio dibujo SVG de
+  fórmula semidesarrollada, igual que las demás filas. Se agregó
+  también **mercapto (sulfanil)** como par tradicional/IUPAC adicional
+  que tampoco aparecía. Total: de 14 a 24 filas.
+- "Reglas clave" salió de la cuadrícula de 2 columnas que compartía con
+  la tabla de sustituyentes (`.grid-bottom`) y pasó a ser una sección
+  normal de ancho completo, ya que esa cuadrícula dejó de tener sentido
+  al desaparecer la tabla pequeña de al lado.
+- **Bug encontrado y corregido durante la prueba con Playwright en modo
+  impresión**: al crecer la tabla a 24 filas, la última fila
+  ("hidroxi"/"mercapto") quedaba tapada por el cuadro de nota de abajo
+  ("Cómo leer el dibujo…"). La causa real era doble: (1) al div que
+  envuelve la tabla le faltaba `min-height:0` en la cadena de
+  `flex:1` anidados, así que no medía bien el alto real de la tabla; y
+  (2) una vez corregido eso, la tabla con 24 filas simplemente
+  necesitaba más alto del que quedaba disponible en esa hoja. Se
+  recuperó ese espacio recortando un poco el relleno vertical de las
+  filas y de los cuadros de introducción/nota (sin tocar el tamaño de
+  letra, que ya se había agrandado a propósito en una sesión
+  anterior). Verificado con Playwright: las 24 filas se ven completas
+  y legibles, sin superposición, y la página 2 impresa sigue llenándose
+  por completo de borde a borde (sin franja en blanco al final, por el
+  pedido explícito del docente de que "llene toda la página 2").
+
+### Pendiente
+- Ampliar a 40+ preguntas cada una las secciones nuevas de `juego.html`
+  ("Encuentra la cadena", "Cazadores de errores", "Haluros de alquilo",
+  "Polifuncionales") — pedido explícito del docente, aún no iniciado.
+
+---
+
+## 2026-10-19 (115) — La causa real del bloqueo en iOS: pushState falla en su dispositivo
+
+### Contexto
+Gracias al aviso de error agregado en la entrada 114, el docente
+consiguió el mensaje exacto que le aparecía a la estudiante:
+**"can only call history.pushState on instances of History"** — un
+`TypeError` propio de WebKit (por eso fallaba igual en Safari y en
+Chrome/iOS, y nunca en Android).
+
+### Diagnóstico
+Ese error viene de `armExitGuard()`, la función que arma la protección
+"¿seguro que quieres salir?" al iniciar una partida
+(`window.history.pushState({chromanomGuard:true},'',location.href)`).
+Por alguna razón específica de su navegador/dispositivo —no se pudo
+determinar el motivo exacto sin un iPhone/iPad real para depurar, pero
+el error es 100% reproducible ahí— esa llamada lanza esa excepción cada
+vez. Como `armExitGuard()` se llama desde dentro de `startGame()`, y el
+aviso de la entrada 114 ya envolvía toda esa cadena en `try/catch`, el
+error ya no se perdía en silencio, pero **tampoco dejaba avanzar**: cada
+intento volvía a fallar exactamente igual, así que mostraba el aviso una
+y otra vez sin que la estudiante pudiera entrar nunca.
+
+Se confirmó con Playwright simulando el error exacto reportado
+(`window.history.pushState` lanzando ese mismo `TypeError`) y
+reproduciendo que, antes de este arreglo, eso bloqueaba el inicio de la
+partida.
+
+### Cambios (`juego.html`)
+`armExitGuard()` y el re-armado dentro del listener de `popstate` ahora
+envuelven su propia llamada a `pushState` en `try/catch`. Si falla
+(como en el dispositivo de la estudiante), se pierde solo la protección
+de "¿seguro que quieres salir?" —no es algo esencial para jugar— y la
+partida arranca con normalidad de todas formas, en vez de quedar
+atascada repitiendo el mismo error.
+
+### Verificación
+Con Playwright: se simuló el error EXACTO que reportó la estudiante
+(`history.pushState` lanzando "can only call history.pushState on
+instances of History") y se confirmó que, con el arreglo, la partida
+arranca igual (`pantalla activa: s-game`, `gameActive: true`, sin avisos
+de error ni errores de consola) — antes del arreglo esto bloqueaba
+`startGame()` por completo. Se confirmó también que el flujo normal
+(sin el error) sigue funcionando igual, y se recorrieron las 7 páginas
+del sitio sin errores de consola.
+
+### Pendiente
+Confirmar con la estudiante que ya puede entrar a jugar con normalidad.
+Ninguno de los archivos tocados necesita paso de despliegue aparte de
+este push a `main`.
+
+---
+
+## 2026-10-19 (114) — El bloqueo en iOS sigue: ahora el error se muestra en vez de quedar en silencio
+
+### Contexto
+El docente confirmó que, después del arreglo de `fetch(keepalive)` de la
+entrada 113, el problema sigue exactamente igual en iOS (sigue
+funcionando bien en Android). Esa hipótesis no era la causa completa —o
+no era la única.
+
+### Cambio de estrategia
+Sin un iPhone/iPad real para probar, seguir adivinando causas de
+WebKit una por una (ya van tres intentos: `pageshow`/bfcache, versión de
+caché, `fetch(keepalive)`) tiene rendimientos cada vez más bajos. En vez
+de seguir a ciegas, se instrumentó el punto exacto donde se traba para
+que, si vuelve a fallar, la estudiante vea el error real en pantalla —
+así la próxima pista no es una conjetura sino el mensaje tal cual lo
+reporta su propio navegador.
+
+### Cambios (`juego.html`)
+`openLevelModal()` y `acceptConsent()` (las dos puertas de entrada a
+`startGame()`, modo colegio y modo libre) ahora envuelven toda la cadena
+de arranque en `try/catch`. Si algo falla en cualquier punto —
+`startGame`, `sendSessionStart`, `armExitGuard`, `showScreen`,
+`loadQuestion`, lo que sea—, en vez de quedarse en silencio (el síntoma
+reportado: "se pulsa la opción y no pasa nada"):
+- se destraban `gameActive` y `_iniciandoPartida` para que se pueda
+  volver a intentar sin recargar la página;
+- se le muestra a la estudiante un aviso con el mensaje de error exacto
+  ("avísale a tu docente con este mensaje…"), para que lo pueda relatar
+  o fotografiar.
+
+### Verificación
+Con Playwright: se confirmó que el flujo normal sigue funcionando igual
+que antes (sin regresión). Se simuló un error cualquiera en medio de la
+cadena (`sendSessionStart` lanzando una excepción) y se confirmó que: (1)
+aparece el aviso con el mensaje de error correcto, (2) no queda ningún
+error sin capturar en la consola, (3) las banderas se destraban y un
+segundo intento sí logra arrancar el nivel una vez que el problema
+simulado se quita. Se recorrieron además las 7 páginas del sitio sin
+errores de consola.
+
+### Pendiente
+**Este es el paso clave:** pedirle a la estudiante que lo intente de
+nuevo. Si vuelve a fallar, el mensaje que le aparezca en el aviso ("con
+este mensaje exacto…") es la pista que hace falta para el próximo
+arreglo — hay que pedirle que lo copie o lo fotografíe tal cual. Ninguno
+de los archivos tocados necesita paso de despliegue aparte de este push
+a `main`.
+
+---
+
+## 2026-10-19 (113) — Encuentra y arregla la causa real del bloqueo en Safari/iOS
+
+### Contexto
+El docente confirmó datos clave que descartaron las dos hipótesis
+anteriores (entradas 111 y 112): la estudiante no tiene el juego
+instalado como PWA, y el bloqueo pasa **igual en Safari que en Chrome
+de iPhone/iPad**, pero **no** en Android ni en Windows. Que falle igual
+en los dos navegadores de iOS —que por obligación de Apple comparten el
+mismo motor, WebKit, aunque se vean distintos— y nunca fuera de iOS,
+apunta directo a un bug específico de WebKit, no a caché ni a una
+sesión vieja. El síntoma exacto: entra el código, ve su nota bien, pero
+al tocar un nivel "no sigue, no inicia el juego".
+
+### Diagnóstico
+`startGame()` llama primero a `sendSessionStart()`, que registra el
+"inicio" de la partida en la hoja de cálculo con
+`fetch(ANALYTICS_URL,{method:'POST',body,...,keepalive:true})` — un
+POST con cuerpo y la opción `keepalive`. Esa combinación tiene fallas
+documentadas en Safari/WebKit (distintas versiones de iOS han lanzado el
+error **de inmediato al llamar `fetch(...)`**, no al rechazar la
+promesa como debería). Como esa llamada no tenía ningún `try/catch`
+alrededor, ese error interrumpía `sendSessionStart()` a medio camino —
+y con eso, todo `startGame()` se detenía ahí mismo, **antes** de
+`gameActive=true`, `showScreen('s-game')` y `loadQuestion()` — sin
+ninguna pantalla nueva, sin ningún aviso. Coincide con que la consulta
+de la nota (`validarCodigoInline()`, un `fetch` simple sin `keepalive`
+ni cuerpo) sí funcione siempre: es un patrón distinto y más simple, que
+no dispara el bug.
+
+Se confirmó reproduciendo el bug exacto con Playwright: se interceptó
+`fetch` para que lanzara el mismo error sincrónico que describe Safari
+al llamarse con `keepalive`+cuerpo, y en efecto el juego se quedaba
+trabado igual que reporta la estudiante — sin necesidad de un iPhone o
+iPad real para confirmarlo.
+
+### Cambios (`juego.html`)
+Se envolvió la llamada a `fetch(...,{keepalive:true})` en `try/catch` en
+los dos lugares donde se usa (`sendSessionStart()`, que se dispara al
+iniciar cada partida, y `sendAnalytics()`, al cerrarla) — si lanza el
+error de inmediato, se trata igual que cualquier otro fallo de red
+(reintenta hasta 3 veces y después se rinde en silencio, como ya hacía
+para los fallos asíncronos), sin interrumpir el resto de la función.
+
+### Verificación
+Con Playwright: se interceptó `fetch` para reproducir el error exacto de
+Safari (lanzarlo al llamar la función, con `keepalive` y cuerpo) y se
+confirmó que, con el arreglo, el juego arranca igual
+(`active screen: s-game`, `gameActive: true`, sin errores) — antes del
+arreglo esa misma simulación bloqueaba `startGame()` por completo. Se
+confirmó también que el caso normal (sin la falla) sigue funcionando
+igual que antes, y se recorrieron las 7 páginas del sitio sin errores de
+consola.
+
+### Pendiente
+Confirmar con la estudiante que ya puede entrar a jugar. Ninguno de los
+archivos tocados necesita paso de despliegue aparte de este push a
+`main`.
+
+---
+
+## 2026-10-19 (112) — Investigación del bloqueo en Safari: sigue pasando tras el arreglo anterior
+
+### Contexto
+El docente avisó que, tras el arreglo de la entrada 111 (el `pageshow`
+para destrabar `gameActive`), el problema seguía pasando en Safari: "no
+deja pasar de la portada".
+
+### Investigación
+Con Playwright se probó el flujo completo simulando toques reales (no
+clics de mouse) con perfiles de **iPhone 13** y **iPad (gen 7)**,
+incluida la vista reducida de Safari (con la barra de direcciones
+visible, no la pantalla completa):
+- Ruta "Modo libre" → tarjeta de nivel → modal de consentimiento →
+  "Entrar al juego" → arranca la partida (`s-game`). Funciona.
+- Ruta "Acceso estudiante" (código ya validado) → tarjeta de nivel →
+  arranca la partida directo. Funciona.
+- Se revisó también el elemento que realmente recibe el toque en cada
+  botón (`elementFromPoint`) para descartar que la barra de navegación
+  inferior nueva (`site-ui.js`, agregada hoy mismo por otra sesión) o su
+  fondo quedaran tapando algo — no se encontró ningún elemento de más
+  encima de los botones.
+
+No se logró reproducir el bloqueo en Chromium con emulación de iOS —
+esto no descarta que sea un problema real, solo confirma que es
+específico del motor de Safari (WebKit), que no está disponible para
+probar en este entorno (no se puede instalar por restricción del
+entorno de ejecución).
+
+### Sospecha principal: versión vieja atascada en caché
+Si la estudiante agregó el juego a la pantalla de inicio del iPhone/iPad
+(como app), Safari puede quedarse sirviendo una versión guardada de
+`juego.html` de hace días o semanas — de antes de CUALQUIERA de los
+arreglos recientes — sin que el aviso de "Nueva versión disponible" le
+llegue a tiempo. Como medida segura e inmediata (no depende de confirmar
+la causa exacta):
+
+### Cambios (`sw.js`)
+Se subió la versión del Service Worker de `chromanom-v19` a
+`chromanom-v20`. Esto fuerza a que todos los dispositivos —estén o no
+atascados en una versión vieja— detecten la actualización la próxima vez
+que abran el juego con conexión, sin esperar ningún otro paso.
+
+### Pendiente
+Falta confirmar con la estudiante (o el docente) los detalles exactos
+para seguir investigando si el problema persiste después de esto:
+- ¿Agregó el juego a la pantalla de inicio (ícono propio, sin barra de
+  Safari) o lo abre siempre desde Safari normal?
+- ¿En qué paso exacto se traba ahora — antes de poder ingresar el
+  código, o después, al tocar un nivel?
+- ¿Probó cerrando Safari por completo (deslizando hacia arriba para
+  quitarla de las apps recientes, no solo minimizarla) antes de volver a
+  entrar?
+
+Ninguno de los archivos tocados (`juego.html`, `sw.js`) necesita paso de
+despliegue aparte de este push a `main`.
+
+---
+
+## 2026-10-19 (111) — Arregla el juego "congelado" en iOS: la nota carga pero ningún nivel entra
+
+### Contexto
+Una estudiante reportó (en iPhone/iPad) que al ingresar su código de
+acceso sí le mostraba su nota, pero no podía entrar a ninguna prueba —
+tocar cualquier tarjeta de nivel no hacía nada, sin mensaje de error ni
+nada visible.
+
+### Diagnóstico
+`juego.html` usa una bandera `gameActive` para bloquear que se abra un
+nivel nuevo mientras hay una partida en curso (`openLevelModal()` revisa
+`if(gameActive||_iniciandoPartida)return;` como primera línea). Esa
+bandera se pone en `true` al empezar una partida y solo se vuelve a
+`false` en tres sitios: al terminar la partida, al volver a la portada, o
+al confirmar "salir". Si la estudiante sale de en medio de una partida de
+otra forma — cambia de app, el celular se bloquea, pierde señal — nunca
+se vuelve a poner en `false`.
+
+En computador esto no se nota porque recargar la página reinicia todas
+las variables de JavaScript desde cero. Pero iOS Safari restaura páginas
+desde su caché (bfcache) al volver de otra app o al deslizar "atrás" SIN
+volver a ejecutar el script — las variables quedan exactamente como
+estaban. Resultado: la próxima vez que abre el juego, la página se ve
+"nueva" (el código y la nota se consultan aparte y sí cargan), pero
+`gameActive` sigue en `true` de la partida abandonada, y cualquier toque
+en un nivel se ignora en silencio para siempre, hasta que cierra la
+pestaña del todo.
+
+Se reprodujo el error exacto con Playwright (forzando `gameActive=true` y
+confirmando que `openLevelModal()` no hacía nada) antes de aplicar el
+arreglo, siguiendo la regla del repositorio de reproducir antes de dar
+por resuelto.
+
+### Cambios (`juego.html`)
+Se agregó un listener de `pageshow` (junto a los de `beforeunload` y
+`popstate` que ya protegían la salida accidental de una partida) que
+revisa `event.persisted` —la señal estándar de que la página se restauró
+desde el bfcache en vez de cargar de cero— y en ese caso destraba
+`gameActive`, `_iniciandoPartida` y `_verificandoCodigo`, y cierra el
+modal de "salir" por si había quedado abierto.
+
+### Verificación
+Con Playwright: se reprodujo el bloqueo manualmente (`gameActive=true` →
+`openLevelModal()` no cambiaba de nivel), se disparó el evento real
+`pageshow` con `persisted:true` (el mismo que usa iOS Safari al
+restaurar), y se confirmó que las banderas se destraban y que
+`openLevelModal()` vuelve a funcionar normalmente. Se recorrieron además
+las 7 páginas del sitio sin errores de consola, para confirmar que el
+cambio no afecta nada más.
+
+### Pendiente
+Ninguno. `juego.html` se sirve directo por GitHub Pages — el arreglo
+queda activo apenas se haga push, sin ningún paso de despliegue aparte.
+Vale la pena pedirle a la estudiante (o a quien más haya reportado algo
+parecido) que lo pruebe de nuevo.
 
 ---
 
