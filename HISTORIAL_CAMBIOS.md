@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (126) — Docente: banco nuevo de preguntas abiertas (reacciones, nomenclatura y MDEC)
+
+### Contexto
+El docente pidió cambiar las preguntas abiertas de las evaluaciones de
+`docente.html` (eran 3 por tema, casi todas de explicación general o de
+contexto) por un banco que pregunte específicamente: resultados de
+reacciones de los grupos funcionales, nomenclatura, o identificación de
+las partes del MDEC.
+
+### Cambios
+- **`docente-datos.js`**: `ABIERTAS` se reemplazó por un banco de **98
+  preguntas** (8-9 por tema, en los 12 temas), de tres tipos:
+  - **Reacción** (`t:'rx'`): se dan reactivos y condiciones; el
+    estudiante escribe la estructura del producto, lo nombra y, cuando se
+    pide, el tipo de reacción (Markovnikov, oxidación de alcoholes,
+    SN1/SN2/E2, SEA, esterificación, saponificación, Grignard, Tollens,
+    reducción con hidruros, aminas, etc.).
+  - **Nomenclatura** (`t:'nom'`): nombrar una estructura dibujada con el
+    motor del Generador, o dibujar la estructura de un nombre dado.
+  - **MDEC** (`t:'mdec'`): se da un nombre y el estudiante completa una
+    tabla con ① sustituyentes, ② cadena principal, ③ insaturaciones y
+    ④ grupo funcional (fragmento y qué indica), y dibuja la estructura;
+    las partes siguen la misma convención de los ejemplos MDEC del sitio.
+- **`docente-app.js`**: cada pregunta lleva un rótulo con su tipo; la de
+  MDEC trae la tabla de 4 filas y una cuadrícula para la estructura. Las
+  preguntas se eligen **en ronda entre los tres tipos** (reacción →
+  nomenclatura → MDEC → …) para que no salgan todas del mismo tipo; cada
+  versión de la evaluación elige con su propia semilla.
+- **`docente.html`**: el número de preguntas abiertas por defecto pasó de
+  2 a 3 (una de cada tipo); estilos del rótulo y de la tabla MDEC.
+- `sw.js`: caché `v27`→`v28`.
+
+### Verificado con Playwright (servidor local)
+- Evaluaciones de Alcoholes, Polifuncionales, Cadena principal y
+  Aromáticos con 6 abiertas: salen 2 de cada tipo, sin hojas desbordadas.
+- Las 11 fórmulas del banco que llevan figura se dibujan con el motor del
+  Generador (se revisaron visualmente: C=O, −OH, −Br y ramificaciones en
+  su sitio).
+
+### Pendiente
+- Las preguntas no llevan clave de respuestas impresa (por decisión del
+  docente, las evaluaciones no la llevan); si quiere una clave aparte solo
+  para él, se puede agregar al banco.
+
+---
+
 ## 2026-10-20 (125) — Docente: cuadrícula de cuaderno, hojas sin huecos, Saber a doble columna, letra de libro y sin alineación curricular
 
 ### Contexto

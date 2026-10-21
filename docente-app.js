@@ -378,9 +378,39 @@ function bloqueHojaRespuestas(n){
   for(var i=1;i<=n;i++){h+='<div class="hr-f"><b>'+i+'</b>'+['A','B','C','D'].map(function(l){return '<span class="bur">'+l+'</span>';}).join('')+'</div>';}
   return h+'</div></div>';
 }
+// Preguntas abiertas: tres tipos (reacción, nomenclatura, MDEC), cada una con
+// su rótulo. La MDEC trae una tabla para separar el nombre en sus 4 partes.
+var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'MDEC'};
+function htmlAbierta(a,num){
+  if(typeof a==='string')return '<div class="ab"><b>'+num+'.</b> '+esc(a)+lineas(5)+'</div>';
+  var tag='<span class="ab-tag">'+(TIPO_AB[a.t]||'')+'</span>';
+  if(a.t==='mdec'){
+    var filas=[['①','Sustituyentes'],['②','Cadena principal'],['③','Insaturaciones'],['④','Grupo funcional']];
+    return '<div class="ab"><b>'+num+'.</b> '+tag+' Separa el nombre en sus partes con el método MDEC, explica qué indica cada una y dibuja la estructura. Si una parte no aparece en el nombre, escribe «no tiene».'+
+      '<div class="ab-nom">'+esc(a.n)+'</div>'+
+      '<table class="mdec-tab blanco ab-mdec"><thead><tr><th>Parte</th><th>Fragmento del nombre</th><th>¿Qué indica?</th></tr></thead><tbody>'+
+      filas.map(function(f){return '<tr><td>'+f[0]+' '+f[1]+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
+      '<div class="ab-est">Estructura:</div>'+cuad(4)+'</div>';
+  }
+  return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(a.q)+(a.f?figura({f:a.f},280,100):'')+lineas(5)+'</div>';
+}
 function bloquesAbiertas(as,ini){
-  return as.map(function(a,i){var q=typeof a==='string'?a:a.q;var f=typeof a==='string'?null:a.f;
-    return (i===0?'<h4 class="sub">Preguntas abiertas <small>Responde con tus palabras y justifica.</small></h4>':'')+'<div class="ab"><b>'+(ini+i)+'.</b> '+esc(q)+(f?figura({f:f},280,100):'')+lineas(5)+'</div>';});
+  return as.map(function(a,i){
+    return (i===0?'<h4 class="sub">Preguntas abiertas <small>Escribe estructuras, nombres y productos en la cuadrícula; justifica cuando se pida.</small></h4>':'')+htmlAbierta(a,ini+i);});
+}
+// Elige n preguntas abiertas repartidas entre los tres tipos (reacción,
+// nomenclatura, MDEC), en ronda, para que no salgan todas del mismo tipo.
+function elegirAbiertas(pool,n,r){
+  var orden=['rx','nom','mdec'],colas={};
+  orden.forEach(function(t){colas[t]=barajar(pool.filter(function(a){return a&&a.t===t;}),r);});
+  var otras=barajar(pool.filter(function(a){return !a||orden.indexOf(a.t)<0;}),r);
+  var out=[],k=0,guard=0;
+  while(out.length<n&&guard++<200){
+    var t=orden[k%orden.length];k++;
+    if(colas[t].length)out.push(colas[t].shift());
+    else if(!colas.rx.length&&!colas.nom.length&&!colas.mdec.length){if(otras.length)out.push(otras.shift());else break;}
+  }
+  return out;
 }
 function bloquesRubricas(temas){
   var ids={};temas.forEach(function(t){
@@ -529,7 +559,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     var qs=barajar(poolS,r).slice(0,F.nSaber);
     if(F.nSaber&&qs.length<F.nSaber)avisos.push(poolS.length?'El banco tiene '+poolS.length+' preguntas tipo Saber para este tema; se usan todas.':'Este tema todavía no tiene preguntas tipo Saber; la evaluación lleva solo preguntas abiertas.');
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat(D.ABIERTAS[t.id]||[]);});
-    var ab=barajar(poolA,rng(semilla+'|abiertas')).slice(0,F.nAb);
+    var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
     if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola en la hoja de respuestas.'+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
     be=be.concat(bloquesSaber(qs,r));

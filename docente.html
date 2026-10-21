@@ -241,6 +241,11 @@ body.sin-eval .solo-eval{display:none}
 .hoja .cuad{border:1px solid #8fb1d6;border-radius:3px;margin-top:4px;background-color:#fff;
   background-image:linear-gradient(#cddff2 1px,transparent 1px),linear-gradient(90deg,#cddff2 1px,transparent 1px);
   background-size:18.9px 18.9px;background-position:-1px -1px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hoja .ab-tag{display:inline-block;font-family:'Outfit',sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1a4f7a;border:1px solid #8fb1d6;border-radius:999px;padding:0 7px;vertical-align:1px}
+.hoja .ab-nom{text-align:center;font-size:16px;font-weight:700;margin:5px 0 4px}
+.hoja .ab-mdec td{height:24px}
+.hoja .ab-mdec td:first-child{white-space:nowrap;font-weight:600;width:28%}
+.hoja .ab-est{font-size:12px;font-weight:600;margin-top:5px}
 .hoja .notas-tit{font-size:11px;font-weight:700;color:#4a5f73;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 /* Preguntas de selección múltiple a doble columna */
 .hoja .cols2{column-count:2;column-gap:20px;column-rule:1px solid #ddd}
@@ -432,7 +437,7 @@ body.sin-eval .solo-eval{display:none}
           <legend>5 · Evaluación</legend>
           <div class="campos">
             <label>Preguntas tipo Saber 11 <input type="number" id="f-nsaber" min="0" max="30" value="8" inputmode="numeric"></label>
-            <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="6" value="2" inputmode="numeric"></label>
+            <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="6" value="3" inputmode="numeric"></label>
           </div>
           <label class="opt"><input type="checkbox" id="f-hr" checked> <span>Incluir hoja de respuestas (círculos A–D)</span></label>
           <label class="opt"><input type="checkbox" id="f-rub"> <span>Anexar rúbricas (hoja aparte)</span></label>
