@@ -7,6 +7,34 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (128) — Docente: preguntas tipo Saber sin el rótulo de competencia
+
+### Contexto
+El docente pidió quitar de las preguntas tipo Saber 11 el título con la
+competencia y el componente que se evalúan (por ejemplo, «Uso comprensivo
+del conocimiento científico · Componente químico»), que salía encima de cada
+pregunta en la evaluación impresa.
+
+### Cambios
+- `docente-app.js`: cada pregunta ya no lleva el rótulo; el número va al
+  inicio del contexto, lo que además ahorra una línea por pregunta. Se
+  quitaron las tablas de nombres de competencia que ya no se usaban. Las
+  etiquetas `c` y `k` se conservan en `docente-datos.js` por si se necesitan
+  después.
+- `docente.html`: estilos ajustados (número junto al contexto; se borraron
+  los estilos del rótulo).
+- `sw.js`: caché `chromanom-v30`.
+- Comprobado con Playwright: el rótulo ya no aparece y ninguna página se
+  desborda.
+
+### Pasos manuales
+- Ninguno (se publica con el push a `main`).
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-21 (127) — Docente: auditoría completa (química, didáctica e instrucciones)
 
 ### Contexto

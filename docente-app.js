@@ -255,8 +255,6 @@ function pintarEstado(){
 }
 
 /* ── Piezas HTML de los documentos ───────────────────────────────────── */
-var COMP={uso:'Uso comprensivo del conocimiento científico',exp:'Explicación de fenómenos',ind:'Indagación'};
-var COMPO={Q:'Componente químico',CTS:'Ciencia, tecnología y sociedad'};
 var NOMBRE_PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturaciones',g:'④ Grupo funcional',cg:'②+④ Anillo aromático'};
 
 function encabezadoInst(e,titulo,sub,forma){
@@ -382,8 +380,8 @@ function bloquesSaber(qs,r){
     var cortas=ops.every(function(o){return o.length<=34;});
     var muyCortas=ops.every(function(o){return o.length<=16;});
     var fig=(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},300,110):'';
-    return '<div class="sq"><div class="sq-cab"><span class="num">'+(i+1)+'</span><span class="sq-tag">'+esc(COMP[q.c])+' · '+esc(COMPO[q.k])+'</span></div>'+
-      '<p class="sq-ctx">'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
+    // Sin rótulo de competencia: el número va al inicio del contexto.
+    return '<div class="sq"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
       '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
   });
 }
