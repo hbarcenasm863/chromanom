@@ -406,9 +406,8 @@ body{
 .pill-r{background:var(--c-r)}
 /* Doble rol (ej. el anillo bencénico: es cadena Y grupo funcional a la vez) */
 .pill-cg{background:linear-gradient(135deg,var(--c-c) 50%,var(--c-g) 50%)}
-/* Hoja del estudiante: fragmentos SIN color (gris neutro) — si salieran
-   coloreados, el color le regalaría la respuesta. (No hay clave de
-   respuestas a propósito: los estudiantes también generan sus hojas.) */
+/* Gris neutro (sin uso por ahora): el docente prefirió que los ejercicios
+   de análisis por partes salgan con los colores del método. */
 .mdec-pill.pill-n{background:#eef2f6;color:#0d2233;border:1.5px solid #94a3b8}
 .mdec-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 
@@ -3535,7 +3534,7 @@ function renderSheet(){
             <span class="ex-badge badge-c">Análisis por partes</span>
             <span class="ex-instruction">Indica a qué parte del método de 4 colores pertenece cada fragmento y qué significa (①&nbsp;Sustituyentes, ②&nbsp;Cadena principal, ③&nbsp;Insaturación, ④&nbsp;Grupo funcional):</span>
           </div>
-          <div class="mdec-name-display">${mdecPills(mol.parts, true)}</div>
+          <div class="mdec-name-display">${mdecPills(mol.parts, false)}</div>
           ${mdecTableBlank(mol.parts)}
         </div>`;
       }

@@ -269,11 +269,12 @@ body.sin-eval .solo-eval{display:none}
 .hoja .mdec-ej{border:1px solid #bbb;border-radius:8px;padding:6px 8px}
 .hoja .pills{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;margin:4px 0}
 .hoja .pill{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;border:2px solid;border-radius:6px;padding:1px 7px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.hoja .p-r{color:#0e7490;border-color:#0891b2;background:#ecfeff}
-.hoja .p-c{color:#14532d;border-color:#166534;background:#f0fdf4}
-.hoja .p-i{color:#92400e;border-color:#b45309;background:#fffbeb}
-.hoja .p-g{color:#9a4a78;border-color:#CC79A7;background:#fdf2f8}
-.hoja .p-cg{color:#14532d;border-color:#CC79A7;background:linear-gradient(135deg,#f0fdf4 50%,#fdf2f8 50%)}
+/* Mismos colores sólidos del código MDEC en todo el sitio (generador, grupos…) */
+.hoja .p-r{color:#fff;border-color:#0891b2;background:#0891b2}
+.hoja .p-c{color:#fff;border-color:#166534;background:#166534}
+.hoja .p-i{color:#fff;border-color:#b45309;background:#b45309}
+.hoja .p-g{color:#fff;border-color:#CC79A7;background:#CC79A7}
+.hoja .p-cg{color:#fff;border-color:#166534;background:linear-gradient(135deg,#166534 50%,#CC79A7 50%)}
 .hoja .p-n{color:#111;border-color:#888;background:#fff}
 .hoja .mdec-tab td:first-child{width:30%;text-align:center}
 .hoja .mdec-tab td{padding:5px 6px}
@@ -736,7 +737,7 @@ body.sin-eval .solo-eval{display:none}
           <li><strong>Del juego a la clase:</strong> revise “Eficacia por tema” antes de clase y abra con los 2 temas de menor acierto.</li>
           <li><strong>Reto de constancia:</strong> número mínimo de partidas en el periodo (columna “Sesiones en el periodo”).</li>
           <li><strong>Autoevaluación:</strong> el estudiante compara su “Tu avance” (Inicio) al principio y al final de la unidad.</li>
-          <li><strong>Coevaluación:</strong> las parejas intercambian ejercicios de análisis por partes y los corrigen coloreando cada fragmento con los 4 colores del método.</li>
+          <li><strong>Coevaluación:</strong> las parejas intercambian ejercicios de análisis por partes y los corrigen con la Hoja de referencia.</li>
         </ul>
       </div>
       <div class="card cn-card">
@@ -759,7 +760,7 @@ body.sin-eval .solo-eval{display:none}
     <details class="faq cn-card"><summary>¿Qué nomenclatura usa?</summary><div class="r">Las recomendaciones IUPAC de 2013: localizador inmediatamente antes del sufijo (butan-2-ol, but-1-eno). La pestaña Comparación de Principios muestra las equivalencias con los nombres tradicionales (2-butanol, acetona…), que siguen apareciendo en libros y exámenes.</div></details>
     <details class="faq cn-card"><summary>Soy de otro colegio. ¿Puedo ver los resultados de mis estudiantes?</summary><div class="r">No con la versión publicada: la hoja de seguimiento pertenece al colegio del autor, y en modo libre los resultados llegan como anónimos a esa hoja. Para tener su propio seguimiento necesita una copia del sitio con su propia hoja de Google y su propio Apps Script (en el código del juego se cambia la dirección <code>ANALYTICS_URL</code>), y cargar los códigos de sus estudiantes en la hoja “Estudiantes”. Requiere algo de manejo técnico. Sin eso, puede usar todo lo demás y evaluar con el Generador y las rúbricas.</div></details>
     <details class="faq cn-card"><summary>¿Puedo modificar o compartir el material?</summary><div class="r">Sí, con la licencia CC BY-NC 4.0: uso y adaptación libres sin fines comerciales, citando al autor (Harvey Barcenas Morales).</div></details>
-    <details class="faq cn-card"><summary>¿Por qué las guías y evaluaciones del docente no dan las respuestas?</summary><div class="r">Porque los estudiantes también entran a esta página para practicar, y una clave visible les daría la respuesta. Por eso ni las guías, ni los talleres, ni las evaluaciones traen clave, y en los ejercicios de análisis por partes los fragmentos salen sin colores.</div></details>
+    <details class="faq cn-card"><summary>¿Por qué las guías y evaluaciones del docente no dan las respuestas?</summary><div class="r">Porque los estudiantes también entran a esta página para practicar, y una clave visible les daría la respuesta. Por eso ni las guías, ni los talleres, ni las evaluaciones traen clave.</div></details>
     <details class="faq cn-card"><summary>Un estudiante dice que su partida “no se guardó”.</summary><div class="r">Al terminar, el juego muestra un aviso grande de “¡Resultados guardados!” o “No se pudo guardar” con botón “Reintentar envío”. Pídale que le muestre esa pantalla. Recuerde que Estadísticas y Curso X tardan hasta 30 minutos en actualizarse; en la hoja Registro la fila aparece de inmediato.</div></details>
     <details class="faq cn-card"><summary>¿Sirve en celulares sencillos?</summary><div class="r">Sí. Está diseñado primero para celular, con letra ajustable (control “A− / A+”) y menú inferior. El Constructor Molecular es más cómodo en pantallas medianas o grandes.</div></details>
     <details class="faq cn-card"><summary>¿Incluye haluros de alquilo?</summary><div class="r">Sí. Tienen su ficha en Grupos (siempre se nombran como prefijo ①: cloro, bromo…, porque no tienen sufijo) y la pestaña Halogenuros de Reacciones trata sus reacciones (sustitución y eliminación).</div></details>

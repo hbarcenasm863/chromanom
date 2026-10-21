@@ -323,7 +323,7 @@ var TIT={A:'Nombrar',B:'Dibujar',C:'Análisis por partes (MDEC)',D:'Reacciones',
 function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
-  if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,true)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
+  if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,false)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
   if(it.k==='D'){var h='';try{h=camposRxn(B.G.tipoD(it.rxn,num),it.rxn);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
   if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+cuad(7,'espacio')+'</div>';

@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (130) — Análisis por partes MDEC con los colores del método
+
+### Contexto
+El docente notó que en `docente.html` los ejercicios de análisis por partes
+(MDEC) salían con los fragmentos en gris, sin los colores propios del sitio.
+Era una decisión del 18 de octubre (entrada 104: «el color regalaba la
+respuesta»). Se le explicó el motivo y eligió volver a los colores.
+
+### Cambios
+- `docente-app.js`: los fragmentos de los ejercicios de análisis por partes
+  salen con su color (① turquesa, ② verde, ③ dorado, ④ rosado).
+- `docente.html`: las pastillas de las hojas usan ahora los colores sólidos
+  con letra blanca, iguales a los del generador y del resto del sitio (antes
+  eran tonos pálidos). Se quitó de la pregunta frecuente la frase «los
+  fragmentos salen sin colores» y se ajustó la coevaluación (se corrige con
+  la Hoja de referencia).
+- `generador.html`: el tipo C también vuelve a mostrar los colores.
+- `sw.js`: caché `chromanom-v31`.
+- Comprobado con Playwright: taller de alquenos solo con análisis por partes,
+  pastillas con color y sin desbordes.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada. Nota didáctica: con color, el ejercicio pasa a ser de reconocer qué
+  significa cada parte más que de clasificarla.
+
+---
+
 ## 2026-10-21 (129) — Documento con la lógica de docente.html (para IoNom)
 
 ### Contexto
