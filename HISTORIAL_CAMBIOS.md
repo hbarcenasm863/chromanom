@@ -7,6 +7,99 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (127) — Docente: auditoría completa (química, didáctica e instrucciones)
+
+### Contexto
+El docente pidió una auditoría completa de `docente.html` para que todo
+quedara didáctica y químicamente correcto, con instrucciones, información y
+secciones sin errores. Se revisaron las 240 preguntas tipo Saber, las 12
+guías por tema, el banco de preguntas abiertas, la pestaña Orientaciones y los
+documentos que arma el generador (guía, taller y evaluación), y se
+comprobaron funcionalmente con Playwright.
+
+### Cambios
+
+**`docente-datos.js` — preguntas tipo Saber (unas 100 correcciones)**
+- Errores químicos y nombres: monómero del PVC (la pregunta ya no da el nombre
+  en el enunciado), ácido benzoico (se quitó el distractor inventado «ácido
+  benzoico oico»), «benzonitrilo», «etoxietano», «pentan-3-al» en lugar de
+  «dietilcetona» (nombre aceptado, era discutible como incorrecto),
+  «2-metilpropanona» en lugar de «metilpropanal» (también correcto),
+  «etil metil cetona», «29 °GL», punto de ebullición del éter (7 °C) y otros.
+- Explicaciones corregidas: llama del acetileno (molécula de alta energía,
+  no «el triple enlace guarda energía»), HFC y ozono, GLP licuado (≈8 atm),
+  combustión del octano, evaporación del alcohol, dímeros de ácidos, jabón,
+  puntos de ebullición de ácido frente a éster (con datos reales).
+- Preguntas rehechas porque no medían lo que decían: masa molar promedio del
+  gas natural, fuga de GLP frente a gas natural, prueba con bicarbonato,
+  experimento de control de variables (ya no repite el de esterificación),
+  etanol carburante del Valle del Cauca (ya no repite la ecuación de la
+  fermentación).
+- Respuestas correctas que se delataban por ser mucho más largas que los
+  distractores: se acortaron o se alargaron los distractores en unas 25
+  preguntas.
+- Competencia (uso / explicación / indagación) y componente (químico / CTS)
+  reclasificados donde no correspondían.
+- Benceno: los experimentos con benceno quedan como «reportados en un libro»,
+  porque es cancerígeno y no se usa en el colegio.
+
+**`docente-datos.js` — guías y preguntas abiertas**
+- Las preguntas abiertas de nomenclatura y MDEC ya no repiten el ejemplo
+  resuelto de la guía ni se dan la respuesta entre sí dentro de la misma
+  evaluación (se cambiaron fórmulas y nombres en los 12 temas).
+- Pistas en las preguntas de reacción que se evalúan (Lindlar, Markovnikov,
+  NaCN, SN1, KMnO₄, PCC frente a CrO₃) y nueva pregunta de hidrólisis de amidas
+  en lugar de la reducción del nitrobenceno.
+- Lecturas: sustitución del −OH con HBr (se evaluaba sin enseñarse),
+  oxidante suave/fuerte en aldehídos, enantiómeros (mismas propiedades físicas
+  salvo la luz polarizada), dímeros de ácidos, Protocolo de Montreal, yuca
+  amarga, cafeína, Faraday, «tíner», «el maracuyá», «oxidorreducción».
+- Nombre corto del tema: «Alcoholes, fenoles y éteres».
+
+**`docente.html` — pestaña Orientaciones**
+- Datos actualizados: 19 fichas de grupos (con haluros de alquilo y
+  polifuncionales), más de 1.300 preguntas en el juego, pestaña «Tipos de
+  reacción», 2 a 40 ejercicios, seis tipos de ejercicio.
+- Se quitaron las referencias al antiguo Generador y a las hojas «Tipo A–D»
+  en la secuencia de clases, la evaluación y las preguntas frecuentes.
+- La sección de alineación curricular ya no dice que los documentos la
+  imprimen (queda como apoyo para el plan de área).
+- Rúbrica C: desempate de la cadena según IUPAC 2013 (primero la más larga).
+- Pregunta frecuente de haluros de alquilo corregida (ahora sí tienen ficha).
+
+**`docente-app.js` — documentos generados**
+- Las tarjetas de reacción muestran los campos que pide cada enunciado
+  (nucleófilo y grupo saliente, observación, posición, compuesto de partida,
+  ecuación…), no siempre «Tipo de reacción / Condiciones».
+- Se excluyen del taller las reacciones de nivel universitario (sales de
+  diazonio, aldólica, acetiluros, Na/NH₃) y las fichas repetidas (mismo
+  reactivo y mismo producto).
+- Los ejercicios de un tema se reparten entre sus subtemas (por ejemplo,
+  alcoholes y éteres), en vez de salir casi todos de uno.
+- La evaluación anexa la rúbrica D cuando trae preguntas abiertas (siempre
+  hay una de reacción).
+- Instrucción de la evaluación según haya o no hoja de respuestas; la línea
+  del estudiante ya no repite «Fecha» si el encabezado la trae; instrucción
+  de reacciones y de MDEC más precisas; autoevaluación de la sesión 4 con
+  «marca con una X»; avisos al docente en «usted».
+- Se precargan también las fuentes JetBrains Mono y Outfit antes de medir
+  las páginas.
+
+**Otros**
+- `generador.html`: «adición aldólica» en el enunciado del producto aldólico
+  (la condensación es el paso siguiente).
+- `sw.js`: caché `chromanom-v29`.
+
+### Pasos manuales
+- Ninguno: los cambios se publican con el push a `main` (GitHub Pages).
+
+### Pendiente
+- Nada obligatorio. En pantalla, la vista previa reducida puede mostrar unos
+  píxeles de recorte por el redondeo del zoom; al imprimir (tamaño real) las
+  páginas no se desbordan.
+
+---
+
 ## 2026-10-21 (126) — Docente: banco nuevo de preguntas abiertas (reacciones, nomenclatura y MDEC)
 
 ### Contexto

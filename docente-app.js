@@ -139,18 +139,18 @@ function poolEjercicios(temas){
       if((t.gen||[]).indexOf(m.topic)<0)return;
       if(t.soloRamificados&&(!/\d/.test(m.name)||/^ciclo|ciclo/.test(m.name)))return;
       var nom=m.iupac||m.name;
-      addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador'});
-      addB(nom,{k:'B',nombre:nom,fuente:'Generador'});
-      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador'});
+      addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador',sub:m.topic});
+      addB(nom,{k:'B',nombre:nom,fuente:'Generador',sub:m.topic});
+      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador',sub:m.topic});
     });
     // 2) Juego
     if(t.jue)B.jue.forEach(function(q){
       if(/^rxn_/.test(q.topic)||!t.jue.test(q.topic))return;
       var qt=quitaHtml(q.q);
       if(q.mol&&(q.type==='mc'||q.type==='write')&&/nombre IUPAC/i.test(qt)&&!/cl[aá]sico|funcional \(/i.test(qt)&&typeof q.ans==='string'){
-        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego'});
-        addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego'});
-        if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego'});
+        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego',sub:q.topic});
+        addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego',sub:q.topic});
+        if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego',sub:q.topic});
       }else if(q.type==='build'){
         var mm=String(q.q||'').match(/<strong>([^<]+)<\/strong>/);
         if(mm)addB(mm[1],{k:'B',nombre:mm[1],fuente:'Juego'});
@@ -164,9 +164,15 @@ function poolEjercicios(temas){
       addB(p.n,{k:'B',nombre:p.n,fuente:'Docente'});
     });
     // 4) Reacciones (Generador, tipo D)
+    // Se omiten las reacciones de nivel universitario (sales de diazonio,
+    // aldólica, acetiluros, Na/NH₃) y las repetidas: dos fichas con el mismo
+    // reactivo y el mismo producto cuentan como un solo ejercicio.
     B.genRxn.forEach(function(r){
-      if((t.rxn||[]).indexOf(r.topic)<0||r.nivel==='avanzado'||rx[r.key])return;
-      rx[r.key]=1;P.D.push({k:'D',rxn:r,fuente:'Generador'});
+      if((t.rxn||[]).indexOf(r.topic)<0||r.nivel==='avanzado'||rx[r.key]||RXN_FUERA.test(r.categoria||''))return;
+      var prod=String(r.respuesta||'').split(/\s{2}|\s\(|\s→/)[0];
+      var s1=r.r+'|'+prod,s2=r.r+'|'+(r.reactivo||'')+'|'+(r.nombre_rxn||'');
+      if(rx[s1]||rx[s2])return;
+      rx[r.key]=rx[s1]=rx[s2]=1;P.D.push({k:'D',rxn:r,fuente:'Generador'});
     });
     // 5) Ejercicios abiertos del tema
     (t.abiertos||[]).forEach(function(a){P.E.push({k:'E',q:typeof a==='string'?a:a.q,fig:typeof a==='string'?null:{f:a.f},fuente:'Docente'});});
@@ -241,7 +247,7 @@ function restaurar(){try{var o=JSON.parse(localStorage.getItem('chromanom_docent
 
 function pintarEstado(){
   var el=$('f-estado');if(!el)return;
-  var g=B.estado.gen==='ok'?'✅ Generador: '+B.genMols.length+' moléculas y '+B.genRxn.length+' reacciones':(B.estado.gen==='cargando'?'⏳ Cargando el banco del Generador…':'⚠️ No se pudo leer el banco del Generador');
+  var g=B.estado.gen==='ok'?'✅ Generador: '+B.genMols.length+' moléculas y '+B.genRxn.length+' ejercicios de reacción':(B.estado.gen==='cargando'?'⏳ Cargando el banco del Generador…':'⚠️ No se pudo leer el banco del Generador');
   var j=B.estado.jue==='ok'?'✅ Juego: '+B.jue.length+' preguntas':(B.estado.jue==='cargando'?'⏳ Cargando el banco del Juego…':'⚠️ No se pudo leer el banco del Juego');
   var s=0;Object.keys(D.SABER).forEach(function(k){s+=D.SABER[k].length;});
   el.innerHTML=g+'<br>'+j+'<br>✅ Preguntas tipo Saber 11: '+s+' en '+Object.keys(D.SABER).length+' temas';
@@ -310,8 +316,8 @@ function bloquesInfo(t){
 var INSTR={
   A:'Escribe el nombre IUPAC de cada estructura.',
   B:'Dibuja la estructura de cada compuesto (fórmula esquelética o semidesarrollada).',
-  C:'Escribe a qué parte del método MDEC pertenece cada fragmento (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) y qué significa.',
-  D:'Completa cada reacción según lo que se pide.',
+  C:'Escribe a qué parte del método MDEC pertenece cada fragmento (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
+  D:'Completa cada reacción según lo que se pide. Cuando se pida el producto, dibuja su estructura y escribe su nombre IUPAC.',
   X:'Un compañero cometió un error al nombrar cada estructura. Explica el error y escribe el nombre correcto.',
   E:'Resuelve en el espacio indicado.'
 };
@@ -320,14 +326,22 @@ function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,true)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
-  if(it.k==='D'){var h='';try{h=B.G.tipoD(it.rxn,num);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
+  if(it.k==='D'){var h='';try{h=camposRxn(B.G.tipoD(it.rxn,num),it.rxn);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
   if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+cuad(7,'espacio')+'</div>';
   return '';
 }
 /* Elige n ejercicios repartidos entre los tipos marcados. */
+// Reparte la cola de un tipo por subtema (alcohol, fenol, éter…) de forma
+// alterna, para que la selección no quede cargada a un solo subtema.
+function alternarSub(lista){
+  var g={},orden=[];lista.forEach(function(x){var s=x.sub||'';if(!g[s]){g[s]=[];orden.push(s);}g[s].push(x);});
+  if(orden.length<2)return lista;
+  var out=[],i=0;while(out.length<lista.length){orden.forEach(function(s){if(g[s][i])out.push(g[s][i]);});i++;}
+  return out;
+}
 function elegirEjercicios(P,tipos,n,r){
-  var colas={};tipos.forEach(function(k){colas[k]=barajar(P[k]||[],r);});
+  var colas={};tipos.forEach(function(k){colas[k]=alternarSub(barajar(P[k]||[],r));});
   var orden=tipos.filter(function(k){return colas[k].length;});
   var cuenta={};orden.forEach(function(k){cuenta[k]=0;});
   var total=0,avanza=true;
@@ -381,6 +395,42 @@ function bloqueHojaRespuestas(n){
 // Preguntas abiertas: tres tipos (reacción, nomenclatura, MDEC), cada una con
 // su rótulo. La MDEC trae una tabla para separar el nombre en sus 4 partes.
 var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'MDEC'};
+// Categorías de reacción que superan el nivel de bachillerato.
+var RXN_FUERA=/diazo|aldólica|acetiluro|Acidez \(alquinos\)|Reducción \(alquinos\)/i;
+// La tarjeta del Generador trae campos fijos según el tipo de pregunta; aquí
+// se ajustan a lo que pide cada enunciado, para que el estudiante tenga dónde
+// escribir exactamente lo que se le pregunta.
+function camposRxn(h,r){
+  var e=String(r.enunciado||''),c=null;
+  function f(l){return '<div class="rxn-d-field"><span>'+l+'</span><div class="ans-line"></div></div>';}
+  var REGLAS=[
+    [/nucle[oó]filo.*saliente/i,['Tipo de reacción:','Nucleófilo:','Grupo saliente:']],
+    [/electr[oó]filo.*posici/i,['Tipo de reacción:','Electrófilo:','Posiciones a las que dirige:']],
+    [/activante o desactivante/i,['Activante o desactivante:','Posiciones a las que dirige:']],
+    [/posici[oó]n/i,['Tipo de reacción:','Posición en el anillo:']],
+    [/no ocurre/i,['¿Ocurre reacción? Producto o explicación:']],
+    [/evidencia|observaci[oó]n|qué se observa/i,[/tipo de reacci|clasifica/i.test(e)?'Tipo de reacción:':null,'Observación:']],
+    [/equivalentes/i,['Equivalentes de Grignard:','Tipo de alcohol (1°, 2° o 3°):']],
+    [/tipo de alcohol/i,['Tipo de alcohol (1°, 2° o 3°):']],
+    [/tipo de combusti[oó]n/i,['Tipo de combustión:','Condición de oxígeno:']],
+    [/qué oxidante/i,['Oxidante:']],
+    [/mecanismo/i,['Tipo de reacción:','Mecanismo:']],
+    [/característica/i,['Tipo de reacción:','Característica clave:']],
+    [/reactivo necesario/i,['Tipo de reacción:','Reactivo necesario:']],
+    [/catalizador necesario/i,['Tipo de reacción:','Catalizador:']],
+    [/reacción que ocurre:$/i,['Tipo de reacción:']]
+  ];
+  if(r.pregunta_tipo==='tipo'){
+    for(var i=0;i<REGLAS.length;i++)if(REGLAS[i][0].test(e)){c=REGLAS[i][1].filter(Boolean).map(f).join('');break;}
+  }else if(r.pregunta_tipo==='reactivo'&&/de partida/i.test(e)){
+    c=f('Compuesto de partida:')+(r.condicion==='???'?f('Condiciones / catalizador:'):'');
+  }else if(r.pregunta_tipo==='producto'){
+    if(/ecuaci[oó]n/i.test(e))c=f('Ecuación completa y balanceada:');
+    else if(/productos/i.test(e))c=f('Productos:');
+  }
+  if(!c)return h;
+  return h.replace(/<div class="rxn-d-fields">[\s\S]*?<\/div>\s*<\/div>\s*$/,'<div class="rxn-d-fields">'+c+'</div>\n  </div>');
+}
 function htmlAbierta(a,num){
   if(typeof a==='string')return '<div class="ab"><b>'+num+'.</b> '+esc(a)+lineas(5)+'</div>';
   var tag='<span class="ab-tag">'+(TIPO_AB[a.t]||'')+'</span>';
@@ -412,8 +462,10 @@ function elegirAbiertas(pool,n,r){
   }
   return out;
 }
-function bloquesRubricas(temas){
-  var ids={};temas.forEach(function(t){
+function bloquesRubricas(temas,conAbiertas){
+  // Toda evaluación con preguntas abiertas lleva al menos una de reacción,
+  // así que se anexa también la rúbrica D para calificarla.
+  var ids=conAbiertas?{'rub-d':1}:{};temas.forEach(function(t){
     var m={cadena:['rub-a','rub-c'],reacciones:['rub-d'],haluros:['rub-a','rub-b','rub-d'],isomeria:['rub-a','rub-b']}[t.id]||['rub-a','rub-b'];
     m.forEach(function(x){ids[x]=1;});
   });
@@ -529,7 +581,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
   // Ejercicios
   var selEj=null;
   if(F.tipo!=='evaluacion'&&!soloEval){
-    if(!tipos.length)avisos.push('No hay ejercicios disponibles para los tipos marcados en este tema.');
+    if(!tipos.length)avisos.push('No hay ejercicios disponibles para los tipos marcados en los temas elegidos.');
     else{selEj=elegirEjercicios(P,tipos,F.nEj,rng(semilla+'|ej'));if(selEj.total<F.nEj)avisos.push('Solo hay '+selEj.total+' ejercicios disponibles para esta selección.');}
   }
   if(F.tipo==='guia'&&!soloEval){
@@ -541,7 +593,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     F.temas.forEach(function(t){b=b.concat(bloquesInfo(t));});
     b.push('<h3 class="ses"><span>3</span> Trabajo práctico</h3><p class="intro">Resuelve en esta guía. Puedes consultar la Hoja de referencia de ChromaNom.</p>');
     if(selEj)b=b.concat(bloquesEjercicios(selEj,1));
-    b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca cómo te sientes con lo aprendido:</p>'+
+    b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca con una X qué tan bien puedes hacer cada cosa:</p>'+
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
     // La guía sale una sola vez (es igual para todos): no lleva rótulo de versión.
@@ -561,19 +613,19 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat(D.ABIERTAS[t.id]||[]);});
     var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
-    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola en la hoja de respuestas.'+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
+    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
     be=be.concat(bloquesSaber(qs,r));
     be=be.concat(bloquesAbiertas(ab,qs.length+1));
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
     var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
-      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div><div class="corta"><span>Fecha</span><i></i></div></div>';
+      '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div>'+(F.enc&&F.enc.fecha?'':'<div class="corta"><span>Fecha</span><i></i></div>')+'</div>';
     docs.push({clase:'eval',etiqueta:verTotal>1?'Evaluación '+verIdx+'/'+verTotal:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
     // El anexo de rúbricas no depende de la semilla (es el mismo criterio de
     // evaluación para todas las versiones): con varias versiones solo se
     // agrega una vez, al final, para no repetir la misma hoja N veces.
     if(F.rubrica&&verIdx===verTotal){
-      var br=bloquesRubricas(F.temas);
+      var br=bloquesRubricas(F.temas,F.nAb>0);
       if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas',true),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
     }
   }
@@ -598,14 +650,14 @@ var ultimo=null;
 function generar(){
   var F=leerForm();
   var info=$('vista-info');
-  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marca al menos un tema.</p>';return Promise.resolve();}
+  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marque al menos un tema.</p>';return Promise.resolve();}
   info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.nVersiones>1?'s':'')+'…</p>';
   return bancosListos.then(function(){
     // La letra de libro (STIX) se descarga solo cuando se usa: hay que
     // pedirla ANTES de medir las páginas, o se mide con la letra de
     // reemplazo y después el texto crece y desborda la hoja.
     if(!document.fonts||!document.fonts.load)return null;
-    return Promise.all(['400 13.5px "STIX Two Text"','700 13.5px "STIX Two Text"','italic 400 13.5px "STIX Two Text"','600 13.5px "STIX Two Text"'].map(function(f){return document.fonts.load(f).catch(function(){});})).then(function(){return document.fonts.ready;});
+    return Promise.all(['400 13.5px "STIX Two Text"','700 13.5px "STIX Two Text"','italic 400 13.5px "STIX Two Text"','600 13.5px "STIX Two Text"','700 12px "JetBrains Mono"','400 12px "Outfit"','700 12px "Outfit"'].map(function(f){return document.fonts.load(f).catch(function(){});})).then(function(){return document.fonts.ready;});
   }).then(function(){
     var R=construirTodas(F);
     var medidor=$('medidor');medidor.innerHTML='';
@@ -614,7 +666,7 @@ function generar(){
     R.docs.forEach(function(doc){var hs=paginar(doc,medidor);resumen.push(doc.etiqueta+': '+hs.length+' página'+(hs.length>1?'s':''));hs.forEach(function(h){vista.appendChild(h);});});
     medidor.innerHTML='';
     ultimo=F;
-    info.innerHTML='<p class="aviso ok">✅ '+esc(resumen.join(' · '))+'. Revisa la vista previa y luego usa <b>Imprimir / Guardar PDF</b> (tamaño carta).</p>'+
+    info.innerHTML='<p class="aviso ok">✅ '+esc(resumen.join(' · '))+'. Revise la vista previa y luego use <b>Imprimir / Guardar PDF</b> (tamaño carta).</p>'+
       R.avisos.map(function(a){return '<p class="aviso warn">'+esc(a)+'</p>';}).join('')+
       '<p class="nota-sin-clave">Por decisión del docente, las evaluaciones no llevan clave de respuestas.</p>';
     $('btn-imprimir').disabled=false;
