@@ -795,6 +795,9 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .btn-check{background:#1a6ea8}
 .btn-check:hover:not(:disabled){background:#0d4a73}
 .write-input:focus{border-color:#1a6ea8}
+/* Partes del nombre con el sombreado MDEC (opciones y respuestas) */
+.mdec-p{border-radius:4px;padding:1px 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mc-opt .mdec-p+.mdec-p{margin-left:1px}
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
@@ -3019,20 +3022,86 @@ function parseNameZones(s){
   zones.push({start:pos,end:s.length,cls:'g'});
   return zones;
 }
+// MDEC: el "an" que sigue a la raíz es ③ (insaturación), no parte de la
+// cadena; parseNameZones lo deja pegado a la raíz, así que aquí se separa:
+// "butano" → but ② · an ③ · o ④.
+function _splitAnZones(s,zones){
+  const low=s.toLowerCase(), out=[];
+  zones.forEach((z,i)=>{
+    if(z.cls!=='c'){ out.push(z); return; }
+    let root=null;
+    for(const w of _NAME_ROOTS){ if(low.startsWith(w,z.start)){ root=w; break; } }
+    const rEnd=root?z.start+root.length:z.end;
+    if(root && low.startsWith('an',rEnd) && rEnd+2<=z.end){
+      out.push({start:z.start,end:rEnd,cls:'c'});
+      out.push({start:rEnd,end:rEnd+2,cls:'i'});
+      if(rEnd+2<z.end){
+        const nx=zones[i+1];
+        // lo que sobra ("o" de propano-1,2-diol, guion) va con la terminación ④
+        if(nx&&nx.cls==='g'){ nx.start=rEnd+2; } else out.push({start:rEnd+2,end:z.end,cls:'g'});
+      }
+    } else out.push(z);
+  });
+  return out;
+}
+// Partición "tolerante" para opciones que no son nombres bien formados
+// (p. ej. "isobutano", "2-metil-3-etilpentano"): raíz de cadena ②, lo de
+// antes ①, an/en/in ③ y el resto ④. Sirve para colorear TODAS las opciones
+// por igual: si solo se coloreaban las bien formadas, el color delataba la
+// respuesta.
+function _lenientZones(s){
+  const low=s.toLowerCase();
+  // primero se consumen los sustituyentes reconocibles (2-metil-, 3-etil-…)
+  let p0=0; const am=/^ácido\s+/.exec(low); if(am) p0=am[0].length;
+  while(true){ const mm=_NAME_SUBST_RE.exec(low.slice(p0)); if(!mm) break; p0=_nameFoldDash(low,p0+mm[1].length); }
+  let best=null;
+  for(let p=p0;p<low.length&&!best;p++){
+    for(const w of _NAME_ROOTS){ if(low.startsWith(w,p)){ best={p,w}; break; } }
+  }
+  if(!best) return null;
+  const zones=[]; let pos=best.p;
+  if(am) zones.push({start:0,end:am[0].length,cls:'g'});
+  if(pos>(am?am[0].length:0)) zones.push({start:am?am[0].length:0,end:pos,cls:'r'});
+  zones.push({start:pos,end:pos+best.w.length,cls:'c'}); pos+=best.w.length;
+  const um=/^(an|(?:-?\d+(?:,\d+)*-)?(?:di|tri)?(?:en|in))/.exec(low.slice(pos));
+  if(um){ zones.push({start:pos,end:pos+um[0].length,cls:'i'}); pos+=um[0].length; }
+  if(pos<s.length) zones.push({start:pos,end:s.length,cls:'g'});
+  return zones;
+}
+function _zonesHTML(s,zones){
+  // ésteres: «de metilo» (grupo del alcohol) es ① sustituyente
+  const low=s.toLowerCase(), last=zones[zones.length-1];
+  const em=last&&last.cls==='g'?/\s+de\s+[a-záéíóúñ()0-9,\-]+$/.exec(low.slice(last.start)):null;
+  if(em&&em.index>0){ const cut=last.start+em.index; zones=zones.slice(0,-1).concat([{start:last.start,end:cut,cls:'g'},{start:cut,end:s.length,cls:'r'}]); }
+  return zones.filter(z=>z.end>z.start).map(z=>`<span class="mdec-p" style="color:var(--${_CLS_VAR[z.cls]}t);background:var(--${_CLS_VAR[z.cls]}b)">${s.slice(z.start,z.end)}</span>`).join('');
+}
 // Devuelve HTML con spans de color, o null si `s` no se reconoce como nombre IUPAC.
 function colorizeName(s){
   const zones=parseNameZones(s);
   if(!zones) return null;
-  return zones.map(z=>`<span style="color:var(--${_CLS_VAR[z.cls]}t)">${s.slice(z.start,z.end)}</span>`).join('');
+  return _zonesHTML(s,_splitAnZones(s,zones));
 }
+function colorizeNameAny(s){
+  const z=parseNameZones(s);
+  if(z) return _zonesHTML(s,_splitAnZones(s,z));
+  const lz=_lenientZones(s);
+  return lz?_zonesHTML(s,lz):null;
+}
+const _NAMELIKE_RE=/^[0-9a-záéíóúñü,()'\-\s]+$/i;
 
 function buildMC(q){
-  // Las opciones se muestran SIN colorear: colorizeName() solo logra pintar
-  // los nombres que sabe descomponer, así que colorear unas sí y otras no
-  // delataba cuáles eran nombres IUPAC bien formados (pista involuntaria).
-  // El color por partes se muestra después, en la retroalimentación.
+  // Identidad MDEC: cada opción muestra sus partes con los colores del
+  // método. Para no dar pistas, se colorean TODAS las opciones con el mismo
+  // criterio (también las mal escritas) o ninguna: solo en preguntas de
+  // nombrar (la respuesta es un nombre IUPAC reconocible) y si todas las
+  // opciones parecen nombres.
   const opts=shuffle(q.opts);
-  return `<div class="mc-options">${opts.map(o=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div>`;
+  let html=opts.map(o=>o);
+  if(colorizeName(String(q.ans))){
+    const col=opts.map(o=>(_NAMELIKE_RE.test(o)&&o.trim().split(/\s+/).length<=4)?colorizeNameAny(o):null);
+    if(col.every(Boolean)) html=col;
+  }
+  return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${html[i]}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;
