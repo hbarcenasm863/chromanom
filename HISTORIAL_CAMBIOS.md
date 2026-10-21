@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (134) — Código completo de maquetación para IoNom
+
+### Contexto
+IoNom sigue teniendo hojas en blanco y espacios muy grandes. El docente
+pidió un .md con todo el código de maquetación de ChromaNom.
+
+### Cambios
+- `MAQUETACION_CODIGO.md` (nuevo):
+  - tabla de diagnóstico síntoma → causa → arreglo, para hojas en blanco y
+    para espacios grandes;
+  - una plantilla HTML completa que funciona sola (hoja carta, medidor,
+    `paginar`, `llenarHoja`, doble columna, precarga de fuentes, zoom de
+    la vista previa y CSS de impresión);
+  - explicación de cada pieza y el CSS de impresión propio de ChromaNom;
+  - una prueba con Playwright que cuenta las páginas del PDF;
+  - pasos para adaptarla a IoNom.
+- La plantilla se probó: 4 hojas → PDF de 4 páginas, sin hojas en blanco y
+  con como mucho 20 px libres por hoja.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-21 (133) — Docente: grupo por grupo, «Solo nomenclatura» y reacciones en formato libro
 
 ### Contexto
