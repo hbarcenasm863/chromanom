@@ -105,6 +105,11 @@ los bancos en un `.js` compartido y cargarlo con `<script>`.
   documento no delata la respuesta.
 - `c` y `k` (competencia y componente) se guardan para el banco, pero **no se
   imprimen** (decisión del docente).
+- `a` es el área (`nom` nomenclatura y estructura, `rx` reacciones, `prop`
+  propiedades y contexto) y `g` el grupo funcional en los temas que reúnen
+  varios (por ejemplo, `alcoholes` / `eteres`, o `ambos`). Con ellos el
+  formulario deja elegir grupo por grupo y el enfoque «Solo nomenclatura» o
+  «Nomenclatura y reacciones».
 - Reglas de calidad que aplicamos en la auditoría:
   - un solo nombre/respuesta defendible (cuidado con nombres alternativos
     aceptados por IUPAC, que no pueden ser distractores);
@@ -183,6 +188,17 @@ La evaluación lleva:
 - preguntas abiertas con cuadrícula;
 - hoja de respuestas de burbujas (opcional);
 - anexo de rúbricas (opcional; si hay abiertas se agrega la de reacciones).
+
+### 5.3 bis Grupos, enfoque y reacciones tipo libro
+
+- Los temas combinados traen `grupos:[{id, t, jue}]`. `temaEfectivo(t)`
+  devuelve una copia del tema restringida a los grupos marcados y al
+  enfoque, y el resto del código la usa sin saber del filtro.
+- Las reacciones se dibujan con el motor compartido `fx-libro.js` (el mismo
+  de reacciones.html): la fórmula del banco (`CH₃−CH(OH)−CH₃`, `C₆H₅−CH₃`)
+  se pasa a notación FX y sale con los sustituyentes apilados, el anillo
+  dibujado y las condiciones sobre la flecha. Las preguntas abiertas
+  «A + B → ? (condición)» se dibujan igual.
 
 ### 5.4 Bloques
 

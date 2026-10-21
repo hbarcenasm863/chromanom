@@ -189,16 +189,55 @@ var TIPOS_EJ=[
   {k:'X',t:'Cazar errores de nombres'},
   {k:'E',t:'Ejercicios abiertos (isomería)'}
 ];
-function temasSel(){return TEMAS.filter(function(t){var c=document.querySelector('input[name=tema][value="'+t.id+'"]');return c&&c.checked;});}
+function enfoque(){return valor('enfoque')||'todo';}
+function gruposSel(t){
+  if(!t.grupos)return null;
+  var g=[].map.call(document.querySelectorAll('input[name=grupo][data-tema="'+t.id+'"]:checked'),function(c){return c.value;});
+  return g.length&&g.length<t.grupos.length?g:null;
+}
+// Tema «efectivo»: el mismo tema, pero restringido a los grupos funcionales
+// marcados (p. ej. solo Alcoholes, sin Éteres) y al enfoque elegido (con
+// «Solo nomenclatura» no entran reacciones). El resto del código usa estos
+// objetos sin saber del filtro.
+function temaEfectivo(t){
+  var g=gruposSel(t),nom=enfoque()==='nom';
+  if(!g&&!nom)return t;
+  var e=Object.assign({},t);
+  if(g){
+    var gs=t.grupos.filter(function(x){return g.indexOf(x.id)>=0;});
+    e.gen=(t.gen||[]).filter(function(x){return g.indexOf(x)>=0;});
+    e.rxn=(t.rxn||[]).filter(function(x){return g.indexOf(x)>=0;});
+    e.jue={test:function(tp){return gs.some(function(x){return x.jue.test(tp);});}};
+    e.corto=e.titulo=gs.map(function(x){return x.t;}).join(' y ');
+    e._g=g;
+  }
+  if(nom){e.rxn=[];e._nom=true;}
+  return e;
+}
+function filtroPreg(t){return function(q){
+  if(t._g&&q.g&&q.g!=='ambos'&&t._g.indexOf(q.g)<0)return false;
+  if(t._nom&&(q.a?q.a!=='nom':q.t==='rx'))return false;
+  return true;
+};}
+function temasSel(){return TEMAS.filter(function(t){var c=document.querySelector('input[name=tema][value="'+t.id+'"]');return c&&c.checked;}).map(temaEfectivo);}
 function pintarTemas(){
   var cont=$('f-temas');if(!cont)return;
   var previos={};document.querySelectorAll('input[name=tema]:checked').forEach(function(c){previos[c.value]=1;});
+  var prevG={};document.querySelectorAll('input[name=grupo]').forEach(function(c){prevG[c.dataset.tema+':'+c.value]=c.checked;});
   cont.innerHTML=TEMAS.map(function(t){
     var P=poolEjercicios([t]);var nEj=P.A.length+P.B.length+P.C.length+P.D.length+P.X.length+P.E.length;
     var nS=(D.SABER[t.id]||[]).length;
-    return '<label class="opt"><input type="checkbox" name="tema" value="'+t.id+'"'+(previos[t.id]?' checked':'')+'> <span><b>'+esc(t.titulo)+'</b><small>'+nEj+' ejercicios'+(nS?' · '+nS+' preguntas tipo Saber':'')+(t.extra?' · solo taller (tema nuevo del Juego)':'')+'</small></span></label>';
+    var gr=t.grupos?'<div class="grupos" data-tema="'+t.id+'"'+(previos[t.id]?'':' hidden')+'><span>Grupos:</span>'+t.grupos.map(function(x){
+      return '<label><input type="checkbox" name="grupo" data-tema="'+t.id+'" value="'+x.id+'"'+(prevG[t.id+':'+x.id]===false?'':' checked')+'> '+esc(x.t)+'</label>';}).join('')+'</div>':'';
+    return '<label class="opt"><input type="checkbox" name="tema" value="'+t.id+'"'+(previos[t.id]?' checked':'')+'> <span><b>'+esc(t.titulo)+'</b><small>'+nEj+' ejercicios'+(nS?' · '+nS+' preguntas tipo Saber':'')+(t.extra?' · solo taller (tema nuevo del Juego)':'')+'</small></span></label>'+gr;
   }).join('');
-  cont.querySelectorAll('input').forEach(function(c){c.addEventListener('change',function(){alinSugerida();pintarTipos();guardar();});});
+  cont.querySelectorAll('input[name=tema]').forEach(function(c){c.addEventListener('change',function(){
+    var g=cont.querySelector('.grupos[data-tema="'+c.value+'"]');if(g)g.hidden=!c.checked;
+    alinSugerida();pintarTipos();guardar();});});
+  // Cada tema conserva al menos un grupo marcado.
+  cont.querySelectorAll('input[name=grupo]').forEach(function(c){c.addEventListener('change',function(){
+    if(!cont.querySelector('input[name=grupo][data-tema="'+c.dataset.tema+'"]:checked'))c.checked=true;
+    pintarTipos();});});
   pintarTipos();alinSugerida();
 }
 function pintarTipos(){
@@ -324,7 +363,7 @@ function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,false)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
-  if(it.k==='D'){var h='';try{h=camposRxn(B.G.tipoD(it.rxn,num),it.rxn);}catch(e){h='';}return '<div class="ej rx">'+h+'</div>';}
+  if(it.k==='D')return htmlRxnLibro(it.rxn,num);
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
   if(it.k==='E')return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+esc(it.q)+'</p>'+(it.fig?figura(it.fig,260,100):'')+cuad(7,'espacio')+'</div>';
   return '';
@@ -395,12 +434,13 @@ function bloqueHojaRespuestas(n){
 var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'MDEC'};
 // Categorías de reacción que superan el nivel de bachillerato.
 var RXN_FUERA=/diazo|aldólica|acetiluro|Acidez \(alquinos\)|Reducción \(alquinos\)/i;
-// La tarjeta del Generador trae campos fijos según el tipo de pregunta; aquí
-// se ajustan a lo que pide cada enunciado, para que el estudiante tenga dónde
-// escribir exactamente lo que se le pregunta.
-function camposRxn(h,r){
+// Campos de respuesta de cada ejercicio de reacción, según lo que pide su
+// enunciado (no siempre «Tipo de reacción / Condiciones»). Cuando hay que
+// escribir una estructura, el campo es una cuadrícula y no una línea.
+function camposRxn(r){
   var e=String(r.enunciado||''),c=null;
-  function f(l){return '<div class="rxn-d-field"><span>'+l+'</span><div class="ans-line"></div></div>';}
+  function f(l){return '<div class="rx-campo"><span>'+l+'</span><i></i></div>';}
+  function g(l){return '<div class="rx-campo rx-dib"><span>'+l+'</span></div>'+cuad(3);}
   var REGLAS=[
     [/nucle[oó]filo.*saliente/i,['Tipo de reacción:','Nucleófilo:','Grupo saliente:']],
     [/electr[oó]filo.*posici/i,['Tipo de reacción:','Electrófilo:','Posiciones a las que dirige:']],
@@ -420,14 +460,76 @@ function camposRxn(h,r){
   ];
   if(r.pregunta_tipo==='tipo'){
     for(var i=0;i<REGLAS.length;i++)if(REGLAS[i][0].test(e)){c=REGLAS[i][1].filter(Boolean).map(f).join('');break;}
-  }else if(r.pregunta_tipo==='reactivo'&&/de partida/i.test(e)){
-    c=f('Compuesto de partida:')+(r.condicion==='???'?f('Condiciones / catalizador:'):'');
-  }else if(r.pregunta_tipo==='producto'){
-    if(/ecuaci[oó]n/i.test(e))c=f('Ecuación completa y balanceada:');
-    else if(/productos/i.test(e))c=f('Productos:');
+    if(!c)c=f('Tipo de reacción:')+f('Condiciones / catalizador:');
+  }else if(r.pregunta_tipo==='reactivo'){
+    c=g(/de partida/i.test(e)?'Compuesto de partida (estructura y nombre):':'Reactivo(s) necesario(s):')+(r.condicion==='???'?f('Condiciones / catalizador:'):'');
+  }else{
+    c=g(/ecuaci[oó]n/i.test(e)?'Ecuación completa y balanceada:':/productos/i.test(e)?'Productos (estructura y nombre):':'Producto principal (estructura y nombre):');
   }
-  if(!c)return h;
-  return h.replace(/<div class="rxn-d-fields">[\s\S]*?<\/div>\s*<\/div>\s*$/,'<div class="rxn-d-fields">'+c+'</div>\n  </div>');
+  return c;
+}
+/* ── Reacciones en formato «tipo libro» (motor FX de fx-libro.js, el mismo
+   de reacciones.html): fórmulas condensadas con los sustituyentes apilados,
+   anillos dibujados y condiciones sobre la flecha. ─────────────────────── */
+var FX_HUECO='ØQØ';
+// Fórmula del banco (texto Unicode) → notación FX.
+function aFx(t){
+  t=String(t||'').trim();if(!t)return '';
+  if(t==='???'||t==='?')return FX_HUECO;
+  var coef='';var mc=t.match(/^(\d+)\s+(.+)$/);if(mc){coef=mc[1]+' ';t=mc[2];}
+  t=t.replace(/\(CH₃\)₃C−?/g,'⟦CH₃|C|CH₃⟧—').replace(/^⟦CH₃\|C\|CH₃⟧—/,'CH₃—⟦CH₃|C|CH₃⟧—');
+  t=t.replace(/C\(([^()]+)\)\(([^()]+)\)/g,'⟦$1|C|$2⟧');
+  t=t.replace(/C₆H₁₁/g,'@chex—').replace(/C₆H₆/g,'@ring').replace(/C₆H₅/g,'@ring');
+  t=t.replace(/—−/g,'—').replace(/—$/,'');
+  return coef+fxNorm(t);
+}
+// «HBr (1 eq., en frío)» → ['HBr','1 eq., en frío']
+function partirNota(t){var m=String(t||'').match(/^(.*?\S)\s+\(([^()]*)\)$/);return m?[m[1],m[2]]:[t,''];}
+function ecuacionLibro(r){
+  var izq=[],der=[],arriba='',abajo='';
+  var reac=String(r.reactivo||'').replace(/^\s*\+\s*/,'').trim(),nota='';
+  if(r.r)izq.push(aFx(r.r));else izq.push(FX_HUECO);
+  if(reac&&reac.indexOf('→')>=0){
+    // Ecuación con productos ya escritos (p. ej. «+ O₂ → 3 CO₂ + 4 H₂O»).
+    var pz=reac.split('→');izq.push(pz[0].trim().split(/\s\+\s/).map(aFx).join(' + '));der=pz[1].trim().split(/\s\+\s/).map(aFx);
+  }else{
+    if(reac){var pn=partirNota(reac);nota=pn[1];izq.push(pn[0].split(/\s\+\s/).map(aFx).join(' + '));}
+    der.push(r.pregunta_tipo==='reactivo'&&r.producto?aFx(r.producto):FX_HUECO);
+    if(r.subproducto)der.push(aFx(partirNota(String(r.subproducto).replace(/↑|↓/g,''))[0]));
+  }
+  var cnd=String(r.condicion||'').trim();
+  if(cnd==='???')arriba=FX_HUECO;
+  else if(cnd){var m2=cnd.match(/^(1\).+?)\s{2,}(2\).+)$/)||cnd.match(/^(.{4,}?)[:;]\s+(.+)$/);var cs=m2?[m2[1],m2[2]]:fxCondSplit(cnd);arriba=cs[0];abajo=cs[1];}
+  if(nota)abajo=abajo?abajo+'; '+nota:nota;
+  var n=izq.join(' + ')+' -['+arriba+'|'+abajo+']-> '+der.join(' + ');
+  var h=FX.eq(n);
+  h=h.split('<span class="fx-t">'+FX_HUECO+'</span>').join('<span class="fx-t"><span class="rx-hueco">?</span></span>')
+     .split(FX_HUECO).join('<span class="rx-hueco sm">?</span>');
+  return '<div class="fx-mol rx-eq'+(/[⟦@]/.test(n)?' fx-hs':'')+'">'+h+'</div>';
+}
+function htmlRxnLibro(r,num){
+  var eq='';try{eq=ecuacionLibro(r);}catch(e){eq='<p>'+esc((r.r||'?')+' '+(r.reactivo||'')+' → ?')+'</p>';}
+  return '<div class="ej rx"><span class="num">'+num+'</span><p class="rx-enun">'+esc(r.enunciado||'')+'</p>'+eq+camposRxn(r)+'</div>';
+}
+// Pregunta abierta de reacción escrita como «A + B → ? (condición). Instrucción»:
+// la ecuación se dibuja en formato libro y la instrucción queda como texto.
+// Si el enunciado no tiene esa forma (p. ej. «El 2-metilpropano reacciona…»),
+// devuelve null y se deja el texto tal cual.
+var NOMBRES_FX={'Benceno':'C₆H₆','Tolueno':'C₆H₅−CH₃','Nitrobenceno':'C₆H₅−NO₂'};
+function abiertaLibro(q){
+  var m=String(q||'').match(/^(.+?)\s*→\s*\?\s*(?:\(([^()]*(?:\([^()]*\)[^()]*)*)\))?\.?\s*(.*)$/);
+  if(!m||/→/.test(m[3]))return null;
+  var izq=m[1].replace(/\b(Benceno|Tolueno|Nitrobenceno)\b/g,function(x){return NOMBRES_FX[x];});
+  if(/[a-záéíóú]{3,}/.test(izq.replace(/\([^()]*\)/g,'')))return null;
+  var t=izq.split(/\s\+\s/);
+  // Sobre la flecha va solo la condición corta; una explicación larga
+  // («…: los dos H se adicionan por el mismo lado») pasa al texto como pista.
+  var cond=(m[2]||'').replace(/^con\s+/,''),pista='';
+  var mc=cond.match(/^(.+?)[:;]\s+(.+)$/);if(mc){cond=mc[1];pista=mc[2];}
+  if(cond.length>24){pista=cond;cond='';}
+  var r={r:t[0],reactivo:t.length>1?'+ '+t.slice(1).join(' + '):'',condicion:cond,pregunta_tipo:'producto'};
+  var texto=(m[3]||'Escribe y nombra el producto.')+(pista?' Pista: '+pista.charAt(0).toLowerCase()+pista.slice(1)+'.':'');
+  try{return {eq:ecuacionLibro(r),texto:texto};}catch(e){return null;}
 }
 function htmlAbierta(a,num){
   if(typeof a==='string')return '<div class="ab"><b>'+num+'.</b> '+esc(a)+lineas(5)+'</div>';
@@ -440,6 +542,7 @@ function htmlAbierta(a,num){
       filas.map(function(f){return '<tr><td>'+f[0]+' '+f[1]+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
       '<div class="ab-est">Estructura:</div>'+cuad(4)+'</div>';
   }
+  if(a.t==='rx'){var lb=abiertaLibro(a.q);if(lb)return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(lb.texto)+lb.eq+lineas(5)+'</div>';}
   return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(a.q)+(a.f?figura({f:a.f},280,100):'')+lineas(5)+'</div>';
 }
 function bloquesAbiertas(as,ini){
@@ -467,6 +570,8 @@ function bloquesRubricas(temas,conAbiertas){
     var m={cadena:['rub-a','rub-c'],reacciones:['rub-d'],haluros:['rub-a','rub-b','rub-d'],isomeria:['rub-a','rub-b']}[t.id]||['rub-a','rub-b'];
     m.forEach(function(x){ids[x]=1;});
   });
+  // Con «Solo nomenclatura» no hay preguntas de reacción que calificar.
+  if(temas.length&&temas.every(function(t){return t._nom;}))delete ids['rub-d'];
   var out=[];
   Object.keys(ids).sort().forEach(function(id){
     var el=document.getElementById(id);if(!el)return;
@@ -604,11 +709,11 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     docs.push({clase:'taller',etiqueta:verTotal>1?'Taller '+verIdx+'/'+verTotal:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
   }
   if(F.tipo==='guia'||F.tipo==='evaluacion'){
-    var poolS=[];F.temas.forEach(function(t){poolS=poolS.concat(D.SABER[t.id]||[]);});
+    var poolS=[];F.temas.forEach(function(t){poolS=poolS.concat((D.SABER[t.id]||[]).filter(filtroPreg(t)));});
     var r=rng(semilla+'|saber');
     var qs=barajar(poolS,r).slice(0,F.nSaber);
-    if(F.nSaber&&qs.length<F.nSaber)avisos.push(poolS.length?'El banco tiene '+poolS.length+' preguntas tipo Saber para este tema; se usan todas.':'Este tema todavía no tiene preguntas tipo Saber; la evaluación lleva solo preguntas abiertas.');
-    var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat(D.ABIERTAS[t.id]||[]);});
+    if(F.nSaber&&qs.length<F.nSaber)avisos.push(poolS.length?'El banco tiene '+poolS.length+' preguntas tipo Saber para este tema; se usan todas.':'No hay preguntas tipo Saber para esta selección; la evaluación lleva solo preguntas abiertas.');
+    var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat((D.ABIERTAS[t.id]||[]).filter(filtroPreg(t)));});
     var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
     if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
@@ -623,7 +728,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     // evaluación para todas las versiones): con varias versiones solo se
     // agrega una vez, al final, para no repetir la misma hoja N veces.
     if(F.rubrica&&verIdx===verTotal){
-      var br=bloquesRubricas(F.temas,F.nAb>0);
+      var br=bloquesRubricas(F.temas,ab.some(function(a){return a&&a.t==='rx';}));
       if(br.length)docs.push({clase:'anexo',etiqueta:'Anexo: rúbricas',cab:cabCorta('Anexo: rúbricas',true),primera:'<h3 class="ses ses-anexo">Anexo: rúbricas de evaluación</h3><p class="intro">Niveles de desempeño de la escala nacional (Decreto 1290 de 2009). La equivalencia numérica la define el SIEE de la institución.</p>',bloques:br});
     }
   }
@@ -692,6 +797,7 @@ function iniciar(){
   $('btn-sugerida').addEventListener('click',alinSugerida);
   CAMPOS.forEach(function(id){$(id).addEventListener('change',guardar);});
   document.querySelectorAll('input[name=tipodoc]').forEach(function(c){c.addEventListener('change',syncTipoDoc);});
+  document.querySelectorAll('input[name=enfoque]').forEach(function(c){c.addEventListener('change',pintarTipos);});
   syncTipoDoc();
   $('btn-generar').addEventListener('click',function(){generar().then(function(){var v=$('vista-wrap');if(v&&v.scrollIntoView)v.scrollIntoView({behavior:'smooth',block:'start'});});});
   $('btn-imprimir').addEventListener('click',imprimir);

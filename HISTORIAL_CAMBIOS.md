@@ -7,6 +7,61 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (133) — Docente: grupo por grupo, «Solo nomenclatura» y reacciones en formato libro
+
+### Contexto
+El docente pidió tres cosas para el generador de `docente.html`:
+- poder elegir grupo por grupo, porque, por ejemplo, alcoholes y éteres
+  salían siempre juntos;
+- la opción de hacer documentos de solo nomenclatura o de nomenclatura y
+  reacciones;
+- que los ejercicios de reacción se vean en formato tipo libro, como en
+  `reacciones.html`.
+
+### Cambios
+- **Grupos:** en los temas que reúnen varios grupos (alquenos/alquinos,
+  alcoholes y fenoles/éteres, aldehídos/cetonas, ácidos/ésteres,
+  aminas/amidas/nitrilos) aparecen casillas para dejar solo los grupos que
+  se quieran. Ejercicios, preguntas tipo Saber y abiertas se filtran, y el
+  título del taller o la evaluación usa los grupos elegidos (p. ej.
+  «Evaluación: Alcoholes y fenoles»).
+- **Enfoque:** nueva opción «Nomenclatura y reacciones» / «Solo
+  nomenclatura». Con la segunda no salen ejercicios de reacción, ni
+  preguntas Saber o abiertas de reacciones, ni la rúbrica D.
+- **`docente-datos.js`:** cada pregunta Saber lleva su área (`a`:
+  nomenclatura, reacciones o propiedades) y, en los temas combinados, su
+  grupo (`g`); las abiertas, su grupo. Los temas combinados traen la lista
+  `grupos`.
+- **Reacciones tipo libro:** los ejercicios de reacción (talleres y guías) y
+  las preguntas abiertas de la forma «A + B → ?» se dibujan con el mismo
+  motor de `reacciones.html`:
+  - fórmulas condensadas en letra de libro, con los sustituyentes y el C=O
+    apilados y el anillo bencénico dibujado;
+  - condiciones sobre la flecha y un recuadro «?» donde va lo que se
+    pregunta;
+  - en las abiertas, las explicaciones largas pasan al texto como «Pista».
+  Para escribir estructuras hay cuadrícula, no una sola línea.
+- **`fx-libro.js` (nuevo):** el motor de fórmulas tipo libro salió de
+  `reacciones.html` a este archivo compartido. `reacciones.html` lo carga y
+  se comprobó que se ve idéntica (mismo resultado en las 611 fórmulas).
+- `LOGICA_DOCENTE.md`: explicación de grupos, enfoque y formato libro.
+- `sw.js`: caché `chromanom-v33` (incluye `fx-libro.js`).
+- Comprobado con Playwright:
+  - 9 temas × 2 enfoques × guía con 2 versiones, y evaluaciones con 8
+    versiones: sin desbordes ni errores;
+  - «Alcoholes y fenoles» sin éteres no trae éteres (salvo una pregunta
+    que compara ambos);
+  - con «Solo nomenclatura» no sale ninguna reacción.
+
+### Pasos manuales
+- Ninguno (se publica con el push a `main`).
+
+### Pendiente
+- Con «Solo nomenclatura» algunos temas tienen pocas preguntas Saber (6–9);
+  la página avisa y usa las que hay.
+
+---
+
 ## 2026-10-21 (132) — Documento de maquetación sin espacios ni hojas en blanco (para IoNom)
 
 ### Contexto

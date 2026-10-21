@@ -173,6 +173,10 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
 .campos input,.campo input,.campo select,#f-sed{min-height:42px;border:1.5px solid #d0e6f5;border-radius:8px;padding:8px 10px;font-size:.9rem;font-family:inherit;color:#0d2d42;background:#fff;width:100%;min-width:0}
 #f-sed{font-size:.82rem}
 #f-sed-texto{font-size:.8rem;color:#2a3f52;background:#f6fafe;border-left:3px solid #1a6ea8;padding:8px 10px;border-radius:6px;margin:6px 0}
+.grupos{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;margin:-2px 0 6px 34px;font-size:.82rem}
+.grupos>span{font-weight:700;color:#3d5166}
+.grupos label{display:inline-flex;gap:5px;align-items:center;cursor:pointer;min-height:32px}
+.grupos[hidden]{display:none}
 .sub-leg{font-size:.78rem;font-weight:800;color:#0d2d42;margin:10px 0 2px}
 .acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .acciones .cn-btn{flex:1 1 160px}
@@ -288,7 +292,6 @@ body.sin-eval .solo-eval{display:none}
 .hoja .fila2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .hoja .ej{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px 6px 30px;min-width:0}
 .hoja .ej .num{position:absolute;left:6px;top:5px;font-weight:800;font-size:12px}
-.hoja .ej.rx{padding:0;border:none}
 .hoja .resp{display:flex;gap:6px;align-items:flex-end;font-size:11.5px;margin-top:4px}
 .hoja .nom{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;padding:2px 0 4px}
 .hoja .dibujo:not(.cuad){height:105px;border:1px dashed #999;border-radius:6px}
@@ -297,26 +300,36 @@ body.sin-eval .solo-eval{display:none}
 .hoja .x-txt{flex:1;font-size:12px}
 .hoja .enun{font-size:12.5px}
 .hoja .espacio:not(.cuad){height:120px;border:1px dashed #999;border-radius:6px;margin-top:4px}
-/* tarjeta de reacción del Generador */
-.hoja .exercise{position:relative;border:1px solid #aaa;border-radius:8px;padding:6px 8px}
-.hoja .ex-header{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:12px}
-.hoja .ex-num{font-weight:800}
-.hoja .ex-badge{font-size:9.5px;font-weight:800;text-transform:uppercase;border:1px solid #1a6ea8;color:#0d4a73;border-radius:999px;padding:0 7px}
-.hoja .rxn-d-eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:6px 4px;margin:4px 0}
-.hoja .rxn-d-mol-box{border:1px solid #ccc;border-radius:6px;padding:4px 8px;display:flex;align-items:center;max-width:300px}
-.hoja .rxn-d-mol-box svg{max-width:280px;height:auto;max-height:110px}
-.hoja .rxn-d-mol-txt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px}
-.hoja .rxn-d-coef{font-family:'JetBrains Mono',monospace;font-weight:700;margin-right:4px}
-.hoja .rxn-d-blank-box{border:2px dashed #555;border-radius:6px;padding:6px 18px;font-weight:800}
-.hoja .rxn-d-plus,.hoja .rxn-d-reagent{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px}
-.hoja .rxn-d-subproducto{color:#555}
-.hoja .rxn-d-arrow-col{display:flex;flex-direction:column;align-items:stretch;gap:1px}
-.hoja .rxn-d-cond{font-size:10px;font-style:italic;text-align:center;white-space:nowrap;color:#333}
-.hoja .rxn-d-arrow-line{position:relative;min-width:40px;height:10px;border-bottom:2px solid #333}
-.hoja .rxn-d-arrow-line::after{content:'';position:absolute;right:-1px;bottom:-5px;border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #333}
-.hoja .rxn-d-fields{display:flex;flex-direction:column;gap:4px}
-.hoja .rxn-d-field{display:flex;gap:6px;align-items:flex-end;font-size:11.5px}
-.hoja .rxn-d-field .ans-line{flex:1;border-bottom:1px solid #333;height:14px}
+/* Reacciones en formato «tipo libro» (motor FX de fx-libro.js, igual que reacciones.html) */
+.hoja .rx-enun{font-size:12.5px;margin:0 0 2px}
+.hoja .fx-mol{font-family:'STIX Two Text','Times New Roman',serif;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:.45em;row-gap:2.2em;font-size:17px;line-height:1.2;color:#111;padding:.35em 0 .3em}
+.hoja .fx-mol.fx-hs{padding:1.35em 0 1.2em}
+.hoja .fx-t{display:inline-flex;align-items:center;white-space:nowrap}
+.hoja .fx-t.w{white-space:normal}
+.hoja .fx-pl{color:#444}
+.hoja .fx-rhs{display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.45em}
+.hoja .fx-mol sub,.hoja .fx-mol sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
+.hoja .fx-mol sub{top:.28em}.hoja .fx-mol sup{top:-.45em}
+.hoja .fx-st{position:relative;display:inline-block}
+.hoja .fx-st>svg:first-child{display:block}
+.hoja .fx-bu,.hoja .fx-bl{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.hoja .fx-bu{bottom:100%}.hoja .fx-bl{top:100%}
+.hoja .fx-lab{line-height:1.05;white-space:nowrap}
+.hoja .fx-bd{display:block;width:1.3px;height:.55em;background:currentColor}
+.hoja .fx-bd.dbl{width:5px;background:none;border-left:1.3px solid currentColor;border-right:1.3px solid currentColor}
+.hoja .fx-st.rg .fx-bd{height:.3em}
+.hoja .fx-ring{height:2.15em;width:2em;display:block}
+.hoja .fx-cprop{height:1.7em;width:1.9em;display:block}
+.hoja .fx-arr{display:inline-flex;flex-direction:column;align-items:stretch;min-width:3.4em;font-family:'STIX Two Text','Times New Roman',serif;font-size:.62em;font-style:italic;text-align:center}
+.hoja .fx-arr .ab,.hoja .fx-arr .be{min-height:1.2em;padding:0 .35em;white-space:nowrap;color:#222}
+.hoja .fx-arr i{position:relative;display:block;height:1.3px;background:#111;margin:.2em 0}
+.hoja .fx-arr i::after{content:"";position:absolute;right:-1px;top:-4px;border-left:9px solid #111;border-top:4.6px solid transparent;border-bottom:4.6px solid transparent}
+.hoja .fx-arr.eqm i::after{display:none}
+.hoja .rx-hueco{display:inline-flex;align-items:center;justify-content:center;min-width:3.2em;height:1.8em;border:1.6px dashed #444;border-radius:6px;font-family:'Outfit',sans-serif;font-weight:800;font-size:.8em;color:#444}
+.hoja .rx-hueco.sm{min-width:1.6em;height:1.3em;font-size:1em;font-style:normal}
+.hoja .rx-campo{display:flex;gap:6px;align-items:flex-end;font-size:11.5px;margin-top:3px}
+.hoja .rx-campo i{flex:1;border-bottom:1px solid #333;height:14px}
+.hoja .rx-campo.rx-dib{margin-top:4px}
 /* evaluación */
 .hoja .instr{font-size:11.5px;border:1px solid #999;border-radius:6px;padding:5px 8px;background:#f7f9fb}
 .hoja .sq{border-bottom:1px solid #ccc;padding-bottom:5px}
@@ -403,6 +416,12 @@ body.sin-eval .solo-eval{display:none}
           <legend>2 · Tema(s)</legend>
           <p class="ayuda">Los ejercicios salen de los bancos del Juego y del Generador; los temas nuevos del Juego aparecen solos.</p>
           <div class="lista-opts" id="f-temas"></div>
+          <p class="ayuda">En los temas que reúnen varios grupos funcionales (por ejemplo, alcoholes y éteres) puede dejar marcados solo los grupos que quiera evaluar.</p>
+          <p class="sub-leg">Enfoque</p>
+          <div class="radios">
+            <label class="opt"><input type="radio" name="enfoque" value="todo" checked> <span><b>Nomenclatura y reacciones</b><small>Todo el banco del tema</small></span></label>
+            <label class="opt"><input type="radio" name="enfoque" value="nom"> <span><b>Solo nomenclatura</b><small>Nombrar, dibujar, MDEC y estructura; sin reacciones</small></span></label>
+          </div>
         </fieldset>
         <fieldset>
           <legend>3 · Grado</legend>
@@ -807,6 +826,7 @@ window.addEventListener('afterprint',function(){
   window.addEventListener('hashchange',porHash);porHash();
 })();
 </script>
+<script src="fx-libro.js"></script>
 <script src="docente-datos.js"></script>
 <script src="docente-app.js"></script>
 <script src="pwa-install.js"></script>
