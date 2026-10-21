@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-10-21 (131) — Documento de maquetación sin espacios ni hojas en blanco (para IoNom)
+## 2026-10-21 (132) — Documento de maquetación sin espacios ni hojas en blanco (para IoNom)
 
 ### Contexto
 El docente pidió, en un .md descargable, los consejos de maquetación y
@@ -29,6 +29,49 @@ grandes y hojas en blanco.
 
 ### Pendiente
 - Nada.
+
+---
+
+## 2026-10-21 (131) — Juego: vuelve el color y el sombreado MDEC en las opciones de respuesta
+
+### Contexto
+Una estudiante notó que, tras el rediseño, el juego perdió la esencia de
+los colores: las opciones de las preguntas ya no mostraban las partes del
+nombre coloreadas. El docente pidió recuperar ese sombreado en preguntas y
+respuestas para mantener la identidad del MDEC.
+
+Causa: en la auditoría del 16-10 se quitó el color de las opciones,
+porque el programa solo coloreaba los nombres que sabía descomponer. Una
+opción sin color (por ejemplo, «isobutano») delataba que era incorrecta.
+
+### Cambios — `juego.html`
+- Las opciones de las preguntas de nombrar vuelven a mostrar cada parte
+  del nombre con su color MDEC, y ahora también con un sombreado suave de
+  fondo, como el desglose de la retroalimentación.
+- Para no dar pistas, se colorean TODAS las opciones con el mismo
+  criterio, incluidas las mal escritas («iso|but|an|o»,
+  «2-metil-3-etil|pent|an|o»), o ninguna. Se usa una partición tolerante,
+  y si alguna opción no se puede partir, la pregunta queda sin color.
+  Resultado: 258 de 265 preguntas de nombrar quedan coloreadas.
+- La partición respeta el MDEC:
+  - el «an» va aparte como ③ (antes «butan» salía todo verde);
+  - en los ésteres, «de metilo» es ①.
+- También se colorean así las respuestas correctas que se muestran en la
+  retroalimentación.
+
+### Otros
+- `sw.js`: caché `chromanom-v32`.
+
+### Verificación
+- Recorrido de las 493 preguntas de opción múltiple: ninguna queda con
+  unas opciones coloreadas y otras no, y en todas se reconoce la
+  respuesta correcta.
+- Revisión general: 9 páginas × 5 anchos y banco (1248) sin problemas.
+
+### Pendiente
+- Las preguntas de identificar y de arrastrar siguen sin colorear el
+  nombre. Si se coloreara, la respuesta saldría a la vista (siempre fue
+  así).
 
 ---
 
