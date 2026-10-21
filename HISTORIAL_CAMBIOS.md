@@ -7,6 +7,27 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (129) — Documento con la lógica de docente.html (para IoNom)
+
+### Contexto
+El docente pidió un archivo .md que explique la lógica del generador de
+`docente.html`, para construir algo igual en IoNom.
+
+### Cambios
+- `LOGICA_DOCENTE.md` (nuevo): explica la carga de bancos desde el juego y
+  el generador, el formato de `docente-datos.js` (temas, preguntas Saber y
+  abiertas, con las reglas de calidad), las versiones con semilla, la
+  selección de ejercicios, la paginación, la cuadrícula que llena las hojas,
+  la impresión y una tabla para adaptarlo a química inorgánica.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-21 (128) — Docente: preguntas tipo Saber sin el rótulo de competencia
 
 ### Contexto
