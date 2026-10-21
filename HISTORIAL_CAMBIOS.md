@@ -7,6 +7,31 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-21 (131) — Documento de maquetación sin espacios ni hojas en blanco (para IoNom)
+
+### Contexto
+El docente pidió, en un .md descargable, los consejos de maquetación y
+presentación de los documentos del generador, para que IoNom evite huecos
+grandes y hojas en blanco.
+
+### Cambios
+- `MAQUETACION_DOCENTE.md` (nuevo):
+  - hojas de tamaño carta fijo y bloques indivisibles;
+  - algoritmo de paginación y doble columna para las preguntas Saber;
+  - cuadrícula elástica que llena el espacio libre;
+  - CSS de impresión que evita hojas en blanco;
+  - cómo medir con las fuentes cargadas y sin el zoom de la vista previa;
+  - tamaño de las figuras y organización de los documentos;
+  - prueba automática con Playwright.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-21 (130) — Análisis por partes MDEC con los colores del método
 
 ### Contexto
