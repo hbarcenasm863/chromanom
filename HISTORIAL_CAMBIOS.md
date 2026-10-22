@@ -7,6 +7,57 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-22 (135) — Docente: letra más grande y moléculas en semidesarrollada tipo libro
+
+### Contexto
+Al imprimir talleres y evaluaciones, el docente vio que la letra quedaba muy
+pequeña y que algunas fórmulas no se apreciaban bien. Pidió además que las
+moléculas salgan en semidesarrollada completa, con los enlaces de las ramas
+hacia arriba y hacia abajo, sin paréntesis.
+
+### Cambios
+- **Letra:** todo el contenido de las hojas es un 22 % más grande. Por
+  ejemplo, el texto de las preguntas pasa de unos 9,4 pt a unos 11,3 pt;
+  las ecuaciones y las moléculas quedan en unos 14–15 pt.
+- **Moléculas tipo libro** (`docente-app.js`): ya no son dibujos SVG con
+  enlaces largos que se achicaban hasta quedar ilegibles. Se escriben como
+  en un libro:
+  - texto del tamaño de la hoja y enlaces cortos (—, =, ≡);
+  - cada rama colgando de su carbono con enlaces verticales hacia arriba o
+    hacia abajo;
+  - el H delante en los grupos del comienzo (HO—, H₂N—).
+  Funciona para las cadenas del Generador y del Juego, para los esqueletos
+  de «Encuentra la cadena» (se respeta la línea dibujada, para no regalar la
+  cadena principal) y para las fórmulas de las preguntas.
+- **Anillos:** se dibujan con letra del tamaño del texto, sustituyentes en
+  su posición (orto, meta, para) y, a la izquierda, escritos al revés
+  (H₃C—O, O₂N). Se describieron a mano unos 85 anillos y casos especiales
+  (benceno y derivados, cicloalcanos, amidas, ésteres, diácidos…).
+- **Fórmulas dentro del texto:** las que traían ramas entre paréntesis
+  (CH₃−CH(OH)−CH₃, (CH₃−CH(CH₃)−CH₃)…) en contextos, preguntas, opciones,
+  lecturas y preguntas abiertas se reescriben solas, con la rama arriba.
+- `docente-datos.js`: el ácido butanodioico de una pregunta pasó a
+  estructura dibujable.
+- `LOGICA_DOCENTE.md`: explicación del nuevo formato.
+- `sw.js`: caché `chromanom-v34`.
+
+### Comprobación (Playwright)
+- Todas las moléculas de los 11 temas con estructuras salen en el formato
+  nuevo; no queda ningún dibujo SVG viejo ni fórmula en texto plano con
+  paréntesis.
+- Sin desbordes en guías (9 temas × 2 enfoques × 2 versiones) ni en
+  evaluaciones (8 versiones).
+- PDF real de una guía: 14 hojas → 14 páginas.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Con la letra más grande, los documentos tienen alrededor de 10–20 % más
+  páginas.
+
+---
+
 ## 2026-10-21 (134) — Código completo de maquetación para IoNom
 
 ### Contexto

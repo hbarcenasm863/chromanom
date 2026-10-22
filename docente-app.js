@@ -35,6 +35,30 @@ function hash(str){var h=2166136261;for(var i=0;i<str.length;i++){h^=str.charCod
 function rng(seedStr){var a=hash(seedStr)||1;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function barajar(arr,r){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
+/* ── Fórmulas dentro del texto ──────────────────────────────────────────
+   Una fórmula condensada con ramas entre paréntesis (CH₃−CH(OH)−CH₃) se
+   dibuja en semidesarrollada, con la rama colgando de su carbono con un
+   enlace hacia arriba (motor FX de fx-libro.js), nunca con paréntesis. */
+var RE_FORM=/[A-Za-z0-9₀-₉−=≡()]+/g;
+function formulaFx(tok){
+  // Quitar paréntesis que encierran toda la fórmula, como en «(CH₃−CH(CH₃)−CH₃)».
+  var pre='',pos='';
+  function cuenta(t,c){return t.split(c).length-1;}
+  function envuelve(t){if(t.charAt(0)!=='('||t.slice(-1)!==')')return false;var d=0;for(var i=0;i<t.length;i++){if(t[i]==='(')d++;else if(t[i]===')'){d--;if(d===0&&i<t.length-1)return false;}}return true;}
+  while(envuelve(tok)){pre+='(';pos=')'+pos;tok=tok.slice(1,-1);}
+  while(tok.charAt(0)==='('&&cuenta(tok,'(')>cuenta(tok,')')){pre+='(';tok=tok.slice(1);}
+  while(tok.slice(-1)===')'&&cuenta(tok,')')>cuenta(tok,'(')){pos=')'+pos;tok=tok.slice(0,-1);}
+  if(!/[−=≡]/.test(tok)||!/C(?:H[₂₃]?)?\(/.test(tok)||typeof FX==='undefined')return null;
+  var n=fxNorm(tok.replace(/C\(([^()]+)\)\(([^()]+)\)/g,'⟦$1|C|$2⟧'));
+  if(/\(/.test(n))return null;
+  return esc(pre)+'<span class="fx-in">'+FX.mol(n)+'</span>'+esc(pos);
+}
+function escQ(s){
+  s=String(s==null?'':s);var out='',last=0,m;RE_FORM.lastIndex=0;
+  while((m=RE_FORM.exec(s))){var h=formulaFx(m[0]);if(h===null)continue;out+=esc(s.slice(last,m.index))+h;last=m.index+m[0].length;}
+  return out+esc(s.slice(last));
+}
+
 /* ── Carga de bancos ─────────────────────────────────────────────────── */
 var B={G:null,J:null,genMols:[],genRxn:[],jue:[],jueLabels:{},estado:{gen:'cargando',jue:'cargando'}};
 function marco(src){
@@ -53,7 +77,7 @@ var bancosListos=Promise.all([
   marco('generador.html').then(function(w){
     var mols=leer(w,'MOLS'),rxn=leer(w,'BANCO_RXN');
     if(!Array.isArray(mols))throw new Error('sin MOLS');
-    B.G={w:w,getSVG:leer(w,'getSVG'),mkDevSVG:leer(w,'mkDevSVG'),parse:leer(w,'_parseChainStr'),alias:leer(w,'_RXN_ALIASES')||{},tipoD:leer(w,'buildTipoDCard')};
+    B.G={w:w,getSVG:leer(w,'getSVG'),mkDevSVG:leer(w,'mkDevSVG'),parse:leer(w,'_parseChainStr'),alias:leer(w,'_RXN_ALIASES')||{},tipoD:leer(w,'buildTipoDCard'),moldes:leer(w,'MOLDES')||{}};
     B.genMols=mols;B.genRxn=Array.isArray(rxn)?rxn:[];B.estado.gen='ok';
   }).catch(function(){B.estado.gen='error';}),
   marco('juego.html').then(function(w){
@@ -65,7 +89,7 @@ var bancosListos=Promise.all([
       if(!Array.isArray(arr)||!arr.length||!arr.some(function(q){return q&&q.type&&q.topic;}))continue;
       arr.forEach(function(q){if(q&&q.type&&q.topic&&todos.indexOf(q)<0)todos.push(q);});
     }
-    B.J={w:w,M:leer(w,'M')||{},MOLDES:leer(w,'MOLDES')||{},mkDevSVG:leer(w,'mkDevSVG')};
+    B.J={w:w,M:leer(w,'M')||{},MOLDES:leer(w,'MOLDES')||{},SKT:leer(w,'SKT')||{},mkDevSVG:leer(w,'mkDevSVG')};
     B.jue=todos;B.jueLabels=leer(w,'NIVEL_LABELS')||{};B.estado.jue=todos.length?'ok':'error';
   }).catch(function(){B.estado.jue='error';})
 ]).then(function(){prepararTemas();pintarEstado();});
@@ -83,8 +107,196 @@ function tamSvg(svg,wMax,hMax,sMax,sMin){
     return '<svg'+attrs+' width="'+(vw*s).toFixed(1)+'" height="'+(vh*s).toFixed(1)+'" style="display:block;margin:0 auto;overflow:visible">';
   });
 }
+/* ── Moléculas en semidesarrollada «tipo libro» ─────────────────────────
+   Las cadenas (formato MOLDES: {s,h,bn,bu,bd,buBn,bdBn}) se escriben con
+   texto, como en un libro: átomos con su letra real, enlaces cortos (—, =, ≡)
+   y cada rama colgando de su carbono con enlaces verticales hacia arriba o
+   hacia abajo, nunca entre paréntesis. Usa las clases del motor FX
+   (fx-libro.js), así se ve igual que las reacciones. Los anillos (benceno,
+   ciclos) siguen como dibujo SVG. */
+function etiquetaAtomo(a){var y=a.s||'C',h=a.h||0;return y+(h<=0?'':h===1?'H':h===2?'H₂':h===3?'H₃':'H₄');}
+function htmlEtq(t){return esc(t).replace(/([₀-₉]+)/g,function(m){return '<sub>'+m.replace(/[₀-₉]/g,function(c){return '₀₁₂₃₄₅₆₇₈₉'.indexOf(c);})+'</sub>';});}
+function enlaceV(bn){return '<span class="fx-bd'+(bn===2?' dbl':bn===3?' tpl':'')+'"></span>';}
+function cadenaLibro(ch){
+  if(!Array.isArray(ch)||!ch.length)return null;
+  var arr=0,abj=0,ancho=0,html='';
+  ch.forEach(function(a,i){
+    if(a.s&&!/^[A-Z][a-z]?$/.test(a.s))throw 0;           // algo que no es un átomo: mejor el SVG
+    var lab=etiquetaAtomo(a);
+    // Un heteroátomo con H al comienzo se escribe con el H adelante: HO—, H₂N—.
+    if(i===0&&a.s&&a.h&&ch.length>1)lab=lab.replace(/^([A-Z][a-z]?)(H[₂₃]?)$/,'$2$1');
+    var base='<span class="fx-lab">'+htmlEtq(lab)+'</span>';
+    ancho+=lab.replace(/[₀-₉]/g,'').length*0.62+0.3;
+    var st='';
+    if(a.bu&&a.bu.length){
+      var u=[];a.bu.slice().reverse().forEach(function(b,k,v){u.push('<span class="fx-lab">'+(b.izq?'<span class="fx-izq">'+htmlEtq(b.izq)+'</span>':'')+htmlEtq(etiquetaAtomo(b))+'</span>');u.push(enlaceV(k<v.length-1?(v[k+1].bn||1):(a.buBn||1)));});
+      st+='<span class="fx-bu">'+u.join('')+'</span>';arr=Math.max(arr,a.bu.length);
+    }
+    if(a.bd&&a.bd.length){
+      var d=[];a.bd.forEach(function(b,k){d.push(enlaceV(k===0?(a.bdBn||1):(a.bd[k-1].bn||1)));d.push('<span class="fx-lab">'+htmlEtq(etiquetaAtomo(b))+'</span>');});
+      st+='<span class="fx-bl">'+d.join('')+'</span>';abj=Math.max(abj,a.bd.length);
+    }
+    html+=st?'<span class="fx-st">'+base+st+'</span>':base;
+    if(i<ch.length-1){var bn=a.bn||1;html+='<span class="fx-enl">'+(bn===2?'=':bn===3?'≡':'—')+'</span>';ancho+=1.05;}
+  });
+  return {html:html,arr:arr,abj:abj,em:ancho};
+}
+// Cadena del banco a partir de la especificación de la figura (o null).
+function cadenaDe(spec){
+  if(spec.cadena)return spec.cadena;
+  if(spec.gen&&B.G){var mg=B.genMols.filter(function(m){return m.key===spec.gen||m.name===spec.gen;})[0];if(mg&&FIG_LIBRO[mg.key])return FIG_LIBRO[mg.key];}
+  if(Array.isArray(spec.f))return spec.f;
+  if(spec.gen&&B.G&&B.G.moldes){
+    var mol=B.genMols.filter(function(m){return m.key===spec.gen||m.name===spec.gen;})[0];
+    if(mol&&Array.isArray(B.G.moldes[mol.key]))return B.G.moldes[mol.key];
+    return null;
+  }
+  if(typeof spec.f==='string'){var mb=spec.f.match(/^C₆H₅−(.+)$/);if(mb&&!/C₆/.test(mb[1]))return {n:6,a:1,s:{0:mb[1].replace(/−/g,'—')}};if(spec.f==='C₆H₆')return {n:6,a:1};}
+  if(typeof spec.f==='string'&&B.G&&B.G.parse&&!(B.G.alias&&B.G.alias[spec.f])){try{var c=B.G.parse(spec.f);if(c&&c.length)return c;}catch(e){}}
+  return null;
+}
+/* Anillos y moléculas que el banco dibuja a mano (funciones M del
+   Generador y del Juego): aquí se escriben en formato libro. Anillo: n
+   lados, a = aromático, d = enlaces dobles del anillo (n.º de lado), het =
+   heteroátomo en un vértice, s = sustituyentes por vértice (0 = arriba,
+   en sentido horario). «=O» es un oxígeno con doble enlace. Las demás son
+   cadenas en formato MOLDES. */
+var O2=[{s:'O',h:0}],OH1=[{s:'O',h:1}],NH2=[{s:'N',h:2}];
+function cCOOH(){return {h:0,bu:O2,buBn:2,bd:OH1};}
+var FIG_LIBRO={
+  ciclohexano:{n:6},ciclobutano:{n:4},ciclopentano:{n:5},ciclopenteno:{n:5,d:[1]},
+  metilciclopentano:{n:5,s:{0:'CH₃'}},etilciclohexano:{n:6,s:{0:'CH₂—CH₃'}},metilciclohexano:{n:6,s:{0:'CH₃'}},
+  propilciclopentano:{n:5,s:{0:'CH₂—CH₂—CH₃'}},ciclohexeno:{n:6,d:[1]},
+  ciclohexanol:{n:6,s:{0:'OH'}},ciclopentanol:{n:5,s:{0:'OH'}},ciclobutanol:{n:4,s:{0:'OH'}},ciclohex2en1ol:{n:6,d:[1],s:{0:'OH'}},
+  ciclopentanona:{n:5,s:{0:'=O'}},ciclohexanona:{n:6,s:{0:'=O'}},dosMCiclopent1ona:{n:5,s:{0:'=O',1:'CH₃'}},
+  tresMCiclohex1ona:{n:6,s:{0:'=O',2:'CH₃'}},cuatroMCiclohex1ona:{n:6,s:{0:'=O',3:'CH₃'}},
+  acidoCiclohexanocarboxilico:{n:6,s:{0:'COOH'}},ciclohexanocarboxaldehido:{n:6,s:{0:'CHO'}},ciclohexanocarboxamida:{n:6,s:{0:'CO—NH₂'}},
+  ciclohexanocarbonitrilo:{n:6,s:{0:'C≡N'}},ciclohexanamina:{n:6,s:{0:'NH₂'}},etanoatoCiclohexilo:{n:6,s:{0:'O—CO—CH₃'}},
+  metoxiciclopentano:{n:5,s:{0:'O—CH₃'}},etoxiciclohexano:{n:6,s:{0:'O—CH₂—CH₃'}},cicloHexilMetilCetona:{n:6,s:{0:'CO—CH₃'}},
+  rt_bromociclohexano:{n:6,s:{0:'Br'}},
+  tetrahidrofurano:{n:5,het:{0:'O'}},tetrahidropirano:{n:6,het:{0:'O'}},oxirano:{n:3,het:{0:'O'}},
+  metilbenceno:{n:6,a:1,s:{0:'CH₃'}},etilbenceno:{n:6,a:1,s:{0:'CH₂—CH₃'}},propilbenceno:{n:6,a:1,s:{0:'CH₂—CH₂—CH₃'}},
+  isopropilbenceno:{n:6,a:1,s:{0:'H₃C—CH—CH₃'}},
+  ortoXileno:{n:6,a:1,s:{0:'CH₃',1:'CH₃'}},metaXileno:{n:6,a:1,s:{0:'CH₃',2:'CH₃'}},paraXileno:{n:6,a:1,s:{0:'CH₃',3:'CH₃'}},
+  trimetilbenceno123:{n:6,a:1,s:{0:'CH₃',1:'CH₃',2:'CH₃'}},trimetilbenceno124:{n:6,a:1,s:{0:'CH₃',1:'CH₃',3:'CH₃'}},
+  trimetilbenceno135:{n:6,a:1,s:{0:'CH₃',2:'CH₃',4:'CH₃'}},
+  acidobenzoico:{n:6,a:1,s:{0:'COOH'}},nitrobenceno:{n:6,a:1,s:{0:'NO₂'}},benzaldehido:{n:6,a:1,s:{0:'CHO'}},
+  anilina:{n:6,a:1,s:{0:'NH₂'}},anisol:{n:6,a:1,s:{0:'O—CH₃'}},clorobenceno:{n:6,a:1,s:{0:'Cl'}},bromobenceno:{n:6,a:1,s:{0:'Br'}},
+  ortoNitrotolueno:{n:6,a:1,s:{0:'CH₃',1:'NO₂'}},paraCresol:{n:6,a:1,s:{0:'OH',3:'CH₃'}},resorcinol:{n:6,a:1,s:{0:'OH',2:'OH'}},
+  paraCloroanilina:{n:6,a:1,s:{0:'NH₂',3:'Cl'}},triclorobenceno124:{n:6,a:1,s:{0:'Cl',1:'Cl',3:'Cl'}},
+  unoCloro4MetilBenceno:{n:6,a:1,s:{0:'Cl',3:'CH₃'}},cuatroCloroBenzonitrilo:{n:6,a:1,s:{0:'C≡N',3:'Cl'}},
+  acidoSalicilico:{n:6,a:1,s:{0:'COOH',1:'OH'}},aspirina:{n:6,a:1,s:{0:'COOH',1:'O—CO—CH₃'}},
+  paracetamol:{n:6,a:1,s:{0:'OH',3:'NH—CO—CH₃'}},TNT:{n:6,a:1,s:{0:'CH₃',1:'NO₂',3:'NO₂',5:'NO₂'}},
+  acidoPicrico:{n:6,a:1,s:{0:'OH',1:'NO₂',3:'NO₂',5:'NO₂'}},vainillina:{n:6,a:1,s:{0:'CHO',3:'OH',4:'O—CH₃'}},
+  benzamida:{n:6,a:1,s:{0:'CO—NH₂'}},benzoatoMetilo:{n:6,a:1,s:{0:'COO—CH₃'}},benzoatoEtilo:{n:6,a:1,s:{0:'COO—CH₂—CH₃'}},
+  etoxibenceno:{n:6,a:1,s:{0:'O—CH₂—CH₃'}},propoxibenceno:{n:6,a:1,s:{0:'O—CH₂—CH₂—CH₃'}},benzonitrilo:{n:6,a:1,s:{0:'C≡N'}},
+  nMetilBencenamina:{n:6,a:1,s:{0:'NH—CH₃'}},fenilMetilCetona:{n:6,a:1,s:{0:'CO—CH₃'}},
+  acidoHexanodioico:[cCOOH(),{h:2},{h:2},{h:2},{h:2},cCOOH()],acidoEtanodioico:[cCOOH(),cCOOH()],
+  hexanodial:[{h:1,bu:O2,buBn:2},{h:2},{h:2},{h:2},{h:2},{h:1,bu:O2,buBn:2}],
+  buta13diino:[{h:1,bn:3},{h:0},{h:0,bn:3},{h:1}],penta14diino:[{h:1,bn:3},{h:0},{h:2},{h:0,bn:3},{h:1}],
+  nMetilAcetamida:[{h:3},{h:0,bu:O2,buBn:2},{s:'N',h:1},{h:3}],
+  nEtilnMetilAcetamida:[{h:3},{h:0,bu:O2,buBn:2},{s:'N',h:0,bu:[{h:3}],bd:[{h:2},{h:3}]}],
+  nEtilPropanamida:[{h:3},{h:2},{h:0,bu:O2,buBn:2},{s:'N',h:1},{h:2},{h:3}],
+  hexanodiamida:[{h:0,bu:O2,buBn:2,bd:NH2},{h:2},{h:2},{h:2},{h:2},{h:0,bu:O2,buBn:2,bd:NH2}],
+  nnDimetilFormamida:[{h:1,bu:O2,buBn:2},{s:'N',h:0,bu:[{h:3}],bd:[{h:3}]}],
+  nnDietilAcetamida:[{h:3},{h:0,bu:O2,buBn:2},{s:'N',h:0,bu:[{h:2},{h:3}],bd:[{h:2},{h:3}]}],
+  trietilamina:[{h:3},{h:2},{s:'N',h:0,bu:[{h:2},{h:3}]},{h:2},{h:3}],
+  pentano24diona:[{h:3},{h:0,bu:O2,buBn:2},{h:2},{h:0,bu:O2,buBn:2},{h:3}],
+  etenilbenceno:{n:6,a:1,s:{0:'CH=CH₂'}},estireno:{n:6,a:1,s:{0:'CH=CH₂'}},
+  metanoatoMetilo:[{h:1,bu:O2,buBn:2},{s:'O',h:0},{h:3}],
+  cianoetanoatoEtilo:[{s:'N',h:0,bn:3},{h:0},{h:2},{h:0,bu:O2,buBn:2},{s:'O',h:0},{h:2},{h:3}],
+  rt_triclorometano:[{h:1,bu:[{s:'Cl',h:0}],bd:[{s:'Cl',h:0}]},{s:'Cl',h:0}],
+  rt_2aminoetanol:[{s:'O',h:1},{h:2},{h:2},{s:'N',h:2}],
+  rt_1hidroxipropan2ona:[{s:'O',h:1},{h:2},{h:0,bu:O2,buBn:2},{h:3}],
+  rt_3etilhexan2ona:[{h:3},{h:0,bu:O2,buBn:2},{h:1,bd:[{h:2},{h:3}]},{h:2},{h:2},{h:3}],
+  rt_secbutilmetiloctano:[{h:3},{h:1,bd:[{h:3}]},{h:2},{h:1,bu:[{h:1,izq:'H₃C—'},{h:2},{h:3}]},{h:2},{h:2},{h:2},{h:3}],
+  propanoatoTercButilo:[{h:3},{h:2},{h:0,bu:O2,buBn:2},{s:'O',h:0},{h:0,bu:[{h:3}],bd:[{h:3}]},{h:3}]
+};
+// Texto con subíndices dentro de un SVG.
+function svgTexto(t,x,y,anc,px){
+  var out='',sub=false;
+  String(t).split(/([₀-₉]+)/).forEach(function(p){if(!p)return;
+    if(/^[₀-₉]+$/.test(p)){out+='<tspan font-size="'+(px*0.7).toFixed(1)+'" dy="'+(px*0.28).toFixed(1)+'">'+p.replace(/[₀-₉]/g,function(c){return '₀₁₂₃₄₅₆₇₈₉'.indexOf(c);})+'</tspan>';sub=true;}
+    else{out+='<tspan'+(sub?' dy="'+(-px*0.28).toFixed(1)+'"':'')+'>'+esc(p)+'</tspan>';sub=false;}
+  });
+  return '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="'+anc+'" font-size="'+px+'">'+out+'</text>';
+}
+function anchoTexto(t,px){t=String(t);return t.replace(/[₀-₉—≡=]/g,'').length*px*0.72+t.replace(/[^₀-₉]/g,'').length*px*0.45+t.replace(/[^—≡=]/g,'').length*px*1.05;}
+// A la izquierda del anillo el grupo se escribe al revés, con el átomo
+// enlazado junto al anillo: O—CH₃ → H₃C—O, OH → HO, NO₂ → O₂N.
+var INV={'CH₃':'H₃C','CH₂':'H₂C','OH':'HO','NO₂':'O₂N','NH₂':'H₂N','COOH':'HOOC','CHO':'OHC','NH':'HN','C≡N':'N≡C','COO':'OOC','CO':'OC'};
+function alReves(t){return t.split('—').reverse().map(function(x){return INV[x]||x;}).join('—');}
+// Anillo en formato libro: polígono con letra del tamaño del texto.
+function anilloSVG(A,px){
+  var n=A.n,R=px*(n===3?1.1:n===4?1.25:n===5?1.45:1.6),L=px*0.9,el=[],box=[1e9,1e9,-1e9,-1e9];
+  function caja(x1,y1,x2,y2){box[0]=Math.min(box[0],x1);box[1]=Math.min(box[1],y1);box[2]=Math.max(box[2],x2);box[3]=Math.max(box[3],y2);}
+  function ln(x1,y1,x2,y2){el.push('<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'"/>');caja(Math.min(x1,x2),Math.min(y1,y2),Math.max(x1,x2),Math.max(y1,y2));}
+  var off=n===4?-45:-90,V=[];
+  for(var k=0;k<n;k++){var a=(off+k*360/n)*Math.PI/180;V.push([R*Math.cos(a),R*Math.sin(a),a]);}
+  var het=A.het||{};
+  for(k=0;k<n;k++){
+    var p=V[k],q=V[(k+1)%n],x1=p[0],y1=p[1],x2=q[0],y2=q[1],dx=x2-x1,dy=y2-y1,l=Math.sqrt(dx*dx+dy*dy),c=px*0.5;
+    if(het[k]){x1+=dx/l*c;y1+=dy/l*c;}
+    if(het[(k+1)%n]){x2-=dx/l*c;y2-=dy/l*c;}
+    ln(x1,y1,x2,y2);
+    if((A.d||[]).indexOf(k)>=0){var mx=(p[0]+q[0])/2,my=(p[1]+q[1])/2,f=0.78;ln(p[0]*f+(q[0]-p[0])*0.15*f,p[1]*f+(q[1]-p[1])*0.15*f,q[0]*f-(q[0]-p[0])*0.15*f,q[1]*f-(q[1]-p[1])*0.15*f);}
+  }
+  if(A.a){el.push('<circle cx="0" cy="0" r="'+(R*0.55).toFixed(1)+'" fill="none"/>');}
+  Object.keys(het).forEach(function(k){var p=V[k];el.push(svgTexto(het[k],p[0],p[1]+px*0.35,'middle',px));caja(p[0]-px*0.4,p[1]-px*0.6,p[0]+px*0.4,p[1]+px*0.5);});
+  Object.keys(A.s||{}).forEach(function(k){
+    var t=A.s[k],p=V[k],ux=Math.cos(p[2]),uy=Math.sin(p[2]),dbl=t.charAt(0)==='=';if(dbl)t=t.slice(1);
+    var x1=p[0],y1=p[1],x2=p[0]+ux*L,y2=p[1]+uy*L;
+    if(dbl){var nx=-uy*2.2,ny=ux*2.2;ln(x1+nx,y1+ny,x2+nx,y2+ny);ln(x1-nx,y1-ny,x2-nx,y2-ny);}else ln(x1,y1,x2,y2);
+    var w=anchoTexto(t,px),anc,tx,ty;
+    if(Math.abs(ux)<0.2){anc='middle';tx=x2;ty=uy<0?y2-px*0.3:y2+px*0.95;caja(tx-w/2,ty-px*0.85,tx+w/2,ty+px*0.35);}
+    else{anc=ux>0?'start':'end';if(ux<0){t=alReves(t);w=anchoTexto(t,px);}tx=x2+(ux>0?1:-1)*px*0.2;ty=y2+px*0.35+(uy<-0.2?-px*0.15:uy>0.2?px*0.25:0);caja(ux>0?tx:tx-w,ty-px*0.85,ux>0?tx+w:tx,ty+px*0.35);}
+    el.push(svgTexto(t,tx,ty,anc,px));
+  });
+  var m=3,X=box[0]-m,Y=box[1]-m,W=box[2]-box[0]+2*m,H=box[3]-box[1]+2*m;
+  return {svg:'<svg class="anillo" xmlns="http://www.w3.org/2000/svg" viewBox="'+X.toFixed(1)+' '+Y.toFixed(1)+' '+W.toFixed(1)+' '+H.toFixed(1)+'" width="'+W.toFixed(0)+'" height="'+H.toFixed(0)+'"><g fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round">'+el.filter(function(e){return e.indexOf('<text')<0;}).join('')+'</g><g fill="#111" font-family="\'STIX Two Text\',\'Times New Roman\',serif">'+el.filter(function(e){return e.indexOf('<text')===0;}).join('')+'</g></svg>',w:W};
+}
+// Esqueleto del Juego (SKT: [padre, ángulo, orden de enlace, átomo]) →
+// cadena MOLDES. La línea dibujada (átomos 0,1,2… seguidos) queda horizontal
+// y lo demás cuelga como ramas; así no se regala la cadena principal en los
+// ejercicios de «Encuentra la cadena». Si hay anillos o ramas ramificadas,
+// devuelve null (queda el dibujo original).
+function grafoACadena(def){
+  if(!def||!def.a||def.r)return null;
+  var a=def.a,N=a.length,hijos=[];for(var i=0;i<N;i++)hijos.push([]);
+  for(i=1;i<N;i++)hijos[a[i][0]].push(i);
+  var lin=[0];for(i=1;i<N&&a[i][0]===i-1&&lin.length===i;i++)lin.push(i);
+  var enLin={};lin.forEach(function(x){enLin[x]=1;});
+  var VAL={C:4,O:2,N:3,S:2,F:1,Cl:1,Br:1,I:1};
+  function at(i){var sim=a[i][3]||'C',b=i>0?a[i][2]:0;hijos[i].forEach(function(j){b+=a[j][2];});return {s:sim==='C'?undefined:sim,h:Math.max(0,(VAL[sim]||4)-b)};}
+  var ch=lin.map(function(i,k){var o=at(i);if(k<lin.length-1)o.bn=a[lin[k+1]][2];return o;});
+  for(var k=0;k<lin.length;k++){
+    var ramas=hijos[lin[k]].filter(function(j){return !enLin[j];});
+    for(var r=0;r<ramas.length;r++){
+      var j=ramas[r],ang=((a[j][1]%360)+360)%360,arriba=ang>180,lista=[],bn=a[j][2],cur=j;
+      while(true){lista.push(at(cur));if(hijos[cur].length>1)return null;if(!hijos[cur].length)break;var nx=hijos[cur][0];lista[lista.length-1].bn=a[nx][2];cur=nx;}
+      var lado=arriba?'bu':'bd';if(ch[k][lado])lado=lado==='bu'?'bd':'bu';if(ch[k][lado])return null;
+      ch[k][lado]=lista;ch[k][lado+'Bn']=bn;
+    }
+  }
+  return ch;
+}
+var FIG_PX=19;   // tamaño de letra de las moléculas en la hoja impresa (≈14 pt)
+function figuraLibro(ch,wMax){
+  if(ch&&!Array.isArray(ch)&&ch.n){
+    var px0=FIG_PX,an=anilloSVG(ch,px0);
+    if(an.w>wMax){px0=Math.max(13,Math.floor(FIG_PX*wMax/an.w));an=anilloSVG(ch,px0);}
+    return '<div class="fig fig-libro" data-w="'+Math.round(an.w)+'">'+an.svg+'</div>';
+  }
+  var r;try{r=cadenaLibro(ch);}catch(e){return null;}
+  if(!r)return null;
+  // Se reduce la letra solo si la cadena no cabe en el ancho disponible.
+  var px=Math.max(14,Math.min(FIG_PX,Math.floor(wMax/Math.max(r.em,1))));
+  var w=Math.round(r.em*px);
+  return '<div class="fig fig-libro" data-w="'+w+'"><span class="fx-cad" style="font-size:'+px+'px;padding:'+(r.arr*1.8+0.15).toFixed(2)+'em 0 '+(r.abj*1.8+0.15).toFixed(2)+'em">'+r.html+'</span></div>';
+}
 function figura(spec,wMax,hMax){
   wMax=wMax||300;hMax=hMax||130;
+  var lib=figuraLibro(cadenaDe(spec),wMax);if(lib)return lib;
   var svg='';
   try{
     if(spec.svgFn){svg=spec.svgFn();}
@@ -98,9 +310,16 @@ function figura(spec,wMax,hMax){
       else{var ch=B.G.parse(spec.f);if(ch&&ch.length)svg=B.G.mkDevSVG(ch);}
     }
   }catch(e){svg='';}
-  if(svg&&svg.indexOf('<svg')>=0)return '<div class="fig">'+tamSvg(svg,wMax,hMax)+'</div>';
+  if(svg&&svg.indexOf('<svg')>=0)return '<div class="fig" data-k="'+esc(spec.key||spec.gen||'')+'">'+tamSvg(svg,wMax,hMax)+'</div>';
   var txt=spec.t||(typeof spec.f==='string'?spec.f:'');
   return txt?'<div class="fig fig-txt">'+esc(txt)+'</div>':'';
+}
+function cadenaJuego(mol){
+  var J=B.J;if(!J)return null;
+  if(FIG_LIBRO[mol])return FIG_LIBRO[mol];
+  if(typeof J.M[mol]!=='function'&&Array.isArray(J.MOLDES[mol]))return J.MOLDES[mol];
+  if(J.SKT&&J.SKT[mol])return grafoACadena(J.SKT[mol]);
+  return null;
 }
 function svgJuego(mol){
   return function(){
@@ -148,14 +367,14 @@ function poolEjercicios(temas){
       if(/^rxn_/.test(q.topic)||!t.jue.test(q.topic))return;
       var qt=quitaHtml(q.q);
       if(q.mol&&(q.type==='mc'||q.type==='write')&&/nombre IUPAC/i.test(qt)&&!/cl[aá]sico|funcional \(/i.test(qt)&&typeof q.ans==='string'){
-        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol)},fuente:'Juego',sub:q.topic});
+        addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol),cadena:cadenaJuego(q.mol),key:q.mol},fuente:'Juego',sub:q.topic});
         addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego',sub:q.topic});
         if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego',sub:q.topic});
       }else if(q.type==='build'){
         var mm=String(q.q||'').match(/<strong>([^<]+)<\/strong>/);
         if(mm)addB(mm[1],{k:'B',nombre:mm[1],fuente:'Juego'});
       }else if(q.mol&&q.type==='mc'&&/nombr[óo]/i.test(qt)&&/error/i.test(qt)){
-        P.X.push({k:'X',fig:{svgFn:svgJuego(q.mol)},texto:q.q,fuente:'Juego'});
+        P.X.push({k:'X',fig:{svgFn:svgJuego(q.mol),cadena:cadenaJuego(q.mol),key:q.mol},texto:q.q,fuente:'Juego'});
       }
     });
     // 3) Práctica propia del tema (docente-datos.js)
@@ -328,16 +547,16 @@ function pastillas(partes,neutral){return '<div class="pills">'+partes.map(funct
 function bloquesPrevios(t){
   var p=t.previos;if(!p)return [];
   var out=[];
-  out.push('<h4 class="sub">¿Sabías que…? <small>'+esc(t.corto)+'</small></h4><ul class="lista">'+p.curiosos.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>');
+  out.push('<h4 class="sub">¿Sabías que…? <small>'+esc(t.corto)+'</small></h4><ul class="lista">'+p.curiosos.map(function(x){return '<li>'+escQ(x)+'</li>';}).join('')+'</ul>');
   out.push('<h4 class="sub">La química en contexto</h4><ul class="lista ctx">'+p.contexto.map(function(x){return '<li><span class="amb">'+esc(x.amb)+'</span> '+esc(x.t)+'</li>';}).join('')+'</ul>');
   out.push('<h4 class="sub">En tu vida diaria</h4><div class="chips">'+p.cotidianos.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>');
-  p.activacion.forEach(function(q,i){out.push((i===0?'<h4 class="sub">Preguntas de activación <small>Responde con lo que sabes; no hay respuestas malas.</small></h4>':'')+'<div class="act"><b>'+(i+1)+'.</b> '+esc(q)+lineas(3)+'</div>');});
+  p.activacion.forEach(function(q,i){out.push((i===0?'<h4 class="sub">Preguntas de activación <small>Responde con lo que sabes; no hay respuestas malas.</small></h4>':'')+'<div class="act"><b>'+(i+1)+'.</b> '+escQ(q)+lineas(3)+'</div>');});
   return out;
 }
 function bloquesInfo(t){
   var inf=t.info;if(!inf)return [];
   var out=[];
-  inf.lectura.forEach(function(par,i){out.push((i===0?'<h4 class="sub">Lectura: lo esencial <small>'+esc(t.corto)+'</small></h4>':'')+'<p class="lect">'+esc(par)+'</p>');});
+  inf.lectura.forEach(function(par,i){out.push((i===0?'<h4 class="sub">Lectura: lo esencial <small>'+esc(t.corto)+'</small></h4>':'')+'<p class="lect">'+escQ(par)+'</p>');});
   var e=inf.esquema;
   if(e)out.push('<h4 class="sub">Mapa de ideas</h4><div class="mapa"><div class="mapa-raiz">'+esc(e.raiz)+'</div><div class="mapa-ramas">'+e.ramas.map(function(r){return '<div class="mapa-rama"><b>'+esc(r.t)+'</b><ul>'+r.items.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';}).join('')+'</div></div>');
   var ej=t.ejemplo;
@@ -396,8 +615,8 @@ function bloquesEjercicios(sel,numIni){
       // fila completa para que no queden con letra diminuta.
       var items=g.items.map(function(it){
         if(it.k!=='A')return it;
-        var c=Object.assign({},it),ancha=figura(it.fig,640,120),m=ancha.match(/width="([\d.]+)"/);
-        if(m&&+m[1]>330){c._ancho=true;c._fig=ancha;}else{c._fig=figura(it.fig,330,120);}
+        var c=Object.assign({},it),ancha=figura(it.fig,640,150),m=ancha.match(/(?:data-w|width)="([\d.]+)"/);
+        if(m&&+m[1]>300){c._ancho=true;c._fig=ancha;}else{c._fig=figura(it.fig,300,150);}
         return c;
       });
       var anchos=items.filter(function(x){return x._ancho;}),medios=items.filter(function(x){return !x._ancho;});
@@ -418,10 +637,10 @@ function bloquesSaber(qs,r){
     var ops=barajar(q.o,r);
     var cortas=ops.every(function(o){return o.length<=34;});
     var muyCortas=ops.every(function(o){return o.length<=16;});
-    var fig=(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},300,110):'';
+    var fig=(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
     // Sin rótulo de competencia: el número va al inicio del contexto.
-    return '<div class="sq"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+esc(q.ctx)+'</p>'+fig+'<p class="sq-q">'+esc(q.q)+'</p>'+
-      '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+esc(o)+'</li>';}).join('')+'</ol></div>';
+    return '<div class="sq"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+escQ(q.ctx)+'</p>'+fig+'<p class="sq-q">'+escQ(q.q)+'</p>'+
+      '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+escQ(o)+'</li>';}).join('')+'</ol></div>';
   });
 }
 function bloqueHojaRespuestas(n){
@@ -542,8 +761,8 @@ function htmlAbierta(a,num){
       filas.map(function(f){return '<tr><td>'+f[0]+' '+f[1]+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
       '<div class="ab-est">Estructura:</div>'+cuad(4)+'</div>';
   }
-  if(a.t==='rx'){var lb=abiertaLibro(a.q);if(lb)return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(lb.texto)+lb.eq+lineas(5)+'</div>';}
-  return '<div class="ab"><b>'+num+'.</b> '+tag+' '+esc(a.q)+(a.f?figura({f:a.f},280,100):'')+lineas(5)+'</div>';
+  if(a.t==='rx'){var lb=abiertaLibro(a.q);if(lb)return '<div class="ab"><b>'+num+'.</b> '+tag+' '+escQ(lb.texto)+lb.eq+lineas(5)+'</div>';}
+  return '<div class="ab"><b>'+num+'.</b> '+tag+' '+escQ(a.q)+(a.f?figura({f:a.f},600,130):'')+lineas(5)+'</div>';
 }
 function bloquesAbiertas(as,ini){
   return as.map(function(a,i){

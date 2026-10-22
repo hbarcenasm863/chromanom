@@ -200,6 +200,20 @@ La evaluación lleva:
   dibujado y las condiciones sobre la flecha. Las preguntas abiertas
   «A + B → ? (condición)» se dibujan igual.
 
+### 5.3 ter Moléculas y fórmulas en formato libro
+
+- Las moléculas de los ejercicios no son dibujos SVG reducidos. Se escriben
+  como en un libro (`cadenaLibro`):
+  - texto del tamaño de la letra de la hoja;
+  - enlaces cortos;
+  - cada rama colgando de su carbono, hacia arriba o hacia abajo.
+  Las cadenas salen del formato MOLDES del Generador y del Juego. Los
+  esqueletos del Juego (SKT) se convierten con `grafoACadena`. Los anillos
+  se dibujan con `anilloSVG`, y la tabla `FIG_LIBRO` describe a mano los
+  anillos y casos especiales.
+- Las fórmulas con ramas entre paréntesis dentro del texto
+  (`CH₃−CH(OH)−CH₃`) se reescriben solas con la rama arriba (`escQ`).
+
 ### 5.4 Bloques
 
 Todo documento es una lista de **bloques HTML** (strings). Un bloque es la
