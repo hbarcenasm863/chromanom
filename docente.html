@@ -303,6 +303,8 @@ body.sin-eval .solo-eval{display:none}
 /* Reacciones en formato «tipo libro» (motor FX de fx-libro.js, igual que reacciones.html) */
 .hoja .rx-enun{font-size:15px;margin:0 0 2px}
 .hoja .fx-mol{font-family:'STIX Two Text','Times New Roman',serif;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:.45em;row-gap:2.2em;font-size:20.5px;line-height:1.2;color:#111;padding:.35em 0 .3em}
+.hoja .leyenda{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
+.hoja .leyenda .pill,.hoja .ab-mdec .pill{font-size:12.5px;padding:0 6px}
 .hoja .fig-libro{text-align:center;padding:2px 0}
 .hoja .fx-cad{display:inline-block;white-space:nowrap;line-height:1.2;font-family:'STIX Two Text','Times New Roman',serif;color:#111}
 .hoja .fx-cad sub{font-size:.7em;line-height:0;position:relative;vertical-align:baseline;top:.28em}
@@ -433,7 +435,7 @@ body.sin-eval .solo-eval{display:none}
           <p class="sub-leg">Enfoque</p>
           <div class="radios">
             <label class="opt"><input type="radio" name="enfoque" value="todo" checked> <span><b>Nomenclatura y reacciones</b><small>Todo el banco del tema</small></span></label>
-            <label class="opt"><input type="radio" name="enfoque" value="nom"> <span><b>Solo nomenclatura</b><small>Nombrar, dibujar, MDEC y estructura; sin reacciones</small></span></label>
+            <label class="opt"><input type="radio" name="enfoque" value="nom"> <span><b>Solo nomenclatura</b><small>Nombrar, dibujar, partes del nombre y estructura; sin reacciones</small></span></label>
           </div>
         </fieldset>
         <fieldset>
@@ -586,7 +588,7 @@ body.sin-eval .solo-eval{display:none}
         <p class="cuando"><strong>¿Cuándo?</strong> Después de los grupos funcionales, antes de reacciones.</p>
         <a class="ir" href="isomeria.html">Abrir Isomería →</a></div>
       <div class="pag cn-card"><span class="ico" aria-hidden="true">📘</span><h3>Docente (esta página)</h3>
-        <p>Guías de 4 sesiones, talleres y evaluaciones tipo Saber 11, armados con los bancos del Juego y del antiguo Generador, ahora fusionados aquí. Seis tipos de ejercicio (nombrar, dibujar, análisis por partes MDEC, reacciones, cazar errores y ejercicios abiertos), de 2 a 40 ejercicios por documento, por tema. Se imprime o se guarda en PDF.</p>
+        <p>Guías de 4 sesiones, talleres y evaluaciones tipo Saber 11, armados con los bancos del Juego y del antiguo Generador, ahora fusionados aquí. Seis tipos de ejercicio (nombrar, dibujar, reconocimiento de partes del nombre, reacciones, cazar errores y ejercicios abiertos), de 2 a 40 ejercicios por documento, por tema. Se imprime o se guarda en PDF.</p>
         <p class="cuando"><strong>¿Cuándo?</strong> Al planear el periodo, para talleres y tareas impresas.</p></div>
     </div>
   </section>
@@ -599,7 +601,7 @@ body.sin-eval .solo-eval{display:none}
       <table class="t-seq">
         <thead><tr><th>#</th><th>Tema</th><th>Al terminar, el estudiante podrá…</th><th>Página(s)</th><th>Actividad en clase</th><th>Evidencia de aprendizaje</th><th>Tarea</th></tr></thead>
         <tbody>
-          <tr><td class="n">1</td><td><strong>El carbono y las 4 partes del nombre</strong></td><td>Explicar por qué el carbono forma cadenas (tetravalencia) e identificar las 4 partes en un nombre dado.</td><td>Inicio; Principios → Esquema y Ejemplos</td><td>Diagnóstico corto. Se proyectan los ejemplos paso a paso; los estudiantes colorean nombres con 4 colores en el cuaderno.</td><td>Ticket de salida: separar y colorear 3 nombres.</td><td>Taller de esta página con «Análisis por partes MDEC», 10 ejercicios, temas Alcanos y Alquenos.</td></tr>
+          <tr><td class="n">1</td><td><strong>El carbono y las 4 partes del nombre</strong></td><td>Explicar por qué el carbono forma cadenas (tetravalencia) e identificar las 4 partes en un nombre dado.</td><td>Inicio; Principios → Esquema y Ejemplos</td><td>Diagnóstico corto. Se proyectan los ejemplos paso a paso; los estudiantes colorean nombres con 4 colores en el cuaderno.</td><td>Ticket de salida: separar y colorear 3 nombres.</td><td>Taller de esta página con «Reconocimiento de partes del nombre», 10 ejercicios, temas Alcanos y Alquenos.</td></tr>
           <tr><td class="n">2</td><td><strong>Alcanos: cadena principal y numeración</strong></td><td>Elegir la cadena más larga, numerarla por el extremo correcto y nombrar alcanos ramificados.</td><td>Principios → Algoritmo y Desempate; Grupos → Alcanos</td><td>Trabajo en parejas con los criterios de desempate; errores típicos discutidos en el tablero.</td><td>5 alcanos nombrados con la cadena resaltada en verde.</td><td>Juego → Practicar por grupo: Alcanos (1 partida).</td></tr>
           <tr><td class="n">3</td><td><strong>Alquenos y alquinos (③)</strong></td><td>Ubicar dobles y triples enlaces, darles el localizador más bajo y escribir el infijo -en-/-in- en su lugar.</td><td>Grupos → Alquenos, Alquinos</td><td>Del nombre a la estructura: dibujar en el cuaderno y comparar con la página.</td><td>Dibujos de 4 estructuras a partir del nombre.</td><td>Juego → Constructor por familia: Alquenos.</td></tr>
           <tr><td class="n">4</td><td><strong>Cicloalcanos y aromáticos</strong></td><td>Nombrar anillos sustituidos y reconocer el benceno como cadena y grupo a la vez.</td><td>Grupos → Cicloalcanos, Aromáticos</td><td>Estaciones: cada grupo resuelve una ficha y la explica.</td><td>Juego → nivel Hidrocarburos (partida completa) como quiz formativo.</td><td>Taller con «Nombrar» de hidrocarburos.</td></tr>
@@ -627,7 +629,7 @@ body.sin-eval .solo-eval{display:none}
         <h3>Sugerencias generales</h3>
         <ul class="lst">
           <li>Pida que el cuaderno use los mismos 4 colores: facilita revisar y corregir.</li>
-          <li>Empiece cada clase con 5 min de un taller corto de «Análisis por partes MDEC».</li>
+          <li>Empiece cada clase con 5 min de un taller corto de «Reconocimiento de partes del nombre».</li>
           <li>Use “Repetir preguntas falladas” del Juego como tarea diferenciada.</li>
           <li>La Hoja de referencia impresa puede quedar pegada en el cuaderno todo el periodo.</li>
         </ul>
@@ -769,7 +771,7 @@ body.sin-eval .solo-eval{display:none}
           <li><strong>Del juego a la clase:</strong> revise “Eficacia por tema” antes de clase y abra con los 2 temas de menor acierto.</li>
           <li><strong>Reto de constancia:</strong> número mínimo de partidas en el periodo (columna “Sesiones en el periodo”).</li>
           <li><strong>Autoevaluación:</strong> el estudiante compara su “Tu avance” (Inicio) al principio y al final de la unidad.</li>
-          <li><strong>Coevaluación:</strong> las parejas intercambian ejercicios de análisis por partes y los corrigen con la Hoja de referencia.</li>
+          <li><strong>Coevaluación:</strong> las parejas intercambian ejercicios de reconocimiento de partes del nombre y los corrigen con la Hoja de referencia.</li>
         </ul>
       </div>
       <div class="card cn-card">

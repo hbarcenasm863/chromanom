@@ -403,7 +403,7 @@ function poolEjercicios(temas){
 var TIPOS_EJ=[
   {k:'A',t:'Nombrar (estructura → nombre)'},
   {k:'B',t:'Dibujar (nombre → estructura)'},
-  {k:'C',t:'Análisis por partes MDEC'},
+  {k:'C',t:'Reconocimiento de partes del nombre'},
   {k:'D',t:'Reacciones'},
   {k:'X',t:'Cazar errores de nombres'},
   {k:'E',t:'Ejercicios abiertos (isomería)'}
@@ -572,12 +572,12 @@ function bloquesInfo(t){
 var INSTR={
   A:'Escribe el nombre IUPAC de cada estructura.',
   B:'Dibuja la estructura de cada compuesto (fórmula esquelética o semidesarrollada).',
-  C:'Escribe a qué parte del método MDEC pertenece cada fragmento (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
+  C:'Cada fragmento del nombre está coloreado según el modelo de cuatro partes. Escribe a qué parte pertenece y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
   D:'Completa cada reacción según lo que se pide. Cuando se pida el producto, dibuja su estructura y escribe su nombre IUPAC.',
   X:'Un compañero cometió un error al nombrar cada estructura. Explica el error y escribe el nombre correcto.',
   E:'Resuelve en el espacio indicado.'
 };
-var TIT={A:'Nombrar',B:'Dibujar',C:'Análisis por partes (MDEC)',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
+var TIT={A:'Nombrar',B:'Dibujar',C:'Reconocimiento de partes del nombre',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
 function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
@@ -608,7 +608,7 @@ function elegirEjercicios(P,tipos,n,r){
 function bloquesEjercicios(sel,numIni){
   var out=[],num=numIni||1;
   sel.porTipo.forEach(function(g){
-    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(INSTR[g.k])+'</small></h4>';
+    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(INSTR[g.k])+'</small></h4>'+(g.k==='C'?leyendaPartes():'');
     var primero=true;
     if(g.k==='A'||g.k==='B'){
       // Estructuras muy anchas (cadenas largas semidesarrolladas) van en una
@@ -648,9 +648,13 @@ function bloqueHojaRespuestas(n){
   for(var i=1;i<=n;i++){h+='<div class="hr-f"><b>'+i+'</b>'+['A','B','C','D'].map(function(l){return '<span class="bur">'+l+'</span>';}).join('')+'</div>';}
   return h+'</div></div>';
 }
-// Preguntas abiertas: tres tipos (reacción, nomenclatura, MDEC), cada una con
-// su rótulo. La MDEC trae una tabla para separar el nombre en sus 4 partes.
-var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'MDEC'};
+// Preguntas abiertas: tres tipos (reacción, nomenclatura, partes del nombre),
+// cada una con su rótulo. La de partes trae una tabla para separar el nombre
+// en sus 4 partes y colorearlas según el modelo.
+var TIPO_AB={rx:'Reacción',nom:'Nomenclatura',mdec:'Partes del nombre'};
+// Leyenda con los colores del modelo de cuatro partes.
+var PARTES=[['r','①','Sustituyentes'],['c','②','Cadena principal'],['i','③','Insaturaciones'],['g','④','Grupo funcional']];
+function leyendaPartes(){return '<div class="leyenda">'+PARTES.map(function(x){return '<span class="pill p-'+x[0]+'">'+x[1]+' '+x[2]+'</span>';}).join('')+'</div>';}
 // Categorías de reacción que superan el nivel de bachillerato.
 var RXN_FUERA=/diazo|aldólica|acetiluro|Acidez \(alquinos\)|Reducción \(alquinos\)/i;
 // Campos de respuesta de cada ejercicio de reacción, según lo que pide su
@@ -754,11 +758,10 @@ function htmlAbierta(a,num){
   if(typeof a==='string')return '<div class="ab"><b>'+num+'.</b> '+esc(a)+lineas(5)+'</div>';
   var tag='<span class="ab-tag">'+(TIPO_AB[a.t]||'')+'</span>';
   if(a.t==='mdec'){
-    var filas=[['①','Sustituyentes'],['②','Cadena principal'],['③','Insaturaciones'],['④','Grupo funcional']];
-    return '<div class="ab"><b>'+num+'.</b> '+tag+' Separa el nombre en sus partes con el método MDEC, explica qué indica cada una y dibuja la estructura. Si una parte no aparece en el nombre, escribe «no tiene».'+
+    return '<div class="ab"><b>'+num+'.</b> '+tag+' Reconoce las partes del nombre y colorea cada una con el color de su parte en el modelo. Escribe cada fragmento en su fila, explica qué indica y dibuja la estructura. Si una parte no aparece en el nombre, escribe «no tiene».'+
       '<div class="ab-nom">'+esc(a.n)+'</div>'+
       '<table class="mdec-tab blanco ab-mdec"><thead><tr><th>Parte</th><th>Fragmento del nombre</th><th>¿Qué indica?</th></tr></thead><tbody>'+
-      filas.map(function(f){return '<tr><td>'+f[0]+' '+f[1]+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
+      PARTES.map(function(f){return '<tr><td><span class="pill p-'+f[0]+'">'+f[1]+' '+f[2]+'</span></td><td></td><td></td></tr>';}).join('')+'</tbody></table>'+
       '<div class="ab-est">Estructura:</div>'+cuad(4)+'</div>';
   }
   if(a.t==='rx'){var lb=abiertaLibro(a.q);if(lb)return '<div class="ab"><b>'+num+'.</b> '+tag+' '+escQ(lb.texto)+lb.eq+lineas(5)+'</div>';}
@@ -769,7 +772,7 @@ function bloquesAbiertas(as,ini){
     return (i===0?'<h4 class="sub">Preguntas abiertas <small>Escribe estructuras, nombres y productos en la cuadrícula; justifica cuando se pida.</small></h4>':'')+htmlAbierta(a,ini+i);});
 }
 // Elige n preguntas abiertas repartidas entre los tres tipos (reacción,
-// nomenclatura, MDEC), en ronda, para que no salgan todas del mismo tipo.
+// nomenclatura, partes del nombre), en ronda, para que no salgan todas del mismo tipo.
 function elegirAbiertas(pool,n,r){
   var orden=['rx','nom','mdec'],colas={};
   orden.forEach(function(t){colas[t]=barajar(pool.filter(function(a){return a&&a.t===t;}),r);});

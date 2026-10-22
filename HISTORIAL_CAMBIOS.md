@@ -7,6 +7,38 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-22 (136) — Docente: «Reconocimiento de partes del nombre» en vez de «MDEC» en las preguntas
+
+### Contexto
+El docente pidió que en los enunciados de las preguntas no aparezca la
+sigla MDEC: solo «reconocimiento de partes» y que se coloreen según el
+modelo.
+
+### Cambios (`docente-app.js`, `docente.html`)
+- **Ejercicios del taller:** el tipo «Análisis por partes (MDEC)» ahora se
+  llama «Reconocimiento de partes del nombre». La instrucción explica que
+  cada fragmento está coloreado según el modelo de cuatro partes, y se
+  agregó una leyenda con los 4 colores (① sustituyentes, ② cadena
+  principal, ③ insaturaciones, ④ grupo funcional).
+- **Preguntas abiertas:** el rótulo «MDEC» pasa a «Partes del nombre». El
+  enunciado pide reconocer las partes del nombre y colorear cada una con el
+  color del modelo. La columna «Parte» de la tabla muestra cada parte con
+  su color, como guía.
+- **Orientaciones y formulario:** se actualizaron los nombres del tipo de
+  ejercicio. Las lecturas de la guía y el ejemplo resuelto siguen
+  explicando el método, porque son información y no preguntas.
+- `sw.js`: caché `chromanom-v35`.
+- Comprobado con Playwright: ningún enunciado de ejercicio o pregunta
+  contiene «MDEC», y no hay desbordes.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-22 (135) — Docente: letra más grande y moléculas en semidesarrollada tipo libro
 
 ### Contexto
