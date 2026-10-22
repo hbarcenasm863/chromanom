@@ -499,7 +499,7 @@ function valor(name){var c=document.querySelector('input[name='+name+']:checked'
 function marcados(name){return [].map.call(document.querySelectorAll('input[name='+name+']:checked'),function(c){return c.value;});}
 
 /* Recordar el encabezado institucional en este dispositivo (comodidad). */
-var CAMPOS=['f-colegio','f-docente','f-area','f-curso','f-periodo'];
+var CAMPOS=['f-colegio','f-docente','f-curso','f-periodo'];
 function guardar(){try{var o={};CAMPOS.forEach(function(id){o[id]=$(id).value;});localStorage.setItem('chromanom_docente_enc',JSON.stringify(o));}catch(e){}}
 function restaurar(){try{var o=JSON.parse(localStorage.getItem('chromanom_docente_enc')||'{}');CAMPOS.forEach(function(id){if(o[id])$(id).value=o[id];});}catch(e){}}
 
@@ -516,10 +516,12 @@ function pintarEstado(){
 var NOMBRE_PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturaciones',g:'④ Grupo funcional',cg:'②+④ Anillo aromático'};
 
 function encabezadoInst(e,titulo,sub,forma){
-  function campo(l,v){return '<div class="ei-c"><span>'+l+'</span>'+(v?'<b>'+esc(v)+'</b>':'<i></i>')+'</div>';}
+  function campo(l,v,cls){return '<div class="ei-c'+(cls?' '+cls:'')+'"><span>'+l+'</span>'+(v?'<b>'+esc(v)+'</b>':'<i></i>')+'</div>';}
   return '<div class="ei"><div class="ei-top"><div><div class="ei-tipo">'+esc(sub)+'</div><div class="ei-tit">'+esc(titulo)+'</div></div>'+
     '<div class="ei-der"><img src="logo-chromanom.png" alt="ChromaNom" width="120" height="34">'+(forma?'<span class="ei-forma">'+esc(forma)+'</span>':'')+'</div></div>'+
-    '<div class="ei-grid">'+campo('Institución',e.colegio)+campo('Docente',e.docente)+campo('Área',e.area)+campo('Grado / curso',e.curso)+campo('Periodo',e.periodo)+campo('Fecha',e.fecha)+'</div></div>';
+    // Institución en una fila completa (el nombre del colegio sale entero);
+    // debajo, docente con más espacio y los datos cortos.
+    '<div class="ei-grid">'+campo('Institución',e.colegio,'ei-inst')+campo('Docente',e.docente,'ei-doc')+campo('Grado / curso',e.curso)+campo('Periodo',e.periodo)+campo('Fecha',e.fecha)+'</div></div>';
 }
 function lineaEstudiante(){return '<div class="est-lin"><div><span>Nombre del estudiante</span><i></i></div><div class="corta"><span>Curso</span><i></i></div></div>';}
 function cajaAlineacion(al,compacta){
@@ -888,7 +890,7 @@ function leerForm(){
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
     nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(6,+$('f-nab').value||0)),
     hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
-    enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),area:$('f-area').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
+    enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
 function construirVersion(F,verIdx,verTotal,soloEval){

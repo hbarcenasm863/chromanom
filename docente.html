@@ -212,7 +212,11 @@ body.sin-eval .solo-eval{display:none}
 .hoja .ei-der{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
 .hoja .ei-der img{width:110px;height:auto}
 .hoja .ei-forma{font-weight:800;font-size:13.5px;border:1.5px solid #333;border-radius:999px;padding:1px 10px}
-.hoja .ei-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 14px;margin-top:6px}
+.hoja .ei-grid{display:grid;grid-template-columns:minmax(0,1fr) max-content max-content max-content;gap:5px 16px;margin-top:6px}
+.hoja .ei-grid .ei-c:not(.ei-inst):not(.ei-doc) i{min-width:70px}
+.hoja .ei-c.ei-inst{grid-column:1/-1}
+.hoja .ei-c.ei-inst:has(b),.hoja .ei-c.ei-doc:has(b){align-items:baseline}
+.hoja .ei-c.ei-inst b,.hoja .ei-c.ei-doc b{white-space:normal;overflow:visible;line-height:1.2}
 .hoja .ei-c{display:flex;gap:5px;align-items:flex-end;font-size:13.5px;min-width:0}
 .hoja .ei-c span{color:#555;white-space:nowrap}
 .hoja .ei-c b{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -490,7 +494,6 @@ body.sin-eval .solo-eval{display:none}
           <div class="campos">
             <label>Institución <input type="text" id="f-colegio" autocomplete="organization"></label>
             <label>Docente <input type="text" id="f-docente" autocomplete="name"></label>
-            <label>Área <input type="text" id="f-area" value="Ciencias Naturales — Química"></label>
             <label>Grado / curso <input type="text" id="f-curso" placeholder="Ej: 1101"></label>
             <label>Periodo <input type="text" id="f-periodo" placeholder="Ej: III"></label>
             <label>Fecha <input type="date" id="f-fecha"></label>

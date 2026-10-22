@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-22 (137) — Docente: encabezado institucional sin «Área» y con el colegio completo
+
+### Contexto
+El docente pidió mejorar la distribución de los datos institucionales del
+encabezado de los documentos, quitando «Área» para que el nombre del
+colegio salga completo.
+
+### Cambios
+- `docente-app.js`: el encabezado ya no lleva «Área».
+  - La institución ocupa toda una fila y su nombre se parte en dos líneas
+    si es largo, en vez de cortarse con «…».
+  - En la segunda fila van el docente (con el espacio que sobra, también
+    sin cortarse), grado/curso, periodo y fecha.
+  - Cada dato corto toma el ancho que necesita, así la fecha completa ya no
+    se recorta.
+- `docente.html`: se quitó el campo «Área» del formulario y se ajustó la
+  rejilla del encabezado.
+- `sw.js`: caché `chromanom-v36`.
+- Comprobado con Playwright, con un nombre de colegio muy largo y con los
+  campos vacíos (quedan las líneas para llenar a mano). Sin desbordes en la
+  prueba completa de guías.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-22 (136) — Docente: «Reconocimiento de partes del nombre» en vez de «MDEC» en las preguntas
 
 ### Contexto
