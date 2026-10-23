@@ -7,6 +7,51 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-23 (138) — Docente: «Cazar errores» en todos los temas
+
+### Contexto
+El docente notó que faltaban preguntas de «Cazar errores». Solo el tema
+«Cadena principal» tenía (40, tomadas del Juego); los otros 11 temas
+mostraban 0.
+
+### Cambios (`docente-app.js`)
+- `errorDeNombre()` genera, para cada molécula del banco de un tema, un
+  nombre equivocado con un error típico de los estudiantes. Errores usados:
+  - numerar desde el extremo equivocado (hept-6-eno, 3-metilpentan-5-ol,
+    ácido 3-metilhexanoico en lugar de 4-metil…);
+  - numerar el anillo de benceno en el sentido equivocado (1,6-dimetil…);
+  - no ordenar los sustituyentes alfabéticamente;
+  - olvidar el prefijo di-/tri- o un localizador repetido;
+  - invertir las partes de un éster (metanoato de etilo por etanoato de
+    metilo);
+  - escribir el localizador a la manera antigua (2-butanol), solo de vez en
+    cuando para que no domine.
+  Solo se usan reglas seguras: si el nombre no se deja analizar
+  (sec-butil, N-…, etc.) o el resultado sale igual al correcto, esa
+  molécula no se usa.
+- Resultado: alcanos 28, alquenos 67, aromáticos 14, haluros 30,
+  alcoholes 39, carbonilos 46, ácidos 27, nitrogenados 36,
+  polifuncionales 27 y cadena 71 ejercicios disponibles.
+- En un mismo documento no sale un «cazar errores» de una molécula que ya
+  aparece en Nombrar, Dibujar o Partes del nombre, para no regalar el
+  nombre.
+- Instrucción nueva: «Revisa el nombre que un compañero escribió para cada
+  estructura. Si tiene un error, explícalo y escribe el nombre correcto».
+  Algunas preguntas del Juego traen un nombre que sí es correcto.
+- `sw.js`: caché `chromanom-v37`.
+- Comprobado: se revisaron los 314 nombres equivocados generados a partir
+  de los 526 nombres del banco; sin desbordes en la prueba completa de
+  guías.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Isomería y Reacciones no tienen moléculas para nombrar, así que no tienen
+  «cazar errores».
+
+---
+
 ## 2026-10-22 (137) — Docente: encabezado institucional sin «Área» y con el colegio completo
 
 ### Contexto

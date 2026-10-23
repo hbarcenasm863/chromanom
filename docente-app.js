@@ -347,9 +347,67 @@ function prepararTemas(){
 function normNombre(s){return String(s||'').toLowerCase().replace(/\s+/g,' ').trim();}
 function quitaHtml(s){var d=document.createElement('div');d.innerHTML=s||'';return (d.textContent||'').trim();}
 
+/* ── Cazar errores: nombres equivocados a partir del nombre correcto ────
+   Cada molécula del banco recibe UN error típico de los estudiantes, elegido
+   entre los que se le pueden aplicar (así el taller trae errores variados):
+   - numerar desde el extremo equivocado (localizadores más altos);
+   - no ordenar los sustituyentes alfabéticamente;
+   - olvidar el prefijo di-/tri- o un localizador repetido;
+   - escribir el localizador del grupo a la manera antigua (2-butanol).
+   Solo se usan reglas seguras: si el resultado coincide con el nombre
+   correcto o el nombre no se deja analizar, la molécula no se usa. */
+var SUST='metil|etil|propil|isopropil|butil|cloro|bromo|yodo|fluoro|nitro|hidroxi|amino|oxo|metoxi|etoxi|fenil|vinil';
+var RAIZ={met:1,et:2,prop:3,but:4,pent:5,hex:6,hept:7,oct:8,non:9,dec:10};
+function partesNombre(n){
+  var pre='',m=n.match(/^(ácido )(.*)$/);if(m){pre=m[1];n=m[2];}
+  var grupos=[],re=new RegExp('^(\\d+(?:,\\d+)*)-(di|tri|tetra)?('+SUST+')(-)?');
+  while((m=n.match(re))){grupos.push({loc:m[1],mul:m[2]||'',nom:m[3]});n=n.slice(m[0].length);if(!m[4])break;}
+  return {pre:pre,grupos:grupos,padre:n};
+}
+function armarNombre(o){
+  var g=o.grupos.map(function(x){return x.loc+'-'+x.mul+x.nom;}).join('-');
+  return o.pre+(g?g+(/^\d/.test(o.padre)?'-':''):'')+o.padre;
+}
+function errorDeNombre(nombre){
+  // Ésteres sencillos: invertir la parte del ácido y la del alcohol.
+  var me=nombre.match(/^(met|et|prop|but|pent|hex)anoato de (met|et|prop|but|pent|hex)ilo$/);
+  if(me)return me[1]===me[2]?null:me[2]+'anoato de '+me[1]+'ilo';
+  if(/\s(de|éter|cetona)\s|\bN-|ciclo.*ciclo/.test(nombre))return null;
+  var o=partesNombre(nombre);if(!o.padre)return null;
+  var cands=[];
+  function add(t){if(t&&t!==nombre&&cands.indexOf(t)<0)cands.push(t);}
+  // a) orden alfabético
+  if(o.grupos.length>=2&&o.grupos[0].nom!==o.grupos[1].nom){var c=JSON.parse(JSON.stringify(o));c.grupos.reverse();add(armarNombre(c));}
+  // b) sin di-/tri-   c) falta un localizador repetido
+  o.grupos.forEach(function(g,i){
+    if(!g.mul)return;
+    var c=JSON.parse(JSON.stringify(o));c.grupos[i].mul='';add(armarNombre(c));
+    var ls=g.loc.split(',');if(ls.length===2&&ls[0]===ls[1]){var d=JSON.parse(JSON.stringify(o));d.grupos[i].loc=ls[0];add(armarNombre(d));}
+  });
+  // d) numeración desde el otro extremo (solo cadenas abiertas sin grupo en C1 fijo)
+  var mr=o.padre.match(/^(met|et|prop|but|pent|hex|hept|oct|non|dec)/);
+  if(mr&&!/ciclo|benceno|fenol|anilina|oato/.test(nombre)){
+    var N=RAIZ[mr[1]],malo=false;
+    var inv=nombre.replace(/\d+(?:,\d+)*/g,function(ls){return ls.split(',').map(function(x){var y=N+1-(+x);if(y<1)malo=true;return y;}).sort(function(a,b){return a-b;}).join(',');});
+    if(!malo)add(inv);
+  }
+  // d2) anillo de benceno numerado en el sentido equivocado: 1,3 → 1,5
+  if(/benceno$/.test(nombre)&&!/\d{2}/.test(nombre)){
+    var rb=nombre.replace(/\d+(?:,\d+)*/g,function(ls){return ls.split(',').map(function(x){return ((2-(+x))%6+6)%6||6;}).sort(function(a,b){return a-b;}).join(',');});
+    add(rb);
+  }
+  var h=hash(nombre);
+  // e) localizador del grupo a la manera antigua: hexan-3-ol → 3-hexanol.
+  // Se usa solo de vez en cuando si hay otros errores posibles, para que no
+  // domine el taller.
+  var mo=o.padre.match(/^([a-z]+?)(an|a)?-(\d+(?:,\d+)*)-((?:di|tri)?(?:en|in|ol|ona|amina)(?:o)?)$/);
+  if(mo&&(!cands.length||h%4===0)){var c2=JSON.parse(JSON.stringify(o));c2.padre=mo[3]+'-'+mo[1]+(mo[2]||'')+mo[4];var viejo=armarNombre(c2);if(viejo!==nombre)return viejo;}
+  if(!cands.length)return null;
+  return cands[h%cands.length];
+}
 function poolEjercicios(temas){
   var P={A:[],B:[],C:[],D:[],X:[],E:[]},nomA={},nomB={},nomC={},rx={};
-  function addA(nombre,item){var k=normNombre(nombre);if(!k||nomA[k])return;nomA[k]=1;P.A.push(item);}
+  function addA(nombre,item){var k=normNombre(nombre);if(!k||nomA[k])return;nomA[k]=1;item.nombre=nombre;P.A.push(item);}
   function addB(nombre,item){var k=normNombre(nombre);if(!k||nomB[k])return;nomB[k]=1;P.B.push(item);}
   function addC(nombre,item){var k=normNombre(nombre);if(!k||nomC[k])return;nomC[k]=1;P.C.push(item);}
   temas.forEach(function(t){
@@ -393,7 +451,16 @@ function poolEjercicios(temas){
       if(rx[s1]||rx[s2])return;
       rx[r.key]=rx[s1]=rx[s2]=1;P.D.push({k:'D',rxn:r,fuente:'Generador'});
     });
-    // 5) Ejercicios abiertos del tema
+    // 5) Cazar errores generados a partir de las moléculas del tema (el
+    // Juego solo trae este tipo de pregunta para la cadena principal).
+    var vistosX={};P.X.forEach(function(x){if(x.fig&&x.fig.key)vistosX[x.fig.key]=1;});
+    P.A.forEach(function(a){
+      if(a._xHecho||!a.nombre)return;a._xHecho=1;
+      var e=errorDeNombre(a.nombre);if(!e)return;
+      P.X.push({k:'X',fig:a.fig,nombre:a.nombre,sub:a.sub,fuente:'Generado',
+        texto:'Un compañero nombró esta molécula como <b>«'+esc(e)+'»</b>. ¿Qué error cometió?'});
+    });
+    // 6) Ejercicios abiertos del tema
     (t.abiertos||[]).forEach(function(a){P.E.push({k:'E',q:typeof a==='string'?a:a.q,fig:typeof a==='string'?null:{f:a.f},fuente:'Docente'});});
   });
   return P;
@@ -576,7 +643,7 @@ var INSTR={
   B:'Dibuja la estructura de cada compuesto (fórmula esquelética o semidesarrollada).',
   C:'Cada fragmento del nombre está coloreado según el modelo de cuatro partes. Escribe a qué parte pertenece y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
   D:'Completa cada reacción según lo que se pide. Cuando se pida el producto, dibuja su estructura y escribe su nombre IUPAC.',
-  X:'Un compañero cometió un error al nombrar cada estructura. Explica el error y escribe el nombre correcto.',
+  X:'Revisa el nombre que un compañero escribió para cada estructura. Si tiene un error, explícalo y escribe el nombre correcto.',
   E:'Resuelve en el espacio indicado.'
 };
 var TIT={A:'Nombrar',B:'Dibujar',C:'Reconocimiento de partes del nombre',D:'Reacciones',X:'Cazar errores',E:'Ejercicios abiertos'};
@@ -604,7 +671,15 @@ function elegirEjercicios(P,tipos,n,r){
   var cuenta={};orden.forEach(function(k){cuenta[k]=0;});
   var total=0,avanza=true;
   while(total<n&&avanza){avanza=false;for(var i=0;i<orden.length&&total<n;i++){var k=orden[i];if(cuenta[k]<colas[k].length){cuenta[k]++;total++;avanza=true;}}}
+  // Un «cazar errores» no puede ser de una molécula que ya sale en Nombrar,
+  // Dibujar o Partes del nombre del mismo documento (se regalaría el nombre).
+  if(cuenta.X){
+    var usados={};['A','B','C'].forEach(function(k){if(cuenta[k])colas[k].slice(0,cuenta[k]).forEach(function(it){usados[normNombre(it.nombre)]=1;});});
+    colas.X=colas.X.filter(function(it){return !it.nombre||!usados[normNombre(it.nombre)];});
+    cuenta.X=Math.min(cuenta.X,colas.X.length);
+  }
   var porTipo=[];orden.forEach(function(k){if(cuenta[k])porTipo.push({k:k,items:colas[k].slice(0,cuenta[k])});});
+  total=0;porTipo.forEach(function(g){total+=g.items.length;});
   return {porTipo:porTipo,total:total};
 }
 function bloquesEjercicios(sel,numIni){
