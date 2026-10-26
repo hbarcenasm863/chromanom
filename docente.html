@@ -195,6 +195,9 @@ body.sin-eval .solo-eval{display:none}
 /* ── Hoja tamaño carta (816×1056 px = 8,5×11 in) ── */
 .hoja{width:816px;height:1056px;background:#fff;color:#111;box-shadow:0 2px 14px rgba(13,34,51,.18);margin:0 auto 18px;padding:38px 46px 30px;display:flex;flex-direction:column;font-family:'Outfit','Segoe UI',Arial,sans-serif;font-size:16px;line-height:1.42;overflow:hidden;position:relative}
 .hoja *{box-sizing:border-box}
+/* Marca de agua: encima del contenido pero muy tenue y en «multiplicar», así
+   se ve también sobre las cuadrículas sin tapar ni aclarar el texto. */
+.hoja .marca-agua{position:absolute;left:50%;top:50%;width:430px;height:auto;transform:translate(-50%,-50%);opacity:.07;mix-blend-mode:multiply;pointer-events:none;z-index:5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .hoja-cab{font-size:10px;color:#555;border-bottom:1px solid #bbb;padding-bottom:4px;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hoja-cuerpo{flex:1;overflow:hidden;min-height:0}
 .hoja-pie{display:flex;justify-content:space-between;gap:10px;font-size:9.5px;color:#555;border-top:1px solid #bbb;padding-top:4px;margin-top:6px}

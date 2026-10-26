@@ -925,7 +925,8 @@ function paginar(doc,medidor){
   var hojas=[];
   function nueva(){
     var h=document.createElement('div');h.className='hoja hoja-'+doc.clase;
-    h.innerHTML='<div class="hoja-cab">'+doc.cab+'</div><div class="hoja-cuerpo"></div><div class="hoja-pie"><span class="pie-n"></span><span>ChromaNom · CC BY-NC 4.0 · hbarcenasm863.github.io/chromanom</span></div>';
+    // Marca de agua de ChromaNom en el centro de cada hoja (imagen de marca).
+    h.innerHTML='<img class="marca-agua" src="icons/marca-agua.png" alt="" aria-hidden="true"><div class="hoja-cab">'+doc.cab+'</div><div class="hoja-cuerpo"></div><div class="hoja-pie"><span class="pie-n"></span><span>ChromaNom · CC BY-NC 4.0 · hbarcenasm863.github.io/chromanom</span></div>';
     medidor.appendChild(h);hojas.push(h);return h.querySelector('.hoja-cuerpo');
   }
   var cuerpo=nueva();
@@ -1081,6 +1082,8 @@ function ajustarZoom(){
   var ancho=v.parentNode.clientWidth;
   v.style.zoom=Math.min(1,ancho/820).toFixed(3);
 }
+// La marca de agua se descarga antes, para que salga en la primera impresión.
+var imgMarca=new Image();imgMarca.src='icons/marca-agua.png';
 function imprimir(){
   if(!$('vista').children.length){generar().then(function(){window.print();});return;}
   window.print();

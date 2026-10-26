@@ -7,6 +7,37 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-26 (139) — Docente: marca de agua de ChromaNom en todas las hojas
+
+### Contexto
+El docente pidió que todo lo que genera `docente.html` lleve una marca de
+agua con el icono de ChromaNom en las páginas, para crear imagen de marca.
+
+### Cambios
+- `icons/marca-agua.png` (nuevo, 11 KB): el logo «CN» con la banda de
+  colores y la bandera, recortado del icono de la app y con fondo
+  transparente (sin el cuadro blanco).
+- `docente-app.js`:
+  - cada hoja generada (guía, taller, evaluación, anexo de rúbricas y hoja
+    de respuestas) lleva la marca en el centro;
+  - la imagen se descarga al abrir la página, para que salga desde la
+    primera impresión.
+- `docente.html`: la marca de agua mide 430 px, tiene 7 % de opacidad y va
+  en modo «multiplicar». Así se ve suave también sobre las cuadrículas, no
+  aclara ni tapa el texto, y se imprime (`print-color-adjust: exact`).
+- `sw.js`: caché `chromanom-v38` (incluye la imagen, para el uso sin
+  conexión).
+- Comprobado con un PDF real de una guía con 2 versiones: 14 hojas → 14
+  páginas, con la marca en todas y el texto legible.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Nada.
+
+---
+
 ## 2026-10-23 (138) — Docente: «Cazar errores» en todos los temas
 
 ### Contexto
