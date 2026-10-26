@@ -582,7 +582,7 @@ body{
 
 /* ── PRINT STYLES ── */
 @media print{
-  @page{size:letter;margin:1.5cm 1.4cm}
+  @page{size:letter;margin:1.5cm 1.4cm!important}
   body{background:#fff !important;color:#000 !important}
 
   /* Hide screen-only elements */
@@ -3597,7 +3597,9 @@ function exportPDF(){
     +'<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
     +'<title>ChromaNom — Ejercicios</title>'
     +fontsLink
-    +'<style>'+styles+'</style></head>'
+    // Licencia en el margen inferior de cada página impresa (la ventana nueva
+    // no carga chromanom.css, donde está esa regla para el resto del sitio).
+    +'<style>'+styles+'@page{@bottom-center{content:"ChromaNom · © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0 (uso libre sin fines comerciales, citando al autor) · hbarcenasm863.github.io/chromanom";font-family:Arial,sans-serif;font-size:7pt;color:#555}}</style></head>'
     +'<body><div id="exercise-sheet" class="show">'+body+'</div>'
     +'<scr'+'ipt>window.onload=function(){var f=(document.fonts&&document.fonts.ready)||Promise.resolve();f.then(function(){setTimeout(function(){window.print();},300);});};<\/scr'+'ipt>'
     +'</body></html>';

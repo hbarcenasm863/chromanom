@@ -114,6 +114,18 @@ body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 @media print{
   .site-nav,.site-footer,#bnav,#bnav-sheet,#text-zoom-widget,.scroll-hint,#pwa-install-btn{display:none!important}
 }
+/* ── Licencia en todo lo impreso ─────────────────────────────────────────
+   El pie del sitio no se imprime, así que la licencia va en el margen
+   inferior de CADA página impresa (caja de margen de @page). Las hojas del
+   generador del docente usan @page sin margen y traen su propia licencia
+   en el pie de cada hoja. */
+@page{
+  margin:12mm 11mm 14mm;   /* deja espacio para la línea de la licencia */
+  @bottom-center{
+    content:"ChromaNom · © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0 (uso libre sin fines comerciales, citando al autor) · hbarcenasm863.github.io/chromanom";
+    font-family:Arial,sans-serif;font-size:7pt;color:#555;
+  }
+}
 
 /* Encabezado de página dentro del contenedor .app de cada página */
 .cn-page-head.cn-in{max-width:none;padding:28px 0 18px;margin:0 0 18px;border-bottom:1px solid var(--cn-brd)}

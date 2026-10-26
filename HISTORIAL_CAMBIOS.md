@@ -7,6 +7,49 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-26 (140) — Licencia CC BY-NC 4.0 en todo lo impreso y en lo que genera el docente
+
+### Contexto
+El docente pidió asegurar que todas las páginas, y todo lo que produce el
+generador, lleven la licencia Creative Commons.
+
+### Diagnóstico
+- En pantalla, las 9 páginas ya tenían la licencia en el pie del sitio.
+- Al **imprimir**, ese pie se oculta (`chromanom.css`). Por eso los PDF de
+  index, teoría, grupos, reacciones, isomería y juego salían **sin
+  licencia**. Solo referencia y las hojas del docente la traían.
+
+### Cambios
+- `chromanom.css`: la licencia va en el margen inferior de **cada página
+  impresa** del sitio, con una caja de margen de `@page`. Dice: «ChromaNom ·
+  © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0 (uso libre sin
+  fines comerciales, citando al autor) · hbarcenasm863.github.io/chromanom».
+  Se agregó un margen de impresión por defecto para que haya espacio.
+- `referencia.html`, `generador.html`, `docente.html`: sus márgenes de
+  impresión propios llevan `!important`, para que la regla general no les
+  cambie el número de páginas.
+- `docente-app.js`: el pie de cada hoja generada (guía, taller, evaluación,
+  anexo) ahora incluye también el autor: «© 2026 Harvey Barcenas Morales ·
+  Licencia CC BY-NC 4.0».
+- `generador.html`: la ventana de exportar a PDF también lleva la licencia
+  en cada página. Hoy esa página redirige a docente.html.
+- `sw.js`: caché `chromanom-v39`.
+
+### Comprobación (PDF reales con Playwright, licencia buscada página por página)
+- index 5/5, teoría 21/21, grupos 2/2, reacciones 9/9, isomería 19/19,
+  referencia 2/2 (sigue en 2 páginas), juego 2/2.
+- Docente: orientaciones 13/13 y documentos generados 8/8.
+
+### Pasos manuales
+- Ninguno.
+
+### Pendiente
+- Si alguien imprime con márgenes «Ninguno», el navegador no deja espacio
+  para la línea de la licencia en las páginas del sitio. Las hojas del
+  docente no se ven afectadas, porque la llevan dentro de la hoja.
+
+---
+
 ## 2026-10-26 (139) — Docente: marca de agua de ChromaNom en todas las hojas
 
 ### Contexto

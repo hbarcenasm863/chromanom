@@ -926,7 +926,7 @@ function paginar(doc,medidor){
   function nueva(){
     var h=document.createElement('div');h.className='hoja hoja-'+doc.clase;
     // Marca de agua de ChromaNom en el centro de cada hoja (imagen de marca).
-    h.innerHTML='<img class="marca-agua" src="icons/marca-agua.png" alt="" aria-hidden="true"><div class="hoja-cab">'+doc.cab+'</div><div class="hoja-cuerpo"></div><div class="hoja-pie"><span class="pie-n"></span><span>ChromaNom · CC BY-NC 4.0 · hbarcenasm863.github.io/chromanom</span></div>';
+    h.innerHTML='<img class="marca-agua" src="icons/marca-agua.png" alt="" aria-hidden="true"><div class="hoja-cab">'+doc.cab+'</div><div class="hoja-cuerpo"></div><div class="hoja-pie"><span class="pie-n"></span><span>ChromaNom · © 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0 · hbarcenasm863.github.io/chromanom</span></div>';
     medidor.appendChild(h);hojas.push(h);return h.querySelector('.hoja-cuerpo');
   }
   var cuerpo=nueva();
