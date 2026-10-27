@@ -451,7 +451,14 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   font-size:.88rem;font-weight:700;cursor:grab;user-select:none;
   border:2px solid transparent;transition:all .15s;
   touch-action:none;
+  /* iPhone/iPad: sin el prefijo -webkit-, mantener el dedo sobre un fragmento
+     abría la selección de texto y la lupa de Safari, y los toques siguientes
+     ya no llegaban al juego. */
+  -webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;
 }
+/* Copia del fragmento que sigue al dedo mientras se arrastra */
+.token.drag-ghost{position:fixed;z-index:9999;pointer-events:none;margin:0;
+  transform:translate(-50%,-60%) scale(1.08);box-shadow:0 8px 20px rgba(13,45,66,.3);opacity:.95}
 .token:active{cursor:grabbing;transform:scale(1.05)}
 .token.r{color:var(--c1t);background:var(--c1b);border-color:var(--c1)}
 .token.c{color:var(--c2t);background:var(--c2b);border-color:var(--c2)}
@@ -464,6 +471,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   display:inline-flex;align-items:center;justify-content:center;
   font-size:.7rem;color:var(--dimmer);background:rgba(255,255,255,.5);
   vertical-align:middle;transition:all .2s;
+  cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
 }
 .drop-slot.filled{border-style:solid}
 .drop-slot.over{border-color:#1a6ea8;background:#e8f4fb}
@@ -3315,19 +3323,20 @@ function checkRxnQ(ans,btn){
 
 // ── DRAG (reemplazado por TAP-TO-PLACE para móvil) ──
 function buildDrag(q){
+  selectedToken=null; // no arrastrar una selección de la pregunta anterior
   const toks=shuffle(q.tokens);
   let slotHtml=q.slots.map(s=>`
     <div style="margin-bottom:10px">
       <div class="drag-target-label">${s.label}</div>
       <div class="drop-slot" id="${s.id}" data-cls="${s.cls}"
-           onclick="placeToken(this)">(toca para colocar)</div>
+           role="button" onclick="placeToken(this)">(toca para colocar)</div>
     </div>`).join('');
   let bankHtml=toks.map((t,i)=>`<button class="token neutral" id="tok-${i}"
     data-val="${t.text}" data-cls="${t.cls}" data-idx="${i}"
     onclick="selectToken(this)">${t.text}</button>`).join('');
   return `<div class="drag-area">
     <div class="name-slots" id="name-preview"><span style="font-size:.72rem;color:var(--dimmer)">El nombre se irá formando aquí…</span></div>
-    <div style="font-size:.78rem;color:var(--dim);margin-bottom:8px;font-style:italic">① Toca un fragmento del banco → ② toca el hueco donde colocarlo</div>
+    <div style="font-size:.78rem;color:var(--dim);margin-bottom:8px;font-style:italic">① Toca un fragmento del banco → ② toca el hueco donde colocarlo (o arrástralo con el dedo hasta el hueco)</div>
     ${slotHtml}
     <div class="drag-prompt" style="margin-top:12px">Banco de fragmentos:</div>
     <div class="drag-bank" id="drag-bank">${bankHtml}</div>
@@ -3338,7 +3347,7 @@ function buildDrag(q){
 let selectedToken=null;
 
 function selectToken(btn){
-  if(answered)return;
+  if(answered||_dragJustEnded())return;
   // Deselect previous
   document.querySelectorAll('.token.selected-tok').forEach(t=>{
     t.classList.remove('selected-tok');
@@ -3352,7 +3361,7 @@ function selectToken(btn){
 }
 
 function placeToken(slot){
-  if(answered)return;
+  if(answered||_dragJustEnded())return;
   if(!selectedToken){
     // If slot already has something, remove it back to bank
     const filled=slot.dataset.filled;
@@ -3426,7 +3435,74 @@ function updateNamePreviewColored(q){
     return val?`<span class="token ${s.cls}" style="font-size:.95rem;padding:3px 8px">${val}</span>`:`<span class="drop-slot" style="min-width:50px;font-size:.65rem">?</span>`;
   }).join('');
 }
-function initDrag(q){/* no longer needed - tap system handles everything */}
+// ── Arrastre con el dedo o el ratón ──
+// Antes el ejercicio decía "Arrastra" pero solo aceptaba toques; en iPhone/iPad
+// los estudiantes intentaban arrastrar y no pasaba nada. Se usan Pointer Events
+// (funcionan igual en Safari de iOS, Android y computador). Un toque corto sin
+// mover el dedo sigue siendo el sistema de "tocar y colocar" de siempre.
+let _dragEndAt=0;
+function _dragJustEnded(){return Date.now()-_dragEndAt<350;}
+function initDrag(q){
+  document.querySelectorAll('#drag-bank .token').forEach(tok=>{
+    tok.addEventListener('pointerdown',e=>_dragStart(e,tok));
+  });
+}
+function _slotAt(x,y){
+  const el=document.elementFromPoint(x,y);
+  return el&&el.closest?el.closest('.drag-area .drop-slot[id]'):null;
+}
+function _dragStart(e,tok){
+  if(answered||tok.disabled||(e.pointerType==='mouse'&&e.button!==0))return;
+  const x0=e.clientX,y0=e.clientY,pid=e.pointerId;
+  let ghost=null,over=null,lastY=y0,raf=0;
+  // Si el dedo llega al borde de la pantalla, la página se desplaza sola para
+  // alcanzar los huecos (en celular a veces quedan fuera de la vista).
+  const autoScroll=()=>{
+    const h=window.innerHeight;
+    // Solo si el dedo va hacia ese borde: el banco suele quedar abajo y no
+    // debe desplazarse la página apenas se empieza a arrastrar desde ahí.
+    const dy=(lastY<70&&lastY<y0-20)?-10:((lastY>h-70&&lastY>y0+20)?10:0);
+    if(dy){try{window.scrollBy({top:dy,behavior:'instant'});}catch(e){window.scrollBy(0,dy);}}
+    raf=requestAnimationFrame(autoScroll);
+  };
+  const move=ev=>{
+    if(ev.pointerId!==pid)return;
+    if(!ghost){
+      if(Math.hypot(ev.clientX-x0,ev.clientY-y0)<8)return; // aún es un toque
+      ghost=tok.cloneNode(true);
+      ghost.removeAttribute('id');ghost.removeAttribute('onclick');
+      ghost.classList.add('drag-ghost');ghost.classList.remove('selected-tok');
+      ghost.style.outline='';
+      document.body.appendChild(ghost);
+      raf=requestAnimationFrame(autoScroll);
+    }
+    ev.preventDefault();
+    lastY=ev.clientY;
+    ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';
+    const s=_slotAt(ev.clientX,ev.clientY);
+    if(s!==over){if(over)over.classList.remove('over');over=s;if(over)over.classList.add('over');}
+  };
+  const end=ev=>{
+    if(ev.pointerId!==pid)return;
+    document.removeEventListener('pointermove',move);
+    document.removeEventListener('pointerup',end);
+    document.removeEventListener('pointercancel',end);
+    cancelAnimationFrame(raf);
+    if(!ghost)return; // fue un toque: lo maneja onclick (selectToken)
+    ghost.remove();
+    if(over)over.classList.remove('over');
+    const slot=ev.type==='pointerup'?_slotAt(ev.clientX,ev.clientY):null;
+    if(slot&&!answered){
+      document.querySelectorAll('.token.selected-tok').forEach(t=>{t.classList.remove('selected-tok');t.style.outline='';});
+      selectedToken=tok;
+      placeToken(slot);
+    }
+    _dragEndAt=Date.now(); // evita que el "click" que sigue al soltar deshaga lo hecho
+  };
+  document.addEventListener('pointermove',move,{passive:false});
+  document.addEventListener('pointerup',end);
+  document.addEventListener('pointercancel',end);
+}
 
 
 function checkDrag(){

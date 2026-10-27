@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-27 (141) — Juego: «Arrastrar y completar» funciona en iPhone/iPad (tocar y arrastrar)
+
+### Contexto
+El docente reportó que en el juego, la pregunta «Arrastra cada fragmento a su
+posición en el nombre IUPAC» no funcionaba en iPhone/iPad: ni arrastrando ni
+tocando el fragmento y luego el hueco.
+
+### Diagnóstico
+- El ejercicio decía «Arrastra», pero el código **no tenía arrastre**: solo
+  aceptaba «toca el fragmento → toca el hueco». Los estudiantes, como dice el
+  enunciado, intentaban arrastrar y no pasaba nada.
+- Al mantener el dedo sobre un fragmento (intentando arrastrar), Safari de
+  iOS abría su selección de texto y la lupa, porque faltaba el prefijo
+  `-webkit-user-select` / `-webkit-touch-callout`. Eso además estorbaba los
+  toques siguientes, así que también parecía fallar el modo de tocar.
+- Una selección de fragmento podía quedar «pegada» de la pregunta anterior.
+- No fue posible probar en Safari real (no hay WebKit en este entorno); se
+  probó en Chromium simulando iPhone 13 e iPad con toques reales.
+
+### Cambios
+- `juego.html`:
+  - Arrastre real con el dedo o el ratón (Pointer Events, que Safari de iOS,
+    Android y computador manejan igual): el fragmento sigue al dedo, el hueco
+    se resalta al pasar encima y se coloca al soltar. Si el dedo llega al
+    borde superior/inferior, la página se desplaza sola para alcanzar los
+    huecos (en celular a veces quedan fuera de la vista).
+  - Un toque corto sigue funcionando como antes (tocar y colocar).
+  - Fragmentos y huecos ya no activan la selección de texto ni el menú de
+    Safari; los huecos tienen `cursor:pointer` y `role="button"`.
+  - La instrucción dice ahora «… (o arrástralo con el dedo hasta el hueco)».
+  - La selección se reinicia en cada pregunta nueva.
+- `sw.js`: caché `chromanom-v40`, para que los dispositivos con la app
+  instalada reciban el arreglo.
+
+### Comprobación (Playwright, Chromium simulando dispositivos)
+- iPhone 13 e iPad: tocar y colocar ✔; arrastrar con el dedo ✔; arrastrar
+  hacia arriba con desplazamiento automático ✔; tocar después de arrastrar ✔.
+- Computador: arrastrar con ratón ✔; «Verificar» ✔.
+
+### Pendiente
+- Que el docente (o un estudiante) lo confirme en un iPhone/iPad real. Si
+  sigue fallando, anotar la versión de iOS y si el juego se abre desde
+  Safari o desde el ícono instalado.
+
+---
+
 ## 2026-10-26 (140) — Licencia CC BY-NC 4.0 en todo lo impreso y en lo que genera el docente
 
 ### Contexto
