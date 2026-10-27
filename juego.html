@@ -2992,6 +2992,7 @@ function loadQuestion(){
   }
 
   startTimer();
+  _marcarPartida();
 }
 
 // ── MC ──
@@ -6896,6 +6897,9 @@ function retryErrors(){
 // UTILS
 // ════════════════════════════════════════════════════════
 function showScreen(id){
+  // Salir de la pantalla del juego (resultados, portada…) es un final normal:
+  // ya no hay partida que reportar si la página se cerrara después.
+  if(id!=='s-game') _borrarMarcaPartida();
   // Volver a la portada (por el botón "← Volver al inicio" o cualquier
   // otro) es una salida DELIBERADA — ya no hay partida en curso que
   // proteger contra un "atrás" o recarga accidental.
@@ -7224,6 +7228,73 @@ window.addEventListener('beforeunload', (e) => {
 // la página se ve normal (la nota sí carga, es una consulta aparte) pero
 // ningún nivel entra. El evento 'pageshow' con persisted=true detecta
 // justo esa restauración desde caché y destraba las banderas.
+// ── Registro de cierres inesperados (iPhone/iPad) ─────────────────────
+// Una estudiante con iPhone 12 reportó un "aviso de error gris" que la
+// sacaba del juego en medio de las preguntas: es Safari cerrando la página
+// ("Se produjo un problema con esta página web, por lo que se volvió a
+// cargar"). Eso no se pudo reproducir sin un iPhone real y, como Safari
+// mata la página de golpe, ningún código alcanza a avisar en ese momento.
+// Solución: mientras hay partida, se guarda en el celular en qué pregunta
+// va ("marca"). Si la página termina normalmente (pagehide, o se sale de la
+// pantalla del juego) la marca se borra. Si al volver a abrir el juego la
+// marca sigue ahí, la página se cerró de golpe: se envía al Apps Script
+// (hoja "Cierres inesperados") para saber en qué nivel, pregunta y celular
+// ocurre. Se envía por GET (?accion=cierre): un Apps Script sin redesplegar
+// lo ignora y no ensucia la hoja "Registro".
+const _MARCA_KEY='chromanom_partida_viva', _CIERRES_KEY='chromanom_cierres_pendientes';
+let _partidaDesde=0;
+function _leerJSON(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch(e){return def;}}
+function _marcarPartida(){
+  try{
+    const q=questions[qIdx]||{};
+    let mol=q.mol||q.rxn||'';
+    try{ if(q.mol) mol=decodeURIComponent(escape(atob(q.mol))); }catch(e){}
+    if(qIdx===0||!_partidaDesde) _partidaDesde=Date.now();
+    localStorage.setItem(_MARCA_KEY,JSON.stringify({
+      sesion:_sessionId, nombre:freeMode?'(anónimo)':studentName, curso:freeMode?'(libre)':studentCourse,
+      codigo:freeMode?'':studentCode, nivel:NIVEL_LABELS[currentLevel]||currentLevel,
+      pregunta:(qIdx+1)+' de '+questions.length, tipo:q.type||'', tema:q.topic||'', molecula:String(mol).slice(0,80),
+      visible:document.visibilityState, desde:_partidaDesde, t:Date.now(), celular:navigator.userAgent
+    }));
+  }catch(e){}
+}
+function _borrarMarcaPartida(){ try{localStorage.removeItem(_MARCA_KEY);}catch(e){} }
+document.addEventListener('visibilitychange',()=>{
+  const m=_leerJSON(_MARCA_KEY,null);
+  if(m){m.visible=document.visibilityState;m.t=Date.now();try{localStorage.setItem(_MARCA_KEY,JSON.stringify(m));}catch(e){}}
+});
+window.addEventListener('pagehide',_borrarMarcaPartida);
+function _enviarCierresPendientes(){
+  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  const pend=_leerJSON(_CIERRES_KEY,[]);
+  pend.forEach(c=>{
+    const qs=Object.keys(c).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(c[k])).join('&');
+    try{
+      fetch(ANALYTICS_URL+'?accion=cierre&'+qs)
+        .then(r=>r.json())
+        .then(j=>{ if(j&&j.ok){ // enviado: se quita de la lista
+          const resto=_leerJSON(_CIERRES_KEY,[]).filter(x=>!(x.sesion===c.sesion&&x.t===c.t));
+          try{localStorage.setItem(_CIERRES_KEY,JSON.stringify(resto));}catch(e){} } })
+        .catch(()=>{}); // se reintenta la próxima vez que abra el juego
+    }catch(e){}
+  });
+}
+(function _revisarCierreAnterior(){
+  const m=_leerJSON(_MARCA_KEY,null);
+  if(m){
+    _borrarMarcaPartida();
+    m.minutos_jugando=Math.round((m.t-m.desde)/60000);
+    m.como=m.visible==='hidden'
+      ?'En segundo plano (salió a otra app y el iPhone liberó memoria)'
+      :'Con el juego en pantalla (Safari cerró la página)';
+    m.minutos_hasta_reabrir=Math.round((Date.now()-m.t)/60000);
+    delete m.visible; delete m.desde;
+    const pend=_leerJSON(_CIERRES_KEY,[]); pend.push(m);
+    try{localStorage.setItem(_CIERRES_KEY,JSON.stringify(pend.slice(-10)));}catch(e){}
+  }
+  setTimeout(_enviarCierresPendientes,3000);
+})();
+
 window.addEventListener('pageshow', (e) => {
   if (e.persisted) {
     gameActive = false;

@@ -9,6 +9,7 @@ const SHEET_REGISTRO   = 'Registro';
 const SHEET_STATS      = 'Estadísticas';
 const SHEET_ESTUDIANTES = 'Estudiantes';
 const SHEET_PREMIO     = 'Premio 1000 preguntas';
+const SHEET_CIERRES    = 'Cierres inesperados';
 
 // ── Cabeceras del Registro ──────────────────────────────────
 // Errores Build/Rxnq van AL FINAL (no intercalados con Errores Write) para
@@ -143,7 +144,7 @@ function doPost(e) {
 // ── Marca de versión del código, para verificar que el despliegue web ──
 // esté sirviendo esta versión y no una anterior. Súbela cada vez que
 // cambies el código y vuelvas a implementar. Ver doGet() más abajo.
-const BUILD_TAG = '2026-09-10-lookup-estudiantes-por-codigo';
+const BUILD_TAG = '2026-10-27-cierres-inesperados';
 
 function jsonOut_(obj) {
   return ContentService
@@ -170,9 +171,43 @@ function doGet(e) {
   if (e && e.parameter && e.parameter.accion === 'estudiante') {
     return handleEstudiante_(e);
   }
+  if (e && e.parameter && e.parameter.accion === 'cierre') {
+    return handleCierre_(e);
+  }
   return ContentService
     .createTextOutput('Chromanom Analytics — activo ✓ (build ' + BUILD_TAG + ')')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+// ── ?accion=cierre: el navegador cerró el juego en plena partida ──
+// juego.html lo envía la siguiente vez que el estudiante abre el juego,
+// cuando detecta que la partida anterior terminó de golpe (típico de
+// Safari en iPhone: "Se produjo un problema con esta página web…"). Va a
+// una hoja aparte, "Cierres inesperados", para no mezclarlo con
+// "Registro" ni con las estadísticas. Sin lock: es una fila suelta en otra
+// hoja y no debe competir con appendRow()/updateStats().
+function handleCierre_(e) {
+  try {
+    const p = e.parameter;
+    const ss = getOrCreateSpreadsheet();
+    let sh = ss.getSheetByName(SHEET_CIERRES);
+    if (!sh) {
+      sh = ss.insertSheet(SHEET_CIERRES);
+      sh.appendRow(['Recibido', 'Nombre', 'Curso', 'Código', 'Nivel', 'Pregunta',
+        'Tipo de pregunta', 'Tema', 'Molécula / reacción', 'Cómo se cerró',
+        'Minutos jugando', 'Minutos hasta reabrir', 'Celular / navegador', 'Sesión']);
+      sh.getRange(1, 1, 1, 14).setFontWeight('bold');
+      sh.setFrozenRows(1);
+    }
+    const txt = v => String(v || '').slice(0, 300);
+    sh.appendRow([new Date(), txt(p.nombre), txt(p.curso), txt(p.codigo), txt(p.nivel),
+      txt(p.pregunta), txt(p.tipo), txt(p.tema), txt(p.molecula), txt(p.como),
+      Number(p.minutos_jugando) || 0, Number(p.minutos_hasta_reabrir) || 0,
+      txt(p.celular), txt(p.sesion)]);
+    return jsonOut_({ ok: true });
+  } catch (err) {
+    return jsonOut_({ ok: false, error: err.message });
+  }
 }
 
 // Zona horaria fija de Bogotá. No se usa Session.getScriptTimeZone() porque

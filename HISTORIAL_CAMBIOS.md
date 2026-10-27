@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-27 (142) — Registro de cierres inesperados del juego (iPhone)
+
+### Contexto
+Una estudiante con iPhone 12 (iOS al día) reportó un «aviso de error en
+gris» que la saca del juego en medio de las preguntas. Por la descripción
+es Safari cerrando y recargando la página («Se produjo un problema con esta
+página web, por lo que se volvió a cargar»), no un aviso del juego.
+
+### Diagnóstico (sin poder reproducirlo)
+- Se cargaron y respondieron las 1338 preguntas del banco en un iPhone
+  simulado (Chromium): ningún error de programa.
+- 4000 preguntas seguidas: la memoria se mantiene estable (sin fugas).
+- Memoria gráfica en el juego ≈ 40 MB: razonable. No hay Safari/WebKit
+  en este entorno, así que la causa real no se pudo ver.
+- El docente eligió dejar un registro de cierres para saber en qué nivel,
+  pregunta y celular pasa, en vez de cambiar cosas a ciegas.
+
+### Cambios
+- `juego.html`: durante la partida se guarda en el celular en qué pregunta
+  va el estudiante. Si la partida termina normalmente (resultados, volver
+  al inicio, recargar o cerrar la pestaña) se borra. Si al volver a abrir
+  el juego sigue ahí, la página se cerró de golpe y se envía al Apps
+  Script (`?accion=cierre`). Se distingue «con el juego en pantalla» de
+  «en segundo plano» (salió a otra app y el iPhone liberó memoria). Si no
+  hay internet, se reintenta la próxima vez que abra el juego.
+- `chromanom-analytics.gs`: nuevo `handleCierre_` que escribe en una hoja
+  nueva, **«Cierres inesperados»** (nombre, curso, código, nivel, pregunta,
+  tipo, tema, molécula, cómo se cerró, minutos jugando, celular).
+  `BUILD_TAG` = `2026-10-27-cierres-inesperados`.
+- `sw.js`: caché `chromanom-v41`.
+
+### Comprobación (Playwright, iPhone 12 simulado)
+- Cierre de golpe en plena partida → 1 reporte con todos los datos ✔.
+- Recargar a propósito / volver al inicio → 0 reportes ✔. Sin errores JS.
+
+### Paso manual pendiente
+- **Redesplegar `chromanom-analytics.gs`** en Apps Script (Implementar →
+  Administrar implementaciones → Nueva versión). Hasta entonces los avisos
+  de cierre se ignoran (no dañan nada). No hace falta recalcular.
+
+### Pendiente
+- Cuando aparezcan filas en «Cierres inesperados», revisar qué tienen en
+  común (tipo de pregunta, nivel, molécula) para encontrar la causa real.
+
+---
+
 ## 2026-10-27 (141) — Juego: «Arrastrar y completar» funciona en iPhone/iPad (tocar y arrastrar)
 
 ### Contexto
