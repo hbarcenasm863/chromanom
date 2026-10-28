@@ -130,7 +130,7 @@
         <fieldset data-c="f"><legend>Forma</legend><label><input type="radio" name="f" value="al"> Abierta lineal</label><label><input type="radio" name="f" value="ar"> Abierta ramificada</label><label><input type="radio" name="f" value="c"> Cerrada</label></fieldset>
         <fieldset data-c="e"><legend>Enlaces</legend><label><input type="radio" name="e" value="sat"> Saturada</label><label><input type="radio" name="e" value="ins"> Insaturada</label></fieldset>
         <fieldset data-c="a"><legend>Átomos</legend><label><input type="radio" name="a" value="hom"> Homogénea</label><label><input type="radio" name="a" value="het"> Heterogénea</label></fieldset>
-        <fieldset data-c="r"><legend>Si es cerrada</legend><label><input type="radio" name="r" value="alic"> Alicíclica</label><label><input type="radio" name="r" value="arom"> Aromática</label><label><input type="radio" name="r" value="na"> No aplica (abierta)</label></fieldset>
+        <fieldset data-c="r"><legend>Tipo de anillo</legend><label><input type="radio" name="r" value="alic"> Alicíclico</label><label><input type="radio" name="r" value="arom"> Aromático</label><label><input type="radio" name="r" value="hetc"> Heterocíclico</label><label><input type="radio" name="r" value="na"> No aplica (abierta)</label></fieldset>
       </form>
       <div class="lab-msg" id="cl-msg" aria-live="polite">Clasifica la cadena del dibujo.</div>
       <div class="links-row"><button type="button" class="btn-sm prim" id="cl-ok">✓ Comprobar</button><button type="button" class="btn-sm" id="cl-otra">🔀 Otra cadena</button><span class="prac-score" id="cl-score" style="align-self:center"></span></div>
@@ -230,12 +230,12 @@ document.getElementById('f-het').innerHTML='<div class="fig">'+F.fu_thf()+'<div 
 
 // ── Clasificador ──
 (function(){
-  var L={al:'abierta lineal',ar:'abierta ramificada',c:'cerrada',sat:'saturada',ins:'insaturada',hom:'homogénea',het:'heterogénea',alic:'alicíclica',arom:'aromática',na:'no aplica'};
+  var L={al:'abierta lineal',ar:'abierta ramificada',c:'cerrada',sat:'saturada',ins:'insaturada',hom:'homogénea',het:'heterogénea',alic:'anillo alicíclico',arom:'anillo aromático',hetc:'anillo heterocíclico',na:'no aplica'};
   var C=[
     ['fu_butano','al','sat','hom','na'],['fu_isobutano','ar','sat','hom','na'],['fu_mixta','ar','ins','hom','na'],['fu_eter','al','sat','het','na'],
     ['fu_dma','al','sat','het','na'],['fu_propeno','al','ins','hom','na'],['fu_ciclohexano','c','sat','hom','alic'],['fu_ciclohexeno','c','ins','hom','alic'],
     ['fu_benceno','c','ins','hom','arom','El benceno tiene dobles enlaces (por eso se cuenta como insaturado), pero sus electrones π están repartidos en todo el anillo.'],
-    ['fu_thf','c','sat','het','alic','Es heterocíclica (tiene O en el anillo) y no aromática.'],['fu_piridina','c','ins','het','arom','Es heterocíclica (N en el anillo) y aromática, como el benceno.'],
+    ['fu_thf','c','sat','het','hetc','Su anillo tiene un O: es heterocíclico (y no aromático).'],['fu_piridina','c','ins','het','hetc','Su anillo tiene un N: es heterocíclico, y además aromático como el benceno.'],
     ['fu_cloroetano','al','sat','hom','na','El Cl está al final: no interrumpe la cadena.'],['fu_tioeter','al','sat','het','na'],['fu_ciclopropano','c','sat','hom','alic'],
     ['fu_dieno','al','ins','hom','na'],['fu_metilamina_ch','al','sat','hom','na','El NH₂ está al final: la cadena sigue siendo homogénea.'],['fu_ramificadaU','ar','sat','hom','na','El CH₂−CH₃ de abajo es una rama: sale del C3, que queda unido a 3 carbonos.']
   ];

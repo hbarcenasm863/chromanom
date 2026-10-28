@@ -428,6 +428,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 /* ── TYPE A: OPCIÓN MÚLTIPLE ── */
 .mc-options{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
 .fd-hint{font-size:.72rem;font-weight:600;color:#3d5166;text-align:right;margin:0 4px 4px}
+.mc-opt.mc-texto{font-family:var(--sans);font-size:.92rem;line-height:1.4}
 .mc-opt{
   padding:12px 16px;border:2px solid var(--brd);border-radius:var(--rs);
   background:var(--surf);cursor:pointer;font-family:var(--mono);
@@ -3162,7 +3163,10 @@ function buildMC(q){
     const col=opts.map(o=>(_NAMELIKE_RE.test(o)&&o.trim().split(/\s+/).length<=4)?colorizeNameAny(o):null);
     if(col.every(Boolean)) html=col;
   }
-  return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${html[i]}</button>`).join('')}</div>`;
+  // Temas conceptuales (Fase 1 e isomería): las opciones son frases, no
+  // nombres IUPAC, y se leen mejor en la letra normal que en monoespaciada.
+  const _txt=FUND_TOPICS.includes(q.topic)?' mc-texto':'';
+  return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${html[i]}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;

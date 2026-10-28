@@ -163,3 +163,4 @@ input[type=range].lab-range{width:100%;accent-color:var(--brand);min-height:36px
   .toc,.pq-fb,.btn-sm,.prac-score,.lab-ctl .seg,.fase-nav,.fase-sig{display:none!important}
   .sec{box-shadow:none;border:1px solid #bbb;break-inside:auto}
 }
+.prac-score:empty{display:none}

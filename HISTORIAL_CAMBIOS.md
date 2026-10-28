@@ -7,6 +7,53 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-28 (144) — Auditoría química y didáctica (Mayer) de la Fase 1 e isomería
+
+### Contexto
+El docente pidió una auditoría de química y de didáctica, basada en los
+principios de aprendizaje multimedia de Richard Mayer, de las páginas nuevas
+(carbono, tipos de carbono, cadenas, laboratorio de isomería) y de las 134
+preguntas nuevas del Juego.
+
+### Correcciones de química
+- `docente-datos.js`: el MTBE se describía «con un carbono cuaternario»; su
+  carbono central está unido a 3 CH₃ y a un O → es **terciario**. «Alcohol
+  antiséptico (propan-2-ol)» pasó a «Alcohol isopropílico (propan-2-ol)».
+- `fundamentos.js`: la pregunta del buta-1,3-dieno decía que con él se forma
+  el caucho natural (que viene del isopreno); ahora habla del polibutadieno,
+  el caucho sintético que sí se fabrica con esa molécula.
+- `cadenas.html`: el clasificador marcaba el anillo con O como «alicíclico»,
+  contradiciendo la misma página («alicíclicas: anillos solo de carbono»).
+  El criterio pasó a «Tipo de anillo»: alicíclico, aromático, heterocíclico
+  o no aplica.
+
+### Correcciones didácticas (Mayer)
+- **Pistas que regalaban la respuesta:** tres preguntas de ángulos de enlace
+  mostraban un dibujo con el ángulo escrito; se quitó el dibujo. En 34 de
+  134 preguntas la correcta era la única opción más larga (en Cadenas, 16 de
+  33); se reescribieron distractores de longitud parecida y más plausibles:
+  ahora son 21 de 134 (16 %, por debajo del azar).
+- **Pre-entrenamiento:** en `carbono.html` se usaban σ y π antes de la
+  sección que los explica; se agregó una definición breve donde aparecen
+  por primera vez.
+- **Legibilidad:** en el Juego, las opciones de estos temas son frases y se
+  veían en letra monoespaciada; ahora usan la letra normal (`mc-texto`).
+- El marcador del clasificador de cadenas ya no aparece vacío.
+
+### Sin cambios (sugerencias para el docente)
+- Narración opcional (principio de modalidad), como el «Escuchar
+  introducción» de IonNom.
+- El violeta se usa para «secundario», «sp²» y la Fase 3: se podría separar.
+
+### Verificación
+Playwright: 10 páginas en PC y celular sin errores; partidas del Juego;
+taller y evaluación del generador del docente con los temas nuevos.
+
+### Pasos manuales
+- Ninguno (GitHub Pages). `chromanom-analytics.gs` no cambió.
+
+---
+
 ## 2026-10-28 (143) — Portada en forma de molécula y Fase 1 «El carbono» (antes de nomenclatura)
 
 ### Contexto

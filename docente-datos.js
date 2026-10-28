@@ -160,8 +160,8 @@ var TEMAS=[
      'Las cadenas muy ramificadas (con carbonos terciarios y cuaternarios) arden de forma más suave en un motor que las lineales.'],
    contexto:[{amb:'Local',t:'La gasolina corriente y la extra que se venden en las estaciones de servicio se diferencian por su octanaje, que depende de cuán ramificadas son sus moléculas.'},
      {amb:'Nacional',t:'Ecopetrol mejora el octanaje de la gasolina en sus refinerías transformando cadenas lineales en cadenas ramificadas.'},
-     {amb:'Global',t:'El metil terc-butil éter (MTBE), con un carbono cuaternario, se usó en todo el mundo para aumentar el octanaje, pero se restringió por contaminar aguas subterráneas.'}],
-   cotidianos:['Gasolina corriente y extra','Alcohol antiséptico (propan-2-ol, alcohol secundario)','Etanol de las bebidas (alcohol primario)'],
+     {amb:'Global',t:'El metil terc-butil éter (MTBE), con un carbono terciario unido a tres CH₃ y a un oxígeno, se usó en todo el mundo para aumentar el octanaje, pero se restringió por contaminar aguas subterráneas.'}],
+   cotidianos:['Gasolina corriente y extra','Alcohol isopropílico (propan-2-ol, alcohol secundario)','Etanol de las bebidas (alcohol primario)'],
    activacion:['Si un carbono está en el extremo de una cadena, ¿a cuántos carbonos está unido?','¿Puede un carbono estar unido a cinco carbonos? ¿Por qué?','¿Qué crees que cambia en una molécula cuando tiene ramificaciones?']
   },
   info:{
