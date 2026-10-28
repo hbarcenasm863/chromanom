@@ -9786,6 +9786,24 @@ document.addEventListener('DOMContentLoaded',()=>{
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
+<script>
+// Narración (narracion.js): bloques que reciben su botón «Escuchar».
+document.querySelectorAll('.tp-head').forEach(function(el){el.setAttribute('data-narrar','');});
+document.querySelectorAll('.tp-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tp-box,.tp-where,.tp-ico');});
+document.querySelectorAll('.tipo-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tipo-card-eq,.tipo-card-rules');});
+</script>
+<script src="narracion.js"></script>
+<script>
+// Los botones 🔊 de cada paso del mecanismo ahora leen el paso completo
+// (título + idea clave), con la misma voz y la lectura de fórmulas del sitio.
+if(window.CN_NARRAR){
+  window.speakStep=function(btn,text){
+    var st=btn&&btn.closest('.mech-step,.rxn-anim-step');
+    window.CN_NARRAR.leer(st?window.CN_NARRAR.textoDe(st,'.mech-vis,.mech-step-n'):text,btn);
+  };
+  window.stopSpeak=function(){window.CN_NARRAR.parar();};
+}
+</script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

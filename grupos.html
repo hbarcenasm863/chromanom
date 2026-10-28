@@ -1277,6 +1277,10 @@ function showGroup(gid){
   // ── Theory card ──
   const theory = document.createElement('div');
   theory.className = 'sec-card';
+  // narracion.js le pone su botón «Escuchar» y lee la tarjeta completa
+  // (descripción, reglas y nota IUPAC), sin las piezas de colores.
+  theory.setAttribute('data-narrar','');
+  theory.setAttribute('data-narrar-excluir','.name-strip,.rule-mol-bd,.rule-mols,.group-badge,.priority-tag,.group-formula,.grp-icon-txt,.rule-num,.rule-chev,.sec-lbl');
   theory.innerHTML = '<div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px">'
     + (g.iconTxt ? '<span class="grp-icon-txt" aria-hidden="true">' + g.icon + '</span>' : '<span style="font-size:2rem" aria-hidden="true">' + g.icon + '</span>')
     + '<div style="flex:1">'
@@ -1291,7 +1295,7 @@ function showGroup(gid){
     + '</div></div></div>'
     + '<div class="sec-lbl">Las 4 partes en un ejemplo</div>'
     + '<div class="name-strip">' + buildNameStrip(g) + '</div>'
-    + '<button class="grp-speak-btn" onclick="speakGrp(\''+(g.name+'. '+g.desc).replace(/<[^>]+>/g,'').replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\')" >🔊 Escuchar descripción</button>'
+    + (window.CN_NARRAR?'':'<button class="grp-speak-btn" onclick="speakGrp(\''+(g.name+'. '+g.desc).replace(/<[^>]+>/g,'').replace(/'/g,"\\'").replace(/"/g,'&quot;')+'\')" >🔊 Escuchar descripción</button>')
     + '<div class="sec-lbl" style="margin-top:14px">Reglas IUPAC <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dimmer);margin-left:4px">— clic para expandir</span></div>'
     + '<div class="rules-list">' + buildRules(g) + '</div>'
     + '<div class="iupac-note">&#128204; <strong>' + (/^IUPAC 2013:/.test(g.iupac) ? 'IUPAC 2013:' : 'IUPAC:') + '</strong> ' + g.iupac.replace(/^IUPAC( 2013)?:\s*/,'') + '</div>'
@@ -2481,7 +2485,10 @@ function _speak(text){
   else window.speechSynthesis.addEventListener('voiceschanged',doSpeak,{once:true});
 }
 function speakGrp(text){_speak(text);}
-function speakRuleBtn(e,text){e.stopPropagation();_speak(text);}
+function speakRuleBtn(e,text){e.stopPropagation();
+  // Con narracion.js: misma voz que el resto del sitio y las fórmulas se leen bien.
+  if(window.CN_NARRAR){window.CN_NARRAR.leer(text,e.currentTarget);return;}
+  _speak(text);}
 </script>
 
 <!-- FOOTER COPYRIGHT -->
@@ -2491,6 +2498,7 @@ function speakRuleBtn(e,text){e.stopPropagation();_speak(text);}
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
+<script src="narracion.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

@@ -12,7 +12,15 @@
    Colombia si existe; no necesita internet ni guarda nada. Si el
    navegador no tiene voz, no aparece ningún botón.
 
-   Otras páginas pueden usar window.CN_NARRAR.leer(texto, boton).
+   Páginas con otra estructura:
+   - data-narrar en un bloque: recibe su botón (después de su primer
+     título) y se lee completo; data-narrar-excluir="selectores" quita
+     partes (ecuaciones, insignias…).
+   - data-narrar-seccion en un ancla vacía (<div id="x"></div>): se lee
+     todo lo que sigue hasta la siguiente ancla vacía (teoria.html).
+   - El contenido que se dibuja después (grupos.html) se monta solo.
+   Otras páginas pueden usar window.CN_NARRAR.leer(texto, boton) y
+   CN_NARRAR.textoDe(elemento, excluir).
    ════════════════════════════════════════════════════════════════════════ */
 (function(){
   var S=window.speechSynthesis;
@@ -45,8 +53,8 @@
       .replace(/[⁰-⁹¹²³]+/g,function(m){return d(m,SUP);})
       .replace(/[①②③④]/g,function(c){return ' '+CIRC[c]+' ';})
       .replace(/σ/g,' sigma ').replace(/π/g,' pi ')
-      .replace(/(\d),(\d)/g,'$1 coma $2').replace(/°/g,' grados').replace(/kJ\/mol/g,'kilojulios por mol')
-      .replace(/·/g,', ').replace(/[«»"]/g,' ').replace(/[🔑⚠️🧩✍️📘⛽☕🧴🧬✏️🏁]/gu,'')
+      .replace(/(\d+(?:,\d+)+)-/g,function(m,g){return g.split(',').join(', ')+' ';}).replace(/(\d),(\d)/g,'$1 coma $2').replace(/\s?°C/g,' grados Celsius').replace(/°/g,' grados').replace(/kJ\/mol/g,'kilojulios por mol')
+      .replace(/·/g,', ').replace(/[«»"]/g,' ').replace(/\s*\((hν|Δ|hν o Δ|hν \/ Δ)\)/g,'').replace(/hν/g,'luz').replace(/Δ/g,'calor').replace(/•/g,'').replace(/\p{Extended_Pictographic}|\uFE0F/gu,'')
       .replace(/\s+([,.:;])/g,'$1').replace(/\s+/g,' ').trim();
   }
   // Lee una lista de frases en cola (en algunos navegadores una sola
@@ -81,6 +89,27 @@
     });
     return out.join(' ');
   }
+  // Texto de un bloque cualquiera, sin figuras, controles, tablas ni
+  // preguntas; cada bloque (párrafo, ítem, título…) termina en pausa.
+  var NO_LEER='svg,button,table,.tbl-wrap,figure,.fig,.prac,.pq,.quiz-q,.quiz-opts,.quiz-fb,input,select,textarea,.narr-btn,.cn-legend,[aria-hidden="true"],script,style';
+  var BLOQUE=/^(P|LI|DIV|H1|H2|H3|H4|H5|H6|UL|OL|SECTION|ARTICLE|BR|DT|DD)$/;
+  function textoLimpio(nodos,excluir){
+    var out=[];
+    (nodos.length!=null?nodos:[nodos]).forEach(function(el){
+      var c=el.cloneNode(true);
+      c.querySelectorAll(NO_LEER+(excluir?','+excluir:'')).forEach(function(x){x.remove();});
+      (function camina(n){
+        n.childNodes.forEach(function(k){
+          if(k.nodeType===3){out.push(k.nodeValue);return;}
+          if(k.nodeType!==1)return;
+          var bl=BLOQUE.test(k.tagName)||k.classList.contains('mx-lbl');if(bl)out.push('\n');camina(k);if(bl)out.push('\n');
+        });
+      })(c);
+      out.push('\n');
+    });
+    return out.join('').split('\n').map(function(x){return x.replace(/\s+/g,' ').trim();}).filter(Boolean)
+      .map(function(x){return /[.!?:;]$/.test(x)?x:x+'.';}).join(' ');
+  }
   function boton(etq){var b=document.createElement('button');b.type='button';b.className='narr-btn';b.innerHTML=etq;b.setAttribute('aria-pressed','false');b.title='Escuchar esta parte en voz alta';return b;}
   function montar(){
     var head=document.querySelector('.cn-page-head');
@@ -94,6 +123,26 @@
       b.addEventListener('click',function(){leer(textoDe(sec),b,sec);});
       h2.insertAdjacentElement('afterend',b);
     });
+    // Bloques marcados con data-narrar
+    document.querySelectorAll('[data-narrar]:not([data-narrar-listo])').forEach(function(z){
+      z.setAttribute('data-narrar-listo','');
+      var b=boton('🔊 Escuchar');b.classList.add('narr-sec');
+      var t=z.querySelector('h1,h2,h3,.tipo-card-title');
+      if(t)t.insertAdjacentElement('afterend',b);else z.insertBefore(b,z.firstChild);
+      b.addEventListener('click',function(){leer(textoLimpio(z,z.getAttribute('data-narrar-excluir')),b,z);});
+    });
+    // Secciones entre anclas vacías (teoria.html)
+    document.querySelectorAll('[data-narrar-seccion]:not([data-narrar-listo])').forEach(function(an){
+      an.setAttribute('data-narrar-listo','');
+      var seg=[],n=an.nextElementSibling;
+      while(n&&!(n.tagName==='DIV'&&n.id&&!n.children.length&&!n.textContent.trim())){seg.push(n);n=n.nextElementSibling;}
+      if(!seg.length)return;
+      var t=null;seg.some(function(x){t=x.matches('.slbl,h1,h2,h3')?x:x.querySelector('h1,h2,.slbl');return !!t;});
+      var b=boton('🔊 Escuchar esta sección');b.classList.add('narr-sec');
+      (t||seg[0]).insertAdjacentElement('afterend',b);
+      var exc=an.getAttribute('data-narrar-excluir');
+      b.addEventListener('click',function(){leer(textoLimpio(seg,exc),b,null);});
+    });
   }
   // La voz no sigue sonando al salir de la página o cambiarla de fondo.
   window.addEventListener('pagehide',parar);
@@ -102,9 +151,12 @@
   css.textContent='.narr-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;margin:2px 0 10px;border-radius:999px;border:1.5px solid var(--cn-brd,#d0e6f5);background:var(--cn-surf,#fff);color:var(--cn-brand-d,#0d4a73);font:inherit;font-size:.82rem;font-weight:800;cursor:pointer}'+
     '.narr-btn:hover,.narr-btn.playing{background:var(--cn-brand-l,#e8f4fb);border-color:var(--cn-brand,#1a6ea8)}'+
     '.cn-page-head .narr-btn{margin-top:12px}'+
-    '.sec.narrando{box-shadow:0 0 0 3px rgba(26,110,168,.35),0 2px 14px rgba(26,110,168,.08)}'+
+    '.sec.narrando,[data-narrar].narrando{box-shadow:0 0 0 3px rgba(26,110,168,.35),0 2px 14px rgba(26,110,168,.08)}'+
     '@media print{.narr-btn{display:none!important}}';
   document.head.appendChild(css);
-  window.CN_NARRAR={leer:function(t,btn){leer(t,btn,null);},parar:parar};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',montar);else montar();
+  window.CN_NARRAR={leer:function(t,btn,zona){leer(t,btn,zona||null);},parar:parar,textoDe:textoLimpio};
+  var pend=null;
+  function iniciar(){montar();
+    new MutationObserver(function(){clearTimeout(pend);pend=setTimeout(montar,250);}).observe(document.body,{childList:true,subtree:true});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',iniciar);else iniciar();
 })();

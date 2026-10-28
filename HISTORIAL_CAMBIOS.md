@@ -7,6 +7,46 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-28 (146) — Narración también en Principios, Grupos y Reacciones
+
+### Contexto
+El docente pidió extender la narración opcional (sesión 145) a las páginas
+de Principios (`teoria.html`), Grupos y Reacciones. Grupos y Reacciones ya
+tenían voz en algunos botones (descripción del grupo, cada regla, cada paso
+del mecanismo), pero cada uno con su propio código y sin el ajuste para
+leer bien la notación química.
+
+### Cambios
+- `narracion.js` ahora sirve para páginas con otra estructura:
+  `data-narrar` (un bloque con su botón), `data-narrar-seccion` (lee desde
+  un ancla hasta la siguiente) y monta solo el contenido que se dibuja
+  después. Mejoras de lectura: los localizadores se leen como lista
+  («propano-1, 2, 3 triol», no «1 coma 2»), pausa entre un título en
+  negrilla y su texto y después de «💡 Idea clave», no lee emojis, «hν» y
+  «Δ» → «luz» y «calor», «°C» → «grados Celsius».
+- `teoria.html`: «Escuchar introducción» y «Escuchar esta sección» en las
+  4 partes, el algoritmo de 5 pasos, las reglas de desempate, la
+  comparación de nomenclaturas y los sustituyentes complejos.
+- `grupos.html`: la tarjeta de cada grupo tiene «Escuchar», que lee la
+  descripción, todas las reglas y la nota IUPAC (reemplaza a «Escuchar
+  descripción», que solo leía el nombre). El 🔊 de cada regla usa la misma voz.
+- `reacciones.html`: «Escuchar» en la idea clave y en las 8 tarjetas de
+  tipos de reacción, y en la presentación de cada grupo. El 🔊 de cada
+  paso del mecanismo ahora lee el paso completo (título + idea clave), no
+  solo el título.
+- `sw.js`: caché `chromanom-v45`.
+
+### Verificación
+Playwright con la voz simulada: las 10 páginas sin errores en PC y
+celular; revisión del texto exacto que se leería en Principios, en la
+tarjeta de Alcoholes, en una regla, en la tarjeta de los alcanos y en un
+paso del mecanismo.
+
+### Pasos manuales
+- Ninguno (GitHub Pages).
+
+---
+
 ## 2026-10-28 (145) — Narración opcional (como en IonNom)
 
 ### Contexto
