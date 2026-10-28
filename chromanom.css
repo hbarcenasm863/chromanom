@@ -165,3 +165,25 @@ body{
 }
 @media print{body{background-image:none!important}}
 @media print{#cn-mol-bg{display:none!important}}
+
+/* ── Ruta por fases (site-ui.js rellena #fase-nav y #fase-sig) ───────── */
+.fase-nav{--fc:var(--cn-brand);display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;background:var(--cn-surf);border:1.5px solid var(--cn-brd);border-left:5px solid var(--fc);border-radius:var(--cn-r);padding:10px 14px;margin:0 0 16px;box-shadow:var(--cn-sh)}
+.fase-nav:empty{display:none}
+.fn-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:.92rem;color:var(--cn-tx)}
+.fn-n{font-family:var(--cn-mono);font-size:.7rem;font-weight:800;color:#fff;background:var(--fc);border-radius:999px;padding:2px 9px}
+.fn-sub{font-size:.78rem;color:var(--cn-tx3)}
+.fn-st{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0}
+.fn-st a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:5px 12px 5px 6px;border-radius:999px;border:1.5px solid var(--cn-brd);background:var(--cn-surf);color:var(--cn-tx2);font-size:.8rem;font-weight:700;text-decoration:none}
+.fn-st a:hover{border-color:var(--fc)}
+.fn-st a.on{background:var(--fc);border-color:var(--fc);color:#fff}
+.fn-k{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--cn-surf2);color:var(--cn-tx2);font-size:.72rem;font-weight:800}
+.fn-st a.on .fn-k{background:rgba(255,255,255,.25);color:#fff}
+.fn-st a.vis .fn-k{background:var(--cn-ok-l);color:var(--cn-ok)}
+.fase-sig{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:stretch;gap:10px;margin:20px 0 8px}
+.fase-sig:empty{display:none}
+.fs-prev,.fs-next{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:10px 16px;border-radius:var(--cn-r-s);text-decoration:none;font-weight:800;font-size:.9rem}
+.fs-prev{color:var(--cn-tx2);border:1.5px solid var(--cn-brd);background:var(--cn-surf)}
+.fs-next{--fc:var(--cn-brand);margin-left:auto;background:var(--fc);color:#fff;box-shadow:var(--cn-sh);text-align:right}
+.fs-next small{font-size:.7rem;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.fs-next:hover{filter:brightness(1.08)}
+@media (max-width:560px){.fs-prev,.fs-next{width:100%;text-align:left}.fs-next{margin-left:0}}

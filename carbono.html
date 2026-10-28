@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · El átomo de carbono e hibridación</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<style>
+/* Promoción electrónica */
+#promo text{font-family:'JetBrains Mono',monospace}
+#promo .bx{transition:transform .9s cubic-bezier(.4,1.4,.5,1)}
+#promo .bx rect{transition:fill .6s,stroke .6s}
+#promo .e{transition:transform 1s cubic-bezier(.5,0,.3,1),opacity .4s}
+#promo .lbl{transition:opacity .5s}
+.dato{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:10px 0}
+.dato div{background:#fff;border:1.5px solid var(--brd);border-radius:var(--rs);padding:10px;text-align:center}
+.dato b{display:block;font-family:'Fraunces',serif;font-size:1.5rem;color:var(--brand-d)}
+.dato span{font-size:.76rem;color:var(--dimmer);font-weight:700}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link active">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 1 · El carbono · Parada 1 de 3</div>
+  <h1>El átomo de carbono e hibridación</h1>
+  <p>Antes de nombrar compuestos orgánicos hay que conocer a su protagonista. Aquí descubres por qué el carbono forma siempre cuatro enlaces, cómo «mezcla» sus orbitales y por qué sus moléculas tienen formas tan distintas: tetraédricas, planas o lineales.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#atomo">El átomo de carbono</a>
+  <a href="#promocion">Promoción e hibridación</a>
+  <a href="#formas">sp³, sp² y sp en 3D</a>
+  <a href="#enlaces">Enlaces σ y π</a>
+  <a href="#reto">Reto: ¿qué hibridación tiene?</a>
+  <a href="#practica">Practica</a>
+</nav>
+
+<!-- ═══════════════ 1. EL ÁTOMO ═══════════════ -->
+<section class="sec" id="atomo">
+  <div class="sec-kicker">Punto de partida</div>
+  <h2>El átomo de carbono</h2>
+  <div class="lab">
+    <div class="lab-view">
+      <svg class="bohr" viewBox="-120 -120 240 240" role="img" aria-label="Modelo de Bohr del carbono: núcleo con 6 protones y 6 neutrones, 2 electrones en el primer nivel y 4 en el segundo">
+        <circle r="44" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+        <circle r="92" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 5"/>
+        <g class="orb" style="animation-duration:5s"><circle cx="44" cy="0" r="7" fill="#1a6ea8"/><circle cx="-44" cy="0" r="7" fill="#1a6ea8"/></g>
+        <g class="orb" style="animation-duration:11s"><circle cx="92" cy="0" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/><circle cx="-92" cy="0" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/><circle cx="0" cy="92" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/><circle cx="0" cy="-92" r="8" fill="#f59e0b" stroke="#fff" stroke-width="2"/></g>
+        <g><circle cx="-7" cy="-6" r="8" fill="#ef4444"/><circle cx="6" cy="-8" r="8" fill="#94a3b8"/><circle cx="9" cy="5" r="8" fill="#ef4444"/><circle cx="-4" cy="8" r="8" fill="#94a3b8"/><circle cx="-12" cy="5" r="8" fill="#94a3b8"/><circle cx="0" cy="-1" r="8" fill="#ef4444"/><circle cx="13" cy="-5" r="7" fill="#94a3b8"/><circle cx="-12" cy="-9" r="7" fill="#ef4444"/><circle cx="2" cy="12" r="7" fill="#ef4444"/><circle cx="12" cy="13" r="6" fill="#94a3b8"/><circle cx="-14" cy="14" r="6" fill="#ef4444"/><circle cx="16" cy="-14" r="6" fill="#94a3b8"/></g>
+        <text x="0" y="114" text-anchor="middle" font-family="Outfit,sans-serif" font-size="12" font-weight="800" fill="#b45309">4 electrones de valencia</text>
+      </svg>
+    </div>
+    <div class="lab-ctl">
+      <p>El carbono (C) está en el <b>grupo 14</b> y el <b>periodo 2</b> de la tabla periódica. Su núcleo tiene 6 protones y, en el isótopo más común, 6 neutrones.</p>
+      <div class="dato">
+        <div><b>6</b><span>número atómico (Z)</span></div>
+        <div><b>12</b><span>número de masa (¹²C)</span></div>
+        <div><b>4</b><span>electrones de valencia</span></div>
+        <div><b>2,55</b><span>electronegatividad</span></div>
+      </div>
+      <p>Los <b style="color:#b45309">4 electrones del último nivel</b> (en amarillo) son los que forman enlaces: por eso el carbono es <b>tetravalente</b>, forma siempre <b>4 enlaces covalentes</b>.</p>
+    </div>
+  </div>
+  <div class="key">🔑 <b>Dos superpoderes del carbono.</b> <b>Tetravalencia:</b> forma 4 enlaces, que pueden ser sencillos, dobles o triples. <b>Concatenación:</b> se une a otros carbonos formando cadenas y anillos muy largos y estables. Por eso existen <b>millones</b> de compuestos orgánicos, muchos más que de todos los demás elementos juntos.</div>
+  <div class="life">
+    <div class="life-h">En tu vida diaria</div>
+    <p>✏️ La mina del lápiz es <b>grafito</b> y el anillo de compromiso puede ser de <b>diamante</b>: los dos son carbono puro. Lo que cambia es cómo están unidos sus átomos (su hibridación), y eso los hace uno blando y negro y el otro duro y transparente.</p>
+    <p>🧬 Tu ADN, el azúcar de la panela, el plástico de una botella y la gasolina están construidos sobre esqueletos de carbono.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 2. PROMOCIÓN E HIBRIDACIÓN ═══════════════ -->
+<section class="sec" id="promocion">
+  <div class="sec-kicker">De 2 a 4 electrones desapareados</div>
+  <h2>Promoción electrónica e hibridación</h2>
+  <p>La configuración del carbono es <b class="mono">1s² 2s² 2p²</b>. Si la miras en cajas, solo tiene <b>2 electrones desapareados</b>… ¡pero forma 4 enlaces! Avanza paso a paso para ver cómo lo resuelve.</p>
+  <div class="lab">
+    <div class="lab-view">
+      <svg id="promo" viewBox="-30 -84 330 220" role="img" aria-label="Diagrama de energía de los orbitales del carbono"></svg>
+    </div>
+    <div class="lab-ctl">
+      <div class="seg" id="promo-seg" role="group" aria-label="Pasos">
+        <button type="button" data-p="0">1 · Fundamental</button>
+        <button type="button" data-p="1">2 · Promoción</button>
+        <button type="button" data-p="2">3 · Hibridación</button>
+      </div>
+      <div class="seg" id="promo-hib" role="group" aria-label="Tipo de hibridación" style="display:none">
+        <button type="button" data-h="3">sp³</button><button type="button" data-h="2">sp²</button><button type="button" data-h="1">sp</button>
+      </div>
+      <div class="lab-msg" id="promo-msg" aria-live="polite"></div>
+      <div class="links-row"><button type="button" class="btn-sm prim" id="promo-next">Siguiente paso →</button></div>
+    </div>
+  </div>
+  <div class="key">🔑 <b>Hibridar</b> es «mezclar» orbitales de distinta forma y energía (el 2s y uno, dos o tres 2p) para obtener orbitales <b>nuevos e iguales</b> entre sí. El número de orbitales híbridos es igual al número de orbitales que se mezclan.</div>
+</section>
+
+<!-- ═══════════════ 3. LAS TRES FORMAS ═══════════════ -->
+<section class="sec" id="formas">
+  <div class="sec-kicker">Geometría molecular</div>
+  <h2>sp³, sp² y sp: tres formas en 3D</h2>
+  <p>Los orbitales híbridos se separan lo más posible para que sus electrones se repelan menos. Así nace la forma de cada molécula. <b>Arrastra el modelo</b> con el dedo o el ratón para girarlo.</p>
+  <div class="lab">
+    <div class="lab-view">
+      <span class="lab-badge" id="h3-badge">CH₄</span>
+      <svg id="h3d" viewBox="-150 -110 300 220" role="img" aria-label="Modelo 3D de la molécula seleccionada"></svg>
+    </div>
+    <div class="lab-ctl">
+      <div class="seg" id="h3-seg" role="group" aria-label="Hibridación">
+        <button type="button" data-k="sp3">sp³ · metano</button><button type="button" data-k="sp2">sp² · eteno</button><button type="button" data-k="sp">sp · etino</button>
+      </div>
+      <dl class="lab-data" id="h3-data"></dl>
+      <div class="lab-msg" id="h3-msg"></div>
+    </div>
+  </div>
+  <h3>Así se dibujan en el papel</h3>
+  <div class="figs" id="fig-geo"></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Hibridación</th><th>Se mezclan</th><th>Átomos unidos al C</th><th>Geometría</th><th>Ángulo</th><th>p sin hibridar</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--sp3)">sp³</b></td><td>1 s + 3 p</td><td>4 (solo enlaces sencillos)</td><td>Tetraédrica</td><td>109,5°</td><td>0</td></tr>
+      <tr><td><b style="color:var(--sp2)">sp²</b></td><td>1 s + 2 p</td><td>3 (un doble enlace)</td><td>Trigonal plana</td><td>120°</td><td>1 → forma 1 π</td></tr>
+      <tr><td><b style="color:var(--sp1)">sp</b></td><td>1 s + 1 p</td><td>2 (un triple o dos dobles)</td><td>Lineal</td><td>180°</td><td>2 → forman 2 π</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ═══════════════ 4. ENLACES σ Y π ═══════════════ -->
+<section class="sec" id="enlaces">
+  <div class="sec-kicker">Sencillos, dobles y triples</div>
+  <h2>Enlaces σ (sigma) y π (pi)</h2>
+  <p>Entre dos átomos, el <b>primer enlace</b> siempre es <b>σ</b>: los orbitales se solapan <b>de frente</b>. Si hay un segundo o un tercer enlace, son <b>π</b>: los orbitales p sin hibridar se solapan <b>de lado</b>, por encima y por debajo del eje (las nubes moradas del modelo del eteno).</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Enlace</th><th>Composición</th><th>Longitud C–C</th><th>¿Puede girar?</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><b>C−C</b> sencillo</td><td>1 σ</td><td>154 pm (el más largo)</td><td>Sí, gira libremente</td><td>etano</td></tr>
+      <tr><td><b>C=C</b> doble</td><td>1 σ + 1 π</td><td>134 pm</td><td>No: se rompería el π</td><td>eteno</td></tr>
+      <tr><td><b>C≡C</b> triple</td><td>1 σ + 2 π</td><td>120 pm (el más corto)</td><td>No</td><td>etino</td></tr>
+    </tbody></table></div>
+  <div class="warn">⚠️ <b>Cuenta bien los σ:</b> en el eteno (CH₂=CH₂) hay 4 enlaces C−H + 1 σ del doble enlace = <b>5 σ</b>, y <b>1 π</b>. En el etino (HC≡CH): 2 C−H + 1 σ = <b>3 σ</b> y <b>2 π</b>.</div>
+  <div class="key">🔑 <b>Regla rápida para saber la hibridación:</b> cuenta cuántos átomos están unidos al carbono. <b>4 → sp³</b> · <b>3 → sp²</b> · <b>2 → sp</b>. (Un doble enlace cuenta como un solo átomo vecino.)</div>
+</section>
+
+<!-- ═══════════════ 5. RETO ═══════════════ -->
+<section class="sec" id="reto">
+  <div class="sec-kicker">Ponlo a prueba</div>
+  <h2>Reto: ¿qué hibridación tiene cada carbono?</h2>
+  <p>Piensa la respuesta y luego toca cada carbono para comprobarla. Cada molécula puede tener carbonos con hibridaciones distintas.</p>
+  <div class="fig" id="reto-fig" style="max-width:520px;margin:0 auto"></div>
+  <div class="chips-row" id="reto-chips" style="justify-content:center"></div>
+  <div class="lab-msg" id="reto-msg" aria-live="polite">Toca un carbono (C1, C2…) para ver su hibridación.</div>
+  <div class="links-row" style="justify-content:center"><button type="button" class="btn-sm" id="reto-otra">🔀 Otra molécula</button><button type="button" class="btn-sm" id="reto-todas">👁️ Mostrar todas</button></div>
+</section>
+
+<!-- ═══════════════ 6. PRÁCTICA ═══════════════ -->
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso</div>
+  <h2>Practica lo que aprendiste</h2>
+  <p>Ocho preguntas al azar del banco de este tema. Cuando termines, pide otras o juega el tema completo en el Juego.</p>
+  <div class="prac" id="prac-hib" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div>
+
+<script src="fundamentos.js"></script>
+<script>
+(function(){
+var FU=window.FUND;
+// ── Promoción electrónica (diagrama de energía con cajas) ──
+(function(){
+  var svg=document.getElementById('promo'),W=32,paso=0,hib=3;
+  var X={s1:0,s2:70,p:[130,170,210]},Y={s1:80,s2:30,p:-20,h:4};
+  function caja(id,x,y,lab){return '<g class="bx" id="'+id+'" style="transform:translate('+x+'px,'+y+'px)"><rect width="'+W+'" height="30" rx="5" fill="#fff" stroke="#0d2233" stroke-width="1.6"/><text class="lbl" x="'+(W/2)+'" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">'+lab+'</text></g>';}
+  function e(id,ch){return '<text class="e" id="'+id+'" x="0" y="0" text-anchor="middle" dominant-baseline="central" font-size="18" font-weight="800" fill="#1a6ea8">'+ch+'</text>';}
+  svg.innerHTML='<line x1="-8" y1="110" x2="-8" y2="-55" stroke="#94a3b8" stroke-width="1.5"/><path d="M -12 -48 L -8 -58 L -4 -48" fill="#94a3b8"/><text x="-4" y="-50" font-size="10" font-weight="700" fill="#64748b">Energía</text>'+
+    caja('b1s',X.s1,Y.s1,'1s')+caja('b2s',X.s2,Y.s2,'2s')+caja('bp0',X.p[0],Y.p,'2p')+caja('bp1',X.p[1],Y.p,'2p')+caja('bp2',X.p[2],Y.p,'2p')+
+    e('e1','↑')+e('e2','↓')+e('e3','↑')+e('e4','↓')+e('e5','↑')+e('e6','↑')+
+    '<text id="promo-tit" x="135" y="-70" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0d2233"></text>';
+  function pos(id,x,y){var el=document.getElementById(id);el.style.transform='translate('+x+'px,'+y+'px)';}
+  function setBox(id,x,y,lab,col){var g=document.getElementById(id);g.style.transform='translate('+x+'px,'+y+'px)';g.querySelector('rect').setAttribute('fill',col||'#fff');g.querySelector('rect').setAttribute('stroke',col?'#7c3aed':'#0d2233');g.querySelector('text').textContent=lab;}
+  function dibuja(){
+    var tit=document.getElementById('promo-tit'),msg=document.getElementById('promo-msg'),c=W/2,cy=15;
+    pos('e1',X.s1+c-6,Y.s1+cy);pos('e2',X.s1+c+6,Y.s1+cy);
+    var e4=document.getElementById('e4');
+    if(paso===0){
+      setBox('b2s',X.s2,Y.s2,'2s');X.p.forEach(function(x,i){setBox('bp'+i,x,Y.p,'2p');});
+      pos('e3',X.s2+c-6,Y.s2+cy);pos('e4',X.s2+c+6,Y.s2+cy);e4.textContent='↓';pos('e5',X.p[0]+c,Y.p+cy);pos('e6',X.p[1]+c,Y.p+cy);
+      tit.textContent='Estado fundamental: 1s² 2s² 2p²';
+      msg.innerHTML='En el estado fundamental el 2s está lleno (↑↓) y en el 2p hay <b>solo 2 electrones desapareados</b>. Con eso el carbono formaría solo 2 enlaces… pero en la realidad forma 4.';
+    }else if(paso===1){
+      setBox('b2s',X.s2,Y.s2,'2s');X.p.forEach(function(x,i){setBox('bp'+i,x,Y.p,'2p');});
+      pos('e3',X.s2+c,Y.s2+cy);pos('e4',X.p[2]+c,Y.p+cy);setTimeout(function(){if(paso===1)e4.textContent='↑';},700);pos('e5',X.p[0]+c,Y.p+cy);pos('e6',X.p[1]+c,Y.p+cy);
+      tit.textContent='Estado excitado: 1s² 2s¹ 2p³';
+      msg.innerHTML='<b>Promoción:</b> un electrón del 2s «salta» al orbital 2p vacío. Ahora hay <b>4 electrones desapareados</b>. Cuesta un poco de energía, pero se recupera de sobra al formar 2 enlaces más.';
+    }else{
+      // Se mezclan el 2s y (hib) orbitales 2p: quedan a la misma energía
+      var xs=[X.s2,X.p[0],X.p[1],X.p[2]],nH=hib+1,lab=hib===3?'sp³':hib===2?'sp²':'sp',col=hib===3?'#ccfbf1':hib===2?'#ede9fe':'#ffedd5';
+      var ids=['b2s','bp0','bp1','bp2'],el=['e3','e5','e6','e4'];
+      ids.forEach(function(id,i){var h=i<nH;setBox(id,70+i*40,h?Y.h:Y.p-18,h?lab:'2p',h?col:null);pos(el[i],70+i*40+c,(h?Y.h:Y.p-18)+cy);});
+      e4.textContent='↑';
+      tit.textContent='Hibridación '+lab+': '+nH+' orbitales híbridos'+(hib<3?' + '+(3-hib)+' p':'');
+      msg.innerHTML=hib===3?'El 2s y los <b>tres</b> 2p se mezclan: salen <b>4 orbitales sp³</b> iguales, a la misma energía. Cada uno forma un enlace σ → 4 enlaces sencillos, como en el metano.':
+        hib===2?'El 2s y <b>dos</b> 2p se mezclan: salen <b>3 orbitales sp²</b>. Queda <b>un orbital p</b> sin hibridar (arriba), que formará el enlace <b>π</b> de un doble enlace.':
+        'El 2s y <b>un</b> 2p se mezclan: salen <b>2 orbitales sp</b>. Quedan <b>dos orbitales p</b> sin hibridar, que forman los <b>dos enlaces π</b> de un triple enlace.';
+    }
+    document.querySelectorAll('#promo-seg button').forEach(function(b){var on=+b.dataset.p===paso;b.classList.toggle('on',on);b.style.background=on?'#1a6ea8':'';b.style.borderColor=on?'#1a6ea8':'';});
+    document.querySelectorAll('#promo-hib button').forEach(function(b){var on=+b.dataset.h===hib;b.classList.toggle('on',on);b.style.background=on?'#7c3aed':'';b.style.borderColor=on?'#7c3aed':'';});
+    document.getElementById('promo-hib').style.display=paso===2?'':'none';
+    document.getElementById('promo-next').textContent=paso<2?'Siguiente paso →':'↺ Volver a empezar';
+  }
+  document.getElementById('promo-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b){paso=+b.dataset.p;dibuja();}});
+  document.getElementById('promo-hib').addEventListener('click',function(e){var b=e.target.closest('button');if(b){hib=+b.dataset.h;dibuja();}});
+  document.getElementById('promo-next').addEventListener('click',function(){paso=(paso+1)%3;dibuja();});
+  dibuja();
+})();
+
+// ── Modelos 3D ──
+(function(){
+  var D={
+    sp3:{b:'CH₄ · metano',c:'#0f766e',d:[['Se mezclan','1 s + 3 p → 4 sp³'],['Geometría','Tetraédrica'],['Ángulo','109,5°'],['Enlaces','4 σ (C−H)']],m:'Los 4 orbitales sp³ apuntan a las esquinas de un <b>tetraedro</b>. Por eso las cadenas de los alcanos son en <b>zigzag</b> y no rectas.'},
+    sp2:{b:'C₂H₄ · eteno',c:'#7c3aed',d:[['Se mezclan','1 s + 2 p → 3 sp²'],['Geometría','Trigonal plana'],['Ángulo','120°'],['Enlaces','5 σ + 1 π']],m:'Los 3 orbitales sp² quedan en un <b>plano</b>. Las nubes moradas son el orbital p de cada carbono: se solapan de lado y forman el enlace <b>π</b>. Gira el modelo: la molécula es plana.'},
+    sp:{b:'C₂H₂ · etino',c:'#c2410c',d:[['Se mezclan','1 s + 1 p → 2 sp'],['Geometría','Lineal'],['Ángulo','180°'],['Enlaces','3 σ + 2 π']],m:'Los 2 orbitales sp quedan <b>opuestos</b>: la molécula es una línea recta. Los dos pares de nubes (morado y rosado) son los dos orbitales p que forman los <b>dos enlaces π</b> del triple enlace.'}
+  };
+  var k='sp3',ctl=FU.mol3d(document.getElementById('h3d'),function(){return FU.MOD[k];},{escala:58});
+  function pon(nk){k=nk;var x=D[k];document.getElementById('h3-badge').textContent=x.b;
+    document.getElementById('h3-data').innerHTML=x.d.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>';}).join('');
+    document.getElementById('h3-msg').innerHTML=x.m;
+    document.querySelectorAll('#h3-seg button').forEach(function(b){var on=b.dataset.k===k;b.classList.toggle('on',on);b.style.background=on?D[b.dataset.k].c:'';b.style.borderColor=on?D[b.dataset.k].c:'';});
+    ctl.redibuja();}
+  document.getElementById('h3-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)pon(b.dataset.k);});
+  pon('sp3');
+  document.getElementById('fig-geo').innerHTML=
+    '<div class="fig">'+FU.geo.sp3()+'<div class="fig-cap">sp³ · tetraédrica</div><div class="fig-sub">La cuña negra sale hacia ti; la punteada va hacia atrás.</div></div>'+
+    '<div class="fig">'+FU.geo.sp2(true)+'<div class="fig-cap">sp² · trigonal plana</div><div class="fig-sub">Los lóbulos morados forman el enlace π.</div></div>'+
+    '<div class="fig">'+FU.geo.sp()+'<div class="fig-cap">sp · lineal</div><div class="fig-sub">Todo en línea recta.</div></div>';
+})();
+
+// ── Reto: hibridación de cada carbono ──
+(function(){
+  var A=function(t,o){o=o||{};o.t=t;return o;},COL={sp3:'#0f766e',sp2:'#7c3aed',sp:'#c2410c'},HT={sp3:'sp³',sp2:'sp²',sp:'sp'};
+  var MOLS=[
+    {at:[A('CH₂',{b:2,n:1}),A('CH',{n:2}),A('CH₂',{n:3}),A('C',{b:3,n:4}),A('CH',{n:5})],h:['sp2','sp2','sp3','sp','sp'],
+     w:['unido a C2 (doble enlace) y a dos H: 3 vecinos','unido a C1 (doble), H y C3: 3 vecinos','unido a C2, C4 y dos H: 4 vecinos, solo enlaces sencillos','unido a C3 y a C5 (triple): 2 vecinos','unido a C4 (triple) y a un H: 2 vecinos']},
+    {at:[A('CH₃',{n:1}),A('C',{u:'O',ub:2,n:2}),A('CH',{b:2,n:3}),A('CH₂',{n:4})],h:['sp3','sp2','sp2','sp2'],
+     w:['unido a C2 y tres H: 4 vecinos','unido a C1, C3 y al O (doble enlace): 3 vecinos','unido a C2, H y C4 (doble): 3 vecinos','unido a C3 (doble) y dos H: 3 vecinos']},
+    {at:[A('CH',{b:3,n:1}),A('C',{n:2}),A('CH',{u:'CH₃',n:3}),A('CH₂',{n:4}),A('CH₃',{n:5})],h:['sp','sp','sp3','sp3','sp3'],
+     w:['unido a C2 (triple) y un H: 2 vecinos','unido a C1 (triple) y C3: 2 vecinos','unido a C2, C4, CH₃ y H: 4 vecinos','unido a C3, C5 y dos H: 4 vecinos','unido a C4 y tres H: 4 vecinos']}
+  ];
+  var i=0,vis=[];
+  function pinta(){
+    var m=MOLS[i];vis=m.h.map(function(){return false;});
+    document.getElementById('reto-fig').innerHTML=FU.semi(m.at,'molécula del reto con sus carbonos numerados');
+    document.getElementById('reto-chips').innerHTML=m.h.map(function(h,j){return '<button type="button" class="hib-chip" data-j="'+j+'">C'+(j+1)+' · ?</button>';}).join('');
+    document.getElementById('reto-msg').textContent='Toca un carbono (C1, C2…) para ver su hibridación.';
+  }
+  function muestra(j,silencio){
+    var m=MOLS[i],h=m.h[j],b=document.querySelector('#reto-chips [data-j="'+j+'"]');
+    b.classList.add('rev');b.style.background=COL[h];b.style.borderColor=COL[h];b.textContent='C'+(j+1)+' · '+HT[h];
+    if(!silencio)document.getElementById('reto-msg').innerHTML='<b>C'+(j+1)+'</b>: '+m.w[j]+' → <b style="color:'+COL[h]+'">'+HT[h]+'</b>.';
+  }
+  document.getElementById('reto-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(b)muestra(+b.dataset.j);});
+  document.getElementById('reto-otra').addEventListener('click',function(){i=(i+1)%MOLS.length;pinta();});
+  document.getElementById('reto-todas').addEventListener('click',function(){MOLS[i].h.forEach(function(_,j){muestra(j,true);});document.getElementById('reto-msg').innerHTML='Recuerda: <b style="color:#0f766e">4 vecinos → sp³</b> · <b style="color:#7c3aed">3 → sp²</b> · <b style="color:#c2410c">2 → sp</b>.';});
+  pinta();
+})();
+
+FU.practica('prac-hib','hibridacion',8,'Practica: átomo de carbono e hibridación');
+})();
+</script>
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>

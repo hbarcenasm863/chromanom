@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Clasificación de cadenas carbonadas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<style>
+#morph text{font-family:'JetBrains Mono',monospace}
+.crit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.crit>div{border:1.5px solid var(--brd);border-radius:var(--rs);background:#fff;padding:12px}
+.crit h4{font-size:.9rem;font-weight:800;color:var(--brand-d);margin-bottom:6px}
+.crit .par{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.crit .par>div{background:var(--surf2);border-radius:8px;padding:8px;text-align:center;font-size:.8rem;line-height:1.4;color:var(--dim)}
+.crit .par b{display:block;font-size:.86rem;color:var(--tx);margin-bottom:2px}
+.crit .par svg{display:block;margin:6px auto 0;max-width:100%!important;height:58px!important;width:auto!important}
+@media(max-width:700px){.crit{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link active">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 1 · El carbono · Parada 3 de 3</div>
+  <h1>Clasificación de las cadenas carbonadas</h1>
+  <p>Los carbonos se unen en cadenas que pueden ser abiertas o cerradas, rectas o con ramas, con enlaces sencillos o múltiples, y a veces con otros átomos intercalados. Clasificar la cadena es el primer paso para nombrarla: es lo que harás en la fase de Nomenclatura.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#mapa">Los 4 criterios</a>
+  <a href="#cerrar">Abierta o cerrada</a>
+  <a href="#doblar">Lineal o ramificada</a>
+  <a href="#cerradas">Tipos de anillos</a>
+  <a href="#clasificador">Clasificador</a>
+  <a href="#practica">Practica</a>
+</nav>
+
+<!-- ═══════════════ 1. MAPA ═══════════════ -->
+<section class="sec" id="mapa">
+  <div class="sec-kicker">Una cadena, cuatro preguntas</div>
+  <h2>Los 4 criterios para clasificar una cadena</h2>
+  <p>Una misma cadena se clasifica respondiendo cuatro preguntas. Por ejemplo, CH₃−CH(CH₃)−CH=CH₂ es <b>abierta, ramificada, insaturada y homogénea</b>.</p>
+  <div class="crit" id="crit"></div>
+  <div class="key">🔑 <b>Heteroátomo</b> = un átomo distinto del carbono (O, N, S…) <b>intercalado entre carbonos</b>. Si el O o el N están al final, como un −OH o un −NH₂, son grupos que cuelgan de la cadena y la cadena sigue siendo <b>homogénea</b>.</div>
+</section>
+
+<!-- ═══════════════ 2. ABIERTA / CERRADA ═══════════════ -->
+<section class="sec" id="cerrar">
+  <div class="sec-kicker">Por su forma</div>
+  <h2>Abierta o cerrada: ciérrala tú</h2>
+  <p>Una cadena <b>abierta</b> (acíclica o alifática) tiene dos extremos. Si los extremos se unen, la cadena se vuelve <b>cerrada</b> (cíclica). Fíjate en lo que pasa con los hidrógenos al cerrarla.</p>
+  <div class="lab">
+    <div class="lab-view"><svg id="morph" viewBox="-130 -95 260 190" role="img" aria-label="Cadena de 6 carbonos que se cierra en un anillo"></svg></div>
+    <div class="lab-ctl">
+      <div class="links-row" style="margin:0 0 10px"><button type="button" class="btn-sm prim" id="morph-btn">🔄 Cerrar la cadena</button></div>
+      <dl class="lab-data" id="morph-data"></dl>
+      <div class="lab-msg" id="morph-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 3. LINEAL / RAMIFICADA ═══════════════ -->
+<section class="sec" id="doblar">
+  <div class="sec-kicker">Por su forma (cadenas abiertas)</div>
+  <h2>Lineal o ramificada: doblar no es ramificar</h2>
+  <p>Una cadena es <b>ramificada</b> cuando de algún carbono sale otra cadena: hay un carbono unido a <b>3 o 4 carbonos</b> (terciario o cuaternario). Doblar el dibujo <b>no</b> crea ramas: sigue el camino de un extremo al otro.</p>
+  <div class="lab">
+    <div class="lab-view"><svg id="doble" viewBox="-20 -80 340 190" role="img" aria-label="Cadena que cambia de forma"></svg></div>
+    <div class="lab-ctl">
+      <div class="seg" id="doble-seg" role="group" aria-label="Forma">
+        <button type="button" data-f="0">Recta</button><button type="button" data-f="1">Zigzag</button><button type="button" data-f="2">En U</button><button type="button" data-f="3">Ramificada</button>
+      </div>
+      <div class="lab-msg" id="doble-msg"></div>
+      <div class="links-row"><button type="button" class="btn-sm" id="doble-camino">✏️ Recorrer el camino</button></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ <b>Error frecuente:</b> pensar que una cadena en zigzag o «doblada» es ramificada. El zigzag es la forma real de los alcanos (por los 109,5° del carbono sp³). Una cadena solo es ramificada si el camino se <b>bifurca</b>.</div>
+</section>
+
+<!-- ═══════════════ 4. CERRADAS ═══════════════ -->
+<section class="sec" id="cerradas">
+  <div class="sec-kicker">Cadenas cerradas</div>
+  <h2>Tipos de anillos</h2>
+  <div class="tree three" role="group" aria-label="Tipos de cadenas cerradas">
+    <div class="tree-root">Cadenas cerradas (cíclicas)</div>
+    <div class="tree-col"><h4>Alicíclicas</h4><p>Anillos solo de carbono, <b>no aromáticos</b>. Pueden ser saturados o insaturados.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-alic"></div></div>
+    <div class="tree-col"><h4>Aromáticas</h4><p>Anillos tipo <b>benceno</b>: 6 carbonos sp² con dobles enlaces alternados, que se dibujan con un círculo.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-arom"></div></div>
+    <div class="tree-col"><h4>Heterocíclicas</h4><p>El anillo tiene un <b>heteroátomo</b> (O, N, S). Pueden ser aromáticas o no.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-het"></div></div>
+  </div>
+  <div class="life">
+    <div class="life-h">En tu vida diaria</div>
+    <p>☕ La cafeína y la nicotina tienen anillos <b>heterocíclicos</b> con nitrógeno. 🧴 Muchos perfumes tienen anillos <b>aromáticos</b>. ⛽ La gasolina mezcla cadenas abiertas, ramificadas y anillos.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 5. CLASIFICADOR ═══════════════ -->
+<section class="sec" id="clasificador">
+  <div class="sec-kicker">Laboratorio</div>
+  <h2>Clasificador de cadenas</h2>
+  <p>Marca una opción en cada criterio y pulsa <b>Comprobar</b>.</p>
+  <div class="lab" style="align-items:start">
+    <div class="lab-view"><div class="fig" id="cl-fig" style="width:100%;min-height:180px;justify-content:center"></div></div>
+    <div class="lab-ctl">
+      <form id="cl-form" class="cl-grid" onsubmit="return false">
+        <fieldset data-c="f"><legend>Forma</legend><label><input type="radio" name="f" value="al"> Abierta lineal</label><label><input type="radio" name="f" value="ar"> Abierta ramificada</label><label><input type="radio" name="f" value="c"> Cerrada</label></fieldset>
+        <fieldset data-c="e"><legend>Enlaces</legend><label><input type="radio" name="e" value="sat"> Saturada</label><label><input type="radio" name="e" value="ins"> Insaturada</label></fieldset>
+        <fieldset data-c="a"><legend>Átomos</legend><label><input type="radio" name="a" value="hom"> Homogénea</label><label><input type="radio" name="a" value="het"> Heterogénea</label></fieldset>
+        <fieldset data-c="r"><legend>Si es cerrada</legend><label><input type="radio" name="r" value="alic"> Alicíclica</label><label><input type="radio" name="r" value="arom"> Aromática</label><label><input type="radio" name="r" value="na"> No aplica (abierta)</label></fieldset>
+      </form>
+      <div class="lab-msg" id="cl-msg" aria-live="polite">Clasifica la cadena del dibujo.</div>
+      <div class="links-row"><button type="button" class="btn-sm prim" id="cl-ok">✓ Comprobar</button><button type="button" class="btn-sm" id="cl-otra">🔀 Otra cadena</button><span class="prac-score" id="cl-score" style="align-self:center"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 6. PRÁCTICA ═══════════════ -->
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso</div>
+  <h2>Practica lo que aprendiste</h2>
+  <p>Ocho preguntas al azar del banco de este tema.</p>
+  <div class="prac" id="prac-cad" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div>
+
+<script src="fundamentos.js"></script>
+<script>
+(function(){
+var FU=window.FUND,F=FU.fig,quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function anima(dur,cb,fin){if(quieto){cb(1);if(fin)fin();return;}var t0=performance.now();(function f(now){var t=Math.min(1,(now-t0)/dur);cb(ease(t));if(t<1)requestAnimationFrame(f);else if(fin)fin();})(t0);}
+
+// Mapa de criterios
+var A=function(t,o){o=o||{};o.t=t;return o;};
+var mini=function(at){return FU.semi(at,'');};
+document.getElementById('crit').innerHTML=[
+  ['1 · Por su forma','Abierta (acíclica)','Tiene dos extremos.',F.fu_butano_zz(),'Cerrada (cíclica)','Los extremos se unen en un anillo.',F.fu_ciclohexano()],
+  ['2 · Por sus ramas (abiertas)','Lineal','Un solo camino, sin bifurcaciones.',F.fu_hexano_zz(),'Ramificada','De un carbono sale otra cadena.',F.fu_isobutano()],
+  ['3 · Por sus enlaces','Saturada','Solo enlaces sencillos C−C.',mini([A('CH₃'),A('CH₂'),A('CH₃')]),'Insaturada','Al menos un enlace doble o triple.',mini([A('CH₂',{b:2}),A('CH'),A('CH₃')])],
+  ['4 · Por sus átomos','Homogénea','Esqueleto solo de carbonos.',mini([A('CH₃'),A('CH₂'),A('OH')]),'Heterogénea','Un O, N o S entre carbonos.',mini([A('CH₃'),A('O'),A('CH₃')])]
+].map(function(c){return '<div><h4>'+c[0]+'</h4><div class="par"><div><b>'+c[1]+'</b>'+c[2]+c[3]+'</div><div><b>'+c[4]+'</b>'+c[5]+c[6]+'</div></div></div>';}).join('');
+
+// ── Cerrar la cadena: zigzag de 6 C → hexágono ──
+(function(){
+  var svg=document.getElementById('morph'),cerrada=false,t=0,L=34;
+  var Z=[],R=[];for(var i=0;i<6;i++){Z.push([(i-2.5)*L*1.05,i%2?-18:18]);var a=(-150+i*60)*Math.PI/180;R.push([46*Math.cos(a),46*Math.sin(a)]);}
+  function pinta(k){
+    var P=Z.map(function(z,i){return [z[0]+(R[i][0]-z[0])*k,z[1]+(R[i][1]-z[1])*k];}),s='';
+    for(var i=0;i<5;i++)s+='<line x1="'+P[i][0].toFixed(1)+'" y1="'+P[i][1].toFixed(1)+'" x2="'+P[i+1][0].toFixed(1)+'" y2="'+P[i+1][1].toFixed(1)+'" stroke="#0d2233" stroke-width="3" stroke-linecap="round"/>';
+    // enlace que cierra el anillo: aparece al final
+    var o=Math.max(0,(k-.75)/.25);
+    if(o>0)s+='<line x1="'+P[5][0].toFixed(1)+'" y1="'+P[5][1].toFixed(1)+'" x2="'+P[0][0].toFixed(1)+'" y2="'+P[0][1].toFixed(1)+'" stroke="#16a34a" stroke-width="4" stroke-linecap="round" opacity="'+o.toFixed(2)+'"/>';
+    P.forEach(function(p,i){var ext=(i===0||i===5);s+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(ext?7:5)+'" fill="'+(ext?(o>0?'#16a34a':'#f59e0b'):'#0d2233')+'"/>';});
+    var hx=14-2*k;
+    s+='<text x="0" y="82" text-anchor="middle" font-size="15" font-weight="800" fill="#0d2233">C₆H<tspan font-size="11" dy="4">'+(k>=1?'12':k<=0?'14':'')+'</tspan></text>';
+    s+='<text x="0" y="-78" text-anchor="middle" font-size="12" font-weight="800" fill="'+(k>=1?'#16a34a':'#b45309')+'">'+(k>=1?'cerrada: ciclohexano':k<=0?'abierta: hexano':'cerrando…')+'</text>';
+    svg.innerHTML=s;
+    document.getElementById('morph-data').innerHTML=k>=1?'<dt>Cadena</dt><dd>Cerrada (cíclica)</dd><dt>Extremos</dt><dd>Ninguno</dd><dt>Fórmula</dt><dd>C₆H₁₂</dd>':'<dt>Cadena</dt><dd>Abierta (acíclica)</dd><dt>Extremos</dt><dd>2 (en amarillo)</dd><dt>Fórmula</dt><dd>C₆H₁₄</dd>';
+    document.getElementById('morph-msg').innerHTML=k>=1?'Al unir los dos extremos se forma un nuevo enlace C−C (en verde). Cada extremo pierde un H para poder hacerlo: el anillo tiene <b>2 H menos</b> que la cadena abierta. Los dos siguen siendo <b>saturados</b>.':'El <b>hexano</b> es una cadena abierta: sus dos extremos (en amarillo) son carbonos primarios, CH₃.';
+  }
+  document.getElementById('morph-btn').addEventListener('click',function(){
+    var de=cerrada?1:0,a=cerrada?0:1;cerrada=!cerrada;this.textContent=cerrada?'🔄 Abrir la cadena':'🔄 Cerrar la cadena';
+    anima(1600,function(e){pinta(de+(a-de)*e);});
+  });
+  pinta(0);
+})();
+
+// ── Doblar no es ramificar ──
+(function(){
+  var svg=document.getElementById('doble'),f=0,cur=null,L=62;
+  // posiciones de 5 carbonos (y, para la ramificada, el 5.º sale del C2)
+  var FORMAS=[
+    [[0,0],[L,0],[2*L,0],[3*L,0],[4*L,0]],
+    [[0,18],[L,-18],[2*L,18],[3*L,-18],[4*L,18]],
+    [[L,60],[L,0],[2*L,0],[3*L,0],[3*L,60]],
+    [[0,0],[L,0],[2*L,0],[3*L,0],[L,-62]]
+  ];
+  var BONDS=[[[0,1],[1,2],[2,3],[3,4]],[[0,1],[1,2],[2,3],[3,4]],[[0,1],[1,2],[2,3],[3,4]],[[0,1],[1,2],[2,3],[1,4]]];
+  var MSG=['Cadena <b>lineal</b> de 5 carbonos dibujada en línea recta.','La misma cadena en <b>zigzag</b>: así es su forma real (ángulos de 109,5°). Sigue siendo <b>lineal</b>.','La misma cadena doblada en <b>U</b>. Los carbonos de abajo son los extremos, no ramas: sigue siendo <b>lineal</b>, 5 C en fila.','Ahora sí: del C2 sale un carbono que no está en el camino principal. El C2 queda unido a <b>3 carbonos</b> → la cadena es <b>ramificada</b> (4 C en la cadena + 1 rama).'];
+  var LAB=[['CH₃','CH₂','CH₂','CH₂','CH₃'],['CH₃','CH₂','CH₂','CH₂','CH₃'],['CH₃','CH₂','CH₂','CH₂','CH₃'],['CH₃','CH','CH₂','CH₃','CH₃']];
+  function pinta(P,bonds,lab,camino){
+    var s='';bonds.forEach(function(b,j){var p=P[b[0]],q=P[b[1]],on=camino!=null&&j<camino;s+='<line x1="'+p[0].toFixed(1)+'" y1="'+p[1].toFixed(1)+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="'+(on?'#16a34a':'#94a3b8')+'" stroke-width="'+(on?6:3)+'" stroke-linecap="round"/>';});
+    P.forEach(function(p,i){var w=lab[i].length*9+12;s+='<rect x="'+(p[0]-w/2).toFixed(1)+'" y="'+(p[1]-14).toFixed(1)+'" width="'+w+'" height="28" rx="8" fill="#fff" stroke="'+(f===3&&i===4?'#0891b2':'#cbd5e1')+'" stroke-width="2"/><text x="'+p[0].toFixed(1)+'" y="'+(p[1]+1).toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="800" fill="#0d2233" font-family="JetBrains Mono,monospace">'+lab[i]+'</text>';});
+    svg.innerHTML=s;
+  }
+  function ir(nf){
+    var de=cur||FORMAS[f].map(function(p){return p.slice();}),a=FORMAS[nf];f=nf;
+    document.getElementById('doble-msg').innerHTML=MSG[f];
+    document.querySelectorAll('#doble-seg button').forEach(function(b){var on=+b.dataset.f===f;b.classList.toggle('on',on);b.style.background=on?'#1a6ea8':'';b.style.borderColor=on?'#1a6ea8':'';});
+    anima(900,function(e){cur=de.map(function(p,i){return [p[0]+(a[i][0]-p[0])*e,p[1]+(a[i][1]-p[1])*e];});pinta(cur,BONDS[f],LAB[f]);});
+  }
+  document.getElementById('doble-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)ir(+b.dataset.f);});
+  document.getElementById('doble-camino').addEventListener('click',function(){
+    var n=0,tot=f===3?3:4;(function paso(){pinta(cur||FORMAS[f],BONDS[f],LAB[f],n);if(n++<tot)setTimeout(paso,quieto?50:450);
+      else document.getElementById('doble-msg').innerHTML=f===3?'El camino más largo pasa por 4 C (en verde) y deja un carbono por fuera: esa es la <b>rama</b>.':'El camino recorre los <b>5 carbonos</b> de un extremo al otro sin dejar ninguno por fuera: la cadena es <b>lineal</b>.';})();
+  });
+  ir(0);
+})();
+
+// Tipos de anillos
+document.getElementById('f-alic').innerHTML='<div class="fig">'+F.fu_ciclohexano()+'<div class="fig-sub">ciclohexano</div></div><div class="fig">'+F.fu_ciclohexeno()+'<div class="fig-sub">ciclohexeno</div></div>';
+document.getElementById('f-arom').innerHTML='<div class="fig">'+F.fu_benceno()+'<div class="fig-sub">benceno</div></div><div class="fig">'+F.fu_tolueno()+'<div class="fig-sub">metilbenceno</div></div>';
+document.getElementById('f-het').innerHTML='<div class="fig">'+F.fu_thf()+'<div class="fig-sub">con O (no aromático)</div></div><div class="fig">'+F.fu_piridina()+'<div class="fig-sub">piridina (aromático)</div></div>';
+
+// ── Clasificador ──
+(function(){
+  var L={al:'abierta lineal',ar:'abierta ramificada',c:'cerrada',sat:'saturada',ins:'insaturada',hom:'homogénea',het:'heterogénea',alic:'alicíclica',arom:'aromática',na:'no aplica'};
+  var C=[
+    ['fu_butano','al','sat','hom','na'],['fu_isobutano','ar','sat','hom','na'],['fu_mixta','ar','ins','hom','na'],['fu_eter','al','sat','het','na'],
+    ['fu_dma','al','sat','het','na'],['fu_propeno','al','ins','hom','na'],['fu_ciclohexano','c','sat','hom','alic'],['fu_ciclohexeno','c','ins','hom','alic'],
+    ['fu_benceno','c','ins','hom','arom','El benceno tiene dobles enlaces (por eso se cuenta como insaturado), pero sus electrones π están repartidos en todo el anillo.'],
+    ['fu_thf','c','sat','het','alic','Es heterocíclica (tiene O en el anillo) y no aromática.'],['fu_piridina','c','ins','het','arom','Es heterocíclica (N en el anillo) y aromática, como el benceno.'],
+    ['fu_cloroetano','al','sat','hom','na','El Cl está al final: no interrumpe la cadena.'],['fu_tioeter','al','sat','het','na'],['fu_ciclopropano','c','sat','hom','alic'],
+    ['fu_dieno','al','ins','hom','na'],['fu_metilamina_ch','al','sat','hom','na','El NH₂ está al final: la cadena sigue siendo homogénea.'],['fu_ramificadaU','ar','sat','hom','na','El CH₂−CH₃ de abajo es una rama: sale del C3, que queda unido a 3 carbonos.']
+  ];
+  var orden=[],i=0,ok=0,tot=0,form=document.getElementById('cl-form');
+  function nueva(){
+    if(!orden.length){orden=C.map(function(_,k){return k;}).sort(function(){return Math.random()-.5;});}
+    i=orden.pop();form.reset();form.querySelectorAll('fieldset').forEach(function(x){x.className='';});
+    document.getElementById('cl-fig').innerHTML=F[C[i][0]]();document.getElementById('cl-msg').textContent='Clasifica la cadena del dibujo.';
+  }
+  document.getElementById('cl-ok').addEventListener('click',function(){
+    var c=C[i],keys=['f','e','a','r'],bien=0,falta=false;
+    keys.forEach(function(k,j){var v=(form.querySelector('input[name='+k+']:checked')||{}).value,fs=form.querySelector('[data-c='+k+']');
+      if(!v){falta=true;fs.className='';return;}fs.className=v===c[j+1]?'ok':'mal';if(v===c[j+1])bien++;});
+    if(falta){document.getElementById('cl-msg').innerHTML='Marca una opción en cada uno de los 4 criterios.';return;}
+    tot++;if(bien===4)ok++;
+    document.getElementById('cl-score').textContent=ok+' de '+tot+' perfectas';
+    document.getElementById('cl-msg').innerHTML=(bien===4?'✓ <b>¡Perfecta!</b> ':'Tienes <b>'+bien+' de 4</b>. ')+'Es <b>'+[L[c[1]],L[c[2]],L[c[3]]].join(', ')+(c[4]!=='na'?', '+L[c[4]]:'')+'</b>.'+(c[5]?' '+c[5]:'');
+  });
+  document.getElementById('cl-otra').addEventListener('click',nueva);
+  nueva();
+})();
+
+FU.practica('prac-cad','cadenas',8,'Practica: clasificación de cadenas');
+})();
+</script>
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>

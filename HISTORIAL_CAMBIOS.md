@@ -7,6 +7,112 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-28 (143) — Portada en forma de molécula y Fase 1 «El carbono» (antes de nomenclatura)
+
+### Contexto
+El docente pidió tres cosas en la misma sesión:
+1. Rediseñar el menú de inicio de ChromaNom con una idea parecida al
+   «átomo» de la portada de IonNom (capas = niveles, electrones = módulos,
+   núcleo = progreso): no tenía que ser un átomo, pero sí algo llamativo.
+2. Páginas nuevas, con el mismo diseño, animaciones, explicación y
+   preguntas, para los temas que van **antes** de nomenclatura: átomo de
+   carbono e hibridación, tipos de carbono y clasificación de cadenas,
+   separadas en fases como en IonNom, con al menos 30 preguntas por tema en
+   el Juego y en el generador de actividades del docente.
+3. Incluir también **isomería** en ese mismo tratamiento.
+
+### Portada: menú en forma de molécula (`index.html`)
+- Nueva sección «Tu molécula ChromaNom»: la ruta se dibuja como una
+  molécula en fórmula de esqueleto que vibra suavemente. La **cadena
+  principal C1…C8** es la ruta recomendada, numerada como en la IUPAC y
+  doblada en dos filas; sus paradas se agrupan en **3 fases**. Las
+  **ramificaciones** son Referencia y Docente; el **doble enlace dorado**
+  (color de las insaturaciones) entra a la siguiente parada; el **grupo
+  funcional** (color ④) muestra el progreso. Pestañas: Tu progreso, Fase 1,
+  Fase 2, Fase 3, Ramificaciones; cada fase trae su pregunta guía, sus
+  paradas con estado (✓ visitado / ⭐ siguiente) y accesos al Juego.
+- Reemplaza la sección «Ruta recomendada». El botón principal lleva a la
+  siguiente parada. La lista de módulos y el tutorial ahora nombran las fases.
+- `site-ui.js`: registra en el celular qué páginas ya se abrieron
+  (`chromanom_visitas`) y define la ruta por fases (`CN_FASES`), que usan la
+  portada y la nueva barra de fases de cada página.
+
+### La ruta por fases
+- **Fase 1 · El carbono** (nueva): átomo de carbono e hibridación → tipos
+  de carbono → clasificación de cadenas.
+- **Fase 2 · Nomenclatura**: Principios → Grupos funcionales → Juego.
+- **Fase 3 · Más allá del nombre**: Isomería → Reacciones. (Isomería quedó
+  aquí y no en la Fase 1 porque sus ejemplos usan nombres IUPAC; moverla
+  es cambiar una línea en `CN_FASES` de `site-ui.js`.)
+- Las páginas de la ruta muestran arriba la barra de su fase y al final el
+  botón «Siguiente parada».
+
+### Páginas nuevas (mismo diseño que `isomeria.html`)
+- `carbono.html`: átomo de Bohr animado; **promoción electrónica paso a
+  paso** (diagrama de energía con cajas que se mueven: fundamental →
+  excitado → sp³/sp²/sp); **modelos 3D** de metano, eteno y etino que giran
+  y se arrastran con el dedo (con los orbitales p del enlace π); enlaces σ y
+  π; reto «¿qué hibridación tiene cada carbono?».
+- `tipos-carbono.html`: tarjetas de los 4 tipos; **clasificador
+  interactivo** (modo explicar, modo reto con paleta de tipos y botón
+  «Animar» que clasifica la molécula carbono por carbono resaltando sus
+  enlaces); relación con los hidrógenos; alcoholes primario/secundario/terciario.
+- `cadenas.html`: mapa de los 4 criterios; animación «cierra la cadena»
+  (hexano → ciclohexano, C₆H₁₄ → C₆H₁₂); animación «doblar no es ramificar»
+  (recta, zigzag, en U y ramificada, con el camino que se recorre); tipos de
+  anillos; **clasificador** con 17 cadenas.
+- `isomeria.html`: entra a la Fase 3; nuevo laboratorio 3D **«gira el
+  enlace»** (el C−C gira libre; en el C=C los orbitales p se desalinean y el
+  π se pone rojo: por eso cis y trans son sustancias distintas) y práctica
+  con el banco nuevo.
+- Cada página termina con 8 preguntas al azar del banco del tema, con
+  retroalimentación por opción, y un enlace al Juego.
+- `fundamentos.js` (nuevo): **banco único** de preguntas y dibujos de la
+  Fase 1 e isomería — 35 de hibridación, 33 de tipos de carbono, 33 de
+  cadenas y 33 de isomería (134) — que usan las páginas, el Juego y el
+  generador del docente; además el motor de los modelos 3D.
+  `fundamentos.css` (nuevo): estilos de estas páginas.
+- Menú superior de todas las páginas: nuevo enlace «⚛️ Carbono»; en
+  celular está en «Más».
+
+### Juego (`juego.html`)
+- Nueva tarjeta **«El carbono · Fase 1»** (primera de la portada) con
+  selector: los 3 temas mezclados, hibridación, tipos de carbono o cadenas.
+  Nueva tarjeta **«Isomería · Fase 3»**.
+- Estas preguntas **no** entran al «Juego completo» (nomenclatura +
+  reacciones). Las preguntas sin dibujo ya no muestran una caja vacía.
+- `juego.html?tema=…` (desde la práctica de las páginas) resalta ese tema.
+- Resumen de la partida con mensajes propios para estos temas.
+- `chromanom-analytics.gs` **no cambió**: los temas nuevos llegan a la hoja
+  con sus propios nombres (hibridacion, tipos_carbono, cadenas, isomeria).
+
+### Generador del docente (`docente-datos.js`, `docente-app.js`)
+- Tres temas nuevos al principio de la lista: carbono e hibridación, tipos
+  de carbono y cadenas carbonadas, con aprendizajes previos (curiosidades,
+  contexto local/nacional/global, preguntas de activación), lectura, mapa de
+  ideas, ejemplo, ejercicios abiertos y preguntas abiertas de evaluación.
+- Las preguntas del banco de `fundamentos.js` se usan como **preguntas
+  tipo Saber 11** (carbono 35, tipos 33, cadenas 33, isomería 20 + 33) y
+  como nuevo tipo de ejercicio de taller **«Selección múltiple»**.
+- Estos temas no anexan las rúbricas de nombrar/dibujar.
+
+### Verificación
+Probado con Playwright (Chromium) en PC y celular: las 10 páginas sin
+errores ni desplazamiento horizontal; partidas de hibridación, tipos de
+carbono, isomería y de los niveles de siempre (completo, hidrocarburos,
+retos, constructor, reacciones); generación de un taller y una evaluación
+con los temas nuevos en el generador del docente.
+
+### Pasos manuales
+- Ninguno: todo se publica al hacer push a `main` (GitHub Pages).
+  `sw.js` pasó a `chromanom-v43` para que los celulares descarguen la
+  versión nueva.
+
+### Pendiente
+- Ver con los estudiantes si prefieren isomería en la Fase 1 o en la 3.
+
+---
+
 ## 2026-10-27 (142) — Registro de cierres inesperados del juego (iPhone)
 
 ### Contexto

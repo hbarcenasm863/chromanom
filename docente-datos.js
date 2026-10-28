@@ -111,6 +111,115 @@ var ALINEACION={
    rxn: temas de BANCO_RXN (reacciones) en generador.html
    ────────────────────────────────────────────────────────────────────── */
 var TEMAS=[
+ /* ── Fase 1 «El carbono»: antes de nomenclatura. Sus preguntas de selección
+    vienen del banco del Juego (fundamentos.js): saberJue hace que se usen
+    como preguntas tipo Saber 11 y como ejercicios «Selección múltiple». ── */
+ {id:'carbono',titulo:'El átomo de carbono e hibridación',corto:'Carbono e hibridación',
+  gen:[],jue:/^hibridacion$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-exp1']},g10:{sed:'sed10q',ev:['10q-exp1','10q-exp3']},est:['est1'],dba:['dba10a']},
+  previos:{
+   curiosos:['La mina de un lápiz (grafito) y un diamante son carbono puro: lo único que cambia es cómo están unidos sus átomos.',
+     'Se conocen más de diez millones de compuestos de carbono, más que de todos los demás elementos juntos.',
+     'El carbono-14, un isótopo radiactivo del carbono, permite calcular la edad de restos de seres vivos de hasta unos 50 000 años.'],
+   contexto:[{amb:'Local',t:'El carbón vegetal de un asado y el hollín de una estufa de leña son formas de carbono casi puro.'},
+     {amb:'Nacional',t:'Colombia es uno de los grandes exportadores de carbón mineral del mundo, con minas a cielo abierto en La Guajira y el Cesar.'},
+     {amb:'Global',t:'El grafeno, una lámina de carbono de un solo átomo de espesor formada por carbonos sp², es uno de los materiales más resistentes y conductores que se conocen.'}],
+   cotidianos:['Mina del lápiz (grafito)','Carbón para asar','Diamantes','Gas de la estufa (metano)','Plásticos'],
+   activacion:['¿Qué tienen en común el grafito de un lápiz y un diamante? ¿Por qué crees que son tan diferentes?',
+     '¿Cuántos electrones tiene un átomo de carbono? ¿Cuántos tiene en su último nivel?',
+     'Si un átomo puede formar cuatro enlaces, ¿de qué maneras distintas podría unirse a otros átomos?']
+  },
+  info:{
+   lectura:['El carbono (Z = 6) tiene la configuración 1s² 2s² 2p²: cuatro electrones de valencia. Es tetravalente (forma cuatro enlaces covalentes) y puede unirse consigo mismo formando cadenas y anillos (concatenación).',
+     'En el estado fundamental solo tiene dos electrones desapareados. Para formar cuatro enlaces, un electrón del 2s se promueve al 2p vacío (estado excitado: 1s² 2s¹ 2p³) y luego los orbitales se mezclan (hibridación) en orbitales nuevos e iguales.',
+     'sp³: se mezclan 1 s y 3 p; cuatro enlaces sencillos, geometría tetraédrica, 109,5° (metano, CH₄). sp²: 1 s y 2 p; un doble enlace, geometría trigonal plana, 120° (eteno, CH₂=CH₂). sp: 1 s y 1 p; un triple enlace, geometría lineal, 180° (etino, HC≡CH).',
+     'El primer enlace entre dos átomos es σ (solapamiento frontal). Los enlaces adicionales son π (solapamiento lateral de orbitales p sin hibridar): un doble enlace es 1 σ + 1 π y un triple, 1 σ + 2 π. Regla rápida: un carbono unido a 4 átomos es sp³; a 3, sp²; a 2, sp.'],
+   esquema:{raiz:'Hibridación del carbono',ramas:[
+     {t:'sp³',items:['1 s + 3 p','Tetraédrica, 109,5°','Solo enlaces sencillos']},
+     {t:'sp²',items:['1 s + 2 p','Trigonal plana, 120°','Un doble enlace (1 π)']},
+     {t:'sp',items:['1 s + 1 p','Lineal, 180°','Un triple enlace (2 π)']},
+     {t:'Enlaces',items:['σ: frontal, el primero','π: lateral, no deja girar']}]}
+  },
+  ejemplo:{pares:[{f:'CH₃−CH₃',n:'etano: carbonos sp³ (109,5°)'},{f:'CH₂=CH₂',n:'eteno: carbonos sp² (120°)'},{f:'CH≡CH',n:'etino: carbonos sp (180°)'}],nota:'Cuenta los átomos unidos a cada carbono: 4 → sp³, 3 → sp², 2 → sp.'},
+  abiertos:[
+   'Escribe la configuración electrónica del carbono en estado fundamental y en estado excitado, y represéntalas con diagramas de cajas.',
+   'Explica con tus palabras por qué el carbono forma cuatro enlaces si en su estado fundamental solo tiene dos electrones desapareados.',
+   'Completa una tabla con las tres hibridaciones del carbono: orbitales que se mezclan, geometría, ángulo de enlace y un ejemplo.',
+   'Indica la hibridación de cada carbono en CH₂=CH−CH₂−C≡CH y justifica cada respuesta.',
+   'Cuenta los enlaces σ y π del eteno (CH₂=CH₂) y del etino (HC≡CH).',
+   'El diamante y el grafito son carbono puro. Investiga y explica su diferencia a partir de la hibridación de sus carbonos.'
+  ],
+  propia:[]},
+
+ {id:'tipos_carbono',titulo:'Tipos de carbono: primario, secundario, terciario y cuaternario',corto:'Tipos de carbono',
+  gen:[],jue:/^tipos_carbono$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  previos:{
+   curiosos:['El «octanaje» de la gasolina se mide comparándola con el isooctano, una molécula muy ramificada que tiene carbonos de los cuatro tipos.',
+     'Que un alcohol sea primario, secundario o terciario cambia lo que pasa cuando se oxida: así funcionan algunos alcoholímetros.',
+     'Las cadenas muy ramificadas (con carbonos terciarios y cuaternarios) arden de forma más suave en un motor que las lineales.'],
+   contexto:[{amb:'Local',t:'La gasolina corriente y la extra que se venden en las estaciones de servicio se diferencian por su octanaje, que depende de cuán ramificadas son sus moléculas.'},
+     {amb:'Nacional',t:'Ecopetrol mejora el octanaje de la gasolina en sus refinerías transformando cadenas lineales en cadenas ramificadas.'},
+     {amb:'Global',t:'El metil terc-butil éter (MTBE), con un carbono cuaternario, se usó en todo el mundo para aumentar el octanaje, pero se restringió por contaminar aguas subterráneas.'}],
+   cotidianos:['Gasolina corriente y extra','Alcohol antiséptico (propan-2-ol, alcohol secundario)','Etanol de las bebidas (alcohol primario)'],
+   activacion:['Si un carbono está en el extremo de una cadena, ¿a cuántos carbonos está unido?','¿Puede un carbono estar unido a cinco carbonos? ¿Por qué?','¿Qué crees que cambia en una molécula cuando tiene ramificaciones?']
+  },
+  info:{
+   lectura:['Un carbono se clasifica según cuántos átomos de carbono tiene unidos directamente: primario (1), secundario (2), terciario (3) o cuaternario (4). Los hidrógenos y los átomos como O, N o halógenos no se cuentan.',
+     'En un alcano el tipo de carbono se reconoce en la fórmula: CH₃ (3 H) es primario, CH₂ (2 H) secundario, CH (1 H) terciario y C (sin H) cuaternario.',
+     'En una cadena lineal los extremos son primarios y los carbonos internos, secundarios. Los terciarios y cuaternarios aparecen donde salen ramificaciones; en los anillos sin ramas todos los carbonos son secundarios.',
+     'La misma regla clasifica los alcoholes: el etanol (CH₃−CH₂−OH) es primario, el propan-2-ol secundario y el 2-metilpropan-2-ol terciario, según el tipo del carbono que lleva el −OH.'],
+   esquema:{raiz:'Tipos de carbono',ramas:[
+     {t:'Primario',items:['Unido a 1 C','CH₃ en alcanos']},
+     {t:'Secundario',items:['Unido a 2 C','CH₂ en alcanos']},
+     {t:'Terciario',items:['Unido a 3 C','CH: sale una rama']},
+     {t:'Cuaternario',items:['Unido a 4 C','C sin hidrógenos']}]}
+  },
+  ejemplo:{pares:[{f:[{h:3},{h:0,bu:CH3,bd:CH3},{h:2},{h:1,bd:CH3},{h:3}],n:'isooctano: 5 primarios, 1 secundario, 1 terciario, 1 cuaternario'},{f:'CH₃−CH(OH)−CH₃',n:'el C del −OH es secundario: alcohol secundario'}],nota:'Solo se cuentan los átomos de carbono unidos a cada carbono.'},
+  abiertos:[
+   {q:'Clasifica cada carbono de esta molécula como primario, secundario, terciario o cuaternario.',f:'CH₃−CH(CH₃)−CH₂−C(CH₃)₂−CH₃'},
+   'Dibuja una molécula de 6 carbonos que tenga exactamente un carbono cuaternario y ninguno terciario.',
+   'Explica por qué el carbono unido al −OH en el etanol es primario, aunque esté unido a cuatro átomos.',
+   'Dibuja una cadena de 5 carbonos con 4 carbonos primarios. ¿Qué tipo de carbono tiene que aparecer?',
+   'Clasifica como primario, secundario o terciario: a) CH₃−CH₂−CH₂−OH; b) CH₃−CH(OH)−CH₃; c) (CH₃)₃C−OH.',
+   '¿Cuántos hidrógenos tiene un carbono terciario en un alcano? Explica por qué.'
+  ],
+  propia:[]},
+
+ {id:'cadenas',titulo:'Clasificación de las cadenas carbonadas',corto:'Cadenas carbonadas',
+  gen:[],jue:/^cadenas$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  previos:{
+   curiosos:['La parafina de las velas está hecha de cadenas largas, abiertas y saturadas, de más de 20 carbonos.',
+     'La cafeína del café y la nicotina del tabaco tienen anillos con nitrógeno: son compuestos heterocíclicos.',
+     'Los aceites vegetales tienen cadenas insaturadas (con dobles enlaces); por eso son líquidos, mientras que la manteca, más saturada, es sólida.'],
+   contexto:[{amb:'Local',t:'El aceite de cocina (cadenas insaturadas) y la manteca (cadenas más saturadas) se diferencian por los enlaces de sus cadenas.'},
+     {amb:'Nacional',t:'El café colombiano debe parte de su aroma a moléculas con anillos aromáticos y heterocíclicos que se forman al tostar el grano.'},
+     {amb:'Global',t:'El caucho natural, extraído del árbol Hevea, está formado por cadenas largas insaturadas; la vulcanización las une con puentes de azufre.'}],
+   cotidianos:['Velas de parafina','Aceite y manteca','Café','Caucho de las llantas','Gas natural'],
+   activacion:['¿Qué diferencia hay entre una cadena de eslabones abierta y un collar cerrado?','¿Una cadena dibujada en zigzag es ramificada? ¿Por qué?','¿Por qué crees que el aceite es líquido y la manteca sólida?']
+  },
+  info:{
+   lectura:['Por su forma, una cadena es abierta (acíclica o alifática), con dos extremos, o cerrada (cíclica), formando un anillo. Las abiertas pueden ser lineales (un solo camino) o ramificadas (de algún carbono sale otra cadena).',
+     'Por sus enlaces es saturada (solo enlaces sencillos C−C) o insaturada (al menos un doble o triple enlace). Por sus átomos es homogénea (esqueleto solo de carbonos) o heterogénea (un heteroátomo, como O, N o S, intercalado entre carbonos).',
+     'Las cerradas pueden ser homocíclicas (solo carbono en el anillo) o heterocíclicas. Entre las homocíclicas están las alicíclicas (ciclohexano, ciclohexeno) y las aromáticas (benceno y sus derivados).',
+     'Doblar el dibujo no ramifica una cadena: el zigzag es su forma real por los 109,5° del carbono sp³. Un −OH, −NH₂ o −Cl al final de la cadena no la hace heterogénea: solo cuenta un heteroátomo entre dos carbonos.'],
+   esquema:{raiz:'Cadenas carbonadas',ramas:[
+     {t:'Forma',items:['Abierta: lineal o ramificada','Cerrada: alicíclica, aromática o heterocíclica']},
+     {t:'Enlaces',items:['Saturada: solo sencillos','Insaturada: dobles o triples']},
+     {t:'Átomos',items:['Homogénea: solo C','Heterogénea: O, N o S entre carbonos']}]}
+  },
+  ejemplo:{pares:[{f:'CH₃−CH(CH₃)−CH=CH₂',n:'abierta, ramificada, insaturada y homogénea'},{f:'CH₃−CH₂−O−CH₃',n:'abierta, lineal, saturada y heterogénea'}],nota:'Una cadena se clasifica con los tres criterios a la vez: forma, enlaces y átomos.'},
+  abiertos:[
+   'Dibuja un ejemplo de cada una: cadena abierta lineal, abierta ramificada, cerrada alicíclica y cerrada aromática.',
+   'Clasifica según los tres criterios: a) CH₃−CH₂−CH₃; b) CH₂=CH−CH₂−CH₃; c) CH₃−O−CH₂−CH₃; d) CH₃−CH(CH₃)−CH₃.',
+   'Explica por qué CH₃−CH₂−OH es una cadena homogénea y CH₃−O−CH₃ es heterogénea.',
+   'Un estudiante dice que una cadena dibujada en zigzag es ramificada. ¿Tiene razón? Explica.',
+   'El hexano es C₆H₁₄ y el ciclohexano C₆H₁₂. Explica por qué el anillo tiene dos hidrógenos menos.',
+   'Dibuja una cadena cerrada heterocíclica y señala su heteroátomo.'
+  ],
+  propia:[]},
+
  {id:'cadena',titulo:'Cadena principal, numeración y desempate',corto:'Cadena principal y desempate',
   gen:['alcanos'],jue:/cadena|desempate|error/i,rxn:[],soloRamificados:true,nomenclatura:true,
   alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
@@ -421,7 +530,7 @@ var TEMAS=[
   ]},
 
  {id:'isomeria',titulo:'Isomería estructural, cis/trans y quiralidad',corto:'Isomería',
-  gen:[],jue:/isomer/i,rxn:[],nomenclatura:false,
+  gen:[],jue:/isomer/i,rxn:[],nomenclatura:false,saberJue:true,
   alin:{g11:{sed:'sed11q',ev:['11q-ind3','11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
   previos:{
    curiosos:['Con la fórmula C₂H₆O existen dos sustancias muy distintas: el etanol (líquido, hierve a 78 °C) y el metoximetano (gas, hierve a −24 °C).',
@@ -1009,6 +1118,18 @@ var SABER={
             ④ grupo funcional) y dibujar la estructura.
    f: fórmula que se dibuja con el motor del Generador; n: nombre (mdec). */
 var ABIERTAS={
+ carbono:[
+  {t:'con',q:'Escribe la configuración electrónica del carbono en estado fundamental y excitado, y explica para qué sirve la promoción de un electrón.'},
+  {t:'con',q:'Indica la hibridación, la geometría y el ángulo de enlace de cada carbono en CH₂=CH−C≡CH.'},
+  {t:'con',q:'Cuenta los enlaces σ y π del propeno (CH₂=CH−CH₃) y explica la diferencia entre ambos tipos de enlace.'}],
+ tipos_carbono:[
+  {t:'con',q:'Dibuja la estructura CH₃−C(CH₃)₂−CH₂−CH(CH₃)−CH₃ y clasifica cada uno de sus carbonos.'},
+  {t:'con',q:'Dibuja un alcohol primario, uno secundario y uno terciario, y explica cómo los reconociste.'},
+  {t:'con',q:'Dibuja una molécula de 5 carbonos que tenga un carbono cuaternario. ¿Cuántos carbonos primarios tiene?'}],
+ cadenas:[
+  {t:'con',q:'Clasifica según su forma, sus enlaces y sus átomos: a) CH₃−CH=CH−CH₃; b) CH₃−NH−CH₂−CH₃; c) ciclohexano; d) benceno.'},
+  {t:'con',q:'Dibuja una cadena abierta, ramificada, insaturada y homogénea, y explica cada criterio.'},
+  {t:'con',q:'Explica con un dibujo por qué una cadena en forma de U puede seguir siendo lineal.'}],
  cadena:[
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto. Marca la cadena principal y explica por qué numeraste desde ese extremo.',f:'CH₃−CH(CH₃)−CH₂−CH(C₂H₅)−CH₂−CH₃'},
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto y justifica la numeración.',f:[{h:3},{h:0,bu:CH3,bd:CH3},{h:2},{h:2},{h:1,bd:CH3},{h:3}]},

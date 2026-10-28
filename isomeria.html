@@ -12,6 +12,7 @@
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Isomería</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
 <style>
 :root{
   --bg:#f6fafe;--surf:#fff;--surf2:#e8f4fb;--brd:#d0e6f5;
@@ -180,6 +181,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
 <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
 <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
 <a href="isomeria.html" class="nav-link active">🔀 <span class="full">Isomería</span></a>
@@ -192,11 +194,13 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
 <div class="app">
 
 <div class="cn-page-head cn-in">
-  <div class="cn-eyebrow">Módulo · Isomería</div>
+  <div class="cn-eyebrow">Fase 3 · Más allá del nombre · Parada 1 de 2</div>
   <h1>Isomería: misma fórmula, distinta molécula</h1>
   <p>Dos compuestos pueden tener exactamente los mismos átomos y aun así ser sustancias diferentes, con otro punto de ebullición, otro olor o hasta otro efecto en el cuerpo. Aquí aprendes a reconocer cada tipo de isomería y a nombrar los isómeros con IUPAC 2013.</p>
   <div class="cn-legend" aria-label="Código de colores del método"><span class="cn-chip r">① Sustituyentes</span><span class="cn-chip c">② Cadena principal</span><span class="cn-chip i">③ Insaturaciones</span><span class="cn-chip g">④ Grupo funcional</span></div>
 </div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
 
 <nav class="toc" aria-label="Secciones de la página">
   <a href="#intro">¿Qué es un isómero?</a>
@@ -205,6 +209,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   <a href="#geometrica">Cis / trans</a>
   <a href="#optica">Carbono quiral</a>
   <a href="#resumen">Resumen</a>
+  <a href="#repaso">Practica</a>
 </nav>
 
 <!-- ═══════════════ 0. INTRODUCCIÓN ═══════════════ -->
@@ -284,6 +289,20 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   <div class="sec-kicker">Estereoisomería · 1</div>
   <h2>Isomería geométrica (cis / trans)</h2>
   <p>Un enlace sencillo C−C gira libremente, pero un <b style="color:var(--c3t)">doble enlace C=C ③ no puede girar</b>. Los dos carbonos del doble enlace y los cuatro átomos unidos a ellos quedan en un mismo <b>plano</b>, con ángulos de unos 120°. Por eso los grupos pueden quedar <b>del mismo lado</b> (cis) o <b>en lados opuestos</b> (trans) del doble enlace, y son dos compuestos distintos.</p>
+  <div class="lab" id="giro-lab">
+    <div class="lab-view">
+      <span class="lab-badge" id="giro-badge">C=C</span>
+      <svg id="giro-svg" viewBox="-150 -110 300 220" role="img" aria-label="Modelo 3D de dos carbonos unidos; el carbono de la derecha se puede girar con el control deslizante"></svg>
+    </div>
+    <div class="lab-ctl">
+      <div class="seg" id="giro-seg" role="group" aria-label="Tipo de enlace">
+        <button type="button" data-m="2">Doble C=C (but-2-eno)</button><button type="button" data-m="1">Sencillo C−C (butano)</button>
+      </div>
+      <label for="giro-r" style="font-size:.8rem;font-weight:800;color:var(--dimmer)">Gira el carbono de la derecha: <span id="giro-g">0°</span></label>
+      <input type="range" class="lab-range" id="giro-r" min="0" max="180" value="0" step="1">
+      <div class="lab-msg" id="giro-msg" aria-live="polite"></div>
+    </div>
+  </div>
   <div class="figs two" id="fig-cistrans"></div>
   <p>El <i>cis</i>-but-2-eno hierve a 3,7 °C y el <i>trans</i>-but-2-eno a 0,9 °C: son sustancias diferentes con la misma fórmula (C₄H₈) y la misma conectividad.</p>
 
@@ -346,6 +365,13 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
 </section>
 
 <!-- ═══════════════ 5. RESUMEN ═══════════════ -->
+<section class="sec" id="repaso">
+  <div class="sec-kicker">Repaso con el banco del Juego</div>
+  <h2>Practica: preguntas al azar de isomería</h2>
+  <p>Ocho preguntas al azar del banco de isomería (el mismo que usa el Juego). Pide otras cuando termines.</p>
+  <div class="prac" id="prac-iso-banco" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
 <section class="sec" id="resumen">
   <div class="sec-kicker">Para repasar</div>
   <h2>Resumen</h2>
@@ -368,6 +394,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   </div>
 </section>
 
+<div class="fase-sig" id="fase-sig"></div>
 </div><!-- /app -->
 
 <script>
@@ -760,6 +787,47 @@ Object.keys(PRACT).forEach(renderPractice);
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
+<script src="fundamentos.js"></script>
+<script>
+(function(){
+var FU=window.FUND;if(!FU)return;
+FU.practica('prac-iso-banco','isomeria',8,'Practica: isomería');
+// ── Gira el enlace: el C−C sencillo gira libre; el C=C no (se rompería el π) ──
+var modo=2,phi=0,R=0.95;
+function pos(cx,a,r){return {x:cx,y:r*Math.cos(a),z:r*Math.sin(a)};}
+function modelo(){
+  var at=[{x:-0.67,y:0,z:0,el:'C'},{x:0.67,y:0,z:0,el:'C'}],bd=[],lobes=[],ph=phi*Math.PI/180,ov=Math.abs(Math.cos(ph));
+  function grupo(cx,a,me){var p=pos(cx,a,R);p.el=me?'M':'H';if(me){p.lt='CH₃';p.r=1.05;}at.push(p);bd.push([cx<0?0:1,at.length-1]);}
+  if(modo===2){
+    grupo(-1.22,0,true);grupo(-1.22,Math.PI,false);
+    grupo(1.22,ph,true);grupo(1.22,Math.PI+ph,false);
+    var roto=ov<0.92,c=roto?'#ef4444':'#a78bfa';
+    bd.unshift([0,1,roto?1:2,roto?'#ef4444':'#94a3b8']);
+    lobes=[{at:0,d:[0,0,1],c:c},{at:0,d:[0,0,-1],c:c},{at:1,d:[0,-Math.sin(ph),Math.cos(ph)],c:c},{at:1,d:[0,Math.sin(ph),-Math.cos(ph)],c:c}];
+  }else{
+    grupo(-1.22,0,true);grupo(-1.22,2.094,false);grupo(-1.22,4.189,false);
+    grupo(1.22,ph,true);grupo(1.22,ph+2.094,false);grupo(1.22,ph+4.189,false);
+    bd.unshift([0,1,1]);
+  }
+  return {at:at,bd:bd,lobes:lobes};
+}
+var ctl=FU.mol3d(document.getElementById('giro-svg'),modelo,{escala:56,ay:0.22,ax:-0.18,vel:0.12});
+function msg(){
+  var g=document.getElementById('giro-msg'),ov=Math.round(Math.abs(Math.cos(phi*Math.PI/180))*100);
+  document.getElementById('giro-g').textContent=phi+'°';
+  document.getElementById('giro-badge').textContent=modo===2?'C=C · solapamiento π: '+ov+' %':'C−C · gira libremente';
+  if(modo===1){g.innerHTML='En un enlace <b>sencillo</b> los carbonos giran libremente: a '+phi+'° sigue siendo <b>el mismo butano</b>, solo cambió su forma en el espacio (una <i>conformación</i>). Por eso el butano no tiene isómeros cis/trans.';return;}
+  if(phi===0)g.innerHTML='Los dos CH₃ están <b>del mismo lado</b>: <b><i>cis</i>-but-2-eno</b>. Las nubes moradas son los orbitales p: están paralelos y forman el enlace π.';
+  else if(phi===180)g.innerHTML='Los dos CH₃ quedaron <b>en lados opuestos</b>: <b><i>trans</i>-but-2-eno</b>. Para llegar aquí hubo que romper el enlace π: en la realidad eso no pasa a temperatura ambiente, así que cis y trans son <b>dos sustancias distintas</b>.';
+  else if(ov<92)g.innerHTML='⚠️ Los orbitales p ya no están paralelos (solapamiento '+ov+' %): <b>el enlace π se rompe</b>. Romperlo cuesta unos 270 kJ/mol, mucha más energía de la que hay a temperatura ambiente: por eso el doble enlace <b>no gira</b>.';
+  else g.innerHTML='Al girar, los orbitales p empiezan a desalinearse (solapamiento '+ov+' %). Sigue girando…';
+}
+document.getElementById('giro-r').addEventListener('input',function(){phi=+this.value;ctl.redibuja();msg();});
+document.getElementById('giro-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;modo=+b.dataset.m;
+  this.querySelectorAll('button').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.style.background=on?'#1a6ea8':'';x.style.borderColor=on?'#1a6ea8':'';});ctl.redibuja();msg();});
+document.querySelector('#giro-seg [data-m="2"]').click();
+})();
+</script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>

@@ -18,6 +18,7 @@
     {href:'juego.html',ico:'🎮',txt:'Juego'}
   ];
   var MAS=[
+    {href:'carbono.html',ico:'⚛️',txt:'Fase 1: El carbono (hibridación, tipos de C, cadenas)'},
     {href:'referencia.html',ico:'📋',txt:'Hoja de referencia'},
     {href:'isomeria.html',ico:'🔀',txt:'Isomería'},
     {href:'docente.html',ico:'📘',txt:'Docente: guías y evaluaciones'}
@@ -181,4 +182,47 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start);
   else start();
+})();
+
+/* ── Ruta por fases (como los niveles de IonNom) ───────────────────────────
+   La misma ruta que dibuja la molécula de la portada. Cada página de la ruta
+   puede poner <nav class="fase-nav" id="fase-nav"></nav> (arriba) y
+   <div class="fase-sig" id="fase-sig"></div> (al final): aquí se rellenan con
+   las paradas de su fase y el enlace a la siguiente parada. */
+window.CN_FASES=[
+  {n:1,t:'El carbono',sub:'Antes de nombrar',c:'#1a6ea8',st:[
+    {id:'carbono.html',e:'⚛️',t:'Átomo de carbono e hibridación',l:'Hibridación'},
+    {id:'tipos-carbono.html',e:'🔢',t:'Tipos de carbono',l:'Tipos de C'},
+    {id:'cadenas.html',e:'⛓️',t:'Clasificación de cadenas',l:'Cadenas'}]},
+  {n:2,t:'Nomenclatura',sub:'Nombrar con IUPAC',c:'#166534',st:[
+    {id:'teoria.html',e:'⚗️',t:'Principios de nomenclatura',l:'Principios'},
+    {id:'grupos.html',e:'🔬',t:'Grupos funcionales',l:'Grupos'},
+    {id:'juego.html',e:'🎮',t:'Juego: nomenclatura',l:'Juego'}]},
+  {n:3,t:'Más allá del nombre',sub:'Isomería y reacciones',c:'#7c3aed',st:[
+    {id:'isomeria.html',e:'🔀',t:'Isomería',l:'Isomería'},
+    {id:'reacciones.html',e:'🧪',t:'Reacciones orgánicas',l:'Reacciones'}]}
+];
+(function(){
+  var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  var F=window.CN_FASES,ruta=[];F.forEach(function(f){f.st.forEach(function(s){s.f=f;ruta.push(s);});});
+  var i=ruta.findIndex?ruta.findIndex(function(s){return s.id===page;}):-1;
+  if(i<0)return;
+  var s=ruta[i],f=s.f,vis={};
+  try{vis=JSON.parse(localStorage.getItem('chromanom_visitas')||'{}')||{};}catch(e){}
+  function pinta(){
+    var nav=document.getElementById('fase-nav');
+    if(nav){
+      nav.style.setProperty('--fc',f.c);
+      nav.innerHTML='<div class="fn-h"><span class="fn-n">Fase '+f.n+'</span><b>'+f.t+'</b><span class="fn-sub">· '+f.sub+'</span></div>'+
+        '<ol class="fn-st">'+f.st.map(function(x,j){var on=x.id===page;
+          return '<li><a href="'+x.id+'"'+(on?' aria-current="page" class="on"':(vis[x.id]?' class="vis"':''))+'><span class="fn-k">'+(vis[x.id]&&!on?'✓':(j+1))+'</span><span>'+x.e+' '+x.l+'</span></a></li>';}).join('')+'</ol>';
+    }
+    var sig=document.getElementById('fase-sig');
+    if(sig){
+      var nx=ruta[i+1],pv=ruta[i-1];
+      sig.innerHTML=(pv?'<a class="fs-prev" href="'+pv.id+'">← '+pv.e+' '+pv.t+'</a>':'<a class="fs-prev" href="index.html">← Inicio</a>')+
+        (nx?'<a class="fs-next" href="'+nx.id+'" style="--fc:'+nx.f.c+'"><small>'+(nx.f!==f?'Comienza la fase '+nx.f.n+' · '+nx.f.t:'Siguiente parada')+'</small>'+nx.e+' '+nx.t+' →</a>':'<a class="fs-next" href="index.html#molecula"><small>¡Terminaste la ruta!</small>🏁 Ver mi molécula →</a>');
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',pinta);else pinta();
 })();

@@ -189,6 +189,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .nivel-card.gf .nivel-icon{background:linear-gradient(135deg,#5eead4,#0d9488)}
 .nivel-card.cf .nivel-icon{background:linear-gradient(135deg,#93c5fd,#2563eb)}
 .nivel-card.rg .nivel-icon{background:linear-gradient(135deg,#f0abfc,#c026d3)}
+.nivel-card.fu .nivel-icon{background:linear-gradient(135deg,#93c5fd,#1a6ea8)}
+.nivel-card.is .nivel-icon{background:linear-gradient(135deg,#c4b5fd,#7c3aed)}
+/* juego.html?tema=…: resalta el tema al que se llegó desde una página */
+.resaltado{outline:3px solid #f59e0b;outline-offset:3px;animation:resaltaTema 1.2s ease 3}
+@keyframes resaltaTema{50%{outline-color:transparent}}
 .nivel-icon{
   font-size:1.5rem;width:46px;height:46px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
@@ -814,6 +819,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
 <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
 <a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
 <a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
@@ -887,6 +893,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     </div>
 
     <div class="portada-modes">
+      <!-- Fase 1 de la ruta: va primero porque se estudia antes de nomenclatura -->
+      <button class="nivel-card fu" onclick="openDrillPicker('fundamentos')">
+        <div class="nivel-icon">⚛️</div>
+        <div><div class="nivel-name">El carbono <span class="paso-badge">Fase 1</span></div><div class="nivel-desc">Hibridación, tipos de carbono y clasificación de cadenas. Antes de empezar a nombrar.</div><div class="nivel-count" id="stat-fund-count">99 preguntas · 3 temas · 20 por sesión</div></div>
+      </button>
       <button class="nivel-card hc" onclick="openLevelModal('hidrocarburos')">
         <div class="nivel-icon">🔗</div>
         <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">318 preguntas · 20 por sesión</div></div>
@@ -913,6 +924,10 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
         <div><div class="nivel-name">Nomenclatura + reacciones <span class="paso-badge">Paso 4</span></div><div class="nivel-desc">Todos los grupos funcionales, con preguntas de reacciones mezcladas. Juégalo después de estudiar Reacciones.</div><div class="nivel-count">1248 preguntas · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card is" onclick="openLevelModal('isomeria')">
+        <div class="nivel-icon">🔀</div>
+        <div><div class="nivel-name">Isomería <span class="paso-badge">Fase 3</span></div><div class="nivel-desc">De cadena, de posición, de función, cis/trans y carbono quiral</div><div class="nivel-count" id="stat-iso-count">33 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card gf" onclick="openDrillPicker('funcional')">
         <div class="nivel-icon">🧬</div>
@@ -1096,6 +1111,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
+<script src="fundamentos.js"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -2466,6 +2482,12 @@ const NIVEL_TOPICS={
   nitrilos:   ['nitrilos'],
   aminas:     ['aminas'],
   benceno:    ['benceno'],
+  // Fase 1 «El carbono» (antes de nomenclatura) e isomería — fundamentos.js
+  carbono:       ['hibridacion','tipos_carbono','cadenas'],
+  hibridacion:   ['hibridacion'],
+  tipos_carbono: ['tipos_carbono'],
+  cadenas:       ['cadenas'],
+  isomeria:      ['isomeria'],
   // Retos de nomenclatura (temas nuevos; etiquetas nuevas en la hoja)
   retos:            ['cadena_principal','cazar_errores','haluros','polifuncionales'],
   cadena_principal: ['cadena_principal'],
@@ -2506,6 +2528,11 @@ const NIVEL_LABELS={
   nitrilos:  'Nitrilos',
   aminas:    'Aminas',
   benceno:   'Aromáticos',
+  carbono:       '⚛️ Fase 1: El carbono',
+  hibridacion:   '⚛️ Átomo de carbono e hibridación',
+  tipos_carbono: '🔢 Tipos de carbono',
+  cadenas:       '⛓️ Clasificación de cadenas',
+  isomeria:      '🔀 Isomería',
   retos:            '🧠 Retos de nomenclatura',
   cadena_principal: '🔎 Encuentra la cadena',
   cazar_errores:    '🕵️ Cazadores de errores',
@@ -2839,7 +2866,7 @@ function startGame(){
   } else {
     pool=NIVEL_TOPICS[currentLevel]
       ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
-      :QBANK;
+      :QBANK.filter(q=>!FUND_TOPICS.includes(q.topic));
   }
   const n=Math.min(pool.length,20);
   questions=shuffle(pool).slice(0,n);
@@ -2966,7 +2993,7 @@ function loadQuestion(){
 
   let html=`<div class="q-type-badge ${typeCls[q.type]||'qt-mc'}">${typeBadge[q.type]||''}</div>`;
   html+=`<div class="q-title">${q.q}</div>`;
-  if(!isBuild&&!isRxnQ) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
+  if(!isBuild&&!isRxnQ&&(molInner||toggleHtml)) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
   if(q.type==='mc') html+=buildMC(q);
   else if(q.type==='drag') html+=buildDrag(q);
@@ -6599,6 +6626,18 @@ const QBANK_RXN_BUILD=[
    q:'Dibuja el <strong>producto</strong> de esta sustitución: CH₃−CH₂−CH₂OH + HBr → ? (fórmula: C₃H₇Br)',expl:'El HBr protona el −OH (sale como agua) y el Br⁻ ocupa su lugar → CH₃−CH₂−CH₂Br (1-bromopropano).'},
 ];
 QBANK.push(...QBANK_RXN_BUILD);
+
+// ── FASE 1 «EL CARBONO» E ISOMERÍA ─────────────────────────────────────────
+// Banco en fundamentos.js (texto plano, sin codificar: NO pasa por
+// _decodeQBank), compartido con carbono.html, tipos-carbono.html,
+// cadenas.html, isomeria.html y el generador del docente. Temas:
+// hibridacion, tipos_carbono, cadenas e isomeria (30+ preguntas cada uno).
+// Sus dibujos (claves fu_…) se suman a M. No entran al «Juego completo»
+// (nomenclatura + reacciones): tienen sus propias tarjetas.
+const FUND_TOPICS=window.FUND_TOPICS||[];
+const QBANK_FUNDAMENTOS=[...(window.FUND_BANCO||[])];
+QBANK.push(...QBANK_FUNDAMENTOS);
+Object.assign(M,window.FUND_FIG||{});
 // Toda pregunta de construir sin explicación propia recibe una breve,
 // armada leyendo el nombre por partes (ver _explBuild).
 QBANK.forEach(q=>{if(q.type==='build'&&!q.expl)q.expl=_explBuild(q);});
@@ -6642,6 +6681,15 @@ const DRILL_CATEGORIES={
       {label:'Amidas',nivel:'amidas'},{label:'Nitrilos',nivel:'nitrilos'},{label:'Aminas',nivel:'aminas'},
       {label:'Aromáticos',nivel:'benceno',especial:true},
       {label:'Haluros de alquilo',nivel:'haluros'},{label:'Polifuncionales',nivel:'polifuncionales'},
+    ]
+  },
+  fundamentos:{
+    titulo:'⚛️ Fase 1: El carbono', desc:'Lo que hay que saber antes de nombrar: el átomo de carbono y su hibridación, los tipos de carbono y la clasificación de las cadenas.',
+    items:[
+      {label:'Los 3 temas mezclados',nivel:'carbono',especial:true},
+      {label:'⚛️ Átomo de carbono e hibridación',nivel:'hibridacion'},
+      {label:'🔢 Tipos de carbono',nivel:'tipos_carbono'},
+      {label:'⛓️ Clasificación de cadenas',nivel:'cadenas'},
     ]
   },
   retos:{
@@ -6721,7 +6769,7 @@ function medalEmoji(pct){return pct>=90?'🥇':pct>=70?'🥈':pct>=50?'🥉':'�
 
 // Render best scores on portada level cards
 function renderBests(){
-  ['hidrocarburos','oxigenados','nitrogenados','completo','constructor'].forEach(nv=>{
+  ['hidrocarburos','oxigenados','nitrogenados','completo','constructor','isomeria'].forEach(nv=>{
     const b=getBest(nv);
     const el=document.querySelector(`.nivel-card[onclick*="${nv}"] .nivel-count`);
     if(el&&b){el.innerHTML=el.innerHTML.replace(/ · Mejor:.*$/,'')+` · Mejor: ${medalEmoji(b.pct)} ${b.pct}%`;}
@@ -6753,9 +6801,11 @@ function showResults(){
   // nomenclatura, aunque la partida fuera solo de reacciones o de construir.
   const nRxn=questions.filter(q=>q.type==='rxnq').length;
   const nBld=questions.filter(q=>q.type==='build').length;
-  const modo=(total>0&&nRxn===total)?'rxn':(total>0&&nBld===total)?'build':(nRxn>0)?'mixto':'nom';
-  const TEMA={rxn:'las reacciones orgánicas',build:'cómo pasar del nombre a la estructura',mixto:'la nomenclatura y las reacciones orgánicas',nom:'la nomenclatura IUPAC'}[modo];
-  const REPASO={rxn:'Repasa el mecanismo, los reactivos y las condiciones de cada reacción.',build:'Lee el nombre por partes (cadena, insaturaciones, grupo funcional, sustituyentes) antes de dibujar.',mixto:'Repasa los grupos funcionales y las reacciones con más errores.',nom:'Revisa las 4 partes del nombre: ① sustituyentes, ② cadena, ③ insaturaciones, ④ grupo funcional.'}[modo];
+  const nFund=questions.filter(q=>FUND_TOPICS.includes(q.topic)).length;
+  const soloIso=total>0&&questions.every(q=>q.topic==='isomeria');
+  const modo=(total>0&&nFund===total)?(soloIso?'iso':'fund'):(total>0&&nRxn===total)?'rxn':(total>0&&nBld===total)?'build':(nRxn>0)?'mixto':'nom';
+  const TEMA={rxn:'las reacciones orgánicas',build:'cómo pasar del nombre a la estructura',mixto:'la nomenclatura y las reacciones orgánicas',nom:'la nomenclatura IUPAC',fund:'los fundamentos del carbono',iso:'la isomería'}[modo];
+  const REPASO={fund:'Repasa las páginas de la Fase 1: hibridación (cuenta los átomos unidos), tipos de carbono (cuenta solo carbonos) y criterios de las cadenas.',iso:'Antes de clasificar, revisa que la fórmula molecular sea la misma; luego mira si cambia la cadena, la posición o el grupo funcional.',rxn:'Repasa el mecanismo, los reactivos y las condiciones de cada reacción.',build:'Lee el nombre por partes (cadena, insaturaciones, grupo funcional, sustituyentes) antes de dibujar.',mixto:'Repasa los grupos funcionales y las reacciones con más errores.',nom:'Revisa las 4 partes del nombre: ① sustituyentes, ② cadena, ③ insaturaciones, ④ grupo funcional.'}[modo];
   let emoji,title,sub;
   if(pct>=90){emoji='🏆';title='¡Excelente dominio!';sub=`Demuestras un dominio sólido de ${TEMA}.`;}
   else if(pct>=70){emoji='🎯';title='¡Muy bien!';sub='Tienes una buena base. Repasa los temas con más errores.';}
@@ -6803,7 +6853,7 @@ function showResults(){
   // recomienda la REACCIÓN CON NOMBRE (ej. "Nitración", "Esterificación de
   // Fischer") — decir solo "repasa reacciones de alcanos" no le dice al
   // estudiante cuál de las 5 reacciones de esa familia falló.
-  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)',cadena_principal:'Encontrar la cadena principal',cazar_errores:'Errores comunes al nombrar',haluros:'Haluros de alquilo (halógeno = prefijo)',polifuncionales:'Compuestos polifuncionales (prioridad de grupos)'};
+  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)',cadena_principal:'Encontrar la cadena principal',hibridacion:'Átomo de carbono e hibridación',tipos_carbono:'Tipos de carbono (cuenta solo los carbonos vecinos)',cadenas:'Clasificación de cadenas carbonadas',isomeria:'Isomería',cazar_errores:'Errores comunes al nombrar',haluros:'Haluros de alquilo (halógeno = prefijo)',polifuncionales:'Compuestos polifuncionales (prioridad de grupos)'};
   // Consejo específico para los temas nuevos (el resto usa el consejo general).
   const TOPIC_TIPS={cadena_principal:'Prueba todos los caminos de extremo a extremo: la cadena más larga puede doblarse y entrar por una rama.',cazar_errores:'Revisa por pasos: cadena más larga, numeración, un localizador por grupo, di-/tri- y orden alfabético (sin contar di-, sec-, terc-).',haluros:'Los halógenos son prefijos (①) como los alquilos: cuentan igual en la numeración y van en orden alfabético.',polifuncionales:'Solo el grupo de mayor prioridad da la terminación; los demás van como prefijos (oxo-, hidroxi-, amino-).'};
   const RXN_GROUP_SHORT={rxn_alcanos:'Alcanos',rxn_alquenos:'Alquenos',rxn_alquinos:'Alquinos',rxn_aromaticos:'Aromáticos',rxn_halogenuros:'Haluros de alquilo',rxn_alcoholes:'Alcoholes',rxn_aminas:'Aminas',rxn_carbonilo:'Aldehídos y cetonas',rxn_acidos:'Ácidos carboxílicos',rxn_derivados:'Derivados de ácido'};
@@ -6939,12 +6989,29 @@ function actualizarConteosNiveles(){
     const n=QBANK.filter(q=>NIVEL_TOPICS[nv].includes(q.topic)).length;
     pon(`.nivel-card[onclick*="'${nv}'"] .nivel-count`,n+' preguntas');
   });
-  pon(`.nivel-card[onclick*="'completo'"] .nivel-count`,QBANK.length+' preguntas');
+  pon(`.nivel-card[onclick*="'completo'"] .nivel-count`,QBANK.filter(q=>!FUND_TOPICS.includes(q.topic)).length+' preguntas');
+  pon('#stat-fund-count',QBANK.filter(q=>NIVEL_TOPICS.carbono.includes(q.topic)).length+' preguntas · 3 temas');
+  pon('#stat-iso-count',QBANK.filter(q=>q.topic==='isomeria').length+' preguntas');
   pon('#stat-build-count',QBANK.filter(q=>q.type==='build').length+' moléculas');
   pon('.nivel-card[onclick*="openRxnPicker"] .nivel-count',QBANK.filter(q=>q.type==='rxnq').length+' preguntas');
   pon('#stat-retos-count',QBANK.filter(q=>NIVEL_TOPICS.retos.includes(q.topic)).length+' preguntas');
 }
 actualizarConteosNiveles();
+// juego.html?tema=…: llega desde la práctica de una página (carbono.html,
+// isomeria.html…) y resalta ese tema en la portada; el estudiante sigue
+// eligiéndolo él mismo (y se identifica antes, si está en modo colegio).
+(function(){
+  let t='';try{t=new URLSearchParams(location.search).get('tema')||'';}catch(e){}
+  if(!/^[a-z_]+$/.test(t))return;
+  if(DRILL_CATEGORIES.fundamentos.items.some(it=>it.nivel===t)){
+    openDrillPicker('fundamentos');
+    const b=[...document.querySelectorAll('#dp-grid .drill-grid-item')].find(x=>(x.getAttribute('onclick')||'').includes("'"+t+"'"));
+    if(b)b.classList.add('resaltado');
+  }else{
+    const c=document.querySelector(`.nivel-card[onclick*="'${t}'"]`);
+    if(c){c.classList.add('resaltado');setTimeout(()=>c.scrollIntoView({block:'center'}),300);}
+  }
+})();
 renderBests();
 document.getElementById('stat-banco').textContent=QBANK.length;
 actualizarPanelesEstudiante();

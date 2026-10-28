@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Tipos de carbono</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<style>
+.tipos4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
+.tipo{border:2px solid var(--brd);border-top:5px solid var(--c);border-radius:var(--rs);background:#fff;padding:12px;text-align:center}
+.tipo b{display:block;font-family:'Fraunces',serif;font-size:1.05rem;color:var(--c)}
+.tipo .n{font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:var(--tx);margin:4px 0}
+.tipo small{display:block;font-size:.76rem;color:var(--dimmer);line-height:1.4}
+.tipo svg{display:block;margin:6px auto 0;height:70px;width:auto}
+@media(max-width:700px){.tipos4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.paleta{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.paleta button{min-height:42px;padding:6px 12px;border-radius:999px;border:2px solid var(--c);background:#fff;color:var(--c);font-weight:800;font-size:.84rem;cursor:pointer;font-family:inherit}
+.paleta button.on{background:var(--c);color:#fff}
+.paleta button.exp{--c:#475569}
+.cuenta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cuenta span{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:800;padding:4px 10px;border-radius:999px;color:#fff}
+@keyframes sacude{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.tc-atom.mal{animation:sacude .35s}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link active">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 1 · El carbono · Parada 2 de 3</div>
+  <h1>Tipos de carbono: primario, secundario, terciario y cuaternario</h1>
+  <p>En una molécula no todos los carbonos son iguales. Según cuántos <b>otros carbonos</b> tengan unidos, se clasifican en cuatro tipos. Saber reconocerlos te ayudará a encontrar las ramificaciones, a clasificar alcoholes y a entender por qué unas reacciones ocurren en un carbono y no en otro.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#regla">La regla</a>
+  <a href="#clasificador">Clasificador interactivo</a>
+  <a href="#hidrogenos">Tipos de carbono e hidrógenos</a>
+  <a href="#otros">Con O, N o halógenos</a>
+  <a href="#practica">Practica</a>
+</nav>
+
+<!-- ═══════════════ 1. LA REGLA ═══════════════ -->
+<section class="sec" id="regla">
+  <div class="sec-kicker">Solo se cuentan carbonos</div>
+  <h2>La regla: cuenta los carbonos vecinos</h2>
+  <p>Mira un carbono y cuenta a cuántos <b>átomos de carbono</b> está unido directamente. Los hidrógenos, oxígenos, nitrógenos o halógenos <b>no cuentan</b>.</p>
+  <div class="tipos4" id="tipos4"></div>
+  <div class="key">🔑 <b>Truco:</b> en un alcano, el tipo de carbono se ve en su fórmula: <b>CH₃</b> casi siempre es primario, <b>CH₂</b> secundario, <b>CH</b> terciario y <b>C</b> (sin H) cuaternario, porque los 4 enlaces que no van a carbonos van a hidrógenos.</div>
+  <div class="warn">⚠️ <b>El tipo de enlace no cambia la cuenta:</b> se cuentan los carbonos unidos, no las rayas. En este curso clasificamos sobre todo carbonos de cadenas con enlaces sencillos (alcanos y sus derivados).</div>
+</section>
+
+<!-- ═══════════════ 2. CLASIFICADOR ═══════════════ -->
+<section class="sec" id="clasificador">
+  <div class="sec-kicker">Laboratorio</div>
+  <h2>Clasificador interactivo</h2>
+  <p><b>Modo explicar:</b> toca un carbono y verás resaltados sus enlaces con otros carbonos. <b>Modo reto:</b> elige un tipo en la paleta y toca los carbonos que sean de ese tipo. O pulsa <b>▶ Animar</b> para que la molécula se clasifique sola.</p>
+  <div class="lab" style="grid-template-columns:1fr">
+    <div>
+      <div class="paleta" id="paleta" role="group" aria-label="Modo">
+        <button type="button" class="exp on" data-k="">🔍 Explicar</button>
+        <button type="button" data-k="p" style="--c:var(--tp)">Primario</button>
+        <button type="button" data-k="s" style="--c:var(--ts)">Secundario</button>
+        <button type="button" data-k="t" style="--c:var(--tt)">Terciario</button>
+        <button type="button" data-k="q" style="--c:var(--tq)">Cuaternario</button>
+      </div>
+      <div class="lab-view" style="background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:6px">
+        <span class="lab-badge" id="tc-nombre"></span>
+        <svg id="tc-svg" viewBox="0 0 400 220" role="img" aria-label="Molécula para clasificar sus carbonos" style="max-width:640px"></svg>
+      </div>
+      <div class="lab-msg" id="tc-msg" aria-live="polite" style="margin-top:10px"></div>
+      <div class="cuenta" id="tc-cuenta"></div>
+      <div class="links-row">
+        <button type="button" class="btn-sm prim" id="tc-anim">▶ Animar</button>
+        <button type="button" class="btn-sm" id="tc-reset">↺ Reiniciar</button>
+        <button type="button" class="btn-sm" id="tc-otra">🔀 Otra molécula</button>
+      </div>
+    </div>
+  </div>
+  <div class="leyenda-tipos"><span><i style="background:var(--tp)"></i>Primario (1 C)</span><span><i style="background:var(--ts)"></i>Secundario (2 C)</span><span><i style="background:var(--tt)"></i>Terciario (3 C)</span><span><i style="background:var(--tq)"></i>Cuaternario (4 C)</span></div>
+</section>
+
+<!-- ═══════════════ 3. HIDRÓGENOS ═══════════════ -->
+<section class="sec" id="hidrogenos">
+  <div class="sec-kicker">Relación con la fórmula</div>
+  <h2>Tipos de carbono e hidrógenos</h2>
+  <p>Cada carbono forma 4 enlaces. Si en un alcano está unido a <i>n</i> carbonos, los otros <b>4 − <i>n</i></b> enlaces son con hidrógenos:</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Tipo</th><th>Carbonos vecinos</th><th>Hidrógenos (en un alcano)</th><th>Se escribe</th><th>Dónde aparece</th></tr></thead>
+    <tbody>
+      <tr><td><b style="color:var(--tp)">Primario</b></td><td>1</td><td>3</td><td class="mono">CH₃−</td><td>Extremos de la cadena y ramas metilo</td></tr>
+      <tr><td><b style="color:var(--ts)">Secundario</b></td><td>2</td><td>2</td><td class="mono">−CH₂−</td><td>Dentro de la cadena, sin ramas; en los anillos</td></tr>
+      <tr><td><b style="color:var(--tt)">Terciario</b></td><td>3</td><td>1</td><td class="mono">−CH&lt;</td><td>Donde sale una ramificación</td></tr>
+      <tr><td><b style="color:var(--tq)">Cuaternario</b></td><td>4</td><td>0</td><td class="mono">&gt;C&lt;</td><td>Donde salen dos ramificaciones del mismo carbono</td></tr>
+    </tbody></table></div>
+  <div class="life">
+    <div class="life-h">En tu vida diaria</div>
+    <p>⛽ El <b>octanaje</b> de la gasolina se mide comparándola con el <b>isooctano</b>, una molécula muy ramificada con 5 carbonos primarios, 1 secundario, 1 terciario y 1 cuaternario. Las cadenas ramificadas arden de forma más suave en el motor que las lineales, que «cascabelean».</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 4. OTROS ÁTOMOS ═══════════════ -->
+<section class="sec" id="otros">
+  <div class="sec-kicker">El O, el N y los halógenos no cuentan</div>
+  <h2>Carbonos unidos a O, N o halógenos</h2>
+  <p>La misma regla sirve cuando el carbono lleva un −OH, un −NH₂ o un halógeno: <b>solo se cuentan los carbonos</b>. Así se clasifican, por ejemplo, los alcoholes:</p>
+  <div class="figs" id="fig-alc"></div>
+  <div class="key">🔑 Un alcohol es <b>primario, secundario o terciario</b> según el tipo del carbono que lleva el −OH. Esto será importante en Reacciones: los alcoholes primarios, secundarios y terciarios reaccionan distinto cuando se oxidan.</div>
+</section>
+
+<!-- ═══════════════ 5. PRÁCTICA ═══════════════ -->
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso</div>
+  <h2>Practica lo que aprendiste</h2>
+  <p>Ocho preguntas al azar del banco de este tema.</p>
+  <div class="prac" id="prac-tc" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div>
+
+<script src="fundamentos.js"></script>
+<script>
+(function(){
+var FU=window.FUND,COL={p:'#2563eb',s:'#7c3aed',t:'#c2410c',q:'#be185d'},NOM={p:'primario',s:'secundario',t:'terciario',q:'cuaternario'},NK=['','p','s','t','q'];
+var SUB=['','₁','₂','₃','₄'];
+
+// Tarjetas de los 4 tipos, cada una con un mini ejemplo
+var A=function(t,o){o=o||{};o.t=t;return o;};
+var EJ={
+  p:FU.semi([A('CH₃',{k:'p'}),A('CH₂'),A('CH₃')],'',true),
+  s:FU.semi([A('CH₃'),A('CH₂',{k:'s'}),A('CH₃')],'',true),
+  t:FU.semi([A('CH₃'),A('CH',{u:'CH₃',k:'t'}),A('CH₃')],'',true),
+  q:FU.semi([A('CH₃'),A('C',{u:'CH₃',d:'CH₃',k:'q'}),A('CH₃')],'',true)
+};
+document.getElementById('tipos4').innerHTML=['p','s','t','q'].map(function(k,i){
+  return '<div class="tipo" style="--c:'+COL[k]+'"><b>'+NOM[k][0].toUpperCase()+NOM[k].slice(1)+'</b><div class="n">'+(i+1)+' C</div><small>unido a '+(i+1)+' carbono'+(i?'s':'')+'</small>'+EJ[k]+'</div>';
+}).join('');
+
+// ── Clasificador: moléculas como grafos (columna, fila) ──
+// at: [col, fila, etiqueta opcional para O/N/Cl]; bd: [i, j]
+var MOLS=[
+  {n:'isooctano (gasolina)',at:[[0,0],[1,0],[2,0],[3,0],[4,0],[1,-1],[1,1],[3,-1]],bd:[[0,1],[1,2],[2,3],[3,4],[1,5],[1,6],[3,7]]},
+  {n:'molécula ramificada de 8 C',at:[[0,0],[1,0],[2,0],[3,0],[4,0],[1,-1],[2,1],[2,2]],bd:[[0,1],[1,2],[2,3],[3,4],[1,5],[2,6],[6,7]]},
+  {n:'molécula de 7 C',at:[[0,0],[1,0],[2,0],[3,0],[1,-1],[1,1],[2,-1]],bd:[[0,1],[1,2],[2,3],[1,4],[1,5],[2,6]]},
+  {n:'un alcohol (el O no cuenta)',at:[[0,0],[1,0],[2,0],[3,0],[1,-1],[1,1,'OH']],bd:[[0,1],[1,2],[2,3],[1,4],[1,5]]},
+  {n:'molécula de 9 C',at:[[0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[2,-1],[2,1],[4,1]],bd:[[0,1],[1,2],[2,3],[3,4],[4,5],[2,6],[2,7],[4,8]]}
+];
+var svg=document.getElementById('tc-svg'),msg=document.getElementById('tc-msg'),mi=0,modo='',hecho={},animando=null,M;
+function prep(m){
+  var deg=m.at.map(function(){return 0;}),nc=m.at.map(function(){return 0;});
+  m.bd.forEach(function(b){deg[b[0]]++;deg[b[1]]++;if(!m.at[b[1]][2])nc[b[0]]++;if(!m.at[b[0]][2])nc[b[1]]++;});
+  m.info=m.at.map(function(a,i){var het=!!a[2],h=4-deg[i];return {het:het,lab:het?a[2]:'C'+(h>0?'H'+(h>1?SUB[h]:''):''),nc:nc[i],k:NK[nc[i]]};});
+  var cols=m.at.map(function(a){return a[0];}),rows=m.at.map(function(a){return a[1];});
+  m.x0=Math.min.apply(0,cols);m.x1=Math.max.apply(0,cols);m.y0=Math.min.apply(0,rows);m.y1=Math.max.apply(0,rows);
+  return m;
+}
+var DX=86,DY=66;
+function P(m,i){return [ (m.at[i][0]-m.x0)*DX+50, (m.at[i][1]-m.y0)*DY+34 ];}
+function dibuja(){
+  M=MOLS[mi];if(!M.info)prep(M);
+  var w=(M.x1-M.x0)*DX+100,h=(M.y1-M.y0)*DY+68;svg.setAttribute('viewBox','0 0 '+w+' '+h);
+  var s='';
+  M.bd.forEach(function(b,j){var p=P(M,b[0]),q=P(M,b[1]);s+='<line class="tc-bond" id="tcb'+j+'" x1="'+p[0]+'" y1="'+p[1]+'" x2="'+q[0]+'" y2="'+q[1]+'"/>';});
+  M.at.forEach(function(a,i){var p=P(M,i),f=M.info[i],w2=f.lab.length*10+14;
+    if(f.het){s+='<g><rect x="'+(p[0]-w2/2)+'" y="'+(p[1]-15)+'" width="'+w2+'" height="30" rx="9" fill="#fff" stroke="#fecaca"/><text x="'+p[0]+'" y="'+(p[1]+1)+'" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono,monospace" font-weight="800" font-size="15" fill="#b42318">'+f.lab+'</text></g>';return;}
+    var k=hecho[i],c=k?COL[k]:'#fff';
+    s+='<g class="tc-atom" id="tca'+i+'" data-i="'+i+'" role="button" tabindex="0" aria-label="carbono '+f.lab+(k?', '+NOM[k]:'')+'"><rect x="'+(p[0]-w2/2)+'" y="'+(p[1]-15)+'" width="'+w2+'" height="30" rx="9" fill="'+c+'" stroke="'+(k?c:'#94a3b8')+'" stroke-width="2"/><text x="'+p[0]+'" y="'+(p[1]+1)+'" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono,monospace" font-weight="800" font-size="15" fill="'+(k?'#fff':'#0d2233')+'" pointer-events="none">'+f.lab+'</text></g>';
+  });
+  svg.innerHTML=s;
+  document.getElementById('tc-nombre').textContent=M.n;
+  cuenta();
+}
+function cuenta(){
+  var tot={p:0,s:0,t:0,q:0},ok={p:0,s:0,t:0,q:0},nC=0;
+  M.info.forEach(function(f,i){if(f.het)return;nC++;tot[f.k]++;if(hecho[i])ok[f.k]++;});
+  var n=Object.keys(hecho).length;
+  document.getElementById('tc-cuenta').innerHTML=n<nC?'<span style="background:#64748b">Clasificados: '+n+' de '+nC+'</span>':
+    ['p','s','t','q'].filter(function(k){return tot[k];}).map(function(k){return '<span style="background:'+COL[k]+'">'+tot[k]+' '+NOM[k]+(tot[k]>1?'s':'')+'</span>';}).join('')+'<span style="background:#15803d">✓ ¡Molécula completa!</span>';
+}
+function resalta(i){
+  M.bd.forEach(function(b,j){var on=(b[0]===i&&!M.info[b[1]].het)||(b[1]===i&&!M.info[b[0]].het);document.getElementById('tcb'+j).classList.toggle('hl',on);});
+  svg.querySelectorAll('.tc-atom').forEach(function(g){g.classList.toggle('sel',+g.dataset.i===i);});
+}
+function explica(i){
+  var f=M.info[i],het=M.bd.some(function(b){return (b[0]===i&&M.info[b[1]].het)||(b[1]===i&&M.info[b[0]].het);});
+  return 'Este <b class="mono">'+f.lab+'</b> está unido a <b>'+f.nc+' carbono'+(f.nc>1?'s':'')+'</b>'+(het?' (el OH no cuenta)':'')+' → <b style="color:'+COL[f.k]+'">'+NOM[f.k]+'</b>.';
+}
+function toca(i){
+  if(animando)return;var f=M.info[i];if(f.het)return;
+  resalta(i);
+  if(!modo){hecho[i]=f.k;dibuja();resalta(i);msg.innerHTML=explica(i);return;}
+  if(f.k===modo){hecho[i]=f.k;dibuja();resalta(i);msg.innerHTML='✓ ¡Bien! '+explica(i);}
+  else{var g=document.getElementById('tca'+i);g.classList.remove('mal');void g.getBBox();g.classList.add('mal');
+    msg.innerHTML='✗ No es <b style="color:'+COL[modo]+'">'+NOM[modo]+'</b>: cuenta los enlaces resaltados en amarillo. Está unido a <b>'+f.nc+'</b> carbono'+(f.nc>1?'s':'')+'.';}
+}
+svg.addEventListener('click',function(e){var g=e.target.closest('.tc-atom');if(g)toca(+g.dataset.i);});
+svg.addEventListener('keydown',function(e){var g=e.target.closest('.tc-atom');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toca(+g.dataset.i);}});
+document.getElementById('paleta').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;modo=b.dataset.k;
+  this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+  msg.innerHTML=modo?'Toca todos los carbonos <b style="color:'+COL[modo]+'">'+NOM[modo]+'s</b> de la molécula.':'Toca un carbono para ver a cuántos carbonos está unido.';});
+function reset(){if(animando){clearTimeout(animando);animando=null;}hecho={};dibuja();msg.innerHTML=modo?'Toca todos los carbonos <b style="color:'+COL[modo]+'">'+NOM[modo]+'s</b>.':'Toca un carbono para ver a cuántos carbonos está unido.';}
+document.getElementById('tc-reset').addEventListener('click',reset);
+document.getElementById('tc-otra').addEventListener('click',function(){mi=(mi+1)%MOLS.length;reset();});
+document.getElementById('tc-anim').addEventListener('click',function(){
+  reset();var orden=M.info.map(function(f,i){return i;}).filter(function(i){return !M.info[i].het;}).sort(function(a,b){return M.at[a][0]-M.at[b][0]||M.at[a][1]-M.at[b][1];}),j=0;
+  var rapido=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function paso(){if(j>=orden.length){animando=null;resalta(-1);msg.innerHTML='Listo: cada carbono quedó coloreado según cuántos carbonos tiene unidos. Cuéntalos tú en el resumen de abajo.';return;}
+    var i=orden[j++];hecho[i]=M.info[i].k;dibuja();resalta(i);msg.innerHTML=explica(i);animando=setTimeout(paso,rapido?300:1300);})();
+});
+dibuja();msg.innerHTML='Toca un carbono para ver a cuántos carbonos está unido.';
+
+// Alcoholes
+var fa=FU.fig;
+document.getElementById('fig-alc').innerHTML=
+  '<div class="fig">'+fa.fu_etanol()+'<div class="fig-cap">Alcohol primario</div><div class="fig-sub">El C del OH está unido a <b>1</b> carbono.</div></div>'+
+  '<div class="fig">'+fa.fu_propan2ol()+'<div class="fig-cap">Alcohol secundario</div><div class="fig-sub">El C del OH está unido a <b>2</b> carbonos.</div></div>'+
+  '<div class="fig">'+fa.fu_terbutanol()+'<div class="fig-cap">Alcohol terciario</div><div class="fig-sub">El C del OH está unido a <b>3</b> carbonos.</div></div>';
+
+FU.practica('prac-tc','tipos_carbono',8,'Practica: tipos de carbono');
+})();
+</script>
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="site-ui.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>
