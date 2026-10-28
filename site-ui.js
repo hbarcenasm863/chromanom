@@ -23,6 +23,14 @@
     {href:'docente.html',ico:'📘',txt:'Docente: guías y evaluaciones'}
   ];
   var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  // Registro de páginas visitadas en este dispositivo: la molécula-menú de la
+  // portada marca con ✓ cada módulo ya abierto y calcula la siguiente parada.
+  try{
+    if(page&&page!=='index.html'){
+      var vis=JSON.parse(localStorage.getItem('chromanom_visitas')||'{}')||{};
+      if(!vis[page]){vis[page]=Date.now();localStorage.setItem('chromanom_visitas',JSON.stringify(vis));}
+    }
+  }catch(e){}
 
   function css(){
     var s=document.createElement('style');

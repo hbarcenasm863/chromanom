@@ -128,12 +128,6 @@ body::before{
 .me{background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r-s);padding:12px;display:flex;flex-wrap:wrap;gap:3px;align-items:flex-end;align-content:center;justify-content:center}
 .me .nw{font-size:.95rem}
 
-.ruta2{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:none;padding:0}
-.ruta2 a{display:flex;gap:12px;align-items:flex-start;height:100%;padding:16px;background:var(--cn-surf);border:1px solid var(--cn-brd);border-radius:var(--cn-r);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,box-shadow .15s,transform .15s}
-.ruta2 a:hover{border-color:var(--cn-brand);box-shadow:var(--cn-sh-h);transform:translateY(-2px)}
-.r2-n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--cn-brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
-.ruta2 b{display:block;font-size:1rem;margin-bottom:3px}
-.ruta2 small{display:block;font-size:.84rem;color:var(--cn-tx2);line-height:1.45}
 
 .mods2{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
 .mods2>.mod2{grid-column:span 2}
@@ -156,7 +150,6 @@ body::before{
   .hero2{grid-template-columns:1fr;gap:24px;padding:32px 0 20px}
   .metodo-grid{grid-template-columns:1fr 1fr}
   .mods2{grid-template-columns:1fr 1fr}.mods2>.mod2,.mods2>.mod2:nth-last-child(-n+4){grid-column:auto}.mods2>.mod2.destacado{grid-column:1/-1}
-  .ruta2{grid-template-columns:1fr 1fr}
   .stats2{grid-template-columns:repeat(2,1fr)}
   .more-examples{grid-template-columns:1fr}
 }
@@ -167,7 +160,6 @@ body::before{
   .hero2-cta .cn-btn{flex:1 1 100%}
   .metodo-grid{grid-template-columns:1fr 1fr;gap:8px}.mt-card{padding:12px}.mt-card p{font-size:.82rem}.mt-card code{font-size:.7rem;white-space:normal}
   .mods2{grid-template-columns:1fr}
-  .ruta2{grid-template-columns:1fr}
   .nw{font-size:1rem}
   .stats2{gap:8px}.st2{padding:12px 8px}.st2 b{font-size:1.5rem}
 }
@@ -314,6 +306,77 @@ footer span{color:var(--naranja);font-weight:700}
 /* Cobertura temática */
 .temas-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .tema-chip{padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:600;background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.25)}
+
+/* ── MENÚ MOLÉCULA (2026-10): la portada presenta los módulos como una
+   molécula. Cadena principal = ruta recomendada (C1…C5), ramificaciones =
+   recursos de apoyo, doble enlace dorado = siguiente parada, grupo
+   funcional = progreso. Usa los 4 colores del método con su mismo sentido. ── */
+.mol-card{padding:22px 22px 18px;margin:0 0 28px;position:relative;overflow:hidden}
+.mol-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.mol-sub{font-size:.92rem;color:var(--cn-tx2);line-height:1.55;max-width:70ch;margin-top:6px}
+.mol-lista{font-size:.8rem;font-weight:700;color:var(--cn-brand);text-decoration:none;white-space:nowrap;padding:6px 0}
+.mol-lista:hover{text-decoration:underline}
+.mol-tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+.mol-tabs::-webkit-scrollbar{display:none}
+.mol-tabs button{flex-shrink:0;display:flex;align-items:center;gap:6px;min-height:40px;padding:6px 14px;border-radius:999px;border:2px solid var(--cn-brd);background:var(--cn-surf);color:var(--cn-tx2);font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,border-color .15s}
+.mol-tabs button .mp{font-size:.72rem;opacity:.8;font-family:'JetBrains Mono',monospace}
+.mol-tabs button.on{color:#fff}
+.mol-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}
+.mol-view{position:relative;border-radius:var(--cn-r);background:
+  radial-gradient(ellipse 70% 60% at 40% 55%,rgba(22,101,52,.07),transparent 70%),
+  radial-gradient(ellipse 40% 40% at 88% 40%,rgba(204,121,167,.10),transparent 70%),
+  linear-gradient(180deg,#fbfdff,#f3f8fc);border:1px solid var(--cn-brd)}
+#mol-svg{display:block;width:100%;height:auto;touch-action:manipulation}
+#mol-svg .bond{stroke:#94a3b8;stroke-width:5;stroke-linecap:round;transition:opacity .2s}
+#mol-svg .bond.ch{stroke:var(--c2)}
+#mol-svg .bond.ra{stroke:var(--c1)}
+#mol-svg .bond.fg{stroke:var(--c4)}
+#mol-svg .bond.dbl{stroke:var(--c3);stroke-width:4}
+#mol-svg .bond.dbl.glow{animation:molGlow 1.6s ease-in-out infinite}
+@keyframes molGlow{0%,100%{opacity:1}50%{opacity:.45}}
+#mol-svg .at{cursor:pointer;transition:opacity .2s}
+#mol-svg .at:focus{outline:none}
+#mol-svg .at-disc{fill:#fff;stroke-width:4;transition:stroke-width .15s}
+#mol-svg .at.vis .at-disc{fill:#f0fdf4}
+#mol-svg .at:hover .at-disc,#mol-svg .at:focus-visible .at-disc,#mol-svg .at.hl .at-disc{stroke-width:7}
+#mol-svg .at-lbl{font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;fill:var(--cn-tx);paint-order:stroke;stroke:#fbfdff;stroke-width:5px;stroke-linejoin:round}
+#mol-svg .at-loc{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;fill:#fff}
+#mol-svg .bond.dim{opacity:.28}
+#mol-svg .at.dim>:not(.at-base){opacity:.3}
+@media(max-width:560px){#mol-svg .at-lbl{font-size:18px}}
+#mol-svg .pulse{animation:molPulse 1.8s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes molPulse{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+@media(prefers-reduced-motion:reduce){#mol-svg .pulse,#mol-svg .bond.dbl.glow{animation:none}}
+.mol-panel{min-width:0}
+.mp-head{border-left:5px solid;padding:2px 0 2px 12px;margin-bottom:12px}
+.mp-n{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.05em}
+.mp-tit{font-family:'Fraunces',Georgia,serif;font-size:1.35rem;font-weight:800;color:var(--cn-tx);line-height:1.2;margin:2px 0 4px}
+.mp-q{font-size:.86rem;color:var(--cn-tx2);line-height:1.5}
+.mp-q strong{color:var(--cn-tx)}
+.mp-bar{height:7px;border-radius:4px;background:var(--cn-surf2);overflow:hidden;margin-top:8px}
+.mp-bar span{display:block;height:100%;border-radius:4px;transition:width .4s}
+.mp-lst{display:flex;flex-direction:column;gap:8px}
+.mp-st{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;min-height:58px;border:2px solid var(--cn-brd);border-radius:var(--cn-r-s);background:var(--cn-surf);text-decoration:none;color:var(--cn-tx);transition:border-color .15s,transform .15s}
+.mp-st:hover{transform:translateX(3px)}
+.mp-st.hl{animation:molFlash 1.2s ease}
+@keyframes molFlash{0%{background:#fef3c7}100%{background:var(--cn-surf)}}
+.mp-st .ic{font-size:1.5rem;line-height:1}
+.mp-st .tt{font-weight:800;font-size:.95rem;line-height:1.25}
+.mp-st .dd{font-size:.8rem;color:var(--cn-tx2);line-height:1.4;margin-top:2px}
+.mp-ss{font-size:.7rem;font-weight:800;white-space:nowrap;padding:3px 9px;border-radius:999px}
+.mp-ss.vis{background:var(--cn-ok-l);color:var(--cn-ok)}
+.mp-ss.sig{background:#fef3c7;color:#92400e}
+.mp-ss.apo{background:var(--c1b);color:var(--c1t)}
+.mp-lv{display:flex;flex-direction:column;gap:7px;margin:4px 0 12px}
+.mp-lv div{display:grid;grid-template-columns:minmax(0,1fr) 90px 40px;gap:8px;align-items:center;font-size:.8rem;font-weight:600;color:var(--cn-tx2)}
+.mp-lv .b{height:7px;border-radius:4px;background:var(--cn-surf2);overflow:hidden}
+.mp-lv .b i{display:block;height:100%;background:var(--cn-brand);border-radius:4px}
+.mp-lv .pc{font-family:'JetBrains Mono',monospace;font-size:.74rem;text-align:right}
+.mp-sub{font-size:.74rem;font-weight:800;color:var(--cn-tx3);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 6px}
+.mp-go{display:flex;align-items:center;justify-content:center;min-height:46px;margin-top:12px;padding:10px 16px;border-radius:var(--cn-r-s);background:var(--cn-brand);color:#fff;font-weight:800;text-decoration:none;box-shadow:var(--cn-sh)}
+.mp-go:hover{background:var(--cn-brand-d)}
+@media(max-width:820px){.mol-grid{grid-template-columns:1fr}.mol-view{max-width:560px;width:100%;margin:0 auto}}
+@media(max-width:560px){.mol-card{padding:16px 12px 14px}.mol-top{flex-direction:column;gap:2px}.mol-sub{font-size:.86rem}}
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
@@ -361,6 +424,24 @@ footer span{color:var(--naranja);font-weight:700}
     </div>
     <figcaption id="hero-fig-cap">Cada color de la estructura corresponde a una parte del nombre: <strong>5-metilhex-3-en-2-ol</strong>.</figcaption>
   </figure>
+</section>
+
+<!-- ── MENÚ MOLÉCULA ── -->
+<section class="mol-card cn-card" id="molecula" aria-labelledby="mol-tit">
+  <div class="mol-top">
+    <div>
+      <div class="cn-eyebrow" id="mol-tit">⌬ Tu molécula ChromaNom</div>
+      <p class="mol-sub">La <strong style="color:var(--c2t)">cadena principal</strong> es tu ruta, numerada como en la IUPAC: empieza en el C1. Las <strong style="color:var(--c1t)">ramificaciones</strong> son recursos de apoyo, el <strong style="color:var(--c3t)">doble enlace dorado</strong> señala tu siguiente parada y el <strong style="color:var(--c4t)">grupo funcional</strong> muestra tu progreso. Toca un átomo.</p>
+    </div>
+    <a class="mol-lista" href="#modulos">Ver como lista ↓</a>
+  </div>
+  <div class="mol-tabs" id="mol-tabs" role="tablist" aria-label="Partes de la molécula"></div>
+  <div class="mol-grid">
+    <div class="mol-view">
+      <svg id="mol-svg" viewBox="10 4 580 304" aria-label="Menú en forma de molécula: la cadena principal es la ruta de módulos, las ramificaciones son recursos y el grupo funcional muestra tu progreso."></svg>
+    </div>
+    <div class="mol-panel" id="mol-panel" aria-live="polite"></div>
+  </div>
 </section>
 
 <!-- ── CIFRAS REALES ── -->
@@ -412,21 +493,6 @@ footer span{color:var(--naranja);font-weight:700}
       <div class="np"><span class="nw g">oico</span><span class="nl g">Ácido</span></div>
     </div>
   </div>
-</section>
-
-<!-- ── RUTA RECOMENDADA ── -->
-<section class="sec2" aria-labelledby="ruta-title">
-  <div class="sec2-head">
-    <div class="cn-eyebrow">¿Por dónde empiezo?</div>
-    <h2 id="ruta-title">Ruta recomendada</h2>
-    <p>Todos los módulos están abiertos; este es el orden que mejor funciona si vas empezando.</p>
-  </div>
-  <ol class="ruta2">
-    <li><a href="teoria.html"><span class="r2-n">1</span><span><b>Principios</b><small>Las 4 partes, el algoritmo de 5 pasos y las reglas de desempate.</small></span></a></li>
-    <li><a href="grupos.html"><span class="r2-n">2</span><span><b>Grupos funcionales</b><small>Cada grupo con su estructura, sus reglas y ejercicios.</small></span></a></li>
-    <li><a href="juego.html"><span class="r2-n">3</span><span><b>Juego: nomenclatura</b><small>Pon a prueba lo aprendido con preguntas cronometradas de nombres.</small></span></a></li>
-    <li><a href="reacciones.html"><span class="r2-n">4</span><span><b>Reacciones y juego completo</b><small>Aprende las reacciones y luego juega el modo «Juego completo: nomenclatura + reacciones».</small></span></a></li>
-  </ol>
 </section>
 
 <!-- ── MÓDULOS ── -->
@@ -684,6 +750,182 @@ function tourRender(){
 }
 </script>
 
+<script>
+// ── MENÚ MOLÉCULA ──
+// La portada presenta los módulos como una molécula en fórmula de esqueleto:
+// la cadena principal (C1…C5) es la ruta recomendada, numerada como en la
+// IUPAC; las ramificaciones son recursos de apoyo; el doble enlace dorado
+// (color de las insaturaciones) entra al módulo que sigue; y el grupo
+// funcional (color ④) es el progreso del estudiante. Tocar un átomo abre su
+// panel con enlaces grandes; la molécula nunca navega por sí sola. Los
+// módulos visitados salen del registro 'chromanom_visitas' de site-ui.js.
+(function(){
+  var svg=document.getElementById('mol-svg'); if(!svg) return;
+  var NS='http://www.w3.org/2000/svg';
+  var GR={
+    ch:{t:'Cadena principal',c:'#166534',e:'⛓️',n:'② CADENA PRINCIPAL · TU RUTA',q:'Cinco carbonos, cinco paradas: del C1 al C5. Es el orden que mejor funciona si vas empezando (todos los módulos están abiertos).'},
+    ra:{t:'Ramificaciones',c:'#0891b2',e:'🌿',n:'① RAMIFICACIONES · APOYO',q:'Recursos que cuelgan de la cadena: tenlos a mano mientras estudias, en cualquier momento de la ruta.'},
+    fg:{t:'Tu progreso',c:'#9a4a78',e:'⭐',n:'④ GRUPO FUNCIONAL · TU PROGRESO',q:''}
+  };
+  // x,y: posición en el esqueleto; r: orden en la ruta (null = ramificación)
+  var AT=[
+    {id:'teoria.html',g:'ch',r:1,x:70,y:232,e:'⚗️',l:'Principios',t:'Principios de nomenclatura',d:'Las 4 partes, el algoritmo de 5 pasos y las reglas de desempate.'},
+    {id:'grupos.html',g:'ch',r:2,x:170,y:174,e:'🔬',l:'Grupos',t:'Grupos funcionales',d:'Los 19 grupos con su prioridad IUPAC, estructuras y más de 200 ejercicios.'},
+    {id:'juego.html',g:'ch',r:3,x:270,y:232,e:'🎮',l:'Juego',t:'Juego: nomenclatura',d:'Preguntas cronometradas: opción múltiple, arrastrar partes, escribir y construir moléculas.'},
+    {id:'reacciones.html',g:'ch',r:4,x:370,y:174,e:'🧪',l:'Reacciones',t:'Reacciones orgánicas',d:'42 reacciones con mecanismo paso a paso; luego juega «Nomenclatura + reacciones».'},
+    {id:'isomeria.html',g:'ch',r:5,x:470,y:232,e:'🔀',l:'Isomería',t:'Isomería',d:'Misma fórmula, distinta molécula: cadena, posición, función, cis/trans y quiralidad.'},
+    {id:'referencia.html',g:'ra',r:null,x:170,y:70,e:'📋',l:'Referencia',t:'Hoja de referencia',d:'Prefijos, multiplicadores, prioridad de grupos y reglas clave. Imprimible.',de:1},
+    {id:'docente.html',g:'ra',r:null,x:370,y:70,e:'📘',l:'Docente',t:'Guías, talleres y evaluaciones',d:'Para el docente: hojas imprimibles de 5 a 50 preguntas y guías de 4 sesiones.',de:3},
+    {id:'_fg',g:'fg',r:null,x:536,y:150,l:'Progreso',de:4}
+  ];
+  var BEST={hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Nomenclatura + reacciones',constructor:'Constructor molecular'};
+  var visitas={}, mejores=[];
+  try{ visitas=JSON.parse(localStorage.getItem('chromanom_visitas')||'{}')||{}; }catch(e){}
+  try{
+    Object.keys(BEST).forEach(function(k){
+      var b=JSON.parse(localStorage.getItem('chromanom_best_'+k)||'null');
+      if(b&&typeof b.pct==='number') mejores.push([BEST[k],Math.max(0,Math.min(100,b.pct))]);
+    });
+  }catch(e){}
+  if(mejores.length) visitas['juego.html']=visitas['juego.html']||1; // ya jugó antes de existir el registro
+  var route=AT.filter(function(a){return a.r;});
+  var next=null; route.some(function(a){ if(!visitas[a.id]){ next=a; return true; } });
+  var hechos=route.filter(function(a){return visitas[a.id];}).length;
+  var byId={}; AT.forEach(function(a){ byId[a.id]=a; });
+  function el(tag,attrs,parent){ var x=document.createElementNS(NS,tag); for(var k in attrs) x.setAttribute(k,attrs[k]); if(parent) parent.appendChild(x); return x; }
+  function txt(n,t){ n.textContent=t; return n; }
+
+  // ── Enlaces ── (la parada siguiente recibe el doble enlace dorado)
+  var BONDS=[['teoria.html','grupos.html','ch'],['grupos.html','juego.html','ch'],['juego.html','reacciones.html','ch'],['reacciones.html','isomeria.html','ch'],
+             ['grupos.html','referencia.html','ra'],['reacciones.html','docente.html','ra'],['isomeria.html','_fg','fg']];
+  var gB=el('g',{},svg), bonds=[];
+  BONDS.forEach(function(b){
+    var dbl=b[2]==='ch'&&next&&next.id===b[1];
+    var lines=dbl?[el('line',{class:'bond dbl glow'},gB),el('line',{class:'bond dbl glow'},gB)]:[el('line',{class:'bond '+b[2]},gB)];
+    bonds.push({a:byId[b[0]],b:byId[b[1]],g:b[2],lines:lines,dbl:dbl});
+  });
+
+  // ── Átomos ──
+  var atoms=[];
+  AT.forEach(function(a){
+    var G=GR[a.g], fg=a.g==='fg';
+    var lab=fg?'Tu progreso: '+hechos+' de '+route.length+' paradas':a.t+(a.r?', parada '+a.r:', ramificación')+(visitas[a.id]?' (visitado)':'');
+    var g=el('g',{class:'at'+(visitas[a.id]?' vis':''),role:'button',tabindex:0,'aria-label':lab},svg);
+    el('circle',{r:fg?38:29,fill:'#fff',class:'at-base'},g); // base opaca: el enlace no se ve a través del átomo atenuado
+    if(next===a) el('circle',{r:36,fill:'none',stroke:'#d4a843','stroke-width':5,class:'pulse'},g);
+    if(fg){
+      el('circle',{r:38,class:'at-disc',stroke:G.c,fill:'#fdf2f8'},g);
+      // anillo de avance alrededor del grupo funcional
+      var C=2*Math.PI*30, pct=hechos/route.length;
+      el('circle',{r:30,fill:'none',stroke:'#f5d0e6','stroke-width':6},g);
+      el('circle',{r:30,fill:'none',stroke:G.c,'stroke-width':6,'stroke-linecap':'round','stroke-dasharray':(C*pct).toFixed(1)+' '+C.toFixed(1),transform:'rotate(-90)'},g);
+      txt(el('text',{y:3,'text-anchor':'middle','font-size':19,'font-weight':900,fill:'#0d2233','font-family':'Outfit, sans-serif'},g),hechos+'/'+route.length);
+      txt(el('text',{y:17,'text-anchor':'middle','font-size':9,'font-weight':800,fill:G.c,'letter-spacing':'.6','font-family':'Outfit, sans-serif'},g),'④ AVANCE');
+    }else{
+      el('circle',{r:29,class:'at-disc',stroke:G.c},g);
+      txt(el('text',{y:9,'text-anchor':'middle','font-size':26},g),a.e);
+      // localizador (C1…C5) o «R» para las ramificaciones
+      el('rect',{x:-35,y:-37,width:a.r?26:22,height:17,rx:8.5,fill:G.c},g);
+      txt(el('text',{x:a.r?-22:-24,y:-24.5,'text-anchor':'middle',class:'at-loc'},g),a.r?'C'+a.r:'R');
+      if(visitas[a.id]){ el('circle',{cx:22,cy:-22,r:9,fill:'#15803d',stroke:'#fff','stroke-width':2.5},g); txt(el('text',{x:22,y:-18,'text-anchor':'middle','font-size':11,'font-weight':900,fill:'#fff'},g),'✓'); }
+    }
+    var up=a.g==='ra';
+    txt(el('text',{y:up?-46:(fg?58:50),'text-anchor':'middle',class:'at-lbl'},g),a.l);
+    function act(){ elegir(a.g,a.id); }
+    g.addEventListener('click',act);
+    g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); act(); } });
+    atoms.push({a:a,g:g,ph:Math.random()*6.28,amp:fg?2.2:3});
+    a.cx=a.x; a.cy=a.y;
+  });
+
+  // ── Vibración molecular: cada átomo oscila un poco y los enlaces lo siguen ──
+  var pausa=false, t0=performance.now();
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function colocar(t){
+    atoms.forEach(function(o){
+      var a=o.a; a.cx=a.x+(quieto?0:Math.cos(t*1.3+o.ph)*o.amp); a.cy=a.y+(quieto?0:Math.sin(t*1.7+o.ph)*o.amp);
+      o.g.setAttribute('transform','translate('+a.cx.toFixed(1)+' '+a.cy.toFixed(1)+')');
+    });
+    bonds.forEach(function(b){
+      var dx=b.b.cx-b.a.cx, dy=b.b.cy-b.a.cy, L=Math.hypot(dx,dy)||1, ox=-dy/L*4.5, oy=dx/L*4.5;
+      b.lines.forEach(function(ln,i){
+        var s=b.lines.length===1?0:(i?1:-1);
+        ln.setAttribute('x1',(b.a.cx+ox*s).toFixed(1)); ln.setAttribute('y1',(b.a.cy+oy*s).toFixed(1));
+        ln.setAttribute('x2',(b.b.cx+ox*s).toFixed(1)); ln.setAttribute('y2',(b.b.cy+oy*s).toFixed(1));
+      });
+    });
+  }
+  function tick(now){
+    if(!pausa&&!document.hidden) colocar((now-t0)/1000);
+    if(!quieto) requestAnimationFrame(tick);
+  }
+  colocar(0); if(!quieto) requestAnimationFrame(tick);
+  // Se queda quieta mientras el dedo o el ratón están encima, para tocar con calma.
+  var vista=svg.parentNode;
+  vista.addEventListener('pointerenter',function(){ pausa=true; });
+  vista.addEventListener('pointerleave',function(){ pausa=false; });
+  vista.addEventListener('focusin',function(){ pausa=true; });
+  vista.addEventListener('focusout',function(){ pausa=false; });
+
+  // ── Pestañas ──
+  var bar=document.getElementById('mol-tabs');
+  [['fg','<span>⭐ Tu progreso</span><span class="mp">'+hechos+'/'+route.length+'</span>'],
+   ['ch','<span>⛓️ Cadena principal</span><span class="mp">C1–C5</span>'],
+   ['ra','<span>🌿 Ramificaciones</span><span class="mp">2</span>']].forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.setAttribute('role','tab'); b.innerHTML=c[1]; b.dataset.g=c[0];
+    b.addEventListener('click',function(){ elegir(c[0]); });
+    bar.appendChild(b);
+  });
+
+  // ── Panel ──
+  var panel=document.getElementById('mol-panel');
+  function estado(a){
+    if(visitas[a.id]) return '<span class="mp-ss vis">✓ Visitado</span>';
+    if(next===a) return '<span class="mp-ss sig">⭐ Siguiente</span>';
+    if(!a.r) return '<span class="mp-ss apo">Apoyo</span>';
+    return '';
+  }
+  function item(a,res){
+    var G=GR[a.g];
+    return '<a class="mp-st'+(a.id===res?' hl':'')+'" href="'+a.id+'" style="border-color:'+(a.id===res?G.c:'')+'"><span class="ic">'+a.e+'</span><span><div class="tt">'+(a.r?'C'+a.r+' · ':'')+a.t+'</div><div class="dd">'+a.d+'</div></span><span>'+estado(a)+'</span></a>';
+  }
+  function elegir(g,res){
+    bar.querySelectorAll('button').forEach(function(b){
+      var on=b.dataset.g===g, c=GR[b.dataset.g].c;
+      b.classList.toggle('on',on); b.setAttribute('aria-selected',on?'true':'false');
+      b.style.background=on?c:''; b.style.borderColor=on?c:'';
+    });
+    atoms.forEach(function(o){ o.g.classList.toggle('dim',o.a.g!==g&&g!=='fg'); o.g.classList.toggle('hl',o.a.id===res); });
+    bonds.forEach(function(b){ var on=g==='fg'||b.g===g||(g==='ra'&&b.g==='ra'); b.lines.forEach(function(l){ l.classList.toggle('dim',!on); }); });
+    var G=GR[g], h;
+    if(g==='fg'){
+      var pct=Math.round(hechos/route.length*100);
+      h='<div class="mp-head" style="border-color:'+G.c+'"><div class="mp-n" style="color:'+G.c+'">'+G.n+'</div><div class="mp-tit">'+(hechos?'Vas por buen camino':'Tu molécula está por armarse')+'</div>'+
+        '<div class="mp-q">Has visitado <strong>'+hechos+' de '+route.length+'</strong> paradas de la cadena principal.</div><div class="mp-bar"><span style="width:'+pct+'%;background:'+G.c+'"></span></div></div>';
+      if(mejores.length){
+        h+='<div class="mp-sub">🎮 Tus mejores resultados en el juego</div><div class="mp-lv">'+mejores.map(function(m){
+          return '<div><span>'+m[0]+'</span><span class="b" role="img" aria-label="'+m[0]+': '+m[1]+'%"><i style="width:'+m[1]+'%"></i></span><span class="pc">'+m[1]+'%</span></div>'; }).join('')+'</div>';
+      }
+      h+=next?'<div class="mp-sub">Siguiente parada</div>'+item(next,next.id)+'<a class="mp-go" href="'+next.id+'">'+(hechos?'⭐ Continuar: ':'▶ Empezar por ')+next.t+' →</a>'
+             :'<div class="mp-q"><strong>🏁 ¡Recorriste toda la cadena!</strong> Vuelve a cualquier parada para repasar o sube tu puntaje en el juego.</div><a class="mp-go" href="juego.html">🎮 Mejorar mi puntaje →</a>';
+      h+='<p class="mp-q" style="margin-top:8px;font-size:.74rem">Se guarda solo en este dispositivo.</p>';
+    }else{
+      h='<div class="mp-head" style="border-color:'+G.c+'"><div class="mp-n" style="color:'+G.c+'">'+G.n+'</div><div class="mp-tit">'+G.e+' '+G.t+'</div><div class="mp-q">'+G.q+'</div></div>'+
+        '<div class="mp-lst">'+AT.filter(function(a){return a.g===g;}).map(function(a){ return item(a,res); }).join('')+'</div>';
+    }
+    panel.innerHTML=h;
+    if(res&&window.innerWidth<=820){ var x=panel.querySelector('.mp-st.hl'); if(x) x.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+  }
+  elegir(hechos?'fg':'ch', hechos?null:(next&&next.id));
+
+  // ── Botón principal de la portada: lleva a la siguiente parada ──
+  var cta=document.getElementById('cta-principal');
+  if(cta&&hechos){
+    if(next){ cta.href=next.id; cta.textContent='⭐ Siguiente parada: '+next.t+' →'; }
+    else { cta.href='#molecula'; cta.textContent='🏁 Repasar mi molécula'; }
+  }
+})();
+</script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
