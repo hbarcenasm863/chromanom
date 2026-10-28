@@ -413,6 +413,7 @@ footer span{color:var(--naranja);font-weight:700}
       <a class="cn-btn cn-btn--secondary" href="#modulos">Explorar módulos</a>
     </div>
     <button type="button" class="cn-btn cn-btn--ghost hero2-tour" onclick="tourOpen()">▶ ¿Cómo funciona ChromaNom? (1 min)</button>
+    <button type="button" class="cn-btn cn-btn--ghost hero2-tour" id="narr-intro" hidden>🔊 Escuchar introducción</button>
     <p class="hero2-proof">🏫 Usado en clase en el Colegio Rufino José Cuervo · Gratis · Sin registro · Funciona en el celular</p>
   </div>
 
@@ -972,10 +973,24 @@ document.addEventListener('DOMContentLoaded',function(){
     else { cta.href='#molecula'; cta.textContent='🏁 Repasar mi molécula'; }
   }
 });
+// ── Narración de la portada (narracion.js; como el «Escuchar introducción» de IonNom) ──
+document.addEventListener('DOMContentLoaded',function(){
+  var b=document.getElementById('narr-intro');if(!b||!window.CN_NARRAR)return;
+  b.hidden=false;
+  b.addEventListener('click',function(){window.CN_NARRAR.leer(
+    '¡Hola! Bienvenido a ChromaNom, tu herramienta para aprender química orgánica. '+
+    'El menú tiene forma de molécula. La cadena principal es tu ruta, numerada como en la IUPAC, y tiene tres fases. '+
+    'En la fase uno, el carbono, verás por qué el carbono forma cuatro enlaces y cómo se hibrida, los tipos de carbono y cómo se clasifican las cadenas. '+
+    'En la fase dos aprenderás a nombrar compuestos orgánicos con el método de cuatro colores: sustituyentes, cadena principal, insaturaciones y grupo funcional, y lo pondrás a prueba en el Juego. '+
+    'En la fase tres estudiarás la isomería y las reacciones orgánicas. '+
+    'El doble enlace dorado te muestra cuál es tu siguiente parada, y el grupo funcional, al final de la cadena, muestra tu progreso. '+
+    'Empieza por el carbono uno. ¡Mucho éxito en tu aprendizaje!',b);});
+});
 </script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
+<script src="narracion.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

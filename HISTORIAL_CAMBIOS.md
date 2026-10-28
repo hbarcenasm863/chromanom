@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-28 (145) — Narración opcional (como en IonNom)
+
+### Contexto
+Sugerencia de la auditoría con los principios de Mayer (principio de
+modalidad): que el estudiante pueda **escuchar** la explicación mientras
+mira las animaciones, como el botón «Escuchar introducción» de IonNom. El
+docente la aprobó.
+
+### Cambios
+- `narracion.js` (nuevo, compartido): usa la voz del propio navegador
+  (Web Speech API), en español de Colombia si está disponible, un poco más
+  lenta de lo normal, igual que IonNom. No necesita internet ni guarda nada;
+  si el navegador no tiene voz, no aparece ningún botón.
+  - Cada sección de las páginas recibe su botón **«🔊 Escuchar»**, que lee
+    solo esa sección (narración por partes); la sección que suena se
+    resalta con un borde azul. Un segundo toque la detiene; también se
+    detiene al salir de la página.
+  - El encabezado de cada página recibe **«🔊 Escuchar introducción»**.
+  - No lee las preguntas de práctica ni las tablas.
+  - Convierte la notación química para que se escuche bien: C₄H₁₀ → «C 4
+    H 10», sp³ → «s p tres», σ/π → «sigma/pi», = y ≡ entre átomos →
+    «doble/triple enlace», 109,5° → «109 coma 5 grados».
+- Se usa en `carbono.html`, `tipos-carbono.html`, `cadenas.html`,
+  `isomeria.html` e `index.html` (portada: «🔊 Escuchar introducción» con
+  una presentación de la molécula y las 3 fases).
+- `sw.js`: caché `chromanom-v44` (incluye `narracion.js`).
+
+### Verificación
+Playwright con la voz simulada: botones en las 5 páginas, sin errores, y
+revisión del texto exacto que se leería en cada sección.
+
+### Pasos manuales
+- Ninguno (GitHub Pages). La voz depende del dispositivo: en celulares
+  Android y iPhone viene una voz en español; en algunos computadores con
+  Windows hay que tener instalada una voz en español.
+
+### Pendiente
+- Si el docente quiere, se puede agregar a Principios, Grupos y Reacciones.
+
+---
+
 ## 2026-10-28 (144) — Auditoría química y didáctica (Mayer) de la Fase 1 e isomería
 
 ### Contexto
