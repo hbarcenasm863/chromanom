@@ -1036,7 +1036,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat((D.ABIERTAS[t.id]||[]).filter(filtroPreg(t)));});
     var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
-    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee el contexto, analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
+    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee cada pregunta (y su contexto, si lo tiene), analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
     be=be.concat(bloquesSaber(qs,r));
     be=be.concat(bloquesAbiertas(ab,qs.length+1));
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));

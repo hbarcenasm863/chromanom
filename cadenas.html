@@ -65,6 +65,8 @@
   <div class="sec-kicker">Una cadena, cuatro preguntas</div>
   <h2>Los 4 criterios para clasificar una cadena</h2>
   <p>Una misma cadena se clasifica respondiendo cuatro preguntas. Por ejemplo, CH₃−CH(CH₃)−CH=CH₂ es <b>abierta, ramificada, insaturada y homogénea</b>.</p>
+  <div class="key">✏️ <b>Antes de empezar: la fórmula de esqueleto.</b> En algunos dibujos de esta página la cadena aparece como un zigzag. Cada <b>vértice</b> y cada <b>extremo</b> del zigzag es un carbono, y los H no se dibujan: cada C tiene los H que le faltan para completar 4 enlaces. Las dos figuras son la misma molécula, el butano.</div>
+  <div class="figs" id="esq"></div>
   <div class="crit" id="crit"></div>
   <div class="key">🔑 <b>Heteroátomo</b> = cualquier átomo distinto del carbono y del hidrógeno (O, N, S, halógenos…). La cadena es <b>heterogénea</b> solo si el heteroátomo está <b>intercalado entre carbonos</b>. Si el O o el N están al final, como un −OH o un −NH₂, son grupos que cuelgan de la cadena y la cadena sigue siendo <b>homogénea</b>.</div>
 </section>
@@ -159,6 +161,7 @@ function anima(dur,cb,fin){if(quieto){cb(1);if(fin)fin();return;}var t0=performa
 // Mapa de criterios
 var A=function(t,o){o=o||{};o.t=t;return o;};
 var mini=function(at){return FU.semi(at,'');};
+document.getElementById('esq').innerHTML='<div class="fig">'+F.fu_butano()+'<div class="fig-sub">semidesarrollada: todos los C y H</div></div><div class="fig">'+F.fu_butano_zz()+'<div class="fig-sub">esqueleto: 2 extremos + 2 vértices = 4 C</div></div>';
 document.getElementById('crit').innerHTML=[
   ['1 · Por su forma','Abierta (acíclica)','Tiene dos extremos.',F.fu_butano_zz(),'Cerrada (cíclica)','Los extremos se unen en un anillo.',F.fu_ciclohexano()],
   ['2 · Por sus ramas (abiertas)','Lineal','Un solo camino, sin bifurcaciones.',F.fu_hexano_zz(),'Ramificada','De un carbono sale otra cadena.',F.fu_isobutano()],
@@ -239,10 +242,20 @@ document.getElementById('f-het').innerHTML='<div class="fig">'+F.fu_thf()+'<div 
     ['fu_cloroetano','al','sat','hom','na','El Cl está al final: no interrumpe la cadena.'],['fu_tioeter','al','sat','het','na'],['fu_ciclopropano','c','sat','hom','alic'],
     ['fu_dieno','al','ins','hom','na'],['fu_metilamina_ch','al','sat','hom','na','El NH₂ está al final: la cadena sigue siendo homogénea.'],['fu_ramificadaU','ar','sat','hom','na','El CH₂−CH₃ de abajo es una rama: sale del C3, que queda unido a 3 carbonos.']
   ];
-  var orden=[],i=0,ok=0,tot=0,form=document.getElementById('cl-form');
+  // Retroalimentación en dos tiempos: primero una pista por cada criterio
+  // fallado (sin dar la respuesta) y un nuevo intento; después, la solución
+  // con el porqué de cada criterio.
+  var PISTA={f:'<b>Forma:</b> ¿tiene extremos o se cierra en anillo? Si tiene extremos, ¿todos sus carbonos caben en un solo camino de un extremo al otro?',
+    e:'<b>Enlaces:</b> busca enlaces dobles (=) o triples (≡) entre carbonos.',
+    a:'<b>Átomos:</b> ¿hay un O, N o S <i>entre</i> dos carbonos? Si está al final (−OH, −Cl, −NH₂), no cuenta.',
+    r:'<b>Anillo:</b> solo aplica a cadenas cerradas. ¿El anillo tiene un átomo distinto del C? ¿Es tipo benceno?'};
+  var POR={al:'tiene dos extremos y todos sus carbonos en un solo camino',ar:'de uno de sus carbonos sale otra cadena (una rama)',c:'sus extremos se unen formando un anillo',
+    sat:'solo tiene enlaces sencillos entre carbonos',ins:'tiene al menos un enlace doble o triple entre carbonos',hom:'su esqueleto es solo de carbonos',het:'tiene un heteroátomo intercalado entre carbonos',
+    alic:'es un anillo no aromático',arom:'es un anillo tipo benceno',hetc:'su anillo incluye un átomo distinto del carbono',na:'no es una cadena cerrada'};
+  var orden=[],i=0,ok=0,tot=0,intento=0,form=document.getElementById('cl-form');
   function nueva(){
     if(!orden.length){orden=C.map(function(_,k){return k;}).sort(function(){return Math.random()-.5;});}
-    i=orden.pop();form.reset();form.querySelectorAll('fieldset').forEach(function(x){x.className='';});
+    i=orden.pop();intento=0;form.reset();form.querySelectorAll('fieldset').forEach(function(x){x.className='';});
     document.getElementById('cl-fig').innerHTML=F[C[i][0]]();document.getElementById('cl-msg').textContent='Clasifica la cadena del dibujo.';
   }
   document.getElementById('cl-ok').addEventListener('click',function(){
@@ -250,9 +263,16 @@ document.getElementById('f-het').innerHTML='<div class="fig">'+F.fu_thf()+'<div 
     keys.forEach(function(k,j){var v=(form.querySelector('input[name='+k+']:checked')||{}).value,fs=form.querySelector('[data-c='+k+']');
       if(!v){falta=true;fs.className='';return;}fs.className=v===c[j+1]?'ok':'mal';if(v===c[j+1])bien++;});
     if(falta){document.getElementById('cl-msg').innerHTML='Marca una opción en cada uno de los 4 criterios.';return;}
-    tot++;if(bien===4)ok++;
-    document.getElementById('cl-score').textContent=ok+' de '+tot+' perfectas';
-    document.getElementById('cl-msg').innerHTML=(bien===4?'✓ <b>¡Perfecta!</b> ':'Tienes <b>'+bien+' de 4</b>. ')+'Es <b>'+[L[c[1]],L[c[2]],L[c[3]]].join(', ')+(c[4]!=='na'?', '+L[c[4]]:'')+'</b>.'+(c[5]?' '+c[5]:'');
+    intento++;
+    if(intento===1){tot++;if(bien===4)ok++;document.getElementById('cl-score').textContent=ok+' de '+tot+' perfectas al primer intento';}
+    var msg=document.getElementById('cl-msg');
+    if(bien<4&&intento===1){
+      msg.innerHTML='Tienes <b>'+bien+' de 4</b>. Revisa lo marcado en rojo y vuelve a comprobar:<br>'+keys.filter(function(k,j){return form.querySelector('[data-c='+k+']').className==='mal';}).map(function(k){return '• '+PISTA[k];}).join('<br>');
+      return;
+    }
+    var porque=[c[1],c[2],c[3]].map(function(v){return L[v]+' porque '+POR[v];});
+    if(c[4]!=='na')porque.push(L[c[4]]+': '+POR[c[4]]);
+    msg.innerHTML=(bien===4?'✓ <b>¡Perfecta!</b> ':'Tienes <b>'+bien+' de 4</b>. ')+'Es '+porque.map(function(x){return '<b>'+x.split(' porque ')[0].split(': ')[0]+'</b>'+x.slice(x.split(' porque ')[0].split(': ')[0].length);}).join('; ')+'.'+(c[5]?' '+c[5]:'');
   });
   document.getElementById('cl-otra').addEventListener('click',nueva);
   nueva();

@@ -89,7 +89,7 @@
         <button type="button" data-k="t" style="--c:var(--tt)">Terciario</button>
         <button type="button" data-k="q" style="--c:var(--tq)">Cuaternario</button>
       </div>
-      <div class="lab-view" style="background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:6px">
+      <div class="lab-view tc-view" style="background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:6px">
         <span class="lab-badge" id="tc-nombre"></span>
         <svg id="tc-svg" viewBox="0 0 400 220" role="img" aria-label="Molécula para clasificar sus carbonos" style="max-width:640px"></svg>
       </div>
@@ -111,12 +111,12 @@
   <h2>Tipos de carbono e hidrógenos</h2>
   <p>Cada carbono forma 4 enlaces. Si en un alcano está unido a <i>n</i> carbonos, los otros <b>4 − <i>n</i></b> enlaces son con hidrógenos:</p>
   <div class="tbl-wrap"><table class="tbl">
-    <thead><tr><th>Tipo</th><th>Carbonos vecinos</th><th>Hidrógenos (en un alcano)</th><th>Se escribe</th><th>Dónde aparece</th></tr></thead>
+    <thead><tr><th>Tipo</th><th>Carbonos unidos</th><th>Hidrógenos (en un alcano)</th><th>Se escribe</th><th>Dónde aparece</th></tr></thead>
     <tbody>
       <tr><td><b style="color:var(--tp)">Primario</b></td><td>1</td><td>3</td><td class="mono">CH₃−</td><td>Extremos de la cadena y ramas metilo</td></tr>
       <tr><td><b style="color:var(--ts)">Secundario</b></td><td>2</td><td>2</td><td class="mono">−CH₂−</td><td>Dentro de la cadena, sin ramas; en los anillos</td></tr>
-      <tr><td><b style="color:var(--tt)">Terciario</b></td><td>3</td><td>1</td><td class="mono">−CH&lt;</td><td>Donde sale una ramificación</td></tr>
-      <tr><td><b style="color:var(--tq)">Cuaternario</b></td><td>4</td><td>0</td><td class="mono">&gt;C&lt;</td><td>Donde salen dos ramificaciones del mismo carbono</td></tr>
+      <tr><td><b style="color:var(--tt)">Terciario</b></td><td>3</td><td>1</td><td class="mono"><span class="fx-in fx-dn">−<span class="fx-st">CH<span class="fx-bl"><span class="fx-bd"></span></span></span>−</span></td><td>Donde sale una ramificación</td></tr>
+      <tr><td><b style="color:var(--tq)">Cuaternario</b></td><td>4</td><td>0</td><td class="mono"><span class="fx-in fx-dn">−<span class="fx-st">C<span class="fx-bu"><span class="fx-bd"></span></span><span class="fx-bl"><span class="fx-bd"></span></span></span>−</span></td><td>Donde salen dos ramificaciones del mismo carbono</td></tr>
     </tbody></table></div>
   <div class="life">
     <div class="life-h">En tu vida diaria</div>

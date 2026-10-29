@@ -208,8 +208,8 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   <a href="#posfun">De posición y de función</a>
   <a href="#geometrica">Cis / trans</a>
   <a href="#optica">Carbono quiral</a>
-  <a href="#resumen">Resumen</a>
   <a href="#repaso">Practica</a>
+  <a href="#resumen">Resumen</a>
 </nav>
 
 <!-- ═══════════════ 0. INTRODUCCIÓN ═══════════════ -->
@@ -244,7 +244,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
 
   <h3>El ejemplo más sencillo: C₄H₁₀</h3>
   <div class="figs two" id="fig-c4"></div>
-  <p>El butano y el 2-metilpropano (nombre común: <i>isobutano</i>) son los dos gases del encendedor y de la pipeta de gas (GLP). Tienen los mismos 4 C y 10 H, pero el butano hierve a −0,5 °C y el 2-metilpropano a −11,7 °C: <b>más ramificación → molécula más compacta → menor punto de ebullición</b>.</p>
+  <p>El butano y el 2-metilpropano (nombre común: <i>isobutano</i>) están en el gas del encendedor y, junto con el propano, en el GLP de la pipeta de gas. Tienen los mismos 4 C y 10 H, pero el butano hierve a −0,5 °C y el 2-metilpropano a −11,7 °C: <b>más ramificación → molécula más compacta → menor punto de ebullición</b>.</p>
 
   <h3>Los 5 isómeros de C₆H₁₄</h3>
   <p>Todos tienen 6 carbonos y 14 hidrógenos. Fíjate cómo la cadena principal ② se acorta a medida que aparecen ramas ①:</p>
@@ -323,7 +323,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
     <div class="figs one" id="fig-grasas" style="margin-top:4px"></div>
     <p>Los aceites vegetales tienen ácidos grasos con dobles enlaces <b>cis</b>, como el <b>ácido oleico</b> del aceite de oliva: el doble enlace cis hace un "codo" en la cadena, las moléculas no se acomodan bien entre sí y el aceite es líquido. Cuando la industria <b>hidrogena parcialmente</b> los aceites para fabricar margarinas y mantecas, algunos dobles enlaces pasan a <b>trans</b> (como el <b>ácido elaídico</b>): la cadena queda casi recta, las moléculas se empacan mejor y la grasa es sólida a temperatura ambiente.</p>
     <p>Las <b>grasas trans</b> aumentan el colesterol "malo" (LDL) y el riesgo de enfermedades del corazón; por eso la OMS recomienda eliminarlas de los alimentos y en Colombia su contenido está regulado. Revisa la etiqueta nutricional: "grasas trans: 0 g".</p>
-    <p>👁️ Tus ojos usan isomería cis/trans: en la retina, la luz convierte el <b>11-<i>cis</i>-retinal</b> en <b><i>trans</i>-retinal</b>; ese cambio de forma es la señal que el cerebro interpreta como "veo luz".</p>
+    <p>👁️ Tus ojos usan isomería cis/trans: en la retina, la luz convierte el <b>11-<i>cis</i>-retinal</b> en <b>todo-<i>trans</i>-retinal</b>; ese cambio de forma es la señal que el cerebro interpreta como "veo luz".</p>
   </div>
 
   <div class="prac" id="prac-geometrica"></div>
@@ -337,7 +337,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
   <div class="key">🔑 <b>Carbono quiral (o asimétrico):</b> un carbono unido a <b>cuatro sustituyentes diferentes</b>. Se marca con un asterisco: C*. Una molécula con un solo carbono quiral existe como <b>dos enantiómeros</b>: dos moléculas que son imagen especular una de la otra y no se pueden superponer.</div>
 
   <h3>Ejemplo 1: butan-2-ol</h3>
-  <p>El C2 del <span class="nm"><span class="c">butan</span><span class="g">-2-ol</span></span> está unido a <b>H</b>, <b style="color:var(--c4t)">OH</b>, <b style="color:var(--c2t)">CH₃</b> y <b style="color:var(--c2t)">CH₂CH₃</b>: cuatro grupos distintos, así que es quiral. En el dibujo, la <b>cuña llena</b> (▶) indica un enlace que sale hacia ti y la <b>cuña rayada</b> uno que va hacia atrás del papel.</p>
+  <p>El C2 del <span class="nm"><span class="c">butan</span><span class="g">-2-ol</span></span> está unido a <b>H</b>, <b style="color:var(--c4t)">OH</b>, <b style="color:var(--c2t)">CH₃</b> y <b style="color:var(--c2t)">CH₂−CH₃</b>: cuatro grupos distintos, así que es quiral. En el dibujo, la <b>cuña llena</b> (▶) indica un enlace que sale hacia ti y la <b>cuña rayada</b> uno que va hacia atrás del papel.</p>
   <div class="figs one" id="fig-but2ol"></div>
 
   <h3>Ejemplo 2: ácido láctico y alanina</h3>
@@ -517,10 +517,10 @@ const H={t:'H',r:'n'},ME={t:'CH₃',tl:'H₃C',r:'c'};
 const P2={
   cis:()=>planar({lt:ME,rt:ME,lb:H,rb:H},'cis-but-2-eno'),
   trans:()=>planar({lt:ME,rb:ME,lb:H,rt:H},'trans-but-2-eno'),
-  but1eno:()=>planar({lt:H,lb:H,rt:H,rb:{t:'CH₂CH₃',r:'c'},same:{l:true}},'but-1-eno'),
+  but1eno:()=>planar({lt:H,lb:H,rt:H,rb:{t:'CH₂−CH₃',r:'c'},same:{l:true}},'but-1-eno'),
   metilprop:()=>planar({lt:H,lb:H,rt:{t:'CH₃',r:'c'},rb:{t:'CH₃',r:'r'},same:{l:true,r:true}},'2-metilprop-1-eno'),
   dicloroTrans:()=>planar({lt:{t:'Cl',r:'r'},rb:{t:'Cl',r:'r'},lb:H,rt:H},'1,2-dicloroeteno, isómero del ejercicio'),
-  pent2enoCis:()=>planar({lt:ME,rt:{t:'CH₂CH₃',r:'c'},lb:H,rb:H},'cis-pent-2-eno'),
+  pent2enoCis:()=>planar({lt:ME,rt:{t:'CH₂−CH₃',r:'c'},lb:H,rb:H},'cis-pent-2-eno'),
 };
 
 // ── Carbono quiral en 3D: cuñas, con su imagen en el espejo ──
@@ -538,7 +538,7 @@ function quiralPar(S,aria){
   return m.svg(aria,1.3);
 }
 const Q={
-  but2ol:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'CH₂CH₃',tl:'CH₃CH₂',r:'c'},w:{t:'OH',tl:'HO',r:'g'},h:{t:'H',r:'n'}},'los dos enantiómeros del butan-2-ol, uno frente al otro como en un espejo'),
+  but2ol:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'CH₂−CH₃',tl:'CH₃−CH₂',r:'c'},w:{t:'OH',tl:'HO',r:'g'},h:{t:'H',r:'n'}},'los dos enantiómeros del butan-2-ol, uno frente al otro como en un espejo'),
   lactico:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'COOH',tl:'HOOC',r:'g'},w:{t:'OH',tl:'HO',r:'r'},h:{t:'H',r:'n'}},'los dos enantiómeros del ácido láctico'),
   alanina:()=>quiralPar({ul:{t:'CH₃',tl:'H₃C',r:'c'},ur:{t:'COOH',tl:'HOOC',r:'g'},w:{t:'NH₂',tl:'H₂N',r:'r'},h:{t:'H',r:'n'}},'los dos enantiómeros de la alanina'),
 };
@@ -588,13 +588,13 @@ put('fig-nocistrans',
 put('fig-grasas',
   fig(acidoGraso(true),'ácido oleico (doble enlace <i>cis</i>)','Cadena con "codo": aceite de oliva, líquido (funde a 13 °C).','yes fa')+
   fig(acidoGraso(false),'ácido elaídico (doble enlace <i>trans</i>)','Cadena casi recta: grasa trans, sólida (funde a 44 °C).','no fa'));
-put('fig-but2ol',fig(Q.but2ol(),'los dos enantiómeros del '+nm('c:butan|g:-2-ol',1),'C* unido a H, OH, CH₃ y CH₂CH₃. Por más que gires una molécula, no coincide con la otra.'));
+put('fig-but2ol',fig(Q.but2ol(),'los dos enantiómeros del '+nm('c:butan|g:-2-ol',1),'C* unido a H, OH, CH₃ y CH₂−CH₃. Por más que gires una molécula, no coincide con la otra.'));
 put('fig-lactico',fig(Q.lactico(),nm('g:ácido |r:2-hidroxi|c:prop|i:an|g:oico',1)+' (ácido láctico)','El OH es aquí un sustituyente ① (hidroxi-) porque el grupo principal ④ es el COOH.'));
 put('fig-alanina',
   fig(Q.alanina(),nm('g:ácido |r:2-amino|c:prop|i:an|g:oico',1)+' (alanina)','C* unido a H, NH₂, CH₃ y COOH.'));
 put('fig-noquiral',
   fig(F.propan2olQ(),nm('c:prop|i:an|g:-2-ol',1),'El C2 tiene dos CH₃ iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
-  fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1),'El C3 tiene dos grupos etilo (−CH₂CH₃) iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
+  fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1),'El C3 tiene dos grupos etilo (−CH₂−CH₃) iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
   fig(F.pentan3ol(),nm('c:pent|i:an|g:-3-ol',1),'El C3 tiene H, OH y dos etilos iguales → no es quiral.','no','<span class="tag no">sin C quiral</span>')+
   fig(F.metilhexano3(),nm('r:3-metil|c:hex|i:an|g:o',1),'En cambio aquí el C3 tiene H, CH₃, etilo y propilo: <b>sí</b> es quiral.','yes','<span class="tag yes">C3 quiral</span>'));
 
@@ -668,7 +668,7 @@ const PRACT={
       {t:'Sí',ok:true},
       {t:'No, porque el C1 tiene tres H',fb:'El C1 no forma parte del doble enlace. Solo importan los dos carbonos del C=C: el C2 y el C3.'},
       {t:'No, porque los dos lados son distintos',fb:'¡Que sean distintos no es un problema! Lo que impide la isomería es tener dos grupos <b>iguales en el mismo carbono</b> del doble enlace.'}],
-     ok:'C2: H y CH₃ (distintos). C3: H y CH₂CH₃ (distintos). Existen <i>cis</i>-pent-2-eno y <i>trans</i>-pent-2-eno.',
+     ok:'C2: H y CH₃ (distintos). C3: H y CH₂−CH₃ (distintos). Existen <i>cis</i>-pent-2-eno y <i>trans</i>-pent-2-eno.',
      after:()=>fig(P2.pent2enoCis(),'<i>cis</i>-pent-2-eno')},
     {q:'¿El <b>propeno</b> (CH₂=CH−CH₃) tiene isomería cis/trans?',opts:[
       {t:'Sí, cis-propeno y trans-propeno',fb:'Mira el C1 del doble enlace: es CH₂, tiene <b>dos H iguales</b>. Si los intercambias, obtienes la misma molécula.'},
@@ -680,7 +680,7 @@ const PRACT={
       {t:'No, porque el C2 tiene dos CH₃',ok:true},
       {t:'No, porque tiene una ramificación',fb:'Tener ramas no impide la isomería cis/trans. El problema es otro: mira qué grupos tiene el C2.'}],
      ok:'El C2 está unido a dos CH₃ iguales (el C1 y el metilo) → <b>no hay isomería cis/trans</b>.'},
-    {q:'¿El <b>1,2-dicloroeteno</b> (ClCH=CHCl) tiene isomería cis/trans?',opts:[
+    {q:'¿El <b>1,2-dicloroeteno</b> (CHCl=CHCl) tiene isomería cis/trans?',opts:[
       {t:'Sí',ok:true},
       {t:'No, porque los dos carbonos son iguales',fb:'Que los dos carbonos se parezcan no importa. Lo que se revisa es si <b>cada carbono</b> tiene dos grupos distintos: aquí cada uno tiene H y Cl.'},
       {t:'No, porque el cloro no es un grupo alquilo',fb:'La regla vale para cualquier sustituyente: halógenos, OH, alquilos… Solo importa que en cada carbono los dos grupos sean distintos.'}],
@@ -702,14 +702,14 @@ const PRACT={
       {t:'C1',fb:'El C1 es un CH₃: está unido a <b>tres H iguales</b>. Nunca puede ser quiral.'},
       {t:'C2',ok:true},
       {t:'C3',fb:'El C3 es un CH₂: tiene <b>dos H iguales</b>.'},
-      {t:'Ninguno',fb:'Revisa el C2 con cuidado: está unido a H, OH, CH₃ y CH₂CH₃. ¿Hay alguno repetido?'}],
-     ok:'El C2 tiene cuatro grupos distintos: H, OH, CH₃ y CH₂CH₃ → es el <b>C*</b>.'},
+      {t:'Ninguno',fb:'Revisa el C2 con cuidado: está unido a H, OH, CH₃ y CH₂−CH₃. ¿Hay alguno repetido?'}],
+     ok:'El C2 tiene cuatro grupos distintos: H, OH, CH₃ y CH₂−CH₃ → es el <b>C*</b>.'},
     {q:'En el <b>3-metilhexano</b>, ¿cuál carbono es quiral?',fig:()=>fig(F.metilhexano3(),nm('r:3-metil|c:hex|i:an|g:o',1)),opts:[
       {t:'C2',fb:'El C2 es un CH₂: tiene dos H iguales.'},
       {t:'C3',ok:true},
       {t:'C4',fb:'El C4 es un CH₂: tiene dos H iguales.'},
       {t:'Ninguno',fb:'Mira los cuatro grupos del C3: H, CH₃, un etilo (C1–C2) y un propilo (C4–C6). ¿Alguno se repite?'}],
-     ok:'El C3 está unido a H, CH₃, CH₂CH₃ (etilo) y CH₂CH₂CH₃ (propilo): cuatro grupos distintos → <b>C3 es quiral</b>.'},
+     ok:'El C3 está unido a H, CH₃, CH₂−CH₃ (etilo) y CH₂−CH₂−CH₃ (propilo): cuatro grupos distintos → <b>C3 es quiral</b>.'},
     {q:'¿El <b>3-metilpentano</b> tiene algún carbono quiral?',fig:()=>fig(F.metilpentano3(),nm('r:3-metil|c:pent|i:an|g:o',1)),opts:[
       {t:'Sí, el C3',fb:'Revisa los grupos del C3: H, CH₃, y hacia cada lado un <b>etilo</b> (C1–C2 y C4–C5). Los dos etilos son iguales.'},
       {t:'Sí, el C2',fb:'El C2 es un CH₂: tiene dos H iguales.'},
@@ -726,7 +726,7 @@ const PRACT={
       {t:'2-bromobutano',ok:true},
       {t:'2-cloropropano',fb:'Su C2 tiene dos CH₃ iguales, igual que el propan-2-ol.'},
       {t:'glicina (ácido aminoetanoico)',fb:'El C2 de la glicina es un CH₂: tiene dos H. Es el único aminoácido de las proteínas que no es quiral.'}],
-     ok:'En el 2-bromobutano, CH₃−CHBr−CH₂−CH₃, el C2 tiene H, Br, CH₃ y CH₂CH₃ → <b>es quiral</b>.'},
+     ok:'En el 2-bromobutano, CH₃−CH(Br)−CH₂−CH₃, el C2 tiene H, Br, CH₃ y CH₂−CH₃ → <b>es quiral</b>.'},
     {q:'¿En qué se diferencian dos enantiómeros?',opts:[
       {t:'En su punto de ebullición',fb:'Los enantiómeros tienen el mismo punto de ebullición, de fusión y la misma densidad.'},
       {t:'En su fórmula molecular',fb:'Son isómeros: la fórmula molecular es exactamente la misma.'},
@@ -815,12 +815,12 @@ var ctl=FU.mol3d(document.getElementById('giro-svg'),modelo,{escala:56,ay:0.22,a
 function msg(){
   var g=document.getElementById('giro-msg'),ov=Math.round(Math.abs(Math.cos(phi*Math.PI/180))*100);
   document.getElementById('giro-g').textContent=phi+'°';
-  document.getElementById('giro-badge').textContent=modo===2?'C=C · solapamiento π: '+ov+' %':'C−C · gira libremente';
+  document.getElementById('giro-badge').textContent=modo===2?'C=C · solapamiento π: '+ov+'\u00a0%':'C−C · gira libremente';
   if(modo===1){g.innerHTML='En un enlace <b>sencillo</b> los carbonos giran libremente: a '+phi+'° sigue siendo <b>el mismo butano</b>, solo cambió su forma en el espacio (una <i>conformación</i>). Por eso el butano no tiene isómeros cis/trans.';return;}
   if(phi===0)g.innerHTML='Los dos CH₃ están <b>del mismo lado</b>: <b><i>cis</i>-but-2-eno</b>. Las nubes moradas son los orbitales p: están paralelos y forman el enlace π.';
   else if(phi===180)g.innerHTML='Los dos CH₃ quedaron <b>en lados opuestos</b>: <b><i>trans</i>-but-2-eno</b>. Para llegar aquí hubo que romper el enlace π: en la realidad eso no pasa a temperatura ambiente, así que cis y trans son <b>dos sustancias distintas</b>.';
-  else if(ov<92)g.innerHTML='⚠️ Los orbitales p ya no están paralelos (solapamiento '+ov+' %): <b>el enlace π se rompe</b>. Romperlo cuesta unos 270 kJ/mol, mucha más energía de la que hay a temperatura ambiente: por eso el doble enlace <b>no gira</b>.';
-  else g.innerHTML='Al girar, los orbitales p empiezan a desalinearse (solapamiento '+ov+' %). Sigue girando…';
+  else if(ov<92)g.innerHTML='⚠️ Los orbitales p ya no están paralelos (solapamiento '+ov+'\u00a0%): <b>el enlace π se rompe</b>. Romperlo cuesta unos 270 kJ/mol, mucha más energía de la que hay a temperatura ambiente: por eso el doble enlace <b>no gira</b>.';
+  else g.innerHTML='Al girar, los orbitales p empiezan a desalinearse (solapamiento '+ov+'\u00a0%). Sigue girando…';
 }
 document.getElementById('giro-r').addEventListener('input',function(){phi=+this.value;ctl.redibuja();msg();});
 document.getElementById('giro-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;modo=+b.dataset.m;

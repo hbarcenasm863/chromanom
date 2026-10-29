@@ -164,3 +164,13 @@ input[type=range].lab-range{width:100%;accent-color:var(--brand);min-height:36px
   .sec{box-shadow:none;border:1px solid #bbb;break-inside:auto}
 }
 .prac-score:empty{display:none}
+
+/* Clasificador de tipos de carbono en celular: la molécula no se encoge
+   hasta volverse ilegible; se desplaza de lado y el nombre va encima. */
+@media (max-width:640px){
+  .tc-view{overflow-x:auto;-webkit-overflow-scrolling:touch;display:block;justify-content:flex-start}
+  .tc-view #tc-svg{min-width:560px}
+  .tc-view .lab-badge{position:static;display:inline-block;margin:0 0 6px}
+}
+@media (max-width:640px){.tc-view{min-width:0;max-width:calc(100vw - 52px)}}
+.tbl .fx-in .fx-bd{height:.8em}

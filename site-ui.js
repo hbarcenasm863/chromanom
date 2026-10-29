@@ -3,7 +3,7 @@
    difícil de entender y ocupaba ~100px fijos arriba. Este archivo, compartido
    por todas las páginas, lo reemplaza en celular por:
      - arriba: solo la marca "ChromaNom" y el botón Instalar (una fila delgada);
-     - abajo: una barra fija con ícono + texto (Inicio, Teoría, Grupos,
+     - abajo: una barra fija con ícono + texto (Inicio, Principios, Grupos,
        Reacciones, Juego, Más). "Más" abre Referencia, Isomería, Docente (que
        fusiona el antiguo Generador) y el control de tamaño de texto (que en
        celular deja de flotar encima del contenido).
@@ -12,7 +12,7 @@
 (function(){
   var ITEMS=[
     {href:'index.html',ico:'🏠',txt:'Inicio'},
-    {href:'teoria.html',ico:'⚗️',txt:'Teoría'},
+    {href:'teoria.html',ico:'⚗️',txt:'Principios'},
     {href:'grupos.html',ico:'🔬',txt:'Grupos'},
     {href:'reacciones.html',ico:'🧪',txt:'Reacciones'},
     {href:'juego.html',ico:'🎮',txt:'Juego'}
@@ -92,7 +92,7 @@
     var nav=document.createElement('nav');
     nav.id='bnav';
     nav.setAttribute('aria-label','Menú principal');
-    var enMas=MAS.some(function(m){return m.href===page;});
+    var enMas=MAS.some(function(m){return m.href===page;})||page==='tipos-carbono.html'||page==='cadenas.html';
     nav.innerHTML=ITEMS.map(function(it){
       var on=(it.href===page)||(page===''&&it.href==='index.html');
       return '<a href="'+it.href+'"'+(on?' class="on" aria-current="page"':'')+'><span class="bi" aria-hidden="true">'+it.ico+'</span><span class="bt">'+it.txt+'</span></a>';

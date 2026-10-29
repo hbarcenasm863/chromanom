@@ -138,7 +138,7 @@
       while(n&&!(n.tagName==='DIV'&&n.id&&!n.children.length&&!n.textContent.trim())){seg.push(n);n=n.nextElementSibling;}
       if(!seg.length)return;
       var t=null;seg.some(function(x){t=x.matches('.slbl,h1,h2,h3')?x:x.querySelector('h1,h2,.slbl');return !!t;});
-      var b=boton('🔊 Escuchar esta sección');b.classList.add('narr-sec');
+      var b=boton('🔊 Escuchar');b.classList.add('narr-sec');
       (t||seg[0]).insertAdjacentElement('afterend',b);
       var exc=an.getAttribute('data-narrar-excluir');
       b.addEventListener('click',function(){leer(textoLimpio(seg,exc),b,null);});

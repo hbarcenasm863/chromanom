@@ -7,6 +7,83 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (149) — Auditoría de química, didáctica (Mayer) y estilo de la Fase 1, isomería y portada
+
+### Contexto
+El docente pidió pasar un auditor de estilo y otro de química y didáctica
+(principios de Mayer) sobre las preguntas recién incorporadas y las páginas
+nuevas. Se corrió una auditoría de las 134 preguntas de `fundamentos.js` y
+otra de las páginas (Carbono, Tipos de carbono, Cadenas, Isomería, portada
+y pestañas del Docente) probadas con Playwright en PC y celular. Cada
+hallazgo se verificó antes de corregirlo.
+
+### Química
+- Banco: dos opciones de una pregunta eran la misma molécula (C(CH₃)₄ y
+  CH₃−C(CH₃)₂−CH₃); «cis = Z» ahora solo para casos como el but-2-eno;
+  «abierta = acíclica» (alifático incluye anillos no aromáticos); la
+  pregunta de heteroátomo pasa a «¿qué hace heterogénea una cadena?»;
+  enantiómeros: «mismo punto de ebullición, de fusión y densidad».
+- Definición de heteroátomo corregida también en `cadenas.html`,
+  `crucigrama.js` y la lectura de las guías (`docente-datos.js`).
+- `fundamentos.js`: el dibujo sp² del eteno ahora va en perspectiva, con C
+  y H en un plano y el orbital p perpendicular (antes los lóbulos parecían
+  estar en el plano); el rótulo «180°» ya no queda tachado por su arco.
+- `isomeria.html`: GLP (propano y butanos), «todo-*trans*-retinal».
+
+### Fórmulas
+- Ramas con todos sus enlaces: CH₂CH₃ → CH₂−CH₃, ClCH=CHCl → CHCl=CHCl,
+  2-bromobutano con el Br colgando, Br−CH₂−CH₂−Br (banco e isomería, incluidos
+  los rótulos de los dibujos de enantiómeros y cis/trans).
+- `tipos-carbono.html`: la tabla dibuja el carbono terciario y el
+  cuaternario con sus enlaces hacia arriba y abajo (antes «−CH<» y «>C<»).
+
+### Didáctica (Mayer)
+- Retroalimentación explicativa: el clasificador de Cadenas da primero una
+  pista por cada criterio fallado y un segundo intento, y luego la solución
+  con el porqué de cada criterio. El reto de Carbono pasó a ser activo: el
+  estudiante elige sp³/sp²/sp por cada carbono, recibe una pista si falla
+  y la explicación al acertar.
+- Pre-entrenamiento: caja «fórmula de esqueleto» en Cadenas, con el
+  butano en las dos notaciones lado a lado.
+- Preguntas: se quitó la opción «sp³» repetida en tres preguntas, el
+  distractor sp³d, figuras que regalaban la respuesta (cajas de orbitales),
+  el rótulo π del eteno en «un doble enlace está formado por…» y las
+  fórmulas del enunciado propan-1-ol/propanal; mejor retroalimentación en
+  varias opciones; se cambió una pregunta casi repetida (alcohol/éter) por
+  ácido/éster; benceno y piridina explican el círculo del dibujo.
+- Un solo término para la regla de hibridación: «átomos unidos» (la página
+  aclara que «regiones de enlace» es lo mismo).
+
+### Ruta por fases y estilo
+- `teoria.html`, `grupos.html`, `reacciones.html`: encabezado «Fase N ·
+  Parada X» y barra de fases arriba y abajo (antes «Módulo 1/2/4»).
+- `index.html`: recorrido guiado reescrito por fases (incluye Fase 1,
+  Isomería y la página Docente), sin los números en círculo del método;
+  cifras unificadas (1.400+ preguntas, 19 grupos, 200+ ejercicios); el nodo
+  «AVANCE» ya no sale cortado.
+- `docente.html` (Orientaciones): tarjeta de la Fase 1 en el mapa del
+  sitio, ruta por fases, Isomería sin «Nueva», laberintos y crucigramas
+  mencionados, y secuencia de 11 clases con una clase 1 dedicada a la Fase 1.
+- `site-ui.js`: menú del celular dice «Principios»; «Más» se resalta en
+  Tipos de carbono y Cadenas. `narracion.js`: el botón dice «Escuchar» en
+  todas las páginas. `docente-app.js`: instrucciones «Lee cada pregunta (y
+  su contexto, si lo tiene)».
+- Celular: el clasificador de Tipos de carbono ya no encoge la molécula
+  (se desliza de lado) y el diagrama de energía de Carbono tiene rótulos
+  más grandes.
+- `sw.js`: caché `chromanom-v48`.
+
+### Pendiente (no se tocó)
+- Los lóbulos p son morados en Carbono y de otro color en el modelo de
+  giro de Isomería.
+- Algunas preguntas de Cadenas usan distractores de otro criterio (por
+  ejemplo, «Insaturada» cuando se pregunta por los átomos).
+- El control flotante de tamaño de texto tapa contenido en escritorio
+  (problema de todo el sitio, anterior a estas páginas).
+- La página del Juego no tiene barra de fases (es la parada 3 de la Fase 2).
+
+---
+
 ## 2026-10-29 (148) — Regla general: ninguna fórmula con paréntesis
 
 ### Contexto

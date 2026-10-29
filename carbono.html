@@ -163,17 +163,18 @@
       <tr><td><b>C≡C</b> triple</td><td>1 σ + 2 π</td><td>120 pm (el más corto)</td><td>No</td><td>etino</td></tr>
     </tbody></table></div>
   <div class="warn">⚠️ <b>Cuenta bien los σ:</b> en el eteno (CH₂=CH₂) hay 4 enlaces C−H + 1 σ del doble enlace = <b>5 σ</b>, y <b>1 π</b>. En el etino (HC≡CH): 2 C−H + 1 σ = <b>3 σ</b> y <b>2 π</b>.</div>
-  <div class="key">🔑 <b>Regla rápida para saber la hibridación:</b> cuenta cuántos átomos están unidos al carbono. <b>4 → sp³</b> · <b>3 → sp²</b> · <b>2 → sp</b>. (Un doble enlace cuenta como un solo átomo vecino.)</div>
+  <div class="key">🔑 <b>Regla rápida para saber la hibridación:</b> cuenta cuántos átomos están unidos al carbono. <b>4 → sp³</b> · <b>3 → sp²</b> · <b>2 → sp</b>. (Un doble o triple enlace cuenta como un solo átomo unido.) En las preguntas verás también el nombre <b>regiones de enlace</b>: es lo mismo.</div>
 </section>
 
 <!-- ═══════════════ 5. RETO ═══════════════ -->
 <section class="sec" id="reto">
   <div class="sec-kicker">Ponlo a prueba</div>
   <h2>Reto: ¿qué hibridación tiene cada carbono?</h2>
-  <p>Piensa la respuesta y luego toca cada carbono para comprobarla. Cada molécula puede tener carbonos con hibridaciones distintas.</p>
+  <p>Elige un carbono y responde qué hibridación tiene. Cada molécula puede tener carbonos con hibridaciones distintas.</p>
   <div class="fig" id="reto-fig" style="max-width:520px;margin:0 auto"></div>
   <div class="chips-row" id="reto-chips" style="justify-content:center"></div>
-  <div class="lab-msg" id="reto-msg" aria-live="polite">Toca un carbono (C1, C2…) para ver su hibridación.</div>
+  <div class="chips-row" id="reto-opc" style="justify-content:center" hidden><button type="button" class="btn-sm" data-h="sp3">sp³</button><button type="button" class="btn-sm" data-h="sp2">sp²</button><button type="button" class="btn-sm" data-h="sp">sp</button></div>
+  <div class="lab-msg" id="reto-msg" aria-live="polite">Toca un carbono (C1, C2…) y elige su hibridación.</div>
   <div class="links-row" style="justify-content:center"><button type="button" class="btn-sm" id="reto-otra">🔀 Otra molécula</button><button type="button" class="btn-sm" id="reto-todas">👁️ Mostrar todas</button></div>
 </section>
 
@@ -196,9 +197,9 @@ var FU=window.FUND;
 (function(){
   var svg=document.getElementById('promo'),W=32,paso=0,hib=3;
   var X={s1:0,s2:70,p:[130,170,210]},Y={s1:80,s2:30,p:-20,h:4};
-  function caja(id,x,y,lab){return '<g class="bx" id="'+id+'" style="transform:translate('+x+'px,'+y+'px)"><rect width="'+W+'" height="30" rx="5" fill="#fff" stroke="#0d2233" stroke-width="1.6"/><text class="lbl" x="'+(W/2)+'" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">'+lab+'</text></g>';}
+  function caja(id,x,y,lab){return '<g class="bx" id="'+id+'" style="transform:translate('+x+'px,'+y+'px)"><rect width="'+W+'" height="30" rx="5" fill="#fff" stroke="#0d2233" stroke-width="1.6"/><text class="lbl" x="'+(W/2)+'" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">'+lab+'</text></g>';}
   function e(id,ch){return '<text class="e" id="'+id+'" x="0" y="0" text-anchor="middle" dominant-baseline="central" font-size="18" font-weight="800" fill="#1a6ea8">'+ch+'</text>';}
-  svg.innerHTML='<line x1="-8" y1="110" x2="-8" y2="-55" stroke="#94a3b8" stroke-width="1.5"/><path d="M -12 -48 L -8 -58 L -4 -48" fill="#94a3b8"/><text x="-4" y="-50" font-size="10" font-weight="700" fill="#64748b">Energía</text>'+
+  svg.innerHTML='<line x1="-8" y1="110" x2="-8" y2="-55" stroke="#94a3b8" stroke-width="1.5"/><path d="M -12 -48 L -8 -58 L -4 -48" fill="#94a3b8"/><text x="-4" y="-50" font-size="12.5" font-weight="700" fill="#64748b">Energía</text>'+
     caja('b1s',X.s1,Y.s1,'1s')+caja('b2s',X.s2,Y.s2,'2s')+caja('bp0',X.p[0],Y.p,'2p')+caja('bp1',X.p[1],Y.p,'2p')+caja('bp2',X.p[2],Y.p,'2p')+
     e('e1','↑')+e('e2','↓')+e('e3','↑')+e('e4','↓')+e('e5','↑')+e('e6','↑')+
     '<text id="promo-tit" x="135" y="-70" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0d2233"></text>';
@@ -256,8 +257,8 @@ var FU=window.FUND;
   document.getElementById('h3-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)pon(b.dataset.k);});
   pon('sp3');
   document.getElementById('fig-geo').innerHTML=
-    '<div class="fig">'+FU.geo.sp3()+'<div class="fig-cap">sp³ · tetraédrica</div><div class="fig-sub">La cuña negra sale hacia ti; la punteada va hacia atrás.</div></div>'+
-    '<div class="fig">'+FU.geo.sp2(true)+'<div class="fig-cap">sp² · trigonal plana</div><div class="fig-sub">Los lóbulos morados forman el enlace π.</div></div>'+
+    '<div class="fig">'+FU.geo.sp3()+'<div class="fig-cap">sp³ · tetraédrica</div><div class="fig-sub">La cuña negra sale hacia ti; la cuña rayada va hacia atrás.</div></div>'+
+    '<div class="fig">'+FU.geo.sp2(true)+'<div class="fig-cap">sp² · trigonal plana</div><div class="fig-sub">C y H en un mismo plano (120°). El orbital p (morado) sale perpendicular al plano y forma el enlace π.</div></div>'+
     '<div class="fig">'+FU.geo.sp()+'<div class="fig-cap">sp · lineal</div><div class="fig-sub">Todo en línea recta.</div></div>';
 })();
 
@@ -266,27 +267,41 @@ var FU=window.FUND;
   var A=function(t,o){o=o||{};o.t=t;return o;},COL={sp3:'#0f766e',sp2:'#7c3aed',sp:'#c2410c'},HT={sp3:'sp³',sp2:'sp²',sp:'sp'};
   var MOLS=[
     {at:[A('CH₂',{b:2,n:1}),A('CH',{n:2}),A('CH₂',{n:3}),A('C',{b:3,n:4}),A('CH',{n:5})],h:['sp2','sp2','sp3','sp','sp'],
-     w:['unido a C2 (doble enlace) y a dos H: 3 vecinos','unido a C1 (doble), H y C3: 3 vecinos','unido a C2, C4 y dos H: 4 vecinos, solo enlaces sencillos','unido a C3 y a C5 (triple): 2 vecinos','unido a C4 (triple) y a un H: 2 vecinos']},
+     w:['unido a C2 (doble enlace) y a dos H: 3 átomos unidos','unido a C1 (doble), H y C3: 3 átomos unidos','unido a C2, C4 y dos H: 4 átomos unidos, solo enlaces sencillos','unido a C3 y a C5 (triple): 2 átomos unidos','unido a C4 (triple) y a un H: 2 átomos unidos']},
     {at:[A('CH₃',{n:1}),A('C',{u:'O',ub:2,n:2}),A('CH',{b:2,n:3}),A('CH₂',{n:4})],h:['sp3','sp2','sp2','sp2'],
-     w:['unido a C2 y tres H: 4 vecinos','unido a C1, C3 y al O (doble enlace): 3 vecinos','unido a C2, H y C4 (doble): 3 vecinos','unido a C3 (doble) y dos H: 3 vecinos']},
+     w:['unido a C2 y tres H: 4 átomos unidos','unido a C1, C3 y al O (doble enlace): 3 átomos unidos','unido a C2, H y C4 (doble): 3 átomos unidos','unido a C3 (doble) y dos H: 3 átomos unidos']},
     {at:[A('CH',{b:3,n:1}),A('C',{n:2}),A('CH',{u:'CH₃',n:3}),A('CH₂',{n:4}),A('CH₃',{n:5})],h:['sp','sp','sp3','sp3','sp3'],
-     w:['unido a C2 (triple) y un H: 2 vecinos','unido a C1 (triple) y C3: 2 vecinos','unido a C2, C4, CH₃ y H: 4 vecinos','unido a C3, C5 y dos H: 4 vecinos','unido a C4 y tres H: 4 vecinos']}
+     w:['unido a C2 (triple) y un H: 2 átomos unidos','unido a C1 (triple) y C3: 2 átomos unidos','unido a C2, C4, CH₃ y H: 4 átomos unidos','unido a C3, C5 y dos H: 4 átomos unidos','unido a C4 y tres H: 4 átomos unidos']}
   ];
-  var i=0,vis=[];
+  var i=0,vis=[],sel=-1,fallos=[],opc=document.getElementById('reto-opc');
   function pinta(){
-    var m=MOLS[i];vis=m.h.map(function(){return false;});
+    var m=MOLS[i];vis=m.h.map(function(){return false;});fallos=m.h.map(function(){return 0;});sel=-1;opc.hidden=true;
     document.getElementById('reto-fig').innerHTML=FU.semi(m.at,'molécula del reto con sus carbonos numerados');
     document.getElementById('reto-chips').innerHTML=m.h.map(function(h,j){return '<button type="button" class="hib-chip" data-j="'+j+'">C'+(j+1)+' · ?</button>';}).join('');
-    document.getElementById('reto-msg').textContent='Toca un carbono (C1, C2…) para ver su hibridación.';
+    document.getElementById('reto-msg').textContent='Toca un carbono (C1, C2…) y elige su hibridación.';
   }
   function muestra(j,silencio){
     var m=MOLS[i],h=m.h[j],b=document.querySelector('#reto-chips [data-j="'+j+'"]');
-    b.classList.add('rev');b.style.background=COL[h];b.style.borderColor=COL[h];b.textContent='C'+(j+1)+' · '+HT[h];
+    vis[j]=true;b.style.outline='';b.classList.add('rev');b.style.background=COL[h];b.style.borderColor=COL[h];b.textContent='C'+(j+1)+' · '+HT[h];
     if(!silencio)document.getElementById('reto-msg').innerHTML='<b>C'+(j+1)+'</b>: '+m.w[j]+' → <b style="color:'+COL[h]+'">'+HT[h]+'</b>.';
   }
-  document.getElementById('reto-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(b)muestra(+b.dataset.j);});
+  document.getElementById('reto-chips').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;var j=+b.dataset.j;
+    if(vis[j]){muestra(j);opc.hidden=true;return;}
+    sel=j;opc.hidden=false;
+    document.querySelectorAll('#reto-chips .hib-chip').forEach(function(x){x.style.outline=x===b?'3px solid #1a6ea8':'';});
+    document.getElementById('reto-msg').innerHTML='¿Qué hibridación tiene el <b>C'+(j+1)+'</b>?';
+  });
+  opc.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||sel<0)return;
+    var m=MOLS[i],h=m.h[sel];
+    if(b.dataset.h===h){muestra(sel);document.getElementById('reto-msg').innerHTML='✓ '+document.getElementById('reto-msg').innerHTML;opc.hidden=true;sel=-1;return;}
+    fallos[sel]++;
+    if(fallos[sel]===1){document.getElementById('reto-msg').innerHTML='No es '+HT[b.dataset.h]+'. Cuenta cuántos átomos están unidos al <b>C'+(sel+1)+'</b> (un enlace doble o triple cuenta como un solo átomo unido): 4 → sp³, 3 → sp², 2 → sp. Intenta de nuevo.';return;}
+    muestra(sel);opc.hidden=true;sel=-1;
+  });
   document.getElementById('reto-otra').addEventListener('click',function(){i=(i+1)%MOLS.length;pinta();});
-  document.getElementById('reto-todas').addEventListener('click',function(){MOLS[i].h.forEach(function(_,j){muestra(j,true);});document.getElementById('reto-msg').innerHTML='Recuerda: <b style="color:#0f766e">4 vecinos → sp³</b> · <b style="color:#7c3aed">3 → sp²</b> · <b style="color:#c2410c">2 → sp</b>.';});
+  document.getElementById('reto-todas').addEventListener('click',function(){opc.hidden=true;sel=-1;MOLS[i].h.forEach(function(_,j){muestra(j,true);});document.getElementById('reto-msg').innerHTML='Recuerda: <b style="color:#0f766e">4 átomos unidos → sp³</b> · <b style="color:#7c3aed">3 → sp²</b> · <b style="color:#c2410c">2 → sp</b>.';});
   pinta();
 })();
 

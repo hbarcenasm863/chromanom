@@ -452,8 +452,8 @@ footer span{color:var(--naranja);font-weight:700}
 
 <!-- ── CIFRAS REALES ── -->
 <section class="stats2" aria-label="ChromaNom en cifras">
-  <div class="st2"><b>17</b><span>grupos funcionales</span></div>
-  <div class="st2"><b>1.100+</b><span>preguntas en el juego</span></div>
+  <div class="st2"><b>19</b><span>grupos funcionales</span></div>
+  <div class="st2"><b>1.400+</b><span>preguntas en el juego</span></div>
   <div class="st2"><b>42</b><span>reacciones explicadas</span></div>
   <div class="st2"><b>4</b><span>tipos de hoja imprimible</span></div>
 </section>
@@ -512,7 +512,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-ico" aria-hidden="true">🎮</span>
       <span class="mod2-tag">Fase 2 · Practicar</span>
       <h3>Juego de práctica</h3>
-      <p>Más de 1.200 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (paso 3). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
+      <p>Más de 1.400 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (Fase 2). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
       <span class="mod2-go">Jugar ahora →</span>
     </a>
     <a class="mod2" href="carbono.html">
@@ -554,7 +554,7 @@ footer span{color:var(--naranja);font-weight:700}
       <span class="mod2-ico" aria-hidden="true">🧪</span>
       <span class="mod2-tag">Fase 3 · Parada 2</span>
       <h3>Reacciones orgánicas</h3>
-      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida. Paso 4 de la ruta, junto con el juego completo.</p>
+      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida. Última parada de la ruta (Fase 3), junto con el juego completo.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
     <a class="mod2" href="referencia.html">
@@ -591,7 +591,7 @@ footer span{color:var(--naranja);font-weight:700}
 <div class="tour-ov" id="tour-ov" onclick="tourOverlayClick(event)">
   <div class="tour-modal" id="tour-modal">
     <div class="tour-header" id="tour-hdr">
-      <div class="tour-step-lbl" id="tour-lbl">Paso 1 de 5</div>
+      <div class="tour-step-lbl" id="tour-lbl">Paso 1 de 9</div>
       <div class="tour-title" id="tour-title">Bienvenida</div>
       <button class="tour-close" onclick="tourClose()" aria-label="Cerrar" title="Cerrar">✕</button>
     </div>
@@ -628,10 +628,24 @@ const TOUR=[
       </div>`
   },
   {
-    title:'① Principios de Nomenclatura',
+    title:'Fase 1 · El carbono',
     hdrColor:'linear-gradient(135deg,#0d4a73,#1a6ea8)',
     body:`
-      <p>El módulo de <strong>Teoría</strong> explica el sistema completo con un algoritmo de 5 pasos para nombrar cualquier molécula orgánica.</p>
+      <p>Antes de nombrar, conoce al protagonista. La <strong>Fase 1</strong> tiene tres paradas cortas, con animaciones, explicación y práctica:</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>⚛️ Hibridación</strong>Por qué el carbono forma 4 enlaces y cómo nacen las formas sp³, sp² y sp.</div>
+        <div class="tour-feat"><strong>🔢 Tipos de carbono</strong>Primario, secundario, terciario y cuaternario, tocando los átomos.</div>
+      </div>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>⛓️ Cadenas</strong>Abiertas o cerradas, saturadas o no, homogéneas o heterogéneas.</div>
+        <div class="tour-feat"><strong>🎮 En el juego</strong>Más de 30 preguntas por tema para repasar.</div>
+      </div>`
+  },
+  {
+    title:'Fase 2 · Principios de nomenclatura',
+    hdrColor:'linear-gradient(135deg,#0d4a73,#1a6ea8)',
+    body:`
+      <p>La página de <strong>Principios</strong> explica el sistema completo con un algoritmo de 5 pasos para nombrar cualquier molécula orgánica.</p>
       <div class="tour-feat-row">
         <div class="tour-feat"><strong>📐 Esquema 4 partes</strong>El mapa visual del sistema. Aprende qué buscar en cada molécula.</div>
         <div class="tour-feat"><strong>📋 Algoritmo 5 pasos</strong>Cómo elegir la cadena, numerar y añadir sufijos — paso a paso.</div>
@@ -643,13 +657,13 @@ const TOUR=[
       <p style="margin-top:10px">Cada sección tiene un botón <strong>Practicar</strong> con ejercicios integrados paso a paso.</p>`
   },
   {
-    title:'② Grupos Funcionales',
+    title:'Fase 2 · Grupos funcionales',
     hdrColor:'linear-gradient(135deg,#357a1f,#4aaa2e)',
     body:`
-      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 17 grupos más importantes del bachillerato con estructuras detalladas y ejercicios propios.</p>
+      <p>El módulo de <strong>Grupos Funcionales</strong> cubre los 19 grupos del bachillerato (incluidos haluros y polifuncionales) con estructuras detalladas y ejercicios propios.</p>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>17 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con su prioridad IUPAC.</div>
-        <div class="tour-feat"><strong>180+ ejercicios</strong>Ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
+        <div class="tour-feat"><strong>19 grupos</strong>Desde ácidos carboxílicos hasta alquinos, con su prioridad IUPAC.</div>
+        <div class="tour-feat"><strong>200+ ejercicios</strong>Ejercicios específicos por grupo — escritura, opción múltiple e identificación.</div>
       </div>
       <p>Las estructuras se dibujan como en los exámenes: puedes verlas en fórmula semidesarrollada.</p>
       <div class="tour-chips">
@@ -663,7 +677,7 @@ const TOUR=[
       </div>`
   },
   {
-    title:'③ Juego de Práctica',
+    title:'Fase 2 · Juego de práctica',
     hdrColor:'linear-gradient(135deg,#c45c0c,#f07c1e)',
     body:`
       <p>El <strong>Juego</strong> te pone a prueba con moléculas reales, cronómetro de 60 segundos y varios tipos de preguntas.</p>
@@ -675,10 +689,20 @@ const TOUR=[
         <div class="tour-feat"><strong>🎯 Identificar</strong>Señala qué parte de la molécula es la cadena, un sustituyente o el grupo funcional.</div>
         <div class="tour-feat"><strong>✍️ Escribir</strong>Escribe el nombre IUPAC completo desde cero. El reto máximo.</div>
       </div>
-      <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual. Cuando llegues a reacciones (paso 4), prueba el modo <strong>«Juego completo: nomenclatura + reacciones»</strong>.</p>`
+      <p style="margin-top:8px">Si te equivocas, verás tu respuesta y la correcta en paralelo, más una pista contextual. Cuando llegues a reacciones (Fase 3), prueba el modo <strong>«Juego completo: nomenclatura + reacciones»</strong>.</p>`
   },
   {
-    title:'④ Reacciones Orgánicas',
+    title:'Fase 3 · Isomería',
+    hdrColor:'linear-gradient(135deg,#5b21b6,#7c3aed)',
+    body:`
+      <p>Con los nombres dominados, la <strong>Fase 3</strong> va más allá: moléculas con la misma fórmula y distinta estructura.</p>
+      <div class="tour-feat-row">
+        <div class="tour-feat"><strong>🔀 Estructural</strong>Isómeros de cadena, de posición y de función.</div>
+        <div class="tour-feat"><strong>🔄 Cis/trans y quiralidad</strong>Gira un enlace en 3D y descubre por qué el doble enlace no gira.</div>
+      </div>`
+  },
+  {
+    title:'Fase 3 · Reacciones orgánicas',
     hdrColor:'linear-gradient(135deg,#1e3a8a,#2563eb)',
     body:`
       <p>El módulo de <strong>Reacciones</strong> explica cómo reaccionan los grupos funcionales: 10 pestañas, 42 reacciones, con mecanismo paso a paso animado.</p>
@@ -686,16 +710,16 @@ const TOUR=[
         <div class="tour-feat"><strong>⚗️ Mecanismo animado</strong>Cada reacción se dibuja átomo por átomo: reactivo → condición → producto.</div>
         <div class="tour-feat"><strong>📖 Glosario previo</strong>30 conceptos clave (carbocatión, nucleófilo, Markovnikov...) antes de entrar al detalle.</div>
       </div>
-      <p style="margin-top:8px">Cubre alcanos, cicloalcanos, alquenos, alquinos, aromáticos, haluros de alquilo, alcoholes, aminas, carbonílicos, ácidos carboxílicos y sus derivados — con práctica rápida al final de cada una. Es el paso 4 de la ruta: después, juega el modo «Nomenclatura + reacciones».</p>`
+      <p style="margin-top:8px">Cubre alcanos, cicloalcanos, alquenos, alquinos, aromáticos, haluros de alquilo, alcoholes, aminas, carbonílicos, ácidos carboxílicos y sus derivados — con práctica rápida al final de cada una. Es la última parada de la ruta: después, juega el modo «Nomenclatura + reacciones».</p>`
   },
   {
-    title:'⑤ Generador de Ejercicios',
+    title:'Para el docente · Guías y actividades',
     hdrColor:'linear-gradient(135deg,#5b21b6,#7c3aed)',
     body:`
-      <p>El <strong>Generador</strong> crea hojas de trabajo personalizadas para imprimir o practicar en clase.</p>
+      <p>La página <strong>Docente</strong> arma guías, talleres, evaluaciones, laberintos y crucigramas para imprimir o practicar en clase, cada uno en su pestaña.</p>
       <div class="tour-feat-row">
-        <div class="tour-feat"><strong>🎛️ Todo ajustable</strong>Grupo funcional, tipo de ejercicio y cantidad de preguntas — tú eliges.</div>
-        <div class="tour-feat"><strong>⚗️ Filtro de reacciones</strong>Para el Tipo D puedes escoger justo qué grupos de reacciones repasar y si son de producto o de tipo de reacción.</div>
+        <div class="tour-feat"><strong>🎛️ Todo ajustable</strong>Temas de las tres fases, tipo de ejercicio y cantidad de preguntas.</div>
+        <div class="tour-feat"><strong>🧭 Laberintos y crucigramas</strong>Con hoja para el estudiante, clave de respuestas y versión para jugar en pantalla.</div>
       </div>
       <p style="margin-top:8px">Ideal para armar un taller o una guía de repaso enfocada solo en los temas que tu curso necesita.</p>`
   },
@@ -708,12 +732,13 @@ const TOUR=[
         <a class="tour-link" style="background:linear-gradient(135deg,#0d4a73,#1a6ea8);color:#fff" href="carbono.html">⚛️ <span>Fase 1 · El carbono<br><small style="font-weight:400;opacity:.85">Empieza aquí: hibridación, tipos de carbono y cadenas</small></span></a>
       </div>
       <div class="tour-links">
-        <a class="tour-link az" href="teoria.html">⚗️ <span>① Principios<br><small style="font-weight:400;opacity:.85">Fase 2: nomenclatura</small></span></a>
-        <a class="tour-link vd" href="grupos.html">🔬 <span>② Grupos<br><small style="font-weight:400;opacity:.85">Luego aquí</small></span></a>
-        <a class="tour-link or" href="juego.html">🎮 <span>③ Juego<br><small style="font-weight:400;opacity:.85">Nomenclatura</small></span></a>
+        <a class="tour-link az" href="teoria.html">⚗️ <span>Principios<br><small style="font-weight:400;opacity:.85">Fase 2: nomenclatura</small></span></a>
+        <a class="tour-link vd" href="grupos.html">🔬 <span>Grupos<br><small style="font-weight:400;opacity:.85">Fase 2: luego aquí</small></span></a>
+        <a class="tour-link or" href="juego.html">🎮 <span>Juego<br><small style="font-weight:400;opacity:.85">Fase 2: nomenclatura</small></span></a>
       </div>
       <div class="tour-links" style="margin-top:8px">
-        <a class="tour-link" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff" href="reacciones.html">🧪 <span>④ Reacciones<br><small style="font-weight:400;opacity:.85">+ juego completo: nomenclatura + reacciones</small></span></a>
+        <a class="tour-link" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff" href="isomeria.html">🔀 <span>Isomería<br><small style="font-weight:400;opacity:.85">Fase 3</small></span></a>
+        <a class="tour-link" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff" href="reacciones.html">🧪 <span>Reacciones<br><small style="font-weight:400;opacity:.85">+ juego completo: nomenclatura + reacciones</small></span></a>
       </div>
       <p style="margin-top:10px;font-size:.82rem">Herramienta para el docente y para repasar: <a href="docente.html">📘 Guías, talleres y evaluaciones</a>.</p>
       <p style="margin-top:14px;font-size:.8rem;color:var(--dimmer)">Puedes volver a ver este tutorial pulsando el botón <strong>"▶ ¿Cómo funciona?"</strong> de la portada en cualquier momento.</p>`
@@ -858,7 +883,7 @@ document.addEventListener('DOMContentLoaded',function(){
       el('circle',{r:30,fill:'none',stroke:'#f5d0e6','stroke-width':6},g);
       el('circle',{r:30,fill:'none',stroke:G.c,'stroke-width':6,'stroke-linecap':'round','stroke-dasharray':(C*pct).toFixed(1)+' '+C.toFixed(1),transform:'rotate(-90)'},g);
       txt(el('text',{y:3,'text-anchor':'middle','font-size':19,'font-weight':900,fill:'#0d2233','font-family':'Outfit, sans-serif'},g),hechos+'/'+route.length);
-      txt(el('text',{y:17,'text-anchor':'middle','font-size':9,'font-weight':800,fill:G.c,'letter-spacing':'.6','font-family':'Outfit, sans-serif'},g),'④ AVANCE');
+      txt(el('text',{y:17,'text-anchor':'middle','font-size':9,'font-weight':800,fill:G.c,'letter-spacing':'.6','font-family':'Outfit, sans-serif'},g),'AVANCE');
     }else{
       el('circle',{r:29,class:'at-disc',stroke:G.c},g);
       txt(el('text',{y:9,'text-anchor':'middle','font-size':26},g),a.e);
