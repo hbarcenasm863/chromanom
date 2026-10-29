@@ -7,6 +7,54 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (97) — Juego: agrega al banco de reacciones las preguntas nuevas de hoy (aromáticos, alcoholes, carbonilos, ácidos, aminas, péptidos)
+
+### Contexto
+La docente pidió que las preguntas nuevas agregadas hoy a `docente-datos.js`
+(entradas 92 y 95) también se sumaran al banco del Juego.
+
+### Qué se hizo (`juego.html`)
+Se agregaron 9 preguntas nuevas a `QBANK_REACCIONES` — el único arreglo del
+Juego que acepta preguntas de opción múltiple **sin** necesitar una
+molécula ya dibujada en la librería (`mol`), ya que describe la estructura
+en el propio enunciado en vez de mostrarla dibujada. Esto evitó tener que
+crear nuevos generadores de SVG (que sí haría falta para las otras tablas
+`QBANK_*`, todas basadas en moléculas pre-dibujadas). Se usaron las
+categorías ("chips") que ya existían en el selector de temas de
+reacciones del Juego: Aromáticos, Alcoholes, Aldehídos y Cetonas, Ácidos
+Carboxílicos, Aminas, y Derivados (Ésteres/Amidas) — ninguna pregunta
+quedó sin categoría.
+- Aromáticos (3): regla fenilo-vs-cadena-principal, ácido salicílico,
+  2,4,6-triclorofenol.
+- Alcoholes (1): por qué un alcohol 2° no depende de la fuerza del
+  oxidante.
+- Aldehídos y cetonas (1): cinamaldehído.
+- Ácidos carboxílicos (1): cloruro de benzoílo.
+- Aminas (2): cadaverina, feniletilamina.
+- Derivados (1): conteo de enlaces peptídicos en un fragmento de
+  oxitocina.
+
+### Errores propios corregidos antes de comitear
+Al insertar las 9 preguntas nuevas faltó la coma que separa la última
+pregunta ya existente de la primera nueva — se detectó al verificar la
+sintaxis del archivo y se corrigió antes de comitear.
+
+### Verificación
+Playwright (Chromium) **contra servidor local** (ver entrada 96 sobre por
+qué `file://` no sirve para estas pruebas): `juego.html` carga
+`QBANK_REACCIONES` con 111 preguntas (102 + 9 nuevas) sin errores de
+consola; se revisaron las 9 preguntas nuevas una por una (texto, opciones
+y respuesta correcta decodificada).
+
+### Pendiente
+Esto cubre las preguntas de las entradas 92 y 95 (material de Drive y
+bimestrales de 2023). Las preguntas que faltan agregar al código a partir
+de las exploraciones de "aumentar los bancos un 20%" (lanzadas en
+paralelo) también deberán reflejarse aquí una vez integradas — queda para
+una entrada aparte. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (96) — Fundamentos: +20% de preguntas en hibridación, tipos de carbono, cadenas e isomería (incluye IDH)
 
 ### Contexto
