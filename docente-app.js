@@ -984,7 +984,7 @@ function leerForm(){
     tipo:valor('tipodoc')||'guia',temas:temasSel(),grado:+valor('grado')||11,
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
-    nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(6,+$('f-nab').value||0)),
+    nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(20,+$('f-nab').value||0)),
     hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };

@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (90) — Docente: corrige el tope de "Preguntas abiertas" (pedía 10, solo salían 6)
+
+### Contexto
+La docente reportó que al generar una evaluación (Grado 11°, temas
+alcanos/alquenos/alquinos/aromáticos/alcoholes, "Nomenclatura y
+reacciones", 0 preguntas tipo Saber 11, 10 preguntas abiertas) solo
+obtuvo 6 preguntas abiertas en vez de las 10 pedidas.
+
+Nota operativa: la rama de trabajo de Claude estaba basada en una
+versión de `main` de más de un mes de antigüedad (sin relación de
+historia con el `main` actual — en algún punto se reescribió el
+historial de la rama principal). Por eso el bug se reportó primero
+contra el archivo equivocado (`generador.html`, que en `main` ya ni se
+usa directamente: ahora redirige a `docente.html`, que es donde se
+fusionó toda esa funcionalidad). Se reinició la rama de trabajo desde
+`origin/main` para operar sobre el código real y vigente.
+
+### Causa
+En `docente.html` el campo "Preguntas abiertas" tenía `max="6"` en el
+HTML, y en `docente-app.js` (función `leerForm()`) el valor se recortaba
+con `Math.min(6, …)` antes de generarse — un tope fijo que no reflejaba
+el tamaño real del banco de preguntas abiertas (`ABIERTAS` en
+`docente-datos.js`, que para los 4 temas elegidos suma más de 30
+preguntas disponibles). El límite no estaba documentado como decisión
+de diseño en `LOGICA_DOCENTE.md`; era simplemente un valor desactualizado
+de una versión más temprana del banco.
+
+### Qué se hizo
+- `docente.html`: `max="6"` → `max="20"` en el campo "Preguntas abiertas".
+- `docente-app.js`: `Math.min(6, …)` → `Math.min(20, …)` en `leerForm()`.
+
+### Verificación
+Playwright (Chromium) contra `docente.html`: se reprodujo exactamente el
+escenario reportado (Grado 11°, los 4 temas, enfoque "Nomenclatura y
+reacciones", 0 Saber 11, 10 abiertas) — antes del cambio el límite
+quedaba en 6; después se generan las 10 preguntas abiertas numeradas de
+1 a 10, sin errores de consola.
+
+### Pendiente
+Ninguno. No se tocó `chromanom-analytics.gs`, así que no hace falta
+redesplegar ni recalcular nada. Queda pendiente, si vuelve a aparecer,
+revisar si 20 sigue siendo un tope cómodo o si conviene subirlo más
+(o quitarlo y limitar solo por el tamaño real del banco por tema).
+
+---
+
 ## 2026-10-29 (151) — Animación 3D: formación de los enlaces σ y π (metano, eteno, etino)
 
 ### Contexto
