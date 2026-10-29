@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (98) — Docente: +20% en SABER/ABIERTAS y nuevo banco de "ejercicios abiertos" de talleres, para los 10 temas de grupos funcionales
+
+### Contexto
+Continuación del pedido de ampliar los bancos un 20% por tema, tanto para
+evaluaciones como para talleres (entrada 96 cubrió los 4 temas
+fundamentales vía `fundamentos.js`; esta entrada cubre los 10 temas de
+grupos funcionales vía `docente-datos.js`, que no comparten ese mecanismo).
+
+### Hallazgo clave (talleres)
+Los talleres ofrecen 7 tipos de ejercicio; el tipo "Ejercicios abiertos"
+(`TEMAS[id].abiertos`) existía solo para `carbono`, `tipos_carbono`,
+`cadenas` e `isomeria` — para los 10 temas de grupos funcionales
+(alcanos, alquenos, aromáticos, haluros, alcoholes, carbonilos, ácidos,
+nitrogenados, polifuncionales, cadena) ese banco estaba **vacío**: sus
+talleres no podían ofrecer ese tipo de ejercicio en absoluto, no solo les
+faltaba un 20%. Se creó desde cero, con 6 preguntas por tema (60 en
+total), con el mismo nivel y estilo que ya tenían esos 4 temas.
+
+### Qué se hizo (`docente-datos.js`)
+Contenido redactado de cero (no minado de ningún documento), verificado
+uno por uno contra el banco ya existente para evitar duplicados y
+contra conocimiento químico bien establecido (sin inventar datos
+numéricos que no se pudieran verificar):
+- **`SABER`**: 39 preguntas nuevas repartidas en los 10 temas, hasta
+  llegar todos a 24 (20 base × 1,2). Cubren, entre otros: regla de
+  desempate de cadena principal, craqueo, rotación del enlace σ,
+  apolaridad de alcanos, isomería cis/trans, combustión balanceada de
+  alquenos, adición doble a alquinos, mecanismos E1/SN2 en haluros,
+  tendencia de puntos de ebullición por halógeno, dirección orto/para
+  vs. meta en aromáticos, deshidratación de alcoholes según temperatura,
+  acidez del fenol, síntesis de Williamson, reactivo de Grignard sobre
+  carbonilos, quimioselectividad del NaBH₄, acidez comparada ácido/fenol,
+  basicidad comparada amina/anilina, y nomenclatura de compuestos
+  polifuncionales (nitrilo+alcohol, prioridad nitrilo-vs-cetona).
+- **`ABIERTAS`**: 14 preguntas nuevas en los temas que todavía no llegaban
+  al 20% (cadena, alcanos, haluros, carbonilos, polifuncionales) y 1 en
+  reacciones — alquenos, aromáticos, alcoholes, ácidos, nitrogenados e
+  isomería ya lo habían alcanzado con las entradas 92/93/95/97 de hoy.
+- **`TEMAS[id].abiertos`**: 60 preguntas nuevas (6 por tema), creando el
+  banco desde cero para los 10 temas de grupos funcionales.
+
+### Verificación
+`node --check` sin errores; conteo programático confirma que los 10
+temas llegaron exactamente a 24 `SABER`, ≥10 `ABIERTAS`, y 6
+`TEMAS.abiertos` cada uno. Playwright (Chromium, **servidor local**): una
+evaluación con los 10 temas y topes muy altos (60 Saber 11, 40 abiertas)
+generó el máximo que permite la interfaz (30 y 20, según los topes ya
+existentes en los campos del formulario) sin avisos de banco insuficiente;
+un taller con solo el tipo "Ejercicios abiertos" para los 10 temas generó
+los 40 ejercicios pedidos (tope del campo) sin errores de consola.
+
+### Pendiente
+Queda sin completar la exploración de **isomería, reacciones, carbono,
+tipos_carbono y cadenas** (SABER/ABIERTAS/TEMAS.abiertos) — se interrumpió
+por un límite temporal de la API a mitad de tarea; se reanudará apenas se
+libere. Tampoco se ha trasladado al banco del Juego el contenido nuevo de
+esta entrada (solo se trasladó el de las entradas 92/95, ver entrada 97) —
+pendiente para una entrada aparte. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (97) — Juego: agrega al banco de reacciones las preguntas nuevas de hoy (aromáticos, alcoholes, carbonilos, ácidos, aminas, péptidos)
 
 ### Contexto

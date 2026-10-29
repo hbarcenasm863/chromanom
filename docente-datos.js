@@ -147,7 +147,9 @@ var TEMAS=[
    'Completa una tabla con las tres hibridaciones del carbono: orbitales que se mezclan, geometría, ángulo de enlace y un ejemplo.',
    'Indica la hibridación de cada carbono en CH₂=CH−CH₂−C≡CH y justifica cada respuesta.',
    'Cuenta los enlaces σ y π del eteno (CH₂=CH₂) y del etino (HC≡CH).',
-   'El diamante y el grafito son carbono puro. Investiga y explica su diferencia a partir de la hibridación de sus carbonos.'
+   'El diamante y el grafito son carbono puro. Investiga y explica su diferencia a partir de la hibridación de sus carbonos.',
+   'Dibuja el carbono central de la propanona (CH₃−CO−CH₃) y explica por qué tiene hibridación sp², igual que un carbono con doble enlace C=C.',
+   'Explica con tus palabras la regla rápida para hallar la hibridación de un carbono a partir de cuántos átomos tiene unidos, y aplícala a los tres carbonos del propino (CH₃−C≡CH).'
   ],
   propia:[]},
 
@@ -182,7 +184,9 @@ var TEMAS=[
    'Explica por qué el carbono unido al −OH en el etanol es primario, aunque esté unido a cuatro átomos.',
    'Dibuja una cadena de 5 carbonos con 4 carbonos primarios. ¿Qué tipo de carbono tiene que aparecer?',
    'Clasifica como primario, secundario o terciario: a) CH₃−CH₂−CH₂−OH; b) CH₃−CH(OH)−CH₃; c) (CH₃)₃C−OH.',
-   '¿Cuántos hidrógenos tiene un carbono terciario en un alcano? Explica por qué.'
+   '¿Cuántos hidrógenos tiene un carbono terciario en un alcano? Explica por qué.',
+   {q:'Clasifica cada carbono de esta molécula (el 3-etilpentano) como primario, secundario o terciario.',f:'CH₃−CH₂−CH(CH₂−CH₃)−CH₂−CH₃'},
+   'Explica por qué la clasificación de un carbono (primario, secundario, terciario o cuaternario) no cambia aunque esté unido a un átomo de cloro o a un grupo −OH en vez de a un hidrógeno.'
   ],
   propia:[]},
 
@@ -216,7 +220,9 @@ var TEMAS=[
    'Explica por qué CH₃−CH₂−OH es una cadena homogénea y CH₃−O−CH₃ es heterogénea.',
    'Un estudiante dice que una cadena dibujada en zigzag es ramificada. ¿Tiene razón? Explica.',
    'El hexano es C₆H₁₄ y el ciclohexano C₆H₁₂. Explica por qué el anillo tiene dos hidrógenos menos.',
-   'Dibuja una cadena cerrada heterocíclica y señala su heteroátomo.'
+   'Dibuja una cadena cerrada heterocíclica y señala su heteroátomo.',
+   'Explica por qué una cadena puede ser insaturada sin ser abierta, y da un ejemplo de una cadena cerrada e insaturada a la vez.',
+   'La cafeína tiene dos anillos fusionados con nitrógeno dentro del ciclo. ¿Cómo se clasifican esos anillos según sus átomos? Explica.'
   ],
   propia:[]},
 
@@ -244,6 +250,14 @@ var TEMAS=[
   },
   ejemplo:{f:[{h:3},{h:0,bu:CH3,bd:CH3},{h:2},{h:1,bd:CH3},{h:3}],t:'(CH₃)₃C−CH₂−CH(CH₃)−CH₃',
     partes:[['2,2,4-trimetil','r','tres metilos: dos en C2 y uno en C4'],['pent','c','5 carbonos en la cadena principal'],['an','i','solo enlaces sencillos'],['o','g','terminación de hidrocarburo']]},
+  abiertos:[
+   'Dibuja la estructura del 2,3-dimetilpentano y marca con un color la cadena principal.',
+   {q:'Escribe el nombre IUPAC del compuesto, explicando por qué extremo numeraste.',f:'CH₃−CH₂−CH(CH₃)−CH₂−CH₂−CH₃'},
+   'Un estudiante nombra una molécula «2,2-dietilbutano». Dibuja la estructura que describe ese nombre y verifica si realmente tiene una cadena de 4 carbonos como cadena más larga, o si debería nombrarse de otra forma.',
+   {q:'Clasifica la cadena principal del compuesto por su forma (abierta lineal o ramificada) y cuenta cuántos carbonos primarios, secundarios y terciarios tiene.',f:'CH₃−CH(CH₃)−CH₂−CH₂−CH₃'},
+   'Escribe los nombres IUPAC de los 5 isómeros de cadena del hexano (C₆H₁₄) y dibuja cada uno.',
+   'Un compañero afirma que «3-metilhexano» y «4-metilhexano» son dos compuestos diferentes. ¿Tiene razón? Dibuja ambas estructuras y decide, aplicando la regla del localizador más bajo.'
+  ],
   propia:[
    {f:[{h:3},{h:1,bd:ET},{h:2},{h:3}],t:'CH₃−CH(C₂H₅)−CH₂−CH₃',n:'3-metilpentano'},
    {f:[{h:3},{h:2},{h:1,bd:ET},{h:2},{h:3}],t:'CH₃−CH₂−CH(C₂H₅)−CH₂−CH₃',n:'3-etilpentano'},
@@ -280,6 +294,14 @@ var TEMAS=[
      {t:'Reacciones',items:['Combustión → CO₂ + H₂O','Halogenación con luz (radicales)']}]}
   },
   ejemplo:{f:'CH₃−CH(CH₃)−CH₂−CH₃',partes:[['2-metil','r','metilo en C2'],['but','c','4 carbonos'],['an','i','solo enlaces sencillos'],['o','g','terminación de hidrocarburo']]},
+  abiertos:[
+   {q:'Escribe el nombre IUPAC del compuesto y clasifica cada uno de sus carbonos como primario, secundario, terciario o cuaternario.',f:'CH₃−C(CH₃)₂−CH₂−CH₃'},
+   'Dibuja la estructura del ciclopentano y la del metilciclopentano, y escribe la fórmula molecular de cada uno.',
+   'El gas natural (metano) y el GLP (propano y butano) se queman en las estufas de los hogares. Escribe la ecuación balanceada de la combustión completa de cada uno de los tres.',
+   'Explica, usando la idea de las fuerzas de London, por qué el metano es gas, el hexano es líquido y la parafina (cadenas largas) es sólida a temperatura ambiente.',
+   {q:'El 2,3-dimetilbutano reacciona con Cl₂ y luz. Identifica los tipos de carbono distintos que tiene esta molécula (sin contar los equivalentes por simetría) y predice cuántos productos monoclorados diferentes se pueden formar.',f:'CH₃−CH(CH₃)−CH(CH₃)−CH₃'},
+   'Investiga y explica por qué los alcanos se consideran poco reactivos («parafinas», poca afinidad) en comparación con los alquenos y los alcoholes.'
+  ],
   propia:[]},
 
  {id:'alquenos',titulo:'Alquenos y alquinos',corto:'Alquenos y alquinos',
@@ -308,6 +330,14 @@ var TEMAS=[
      {t:'Isomería',items:['cis/trans en alquenos','Requiere dos grupos distintos en cada C del doble enlace']}]}
   },
   ejemplo:{f:'CH₂=CH−CH(CH₃)−CH₃',partes:[['3-metil','r','metilo en C3'],['but','c','4 carbonos'],['-1-en-','i','doble enlace en C1'],['o','g','terminación de hidrocarburo']]},
+  abiertos:[
+   'Dibuja y nombra el alqueno y el alquino de 4 carbonos con el enlace múltiple en el primer carbono posible.',
+   'CH₂=CH−CH₃ + H₂ → ? (con catalizador de Ni o Pt). Escribe y nombra el producto, y di qué tipo de reacción es.',
+   'El but-2-ino reacciona con 2 moles de HBr. Escribe la ecuación y el producto final, aplicando la regla de Markovnikov en cada adición.',
+   'Dibuja la estructura del penta-1,3-dieno y cuenta cuántos carbonos sp² y cuántos sp³ tiene.',
+   'Explica por qué el 2-metilpropeno reacciona con HCl para dar mayoritariamente 2-cloro-2-metilpropano, usando el concepto de estabilidad de carbocationes.',
+   'Calcula cuántos moles de Br₂ se necesitan para reaccionar completamente con 1 mol de hexa-1,3,5-trieno (3 dobles enlaces) y explica tu razonamiento.'
+  ],
   propia:[]},
 
  {id:'aromaticos',titulo:'Compuestos aromáticos (benceno)',corto:'Aromáticos',
@@ -335,6 +365,14 @@ var TEMAS=[
      {t:'Usos y riesgos',items:['Solventes, plásticos, fármacos','El benceno es cancerígeno']}]}
   },
   ejemplo:{gen:'1,2-dimetilbenceno',partes:[['1,2-dimetil','r','dos metilos en carbonos vecinos'],['benceno','cg','anillo aromático (② y ④ a la vez)']]},
+  abiertos:[
+   'Dibuja la estructura del benceno mostrando los seis electrones π deslocalizados (puedes usar el círculo dentro del hexágono) y explica por qué no se comporta como un alqueno con tres dobles enlaces aislados.',
+   'Dibuja y nombra el 1,3-diclorobenceno, e indica su posición relativa (orto/meta/para) usando la nomenclatura tradicional.',
+   'Explica por qué el benceno da reacciones de sustitución electrofílica en vez de adición, a diferencia de un alqueno.',
+   'Dibuja la estructura del tolueno (metilbenceno) y explica por qué el grupo −CH₃ es un sustituyente director orto/para.',
+   'Investiga y explica por qué el benceno está clasificado como cancerígeno, y menciona una norma o medida que limite su uso.',
+   'Compara el fenol (C₆H₅−OH) con un alcohol común como el etanol: ¿en qué se parecen y en qué se diferencian sus grupos −OH?'
+  ],
   propia:[]},
 
  {id:'haluros',titulo:'Haluros de alquilo',corto:'Haluros de alquilo',
@@ -362,6 +400,14 @@ var TEMAS=[
      {t:'Ambiente',items:['CFC y capa de ozono','PVC','Plaguicidas persistentes']}]}
   },
   ejemplo:{f:'CH₃−CH(Cl)−CH(CH₃)−CH₃',partes:[['2-cloro-3-metil','r','cloro en C2 y metilo en C3'],['but','c','4 carbonos'],['an','i','solo enlaces sencillos'],['o','g','terminación de hidrocarburo']]},
+  abiertos:[
+   'Dibuja y nombra los cuatro haluros de butilo (usando Br como halógeno: 1-bromobutano, 2-bromobutano, 1-bromo-2-metilpropano y 2-bromo-2-metilpropano), y clasifica cada uno como primario, secundario o terciario.',
+   {q:'CH₃−CH₂−CH₂−Cl + NaI → ? (el ion I⁻ es un buen nucleófilo y desplaza al Cl⁻). Escribe y nombra el producto orgánico.'},
+   'Un haluro de alquilo con fórmula C₄H₉Br puede ser primario, secundario o terciario. Dibuja un ejemplo de cada tipo y nombra los tres.',
+   'Explica, usando el concepto de grupo saliente, por qué el yoduro de metilo reacciona más rápido en sustitución nucleofílica que el fluoruro de metilo, aunque el flúor sea más electronegativo.',
+   'CH₃−CH(Br)−CH₃ reacciona con NaOH en agua (sustitución) y, por separado, con KOH en etanol caliente (eliminación). Escribe los dos productos distintos que se obtienen en cada caso y explica la diferencia.',
+   'Investiga qué es el Protocolo de Montreal y explica, en tus palabras, por qué los CFC se reemplazaron por HFC en los refrigerantes.'
+  ],
   propia:[
    {f:'CH₃−CH₂−Cl',n:'cloroetano'},
    {f:'CH₃−CHCl−CH₃',n:'2-cloropropano'},
@@ -403,6 +449,14 @@ var TEMAS=[
      {t:'Propiedades y reacciones',items:['Puentes de hidrógeno','Oxidación, deshidratación','Combustión']}]}
   },
   ejemplo:{f:'CH₃−CH(OH)−CH₂−CH(CH₃)−CH₃',partes:[['4-metil','r','metilo en C4'],['pent','c','5 carbonos'],['an','i','solo enlaces sencillos'],['-2-ol','g','−OH en C2']]},
+  abiertos:[
+   'Clasifica el propan-1-ol, el propan-2-ol y el 2-metilpropan-2-ol como alcohol primario, secundario o terciario, y explica tu criterio.',
+   'Explica por qué el etanol se mezcla con el agua en cualquier proporción, pero el octan-1-ol casi no se disuelve en agua.',
+   'Escribe el producto de la deshidratación del etanol con H₂SO₄ a 140 °C y a 180 °C. ¿Por qué cambia el producto con la temperatura?',
+   'Dibuja la estructura del dietil éter (etoxietano) y explica por qué no forma puentes de hidrógeno entre sus propias moléculas, aunque sí se disuelve parcialmente en agua.',
+   'Explica por qué el fenol es un ácido débil (reacciona con NaOH) mientras que un alcohol común, como el etanol, no.',
+   'CH₃−CH₂−CH₂−OH se oxida con CrO₃/H⁺ en exceso. Escribe el producto final y explica por qué la reacción no se detiene en el aldehído.'
+  ],
   propia:[]},
 
  {id:'carbonilos',titulo:'Aldehídos y cetonas',corto:'Aldehídos y cetonas',
@@ -431,6 +485,14 @@ var TEMAS=[
      {t:'Origen',items:['Alcohol 1° → aldehído (→ ácido)','Alcohol 2° → cetona']}]}
   },
   ejemplo:{f:'CH₃−CO−CH₂−CH(CH₃)−CH₃',partes:[['4-metil','r','metilo en C4'],['pent','c','5 carbonos'],['an','i','solo enlaces sencillos'],['-2-ona','g','C=O en C2']]},
+  abiertos:[
+   'Dibuja y nombra el butanal y la butanona, y explica la diferencia estructural entre un aldehído y una cetona.',
+   'Explica por qué las cetonas no dan positiva la prueba de Tollens ni la de Fehling, a diferencia de los aldehídos.',
+   'CH₃−CH₂−CHO reacciona con reactivo de Tollens. Escribe la ecuación y describe qué observarías en el tubo de ensayo.',
+   'Explica por qué el NaBH₄ reduce el grupo carbonilo (C=O) de una cetona, pero no afecta un doble enlace C=C en la misma molécula.',
+   'Dibuja la estructura de la pentano-2,4-diona y explica por qué su nombre necesita dos localizadores.',
+   'Un estudiante dice que la propanona (acetona) y el propanal tienen la misma fórmula molecular. Verifica si es cierto y, si lo es, indica qué tipo de isómeros son.'
+  ],
   propia:[]},
 
  {id:'acidos',titulo:'Ácidos carboxílicos y ésteres',corto:'Ácidos y ésteres',
@@ -459,6 +521,14 @@ var TEMAS=[
      {t:'Contexto',items:['Vinagre','Biodiésel de palma','PET']}]}
   },
   ejemplo:{f:'CH₃−CH(CH₃)−CH₂−COOH',partes:[['ácido','g','palabra del grupo funcional'],['3-metil','r','metilo en C3'],['but','c','4 carbonos'],['an','i','solo enlaces sencillos'],['oico','g','grupo −COOH']]},
+  abiertos:[
+   'Escribe la ecuación de la esterificación de Fischer entre el ácido metanoico y el etanol, con H⁺ como catalizador. Nombra el éster que se forma.',
+   'Explica por qué los ácidos carboxílicos tienen puntos de ebullición más altos que los alcoholes de tamaño parecido, usando el concepto de dímero unido por dos puentes de hidrógeno.',
+   'Dibuja y nombra el ácido carboxílico y el alcohol que se obtienen al hidrolizar (con agua y H⁺) el propanoato de metilo.',
+   'El ácido butanodioico (ácido succínico), HOOC−CH₂−CH₂−COOH, reacciona con NaOH en exceso. Escribe la ecuación y nombra la sal que se forma.',
+   {q:'Escribe el nombre IUPAC del compuesto y dibuja por separado el ácido y el alcohol de los que proviene.',f:'CH₃−CH₂−CH₂−COO−CH₂−CH₃'},
+   'El cloruro de etanoílo (CH₃−COCl) reacciona con etanol. Escribe la ecuación y nombra el producto orgánico.'
+  ],
   propia:[]},
 
  {id:'nitrogenados',titulo:'Aminas, amidas y nitrilos',corto:'Compuestos nitrogenados',
@@ -487,6 +557,14 @@ var TEMAS=[
      {t:'Contexto',items:['Proteínas (enlace amida)','Fármacos','Fertilizantes']}]}
   },
   ejemplo:{f:'CH₃−CH₂−CO−NH₂',partes:[['prop','c','3 carbonos (incluye el del grupo)'],['an','i','solo enlaces sencillos'],['amida','g','grupo −CO−NH₂']]},
+  abiertos:[
+   'CH₃−CH₂−C≡N + H₂O (con H⁺ y calor) → ? Escribe y nombra los productos de esta hidrólisis del nitrilo (se forma un ácido carboxílico).',
+   {q:'Escribe el nombre IUPAC del compuesto y clasifícalo como amina primaria, secundaria o terciaria.',f:'CH₃−CH₂−NH−CH₂−CH₂−CH₃'},
+   'La trimetilamina, (CH₃)₃N, es responsable del olor a pescado. Dibuja su estructura y explica por qué actúa como base en presencia de un ácido.',
+   'CH₃−CH₂−CO−NH−CH₃ es una amida N-sustituida. Escribe su nombre IUPAC completo.',
+   'Dibuja y nombra el nitrilo que se forma al deshidratar la propanamida (CH₃−CH₂−CO−NH₂), perdiendo una molécula de agua.',
+   'La trietilamina, (CH₃CH₂)₃N, reacciona con HCl. Escribe la ecuación y nombra el producto (una sal de amina).'
+  ],
   propia:[]},
 
  {id:'polifuncionales',titulo:'Compuestos polifuncionales (prioridad de grupos)',corto:'Polifuncionales',
@@ -514,6 +592,14 @@ var TEMAS=[
      {t:'4 · Prefijos ①',items:['hidroxi, oxo, amino, ciano, halo','Orden alfabético']}]}
   },
   ejemplo:{f:'CH₃−CH(OH)−COOH',partes:[['ácido','g','palabra del grupo principal'],['2-hidroxi','r','−OH como prefijo en C2'],['prop','c','3 carbonos'],['an','i','solo enlaces sencillos'],['oico','g','−COOH: grupo principal']]},
+  abiertos:[
+   'Dibuja la estructura del ácido acetilsalicílico (aspirina): un anillo de benceno con un grupo −COOH y, en el carbono vecino, un grupo −O−CO−CH₃. Señala cuál de sus grupos funcionales da el sufijo del nombre.',
+   {q:'Escribe el nombre IUPAC del compuesto.',f:'HO−CH₂−CH₂−CH₂−C≡N'},
+   'La treonina, otro aminoácido de las proteínas, es CH₃−CH(OH)−CH(NH₂)−COOH. Escribe su nombre IUPAC completo, indicando cuál grupo da el sufijo y cuáles van como prefijos.',
+   'El ácido 4-oxopentanoico, CH₃−CO−CH₂−CH₂−COOH, tiene un grupo cetona y un grupo ácido. Dibuja su estructura y explica por qué el ácido da el sufijo y la cetona se nombra con el prefijo oxo-.',
+   {q:'Escribe el nombre IUPAC del compuesto.',f:'CH₂(NH₂)−CH₂−CH₂−OH'},
+   'Compara el ácido 3-hidroxibutanoico y la 4-hidroxibutan-2-ona: los dos tienen un grupo −OH y un grupo con oxígeno doblemente enlazado. Dibuja ambas estructuras y explica por qué una termina en «-oico» y la otra en «-ona».'
+  ],
   propia:[
    {f:'CH₃−CH(OH)−COOH',n:'ácido 2-hidroxipropanoico'},
    {f:'CH₂(OH)−CH₂−CHO',n:'3-hidroxipropanal'},
@@ -565,7 +651,9 @@ var TEMAS=[
    {q:'Marca con un asterisco (*) el carbono quiral del butan-2-ol y dibuja sus dos enantiómeros (puedes usar cuñas).',f:'CH₃−CH(OH)−CH₂−CH₃'},
    '¿Cuáles de estos compuestos presentan isomería cis/trans? Justifica: a) propeno; b) pent-2-eno; c) 2-metilbut-2-eno; d) 1,2-dicloroeteno.',
    'Escribe dos isómeros de función de fórmula C₃H₆O y nómbralos.',
-   'Indica qué tipo de isómeros son: a) butan-1-ol y butan-2-ol; b) butanal y butanona; c) pentano y 2,2-dimetilpropano.'
+   'Indica qué tipo de isómeros son: a) butan-1-ol y butan-2-ol; b) butanal y butanona; c) pentano y 2,2-dimetilpropano.',
+   'Dibuja y nombra dos isómeros de cadena de C₆H₁₄ distintos a los que ya conoces, e indica cuántos carbonos primarios tiene cada uno.',
+   'Dibuja el ácido propanoico y el metanoato de etilo (ambos C₃H₆O₂) y explica por qué son isómeros de función.'
   ],
   propia:[]},
 
@@ -594,6 +682,14 @@ var TEMAS=[
      {t:'Oxidorreducción',items:['Combustión','Alcohol → aldehído / cetona → ácido']}]}
   },
   ejemplo:null,
+  abiertos:[
+   'Clasifica cada una de estas reacciones como sustitución, adición, eliminación u oxidorreducción: a) CH₂=CH₂ + HBr → CH₃−CH₂−Br; b) CH₃−CH₂−OH → CH₂=CH₂ + H₂O; c) CH₃−Cl + NaOH → CH₃−OH + NaCl; d) CH₃−CH₂−OH → CH₃−CHO.',
+   'Explica la diferencia entre una ruptura homolítica y una heterolítica, con un ejemplo de cada una.',
+   '¿Qué diferencia hay entre un reactivo nucleófilo y uno electrófilo? Da un ejemplo de cada uno.',
+   'Escribe la ecuación de la esterificación entre el ácido etanoico y el etanol, y nombra el éster que se forma.',
+   'Explica por qué la combustión incompleta de un hidrocarburo es más peligrosa que la completa, en términos de los productos que forma.',
+   'Describe, paso a paso, qué le pasa a un alcohol primario cuando se oxida primero a aldehído y después a ácido carboxílico: qué enlaces se rompen y cuáles se forman en cada paso.'
+  ],
   propia:[]}
 ];
 
@@ -646,7 +742,15 @@ var SABER={
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−CH(CH₂CH₃)−CH₂−CH₂−CH₃',
    q:'¿Cuál es su nombre IUPAC?',o:['3-etilhexano','3-etilheptano','4-etilhexano','3-propilpentano']},
   {a:'nom',c:'exp',k:'CTS',ctx:'La IUPAC recomienda nombres sistemáticos (como butano) en vez de nombres triviales o comerciales que cambian de una región a otra.',
-   q:'¿Cuál es la principal ventaja de tener un sistema de nomenclatura único e internacional?',o:['Permite que cualquier químico, en cualquier país, identifique sin ambigüedad la misma sustancia a partir de su nombre','Hace que los nombres sean más cortos y fáciles de memorizar','Evita que las sustancias reaccionen entre sí al almacenarlas','Elimina la necesidad de dibujar las estructuras de las moléculas']}
+   q:'¿Cuál es la principal ventaja de tener un sistema de nomenclatura único e internacional?',o:['Permite que cualquier químico, en cualquier país, identifique sin ambigüedad la misma sustancia a partir de su nombre','Hace que los nombres sean más cortos y fáciles de memorizar','Evita que las sustancias reaccionen entre sí al almacenarlas','Elimina la necesidad de dibujar las estructuras de las moléculas']},
+  {a:'nom',c:'exp',k:'Q',ctx:'Un heptano tiene sustituyentes metilo en dos carbonos y etilo en uno. Numerando por un extremo, los localizadores quedan en {2,3,6}; numerando por el otro extremo, en {2,5,6}.',
+   q:'¿Cuál conjunto de localizadores es el correcto, según la regla de la IUPAC?',o:['{2,3,6}, porque en el primer punto de diferencia (la segunda posición) 3 es menor que 5','{2,5,6}, porque la suma de sus números es mayor','Cualquiera de los dos, porque ambos empiezan en 2','{2,3,6}, porque tiene el número más alto, 6, en la misma posición']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−CH(CH₃)−CH(CH₃)−CH₂−CH₂−CH₃',
+   q:'¿Cuál es su nombre IUPAC?',o:['3,4-dimetilheptano','4,5-dimetilheptano','3,4-dimetilhexano','2,3-dimetilheptano']},
+  {a:'nom',c:'exp',k:'Q',ctx:'Dos cadenas posibles de un mismo alcano ramificado tienen ambas 6 carbonos de longitud, pero una de ellas pasa por un carbono que tiene dos ramificaciones y la otra no pasa por ningún carbono ramificado.',
+   q:'Según la regla de desempate de la IUPAC, ¿cuál de las dos se escoge como cadena principal?',o:['La que tiene más sustituyentes, aunque las dos tengan la misma longitud','La que no tiene ningún sustituyente, porque es más sencilla de nombrar','Ninguna: si hay empate en longitud, la molécula no se puede nombrar','La que aparece dibujada en línea horizontal']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH(CH₃)−CH(CH₃)−CH(CH₃)−CH₃',
+   q:'¿Cuál es su nombre IUPAC?',o:['2,3,4-trimetilpentano','2,3,4-trimetilbutano','3,4-dimetilhexano','2,4-dimetilpentano']}
  ],
  alcanos:[
   {a:'nom',c:'uso',k:'CTS',ctx:'El gas de las pipetas (GLP) que se usa en muchas cocinas colombianas es principalmente una mezcla de propano y butano.',
@@ -688,7 +792,15 @@ var SABER={
   {a:'prop',c:'exp',k:'CTS',ctx:'Las fugas de GLP son peligrosas en espacios cerrados porque el gas, al ser más denso que el aire, tiende a acumularse cerca del piso.',
    q:'¿Qué recomendación de seguridad se deriva directamente de esta propiedad?',o:['Ventilar por la parte baja del espacio y evitar generar chispas cerca del piso si se sospecha una fuga','Abrir únicamente las ventanas más altas del espacio','Guardar siempre el cilindro de gas en un lugar elevado, lejos del piso','Usar el gas solamente en espacios completamente cerrados']},
   {a:'prop',c:'uso',k:'CTS',ctx:'El gas natural que se produce en La Guajira y el piedemonte llanero es principalmente metano, con pequeñas cantidades de etano, propano y butano.',
-   q:'Una muestra de gas natural tiene, en moles, 90 % de metano y 10 % de etano. ¿Cuál es su masa molar promedio? (CH₄ = 16 g/mol; C₂H₆ = 30 g/mol)',o:['17,4 g/mol','23,0 g/mol','16,0 g/mol','28,6 g/mol']}
+   q:'Una muestra de gas natural tiene, en moles, 90 % de metano y 10 % de etano. ¿Cuál es su masa molar promedio? (CH₄ = 16 g/mol; C₂H₆ = 30 g/mol)',o:['17,4 g/mol','23,0 g/mol','16,0 g/mol','28,6 g/mol']},
+  {a:'rx',c:'uso',k:'CTS',ctx:'En las refinerías, el craqueo (cracking) rompe moléculas largas de alcanos del petróleo, con calor y catalizadores, para obtener gasolina y otros combustibles más ligeros.',
+   q:'¿Qué tipo de productos se obtienen al romper una cadena larga de alcano por craqueo?',o:['Una mezcla de alcanos y alquenos más pequeños, porque al romper un enlace C−C sobra un carbono con un doble enlace','Solo alcanos más pequeños, porque el craqueo solo rompe enlaces C−H','Solo CO₂ y agua, igual que en la combustión','Un solo alqueno grande, sin ningún alcano']},
+  {a:'prop',c:'exp',k:'Q',ctx:'A diferencia de un doble enlace, un enlace sencillo C−C como los del propano puede girar libremente sobre su eje sin romperse.',
+   q:'¿Por qué un enlace sencillo (σ) permite esta rotación?',o:['Porque es un solapamiento simétrico alrededor del eje que une los dos núcleos, así que girar no cambia el solapamiento de los orbitales','Porque el enlace sencillo es mucho más débil que uno doble y se rompe y se vuelve a formar constantemente','Porque los átomos de carbono no tienen masa suficiente para resistir el giro','Porque en los alcanos no hay electrones compartidos entre los carbonos']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−C(CH₃)₂−CH₂−CH₂−CH₃',
+   q:'¿Cuál es su nombre IUPAC?',o:['2,2-dimetilpentano','3,3-dimetilpentano','2,2-dimetilbutano','1,1-dimetilpentano']},
+  {a:'prop',c:'ind',k:'CTS',ctx:'Al derramarse petróleo crudo (una mezcla de hidrocarburos, en su mayoría alcanos) en el mar, la mancha flota y se extiende sobre la superficie del agua, sin mezclarse con ella.',
+   q:'¿Qué dos propiedades de los alcanos explican este comportamiento?',o:['Son apolares (no se mezclan con el agua, que es polar) y menos densos que el agua','Son muy densos y se hunden en el fondo del mar','Son polares y forman puentes de hidrógeno con el agua','Son compuestos iónicos que flotan por repulsión eléctrica']}
  ],
  alquenos:[
   {a:'nom',g:'alquenos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH=CH−CH₂−CH₃',
@@ -730,7 +842,15 @@ var SABER={
   {a:'nom',g:'alquenos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH=CH−CH=CH−CH₃',
    q:'¿Cuál es su nombre IUPAC?',o:['hexa-2,4-dieno','hexa-1,3-dieno','hexa-2,4-dino','hexa-3,5-dieno']},
   {a:'rx',g:'alquenos',c:'uso',k:'CTS',ctx:'El eteno no solo se usa para madurar frutas: también es la materia prima más consumida por la industria petroquímica para fabricar plásticos.',
-   q:'¿Qué polímero de uso masivo (bolsas, envases) se obtiene al unir muchas moléculas de eteno?',o:['Polietileno','Poliestireno','PVC (policloruro de vinilo)','Nailon']}
+   q:'¿Qué polímero de uso masivo (bolsas, envases) se obtiene al unir muchas moléculas de eteno?',o:['Polietileno','Poliestireno','PVC (policloruro de vinilo)','Nailon']},
+  {a:'nom',g:'alquenos',c:'uso',k:'Q',ctx:'El pent-2-eno puede existir como dos isómeros distintos, cis y trans, porque su doble enlace no puede girar y cada carbono del C=C tiene dos grupos diferentes.',
+   q:'¿Qué nombre recibe este tipo de isomería?',o:['Isomería geométrica (cis/trans)','Isomería de cadena','Isomería de función','Isomería de posición']},
+  {a:'rx',g:'alquenos',c:'uso',k:'Q',ctx:'El propeno (gas usado en la fabricación de polipropileno) también puede quemarse completamente con oxígeno, igual que un alcano.',
+   q:'¿Cuál es la ecuación balanceada de su combustión completa?',o:['2 C₃H₆ + 9 O₂ → 6 CO₂ + 6 H₂O','C₃H₆ + 3 O₂ → 3 CO₂ + 3 H₂O','2 C₃H₆ + 9 O₂ → 6 CO + 6 H₂O','C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O']},
+  {a:'nom',g:'alquinos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−C≡C−CH₂−CH₃',
+   q:'¿Cuál es su nombre IUPAC?',o:['hex-3-ino','hex-2-ino','hept-3-ino','hex-3-eno']},
+  {a:'rx',g:'alquinos',c:'uso',k:'Q',ctx:'El but-2-ino reacciona con exceso de HBr.',
+   q:'¿Cuál es el producto final, aplicando la adición de HBr dos veces?',o:['2,2-dibromobutano','1,1-dibromobutano','2,3-dibromobutano','2-bromobut-2-eno']}
  ],
  aromaticos:[
   {a:'nom',c:'uso',k:'CTS',ctx:'El xileno, usado como solvente en laboratorios, es una mezcla de dimetilbencenos.',
@@ -778,7 +898,9 @@ var SABER={
   {a:'nom',c:'uso',k:'CTS',ctx:'El ácido salicílico, precursor de la aspirina, es un anillo de benceno con un grupo −COOH y, en el carbono vecino (orto), un grupo −OH.',
    q:'Como el −COOH tiene mayor prioridad que el −OH para dar el sufijo del nombre, ¿cuál es su nombre IUPAC?',o:['ácido 2-hidroxibenzoico','ácido 3-hidroxibenzoico','ácido 2-carboxifenólico','ácido O-hidroxibenzoico']},
   {a:'nom',c:'uso',k:'CTS',ctx:'El 2,4,6-triclorofenol se usó como conservante de la madera. Su anillo tiene un −OH y tres cloros: dos en las posiciones vecinas (orto) al −OH, y uno en la posición opuesta (para).',
-   q:'¿Cuál es su nombre con los localizadores numéricos correctos (considerando el carbono del −OH como C1)?',o:['2,4,6-triclorofenol','2,3,6-triclorofenol','3,4,5-triclorofenol','2,4,5-triclorofenol']}
+   q:'¿Cuál es su nombre con los localizadores numéricos correctos (considerando el carbono del −OH como C1)?',o:['2,4,6-triclorofenol','2,3,6-triclorofenol','3,4,5-triclorofenol','2,4,5-triclorofenol']},
+  {a:'rx',c:'exp',k:'Q',ctx:'En la sustitución electrofílica aromática, cada sustituyente ya presente en el anillo "dirige" por dónde entra el siguiente grupo: unos dirigen a las posiciones orto y para, y otros a la posición meta.',
+   q:'¿Qué tienen en común los grupos que dirigen a orto/para, como −CH₃ y −OH, frente a los que dirigen a meta, como −NO₂ y −COOH?',o:['Los directores orto/para aportan densidad electrónica al anillo (son activantes); los directores meta la retiran (son desactivantes)','Los directores orto/para siempre tienen oxígeno; los meta nunca lo tienen','Los directores orto/para son siempre gases; los meta son siempre sólidos','No tienen nada en común: la dirección es aleatoria para cada sustituyente']}
  ],
  haluros:[
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CHCl−CH₃',
@@ -820,7 +942,15 @@ var SABER={
   {a:'nom',c:'uso',k:'CTS',ctx:'Antes de los anestésicos modernos como el halotano, el cloroformo (triclorometano) se usó durante casi un siglo como anestésico inhalado, hasta que se comprobó que dañaba el hígado y el corazón.',
    q:'¿Cuál es la fórmula molecular del cloroformo?',o:['CHCl₃','CCl₄','CH₂Cl₂','CH₃Cl']},
   {a:'nom',c:'uso',k:'Q',ctx:'Un haluro de alquilo se clasifica como primario, secundario o terciario según cuántos carbonos están unidos al carbono que lleva el halógeno.',
-   q:'¿Cómo se clasifica el 2-bromobutano?',o:['Secundario, porque el carbono con el bromo está unido a otros dos carbonos','Primario, porque el carbono con el bromo está unido a un solo carbono','Terciario, porque el carbono con el bromo está unido a tres carbonos','No se puede clasificar sin ver la estructura completa']}
+   q:'¿Cómo se clasifica el 2-bromobutano?',o:['Secundario, porque el carbono con el bromo está unido a otros dos carbonos','Primario, porque el carbono con el bromo está unido a un solo carbono','Terciario, porque el carbono con el bromo está unido a tres carbonos','No se puede clasificar sin ver la estructura completa']},
+  {a:'rx',c:'exp',k:'Q',ctx:'El 2-bromo-2-metilpropano (terciario) se calienta en etanol, sin una base fuerte añadida, y forma 2-metilpropeno junto con HBr.',
+   q:'¿Cómo se llama el mecanismo de esta eliminación, dado que el haluro es terciario y no hay una base fuerte presente?',o:['E1: se forma primero un carbocatión terciario estable, y luego se pierde un H⁺ vecino','E2: el ataque de la base y la salida del halógeno ocurren en un solo paso','SN1: el nucleófilo ataca al carbocatión y sustituye al halógeno','SN2: el nucleófilo ataca por el lado opuesto al halógeno saliente']},
+  {a:'rx',c:'ind',k:'Q',ctx:'Un grupo hace reaccionar NaOH con tres haluros de alquilo distintos (1-clorobutano, 2-clorobutano y 2-cloro-2-metilpropano) en las mismas condiciones, y mide qué tan rápido ocurre la sustitución nucleofílica tipo SN2.',
+   q:'¿Qué resultado se espera, si el mecanismo es SN2?',o:['El haluro primario (1-clorobutano) reacciona más rápido, porque el nucleófilo ataca con menos impedimento estérico','El haluro terciario reacciona más rápido, porque forma un carbocatión más estable','Los tres reaccionan a la misma velocidad, porque todos tienen un solo cloro','El haluro secundario siempre es el más rápido en cualquier mecanismo']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−CHCl−CH₂−CH₃',
+   q:'¿Cuál es su nombre IUPAC?',o:['3-cloropentano','2-cloropentano','3-clorobutano','1-cloropentano']},
+  {a:'prop',c:'ind',k:'Q',ctx:'Se comparan los puntos de ebullición de tres haluros de metilo: fluorometano (−78 °C), clorometano (−24 °C) y bromometano (4 °C).',
+   q:'¿Qué tendencia muestran estos datos al aumentar el tamaño del halógeno?',o:['El punto de ebullición aumenta, porque los halógenos más grandes y pesados generan fuerzas de London más intensas','El punto de ebullición disminuye, porque los halógenos más grandes son menos electronegativos','El punto de ebullición no depende del halógeno, solo del número de carbonos','El punto de ebullición disminuye porque el enlace C−X se hace más polar']}
  ],
  alcoholes:[
   {a:'nom',g:'alcoholes',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH(OH)−CH₃',
@@ -862,7 +992,15 @@ var SABER={
   {a:'nom',g:'alcoholes',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH(OH)−CH(CH₃)−CH₃',
    q:'¿Cuál es su nombre IUPAC?',o:['3-metilbutan-2-ol','2-metilbutan-3-ol','3-metilbutan-1-ol','2-metilbutan-2-ol']},
   {a:'rx',g:'alcoholes',c:'exp',k:'Q',ctx:'Un alcohol primario con CrO₃/H⁺ (oxidante fuerte) sigue hasta ácido carboxílico; con clorocromato de piridinio, CCP (oxidante suave), se detiene en el aldehído. Un alcohol secundario, en cambio, da el mismo producto con cualquiera de los dos oxidantes.',
-   q:'¿Por qué un alcohol secundario no se ve afectado por la fuerza del oxidante, a diferencia del primario?',o:['Porque la cetona que se forma no tiene un hidrógeno en el carbonilo, así que no puede oxidarse más','Porque los alcoholes secundarios no reaccionan con ningún oxidante','Porque el CCP no reacciona nunca con alcoholes secundarios','Porque los alcoholes secundarios siempre dan ácido carboxílico, sin importar el oxidante']}
+   q:'¿Por qué un alcohol secundario no se ve afectado por la fuerza del oxidante, a diferencia del primario?',o:['Porque la cetona que se forma no tiene un hidrógeno en el carbonilo, así que no puede oxidarse más','Porque los alcoholes secundarios no reaccionan con ningún oxidante','Porque el CCP no reacciona nunca con alcoholes secundarios','Porque los alcoholes secundarios siempre dan ácido carboxílico, sin importar el oxidante']},
+  {a:'rx',g:'alcoholes',c:'exp',k:'Q',ctx:'El etanol reacciona con H₂SO₄ concentrado como catalizador, pero el producto depende de la temperatura: a unos 140 °C se favorece la deshidratación intermolecular (entre dos moléculas de alcohol) y a unos 180 °C, la intramolecular (dentro de una sola molécula).',
+   q:'¿Qué producto se espera a 140 °C?',o:['Un éter (etoxietano), por la unión de dos moléculas de etanol con pérdida de agua','Un alqueno (eteno), por eliminación dentro de una sola molécula','Un ácido carboxílico, por oxidación del alcohol','Ningún cambio: el H₂SO₄ no reacciona a esa temperatura']},
+  {a:'prop',g:'alcoholes',c:'exp',k:'Q',ctx:'El fenol (C₆H₅−OH) reacciona con NaOH y forma una sal (fenóxido de sodio) soluble en agua; el etanol, en cambio, no reacciona con NaOH.',
+   q:'¿Qué explica esta diferencia?',o:['El fenol es un ácido débil (su −OH cede H⁺ con más facilidad, porque el anillo aromático estabiliza la carga negativa que queda); el etanol no es ácido en esas condiciones','El fenol tiene un átomo de oxígeno extra que el etanol no tiene','El etanol es una base y por eso no reacciona con otra base como el NaOH','El fenol no tiene ningún grupo −OH, así que no se compara con el etanol']},
+  {a:'rx',g:'eteres',c:'exp',k:'Q',ctx:'Para preparar un éter a partir de un alcóxido de sodio (R−O⁻Na⁺) y un haluro de alquilo (R′−X), como en la síntesis de Williamson, el ion alcóxido actúa como nucleófilo y ataca al carbono unido al halógeno.',
+   q:'¿Qué tipo de reacción es esta síntesis?',o:['Sustitución nucleofílica: el alcóxido reemplaza al halógeno','Adición electrofílica sobre un doble enlace','Eliminación, formando un alqueno','Oxidación del alcóxido a un ácido carboxílico']},
+  {a:'prop',g:'eteres',c:'exp',k:'Q',ctx:'El etoxietano (dietil éter) hierve a 35 °C, mucho más bajo que el butan-1-ol (118 °C), aunque los dos tienen una masa molar parecida (74 g/mol).',
+   q:'¿Qué explica esta diferencia tan grande en el punto de ebullición?',o:['El éter no tiene ningún H unido a O, así que sus moléculas no pueden formar puentes de hidrógeno entre sí; el alcohol sí','El éter tiene una masa molar mucho menor que el alcohol','El alcohol es un compuesto iónico y el éter es covalente','El éter reacciona con el aire antes de poder hervir']}
  ],
  carbonilos:[
   {a:'nom',g:'cetonas',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CO−CH₃',
@@ -906,7 +1044,13 @@ var SABER={
   {a:'nom',g:'aldehidos',c:'uso',k:'Q',ctx:'En la retina del ojo humano, el retinal (un aldehído derivado de la vitamina A) cambia de forma geométrica al absorber luz, lo que dispara la señal nerviosa de la visión.',
    q:'¿Qué tienen en común el retinal y otros aldehídos, sin importar su tamaño?',o:['Todos tienen un grupo −CHO: un carbonilo (C=O) unido al menos a un hidrógeno','Todos tienen un anillo aromático','Todos son solubles en agua en cualquier proporción','Todos tienen el mismo número de carbonos']},
   {a:'nom',g:'aldehidos',c:'uso',k:'CTS',ctx:'El cinamaldehído, responsable del aroma y sabor de la canela, también se usa como repelente de insectos. Su estructura es C₆H₅−CH=CH−CHO.',
-   q:'¿Cuál es su nombre IUPAC?',o:['3-fenilprop-2-enal','3-fenilbut-2-enal','benceno-2-enocarbaldehído','prop-2-enobencenocarbaldehído']}
+   q:'¿Cuál es su nombre IUPAC?',o:['3-fenilprop-2-enal','3-fenilbut-2-enal','benceno-2-enocarbaldehído','prop-2-enobencenocarbaldehído']},
+  {a:'rx',g:'ambos',c:'exp',k:'Q',ctx:'El bromuro de metilmagnesio (CH₃MgBr), un reactivo de Grignard, ataca al carbono del grupo carbonilo (C=O) de un aldehído o una cetona.',
+   q:'¿Por qué el carbono del carbonilo es el punto atacado por este reactivo?',o:['Porque el oxígeno, más electronegativo, deja a ese carbono con carga parcial positiva (δ+), atractiva para un nucleófilo como el CH₃⁻','Porque ese carbono tiene carga negativa y atrae al magnesio','Porque el carbonilo es la parte menos reactiva de la molécula y por eso no cambia','Porque el reactivo de Grignard solo ataca a los hidrógenos de la molécula']},
+  {a:'rx',g:'cetonas',c:'exp',k:'Q',ctx:'Los aldehídos dan positivas las pruebas de Tollens y Fehling (se oxidan con facilidad); las cetonas no reaccionan con ninguno de los dos reactivos.',
+   q:'¿Qué explica que las cetonas no se oxiden en estas pruebas?',o:['El carbono del carbonilo de una cetona está unido a dos carbonos, sin ningún H que perder en la oxidación','Las cetonas no tienen ningún átomo de oxígeno en su estructura','Las cetonas son siempre gases y no pueden reaccionar en un tubo de ensayo','Las cetonas reaccionan igual que los aldehídos, pero más lento']},
+  {a:'rx',g:'ambos',c:'exp',k:'Q',ctx:'El NaBH₄ reduce el grupo carbonilo (C=O) de un aldehído o una cetona a un alcohol, pero no reduce un doble enlace C=C presente en la misma molécula.',
+   q:'¿Cómo se llama esta capacidad de un reactivo para transformar un grupo funcional sin afectar a otro presente en la misma molécula?',o:['Quimioselectividad','Isomería','Hibridación','Deslocalización electrónica']}
  ],
  acidos:[
   {a:'nom',g:'acidos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−COOH',
@@ -950,7 +1094,13 @@ var SABER={
   {a:'nom',g:'acidos',c:'uso',k:'CTS',ctx:'La espinaca y el ruibarbo contienen ácido etanodioico (ácido oxálico), HOOC−COOH, que en grandes cantidades puede formar cristales de oxalato de calcio en los riñones.',
    q:'¿Cuántos grupos −COOH tiene el ácido etanodioico?',o:['Dos','Uno','Tres','Ninguno: es un alcohol']},
   {a:'nom',g:'acidos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura: un anillo de benceno unido a un grupo −CO−Cl.',
-   q:'¿Cuál es su nombre IUPAC?',o:['cloruro de benzoílo','cloruro de bencilo','ácido clorobenzoico','benzoato de cloro']}
+   q:'¿Cuál es su nombre IUPAC?',o:['cloruro de benzoílo','cloruro de bencilo','ácido clorobenzoico','benzoato de cloro']},
+  {a:'nom',g:'esteres',c:'uso',k:'CTS',ctx:'El aroma de la piña se debe en parte al butanoato de etilo, un éster que también se usa como saborizante artificial.',
+   q:'¿Cuál es su fórmula estructural?',o:['CH₃−CH₂−CH₂−COO−CH₂−CH₃','CH₃−COO−CH₂−CH₂−CH₃','CH₃−CH₂−CH₂−CH₂−COO−CH₃','CH₃−CH₂−COO−CH₂−CH₂−CH₃']},
+  {a:'prop',g:'acidos',c:'exp',k:'Q',ctx:'El ácido etanoico y el fenol (C₆H₅−OH) pueden ceder un H⁺ en agua, pero el ácido etanoico es mucho más ácido.',
+   q:'¿Qué explica esta diferencia?',o:['El ion acetato (CH₃−COO⁻) deslocaliza la carga negativa entre dos oxígenos equivalentes, más eficazmente que el fenóxido, que la deslocaliza solo hacia el anillo','El fenol no tiene ningún oxígeno que pueda ceder un H⁺','El ácido etanoico es un ácido fuerte, como el HCl','El fenol es una base, no un ácido']},
+  {a:'rx',g:'esteres',c:'exp',k:'Q',ctx:'En la esterificación de Fischer (ácido + alcohol → éster + agua), siempre se usa H₂SO₄ o H⁺ como catalizador.',
+   q:'¿Cuál es la función principal del H⁺ en esta reacción?',o:['Protona el grupo carbonilo del ácido, haciéndolo más reactivo para que el alcohol lo ataque','Se incorpora al éster final como parte de su estructura','Neutraliza el ácido carboxílico antes de que reaccione','Rompe el enlace C−C de la cadena del ácido']}
  ],
  nitrogenados:[
   {a:'nom',g:'aminas',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−NH₂',
@@ -998,7 +1148,9 @@ var SABER={
   {a:'nom',g:'aminas',c:'uso',k:'CTS',ctx:'La feniletilamina, presente en el chocolate, es un anillo de benceno unido a una cadena de dos carbonos que termina en un grupo −NH₂.',
    q:'¿Cuál es su nombre IUPAC?',o:['2-feniletan-1-amina','1-feniletan-2-amina','N-fenilamina','feniletanoamida']},
   {a:'rx',g:'amidas',c:'ind',k:'CTS',ctx:'Un fragmento de la hormona oxitocina tiene la secuencia Cys-Tyr-Ile-Gln-Asn-Cys-Pro-Leu-Gly (9 residuos de aminoácidos), unidos uno a uno por enlaces peptídicos.',
-   q:'¿Cuántos enlaces peptídicos hay en este fragmento?',o:['8','9','10','7']}
+   q:'¿Cuántos enlaces peptídicos hay en este fragmento?',o:['8','9','10','7']},
+  {a:'prop',g:'aminas',c:'exp',k:'Q',ctx:'La etanamina es una base más fuerte que la anilina (C₆H₅−NH₂), aunque las dos tienen un nitrógeno con un par de electrones libre.',
+   q:'¿Qué explica que la anilina sea una base más débil?',o:['En la anilina el par libre del nitrógeno se deslocaliza hacia el anillo aromático y queda menos disponible para aceptar un H⁺','La anilina no tiene ningún par de electrones libre en el nitrógeno','La etanamina tiene carga negativa permanente en el nitrógeno','La anilina es, en realidad, una amida, no una amina']}
  ],
  polifuncionales:[
   {a:'nom',c:'uso',k:'Q',ctx:'El ácido láctico se forma en los músculos y en la fermentación del kumis. Su estructura es:',f:'CH₃−CH(OH)−COOH',
@@ -1042,7 +1194,13 @@ var SABER={
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−CH(OH)−CO−CH₃',
    q:'¿Cuál es su nombre IUPAC?',o:['3-hidroxipentan-2-ona','2-hidroxipentan-3-ona','4-hidroxipentan-2-ona','3-hidroxipentanal']},
   {a:'rx',c:'uso',k:'CTS',ctx:'El herbicida 2,4-D (ácido 2,4-diclorofenoxiacético), uno de los más usados en el mundo contra malezas de hoja ancha, tiene un anillo de benceno con dos cloros, unido mediante un oxígeno a una cadena −CH₂−COOH.',
-   q:'¿Qué dos grupos funcionales tiene esta molécula, además del anillo aromático y los cloros?',o:['Un éter (el oxígeno que conecta el anillo con la cadena) y un ácido carboxílico','Un éter y un aldehído','Un alcohol y un ácido carboxílico','Un éster y un fenol']}
+   q:'¿Qué dos grupos funcionales tiene esta molécula, además del anillo aromático y los cloros?',o:['Un éter (el oxígeno que conecta el anillo con la cadena) y un ácido carboxílico','Un éter y un aldehído','Un alcohol y un ácido carboxílico','Un éster y un fenol']},
+  {a:'nom',c:'uso',k:'CTS',ctx:'El ácido acetilsalicílico (aspirina) tiene un anillo aromático con un grupo −COOH y, en el carbono vecino, un grupo éster (−O−CO−CH₃).',
+   q:'¿Cuáles son sus dos grupos funcionales con oxígeno, aparte del anillo?',o:['Un ácido carboxílico y un éster','Un alcohol y un éster','Dos grupos ácido carboxílico','Un aldehído y un ácido carboxílico']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'HO−CH₂−CH₂−CH₂−C≡N',
+   q:'¿Cuál es su nombre IUPAC?',o:['4-hidroxibutanonitrilo','4-hidroxibutanamina','ácido 4-hidroxibutanoico','1-ciano-3-hidroxipropano']},
+  {a:'nom',c:'exp',k:'Q',ctx:'El orden de prioridad IUPAC ya visto es: ácido carboxílico > éster > amida > nitrilo > aldehído > cetona > alcohol > amina.',
+   q:'Si una molécula tiene un grupo nitrilo y un grupo cetona, ¿cuál de los dos da la terminación del nombre?',o:['El nitrilo, porque tiene mayor prioridad que la cetona; la cetona se nombra entonces con el prefijo oxo-','La cetona, porque el oxígeno es más importante que el nitrógeno','Ninguno: los dos se nombran siempre como sufijos a la vez','Depende de cuál esté más cerca del extremo de la cadena']}
  ],
  isomeria:[
   {a:'nom',c:'uso',k:'Q',ctx:'El etanol (CH₃−CH₂−OH) y el metoximetano (CH₃−O−CH₃) tienen la misma fórmula molecular, C₂H₆O.',
@@ -1084,7 +1242,15 @@ var SABER={
   {a:'nom',c:'uso',k:'Q',ctx:'El 1-clorobutano y el 2-clorobutano tienen la misma fórmula molecular, C₄H₉Cl, pero el cloro está en una posición distinta de la cadena.',
    q:'¿Qué tipo de isómeros son?',o:['Isómeros de posición','Isómeros de cadena','Isómeros de función','Isómeros cis/trans']},
   {a:'nom',c:'ind',k:'Q',ctx:'Para saber si el 2-clorobutano (CH₃−CHCl−CH₂−CH₃) tiene un carbono quiral, un estudiante examina los cuatro grupos unidos al carbono que lleva el cloro.',
-   q:'¿Cuáles son esos cuatro grupos, y son todos diferentes entre sí?',o:['Cl, H, CH₃ y CH₂CH₃: los cuatro son diferentes, así que ese carbono sí es quiral','Cl, H, CH₃ y CH₃: dos de los grupos son iguales, así que no es quiral','Cl, Cl, H y CH₃: hay dos cloros, así que no puede ser quiral','H, H, CH₃ y CH₂CH₃: hay dos hidrógenos, así que no es quiral']}
+   q:'¿Cuáles son esos cuatro grupos, y son todos diferentes entre sí?',o:['Cl, H, CH₃ y CH₂CH₃: los cuatro son diferentes, así que ese carbono sí es quiral','Cl, H, CH₃ y CH₃: dos de los grupos son iguales, así que no es quiral','Cl, Cl, H y CH₃: hay dos cloros, así que no puede ser quiral','H, H, CH₃ y CH₂CH₃: hay dos hidrógenos, así que no es quiral']},
+  {a:'nom',c:'uso',k:'Q',ctx:'El 1,2-diclorobenceno y el 1,4-diclorobenceno tienen la misma fórmula molecular, C₆H₄Cl₂, pero los dos átomos de cloro ocupan posiciones distintas del anillo.',
+   q:'¿Qué tipo de isómeros son?',o:['De posición','De cadena','De función','Cis/trans']},
+  {a:'nom',c:'uso',k:'Q',ctx:'El heptano, C₇H₁₆, puede tener la cadena lineal o varias formas ramificadas.',
+   q:'¿Cuántos isómeros estructurales tiene el C₇H₁₆?',o:['9','5','7','12']},
+  {a:'nom',c:'exp',k:'Q',ctx:'El hex-3-eno, CH₃−CH₂−CH=CH−CH₂−CH₃, tiene un doble enlace entre el C3 y el C4.',
+   q:'¿Tiene isomería cis/trans?',o:['Sí, porque cada carbono del doble enlace está unido a un H y a un grupo etilo, dos sustituyentes distintos','No, porque los dos lados de la molécula son iguales','No, porque el doble enlace no está en el centro de la cadena','Sí, pero solo existe la forma cis']},
+  {a:'nom',c:'uso',k:'Q',ctx:'El ciclopropano (un anillo de 3 carbonos) y el propeno (CH₂=CH−CH₃) tienen ambos fórmula molecular C₃H₆.',
+   q:'¿Qué tipo de isómeros son?',o:['De función','De posición','De cadena','Cis/trans']}
  ],
  reacciones:[
   {a:'rx',c:'uso',k:'Q',ctx:'CH₂=CH₂ + H₂O → CH₃−CH₂−OH (con H₂SO₄ como catalizador)',
@@ -1126,7 +1292,15 @@ var SABER={
   {a:'rx',c:'ind',k:'Q',ctx:'Un grupo quiere saber si el agua de bromo se decolora más rápido cuando hay más alqueno. Usa dos tubos con la misma cantidad de agua de bromo, a la misma temperatura; en uno pone 1 mL de ciclohexeno y en el otro, 3 mL.',
    q:'¿Qué variable cambian a propósito y qué deben medir?',o:['Cambian la cantidad de ciclohexeno y deben medir el tiempo que tarda en desaparecer el color del bromo','Cambian la temperatura y deben medir la cantidad de ciclohexeno que queda','Cambian la cantidad de agua de bromo y deben medir el volumen final','Cambian el tipo de alqueno y deben medir la masa de cada tubo']},
   {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CH₂−OH → CH₃−CHO (con un oxidante suave y controlado)',
-   q:'¿Qué tipo de reacción es, respecto al carbono que lleva el −OH?',o:['Oxidación: ese carbono gana un enlace con oxígeno y pierde un enlace con hidrógeno','Reducción: ese carbono gana un enlace con hidrógeno y pierde uno con oxígeno','Sustitución: el −OH es reemplazado por un átomo de hidrógeno','Eliminación: se pierde agua y se forma un doble enlace C=C']}
+   q:'¿Qué tipo de reacción es, respecto al carbono que lleva el −OH?',o:['Oxidación: ese carbono gana un enlace con oxígeno y pierde un enlace con hidrógeno','Reducción: ese carbono gana un enlace con hidrógeno y pierde uno con oxígeno','Sustitución: el −OH es reemplazado por un átomo de hidrógeno','Eliminación: se pierde agua y se forma un doble enlace C=C']},
+  {a:'rx',c:'uso',k:'Q',ctx:'C₆H₆ + HNO₃ → C₆H₅−NO₂ + H₂O (con H₂SO₄ como catalizador)',
+   q:'¿Qué tipo de reacción es?',o:['Sustitución electrofílica aromática','Adición electrofílica','Eliminación','Sustitución nucleofílica']},
+  {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CO−NH₂ + H₂O (con H⁺ y calor) → CH₃−COOH + NH₄⁺',
+   q:'¿Qué tipo de reacción es?',o:['Hidrólisis de una amida','Esterificación','Saponificación','Deshidratación']},
+  {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CO−CH₃ + NaBH₄ (y luego agua) → CH₃−CH(OH)−CH₃',
+   q:'¿Qué tipo de reacción es, respecto al carbono del grupo carbonilo?',o:['Reducción: ese carbono gana un enlace con hidrógeno y pierde uno con oxígeno','Oxidación: ese carbono gana un enlace con oxígeno','Sustitución nucleofílica: el oxígeno es reemplazado por hidrógeno','Eliminación: se pierde agua y se forma un doble enlace']},
+  {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CH₂−Br + NaCN → CH₃−CH₂−C≡N + NaBr',
+   q:'¿Qué tipo de reacción es?',o:['Sustitución nucleofílica','Adición nucleofílica','Eliminación','Oxidación']}
  ]
 };
 
@@ -1142,15 +1316,18 @@ var ABIERTAS={
  carbono:[
   {t:'con',q:'Escribe la configuración electrónica del carbono en estado fundamental y excitado, y explica para qué sirve la promoción de un electrón.'},
   {t:'con',q:'Indica la hibridación, la geometría y el ángulo de enlace de cada carbono en CH₂=CH−C≡CH.'},
-  {t:'con',q:'Cuenta los enlaces σ y π del propeno (CH₂=CH−CH₃) y explica la diferencia entre ambos tipos de enlace.'}],
+  {t:'con',q:'Cuenta los enlaces σ y π del propeno (CH₂=CH−CH₃) y explica la diferencia entre ambos tipos de enlace.'},
+  {t:'con',q:'Dibuja la propanona (CH₃−CO−CH₃) e indica la hibridación, la geometría y el ángulo de enlace del carbono del grupo carbonilo.'}],
  tipos_carbono:[
   {t:'con',q:'Dibuja la estructura CH₃−C(CH₃)₂−CH₂−CH(CH₃)−CH₃ y clasifica cada uno de sus carbonos.'},
   {t:'con',q:'Dibuja un alcohol primario, uno secundario y uno terciario, y explica cómo los reconociste.'},
-  {t:'con',q:'Dibuja una molécula de 5 carbonos que tenga un carbono cuaternario. ¿Cuántos carbonos primarios tiene?'}],
+  {t:'con',q:'Dibuja una molécula de 5 carbonos que tenga un carbono cuaternario. ¿Cuántos carbonos primarios tiene?'},
+  {t:'con',q:'Dibuja el 3-etil-2-metilpentano y clasifica cada uno de sus carbonos como primario, secundario, terciario o cuaternario.'}],
  cadenas:[
   {t:'con',q:'Clasifica según su forma, sus enlaces y sus átomos: a) CH₃−CH=CH−CH₃; b) CH₃−NH−CH₂−CH₃; c) ciclohexano; d) benceno.'},
   {t:'con',q:'Dibuja una cadena abierta, ramificada, insaturada y homogénea, y explica cada criterio.'},
-  {t:'con',q:'Explica con un dibujo por qué una cadena en forma de U puede seguir siendo lineal.'}],
+  {t:'con',q:'Explica con un dibujo por qué una cadena en forma de U puede seguir siendo lineal.'},
+  {t:'con',q:'Dibuja un anillo heterocíclico (con un heteroátomo dentro del ciclo) y uno homocíclico, y explica la diferencia.'}],
  cadena:[
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto. Marca la cadena principal y explica por qué numeraste desde ese extremo.',f:'CH₃−CH(CH₃)−CH₂−CH(C₂H₅)−CH₂−CH₃'},
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto y justifica la numeración.',f:[{h:3},{h:0,bu:CH3,bd:CH3},{h:2},{h:2},{h:1,bd:CH3},{h:3}]},
@@ -1159,7 +1336,9 @@ var ABIERTAS={
   {t:'mdec',n:'3-etil-2-metilhexano'},
   {t:'mdec',n:'3,3-dietilpentano'},
   {t:'rx',q:'Escribe la ecuación balanceada de la combustión completa del 2,2,4-trimetilpentano (C₈H₁₈), el compuesto de referencia del octanaje de la gasolina.'},
-  {t:'rx',q:'El 2-metilpropano reacciona con Br₂ en presencia de luz. Dibuja y nombra el producto monobromado principal y explica por qué se forma ese.'}],
+  {t:'rx',q:'El 2-metilpropano reacciona con Br₂ en presencia de luz. Dibuja y nombra el producto monobromado principal y explica por qué se forma ese.'},
+  {t:'nom',q:'Dibuja la estructura del 3-etil-2,2-dimetilpentano. Numerando desde el otro extremo de la cadena, escribe el conjunto de localizadores que resultaría y compáralo con {2,2,3} para explicar por qué el nombre dado es el correcto.'},
+  {t:'con',q:'El nombre 4-etil-2,3-dimetilhexano tiene una cadena principal de 6 carbonos y tres sustituyentes (un etilo y dos metilos). Calcula cuántos carbonos tiene la molécula en total y cuántos hidrógenos, sabiendo que es un alcano saturado.'}],
  alcanos:[
   {t:'rx',q:'CH₄ + Cl₂ → ? (con luz). Escribe los productos de la monocloración, nómbralos y di qué tipo de reacción es.'},
   {t:'rx',q:'Escribe la ecuación balanceada de la combustión completa del propano y la de su combustión incompleta (cuando se forma CO).'},
@@ -1168,7 +1347,9 @@ var ABIERTAS={
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto.',f:'CH₃−CH₂−CH₂−CH(CH₃)−CH₃'},
   {t:'nom',q:'Dibuja la fórmula del metilciclohexano y la del 1,3-dimetilciclopentano.'},
   {t:'mdec',n:'2,3-dimetilbutano'},
-  {t:'mdec',n:'3-etil-3-metilheptano'}],
+  {t:'mdec',n:'3-etil-3-metilheptano'},
+  {t:'rx',q:'El craqueo térmico del decano (C₁₀H₂₂) produce una mezcla de un alcano y un alqueno más pequeños. Si uno de los productos es el hexano (C₆H₁₄), escribe la fórmula molecular del otro producto y explica por qué debe tener un doble enlace.'},
+  {t:'con',q:'Explica por qué el 2,2,3,3-tetrametilbutano, muy ramificado, hierve a una temperatura menor que el octano (C₈H₁₈) lineal, aunque las dos moléculas tienen la misma fórmula molecular.'}],
  alquenos:[
   {g:'alquenos',t:'rx',q:'CH₃−CH=CH₂ + HBr → ? Escribe el producto principal, nómbralo y explica por qué el Br queda en ese carbono.'},
   {g:'alquenos',t:'rx',q:'CH₂=CH₂ + Br₂ → ? Escribe y nombra el producto. ¿Qué cambio de color observarías en el laboratorio?'},
@@ -1202,7 +1383,9 @@ var ABIERTAS={
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto y clasifícalo como haluro primario, secundario o terciario.',f:'CH₂Br−CH(CH₃)−CH₃'},
   {t:'nom',q:'Dibuja la fórmula semidesarrollada del 2-bromo-3-metilpentano y la del 1,1-dicloroetano.'},
   {t:'mdec',n:'1-cloro-3-metilbutano'},
-  {t:'mdec',n:'2-bromo-2-metilbutano'}],
+  {t:'mdec',n:'2-bromo-2-metilbutano'},
+  {t:'rx',q:'CH₃−CH₂−CH₂−Br + KOH (en etanol, con calor) → ? Escribe el producto principal de eliminación, nómbralo y di qué tipo de mecanismo esperarías (E1 o E2) para un haluro primario con una base fuerte.'},
+  {t:'con',q:'Explica por qué el 2-bromo-2-metilpropano reacciona con agua mucho más rápido por mecanismo SN1 que por SN2, mientras que el bromometano reacciona más rápido por SN2 que por SN1. Relaciona tu respuesta con la estabilidad de los carbocationes y el impedimento estérico.'}],
  alcoholes:[
   {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−OH con CCP (clorocromato de piridinio, oxidante suave) → ? y con CrO₃/H⁺ (oxidante fuerte) → ? Escribe y nombra el producto de cada caso.'},
   {g:'alcoholes',t:'rx',q:'CH₃−CH(OH)−CH₃ + CrO₃/H⁺ → ? Escribe y nombra el producto. ¿Qué pasaría con el 2-metilpropan-2-ol? Explica.'},
@@ -1226,7 +1409,9 @@ var ABIERTAS={
   {g:'cetonas',t:'nom',q:'Escribe el nombre IUPAC del compuesto.',f:'CH₃−CH₂−CO−CH(CH₃)−CH₃'},
   {g:'ambos',t:'nom',q:'Dibuja la estructura del butanal, de la butanona y del 3-metilbutanal.'},
   {g:'cetonas',t:'mdec',n:'5-metilhexan-3-ona'},
-  {g:'aldehidos',t:'mdec',n:'2-metilbutanal'}],
+  {g:'aldehidos',t:'mdec',n:'2-metilbutanal'},
+  {g:'ambos',t:'rx',q:'Un aldehído reacciona con bromuro de etilmagnesio (CH₃CH₂MgBr) y luego con H₃O⁺, y se obtiene pentan-3-ol. Dibuja y nombra el aldehído de partida.'},
+  {g:'aldehidos',t:'rx',q:'Tienes dos tubos sin etiqueta: uno con pentanal y otro con pentan-3-ona. Propón una prueba química que permita distinguirlos y describe qué observarías en cada tubo.'}],
  acidos:[
   {g:'acidos',t:'rx',q:'CH₃−COOH + NaOH → ? Escribe y nombra los productos.'},
   {g:'esteres',t:'rx',q:'CH₃−CH₂−COOH + CH₃−OH → ? (con H⁺). Escribe y nombra el éster que se forma.'},
@@ -1257,7 +1442,9 @@ var ABIERTAS={
   {t:'nom',q:'Escribe el nombre IUPAC del compuesto. Indica cuál grupo va como prefijo y cuál como sufijo.',f:'CH₃−CH(OH)−CH₂−COOH'},
   {t:'nom',q:'Dibuja la estructura del ácido 2-aminopropanoico (alanina) y señala cuál de sus grupos da el sufijo del nombre.'},
   {t:'mdec',n:'ácido 3-aminobutanoico'},
-  {t:'mdec',n:'5-hidroxihexan-2-ona'}],
+  {t:'mdec',n:'5-hidroxihexan-2-ona'},
+  {t:'nom',q:'Escribe el nombre IUPAC del compuesto y explica por qué el grupo nitrilo, no el alcohol, da la terminación del nombre.',f:'HO−CH₂−CH₂−C≡N'},
+  {t:'rx',q:'El ácido acetilsalicílico (aspirina) se hidroliza con NaOH. Describe qué les pasa a sus dos grupos funcionales con oxígeno (el éster y el ácido carboxílico) y qué productos se forman.'}],
  isomeria:[
   {t:'nom',q:'Dibuja y nombra los tres isómeros estructurales de fórmula C₅H₁₂.'},
   {t:'nom',q:'Dibuja y nombra los isómeros cis y trans del but-2-eno.'},
@@ -1280,7 +1467,8 @@ var ABIERTAS={
   {t:'rx',q:'CH₃−COOH + CH₃−OH → ? (con H⁺). Escribe y nombra el éster y di qué tipo de reacción es.'},
   {t:'nom',q:'Escribe el nombre del producto orgánico de cada reacción: a) propeno + HBr; b) propan-2-ol + CrO₃/H⁺.'},
   {t:'mdec',n:'2-cloro-2-metilpropano'},
-  {t:'rx',q:'CH₂=CH₂ + H₂ → A (con catalizador de Ni). A + Cl₂ → B (con calor o luz). Escribe y nombra A y B, e indica qué tipo de reacción forma cada uno.'}]
+  {t:'rx',q:'CH₂=CH₂ + H₂ → A (con catalizador de Ni). A + Cl₂ → B (con calor o luz). Escribe y nombra A y B, e indica qué tipo de reacción forma cada uno.'},
+  {t:'con',q:'Clasifica cada una de estas reacciones según su tipo (sustitución, adición, eliminación u oxidorreducción) y justifica brevemente cada clasificación: a) CH₂=CH₂ + Br₂ → CH₂Br−CH₂Br; b) CH₃−CH₂−Br + KOH (en etanol, con calor) → CH₂=CH₂ + KBr + H₂O; c) CH₃−CH₂−OH + CrO₃/H⁺ → CH₃−COOH; d) C₆H₆ + Cl₂ (cat. AlCl₃) → C₆H₅Cl + HCl.'}]
 };
 
 window.DOCENTE_DATOS={ALINEACION:ALINEACION,TEMAS:TEMAS,SABER:SABER,ABIERTAS:ABIERTAS};
