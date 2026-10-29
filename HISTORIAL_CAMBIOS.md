@@ -7,6 +7,56 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (100) — Juego: traslada el resto de preguntas nuevas de SABER (29 preguntas)
+
+### Contexto
+Última parte pendiente del pedido de ampliar el banco del Juego con las
+preguntas nuevas de hoy: faltaban las 47 preguntas de `SABER` agregadas
+en las entradas 98/99 (el +20% por tema) — solo se habían trasladado las
+9 de las entradas 92/95 (ver entrada 97).
+
+### Criterio de selección
+De las 47, se trasladaron las que son preguntas de reacción o de
+concepto, resolubles con el texto del enunciado sin necesitar una
+estructura ya dibujada en la librería de moléculas del Juego (crear
+nuevas moléculas dibujables es un trabajo aparte, de otro alcance). Se
+dejaron fuera las de nomenclatura que muestran una estructura para
+nombrar (`f:` con una fórmula) — esas necesitarían una molécula nueva en
+el Juego para dibujarse, y no se improvisó eso hoy.
+
+### Qué se hizo
+- **`juego.html`**: 25 preguntas nuevas en `QBANK_REACCIONES` (sin
+  necesitar moléculas nuevas): 3 de alcanos, 2 de alquenos, 1 de
+  alquinos, 4 de haluros, 2 de aromáticos, 4 de alcoholes, 4 de
+  carbonilos, 2 de ácidos, 1 de aminas, 2 de derivados (ésteres/amidas).
+- **`fundamentos.js`**: 4 preguntas nuevas de isomería (`Q(I,...)`) —
+  estas NO se pusieron en `QBANK_REACCIONES` porque el tema "isomería"
+  ya tiene su banco propio ahí, que además alimenta a la vez el Juego,
+  los talleres tipo "Q" y la página `isomeria.html`: es el lugar
+  correcto, no uno improvisado.
+- Las preguntas de nomenclatura con `f:` (cadena, alcanos, alquenos,
+  haluros, aromáticos, polifuncionales) y las de polifuncionales sin
+  tema afín en el Juego se dejaron **sin trasladar** — quedan solo en
+  `docente-datos.js`.
+
+### Errores propios corregidos antes de comitear
+Al escribir a mano 2 de las preguntas nuevas de isomería se mezclaron
+sin querer letras cirílicas visualmente parecidas a las latinas (ej.
+"dicloробenceno" en vez de "diclorobenceno") — se detectó al revisar el
+texto exacto antes de comitear y se corrigió.
+
+### Verificación
+Playwright (Chromium, servidor local): `QBANK_REACCIONES` pasó de 111 a
+136 preguntas y `FUND_BANCO` de 162 a 166, ambos sin errores de consola.
+
+### Pendiente
+Quedan sin trasladar al Juego las preguntas de nomenclatura con
+estructura (`f:`) de SABER, y las 2 de polifuncionales sin tema afín en
+el Juego — ninguna es urgente, y crear las moléculas nuevas que harían
+falta es trabajo de otro alcance. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (99) — Corrección a la entrada 98: isomería/reacciones/carbono/tipos_carbono/cadenas sí quedaron integrados
 
 ### Contexto
