@@ -7,6 +7,90 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (96) — Fundamentos: +20% de preguntas en hibridación, tipos de carbono, cadenas e isomería (incluye IDH)
+
+### Contexto
+La docente pidió aumentar los bancos de preguntas abiertas y cerradas por
+lo menos un 20% por tema, tanto para evaluaciones como para talleres, y
+que el banco del Juego también creciera con las preguntas nuevas.
+
+### Hallazgo clave
+`fundamentos.js` es una **única fuente** que alimenta a la vez cuatro
+lugares: el Juego (`juego.html`, vía `QBANK_FUNDAMENTOS`), las páginas
+`carbono.html`/`tipos-carbono.html`/`cadenas.html`/`isomeria.html` (su
+práctica rápida "repaso"), y el generador del docente (`docente.html`):
+las preguntas de hibridación/tipos de carbono/cadenas/isomería alimentan
+tanto el banco "Preguntas tipo Saber 11" de las evaluaciones como el tipo
+de ejercicio "Q: Selección múltiple" de los talleres — pero **solo** para
+estos 4 temas (`saberJue:true`); los 12 temas de grupos funcionales
+(alcanos, alcoholes, etc.) no usan este mecanismo: su "cerradas" vive en
+`SABER` de `docente-datos.js` en vez de aquí.
+Editar este único archivo cubre de un golpe el pedido de "banco del
+Juego" + "cerradas para evaluaciones" + "cerradas para talleres", para
+estos 4 temas.
+
+### Qué se hizo (`fundamentos.js`)
+Se agregaron 7 preguntas nuevas a cada uno de los 4 bloques (28 en
+total), superando el +20% exacto (35→42, 33→40, 33→40, 33→40):
+- **Hibridación**: carbono del nitrilo (sp), conteo de enlaces π por
+  hibridación, CO₂ como ejemplo de carbono sp, naftaleno (sp² en anillos
+  fusionados), por qué el triple enlace es más corto/fuerte, lo que
+  comparten un sp² de alqueno y uno aromático, regla rápida general
+  (átomos unidos → hibridación).
+- **Tipos de carbono**: la clasificación no depende de otros grupos
+  unidos (−OH, −Cl); cadena lineal siempre tiene 2 primarios; cuaternario
+  nunca tiene H; 3 preguntas con el 3-etilpentano (terciario, primarios,
+  secundarios); por qué el alcohol terciario no se oxida con CrO₃/H⁺.
+- **Cadenas**: cerrada + heterogénea a la vez (THF); insaturada no implica
+  abierta (ciclohexeno/benceno); ciclohexano como cerrada+homogénea;
+  fórmula CₙH₂ₙ (una insaturación, abierta o cerrada); molécula ramificada
+  e insaturada a la vez; anillos heterocíclicos de la cafeína;
+  heterocíclica vs. heterogénea abierta.
+- **Isomería**: 7 preguntas centradas en el **índice de deficiencia de
+  hidrógeno (IDH)** — qué significa, cálculo con el ciclohexano, por qué
+  isómeros con distinto IDH es imposible, qué combinaciones son posibles
+  con IDH = 2, IDH = 0 de cualquier alcano abierto, el benceno explica
+  IDH = 4 por sí solo, y para qué sirve calcularlo antes de enumerar
+  isómeros — enlazando con la sección que se agregó a `isomeria.html` en
+  la entrada 94.
+
+### Errores propios corregidos antes de comitear
+Dos preguntas quedaron mal escritas al redactarlas (una con un cálculo a
+medio corregir en el texto, dejando la respuesta ambigua; la otra sin la
+coma de cierre del literal, lo que habría roto la sintaxis del archivo) —
+se detectaron y corrigieron antes de este commit. También faltó 1
+pregunta en cada uno de los 3 primeros bloques por un error de conteo
+propio; se agregó la que faltaba a cada uno para llegar exactamente al
++20%.
+
+### Verificación
+Playwright (Chromium) **contra un servidor local** (`python3 -m http.server`,
+no `file://`): se confirmó que `docente.html` lee los bancos de
+`generador.html` y `juego.html` mediante un iframe oculto, que Chromium
+bloquea bajo `file://` sin avisar con ningún error en consola — por eso
+las pruebas de los talleres y de las evaluaciones de estos 4 temas deben
+hacerse con un servidor local, nunca con `file://`, o dan falsos
+negativos. Con el servidor local: `juego.html` carga los 162 ítems de
+`FUND_BANCO` sin errores; `isomeria.html` sigue generando sus 8 preguntas
+de repaso; una evaluación de los 4 temas genera las 30 preguntas tipo
+Saber 11 y las 10 abiertas pedidas sin problema; un taller con solo tipo
+"Q" genera los 20 ejercicios pedidos sin problema.
+
+### Pendiente
+Falta la parte más grande del pedido: ampliar un 20% los bancos `SABER` y
+`ABIERTAS` de `docente-datos.js` para los 12 temas de grupos funcionales
+(alcanos, alquenos, aromáticos, haluros, alcoholes, carbonilos, ácidos,
+nitrogenados, polifuncionales, y también cadena/reacciones), más crear
+desde cero el banco de "ejercicios abiertos" de talleres
+(`TEMAS.abiertos`) para esos mismos 12 temas (hoy en 0, un hueco real:
+sus talleres no pueden ofrecer ese tipo de ejercicio). Y, por separado,
+trasladar al banco del Juego (`juego.html`, con sus propios arreglos
+`QBANK_*`) las preguntas ya agregadas hoy a `docente-datos.js` sobre
+aromáticos/alcoholes/carbonilos/ácidos/nitrogenados/polifuncionales/
+reacciones — eso sigue en curso. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (95) — Docente: amplía SABER/ABIERTAS con 5 bimestrales de 2023 (aromáticos, carbonilos, ácidos, nitrogenados, polifuncionales, reacciones, alcoholes)
 
 ### Contexto
