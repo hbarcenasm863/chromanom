@@ -774,7 +774,11 @@ var SABER={
   {a:'prop',c:'uso',k:'CTS',ctx:'La gasolina contiene una pequeña proporción de hidrocarburos aromáticos (benceno, tolueno, etilbenceno, xilenos) que mejoran el índice de octano, pero la normativa limita estrictamente el porcentaje de benceno permitido.',
    q:'¿Por qué se limita en particular el benceno y no tanto sus derivados metilados (tolueno, xilenos)?',o:['Porque el benceno es cancerígeno comprobado, mientras que sus derivados metilados son considerablemente menos tóxicos','Porque el benceno es el único de ellos que mejora el índice de octano','Porque el benceno es el único de ellos que es aromático','Porque el benceno es más costoso de producir que los demás']},
   {a:'nom',c:'uso',k:'Q',ctx:'Cuando un anillo de benceno está unido a una cadena de carbono más larga que él mismo, el anillo ya no se trata como la cadena principal: se nombra como sustituyente, con el nombre del grupo fenilo (C₆H₅−).',
-   q:'¿Cómo se nombra un compuesto con un anillo de benceno unido a una cadena lineal de ocho carbonos?',o:['Como un octano con un sustituyente fenilo','Como un benceno con un sustituyente octilo','Con un nombre conservado, distinto de los dos anteriores','No se puede nombrar con las reglas de la IUPAC']}
+   q:'¿Cómo se nombra un compuesto con un anillo de benceno unido a una cadena lineal de ocho carbonos?',o:['Como un octano con un sustituyente fenilo','Como un benceno con un sustituyente octilo','Con un nombre conservado, distinto de los dos anteriores','No se puede nombrar con las reglas de la IUPAC']},
+  {a:'nom',c:'uso',k:'CTS',ctx:'El ácido salicílico, precursor de la aspirina, es un anillo de benceno con un grupo −COOH y, en el carbono vecino (orto), un grupo −OH.',
+   q:'Como el −COOH tiene mayor prioridad que el −OH para dar el sufijo del nombre, ¿cuál es su nombre IUPAC?',o:['ácido 2-hidroxibenzoico','ácido 3-hidroxibenzoico','ácido 2-carboxifenólico','ácido O-hidroxibenzoico']},
+  {a:'nom',c:'uso',k:'CTS',ctx:'El 2,4,6-triclorofenol se usó como conservante de la madera. Su anillo tiene un −OH y tres cloros: dos en las posiciones vecinas (orto) al −OH, y uno en la posición opuesta (para).',
+   q:'¿Cuál es su nombre con los localizadores numéricos correctos (considerando el carbono del −OH como C1)?',o:['2,4,6-triclorofenol','2,3,6-triclorofenol','3,4,5-triclorofenol','2,4,5-triclorofenol']}
  ],
  haluros:[
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CHCl−CH₃',
@@ -900,7 +904,9 @@ var SABER={
   {a:'nom',g:'cetonas',c:'uso',k:'CTS',ctx:'La etil metil cetona (butan-2-ona, MEK) es un disolvente industrial común en pinturas, pegantes y barnices.',
    q:'¿Cuál es su fórmula estructural?',o:['CH₃−CO−CH₂−CH₃','CH₃−CH₂−CO−CH₂−CH₃','CH₃−CH₂−CH₂−CHO','CH₃−CH(OH)−CH₂−CH₃']},
   {a:'nom',g:'aldehidos',c:'uso',k:'Q',ctx:'En la retina del ojo humano, el retinal (un aldehído derivado de la vitamina A) cambia de forma geométrica al absorber luz, lo que dispara la señal nerviosa de la visión.',
-   q:'¿Qué tienen en común el retinal y otros aldehídos, sin importar su tamaño?',o:['Todos tienen un grupo −CHO: un carbonilo (C=O) unido al menos a un hidrógeno','Todos tienen un anillo aromático','Todos son solubles en agua en cualquier proporción','Todos tienen el mismo número de carbonos']}
+   q:'¿Qué tienen en común el retinal y otros aldehídos, sin importar su tamaño?',o:['Todos tienen un grupo −CHO: un carbonilo (C=O) unido al menos a un hidrógeno','Todos tienen un anillo aromático','Todos son solubles en agua en cualquier proporción','Todos tienen el mismo número de carbonos']},
+  {a:'nom',g:'aldehidos',c:'uso',k:'CTS',ctx:'El cinamaldehído, responsable del aroma y sabor de la canela, también se usa como repelente de insectos. Su estructura es C₆H₅−CH=CH−CHO.',
+   q:'¿Cuál es su nombre IUPAC?',o:['3-fenilprop-2-enal','3-fenilbut-2-enal','benceno-2-enocarbaldehído','prop-2-enobencenocarbaldehído']}
  ],
  acidos:[
   {a:'nom',g:'acidos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−COOH',
@@ -942,7 +948,9 @@ var SABER={
   {a:'nom',g:'acidos',c:'uso',k:'CTS',ctx:'El ácido cítrico, presente en el limón y otros cítricos, tiene tres grupos −COOH en su estructura.',
    q:'¿Cómo se clasifica un ácido con tres grupos carboxilo, según el número de esos grupos?',o:['Triprótico (puede ceder hasta tres H⁺)','Monoprótico','Diprótico','Neutro, porque sus grupos se cancelan entre sí']},
   {a:'nom',g:'acidos',c:'uso',k:'CTS',ctx:'La espinaca y el ruibarbo contienen ácido etanodioico (ácido oxálico), HOOC−COOH, que en grandes cantidades puede formar cristales de oxalato de calcio en los riñones.',
-   q:'¿Cuántos grupos −COOH tiene el ácido etanodioico?',o:['Dos','Uno','Tres','Ninguno: es un alcohol']}
+   q:'¿Cuántos grupos −COOH tiene el ácido etanodioico?',o:['Dos','Uno','Tres','Ninguno: es un alcohol']},
+  {a:'nom',g:'acidos',c:'uso',k:'Q',ctx:'Observa la siguiente estructura: un anillo de benceno unido a un grupo −CO−Cl.',
+   q:'¿Cuál es su nombre IUPAC?',o:['cloruro de benzoílo','cloruro de bencilo','ácido clorobenzoico','benzoato de cloro']}
  ],
  nitrogenados:[
   {a:'nom',g:'aminas',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−NH₂',
@@ -984,7 +992,13 @@ var SABER={
   {a:'nom',g:'nitrilos',c:'uso',k:'CTS',ctx:'Las fibras acrílicas (como el orlón, usado en suéteres y cobijas) se fabrican a partir del monómero acrilonitrilo, CH₂=CH−C≡N.',
    q:'¿Qué grupos funcionales tiene el acrilonitrilo?',o:['Un doble enlace C=C y un grupo nitrilo (−C≡N)','Un triple enlace C≡C y un grupo amina','Dos grupos nitrilo','Un grupo amida y un grupo alcohol']},
   {a:'nom',g:'ambos',c:'uso',k:'Q',ctx:'El grupo −NH₂ de una amina primaria y el grupo −CO−NH₂ de una amida se confunden con facilidad porque los dos contienen nitrógeno e hidrógeno.',
-   q:'¿Cuál es la diferencia estructural clave entre los dos grupos?',o:['La amida tiene el nitrógeno unido a un carbono carbonilo (C=O); la amina tiene el nitrógeno unido directamente a un carbono de la cadena, sin C=O','La amina tiene el nitrógeno unido a un carbono con doble enlace a oxígeno; la amida tiene el nitrógeno unido a un carbono de la cadena','La amida tiene el nitrógeno unido a un oxígeno (N−O); la amina tiene el nitrógeno unido solo a carbonos e hidrógenos','La amida tiene un triple enlace entre carbono y nitrógeno; la amina tiene un enlace sencillo']}
+   q:'¿Cuál es la diferencia estructural clave entre los dos grupos?',o:['La amida tiene el nitrógeno unido a un carbono carbonilo (C=O); la amina tiene el nitrógeno unido directamente a un carbono de la cadena, sin C=O','La amina tiene el nitrógeno unido a un carbono con doble enlace a oxígeno; la amida tiene el nitrógeno unido a un carbono de la cadena','La amida tiene el nitrógeno unido a un oxígeno (N−O); la amina tiene el nitrógeno unido solo a carbonos e hidrógenos','La amida tiene un triple enlace entre carbono y nitrógeno; la amina tiene un enlace sencillo']},
+  {a:'nom',g:'aminas',c:'uso',k:'CTS',ctx:'La cadaverina, H₂N−CH₂−CH₂−CH₂−CH₂−CH₂−NH₂, se produce cuando bacterias degradan el aminoácido lisina y es responsable del olor de la materia orgánica en descomposición.',
+   q:'¿Cuál es su nombre IUPAC?',o:['pentano-1,5-diamina','N,N-pentilamina','pentan-1,5-diamida','1,5-diaminopentanol']},
+  {a:'nom',g:'aminas',c:'uso',k:'CTS',ctx:'La feniletilamina, presente en el chocolate, es un anillo de benceno unido a una cadena de dos carbonos que termina en un grupo −NH₂.',
+   q:'¿Cuál es su nombre IUPAC?',o:['2-feniletan-1-amina','1-feniletan-2-amina','N-fenilamina','feniletanoamida']},
+  {a:'rx',g:'amidas',c:'ind',k:'CTS',ctx:'Un fragmento de la hormona oxitocina tiene la secuencia Cys-Tyr-Ile-Gln-Asn-Cys-Pro-Leu-Gly (9 residuos de aminoácidos), unidos uno a uno por enlaces peptídicos.',
+   q:'¿Cuántos enlaces peptídicos hay en este fragmento?',o:['8','9','10','7']}
  ],
  polifuncionales:[
   {a:'nom',c:'uso',k:'Q',ctx:'El ácido láctico se forma en los músculos y en la fermentación del kumis. Su estructura es:',f:'CH₃−CH(OH)−COOH',
@@ -1026,7 +1040,9 @@ var SABER={
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH(NH₂)−CH₂−CH₃',
    q:'¿Cuál es su nombre IUPAC?',o:['butan-2-amina','butan-1-amina','butan-3-amina','butanamida']},
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH₂−CH(OH)−CO−CH₃',
-   q:'¿Cuál es su nombre IUPAC?',o:['3-hidroxipentan-2-ona','2-hidroxipentan-3-ona','4-hidroxipentan-2-ona','3-hidroxipentanal']}
+   q:'¿Cuál es su nombre IUPAC?',o:['3-hidroxipentan-2-ona','2-hidroxipentan-3-ona','4-hidroxipentan-2-ona','3-hidroxipentanal']},
+  {a:'rx',c:'uso',k:'CTS',ctx:'El herbicida 2,4-D (ácido 2,4-diclorofenoxiacético), uno de los más usados en el mundo contra malezas de hoja ancha, tiene un anillo de benceno con dos cloros, unido mediante un oxígeno a una cadena −CH₂−COOH.',
+   q:'¿Qué dos grupos funcionales tiene esta molécula, además del anillo aromático y los cloros?',o:['Un éter (el oxígeno que conecta el anillo con la cadena) y un ácido carboxílico','Un éter y un aldehído','Un alcohol y un ácido carboxílico','Un éster y un fenol']}
  ],
  isomeria:[
   {a:'nom',c:'uso',k:'Q',ctx:'El etanol (CH₃−CH₂−OH) y el metoximetano (CH₃−O−CH₃) tienen la misma fórmula molecular, C₂H₆O.',
@@ -1200,7 +1216,8 @@ var ABIERTAS={
   {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−COOH + CH₃−OH → ? (esterificación de Fischer, con H⁺ y calor). Escribe y nombra el éster que se forma (tiene aroma a piña).'},
   {g:'alcoholes',t:'rx',q:'(CH₃)₃C−OH + SOCl₂ → ? Escribe y nombra el producto orgánico y los dos subproductos gaseosos. ¿Por qué se prefiere este reactivo sobre HCl para un alcohol terciario?'},
   {g:'alcoholes',t:'rx',q:'Un alqueno se obtuvo por deshidratación ácida (H₂SO₄, calor) de un alcohol de partida; solo existía una posición posible para la eliminación. Si el alqueno es CH₃−CH₂−CH=CH₂, dibuja y nombra el alcohol de partida.'},
-  {g:'alcoholes',t:'con',q:'Propón una reacción (reactivos y condiciones) que permita obtener propan-2-ol. Escribe la ecuación completa y nombra el tipo de reacción.'}],
+  {g:'alcoholes',t:'con',q:'Propón una reacción (reactivos y condiciones) que permita obtener propan-2-ol. Escribe la ecuación completa y nombra el tipo de reacción.'},
+  {g:'alcoholes',t:'rx',q:'Un alcohol primario se oxida con CCP (oxidante suave) y se obtiene 3-metilbutanal. Dibuja y nombra el alcohol de partida.'}],
  carbonilos:[
   {g:'aldehidos',t:'rx',q:'CH₃−CHO + HCN → ? Escribe y nombra el producto (una cianohidrina).'},
   {g:'cetonas',t:'rx',q:'CH₃−CO−CH₃ + NaBH₄ (y luego agua) → ? Escribe y nombra el producto y di si es un alcohol 1°, 2° o 3°.'},
@@ -1218,7 +1235,9 @@ var ABIERTAS={
   {g:'acidos',t:'nom',q:'Escribe el nombre IUPAC del compuesto.',f:'CH₃−CH₂−CH(CH₃)−COOH'},
   {g:'ambos',t:'nom',q:'Dibuja la estructura del ácido 2-metilpropanoico y la del etanoato de metilo.'},
   {g:'acidos',t:'mdec',n:'ácido 3,3-dimetilbutanoico'},
-  {g:'acidos',t:'mdec',n:'ácido 2-metilpentanoico'}],
+  {g:'acidos',t:'mdec',n:'ácido 2-metilpentanoico'},
+  {g:'acidos',t:'rx',q:'CH₃−CH₂−COOH + SOCl₂ → ? Escribe y nombra el producto orgánico (un cloruro de ácido) y los dos subproductos gaseosos.'},
+  {g:'esteres',t:'nom',q:'Dibuja la estructura del 2-etilhex-3-enoato de isopropilo.'}],
  nitrogenados:[
   {g:'aminas',t:'rx',q:'CH₃−NH₂ + HCl → ? Escribe y nombra el producto y explica por qué la amina actúa como base.'},
   {g:'amidas',t:'rx',q:'CH₃−CO−NH₂ + H₂O → ? (con H⁺ y calor: hidrólisis de la amida). Escribe y nombra los productos.'},
@@ -1227,7 +1246,9 @@ var ABIERTAS={
   {g:'amidas',t:'nom',q:'Escribe el nombre IUPAC del compuesto.',f:'CH₃−CH(CH₃)−CO−NH₂'},
   {g:'ambos',t:'nom',q:'Dibuja la estructura de la propan-1-amina, de la N-metiletanamina y del propanonitrilo.'},
   {g:'amidas',t:'mdec',n:'3-metilbutanamida'},
-  {g:'nitrilos',t:'mdec',n:'butanonitrilo'}],
+  {g:'nitrilos',t:'mdec',n:'butanonitrilo'},
+  {g:'amidas',t:'rx',q:'Une el −COOH de la glicina (H₂N−CH₂−COOH) con el −NH₂ de la alanina (H₂N−CH(CH₃)−COOH) para formar el dipéptido Gly-Ala. Dibuja el enlace peptídico que se forma e indica qué molécula pequeña se libera.'},
+  {g:'amidas',t:'rx',q:'CH₃−CH₂−CH(CH₃)−COOH + CH₃−CH₂−NH₂ → ? (con calor, pérdida de agua). Escribe y nombra la amida que se forma.'}],
  polifuncionales:[
   {t:'rx',q:'CH₃−CO−CH₂−CH₂−CH₂−OH + NaBH₄ (y luego agua) → ? Escribe y nombra el producto.'},
   {t:'rx',q:'El ácido láctico, CH₃−CH(OH)−COOH, reacciona con NaOH. Escribe y nombra la sal que se forma.'},
@@ -1258,7 +1279,8 @@ var ABIERTAS={
   {t:'rx',q:'Benceno + Br₂ → ? (con FeBr₃). Escribe y nombra el producto y explica por qué es una sustitución y no una adición.'},
   {t:'rx',q:'CH₃−COOH + CH₃−OH → ? (con H⁺). Escribe y nombra el éster y di qué tipo de reacción es.'},
   {t:'nom',q:'Escribe el nombre del producto orgánico de cada reacción: a) propeno + HBr; b) propan-2-ol + CrO₃/H⁺.'},
-  {t:'mdec',n:'2-cloro-2-metilpropano'}]
+  {t:'mdec',n:'2-cloro-2-metilpropano'},
+  {t:'rx',q:'CH₂=CH₂ + H₂ → A (con catalizador de Ni). A + Cl₂ → B (con calor o luz). Escribe y nombra A y B, e indica qué tipo de reacción forma cada uno.'}]
 };
 
 window.DOCENTE_DATOS={ALINEACION:ALINEACION,TEMAS:TEMAS,SABER:SABER,ABIERTAS:ABIERTAS};

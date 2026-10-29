@@ -7,6 +7,53 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (95) — Docente: amplía SABER/ABIERTAS con 5 bimestrales de 2023 (aromáticos, carbonilos, ácidos, nitrogenados, polifuncionales, reacciones, alcoholes)
+
+### Contexto
+Continuación de la minería de material viejo de la docente: 5 evaluaciones
+bimestrales de 2023 (periodos II/III/IV, Colegio CAFAM). Se confirmó que
+dos pares de archivos eran la misma evaluación en distinta revisión
+(`11_-BIM_QU_MICA-IVP_V3-2023.pdf` y `CUARTO_PERIODO_V2.pdf` comparten
+tablas y ejercicios iniciales) — de ahí no salió nada nuevo; el resto sí.
+
+### Qué se hizo (`docente-datos.js`)
+- **`SABER`**: 8 preguntas nuevas — 2 de aromáticos (ácido salicílico:
+  prioridad COOH sobre OH; 2,4,6-triclorofenol: localizadores), 1 de
+  carbonilos (cinamaldehído), 1 de ácidos (cloruro de benzoílo), 1 de
+  polifuncionales (grupos funcionales del herbicida 2,4-D), 3 de
+  nitrogenados (cadaverina, feniletilamina, conteo de enlaces peptídicos
+  en un fragmento de oxitocina).
+- **`ABIERTAS`**: 6 preguntas nuevas — 1 de reacciones (hidrogenación de
+  eteno seguida de cloración, 2 pasos), 1 de alcoholes (retrosíntesis desde
+  un aldehído obtenido con CCP), 2 de ácidos (SOCl₂ sobre ácido propanoico;
+  nomenclatura→estructura de un éster con nombre compuesto), 2 de
+  nitrogenados (formación del dipéptido Gly-Ala; formación de una amida
+  desde ácido y amina).
+
+### Qué se descartó
+Nomenclatura de anhídridos de ácido (grupo funcional que ninguna guía del
+sitio cubre — no se introduce sin que se pida explícitamente); 2 preguntas
+de IDH de un PDF de aromáticos (el IDH ya se agregó, pero en la guía de
+isomería, no en aromáticos — no corresponde mezclarlo ahí); tripéptidos
+largos (no caben bien en el formato de `ABIERTAS`); una pregunta sobre
+salicilato de bencilo cuya opción "correcta" en el PDF original mezclaba
+fenilo/bencilo de forma inconsistente (no se pudo verificar); reconocimiento
+de grupo amina en una estructura que en realidad era una imina (concepto no
+enseñado); la regla de Zaitsev (no se confirmó que esté enseñada en el
+sitio).
+
+### Verificación
+Playwright (Chromium): se generaron evaluaciones con los 7 temas afectados
+a la vez, en 4 variantes distintas, sin errores de consola.
+
+### Pendiente
+Con esto quedan integradas las dos exploraciones de material viejo que la
+docente subió esta sesión (10 PDFs de 2024 + 5 bimestrales de 2023). No se
+tocó `chromanom-analytics.gs`, así que no hace falta redesplegar ni
+recalcular nada.
+
+---
+
 ## 2026-10-29 (94) — Isomería: agrega la sección del IDH a `isomeria.html`
 
 ### Contexto
