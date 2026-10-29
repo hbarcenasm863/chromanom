@@ -7,6 +7,39 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (150) — Animación 3D: los orbitales del carbono se mezclan (hibridación)
+
+### Contexto
+El docente pidió animaciones que muestren cómo se ve la hibridación de los
+orbitales al cambiar de forma, como en un video de YouTube que compartió.
+El video no se pudo abrir desde esta sesión (YouTube está bloqueado en la
+red del entorno), así que se construyó la representación habitual de esos
+videos: los orbitales s y p que se funden y salen convertidos en híbridos.
+
+### `carbono.html` — nueva sección «Mira cómo se mezclan los orbitales»
+- Entre «Promoción e hibridación» y «sp³, sp² y sp en 3D», con su enlace en
+  el índice de la página.
+- Modelo 3D que gira solo y se puede arrastrar: el 2s (esfera azul) y los
+  tres 2p (dos lóbulos verdes sobre los ejes x, y, z).
+- Botones «Sin mezclar · sp³ · sp² · sp»: los orbitales que participan se
+  encogen hacia el núcleo tomando el mismo color y luego salen como
+  híbridos (lóbulo grande + lóbulo pequeño) en sus nuevas direcciones:
+  tetraédrica (4 sp³), trigonal plana (3 sp² + 1 p verde perpendicular) o
+  lineal (2 sp + 2 p verdes). Al pasar de un híbrido a otro, primero vuelve
+  a «sin mezclar».
+- Fichas que llevan la cuenta (2s 2p 2p 2p → sp³ sp³ sp³ sp³, etc.),
+  explicación de cada caso y la idea clave «los orbitales no se crean ni
+  se pierden; los p sobrantes forman los enlaces π».
+- Con «reducir movimiento» activado en el dispositivo, cambia sin animar.
+- `sw.js`: caché `chromanom-v49`.
+
+### Pendiente
+- Si el video muestra algo distinto (por ejemplo, la superposición de
+  orbitales al formar los enlaces del metano o del eteno), el docente
+  puede describirlo para ajustarlo.
+
+---
+
 ## 2026-10-29 (149) — Auditoría de química, didáctica (Mayer) y estilo de la Fase 1, isomería y portada
 
 ### Contexto

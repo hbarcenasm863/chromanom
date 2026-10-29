@@ -55,6 +55,7 @@
 <nav class="toc" aria-label="Secciones de la página">
   <a href="#atomo">El átomo de carbono</a>
   <a href="#promocion">Promoción e hibridación</a>
+  <a href="#mezcla">Los orbitales se mezclan</a>
   <a href="#formas">sp³, sp² y sp en 3D</a>
   <a href="#enlaces">Enlaces σ y π</a>
   <a href="#reto">Reto: ¿qué hibridación tiene?</a>
@@ -119,6 +120,28 @@
   </div>
   <div class="key">🔑 <b>Hibridar</b> es «mezclar» orbitales de distinta forma y energía (el 2s y uno, dos o tres 2p) para obtener orbitales <b>nuevos e iguales</b> entre sí. El número de orbitales híbridos es igual al número de orbitales que se mezclan.</div>
   <div class="key" style="border-left-color:#7c3aed;background:#f5f3ff">🧩 <b>Dos palabras que vas a usar desde ya:</b> un enlace <b>σ (sigma)</b> se forma cuando dos orbitales se solapan <b>de frente</b>, en la línea que une los átomos: todo enlace sencillo es σ. Un enlace <b>π (pi)</b> se forma cuando dos orbitales p sin hibridar se solapan <b>de lado</b>: aparece en los dobles y triples enlaces. Más abajo los estudias en detalle.</div>
+</section>
+
+<!-- ═══════════════ 2b. MEZCLA DE ORBITALES EN 3D ═══════════════ -->
+<section class="sec" id="mezcla">
+  <div class="sec-kicker">Animación 3D</div>
+  <h2>Mira cómo se mezclan los orbitales</h2>
+  <p>Así se ven en el espacio los orbitales del carbono. El <b style="color:#2563eb">2s</b> es una esfera y cada <b style="color:#16a34a">2p</b> tiene dos lóbulos sobre un eje (x, y o z). Al hibridarse, los que participan se funden y salen convertidos en orbitales <b>nuevos e iguales</b>, con un lóbulo grande que apunta hacia donde se formará el enlace. Elige una hibridación y <b>arrastra</b> el modelo para girarlo.</p>
+  <div class="lab">
+    <div class="lab-view">
+      <span class="lab-badge" id="mz-badge">2s + 2p</span>
+      <svg id="mz" viewBox="-150 -145 300 270" role="img" aria-label="Animación en 3D de los orbitales del carbono mezclándose para formar orbitales híbridos"></svg>
+    </div>
+    <div class="lab-ctl">
+      <div class="seg" id="mz-seg" role="group" aria-label="Elige qué ver">
+        <button type="button" data-k="pure">Sin mezclar</button><button type="button" data-k="sp3">sp³</button><button type="button" data-k="sp2">sp²</button><button type="button" data-k="sp">sp</button>
+      </div>
+      <div class="chips-row" id="mz-cuenta" aria-hidden="true" style="margin-top:0"></div>
+      <div class="lab-msg" id="mz-msg" aria-live="polite"></div>
+      <div class="links-row"><button type="button" class="btn-sm" id="mz-otra">▶ Ver la mezcla otra vez</button></div>
+    </div>
+  </div>
+  <div class="key">🔑 Fíjate en la cuenta: <b>los orbitales no se crean ni se pierden</b>. Si se mezclan 4 (1 s + 3 p) salen 4 sp³; si se mezclan 3, salen 3 sp² y queda <b>1 p</b> sin mezclar; si se mezclan 2, salen 2 sp y quedan <b>2 p</b>. Esos p sobrantes son los que forman los enlaces π.</div>
 </section>
 
 <!-- ═══════════════ 3. LAS TRES FORMAS ═══════════════ -->
@@ -260,6 +283,109 @@ var FU=window.FUND;
     '<div class="fig">'+FU.geo.sp3()+'<div class="fig-cap">sp³ · tetraédrica</div><div class="fig-sub">La cuña negra sale hacia ti; la cuña rayada va hacia atrás.</div></div>'+
     '<div class="fig">'+FU.geo.sp2(true)+'<div class="fig-cap">sp² · trigonal plana</div><div class="fig-sub">C y H en un mismo plano (120°). El orbital p (morado) sale perpendicular al plano y forma el enlace π.</div></div>'+
     '<div class="fig">'+FU.geo.sp()+'<div class="fig-cap">sp · lineal</div><div class="fig-sub">Todo en línea recta.</div></div>';
+})();
+
+// ── Mezcla de orbitales en 3D ──
+// Cada orbital se dibuja como dos lóbulos (elipses proyectadas desde 3D):
+// el s es una esfera, el p dos lóbulos iguales y el híbrido un lóbulo grande
+// y uno pequeño detrás. Al hibridar, los orbitales que participan se funden
+// en el centro (mismo color) y salen en las direcciones de la nueva forma.
+(function(){
+  var svg=document.getElementById('mz');if(!svg)return;
+  var S=78,ay=0.6,ax=-0.32,drag=null,pausa=false;
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CS='#2563eb',CP='#16a34a',HC={sp3:'#0f766e',sp2:'#7c3aed',sp:'#c2410c'};
+  var ESF={fo:0,fl:.42,fw:.42,bo:0,bl:.01,bw:.01},PP={fo:.56,fl:.56,fw:.29,bo:-.56,bl:.56,bw:.29},
+      HY={fo:.74,fl:.74,fw:.37,bo:-.17,bl:.17,bw:.16},MX={fo:0,fl:.3,fw:.3,bo:0,bl:.01,bw:.01};
+  var X=[1,0,0],Y=[0,1,0],Z=[0,0,1];
+  // orbitales: 0 = s, 1 = px, 2 = py, 3 = pz
+  var PURO=[{d:Y,f:ESF,c:CS},{d:X,f:PP,c:CP},{d:Y,f:PP,c:CP},{d:Z,f:PP,c:CP}];
+  var T={
+    sp3:{dirs:[[0,1,0],[.943,-.333,0],[-.471,-.333,-.816],[-.471,-.333,.816]],n:4,ang:'109,5°',geo:'tetraédrica'},
+    sp2:{dirs:[[0,1,0],[.866,-.5,0],[-.866,-.5,0],null],n:3,ang:'120°',geo:'trigonal plana'},
+    sp:{dirs:[[-1,0,0],[1,0,0],null,null],n:2,ang:'180°',geo:'lineal'}
+  };
+  var MSG={
+    pure:'<b>Sin mezclar:</b> el 2s (esfera azul) y los tres 2p (px, py, pz), cada uno sobre su eje y a 90° de los otros. Con esta forma el carbono no podría hacer 4 enlaces iguales.',
+    sp3:'<b>sp³:</b> se mezclan <b>1 s + 3 p</b> y salen <b>4 orbitales sp³</b> iguales, que se separan al máximo: forma <b>tetraédrica</b>, 109,5°. No queda ningún p: solo enlaces sencillos (σ), como en el metano.',
+    sp2:'<b>sp²:</b> se mezclan <b>1 s + 2 p</b> y salen <b>3 orbitales sp²</b> en un plano, a 120° (trigonal plana). El <b>p que no se mezcla</b> (verde) queda perpendicular al plano: con él se forma el enlace π del doble enlace.',
+    sp:'<b>sp:</b> se mezclan <b>1 s + 1 p</b> y salen <b>2 orbitales sp</b> opuestos, a 180° (lineal). Quedan <b>2 p sin mezclar</b> (verdes), perpendiculares entre sí: forman los dos enlaces π del triple enlace.'
+  };
+  var CUENTA={pure:['2s','2p','2p','2p'],sp3:['sp³','sp³','sp³','sp³'],sp2:['sp²','sp²','sp²','p'],sp:['sp','sp','p','p']};
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function mezclaCol(a,b,t){var pa=parseInt(a.slice(1),16),pb=parseInt(b.slice(1),16),o='#';
+    [16,8,0].forEach(function(k){var v=Math.round(lerp(pa>>k&255,pb>>k&255,t));o+=(v<16?'0':'')+v.toString(16);});return o;}
+  function norm(v){var L=Math.hypot(v[0],v[1],v[2])||1;return [v[0]/L,v[1]/L,v[2]/L];}
+  function forma(a,b,t){var o={};for(var k in a)o[k]=lerp(a[k],b[k],t);return o;}
+  // Estado de cada orbital al avanzar t (0 → 1) desde «sin mezclar» hasta el híbrido k
+  function estado(k,t){
+    if(k==='pure'||t<=0)return PURO;
+    var tg=T[k],e=t*t*(3-2*t);
+    return PURO.map(function(o,i){
+      var dir=tg.dirs[i];if(!dir)return o; // p que no participa
+      if(e<.5){var u=e/.5;return {d:o.d,f:forma(o.f,MX,u),c:mezclaCol(o.c,HC[k],u)};}
+      var u2=(e-.5)/.5;return {d:norm([lerp(o.d[0],dir[0],u2),lerp(o.d[1],dir[1],u2),lerp(o.d[2],dir[2],u2)]),f:forma(MX,HY,u2),c:HC[k]};
+    });
+  }
+  function pr(p){
+    var ca=Math.cos(ay),sa=Math.sin(ay),cb=Math.cos(ax),sb=Math.sin(ax);
+    var x=p[0]*ca+p[2]*sa,z=-p[0]*sa+p[2]*ca,y=p[1]*cb-z*sb,z2=p[1]*sb+z*cb,k=1+z2*0.12;
+    return {x:x*S*k,y:-y*S*k,z:z2,k:k};
+  }
+  function lobulo(d,off,l,w,col,op){
+    if(w<.02)return null;
+    var c=[d[0]*off,d[1]*off,d[2]*off],pc=pr(c),pt=pr([c[0]+d[0]*l,c[1]+d[1]*l,c[2]+d[2]*l]);
+    var vx=pt.x-pc.x,vy=pt.y-pc.y,L=Math.hypot(vx,vy),ry=w*S*pc.k,rx=Math.max(L,ry),ang=Math.atan2(vy,vx)*180/Math.PI;
+    return {z:pc.z,h:'<ellipse cx="'+pc.x.toFixed(1)+'" cy="'+pc.y.toFixed(1)+'" rx="'+rx.toFixed(1)+'" ry="'+ry.toFixed(1)+'" transform="rotate('+ang.toFixed(1)+' '+pc.x.toFixed(1)+' '+pc.y.toFixed(1)+')" fill="'+col+'" fill-opacity="'+op+'" stroke="'+col+'" stroke-opacity=".85" stroke-width="1.3"/>'};
+  }
+  var actual='pure',seg=null,orbs=PURO;
+  function dibuja(){
+    var it=[],ejes='';
+    var aOp=actual==='pure'&&!seg?.55:.22;
+    [[X,'x'],[Y,'y'],[Z,'z']].forEach(function(a){var p=pr([a[0][0]*1.45,a[0][1]*1.45,a[0][2]*1.45]),q=pr([-a[0][0]*1.45,-a[0][1]*1.45,-a[0][2]*1.45]);
+      ejes+='<line x1="'+q.x.toFixed(1)+'" y1="'+q.y.toFixed(1)+'" x2="'+p.x.toFixed(1)+'" y2="'+p.y.toFixed(1)+'" stroke="#94a3b8" stroke-opacity="'+aOp+'" stroke-width="1.2" stroke-dasharray="4 4"/>'+
+        '<text x="'+(p.x*1.06).toFixed(1)+'" y="'+(p.y*1.06).toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-family="JetBrains Mono,monospace" font-size="12" font-weight="800" fill="#64748b" fill-opacity="'+aOp+'">'+a[1]+'</text>';});
+    orbs.forEach(function(o){
+      var a=lobulo(o.d,o.f.fo,o.f.fl,o.f.fw,o.c,.42),b=lobulo(o.d,o.f.bo,o.f.bl,o.f.bw,o.c,.2);
+      if(a)it.push(a);if(b)it.push(b);
+    });
+    it.push({z:0.001,h:'<circle r="9" fill="#0d2233"/><text y="0.5" text-anchor="middle" dominant-baseline="central" font-family="Outfit,sans-serif" font-size="10" font-weight="800" fill="#fff">C</text>'});
+    it.sort(function(p,q){return p.z-q.z;});
+    svg.innerHTML=ejes+it.map(function(x){return x.h;}).join('');
+  }
+  function textos(k){
+    document.getElementById('mz-msg').innerHTML=MSG[k];
+    document.getElementById('mz-badge').textContent=k==='pure'?'2s + 2p':k==='sp3'?'1 s + 3 p → 4 sp³':k==='sp2'?'1 s + 2 p → 3 sp² + 1 p':'1 s + 1 p → 2 sp + 2 p';
+    document.getElementById('mz-cuenta').innerHTML=CUENTA[k].map(function(t){var c=t==='2s'?CS:(t==='p'||t==='2p')?CP:HC[k];
+      return '<span style="display:inline-flex;align-items:center;justify-content:center;min-width:46px;padding:4px 10px;border-radius:999px;font-family:JetBrains Mono,monospace;font-weight:800;font-size:.84rem;color:#fff;background:'+c+'">'+t+'</span>';}).join('');
+    document.querySelectorAll('#mz-seg button').forEach(function(b){var on=b.dataset.k===k,c=b.dataset.k==='pure'?'#1a6ea8':HC[b.dataset.k];b.classList.toggle('on',on);b.style.background=on?c:'';b.style.borderColor=on?c:'';});
+  }
+  // Cola de tramos: desde un híbrido se vuelve primero a «sin mezclar»
+  var cola=[];
+  function ir(k,repetir){
+    cola=[];seg=null;
+    if(actual!=='pure'&&(k!==actual||repetir))cola.push({k:actual,de:1,a:0,dur:900});
+    if(k!=='pure'&&(k!==actual||repetir))cola.push({k:k,de:0,a:1,dur:1900});
+    if(quieto){cola=[];orbs=estado(k,1);actual=k;textos(k);dibuja();return;}
+    textos(k);sig();
+  }
+  function sig(){seg=cola.shift()||null;if(seg)seg.t0=performance.now();}
+  var last=performance.now();
+  function tick(now){
+    var dt=Math.min(.1,(now-last)/1000);last=now;
+    if(!pausa&&!drag&&!quieto&&!document.hidden)ay+=dt*0.45;
+    if(seg){var u=Math.min(1,(now-seg.t0)/seg.dur);orbs=estado(seg.k,lerp(seg.de,seg.a,u));
+      if(u>=1){actual=seg.a===1?seg.k:'pure';sig();}}
+    else orbs=estado(actual,1);
+    dibuja();requestAnimationFrame(tick);
+  }
+  svg.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,ay:ay,ax:ax};try{svg.setPointerCapture(e.pointerId);}catch(_){}});
+  svg.addEventListener('pointermove',function(e){if(!drag)return;ay=drag.ay+(e.clientX-drag.x)*0.012;ax=Math.max(-1.4,Math.min(1.4,drag.ax+(e.clientY-drag.y)*0.01));if(quieto)dibuja();});
+  ['pointerup','pointercancel'].forEach(function(t){svg.addEventListener(t,function(){drag=null;});});
+  svg.style.cursor='grab';svg.style.touchAction='none';
+  document.getElementById('mz-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)ir(b.dataset.k);});
+  document.getElementById('mz-otra').addEventListener('click',function(){ir(actual==='pure'?'sp3':actual,true);});
+  textos('pure');dibuja();requestAnimationFrame(tick);
 })();
 
 // ── Reto: hibridación de cada carbono ──
