@@ -92,7 +92,14 @@ var bancosListos=Promise.all([
     B.J={w:w,M:leer(w,'M')||{},MOLDES:leer(w,'MOLDES')||{},SKT:leer(w,'SKT')||{},mkDevSVG:leer(w,'mkDevSVG')};
     B.jue=todos;B.jueLabels=leer(w,'NIVEL_LABELS')||{};B.estado.jue=todos.length?'ok':'error';
   }).catch(function(){B.estado.jue='error';})
-]).then(function(){prepararTemas();pintarEstado();});
+]).then(function(){prepararTemas();pintarEstado();
+  // Laberintos y crucigramas (laberinto.js, crucigrama.js) usan los mismos
+  // bancos ya cargados: moléculas y dibujos del Generador, reacciones.
+  window.DOCENTE_BANCOS=B;
+  // Dibujo compacto «estilo libro» (el mismo de las hojas impresas).
+  window.DOCENTE_FIGURA=function(spec,wMax,hMax){return figura(spec,wMax,hMax);};
+  document.dispatchEvent(new Event('docente-bancos-listos'));
+});
 
 /* ── Dibujo de estructuras ───────────────────────────────────────────── */
 function tamSvg(svg,wMax,hMax,sMax,sMin){

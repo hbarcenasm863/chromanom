@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (147) — Generador docente en pestañas, con laberintos y crucigramas (adaptados de IonNom)
+
+### Contexto
+El docente pidió separar en pestañas lo que hace el generador (como en
+IonNom) y traer desde IonNom sus otros tipos de actividad —laberintos y
+crucigramas—, adaptados a la química orgánica de ChromaNom.
+
+### Pestañas (`docente.html`)
+- **📘 Guías · ✏️ Talleres · 📝 Evaluaciones · 🧭 Laberintos · 🔤 Crucigramas
+  · 📖 Orientaciones.** Las tres primeras comparten el formulario de siempre:
+  cada pestaña fija el tipo de documento (el antiguo apartado «1 ·
+  Documento» quedó oculto), muestra una breve explicación y solo los
+  apartados que le aplican, renumerados. Se recuerda la última pestaña y
+  `docente.html#talleres`, `#laberintos`, etc. abren directo esa.
+- La regla de página de las guías (carta vertical con márgenes) pasó a un
+  bloque propio (`estilo-pagina-guias`) que laberintos y crucigramas
+  desactivan mientras imprimen: con ella activa cada laberinto salía
+  partido en dos páginas.
+
+### Laberintos (`laberinto.js`, nuevo)
+Motor de IonNom: casillas A, B, C…; en cada una se resuelve un ejercicio y
+se sigue la flecha con la respuesta hasta FIN. **Ruta única verificada**
+(ninguna salida falsa es aceptada, desde una casilla trampa nunca se llega
+a FIN), casillas trampa, 4 tamaños, «ejercicios hasta FIN», hasta 40
+versiones con código para reimprimir, hoja de clave, modo **Jugar** en
+pantalla (tarjeta grande en celular, pantalla completa) e impresión en carta
+horizontal. Tres modos:
+- **Nomenclatura orgánica:** estructura → nombre IUPAC (distractores con
+  errores típicos: numerar desde el otro extremo, orden alfabético, quitar
+  di-/tri-, localizador corrido; y nombres de la misma familia) y
+  estructura → familia. Moléculas del Generador, dibujadas en el estilo
+  compacto de las hojas impresas; se descartan las que quedarían ilegibles.
+- **El carbono e isomería:** preguntas cortas del banco de la Fase 1
+  (`fundamentos.js`).
+- **Tipos de reacción:** 86 reacciones del banco (sin las de nivel
+  universitario); acepta también las respuestas equivalentes (la combustión
+  es una oxidación; esterificación e hidrólisis de ésteres son sustituciones).
+
+### Crucigramas (`crucigrama.js`, nuevo)
+Motor de IonNom: cuadrícula verificada (todas las palabras conectadas, sin
+palabras accidentales, sin respuestas repetidas), versiones, clave, modo
+**Resolver** en pantalla e impresión en carta vertical. Pistas:
+- **Fórmula → nombre:** 99 compuestos sin localizadores, con la fórmula
+  semidesarrollada en una línea (CH₃−CH₂−CHO → PROPANAL).
+- **Grupos funcionales, prefijos y terminaciones.**
+- **Glosarios:** el carbono, isomería y reacciones.
+
+### Otros
+- `docente-app.js` comparte sus bancos ya cargados (`DOCENTE_BANCOS`) y su
+  dibujo compacto (`DOCENTE_FIGURA`) con laberintos y crucigramas.
+- `actividades.css` (nuevo): estilos de los controles y de las hojas.
+- `sw.js`: caché `chromanom-v46`.
+
+### Verificación
+Playwright: 144 laberintos (3 modos × 4 tamaños × 12 semillas) y 70
+crucigramas (7 combinaciones × 10 semillas) pasan su verificación; jugar
+hasta FIN en PC y celular; impresión de 4 versiones + claves en 8 páginas
+exactas (laberinto horizontal, crucigrama vertical); guías, talleres y
+evaluaciones siguen generándose igual.
+
+### Pasos manuales
+- Ninguno (GitHub Pages).
+
+---
+
 ## 2026-10-28 (146) — Narración también en Principios, Grupos y Reacciones
 
 ### Contexto

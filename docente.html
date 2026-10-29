@@ -120,7 +120,6 @@ details.faq .r{padding:0 18px 16px 38px;color:#3d5166}
 
 /* ── IMPRESIÓN ── */
 @media print{
-  @page{size:letter;margin:12mm 11mm!important}
   html,body{background:#fff!important;font-size:10.5pt!important;display:block}
   .doc-tools,.toc,.no-print{display:none!important}
   .app{max-width:none;padding:0}
@@ -389,6 +388,11 @@ body.sin-eval .solo-eval{display:none}
 .hoja .t-rub th:first-child{background:#0d4a73;color:#fff}
 </style>
 <link rel="stylesheet" href="chromanom.css">
+<link rel="stylesheet" href="actividades.css">
+<!-- Página de las guías, talleres y evaluaciones (carta vertical con márgenes).
+     Laberintos y crucigramas lo desactivan mientras imprimen (media="not all"):
+     con esta regla activa cada laberinto salía partido en dos páginas. -->
+<style id="estilo-pagina-guias">@media print{@page{size:letter;margin:12mm 11mm!important}}</style>
 </head>
 <body class="tab-gen">
 <nav class="site-nav">
@@ -409,8 +413,8 @@ body.sin-eval .solo-eval{display:none}
 <div class="app">
   <header class="cn-page-head cn-in">
     <span class="cn-eyebrow">📘 Para docentes</span>
-    <h1>Guías, talleres y evaluaciones</h1>
-    <p>Arme en minutos una guía de 4 sesiones (aprendizajes previos, información, trabajo práctico y evaluación aparte), un taller o una evaluación tipo Saber 11, con los ejercicios de ChromaNom y alineada con los aprendizajes priorizados, los Estándares y los DBA.</p>
+    <h1>Generador para docentes</h1>
+    <p>Arme en minutos guías de 4 sesiones, talleres, evaluaciones tipo Saber 11, laberintos y crucigramas imprimibles con los ejercicios de ChromaNom, con versiones reproducibles para evitar la copia entre estudiantes.</p>
     <div class="cn-legend" aria-label="Colores del método MDEC">
       <span class="cn-chip r">① Sustituyentes</span>
       <span class="cn-chip c">② Cadena principal</span>
@@ -419,15 +423,25 @@ body.sin-eval .solo-eval{display:none}
     </div>
   </header>
 
-  <div class="tabs" role="tablist" aria-label="Secciones de la página">
-    <button type="button" role="tab" id="tab-gen" aria-controls="panel-gen" aria-selected="true">🛠️ Generador de guías</button>
-    <button type="button" role="tab" id="tab-ori" aria-controls="panel-ori" aria-selected="false">🧭 Orientaciones para usar ChromaNom</button>
+  <!-- Pestañas: Guías, Talleres y Evaluaciones comparten el formulario
+       #panel-gen (cada una fija el tipo de documento); Laberintos y
+       Crucigramas tienen su propio panel (laberinto.js, crucigrama.js). -->
+  <div class="tabs" role="tablist" aria-label="Tipo de material">
+    <button type="button" role="tab" id="tab-guias" data-tab="guias" data-panel="gen" data-tipo="guia" aria-controls="panel-gen" aria-selected="true">📘 Guías</button>
+    <button type="button" role="tab" id="tab-talleres" data-tab="talleres" data-panel="gen" data-tipo="taller" aria-controls="panel-gen" aria-selected="false" tabindex="-1">✏️ Talleres</button>
+    <button type="button" role="tab" id="tab-evaluaciones" data-tab="evaluaciones" data-panel="gen" data-tipo="evaluacion" aria-controls="panel-gen" aria-selected="false" tabindex="-1">📝 Evaluaciones</button>
+    <button type="button" role="tab" id="tab-laberintos" data-tab="laberintos" data-panel="lab" aria-controls="panel-lab" aria-selected="false" tabindex="-1">🧭 Laberintos</button>
+    <button type="button" role="tab" id="tab-crucigramas" data-tab="crucigramas" data-panel="cz" aria-controls="panel-cz" aria-selected="false" tabindex="-1">🔤 Crucigramas</button>
+    <button type="button" role="tab" id="tab-ori" data-tab="orientaciones" data-panel="ori" aria-controls="panel-ori" aria-selected="false" tabindex="-1">📖 Orientaciones</button>
   </div>
 
-  <section class="panel" id="panel-gen" role="tabpanel" aria-labelledby="tab-gen">
+  <section class="panel" id="panel-gen" role="tabpanel" aria-labelledby="tab-guias">
+    <div class="tipo-intro" data-solo="guia"><strong>📘 Guía de aprendizaje</strong> Cuatro sesiones: aprendizajes previos, información del tema, trabajo práctico y la evaluación en hojas aparte.</div>
+    <div class="tipo-intro" data-solo="taller" hidden><strong>✏️ Taller</strong> Hojas de ejercicios de práctica (nombrar, dibujar, partes del nombre, reacciones, cazar errores, selección múltiple y ejercicios abiertos).</div>
+    <div class="tipo-intro" data-solo="evaluacion" hidden><strong>📝 Evaluación</strong> Preguntas tipo Saber 11 de selección múltiple y preguntas abiertas, con hoja de respuestas y rúbricas opcionales.</div>
     <div class="gen-grid">
       <form id="gen-form" class="cn-card" onsubmit="return false" aria-label="Configuración del documento">
-        <fieldset>
+        <fieldset hidden>
           <legend>1 · Documento</legend>
           <div class="radios">
             <label class="opt"><input type="radio" name="tipodoc" value="guia" checked> <span><b>Guía completa</b><small>4 sesiones + evaluación en hojas aparte</small></span></label>
@@ -517,6 +531,145 @@ body.sin-eval .solo-eval{display:none}
     </div>
   </section>
 
+  <!-- ══════════════ LABERINTOS (laberinto.js) ══════════════ -->
+  <section class="panel act-panel" id="panel-lab" role="tabpanel" aria-labelledby="tab-laberintos" hidden>
+   <div id="lab-app" data-mode="nom">
+    <div class="tipo-intro"><strong>🧭 Laberinto</strong> Una hoja con casillas A, B, C…: en cada una el estudiante resuelve un ejercicio y sigue la flecha rotulada con su respuesta hasta llegar a FIN. Solo hay una ruta correcta; algunas casillas son trampas. Se puede imprimir o jugar en pantalla.</div>
+    <div class="act-sect">
+      <h2>1 · Tipo de laberinto</h2>
+      <div class="act-modos">
+        <label class="opt"><input type="radio" name="lab-mode" value="nom" checked> <span><b>Nomenclatura orgánica</b><small>Estructura → nombre IUPAC o familia del compuesto</small></span></label>
+        <label class="opt"><input type="radio" name="lab-mode" value="fund"> <span><b>El carbono e isomería</b><small>Hibridación, tipos de carbono, cadenas e isomería</small></span></label>
+        <label class="opt"><input type="radio" name="lab-mode" value="rx"> <span><b>Tipos de reacción</b><small>Clasificar reacciones del banco</small></span></label>
+      </div>
+    </div>
+    <div class="act-sect">
+      <h2>2 · Contenido</h2>
+      <p class="ayuda">Las casillas salen de los mismos bancos del Juego, del Generador y de las páginas de la Fase 1.</p>
+      <div class="lab-only lab-nom">
+        <p class="sub-leg">Tipo de pregunta</p>
+        <div class="act-chks" id="lab-fs-forma">
+          <label class="opt"><input type="checkbox" value="f2n" checked> <span><b>Estructura → nombre</b><small>Distractores con errores típicos: numeración, orden alfabético, di-/tri-</small></span></label>
+          <label class="opt"><input type="checkbox" value="fam" checked> <span><b>Estructura → familia</b><small>Alcohol, cetona, éster, amina…</small></span></label>
+        </div>
+        <p class="sub-leg">Familias de compuestos</p>
+        <div class="act-chks act-fam" id="lab-fs-fam"></div>
+      </div>
+      <div class="lab-only lab-fund">
+        <div class="act-chks" id="lab-fs-fund">
+          <label class="opt"><input type="checkbox" value="hibridacion" checked> <span><b>Átomo de carbono e hibridación</b><small></small></span></label>
+          <label class="opt"><input type="checkbox" value="tipos_carbono" checked> <span><b>Tipos de carbono</b><small></small></span></label>
+          <label class="opt"><input type="checkbox" value="cadenas" checked> <span><b>Clasificación de cadenas</b><small></small></span></label>
+          <label class="opt"><input type="checkbox" value="isomeria"> <span><b>Isomería</b><small></small></span></label>
+        </div>
+      </div>
+      <div class="lab-only lab-rx">
+        <p class="ayuda" id="lab-rx-info">Sustitución, adición, eliminación, combustión, oxidación, reducción, neutralización, hidrólisis, esterificación y polimerización.</p>
+      </div>
+    </div>
+    <div class="act-sect">
+      <h2>3 · Hoja y versiones</h2>
+      <div class="campos">
+        <label>Tamaño <select id="lab-size"><option value="3x3">3×3 · 8 casillas</option><option value="4x3" selected>4×3 · 11 casillas</option><option value="4x4">4×4 · 15 casillas</option><option value="5x4">5×4 · 19 casillas</option></select></label>
+        <label>Ejercicios hasta FIN <select id="lab-paradas"></select></label>
+        <label>Título <input type="text" id="lab-title" maxlength="40"></label>
+        <label>Versiones paralelas (1 a 40) <input type="number" inputmode="numeric" id="lab-nver" value="4" min="1" max="40" step="1"></label>
+        <label>Versión en pantalla <select id="lab-vsel"></select></label>
+      </div>
+      <p class="ayuda">Cada versión tiene ejercicios y ruta distintos. «Ejercicios hasta FIN» son las casillas que se resuelven en la ruta correcta; las demás son casillas trampa. La ruta solo avanza a la derecha, hacia abajo o en diagonal.</p>
+      <details class="act-adv"><summary>Volver a generar hojas de otro día</summary>
+        <p class="ayuda">Escriba el código que aparece en la hoja de clave para obtener exactamente las mismas hojas.</p>
+        <label class="campo">Código de la hoja de clave <input type="text" id="lab-seed" maxlength="20" autocomplete="off"></label>
+      </details>
+    </div>
+    <div class="act-bar">
+      <button type="button" class="cn-btn cn-btn--secondary" id="lab-btn-seed">🎲 Generar nuevo laberinto</button>
+      <div class="act-seg" id="lab-seg" role="group" aria-label="Vista">
+        <button type="button" data-view="sheet" class="on" aria-pressed="true">📄 Hoja</button>
+        <button type="button" data-view="play" aria-pressed="false">🎮 Jugar</button>
+        <button type="button" data-view="key" aria-pressed="false">🔑 Clave</button>
+      </div>
+      <button type="button" class="cn-btn cn-btn--secondary" id="lab-fs-btn" style="display:none">⛶ Pantalla completa</button>
+      <button type="button" class="cn-btn cn-btn--secondary" id="lab-restart2" style="display:none">↺ Reiniciar</button>
+      <button type="button" class="cn-btn cn-btn--primary" id="lab-btn-print">🖨️ Imprimir versiones</button>
+      <label class="opt act-inl"><input type="checkbox" id="lab-withkeys" checked> <span>con hojas de clave al final</span></label>
+    </div>
+    <div id="lab-playwrap">
+      <div id="lab-play-bar">
+        <img class="pb-logo" src="logo-chromanom.png" alt="ChromaNom">
+        <span id="lab-play-msg" aria-live="polite"></span>
+        <button type="button" id="lab-restart">↺ Reiniciar</button>
+        <button type="button" id="lab-fs-exit">✕ Salir de pantalla completa</button>
+      </div>
+      <div id="lab-verif" class="act-verif"></div>
+      <div id="lab-status" aria-live="polite">Cargando bancos…</div>
+      <div id="lab-girar" class="lab-girar" hidden role="status">
+        <span class="lg-ico" aria-hidden="true">📱↻</span>
+        <span><strong>Gira tu celular</strong> para jugar en horizontal: la casilla queda a un lado y el laberinto al otro.</span>
+        <button type="button" id="lab-girar-ok">Seguir en vertical</button>
+      </div>
+      <div class="lab-cuerpo">
+        <div id="lab-card" class="lab-card" hidden></div>
+        <div id="lab-stage"></div>
+      </div>
+    </div>
+    <div id="lab-routebox">
+      <b>Verificar la ruta de un estudiante:</b>
+      <input id="lab-routein" type="text" placeholder="Ej.: A E I J K FIN" aria-label="Ruta escrita por el estudiante">
+      <button type="button" class="cn-btn cn-btn--secondary" id="lab-routebtn">Comprobar</button>
+      <span id="lab-routemsg" aria-live="polite"></span>
+    </div>
+    <div id="lab-keybox"></div>
+   </div>
+  </section>
+
+  <!-- ══════════════ CRUCIGRAMAS (crucigrama.js) ══════════════ -->
+  <section class="panel act-panel" id="panel-cz" role="tabpanel" aria-labelledby="tab-crucigramas" hidden>
+   <div id="cz-app">
+    <div class="tipo-intro"><strong>🔤 Crucigrama</strong> Cuadrícula verificada (todas las palabras conectadas, sin palabras accidentales) con pistas de nomenclatura y de los conceptos del curso. Las respuestas se escriben en mayúsculas, sin espacios, tildes ni números.</div>
+    <div class="act-sect">
+      <h2>1 · Tipos de pista</h2>
+      <div class="act-chks" id="cz-tipos">
+        <label class="opt"><input type="checkbox" value="nom" checked> <span><b>Fórmula → nombre</b><small>«CH₃−CH₂−OH» → ETANOL (compuestos sin localizadores)</small></span></label>
+        <label class="opt"><input type="checkbox" value="gf" checked> <span><b>Grupos funcionales y prefijos</b><small>«Grupo funcional −COOH» → ACIDOCARBOXILICO · «Prefijo de 5 carbonos» → PENT</small></span></label>
+        <label class="opt"><input type="checkbox" value="car"> <span><b>Glosario: el carbono</b><small>Hibridación, tipos de carbono, clasificación de cadenas</small></span></label>
+        <label class="opt"><input type="checkbox" value="iso"> <span><b>Glosario: isomería</b><small>Isómeros, cis/trans, carbono quiral, enantiómeros</small></span></label>
+        <label class="opt"><input type="checkbox" value="rx"> <span><b>Glosario: reacciones</b><small>Sustitución, adición, Markovnikov, esterificación…</small></span></label>
+      </div>
+    </div>
+    <div class="act-sect cz-solo-nom">
+      <h2>2 · Compuestos (para «Fórmula → nombre»)</h2>
+      <div class="act-chks act-fam" id="cz-fam"></div>
+    </div>
+    <div class="act-sect">
+      <h2>3 · Hoja y versiones</h2>
+      <div class="campos">
+        <label>Número de palabras (6 a 20) <input type="number" inputmode="numeric" id="cz-n" value="12" min="6" max="20"></label>
+        <label>Largo máximo de palabra (8 a 22) <input type="number" inputmode="numeric" id="cz-max" value="16" min="8" max="22"></label>
+        <label>Título <input type="text" id="cz-title" maxlength="40"></label>
+        <label>Versiones paralelas (1 a 40) <input type="number" inputmode="numeric" id="cz-nver" value="4" min="1" max="40"></label>
+        <label>Versión en pantalla <select id="cz-vsel"></select></label>
+      </div>
+      <details class="act-adv"><summary>Volver a generar hojas de otro día</summary>
+        <label class="campo">Código de la hoja de clave <input type="text" id="cz-seed" maxlength="20" autocomplete="off"></label>
+      </details>
+    </div>
+    <div class="act-bar">
+      <button type="button" class="cn-btn cn-btn--secondary" id="cz-btn-seed">🎲 Generar nuevo crucigrama</button>
+      <div class="act-seg" id="cz-seg" role="group" aria-label="Vista">
+        <button type="button" data-view="sheet" class="on" aria-pressed="true">📄 Hoja</button>
+        <button type="button" data-view="play" aria-pressed="false">✏️ Resolver</button>
+        <button type="button" data-view="key" aria-pressed="false">🔑 Clave</button>
+      </div>
+      <button type="button" class="cn-btn cn-btn--primary" id="cz-btn-print">🖨️ Imprimir versiones</button>
+      <label class="opt act-inl"><input type="checkbox" id="cz-withkeys" checked> <span>con hojas de clave al final</span></label>
+    </div>
+    <div id="cz-verif" class="act-verif"></div>
+    <div id="cz-status" aria-live="polite"></div>
+    <div id="cz-stage"></div>
+    <div id="cz-play"></div>
+   </div>
+  </section>
   <section class="panel" id="panel-ori" role="tabpanel" aria-labelledby="tab-ori" hidden>
     <div class="aviso" style="margin:0 0 16px">Esta sección resume cómo usar ChromaNom en clase. Puede imprimirla completa o solo la secuencia y las rúbricas.</div>
   <div class="doc-tools">
@@ -829,28 +982,66 @@ window.addEventListener('afterprint',function(){
 });
 </script>
 <script>
-// Pestañas: Generador de guías / Orientaciones (#orientaciones abre la segunda).
+// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas |
+// Orientaciones. Las tres primeras comparten el formulario de #panel-gen:
+// cada una fija el tipo de documento (radio «tipodoc», ahora oculto) y deja
+// ver solo los apartados que le aplican, renumerados. Se recuerda la última
+// pestaña; #talleres, #laberintos, #orientaciones… abren directo esa.
 (function(){
-  function abrir(cual){
-    var gen=cual!=='ori';
-    document.getElementById('panel-gen').hidden=!gen;
-    document.getElementById('panel-ori').hidden=gen;
-    document.getElementById('tab-gen').setAttribute('aria-selected',gen);
-    document.getElementById('tab-ori').setAttribute('aria-selected',!gen);
-    document.body.classList.toggle('tab-gen',gen);
-    document.body.classList.toggle('tab-ori',!gen);
-    if(window.DocenteGen&&gen)window.dispatchEvent(new Event('resize'));
+  var btns=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+  var IDS=btns.map(function(b){return b.dataset.tab;});
+  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ori:'panel-ori'};
+  var oriIds=['metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
+  function aplicarTipo(tipo){
+    var r=document.querySelector('input[name=tipodoc][value="'+tipo+'"]');
+    if(r&&!r.checked){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}));}
+    document.querySelectorAll('#panel-gen .tipo-intro[data-solo]').forEach(function(el){el.hidden=el.dataset.solo!==tipo;});
+    // renumerar los apartados visibles (1 · …, 2 · …)
+    var n=0;
+    document.querySelectorAll('#gen-form > fieldset').forEach(function(fs){
+      var lg=fs.querySelector('legend');if(!lg)return;
+      if(fs.hidden||getComputedStyle(fs).display==='none')return;
+      lg.textContent=lg.textContent.replace(/^\d+ · /,(++n)+' · ');
+    });
   }
-  document.getElementById('tab-gen').addEventListener('click',function(){abrir('gen');history.replaceState(null,'',location.pathname);});
-  document.getElementById('tab-ori').addEventListener('click',function(){abrir('ori');history.replaceState(null,'','#orientaciones');});
-  var oriIds=['orientaciones','metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
-  function porHash(){var h=location.hash.slice(1);if(oriIds.indexOf(h)>=0){abrir('ori');var el=document.getElementById(h);if(el&&h!=='orientaciones')el.scrollIntoView();}}
-  window.addEventListener('hashchange',porHash);porHash();
+  function mostrar(id,sinGuardar){
+    var b=btns.filter(function(x){return x.dataset.tab===id;})[0]||btns[0],panel=b.dataset.panel;
+    btns.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
+    Object.keys(PANELES).forEach(function(k){var el=document.getElementById(PANELES[k]);if(el)el.hidden=k!==panel;});
+    ['gen','lab','cz','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
+    document.getElementById(PANELES[panel]).setAttribute('aria-labelledby',b.id);
+    if(b.dataset.tipo)aplicarTipo(b.dataset.tipo);
+    if(!sinGuardar){try{localStorage.setItem('chromanom-docente-tab',b.dataset.tab);}catch(e){}
+      history.replaceState(null,'',b.dataset.tab==='guias'?location.pathname:'#'+b.dataset.tab);}
+    if(panel==='gen')window.dispatchEvent(new Event('resize'));
+    if(panel==='lab'&&window.LABERINTO)window.LABERINTO.ajustar();
+    if(panel==='cz'&&window.CRUCIGRAMA)window.CRUCIGRAMA.render();
+  }
+  btns.forEach(function(b,i){
+    b.addEventListener('click',function(){mostrar(b.dataset.tab);});
+    b.addEventListener('keydown',function(e){ // patrón ARIA de pestañas: ←/→/Inicio/Fin
+      var j=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:e.key==='Home'?0:e.key==='End'?btns.length-1:null;
+      if(j===null)return;e.preventDefault();j=(j+btns.length)%btns.length;mostrar(btns[j].dataset.tab);btns[j].focus();
+    });
+  });
+  function porHash(){
+    var h=location.hash.slice(1);
+    if(oriIds.indexOf(h)>=0){mostrar('orientaciones',true);var el=document.getElementById(h);if(el)el.scrollIntoView();return true;}
+    if(IDS.indexOf(h)>=0){mostrar(h,true);return true;}
+    return false;
+  }
+  window.addEventListener('hashchange',porHash);
+  if(!porHash()){var ini=null;try{ini=localStorage.getItem('chromanom-docente-tab');}catch(e){}mostrar(IDS.indexOf(ini)>=0?ini:'guias',true);}
 })();
 </script>
+<div id="lab-print-root" aria-hidden="true"></div>
+<div id="cz-print-root" aria-hidden="true"></div>
 <script src="fx-libro.js"></script>
 <script src="docente-datos.js"></script>
 <script src="docente-app.js"></script>
+<script src="fundamentos.js"></script>
+<script src="laberinto.js"></script>
+<script src="crucigrama.js"></script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>

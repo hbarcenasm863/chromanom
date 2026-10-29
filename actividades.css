@@ -1,0 +1,311 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ChromaNom — pestañas «Laberintos» y «Crucigramas» del generador docente
+   (docente.html, laberinto.js, crucigrama.js). Adaptado del generador de
+   IonNom: mismas hojas, modo jugar/resolver, clave e impresión.
+   ════════════════════════════════════════════════════════════════════════ */
+#panel-lab,#panel-cz,#lab-print-root,#cz-print-root{
+  --nav:#0d4a73;--brd:#d0e6f5;--surf:#fff;--surf2:#f1f5f9;--tx:#0d2d42;--tx2:#3d5166;--dimmer:#5b6b7b;
+  --sans:'Outfit','Segoe UI',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;--mono:'JetBrains Mono','Courier New',monospace;
+  --r:16px;--rs:10px;--sh:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);
+  --ok-b:#dcfce7;--ok-t:#15803d;--err:#dc2626;--err-b:#fee4e2;--err-t:#b42318;--an-b:#e8f4fb;
+}
+/* Intro de cada pestaña (también en Guías/Talleres/Evaluaciones) */
+.tipo-intro{background:#e8f4fb;border-left:4px solid #1a6ea8;border-radius:10px;padding:12px 14px;margin:0 0 16px;font-size:.88rem;line-height:1.5;color:#0d2d42}
+.tipo-intro strong{display:block;font-size:1rem;margin-bottom:2px;color:#0d4a73}
+.tipo-intro[hidden]{display:none}
+@media print{.tipo-intro{display:none!important}}
+/* Controles */
+.act-panel{max-width:1100px}
+.act-sect{background:#fff;border:1px solid #dfe7ef;border-radius:16px;padding:16px 18px;margin:0 0 14px;box-shadow:var(--sh)}
+.act-sect h2{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1a6ea8;margin:0 0 8px}
+.act-sect .ayuda{font-size:.8rem;color:#3d5166;margin:0 0 8px}
+.act-modos,.act-chks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.act-modos .opt,.act-chks .opt{border:1px solid #dfe7ef;background:#fff}
+.act-fam{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.act-panel .campos{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.act-panel .campos select{min-height:42px;border:1.5px solid #d0e6f5;border-radius:8px;padding:8px 10px;font-size:.9rem;font-family:inherit;color:#0d2d42;background:#fff;width:100%}
+.act-adv{margin-top:8px;font-size:.84rem}
+.act-adv summary{cursor:pointer;color:#5b6b7b;font-weight:700;min-height:40px;display:flex;align-items:center}
+.act-adv .campo{max-width:280px}
+.act-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 12px}
+.act-inl{border:none!important;padding:4px!important}
+.act-seg{display:inline-flex;border:1.5px solid #d0e6f5;border-radius:10px;overflow:hidden;background:#fff}
+.act-seg button{border:none;background:none;padding:10px 16px;min-height:44px;font-family:inherit;font-weight:700;font-size:.86rem;color:#0d4a73;cursor:pointer}
+.act-seg button+button{border-left:1.5px solid #d0e6f5}
+.act-seg button.on{background:#0d4a73;color:#fff}
+.act-verif{font-size:.8rem;font-weight:700;padding:6px 12px;border-radius:999px;display:inline-block;margin:0 0 8px}
+.act-verif:empty{display:none}
+.act-verif.ok{background:#dcfce7;color:#15803d}
+.act-verif.bad{background:#fee4e2;color:#b42318}
+#lab-app[data-mode="nom"] .lab-only:not(.lab-nom),
+#lab-app[data-mode="fund"] .lab-only:not(.lab-fund),
+#lab-app[data-mode="rx"] .lab-only:not(.lab-rx){display:none!important}
+#cz-app.sin-nom .cz-solo-nom{display:none}
+#lab-status,#cz-status{font-size:.86rem;font-weight:600;color:#3d5166;min-height:22px;margin-bottom:8px}
+#lab-stage,#cz-stage{width:100%}
+.lab-scaled{position:relative;margin:0 auto;overflow:hidden;background:#fff;box-shadow:0 2px 16px rgba(15,23,42,.16);border-radius:4px}
+#lab-routebox{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 6px}
+#lab-routebox input{max-width:280px;min-height:42px;padding:8px 11px;border:1.5px solid #d0e6f5;border-radius:10px;font-family:inherit;font-size:.88rem}
+#lab-routemsg{font-weight:700;font-size:.88rem}
+#lab-keybox{margin-top:12px;overflow-x:auto}
+.lab-ruta{font-size:.9rem;margin-bottom:8px}
+.lab-kt{border-collapse:collapse;width:100%;background:#fff;color:#111;font:13px/1.35 var(--sans)}
+.lab-kt th,.lab-kt td{border:1px solid #ccc;padding:4px 7px;text-align:left;vertical-align:top}
+.lab-kt th{background:#eef3f7;color:var(--nav)}
+.lab-kt tr.main td{background:#f0fdf4;font-weight:600}
+.lab-kt svg{max-height:56px;max-width:160px;width:auto;height:auto;vertical-align:middle}
+/* Dibujos de moléculas dentro de las casillas y de la tarjeta de juego */
+.lab-sheet .node .fo.mol{display:flex;align-items:center;justify-content:center;width:100%;min-height:0;flex:1}
+.lab-sheet .node .fo.mol svg{max-width:190px;max-height:92px;width:auto;height:auto}
+.lab-sheet .node .fo.eqx{font-size:14px;line-height:1.35;font-weight:600;font-family:var(--mono)}
+.lab-sheet .node .q.sm{font-size:13.5px}
+.lc-fo svg{max-width:100%;max-height:150px;width:auto;height:auto}
+.cz-pistas .fx{font-family:var(--mono);font-weight:600}
+/* Jugar + pantalla completa */
+#lab-play-bar{display:none}
+#lab-playwrap.fs-on{background:#eef3f7;padding:10px 12px;overflow:auto}
+#lab-playwrap.fs-on #lab-play-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#lab-playwrap.fs-on #lab-status,#lab-playwrap.fs-on .lab-verif{display:none}
+#lab-playwrap.pseudo-fs{position:fixed;inset:0;z-index:var(--z-modal,400)}
+/* Celular en horizontal (pantalla completa): tarjeta a la izquierda, mapa a la derecha */
+#lab-playwrap.lado{padding:6px 10px}
+#lab-playwrap.lado #lab-play-bar{margin-bottom:6px;gap:8px}
+#lab-playwrap.lado #lab-play-bar .pb-logo{height:24px}
+#lab-playwrap.lado #lab-play-msg{display:none}
+#lab-playwrap.lado #lab-play-bar button{min-height:40px;padding:6px 12px}
+#lab-playwrap.lado .lab-cuerpo{display:flex;gap:12px;align-items:flex-start}
+#lab-playwrap.lado #lab-card{flex:0 0 44%;margin:0;max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow:auto;padding:10px 12px}
+#lab-playwrap.lado #lab-stage{flex:1;min-width:0}
+#lab-playwrap.lado .lc-fo{font-size:1.2rem;margin:2px 0}
+#lab-playwrap.lado .lc-q{font-size:.92rem}
+#lab-playwrap.lado .lc-head{margin-bottom:4px}
+#lab-playwrap.lado .lc-ops{gap:6px;margin-top:6px}
+#lab-playwrap.lado .lab-op{min-height:44px;padding:6px 12px;font-size:.95rem}
+.lab-girar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--nav);color:#fff;border-radius:var(--rs);padding:12px 14px;margin-bottom:10px;font-size:.92rem}
+.lab-girar[hidden]{display:none}
+.lab-girar .lg-ico{font-size:1.6rem}
+.lab-girar span:nth-child(2){flex:1;min-width:180px}
+.lab-girar button{min-height:44px;background:#fff;color:var(--nav);border:none;border-radius:var(--rs);padding:8px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+/* Tarjeta de juego (pantallas angostas): casilla actual + salidas grandes */
+.lab-card{background:var(--surf);border:2px solid var(--nav);border-radius:var(--r);padding:14px 16px;margin:0 0 12px;box-shadow:var(--sh)}
+.lab-card[hidden]{display:none}
+.lc-head{display:flex;align-items:center;gap:10px;font-size:.84rem;font-weight:700;color:var(--dimmer);margin-bottom:8px}
+.lc-badge{width:36px;height:36px;border-radius:50%;background:var(--nav);color:#fff;font:italic 900 1.1rem/36px var(--serif);text-align:center;flex-shrink:0}
+.lc-q{font-size:1rem;color:var(--tx2);text-align:center}
+.lc-fo{font-size:1.5rem;font-weight:700;text-align:center;margin:6px 0;color:var(--tx);overflow-wrap:anywhere}
+.lc-fo .lf{font-family:var(--mono)}
+.lc-ft{font-size:.84rem;color:var(--dimmer);text-align:center;margin-bottom:6px}
+.lc-ops{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.lab-op{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;padding:10px 14px;border:2px solid var(--brd);border-radius:var(--rs);background:#fff;color:var(--tx);font-family:var(--sans);font-size:1.02rem;font-weight:700;text-align:left;cursor:pointer}
+.lab-op:hover,.lab-op:focus-visible{border-color:var(--nav);background:var(--an-b)}
+.lab-op .lc-dir{font-size:1.3rem;color:var(--nav);width:24px;text-align:center;flex-shrink:0}
+.lab-op .lf{font-family:var(--mono)}
+.lab-op.bad{animation:labShakeOp .38s;border-color:var(--err);background:var(--err-b)}
+.lab-op.good{border-color:#16a34a;background:#dcfce7;color:#14532d}.lab-op.good .lc-dir{color:#16a34a}
+@keyframes labShakeOp{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.lc-fin{font:italic 900 1.5rem var(--serif);color:var(--nav);text-align:center;margin-bottom:10px}
+.lab-op.lc-re{justify-content:center;background:var(--nav);color:#fff;border-color:var(--nav)}
+#lab-play-bar .pb-logo{height:32px}
+#lab-play-msg{flex:1;min-width:200px;font-weight:700;color:var(--tx);font-size:.95rem}
+#lab-play-bar button{border:1.5px solid var(--brd);background:#fff;color:var(--nav);border-radius:var(--rs);padding:8px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+#lab-play-bar #lab-fs-exit{background:var(--nav);color:#fff;border-color:var(--nav)}
+
+/* ══════════════ Laberintos (hoja) ══════════════ */
+.lab-sheet{position:absolute;left:0;top:0;transform-origin:0 0;background:#fff;color:#0d2d42;font-family:var(--sans);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.lab-sheet sub,.lab-sheet sup{font-size:.62em;line-height:0}
+.lab-sheet .wm{position:absolute;left:50%;top:54%;width:46%;max-width:620px;transform:translate(-50%,-50%);opacity:.08;z-index:0;pointer-events:none}
+.lab-sheet .shead{position:absolute;left:30px;right:30px;top:16px;height:90px;display:flex;align-items:center;gap:18px;border-bottom:3px solid var(--nav)}
+.lab-sheet .slogo{height:56px;width:auto;flex-shrink:0}
+.lab-sheet .stit{flex:1;text-align:center;min-width:0}
+.lab-sheet .title{font-family:var(--serif);font-style:italic;font-weight:900;font-size:40px;line-height:1.05;color:var(--nav);letter-spacing:-.02em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lab-sheet .title.sm{font-size:31px}
+.lab-sheet .title.xs{font-size:25px}
+.lab-sheet .sub{font-size:17px;color:#2a3f52;margin-top:4px}
+.lab-sheet .shead.angosta .sub{font-size:14.5px}
+#lab-playwrap.con-tarjeta #lab-status{display:none}
+.lab-sheet .sver{width:150px;flex-shrink:0;text-align:right;font-size:13px;color:#4f6d88;font-weight:600}
+.lab-sheet .sform{position:absolute;left:30px;right:30px;top:114px;height:30px;display:flex;align-items:flex-end;gap:26px;font-size:16px;font-weight:600;color:#0d2d42;padding:0 14px 4px;border:1.5px solid #cfcfd8;border-radius:10px;background:#fff;z-index:6}
+.lab-sheet .sform span{display:flex;align-items:flex-end;gap:6px;white-space:nowrap}
+.lab-sheet .sform i{display:inline-block;border-bottom:1.8px solid #0d2d42;height:16px}
+.lab-sheet .sform .w-nom{flex:1}
+.lab-sheet .sform span:first-child{flex:1}
+.lab-sheet .sform .w-cur{width:90px}
+.lab-sheet .sform .w-fec{width:140px}
+.lab-sheet svg.lines{position:absolute;left:0;top:0;z-index:1;overflow:visible}
+.lab-sheet .ln{stroke:#5b7389;stroke-width:3;stroke-linecap:round}
+.lab-sheet .mk{fill:#5b7389}
+.lab-sheet .node{position:absolute;border:3px solid var(--nav);border-radius:16px;background:#fff;padding:14px 10px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;z-index:2}
+.lab-sheet .node .q{font-size:16px;line-height:1.15;color:#2a3f52}
+.lab-sheet .node .fo{font-size:26px;font-weight:700;line-height:1.15;color:#0d2d42}
+.lab-sheet .node .fo.nm{font-size:19px;font-family:var(--serif);font-style:italic}
+.lab-sheet .node .fo.eq{font-size:16px;line-height:1.3}
+/* notación nuclear ᴬ_Z X (laberinto «Teoría atómica»): A arriba y Z abajo */
+.nuc{display:inline-flex;flex-direction:column;align-items:flex-end;font-size:.5em;line-height:1.05;vertical-align:middle;margin-right:1px;font-weight:700}
+.lab-sheet .nw,.lab-card .nw{white-space:nowrap}
+.lab-sheet .node .ft{font-size:13px;line-height:1.15;color:#4f6d88}
+.lab-sheet .lf{font-family:var(--mono);font-weight:700}
+.lab-sheet .qm{font-family:var(--sans);font-weight:600;margin-left:3px}
+.lab-sheet .badge{position:absolute;left:-16px;top:-16px;width:40px;height:40px;border-radius:50%;background:var(--nav);color:#fff;font:italic 900 22px/40px var(--serif);text-align:center;box-shadow:0 0 0 3px #fff}
+.lab-sheet .node.fin{background:var(--nav);border-color:var(--nav);color:#fff}
+.lab-sheet .node.fin .flag{font-size:46px;line-height:1}
+.lab-sheet .node.fin .finw{font:italic 900 48px/1 var(--serif);color:#fcd34d;margin-top:4px}
+.lab-sheet .el{position:absolute;transform:translate(-50%,-50%);z-index:3;background:#fff;border:1.5px solid #cfcfd8;border-radius:10px;font-family:var(--sans);font-size:15px;line-height:1.1;padding:3px 7px;text-align:center;color:#0d2d42;max-width:106px;appearance:none;-webkit-appearance:none;cursor:default;font-weight:600}
+.lab-sheet .el.v{max-width:196px}
+.lab-sheet .el.d{max-width:120px}
+.lab-sheet .el.lg{font-size:14px}
+.lab-sheet .el.xl{font-size:13px}
+.lab-sheet .el .lf{font-size:1.05em}
+.lab-sheet:not(.play) .el{pointer-events:none}
+.lab-sheet .sfoot{position:absolute;left:30px;right:30px;display:flex;align-items:flex-end;gap:20px;font-size:17px}
+.lab-sheet .sfoot .fields{flex:1;white-space:nowrap;display:flex;align-items:flex-end;gap:8px;min-width:0}
+.lab-sheet .sfoot .fields i{flex:1;max-width:380px}
+.lab-sheet .sfoot i{display:inline-block;border-bottom:2px solid #0d2d42;height:18px;vertical-align:baseline;margin-right:14px}
+.lab-sheet .smark{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--nav);white-space:nowrap}
+.lab-sheet .smark b{color:#f07c1e}
+.lab-sheet .slic{display:block;font-family:var(--sans);font-style:normal;font-size:11px;color:#4f6d88;text-align:right;margin-top:2px}
+.lab-sheet .sdata{position:absolute;left:30px;right:30px;font-size:13.5px;line-height:1.45;color:#2a3f52;text-align:center;border-top:1px solid #e3e3e8;padding-top:4px}
+.lab-sheet .c-cat{color:var(--cat-t)}.lab-sheet .c-an{color:var(--an-t)}.lab-sheet .c-oh{color:var(--oh-t)}.lab-sheet .c-ox{color:var(--ox-t)}
+.lab-sheet.nocolor .c-cat,.lab-sheet.nocolor .c-an,.lab-sheet.nocolor .c-oh,.lab-sheet.nocolor .c-ox{color:inherit}
+/* clave */
+.lab-sheet.key .ln.on{stroke:#15803d;stroke-width:7}
+.lab-sheet.key .el.on{border:2.5px solid #15803d;color:#14532d;background:#f0fdf4;font-weight:800}
+.lab-sheet .sley .sv{color:#15803d;font-weight:800}.lab-sheet .sley .sn{color:#b45309;font-weight:800}
+.lab-sheet.key .el.good:not(.on){border:2px dashed #d97706}
+.lab-sheet.key .node.onp{background:#f0fdf4}
+/* jugar */
+.lab-sheet.play .el.hot{pointer-events:auto;cursor:pointer;background:#fef3c7;border:2px dashed var(--nav)}
+.lab-sheet.play .el.hot:hover,.lab-sheet.play .el.hot:focus-visible{background:#fde68a}
+.lab-sheet.play .node.visited{background:#dcfce7}
+.lab-sheet.play .node.fin.visited{background:var(--nav);box-shadow:0 0 0 7px rgba(22,163,74,.6)}
+.lab-sheet.play .node.cur{box-shadow:0 0 0 7px rgba(252,211,77,.85)}
+.lab-sheet.play .ln.trav{stroke:#16a34a;stroke-width:7}
+.lab-sheet.play .el.taken{color:#14532d;border-color:#16a34a;font-weight:800}
+.lab-sheet .el.bad{animation:labShake .38s;background:#fee2e2!important;border-color:#dc2626!important}
+@keyframes labShake{0%,100%{transform:translate(-50%,-50%)}20%{transform:translate(calc(-50% - 7px),-50%)}40%{transform:translate(calc(-50% + 7px),-50%)}60%{transform:translate(calc(-50% - 5px),-50%)}80%{transform:translate(calc(-50% + 5px),-50%)}}
+
+/* impresión del laberinto: carta horizontal (ver imprimir() en laberinto.js) */
+#lab-print-root{display:none}
+@page lab{size:letter landscape;margin:.3in}
+@media print{
+  body.lab-printing>*:not(#lab-print-root){display:none!important}
+  body.lab-printing #lab-print-root{display:block!important}
+  /* 990×740 px = PAG_W×PAG_H de laberinto.js, dentro del área imprimible
+     de carta horizontal con márgenes de 0,3 in (998×758 px) */
+  body.lab-printing .lab-pp{page:lab;width:990px;height:740px;position:relative;overflow:hidden;break-after:page;page-break-after:always;break-inside:avoid;display:flex;justify-content:center;align-items:center}
+  body.lab-printing .lab-pp:last-child{break-after:auto;page-break-after:auto}
+  body.lab-printing .lab-scaled{box-shadow:none;border-radius:0}
+  body.lab-printing .lab-pp.keypage{display:block}
+  body.lab-printing .keypage .kh{display:flex;align-items:center;gap:12px;font:13px var(--sans);margin-bottom:8px;color:#0d2d42}
+  body.lab-printing .keypage .kh img{height:30px}
+  body.lab-printing .keypage .kb{display:flex;gap:12px;align-items:flex-start}
+  body.lab-printing .keypage .kb .lab-scaled{margin:0;flex:none;border:1px solid #ccc}
+  body.lab-printing .keypage .kt-wrap{flex:1}
+  body.lab-printing .keypage .kb.sola{justify-content:center}
+  body.lab-printing .keypage .lab-kt{font-size:10px}
+}
+/* ══════════════ Crucigramas ══════════════ */
+#cz-status{font-size:.86rem;font-weight:600;color:var(--tx2);min-height:22px;margin-bottom:8px}
+#cz-stage{width:100%}
+.cz-escala{position:relative;margin:0 auto;overflow:hidden;box-shadow:0 2px 16px rgba(15,23,42,.16);border-radius:4px;background:#fff}
+.cz-escala .cz-hoja{transform-origin:0 0;position:absolute;left:0;top:0}
+.cz-hoja{width:816px;height:1056px;background:#fff;color:#0d2d42;font-family:var(--sans);padding:34px 44px 28px;box-sizing:border-box;display:flex;flex-direction:column;position:relative;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cz-wm{position:absolute;left:50%;top:55%;width:58%;transform:translate(-50%,-50%);opacity:.06;pointer-events:none;z-index:0}
+.cz-head{display:flex;align-items:center;gap:16px;border-bottom:3px solid var(--nav);padding-bottom:8px;position:relative;z-index:1}
+.cz-head img{height:46px}
+.cz-tit{flex:1;text-align:center;min-width:0}
+.cz-tit .t{font-family:var(--serif);font-style:italic;font-weight:900;font-size:28px;color:var(--nav);line-height:1.1}
+.cz-tit .s{font-size:11.5px;color:#2a3f52;margin-top:3px}
+.cz-ver{width:120px;text-align:right;font-size:11px;color:#4f6d88;font-weight:600}
+.cz-form{display:flex;gap:22px;align-items:flex-end;border:1.5px solid #cfcfd8;border-radius:10px;padding:6px 12px 5px;margin:10px 0 12px;font-size:13px;font-weight:600;position:relative;z-index:1}
+.cz-form span{display:flex;gap:6px;align-items:flex-end;white-space:nowrap}
+.cz-form span:first-child{flex:1}
+.cz-form i{display:inline-block;border-bottom:1.6px solid #0d2d42;height:14px}
+.cz-form .w1{flex:1}.cz-form .w2{width:80px}.cz-form .w3{width:120px}
+.cz-cuerpo{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:12px;position:relative;z-index:1}
+.cz-grid{display:grid;gap:0;flex-shrink:0}
+.cz-v{background:transparent}
+.cz-c{position:relative;border:1.5px solid #0d2d42;margin:-0.75px;background:#fff;display:flex;align-items:center;justify-content:center}
+.cz-c i{position:absolute;left:2px;top:0;font-style:normal;font-size:calc(var(--celda) * .3);font-weight:700;color:var(--nav);line-height:1.1}
+.cz-c b{font-family:var(--mono);font-size:calc(var(--celda) * .55);color:#15803d}
+.cz-pistas{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;width:100%;font-size:13px;line-height:1.3}
+.cz-pistas h4{font-family:var(--serif);font-style:italic;color:var(--nav);font-size:1.05em;margin:0 0 3px;border-bottom:1.5px solid #e3e3e8}
+.cz-pistas ol{margin:0;padding-left:2em}
+.cz-pistas li{margin:0 0 2px}
+.cz-pistas em{color:#4f6d88;font-style:normal;font-size:.9em}
+.cz-pistas .fx{font-family:var(--mono)}
+.cz-sol{font-family:var(--mono);color:#15803d}
+.cz-pie{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ccc;padding-top:5px;margin-top:8px;font-size:10.5px;color:#777;position:relative;z-index:1}
+.cz-pie .m{font-family:var(--serif);font-style:italic;color:var(--nav)}.cz-pie .m b{color:#f07c1e}
+/* resolver en pantalla */
+.cz-jugar{background:var(--surf);border:2px solid var(--brd);border-radius:var(--r);padding:14px}
+/* sin flex-center: con la cuadrícula más ancha que la pantalla, el centrado
+   dejaba la parte izquierda fuera de alcance; margin:auto centra solo si cabe */
+.cz-gwrap{overflow-x:auto;padding:4px;margin-bottom:12px}
+.cz-gwrap .cz-grid{width:max-content;margin:0 auto}
+.cz-jugar .cz-c input{width:100%;height:100%;border:none;background:transparent;text-align:center;font-family:var(--mono);font-weight:700;font-size:max(16px, calc(var(--celda) * .5));color:#0d2d42;text-transform:uppercase;padding:0;outline:none;caret-color:var(--nav)}
+.cz-jugar .cz-c.sel{background:#fef3c7}
+.cz-jugar .cz-c:focus-within{background:#fde68a}
+.cz-jugar .cz-c.bien{background:#dcfce7}
+.cz-jugar .cz-c.mal{background:#fee2e2}
+.cz-jugar .cz-pistas{font-size:.92rem}
+.cz-jugar .cz-pistas li{cursor:pointer;padding:3px 4px;border-radius:6px}
+.cz-jugar .cz-pistas li.sel{background:var(--an-b)}
+.cz-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.cz-bar button{min-height:44px}
+#cz-msg{font-weight:700;color:var(--tx)}
+@media(max-width:600px){ .cz-jugar .cz-pistas{grid-template-columns:1fr} }
+/* impresión de crucigramas: carta vertical, una hoja por página */
+#cz-print-root{display:none}
+@media print{
+  body.cz-printing>*:not(#cz-print-root){display:none!important}
+  body.cz-printing #cz-print-root{display:block!important}
+  body.cz-printing .cz-hoja{break-after:page;page-break-after:always;box-shadow:none;height:1055px}
+  body.cz-printing .cz-hoja:last-child{break-after:auto;page-break-after:auto}
+}
+
+/* Dibujos «estilo libro» (fx-libro.js) dentro de casillas, tarjeta y clave */
+.lab-sheet .fx-mol,.lab-card .fx-mol,.lab-kt .fx-mol{font-family:'STIX Two Text','Times New Roman',serif;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:.45em;row-gap:2.2em;font-size:20.5px;line-height:1.2;color:#111;padding:.35em 0 .3em}
+.lab-sheet .fig-libro,.lab-card .fig-libro,.lab-kt .fig-libro{text-align:center;padding:2px 0}
+.lab-sheet .fx-cad,.lab-card .fx-cad,.lab-kt .fx-cad{display:inline-block;white-space:nowrap;line-height:1.2;font-family:'STIX Two Text','Times New Roman',serif;color:#111}
+.lab-sheet .fx-cad sub,.lab-card .fx-cad sub,.lab-kt .fx-cad sub{font-size:.7em;line-height:0;position:relative;vertical-align:baseline;top:.28em}
+.lab-sheet .fx-enl,.lab-card .fx-enl,.lab-kt .fx-enl{padding:0 .06em}
+.lab-sheet .fx-cad .fx-bd,.lab-card .fx-cad .fx-bd,.lab-kt .fx-cad .fx-bd{height:.75em}
+.lab-sheet .fx-cad .fx-st,.lab-card .fx-cad .fx-st,.lab-kt .fx-cad .fx-st{margin:0 .12em}
+.lab-sheet .fx-lab,.lab-card .fx-lab,.lab-kt .fx-lab{position:relative}
+.lab-sheet .fx-izq,.lab-card .fx-izq,.lab-kt .fx-izq{position:absolute;right:100%;top:0;white-space:nowrap}
+.lab-sheet .fx-bd.tpl,.lab-card .fx-bd.tpl,.lab-kt .fx-bd.tpl{width:8px;background:linear-gradient(90deg,transparent 3.3px,currentColor 3.3px,currentColor 4.7px,transparent 4.7px);border-left:1.3px solid currentColor;border-right:1.3px solid currentColor}
+.lab-sheet .fx-in,.lab-card .fx-in,.lab-kt .fx-in{display:inline-block;white-space:nowrap;padding-top:1.25em;line-height:1.2;vertical-align:baseline;font-family:'STIX Two Text','Times New Roman',serif}
+.lab-sheet .fx-in sub,.lab-card .fx-in sub,.lab-kt .fx-in sub,.lab-sheet .fx-in sup,.lab-card .fx-in sup,.lab-kt .fx-in sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
+.lab-sheet .fx-in sub,.lab-card .fx-in sub,.lab-kt .fx-in sub{top:.28em}.hoja .fx-in sup{top:-.45em}
+.lab-sheet .fx-mol.fx-hs,.lab-card .fx-mol.fx-hs,.lab-kt .fx-mol.fx-hs{padding:1.35em 0 1.2em}
+.lab-sheet .fx-t,.lab-card .fx-t,.lab-kt .fx-t{display:inline-flex;align-items:center;white-space:nowrap}
+.lab-sheet .fx-t.w,.lab-card .fx-t.w,.lab-kt .fx-t.w{white-space:normal}
+.lab-sheet .fx-pl,.lab-card .fx-pl,.lab-kt .fx-pl{color:#444}
+.lab-sheet .fx-rhs,.lab-card .fx-rhs,.lab-kt .fx-rhs{display:inline-flex;flex-wrap:wrap;align-items:center;column-gap:.45em}
+.lab-sheet .fx-mol sub,.lab-card .fx-mol sub,.lab-kt .fx-mol sub,.lab-sheet .fx-mol sup,.lab-card .fx-mol sup,.lab-kt .fx-mol sup{font-size:.7em;line-height:0;position:relative;vertical-align:baseline}
+.lab-sheet .fx-mol sub,.lab-card .fx-mol sub,.lab-kt .fx-mol sub{top:.28em}.hoja .fx-mol sup{top:-.45em}
+.lab-sheet .fx-st,.lab-card .fx-st,.lab-kt .fx-st{position:relative;display:inline-block}
+.lab-sheet .fx-in .fx-bd,.lab-card .fx-in .fx-bd,.lab-kt .fx-in .fx-bd{height:.45em}
+.lab-sheet .fx-st>svg:first-child,.lab-card .fx-st>svg:first-child,.lab-kt .fx-st>svg:first-child{display:block}
+.lab-sheet .fx-bu,.lab-card .fx-bu,.lab-kt .fx-bu,.lab-sheet .fx-bl,.lab-card .fx-bl,.lab-kt .fx-bl{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.lab-sheet .fx-bu,.lab-card .fx-bu,.lab-kt .fx-bu{bottom:100%}.hoja .fx-bl{top:100%}
+.lab-sheet .fx-lab,.lab-card .fx-lab,.lab-kt .fx-lab{line-height:1.05;white-space:nowrap}
+.lab-sheet .fx-bd,.lab-card .fx-bd,.lab-kt .fx-bd{display:block;width:1.3px;height:.55em;background:currentColor}
+.lab-sheet .fx-bd.dbl,.lab-card .fx-bd.dbl,.lab-kt .fx-bd.dbl{width:5px;background:none;border-left:1.3px solid currentColor;border-right:1.3px solid currentColor}
+.lab-sheet .fx-st.rg .fx-bd,.lab-card .fx-st.rg .fx-bd,.lab-kt .fx-st.rg .fx-bd{height:.3em}
+.lab-sheet .fx-ring,.lab-card .fx-ring,.lab-kt .fx-ring{height:2.15em;width:2em;display:block}
+.lab-sheet .fx-cprop,.lab-card .fx-cprop,.lab-kt .fx-cprop{height:1.7em;width:1.9em;display:block}
+.lab-sheet .fx-arr,.lab-card .fx-arr,.lab-kt .fx-arr{display:inline-flex;flex-direction:column;align-items:stretch;min-width:3.4em;font-family:'STIX Two Text','Times New Roman',serif;font-size:.62em;font-style:italic;text-align:center}
+.lab-sheet .fx-arr .ab,.lab-card .fx-arr .ab,.lab-kt .fx-arr .ab,.lab-sheet .fx-arr .be,.lab-card .fx-arr .be,.lab-kt .fx-arr .be{min-height:1.2em;padding:0 .35em;white-space:nowrap;color:#222}
+.lab-sheet .fx-arr i,.lab-card .fx-arr i,.lab-kt .fx-arr i{position:relative;display:block;height:1.3px;background:#111;margin:.2em 0}
+.lab-sheet .fx-arr i::after,.lab-card .fx-arr i::after,.lab-kt .fx-arr i::after{content:"";position:absolute;right:-1px;top:-4px;border-left:9px solid #111;border-top:4.6px solid transparent;border-bottom:4.6px solid transparent}
+.lab-sheet .fx-arr.eqm i::after,.lab-card .fx-arr.eqm i::after,.lab-kt .fx-arr.eqm i::after{display:none}
+.lab-sheet .node .fo.mol .fig-libro,.lab-card .fig-libro{font-size:16px}
+.lab-sheet .node .fo.mol .fig,.lab-card .fig,.lab-kt .fig{border:none;padding:0;background:none}
+
+/* Páginas con nombre: el @page general de docente.html fuerza márgenes de
+   12 mm con !important; sin esta prioridad el laberinto (carta horizontal)
+   no cabía y cada hoja salía partida en dos páginas. */
+@page lab{size:letter landscape;margin:.3in!important;@bottom-center{content:none}}
+@page cz{size:letter;margin:0!important;@bottom-center{content:none}}
+@media print{body.cz-printing .cz-hoja{page:cz}}
