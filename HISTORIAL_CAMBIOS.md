@@ -7,6 +7,67 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (92) — Docente: amplía SABER y ABIERTAS con ejercicios de la carpeta de Drive "MATERIAL 2026"
+
+### Contexto
+La docente señaló que en su Drive, en la carpeta "MATERIAL 2026" (evaluaciones
+y talleres reales de sus cursos), hay material que puede servir para
+completar los bancos de preguntas de `docente.html`. Se revisó esa carpeta
+completa (I/II/III periodo, evaluación de desempeño, retroalimentación) con
+el mismo criterio de calidad que se acaba de aplicar al quitar la pregunta
+del alcoholímetro: solo se usó lo que tiene una estructura o reacción real
+que sustente la respuesta, relacionado con nomenclatura o reacciones
+orgánicas (no química general ni trivia de contexto sin sustento químico).
+
+### Qué se revisó y qué se usó
+De toda la carpeta, solo dos talleres de los grupos de once (1104 y 1102)
+tenían contenido genuinamente nuevo (lo demás era química general de décimo
+—estequiometría, tabla periódica—, administrativo, o repetía casi
+literalmente preguntas que ya estaban en el banco):
+- **`TALLER AROMATICOS 1104.docx`**: nomenclatura de bencenos trisustituidos
+  y la regla de cuándo el anillo se nombra como sustituyente fenilo (cadena
+  más larga que el anillo) — el banco actual solo cubría mono/disustituidos.
+  Se descartaron ~20 preguntas de comprensión de lectura de ese mismo taller
+  (anécdota histórica de Kekulé, contexto ambiental del río Tunjuelo) por
+  ser trivia sin estructura que sustente la respuesta.
+- **`TALLER_OXIGENADOS_1102_v2.docx`**: reacciones de alcoholes en contexto
+  de curtiembres (esterificación de Fischer, SOCl₂ sobre alcohol terciario,
+  retrosíntesis de un alqueno a su alcohol de partida, y el contraste de que
+  un alcohol 2° da el mismo producto con oxidante fuerte o suave) — ninguna
+  ya estaba en el banco.
+- Se descartaron por completo (ya cubierto o fuera de alcance): el resto de
+  `I PERIODO`, los talleres/evaluaciones de **décimo** de II/III periodo
+  (química general), `evaluacion de desempeño`, `RETROALIMENTACION I
+  PERIODO`, y `EVALUACION_FINAL_III_PERIODO_1101_VERSION_A.docx` (repetía
+  casi literalmente preguntas ya existentes). Quedaron sin revisar por
+  tiempo las otras 5 evaluaciones finales de III periodo (versiones B de
+  1101/1102/1103 y la versión A de 1102/1103) — es poco probable que aporten
+  algo distinto a la versión A de 1101 ya revisada (mismo banco, solo
+  mezclado), pero no se puede descartar sin leerlas.
+
+### Qué se hizo (`docente-datos.js`)
+- **2 preguntas nuevas en `SABER`**: 1 de aromáticos (regla
+  fenilo-vs-cadena-principal) y 1 de alcoholes (por qué un alcohol 2° no
+  depende de la fuerza del oxidante).
+- **6 preguntas nuevas en `ABIERTAS`**: 3 de aromáticos (tribromobenceno
+  trisustituido, numeración horaria/antihoraria, y una de partes del
+  nombre con 3 sustituyentes) y 3 de alcoholes (esterificación de Fischer,
+  SOCl₂, retrosíntesis de un alqueno a su alcohol).
+- De paso, se corrigió `PCC` → `CCP` en una pregunta de `ABIERTAS` de
+  alcoholes que se había quedado con la sigla en inglés — el mismo ajuste
+  que ya se le hizo a `juego.html` en la sesión anterior, pero que no se
+  había replicado aquí.
+
+### Pendiente
+Si se quiere revisar el resto de evaluaciones finales de III periodo sin
+leer (versiones B de 1101/1102/1103 y A de 1102/1103) o `TALLER OXIGENADOS
+1103.docx` (posible otra versión del mismo taller), decírmelo explícitamente
+— no se hizo por acotar el alcance de esta sesión. No se tocó
+`chromanom-analytics.gs`, así que no hace falta redesplegar ni recalcular
+nada.
+
+---
+
 ## 2026-10-29 (91) — Docente: quita del banco SABER una pregunta de trivia sin sustento químico (alcoholímetro)
 
 ### Contexto

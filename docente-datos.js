@@ -769,7 +769,9 @@ var SABER={
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'C₆H₅−NH₂',
    q:'¿Cuál es su nombre?',o:['anilina','nitrobenceno','fenol','benzonitrilo']},
   {a:'prop',c:'uso',k:'CTS',ctx:'La gasolina contiene una pequeña proporción de hidrocarburos aromáticos (benceno, tolueno, etilbenceno, xilenos) que mejoran el índice de octano, pero la normativa limita estrictamente el porcentaje de benceno permitido.',
-   q:'¿Por qué se limita en particular el benceno y no tanto sus derivados metilados (tolueno, xilenos)?',o:['Porque el benceno es cancerígeno comprobado, mientras que sus derivados metilados son considerablemente menos tóxicos','Porque el benceno es el único de ellos que mejora el índice de octano','Porque el benceno es el único de ellos que es aromático','Porque el benceno es más costoso de producir que los demás']}
+   q:'¿Por qué se limita en particular el benceno y no tanto sus derivados metilados (tolueno, xilenos)?',o:['Porque el benceno es cancerígeno comprobado, mientras que sus derivados metilados son considerablemente menos tóxicos','Porque el benceno es el único de ellos que mejora el índice de octano','Porque el benceno es el único de ellos que es aromático','Porque el benceno es más costoso de producir que los demás']},
+  {a:'nom',c:'uso',k:'Q',ctx:'Cuando un anillo de benceno está unido a una cadena de carbono más larga que él mismo, el anillo ya no se trata como la cadena principal: se nombra como sustituyente, con el nombre del grupo fenilo (C₆H₅−).',
+   q:'¿Cómo se nombra un compuesto con un anillo de benceno unido a una cadena lineal de ocho carbonos?',o:['Como un octano con un sustituyente fenilo','Como un benceno con un sustituyente octilo','Con un nombre conservado, distinto de los dos anteriores','No se puede nombrar con las reglas de la IUPAC']}
  ],
  haluros:[
   {a:'nom',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CHCl−CH₃',
@@ -851,7 +853,9 @@ var SABER={
   {a:'prop',g:'ambos',c:'exp',k:'Q',ctx:'El propano (M=44 g/mol), el metoxietano (un éter, M=60 g/mol) y el propan-1-ol (M=60 g/mol) hierven a −42 °C, 7 °C y 97 °C, respectivamente.',
    q:'¿Qué explica que el propan-1-ol hierva a una temperatura mucho mayor que el éter, de masa molar parecida?',o:['El propan-1-ol forma puentes de hidrógeno entre sus moléculas gracias al −OH; el éter no puede formarlos entre las suyas','El propan-1-ol tiene mayor masa molar que el éter','El éter tiene un enlace más fuerte que el del alcohol','El éter forma puentes de hidrógeno más débiles que los del alcohol']},
   {a:'nom',g:'alcoholes',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CH(OH)−CH(CH₃)−CH₃',
-   q:'¿Cuál es su nombre IUPAC?',o:['3-metilbutan-2-ol','2-metilbutan-3-ol','3-metilbutan-1-ol','2-metilbutan-2-ol']}
+   q:'¿Cuál es su nombre IUPAC?',o:['3-metilbutan-2-ol','2-metilbutan-3-ol','3-metilbutan-1-ol','2-metilbutan-2-ol']},
+  {a:'rx',g:'alcoholes',c:'exp',k:'Q',ctx:'Un alcohol primario con CrO₃/H⁺ (oxidante fuerte) sigue hasta ácido carboxílico; con clorocromato de piridinio, CCP (oxidante suave), se detiene en el aldehído. Un alcohol secundario, en cambio, da el mismo producto con cualquiera de los dos oxidantes.',
+   q:'¿Por qué un alcohol secundario no se ve afectado por la fuerza del oxidante, a diferencia del primario?',o:['Porque la cetona que se forma no tiene un hidrógeno en el carbonilo, así que no puede oxidarse más','Porque los alcoholes secundarios no reaccionan con ningún oxidante','Porque el CCP no reacciona nunca con alcoholes secundarios','Porque los alcoholes secundarios siempre dan ácido carboxílico, sin importar el oxidante']}
  ],
  carbonilos:[
   {a:'nom',g:'cetonas',c:'uso',k:'Q',ctx:'Observa la siguiente estructura:',f:'CH₃−CO−CH₃',
@@ -1164,7 +1168,10 @@ var ABIERTAS={
   {t:'nom',q:'Dibuja y nombra los tres isómeros del dimetilbenceno e indica cuál es orto, cuál meta y cuál para.'},
   {t:'nom',q:'Dibuja la estructura de: a) etilbenceno; b) 1,3-dinitrobenceno; c) 1-cloro-4-metilbenceno.'},
   {t:'mdec',n:'1-bromo-3-etilbenceno'},
-  {t:'mdec',n:'1-etil-4-nitrobenceno'}],
+  {t:'mdec',n:'1-etil-4-nitrobenceno'},
+  {t:'nom',q:'Dibuja y nombra el compuesto 1,3,5-tribromobenceno.'},
+  {t:'nom',q:'Un benceno tiene metilo en C1, etilo en C2 y cloro en C4. Dibuja la estructura y escribe su nombre IUPAC completo (compara las dos numeraciones posibles —horaria y antihoraria— y elige la que da el conjunto de localizadores más bajo).'},
+  {t:'mdec',n:'1-cloro-4-metil-2-nitrobenceno'}],
  haluros:[
   {t:'rx',q:'CH₃−CH₂−Br + NaOH (en agua) → ? Escribe y nombra el producto orgánico y di qué tipo de reacción es.'},
   {t:'rx',q:'CH₃−CHBr−CH₃ + KOH (en etanol, con calor) → ? Escribe y nombra el producto orgánico y di qué tipo de reacción es.'},
@@ -1175,7 +1182,7 @@ var ABIERTAS={
   {t:'mdec',n:'1-cloro-3-metilbutano'},
   {t:'mdec',n:'2-bromo-2-metilbutano'}],
  alcoholes:[
-  {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−OH con PCC (clorocromato de piridinio, oxidante suave) → ? y con CrO₃/H⁺ (oxidante fuerte) → ? Escribe y nombra el producto de cada caso.'},
+  {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−OH con CCP (clorocromato de piridinio, oxidante suave) → ? y con CrO₃/H⁺ (oxidante fuerte) → ? Escribe y nombra el producto de cada caso.'},
   {g:'alcoholes',t:'rx',q:'CH₃−CH(OH)−CH₃ + CrO₃/H⁺ → ? Escribe y nombra el producto. ¿Qué pasaría con el 2-metilpropan-2-ol? Explica.'},
   {g:'alcoholes',t:'rx',q:'CH₃−CH₂−OH → ? (con H₂SO₄ a 180 °C). Escribe y nombra el producto orgánico y di qué tipo de reacción es.'},
   {g:'alcoholes',t:'rx',q:'CH₃−CH₂−OH + HBr → ? (el −OH se sustituye por el halógeno). Escribe y nombra el producto orgánico.'},
@@ -1183,7 +1190,10 @@ var ABIERTAS={
   {g:'alcoholes',t:'nom',q:'Escribe el nombre IUPAC del compuesto.',f:'CH₃−CH₂−CH(OH)−CH(CH₃)−CH₃'},
   {g:'ambos',t:'nom',q:'Dibuja la estructura del butan-2-ol, del fenol y del metoxietano.'},
   {g:'alcoholes',t:'mdec',n:'2-metilbutan-2-ol'},
-  {g:'alcoholes',t:'mdec',n:'3-metilbutan-1-ol'}],
+  {g:'alcoholes',t:'mdec',n:'3-metilbutan-1-ol'},
+  {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−COOH + CH₃−OH → ? (esterificación de Fischer, con H⁺ y calor). Escribe y nombra el éster que se forma (tiene aroma a piña).'},
+  {g:'alcoholes',t:'rx',q:'(CH₃)₃C−OH + SOCl₂ → ? Escribe y nombra el producto orgánico y los dos subproductos gaseosos. ¿Por qué se prefiere este reactivo sobre HCl para un alcohol terciario?'},
+  {g:'alcoholes',t:'rx',q:'Un alqueno se obtuvo por deshidratación ácida (H₂SO₄, calor) de un alcohol de partida; solo existía una posición posible para la eliminación. Si el alqueno es CH₃−CH₂−CH=CH₂, dibuja y nombra el alcohol de partida.'}],
  carbonilos:[
   {g:'aldehidos',t:'rx',q:'CH₃−CHO + HCN → ? Escribe y nombra el producto (una cianohidrina).'},
   {g:'cetonas',t:'rx',q:'CH₃−CO−CH₃ + NaBH₄ (y luego agua) → ? Escribe y nombra el producto y di si es un alcohol 1°, 2° o 3°.'},
