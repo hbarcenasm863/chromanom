@@ -178,6 +178,21 @@
   <div class="sec-kicker">Sencillos, dobles y triples</div>
   <h2>Enlaces σ (sigma) y π (pi)</h2>
   <p>Entre dos átomos, el <b>primer enlace</b> siempre es <b>σ</b>: los orbitales se solapan <b>de frente</b>. Si hay un segundo o un tercer enlace, son <b>π</b>: los orbitales p sin hibridar se solapan <b>de lado</b>, por encima y por debajo del eje (las nubes moradas del modelo del eteno).</p>
+  <p>Mira cómo se forman en la animación: los orbitales híbridos del carbono van en gris, el 1s del H en azul, los p sin hibridar en verde, los enlaces <b style="color:#b45309">σ</b> en dorado y las nubes <b style="color:#7e22ce">π</b> en morado.</p>
+  <div class="lab">
+    <div class="lab-view">
+      <span class="lab-badge" id="ef-badge">CH₄</span>
+      <svg id="ef" viewBox="-170 -135 340 270" role="img" aria-label="Animación en 3D de la formación de los enlaces sigma y pi"></svg>
+    </div>
+    <div class="lab-ctl">
+      <div class="seg" id="ef-seg" role="group" aria-label="Molécula">
+        <button type="button" data-k="metano">Metano</button><button type="button" data-k="eteno">Eteno</button><button type="button" data-k="etino">Etino</button>
+      </div>
+      <div class="chips-row" id="ef-cuenta" aria-hidden="true" style="margin-top:0"></div>
+      <div class="lab-msg" id="ef-msg" aria-live="polite"></div>
+      <div class="links-row"><button type="button" class="btn-sm" id="ef-otra">▶ Formar los enlaces otra vez</button></div>
+    </div>
+  </div>
   <div class="tbl-wrap"><table class="tbl">
     <thead><tr><th>Enlace</th><th>Composición</th><th>Longitud C–C</th><th>¿Puede girar?</th><th>Ejemplo</th></tr></thead>
     <tbody>
@@ -386,6 +401,114 @@ var FU=window.FUND;
   document.getElementById('mz-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)ir(b.dataset.k);});
   document.getElementById('mz-otra').addEventListener('click',function(){ir(actual==='pure'?'sp3':actual,true);});
   textos('pure');dibuja();requestAnimationFrame(tick);
+})();
+
+// ── Formación de enlaces σ y π en 3D ──
+// Los orbitales híbridos del carbono se solapan DE FRENTE con el 1s del H o
+// con el híbrido del otro carbono (σ, en dorado); los p sin hibridar, que
+// son paralelos, se solapan DE LADO y se funden en las nubes π (moradas).
+(function(){
+  var svg=document.getElementById('ef');if(!svg)return;
+  var S=62,ay=0.5,ax=-0.38,drag=null;
+  var quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var HC={metano:'#0f766e',eteno:'#7c3aed',etino:'#c2410c'},HG='#64748b',CP='#16a34a',CH='#60a5fa',CSIG='#f59e0b',CPI='#a855f7';
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function ease(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
+  function tramo(t,a,b){return ease((t-a)/(b-a));}
+  function add(a,b,k){k=k==null?1:k;return [a[0]+b[0]*k,a[1]+b[1]*k,a[2]+b[2]*k];}
+  function pr(p){
+    var ca=Math.cos(ay),sa=Math.sin(ay),cb=Math.cos(ax),sb=Math.sin(ax);
+    var x=p[0]*ca+p[2]*sa,z=-p[0]*sa+p[2]*ca,y=p[1]*cb-z*sb,z2=p[1]*sb+z*cb,k=1+z2*0.1;
+    return {x:x*S*k,y:-y*S*k,z:z2,k:k};
+  }
+  // elipse 3D: centro c, eje d, semilargo l, semiancho w
+  function elip(c,d,l,w,col,op,it){
+    if(op<=0.01||w<=0)return;
+    var pc=pr(c),pt=pr(add(c,d,l)),vx=pt.x-pc.x,vy=pt.y-pc.y,L=Math.hypot(vx,vy),ry=w*S*pc.k,rx=Math.max(L,ry),g=Math.atan2(vy,vx)*180/Math.PI;
+    it.push({z:pc.z,h:'<ellipse cx="'+pc.x.toFixed(1)+'" cy="'+pc.y.toFixed(1)+'" rx="'+rx.toFixed(1)+'" ry="'+ry.toFixed(1)+'" transform="rotate('+g.toFixed(1)+' '+pc.x.toFixed(1)+' '+pc.y.toFixed(1)+')" fill="'+col+'" fill-opacity="'+(op*.45).toFixed(2)+'" stroke="'+col+'" stroke-opacity="'+(op*.9).toFixed(2)+'" stroke-width="1.2"/>'});
+  }
+  // híbrido: lóbulo grande hacia d y uno pequeño detrás
+  function hib(at,d,col,it,op){elip(add(at,d,.5),d,.52,.27,col,op==null?1:op,it);elip(add(at,d,-.12),d,.12,.11,col,op==null?1:op,it);}
+  function porb(at,d,it,op){elip(add(at,d,.42),d,.42,.2,CP,op,it);elip(add(at,d,-.42),d,.42,.2,CP,op,it);}
+  function nucleo(p,el,it){var q=pr(p),r=(el==='C'?9:6)*q.k;
+    it.push({z:q.z+.001,h:'<circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+(el==='C'?'#0d2233':'#1d4ed8')+'"/><text x="'+q.x.toFixed(1)+'" y="'+(q.y+.5).toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-family="Outfit,sans-serif" font-size="'+(el==='C'?10:8)*q.k+'" font-weight="800" fill="#fff">'+el+'</text>'});}
+  function etiqueta(p,t,col,op,lab){if(op<.5)return;var q=pr(p);lab.push('<text x="'+q.x.toFixed(1)+'" y="'+q.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-family="Outfit,sans-serif" font-size="17" font-weight="900" fill="'+col+'" stroke="#fff" stroke-width="3" paint-order="stroke">'+t+'</text>');}
+  var TET=[[0,1,0],[.943,-.333,0],[-.471,-.333,-.816],[-.471,-.333,.816]];
+  var X=[1,0,0],Y=[0,1,0],Z=[0,0,1];
+  function nx(v){return [-v[0],v[1],v[2]];}
+  var M={
+    metano:{
+      badge:'CH₄ · C sp³',cuenta:['σ','σ','σ','σ'],
+      msg:['Los 4 hidrógenos se acercan, cada uno con su orbital <b>1s</b> (azul), justo en la dirección de un orbital <b>sp³</b> del carbono…','Cada sp³ se solapa <b>de frente</b> con un 1s: se forman <b>4 enlaces σ</b> C−H (en dorado), a 109,5° entre sí. No hay p sin hibridar, así que no hay enlaces π.'],
+      pinta:function(t,it,lab){
+        var c=[0,0,0],u=tramo(t,0,.65),sg=tramo(t,.6,.85);
+        nucleo(c,'C',it);
+        TET.forEach(function(d){hib(c,d,HG,it);
+          var h=add(c,d,lerp(2.5,1.35,u));elip(h,d,.32,.32,CH,1,it);nucleo(h,'H',it);
+          elip(add(c,d,1.02),d,.2,.17,CSIG,sg,it);etiqueta(add(c,d,1.02),'σ','#b45309',sg,lab);});
+      }},
+    eteno:{
+      badge:'CH₂=CH₂ · C sp²',cuenta:['σ','σ','σ','σ','σ','π'],
+      msg:['Dos carbonos <b>sp²</b> se acercan. Cada uno ya tiene sus 2 enlaces σ con H, un sp² que apunta al otro carbono y un <b>p sin hibridar</b> (verde) perpendicular al plano…','Los sp² se solapan <b>de frente</b>: enlace <b>σ</b> C−C. Los dos p, paralelos, se solapan <b>de lado</b> y forman una nube arriba y otra abajo: ¡es <b>un solo enlace π</b>! Total: <b>5 σ + 1 π</b>. El π impide que el doble enlace gire.'],
+      pinta:function(t,it,lab){
+        var sep=lerp(1.3,0,tramo(t,0,.45)),sg=tramo(t,.42,.6),pi=tramo(t,.62,.9);
+        [-1,1].forEach(function(s){
+          var c=[s*(.68+sep),0,0],hacia=[-s,0,0];nucleo(c,'C',it);
+          hib(c,hacia,HG,it);
+          [[s*.5,0,.866],[s*.5,0,-.866]].forEach(function(d){hib(c,d,HG,it);var h=add(c,d,1.3);elip(h,d,.3,.3,CH,1,it);nucleo(h,'H',it);elip(add(c,d,.98),d,.17,.14,CSIG,.85,it);});
+          porb(c,Y,it,1-pi);
+        });
+        elip([0,0,0],X,.24,.17,CSIG,sg,it);etiqueta([0,-.42,0],'σ','#b45309',sg,lab);
+        elip([0,.5,0],X,1.05,.24,CPI,pi,it);elip([0,-.5,0],X,1.05,.24,CPI,pi,it);etiqueta([0,1.0,0],'π','#7e22ce',pi,lab);
+      }},
+    etino:{
+      badge:'HC≡CH · C sp',cuenta:['σ','σ','σ','π','π'],
+      msg:['Dos carbonos <b>sp</b> se acercan en línea recta. A cada uno le quedan <b>2 p sin hibridar</b> (verdes), perpendiculares entre sí…','Los sp se solapan de frente (<b>σ</b> C−C) y los p se solapan de lado <b>dos veces</b>: una nube π arriba-abajo y otra adelante-atrás. Total: <b>3 σ + 2 π</b>. Las dos nubes rodean el eje como un cilindro.'],
+      pinta:function(t,it,lab){
+        var sep=lerp(1.3,0,tramo(t,0,.45)),sg=tramo(t,.42,.6),pi=tramo(t,.62,.9);
+        [-1,1].forEach(function(s){
+          var c=[s*(.6+sep),0,0];nucleo(c,'C',it);
+          hib(c,[-s,0,0],HG,it);hib(c,[s,0,0],HG,it);
+          var h=add(c,[s,0,0],1.3);elip(h,X,.3,.3,CH,1,it);nucleo(h,'H',it);elip(add(c,[s,0,0],.98),X,.17,.14,CSIG,.85,it);
+          porb(c,Y,it,1-pi);porb(c,Z,it,1-pi);
+        });
+        elip([0,0,0],X,.22,.16,CSIG,sg,it);etiqueta([0,-.36,.36],'σ','#b45309',sg,lab);
+        [[0,.48,0],[0,-.48,0],[0,0,.48],[0,0,-.48]].forEach(function(c){elip(c,X,.95,.21,CPI,pi,it);});
+        etiqueta([0,.95,0],'π','#7e22ce',pi,lab);etiqueta([0,0,.95],'π','#7e22ce',pi,lab);
+      }}
+  };
+  var k='metano',t0=performance.now(),DUR=3800,t=0;
+  function textos(){
+    var m=M[k];document.getElementById('ef-badge').textContent=m.badge;
+    document.getElementById('ef-cuenta').innerHTML=m.cuenta.map(function(x){return '<span style="display:inline-flex;align-items:center;justify-content:center;min-width:38px;padding:4px 10px;border-radius:999px;font-family:Outfit,sans-serif;font-weight:900;font-size:.9rem;color:#fff;background:'+(x==='σ'?'#d97706':'#9333ea')+'">'+x+'</span>';}).join('');
+    document.querySelectorAll('#ef-seg button').forEach(function(b){var on=b.dataset.k===k,c=HC[b.dataset.k];b.classList.toggle('on',on);b.style.background=on?c:'';b.style.borderColor=on?c:'';});
+  }
+  function msg(){document.getElementById('ef-msg').innerHTML=M[k].msg[t<.6?0:1];}
+  var ultimoMsg=-1;
+  function dibuja(){
+    var it=[],lab=[];M[k].pinta(t,it,lab);it.sort(function(a,b){return a.z-b.z;});
+    svg.innerHTML=it.map(function(x){return x.h;}).join('')+lab.join('');
+    var mi=t<.6?0:1;if(mi!==ultimoMsg){ultimoMsg=mi;msg();}
+  }
+  function ir(nk){k=nk;if(!drag){ay=k==='metano'?1.05:0.35;ax=k==='metano'?-0.2:-0.42;}t0=performance.now();t=quieto?1:0;ultimoMsg=-1;textos();dibuja();}
+  var last=performance.now();
+  function tick(now){
+    var dt=Math.min(.1,(now-last)/1000);last=now;
+    // gira solo cuando ya se formaron los enlaces, para que la formación se vea de lado
+    if(!drag&&!quieto&&!document.hidden&&t>=1)ay+=dt*0.35;
+    if(!quieto)t=Math.min(1,(now-t0)/DUR);
+    dibuja();requestAnimationFrame(tick);
+  }
+  svg.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,ay:ay,ax:ax};try{svg.setPointerCapture(e.pointerId);}catch(_){}});
+  svg.addEventListener('pointermove',function(e){if(!drag)return;ay=drag.ay+(e.clientX-drag.x)*0.012;ax=Math.max(-1.4,Math.min(1.4,drag.ax+(e.clientY-drag.y)*0.01));if(quieto)dibuja();});
+  ['pointerup','pointercancel'].forEach(function(e){svg.addEventListener(e,function(){drag=null;});});
+  svg.style.cursor='grab';svg.style.touchAction='none';
+  document.getElementById('ef-seg').addEventListener('click',function(e){var b=e.target.closest('button');if(b)ir(b.dataset.k);});
+  document.getElementById('ef-otra').addEventListener('click',function(){ir(k);});
+  // La animación arranca cuando la sección aparece en pantalla
+  var visto=false;
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){if(!visto&&es[0].isIntersecting){visto=true;ir(k);}},{threshold:.4}).observe(svg);}
+  ir(k);requestAnimationFrame(tick);
 })();
 
 // ── Reto: hibridación de cada carbono ──

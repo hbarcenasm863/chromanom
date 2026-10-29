@@ -7,6 +7,32 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (151) — Animación 3D: formación de los enlaces σ y π (metano, eteno, etino)
+
+### Contexto
+Continuación de la animación de hibridación: el docente aceptó la
+propuesta de mostrar también cómo los orbitales híbridos se superponen con
+los de otros átomos para formar los enlaces σ y π.
+
+### `carbono.html` — sección «Enlaces σ y π»
+- Nuevo laboratorio 3D con tres botones (Metano · Eteno · Etino):
+  - **Metano:** los 4 H se acercan con su 1s (azul) en la dirección de los
+    4 sp³ y, al solaparse de frente, aparecen los 4 enlaces σ (dorados).
+  - **Eteno:** dos C sp² se acercan; sus sp² se solapan de frente (σ C−C)
+    y los dos p verdes, paralelos, se funden de lado en una nube arriba y
+    otra abajo: un solo enlace π (morado). Cuenta: 5 σ + 1 π.
+  - **Etino:** dos C sp en línea; σ C−C de frente y los p forman dos nubes
+    π perpendiculares (3 σ + 2 π).
+- Fichas con la cuenta de σ y π, explicación en dos tiempos (antes y
+  después de formarse los enlaces) y una línea con el código de colores.
+- Los híbridos del carbono van en gris para no confundirse con el π
+  morado. La formación se ve de lado y el modelo empieza a girar cuando
+  termina; se puede arrastrar. Arranca al aparecer en pantalla y respeta
+  «reducir movimiento».
+- `sw.js`: caché `chromanom-v50`.
+
+---
+
 ## 2026-10-29 (150) — Animación 3D: los orbitales del carbono se mezclan (hibridación)
 
 ### Contexto
