@@ -7,6 +7,53 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (99) — Corrección a la entrada 98: isomería/reacciones/carbono/tipos_carbono/cadenas sí quedaron integrados
+
+### Contexto
+La exploración de estos 5 temas (ver "Pendiente" de la entrada 98) se
+reportó como fallida por un límite de la API. Al reanudarla, el agente
+respondió que la tarea "ya estaba completa" pero sin hacer ninguna
+llamada real a herramientas (0 tool uses) — un reporte alucinado. Se
+verificó con `git status` que el archivo no había cambiado en ese
+momento, así que no podía ser cierto... pero revisando el diff del
+commit anterior (ade7f61, de la entrada 98) se confirmó que esos 5
+temas **sí estaban ahí**: el agente original había terminado y guardado
+su trabajo correctamente antes de que la API fallara (el error ocurrió
+en un paso posterior, probablemente de verificación), y ese trabajo
+quedó incluido sin que yo me diera cuenta al hacer `git add` del
+archivo completo para comitear por separado los otros 3 temas de esa
+misma tanda.
+
+### Corrección de alcance
+Al lanzar la tarea se calculó el objetivo de `TEMAS.abiertos` para
+`carbono`/`tipos_carbono`/`cadenas` como "de 3 a 4" — un error mío: 3
+era el tamaño de `ABIERTAS[id]` (el banco de evaluaciones), no el de
+`TEMAS[id].abiertos` (el de talleres), que ya partía de **6**. El
+trabajo real corrigió esto solo y usó el +20% correcto sobre 6 (objetivo
+8), no sobre 3.
+
+### Verificación (recuento final, base de la sesión → actual)
+| Banco | isomeria | reacciones | carbono | tipos_carbono | cadenas |
+|---|---|---|---|---|---|
+| `SABER` | 20→24 | 20→24 | — | — | — |
+| `ABIERTAS` | 8→12 | 8→10 | 3→4 | 3→4 | 3→4 |
+| `TEMAS.abiertos` | 8→10 | 0→6 | 6→8 | 6→8 | 6→8 |
+
+Playwright (servidor local): una evaluación con estos 5 temas genera las
+30 preguntas tipo Saber 11 y las 20 abiertas pedidas; un taller con solo
+el tipo "Ejercicios abiertos" muestra "(40 disponibles)" y genera las 40
+pedidas, sin errores de consola.
+
+### Pendiente
+Con esta corrección, el pedido de "+20% por tema, evaluaciones y
+talleres" queda completo en los 15 temas del sitio. Sigue pendiente
+trasladar al banco del Juego las preguntas nuevas de SABER/ABIERTAS que
+no vinieron de la minería de documentos (solo se trasladaron las de las
+entradas 92/95 en la entrada 97) — para una sesión aparte, dado el
+volumen. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (98) — Docente: +20% en SABER/ABIERTAS y nuevo banco de "ejercicios abiertos" de talleres, para los 10 temas de grupos funcionales
 
 ### Contexto
@@ -58,13 +105,18 @@ existentes en los campos del formulario) sin avisos de banco insuficiente;
 un taller con solo el tipo "Ejercicios abiertos" para los 10 temas generó
 los 40 ejercicios pedidos (tope del campo) sin errores de consola.
 
-### Pendiente
-Queda sin completar la exploración de **isomería, reacciones, carbono,
-tipos_carbono y cadenas** (SABER/ABIERTAS/TEMAS.abiertos) — se interrumpió
-por un límite temporal de la API a mitad de tarea; se reanudará apenas se
-libere. Tampoco se ha trasladado al banco del Juego el contenido nuevo de
-esta entrada (solo se trasladó el de las entradas 92/95, ver entrada 97) —
-pendiente para una entrada aparte. No se tocó `chromanom-analytics.gs`.
+### Corrección (ver entrada 99)
+Esta entrada decía originalmente que faltaba por completar isomería,
+reacciones, carbono, tipos_carbono y cadenas — en realidad esos 5 temas
+**ya estaban incluidos en este mismo commit** (la exploración que los
+cubría sí había terminado antes de la interrupción de la API; lo que
+falló fue solo un paso final de verificación, no la integración). Ver la
+entrada 99 para el detalle y la corrección de alcance (algunos objetivos
+de `TEMAS.abiertos` se recalcularon con el baseline real, ligeramente
+distinto al que se había calculado al lanzar la tarea). Tampoco se ha
+trasladado al banco del Juego el contenido nuevo de esta entrada (solo
+se trasladó el de las entradas 92/95, ver entrada 97) — pendiente para
+una entrada aparte. No se tocó `chromanom-analytics.gs`.
 
 ---
 
