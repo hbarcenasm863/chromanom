@@ -119,7 +119,7 @@ const GLOS = {
     ['PROMOCION','Salto de un electrón del 2s al 2p vacío'], ['VALENCIA','Electrones de ____: el carbono tiene cuatro'], ['PRIMARIO','Carbono unido a un solo carbono'],
     ['SECUNDARIO','Carbono unido a dos carbonos'], ['TERCIARIO','Carbono unido a tres carbonos'], ['CUATERNARIO','Carbono unido a cuatro carbonos'],
     ['SATURADA','Cadena con solo enlaces sencillos'], ['INSATURADA','Cadena con al menos un enlace doble o triple'], ['HOMOGENEA','Cadena cuyo esqueleto tiene solo átomos de carbono'],
-    ['HETEROGENEA','Cadena con un O, N o S intercalado entre carbonos'], ['HETEROATOMO','Átomo distinto del carbono dentro de la cadena (O, N, S)'],
+    ['HETEROGENEA','Cadena con un O, N o S intercalado entre carbonos'], ['HETEROATOMO','Átomo distinto del carbono y del hidrógeno, como O, N o S'],
     ['RAMIFICADA','Cadena de la que sale otra cadena desde algún carbono'], ['ACICLICA','Cadena «sin ciclo»: abierta'], ['CICLICA','Cadena cerrada en forma de anillo'],
     ['ALICICLICA','Cadena cerrada que no es aromática'], ['AROMATICA','Cadena cerrada tipo benceno'], ['HETEROCICLICA','Cadena cerrada con un heteroátomo en el anillo'],
     ['DIAMANTE','Carbono puro con todos sus átomos sp³ en una red rígida'], ['GRAFITO','Carbono puro de la mina del lápiz (carbonos sp²)'], ['ORBITAL','Región donde es más probable encontrar un electrón']

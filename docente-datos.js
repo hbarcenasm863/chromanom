@@ -200,7 +200,7 @@ var TEMAS=[
    activacion:['¿Qué diferencia hay entre una cadena de eslabones abierta y un collar cerrado?','¿Una cadena dibujada en zigzag es ramificada? ¿Por qué?','¿Por qué crees que el aceite es líquido y la manteca sólida?']
   },
   info:{
-   lectura:['Por su forma, una cadena es abierta (acíclica o alifática), con dos extremos, o cerrada (cíclica), formando un anillo. Las abiertas pueden ser lineales (un solo camino) o ramificadas (de algún carbono sale otra cadena).',
+   lectura:['Por su forma, una cadena es abierta (acíclica), con dos extremos, o cerrada (cíclica), formando un anillo. Las abiertas pueden ser lineales (un solo camino) o ramificadas (de algún carbono sale otra cadena).',
      'Por sus enlaces es saturada (solo enlaces sencillos C−C) o insaturada (al menos un doble o triple enlace). Por sus átomos es homogénea (esqueleto solo de carbonos) o heterogénea (un heteroátomo, como O, N o S, intercalado entre carbonos).',
      'Las cerradas pueden ser homocíclicas (solo carbono en el anillo) o heterocíclicas. Entre las homocíclicas están las alicíclicas (ciclohexano, ciclohexeno) y las aromáticas (benceno y sus derivados).',
      'Doblar el dibujo no ramifica una cadena: el zigzag es su forma real por los 109,5° del carbono sp³. Un −OH, −NH₂ o −Cl al final de la cadena no la hace heterogénea: solo cuenta un heteroátomo entre dos carbonos.'],
