@@ -7,6 +7,71 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (93) — Docente: explica el IDH en la guía de isomería y amplía isomería/alquenos/alcoholes con material de 2024
+
+### Contexto
+La docente subió 10 PDFs viejos de 2024 (guías "GA1"-"GA4"/"CI" y 5
+"evaluación de control" IIP por sección: 11, 11C, 11D, 11E, 11G) para
+revisar si aportaban algo a los bancos. Al ver que una de las preguntas
+propuestas usaba el índice de deficiencia de hidrógeno (IDH), pidió que si
+se iba a usar ese concepto, primero hubiera una sección que explicara cómo
+se calcula — si no, la pregunta no tendría de dónde sacar la respuesta,
+el mismo criterio de "no preguntar lo que la guía no enseña" que ya se
+había aplicado con el alcoholímetro.
+
+### Qué se revisó
+De los 10 PDFs, la mayoría era protocolo de laboratorio, tablas de
+nomenclatura ya cubiertas, o el mismo examen barajado entre las 5
+secciones de "evaluación de control" (confirmado comparando su contenido).
+Dos guías (GA3 de isomería/aromáticos y GA4 de reacciones de
+hidrocarburos) sí tenían contenido nuevo.
+
+### Qué se hizo (`docente-datos.js`)
+- **Tema `isomeria` (`TEMAS`)**: se agregaron 2 párrafos a `info.lectura`
+  explicando el IDH —fórmula `IDH = (2C+2+N−H)/2`, qué significa cada
+  valor, y un ejemplo resuelto (C₄H₈)— y una rama nueva al mapa de ideas
+  (`info.esquema`). Esto se agrega a la **guía completa** del tema, que es
+  donde la docente ve la lectura antes de la evaluación.
+- **`ABIERTAS.isomeria`**: 4 preguntas nuevas (cálculo de IDH con
+  interpretación; isómeros de posición de C₇H₁₄O; cis/trans de
+  3-metilhex-3-eno; identificar tipo de isomería en 5 pares, incluido uno
+  que deliberadamente NO son isómeros — el banco actual siempre daba por
+  hecho que sí lo eran).
+- **`ABIERTAS.alquenos`**: 3 preguntas nuevas, todas de reacciones
+  (retrosíntesis de un alqueno desde su producto diclorado, adición de HCl
+  con Markovnikov sobre hex-2-eno, prueba de Baeyer con KMnO₄ frío y
+  diluido).
+- **`ABIERTAS.alcoholes`**: 1 pregunta nueva, abierta a propósito (proponer
+  una ruta de síntesis para propan-2-ol; hay varias respuestas válidas).
+- Se corrigió un error propio: por equivocación las primeras 4 preguntas de
+  isomería se habían insertado en `TEMAS.isomeria.abiertos` (el banco de
+  los **talleres**, que no usa el campo `t`) en vez de en `ABIERTAS.isomeria`
+  (el de las **evaluaciones**) — se detectó y se corrigió antes de comitear.
+
+### Qué se descartó (de los mismos 10 PDFs)
+Una secuencia de reacciones de GA4 con un paso químicamente inconsistente
+en el documento original, un ejercicio con texto ilegible/mal escrito (no
+se intentó adivinar o inventar), nomenclatura de bencenos con sustituyentes
+tipo "t-butil"/"secbutil" (el tema de aromáticos ya se amplió bastante en
+la tarea anterior), y varios ítems ya cubiertos o fuera de alcance (química
+de pilas/contaminación, no orgánica).
+
+### Verificación
+Playwright (Chromium): la guía completa de isomería ya muestra la
+explicación del IDH en la lectura; se generaron evaluaciones con los 3
+temas (isomería, alquenos, alcoholes) en 3 variantes distintas, sin
+errores de consola, con las preguntas nuevas apareciendo correctamente
+etiquetadas.
+
+### Pendiente
+Queda por revisar (no se hizo todavía): 5 evaluaciones bimestrales de 2023
+(periodos II/III/IV) que la docente subió después — esa exploración sigue
+en curso y se integrará en una entrada aparte. No se tocó
+`chromanom-analytics.gs`, así que no hace falta redesplegar ni recalcular
+nada.
+
+---
+
 ## 2026-10-29 (92) — Docente: amplía SABER y ABIERTAS con ejercicios de la carpeta de Drive "MATERIAL 2026"
 
 ### Contexto
