@@ -7,6 +7,66 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (148) — Regla general: ninguna fórmula con paréntesis
+
+### Contexto
+El docente vio estructuras escritas con paréntesis (CH₃−CH(CH₃)−CH₃,
+(CH₃)₃C−OH…) y pidió volverlo regla general del repositorio: las fórmulas
+deben ser **semidesarrolladas mostrando todos sus enlaces** (las ramas
+colgando de su carbono) o, si no, **fórmulas moleculares**. Nunca
+paréntesis.
+
+### Regla en `CLAUDE.md`
+- Nueva convención «Fórmulas químicas: nunca con paréntesis», con las dos
+  formas permitidas, la notación del motor FX para escribirlas en el código
+  y las excepciones (reactivos inorgánicos como Ag(NH₃)₂⁺ o Pb(OAc)₂, y
+  paréntesis que no son de una fórmula, como «(1-metilpropil)»).
+
+### Convertidor común (`fx-libro.js`)
+- `fxCondensada` / `fxTexto` / `fxAuto`: toman una fórmula condensada con
+  paréntesis y la dibujan en semidesarrollada, con cada rama colgando de su
+  carbono y su enlace visible (arriba y, si hay otra, abajo). Cubre
+  CH(CH₃), C(CH₃)₂, C(CH₃)₄, (CH₃)₃C−, (CH₃)₂CH−, CH₂(OH), CH(OH)(OR′),
+  aminas (CH₃)₂NH y (CH₃)₃N, anhídridos (CH₃CO)₂O, cadenas (CH₂)₄ y ramas
+  escritas sin enlaces (C₂H₅ → CH₂−CH₃).
+- `fxAuto` se aplica sola a toda la página y a lo que se pinte después
+  (preguntas del juego, documentos, laberintos, crucigramas). Para la
+  narración y los lectores de pantalla se conserva el texto original oculto.
+- Ahora se carga en Carbono, Tipos de carbono, Cadenas, Isomería, Grupos,
+  Principios, Referencia y el Juego (ya estaba en Reacciones y el Generador).
+
+### Ajustes puntuales
+- `juego.html`: la opción correcta se reconoce por un atributo propio
+  (antes comparaba el texto del botón, que cambia al dibujar la fórmula);
+  el distractor C₆H₄(NO₂)₂ pasó a fórmula molecular C₆H₄N₂O₄.
+- `docente-app.js`: usa el mismo convertidor que el resto del sitio.
+- `laberinto.js` / `crucigrama.js`: las ecuaciones y pistas salen
+  dibujadas; se descartan las que aún no se puedan dibujar sin paréntesis.
+- `reacciones.html`: a mano, lo que el convertidor no alcanza — dibujos SVG
+  de la cianohidrina y del alcohol del Grignard (ahora con sus enlaces), la
+  mezcla de nitración (2-nitropropano), el butan-2-ol de la eliminación y
+  el 2-bromopropano resaltado.
+- `teoria.html`: tabla de sec-butil / terc-butil con la rama escrita como
+  fórmula que se dibuja.
+- `narracion.js`: no lee dos veces una fórmula dibujada.
+- `sw.js`: caché `chromanom-v47`.
+
+### Verificado (Playwright)
+- Barrido de todas las páginas, de todo el banco del juego (149 textos con
+  fórmulas), de guías, talleres y evaluaciones de los 15 temas, de 20
+  laberintos de reacciones y de las 99 pistas de crucigrama: no queda
+  ninguna fórmula orgánica con paréntesis.
+
+### Pendiente
+- Siguen escritas con paréntesis, por norma IUPAC, algunas fórmulas de
+  reactivos inorgánicos (Tollens Ag(NH₃)₂⁺, Lindlar Pb(OAc)₂, Cu₂(CN)₂,
+  LiAlH(OtBu)₃).
+- Hay fórmulas condensadas **sin paréntesis pero sin guiones de enlace**
+  (CH₃CH₂OH, CH₃COOH…) en páginas antiguas, sobre todo en Reacciones. No
+  se tocaron en esta sesión.
+
+---
+
 ## 2026-10-29 (147) — Generador docente en pestañas, con laberintos y crucigramas (adaptados de IonNom)
 
 ### Contexto

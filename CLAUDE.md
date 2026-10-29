@@ -45,6 +45,29 @@ hace falta registrar nada.
   este error", reproducirlo primero (Playwright con Chromium está
   disponible) en vez de solo razonar sobre el código — varios bugs de este
   proyecto solo se manifestaron al probarlos funcionalmente.
+- **Fórmulas químicas: nunca con paréntesis.** Regla general del docente
+  para todo el sitio (páginas, juego, generador, laberintos, crucigramas,
+  hojas impresas): ninguna fórmula se muestra al estudiante con ramas entre
+  paréntesis (nada de `CH₃−CH(CH₃)−CH₃`, `(CH₃)₃C−OH`, `C(CH₃)₄`,
+  `CH₃CH(OH)CH₃`). Solo se permiten dos formas:
+  1. **Semidesarrollada mostrando todos sus enlaces**: cada rama cuelga de
+     su carbono con su enlace dibujado (arriba y, si hay otra, abajo), como
+     en un libro. En el código se escribe con la notación del motor FX de
+     `fx-libro.js` (`CH₃—⟦CH₃|CH⟧—CH₃`, `⟦arriba|C|abajo⟧`), o con figuras
+     SVG que dibujen los enlaces.
+  2. **Fórmula molecular** (C₄H₁₀, C₂H₆O…) cuando lo que importa es la
+     composición y no la estructura.
+  Red de seguridad: `fx-libro.js` (cargado en todas las páginas de
+  contenido y en el generador) convierte solo, al pintarse la página, las
+  fórmulas condensadas con paréntesis que hayan quedado en los datos
+  (`fxAuto`, `fxTexto`, `fxCondensada`). Aun así, el contenido NUEVO se
+  escribe ya sin paréntesis, y lo que el convertidor no sepa dibujar
+  (paréntesis anidados, textos dentro de SVG, `<option>` de un `<select>`)
+  se corrige a mano. Para ejercicios generados al azar, descartar los que
+  aún tengan paréntesis con `fxQuedanParentesis(texto)`. Excepciones: los
+  complejos y reactivos inorgánicos que por norma IUPAC se escriben así
+  (Ag(NH₃)₂⁺ de Tollens, Pb(OAc)₂…) y los paréntesis que no son de una
+  fórmula (nombres como «(1-metilpropil)», aclaraciones en el texto).
 - `juego.html` se sirve directo por GitHub Pages: un cambio ahí no necesita
   ningún paso de despliegue aparte de hacer push a `main`.
 - `chromanom-analytics.gs` sí necesita redespliegue manual en el editor de

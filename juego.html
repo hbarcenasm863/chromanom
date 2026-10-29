@@ -3166,14 +3166,14 @@ function buildMC(q){
   // Temas conceptuales (Fase 1 e isomería): las opciones son frases, no
   // nombres IUPAC, y se leen mejor en la letra normal que en monoespaciada.
   const _txt=FUND_TOPICS.includes(q.topic)?' mc-texto':'';
-  return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" onclick="checkMC('${o.replace(/'/g,"\\'")}',this)">${html[i]}</button>`).join('')}</div>`;
+  return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" data-ans="${String(o).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}" onclick="checkMC(this.dataset.ans,this)">${html[i]}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
   if(answered)return;
   answered=true; stopTimer();
   const q=questions[qIdx];
   const allBtns=document.querySelectorAll('.mc-opt');
-  allBtns.forEach(b=>{b.disabled=true; if(b.textContent===q.ans)b.classList.add('correct');});
+  allBtns.forEach(b=>{b.disabled=true; if(b.dataset.ans===q.ans)b.classList.add('correct');});
   const ok=norm(ans)===norm(q.ans);
   if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
   else{btn.classList.add('wrong');}
@@ -6403,7 +6403,7 @@ const QBANK_RXNQ=[
   {type:'rxnq',subtype:'nombre',topic:'rxn_alcanos',rxn:'Halogenación radical',mol_r:'etano',mol_p:null,q:'¿Cómo se llama esta reacción?',r:'CH₃−CH₃',reactivo:'+ Br₂',condicion:'hν',producto:'Q0jigoNDSOKCgkJyICsgSEJy',opts:['Halogenación radical (bromación)','Adición de Br₂ al doble enlace','Eliminación','Sustitución Nucleofílica SN2'],ans:'SGFsb2dlbmFjacOzbiByYWRpY2FsIChicm9tYWNpw7NuKQ==',expl:'TG9zIGFsY2Fub3MgcmVhY2Npb25hbiBjb24gQnLigoIgYmFqbyBsdXogVVYgcG9yIHN1c3RpdHVjacOzbiByYWRpY2FsIChTUikuIE5vIGhheSBkb2JsZSBlbmxhY2UgcXVlIGFkaWNpb25hci4='},
   {type:'rxnq',subtype:'producto',topic:'rxn_aromaticos',rxn:'Halogenación (SEA)',mol_r:'build_benceno',mol_p:'YnVpbGRfY2xvcm9iZW5jZW5v',q:'Predice el <strong>producto</strong> de la halogenación del benceno:',r:'C₆H₆',reactivo:'+ Cl₂',condicion:'cat. FeCl₃',producto:'Q+KChkjigoVDbCArIEhDbA==',opts:['C₆H₅Cl + HCl (clorobenceno)','C₆H₄Cl₂ (diclorobenceno)','C₆H₁₁Cl (clorociclohexano)','C₆H₆ (sin reacción)'],ans:'Q+KChkjigoVDbCArIEhDbCAoY2xvcm9iZW5jZW5vKQ==',expl:'U0VBOiBGZUNs4oKDIGFjdGl2YSBDbOKCgiBnZW5lcmFuZG8gQ2zigbouIEVsIGFuaWxsbyBzdXN0aXR1eWUgdW4gSCBwb3IgQ2wgcmVjdXBlcmFuZG8gbGEgYXJvbWF0aWNpZGFkIOKGkiBjbG9yb2JlbmNlbm8u'},
   {type:'rxnq',subtype:'condicion',topic:'rxn_aromaticos',rxn:'Halogenación (SEA)',mol_r:'build_benceno',mol_p:'YnVpbGRfY2xvcm9iZW5jZW5v',q:'¿Qué <strong>catalizador</strong> activa la halogenación del benceno?',r:'C₆H₆',reactivo:'+ Cl₂',condicion:null,producto:'Q+KChkjigoVDbCArIEhDbA==',opts:['cat. FeCl₃ (ácido de Lewis)','cat. Ni/Pd (metal)','hν (luz UV)','cat. H₂SO₄'],ans:'Y2F0LiBGZUNs4oKDICjDoWNpZG8gZGUgTGV3aXMp',expl:'TGEgU0VBIHJlcXVpZXJlIHVuIMOhY2lkbyBkZSBMZXdpcyAoRmVDbOKCgywgQWxDbOKCgykgcXVlIGNvb3JkaW5hIGNvbiBlbCBoYWzDs2dlbm8geSBnZW5lcmEgZWwgZWxlY3Ryw7NmaWxvIGFjdGl2by4='},
-  {type:'rxnq',subtype:'producto',topic:'rxn_aromaticos',rxn:'Nitración (SEA)',mol_r:'build_benceno',mol_p:null,q:'Indica el <strong>producto</strong> de la nitración del benceno:',r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄ / Δ',producto:'Q+KChkjigoVOT+KCgiArIEjigoJP',opts:['C₆H₅NO₂ + H₂O (nitrobenceno)','C₆H₅NH₂ + H₂O (anilina)','C₆H₅OH + HNO₂ (fenol)','C₆H₄(NO₂)₂ (dinitrobenceno)'],ans:'Q+KChkjigoVOT+KCgiArIEjigoJPIChuaXRyb2JlbmNlbm8p',expl:'U0VBLU5pdHJhY2nDs246IEjigoJTT+KChCBnZW5lcmEgTk/igoLigbogKGlvbiBuaXRyb25pbykgcXVlIGF0YWNhIGVsIGFuaWxsbyDihpIgbml0cm9iZW5jZW5vICsgSOKCgk8u'},
+  {type:'rxnq',subtype:'producto',topic:'rxn_aromaticos',rxn:'Nitración (SEA)',mol_r:'build_benceno',mol_p:null,q:'Indica el <strong>producto</strong> de la nitración del benceno:',r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄ / Δ',producto:'Q+KChkjigoVOT+KCgiArIEjigoJP',opts:['C₆H₅NO₂ + H₂O (nitrobenceno)','C₆H₅NH₂ + H₂O (anilina)','C₆H₅OH + HNO₂ (fenol)','C₆H₄N₂O₄ (dinitrobenceno)'],ans:'Q+KChkjigoVOT+KCgiArIEjigoJPIChuaXRyb2JlbmNlbm8p',expl:'U0VBLU5pdHJhY2nDs246IEjigoJTT+KChCBnZW5lcmEgTk/igoLigbogKGlvbiBuaXRyb25pbykgcXVlIGF0YWNhIGVsIGFuaWxsbyDihpIgbml0cm9iZW5jZW5vICsgSOKCgk8u'},
   {type:'rxnq',subtype:'producto',topic:'rxn_aromaticos',rxn:'Alquilación de Friedel-Crafts',mol_r:'build_benceno',mol_p:'YnVpbGRfdG9sdWVubw==',q:'Predice el <strong>producto</strong> de la alquilación de Friedel-Crafts:',r:'C₆H₆',reactivo:'+ CH₃Cl',condicion:'cat. AlCl₃',producto:'Q+KChkjigoVDSOKCgyArIEhDbA==',opts:['C₆H₅CH₃ + HCl (tolueno)','C₆H₅Cl + CH₄','C₆H₁₂ (ciclohexano)','C₆H₅OCH₃ + HCl (éter)'],ans:'Q+KChkjigoVDSOKCgyArIEhDbCAodG9sdWVubyk=',expl:'RnJpZWRlbC1DcmFmdHM6IEFsQ2zigoMgZ2VuZXJhIENI4oKD4oG6IChlbGVjdHLDs2ZpbG8pLiBFbCBhbmlsbG8gbG8gaW5jb3Jwb3JhIHN1c3RpdHV5ZW5kbyBIIOKGkiB0b2x1ZW5vLg=='},
   {type:'rxnq',subtype:'nombre',topic:'rxn_aromaticos',rxn:'Alquilación de Friedel-Crafts',mol_r:'build_benceno',mol_p:'YnVpbGRfdG9sdWVubw==',q:'¿Cómo se llama esta reacción?',r:'C₆H₆',reactivo:'+ CH₃Cl',condicion:'AlCl₃',producto:'Q+KChkjigoVDSOKCgyArIEhDbA==',opts:['Alquilación de Friedel-Crafts','Halogenación aromática','Nitración aromática','Sustitución Radical'],ans:'QWxxdWlsYWNpw7NuIGRlIEZyaWVkZWwtQ3JhZnRz',expl:'TGEgaW50cm9kdWNjacOzbiBkZSB1biBncnVwbyBhbHF1aWxvIGVuIHVuIGFuaWxsbyBhcm9tw6F0aWNvIHVzYW5kbyB1biBoYWx1cm8gZGUgYWxxdWlsbyArIEFsQ2zigoMgZXMgbGEgQWxxdWlsYWNpw7NuIGRlIEZyaWVkZWwtQ3JhZnRzIChTRUEpLg=='},
   {type:'rxnq',subtype:'nombre',topic:'rxn_aromaticos',rxn:'Nitración (SEA)',mol_r:'build_benceno',mol_p:null,q:'¿Cómo se llama esta reacción?',r:'C₆H₆',reactivo:'+ HNO₃',condicion:'H₂SO₄',producto:'Q+KChkjigoVOT+KCgiArIEjigoJP',opts:['Nitración aromática (SEA)','Nitración radical','Adición electrofílica','Oxidación'],ans:'Tml0cmFjacOzbiBhcm9tw6F0aWNhIChTRUEp',expl:'TGEgaW50cm9kdWNjacOzbiBkZSDiiJJOT+KCgiBlbiBlbCBhbmlsbG8gYmVuY8OpbmljbyB1c2FuZG8gSE5P4oKDL0jigoJTT+KChCBlcyBsYSBOaXRyYWNpw7NuIGFyb23DoXRpY2EsIHVuIHRpcG8gZGUgU0VBLg=='},
@@ -7428,6 +7428,7 @@ function confirmExitGame(){
 </div>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
+<script src="fx-libro.js"></script>
 <script src="site-ui.js"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>

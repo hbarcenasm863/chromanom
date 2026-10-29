@@ -39,20 +39,8 @@ function barajar(arr,r){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Ma
    Una fórmula condensada con ramas entre paréntesis (CH₃−CH(OH)−CH₃) se
    dibuja en semidesarrollada, con la rama colgando de su carbono con un
    enlace hacia arriba (motor FX de fx-libro.js), nunca con paréntesis. */
-var RE_FORM=/[A-Za-z0-9₀-₉−=≡()]+/g;
-function formulaFx(tok){
-  // Quitar paréntesis que encierran toda la fórmula, como en «(CH₃−CH(CH₃)−CH₃)».
-  var pre='',pos='';
-  function cuenta(t,c){return t.split(c).length-1;}
-  function envuelve(t){if(t.charAt(0)!=='('||t.slice(-1)!==')')return false;var d=0;for(var i=0;i<t.length;i++){if(t[i]==='(')d++;else if(t[i]===')'){d--;if(d===0&&i<t.length-1)return false;}}return true;}
-  while(envuelve(tok)){pre+='(';pos=')'+pos;tok=tok.slice(1,-1);}
-  while(tok.charAt(0)==='('&&cuenta(tok,'(')>cuenta(tok,')')){pre+='(';tok=tok.slice(1);}
-  while(tok.slice(-1)===')'&&cuenta(tok,')')>cuenta(tok,'(')){pos=')'+pos;tok=tok.slice(0,-1);}
-  if(!/[−=≡]/.test(tok)||!/C(?:H[₂₃]?)?\(/.test(tok)||typeof FX==='undefined')return null;
-  var n=fxNorm(tok.replace(/C\(([^()]+)\)\(([^()]+)\)/g,'⟦$1|C|$2⟧'));
-  if(/\(/.test(n))return null;
-  return esc(pre)+'<span class="fx-in">'+FX.mol(n)+'</span>'+esc(pos);
-}
+var RE_FORM=/[A-Za-z0-9₀-₉−—=≡()′″⁺⁻]+/g;
+function formulaFx(tok){return typeof fxFormulaHTML==='function'?fxFormulaHTML(tok):null;}
 function escQ(s){
   s=String(s==null?'':s);var out='',last=0,m;RE_FORM.lastIndex=0;
   while((m=RE_FORM.exec(s))){var h=formulaFx(m[0]);if(h===null)continue;out+=esc(s.slice(last,m.index))+h;last=m.index+m[0].length;}

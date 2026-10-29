@@ -93,10 +93,10 @@ function pistasNom(cfg){
   mols().filter(m => cfg.fam.includes(m.topic)).forEach(m => {
     const n = nombreDe(m);
     if(/\d|[A-Z]|,/.test(n)) return;
-    const f = textoCadena(moldes[m.key]); if(!f) return;
+    const f = textoCadena(moldes[m.key]); if(!f || fxQuedanParentesis(f)) return;
     const w = palabra(n); if(!w || vistos[w] || vistos['f:' + f]) return;
     vistos[w] = 1; vistos['f:' + f] = 1;
-    out.push({tipo:'nom', clave:'m:' + m.key, respuesta:w, solucion:n, pista:'Nombre IUPAC de <b class="fx">' + esc(f) + '</b>'});
+    out.push({tipo:'nom', clave:'m:' + m.key, respuesta:w, solucion:n, pista:'Nombre IUPAC de <b class="fx">' + (fxTexto(f) || esc(f)) + '</b>'});
   });
   return out;
 }

@@ -258,13 +258,16 @@ function productoDe(rx){ return String(rx.respuesta || '').split(/\s{2,}|\s\(|\s
 function poolRx(){
   // mismas exclusiones de nivel universitario que el generador de guías (docente-app.js)
   const FUERA = /diazo|aldólica|acetiluro|Acidez \(alquinos\)|Reducción \(alquinos\)|Grignard/i;
-  return rxns().filter(x => x.pregunta_tipo === 'producto' && tipoRx(x.categoria) && x.nivel !== 'avanzado' && !FUERA.test(x.categoria || '') && productoDe(x) && !/^[a-záéíóúñ]/.test(productoDe(x)) && productoDe(x).length <= 60);
+  return rxns().filter(x => x.pregunta_tipo === 'producto' && tipoRx(x.categoria) && x.nivel !== 'avanzado' && !FUERA.test(x.categoria || '') && productoDe(x) && !/^[a-záéíóúñ]/.test(productoDe(x)) && productoDe(x).length <= 60
+    && !fxQuedanParentesis(x.r) && !fxQuedanParentesis(productoDe(x)));
 }
+// fórmula de texto → dibujada sin paréntesis (fx-libro.js)
+const fxh = t => fxTexto(t) || esc(t);
 function genRx(r, o){
   const x = pick(o.pool, r); if(!x) return null;
   const tipo = tipoRx(x.categoria), tL = t => L(t, 'R:' + t);
   const ok = [tipo].concat(RX_TAMBIEN[tipo] || []);
-  const fo = '<span class="nw">' + esc(x.r) + '</span> ' + (x.reactivo ? '<span class="nw">' + esc(x.reactivo) + '</span> ' : '') + '→ <span class="nw">' + esc(productoDe(x)) + '</span>';
+  const fo = '<span class="nw">' + fxh(x.r) + '</span> ' + (x.reactivo ? '<span class="nw">' + fxh(x.reactivo) + '</span> ' : '') + '→ <span class="nw">' + fxh(productoDe(x)) + '</span>';
   return {key:'rx' + x.key, qh:'¿Qué tipo de reacción es?', fo, foc:'eqx', ft: x.condicion ? esc(x.condicion) : '',
     ans: tL(tipo), niveles:[(RX_CONF[tipo] || []).map(tL)], cands: TIPOS_RX.map(tL),
     more: rr => tL(pick(TIPOS_RX, rr)), acepta: lab => ok.some(t => lab.k === 'R:' + t), fs:[]};
