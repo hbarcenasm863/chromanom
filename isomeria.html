@@ -204,6 +204,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
 
 <nav class="toc" aria-label="Secciones de la página">
   <a href="#intro">¿Qué es un isómero?</a>
+  <a href="#idh">El IDH</a>
   <a href="#cadena">De cadena</a>
   <a href="#posfun">De posición y de función</a>
   <a href="#geometrica">Cis / trans</a>
@@ -234,6 +235,38 @@ table.tbl{border-collapse:collapse;width:100%;font-size:.84rem;min-width:0}
       <a class="tree-leaf" href="#optica"><b>Óptica (enantiómeros):</b> por un carbono quiral; son imágenes en el espejo.</a>
     </div>
   </div>
+</section>
+
+<!-- ═══════════════ 0b. ÍNDICE DE DEFICIENCIA DE HIDRÓGENO ═══════════════ -->
+<section class="sec" id="idh">
+  <div class="sec-kicker">Antes de buscar isómeros</div>
+  <h2>¿Cuántas insaturaciones tiene? El índice de deficiencia de hidrógeno (IDH)</h2>
+  <p>Antes de dibujar todos los isómeros de una fórmula, conviene saber de antemano <b>cuántos anillos y/o enlaces dobles o triples</b> debe tener la molécula, sin dibujar nada todavía. Eso es lo que te dice el <b>índice de deficiencia de hidrógeno (IDH)</b>, también llamado grado de insaturación: cuenta cuántos hidrógenos "le faltan" a la fórmula comparada con el alcano de cadena abierta del mismo número de carbonos (el que tiene el máximo posible de H).</p>
+
+  <h3>La fórmula</h3>
+  <div class="key">🔑 <b>IDH = (2C + 2 + N − H) / 2</b>, donde <b>C</b> es el número de carbonos, <b>H</b> el de hidrógenos y <b>N</b> el de nitrógenos de la fórmula molecular. Dos detalles importantes: cada <b>halógeno</b> (F, Cl, Br, I) se cuenta <b>como si fuera un H</b> (también "le falta" a la cadena saturada), y el <b>oxígeno no se cuenta</b> para nada, porque un −O− no cambia cuántos H puede llevar la cadena.</div>
+
+  <h3>¿Qué significa el resultado?</h3>
+  <div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>IDH</th><th>Qué puede ser</th></tr></thead>
+    <tbody>
+      <tr><td><b>0</b></td><td>Cadena abierta y saturada: sin anillos ni enlaces múltiples (un alcano, o un alcohol/haluro/amina sin insaturación).</td></tr>
+      <tr><td><b>1</b></td><td>Un anillo <b>o</b> un enlace doble (pero no los dos). Por ejemplo, un alqueno o un cicloalcano.</td></tr>
+      <tr><td><b>2</b></td><td>Dos anillos, dos enlaces dobles, un anillo y un doble enlace, o un solo enlace triple (un triple enlace "vale" 2, porque equivale a dos π).</td></tr>
+      <tr><td><b>4</b></td><td>Un anillo aromático (benceno) por sí solo: 1 anillo + 3 enlaces π deslocalizados.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>El IDH <b>no</b> dice cuál de esas opciones es ni dónde está la insaturación — eso hay que decidirlo dibujando la estructura. Pero sí te dice exactamente cuántas insaturaciones en total debe tener cualquier estructura con esa fórmula.</p>
+
+  <h3>Ejemplo resuelto</h3>
+  <p>Para <b>C₄H₈</b>: IDH = (2×4 + 2 − 8) / 2 = 2/2 = <b>1</b>. Esa única insaturación puede ser un alqueno de cadena abierta (but-1-eno, but-2-eno) o un cicloalcano (ciclobutano, metilciclopropano): los cuatro son isómeros entre sí, y los cuatro tienen IDH = 1.</p>
+  <p>Para el <b>benceno, C₆H₆</b>: IDH = (2×6 + 2 − 6) / 2 = 8/2 = <b>4</b>, que coincide con el anillo aromático (1 anillo + 3 π) — nunca hace falta buscar otra insaturación aparte del anillo.</p>
+
+  <div class="warn">⚠️ <b>Para qué te sirve al buscar isómeros:</b> si vas a listar todos los isómeros de una fórmula, calcula primero su IDH. Si es <b>0</b>, ni te molestes en buscar alquenos, alquinos o anillos: todos los isómeros son alcanos de cadena abierta. Si es <b>1</b>, sabes que cada isómero tiene <i>exactamente</i> una insaturación (un doble enlace o un anillo, nunca cero ni dos), así que puedes concentrarte en esas dos familias sin desperdiciar tiempo en otras.</div>
+
+  <div class="prac" id="prac-idh"></div>
 </section>
 
 <!-- ═══════════════ 1. ISOMERÍA DE CADENA ═══════════════ -->
@@ -733,6 +766,32 @@ const PRACT={
       {t:'En cómo desvían la luz polarizada y en cómo actúan con moléculas quirales del cuerpo',ok:true},
       {t:'En el orden en que están unidos los átomos',fb:'Eso sería isomería estructural. En los enantiómeros el orden de unión es el mismo; cambia la disposición en el espacio.'}],
      ok:'Desvían la luz polarizada en sentidos opuestos y pueden tener olores o efectos distintos en el cuerpo (carvona, talidomida).'},
+  ]},
+  idh:{titulo:'Práctica: índice de deficiencia de hidrógeno',qs:[
+    {q:'¿Cuál es el IDH del butano, C₄H₁₀?',opts:[
+      {t:'0',ok:true},
+      {t:'1',fb:'Calcula de nuevo: (2×4 + 2 − 10) / 2. El butano es un alcano, sin anillos ni dobles/triples enlaces: su IDH debe dar 0.'},
+      {t:'2',fb:'Revisa la resta: 2×4 + 2 = 10, y la fórmula tiene 10 H. 10 − 10 = 0, no 4.'},
+      {t:'No se puede calcular sin dibujarlo',fb:'El IDH se calcula solo con la fórmula molecular, sin necesidad de dibujar nada.'}],
+     ok:'IDH = (2×4 + 2 − 10) / 2 = (8 + 2 − 10) / 2 = 0/2 = <b>0</b>. El butano es un alcano saturado de cadena abierta: tiene que dar 0.'},
+    {q:'¿Cuál es el IDH del benceno, C₆H₆?',opts:[
+      {t:'4',ok:true},
+      {t:'3',fb:'Casi: contaste los 3 enlaces π, pero el anillo en sí mismo también cuenta como una insaturación más (1 anillo + 3 π = 4).'},
+      {t:'1',fb:'Eso sería el IDH de un solo anillo saturado (ciclohexano) o de un solo doble enlace. El benceno tiene además 3 enlaces π deslocalizados.'},
+      {t:'6',fb:'No se cuenta un punto por cada carbono del anillo, sino por cada anillo y cada enlace π: 1 anillo + 3 π = 4.'}],
+     ok:'IDH = (2×6 + 2 − 6) / 2 = 8/2 = <b>4</b>: el anillo aromático por sí solo (1 anillo + 3 π) explica las 4 unidades.'},
+    {q:'Un compuesto de fórmula C₅H₁₀ resulta ser de <b>cadena abierta</b> (no tiene ningún anillo). ¿Qué insaturación debe tener?',opts:[
+      {t:'Un doble enlace (es un alqueno)',ok:true},
+      {t:'Un triple enlace (es un alquino)',fb:'Un triple enlace vale 2 unidades de IDH, pero aquí el IDH es 1. Si tuviera un triple enlace, la fórmula tendría 2 H menos: C₅H₈.'},
+      {t:'No tiene ninguna insaturación',fb:'Calcula el IDH: (2×5+2−10)/2 = 2/2 = 1. Si no tiene anillos, esa única insaturación tiene que ser un enlace π.'},
+      {t:'Dos dobles enlaces',fb:'Dos dobles enlaces darían IDH = 2, pero aquí el IDH es 1 (una sola insaturación).'}],
+     ok:'IDH = (2×5 + 2 − 10) / 2 = 2/2 = 1. Como el enunciado ya dice que no hay anillos, esa única insaturación solo puede ser un <b>doble enlace</b>.'},
+    {q:'Vas a buscar todos los isómeros de <b>C₄H₈</b> y calculas que su IDH es 1. ¿Qué te dice eso sobre qué estructuras considerar?',opts:[
+      {t:'Que cada isómero tiene exactamente una insaturación: será un alqueno (doble enlace) o un cicloalcano (anillo), nunca un alcano de cadena abierta',ok:true},
+      {t:'Que todos los isómeros son alcanos',fb:'Un alcano de cadena abierta de 4 C sin insaturación es C₄H₁₀, no C₄H₈: su IDH sería 0, no 1.'},
+      {t:'Que todos los isómeros tienen un triple enlace',fb:'Un triple enlace vale 2 unidades de IDH. Con IDH = 1 no puede haber ningún triple enlace.'},
+      {t:'Que esa fórmula no puede tener isómeros',fb:'El IDH no dice si hay o no isómeros, solo cuántas insaturaciones debe tener cada uno. C₄H₈ sí tiene varios: but-1-eno, but-2-eno, ciclobutano, metilciclopropano…'}],
+     ok:'Con IDH = 1 sabes de antemano que <b>no</b> vale la pena buscar alcanos (IDH 0) ni compuestos con dos insaturaciones: cada isómero de C₄H₈ tiene un doble enlace <b>o</b> un anillo, nunca los dos ni ninguno.'},
   ]},
 };
 

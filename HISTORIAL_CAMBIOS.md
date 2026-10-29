@@ -7,6 +7,46 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (94) — Isomería: agrega la sección del IDH a `isomeria.html`
+
+### Contexto
+Tras agregar el índice de deficiencia de hidrógeno (IDH) a la lectura de
+`docente.html` (entrada 93), la docente pidió que la explicación también
+estuviera en `isomeria.html` —la página pública de la ruta de aprendizaje,
+no solo en el generador del docente— con qué es, cómo se calcula y para
+qué sirve dentro de isomería.
+
+### Qué se hizo (`isomeria.html`)
+- Nueva sección `#idh` ("¿Cuántas insaturaciones tiene? El índice de
+  deficiencia de hidrógeno"), ubicada justo después de la introducción y
+  antes de "Isomería de cadena" (es una herramienta que conviene usar
+  *antes* de ponerse a buscar isómeros de una fórmula). Incluye:
+  - La fórmula (`IDH = (2C+2+N−H)/2`) con las dos salvedades (halógenos
+    cuentan como H, oxígeno no se cuenta).
+  - Una tabla de qué significa cada valor (0, 1, 2, 4).
+  - Dos ejemplos resueltos (C₄H₈ y benceno).
+  - Un recuadro que conecta el concepto con isomería: para qué sirve
+    calcularlo antes de enumerar isómeros de una fórmula dada.
+  - Una práctica interactiva nueva (`PRACT.idh`, 4 preguntas de opción
+    múltiple con retroalimentación por opción, mismo formato que las demás
+    prácticas de la página).
+- Se agregó el enlace "El IDH" a la tabla de contenido (`nav.toc`) de la
+  página.
+
+### Verificación
+Playwright (Chromium): la sección y su práctica se renderizan sin errores
+de consola; se confirmó que las 4 preguntas de la nueva práctica aparecen
+con sus opciones.
+
+### Pendiente
+Quedan por integrar al código las 14 entradas (7 `SABER` + 7 `ABIERTAS`)
+de la exploración de los 5 bimestrales de 2023, que terminó en paralelo a
+este cambio — se hará en una entrada aparte. No se tocó
+`chromanom-analytics.gs`, así que no hace falta redesplegar ni recalcular
+nada.
+
+---
+
 ## 2026-10-29 (93) — Docente: explica el IDH en la guía de isomería y amplía isomería/alquenos/alcoholes con material de 2024
 
 ### Contexto
