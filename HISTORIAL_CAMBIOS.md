@@ -7,6 +7,30 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-10-29 (91) — Docente: quita del banco SABER una pregunta de trivia sin sustento químico (alcoholímetro)
+
+### Contexto
+La docente vio en una evaluación generada una pregunta que pedía explicar
+por qué el etanol del aliento refleja el nivel de alcohol en la sangre
+— un dato de fisiología/CTS sin relación con nomenclatura ni reacciones
+(las dos bases de la página) y sin ninguna estructura o reacción que
+sustentara la respuesta desde la química enseñada.
+
+### Qué se hizo (`docente-datos.js`)
+Se eliminó esa entrada del banco `SABER` (tema `alcoholes`, área `prop`,
+competencia `exp`). El resto de preguntas de contexto CTS de ese tema que
+sí dependen de una propiedad química verificable (solubilidad, puntos de
+ebullición, puentes de hidrógeno) se dejaron intactas.
+
+### Pendiente
+Se lanzó una exploración de la carpeta de Drive "MATERIAL 2026" (evaluaciones
+y talleres reales de la docente) para encontrar ejercicios de nomenclatura
+y reacciones con los que ampliar los bancos `ABIERTAS` y `SABER` — esa
+tarea sigue en curso; su resultado se registrará en una entrada aparte
+cuando se integre. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-10-29 (90) — Docente: corrige el tope de "Preguntas abiertas" (pedía 10, solo salían 6)
 
 ### Contexto
