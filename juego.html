@@ -838,10 +838,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   <div class="portada-inner">
     <img src="logo-chromanom.png" style="height:48px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.18))" alt="Nomenclatura Orgánica Fácil"/>
     <div class="portada-title" style="font-size:1.6rem;margin-top:8px">Modo <em>Reto</em></div>
-    <div class="portada-sub">Pon a prueba tu nomenclatura IUPAC.<br>Elige tu modo de acceso y luego el nivel.</div>
+    <div class="portada-sub">Pon a prueba tu nomenclatura IUPAC.<br>Elige un nivel y empieza a jugar.</div>
 
-    <!-- SELECTOR DE MODO -->
-    <div class="modo-selector">
+    <!-- SELECTOR DE MODO — oculto mientras el modo estudiante esté desactivado
+         (ver MODO_ESTUDIANTE_ACTIVO en el script). -->
+    <div class="modo-selector" id="modo-selector">
       <button class="modo-btn active-colegio" id="btn-modo-colegio" onclick="setModo('colegio')">
         <span class="mb-icon">🎓</span>
         <span class="mb-title">Acceso estudiante</span>
@@ -853,7 +854,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
         <span class="mb-sub">Sin registro · Sin datos</span>
       </button>
     </div>
-    <div class="modo-divider"><span id="modo-label">Selecciona tu nivel</span></div>
+    <div class="modo-divider"><span id="modo-label">Elige tu nivel</span></div>
 
     <!-- Identificación del estudiante: inline en la portada (sin modal) -->
     <div class="inline-card" id="login-panel">
@@ -2639,10 +2640,20 @@ function updateStreakDisplay(){
 }
 
 // ── Modo de acceso ──────────────────────────────────────
-let freeMode = false;
-let freeConsent = false;
+// Interruptor del modo estudiante (código, nota y envío de analíticas a la
+// hoja del docente). Por decisión del docente queda DESACTIVADO por el
+// resto del año: el juego funciona solo en modo libre y no envía ningún
+// dato. Para volver a activarlo, cambiar a true.
+const MODO_ESTUDIANTE_ACTIVO = false;
+let freeMode = !MODO_ESTUDIANTE_ACTIVO;
+// Sin analíticas no hay nada que consentir: se salta el aviso del modo libre.
+let freeConsent = !MODO_ESTUDIANTE_ACTIVO;
+if(!MODO_ESTUDIANTE_ACTIVO){
+  document.getElementById('modo-selector').style.display='none';
+}
 
 function setModo(modo){
+  if(!MODO_ESTUDIANTE_ACTIVO) modo='libre';
   freeMode = (modo==='libre');
   document.getElementById('btn-modo-colegio').className='modo-btn'+(freeMode?'':' active-colegio');
   document.getElementById('btn-modo-libre').className='modo-btn'+(freeMode?' active-libre':'');
@@ -2807,7 +2818,7 @@ function cargarProgresoInline(){
     document.getElementById(id).textContent='–';
   });
   document.getElementById('progreso-periodo-fechas').textContent='';
-  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const url=ANALYTICS_URL+'?accion=progreso&nombre='+encodeURIComponent(studentName)+'&curso='+encodeURIComponent(studentCourse);
   // 9s en vez de 4s: con toda la clase entrando su código casi al mismo
   // tiempo, el .gs puede tardar más (incluye su propio reintento con
@@ -7077,7 +7088,7 @@ let _sessionId = '';
 // reintentos, como estaba antes, podía perder ese registro para siempre sin
 // que nadie —ni el estudiante ni el docente— se enterara de que algo falló.
 function sendSessionStart(){
-  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const body=JSON.stringify({
     fecha:     new Date().toISOString().slice(0,10),
     hora:      new Date().toTimeString().slice(0,5),
@@ -7176,7 +7187,7 @@ function buildPayload(trigger){
 // tropiezos momentáneos sin depender de que el estudiante actúe.
 const _ANALYTICS_INTENTOS=3;
 function sendAnalytics(trigger){
-  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   if(_analyticsSent) return;
   // OJO: antes se descartaba el envío si history estaba vacío (0 preguntas
   // respondidas), pensando que "no hay nada que guardar". Pero eso dejaba a
@@ -7274,6 +7285,7 @@ function closeEnvioModal(){
 function sendToSheets(){
   const btn=document.getElementById('btn-sheets');
   const status=document.getElementById('sheets-status');
+  if(!MODO_ESTUDIANTE_ACTIVO) return;
   if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT'){
     if(status) status.textContent='⚠ Configura la URL del Apps Script en el código (ANALYTICS_URL).';
     return;
@@ -7370,7 +7382,7 @@ document.addEventListener('visibilitychange',()=>{
 });
 window.addEventListener('pagehide',_borrarMarcaPartida);
 function _enviarCierresPendientes(){
-  if(!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   const pend=_leerJSON(_CIERRES_KEY,[]);
   pend.forEach(c=>{
     const qs=Object.keys(c).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(c[k])).join('&');

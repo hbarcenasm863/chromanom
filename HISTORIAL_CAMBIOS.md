@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-02 (101) — Juego: se desactiva el modo estudiante (solo modo libre)
+
+### Contexto
+El docente pidió dejar el juego solo en modo libre por lo que queda del año:
+ya no necesita más analíticas ni seguimiento por código de estudiante.
+
+### Cambios en `juego.html`
+- Nuevo interruptor `MODO_ESTUDIANTE_ACTIVO = false` (junto a `freeMode`).
+  Con él en `false`:
+  - Se oculta el selector «Acceso estudiante / Modo libre» y el campo de
+    código; el juego arranca directo en modo libre.
+  - Ya no aparece el aviso de consentimiento del modo libre (no se recoge
+    ningún dato, así que no hay nada que aceptar).
+  - No se envía nada al Apps Script: ni inicio de sesión, ni resultados
+    al terminar, ni «cierres inesperados», ni consulta de progreso.
+- El código del modo estudiante se conserva intacto: para reactivarlo el
+  próximo año basta con cambiar esa línea a `true`.
+- Texto de la portada ajustado («Elige un nivel y empieza a jugar»).
+- Probado con Playwright: sin selector ni campo de código, se entra a un
+  nivel sin aviso, se llega al resumen y no sale ninguna petición a Google.
+
+### Pasos manuales
+- Ninguno. No se tocó `chromanom-analytics.gs`; la hoja de Google queda con
+  los datos que ya tenía.
+
+---
+
 ## 2026-10-29 (100) — Juego: traslada el resto de preguntas nuevas de SABER (29 preguntas)
 
 ### Contexto
