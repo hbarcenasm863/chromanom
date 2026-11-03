@@ -191,6 +191,14 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .nivel-card.rg .nivel-icon{background:linear-gradient(135deg,#f0abfc,#c026d3)}
 .nivel-card.fu .nivel-icon{background:linear-gradient(135deg,#93c5fd,#1a6ea8)}
 .nivel-card.is .nivel-icon{background:linear-gradient(135deg,#c4b5fd,#7c3aed)}
+.nivel-card.pr .nivel-icon{background:linear-gradient(135deg,#bbf7d0,#166534)}
+.nivel-card.tr .nivel-icon{background:linear-gradient(135deg,#fecaca,#b91c1c)}
+/* Encabezado de cada fase en la portada (mismos colores que CN_FASES). */
+.fase-titulo{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin:14px 0 2px;padding:6px 0 6px 10px;border-left:4px solid var(--fc,#1a6ea8);text-align:left}
+.fase-titulo:first-child{margin-top:0}
+.fase-titulo .ft-n{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--fc,#1a6ea8);border-radius:999px;padding:2px 8px}
+.fase-titulo .ft-t{font-weight:800;font-size:.98rem;color:var(--tx,#0d2233)}
+.fase-titulo .ft-s{font-size:.78rem;color:var(--dim,#4b5b6b)}
 /* juego.html?tema=…: resalta el tema al que se llegó desde una página */
 .resaltado{outline:3px solid #f59e0b;outline-offset:3px;animation:resaltaTema 1.2s ease 3}
 @keyframes resaltaTema{50%{outline-color:transparent}}
@@ -894,58 +902,70 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <button class="wi-change" onclick="cambiarEstudiante()">Cambiar de estudiante</button>
     </div>
 
+    <!-- Niveles en el orden de la molécula de la portada (site-ui.js →
+         CN_FASES): Fase 1 El carbono → Fase 2 Nomenclatura → Fase 3 Más
+         allá del nombre. Dentro de cada fase, de lo más simple a lo más
+         complejo. Los conteos los pone actualizarConteosNiveles(). -->
     <div class="portada-modes">
-      <!-- Fase 1 de la ruta: va primero porque se estudia antes de nomenclatura -->
+      <div class="fase-titulo" style="--fc:#1a6ea8"><span class="ft-n">Fase 1</span><span class="ft-t">El carbono</span><span class="ft-s">Antes de nombrar</span></div>
       <button class="nivel-card fu" onclick="openDrillPicker('fundamentos')">
         <div class="nivel-icon">⚛️</div>
-        <div><div class="nivel-name">El carbono <span class="paso-badge">Fase 1</span></div><div class="nivel-desc">Hibridación, tipos de carbono y clasificación de cadenas. Antes de empezar a nombrar.</div><div class="nivel-count" id="stat-fund-count">99 preguntas · 3 temas · 20 por sesión</div></div>
+        <div><div class="nivel-name">El carbono</div><div class="nivel-desc">Hibridación, tipos de carbono y clasificación de cadenas. Antes de empezar a nombrar.</div><div class="nivel-count" id="stat-fund-count">99 preguntas · 3 temas · 20 por sesión</div></div>
+      </button>
+      <div class="fase-titulo" style="--fc:#166534"><span class="ft-n">Fase 2</span><span class="ft-t">Nomenclatura</span><span class="ft-s">Nombrar con IUPAC</span></div>
+      <button class="nivel-card pr" onclick="openLevelModal('principios')">
+        <div class="nivel-icon">📐</div>
+        <div><div class="nivel-name">Principios de nomenclatura</div><div class="nivel-desc">Las 4 partes del nombre, prefijos, prioridad de grupos, numeración y orden alfabético.</div><div class="nivel-count">33 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card hc" onclick="openLevelModal('hidrocarburos')">
         <div class="nivel-icon">🔗</div>
-        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, alquenos, alquinos, aromáticos</div><div class="nivel-count">318 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Hidrocarburos</div><div class="nivel-desc">Alcanos, cicloalcanos, alquenos, alquinos y aromáticos</div><div class="nivel-count">349 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ox" onclick="openLevelModal('oxigenados')">
         <div class="nivel-icon">💧</div>
-        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, cetonas, aldehídos, ácidos carboxílicos, ésteres, éteres</div><div class="nivel-count">371 preguntas · 20 por sesión</div></div>
+        <div><div class="nivel-name">Compuestos Oxigenados</div><div class="nivel-desc">Alcoholes, fenoles, éteres, aldehídos, cetonas, ácidos carboxílicos, haluros de ácido, anhídridos y ésteres</div><div class="nivel-count">433 preguntas · 20 por sesión</div></div>
       </button>
       <button class="nivel-card ni" onclick="openLevelModal('nitrogenados')">
         <div class="nivel-icon">🔵</div>
         <div><div class="nivel-name">Compuestos Nitrogenados</div><div class="nivel-desc">Amidas, nitrilos y aminas</div><div class="nivel-count">168 preguntas · 20 por sesión</div></div>
       </button>
-      <button class="nivel-card ct" onclick="openLevelModal('constructor')">
-        <div class="nivel-icon">🏗️</div>
-        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">107 moléculas · 20 por sesión</div></div>
-      </button>
-      <button class="nivel-card rx" onclick="openRxnPicker()">
-        <div class="nivel-icon">🧪</div>
-        <div><div class="nivel-name">Reacciones Orgánicas</div><div class="nivel-desc">Mecanismos, productos y condiciones de todos los grupos</div><div class="nivel-count">207 preguntas · 20 por sesión</div></div>
-      </button>
-      <!-- "Juego completo" mezcla nomenclatura con ~25 % de preguntas de
-           reacciones: es el paso 4 de la ruta (después de estudiar Reacciones),
-           por eso va después de la tarjeta de reacciones y se rotula así. -->
-      <button class="nivel-card cp" onclick="openLevelModal('completo')">
-        <div class="nivel-icon">⭐</div>
-        <div><div class="nivel-name">Nomenclatura + reacciones <span class="paso-badge">Paso 4</span></div><div class="nivel-desc">Todos los grupos funcionales, con preguntas de reacciones mezcladas. Juégalo después de estudiar Reacciones.</div><div class="nivel-count">1248 preguntas · 20 por sesión</div></div>
-      </button>
-      <button class="nivel-card is" onclick="openLevelModal('isomeria')">
-        <div class="nivel-icon">🔀</div>
-        <div><div class="nivel-name">Isomería <span class="paso-badge">Fase 3</span></div><div class="nivel-desc">De cadena, de posición, de función, cis/trans y carbono quiral</div><div class="nivel-count" id="stat-iso-count">33 preguntas · 20 por sesión</div></div>
-      </button>
       <button class="nivel-card gf" onclick="openDrillPicker('funcional')">
         <div class="nivel-icon">🧬</div>
-        <div><div class="nivel-name">Practicar por Grupo Funcional</div><div class="nivel-desc">Nomenclatura de un solo grupo: alcanos, alcoholes, cetonas...</div><div class="nivel-count">15 grupos con ejercicios en el juego · 20 por sesión</div></div>
+        <div><div class="nivel-name">Practicar por Grupo Funcional</div><div class="nivel-desc">Nomenclatura de un solo grupo: alcanos, fenoles, cetonas, anhídridos...</div><div class="nivel-count">18 grupos · 20 por sesión</div></div>
       </button>
       <button class="nivel-card hc" onclick="openDrillPicker('retos')">
         <div class="nivel-icon">🧠</div>
         <div><div class="nivel-name">Retos de nomenclatura</div><div class="nivel-desc">Encuentra la cadena principal, caza errores de un compañero, haluros y polifuncionales</div><div class="nivel-count" id="stat-retos-count">70 preguntas · 20 por sesión</div></div>
       </button>
+      <button class="nivel-card ct" onclick="openLevelModal('constructor')">
+        <div class="nivel-icon">🏗️</div>
+        <div><div class="nivel-name">Constructor Molecular</div><div class="nivel-desc">Dibuja estructuras a partir del nombre IUPAC</div><div class="nivel-count" id="stat-build-count">107 moléculas · 20 por sesión</div></div>
+      </button>
       <button class="nivel-card cf" onclick="openDrillPicker('constructor')">
         <div class="nivel-icon">🧩</div>
         <div><div class="nivel-name">Constructor por Familia</div><div class="nivel-desc">Dibuja estructuras de un solo grupo funcional</div><div class="nivel-count">13 familias · 20 por sesión</div></div>
       </button>
+      <div class="fase-titulo" style="--fc:#7c3aed"><span class="ft-n">Fase 3</span><span class="ft-t">Más allá del nombre</span><span class="ft-s">Isomería y reacciones</span></div>
+      <button class="nivel-card is" onclick="openLevelModal('isomeria')">
+        <div class="nivel-icon">🔀</div>
+        <div><div class="nivel-name">Isomería</div><div class="nivel-desc">De cadena, de posición, de función, cis/trans y carbono quiral</div><div class="nivel-count" id="stat-iso-count">33 preguntas · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card tr" onclick="openLevelModal('tipos_reaccion')">
+        <div class="nivel-icon">🧭</div>
+        <div><div class="nivel-name">Tipos de reacción orgánica</div><div class="nivel-desc">Sustitución, adición, eliminación, redox, ácido-base, condensación, hidrólisis y polimerización</div><div class="nivel-count">31 preguntas · 20 por sesión</div></div>
+      </button>
       <button class="nivel-card rg" onclick="openDrillPicker('reacciones')">
         <div class="nivel-icon">🔬</div>
         <div><div class="nivel-name">Reacciones por Grupo</div><div class="nivel-desc">Reacciones de un solo grupo funcional</div><div class="nivel-count">11 grupos · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card rx" onclick="openRxnPicker()">
+        <div class="nivel-icon">🧪</div>
+        <div><div class="nivel-name">Reacciones Orgánicas</div><div class="nivel-desc">Elige varios grupos y mezcla sus reacciones</div><div class="nivel-count">207 preguntas · 20 por sesión</div></div>
+      </button>
+      <!-- Última parada: mezcla todo (nomenclatura con ~25 % de reacciones). -->
+      <button class="nivel-card cp" onclick="openLevelModal('completo')">
+        <div class="nivel-icon">⭐</div>
+        <div><div class="nivel-name">Nomenclatura + reacciones</div><div class="nivel-desc">Todos los grupos funcionales, con preguntas de reacciones mezcladas. Juégalo al final, después de estudiar Reacciones.</div><div class="nivel-count">1248 preguntas · 20 por sesión</div></div>
       </button>
     </div>
     <div class="portada-stats">
@@ -1032,10 +1052,10 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_aromaticos')">Aromáticos</button>
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_halogenuros')">Haluros de alquilo</button>
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_alcoholes')">Alcoholes</button>
-      <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_aminas')">Aminas</button>
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_carbonilo')">Aldehídos y Cetonas</button>
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_acidos')">Ácidos Carboxílicos</button>
       <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_derivados')">Derivados (Ésteres/Amidas)</button>
+      <button class="rxn-grupo-chip" onclick="toggleRxnGrupo(this,'rxn_aminas')">Aminas</button>
     </div>
     <button class="rxn-continuar" id="rxn-continuar" onclick="openRxnMixto()">Comenzar →</button>
   </div>
@@ -1114,6 +1134,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 </div>
 
 <script src="fundamentos.js"></script>
+<script src="temas-extra.js"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -2453,8 +2474,8 @@ let currentLevel='completo';
 let isRetryRound=false;
 let studentName='', studentCourse='', studentCode='';
 const NIVEL_TOPICS={
-  hidrocarburos:['alcanos','alquenos','alquinos','benceno'],
-  oxigenados:   ['alcoholes','cetonas','aldehidos','acidos','esteres','eteres'],
+  hidrocarburos:['alcanos','cicloalcanos','alquenos','alquinos','benceno'],
+  oxigenados:   ['alcoholes','fenoles','eteres','aldehidos','cetonas','acidos','derivados_acido','esteres'],
   nitrogenados: ['amidas','nitrilos','aminas'],
   completo:     null,
   constructor:  ['constructor'],
@@ -2490,6 +2511,12 @@ const NIVEL_TOPICS={
   tipos_carbono: ['tipos_carbono'],
   cadenas:       ['cadenas'],
   isomeria:      ['isomeria'],
+  // Temas de la página que el Juego no cubría — temas-extra.js
+  principios:      ['principios'],
+  cicloalcanos:    ['cicloalcanos'],
+  fenoles:         ['fenoles'],
+  derivados_acido: ['derivados_acido'],
+  tipos_reaccion:  ['tipos_reaccion'],
   // Retos de nomenclatura (temas nuevos; etiquetas nuevas en la hoja)
   retos:            ['cadena_principal','cazar_errores','haluros','polifuncionales'],
   cadena_principal: ['cadena_principal'],
@@ -2535,6 +2562,11 @@ const NIVEL_LABELS={
   tipos_carbono: '🔢 Tipos de carbono',
   cadenas:       '⛓️ Clasificación de cadenas',
   isomeria:      '🔀 Isomería',
+  principios:      '📐 Principios de nomenclatura',
+  cicloalcanos:    'Cicloalcanos',
+  fenoles:         'Fenoles',
+  derivados_acido: 'Haluros de ácido y anhídridos',
+  tipos_reaccion:  '🧭 Tipos de reacción orgánica',
   retos:            '🧠 Retos de nomenclatura',
   cadena_principal: '🔎 Encuentra la cadena',
   cazar_errores:    '🕵️ Cazadores de errores',
@@ -3176,7 +3208,7 @@ function buildMC(q){
   }
   // Temas conceptuales (Fase 1 e isomería): las opciones son frases, no
   // nombres IUPAC, y se leen mejor en la letra normal que en monoespaciada.
-  const _txt=FUND_TOPICS.includes(q.topic)?' mc-texto':'';
+  const _txt=(FUND_TOPICS.includes(q.topic)||EXTRA_TOPICS.includes(q.topic))?' mc-texto':'';
   return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" data-ans="${String(o).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}" onclick="checkMC(this.dataset.ans,this)">${html[i]}</button>`).join('')}</div>`;
 }
 function checkMC(ans,btn){
@@ -6684,6 +6716,9 @@ QBANK.push(...QBANK_RXN_BUILD);
 // Sus dibujos (claves fu_…) se suman a M. No entran al «Juego completo»
 // (nomenclatura + reacciones): tienen sus propias tarjetas.
 const FUND_TOPICS=window.FUND_TOPICS||[];
+// Temas de temas-extra.js (principios, cicloalcanos, fenoles, haluros de
+// ácido y anhídridos, tipos de reacción): opciones en letra normal.
+const EXTRA_TOPICS=window.EXTRA_TOPICS||[];
 const QBANK_FUNDAMENTOS=[...(window.FUND_BANCO||[])];
 QBANK.push(...QBANK_FUNDAMENTOS);
 Object.assign(M,window.FUND_FIG||{});
@@ -6723,13 +6758,14 @@ function openRxnMixto(){
 const DRILL_CATEGORIES={
   funcional:{
     titulo:'🧬 Practicar por Grupo Funcional', desc:'Elige un grupo para practicar solo su nomenclatura IUPAC.',
+    // Mismo orden que grupos.html (de lo más simple a lo más complejo).
     items:[
-      {label:'Alcanos',nivel:'alcanos'},{label:'Alquenos',nivel:'alquenos'},{label:'Alquinos',nivel:'alquinos'},
-      {label:'Alcoholes',nivel:'alcoholes'},{label:'Cetonas',nivel:'cetonas'},{label:'Aldehídos',nivel:'aldehidos'},
-      {label:'Ácidos Carboxílicos',nivel:'acidos'},{label:'Ésteres',nivel:'esteres'},{label:'Éteres',nivel:'eteres'},
-      {label:'Amidas',nivel:'amidas'},{label:'Nitrilos',nivel:'nitrilos'},{label:'Aminas',nivel:'aminas'},
-      {label:'Aromáticos',nivel:'benceno',especial:true},
-      {label:'Haluros de alquilo',nivel:'haluros'},{label:'Polifuncionales',nivel:'polifuncionales'},
+      {label:'Alcanos',nivel:'alcanos'},{label:'Cicloalcanos',nivel:'cicloalcanos'},{label:'Alquenos',nivel:'alquenos'},
+      {label:'Alquinos',nivel:'alquinos'},{label:'Aromáticos',nivel:'benceno'},{label:'Fenoles',nivel:'fenoles'},
+      {label:'Alcoholes',nivel:'alcoholes'},{label:'Éteres',nivel:'eteres'},{label:'Aldehídos',nivel:'aldehidos'},
+      {label:'Cetonas',nivel:'cetonas'},{label:'Ácidos Carboxílicos',nivel:'acidos'},{label:'Haluros de ácido y anhídridos',nivel:'derivados_acido'},
+      {label:'Ésteres',nivel:'esteres'},{label:'Amidas',nivel:'amidas'},{label:'Nitrilos',nivel:'nitrilos'},
+      {label:'Aminas',nivel:'aminas'},{label:'Haluros de alquilo',nivel:'haluros'},{label:'Polifuncionales',nivel:'polifuncionales',especial:true},
     ]
   },
   fundamentos:{
@@ -6754,23 +6790,23 @@ const DRILL_CATEGORIES={
     items:[
       {label:'Todas las moléculas',nivel:'constructor'},
       {label:'Alcanos',nivel:'constructor_alcanos'},{label:'Alquenos',nivel:'constructor_alquenos'},
-      {label:'Alquinos',nivel:'constructor_alquinos'},{label:'Alcoholes',nivel:'constructor_alcoholes'},
-      {label:'Cetonas',nivel:'constructor_cetonas'},{label:'Aldehídos',nivel:'constructor_aldehidos'},
+      {label:'Alquinos',nivel:'constructor_alquinos'},{label:'Aromáticos (construir)',nivel:'constructor_aromaticos'},
+      {label:'Alcoholes',nivel:'constructor_alcoholes'},{label:'Éteres',nivel:'constructor_eteres'},
+      {label:'Aldehídos',nivel:'constructor_aldehidos'},{label:'Cetonas',nivel:'constructor_cetonas'},
       {label:'Ácidos Carboxílicos',nivel:'constructor_acidos'},{label:'Ésteres',nivel:'constructor_esteres'},
-      {label:'Éteres',nivel:'constructor_eteres'},{label:'Amidas',nivel:'constructor_amidas'},
-      {label:'Nitrilos',nivel:'constructor_nitrilos'},{label:'Aminas',nivel:'constructor_aminas'},
-      {label:'Aromáticos (construir)',nivel:'constructor_aromaticos',especial:true},
+      {label:'Amidas',nivel:'constructor_amidas'},{label:'Nitrilos',nivel:'constructor_nitrilos'},
+      {label:'Aminas',nivel:'constructor_aminas'},
     ]
   },
   reacciones:{
     titulo:'🔬 Reacciones por Grupo', desc:'Elige un grupo para practicar solo sus reacciones orgánicas.',
     items:[
-      {label:'Hidrocarburos (RXN)',nivel:'rxn_hc'},{label:'Alcanos',nivel:'rxn_alcanos'},
-      {label:'Alquenos',nivel:'rxn_alquenos'},{label:'Alquinos',nivel:'rxn_alquinos'},
-      {label:'Aromáticos',nivel:'rxn_aromaticos',especial:true},{label:'Haluros de alquilo',nivel:'rxn_halogenuros'},
-      {label:'Alcoholes',nivel:'rxn_alcoholes'},{label:'Aminas',nivel:'rxn_aminas'},
-      {label:'Aldehídos y Cetonas',nivel:'rxn_carbonilo'},{label:'Ácidos Carboxílicos',nivel:'rxn_acidos'},
-      {label:'Derivados AC',nivel:'rxn_derivados'},
+      {label:'Alcanos',nivel:'rxn_alcanos'},{label:'Alquenos',nivel:'rxn_alquenos'},
+      {label:'Alquinos',nivel:'rxn_alquinos'},{label:'Aromáticos',nivel:'rxn_aromaticos'},
+      {label:'Hidrocarburos (mezcla)',nivel:'rxn_hc',especial:true},{label:'Haluros de alquilo',nivel:'rxn_halogenuros'},
+      {label:'Alcoholes',nivel:'rxn_alcoholes'},{label:'Aldehídos y Cetonas',nivel:'rxn_carbonilo'},
+      {label:'Ácidos Carboxílicos',nivel:'rxn_acidos'},{label:'Derivados AC',nivel:'rxn_derivados'},
+      {label:'Aminas',nivel:'rxn_aminas'},
     ]
   },
 };
@@ -6902,7 +6938,7 @@ function showResults(){
   // recomienda la REACCIÓN CON NOMBRE (ej. "Nitración", "Esterificación de
   // Fischer") — decir solo "repasa reacciones de alcanos" no le dice al
   // estudiante cuál de las 5 reacciones de esa familia falló.
-  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)',cadena_principal:'Encontrar la cadena principal',hibridacion:'Átomo de carbono e hibridación',tipos_carbono:'Tipos de carbono (cuenta solo los carbonos vecinos)',cadenas:'Clasificación de cadenas carbonadas',isomeria:'Isomería',cazar_errores:'Errores comunes al nombrar',haluros:'Haluros de alquilo (halógeno = prefijo)',polifuncionales:'Compuestos polifuncionales (prioridad de grupos)'};
+  const topicNames={alcanos:'Alcanos y ramificaciones',alquenos:'Alquenos (doble enlace)',alquinos:'Alquinos (triple enlace)',benceno:'Aromáticos',alcoholes:'Alcoholes (-ol)',cetonas:'Cetonas (-ona)',acidos:'Ácidos carboxílicos',amidas:'Amidas',nitrilos:'Nitrilos',aldehidos:'Aldehídos (-al)',esteres:'Ésteres (-oato de -ilo)',eteres:'Éteres (alcoxi-)',aminas:'Aminas (-amina)',cadena_principal:'Encontrar la cadena principal',hibridacion:'Átomo de carbono e hibridación',tipos_carbono:'Tipos de carbono (cuenta solo los carbonos vecinos)',cadenas:'Clasificación de cadenas carbonadas',isomeria:'Isomería',cazar_errores:'Errores comunes al nombrar',haluros:'Haluros de alquilo (halógeno = prefijo)',polifuncionales:'Compuestos polifuncionales (prioridad de grupos)',principios:'Principios de nomenclatura (4 partes, prefijos y prioridad)',cicloalcanos:'Cicloalcanos (ciclo- + nombre del anillo)',fenoles:'Fenoles (−OH unido al anillo aromático)',derivados_acido:'Haluros de ácido (-oílo) y anhídridos',tipos_reaccion:'Tipos de reacción orgánica'};
   // Consejo específico para los temas nuevos (el resto usa el consejo general).
   const TOPIC_TIPS={cadena_principal:'Prueba todos los caminos de extremo a extremo: la cadena más larga puede doblarse y entrar por una rama.',cazar_errores:'Revisa por pasos: cadena más larga, numeración, un localizador por grupo, di-/tri- y orden alfabético (sin contar di-, sec-, terc-).',haluros:'Los halógenos son prefijos (①) como los alquilos: cuentan igual en la numeración y van en orden alfabético.',polifuncionales:'Solo el grupo de mayor prioridad da la terminación; los demás van como prefijos (oxo-, hidroxi-, amino-).'};
   const RXN_GROUP_SHORT={rxn_alcanos:'Alcanos',rxn_alquenos:'Alquenos',rxn_alquinos:'Alquinos',rxn_aromaticos:'Aromáticos',rxn_halogenuros:'Haluros de alquilo',rxn_alcoholes:'Alcoholes',rxn_aminas:'Aminas',rxn_carbonilo:'Aldehídos y cetonas',rxn_acidos:'Ácidos carboxílicos',rxn_derivados:'Derivados de ácido'};
@@ -7044,6 +7080,10 @@ function actualizarConteosNiveles(){
   pon('#stat-build-count',QBANK.filter(q=>q.type==='build').length+' moléculas');
   pon('.nivel-card[onclick*="openRxnPicker"] .nivel-count',QBANK.filter(q=>q.type==='rxnq').length+' preguntas');
   pon('#stat-retos-count',QBANK.filter(q=>NIVEL_TOPICS.retos.includes(q.topic)).length+' preguntas');
+  ['principios','tipos_reaccion'].forEach(nv=>{
+    pon(`.nivel-card[onclick*="'${nv}'"] .nivel-count`,QBANK.filter(q=>q.topic===nv).length+' preguntas');
+  });
+  pon(`.nivel-card[onclick*="'funcional'"] .nivel-count`,DRILL_CATEGORIES.funcional.items.length+' grupos');
 }
 actualizarConteosNiveles();
 // juego.html?tema=…: llega desde la práctica de una página (carbono.html,
@@ -7052,8 +7092,9 @@ actualizarConteosNiveles();
 (function(){
   let t='';try{t=new URLSearchParams(location.search).get('tema')||'';}catch(e){}
   if(!/^[a-z_]+$/.test(t))return;
-  if(DRILL_CATEGORIES.fundamentos.items.some(it=>it.nivel===t)){
-    openDrillPicker('fundamentos');
+  const _cat=Object.keys(DRILL_CATEGORIES).find(k=>k!=='retos'&&DRILL_CATEGORIES[k].items.some(it=>it.nivel===t)&&!document.querySelector(`.nivel-card[onclick*="'${t}'"]`));
+  if(_cat){
+    openDrillPicker(_cat);
     const b=[...document.querySelectorAll('#dp-grid .drill-grid-item')].find(x=>(x.getAttribute('onclick')||'').includes("'"+t+"'"));
     if(b)b.classList.add('resaltado');
   }else{

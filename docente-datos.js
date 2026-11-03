@@ -227,7 +227,7 @@ var TEMAS=[
   propia:[]},
 
  {id:'cadena',titulo:'Cadena principal, numeración y desempate',corto:'Cadena principal y desempate',
-  gen:['alcanos'],jue:/cadena|desempate|error/i,rxn:[],soloRamificados:true,nomenclatura:true,
+  gen:['alcanos'],jue:/cadena|desempate|error|^principios$/i,rxn:[],soloRamificados:true,nomenclatura:true,saberJue:/^principios$/,
   alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
   previos:{
    curiosos:['El índice de octano de la gasolina se mide comparándola con dos alcanos: el heptano (valor 0) y el 2,2,4-trimetilpentano, llamado «isooctano» (valor 100). Con casi los mismos átomos, la forma de la cadena cambia mucho el comportamiento en el motor.',
@@ -270,7 +270,7 @@ var TEMAS=[
   ]},
 
  {id:'alcanos',titulo:'Alcanos y cicloalcanos',corto:'Alcanos',
-  gen:['alcanos'],jue:/^alcanos$|cicloalc/i,rxn:['alcanos'],nomenclatura:true,
+  gen:['alcanos'],jue:/^alcanos$|cicloalc/i,rxn:['alcanos'],nomenclatura:true,saberJue:/^cicloalcanos$/,
   alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
   previos:{
    curiosos:['El metano es el principal componente del gas natural; también lo producen las vacas durante la digestión y la basura que se descompone en los rellenos sanitarios.',
@@ -424,7 +424,7 @@ var TEMAS=[
   ]},
 
  {id:'alcoholes',titulo:'Alcoholes, fenoles y éteres',corto:'Alcoholes, fenoles y éteres',
-  gen:['alcoholes','eteres'],jue:/^alcoholes$|^eteres$|fenol/i,rxn:['alcoholes','eteres'],nomenclatura:true,
+  gen:['alcoholes','eteres'],jue:/^alcoholes$|^eteres$|fenol/i,rxn:['alcoholes','eteres'],nomenclatura:true,saberJue:/^fenoles$/,
   grupos:[{id:'alcoholes',t:'Alcoholes y fenoles',jue:/^alcoholes$|fenol/i},{id:'eteres',t:'Éteres',jue:/^eteres$/i}],
   alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
   previos:{
@@ -496,8 +496,8 @@ var TEMAS=[
   propia:[]},
 
  {id:'acidos',titulo:'Ácidos carboxílicos y ésteres',corto:'Ácidos y ésteres',
-  gen:['acidos','esteres'],jue:/^acidos$|^esteres$/i,rxn:['acidos','esteres'],nomenclatura:true,
-  grupos:[{id:'acidos',t:'Ácidos carboxílicos',jue:/^acidos$/i},{id:'esteres',t:'Ésteres',jue:/^esteres$/i}],
+  gen:['acidos','esteres'],jue:/^acidos$|^esteres$|^derivados_acido$/i,rxn:['acidos','esteres'],nomenclatura:true,saberJue:/^derivados_acido$/,
+  grupos:[{id:'acidos',t:'Ácidos carboxílicos',jue:/^acidos$/i},{id:'derivados_acido',t:'Haluros de ácido y anhídridos',jue:/^derivados_acido$/i},{id:'esteres',t:'Ésteres',jue:/^esteres$/i}],
   alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
   previos:{
    curiosos:['El vinagre es una solución de ácido etanoico (acético) en agua, de alrededor del 4 % al 5 %.',
@@ -658,7 +658,7 @@ var TEMAS=[
   propia:[]},
 
  {id:'reacciones',titulo:'Reacciones orgánicas (tipos y mecanismos básicos)',corto:'Reacciones orgánicas',
-  gen:[],jue:null,rxn:['alcanos','alquenos','alquinos','benceno','halogenuros','alcoholes','eteres','aldehidos','cetonas','acidos','esteres','amidas','nitrilos','aminas'],nomenclatura:false,
+  gen:[],jue:/^tipos_reaccion$/,saberJue:true,rxn:['alcanos','alquenos','alquinos','benceno','halogenuros','alcoholes','eteres','aldehidos','cetonas','acidos','esteres','amidas','nitrilos','aminas'],nomenclatura:false,
   alin:{g11:{sed:'sed11q',ev:['11q-exp3','11q-ind2']},g10:{sed:'sed10q',ev:['10q-exp2']},est:['est2','est3'],dba:['dba11a']},
   previos:{
    curiosos:['En la fermentación que produce el etanol de la chicha y el guarapo, las levaduras transforman azúcares: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂.',

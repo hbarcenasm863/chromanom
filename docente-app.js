@@ -464,14 +464,19 @@ function poolEjercicios(temas){
 }
 
 /* ── Preguntas de selección múltiple del Juego ──────────────────────────
-   Los temas con saberJue (Fase 1 «El carbono» e isomería) toman del Juego
+   Los temas con saberJue (Fase 1, isomería y los de temas-extra.js) toman del Juego
    sus preguntas conceptuales de opción múltiple (banco en fundamentos.js):
    - como preguntas tipo Saber 11 de la evaluación (formato de SABER: la
      primera opción es la correcta; al imprimir se barajan);
    - como ejercicios «Selección múltiple» (tipo Q) de talleres y guías. */
 function preguntasJuego(t){
   if(!t.saberJue||!t.jue)return [];
-  return B.jue.filter(function(q){return q.type==='mc'&&t.jue.test(q.topic)&&Array.isArray(q.opts)&&typeof q.ans==='string'&&!/nombre IUPAC/i.test(quitaHtml(q.q));});
+  // saberJue puede ser true (todas las preguntas del tema) o una expresión
+  // que elige solo algunos temas del Juego (p. ej. /^fenoles$/ dentro de
+  // «Alcoholes, fenoles y éteres»): así no se cuelan como «Saber 11» las
+  // preguntas de opción múltiple de nomenclatura de los demás grupos.
+  var sj=t.saberJue instanceof RegExp?t.saberJue:null;
+  return B.jue.filter(function(q){return q.type==='mc'&&t.jue.test(q.topic)&&(!sj||sj.test(q.topic))&&Array.isArray(q.opts)&&typeof q.ans==='string'&&!/nombre IUPAC/i.test(quitaHtml(q.q));});
 }
 function saberDe(t){
   var jue=preguntasJuego(t).map(function(q){
@@ -488,7 +493,7 @@ var TIPOS_EJ=[
   {k:'C',t:'Reconocimiento de partes del nombre'},
   {k:'D',t:'Reacciones'},
   {k:'X',t:'Cazar errores de nombres'},
-  {k:'Q',t:'Selección múltiple (carbono, cadenas e isomería)'},
+  {k:'Q',t:'Selección múltiple (conceptos del Juego)'},
   {k:'E',t:'Ejercicios abiertos'}
 ];
 function enfoque(){return valor('enfoque')||'todo';}
