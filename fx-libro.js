@@ -37,9 +37,34 @@ const FX=(function(){
     const a=s.split('|'),base=mol(a[1]||'');
     return `<span class="fx-st${base.includes('<svg')?' rg':''}">${base}${part(a[0],'u')}${part(a[2],'d')}</span>`;
   }
+  // Anillo dentro de una cadena (X—@ring—Y, X—@ring o @ring—Y): el hexágono
+  // se gira para que tenga un vértice a cada lado y el enlace sale de ese
+  // vértice, como en los libros. Antes se escribía la raya «—» como texto
+  // junto al hexágono de punta hacia arriba y quedaba un espacio: el enlace
+  // no tocaba el anillo. Con enlaces a los dos lados, las cadenas quedan en
+  // vértices opuestos (posición para, 1,4).
+  function hexEnCadena(kek,izq,der){
+    const S=14,r=16,H=30,x0=izq?S:0,cx=x0+r+1,cy=H/2,W=x0+2*r+2+(der?S:0);
+    const v=pts(cx,cy,r,6,0);let d=path(v);
+    if(kek)for(const i of [1,3,5]){const f=x=>[cx+(x[0]-cx)*.74,cy+(x[1]-cy)*.74],a=f(v[i]),b=f(v[(i+1)%6]);d+=`M${a[0].toFixed(2)} ${a[1].toFixed(2)}L${b[0].toFixed(2)} ${b[1].toFixed(2)}`}
+    if(izq)d+=`M0 ${cy}L${v[3][0].toFixed(2)} ${cy}`;
+    if(der)d+=`M${v[0][0].toFixed(2)} ${cy}L${W} ${cy}`;
+    const h=2.05,w=(W/H*h).toFixed(2);
+    return `<svg class="fx-ring fx-ringc" viewBox="0 0 ${W} ${H}" style="height:${h}em;width:${w}em;display:inline-block;vertical-align:middle" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`;
+  }
   function mol(s){
-    return s.split(/(⟦[^⟧]*⟧|@\w+)/).map(p=>{
+    const P=s.split(/(⟦[^⟧]*⟧|@\w+)/),out=P.slice();
+    P.forEach((p,i)=>{
+      if(p!=='@ring'&&p!=='@chex')return;
+      const izq=i>0&&/—\s*$/.test(out[i-1]),der=i<P.length-1&&/^\s*—/.test(P[i+1]);
+      if(!izq&&!der)return;
+      if(izq)out[i-1]=out[i-1].replace(/\s*—\s*$/,'');
+      if(der)P[i+1]=out[i+1]=P[i+1].replace(/^\s*—\s*/,'');
+      out[i]={svg:hexEnCadena(p==='@ring',izq,der)};
+    });
+    return out.map(p=>{
       if(!p)return '';
+      if(p.svg)return p.svg;
       if(p[0]==='⟦')return stack(p.slice(1,-1));
       if(p[0]==='@')return SV[p.slice(1)]||'';
       return txt(p);
