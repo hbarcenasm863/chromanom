@@ -891,7 +891,7 @@ function bloquesRubricas(temas,conAbiertas){
   // Toda evaluación con preguntas abiertas lleva al menos una de reacción,
   // así que se anexa también la rúbrica D para calificarla.
   var ids=conAbiertas?{'rub-d':1}:{};temas.forEach(function(t){
-    var m={cadena:['rub-a','rub-c'],reacciones:['rub-d'],haluros:['rub-a','rub-b','rub-d'],isomeria:['rub-a','rub-b'],carbono:[],tipos_carbono:[],cadenas:[]}[t.id]||['rub-a','rub-b'];
+    var m={cadena:['rub-a','rub-c'],reacciones:['rub-d'],haluros:['rub-a','rub-b','rub-d'],isomeria:['rub-a','rub-b'],carbono:[],tipos_carbono:[],cadenas:[],orbitales:[],propiedades:[],biomoleculas:[],ambiente:[]}[t.id]||['rub-a','rub-b'];
     m.forEach(function(x){ids[x]=1;});
   });
   // Con «Solo nomenclatura» no hay preguntas de reacción que calificar.

@@ -1626,5 +1626,84 @@ var ABIERTAS={
   {t:'con',q:'Clasifica cada una de estas reacciones según su tipo (sustitución, adición, eliminación u oxidorreducción) y justifica brevemente cada clasificación: a) CH₂=CH₂ + Br₂ → CH₂Br−CH₂Br; b) CH₃−CH₂−Br + KOH (en etanol, con calor) → CH₂=CH₂ + KBr + H₂O; c) CH₃−CH₂−OH + CrO₃/H⁺ → CH₃−COOH; d) C₆H₆ + Cl₂ (cat. AlCl₃) → C₆H₅Cl + HCl.'}]
 };
 
+/* ── Fase 4: preguntas abiertas de los temas nuevos ──
+   Cada pregunta se responde solo con lo que explica su página
+   (orbitales.html, propiedades.html, biomoleculas.html, ambiente.html).
+   Se usan en las evaluaciones (ABIERTAS) y en los talleres
+   (sección «Ejercicios abiertos» de cada TEMA). */
+var F4_ABIERTAS={
+ orbitales:[
+  {t:'con',q:'Dibuja el diagrama de orbitales moleculares del H₂ y del He₂, calcula el orden de enlace de cada uno y explica por qué el helio no forma moléculas diatómicas.'},
+  {t:'con',q:'Calcula el orden de enlace del N₂, el O₂ y el F₂ y ordénalos de mayor a menor energía de enlace. Justifica tu respuesta.'},
+  {t:'con',q:'Explica por qué el oxígeno líquido es atraído por un imán y qué modelo de enlace permite predecirlo.'},
+  {t:'con',q:'Usa los datos de hidrogenación (ciclohexeno: 120 kJ/mol; benceno: 208 kJ/mol) para calcular la energía de resonancia del benceno y explica qué significa.'},
+  {t:'con',q:'Aplica la regla de Hückel al benceno, al ciclobutadieno y al naftaleno e indica cuáles son aromáticos.'},
+  {t:'con',q:'Explica por qué la zanahoria es naranja y el aceite de cocina es casi incoloro, usando la idea de conjugación.'},
+  {t:'con',q:'Explica, con la idea de ondas que se suman o se restan, por qué el orbital σ1s une los dos átomos de hidrógeno y el σ*1s los separa.'},
+  {t:'con',q:'Calcula el orden de enlace del H₂⁺ y del He₂⁺ y explica si estas especies pueden existir.'},
+  {t:'con',q:'En la curva de energía del H₂ el mínimo está en 74 pm y −436 kJ/mol. Explica qué representa cada valor y por qué las moléculas reales vibran.'},
+  {t:'con',q:'Compara el modelo de enlace de valencia con el de orbitales moleculares: qué explica bien cada uno y por qué seguimos usando la hibridación para la forma de las moléculas.'},
+  {t:'rx',q:'Explica con la nube π por qué el eteno, CH₂=CH₂, reacciona por adición con el HBr: qué enlace se rompe y qué enlaces se forman.'},
+  {t:'con',q:'Los seis enlaces C−C del benceno miden 139 pm. Compáralos con un enlace sencillo (154 pm) y uno doble (134 pm) y explica qué demuestra ese dato.'},
+  {t:'rx',q:'Explica por qué el benceno hace sustitución electrofílica y no adición, usando la energía de resonancia.'},
+  {t:'con',q:'Aplica la regla de Hückel a la piridina y al cicloocta-1,3,5,7-tetraeno y explica por qué una es aromática y el otro no.'},
+  {t:'con',q:'Ordena el eteno, el buta-1,3-dieno y el β-caroteno según la longitud de onda de la luz que absorben y explica por qué solo el último tiene color.'},
+  {t:'con',q:'Explica por qué las hojas se ven verdes si la clorofila absorbe la luz roja y la azul.'}],
+ propiedades:[
+  {t:'con',q:'Ordena de menor a mayor punto de ebullición: butano, propanona y propan-1-ol (masas molares casi iguales). Justifica con el tipo de fuerza intermolecular de cada uno.'},
+  {t:'con',q:'Explica por qué el etanol se disuelve en agua en cualquier proporción y el hexan-1-ol casi no.'},
+  {t:'con',q:'Un grupo midió el punto de ebullición del etanol y obtuvo 75,5 °C (referencia: 78,4 °C a 1 atm). Calcula el porcentaje de error y propone dos causas de la diferencia, una de ellas relacionada con la altura de Bogotá.'},
+  {t:'con',q:'Diseña un experimento para comprobar la hipótesis «a más carbonos, mayor punto de ebullición». Indica qué variable cambias, cuáles mantienes y qué gráfica harías.'},
+  {t:'con',q:'Explica por qué el pentano hierve a 36 °C y el 2,2-dimetilpropano, su isómero, a 10 °C.'},
+  {t:'con',q:'Explica con las fuerzas intermoleculares cómo quita el jabón la grasa de la ropa.'},
+  {t:'con',q:'Cuando el agua hierve, ¿se rompen los enlaces O−H? Explica la diferencia entre las fuerzas intramoleculares y las intermoleculares con los valores de 460 kJ/mol y 20 kJ/mol.'},
+  {t:'con',q:'Explica por qué el clorometano, CH₃−Cl, es polar y el tetraclorometano, CCl₄, es apolar, aunque los dos tienen enlaces C−Cl polares.'},
+  {t:'con',q:'El etanol, CH₃−CH₂−OH, y el dimetiléter, CH₃−O−CH₃, tienen la misma fórmula molecular, C₂H₆O. Explica cuál forma puentes de hidrógeno entre sus moléculas y cuál hierve a mayor temperatura.'},
+  {t:'con',q:'Identifica la fuerza intermolecular más fuerte entre las moléculas del propano, el propanal, el ácido etanoico y la etilamina, y justifica con su grupo funcional.'},
+  {t:'con',q:'Explica por qué el alcohol antiséptico se evapora rápido de la piel y el aceite de cocina casi no se evapora.'},
+  {t:'con',q:'Con estos datos de solubilidad en agua (metanol, etanol y propan-1-ol: miscibles; butan-1-ol: 7,7; pentan-1-ol: 2,2; hexan-1-ol: 0,6 g/100 mL), describe la tendencia y explícala con la parte polar y la parte apolar de las moléculas.'},
+  {t:'con',q:'A la misma temperatura, ¿cuál tendrá más moléculas en el vapor: el propano, el etanal, el etanol o el agua? Explica tu respuesta con las fuerzas intermoleculares.'},
+  {t:'con',q:'Ordena de menor a mayor punto de ebullición el propano, el dimetiléter, el etanal, el etanol y el ácido metanoico (masas molares de 44 a 46 g/mol) y justifica cada lugar.'}],
+ biomoleculas:[
+  {t:'con',q:'Identifica los grupos funcionales de la glucosa y de la fructosa y explica por qué son isómeros de función.'},
+  {t:'rx',q:'Escribe, con fórmulas generales, la condensación de dos aminoácidos y señala el enlace peptídico.'},
+  {t:'con',q:'Explica con la forma de las cadenas por qué el ácido esteárico (69 °C) se funde a mayor temperatura que el ácido oleico (13 °C).'},
+  {t:'con',q:'Calcula las kilocalorías de una porción con 30 g de carbohidratos, 6 g de proteína y 8 g de grasa, y explica por qué la grasa aporta tanta energía.'},
+  {t:'con',q:'Escribe la hebra complementaria de 5′-ATGCCGTA-3′ y cuenta cuántos puentes de hidrógeno unen las dos hebras.'},
+  {t:'rx',q:'Compara la respiración celular con la fermentación alcohólica: reactivos, productos, presencia de oxígeno y un ejemplo de cada una en Colombia.'},
+  {t:'nom',q:'Clasifica el gliceraldehído, la dihidroxiacetona, la ribosa, la ribulosa, la glucosa y la fructosa como aldosas o cetosas y según su número de carbonos, y escribe el nombre que une las dos clasificaciones (por ejemplo, aldohexosa).'},
+  {t:'nom',q:'Dibuja la proyección de Fischer de la D-glucosa y explica cómo se reconoce que pertenece a la serie D y no a la serie L.'},
+  {t:'rx',q:'Explica paso a paso cómo se pasa de la proyección de Fischer de la D-glucosa a su proyección de Haworth: qué grupos reaccionan, cuántos átomos tiene el anillo y dónde queda cada −OH.'},
+  {t:'nom',q:'Dibuja la α-D-glucopiranosa y la β-D-glucopiranosa en proyección de Haworth. Explica qué las diferencia y por qué esa diferencia separa al almidón de la celulosa.'},
+  {t:'con',q:'Explica por qué la fructosa forma un anillo de 5 átomos (furanosa) y la glucosa uno de 6 (piranosa).'},
+  {t:'con',q:'El ácido α-linolénico es 18:3 cis-Δ9,12,15. Explica qué significa cada número, calcula su número omega y explica por qué es un ácido graso esencial.'},
+  {t:'con',q:'Explica la diferencia entre numerar los dobles enlaces de un ácido graso con Δ y con ω, usando como ejemplo el ácido linoleico, 18:2 cis-Δ9,12.'},
+  {t:'rx',q:'Escribe la saponificación de una grasa con NaOH y explica, con el dibujo de una micela, cómo el jabón retira la grasa.'},
+  {t:'con',q:'Explica qué significa que las dos hebras del ADN sean antiparalelas y qué dice la regla de Chargaff. Si un ADN tiene 30 % de adenina, calcula el porcentaje de las otras tres bases.'},
+  {t:'con',q:'Explica por qué se dice que la replicación del ADN es semiconservativa.'},
+  {t:'con',q:'El ARNm 5′-AUG GCU AAA UUU UAA-3′ se traduce en el ribosoma. Escribe el anticodón de cada ARNt que llega y la secuencia de aminoácidos que se forma (AUG: metionina; GCU: alanina; AAA: lisina; UUU: fenilalanina; UAA: parada).'},
+  {t:'con',q:'Describe cómo se forma una proteína a partir de un gen: la transcripción, el papel del ARNm, del ARNt y del ribosoma (sitios P y A), y en qué momento se forma cada enlace peptídico.'},
+  {t:'con',q:'Explica qué le pasa a la clara del huevo al freírla o al pescado en el ceviche, usando los niveles de estructura de las proteínas.'},
+  {t:'con',q:'Explica cómo actúa una enzima como la que hidroliza la sacarosa: qué es el sitio activo y por qué el calor excesivo o un pH extremo la dañan.'}],
+ ambiente:[
+  {t:'con',q:'Calcula la masa de CO₂ que se produce al quemar 1 kg de propano (C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O). Muestra la cadena de factores de conversión.'},
+  {t:'con',q:'Explica por qué quemar 1 kg de gasolina produce más de 1 kg de CO₂, usando la ley de conservación de la masa.'},
+  {t:'rx',q:'Escribe el mecanismo por el que un CFC destruye el ozono e identifica el paso de ruptura homolítica.'},
+  {t:'con',q:'Explica, con la polaridad, por qué el DDT se acumula en la grasa de los animales y su concentración aumenta en la cadena alimentaria.'},
+  {t:'con',q:'Clasifica el PET, el PVC y el polietileno como polímeros de adición o de condensación y explica cuál podría hidrolizarse con más facilidad.'},
+  {t:'con',q:'Argumenta una ventaja y una desventaja del biodiésel de palma frente al diésel del petróleo, desde el punto de vista químico y ambiental.'},
+  {t:'con',q:'Explica con las fuerzas de London por qué en la torre de destilación del petróleo los gases salen por arriba y el asfalto queda en el fondo.'},
+  {t:'con',q:'El metano emite 49 g de CO₂ por megajulio y el octano 64 g. Explica a qué se debe la diferencia y por qué el metano que se escapa sin quemar también es un problema.'},
+  {t:'rx',q:'Escribe la ecuación balanceada de la combustión incompleta del metano y explica por qué un calentador de gas nunca debe usarse en un lugar cerrado.'},
+  {t:'con',q:'Explica, con lo que hacen las moléculas de CO₂ con la radiación infrarroja, por qué más CO₂ en el aire aumenta la temperatura del suelo.'},
+  {t:'con',q:'Explica por qué una bolsa de polietileno no se biodegrada como una cáscara de fruta y en qué se convierte con el paso del tiempo.'},
+  {t:'con',q:'Explica por qué un solo átomo de cloro puede destruir miles de moléculas de ozono y qué logró el Protocolo de Montreal.'},
+  {t:'rx',q:'Escribe la reacción de fermentación con la que se obtiene el etanol de caña y argumenta por qué «renovable» no significa «sin impacto».'},
+  {t:'con',q:'La tienda escolar quiere dejar los vasos de icopor. Usa los principios de la química verde para escoger entre vasos de PET reciclables, vasos de papel con capa plástica, vasos reutilizables y vasos de «plástico biodegradable», y justifica.'},
+  {t:'con',q:'Explica por qué un derrame de petróleo forma una mancha sobre el agua y cómo daña a los peces y a las aves.'}]
+};
+Object.keys(F4_ABIERTAS).forEach(function(k){ABIERTAS[k]=F4_ABIERTAS[k];});
+TEMAS.forEach(function(t){if(F4_ABIERTAS[t.id])t.abiertos=F4_ABIERTAS[t.id].map(function(a){return a.q;});});
+
 window.DOCENTE_DATOS={ALINEACION:ALINEACION,TEMAS:TEMAS,SABER:SABER,ABIERTAS:ABIERTAS};
 })();

@@ -7,6 +7,63 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (157) — Preguntas abiertas de la Fase 4 en las evaluaciones del generador
+
+### Contexto
+El docente pidió que los generadores tuvieran preguntas abiertas de los temas
+nuevos, basadas exclusivamente en lo que se explica dentro del repositorio.
+Al revisarlo apareció un fallo: las evaluaciones de los cuatro temas de la
+Fase 4 (Orbitales, Propiedades, Biomoléculas, Ambiente) salían **sin
+preguntas abiertas**. Sus preguntas solo estaban en los talleres; faltaban
+en la lista `ABIERTAS`, que es la que usan las evaluaciones.
+
+### Cambios
+- `docente-datos.js`:
+  - Nuevo bloque `F4_ABIERTAS` con las preguntas abiertas de la Fase 4:
+    Orbitales 16, Propiedades 14, Biomoléculas 20, Ambiente 15 (antes eran
+    6 por tema, y solo en los talleres).
+  - El mismo bloque alimenta las evaluaciones (`ABIERTAS`) y los talleres
+    (`abiertos` de cada tema), así que las dos listas no se pueden
+    desincronizar.
+  - Las preguntas tienen su rótulo (Conceptos, Reacción, Nomenclatura), así
+    que el generador las reparte entre los tres tipos.
+  - Cada pregunta se comparó con el texto de su página: las 24 anteriores
+    se mantienen porque la página las respalda.
+  - Las nuevas preguntan solo lo que la página explica:
+    - Orbitales: ondas que se suman o restan, H₂⁺ y He₂⁺, curva de energía
+      del H₂, enlace de valencia frente a orbitales moleculares, nube π del
+      eteno, longitudes de enlace del benceno, Hückel con piridina y
+      ciclooctatetraeno, color y clorofila.
+    - Propiedades: intra e intermolecular (460 frente a 20 kJ/mol), CH₃−Cl
+      frente a CCl₄, etanol frente a dimetiléter, gráfica de solubilidad de
+      los alcoholes, evaporación del alcohol antiséptico, serie de 44–46
+      g/mol.
+    - Biomoléculas:
+      - carbohidratos: aldosas y cetosas de triosas a hexosas; Fischer y
+        serie D; paso de Fischer a Haworth; anómeros α y β (almidón frente a
+        celulosa); furanosa frente a piranosa;
+      - lípidos: notación Δ y ω, omega-3 esencial, saponificación y micelas;
+      - ADN: hebras antiparalelas, Chargaff, replicación semiconservativa;
+      - proteínas: traducción de un ARNm con sus anticodones; ARNm, ARNt y
+        ribosoma; niveles de estructura y desnaturalización; enzimas.
+    - Ambiente: destilación del petróleo, CO₂ por megajulio, combustión
+      incompleta, efecto invernadero, microplásticos, Protocolo de Montreal,
+      etanol de caña, química verde (caso de los vasos de icopor), derrames.
+  - Ninguna fórmula nueva lleva paréntesis.
+- `docente-app.js`: las evaluaciones de la Fase 4 ya no anexan las rúbricas
+  de nomenclatura (A y B), que no aplican a esos temas.
+- `sw.js`: caché `chromanom-v58`.
+
+### Verificación
+Con Playwright se generó una evaluación de cada tema de la Fase 4. Las
+cuatro traen sus preguntas abiertas, repartidas entre Conceptos, Reacción y
+Nomenclatura. No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-05 (156) — El O del anillo de Haworth queda como vértice, no atravesado
 
 ### Contexto
