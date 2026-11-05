@@ -791,12 +791,15 @@ var TEMAS=[
    lectura:['Las biomoléculas orgánicas son carbohidratos, lípidos, proteínas y ácidos nucleicos. Los polímeros se construyen por condensación (sale H₂O) y se rompen por hidrólisis (entra H₂O).',
      'Los carbohidratos son polialcoholes con un aldehído (aldosas, como la glucosa) o una cetona (cetosas, como la fructosa); se unen por enlaces glucosídicos. El almidón (enlaces α) se digiere; la celulosa (enlaces β) no.',
      'Los triglicéridos son triésteres de glicerol y tres ácidos grasos: saturados (cadenas rectas, sólidos), insaturados cis (cadenas dobladas, líquidos) o trans. Las proteínas son cadenas de aminoácidos unidos por enlaces peptídicos (amidas); su forma 3D depende de puentes de hidrógeno y define su función.',
+     'Los monosacáridos se nombran por su grupo y su número de carbonos: aldo/ceto + tri, tetr, pent o hex + -osa (gliceraldehído = aldotriosa, ribosa = aldopentosa, fructosa = cetohexosa). En la proyección de Fischer, el −OH del penúltimo carbono a la derecha indica la serie D. Al cerrarse el anillo (Haworth), lo que estaba a la derecha queda abajo; el −OH nuevo del C1 puede quedar abajo (α) o arriba (β).',
+     'Los ácidos grasos omega se cuentan desde el extremo CH₃: el linoleico es omega-6 y el α-linolénico omega-3; los dos son esenciales. Un jabón es la sal de un ácido graso: su cola apolar se mete en la grasa y su cabeza −COO⁻ queda en el agua, formando micelas que el agua arrastra.',
+     'El ADN es una doble hélice de hebras antiparalelas con pares A−T y G−C (regla de Chargaff); se copia de forma semiconservativa. Para fabricar una proteína, el ADN se transcribe a ARNm (con U en lugar de T); en el ribosoma, cada codón del ARNm se aparea con el anticodón de un ARNt que trae su aminoácido, y el ribosoma los une con enlaces peptídicos desde AUG hasta un codón de parada.',
      'Las enzimas son proteínas que catalizan las reacciones del metabolismo. La respiración celular, C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O, es la oxidación de la glucosa; la fermentación alcohólica produce etanol y CO₂.'],
    esquema:{raiz:'Biomoléculas',ramas:[
-     {t:'Carbohidratos',items:['Glucosa, sacarosa','Almidón y celulosa']},
-     {t:'Lípidos',items:['Triglicéridos (ésteres)','Saturados e insaturados']},
-     {t:'Proteínas',items:['Aminoácidos','Enlace peptídico']},
-     {t:'Ácidos nucleicos',items:['Nucleótidos','A−T y G−C']}]}
+     {t:'Carbohidratos',items:['Aldosas y cetosas, triosas a hexosas','Fischer y Haworth, α y β','Almidón y celulosa']},
+     {t:'Lípidos',items:['Ácidos grasos omega-3 y omega-6','Triglicéridos y jabones']},
+     {t:'Proteínas',items:['Enlace peptídico','ARNm, ARNt y ribosoma']},
+     {t:'Ácidos nucleicos',items:['ADN: doble hélice antiparalela','A−T y G−C, replicación']}]}
   },
   ejemplo:null,
   abiertos:[

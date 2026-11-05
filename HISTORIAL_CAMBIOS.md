@@ -7,6 +7,85 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (155) — Biomoléculas a fondo: Fischer y Haworth, omegas y jabón, ADN y síntesis de proteínas
+
+### Contexto
+El docente pidió profundizar la página de Biomoléculas en cuatro frentes.
+- Carbohidratos: explicar con claridad las proyecciones de Fischer y de
+  Haworth y cómo se pasa de una a la otra, y la nomenclatura de triosas a
+  hexosas, distinguiendo aldosas de cetosas.
+- Lípidos: los ácidos grasos con sus omegas y cómo funciona un jabón.
+- Ácidos nucleicos: centrarse en el ADN.
+- Proteínas: simulaciones completas del enlace peptídico y de la formación
+  de proteínas con el ARNm y el ARNt.
+
+### Cambios
+- `biomoleculas.html`, Carbohidratos:
+  - Árbol de nomenclatura aldo/ceto × tri/tetr/pent/hex + «-osa», con
+    ejemplos (gliceraldehído, dihidroxiacetona, eritrosa, ribosa, ribulosa,
+    glucosa, galactosa, manosa, fructosa).
+  - Constructor de proyecciones de Fischer: el estudiante elige el número de
+    carbonos, aldo o ceto y la serie D/L, y la página dibuja la proyección y
+    la nombra.
+  - Conversión de Fischer a Haworth en tres pasos (cadena abierta → ataque
+    del −OH del C5 → anillo), para glucosa, galactosa, manosa, fructosa,
+    ribosa y desoxirribosa, con anómeros α y β. Incluye un reto de
+    «derecha → abajo» y una tabla de disacáridos.
+- `biomoleculas.html`, Lípidos:
+  - Explicación de la numeración Δ (desde el −COOH) y ω (desde el CH₃).
+  - Explorador de ácidos grasos (palmítico, esteárico, oleico, linoleico,
+    α-linolénico, araquidónico, EPA, DHA): cadena dibujada con sus dobles
+    enlaces cis, omega y punto de fusión.
+  - Pasos de la saponificación y simulación del jabón (`SIM.jabon`): las
+    colas apolares se meten en la grasa, se forman micelas y el agua las
+    arrastra.
+- `biomoleculas.html`, Ácidos nucleicos: el ADN, con tabla ADN/ARN,
+  hebras antiparalelas, Chargaff y escritor de la hebra complementaria.
+  Simulación `SIM.adn`: doble hélice 3D que gira y replicación
+  semiconservativa.
+- `biomoleculas.html`, Proteínas: pasos del enlace peptídico (condensación
+  −COOH + −NH₂ → −CO−NH− + H₂O), niveles de estructura y tabla ARNm/ARNt.
+  Simulación `SIM.traduccion`:
+  - transcripción ADN → ARNm (con U);
+  - el ribosoma con sus sitios P y A;
+  - los ARNt con su anticodón y su aminoácido;
+  - la formación del enlace peptídico, hasta el codón de parada.
+
+  Usa el código genético completo; se puede traducir un gen corto o el
+  inicio de la cadena B de la insulina, y una tabla muestra cada codón,
+  anticodón y aminoácido leído.
+- `sim4.js`: las simulaciones `adn`, `traduccion` y `jabon`.
+- `temas-11.js`: 16 preguntas nuevas de biomoléculas (41 en total) para el
+  Juego, la práctica y el generador. Cubren:
+  - nomenclatura de monosacáridos, serie D en Fischer y paso a Haworth;
+  - anómeros α/β y furanosas;
+  - omegas y ácidos grasos esenciales;
+  - micelas;
+  - hebra complementaria, replicación semiconservativa;
+  - codón y anticodón, enlace peptídico en el ribosoma, AUG y uracilo.
+
+  Las opciones quedaron equilibradas: la correcta es la más larga solo en
+  el 29 % de los casos.
+- `docente-datos.js`: la lectura y el esquema de Biomoléculas del generador
+  incluyen ahora la nomenclatura, Fischer/Haworth, los omegas, el jabón, el
+  ADN y la traducción.
+- `sw.js`: caché `chromanom-v56`.
+
+### Verificación
+- Pruebas con Playwright:
+  - la traducción da Met-Ala-Lys-Phe-Gly-Trp con el gen corto y
+    Met-Phe-Val-Asn-Gln-His-Leu-Cys-Gly-Ser-His-Leu-Val con la insulina;
+  - el jabón retira 3 de 3 gotas de grasa;
+  - la replicación del ADN termina;
+  - Haworth dibuja correctamente la β-D-glucopiranosa y la
+    β-D-fructofuranosa.
+- Sin errores en consola ni desbordes en un celular de 390 px.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+---
+
 ## 2026-11-05 (154) — La Fase 4 entra a la molécula de la portada y el menú se ordena por fases
 
 ### Contexto

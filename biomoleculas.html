@@ -47,10 +47,10 @@
   <a href="#previo">Palabras clave</a>
   <a href="#cuatro">Las cuatro familias</a>
   <a href="#unir">Unir y separar</a>
-  <a href="#carbo">Carbohidratos</a>
-  <a href="#lipidos">Lípidos</a>
-  <a href="#proteinas">Proteínas</a>
-  <a href="#nucleicos">Ácidos nucleicos</a>
+  <a href="#carbo">Carbohidratos: Fischer y Haworth</a>
+  <a href="#lipidos">Lípidos, omegas y jabón</a>
+  <a href="#nucleicos">ADN</a>
+  <a href="#proteinas">Proteínas y su síntesis</a>
   <a href="#simenz">Simulación: enzimas</a>
   <a href="#metab">Enzimas y metabolismo</a>
   <a href="#practica">Practica</a>
@@ -109,102 +109,188 @@
 <section class="sec" id="carbo">
   <div class="sec-kicker">Familia 1</div>
   <h2>Carbohidratos: alcoholes que también son aldehídos o cetonas</h2>
-  <div class="meta">Al terminar podrás reconocer los grupos funcionales de la glucosa y explicar por qué digerimos el almidón y no la celulosa.</div>
-  <p>Un monosacárido tiene varios grupos <b>−OH</b> (alcohol) y un grupo <b>carbonilo</b>: si es aldehído (−CHO) se llama <b>aldosa</b>; si es cetona (C=O en el medio), <b>cetosa</b>. La glucosa y la fructosa tienen la misma fórmula, C₆H₁₂O₆: son <b>isómeros de función</b>.</p>
-  <div class="figs two">
-    <div class="fig"><div class="fig-cap">Glucosa (aldosa)</div><div class="fxm" data-fx="⟦=O|C⟧H—CHOH—CHOH—CHOH—CHOH—CH₂OH" aria-label="glucosa en cadena abierta: aldehído en el carbono 1 y cinco grupos OH"></div><div class="fig-sub">Aldehído en el C1 + cinco −OH. En el agua se cierra en un anillo de 6.</div></div>
-    <div class="fig"><div class="fig-cap">Fructosa (cetosa)</div><div class="fxm" data-fx="CH₂OH—⟦=O|C⟧—CHOH—CHOH—CHOH—CH₂OH" aria-label="fructosa en cadena abierta: cetona en el carbono 2 y cinco grupos OH"></div><div class="fig-sub">Cetona en el C2 + cinco −OH. Es el azúcar de las frutas y la miel.</div></div>
+  <div class="meta">Al terminar podrás nombrar un monosacárido (aldotriosa… cetohexosa), dibujarlo en proyección de Fischer, convertirlo a Haworth y reconocer los anómeros α y β.</div>
+  <p>Un monosacárido es una cadena de 3 a 7 carbonos con un grupo <b>−OH</b> en casi cada carbono y un grupo <b>carbonilo</b>. Su nombre dice dos cosas:</p>
+  <div class="tree" role="group" aria-label="Clasificación de los monosacáridos">
+    <div class="tree-root">Nombre de un monosacárido = tipo de carbonilo + número de carbonos + «-osa»</div>
+    <div class="tree-col"><h4>¿Qué carbonilo tiene?</h4>
+      <span class="tree-leaf"><b>Aldosa:</b> un <b>aldehído</b> (−CHO) en el C1. Ej.: glucosa, ribosa, gliceraldehído.</span>
+      <span class="tree-leaf"><b>Cetosa:</b> una <b>cetona</b> (C=O) en el C2. Ej.: fructosa, ribulosa, dihidroxiacetona.</span></div>
+    <div class="tree-col"><h4>¿Cuántos carbonos tiene?</h4>
+      <span class="tree-leaf"><b>3</b> triosa · <b>4</b> tetrosa · <b>5</b> pentosa · <b>6</b> hexosa.</span>
+      <span class="tree-leaf">Glucosa = <b>aldohexosa</b>; fructosa = <b>cetohexosa</b>; ribosa = <b>aldopentosa</b>.</span></div>
   </div>
+
+  <h3>Constructor de monosacáridos en proyección de Fischer</h3>
+  <p>En la <b>proyección de Fischer</b> la cadena se dibuja vertical, con el carbonilo arriba (C1). Cada carbono quiral es un cruce: las líneas horizontales salen hacia ti y las verticales se alejan. Si el −OH del <b>penúltimo carbono</b> está a la <b>derecha</b>, el azúcar es de la serie <b>D</b> (casi todos los de los seres vivos); a la izquierda, <b>L</b>.</p>
+  <div class="calc">
+    <div class="calc-row"><span style="font-weight:800">Carbonos:</span><div class="seg" id="fs-n" role="group" aria-label="Número de carbonos"><button type="button" data-n="3">3 · triosa</button><button type="button" data-n="4">4 · tetrosa</button><button type="button" data-n="5">5 · pentosa</button><button type="button" data-n="6" class="on">6 · hexosa</button></div></div>
+    <div class="calc-row"><span style="font-weight:800">Carbonilo:</span><div class="seg" id="fs-t" role="group" aria-label="Tipo"><button type="button" data-t="aldo" class="on">Aldosa (−CHO)</button><button type="button" data-t="ceto">Cetosa (C=O)</button></div>
+      <span style="font-weight:800">Serie:</span><div class="seg" id="fs-dl" role="group" aria-label="Serie"><button type="button" data-d="D" class="on">D</button><button type="button" data-d="L">L (imagen en el espejo)</button></div></div>
+    <div class="calc-row"><label for="fs-az">Azúcar:</label><select id="fs-az"></select></div>
+    <div class="duo"><div class="plot"><svg id="fs-svg" viewBox="0 0 300 330" role="img" aria-label="Proyección de Fischer del azúcar elegido"></svg></div><div class="calc-out" id="fs-out" aria-live="polite"></div></div>
+  </div>
+
+  <h3>De Fischer a Haworth: el azúcar se cierra en un anillo</h3>
+  <p>En el agua, casi todas las moléculas de glucosa no están abiertas: el −OH del <b>C5</b> ataca al carbonilo del <b>C1</b> y forma un anillo (un <b>hemiacetal</b>). La <b>proyección de Haworth</b> dibuja ese anillo como un hexágono plano visto de lado: el borde grueso está hacia ti.</p>
+  <div class="calc">
+    <div class="calc-row"><label for="hw-az">Azúcar:</label><select id="hw-az" style="max-width:100%"><option value="glucosa">D-glucosa (piranosa: anillo de 6)</option><option value="galactosa">D-galactosa (piranosa)</option><option value="manosa">D-manosa (piranosa)</option><option value="fructosa">D-fructosa (furanosa: anillo de 5)</option><option value="ribosa">D-ribosa (furanosa)</option><option value="desoxirribosa">2-desoxi-D-ribosa (furanosa, la del ADN)</option></select>
+      <span style="font-weight:800">Anómero:</span><div class="seg" id="hw-an" role="group" aria-label="Anómero"><button type="button" data-a="b" class="on">β</button><button type="button" data-a="a">α</button></div></div>
+    <div class="duo">
+      <div class="plot"><svg id="hw-svg" viewBox="0 0 320 250" role="img" aria-label="Conversión de Fischer a Haworth, paso a paso"></svg></div>
+      <div><div class="calc-out" id="hw-out" aria-live="polite"></div>
+        <div class="calc-row"><button type="button" class="btn-sm" id="hw-ant">← Paso anterior</button><button type="button" class="btn-sm prim" id="hw-sig">Siguiente paso →</button><span class="mono" id="hw-pn"></span></div></div>
+    </div>
+    <div class="key">🔑 <b>Reglas para pasar de Fischer a Haworth (serie D):</b> lo que está a la <b>derecha</b> en Fischer queda <b>abajo</b> en Haworth; lo que está a la <b>izquierda</b> queda <b>arriba</b>; el −CH₂OH del final queda <b>arriba</b>. En el carbono del carbonilo (anomérico) aparece un −OH nuevo: <b>β</b> si queda del mismo lado que el CH₂OH (arriba) y <b>α</b> si queda del lado contrario (abajo).</div>
+    <p style="font-weight:700;margin-top:6px">Reto: ¿arriba o abajo en el anillo de Haworth?</p>
+    <div id="hw-reto"></div>
+  </div>
+
+  <h3>Disacáridos y polisacáridos</h3>
   <div class="tbl-wrap"><table class="tbl">
     <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Está formado por</th><th>Dónde lo encuentras</th></tr></thead>
     <tbody>
-      <tr><td>Disacárido</td><td><b>Sacarosa</b>, C₁₂H₂₂O₁₁</td><td>glucosa + fructosa</td><td>Panela y azúcar de caña</td></tr>
-      <tr><td>Disacárido</td><td><b>Lactosa</b></td><td>glucosa + galactosa</td><td>Leche, kumis, queso fresco</td></tr>
-      <tr><td>Polisacárido</td><td><b>Almidón</b></td><td>miles de glucosas con enlaces α</td><td>Papa, arroz, yuca, maíz, plátano</td></tr>
-      <tr><td>Polisacárido</td><td><b>Celulosa</b></td><td>miles de glucosas con enlaces β</td><td>Fibra de frutas y verduras, papel, algodón</td></tr>
-      <tr><td>Polisacárido</td><td><b>Glucógeno</b></td><td>glucosas muy ramificadas (α)</td><td>Reserva de energía en tu hígado y músculos</td></tr>
+      <tr><td>Disacárido</td><td><b>Sacarosa</b>, C₁₂H₂₂O₁₁</td><td>α-glucosa + β-fructosa (enlace α1→β2)</td><td>Panela y azúcar de caña</td></tr>
+      <tr><td>Disacárido</td><td><b>Lactosa</b></td><td>β-galactosa + glucosa (β1→4)</td><td>Leche, kumis, queso fresco</td></tr>
+      <tr><td>Disacárido</td><td><b>Maltosa</b></td><td>α-glucosa + glucosa (α1→4)</td><td>Malta de la cerveza y la malta</td></tr>
+      <tr><td>Polisacárido</td><td><b>Almidón</b></td><td>miles de α-glucosas (α1→4)</td><td>Papa, arroz, yuca, maíz, plátano</td></tr>
+      <tr><td>Polisacárido</td><td><b>Celulosa</b></td><td>miles de β-glucosas (β1→4)</td><td>Fibra de frutas y verduras, papel, algodón</td></tr>
+      <tr><td>Polisacárido</td><td><b>Glucógeno</b></td><td>α-glucosas muy ramificadas</td><td>Reserva de energía en tu hígado y músculos</td></tr>
     </tbody>
   </table></div>
-  <div class="warn">⚠️ El almidón y la celulosa son ambos «cadenas de glucosa». La diferencia está en la <b>orientación del enlace</b> (α o β). Nuestras enzimas (amilasas) solo rompen los enlaces α: la celulosa pasa sin digerirse y funciona como fibra. Las vacas sí la aprovechan gracias a los microorganismos de su estómago.</div>
+  <div class="warn">⚠️ El almidón y la celulosa son ambos «cadenas de glucosa». La diferencia es el <b>anómero</b>: α en el almidón y β en la celulosa (ahora puedes verlo en Haworth: el −OH del C1 abajo o arriba). Nuestras enzimas solo rompen los enlaces α: la celulosa pasa sin digerirse y funciona como fibra.</div>
   <div class="life">
     <div class="life-h">🧪 Pruebas que puedes hacer en el laboratorio del colegio</div>
     <p><b>Lugol (yodo):</b> se pone azul oscuro con el almidón. Prueba una tajada de papa y una de manzana madura.</p>
-    <p><b>Benedict o Fehling:</b> al calentar, da un precipitado rojo ladrillo con los azúcares que tienen el carbonilo libre (glucosa, fructosa, lactosa). La sacarosa da negativo: su carbonilo está «ocupado» en el enlace. Es la misma prueba de aldehídos que viste en Reacciones.</p>
+    <p><b>Benedict o Fehling:</b> al calentar, da un precipitado rojo ladrillo con los azúcares que pueden abrir su anillo y dejar libre el carbonilo (glucosa, fructosa, lactosa, maltosa). La sacarosa da negativo: sus dos carbonos anoméricos están «ocupados» en el enlace.</p>
   </div>
 </section>
 
 <section class="sec" id="lipidos">
   <div class="sec-kicker">Familia 2</div>
-  <h2>Lípidos: ésteres apolares que guardan energía</h2>
-  <div class="meta">Al terminar podrás explicar con la forma de las moléculas por qué la manteca es sólida y el aceite líquido.</div>
-  <p>Un <b>triglicérido</b> (grasa o aceite) es un <b>triéster</b>: los tres −OH del glicerol, CH₂OH−CHOH−CH₂OH, reaccionan con el −COOH de tres ácidos grasos (cadenas de 12 a 22 carbonos). Salen 3 H₂O. Como casi toda la molécula es hidrocarburo, los lípidos son <b>apolares</b> e insolubles en agua.</p>
+  <h2>Lípidos: ácidos grasos, omegas y jabones</h2>
+  <div class="meta">Al terminar podrás leer la notación de un ácido graso (18:2 ω-6), saber qué es un omega-3 y explicar con partículas cómo limpia un jabón.</div>
+  <p>Un <b>ácido graso</b> es un ácido carboxílico de cadena larga (casi siempre de 12 a 22 carbonos, en número par). Puede ser <b>saturado</b> (solo enlaces sencillos) o <b>insaturado</b> (con uno o más C=C, casi siempre <i>cis</i>). Hay dos formas de numerar sus dobles enlaces:</p>
   <div class="duo">
-    <div class="fig">
-      <svg viewBox="0 0 300 170" role="img" aria-label="Esquema de un triglicérido: el glicerol a la izquierda y tres cadenas de ácido graso unidas por enlaces éster; una de ellas con un doble enlace cis que la dobla">
-        <rect x="14" y="20" width="56" height="130" rx="10" fill="#dcfce7" stroke="#166534" stroke-width="2"/>
-        <text x="42" y="90" text-anchor="middle" font-size="12" font-weight="800" fill="#14532d">glicerol</text>
-        <g font-size="10" font-weight="800" fill="#9a4a78"><text x="74" y="40">éster</text><text x="74" y="90">éster</text><text x="74" y="140">éster</text></g>
-        <polyline points="104,36 124,28 144,36 164,28 184,36 204,28 224,36 244,28 264,36 284,28" fill="none" stroke="#0d2d42" stroke-width="3"/>
-        <polyline points="104,86 124,78 144,86 164,78 184,86 204,78 224,86 244,78 264,86 284,78" fill="none" stroke="#0d2d42" stroke-width="3"/>
-        <polyline points="104,136 124,128 144,136 164,128 184,136 200,150 214,166" fill="none" stroke="#0d2d42" stroke-width="3"/>
-        <line x1="186" y1="140" x2="200" y2="153" stroke="#b45309" stroke-width="3"/>
-        <text x="226" y="150" font-size="10" fill="#b45309" font-weight="800">C=C cis: «codo»</text>
-      </svg>
-      <div class="fig-sub">Dos cadenas saturadas (rectas) y una insaturada cis (doblada).</div>
-    </div>
-    <div>
-      <div class="pasos">
-        <div class="pasos-h">Razonando con datos: tres ácidos grasos de 18 carbonos</div>
-        <ol>
-          <li><b>Ácido esteárico</b> (saturado, cadena recta): se funde a <b>69 °C</b>. Sólido, como el sebo.</li>
-          <li><b>Ácido oleico</b> (un C=C <i>cis</i>, cadena doblada): se funde a <b>13 °C</b>. Líquido, como el aceite de oliva o de aguacate.</li>
-          <li><b>Ácido elaídico</b> (un C=C <i>trans</i>, cadena casi recta): se funde a <b>45 °C</b>. Misma fórmula que el oleico, pero se comporta casi como uno saturado.</li>
-          <li><b>Conclusión:</b> con igual número de carbonos, lo que cambia es la <b>forma</b>. Las cadenas rectas se apilan juntas (más fuerzas de London → sólido); el codo cis no las deja acomodarse (→ líquido). Las grasas trans se apilan como las saturadas y su consumo eleva el riesgo cardiovascular.</li>
-        </ol>
-      </div>
-    </div>
+    <div class="key">🔢 <b>Desde el −COOH (Δ, «delta»):</b> el carbono del carboxilo es el C1. El ácido oleico es <b>cis-Δ9</b>: su C=C empieza en el C9.</div>
+    <div class="key">🐟 <b>Desde el extremo CH₃ (ω, «omega»):</b> el último carbono es el ω1. El primer C=C contado desde ese extremo da el nombre: el ácido oleico es <b>omega-9</b> (18 − 9 = 9).</div>
   </div>
-  <p>Con una base fuerte, los ésteres de la grasa se hidrolizan: <b>grasa + NaOH → glicerol + jabón</b> (saponificación). Por eso el jabón artesanal se hace con sebo o aceite y soda cáustica.</p>
+  <div class="calc">
+    <div class="calc-row"><label for="og-s">Ácido graso:</label><select id="og-s"></select>
+      <span style="font-weight:800">Numerar desde:</span><div class="seg" id="og-num" role="group" aria-label="Numeración"><button type="button" data-k="d" class="on">el −COOH (Δ)</button><button type="button" data-k="w">el extremo ω</button></div></div>
+    <div class="plot"><svg id="og-svg" viewBox="0 0 640 150" role="img" aria-label="Cadena del ácido graso con sus dobles enlaces y la numeración"></svg></div>
+    <div class="calc-out" id="og-out" aria-live="polite"></div>
+  </div>
+  <div class="life">
+    <div class="life-h">🍽️ Omegas en tu plato</div>
+    <p>Los ácidos <b>linoleico (ω-6)</b> y <b>α-linolénico (ω-3)</b> son <b>esenciales</b>: el cuerpo no puede fabricarlos y hay que comerlos. Los ω-3 de cadena larga (EPA y DHA) forman parte de las membranas de las neuronas y la retina.</p>
+    <p><b>ω-3:</b> sardina, atún, trucha, salmón, chía, linaza, nueces. <b>ω-6:</b> aceites de girasol, maíz y soya. <b>ω-9</b> (no esencial): aceite de oliva, aguacate. Los nutricionistas recomiendan equilibrar ω-6 y ω-3, porque en las dietas actuales suele sobrar ω-6.</p>
+  </div>
+
+  <h3>Triglicéridos: tres ácidos grasos sobre el glicerol</h3>
+  <p>Un <b>triglicérido</b> (grasa o aceite) es un <b>triéster</b>: los tres −OH del glicerol, CH₂OH−CHOH−CH₂OH, reaccionan con el −COOH de tres ácidos grasos y salen 3 H₂O. Con cadenas saturadas (rectas) se apilan bien y son sólidos, como la manteca; con cadenas cis (dobladas) son líquidos, como los aceites. El ácido esteárico (saturado) se funde a 69 °C; el oleico (un C=C cis), a 13 °C; el elaídico (el mismo, pero trans y recto), a 45 °C: las <b>grasas trans</b> se comportan como saturadas y elevan el riesgo cardiovascular.</p>
+
+  <h3>¿Cómo funciona un jabón?</h3>
+  <p>Al hervir grasa con soda cáustica se hidrolizan los ésteres: <b>grasa + 3 NaOH → glicerol + 3 R−COO⁻ Na⁺</b> (jabón): es la <b>saponificación</b>. Cada molécula de jabón tiene dos partes opuestas: una <b>cabeza iónica</b> (−COO⁻ Na⁺) que se atrae con el agua (hidrófila) y una <b>cola</b> larga de hidrocarburo que se atrae con la grasa (hidrófoba). Observa lo que hacen:</p>
+  <p class="sim-pregunta">¿qué crees que pasará con la grasa si solo agitas con agua, sin jabón? ¿Y con jabón?</p>
+  <div class="sim" data-sim="jabon"></div>
+  <div class="pasos">
+    <div class="pasos-h">Cómo limpia el jabón, paso a paso</div>
+    <ol>
+      <li><b>Las colas entran a la grasa:</b> la parte apolar del jabón se disuelve en la mancha de grasa (semejante disuelve a semejante).</li>
+      <li><b>Las cabezas quedan afuera:</b> las cabezas −COO⁻ quedan en contacto con el agua.</li>
+      <li><b>Se forma una micela:</b> al frotar, la grasa se desprende envuelta en jabón, como una gota con «pelos» iónicos por fuera. Las micelas tienen carga negativa por fuera y se repelen entre sí, así que no se vuelven a juntar.</li>
+      <li><b>El enjuague se las lleva:</b> el agua arrastra las micelas con la grasa adentro. Los detergentes sintéticos funcionan igual, con otra cabeza iónica (por ejemplo, sulfonato).</li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="nucleicos">
+  <div class="sec-kicker">Familia 3</div>
+  <h2>El ADN: la molécula que guarda la información de la vida</h2>
+  <div class="meta">Al terminar podrás describir la estructura del ADN (nucleótidos, doble hélice antiparalela, pares de bases) y explicar por qué su replicación es semiconservativa.</div>
+  <div class="duo">
+    <div>
+      <p>El <b>ADN</b> (ácido desoxirribonucleico) es un polímero de <b>nucleótidos</b>. Cada nucleótido tiene tres partes:</p>
+      <ul>
+        <li>un <b>fosfato</b> (del ácido fosfórico);</li>
+        <li>un azúcar de 5 carbonos, la <b>2-desoxirribosa</b> (una aldopentosa sin el −OH del C2: la viste en el constructor de Fischer);</li>
+        <li>una <b>base nitrogenada</b>: las <b>purinas</b> adenina (A) y guanina (G), de dos anillos, y las <b>pirimidinas</b> citosina (C) y timina (T), de un anillo.</li>
+      </ul>
+      <p>Los nucleótidos se unen por enlaces <b>fosfodiéster</b> entre el C3′ de un azúcar y el C5′ del siguiente: por eso cada hebra tiene una dirección, de <b>5′ a 3′</b>.</p>
+    </div>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Característica</th><th>Valor</th></tr></thead>
+      <tbody>
+        <tr><td>Hebras</td><td>2, antiparalelas (5′→3′ y 3′→5′)</td></tr>
+        <tr><td>Pares de bases</td><td>A=T (2 puentes de H) · G≡C (3 puentes de H)</td></tr>
+        <tr><td>Regla de Chargaff</td><td>%A = %T y %G = %C</td></tr>
+        <tr><td>Una vuelta de hélice</td><td>≈ 10 pares de bases, 3,4 nm</td></tr>
+        <tr><td>Diámetro</td><td>≈ 2 nm</td></tr>
+        <tr><td>ADN en una célula humana</td><td>≈ 6400 millones de pares de bases, unos 2 m estirado</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <p class="sim-pregunta">si una hebra dice 5′-ATGC-3′, ¿qué dice la hebra complementaria, y en qué dirección?</p>
+  <div class="sim" data-sim="adn"></div>
+  <div class="calc">
+    <div class="calc-row"><label for="dna-in">Escribe una hebra de ADN (solo A, T, G, C):</label><input id="dna-in" value="ATGCGTA" style="width:220px;text-transform:uppercase" maxlength="24"></div>
+    <div class="calc-out" id="dna-out" aria-live="polite"></div>
+  </div>
+  <div class="life">
+    <div class="life-h">🇨🇴 El ADN en Colombia</div>
+    <p>Medicina Legal compara perfiles de ADN para pruebas de paternidad y para identificar a personas desaparecidas, comparando su ADN con el de sus familiares. Funciona porque cada persona hereda la mitad de su ADN de cada padre y la complementariedad A−T y G−C permite copiar y analizar fragmentos muy pequeños.</p>
+  </div>
 </section>
 
 <section class="sec" id="proteinas">
-  <div class="sec-kicker">Familia 3</div>
-  <h2>Proteínas: cadenas de aminoácidos que se pliegan</h2>
-  <div class="meta">Al terminar podrás dibujar el enlace peptídico y explicar qué pasa cuando una proteína se desnaturaliza.</div>
+  <div class="sec-kicker">Familia 4</div>
+  <h2>Proteínas: del ADN a una cadena de aminoácidos</h2>
+  <div class="meta">Al terminar podrás explicar cómo se forma el enlace peptídico y cómo el ARN mensajero y los ARN de transferencia deciden el orden de los aminoácidos de una proteína.</div>
   <p>Todo aminoácido tiene un grupo <b>amino</b> (−NH₂) y un <b>carboxilo</b> (−COOH) unidos al mismo carbono, que también lleva un H y una cadena lateral <b>R</b>. Hay 20 cadenas R distintas: de ellas dependen las propiedades de cada proteína.</p>
   <div class="figs">
     <div class="fig"><div class="fig-cap">Aminoácido (fórmula general)</div><div class="fxm" data-fx="H₂N—⟦R|CH⟧—COOH" aria-label="H2N, un carbono con H y la cadena R, y COOH"></div><div class="fig-sub">R cambia de un aminoácido a otro.</div></div>
     <div class="fig"><div class="fig-cap">Glicina (R = H)</div><div class="fxm" data-fx="H₂N—CH₂—COOH" aria-label="glicina"></div><div class="fig-sub">Ácido 2-aminoetanoico. Única sin carbono quiral.</div></div>
     <div class="fig"><div class="fig-cap">Alanina (R = CH₃)</div><div class="fxm" data-fx="H₂N—⟦CH₃|CH⟧—COOH" aria-label="alanina: el carbono central lleva un grupo metilo"></div><div class="fig-sub">Ácido 2-aminopropanoico. Su C2 es quiral.</div></div>
   </div>
-  <p>El −COOH de un aminoácido reacciona con el −NH₂ del siguiente: se forma una <b>amida</b> llamada <b>enlace peptídico</b> y sale H₂O. Con n aminoácidos se forman n − 1 enlaces.</p>
-  <div class="fig" style="max-width:520px;margin:8px auto"><div class="fig-cap">Dipéptido glicina–alanina</div><div class="fxm" data-fx="H₂N—CH₂—«⟦=O|C⟧—NH»—⟦CH₃|CH⟧—COOH" aria-label="H2N CH2, el enlace peptídico C=O NH resaltado, CH con CH3 y COOH"></div><div class="fig-sub">En rosado, el enlace peptídico (−CO−NH−).</div></div>
+  <div class="pasos">
+    <div class="pasos-h">El enlace peptídico, paso a paso</div>
+    <ol>
+      <li><b>Dos aminoácidos se enfrentan:</b> el −COOH del primero y el −NH₂ del segundo.</li>
+      <li><b>Condensación:</b> del −COOH sale un −OH y del −NH₂ sale un −H: juntos forman una molécula de H₂O.</li>
+      <li><b>Nace la amida:</b> el C del carbonilo queda unido al N: −CO−NH−. Ese es el <b>enlace peptídico</b>.</li>
+      <li><b>Es plano y rígido:</b> por resonancia, el C−N tiene algo de doble enlace y no gira. Por eso las proteínas forman hélices y láminas ordenadas.</li>
+    </ol>
+  </div>
+  <div class="fig" style="max-width:560px;margin:8px auto"><div class="fig-cap">Dipéptido glicina–alanina</div><div class="fxm" data-fx="H₂N—CH₂—«⟦=O|C⟧—NH»—⟦CH₃|CH⟧—COOH" aria-label="H2N CH2, el enlace peptídico C=O NH resaltado, CH con CH3 y COOH"></div><div class="fig-sub">En rosado, el enlace peptídico (−CO−NH−).</div></div>
+  <h3>¿Quién decide el orden de los aminoácidos? El ARNm y los ARNt</h3>
+  <p>El orden está escrito en un gen del ADN. Primero se copia en <b>ARN mensajero</b> (transcripción); luego el <b>ribosoma</b> lee el ARNm de tres en tres bases (cada trío es un <b>codón</b>) y los <b>ARN de transferencia</b> (ARNt) traen el aminoácido que corresponde: cada ARNt tiene un <b>anticodón</b> complementario del codón (traducción). En el ribosoma se forma un enlace peptídico tras otro.</p>
+  <p class="sim-pregunta">si el ARNm dice AUG−GCU−AAA, ¿qué anticodones tendrán los ARNt que lleguen y qué tres aminoácidos se unirán?</p>
+  <div class="sim" data-sim="traduccion"></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Molécula</th><th>Qué hace en la síntesis</th></tr></thead>
+    <tbody>
+      <tr><td><b>ADN</b></td><td>Guarda el gen. No sale del núcleo.</td></tr>
+      <tr><td><b>ARNm</b> (mensajero)</td><td>Copia del gen, con U en vez de T. Lleva el mensaje al ribosoma; se lee en codones de 3 bases.</td></tr>
+      <tr><td><b>ARNt</b> (transferencia)</td><td>Trae un aminoácido; su anticodón se aparea con el codón del ARNm.</td></tr>
+      <tr><td><b>Ribosoma</b> (ARNr + proteínas)</td><td>Lee el ARNm y forma los enlaces peptídicos. Tiene un sitio P (cadena que crece) y un sitio A (aminoácido que llega).</td></tr>
+      <tr><td><b>Codones especiales</b></td><td>AUG: inicio (metionina). UAA, UAG y UGA: parada.</td></tr>
+    </tbody>
+  </table></div>
   <div class="tbl-wrap"><table class="tbl">
     <thead><tr><th>Nivel</th><th>Qué es</th><th>Qué lo mantiene</th></tr></thead>
     <tbody>
       <tr><td><b>Primario</b></td><td>La secuencia de aminoácidos</td><td>Enlaces peptídicos (covalentes)</td></tr>
-      <tr><td><b>Secundario</b></td><td>Hélices y láminas</td><td>Puentes de hidrógeno entre C=O y N−H de la cadena</td></tr>
+      <tr><td><b>Secundario</b></td><td>Hélices α y láminas β</td><td>Puentes de hidrógeno entre C=O y N−H de la cadena</td></tr>
       <tr><td><b>Terciario</b></td><td>El plegamiento completo en 3D</td><td>Puentes de hidrógeno, atracciones iónicas, partes apolares que se esconden del agua, puentes S−S</td></tr>
       <tr><td><b>Cuaternario</b></td><td>Varias cadenas juntas (como la hemoglobina)</td><td>Las mismas atracciones, entre cadenas</td></tr>
     </tbody>
   </table></div>
   <div class="life">
     <div class="life-h">🍋 Desnaturalización en la cocina</div>
-    <p>Al freír un huevo, la clara pasa de transparente a blanca: el calor rompe los puentes de hidrógeno y la proteína (albúmina) <b>pierde su forma</b>. En el <b>ceviche</b>, el ácido del limón hace lo mismo sin calor. Los enlaces peptídicos no se rompen: la secuencia sigue igual, pero sin su forma la proteína ya no cumple su función.</p>
+    <p>Al freír un huevo, la clara pasa de transparente a blanca: el calor rompe los puentes de hidrógeno y la proteína <b>pierde su forma</b>. En el <b>ceviche</b>, el ácido del limón hace lo mismo sin calor. Los enlaces peptídicos no se rompen: la secuencia sigue igual, pero sin su forma la proteína ya no funciona.</p>
     <p><b>Prueba de Biuret:</b> en medio básico con un poco de sulfato de cobre, las proteínas dan color violeta (el Cu²⁺ se une a los enlaces peptídicos).</p>
   </div>
-</section>
-
-<section class="sec" id="nucleicos">
-  <div class="sec-kicker">Familia 4</div>
-  <h2>Ácidos nucleicos: puentes de hidrógeno que guardan información</h2>
-  <div class="meta">Al terminar podrás escribir la hebra complementaria de una secuencia de ADN y contar sus puentes de hidrógeno.</div>
-  <p>Un <b>nucleótido</b> tiene tres partes: un <b>fosfato</b>, un <b>azúcar</b> de 5 carbonos (desoxirribosa en el ADN, ribosa en el ARN) y una <b>base nitrogenada</b> (A, T, G, C; en el ARN la T se cambia por U). Los nucleótidos se encadenan por enlaces <b>fosfodiéster</b>. Las dos hebras del ADN se unen por <b>puentes de hidrógeno</b> entre bases: <b>A con T (2 puentes)</b> y <b>G con C (3 puentes)</b>.</p>
-  <div class="calc">
-    <div class="calc-row"><label for="dna-in">Escribe una hebra de ADN (solo A, T, G, C):</label><input id="dna-in" value="ATGCGTA" style="width:220px;text-transform:uppercase" maxlength="24"></div>
-    <div class="calc-out" id="dna-out" aria-live="polite"></div>
-  </div>
-  <p>¿Por qué puentes de hidrógeno y no enlaces covalentes? Porque son <b>lo bastante fuertes</b> para mantener la doble hélice estable y <b>lo bastante débiles</b> para que las enzimas abran las hebras cuando la célula copia su ADN.</p>
 </section>
 
 <section class="sec" id="simenz">
@@ -285,6 +371,106 @@
 (function(){
 'use strict';
 var FU=window.FUND;if(FU)FU.practica('prac-bm','biomoleculas',8,'Practica: biomoléculas');
+/* ── Constructor de monosacáridos (Fischer) ──
+   Para cada azúcar de la serie D: posición del −OH de cada carbono quiral
+   (R = derecha, L = izquierda, H = sin OH, como en la desoxirribosa).
+   Aldosas: carbonos quirales C2…C(n−1). Cetosas: C3…C(n−1). */
+var AZ={3:{aldo:[['gliceraldehído',['R'],'El azúcar más simple con un carbono quiral; es la referencia de las series D y L.']],ceto:[['dihidroxiacetona',[],'No tiene carbonos quirales; se usa en los autobronceadores.']]},
+  4:{aldo:[['eritrosa',['R','R'],'Intermediario del metabolismo de los azúcares en las plantas.'],['treosa',['L','R'],'Diastereoisómero de la eritrosa: solo cambia el C2.']],ceto:[['eritrulosa',['R'],'Cetotetrosa; también se usa en autobronceadores.']]},
+  5:{aldo:[['ribosa',['R','R','R'],'Forma parte del ARN y del ATP.'],['2-desoxirribosa',['H','R','R'],'Forma parte del ADN: le falta el −OH del C2.'],['arabinosa',['L','R','R'],'Presente en la goma arábiga y en las paredes de las plantas.'],['xilosa',['R','L','R'],'Azúcar de la madera; de ella se obtiene el xilitol.']],ceto:[['ribulosa',['R','R'],'En la fotosíntesis, la enzima rubisco fija el CO₂ sobre ella.'],['xilulosa',['L','R'],'Intermediario del metabolismo de la glucosa.']]},
+  6:{aldo:[['glucosa',['R','L','R','R'],'El combustible de tus células; forma almidón, celulosa y glucógeno.'],['galactosa',['R','L','L','R'],'Con la glucosa forma la lactosa de la leche. Solo cambia el C4.'],['manosa',['L','L','R','R'],'Solo cambia el C2 respecto a la glucosa.']],ceto:[['fructosa',['L','R','R'],'El azúcar de las frutas y la miel; con la glucosa forma la sacarosa de la panela.']]}};
+var PREF={3:'tri',4:'tetr',5:'pent',6:'hex'};
+var fsN=6,fsT='aldo',fsD='D',NSv='http://www.w3.org/2000/svg';
+function sv(t,a,p){var x=document.createElementNS(NSv,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function st(p,x,y,s,a){var e=sv('text',Object.assign({x:x,y:y,'font-size':13,'font-family':'JetBrains Mono,monospace','font-weight':700,fill:'#0d2d42','text-anchor':'middle'},a||{}),p);e.textContent=s;return e;}
+function sub(s){return s.replace(/₂/g,'₂');}
+function fischer(svg,n,tipo,conf,serieD,resalta){
+  svg.innerHTML='';var cx=150,y0=34,dy=Math.min(62,250/(n-1)),cols={C:'#0d2d42',O:'#dc2626'};
+  var cad=[];for(var i=1;i<=n;i++){var y=y0+(i-1)*dy;cad.push(y);}
+  sv('line',{x1:cx,y1:cad[0],x2:cx,y2:cad[n-1],stroke:'#334155','stroke-width':2.5},svg);
+  for(i=1;i<=n;i++){var y=cad[i-1],lab;
+    if(i===1)lab=tipo==='aldo'?'CHO':'CH₂OH';else if(i===n)lab='CH₂OH';else if(tipo==='ceto'&&i===2)lab='C=O';else lab=null;
+    if(lab){sv('rect',{x:cx-30,y:y-12,width:60,height:24,rx:6,fill:i===1&&tipo==='aldo'||lab==='C=O'?'#fce8f4':'#fff',stroke:'#cbd5e1'},svg);st(svg,cx,y+5,lab,{fill:lab==='CHO'||lab==='C=O'?'#9a4a78':'#0d2d42'});}
+    else{var k=i-(tipo==='aldo'?2:3),c=conf[k];if(!serieD&&c!=='H')c=c==='R'?'L':'R';
+      sv('line',{x1:cx-58,y1:y,x2:cx+58,y2:y,stroke:'#334155','stroke-width':2.5},svg);
+      var der=c==='R'?'OH':'H',izq=c==='L'?'OH':'H';if(c==='H'){der='H';izq='H';}
+      var hl=resalta&&i===n-1;
+      st(svg,cx+78,y+5,der,{fill:der==='OH'?(hl?'#dc2626':'#1a6ea8'):'#64748b'});st(svg,cx-78,y+5,izq,{fill:izq==='OH'?(hl?'#dc2626':'#1a6ea8'):'#64748b'});
+      sv('circle',{cx:cx,cy:y,r:3,fill:'#0d2d42'},svg);}
+    st(svg,24,y+5,'C'+i,{'font-size':11,fill:'#94a3b8','font-family':'Outfit,sans-serif'});}
+}
+function fsLista(){var l=AZ[fsN][fsT],s=document.getElementById('fs-az');s.innerHTML=l.map(function(a,i){return '<option value="'+i+'">'+a[0]+'</option>';}).join('');}
+function fsPinta(){var l=AZ[fsN][fsT],a=l[+document.getElementById('fs-az').value||0],D=fsD==='D',quir=a[1].filter(function(c){return c!=='H';}).length;
+  fischer(document.getElementById('fs-svg'),fsN,fsT,a[1],D,true);
+  var nom=a[0]==='dihidroxiacetona'?'dihidroxiacetona':(D?'D':'L')+'-'+a[0],gen=fsT+PREF[fsN]+'osa',form=a[0]==='2-desoxirribosa'?'C₅H₁₀O₄':'C'+'₃₄₅₆'[fsN-3]+'H'+['₆','₈','₁₀','₁₂'][fsN-3]+'O'+'₃₄₅₆'[fsN-3];
+  document.getElementById('fs-out').innerHTML='<b>'+nom+'</b> · es una <b>'+gen+'</b> ('+(fsT==='aldo'?'aldehído en el C1':'cetona en el C2')+', '+fsN+' carbonos).<br>Fórmula: <b>'+form+'</b>'+(a[0]==='2-desoxirribosa'?' (le falta un O)':' (Cₙ(H₂O)ₙ: por eso se llamaron «hidratos de carbono»)')+'.<br>Carbonos quirales: <b>'+quir+'</b> → hasta 2<sup>'+quir+'</sup> = '+Math.pow(2,quir)+' estereoisómeros.'+(quir?'<br>Serie <b>'+(D?'D':'L')+'</b>: el −OH del penúltimo carbono (en rojo) está a la '+(D?'derecha':'izquierda')+'.':'')+'<br>'+a[2]+(!D?' <i>(La forma L casi no aparece en los seres vivos.)</i>':'');}
+function seg(id,fn){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});fn(b);});}
+seg('fs-n',function(b){fsN=+b.dataset.n;fsLista();fsPinta();});seg('fs-t',function(b){fsT=b.dataset.t;fsLista();fsPinta();});seg('fs-dl',function(b){fsD=b.dataset.d;fsPinta();});
+document.getElementById('fs-az').addEventListener('change',fsPinta);fsLista();fsPinta();
+
+/* ── Fischer → Haworth, paso a paso ──
+   up/dn de cada carbono del anillo según la regla: derecha → abajo,
+   izquierda → arriba; el CH₂OH final arriba (serie D). */
+var HW={glucosa:{n:6,t:'aldo',c:['R','L','R','R'],ani:6,nombre:'glucopiranosa'},galactosa:{n:6,t:'aldo',c:['R','L','L','R'],ani:6,nombre:'galactopiranosa'},manosa:{n:6,t:'aldo',c:['L','L','R','R'],ani:6,nombre:'manopiranosa'},
+  fructosa:{n:6,t:'ceto',c:['L','R','R'],ani:5,nombre:'fructofuranosa'},ribosa:{n:5,t:'aldo',c:['R','R','R'],ani:5,nombre:'ribofuranosa'},desoxirribosa:{n:5,t:'aldo',c:['H','R','R'],ani:5,nombre:'2-desoxirribofuranosa'}};
+var hwP=0,hwA='b';
+function haworth(svg,k,an){var z=HW[k];svg.innerHTML='';
+  var P6=[[258,128],[208,172],[108,172],[58,128],[108,84],[208,84]],P5=[[248,128],[208,174],[112,174],[72,128],[160,86]];
+  var P=z.ani===6?P6:P5;  // 6: C1,C2,C3,C4,C5,O · 5: C(an),C,C,C,O
+  var pts=P.map(function(p){return p.join(',');}).join(' ');sv('polygon',{points:pts,fill:'#f1f5f9',stroke:'#334155','stroke-width':2.5},svg);
+  sv('line',{x1:P[1][0],y1:P[1][1],x2:P[2][0],y2:P[2][1],stroke:'#334155','stroke-width':7},svg);
+  var oI=P.length-1;st(svg,P[oI][0],P[oI][1]+5,'O',{fill:'#dc2626'});sv('circle',{cx:P[oI][0],cy:P[oI][1],r:9,fill:'none'},svg);
+  function sus(i,arriba,abajo,col){var x=P[i][0],y=P[i][1];sv('line',{x1:x,y1:y,x2:x,y2:y-24,stroke:'#334155','stroke-width':1.8},svg);sv('line',{x1:x,y1:y,x2:x,y2:y+24,stroke:'#334155','stroke-width':1.8},svg);
+    st(svg,x,y-29,arriba,{fill:arriba==='OH'&&col?col:arriba==='OH'?'#1a6ea8':arriba==='H'?'#64748b':'#0d2d42','font-size':12});st(svg,x,y+39,abajo,{fill:abajo==='OH'&&col?col:abajo==='OH'?'#1a6ea8':abajo==='H'?'#64748b':'#0d2d42','font-size':12});}
+  function pos(c){return c==='R'?['H','OH']:c==='L'?['OH','H']:['H','H'];}
+  var ab=an==='b',anOH=ab?['OH','H']:['H','OH'];
+  if(z.ani===6){sus(0,anOH[0],anOH[1],'#dc2626');for(var j=0;j<3;j++){var q=pos(z.c[j]);sus(j+1,q[0],q[1]);}sus(4,'CH₂OH','H');
+    st(svg,P[0][0]+18,P[0][1]+4,'1',{'font-size':10,fill:'#94a3b8'});st(svg,P[4][0]-18,P[4][1]+4,'5',{'font-size':10,fill:'#94a3b8'});}
+  else if(z.t==='ceto'){var ac=ab?['OH','CH₂OH']:['CH₂OH','OH'];sus(0,ac[0],ac[1],'#dc2626');var q1=pos(z.c[0]),q2=pos(z.c[1]);sus(1,q1[0],q1[1]);sus(2,q2[0],q2[1]);sus(3,'CH₂OH','H');
+    st(svg,P[0][0]+18,P[0][1]+4,'2',{'font-size':10,fill:'#94a3b8'});st(svg,P[3][0]-18,P[3][1]+4,'5',{'font-size':10,fill:'#94a3b8'});}
+  else{sus(0,anOH[0],anOH[1],'#dc2626');var r1=pos(z.c[0]),r2=pos(z.c[1]);sus(1,r1[0],r1[1]);sus(2,r2[0],r2[1]);sus(3,'CH₂OH','H');
+    st(svg,P[0][0]+18,P[0][1]+4,'1',{'font-size':10,fill:'#94a3b8'});st(svg,P[3][0]-18,P[3][1]+4,'4',{'font-size':10,fill:'#94a3b8'});}
+}
+function hwPinta(){var k=document.getElementById('hw-az').value,z=HW[k],svg=document.getElementById('hw-svg'),o=document.getElementById('hw-out'),cAn=z.t==='ceto'?'C2':'C1',cAt=z.ani===6?'C5':z.t==='ceto'?'C5':'C4';
+  var anN=(hwA==='b'?'β':'α')+'-D-'+z.nombre;
+  if(hwP===0){fischer(svg,z.n,z.t,z.c,true,false);o.innerHTML='<b>Paso 1 · Cadena abierta (Fischer).</b> Ubica el carbonilo ('+cAn+') y el −OH del <b>'+cAt+'</b>: son los que van a reaccionar.';}
+  else if(hwP===1){fischer(svg,z.n,z.t,z.c,true,false);var dy=Math.min(62,250/(z.n-1)),iAt=z.ani===6?5:(z.t==='ceto'?5:4),iCa=z.t==='ceto'?2:1,yAt=34+(iAt-1)*dy,yCa=34+(iCa-1)*dy;
+    sv('path',{d:'M244 '+yAt+' C 300 '+(yAt-20)+', 300 '+(yCa+10)+', 184 '+yCa,fill:'none',stroke:'#dc2626','stroke-width':2.5,'stroke-dasharray':'6 4'},svg);sv('circle',{cx:184,cy:yCa,r:5,fill:'#dc2626'},svg);
+    o.innerHTML='<b>Paso 2 · La cadena se dobla.</b> El O del −OH del <b>'+cAt+'</b> se acerca al C del carbonilo ('+cAn+') y lo ataca: se forma un enlace C−O y el anillo se cierra. Esta reacción alcohol + '+(z.t==='aldo'?'aldehído':'cetona')+' forma un <b>hemi'+(z.t==='aldo'?'acetal':'cetal')+'</b>.';}
+  else if(hwP===2){haworth(svg,k,hwA);o.innerHTML='<b>Paso 3 · Anillo de Haworth.</b> Queda un anillo de <b>'+z.ani+'</b> átomos ('+(z.ani===6?'5 C y 1 O: «piranosa»':'4 C y 1 O: «furanosa»')+'). Cada −OH que estaba a la <b>derecha</b> en Fischer queda <b>abajo</b>; los de la <b>izquierda</b>, <b>arriba</b>. El CH₂OH del final queda arriba.';}
+  else{haworth(svg,k,hwA);o.innerHTML='<b>Paso 4 · Anómeros α y β.</b> El '+cAn+' (en rojo) es un carbono quiral nuevo: el carbono <b>anomérico</b>. Si su −OH queda <b>abajo</b>, opuesto al CH₂OH, es <b>α</b>; si queda <b>arriba</b>, es <b>β</b>. Ahora ves la <b>'+anN+'</b>. Cambia α/β arriba. En el agua las dos formas se interconvierten pasando por la cadena abierta (mutarrotación).';}
+  document.getElementById('hw-pn').textContent='Paso '+(hwP+1)+' de 4';document.getElementById('hw-ant').disabled=hwP===0;document.getElementById('hw-sig').disabled=hwP===3;}
+document.getElementById('hw-sig').addEventListener('click',function(){if(hwP<3)hwP++;hwPinta();});document.getElementById('hw-ant').addEventListener('click',function(){if(hwP>0)hwP--;hwPinta();});
+document.getElementById('hw-az').addEventListener('change',function(){hwP=0;hwPinta();reto();});seg('hw-an',function(b){hwA=b.dataset.a;if(hwP<2)hwP=3;hwPinta();});
+hwPinta();
+function reto(){var k=document.getElementById('hw-az').value,z=HW[k],it=[],c0=z.t==='ceto'?3:2;
+  z.c.forEach(function(c,i){if(c==='H')return;var cn=c0+i,ult=(i===z.c.length-1);if(ult&&z.ani===6){it.push({t:'El −CH₂OH del C6 (el C5 tiene el −OH a la derecha en Fischer)',ok:'Arriba',fb:'En la serie D el CH₂OH final siempre queda arriba.'});return;}
+    if(ult){it.push({t:'El −CH₂OH del extremo (serie D)',ok:'Arriba',fb:'En la serie D queda arriba.'});return;}
+    it.push({t:'El −OH del C'+cn+' (en Fischer está a la '+(c==='R'?'derecha':'izquierda')+')',ok:c==='R'?'Abajo':'Arriba',fb:(c==='R'?'Derecha':'Izquierda')+' en Fischer → '+(c==='R'?'abajo':'arriba')+' en Haworth.'});});
+  it.push({t:'El −OH del carbono anomérico en el anómero β',ok:'Arriba',fb:'β: del mismo lado que el CH₂OH (arriba).'});
+  if(window.F4){var b=document.getElementById('hw-reto');b.innerHTML='';b.replaceWith(b.cloneNode(false));F4.clasificador('hw-reto',it,['Arriba','Abajo']);}}
+reto();
+
+/* ── Ácidos grasos y omegas ── (n carbonos, posiciones Δ de los C=C, punto de fusión °C) */
+var AG=[['Palmítico (aceite de palma)',16,[],63,'Saturado. Abunda en el aceite de palma y en la manteca.'],['Esteárico (sebo, chocolate)',18,[],69,'Saturado: cadena recta, sólido a temperatura ambiente.'],
+  ['Oleico (aguacate, oliva)',18,[9],13,'Monoinsaturado. No es esencial: el cuerpo lo fabrica.'],['Linoleico (girasol, maíz, soya)',18,[9,12],-5,'Esencial: hay que comerlo.'],
+  ['α-linolénico (chía, linaza)',18,[9,12,15],-11,'Esencial: hay que comerlo. El cuerpo lo convierte, en poca cantidad, en EPA y DHA.'],['Araquidónico (carnes, huevo)',20,[5,8,11,14],-49,'Se forma a partir del linoleico; participa en la inflamación.'],
+  ['EPA (pescado azul: sardina, atún)',20,[5,8,11,14,17],-54,'Omega-3 de cadena larga; ayuda a regular la inflamación y los triglicéridos de la sangre.'],['DHA (pescado, trucha)',22,[4,7,10,13,16,19],-44,'Omega-3 de cadena larga; abundante en el cerebro y la retina.']];
+var ogNum='d';
+document.getElementById('og-s').innerHTML=AG.map(function(a,i){return '<option value="'+i+'"'+(i===4?' selected':'')+'>'+a[0]+'</option>';}).join('');
+function ogPinta(){var a=AG[+document.getElementById('og-s').value],n=a[1],db=a[2],svg=document.getElementById('og-svg');svg.innerHTML='';
+  var x0=70,dx=(600-x0)/(n-1),yA=60,yB=95,X=function(c){return x0+(c-1)*dx;},Y=function(c){return c%2?yB:yA;};
+  for(var c=1;c<n;c++){var dob=db.indexOf(c)>=0;sv('line',{x1:X(c),y1:Y(c),x2:X(c+1),y2:Y(c+1),stroke:dob?'#b45309':'#334155','stroke-width':dob?3:2.2},svg);
+    if(dob){var ang=Math.atan2(Y(c+1)-Y(c),X(c+1)-X(c)),ox=-Math.sin(ang)*5,oy=Math.cos(ang)*5;sv('line',{x1:X(c)+ox+2,y1:Y(c)+oy,x2:X(c+1)+ox-2,y2:Y(c+1)+oy,stroke:'#b45309','stroke-width':2.4},svg);}}
+  sv('line',{x1:X(1),y1:Y(1),x2:X(1)-26,y2:Y(1)-22,stroke:'#dc2626','stroke-width':2.2},svg);sv('line',{x1:X(1)-4,y1:Y(1)+2,x2:X(1)-30,y2:Y(1)-18,stroke:'#dc2626','stroke-width':2.2},svg);
+  st(svg,X(1)-36,Y(1)-26,'O',{fill:'#dc2626','font-size':12});sv('line',{x1:X(1),y1:Y(1),x2:X(1)-28,y2:Y(1)+18,stroke:'#dc2626','stroke-width':2.2},svg);st(svg,X(1)-40,Y(1)+28,'HO',{fill:'#dc2626','font-size':12});
+  for(c=1;c<=n;c++){var lab=ogNum==='d'?String(c):(c===n?'ω':String(n-c+1));var dest=ogNum==='d'?db.indexOf(c)>=0:db.indexOf(c-1)>=0&&false;
+    var hlw=ogNum==='w'&&db.length&&(n-c+1)===(n-Math.max.apply(null,db));
+    st(svg,X(c),Y(c)+(c%2?20:-10),lab,{'font-size':9,fill:(ogNum==='d'&&db.indexOf(c)>=0)||hlw?'#b45309':'#94a3b8','font-family':'Outfit,sans-serif','font-weight':(ogNum==='d'&&db.indexOf(c)>=0)||hlw?800:600});}
+  st(svg,X(n)+18,Y(n)+4,'CH₃',{'font-size':11,fill:'#0d2d42'});
+  var w=db.length?n-Math.max.apply(null,db):null,not=n+':'+db.length+(w?' ω-'+w:''),delta=db.length?'cis-Δ'+db.join(','):'saturado';
+  document.getElementById('og-out').innerHTML='<b>'+a[0]+'</b> · notación <b>'+not+'</b> ('+n+' carbonos, '+db.length+' dobles enlaces) · '+delta+'.<br>'+(w?'<b>¿Por qué omega-'+w+'?</b> El último C=C empieza en el C'+Math.max.apply(null,db)+' contado desde el −COOH; desde el otro extremo es el carbono '+n+' − '+Math.max.apply(null,db)+' = <b>ω'+w+'</b>. ':'Sin dobles enlaces: no tiene número omega. ')+'Punto de fusión: <b>'+a[3]+' °C</b> ('+(a[3]>25?'sólido':'líquido')+' a temperatura ambiente). '+a[4]+(db.length?' <i>Fíjate: a más dobles enlaces cis, la cadena se dobla más y el punto de fusión baja.</i>':'');}
+document.getElementById('og-s').addEventListener('change',ogPinta);seg('og-num',function(b){ogNum=b.dataset.k;ogPinta();});ogPinta();
 var NS='http://www.w3.org/2000/svg';
 function el(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
 function tx(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}

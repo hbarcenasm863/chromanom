@@ -6,6 +6,8 @@
    - evaporacion  (propiedades.html)  moléculas que se atraen y se evaporan
    - enzima       (biomoleculas.html) enzimas, sustrato y temperatura
    - invernadero  (ambiente.html)     fotones, suelo y moléculas de CO₂
+   - adn, traduccion, jabon (biomoleculas.html) doble hélice y replicación;
+                  transcripción y traducción con ARNm y ARNt; micelas de jabón
    Comunes: se ajustan al ancho de la pantalla, se pausan solas cuando no
    se ven (IntersectionObserver), arrancan en pausa si el sistema pide
    «reducir movimiento» y se pueden manejar con el dedo o el mouse.
@@ -247,6 +249,216 @@ SIM.invernadero=function(box){
   }
   var A=animar(L,paso);botonPausa(A,c1);
   box._prueba=function(seg){for(var t=0;t<seg;t+=0.05)paso(0.05);return {T:Tk-273.15,ppm:ppm,vuelve:vuelve,esc:esc};};
+};
+
+/* ── 5. ADN: doble hélice y replicación ─────────────────────────────────
+   Modo hélice: la doble hélice gira en 3D (proyección); cada peldaño es un
+   par de bases (A−T con 2 puentes de hidrógeno, G−C con 3). Una vuelta
+   completa tiene unos 10 pares (3,4 nm). Modo replicación: la hélice se
+   «desenrolla» como escalera, la horquilla avanza y cada hebra vieja sirve
+   de molde para una nueva (replicación semiconservativa). */
+var COLB={A:'#ef4444',T:'#eab308',G:'#16a34a',C:'#2563eb'},COMP={A:'T',T:'A',G:'C',C:'G'};
+SIM.adn=function(box){
+  var L=lienzo(box,0.5,'Doble hélice de ADN que gira; se puede ver como escalera y replicar'),ctx=L.ctx;
+  var sec='ATGCGTACCGATTGCAGC',rot=0,modo='helice',hor=0,nuevas=0,girar=true;
+  var c1=fila(box);pildoras(c1,[['helice','🧬 Doble hélice 3D'],['replica','🪜 Replicación']],modo,function(k){modo=k;hor=0;nuevas=0;A.play();});
+  var inp=el('input',{type:'text',value:sec,maxlength:24,'aria-label':'Secuencia de la hebra 5′→3′',style:'text-transform:uppercase;width:220px;min-height:44px;border:1.5px solid #d0e6f5;border-radius:9px;padding:6px 10px;font-family:JetBrains Mono,monospace'});
+  var lab=el('label',{class:'sim-rng'},'<span>Hebra 5′→3′:</span>');lab.appendChild(inp);c1.appendChild(lab);
+  inp.addEventListener('input',function(){var v=inp.value.toUpperCase().replace(/[^ATGC]/g,'');if(v.length>=4){sec=v;hor=0;nuevas=0;A.dibujar();}});
+  var c2=fila(box);
+  var bR=el('button',{type:'button',class:'btn-sm prim'},'▶ Replicar');c2.appendChild(bR);bR.addEventListener('click',function(){modo='replica';hor=0;nuevas=0;c1.querySelectorAll('.seg button').forEach(function(x){x.classList.toggle('on',x.dataset.k==='replica');});A.play();});
+  var msg=nota(box,'');
+  function paso(dt){
+    var W=L.W,H=L.H,n=sec.length,mx=40,esp=(W-2*mx)/(n-1),cy=H*0.5;
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#f8fafc';ctx.fillRect(0,0,W,H);
+    var nGC=sec.split('').filter(function(b){return b==='G'||b==='C';}).length,ph=sec.split('').reduce(function(s,b){return s+(b==='G'||b==='C'?3:2);},0);
+    if(modo==='helice'){if(dt>0)rot+=dt*0.9;var R=H*0.3;
+      var pts=[];for(var i=0;i<n;i++){var th=i*Math.PI*2/10+rot;pts.push({x:mx+i*esp,y1:cy+R*Math.cos(th),y2:cy-R*Math.cos(th),z:Math.sin(th)});}
+      // peldaños (pares de bases) detrás → delante
+      var ord=pts.map(function(p,i){return i;}).sort(function(a,b){return pts[a].z-pts[b].z;});
+      function hebra(k,col){ctx.strokeStyle=col;ctx.lineWidth=5;ctx.beginPath();for(var t=0;t<=(n-1)*8;t++){var u=t/8,th=u*Math.PI*2/10+rot,x=mx+u*esp,y=cy+(k?-1:1)*R*Math.cos(th);if(t)ctx.lineTo(x,y);else ctx.moveTo(x,y);}ctx.stroke();ctx.lineWidth=1;}
+      hebra(0,'rgba(234,88,12,.9)');hebra(1,'rgba(14,116,144,.9)');
+      ord.forEach(function(i){var p=pts[i],b=sec[i],c=COMP[b],ym=(p.y1+p.y2)/2,al=0.45+0.55*(p.z+1)/2;ctx.globalAlpha=al;ctx.lineWidth=6;
+        ctx.strokeStyle=COLB[b];ctx.beginPath();ctx.moveTo(p.x,p.y1);ctx.lineTo(p.x,ym-2);ctx.stroke();ctx.strokeStyle=COLB[c];ctx.beginPath();ctx.moveTo(p.x,ym+2);ctx.lineTo(p.x,p.y2);ctx.stroke();ctx.lineWidth=1;
+        if(Math.abs(p.y1-p.y2)>34){ctx.fillStyle='#0d2d42';ctx.font='800 10px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText(b,p.x+8,p.y1+(p.y1<p.y2?10:-4));ctx.fillText(c,p.x+8,p.y2+(p.y2<p.y1?10:-4));}
+        ctx.globalAlpha=1;});
+      ctx.fillStyle='#ea580c';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('5′',mx-26,cy+R*Math.cos(rot)+4);ctx.fillText('3′',W-mx+8,cy+R*Math.cos((n-1)*Math.PI*2/10+rot)+4);
+      ctx.fillStyle='#0e7490';ctx.fillText('3′',mx-26,cy-R*Math.cos(rot)+4);ctx.fillText('5′',W-mx+8,cy-R*Math.cos((n-1)*Math.PI*2/10+rot)+4);
+      msg.innerHTML='Dos hebras <b>antiparalelas</b> (una va de 5′ a 3′ y la otra de 3′ a 5′) enrolladas en una <b>doble hélice</b>; el esqueleto es azúcar (desoxirribosa) y fosfato, y las bases quedan adentro. A siempre con T (2 puentes de hidrógeno) y G con C (3). Esta secuencia: '+n+' pares, '+Math.round(nGC/n*100)+' % de G−C, <b>'+ph+' puentes de hidrógeno</b>. Una vuelta completa tiene unos 10 pares de bases.';
+    }else{
+      if(dt>0){hor=Math.min(n,hor+dt*1.6);nuevas=Math.floor(hor);}
+      var yA=cy-H*0.32,yB=cy+H*0.32,gap=H*0.1,f=hor;
+      for(var i=0;i<n;i++){var x=mx+i*esp,b=sec[i],c=COMP[b];
+        if(i>=f){ // aún cerrada: escalera
+          var y1=cy-gap*1.4,y2=cy+gap*1.4;ctx.strokeStyle=COLB[b];ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,cy-1);ctx.stroke();ctx.strokeStyle=COLB[c];ctx.beginPath();ctx.moveTo(x,cy+1);ctx.lineTo(x,y2);ctx.stroke();ctx.lineWidth=1;
+          ctx.fillStyle='#ea580c';ctx.fillRect(x-esp/2,y1-6,esp,5);ctx.fillStyle='#0e7490';ctx.fillRect(x-esp/2,y2+1,esp,5);
+          etq(b,x+7,y1+12);etq(c,x+7,y2-4);}
+        else{ // abierta: dos hélices hijas
+          var hn=i<nuevas;
+          ctx.fillStyle='#ea580c';ctx.fillRect(x-esp/2,yA-6,esp,5);ctx.strokeStyle=COLB[b];ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(x,yA);ctx.lineTo(x,yA+gap-1);ctx.stroke();etq(b,x+7,yA+12);
+          if(hn){ctx.globalAlpha=0.75;ctx.strokeStyle=COLB[c];ctx.beginPath();ctx.moveTo(x,yA+gap+1);ctx.lineTo(x,yA+2*gap);ctx.stroke();ctx.fillStyle='#94a3b8';ctx.fillRect(x-esp/2,yA+2*gap,esp,5);etq(c,x+7,yA+2*gap-3);ctx.globalAlpha=1;}
+          ctx.fillStyle='#0e7490';ctx.fillRect(x-esp/2,yB+1,esp,5);ctx.strokeStyle=COLB[c];ctx.beginPath();ctx.moveTo(x,yB);ctx.lineTo(x,yB-gap+1);ctx.stroke();etq(c,x+7,yB-4);
+          if(hn){ctx.globalAlpha=0.75;ctx.strokeStyle=COLB[b];ctx.beginPath();ctx.moveTo(x,yB-gap-1);ctx.lineTo(x,yB-2*gap);ctx.stroke();ctx.fillStyle='#94a3b8';ctx.fillRect(x-esp/2,yB-2*gap-5,esp,5);etq(b,x+7,yB-2*gap+12);ctx.globalAlpha=1;}
+          ctx.lineWidth=1;}}
+      if(f<n){var xf=mx+f*esp;ctx.fillStyle='rgba(124,58,237,.85)';ctx.beginPath();ctx.moveTo(xf,cy-20);ctx.lineTo(xf+18,cy);ctx.lineTo(xf,cy+20);ctx.closePath();ctx.fill();ctx.fillStyle='#5b21b6';ctx.font='700 10px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText('helicasa',xf,cy+34);}
+      ctx.fillStyle='#334155';ctx.font='10px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('naranja/azul oscuro = hebras viejas · gris = hebras nuevas',8,H-8);
+      msg.innerHTML=f<n?'La <b>helicasa</b> rompe los puentes de hidrógeno y abre la doble hélice. La <b>ADN polimerasa</b> lee cada hebra vieja y agrega nucleótidos complementarios (A frente a T, G frente a C).':'<b>Replicación terminada:</b> hay dos moléculas de ADN idénticas y cada una tiene una hebra vieja y una nueva. Por eso se dice que la replicación es <b>semiconservativa</b>. Así, cada célula hija recibe una copia exacta de la información.';
+    }
+    function etq(t,x,y){ctx.fillStyle='#0d2d42';ctx.font='800 10px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText(t,x,y);}
+  }
+  var A=animar(L,paso);botonPausa(A,c2);
+  box._prueba=function(seg){for(var t=0;t<seg;t+=0.05)paso(0.05);return {hor:hor,modo:modo};};
+};
+
+/* ── 6. Síntesis de proteínas: transcripción y traducción ───────────────
+   Fase 1 (transcripción): la ARN polimerasa copia la hebra de ADN en ARNm
+   (U en vez de T). Fase 2 (traducción): el ribosoma lee el ARNm de 3 en 3
+   (codones). Cada ARNt trae su aminoácido y tiene el anticodón
+   complementario; en el ribosoma se forma el ENLACE PEPTÍDICO entre la
+   cadena que crece y el aminoácido nuevo; el ribosoma avanza un codón y el
+   ARNt vacío sale. El codón de parada libera la proteína. Código genético
+   estándar completo. */
+var CODIGO=(function(){var b='UCAG',aa='FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG',m={},k=0;
+  for(var i=0;i<4;i++)for(var j=0;j<4;j++)for(var l=0;l<4;l++)m[b[i]+b[j]+b[l]]=aa[k++];return m;})();
+var AA3={A:'Ala',R:'Arg',N:'Asn',D:'Asp',C:'Cys',Q:'Gln',E:'Glu',G:'Gly',H:'His',I:'Ile',L:'Leu',K:'Lys',M:'Met',F:'Phe',P:'Pro',S:'Ser',T:'Thr',W:'Trp',Y:'Tyr',V:'Val'};
+var AACOL={M:'#7c3aed',A:'#0891b2',K:'#2563eb',F:'#ea580c',G:'#16a34a',W:'#be185d',L:'#0d9488',S:'#ca8a04',Y:'#9333ea',C:'#65a30d',R:'#1d4ed8',H:'#0369a1',E:'#dc2626',D:'#b91c1c',N:'#a16207',Q:'#c2410c',P:'#475569',T:'#059669',I:'#15803d',V:'#0f766e'};
+SIM.traduccion=function(box){
+  var L=lienzo(box,0.62,'Síntesis de proteínas: transcripción del ADN a ARNm y traducción en el ribosoma con ARNt'),ctx=L.ctx;
+  var GENES={corto:'ATGGCTAAATTTGGCTGGTAA',insulina:'ATGTTTGTGAACCAACACCTGTGCGGCTCACACCTGGTGTAA',propio:''};
+  var adn=GENES.corto,arn='',fase='trans',tt=0,i=0,sub='llega',cad=[],t=0,vel=1,fin=false,flash=0;
+  var c1=fila(box);
+  pildoras(c1,[['corto','Gen de ejemplo (6 aminoácidos)'],['insulina','Comienzo de la cadena B de la insulina']],'corto',function(k){adn=GENES[k];reiniciar();});
+  var inp=el('input',{type:'text',placeholder:'o escribe ADN: ATG…',maxlength:60,'aria-label':'Secuencia de ADN codificante',style:'text-transform:uppercase;width:210px;min-height:44px;border:1.5px solid #d0e6f5;border-radius:9px;padding:6px 10px;font-family:JetBrains Mono,monospace'});
+  c1.appendChild(inp);inp.addEventListener('change',function(){var v=inp.value.toUpperCase().replace(/[^ATGC]/g,'');if(v.length>=6){adn=v;reiniciar();}});
+  var c2=fila(box);
+  deslizador(c2,'Velocidad',0.3,3,0.1,1,function(x){vel=x;return '×'+x.toFixed(1).replace('.',',');});
+  var bP=el('button',{type:'button',class:'btn-sm'},'⏭ Siguiente paso');c2.appendChild(bP);
+  var bR=el('button',{type:'button',class:'btn-sm'},'↺ Empezar de nuevo');c2.appendChild(bR);bR.addEventListener('click',function(){reiniciar();});
+  var msg=nota(box,'');
+  function reiniciar(){arn=adn.replace(/T/g,'U');fase='trans';tt=0;i=0;sub='llega';cad=[];t=0;fin=false;flash=0;
+    var k=arn.indexOf('AUG');if(k<0){k=0;}inicio=k;A&&A.dibujar();}
+  var inicio=0,A=null;
+  bP.addEventListener('click',function(){avanzar(true);A.dibujar();});
+  function codon(j){return arn.substr(inicio+3*j,3);}
+  function avanzar(forzar){
+    if(fase==='trans'){tt=arn.length;fase='trad';t=0;return;}
+    if(fin)return;
+    var cd=codon(i),aa=CODIGO[cd];
+    if(sub==='llega'){if(cd.length<3||aa==='*'){sub='para';t=0;return;}sub='enlace';t=0;if(i===0){cad.push(aa);sub='transloca';}else{cad.push(aa);flash=1;}return;}
+    if(sub==='enlace'){sub='transloca';t=0;return;}
+    if(sub==='transloca'){i++;sub='llega';t=0;return;}
+    if(sub==='para'){fin=true;return;}
+  }
+  function paso(dt){
+    var W=L.W,H=L.H;
+    if(dt>0){t+=dt*vel;flash=Math.max(0,flash-dt*1.2);
+      if(fase==='trans'){tt+=dt*vel*8;if(tt>=arn.length+4)avanzar();}
+      else if(!fin&&t>1.1)avanzar();}
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#f8fafc';ctx.fillRect(0,0,W,H);
+    var nb=Math.max(arn.length,21),bw=Math.min(30,(W-40)/Math.min(nb,22)),ym=H*0.74;ctx.save();
+    // desplazamiento para que el ribosoma quede a la vista
+    var off=0;if(fase==='trad'){var xr=20+(inicio+3*i)*bw;off=Math.max(0,xr-W/1.35*0.42);}
+    // ADN arriba (solo en transcripción) y ARNm abajo
+    ctx.font='700 11px JetBrains Mono,monospace';ctx.textAlign='center';
+    if(fase==='trans'){ctx.fillStyle='#334155';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('ADN (hebra codificante)',20,H*0.2);ctx.fillText('ARNm que se va formando',20,ym+38);
+      for(var k=0;k<adn.length;k++){var x=20+k*bw-off;ctx.fillStyle='#e2e8f0';ctx.fillRect(x,H*0.24,bw-2,22);ctx.fillStyle=COLB[adn[k]];ctx.font='800 12px JetBrains Mono,monospace';ctx.textAlign='center';ctx.fillText(adn[k],x+bw/2-1,H*0.24+15);}
+      var hecho=Math.min(arn.length,Math.floor(tt));for(k=0;k<hecho;k++){x=20+k*bw-off;ctx.fillStyle='#fef3c7';ctx.fillRect(x,ym,bw-2,22);ctx.fillStyle=arn[k]==='U'?'#ca8a04':COLB[arn[k]];ctx.fillText(arn[k],x+bw/2-1,ym+15);}
+      var xp=20+hecho*bw-off;ctx.fillStyle='rgba(13,148,136,.25)';ctx.strokeStyle='#0d9488';ctx.beginPath();ctx.ellipse(xp,(H*0.24+ym)/2+10,34,H*0.3,0,0,PI2);ctx.fill();ctx.stroke();
+      ctx.fillStyle='#0f766e';ctx.font='700 10px Outfit,sans-serif';ctx.fillText('ARN polimerasa',xp,H*0.2-8);
+      msg.innerHTML='<b>1 · Transcripción</b> (en el núcleo): la <b>ARN polimerasa</b> copia el gen en una molécula de <b>ARN mensajero</b>. Es la misma secuencia de la hebra codificante, pero con <b>U (uracilo)</b> en lugar de T. Luego el ARNm sale al citoplasma, donde están los ribosomas.';
+      return;}
+    // ARNm con codones (escena ampliada ×1,35 desde abajo)
+    var K=1.35;ctx.save();ctx.translate(0,H*0.97);ctx.scale(K,K);ctx.translate(0,-H*0.97);
+    for(var k=0;k<arn.length;k++){var x=20+k*bw-off;if(x<-bw||x>W)continue;var j=Math.floor((k-inicio)/3),enC=k>=inicio;
+      ctx.fillStyle=enC&&j%2===0?'#fef3c7':'#fde68a';if(!enC)ctx.fillStyle='#f1f5f9';ctx.fillRect(x,ym,bw-1,22);ctx.fillStyle=arn[k]==='U'?'#ca8a04':COLB[arn[k]];ctx.font='800 12px JetBrains Mono,monospace';ctx.textAlign='center';ctx.fillText(arn[k],x+bw/2,ym+15);}
+    ctx.fillStyle='#334155';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('ARNm  5′ →',4,ym+40);
+    // ribosoma sobre los sitios P (codón i−1) y A (codón i)
+    var pP=20+(inicio+3*(i-1))*bw-off,pA=20+(inicio+3*i)*bw-off,mov=sub==='transloca'?Math.min(1,t)*3*bw:0;
+    var rx=(sub==='transloca'?pP+mov:pP)+1.5*bw;
+    ctx.fillStyle='rgba(148,163,184,.35)';ctx.strokeStyle='#64748b';ctx.beginPath();ctx.ellipse(rx+1.5*bw,ym+14,3.6*bw,26,0,0,PI2);ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.ellipse(rx+1.5*bw,ym-44,4*bw,44,0,Math.PI,PI2);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#475569';ctx.font='700 10px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText('ribosoma',rx+1.5*bw,ym-70);
+    if(i>0){ctx.fillText('P',pP+1.5*bw,ym-4);}ctx.fillText('A',pA+1.5*bw,ym-4);
+    // ARNt
+    function arnt(xc,cd,aa,y,lleno){var anti=cd.split('').map(function(b){return {A:'U',U:'A',G:'C',C:'G'}[b];}).join('');
+      ctx.fillStyle='#fecaca';ctx.strokeStyle='#dc2626';ctx.beginPath();ctx.moveTo(xc-16,y);ctx.lineTo(xc+16,y);ctx.lineTo(xc+10,y-34);ctx.lineTo(xc-10,y-34);ctx.closePath();ctx.fill();ctx.stroke();
+      ctx.fillStyle='#7f1d1d';ctx.font='800 10px JetBrains Mono,monospace';ctx.fillText(anti,xc,y-4);ctx.font='9px Outfit,sans-serif';ctx.fillText('ARNt',xc,y-20);
+      if(lleno){ctx.fillStyle=AACOL[aa]||'#64748b';ctx.beginPath();ctx.arc(xc,y-46,12,0,PI2);ctx.fill();ctx.fillStyle='#fff';ctx.font='800 9px Outfit,sans-serif';ctx.fillText(AA3[aa]||aa,xc,y-43);}}
+    var cdA=codon(i),aaA=CODIGO[cdA];
+    if(i>0&&sub!=='transloca'){arnt(pP+1.5*bw,codon(i-1),CODIGO[codon(i-1)],ym-2,false);}
+    if(sub==='llega'&&cdA.length===3&&aaA!=='*'){var yd=ym-2-Math.max(0,1-t)*90;arnt(pA+1.5*bw,cdA,aaA,yd,true);}
+    if(sub==='enlace'||sub==='transloca'){var xA=sub==='transloca'?rx:pA+1.5*bw;arnt(xA,i===0&&sub==='transloca'?codon(0):cdA,aaA,ym-2,false);
+      if(sub==='transloca'&&i>0){var xs=pP+1.5*bw,ys=ym-2-Math.min(1,t)*80;ctx.globalAlpha=1-Math.min(1,t);arnt(xs,codon(i-1),'',ys,false);ctx.globalAlpha=1;}}
+    // cadena de aminoácidos (encima del ARNt del sitio que corresponde)
+    var xa=(sub==='enlace'||sub==='transloca')?(sub==='transloca'?rx:pA+1.5*bw):(i>0?pP+1.5*bw:pA+1.5*bw),ya=ym-50;
+    for(var q=cad.length-1,m=0;q>=0;q--,m++){var cx=xa-m*18,cyy=ya-m*9;if(q<cad.length-1){ctx.strokeStyle=(q===cad.length-2&&flash>0)?'#f59e0b':'#94a3b8';ctx.lineWidth=(q===cad.length-2&&flash>0)?5:2;ctx.beginPath();ctx.moveTo(cx,cyy);ctx.lineTo(cx+18,cyy+9);ctx.stroke();ctx.lineWidth=1;}
+      ctx.fillStyle=AACOL[cad[q]]||'#64748b';ctx.beginPath();ctx.arc(cx,cyy,11,0,PI2);ctx.fill();ctx.fillStyle='#fff';ctx.font='800 9px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText(AA3[cad[q]],cx,cyy+3);}
+    if(flash>0){ctx.globalAlpha=flash;ctx.fillStyle='#b45309';ctx.font='800 12px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText('¡enlace peptídico! −CO−NH−',xa-9,ya-30);ctx.globalAlpha=1;}
+    ctx.restore();
+    // tabla de lo leído: codón → anticodón → aminoácido
+    var leidos=Math.min(i+(sub==='llega'?0:1),Math.floor((arn.length-inicio)/3));ctx.fillStyle='rgba(255,255,255,.95)';ctx.strokeStyle='#cbd5e1';var tw=Math.min(260,W*0.42),tx0=W-tw-10;ctx.fillRect(tx0,10,tw,22+Math.min(8,leidos)*16);ctx.strokeRect(tx0,10,tw,22+Math.min(8,leidos)*16);
+    ctx.fillStyle='#0d2d42';ctx.font='800 10px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('Codón (ARNm)   Anticodón (ARNt)   Aminoácido',tx0+8,25);
+    for(var r=Math.max(0,leidos-8);r<leidos;r++){var cr=codon(r),ar=cr.split('').map(function(b){return {A:'U',U:'A',G:'C',C:'G'}[b];}).join(''),yy=25+16*(r-Math.max(0,leidos-8)+1);ctx.font='700 11px JetBrains Mono,monospace';ctx.fillStyle='#92400e';ctx.fillText(cr,tx0+14,yy);ctx.fillStyle='#b91c1c';ctx.fillText(ar,tx0+100,yy);ctx.fillStyle=AACOL[CODIGO[cr]]||'#0d2d42';ctx.fillText(CODIGO[cr]==='*'?'parada':AA3[CODIGO[cr]],tx0+190,yy);}
+    ctx.fillStyle='#94a3b8';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('CITOPLASMA',12,20);
+    ctx.restore();
+    var prot=cad.map(function(a){return AA3[a];}).join('–');
+    var txt={llega:i===0?'<b>2 · Inicio de la traducción:</b> el ribosoma se une al ARNm en el codón <b>AUG</b> (inicio). Llega el primer ARNt, con el anticodón <b>UAC</b>, trayendo <b>metionina (Met)</b>.':'<b>Llega un ARNt</b> al sitio A: su anticodón <b>'+cdA.split('').map(function(b){return {A:'U',U:'A',G:'C',C:'G'}[b];}).join('')+'</b> es complementario del codón <b>'+cdA+'</b>, así que trae <b>'+(AA3[aaA]||'—')+'</b>.',
+      enlace:'<b>Se forma el enlace peptídico:</b> el ribosoma une el −COOH del último aminoácido de la cadena con el −NH₂ del aminoácido nuevo: −CO−NH− (una amida). La cadena pasa al ARNt del sitio A.',
+      transloca:'<b>El ribosoma avanza un codón</b> (3 bases). El ARNt que quedó vacío sale y el sitio A queda libre para el siguiente.',para:'<b>Codón de parada ('+cdA+'):</b> no hay ARNt para él. Un factor de liberación suelta la cadena.'}[sub];
+    msg.innerHTML=(fin?'✅ <b>Proteína terminada:</b> '+prot+' ('+cad.length+' aminoácidos unidos por '+Math.max(0,cad.length-1)+' enlaces peptídicos). Luego la cadena se pliega y adquiere su forma 3D.':txt)+(prot&&!fin?'<br>Cadena: <b>'+prot+'</b>':'');
+  }
+  A=animar(L,paso);botonPausa(A,c2);reiniciar();
+  box._prueba=function(seg){for(var s=0;s<seg;s+=0.05)paso(0.05);return {fase:fase,fin:fin,prot:cad.map(function(a){return AA3[a];}).join('-')};};
+};
+
+/* ── 7. ¿Cómo limpia un jabón? Micelas ───────────────────────────────────
+   Moléculas de jabón: cabeza iónica (−COO⁻, se atrae con el agua) y cola de
+   hidrocarburo (apolar, se mete en la grasa). Se pegan a la mancha de grasa
+   con la cola hacia adentro; cuando la rodean y se agita, la grasa se
+   desprende como una MICELA (gota de grasa envuelta en jabón) que el
+   enjuague se lleva. Sin jabón, el agua sola no quita la grasa. */
+SIM.jabon=function(box){
+  var L=lienzo(box,0.56,'Moléculas de jabón que rodean una mancha de grasa y forman micelas'),ctx=L.ctx;
+  var J=[],G=[],nj=50,agita=0,enjuaga=0,quitada=0,total=0;
+  function iniciar(){var W=L.W,H=L.H;J=[];G=[];quitada=0;
+    [[0.25,0.86,26],[0.55,0.87,22],[0.8,0.86,24]].forEach(function(g){G.push({x:g[0]*W,y:g[1]*H,r:g[2],pegadas:0,suelta:false,vx:0,vy:0,fuera:false});});total=G.length;
+    for(var k=0;k<nj;k++)J.push({x:Math.random()*W,y:Math.random()*H*0.6+H*0.08,a:Math.random()*PI2,vx:0,vy:0,g:null,ang:0});}
+  var c1=fila(box);
+  deslizador(c1,'Jabón',0,80,5,nj,function(x){nj=x;return x+' moléculas';});
+  var bA=el('button',{type:'button',class:'btn-sm prim'},'🌀 Agitar (lavar)');c1.appendChild(bA);bA.addEventListener('click',function(){agita=3;A.play();});
+  var bE=el('button',{type:'button',class:'btn-sm'},'🚿 Enjuagar');c1.appendChild(bE);bE.addEventListener('click',function(){enjuaga=2.5;A.play();});
+  var bR=el('button',{type:'button',class:'btn-sm'},'↺ Ropa sucia otra vez');c1.appendChild(bR);bR.addEventListener('click',function(){iniciar();});
+  c1.querySelector('input').addEventListener('change',function(){iniciar();});
+  var msg=nota(box,'');
+  function paso(dt){
+    var W=L.W,H=L.H,tela=H*0.9;
+    if(dt>0){agita=Math.max(0,agita-dt);enjuaga=Math.max(0,enjuaga-dt);
+      J.forEach(function(j){if(j.g){var g=j.g;j.x=g.x+Math.cos(j.ang)*(g.r+14);j.y=g.y+Math.sin(j.ang)*(g.r+14);j.a=j.ang;return;}
+        j.vx+=gauss()*90*dt+(agita>0?Math.sin(j.y/30)*120*dt:0);j.vy+=gauss()*90*dt;
+        // las colas apolares «buscan» la grasa: atracción suave hacia la mancha más cercana que todavía tenga espacio
+        var obj=null,dmin=400;G.forEach(function(g){if(g.fuera||g.pegadas>=Math.round(g.r/3)+1)return;var d=Math.hypot(j.x-g.x,j.y-g.y);if(d<dmin){dmin=d;obj=g;}});
+        if(obj&&nj>0){j.vx+=(obj.x-j.x)/dmin*140*dt;j.vy+=(obj.y-obj.r*0.6-j.y)/dmin*140*dt;}j.vx*=0.95;j.vy*=0.95;j.x+=j.vx*dt;j.y+=j.vy*dt;j.a+=gauss()*2*dt;
+        if(enjuaga>0)j.x+=160*dt;if(j.x<0)j.x+=W;if(j.x>W)j.x-=W;j.y=Math.max(10,Math.min(tela-6,j.y));
+        G.forEach(function(g){if(j.g||g.fuera)return;var d=Math.hypot(j.x-g.x,j.y-g.y);if(d<g.r+26){var an=Math.atan2(j.y-g.y,j.x-g.x);if(!g.suelta&&an>0.2&&an<Math.PI-0.2)return;j.g=g;j.ang=an;g.pegadas++;}});});
+      G.forEach(function(g){if(g.fuera)return;var lim=Math.round(g.r/3);
+        if(!g.suelta&&g.pegadas>=lim&&agita>0){g.suelta=true;g.vy=-40;var mias=J.filter(function(j){return j.g===g;});mias.forEach(function(j,k){j.ang=k*PI2/mias.length;});}
+        if(g.suelta){g.vx+=gauss()*40*dt+(agita>0?Math.sin(g.y/40)*60*dt:0);g.vy+=(-10+gauss()*40)*dt;g.vx*=0.97;g.vy*=0.97;g.x+=g.vx*dt+(enjuaga>0?170*dt:0);g.y=Math.max(g.r+16,Math.min(tela-g.r-20,g.y+g.vy*dt));
+          if(g.x>W+g.r+20){g.fuera=true;quitada++;J=J.filter(function(j){return j.g!==g;});}}});}
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#e0f2fe';ctx.fillRect(0,0,W,tela);
+    ctx.fillStyle='#c4b5fd';ctx.fillRect(0,tela,W,H-tela);ctx.fillStyle='#5b21b6';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('tela',8,H-6);
+    G.forEach(function(g){if(g.fuera)return;ctx.fillStyle='#facc15';ctx.beginPath();ctx.arc(g.x,g.y,g.r,0,PI2);ctx.fill();ctx.fillStyle='#854d0e';ctx.font='700 10px Outfit,sans-serif';ctx.textAlign='center';ctx.fillText(g.suelta?'micela':'grasa',g.x,g.y+3);});
+    J.forEach(function(j){var hx=j.x,hy=j.y,ta=j.a+Math.PI;ctx.strokeStyle='#334155';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hx,hy);for(var u=1;u<=5;u++)ctx.lineTo(hx+Math.cos(ta)*u*3.4+Math.cos(ta+Math.PI/2)*(u%2?2:-2),hy+Math.sin(ta)*u*3.4+Math.sin(ta+Math.PI/2)*(u%2?2:-2));ctx.stroke();ctx.lineWidth=1;
+      ctx.fillStyle='#2563eb';ctx.beginPath();ctx.arc(hx,hy,4.5,0,PI2);ctx.fill();});
+    ctx.fillStyle='#0d2d42';ctx.font='700 11px Outfit,sans-serif';ctx.textAlign='left';ctx.fillText('Grasa quitada: '+quitada+' de '+total,8,16);
+    ctx.font='10px Outfit,sans-serif';ctx.fillText('● azul = cabeza −COO⁻ Na⁺ (le gusta el agua) · línea = cola de hidrocarburo (le gusta la grasa)',8,30);
+    var suel=G.filter(function(g){return g.suelta&&!g.fuera;}).length;
+    msg.innerHTML=nj===0?'Sin jabón, el agua no puede quitar la grasa: el agua es polar y la grasa apolar, así que no se mezclan aunque agites.':
+      quitada===total?'✅ <b>¡Ropa limpia!</b> Cada gota de grasa salió envuelta en jabón (una <b>micela</b>): las colas apolares adentro, con la grasa, y las cabezas iónicas afuera, hacia el agua.':
+      suel?'Se formaron <b>micelas</b>: la grasa quedó envuelta en jabón y ya flota en el agua. Pulsa <b>Enjuagar</b> para que el agua se las lleve.':
+      'Las <b>colas</b> apolares del jabón se meten en la grasa y las <b>cabezas</b> iónicas quedan hacia el agua. Cuando la mancha está rodeada, <b>agita</b> para despegarla de la tela.';
+  }
+  var A=animar(L,paso);botonPausa(A,c1);iniciar();
+  box._prueba=function(seg,acc){if(acc==='agita')agita=3;if(acc==='enjuaga')enjuaga=2.5;for(var s=0;s<seg;s+=0.05)paso(0.05);return {quitada:quitada,total:total,pegadas:G.map(function(g){return g.pegadas;})};};
 };
 
 function iniciar(){document.querySelectorAll('.sim[data-sim]').forEach(function(b){if(b.dataset.listo)return;b.dataset.listo='1';var f=SIM[b.dataset.sim];if(f)try{f(b);}catch(e){b.innerHTML='<p>No se pudo iniciar la simulación.</p>';if(window.console)console.error(e);}});}
