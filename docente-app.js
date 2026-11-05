@@ -455,6 +455,11 @@ function poolEjercicios(temas){
       P.X.push({k:'X',fig:a.fig,nombre:a.nombre,sub:a.sub,fuente:'Generado',
         texto:'Un compañero nombró esta molécula como <b>«'+esc(e)+'»</b>. ¿Qué error cometió?'});
     });
+    // 5b) Cazar errores escritos del tema (afirmaciones con un error de
+    // concepto, de cálculo o de nombre), para los temas sin moléculas que
+    // nombrar o con pocas (docente-datos.js, CAZAR).
+    (t.cazar||[]).forEach(function(c){P.X.push({k:'X',fig:null,afirma:c[0],clave:c[1],fuente:'Docente',
+      texto:'Un compañero escribió: <b>«'+escQ(String(c[0]).replace(/\.$/,''))+'»</b>. Encuentra el error, explica por qué está mal y escríbelo de forma correcta.'});});
     // 6) Selección múltiple de conceptos (temas con saberJue)
     preguntasJuego(t).forEach(function(q){P.Q.push({k:'Q',q:quitaHtml(q.q),opts:q.opts.slice(),fig:q.mol?{svgFn:svgJuego(q.mol),key:q.mol}:null,sub:q.topic,fuente:'Juego'});});
     // 7) Ejercicios abiertos del tema
@@ -492,7 +497,7 @@ var TIPOS_EJ=[
   {k:'B',t:'Dibujar (nombre → estructura)'},
   {k:'C',t:'Reconocimiento de partes del nombre'},
   {k:'D',t:'Reacciones'},
-  {k:'X',t:'Cazar errores de nombres'},
+  {k:'X',t:'Cazar errores'},
   {k:'Q',t:'Selección múltiple (conceptos del Juego)'},
   {k:'E',t:'Ejercicios abiertos'}
 ];
@@ -674,6 +679,7 @@ function htmlEjercicio(it,num){
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,false)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
   if(it.k==='D')return htmlRxnLibro(it.rxn,num);
+  if(it.k==='X'&&it.afirma)return '<div class="ej"><span class="num">'+num+'</span><div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Versión correcta:<i></i></div>'+cuad(2)+'</div></div>';
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
   if(it.k==='Q'){var ops=barajar(it.opts,rng('q|'+it.q)),L=['A','B','C','D'];
     return '<div class="ej"><span class="num">'+num+'</span><p class="enun">'+escQ(it.q)+'</p>'+(it.fig?figura(it.fig,300,110):'')+
@@ -710,7 +716,8 @@ function elegirEjercicios(P,tipos,n,r){
 function bloquesEjercicios(sel,numIni){
   var out=[],num=numIni||1;
   sel.porTipo.forEach(function(g){
-    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(INSTR[g.k])+'</small></h4>'+(g.k==='C'?leyendaPartes():'');
+    var ins=INSTR[g.k];if(g.k==='X'&&g.items.every(function(it){return it.afirma;}))ins='Cada afirmación tiene un error. Encuéntralo, explica por qué está mal y escríbela de forma correcta.';else if(g.k==='X'&&g.items.some(function(it){return it.afirma;}))ins='Cada ejercicio tiene un error (en un nombre o en una afirmación). Encuéntralo, explícalo y escribe la versión correcta.';
+    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(ins)+'</small></h4>'+(g.k==='C'?leyendaPartes():'');
     var primero=true;
     if(g.k==='A'||g.k==='B'){
       // Estructuras muy anchas (cadenas largas semidesarrolladas) van en una

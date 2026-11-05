@@ -1705,5 +1705,824 @@ var F4_ABIERTAS={
 Object.keys(F4_ABIERTAS).forEach(function(k){ABIERTAS[k]=F4_ABIERTAS[k];});
 TEMAS.forEach(function(t){if(F4_ABIERTAS[t.id])t.abiertos=F4_ABIERTAS[t.id].map(function(a){return a.q;});});
 
-window.DOCENTE_DATOS={ALINEACION:ALINEACION,TEMAS:TEMAS,SABER:SABER,ABIERTAS:ABIERTAS};
+/* ── Cazar errores escritos: cada afirmación tiene UN error que el estudiante
+   debe encontrar y corregir. Se basan solo en lo que explica la página del
+   tema. [afirmación con el error, explicación para el docente] ── */
+var CAZAR={
+"carbono": [
+[
+"El carbono tiene 6 electrones de valencia, porque su número atómico es 6.",
+"Tiene 4 electrones de valencia: 2 de sus 6 electrones están en el nivel 1s, que no forma enlaces."
+],
+[
+"El carbono forma 2 enlaces, porque en su estado fundamental solo tiene 2 electrones desapareados.",
+"Forma 4 enlaces: promueve un electrón del 2s al 2p y se hibrida."
+],
+[
+"Al mezclar 1 orbital s con 3 orbitales p se obtienen 3 orbitales sp³.",
+"Salen 4 sp³: el número de híbridos es igual al de orbitales que se mezclan."
+],
+[
+"En la hibridación sp² se mezclan 1 s y 2 p, y no queda ningún orbital p sin hibridar.",
+"Queda 1 orbital p sin hibridar, que forma el enlace π."
+],
+[
+"Un carbono sp³ tiene geometría trigonal plana, con ángulos de 120°.",
+"El sp³ es tetraédrico, con ángulos de 109,5°; el trigonal plano es sp²."
+],
+[
+"Los carbonos del etino, HC≡CH, son sp², porque tienen un triple enlace.",
+"Son sp: lineales, con ángulos de 180°."
+],
+[
+"El doble enlace C=C está formado por dos enlaces π.",
+"Está formado por 1 σ + 1 π: el primer enlace entre dos átomos siempre es σ."
+],
+[
+"El triple enlace C≡C está formado por 3 enlaces σ.",
+"Está formado por 1 σ + 2 π."
+],
+[
+"En el eteno, CH₂=CH₂, hay 4 enlaces σ y 2 enlaces π.",
+"Hay 5 σ (4 C−H + 1 del doble enlace) y 1 π."
+],
+[
+"En el etino, HC≡CH, hay 2 enlaces σ y 3 enlaces π.",
+"Hay 3 σ (2 C−H + 1 C−C) y 2 π."
+],
+[
+"El enlace sencillo C−C es el más corto de los tres: mide 120 pm.",
+"El sencillo es el más largo (154 pm); el triple es el más corto (120 pm)."
+],
+[
+"Un doble enlace C=C puede girar libremente, igual que un enlace sencillo.",
+"No puede girar: al girar se rompería el enlace π."
+],
+[
+"Las cadenas de los alcanos son rectas porque el carbono sp³ forma ángulos de 180°.",
+"Son en zigzag: el carbono sp³ forma ángulos de 109,5°."
+],
+[
+"Un carbono unido a 3 átomos, uno de ellos con doble enlace, es sp³.",
+"Es sp²: 3 átomos unidos → sp² (el doble enlace cuenta como un solo átomo unido)."
+],
+[
+"El enlace π se forma cuando dos orbitales híbridos se solapan de frente.",
+"Eso es un σ; el π se forma con orbitales p sin hibridar que se solapan de lado."
+],
+[
+"El grafito y el diamante son elementos distintos, porque uno es negro y blando y el otro transparente y duro.",
+"Los dos son carbono puro; cambia cómo están unidos sus átomos (su hibridación)."
+],
+[
+"En la hibridación sp quedan 2 orbitales sp y 1 orbital p sin hibridar.",
+"Quedan 2 orbitales p sin hibridar, que forman 2 enlaces π."
+],
+[
+"La configuración del carbono en estado fundamental es 1s² 2s¹ 2p³.",
+"Esa es la del estado excitado (después de la promoción); la fundamental es 1s² 2s² 2p²."
+],
+[
+"En el metano, CH₄, los 4 enlaces C−H son enlaces π.",
+"Son 4 enlaces σ: todo enlace sencillo es σ."
+],
+[
+"Concatenación significa que el carbono forma 4 enlaces.",
+"Eso es la tetravalencia; la concatenación es unirse a otros carbonos en cadenas y anillos."
+]
+],
+"tipos_carbono": [
+[
+"En el propano, CH₃−CH₂−CH₃, el carbono del medio es primario.",
+"Es secundario: está unido a 2 carbonos."
+],
+[
+"Un carbono unido a 3 hidrógenos y a 1 carbono es terciario, porque tiene 3 H.",
+"Es primario: solo se cuentan los carbonos vecinos, no los hidrógenos."
+],
+[
+"En el etanol, CH₃−CH₂−OH, el carbono que lleva el −OH es secundario, porque está unido a un C y a un O.",
+"Es primario: el O no cuenta, solo se cuentan carbonos."
+],
+[
+"Un −CH₂− dentro de una cadena sin ramas es un carbono terciario.",
+"Es secundario: está unido a 2 carbonos."
+],
+[
+"En un alcano, un carbono cuaternario tiene 1 hidrógeno.",
+"Tiene 0 hidrógenos: sus 4 enlaces van a carbonos."
+],
+[
+"En un alcano, un carbono terciario se escribe −CH₂−.",
+"Se escribe −CH−, con 1 H; −CH₂− es secundario."
+],
+[
+"Un carbono terciario está unido a 3 hidrógenos.",
+"Está unido a 3 carbonos (y, en un alcano, a 1 H)."
+],
+[
+"El propan-2-ol es un alcohol primario porque tiene un solo −OH.",
+"Es secundario: el carbono del −OH está unido a 2 carbonos."
+],
+[
+"El 2-metilpropan-2-ol es un alcohol secundario.",
+"Es terciario: el carbono del −OH está unido a 3 carbonos."
+],
+[
+"El isooctano tiene 5 carbonos primarios, 1 secundario, 2 terciarios y ningún cuaternario.",
+"Tiene 5 primarios, 1 secundario, 1 terciario y 1 cuaternario."
+],
+[
+"En un doble enlace C=C, el carbono vecino se cuenta dos veces porque hay dos rayas.",
+"Se cuentan los carbonos unidos, no las rayas: el vecino cuenta una sola vez."
+],
+[
+"En el butano, CH₃−CH₂−CH₂−CH₃, los 4 carbonos son secundarios.",
+"Hay 2 primarios (los extremos) y 2 secundarios."
+],
+[
+"En el 2-metilpropano, el carbono central es secundario.",
+"Es terciario: está unido a 3 carbonos."
+],
+[
+"En el 2,2-dimetilpropano, el carbono central es terciario.",
+"Es cuaternario: está unido a 4 carbonos."
+],
+[
+"En el ciclohexano todos los carbonos son primarios.",
+"Son secundarios: en el anillo cada carbono está unido a 2 carbonos."
+],
+[
+"En un alcano, un carbono unido a 2 carbonos tiene 3 hidrógenos.",
+"Tiene 4 − 2 = 2 hidrógenos."
+],
+[
+"Un carbono cuaternario aparece donde sale una sola ramificación.",
+"Donde sale una rama hay un terciario; el cuaternario aparece donde salen dos ramas del mismo carbono."
+],
+[
+"En el 2-cloropropano, el carbono que lleva el Cl es terciario, porque está unido a 3 átomos que no son hidrógeno.",
+"Es secundario: el Cl no cuenta, solo los 2 carbonos."
+],
+[
+"Los carbonos de los extremos de una cadena siempre son secundarios.",
+"Son primarios: están unidos a un solo carbono."
+],
+[
+"El carbono de una rama metilo es secundario.",
+"Es primario: el metilo está unido a un solo carbono."
+],
+[
+"El 2-metilbutano tiene 2 carbonos primarios, 2 secundarios y 1 terciario.",
+"Tiene 3 primarios, 1 secundario y 1 terciario."
+]
+],
+"cadenas": [
+[
+"El butano dibujado en zigzag es una cadena ramificada.",
+"Es lineal: doblar el dibujo no crea ramas; el camino no se bifurca."
+],
+[
+"El etanol, CH₃−CH₂−OH, tiene una cadena heterogénea porque tiene oxígeno.",
+"Es homogénea: el O está al final como −OH, no intercalado entre carbonos."
+],
+[
+"El metoximetano, CH₃−O−CH₃, tiene una cadena homogénea.",
+"Es heterogénea: el O está intercalado entre dos carbonos."
+],
+[
+"El propeno, CH₂=CH−CH₃, es una cadena saturada.",
+"Es insaturada: tiene un doble enlace."
+],
+[
+"El ciclohexano es una cadena abierta porque solo tiene enlaces sencillos.",
+"Es cerrada (cíclica); tener solo enlaces sencillos la hace saturada, que es otro criterio."
+],
+[
+"Al cerrar el hexano, C₆H₁₄, para formar el ciclohexano, la fórmula sigue siendo C₆H₁₄.",
+"Pasa a C₆H₁₂: al unir los extremos se pierden 2 H."
+],
+[
+"El benceno es un anillo alicíclico.",
+"Es aromático: 6 carbonos sp² con dobles enlaces alternados."
+],
+[
+"La piridina es un anillo alicíclico porque tiene 6 átomos.",
+"Es heterocíclica (y aromática): tiene un N en el anillo."
+],
+[
+"Una cadena abierta tiene un solo extremo.",
+"Tiene dos extremos."
+],
+[
+"Una cadena es ramificada cuando tiene un doble enlace.",
+"Es ramificada cuando de un carbono sale otra cadena; el doble enlace la hace insaturada."
+],
+[
+"El ciclohexeno es aromático porque es un anillo con un doble enlace.",
+"Es alicíclico insaturado; aromático es el anillo tipo benceno."
+],
+[
+"En una cadena ramificada, la rama sale de un carbono secundario.",
+"Sale de un carbono terciario o cuaternario."
+],
+[
+"Un heteroátomo es cualquier átomo distinto del carbono, incluido el hidrógeno.",
+"Es cualquier átomo distinto del carbono y del hidrógeno (O, N, S, halógenos…)."
+],
+[
+"La cadena de la etilamina, CH₃−CH₂−NH₂, es heterogénea porque tiene nitrógeno.",
+"Es homogénea: el −NH₂ está al final, no entre carbonos."
+],
+[
+"Una cadena insaturada tiene solo enlaces sencillos.",
+"Tiene al menos un enlace doble o triple; con solo sencillos es saturada."
+],
+[
+"En la fórmula de esqueleto del butano hay 2 carbonos: los dos extremos del zigzag.",
+"Hay 4: los 2 extremos y los 2 vértices."
+],
+[
+"El metilbenceno es una cadena abierta ramificada.",
+"Es una cadena cerrada aromática con una rama metilo."
+],
+[
+"Un anillo con un oxígeno entre sus átomos es alicíclico.",
+"Es heterocíclico: tiene un heteroátomo en el anillo."
+],
+[
+"Los anillos alicíclicos solo pueden ser saturados.",
+"Pueden ser saturados (ciclohexano) o insaturados (ciclohexeno)."
+],
+[
+"El but-1-eno, CH₂=CH−CH₂−CH₃, es una cadena abierta, ramificada, insaturada y homogénea.",
+"Es lineal, no ramificada: su camino no se bifurca."
+]
+],
+"aromaticos": [
+[
+"El benceno reacciona con el Br₂ por adición, igual que un alqueno.",
+"Hace sustitución electrofílica (con FeBr₃): así conserva el anillo aromático."
+],
+[
+"El nombre correcto del xileno con los metilos en las posiciones 1 y 3 es 1,5-dimetilbenceno.",
+"Se numera con los localizadores más bajos: 1,3-dimetilbenceno."
+],
+[
+"El diclorobenceno con los cloros en carbonos vecinos se llama 1,6-diclorobenceno.",
+"Se llama 1,2-diclorobenceno: localizadores más bajos."
+],
+[
+"El metilbenceno también se llama fenol.",
+"Se llama tolueno; el fenol es el benceno con un −OH."
+],
+[
+"El 1,4-dimetilbenceno también se llama orto-dimetilbenceno.",
+"Es para (1,4); orto es 1,2 y meta es 1,3."
+],
+[
+"El 1,3-diclorobenceno se llama para-diclorobenceno.",
+"Es meta-diclorobenceno; para es 1,4."
+],
+[
+"El benceno tiene tres enlaces C−C cortos y tres largos.",
+"Los seis miden lo mismo, 139 pm: los electrones π están deslocalizados."
+],
+[
+"El nombre correcto es 1-metil-2-clorobenceno.",
+"Los sustituyentes van en orden alfabético: 1-cloro-2-metilbenceno."
+]
+],
+"isomeria": [
+[
+"El butano y el 2-metilpropano no son isómeros, porque tienen nombres distintos.",
+"Sí son isómeros: los dos son C₄H₁₀ con estructuras distintas."
+],
+[
+"El hexano dibujado en forma de U es un isómero del hexano dibujado en zigzag.",
+"Es el mismo compuesto: doblar la cadena no crea un isómero."
+],
+[
+"El 1-metilpentano es un isómero del hexano.",
+"El 1-metilpentano es el mismo hexano: un metilo en el extremo alarga la cadena."
+],
+[
+"El 2-etilbutano es un nombre correcto para un isómero de C₆H₁₄.",
+"Su cadena más larga tiene 5 C: el nombre correcto es 3-metilpentano."
+],
+[
+"El 3-metilbutano y el 2-metilbutano son isómeros de posición.",
+"Son la misma molécula numerada al revés; el nombre correcto es 2-metilbutano."
+],
+[
+"El propan-1-ol y el propan-2-ol son isómeros de función.",
+"Son isómeros de posición: el mismo grupo −OH en otro carbono."
+],
+[
+"El etanol y el metoximetano son isómeros de cadena.",
+"Son isómeros de función: alcohol y éter."
+],
+[
+"El propanal y la propanona son isómeros de posición.",
+"Son isómeros de función: aldehído y cetona."
+],
+[
+"El propan-1-ol y el propanal son isómeros de función.",
+"No son isómeros: el propan-1-ol es C₃H₈O y el propanal C₃H₆O."
+],
+[
+"El índice de deficiencia de hidrógeno del C₄H₈ es 2.",
+"IDH = (2×4 + 2 − 8) ÷ 2 = 1."
+],
+[
+"El IDH del benceno, C₆H₆, es 3: uno por cada doble enlace.",
+"Es 4: 1 anillo + 3 enlaces π."
+],
+[
+"Un triple enlace cuenta 1 en el índice de deficiencia de hidrógeno.",
+"Cuenta 2, porque equivale a dos enlaces π."
+],
+[
+"El propeno, CH₂=CH−CH₃, tiene isomería cis/trans.",
+"No la tiene: su C1 tiene dos H iguales."
+],
+[
+"El but-1-eno tiene isomería cis/trans.",
+"No la tiene: el C1 tiene dos H."
+],
+[
+"En el cis-but-2-eno los dos CH₃ están en lados opuestos del doble enlace.",
+"En el cis están del mismo lado; en lados opuestos es el trans."
+],
+[
+"El (Z)-but-2-eno es el trans-but-2-eno.",
+"Z = juntos = cis; el trans es el (E)-but-2-eno."
+],
+[
+"El C2 del butan-2-ol no es quiral porque está unido a dos carbonos.",
+"Sí es quiral: tiene 4 grupos distintos (H, OH, CH₃ y CH₂−CH₃)."
+],
+[
+"La glicina es quiral, como casi todos los aminoácidos.",
+"Es la excepción: su C2 tiene dos H."
+],
+[
+"Un carbono quiral está unido a cuatro sustituyentes iguales.",
+"Está unido a cuatro sustituyentes diferentes."
+],
+[
+"Las grasas trans tienen un codo en la cadena y por eso son líquidas.",
+"El codo lo da el doble enlace cis (aceites líquidos); la cadena trans es casi recta y sólida."
+],
+[
+"El pentano, C₅H₁₂, tiene 2 isómeros de cadena.",
+"Tiene 3: pentano, 2-metilbutano y 2,2-dimetilpropano."
+]
+],
+"reacciones": [
+[
+"Eteno + bromo → 1,2-dibromoetano es una sustitución.",
+"Es una adición: desaparece el doble enlace y dos moléculas quedan en una."
+],
+[
+"Etanol → eteno + agua es una adición.",
+"Es una eliminación (deshidratación): aparece un doble enlace y sale H₂O."
+],
+[
+"Bromoetano + hidróxido → etanol + bromuro es una eliminación.",
+"Es una sustitución: el Br cambia por −OH y no cambian los dobles enlaces."
+],
+[
+"Propanona → propan-2-ol es una oxidación, porque el carbono gana hidrógeno.",
+"Ganar H es una reducción."
+],
+[
+"Ácido etanoico + etanol → etanoato de etilo + agua es una hidrólisis.",
+"Es una condensación (esterificación): dos moléculas se unen y sale agua."
+],
+[
+"Etanoato de etilo + agua → ácido etanoico + etanol es una condensación.",
+"Es una hidrólisis: el agua parte la molécula en dos."
+],
+[
+"Cloruro de vinilo → PVC es una eliminación, porque desaparece el doble enlace.",
+"Es una polimerización por adición: muchos monómeros se unen en una cadena."
+],
+[
+"Ácido etanoico + hidróxido de sodio → etanoato de sodio + agua es una sustitución.",
+"Es una reacción ácido-base: solo pasa un H⁺ y se forma una sal."
+],
+[
+"En una adición, una molécula se convierte en dos.",
+"Es al revés: dos moléculas se convierten en una (eso otro es la eliminación)."
+],
+[
+"En una eliminación, el producto queda más saturado que el reactivo.",
+"Queda menos saturado: se forma un doble enlace."
+],
+[
+"En una sustitución cambia el número de dobles enlaces.",
+"El número de dobles enlaces no cambia: un grupo sale y otro entra."
+],
+[
+"Oxidar un carbono significa que gane enlaces con hidrógeno.",
+"Oxidar es ganar enlaces con O o perder H."
+],
+[
+"El H₂ y el NaBH₄ son reactivos típicos de oxidación.",
+"Son reactivos de reducción."
+],
+[
+"El KMnO₄ y el CrO₃ son reactivos típicos de reducción.",
+"Son reactivos de oxidación."
+],
+[
+"La hidrogenación de un alqueno es solo una adición; no puede ser también una reducción.",
+"Es las dos cosas: se suma H₂ (adición) y el carbono gana H (reducción)."
+],
+[
+"La saponificación es una condensación, porque se forma jabón.",
+"Es una hidrólisis del éster y también una reacción ácido-base."
+],
+[
+"En una reacción ácido-base cambia el esqueleto de carbonos.",
+"El esqueleto no cambia: solo pasa un H⁺ de una sustancia a otra."
+],
+[
+"La combustión es una reducción completa: todo el carbono termina como CO₂.",
+"Es una oxidación completa."
+],
+[
+"La hidrólisis es una reacción típica de los alcanos.",
+"Es típica de ésteres, amidas, cloruros de ácido y nitrilos."
+],
+[
+"En la polimerización por adición sale una molécula de agua en cada unión.",
+"No sale nada: se abre el doble enlace; con salida de agua es condensación."
+]
+],
+"orbitales": [
+[
+"El orden de enlace se calcula como (electrones enlazantes + antienlazantes) ÷ 2.",
+"Se restan: (enlazantes − antienlazantes) ÷ 2."
+],
+[
+"El H₂ tiene orden de enlace 2, porque tiene 2 electrones.",
+"Es (2 − 0) ÷ 2 = 1: un enlace sencillo."
+],
+[
+"El He₂ existe y tiene orden de enlace 1.",
+"Tiene 2 enlazantes y 2 antienlazantes: orden 0, no existe."
+],
+[
+"Al combinar 2 orbitales atómicos se obtiene 1 orbital molecular.",
+"Salen 2: tantos orbitales moleculares como orbitales atómicos se combinan."
+],
+[
+"En el orbital antienlazante hay electrones entre los núcleos, que los mantienen unidos.",
+"El antienlazante tiene un nodo en el medio: los núcleos quedan expuestos y se repelen."
+],
+[
+"El orbital enlazante tiene más energía que los orbitales atómicos de los que sale.",
+"Tiene menos energía; el antienlazante tiene más."
+],
+[
+"Los electrones llenan primero el orbital antienlazante.",
+"Llenan primero el de menor energía (el enlazante), como en Aufbau."
+],
+[
+"El O₂ no es atraído por un imán porque todos sus electrones están apareados.",
+"Tiene 2 electrones desapareados en los π*: es paramagnético."
+],
+[
+"El orden de enlace del N₂ es 2.",
+"Es 3: un triple enlace."
+],
+[
+"El H₂⁺ no puede existir porque su orden de enlace es 0.",
+"Tiene 1 electrón enlazante: orden 0,5, así que sí existe."
+],
+[
+"En el H₂ la energía es mínima cuando los núcleos están a 220 pm.",
+"El mínimo está en 74 pm (−436 kJ/mol)."
+],
+[
+"El enlace π del eteno está sobre el eje que une los dos núcleos.",
+"La nube π está arriba y abajo del eje; sobre el eje está el σ."
+],
+[
+"El eteno reacciona por sustitución porque su nube π está protegida dentro de la molécula.",
+"Reacciona por adición: la nube π está expuesta y la atacan los electrófilos."
+],
+[
+"El benceno libera 360 kJ/mol al hidrogenarse, igual que tres ciclohexenos.",
+"360 es lo que predice el modelo de dobles enlaces fijos; el benceno libera 208 kJ/mol."
+],
+[
+"La energía de resonancia del benceno es 208 kJ/mol.",
+"Es 360 − 208 ≈ 152 kJ/mol; 208 es lo que libera al hidrogenarse."
+],
+[
+"El ciclobutadieno es aromático porque es un anillo plano y conjugado.",
+"Tiene 4 electrones π, que no cumplen 4n + 2: no es aromático."
+],
+[
+"El ciclohexano es aromático porque es un anillo de 6 carbonos.",
+"Sus carbonos son sp³ y tiene 0 electrones π: no es aromático."
+],
+[
+"Con más dobles enlaces conjugados, la molécula absorbe luz de menor longitud de onda.",
+"Absorbe luz de mayor longitud de onda (de menor energía)."
+],
+[
+"Las hojas se ven verdes porque la clorofila absorbe la luz verde.",
+"La clorofila absorbe la luz roja y la azul; la verde no se absorbe y es la que vemos."
+],
+[
+"El modelo de orbitales moleculares reemplaza por completo a la hibridación, que ya no se usa.",
+"Se usan los dos: la hibridación sigue sirviendo para la forma de las moléculas."
+],
+[
+"El eteno es de color porque absorbe luz visible.",
+"Absorbe a 171 nm, en el ultravioleta: es incoloro."
+]
+],
+"propiedades": [
+[
+"Cuando el agua hierve se rompen los enlaces O−H de sus moléculas.",
+"El vapor sigue siendo H₂O: solo se vencen las atracciones entre moléculas."
+],
+[
+"El CCl₄ es polar porque tiene 4 enlaces C−Cl polares.",
+"Los 4 enlaces apuntan a los vértices del tetraedro y se anulan: es apolar."
+],
+[
+"El dimetiléter forma puentes de hidrógeno entre sus moléculas porque tiene oxígeno.",
+"No tiene ningún H unido al O: solo hay dipolo-dipolo y London."
+],
+[
+"Las fuerzas de London solo existen entre moléculas apolares.",
+"Existen en todas las moléculas."
+],
+[
+"El puente de hidrógeno es la más débil de las tres fuerzas intermoleculares.",
+"Es la más fuerte de las tres; London es la más débil por molécula."
+],
+[
+"Cuanto más fuertes son las fuerzas intermoleculares, menor es el punto de ebullición.",
+"Es al revés: mayor es el punto de ebullición."
+],
+[
+"El etanal, CH₃−CHO, forma puentes de hidrógeno porque tiene un C=O.",
+"No tiene O−H ni N−H: su fuerza más fuerte es dipolo-dipolo."
+],
+[
+"La propanona forma puentes de hidrógeno entre sus moléculas.",
+"Sin O−H ni N−H, su fuerza más fuerte es dipolo-dipolo."
+],
+[
+"La etilamina solo tiene fuerzas de London porque no tiene oxígeno.",
+"Tiene enlaces N−H: forma puentes de hidrógeno."
+],
+[
+"El hexan-1-ol se mezcla con agua en cualquier proporción porque tiene un −OH.",
+"Casi no se disuelve (0,6 g/100 mL): su cadena apolar es larga."
+],
+[
+"El butan-1-ol se mezcla con agua en cualquier proporción, igual que el metanol.",
+"Solo se disuelven 7,7 g/100 mL: desde 4 carbonos la solubilidad cae."
+],
+[
+"El 2,2-dimetilpropano hierve más alto que el pentano porque es más ramificado.",
+"Hierve más bajo (10 °C frente a 36 °C): con menos superficie, menos London."
+],
+[
+"Las fuerzas de London disminuyen cuando aumentan el número de electrones y la superficie.",
+"Aumentan con el número de electrones y con la superficie."
+],
+[
+"El alcohol antiséptico se evapora rápido porque sus moléculas se atraen más que las del aceite.",
+"Se evapora rápido porque se atraen menos."
+],
+[
+"A la misma temperatura, el agua tiene más moléculas en el vapor que el propano.",
+"Tiene menos: el agua tiene puentes de hidrógeno y el propano solo London."
+],
+[
+"Romper un enlace O−H cuesta unos 20 kJ/mol y separar dos moléculas de agua, unos 460 kJ/mol.",
+"Es al revés: 460 kJ/mol el enlace O−H y unos 20 kJ/mol separar las moléculas."
+],
+[
+"Los hidrocarburos son polares porque tienen muchos enlaces C−H.",
+"El C−H casi no es polar: los hidrocarburos son apolares."
+],
+[
+"Porcentaje de error = (valor de referencia ÷ valor medido) × 100.",
+"Es |medido − referencia| ÷ referencia × 100."
+],
+[
+"Si las medidas no coinciden exactamente con la referencia, los datos no apoyan la hipótesis.",
+"Diferencias pequeñas son errores de medida: los datos pueden apoyar la hipótesis."
+],
+[
+"En el jabón, la cabeza iónica se mete en la grasa y la cola queda hacia el agua.",
+"Es al revés: la cola apolar en la grasa y la cabeza iónica hacia el agua."
+],
+[
+"En la serie de alcoholes de metanol a hexan-1-ol, el punto de ebullición baja cuando la cadena crece.",
+"Sube: más carbonos, más fuerzas de London."
+]
+],
+"biomoleculas": [
+[
+"La ribosa es una cetopentosa.",
+"Tiene un aldehído y 5 C: es una aldopentosa."
+],
+[
+"La fructosa es una aldohexosa.",
+"Tiene una cetona en el C2: es una cetohexosa."
+],
+[
+"El gliceraldehído es una cetotriosa.",
+"Es una aldotriosa; la cetotriosa es la dihidroxiacetona."
+],
+[
+"Un monosacárido es de la serie D si en Fischer el −OH del C2 está a la derecha.",
+"Se mira el −OH del penúltimo carbono, el quiral más alejado del carbonilo."
+],
+[
+"Al pasar de Fischer a Haworth, un −OH que estaba a la derecha queda arriba del anillo.",
+"Derecha → abajo; izquierda → arriba."
+],
+[
+"Para formar el anillo de la glucosa, el −OH del C6 ataca al aldehído del C1.",
+"Lo ataca el −OH del C5: se forma un anillo de 6 átomos (5 C y 1 O)."
+],
+[
+"La β-glucosa tiene el −OH del C1 abajo, en el lado opuesto al CH₂OH.",
+"Esa es la α; en la β el −OH del C1 queda arriba."
+],
+[
+"El almidón está hecho de β-glucosas y la celulosa de α-glucosas.",
+"Es al revés: almidón α y celulosa β."
+],
+[
+"La glucosa forma una furanosa, un anillo de 5 átomos.",
+"Forma una piranosa (anillo de 6); la fructosa forma la furanosa."
+],
+[
+"El ácido linoleico, 18:2 cis-Δ9,12, es un omega-12.",
+"ω = 18 − 12 = 6: es omega-6."
+],
+[
+"El número omega se cuenta desde el carbono del −COOH.",
+"Se cuenta desde el extremo CH₃; desde el −COOH se cuenta Δ."
+],
+[
+"El ácido oleico es un ácido graso esencial que hay que comer.",
+"No es esencial: el cuerpo lo fabrica. Los esenciales son el linoleico y el α-linolénico."
+],
+[
+"El ácido esteárico es líquido porque su cadena está doblada.",
+"Es saturado: su cadena es recta, se apila bien y es sólido (69 °C)."
+],
+[
+"En la saponificación, una grasa reacciona con NaOH y forma glicerol y una sola molécula de jabón.",
+"Grasa + 3 NaOH → glicerol + 3 moléculas de jabón."
+],
+[
+"En una micela, las cabezas −COO⁻ quedan hacia adentro, en contacto con la grasa.",
+"Las colas apolares van hacia la grasa y las cabezas −COO⁻ hacia el agua."
+],
+[
+"La hebra complementaria de 5′-ATGC-3′ es 5′-ATGC-3′.",
+"Es 3′-TACG-5′: A con T, G con C, y en dirección contraria."
+],
+[
+"En el ADN, la A se aparea con la G y la T con la C.",
+"Se aparean A con T y G con C."
+],
+[
+"Si un ADN tiene 30 % de adenina, también tiene 30 % de guanina.",
+"Tiene 30 % de T; G y C son 20 % cada una (Chargaff)."
+],
+[
+"El par G−C se une con 2 puentes de hidrógeno y el par A−T con 3.",
+"Es al revés: A=T con 2 y G≡C con 3."
+],
+[
+"En la replicación, una molécula hija queda con las dos hebras viejas y la otra con las dos nuevas.",
+"Es semiconservativa: cada hija tiene una hebra vieja y una nueva."
+],
+[
+"El ARN tiene timina, igual que el ADN.",
+"El ARN tiene uracilo en lugar de timina."
+],
+[
+"El codón GCU del ARNm se aparea con un ARNt de anticodón GCU.",
+"El anticodón es complementario: CGA."
+],
+[
+"El enlace peptídico se forma en el núcleo, mientras el ADN se transcribe.",
+"Se forma en el ribosoma, durante la traducción."
+],
+[
+"La traducción empieza en el codón UAA.",
+"Empieza en AUG (metionina); UAA es un codón de parada."
+],
+[
+"Al freír un huevo se rompen los enlaces peptídicos de sus proteínas.",
+"Se rompen los puentes de hidrógeno y la proteína pierde su forma; los enlaces peptídicos no se rompen."
+]
+],
+"ambiente": [
+[
+"En la torre de destilación, las cadenas más largas salen por arriba.",
+"Se condensan abajo; por arriba salen los gases, de cadena corta."
+],
+[
+"Las moléculas más largas tienen menos fuerzas de London y hierven a menor temperatura.",
+"Tienen más fuerzas de London y hierven a mayor temperatura."
+],
+[
+"Al quemar 1 kg de gasolina sale menos de 1 kg de CO₂, porque parte se pierde como humo.",
+"Sale más de 1 kg: cada carbono se une al oxígeno del aire."
+],
+[
+"La combustión del octano es 2 C₈H₁₈ + 25 O₂ → 8 CO₂ + 18 H₂O.",
+"Faltan carbonos: son 16 CO₂."
+],
+[
+"La combustión incompleta del metano es 2 CH₄ + 3 O₂ → 2 CO₂ + 4 H₂O.",
+"Con poco oxígeno se forma CO: 2 CH₄ + 3 O₂ → 2 CO + 4 H₂O."
+],
+[
+"El monóxido de carbono es fácil de detectar porque tiene un olor muy fuerte.",
+"No tiene olor ni color; por eso es tan peligroso."
+],
+[
+"El octano emite menos CO₂ por megajulio que el metano.",
+"Emite más: 64 g/MJ frente a 49 g/MJ del metano."
+],
+[
+"El etanol de caña no emite CO₂ al quemarse porque es un biocombustible.",
+"Sí emite CO₂; la diferencia es que ese carbono lo tomó la caña del aire."
+],
+[
+"El CO₂ absorbe la luz solar y deja pasar la radiación infrarroja que emite el suelo.",
+"La luz solar atraviesa el aire; el CO₂ absorbe el infrarrojo del suelo y lo reemite."
+],
+[
+"El polietileno se forma por condensación y en cada unión sale una molécula de agua.",
+"Se forma por adición: se abren los C=C y no sale nada."
+],
+[
+"El PET se forma por polimerización por adición.",
+"Se forma por condensación: es un poliéster."
+],
+[
+"Una bolsa de polietileno se degrada rápido porque los microorganismos rompen fácilmente sus enlaces C−C.",
+"Casi no hay enzimas para cadenas de solo C−C: se parte en microplásticos."
+],
+[
+"Los microplásticos son trozos de plástico de más de 5 mm.",
+"Son de menos de 5 mm."
+],
+[
+"En la destrucción del ozono, la luz UV rompe el enlace C−Cl de forma heterolítica.",
+"La ruptura es homolítica: cada átomo se queda con un electrón."
+],
+[
+"Cada Cl· se gasta en la primera reacción y destruye una sola molécula de ozono.",
+"El Cl· queda libre otra vez: actúa como catalizador y destruye miles."
+],
+[
+"El DDT se elimina fácil con la orina porque es muy polar.",
+"Es muy apolar: se disuelve en la grasa y se acumula."
+],
+[
+"La concentración de DDT disminuye en cada nivel de la cadena alimentaria.",
+"Aumenta en cada nivel: biomagnificación."
+],
+[
+"El petróleo derramado se hunde porque es más denso que el agua.",
+"Es menos denso: flota y forma una mancha."
+],
+[
+"El biodiésel de palma se obtiene por fermentación del aceite.",
+"Se obtiene por transesterificación con metanol; la fermentación da el etanol de caña."
+],
+[
+"Un combustible renovable no tiene ningún impacto ambiental.",
+"«Renovable» no significa «sin impacto»: hay que mirar todo su ciclo de vida."
+],
+[
+"El Protocolo de Montreal de 1987 prohibió los plásticos de un solo uso.",
+"Prohibió los CFC; en Colombia los plásticos de un solo uso los reduce la Ley 2232 de 2022."
+]
+]
+};
+TEMAS.forEach(function(t){if(CAZAR[t.id])t.cazar=CAZAR[t.id];});
+
+window.DOCENTE_DATOS={ALINEACION:ALINEACION,TEMAS:TEMAS,SABER:SABER,ABIERTAS:ABIERTAS,CAZAR:CAZAR};
 })();

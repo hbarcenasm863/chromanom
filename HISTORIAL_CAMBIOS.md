@@ -7,6 +7,64 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (158) — Cazar errores: al menos 20 por tema en el generador
+
+### Contexto
+El docente pidió que en los dos generadores (ChromaNom e IonNom) hubiera
+ejercicios de «cazar errores» y que cada tema tuviera al menos 20. En
+ChromaNom este tipo solo se fabricaba a partir de nombres de moléculas, así
+que 10 temas no llegaban a 20:
+- 9 temas tenían 0: carbono e hibridación, tipos de carbono, cadenas,
+  isomería, reacciones y los 4 de la Fase 4;
+- aromáticos tenía 14.
+
+### Cambios
+- `docente-datos.js`: nuevo banco `CAZAR` con 197 afirmaciones escritas.
+  - Cada una tiene **un** error que el estudiante debe encontrar y
+    corregir, y una explicación para el docente (que no se imprime).
+  - Se basan solo en lo que explica la página de cada tema: por ejemplo,
+    «el doble enlace C=C está formado por dos enlaces π», «el etanol y el
+    metoximetano son isómeros de cadena», «la β-glucosa tiene el −OH del C1
+    abajo» o «el Protocolo de Montreal prohibió los plásticos de un solo
+    uso».
+  - Ninguna fórmula lleva paréntesis.
+- `docente-app.js`:
+  - Las afirmaciones se suman a los nombres equivocados que ya se
+    generaban, sin figura, con espacio para «Error» y «Versión correcta».
+  - La instrucción del bloque cambia según el contenido: nombres,
+    afirmaciones o ambos.
+  - El título del bloque pasa de «Cazar errores de nombres» a «Cazar
+    errores».
+- `sw.js`: caché `chromanom-v59`.
+
+**Cazar errores disponibles por tema (antes → ahora):**
+
+| Tema | Antes | Ahora |
+|---|---|---|
+| Carbono e hibridación | 0 | 20 |
+| Tipos de carbono | 0 | 21 |
+| Cadenas | 0 | 20 |
+| Aromáticos | 14 | 22 |
+| Isomería | 0 | 21 |
+| Reacciones | 0 | 20 |
+| Orbitales | 0 | 21 |
+| Propiedades | 0 | 21 |
+| Biomoléculas | 0 | 25 |
+| Ambiente | 0 | 21 |
+
+Los demás temas ya tenían entre 27 y 72.
+
+### Verificación
+Con Playwright se contaron los ejercicios disponibles de cada tema en el
+generador: los 19 temas tienen 20 o más. También se generaron talleres de
+Carbono, Aromáticos, Alcanos y Biomoléculas con 20 ejercicios de cazar
+errores cada uno. No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-05 (157) — Preguntas abiertas de la Fase 4 en las evaluaciones del generador
 
 ### Contexto
