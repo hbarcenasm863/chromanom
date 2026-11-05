@@ -7,6 +7,39 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (159) — Cazar errores también en las evaluaciones
+
+### Contexto
+El docente pidió que los ejercicios del generador cubrieran todos los tipos
+de documento. Los de cazar errores solo salían en el taller y en el trabajo
+práctico de la guía; la evaluación no los traía.
+
+### Cambios
+- `docente.html`: nuevo campo «Cazar errores» (0 a 10, por defecto 2) en la
+  sección de evaluación. La descripción de «Solo evaluación» ahora menciona
+  los cazar errores.
+- `docente-app.js`:
+  - La evaluación agrega un bloque «Cazar errores» después de las preguntas
+    abiertas. Usa el mismo banco del taller (nombres equivocados y
+    afirmaciones con error), con su propia semilla para cada versión.
+  - Las instrucciones de la evaluación lo mencionan.
+  - En la «Guía completa» no repite los ejercicios que ya salieron en el
+    trabajo práctico.
+- Laberintos y crucigramas no cambian: cada casilla necesita una respuesta
+  corta y única, y el laberinto de nombres ya usa como distractores esos
+  mismos errores típicos.
+- `sw.js`: caché `chromanom-v60`.
+
+### Verificación
+Con Playwright se generaron evaluaciones de Biomoléculas y Alcanos, una
+guía de Isomería y un taller de Carbono. Todas traen su bloque de cazar
+errores. No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-05 (158) — Cazar errores: al menos 20 por tema en el generador
 
 ### Contexto

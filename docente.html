@@ -439,7 +439,7 @@ body.sin-eval .solo-eval{display:none}
   <section class="panel" id="panel-gen" role="tabpanel" aria-labelledby="tab-guias">
     <div class="tipo-intro" data-solo="guia"><strong>📘 Guía de aprendizaje</strong> Cuatro sesiones: aprendizajes previos, información del tema, trabajo práctico y la evaluación en hojas aparte.</div>
     <div class="tipo-intro" data-solo="taller" hidden><strong>✏️ Taller</strong> Hojas de ejercicios de práctica (nombrar, dibujar, partes del nombre, reacciones, cazar errores, selección múltiple y ejercicios abiertos).</div>
-    <div class="tipo-intro" data-solo="evaluacion" hidden><strong>📝 Evaluación</strong> Preguntas tipo Saber 11 de selección múltiple y preguntas abiertas, con hoja de respuestas y rúbricas opcionales.</div>
+    <div class="tipo-intro" data-solo="evaluacion" hidden><strong>📝 Evaluación</strong> Preguntas tipo Saber 11 de selección múltiple, preguntas abiertas y ejercicios de cazar errores, con hoja de respuestas y rúbricas opcionales.</div>
     <div class="gen-grid">
       <form id="gen-form" class="cn-card" onsubmit="return false" aria-label="Configuración del documento">
         <fieldset hidden>
@@ -447,7 +447,7 @@ body.sin-eval .solo-eval{display:none}
           <div class="radios">
             <label class="opt"><input type="radio" name="tipodoc" value="guia" checked> <span><b>Guía completa</b><small>4 sesiones + evaluación en hojas aparte</small></span></label>
             <label class="opt"><input type="radio" name="tipodoc" value="taller"> <span><b>Solo taller</b><small>Ejercicios de práctica</small></span></label>
-            <label class="opt"><input type="radio" name="tipodoc" value="evaluacion"> <span><b>Solo evaluación</b><small>Tipo Saber 11 + abiertas</small></span></label>
+            <label class="opt"><input type="radio" name="tipodoc" value="evaluacion"> <span><b>Solo evaluación</b><small>Tipo Saber 11 + abiertas + cazar errores</small></span></label>
           </div>
         </fieldset>
         <fieldset>
@@ -494,6 +494,7 @@ body.sin-eval .solo-eval{display:none}
           <div class="campos">
             <label>Preguntas tipo Saber 11 <input type="number" id="f-nsaber" min="0" max="30" value="8" inputmode="numeric"></label>
             <label>Preguntas abiertas <input type="number" id="f-nab" min="0" max="20" value="3" inputmode="numeric"></label>
+            <label>Cazar errores <input type="number" id="f-nx" min="0" max="10" value="2" inputmode="numeric"></label>
           </div>
           <label class="opt"><input type="checkbox" id="f-hr" checked> <span>Incluir hoja de respuestas (círculos A–D)</span></label>
           <label class="opt"><input type="checkbox" id="f-rub"> <span>Anexar rúbricas (hoja aparte)</span></label>

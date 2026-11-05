@@ -996,7 +996,7 @@ function leerForm(){
     tipo:valor('tipodoc')||'guia',temas:temasSel(),grado:+valor('grado')||11,
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
-    nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(20,+$('f-nab').value||0)),
+    nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(20,+$('f-nab').value||0)),nX:Math.max(0,Math.min(10,+(($('f-nx')||{}).value)||0)),
     hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
@@ -1048,9 +1048,20 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat((D.ABIERTAS[t.id]||[]).filter(filtroPreg(t)));});
     var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
     var be=[];
-    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee cada pregunta (y su contexto, si lo tiene), analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+'</p>');
+    if(qs.length)be.push('<p class="instr"><b>Instrucciones.</b> Preguntas '+(qs.length>1?'1 a '+qs.length:'1')+': selección múltiple con única respuesta (tipo Saber 11). Lee cada pregunta (y su contexto, si lo tiene), analiza las cuatro opciones y marca una sola '+(F.hojaResp?'en la hoja de respuestas.':'encerrando su letra.')+(ab.length?' Preguntas '+(qs.length+1)+' a '+(qs.length+ab.length)+': abiertas, responde en el espacio indicado.':'')+(F.nX?' Al final, ejercicios de cazar errores: encuentra y corrige el error de cada uno.':'')+'</p>');
     be=be.concat(bloquesSaber(qs,r));
     be=be.concat(bloquesAbiertas(ab,qs.length+1));
+    // Cazar errores también en la evaluación (y por eso también en las hojas
+    // de evaluación de la guía): mismo banco que el taller, con su propia
+    // semilla para que cada versión traiga errores distintos.
+    if(F.nX){
+      var yaX={};if(selEj)selEj.porTipo.forEach(function(g){if(g.k==='X')g.items.forEach(function(it){yaX[it.texto]=1;});});
+      var poolX=poolEjercicios(F.temas).X.filter(function(it){return !yaX[it.texto];});
+      var xs=barajar(poolX,rng(semilla+'|cazar')).slice(0,F.nX);
+      if(xs.length<F.nX)avisos.push(poolX.length?'Hay '+poolX.length+' ejercicios de cazar errores para esta selección; se usan todos.':'No hay ejercicios de cazar errores para esta selección.');
+      var nIni=qs.length+ab.length+1;
+      xs.forEach(function(it,i){be.push((i===0?'<h4 class="sub">Cazar errores <small>Cada ejercicio tiene un error. Encuéntralo, explica por qué está mal y escribe la versión correcta.</small></h4>':'')+htmlEjercicio(it,nIni+i));});
+    }
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
     var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
