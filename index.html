@@ -141,6 +141,12 @@ body::before{
 .mod2.destacado .mod2-go{background:#fff;color:var(--cn-brand-d);padding:10px 16px;border-radius:var(--cn-r-s);align-self:flex-start}
 .mod2-ico{font-size:1.6rem;width:48px;height:48px;border-radius:12px;background:var(--cn-brand-l);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .mod2.destacado .mod2-ico{background:rgba(255,255,255,.16)}
+.mods2-fase{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin:14px 0 2px;padding:6px 0 6px 12px;border-left:6px solid var(--fc);color:var(--cn-tx,#0d2d42)}
+.mods2-fase .mf-n{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:800;color:#fff;background:var(--fc);padding:2px 9px;border-radius:100px}
+.mods2-fase b{font-family:'Fraunces',serif;font-size:1.15rem}
+.mods2-fase .mf-s{font-size:.8rem;color:#475569}
+.mod2.mod2-f{border-top:4px solid var(--fc)}
+.mod2.mod2-f .mod2-tag{color:var(--fc)}
 .mod2-tag{position:absolute;top:18px;right:18px;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cn-brand-d);background:var(--cn-brand-l);padding:4px 9px;border-radius:999px}
 .mod2 h3{font-size:1.12rem;font-weight:800;margin-bottom:6px;line-height:1.25}
 .mod2 p{font-size:.9rem;color:var(--cn-tx2);line-height:1.55;flex:1}
@@ -438,14 +444,14 @@ footer span{color:var(--naranja);font-weight:700}
   <div class="mol-top">
     <div>
       <div class="cn-eyebrow" id="mol-tit">⌬ Tu molécula ChromaNom</div>
-      <p class="mol-sub">La <strong style="color:var(--c2t)">cadena principal</strong> es tu ruta en <strong>3 fases</strong>, numerada como en la IUPAC: empieza en el C1, con el átomo de carbono, antes de nombrar. Las <strong style="color:var(--c1t)">ramificaciones</strong> son recursos de apoyo, el <strong style="color:var(--c3t)">doble enlace dorado</strong> señala tu siguiente parada y el <strong style="color:var(--c4t)">grupo funcional</strong> muestra tu progreso. Toca un átomo.</p>
+      <p class="mol-sub">La <strong style="color:var(--c2t)">cadena principal</strong> es tu ruta en <strong>4 fases</strong>, numerada como en la IUPAC: empieza en el C1, con el átomo de carbono, antes de nombrar. Las <strong style="color:var(--c1t)">ramificaciones</strong> son recursos de apoyo, el <strong style="color:var(--c3t)">doble enlace dorado</strong> señala tu siguiente parada y el <strong style="color:var(--c4t)">grupo funcional</strong> muestra tu progreso. Toca un átomo.</p>
     </div>
     <a class="mol-lista" href="#modulos">Ver como lista ↓</a>
   </div>
   <div class="mol-tabs" id="mol-tabs" role="tablist" aria-label="Partes de la molécula"></div>
   <div class="mol-grid">
     <div class="mol-view">
-      <svg id="mol-svg" viewBox="10 -14 560 550" aria-label="Menú en forma de molécula: la cadena principal es la ruta de módulos, las ramificaciones son recursos y el grupo funcional muestra tu progreso."></svg>
+      <svg id="mol-svg" viewBox="-74 -14 634 612" aria-label="Menú en forma de molécula: la cadena principal es la ruta de módulos, las ramificaciones son recursos y el grupo funcional muestra tu progreso."></svg>
     </div>
     <div class="mol-panel" id="mol-panel" aria-live="polite"></div>
   </div>
@@ -509,95 +515,100 @@ footer span{color:var(--naranja);font-weight:700}
     <h2 id="mod-title">Todo lo que puedes hacer en ChromaNom</h2>
   </div>
   <div class="mods2">
-    <a class="mod2 destacado" href="juego.html">
-      <span class="mod2-ico" aria-hidden="true">🎮</span>
-      <span class="mod2-tag">Fase 2 · Practicar</span>
-      <h3>Juego de práctica</h3>
-      <p>Más de 1.400 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (Fase 2). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
-      <span class="mod2-go">Jugar ahora →</span>
-    </a>
-    <a class="mod2" href="carbono.html">
+    <div class="mods2-fase" style="--fc:#1a6ea8"><span class="mf-n">Fase 1</span><b>El carbono</b><span class="mf-s">Antes de nombrar</span></div>
+    <a style="--fc:#1a6ea8" class="mod2 mod2-f" href="carbono.html">
       <span class="mod2-ico" aria-hidden="true">⚛️</span>
       <span class="mod2-tag">Fase 1 · Parada 1</span>
       <h3>Átomo de carbono e hibridación</h3>
       <p>Configuración electrónica, promoción, hibridación sp³, sp² y sp con modelos 3D que puedes girar, y enlaces σ y π.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="tipos-carbono.html">
+    <a style="--fc:#1a6ea8" class="mod2 mod2-f" href="tipos-carbono.html">
       <span class="mod2-ico" aria-hidden="true">🔢</span>
       <span class="mod2-tag">Fase 1 · Parada 2</span>
       <h3>Tipos de carbono</h3>
       <p>Primario, secundario, terciario y cuaternario, con un clasificador interactivo que cuenta los carbonos vecinos.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="cadenas.html">
+    <a style="--fc:#1a6ea8" class="mod2 mod2-f" href="cadenas.html">
       <span class="mod2-ico" aria-hidden="true">⛓️</span>
       <span class="mod2-tag">Fase 1 · Parada 3</span>
       <h3>Clasificación de cadenas</h3>
       <p>Abiertas o cerradas, lineales o ramificadas, saturadas o insaturadas, homogéneas o heterogéneas. Con animaciones y un clasificador.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="teoria.html">
+    <div class="mods2-fase" style="--fc:#166534"><span class="mf-n">Fase 2</span><b>Nomenclatura</b><span class="mf-s">Nombrar con IUPAC</span></div>
+    <a style="--fc:#166534" class="mod2 mod2-f" href="teoria.html">
       <span class="mod2-ico" aria-hidden="true">⚗️</span>
       <span class="mod2-tag">Fase 2 · Parada 1</span>
       <h3>Principios de nomenclatura</h3>
       <p>Las 4 partes, el algoritmo paso a paso, tablas de referencia y ejercicios guiados.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="grupos.html">
+    <a style="--fc:#166534" class="mod2 mod2-f" href="grupos.html">
       <span class="mod2-ico" aria-hidden="true">🔬</span>
       <span class="mod2-tag">Fase 2 · Parada 2</span>
       <h3>Grupos funcionales</h3>
       <p>Los 19 grupos (incluidos haluros y polifuncionales) con su prioridad IUPAC, estructuras dibujadas y más de 200 ejercicios.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="reacciones.html">
-      <span class="mod2-ico" aria-hidden="true">🧪</span>
-      <span class="mod2-tag">Fase 3 · Parada 2</span>
-      <h3>Reacciones orgánicas</h3>
-      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida. Última parada de la ruta (Fase 3), junto con el juego completo.</p>
-      <span class="mod2-go">Abrir →</span>
+    <a style="--fc:#166534" class="mod2 mod2-f destacado" href="juego.html">
+      <span class="mod2-ico" aria-hidden="true">🎮</span>
+      <span class="mod2-tag">Fase 2 · Parada 3</span>
+      <h3>Juego de práctica</h3>
+      <p>Más de 1.400 preguntas: opción múltiple, arrastrar partes, identificar fragmentos, escribir nombres y construir moléculas (Fase 2). Cuando estudies reacciones, juega el modo «Nomenclatura + reacciones» (paso 4). 20 preguntas por partida, 60 segundos cada una.</p>
+      <span class="mod2-go">Jugar ahora →</span>
     </a>
-    <a class="mod2" href="referencia.html">
-      <span class="mod2-ico" aria-hidden="true">📋</span>
-      <span class="mod2-tag">Recurso</span>
-      <h3>Hoja de referencia</h3>
-      <p>Prefijos, multiplicadores, prioridad de grupos, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave. Imprimible.</p>
-      <span class="mod2-go">Abrir →</span>
-    </a>
-    <a class="mod2" href="isomeria.html">
+    <div class="mods2-fase" style="--fc:#7c3aed"><span class="mf-n">Fase 3</span><b>Más allá del nombre</b><span class="mf-s">Isomería y reacciones</span></div>
+    <a style="--fc:#7c3aed" class="mod2 mod2-f" href="isomeria.html">
       <span class="mod2-ico" aria-hidden="true">🔀</span>
       <span class="mod2-tag">Fase 3 · Parada 1</span>
       <h3>Isomería</h3>
       <p>Misma fórmula, distinta molécula: isómeros de cadena, posición y función, cis/trans y carbono quiral, con práctica y ejemplos de la vida diaria.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="orbitales.html">
+    <a style="--fc:#7c3aed" class="mod2 mod2-f" href="reacciones.html">
+      <span class="mod2-ico" aria-hidden="true">🧪</span>
+      <span class="mod2-tag">Fase 3 · Parada 2</span>
+      <h3>Reacciones orgánicas</h3>
+      <p>42 reacciones en 10 pestañas: condiciones, mecanismo paso a paso, ejemplos y práctica rápida. Última parada de la ruta (Fase 3), junto con el juego completo.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <div class="mods2-fase" style="--fc:#0f766e"><span class="mf-n">Fase 4</span><b>Química de la vida y del ambiente</b><span class="mf-s">Estructura, propiedades y contexto</span></div>
+    <a style="--fc:#0f766e" class="mod2 mod2-f" href="orbitales.html">
       <span class="mod2-ico" aria-hidden="true">🌈</span>
       <span class="mod2-tag">Fase 4 · Parada 1</span>
       <h3>Orbitales moleculares y aromaticidad</h3>
       <p>Enlazante y antienlazante, orden de enlace con un diagrama que llenas tú, el benceno con datos de energía y por qué la zanahoria es naranja.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="propiedades.html">
+    <a style="--fc:#0f766e" class="mod2 mod2-f" href="propiedades.html">
       <span class="mod2-ico" aria-hidden="true">💧</span>
       <span class="mod2-tag">Fase 4 · Parada 2</span>
       <h3>Fuerzas intermoleculares y propiedades</h3>
       <p>London, dipolo-dipolo y puentes de hidrógeno; predice puntos de ebullición y solubilidades, y un laboratorio de datos con hipótesis, gráfica y margen de error.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="biomoleculas.html">
+    <a style="--fc:#0f766e" class="mod2 mod2-f" href="biomoleculas.html">
       <span class="mod2-ico" aria-hidden="true">🧬</span>
       <span class="mod2-tag">Fase 4 · Parada 3</span>
       <h3>Biomoléculas</h3>
       <p>Carbohidratos, lípidos, proteínas y ácidos nucleicos: condensación e hidrólisis animadas, enzimas, metabolismo y la energía de tus alimentos.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
-    <a class="mod2" href="ambiente.html">
+    <a style="--fc:#0f766e" class="mod2 mod2-f" href="ambiente.html">
       <span class="mod2-ico" aria-hidden="true">🌎</span>
       <span class="mod2-tag">Fase 4 · Parada 4</span>
       <h3>Química orgánica y ambiente</h3>
       <p>Petróleo, cálculo del CO₂ de cada combustible, plásticos, CFC y ozono, plaguicidas, biocombustibles y química verde.</p>
+      <span class="mod2-go">Abrir →</span>
+    </a>
+    <div class="mods2-fase" style="--fc:#0e7490"><span class="mf-n">Recursos</span><b>Para tener a mano</b><span class="mf-s">En cualquier fase</span></div>
+    <a class="mod2" href="referencia.html">
+      <span class="mod2-ico" aria-hidden="true">📋</span>
+      <span class="mod2-tag">Recurso</span>
+      <h3>Hoja de referencia</h3>
+      <p>Prefijos, multiplicadores, prioridad de grupos, sustituyentes (nombre tradicional vs. IUPAC) y reglas clave. Imprimible.</p>
       <span class="mod2-go">Abrir →</span>
     </a>
     <a class="mod2" href="docente.html">
@@ -839,7 +850,7 @@ function tourRender(){
 // La portada presenta la ruta como una molécula en fórmula de esqueleto,
 // inspirada en el menú átomo de IonNom. La cadena principal (C1…C8) es la
 // ruta recomendada, numerada como en la IUPAC y doblada en dos filas; sus
-// paradas se agrupan en las 3 fases de window.CN_FASES (site-ui.js, la misma
+// paradas se agrupan en las 4 fases de window.CN_FASES (site-ui.js, la misma
 // lista que dibuja la barra de fases de cada página). Las ramificaciones son
 // recursos de apoyo; el doble enlace dorado (color de las insaturaciones)
 // entra a la parada que sigue; el grupo funcional (color ④) es el progreso.
@@ -849,7 +860,7 @@ function tourRender(){
 document.addEventListener('DOMContentLoaded',function(){
   var svg=document.getElementById('mol-svg'),FASES=window.CN_FASES; if(!svg||!FASES) return;
   var NS='http://www.w3.org/2000/svg';
-  var Q={1:'¿Por qué el carbono forma millones de compuestos y cómo se organizan sus cadenas?',2:'¿Cómo se lee y se escribe el nombre IUPAC de cualquier molécula orgánica?',3:'¿Qué pasa cuando dos moléculas tienen la misma fórmula, y cómo se transforman unas en otras?'};
+  var Q={1:'¿Por qué el carbono forma millones de compuestos y cómo se organizan sus cadenas?',2:'¿Cómo se lee y se escribe el nombre IUPAC de cualquier molécula orgánica?',3:'¿Qué pasa cuando dos moléculas tienen la misma fórmula, y cómo se transforman unas en otras?',4:'¿Qué explica la estructura de las moléculas orgánicas sobre la vida y el ambiente?'};
   var DESC={
     'carbono.html':'Configuración, promoción electrónica, sp³ / sp² / sp en 3D y enlaces σ y π.',
     'tipos-carbono.html':'Primario, secundario, terciario y cuaternario, con un clasificador interactivo.',
@@ -858,20 +869,25 @@ document.addEventListener('DOMContentLoaded',function(){
     'grupos.html':'Los 19 grupos con su prioridad IUPAC, estructuras y más de 200 ejercicios.',
     'juego.html':'Preguntas cronometradas: opción múltiple, arrastrar partes, escribir y construir.',
     'isomeria.html':'De cadena, posición y función, cis/trans (gira el enlace en 3D) y carbono quiral.',
-    'reacciones.html':'42 reacciones con mecanismo paso a paso; luego juega «Nomenclatura + reacciones».'
+    'reacciones.html':'42 reacciones con mecanismo paso a paso; luego juega «Nomenclatura + reacciones».',
+    'orbitales.html':'Forma una molécula de H₂, llena diagramas de orbitales, aromaticidad y color.',
+    'propiedades.html':'Fuerzas intermoleculares, simulación de evaporación y laboratorio de datos.',
+    'biomoleculas.html':'Carbohidratos, lípidos, proteínas, ADN y enzimas en acción.',
+    'ambiente.html':'Combustibles y CO₂, plásticos, ozono y simulación del efecto invernadero.'
   };
-  var JUEGO={1:[['carbono','⚛️ Los 3 temas'],['hibridacion','Hibridación'],['tipos_carbono','Tipos de C'],['cadenas','Cadenas']],2:[['retos','🧠 Retos de nomenclatura']],3:[['isomeria','🔀 Isomería']]};
+  var JUEGO={1:[['carbono','⚛️ Los 3 temas'],['hibridacion','Hibridación'],['tipos_carbono','Tipos de C'],['cadenas','Cadenas']],2:[['retos','🧠 Retos de nomenclatura']],3:[['isomeria','🔀 Isomería']],4:[['fase4','🌿 Fase 4 completa'],['orbitales_mol','Orbitales'],['fuerzas_inter','Fuerzas'],['biomoleculas','Biomoléculas'],['quimica_ambiente','Ambiente']]};
   // Posiciones: la cadena se dobla en dos filas (C1→C5 arriba, C6→C8 de vuelta)
-  var POS=[[70,214],[160,162],[250,214],[340,162],[430,214],[430,318],[340,370],[250,318]];
-  var LBL=['b','b','b','b','b','r','t','b'];
+  // 12 paradas: la cadena se dobla en tres filas (C1→C5, C6→C10 de vuelta, C11→C12)
+  var POS=[[70,214],[160,162],[250,214],[340,162],[430,214],[430,318],[340,370],[250,318],[160,370],[70,318],[70,422],[160,474]];
+  var LBL=['b','b','b','b','b','r','t','b','b','l','l','b'];
   var AT=[],route=[];
   FASES.forEach(function(f){f.st.forEach(function(s){var i=route.length,a={id:s.id,g:'f'+f.n,f:f,r:i+1,x:POS[i][0],y:POS[i][1],e:s.e,l:s.l,t:s.t,d:DESC[s.id]||'',lp:LBL[i]};route.push(a);AT.push(a);});});
   var GR={ra:{t:'Ramificaciones',c:'#0891b2',n:'① RAMIFICACIONES · APOYO',q:'Recursos que cuelgan de la cadena: tenlos a mano en cualquier momento de la ruta.'},fg:{t:'Tu progreso',c:'#9a4a78',n:'④ GRUPO FUNCIONAL · TU PROGRESO'}};
   FASES.forEach(function(f){GR['f'+f.n]={t:f.t,c:f.c,n:'FASE '+f.n+' · '+f.sub.toUpperCase(),q:Q[f.n],fase:f};});
   AT.push({id:'referencia.html',g:'ra',x:160,y:58,e:'📋',l:'Referencia',t:'Hoja de referencia',d:'Prefijos, multiplicadores, prioridad de grupos y reglas clave. Imprimible.',lp:'t'});
-  AT.push({id:'docente.html',g:'ra',x:340,y:474,e:'📘',l:'Docente',t:'Guías, talleres y evaluaciones',d:'Para el docente: guías, talleres y evaluaciones tipo Saber 11 de todos los temas, también los de la Fase 1.',lp:'b'});
-  AT.push({id:'_fg',g:'fg',x:160,y:370,l:'Progreso',lp:'b'});
-  var BEST={carbono:'Fase 1: El carbono',hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Nomenclatura + reacciones',constructor:'Constructor molecular',isomeria:'Isomería'};
+  AT.push({id:'docente.html',g:'ra',x:430,y:422,e:'📘',l:'Docente',t:'Guías, talleres y evaluaciones',d:'Para el docente: guías, talleres y evaluaciones tipo Saber 11 de todos los temas, también los de la Fase 1.',lp:'b'});
+  AT.push({id:'_fg',g:'fg',x:262,y:526,l:'Progreso',lp:'r'});
+  var BEST={fase4:'Fase 4: Vida y ambiente',carbono:'Fase 1: El carbono',hidrocarburos:'Hidrocarburos',oxigenados:'Oxigenados',nitrogenados:'Nitrogenados',completo:'Nomenclatura + reacciones',constructor:'Constructor molecular',isomeria:'Isomería'};
   var visitas={}, mejores=[];
   try{ visitas=JSON.parse(localStorage.getItem('chromanom_visitas')||'{}')||{}; }catch(e){}
   try{
@@ -921,8 +937,8 @@ document.addEventListener('DOMContentLoaded',function(){
       txt(el('text',{x:a.r?-22:-24,y:-24.5,'text-anchor':'middle',class:'at-loc'},g),a.r?'C'+a.r:'R');
       if(visitas[a.id]){ el('circle',{cx:22,cy:-22,r:9,fill:'#15803d',stroke:'#fff','stroke-width':2.5},g); txt(el('text',{x:22,y:-18,'text-anchor':'middle','font-size':11,'font-weight':900,fill:'#fff'},g),'✓'); }
     }
-    var lp=a.lp,lx=lp==='r'?38:0,ly=lp==='t'?-46:lp==='r'?5:(fg?58:50);
-    txt(el('text',{x:lx,y:ly,'text-anchor':lp==='r'?'start':'middle',class:'at-lbl'},g),a.l);
+    var lp=a.lp,lx=lp==='r'?(fg?46:38):lp==='l'?-38:0,ly=lp==='t'?-46:(lp==='r'||lp==='l')?5:(fg?58:50);
+    txt(el('text',{x:lx,y:ly,'text-anchor':lp==='r'?'start':lp==='l'?'end':'middle',class:'at-lbl'},g),a.l);
     function act(){ elegir(a.g,a.id); }
     g.addEventListener('click',act);
     g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); act(); } });
@@ -930,7 +946,7 @@ document.addEventListener('DOMContentLoaded',function(){
     a.cx=a.x; a.cy=a.y;
   });
   // viewBox ajustado a la molécula (con espacio para las etiquetas)
-  svg.setAttribute('viewBox','10 -14 560 550');
+  svg.setAttribute('viewBox','-74 -14 634 612');
 
   // ── Vibración molecular: cada átomo oscila un poco y los enlaces lo siguen ──
   var pausa=false, t0=performance.now();
@@ -1033,10 +1049,11 @@ document.addEventListener('DOMContentLoaded',function(){
   b.hidden=false;
   b.addEventListener('click',function(){window.CN_NARRAR.leer(
     '¡Hola! Bienvenido a ChromaNom, tu herramienta para aprender química orgánica. '+
-    'El menú tiene forma de molécula. La cadena principal es tu ruta, numerada como en la IUPAC, y tiene tres fases. '+
+    'El menú tiene forma de molécula. La cadena principal es tu ruta, numerada como en la IUPAC, y tiene cuatro fases. '+
     'En la fase uno, el carbono, verás por qué el carbono forma cuatro enlaces y cómo se hibrida, los tipos de carbono y cómo se clasifican las cadenas. '+
     'En la fase dos aprenderás a nombrar compuestos orgánicos con el método de cuatro colores: sustituyentes, cadena principal, insaturaciones y grupo funcional, y lo pondrás a prueba en el Juego. '+
     'En la fase tres estudiarás la isomería y las reacciones orgánicas. '+
+    'En la fase cuatro verás la química de la vida y del ambiente: orbitales moleculares, fuerzas intermoleculares, biomoléculas y el impacto ambiental de los compuestos orgánicos. '+
     'El doble enlace dorado te muestra cuál es tu siguiente parada, y el grupo funcional, al final de la cadena, muestra tu progreso. '+
     'Empieza por el carbono uno. ¡Mucho éxito en tu aprendizaje!',b);});
 });

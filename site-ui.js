@@ -61,6 +61,11 @@
         '#bnav-sheet.open{display:block;position:fixed;left:0;right:0;bottom:0;z-index:1002;background:#fff;'+
           'border-radius:18px 18px 0 0;padding:14px 16px calc(18px + env(safe-area-inset-bottom));'+
           'box-shadow:0 -10px 30px rgba(0,0,0,.25);font-family:Outfit,system-ui,sans-serif;color:#0d2d42}'+
+        '#bnav-sheet.open{max-height:86vh;overflow-y:auto}'+
+        '#bnav-sheet .bf{border-left:5px solid var(--fc);padding-left:10px;margin-bottom:10px}'+
+        '#bnav-sheet .bf-h{font-size:.82rem;color:var(--fc);margin:2px 0 6px}'+
+        '#bnav-sheet .bf a{padding:9px 12px;min-height:44px;font-size:.92rem;margin-bottom:6px}'+
+        '#bnav-sheet .bf a.on{background:#dbeafe}'+
         '#bnav-sheet h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#2a3f52;margin:4px 0 10px}'+
         '#bnav-sheet a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;'+
           'text-decoration:none;color:#0d2d42;font-weight:700;font-size:1rem;background:#f0f7ff;margin-bottom:8px;min-height:48px}'+
@@ -93,7 +98,7 @@
     var nav=document.createElement('nav');
     nav.id='bnav';
     nav.setAttribute('aria-label','Menú principal');
-    var enMas=MAS.some(function(m){return m.href===page;})||page==='tipos-carbono.html'||page==='cadenas.html';
+    var enMas=page!=='index.html'&&!ITEMS.some(function(it){return it.href===page;});
     nav.innerHTML=ITEMS.map(function(it){
       var on=(it.href===page)||(page===''&&it.href==='index.html');
       return '<a href="'+it.href+'"'+(on?' class="on" aria-current="page"':'')+'><span class="bi" aria-hidden="true">'+it.ico+'</span><span class="bt">'+it.txt+'</span></a>';
@@ -104,8 +109,11 @@
     var back=document.createElement('div'); back.id='bnav-backdrop';
     var sheet=document.createElement('div'); sheet.id='bnav-sheet';
     sheet.setAttribute('role','dialog'); sheet.setAttribute('aria-label','Más opciones');
-    sheet.innerHTML='<h3>Más herramientas</h3>'+
-      MAS.map(function(m){return '<a href="'+m.href+'"><span aria-hidden="true">'+m.ico+'</span>'+m.txt+'</a>';}).join('')+
+    var F=window.CN_FASES||[];
+    sheet.innerHTML='<h3>La ruta por fases</h3>'+F.map(function(f){return '<div class="bf" style="--fc:'+f.c+'"><div class="bf-h"><b>Fase '+f.n+'</b> · '+f.t+'</div>'+
+        f.st.map(function(x){return '<a href="'+x.id+'"'+(x.id===page?' class="on"':'')+'><span aria-hidden="true">'+x.e+'</span>'+x.t+'</a>';}).join('')+'</div>';}).join('')+
+      '<h3 style="margin-top:12px">Recursos</h3>'+
+      MAS.filter(function(m){return /referencia|docente/.test(m.href);}).map(function(m){return '<a href="'+m.href+'"><span aria-hidden="true">'+m.ico+'</span>'+m.txt+'</a>';}).join('')+
       '<h3 style="margin-top:14px">Tamaño del texto</h3>'+
       '<div class="tz"><button type="button" data-tz="tz-minus" aria-label="Reducir texto">A−</button>'+
       '<span id="bnav-tz-label"></span>'+
@@ -201,18 +209,15 @@ window.CN_FASES=[
     {id:'juego.html',e:'🎮',t:'Juego: nomenclatura',l:'Juego'}]},
   {n:3,t:'Más allá del nombre',sub:'Isomería y reacciones',c:'#7c3aed',st:[
     {id:'isomeria.html',e:'🔀',t:'Isomería',l:'Isomería'},
-    {id:'reacciones.html',e:'🧪',t:'Reacciones orgánicas',l:'Reacciones'}]}
-];
-/* Fase 4 (grado 11.º, aprendizajes priorizados de la SED): va aparte porque
-   la molécula-menú de la portada está dibujada para las 8 paradas de las
-   fases 1 a 3. Sí entra en la barra de fases y en «Siguiente parada». */
-window.CN_FASES_EXTRA=[
+    {id:'reacciones.html',e:'🧪',t:'Reacciones orgánicas',l:'Reacciones'}]},
   {n:4,t:'Química de la vida y del ambiente',sub:'Estructura, propiedades y contexto',c:'#0f766e',st:[
     {id:'orbitales.html',e:'🌈',t:'Orbitales moleculares y aromaticidad',l:'Orbitales'},
     {id:'propiedades.html',e:'💧',t:'Fuerzas intermoleculares y propiedades',l:'Propiedades'},
     {id:'biomoleculas.html',e:'🧬',t:'Biomoléculas',l:'Biomoléculas'},
     {id:'ambiente.html',e:'🌎',t:'Química orgánica y ambiente',l:'Ambiente'}]}
 ];
+// Antes la Fase 4 iba aparte; ahora está en CN_FASES (portada y barra de fases).
+window.CN_FASES_EXTRA=[];
 (function(){
   var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
   var F=window.CN_FASES.concat(window.CN_FASES_EXTRA||[]),ruta=[];F.forEach(function(f){f.st.forEach(function(s){s.f=f;ruta.push(s);});});
@@ -234,6 +239,34 @@ window.CN_FASES_EXTRA=[
       sig.innerHTML=(pv?'<a class="fs-prev" href="'+pv.id+'">← '+pv.e+' '+pv.t+'</a>':'<a class="fs-prev" href="index.html">← Inicio</a>')+
         (nx?'<a class="fs-next" href="'+nx.id+'" style="--fc:'+nx.f.c+'"><small>'+(nx.f!==f?'Comienza la fase '+nx.f.n+' · '+nx.f.t:'Siguiente parada')+'</small>'+nx.e+' '+nx.t+' →</a>':'<a class="fs-next" href="index.html#molecula"><small>¡Terminaste la ruta!</small>🏁 Ver mi molécula →</a>');
     }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',pinta);else pinta();
+})();
+
+
+/* ── Menú superior ordenado y marcado por fases ─────────────────────────────
+   Cada enlace del menú lleva una barra con el color de su fase (y el título
+   «Fase N»), en el orden de la ruta: Inicio · Fase 1 · Fase 2 · Fase 3 ·
+   Fase 4 · recursos. Las páginas de una fase que no tienen enlace propio
+   (Tipos de C, Cadenas, Propiedades, Biomoléculas, Ambiente) marcan como
+   activo el enlace de su fase. */
+(function(){
+  var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  function pinta(){
+    var cont=document.querySelector('.site-nav .nav-links');if(!cont||!window.CN_FASES)return;
+    var F=window.CN_FASES,fase={},orden={};
+    F.forEach(function(f,i){f.st.forEach(function(x,j){fase[x.id]=f;orden[x.id]=(f.n*10)+j;});});
+    var links=[].slice.call(cont.querySelectorAll('a.nav-link'));if(!links.length)return;
+    var faseDe=function(h){return fase[h]||null;};
+    var paginaFase=fase[page];
+    links.forEach(function(a){var h=(a.getAttribute('href')||'').toLowerCase(),f=faseDe(h);
+      a.dataset.ord=h==='index.html'?0:f?orden[h]:100+(h==='referencia.html'?1:2);
+      if(f){a.style.boxShadow='inset 0 -3px 0 '+f.c;a.title='Fase '+f.n+' · '+f.t;
+        if(paginaFase&&paginaFase===f&&!links.some(function(x){return (x.getAttribute('href')||'').toLowerCase()===page;})&&h===f.st[0].id)a.classList.add('active');}});
+    links.sort(function(a,b){return a.dataset.ord-b.dataset.ord;}).forEach(function(a){cont.appendChild(a);});
+    // Las páginas sueltas de una fase cuya primera parada no tiene enlace
+    if(paginaFase&&!cont.querySelector('a.active')){var l=links.filter(function(a){var f=faseDe((a.getAttribute('href')||'').toLowerCase());return f===paginaFase;})[0];if(l)l.classList.add('active');}
+    var btn=cont.querySelector('#pwa-install-btn');if(btn)cont.appendChild(btn);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',pinta);else pinta();
 })();

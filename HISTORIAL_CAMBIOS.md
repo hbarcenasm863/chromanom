@@ -7,6 +7,44 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (154) — La Fase 4 entra a la molécula de la portada y el menú se ordena por fases
+
+### Contexto
+El docente notó en el celular que la molécula de la portada no tenía la
+Fase 4 y pidió que, si el sitio se recorre por fases, todas quedaran bien
+diferenciadas en el menú y en la molécula.
+
+### Cambios
+- `site-ui.js`:
+  - La Fase 4 (Orbitales, Propiedades, Biomoléculas, Ambiente) pasa a ser
+    parte de `CN_FASES`; `CN_FASES_EXTRA` queda vacío.
+  - Menú superior: los enlaces se ordenan como la ruta (Inicio · Fase 1 ·
+    Fase 2 · Fase 3 · Fase 4 · recursos; el Juego queda en la Fase 2) y cada
+    uno lleva una barra con el color de su fase (azul, verde, morado,
+    verde azulado) y el título «Fase N». Las páginas de una fase sin enlace
+    propio marcan como activo el enlace de su fase.
+  - Hoja «Más» del celular: ahora muestra la ruta completa agrupada por
+    fases, con su color, y aparte los recursos (Referencia y Docente).
+- `index.html`:
+  - Molécula con **12 paradas** (C1 a C12) en tres filas; la Fase 4 ocupa
+    C9 a C12 con su color, y el grupo funcional de progreso queda al final
+    (cuenta de 0/12). Pregunta guía, descripciones y temas del Juego de la
+    Fase 4 en su panel. Docente se movió para dejar espacio.
+  - Fichas de fase y panel de progreso con la Fase 4.
+  - La lista «Todo lo que puedes hacer» quedó agrupada por fases, con
+    encabezado y color de cada una, y al final los recursos.
+  - Textos «3 fases» → «4 fases» (también en la narración).
+- `sw.js`: `chromanom-v55`.
+
+### Pruebas
+- Portada sin errores en PC y en celular (Pixel 7); la molécula completa se
+  ve sin cortes y el panel de la Fase 4 muestra sus cuatro paradas.
+
+### Pasos manuales
+- Ninguno.
+
+---
+
 ## 2026-11-05 (153) — Fase 4: simulaciones en canvas que se mueven
 
 ### Contexto
