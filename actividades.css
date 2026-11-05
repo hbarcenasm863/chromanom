@@ -3,7 +3,7 @@
    (docente.html, laberinto.js, crucigrama.js). Adaptado del generador de
    IonNom: mismas hojas, modo jugar/resolver, clave e impresión.
    ════════════════════════════════════════════════════════════════════════ */
-#panel-lab,#panel-cz,#lab-print-root,#cz-print-root{
+#panel-lab,#panel-cz,#panel-ah,#lab-print-root,#cz-print-root,#ah-print-root{
   --nav:#0d4a73;--brd:#d0e6f5;--surf:#fff;--surf2:#f1f5f9;--tx:#0d2d42;--tx2:#3d5166;--dimmer:#5b6b7b;
   --sans:'Outfit','Segoe UI',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;--mono:'JetBrains Mono','Courier New',monospace;
   --r:16px;--rs:10px;--sh:0 1px 2px rgba(13,34,51,.06),0 4px 14px rgba(13,34,51,.06);
@@ -309,3 +309,61 @@
 @page lab{size:letter landscape;margin:.3in!important;@bottom-center{content:none}}
 @page cz{size:letter;margin:0!important;@bottom-center{content:none}}
 @media print{body.cz-printing .cz-hoja{page:cz}}
+
+/* ── Ahorcado: hoja carta y modo clase ── */
+.ah-stage{overflow-x:auto;padding:6px 0}
+.ah-hoja{width:816px;min-height:1056px;background:#fff;color:#0d2d42;font-family:var(--sans);padding:32px 42px 28px;box-sizing:border-box;margin:0 auto 18px;box-shadow:0 2px 10px rgba(0,0,0,.12);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ah-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:2px solid #0d4a73;padding-bottom:8px;margin-bottom:8px}
+.ah-cab2{justify-content:flex-start}
+.ah-tit{font-family:var(--serif,Georgia,serif);font-size:1.45rem;font-weight:800;color:#0d4a73}
+.ah-sub{font-size:.78rem;color:#4f6d88;font-weight:700}
+.ah-est{display:flex;align-items:flex-end;gap:6px;font-size:.8rem;font-weight:700;color:#4f6d88}
+.ah-est i{display:inline-block;width:190px;border-bottom:1px solid #94a3b8}.ah-est i.c{width:70px}
+.ah-ins{font-size:.8rem;line-height:1.4;margin:6px 0 10px}
+.ah-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ah-card{border:1.5px solid #cbd5e1;border-radius:10px;padding:8px 10px;break-inside:avoid;page-break-inside:avoid}
+.ah-card-top{display:flex;gap:8px;align-items:flex-start}
+.ah-num{font-weight:900;color:#0d4a73;font-size:1.05rem;min-width:1.1em}
+.ah-pat{width:64px;height:58px;flex:0 0 auto}
+.ah-pis{font-size:.74rem;line-height:1.32;flex:1}
+.ah-pis>div{margin-bottom:2px}
+.ah-len{font-weight:800;color:#b45309;font-size:.72rem}
+.ah-pal{display:flex;flex-wrap:wrap;gap:3px;margin:8px 0 6px}
+.ah-box{width:21px;height:24px;border:1.5px solid #64748b;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;font:800 .9rem/1 var(--mono,monospace);color:#0d4a73}
+.ah-box.ah-fija{border-color:transparent}
+.ah-sp{width:10px}
+.ah-abc{display:flex;flex-wrap:wrap;gap:2px;font:700 .66rem/1 var(--mono,monospace);color:#64748b}
+.ah-abc span{width:13px;text-align:center}
+#ah-print-root{display:none}
+@page ah{size:letter;margin:0}
+@media print{
+  body.ah-printing .ah-hoja{page:ah}
+  body.ah-printing>*:not(#ah-print-root){display:none!important}
+  body.ah-printing #ah-print-root{display:block!important}
+  body.ah-printing .ah-hoja{box-shadow:none;margin:0;break-after:page;page-break-after:always;min-height:0;height:1055px;overflow:hidden}
+  body.ah-printing .ah-hoja:last-child{break-after:auto;page-break-after:auto}
+}
+.ahc{background:#fff;border:2px solid #0d4a73;border-radius:16px;padding:18px 22px;color:#0d2d42}
+.ahc:fullscreen{overflow:auto;border:none;border-radius:0;padding:28px 40px;font-size:1.25rem}
+.ahc-bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:10px;font-size:1rem}
+.ahc-eq button,.ahc-fs{border:1.5px solid #0d4a73;background:#eef6fb;color:#0d4a73;border-radius:8px;padding:4px 10px;font-weight:800;cursor:pointer}
+.ahc-fs{margin-left:auto}
+.ahc-main{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+.ahc-svg{width:220px;max-width:40vw;height:auto;background:#f8fafc;border-radius:14px}
+.ahc-info{flex:1 1 300px;font-size:1.15em;line-height:1.45}
+.ahc-fallos{color:#475569;margin-bottom:6px}
+.ahc-pista{margin-bottom:6px}
+.ahc-btn{border:1.5px solid #d4a843;background:#fff8e6;color:#7a5a00;border-radius:10px;padding:9px 16px;font-weight:800;cursor:pointer;font-size:1rem;margin:4px 8px 0 0}
+.ahc-sig,.ahc-otra{background:#0d4a73;color:#fff;border-color:#0d4a73}
+.ahc-pal{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 8px;margin:18px 0}
+.ahc-l{width:1.5em;height:1.7em;border-bottom:5px solid #0d4a73;display:inline-flex;align-items:flex-end;justify-content:center;font:900 2.4rem/1.1 var(--mono,monospace);color:#0d2d42}
+.ahc-l.falto{color:#dc2626}
+.ahc-sp{width:1.2em}
+.ahc-msg{text-align:center;font-weight:800;font-size:1.2em;margin:4px 0 12px}
+.ahc-msg.ok{color:#15803d}.ahc-msg.err{color:#b91c1c}
+.ahc-tec{display:grid;grid-template-columns:repeat(14,1fr);gap:6px}
+.ahc-tec button{min-height:52px;border:2px solid #cbd5e1;border-radius:10px;background:#fff;font-weight:900;font-size:1.3rem;color:#0d2d42;cursor:pointer}
+.ahc-tec button.si{background:#dcfce7;border-color:#16a34a;color:#166534}
+.ahc-tec button.no{background:#fee2e2;border-color:#fca5a5;color:#991b1b;opacity:.7}
+.ahc-acc{margin-top:14px;text-align:center}
+@media(max-width:700px){.ahc-tec{grid-template-columns:repeat(9,1fr)}.ahc-l{font-size:1.6rem}.ahc-tec button{min-height:42px;font-size:1rem}}

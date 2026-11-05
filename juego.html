@@ -194,6 +194,26 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .nivel-card.pr .nivel-icon{background:linear-gradient(135deg,#bbf7d0,#166534)}
 .nivel-card.tr .nivel-icon{background:linear-gradient(135deg,#fecaca,#b91c1c)}
 .nivel-card.f4 .nivel-icon{background:linear-gradient(135deg,#99f6e4,#0f766e)}
+.nivel-card.ah .nivel-icon{background:linear-gradient(135deg,#fde68a,#b45309)}
+/* Ahorcado */
+.ah-wrap{display:flex;gap:12px;align-items:flex-start;margin:6px 0 10px}
+.ah-svg{width:150px;height:auto;flex:0 0 auto;background:#f8fafc;border-radius:12px}
+.ah-info{flex:1 1 200px;min-width:0}
+.ah-fallos{font-size:.85rem;color:var(--dim,#475569);margin-bottom:6px}
+.ah-pistas{margin:0 0 8px;padding:0;list-style:none;font-size:.92rem;line-height:1.4}
+.ah-pistas li{margin-bottom:4px}
+.ah-pista-btn{border:1.5px solid #d4a843;background:#fff8e6;color:#7a5a00;border-radius:10px;padding:7px 12px;font-weight:700;cursor:pointer;font-size:.88rem;font-family:inherit}
+.ah-palabra{display:flex;flex-wrap:wrap;gap:6px 5px;justify-content:center;margin:8px 0 14px}
+.ah-l{width:1.6em;height:1.9em;border-bottom:3px solid #0d4a73;display:inline-flex;align-items:flex-end;justify-content:center;font:800 1.25rem/1.2 var(--mono,monospace);color:#0d2d42}
+.ah-l.ah-falto{color:#dc2626}
+.ah-esp{width:1.2em}
+.ah-teclado{display:grid;grid-template-columns:repeat(9,1fr);gap:5px}
+.ah-k{min-height:40px;border:1.5px solid #cbd5e1;border-radius:9px;background:#fff;font-weight:800;font-size:1rem;cursor:pointer;color:#0d2d42;font-family:inherit}
+.ah-k:disabled{cursor:default}
+.ah-k.ah-si{background:#dcfce7;border-color:#16a34a;color:#166534}
+.ah-k.ah-no{background:#fee2e2;border-color:#fca5a5;color:#991b1b;opacity:.7}
+.qt-ah{background:#fff4dc;color:#92400e}
+@media (max-width:420px){.ah-svg{width:84px}.ah-pistas{font-size:.85rem}.ah-l{width:1.3em;font-size:1.05rem}.ah-k{min-height:38px;font-size:.92rem}}
 /* Encabezado de cada fase en la portada (mismos colores que CN_FASES). */
 .fase-titulo{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin:14px 0 2px;padding:6px 0 6px 10px;border-left:4px solid var(--fc,#1a6ea8);text-align:left}
 .fase-titulo:first-child{margin-top:0}
@@ -990,11 +1010,16 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
         <div class="nivel-icon">🌎</div>
         <div><div class="nivel-name">Química orgánica y ambiente</div><div class="nivel-desc">Combustión y CO₂, plásticos, ozono, plaguicidas y biocombustibles</div><div class="nivel-count">23 preguntas · 20 por sesión</div></div>
       </button>
+      <div class="fase-titulo" style="--fc:#b45309"><span class="ft-n">Especial</span><span class="ft-t">Ahorcado</span><span class="ft-s">Palabras clave de las cuatro fases, con 3 pistas</span></div>
+      <button class="nivel-card ah" onclick="openLevelModal('ahorcado')">
+        <div class="nivel-icon">🪢</div>
+        <div><div class="nivel-name">Ahorcado con 3 pistas</div><div class="nivel-desc">Adivina la palabra letra por letra; pide pistas si las necesitas</div><div class="nivel-count" id="stat-ah-count">20 palabras por sesión</div></div>
+      </button>
     </div>
     <div class="portada-stats">
       <div class="ps"><div class="ps-n" id="stat-banco">1248</div><div class="ps-l">En el banco</div></div>
       <div class="ps"><div class="ps-n">60s</div><div class="ps-l">Por pregunta</div></div>
-      <div class="ps"><div class="ps-n">6</div><div class="ps-l">Tipos de pregunta</div></div>
+      <div class="ps"><div class="ps-n">7</div><div class="ps-l">Tipos de pregunta</div></div>
     </div>
   </div>
 </div>
@@ -1159,6 +1184,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 <script src="fundamentos.js"></script>
 <script src="temas-extra.js"></script>
 <script src="temas-11.js"></script>
+<script src="ahorcado-datos.js"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -2488,7 +2514,7 @@ let history=[];
 // startGame()/retryErrors() siempre reasignan este objeto (con 'rxnq'
 // incluido) antes de cargar cualquier pregunta — este valor inicial solo
 // existe para que la variable no quede undefined antes del primer juego.
-let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
 // true durante una ronda de "Repetir errores": showResults() no debe usar
@@ -2940,6 +2966,9 @@ function startGame(){
   } else if(currentLevel.startsWith('constructor_')){
     const _fam=CONSTRUCTOR_FAMILIA_TOPIC[currentLevel]||currentLevel.slice('constructor_'.length);
     pool=QBANK.filter(q=>q.type==='build'&&q.topic===_fam);
+  } else if(currentLevel==='ahorcado'){
+    pool=(window.BANCO_AHORCADO||[]).map(w=>({type:'ahorcado',topic:'ahorcado',palabra:w[0],pistas:w.slice(2,5),
+      q:'Adivina la palabra letra por letra. Tienes 6 fallos y hasta 3 pistas.',ans:w[0],expl:w[4]}));
   } else if(currentLevel==='constructor'){
     pool=QBANK.filter(q=>q.type==='build'&&CONSTRUCTOR_FAMILIAS.includes(q.topic));
   } else {
@@ -2951,7 +2980,7 @@ function startGame(){
   questions=shuffle(pool).slice(0,n);
   qIdx=0; score=0; history=[];
   streak=0; bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
   writeAttempts=0;
   isRetryRound=false;
   _analyticsSent=false;
@@ -3021,6 +3050,71 @@ function setMolView(view){
   },140);
 }
 
+
+/* ── Ahorcado con 3 pistas ─────────────────────────────────────────────
+   Banco: ahorcado-datos.js (el mismo de la pestaña «Ahorcado» del
+   generador docente). Se ve la pista 1; se pueden pedir la 2 y la 3 (la
+   más reveladora). 6 fallos completan el muñeco. Puntaje: 10 si adivina
+   con 1 o 2 pistas, 5 si usó las 3. Las tildes no cuentan (la A descubre
+   también la Á); la Ñ es una letra aparte. */
+const AH_MAX_FALLOS=6;
+let AH=null;
+function ahBase(ch){return ch==='Ñ'?'Ñ':ch.normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function ahDibujo(f){
+  const p=['<circle cx="120" cy="52" r="14"/>','<line x1="120" y1="66" x2="120" y2="112"/>','<line x1="120" y1="78" x2="100" y2="98"/>',
+    '<line x1="120" y1="78" x2="140" y2="98"/>','<line x1="120" y1="112" x2="104" y2="140"/>','<line x1="120" y1="112" x2="136" y2="140"/>'];
+  return '<svg viewBox="0 0 180 160" class="ah-svg" role="img" aria-label="Fallos: '+f+' de '+AH_MAX_FALLOS+'">'
+    +'<g stroke="#64748b" stroke-width="4" stroke-linecap="round" fill="none"><line x1="20" y1="152" x2="100" y2="152"/><line x1="50" y1="152" x2="50" y2="12"/><line x1="50" y1="12" x2="120" y2="12"/><line x1="120" y1="12" x2="120" y2="38"/></g>'
+    +'<g stroke="#dc2626" stroke-width="4" stroke-linecap="round" fill="none">'+p.slice(0,f).join('')+'</g></svg>';
+}
+function iniciarAhorcado(q){
+  const pal=q.palabra.toUpperCase();
+  AH={q,palabra:pal,base:[...pal].map(ahBase).join(''),pistas:q.pistas,nPistas:1,fallos:0,usadas:new Set(),fin:false};
+  ahPintar();
+}
+function ahPintar(){
+  const area=document.getElementById('area-ahorcado');if(!area||!AH)return;
+  const hueco=[...AH.palabra].map(ch=>{
+    if(ch===' ')return '<span class="ah-esp"></span>';
+    if(!/[A-ZÁÉÍÓÚÜÑ]/.test(ch))return '<span class="ah-l">'+ch+'</span>';
+    const ok=AH.usadas.has(ahBase(ch))||AH.fin;
+    return '<span class="ah-l'+(AH.fin&&!AH.usadas.has(ahBase(ch))?' ah-falto':'')+'">'+(ok?ch:'')+'</span>';
+  }).join('');
+  const pistas=AH.pistas.slice(0,AH.nPistas).map((t,i)=>'<li><b>Pista '+(i+1)+':</b> '+t+'</li>').join('');
+  const teclas='ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('').map(l=>{const u=AH.usadas.has(l),en=AH.base.includes(l);
+    return '<button type="button" class="ah-k'+(u?(en?' ah-si':' ah-no'):'')+'" data-l="'+l+'"'+(u||AH.fin?' disabled':'')+'>'+l+'</button>';}).join('');
+  area.innerHTML='<div class="ah-wrap">'+ahDibujo(AH.fallos)+'<div class="ah-info"><div class="ah-fallos">Fallos: <b>'+AH.fallos+'</b> de '+AH_MAX_FALLOS+'</div><ul class="ah-pistas">'+pistas+'</ul>'
+    +(AH.nPistas<3&&!AH.fin?'<button type="button" class="ah-pista-btn">💡 Ver la pista '+(AH.nPistas+1)+' de 3'+(AH.nPistas===2?' (vale la mitad)':'')+'</button>':'')+'</div></div>'
+    +'<div class="ah-palabra">'+hueco+'</div><div class="ah-teclado">'+teclas+'</div>';
+  area.querySelectorAll('.ah-k').forEach(b=>b.addEventListener('click',()=>ahLetra(b.dataset.l)));
+  const pb=area.querySelector('.ah-pista-btn');if(pb)pb.addEventListener('click',()=>{if(AH&&!AH.fin&&AH.nPistas<3){AH.nPistas++;ahPintar();}});
+}
+function ahLetra(l){
+  if(!AH||AH.fin||answered||AH.usadas.has(l))return;
+  AH.usadas.add(l);
+  if(!AH.base.includes(l))AH.fallos++;
+  const completa=[...AH.palabra].every(ch=>!/[A-ZÁÉÍÓÚÜÑ]/.test(ch)||AH.usadas.has(ahBase(ch)));
+  if(completa)return ahTerminar(true);
+  if(AH.fallos>=AH_MAX_FALLOS)return ahTerminar(false);
+  ahPintar();
+}
+function ahTerminar(gano){
+  if(!AH||AH.fin||answered)return;
+  AH.fin=true;answered=true;stopTimer();
+  const q=questions[qIdx];
+  const pts=gano?(AH.nPistas<=2?10:5):0;
+  if(gano){score+=pts;typeStats[q.type].ok++;}
+  bumpStreak(gano);
+  ahPintar();
+  showFeedback(gano,'La palabra era <b>'+q.palabra+'</b>. '+q.expl,q.ans,pts);
+  history.push({type:q.type,ok:gano,ans:q.ans,given:gano?q.ans:'',topic:q.topic});
+}
+document.addEventListener('keydown',function(e){
+  if(!AH||AH.fin||answered||e.ctrlKey||e.metaKey||e.altKey)return;
+  const q=questions&&questions[qIdx];if(!q||q.type!=='ahorcado')return;
+  const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;
+  const k=(e.key||'').toUpperCase();if(/^[A-ZÑ]$/.test(k)){e.preventDefault();ahLetra(k);}
+});
 function loadQuestion(){
   // Detiene cualquier cronómetro de la pregunta anterior antes de seguir. Sin
   // esto, si loadQuestion() se llama dos veces seguidas sin que la pregunta de
@@ -3046,11 +3140,11 @@ function loadQuestion(){
   const area=document.getElementById('q-area');
   area.innerHTML='';
 
-  const typeBadge={mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura',rxnq:'⚗️ Reacción orgánica'};
-  const typeCls={mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build',rxnq:'qt-rxnq'};
+  const typeBadge={ahorcado:'🪢 Ahorcado',mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura',rxnq:'⚗️ Reacción orgánica'};
+  const typeCls={ahorcado:'qt-ah',mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build',rxnq:'qt-rxnq'};
 
   const isBuild=q.type==='build';
-  const isRxnQ=q.type==='rxnq';
+  const isRxnQ=q.type==='rxnq'||q.type==='ahorcado';
   // hasFm: solo true cuando MOLDES tiene un array (fórmula semidesarrollada lineal).
   // Los entries en formato ring ({chain,ring}) no generan toggle — la vista esqueletal
   // (M[mol]()) es la única representación visual correcta para moléculas cíclicas.
@@ -3080,6 +3174,7 @@ function loadQuestion(){
   else if(q.type==='write') html+=buildWrite(q);
   else if(q.type==='build') html+=buildBuild(q);
   else if(q.type==='rxnq') html+=buildRxnQ(q);
+  else if(q.type==='ahorcado') html+='<div id="area-ahorcado"></div>';
 
   html+=`<div class="feedback" id="feedback"></div>`;
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
@@ -3088,6 +3183,7 @@ function loadQuestion(){
   _fitFormula();
 
   if(q.type==='drag') initDrag(q);
+  if(q.type==='ahorcado') iniciarAhorcado(q);
   if(q.type==='write'){
     const inp=document.getElementById('write-inp');
     inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkWrite();});
@@ -3801,7 +3897,7 @@ function checkWrite(){
 // estudiantes reportaban "muy poco tiempo" en ese modo específico.
 function startTimer(){
   const q=questions[qIdx];
-  timeMax=(q&&q.type==='build')?90:60;
+  timeMax=(q&&q.type==='build')?90:(q&&q.type==='ahorcado')?180:60;
   timeLeft=timeMax;
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
@@ -6955,8 +7051,8 @@ function showResults(){
   document.getElementById('r-time').textContent=tout;
 
   // By type
-  const typeNames={mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
-  const typeCls={mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
+  const typeNames={ahorcado:'Ahorcado',mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
+  const typeCls={ahorcado:'rxnq',mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
   let rbHtml='';
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
@@ -7053,7 +7149,7 @@ function retryErrors(){
   if(errPool.length===0)return;
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
   isRetryRound=true;
   // Nueva sesión propia para la ronda de repaso: si se reutilizara _sessionId
   // de la partida anterior, sendAnalytics() la ignoraría (_analyticsSent ya

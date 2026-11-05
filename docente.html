@@ -433,6 +433,7 @@ body.sin-eval .solo-eval{display:none}
     <button type="button" role="tab" id="tab-evaluaciones" data-tab="evaluaciones" data-panel="gen" data-tipo="evaluacion" aria-controls="panel-gen" aria-selected="false" tabindex="-1">📝 Evaluaciones</button>
     <button type="button" role="tab" id="tab-laberintos" data-tab="laberintos" data-panel="lab" aria-controls="panel-lab" aria-selected="false" tabindex="-1">🧭 Laberintos</button>
     <button type="button" role="tab" id="tab-crucigramas" data-tab="crucigramas" data-panel="cz" aria-controls="panel-cz" aria-selected="false" tabindex="-1">🔤 Crucigramas</button>
+    <button type="button" role="tab" id="tab-ahorcado" data-tab="ahorcado" data-panel="ah" aria-controls="panel-ah" aria-selected="false" tabindex="-1">🪢 Ahorcado</button>
     <button type="button" role="tab" id="tab-ori" data-tab="orientaciones" data-panel="ori" aria-controls="panel-ori" aria-selected="false" tabindex="-1">📖 Orientaciones</button>
   </div>
 
@@ -675,6 +676,43 @@ body.sin-eval .solo-eval{display:none}
     <div id="cz-status" aria-live="polite"></div>
     <div id="cz-stage"></div>
     <div id="cz-play"></div>
+   </div>
+  </section>
+  <!-- ══════════════ AHORCADO (ahorcado.js + ahorcado-datos.js) ══════════════ -->
+  <section class="panel act-panel" id="panel-ah" role="tabpanel" aria-labelledby="tab-ahorcado" hidden>
+   <div id="ah-app">
+    <div class="tipo-intro"><strong>🪢 Ahorcado</strong> Las mismas palabras clave del Ahorcado del Juego, cada una con 3 pistas (de la más general a la más reveladora) basadas en lo que explican las páginas de ChromaNom. Hoja para imprimir con versiones y clave, o modo clase para proyectar.</div>
+    <div class="act-sect">
+      <h2>1 · Temas</h2>
+      <div class="act-chks" id="ah-grupos"></div>
+    </div>
+    <div class="act-sect">
+      <h2>2 · Hoja y versiones</h2>
+      <div class="campos">
+        <label>Número de palabras (4 a 16) <input type="number" inputmode="numeric" id="ah-n" value="8" min="4" max="16"></label>
+        <label>Pistas impresas por palabra <select id="ah-pistas"><option value="3">Las 3 pistas</option><option value="2">Solo 2 pistas</option><option value="1">Solo 1 pista</option></select></label>
+        <label>Título <input type="text" id="ah-title" maxlength="40" placeholder="Ahorcado de química"></label>
+        <label>Versiones paralelas (1 a 40) <input type="number" inputmode="numeric" id="ah-nver" value="2" min="1" max="40"></label>
+        <label>Versión en pantalla <select id="ah-vsel"></select></label>
+      </div>
+      <p class="ayuda">Cada versión trae otras palabras. En «Modo clase» se juega con la versión en pantalla: proyéctela y deje que el curso, por turnos o por equipos, diga las letras.</p>
+      <details class="act-adv"><summary>Volver a generar hojas de otro día</summary>
+        <label class="campo">Código de la hoja de clave <input type="text" id="ah-seed" maxlength="20" autocomplete="off"></label>
+      </details>
+    </div>
+    <div class="act-bar">
+      <button type="button" class="cn-btn cn-btn--secondary" id="ah-btn-seed">🎲 Otras palabras</button>
+      <div class="act-seg" id="ah-seg" role="group" aria-label="Vista">
+        <button type="button" data-view="sheet" class="on" aria-pressed="true">📄 Hoja</button>
+        <button type="button" data-view="key" aria-pressed="false">🔑 Clave</button>
+        <button type="button" data-view="play" aria-pressed="false">📽️ Modo clase</button>
+      </div>
+      <button type="button" class="cn-btn cn-btn--primary" id="ah-btn-print">🖨️ Imprimir versiones</button>
+      <label class="opt act-inl"><input type="checkbox" id="ah-withkeys" checked> <span>con hojas de clave al final</span></label>
+    </div>
+    <div id="ah-status" class="act-verif" aria-live="polite"></div>
+    <div id="ah-stage" class="ah-stage"></div>
+    <div id="ah-play" style="display:none"></div>
    </div>
   </section>
   <section class="panel" id="panel-ori" role="tabpanel" aria-labelledby="tab-ori" hidden>
@@ -994,7 +1032,7 @@ window.addEventListener('afterprint',function(){
 });
 </script>
 <script>
-// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas |
+// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas | Ahorcado |
 // Orientaciones. Las tres primeras comparten el formulario de #panel-gen:
 // cada una fija el tipo de documento (radio «tipodoc», ahora oculto) y deja
 // ver solo los apartados que le aplican, renumerados. Se recuerda la última
@@ -1002,7 +1040,7 @@ window.addEventListener('afterprint',function(){
 (function(){
   var btns=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
   var IDS=btns.map(function(b){return b.dataset.tab;});
-  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ori:'panel-ori'};
+  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',ori:'panel-ori'};
   var oriIds=['metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
   function aplicarTipo(tipo){
     var r=document.querySelector('input[name=tipodoc][value="'+tipo+'"]');
@@ -1020,7 +1058,7 @@ window.addEventListener('afterprint',function(){
     var b=btns.filter(function(x){return x.dataset.tab===id;})[0]||btns[0],panel=b.dataset.panel;
     btns.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
     Object.keys(PANELES).forEach(function(k){var el=document.getElementById(PANELES[k]);if(el)el.hidden=k!==panel;});
-    ['gen','lab','cz','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
+    ['gen','lab','cz','ah','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
     document.getElementById(PANELES[panel]).setAttribute('aria-labelledby',b.id);
     if(b.dataset.tipo)aplicarTipo(b.dataset.tipo);
     if(!sinGuardar){try{localStorage.setItem('chromanom-docente-tab',b.dataset.tab);}catch(e){}
@@ -1028,6 +1066,7 @@ window.addEventListener('afterprint',function(){
     if(panel==='gen')window.dispatchEvent(new Event('resize'));
     if(panel==='lab'&&window.LABERINTO)window.LABERINTO.ajustar();
     if(panel==='cz'&&window.CRUCIGRAMA)window.CRUCIGRAMA.render();
+    if(panel==='ah'&&window.AHORCADO)window.AHORCADO.render();
   }
   btns.forEach(function(b,i){
     b.addEventListener('click',function(){mostrar(b.dataset.tab);});
@@ -1048,6 +1087,7 @@ window.addEventListener('afterprint',function(){
 </script>
 <div id="lab-print-root" aria-hidden="true"></div>
 <div id="cz-print-root" aria-hidden="true"></div>
+<div id="ah-print-root" aria-hidden="true"></div>
 <script src="fx-libro.js"></script>
 <script src="docente-datos.js"></script>
 <script src="docente-app.js"></script>
@@ -1056,6 +1096,8 @@ window.addEventListener('afterprint',function(){
 <script src="temas-11.js"></script>
 <script src="laberinto.js"></script>
 <script src="crucigrama.js"></script>
+<script src="ahorcado-datos.js"></script>
+<script src="ahorcado.js"></script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>

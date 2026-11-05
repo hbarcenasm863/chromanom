@@ -7,6 +7,74 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (160) — Ahorcado con 3 pistas: en el Juego y en el generador docente
+
+### Contexto
+Los estudiantes pidieron un juego especial de ahorcado con 3 pistas. Ya se
+había hecho en IonNom y el docente pidió lo mismo en ChromaNom: en el Juego
+y en el generador docente, con una versión para imprimir y otra interactiva
+para proyectar en clase.
+
+### Cambios
+- `ahorcado-datos.js` (nuevo): banco de 96 palabras clave de las cuatro
+  fases, cada una con 3 pistas que van de la más general a la más
+  reveladora.
+  - Grupos: Fase 1 · El carbono (20), Fase 2 · Nomenclatura (19), Fase 3 ·
+    Isomería y reacciones (14), Fase 4 · Orbitales y propiedades (14), Fase
+    4 · Biomoléculas (21) y Fase 4 · Ambiente (8).
+  - Las pistas usan solo lo que explican las páginas, por ejemplo: «La
+    fructosa forma una» → FURANOSA; «Para el codón GCU es CGA» → ANTICODÓN.
+  - Ninguna fórmula lleva paréntesis.
+  - Va en un archivo propio, y no dentro de un banco más grande, para que
+    los cambios lleguen a los celulares sin depender de la caché vieja. En
+    IonNom, tenerlo dentro de `banco.js` hizo que el ahorcado saliera vacío
+    hasta que se actualizara la app.
+- `juego.html`: nueva tarjeta «🪢 Ahorcado con 3 pistas» (sección
+  «Especial», después de la Fase 4) y nuevo tipo de pregunta `ahorcado`.
+  - Cada sesión trae 20 palabras.
+  - Se ve la pista 1; las otras dos se piden con un botón.
+  - Con 6 fallos se completa el muñeco.
+  - Puntaje: 10 puntos con 1 o 2 pistas y 5 con las 3.
+  - Teclado en pantalla con Ñ, más el teclado físico. Las tildes no
+    cuentan (la A descubre también la Á).
+  - 3 minutos por palabra.
+  - Racha, puntaje, resultados por tipo e historial funcionan como en el
+    resto del Juego.
+  - La portada pasa a «7 tipos de pregunta».
+- `ahorcado.js` (nuevo) y `docente.html`: nueva pestaña «🪢 Ahorcado» en el
+  generador docente.
+  - **Hoja carta para imprimir:**
+    - de 4 a 16 palabras, 8 por hoja;
+    - cada palabra con patíbulo, número de letras, pistas (3, 2 o 1, a
+      elección del docente), casillas y abecedario para tachar;
+    - hasta 40 versiones, con hojas de clave y código para volver a
+      generarlas otro día.
+  - **Modo clase para proyectar:**
+    - letras grandes y teclado;
+    - botones para mostrar la pista siguiente, revelar la palabra y pasar a
+      la siguiente;
+    - marcador de dos equipos y pantalla completa.
+- `actividades.css`: estilos de la hoja y del modo clase.
+- `sw.js`: agrega los dos archivos nuevos; caché `chromanom-v61`.
+
+### Verificación
+- Juego, con Playwright en un celular de 390 px:
+  - con 3 pistas dio 5 puntos;
+  - con 1 pista dio 10;
+  - al perder no sumó y mostró la palabra;
+  - no hubo desbordes ni errores en consola.
+- Generador:
+  - la hoja, la clave y el modo clase funcionaron (teclado, pistas,
+    revelar, siguiente y marcador);
+  - 2 versiones de 12 palabras se imprimieron en 8 páginas carta;
+  - no hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno. `chromanom-analytics.gs` no tiene lista de niveles, así que no hay
+que redesplegarlo.
+
+---
+
 ## 2026-11-05 (159) — Cazar errores también en las evaluaciones
 
 ### Contexto
