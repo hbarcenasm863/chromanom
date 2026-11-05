@@ -7,6 +7,57 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (161) — Rediseño visual del Ahorcado (Juego y modo clase)
+
+### Contexto
+El docente notó que el Ahorcado de ChromaNom se veía bastante deficiente
+frente al de IonNom. En el Juego, en celular, el ahorcado quedaba suelto
+sobre el fondo de moléculas, sin tarjeta: el dibujo se perdía, la
+instrucción salía enorme y no había jerarquía visual. Además, las palabras
+compuestas (MONÓXIDO DE CARBONO) se partían por la mitad al saltar de línea,
+y una palabra de 17 letras (DESNATURALIZACIÓN) no cabía en un celular de
+320 px.
+
+### Cambios
+- `juego.html`: nuevo diseño del Ahorcado con la identidad de ChromaNom.
+  - Tarjeta blanca con la franja de los 4 colores del sitio.
+  - Etiqueta con la fase de la palabra y el número de letras.
+  - Patíbulo en el azul del sitio; el muñeco cambia de dorado a rojo a
+    medida que se acerca al final.
+  - **Vidas:** 6 anillos de benceno que se apagan con cada fallo, con el
+    mensaje «Te quedan N fallos» o «¡Última vida!».
+  - **Pistas como fichas de colores:** 1 cian, 2 dorada y 3 rosada. Las
+    que faltan se ven con candado y se abren al tocarlas; la 3.ª avisa que
+    la palabra vale la mitad.
+  - **Letras en casillas tipo ficha**, con una animación al acertar
+    (desactivada si el sistema pide reducir el movimiento). Las letras que
+    faltaban se muestran en rojo al perder.
+  - Cada palabra se mantiene unida en su línea. Las casillas se ajustan al
+    ancho de la pantalla, y una palabra que no cabe con casillas de al menos
+    22 px se reparte en dos filas parejas.
+  - Teclado con letras más gruesas. Las letras falladas quedan tachadas en
+    gris.
+- `ahorcado.js` y `actividades.css`: el modo clase del generador docente
+  usa el mismo diseño: vidas, fichas de pistas, casillas grandes que se
+  ajustan al ancho de la pantalla y fase de la palabra.
+- `sw.js`: caché `chromanom-v62`.
+
+### Verificación
+- Con Playwright en celulares de 390 px y de 320 px:
+  - DESNATURALIZACIÓN se reparte en dos filas, con casillas de 32 px y de
+    24 px;
+  - MONÓXIDO DE CARBONO queda con una palabra por fila;
+  - nada se sale de la pantalla.
+- La lógica no cambió: 5 puntos con 3 pistas, 10 con 1 y 0 al perder.
+- Modo clase: pistas, revelar, siguiente y marcador funcionan; la
+  impresión sigue igual.
+- No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-05 (160) — Ahorcado con 3 pistas: en el Juego y en el generador docente
 
 ### Contexto

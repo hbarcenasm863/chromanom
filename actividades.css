@@ -367,3 +367,33 @@
 .ahc-tec button.no{background:#fee2e2;border-color:#fca5a5;color:#991b1b;opacity:.7}
 .ahc-acc{margin-top:14px;text-align:center}
 @media(max-width:700px){.ahc-tec{grid-template-columns:repeat(9,1fr)}.ahc-l{font-size:1.6rem}.ahc-tec button{min-height:42px;font-size:1rem}}
+
+/* Modo clase · diseño ChromaNom (vidas en hexágonos, fichas de pistas y casillas) */
+.ahc-cn{border:1.5px solid var(--brd);border-radius:22px;box-shadow:0 10px 30px rgba(13,74,115,.12);position:relative;overflow:hidden}
+.ahc-cn::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(90deg,#0891b2,#166534,#b45309,#CC79A7)}
+.ahc-fase{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0e7490;background:#cffafe;border-radius:999px;padding:4px 12px}
+.ahc-cn .ahc-fig{width:230px;max-width:38vw;aspect-ratio:220/215;border-radius:18px;background:radial-gradient(circle at 50% 35%,#f0f9ff,#e0f2fe 70%)}
+.ahc-cn .ahc-fig .ahc-svg{width:100%;max-width:none;background:none}
+.ahc-vidas{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ahc-vida{width:30px;height:30px;transition:transform .3s,opacity .3s}
+.ahc-vida.perdida{opacity:.35;transform:scale(.82)}
+.ahc-quedan{margin-left:8px;font-weight:700;color:#3a5568}
+.ahc-pistas{display:flex;flex-direction:column;gap:8px}
+.ahc-pista{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:10px 14px;font-size:1.1rem;line-height:1.4;color:#0d2d42;border:1.5px solid transparent;text-align:left;width:100%;font-family:inherit}
+.ahc-pista .n{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;color:#fff}
+.ahc-pista.p1{background:#cffafe}.ahc-pista.p1 .n{background:#0891b2}
+.ahc-pista.p2{background:#fef3c7}.ahc-pista.p2 .n{background:#b45309}
+.ahc-pista.p3{background:#fce8f4}.ahc-pista.p3 .n{background:#CC79A7}
+.ahc-pista.lock{background:#fff;border:1.5px dashed #cbd5e1;color:#3a5568;cursor:pointer;font-weight:700}
+.ahc-pista.lock .n{background:#cbd5e1}
+.ahc-pista.lock:hover:not([disabled]){border-color:#b45309;color:#92400e}
+.ahc-pista.lock[disabled]{cursor:default;opacity:.6}
+.ahc-cn .ahc-pal{gap:14px 28px;--t:56px}
+.ahc-w{display:inline-flex;gap:6px}
+.ahc-t{width:var(--t);height:calc(var(--t)*1.2);border-radius:calc(var(--t)*.22);background:#f1f5f9;border:2px solid #dbe4ee;border-bottom:5px solid #94a3b8;display:inline-flex;align-items:center;justify-content:center;font:900 calc(var(--t)*.6)/1 var(--mono);color:#0d2d42}
+.ahc-t.v{background:#dcfce7;border-color:#86efac;border-bottom-color:#15803d;color:#14532d;animation:ahcPop .35s ease}
+.ahc-t.falto{background:#fee2e2;border-color:#fca5a5;border-bottom-color:#dc2626;color:#b91c1c}
+@keyframes ahcPop{0%{transform:scale(.6)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+.ahc-cn .ahc-tec button{border-bottom-width:4px;border-radius:12px}
+.ahc-cn .ahc-tec button.no{background:#f1f5f9;border-color:#e2e8f0;color:#94a3b8;text-decoration:line-through;opacity:1}
+@media (prefers-reduced-motion:reduce){.ahc-t.v{animation:none}}

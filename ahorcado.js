@@ -87,11 +87,11 @@ function hojas(c, v, clave, etiqueta){
 /* ───── modo clase (proyectar) ───── */
 let CL = null;
 function dibujoGrande(f){
-  const p = ['<circle cx="150" cy="70" r="20"/>','<line x1="150" y1="90" x2="150" y2="150"/>','<line x1="150" y1="105" x2="122" y2="132"/>',
+  const p = ['<circle cx="150" cy="70" r="20" fill="#fff"/>','<line x1="150" y1="90" x2="150" y2="150"/>','<line x1="150" y1="105" x2="122" y2="132"/>',
     '<line x1="150" y1="105" x2="178" y2="132"/>','<line x1="150" y1="150" x2="128" y2="190"/>','<line x1="150" y1="150" x2="172" y2="190"/>'];
   return '<svg viewBox="0 0 220 215" class="ahc-svg" role="img" aria-label="Fallos: ' + f + ' de ' + MAX_FALLOS + '">'
-    + '<g stroke="#475569" stroke-width="6" stroke-linecap="round" fill="none"><line x1="20" y1="205" x2="120" y2="205"/><line x1="60" y1="205" x2="60" y2="14"/><line x1="60" y1="14" x2="150" y2="14"/><line x1="150" y1="14" x2="150" y2="50"/></g>'
-    + '<g stroke="#dc2626" stroke-width="6" stroke-linecap="round" fill="none">' + p.slice(0, f).join('') + '</g></svg>';
+    + '<g stroke="#0d4a73" stroke-width="8" stroke-linecap="round" fill="none"><line x1="20" y1="205" x2="120" y2="205"/><line x1="60" y1="205" x2="60" y2="14"/><line x1="60" y1="14" x2="150" y2="14"/></g><line x1="150" y1="14" x2="150" y2="50" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>'
+    + '<g stroke="' + (f >= 5 ? '#dc2626' : f >= 3 ? '#ea580c' : '#b45309') + '" stroke-width="7" stroke-linecap="round" fill="none">' + p.slice(0, f).join('') + '</g></svg>';
 }
 function iniciarClase(){
   const c = getCfg(); if(c.vacio){ $('#ah-status').textContent = '⚠️ ' + c.vacio; return; }
@@ -115,17 +115,24 @@ function letraClase(l){
 }
 function pintarClase(){
   const box = $('#ah-play'); if(!box || !CL) return;
-  const pal = [...CL.pal].map(ch => ch === ' ' ? '<span class="ahc-sp"></span>' : !esLetra(ch) ? '<span class="ahc-l v">' + esc(ch) + '</span>'
-    : (CL.usadas.has(base(ch)) || CL.fin) ? '<span class="ahc-l v' + (!CL.usadas.has(base(ch)) ? ' falto' : '') + '">' + ch + '</span>' : '<span class="ahc-l"></span>').join('');
-  box.innerHTML = '<div class="ahc">'
-    + '<div class="ahc-bar"><b>Palabra ' + (CL.i + 1) + ' de ' + CL.lista.length + '</b>'
+  const tile = ch => !esLetra(ch) || CL.usadas.has(base(ch)) ? '<span class="ahc-t v">' + esc(ch) + '</span>' : CL.fin ? '<span class="ahc-t falto">' + ch + '</span>' : '<span class="ahc-t"></span>';
+  const pal = CL.pal.split(' ').map(w => '<span class="ahc-w">' + [...w].map(tile).join('') + '</span>').join('');
+  const maxL = Math.max(...CL.pal.split(' ').map(w => [...w].length));
+  const quedan = MAX_FALLOS - CL.fallos;
+  const vida = v => '<svg class="ahc-vida' + (v ? '' : ' perdida') + '" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 20.7,7 20.7,17 12,22 3.3,17 3.3,7" fill="' + (v ? '#dcfce7' : '#f1f5f9') + '" stroke="' + (v ? '#15803d' : '#94a3b8') + '" stroke-width="1.8"/><circle cx="12" cy="12" r="4.4" fill="none" stroke="' + (v ? '#15803d' : '#94a3b8') + '" stroke-width="1.6"/></svg>';
+  const grupo = (GRUPOS.find(g => g[2].includes(CL.w[1])) || [,''])[1].replace(/^\S+\s/, '');
+  const pistas = [0,1,2].map(i => i < CL.nPistas
+    ? '<div class="ahc-pista p' + (i+1) + '"><span class="n">' + (i+1) + '</span><span>' + esc(CL.w[2+i]) + '</span></div>'
+    : '<button type="button" class="ahc-pista lock"' + (i === CL.nPistas && !CL.fin ? ' data-mas="1"' : ' disabled') + '><span class="n">' + (i+1) + '</span><span>🔒 Pista ' + (i+1) + (i === CL.nPistas && !CL.fin ? ' · clic para mostrarla' : '') + '</span></button>').join('');
+  box.innerHTML = '<div class="ahc ahc-cn">'
+    + '<div class="ahc-bar"><b>Palabra ' + (CL.i + 1) + ' de ' + CL.lista.length + '</b>' + (grupo ? '<span class="ahc-fase">' + esc(grupo) + '</span>' : '')
     + '<span class="ahc-eq">Equipo A: <b>' + CL.eqA + '</b> <button type="button" data-eq="A">+1</button></span>'
     + '<span class="ahc-eq">Equipo B: <b>' + CL.eqB + '</b> <button type="button" data-eq="B">+1</button></span>'
     + '<button type="button" class="ahc-fs">⛶ Pantalla completa</button></div>'
-    + '<div class="ahc-main">' + dibujoGrande(CL.fallos) + '<div class="ahc-info"><div class="ahc-fallos">Fallos: <b>' + CL.fallos + '</b> de ' + MAX_FALLOS + '</div>'
-    + CL.w.slice(2, 2 + CL.nPistas).map((t, k) => '<div class="ahc-pista"><b>Pista ' + (k+1) + ':</b> ' + esc(t) + '</div>').join('')
-    + (CL.nPistas < 3 && !CL.fin ? '<button type="button" class="ahc-btn ahc-mas">💡 Mostrar la pista ' + (CL.nPistas + 1) + '</button>' : '') + '</div></div>'
-    + '<div class="ahc-pal">' + pal + '</div>'
+    + '<div class="ahc-main"><div class="ahc-fig">' + dibujoGrande(CL.fallos) + '</div><div class="ahc-info">'
+    + '<div class="ahc-vidas">' + Array.from({length: MAX_FALLOS}, (_, i) => vida(i < quedan)).join('') + '<span class="ahc-quedan">' + (CL.fin ? '' : quedan === 1 ? '¡Última vida!' : 'Quedan ' + quedan + ' fallos') + '</span></div>'
+    + '<div class="ahc-pistas">' + pistas + '</div></div></div>'
+    + '<div class="ahc-pal" style="--t:' + Math.max(26, Math.min(64, Math.floor(((box.clientWidth || 1000) - 70 - (maxL - 1) * 6) / maxL))) + 'px">' + pal + '</div>'
     + (CL.msg ? '<div class="ahc-msg' + (CL.msg.startsWith('🎉') ? ' ok' : ' err') + '">' + esc(CL.msg) + '</div>' : '')
     + '<div class="ahc-tec">' + ABC.map(l => { const u = CL.usadas.has(l), en = CL.base.includes(l); return '<button type="button" data-l="' + l + '" class="' + (u ? (en ? 'si' : 'no') : '') + '"' + (u || CL.fin ? ' disabled' : '') + '>' + l + '</button>'; }).join('') + '</div>'
     + '<div class="ahc-acc">' + (!CL.fin ? '<button type="button" class="ahc-btn ahc-rev">👁️ Revelar la palabra</button>' : '')
@@ -133,7 +140,7 @@ function pintarClase(){
     + '</div>';
   box.querySelectorAll('.ahc-tec button').forEach(b => b.addEventListener('click', () => letraClase(b.dataset.l)));
   const on = (sel, fn) => { const e = box.querySelector(sel); if(e) e.addEventListener('click', fn); };
-  on('.ahc-mas', () => { if(CL.nPistas < 3){ CL.nPistas++; pintarClase(); } });
+  on('[data-mas]', () => { if(CL.nPistas < 3){ CL.nPistas++; pintarClase(); } });
   on('.ahc-rev', () => { CL.fin = true; CL.msg = 'La palabra era ' + CL.pal + '.'; pintarClase(); });
   on('.ahc-sig', () => { CL.i++; nuevaPalabra(); });
   on('.ahc-otra', () => { semilla = nuevaSemilla(); $('#ah-seed').value = ''; iniciarClase(); });
