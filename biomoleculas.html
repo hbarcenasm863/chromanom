@@ -417,9 +417,13 @@ var hwP=0,hwA='b';
 function haworth(svg,k,an){var z=HW[k];svg.innerHTML='';
   var P6=[[258,128],[208,172],[108,172],[58,128],[108,84],[208,84]],P5=[[248,128],[208,174],[112,174],[72,128],[160,86]];
   var P=z.ani===6?P6:P5;  // 6: C1,C2,C3,C4,C5,O · 5: C(an),C,C,C,O
-  var pts=P.map(function(p){return p.join(',');}).join(' ');sv('polygon',{points:pts,fill:'#f1f5f9',stroke:'#334155','stroke-width':2.5},svg);
+  var pts=P.map(function(p){return p.join(',');}).join(' ');sv('polygon',{points:pts,fill:'#f1f5f9',stroke:'none'},svg);
+  // Cada lado del anillo se dibuja aparte y se recorta junto al O, para que el O sea el vértice (el punto de unión) y no quede atravesado por las líneas.
+  var oJ=P.length-1;P.forEach(function(p,i){var q=P[(i+1)%P.length],x1=p[0],y1=p[1],x2=q[0],y2=q[1],L=Math.hypot(x2-x1,y2-y1),R=10;
+    if(i===oJ){x1+=(x2-x1)*R/L;y1+=(y2-y1)*R/L;}if((i+1)%P.length===oJ){x2-=(x2-x1)*R/L;y2-=(y2-y1)*R/L;}
+    if(i!==1)sv('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'#334155','stroke-width':2.5,'stroke-linecap':'round'},svg);});
   sv('line',{x1:P[1][0],y1:P[1][1],x2:P[2][0],y2:P[2][1],stroke:'#334155','stroke-width':7},svg);
-  var oI=P.length-1;st(svg,P[oI][0],P[oI][1]+5,'O',{fill:'#dc2626'});sv('circle',{cx:P[oI][0],cy:P[oI][1],r:9,fill:'none'},svg);
+  var oI=P.length-1;st(svg,P[oI][0],P[oI][1]+5.5,'O',{fill:'#dc2626','font-size':16});
   function sus(i,arriba,abajo,col){var x=P[i][0],y=P[i][1];sv('line',{x1:x,y1:y,x2:x,y2:y-24,stroke:'#334155','stroke-width':1.8},svg);sv('line',{x1:x,y1:y,x2:x,y2:y+24,stroke:'#334155','stroke-width':1.8},svg);
     st(svg,x,y-29,arriba,{fill:arriba==='OH'&&col?col:arriba==='OH'?'#1a6ea8':arriba==='H'?'#64748b':'#0d2d42','font-size':12});st(svg,x,y+39,abajo,{fill:abajo==='OH'&&col?col:abajo==='OH'?'#1a6ea8':abajo==='H'?'#64748b':'#0d2d42','font-size':12});}
   function pos(c){return c==='R'?['H','OH']:c==='L'?['OH','H']:['H','H'];}

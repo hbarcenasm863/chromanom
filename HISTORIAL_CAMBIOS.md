@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (156) — El O del anillo de Haworth queda como vértice, no atravesado
+
+### Contexto
+El docente notó que en los anillos de los carbohidratos (proyección de
+Haworth) la línea del anillo pasaba por encima del O. Así parecía que el O
+estaba «atravesado» por el vértice, en lugar de ser el átomo donde se unen
+los dos enlaces.
+
+### Cambios
+- `biomoleculas.html` (función `haworth`):
+  - El anillo ya no se dibuja como un solo polígono con borde. Cada lado
+    se traza aparte y los dos lados que llegan al O se recortan unos
+    10 px antes. Así el O queda como el punto de unión del anillo, igual
+    que en un libro.
+  - El O es algo más grande.
+  - Aplica a las piranosas (glucosa, galactosa, manosa) y a las furanosas
+    (fructosa, ribosa, desoxirribosa).
+- `sw.js`: caché `chromanom-v57`.
+
+### Verificación
+Capturas con Playwright de la β-D-glucopiranosa y de la
+β-D-fructofuranosa: el O aparece limpio en el vértice y los enlaces llegan
+hasta él sin cruzarlo. Sin errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-05 (155) — Biomoléculas a fondo: Fischer y Haworth, omegas y jabón, ADN y síntesis de proteínas
 
 ### Contexto
