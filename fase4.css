@@ -76,3 +76,6 @@
 .fxm .hn{color:var(--c4t);background:var(--c4b);border-radius:4px;padding:0 1px}
 .fxm .bp{color:#c2410c}
 .plot svg{max-width:680px;margin:0 auto}
+.fxm{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media(max-width:480px){.fxm{font-size:.74rem}}
+@media(max-width:600px){.figs.two{grid-template-columns:1fr!important}}

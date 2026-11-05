@@ -7,6 +7,119 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (152) — Fase 4 «Química de la vida y del ambiente» (aprendizajes priorizados de la SED para 11.°)
+
+### Contexto
+El docente pidió revisar qué faltaba en ChromaNom e IonNom frente a los
+Estándares, los DBA y, sobre todo, la *Priorización de aprendizajes para
+ciencias naturales y educación ambiental — Media* (SED Bogotá, 2025), que
+envió en PDF. Para 11.° faltaban cuatro evidencias del componente químico
+(orbitales moleculares 11q-exp2, polaridad y grupos funcionales 11q-ind3,
+macromoléculas biológicas 11q-uso1 e impacto ambiental 11q-uso3), la parte
+matemática de 11q-exp3 y las tres evidencias de construcción del
+conocimiento (hipótesis, datos, gráficas y margen de error). Pidió hacer
+todas las páginas necesarias con los principios de Mayer, sumar preguntas
+al Juego y al docente, y terminar con una auditoría pedagógica y química.
+(Lo de 10.° se hizo en IonNom: ver su `CHANGELOG.md`.)
+
+### Páginas nuevas (Fase 4, después de Reacciones)
+Todas con la misma estructura de Mayer: palabras clave para tocar antes de
+empezar (pre-entrenamiento), una meta por sección (señalización), ejemplos
+resueltos que se muestran paso a paso (segmentación), figuras con las
+etiquetas dentro (contigüidad), laboratorios donde el estudiante predice
+antes de ver el resultado, botón «Escuchar» (modalidad) y práctica final
+con el banco del Juego.
+- `orbitales.html`: enlazante y antienlazante; laboratorio para llenar el
+  diagrama de orbitales moleculares de H₂⁺, H₂, He₂⁺, He₂, N₂, O₂, F₂ y Ne₂
+  (predicción del orden de enlace, paramagnetismo y datos medidos de energía
+  y longitud de enlace); el enlace π; aromaticidad del benceno con las
+  energías de hidrogenación (360 kJ/mol esperados frente a 208 medidos) y
+  clasificador de la regla de Hückel; conjugación y color (β-caroteno,
+  licopeno, curcumina, clorofila) con el espectro.
+- `propiedades.html`: dentro y entre moléculas; ¿es polar?; las tres
+  fuerzas con clasificadores; «compara y predice» con series de masa igual
+  (datos reales de puntos de ebullición); solubilidad de los alcoholes;
+  laboratorio de datos con hipótesis, tres medidas simuladas, gráfica,
+  porcentaje de error y conclusión, en Bogotá o a nivel del mar (la
+  diferencia por la presión se estima con Clausius-Clapeyron y Trouton).
+- `biomoleculas.html`: las cuatro familias; animación de condensación e
+  hidrólisis (glucosas, glicerol + ácido graso, aminoácidos); carbohidratos
+  (isómeros glucosa/fructosa, almidón frente a celulosa, Lugol y Benedict);
+  lípidos (esteárico 69 °C, oleico 13 °C, elaídico 45 °C); proteínas,
+  enlace peptídico y desnaturalización (ceviche, huevo, Biuret); ADN con
+  hebra complementaria y conteo de puentes de hidrógeno; enzimas,
+  respiración, fotosíntesis y fermentaciones; calculadora de kilocalorías.
+- `ambiente.html`: destilación del petróleo; estequiometría de la
+  combustión (galón de gasolina, calculadora de CO₂ para cinco combustibles
+  y gramos de CO₂ por megajulio); combustión incompleta y CO; plásticos de
+  adición y condensación con los códigos de reciclaje y la Ley 2232 de
+  2022; CFC y ozono (ruptura homolítica en cadena); DDT, derrames y
+  biomagnificación; etanol de caña y biodiésel de palma; caso de química
+  verde para la tienda escolar.
+- Archivos compartidos nuevos: `fase4.css` y `fase4.js` (glosario, pasos,
+  clasificador, fórmulas con el motor FX).
+
+### Preguntas nuevas
+- `temas-11.js` (nuevo): 94 preguntas de opción múltiple con
+  retroalimentación por opción, en cuatro temas: `orbitales_mol` (22),
+  `fuerzas_inter` (24), `biomoleculas` (25) y `quimica_ambiente` (23). Se
+  suman a `FUND_BANCO`/`EXTRA_TOPICS`, así que las usan el Juego, las
+  prácticas de las páginas, el generador del docente y los laberintos.
+- `juego.html`: bloque «Fase 4» con cinco tarjetas (los cuatro temas y la
+  mezcla). Estos temas no entran en «Nomenclatura + reacciones» y tienen su
+  propio mensaje final.
+- `docente-datos.js`: cuatro temas nuevos (orbitales, propiedades,
+  biomoléculas, ambiente) con aprendizajes previos, lectura, mapa, seis
+  preguntas abiertas cada uno y alineación SED. Sus preguntas tipo Saber
+  salen del banco del Juego (`saberJue`).
+
+### Alineación curricular (generador del docente)
+- Se copiaron literalmente del PDF las **7 evidencias del componente químico
+  de 10.° que faltaban** (había 3 de 10): 10q-ind1, 10q-ind2, 10q-ind3,
+  10q-exp4, 10q-uso1, 10q-uso2 y 10q-uso3.
+- Estándares nuevos est4 y est5, marcados «verificar redacción oficial».
+
+### Navegación
+- Enlace «🌿 Vida y ambiente» en el menú de todas las páginas; Fase 4 en la
+  barra de fases (`site-ui.js`, `CN_FASES_EXTRA`) y en la hoja «Más» del
+  celular. La molécula de la portada no cambia (está dibujada para las 8
+  paradas de las fases 1 a 3); la portada trae cuatro tarjetas nuevas.
+- `chromanom.css`: el menú muestra solo íconos hasta 1440 px (antes 1280)
+  para que quepa el enlace nuevo.
+- `sw.js`: `chromanom-v53`, con las páginas y archivos nuevos.
+
+### Auditoría pedagógica y química
+- **Ecuaciones:** un script revisó el balance de átomos y de carga de todas
+  las ecuaciones de las páginas y del banco; las únicas «mal balanceadas»
+  son las que están así a propósito (distractores o ejemplos para corregir).
+- **Opciones equilibradas:** en la primera versión la respuesta correcta era
+  la opción más larga en el 73 % de las preguntas. Se acortaron las
+  correctas y se alargaron los distractores con errores típicos: quedó en
+  34 %, cerca del 26 % de `temas-extra.js`.
+- **Regla de paréntesis:** `fxQuedanParentesis` no encuentra ninguna fórmula
+  con paréntesis en las cuatro páginas ni en las 94 preguntas.
+- **Datos:** puntos de ebullición, solubilidades, energías de enlace y de
+  hidrogenación, absorciones y entalpías de combustión revisados contra
+  valores de referencia. El punto de ebullición del agua en Bogotá quedó
+  unificado en «unos 91 °C» en los dos sitios.
+- **Pruebas con Playwright:** las cuatro páginas sin errores en PC y en
+  iPhone 13 (se corrigió un desborde de la fórmula de la glucosa en
+  celular); todos los clasificadores, prácticas y calculadoras responden
+  bien a la respuesta correcta y a los errores típicos; el Juego arma
+  partidas de cada tema; el docente genera guías de los temas nuevos.
+
+### Pasos manuales
+- Ninguno. No se tocó `chromanom-analytics.gs`.
+
+### Pendiente
+- Los Estándares y DBA del MEN siguen sin cotejarse con el documento
+  oficial (van marcados).
+- Temas del MEN que la SED no prioriza y siguen sin página: soluciones,
+  cinética, equilibrio químico, termoquímica y química nuclear. De gases
+  solo está la ley de Boyle (en `modelos.html` de IonNom).
+
+---
+
 ## 2026-11-02 (101) — Juego: se desactiva el modo estudiante (solo modo libre)
 
 ### Contexto

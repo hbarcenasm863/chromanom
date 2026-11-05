@@ -744,7 +744,7 @@ var TEMAS=[
   alin:{g11:{sed:'sed11q',ev:['11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est4'],dba:['dba11b']},
   previos:{
    curiosos:['El etanol y el dimetiléter tienen la misma fórmula, C₂H₆O, pero uno hierve a 78 °C y el otro a −24 °C.',
-     'En Bogotá el agua hierve a unos 92 °C, no a 100 °C, porque la presión del aire es menor.',
+     'En Bogotá el agua hierve a unos 91 °C, no a 100 °C, porque la presión del aire es menor.',
      'El ADN se mantiene enrollado en doble hélice gracias a millones de puentes de hidrógeno.'],
    contexto:[{amb:'Local',t:'El alcohol antiséptico se evapora rápido de la piel; el aceite de cocina casi no se evapora.'},
      {amb:'Nacional',t:'En las refinerías de Barrancabermeja y Cartagena el petróleo se separa en fracciones según su punto de ebullición.'},
