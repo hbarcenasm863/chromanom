@@ -47,6 +47,7 @@
   <a href="#previo">Palabras clave</a>
   <a href="#petroleo">Petróleo</a>
   <a href="#co2">Calcula el CO₂</a>
+  <a href="#siminv">Simulación: invernadero</a>
   <a href="#plasticos">Plásticos</a>
   <a href="#ozono">CFC y ozono</a>
   <a href="#persist">Plaguicidas</a>
@@ -125,6 +126,15 @@
   <div class="plot"><svg id="cb-svg" viewBox="0 0 520 210" role="img" aria-label="Gramos de CO₂ por megajulio de energía para cinco combustibles"></svg></div>
   <p>Los combustibles con más hidrógeno por carbono (como el metano) obtienen parte de su energía formando H₂O y no CO₂: emiten menos CO₂ por megajulio. Pero <b>todos</b> los que tienen carbono emiten CO₂; además, el metano que se escapa sin quemar es un gas de efecto invernadero mucho más potente que el CO₂.</p>
   <div class="warn">⚠️ <b>Combustión incompleta:</b> con poco oxígeno, 2 CH₄ + 3 O₂ → 2 CO + 4 H₂O. El monóxido de carbono no tiene olor ni color y se une a la hemoglobina con más fuerza que el oxígeno. Por eso un calentador o una estufa de gas nunca debe usarse en un lugar cerrado y sin ventilación. La llama amarilla y el hollín son señales de combustión incompleta.</div>
+</section>
+
+<section class="sec" id="siminv">
+  <div class="sec-kicker">Simulación en movimiento</div>
+  <h2>Efecto invernadero: sigue la energía</h2>
+  <div class="meta">Al terminar podrás explicar con partículas por qué más CO₂ en el aire calienta la superficie.</div>
+  <p class="sim-pregunta">si el CO₂ del aire pasa de 280 ppm (año 1800) a 800 ppm, ¿la temperatura del suelo sube, baja o no cambia? ¿Por qué?</p>
+  <div class="sim" data-sim="invernadero"></div>
+  <div class="warn">⚠️ Modelo simplificado: la luz solar (amarilla) atraviesa el aire, el suelo caliente emite infrarrojo (rojo) y las moléculas de CO₂ lo absorben y lo reemiten en cualquier dirección. Muestra la tendencia, no la temperatura real de cada año.</div>
 </section>
 
 <section class="sec" id="plasticos">
@@ -253,6 +263,7 @@
 <script src="text-zoom.js"></script>
 <script src="fx-libro.js"></script>
 <script src="fase4.js"></script>
+<script src="sim4.js"></script>
 <script>
 (function(){
 'use strict';

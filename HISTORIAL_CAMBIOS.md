@@ -7,6 +7,52 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-05 (153) — Fase 4: simulaciones en canvas que se mueven
+
+### Contexto
+El docente pidió que las páginas nuevas fueran «muy interactivas, con
+simulaciones y modelos en canvas que puedan moverse», y que todo quedara en
+`main` con su registro en los `.md`.
+
+### Cambios
+- `sim4.js` (nuevo): cuatro simulaciones animadas en `<canvas>`, con
+  controles, botón de pausa y una pregunta para predecir antes de mirar.
+  Se ajustan al ancho de la pantalla, se manejan con el dedo o el mouse, se
+  detienen solas cuando no se ven y arrancan en pausa si el celular tiene
+  activado «reducir movimiento».
+  - `orbitales.html` · **Forma (o rompe) una molécula de H₂**: los núcleos
+    se arrastran; la nube electrónica (φA ± φB)² se dibuja con puntos al azar
+    y abajo se mueve un punto sobre la curva de energía (curva de Morse del
+    H₂: 74 pm, −436 kJ/mol). Al soltarlos, con el orbital enlazante los
+    átomos quedan **vibrando** cerca de 74 pm; con el antienlazante se
+    separan.
+  - `propiedades.html` · **Mira cómo escapan las moléculas al vapor**:
+    dinámica molecular sencilla (Lennard-Jones) con cuatro sustancias
+    (propano, etanal, etanol y agua) y control de temperatura; se dibujan
+    los puentes de hidrógeno y se cuenta el % de moléculas en el vapor.
+  - `biomoleculas.html` · **Enzimas en acción**: la sacarasa rompe sacarosa
+    en glucosa y fructosa; la rapidez sube con la temperatura y las enzimas
+    se desnaturalizan por encima de unos 42 °C (lenta a 5 °C, más rápida a
+    37 °C, se detiene a 70 °C). Gráfica de productos en tiempo real.
+  - `ambiente.html` · **Efecto invernadero**: luz solar, infrarrojo del
+    suelo y moléculas de CO₂ y de vapor de agua que lo reemiten. Calibrado:
+    unos 13 °C con 280 ppm, 15 °C con 420 ppm y 19 °C con 800 ppm; sin
+    vapor de agua ni CO₂, unos −18 °C, como la Tierra sin efecto
+    invernadero. Botón para quitar el vapor de agua.
+- `fase4.css`: estilos de las simulaciones (y controles que no se salen en
+  celular).
+- `sw.js`: `chromanom-v54`, con `sim4.js`.
+
+### Pruebas
+- Las cuatro páginas sin errores en PC y en iPhone 13 (390 px, sin
+  desbordes). Se comprobó con mediciones automáticas que la enzima y el
+  invernadero dan las tendencias esperadas.
+
+### Pasos manuales
+- Ninguno.
+
+---
+
 ## 2026-11-05 (152) — Fase 4 «Química de la vida y del ambiente» (aprendizajes priorizados de la SED para 11.°)
 
 ### Contexto

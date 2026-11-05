@@ -79,3 +79,16 @@
 .fxm{max-width:100%;overflow-x:auto;overflow-y:hidden}
 @media(max-width:480px){.fxm{font-size:.74rem}}
 @media(max-width:600px){.figs.two{grid-template-columns:1fr!important}}
+
+/* Simulaciones en canvas (sim4.js) */
+.sim{margin:12px 0;border:1.5px solid var(--brd);border-radius:var(--r);background:#fff;padding:10px;overflow:hidden}
+.sim-cv{display:block;margin:0 auto;border-radius:10px;touch-action:none;max-width:100%}
+.sim-ctl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:8px 2px 0}
+.sim-ctl .seg{margin:0}
+.sim-rng{display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:700;color:var(--dim)}
+.sim-rng input{width:200px;max-width:52vw}
+.sim-rng b{font-family:'JetBrains Mono',monospace;color:var(--brand-d);min-width:5.5em}
+.sim-msg{margin-top:8px;font-size:.86rem;line-height:1.6;color:var(--dim);background:var(--surf2);border-radius:var(--rs);padding:9px 12px}
+.sim-pregunta{font-size:.88rem;font-weight:700;color:var(--tx);margin:4px 0 6px}
+.sim-pregunta::before{content:'🤔 Predice: '}
+@media(max-width:520px){.sim-rng{flex-wrap:wrap;max-width:100%}.sim-rng input{width:100%;max-width:100%;flex:1 1 160px}.sim-rng b{min-width:0}}
