@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<meta name="description" content="Polaridad, fuerzas de London, dipolo-dipolo y puentes de hidrógeno; punto de ebullición y solubilidad de compuestos orgánicos; laboratorio de datos con margen de error.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Fuerzas intermoleculares y propiedades</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<link rel="stylesheet" href="fase4.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="orbitales.html" class="nav-link active">🌿 <span class="full">Vida y ambiente</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 4 · Química de la vida y del ambiente · Parada 2 de 4</div>
+  <h1>Fuerzas intermoleculares: por qué el alcohol se evapora y el aceite no se mezcla con el agua</h1>
+  <p>Dos compuestos con la misma fórmula pueden hervir a 100 °C de diferencia. La clave no está en los enlaces de cada molécula, sino en cómo se atraen las moléculas entre sí. Aquí aprendes a reconocer esas atracciones a partir del grupo funcional, a predecir puntos de ebullición y solubilidades, y a comprobarlo con datos como en un laboratorio.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#previo">Palabras clave</a>
+  <a href="#intra">Dentro y entre</a>
+  <a href="#polar">¿Es polar?</a>
+  <a href="#fuerzas">Las tres fuerzas</a>
+  <a href="#comparar">Compara y predice</a>
+  <a href="#solub">Solubilidad</a>
+  <a href="#labdatos">Laboratorio de datos</a>
+  <a href="#practica">Practica</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+<section class="sec" id="previo">
+  <div class="sec-kicker">Antes de empezar</div>
+  <h2>Palabras clave de esta página</h2>
+  <p>Toca cada tarjeta para ver qué significa.</p>
+  <div class="glos">
+    <button type="button"><b>Intramolecular</b><span class="hint">Toca para ver</span><span class="def">Dentro de la molécula: los enlaces covalentes (C−H, O−H…). Son fuertes.</span></button>
+    <button type="button"><b>Intermolecular</b><span class="hint">Toca para ver</span><span class="def">Entre moléculas vecinas. Son mucho más débiles y se vencen al hervir o al disolver.</span></button>
+    <button type="button"><b>Electronegatividad</b><span class="hint">Toca para ver</span><span class="def">Qué tanto atrae un átomo los electrones del enlace. O (3,4) y N (3,0) atraen más que C (2,6) y H (2,2).</span></button>
+    <button type="button"><b>Molécula polar</b><span class="hint">Toca para ver</span><span class="def">Tiene un extremo parcialmente negativo (δ−) y otro positivo (δ+) que no se anulan.</span></button>
+    <button type="button"><b>Fuerzas de London</b><span class="hint">Toca para ver</span><span class="def">Atracciones por dipolos instantáneos. Están en TODAS las moléculas y crecen con el tamaño.</span></button>
+    <button type="button"><b>Puente de hidrógeno</b><span class="hint">Toca para ver</span><span class="def">Atracción fuerte entre un H unido a O, N o F y un par libre de O, N o F vecino.</span></button>
+    <button type="button"><b>Punto de ebullición</b><span class="hint">Toca para ver</span><span class="def">Temperatura a la que un líquido hierve. Depende de las fuerzas intermoleculares y de la presión.</span></button>
+    <button type="button"><b>Porcentaje de error</b><span class="hint">Toca para ver</span><span class="def">|medido − referencia| ÷ referencia × 100. Dice qué tan lejos quedó tu medida.</span></button>
+  </div>
+</section>
+
+<section class="sec" id="intra">
+  <div class="sec-kicker">Punto de partida</div>
+  <h2>Dentro de la molécula y entre moléculas</h2>
+  <div class="meta">Al terminar podrás explicar qué se rompe cuando un líquido hierve.</div>
+  <div class="duo">
+    <div class="fig">
+      <svg viewBox="0 0 260 170" role="img" aria-label="Dos moléculas de agua: enlaces O−H dentro de cada una y un puente de hidrógeno punteado entre ellas">
+        <g font-family="Outfit" font-weight="700">
+          <circle cx="70" cy="80" r="20" fill="#fecaca" stroke="#dc2626" stroke-width="2"/><text x="70" y="85" text-anchor="middle" font-size="13" fill="#7f1d1d">O</text>
+          <circle cx="40" cy="115" r="12" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><text x="40" y="119" text-anchor="middle" font-size="11">H</text>
+          <circle cx="110" cy="92" r="12" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><text x="110" y="96" text-anchor="middle" font-size="11">H</text>
+          <line x1="58" y1="95" x2="47" y2="106" stroke="#0d2d42" stroke-width="4"/><line x1="89" y1="85" x2="99" y2="89" stroke="#0d2d42" stroke-width="4"/>
+          <circle cx="185" cy="98" r="20" fill="#fecaca" stroke="#dc2626" stroke-width="2"/><text x="185" y="103" text-anchor="middle" font-size="13" fill="#7f1d1d">O</text>
+          <circle cx="210" cy="62" r="12" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><text x="210" y="66" text-anchor="middle" font-size="11">H</text>
+          <circle cx="222" cy="122" r="12" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/><text x="222" y="126" text-anchor="middle" font-size="11">H</text>
+          <line x1="196" y1="81" x2="204" y2="72" stroke="#0d2d42" stroke-width="4"/><line x1="202" y1="109" x2="212" y2="116" stroke="#0d2d42" stroke-width="4"/>
+          <line x1="123" y1="93" x2="164" y2="97" stroke="#1a6ea8" stroke-width="3" stroke-dasharray="5 4"/>
+          <text x="70" y="150" text-anchor="middle" font-size="11" fill="#0d2d42">enlace O−H (dentro)</text>
+          <text x="145" y="30" text-anchor="middle" font-size="11" fill="#1a6ea8">puente de hidrógeno (entre)</text>
+          <line x1="145" y1="36" x2="145" y2="88" stroke="#1a6ea8" stroke-width="1"/>
+          <text x="105" y="76" font-size="11" fill="#1a6ea8">δ+</text><text x="160" y="84" font-size="11" fill="#dc2626">δ−</text>
+        </g>
+      </svg>
+      <div class="fig-sub">Romper un enlace O−H cuesta unos 460 kJ/mol; separar dos moléculas de agua, unos 20 kJ/mol.</div>
+    </div>
+    <div>
+      <p>Cuando el agua de la olla hierve, el vapor sigue siendo H₂O: <b>no se rompió ningún enlace O−H</b>. Lo que se venció fueron las atracciones <b>entre</b> moléculas.</p>
+      <div class="key">🔑 <b>Idea central:</b> cuanto más fuertes sean las fuerzas intermoleculares, más energía hay que dar para separar las moléculas → <b>mayor punto de ebullición</b> y menor tendencia a evaporarse.</div>
+      <p>Por eso el alcohol antiséptico (etanol) se evapora rápido de la piel y el aceite de cocina casi no se evapora: sus moléculas se atraen de forma distinta.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="polar">
+  <div class="sec-kicker">Paso 1 para predecir</div>
+  <h2>¿La molécula es polar? Enlaces + forma</h2>
+  <div class="meta">Al terminar podrás decidir si una molécula orgánica es polar mirando sus enlaces y su forma.</div>
+  <div class="pasos">
+    <div class="pasos-h">Ejemplo resuelto: ¿el clorometano, CH₃−Cl, es polar?</div>
+    <ol>
+      <li><b>Mira los enlaces.</b> C−H casi no es polar (2,6 frente a 2,2). C−Cl sí lo es: el Cl (3,2) atrae los electrones → Cl δ−, C δ+.</li>
+      <li><b>Mira la forma.</b> El carbono es sp³ (tetraédrico). Hay un solo enlace polar, así que ningún otro lo compensa.</li>
+      <li><b>Concluye.</b> El clorometano es <b>polar</b>: tiene un extremo δ− (el Cl) y otro δ+.</li>
+      <li><b>Compara.</b> En el CCl₄ hay cuatro C−Cl polares, pero apuntan a los cuatro vértices del tetraedro y <b>se anulan</b>: el CCl₄ es apolar. La forma importa tanto como los enlaces.</li>
+    </ol>
+  </div>
+  <p>En química orgánica casi siempre basta esta regla: <b>los hidrocarburos son apolares</b>; los compuestos con O, N o halógenos en su grupo funcional suelen ser <b>polares</b>, sobre todo si la cadena es corta.</p>
+  <div id="cl-polar"></div>
+  <div class="calc-out" id="cl-polar-out" aria-live="polite">Clasifica las seis moléculas.</div>
+</section>
+
+<section class="sec" id="fuerzas">
+  <div class="sec-kicker">Paso 2 para predecir</div>
+  <h2>Las tres fuerzas intermoleculares</h2>
+  <div class="meta">Al terminar podrás identificar la fuerza más fuerte que tiene cada compuesto a partir de su grupo funcional.</div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Fuerza</th><th>¿Quién la tiene?</th><th>¿Cómo se origina?</th><th>Ejemplos orgánicos</th></tr></thead>
+    <tbody>
+      <tr><td><b>London (dispersión)</b><br><span class="tag info">la más débil por molécula</span></td><td><b>Todas</b> las moléculas</td><td>Los electrones se mueven y crean dipolos instantáneos que inducen otros en las vecinas. Crece con el número de electrones y con la superficie.</td><td>Alcanos, alquenos, benceno, grasas</td></tr>
+      <tr><td><b>Dipolo-dipolo</b></td><td>Moléculas <b>polares</b></td><td>El extremo δ+ de una atrae al δ− de otra.</td><td>Aldehídos, cetonas, ésteres, éteres, haluros de alquilo</td></tr>
+      <tr><td><b>Puente de hidrógeno</b><br><span class="tag yes">la más fuerte de las tres</span></td><td>Moléculas con <b>O−H</b> o <b>N−H</b></td><td>El H, muy δ+, se atrae con un par libre de O o N de otra molécula.</td><td>Alcoholes, ácidos carboxílicos, aminas primarias y secundarias, amidas</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">⚠️ <b>Error frecuente:</b> «el éter forma puentes de hidrógeno porque tiene O». El dimetiléter, CH₃−O−CH₃, tiene O, pero <b>ningún H unido al O</b>: entre sus moléculas solo hay dipolo-dipolo y London. (Sí puede <i>recibir</i> puentes de hidrógeno del agua, por eso se disuelve algo en ella).</div>
+  <p>Escoge la fuerza intermolecular <b>más fuerte</b> que hay entre las moléculas de cada compuesto puro:</p>
+  <div id="cl-fuerza"></div>
+  <div class="calc-out" id="cl-fuerza-out" aria-live="polite">Clasifica los siete compuestos.</div>
+</section>
+
+<section class="sec" id="comparar">
+  <div class="sec-kicker">Comparaciones con variaciones mínimas</div>
+  <h2>Compara y predice: ¿cuál hierve primero?</h2>
+  <div class="meta">Predice el orden, compruébalo con los datos reales y explica la diferencia con las fuerzas intermoleculares.</div>
+  <p>En cada serie los compuestos se parecen mucho (misma masa o misma fórmula): así, la diferencia se debe a <b>una sola variable</b>. Toca los compuestos en orden, <b>del menor al mayor</b> punto de ebullición, y luego compara con los datos.</p>
+  <div class="seg" id="cmp-serie" role="group" aria-label="Serie"></div>
+  <div id="cmp-items" class="links-row"></div>
+  <div class="calc-row"><button type="button" class="btn-sm prim" id="cmp-ver">Comprobar con los datos</button><button type="button" class="btn-sm" id="cmp-rei">↺ Ordenar otra vez</button></div>
+  <div class="plot" id="cmp-plot" hidden><svg id="cmp-svg" viewBox="0 0 520 240" role="img" aria-label="Barras con los puntos de ebullición de la serie"></svg></div>
+  <div class="calc-out" id="cmp-msg" aria-live="polite" style="margin-top:10px">Elige una serie y toca los compuestos en orden.</div>
+</section>
+
+<section class="sec" id="solub">
+  <div class="sec-kicker">Otra propiedad</div>
+  <h2>Solubilidad: semejante disuelve a semejante</h2>
+  <div class="meta">Al terminar podrás predecir si un compuesto orgánico se disuelve en agua o en aceite.</div>
+  <p>Una sustancia se disuelve cuando sus moléculas pueden atraerse con las del solvente tanto como se atraían entre ellas. El agua es muy polar y forma puentes de hidrógeno: disuelve compuestos polares con −OH, −NH₂ o −COOH <b>si su cadena apolar es corta</b>.</p>
+  <div class="duo">
+    <div class="plot"><svg id="sol-svg" viewBox="0 0 320 210" role="img" aria-label="Solubilidad en agua de los alcoholes de 1 a 6 carbonos"></svg></div>
+    <div>
+      <p><b>Lee la gráfica.</b> Los alcoholes de 1, 2 y 3 carbonos se mezclan con el agua en cualquier proporción (barra completa). A partir de 4 carbonos, la parte apolar «pesa» más que el −OH y la solubilidad cae rápido.</p>
+      <div class="life">
+        <div class="life-h">🧼 ¿Cómo limpia el jabón?</div>
+        <p>Una molécula de jabón tiene una <b>cola</b> larga de hidrocarburo (apolar) y una <b>cabeza</b> −COO⁻ Na⁺ (iónica). Las colas se meten en la grasa y las cabezas quedan hacia el agua: la grasa sale envuelta en pequeñas gotas (micelas) con el enjuague.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="labdatos">
+  <div class="sec-kicker">Laboratorio de datos · construcción del conocimiento</div>
+  <h2>Investiga como en el laboratorio: hipótesis, datos, gráfica y margen de error</h2>
+  <div class="meta">Formula una hipótesis, mide (simulado), grafica, calcula el porcentaje de error y escribe una conclusión coherente con tus datos.</div>
+  <p><b>Pregunta de investigación:</b> ¿cómo cambia el punto de ebullición de una familia de compuestos cuando su cadena crece un carbono?</p>
+  <div class="calc">
+    <div class="calc-row"><label for="ld-fam">1 · Familia:</label><select id="ld-fam"><option value="alc">Alcoholes (metanol → hexan-1-ol)</option><option value="alk">Alcanos (pentano → octano)</option></select>
+      <label for="ld-lugar">Lugar:</label><select id="ld-lugar"><option value="bog">Bogotá (0,74 atm)</option><option value="mar">Nivel del mar (1 atm)</option></select></div>
+    <div class="calc-row"><label for="ld-hip">2 · Mi hipótesis:</label><select id="ld-hip" style="max-width:100%"><option value="">— elige —</option><option value="sube">Si la cadena crece, el punto de ebullición sube, porque aumentan las fuerzas de London</option><option value="baja">Si la cadena crece, el punto de ebullición baja, porque la molécula es más pesada</option><option value="igual">El punto de ebullición no cambia, porque el grupo funcional es el mismo</option></select></div>
+    <div class="calc-row"><span style="font-size:.84rem;font-weight:700;color:var(--dim)">3 · Medir:</span><button type="button" class="btn-sm prim" id="ld-medir">🌡️ Medir cada compuesto 3 veces</button></div>
+    <div class="tbl-wrap"><table class="tbl" id="ld-tabla"><thead><tr><th>Compuesto</th><th>C</th><th>Medida 1</th><th>Medida 2</th><th>Medida 3</th><th>Promedio (°C)</th></tr></thead><tbody></tbody></table></div>
+    <div class="plot"><svg id="ld-svg" viewBox="0 0 520 260" role="img" aria-label="Gráfica de punto de ebullición contra número de carbonos"></svg></div>
+    <div class="calc-row"><label for="ld-err">4 · Porcentaje de error de <span id="ld-errnom">…</span> (referencia en este lugar: <b id="ld-errref">…</b> °C; tu promedio: <b id="ld-errmed">…</b> °C):</label><input id="ld-err" inputmode="decimal" placeholder="%"><button type="button" class="btn-sm" id="ld-errok">Revisar</button></div>
+    <div class="calc-row"><label for="ld-con">5 · Conclusión:</label><select id="ld-con" style="max-width:100%"><option value="">— elige —</option><option value="a">Los datos apoyan la hipótesis de que el punto de ebullición sube con la cadena; las diferencias con la referencia son pequeñas (errores de medida)</option><option value="b">Los datos no apoyan ninguna tendencia porque las medidas no son exactamente iguales a la referencia</option><option value="c">Los datos demuestran que la masa no influye en el punto de ebullición</option></select></div>
+    <div class="calc-out" id="ld-out" aria-live="polite">Empieza eligiendo la familia, el lugar y tu hipótesis.</div>
+  </div>
+  <div class="warn">⚠️ Las medidas de este laboratorio son <b>simuladas</b>: se calculan con los valores de referencia y un error al azar de hasta ±1,5 °C, como el de un termómetro escolar. Los valores para Bogotá se estiman con un modelo de presión de vapor; en tu colegio, el agua hierve cerca de 92 °C.</div>
+</section>
+
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso con el banco del Juego</div>
+  <h2>Practica: fuerzas intermoleculares y propiedades</h2>
+  <div class="prac" id="prac-fi" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<section class="sec" id="resumen">
+  <div class="sec-kicker">Para repasar</div>
+  <h2>Resumen</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Si el compuesto…</th><th>Fuerza más fuerte</th><th>Consecuencia</th></tr></thead>
+    <tbody>
+      <tr><td>solo tiene C e H (alcanos, alquenos, aromáticos)</td><td>London</td><td>Puntos de ebullición bajos; insoluble en agua; sube con la cadena y baja con la ramificación.</td></tr>
+      <tr><td>tiene C=O, C−O−C o C−X (aldehídos, cetonas, ésteres, éteres, haluros)</td><td>Dipolo-dipolo</td><td>Hierve más que un alcano de masa parecida.</td></tr>
+      <tr><td>tiene O−H o N−H (alcoholes, ácidos, aminas, amidas)</td><td>Puente de hidrógeno</td><td>Los puntos de ebullición más altos; los de cadena corta se disuelven en agua.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="links-row"><a class="cn-btn cn-btn--secondary" href="grupos.html">🔬 Repasar los grupos funcionales</a><a class="cn-btn cn-btn--secondary" href="juego.html?tema=fuerzas_inter">🎮 Jugar con este tema</a></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div><!-- /app -->
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="fundamentos.js"></script>
+<script src="temas-extra.js"></script>
+<script src="temas-11.js"></script>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="fx-libro.js"></script>
+<script src="fase4.js"></script>
+<script>
+(function(){
+'use strict';
+var FU=window.FUND;if(FU)FU.practica('prac-fi','fuerzas_inter',8,'Practica: fuerzas intermoleculares');
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function tx(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}
+function coma(v,d){return (d==null?String(v):v.toFixed(d)).replace('.',',');}
+
+if(window.F4){
+F4.clasificador('cl-polar',[
+  {t:'Metano, CH₄',ok:'Apolar',fb:'Enlaces C−H casi apolares y forma simétrica.'},
+  {t:'Clorometano, CH₃−Cl',ok:'Polar',fb:'Un solo C−Cl polar que nadie compensa.'},
+  {t:'Tetraclorometano, CCl₄',ok:'Apolar',fb:'Cuatro C−Cl polares que se anulan por la forma tetraédrica.'},
+  {t:'Etanol, CH₃−CH₂−OH',ok:'Polar',fb:'El −OH es muy polar y la cadena es corta.'},
+  {t:'Hexano, CH₃−CH₂−CH₂−CH₂−CH₂−CH₃',ok:'Apolar',fb:'Hidrocarburo: solo C−C y C−H.'},
+  {t:'Propanona, CH₃−CO−CH₃',ok:'Polar',fb:'El C=O es polar: el O es δ−.'}
+],['Polar','Apolar'],function(b,n){document.getElementById('cl-polar-out').innerHTML='Terminaste: <b>'+b+' de '+n+'</b> al primer intento.';});
+F4.clasificador('cl-fuerza',[
+  {t:'Propano, CH₃−CH₂−CH₃',ok:'London',fb:'Hidrocarburo apolar: solo fuerzas de London.'},
+  {t:'Propan-1-ol, CH₃−CH₂−CH₂−OH',ok:'Puente de H',fb:'Tiene O−H.'},
+  {t:'Propanal, CH₃−CH₂−CHO',ok:'Dipolo-dipolo',fb:'C=O polar, pero ningún H unido a O.'},
+  {t:'Ácido etanoico, CH₃−COOH',ok:'Puente de H',fb:'El −COOH tiene O−H (y forma pares de moléculas con dos puentes).'},
+  {t:'Dimetiléter, CH₃−O−CH₃',ok:'Dipolo-dipolo',fb:'Tiene O, pero no H unido al O.'},
+  {t:'Etilamina, CH₃−CH₂−NH₂',ok:'Puente de H',fb:'Tiene N−H.'},
+  {t:'Benceno, C₆H₆',ok:'London',fb:'Hidrocarburo apolar.'}
+],['London','Dipolo-dipolo','Puente de H'],function(b,n){document.getElementById('cl-fuerza-out').innerHTML='Terminaste: <b>'+b+' de '+n+'</b> al primer intento. Pista que funciona siempre: ¿hay O−H o N−H? → puente de H; ¿hay O, N o halógeno sin eso? → dipolo-dipolo; ¿solo C e H? → London.';});
+}
+
+/* ── Compara y predice ── (puntos de ebullición a 1 atm, °C) */
+var SER=[
+ {n:'Masa ≈ 44–46 g/mol',it:[['Propano','CH₃−CH₂−CH₃',44,-42,'London'],['Dimetiléter','CH₃−O−CH₃',46,-24,'dipolo-dipolo'],['Etanal','CH₃−CHO',44,20,'dipolo-dipolo'],['Etanol','CH₃−CH₂−OH',46,78,'puente de H'],['Ácido metanoico','H−COOH',46,101,'puente de H (dímeros)']],
+  ex:'Con masas casi iguales, el orden lo pone el <b>tipo de fuerza</b>: London (propano) &lt; dipolo-dipolo (éter, aldehído) &lt; puente de hidrógeno (etanol) &lt; dos puentes por par de moléculas (ácido). El éter hierve menos que el etanal porque su C−O−C es menos polar que un C=O.'},
+ {n:'Masa ≈ 58–60 g/mol',it:[['Butano','CH₃−CH₂−CH₂−CH₃',58,-1,'London'],['Propanal','CH₃−CH₂−CHO',58,48,'dipolo-dipolo'],['Propanona','CH₃−CO−CH₃',58,56,'dipolo-dipolo'],['Propan-1-ol','CH₃−CH₂−CH₂−OH',60,97,'puente de H'],['Ácido etanoico','CH₃−COOH',60,118,'puente de H (dímeros)']],
+  ex:'Misma conclusión que con la serie anterior: casi 120 °C de diferencia con la misma masa. Lo que cambia es el <b>grupo funcional</b> y, con él, la fuerza intermolecular.'},
+ {n:'Isómeros C₅H₁₂',it:[['2,2-dimetilpropano','C₅H₁₂ muy ramificado (casi esférico)',72,10,'London'],['2-metilbutano','C₅H₁₂ con una rama',72,28,'London'],['Pentano','CH₃−CH₂−CH₂−CH₂−CH₃',72,36,'London']],
+  ex:'Misma fórmula, misma fuerza (London). La diferencia es la <b>forma</b>: la cadena lineal tiene más superficie de contacto que la ramificada, así que sus fuerzas de London son mayores.'}
+];
+var si=0,orden=[];
+var segS=document.getElementById('cmp-serie');
+segS.innerHTML=SER.map(function(s,i){return '<button type="button" data-i="'+i+'"'+(i?'':' class="on"')+'>'+s.n+'</button>';}).join('');
+function pintaItems(){
+  var s=SER[si],rand=s.it.map(function(x,i){return i;});
+  rand.sort(function(a,b){return (a*7+3)%5-(b*7+3)%5;});
+  document.getElementById('cmp-items').innerHTML=rand.map(function(i){var it=s.it[i],k=orden.indexOf(i);
+    return '<button type="button" class="btn-sm'+(k>=0?' on':'')+'" data-i="'+i+'"'+(k>=0?' disabled':'')+'>'+(k>=0?(k+1)+'º · ':'')+it[0]+' <small style="font-weight:500">'+it[1]+'</small></button>';}).join('');
+}
+function reset(){orden=[];document.getElementById('cmp-plot').hidden=true;document.getElementById('cmp-msg').innerHTML='Toca los compuestos <b>del menor al mayor</b> punto de ebullición.';pintaItems();}
+segS.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;si=+b.dataset.i;segS.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});reset();});
+document.getElementById('cmp-items').addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;orden.push(+b.dataset.i);pintaItems();
+  if(orden.length===SER[si].it.length)document.getElementById('cmp-msg').innerHTML='Listo. Pulsa <b>Comprobar con los datos</b>.';});
+document.getElementById('cmp-rei').addEventListener('click',reset);
+document.getElementById('cmp-ver').addEventListener('click',function(){
+  var s=SER[si];if(orden.length<s.it.length){document.getElementById('cmp-msg').innerHTML='Primero ordena todos los compuestos (llevas '+orden.length+' de '+s.it.length+').';return;}
+  var real=s.it.map(function(x,i){return i;}).sort(function(a,b){return s.it[a][3]-s.it[b][3];});
+  var bien=orden.filter(function(v,k){return v===real[k];}).length;
+  var svg=document.getElementById('cmp-svg');svg.innerHTML='';document.getElementById('cmp-plot').hidden=false;
+  var mn=-60,mx=130,y=function(v){return 200-(v-mn)/(mx-mn)*180;},w=(460/s.it.length);
+  el('line',{x1:40,y1:y(0),x2:510,y2:y(0),stroke:'#94a3b8'},svg);tx(svg,36,y(0)+4,'0 °C',{'text-anchor':'end','font-size':10,fill:'#475569'});
+  tx(svg,36,y(100)+4,'100',{'text-anchor':'end','font-size':10,fill:'#475569'});el('line',{x1:40,y1:y(100),x2:510,y2:y(100),stroke:'#e2e8f0'},svg);
+  real.forEach(function(i,k){var it=s.it[i],x=50+k*w,h=y(0)-y(it[3]),col=/puente/.test(it[4])?'#1a6ea8':/dipolo/.test(it[4])?'#b45309':'#64748b';
+    el('rect',{x:x,y:h>=0?y(it[3]):y(0),width:w-16,height:Math.abs(h),fill:col,rx:4,opacity:.85},svg);
+    tx(svg,x+(w-16)/2,(h>=0?y(it[3]):y(it[3]))+(h>=0?-6:14),it[3]+' °C',{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#0d2d42'});
+    tx(svg,x+(w-16)/2,222,it[0],{'text-anchor':'middle','font-size':10,'font-weight':700,fill:'#0d2d42'});
+    tx(svg,x+(w-16)/2,235,it[4],{'text-anchor':'middle','font-size':9,fill:col});});
+  document.getElementById('cmp-msg').innerHTML=(bien===s.it.length?'✅ <b>¡Orden correcto!</b> ':'🔎 Acertaste la posición de <b>'+bien+' de '+s.it.length+'</b>. Las barras muestran el orden real. ')+s.ex;
+  document.getElementById('cmp-msg').className='calc-out '+(bien===s.it.length?'ok':'');
+});
+reset();
+
+/* ── Solubilidad de alcoholes (g/100 mL de agua, 20 °C) ── */
+(function(){
+  var s=document.getElementById('sol-svg'),D=[['metanol',1,null],['etanol',2,null],['propan-1-ol',3,null],['butan-1-ol',4,7.7],['pentan-1-ol',5,2.2],['hexan-1-ol',6,0.6]];
+  var y=function(v){return 170-v/10*150;};
+  el('line',{x1:40,y1:170,x2:310,y2:170,stroke:'#94a3b8'},s);
+  [0,5,10].forEach(function(v){tx(s,34,y(v)+4,String(v),{'text-anchor':'end','font-size':10,fill:'#475569'});el('line',{x1:40,y1:y(v),x2:310,y2:y(v),stroke:'#eef2f7'},s);});
+  tx(s,12,95,'g / 100 mL',{transform:'rotate(-90 12 95)','text-anchor':'middle','font-size':10,fill:'#475569'});
+  D.forEach(function(d,i){var x=50+i*43,v=d[2]==null?10:d[2];
+    el('rect',{x:x,y:y(v),width:30,height:170-y(v),fill:d[2]==null?'#1a6ea8':'#7dd3fc',rx:3},s);
+    tx(s,x+15,y(v)-5,d[2]==null?'∞':coma(d[2]),{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#0d2d42'});
+    tx(s,x+15,186,d[1]+' C',{'text-anchor':'middle','font-size':10,'font-weight':700,fill:'#0d2d42'});
+    tx(s,x+15,200,d[0],{'text-anchor':'middle','font-size':8,fill:'#475569'});});
+  tx(s,175,16,'∞ = miscible en cualquier proporción',{'text-anchor':'middle','font-size':10,fill:'#1a6ea8'});
+})();
+
+/* ── Laboratorio de datos ──
+   Referencias a 1 atm (°C). Para Bogotá (0,74 atm) se estima con la ecuación
+   de Clausius-Clapeyron y la regla de Trouton: ΔHvap ≈ k·Tb (k = 88 J/mol·K
+   para alcanos; ≈ 110 para alcoholes, que forman puentes de hidrógeno).
+   Con k = 110, el agua da 91,6 °C, el valor que se observa en Bogotá. */
+var FAM={alc:{k:110,it:[['Metanol',1,64.7],['Etanol',2,78.4],['Propan-1-ol',3,97.2],['Butan-1-ol',4,117.7],['Pentan-1-ol',5,138.0],['Hexan-1-ol',6,157.0]]},
+         alk:{k:88,it:[['Pentano',5,36.1],['Hexano',6,68.7],['Heptano',7,98.4],['Octano',8,125.7]]}};
+var med=null;
+function ref(t,k,lugar){if(lugar==='mar')return t;var T=t+273.15;return T/(1+8.314*Math.log(1/0.74)/k)-273.15;}
+function lab(){return {f:FAM[document.getElementById('ld-fam').value],lug:document.getElementById('ld-lugar').value};}
+function grafica(){
+  var L=lab(),svg=document.getElementById('ld-svg');svg.innerHTML='';
+  var it=L.f.it,cmin=it[0][1],cmax=it[it.length-1][1],X=function(c){return 60+(c-cmin)/(cmax-cmin||1)*420;},Y=function(t){return 220-(t-20)/150*200;};
+  el('line',{x1:55,y1:220,x2:490,y2:220,stroke:'#64748b'},svg);el('line',{x1:55,y1:20,x2:55,y2:220,stroke:'#64748b'},svg);
+  [20,60,100,140].forEach(function(v){tx(svg,50,Y(v)+4,v+'',{'text-anchor':'end','font-size':10,fill:'#475569'});el('line',{x1:55,y1:Y(v),x2:490,y2:Y(v),stroke:'#eef2f7'},svg);});
+  it.forEach(function(r){tx(svg,X(r[1]),236,r[1]+'',{'text-anchor':'middle','font-size':10,fill:'#475569'});});
+  tx(svg,272,254,'número de carbonos',{'text-anchor':'middle','font-size':11,fill:'#0d2d42','font-weight':700});
+  tx(svg,16,120,'Punto de ebullición (°C)',{transform:'rotate(-90 16 120)','text-anchor':'middle','font-size':11,fill:'#0d2d42','font-weight':700});
+  if(!med){tx(svg,272,120,'Aquí aparecerán tus datos',{'text-anchor':'middle','font-size':13,fill:'#94a3b8'});return;}
+  var pts=med.map(function(m,i){return [X(it[i][1]),Y(m.p)];});
+  el('polyline',{points:it.map(function(r){return X(r[1])+','+Y(ref(r[2],L.f.k,L.lug));}).join(' '),fill:'none',stroke:'#94a3b8','stroke-width':2,'stroke-dasharray':'5 4'},svg);
+  pts.forEach(function(p,i){el('circle',{cx:p[0],cy:p[1],r:6,fill:'#1a6ea8',stroke:'#fff','stroke-width':2},svg);});
+  tx(svg,480,32,'● tu promedio   - - referencia',{'text-anchor':'end','font-size':10,fill:'#0d2d42'});
+}
+function tabla(){
+  var L=lab(),tb=document.querySelector('#ld-tabla tbody');
+  tb.innerHTML=L.f.it.map(function(r,i){var m=med&&med[i];
+    return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td>'+(m?m.v.map(function(v){return '<td>'+coma(v,1)+'</td>';}).join('')+'<td><b>'+coma(m.p,1)+'</b></td>':'<td>—</td><td>—</td><td>—</td><td>—</td>')+'</tr>';}).join('');
+  var j=Math.min(1,L.f.it.length-1),r=L.f.it[j];
+  document.getElementById('ld-errnom').textContent=r[0];
+  document.getElementById('ld-errref').textContent=coma(ref(r[2],L.f.k,L.lug),1);
+  document.getElementById('ld-errmed').textContent=med?coma(med[j].p,1):'…';
+}
+function nuevo(){med=null;tabla();grafica();document.getElementById('ld-out').className='calc-out';document.getElementById('ld-out').innerHTML='Elige tu hipótesis y pulsa <b>Medir</b>.';}
+['ld-fam','ld-lugar'].forEach(function(id){document.getElementById(id).addEventListener('change',nuevo);});
+document.getElementById('ld-medir').addEventListener('click',function(){
+  var out=document.getElementById('ld-out');
+  if(!document.getElementById('ld-hip').value){out.className='calc-out fail';out.innerHTML='Primero escribe tu <b>hipótesis</b> (paso 2): un científico predice antes de medir.';return;}
+  var L=lab();med=L.f.it.map(function(r){var t=ref(r[2],L.f.k,L.lug),v=[0,1,2].map(function(){return Math.round((t+(Math.random()*3-1.5))*10)/10;});return {v:v,p:(v[0]+v[1]+v[2])/3};});
+  tabla();grafica();out.className='calc-out';out.innerHTML='Mira la gráfica: ¿los puntos suben, bajan o se quedan iguales? Ahora calcula el porcentaje de error del paso 4.';
+});
+document.getElementById('ld-errok').addEventListener('click',function(){
+  var out=document.getElementById('ld-out');if(!med){out.className='calc-out fail';out.innerHTML='Primero mide (paso 3).';return;}
+  var L=lab(),j=Math.min(1,L.f.it.length-1),r=ref(L.f.it[j][2],L.f.k,L.lug),m=Math.round(med[j].p*10)/10,e=Math.abs(m-Math.round(r*10)/10)/(Math.round(r*10)/10)*100;
+  var v=parseFloat(String(document.getElementById('ld-err').value).replace(',','.'));
+  if(isNaN(v)){out.className='calc-out fail';out.innerHTML='Escribe un número (por ejemplo 1,2).';return;}
+  if(Math.abs(v-e)<=0.15){out.className='calc-out ok';out.innerHTML='✅ <b>Correcto: '+coma(e,2)+' %.</b> Un error menor que 5 % suele considerarse bueno en un laboratorio escolar. Ahora escoge una conclusión (paso 5).';}
+  else{out.className='calc-out fail';out.innerHTML='🔎 Revisa: % error = |'+coma(m,1)+' − '+coma(r,1)+'| ÷ '+coma(r,1)+' × 100. Primero la diferencia, luego divides entre la <b>referencia</b> y multiplicas por 100.';}
+});
+document.getElementById('ld-con').addEventListener('change',function(){
+  var out=document.getElementById('ld-out'),c=this.value,h=document.getElementById('ld-hip').value;if(!c)return;
+  if(!med){out.className='calc-out fail';out.innerHTML='Sin datos no hay conclusión: primero mide.';return;}
+  if(c==='a'){out.className='calc-out ok';out.innerHTML='✅ <b>Conclusión coherente con los datos.</b> Los promedios suben con cada carbono (más electrones y superficie → más fuerzas de London) y se desvían de la referencia menos de 2 °C, dentro del margen de error del termómetro. '+(h==='sube'?'Tu hipótesis quedó <b>apoyada</b>.':'Tu hipótesis inicial <b>no</b> se cumplió: eso también es un resultado valioso, y la ciencia avanza corrigiendo hipótesis.')+(lab().lug==='bog'?' Fíjate: en Bogotá todos hierven entre 7 y 11 °C por debajo del valor de las tablas, por la menor presión. Esa diferencia no es un error de medida.':'');}
+  else if(c==='b'){out.className='calc-out fail';out.innerHTML='🔎 Ninguna medida es idéntica a la referencia: por eso existe el <b>margen de error</b>. Diferencias de 1 o 2 °C no borran una tendencia de 20 °C por carbono.';}
+  else{out.className='calc-out fail';out.innerHTML='🔎 En este experimento la masa y la cadena crecen juntas, así que los datos no permiten separar los dos efectos. Para concluir sobre la masa harían falta compuestos de igual masa y distinta forma (mira la sección «Compara y predice»).';}
+});
+nuevo();
+})();
+</script>
+<script src="site-ui.js"></script>
+<script src="narracion.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>

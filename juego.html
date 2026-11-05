@@ -193,6 +193,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .nivel-card.is .nivel-icon{background:linear-gradient(135deg,#c4b5fd,#7c3aed)}
 .nivel-card.pr .nivel-icon{background:linear-gradient(135deg,#bbf7d0,#166534)}
 .nivel-card.tr .nivel-icon{background:linear-gradient(135deg,#fecaca,#b91c1c)}
+.nivel-card.f4 .nivel-icon{background:linear-gradient(135deg,#99f6e4,#0f766e)}
 /* Encabezado de cada fase en la portada (mismos colores que CN_FASES). */
 .fase-titulo{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin:14px 0 2px;padding:6px 0 6px 10px;border-left:4px solid var(--fc,#1a6ea8);text-align:left}
 .fase-titulo:first-child{margin-top:0}
@@ -833,6 +834,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 <a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
 <a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
 <a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="orbitales.html" class="nav-link">🌿 <span class="full">Vida y ambiente</span></a>
 <a href="juego.html" class="nav-link active">🎮 <span class="full">Juego</span></a>
 <a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
 <a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
@@ -966,6 +968,27 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
       <button class="nivel-card cp" onclick="openLevelModal('completo')">
         <div class="nivel-icon">⭐</div>
         <div><div class="nivel-name">Nomenclatura + reacciones</div><div class="nivel-desc">Todos los grupos funcionales, con preguntas de reacciones mezcladas. Juégalo al final, después de estudiar Reacciones.</div><div class="nivel-count">1248 preguntas · 20 por sesión</div></div>
+      </button>
+      <div class="fase-titulo" style="--fc:#0f766e"><span class="ft-n">Fase 4</span><span class="ft-t">Química de la vida y del ambiente</span><span class="ft-s">Orbitales, propiedades, biomoléculas y ambiente (11.°)</span></div>
+      <button class="nivel-card f4" onclick="openLevelModal('fase4')">
+        <div class="nivel-icon">🌿</div>
+        <div><div class="nivel-name">Fase 4 completa</div><div class="nivel-desc">Mezcla los cuatro temas de la Fase 4</div><div class="nivel-count" id="stat-f4-count">94 preguntas · 4 temas</div></div>
+      </button>
+      <button class="nivel-card f4" onclick="openLevelModal('orbitales_mol')">
+        <div class="nivel-icon">🌈</div>
+        <div><div class="nivel-name">Orbitales moleculares</div><div class="nivel-desc">Enlazante y antienlazante, orden de enlace, aromaticidad y color</div><div class="nivel-count">22 preguntas · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card f4" onclick="openLevelModal('fuerzas_inter')">
+        <div class="nivel-icon">💧</div>
+        <div><div class="nivel-name">Fuerzas intermoleculares</div><div class="nivel-desc">Polaridad, puntos de ebullición, solubilidad y margen de error</div><div class="nivel-count">24 preguntas · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card f4" onclick="openLevelModal('biomoleculas')">
+        <div class="nivel-icon">🧬</div>
+        <div><div class="nivel-name">Biomoléculas</div><div class="nivel-desc">Carbohidratos, lípidos, proteínas, ácidos nucleicos y metabolismo</div><div class="nivel-count">25 preguntas · 20 por sesión</div></div>
+      </button>
+      <button class="nivel-card f4" onclick="openLevelModal('quimica_ambiente')">
+        <div class="nivel-icon">🌎</div>
+        <div><div class="nivel-name">Química orgánica y ambiente</div><div class="nivel-desc">Combustión y CO₂, plásticos, ozono, plaguicidas y biocombustibles</div><div class="nivel-count">23 preguntas · 20 por sesión</div></div>
       </button>
     </div>
     <div class="portada-stats">
@@ -1135,6 +1158,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 
 <script src="fundamentos.js"></script>
 <script src="temas-extra.js"></script>
+<script src="temas-11.js"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -2517,6 +2541,12 @@ const NIVEL_TOPICS={
   fenoles:         ['fenoles'],
   derivados_acido: ['derivados_acido'],
   tipos_reaccion:  ['tipos_reaccion'],
+  // Fase 4 «Química de la vida y del ambiente» — temas-11.js
+  fase4:            ['orbitales_mol','fuerzas_inter','biomoleculas','quimica_ambiente'],
+  orbitales_mol:    ['orbitales_mol'],
+  fuerzas_inter:    ['fuerzas_inter'],
+  biomoleculas:     ['biomoleculas'],
+  quimica_ambiente: ['quimica_ambiente'],
   // Retos de nomenclatura (temas nuevos; etiquetas nuevas en la hoja)
   retos:            ['cadena_principal','cazar_errores','haluros','polifuncionales'],
   cadena_principal: ['cadena_principal'],
@@ -2567,6 +2597,11 @@ const NIVEL_LABELS={
   fenoles:         'Fenoles',
   derivados_acido: 'Haluros de ácido y anhídridos',
   tipos_reaccion:  '🧭 Tipos de reacción orgánica',
+  fase4:            '🌿 Fase 4: Química de la vida y del ambiente',
+  orbitales_mol:    '🌈 Orbitales moleculares y aromaticidad',
+  fuerzas_inter:    '💧 Fuerzas intermoleculares y propiedades',
+  biomoleculas:     '🧬 Biomoléculas',
+  quimica_ambiente: '🌎 Química orgánica y ambiente',
   retos:            '🧠 Retos de nomenclatura',
   cadena_principal: '🔎 Encuentra la cadena',
   cazar_errores:    '🕵️ Cazadores de errores',
@@ -2910,7 +2945,7 @@ function startGame(){
   } else {
     pool=NIVEL_TOPICS[currentLevel]
       ?QBANK.filter(q=>NIVEL_TOPICS[currentLevel].includes(q.topic))
-      :QBANK.filter(q=>!FUND_TOPICS.includes(q.topic));
+      :QBANK.filter(q=>!FUND_TOPICS.includes(q.topic)&&!F4_TOPICS.includes(q.topic));
   }
   const n=Math.min(pool.length,20);
   questions=shuffle(pool).slice(0,n);
@@ -6719,6 +6754,9 @@ const FUND_TOPICS=window.FUND_TOPICS||[];
 // Temas de temas-extra.js (principios, cicloalcanos, fenoles, haluros de
 // ácido y anhídridos, tipos de reacción): opciones en letra normal.
 const EXTRA_TOPICS=window.EXTRA_TOPICS||[];
+// Temas de la Fase 4 (temas-11.js): tienen sus propias tarjetas y no entran
+// al «Juego completo» (nomenclatura + reacciones).
+const F4_TOPICS=Object.keys(window.TEMAS11||{});
 const QBANK_FUNDAMENTOS=[...(window.FUND_BANCO||[])];
 QBANK.push(...QBANK_FUNDAMENTOS);
 Object.assign(M,window.FUND_FIG||{});
@@ -6887,10 +6925,11 @@ function showResults(){
   const nRxn=questions.filter(q=>q.type==='rxnq').length;
   const nBld=questions.filter(q=>q.type==='build').length;
   const nFund=questions.filter(q=>FUND_TOPICS.includes(q.topic)).length;
+  const nF4=questions.filter(q=>F4_TOPICS.includes(q.topic)).length;
   const soloIso=total>0&&questions.every(q=>q.topic==='isomeria');
-  const modo=(total>0&&nFund===total)?(soloIso?'iso':'fund'):(total>0&&nRxn===total)?'rxn':(total>0&&nBld===total)?'build':(nRxn>0)?'mixto':'nom';
-  const TEMA={rxn:'las reacciones orgánicas',build:'cómo pasar del nombre a la estructura',mixto:'la nomenclatura y las reacciones orgánicas',nom:'la nomenclatura IUPAC',fund:'los fundamentos del carbono',iso:'la isomería'}[modo];
-  const REPASO={fund:'Repasa las páginas de la Fase 1: hibridación (cuenta los átomos unidos), tipos de carbono (cuenta solo carbonos) y criterios de las cadenas.',iso:'Antes de clasificar, revisa que la fórmula molecular sea la misma; luego mira si cambia la cadena, la posición o el grupo funcional.',rxn:'Repasa el mecanismo, los reactivos y las condiciones de cada reacción.',build:'Lee el nombre por partes (cadena, insaturaciones, grupo funcional, sustituyentes) antes de dibujar.',mixto:'Repasa los grupos funcionales y las reacciones con más errores.',nom:'Revisa las 4 partes del nombre: ① sustituyentes, ② cadena, ③ insaturaciones, ④ grupo funcional.'}[modo];
+  const modo=(total>0&&nF4===total)?'f4':(total>0&&nFund===total)?(soloIso?'iso':'fund'):(total>0&&nRxn===total)?'rxn':(total>0&&nBld===total)?'build':(nRxn>0)?'mixto':'nom';
+  const TEMA={rxn:'las reacciones orgánicas',build:'cómo pasar del nombre a la estructura',mixto:'la nomenclatura y las reacciones orgánicas',nom:'la nomenclatura IUPAC',fund:'los fundamentos del carbono',iso:'la isomería',f4:'la química de la vida y del ambiente'}[modo];
+  const REPASO={f4:'Repasa las páginas de la Fase 4: orden de enlace y aromaticidad, fuerzas intermoleculares (¿hay O−H o N−H?), biomoléculas (condensación e hidrólisis) y estequiometría de la combustión.',fund:'Repasa las páginas de la Fase 1: hibridación (cuenta los átomos unidos), tipos de carbono (cuenta solo carbonos) y criterios de las cadenas.',iso:'Antes de clasificar, revisa que la fórmula molecular sea la misma; luego mira si cambia la cadena, la posición o el grupo funcional.',rxn:'Repasa el mecanismo, los reactivos y las condiciones de cada reacción.',build:'Lee el nombre por partes (cadena, insaturaciones, grupo funcional, sustituyentes) antes de dibujar.',mixto:'Repasa los grupos funcionales y las reacciones con más errores.',nom:'Revisa las 4 partes del nombre: ① sustituyentes, ② cadena, ③ insaturaciones, ④ grupo funcional.'}[modo];
   let emoji,title,sub;
   if(pct>=90){emoji='🏆';title='¡Excelente dominio!';sub=`Demuestras un dominio sólido de ${TEMA}.`;}
   else if(pct>=70){emoji='🎯';title='¡Muy bien!';sub='Tienes una buena base. Repasa los temas con más errores.';}
@@ -7074,13 +7113,14 @@ function actualizarConteosNiveles(){
     const n=QBANK.filter(q=>NIVEL_TOPICS[nv].includes(q.topic)).length;
     pon(`.nivel-card[onclick*="'${nv}'"] .nivel-count`,n+' preguntas');
   });
-  pon(`.nivel-card[onclick*="'completo'"] .nivel-count`,QBANK.filter(q=>!FUND_TOPICS.includes(q.topic)).length+' preguntas');
+  pon(`.nivel-card[onclick*="'completo'"] .nivel-count`,QBANK.filter(q=>!FUND_TOPICS.includes(q.topic)&&!F4_TOPICS.includes(q.topic)).length+' preguntas');
+  pon('#stat-f4-count',QBANK.filter(q=>F4_TOPICS.includes(q.topic)).length+' preguntas · 4 temas');
   pon('#stat-fund-count',QBANK.filter(q=>NIVEL_TOPICS.carbono.includes(q.topic)).length+' preguntas · 3 temas');
   pon('#stat-iso-count',QBANK.filter(q=>q.topic==='isomeria').length+' preguntas');
   pon('#stat-build-count',QBANK.filter(q=>q.type==='build').length+' moléculas');
   pon('.nivel-card[onclick*="openRxnPicker"] .nivel-count',QBANK.filter(q=>q.type==='rxnq').length+' preguntas');
   pon('#stat-retos-count',QBANK.filter(q=>NIVEL_TOPICS.retos.includes(q.topic)).length+' preguntas');
-  ['principios','tipos_reaccion'].forEach(nv=>{
+  ['principios','tipos_reaccion','orbitales_mol','fuerzas_inter','biomoleculas','quimica_ambiente'].forEach(nv=>{
     pon(`.nivel-card[onclick*="'${nv}'"] .nivel-count`,QBANK.filter(q=>q.topic===nv).length+' preguntas');
   });
   pon(`.nivel-card[onclick*="'funcional'"] .nivel-count`,DRILL_CATEGORIES.funcional.items.length+' grupos');

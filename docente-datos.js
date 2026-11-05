@@ -75,9 +75,16 @@ var ALINEACION={
     {id:'sed10q',grado:10,pag:8,proceso:'Enfoque sobre las ideas centrales de las Ciencias Naturales',componente:'Químico',
      texto:'Argumenta cómo las propiedades periódicas de los elementos, la acidez, la basicidad y los diferentes mecanismos de reacción química (óxido-reducción, descomposición, neutralización y precipitación) explican la formación de compuestos y el desarrollo de reacciones inorgánicas cotidianas, a partir de procesos biológicos e industriales básicos.',
      evid:[
+      {id:'10q-ind1',comp:'Indagación',t:'Evalúa los conceptos de acidez y basicidad y su importancia en reacciones químicas y procesos biológicos, mediante experimentos sencillos controlados que evidencien cambios en el pH y sus efectos.'},
+      {id:'10q-ind2',comp:'Indagación',t:'Interpreta las ecuaciones químicas considerando la ley de conservación de la masa y la carga con ejemplos de la vida cotidiana y calcula las proporciones de reactivos y productos involucrados.'},
+      {id:'10q-ind3',comp:'Indagación',t:'Evalúa el impacto de alimentos y productos ácidos y básicos en el pH del cuerpo humano en relación con los recursos naturales del contexto local, utilizando estudios comparativos y análisis de datos experimentales.'},
       {id:'10q-exp1',comp:'Explicación de fenómenos',t:'Establece la estructura atómica y la discontinuidad de la materia para explicar las propiedades de los elementos y cómo su distribución determina la formación de compuestos, a través de modelos atómicos visuales que muestren la organización de los electrones.'},
       {id:'10q-exp2',comp:'Explicación de fenómenos',t:'Aplica el conocimiento de las propiedades periódicas de los elementos para predecir su comportamiento químico, desarrollando predicciones sobre reactividad y enlace químico en casos específicos para justificar sus resultados.'},
-      {id:'10q-exp3',comp:'Explicación de fenómenos',t:'Analiza los diferentes tipos de enlaces químicos y su importancia en la formación de compuestos, identificando ejemplos de compuestos con distintos tipos de enlaces en contextos naturales y sintéticos.'}
+      {id:'10q-exp3',comp:'Explicación de fenómenos',t:'Analiza los diferentes tipos de enlaces químicos y su importancia en la formación de compuestos, identificando ejemplos de compuestos con distintos tipos de enlaces en contextos naturales y sintéticos.'},
+      {id:'10q-exp4',comp:'Explicación de fenómenos',t:'Evalúa el impacto de alimentos y productos ácidos y básicos en el pH del cuerpo humano, a través de estudios de casos sobre sus efectos en la salud y el medio ambiente.'},
+      {id:'10q-uso1',comp:'Uso comprensivo del conocimiento científico',t:'Aplica las reglas de nomenclatura inorgánica para los compuestos químicos, realizando ejercicios de nomenclatura para identificar y nombrar compuestos complejos.'},
+      {id:'10q-uso2',comp:'Uso comprensivo del conocimiento científico',t:'Evalúa la relación proporcional de la cantidad de sustancia de reactivos y productos en una reacción química, teniendo en cuenta la ley de conservación de la masa y la carga, mediante el análisis y resolución de ejercicios estequiométricos.'},
+      {id:'10q-uso3',comp:'Uso comprensivo del conocimiento científico',t:'Desarrolla los principios de estequiometría para explicar procesos industriales, a través de experimentos prácticos, donde se evalúe la cantidad de productos o reactivos necesarios.'}
      ]},
     {id:'sed10c',grado:10,pag:6,proceso:'Enfoque sobre la construcción del conocimiento científico',componente:'',
      texto:'Plantea preguntas para sustentar y adaptar diferentes tipos de modelos, con el objetivo de predecir fenómenos naturales de su contexto y analizar datos, utilizando herramientas matemáticas y diferenciando entre conceptos científicos como teorías, leyes y modelos.',
@@ -93,7 +100,9 @@ var ALINEACION={
   estandares:[
     {id:'est1',t:'Relaciono la estructura del carbono con la formación de moléculas orgánicas.',nota:'verificar redacción oficial (MEN, 2004)'},
     {id:'est2',t:'Relaciono grupos funcionales con las propiedades físicas y químicas de las sustancias.',nota:'verificar redacción oficial (MEN, 2004)'},
-    {id:'est3',t:'Explico algunos cambios químicos que ocurren en el ser humano.',nota:'no verificado: verificar redacción oficial (MEN, 2004)'}
+    {id:'est3',t:'Explico algunos cambios químicos que ocurren en el ser humano.',nota:'no verificado: verificar redacción oficial (MEN, 2004)'},
+    {id:'est4',t:'Relaciono la estructura de las moléculas orgánicas e inorgánicas con sus propiedades físicas y químicas y su capacidad de cambio químico.',nota:'verificar redacción oficial (MEN, 2004)'},
+    {id:'est5',t:'Identifico cambios químicos en la vida cotidiana y en el ambiente.',nota:'verificar redacción oficial (MEN, 2004)'}
   ],
   /* Derechos Básicos de Aprendizaje: no se pudo consultar el documento
      oficial; por eso van como paráfrasis. */
@@ -689,6 +698,149 @@ var TEMAS=[
    'Escribe la ecuación de la esterificación entre el ácido etanoico y el etanol, y nombra el éster que se forma.',
    'Explica por qué la combustión incompleta de un hidrocarburo es más peligrosa que la completa, en términos de los productos que forma.',
    'Describe, paso a paso, qué le pasa a un alcohol primario cuando se oxida primero a aldehído y después a ácido carboxílico: qué enlaces se rompen y cuáles se forman en cada paso.'
+  ],
+  propia:[]},
+ /* ── Fase 4 «Química de la vida y del ambiente» (temas-11.js). Sus preguntas
+    de selección vienen del banco del Juego (saberJue). Cubren las evidencias
+    de la SED para 11.º que el sitio no tenía: 11q-exp2, 11q-ind3, 11q-uso1 y
+    11q-uso3, y la construcción del conocimiento (laboratorio de datos). ── */
+ {id:'orbitales',titulo:'Orbitales moleculares y aromaticidad',corto:'Orbitales moleculares',
+  gen:[],jue:/^orbitales_mol$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-exp2','11q-exp1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1','est4'],dba:['dba11a']},
+  previos:{
+   curiosos:['El oxígeno líquido queda «pegado» entre los polos de un imán: tiene electrones desapareados, algo que la estructura de Lewis no muestra.',
+     'El color naranja de la zanahoria se debe a una molécula con 11 dobles enlaces seguidos, el β-caroteno.',
+     'El benceno es unos 150 kJ/mol más estable de lo que se esperaría si tuviera tres dobles enlaces fijos.'],
+   contexto:[{amb:'Local',t:'La ahuyama, el mango y la zanahoria deben su color a carotenos; el tomate y la guayaba, al licopeno.'},
+     {amb:'Nacional',t:'La cúrcuma, que se cultiva en el Huila y el Meta, contiene curcumina, un colorante amarillo con un sistema de dobles enlaces conjugados.'},
+     {amb:'Global',t:'Los colorantes de la industria textil y alimentaria se diseñan ajustando la conjugación de sus moléculas.'}],
+   cotidianos:['Zanahoria','Tomate','Cúrcuma','Hojas verdes','Bolas de naftalina'],
+   activacion:['¿Por qué crees que unas sustancias orgánicas tienen color y otras, como el alcohol o el agua, no?','Si un enlace doble es más fuerte que uno sencillo, ¿por qué el benceno, con «tres dobles enlaces», casi no reacciona como un alqueno?','¿Qué significa que un modelo científico explique «mejor» que otro?']
+  },
+  info:{
+   lectura:['Según la teoría de orbitales moleculares, cuando dos orbitales atómicos se combinan se forman dos orbitales moleculares: uno enlazante, de menor energía, que concentra los electrones entre los núcleos, y uno antienlazante (*), de mayor energía, con un nodo entre ellos.',
+     'El orden de enlace es (electrones enlazantes − electrones antienlazantes) ÷ 2. H₂ tiene orden 1; He₂, orden 0 (no existe); N₂, orden 3; O₂, orden 2, con dos electrones desapareados que lo hacen paramagnético.',
+     'En el benceno los seis orbitales p se combinan en orbitales π que cubren todo el anillo: los electrones están deslocalizados, los seis enlaces C−C miden lo mismo y la molécula es unos 150 kJ/mol más estable. Un anillo plano y conjugado con 4n + 2 electrones π es aromático (regla de Hückel).',
+     'En los sistemas conjugados (C=C−C=C…) la diferencia de energía entre el último orbital lleno (π) y el primero vacío (π*) disminuye con cada doble enlace: la molécula absorbe luz de mayor longitud de onda. Con unos 8 o más dobles enlaces conjugados absorbe luz visible y tiene color.'],
+   esquema:{raiz:'Orbitales moleculares',ramas:[
+     {t:'Enlazante y antienlazante',items:['σ y σ*','π y π*']},
+     {t:'Orden de enlace',items:['(enl. − antienl.) ÷ 2','0 = no existe']},
+     {t:'Aromaticidad',items:['Benceno: 6 e⁻ π','Regla 4n + 2']},
+     {t:'Conjugación y color',items:['Más C=C conjugados → mayor λ','β-caroteno: naranja']}]}
+  },
+  ejemplo:null,
+  abiertos:[
+   'Dibuja el diagrama de orbitales moleculares del H₂ y del He₂, calcula el orden de enlace de cada uno y explica por qué el helio no forma moléculas diatómicas.',
+   'Calcula el orden de enlace del N₂, el O₂ y el F₂ y ordénalos de mayor a menor energía de enlace. Justifica tu respuesta.',
+   'Explica por qué el oxígeno líquido es atraído por un imán y qué modelo de enlace permite predecirlo.',
+   'Usa los datos de hidrogenación (ciclohexeno: 120 kJ/mol; benceno: 208 kJ/mol) para calcular la energía de resonancia del benceno y explica qué significa.',
+   'Aplica la regla de Hückel al benceno, al ciclobutadieno y al naftaleno e indica cuáles son aromáticos.',
+   'Explica por qué la zanahoria es naranja y el aceite de cocina es casi incoloro, usando la idea de conjugación.'
+  ],
+  propia:[]},
+
+ {id:'propiedades',titulo:'Fuerzas intermoleculares y propiedades físicas',corto:'Fuerzas intermoleculares',
+  gen:[],jue:/^fuerzas_inter$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est4'],dba:['dba11b']},
+  previos:{
+   curiosos:['El etanol y el dimetiléter tienen la misma fórmula, C₂H₆O, pero uno hierve a 78 °C y el otro a −24 °C.',
+     'En Bogotá el agua hierve a unos 92 °C, no a 100 °C, porque la presión del aire es menor.',
+     'El ADN se mantiene enrollado en doble hélice gracias a millones de puentes de hidrógeno.'],
+   contexto:[{amb:'Local',t:'El alcohol antiséptico se evapora rápido de la piel; el aceite de cocina casi no se evapora.'},
+     {amb:'Nacional',t:'En las refinerías de Barrancabermeja y Cartagena el petróleo se separa en fracciones según su punto de ebullición.'},
+     {amb:'Global',t:'Los jabones y detergentes funcionan porque una parte de su molécula es polar y la otra apolar.'}],
+   cotidianos:['Alcohol antiséptico','Aceite y agua','Jabón','Pipeta de gas','Olla a presión'],
+   activacion:['¿Por qué el aceite y el agua no se mezclan aunque los agites?','¿Por qué el alcohol se seca más rápido que el agua en la piel?','¿Por qué los frijoles se demoran más en cocinarse en Bogotá que en Cartagena?']
+  },
+  info:{
+   lectura:['Las fuerzas intermoleculares son atracciones entre moléculas vecinas. Son mucho más débiles que los enlaces covalentes y son las que se vencen cuando un líquido hierve o una sustancia se disuelve.',
+     'Fuerzas de London: están en todas las moléculas y crecen con el tamaño y la superficie. Dipolo-dipolo: entre moléculas polares (C=O, C−O−C, C−X). Puente de hidrógeno: cuando hay O−H o N−H; es la más fuerte de las tres.',
+     'Con masas parecidas, el punto de ebullición aumenta así: alcano < éter, aldehído o cetona < alcohol < ácido carboxílico. En una misma familia, sube con la cadena y baja con la ramificación.',
+     'Solubilidad: «semejante disuelve a semejante». Los compuestos con −OH, −NH₂ o −COOH y cadena corta se disuelven en agua; al crecer la cadena apolar, la solubilidad disminuye.'],
+   esquema:{raiz:'Fuerzas intermoleculares',ramas:[
+     {t:'London',items:['Todas las moléculas','Crecen con la cadena']},
+     {t:'Dipolo-dipolo',items:['Moléculas polares','Aldehídos, cetonas, éteres']},
+     {t:'Puente de hidrógeno',items:['O−H o N−H','Alcoholes, ácidos, aminas']},
+     {t:'Propiedades',items:['Punto de ebullición','Solubilidad en agua']}]}
+  },
+  ejemplo:null,
+  abiertos:[
+   'Ordena de menor a mayor punto de ebullición: butano, propanona y propan-1-ol (masas molares casi iguales). Justifica con el tipo de fuerza intermolecular de cada uno.',
+   'Explica por qué el etanol se disuelve en agua en cualquier proporción y el hexan-1-ol casi no.',
+   'Un grupo midió el punto de ebullición del etanol y obtuvo 75,5 °C (referencia: 78,4 °C a 1 atm). Calcula el porcentaje de error y propone dos causas de la diferencia, una de ellas relacionada con la altura de Bogotá.',
+   'Diseña un experimento para comprobar la hipótesis «a más carbonos, mayor punto de ebullición». Indica qué variable cambias, cuáles mantienes y qué gráfica harías.',
+   'Explica por qué el pentano hierve a 36 °C y el 2,2-dimetilpropano, su isómero, a 10 °C.',
+   'Explica con las fuerzas intermoleculares cómo quita el jabón la grasa de la ropa.'
+  ],
+  propia:[]},
+
+ {id:'biomoleculas',titulo:'Biomoléculas y metabolismo',corto:'Biomoléculas',
+  gen:[],jue:/^biomoleculas$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-uso1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est3','est2'],dba:['dba11b']},
+  previos:{
+   curiosos:['El almidón de la papa y la celulosa del papel están hechos del mismo azúcar, la glucosa; solo cambia cómo se unen sus moléculas.',
+     'Cuando haces ceviche, el limón «cocina» el pescado sin calor: desnaturaliza sus proteínas.',
+     'Un gramo de grasa aporta 9 kcal; un gramo de azúcar o de proteína, solo 4.'],
+   contexto:[{amb:'Local',t:'La panela, el arroz, el fríjol, el aguacate y el huevo de tu almuerzo aportan carbohidratos, proteínas y lípidos.'},
+     {amb:'Nacional',t:'El guarapo y la chicha se obtienen por fermentación alcohólica; el kumis, por fermentación láctica.'},
+     {amb:'Global',t:'Las grasas trans, que se forman al hidrogenar parcialmente aceites, se han limitado en muchos países por su efecto en la salud del corazón.'}],
+   cotidianos:['Panela','Aguacate','Huevo','Kumis','Ceviche'],
+   activacion:['¿Qué crees que le pasa al almidón del arroz cuando lo digieres?','¿Por qué la clara del huevo se vuelve blanca al freírla?','¿Por qué el aceite es líquido y la manteca es sólida si las dos son grasas?']
+  },
+  info:{
+   lectura:['Las biomoléculas orgánicas son carbohidratos, lípidos, proteínas y ácidos nucleicos. Los polímeros se construyen por condensación (sale H₂O) y se rompen por hidrólisis (entra H₂O).',
+     'Los carbohidratos son polialcoholes con un aldehído (aldosas, como la glucosa) o una cetona (cetosas, como la fructosa); se unen por enlaces glucosídicos. El almidón (enlaces α) se digiere; la celulosa (enlaces β) no.',
+     'Los triglicéridos son triésteres de glicerol y tres ácidos grasos: saturados (cadenas rectas, sólidos), insaturados cis (cadenas dobladas, líquidos) o trans. Las proteínas son cadenas de aminoácidos unidos por enlaces peptídicos (amidas); su forma 3D depende de puentes de hidrógeno y define su función.',
+     'Las enzimas son proteínas que catalizan las reacciones del metabolismo. La respiración celular, C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O, es la oxidación de la glucosa; la fermentación alcohólica produce etanol y CO₂.'],
+   esquema:{raiz:'Biomoléculas',ramas:[
+     {t:'Carbohidratos',items:['Glucosa, sacarosa','Almidón y celulosa']},
+     {t:'Lípidos',items:['Triglicéridos (ésteres)','Saturados e insaturados']},
+     {t:'Proteínas',items:['Aminoácidos','Enlace peptídico']},
+     {t:'Ácidos nucleicos',items:['Nucleótidos','A−T y G−C']}]}
+  },
+  ejemplo:null,
+  abiertos:[
+   'Identifica los grupos funcionales de la glucosa y de la fructosa y explica por qué son isómeros de función.',
+   'Escribe, con fórmulas generales, la condensación de dos aminoácidos y señala el enlace peptídico.',
+   'Explica con la forma de las cadenas por qué el ácido esteárico (69 °C) se funde a mayor temperatura que el ácido oleico (13 °C).',
+   'Calcula las kilocalorías de una porción con 30 g de carbohidratos, 6 g de proteína y 8 g de grasa, y explica por qué la grasa aporta tanta energía.',
+   'Escribe la hebra complementaria de 5′-ATGCCGTA-3′ y cuenta cuántos puentes de hidrógeno unen las dos hebras.',
+   'Compara la respiración celular con la fermentación alcohólica: reactivos, productos, presencia de oxígeno y un ejemplo de cada una en Colombia.'
+  ],
+  propia:[]},
+
+ {id:'ambiente',titulo:'Química orgánica y ambiente',corto:'Química y ambiente',
+  gen:[],jue:/^quimica_ambiente$/,rxn:[],nomenclatura:false,saberJue:true,
+  alin:{g11:{sed:'sed11q',ev:['11q-uso3','11q-exp3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est5','est2'],dba:['dba11a']},
+  previos:{
+   curiosos:['Quemar un galón de gasolina (unos 2,8 kg) produce unos 8,6 kg de CO₂: la masa extra es oxígeno del aire.',
+     'Un solo átomo de cloro de un CFC puede destruir miles de moléculas de ozono en la estratosfera.',
+     'Una bolsa de polietileno no se biodegrada: se rompe en microplásticos que siguen en el ambiente.'],
+   contexto:[{amb:'Local',t:'El gas de la estufa y la pipeta de gas son metano, propano y butano: su combustión produce CO₂ y H₂O.'},
+     {amb:'Nacional',t:'Colombia produce etanol de caña en el Valle del Cauca y biodiésel de palma; la Ley 2232 de 2022 reduce gradualmente varios plásticos de un solo uso.'},
+     {amb:'Global',t:'El Protocolo de Montreal (1987) prohibió los CFC y hoy la capa de ozono se recupera lentamente.'}],
+   cotidianos:['Gasolina','Bolsas plásticas','Botellas PET','Aerosoles','Biodiésel'],
+   activacion:['¿Por qué crees que un plástico dura cientos de años y una cáscara de banano solo unas semanas?','Si la gasolina se quema y «desaparece», ¿a dónde va su carbono?','¿Es lo mismo un combustible renovable que uno sin impacto ambiental?']
+  },
+  info:{
+   lectura:['El petróleo es una mezcla de hidrocarburos que se separa por destilación fraccionada según el punto de ebullición, que depende del tamaño de las moléculas (fuerzas de London).',
+     'En la combustión completa cada carbono del combustible sale como CO₂. Con la ecuación balanceada y las masas molares se calcula la masa de CO₂ (por ejemplo, 1 mol de CH₄ → 1 mol de CO₂ = 44 g). Con poco oxígeno se forma CO, que es tóxico.',
+     'Los plásticos de adición (polietileno, PP, PVC) tienen solo enlaces C−C y C−H, que los microorganismos casi no rompen: persisten y se fragmentan en microplásticos. Los CFC liberan radicales Cl· por ruptura homolítica y destruyen el ozono en cadena. Los plaguicidas apolares, como el DDT, se acumulan en la grasa de los seres vivos.',
+     'Alternativas: biocombustibles (etanol por fermentación, biodiésel por transesterificación), plásticos que se puedan reciclar o degradar, y los principios de la química verde: prevenir desechos, usar materias primas renovables y diseñar productos que se degraden.'],
+   esquema:{raiz:'Química orgánica y ambiente',ramas:[
+     {t:'Combustibles',items:['Destilación del petróleo','CO₂ y CO']},
+     {t:'Plásticos',items:['Adición y condensación','Microplásticos']},
+     {t:'Contaminantes',items:['CFC y ozono','DDT y bioacumulación']},
+     {t:'Alternativas',items:['Biocombustibles','Química verde']}]}
+  },
+  ejemplo:null,
+  abiertos:[
+   'Calcula la masa de CO₂ que se produce al quemar 1 kg de propano (C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O). Muestra la cadena de factores de conversión.',
+   'Explica por qué quemar 1 kg de gasolina produce más de 1 kg de CO₂, usando la ley de conservación de la masa.',
+   'Escribe el mecanismo por el que un CFC destruye el ozono e identifica el paso de ruptura homolítica.',
+   'Explica, con la polaridad, por qué el DDT se acumula en la grasa de los animales y su concentración aumenta en la cadena alimentaria.',
+   'Clasifica el PET, el PVC y el polietileno como polímeros de adición o de condensación y explica cuál podría hidrolizarse con más facilidad.',
+   'Argumenta una ventaja y una desventaja del biodiésel de palma frente al diésel del petróleo, desde el punto de vista químico y ambiental.'
   ],
   propia:[]}
 ];

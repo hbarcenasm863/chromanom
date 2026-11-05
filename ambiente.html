@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<meta name="description" content="Petróleo y combustibles, estequiometría de la combustión y CO₂, plásticos, CFC y capa de ozono, plaguicidas, biocombustibles y química verde, con casos colombianos.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Química orgánica y ambiente</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<link rel="stylesheet" href="fase4.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="orbitales.html" class="nav-link active">🌿 <span class="full">Vida y ambiente</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 4 · Química de la vida y del ambiente · Parada 4 de 4</div>
+  <h1>Química orgánica y ambiente: lo que pasa con los compuestos después de usarlos</h1>
+  <p>La gasolina, el plástico de una bolsa o un plaguicida son compuestos orgánicos útiles. Pero no desaparecen cuando terminamos de usarlos: se queman, se acumulan o reaccionan en el aire. Con lo que ya sabes de grupos funcionales, reacciones y fuerzas intermoleculares puedes explicar (y calcular) su impacto, y evaluar alternativas más sostenibles.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#previo">Palabras clave</a>
+  <a href="#petroleo">Petróleo</a>
+  <a href="#co2">Calcula el CO₂</a>
+  <a href="#plasticos">Plásticos</a>
+  <a href="#ozono">CFC y ozono</a>
+  <a href="#persist">Plaguicidas</a>
+  <a href="#bio">Biocombustibles</a>
+  <a href="#verde">Química verde</a>
+  <a href="#practica">Practica</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+<section class="sec" id="previo">
+  <div class="sec-kicker">Antes de empezar</div>
+  <h2>Palabras clave de esta página</h2>
+  <p>Toca cada tarjeta para ver qué significa.</p>
+  <div class="glos">
+    <button type="button"><b>Combustible fósil</b><span class="hint">Toca para ver</span><span class="def">Petróleo, carbón o gas natural: restos de seres vivos transformados durante millones de años.</span></button>
+    <button type="button"><b>Combustión completa</b><span class="hint">Toca para ver</span><span class="def">Con suficiente O₂: el carbono sale como CO₂ y el hidrógeno como H₂O.</span></button>
+    <button type="button"><b>Combustión incompleta</b><span class="hint">Toca para ver</span><span class="def">Con poco O₂: se forman CO (tóxico) u hollín (carbono).</span></button>
+    <button type="button"><b>Efecto invernadero</b><span class="hint">Toca para ver</span><span class="def">Gases como el CO₂ y el CH₄ retienen el calor que emite la Tierra. Al aumentar, la temperatura sube.</span></button>
+    <button type="button"><b>Persistente</b><span class="hint">Toca para ver</span><span class="def">Que dura mucho en el ambiente porque los microorganismos casi no lo degradan.</span></button>
+    <button type="button"><b>Biomagnificación</b><span class="hint">Toca para ver</span><span class="def">Aumento de la concentración de una sustancia en cada nivel de la cadena alimentaria.</span></button>
+    <button type="button"><b>Radical libre</b><span class="hint">Toca para ver</span><span class="def">Átomo o molécula con un electrón desapareado, muy reactivo (como el Cl·).</span></button>
+    <button type="button"><b>Química verde</b><span class="hint">Toca para ver</span><span class="def">Diseñar productos y procesos que reduzcan sustancias peligrosas y desechos.</span></button>
+  </div>
+</section>
+
+<section class="sec" id="petroleo">
+  <div class="sec-kicker">De dónde vienen</div>
+  <h2>El petróleo: una mezcla que se separa por puntos de ebullición</h2>
+  <div class="meta">Al terminar podrás explicar con las fuerzas de London cómo se separan los combustibles en una refinería.</div>
+  <div class="duo">
+    <div class="fig">
+      <svg viewBox="0 0 280 300" role="img" aria-label="Torre de destilación fraccionada: arriba los gases, luego gasolina, queroseno, diésel, aceites y abajo el asfalto">
+        <rect x="70" y="20" width="80" height="260" rx="10" fill="#f1f5f9" stroke="#0d2d42" stroke-width="2"/>
+        <defs><linearGradient id="tt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfdbfe"/><stop offset="1" stop-color="#fca5a5"/></linearGradient></defs>
+        <rect x="74" y="24" width="72" height="252" rx="8" fill="url(#tt)" opacity=".6"/>
+        <g font-family="Outfit" font-size="10" fill="#0d2d42">
+          <line x1="150" y1="40" x2="172" y2="40" stroke="#0d2d42" stroke-width="2"/><text x="176" y="37" font-weight="800">Gases (C₁–C₄)</text><text x="176" y="49">&lt; 40 °C · gas de cocina</text>
+          <line x1="150" y1="85" x2="172" y2="85" stroke="#0d2d42" stroke-width="2"/><text x="176" y="82" font-weight="800">Gasolina (C₅–C₁₀)</text><text x="176" y="94">40–180 °C</text>
+          <line x1="150" y1="130" x2="172" y2="130" stroke="#0d2d42" stroke-width="2"/><text x="176" y="127" font-weight="800">Queroseno (C₁₀–C₁₆)</text><text x="176" y="139">180–260 °C · aviones</text>
+          <line x1="150" y1="175" x2="172" y2="175" stroke="#0d2d42" stroke-width="2"/><text x="176" y="172" font-weight="800">Diésel (C₁₄–C₂₀)</text><text x="176" y="184">260–350 °C · ACPM</text>
+          <line x1="150" y1="220" x2="172" y2="220" stroke="#0d2d42" stroke-width="2"/><text x="176" y="217" font-weight="800">Aceites y parafinas</text><text x="176" y="229">&gt; 350 °C</text>
+          <line x1="110" y1="280" x2="110" y2="294" stroke="#0d2d42" stroke-width="2"/><text x="120" y="296" font-weight="800">Asfalto (residuo)</text>
+          <text x="8" y="268" font-weight="800">crudo</text><text x="8" y="280">caliente →</text><line x1="50" y1="262" x2="70" y2="262" stroke="#dc2626" stroke-width="3"/>
+          <text x="110" y="16" text-anchor="middle" fill="#1a6ea8" font-weight="800">más frío ↑</text>
+        </g>
+      </svg>
+      <div class="fig-sub">Rangos aproximados de carbonos y de temperatura.</div>
+    </div>
+    <div>
+      <p>El crudo se calienta y entra por abajo de una torre. Los vapores suben y se enfrían: cada fracción se <b>condensa</b> a la altura donde la temperatura baja de su punto de ebullición.</p>
+      <div class="key">🔑 <b>Conexión con lo que ya sabes:</b> las moléculas más largas tienen más fuerzas de <b>London</b> → mayor punto de ebullición → se condensan más abajo. Los gases (metano a butano) salen por arriba.</div>
+      <div class="life"><div class="life-h">🇨🇴 En Colombia</div><p>Las refinerías de <b>Barrancabermeja</b> (Santander) y <b>Cartagena</b> procesan el crudo del país. Además de destilar, «craquean» las cadenas largas en otras más cortas para obtener más gasolina, y de sus gases salen el eteno y el propeno con que se fabrican plásticos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="co2">
+  <div class="sec-kicker">Estequiometría de la combustión</div>
+  <h2>Calcula cuánto CO₂ produce un combustible</h2>
+  <div class="meta">Al terminar podrás calcular la masa de CO₂ que sale al quemar una masa de combustible y comparar combustibles por cada unidad de energía.</div>
+  <div class="pasos">
+    <div class="pasos-h">Ejemplo resuelto: ¿cuánto CO₂ sale de un galón de gasolina?</div>
+    <ol>
+      <li><b>Modelo y ecuación balanceada.</b> La gasolina se modela como octano: 2 C₈H₁₈ + 25 O₂ → 16 CO₂ + 18 H₂O. Relación: <b>1 mol C₈H₁₈ → 8 mol CO₂</b>.</li>
+      <li><b>Masa del combustible.</b> 1 galón = 3,785 L; densidad de la gasolina ≈ 0,74 g/mL → 3785 mL × 0,74 g/mL ≈ <b>2800 g</b>.</li>
+      <li><b>Gramos → moles.</b> Masa molar del octano = 8(12) + 18(1) = 114 g/mol → 2800 g ÷ 114 g/mol ≈ <b>24,6 mol</b>.</li>
+      <li><b>Moles de combustible → moles de CO₂.</b> 24,6 mol × (8 mol CO₂ / 1 mol C₈H₁₈) ≈ <b>196 mol CO₂</b>.</li>
+      <li><b>Moles → gramos de CO₂.</b> 196 mol × 44 g/mol ≈ 8600 g ≈ <b>8,6 kg de CO₂</b>. ¡Más de tres veces la masa de la gasolina! La diferencia es el <b>oxígeno del aire</b> que se unió a cada carbono.</li>
+    </ol>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><label for="cb-f">Combustible:</label><select id="cb-f"></select><label for="cb-m">Masa (g):</label><input id="cb-m" inputmode="decimal" value="1000"></div>
+    <div class="calc-row"><label for="cb-r">Antes de ver la respuesta, calcula los gramos de CO₂:</label><input id="cb-r" inputmode="decimal" placeholder="g de CO₂"><button type="button" class="btn-sm prim" id="cb-ok">Revisar</button><button type="button" class="btn-sm" id="cb-ver">Ver la cadena de factores</button></div>
+    <div class="calc-out" id="cb-out" aria-live="polite">Elige un combustible. La ecuación balanceada aparecerá aquí.</div>
+  </div>
+  <h3>¿Qué combustible emite menos CO₂ por la misma energía?</h3>
+  <div class="plot"><svg id="cb-svg" viewBox="0 0 520 210" role="img" aria-label="Gramos de CO₂ por megajulio de energía para cinco combustibles"></svg></div>
+  <p>Los combustibles con más hidrógeno por carbono (como el metano) obtienen parte de su energía formando H₂O y no CO₂: emiten menos CO₂ por megajulio. Pero <b>todos</b> los que tienen carbono emiten CO₂; además, el metano que se escapa sin quemar es un gas de efecto invernadero mucho más potente que el CO₂.</p>
+  <div class="warn">⚠️ <b>Combustión incompleta:</b> con poco oxígeno, 2 CH₄ + 3 O₂ → 2 CO + 4 H₂O. El monóxido de carbono no tiene olor ni color y se une a la hemoglobina con más fuerza que el oxígeno. Por eso un calentador o una estufa de gas nunca debe usarse en un lugar cerrado y sin ventilación. La llama amarilla y el hollín son señales de combustión incompleta.</div>
+</section>
+
+<section class="sec" id="plasticos">
+  <div class="sec-kicker">Polímeros sintéticos</div>
+  <h2>Plásticos: por qué duran tanto</h2>
+  <div class="meta">Al terminar podrás clasificar los plásticos comunes por su tipo de polimerización y explicar su persistencia con sus enlaces.</div>
+  <div class="duo">
+    <div>
+      <h3>Polimerización por adición</h3>
+      <p>Los C=C de los monómeros se abren y se encadenan; no sale nada: n CH₂=CH₂ → −[CH₂−CH₂]ₙ−. La cadena queda formada solo por enlaces <b>C−C y C−H</b>, muy estables y apolares.</p>
+    </div>
+    <div>
+      <h3>Polimerización por condensación</h3>
+      <p>Dos monómeros con dos grupos funcionales cada uno se unen y en cada unión sale una molécula pequeña (como H₂O). Así se forman los <b>poliésteres</b> (PET) y las <b>poliamidas</b> (nailon), con enlaces que el agua puede hidrolizar lentamente.</p>
+    </div>
+  </div>
+  <p>Mira el número dentro del triángulo de reciclaje de un envase y clasifica el plástico:</p>
+  <div id="cl-plast"></div>
+  <div class="calc-out" id="cl-plast-out" aria-live="polite">Clasifica los seis plásticos.</div>
+  <div class="key">🔑 Los microorganismos tienen enzimas para romper los enlaces de las biomoléculas (éster, amida, glucosídico), pero casi ninguna para cadenas de solo C−C. Por eso una bolsa de polietileno no se degrada: el sol y el roce la parten en <b>microplásticos</b> (menos de 5 mm), que llegan a los ríos, al mar y a los alimentos.</div>
+  <div class="life"><div class="life-h">🇨🇴 En Colombia</div><p>La <b>Ley 2232 de 2022</b> establece la reducción gradual de varios plásticos de un solo uso (bolsas, pitillos, mezcladores, platos y cubiertos desechables, entre otros). Separar en la fuente y reciclar el PET y el PEAD, que son los que más se recuperan, ayuda a que no lleguen a los rellenos sanitarios como Doña Juana.</p></div>
+</section>
+
+<section class="sec" id="ozono">
+  <div class="sec-kicker">Un mecanismo con consecuencias globales</div>
+  <h2>CFC y capa de ozono: una ruptura homolítica en la estratosfera</h2>
+  <div class="meta">Al terminar podrás explicar con el mecanismo de radicales por qué un solo átomo de cloro destruye miles de moléculas de ozono.</div>
+  <p>Los <b>clorofluorocarbonos</b> (CFC), como el CCl₂F₂, se usaron en neveras y aerosoles porque no son tóxicos ni inflamables: son tan estables que llegan intactos hasta la estratosfera. Allí ocurre esto:</p>
+  <div class="pasos">
+    <div class="pasos-h">El mecanismo, paso a paso</div>
+    <ol>
+      <li><b>Iniciación (ruptura homolítica):</b> la luz UV rompe un C−Cl y cada átomo se queda con un electrón: CCl₂F₂ → CClF₂· + <b>Cl·</b>.</li>
+      <li><b>Propagación 1:</b> Cl· + O₃ → ClO· + O₂. Se destruye una molécula de ozono.</li>
+      <li><b>Propagación 2:</b> ClO· + O → <b>Cl·</b> + O₂. El cloro <b>vuelve a quedar libre</b>.</li>
+      <li><b>Consecuencia:</b> el Cl· actúa como un <b>catalizador</b>: repite el ciclo miles de veces antes de quedar atrapado. Menos ozono significa más radiación UV en la superficie (quemaduras, cáncer de piel, daño a cultivos).</li>
+      <li><b>La respuesta:</b> el <b>Protocolo de Montreal</b> (1987) prohibió los CFC. Hoy la capa de ozono se está recuperando lentamente: un ejemplo de que la ciencia y los acuerdos entre países funcionan.</li>
+    </ol>
+  </div>
+  <div class="links-row"><a class="btn-sm" href="reacciones.html" style="text-decoration:none">🧪 Repasar la halogenación por radicales en Reacciones</a></div>
+</section>
+
+<section class="sec" id="persist">
+  <div class="sec-kicker">Polaridad y salud</div>
+  <h2>Plaguicidas, derrames y bioacumulación: semejante disuelve a semejante</h2>
+  <div class="meta">Al terminar podrás explicar con la polaridad por qué algunos compuestos se acumulan en los seres vivos.</div>
+  <div class="duo">
+    <div class="fig">
+      <svg viewBox="0 0 260 200" role="img" aria-label="Pirámide de biomagnificación: plancton, peces pequeños, peces grandes y aves; la concentración del contaminante aumenta hacia arriba">
+        <g font-family="Outfit" font-size="11" font-weight="700" fill="#0d2d42" text-anchor="middle">
+          <polygon points="130,14 162,64 98,64" fill="#fecaca" stroke="#dc2626"/><text x="130" y="56">aves</text>
+          <polygon points="98,68 162,68 190,112 70,112" fill="#fed7aa" stroke="#c2410c"/><text x="130" y="96">peces grandes</text>
+          <polygon points="70,116 190,116 218,160 42,160" fill="#fef3c7" stroke="#b45309"/><text x="130" y="143">peces pequeños</text>
+          <polygon points="42,164 218,164 246,196 14,196" fill="#dcfce7" stroke="#166534"/><text x="130" y="186">plancton</text>
+        </g>
+        <line x1="248" y1="160" x2="248" y2="24" stroke="#dc2626" stroke-width="3"/><path d="M248 16 l-6 12 h12 z" fill="#dc2626"/>
+        <text x="236" y="100" font-size="10" fill="#dc2626" transform="rotate(-90 236 100)" text-anchor="middle">más concentración</text>
+      </svg>
+      <div class="fig-sub">Esquema cualitativo: cada nivel come muchos individuos del anterior.</div>
+    </div>
+    <div>
+      <p>El <b>DDT</b> y otros plaguicidas organoclorados son <b>muy apolares</b>: casi no se disuelven en agua, pero sí en la <b>grasa</b>. Un animal no los elimina con la orina y los acumula en sus tejidos grasos. Cuando otro animal se lo come, recibe todo lo acumulado: la concentración aumenta en cada nivel (<b>biomagnificación</b>). Por eso el DDT se prohibió en la mayoría de los países.</p>
+      <p>Lo mismo explica los <b>derrames de petróleo</b>: los hidrocarburos no se mezclan con el agua y, como son menos densos, forman una mancha que impide el paso de la luz y del oxígeno y cubre las plumas de las aves.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="bio">
+  <div class="sec-kicker">Alternativas</div>
+  <h2>Biocombustibles: etanol de caña y biodiésel de palma</h2>
+  <div class="meta">Al terminar podrás escribir la reacción de cada biocombustible y argumentar ventajas y desventajas.</div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th></th><th>Etanol de caña</th><th>Biodiésel de palma</th></tr></thead>
+    <tbody>
+      <tr><td><b>¿Cómo se obtiene?</b></td><td>Fermentación del azúcar: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂, y luego destilación</td><td><b>Transesterificación</b> del aceite: triglicérido + 3 CH₃OH → 3 ésteres metílicos (biodiésel) + glicerol</td></tr>
+      <tr><td><b>¿Dónde, en Colombia?</b></td><td>Valle del Cauca y otras zonas cañeras</td><td>Meta, Cesar, Magdalena, Santander y otras zonas palmeras</td></tr>
+      <tr><td><b>Ventaja</b></td><td>El carbono lo tomó la caña del aire con la fotosíntesis; se mezcla con la gasolina</td><td>Renovable y biodegradable; se mezcla con el diésel</td></tr>
+      <tr><td><b>Desventaja o riesgo</b></td><td>También emite CO₂ al quemarse; usa suelo, agua y energía en el cultivo y la destilación</td><td>Si se siembra talando bosques, el balance de CO₂ y de biodiversidad empeora</td></tr>
+    </tbody>
+  </table></div>
+  <div class="key">🔑 «Renovable» no significa «sin impacto». Para evaluar un combustible hay que mirar todo su ciclo de vida: cómo se produce, qué suelo ocupa, cuánta energía cuesta y qué emite.</div>
+</section>
+
+<section class="sec" id="verde">
+  <div class="sec-kicker">Desarrollo sostenible</div>
+  <h2>Química verde: decidir con criterios químicos</h2>
+  <div class="meta">Usa lo aprendido para evaluar una decisión real con varios criterios, no solo con uno.</div>
+  <p>La química verde propone, entre otros principios: <b>prevenir desechos</b> en vez de tratarlos, usar <b>materias primas renovables</b>, preferir <b>catalizadores</b> a reactivos en exceso, y diseñar productos que <b>se degraden</b> al terminar su uso sin dejar sustancias tóxicas.</p>
+  <div class="calc">
+    <div style="font-weight:800;margin-bottom:6px">Caso: la tienda escolar quiere dejar de usar vasos de icopor (poliestireno, PS). ¿Qué opción es mejor para el ambiente?</div>
+    <div class="seg" id="vd-op" role="group" aria-label="Opciones"><button type="button" data-o="a">Vasos de PET reciclables</button><button type="button" data-o="b">Vasos de papel con capa plástica</button><button type="button" data-o="c">Vasos reutilizables que se lavan</button><button type="button" data-o="d">Vasos de «plástico biodegradable» que se botan con la basura común</button></div>
+    <div class="calc-out" id="vd-out" aria-live="polite">Escoge una opción y lee el análisis.</div>
+  </div>
+</section>
+
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso con el banco del Juego</div>
+  <h2>Practica: química orgánica y ambiente</h2>
+  <div class="prac" id="prac-am" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<section class="sec" id="resumen">
+  <div class="sec-kicker">Para repasar</div>
+  <h2>Resumen</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Problema</th><th>Explicación química</th><th>Qué se puede hacer</th></tr></thead>
+    <tbody>
+      <tr><td>CO₂ de los combustibles</td><td>Cada carbono del combustible sale como CO₂ (44 g por cada 12 g de C)</td><td>Ahorrar energía, preferir fuentes con menos CO₂ por MJ y energías renovables</td></tr>
+      <tr><td>Plásticos persistentes</td><td>Cadenas de solo C−C y C−H que las enzimas no rompen</td><td>Reducir, reutilizar, separar y reciclar; Ley 2232 de 2022</td></tr>
+      <tr><td>Capa de ozono</td><td>Radicales Cl· (ruptura homolítica) que destruyen O₃ en cadena</td><td>Protocolo de Montreal: prohibir los CFC</td></tr>
+      <tr><td>Plaguicidas y derrames</td><td>Compuestos apolares: se acumulan en la grasa y no se mezclan con el agua</td><td>Plaguicidas menos persistentes, control biológico, prevención de derrames</td></tr>
+    </tbody>
+  </table></div>
+  <div class="links-row"><a class="cn-btn cn-btn--secondary" href="reacciones.html">🧪 Repasar las reacciones</a><a class="cn-btn cn-btn--secondary" href="juego.html?tema=quimica_ambiente">🎮 Jugar con este tema</a></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div><!-- /app -->
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="fundamentos.js"></script>
+<script src="temas-extra.js"></script>
+<script src="temas-11.js"></script>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="fx-libro.js"></script>
+<script src="fase4.js"></script>
+<script>
+(function(){
+'use strict';
+var FU=window.FUND;if(FU)FU.practica('prac-am','quimica_ambiente',8,'Practica: química y ambiente');
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function tx(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}
+function coma(v,d){return v.toFixed(d).replace('.',',');}
+
+/* Combustibles: M en g/mol (C = 12, H = 1, O = 16), carbonos por molécula,
+   ecuación balanceada y entalpía de combustión (kJ/mol, tablas). */
+var CB=[
+ {n:'Metano (gas natural)',f:'CH₄',M:16,c:1,dH:890,ec:'CH₄ + 2 O₂ → CO₂ + 2 H₂O'},
+ {n:'Propano (gas propano)',f:'C₃H₈',M:44,c:3,dH:2220,ec:'C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O'},
+ {n:'Butano (pipeta de gas)',f:'C₄H₁₀',M:58,c:4,dH:2878,ec:'2 C₄H₁₀ + 13 O₂ → 8 CO₂ + 10 H₂O'},
+ {n:'Octano (modelo de gasolina)',f:'C₈H₁₈',M:114,c:8,dH:5471,ec:'2 C₈H₁₈ + 25 O₂ → 16 CO₂ + 18 H₂O'},
+ {n:'Etanol (alcohol carburante)',f:'C₂H₅OH',M:46,c:2,dH:1367,ec:'C₂H₅OH + 3 O₂ → 2 CO₂ + 3 H₂O'}
+];
+var sel=document.getElementById('cb-f');
+sel.innerHTML=CB.map(function(c,i){return '<option value="'+i+'">'+c.n+' · '+c.f+'</option>';}).join('');
+function datos(){var c=CB[+sel.value],m=parseFloat(String(document.getElementById('cb-m').value).replace(',','.'));return {c:c,m:m,n:m/c.M,co2:m/c.M*c.c*44};}
+function cadena(d){return '<b>'+d.c.ec+'</b> → 1 mol de '+d.c.f+' da <b>'+d.c.c+' mol de CO₂</b>.<br><span class="mono">'+coma(d.m,0)+' g '+d.c.f+' × (1 mol / '+d.c.M+' g) × ('+d.c.c+' mol CO₂ / 1 mol '+d.c.f+') × (44 g / 1 mol CO₂) = '+coma(d.co2,0)+' g CO₂</span><br>Energía liberada: '+coma(d.n*d.c.dH/1000,1)+' MJ ('+d.c.dH+' kJ por mol).';}
+function info(){var d=datos();document.getElementById('cb-out').className='calc-out';document.getElementById('cb-out').innerHTML='Ecuación balanceada: <b>'+d.c.ec+'</b>. Masas molares: '+d.c.f+' = '+d.c.M+' g/mol; CO₂ = 44 g/mol. Calcula con la cadena de factores y escribe tu resultado.';}
+sel.addEventListener('change',info);
+document.getElementById('cb-ver').addEventListener('click',function(){var d=datos(),o=document.getElementById('cb-out');if(!(d.m>0)){o.className='calc-out fail';o.innerHTML='Escribe una masa mayor que 0.';return;}o.className='calc-out';o.innerHTML=cadena(d);});
+document.getElementById('cb-ok').addEventListener('click',function(){var d=datos(),o=document.getElementById('cb-out'),r=parseFloat(String(document.getElementById('cb-r').value).replace(',','.'));
+  if(!(d.m>0)){o.className='calc-out fail';o.innerHTML='Escribe una masa mayor que 0.';return;}
+  if(isNaN(r)){o.className='calc-out fail';o.innerHTML='Escribe tu resultado en gramos de CO₂.';return;}
+  var err=Math.abs(r-d.co2)/d.co2;
+  if(err<=0.02){o.className='calc-out ok';o.innerHTML='✅ <b>Correcto.</b> '+cadena(d);}
+  else if(Math.abs(r-d.m/d.c.M*44)/d.co2<=0.02&&d.c.c>1){o.className='calc-out fail';o.innerHTML='🔎 Te faltó el factor de la ecuación: cada mol de '+d.c.f+' produce <b>'+d.c.c+'</b> mol de CO₂, no 1.';}
+  else if(Math.abs(r-d.m)/d.m<=0.02){o.className='calc-out fail';o.innerHTML='🔎 La masa de CO₂ no es igual a la del combustible: se suma la masa del oxígeno del aire. Usa la cadena de factores.';}
+  else{o.className='calc-out fail';o.innerHTML='🔎 Revisa los pasos: gramos → moles de '+d.c.f+' → moles de CO₂ (con la ecuación) → gramos de CO₂. Pulsa «Ver la cadena de factores» si necesitas ayuda.';}});
+info();
+(function(){var s=document.getElementById('cb-svg');
+  var D=CB.map(function(c){return {n:c.n.split(' (')[0],v:c.c*44/(c.dH/1000)};});
+  var mx=80,X=function(v){return 150+v/mx*330;};
+  D.forEach(function(d,i){var y=20+i*36;el('rect',{x:150,y:y,width:X(d.v)-150,height:24,rx:4,fill:i===0?'#86efac':i===4?'#fde68a':'#93c5fd'},s);
+    tx(s,144,y+16,d.n,{'text-anchor':'end','font-size':12,'font-weight':700,fill:'#0d2d42'});tx(s,X(d.v)+6,y+16,coma(d.v,0)+' g CO₂/MJ',{'font-size':11,'font-weight':800,fill:'#0d2d42'});});
+  tx(s,315,205,'gramos de CO₂ por cada megajulio de energía (combustión completa)',{'text-anchor':'middle','font-size':10,fill:'#475569'});})();
+
+if(window.F4)F4.clasificador('cl-plast',[
+  {t:'♳ <b>1 · PET</b> (botellas de gaseosa y agua)',ok:'Condensación',fb:'Poliéster: cada unión es un enlace éster y libera una molécula pequeña.'},
+  {t:'♴ <b>2 · PEAD</b>, polietileno de alta densidad (tarros de champú y leche)',ok:'Adición',fb:'Del eteno, CH₂=CH₂.'},
+  {t:'♵ <b>3 · PVC</b> (tubos, cables)',ok:'Adición',fb:'Del cloroeteno, CH₂=CH−Cl.'},
+  {t:'♶ <b>4 · PEBD</b>, polietileno de baja densidad (bolsas)',ok:'Adición',fb:'También del eteno; sus cadenas son más ramificadas que las del PEAD.'},
+  {t:'♷ <b>5 · PP</b>, polipropileno (tapas, coca de almuerzo)',ok:'Adición',fb:'Del propeno, CH₂=CH−CH₃.'},
+  {t:'Nailon (cuerdas, medias, cerdas de cepillo)',ok:'Condensación',fb:'Poliamida: cada unión es un enlace amida, como en las proteínas.'}
+],['Adición','Condensación'],function(b,n){document.getElementById('cl-plast-out').innerHTML='Terminaste: <b>'+b+' de '+n+'</b> al primer intento. Pista: si el monómero tiene un C=C y en la cadena solo quedan C−C, es de adición.';});
+
+var VD={a:'🟡 <b>Mejor que el icopor, pero no la mejor.</b> El PET se recicla bien si se separa en la fuente, pero sigue siendo un plástico de un solo uso: si no llega al reciclaje, persiste cientos de años (prevenir el desecho es mejor que tratarlo).',
+ b:'🟡 <b>Parece mejor, pero tiene una trampa.</b> La capa plástica (polietileno) que lo hace impermeable dificulta reciclar el papel, y el vaso igual se bota después de un uso.',
+ c:'✅ <b>La mejor opción con criterios de química verde.</b> Previene el desecho en lugar de tratarlo. Gasta agua y jabón al lavarse, pero tras pocos usos su impacto total es menor que el de cientos de vasos desechables. Para comprobarlo, el colegio podría pesar su basura plástica antes y después del cambio.',
+ d:'🔴 <b>Cuidado.</b> Muchos «biodegradables» (como el ácido poliláctico, un poliéster) solo se degradan en compostaje industrial, con calor y humedad controlados. En un relleno sanitario o en un río se comportan casi como plástico común.'};
+document.getElementById('vd-op').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+  var o=document.getElementById('vd-out');o.className='calc-out'+(b.dataset.o==='c'?' ok':'');o.innerHTML=VD[b.dataset.o];});
+})();
+</script>
+<script src="site-ui.js"></script>
+<script src="narracion.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>

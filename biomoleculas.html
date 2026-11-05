@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<meta name="description" content="Carbohidratos, lípidos, proteínas y ácidos nucleicos: monómeros, enlaces, condensación e hidrólisis, enzimas y metabolismo, con ejemplos de la cocina colombiana.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Biomoléculas</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<link rel="stylesheet" href="fase4.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="orbitales.html" class="nav-link active">🌿 <span class="full">Vida y ambiente</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 4 · Química de la vida y del ambiente · Parada 3 de 4</div>
+  <h1>Biomoléculas: los grupos funcionales que te mantienen vivo</h1>
+  <p>Tu cuerpo es, sobre todo, química orgánica. Los mismos grupos funcionales que aprendiste a nombrar (alcoholes, aldehídos, cetonas, ésteres, aminas, amidas) forman los azúcares de la panela, las grasas del aguacate, las proteínas del fríjol y el ADN de tus células. Aquí ves cómo se construyen, cómo se rompen y qué hacen en el metabolismo.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#previo">Palabras clave</a>
+  <a href="#cuatro">Las cuatro familias</a>
+  <a href="#unir">Unir y separar</a>
+  <a href="#carbo">Carbohidratos</a>
+  <a href="#lipidos">Lípidos</a>
+  <a href="#proteinas">Proteínas</a>
+  <a href="#nucleicos">Ácidos nucleicos</a>
+  <a href="#metab">Enzimas y metabolismo</a>
+  <a href="#practica">Practica</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+<section class="sec" id="previo">
+  <div class="sec-kicker">Antes de empezar</div>
+  <h2>Palabras clave de esta página</h2>
+  <p>Toca cada tarjeta para ver qué significa.</p>
+  <div class="glos">
+    <button type="button"><b>Monómero</b><span class="hint">Toca para ver</span><span class="def">Molécula pequeña que se repite para formar una grande: glucosa, aminoácido, nucleótido.</span></button>
+    <button type="button"><b>Polímero</b><span class="hint">Toca para ver</span><span class="def">Molécula grande formada por muchos monómeros unidos: almidón, proteína, ADN.</span></button>
+    <button type="button"><b>Condensación</b><span class="hint">Toca para ver</span><span class="def">Unión de dos moléculas en la que sale una molécula pequeña, casi siempre H₂O.</span></button>
+    <button type="button"><b>Hidrólisis</b><span class="hint">Toca para ver</span><span class="def">Ruptura de un enlace usando una molécula de agua. Es lo contrario de la condensación.</span></button>
+    <button type="button"><b>Enlace glucosídico</b><span class="hint">Toca para ver</span><span class="def">Une dos azúcares por un oxígeno (C−O−C, como un éter).</span></button>
+    <button type="button"><b>Enlace peptídico</b><span class="hint">Toca para ver</span><span class="def">Une dos aminoácidos: es un grupo amida, −CO−NH−.</span></button>
+    <button type="button"><b>Enzima</b><span class="hint">Toca para ver</span><span class="def">Proteína que acelera una reacción del cuerpo sin gastarse (catalizador biológico).</span></button>
+    <button type="button"><b>Metabolismo</b><span class="hint">Toca para ver</span><span class="def">Conjunto de reacciones químicas de un ser vivo: unas construyen moléculas y otras las rompen para obtener energía.</span></button>
+  </div>
+</section>
+
+<section class="sec" id="cuatro">
+  <div class="sec-kicker">El mapa</div>
+  <h2>Las cuatro familias de biomoléculas</h2>
+  <div class="meta">Al terminar podrás decir de qué monómero está hecha cada biomolécula y qué enlace los une.</div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Familia</th><th>Monómero</th><th>Enlace que los une</th><th>Grupo funcional del enlace</th><th>Función principal</th><th>En tu plato</th></tr></thead>
+    <tbody>
+      <tr><td><b>Carbohidratos</b></td><td>Monosacáridos (glucosa, fructosa)</td><td>Glucosídico</td><td>Éter, C−O−C</td><td>Energía rápida y estructura (celulosa)</td><td>Arroz, papa, yuca, panela, plátano</td></tr>
+      <tr><td><b>Lípidos</b></td><td>Glicerol + ácidos grasos <small>(no forman cadenas largas)</small></td><td>Éster</td><td>−COO−</td><td>Reserva de energía, membranas, aislamiento</td><td>Aguacate, aceite, mantequilla, chicharrón</td></tr>
+      <tr><td><b>Proteínas</b></td><td>Aminoácidos (20 tipos)</td><td>Peptídico</td><td>Amida, −CO−NH−</td><td>Estructura, enzimas, defensa, transporte</td><td>Fríjol, lenteja, huevo, carne, queso</td></tr>
+      <tr><td><b>Ácidos nucleicos</b></td><td>Nucleótidos</td><td>Fosfodiéster</td><td>Éster de ácido fosfórico</td><td>Guardar y transmitir la información genética</td><td>Están en todas las células de lo que comes</td></tr>
+    </tbody>
+  </table></div>
+  <div class="key">🔑 <b>Un solo truco químico para casi todo:</b> los seres vivos construyen sus polímeros por <b>condensación</b> (sale H₂O) y los rompen por <b>hidrólisis</b> (entra H₂O). La digestión es, en gran parte, hidrólisis.</div>
+</section>
+
+<section class="sec" id="unir">
+  <div class="sec-kicker">Laboratorio interactivo</div>
+  <h2>Une y separa: condensación e hidrólisis</h2>
+  <div class="meta">Observa qué átomos salen como agua al unir dos monómeros y cuál es el grupo funcional nuevo.</div>
+  <div class="seg" id="un-sel" role="group" aria-label="Par de monómeros"><button type="button" data-k="c" class="on">Dos glucosas</button><button type="button" data-k="l">Glicerol + ácido graso</button><button type="button" data-k="p">Dos aminoácidos</button></div>
+  <div class="lab">
+    <div class="lab-view"><svg id="un-svg" viewBox="0 0 440 210" role="img" aria-label="Animación de condensación e hidrólisis"></svg></div>
+    <div class="lab-ctl">
+      <div class="calc-row"><button type="button" class="btn-sm prim" id="un-unir">🔗 Unir (condensación)</button><button type="button" class="btn-sm" id="un-sep">✂️ Separar (hidrólisis)</button></div>
+      <div class="lab-msg" id="un-msg" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><label for="un-n">Reto: ¿cuántas moléculas de agua salen al formar una cadena de</label><input id="un-n" type="number" min="2" max="1000" value="10" style="width:90px"><label>monómeros?</label><input id="un-r" inputmode="numeric" placeholder="H₂O" style="width:90px"><button type="button" class="btn-sm" id="un-ok">Revisar</button></div>
+    <div class="calc-out" id="un-out" aria-live="polite">Pista: dibuja 3 monómeros en tu cuaderno y cuenta las uniones.</div>
+  </div>
+</section>
+
+<section class="sec" id="carbo">
+  <div class="sec-kicker">Familia 1</div>
+  <h2>Carbohidratos: alcoholes que también son aldehídos o cetonas</h2>
+  <div class="meta">Al terminar podrás reconocer los grupos funcionales de la glucosa y explicar por qué digerimos el almidón y no la celulosa.</div>
+  <p>Un monosacárido tiene varios grupos <b>−OH</b> (alcohol) y un grupo <b>carbonilo</b>: si es aldehído (−CHO) se llama <b>aldosa</b>; si es cetona (C=O en el medio), <b>cetosa</b>. La glucosa y la fructosa tienen la misma fórmula, C₆H₁₂O₆: son <b>isómeros de función</b>.</p>
+  <div class="figs two">
+    <div class="fig"><div class="fig-cap">Glucosa (aldosa)</div><div class="fxm" data-fx="⟦=O|C⟧H—CHOH—CHOH—CHOH—CHOH—CH₂OH" aria-label="glucosa en cadena abierta: aldehído en el carbono 1 y cinco grupos OH"></div><div class="fig-sub">Aldehído en el C1 + cinco −OH. En el agua se cierra en un anillo de 6.</div></div>
+    <div class="fig"><div class="fig-cap">Fructosa (cetosa)</div><div class="fxm" data-fx="CH₂OH—⟦=O|C⟧—CHOH—CHOH—CHOH—CH₂OH" aria-label="fructosa en cadena abierta: cetona en el carbono 2 y cinco grupos OH"></div><div class="fig-sub">Cetona en el C2 + cinco −OH. Es el azúcar de las frutas y la miel.</div></div>
+  </div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Tipo</th><th>Ejemplo</th><th>Está formado por</th><th>Dónde lo encuentras</th></tr></thead>
+    <tbody>
+      <tr><td>Disacárido</td><td><b>Sacarosa</b>, C₁₂H₂₂O₁₁</td><td>glucosa + fructosa</td><td>Panela y azúcar de caña</td></tr>
+      <tr><td>Disacárido</td><td><b>Lactosa</b></td><td>glucosa + galactosa</td><td>Leche, kumis, queso fresco</td></tr>
+      <tr><td>Polisacárido</td><td><b>Almidón</b></td><td>miles de glucosas con enlaces α</td><td>Papa, arroz, yuca, maíz, plátano</td></tr>
+      <tr><td>Polisacárido</td><td><b>Celulosa</b></td><td>miles de glucosas con enlaces β</td><td>Fibra de frutas y verduras, papel, algodón</td></tr>
+      <tr><td>Polisacárido</td><td><b>Glucógeno</b></td><td>glucosas muy ramificadas (α)</td><td>Reserva de energía en tu hígado y músculos</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">⚠️ El almidón y la celulosa son ambos «cadenas de glucosa». La diferencia está en la <b>orientación del enlace</b> (α o β). Nuestras enzimas (amilasas) solo rompen los enlaces α: la celulosa pasa sin digerirse y funciona como fibra. Las vacas sí la aprovechan gracias a los microorganismos de su estómago.</div>
+  <div class="life">
+    <div class="life-h">🧪 Pruebas que puedes hacer en el laboratorio del colegio</div>
+    <p><b>Lugol (yodo):</b> se pone azul oscuro con el almidón. Prueba una tajada de papa y una de manzana madura.</p>
+    <p><b>Benedict o Fehling:</b> al calentar, da un precipitado rojo ladrillo con los azúcares que tienen el carbonilo libre (glucosa, fructosa, lactosa). La sacarosa da negativo: su carbonilo está «ocupado» en el enlace. Es la misma prueba de aldehídos que viste en Reacciones.</p>
+  </div>
+</section>
+
+<section class="sec" id="lipidos">
+  <div class="sec-kicker">Familia 2</div>
+  <h2>Lípidos: ésteres apolares que guardan energía</h2>
+  <div class="meta">Al terminar podrás explicar con la forma de las moléculas por qué la manteca es sólida y el aceite líquido.</div>
+  <p>Un <b>triglicérido</b> (grasa o aceite) es un <b>triéster</b>: los tres −OH del glicerol, CH₂OH−CHOH−CH₂OH, reaccionan con el −COOH de tres ácidos grasos (cadenas de 12 a 22 carbonos). Salen 3 H₂O. Como casi toda la molécula es hidrocarburo, los lípidos son <b>apolares</b> e insolubles en agua.</p>
+  <div class="duo">
+    <div class="fig">
+      <svg viewBox="0 0 300 170" role="img" aria-label="Esquema de un triglicérido: el glicerol a la izquierda y tres cadenas de ácido graso unidas por enlaces éster; una de ellas con un doble enlace cis que la dobla">
+        <rect x="14" y="20" width="56" height="130" rx="10" fill="#dcfce7" stroke="#166534" stroke-width="2"/>
+        <text x="42" y="90" text-anchor="middle" font-size="12" font-weight="800" fill="#14532d">glicerol</text>
+        <g font-size="10" font-weight="800" fill="#9a4a78"><text x="74" y="40">éster</text><text x="74" y="90">éster</text><text x="74" y="140">éster</text></g>
+        <polyline points="104,36 124,28 144,36 164,28 184,36 204,28 224,36 244,28 264,36 284,28" fill="none" stroke="#0d2d42" stroke-width="3"/>
+        <polyline points="104,86 124,78 144,86 164,78 184,86 204,78 224,86 244,78 264,86 284,78" fill="none" stroke="#0d2d42" stroke-width="3"/>
+        <polyline points="104,136 124,128 144,136 164,128 184,136 200,150 214,166" fill="none" stroke="#0d2d42" stroke-width="3"/>
+        <line x1="186" y1="140" x2="200" y2="153" stroke="#b45309" stroke-width="3"/>
+        <text x="226" y="150" font-size="10" fill="#b45309" font-weight="800">C=C cis: «codo»</text>
+      </svg>
+      <div class="fig-sub">Dos cadenas saturadas (rectas) y una insaturada cis (doblada).</div>
+    </div>
+    <div>
+      <div class="pasos">
+        <div class="pasos-h">Razonando con datos: tres ácidos grasos de 18 carbonos</div>
+        <ol>
+          <li><b>Ácido esteárico</b> (saturado, cadena recta): se funde a <b>69 °C</b>. Sólido, como el sebo.</li>
+          <li><b>Ácido oleico</b> (un C=C <i>cis</i>, cadena doblada): se funde a <b>13 °C</b>. Líquido, como el aceite de oliva o de aguacate.</li>
+          <li><b>Ácido elaídico</b> (un C=C <i>trans</i>, cadena casi recta): se funde a <b>45 °C</b>. Misma fórmula que el oleico, pero se comporta casi como uno saturado.</li>
+          <li><b>Conclusión:</b> con igual número de carbonos, lo que cambia es la <b>forma</b>. Las cadenas rectas se apilan juntas (más fuerzas de London → sólido); el codo cis no las deja acomodarse (→ líquido). Las grasas trans se apilan como las saturadas y su consumo eleva el riesgo cardiovascular.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <p>Con una base fuerte, los ésteres de la grasa se hidrolizan: <b>grasa + NaOH → glicerol + jabón</b> (saponificación). Por eso el jabón artesanal se hace con sebo o aceite y soda cáustica.</p>
+</section>
+
+<section class="sec" id="proteinas">
+  <div class="sec-kicker">Familia 3</div>
+  <h2>Proteínas: cadenas de aminoácidos que se pliegan</h2>
+  <div class="meta">Al terminar podrás dibujar el enlace peptídico y explicar qué pasa cuando una proteína se desnaturaliza.</div>
+  <p>Todo aminoácido tiene un grupo <b>amino</b> (−NH₂) y un <b>carboxilo</b> (−COOH) unidos al mismo carbono, que también lleva un H y una cadena lateral <b>R</b>. Hay 20 cadenas R distintas: de ellas dependen las propiedades de cada proteína.</p>
+  <div class="figs">
+    <div class="fig"><div class="fig-cap">Aminoácido (fórmula general)</div><div class="fxm" data-fx="H₂N—⟦R|CH⟧—COOH" aria-label="H2N, un carbono con H y la cadena R, y COOH"></div><div class="fig-sub">R cambia de un aminoácido a otro.</div></div>
+    <div class="fig"><div class="fig-cap">Glicina (R = H)</div><div class="fxm" data-fx="H₂N—CH₂—COOH" aria-label="glicina"></div><div class="fig-sub">Ácido 2-aminoetanoico. Única sin carbono quiral.</div></div>
+    <div class="fig"><div class="fig-cap">Alanina (R = CH₃)</div><div class="fxm" data-fx="H₂N—⟦CH₃|CH⟧—COOH" aria-label="alanina: el carbono central lleva un grupo metilo"></div><div class="fig-sub">Ácido 2-aminopropanoico. Su C2 es quiral.</div></div>
+  </div>
+  <p>El −COOH de un aminoácido reacciona con el −NH₂ del siguiente: se forma una <b>amida</b> llamada <b>enlace peptídico</b> y sale H₂O. Con n aminoácidos se forman n − 1 enlaces.</p>
+  <div class="fig" style="max-width:520px;margin:8px auto"><div class="fig-cap">Dipéptido glicina–alanina</div><div class="fxm" data-fx="H₂N—CH₂—«⟦=O|C⟧—NH»—⟦CH₃|CH⟧—COOH" aria-label="H2N CH2, el enlace peptídico C=O NH resaltado, CH con CH3 y COOH"></div><div class="fig-sub">En rosado, el enlace peptídico (−CO−NH−).</div></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Nivel</th><th>Qué es</th><th>Qué lo mantiene</th></tr></thead>
+    <tbody>
+      <tr><td><b>Primario</b></td><td>La secuencia de aminoácidos</td><td>Enlaces peptídicos (covalentes)</td></tr>
+      <tr><td><b>Secundario</b></td><td>Hélices y láminas</td><td>Puentes de hidrógeno entre C=O y N−H de la cadena</td></tr>
+      <tr><td><b>Terciario</b></td><td>El plegamiento completo en 3D</td><td>Puentes de hidrógeno, atracciones iónicas, partes apolares que se esconden del agua, puentes S−S</td></tr>
+      <tr><td><b>Cuaternario</b></td><td>Varias cadenas juntas (como la hemoglobina)</td><td>Las mismas atracciones, entre cadenas</td></tr>
+    </tbody>
+  </table></div>
+  <div class="life">
+    <div class="life-h">🍋 Desnaturalización en la cocina</div>
+    <p>Al freír un huevo, la clara pasa de transparente a blanca: el calor rompe los puentes de hidrógeno y la proteína (albúmina) <b>pierde su forma</b>. En el <b>ceviche</b>, el ácido del limón hace lo mismo sin calor. Los enlaces peptídicos no se rompen: la secuencia sigue igual, pero sin su forma la proteína ya no cumple su función.</p>
+    <p><b>Prueba de Biuret:</b> en medio básico con un poco de sulfato de cobre, las proteínas dan color violeta (el Cu²⁺ se une a los enlaces peptídicos).</p>
+  </div>
+</section>
+
+<section class="sec" id="nucleicos">
+  <div class="sec-kicker">Familia 4</div>
+  <h2>Ácidos nucleicos: puentes de hidrógeno que guardan información</h2>
+  <div class="meta">Al terminar podrás escribir la hebra complementaria de una secuencia de ADN y contar sus puentes de hidrógeno.</div>
+  <p>Un <b>nucleótido</b> tiene tres partes: un <b>fosfato</b>, un <b>azúcar</b> de 5 carbonos (desoxirribosa en el ADN, ribosa en el ARN) y una <b>base nitrogenada</b> (A, T, G, C; en el ARN la T se cambia por U). Los nucleótidos se encadenan por enlaces <b>fosfodiéster</b>. Las dos hebras del ADN se unen por <b>puentes de hidrógeno</b> entre bases: <b>A con T (2 puentes)</b> y <b>G con C (3 puentes)</b>.</p>
+  <div class="calc">
+    <div class="calc-row"><label for="dna-in">Escribe una hebra de ADN (solo A, T, G, C):</label><input id="dna-in" value="ATGCGTA" style="width:220px;text-transform:uppercase" maxlength="24"></div>
+    <div class="calc-out" id="dna-out" aria-live="polite"></div>
+  </div>
+  <p>¿Por qué puentes de hidrógeno y no enlaces covalentes? Porque son <b>lo bastante fuertes</b> para mantener la doble hélice estable y <b>lo bastante débiles</b> para que las enzimas abran las hebras cuando la célula copia su ADN.</p>
+</section>
+
+<section class="sec" id="metab">
+  <div class="sec-kicker">Química en movimiento</div>
+  <h2>Enzimas y metabolismo: oxidar la glucosa paso a paso</h2>
+  <div class="meta">Al terminar podrás comparar la respiración, la fotosíntesis y las fermentaciones, y calcular la energía de un alimento.</div>
+  <p>Las <b>enzimas</b> son proteínas que aceleran reacciones bajando su <b>energía de activación</b>. Cada una tiene un «sitio activo» con la forma justa para su sustrato. Trabajan mejor a una temperatura y un pH determinados: el calor excesivo o un pH extremo las <b>desnaturaliza</b>.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Proceso</th><th>Ecuación global</th><th>Tipo de reacción</th><th>¿Dónde?</th></tr></thead>
+    <tbody>
+      <tr><td><b>Respiración celular</b></td><td>C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O + energía</td><td>Oxidación de la glucosa (el carbono pasa de estado de oxidación promedio 0 a +4)</td><td>Tus células (mitocondrias)</td></tr>
+      <tr><td><b>Fotosíntesis</b></td><td>6 CO₂ + 6 H₂O + luz → C₆H₁₂O₆ + 6 O₂</td><td>Reducción del CO₂: la inversa de la respiración</td><td>Hojas de las plantas (cloroplastos)</td></tr>
+      <tr><td><b>Fermentación alcohólica</b></td><td>C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂</td><td>Redox sin oxígeno (parte del C se oxida y parte se reduce)</td><td>Levaduras: guarapo, chicha, pan</td></tr>
+      <tr><td><b>Fermentación láctica</b></td><td>C₆H₁₂O₆ → 2 C₃H₆O₃ (ácido láctico)</td><td>Redox sin oxígeno</td><td>Bacterias del kumis y el yogur; tus músculos en un esfuerzo intenso</td></tr>
+    </tbody>
+  </table></div>
+  <div class="key">🔑 La respiración libera la misma energía que quemar la glucosa (unos 2800 kJ por mol), pero <b>en muchos pasos pequeños</b> controlados por enzimas. Así la energía se guarda en moléculas de ATP en vez de salir como fuego.</div>
+  <div class="pasos">
+    <div class="pasos-h">Ejemplo resuelto: ¿cuántas kilocalorías tiene una porción?</div>
+    <ol>
+      <li><b>Lee la etiqueta</b> (ejemplo): carbohidratos 30 g, proteína 6 g, grasa 8 g.</li>
+      <li><b>Usa los factores</b> de energía: carbohidratos y proteínas 4 kcal/g; grasas 9 kcal/g.</li>
+      <li><b>Multiplica:</b> 30 × 4 = 120 kcal; 6 × 4 = 24 kcal; 8 × 9 = 72 kcal.</li>
+      <li><b>Suma:</b> 120 + 24 + 72 = <b>216 kcal</b>. La grasa es solo el 18 % de la masa, pero aporta un tercio de la energía: sus carbonos están casi sin oxidar (muchos C−H).</li>
+    </ol>
+  </div>
+  <div class="calc">
+    <div class="calc-row"><span style="font-weight:800">Tu turno — copia los gramos de la etiqueta de un alimento de tu casa:</span></div>
+    <div class="calc-row"><label for="kc-c">Carbohidratos (g)</label><input id="kc-c" inputmode="decimal" value="25"><label for="kc-p">Proteína (g)</label><input id="kc-p" inputmode="decimal" value="3"><label for="kc-g">Grasa (g)</label><input id="kc-g" inputmode="decimal" value="12"></div>
+    <div class="calc-row"><label for="kc-r">Tu cálculo (kcal):</label><input id="kc-r" inputmode="decimal"><button type="button" class="btn-sm prim" id="kc-ok">Revisar</button></div>
+    <div class="calc-out" id="kc-out" aria-live="polite">Calcula primero en tu cuaderno y luego escribe el resultado.</div>
+  </div>
+</section>
+
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso con el banco del Juego</div>
+  <h2>Practica: biomoléculas</h2>
+  <div class="prac" id="prac-bm" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<section class="sec" id="resumen">
+  <div class="sec-kicker">Para repasar</div>
+  <h2>Resumen</h2>
+  <ul>
+    <li><b>Carbohidratos:</b> polialcoholes con un aldehído o una cetona; se unen por enlaces glucosídicos. Almidón (α, digerible) y celulosa (β, fibra).</li>
+    <li><b>Lípidos:</b> triésteres de glicerol, apolares. Saturados (rectos, sólidos), insaturados cis (doblados, líquidos), trans (rectos, dañinos).</li>
+    <li><b>Proteínas:</b> aminoácidos unidos por enlaces peptídicos (amidas); su forma 3D depende de puentes de hidrógeno y define su función.</li>
+    <li><b>Ácidos nucleicos:</b> nucleótidos; bases unidas por puentes de hidrógeno: A=T (2) y G≡C (3).</li>
+    <li><b>Metabolismo:</b> condensación para construir, hidrólisis para romper; la respiración es la oxidación de la glucosa con ayuda de enzimas.</li>
+  </ul>
+  <div class="links-row"><a class="cn-btn cn-btn--secondary" href="grupos.html">🔬 Repasar los grupos funcionales</a><a class="cn-btn cn-btn--secondary" href="juego.html?tema=biomoleculas">🎮 Jugar con este tema</a></div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div><!-- /app -->
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="fundamentos.js"></script>
+<script src="temas-extra.js"></script>
+<script src="temas-11.js"></script>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="fx-libro.js"></script>
+<script src="fase4.js"></script>
+<script>
+(function(){
+'use strict';
+var FU=window.FUND;if(FU)FU.practica('prac-bm','biomoleculas',8,'Practica: biomoléculas');
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function tx(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}
+
+/* ── Une y separa ── */
+var PAR={
+ c:{a:'glucosa',b:'glucosa',ga:'−OH',gb:'HO−',sale:'H y OH',nuevo:'C−O−C',nn:'enlace glucosídico',prod:'maltosa (C₁₂H₂₂O₁₁)',ec:'C₆H₁₂O₆ + C₆H₁₂O₆ → C₁₂H₂₂O₁₁ + H₂O',ca:'#fde68a',cb:'#fde68a',
+    txt:'El −OH de una glucosa y el H de un −OH de la otra salen como <b>H₂O</b>. El oxígeno que queda une los dos anillos: <b>enlace glucosídico</b>, C−O−C, como en un éter. Producto: <b>maltosa</b>, el azúcar de la malta.'},
+ l:{a:'glicerol',b:'ácido graso',ga:'−OH',gb:'HO−CO−',sale:'H y OH',nuevo:'−COO−',nn:'enlace éster',prod:'monoglicérido',ec:'R−COOH + HO−CH₂−… → R−COO−CH₂−… + H₂O',ca:'#bbf7d0',cb:'#e2e8f0',
+    txt:'El −OH del ácido graso y el H de un −OH del glicerol salen como <b>H₂O</b>: se forma un <b>éster</b> (esterificación). Repitiendo con los otros dos −OH del glicerol se obtiene un <b>triglicérido</b> y salen 3 H₂O.'},
+ p:{a:'aminoácido 1',b:'aminoácido 2',ga:'−COOH',gb:'H₂N−',sale:'OH y H',nuevo:'−CO−NH−',nn:'enlace peptídico',prod:'dipéptido',ec:'R−COOH + H₂N−R′ → R−CO−NH−R′ + H₂O',ca:'#bfdbfe',cb:'#c4b5fd',
+    txt:'El −OH del carboxilo de un aminoácido y un H del −NH₂ del otro salen como <b>H₂O</b>. Se forma una <b>amida</b>, −CO−NH−: el <b>enlace peptídico</b>. Con muchos aminoácidos se forma una proteína.'}
+};
+var k='c',unido=false;
+function pinta(anim){
+  var p=PAR[k],s=document.getElementById('un-svg');s.innerHTML='';
+  var xa=unido?120:80,xb=unido?260:320;
+  el('rect',{x:xa-60,y:60,width:120,height:70,rx:18,fill:p.ca,stroke:'#0d2d42','stroke-width':2},s);
+  tx(s,xa-10,100,p.a,{'text-anchor':'middle','font-size':13,'font-weight':800,fill:'#0d2d42'});
+  el('rect',{x:xb-60,y:60,width:120,height:70,rx:18,fill:p.cb,stroke:'#0d2d42','stroke-width':2},s);
+  tx(s,xb+10,100,p.b,{'text-anchor':'middle','font-size':13,'font-weight':800,fill:'#0d2d42'});
+  if(!unido){
+    tx(s,xa+58,90,p.ga,{'font-size':13,'font-weight':800,fill:'#dc2626','text-anchor':'start'});
+    tx(s,xb-58,90,p.gb,{'font-size':13,'font-weight':800,fill:'#dc2626','text-anchor':'end'});
+    tx(s,220,40,'grupos que van a reaccionar',{'text-anchor':'middle','font-size':11,fill:'#dc2626'});
+  }else{
+    el('rect',{x:166,y:80,width:48,height:30,rx:6,fill:'#fce8f4',stroke:'#9a4a78','stroke-width':2},s);
+    tx(s,190,100,p.nuevo,{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#9a4a78'});
+    tx(s,190,150,p.nn,{'text-anchor':'middle','font-size':12,'font-weight':800,fill:'#9a4a78'});
+    var w=el('g',{},s);el('circle',{cx:190,cy:186,r:16,fill:'#dbeafe',stroke:'#1a6ea8','stroke-width':2},w);tx(w,190,191,'H₂O',{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#0d4a73'});
+    if(anim&&w.animate)w.animate([{transform:'translate(0,-70px)',opacity:0},{transform:'translate(0,0)',opacity:1}],{duration:700,easing:'ease-out'});
+    tx(s,230,192,'sale una molécula de agua',{'font-size':11,fill:'#0d4a73'});
+  }
+  document.getElementById('un-msg').innerHTML=unido?(p.txt+'<br><span class="mono">'+p.ec+'</span>'):'Mira los grupos en rojo: <b>'+p.ga+'</b> y <b>'+p.gb+'</b>. Pulsa <b>Unir</b> para ver la condensación.';
+}
+document.getElementById('un-sel').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;k=b.dataset.k;unido=false;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});pinta(false);});
+document.getElementById('un-unir').addEventListener('click',function(){if(unido){document.getElementById('un-msg').innerHTML+='<br>Ya están unidos: para romper el enlace hace falta agua (hidrólisis).';return;}unido=true;pinta(true);});
+document.getElementById('un-sep').addEventListener('click',function(){if(!unido){document.getElementById('un-msg').innerHTML='Primero únelos. La hidrólisis rompe un enlace que ya existe.';return;}unido=false;pinta(false);
+  document.getElementById('un-msg').innerHTML='<b>Hidrólisis:</b> una molécula de H₂O entra, rompe el '+PAR[k].nn+' y devuelve el H y el OH a cada monómero. Así digiere tu cuerpo el almidón, las grasas y las proteínas, con ayuda de enzimas.';});
+pinta(false);
+document.getElementById('un-ok').addEventListener('click',function(){var n=parseInt(document.getElementById('un-n').value,10),r=parseInt(document.getElementById('un-r').value,10),o=document.getElementById('un-out');
+  if(!(n>=2)){o.className='calc-out fail';o.innerHTML='Escribe un número de monómeros mayor o igual que 2.';return;}
+  if(r===n-1){o.className='calc-out ok';o.innerHTML='✅ <b>'+(n-1)+' moléculas de agua.</b> Con '+n+' monómeros en fila hay '+(n-1)+' uniones, y cada unión libera una H₂O.';}
+  else{o.className='calc-out fail';o.innerHTML='🔎 '+(r===n?'Casi: el último monómero no se une con nadie más. ':'')+'Cuenta las <b>uniones</b>, no los monómeros: con 3 monómeros hay 2 uniones.';}});
+
+/* ── Hebra complementaria de ADN ── */
+function adn(){var v=document.getElementById('dna-in').value.toUpperCase().replace(/[^ATGC]/g,''),C={A:'T',T:'A',G:'C',C:'G'},o=document.getElementById('dna-out');
+  if(!v){o.innerHTML='Escribe al menos una letra A, T, G o C.';return;}
+  var comp=v.split('').map(function(b){return C[b];}).join(''),ph=v.split('').reduce(function(s,b){return s+(b==='A'||b==='T'?2:3);},0),gc=v.split('').filter(function(b){return b==='G'||b==='C';}).length;
+  o.innerHTML='<span class="mono">5′− '+v.split('').join(' ')+' −3′<br>3′− '+comp.split('').join(' ')+' −5′</span><br>Pares A−T: <b>'+(v.length-gc)+'</b> (× 2 puentes) · Pares G−C: <b>'+gc+'</b> (× 3 puentes) → <b>'+ph+' puentes de hidrógeno</b>. Un ADN con más G−C necesita más energía para separar sus hebras.';}
+document.getElementById('dna-in').addEventListener('input',adn);adn();
+
+/* ── Kilocalorías ── */
+function num(id){return parseFloat(String(document.getElementById(id).value).replace(',','.'));}
+document.getElementById('kc-ok').addEventListener('click',function(){var c=num('kc-c'),p=num('kc-p'),g=num('kc-g'),r=num('kc-r'),o=document.getElementById('kc-out');
+  if([c,p,g].some(isNaN)){o.className='calc-out fail';o.innerHTML='Escribe los gramos de los tres nutrientes (0 si no tiene).';return;}
+  var t=c*4+p*4+g*9,pg=t?Math.round(g*9/t*100):0;
+  if(isNaN(r)){o.className='calc-out fail';o.innerHTML='Escribe tu resultado en kcal.';return;}
+  if(Math.abs(r-t)<=1){o.className='calc-out ok';o.innerHTML='✅ <b>'+String(t).replace('.',',')+' kcal.</b> La grasa aporta el '+pg+' % de la energía. Compáralo con el valor que trae la etiqueta: puede diferir un poco porque las etiquetas redondean.';}
+  else if(Math.abs(r-(c+p+g)*4)<=1){o.className='calc-out fail';o.innerHTML='🔎 Usaste 4 kcal/g para todo. Las grasas aportan <b>9 kcal/g</b>.';}
+  else{o.className='calc-out fail';o.innerHTML='🔎 Revisa: ('+c+' × 4) + ('+p+' × 4) + ('+g+' × 9).';}});
+})();
+</script>
+<script src="site-ui.js"></script>
+<script src="narracion.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>

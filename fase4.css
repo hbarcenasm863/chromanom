@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   ChromaNom — componentes de la Fase 4 «Química de la vida y del ambiente»
+   (orbitales.html, propiedades.html, biomoleculas.html, ambiente.html).
+   Se carga DESPUÉS de fundamentos.css y chromanom.css.
+   Principios de Mayer que apoya cada componente:
+   - .glos      pre-entrenamiento: palabras clave antes de la explicación
+   - .pasos     ejemplo resuelto segmentado: un paso a la vez
+   - .calc/.plot interactividad guiada con retroalimentación inmediata
+   - .meta      señalización: qué vas a poder hacer al terminar la sección
+   ═══════════════════════════════════════════════════════════════════════ */
+.meta{display:flex;gap:8px;align-items:flex-start;font-size:.84rem;line-height:1.55;color:var(--brand-d);background:#f2f9fd;border:1px dashed rgba(26,110,168,.35);border-radius:var(--rs);padding:8px 12px;margin:0 0 12px}
+.meta::before{content:'🎯';flex-shrink:0}
+
+/* Pre-entrenamiento: tarjetas que se voltean con la definición */
+.glos{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:12px 0}
+.glos button{min-height:64px;text-align:left;border:1.5px solid var(--brd);border-radius:var(--rs);background:#fff;padding:10px 12px;font-family:inherit;cursor:pointer;color:var(--tx);transition:border-color .15s,background .15s}
+.glos button b{display:block;font-size:.9rem;color:var(--brand-d)}
+.glos button span{display:block;font-size:.78rem;color:var(--dimmer);margin-top:3px;line-height:1.45}
+.glos button .def{display:none;color:var(--dim)}
+.glos button.on{background:var(--brand-l);border-color:var(--brand)}
+.glos button.on .hint{display:none}
+.glos button.on .def{display:block}
+
+/* Ejemplo resuelto por pasos */
+.pasos{border:1.5px solid var(--brd);border-radius:var(--r);background:#fbfdff;padding:14px 16px;margin:12px 0}
+.pasos-h{font-weight:800;font-size:.92rem;color:var(--tx);margin-bottom:8px}
+.pasos ol{list-style:none;padding:0;margin:0;counter-reset:p}
+.pasos li{counter-increment:p;position:relative;padding:8px 10px 8px 40px;border-radius:var(--rs);margin-bottom:6px;background:#fff;border:1px solid var(--brd);font-size:.88rem;line-height:1.6;color:var(--dim)}
+.pasos li::before{content:counter(p);position:absolute;left:10px;top:8px;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:.74rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.pasos li.oculto{display:none}
+.pasos li.nuevo{animation:pop .3s ease}
+.pasos .pasos-ctl{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+/* Calculadora o reto con respuesta escrita */
+.calc{border:1.5px solid var(--brd);border-radius:var(--r);background:linear-gradient(180deg,#fbfdff,#f1f7fc);padding:14px 16px;margin:12px 0}
+.calc-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.calc label{font-size:.84rem;font-weight:700;color:var(--dim)}
+.calc select,.calc input{min-height:44px;border:1.5px solid var(--brd);border-radius:var(--rs);padding:6px 10px;font-family:inherit;font-size:.9rem;background:#fff;color:var(--tx)}
+.calc input{width:120px}
+.calc input[type=range]{width:220px;padding:0;border:none;background:none}
+.calc-out{font-size:.88rem;line-height:1.65;color:var(--dim);background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:10px 12px;min-height:3em}
+.calc-out b{color:var(--tx)}
+.calc-out.ok{border-color:#86efac;background:var(--okb)}
+.calc-out.fail{border-color:#fca5a5;background:var(--errb)}
+.big{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--brand-d)}
+
+/* Gráfica de datos (SVG) */
+.plot{background:#fff;border:1px solid var(--brd);border-radius:var(--rs);padding:8px}
+.plot svg{width:100%;height:auto;display:block}
+.plot text{font-family:'Outfit',sans-serif}
+
+/* Dos columnas que se apilan en celular */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+@media(max-width:760px){.duo{grid-template-columns:1fr}}
+
+/* Selector de opciones en píldoras (reutiliza el aspecto de .lab-ctl .seg) */
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.seg button{min-height:42px;padding:6px 14px;border-radius:999px;border:2px solid var(--brd);background:#fff;font-weight:800;font-size:.84rem;cursor:pointer;color:var(--dim);font-family:inherit}
+.seg button.on{background:var(--brand);border-color:var(--brand);color:#fff}
+
+/* Clasificador: tarjetas para tocar y ubicar */
+.clasif{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.clasif .item{min-height:44px;padding:8px 12px;border-radius:var(--rs);border:1.5px solid var(--brd);background:#fff;font-size:.86rem;font-weight:700;color:var(--tx)}
+.clasif .item .seg{margin:6px 0 0}
+.clasif .item .seg button{min-height:36px;padding:4px 10px;font-size:.76rem}
+.clasif .item.ok{border-color:#86efac;background:var(--okb)}
+.clasif .item.fail{border-color:#fca5a5;background:var(--errb)}
+.clasif .item small{display:block;font-weight:500;color:var(--dim);margin-top:4px;line-height:1.45}
+
+/* Fórmulas FX en línea */
+.fxm{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.92rem;color:var(--tx)}
+.fxm .fx-in{padding-top:1.3em;padding-bottom:1.4em}
+
+@media(max-width:760px){.lab{grid-template-columns:1fr}}
+@media print{.site-nav,#bnav,.fase-nav,.fase-sig,.toc,.prac,.links-row{display:none!important}.sec{break-inside:avoid;box-shadow:none}}
+.fxm .hn{color:var(--c4t);background:var(--c4b);border-radius:4px;padding:0 1px}
+.fxm .bp{color:#c2410c}
+.plot svg{max-width:680px;margin:0 auto}

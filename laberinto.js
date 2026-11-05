@@ -216,7 +216,7 @@ function genNom(forma, r, o){
 
 // Preguntas de la Fase 1 e isomería (fundamentos.js) con respuestas que
 // caben en el rótulo de una flecha.
-const FUND_TIT = {hibridacion:'Átomo de carbono e hibridación', tipos_carbono:'Tipos de carbono', cadenas:'Clasificación de cadenas', isomeria:'Isomería', principios:'Principios de nomenclatura', cicloalcanos:'Cicloalcanos', fenoles:'Fenoles', derivados_acido:'Haluros de ácido y anhídridos', tipos_reaccion:'Tipos de reacción orgánica'};
+const FUND_TIT = {hibridacion:'Átomo de carbono e hibridación', tipos_carbono:'Tipos de carbono', cadenas:'Clasificación de cadenas', isomeria:'Isomería', principios:'Principios de nomenclatura', cicloalcanos:'Cicloalcanos', fenoles:'Fenoles', derivados_acido:'Haluros de ácido y anhídridos', tipos_reaccion:'Tipos de reacción orgánica', orbitales_mol:'Orbitales moleculares y aromaticidad', fuerzas_inter:'Fuerzas intermoleculares y propiedades', biomoleculas:'Biomoléculas', quimica_ambiente:'Química orgánica y ambiente'};
 const sinHtml = s => String(s).replace(/<[^>]+>/g, '');
 function poolFund(cfg){
   return (window.FUND_BANCO || []).filter(q => cfg.temas.includes(q.topic) && sinHtml(q.q).length <= 120 && q.opts.every(o => o.length <= 36));

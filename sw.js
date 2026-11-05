@@ -3,7 +3,7 @@
 // Assets estáticos (JS/CSS/íconos) y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v52';
+const CACHE = 'chromanom-v53';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -21,6 +21,13 @@ const ASSETS = [
   './cadenas.html',
   './fundamentos.js',
   './temas-extra.js',
+  './temas-11.js',
+  './fase4.css',
+  './fase4.js',
+  './orbitales.html',
+  './propiedades.html',
+  './biomoleculas.html',
+  './ambiente.html',
   './fundamentos.css',
   './narracion.js',
   './laberinto.js',

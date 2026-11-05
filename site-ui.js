@@ -21,6 +21,7 @@
     {href:'carbono.html',ico:'⚛️',txt:'Fase 1: El carbono (hibridación, tipos de C, cadenas)'},
     {href:'referencia.html',ico:'📋',txt:'Hoja de referencia'},
     {href:'isomeria.html',ico:'🔀',txt:'Isomería'},
+    {href:'orbitales.html',ico:'🌿',txt:'Fase 4: Química de la vida y del ambiente (orbitales, propiedades, biomoléculas, ambiente)'},
     {href:'docente.html',ico:'📘',txt:'Docente: guías y evaluaciones'}
   ];
   var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
@@ -202,9 +203,19 @@ window.CN_FASES=[
     {id:'isomeria.html',e:'🔀',t:'Isomería',l:'Isomería'},
     {id:'reacciones.html',e:'🧪',t:'Reacciones orgánicas',l:'Reacciones'}]}
 ];
+/* Fase 4 (grado 11.º, aprendizajes priorizados de la SED): va aparte porque
+   la molécula-menú de la portada está dibujada para las 8 paradas de las
+   fases 1 a 3. Sí entra en la barra de fases y en «Siguiente parada». */
+window.CN_FASES_EXTRA=[
+  {n:4,t:'Química de la vida y del ambiente',sub:'Estructura, propiedades y contexto',c:'#0f766e',st:[
+    {id:'orbitales.html',e:'🌈',t:'Orbitales moleculares y aromaticidad',l:'Orbitales'},
+    {id:'propiedades.html',e:'💧',t:'Fuerzas intermoleculares y propiedades',l:'Propiedades'},
+    {id:'biomoleculas.html',e:'🧬',t:'Biomoléculas',l:'Biomoléculas'},
+    {id:'ambiente.html',e:'🌎',t:'Química orgánica y ambiente',l:'Ambiente'}]}
+];
 (function(){
   var page=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-  var F=window.CN_FASES,ruta=[];F.forEach(function(f){f.st.forEach(function(s){s.f=f;ruta.push(s);});});
+  var F=window.CN_FASES.concat(window.CN_FASES_EXTRA||[]),ruta=[];F.forEach(function(f){f.st.forEach(function(s){s.f=f;ruta.push(s);});});
   var i=ruta.findIndex?ruta.findIndex(function(s){return s.id===page;}):-1;
   if(i<0)return;
   var s=ruta[i],f=s.f,vis={};

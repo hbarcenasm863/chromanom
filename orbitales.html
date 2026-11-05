@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){try{var v=localStorage.getItem('chromanom_text_zoom');if(v)document.documentElement.style.fontSize=v+'%';}catch(e){}})();</script>
+<meta name="theme-color" content="#0d4a73">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ChromaNom">
+<meta name="description" content="Orbitales moleculares enlazantes y antienlazantes, orden de enlace, aromaticidad del benceno y por qué los compuestos conjugados tienen color.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>ChromaNom · Orbitales moleculares y aromaticidad</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fundamentos.css">
+<link rel="stylesheet" href="chromanom.css">
+<link rel="stylesheet" href="fase4.css">
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-brand">ChromaNom</a>
+  <div class="nav-links">
+<a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
+<a href="carbono.html" class="nav-link">⚛️ <span class="full">Carbono</span></a>
+<a href="teoria.html" class="nav-link">⚗️ <span class="full">Principios</span></a>
+<a href="grupos.html" class="nav-link">🔬 <span class="full">Grupos</span></a>
+<a href="isomeria.html" class="nav-link">🔀 <span class="full">Isomería</span></a>
+<a href="reacciones.html" class="nav-link">🧪 <span class="full">Reacciones</span></a>
+<a href="orbitales.html" class="nav-link active">🌿 <span class="full">Vida y ambiente</span></a>
+<a href="juego.html" class="nav-link">🎮 <span class="full">Juego</span></a>
+<a href="referencia.html" class="nav-link">📋 <span class="full">Referencia</span></a>
+<a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
+  </div>
+</nav>
+<div class="app">
+
+<div class="cn-page-head cn-in">
+  <div class="cn-eyebrow">Fase 4 · Química de la vida y del ambiente · Parada 1 de 4</div>
+  <h1>Orbitales moleculares: por qué el benceno es tan estable y la zanahoria es naranja</h1>
+  <p>En la Fase 1 explicaste los enlaces con la hibridación (enlace de valencia). Aquí conoces un segundo modelo, el de orbitales moleculares, que explica cosas que el primero no puede: por qué el oxígeno es atraído por un imán, por qué el benceno casi no hace adiciones y por qué algunas moléculas orgánicas tienen color.</p>
+</div>
+
+<nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
+
+<nav class="toc" aria-label="Secciones de la página">
+  <a href="#previo">Palabras clave</a>
+  <a href="#modelos">Dos modelos</a>
+  <a href="#combinar">Enlazante y antienlazante</a>
+  <a href="#lab">Llena el diagrama</a>
+  <a href="#pi">El enlace π</a>
+  <a href="#benceno">Aromaticidad</a>
+  <a href="#color">Conjugación y color</a>
+  <a href="#practica">Practica</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+<!-- ═══════════════ 0. PALABRAS CLAVE (pre-entrenamiento) ═══════════════ -->
+<section class="sec" id="previo">
+  <div class="sec-kicker">Antes de empezar</div>
+  <h2>Palabras clave de esta página</h2>
+  <p>Toca cada tarjeta para ver qué significa. Vas a encontrar estas palabras en todas las secciones.</p>
+  <div class="glos">
+    <button type="button"><b>Orbital atómico</b><span class="hint">Toca para ver</span><span class="def">Región alrededor de UN átomo donde es probable encontrar un electrón (1s, 2p…).</span></button>
+    <button type="button"><b>Orbital molecular</b><span class="hint">Toca para ver</span><span class="def">Región que abarca a TODA la molécula, formada al combinar orbitales atómicos.</span></button>
+    <button type="button"><b>Enlazante</b><span class="hint">Toca para ver</span><span class="def">Orbital molecular de menor energía: sus electrones quedan entre los núcleos y los mantienen unidos.</span></button>
+    <button type="button"><b>Antienlazante (*)</b><span class="hint">Toca para ver</span><span class="def">Orbital de mayor energía, con un «nodo» entre los núcleos: sus electrones debilitan el enlace.</span></button>
+    <button type="button"><b>Orden de enlace</b><span class="hint">Toca para ver</span><span class="def">(electrones enlazantes − antienlazantes) ÷ 2. Indica si el enlace es sencillo, doble o triple.</span></button>
+    <button type="button"><b>Deslocalización</b><span class="hint">Toca para ver</span><span class="def">Electrones π repartidos sobre varios átomos, no fijos entre dos.</span></button>
+    <button type="button"><b>Conjugación</b><span class="hint">Toca para ver</span><span class="def">Dobles enlaces que alternan con sencillos (C=C−C=C): sus electrones π se deslocalizan.</span></button>
+    <button type="button"><b>Aromático</b><span class="hint">Toca para ver</span><span class="def">Anillo plano y conjugado con 4n + 2 electrones π (2, 6, 10…), como el benceno. Es muy estable.</span></button>
+  </div>
+</section>
+
+<!-- ═══════════════ 1. DOS MODELOS ═══════════════ -->
+<section class="sec" id="modelos">
+  <div class="sec-kicker">Punto de partida</div>
+  <h2>Dos modelos para explicar el mismo enlace</h2>
+  <div class="meta">Al terminar podrás decir qué explica cada modelo y por qué se necesitan los dos.</div>
+  <p>Un <b>modelo</b> científico es una representación que explica y predice. Ningún modelo lo explica todo: se usa el que mejor sirve para cada pregunta.</p>
+  <div class="tree" role="group" aria-label="Comparación de los dos modelos">
+    <div class="tree-root">¿Cómo se forma un enlace covalente?</div>
+    <div class="tree-col">
+      <h4>Enlace de valencia (Fase 1)</h4>
+      <p>Cada enlace es un par de electrones <b>entre dos átomos</b>. Los orbitales se hibridan (sp³, sp², sp) y se solapan.</p>
+      <span class="tree-leaf"><b>Explica bien:</b> la forma de las moléculas (tetraédrica, plana, lineal) y los enlaces σ y π.</span>
+      <span class="tree-leaf"><b>No explica:</b> el magnetismo del O₂, la estabilidad extra del benceno ni el color.</span>
+    </div>
+    <div class="tree-col">
+      <h4>Orbitales moleculares (nuevo)</h4>
+      <p>Los orbitales de los átomos se combinan en orbitales que pertenecen a <b>toda la molécula</b>.</p>
+      <span class="tree-leaf"><b>Explica bien:</b> el orden de enlace, el O₂ paramagnético, la deslocalización del benceno y el color de las moléculas conjugadas.</span>
+      <span class="tree-leaf"><b>Cuesta más:</b> dibujarlo en moléculas grandes; por eso para la forma seguimos usando la hibridación.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 2. ENLAZANTE Y ANTIENLAZANTE ═══════════════ -->
+<section class="sec" id="combinar">
+  <div class="sec-kicker">La idea central</div>
+  <h2>Dos orbitales atómicos → un enlazante y un antienlazante</h2>
+  <div class="meta">Al terminar podrás explicar por qué un orbital une los átomos y el otro los separa.</div>
+  <p>Los electrones se comportan como ondas. Cuando dos orbitales 1s de dos átomos de hidrógeno se acercan, sus ondas se pueden <b>sumar</b> o <b>restar</b>, como las ondas de dos piedras que caen en un estanque.</p>
+  <div class="figs two">
+    <div class="fig">
+      <svg viewBox="0 0 260 120" role="img" aria-label="Orbital enlazante: las dos nubes se suman y hay mucha densidad electrónica entre los núcleos">
+        <ellipse cx="130" cy="60" rx="96" ry="40" fill="#bfdbfe" stroke="#1a6ea8" stroke-width="2"/>
+        <ellipse cx="130" cy="60" rx="34" ry="26" fill="#93c5fd" opacity=".9"/>
+        <circle cx="95" cy="60" r="5" fill="#0d2d42"/><circle cx="165" cy="60" r="5" fill="#0d2d42"/>
+        <text x="95" y="86" text-anchor="middle" font-size="11" fill="#0d2d42">H</text><text x="165" y="86" text-anchor="middle" font-size="11" fill="#0d2d42">H</text>
+        <text x="130" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#0d4a73">electrones ENTRE los núcleos</text>
+      </svg>
+      <div class="fig-cap">σ1s · enlazante</div>
+      <div class="fig-sub">Las ondas se <b>suman</b>. La carga negativa entre los núcleos atrae a los dos: <b>baja la energía</b>.</div>
+    </div>
+    <div class="fig">
+      <svg viewBox="0 0 260 120" role="img" aria-label="Orbital antienlazante: las nubes se restan y queda un nodo sin electrones entre los núcleos">
+        <ellipse cx="72" cy="60" rx="52" ry="36" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+        <ellipse cx="188" cy="60" rx="52" ry="36" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+        <line x1="130" y1="14" x2="130" y2="100" stroke="#0d2d42" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <circle cx="95" cy="60" r="5" fill="#0d2d42"/><circle cx="165" cy="60" r="5" fill="#0d2d42"/>
+        <text x="130" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">nodo: sin electrones en el medio</text>
+      </svg>
+      <div class="fig-cap">σ*1s · antienlazante</div>
+      <div class="fig-sub">Las ondas se <b>restan</b>. Los núcleos quedan expuestos y se repelen: <b>sube la energía</b>.</div>
+    </div>
+  </div>
+  <div class="key">🔑 <b>Regla de conteo:</b> siempre salen tantos orbitales moleculares como orbitales atómicos se combinan. Los electrones llenan primero el de menor energía (como en la configuración electrónica: Aufbau, Pauli y Hund).</div>
+  <div class="pasos">
+    <div class="pasos-h">Ejemplo resuelto: ¿cuál es el orden de enlace del H₂?</div>
+    <ol>
+      <li>Cuenta los electrones: cada H aporta 1 → la molécula tiene <b>2 electrones</b>.</li>
+      <li>Llena de abajo hacia arriba: los 2 caben en el <b>σ1s enlazante</b> (con espines opuestos). El σ*1s queda vacío.</li>
+      <li>Aplica la fórmula: orden = (enlazantes − antienlazantes) ÷ 2 = (2 − 0) ÷ 2 = <b>1</b>.</li>
+      <li>Interpreta: orden 1 = <b>un enlace sencillo</b>, H−H. Coincide con la estructura de Lewis. Romperlo cuesta 436 kJ/mol.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══════════════ 3. LABORATORIO: LLENA EL DIAGRAMA ═══════════════ -->
+<section class="sec" id="lab">
+  <div class="sec-kicker">Laboratorio interactivo</div>
+  <h2>Llena el diagrama y predice si la molécula existe</h2>
+  <div class="meta">Primero predice; después agrega los electrones uno por uno y compara con los datos medidos.</div>
+  <p>Escoge una molécula. Antes de llenar, <b>escribe tu predicción</b> del orden de enlace. Luego agrega los electrones: el diagrama los ubica con las reglas de Aufbau, Pauli y Hund.</p>
+  <div class="seg" id="om-mol" role="group" aria-label="Molécula"></div>
+  <div class="lab">
+    <div class="lab-view"><svg id="om-svg" viewBox="0 0 360 330" role="img" aria-label="Diagrama de energía de orbitales moleculares"></svg></div>
+    <div class="lab-ctl">
+      <div class="calc-row"><label for="om-pred">Mi predicción del orden de enlace:</label>
+        <select id="om-pred"><option value="">— elige —</option><option>0</option><option>0,5</option><option>1</option><option>1,5</option><option>2</option><option>2,5</option><option>3</option></select></div>
+      <div class="calc-row"><button type="button" class="btn-sm prim" id="om-add">➕ Agregar un electrón</button><button type="button" class="btn-sm" id="om-all">Llenar todo</button><button type="button" class="btn-sm" id="om-reset">↺ Vaciar</button></div>
+      <dl class="lab-data" id="om-data"></dl>
+      <div class="lab-msg" id="om-msg" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="warn">⚠️ En las moléculas del segundo periodo (N₂, O₂, F₂, Ne₂) el diagrama muestra solo los electrones de <b>valencia</b> (2s y 2p). Los de la capa 1s se cancelan entre enlazantes y antienlazantes y no cambian el orden de enlace. En el N₂ el orbital π2p queda por debajo del σ2p; en O₂, F₂ y Ne₂, al revés.</div>
+</section>
+
+<!-- ═══════════════ 4. EL ENLACE PI ═══════════════ -->
+<section class="sec" id="pi">
+  <div class="sec-kicker">De vuelta a la química orgánica</div>
+  <h2>El enlace π del eteno: el más expuesto</h2>
+  <div class="meta">Al terminar podrás explicar con orbitales por qué los alquenos reaccionan por adición.</div>
+  <p>En el eteno, CH₂=CH₂, los dos orbitales p que no se hibridaron se combinan <b>de lado</b>: forman un orbital <b>π enlazante</b> (ocupado por 2 electrones) y un <b>π* antienlazante</b> (vacío).</p>
+  <div class="duo">
+    <div class="fig">
+      <svg viewBox="0 0 240 150" role="img" aria-label="Orbital pi del eteno: dos lóbulos, uno arriba y otro abajo del enlace sigma">
+        <ellipse cx="120" cy="45" rx="62" ry="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <ellipse cx="120" cy="105" rx="62" ry="22" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <line x1="85" y1="75" x2="155" y2="75" stroke="#0d2d42" stroke-width="3"/>
+        <circle cx="85" cy="75" r="9" fill="#166534"/><circle cx="155" cy="75" r="9" fill="#166534"/>
+        <text x="85" y="79" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">C</text><text x="155" y="79" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">C</text>
+        <text x="200" y="40" font-size="11" fill="#5b21b6" font-weight="700">π</text><text x="200" y="80" font-size="11" fill="#0d2d42" font-weight="700">σ</text>
+        <text x="120" y="146" text-anchor="middle" font-size="10" fill="#3a5568">nube π arriba y abajo del eje</text>
+      </svg>
+      <div class="fig-sub">Los electrones π están <b>lejos de los núcleos</b> y expuestos.</div>
+    </div>
+    <div>
+      <p><b>¿Por qué importa?</b> Un reactivo que busca electrones (un electrófilo como el H⁺ del HBr) encuentra primero la nube π. Por eso el eteno hace <b>adiciones</b>: se rompe el π y se forman dos σ nuevos.</p>
+      <p>El orbital π es el <b>último lleno</b> de la molécula y el π* es el <b>primero vacío</b>. La diferencia de energía entre los dos decide qué luz puede absorber la molécula: lo verás en la sección de color.</p>
+      <div class="links-row"><a class="btn-sm" href="reacciones.html" style="text-decoration:none">🧪 Ver la adición electrofílica en Reacciones</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 5. BENCENO Y AROMATICIDAD ═══════════════ -->
+<section class="sec" id="benceno">
+  <div class="sec-kicker">Un caso que el enlace de valencia no explica</div>
+  <h2>El benceno: seis electrones π que no se quedan quietos</h2>
+  <div class="meta">Al terminar podrás usar datos de energía para demostrar que el benceno es más estable de lo esperado.</div>
+  <p>Si el benceno, C₆H₆, tuviera tres dobles enlaces fijos, tendría tres enlaces cortos y tres largos y reaccionaría como un alqueno. Las medidas dicen otra cosa: <b>los seis enlaces C−C miden lo mismo (139 pm)</b>, entre un sencillo (154 pm) y un doble (134 pm). Los seis orbitales p se combinan en orbitales π que cubren todo el anillo: los electrones están <b>deslocalizados</b>.</p>
+  <div class="pasos">
+    <div class="pasos-h">Ejemplo resuelto con datos: ¿cuánto más estable es el benceno?</div>
+    <ol>
+      <li><b>Dato 1.</b> Al hidrogenar el ciclohexeno (un C=C) se liberan <b>120 kJ/mol</b>: C₆H₁₀ + H₂ → C₆H₁₂.</li>
+      <li><b>Predicción del modelo de 3 dobles enlaces fijos.</b> Si el benceno tuviera tres C=C aislados liberaría 3 × 120 = <b>360 kJ/mol</b> al convertirse en ciclohexano.</li>
+      <li><b>Dato 2 (medido).</b> El benceno libera solo <b>208 kJ/mol</b>: C₆H₆ + 3 H₂ → C₆H₁₂.</li>
+      <li><b>Compara.</b> 360 − 208 ≈ <b>152 kJ/mol</b>. El benceno estaba ya «más abajo» en energía: es unos 150 kJ/mol más estable que lo que predice el modelo de dobles enlaces fijos. Esa diferencia se llama <b>energía de resonancia</b>.</li>
+      <li><b>Concluye.</b> Como una adición destruiría la nube aromática y perdería esa estabilidad, el benceno prefiere la <b>sustitución electrofílica</b>: cambia un H y conserva el anillo.</li>
+    </ol>
+  </div>
+  <div class="plot"><svg id="bz-svg" viewBox="0 0 420 220" role="img" aria-label="Diagrama de energías de hidrogenación: 360 kJ/mol esperados frente a 208 medidos para el benceno"></svg></div>
+  <h3>¿Es aromático? La regla de Hückel</h3>
+  <p>Un anillo es <b>aromático</b> si es plano, todos sus átomos del anillo tienen un orbital p (conjugación completa) y tiene <b>4n + 2 electrones π</b> (2, 6, 10, 14…). Clasifica cada caso:</p>
+  <div id="huckel"></div>
+  <div class="calc-out" id="huckel-out" aria-live="polite">Clasifica los seis anillos.</div>
+</section>
+
+<!-- ═══════════════ 6. CONJUGACIÓN Y COLOR ═══════════════ -->
+<section class="sec" id="color">
+  <div class="sec-kicker">Química que se ve</div>
+  <h2>Conjugación y color: de la zanahoria a la cúrcuma</h2>
+  <div class="meta">Al terminar podrás predecir si una molécula orgánica tiene color a partir del número de dobles enlaces conjugados.</div>
+  <p>Una molécula absorbe luz cuando un electrón salta del último orbital lleno (π) al primero vacío (π*). Con cada doble enlace conjugado más, esos dos orbitales quedan <b>más cerca en energía</b>, así que la molécula absorbe luz de <b>menor energía, es decir, de mayor longitud de onda</b>. Cuando la absorción llega al visible (400–700 nm), vemos el color <b>complementario</b>: el que la sustancia no absorbe.</p>
+  <div class="seg" id="col-sel" role="group" aria-label="Compuesto"></div>
+  <div class="plot"><svg id="col-svg" viewBox="0 0 520 170" role="img" aria-label="Espectro con la longitud de onda absorbida por el compuesto elegido"></svg></div>
+  <div class="calc-out" id="col-msg" aria-live="polite" style="margin-top:10px"></div>
+  <div class="life">
+    <div class="life-h">🇨🇴 En tu cocina y en el campo</div>
+    <p>El <b>β-caroteno</b> (zanahoria, ahuyama, mango) y el <b>licopeno</b> (tomate, guayaba, sandía) son hidrocarburos con 11 dobles enlaces conjugados. La <b>curcumina</b> de la cúrcuma, que se cultiva en el Huila y el Meta, da el amarillo a muchos alimentos. La <b>clorofila</b> absorbe luz roja y azul para la fotosíntesis y por eso las hojas se ven verdes.</p>
+    <p>Los valores de absorción de esta sección son aproximados: cambian un poco según el solvente en que se midan.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 7. PRÁCTICA ═══════════════ -->
+<section class="sec" id="practica">
+  <div class="sec-kicker">Repaso con el banco del Juego</div>
+  <h2>Practica: orbitales moleculares y aromaticidad</h2>
+  <p>Ocho preguntas al azar del mismo banco que usa el Juego. Cada opción incorrecta te explica por qué no es.</p>
+  <div class="prac" id="prac-om" style="border-top:none;margin-top:6px;padding-top:0"></div>
+</section>
+
+<section class="sec" id="resumen">
+  <div class="sec-kicker">Para repasar</div>
+  <h2>Resumen</h2>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Idea</th><th>Qué dice</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><b>Orbital enlazante / antienlazante</b></td><td>Dos orbitales atómicos dan uno de menor energía (une) y otro de mayor energía (separa).</td><td>σ1s y σ*1s del H₂</td></tr>
+      <tr><td><b>Orden de enlace</b></td><td>(enlazantes − antienlazantes) ÷ 2. Si da 0, la molécula no existe.</td><td>H₂ = 1; He₂ = 0; N₂ = 3; O₂ = 2</td></tr>
+      <tr><td><b>Paramagnetismo</b></td><td>Electrones desapareados → la sustancia es atraída por un imán.</td><td>O₂ líquido</td></tr>
+      <tr><td><b>Aromaticidad</b></td><td>Anillo plano, conjugado, con 4n + 2 electrones π: muy estable; prefiere sustitución.</td><td>Benceno (6 e⁻ π), unos 150 kJ/mol de estabilidad extra</td></tr>
+      <tr><td><b>Conjugación y color</b></td><td>Más dobles enlaces conjugados → absorbe a mayor longitud de onda → con unos 8 o más, color visible.</td><td>β-caroteno (11 C=C): absorbe azul, se ve naranja</td></tr>
+    </tbody>
+  </table></div>
+  <div class="links-row">
+    <a class="cn-btn cn-btn--secondary" href="carbono.html">⚛️ Repasar la hibridación</a>
+    <a class="cn-btn cn-btn--secondary" href="juego.html?tema=orbitales_mol">🎮 Jugar con este tema</a>
+  </div>
+</section>
+
+<div class="fase-sig" id="fase-sig"></div>
+</div><!-- /app -->
+
+<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
+  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
+</div>
+<script src="fundamentos.js"></script>
+<script src="temas-extra.js"></script>
+<script src="temas-11.js"></script>
+<script src="pwa-install.js"></script>
+<script src="text-zoom.js"></script>
+<script src="fx-libro.js"></script>
+<script src="fase4.js"></script>
+<script>
+(function(){
+'use strict';
+var FU=window.FUND;if(FU)FU.practica('prac-om','orbitales_mol',8,'Practica: orbitales moleculares');
+var NS='http://www.w3.org/2000/svg';
+function el(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function tx(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}
+function coma(n){return String(n).replace('.',',');}
+
+/* ── Laboratorio de orbitales moleculares ──
+   Orbitales en orden de llenado. g = cuántos orbitales degenerados (π = 2),
+   b = enlazante (true) o antienlazante (false). Datos medidos: energía de
+   enlace (kJ/mol) y longitud (pm) de tablas de referencia, redondeados. */
+var P1=[{n:'σ1s',b:true,g:1},{n:'σ*1s',b:false,g:1}];
+var P2N=[{n:'σ2s',b:true,g:1},{n:'σ*2s',b:false,g:1},{n:'π2p',b:true,g:2},{n:'σ2p',b:true,g:1},{n:'π*2p',b:false,g:2},{n:'σ*2p',b:false,g:1}];
+var P2O=[{n:'σ2s',b:true,g:1},{n:'σ*2s',b:false,g:1},{n:'σ2p',b:true,g:1},{n:'π2p',b:true,g:2},{n:'π*2p',b:false,g:2},{n:'σ*2p',b:false,g:1}];
+var MOL=[
+ {id:'H₂⁺',e:1,orb:P1,E:'≈ 255 kJ/mol',L:'106 pm',nota:'Existe en descargas eléctricas y en el espacio interestelar.'},
+ {id:'H₂',e:2,orb:P1,E:'436 kJ/mol',L:'74 pm',nota:'El hidrógeno gaseoso.'},
+ {id:'He₂⁺',e:3,orb:P1,E:'≈ 230 kJ/mol',L:'108 pm',nota:'Ion detectado en el laboratorio.'},
+ {id:'He₂',e:4,orb:P1,E:'≈ 0 (no se forma)',L:'—',nota:'El helio es un gas de átomos sueltos.'},
+ {id:'N₂',e:10,orb:P2N,E:'945 kJ/mol',L:'110 pm',nota:'El 78 % del aire; muy poco reactivo.'},
+ {id:'O₂',e:12,orb:P2O,E:'498 kJ/mol',L:'121 pm',nota:'El oxígeno líquido es atraído por un imán.'},
+ {id:'F₂',e:14,orb:P2O,E:'≈ 158 kJ/mol',L:'142 pm',nota:'Un enlace débil: el flúor es muy reactivo.'},
+ {id:'Ne₂',e:16,orb:P2O,E:'≈ 0 (no se forma)',L:'—',nota:'El neón es un gas de átomos sueltos.'}
+];
+var cur=MOL[1],ne=0;
+var segM=document.getElementById('om-mol');
+segM.innerHTML=MOL.map(function(m,i){return '<button type="button" data-i="'+i+'"'+(i===1?' class="on"':'')+'>'+m.id+'</button>';}).join('');
+function reparte(m,k){ // electrones por orbital (cajas) con Aufbau y Hund
+  var out=m.orb.map(function(o){return o.g===2?[0,0]:[0];}),left=k;
+  m.orb.forEach(function(o,i){
+    if(o.g===1){var c=Math.min(2,left);out[i][0]=c;left-=c;}
+    else{ // Hund: primero uno en cada caja, luego se aparean
+      if(left>0){out[i][0]=1;left--;} if(left>0){out[i][1]=1;left--;}
+      if(left>0){out[i][0]=2;left--;} if(left>0){out[i][1]=2;left--;}
+    }
+  });
+  return out;
+}
+function dibuja(){
+  var svg=document.getElementById('om-svg');svg.innerHTML='';
+  var o=cur.orb,box=reparte(cur,ne),n=o.length,y0=300,dy=(n===2?150:46);
+  el('line',{x1:40,y1:20,x2:40,y2:310,stroke:'#94a3b8','stroke-width':1.5,'marker-end':''},svg);
+  tx(svg,14,165,'Energía ↑',{transform:'rotate(-90 14 165)','font-size':11,fill:'#3a5568','text-anchor':'middle'});
+  var eb=0,ea=0;
+  o.forEach(function(orb,i){
+    var y=n===2?(i===0?230:90):y0-i*dy,cx=200,w=36,boxes=orb.g;
+    var col=orb.b?'#1a6ea8':'#dc2626';
+    for(var j=0;j<boxes;j++){
+      var x=cx-(boxes*w+(boxes-1)*10)/2+j*(w+10);
+      el('rect',{x:x,y:y-16,width:w,height:30,rx:5,fill:'#fff',stroke:col,'stroke-width':2},svg);
+      var c=box[i][j];
+      if(c>=1)tx(svg,x+(c===2?11:18),y+5,'↑',{'font-size':18,'font-weight':800,fill:'#0d2d42','text-anchor':'middle'});
+      if(c===2)tx(svg,x+25,y+5,'↓',{'font-size':18,'font-weight':800,fill:'#0d2d42','text-anchor':'middle'});
+      if(orb.b)eb+=c;else ea+=c;
+    }
+    tx(svg,cx+(boxes*w+(boxes-1)*10)/2+12,y+4,orb.n,{'font-size':13,'font-weight':800,fill:col});
+    tx(svg,70,y+4,orb.b?'enlazante':'antienlazante',{'font-size':10,fill:col});
+  });
+  var orden=(eb-ea)/2,desap=box.reduce(function(s,b){return s+b.filter(function(c){return c===1;}).length;},0);
+  document.getElementById('om-data').innerHTML='<dt>Electrones colocados</dt><dd>'+ne+' de '+cur.e+'</dd><dt>Enlazantes</dt><dd>'+eb+'</dd><dt>Antienlazantes</dt><dd>'+ea+'</dd><dt>Orden de enlace</dt><dd>('+eb+' − '+ea+') ÷ 2 = '+coma(orden)+'</dd><dt>Desapareados</dt><dd>'+desap+'</dd>';
+  var msg=document.getElementById('om-msg'),pred=document.getElementById('om-pred').value;
+  if(ne<cur.e){msg.innerHTML='Faltan <b>'+(cur.e-ne)+'</b> electrones. Recuerda: se llena de abajo hacia arriba y, en los dos orbitales π de igual energía, primero uno en cada caja (regla de Hund).';return;}
+  var r='<b>'+cur.id+': orden de enlace '+coma(orden)+'.</b> '+(orden===0?'La molécula <b>no existe</b>: los antienlazantes anulan a los enlazantes.':'La molécula existe.')+' '+(desap?'Tiene '+desap+' electrones desapareados: es <b>paramagnética</b> (la atrae un imán).':'Todos los electrones están apareados.')+'<br>📏 <b>Dato medido:</b> energía de enlace '+cur.E+'; longitud '+cur.L+'. '+cur.nota;
+  if(pred!==''){var ok=pred===coma(orden);r=(ok?'✅ <b>Tu predicción fue correcta.</b> ':'🔎 Predijiste '+pred+'; el diagrama da '+coma(orden)+'. Revisa cuántos electrones quedaron en antienlazantes. ')+r;}
+  msg.innerHTML=r;
+}
+segM.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cur=MOL[+b.dataset.i];ne=0;
+  segM.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});document.getElementById('om-pred').value='';dibuja();});
+document.getElementById('om-add').addEventListener('click',function(){if(ne<cur.e)ne++;dibuja();});
+document.getElementById('om-all').addEventListener('click',function(){ne=cur.e;dibuja();});
+document.getElementById('om-reset').addEventListener('click',function(){ne=0;dibuja();});
+document.getElementById('om-pred').addEventListener('change',dibuja);
+dibuja();
+
+/* ── Energías de hidrogenación del benceno ── */
+(function(){
+  var s=document.getElementById('bz-svg'),base=200,k=0.45;
+  el('line',{x1:40,y1:base,x2:400,y2:base,stroke:'#94a3b8'},s);
+  tx(s,220,214,'ciclohexano, C₆H₁₂ (punto de llegada)',{'text-anchor':'middle','font-size':11,fill:'#3a5568'});
+  function barra(x,v,col,et1,et2){el('rect',{x:x,y:base-v*k,width:70,height:v*k,fill:col,rx:4,opacity:.85},s);
+    tx(s,x+35,base-v*k-22,et1,{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#0d2d42'});
+    tx(s,x+35,base-v*k-8,et2,{'text-anchor':'middle','font-size':11,fill:'#0d2d42'});}
+  barra(60,120,'#93c5fd','ciclohexeno','120 kJ/mol');
+  barra(170,360,'#fca5a5','3 C=C fijos','360 (predicho)');
+  barra(280,208,'#86efac','benceno','208 (medido)');
+  el('line',{x1:315,y1:base-360*k,x2:315,y2:base-208*k,stroke:'#7c3aed','stroke-width':2,'stroke-dasharray':'4 3'},s);
+  el('line',{x1:240,y1:base-360*k,x2:350,y2:base-360*k,stroke:'#7c3aed','stroke-width':1,'stroke-dasharray':'2 3'},s);
+  tx(s,357,base-284*k,'≈ 152',{'font-size':12,'font-weight':800,fill:'#5b21b6'});
+  tx(s,357,base-284*k+13,'kJ/mol',{'font-size':10,fill:'#5b21b6'});
+})();
+
+/* ── Regla de Hückel ── */
+if(window.F4)F4.clasificador('huckel',[
+  {t:'Benceno: anillo plano, 6 C sp², <b>6 electrones π</b>',ok:'Aromático',fb:'6 = 4(1) + 2. Es el aromático de referencia.'},
+  {t:'Ciclohexano: anillo de 6 C sp³, <b>0 electrones π</b>',ok:'No aromático',fb:'No tiene enlaces π: no hay nube deslocalizada.'},
+  {t:'Ciclobutadieno: anillo plano de 4 C, <b>4 electrones π</b>',ok:'No aromático',fb:'4 no es 4n + 2. De hecho es muy inestable (se le llama «antiaromático»).'},
+  {t:'Naftaleno (bolas de naftalina): dos anillos fusionados, <b>10 electrones π</b>',ok:'Aromático',fb:'10 = 4(2) + 2. Es plano y conjugado.'},
+  {t:'Piridina: anillo de 5 C y 1 N, plano, <b>6 electrones π</b>',ok:'Aromático',fb:'6 electrones π: el N aporta uno, como cada C. Es aromática.'},
+  {t:'Cicloocta-1,3,5,7-tetraeno: anillo de 8 C, <b>8 electrones π</b>, no plano',ok:'No aromático',fb:'8 no cumple 4n + 2 y la molécula se dobla como una bañera.'}
+],['Aromático','No aromático'],function(b,n){document.getElementById('huckel-out').innerHTML='Terminaste: <b>'+b+' de '+n+'</b> al primer intento. La clave siempre es contar los electrones π y comprobar si el anillo es plano y conjugado.';});
+
+/* ── Conjugación y color ── */
+var COMP=[
+ {n:'Eteno',c:1,l:[171],ve:'incoloro',fondo:'#ffffff',d:'Un solo doble enlace: absorbe en el ultravioleta lejano (171 nm). No lo vemos de ningún color.'},
+ {n:'Buta-1,3-dieno',c:2,l:[217],ve:'incoloro',fondo:'#ffffff',d:'Dos dobles enlaces conjugados: la absorción sube a 217 nm, todavía en el ultravioleta.'},
+ {n:'Hexa-1,3,5-trieno',c:3,l:[258],ve:'incoloro',fondo:'#ffffff',d:'Tres dobles enlaces conjugados: 258 nm. Cada doble enlace corre la absorción unos 40 nm.'},
+ {n:'Curcumina (cúrcuma)',c:'cadena + 2 anillos',l:[425],ve:'amarillo',fondo:'#facc15',d:'Su sistema conjugado (dobles enlaces, dos C=O y dos anillos aromáticos) absorbe violeta-azul (unos 425 nm): la vemos amarilla.'},
+ {n:'β-caroteno (zanahoria)',c:11,l:[450],ve:'naranja',fondo:'#f97316',d:'Once dobles enlaces conjugados: absorbe luz azul (unos 450 nm) y la vemos naranja.'},
+ {n:'Licopeno (tomate)',c:11,l:[472],ve:'rojo',fondo:'#dc2626',d:'También 11 conjugados, en una cadena abierta: absorbe azul-verde (unos 470 nm) y lo vemos rojo.'},
+ {n:'Clorofila a (hojas)',c:'anillo grande',l:[430,662],ve:'verde',fondo:'#16a34a',d:'Absorbe en el azul (unos 430 nm) y en el rojo (unos 662 nm). Refleja el verde, que no absorbe.'}
+];
+var segC=document.getElementById('col-sel');
+segC.innerHTML=COMP.map(function(c,i){return '<button type="button" data-i="'+i+'">'+c.n+'</button>';}).join('');
+function nm2rgb(w){var r=0,g=0,b=0;if(w<440){r=-(w-440)/60;b=1;}else if(w<490){g=(w-440)/50;b=1;}else if(w<510){g=1;b=-(w-510)/20;}else if(w<580){r=(w-510)/70;g=1;}else if(w<645){r=1;g=-(w-645)/65;}else{r=1;}
+  return 'rgb('+[r,g,b].map(function(v){return Math.round(Math.max(0,Math.min(1,v))*255);}).join(',')+')';}
+function espectro(i){
+  var s=document.getElementById('col-svg');s.innerHTML='';var x0=30,x1=500,w0=150,w1=750,X=function(w){return x0+(w-w0)/(w1-w0)*(x1-x0);};
+  var g=el('defs',{},s),lg=el('linearGradient',{id:'vis',x1:'0',x2:'1'},g);
+  for(var w=400;w<=700;w+=20)el('stop',{offset:((w-400)/300).toFixed(3),'stop-color':nm2rgb(w)},lg);
+  el('rect',{x:X(150),y:40,width:X(400)-X(150),height:40,fill:'#e2e8f0'},s);
+  el('rect',{x:X(400),y:40,width:X(700)-X(400),height:40,fill:'url(#vis)'},s);
+  el('rect',{x:X(700),y:40,width:X(750)-X(700),height:40,fill:'#fecaca'},s);
+  tx(s,(X(150)+X(400))/2,64,'ultravioleta (no se ve)',{'text-anchor':'middle','font-size':11,fill:'#334155'});
+  tx(s,X(550),32,'luz visible 400–700 nm',{'text-anchor':'middle','font-size':11,fill:'#334155','font-weight':700});
+  [200,300,400,500,600,700].forEach(function(w){el('line',{x1:X(w),y1:80,x2:X(w),y2:86,stroke:'#64748b'},s);tx(s,X(w),98,w+' nm',{'text-anchor':'middle','font-size':10,fill:'#475569'});});
+  var c=COMP[i];
+  c.l.forEach(function(w){el('path',{d:'M'+X(w)+' 36 l-7 -12 h14 z',fill:'#0d2d42'},s);el('line',{x1:X(w),y1:38,x2:X(w),y2:82,stroke:'#0d2d42','stroke-width':3},s);tx(s,X(w),20,'absorbe '+w+' nm',{'text-anchor':'middle','font-size':11,'font-weight':800,fill:'#0d2d42'});});
+  el('rect',{x:30,y:116,width:60,height:40,rx:8,fill:c.fondo,stroke:'#94a3b8'},s);
+  tx(s,100,134,'Se ve: '+c.ve,{'font-size':13,'font-weight':800,fill:'#0d2d42'});
+  tx(s,100,151,'Dobles enlaces conjugados: '+c.c,{'font-size':11,fill:'#3a5568'});
+  document.getElementById('col-msg').innerHTML='<b>'+c.n+'.</b> '+c.d;
+  segC.querySelectorAll('button').forEach(function(x,j){x.classList.toggle('on',j===i);});
+}
+segC.addEventListener('click',function(e){var b=e.target.closest('button');if(b)espectro(+b.dataset.i);});
+espectro(0);
+})();
+</script>
+<script src="site-ui.js"></script>
+<script src="narracion.js"></script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body>
+</html>
