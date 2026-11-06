@@ -83,6 +83,22 @@ const RELLENO = 'AAAAAAAAAAAAEEEEEEEEEEEEEOOOOOOOOOSSSSSSSRRRRRRNNNNNNIIIIIIDDDD
 function fnv(str){ let h = 0x811c9dc5; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
 function rng(seed){ let a = fnv(String(seed)); return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function barajar(arr, r){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(r()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+/* Reparto «en mazo»: la versión v toma la ventana v·n … v·n+n−1 de una
+   secuencia hecha de barajadas sucesivas del banco. Así 20 versiones usan
+   todas las palabras por igual y dos versiones no traen el mismo grupo. */
+function mazo(pool, seed, inicio, cuantos, clave){
+  clave = clave || (w => Array.isArray(w) ? w[0] : w);
+  const L = pool.length, out = [], vistos = new Set(); if(!L) return out;
+  let pos = Math.max(0, inicio), ciclo = -1, orden = null, guarda = 0;
+  while(out.length < Math.min(cuantos, L) && guarda++ < cuantos + 3 * L){
+    const cy = Math.floor(pos / L);
+    if(cy !== ciclo){ ciclo = cy; orden = barajar(pool, rng(seed + '|mazo|' + cy)); }
+    const w = orden[pos % L]; pos++;
+    const k = clave(w); if(vistos.has(k)) continue; vistos.add(k); out.push(w);
+  }
+  return out;
+}
+
 const nuevaSemilla = () => Math.random().toString(36).slice(2, 8).toUpperCase();
 
 // Palabra de la sopa: mayúsculas, sin tildes ni espacios; la Ñ se conserva.
@@ -119,10 +135,15 @@ function construir(c, v){
   const dirs = DIRS[c.dif] || DIRS.media;
   for(let intento = 0; intento < 40; intento++){
     const r = rng(c.seed + '|' + v + '|' + intento);
-    const cand = barajar(c.pool, r).slice(0, Math.min(c.pool.length, c.n + 6));
+    // primeros intentos: las palabras de la ventana de esta versión en el mazo;
+    // si no caben, se baraja de nuevo todo el banco.
+    const cand = intento < 25 ? mazo(c.pool, c.seed, v * c.n, c.n + 6) : barajar(c.pool, r).slice(0, Math.min(c.pool.length, c.n + 6));
     const N = c.tam, grid = Array.from({length:N}, () => Array(N).fill(''));
     const puestas = [];
-    for(const w of cand.sort((a, b) => limpia(b[0]).length - limpia(a[0]).length)){
+    // se ubican primero (de la más larga a la más corta) las n palabras de la
+    // ventana de esta versión; las de reserva solo entran si alguna no cupo
+    const porLargo = (a, b) => limpia(b[0]).length - limpia(a[0]).length;
+    for(const w of cand.slice(0, c.n).sort(porLargo).concat(cand.slice(c.n).sort(porLargo))){
       if(puestas.length >= c.n) break;
       const pal = limpia(w[0]);
       if(puestas.some(p => p.pal === pal)) continue;
@@ -338,6 +359,17 @@ function init(){
   window.addEventListener('afterprint', finImpresion);
   render();
 }
-window.SOPA = {render};
+
+/* Bloque para los talleres y guías del generador (ACT_TALLER, extras.js):
+   sopa de 12 × 12 con pistas; cada versión, otra ventana del mazo. */
+function taller(pool, seed, v, n){
+  const c = {pool: pool.filter(w => limpia(w[0]).length >= 3 && limpia(w[0]).length <= 12), tam: 12, n: n || 8, dif: 'media', ayuda: '1', seed};
+  if(c.pool.length < 4) return null;
+  const s = construir(c, v); if(s.error) return null;
+  return {titulo: 'Sopa de letras', instr: 'Lee cada pista, escribe la palabra en la línea y búscala en la sopa. Pueden estar ' + txtDirs(c.dif) + '; no llevan tildes ni espacios.',
+    bloques: ['<div class="act-tall sp-hoja" style="--f:.8"><div class="sp-centro">' + tablaHTML(s, false) + '</div><ol class="sp-pistas">'
+      + s.puestas.map(p => '<li>' + esc(pistaDe(p, c)) + ' <span class="sp-n">(' + p.pal.length + ')</span> <span class="sp-lin"></span></li>').join('') + '</ol></div>']};
+}
+window.SOPA = {render, taller};
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

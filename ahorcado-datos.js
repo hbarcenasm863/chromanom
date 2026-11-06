@@ -9,6 +9,9 @@
    ═════════════════════════════════════════════════════════════════════ */
 window.AHORCADO_SITIO='ChromaNom';
 window.AHORCADO_GRUPOS=[["carbono", "⚛️ Fase 1 · El carbono", ["carbono"]], ["nombres", "🏷️ Fase 2 · Nomenclatura", ["nombres"]], ["fase3", "🔬 Fase 3 · Isomería y reacciones", ["fase3"]], ["fase4a", "🌈 Fase 4 · Orbitales y propiedades", ["fase4a"]], ["bio", "🧬 Fase 4 · Biomoléculas", ["bio"]], ["amb", "🌎 Fase 4 · Ambiente", ["amb"]]];
+/* Tema del generador de guías y talleres → grupo de palabras e historias
+   (para las actividades dentro de los talleres: ACT_TALLER, extras.js). */
+window.ACT_TEMA_GRUPO={carbono:'carbono',tipos_carbono:'carbono',cadenas:'carbono',cadena:'nombres',alcanos:'nombres',alquenos:'nombres',aromaticos:'nombres',haluros:'nombres',alcoholes:'nombres',carbonilos:'nombres',acidos:'nombres',nitrogenados:'nombres',polifuncionales:'nombres',isomeria:'fase3',reacciones:'fase3',orbitales:'fase4a',propiedades:'fase4a',biomoleculas:'bio',ambiente:'amb'};
 window.BANCO_AHORCADO=[
 [
 "TETRAVALENCIA",

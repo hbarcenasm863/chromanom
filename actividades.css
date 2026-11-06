@@ -618,3 +618,16 @@
   #mp-play.fs-on .mp-n{min-height:26px;padding:3px 5px;font-size:.7rem}#mp-play.fs-on .mp-items{gap:4px}#mp-play.fs-on .mp-rama{padding-top:8px}#mp-play.fs-on .mp-rama::before{height:8px}
   #mp-play.fs-on .mp-chip{font-size:.72rem;padding:4px 8px}
 }
+
+/* ── Actividades dentro de guías y talleres (extras.js → ACT_TALLER) ──
+   El bloque usa las clases de la hoja de cada actividad (ah-hoja, sp-hoja,
+   ex-hoja) para heredar sus estilos, pero sin el tamaño carta ni la sombra. */
+.act-tall.ah-hoja,.act-tall.sp-hoja,.act-tall.ex-hoja{width:auto;height:auto;min-height:0;padding:0;margin:0 0 6px;box-shadow:none;background:transparent;overflow:visible;display:block}
+.act-tall .sp-centro{margin:2px 0 8px}
+.act-tall .mp-con{padding:12px 0 4px}
+.act-tall .mp-banco{margin-top:10px}
+.act-tall .dt-texto{margin:0 0 4px}
+/* Dentro de la hoja de taller (docente.html pone width:100% y bordes grises
+   a toda tabla de .hoja): la sopa conserva sus casillas cuadradas. */
+.hoja .act-tall .sp-tab{width:auto;border:2px solid #0d4a73}
+.hoja .act-tall .sp-tab td{width:calc(var(--sc)*var(--f,1));height:calc(var(--sc)*var(--f,1));padding:0;text-align:center;vertical-align:middle;font:700 calc(var(--sc)*.5*var(--f,1))/1 var(--mono,monospace);border:1px solid #9fb3c8;color:#0d2d42;background:transparent}

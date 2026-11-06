@@ -24,6 +24,22 @@ const GRUPOS = window.AHORCADO_GRUPOS || [];
 function fnv(str){ let h = 0x811c9dc5; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
 function rng(seed){ let a = fnv(String(seed)); return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function barajar(arr, r){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(r()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+/* Reparto «en mazo»: la versión v toma la ventana v·n … v·n+n−1 de una
+   secuencia hecha de barajadas sucesivas del banco. Así 20 versiones usan
+   todas las palabras por igual y dos versiones no traen el mismo grupo. */
+function mazo(pool, seed, inicio, cuantos, clave){
+  clave = clave || (w => Array.isArray(w) ? w[0] : w);
+  const L = pool.length, out = [], vistos = new Set(); if(!L) return out;
+  let pos = Math.max(0, inicio), ciclo = -1, orden = null, guarda = 0;
+  while(out.length < Math.min(cuantos, L) && guarda++ < cuantos + 3 * L){
+    const cy = Math.floor(pos / L);
+    if(cy !== ciclo){ ciclo = cy; orden = barajar(pool, rng(seed + '|mazo|' + cy)); }
+    const w = orden[pos % L]; pos++;
+    const k = clave(w); if(vistos.has(k)) continue; vistos.add(k); out.push(w);
+  }
+  return out;
+}
+
 const nuevaSemilla = () => Math.random().toString(36).slice(2, 8).toUpperCase();
 const sinTilde = s => String(s).replace(/Ñ/g,'\u0001').replace(/ñ/g,'\u0002').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\u0001/g,'Ñ').replace(/\u0002/g,'ñ');
 
@@ -67,6 +83,26 @@ function vigilarPC(box, repintar){
   document.addEventListener('fullscreenchange', f); document.addEventListener('webkitfullscreenchange', f);
 }
 const btnPC = box => '<button type="button" class="exc-fs">' + (esPC(box) ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa') + '</button>';
+
+/* Elige, para la versión v, un subconjunto de «cuantos» elementos que no
+   haya salido en las versiones anteriores (mientras queden combinaciones).
+   La versión v depende solo de la semilla y de v: es reproducible. */
+function comb(n, k){ let r = 1; for(let i=1;i<=k;i++){ r = r * (n - k + i) / i; if(r > 1e6) return 1e6; } return Math.round(r); }
+function subconjuntoDistinto(lista, cuantos, seed, v){
+  const usados = new Set(); let elegido = null;
+  const total = comb(lista.length, cuantos);
+  for(let u=0; u<=v; u++){
+    if(usados.size >= total) usados.clear();
+    let cand = null;
+    for(let t=0; t<60; t++){
+      const s = barajar(lista.map((_, i) => i), rng(seed + '|sub|' + u + '|' + t)).slice(0, cuantos).sort((a, b) => a - b);
+      const k = s.join(',');
+      if(!usados.has(k) || t === 59){ cand = s; usados.add(k); break; }
+    }
+    elegido = cand;
+  }
+  return elegido.map(i => lista[i]);
+}
 
 /* ───── formulario de cada pestaña (estilo del sitio) ───── */
 // data-estilo="cn" (ChromaNom) o "ion" (IonNom) en el contenedor .ex-app
@@ -168,7 +204,7 @@ const CR = {
   },
   frases(c, v){
     const r = rng(c.seed + '|cr|' + v), cand = candidatos(c.maxZ);
-    return barajar(c.pool, r).slice(0, c.n).map(w => {
+    return mazo(c.pool, c.seed + '|cr', v * c.n, c.n).map(w => {
       const texto = (w[0] + ': ' + w[2]).toUpperCase();
       const fijo = {};
       const celdas = [...texto].map(ch => {
@@ -235,7 +271,7 @@ const CR = {
 const MP = {
   id:'mp', icono:'🗺️', nombre:'Mapa conceptual con huecos', t1:'Tema', tituloDef:'Mapa conceptual',
   intro:'El esquema de cada tema (el mismo de la lectura de las guías), dibujado con sus conectores y con algunos recuadros en blanco para completar.',
-  ayuda:'Cada versión deja en blanco otros recuadros. Sin banco de palabras es más difícil: el estudiante escribe el concepto con sus propias palabras.',
+  ayuda:'Cada versión deja en blanco una combinación distinta de recuadros (no se repite mientras queden combinaciones). Sin banco de palabras es más difícil: el estudiante escribe el concepto con sus propias palabras.',
   temas(){ return ((window.DOCENTE_DATOS || {}).TEMAS || []).filter(t => t.info && t.info.esquema && t.info.esquema.ramas && t.info.esquema.ramas.length); },
   seccion1(E){ return E.campos([E.campo('Tema del mapa', '<select id="mp-tema">' + this.temas().map(t => '<option value="' + esc(t.id) + '">' + esc(t.titulo) + '</option>').join('') + '</select>')]); },
   campos:E => [
@@ -243,14 +279,27 @@ const MP = {
     E.campo('Banco de palabras', '<select id="mp-banco"><option value="si" selected>Sí, abajo y desordenado</option><option value="no">No</option></select>')],
   cfg(){
     const t = this.temas().find(x => x.id === $('#mp-tema').value) || this.temas()[0];
-    return {t, huecos: $('#mp-huecos').value, banco: $('#mp-banco').value === 'si', vacio: t ? '' : 'No hay esquemas disponibles.', info: t ? 'Mapa de «' + esc(t.titulo) + '»: ' + t.info.esquema.ramas.length + ' ramas.' : ''};
+    const huecos = $('#mp-huecos').value, nv = Math.max(1, parseInt($('#mp-nver').value, 10) || 1);
+    const k = t ? this.huecosDe(this.nodosDe(t.info.esquema), huecos).combinaciones : 0;
+    return {t, huecos, banco: $('#mp-banco').value === 'si', vacio: t ? '' : 'No hay esquemas disponibles.',
+      info: t ? 'Mapa de «' + esc(t.titulo) + '»: ' + t.info.esquema.ramas.length + ' ramas · ' + (k >= 1e6 ? 'más de un millón de' : k) + ' combinaciones distintas de recuadros en blanco'
+        + (k < nv ? ' — ⚠️ con ' + nv + ' versiones algunas se repiten: elige «La mitad, al azar» u otro tema.' : '.') : ''};
+  },
+  nodosDe(e){ const nodos = []; e.ramas.forEach((ra, i) => { nodos.push({k:'r', i, txt: ra.t}); (ra.items || []).forEach((it, j) => nodos.push({k:'i', i, j, txt: it})); }); return nodos; },
+  // Con 20 versiones hacen falta muchas combinaciones: ni «solo ramas» ni
+  // «solo ejemplos» dejan en blanco todos sus recuadros, sino unos 2/3.
+  huecosDe(nodos, modo){
+    const elegibles = modo === 'ramas' ? nodos.filter(n => n.k === 'r') : modo === 'items' ? nodos.filter(n => n.k === 'i') : nodos;
+    const E = elegibles.length;
+    const cuantos = modo === 'mitad' ? Math.ceil(E / 2) : modo === 'todo' ? Math.max(1, E - 2) : Math.max(1, Math.min(E - (E > 1 ? 1 : 0), Math.ceil(E * 2 / 3)));
+    return {elegibles, cuantos, combinaciones: comb(E, cuantos)};
   },
   armar(c, v){
     const e = c.t.info.esquema, r = rng(c.seed + '|mp|' + v + '|' + c.t.id);
-    const nodos = []; e.ramas.forEach((ra, i) => { nodos.push({k:'r', i, txt: ra.t}); (ra.items || []).forEach((it, j) => nodos.push({k:'i', i, j, txt: it})); });
-    let elegibles = c.huecos === 'ramas' ? nodos.filter(n => n.k === 'r') : c.huecos === 'items' ? nodos.filter(n => n.k === 'i') : nodos;
-    const cuantos = c.huecos === 'mitad' ? Math.ceil(nodos.length / 2) : c.huecos === 'todo' ? Math.max(1, nodos.length - 1) : elegibles.length;
-    const blancos = new Set(barajar(elegibles, r).slice(0, cuantos));
+    const nodos = this.nodosDe(e);
+    const {elegibles, cuantos} = this.huecosDe(nodos, c.huecos);
+    // cada versión deja en blanco una combinación distinta de recuadros
+    const blancos = new Set(subconjuntoDistinto(elegibles, cuantos, c.seed + '|mp|' + c.t.id + '|' + c.huecos, v));
     return {e, nodos, blancos, banco: barajar([...blancos].map(n => n.txt), r)};
   },
   dibujar(m, clave, modo){
@@ -298,20 +347,35 @@ const MP = {
 const DT = {
   id:'dt', icono:'🕵️', nombre:'El detective químico', t1:'Historia', tituloDef:'El detective químico',
   intro:'Una historia de un día en el laboratorio o de un fenómeno cotidiano con errores conceptuales camuflados. El estudiante los subraya y los corrige.',
-  ayuda:'Cada historia tiene 8 puntos dudosos. Cada versión elige al azar cuáles salen con error, así que dos versiones de la misma historia tienen errores distintos.',
+  ayuda:'Cada historia tiene 8 puntos dudosos. Con «🎲 Todas las de…», cada versión trae otra historia del grupo; y cada vez que una historia se repite, salen otros errores (no se repite la misma combinación).',
   historias(){ return window.DETECTIVE || []; },
-  seccion1(E){ return E.campos([E.campo('Historia', '<select id="dt-h">' + this.historias().map((h, i) => '<option value="' + i + '">' + esc(h[1]) + ' · ' + esc(((GRUPOS.find(g => g[0] === h[0]) || [,''])[1]).replace(/^\S+\s/, '')) + '</option>').join('') + '</select>')]); },
+  seccion1(E){
+    const hs = this.historias(), gr = GRUPOS.filter(g => hs.some(h => h[0] === g[0]));
+    const corto = g => esc(g[1].replace(/^\S+\s/, ''));
+    return E.campos([E.campo('Historia', '<select id="dt-h">'
+      + '<optgroup label="Una historia distinta en cada versión">' + gr.map(g => '<option value="g:' + g[0] + '">🎲 Todas las de ' + corto(g) + ' (' + hs.filter(h => h[0] === g[0]).length + ' historias)</option>').join('') + '</optgroup>'
+      + '<optgroup label="Una sola historia">' + hs.map((h, i) => '<option value="' + i + '">' + esc(h[1]) + ' · ' + corto(GRUPOS.find(g => g[0] === h[0]) || [, '']) + '</option>').join('') + '</optgroup>'
+      + '</select>')]);
+  },
+  // historias que usa la hoja: las de un grupo (rotan por versión) o una sola
+  lista(sel){ const hs = this.historias(); if(String(sel).startsWith('g:')){ const g = String(sel).slice(2); return hs.filter(h => h[0] === g); } const h = hs[+sel || 0]; return h ? [h] : []; },
+  // historia de la versión v y su vuelta (cuántas veces ya salió antes)
+  deVersion(c, v){ const L = c.hs.length, orden = barajar(c.hs.map((_, i) => i), rng(c.seed + '|dt-orden')); return {h: c.hs[orden[v % L]], vuelta: Math.floor(v / L)}; },
   campos:E => [E.campo('Errores escondidos', '<select id="dt-n"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select>')],
   cfg(){
-    const hs = this.historias(), h = hs[+$('#dt-h').value || 0];
-    return {h, n: +$('#dt-n').value || 5, vacio: h ? '' : 'No hay historias disponibles.', info: h ? 'Historia «' + esc(h[1]) + '» con ' + (+$('#dt-n').value || 5) + ' errores.' : ''};
+    const hs = this.lista($('#dt-h').value), n = +$('#dt-n').value || 5;
+    const tot = hs.reduce((a, h) => a + comb(h[2].filter(Array.isArray).length, n), 0);
+    return {hs, h: hs[0], n, vacio: hs.length ? '' : 'No hay historias disponibles.',
+      info: hs.length ? (hs.length > 1 ? hs.length + ' historias que rotan por versión' : 'Historia «' + esc(hs[0][1]) + '»') + ' · ' + n + ' errores por hoja · ' + tot + ' versiones distintas posibles.' : ''};
   },
   armar(c, v){
-    const r = rng(c.seed + '|dt|' + v + '|' + c.h[1]);
-    const dudosos = c.h[2].map((p, i) => Array.isArray(p) ? i : -1).filter(i => i >= 0);
-    const malos = new Set(barajar(dudosos, r).slice(0, Math.min(c.n, dudosos.length)));
+    const {h, vuelta} = this.deVersion(c, v);
+    const dudosos = h[2].map((p, i) => Array.isArray(p) ? i : -1).filter(i => i >= 0);
+    // cada vez que la historia vuelve a salir, otra combinación de errores
+    const malos = new Set(subconjuntoDistinto(dudosos, Math.min(c.n, dudosos.length), c.seed + '|dt|' + h[1], vuelta));
     let k = 0;
-    return c.h[2].map((p, i) => Array.isArray(p) ? (malos.has(i) ? {t: p[1], err: true, corr: p[0], n: ++k} : {t: p[0]}) : {t: p});
+    const partes = h[2].map((p, i) => Array.isArray(p) ? (malos.has(i) ? {t: p[1], err: true, corr: p[0], n: ++k} : {t: p[0]}) : {t: p});
+    partes.h = h; return partes;
   },
   hoja(c, v, clave, etiqueta){
     const partes = this.armar(c, v), nErr = partes.filter(p => p.err).length;
@@ -321,13 +385,13 @@ const DT = {
       ? '<ol class="dt-corr">' + partes.filter(p => p.err).map(p => '<li><s>' + esc(p.t) + '</s><br>✔ ' + esc(p.corr) + '</li>').join('') + '</ol>'
       : '<div class="dt-lineas">' + Array.from({length: nErr}, (_, i) => '<div class="dt-l"><b>' + (i+1) + '.</b><i></i><i></i></div>').join('') + '</div>';
     return '<div class="ex-hoja dt-hoja">' + encabezadoHoja(c.titulo + (clave ? ' · Clave' : ''), clave ? '' : ins, etiqueta, !clave)
-      + '<div class="ex-cuerpo"><h3 class="dt-tit">' + esc(c.h[1]) + '</h3>' + texto + tabla + '</div>' + pieHoja() + '</div>';
+      + '<div class="ex-cuerpo"><h3 class="dt-tit">' + esc(partes.h[1]) + '</h3>' + texto + tabla + '</div>' + pieHoja() + '</div>';
   },
   nuevoJuego(c){ return {c, partes: this.armar(c, c.v), marcadas: new Set(), fallos: 0}; },
   pintar(box){
     const J = this.juego, P = J.partes, tot = P.filter(p => p.err).length, hall = P.filter((p, i) => p.err && J.marcadas.has(i)).length;
     box.innerHTML = '<div class="exc"><div class="exc-bar"><b>' + hall + ' de ' + tot + ' errores</b><span class="exc-fallo">Toques en frases correctas: ' + J.fallos + '</span>' + equipos(J) + btnPC(box) + '</div>'
-      + '<h3 class="dt-tit">' + esc(J.c.h[1]) + '</h3>'
+      + '<h3 class="dt-tit">' + esc(P.h[1]) + '</h3>'
       + '<p class="exc-ayuda">Toca cada frase que tenga un error de química.</p>'
       + '<p class="dt-texto dtc">' + P.map((p, i) => '<span class="dt-f' + (J.marcadas.has(i) ? (p.err ? ' hallado' : ' bien') : '') + '" data-i="' + i + '"><span class="dt-txt">' + esc(p.t) + '</span>' + (J.marcadas.has(i) && p.err ? '<span class="dt-cor">✔ ' + esc(p.corr) + '</span>' : '') + '</span>').join(' ') + '</p>'
       + (hall === tot ? '<div class="exc-msg ok">🎉 ¡Caso resuelto! Encontraron los ' + tot + ' errores.</div>' : '')
@@ -342,8 +406,63 @@ const DT = {
   }
 };
 
+
+/* ═════════ ACTIVIDADES DENTRO DE TALLERES Y GUÍAS ═════════
+   El generador de guías y talleres (docente-app.js) pide aquí los bloques
+   de cada actividad para los temas marcados. Las palabras, frases e
+   historias salen del grupo de cada tema (ACT_TEMA_GRUPO o
+   AHORCADO_GRUPOS); con la misma semilla base, la versión v toma otra
+   ventana del mazo, otra historia y otros recuadros en blanco. */
+const TIPOS_TALLER = [['sp', '🔎 Sopa de letras', '8 palabras con pista'], ['ah', '🪢 Ahorcado con pistas', '4 palabras'], ['cr', '🔐 Criptograma químico', '2 frases'], ['mp', '🗺️ Mapa conceptual con huecos', '1 mapa'], ['dt', '🕵️ Detective químico', '1 historia con 4 errores']];
+const largo = s => sinTilde(String(s).toUpperCase()).replace(/[^A-ZÑ]/g, '').length;
+function gruposDeTemas(ids){
+  const m = window.ACT_TEMA_GRUPO || {}, out = [];
+  ids.forEach(id => { const g = m[id] || (GRUPOS.find(x => x[2].includes(id)) || [])[0]; if(g && !out.includes(g)) out.push(g); });
+  return out;
+}
+function poolTaller(ids){ const gs = gruposDeTemas(ids), temas = GRUPOS.filter(g => gs.includes(g[0])).reduce((a, g) => a.concat(g[2]), []); return (window.BANCO_AHORCADO || []).filter(w => temas.includes(w[1])); }
+const poolCR = P => P.filter(w => !/___/.test(w[2]) && (w[0] + w[2]).length <= 95);
+function mapasTaller(ids){ return MP.temas().filter(t => ids.includes(t.id)); }
+function historiasTaller(ids){ const gs = gruposDeTemas(ids); return DT.historias().filter(h => gs.includes(h[0])); }
+window.ACT_TALLER = {
+  tipos: TIPOS_TALLER,
+  disponibles(ids){
+    const P = poolTaller(ids);
+    return {sp: P.filter(w => largo(w[0]) >= 3 && largo(w[0]) <= 12).length, ah: P.length, cr: poolCR(P).length, mp: mapasTaller(ids).length, dt: historiasTaller(ids).length};
+  },
+  // → {titulo, instr, bloques:[html…]} o null si no hay material
+  armar(id, ids, seed, v){
+    const P = poolTaller(ids);
+    if(id === 'sp') return window.SOPA && window.SOPA.taller ? window.SOPA.taller(P, seed + '|sp', v, 8) : null;
+    if(id === 'ah') return window.AHORCADO && window.AHORCADO.taller ? window.AHORCADO.taller(P, seed + '|ah', v, 4) : null;
+    if(id === 'cr'){
+      const c = {pool: poolCR(P), n: 2, maxZ: 56, fijo: false, seed: seed};
+      if(!c.pool.length) return null;
+      return {titulo: 'Criptograma químico', instr: 'Cada número es el número atómico (Z) de un elemento. Busca su símbolo en la tabla periódica y escribe la primera letra del símbolo en la casilla (17 → Cl → C). Las letras con punto ya están dadas.',
+        bloques: CR.frases(c, v).map((f, i) => '<div class="act-tall ex-hoja" style="--f:.8"><div class="cr-bloque"><div class="cr-n">' + (i+1) + '</div>' + CR.dibujar(f, false) + '</div></div>')};
+    }
+    if(id === 'mp'){
+      const ts = mapasTaller(ids); if(!ts.length) return null;
+      const t = ts[v % ts.length], c = {t, huecos: 'mitad', banco: true, seed: seed}, m = MP.armar(c, Math.floor(v / ts.length));
+      return {titulo: 'Mapa conceptual: ' + (t.corto || t.titulo), instr: 'Completa los recuadros en blanco con los conceptos del banco de palabras. Cada concepto se usa una sola vez.',
+        bloques: ['<div class="act-tall ex-hoja" style="--f:.72">' + MP.dibujar(m, false) + '<div class="mp-banco"><b>Banco de palabras:</b> ' + m.banco.map(x => '<span>' + esc(x) + '</span>').join('') + '</div></div>']};
+    }
+    if(id === 'dt'){
+      const hs = historiasTaller(ids); if(!hs.length) return null;
+      const partes = DT.armar({hs, n: 4, seed: seed}, v), nErr = partes.filter(p => p.err).length;
+      return {titulo: 'El detective químico', instr: 'La historia tiene ' + nErr + ' errores de química. Subraya cada error y escribe abajo la versión correcta.',
+        // historia y renglones en un mismo bloque: no se separan en dos hojas
+        bloques: ['<div class="act-tall ex-hoja" style="--f:.8"><h3 class="dt-tit">' + esc(partes.h[1]) + '</h3><p class="dt-texto">' + partes.map(p => esc(p.t)).join(' ') + '</p>'
+          + '<div class="dt-lineas">' + Array.from({length: nErr}, (_, i) => '<div class="dt-l"><b>' + (i+1) + '.</b><i></i><i></i></div>').join('') + '</div></div>']};
+    }
+    return null;
+  }
+};
+
 const ACTS = {cr: CR, mp: MP, dt: DT};
 function init(){ Object.values(ACTS).forEach(A => montar(A)); }
 window.EXTRAS = {render: id => { if(ACTS[id] && $('#' + id + '-app')) render(ACTS[id]); }};
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+// avisa al generador de guías y talleres que ya puede ofrecer las actividades
+document.dispatchEvent(new Event('act-taller-listo'));
 })();

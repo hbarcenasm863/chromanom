@@ -80,6 +80,22 @@ const SITIO = window.AHORCADO_SITIO || 'ChromaNom';
 function fnv(str){ let h = 0x811c9dc5; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
 function rng(seed){ let a = fnv(String(seed)); return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function barajar(arr, r){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(r()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+/* Reparto «en mazo»: la versión v toma la ventana v·n … v·n+n−1 de una
+   secuencia hecha de barajadas sucesivas del banco. Así 20 versiones usan
+   todas las palabras por igual y dos versiones no traen el mismo grupo. */
+function mazo(pool, seed, inicio, cuantos, clave){
+  clave = clave || (w => Array.isArray(w) ? w[0] : w);
+  const L = pool.length, out = [], vistos = new Set(); if(!L) return out;
+  let pos = Math.max(0, inicio), ciclo = -1, orden = null, guarda = 0;
+  while(out.length < Math.min(cuantos, L) && guarda++ < cuantos + 3 * L){
+    const cy = Math.floor(pos / L);
+    if(cy !== ciclo){ ciclo = cy; orden = barajar(pool, rng(seed + '|mazo|' + cy)); }
+    const w = orden[pos % L]; pos++;
+    const k = clave(w); if(vistos.has(k)) continue; vistos.add(k); out.push(w);
+  }
+  return out;
+}
+
 const nuevaSemilla = () => Math.random().toString(36).slice(2, 8).toUpperCase();
 
 const base = ch => ch === 'Ñ' ? 'Ñ' : ch.normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -99,7 +115,7 @@ function getCfg(){
   return {grupos, pool, n, nver, pistas, titulo: ($('#ah-title').value || '').trim(), seed: seedTxt || semilla,
     vacio: !grupos.length ? 'Marca al menos un grupo de temas.' : (!pool.length ? 'No hay palabras para esos temas.' : '')};
 }
-function palabrasDe(c, v){ return barajar(c.pool, rng(c.seed + '|' + v)).slice(0, c.n); }
+function palabrasDe(c, v){ return barajar(mazo(c.pool, c.seed, v * c.n, c.n), rng(c.seed + '|' + v)); }
 function contarPalabras(){
   const c = getCfg();
   if(!banco().length){ $('#ah-status').textContent = '⚠️ No se cargaron las palabras del ahorcado. Recargue la página.'; return; }
@@ -274,6 +290,17 @@ function init(){
   window.addEventListener('afterprint', finImpresion);
   render();
 }
-window.AHORCADO = {render, iniciarClase};
+
+/* Bloque para los talleres y guías del generador (ACT_TALLER, extras.js):
+   n tarjetas con sus 3 pistas, de a dos por fila para que el taller pueda
+   pasar de página entre filas. */
+function taller(pool, seed, v, n){
+  const c = {pool, seed, n: n || 4, pistas: 3};
+  const ws = palabrasDe(c, v); if(!ws.length) return null;
+  const filas = [];
+  for(let i=0; i<ws.length; i+=2) filas.push('<div class="act-tall ah-hoja" style="--f:.9"><div class="ah-grid">' + ws.slice(i, i+2).map((w, k) => tarjeta(w, i+k, c, false)).join('') + '</div></div>');
+  return {titulo: 'Ahorcado con pistas', instr: 'Lee la primera pista y escribe una letra a la vez. Tacha cada letra que uses; por cada letra que no esté, dibuja una parte del muñeco (6 fallos). Lee la pista siguiente solo si la necesitas.', bloques: filas};
+}
+window.AHORCADO = {render, iniciarClase, taller};
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

@@ -561,6 +561,33 @@ function pintarTipos(){
     var chk=!dis&&(prev[x.k]===undefined?true:prev[x.k]);
     return '<label class="opt'+(dis?' dis':'')+'"><input type="checkbox" name="tipoej" value="'+x.k+'"'+(chk?' checked':'')+(dis?' disabled':'')+'> <span>'+esc(x.t)+' <small>('+n+' disponibles)</small></span></label>';
   }).join('');
+  pintarActs();
+}
+// Actividades dentro del taller (extras.js → window.ACT_TALLER): sopa,
+// ahorcado, criptograma, mapa conceptual y detective, con lo disponible
+// para los temas marcados.
+function pintarActs(){
+  var cont=$('f-act'),A=window.ACT_TALLER;if(!cont||!A)return;
+  var prev={};cont.querySelectorAll('input[name=act]').forEach(function(c){prev[c.value]=c.checked;});
+  var d=A.disponibles(temasSel().map(function(t){return t.id;}));
+  var unidad={sp:['palabra','palabras'],ah:['palabra','palabras'],cr:['frase','frases'],mp:['mapa','mapas'],dt:['historia','historias']};
+  cont.innerHTML=A.tipos.map(function(x){
+    var n=d[x[0]]||0,dis=!n||(x[0]==='sp'&&n<4);
+    return '<label class="opt'+(dis?' dis':'')+'"><input type="checkbox" name="act" value="'+x[0]+'"'+(!dis&&prev[x[0]]?' checked':'')+(dis?' disabled':'')+'> <span>'+esc(x[1])+' <small>('+esc(x[2])+' · '+n+' '+unidad[x[0]][n===1?0:1]+' en el banco)</small></span></label>';
+  }).join('');
+}
+document.addEventListener('act-taller-listo',function(){pintarActs();});
+// Bloques de las actividades marcadas para la versión verIdx: la semilla
+// base es la misma en todas las versiones para que cada una tome otra
+// ventana del mazo (no se repiten las mismas palabras ni la misma historia).
+function bloquesActividades(F,verIdx){
+  var A=window.ACT_TALLER;if(!A||!F.acts||!F.acts.length)return [];
+  var ids=F.temas.map(function(t){return t.id;}),base=['act',F.variante,ids.join(',')].join('|'),out=[];
+  F.acts.forEach(function(id){
+    var r=A.armar(id,ids,base,verIdx-1);if(!r)return;
+    r.bloques.forEach(function(h,i){out.push((i===0?'<h4 class="sub">'+esc(r.titulo)+' <small>'+esc(r.instr)+'</small></h4>':'')+h);});
+  });
+  return out;
 }
 function pintarAlineacion(sel){
   var g=+(document.querySelector('input[name=grado]:checked')||{value:11}).value;
@@ -997,7 +1024,7 @@ function leerForm(){
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
     nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(20,+$('f-nab').value||0)),nX:Math.max(0,Math.min(10,+(($('f-nx')||{}).value)||0)),
-    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(8,+$('f-nver').value||1)),variante:($('f-var').value||'1').trim(),
+    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(20,+$('f-nver').value||1)),acts:marcados('act'),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
@@ -1028,6 +1055,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     F.temas.forEach(function(t){b=b.concat(bloquesInfo(t));});
     b.push('<h3 class="ses"><span>3</span> Trabajo práctico</h3><p class="intro">Resuelve en esta guía. Puedes consultar la Hoja de referencia de ChromaNom.</p>');
     if(selEj)b=b.concat(bloquesEjercicios(selEj,1));
+    b=b.concat(bloquesActividades(F,1));
     b.push('<h3 class="ses"><span>4</span> Evaluación</h3><p class="intro">La evaluación se entrega en hojas aparte. Antes, marca con una X qué tan bien puedes hacer cada cosa:</p>'+
       '<table class="auto"><thead><tr><th>Puedo…</th><th>Lo logro</th><th>Con ayuda</th><th>Aún no</th></tr></thead><tbody>'+
       ['Identificar la cadena principal y numerarla','Nombrar compuestos del tema con IUPAC 2013','Dibujar una estructura a partir de su nombre','Explicar una propiedad o reacción con la estructura'].map(function(x){return '<tr><td>'+x+'</td><td></td><td></td><td></td></tr>';}).join('')+'</tbody></table>');
@@ -1036,7 +1064,7 @@ function construirVersion(F,verIdx,verTotal,soloEval){
     docs.push({clase:'guia',etiqueta:'Guía',cab:cabCorta('Guía',true),primera:prim,bloques:b});
   }
   if(F.tipo==='taller'){
-    var bt=selEj?bloquesEjercicios(selEj,1):[];
+    var bt=(selEj?bloquesEjercicios(selEj,1):[]).concat(bloquesActividades(F,verIdx));
     var primT=encabezadoInst(F.enc,'Taller de ejercicios: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+lineaEstudiante();
     docs.push({clase:'taller',etiqueta:verTotal>1?'Taller '+verIdx+'/'+verTotal:'Taller',cab:cabCorta('Taller'),primera:primT,bloques:bt.length?bt:['<p>No hay ejercicios para esta selección.</p>']});
   }

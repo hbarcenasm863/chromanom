@@ -7,6 +7,50 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (167) — Material para 20 versiones distintas y actividades dentro de los talleres
+
+### Contexto
+El docente pidió dos cosas:
+1. Que haya material suficiente para generar **hasta 20 versiones distintas** de cada actividad.
+2. Que las actividades (sopa, ahorcado, criptograma, mapa conceptual y detective) puedan ir **dentro de los talleres**, como parte de las preguntas.
+
+### Cambios
+- **20 versiones distintas** (`sopa.js`, `ahorcado.js`, `extras.js`):
+  - **Reparto «en mazo»:** las palabras y frases se reparten como un mazo de cartas. Cada versión toma las siguientes del mazo barajado, así que 20 versiones usan todo el banco por igual y no repiten el mismo grupo de palabras.
+  - **Sopa:** antes, las palabras largas salían casi siempre, porque se ubicaban primero. Ahora salen primero las de la versión, y las de reserva solo entran si alguna no cabe.
+  - **Mapa conceptual:** cada versión deja en blanco una combinación distinta de recuadros, sin repetirla mientras queden combinaciones.
+    - «Solo ramas» y «Solo ejemplos» dejan en blanco unos 2/3 de esos recuadros, ya no todos; antes todas sus versiones eran iguales.
+    - La línea de estado dice cuántas combinaciones hay y avisa si no alcanzan para el número de versiones pedido.
+  - **Detective:**
+    - Nueva opción «🎲 Todas las de …»: cada versión trae otra historia del grupo. Queda seleccionada por defecto.
+    - Cuando una historia se repite, sale con otra combinación de errores.
+    - La línea de estado dice cuántas versiones distintas son posibles.
+- **Actividades dentro de guías y talleres:**
+  - **`docente.html`:**
+    - En «4 · Trabajo práctico», casillas nuevas: Sopa de letras (8 palabras), Ahorcado con pistas (4 palabras), Criptograma (2 frases), Mapa conceptual con huecos y Detective químico (1 historia con 4 errores). Cada una muestra cuánto material hay para los temas marcados.
+    - El número de versiones de talleres y evaluaciones pasa de 8 a **20** como máximo.
+  - **`docente-app.js`:** `bloquesActividades()` agrega las actividades al final de los ejercicios del taller y de la sesión 3 de la guía.
+    - La semilla base es la misma en todas las versiones, así que cada versión toma otra parte del mazo, otra historia y otro mapa (rota entre los temas marcados).
+  - **`extras.js`:** nuevo `window.ACT_TALLER`, que arma los bloques.
+    - Usa `AHORCADO.taller` y `SOPA.taller`, nuevos en `ahorcado.js` y `sopa.js`.
+    - **`ahorcado-datos.js`:** `ACT_TEMA_GRUPO` dice qué grupo de palabras e historias corresponde a cada tema del generador.
+  - **`actividades.css`:** estilos `.act-tall` para que las actividades se vean igual dentro de la hoja del taller, con las casillas de la sopa cuadradas.
+- **`sw.js`:** la caché pasa a `chromanom-v68`.
+
+### Verificación
+Probado con Playwright:
+- **Pestañas de actividades:** con 20 versiones, las 20 salen distintas en las cinco actividades. En la sopa, cada palabra sale entre 7 y 9 veces.
+- **Taller:** taller de «Alcoholes, fenoles y éteres» con 20 versiones y las cinco actividades:
+  - las 20 versiones son distintas;
+  - ninguna de las 153 hojas se desborda;
+  - no hay errores de JavaScript.
+- **Modo clase e impresión:** siguen funcionando.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-11-06 (166) — Al menos 20 palabras por categoría en Sopa, Ahorcado y Criptograma; más historias del Detective
 
 ### Contexto
