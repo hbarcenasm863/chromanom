@@ -7,6 +7,39 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (168) — El mapa conceptual se imprimía como texto suelto en el celular
+
+### Contexto
+El docente envió una captura del PDF de la pestaña «Mapa conceptual»
+generado en el celular: el encabezado salía bien, pero el mapa aparecía
+como una lista de textos sin recuadros, sin la raíz azul ni las ramas, y
+las hojas se cortaban en cualquier parte.
+
+### Causa (reproducida con Playwright)
+- La app instalada en el celular tenía guardada una copia **vieja** de `actividades.css`, de antes de que existieran los estilos del mapa, del criptograma y del detective.
+- `sw.js` servía los JS y CSS «stale-while-revalidate», es decir, primero la copia guardada.
+- La versión nueva del service worker solo toma el control cuando se toca «Actualizar».
+- Mientras tanto, `extras.js` sí llegó nuevo de internet, porque la copia vieja no lo tenía guardado.
+- Con la página nueva servida junto con el `actividades.css` anterior, el PDF sale igual que en la captura.
+
+### Cambios
+- **Todas las páginas `.html`:** los `.js` y `.css` locales se piden con `?v=69` (142 referencias). Como las páginas se sirven «red primero», un celular con la app vieja ya no encuentra esas direcciones guardadas y descarga los archivos nuevos.
+- **`sw.js`:**
+  - Los JS y CSS ahora son «red primero». Sin conexión se usa la copia guardada, con o sin `?v=`.
+  - Íconos e imágenes siguen «stale-while-revalidate».
+  - La caché pasa a `chromanom-v69`.
+- **`CLAUDE.md`:** nota sobre esta convención.
+
+### Verificación
+- Con el service worker activo, en un celular emulado, el PDF del mapa sale con los recuadros, las ramas y la hoja carta.
+- Las 16 páginas cargan sin errores ni archivos faltantes.
+- IonNom no tenía el problema: los estilos de sus actividades están dentro de `docente.html`, y sus scripts ya eran «red primero».
+
+### Pendiente
+Ninguno. En el celular basta con recargar la página del generador. Si aparece el aviso «Nueva versión disponible», conviene tocar «Actualizar».
+
+---
+
 ## 2026-11-06 (167) — Material para 20 versiones distintas y actividades dentro de los talleres
 
 ### Contexto

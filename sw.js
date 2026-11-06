@@ -1,9 +1,9 @@
 // ChromaNom Service Worker — v32.2
 // Páginas HTML: red primero (siempre la versión más reciente si hay conexión).
-// Assets estáticos (JS/CSS/íconos) y fuentes: stale-while-revalidate (rápido y se
+// JS y CSS: red primero. Íconos y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v68';
+const CACHE = 'chromanom-v69';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -134,7 +134,26 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Todo lo demás (JS, CSS, íconos): stale-while-revalidate — responde rápido
+  // JS y CSS: red primero (como las páginas), para que el código y los
+  // estilos nuevos lleguen de inmediato junto con el HTML nuevo. Antes eran
+  // stale-while-revalidate y un celular podía combinar un extras.js nuevo
+  // con un actividades.css viejo: el mapa conceptual se imprimía como texto
+  // suelto. Sin red, se usa la copia guardada (con o sin «?v=» en la URL).
+  const ruta = new URL(url).pathname;
+  if (/\.(js|css)$/.test(ruta)) {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(e.request).then(cached => cached || caches.match(e.request, {ignoreSearch: true})))
+    );
+    return;
+  }
+
+  // Lo demás (íconos, imágenes): stale-while-revalidate — responde rápido
   // desde caché y actualiza en segundo plano para la próxima visita.
   e.respondWith(
     caches.open(CACHE).then(cache =>

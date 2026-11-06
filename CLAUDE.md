@@ -80,3 +80,10 @@ hace falta registrar nada.
   de 30 min. Si un cambio agrega/modifica columnas que lee esa hoja (como
   `handleProgreso_`), avisar los DOS pasos por separado — redesplegar y
   recalcular — no dar por hecho que uno implica el otro.
+- **Service worker y `?v=` en las páginas.** Los `.js` y `.css` locales se
+  piden con `?v=N` en todas las páginas `.html`, y `sw.js` los sirve «red
+  primero». Así un celular con la app vieja instalada no mezcla un `.js`
+  nuevo con un `.css` viejo, que fue lo que pasó con el mapa conceptual
+  impreso como texto suelto (sesión 168). Si se agrega un archivo nuevo o
+  cambia mucho un CSS, subir `CACHE` en `sw.js` y el `?v=` de las páginas
+  (`?v=69` → `?v=70`).
