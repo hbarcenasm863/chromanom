@@ -7,6 +7,61 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (163) — Sopa de letras en el generador docente (para imprimir y modo clase)
+
+### Contexto
+El docente preguntó qué otras actividades imprimibles y en pantalla se
+podían agregar y eligió la sopa de letras, para ChromaNom y para IonNom.
+
+### Cambios
+- `sopa.js` (nuevo; el mismo archivo va en IonNom como `assets/sopa.js`):
+  pestaña «🔍 Sopa de letras».
+  - **Palabras:** usa el banco del Ahorcado (96 palabras con 3 pistas en
+    ChromaNom), por fases. Las palabras van sin tildes ni espacios y la Ñ
+    se conserva.
+  - **Opciones:**
+    - de 4 a 16 palabras;
+    - cuadrícula de 12, 14 o 16;
+    - direcciones fáciles (→ ↓), medias (también diagonales) o difíciles
+      (también al revés);
+    - qué ve el estudiante: la pista 1, 2 o 3 (no ve la palabra, solo la
+      pista y el número de letras) o la lista de palabras, para cursos que
+      empiezan.
+  - **Verificación:** cada sopa comprueba que cada palabra aparezca una
+    sola vez en las direcciones permitidas; si no, la vuelve a armar. Las
+    letras de relleno siguen la frecuencia del español. Si la pista
+    elegida contiene la palabra, se usa otra.
+  - **Hoja carta para imprimir:** cuadrícula, pistas numeradas en dos
+    columnas con el número de letras y una línea para la respuesta, o la
+    lista de palabras. Hasta 40 versiones paralelas, con hojas de clave
+    (cada palabra resaltada en su color) y código para volver a generarlas.
+  - **Modo clase:**
+    - se marca arrastrando de la primera a la última letra, o tocando la
+      primera y después la última;
+    - al acertar, la palabra se pinta en su color y su pista queda con ✓ y
+      con la palabra;
+    - contador de palabras encontradas, marcador de dos equipos, «Revelar
+      todas» y «Otra sopa»;
+    - pantalla completa que gira el celular a horizontal: cuadrícula a la
+      izquierda y pistas a la derecha, que se desplazan si no caben.
+- `docente.html`, `actividades.css`, `sw.js` (caché `chromanom-v64`): la
+  pestaña nueva y sus estilos.
+
+### Verificación (Playwright, en ChromaNom e IonNom)
+- En las direcciones fácil, media y difícil, cada una de las 10 palabras
+  aparece exactamente 1 vez, buscando incluso en las 8 direcciones.
+- La hoja cabe en una página carta; 2 versiones con clave dan 4 páginas.
+- Modo clase: encontró una palabra arrastrando y otra con dos toques; una
+  selección equivocada no contó.
+- Celular en horizontal (844 × 390): se mantiene la pantalla completa, se
+  pide el giro y la cuadrícula y los botones caben en la pantalla.
+- No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-06 (162) — Ahorcado en pantalla completa: gira a horizontal en el celular
 
 ### Contexto

@@ -434,6 +434,7 @@ body.sin-eval .solo-eval{display:none}
     <button type="button" role="tab" id="tab-laberintos" data-tab="laberintos" data-panel="lab" aria-controls="panel-lab" aria-selected="false" tabindex="-1">🧭 Laberintos</button>
     <button type="button" role="tab" id="tab-crucigramas" data-tab="crucigramas" data-panel="cz" aria-controls="panel-cz" aria-selected="false" tabindex="-1">🔤 Crucigramas</button>
     <button type="button" role="tab" id="tab-ahorcado" data-tab="ahorcado" data-panel="ah" aria-controls="panel-ah" aria-selected="false" tabindex="-1">🪢 Ahorcado</button>
+    <button type="button" role="tab" id="tab-sopa" data-tab="sopa" data-panel="sp" aria-controls="panel-sp" aria-selected="false" tabindex="-1">🔍 Sopa de letras</button>
     <button type="button" role="tab" id="tab-ori" data-tab="orientaciones" data-panel="ori" aria-controls="panel-ori" aria-selected="false" tabindex="-1">📖 Orientaciones</button>
   </div>
 
@@ -713,6 +714,45 @@ body.sin-eval .solo-eval{display:none}
     <div id="ah-status" class="act-verif" aria-live="polite"></div>
     <div id="ah-stage" class="ah-stage"></div>
     <div id="ah-play" style="display:none"></div>
+   </div>
+  </section>
+  <!-- ══════════════ SOPA DE LETRAS (sopa.js + ahorcado-datos.js) ══════════════ -->
+  <section class="panel act-panel" id="panel-sp" role="tabpanel" aria-labelledby="tab-sopa" hidden>
+    <div class="tipo-intro"><strong>🔍 Sopa de letras</strong> Con las palabras clave del Ahorcado y sus pistas. Hoja para imprimir con versiones y clave, o modo clase para buscar las palabras en el tablero.</div>
+   <div id="sp-app" data-chk="opt">
+    <div class="act-sect">
+      <h2>1 · Temas</h2>
+      <div class="act-chks" id="sp-grupos"></div>
+    </div>
+    <div class="act-sect">
+      <h2>2 · Sopa y hoja</h2>
+      <div class="campos">
+        <label>Número de palabras (4 a 16) <input type="number" inputmode="numeric" id="sp-n" value="10" min="4" max="16"></label>
+        <label>Tamaño de la cuadrícula <select id="sp-tam"><option value="12">12 × 12</option><option value="14" selected>14 × 14</option><option value="16">16 × 16</option></select></label>
+        <label>Direcciones <select id="sp-dif"><option value="facil">Fácil: → y ↓</option><option value="media" selected>Media: también en diagonal</option><option value="dificil">Difícil: también al revés</option></select></label>
+        <label>Qué ve el estudiante <select id="sp-ayuda"><option value="1" selected>Pista 1 (la más general)</option><option value="2">Pista 2</option><option value="3">Pista 3 (la más reveladora)</option><option value="lista">La lista de palabras</option></select></label>
+        <label>Título <input type="text" id="sp-title" maxlength="40" placeholder="Sopa de letras de química"></label>
+        <label>Versiones paralelas (1 a 40) <input type="number" inputmode="numeric" id="sp-nver" value="2" min="1" max="40"></label>
+        <label>Versión en pantalla <select id="sp-vsel"></select></label>
+      </div>
+      <p class="ayuda">Con «pista» el estudiante no ve la palabra: lee la pista, escribe la respuesta y la busca en la sopa. Cada versión trae otras palabras en otras posiciones, y cada palabra aparece una sola vez en la cuadrícula.</p>
+      <details class="act-adv"><summary>Volver a generar hojas de otro día</summary>
+        <label class="campo">Código de la hoja de clave <input type="text" id="sp-seed" maxlength="20" autocomplete="off"></label>
+      </details>
+    </div>
+    <div class="act-bar">
+      <button type="button" class="cn-btn cn-btn--secondary" id="sp-btn-seed">🎲 Otra sopa</button>
+      <div class="act-seg" id="sp-seg" role="group" aria-label="Vista">
+        <button type="button" data-view="sheet" class="on" aria-pressed="true">📄 Hoja</button>
+        <button type="button" data-view="key" aria-pressed="false">🔑 Clave</button>
+        <button type="button" data-view="play" aria-pressed="false">📽️ Modo clase</button>
+      </div>
+      <button type="button" class="cn-btn cn-btn--primary" id="sp-btn-print">🖨️ Imprimir versiones</button>
+      <label class="opt act-inl"><input type="checkbox" id="sp-withkeys" checked> <span>con hojas de clave al final</span></label>
+    </div>
+    <div id="sp-status" class="act-verif" aria-live="polite"></div>
+    <div id="sp-stage" class="sp-stage"></div>
+    <div id="sp-play" style="display:none"></div>
    </div>
   </section>
   <section class="panel" id="panel-ori" role="tabpanel" aria-labelledby="tab-ori" hidden>
@@ -1032,7 +1072,7 @@ window.addEventListener('afterprint',function(){
 });
 </script>
 <script>
-// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas | Ahorcado |
+// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas | Ahorcado | Sopa |
 // Orientaciones. Las tres primeras comparten el formulario de #panel-gen:
 // cada una fija el tipo de documento (radio «tipodoc», ahora oculto) y deja
 // ver solo los apartados que le aplican, renumerados. Se recuerda la última
@@ -1040,7 +1080,7 @@ window.addEventListener('afterprint',function(){
 (function(){
   var btns=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
   var IDS=btns.map(function(b){return b.dataset.tab;});
-  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',ori:'panel-ori'};
+  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',sp:'panel-sp',ori:'panel-ori'};
   var oriIds=['metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
   function aplicarTipo(tipo){
     var r=document.querySelector('input[name=tipodoc][value="'+tipo+'"]');
@@ -1058,7 +1098,7 @@ window.addEventListener('afterprint',function(){
     var b=btns.filter(function(x){return x.dataset.tab===id;})[0]||btns[0],panel=b.dataset.panel;
     btns.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
     Object.keys(PANELES).forEach(function(k){var el=document.getElementById(PANELES[k]);if(el)el.hidden=k!==panel;});
-    ['gen','lab','cz','ah','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
+    ['gen','lab','cz','ah','sp','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
     document.getElementById(PANELES[panel]).setAttribute('aria-labelledby',b.id);
     if(b.dataset.tipo)aplicarTipo(b.dataset.tipo);
     if(!sinGuardar){try{localStorage.setItem('chromanom-docente-tab',b.dataset.tab);}catch(e){}
@@ -1067,6 +1107,7 @@ window.addEventListener('afterprint',function(){
     if(panel==='lab'&&window.LABERINTO)window.LABERINTO.ajustar();
     if(panel==='cz'&&window.CRUCIGRAMA)window.CRUCIGRAMA.render();
     if(panel==='ah'&&window.AHORCADO)window.AHORCADO.render();
+    if(panel==='sp'&&window.SOPA)window.SOPA.render();
   }
   btns.forEach(function(b,i){
     b.addEventListener('click',function(){mostrar(b.dataset.tab);});
@@ -1088,6 +1129,7 @@ window.addEventListener('afterprint',function(){
 <div id="lab-print-root" aria-hidden="true"></div>
 <div id="cz-print-root" aria-hidden="true"></div>
 <div id="ah-print-root" aria-hidden="true"></div>
+<div id="sp-print-root" aria-hidden="true"></div>
 <script src="fx-libro.js"></script>
 <script src="docente-datos.js"></script>
 <script src="docente-app.js"></script>
@@ -1098,6 +1140,7 @@ window.addEventListener('afterprint',function(){
 <script src="crucigrama.js"></script>
 <script src="ahorcado-datos.js"></script>
 <script src="ahorcado.js"></script>
+<script src="sopa.js"></script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
