@@ -7,6 +7,48 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (162) — Ahorcado en pantalla completa: gira a horizontal en el celular
+
+### Contexto
+El docente pidió que, al poner el modo clase del Ahorcado en pantalla
+completa, el celular girara solo a horizontal, en ChromaNom y en IonNom. Al
+probarlo apareció un fallo: la pantalla completa se aplicaba al tablero, que
+se redibuja con cada letra, así que **se cerraba sola** apenas se tocaba la
+primera letra.
+
+### Cambios
+- `ahorcado.js`:
+  - La pantalla completa se aplica a `#ah-play`, que no se redibuja, y se
+    mantiene durante toda la partida.
+  - Al entrar se pide el giro a horizontal (`screen.orientation.lock`). Al
+    salir, el giro se libera.
+  - El botón cambia a «✕ Salir de pantalla completa».
+  - Al girar o cambiar el tamaño de la pantalla, el tablero se redibuja con
+    casillas a la medida; en horizontal se calculan para la columna derecha
+    y para la altura.
+- `actividades.css`: en pantalla completa el fondo es blanco y el tablero
+  ocupa toda la pantalla. En un celular en horizontal se usan dos columnas:
+  - a la izquierda, el muñeco, las vidas y las pistas;
+  - a la derecha, la palabra, el teclado y los botones.
+
+  Todo cabe sin desplazarse.
+- `sw.js`: caché `chromanom-v63`.
+- Mismo cambio en IonNom (`assets/ahorcado.js`, `docente.html`).
+
+### Verificación
+Con Playwright, simulando un celular en horizontal (844 × 390):
+- la pantalla completa se mantuvo tras 6 letras y una pista;
+- se pidió el giro a horizontal al entrar y se liberó al salir;
+- los botones quedaron dentro de los 390 px de alto;
+- no hubo errores en consola, en ninguno de los dos sitios.
+
+### Pendiente
+En iPhone, Safari no permite poner en pantalla completa ni girar una parte
+de la página: ahí el botón no hace nada y hay que girar el celular a mano.
+En Android (Chrome) y en tabletas sí funciona.
+
+---
+
 ## 2026-11-05 (161) — Rediseño visual del Ahorcado (Juego y modo clase)
 
 ### Contexto
