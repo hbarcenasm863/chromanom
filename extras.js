@@ -350,7 +350,7 @@ const MP = {
 const DT = {
   id:'dt', icono:'🕵️', nombre:'El detective químico', t1:'Historia', tituloDef:'El detective químico',
   intro:'Una historia de un día en el laboratorio o de un fenómeno cotidiano con errores conceptuales camuflados. El estudiante los subraya y los corrige.',
-  ayuda:'Cada historia tiene 8 puntos dudosos, repartidos en párrafos de un solo tema (máximo 3 por párrafo). Nivel guiado: las 8 frases sospechosas van numeradas y el estudiante decide si cada una está bien o mal. Con pistas: cada párrafo dice cuántos errores tiene. Experto: solo el total. Con «🎲 Todas las de…», cada versión trae otra historia del grupo; y cada vez que una historia se repite, salen otros errores (no se repite la misma combinación).',
+  ayuda:'Cada historia tiene 8 puntos dudosos, repartidos en párrafos de un solo tema (máximo 3 por párrafo). Nivel guiado: las 8 frases sospechosas van numeradas y el estudiante decide si cada una está bien o mal. Sin pistas: solo se dice el total. En el modo clase, «🔍 Revelar pista» señala con una lupa un párrafo donde aún hay errores. Con «🎲 Todas las de…», cada versión trae otra historia del grupo; y cada vez que una historia se repite, salen otros errores (no se repite la misma combinación).',
   historias(){ return window.DETECTIVE || []; },
   seccion1(E){
     const hs = this.historias(), gr = GRUPOS.filter(g => hs.some(h => h[0] === g[0]));
@@ -365,9 +365,9 @@ const DT = {
   // historia de la versión v y su vuelta (cuántas veces ya salió antes)
   deVersion(c, v){ const L = c.hs.length, orden = barajar(c.hs.map((_, i) => i), rng(c.seed + '|dt-orden')); return {h: c.hs[orden[v % L]], vuelta: Math.floor(v / L)}; },
   campos:E => [E.campo('Errores escondidos', '<select id="dt-n"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select>'),
-    E.campo('Nivel de apoyo', '<select id="dt-nivel"><option value="guiado">Guiado: frases sospechosas numeradas</option><option value="pistas" selected>Con pistas: errores por párrafo</option><option value="experto">Experto: solo el total</option></select>')],
+    E.campo('Nivel de apoyo', '<select id="dt-nivel"><option value="guiado">Guiado: frases sospechosas numeradas</option><option value="experto" selected>Sin pistas: solo el total de errores</option></select>')],
   cfg(){
-    const hs = this.lista($('#dt-h').value), n = +$('#dt-n').value || 5, nivel = $('#dt-nivel').value || 'pistas';
+    const hs = this.lista($('#dt-h').value), n = +$('#dt-n').value || 5, nivel = $('#dt-nivel').value || 'experto';
     const tot = hs.reduce((a, h) => a + comb(h[2].filter(Array.isArray).length, n), 0);
     return {hs, h: hs[0], n, nivel, vacio: hs.length ? '' : 'No hay historias disponibles.',
       info: hs.length ? (hs.length > 1 ? hs.length + ' historias que rotan por versión' : 'Historia «' + esc(hs[0][1]) + '»') + ' · ' + n + ' errores por hoja · ' + tot + ' versiones distintas posibles.' : ''};
@@ -392,11 +392,10 @@ const DT = {
     if(cur.length){ if(out.length && !cur.some(x => P[x].dud)) out[out.length-1] = out[out.length-1].concat(cur); else out.push(cur); }
     return out;
   },
-  pista(P, par){ const e = par.filter(i => P[i].err).length; return '<span class="dt-pista">🔍 ' + (e === 0 ? 'Ningún error' : e === 1 ? '1 error' : e + ' errores') + ' en este párrafo</span>'; },
   instr(nivel, nErr){
     return nivel === 'guiado'
       ? 'Las frases <u>subrayadas y numeradas</u> son las sospechosas: <b>' + nErr + '</b> de ellas tienen un error de química. Decide si cada una está bien (✔) o tiene un error (✘). Si tiene error, escríbela bien y explica por qué.'
-      : 'La historia tiene <b>' + nErr + ' errores</b> de química.' + (nivel === 'pistas' ? ' Al final de cada párrafo, la lupa 🔍 dice cuántos hay en ese párrafo.' : '') + ' Subraya cada error y completa la tabla: la versión correcta y por qué estaba mal.';
+      : 'La historia tiene <b>' + nErr + ' errores</b> de química. Subraya cada error y completa la tabla: la versión correcta y por qué estaba mal.';
   },
   texto(P, nivel, clave){
     return '<div class="dt-texto">' + this.parrafos(P).map(par => '<p class="dt-par">' + par.map(i => {
@@ -404,7 +403,7 @@ const DT = {
       if(clave && p.err) return '<mark>' + esc(p.t) + ' <sup>' + (nivel === 'guiado' ? p.d : p.n) + '</sup></mark>';
       if(nivel === 'guiado' && p.dud) return '<span class="dt-dud">' + esc(p.t) + '<sup class="dt-num">' + p.d + '</sup></span>';
       return esc(p.t);
-    }).join(' ') + (nivel === 'pistas' && !clave ? ' ' + this.pista(P, par) : '') + '</p>').join('') + '</div>';
+    }).join(' ') + '</p>').join('') + '</div>';
   },
   respuestas(P, nivel){
     const nErr = P.filter(p => p.err).length;
@@ -423,30 +422,43 @@ const DT = {
     return '<div class="ex-hoja dt-hoja">' + encabezadoHoja(c.titulo + (clave ? ' · Clave' : ''), clave ? '' : this.instr(c.nivel, nErr), etiqueta, !clave)
       + '<div class="ex-cuerpo"><h3 class="dt-tit">' + esc(P.h[1]) + '</h3>' + this.texto(P, c.nivel, clave) + (clave ? this.clave(P, c.nivel) : this.respuestas(P, c.nivel)) + '</div>' + pieHoja() + '</div>';
   },
-  nuevoJuego(c){ return {c, partes: this.armar(c, c.v), marcadas: new Set(), fallos: 0}; },
+  nuevoJuego(c){ return {c, partes: this.armar(c, c.v), marcadas: new Set(), fallos: 0, pistas: new Set(), ultimaPista: -1}; },
   pintar(box){
     const J = this.juego, P = J.partes, nivel = J.c.nivel, tot = P.filter(p => p.err).length, hall = P.filter((p, i) => p.err && J.marcadas.has(i)).length;
-    const ayuda = nivel === 'guiado' ? 'Las frases sospechosas están subrayadas. Toquen las que tienen un error de química.'
-      : 'Toquen cada frase que tenga un error de química.' + (nivel === 'pistas' ? ' La lupa 🔍 dice cuántos errores faltan en cada párrafo.' : '');
+    const ayuda = (nivel === 'guiado' ? 'Las frases sospechosas están subrayadas. Toquen las que tienen un error de química.' : 'Toquen cada frase que tenga un error de química.')
+      + ' Si se atascan, «🔍 Revelar pista» señala con una lupa un párrafo donde aún hay errores.';
+    const pars = this.parrafos(P), faltan = par => par.filter(i => P[i].err && !J.marcadas.has(i)).length;
     const frase = i => {
       const p = P[i], m = J.marcadas.has(i), toca = nivel !== 'guiado' || p.dud;
       return '<span class="dt-f' + (toca ? '' : ' dt-fija') + (nivel === 'guiado' && p.dud ? ' dt-dud' : '') + (m ? (p.err ? ' hallado' : ' bien') : '') + '"' + (toca ? ' data-i="' + i + '"' : '') + '><span class="dt-txt">' + esc(p.t) + '</span>'
         + (nivel === 'guiado' && p.dud ? '<sup class="dt-num">' + p.d + '</sup>' : '')
         + (m && p.err ? '<span class="dt-cor">✔ ' + esc(p.corr) + '</span>' : '') + (m && !p.err ? '<span class="dt-okf">✔ Esta frase está bien</span>' : '') + '</span>';
     };
-    const pistaClase = par => { const f = par.filter(i => P[i].err && !J.marcadas.has(i)).length; return '<span class="dt-pista">🔍 ' + (f === 0 ? 'Párrafo resuelto' : f === 1 ? 'Falta 1 error' : 'Faltan ' + f + ' errores') + '</span>'; };
-    box.innerHTML = '<div class="exc"><div class="exc-bar"><b>' + hall + ' de ' + tot + ' errores</b><span class="exc-fallo">Toques en frases correctas: ' + J.fallos + '</span>' + equipos(J) + btnPC(box) + '</div>'
+    // lupa sobre el párrafo señalado por «Revelar pista» (solo los que se pidieron)
+    const lupa = (par, k) => { if(!J.pistas.has(k)) return ''; const f = faltan(par); return '<span class="dt-lupa' + (k === J.ultimaPista ? ' nueva' : '') + '">🔍 ' + (f === 0 ? 'Párrafo resuelto' : f === 1 ? 'Aquí hay 1 error' : 'Aquí hay ' + f + ' errores') + '</span>'; };
+    box.innerHTML = '<div class="exc"><div class="exc-bar"><b>' + hall + ' de ' + tot + ' errores</b><span class="exc-fallo">Toques en frases correctas: ' + J.fallos + ' · Pistas usadas: ' + J.pistas.size + '</span>' + equipos(J) + btnPC(box) + '</div>'
       + '<h3 class="dt-tit">' + esc(P.h[1]) + '</h3>'
       + '<p class="exc-ayuda">' + ayuda + '</p>'
-      + '<div class="dt-texto dtc">' + this.parrafos(P).map(par => '<p class="dt-par">' + par.map(frase).join(' ') + (nivel === 'pistas' ? ' ' + pistaClase(par) : '') + '</p>').join('') + '</div>'
+      + '<div class="dt-texto dtc">' + pars.map((par, k) => '<p class="dt-par' + (J.pistas.has(k) ? ' dt-par-pista' : '') + '" data-par="' + k + '">' + lupa(par, k) + par.map(frase).join(' ') + '</p>').join('') + '</div>'
+      + '<div class="exc-msg" id="dt-msg"></div>'
       + (hall === tot ? '<div class="exc-msg ok">🎉 ¡Caso resuelto! Encontraron los ' + tot + ' errores.</div>' : '')
-      + '<div class="exc-acc"><button type="button" class="exc-btn" data-a="rev">👁️ Revelar los errores</button></div></div>';
+      + '<div class="exc-acc">' + (hall < tot ? '<button type="button" class="exc-btn" data-a="pista">🔍 Revelar pista</button>' : '') + '<button type="button" class="exc-btn" data-a="rev">👁️ Revelar los errores</button></div></div>';
     box.querySelectorAll('.dt-f[data-i]').forEach(s => s.addEventListener('click', () => {
       const i = +s.dataset.i; if(J.marcadas.has(i)) return;
       J.marcadas.add(i); if(!P[i].err) J.fallos++;
       this.pintar(box);
     }));
     box.querySelector('[data-a=rev]').addEventListener('click', () => { P.forEach((p, i) => { if(p.err) J.marcadas.add(i); }); this.pintar(box); });
+    // Revelar pista: el primer párrafo con errores pendientes que aún no se
+    // haya señalado; la vista se desplaza hasta él y aparece la lupa encima.
+    const bp = box.querySelector('[data-a=pista]');
+    if(bp) bp.addEventListener('click', () => {
+      const k = pars.findIndex((par, k) => faltan(par) > 0 && !J.pistas.has(k));
+      if(k < 0){ box.querySelector('#dt-msg').textContent = 'Ya están señaladas todas las pistas: busquen en los párrafos con lupa.'; return; }
+      J.pistas.add(k); J.ultimaPista = k; this.pintar(box);
+      const el = box.querySelector('.dt-par[data-par="' + k + '"]'); if(el) el.scrollIntoView({behavior: 'smooth', block: 'center'});
+    });
+    J.ultimaPista = -1;
     enlazarComunes(this, box);
   }
 };
@@ -495,9 +507,9 @@ window.ACT_TALLER = {
     if(id === 'dt'){
       const hs = historiasTaller(ids); if(!hs.length) return null;
       const P = DT.armar({hs, n: 4, seed: seed}, v), nErr = P.filter(p => p.err).length;
-      // historia (en párrafos, con la lupa de errores por párrafo) y tabla de respuestas en un mismo bloque
-      return {titulo: 'El detective químico', instr: DT.instr('pistas', nErr).replace(/<[^>]+>/g, ''),
-        bloques: ['<div class="act-tall ex-hoja" style="--f:.8"><h3 class="dt-tit">' + esc(P.h[1]) + '</h3>' + DT.texto(P, 'pistas', false) + DT.respuestas(P, 'pistas') + '</div>']};
+      // historia (en párrafos) y tabla de respuestas en un mismo bloque
+      return {titulo: 'El detective químico', instr: DT.instr('experto', nErr).replace(/<[^>]+>/g, ''),
+        bloques: ['<div class="act-tall ex-hoja" style="--f:.8"><h3 class="dt-tit">' + esc(P.h[1]) + '</h3>' + DT.texto(P, 'experto', false) + DT.respuestas(P, 'experto') + '</div>']};
     }
     return null;
   }

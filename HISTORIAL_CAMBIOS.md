@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (170) — Detective: la lupa ya no va fija en cada párrafo; botón «Revelar pista»
+
+### Contexto
+El docente no quiere la lupa 🔍 fija al final de cada párrafo, que se agregó en la sesión 169 con el nivel «Con pistas». Prefiere un botón para revelar pistas que haga aparecer la lupa señalando el párrafo.
+
+### Cambios (`extras.js`, el mismo archivo en IonNom)
+- **Se quitó el nivel «Con pistas».** En las hojas quedan dos niveles: «Guiado» (frases sospechosas numeradas) y «Sin pistas: solo el total de errores», que viene marcado. Las hojas impresas y los talleres ya no llevan lupas.
+- **Modo clase, botón «🔍 Revelar pista»** (en los dos niveles):
+  - Cada toque señala el siguiente párrafo con errores pendientes.
+  - La vista se desplaza hasta ese párrafo, que queda resaltado con un borde naranja.
+  - Encima del párrafo aparece, con una pequeña animación, una lupa que dice «Aquí hay N errores». Se actualiza a medida que los encuentran y dice «Párrafo resuelto» al terminar.
+  - La barra cuenta las «Pistas usadas».
+  - Cuando ya no quedan párrafos por señalar, el botón avisa.
+  - El botón desaparece cuando el caso está resuelto.
+- **Estilos:** `actividades.css` (en IonNom, el `<style>` de `docente.html`), con `.dt-lupa` y `.dt-par-pista` en lugar de `.dt-pista`.
+- **Versión:** `?v=71` y `chromanom-v71`. En IonNom, `ionom-v88`.
+
+### Verificación
+Probado con Playwright en los dos sitios:
+- Las hojas no tienen lupas, y el modo clase no muestra ninguna hasta que se pide.
+- Cada toque del botón agrega la lupa al párrafo siguiente con errores, y al agotarse aparece el aviso.
+- Las 39 historias caben en los dos niveles, en la hoja y en la clave.
+- El taller de 20 versiones no se desborda.
+- No hay errores.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-11-06 (169) — Detective químico: párrafos por tema y tres niveles de apoyo
 
 ### Contexto
