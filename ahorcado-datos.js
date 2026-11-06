@@ -1163,6 +1163,7 @@ window.DETECTIVE=[
 "La cadena del 2-metilbutano es abierta y ramificada.",
 "La cadena del 2-metilbutano es cerrada y lineal."
 ],
+"Para terminar, cada equipo explicó cómo se dibujan las moléculas y por qué el carbono forma cuatro enlaces.",
 [
 "En la fórmula de esqueleto, cada vértice del zigzag es un carbono y los H no se dibujan.",
 "En la fórmula de esqueleto, cada vértice del zigzag es un hidrógeno y los C no se dibujan."
@@ -1187,6 +1188,7 @@ window.DETECTIVE=[
 "El segundo decía «propanona», la acetona del quitaesmalte, que es una cetona.",
 "El segundo decía «propanona», la acetona del quitaesmalte, que es un aldehído."
 ],
+"Luego revisó los frascos de hidrocarburos.",
 [
 "El tercero era un alqueno, porque su nombre terminaba en -eno.",
 "El tercero era un alquino, porque su nombre terminaba en -eno."
@@ -1204,6 +1206,7 @@ window.DETECTIVE=[
 "Para un benceno con un cloro y un metilo escribió «1-cloro-2-metilbenceno», en orden alfabético.",
 "Para un benceno con un cloro y un metilo escribió «1-metil-2-clorobenceno», en orden alfabético."
 ],
+"Quedaban dos frascos de compuestos con oxígeno.",
 [
 "El último frasco olía a vinagre: era ácido etanoico, con el grupo −COOH.",
 "El último frasco olía a vinagre: era ácido etanoico, con el grupo −CHO."
@@ -1232,6 +1235,7 @@ window.DETECTIVE=[
 "Para dos grupos metilo en los carbonos 2 y 3 escribió «2,3-dimetilbutano».",
 "Para dos grupos metilo en los carbonos 2 y 3 escribió «2,3-metilbutano»."
 ],
+"En la segunda parte del taller, Camilo trabajó con los prefijos y los dobles enlaces.",
 [
 "Una cadena de cinco carbonos lleva el prefijo pent-.",
 "Una cadena de cinco carbonos lleva el prefijo hex-."
@@ -1244,6 +1248,7 @@ window.DETECTIVE=[
 "Al but-1-eno le dio al doble enlace el número más bajo posible.",
 "Al but-1-eno le dio al doble enlace el número más alto posible."
 ],
+"La última parte era de grupos funcionales.",
 [
 "Para el CH₃−CH₂−CHO escribió «propanal», porque los aldehídos terminan en -al.",
 "Para el CH₃−CH₂−CHO escribió «propanona», porque los aldehídos terminan en -ona."
@@ -1281,6 +1286,7 @@ window.DETECTIVE=[
 "La anilina, en cambio, es un benceno con un grupo −NH₂.",
 "La anilina, en cambio, es un benceno con un grupo −CH₃."
 ],
+"Luego repasó dónde va el oxígeno en otros grupos funcionales.",
 [
 "En un éter, el oxígeno está entre dos grupos de carbono, como en el metoximetano.",
 "En un éter, el oxígeno está al final de la cadena, como en el metanol."
@@ -1355,6 +1361,7 @@ window.DETECTIVE=[
 "El propan-1-ol y el propan-2-ol son isómeros de posición.",
 "El propan-1-ol y el propan-2-ol son el mismo compuesto, escrito de otra forma."
 ],
+"Luego miraron los isómeros que se deben al doble enlace.",
 [
 "El trans-but-2-eno tiene sus dos CH₃ en lados opuestos del doble enlace.",
 "El trans-but-2-eno tiene sus dos CH₃ del mismo lado del doble enlace."
@@ -1368,6 +1375,7 @@ window.DETECTIVE=[
 "Un carbono quiral está unido a cuatro grupos distintos.",
 "Un carbono quiral está unido a cuatro grupos iguales."
 ],
+"Al final compararon algunas propiedades de los isómeros.",
 [
 "El ciclohexano no tiene isomería cis/trans en sus carbonos sin sustituyentes.",
 "El ciclohexano tiene isomería cis/trans en todos sus carbonos, aunque no tengan sustituyentes."
@@ -1405,6 +1413,7 @@ window.DETECTIVE=[
 "El H⁺ del HBr es un electrófilo: busca los electrones de la nube π.",
 "El H⁺ del HBr es un nucleófilo: busca los electrones de la nube π."
 ],
+"Después explicó cómo se rompen los enlaces en otras reacciones.",
 [
 "En una ruptura homolítica, cada átomo se queda con un electrón y se forman radicales.",
 "En una ruptura homolítica, un átomo se queda con los dos electrones y se forman iones."
@@ -1455,6 +1464,7 @@ window.DETECTIVE=[
 "Las hojas de cilantro se ven verdes porque la clorofila absorbe la luz roja y la azul.",
 "Las hojas de cilantro se ven verdes porque la clorofila absorbe la luz verde."
 ],
+"Por último, lavó la sartén.",
 [
 "Al lavar la sartén, el jabón metió sus colas apolares en la grasa y dejó las cabezas iónicas hacia el agua.",
 "Al lavar la sartén, el jabón metió sus cabezas iónicas en la grasa y dejó las colas hacia el agua."
@@ -1517,6 +1527,7 @@ window.DETECTIVE=[
 "Entre los alcanos, el que tiene la cadena más larga hierve a mayor temperatura.",
 "Entre los alcanos, el que tiene la cadena más larga hierve a menor temperatura."
 ],
+"En la segunda ronda compararon la forma y la polaridad de las moléculas.",
 [
 "Una cadena ramificada hierve a menor temperatura que su isómero lineal, porque tiene menos superficie de contacto.",
 "Una cadena ramificada hierve a mayor temperatura que su isómero lineal, porque tiene menos superficie de contacto."
@@ -1534,6 +1545,7 @@ window.DETECTIVE=[
 "La solubilidad de los alcoholes en agua disminuye cuando la cadena de carbonos crece.",
 "La solubilidad de los alcoholes en agua aumenta cuando la cadena de carbonos crece."
 ],
+"Para terminar, repasaron las fuerzas entre moléculas y revisaron sus medidas.",
 [
 "Las fuerzas de London aumentan con el tamaño de la molécula.",
 "Las fuerzas de London disminuyen con el tamaño de la molécula."
@@ -1562,6 +1574,7 @@ window.DETECTIVE=[
 "La fructosa de la naranja es una cetosa y forma un anillo de cinco átomos.",
 "La fructosa de la naranja es una aldosa y forma un anillo de seis átomos."
 ],
+"Después pensó en las grasas y en las proteínas de su plato.",
 [
 "El aguacate tiene ácido oleico, cuyo doble enlace cis dobla la cadena y lo hace líquido.",
 "El aguacate tiene ácido oleico, cuya cadena recta lo hace sólido a temperatura ambiente."
@@ -1658,6 +1671,7 @@ window.DETECTIVE=[
 "La replicación es semiconservativa: cada ADN hijo tiene una hebra vieja y una nueva.",
 "La replicación es conservativa: un ADN hijo tiene las dos hebras viejas y el otro las dos nuevas."
 ],
+"Luego comparó el ADN con el ARN y con las proteínas.",
 [
 "El ARN usa el azúcar ribosa, y el ADN, la desoxirribosa.",
 "El ARN usa el azúcar desoxirribosa, y el ADN, la ribosa."
@@ -1695,6 +1709,7 @@ window.DETECTIVE=[
 "Con el tiempo se parte en microplásticos de menos de 5 mm.",
 "Con el tiempo se parte en microplásticos de más de 5 mm."
 ],
+"Al día siguiente, en clase, repasaron otros contaminantes y combustibles.",
 [
 "En clase recordaron que los CFC destruyen el ozono y que el Protocolo de Montreal los prohibió.",
 "En clase recordaron que los CFC protegen el ozono y que el Protocolo de Montreal los promovió."
@@ -1736,6 +1751,7 @@ window.DETECTIVE=[
 "El queroseno de los aviones sale de la torre entre la gasolina y el diésel.",
 "El queroseno de los aviones sale por el fondo de la torre, junto con el asfalto."
 ],
+"Su papá le contó que el carro también podría andar con gas natural.",
 [
 "El metano emite menos CO₂ por megajulio que la gasolina.",
 "El metano emite más CO₂ por megajulio que el carbón."
@@ -1764,6 +1780,7 @@ window.DETECTIVE=[
 "El PVC de los tubos se fabrica con cloruro de vinilo.",
 "El PVC de los tubos se fabrica con eteno y agua."
 ],
+"Después explicó cómo se forman algunos de esos plásticos.",
 [
 "El PET es un poliéster y se forma por condensación.",
 "El PET es un alcano y se forma por combustión."
@@ -1785,6 +1802,7 @@ window.DETECTIVE=[
 "El ozono filtra la radiación ultravioleta del Sol.",
 "El ozono filtra la radiación infrarroja de la Tierra y causa el efecto invernadero."
 ],
+"Al final dio un consejo para la casa.",
 [
 "Separar los residuos en la fuente facilita el reciclaje.",
 "Mezclar todos los residuos en una sola bolsa facilita el reciclaje."

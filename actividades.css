@@ -631,3 +631,19 @@
    a toda tabla de .hoja): la sopa conserva sus casillas cuadradas. */
 .hoja .act-tall .sp-tab{width:auto;border:2px solid #0d4a73}
 .hoja .act-tall .sp-tab td{width:calc(var(--sc)*var(--f,1));height:calc(var(--sc)*var(--f,1));padding:0;text-align:center;vertical-align:middle;font:700 calc(var(--sc)*.5*var(--f,1))/1 var(--mono,monospace);border:1px solid #9fb3c8;color:#0d2d42;background:transparent}
+
+/* detective: párrafos por tema, frases sospechosas (nivel guiado), lupa de errores por párrafo y tabla de respuestas */
+.dt-texto .dt-par{margin:0 0 calc(8px*var(--f,1));text-indent:1.2em}
+.dt-dud{text-decoration:underline dotted #0d4a73;text-decoration-thickness:1.5px;text-underline-offset:3px}
+.dt-num{font:900 .72em/1 var(--sans);color:#fff;background:#0d4a73;border-radius:9px;padding:1px 5px;margin-left:2px}
+.dt-pista{display:inline-block;font-size:.8em;font-weight:800;color:#b45309;background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:0 7px;line-height:1.6;text-indent:0}
+.dt-tabla{width:100%;border-collapse:collapse;margin-top:calc(8px*var(--f,1));font-size:calc(.82rem*var(--f,1))}
+.dt-tabla th{background:#eef6fb;color:#0d4a73;text-align:left;font-weight:800;padding:4px 6px;border:1px solid #94a3b8}
+.dt-tabla td{border:1px solid #94a3b8;height:calc(38px*var(--f,1));padding:2px 6px;vertical-align:top}
+.dt-tabla td:first-child{width:34px;text-align:center;font-weight:800;color:#0d4a73;vertical-align:middle}
+.dt-tabla-g td{height:calc(30px*var(--f,1))}
+.dt-tabla-g td:nth-child(2),.dt-tabla-g td:nth-child(3){width:52px}
+.dt-bien{font-size:calc(.85rem*var(--f,1));color:#14532d;margin:4px 0 0}
+.dtc .dt-fija{cursor:default}.dtc .dt-fija:hover{background:none}
+.dtc .dt-dud{cursor:pointer}
+.dt-okf{display:inline-block;font-size:.8em;font-weight:800;color:#475569;background:#e2e8f0;border-radius:6px;padding:0 6px;margin-left:4px}

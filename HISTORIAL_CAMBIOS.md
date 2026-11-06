@@ -7,6 +7,45 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (169) — Detective químico: párrafos por tema y tres niveles de apoyo
+
+### Contexto
+El docente compartió una retroalimentación pedagógica sobre el Detective químico:
+- **Sobrecarga conceptual:** varias tendencias periódicas (radio atómico, energía de ionización, electronegatividad) aparecían juntas en un párrafo corto, lo que lleva a confundir conceptos que varían en sentido contrario.
+- **Ambigüedad:** sin una base sólida, algunas afirmaciones densas cuestan de identificar sin la guía del profesor o una retroalimentación inmediata.
+
+La historia señalada era «El juego de las cartas de elementos» (IonNom), con sus 8 puntos dudosos en un solo bloque. Al medirlo, 16 de las 39 historias de los dos sitios tenían 4 o más puntos dudosos seguidos.
+
+### Cambios
+- **Historias** (`ahorcado-datos.js` y, en IonNom, `assets/bancos-extra.js`):
+  - Se agregaron frases de transición que anuncian el tema del párrafo («Luego…», «La carta más difícil fue la del tamaño de los átomos.»). Ningún párrafo tiene más de 3 puntos dudosos.
+  - «El juego de las cartas de elementos» se reescribió: metales y no metales, familias, radio atómico, energía de ionización y electronegatividad van en párrafos distintos. El radio y la energía de ionización llevan su causa («porque cada elemento tiene un nivel de energía más», «porque el núcleo tiene más protones y atrae con más fuerza…»), así se distinguen tendencias opuestas.
+- **`extras.js`** (mismo archivo en los dos sitios):
+  - La historia se muestra en **párrafos**: cada frase de transición abre uno nuevo.
+  - Nuevo campo **«Nivel de apoyo»**:
+    - **Guiado:** las 8 frases sospechosas van subrayadas y numeradas. El estudiante decide en una tabla si cada una está bien (✔) o tiene error (✘), y corrige las que tienen error. La clave dice también cuáles sospechosas están bien.
+    - **Con pistas (por defecto):** al final de cada párrafo, una lupa 🔍 dice cuántos errores hay en ese párrafo, o «Ningún error».
+    - **Experto:** como antes, solo el total.
+  - **Hoja de respuestas:** ahora es una tabla con «Versión correcta» y «¿Por qué estaba mal?», para que el estudiante explique y no solo copie.
+  - **Modo clase:** en el nivel guiado solo se pueden tocar las frases sospechosas; con pistas, la lupa de cada párrafo dice cuántos errores faltan. Al tocar una frase correcta aparece «✔ Esta frase está bien», que es la retroalimentación inmediata.
+  - **En los talleres,** el detective usa el nivel «con pistas» y la tabla con «¿por qué?».
+  - **`ajustarHojas`:** ahora también reduce la letra cuando el contenido se monta sobre el pie de página, aunque la hoja completa no crezca. Sin esto, la tabla del nivel guiado tapaba el pie.
+- **`actividades.css`** (en IonNom, el `<style>` de `docente.html`): estilos de los párrafos, las frases sospechosas, la lupa y la tabla.
+- **Versión:** `?v=70` en las páginas y `chromanom-v70` en `sw.js`. En IonNom, `ionom-v87`.
+
+### Verificación
+Probado con Playwright:
+- Las 39 historias × 3 niveles × hoja y clave caben en la hoja carta, sin montarse sobre el pie.
+- El modo clase funciona en los 3 niveles.
+- Las 20 versiones salen distintas.
+- Talleres de 20 versiones sin desbordes.
+- No hay errores de JavaScript.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-11-06 (168) — El mapa conceptual se imprimía como texto suelto en el celular
 
 ### Contexto
