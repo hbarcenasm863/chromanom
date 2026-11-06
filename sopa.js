@@ -17,6 +17,60 @@
 
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+/* ───── marca del sitio en las hojas impresas ─────
+   Igual que crucigramas y laberintos: logo arriba con el título y la
+   versión, línea de Nombre / Curso / Fecha, marca de agua con el logo y
+   pie con la licencia (window.HOJA_SITIO, definido por cada sitio). */
+const MARCA = window.HOJA_SITIO || {logo:'', marca:'', nombre:'', pie:''};
+function encabezadoHoja(titulo, sub, etiqueta, conForm){
+  return (MARCA.marca ? '<img class="cz-wm" src="' + MARCA.marca + '" alt="" aria-hidden="true">' : '')
+    + '<div class="cz-head">' + (MARCA.logo ? '<img src="' + MARCA.logo + '" alt="' + esc(MARCA.nombre) + '">' : '')
+    + '<div class="cz-tit"><div class="t">' + esc(titulo) + '</div>' + (sub ? '<div class="s">' + sub + '</div>' : '') + '</div>'
+    + '<div class="cz-ver">' + esc(etiqueta || '') + '</div></div>'
+    + (conForm ? '<div class="cz-form"><span>Nombre: <i class="w1"></i></span><span>Curso: <i class="w2"></i></span><span>Fecha: <i class="w3"></i></span></div>' : '');
+}
+function pieHoja(){ return MARCA.pie ? '<div class="cz-pie">' + MARCA.pie + '</div>' : ''; }
+
+/* Si una hoja no cabe en la carta (816 × 1056), se reduce su escala --f
+   (letra de las pistas y, en la sopa, las casillas) hasta que quepa. */
+function ajustarHojas(cont, sel){
+  cont.querySelectorAll(sel).forEach(h => {
+    let f = 1; h.style.removeProperty('--f');
+    while(h.scrollHeight > 1057 && f > 0.62){ f = Math.round((f - 0.04) * 100) / 100; h.style.setProperty('--f', f); }
+  });
+}
+
+/* ───── pantalla completa con respaldo ─────
+   Si el navegador no tiene la API (iPhone) o la rechaza, el contenedor se
+   fija a toda la ventana (.pseudo-fs). En los dos casos lleva .fs-on, que
+   es lo que usan los estilos. En celular se pide el giro a horizontal. */
+function esPC(box){ return !!box && (document.fullscreenElement === box || document.webkitFullscreenElement === box || box.classList.contains('pseudo-fs')); }
+function alternarPC(box, repintar){
+  if(!box) return;
+  if(esPC(box)){
+    if(box.classList.contains('pseudo-fs')){ box.classList.remove('pseudo-fs', 'fs-on'); document.body.style.overflow = ''; repintar(); }
+    else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    return;
+  }
+  const pseudo = () => { box.classList.add('pseudo-fs', 'fs-on'); document.body.style.overflow = 'hidden'; repintar(); };
+  const req = box.requestFullscreen || box.webkitRequestFullscreen;
+  if(!req){ pseudo(); return; }
+  box.classList.add('fs-on');
+  let p; try{ p = req.call(box); }catch(e){ pseudo(); return; }
+  const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} };
+  if(p && p.then) p.then(girar).catch(pseudo); else girar();
+}
+function vigilarPC(box, repintar){
+  const f = () => {
+    const real = document.fullscreenElement === box || document.webkitFullscreenElement === box;
+    // solo actúa si ERA este contenedor el que estaba en pantalla completa
+    // (en la misma página conviven el Ahorcado y la Sopa)
+    if(!real && !box.classList.contains('pseudo-fs') && box.classList.contains('fs-on')){ box.classList.remove('fs-on'); try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} repintar(); }
+    else if(real) repintar();
+  };
+  document.addEventListener('fullscreenchange', f); document.addEventListener('webkitfullscreenchange', f);
+}
 const MAX_VERSIONES = 40;
 const SITIO = window.AHORCADO_SITIO || '';
 const GRUPOS = window.AHORCADO_GRUPOS || [];
@@ -126,10 +180,8 @@ function hoja(s, c, clave, etiqueta){
   const lista = c.ayuda === 'lista'
     ? '<div class="sp-lista">' + s.puestas.map(p => '<span>' + p.pal + '</span>').join('') + '</div>'
     : '<ol class="sp-pistas">' + s.puestas.map(p => '<li>' + esc(pistaDe(p, c)) + ' <span class="sp-n">(' + p.pal.length + ')</span> <span class="sp-lin">' + (clave ? '<b>' + p.pal + '</b>' : '') + '</span></li>').join('') + '</ol>';
-  return '<div class="sp-hoja"><div class="sp-cab"><div><div class="sp-tit">' + esc(c.titulo || 'Sopa de letras de química') + (clave ? ' · Clave' : '') + '</div><div class="sp-sub">' + esc(SITIO) + (SITIO ? ' · ' : '') + esc(etiqueta) + '</div></div>'
-    + (clave ? '' : '<div class="sp-est"><span>Nombre</span><i></i><span>Curso</span><i class="c"></i></div>') + '</div>'
-    + (clave ? '' : '<p class="sp-ins"><b>Instrucciones.</b> ' + ins + '</p>')
-    + '<div class="sp-centro">' + tablaHTML(s, clave) + '</div>' + lista + '</div>';
+  return '<div class="sp-hoja">' + encabezadoHoja((c.titulo || 'Sopa de letras de química') + (clave ? ' · Clave' : ''), clave ? '' : ins, etiqueta, !clave)
+    + '<div class="sp-cuerpo"><div class="sp-centro">' + tablaHTML(s, clave) + '</div>' + lista + '</div>' + pieHoja() + '</div>';
 }
 function txtDirs(d){ return d === 'facil' ? 'de izquierda a derecha o de arriba abajo' : d === 'media' ? 'en horizontal, en vertical o en diagonal' : 'en cualquier dirección, también al revés'; }
 
@@ -164,7 +216,7 @@ function comprobar(cel){
 function pintarClase(){
   const box = $('#sp-play'); if(!box || !SP) return;
   const N = SP.s.grid.length;
-  const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const fs = esPC(box);
   const horiz = innerWidth > innerHeight;
   // tamaño de celda: cabe a lo ancho (o a lo alto en pantalla completa horizontal)
   const anchoDisp = (box.clientWidth || 900) * (horiz ? 0.56 : 1) - 30;
@@ -217,25 +269,10 @@ function pintarClase(){
   const on = (sel, fn) => { const el = box.querySelector(sel); if(el) el.addEventListener('click', fn); };
   on('.spc-rev', () => { SP.rev = true; pintarClase(); });
   on('.spc-otra', () => { semilla = nuevaSemilla(); $('#sp-seed').value = ''; iniciarClase(); });
-  on('.spc-fs', pantallaCompleta);
+  on('.spc-fs', pcClase);
   box.querySelectorAll('[data-eq]').forEach(b => b.addEventListener('click', () => { if(b.dataset.eq === 'A') SP.eqA++; else SP.eqB++; pintarClase(); }));
 }
-function pantallaCompleta(){
-  const box = $('#sp-play'); if(!box) return;
-  const fe = document.fullscreenElement || document.webkitFullscreenElement;
-  if(fe){ (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
-  const req = box.requestFullscreen || box.webkitRequestFullscreen; if(!req) return;
-  const p = req.call(box);
-  const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} };
-  if(p && p.then) p.then(girar).catch(() => {}); else girar();
-}
-function alCambiarPantalla(){
-  const fe = document.fullscreenElement || document.webkitFullscreenElement;
-  if(!fe){ try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} }
-  if(SP && vista === 'play') pintarClase();
-}
-document.addEventListener('fullscreenchange', alCambiarPantalla);
-document.addEventListener('webkitfullscreenchange', alCambiarPantalla);
+const pcClase = () => alternarPC($('#sp-play'), () => { if(SP && vista === 'play') pintarClase(); });
 window.addEventListener('resize', () => { if(SP && vista === 'play' && $('#sp-play') && $('#sp-play').offsetParent !== null) pintarClase(); });
 
 /* ───── vista e impresión ───── */
@@ -252,6 +289,7 @@ function render(){
   const s = construir(c, v);
   if(s.error){ $('#sp-stage').innerHTML = ''; $('#sp-status').textContent = '⚠️ ' + s.error; return; }
   $('#sp-stage').innerHTML = hoja(s, c, vista === 'key', vista === 'key' ? 'código ' + c.seed + ' · versión ' + (v+1) : 'Versión ' + (v+1) + ' de ' + c.nver);
+  ajustarHojas($('#sp-stage'), '.sp-hoja');
 }
 function llenarVersiones(){
   const n = Math.max(1, Math.min(MAX_VERSIONES, parseInt($('#sp-nver').value, 10) || 1)), sel = $('#sp-vsel'), keep = +sel.value || 0;
@@ -264,7 +302,12 @@ function prepararImpresion(){
   let h = '', ks = '';
   for(let v=0; v<c.nver; v++){ const s = construir(c, v); if(s.error){ $('#sp-status').textContent = '⚠️ ' + s.error; return false; }
     h += hoja(s, c, false, 'Versión ' + (v+1) + ' de ' + c.nver); ks += hoja(s, c, true, 'código ' + c.seed + ' · versión ' + (v+1)); }
-  $('#sp-print-root').innerHTML = h + ($('#sp-withkeys').checked ? ks : '');
+  const root = $('#sp-print-root');
+  root.innerHTML = h + ($('#sp-withkeys').checked ? ks : '');
+  // se mide con la raíz visible fuera de la pantalla, para ajustar cada hoja
+  root.style.cssText = 'display:block;position:absolute;left:-12000px;top:0';
+  ajustarHojas(root, '.sp-hoja');
+  root.style.cssText = '';
   document.body.classList.add('sp-printing');
   return true;
 }
@@ -289,6 +332,7 @@ function init(){
     vista = b.dataset.view; $$('#sp-seg button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     render();
   }));
+  vigilarPC($('#sp-play'), () => { if(SP && vista === 'play') pintarClase(); });
   $('#sp-btn-print').addEventListener('click', imprimir);
   window.addEventListener('beforeprint', () => { if(panelVisible() && !/(^| )(ah|cz|lab)-printing/.test(document.body.className) && !document.body.classList.contains('sp-printing')) prepararImpresion(); });
   window.addEventListener('afterprint', finImpresion);

@@ -14,6 +14,60 @@
 
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+/* ───── marca del sitio en las hojas impresas ─────
+   Igual que crucigramas y laberintos: logo arriba con el título y la
+   versión, línea de Nombre / Curso / Fecha, marca de agua con el logo y
+   pie con la licencia (window.HOJA_SITIO, definido por cada sitio). */
+const MARCA = window.HOJA_SITIO || {logo:'', marca:'', nombre:'', pie:''};
+function encabezadoHoja(titulo, sub, etiqueta, conForm){
+  return (MARCA.marca ? '<img class="cz-wm" src="' + MARCA.marca + '" alt="" aria-hidden="true">' : '')
+    + '<div class="cz-head">' + (MARCA.logo ? '<img src="' + MARCA.logo + '" alt="' + esc(MARCA.nombre) + '">' : '')
+    + '<div class="cz-tit"><div class="t">' + esc(titulo) + '</div>' + (sub ? '<div class="s">' + sub + '</div>' : '') + '</div>'
+    + '<div class="cz-ver">' + esc(etiqueta || '') + '</div></div>'
+    + (conForm ? '<div class="cz-form"><span>Nombre: <i class="w1"></i></span><span>Curso: <i class="w2"></i></span><span>Fecha: <i class="w3"></i></span></div>' : '');
+}
+function pieHoja(){ return MARCA.pie ? '<div class="cz-pie">' + MARCA.pie + '</div>' : ''; }
+
+/* Si una hoja no cabe en la carta (816 × 1056), se reduce su escala --f
+   (letra de las pistas y, en la sopa, las casillas) hasta que quepa. */
+function ajustarHojas(cont, sel){
+  cont.querySelectorAll(sel).forEach(h => {
+    let f = 1; h.style.removeProperty('--f');
+    while(h.scrollHeight > 1057 && f > 0.62){ f = Math.round((f - 0.04) * 100) / 100; h.style.setProperty('--f', f); }
+  });
+}
+
+/* ───── pantalla completa con respaldo ─────
+   Si el navegador no tiene la API (iPhone) o la rechaza, el contenedor se
+   fija a toda la ventana (.pseudo-fs). En los dos casos lleva .fs-on, que
+   es lo que usan los estilos. En celular se pide el giro a horizontal. */
+function esPC(box){ return !!box && (document.fullscreenElement === box || document.webkitFullscreenElement === box || box.classList.contains('pseudo-fs')); }
+function alternarPC(box, repintar){
+  if(!box) return;
+  if(esPC(box)){
+    if(box.classList.contains('pseudo-fs')){ box.classList.remove('pseudo-fs', 'fs-on'); document.body.style.overflow = ''; repintar(); }
+    else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    return;
+  }
+  const pseudo = () => { box.classList.add('pseudo-fs', 'fs-on'); document.body.style.overflow = 'hidden'; repintar(); };
+  const req = box.requestFullscreen || box.webkitRequestFullscreen;
+  if(!req){ pseudo(); return; }
+  box.classList.add('fs-on');
+  let p; try{ p = req.call(box); }catch(e){ pseudo(); return; }
+  const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} };
+  if(p && p.then) p.then(girar).catch(pseudo); else girar();
+}
+function vigilarPC(box, repintar){
+  const f = () => {
+    const real = document.fullscreenElement === box || document.webkitFullscreenElement === box;
+    // solo actúa si ERA este contenedor el que estaba en pantalla completa
+    // (en la misma página conviven el Ahorcado y la Sopa)
+    if(!real && !box.classList.contains('pseudo-fs') && box.classList.contains('fs-on')){ box.classList.remove('fs-on'); try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} repintar(); }
+    else if(real) repintar();
+  };
+  document.addEventListener('fullscreenchange', f); document.addEventListener('webkitfullscreenchange', f);
+}
 const MAX_VERSIONES = 40, POR_HOJA = 8, MAX_FALLOS = 6;
 const ABC = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
 
@@ -71,15 +125,12 @@ function tarjeta(w, i, c, clave){
     + '</div>';
 }
 function hojas(c, v, clave, etiqueta){
-  const ws = palabrasDe(c, v), out = [];
+  const ws = palabrasDe(c, v), out = [], tit = (c.titulo || 'Ahorcado de química') + (clave ? ' · Clave' : '');
+  const ins = 'Lee la primera pista y escribe una letra a la vez en las casillas. Tacha en el abecedario cada letra que uses; por cada letra que no esté, dibuja una parte del muñeco (cabeza, tronco, dos brazos y dos piernas: 6 fallos). Lee la pista siguiente solo si la necesitas. Las tildes no cuentan como letra aparte.';
   for(let ini = 0; ini < ws.length; ini += POR_HOJA){
     const pag = ws.slice(ini, ini + POR_HOJA);
-    const cab = ini === 0
-      ? '<div class="ah-cab"><div><div class="ah-tit">' + esc(c.titulo || 'Ahorcado de química') + (clave ? ' · Clave' : '') + '</div><div class="ah-sub">' + SITIO + ' · ' + esc(etiqueta) + '</div></div>'
-        + (clave ? '' : '<div class="ah-est"><span>Nombre</span><i></i><span>Curso</span><i class="c"></i></div>') + '</div>'
-        + (clave ? '' : '<p class="ah-ins"><b>Instrucciones.</b> Lee la primera pista y escribe una letra a la vez en las casillas. Tacha en el abecedario cada letra que uses; por cada letra que no esté, dibuja una parte del muñeco (cabeza, tronco, dos brazos y dos piernas: 6 fallos). Lee la pista siguiente solo si la necesitas. Las tildes no cuentan como letra aparte.</p>')
-      : '<div class="ah-cab ah-cab2"><div class="ah-sub">' + esc(c.titulo || 'Ahorcado de química') + (clave ? ' · Clave' : '') + ' · ' + esc(etiqueta) + '</div></div>';
-    out.push('<div class="ah-hoja">' + cab + '<div class="ah-grid">' + pag.map((w, k) => tarjeta(w, ini + k, c, clave)).join('') + '</div></div>');
+    out.push('<div class="ah-hoja">' + encabezadoHoja(tit, ini === 0 && !clave ? ins : '', etiqueta, !clave)
+      + '<div class="ah-grid">' + pag.map((w, k) => tarjeta(w, ini + k, c, clave)).join('') + '</div>' + pieHoja() + '</div>');
   }
   return out.join('');
 }
@@ -113,32 +164,14 @@ function letraClase(l){
   else if(CL.fallos >= MAX_FALLOS){ CL.fin = true; CL.msg = '✗ Se completó el muñeco. La palabra era ' + CL.pal + '.'; }
   pintarClase();
 }
-/* Pantalla completa del modo clase: se aplica a #ah-play (que no se redibuja
-   al tocar una letra; antes se aplicaba al tablero, que sí se reemplaza, y
-   la pantalla completa se cerraba sola). En celular gira a horizontal. */
-function pantallaCompleta(){
-  const box = $('#ah-play'); if(!box) return;
-  const fe = document.fullscreenElement || document.webkitFullscreenElement;
-  if(fe){ (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
-  const req = box.requestFullscreen || box.webkitRequestFullscreen;
-  if(!req) return;
-  const p = req.call(box);
-  const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} };
-  if(p && p.then) p.then(girar).catch(() => {}); else girar();
-}
-function alCambiarPantalla(){
-  const fe = document.fullscreenElement || document.webkitFullscreenElement;
-  if(!fe){ try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} }
-  if(CL) pintarClase();
-}
-document.addEventListener('fullscreenchange', alCambiarPantalla);
-document.addEventListener('webkitfullscreenchange', alCambiarPantalla);
-window.addEventListener('resize', () => { if(CL && (document.fullscreenElement || document.webkitFullscreenElement)) pintarClase(); });
+// La pantalla completa se aplica a #ah-play, que no se redibuja al tocar una letra.
+const pcClase = () => alternarPC($('#ah-play'), () => { if(CL) pintarClase(); });
+window.addEventListener('resize', () => { if(CL && esPC($('#ah-play'))) pintarClase(); });
 // Tamaño de las casillas según el ancho disponible: en pantalla completa
 // horizontal de celular la palabra ocupa solo la columna derecha (≈ 58 %)
 // y también se limita por la altura.
 function tamCasilla(box, maxL){
-  const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const fs = esPC($('#ah-play'));
   const horiz = fs && innerWidth > innerHeight && innerHeight <= 560;
   const ancho = (box.clientWidth || 1000) * (horiz ? 0.58 : 1) - (horiz ? 30 : 70);
   let t = Math.floor((ancho - (maxL - 1) * 6) / maxL);
@@ -160,7 +193,7 @@ function pintarClase(){
     + '<div class="ahc-bar"><b>Palabra ' + (CL.i + 1) + ' de ' + CL.lista.length + '</b>' + (grupo ? '<span class="ahc-fase">' + esc(grupo) + '</span>' : '')
     + '<span class="ahc-eq">Equipo A: <b>' + CL.eqA + '</b> <button type="button" data-eq="A">+1</button></span>'
     + '<span class="ahc-eq">Equipo B: <b>' + CL.eqB + '</b> <button type="button" data-eq="B">+1</button></span>'
-    + '<button type="button" class="ahc-fs">' + ((document.fullscreenElement || document.webkitFullscreenElement) ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa') + '</button></div>'
+    + '<button type="button" class="ahc-fs">' + (esPC($('#ah-play')) ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa') + '</button></div>'
     + '<div class="ahc-main"><div class="ahc-fig">' + dibujoGrande(CL.fallos) + '</div><div class="ahc-info">'
     + '<div class="ahc-vidas">' + Array.from({length: MAX_FALLOS}, (_, i) => vida(i < quedan)).join('') + '<span class="ahc-quedan">' + (CL.fin ? '' : quedan === 1 ? '¡Última vida!' : 'Quedan ' + quedan + ' fallos') + '</span></div>'
     + '<div class="ahc-pistas">' + pistas + '</div></div></div>'
@@ -176,7 +209,7 @@ function pintarClase(){
   on('.ahc-rev', () => { CL.fin = true; CL.msg = 'La palabra era ' + CL.pal + '.'; pintarClase(); });
   on('.ahc-sig', () => { CL.i++; nuevaPalabra(); });
   on('.ahc-otra', () => { semilla = nuevaSemilla(); $('#ah-seed').value = ''; iniciarClase(); });
-  on('.ahc-fs', pantallaCompleta);
+  on('.ahc-fs', pcClase);
   box.querySelectorAll('[data-eq]').forEach(b => b.addEventListener('click', () => { if(b.dataset.eq === 'A') CL.eqA++; else CL.eqB++; pintarClase(); }));
 }
 document.addEventListener('keydown', e => {
@@ -197,6 +230,7 @@ function render(){
   if(c.vacio){ $('#ah-stage').innerHTML = ''; $('#ah-play').innerHTML = ''; return; }
   if(vista === 'play'){ if(!CL) iniciarClase(); else pintarClase(); return; }
   $('#ah-stage').innerHTML = hojas(c, v, vista === 'key', vista === 'key' ? 'código ' + c.seed + ' · versión ' + (v+1) : 'Versión ' + (v+1) + ' de ' + c.nver);
+  ajustarHojas($('#ah-stage'), '.ah-hoja');
 }
 function llenarVersiones(){
   const n = Math.max(1, Math.min(MAX_VERSIONES, parseInt($('#ah-nver').value, 10) || 1)), sel = $('#ah-vsel'), keep = +sel.value || 0;
@@ -210,6 +244,10 @@ function prepararImpresion(){
   for(let v=0; v<c.nver; v++) h += hojas(c, v, false, 'Versión ' + (v+1) + ' de ' + c.nver);
   if($('#ah-withkeys').checked) for(let v=0; v<c.nver; v++) h += hojas(c, v, true, 'código ' + c.seed + ' · versión ' + (v+1));
   root.innerHTML = h;
+  // se mide con la raíz visible fuera de la pantalla, para ajustar cada hoja
+  root.style.cssText = 'display:block;position:absolute;left:-12000px;top:0';
+  ajustarHojas(root, '.ah-hoja');
+  root.style.cssText = '';
   document.body.classList.add('ah-printing');
   return true;
 }
@@ -230,6 +268,7 @@ function init(){
     vista = b.dataset.view; $$('#ah-seg button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     render();
   }));
+  vigilarPC($('#ah-play'), () => { if(CL && vista === 'play') pintarClase(); });
   $('#ah-btn-print').addEventListener('click', imprimir);
   window.addEventListener('beforeprint', () => { const t = $('#panel-ah'); if(t && !t.hidden && !document.body.classList.contains('ah-printing') && !document.body.classList.contains('cz-printing') && !document.body.classList.contains('lab-printing')) prepararImpresion(); });
   window.addEventListener('afterprint', finImpresion);

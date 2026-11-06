@@ -683,3 +683,7 @@ window.BANCO_AHORCADO=[
 "Las refinerías lo separan en fracciones."
 ]
 ];
+
+/* Marca del sitio para las hojas impresas (Ahorcado y Sopa de letras):
+   mismo logo, marca de agua y pie que los crucigramas y laberintos. */
+window.HOJA_SITIO={logo:'logo-chromanom.png',marca:'icons/marca-agua.png',nombre:'ChromaNom',pie:'<span class="m">Chroma<b>Nom</b> · Nomenclatura orgánica</span><span>© 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0</span>'};

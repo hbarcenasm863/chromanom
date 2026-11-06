@@ -235,6 +235,20 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100
 .ahx-k.si{background:var(--c2b);border-color:#86efac;color:var(--c2t)}
 .ahx-k.no{background:#f1f5f9;border-color:#e2e8f0;color:#94a3b8;text-decoration:line-through}
 .qt-ah{background:var(--c3b);color:var(--c3t)}
+.ahx-cab .ahx-len{margin-left:auto}
+.ahx-fs{border:1.5px solid #0d4a73;background:#eef6fb;color:#0d4a73;border-radius:8px;padding:4px 10px;font-weight:800;font-size:.75rem;cursor:pointer;font-family:inherit}
+/* Pantalla completa en celular horizontal: dos columnas (muñeco, vidas y pistas | palabra y teclado) */
+@media (orientation:landscape) and (max-height:560px){
+  html.juego-fs .ahx{display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);grid-template-areas:"cab cab" "top pal" "pis tec";column-gap:16px;row-gap:6px;padding:10px 14px 12px;align-items:start}
+  html.juego-fs .ahx-cab{grid-area:cab;margin:0}
+  html.juego-fs .ahx-top{grid-area:top;grid-template-columns:auto 1fr;gap:10px}
+  html.juego-fs .ahx-fig{width:84px}
+  html.juego-fs .ahx-pistas{grid-area:pis;margin:0;gap:5px}
+  html.juego-fs .ahx-p{font-size:.78rem;padding:6px 9px}
+  html.juego-fs .ahx-pal{grid-area:pal;margin:4px 0 0;align-self:center}
+  html.juego-fs .ahx-tec{grid-area:tec;gap:4px}
+  html.juego-fs .ahx-k{min-height:34px;font-size:.9rem}
+}
 @media (max-width:420px){.ahx{padding:14px 12px 16px}.ahx-fig{width:96px}.ahx-k{min-height:40px;font-size:.95rem}.ahx-tec{gap:5px}.ahx-p{font-size:.84rem}}
 @media (prefers-reduced-motion:reduce){.ahx-t.v{animation:none}}
 /* Encabezado de cada fase en la portada (mismos colores que CN_FASES). */
@@ -864,6 +878,12 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 /* Partes del nombre con el sombreado MDEC (opciones y respuestas) */
 .mdec-p{border-radius:4px;padding:1px 1px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .mc-opt .mdec-p+.mdec-p{margin-left:1px}
+
+/* Pantalla completa horizontal del Juego: sin la barra de navegación del sitio ni controles flotantes */
+@media (orientation:landscape) and (max-height:560px){
+  html.juego-fs .site-nav,html.juego-fs #text-zoom-widget,html.juego-fs .site-footer,html.juego-fs body>footer{display:none!important}
+  html.juego-fs #area-ahorcado{scroll-margin-top:84px}
+}
 </style>
 <link rel="stylesheet" href="chromanom.css">
 </head>
@@ -3101,6 +3121,24 @@ function ahFase(q){
   const g=(window.AHORCADO_GRUPOS||[]).find(x=>x[0]===q.grupo);
   return g?g[1].replace(/^\S+\s/,''):'Química orgánica';
 }
+
+/* Pantalla completa del Juego (toda la página: se mantiene al pasar de
+   palabra y en los resultados). En celular gira a horizontal. En iPhone,
+   Safari no lo permite: queda la página normal y hay que girar a mano. */
+function juegoEsPC(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+function juegoPantallaCompleta(){
+  if(juegoEsPC()){ (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+  const el = document.documentElement, req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if(!req){ alert('Este navegador no permite la pantalla completa. Gira el celular a horizontal.'); return; }
+  let p; try{ p = req.call(el); }catch(e){ return; }
+  const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} };
+  if(p && p.then) p.then(girar).catch(() => {}); else girar();
+}
+['fullscreenchange','webkitfullscreenchange'].forEach(ev => document.addEventListener(ev, () => {
+  document.documentElement.classList.toggle('juego-fs', juegoEsPC());
+  if(!juegoEsPC()){ try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} }
+  if(typeof AH !== 'undefined' && AH){ ahPintar(); const a = document.getElementById('area-ahorcado'); if(a && juegoEsPC()) setTimeout(() => a.scrollIntoView({block:'start'}), 120); }
+}));
 function iniciarAhorcado(q){
   const pal=q.palabra.toUpperCase();
   AH={q,palabra:pal,base:[...pal].map(ahBase).join(''),pistas:q.pistas,nPistas:1,fallos:0,usadas:new Set(),fin:false};
@@ -3118,7 +3156,9 @@ function ahPintar(){
     return '<span class="ahx-t"></span>';
   };
   const palabras=AH.palabra.split(' ');
-  const ancho=Math.max(220,(area.clientWidth||340)-30);
+  // en pantalla completa horizontal la palabra ocupa solo la columna derecha
+  const fsH=document.documentElement.classList.contains('juego-fs')&&innerWidth>innerHeight&&innerHeight<=560;
+  const ancho=Math.max(220,(area.clientWidth||340)*(fsH?0.54:1)-30);
   const cabe=n=>Math.floor((ancho-(n-1)*4)/n);
   // Una palabra que no cabe con casillas de al menos 22 px se reparte en dos
   // filas parejas (sin guion), en vez de encoger las casillas hasta ser ilegibles.
@@ -3137,7 +3177,7 @@ function ahPintar(){
   const teclas='ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('').map(l=>{const u=AH.usadas.has(l),en=AH.base.includes(l);
     return '<button type="button" class="ahx-k'+(u?(en?' si':' no'):'')+'" data-l="'+l+'"'+(u||AH.fin?' disabled':'')+' aria-label="Letra '+l+'">'+l+'</button>';}).join('');
   area.innerHTML='<div class="ahx">'
-    +'<div class="ahx-cab"><span class="ahx-fase">'+ahFase(AH.q)+'</span><span class="ahx-len">'+letras+' letras'+(AH.palabra.includes(' ')?' · '+(AH.palabra.split(' ').length)+' palabras':'')+'</span></div>'
+    +'<div class="ahx-cab"><span class="ahx-fase">'+ahFase(AH.q)+'</span><span class="ahx-len">'+letras+' letras'+(AH.palabra.includes(' ')?' · '+(AH.palabra.split(' ').length)+' palabras':'')+'</span><button type="button" class="ahx-fs">'+(juegoEsPC()?'✕ Salir':'⛶ Pantalla completa')+'</button></div>'
     +'<div class="ahx-top"><div class="ahx-fig">'+ahDibujo(AH.fallos)+'</div><div><div class="ahx-vidas-l">Vidas</div><div class="ahx-vidas">'+vidas+'</div>'
     +'<div class="ahx-msgv">'+(AH.fin?'':quedan===1?'¡Última vida!':'Te quedan '+quedan+' fallos')+'</div></div></div>'
     +'<div class="ahx-pistas">'+pistas+'</div>'
@@ -3145,6 +3185,7 @@ function ahPintar(){
     +'<div class="ahx-tec">'+teclas+'</div></div>';
   area.querySelectorAll('.ahx-k').forEach(b=>b.addEventListener('click',()=>ahLetra(b.dataset.l)));
   const pb=area.querySelector('[data-mas]');if(pb)pb.addEventListener('click',()=>{if(AH&&!AH.fin&&AH.nPistas<3){AH.nPistas++;ahPintar();}});
+  const fb=area.querySelector('.ahx-fs');if(fb)fb.addEventListener('click',juegoPantallaCompleta);
 }
 function ahLetra(l){
   if(!AH||AH.fin||answered||AH.usadas.has(l))return;

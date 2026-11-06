@@ -7,6 +7,78 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (164) — Marca del sitio en todas las hojas y pantalla completa en todo lo que se proyecta
+
+### Contexto
+El docente recordó dos reglas para todo el material, en ChromaNom y en
+IonNom:
+1. todo lo que se proyecta debe tener pantalla completa;
+2. toda hoja para imprimir debe llevar arriba el logo de la aplicación con
+   los espacios de Nombre y Curso, y el logo como marca de agua.
+
+Las guías, talleres, evaluaciones, laberintos y crucigramas ya cumplían la
+segunda regla; las hojas del Ahorcado y de la Sopa de letras no. El
+crucigrama («Resolver») y el ahorcado del Juego no tenían pantalla
+completa.
+
+### Cambios
+- **Hojas del Ahorcado y de la Sopa** (`ahorcado.js`, `sopa.js`):
+  - Llevan el mismo encabezado que los crucigramas: logo del sitio, título,
+    instrucciones y versión. Debajo va la línea de Nombre, Curso y Fecha
+    (no en las claves).
+  - Llevan la marca de agua con el logo y el pie con la licencia.
+  - La marca de cada sitio queda en `window.HOJA_SITIO`: en
+    `ahorcado-datos.js` (ChromaNom) y en `assets/bancos-extra.js` (IonNom).
+  - Ajuste automático: si una hoja no cabe en la carta, se reduce poco a
+    poco la letra de las pistas (y, en la sopa, el tamaño de las casillas)
+    hasta que quepa, tanto en pantalla como al imprimir.
+- **Pantalla completa con respaldo para iPhone** (Ahorcado y Sopa en modo
+  clase):
+  - Si el navegador no tiene la pantalla completa o la rechaza, el tablero
+    se fija a toda la ventana.
+  - Corregido: el ahorcado y la sopa conviven en la misma página, y al
+    entrar uno en pantalla completa el otro liberaba el giro a horizontal.
+    Ahora cada uno solo actúa sobre su propio tablero.
+- **Crucigrama «Resolver»** (`crucigrama.js`): nuevo botón «⛶ Pantalla
+  completa».
+  - No borra lo escrito.
+  - Gira el celular a horizontal y ajusta las casillas a la pantalla.
+  - En horizontal: la cuadrícula a la izquierda y las pistas (horizontales
+    y verticales, una lista debajo de la otra, con desplazamiento propio) a
+    la derecha, con los botones visibles.
+- **Ahorcado del Juego** (`juego.html`): botón «⛶ Pantalla completa» en el
+  tablero.
+  - La pantalla completa abarca toda la página del Juego, así que se
+    mantiene al pasar de palabra y en los resultados.
+  - En celular gira a horizontal y oculta la barra de navegación del sitio.
+  - El tablero se reparte en dos columnas: muñeco, vidas y pistas | palabra
+    y teclado.
+  - Mismo cambio en el Juego de IonNom.
+- `actividades.css`; `sw.js` (caché `chromanom-v65`). En IonNom,
+  `docente.html`, `juego.html`, `assets/*` y `sw.js` (`ionom-v83`).
+
+### Verificación (Playwright, en los dos sitios)
+- Las 8 hojas de prueba (Ahorcado y Sopa; hoja y clave; 16 palabras)
+  tienen logo, marca de agua y pie. Las hojas de estudiante tienen además
+  la línea de Nombre, Curso y Fecha. Ninguna se pasa de la carta (1056 px)
+  ni toca el pie.
+- Celular en horizontal (844 × 390):
+  - crucigrama: conserva lo escrito y los botones quedan visibles;
+  - Ahorcado y Sopa del generador: se mantiene la pantalla completa
+    mientras se juega;
+  - Ahorcado del Juego: el marcador y el teclado quedan a la vista.
+
+  En todos se pide el giro al entrar y se libera solo al salir.
+- La lógica del Juego no cambió (5, 10 o 0 puntos). No hubo errores en
+  consola.
+
+### Pendiente
+En iPhone, Safari no permite la pantalla completa de una página. En el
+generador se usa el respaldo, que fija el tablero a la ventana. En el Juego
+aparece un aviso para girar el celular a mano.
+
+---
+
 ## 2026-11-06 (163) — Sopa de letras en el generador docente (para imprimir y modo clase)
 
 ### Contexto

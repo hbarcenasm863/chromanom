@@ -354,7 +354,48 @@ function jugar(cz){
   const avail = Math.max(240, (box.clientWidth || $('#cz-app').clientWidth || 360) - 40);
   const celda = Math.max(22, Math.min(40, Math.floor(avail / cz.cols)));
   box.innerHTML = '<div class="cz-jugar"><div class="cz-gwrap">' + cuadricula(cz, 'jugar', celda) + '</div>' + listaPistas(cz, false)
-    + '<div class="cz-bar"><button type="button" class="cn-btn cn-btn--primary" id="cz-check">✔ Comprobar</button><button type="button" class="cn-btn cn-btn--secondary" id="cz-clear">↺ Borrar todo</button><span id="cz-msg" aria-live="polite"></span></div></div>';
+    + '<div class="cz-bar"><button type="button" class="cn-btn cn-btn--primary" id="cz-check">✔ Comprobar</button><button type="button" class="cn-btn cn-btn--secondary" id="cz-clear">↺ Borrar todo</button><button type="button" class="cn-btn cn-btn--secondary" id="cz-fs">⛶ Pantalla completa</button><span id="cz-msg" aria-live="polite"></span></div></div>';
+  // ── Pantalla completa (para proyectar o jugar en celular) ──
+  // Se aplica a #cz-play, que no se redibuja al escribir; al entrar, al girar
+  // o al cambiar el tamaño solo se recalcula el tamaño de las casillas.
+  const gridEl = box.querySelector('.cz-grid');
+  const tamCasillas = () => {
+    const fs = box.classList.contains('fs-on'), horiz = innerWidth > innerHeight;
+    let t;
+    if(fs){
+      const ancho = box.clientWidth * (horiz ? 0.56 : 1) - 40, alto = innerHeight - (horiz ? 44 : 260);
+      t = Math.floor(Math.min(ancho / cz.cols, alto / cz.filas));
+    } else t = Math.floor(Math.max(240, (box.clientWidth || 360) - 40) / cz.cols);
+    t = Math.max(18, Math.min(fs ? 56 : 40, t));
+    gridEl.style.gridTemplateColumns = 'repeat(' + cz.cols + ',' + t + 'px)'; gridEl.style.gridAutoRows = t + 'px'; gridEl.style.setProperty('--celda', t + 'px');
+    const b = box.querySelector('#cz-fs'); if(b) b.textContent = fs ? '✕ Salir de pantalla completa' : '⛶ Pantalla completa';
+  };
+  const esPCz = () => document.fullscreenElement === box || document.webkitFullscreenElement === box || box.classList.contains('pseudo-fs');
+  box.querySelector('#cz-fs').addEventListener('click', () => {
+    if(esPCz()){
+      if(box.classList.contains('pseudo-fs')){ box.classList.remove('pseudo-fs', 'fs-on'); document.body.style.overflow = ''; tamCasillas(); }
+      else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      return;
+    }
+    const pseudo = () => { box.classList.add('pseudo-fs', 'fs-on'); document.body.style.overflow = 'hidden'; tamCasillas(); };
+    const req = box.requestFullscreen || box.webkitRequestFullscreen;
+    if(!req){ pseudo(); return; }
+    box.classList.add('fs-on');
+    let pr; try{ pr = req.call(box); }catch(e){ pseudo(); return; }
+    const girar = () => { try{ if(screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); }catch(e){} setTimeout(tamCasillas, 150); };
+    if(pr && pr.then) pr.then(girar).catch(pseudo); else girar();
+  });
+  if(!jugar._vigila){
+    jugar._vigila = true;
+    const f = () => { const b = $('#cz-play'); if(!b) return;
+      const real = document.fullscreenElement === b || document.webkitFullscreenElement === b;
+      if(!real && !b.classList.contains('pseudo-fs') && b.classList.contains('fs-on')){ b.classList.remove('fs-on'); try{ if(screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} }
+      if(jugar._tam) jugar._tam(); };
+    document.addEventListener('fullscreenchange', f); document.addEventListener('webkitfullscreenchange', f);
+    window.addEventListener('resize', () => { if(jugar._tam && $('#cz-play') && $('#cz-play').offsetParent !== null) jugar._tam(); });
+  }
+  jugar._tam = tamCasillas;
+
   const celdaEl = (f, c) => box.querySelector('.cz-c[data-f="' + f + '"][data-c="' + c + '"] input');
   let dir = 'h', activa = null;
   const palDe = (f, c, d) => cz.pal.find(p => p.dir === d && (d === 'h' ? p.f === f && c >= p.c && c < p.c + p.x.respuesta.length : p.c === c && f >= p.f && f < p.f + p.x.respuesta.length));
