@@ -7,6 +7,48 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (166) — Al menos 20 palabras por categoría en Sopa, Ahorcado y Criptograma; más historias del Detective
+
+### Contexto
+El docente notó que la sopa de letras tenía muy pocas palabras en cada
+categoría y pidió **al menos 20 por categoría**, y lo mismo para las demás
+actividades. El Ahorcado, la Sopa de letras y el Criptograma usan el mismo
+banco, así que al ampliarlo se amplían las tres actividades a la vez.
+
+### Cambios
+- `ahorcado-datos.js` — `BANCO_AHORCADO`:
+  - Pasó de 96 a **146 palabras**, todas con 3 pistas sacadas de las páginas del sitio y sin fórmulas con paréntesis.
+  - Palabras por categoría:
+
+    | Categoría | Antes | Ahora | Caben en la sopa (≤ 14 letras) |
+    |---|---|---|---|
+    | El carbono | 20 | 24 | 24 |
+    | Nomenclatura | 19 | 26 | 26 |
+    | Isomería y reacciones | 14 | 24 | 24 |
+    | Orbitales y propiedades | 14 | 24 | 23 |
+    | Biomoléculas | 21 | 24 | 22 |
+    | Ambiente | 8 | 24 | 22 |
+
+  - El Criptograma tiene ahora entre 23 y 26 frases por categoría.
+- `ahorcado-datos.js` — `DETECTIVE`:
+  - **2 historias nuevas por categoría**: 18 en total, 3 por categoría.
+  - Cada categoría reúne 24 puntos dudosos.
+  - En el menú, las historias quedan ordenadas por categoría.
+- `sw.js`: la caché pasa a `chromanom-v67`.
+
+### Verificación
+Probado con Playwright:
+- Los rótulos de las pestañas Ahorcado, Sopa y Criptograma muestran los conteos nuevos.
+- Cada categoría arma su sopa sin problema.
+- Las 18 historias del Detective caben en una hoja carta, en la hoja y en la clave, con 6 errores.
+- El modo clase revela las 6 correcciones.
+- El Juego carga las 146 palabras sin errores.
+
+### Pendiente
+Ninguno. El Mapa conceptual ya tiene un mapa por cada tema, porque cada tema tiene un solo esquema.
+
+---
+
 ## 2026-11-06 (165) — Criptograma químico, mapa conceptual con huecos y detective químico
 
 ### Contexto

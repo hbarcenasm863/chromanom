@@ -681,6 +681,356 @@ window.BANCO_AHORCADO=[
 "Petróleo tal como sale del pozo.",
 "Se calienta y entra por abajo de la torre de destilación.",
 "Las refinerías lo separan en fracciones."
+],
+[
+"ESQUELETO",
+"carbono",
+"Fórmula que dibuja la cadena en zigzag sin escribir los C ni los H.",
+"Cada vértice y cada extremo es un carbono.",
+"Fórmula de ___."
+],
+[
+"ABIERTA",
+"carbono",
+"Cadena que tiene dos extremos.",
+"También se llama acíclica.",
+"Lo contrario de cerrada."
+],
+[
+"ALICÍCLICO",
+"carbono",
+"Anillo solo de carbonos que no es aromático.",
+"El ciclohexano es uno.",
+"Puede ser saturado o insaturado."
+],
+[
+"ZIGZAG",
+"carbono",
+"Forma real de las cadenas de los alcanos.",
+"Se debe a los 109,5° del carbono sp³.",
+"Doblar así la cadena no crea ramas."
+],
+[
+"METILO",
+"nombres",
+"Rama de un solo carbono.",
+"Se escribe −CH₃.",
+"En el 2-metilpropano hay uno."
+],
+[
+"PREFIJO",
+"nombres",
+"Parte del nombre que indica cuántos carbonos tiene la cadena.",
+"Met-, et-, prop-, but-…",
+"Para cinco carbonos es pent-."
+],
+[
+"SUFIJO",
+"nombres",
+"Terminación del nombre que indica el grupo funcional.",
+"-ol en los alcoholes y -ona en las cetonas.",
+"En el etanol es -ol."
+],
+[
+"PARA",
+"nombres",
+"Posiciones 1,4 en el anillo de benceno.",
+"Se abrevia p-.",
+"Orto es 1,2 y meta es 1,3."
+],
+[
+"META",
+"nombres",
+"Posiciones 1,3 en el anillo de benceno.",
+"Se abrevia m-.",
+"Está entre orto y para."
+],
+[
+"XILENO",
+"nombres",
+"Nombre común de los dimetilbencenos.",
+"Es un benceno con dos grupos metilo.",
+"En el p-___ los metilos están en 1,4."
+],
+[
+"ANILINA",
+"nombres",
+"Benceno con un grupo −NH₂.",
+"Es una amina aromática.",
+"Nombre común aceptado por IUPAC."
+],
+[
+"CIS",
+"fase3",
+"Grupos del mismo lado del doble enlace.",
+"Equivale a Z en la notación IUPAC.",
+"Lo contrario de trans."
+],
+[
+"POSICIÓN",
+"fase3",
+"Tipo de isomería del propan-1-ol y el propan-2-ol.",
+"El mismo grupo está en otro carbono.",
+"Isomería de ___."
+],
+[
+"FUNCIÓN",
+"fase3",
+"Tipo de isomería del etanol y el metoximetano.",
+"Los grupos funcionales son distintos.",
+"Isomería de ___."
+],
+[
+"CADENA",
+"fase3",
+"Tipo de isomería del butano y el 2-metilpropano.",
+"Cambia la cadena principal.",
+"Isomería de ___."
+],
+[
+"GEOMÉTRICA",
+"fase3",
+"Otro nombre de la isomería cis/trans.",
+"Se debe a un doble enlace que no gira.",
+"Isomería ___."
+],
+[
+"OXIDACIÓN",
+"fase3",
+"El carbono gana enlaces con O o pierde H.",
+"La provocan el KMnO₄ y el CrO₃.",
+"Lo contrario de la reducción."
+],
+[
+"HIDROGENACIÓN",
+"fase3",
+"Adición de H₂ al doble enlace de un alqueno.",
+"Es una adición y también una reducción.",
+"Usa un catalizador de níquel."
+],
+[
+"MONÓMERO",
+"fase3",
+"Molécula pequeña que se repite en un polímero.",
+"El cloruro de vinilo lo es para el PVC.",
+"Muchos se unen en la polimerización."
+],
+[
+"ELECTRÓFILO",
+"fase3",
+"Reactivo que busca electrones.",
+"El H⁺ del HBr es uno.",
+"Ataca la nube π de los alquenos."
+],
+[
+"RADICAL",
+"fase3",
+"Átomo con un electrón sin aparear.",
+"Se forma en una ruptura homolítica.",
+"El Cl· que destruye el ozono es uno."
+],
+[
+"NODO",
+"fase4a",
+"Zona sin electrones entre los dos núcleos.",
+"La tiene el orbital antienlazante.",
+"Por eso los núcleos se repelen."
+],
+[
+"PIRIDINA",
+"fase4a",
+"Anillo aromático de 5 C y 1 N.",
+"Tiene 6 electrones π.",
+"Es heterocíclica."
+],
+[
+"NAFTALENO",
+"fase4a",
+"Dos anillos de benceno fusionados.",
+"Tiene 10 electrones π.",
+"Está en las bolas de naftalina."
+],
+[
+"LICOPENO",
+"fase4a",
+"Pigmento rojo del tomate.",
+"Tiene 11 dobles enlaces conjugados.",
+"También está en la guayaba y la sandía."
+],
+[
+"CURCUMINA",
+"fase4a",
+"Pigmento amarillo de la cúrcuma.",
+"La cúrcuma se cultiva en el Huila y el Meta.",
+"Da el color amarillo a muchos alimentos."
+],
+[
+"DIPOLO",
+"fase4a",
+"Molécula con un extremo δ+ y otro δ−.",
+"Las cetonas y los aldehídos lo son.",
+"Fuerza ___-dipolo."
+],
+[
+"SOLUBILIDAD",
+"fase4a",
+"Cantidad de una sustancia que se disuelve en otra.",
+"La de los alcoholes cae desde los 4 carbonos.",
+"Semejante disuelve a semejante."
+],
+[
+"EBULLICIÓN",
+"fase4a",
+"Paso de líquido a vapor cuando el líquido hierve.",
+"Sube con las fuerzas intermoleculares.",
+"Punto de ___."
+],
+[
+"AROMATICIDAD",
+"fase4a",
+"Estabilidad especial de anillos como el benceno.",
+"Se reconoce con la regla de Hückel.",
+"Necesita 4n + 2 electrones π."
+],
+[
+"ERROR",
+"fase4a",
+"Diferencia entre una medida y el valor de referencia.",
+"Se expresa en porcentaje.",
+"Porcentaje de ___."
+],
+[
+"GLUCOSA",
+"bio",
+"Aldohexosa, el combustible de las células.",
+"Forma el almidón, la celulosa y el glucógeno.",
+"Su anillo es una piranosa."
+],
+[
+"SACAROSA",
+"bio",
+"Disacárido de glucosa y fructosa.",
+"La enzima del modelo la hidroliza.",
+"Es el azúcar de mesa."
+],
+[
+"GLICEROL",
+"bio",
+"Alcohol que forma los triglicéridos.",
+"Sale junto al jabón en la saponificación.",
+"Se une a tres ácidos grasos."
+],
+[
+"COMBUSTIBLE",
+"amb",
+"Sustancia que se quema para obtener energía.",
+"El gas natural, la gasolina y el diésel lo son.",
+"___ fósil."
+],
+[
+"GASOLINA",
+"amb",
+"Fracción del petróleo de 5 a 10 carbonos.",
+"Se modela como octano.",
+"Un galón produce unos 8,6 kg de CO₂."
+],
+[
+"DIÉSEL",
+"amb",
+"Fracción del petróleo de 14 a 20 carbonos.",
+"En Colombia también se llama ACPM.",
+"Se mezcla con biodiésel."
+],
+[
+"QUEROSENO",
+"amb",
+"Fracción del petróleo que usan los aviones.",
+"Tiene de 10 a 16 carbonos.",
+"Sale entre 180 y 260 °C."
+],
+[
+"ASFALTO",
+"amb",
+"Residuo que queda al fondo de la torre de destilación.",
+"Es la fracción más pesada del petróleo.",
+"Sus moléculas son las más largas."
+],
+[
+"METANO",
+"amb",
+"Gas natural, CH₄.",
+"Emite menos CO₂ por megajulio que la gasolina.",
+"Si se escapa sin quemar, es un potente gas de efecto invernadero."
+],
+[
+"PROPANO",
+"amb",
+"Gas de la pipeta, C₃H₈.",
+"C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O.",
+"Es un alcano de tres carbonos."
+],
+[
+"POLIETILENO",
+"amb",
+"Plástico de las bolsas.",
+"Se forma por adición del eteno.",
+"Casi no se biodegrada."
+],
+[
+"PVC",
+"amb",
+"Plástico de los tubos y los cables.",
+"Se fabrica con cloruro de vinilo.",
+"Policloruro de vinilo."
+],
+[
+"PET",
+"amb",
+"Plástico de las botellas de gaseosa y de agua.",
+"Es un poliéster: se forma por condensación.",
+"Lleva el número 1 en el triángulo de reciclaje."
+],
+[
+"NAILON",
+"amb",
+"Poliamida de las cuerdas y las medias.",
+"Se forma por condensación.",
+"Sus enlaces se pueden hidrolizar lentamente."
+],
+[
+"CFC",
+"amb",
+"Gases de neveras y aerosoles que destruyen el ozono.",
+"El CCl₂F₂ es uno.",
+"Los prohibió el Protocolo de Montreal."
+],
+[
+"DDT",
+"amb",
+"Plaguicida organoclorado muy apolar.",
+"Se acumula en la grasa de los animales.",
+"Su concentración aumenta en la cadena alimentaria."
+],
+[
+"ETANOL",
+"amb",
+"Biocombustible que se obtiene de la caña de azúcar.",
+"Se produce por fermentación y destilación.",
+"Se mezcla con la gasolina."
+],
+[
+"RECICLAJE",
+"amb",
+"Volver a usar los materiales de un residuo.",
+"El PET y el PEAD son los que más se recuperan.",
+"Separar en la fuente lo facilita."
+],
+[
+"MONTREAL",
+"amb",
+"Ciudad del protocolo que prohibió los CFC.",
+"El protocolo se firmó en 1987.",
+"Protocolo de ___."
 ]
 ];
 
@@ -738,6 +1088,90 @@ window.DETECTIVE=[
 ]
 ],
 [
+"carbono",
+"El carbono en la cocina de la abuela",
+[
+"Martín ayudaba a su abuela en la cocina y se puso a pensar en el carbono.",
+[
+"El gas de la estufa es metano, un alcano: todos sus enlaces son sencillos.",
+"El gas de la estufa es metano, un alqueno: tiene un doble enlace."
+],
+[
+"El carbono puede unirse con otros carbonos y formar cadenas muy largas: esa propiedad se llama concatenación.",
+"El carbono puede unirse con otros carbonos y formar cadenas muy largas: esa propiedad se llama tetravalencia."
+],
+"En la alacena encontró un frasco de vinagre y una botella de alcohol.",
+[
+"Los dos son compuestos orgánicos, porque sus moléculas tienen cadenas de carbono e hidrógeno.",
+"Los dos son compuestos inorgánicos, porque se compran en la tienda y no salen de un ser vivo."
+],
+[
+"La abuela encendió la estufa con un fósforo; en el triple enlace del etino de un soplete habría un enlace σ y dos π.",
+"La abuela encendió la estufa con un fósforo; en el triple enlace del etino de un soplete habría tres enlaces σ."
+],
+[
+"Los carbonos del etino son sp y su molécula es lineal, a 180°.",
+"Los carbonos del etino son sp³ y su molécula es un tetraedro, a 109,5°."
+],
+"Martín dibujó luego el 2,2-dimetilpropano.",
+[
+"Su carbono central es cuaternario, porque está unido a otros cuatro carbonos.",
+"Su carbono central es terciario, porque está unido a otros cuatro carbonos."
+],
+[
+"Una cadena que tiene un átomo de oxígeno entre sus carbonos es heterogénea.",
+"Una cadena que tiene un átomo de oxígeno entre sus carbonos es homogénea."
+],
+[
+"El ciclohexano es una cadena cerrada y saturada.",
+"El ciclohexano es una cadena abierta e insaturada."
+],
+"La abuela le dijo que, para ser cocinero, sabía mucha química."
+]
+],
+[
+"carbono",
+"El concurso de modelos moleculares",
+[
+"El colegio organizó un concurso de modelos moleculares con plastilina y palillos.",
+[
+"El equipo de Paula usó palillos rectos para los enlaces sencillos, que pueden girar.",
+"El equipo de Paula usó palillos rectos para los enlaces sencillos, que no pueden girar."
+],
+[
+"En el eteno, los carbonos son sp² y sus enlaces quedan en un plano, a 120°.",
+"En el eteno, los carbonos son sp³ y sus enlaces quedan en un plano, a 120°."
+],
+[
+"El doble enlace del eteno está formado por un enlace σ y un enlace π.",
+"El doble enlace del eteno está formado por dos enlaces π."
+],
+"Otro equipo armó el benceno.",
+[
+"El benceno es un anillo de seis carbonos con electrones π deslocalizados: es aromático.",
+"El benceno es un anillo de seis carbonos con todos sus enlaces sencillos: es alicíclico."
+],
+"El jurado pidió clasificar los carbonos del 2-metilbutano.",
+[
+"El carbono 2 es terciario, porque está unido a otros tres carbonos.",
+"El carbono 2 es secundario, porque está unido a otros tres carbonos."
+],
+[
+"La cadena del 2-metilbutano es abierta y ramificada.",
+"La cadena del 2-metilbutano es cerrada y lineal."
+],
+[
+"En la fórmula de esqueleto, cada vértice del zigzag es un carbono y los H no se dibujan.",
+"En la fórmula de esqueleto, cada vértice del zigzag es un hidrógeno y los C no se dibujan."
+],
+[
+"Al final explicaron que el carbono forma 4 enlaces porque su configuración es 1s² 2s² 2p².",
+"Al final explicaron que el carbono forma 4 enlaces porque su configuración es 1s² 2s² 2p⁴."
+],
+"El modelo del benceno ganó el primer puesto."
+]
+],
+[
 "nombres",
 "Las etiquetas borrosas",
 [
@@ -776,6 +1210,87 @@ window.DETECTIVE=[
 "Andrés recordó que un éster se nombra «___ilo de ___oato», como el etilo de etanoato."
 ],
 "Con las etiquetas nuevas, la bodega quedó en orden."
+]
+],
+[
+"nombres",
+"El taller de nomenclatura",
+[
+"El profesor Jorge entregó un taller de nomenclatura y pidió revisar las respuestas de Camilo.",
+[
+"Para nombrar un alcano, Camilo buscó primero la cadena de carbonos más larga.",
+"Para nombrar un alcano, Camilo buscó primero la rama más larga."
+],
+[
+"Numeró la cadena desde el extremo más cercano a la primera rama.",
+"Numeró la cadena siempre desde el extremo izquierdo, sin mirar las ramas."
+],
+[
+"Para dos grupos metilo en los carbonos 2 y 3 escribió «2,3-dimetilbutano».",
+"Para dos grupos metilo en los carbonos 2 y 3 escribió «2,3-metilbutano»."
+],
+[
+"Una cadena de cinco carbonos lleva el prefijo pent-.",
+"Una cadena de cinco carbonos lleva el prefijo hex-."
+],
+[
+"En un alqueno, la cadena principal debe contener el doble enlace.",
+"En un alqueno, el doble enlace puede quedar fuera de la cadena principal."
+],
+[
+"Al but-1-eno le dio al doble enlace el número más bajo posible.",
+"Al but-1-eno le dio al doble enlace el número más alto posible."
+],
+[
+"Para el CH₃−CH₂−CHO escribió «propanal», porque los aldehídos terminan en -al.",
+"Para el CH₃−CH₂−CHO escribió «propanona», porque los aldehídos terminan en -ona."
+],
+[
+"Para el CH₃−NH₂ escribió «metilamina», una amina.",
+"Para el CH₃−NH₂ escribió «metanamida», una amida."
+],
+"El profesor le puso la mejor nota del curso."
+]
+],
+[
+"nombres",
+"La tienda de cosméticos",
+[
+"Isabela leyó las etiquetas de los productos de una tienda de cosméticos.",
+[
+"El quitaesmalte tenía acetona, cuyo nombre IUPAC es propanona.",
+"El quitaesmalte tenía acetona, cuyo nombre IUPAC es propanal."
+],
+[
+"Un perfume tenía un éster, el grupo que da los olores a fruta.",
+"Un perfume tenía un éter, el grupo que da los olores a fruta."
+],
+[
+"El alcohol antiséptico era etanol, con el grupo −OH.",
+"El alcohol antiséptico era etanol, con el grupo −COOH."
+],
+"En una crema leyó la palabra «fenol».",
+[
+"El fenol es un benceno con un grupo −OH.",
+"El fenol es un benceno con un grupo −NH₂."
+],
+[
+"La anilina, en cambio, es un benceno con un grupo −NH₂.",
+"La anilina, en cambio, es un benceno con un grupo −CH₃."
+],
+[
+"En un éter, el oxígeno está entre dos grupos de carbono, como en el metoximetano.",
+"En un éter, el oxígeno está al final de la cadena, como en el metanol."
+],
+[
+"Las cetonas tienen el grupo C=O en un carbono del medio de la cadena.",
+"Las cetonas tienen el grupo C=O siempre en el carbono 1 de la cadena."
+],
+[
+"Un ácido carboxílico se nombra con la palabra «ácido» y el sufijo -oico.",
+"Un ácido carboxílico se nombra con la palabra «ácido» y el sufijo -ona."
+],
+"Isabela descubrió que en la tienda hay más química que en su cuaderno."
 ]
 ],
 [
@@ -821,6 +1336,88 @@ window.DETECTIVE=[
 ]
 ],
 [
+"fase3",
+"Los isómeros del perfume",
+[
+"En el laboratorio, Natalia comparó dos sustancias con la misma fórmula, C₂H₆O.",
+[
+"Una era el etanol y la otra el metoximetano: isómeros de función.",
+"Una era el etanol y la otra el metoximetano: isómeros de cadena."
+],
+[
+"Los isómeros tienen la misma fórmula molecular, pero distinta estructura.",
+"Los isómeros tienen distinta fórmula molecular, pero la misma estructura."
+],
+[
+"El propan-1-ol y el propan-2-ol son isómeros de posición.",
+"El propan-1-ol y el propan-2-ol son el mismo compuesto, escrito de otra forma."
+],
+[
+"El trans-but-2-eno tiene sus dos CH₃ en lados opuestos del doble enlace.",
+"El trans-but-2-eno tiene sus dos CH₃ del mismo lado del doble enlace."
+],
+"Después la profesora habló de las moléculas que son como las manos.",
+[
+"Dos enantiómeros son imágenes de espejo que no se pueden superponer.",
+"Dos enantiómeros son moléculas idénticas que se pueden superponer."
+],
+[
+"Un carbono quiral está unido a cuatro grupos distintos.",
+"Un carbono quiral está unido a cuatro grupos iguales."
+],
+[
+"El ciclohexano no tiene isomería cis/trans en sus carbonos sin sustituyentes.",
+"El ciclohexano tiene isomería cis/trans en todos sus carbonos, aunque no tengan sustituyentes."
+],
+[
+"El butano y el 2-metilpropano tienen distintos puntos de ebullición, aunque tengan la misma fórmula.",
+"El butano y el 2-metilpropano tienen el mismo punto de ebullición, porque tienen la misma fórmula."
+],
+"Natalia concluyó que la forma de una molécula importa tanto como sus átomos."
+]
+],
+[
+"fase3",
+"La fábrica de plásticos",
+[
+"En una feria de ciencias, Esteban explicó cómo se fabrican los plásticos.",
+[
+"El polietileno se forma por adición de muchas moléculas de eteno.",
+"El polietileno se forma por eliminación de muchas moléculas de eteno."
+],
+[
+"Cada molécula pequeña que se repite en un polímero se llama monómero.",
+"Cada molécula pequeña que se repite en un polímero se llama isómero."
+],
+[
+"El PET de las botellas se forma por condensación, con salida de agua.",
+"El PET de las botellas se forma por adición, sin perder ninguna molécula."
+],
+"Luego habló de las reacciones de los alquenos.",
+[
+"Al agregar H₂ al eteno con un catalizador de níquel se obtiene etano: una hidrogenación.",
+"Al agregar H₂ al eteno con un catalizador de níquel se obtiene etino: una hidrogenación."
+],
+[
+"El H⁺ del HBr es un electrófilo: busca los electrones de la nube π.",
+"El H⁺ del HBr es un nucleófilo: busca los electrones de la nube π."
+],
+[
+"En una ruptura homolítica, cada átomo se queda con un electrón y se forman radicales.",
+"En una ruptura homolítica, un átomo se queda con los dos electrones y se forman iones."
+],
+[
+"El metano reacciona con cloro bajo la luz por sustitución: un H se cambia por un Cl.",
+"El metano reacciona con cloro bajo la luz por adición, porque tiene un doble enlace."
+],
+[
+"Oxidar un alcohol primario con KMnO₄ da primero un aldehído y luego un ácido carboxílico.",
+"Oxidar un alcohol primario con KMnO₄ da primero una cetona y luego un éter."
+],
+"Su stand fue el más visitado de la feria."
+]
+],
+[
 "fase4a",
 "La química del almuerzo",
 [
@@ -860,6 +1457,89 @@ window.DETECTIVE=[
 "Al lavar la sartén, el jabón metió sus cabezas iónicas en la grasa y dejó las colas hacia el agua."
 ],
 "Daniel terminó de almorzar convencido de que la cocina es un laboratorio."
+]
+],
+[
+"fase4a",
+"Las luces del laboratorio",
+[
+"Juliana preparó una exposición sobre los colores y las moléculas.",
+[
+"El licopeno del tomate es rojo porque tiene muchos dobles enlaces conjugados.",
+"El licopeno del tomate es rojo porque no tiene ningún doble enlace."
+],
+[
+"La curcumina de la cúrcuma es un pigmento amarillo.",
+"La curcumina de la cúrcuma es un pigmento azul."
+],
+[
+"Un objeto se ve del color que no absorbe, es decir, del que refleja.",
+"Un objeto se ve del mismo color que absorbe."
+],
+"Luego explicó los orbitales moleculares del H₂.",
+[
+"El orbital enlazante concentra los electrones entre los dos núcleos.",
+"El orbital antienlazante concentra los electrones entre los dos núcleos."
+],
+[
+"El orbital antienlazante tiene un nodo: una zona sin electrones entre los núcleos.",
+"El orbital enlazante tiene un nodo: una zona sin electrones entre los núcleos."
+],
+"Al final habló de la aromaticidad.",
+[
+"El benceno cumple la regla de Hückel porque tiene 6 electrones π: 4n + 2 con n = 1.",
+"El benceno cumple la regla de Hückel porque tiene 8 electrones π: 4n + 2 con n = 2."
+],
+[
+"El naftaleno tiene dos anillos fusionados y 10 electrones π.",
+"El naftaleno tiene un solo anillo y 4 electrones π."
+],
+[
+"La piridina es un anillo aromático con un átomo de nitrógeno: es heterocíclica.",
+"La piridina es un anillo aromático solo de carbonos: es homocíclica."
+],
+"Sus compañeros aplaudieron la exposición."
+]
+],
+[
+"fase4a",
+"La competencia de puntos de ebullición",
+[
+"El profesor organizó una competencia: predecir cuál sustancia hierve primero.",
+[
+"El butano hierve a menor temperatura que el butan-1-ol, porque no forma puentes de hidrógeno.",
+"El butano hierve a mayor temperatura que el butan-1-ol, porque no forma puentes de hidrógeno."
+],
+[
+"Entre los alcanos, el que tiene la cadena más larga hierve a mayor temperatura.",
+"Entre los alcanos, el que tiene la cadena más larga hierve a menor temperatura."
+],
+[
+"Una cadena ramificada hierve a menor temperatura que su isómero lineal, porque tiene menos superficie de contacto.",
+"Una cadena ramificada hierve a mayor temperatura que su isómero lineal, porque tiene menos superficie de contacto."
+],
+[
+"La propanona tiene un dipolo en su grupo C=O, y por eso hierve más alto que el butano.",
+"La propanona es apolar, y por eso hierve más alto que el butano."
+],
+"Luego pasaron a la solubilidad en agua.",
+[
+"El metanol y el etanol se mezclan con el agua en cualquier proporción.",
+"El metanol y el etanol no se mezclan con el agua, porque son orgánicos."
+],
+[
+"La solubilidad de los alcoholes en agua disminuye cuando la cadena de carbonos crece.",
+"La solubilidad de los alcoholes en agua aumenta cuando la cadena de carbonos crece."
+],
+[
+"Las fuerzas de London aumentan con el tamaño de la molécula.",
+"Las fuerzas de London disminuyen con el tamaño de la molécula."
+],
+[
+"Al comparar su medida con el valor de la tabla, calcularon el porcentaje de error.",
+"Al comparar su medida con el valor de la tabla, calcularon el rendimiento de la reacción."
+],
+"El grupo de Manuela ganó la competencia."
 ]
 ],
 [
@@ -904,6 +1584,89 @@ window.DETECTIVE=[
 ]
 ],
 [
+"bio",
+"La clase de nutrición",
+[
+"La nutricionista del colegio dio una charla sobre biomoléculas.",
+[
+"La sacarosa del azúcar de mesa es un disacárido de glucosa y fructosa.",
+"La sacarosa del azúcar de mesa es un disacárido de dos glucosas."
+],
+[
+"La celulosa está formada por β-glucosas y no la podemos digerir.",
+"La celulosa está formada por α-glucosas y la digerimos igual que el almidón."
+],
+[
+"El glucógeno es la forma en que los animales guardan la glucosa.",
+"El glucógeno es la forma en que las plantas guardan la glucosa."
+],
+"Luego habló de las grasas.",
+[
+"Un triglicérido es un triéster de glicerol y tres ácidos grasos.",
+"Un triglicérido es un triéster de etanol y tres aminoácidos."
+],
+[
+"Las grasas saturadas tienen cadenas sin dobles enlaces y suelen ser sólidas.",
+"Las grasas saturadas tienen muchos dobles enlaces y suelen ser líquidas."
+],
+[
+"El ácido linoleico es un omega-6: su primer doble enlace está en el carbono 6 contado desde el extremo CH₃.",
+"El ácido linoleico es un omega-6: tiene seis dobles enlaces."
+],
+"Al final explicó las proteínas.",
+[
+"Las proteínas están formadas por aminoácidos unidos por enlaces peptídicos.",
+"Las proteínas están formadas por glucosas unidas por enlaces peptídicos."
+],
+[
+"Las enzimas son proteínas que aceleran las reacciones de las células.",
+"Las enzimas son grasas que frenan las reacciones de las células."
+],
+"Todos salieron pensando en lo que comen."
+]
+],
+[
+"bio",
+"El jabón artesanal",
+[
+"Gabriel y su mamá hicieron jabón artesanal con aceite y soda cáustica.",
+[
+"La reacción entre un triglicérido y el NaOH se llama saponificación.",
+"La reacción entre un triglicérido y el NaOH se llama polimerización."
+],
+[
+"Además del jabón, se forma glicerol.",
+"Además del jabón, se forma glucosa."
+],
+[
+"La molécula de jabón tiene una cabeza iónica que atrae el agua y una cola apolar.",
+"La molécula de jabón tiene una cabeza apolar que atrae el agua y una cola iónica."
+],
+"Esa noche Gabriel leyó sobre el ADN.",
+[
+"En el ADN, la adenina se aparea con la timina y la guanina con la citosina.",
+"En el ADN, la adenina se aparea con la guanina y la timina con la citosina."
+],
+[
+"Las dos hebras del ADN son antiparalelas: una va de 5′ a 3′ y la otra de 3′ a 5′.",
+"Las dos hebras del ADN son paralelas: las dos van de 5′ a 3′."
+],
+[
+"La replicación es semiconservativa: cada ADN hijo tiene una hebra vieja y una nueva.",
+"La replicación es conservativa: un ADN hijo tiene las dos hebras viejas y el otro las dos nuevas."
+],
+[
+"El ARN usa el azúcar ribosa, y el ADN, la desoxirribosa.",
+"El ARN usa el azúcar desoxirribosa, y el ADN, la ribosa."
+],
+[
+"En el ceviche, el limón desnaturaliza las proteínas del pescado.",
+"En el ceviche, el limón rompe el ADN del pescado y por eso cambia de color."
+],
+"El jabón quedó listo en dos semanas."
+]
+],
+[
 "amb",
 "La salida a la refinería",
 [
@@ -942,6 +1705,88 @@ window.DETECTIVE=[
 "Por último compararon el biodiésel de palma, que se obtiene por fermentación, con el diésel del petróleo."
 ],
 "El curso concluyó que «renovable» no significa «sin impacto»."
+]
+],
+[
+"amb",
+"El viaje en carro",
+[
+"La familia de Santiago salió de paseo en carro y él se puso a pensar en el combustible.",
+[
+"La gasolina es una fracción del petróleo con cadenas de 5 a 10 carbonos.",
+"La gasolina es una fracción del petróleo con cadenas de 30 a 40 carbonos."
+],
+[
+"El diésel, que en Colombia también se llama ACPM, tiene cadenas más largas que la gasolina.",
+"El diésel, que en Colombia también se llama ACPM, tiene cadenas más cortas que la gasolina."
+],
+[
+"Al quemar el combustible con suficiente oxígeno salen CO₂ y agua: una combustión completa.",
+"Al quemar el combustible con suficiente oxígeno sale monóxido de carbono: una combustión completa."
+],
+"En el camino vieron un letrero de una planta de etanol.",
+[
+"El etanol de la caña se obtiene por fermentación y luego se destila.",
+"El etanol de la caña se obtiene por destilación del petróleo."
+],
+[
+"El queroseno de los aviones sale de la torre entre la gasolina y el diésel.",
+"El queroseno de los aviones sale por el fondo de la torre, junto con el asfalto."
+],
+[
+"El metano emite menos CO₂ por megajulio que la gasolina.",
+"El metano emite más CO₂ por megajulio que el carbón."
+],
+[
+"Si el metano se escapa sin quemar, es un potente gas de efecto invernadero.",
+"Si el metano se escapa sin quemar, no afecta el clima porque no es CO₂."
+],
+[
+"El CO₂ calienta la superficie porque absorbe la radiación infrarroja y la reemite.",
+"El CO₂ calienta la superficie porque destruye la capa de ozono."
+],
+"Santiago propuso usar más la bicicleta."
+]
+],
+[
+"amb",
+"La campaña de reciclaje",
+[
+"El colegio organizó una campaña de reciclaje y Ana María explicó los plásticos.",
+[
+"Las botellas de gaseosa son de PET, el plástico número 1 del triángulo de reciclaje.",
+"Las botellas de gaseosa son de PVC, el plástico número 1 del triángulo de reciclaje."
+],
+[
+"El PVC de los tubos se fabrica con cloruro de vinilo.",
+"El PVC de los tubos se fabrica con eteno y agua."
+],
+[
+"El PET es un poliéster y se forma por condensación.",
+"El PET es un alcano y se forma por combustión."
+],
+[
+"El nailon de las cuerdas es una poliamida.",
+"El nailon de las cuerdas es un polisacárido."
+],
+"Luego habló de los contaminantes que viajan por la cadena alimentaria.",
+[
+"La concentración del DDT aumenta en cada eslabón: plancton, peces y aves.",
+"La concentración del DDT disminuye en cada eslabón: plancton, peces y aves."
+],
+[
+"Los CFC de las neveras viejas destruyen el ozono de la estratosfera.",
+"Los CFC de las neveras viejas producen ozono en la estratosfera."
+],
+[
+"El ozono filtra la radiación ultravioleta del Sol.",
+"El ozono filtra la radiación infrarroja de la Tierra y causa el efecto invernadero."
+],
+[
+"Separar los residuos en la fuente facilita el reciclaje.",
+"Mezclar todos los residuos en una sola bolsa facilita el reciclaje."
+],
+"La campaña recogió más de 300 kg de plástico."
 ]
 ]
 ];
