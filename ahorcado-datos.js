@@ -687,3 +687,261 @@ window.BANCO_AHORCADO=[
 /* Marca del sitio para las hojas impresas (Ahorcado y Sopa de letras):
    mismo logo, marca de agua y pie que los crucigramas y laberintos. */
 window.HOJA_SITIO={logo:'logo-chromanom.png',marca:'icons/marca-agua.png',nombre:'ChromaNom',pie:'<span class="m">Chroma<b>Nom</b> · Nomenclatura orgánica</span><span>© 2026 Harvey Barcenas Morales · Licencia CC BY-NC 4.0</span>'};
+
+/* Historias del «Detective químico» (extras.js): [grupo, título, partes].
+   Cada parte es texto fijo o [versión correcta, versión con error]; cada hoja
+   elige al azar cuáles puntos dudosos salen con error. Basadas en lo que
+   explican las páginas del sitio. */
+window.DETECTIVE=[
+[
+"carbono",
+"Un sábado repasando el carbono",
+[
+"Valentina abrió su cuaderno para repasar el átomo de carbono antes del examen.",
+[
+"El carbono tiene 4 electrones de valencia y por eso forma siempre 4 enlaces covalentes.",
+"El carbono tiene 6 electrones de valencia y por eso forma siempre 6 enlaces covalentes."
+],
+"Su profesor le mostró la mina de un lápiz y un anillo con un diamante.",
+[
+"Le explicó que los dos son carbono puro y que lo único que cambia es cómo están unidos sus átomos.",
+"Le explicó que el grafito y el diamante son elementos diferentes, aunque los dos contengan carbono."
+],
+"Luego armaron con bolitas una molécula de metano, CH₄.",
+[
+"El carbono del metano es sp³ y sus cuatro enlaces apuntan a las esquinas de un tetraedro, a 109,5°.",
+"El carbono del metano es sp² y sus cuatro enlaces quedan en un mismo plano, a 120°."
+],
+"Después construyeron el eteno, CH₂=CH₂.",
+[
+"Valentina contó 5 enlaces σ y 1 enlace π.",
+"Valentina contó 4 enlaces σ y 2 enlaces π."
+],
+[
+"También notó que el doble enlace no puede girar, porque se rompería el enlace π.",
+"También notó que el doble enlace gira libremente, igual que un enlace sencillo."
+],
+"Para terminar, dibujaron el butano en zigzag.",
+[
+"Valentina explicó que el zigzag no crea ramas: el butano sigue siendo una cadena lineal.",
+"Valentina explicó que el zigzag convierte al butano en una cadena ramificada."
+],
+[
+"Al clasificar sus carbonos encontró dos primarios en los extremos y dos secundarios en el medio.",
+"Al clasificar sus carbonos encontró cuatro secundarios, porque todos tienen hidrógenos."
+],
+[
+"En el ciclohexano, en cambio, todos los carbonos resultaron secundarios.",
+"En el ciclohexano, en cambio, todos los carbonos resultaron primarios."
+],
+"Valentina cerró el cuaderno, lista para el examen."
+]
+],
+[
+"nombres",
+"Las etiquetas borrosas",
+[
+"En la bodega del laboratorio, Andrés encontró varios frascos con las etiquetas borrosas.",
+[
+"En el primero leyó «etanol», un alcohol: su grupo −OH le da el sufijo -ol.",
+"En el primero leyó «etanol», un aldehído: su grupo −OH le da el sufijo -ol."
+],
+[
+"El segundo decía «propanona», la acetona del quitaesmalte, que es una cetona.",
+"El segundo decía «propanona», la acetona del quitaesmalte, que es un aldehído."
+],
+[
+"El tercero era un alqueno, porque su nombre terminaba en -eno.",
+"El tercero era un alquino, porque su nombre terminaba en -eno."
+],
+[
+"En otro frasco estaba el metilbenceno, que también se llama tolueno.",
+"En otro frasco estaba el metilbenceno, que también se llama fenol."
+],
+"Andrés quiso escribir el nombre de un benceno con dos grupos metilo.",
+[
+"Como estaban en las posiciones 1 y 4, escribió «1,4-dimetilbenceno», es decir, para-dimetilbenceno.",
+"Como estaban en las posiciones 1 y 4, escribió «1,4-dimetilbenceno», es decir, orto-dimetilbenceno."
+],
+[
+"Para un benceno con un cloro y un metilo escribió «1-cloro-2-metilbenceno», en orden alfabético.",
+"Para un benceno con un cloro y un metilo escribió «1-metil-2-clorobenceno», en orden alfabético."
+],
+[
+"El último frasco olía a vinagre: era ácido etanoico, con el grupo −COOH.",
+"El último frasco olía a vinagre: era ácido etanoico, con el grupo −CHO."
+],
+[
+"Andrés recordó que un éster se nombra «___oato de ___ilo», como el etanoato de etilo.",
+"Andrés recordó que un éster se nombra «___ilo de ___oato», como el etilo de etanoato."
+],
+"Con las etiquetas nuevas, la bodega quedó en orden."
+]
+],
+[
+"fase3",
+"La clase de isómeros y reacciones",
+[
+"La profesora Marta escribió C₄H₁₀ en el tablero y pidió dibujar todos sus isómeros.",
+[
+"Sara dibujó el butano y el 2-metilpropano: dos isómeros de cadena.",
+"Sara dibujó el butano y el 2-metilpropano: dos isómeros de función."
+],
+[
+"Tomás dibujó el butano en forma de U y dijo que era el mismo compuesto, solo que doblado.",
+"Tomás dibujó el butano en forma de U y dijo que era un tercer isómero."
+],
+"Luego pasaron al but-2-eno.",
+[
+"En el cis-but-2-eno, los dos CH₃ quedan del mismo lado del doble enlace.",
+"En el cis-but-2-eno, los dos CH₃ quedan en lados opuestos del doble enlace."
+],
+[
+"El propeno, en cambio, no tiene isomería cis/trans, porque su primer carbono tiene dos H.",
+"El propeno también tiene isomería cis/trans, igual que el but-2-eno."
+],
+[
+"El C2 del butan-2-ol es quiral, porque está unido a cuatro grupos distintos.",
+"El C2 del butan-2-ol no es quiral, porque está unido a dos carbonos."
+],
+"Después la profesora mostró tres reacciones.",
+[
+"Eteno con bromo formó 1,2-dibromoetano: fue una adición.",
+"Eteno con bromo formó 1,2-dibromoetano: fue una sustitución."
+],
+[
+"El etanol, calentado con ácido, formó eteno y agua: fue una eliminación.",
+"El etanol, calentado con ácido, formó eteno y agua: fue una adición."
+],
+[
+"El ácido etanoico con etanol formó etanoato de etilo y agua: fue una condensación.",
+"El ácido etanoico con etanol formó etanoato de etilo y agua: fue una hidrólisis."
+],
+"Todos salieron sabiendo reconocer el tipo de cada reacción."
+]
+],
+[
+"fase4a",
+"La química del almuerzo",
+[
+"Mientras cocinaba, Daniel se puso a pensar en la química de su almuerzo.",
+[
+"Cuando el agua hierve no se rompen los enlaces O−H: solo se vencen las atracciones entre moléculas.",
+"Cuando el agua hierve se rompen los enlaces O−H y quedan átomos sueltos de hidrógeno y oxígeno."
+],
+[
+"Las moléculas de agua se atraen con puentes de hidrógeno, la más fuerte de las tres fuerzas intermoleculares.",
+"Las moléculas de agua se atraen con fuerzas de London, la más fuerte de las tres fuerzas intermoleculares."
+],
+"Al lado, el aceite de la sartén no se mezclaba con el agua.",
+[
+"El aceite es apolar y el agua es polar: semejante disuelve a semejante.",
+"El aceite es polar y el agua es apolar: por eso no se mezclan."
+],
+[
+"El alcohol antiséptico, en cambio, se evapora rápido de la piel porque sus moléculas se atraen menos.",
+"El alcohol antiséptico, en cambio, se evapora rápido de la piel porque sus moléculas se atraen más."
+],
+"Luego picó una zanahoria.",
+[
+"Su color naranja viene del β-caroteno, que tiene 11 dobles enlaces conjugados.",
+"Su color naranja viene del β-caroteno, que tiene un solo doble enlace."
+],
+[
+"Con más dobles enlaces conjugados, la molécula absorbe luz de mayor longitud de onda.",
+"Con más dobles enlaces conjugados, la molécula absorbe luz de menor longitud de onda."
+],
+[
+"Las hojas de cilantro se ven verdes porque la clorofila absorbe la luz roja y la azul.",
+"Las hojas de cilantro se ven verdes porque la clorofila absorbe la luz verde."
+],
+[
+"Al lavar la sartén, el jabón metió sus colas apolares en la grasa y dejó las cabezas iónicas hacia el agua.",
+"Al lavar la sartén, el jabón metió sus cabezas iónicas en la grasa y dejó las colas hacia el agua."
+],
+"Daniel terminó de almorzar convencido de que la cocina es un laboratorio."
+]
+],
+[
+"bio",
+"Un desayuno con biomoléculas",
+[
+"Laura desayunó arepa, huevo frito, aguacate y jugo de naranja.",
+[
+"El almidón de la arepa está hecho de α-glucosas, y por eso lo podemos digerir.",
+"El almidón de la arepa está hecho de β-glucosas, igual que la celulosa del papel."
+],
+[
+"La glucosa es una aldohexosa: tiene un aldehído y seis carbonos.",
+"La glucosa es una cetopentosa: tiene una cetona y cinco carbonos."
+],
+[
+"La fructosa de la naranja es una cetosa y forma un anillo de cinco átomos.",
+"La fructosa de la naranja es una aldosa y forma un anillo de seis átomos."
+],
+[
+"El aguacate tiene ácido oleico, cuyo doble enlace cis dobla la cadena y lo hace líquido.",
+"El aguacate tiene ácido oleico, cuya cadena recta lo hace sólido a temperatura ambiente."
+],
+[
+"Al freír el huevo, la clara se puso blanca: la proteína perdió su forma, pero sus enlaces peptídicos no se rompieron.",
+"Al freír el huevo, la clara se puso blanca porque se rompieron todos sus enlaces peptídicos."
+],
+"En la tarde, Laura estudió cómo sus células fabrican proteínas.",
+[
+"Primero el ADN se copia en ARN mensajero, que usa uracilo en lugar de timina.",
+"Primero el ADN se copia en ARN mensajero, que usa timina, igual que el ADN."
+],
+[
+"Luego el ribosoma lee el ARNm de tres en tres bases, empezando por el codón AUG.",
+"Luego el ribosoma lee el ARNm de tres en tres bases, empezando por el codón UAA."
+],
+[
+"Cada ARNt trae un aminoácido y tiene un anticodón complementario del codón.",
+"Cada ARNt trae un aminoácido y tiene un anticodón idéntico al codón."
+],
+"Laura entendió que su desayuno terminaría siendo parte de su cuerpo."
+]
+],
+[
+"amb",
+"La salida a la refinería",
+[
+"El curso visitó la refinería de Barrancabermeja.",
+[
+"En la torre de destilación, las cadenas largas se condensan abajo y los gases salen por arriba.",
+"En la torre de destilación, las cadenas largas salen por arriba y los gases se quedan abajo."
+],
+[
+"El guía explicó que al quemar gasolina sale más masa de CO₂ que de gasolina, porque cada carbono se une al oxígeno del aire.",
+"El guía explicó que al quemar gasolina sale menos masa de CO₂ que de gasolina, porque una parte se pierde como humo."
+],
+[
+"También advirtió que el monóxido de carbono no tiene olor ni color.",
+"También advirtió que el monóxido de carbono se reconoce fácil por su olor fuerte."
+],
+"De regreso, vieron una bolsa plástica flotando en el río.",
+[
+"Una bolsa de polietileno casi no se degrada: los microorganismos casi no tienen enzimas para cortar cadenas de C−C.",
+"Una bolsa de polietileno se degrada en pocas semanas, porque los microorganismos cortan fácil sus enlaces C−C."
+],
+[
+"Con el tiempo se parte en microplásticos de menos de 5 mm.",
+"Con el tiempo se parte en microplásticos de más de 5 mm."
+],
+[
+"En clase recordaron que los CFC destruyen el ozono y que el Protocolo de Montreal los prohibió.",
+"En clase recordaron que los CFC protegen el ozono y que el Protocolo de Montreal los promovió."
+],
+[
+"El DDT se acumula en la grasa de los animales porque es apolar.",
+"El DDT se elimina fácil con la orina porque es muy polar."
+],
+[
+"Por último compararon el biodiésel de palma, que se obtiene por transesterificación, con el diésel del petróleo.",
+"Por último compararon el biodiésel de palma, que se obtiene por fermentación, con el diésel del petróleo."
+],
+"El curso concluyó que «renovable» no significa «sin impacto»."
+]
+]
+];

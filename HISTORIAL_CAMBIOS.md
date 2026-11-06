@@ -7,6 +7,79 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-06 (165) — Criptograma químico, mapa conceptual con huecos y detective químico
+
+### Contexto
+El docente propuso tres actividades nuevas para imprimir y para proyectar:
+criptogramas químicos, mapas conceptuales con huecos e historias con
+errores («El detective químico»). Se hicieron en ChromaNom y en IonNom con
+las reglas de siempre:
+- hoja carta con logo, Nombre / Curso / Fecha, marca de agua y pie;
+- versiones con clave;
+- modo clase con pantalla completa.
+
+### Cambios
+- `extras.js` (nuevo; el mismo archivo va en IonNom como
+  `assets/extras.js`): tres pestañas nuevas en el generador docente.
+  - **🔐 Criptograma químico.**
+    - La frase es una palabra clave con su definición, tomada del banco del
+      Ahorcado (por ejemplo, «TETRAVALENCIA: propiedad del carbono de
+      formar siempre 4 enlaces»).
+    - Cada letra se cifra con el número atómico Z de un elemento cuyo
+      símbolo empieza por esa letra (C → 6, 17 o 20). El estudiante usa la
+      tabla periódica: Z → símbolo → primera letra.
+    - Opciones: elementos de Z 1–36, 1–56 o 1–92; la misma letra siempre
+      con el mismo número, o variable; de 1 a 5 frases por hoja.
+    - Las letras sin elemento en el rango (E, D, J, Q, Ñ…) se dan de
+      regalo. La clave trae la lista de los Z usados.
+    - Modo clase: una casilla por letra, «Comprobar», «Revelar una letra»,
+      «Revelar la frase» y la siguiente frase.
+  - **🗺️ Mapa conceptual con huecos.**
+    - Usa el esquema de cada tema (el mismo de la lectura de las guías: 19
+      temas), dibujado con sus conectores («se organiza en», «incluye»).
+    - Se pueden dejar en blanco solo las ramas, solo los ejemplos, la
+      mitad al azar o casi todos, con o sin banco de palabras.
+    - Modo clase: se toca un concepto del banco y luego el recuadro «?».
+      Si es correcto se llena; si no, el recuadro tiembla.
+  - **🕵️ El detective químico.**
+    - 6 historias nuevas en `ahorcado-datos.js` (`window.DETECTIVE`), una
+      por grupo de fases. Cada una tiene 8 puntos dudosos escritos en
+      versión correcta y con error.
+    - Cada versión elige al azar cuáles salen con error (3 a 6), así que
+      dos versiones de la misma historia tienen errores distintos.
+    - Hoja: la historia y líneas numeradas para corregir. Clave: los
+      errores resaltados, con su corrección.
+    - Modo clase: se toca cada frase que parezca tener un error. Si lo
+      tiene, se tacha y aparece la corrección en verde. Si está bien, se
+      cuenta como toque en una frase correcta.
+  - Común a las tres: marcador de dos equipos, pantalla completa con
+    respaldo para iPhone y giro a horizontal, y ajuste automático de la
+    hoja a la carta.
+- `docente.html`, `actividades.css`, `sw.js` (caché `chromanom-v66`): las
+  pestañas nuevas y sus estilos.
+
+### Verificación (Playwright, en ChromaNom e IonNom)
+- Las hojas y claves de las tres actividades tienen logo, marca de agua y
+  pie; las de estudiante tienen además la línea de Nombre, Curso y Fecha.
+  Ninguna se pasa de la carta.
+- Los 19 mapas de ChromaNom y los 23 de IonNom caben, incluso con casi
+  todos los recuadros en blanco.
+- Modo clase:
+  - el criptograma distinguió las letras bien y mal puestas;
+  - el mapa aceptó un concepto puesto en su recuadro;
+  - el detective contó un toque en una frase correcta y reveló las 5
+    correcciones.
+- La impresión de 2 versiones con clave da 4 hojas.
+- Celular en horizontal: las tres quedan en pantalla completa y piden el
+  giro. El criptograma y el mapa caben sin desplazarse; la historia larga
+  se lee desplazándose.
+- No hubo errores en consola.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-06 (164) — Marca del sitio en todas las hojas y pantalla completa en todo lo que se proyecta
 
 ### Contexto

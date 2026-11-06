@@ -435,6 +435,9 @@ body.sin-eval .solo-eval{display:none}
     <button type="button" role="tab" id="tab-crucigramas" data-tab="crucigramas" data-panel="cz" aria-controls="panel-cz" aria-selected="false" tabindex="-1">🔤 Crucigramas</button>
     <button type="button" role="tab" id="tab-ahorcado" data-tab="ahorcado" data-panel="ah" aria-controls="panel-ah" aria-selected="false" tabindex="-1">🪢 Ahorcado</button>
     <button type="button" role="tab" id="tab-sopa" data-tab="sopa" data-panel="sp" aria-controls="panel-sp" aria-selected="false" tabindex="-1">🔍 Sopa de letras</button>
+    <button type="button" role="tab" id="tab-cripto" data-tab="criptograma" data-panel="cr" aria-controls="panel-cr" aria-selected="false" tabindex="-1">🔐 Criptograma</button>
+    <button type="button" role="tab" id="tab-mapa" data-tab="mapa" data-panel="mp" aria-controls="panel-mp" aria-selected="false" tabindex="-1">🗺️ Mapa conceptual</button>
+    <button type="button" role="tab" id="tab-detective" data-tab="detective" data-panel="dt" aria-controls="panel-dt" aria-selected="false" tabindex="-1">🕵️ Detective químico</button>
     <button type="button" role="tab" id="tab-ori" data-tab="orientaciones" data-panel="ori" aria-controls="panel-ori" aria-selected="false" tabindex="-1">📖 Orientaciones</button>
   </div>
 
@@ -755,6 +758,10 @@ body.sin-eval .solo-eval{display:none}
     <div id="sp-play" style="display:none"></div>
    </div>
   </section>
+  <!-- ══════════════ CRIPTOGRAMA, MAPA CONCEPTUAL Y DETECTIVE (extras.js) ══════════════ -->
+  <section class="panel act-panel" id="panel-cr" role="tabpanel" aria-labelledby="tab-cripto" hidden><div id="cr-app" class="ex-app" data-estilo="cn"></div></section>
+  <section class="panel act-panel" id="panel-mp" role="tabpanel" aria-labelledby="tab-mapa" hidden><div id="mp-app" class="ex-app" data-estilo="cn"></div></section>
+  <section class="panel act-panel" id="panel-dt" role="tabpanel" aria-labelledby="tab-detective" hidden><div id="dt-app" class="ex-app" data-estilo="cn"></div></section>
   <section class="panel" id="panel-ori" role="tabpanel" aria-labelledby="tab-ori" hidden>
     <div class="aviso" style="margin:0 0 16px">Esta sección resume cómo usar ChromaNom en clase. Puede imprimirla completa o solo la secuencia y las rúbricas.</div>
   <div class="doc-tools">
@@ -1072,7 +1079,7 @@ window.addEventListener('afterprint',function(){
 });
 </script>
 <script>
-// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas | Ahorcado | Sopa |
+// Pestañas: Guías | Talleres | Evaluaciones | Laberintos | Crucigramas | Ahorcado | Sopa | Criptograma | Mapa | Detective |
 // Orientaciones. Las tres primeras comparten el formulario de #panel-gen:
 // cada una fija el tipo de documento (radio «tipodoc», ahora oculto) y deja
 // ver solo los apartados que le aplican, renumerados. Se recuerda la última
@@ -1080,7 +1087,7 @@ window.addEventListener('afterprint',function(){
 (function(){
   var btns=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
   var IDS=btns.map(function(b){return b.dataset.tab;});
-  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',sp:'panel-sp',ori:'panel-ori'};
+  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',sp:'panel-sp',cr:'panel-cr',mp:'panel-mp',dt:'panel-dt',ori:'panel-ori'};
   var oriIds=['metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
   function aplicarTipo(tipo){
     var r=document.querySelector('input[name=tipodoc][value="'+tipo+'"]');
@@ -1098,7 +1105,7 @@ window.addEventListener('afterprint',function(){
     var b=btns.filter(function(x){return x.dataset.tab===id;})[0]||btns[0],panel=b.dataset.panel;
     btns.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
     Object.keys(PANELES).forEach(function(k){var el=document.getElementById(PANELES[k]);if(el)el.hidden=k!==panel;});
-    ['gen','lab','cz','ah','sp','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
+    ['gen','lab','cz','ah','sp','cr','mp','dt','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
     document.getElementById(PANELES[panel]).setAttribute('aria-labelledby',b.id);
     if(b.dataset.tipo)aplicarTipo(b.dataset.tipo);
     if(!sinGuardar){try{localStorage.setItem('chromanom-docente-tab',b.dataset.tab);}catch(e){}
@@ -1108,6 +1115,7 @@ window.addEventListener('afterprint',function(){
     if(panel==='cz'&&window.CRUCIGRAMA)window.CRUCIGRAMA.render();
     if(panel==='ah'&&window.AHORCADO)window.AHORCADO.render();
     if(panel==='sp'&&window.SOPA)window.SOPA.render();
+    if(['cr','mp','dt'].indexOf(panel)>=0&&window.EXTRAS)window.EXTRAS.render(panel);
   }
   btns.forEach(function(b,i){
     b.addEventListener('click',function(){mostrar(b.dataset.tab);});
@@ -1130,6 +1138,7 @@ window.addEventListener('afterprint',function(){
 <div id="cz-print-root" aria-hidden="true"></div>
 <div id="ah-print-root" aria-hidden="true"></div>
 <div id="sp-print-root" aria-hidden="true"></div>
+<div id="ex-print-root" aria-hidden="true"></div>
 <script src="fx-libro.js"></script>
 <script src="docente-datos.js"></script>
 <script src="docente-app.js"></script>
@@ -1141,6 +1150,7 @@ window.addEventListener('afterprint',function(){
 <script src="ahorcado-datos.js"></script>
 <script src="ahorcado.js"></script>
 <script src="sopa.js"></script>
+<script src="extras.js"></script>
 <script src="pwa-install.js"></script>
 <script src="text-zoom.js"></script>
 <script src="site-ui.js"></script>
