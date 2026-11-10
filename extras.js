@@ -1,12 +1,19 @@
 /* ═════════════════════════════════════════════════════════════════════
    extras.js — pestañas «Criptograma», «Mapa conceptual» y «Detective
    químico» del generador docente (docente.html).
-   Mismo archivo en ChromaNom (extras.js) e IonNom (assets/extras.js).
+   Mismo archivo en ChromaNom (extras.js), IonNom (assets/extras.js) y BioNom (extras.js).
    Datos:
    - Criptograma: BANCO_AHORCADO (palabra + pista 1 = la frase a descifrar).
    - Mapa conceptual: DOCENTE_DATOS.TEMAS[].info.esquema (raíz, ramas, ítems).
    - Detective: window.DETECTIVE (historias con puntos dudosos escritos en
      versión correcta y con error; cada hoja elige cuáles salen con error).
+   Ajuste por sitio (window.EXTRAS_SITIO, opcional; sin él todo queda
+   como en química):
+   - area / adj: «química» / «químico» o, en BioNom, «biología» / «biológico»
+     (textos del detective y del criptograma).
+   - cripto: 'z' (cada letra = número atómico de un elemento) o 'codon'
+     (BioNom: cada letra = un codón del ARN; se descifra con la tabla del
+     código genético y el código de una letra de los aminoácidos).
    Todas: hoja carta con la marca del sitio (logo, Nombre / Curso / Fecha,
    marca de agua, pie), versiones con semilla y clave, y modo clase con
    pantalla completa (respaldo .pseudo-fs en iPhone; gira a horizontal).
@@ -19,6 +26,8 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 const MAX_VERSIONES = 40;
 const MARCA = window.HOJA_SITIO || {logo:'', marca:'', nombre:'', pie:''};
 const GRUPOS = window.AHORCADO_GRUPOS || [];
+const SITIO = Object.assign({area:'química', adj:'químico', cripto:'z'}, window.EXTRAS_SITIO || {});
+const GEN = SITIO.cripto === 'codon';
 
 /* ───── utilidades comunes ───── */
 function fnv(str){ let h = 0x811c9dc5; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
@@ -188,21 +197,39 @@ function enlazarComunes(A, box){
    estudiante pasa de Z al símbolo con la tabla periódica y toma la
    primera letra. Las letras sin elemento en el rango elegido se regalan. */
 const SIMBOLOS = ['','H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr','Rb','Sr','Y','Zr','Nb','Mo','Tc','Ru','Rh','Pd','Ag','Cd','In','Sn','Sb','Te','I','Xe','Cs','Ba','La','Ce','Pr','Nd','Pm','Sm','Eu','Gd','Tb','Dy','Ho','Er','Tm','Yb','Lu','Hf','Ta','W','Re','Os','Ir','Pt','Au','Hg','Tl','Pb','Bi','Po','At','Rn','Fr','Ra','Ac','Th','Pa','U'];
-function candidatos(maxZ){ const m = {}; for(let z=1; z<=maxZ; z++){ const l = SIMBOLOS[z][0]; (m[l] = m[l] || []).push(z); } return m; }
+// Código genético (ARN mensajero) → código de una letra del aminoácido.
+const CODONES = {A:['GCU','GCC','GCA','GCG'],C:['UGU','UGC'],D:['GAU','GAC'],E:['GAA','GAG'],F:['UUU','UUC'],G:['GGU','GGC','GGA','GGG'],H:['CAU','CAC'],
+  I:['AUU','AUC','AUA'],K:['AAA','AAG'],L:['UUA','UUG','CUU','CUC','CUA','CUG'],M:['AUG'],N:['AAU','AAC'],P:['CCU','CCC','CCA','CCG'],Q:['CAA','CAG'],
+  R:['CGU','CGC','CGA','CGG','AGA','AGG'],S:['UCU','UCC','UCA','UCG','AGU','AGC'],T:['ACU','ACC','ACA','ACG'],V:['GUU','GUC','GUA','GUG'],W:['UGG'],Y:['UAU','UAC']};
+const AA3 = {A:'Ala',C:'Cys',D:'Asp',E:'Glu',F:'Phe',G:'Gly',H:'His',I:'Ile',K:'Lys',L:'Leu',M:'Met',N:'Asn',P:'Pro',Q:'Gln',R:'Arg',S:'Ser',T:'Thr',V:'Val',W:'Trp',Y:'Tyr'};
+const DE_CODON = {}; Object.keys(CODONES).forEach(l => CODONES[l].forEach(c => { DE_CODON[c] = l; }));
+// Tabla compacta del código genético para la hoja (codón → letra).
+function tablaCodones(){
+  const B = ['U','C','A','G'];
+  return '<table class="cr-tgen"><caption>Código genético (ARN mensajero) · codón → aminoácido (código de una letra)</caption><tbody>'
+    + B.map(a => '<tr>' + B.map(b => '<td>' + B.map(c => { const k = a + b + c, l = DE_CODON[k]; return '<span>' + k + ' ' + (l ? '<b>' + l + '</b> ' + AA3[l] : '<b>■</b> Fin') + '</span>'; }).join('') + '</td>').join('') + '</tr>').join('')
+    + '</tbody></table>';
+}
+function candidatos(maxZ){
+  if(GEN){ const m = {}; Object.keys(CODONES).forEach(l => { m[l] = CODONES[l].slice(); }); return m; } const m = {}; for(let z=1; z<=maxZ; z++){ const l = SIMBOLOS[z][0]; (m[l] = m[l] || []).push(z); } return m; }
+const INS_GEN = 'Cada grupo de tres letras es un <b>codón</b> del ARN mensajero. Búscalo en la tabla del código genético y escribe en la casilla el <b>código de una letra</b> de su aminoácido (por ejemplo, UGU → cisteína → C). Las letras con punto ya están dadas.';
 const CR = {
-  id:'cr', icono:'🔐', nombre:'Criptograma químico', t1:'Frases y clave', tituloDef:'Criptograma químico',
-  intro:'Una definición del sitio cifrada con la tabla periódica: cada letra es el número atómico Z de un elemento cuyo símbolo empieza por esa letra. El estudiante descifra con la tabla periódica.',
-  ayuda:'Ejemplo: «CARBONO» puede salir como 20 · 13 · 37 · 5 · 8 · 7 · 8 (Ca · Al · Rb · B · O · N · O). Las letras sin elemento en el rango elegido se dan de regalo. Cada versión trae otras frases y otros números.',
+  id:'cr', icono:'🔐', nombre: GEN ? 'Criptograma genético' : 'Criptograma químico', t1:'Frases y clave', tituloDef: GEN ? 'Criptograma genético' : 'Criptograma químico',
+  intro: GEN ? 'Una definición del sitio cifrada con el código genético: cada letra es un codón del ARN mensajero que codifica el aminoácido cuyo código de una letra es esa letra. El estudiante descifra con la tabla del código genético.'
+    : 'Una definición del sitio cifrada con la tabla periódica: cada letra es el número atómico Z de un elemento cuyo símbolo empieza por esa letra. El estudiante descifra con la tabla periódica.',
+  ayuda: GEN ? 'Ejemplo: «CELULA» puede salir como UGU · GAA · CUG · ? · UUA · GCU (C de cisteína, E de glutamato, L de leucina…). Las letras que no son código de ningún aminoácido (B, J, O, U, X, Z, Ñ) se dan de regalo. Cada versión trae otras frases y otros codones.'
+    : 'Ejemplo: «CARBONO» puede salir como 20 · 13 · 37 · 5 · 8 · 7 · 8 (Ca · Al · Rb · B · O · N · O). Las letras sin elemento en el rango elegido se dan de regalo. Cada versión trae otras frases y otros números.',
   seccion1:E => '<div class="' + E.chks + '" id="cr-grupos">' + GRUPOS.map((g, i) => E.chk(g[0], g[1], i < 2)).join('') + '</div>',
   campos:E => [
     E.campo('Frases por hoja (1 a 5)', '<input type="number" inputmode="numeric" id="cr-n" value="4" min="1" max="5">'),
-    E.campo('Elementos usados', '<select id="cr-z"><option value="36">Z del 1 al 36 (más fácil)</option><option value="56" selected>Z del 1 al 56</option><option value="92">Z del 1 al 92 (más difícil)</option></select>'),
-    E.campo('Misma letra, mismo número', '<select id="cr-fijo"><option value="si">Sí: cada letra siempre con el mismo Z</option><option value="no" selected>No: puede variar (más reto)</option></select>')],
+    GEN ? E.campo('Tabla del código genético', '<select id="cr-z"><option value="1" selected>Sí, impresa en la hoja</option><option value="0">No (el estudiante usa la de su cuaderno)</option></select>')
+      : E.campo('Elementos usados', '<select id="cr-z"><option value="36">Z del 1 al 36 (más fácil)</option><option value="56" selected>Z del 1 al 56</option><option value="92">Z del 1 al 92 (más difícil)</option></select>'),
+    E.campo(GEN ? 'Misma letra, mismo codón' : 'Misma letra, mismo número', '<select id="cr-fijo"><option value="si">Sí: cada letra siempre con el mismo ' + (GEN ? 'codón' : 'Z') + '</option><option value="no" selected>No: puede variar (más reto)</option></select>')],
   cfg(){
     const gr = $$('#cr-grupos input:checked').map(i => i.value), temas = GRUPOS.filter(g => gr.includes(g[0])).reduce((a, g) => a.concat(g[2]), []);
     const pool = (window.BANCO_AHORCADO || []).filter(w => temas.includes(w[1]) && !/___/.test(w[2]) && (w[0] + w[2]).length <= 95);
     $$('#cr-grupos label').forEach(l => { const g = GRUPOS.find(x => x[0] === l.querySelector('input').value); const s = l.querySelector('small'); if(s) s.textContent = (window.BANCO_AHORCADO || []).filter(w => g[2].includes(w[1]) && !/___/.test(w[2])).length + ' frases'; });
-    return {pool, n: Math.max(1, Math.min(5, parseInt($('#cr-n').value, 10) || 4)), maxZ: +$('#cr-z').value || 56, fijo: $('#cr-fijo').value === 'si',
+    return {pool, n: Math.max(1, Math.min(5, parseInt($('#cr-n').value, 10) || 4)), maxZ: GEN ? 0 : (+$('#cr-z').value || 56), tabla: GEN && $('#cr-z').value !== '0', fijo: $('#cr-fijo').value === 'si',
       vacio: !gr.length ? 'Marca al menos un grupo de temas.' : (!pool.length ? 'No hay frases para esos temas.' : ''), info: pool.length + ' frases disponibles para esos temas.'};
   },
   frases(c, v){
@@ -228,17 +255,18 @@ const CR = {
     return '<div class="cr-frase">' + pal.map(p => '<span class="cr-pal">' + p.map(c => {
       if(c.signo) return '<span class="cr-c cr-signo"><b>' + esc(c.t) + '</b></span>';
       if(c.regalo) return '<span class="cr-c cr-regalo"><i>·</i><b>' + esc(c.t) + '</b></span>';
-      if(modo === 'play') return '<span class="cr-c"><i>' + c.z + '</i><input maxlength="1" data-l="' + c.l + '" autocomplete="off" autocapitalize="characters" aria-label="Letra del número ' + c.z + '"></span>';
-      return '<span class="cr-c"><i>' + c.z + '</i><b>' + (clave ? esc(c.t) : '') + '</b></span>';
+      if(modo === 'play') return '<span class="cr-c' + (GEN ? ' cr-cod' : '') + '"><i>' + c.z + '</i><input maxlength="1" data-l="' + c.l + '" autocomplete="off" autocapitalize="characters" aria-label="Letra del ' + (GEN ? 'codón ' : 'número ') + c.z + '"></span>';
+      return '<span class="cr-c' + (GEN ? ' cr-cod' : '') + '"><i>' + c.z + '</i><b>' + (clave ? esc(c.t) : '') + '</b></span>';
     }).join('') + '</span>').join('') + '</div>';
   },
   hoja(c, v, clave, etiqueta){
     const fs = this.frases(c, v);
-    const usados = [...new Set(fs.flatMap(f => f.celdas.filter(x => x.z).map(x => x.z)))].sort((a, b) => a - b);
-    const ins = 'Cada número es el número atómico (Z) de un elemento. Busca su símbolo en la tabla periódica y escribe la <b>primera letra</b> del símbolo en la casilla (por ejemplo, 17 → Cl → C). Las letras con punto ya están dadas.';
+    const usados = [...new Set(fs.flatMap(f => f.celdas.filter(x => x.z).map(x => x.z)))].sort((a, b) => GEN ? (a < b ? -1 : a > b ? 1 : 0) : a - b);
+    const ins = GEN ? INS_GEN : 'Cada número es el número atómico (Z) de un elemento. Busca su símbolo en la tabla periódica y escribe la <b>primera letra</b> del símbolo en la casilla (por ejemplo, 17 → Cl → C). Las letras con punto ya están dadas.';
     return '<div class="ex-hoja cr-hoja">' + encabezadoHoja(c.titulo + (clave ? ' · Clave' : ''), clave ? '' : ins, etiqueta, !clave)
       + '<div class="ex-cuerpo">' + fs.map((f, i) => '<div class="cr-bloque"><div class="cr-n">' + (i+1) + '</div>' + this.dibujar(f, clave) + '</div>').join('')
-      + (clave ? '<p class="cr-zs"><b>Números usados:</b> ' + usados.map(z => z + ' ' + SIMBOLOS[z]).join(' · ') + '</p>' : '') + '</div>' + pieHoja() + '</div>';
+      + (clave ? '<p class="cr-zs"><b>' + (GEN ? 'Codones usados' : 'Números usados') + ':</b> ' + usados.map(z => z + ' ' + (GEN ? DE_CODON[z] + ' (' + AA3[DE_CODON[z]] + ')' : SIMBOLOS[z])).join(' · ') + '</p>' : '')
+      + (!clave && c.tabla ? tablaCodones() : '') + '</div>' + pieHoja() + '</div>';
   },
   nuevoJuego(c){ return {c, fs: this.frases(c, c.v), i: 0}; },
   pintar(box){
@@ -246,7 +274,7 @@ const CR = {
     const antes = {}; box.querySelectorAll('.cr-c input').forEach((x, k) => { antes[k] = x.value; });
     const mismo = box.dataset.frase === String(J.i);
     box.innerHTML = '<div class="exc"><div class="exc-bar"><b>Frase ' + (J.i+1) + ' de ' + J.fs.length + '</b>' + equipos(J) + btnPC(box) + '</div>'
-      + '<p class="exc-ayuda">Número atómico → símbolo en la tabla periódica → primera letra. Escribe una letra en cada casilla.</p>'
+      + '<p class="exc-ayuda">' + (GEN ? 'Codón → aminoácido en la tabla del código genético → su código de una letra. Escribe una letra en cada casilla.' : 'Número atómico → símbolo en la tabla periódica → primera letra. Escribe una letra en cada casilla.') + '</p>'
       + this.dibujar(f, false, 'play')
       + '<div class="exc-msg" id="cr-msg"></div>'
       + '<div class="exc-acc"><button type="button" class="exc-btn exc-ok" data-a="comp">✔ Comprobar</button><button type="button" class="exc-btn" data-a="pista">💡 Revelar una letra</button><button type="button" class="exc-btn" data-a="rev">👁️ Revelar la frase</button>'
@@ -348,7 +376,7 @@ const MP = {
    Historias con puntos dudosos escritos en versión correcta y con error
    (window.DETECTIVE). Cada versión elige al azar cuáles salen con error. */
 const DT = {
-  id:'dt', icono:'🕵️', nombre:'El detective químico', t1:'Historia', tituloDef:'El detective químico',
+  id:'dt', icono:'🕵️', nombre:'El detective ' + SITIO.adj, t1:'Historia', tituloDef:'El detective ' + SITIO.adj,
   intro:'Una historia de un día en el laboratorio o de un fenómeno cotidiano con errores conceptuales camuflados. El estudiante los subraya y los corrige.',
   ayuda:'Cada historia tiene 8 puntos dudosos, repartidos en párrafos de un solo tema (máximo 3 por párrafo). Nivel guiado: las 8 frases sospechosas van numeradas y el estudiante decide si cada una está bien o mal. Sin pistas: solo se dice el total. En el modo clase, «🔍 Revelar pista» señala con una lupa un párrafo donde aún hay errores. Con «🎲 Todas las de…», cada versión trae otra historia del grupo; y cada vez que una historia se repite, salen otros errores (no se repite la misma combinación).',
   historias(){ return window.DETECTIVE || []; },
@@ -394,8 +422,8 @@ const DT = {
   },
   instr(nivel, nErr){
     return nivel === 'guiado'
-      ? 'Las frases <u>subrayadas y numeradas</u> son las sospechosas: <b>' + nErr + '</b> de ellas tienen un error de química. Decide si cada una está bien (✔) o tiene un error (✘). Si tiene error, escríbela bien y explica por qué.'
-      : 'La historia tiene <b>' + nErr + ' errores</b> de química. Subraya cada error y completa la tabla: la versión correcta y por qué estaba mal.';
+      ? 'Las frases <u>subrayadas y numeradas</u> son las sospechosas: <b>' + nErr + '</b> de ellas tienen un error de ' + SITIO.area + '. Decide si cada una está bien (✔) o tiene un error (✘). Si tiene error, escríbela bien y explica por qué.'
+      : 'La historia tiene <b>' + nErr + ' errores</b> de ' + SITIO.area + '. Subraya cada error y completa la tabla: la versión correcta y por qué estaba mal.';
   },
   texto(P, nivel, clave){
     return '<div class="dt-texto">' + this.parrafos(P).map(par => '<p class="dt-par">' + par.map(i => {
@@ -425,7 +453,7 @@ const DT = {
   nuevoJuego(c){ return {c, partes: this.armar(c, c.v), marcadas: new Set(), fallos: 0, pistas: new Set(), ultimaPista: -1}; },
   pintar(box){
     const J = this.juego, P = J.partes, nivel = J.c.nivel, tot = P.filter(p => p.err).length, hall = P.filter((p, i) => p.err && J.marcadas.has(i)).length;
-    const ayuda = (nivel === 'guiado' ? 'Las frases sospechosas están subrayadas. Toquen las que tienen un error de química.' : 'Toquen cada frase que tenga un error de química.')
+    const ayuda = (nivel === 'guiado' ? 'Las frases sospechosas están subrayadas. Toquen las que tienen un error de ' + SITIO.area + '.' : 'Toquen cada frase que tenga un error de ' + SITIO.area + '.')
       + ' Si se atascan, «🔍 Revelar pista» señala con una lupa un párrafo donde aún hay errores.';
     const pars = this.parrafos(P), faltan = par => par.filter(i => P[i].err && !J.marcadas.has(i)).length;
     const frase = i => {
@@ -470,7 +498,7 @@ const DT = {
    historias salen del grupo de cada tema (ACT_TEMA_GRUPO o
    AHORCADO_GRUPOS); con la misma semilla base, la versión v toma otra
    ventana del mazo, otra historia y otros recuadros en blanco. */
-const TIPOS_TALLER = [['sp', '🔎 Sopa de letras', '8 palabras con pista'], ['ah', '🪢 Ahorcado con pistas', '4 palabras'], ['cr', '🔐 Criptograma químico', '2 frases'], ['mp', '🗺️ Mapa conceptual con huecos', '1 mapa'], ['dt', '🕵️ Detective químico', '1 historia con 4 errores']];
+const TIPOS_TALLER = [['sp', '🔎 Sopa de letras', '8 palabras con pista'], ['ah', '🔠 Ahorcado con pistas', '4 palabras'], ['cr', GEN ? '🔐 Criptograma genético' : '🔐 Criptograma químico', '2 frases'], ['mp', '🗺️ Mapa conceptual con huecos', '1 mapa'], ['dt', '🕵️ Detective ' + SITIO.adj, '1 historia con 4 errores']];
 const largo = s => sinTilde(String(s).toUpperCase()).replace(/[^A-ZÑ]/g, '').length;
 function gruposDeTemas(ids){
   const m = window.ACT_TEMA_GRUPO || {}, out = [];
@@ -495,8 +523,9 @@ window.ACT_TALLER = {
     if(id === 'cr'){
       const c = {pool: poolCR(P), n: 2, maxZ: 56, fijo: false, seed: seed};
       if(!c.pool.length) return null;
-      return {titulo: 'Criptograma químico', instr: 'Cada número es el número atómico (Z) de un elemento. Busca su símbolo en la tabla periódica y escribe la primera letra del símbolo en la casilla (17 → Cl → C). Las letras con punto ya están dadas.',
-        bloques: CR.frases(c, v).map((f, i) => '<div class="act-tall ex-hoja" style="--f:.8"><div class="cr-bloque"><div class="cr-n">' + (i+1) + '</div>' + CR.dibujar(f, false) + '</div></div>')};
+      return {titulo: GEN ? 'Criptograma genético' : 'Criptograma químico', instr: GEN ? INS_GEN.replace(/<[^>]+>/g, '') : 'Cada número es el número atómico (Z) de un elemento. Busca su símbolo en la tabla periódica y escribe la primera letra del símbolo en la casilla (17 → Cl → C). Las letras con punto ya están dadas.',
+        bloques: CR.frases(c, v).map((f, i) => '<div class="act-tall ex-hoja" style="--f:.8"><div class="cr-bloque"><div class="cr-n">' + (i+1) + '</div>' + CR.dibujar(f, false) + '</div></div>')
+          .concat(GEN ? ['<div class="act-tall ex-hoja" style="--f:.8">' + tablaCodones() + '</div>'] : [])};
     }
     if(id === 'mp'){
       const ts = mapasTaller(ids); if(!ts.length) return null;
@@ -508,7 +537,7 @@ window.ACT_TALLER = {
       const hs = historiasTaller(ids); if(!hs.length) return null;
       const P = DT.armar({hs, n: 4, seed: seed}, v), nErr = P.filter(p => p.err).length;
       // historia (en párrafos) y tabla de respuestas en un mismo bloque
-      return {titulo: 'El detective químico', instr: DT.instr('experto', nErr).replace(/<[^>]+>/g, ''),
+      return {titulo: 'El detective ' + SITIO.adj, instr: DT.instr('experto', nErr).replace(/<[^>]+>/g, ''),
         bloques: ['<div class="act-tall ex-hoja" style="--f:.8"><h3 class="dt-tit">' + esc(P.h[1]) + '</h3>' + DT.texto(P, 'experto', false) + DT.respuestas(P, 'experto') + '</div>']};
     }
     return null;

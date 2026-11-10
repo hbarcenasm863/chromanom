@@ -29,7 +29,7 @@ var R = {};
 function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function sinTilde(s){ return String(s).replace(/ñ/g,'\u0001').replace(/Ñ/g,'\u0002').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\u0001/g,'ñ').replace(/\u0002/g,'Ñ'); }
 function normal(s){ return sinTilde(String(s).replace(/<[^>]*>/g,'')).toLowerCase(); }
-function barajar(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function barajar(a, rnd){ rnd = rnd || Math.random; a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(rnd() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 // Palabra para casillas: mayúsculas, sin tildes, sin espacios ni signos (la Ñ se conserva).
 function letras(s){ return sinTilde(String(s).toUpperCase()).replace(/[^A-ZÑ]/g,''); }
 function mmss(s){ s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2); }
@@ -276,17 +276,18 @@ function resumenHTML(titulo, filas){
 /* ═════════════════ CRUCIGRAMA ═════════════════ */
 // Arma un crucigrama con hasta n palabras conectadas. Prueba varias
 // selecciones al azar y se queda con la que ubica más palabras.
-function armarCruci(cands, n){
+function armarCruci(cands, n, rnd){
   var mejor = null;
   for(var intento = 0; intento < 40; intento++){
-    var lista = barajar(cands);
-    var r = ubicar(lista, n);
+    var lista = barajar(cands, rnd);
+    var r = ubicar(lista, n, rnd);
     if(!mejor || r.length > mejor.length) mejor = r;
     if(mejor.length >= n) break;
   }
   return mejor;
 }
-function ubicar(lista, n){
+function ubicar(lista, n, rnd){
+  rnd = rnd || Math.random;
   var G = {}, usadas = [];
   function k(r, c){ return r + ',' + c; }
   function celda(r, c){ return G[k(r, c)]; }
@@ -336,7 +337,7 @@ function ubicar(lista, n){
       var rs = [o.r, o.r + (o.dir === 'V' ? p.length - 1 : 0)], cs = [o.c, o.c + (o.dir === 'H' ? p.length - 1 : 0)];
       usadas.forEach(function(u){ rs.push(u.r, u.r + (u.dir === 'V' ? u.item.pal.length - 1 : 0)); cs.push(u.c, u.c + (u.dir === 'H' ? u.item.pal.length - 1 : 0)); });
       var alto = Math.max.apply(null, rs) - Math.min.apply(null, rs) + 1, ancho = Math.max.apply(null, cs) - Math.min.apply(null, cs) + 1;
-      o.s = o.cr * 30 - Math.max(alto, ancho) * 2 - Math.abs(alto - ancho) + Math.random() * 6;
+      o.s = o.cr * 30 - Math.max(alto, ancho) * 2 - Math.abs(alto - ancho) + rnd() * 6;
     });
     ops.sort(function(a, b){ return b.s - a.s; });
     poner(it, ops[0].r, ops[0].c, ops[0].dir);
@@ -344,10 +345,26 @@ function ubicar(lista, n){
   return usadas;
 }
 
+/* Crucigrama con semilla para las hojas impresas del panel docente:
+   cands = [{pal, txt, pistas}], rnd = función de azar con semilla.
+   Devuelve {F, C, palabras:[{item, r, c, dir:'H'|'V', num}]}, ya numerado. */
+R.armarCrucigrama = function(cands, n, rnd){
+  var pal = armarCruci(cands, n, rnd);
+  var minR = Infinity, minC = Infinity, maxR = -Infinity, maxC = -Infinity;
+  pal.forEach(function(w){ var L = w.item.pal.length;
+    minR = Math.min(minR, w.r); minC = Math.min(minC, w.c);
+    maxR = Math.max(maxR, w.r + (w.dir === 'V' ? L - 1 : 0)); maxC = Math.max(maxC, w.c + (w.dir === 'H' ? L - 1 : 0)); });
+  pal.forEach(function(w){ w.r -= minR; w.c -= minC; });
+  var inicios = pal.map(function(w){ return w.r * 1000 + w.c; }).filter(function(v, i, a){ return a.indexOf(v) === i; }).sort(function(a, b){ return a - b; });
+  pal.forEach(function(w){ w.num = inicios.indexOf(w.r * 1000 + w.c) + 1; });
+  pal.sort(function(a, b){ return a.num - b.num || (a.dir === 'H' ? -1 : 1); });
+  return {F: maxR - minR + 1, C: maxC - minC + 1, palabras: pal};
+};
+
 R.crucigrama = function(el, banco, o){
   estilos(); o = o || {};
   var N = o.n || 10;
-  var cands = R.elegir(banco, 0, {grupos: o.grupos, max: 15, min: 4});
+  var cands = o.fijas ? o.fijas.slice() : R.elegir(banco, 0, {grupos: o.grupos, max: 15, min: 4});
   var pref = cands.slice(0, Math.max(N * 3, 24));
   var pal = armarCruci(pref, N);
   if(pal.length < N) pal = armarCruci(cands, N);
@@ -738,7 +755,7 @@ R.ahorcado = function(el, item, o){
   var base = function(ch){ return ch === 'Ñ' ? 'Ñ' : sinTilde(ch); };
   var B = pal.split('').map(base).join('');
   var seg = o.segundos || R.tiempo('ahorcado', [item]);
-  el.innerHTML = '<div class="rt-box rt-ah"><div class="rt-cab"><b>🪢 Ahorcado</b><span class="rt-reloj"></span></div><div class="rt-ah-cuerpo"></div><div class="rt-msg" aria-live="polite"></div><div class="rt-final"></div></div>';
+  el.innerHTML = '<div class="rt-box rt-ah"><div class="rt-cab"><b>🔠 Ahorcado</b><span class="rt-reloj"></span></div><div class="rt-ah-cuerpo"></div><div class="rt-msg" aria-live="polite"></div><div class="rt-final"></div></div>';
   var box = el.querySelector('.rt-ah'), cuerpo = box.querySelector('.rt-ah-cuerpo'), msg = box.querySelector('.rt-msg');
   function dibujo(f){
     var p = ['<circle cx="100" cy="44" r="12"/>','<line x1="100" y1="56" x2="100" y2="90"/>','<line x1="100" y1="64" x2="84" y2="80"/>','<line x1="100" y1="64" x2="116" y2="80"/>','<line x1="100" y1="90" x2="88" y2="112"/>','<line x1="100" y1="90" x2="112" y2="112"/>'];

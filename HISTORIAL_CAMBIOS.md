@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-10 (172) — `extras.js` y `retos.js` compartidos con BioNom
+
+### Contexto
+El docente pidió completar el panel docente de BioNom con las mismas actividades de ChromaNom e IonNom. Para eso BioNom usa el mismo `extras.js` (criptograma, mapa conceptual y detective) y `retos.js`.
+
+### Cambios
+- **`extras.js`** (igual en los tres sitios): acepta un ajuste opcional, `window.EXTRAS_SITIO`, que BioNom usa para hablar de biología y cifrar el criptograma con codones del código genético. **En ChromaNom no cambia nada**, porque no define ese ajuste. En las actividades del taller, el ícono del ahorcado pasó de 🪢 a 🔠, que se ve en todos los Windows.
+- **`retos.js`:** nueva función `RETOS.armarCrucigrama` (crucigrama con semilla, para las hojas de BioNom). El ícono del ahorcado del módulo pasó a 🔠.
+- **Versión:** `?v=73` y `chromanom-v73`.
+
+### Verificación
+Con Playwright: el panel docente sigue mostrando «Criptograma químico» y «El detective químico» sin errores, y los niveles de crucigrama, sopa y ahorcado del Juego funcionan.
+
+### Pendiente
+Ninguno.
+
+---
+
 ## 2026-11-10 (171) — Juego: 3 intentos con pistas progresivas; crucigrama y sopa de letras
 
 ### Contexto
