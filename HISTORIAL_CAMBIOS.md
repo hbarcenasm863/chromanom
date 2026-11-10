@@ -7,6 +7,47 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-10 (171) — Juego: 3 intentos con pistas progresivas; crucigrama y sopa de letras
+
+### Contexto
+El docente pidió revisar que en todos los juegos el estudiante tenga siempre 3 oportunidades para responder, con pistas progresivas que no regalen la respuesta, y que al final se explique completa la respuesta correcta. También pidió integrar como secciones del juego crucigramas de 10 palabras, sopas de letras de 10 palabras y ahorcado, con un tiempo proporcional a la dificultad de cada uno. Aclaró que cada sitio es único: los bancos de preguntas y de palabras no se comparten, solo las reglas.
+
+### Cambios
+- **`retos.js`** (archivo nuevo; el mismo en ChromaNom, IonNom —en `assets/`— y BioNom). Solo tiene **reglas**, ningún banco: cada sitio le pasa su propio banco de preguntas y su propio `BANCO_AHORCADO`.
+  - **3 intentos con pistas progresivas:**
+    - 1.er error → la opción elegida se descarta y aparece la pista 1, la más general (qué revisar).
+    - 2.º error → pista 2, más concreta.
+    - 3.er error → se cierra la pregunta con la explicación completa y la lista de intentos equivocados.
+    - Las pistas salen de las pistas propias de la pregunta o de su explicación, con las palabras de la respuesta tapadas (▢▢▢). Se verifica que ninguna pista contenga la respuesta.
+    - Puntos: 100 % al primer intento, 50 % al segundo y 20 % al tercero.
+    - Excepción: si la pregunta solo tiene 2 o 3 opciones, hay un intento menos que opciones (en verdadero/falso, un solo intento), porque si no, la última oportunidad sería regalada.
+  - **Crucigrama de 10 palabras:** palabras conectadas, sin palabras «accidentales» en los cruces. Hay 3 comprobaciones: después de cada una, las palabras que siguen mal reciben la pista siguiente, y en la segunda se regala su primera letra. Puntos por palabra: 10, 5 y 2. Al final, cada palabra con su explicación (sus 3 pistas).
+  - **Sopa de letras de 10 palabras:** el estudiante no ve la palabra sino su pista y el número de letras. Puede pedir hasta 3 pistas por palabra; con la tercera parpadea la primera letra en la cuadrícula. Se marca arrastrando o tocando la primera y la última letra. Cada palabra aparece una sola vez.
+  - **Tiempo proporcional a la dificultad**, con su propio reloj:
+    - Crucigrama: 22 s por palabra + 4 s por letra (entre 4 y 15 min; con 10 palabras, unos 9 a 11 min).
+    - Sopa: 20 s por palabra + 2 s por letra + el tamaño de la cuadrícula (unos 6 a 8 min).
+    - Ahorcado: 45 s + 10 s por letra distinta + 2 s por letra (entre 1:15 y 4 min por palabra).
+  - Los paneles del crucigrama y de la sopa tienen fondo claro propio, así que se leen bien también en modo oscuro.
+- **`juego.html`:**
+  - Opción múltiple, reacciones, «Identificar parte» y «Arrastrar y completar» ahora tienen 3 intentos (antes, uno solo). «Escribir nombre» y el Constructor ya los tenían.
+    - En nomenclatura, la pista 1 empieza con el diagnóstico automático del error («Revisa la numeración…», «tomaste una cadena más corta…»), que dice qué revisar sin dar el nombre.
+    - En los «Retos de nomenclatura», la explicación escrita para cada opción equivocada se deja solo para el final, porque casi daba la respuesta.
+    - En «Arrastrar», la pista 1 dice cuántos fragmentos están en su lugar; en la 2, los que están bien quedan fijos en verde.
+  - Nuevos niveles **🔤 Crucigrama** y **🔍 Sopa de letras** junto al Ahorcado, con las palabras de `ahorcado-datos.js`. Cada palabra cuenta como una pregunta en los resultados y en lo que se envía a la hoja del docente.
+  - El **Ahorcado** ya no tiene 3 minutos fijos: el tiempo depende de la palabra.
+- **Versión:** `?v=72` en todas las páginas y `chromanom-v72` en `sw.js` (con `retos.js` en la caché).
+
+### Verificación
+Con Playwright (celular de 390 px y computador):
+- Se fallaron a propósito preguntas de cada tipo: aparecen la pista 1 y la 2, ninguna dice la respuesta, y al tercer error sale la explicación completa.
+- Crucigrama y sopa se resolvieron completos (10 de 10) escribiendo y arrastrando, y también se probaron sin resolver: se pasa a resultados con 10 palabras.
+- Ninguna página tiene errores.
+
+### Pendiente
+Ningún paso manual: basta el push a `main` (no se tocó `chromanom-analytics.gs`).
+
+---
+
 ## 2026-11-06 (170) — Detective: la lupa ya no va fija en cada párrafo; botón «Revelar pista»
 
 ### Contexto

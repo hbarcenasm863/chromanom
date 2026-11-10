@@ -885,7 +885,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   html.juego-fs #area-ahorcado{scroll-margin-top:84px}
 }
 </style>
-<link rel="stylesheet" href="chromanom.css?v=71">
+<link rel="stylesheet" href="chromanom.css?v=72">
 </head>
 <body>
 <nav class="site-nav">
@@ -1053,10 +1053,18 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
         <div class="nivel-icon">🌎</div>
         <div><div class="nivel-name">Química orgánica y ambiente</div><div class="nivel-desc">Combustión y CO₂, plásticos, ozono, plaguicidas y biocombustibles</div><div class="nivel-count">23 preguntas · 20 por sesión</div></div>
       </button>
-      <div class="fase-titulo" style="--fc:#b45309"><span class="ft-n">Especial</span><span class="ft-t">Ahorcado</span><span class="ft-s">Palabras clave de las cuatro fases, con 3 pistas</span></div>
+      <div class="fase-titulo" style="--fc:#b45309"><span class="ft-n">Especial</span><span class="ft-t">Ahorcado, crucigrama y sopa de letras</span><span class="ft-s">Palabras clave de las cuatro fases, con pistas progresivas y tiempo según la dificultad</span></div>
       <button class="nivel-card ah" onclick="openLevelModal('ahorcado')">
         <div class="nivel-icon">🪢</div>
-        <div><div class="nivel-name">Ahorcado con 3 pistas</div><div class="nivel-desc">Adivina la palabra letra por letra; pide pistas si las necesitas</div><div class="nivel-count" id="stat-ah-count">20 palabras por sesión</div></div>
+        <div><div class="nivel-name">Ahorcado con 3 pistas</div><div class="nivel-desc">Adivina la palabra letra por letra; pide pistas si las necesitas</div><div class="nivel-count" id="stat-ah-count">20 palabras por sesión · tiempo según la palabra</div></div>
+      </button>
+      <button class="nivel-card ah" onclick="openLevelModal('crucigrama')">
+        <div class="nivel-icon">🔤</div>
+        <div><div class="nivel-name">Crucigrama</div><div class="nivel-desc">10 palabras clave con sus pistas; 3 comprobaciones, y cada una trae pistas nuevas</div><div class="nivel-count">10 palabras · unos 9 a 11 minutos</div></div>
+      </button>
+      <button class="nivel-card ah" onclick="openLevelModal('sopa')">
+        <div class="nivel-icon">🔍</div>
+        <div><div class="nivel-name">Sopa de letras</div><div class="nivel-desc">Lee la pista, piensa la palabra y búscala; hasta 3 pistas por palabra</div><div class="nivel-count">10 palabras · unos 6 a 8 minutos</div></div>
       </button>
     </div>
     <div class="portada-stats">
@@ -1224,10 +1232,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
-<script src="fundamentos.js?v=71"></script>
-<script src="temas-extra.js?v=71"></script>
-<script src="temas-11.js?v=71"></script>
-<script src="ahorcado-datos.js?v=71"></script>
+<script src="fundamentos.js?v=72"></script>
+<script src="temas-extra.js?v=72"></script>
+<script src="temas-11.js?v=72"></script>
+<script src="ahorcado-datos.js?v=72"></script>
+<script src="retos.js?v=72"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -2557,7 +2566,7 @@ let history=[];
 // startGame()/retryErrors() siempre reasignan este objeto (con 'rxnq'
 // incluido) antes de cargar cualquier pregunta — este valor inicial solo
 // existe para que la variable no quede undefined antes del primer juego.
-let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
+let typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0},crucigrama:{ok:0,tot:0},sopa:{ok:0,tot:0}};
 let writeAttempts=0;
 let currentLevel='completo';
 // true durante una ronda de "Repetir errores": showResults() no debe usar
@@ -2638,6 +2647,8 @@ const NIVEL_TOPICS={
   rxn_derivados:    ['rxn_derivados'],
 };
 const NIVEL_LABELS={
+  crucigrama:   '🔤 Crucigrama',
+  sopa:         '🔍 Sopa de letras',
   hidrocarburos:'Hidrocarburos',
   oxigenados:   'Compuestos Oxigenados',
   nitrogenados: 'Compuestos Nitrogenados',
@@ -3012,6 +3023,11 @@ function startGame(){
   } else if(currentLevel==='ahorcado'){
     pool=(window.BANCO_AHORCADO||[]).map(w=>({type:'ahorcado',topic:'ahorcado',palabra:w[0],grupo:w[1],pistas:w.slice(2,5),
       q:'Adivina la palabra: toca las letras o escríbelas con el teclado.',ans:w[0],expl:w[4]}));
+  } else if(currentLevel==='crucigrama'||currentLevel==='sopa'){
+    // Una sola «pregunta» con 10 palabras del banco del Ahorcado de ChromaNom
+    // (reglas en retos.js); cada palabra cuenta en los resultados.
+    pool=[{type:currentLevel,topic:currentLevel,ans:'',expl:'',
+      q:currentLevel==='crucigrama'?'Crucigrama de 10 palabras: lee las pistas y completa las casillas.':'Sopa de letras de 10 palabras: lee cada pista, piensa la palabra y búscala.'}];
   } else if(currentLevel==='constructor'){
     pool=QBANK.filter(q=>q.type==='build'&&CONSTRUCTOR_FAMILIAS.includes(q.topic));
   } else {
@@ -3023,7 +3039,7 @@ function startGame(){
   questions=shuffle(pool).slice(0,n);
   qIdx=0; score=0; history=[];
   streak=0; bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0},crucigrama:{ok:0,tot:0},sopa:{ok:0,tot:0}};
   writeAttempts=0;
   isRetryRound=false;
   _analyticsSent=false;
@@ -3213,6 +3229,21 @@ document.addEventListener('keydown',function(e){
   const t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;
   const k=(e.key||'').toUpperCase();if(/^[A-ZÑ]$/.test(k)){e.preventDefault();ahLetra(k);}
 });
+/* ── Crucigrama y sopa de letras (reglas comunes en retos.js) ──
+   Palabras del banco del Ahorcado de ChromaNom (ahorcado-datos.js). Cada
+   palabra cuenta como un acierto o un error en los resultados. */
+function iniciarMini(q){
+  const fn=q.type==='crucigrama'?RETOS.crucigrama:RETOS.sopa;
+  fn(document.getElementById('area-mini'),window.BANCO_AHORCADO,{n:10,onFin:function(r){
+    if(answered)return;
+    answered=true;stopTimer();
+    typeStats[q.type].tot+=r.resultados.length-1;
+    r.resultados.forEach(x=>{if(x.ok)typeStats[q.type].ok++;history.push({type:q.type,ok:x.ok,ans:x.item.txt,given:x.ok?x.item.txt:'',topic:q.type});});
+    score+=r.puntos;document.getElementById('gh-score').textContent=score;
+    bumpStreak(r.resultados.filter(x=>x.ok).length*2>=r.resultados.length);
+    const nxt=document.getElementById('q-next');if(nxt){nxt.textContent='Ver resultados →';nxt.classList.add('show');}
+  }});
+}
 function loadQuestion(){
   // Detiene cualquier cronómetro de la pregunta anterior antes de seguir. Sin
   // esto, si loadQuestion() se llama dos veces seguidas sin que la pregunta de
@@ -3225,6 +3256,7 @@ function loadQuestion(){
   if(qIdx>=questions.length){showResults();return;}
   answered=false;
   writeAttempts=0;
+  selIntento=1;selMalas=[];
   const q=questions[qIdx];
   typeStats[q.type].tot++;
 
@@ -3238,11 +3270,11 @@ function loadQuestion(){
   const area=document.getElementById('q-area');
   area.innerHTML='';
 
-  const typeBadge={ahorcado:'🪢 Ahorcado',mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura',rxnq:'⚗️ Reacción orgánica'};
-  const typeCls={ahorcado:'qt-ah',mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build',rxnq:'qt-rxnq'};
+  const typeBadge={crucigrama:'🔤 Crucigrama',sopa:'🔍 Sopa de letras',ahorcado:'🪢 Ahorcado',mc:'🎯 Opción múltiple',drag:'🧩 Arrastrar y completar',id:'🔍 Identificar parte',write:'✍️ Escribir nombre',build:'🏗️ Construir estructura',rxnq:'⚗️ Reacción orgánica'};
+  const typeCls={crucigrama:'qt-ah',sopa:'qt-ah',ahorcado:'qt-ah',mc:'qt-mc',drag:'qt-drag',id:'qt-id',write:'qt-write',build:'qt-build',rxnq:'qt-rxnq'};
 
   const isBuild=q.type==='build';
-  const isRxnQ=q.type==='rxnq'||q.type==='ahorcado';
+  const isRxnQ=q.type==='rxnq'||q.type==='ahorcado'||q.type==='crucigrama'||q.type==='sopa';
   // hasFm: solo true cuando MOLDES tiene un array (fórmula semidesarrollada lineal).
   // Los entries en formato ring ({chain,ring}) no generan toggle — la vista esqueletal
   // (M[mol]()) es la única representación visual correcta para moléculas cíclicas.
@@ -3273,8 +3305,9 @@ function loadQuestion(){
   else if(q.type==='build') html+=buildBuild(q);
   else if(q.type==='rxnq') html+=buildRxnQ(q);
   else if(q.type==='ahorcado') html+='<div id="area-ahorcado"></div>';
+  else if(q.type==='crucigrama'||q.type==='sopa') html+='<div id="area-mini"></div>';
 
-  html+=`<div class="feedback" id="feedback"></div>`;
+  html+=`<div id="pista-box"></div><div class="feedback" id="feedback"></div>`;
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
 
   area.innerHTML=html;
@@ -3282,6 +3315,7 @@ function loadQuestion(){
 
   if(q.type==='drag') initDrag(q);
   if(q.type==='ahorcado') iniciarAhorcado(q);
+  if(q.type==='crucigrama'||q.type==='sopa') iniciarMini(q);
   if(q.type==='write'){
     const inp=document.getElementById('write-inp');
     inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkWrite();});
@@ -3440,17 +3474,68 @@ function buildMC(q){
   const _txt=(FUND_TOPICS.includes(q.topic)||EXTRA_TOPICS.includes(q.topic))?' mc-texto':'';
   return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" data-ans="${String(o).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}" onclick="checkMC(this.dataset.ans,this)">${html[i]}</button>`).join('')}</div>`;
 }
+// ── 3 intentos con pistas progresivas (reglas comunes en retos.js) ──
+// Opción múltiple, reacciones, identificar parte y arrastrar: al fallar se
+// descarta la opción y aparece una pista (la 1 más general, la 2 más
+// concreta), sin decir la respuesta. Al 3.er error (o cuando ya solo
+// quedaría una opción) se cierra la pregunta con la explicación completa.
+// Puntos: 10 al primer intento, 5 al segundo, 2 al tercero.
+let selIntento=1, selMalas=[];
+const _PISTA_NOMBRE='Nombra por partes: ① sustituyentes (las ramas), ② cadena principal (met-, et-, prop-…), ③ insaturaciones (-an-, -en-, -in-) y ④ grupo funcional (la terminación).';
+const _PISTA_RXN='Mira primero qué grupo funcional tiene el reactivo y qué hace el reactivo de la flecha: ¿oxida, reduce, sustituye, adiciona o elimina?';
+function _maxIntentosQ(q){
+  if(q.type==='drag')return 3;
+  if(q.type==='id')return RETOS.maxIntentos(5-(Array.isArray(q.correct)?q.correct.length:1));
+  return RETOS.maxIntentos((q.opts||[]).length||4);
+}
+function _pistasQ(q){
+  if(!q._pistas){
+    let general;
+    if(q.type==='rxnq')general=_PISTA_RXN;
+    else if(q.type==='id'||q.type==='drag'||(q.type==='mc'&&colorizeName(String(q.ans||''))))general=_PISTA_NOMBRE;
+    const _partes={r:'Sustituyentes',c:'Cadena principal',i:'Insaturaciones',g:'Grupo funcional'};
+    const resp=q.type==='id'?[].concat(q.correct).map(c=>_partes[c]):[q.ans].concat(q.accepted||[]).filter(Boolean);
+    q._pistas=RETOS.pistas({resp,exp:q.expl,extra:[].concat(q.pistas||[]).filter(x=>typeof x==='string'),general});
+  }
+  return q._pistas;
+}
+// Devuelve true si aún quedan intentos: muestra la pista y la pregunta sigue abierta.
+function _reintentar(q,given,extra){
+  if(given!=null&&given!=='')selMalas.push(given);
+  const max=_maxIntentosQ(q);
+  if(selIntento>=max)return false;
+  const ps=_pistasQ(q);
+  const box=document.getElementById('pista-box');
+  if(box)box.innerHTML=RETOS.cajaPista(selIntento,max,ps[Math.min(selIntento,ps.length)-1],extra||'');
+  selIntento++;
+  return true;
+}
+function _ptsIntento(){return RETOS.puntos(selIntento,10);}
+function _notaIntentos(ok){
+  const box=document.getElementById('pista-box');if(box)box.innerHTML='';
+  const fb=document.getElementById('feedback');if(!fb||(ok&&selIntento===1))return;
+  fb.insertAdjacentHTML('beforeend',RETOS.cajaExplicacion({titulo:'🔁 Tus intentos',ok,intentos:selIntento,elegidas:selMalas.map(String)}));
+}
 function checkMC(ans,btn){
   if(answered)return;
-  answered=true; stopTimer();
   const q=questions[qIdx];
+  const ok=norm(ans)===norm(q.ans);
+  if(!ok){
+    // El diagnóstico automático dice QUÉ revisar sin dar la respuesta. La
+    // retroalimentación escrita por opción (optfb) explica la correcta, así
+    // que se guarda para la explicación final.
+    let diag='';try{diag=Array.isArray(q.optfb)?'':_diagnosticoError(ans,q.ans,q);}catch(e){}
+    if(_reintentar(q,ans,diag?'🔎 '+diag:'Esa opción no es.')){btn.classList.add('wrong');btn.disabled=true;return;}
+  }
+  answered=true; stopTimer();
   const allBtns=document.querySelectorAll('.mc-opt');
   allBtns.forEach(b=>{b.disabled=true; if(b.dataset.ans===q.ans)b.classList.add('correct');});
-  const ok=norm(ans)===norm(q.ans);
-  if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
+  const pts=_ptsIntento();
+  if(ok){btn.classList.add('correct');score+=pts;typeStats[q.type].ok++;}
   else{btn.classList.add('wrong');}
   bumpStreak(ok);
-  showFeedback(ok,q.expl,q.ans,undefined,ok?undefined:ans);
+  showFeedback(ok,q.expl,q.ans,ok?pts:undefined,ok?undefined:ans);
+  _notaIntentos(ok);
 
   history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic});
 }
@@ -3613,15 +3698,18 @@ function buildRxnQ(q){
 }
 function checkRxnQ(ans,btn){
   if(answered)return;
-  answered=true;stopTimer();
   const q=questions[qIdx];
+  const ok=norm(ans)===norm(q.ans);
+  if(!ok&&_reintentar(q,ans,'Ese no es el producto.')){btn.classList.add('wrong');btn.disabled=true;return;}
+  answered=true;stopTimer();
   const allBtns=document.querySelectorAll('.rxnq-opt');
   allBtns.forEach(b=>{b.disabled=true;if(b.dataset.ans===q.ans)b.classList.add('correct');});
-  const ok=norm(ans)===norm(q.ans);
-  if(ok){btn.classList.add('correct');score+=10;typeStats[q.type].ok++;}
+  const pts=_ptsIntento();
+  if(ok){btn.classList.add('correct');score+=pts;typeStats[q.type].ok++;}
   else btn.classList.add('wrong');
   bumpStreak(ok);
-  showFeedback(ok,q.expl,q.ans);
+  showFeedback(ok,q.expl,q.ans,ok?pts:undefined);
+  _notaIntentos(ok);
   history.push({type:q.type,ok,ans:q.ans,given:ans,topic:q.topic,rxn:q.rxn});
 }
 
@@ -3665,7 +3753,7 @@ function selectToken(btn){
 }
 
 function placeToken(slot){
-  if(answered||_dragJustEnded())return;
+  if(answered||_dragJustEnded()||slot.dataset.lock)return;
   if(!selectedToken){
     // If slot already has something, remove it back to bank
     const filled=slot.dataset.filled;
@@ -3708,7 +3796,7 @@ function placeToken(slot){
 }
 
 function removePlaced(slot){
-  if(answered)return;
+  if(answered||slot.dataset.lock)return;
   const idx=slot.dataset.filledIdx;
   const bankTok=document.getElementById('tok-'+idx);
   if(bankTok){bankTok.disabled=false;bankTok.style.opacity='1';bankTok.style.textDecoration='none';}
@@ -3811,8 +3899,22 @@ function _dragStart(e,tok){
 
 function checkDrag(){
   if(answered)return;
-  answered=true; stopTimer();
   const q=questions[qIdx];
+  // Intentos 1 y 2 fallidos: pista con cuántos fragmentos están bien; al
+  // segundo error los que están bien quedan fijos (en verde).
+  const _bien=q.slots.map(s=>{const sl=document.getElementById(s.id);return norm(sl.dataset.filled||'')===norm(s.correct);});
+  const _nb=_bien.filter(Boolean).length;
+  if(_nb<q.slots.length){
+    const _int=selIntento;
+    const _extra=_int===1?'Tienes '+_nb+' de '+q.slots.length+' fragmentos en su lugar.':'Los '+_nb+' fragmentos que estaban bien quedaron fijos (en verde); cambia los demás.';
+    if(_reintentar(q,null,_extra)){
+      if(_int===2)q.slots.forEach((s,i)=>{const sl=document.getElementById(s.id);
+        if(_bien[i]){sl.dataset.lock='1';sl.style.border='2px solid var(--ok)';sl.style.background='var(--okb)';}
+        else if(sl.dataset.filled)removePlaced(sl);});
+      return;
+    }
+  }
+  answered=true; stopTimer();
   let allOk=true;
   q.slots.forEach(s=>{
     const slot=document.getElementById(s.id);
@@ -3829,10 +3931,12 @@ function checkDrag(){
       slot.innerHTML+=`<div style="font-size:.65rem;color:var(--errt);margin-top:2px">→ correcto: <strong>${s.correct}</strong></div>`;
     }
   });
-  if(allOk){score+=10;typeStats[q.type].ok++;}
+  const _ptsD=_ptsIntento();
+  if(allOk){score+=_ptsD;typeStats[q.type].ok++;}
   bumpStreak(allOk);
   document.getElementById('drag-check').style.display='none';
-  showFeedback(allOk,q.expl,q.ans);
+  showFeedback(allOk,q.expl,q.ans,allOk?_ptsD:undefined);
+  _notaIntentos(allOk);
   updateNamePreviewColored(q);
   history.push({type:q.type,ok:allOk,ans:q.ans,given:'(colocar)',topic:q.topic});
 }
@@ -3875,11 +3979,13 @@ function buildID(q){
 
 function checkID(choice,btn){
   if(answered)return;
-  answered=true; stopTimer();
   const q=questions[qIdx];
   // correct puede ser string único o array de respuestas válidas (ej: benceno = ['c','g'])
   const correctArr=Array.isArray(q.correct)?q.correct:[q.correct];
   const ok=correctArr.includes(choice);
+  const _NOMP={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturaciones',g:'④ Grupo funcional'};
+  if(!ok&&_reintentar(q,_NOMP[choice]||choice,'El fragmento enmarcado no es «'+(_NOMP[choice]||choice)+'».')){btn.disabled=true;btn.style.opacity='.45';btn.style.textDecoration='line-through';return;}
+  answered=true; stopTimer();
   document.querySelectorAll('.id-btn').forEach(b=>b.disabled=true);
   btn.classList.add('active');
   // Revelar color del segmento destacado
@@ -3903,7 +4009,8 @@ function checkID(choice,btn){
     hl.style.background=bgMap[correctArr[0]];
     hl.style.border=`2px solid ${colorMap[correctArr[0]]}`;
   }
-  if(ok){score+=10;typeStats[q.type].ok++;}
+  const _ptsID=_ptsIntento();
+  if(ok){score+=_ptsID;typeStats[q.type].ok++;}
   else{
     btn.style.opacity='.5';
     // Marcar respuestas correctas si el alumno erró
@@ -3915,7 +4022,8 @@ function checkID(choice,btn){
   bumpStreak(ok);
   const _PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturaciones',g:'④ Grupo funcional'};
   const ansLabel=`«${q.highlight.text}» → `+correctArr.map(c=>_PARTE[c]).join(' / ');
-  showFeedback(ok,q.expl,'');
+  showFeedback(ok,q.expl,'',ok?_ptsID:undefined);
+  _notaIntentos(ok);
   history.push({type:q.type,ok,ans:ansLabel,given:_PARTE[choice]||choice,topic:q.topic});
 }
 
@@ -3995,7 +4103,15 @@ function checkWrite(){
 // estudiantes reportaban "muy poco tiempo" en ese modo específico.
 function startTimer(){
   const q=questions[qIdx];
-  timeMax=(q&&q.type==='build')?90:(q&&q.type==='ahorcado')?180:60;
+  // Crucigrama y sopa de letras traen su propio reloj (retos.js), con un
+  // tiempo proporcional a la cantidad de palabras y de letras.
+  if(q&&(q.type==='crucigrama'||q.type==='sopa')){
+    const t=document.getElementById('timer-text');if(t)t.textContent='⏱';
+    const f=document.getElementById('timer-fg');if(f)f.style.strokeDashoffset=0;
+    return;
+  }
+  // Ahorcado: el tiempo crece con las letras distintas y el largo de la palabra (retos.js).
+  timeMax=(q&&q.type==='build')?90:(q&&q.type==='ahorcado')?RETOS.tiempo('ahorcado',[{pal:RETOS.letras(q.palabra)}]):60;
   timeLeft=timeMax;
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
@@ -7099,7 +7215,8 @@ function showResults(){
   // nada, así que ya no hace falta la confirmación de salida.
   gameActive=false;
   showScreen('s-resumen');
-  const total=questions.length;
+  // Crucigrama y sopa son una sola «pregunta» con 10 palabras: se cuenta cada palabra.
+  const total=Math.max(history.length,questions.length);
   const ok=history.filter(h=>h.ok).length;
   const err=history.filter(h=>!h.ok&&!h.timeout).length;
   const tout=history.filter(h=>h.timeout).length;
@@ -7149,8 +7266,8 @@ function showResults(){
   document.getElementById('r-time').textContent=tout;
 
   // By type
-  const typeNames={ahorcado:'Ahorcado',mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
-  const typeCls={ahorcado:'rxnq',mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
+  const typeNames={crucigrama:'Crucigrama',sopa:'Sopa de letras',ahorcado:'Ahorcado',mc:'Opción múltiple',drag:'Arrastrar',id:'Identificar parte',write:'Escribir nombre',build:'Constructor',rxnq:'Reacción'};
+  const typeCls={crucigrama:'rxnq',sopa:'rxnq',ahorcado:'rxnq',mc:'mc',drag:'drag',id:'id',write:'write',build:'build',rxnq:'rxnq'};
   let rbHtml='';
   Object.entries(typeStats).forEach(([t,st])=>{
     if(st.tot===0)return;
@@ -7247,7 +7364,7 @@ function retryErrors(){
   if(errPool.length===0)return;
   questions=shuffle(errPool).slice(0,Math.min(errPool.length,20));
   qIdx=0;score=0;history=[];streak=0;bestStreak=0;
-  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0}};
+  typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0},crucigrama:{ok:0,tot:0},sopa:{ok:0,tot:0}};
   isRetryRound=true;
   // Nueva sesión propia para la ronda de repaso: si se reutilizara _sessionId
   // de la partida anterior, sendAnalytics() la ignoraría (_analyticsSent ya
@@ -7747,10 +7864,10 @@ function confirmExitGame(){
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="pwa-install.js?v=71"></script>
-<script src="text-zoom.js?v=71"></script>
-<script src="fx-libro.js?v=71"></script>
-<script src="site-ui.js?v=71"></script>
+<script src="pwa-install.js?v=72"></script>
+<script src="text-zoom.js?v=72"></script>
+<script src="fx-libro.js?v=72"></script>
+<script src="site-ui.js?v=72"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
