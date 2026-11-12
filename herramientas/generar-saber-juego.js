@@ -31,7 +31,7 @@ const out=[];let omitidas=0;
 for(const k in c.DOCENTE_DATOS.SABER)c.DOCENTE_DATOS.SABER[k].forEach(q=>{
   const t=[q.ctx,q.q].concat(q.o).join(' ');
   if(q.f||q.gen||q.fig||PAREN.test(t)||!TEMA[k]){omitidas++;return;}
-  out.push({t:TEMA[k](t),c:SI.competencia(q),af:SI.afirmacion(q).cod,ctx:lim(q.ctx),q:lim(q.q),o:q.o.map(lim),tabla:q.tabla||undefined,graf:q.graf||undefined});
+  out.push({t:TEMA[k](t),c:SI.competencia(q),af:SI.afirmacion(q).cod,ctx:lim(q.ctx),q:lim(q.q),o:q.o.map(lim),tabla:q.tabla||undefined,exp:q.exp?lim(q.exp):undefined,graf:q.graf||undefined});
 });
 const txt='/* GENERADO por herramientas/generar-saber-juego.js: no editar a mano.\n   Preguntas tipo Saber 11 de ChromaNom para el Juego ('+out.length+'). */\nwindow.SABER_JUEGO='+JSON.stringify(out)+';\n';
 fs.writeFileSync('saber-juego.js',txt);

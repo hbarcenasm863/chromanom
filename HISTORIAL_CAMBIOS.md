@@ -7,6 +7,21 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (178) — Explicaciones propias en las preguntas con datos
+
+### Contexto
+El docente pidió dejar de usar la explicación general en las preguntas tipo Saber del juego y escribir explicaciones propias.
+
+### Cambios
+- **`docente-datos.js`:** las 10 preguntas con tabla o gráfica tienen ahora su propia explicación (campo `exp`): lee los datos, hace la cuenta y explica por qué se descarta cada idea equivocada.
+- **`herramientas/generar-saber-juego.js` y `juego.html`:** el juego usa la explicación propia cuando existe y la general solo cuando no hay otra.
+- **Versión:** `?v=79` y `chromanom-v79`.
+
+### Pendiente
+Las demás preguntas tipo Saber (unas 270 del juego) siguen con la explicación general: se irán escribiendo por tema.
+
+---
+
 ## 2026-11-13 (177) — Preguntas de indagación con tablas y gráficas
 
 ### Contexto
