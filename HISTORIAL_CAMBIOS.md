@@ -7,6 +7,25 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-12 (175) — Más indagación y competencias bien marcadas
+
+### Contexto
+El docente pidió continuar con lo que había quedado pendiente de la revisión con el modelo basado en evidencias del Icfes: subir la proporción de preguntas de **indagación** (la competencia con más preguntas en la prueba Saber 11 y la más débil en los tres sitios) y, en IonNom, darle **contexto** a las preguntas tipo Saber que no lo tenían.
+
+### Cambios
+- **`docente-datos.js`:** 38 preguntas nuevas de indagación, para que **cada tema tenga 8** (antes entre 3 y 6). Piden analizar datos (densidades, solubilidades, puntos de ebullición, rendimientos de nitración, pH), diseñar experimentos con variables controladas, evaluar predicciones y reconocer cómo se construyó un conocimiento (Kekulé, Markovnikov, Wöhler, Chevreul, Pauling). Opciones del mismo largo y forma, y fórmulas sin paréntesis.
+- **Etiquetas de competencia revisadas:** 12 preguntas estaban mal marcadas. Tres marcadas como indagación pedían un dato o un nombre, y nueve marcadas como uso pedían explicar «por qué». Se corrigieron.
+- **Resultado:** indagación pasa de 12 % (sesión 173) a **27 %** de las 350 preguntas tipo Saber; uso 48 %, explicación 26 %.
+- **Versión:** `?v=76` y `chromanom-v76`.
+
+### Verificación
+Con Playwright: evaluaciones con la matriz de competencias; el panel docente y el juego cargan sin errores.
+
+### Pendiente
+Ninguno de esta revisión.
+
+---
+
 ## 2026-11-12 (174) — Doble columna sin huecos y distractores al estilo del Icfes
 
 ### Contexto
