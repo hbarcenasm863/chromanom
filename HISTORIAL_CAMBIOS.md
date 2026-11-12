@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-12 (174) — Doble columna sin huecos y distractores al estilo del Icfes
+
+### Contexto
+El docente pidió dos cosas: (1) que las evaluaciones impresas no dejen columnas en blanco y aprovechen la doble columna aunque algunas preguntas sean largas por sus tablas, figuras o contexto; y (2) revisar los bancos de preguntas tipo Saber y los del juego con el modelo basado en evidencias del Icfes, inspirado en el cuadernillo de 2026, y hacer los ajustes necesarios.
+
+### Cambios
+- **`saber-icfes.js` (el mismo archivo en los tres sitios): nuevo acomodador de doble columna** (`colocar`). Antes las preguntas iban en columnas CSS «balanceadas» (ChromaNom, BioNom) o en filas de a dos (IonNom), y una pregunta larga dejaba la otra columna vacía. Ahora:
+  - hay dos columnas reales que se llenan en orden: primero la izquierda hasta abajo y luego la derecha;
+  - si una pregunta no cabe en el hueco que queda, se adelanta una de las siguientes (hasta 6 más allá) que sí quepa, y al final se **renumeran** todas en el orden en que quedaron;
+  - la clave, la matriz de competencias y la hoja de respuestas usan ese mismo orden final (verificado: el número de cada pregunta coincide en examen, clave y matriz);
+  - una pregunta con figura que no cabe por poco reduce su figura (hasta el 60 %);
+  - una pregunta muy alta (tabla ancha o figura grande) se prueba a todo el ancho, donde ocupa menos alto;
+  - al terminar las preguntas, las dos columnas quedan parejas, y si sobra una sola pregunta va a todo el ancho;
+  - las tablas del cuadernillo se ajustan al ancho de la columna;
+  - la matriz de competencias se parte en tablas de 8 filas para que no se salga de la hoja.
+- **`docente-app.js`:** la evaluación usa el acomodador y se renumera; la matriz de cada versión se arma con el orden final.
+- **Revisión de los bancos con el modelo del Icfes.** El defecto más grave que se encontró fue que en muchas preguntas la opción correcta era la más larga y detallada, y las incorrectas eran cortas y obviamente falsas («No pasa nada», «Producen nieve»). Así el estudiante acierta por descarte sin usar la competencia. Las preguntas del Icfes tienen opciones del mismo largo y estructura, y cada distractor representa un error típico de razonamiento. Se reescribieron **los distractores de 595 preguntas** (no se tocó la correcta ni el enunciado) para que sean del mismo largo, tengan la misma forma («Sí, porque…/No, porque…», «Porque…») y sean errores plausibles:
+
+| | Saber: correcta delatada por su largo (antes → ahora) | Juego (antes → ahora) |
+|---|---|---|
+| BioNom | 242 → 0 | 94 → 0 |
+| ChromaNom | 96 → 0 | 53 → 0 |
+| IonNom | 63 → 0 (más 6 que vienen del juego) | 41 → 0 |
+
+  Se midió con la regla: la correcta es la más larga, mide más de 1,6 veces el promedio de las otras y les saca más de 15 caracteres. El cambio se aplicó directamente en los archivos de datos, buscando cada pregunta por su contexto y su enunciado.
+- **`docente-datos.js`** (96 preguntas tipo Saber) y **`juego.html`** (53 preguntas del juego). En «Cazar errores» del juego, la opción «No eligió la cadena más larga (solo contó la línea recta del dibujo)» se acortó a «No eligió la cadena más larga de la molécula» en todas las preguntas (texto y respuesta codificada), porque la aclaración entre paréntesis la delataba. Los distractores nuevos respetan la regla de fórmulas sin paréntesis.
+- **Versión:** `?v=75` y `chromanom-v75`.
+
+### Verificación
+Con Playwright: evaluaciones de «Alcoholes · Aldehídos y cetonas · Ácidos» con 14 y 16 preguntas: las hojas quedan llenas, sin columnas en blanco, y la numeración del examen coincide con la matriz. El juego y el panel docente cargan sin errores.
+
+### Pendiente
+- La indagación sigue en 19 % de las preguntas tipo Saber (en la prueba real es cerca del 38 %).
+- Cuando todas las preguntas que siguen son largas, al final de alguna hoja puede quedar el recuadro de borrador: no hay una pregunta corta que adelantar.
+
+---
+
 ## 2026-11-12 (173) — Preguntas oficiales del Icfes y modelo basado en evidencias en las evaluaciones
 
 ### Contexto
