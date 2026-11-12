@@ -153,6 +153,20 @@ function creditoHTML(q){
 }
 /* Matriz de la evaluación para el docente: competencia, afirmación y
    componente de cada pregunta (sin respuestas). nIni: número de la primera. */
+/* La misma matriz partida en tablas de «porTabla» filas (cada una con su
+   encabezado), para que la paginación pueda repartirla entre hojas. El
+   reparto y las notas van en el último bloque. */
+function matrizBloques(qs,nIni,defComp,porTabla){
+  porTabla=porTabla||10;nIni=nIni||1;var out=[];
+  for(var k=0;k<qs.length;k+=porTabla){
+    var h=matrizHTML(qs.slice(k,k+porTabla),nIni+k,defComp);
+    if(k+porTabla<qs.length)h=h.replace(/<\/table>[\s\S]*<\/div>$/,'</table></div>');
+    out.push(h);
+  }
+  if(out.length>1){var r=resumen(qs),ult=out.length-1;
+    out[ult]=out[ult].replace(/<p class="icfes-res"><b>Reparto:<\/b>[^<]*(<[^p][^>]*>[^<]*)*?<\/p>/,function(){return '<p class="icfes-res"><b>Reparto:</b> '+['uso','exp','ind'].map(function(c){return e(COMP[c].n)+': '+r[c];}).join(' · ')+'. Meta del Icfes: cerca de un tercio de cada una, con un poco más de indagación y explicación que de uso.</p>';});}
+  return out;
+}
 function matrizHTML(qs,nIni,defComp){
   nIni=nIni||1;
   var r=resumen(qs),hay=qs.some(function(q){return q.icfes;});
@@ -182,6 +196,110 @@ function preguntas(){
     q.t=x.t;q.tema=x.t;return q;
   });
 }
+/* ── Doble columna para las hojas impresas ──
+   Antes las preguntas iban con columnas CSS balanceadas (o en filas de a
+   dos): una pregunta larga (con tabla o figura) dejaba la otra columna en
+   blanco. Ahora hay dos columnas reales que se llenan en orden: la
+   izquierda hasta abajo y luego la derecha. El orden de las preguntas no
+   cambia (la clave y la hoja de respuestas siguen coincidiendo).
+   colocar(cuerpo,nodos,desde,forzar): pone nodos[desde…] en un contenedor
+   de dos columnas al final de «cuerpo» mientras quepan en la hoja.
+   Devuelve cuántos puso. Con forzar=true pone al menos uno aunque no quepa
+   (para una hoja vacía con una pregunta más alta que la hoja). */
+function desborda(c){return c.scrollHeight>c.clientHeight+1;}
+// Si una pregunta con figura no cabe por poco, reduce la figura (hasta el
+// 60 %) antes de mandarla a la otra columna u hoja. Si ni así cabe, la deja
+// como estaba y devuelve false.
+function encoger(nodo,cuerpo){
+  var ims=[].slice.call(nodo.querySelectorAll('.icfes-fig img'));if(!ims.length)return false;
+  var w0=ims.map(function(im){return im.getBoundingClientRect().width;});
+  for(var f=0.9;f>=0.59;f-=0.1){
+    ims.forEach(function(im,j){im.style.width=Math.round(w0[j]*f)+'px';});
+    if(!desborda(cuerpo))return true;
+  }
+  ims.forEach(function(im,j){im.style.width=Math.round(w0[j])+'px';});
+  return false;
+}
+function colocar(cuerpo,nodos,desde,forzar,op){
+  op=op||{};
+  var box=document.createElement('div');box.className='dcol';
+  var cols=[document.createElement('div'),document.createElement('div')];
+  cols.forEach(function(c){c.className='dcol-c';box.appendChild(c);});
+  cuerpo.appendChild(box);
+  var k=0,i=desde,n=0;
+  while(i<nodos.length){
+    cols[k].appendChild(nodos[i]);
+    if(desborda(cuerpo)&&!encoger(nodos[i],cuerpo)){
+      cols[k].removeChild(nodos[i]);
+      // op.reordenar: si la pregunta no cabe en el hueco de esta columna, se
+      // adelanta una de las siguientes (hasta 6 más allá) que sí quepa. El
+      // que llama renumera después (renumerar) y arma clave, matriz y hoja
+      // de respuestas con el orden final (orden).
+      if(op.reordenar&&n>0){
+        var hallado=-1;
+        for(var j=i+1;j<nodos.length&&j<=i+6;j++){
+          cols[k].appendChild(nodos[j]);
+          var ok=!desborda(cuerpo);cols[k].removeChild(nodos[j]);
+          if(ok){hallado=j;break;}
+        }
+        if(hallado>0){var mv=nodos.splice(hallado,1)[0];nodos.splice(i,0,mv);cols[k].appendChild(mv);i++;n++;continue;}
+      }
+      if(k===0){k=1;continue;}
+      break;
+    }
+    i++;n++;
+  }
+  var forzado=false;
+  if(!n&&forzar&&desde<nodos.length){cols[0].appendChild(nodos[desde]);n=1;i=desde+1;forzado=true;}
+  // Pregunta muy alta (tabla ancha o figura grande) que no cupo en ninguna
+  // columna: se prueba a todo el ancho, debajo de las columnas, donde ocupa
+  // mucho menos alto. Después sigue otra pareja de columnas.
+  if(n&&i<nodos.length&&!forzado){
+    var alto=nodos[i];cols[1].appendChild(alto);var hc=alto.offsetHeight;cols[1].removeChild(alto);
+    if(hc>cuerpo.clientHeight*0.35){
+      balancear();
+      alto.classList.add('dcol-ancho');cuerpo.appendChild(alto);
+      if(desborda(cuerpo)&&!encoger(alto,cuerpo)){cuerpo.removeChild(alto);alto.classList.remove('dcol-ancho');}
+      else{i++;n++;n+=colocar(cuerpo,nodos,i,false,op);return n;}
+    }
+  }
+  if(!n)cuerpo.removeChild(box);
+  else if(i>=nodos.length)balancear();
+  function balancear(){
+    // Se acabaron las preguntas en esta hoja: se reparten en orden entre las
+    // dos columnas para que queden parejas (sin una columna medio vacía) y
+    // el espacio que sobra quede abajo, a todo el ancho, para el borrador.
+    var todos=[].slice.call(cols[0].children).concat([].slice.call(cols[1].children));
+    // una sola pregunta al final: a todo el ancho, para no dejar la
+    // columna de al lado vacía
+    if(todos.length===1){var u=todos[0];u.classList.add('dcol-ancho');box.parentNode.insertBefore(u,box);box.parentNode.removeChild(box);return;}
+    if(todos.length>1){
+      var hs=todos.map(function(e){return e.offsetHeight;}),tot=hs.reduce(function(a,b){return a+b;},0),mejor=1,mh=1e9,acc=0;
+      for(var j=1;j<todos.length;j++){acc+=hs[j-1];var m=Math.max(acc,tot-acc);if(m<mh){mh=m;mejor=j;}}
+      todos.forEach(function(e,q){cols[q<mejor?0:1].appendChild(e);});
+    }
+  }
+  return n;
+}
+
+/* Después de acomodar con reordenar: pone los números 1, 2, 3… en el
+   orden en que quedaron las preguntas (orden de lectura: columna izquierda
+   y luego derecha). sel: selector del número dentro de cada pregunta;
+   fmt(n): texto del número. Devuelve el orden final (data-k de cada nodo). */
+function renumerar(raiz,selPreg,selNum,fmt,n0){
+  var orden=[],n=n0||1;
+  [].forEach.call(raiz.querySelectorAll(selPreg),function(q){
+    var e=q.querySelector(selNum);if(e)e.textContent=fmt?fmt(n):String(n);n++;
+    if(q.getAttribute('data-k')!=null)orden.push(+q.getAttribute('data-k'));
+  });
+  return orden;
+}
+// Reordena una lista según «orden» (índices originales), sin perder nada.
+function aplicarOrden(lista,orden){
+  if(!orden||orden.length!==lista.length)return lista;
+  return orden.map(function(k){return lista[k];});
+}
+
 // Estilos (una sola vez)
 function css(){
   if(document.getElementById('icfes-css'))return;
@@ -190,7 +308,9 @@ function css(){
     '.icfes-tab{border-collapse:collapse;margin:6px auto;font-size:.86em}.icfes-tab th,.icfes-tab td{border:1px solid #888;padding:2px 7px;text-align:center}.icfes-tab th{background:#eef2f6}'+
     '.icfes-cred{font-size:.72em;color:#555;font-style:italic;margin-top:3px}'+
     '.icfes-mat table{border-collapse:collapse;width:100%;font-size:.78em}.icfes-mat th,.icfes-mat td{border:1px solid #999;padding:3px 5px;vertical-align:top;text-align:left}.icfes-mat th{background:#eef2f6}'+
-    '.icfes-res,.icfes-cita{font-size:.78em;margin:6px 0}';
+    '.icfes-res,.icfes-cita{font-size:.78em;margin:6px 0}'+
+    '.dcol-ancho{border-top:1px solid #ddd;border-bottom:1px solid #ddd;padding:4px 0;margin:2px 0 6px}.dcol{display:flex;gap:16px;align-items:stretch;margin:2px 0 6px}.dcol-c{flex:1 1 0;min-width:0}.dcol-c+.dcol-c{border-left:1px solid #ddd;padding-left:16px}'+
+    '.dcol .icfes-tab{font-size:.72em;width:100%;table-layout:fixed}.dcol .icfes-tab th,.dcol .icfes-tab td{padding:1px 2px;overflow-wrap:anywhere;hyphens:auto}';
   (document.head||document.documentElement).appendChild(s);
 }
 if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',css);else css();}
@@ -198,5 +318,5 @@ if(typeof document!=='undefined'){if(document.readyState==='loading')document.ad
 window.SABER_ICFES={AF:AF,COMP:COMP,COMPONENTE:COMPONENTE,META:META,CITA:CITA,
   competencia:competencia,afirmacion:afirmacion,componente:componente,elegir:elegir,resumen:resumen,
   extraHTML:extraHTML,opsImgHTML:opsImgHTML,creditoHTML:creditoHTML,matrizHTML:matrizHTML,citaHTML:citaHTML,
-  tablaHTML:tablaHTML,preguntas:preguntas};
+  tablaHTML:tablaHTML,preguntas:preguntas,colocar:colocar,matrizBloques:matrizBloques,renumerar:renumerar,aplicarOrden:aplicarOrden};
 })();
