@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Química orgánica y ambiente</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fundamentos.css?v=79">
-<link rel="stylesheet" href="chromanom.css?v=79">
-<link rel="stylesheet" href="fase4.css?v=79">
+<link rel="stylesheet" href="fundamentos.css?v=80">
+<link rel="stylesheet" href="chromanom.css?v=80">
+<link rel="stylesheet" href="fase4.css?v=80">
 </head>
 <body>
 <nav class="site-nav">
@@ -101,6 +101,12 @@
       <div class="life"><div class="life-h">🇨🇴 En Colombia</div><p>Las refinerías de <b>Barrancabermeja</b> (Santander) y <b>Cartagena</b> procesan el crudo del país. Además de destilar, «craquean» las cadenas largas en otras más cortas para obtener más gasolina, y de sus gases salen el eteno y el propeno con que se fabrican plásticos.</p></div>
     </div>
   </div>
+    <div data-foto="torre_arak" data-pie="Una torre de destilación gigante, transportada hacia una refinería en Arak (Irán): así de grandes son las torres donde se separa el petróleo."></div>
+    <div data-foto="crudos_color" data-pie="Cuatro muestras de crudo de distintos yacimientos: no todos son iguales, cambian el color, la viscosidad y la proporción de fracciones."></div>
+  <h3>Simulación: la torre en funcionamiento</h3>
+  <p class="sim-pregunta">si bajas la temperatura del horno, ¿qué fracciones dejan de salir primero: las de moléculas pequeñas o las grandes?</p>
+  <div data-simx="destilacion" data-titulo="Destilación fraccionada del petróleo"></div>
+  <div class="warn">⚠️ Es un modelo: cada círculo representa muchísimas moléculas y las temperaturas de las bandejas son aproximadas.</div>
 </section>
 
 <section class="sec" id="co2">
@@ -151,6 +157,9 @@
       <p>Dos monómeros con dos grupos funcionales cada uno se unen y en cada unión sale una molécula pequeña (como H₂O). Así se forman los <b>poliésteres</b> (PET) y las <b>poliamidas</b> (nailon), con enlaces que el agua puede hidrolizar lentamente.</p>
     </div>
   </div>
+  <h3>Simulación: cómo crece una cadena de polietileno</h3>
+  <div data-simx="polimero" data-titulo="Polimerización del etileno"></div>
+    <div data-foto="bolsa_pe" data-pie="Una bolsa de polietileno: miles de unidades —CH₂—CH₂— unidas solo por enlaces C−C y C−H."></div>
   <p>Mira el número dentro del triángulo de reciclaje de un envase y clasifica el plástico:</p>
   <div id="cl-plast"></div>
   <div class="calc-out" id="cl-plast-out" aria-live="polite">Clasifica los seis plásticos.</div>
@@ -180,6 +189,7 @@
   <div class="sec-kicker">Polaridad y salud</div>
   <h2>Plaguicidas, derrames y bioacumulación: semejante disuelve a semejante</h2>
   <div class="meta">Al terminar podrás explicar con la polaridad por qué algunos compuestos se acumulan en los seres vivos.</div>
+    <div data-foto="derrame" data-pie="Derrame de petróleo en el golfo de México (2010): el crudo, apolar, flota sobre el agua polar y no se mezcla con ella."></div>
   <div class="duo">
     <div class="fig">
       <svg viewBox="0 0 260 200" role="img" aria-label="Pirámide de biomagnificación: plancton, peces pequeños, peces grandes y aves; la concentración del contaminante aumenta hacia arriba">
@@ -256,14 +266,14 @@
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="fundamentos.js?v=79"></script>
-<script src="temas-extra.js?v=79"></script>
-<script src="temas-11.js?v=79"></script>
-<script src="pwa-install.js?v=79"></script>
-<script src="text-zoom.js?v=79"></script>
-<script src="fx-libro.js?v=79"></script>
-<script src="fase4.js?v=79"></script>
-<script src="sim4.js?v=79"></script>
+<script src="fundamentos.js?v=80"></script>
+<script src="temas-extra.js?v=80"></script>
+<script src="temas-11.js?v=80"></script>
+<script src="pwa-install.js?v=80"></script>
+<script src="text-zoom.js?v=80"></script>
+<script src="fx-libro.js?v=80"></script>
+<script src="fase4.js?v=80"></script>
+<script src="sim4.js?v=80"></script>
 <script>
 (function(){
 'use strict';
@@ -322,8 +332,13 @@ document.getElementById('vd-op').addEventListener('click',function(e){var b=e.ta
   var o=document.getElementById('vd-out');o.className='calc-out'+(b.dataset.o==='c'?' ok':'');o.innerHTML=VD[b.dataset.o];});
 })();
 </script>
-<script src="site-ui.js?v=79"></script>
-<script src="narracion.js?v=79"></script>
+<script src="site-ui.js?v=80"></script>
+<script>window.PANTALLA_EXTRA=['.lab'];</script>
+<script src="fotos-datos.js?v=80"></script>
+<script src="fotos.js?v=80"></script>
+<script src="pantalla.js?v=80"></script>
+<script src="simx.js?v=80"></script>
+<script src="narracion.js?v=80"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

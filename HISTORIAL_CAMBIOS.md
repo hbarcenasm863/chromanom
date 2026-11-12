@@ -7,6 +7,25 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (179) — Simulaciones nuevas, pantalla completa y fotos con cita APA
+
+### Contexto
+El docente consideró necesario que ChromaNom tenga animaciones y simulaciones como las de BioNom, con pantalla completa y, si es posible, imágenes de repositorios libres que las complementen.
+
+### Cambios
+- **`pantalla.js` (nuevo):** botón «⛶ Pantalla completa» en todas las simulaciones (`.sim`, las nuevas y los `.lab` de carbono, cadenas, isomería, orbitales y tipos de carbono). En el celular gira a horizontal; en iPhone llena la ventana. Se sale con el botón o Esc.
+- **`simx.js` (nuevo), 5 simulaciones:** destilación fraccionada del petróleo y polimerización del etileno (`ambiente.html`), SN2 con inversión y energía (`reacciones.html`, pestaña Haluros), conformaciones del etano y el butano con proyección de Newman (`cadenas.html`), moléculas en 3D que se giran con el dedo (`carbono.html`).
+- **`sim4.js`:** los canvas se agrandan en pantalla completa.
+- **`fotos.js` y `fotos-datos.js` (nuevos), 7 fotos** de Wikimedia Commons con su cita APA debajo: torre de destilación, crudos, alótropos del carbono, bolsa de polietileno, derrame, almidón y jabón.
+- **Versión:** `?v=80` y `chromanom-v80`. `CLAUDE.md` con la regla nueva.
+
+### Pendiente
+- El año de cada foto quedó «s. f.»: Wikimedia bloqueó la consulta de metadatos. Conviene completarlo cuando se pueda.
+- Descargar las fotos fue lento por los límites de Wikimedia.
+- No se tocó `chromanom-analytics.gs`: no hay pasos manuales.
+
+---
+
 ## 2026-11-13 (178) — Explicaciones propias en las preguntas con datos
 
 ### Contexto

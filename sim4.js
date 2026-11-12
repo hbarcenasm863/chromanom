@@ -25,7 +25,7 @@ function gauss(){return (Math.random()+Math.random()+Math.random()-1.5)*1.15;}
 function lienzo(box,ratio,alt){
   var cv=el('canvas',{role:'img','aria-label':alt||'Simulación'});cv.className='sim-cv';box.appendChild(cv);
   var ctx=cv.getContext('2d'),o={cv:cv,ctx:ctx,W:0,H:0};
-  o.size=function(){var dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(280,Math.min(box.clientWidth||640,900));
+  o.size=function(){var dpr=Math.min(window.devicePixelRatio||1,2),full=box.classList.contains('en-pantalla'),w=full?Math.max(280,Math.min(box.clientWidth-40,1500,Math.round((window.innerHeight-150)/ratio))):Math.max(280,Math.min(box.clientWidth||640,900));
     o.W=w;o.H=Math.round(w*ratio);cv.style.width=w+'px';cv.style.height=o.H+'px';cv.width=Math.round(w*dpr);cv.height=Math.round(o.H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);};
   o.size();
   o.pos=function(e){var r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*o.W/r.width,y:(e.clientY-r.top)*o.H/r.height};};

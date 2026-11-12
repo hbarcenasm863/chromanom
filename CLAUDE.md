@@ -87,3 +87,17 @@ hace falta registrar nada.
   impreso como texto suelto (sesión 168). Si se agrega un archivo nuevo o
   cambia mucho un CSS, subir `CACHE` en `sw.js` y el `?v=` de las páginas
   (`?v=69` → `?v=70`).
+
+- **Simulaciones, pantalla completa y fotos (sesión 179).** Las simulaciones
+  nuevas se escriben en `simx.js` (`<div data-simx="nombre" data-titulo="…">`,
+  mismo esquema que `sim4.js`, sin depender de `fase4.css`). **Toda simulación
+  nueva debe poder verse en pantalla completa**: `pantalla.js` pone solo el
+  botón «⛶ Pantalla completa» en cada `.sim`, en cada `data-simx` y en lo que
+  declare `window.PANTALLA_EXTRA` (por ejemplo `['.lab']`); si no la detecta,
+  ponerle `data-pantalla="Nombre"`. Los canvas deben calcular su tamaño con
+  la clase `en-pantalla` (ver `lienzo()` en `sim4.js`/`simx.js`). Las fotos
+  reales van en `img/fotos/` con su cita APA en `fotos-datos.js`
+  (`<div data-foto="clave" data-pie="…"></div>`): solo bancos libres (Wikimedia
+  Commons, buscados con Openverse), licencias CC0, dominio público, CC BY o
+  CC BY-SA, y la cita siempre debajo. Wikimedia limita las descargas
+  automáticas (error 429): bajar las imágenes de a una y con pausas.

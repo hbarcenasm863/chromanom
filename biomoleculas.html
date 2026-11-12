@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Biomoléculas</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fundamentos.css?v=79">
-<link rel="stylesheet" href="chromanom.css?v=79">
-<link rel="stylesheet" href="fase4.css?v=79">
+<link rel="stylesheet" href="fundamentos.css?v=80">
+<link rel="stylesheet" href="chromanom.css?v=80">
+<link rel="stylesheet" href="fase4.css?v=80">
 </head>
 <body>
 <nav class="site-nav">
@@ -110,6 +110,7 @@
   <div class="sec-kicker">Familia 1</div>
   <h2>Carbohidratos: alcoholes que también son aldehídos o cetonas</h2>
   <div class="meta">Al terminar podrás nombrar un monosacárido (aldotriosa… cetohexosa), dibujarlo en proyección de Fischer, convertirlo a Haworth y reconocer los anómeros α y β.</div>
+    <div data-foto="almidon" data-pie="Granos de almidón vistos al microscopio: miles de unidades de glucosa unidas por enlaces glucosídicos."></div>
   <p>Un monosacárido es una cadena de 3 a 7 carbonos con un grupo <b>−OH</b> en casi cada carbono y un grupo <b>carbonilo</b>. Su nombre dice dos cosas:</p>
   <div class="tree" role="group" aria-label="Clasificación de los monosacáridos">
     <div class="tree-root">Nombre de un monosacárido = tipo de carbonilo + número de carbonos + «-osa»</div>
@@ -170,6 +171,7 @@
   <div class="sec-kicker">Familia 2</div>
   <h2>Lípidos: ácidos grasos, omegas y jabones</h2>
   <div class="meta">Al terminar podrás leer la notación de un ácido graso (18:2 ω-6), saber qué es un omega-3 y explicar con partículas cómo limpia un jabón.</div>
+    <div data-foto="jabon_barra" data-pie="Una barra de jabón: sales sódicas de ácidos grasos, con cola apolar y cabeza iónica."></div>
   <p>Un <b>ácido graso</b> es un ácido carboxílico de cadena larga (casi siempre de 12 a 22 carbonos, en número par). Puede ser <b>saturado</b> (solo enlaces sencillos) o <b>insaturado</b> (con uno o más C=C, casi siempre <i>cis</i>). Hay dos formas de numerar sus dobles enlaces:</p>
   <div class="duo">
     <div class="key">🔢 <b>Desde el −COOH (Δ, «delta»):</b> el carbono del carboxilo es el C1. El ácido oleico es <b>cis-Δ9</b>: su C=C empieza en el C9.</div>
@@ -359,14 +361,14 @@
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="fundamentos.js?v=79"></script>
-<script src="temas-extra.js?v=79"></script>
-<script src="temas-11.js?v=79"></script>
-<script src="pwa-install.js?v=79"></script>
-<script src="text-zoom.js?v=79"></script>
-<script src="fx-libro.js?v=79"></script>
-<script src="fase4.js?v=79"></script>
-<script src="sim4.js?v=79"></script>
+<script src="fundamentos.js?v=80"></script>
+<script src="temas-extra.js?v=80"></script>
+<script src="temas-11.js?v=80"></script>
+<script src="pwa-install.js?v=80"></script>
+<script src="text-zoom.js?v=80"></script>
+<script src="fx-libro.js?v=80"></script>
+<script src="fase4.js?v=80"></script>
+<script src="sim4.js?v=80"></script>
 <script>
 (function(){
 'use strict';
@@ -538,8 +540,12 @@ document.getElementById('kc-ok').addEventListener('click',function(){var c=num('
   else{o.className='calc-out fail';o.innerHTML='🔎 Revisa: ('+c+' × 4) + ('+p+' × 4) + ('+g+' × 9).';}});
 })();
 </script>
-<script src="site-ui.js?v=79"></script>
-<script src="narracion.js?v=79"></script>
+<script src="site-ui.js?v=80"></script>
+<script>window.PANTALLA_EXTRA=['.lab'];</script>
+<script src="fotos-datos.js?v=80"></script>
+<script src="fotos.js?v=80"></script>
+<script src="pantalla.js?v=80"></script>
+<script src="narracion.js?v=80"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
