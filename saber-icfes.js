@@ -88,7 +88,7 @@ function componente(q,defecto){
 
 /* ── generador de números al azar: se usa el que pasa cada sitio ── */
 function mezclar(a,r){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function tieneCtx(q){return !!(q.icfes||(q.ctx&&String(q.ctx).replace(/<[^>]+>/g,'').trim().length>25)||q.img||q.tabla||q.fig||q.f);}
+function tieneCtx(q){return !!(q.icfes||(q.ctx&&String(q.ctx).replace(/<[^>]+>/g,'').trim().length>25)||q.img||q.tabla||q.graf||q.fig||q.f);}
 /* Escoge n preguntas del pool repartidas por competencia.
    op.prioIcfes (por defecto true): las oficiales del Icfes van primero.
    op.tema(q): función que devuelve el tema (para no repetir tema seguido).
@@ -144,7 +144,39 @@ function imgsHTML(l,cls){
     return '<div class="icfes-fig'+(cls?' '+cls:'')+'"><img src="'+e(base()+s)+'"'+w+' alt="Figura de la pregunta del Icfes"></div>';}).join('');
 }
 // Lo que va entre el contexto y el enunciado: tablas y figuras.
-function extraHTML(q){return (q.icfes?imgsHTML(q.img)+tablaHTML(q.tabla):'');}
+/* Gráfica sencilla en SVG (sin librerías) para las preguntas de indagación:
+   graf:{tipo:'lin'|'bar', x:[categorías], y:[valores] o series:[{n,y:[…]}],
+         ex:'título del eje x', ey:'título del eje y', ymin:0}.
+   Lleva ancho y alto fijos para que la paginación mida bien la hoja. */
+function numTxt(v){return String(Math.round(v*100)/100).replace('.',',');}
+function grafHTML(g){
+  if(!g||!g.x)return '';
+  var W=300,H=176,L=46,R=10,T=16,B=48,ser=g.series||[{n:'',y:g.y}],bar=g.tipo==='bar';
+  var lo=g.ymin||0,mx=lo;ser.forEach(function(z){z.y.forEach(function(v){if(v>mx)mx=v;});});
+  var rango=(mx-lo)||1,mag=Math.pow(10,Math.floor(Math.log10(rango/4))),paso=mag;
+  [1,2,2.5,5,10].some(function(m){paso=m*mag;return rango/paso<=5;});
+  var top=lo+Math.ceil((mx-lo)/paso-1e-9)*paso,n=g.x.length;
+  var pw=W-L-R,ph=H-T-B;
+  function X(i){return bar?L+pw*(i+0.5)/n:L+pw*(n===1?0.5:i/(n-1))*0.9+pw*0.05;}
+  function Y(v){return T+ph-(v-lo)/(top-lo)*ph;}
+  var col=['#1f4e79','#c55a11','#2e7d32'],o='';
+  for(var t=lo;t<=top+1e-9;t+=paso){o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(t).toFixed(1)+'" y2="'+Y(t).toFixed(1)+'" stroke="#ddd"/>'+
+    '<text x="'+(L-5)+'" y="'+(Y(t)+3).toFixed(1)+'" text-anchor="end" font-size="9">'+numTxt(t)+'</text>';}
+  o+='<line x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+(T+ph)+'" stroke="#333"/><line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ph)+'" y2="'+(T+ph)+'" stroke="#333"/>';
+  g.x.forEach(function(c,i){o+='<text x="'+X(i).toFixed(1)+'" y="'+(T+ph+12)+'" text-anchor="middle" font-size="9">'+e(c)+'</text>';});
+  var m=ser.length,bw=pw/n*0.7/(bar?m:1);
+  ser.forEach(function(z,k){
+    if(bar){z.y.forEach(function(v,i){var x0=X(i)-bw*m/2+k*bw;o+='<rect x="'+x0.toFixed(1)+'" y="'+Y(v).toFixed(1)+'" width="'+(bw*0.92).toFixed(1)+'" height="'+(T+ph-Y(v)).toFixed(1)+'" fill="'+col[k%3]+'"/>';});}
+    else{o+='<polyline fill="none" stroke="'+col[k%3]+'" stroke-width="1.8"'+(k===1?' stroke-dasharray="5 3"':'')+' points="'+z.y.map(function(v,i){return X(i).toFixed(1)+','+Y(v).toFixed(1);}).join(' ')+'"/>'+
+      z.y.map(function(v,i){return '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="2.6" fill="'+col[k%3]+'"/>';}).join('');}
+  });
+  if(g.ex)o+='<text x="'+(L+pw/2)+'" y="'+(H-12)+'" text-anchor="middle" font-size="10" font-weight="700">'+e(g.ex)+'</text>';
+  if(g.ey)o+='<text transform="translate(11,'+(T+ph/2)+') rotate(-90)" text-anchor="middle" font-size="10" font-weight="700">'+e(g.ey)+'</text>';
+  if(m>1)ser.forEach(function(z,k){o+='<rect x="'+(L+k*84)+'" y="1" width="9" height="7" fill="'+col[k%3]+'"/><text x="'+(L+k*84+12)+'" y="7.5" font-size="9">'+e(z.n)+'</text>';});
+  return '<div class="icfes-fig icfes-graf"><svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:100%;height:auto;font-family:sans-serif" role="img" aria-label="Gráfica de datos de la pregunta">'+o+'</svg></div>';
+}
+// Lo que va entre el contexto y el enunciado: figuras, tablas y gráficas.
+function extraHTML(q){return (q.icfes?imgsHTML(q.img):'')+tablaHTML(q.tabla)+grafHTML(q.graf);}
 // Figura con las opciones A–D dibujadas (las opciones no se barajan).
 function opsImgHTML(q){return q.imgOps?imgsHTML(q.imgOps,'ops'):'';}
 function creditoHTML(q){
@@ -318,5 +350,5 @@ if(typeof document!=='undefined'){if(document.readyState==='loading')document.ad
 window.SABER_ICFES={AF:AF,COMP:COMP,COMPONENTE:COMPONENTE,META:META,CITA:CITA,
   competencia:competencia,afirmacion:afirmacion,componente:componente,elegir:elegir,resumen:resumen,
   extraHTML:extraHTML,opsImgHTML:opsImgHTML,creditoHTML:creditoHTML,matrizHTML:matrizHTML,citaHTML:citaHTML,
-  tablaHTML:tablaHTML,preguntas:preguntas,colocar:colocar,matrizBloques:matrizBloques,renumerar:renumerar,aplicarOrden:aplicarOrden};
+  tablaHTML:tablaHTML,grafHTML:grafHTML,preguntas:preguntas,colocar:colocar,matrizBloques:matrizBloques,renumerar:renumerar,aplicarOrden:aplicarOrden};
 })();

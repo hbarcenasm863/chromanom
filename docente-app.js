@@ -777,7 +777,7 @@ function bloquesSaber(qs,r){
     var ops=q.fijo?q.o.slice():barajar(q.o,r);
     var cortas=ops.every(function(o){return o.length<=34;});
     var muyCortas=ops.every(function(o){return o.length<=16;});
-    var fig=ofi?(SI?SI.extraHTML(q):''):q.fig?figura(q.fig,330,130):(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
+    var fig=(ofi||q.tabla||q.graf)?(SI?SI.extraHTML(q):''):q.fig?figura(q.fig,330,130):(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
     // Sin rótulo de competencia: el número va al inicio del contexto.
     return '<div class="sq" data-k="'+i+'"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+escQ(q.ctx)+'</p>'+fig+(q.q?'<p class="sq-q">'+escQ(q.q)+'</p>':'')+
       (q.imgOps&&SI?SI.opsImgHTML(q):'<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+escQ(o)+'</li>';}).join('')+'</ol>')+

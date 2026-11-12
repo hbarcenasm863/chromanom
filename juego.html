@@ -886,7 +886,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 }
 .saber-ctx{font-size:.9rem;font-style:italic;opacity:.85;margin:6px 0 8px;line-height:1.45}.saber-ctx+.icfes-fig img,.q-title ~ .icfes-fig img{max-width:100%;height:auto;max-height:240px}.icfes-fig img{max-width:100%;height:auto;max-height:240px;background:#fff;border-radius:6px}.icfes-tab{font-size:.8em;margin:6px 0;background:#fff;color:#111}.icfes-cred{font-size:.72rem;opacity:.7;font-style:italic;margin-top:4px}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=77">
+<link rel="stylesheet" href="chromanom.css?v=78">
 </head>
 <body>
 <nav class="site-nav">
@@ -1233,14 +1233,14 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
-<script src="fundamentos.js?v=77"></script>
-<script src="temas-extra.js?v=77"></script>
-<script src="temas-11.js?v=77"></script>
-<script src="ahorcado-datos.js?v=77"></script>
-<script src="saber-icfes.js?v=77"></script>
-<script src="icfes-datos.js?v=77"></script>
-<script src="saber-juego.js?v=77"></script>
-<script src="retos.js?v=77"></script>
+<script src="fundamentos.js?v=78"></script>
+<script src="temas-extra.js?v=78"></script>
+<script src="temas-11.js?v=78"></script>
+<script src="ahorcado-datos.js?v=78"></script>
+<script src="saber-icfes.js?v=78"></script>
+<script src="icfes-datos.js?v=78"></script>
+<script src="saber-juego.js?v=78"></script>
+<script src="retos.js?v=78"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -3304,7 +3304,7 @@ function loadQuestion(){
 
   let html=`<div class="q-type-badge ${typeCls[q.type]||'qt-mc'}">${typeBadge[q.type]||''}</div>`;
   if(q.saber){const _SI=window.SABER_ICFES;
-    html+=`<div class="saber-ctx">${q.ctx}</div>${(_SI&&q.icfes)?_SI.extraHTML(q):''}<div class="q-title">${q.q}</div>${(_SI&&q.icfes)?_SI.creditoHTML(q):''}`;}
+    html+=`<div class="saber-ctx">${q.ctx}</div>${(_SI&&(q.icfes||q.tabla||q.graf))?_SI.extraHTML(q):''}<div class="q-title">${q.q}</div>${(_SI&&q.icfes)?_SI.creditoHTML(q):''}`;}
   else html+=`<div class="q-title">${q.q}</div>`;
   if(!isBuild&&!isRxnQ&&(molInner||toggleHtml)) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
@@ -7088,7 +7088,7 @@ QBANK.push(...QBANK_FUNDAMENTOS);
   const PIS={ind:['Fíjate en los datos, la tabla o el procedimiento que describe la situación.','La respuesta correcta se apoya en lo que se midió o se observó; descarta lo que no se desprende de ahí.'],
     exp:['Relaciona la situación con la estructura del compuesto: ¿qué propiedad o grupo funcional explica lo que pasa?','Descarta las opciones que solo describen o que inventan una causa que la situación no menciona.'],
     uso:['Recuerda la regla o la definición del tema que usa esta pregunta.','Compara cada opción con esa regla y descarta las que la contradicen.']};
-  const mk=(x,ok,opts,extra)=>Object.assign({type:'mc',saber:1,topic:x.t,ctx:x.ctx,q:x.q,ans:ok,opts:opts,pistas:PIS[x.c]||PIS.uso,
+  const mk=(x,ok,opts,extra)=>Object.assign({type:'mc',saber:1,topic:x.t,ctx:x.ctx,tabla:x.tabla,graf:x.graf,q:x.q,ans:ok,opts:opts,pistas:PIS[x.c]||PIS.uso,
     expl:'Pregunta tipo Saber 11 de la competencia de '+(NOMC[x.c]||NOMC.uso)+'. La respuesta correcta es «'+ok+'»: es la que se apoya en la situación y en lo que estudiaste en este tema; las otras opciones no se desprenden de ella.'},extra||{});
   (window.SABER_JUEGO||[]).forEach(x=>QBANK.push(mk(x,x.o[0],x.o.slice())));
   if(window.SABER_ICFES)SABER_ICFES.preguntas().forEach(x=>{if(x.imgOps)return;
@@ -7890,10 +7890,10 @@ function confirmExitGame(){
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="pwa-install.js?v=77"></script>
-<script src="text-zoom.js?v=77"></script>
-<script src="fx-libro.js?v=77"></script>
-<script src="site-ui.js?v=77"></script>
+<script src="pwa-install.js?v=78"></script>
+<script src="text-zoom.js?v=78"></script>
+<script src="fx-libro.js?v=78"></script>
+<script src="site-ui.js?v=78"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

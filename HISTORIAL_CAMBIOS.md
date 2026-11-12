@@ -7,6 +7,26 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (177) — Preguntas de indagación con tablas y gráficas
+
+### Contexto
+El docente pidió seguir con las preguntas de indagación que traen sus datos en una **tabla o una gráfica**, como la prueba Saber 11, y que también estén en el juego.
+
+### Cambios
+- **`saber-icfes.js`** (el mismo archivo en los tres sitios): nuevo dibujo de **gráficas** (líneas o barras, una o dos series, con ejes rotulados) hecho en SVG, sin librerías. Una pregunta puede traer `tabla` o `graf` y se dibuja sola en la evaluación y en el juego.
+- **`docente-datos.js`:** 10 preguntas nuevas de indagación con datos: puntos de ebullición de los alcanos (gráfica), isómeros de C₄H₁₀O, solubilidad de alcoholes, prueba del agua de bromo, pKa de ácidos con cloro, rapidez de sustitución en haluros, nitración de aromáticos, pruebas de Tollens y Fehling, basicidad de aminas y catálisis de la esterificación (gráfica con dos curvas). Opciones del mismo largo; sin fórmulas con paréntesis.
+- **`docente-app.js`:** las preguntas con `tabla` o `graf` ya muestran sus datos en la evaluación.
+- **`juego.html` y `saber-juego.js`:** el generador pasa las tablas y gráficas al juego, que las muestra sobre la pregunta.
+- **Versión:** `?v=78` y `chromanom-v78`.
+
+### Verificación
+Con Playwright: evaluación (tablas y gráfica en doble columna, matriz marca «Indagación») y juego (gráfica y opciones se ven bien), sin errores.
+
+### Pendiente
+Más preguntas con datos en otros temas.
+
+---
+
 ## 2026-11-12 (176) — Las preguntas tipo Saber también entran al juego
 
 ### Contexto
