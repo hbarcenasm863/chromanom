@@ -387,8 +387,8 @@ body.sin-eval .solo-eval{display:none}
 .hoja .t-rub th{color:#fff}
 .hoja .t-rub th:first-child{background:#0d4a73;color:#fff}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=73">
-<link rel="stylesheet" href="actividades.css?v=73">
+<link rel="stylesheet" href="chromanom.css?v=74">
+<link rel="stylesheet" href="actividades.css?v=74">
 <!-- Página de las guías, talleres y evaluaciones (carta vertical con márgenes).
      Laberintos y crucigramas lo desactivan mientras imprimen (media="not all"):
      con esta regla activa cada laberinto salía partido en dos páginas. -->
@@ -506,6 +506,8 @@ body.sin-eval .solo-eval{display:none}
           </div>
           <label class="opt"><input type="checkbox" id="f-hr" checked> <span>Incluir hoja de respuestas (círculos A–D)</span></label>
           <label class="opt"><input type="checkbox" id="f-rub"> <span>Anexar rúbricas (hoja aparte)</span></label>
+          <label class="opt"><input type="checkbox" id="f-icfes" checked> <span>Priorizar preguntas oficiales del Icfes (cuadernillo Saber 11.º de Ciencias Naturales, 2026, con su crédito)</span></label>
+          <label class="opt"><input type="checkbox" id="f-mat"> <span>Anexar matriz de competencias: competencia, afirmación y componente de cada pregunta (hoja aparte, sin respuestas)</span></label>
           <p class="ayuda">Las evaluaciones no llevan clave de respuestas: los estudiantes también entran a esta página.</p>
         </fieldset>
         <fieldset>
@@ -1142,21 +1144,23 @@ window.addEventListener('afterprint',function(){
 <div id="ah-print-root" aria-hidden="true"></div>
 <div id="sp-print-root" aria-hidden="true"></div>
 <div id="ex-print-root" aria-hidden="true"></div>
-<script src="fx-libro.js?v=73"></script>
-<script src="docente-datos.js?v=73"></script>
-<script src="docente-app.js?v=73"></script>
-<script src="fundamentos.js?v=73"></script>
-<script src="temas-extra.js?v=73"></script>
-<script src="temas-11.js?v=73"></script>
-<script src="laberinto.js?v=73"></script>
-<script src="crucigrama.js?v=73"></script>
-<script src="ahorcado-datos.js?v=73"></script>
-<script src="ahorcado.js?v=73"></script>
-<script src="sopa.js?v=73"></script>
-<script src="extras.js?v=73"></script>
-<script src="pwa-install.js?v=73"></script>
-<script src="text-zoom.js?v=73"></script>
-<script src="site-ui.js?v=73"></script>
+<script src="fx-libro.js?v=74"></script>
+<script src="docente-datos.js?v=74"></script>
+<script src="saber-icfes.js?v=74"></script>
+<script src="icfes-datos.js?v=74"></script>
+<script src="docente-app.js?v=74"></script>
+<script src="fundamentos.js?v=74"></script>
+<script src="temas-extra.js?v=74"></script>
+<script src="temas-11.js?v=74"></script>
+<script src="laberinto.js?v=74"></script>
+<script src="crucigrama.js?v=74"></script>
+<script src="ahorcado-datos.js?v=74"></script>
+<script src="ahorcado.js?v=74"></script>
+<script src="sopa.js?v=74"></script>
+<script src="extras.js?v=74"></script>
+<script src="pwa-install.js?v=74"></script>
+<script src="text-zoom.js?v=74"></script>
+<script src="site-ui.js?v=74"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

@@ -488,7 +488,9 @@ function saberDe(t){
     return {a:'nom',c:'uso',k:'Q',ctx:quitaHtml(q.q),q:'',o:[q.ans].concat(q.opts.filter(function(o){return o!==q.ans;})),
       fig:q.mol?{svgFn:svgJuego(q.mol),key:q.mol}:null,fuente:'Juego'};
   });
-  return (D.SABER[t.id]||[]).concat(jue);
+  // Preguntas oficiales del Icfes del tema (icfes-datos.js, saber-icfes.js).
+  var icf=window.SABER_ICFES?SABER_ICFES.preguntas().filter(function(q){return q.t===t.id;}):[];
+  return (D.SABER[t.id]||[]).concat(icf,jue);
 }
 
 /* ── Formulario ──────────────────────────────────────────────────────── */
@@ -770,13 +772,16 @@ function bloquesEjercicios(sel,numIni){
 function bloquesSaber(qs,r){
   var letras=['A','B','C','D'];
   return qs.map(function(q,i){
-    var ops=barajar(q.o,r);
+    // Las preguntas oficiales del Icfes (q.fijo) conservan el orden A–D.
+    var SI=window.SABER_ICFES,ofi=!!q.icfes;
+    var ops=q.fijo?q.o.slice():barajar(q.o,r);
     var cortas=ops.every(function(o){return o.length<=34;});
     var muyCortas=ops.every(function(o){return o.length<=16;});
-    var fig=q.fig?figura(q.fig,330,130):(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
+    var fig=ofi?(SI?SI.extraHTML(q):''):q.fig?figura(q.fig,330,130):(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
     // Sin rótulo de competencia: el número va al inicio del contexto.
     return '<div class="sq"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+escQ(q.ctx)+'</p>'+fig+(q.q?'<p class="sq-q">'+escQ(q.q)+'</p>':'')+
-      '<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+escQ(o)+'</li>';}).join('')+'</ol></div>';
+      (q.imgOps&&SI?SI.opsImgHTML(q):'<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+escQ(o)+'</li>';}).join('')+'</ol>')+
+      (ofi&&SI?SI.creditoHTML(q):'')+'</div>';
   });
 }
 function bloqueHojaRespuestas(n){
@@ -1024,7 +1029,7 @@ function leerForm(){
     alin:{sed:$('f-sed').value,ev:marcados('ev'),est:marcados('est'),dba:marcados('dba')},
     tipos:marcados('tipoej'),nEj:Math.max(2,Math.min(40,+$('f-nej').value||12)),
     nSaber:Math.max(0,Math.min(30,+$('f-nsaber').value||0)),nAb:Math.max(0,Math.min(20,+$('f-nab').value||0)),nX:Math.max(0,Math.min(10,+(($('f-nx')||{}).value)||0)),
-    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,nVersiones:Math.max(1,Math.min(20,+$('f-nver').value||1)),acts:marcados('act'),variante:($('f-var').value||'1').trim(),
+    hojaResp:$('f-hr').checked,rubrica:$('f-rub').checked,icfes:!$('f-icfes')||$('f-icfes').checked,matriz:!!($('f-mat')&&$('f-mat').checked),nVersiones:Math.max(1,Math.min(20,+$('f-nver').value||1)),acts:marcados('act'),variante:($('f-var').value||'1').trim(),
     enc:{colegio:$('f-colegio').value.trim(),docente:$('f-docente').value.trim(),curso:$('f-curso').value.trim(),periodo:$('f-periodo').value.trim(),fecha:fs}
   };
 }
@@ -1071,7 +1076,9 @@ function construirVersion(F,verIdx,verTotal,soloEval){
   if(F.tipo==='guia'||F.tipo==='evaluacion'){
     var poolS=[];F.temas.forEach(function(t){poolS=poolS.concat(saberDe(t).filter(filtroPreg(t)));});
     var r=rng(semilla+'|saber');
-    var qs=barajar(poolS,r).slice(0,F.nSaber);
+    // Repartidas entre las tres competencias de la prueba Saber 11 y con
+    // prioridad a las preguntas oficiales del Icfes (saber-icfes.js).
+    var qs=window.SABER_ICFES?SABER_ICFES.elegir(poolS,F.nSaber,r,{prioIcfes:F.icfes}):barajar(poolS,r).slice(0,F.nSaber);
     if(F.nSaber&&qs.length<F.nSaber)avisos.push(poolS.length?'El banco tiene '+poolS.length+' preguntas tipo Saber para este tema; se usan todas.':'No hay preguntas tipo Saber para esta selección; la evaluación lleva solo preguntas abiertas.');
     var poolA=[];F.temas.forEach(function(t){poolA=poolA.concat((D.ABIERTAS[t.id]||[]).filter(filtroPreg(t)));});
     var ab=elegirAbiertas(poolA,F.nAb,rng(semilla+'|abiertas'));
@@ -1091,10 +1098,15 @@ function construirVersion(F,verIdx,verTotal,soloEval){
       xs.forEach(function(it,i){be.push((i===0?'<h4 class="sub">Cazar errores <small>Cada ejercicio tiene un error. Encuéntralo, explica por qué está mal y escribe la versión correcta.</small></h4>':'')+htmlEjercicio(it,nIni+i));});
     }
     if(F.hojaResp&&qs.length)be.push(bloqueHojaRespuestas(qs.length));
+    if(window.SABER_ICFES){var cr=SABER_ICFES.citaHTML(qs);if(cr)be.push(cr);}
     if(!be.length)be.push('<p>No hay preguntas para esta selección.</p>');
     var primE=encabezadoInst(F.enc,'Evaluación: '+nombreTemas,'Química orgánica · Grado '+F.grado+'.º',verLbl)+
       '<div class="est-lin"><div><span>Nombre</span><i></i></div><div class="corta"><span>Curso</span><i></i></div>'+(F.enc&&F.enc.fecha?'':'<div class="corta"><span>Fecha</span><i></i></div>')+'</div>';
     docs.push({clase:'eval',etiqueta:verTotal>1?'Evaluación '+verIdx+'/'+verTotal:'Evaluación',cab:cabCorta('Evaluación'),primera:primE,bloques:be});
+    // Matriz de competencias de esta versión (sin respuestas).
+    if(F.matriz&&qs.length&&window.SABER_ICFES)docs.push({clase:'anexo',etiqueta:'Matriz de competencias'+(verTotal>1?' '+verIdx+'/'+verTotal:''),cab:cabCorta('Matriz de competencias'),
+      primera:'<h3 class="ses ses-anexo">Matriz de la evaluación'+(verLbl?' · '+esc(verLbl):'')+'</h3><p class="intro">Para el docente: competencia, afirmación y componente de cada pregunta tipo Saber 11 (modelo basado en evidencias del Icfes). No incluye respuestas.</p>',
+      bloques:['<div>'+SABER_ICFES.matrizHTML(qs,1,'Q')+'</div>']});
     // El anexo de rúbricas no depende de la semilla (es el mismo criterio de
     // evaluación para todas las versiones): con varias versiones solo se
     // agrega una vez, al final, para no repetir la misma hoja N veces.
