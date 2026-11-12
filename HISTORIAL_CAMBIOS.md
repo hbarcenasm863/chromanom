@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-12 (176) — Las preguntas tipo Saber también entran al juego
+
+### Contexto
+El docente pidió que las preguntas tipo Saber 11 (con situación, tabla o figura) no se queden solo en las evaluaciones del panel docente, sino que también salgan en el **juego**, en el tema que les corresponde.
+
+### Cambios
+- **`saber-juego.js` (nuevo)** y **`herramientas/generar-saber-juego.js` (nuevo):** el generador toma las preguntas tipo Saber de `docente-datos.js` y las pasa a un archivo compacto (268 preguntas) para no cargar en el celular todo el banco docente. Cada pregunta se asigna al tema del juego que le corresponde (alcanos, alquenos, alcoholes, isomería, reacciones, etc.). Se omiten 82 que dependen de un dibujo o de una fórmula con paréntesis. Si cambian las preguntas Saber del panel docente, hay que volver a correr el generador: `node herramientas/generar-saber-juego.js`.
+- **`juego.html`:** las preguntas Saber y las oficiales del cuadernillo Icfes (con su figura, tabla y crédito) se suman al banco. Cada partida trae al menos 4 de ellas; muestran la situación sobre la pregunta, tienen 90 s y sus opciones se leen como texto.
+- **Versión:** `?v=77`, `chromanom-v77`, y `saber-juego.js` en `sw.js`.
+
+### Verificación
+Con Playwright: los 13 niveles arrancan con al menos 4 preguntas Saber, sin errores; se revisó en capturas una pregunta de indagación y la oficial 50 con sus tablas.
+
+### Pendiente
+Las explicaciones y pistas del juego para estas preguntas son generales por competencia; falta escribir explicaciones propias. Más preguntas con tablas y gráficas quedan para la siguiente sesión.
+
+---
+
 ## 2026-11-12 (175) — Más indagación y competencias bien marcadas
 
 ### Contexto

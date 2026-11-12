@@ -884,8 +884,9 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   html.juego-fs .site-nav,html.juego-fs #text-zoom-widget,html.juego-fs .site-footer,html.juego-fs body>footer{display:none!important}
   html.juego-fs #area-ahorcado{scroll-margin-top:84px}
 }
+.saber-ctx{font-size:.9rem;font-style:italic;opacity:.85;margin:6px 0 8px;line-height:1.45}.saber-ctx+.icfes-fig img,.q-title ~ .icfes-fig img{max-width:100%;height:auto;max-height:240px}.icfes-fig img{max-width:100%;height:auto;max-height:240px;background:#fff;border-radius:6px}.icfes-tab{font-size:.8em;margin:6px 0;background:#fff;color:#111}.icfes-cred{font-size:.72rem;opacity:.7;font-style:italic;margin-top:4px}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=76">
+<link rel="stylesheet" href="chromanom.css?v=77">
 </head>
 <body>
 <nav class="site-nav">
@@ -1232,11 +1233,14 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
-<script src="fundamentos.js?v=76"></script>
-<script src="temas-extra.js?v=76"></script>
-<script src="temas-11.js?v=76"></script>
-<script src="ahorcado-datos.js?v=76"></script>
-<script src="retos.js?v=76"></script>
+<script src="fundamentos.js?v=77"></script>
+<script src="temas-extra.js?v=77"></script>
+<script src="temas-11.js?v=77"></script>
+<script src="ahorcado-datos.js?v=77"></script>
+<script src="saber-icfes.js?v=77"></script>
+<script src="icfes-datos.js?v=77"></script>
+<script src="saber-juego.js?v=77"></script>
+<script src="retos.js?v=77"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -3013,10 +3017,10 @@ function startGame(){
   _iniciandoPartida=false; // la partida ya arrancó de verdad: libera el candado de openLevelModal()
   let pool;
   if(currentLevel==='rxn_mixto'){
-    pool=QBANK.filter(q=>q.type==='rxnq'&&_rxnGrupos.includes(q.topic));
+    pool=QBANK.filter(q=>(q.type==='rxnq'||q.saber)&&_rxnGrupos.includes(q.topic));
   } else if(currentLevel.startsWith('rxn_')||currentLevel==='reacciones'){
     const _t=NIVEL_TOPICS[currentLevel]||[currentLevel];
-    pool=QBANK.filter(q=>q.type==='rxnq'&&_t.includes(q.topic));
+    pool=QBANK.filter(q=>(q.type==='rxnq'||q.saber)&&_t.includes(q.topic));
   } else if(currentLevel.startsWith('constructor_')){
     const _fam=CONSTRUCTOR_FAMILIA_TOPIC[currentLevel]||currentLevel.slice('constructor_'.length);
     pool=QBANK.filter(q=>q.type==='build'&&q.topic===_fam);
@@ -3037,6 +3041,10 @@ function startGame(){
   }
   const n=Math.min(pool.length,20);
   questions=shuffle(pool).slice(0,n);
+  // Cada partida lleva al menos 4 preguntas tipo Saber 11 (con situación) si el tema las tiene.
+  {const _sab=pool.filter(q=>q.saber),_min=Math.min(4,_sab.length,questions.length),_ya=questions.filter(q=>q.saber).length;
+   if(_ya<_min){const _ex=shuffle(_sab.filter(q=>!questions.includes(q))).slice(0,_min-_ya);
+     shuffle(questions.map((q,i)=>i).filter(i=>!questions[i].saber)).slice(0,_ex.length).forEach((i,k)=>{questions[i]=_ex[k];});}}
   qIdx=0; score=0; history=[];
   streak=0; bestStreak=0;
   typeStats={mc:{ok:0,tot:0},drag:{ok:0,tot:0},id:{ok:0,tot:0},write:{ok:0,tot:0},build:{ok:0,tot:0},rxnq:{ok:0,tot:0},ahorcado:{ok:0,tot:0},crucigrama:{ok:0,tot:0},sopa:{ok:0,tot:0}};
@@ -3295,7 +3303,9 @@ function loadQuestion(){
   const molInner=(molView==='form')?`<div class="formula-display">${mkDevSVG(MOLDES[q.mol])}</div>`:(M[q.mol]?M[q.mol]():'');
 
   let html=`<div class="q-type-badge ${typeCls[q.type]||'qt-mc'}">${typeBadge[q.type]||''}</div>`;
-  html+=`<div class="q-title">${q.q}</div>`;
+  if(q.saber){const _SI=window.SABER_ICFES;
+    html+=`<div class="saber-ctx">${q.ctx}</div>${(_SI&&q.icfes)?_SI.extraHTML(q):''}<div class="q-title">${q.q}</div>${(_SI&&q.icfes)?_SI.creditoHTML(q):''}`;}
+  else html+=`<div class="q-title">${q.q}</div>`;
   if(!isBuild&&!isRxnQ&&(molInner||toggleHtml)) html+=`${toggleHtml}<div class="mol-card" id="mol-card-inner">${molInner}</div>`;
 
   if(q.type==='mc') html+=buildMC(q);
@@ -3471,7 +3481,7 @@ function buildMC(q){
   }
   // Temas conceptuales (Fase 1 e isomería): las opciones son frases, no
   // nombres IUPAC, y se leen mejor en la letra normal que en monoespaciada.
-  const _txt=(FUND_TOPICS.includes(q.topic)||EXTRA_TOPICS.includes(q.topic))?' mc-texto':'';
+  const _txt=(q.saber||FUND_TOPICS.includes(q.topic)||EXTRA_TOPICS.includes(q.topic))?' mc-texto':'';
   return `<div class="mc-options">${opts.map((o,i)=>`<button class="mc-opt${_txt}" data-ans="${String(o).replace(/&/g,"&amp;").replace(/"/g,"&quot;")}" onclick="checkMC(this.dataset.ans,this)">${html[i]}</button>`).join('')}</div>`;
 }
 // ── 3 intentos con pistas progresivas (reglas comunes en retos.js) ──
@@ -4111,7 +4121,7 @@ function startTimer(){
     return;
   }
   // Ahorcado: el tiempo crece con las letras distintas y el largo de la palabra (retos.js).
-  timeMax=(q&&q.type==='build')?90:(q&&q.type==='ahorcado')?RETOS.tiempo('ahorcado',[{pal:RETOS.letras(q.palabra)}]):60;
+  timeMax=(q&&q.type==='build')?90:(q&&q.saber)?90:(q&&q.type==='ahorcado')?RETOS.tiempo('ahorcado',[{pal:RETOS.letras(q.palabra)}]):60;
   timeLeft=timeMax;
   const fg=document.getElementById('timer-fg');
   const txt=document.getElementById('timer-text');
@@ -7069,6 +7079,22 @@ const EXTRA_TOPICS=window.EXTRA_TOPICS||[];
 const F4_TOPICS=Object.keys(window.TEMAS11||{});
 const QBANK_FUNDAMENTOS=[...(window.FUND_BANCO||[])];
 QBANK.push(...QBANK_FUNDAMENTOS);
+// ── Preguntas tipo Saber 11 en el Juego ──
+// saber-juego.js (generado desde docente-datos.js) y las oficiales del Icfes
+// (icfes-datos.js) se suman al banco en su tema, con su situación (ctx).
+// Las oficiales llevan figura y crédito debajo (saber-icfes.js).
+(function(){
+  const NOMC={uso:'uso comprensivo del conocimiento científico',exp:'explicación de fenómenos',ind:'indagación'};
+  const PIS={ind:['Fíjate en los datos, la tabla o el procedimiento que describe la situación.','La respuesta correcta se apoya en lo que se midió o se observó; descarta lo que no se desprende de ahí.'],
+    exp:['Relaciona la situación con la estructura del compuesto: ¿qué propiedad o grupo funcional explica lo que pasa?','Descarta las opciones que solo describen o que inventan una causa que la situación no menciona.'],
+    uso:['Recuerda la regla o la definición del tema que usa esta pregunta.','Compara cada opción con esa regla y descarta las que la contradicen.']};
+  const mk=(x,ok,opts,extra)=>Object.assign({type:'mc',saber:1,topic:x.t,ctx:x.ctx,q:x.q,ans:ok,opts:opts,pistas:PIS[x.c]||PIS.uso,
+    expl:'Pregunta tipo Saber 11 de la competencia de '+(NOMC[x.c]||NOMC.uso)+'. La respuesta correcta es «'+ok+'»: es la que se apoya en la situación y en lo que estudiaste en este tema; las otras opciones no se desprenden de ella.'},extra||{});
+  (window.SABER_JUEGO||[]).forEach(x=>QBANK.push(mk(x,x.o[0],x.o.slice())));
+  if(window.SABER_ICFES)SABER_ICFES.preguntas().forEach(x=>{if(x.imgOps)return;
+    QBANK.push(mk({t:x.t,c:x.c,ctx:x.ctx,q:x.q},x.o[x.r],x.o.slice(),{icfes:x.icfes,img:x.img,tabla:x.tabla,pistas:x.p||PIS[x.c],
+      expl:(x.exp||'')+' (Pregunta '+x.icfes+' del cuadernillo Saber 11.º de Ciencias Naturales, Icfes 2026.)'}));});
+})();
 Object.assign(M,window.FUND_FIG||{});
 // Toda pregunta de construir sin explicación propia recibe una breve,
 // armada leyendo el nombre por partes (ver _explBuild).
@@ -7864,10 +7890,10 @@ function confirmExitGame(){
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="pwa-install.js?v=76"></script>
-<script src="text-zoom.js?v=76"></script>
-<script src="fx-libro.js?v=76"></script>
-<script src="site-ui.js?v=76"></script>
+<script src="pwa-install.js?v=77"></script>
+<script src="text-zoom.js?v=77"></script>
+<script src="fx-libro.js?v=77"></script>
+<script src="site-ui.js?v=77"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>
