@@ -7,6 +7,22 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (182) — Hojas de referencia de ChromaNom: acabado final
+
+### Contexto
+El docente pidió una hoja «Reacciones por grupo funcional» (nombre y forma general, sin mecanismo, con Markovnikov/Zaitsev y colores para lo que entra, sale o se transfiere), sin paréntesis ni grupos abreviados (-CHO, -COOH, -CO-), con dobles enlaces y grupos totalmente desplegados, anillos con enlaces que salen de los carbonos, logo, marca de agua y pie con créditos en todas las páginas, y sin espacios en blanco grandes.
+
+### Cambios
+- `guias.html`: diez hojas (nueva «Reacciones por grupo funcional», 10 páginas) dibujadas con el motor FX de `fx-libro.js`; Friedel-Crafts con anillo `@ring`; corregido texto con código visible en Biomoléculas y Grupos funcionales; bloques en dos columnas ya se parten entre páginas (menos espacio en blanco).
+- `pdf/guia-*.pdf`: los diez PDF regenerados (logo arriba, marca de agua y pie con créditos en cada página).
+- `referencia.html`: marca de agua para el PDF de nomenclatura.
+
+### Pendiente
+- El PDF de nomenclatura aún no repite el logo en su segunda página.
+- Sin pasos manuales (no se tocó el `.gs`).
+
+---
+
 ## 2026-11-13 (181) — Hoja «Reacciones por grupo funcional»: formas generales
 
 ### Contexto
