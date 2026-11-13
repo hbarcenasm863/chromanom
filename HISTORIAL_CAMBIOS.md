@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (181) — Hoja «Reacciones por grupo funcional»: formas generales
+
+### Contexto
+El docente pidió un resumen de las **formas generales de las reacciones**, en el formato de las fotos de su libro de referencia: grupo funcional, nombre de la reacción y forma general, **sin mecanismo**. Luego pidió no olvidar la **regla de Markovnikov** y usar **colores distintos** para los grupos que se adicionan o se sustituyen, para que el estudiante los siga fácil.
+
+### Cambios
+- **`guias.html`:** pestaña nueva «📑 Reacciones por grupo» con 11 grupos (alcanos, alquenos, alquinos, aromáticos, halogenuros de alquilo, éteres, alcoholes, aminas, aldehídos y cetonas, ácidos carboxílicos y derivados de ácido) y unas 55 reacciones, tomadas de `reacciones.html` (que se armó con las fotos del libro). Cada fila: nombre de la reacción + forma general con el reactivo o la condición sobre la flecha.
+- **Colores para seguir los grupos:** rosa = grupo que entra, naranja = grupo que sale, azul = hidrógeno que se transfiere, violeta = pareja del reactivo. El mismo color va del reactivo al producto.
+- **Reglas:** recuadro al inicio con la **regla de Markovnikov** (con ejemplo propeno + HBr dibujado) y la de **Zaitsev**.
+- **Reglas del sitio:** sin paréntesis; los grupos que cuelgan de un carbono (OH, R, CN) se dibujan apilados con su enlace, como en el motor de fórmulas.
+- **`pdf/guia-reacciones-por-grupo.pdf`** (3 páginas, carta horizontal) y generador actualizado. Portada y textos: «diez hojas».
+
+### Pendiente
+- No hay las fotos del libro dentro del repositorio: la lista de reacciones sale de `reacciones.html`. Si el libro trae alguna reacción más, se agrega.
+- No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-11-13 (180) — Guías de referencia descargables en PDF (nueve hojas)
 
 ### Contexto

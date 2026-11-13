@@ -6,7 +6,7 @@
 const {chromium}=require('playwright');const path=require('path');
 const FUENTES=process.env.FUENTES||'';
 const base=path.resolve(process.argv[2]||'.');const out=path.resolve(process.argv[3]||base+'/pdf');
-const hojas={carbono:'guia-carbono.pdf',cadenas:'guia-cadenas.pdf',grupos:'guia-grupos-funcionales.pdf',isomeria:'guia-isomeria.pdf',fuerzas:'guia-fuerzas-intermoleculares.pdf',reacciones:'guia-reacciones-organicas.pdf',biomol:'guia-biomoleculas.pdf',ambiente:'guia-organica-ambiente.pdf'};
+const hojas={carbono:'guia-carbono.pdf',cadenas:'guia-cadenas.pdf',grupos:'guia-grupos-funcionales.pdf',isomeria:'guia-isomeria.pdf',fuerzas:'guia-fuerzas-intermoleculares.pdf',reacciones:'guia-reacciones-organicas.pdf',rxgrupo:'guia-reacciones-por-grupo.pdf',biomol:'guia-biomoleculas.pdf',ambiente:'guia-organica-ambiente.pdf'};
 (async()=>{const b=await chromium.launch();
 async function fuentes(p){
  if(!FUENTES)return;
