@@ -19,7 +19,7 @@
   ];
   var MAS=[
     {href:'carbono.html',ico:'⚛️',txt:'Fase 1: El carbono (hibridación, tipos de C, cadenas)'},
-    {href:'referencia.html',ico:'📋',txt:'Hoja de referencia'},
+    {href:'guias.html',ico:'📋',txt:'Guías de referencia (PDF)'},
     {href:'isomeria.html',ico:'🔀',txt:'Isomería'},
     {href:'orbitales.html',ico:'🌿',txt:'Fase 4: Química de la vida y del ambiente (orbitales, propiedades, biomoléculas, ambiente)'},
     {href:'docente.html',ico:'📘',txt:'Docente: guías y evaluaciones'}
@@ -113,7 +113,7 @@
     sheet.innerHTML='<h3>La ruta por fases</h3>'+F.map(function(f){return '<div class="bf" style="--fc:'+f.c+'"><div class="bf-h"><b>Fase '+f.n+'</b> · '+f.t+'</div>'+
         f.st.map(function(x){return '<a href="'+x.id+'"'+(x.id===page?' class="on"':'')+'><span aria-hidden="true">'+x.e+'</span>'+x.t+'</a>';}).join('')+'</div>';}).join('')+
       '<h3 style="margin-top:12px">Recursos</h3>'+
-      MAS.filter(function(m){return /referencia|docente/.test(m.href);}).map(function(m){return '<a href="'+m.href+'"><span aria-hidden="true">'+m.ico+'</span>'+m.txt+'</a>';}).join('')+
+      MAS.filter(function(m){return /guias|referencia|docente/.test(m.href);}).map(function(m){return '<a href="'+m.href+'"><span aria-hidden="true">'+m.ico+'</span>'+m.txt+'</a>';}).join('')+
       '<h3 style="margin-top:14px">Tamaño del texto</h3>'+
       '<div class="tz"><button type="button" data-tz="tz-minus" aria-label="Reducir texto">A−</button>'+
       '<span id="bnav-tz-label"></span>'+
@@ -260,7 +260,7 @@ window.CN_FASES_EXTRA=[];
     var faseDe=function(h){return fase[h]||null;};
     var paginaFase=fase[page];
     links.forEach(function(a){var h=(a.getAttribute('href')||'').toLowerCase(),f=faseDe(h);
-      a.dataset.ord=h==='index.html'?0:f?orden[h]:100+(h==='referencia.html'?1:2);
+      a.dataset.ord=h==='index.html'?0:f?orden[h]:100+(h==='guias.html'||h==='referencia.html'?1:2);
       if(f){a.style.boxShadow='inset 0 -3px 0 '+f.c;a.title='Fase '+f.n+' · '+f.t;
         if(paginaFase&&paginaFase===f&&!links.some(function(x){return (x.getAttribute('href')||'').toLowerCase()===page;})&&h===f.st[0].id)a.classList.add('active');}});
     links.sort(function(a,b){return a.dataset.ord-b.dataset.ord;}).forEach(function(a){cont.appendChild(a);});

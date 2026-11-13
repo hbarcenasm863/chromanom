@@ -7,6 +7,26 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (180) — Guías de referencia descargables en PDF (nueve hojas)
+
+### Contexto
+El docente pidió revisar qué hojas de referencia faltaban en ChromaNom y construirlas siguiendo las reglas de estructuras del sitio. Antes solo existía la hoja de nomenclatura IUPAC (`referencia.html`).
+
+### Cambios
+- **`guias.html` (nueva):** nueve hojas con pestañas, cada una con «Descargar PDF» e «Imprimir»: Nomenclatura (enlaza la hoja oficial), **El carbono** (hibridación sp³/sp²/sp, σ y π, orbitales moleculares y aromaticidad), **Cadenas y tipos de carbono** (1° a 4°, criterios de clasificación, anillos), **Grupos funcionales** (diez familias dibujadas con su fórmula general y sufijo), **Isomería** (cadena, posición, función, cis-trans, enantiómeros, IDH), **Polaridad y fuerzas intermoleculares** (con gráfica de puntos de ebullición), **Reacciones orgánicas** (los ocho tipos, Markovnikov y Zaitsev, SN1 y SN2), **Biomoléculas** (enlace peptídico dibujado) y **Química orgánica y ambiente**.
+- **Reglas del sitio:** código de cuatro colores (① turquesa, ② verde, ③ dorado, ④ rosa) en todos los dibujos; **ninguna fórmula con paréntesis**: las estructuras se dibujan en SVG con todos sus enlaces (ramas colgando de su carbono, dobles y triples enlaces, cuñas y rayas en los enantiómeros) y el resto va con fórmula molecular o semidesarrollada lineal.
+- **`pdf/` (nuevo):** nueve PDF (carta horizontal, 2 páginas) con logo, marca de agua y la licencia al pie. **`herramientas/generar-guias-pdf.js`** los genera (hay que volver a correrlo si cambia `guias.html` o `referencia.html`).
+- **`referencia.html`:** se le agregó la marca de agua al imprimir.
+- **Menú, portada y `site-ui.js`:** «Referencia» pasa a «Guías» (`guias.html`); tarjeta nueva en la portada.
+- **Versión:** `?v=81` y `chromanom-v81` (`sw.js` incluye `guias.html`).
+- **Pruebas:** Playwright en computador y celular sin errores ni desbordes; cada PDF se revisó como imagen; impresión en carta y A4, horizontal y vertical, sin hojas en blanco (de 2 a 3 páginas).
+
+### Pendiente
+- No se tocó `chromanom-analytics.gs`: no hay pasos manuales.
+- Los PDF son archivos fijos: si se cambia el texto de una guía, regenerarlos.
+
+---
+
 ## 2026-11-13 (179) — Simulaciones nuevas, pantalla completa y fotos con cita APA
 
 ### Contexto

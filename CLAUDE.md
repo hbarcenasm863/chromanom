@@ -101,3 +101,5 @@ hace falta registrar nada.
   Commons, buscados con Openverse), licencias CC0, dominio público, CC BY o
   CC BY-SA, y la cita siempre debajo. Wikimedia limita las descargas
   automáticas (error 429): bajar las imágenes de a una y con pausas.
+
+- **Guías descargables (`guias.html`).** Los PDF de `pdf/guia-*.pdf` son archivos fijos generados desde `guias.html` y `referencia.html` (carta horizontal, con logo y marca de agua). Si se cambia el contenido de una guía, correr `node herramientas/generar-guias-pdf.js . pdf` (con `FUENTES=<node_modules/@fontsource>` para la letra Outfit) y subir los PDF en el mismo commit. Las estructuras de las guías van **dibujadas en SVG** con el código de cuatro colores y sin paréntesis; nunca escribir ramas entre paréntesis.
