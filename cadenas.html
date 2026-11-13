@@ -12,8 +12,8 @@
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Clasificación de cadenas carbonadas</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fundamentos.css?v=81">
-<link rel="stylesheet" href="chromanom.css?v=81">
+<link rel="stylesheet" href="fundamentos.css?v=82">
+<link rel="stylesheet" href="chromanom.css?v=82">
 <style>
 #morph text{font-family:'JetBrains Mono',monospace}
 .crit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
@@ -53,23 +53,27 @@
 <nav class="fase-nav" id="fase-nav" aria-label="Paradas de esta fase"></nav>
 
 <nav class="toc" aria-label="Secciones de la página">
-  <a href="#mapa">Los 4 criterios</a>
+  <a href="#mapa">Mapa de clasificación</a>
   <a href="#cerrar">Abierta o cerrada</a>
   <a href="#doblar">Lineal o ramificada</a>
-  <a href="#cerradas">Tipos de anillos</a>
   <a href="#clasificador">Clasificador</a>
   <a href="#practica">Practica</a>
 </nav>
 
 <!-- ═══════════════ 1. MAPA ═══════════════ -->
 <section class="sec" id="mapa">
-  <div class="sec-kicker">Una cadena, cuatro preguntas</div>
-  <h2>Los 4 criterios para clasificar una cadena</h2>
-  <p>Una misma cadena se clasifica respondiendo cuatro preguntas. Por ejemplo, CH₃−CH(CH₃)−CH=CH₂ es <b>abierta, ramificada, insaturada y homogénea</b>.</p>
-  <div class="key">✏️ <b>Antes de empezar: la fórmula de esqueleto.</b> En algunos dibujos de esta página la cadena aparece como un zigzag. Cada <b>vértice</b> y cada <b>extremo</b> del zigzag es un carbono, y los H no se dibujan: cada C tiene los H que le faltan para completar 4 enlaces. Las dos figuras son la misma molécula, el butano.</div>
+  <div class="sec-kicker">Una cadena, un camino</div>
+  <h2>Mapa de clasificación de las cadenas carbonadas</h2>
+  <p>Toda cadena se clasifica siguiendo un camino de izquierda a derecha: primero <b>alifática o aromática</b>, después su forma, sus ramas, los átomos del anillo y sus enlaces. <b>Toca cada recuadro</b> para ver qué significa, cómo reconocerlo y ejemplos dibujados. Por ejemplo, el 3-metilbut-1-eno es <b>alifático, acíclico, ramificado e insaturado</b>.</p>
+  <div data-cadmapa></div>
+  <div class="key">✏️ <b>Antes de empezar: la fórmula de esqueleto.</b> En algunos dibujos de esta página la cadena aparece como un zigzag. Cada <b>vértice</b> y cada <b>extremo</b> del zigzag es un carbono, y los H no se dibujan.</div>
   <div class="figs" id="esq"></div>
-  <div class="crit" id="crit"></div>
-  <div class="key">🔑 <b>Heteroátomo</b> = cualquier átomo distinto del carbono y del hidrógeno (O, N, S, halógenos…). La cadena es <b>heterogénea</b> solo si el heteroátomo está <b>intercalado entre carbonos</b>. Si el O o el N están al final, como un −OH o un −NH₂, son grupos que cuelgan de la cadena y la cadena sigue siendo <b>homogénea</b>.</div>
+  <div class="key">🔑 <b>Heteroátomo</b> = cualquier átomo distinto del carbono y del hidrógeno (O, N, S, halógenos…). Un anillo es <b>heterogéneo</b> (heterocíclico) solo si el heteroátomo está <b>dentro del anillo, entre carbonos</b>. Si el O, el N o el halógeno está al final o colgando (−OH, −NH₂, −Cl), la cadena sigue siendo homogénea.</div>
+  <div class="life">
+    <div class="life-h">En tu vida diaria</div>
+    <p>☕ La cafeína y la nicotina tienen anillos <b>heterocíclicos</b> con nitrógeno. 🧴 Muchos perfumes tienen anillos <b>aromáticos</b>. 🧿 La naftalina es un aromático <b>polinuclear</b>. ⛽ La gasolina mezcla cadenas abiertas, ramificadas y anillos.</p>
+  </div>
+  <div class="warn">⚠️ <b>Error frecuente:</b> pensar que una cadena en zigzag o «doblada» es ramificada. El zigzag es la forma real de los alcanos (por los 109,5° del carbono sp³). Una cadena solo es ramificada si el camino se <b>bifurca</b>.</div>
 </section>
 
 <!-- ═══════════════ 2. ABIERTA / CERRADA ═══════════════ -->
@@ -105,22 +109,6 @@
   <div class="warn">⚠️ <b>Error frecuente:</b> pensar que una cadena en zigzag o «doblada» es ramificada. El zigzag es la forma real de los alcanos (por los 109,5° del carbono sp³). Una cadena solo es ramificada si el camino se <b>bifurca</b>.</div>
 </section>
 
-<!-- ═══════════════ 4. CERRADAS ═══════════════ -->
-<section class="sec" id="cerradas">
-  <div class="sec-kicker">Cadenas cerradas</div>
-  <h2>Tipos de anillos</h2>
-  <div class="tree three" role="group" aria-label="Tipos de cadenas cerradas">
-    <div class="tree-root">Cadenas cerradas (cíclicas)</div>
-    <div class="tree-col"><h4>Alicíclicas</h4><p>Anillos solo de carbono, <b>no aromáticos</b>. Pueden ser saturados o insaturados.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-alic"></div></div>
-    <div class="tree-col"><h4>Aromáticas</h4><p>Anillos tipo <b>benceno</b>: 6 carbonos sp² con dobles enlaces alternados, que se dibujan con un círculo.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-arom"></div></div>
-    <div class="tree-col"><h4>Heterocíclicas</h4><p>El anillo tiene un <b>heteroátomo</b> (O, N, S). Pueden ser aromáticas o no.</p><div class="figs" style="grid-template-columns:1fr 1fr;margin:0" id="f-het"></div></div>
-  </div>
-  <div class="life">
-    <div class="life-h">En tu vida diaria</div>
-    <p>☕ La cafeína y la nicotina tienen anillos <b>heterocíclicos</b> con nitrógeno. 🧴 Muchos perfumes tienen anillos <b>aromáticos</b>. ⛽ La gasolina mezcla cadenas abiertas, ramificadas y anillos.</p>
-  </div>
-</section>
-
 <!-- ═══════════════ CONFORMACIONES ═══════════════ -->
 <section class="sec" id="conformaciones">
   <div class="sec-kicker">Una cadena no está quieta</div>
@@ -135,18 +123,13 @@
 <section class="sec" id="clasificador">
   <div class="sec-kicker">Laboratorio</div>
   <h2>Clasificador de cadenas</h2>
-  <p>Marca una opción en cada criterio y pulsa <b>Comprobar</b>.</p>
+  <p>Recorre el mapa con la cadena del dibujo: en cada paso elige una opción y aparecerán las siguientes. Al llegar al final pulsa <b>Comprobar</b>.</p>
   <div class="lab" style="align-items:start">
     <div class="lab-view"><div class="fig" id="cl-fig" style="width:100%;min-height:180px;justify-content:center"></div></div>
     <div class="lab-ctl">
-      <form id="cl-form" class="cl-grid" onsubmit="return false">
-        <fieldset data-c="f"><legend>Forma</legend><label><input type="radio" name="f" value="al"> Abierta lineal</label><label><input type="radio" name="f" value="ar"> Abierta ramificada</label><label><input type="radio" name="f" value="c"> Cerrada</label></fieldset>
-        <fieldset data-c="e"><legend>Enlaces</legend><label><input type="radio" name="e" value="sat"> Saturada</label><label><input type="radio" name="e" value="ins"> Insaturada</label></fieldset>
-        <fieldset data-c="a"><legend>Átomos</legend><label><input type="radio" name="a" value="hom"> Homogénea</label><label><input type="radio" name="a" value="het"> Heterogénea</label></fieldset>
-        <fieldset data-c="r"><legend>Tipo de anillo</legend><label><input type="radio" name="r" value="alic"> Alicíclico</label><label><input type="radio" name="r" value="arom"> Aromático</label><label><input type="radio" name="r" value="hetc"> Heterocíclico</label><label><input type="radio" name="r" value="na"> No aplica (abierta)</label></fieldset>
-      </form>
+      <div id="cl-pasos" class="cl-grid" style="grid-template-columns:1fr" aria-live="polite"></div>
       <div class="lab-msg" id="cl-msg" aria-live="polite">Clasifica la cadena del dibujo.</div>
-      <div class="links-row"><button type="button" class="btn-sm prim" id="cl-ok">✓ Comprobar</button><button type="button" class="btn-sm" id="cl-otra">🔀 Otra cadena</button><span class="prac-score" id="cl-score" style="align-self:center"></span></div>
+      <div class="links-row"><button type="button" class="btn-sm prim" id="cl-ok" disabled>✓ Comprobar</button><button type="button" class="btn-sm" id="cl-otra">🔀 Otra cadena</button><span class="prac-score" id="cl-score" style="align-self:center"></span></div>
     </div>
   </div>
 </section>
@@ -162,23 +145,15 @@
 <div class="fase-sig" id="fase-sig"></div>
 </div>
 
-<script src="fundamentos.js?v=81"></script>
+<script src="fundamentos.js?v=82"></script>
+<script src="cadmapa.js?v=82"></script>
 <script>
 (function(){
 var FU=window.FUND,F=FU.fig,quieto=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
 function anima(dur,cb,fin){if(quieto){cb(1);if(fin)fin();return;}var t0=performance.now();(function f(now){var t=Math.min(1,(now-t0)/dur);cb(ease(t));if(t<1)requestAnimationFrame(f);else if(fin)fin();})(t0);}
 
-// Mapa de criterios
-var A=function(t,o){o=o||{};o.t=t;return o;};
-var mini=function(at){return FU.semi(at,'');};
 document.getElementById('esq').innerHTML='<div class="fig">'+F.fu_butano()+'<div class="fig-sub">semidesarrollada: todos los C y H</div></div><div class="fig">'+F.fu_butano_zz()+'<div class="fig-sub">esqueleto: 2 extremos + 2 vértices = 4 C</div></div>';
-document.getElementById('crit').innerHTML=[
-  ['1 · Por su forma','Abierta (acíclica)','Tiene dos extremos.',F.fu_butano_zz(),'Cerrada (cíclica)','Los extremos se unen en un anillo.',F.fu_ciclohexano()],
-  ['2 · Por sus ramas (abiertas)','Lineal','Un solo camino, sin bifurcaciones.',F.fu_hexano_zz(),'Ramificada','De un carbono sale otra cadena.',F.fu_isobutano()],
-  ['3 · Por sus enlaces','Saturada','Solo enlaces sencillos C−C.',mini([A('CH₃'),A('CH₂'),A('CH₃')]),'Insaturada','Al menos un enlace doble o triple.',mini([A('CH₂',{b:2}),A('CH'),A('CH₃')])],
-  ['4 · Por sus átomos','Homogénea','Esqueleto solo de carbonos.',mini([A('CH₃'),A('CH₂'),A('OH')]),'Heterogénea','Un O, N o S entre carbonos.',mini([A('CH₃'),A('O'),A('CH₃')])]
-].map(function(c){return '<div><h4>'+c[0]+'</h4><div class="par"><div><b>'+c[1]+'</b>'+c[2]+c[3]+'</div><div><b>'+c[4]+'</b>'+c[5]+c[6]+'</div></div></div>';}).join('');
 
 // ── Cerrar la cadena: zigzag de 6 C → hexágono ──
 (function(){
@@ -237,53 +212,61 @@ document.getElementById('crit').innerHTML=[
   ir(0);
 })();
 
-// Tipos de anillos
-document.getElementById('f-alic').innerHTML='<div class="fig">'+F.fu_ciclohexano()+'<div class="fig-sub">ciclohexano</div></div><div class="fig">'+F.fu_ciclohexeno()+'<div class="fig-sub">ciclohexeno</div></div>';
-document.getElementById('f-arom').innerHTML='<div class="fig">'+F.fu_benceno()+'<div class="fig-sub">benceno</div></div><div class="fig">'+F.fu_tolueno()+'<div class="fig-sub">metilbenceno</div></div>';
-document.getElementById('f-het').innerHTML='<div class="fig">'+F.fu_thf()+'<div class="fig-sub">con O (no aromático)</div></div><div class="fig">'+F.fu_piridina()+'<div class="fig-sub">piridina (aromático)</div></div>';
-
-// ── Clasificador ──
+// ── Clasificador: recorre el árbol del mapa (cadmapa.js) ──
 (function(){
-  var L={al:'abierta lineal',ar:'abierta ramificada',c:'cerrada',sat:'saturada',ins:'insaturada',hom:'homogénea',het:'heterogénea',alic:'anillo alicíclico',arom:'anillo aromático',hetc:'anillo heterocíclico',na:'no aplica'};
+  var M=window.CADMAPA,IDX=M.idx;
+  // [dibujo, hoja del mapa, nota opcional]
   var C=[
-    ['fu_butano','al','sat','hom','na'],['fu_isobutano','ar','sat','hom','na'],['fu_mixta','ar','ins','hom','na'],['fu_eter','al','sat','het','na'],
-    ['fu_dma','al','sat','het','na'],['fu_propeno','al','ins','hom','na'],['fu_ciclohexano','c','sat','hom','alic'],['fu_ciclohexeno','c','ins','hom','alic'],
-    ['fu_benceno','c','ins','hom','arom','El benceno tiene dobles enlaces (por eso se cuenta como insaturado), pero sus electrones π están repartidos en todo el anillo.'],
-    ['fu_thf','c','sat','het','hetc','Su anillo tiene un O: es heterocíclico (y no aromático).'],['fu_piridina','c','ins','het','hetc','Su anillo tiene un N: es heterocíclico, y además aromático como el benceno.'],
-    ['fu_cloroetano','al','sat','hom','na','El Cl está al final: no interrumpe la cadena.'],['fu_tioeter','al','sat','het','na'],['fu_ciclopropano','c','sat','hom','alic'],
-    ['fu_dieno','al','ins','hom','na'],['fu_metilamina_ch','al','sat','hom','na','El NH₂ está al final: la cadena sigue siendo homogénea.'],['fu_ramificadaU','ar','sat','hom','na','El CH₂−CH₃ de abajo es una rama: sale del C3, que queda unido a 3 carbonos.']
+    ['fu_butano','lin-sat'],['fu_hexano_zz','lin-sat'],['fu_cadenaU','lin-sat','Está doblada en U, pero sus carbonos siguen en un solo camino: es lineal.'],
+    ['fu_propeno','lin-ins'],['fu_propino','lin-ins'],['fu_dieno','lin-ins'],['fu_buteno2','lin-ins'],
+    ['fu_isobutano','ram-sat'],['fu_metilbutano','ram-sat'],['fu_ramificadaU','ram-sat','El CH₂−CH₃ de abajo es una rama: sale de un carbono unido a tres carbonos.'],
+    ['fu_mixta','ram-ins'],['fu_metilpropeno','ram-ins'],
+    ['fu_ciclohexano','hom-sen-sat'],['fu_ciclopentano','hom-sen-sat'],['fu_ciclopropano','hom-sen-sat'],['fu_ciclohexeno','hom-sen-ins'],['fu_ciclopenteno','hom-sen-ins'],
+    ['fu_metilciclohexano','hom-ram-sat'],['fu_metilciclopentano','hom-ram-sat'],['fu_metilciclohexeno','hom-ram-ins'],['fu_metilciclopenteno','hom-ram-ins'],
+    ['fu_thf','het-sen-sat'],['fu_oxirano','het-sen-sat'],['fu_piperidina','het-sen-sat'],['fu_dihidrofurano','het-sen-ins'],['fu_dihidropirano','het-sen-ins'],
+    ['fu_metilthf','het-ram-sat'],['fu_metilpiperidina','het-ram-sat'],['fu_metildihidrofurano','het-ram-ins'],['fu_metiltetrahidropiridina','het-ram-ins'],
+    ['fu_benceno','mon-sen','El círculo representa los tres dobles enlaces alternados del benceno.'],['fu_piridina','mon-sen','Tiene un N en el anillo (es heterocíclico), pero sus dobles enlaces alternados la hacen aromática y con un solo anillo.'],
+    ['fu_tolueno','mon-ram'],['fu_etilbenceno','mon-ram'],
+    ['fu_naftaleno','pol-con'],['fu_antraceno','pol-con'],['fu_bifenilo','pol-ais']
   ];
-  // Retroalimentación en dos tiempos: primero una pista por cada criterio
-  // fallado (sin dar la respuesta) y un nuevo intento; después, la solución
-  // con el porqué de cada criterio.
-  var PISTA={f:'<b>Forma:</b> ¿tiene extremos o se cierra en anillo? Si tiene extremos, ¿todos sus carbonos caben en un solo camino de un extremo al otro?',
-    e:'<b>Enlaces:</b> busca enlaces dobles (=) o triples (≡) entre carbonos.',
-    a:'<b>Átomos:</b> ¿hay un O, N o S <i>entre</i> dos carbonos? Si está al final (−OH, −Cl, −NH₂), no cuenta.',
-    r:'<b>Anillo:</b> solo aplica a cadenas cerradas. ¿El anillo tiene un átomo distinto del C? ¿Es tipo benceno?'};
-  var POR={al:'tiene dos extremos y todos sus carbonos en un solo camino',ar:'de uno de sus carbonos sale otra cadena (una rama)',c:'sus extremos se unen formando un anillo',
-    sat:'solo tiene enlaces sencillos entre carbonos',ins:'tiene al menos un enlace doble o triple entre carbonos',hom:'su esqueleto es solo de carbonos',het:'tiene un heteroátomo intercalado entre carbonos',
-    alic:'es un anillo no aromático',arom:'es un anillo tipo benceno',hetc:'su anillo incluye un átomo distinto del carbono',na:'no es una cadena cerrada'};
-  var orden=[],i=0,ok=0,tot=0,intento=0,form=document.getElementById('cl-form');
+  var orden=[],cur=null,sel=[],intento=0,ok=0,tot=0,pasos=document.getElementById('cl-pasos'),msg=document.getElementById('cl-msg'),btn=document.getElementById('cl-ok');
   function nueva(){
-    if(!orden.length){orden=C.map(function(_,k){return k;}).sort(function(){return Math.random()-.5;});}
-    i=orden.pop();intento=0;form.reset();form.querySelectorAll('fieldset').forEach(function(x){x.className='';});
-    document.getElementById('cl-fig').innerHTML=F[C[i][0]]();document.getElementById('cl-msg').textContent='Clasifica la cadena del dibujo.';
+    if(!orden.length)orden=C.map(function(_,k){return k;}).sort(function(){return Math.random()-.5;});
+    cur=C[orden.pop()];sel=[];intento=0;
+    document.getElementById('cl-fig').innerHTML=F[cur[0]]();msg.textContent='Clasifica la cadena del dibujo.';pinta();
   }
-  document.getElementById('cl-ok').addEventListener('click',function(){
-    var c=C[i],keys=['f','e','a','r'],bien=0,falta=false;
-    keys.forEach(function(k,j){var v=(form.querySelector('input[name='+k+']:checked')||{}).value,fs=form.querySelector('[data-c='+k+']');
-      if(!v){falta=true;fs.className='';return;}fs.className=v===c[j+1]?'ok':'mal';if(v===c[j+1])bien++;});
-    if(falta){document.getElementById('cl-msg').innerHTML='Marca una opción en cada uno de los 4 criterios.';return;}
-    intento++;
-    if(intento===1){tot++;if(bien===4)ok++;document.getElementById('cl-score').textContent=ok+' de '+tot+' perfectas al primer intento';}
-    var msg=document.getElementById('cl-msg');
-    if(bien<4&&intento===1){
-      msg.innerHTML='Tienes <b>'+bien+' de 4</b>. Revisa lo marcado en rojo y vuelve a comprobar:<br>'+keys.filter(function(k,j){return form.querySelector('[data-c='+k+']').className==='mal';}).map(function(k){return '• '+PISTA[k];}).join('<br>');
-      return;
+  // Pasos: cada uno muestra los hijos del nodo elegido antes.
+  function pinta(res){
+    var h='',n=M.arbol,d=0,i;
+    for(i=0;n&&n.k;i++){
+      var pre=n.q?'<div class="cm-pista" style="margin:0 0 4px">'+n.q+'</div>':'';
+      h+='<fieldset data-d="'+i+'" class="'+(res&&res[i]!==undefined?res[i]:'')+'"><legend>Paso '+(i+1)+'</legend>'+pre+n.k.map(function(c){
+        return '<label><input type="radio" name="p'+i+'" value="'+c.id+'"'+(sel[i]===c.id?' checked':'')+'> '+c.t+(c.s?' <small style="color:#64748b">· '+c.s+'</small>':'')+'</label>';}).join('')+'</fieldset>';
+      if(sel[i]===undefined)break;
+      n=IDX[sel[i]];
     }
-    var porque=[c[1],c[2],c[3]].map(function(v){return L[v]+' porque '+POR[v];});
-    if(c[4]!=='na')porque.push(L[c[4]]+': '+POR[c[4]]);
-    msg.innerHTML=(bien===4?'✓ <b>¡Perfecta!</b> ':'Tienes <b>'+bien+' de 4</b>. ')+'Es '+porque.map(function(x){return '<b>'+x.split(' porque ')[0].split(': ')[0]+'</b>'+x.slice(x.split(' porque ')[0].split(': ')[0].length);}).join('; ')+'.'+(c[5]?' '+c[5]:'');
+    pasos.innerHTML=h;btn.disabled=!(sel.length&&IDX[sel[sel.length-1]]&&!IDX[sel[sel.length-1]].k);
+  }
+  pasos.addEventListener('change',function(e){
+    var r=e.target.closest('input');if(!r)return;var d=+r.closest('fieldset').dataset.d;
+    sel=sel.slice(0,d);sel[d]=r.value;pinta();msg.textContent='Sigue eligiendo hasta llegar a una opción final.';
+  });
+  btn.addEventListener('click',function(){
+    var meta=M.camino(cur[1]).slice(1).map(function(x){return x.id;}),res=[],mal=-1,i;
+    for(i=0;i<sel.length;i++){res[i]=sel[i]===meta[i]?'ok':'mal';if(mal<0&&res[i]==='mal')mal=i;}
+    intento++;
+    if(intento===1){tot++;if(mal<0)ok++;document.getElementById('cl-score').textContent=ok+' de '+tot+' perfectas al primer intento';}
+    if(mal>=0&&intento===1){
+      var padre=mal===0?M.arbol:IDX[meta[mal-1]];
+      pinta(res);msg.innerHTML='Hay un error en el <b>paso '+(mal+1)+'</b>. Pista: <b>'+(padre.q||'revisa de nuevo el dibujo')+'</b> Corrígelo y vuelve a comprobar.';
+      sel=sel.slice(0,mal+1);return;
+    }
+    var ruta=M.camino(cur[1]).slice(1).map(function(x){return '<b>'+x.t.toLowerCase()+'</b>';}).join(' › ');
+    pinta(meta.map(function(){return 'ok';}));
+    var hoja=IDX[cur[1]];
+    msg.innerHTML=(mal<0?'✓ <b>¡Correcto!</b> ':'La respuesta es: ')+ruta+'.<br>'+hoja.def+(cur[2]?' <i>'+cur[2]+'</i>':'')+' <button type="button" class="btn-sm" id="cl-ver">ℹ️ Ver explicación</button>';
+    sel=meta.slice();pinta(meta.map(function(){return 'ok';}));btn.disabled=true;
+    document.getElementById('cl-ver').onclick=function(){M.abre(cur[1],this);};
   });
   document.getElementById('cl-otra').addEventListener('click',nueva);
   nueva();
@@ -296,14 +279,14 @@ FU.practica('prac-cad','cadenas',8,'Practica: clasificación de cadenas');
 <div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
   <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
 </div>
-<script src="pwa-install.js?v=81"></script>
-<script src="text-zoom.js?v=81"></script>
-<script src="fx-libro.js?v=81"></script>
-<script src="site-ui.js?v=81"></script>
+<script src="pwa-install.js?v=82"></script>
+<script src="text-zoom.js?v=82"></script>
+<script src="fx-libro.js?v=82"></script>
+<script src="site-ui.js?v=82"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="pantalla.js?v=81"></script>
-<script src="simx.js?v=81"></script>
-<script src="narracion.js?v=81"></script>
+<script src="pantalla.js?v=82"></script>
+<script src="simx.js?v=82"></script>
+<script src="narracion.js?v=82"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

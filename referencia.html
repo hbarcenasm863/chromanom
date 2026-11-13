@@ -336,9 +336,11 @@ code{
    PRINT STYLES
 ───────────────────────────────────────── */
 .pdf-wm{display:none}
+.ref-cab2{display:none}
 @media print{
   .pdf-wm{display:block;position:fixed;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);opacity:.07;z-index:-1;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .ref-logo{position:absolute;top:8px;right:14px;width:150px}
+  .ref-cab2{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #999;padding:0 0 2px;margin:-4px 0 4px}.ref-cab2 img{height:22px;width:auto}.ref-cab2 span{font:700 9pt Outfit,sans-serif;color:#333}
   @page{size:letter landscape;margin:7mm 9mm!important}
 
   /* Hide interactive elements */
@@ -488,7 +490,7 @@ code{
   .rule-item{font-size:.72rem;padding:3px 0}
 }
 </style>
-<link rel="stylesheet" href="chromanom.css?v=81">
+<link rel="stylesheet" href="chromanom.css?v=82">
 </head>
 <body>
 <nav class="site-nav">
@@ -624,6 +626,7 @@ code{
 
   <!-- HOJA 2 (al imprimir) -->
   <div class="hoja hoja-2">
+  <div class="ref-cab2" aria-hidden="true"><img src="logo-chromanom.png" alt=""><span>Nomenclatura Orgánica IUPAC · Hoja de Referencia</span></div>
   <!-- SECTION 4 — Reglas clave (ancho completo: ya no comparte fila con
        Sustituyentes comunes, que se unió a la tabla de abajo) -->
   <div class="sec">
@@ -774,10 +777,10 @@ function refSearch(q){
   }catch(e){}
 })();
 </script>
-<script src="pwa-install.js?v=81"></script>
-<script src="text-zoom.js?v=81"></script>
-<script src="fx-libro.js?v=81"></script>
-<script src="site-ui.js?v=81"></script>
+<script src="pwa-install.js?v=82"></script>
+<script src="text-zoom.js?v=82"></script>
+<script src="fx-libro.js?v=82"></script>
+<script src="site-ui.js?v=82"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

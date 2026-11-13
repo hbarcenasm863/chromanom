@@ -7,6 +7,26 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (183) — Clasificación de cadenas con mapa interactivo (alifáticas y aromáticas)
+
+### Contexto
+El docente clasifica las cadenas en clase con un mapa en llaves (cadenas acíclicas y cíclicas, lineales y ramificadas, homogéneas y heterogéneas, sencillas y ramificadas, saturadas e insaturadas) y pidió separar las alifáticas de las aromáticas (mononucleares y polinucleares). Quiso que la página de teoría, la hoja de referencia, los ejercicios, el juego y el generador docente siguieran esa misma clasificación, y que al tocar cada tipo se abra una ventana con la explicación y ejemplos. Si algo no coincidía con lo vigente, se sigue lo vigente: la IUPAC llama «alifático» a todo lo que no es aromático (abierto o cerrado); se aclara en el recuadro de «Alifáticas» que algunos libros usan el término solo para las abiertas.
+
+### Cambios
+- `cadmapa.js` (nuevo): el mapa en llaves, con 31 recuadros. Cada uno abre una ventana con definición, cómo reconocerlo, ejemplos dibujados con todos sus enlaces (sin paréntesis), error frecuente y la pregunta que ayuda a decidir. En celular se vuelve una lista con sangría. También tiene una versión fija para imprimir (`data-cadmapa="fijo"`).
+- `fundamentos.js`: dibujos nuevos (anillos con ramas, heterociclos, naftaleno, antraceno con sus dobles enlaces completos, bifenilo) y 40 preguntas nuevas del tema «cadenas» generadas desde el mapa (ahora son 80). Las opciones incorrectas explican en qué paso se desvió el estudiante. Este banco alimenta la práctica de la página, el juego y el generador docente.
+- `cadenas.html`: el mapa reemplaza a «Los 4 criterios» y «Tipos de anillos»; el clasificador ahora recorre el mismo árbol paso a paso, con pista en el paso donde se equivocó.
+- `guias.html` y `pdf/guia-cadenas.pdf`: la hoja «Cadenas» ahora trae el mapa (vista general, acíclicas, cíclicas y aromáticas), una tabla «Cómo decidir en cada paso» y errores frecuentes; 4 páginas bien aprovechadas.
+- `docente-datos.js`: lectura, esquema, ejemplos, preguntas abiertas y afirmaciones verdadero/falso del tema «Cadenas» actualizados a la nueva clasificación.
+- `referencia.html`: el PDF de nomenclatura repite el logo al inicio de su segunda página.
+- `sw.js`: caché `chromanom-v82` y `cadmapa.js` en la lista; `?v=82` en todas las páginas.
+
+### Pendiente
+- Sin pasos manuales (no se tocó el `.gs`).
+- Falta revisar en el juego y en el generador docente, con calma, cómo se ven las preguntas con los dibujos nuevos de aromáticos polinucleares.
+
+---
+
 ## 2026-11-13 (182) — Hojas de referencia de ChromaNom: acabado final
 
 ### Contexto

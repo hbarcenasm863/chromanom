@@ -213,19 +213,19 @@ var TEMAS=[
    activacion:['¿Qué diferencia hay entre una cadena de eslabones abierta y un collar cerrado?','¿Una cadena dibujada en zigzag es ramificada? ¿Por qué?','¿Por qué crees que el aceite es líquido y la manteca sólida?']
   },
   info:{
-   lectura:['Por su forma, una cadena es abierta (acíclica), con dos extremos, o cerrada (cíclica), formando un anillo. Las abiertas pueden ser lineales (un solo camino) o ramificadas (de algún carbono sale otra cadena).',
-     'Por sus enlaces es saturada (solo enlaces sencillos C−C) o insaturada (al menos un doble o triple enlace). Por sus átomos es homogénea (esqueleto solo de carbonos) o heterogénea (un heteroátomo, como O, N o S, intercalado entre carbonos).',
-     'Las cerradas pueden ser homocíclicas (solo carbono en el anillo) o heterocíclicas. Entre las homocíclicas están las alicíclicas (ciclohexano, ciclohexeno) y las aromáticas (benceno y sus derivados).',
-     'Doblar el dibujo no ramifica una cadena: el zigzag es su forma real por los 109,5° del carbono sp³. Un −OH, −NH₂ o −Cl al final de la cadena no la hace heterogénea: solo cuenta un heteroátomo entre dos carbonos.'],
+   lectura:['Las cadenas carbonadas se clasifican con un mapa que va de lo general a lo particular. Primero se decide si son alifáticas (sin anillo tipo benceno) o aromáticas (con anillo tipo benceno). Según la IUPAC, alifático es todo lo que no es aromático, sea de cadena abierta o cerrada.',
+     'Las alifáticas pueden ser acíclicas (cadena abierta, con dos extremos), que son lineales o ramificadas y saturadas (solo enlaces sencillos) o insaturadas (con dobles o triples). O cíclicas (cadena cerrada, alicíclicas): homogéneas, si el anillo es solo de carbonos, o heterogéneas, si tiene O, N o S dentro del anillo; sencillas o ramificadas; saturadas o insaturadas.',
+     'Las aromáticas son mononucleares (un solo anillo, como el benceno y el tolueno) o polinucleares (varios anillos): condensadas, si comparten un lado (naftaleno, antraceno), o aisladas, si están unidas por un enlace (bifenilo).',
+     'Doblar el dibujo no ramifica una cadena: el zigzag es su forma real por los 109,5° del carbono sp³. Un −OH, −NH₂ o −Cl al final de la cadena o colgado de un anillo no la hace heterogénea: solo cuenta un heteroátomo dentro de la cadena o del anillo.'],
    esquema:{raiz:'Cadenas carbonadas',ramas:[
-     {t:'Forma',items:['Abierta: lineal o ramificada','Cerrada: alicíclica, aromática o heterocíclica']},
-     {t:'Enlaces',items:['Saturada: solo sencillos','Insaturada: dobles o triples']},
-     {t:'Átomos',items:['Homogénea: solo C','Heterogénea: O, N o S entre carbonos']}]}
+     {t:'Alifáticas',items:['Acíclicas: lineales o ramificadas','Cíclicas: homogéneas o heterogéneas, sencillas o ramificadas']},
+     {t:'Aromáticas',items:['Mononucleares: sencillas o ramificadas','Polinucleares: condensadas o aisladas']},
+     {t:'Enlaces',items:['Saturada: solo sencillos','Insaturada: dobles o triples']}]}
   },
-  ejemplo:{pares:[{f:'CH₃−CH(CH₃)−CH=CH₂',n:'abierta, ramificada, insaturada y homogénea'},{f:'CH₃−CH₂−O−CH₃',n:'abierta, lineal, saturada y heterogénea'}],nota:'Una cadena se clasifica con los tres criterios a la vez: forma, enlaces y átomos.'},
+  ejemplo:{pares:[{f:'3-metilbut-1-eno, C₅H₁₀',n:'alifática, acíclica, ramificada e insaturada'},{f:'Tetrahidrofurano, C₄H₈O',n:'alifática, cíclica, heterogénea, sencilla y saturada'},{f:'Naftaleno, C₁₀H₈',n:'aromática, polinuclear condensada'}],nota:'Una cadena se clasifica siguiendo el mapa: alifática o aromática, su forma, los átomos del anillo, sus ramas y sus enlaces.'},
   abiertos:[
-   'Dibuja un ejemplo de cada una: cadena abierta lineal, abierta ramificada, cerrada alicíclica y cerrada aromática.',
-   'Clasifica según los tres criterios: a) CH₃−CH₂−CH₃; b) CH₂=CH−CH₂−CH₃; c) CH₃−O−CH₂−CH₃; d) CH₃−CH(CH₃)−CH₃.',
+   'Dibuja un ejemplo de cada una: alifática acíclica lineal, acíclica ramificada, cíclica homogénea, cíclica heterogénea, aromática mononuclear y aromática polinuclear.',
+   'Clasifica siguiendo el mapa: a) propano; b) but-1-eno; c) metilpropano; d) ciclohexeno; e) tolueno; f) naftaleno.',
    'Explica por qué CH₃−CH₂−OH es una cadena homogénea y CH₃−O−CH₃ es heterogénea.',
    'Un estudiante dice que una cadena dibujada en zigzag es ramificada. ¿Tiene razón? Explica.',
    'El hexano es C₆H₁₄ y el ciclohexano C₆H₁₂. Explica por qué el anillo tiene dos hidrógenos menos.',
@@ -1878,6 +1878,30 @@ var CAZAR={
 ]
 ],
 "cadenas": [
+[
+"Una cadena alifática siempre es abierta.",
+"Alifática significa no aromática: puede ser abierta (acíclica) o cerrada (alicíclica, como el ciclohexano)."
+],
+[
+"El naftaleno es un aromático mononuclear.",
+"Tiene dos anillos que comparten un lado: es polinuclear condensado."
+],
+[
+"El bifenilo es un aromático polinuclear condensado.",
+"Sus dos anillos están unidos por un enlace y no comparten carbonos: es polinuclear aislado."
+],
+[
+"El ciclohexanol, con un −OH colgado del anillo, es un heterociclo.",
+"El oxígeno está fuera del anillo: es una cadena cíclica homogénea ramificada."
+],
+[
+"El tetrahidrofurano es una cadena cíclica homogénea.",
+"Tiene un oxígeno dentro del anillo: es heterogénea (heterocíclica)."
+],
+[
+"El metilciclohexano es una cadena cíclica sencilla.",
+"Tiene un CH₃ colgando del anillo: es cíclica ramificada."
+],
 [
 "El butano dibujado en zigzag es una cadena ramificada.",
 "Es lineal: doblar el dibujo no crea ramas; el camino no se bifurca."

@@ -98,6 +98,26 @@ function anillo(n,o,aria){
   });
   return svgWrap(minX,minY,maxX,maxY,body,aria);
 }
+
+/* Anillos aromáticos fusionados (Kekulé, con los dobles enlaces completos) y bifenilo */
+function hexPts(cx,cy,R,ini){var P=[];for(var i=0;i<6;i++){var a=(ini+i*60)*Math.PI/180;P.push([cx+R*Math.cos(a),cy+R*Math.sin(a)]);}return P;}
+function fusion(nAn,dobles,aria){
+  var R=26,W=Math.sqrt(3)*R,body='',k,i,hechos={};
+  var anill=[];for(k=0;k<nAn;k++)anill.push({c:[k*W,0],P:hexPts(k*W,0,R,-90)});
+  anill.forEach(function(a){for(i=0;i<6;i++){var p=a.P[i],q=a.P[(i+1)%6],id=[p,q].map(function(z){return z[0].toFixed(0)+','+z[1].toFixed(0);}).sort().join('|');
+    if(!hechos[id]){hechos[id]=1;body+=ln(p[0],p[1],q[0],q[1],INK,2);}}});
+  dobles.forEach(function(d){var a=anill[d[0]],p=a.P[d[1]],q=a.P[d[2]],c=a.c;
+    var px=p[0]+(c[0]-p[0])*.2,py=p[1]+(c[1]-p[1])*.2,qx=q[0]+(c[0]-q[0])*.2,qy=q[1]+(c[1]-q[1])*.2,dx=(qx-px)*.14,dy=(qy-py)*.14;
+    body+=ln(px+dx,py+dy,qx-dx,qy-dy,INK,2);});
+  return svgWrap(-R,-R,(nAn-1)*W+R,R,body,aria);
+}
+function bifenilo(){
+  var R=24,d=18,body='',A=hexPts(-R-d/2,0,R,0),B=hexPts(R+d/2,0,R,0),i;
+  [A,B].forEach(function(P,j){for(i=0;i<6;i++)body+=ln(P[i][0],P[i][1],P[(i+1)%6][0],P[(i+1)%6][1],INK,2);
+    body+='<circle cx="'+(j?R+d/2:-R-d/2)+'" cy="0" r="'+(R*.55).toFixed(1)+'" fill="none" stroke="'+INK+'" stroke-width="1.8"/>';});
+  body+=ln(A[0][0],A[0][1],B[3][0],B[3][1],INK,2);
+  return svgWrap(-2*R-d/2,-R,2*R+d/2,R,body,'bifenilo: dos anillos de benceno unidos por un enlace sencillo');
+}
 /* Cadena en zigzag (fórmula de esqueleto) */
 function zigzag(n,aria){
   var body='',pts=[];for(var i=0;i<n;i++)pts.push([i*30,i%2?-17:0]);
@@ -220,7 +240,29 @@ var F={
   fu_metilamina_ch:function(){return semi([A('CH₃'),A('CH₂'),A('CH₂'),A('NH₂')],'CH₃−CH₂−CH₂−NH₂');},
   fu_dieno:function(){return semi([A('CH₂',{b:2}),A('CH'),A('CH',{b:2}),A('CH₂')],'CH₂=CH−CH=CH₂');},
   fu_ramificadaU:function(){return semi([A('CH₃'),A('CH₂'),A('CH',{d:'CH₂−CH₃'}),A('CH₂'),A('CH₃')],'CH₃−CH₂−CH(CH₂−CH₃)−CH₂−CH₃');},
-  fu_cadenaU:function(){return semi([A('CH₂',{d:'CH₃'}),A('CH₂'),A('CH₂',{d:'CH₃'})],'cadena lineal de 5 carbonos dibujada en forma de U invertida');}
+  fu_cadenaU:function(){return semi([A('CH₂',{d:'CH₃'}),A('CH₂'),A('CH₂',{d:'CH₃'})],'cadena lineal de 5 carbonos dibujada en forma de U invertida');},
+  /* mapa de clasificación (cadmapa.js) */
+  fu_pentano_zz:function(){return zigzag(5,'cadena de 5 carbonos en zigzag');},
+  fu_buteno2:function(){return semi([A('CH₃'),A('CH',{b:2}),A('CH'),A('CH₃')],'but-2-eno');},
+  fu_metilbutano:function(){return semi([A('CH₃'),A('CH',{u:'CH₃'}),A('CH₂'),A('CH₃')],'2-metilbutano');},
+  fu_metilpropeno:function(){return semi([A('CH₂',{b:2}),A('C',{u:'CH₃'}),A('CH₃')],'2-metilpropeno');},
+  fu_ciclopenteno:function(){return anillo(5,{dbl:[1]},'ciclopenteno');},
+  fu_metilciclohexeno:function(){return anillo(6,{dbl:[1],sub:{0:'CH₃'}},'metilciclohexeno');},
+  fu_metilciclopentano:function(){return anillo(5,{sub:{0:'CH₃'}},'metilciclopentano');},
+  fu_metilciclopenteno:function(){return anillo(5,{dbl:[1],sub:{0:'CH₃'}},'metilciclopenteno');},
+  fu_oxirano:function(){return anillo(3,{het:{0:'O'}},'oxirano: anillo de 3 átomos con un oxígeno');},
+  fu_pirrolidina:function(){return anillo(5,{het:{0:'NH'}},'pirrolidina: anillo de 5 átomos con un nitrógeno');},
+  fu_piperidina:function(){return anillo(6,{het:{0:'NH'}},'piperidina: anillo de 6 átomos con un nitrógeno');},
+  fu_dihidrofurano:function(){return anillo(5,{het:{0:'O'},dbl:[1]},'anillo de 5 átomos con un oxígeno y un doble enlace');},
+  fu_dihidropirano:function(){return anillo(6,{het:{0:'O'},dbl:[2]},'anillo de 6 átomos con un oxígeno y un doble enlace');},
+  fu_metilthf:function(){return anillo(5,{het:{0:'O'},sub:{1:'CH₃'}},'metiltetrahidrofurano');},
+  fu_metilpiperidina:function(){return anillo(6,{het:{0:'NH'},sub:{3:'CH₃'}},'metilpiperidina');},
+  fu_metildihidrofurano:function(){return anillo(5,{het:{0:'O'},dbl:[1],sub:{3:'CH₃'}},'anillo de 5 átomos con un oxígeno, un doble enlace y un metilo');},
+  fu_metiltetrahidropiridina:function(){return anillo(6,{het:{0:'NH'},dbl:[2],sub:{4:'CH₃'}},'anillo de 6 átomos con un nitrógeno, un doble enlace y un metilo');},
+  fu_etilbenceno:function(){return anillo(6,{arom:true,sub:{0:'CH₂−CH₃'}},'etilbenceno');},
+  fu_naftaleno:function(){return fusion(2,[[0,5,4],[0,0,1],[0,3,2],[1,0,1],[1,2,3]],'naftaleno: dos anillos de benceno que comparten un lado');},
+  fu_antraceno:function(){return fusion(3,[[0,5,4],[0,0,1],[0,3,2],[1,0,1],[1,3,2],[2,0,1],[2,2,3]],'antraceno: tres anillos de benceno en fila que comparten lados');},
+  fu_bifenilo:bifenilo
 };
 
 /* ── Banco de preguntas ──────────────────────────────────────────────── */
@@ -405,6 +447,80 @@ Q(I,null,'El heptano, C₇H₁₆, puede tener la cadena lineal o varias formas 
 Q(I,null,'El hex-3-eno, CH₃−CH₂−CH=CH−CH₂−CH₃, tiene un doble enlace entre el C3 y el C4. ¿Tiene isomería cis/trans?',[['Sí, porque cada carbono del doble enlace está unido a un H y a un grupo etilo, dos sustituyentes distintos'],['No, porque los dos lados de la molécula son iguales','Que los dos lados sean iguales entre sí no importa: lo que cuenta es que en CADA carbono del C=C los dos grupos sean distintos entre sí, y lo son (H y etilo).'],['No, porque el doble enlace no está en el centro de la cadena','La posición del doble enlace en la cadena no decide si hay cis/trans: lo decide qué grupos tiene cada carbono del C=C.'],['Sí, pero solo existe la forma cis','Si hay isomería cis/trans existen las dos formas, cis y trans.']],'C3 y C4 tienen cada uno un H y un grupo etilo (dos sustituyentes distintos) → sí hay isomería cis/trans.'),
 Q(I,null,'El ciclopropano (un anillo de 3 carbonos) y el propeno (CH₂=CH−CH₃) tienen ambos fórmula molecular C₃H₆. ¿Qué tipo de isómeros son?',[['De función'],['De posición','No es el mismo grupo cambiado de lugar: uno es un anillo y el otro tiene un doble enlace.'],['De cadena','La diferencia no es la forma de la cadena, sino el tipo de insaturación (anillo vs. doble enlace).'],['Cis/trans','El propeno no tiene isomería cis/trans: su C1 (=CH₂) tiene dos H iguales.']],'Un cicloalcano y un alqueno con la misma fórmula son isómeros de función: cada uno tiene su propia insaturación (anillo o doble enlace) sin ser la misma familia de compuesto.')
 ];
+
+
+/* ── Preguntas del mapa de clasificación de cadenas (cadmapa.js) ──────────
+   Cada pregunta de dibujo se arma sola a partir del camino de la cadena en
+   el mapa; las opciones incorrectas explican en qué paso se desvían. */
+var CAM={'lin-sat':['ali','aci','lin','lin-sat'],'lin-ins':['ali','aci','lin','lin-ins'],'ram-sat':['ali','aci','ram','ram-sat'],'ram-ins':['ali','aci','ram','ram-ins'],
+ 'hom-sen-sat':['ali','cic','hom','hom-sen','hom-sen-sat'],'hom-sen-ins':['ali','cic','hom','hom-sen','hom-sen-ins'],'hom-ram-sat':['ali','cic','hom','hom-ram','hom-ram-sat'],'hom-ram-ins':['ali','cic','hom','hom-ram','hom-ram-ins'],
+ 'het-sen-sat':['ali','cic','het','het-sen','het-sen-sat'],'het-sen-ins':['ali','cic','het','het-sen','het-sen-ins'],'het-ram-sat':['ali','cic','het','het-ram','het-ram-sat'],'het-ram-ins':['ali','cic','het','het-ram','het-ram-ins'],
+ 'mon-sen':['aro','mon','mon-sen'],'mon-ram':['aro','mon','mon-ram'],'pol-con':['aro','pol','pol-con'],'pol-ais':['aro','pol','pol-ais']};
+var NOMC={ali:'alifática',aci:'acíclica',lin:'lineal','lin-sat':'saturada','lin-ins':'insaturada',ram:'ramificada','ram-sat':'saturada','ram-ins':'insaturada',cic:'cíclica',hom:'homogénea',het:'heterogénea',
+ 'hom-sen':'sencilla','hom-ram':'ramificada','het-sen':'sencilla','het-ram':'ramificada','hom-sen-sat':'saturada','hom-sen-ins':'insaturada','hom-ram-sat':'saturada','hom-ram-ins':'insaturada',
+ 'het-sen-sat':'saturada','het-sen-ins':'insaturada','het-ram-sat':'saturada','het-ram-ins':'insaturada',aro:'aromática',mon:'mononuclear',pol:'polinuclear','mon-sen':'sencilla','mon-ram':'ramificada','pol-con':'condensada','pol-ais':'aislada'};
+var PISTAC={raiz:'¿hay un anillo tipo benceno? Si lo hay, es aromática; si no, alifática.',ali:'¿los extremos de la cadena se unen en un anillo? Si no, es acíclica; si sí, es cíclica.',
+ aci:'¿todos los carbonos están en un solo camino (lineal) o de alguno sale una rama (ramificada)?',lin:'¿hay dobles o triples enlaces entre carbonos? Con solo sencillos es saturada.',ram:'¿hay dobles o triples enlaces entre carbonos? Con solo sencillos es saturada.',
+ cic:'¿el anillo tiene solo carbonos (homogénea) o también O, N o S (heterogénea)?',hom:'¿hay una rama de carbonos colgando del anillo? Sin rama es sencilla.',het:'¿hay una rama de carbonos colgando del anillo? Sin rama es sencilla.',
+ 'hom-sen':'¿el anillo tiene algún doble enlace? Con solo sencillos es saturada.','hom-ram':'¿el anillo tiene algún doble enlace? Con solo sencillos es saturada.','het-sen':'¿el anillo tiene algún doble enlace? Con solo sencillos es saturada.','het-ram':'¿el anillo tiene algún doble enlace? Con solo sencillos es saturada.',
+ aro:'¿cuántos anillos aromáticos tiene? Uno es mononuclear; varios, polinuclear.',mon:'¿hay una rama de carbonos colgando del anillo?',pol:'¿los anillos comparten un lado (condensados) o están unidos por un enlace (aislados)?'};
+function textoC(leaf){var c=CAM[leaf].map(function(i){return NOMC[i];});return c.slice(0,-1).join(', ')+' y '+c[c.length-1];}
+function mayus(t){return t.charAt(0).toUpperCase()+t.slice(1);}
+function PQ(fig,leaf,otras,extra){
+  var ok=CAM[leaf],ops=[[mayus(textoC(leaf))]];
+  otras.forEach(function(o){var c=CAM[o],i=0;while(i<c.length&&c[i]===ok[i])i++;
+    var padre=i===0?'raiz':ok[i-1];
+    ops.push([mayus(textoC(o)),'No: esa clasificación se desvía en el paso '+(i+1)+'. Pregúntate '+(PISTAC[padre]||'')]);});
+  return Q(C,fig,'Siguiendo el mapa de clasificación, ¿cómo es esta cadena?',ops,'Camino en el mapa: <b>'+textoC(leaf)+'</b>.'+(extra?' '+extra:''));
+}
+function mapaQs(){
+  var a=[
+  PQ('fu_butano','lin-sat',['ram-sat','lin-ins','hom-sen-sat']),
+  PQ('fu_hexano_zz','lin-sat',['ram-sat','hom-sen-sat','lin-ins'],'El zigzag no crea ramas: sus carbonos siguen un solo camino.'),
+  PQ('fu_cadenaU','lin-sat',['ram-sat','hom-sen-sat','lin-ins'],'Doblada en U sigue siendo lineal: los CH₃ de abajo son los extremos.'),
+  PQ('fu_propeno','lin-ins',['lin-sat','ram-ins','hom-sen-ins']),
+  PQ('fu_propino','lin-ins',['lin-sat','ram-ins','hom-sen-ins'],'El triple enlace también es una insaturación.'),
+  PQ('fu_dieno','lin-ins',['lin-sat','ram-ins','hom-sen-ins'],'Tiene dos dobles enlaces: sigue siendo lineal e insaturada.'),
+  PQ('fu_isobutano','ram-sat',['lin-sat','ram-ins','hom-ram-sat']),
+  PQ('fu_metilbutano','ram-sat',['lin-sat','ram-ins','hom-ram-sat']),
+  PQ('fu_mixta','ram-ins',['ram-sat','lin-ins','hom-ram-ins']),
+  PQ('fu_metilpropeno','ram-ins',['ram-sat','lin-ins','hom-ram-ins']),
+  PQ('fu_ciclohexano','hom-sen-sat',['hom-sen-ins','lin-sat','mon-sen'],'No tiene dobles enlaces alternados: no es aromática.'),
+  PQ('fu_ciclopentano','hom-sen-sat',['hom-sen-ins','hom-ram-sat','het-sen-sat']),
+  PQ('fu_ciclohexeno','hom-sen-ins',['hom-sen-sat','mon-sen','het-sen-ins'],'Un solo doble enlace no hace aromático un anillo.'),
+  PQ('fu_metilciclohexano','hom-ram-sat',['hom-sen-sat','hom-ram-ins','mon-ram']),
+  PQ('fu_metilciclohexeno','hom-ram-ins',['hom-ram-sat','hom-sen-ins','mon-ram']),
+  PQ('fu_thf','het-sen-sat',['hom-sen-sat','het-sen-ins','het-ram-sat'],'El oxígeno está dentro del anillo: es heterogénea (heterocíclica).'),
+  PQ('fu_piperidina','het-sen-sat',['hom-sen-sat','het-sen-ins','mon-sen'],'Tiene un nitrógeno dentro del anillo y solo enlaces sencillos.'),
+  PQ('fu_dihidrofurano','het-sen-ins',['het-sen-sat','hom-sen-ins','het-ram-ins']),
+  PQ('fu_metilthf','het-ram-sat',['het-sen-sat','hom-ram-sat','het-ram-ins']),
+  PQ('fu_metildihidrofurano','het-ram-ins',['het-ram-sat','het-sen-ins','hom-ram-ins']),
+  PQ('fu_benceno','mon-sen',['hom-sen-ins','pol-con','mon-ram'],'El círculo representa los dobles enlaces alternados del anillo aromático.'),
+  PQ('fu_tolueno','mon-ram',['mon-sen','hom-ram-ins','pol-con']),
+  PQ('fu_etilbenceno','mon-ram',['mon-sen','hom-ram-sat','pol-ais']),
+  PQ('fu_naftaleno','pol-con',['mon-sen','pol-ais','hom-sen-ins'],'Los dos anillos comparten un lado.'),
+  PQ('fu_antraceno','pol-con',['mon-ram','pol-ais','hom-sen-ins'],'Tres anillos en fila que comparten lados.'),
+  PQ('fu_bifenilo','pol-ais',['pol-con','mon-ram','mon-sen'],'Los dos anillos solo están unidos por un enlace: no comparten ningún carbono.')
+  ];
+  a.push(
+  Q(C,null,'Según la IUPAC, una cadena <b>alifática</b> es…',[['toda cadena que no es aromática, sea abierta o cerrada'],['solo la cadena abierta','Algunos libros la usan así, pero la IUPAC incluye también los anillos no aromáticos, como el ciclohexano.'],['la que tiene un anillo tipo benceno','Esa es la aromática.'],['la que tiene heteroátomos','Eso describe una cadena heterogénea.']],'Alifático = no aromático. Las acíclicas y las cíclicas (alicíclicas) son alifáticas.'),
+  Q(C,null,'En el mapa de clasificación, ¿qué grupos principales salen de las «cadenas carbonadas»?',[['Alifáticas y aromáticas'],['Abiertas y cerradas','Esa decisión viene después, dentro de las alifáticas.'],['Saturadas e insaturadas','Es la última decisión de cada rama.'],['Lineales y ramificadas','Solo se aplica a las acíclicas.']],'La primera pregunta es si hay un anillo tipo benceno: <b>alifáticas</b> (no) o <b>aromáticas</b> (sí).'),
+  Q(C,null,'Una cadena <b>cíclica homogénea</b> es la que…',[['tiene un anillo formado solo por carbonos'],['tiene un oxígeno o un nitrógeno en el anillo','Esa es la heterogénea (heterocíclica).'],['tiene dos extremos','Eso es una cadena abierta.'],['tiene un anillo tipo benceno','Esa es aromática.']],'Homogénea = todos los átomos del anillo son carbonos (carbocíclica).'),
+  Q(C,null,'Una cadena <b>cíclica heterogénea</b> es la que…',[['tiene al menos un heteroátomo (O, N o S) dentro del anillo'],['tiene un −OH colgando del anillo','El grupo colgante no es parte del anillo: el ciclohexanol es homogéneo.'],['tiene un anillo de solo carbonos','Esa es la homogénea.'],['tiene un doble enlace en el anillo','Eso la hace insaturada, no heterogénea.']],'Heterocíclica = el heteroátomo está <b>dentro</b> del anillo.'),
+  Q(C,null,'En una cadena cíclica, ¿qué significa que sea <b>«sencilla»</b>?',[['Que el anillo no tiene ramas de carbono colgando'],['Que solo tiene enlaces sencillos','Eso es saturada: otro criterio.'],['Que solo tiene un anillo','Eso sería mononuclear, en las aromáticas.'],['Que es más pequeña que 6 carbonos','El tamaño del anillo no lo decide.']],'Sencilla = sin ramas; ramificada = una cadena de carbonos cuelga del anillo.'),
+  Q(C,null,'Las cadenas aromáticas se clasifican según…',[['el número de anillos: mononucleares o polinucleares'],['si tienen enlaces sencillos o dobles','Todas tienen dobles enlaces alternados en el anillo.'],['si son abiertas o cerradas','Todas son cerradas.'],['si son lineales o ramificadas','Eso se aplica a las cadenas acíclicas.']],'Mononuclear = un anillo (benceno); polinuclear = varios (naftaleno).'),
+  Q(C,null,'¿Qué diferencia a un aromático <b>polinuclear condensado</b> de uno <b>aislado</b>?',[['En el condensado los anillos comparten un lado; en el aislado están unidos por un enlace'],['El condensado tiene un solo anillo','Todo polinuclear tiene dos o más anillos.'],['El aislado tiene heteroátomos','No: se distinguen por la forma de unirse sus anillos.'],['El condensado es abierto','Todos los aromáticos son cerrados.']],'Naftaleno y antraceno: condensados. Bifenilo: aislado.'),
+  Q(C,null,'La naftalina (naftaleno, C₁₀H₈) se usa contra la polilla. ¿Qué tipo de cadena aromática es?',[['Polinuclear condensada'],['Mononuclear','Tiene dos anillos, no uno.'],['Polinuclear aislada','Sus anillos comparten un lado, no están unidos por un enlace.'],['Alifática cíclica','Es aromática.']],'Dos anillos de benceno que comparten un lado: <b>polinuclear condensada</b>.'),
+  Q(C,null,'La piridina (C₅H₅N) tiene un nitrógeno dentro de un anillo aromático de un solo ciclo. ¿Cómo se describe?',[['Aromática mononuclear, con un heteroátomo en el anillo'],['Aromática polinuclear','Tiene un solo anillo.'],['Alifática heterocíclica saturada','Tiene dobles enlaces alternados: es aromática.'],['Acíclica heterogénea','Es un anillo, no una cadena abierta.']],'Un solo anillo aromático = mononuclear; el N lo hace además heterocíclico.'),
+  Q(C,null,'El ciclohexanol es un anillo de seis carbonos con un −OH colgando. ¿Es heterocíclico?',[['No: el oxígeno está fuera del anillo; el anillo es homogéneo'],['Sí, porque tiene oxígeno','El oxígeno debe estar dentro del anillo, entre carbonos.'],['Sí, porque es un alcohol','El grupo funcional no cambia la clase del anillo.'],['Solo si el anillo es aromático','La aromaticidad no decide si es heterocíclico.']],'Solo el heteroátomo <b>intercalado en el anillo</b> hace heterocíclica la cadena.'),
+  Q(C,null,'Si en un anillo de seis carbonos se sustituye un H por un CH₃, la cadena pasa de…',[['sencilla a ramificada'],['saturada a insaturada','Agregar un CH₃ no cambia los enlaces del anillo.'],['homogénea a heterogénea','El CH₃ es carbono: el anillo sigue siendo de carbonos.'],['cerrada a abierta','El anillo sigue cerrado.']],'Una cadena de carbonos colgando del anillo lo vuelve <b>ramificado</b>.'),
+  Q(C,null,'Un cicloalcano saturado de n carbonos tiene fórmula…',[['CₙH₂ₙ'],['CₙH₂ₙ₊₂','Esa es la del alcano abierto: el anillo tiene 2 H menos.'],['CₙHₙ','Eso corresponde a un aromático como el benceno, C₆H₆.'],['CₙH₂ₙ₋₂','Eso pide un doble enlace más (o un segundo anillo).']],'Al cerrar la cadena se pierden 2 H: ciclopentano C₅H₁₀, ciclohexano C₆H₁₂.'),
+  Q(C,'fu_naftaleno','¿Cuántos anillos tiene el naftaleno y cómo se llaman estos aromáticos?',[['Dos anillos: polinuclear'],['Uno: mononuclear','Cuenta los hexágonos del dibujo: son dos.'],['Dos anillos: aislado','Aislado sería con un enlace entre anillos; aquí comparten un lado.'],['Tres anillos: polinuclear','Cuenta de nuevo: son dos.']],'Dos hexágonos que comparten un lado: polinuclear condensado.'),
+  Q(C,'fu_antraceno','El antraceno tiene tres anillos de benceno en fila que comparten lados. ¿Cómo se clasifica?',[['Aromática polinuclear condensada'],['Aromática mononuclear','Tiene tres anillos.'],['Aromática polinuclear aislada','Los anillos comparten lados.'],['Alifática cíclica','Es aromática.']],'Varios anillos que comparten lados: <b>polinuclear condensada</b>.')
+  );
+  return a;
+}
+B=B.concat(mapaQs());
 
 /* ── Práctica en las páginas ─────────────────────────────────────────── */
 function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
