@@ -130,7 +130,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit','Segoe UI',Arial,
   .ggrid{grid-template-columns:repeat(5,1fr);gap:6px}.gcard{padding:4px 5px;border-width:1px}.gname{font-size:10.6pt}.gcard svg{max-width:112px}.gline{font-size:9.3pt}.guso{font-size:8.6pt}
 }
 </style>
-<link rel="stylesheet" href="chromanom.css?v=82">
+<link rel="stylesheet" href="chromanom.css?v=83">
 <style>@page{size:letter landscape;margin:6mm 9mm 6mm;@bottom-center{content:none}}</style>
 </head>
 <body>
@@ -578,18 +578,18 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit','Segoe UI',Arial,
   var m=location.search.match(/hoja=([a-z]+)/);if(m&&document.getElementById('h-'+m[1]))mostrar(m[1],false);
 })();
 </script>
-<script src="fundamentos.js?v=82"></script>
-<script src="cadmapa.js?v=82"></script>
-<script src="fx-libro.js?v=82"></script>
+<script src="fundamentos.js?v=83"></script>
+<script src="cadmapa.js?v=83"></script>
+<script src="fx-libro.js?v=83"></script>
 <script>
 function fxpost(h){return h.replace(/⟪/g,'<span class="cH">').replace(/⟫/g,'</span>').replace(/⟨/g,'<span class="cP">').replace(/⟩/g,'</span>');}
 function fxrender(){document.querySelectorAll('.fxeq:not([data-done])').forEach(function(e){var s=e.getAttribute('data-fx'),m=e.classList.contains('m');
   e.innerHTML='<span class="fx-mol fx-sm'+(e.classList.contains('hs')?' fx-hs':'')+(m?' fx-txt':'')+'">'+fxpost(m?FX.mol(s):FX.eq(s))+'</span>';e.setAttribute('data-done','1');});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fxrender);else fxrender();
 </script>
-<script src="pwa-install.js?v=82"></script>
-<script src="text-zoom.js?v=82"></script>
-<script src="site-ui.js?v=82"></script>
+<script src="pwa-install.js?v=83"></script>
+<script src="text-zoom.js?v=83"></script>
+<script src="site-ui.js?v=83"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

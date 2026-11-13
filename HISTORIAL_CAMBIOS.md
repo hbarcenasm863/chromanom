@@ -7,6 +7,17 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-13 (184) — El mapa de la portada apunta a las guías nuevas
+
+### Contexto
+En el mapa principal de `index.html`, el nodo «Referencia» seguía llevando a `referencia.html` (solo nomenclatura) y no a la página con todas las guías.
+
+### Cambios
+- `index.html`: el nodo del mapa ahora se llama «Guías» y abre `guias.html`; la conexión del mapa también; se quitó la tarjeta repetida «Hoja de referencia» de la lista de recursos (la hoja de nomenclatura sigue dentro de `guias.html`).
+- `sw.js` y `?v=83` en todas las páginas.
+
+---
+
 ## 2026-11-13 (183) — Clasificación de cadenas con mapa interactivo (alifáticas y aromáticas)
 
 ### Contexto
