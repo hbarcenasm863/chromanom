@@ -7,6 +7,20 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-14 (186) — Cada página de teoría enlaza su guía de referencia
+
+### Contexto
+El docente pidió que cada sección tenga un enlace a la guía de referencia que le corresponde.
+
+### Cambios
+- Las 11 páginas de contenido (`teoria`, `carbono`, `tipos-carbono`, `cadenas`, `grupos`, `isomeria`, `propiedades`, `reacciones`, `biomoleculas`, `orbitales`, `ambiente`) llevan arriba un recuadro «Guía de referencia» con el botón «Ver la guía» (abre `guias.html` en la hoja correcta) y «⬇️ PDF». `reacciones.html` enlaza dos hojas (reacciones orgánicas y reacciones por grupo funcional); `orbitales.html` enlaza la del carbono; `teoria.html`, la de nomenclatura.
+- `sw.js` y `?v=85`.
+
+### Pendiente
+- Los botones llevan estilos propios en cada página (no dependen de `fundamentos.css`).
+
+---
+
 ## 2026-11-14 (185) — Reacciones por grupo funcional: un ejemplo concreto en cada reacción
 
 ### Contexto
