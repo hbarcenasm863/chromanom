@@ -7,6 +7,21 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-14 (185) — Reacciones por grupo funcional: un ejemplo concreto en cada reacción
+
+### Contexto
+La hoja «Reacciones por grupo funcional» tenía solo la forma general de cada reacción. El docente pidió agregar, en cada una, un ejemplo con un compuesto específico.
+
+### Cambios
+- `guias.html` y `pdf/guia-reacciones-por-grupo.pdf`: las 56 reacciones llevan debajo de la forma general una línea «Ejemplo» con un compuesto concreto (por ejemplo propeno + HBr → 2-bromopropano; benceno → nitrobenceno; etanol → etanal), con los mismos colores (rosa entra, naranja sale, azul hidrógeno, violeta pareja), sin paréntesis y con los grupos desplegados, más el nombre de los compuestos en letra pequeña.
+- Las filas ya no se parten entre páginas y los títulos de grupo no quedan solos al final de una; el PDF pasó de 10 a 19 páginas.
+- `sw.js` y `?v=84`.
+
+### Pendiente
+- Sin pasos manuales (no se tocó el `.gs`). Algunas páginas del PDF quedan con espacio al final porque cada reacción se mantiene completa en una sola página.
+
+---
+
 ## 2026-11-13 (184) — El mapa de la portada apunta a las guías nuevas
 
 ### Contexto
