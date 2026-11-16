@@ -7,6 +7,30 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-16 (187) — Correcciones tras la auditoría de las hojas de referencia
+
+### Contexto
+Un auditor independiente revisó las 10 hojas descargables (¿sirven como repaso para secundaria?) y señaló errores y vacíos. Se corrigió lo verificable.
+
+### Cambios
+- **Isomería:** corregido «los tres primeros pares» (son dos constitucionales y un par cis/trans); nuevo recuadro para contar isómeros y nombrar E y Z, y qué son los diastereómeros.
+- **Reacciones:** definiciones de nucleófilo, carbocatión, estado de transición y racemización, y nota sobre haluros secundarios.
+- **Reacciones por grupo funcional:** estrella ★ en las 20 reacciones del núcleo básico, recuadro de siglas (CCP = clorocromato de piridinio, LiAlH₄, NaBH₄, Lindlar, Δ, hν) y acetofenona con su nombre IUPAC (1-feniletanona).
+- **Biomoléculas:** «suelen ser» sólidos/líquidos en las grasas; nuevo recuadro con el aminoácido dibujado, disacáridos, desnaturalización, grasas trans y pruebas de Benedict, Lugol, Biuret y Sudán.
+- **Ambiente:** plásticos (la frase «solo C−C y C−H» ahora vale para los de adición; PVC, PET y nailon aclarados), error frecuente reformulado, GLP como C₃–C₄.
+- **Grupos funcionales:** nitrilo, haluro de ácido y anhídrido; el error frecuente pasa junto a «Qué los distingue».
+- **Carbono:** regla para decidir la hibridación con un ejemplo resuelto.
+- **Nomenclatura (`referencia.html`):** el anillo es la parte principal (IUPAC 2013) si no hay grupo funcional; aclarado que en un examen se usa la forma de sustituyente que pida el docente.
+- **`guias.html`:** en celular las tablas se desplazan dentro de su recuadro (siete hojas se salían de la pantalla).
+- `sw.js` y `?v=86`.
+
+### Pendiente
+- No se hizo la versión corta de 2 páginas de reacciones por grupo (la estrella marca el núcleo básico).
+- Quedan sin incluir: hoja de repaso de unidades de reacciones esenciales, E/Z en la hoja de nomenclatura y ampliaciones de nomenclatura (ejemplo paso a paso más largo).
+- Sin pasos manuales (no se tocó el `.gs`).
+
+---
+
 ## 2026-11-14 (186) — Cada página de teoría enlaza su guía de referencia
 
 ### Contexto
