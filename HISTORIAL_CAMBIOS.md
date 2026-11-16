@@ -7,6 +7,17 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-16 (189) — «Nombrar paso a paso» ahora sigue el método MDEC
+
+### Contexto
+La hoja «Nombrar paso a paso» (188) usaba cinco pasos genéricos y no el método MDEC, que es lo principal del sitio: las cuatro partes ① sustituyentes, ② cadena principal, ③ enlaces dobles y triples y ④ grupo funcional, con sus cuatro colores; el nombre se escribe ①②③④ y se resuelve empezando por ④.
+
+### Cambios
+- **`guias.html` y `pdf/guia-nombrar-paso-a-paso.pdf`** (2 páginas): tabla del método MDEC con las cuatro partes y su ejemplo; los seis ejemplos se resuelven en el orden ④ → ② → ③ → ①, con la estructura y el nombre coloreados por parte (nuevos marcadores de color en el motor de fórmulas de la página); leyenda de colores en la hoja; el bloque de cis/trans y E/Z queda como parte ③.
+- `sw.js` y `?v=88`.
+
+### Pendiente
+- Sin pasos manuales (no se tocó el `.gs`). Los enlaces de la estructura (la barra vertical de las ramas) se dibujan en negro, no en el color de la parte.
 ## 2026-11-16 (189) — Skill «chromanom-estructuras» para usar el estilo de estructuras en todo Claude
 
 ### Contexto
