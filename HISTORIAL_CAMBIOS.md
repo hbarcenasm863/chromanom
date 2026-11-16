@@ -7,6 +7,22 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-16 (188) — Dos hojas nuevas: reacciones esenciales y nombrar paso a paso
+
+### Contexto
+Tras la auditoría se pidió completar lo que faltaba: una versión corta de reacciones por grupo funcional y los ejemplos resueltos de nomenclatura con E/Z, que no cabían en las 2 páginas de la hoja de nomenclatura.
+
+### Cambios
+- **Hoja «Reacciones esenciales»** (`pdf/guia-reacciones-esenciales.pdf`, 2 páginas): las 20 reacciones con estrella ★ de la hoja larga, cada una con su forma general (con colores) y un ejemplo en una línea.
+- **Hoja «Nombrar paso a paso»** (`pdf/guia-nombrar-paso-a-paso.pdf`, 2 páginas): los cinco pasos, la regla anillo/cadena, seis ejemplos resueltos con la estructura dibujada y cómo leer cis y trans como E y Z.
+- `guias.html`: ya son 12 hojas (pestañas, textos y `index.html`); `herramientas/generar-guias-pdf.js` incluye las dos nuevas; las páginas de teoría de Principios, Isomería y Reacciones enlazan las hojas nuevas.
+- `sw.js` y `?v=87`.
+
+### Pendiente
+- Sin pasos manuales (no se tocó el `.gs`).
+
+---
+
 ## 2026-11-16 (187) — Correcciones tras la auditoría de las hojas de referencia
 
 ### Contexto
