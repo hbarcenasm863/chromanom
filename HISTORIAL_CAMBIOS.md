@@ -26,7 +26,7 @@ Un auditor independiente revisó las 10 hojas descargables (¿sirven como repaso
 
 ### Pendiente
 - No se hizo la versión corta de 2 páginas de reacciones por grupo (la estrella marca el núcleo básico).
-- Quedan sin incluir: hoja de repaso de unidades de reacciones esenciales, E/Z en la hoja de nomenclatura y ampliaciones de nomenclatura (ejemplo paso a paso más largo).
+- Quedan sin incluir: E/Z en la hoja de nomenclatura y un ejemplo de nombre paso a paso (no cabían en las 2 páginas de esa hoja).
 - Sin pasos manuales (no se tocó el `.gs`).
 
 ---
