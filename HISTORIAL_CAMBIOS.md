@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-16 (189) — Skill «chromanom-estructuras» para usar el estilo de estructuras en todo Claude
+
+### Contexto
+El docente preguntó si el generador de estructuras de ChromaNom podía convertirse en una skill, para que Claude dibuje las fórmulas así por defecto en cualquier conversación (Claude Code y el chat), no solo dentro de este repositorio.
+
+### Cambios
+- Carpeta nueva `skill/chromanom-estructuras/`:
+  - `SKILL.md`: instrucciones para Claude (regla de nunca mostrar ramas entre paréntesis, semidesarrollada con todos sus enlaces o fórmula molecular, colores de los átomos, método de 4 colores y cómo insertar el dibujo en chat, Word, PDF o PowerPoint).
+  - `scripts/dibujar.js`: el motor `mkDevSVG` y el lector de fórmulas de `generador.html`, copiados tal cual, para dibujar una fórmula como `CH3-CH(CH3)-CH3` en SVG desde la consola (`node dibujar.js "…" salida.svg`).
+- `skill/chromanom-estructuras.zip`: el paquete listo para subir a claude.ai.
+
+### Pendiente
+- Paso manual del docente: subir `skill/chromanom-estructuras.zip` en claude.ai → Configuración → Capacidades → Skills. Desde ahí queda en el chat y en las sesiones de Claude Code en la nube de su cuenta.
+- La skill es una copia: si se mejora el motor de `generador.html`, actualizar también `scripts/dibujar.js` y volver a generar el `.zip`.
+- El script dibuja cadenas abiertas; los anillos (benceno, ciclos) se siguen dibujando a mano en SVG según las instrucciones.
+
+---
+
 ## 2026-11-16 (188) — Dos hojas nuevas: reacciones esenciales y nombrar paso a paso
 
 ### Contexto
