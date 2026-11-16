@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-11-16 (189) — «Nombrar paso a paso» ahora sigue el método MDEC
+## 2026-11-16 (190) — «Nombrar paso a paso» ahora sigue el método MDEC
 
 ### Contexto
 La hoja «Nombrar paso a paso» (188) usaba cinco pasos genéricos y no el método MDEC, que es lo principal del sitio: las cuatro partes ① sustituyentes, ② cadena principal, ③ enlaces dobles y triples y ④ grupo funcional, con sus cuatro colores; el nombre se escribe ①②③④ y se resuelve empezando por ④.
