@@ -7,6 +7,21 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-17 (191) — El mapa de cadenas en celular: paso a paso y pantalla completa
+
+### Contexto
+En el celular el mapa de clasificación (un árbol de 31 recuadros) quedaba largo y difícil de recorrer. El docente pidió hacerlo más interactivo o que se revele paso a paso desde lo más básico, y que permita pantalla completa.
+
+### Cambios
+- **`cadmapa.js`:** nuevo modo **«👣 Paso a paso»** (por defecto en pantallas angostas): se muestra el recuadro actual con su explicación y ejemplos, la pregunta para decidir y botones grandes con las opciones; al elegir una aparece la siguiente. Hay un camino de migas para volver a cualquier paso, «Volver un paso», «Empezar de nuevo» y «Más explicación y ejemplos» (la ventana de siempre). Un interruptor **«🗺️ Mapa completo»** muestra todo el árbol (en computador es el modo por defecto).
+- **`cadenas.html`:** el mapa lleva el botón **«⛶ Pantalla completa»** (con el archivo `pantalla.js` de siempre) y el texto de la sección explica los dos modos.
+- `sw.js` y `?v=89`.
+
+### Pendiente
+- Sin pasos manuales (no se tocó el `.gs`). La hoja de referencia PDF del mapa no cambia.
+
+---
+
 ## 2026-11-16 (190) — «Nombrar paso a paso» ahora sigue el método MDEC
 
 ### Contexto

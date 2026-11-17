@@ -215,6 +215,18 @@ var CSS='.cm{display:block;overflow-x:auto;padding:6px 2px 10px}.cm .cm-row{disp
 '.cm .cm-ej{display:flex;gap:4px 8px;align-items:center;flex-wrap:wrap;max-width:210px}'+
 '.cm .cm-ej span{font-size:.68rem;color:#475569}'+
 '.cm-pista{font-size:.8rem;color:#64748b;margin:6px 0 0}'+
+'.cm-bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}.cm-bar button{font:700 .86rem Outfit,sans-serif;border:2px solid #1a6ea8;border-radius:999px;padding:9px 14px;min-height:44px;background:#fff;color:#0d4a73;cursor:pointer}.cm-bar button[aria-pressed="true"]{background:#1a6ea8;color:#fff}'+
+'.cp{max-width:640px}.cp-ruta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;margin:0 0 10px}.cp-sep{color:#94a3b8;font-weight:800}.cp-mig{font:700 .78rem Outfit,sans-serif;border:2px solid;border-radius:999px;padding:6px 11px;min-height:36px;cursor:pointer}.cp-mig[aria-current="step"]{box-shadow:0 0 0 3px rgba(245,158,11,.55)}'+
+'.cp-card{border:2.5px solid;border-radius:16px;background:#fff;padding:14px 16px;margin:0 0 12px;animation:cpIn .25s ease}.cp-card:focus{outline:none}@keyframes cpIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.cp-card{animation:none}}'+
+'.cp-card h3{font-family:Fraunces,serif;font-size:1.35rem;font-weight:900;margin:0 0 6px}.cp-card h3 small{display:block;font:600 .8rem Outfit,sans-serif;color:#64748b;margin-top:2px}.cp-card p{font-size:.95rem;line-height:1.6;color:#334155;margin:0 0 10px}'+
+'.cp-ej{display:flex;flex-wrap:wrap;gap:10px 14px;margin:0 0 10px}.cp-ej>div{text-align:center;font-size:.74rem;color:#475569}.cp-ej>div span{display:block;margin-top:2px}'+
+'.cp-mas{font:700 .86rem Outfit,sans-serif;border:2px solid #0e7490;border-radius:999px;padding:9px 14px;min-height:44px;background:#fff;color:#0e7490;cursor:pointer}'+
+'.cp-q{font-size:.92rem;color:#334155;margin:0 0 8px}.cp-q b{color:#0d2233}.cp-op{display:grid;gap:10px;margin:0 0 12px}'+
+'.cp-opc{position:relative;text-align:left;font:700 1.02rem Outfit,sans-serif;border:2.5px solid;border-radius:14px;padding:12px 40px 12px 14px;min-height:56px;cursor:pointer;display:block;width:100%}.cp-opc small{display:block;font-weight:500;font-size:.78rem;opacity:.85;margin-top:2px}.cp-opc span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1.3rem}'+
+'.cp-fin{background:#ecfdf3;border-left:5px solid #16a34a;border-radius:10px;padding:10px 14px;font-size:.92rem;color:#14532d;margin:0 0 12px}'+
+'.cp-nav{display:flex;gap:10px;flex-wrap:wrap}.cp-nav button{font:700 .86rem Outfit,sans-serif;border:2px solid #94a3b8;border-radius:999px;padding:9px 14px;min-height:44px;background:#fff;color:#334155;cursor:pointer}'+
+'.con-pantalla.en-pantalla .cp{max-width:760px;margin:0 auto}.con-pantalla.en-pantalla .cp-card h3{font-size:1.6rem}.con-pantalla.en-pantalla .cm-bar{justify-content:center}'+
+
 '@media(max-width:820px){.cm{overflow-x:visible}.cm .cm-row{display:block}.cm .cm-kids{display:block;margin:6px 0 2px 10px;border-left:2px solid #cbd5e1;padding-left:10px}.cm .cm-brace{display:none}.cm .cm-col{gap:8px}.cm .cm-n{max-width:none}}'+
 /* ventana */
 '.cm-ov{position:fixed;inset:0;background:rgba(13,34,51,.55);z-index:9000;display:flex;align-items:center;justify-content:center;padding:14px}'+
@@ -279,12 +291,44 @@ function abre(id,origen){
   var x=ov.querySelector('.cm-x');if(x)x.focus();
 }
 
+function vistaPasos(ruta){
+  var id=ruta[ruta.length-1],n=IDX[id],d=ruta.length-1,col=NIV[d%NIV.length];
+  var h='<div class="cp"><nav class="cp-ruta" aria-label="Camino recorrido">'+ruta.map(function(r,i){return '<button type="button" class="cp-mig" data-i="'+i+'" style="'+estilo(i)+'"'+(i===d?' aria-current="step"':'')+'>'+IDX[r].t+'</button>';}).join('<span class="cp-sep" aria-hidden="true">›</span>')+'</nav>';
+  h+='<div class="cp-card" tabindex="-1" style="border-color:'+col+'"><h3 style="color:'+col+'">'+n.t+(n.s?'<small>'+n.s+'</small>':'')+'</h3><p>'+n.def+'</p><div class="cp-ej">'+n.ej.slice(0,3).map(function(e){return '<div>'+mini(e[0],64,110)+'<span>'+e[1]+'</span></div>';}).join('')+'</div><button type="button" class="cp-mas" data-id="'+id+'">ℹ️ Más explicación y ejemplos</button></div>';
+  if(n.k){
+    h+='<div class="cp-q">'+(n.q?'Para decidir, pregúntate: <b>'+n.q+'</b>':'Elige una opción:')+'</div><div class="cp-op">'+n.k.map(function(c){return '<button type="button" class="cp-opc" data-id="'+c.id+'" style="'+estilo(d+1)+'">'+c.t+(c.s?'<small>'+c.s+'</small>':'')+'<span aria-hidden="true">→</span></button>';}).join('')+'</div>';
+  }else{
+    h+='<div class="cp-fin">✓ <b>Clasificación completa:</b> '+ruta.slice(1).map(function(r){return IDX[r].t;}).join(' › ')+'</div>';
+  }
+  h+='<div class="cp-nav">'+(ruta.length>1?'<button type="button" data-a="atras">← Volver un paso</button><button type="button" data-a="inicio">↺ Empezar de nuevo</button>':'')+'</div></div>';
+  return h;
+}
 function montar(el){
   inyecta();
   var fijo=el.getAttribute('data-cadmapa')==='fijo';
-  var desde=IDX[el.getAttribute('data-desde')]||T,prof=el.getAttribute('data-prof'),d0=camino(desde.id).length-1;
-  el.innerHTML='<div class="cm'+(fijo?' fijo':'')+'" role="group" aria-label="Mapa de clasificación de las cadenas carbonadas">'+nodo(desde,d0,fijo,prof==null?null:d0+(+prof))+'</div>';
-  if(!fijo)el.addEventListener('click',function(e){var b=e.target.closest('.cm-n');if(b)abre(b.dataset.id,b);});
+  if(fijo){
+    var desde=IDX[el.getAttribute('data-desde')]||T,prof=el.getAttribute('data-prof'),d0=camino(desde.id).length-1;
+    el.innerHTML='<div class="cm fijo" role="group" aria-label="Mapa de clasificación de las cadenas carbonadas">'+nodo(desde,d0,true,prof==null?null:d0+(+prof))+'</div>';
+    return;
+  }
+  var modo=(window.matchMedia&&matchMedia('(max-width:820px)').matches)?'pasos':'mapa',ruta=['raiz'];
+  el.innerHTML='<div class="cm-bar" role="group" aria-label="Forma de ver el mapa"><button type="button" data-m="pasos">👣 Paso a paso</button><button type="button" data-m="mapa">🗺️ Mapa completo</button></div><div class="cm-vista"></div>';
+  var vista=el.querySelector('.cm-vista');
+  function pinta(foco){
+    el.querySelectorAll('.cm-bar button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===modo?'true':'false');});
+    if(modo==='mapa')vista.innerHTML='<div class="cm" role="group" aria-label="Mapa de clasificación de las cadenas carbonadas">'+nodo(T,0,false,null)+'</div>';
+    else{vista.innerHTML=vistaPasos(ruta);if(foco){var c=vista.querySelector('.cp-card');if(c)c.focus({preventScroll:true});}}
+  }
+  el.addEventListener('click',function(e){
+    var t=e.target,b;
+    if((b=t.closest('.cm-bar button'))){modo=b.dataset.m;pinta(false);return;}
+    if((b=t.closest('.cm-n'))){abre(b.dataset.id,b);return;}
+    if((b=t.closest('.cp-opc'))){ruta.push(b.dataset.id);pinta(true);vista.scrollIntoView({block:'nearest'});return;}
+    if((b=t.closest('.cp-mig'))){ruta=ruta.slice(0,+b.dataset.i+1);pinta(true);return;}
+    if((b=t.closest('.cp-mas'))){abre(b.dataset.id,b);return;}
+    if((b=t.closest('.cp-nav button'))){if(b.dataset.a==='atras')ruta.pop();else ruta=['raiz'];pinta(true);return;}
+  });
+  pinta(false);
 }
 function inicia(){document.querySelectorAll('[data-cadmapa]').forEach(montar);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',inicia);else inicia();
