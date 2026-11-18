@@ -31,9 +31,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fundamentos.css?v=90">
-<link rel="stylesheet" href="chromanom.css?v=90">
-<link rel="stylesheet" href="fase4.css?v=90">
+<link rel="stylesheet" href="fundamentos.css?v=95">
+<link rel="stylesheet" href="chromanom.css?v=95">
+<link rel="stylesheet" href="fase4.css?v=95">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -75,6 +75,9 @@
   <a href="#persist">Plaguicidas</a>
   <a href="#bio">Biocombustibles</a>
   <a href="#verde">Química verde</a>
+  <a href="#colombia">Colombia</a>
+  <a href="#glaciares">Nevados y CO₂</a>
+  <a href="#accion">Plan de acción</a>
   <a href="#practica">Practica</a>
   <a href="#resumen">Resumen</a>
 </nav>
@@ -261,6 +264,54 @@
   </div>
 </section>
 
+<section class="sec" id="colombia">
+  <div class="sec-kicker">Colombia, país megadiverso</div>
+  <h2>Actividades humanas y biodiversidad: ¿qué química hay detrás?</h2>
+  <div class="meta">Al terminar podrás argumentar, con una causa química, cómo una actividad humana afecta a los seres vivos de Colombia.</div>
+  <p>Colombia es uno de los países con mayor biodiversidad del planeta. Escoge una actividad y mira qué sustancias intervienen, qué le pasa a los seres vivos y qué se puede hacer.</p>
+  <div class="calc">
+    <div class="seg" id="co-op" role="group" aria-label="Actividades humanas">
+      <button type="button" data-o="hg">Minería de oro</button><button type="button" data-o="carb">Minería de carbón a cielo abierto</button><button type="button" data-o="gan">Ganadería extensiva</button><button type="button" data-o="tala">Tala y quema de bosques</button><button type="button" data-o="agro">Agricultura intensiva</button><button type="button" data-o="vias">Carreteras y ciudades</button>
+    </div>
+    <div class="calc-out" id="co-out" aria-live="polite">Escoge una actividad para ver su análisis.</div>
+  </div>
+  <div class="warn">⚠️ Resumen didáctico: los casos reales tienen muchas causas y cada región es distinta. Para argumentar con evidencias, busca siempre datos oficiales (IDEAM, Ministerio de Ambiente, corporaciones autónomas regionales).</div>
+</section>
+
+<section class="sec" id="glaciares">
+  <div class="sec-kicker">Leer gráficas</div>
+  <h2>Los nevados de Colombia y el CO₂: analiza los datos</h2>
+  <div class="meta">Al terminar podrás leer una gráfica, calcular una tasa y relacionar los datos con el calentamiento global.</div>
+  <p><b>Datos 1.</b> Pérdida de área de seis glaciares colombianos en dos períodos: de 1850 a 1954-1959 (unos 106 años) y de 1954-1959 a 2001-2003 (unos 45 años).</p>
+  <div class="seg" id="gl-vista" role="group" aria-label="Qué mostrar"><button type="button" data-v="tot" class="on">Pérdida total (%)</button><button type="button" data-v="anio">Pérdida por año (% / año)</button></div>
+  <svg id="gl-svg" viewBox="0 0 640 330" role="img" aria-label="Gráfica de barras de la pérdida de área de seis nevados de Colombia en dos períodos" style="width:100%;max-width:720px;height:auto;display:block;background:#fff;border:1px solid var(--brd);border-radius:12px"></svg>
+  <p style="font-size:.76rem;color:#475569;margin:4px 0 10px">Fuente: IDEAM (2009), citado por Roca (2010), tal como se reproduce en los Derechos Básicos de Aprendizaje de Ciencias Naturales (MEN, 2016). La pérdida por año es una estimación didáctica: porcentaje dividido entre los años del período.</p>
+  <div class="calc">
+    <div style="font-weight:800;margin-bottom:6px">Pregunta: ¿qué pasó con la rapidez de la pérdida?</div>
+    <div class="seg" id="gl-q" role="group" aria-label="Respuestas"><button type="button" data-o="a">Fue más rápida en el segundo período en los seis nevados</button><button type="button" data-o="b">Fue más lenta en el segundo período, porque el porcentaje es menor</button><button type="button" data-o="c">Fue igual en los dos períodos</button></div>
+    <div class="calc-out" id="gl-out" aria-live="polite">Cambia a «Pérdida por año», compara y escoge una respuesta.</div>
+  </div>
+  <p><b>Datos 2.</b> Concentración de CO₂ en el aire medida en Mauna Loa (valores aproximados, NOAA):</p>
+  <svg id="co2-svg" viewBox="0 0 640 220" role="img" aria-label="Gráfica de barras de la concentración de CO₂ en 1960, 1980, 2000 y 2020" style="width:100%;max-width:720px;height:auto;display:block;background:#fff;border:1px solid var(--brd);border-radius:12px"></svg>
+  <p>🤔 <b>Para analizar:</b> el CO₂ aumentó cerca de un 30 % entre 1960 y 2020 y la pérdida de hielo se aceleró. ¿Qué relación puedes plantear? ¿Qué otros factores habría que revisar antes de afirmar que uno causa al otro? ¿Qué podría pasarles a los páramos y a los seres vivos que dependen del agua que nace en los nevados?</p>
+</section>
+
+<section class="sec" id="accion">
+  <div class="sec-kicker">De lo local a lo colectivo</div>
+  <h2>Tu plan de acción: ¿qué puedes hacer y por qué funciona?</h2>
+  <div class="meta">Escoge una acción en cada nivel y lee la razón química.</div>
+  <div class="calc">
+    <label for="ac-1" style="font-weight:800">Personal</label>
+    <select id="ac-1" style="width:100%;margin:4px 0 10px;padding:8px;border:1.5px solid var(--brd);border-radius:10px;font:inherit"></select>
+    <label for="ac-2" style="font-weight:800">En el colegio</label>
+    <select id="ac-2" style="width:100%;margin:4px 0 10px;padding:8px;border:1.5px solid var(--brd);border-radius:10px;font:inherit"></select>
+    <label for="ac-3" style="font-weight:800">En la comunidad</label>
+    <select id="ac-3" style="width:100%;margin:4px 0 10px;padding:8px;border:1.5px solid var(--brd);border-radius:10px;font:inherit"></select>
+    <div class="calc-out" id="ac-out" aria-live="polite"></div>
+    <button type="button" class="btn-sm prim" id="ac-copiar" style="margin-top:8px">📋 Copiar mi plan</button>
+  </div>
+</section>
+
 <section class="sec" id="practica">
   <div class="sec-kicker">Repaso con el banco del Juego</div>
   <h2>Practica: química orgánica y ambiente</h2>
@@ -291,14 +342,14 @@
   <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
   <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
 </footer>
-<script src="fundamentos.js?v=90"></script>
-<script src="temas-extra.js?v=90"></script>
-<script src="temas-11.js?v=90"></script>
-<script src="pwa-install.js?v=90"></script>
-<script src="text-zoom.js?v=90"></script>
-<script src="fx-libro.js?v=90"></script>
-<script src="fase4.js?v=90"></script>
-<script src="sim4.js?v=90"></script>
+<script src="fundamentos.js?v=95"></script>
+<script src="temas-extra.js?v=95"></script>
+<script src="temas-11.js?v=95"></script>
+<script src="pwa-install.js?v=95"></script>
+<script src="text-zoom.js?v=95"></script>
+<script src="fx-libro.js?v=95"></script>
+<script src="fase4.js?v=95"></script>
+<script src="sim4.js?v=95"></script>
 <script>
 (function(){
 'use strict';
@@ -357,14 +408,65 @@ document.getElementById('vd-op').addEventListener('click',function(e){var b=e.ta
   var o=document.getElementById('vd-out');o.className='calc-out'+(b.dataset.o==='c'?' ok':'');o.innerHTML=VD[b.dataset.o];});
 })();
 </script>
-<script src="site-ui.js?v=90"></script>
-<script src="calidad.js?v=90"></script>
+<script>
+(function(){
+'use strict';
+var NS='http://www.w3.org/2000/svg';
+function E(t,a,p){var x=document.createElementNS(NS,t);for(var k in a)x.setAttribute(k,a[k]);if(p)p.appendChild(x);return x;}
+function T(p,x,y,s,a){var t=E('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t;}
+function coma(v,d){return v.toFixed(d).replace('.',',');}
+var CO={
+ hg:'<b>⛏️ Minería de oro con mercurio.</b><br><b>Química:</b> el mercurio (Hg) se une al oro formando una amalgama. Parte del mercurio se evapora o llega al agua, donde ciertos microorganismos lo convierten en <b>metilmercurio</b>, muy tóxico.<br><b>Efecto en la biodiversidad:</b> el metilmercurio se acumula en los tejidos de los peces y aumenta a lo largo de la cadena alimentaria (bioacumulación): afecta a peces, aves y a las personas que los consumen.<br><b>Qué se puede hacer:</b> técnicas de recuperación de oro sin mercurio, formalización de la minería y restauración de suelos. En Colombia, la Ley 1658 de 2013 regula el uso del mercurio.',
+ carb:'<b>⛏️ Minería de carbón a cielo abierto.</b><br><b>Química:</b> al remover el suelo, los sulfuros de la roca, como la pirita (FeS₂), se oxidan con el aire y el agua y forman <b>ácido sulfúrico</b> (drenaje ácido). Además, el carbón al quemarse libera CO₂.<br><b>Efecto en la biodiversidad:</b> el agua se acidifica, disuelve metales y arrastra sedimentos; se pierde la cobertura vegetal y el hábitat. Un caso citado en los DBA de Ciencias Naturales: entre 2010 y 2011 murieron cerca de 95 000 truchas en Tasco (Boyacá) por contaminación del agua.<br><b>Qué se puede hacer:</b> tratar el agua de la mina, restaurar el suelo con especies nativas y reducir el consumo de carbón.',
+ gan:'<b>🐄 Ganadería extensiva.</b><br><b>Química:</b> el ganado produce <b>metano (CH₄)</b> en su digestión; por cada molécula, el metano retiene mucho más calor que el CO₂. Abrir potreros suele implicar talar y quemar, y eso libera CO₂.<br><b>Efecto en la biodiversidad:</b> se pierde bosque y su fauna, y el suelo se compacta y se erosiona. En la Amazonía colombiana la deforestación se asocia en buena parte con la ampliación de pastos.<br><b>Qué se puede hacer:</b> sistemas silvopastoriles (pastos con árboles), recuperar potreros degradados y reducir la ampliación de la frontera agrícola.',
+ tala:'<b>🔥 Tala y quema de bosques.</b><br><b>Química:</b> la madera es sobre todo celulosa, un polímero de carbono. Al quemarla se libera el carbono como <b>CO₂</b>, y al talar se pierde la fotosíntesis que absorbía CO₂ del aire.<br><b>Efecto en la biodiversidad:</b> pérdida de hábitat y de especies, erosión del suelo y menos agua en las cuencas. Colombia tiene selvas muy diversas, como la Amazonía y el Chocó.<br><b>Qué se puede hacer:</b> proteger los bosques, sembrar especies nativas y usar madera de fuentes legales y sostenibles.',
+ agro:'<b>🌾 Agricultura intensiva.</b><br><b>Química:</b> los fertilizantes que sobran, con nitratos y fosfatos, llegan a quebradas y lagos y estimulan el crecimiento de algas (eutrofización). Al descomponerse, las algas consumen el oxígeno disuelto. Los plaguicidas persistentes, apolares, se acumulan en la grasa de los animales.<br><b>Efecto en la biodiversidad:</b> mueren peces y otros organismos acuáticos; algunas aves y polinizadores se ven afectados.<br><b>Qué se puede hacer:</b> fertilizar solo lo necesario, usar abonos orgánicos, control biológico de plagas y franjas de vegetación junto a las quebradas.',
+ vias:'<b>🛣️ Carreteras y ciudades.</b><br><b>Química:</b> el tráfico quema combustibles y emite CO₂, óxidos de nitrógeno y partículas. Las superficies de cemento y asfalto impiden que el agua se infiltre y arrastran aceites y residuos hacia los ríos.<br><b>Efecto en la biodiversidad:</b> las vías fragmentan el hábitat, los animales mueren atropellados y, en zonas de bosque, abren paso a la deforestación a ambos lados.<br><b>Qué se puede hacer:</b> pasos de fauna, transporte público y bicicleta, y zonas verdes que dejen infiltrar el agua.'};
+document.getElementById('co-op').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+  var o=document.getElementById('co-out');o.className='calc-out';o.innerHTML=CO[b.dataset.o];});
+/* glaciares: IDEAM (2009) citado por Roca (2010), tomado de los DBA (MEN, 2016) */
+var GL=[['Sierra Nevada de Santa Marta',76,60],['Sierra Nevada de El Cocuy',76,49],['Volcán Nevado del Ruiz',55,51],['Volcán Nevado de Santa Isabel',66,65],['Volcán Nevado del Tolima',71,62],['Volcán Nevado del Huila',53,25]];
+var vista='tot',s=document.getElementById('gl-svg');
+function pintaGl(){s.innerHTML='';var anio=vista==='anio',mx=anio?1.6:80,X=function(v){return 205+v/mx*400;};
+  GL.forEach(function(g,i){var y=14+i*50,v1=anio?g[1]/106:g[1],v2=anio?g[2]/45:g[2];
+    T(s,198,y+17,g[0],{'text-anchor':'end','font-size':11,'font-weight':700,fill:'#0d2d42'});
+    E('rect',{x:205,y:y,width:X(v1)-205,height:17,rx:3,fill:'#60a5fa'},s);T(s,X(v1)+5,y+13,anio?coma(v1,2):String(v1),{'font-size':11,'font-weight':800,fill:'#0d2d42'});
+    E('rect',{x:205,y:y+20,width:X(v2)-205,height:17,rx:3,fill:'#f97316'},s);T(s,X(v2)+5,y+33,anio?coma(v2,2):String(v2),{'font-size':11,'font-weight':800,fill:'#0d2d42'});});
+  E('rect',{x:205,y:312,width:12,height:12,fill:'#60a5fa'},s);T(s,221,322,'1850 a 1954-1959',{'font-size':11,fill:'#334155'});
+  E('rect',{x:360,y:312,width:12,height:12,fill:'#f97316'},s);T(s,376,322,'1954-1959 a 2001-2003',{'font-size':11,fill:'#334155'});
+  T(s,605,322,anio?'% de área por año':'% de área perdida',{'text-anchor':'end','font-size':10,fill:'#475569'});}
+pintaGl();
+document.getElementById('gl-vista').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});vista=b.dataset.v;pintaGl();});
+var GQ={a:'✅ <b>Correcto.</b> Al dividir entre los años, la pérdida por año es mayor en el segundo período en los seis nevados (por ejemplo, en la Sierra Nevada de Santa Marta pasa de unos 0,72 % por año a unos 1,33 % por año). Aunque el porcentaje total parezca menor, el período es mucho más corto: el hielo se perdió más rápido.',
+ b:'🔎 Compara con cuidado: el segundo período dura 45 años y el primero 106. Con porcentajes parecidos en períodos mucho más cortos, la rapidez es mayor. Cambia a «Pérdida por año» y compara.',
+ c:'🔎 No son iguales: en «Pérdida por año» las barras naranja (segundo período) son más largas que las azules en todos los nevados.'};
+document.getElementById('gl-q').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+  var o=document.getElementById('gl-out');o.className='calc-out'+(b.dataset.o==='a'?' ok':' fail');o.innerHTML=GQ[b.dataset.o];});
+var c2=document.getElementById('co2-svg'),CD=[[1960,317],[1980,339],[2000,370],[2020,414]];
+CD.forEach(function(d,i){var x=70+i*140,h=(d[1]-250)/180*150;E('rect',{x:x,y:185-h,width:80,height:h,rx:4,fill:'#94a3b8'},c2);T(c2,x+40,185-h-6,d[1]+' ppm',{'text-anchor':'middle','font-size':12,'font-weight':800,fill:'#0d2d42'});T(c2,x+40,205,String(d[0]),{'text-anchor':'middle','font-size':12,fill:'#334155'});});
+T(c2,12,14,'La escala empieza en 250 ppm para que se note la diferencia.',{'font-size':10,fill:'#64748b'});
+/* plan de acción */
+var AC=[
+ [['Apagar luces y aparatos que no uso, y caminar o ir en bicicleta en trayectos cortos','Se quema menos combustible: cada litro de gasolina que no se usa evita unos 2,3 kg de CO₂.'],['Usar botella y bolsa reutilizables','Se evita producir y desechar plásticos hechos de cadenas C−C que casi no se degradan.'],['Separar los residuos en la fuente','Los orgánicos se compostan y los plásticos, vidrio y papel se pueden reciclar, en vez de quemarse o enterrarse mezclados.']],
+ [['Sembrar árboles nativos o una huerta en el colegio','Las plantas absorben CO₂ en la fotosíntesis y fijan carbono en la celulosa.'],['Montar un punto de reciclaje y compostaje de residuos orgánicos','El compostaje convierte restos de comida en abono y evita que se pudran sin oxígeno y produzcan metano.'],['Hacer una campaña contra la quema de basuras','Quemar plásticos libera CO₂ y compuestos tóxicos; separar y llevar al reciclaje evita esas emisiones.']],
+ [['Organizar una jornada de limpieza de una quebrada','Se retiran residuos antes de que el agua los arrastre y los plásticos se rompan en microplásticos.'],['Proponer a la junta de acción comunal una ruta de recolección selectiva','Con residuos separados, el reciclaje es más eficiente y hay menos basura en los rellenos.'],['Impulsar rutas escolares compartidas o caminatas','Menos vehículos pequeños quemando combustible significa menos CO₂, óxidos de nitrógeno y partículas.']]];
+['ac-1','ac-2','ac-3'].forEach(function(id,k){var sl=document.getElementById(id);sl.innerHTML=AC[k].map(function(a,i){return '<option value="'+i+'">'+a[0]+'</option>';}).join('');sl.addEventListener('change',plan);});
+function plan(){var P=[0,1,2].map(function(k){return AC[k][+document.getElementById('ac-'+(k+1)).value];}),n=['Personal','En el colegio','En la comunidad'];
+  document.getElementById('ac-out').innerHTML=P.map(function(a,k){return '<b>'+n[k]+':</b> '+a[0]+'.<br><i>Por qué funciona:</i> '+a[1];}).join('<br><br>');
+  return P.map(function(a,k){return n[k]+': '+a[0]+'. Por qué funciona: '+a[1];}).join('\n');}
+plan();
+document.getElementById('ac-copiar').addEventListener('click',function(){var t='Mi plan de acción\n'+plan();var b=this;
+  if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){b.textContent='✅ Copiado';setTimeout(function(){b.textContent='📋 Copiar mi plan';},1800);});});
+})();
+</script>
+<script src="site-ui.js?v=95"></script>
+<script src="calidad.js?v=95"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="fotos-datos.js?v=90"></script>
-<script src="fotos.js?v=90"></script>
-<script src="pantalla.js?v=90"></script>
-<script src="simx.js?v=90"></script>
-<script src="narracion.js?v=90"></script>
+<script src="fotos-datos.js?v=95"></script>
+<script src="fotos.js?v=95"></script>
+<script src="pantalla.js?v=95"></script>
+<script src="simx.js?v=95"></script>
+<script src="narracion.js?v=95"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

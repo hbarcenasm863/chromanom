@@ -7,6 +7,36 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-18 (193) — Los DBA de Ciencias Naturales de 11.º: lo que faltaba en páginas, juego y docente
+
+### Contexto
+El docente pidió revisar si ChromaNom representa por completo los DBA de Ciencias Naturales (MEN, 2016) y completar lo que faltara (preguntas, animaciones, contenido en las páginas, el juego y el módulo docente), **solo para grado 11.º**. De los cinco DBA de 11.º, el n.º 4 (mecanismos de reacción orgánica) y el n.º 5 (cuestiones ambientales) son de química; los n.º 1 a 3 (ondas, cargas y circuitos) son de física y no se trabajan en el sitio. La revisión encontró estos huecos: nada sobre reacciones exotérmicas y endotérmicas, pruebas químicas solo escritas (sin actividad), una sola reacción pericíclica sin animación, el DBA n.º 5 a medias, y en el docente DBA como «paráfrasis sin verificar» (uno de 10.º que no existe).
+
+### Cambios
+- **`simx.js`** (tres simulaciones nuevas, con botón de pantalla completa):
+  - `energia`: perfil de energía de una reacción (hidrogenación del eteno, deshidratación del etanol y combustión del metano), con catalizador y temperatura; los choques superan o no la barrera. Los ΔH son valores reales aproximados; las Ea son ilustrativas.
+  - `pruebas`: laboratorio virtual con 10 reactivos (Tollens, Fehling, Benedict, bicarbonato, FeCl₃, Lugol, Biuret, Sudán III, dicromato y Lucas) y 13 muestras. Modo «Explorar» y modo «Muestra misteriosa» con bitácora.
+  - `diels`: cicloadición de Diels-Alder en un solo paso, con las flechas de seis electrones y el perfil de una sola barrera.
+- **`reacciones.html`**: sección «Exotérmica y endotérmica» con la simulación y 4 preguntas; sección «Homolítica, heterolítica y pericíclica» con la simulación y 4 preguntas.
+- **`biomoleculas.html`**: sección «Pruebas químicas» con el laboratorio virtual. **`grupos.html`**: enlace al laboratorio desde la introducción.
+- **`ambiente.html`**: tres secciones nuevas: «Actividades humanas y biodiversidad» (seis actividades con su causa química y su efecto en Colombia), «Los nevados de Colombia y el CO₂» (gráficas con los datos de IDEAM 2009 de los DBA y CO₂ de Mauna Loa, con una pregunta de tasa) y «Plan de acción» (con botón para copiar).
+- **Juego** (`temas-extra.js` y `temas-11.js`): 17 preguntas nuevas en «Tipos de reacción» (energía y mecanismos), 12 en «Biomoléculas» (pruebas químicas) y 10 en «Química orgánica y ambiente» (Colombia, gráficas, acciones).
+- **Docente** (`docente-datos.js`): 5 + 5 + 2 preguntas tipo Saber 11 nuevas (energía, pruebas, mecanismos) y 7 preguntas abiertas nuevas. `herramientas/generar-saber-juego.js` reconoce ahora los temas nuevos y se volvió a correr (290 preguntas en `saber-juego.js`).
+- **Alineación en el docente:** los DBA pasan a ser el texto oficial de 11.º n.º 4 y n.º 5 (`dba11a` y `dba11c`); se quitó el «DBA de 10.º» que no era oficial y `dba11b`. En `docente.html`, la tabla ahora incluye los n.º 4 y 5 con su texto oficial, aclara que los n.º 1 a 3 son de física, y trae una tabla de cobertura por evidencia (cubierta o parcial).
+- `sw.js` y `?v=95` en todas las páginas.
+
+### Pasos manuales pendientes
+- Ninguno en `chromanom-analytics.gs` (no se tocó).
+- Los cambios van en la rama de trabajo; falta fusionarlos en `main` para que GitHub Pages los publique.
+
+### Pendiente o sin resolver
+- DBA n.º 5: «Parcial» en dos evidencias: el diseño de investigaciones y el tráfico de especies quedan para el trabajo en clase.
+- Pericíclicas: solo hay un ejemplo (Diels-Alder).
+- Revisión científica pendiente por parte del docente: las Ea de la simulación de energía y los resultados de cada reactivo del laboratorio son de libro de texto, conviene que los confirme.
+- Las pruebas de Lucas, Sudán y dicromato tienen casos marcados «no aplica» a propósito (la muestra daría falso positivo o reacciones complicadas).
+
+---
+
 ## 2026-11-18 (192) — Calidad: accesibilidad, SEO, credibilidad y analítica (plan de mejoras, tareas 0 a 5)
 
 ### Contexto

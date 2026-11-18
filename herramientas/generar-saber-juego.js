@@ -9,7 +9,8 @@ const c={console};c.window=c;vm.createContext(c);
 const SI=c.SABER_ICFES;
 const lim=s=>String(s==null?'':s).replace(/<[^>]+>/g,'');
 const PAREN=/[A-Za-zₐ-ₜ₀-₉]\([A-Za-z₀-₉]+\)[₀-₉]|\(CH|\)CH|C\(/;
-const RXN=[[/éster|esterific|saponific|jab[oó]n|transesterific|biodi[eé]sel|amida|anh[ií]drido|cloruro de [aá]cido/i,'rxn_derivados'],
+const RXN=[[/exot[ée]rmic|endot[ée]rmic|energ[ií]a de activaci[óo]n|ΔH|Biuret|Lugol|Benedict|reactivo de Lucas|pericíclic|homolítica/i,'tipos_reaccion'],
+  [/éster|esterific|saponific|jab[oó]n|transesterific|biodi[eé]sel|amida|anh[ií]drido|cloruro de [aá]cido/i,'rxn_derivados'],
   [/aldeh[ií]do|cetona|tollens|fehling|carbonilo|grignard|NaBH/i,'rxn_carbonilo'],
   [/benceno|arom[aá]tic|nitraci|tolueno/i,'rxn_aromaticos'],
   [/haluro|bromuro|cloruro|SN1|SN2|halog/i,'rxn_halogenuros'],

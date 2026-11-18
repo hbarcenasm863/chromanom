@@ -614,7 +614,7 @@ function alinSugerida(){
   var ev=[];ts.forEach(function(x){var al=(x.alin||a)[g===10?'g10':'g11'];if(al&&al.sed===gg.sed)al.ev.forEach(function(e){if(ev.indexOf(e)<0)ev.push(e);});});
   if(!ev.length)ev=gg.ev.slice();
   var est=[],dba=[];ts.forEach(function(x){((x.alin||a).est||[]).forEach(function(e){if(est.indexOf(e)<0)est.push(e);});((x.alin||a).dba||[]).forEach(function(e){if(dba.indexOf(e)<0)dba.push(e);});});
-  if(g===10)dba=['dba10a'];
+  if(g===10)dba=[];
   pintarAlineacion({sed:gg.sed,ev:ev,est:est.length?est:a.est,dba:dba});
 }
 function valor(name){var c=document.querySelector('input[name='+name+']:checked');return c?c.value:'';}

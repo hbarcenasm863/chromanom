@@ -104,12 +104,13 @@ var ALINEACION={
     {id:'est4',t:'Relaciono la estructura de las moléculas orgánicas e inorgánicas con sus propiedades físicas y químicas y su capacidad de cambio químico.',nota:'verificar redacción oficial (MEN, 2004)'},
     {id:'est5',t:'Identifico cambios químicos en la vida cotidiana y en el ambiente.',nota:'verificar redacción oficial (MEN, 2004)'}
   ],
-  /* Derechos Básicos de Aprendizaje: no se pudo consultar el documento
-     oficial; por eso van como paráfrasis. */
+  /* Derechos Básicos de Aprendizaje de Ciencias Naturales, grado 11.º (MEN, 2016,
+     versión 1). Texto oficial. Los n.º 1 a 3 (ondas, cargas y circuitos) son de física y
+     ChromaNom no los trabaja. n.º 4: mecanismos de reacción en compuestos orgánicos;
+     n.º 5: cuestiones ambientales. */
   dba:[
-    {id:'dba11a',grado:11,t:'Comprende que los diferentes mecanismos de reacción química (óxido-reducción, homólisis, heterólisis y pericíclicas) posibilitan la formación de distintos tipos de compuestos orgánicos.',nota:'paráfrasis — verificar redacción y número en los DBA del MEN'},
-    {id:'dba11b',grado:11,t:'Clasifica compuestos orgánicos por sus grupos funcionales y los identifica mediante pruebas químicas sencillas.',nota:'paráfrasis — verificar en los DBA del MEN'},
-    {id:'dba10a',grado:10,t:'Comprende la relación entre la estructura de los átomos, los tipos de enlace y las propiedades de las sustancias.',nota:'paráfrasis — verificar en los DBA del MEN'}
+    {id:'dba11a',grado:11,num:4,t:'Comprende que los diferentes mecanismos de reacción química (oxido-reducción, homólisis, heterólisis y pericíclicas) posibilitan la formación de distintos tipos de compuestos orgánicos.',nota:'texto oficial, DBA de Ciencias Naturales 11.º n.º 4 (MEN, 2016)'},
+    {id:'dba11c',grado:11,num:5,t:'Analiza cuestiones ambientales actuales, como el calentamiento global, contaminación, tala de bosques y minería, desde una visión sistémica (económico, social, ambiental y cultural).',nota:'texto oficial, DBA de Ciencias Naturales 11.º n.º 5 (MEN, 2016)'}
   ]
 };
 
@@ -125,7 +126,7 @@ var TEMAS=[
     como preguntas tipo Saber 11 y como ejercicios «Selección múltiple». ── */
  {id:'carbono',titulo:'El átomo de carbono e hibridación',corto:'Carbono e hibridación',
   gen:[],jue:/^hibridacion$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-exp1']},g10:{sed:'sed10q',ev:['10q-exp1','10q-exp3']},est:['est1'],dba:['dba10a']},
+  alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-exp1']},g10:{sed:'sed10q',ev:['10q-exp1','10q-exp3']},est:['est1'],dba:[]},
   previos:{
    curiosos:['La mina de un lápiz (grafito) y un diamante son carbono puro: lo único que cambia es cómo están unidos sus átomos.',
      'Se conocen más de diez millones de compuestos de carbono, más que de todos los demás elementos juntos.',
@@ -164,7 +165,7 @@ var TEMAS=[
 
  {id:'tipos_carbono',titulo:'Tipos de carbono: primario, secundario, terciario y cuaternario',corto:'Tipos de carbono',
   gen:[],jue:/^tipos_carbono$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11a']},
   previos:{
    curiosos:['El «octanaje» de la gasolina se mide comparándola con el isooctano, una molécula muy ramificada que tiene carbonos de los cuatro tipos.',
      'Que un alcohol sea primario, secundario o terciario cambia lo que pasa cuando se oxida: así funcionan algunos alcoholímetros.',
@@ -201,7 +202,7 @@ var TEMAS=[
 
  {id:'cadenas',titulo:'Clasificación de las cadenas carbonadas',corto:'Cadenas carbonadas',
   gen:[],jue:/^cadenas$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11a']},
   previos:{
    curiosos:['La parafina de las velas está hecha de cadenas largas, abiertas y saturadas, de más de 20 carbonos.',
      'La cafeína del café y la nicotina del tabaco tienen anillos con nitrógeno: son compuestos heterocíclicos.',
@@ -237,7 +238,7 @@ var TEMAS=[
 
  {id:'cadena',titulo:'Cadena principal, numeración y desempate',corto:'Cadena principal y desempate',
   gen:['alcanos'],jue:/cadena|desempate|error|^principios$/i,rxn:[],soloRamificados:true,nomenclatura:true,saberJue:/^principios$/,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11a']},
   previos:{
    curiosos:['El índice de octano de la gasolina se mide comparándola con dos alcanos: el heptano (valor 0) y el 2,2,4-trimetilpentano, llamado «isooctano» (valor 100). Con casi los mismos átomos, la forma de la cadena cambia mucho el comportamiento en el motor.',
      'Con la fórmula C₁₀H₂₂ se pueden dibujar 75 alcanos distintos y con C₂₀H₄₂ más de 366 000. Sin reglas para escoger la cadena principal sería imposible darle a cada uno un nombre único.'],
@@ -280,7 +281,7 @@ var TEMAS=[
 
  {id:'alcanos',titulo:'Alcanos y cicloalcanos',corto:'Alcanos',
   gen:['alcanos'],jue:/^alcanos$|cicloalc/i,rxn:['alcanos'],nomenclatura:true,saberJue:/^cicloalcanos$/,
-  alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-ind1','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11a']},
   previos:{
    curiosos:['El metano es el principal componente del gas natural; también lo producen las vacas durante la digestión y la basura que se descompone en los rellenos sanitarios.',
      'La parafina de las velas es una mezcla de alcanos de unos 20 a 40 carbonos.',
@@ -435,7 +436,7 @@ var TEMAS=[
  {id:'alcoholes',titulo:'Alcoholes, fenoles y éteres',corto:'Alcoholes, fenoles y éteres',
   gen:['alcoholes','eteres'],jue:/^alcoholes$|^eteres$|fenol/i,rxn:['alcoholes','eteres'],nomenclatura:true,saberJue:/^fenoles$/,
   grupos:[{id:'alcoholes',t:'Alcoholes y fenoles',jue:/^alcoholes$|fenol/i},{id:'eteres',t:'Éteres',jue:/^eteres$/i}],
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11a']},
   previos:{
    curiosos:['El etanol de las bebidas se produce por fermentación de azúcares; la chicha y el guarapo son bebidas fermentadas tradicionales de Colombia.',
      'El glicerol (propano-1,2,3-triol) tiene tres grupos −OH; se usa en cremas porque retiene la humedad.',
@@ -471,7 +472,7 @@ var TEMAS=[
  {id:'carbonilos',titulo:'Aldehídos y cetonas',corto:'Aldehídos y cetonas',
   gen:['aldehidos','cetonas'],jue:/^aldehidos$|^cetonas$/i,rxn:['aldehidos','cetonas'],nomenclatura:true,
   grupos:[{id:'aldehidos',t:'Aldehídos',jue:/^aldehidos$/i},{id:'cetonas',t:'Cetonas',jue:/^cetonas$/i}],
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11a']},
   previos:{
    curiosos:['La vainillina (vainilla) y el cinamaldehído (canela) son aldehídos.',
      'La propanona (acetona) es el componente principal de muchos quitaesmaltes.',
@@ -507,7 +508,7 @@ var TEMAS=[
  {id:'acidos',titulo:'Ácidos carboxílicos y ésteres',corto:'Ácidos y ésteres',
   gen:['acidos','esteres'],jue:/^acidos$|^esteres$|^derivados_acido$/i,rxn:['acidos','esteres'],nomenclatura:true,saberJue:/^derivados_acido$/,
   grupos:[{id:'acidos',t:'Ácidos carboxílicos',jue:/^acidos$/i},{id:'derivados_acido',t:'Haluros de ácido y anhídridos',jue:/^derivados_acido$/i},{id:'esteres',t:'Ésteres',jue:/^esteres$/i}],
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3','11q-uso3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11a']},
   previos:{
    curiosos:['El vinagre es una solución de ácido etanoico (acético) en agua, de alrededor del 4 % al 5 %.',
      'El olor del sudor y de algunos quesos se debe a ácidos carboxílicos como el ácido butanoico.',
@@ -543,7 +544,7 @@ var TEMAS=[
  {id:'nitrogenados',titulo:'Aminas, amidas y nitrilos',corto:'Compuestos nitrogenados',
   gen:['aminas','amidas','nitrilos'],jue:/^aminas$|^amidas$|^nitrilos$/i,rxn:['aminas','amidas','nitrilos'],nomenclatura:true,
   grupos:[{id:'aminas',t:'Aminas',jue:/^aminas$/i},{id:'amidas',t:'Amidas',jue:/^amidas$/i},{id:'nitrilos',t:'Nitrilos',jue:/^nitrilos$/i}],
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2'],dba:['dba11a']},
   previos:{
    curiosos:['El olor a pescado se debe a aminas como la trimetilamina (N,N-dimetilmetanamina).',
      'La urea, una amida, fue en 1828 el primer compuesto orgánico preparado en el laboratorio a partir de una sustancia inorgánica (Friedrich Wöhler).',
@@ -578,7 +579,7 @@ var TEMAS=[
 
  {id:'polifuncionales',titulo:'Compuestos polifuncionales (prioridad de grupos)',corto:'Polifuncionales',
   gen:[],jue:/polif/i,rxn:[],nomenclatura:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-uso1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est3'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso2','11q-uso1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est3'],dba:['dba11a']},
   previos:{
    curiosos:['El ácido láctico (ácido 2-hidroxipropanoico) da el sabor ácido al kumis y al yogur.',
      'Los aminoácidos que forman las proteínas tienen a la vez un grupo amino (−NH₂) y un grupo carboxilo (−COOH).',
@@ -626,7 +627,7 @@ var TEMAS=[
 
  {id:'isomeria',titulo:'Isomería estructural, cis/trans y quiralidad',corto:'Isomería',
   gen:[],jue:/isomer/i,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-ind3','11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-ind3','11q-uso2']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est1'],dba:['dba11a']},
   previos:{
    curiosos:['Con la fórmula C₂H₆O existen dos sustancias muy distintas: el etanol (líquido, hierve a 78 °C) y el metoximetano (gas, hierve a −24 °C).',
      'La (R)-carvona huele a hierbabuena y la (S)-carvona a alcaravea: son imágenes en espejo una de la otra, que no se pueden superponer (enantiómeros).',
@@ -741,7 +742,7 @@ var TEMAS=[
 
  {id:'propiedades',titulo:'Fuerzas intermoleculares y propiedades físicas',corto:'Fuerzas intermoleculares',
   gen:[],jue:/^fuerzas_inter$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est4'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-ind3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est2','est4'],dba:['dba11a']},
   previos:{
    curiosos:['El etanol y el dimetiléter tienen la misma fórmula, C₂H₆O, pero uno hierve a 78 °C y el otro a −24 °C.',
      'En Bogotá el agua hierve a unos 91 °C, no a 100 °C, porque la presión del aire es menor.',
@@ -776,7 +777,7 @@ var TEMAS=[
 
  {id:'biomoleculas',titulo:'Biomoléculas y metabolismo',corto:'Biomoléculas',
   gen:[],jue:/^biomoleculas$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est3','est2'],dba:['dba11b']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso1']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est3','est2'],dba:['dba11a']},
   previos:{
    curiosos:['El almidón de la papa y la celulosa del papel están hechos del mismo azúcar, la glucosa; solo cambia cómo se unen sus moléculas.',
      'Cuando haces ceviche, el limón «cocina» el pescado sin calor: desnaturaliza sus proteínas.',
@@ -814,7 +815,7 @@ var TEMAS=[
 
  {id:'ambiente',titulo:'Química orgánica y ambiente',corto:'Química y ambiente',
   gen:[],jue:/^quimica_ambiente$/,rxn:[],nomenclatura:false,saberJue:true,
-  alin:{g11:{sed:'sed11q',ev:['11q-uso3','11q-exp3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est5','est2'],dba:['dba11a']},
+  alin:{g11:{sed:'sed11q',ev:['11q-uso3','11q-exp3']},g10:{sed:'sed10q',ev:['10q-exp3']},est:['est5','est2'],dba:['dba11a','dba11c']},
   previos:{
    curiosos:['Quemar un galón de gasolina (unos 2,8 kg) produce unos 8,6 kg de CO₂: la masa extra es oxígeno del aire.',
      'Un solo átomo de cloro de un CFC puede destruir miles de moléculas de ozono en la estratosfera.',
@@ -1455,7 +1456,31 @@ var SABER={
   {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CO−CH₃ + NaBH₄ (y luego agua) → CH₃−CH(OH)−CH₃',
    q:'¿Qué tipo de reacción es, respecto al carbono del grupo carbonilo?',o:['Reducción: ese carbono gana un enlace con hidrógeno y pierde uno con oxígeno','Oxidación: ese carbono gana un enlace con oxígeno','Sustitución nucleofílica: el oxígeno es reemplazado por hidrógeno','Eliminación: se pierde agua y se forma un doble enlace']},
   {a:'rx',c:'uso',k:'Q',ctx:'CH₃−CH₂−Br + NaCN → CH₃−CH₂−C≡N + NaBr',
-   q:'¿Qué tipo de reacción es?',o:['Sustitución nucleofílica','Adición nucleofílica','Eliminación','Oxidación']}
+   q:'¿Qué tipo de reacción es?',o:['Sustitución nucleofílica','Adición nucleofílica','Eliminación','Oxidación']},
+  {a:'rx',c:'ind',k:'CTS',ctx:'Dos grupos de estudiantes hacen reaccionar un alqueno con hidrógeno en un recipiente aislado con un termómetro. Registran la temperatura de la mezcla cada minuto: 25 °C, 31 °C, 38 °C, 44 °C, 45 °C y 45 °C.',
+   q:'¿Qué conclusión es coherente con estos datos?',o:['La reacción libera calor al medio (es exotérmica) y termina cuando la temperatura deja de subir','La reacción absorbe calor del medio (es endotérmica), porque la temperatura cambió','La reacción es muy lenta, porque la temperatura solo subió 20 °C','No se puede saber si hay intercambio de calor, porque no se midió la masa']},
+  {a:'rx',c:'exp',k:'Q',ctx:'En el diagrama de energía de una reacción, los reactivos están a 0 kJ/mol, la cima de la barrera a 150 kJ/mol y los productos a −90 kJ/mol.',
+   q:'¿Cuáles son la energía de activación y el cambio de energía (ΔH) de esta reacción?',o:['Ea = 150 kJ/mol y ΔH = −90 kJ/mol, por lo que es exotérmica','Ea = 90 kJ/mol y ΔH = 150 kJ/mol, por lo que es endotérmica','Ea = 150 kJ/mol y ΔH = +90 kJ/mol, por lo que es endotérmica','Ea = −90 kJ/mol y ΔH = 150 kJ/mol, por lo que es exotérmica']},
+  {a:'rx',c:'uso',k:'Q',ctx:'La deshidratación de un alcohol para obtener un alqueno es endotérmica y por eso en el laboratorio se mantiene el calentamiento durante toda la reacción.',
+   q:'¿Qué ocurriría si se apagara el mechero a la mitad del proceso?',o:['La reacción se frenaría, porque necesita absorber calor del entorno de forma continua','La reacción se aceleraría, porque el sistema ya tiene suficiente energía','La reacción seguiría igual, porque el calor solo hace falta al comienzo','La reacción pasaría a ser exotérmica, porque el sistema se enfría']},
+  {a:'rx',c:'ind',k:'CTS',ctx:'Un grupo de estudiantes hidrogena el mismo alqueno dos veces a 60 °C: una sin catalizador, tardando 40 minutos, y otra con níquel, tardando 2 minutos. En ambos casos el recipiente aislado sube la misma cantidad de grados.',
+   q:'¿Qué conclusión se apoya en estos datos?',o:['El níquel acelera la reacción sin cambiar la cantidad de calor liberada','El níquel libera más calor, por eso la reacción es más rápida','El níquel hace que la reacción pase de exotérmica a endotérmica','Sin níquel la reacción libera más calor, porque dura más tiempo']},
+  {a:'rx',c:'exp',k:'Q',ctx:'Una estudiante afirma: «Como la combustión de la gasolina libera mucha energía, no necesita energía de activación».',
+   q:'¿Cómo se corrige esta afirmación?',o:['Toda reacción necesita superar una barrera; la chispa del motor aporta la energía de activación y luego el calor liberado mantiene la combustión','Es correcta: las reacciones exotérmicas nunca tienen barrera de energía','Es correcta, pero solo para los combustibles líquidos','Hay que corregirla: la chispa hace que la reacción sea más exotérmica']},
+  {a:'rx',c:'ind',k:'CTS',ctx:'En el laboratorio hay tres frascos sin etiqueta, X, Y y Z, que contienen etanal, propanona y etanol (no necesariamente en ese orden). Con el reactivo de Tollens, solo X forma un espejo de plata. Con dicromato de potasio acidulado, Y queda naranja y Z se vuelve verde.',
+   q:'¿Qué identificación de los frascos es coherente con estos resultados?',o:['X es etanal, Y es propanona y Z es etanol','X es etanol, Y es propanona y Z es etanal','X es propanona, Y es etanal y Z es etanol','X es etanal, Y es etanol y Z es propanona']},
+  {a:'rx',c:'exp',k:'Q',ctx:'Al calentar con el reactivo de Benedict, la glucosa forma un precipitado rojo ladrillo, pero la sacarosa deja la mezcla azul.',
+   q:'¿Cómo se explica esta diferencia?',o:['La glucosa tiene un grupo aldehído libre que reduce el Cu²⁺; en la sacarosa los extremos reductores están unidos entre sí','La sacarosa no tiene carbono, por eso no reacciona','La glucosa es un lípido y la sacarosa un carbohidrato','El reactivo de Benedict solo reacciona con compuestos de seis carbonos']},
+  {a:'rx',c:'ind',k:'CTS',ctx:'Una estudiante analiza una muestra de alimento: con Biuret se vuelve violeta, con Lugol se queda pardo-amarillo y con Benedict sigue azul después de calentar.',
+   q:'¿Qué conclusión se apoya en estos tres resultados?',o:['Contiene proteínas, pero no almidón ni azúcares reductores','Contiene almidón y azúcares reductores, pero no proteínas','Contiene solo lípidos','No se puede concluir nada, porque dos pruebas fueron negativas']},
+  {a:'rx',c:'uso',k:'Q',ctx:'A una muestra líquida se le agrega bicarbonato de sodio y se observa un burbujeo.',
+   q:'¿Qué grupo funcional se puede inferir y qué gas forma las burbujas?',o:['Un ácido carboxílico; el gas es CO₂','Un alcohol; el gas es H₂','Un aldehído; el gas es O₂','Una cetona; el gas es CO₂']},
+  {a:'rx',c:'ind',k:'CTS',ctx:'Se agrega el reactivo de Lucas a tres alcoholes: butan-1-ol, butan-2-ol y 2-metilpropan-2-ol. La muestra M1 se enturbia de inmediato, la muestra M2 se enturbia después de unos 5 minutos y la muestra M3 no cambia a temperatura ambiente.',
+   q:'¿Qué alcohol corresponde a cada muestra?',o:['M1 es 2-metilpropan-2-ol, M2 es butan-2-ol y M3 es butan-1-ol','M1 es butan-1-ol, M2 es butan-2-ol y M3 es 2-metilpropan-2-ol','M1 es butan-2-ol, M2 es butan-1-ol y M3 es 2-metilpropan-2-ol','M1 es 2-metilpropan-2-ol, M2 es butan-1-ol y M3 es butan-2-ol']},
+  {a:'rx',c:'exp',k:'Q',ctx:'El 1,3-butadieno reacciona con el eteno para formar ciclohexeno. Los datos experimentales indican que no se detecta ningún radical ni carbocatión durante la reacción y que ocurre en un solo paso.',
+   q:'¿Qué tipo de mecanismo explica estas observaciones?',o:['Pericíclico: los enlaces se rompen y se forman a la vez, en un estado de transición cíclico','Homolítico: se forman radicales que luego se combinan','Heterolítico: se forma un carbocatión que luego reacciona','Ácido-base: se transfiere un H⁺ al eteno']},
+  {a:'rx',c:'uso',k:'Q',ctx:'En una reacción, un enlace Cl−Cl se rompe de modo que cada átomo de cloro se queda con uno de los dos electrones del enlace.',
+   q:'¿Cómo se llama esa ruptura y qué especies se forman?',o:['Homolítica; se forman radicales de cloro','Heterolítica; se forman un catión y un anión','Pericíclica; se forma un anillo','Heterolítica; se forman dos radicales']}
  ]
 };
 
@@ -1623,6 +1648,11 @@ var ABIERTAS={
   {t:'nom',q:'Escribe el nombre del producto orgánico de cada reacción: a) propeno + HBr; b) propan-2-ol + CrO₃/H⁺.'},
   {t:'mdec',n:'2-cloro-2-metilpropano'},
   {t:'rx',q:'CH₂=CH₂ + H₂ → A (con catalizador de Ni). A + Cl₂ → B (con calor o luz). Escribe y nombra A y B, e indica qué tipo de reacción forma cada uno.'},
+  {t:'con',q:'La hidrogenación del eteno tiene ΔH = −137 kJ/mol y la deshidratación del etanol tiene ΔH = +45 kJ/mol. Explica cuál es exotérmica y cuál endotérmica, y dibuja para cada una el diagrama de energía señalando los reactivos, los productos, la energía de activación y ΔH.'},
+  {t:'con',q:'Dibuja en el mismo diagrama de energía una reacción sin catalizador y con catalizador. Explica qué cambia (energía de activación, rapidez) y qué NO cambia (ΔH, productos), y da un ejemplo orgánico.'},
+  {t:'con',q:'Tienes tres frascos sin etiqueta: etanal, propanona y propan-2-ol. Diseña una secuencia de pruebas químicas (Tollens, dicromato de potasio u otras) para identificar cada uno y escribe lo que observarías en cada caso.'},
+  {t:'con',q:'Explica por qué la glucosa da positivo con Benedict y la sacarosa da negativo, y qué prueba usarías para distinguir el almidón de la glucosa. Indica el color que observarías en cada caso.'},
+  {t:'con',q:'Compara la halogenación de un alcano con luz (homolítica), la adición de HBr a un alqueno (heterolítica) y la reacción de Diels-Alder (pericíclica): indica qué se forma en el camino (radicales, iones o ningún intermediario) y cuántos pasos tiene cada una.'},
   {t:'con',q:'Clasifica cada una de estas reacciones según su tipo (sustitución, adición, eliminación u oxidorreducción) y justifica brevemente cada clasificación: a) CH₂=CH₂ + Br₂ → CH₂Br−CH₂Br; b) CH₃−CH₂−Br + KOH (en etanol, con calor) → CH₂=CH₂ + KBr + H₂O; c) CH₃−CH₂−OH + CrO₃/H⁺ → CH₃−COOH; d) C₆H₆ + Cl₂ (cat. AlCl₃) → C₆H₅Cl + HCl.'}]
 };
 
@@ -1686,6 +1716,9 @@ var F4_ABIERTAS={
   {t:'con',q:'Explica qué le pasa a la clara del huevo al freírla o al pescado en el ceviche, usando los niveles de estructura de las proteínas.'},
   {t:'con',q:'Explica cómo actúa una enzima como la que hidroliza la sacarosa: qué es el sitio activo y por qué el calor excesivo o un pH extremo la dañan.'}],
  ambiente:[
+  {t:'con',q:'Elige una actividad humana (minería, ganadería, tala, agricultura intensiva o vías) y explica, con una sustancia o reacción química, cómo afecta a la biodiversidad de una región de Colombia. Propón una acción local para reducir el daño.'},
+  {t:'con',q:'La Sierra Nevada de Santa Marta perdió 76 % de su área de glaciar entre 1850 y 1954-1959 (unos 106 años) y 60 % entre 1954-1959 y 2001-2003 (unos 45 años). Calcula la pérdida por año en cada período, grafica los datos y analiza qué indican sobre la rapidez de la pérdida.'},
+  {t:'con',q:'Con los datos de CO₂ en el aire (317 ppm en 1960, 339 ppm en 1980, 370 ppm en 2000 y 414 ppm en 2020) calcula el aumento porcentual y explica por qué esa coincidencia con la pérdida de glaciares no basta para afirmar una causa única.'},
   {t:'con',q:'Calcula la masa de CO₂ que se produce al quemar 1 kg de propano (C₃H₈ + 5 O₂ → 3 CO₂ + 4 H₂O). Muestra la cadena de factores de conversión.'},
   {t:'con',q:'Explica por qué quemar 1 kg de gasolina produce más de 1 kg de CO₂, usando la ley de conservación de la masa.'},
   {t:'rx',q:'Escribe el mecanismo por el que un CFC destruye el ozono e identifica el paso de ruptura homolítica.'},

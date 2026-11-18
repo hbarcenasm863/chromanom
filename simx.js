@@ -6,6 +6,9 @@
    - sn2            (reacciones.html) ataque por la espalda e inversión del carbono
    - conformaciones (cadenas.html)    proyección de Newman y energía del giro
    - molecula3d     (carbono.html)    moléculas en 3D que se giran con el dedo
+   - energia        (reacciones.html) perfil de energía: exotérmica, endotérmica y catalizador
+   - diels          (reacciones.html) cicloadición de Diels-Alder: mecanismo pericíclico en un solo paso
+   - pruebas        (biomoleculas.html)     laboratorio virtual: reactivos que identifican grupos y biomoléculas
    Se pausan solas cuando no se ven y arrancan en pausa si el sistema pide «reducir movimiento».
    Son MODELOS: simplifican la realidad para mostrar la idea central. ═══ */
 (function(){
@@ -308,6 +311,288 @@ SIMX.molecula3d=function(box){
       else{var a=it.a,r=s*RAD[a.e]*.62*a.f;bola(ctx,a.x,a.y,r,COL[a.e]==='#e2e8f0'?'#cbd5e1':COL[a.e]);}});
     txt(ctx,m.n+' · '+m.f,12,22,'#0d2d42','800 15px "Outfit",sans-serif');txt(ctx,'gris = carbono · claro = hidrógeno · arrastra para girar',12,H-10,'#64748b','700 11px sans-serif');
     msg.innerHTML=m.t;
+  }
+  var A=animar(L,paso);
+};
+
+/* ── 6. Energía de la reacción: exotérmica, endotérmica y catalizador (reacciones.html) ──
+   Perfil de energía de tres reacciones orgánicas. La bolita es un choque entre moléculas: su
+   energía se sortea según la temperatura; si alcanza la energía de activación (Ea) supera la
+   barrera y reacciona, si no, vuelve a los reactivos. ΔH son valores reales aproximados (en fase
+   gaseosa, salvo la combustión, con H₂O líquida); las Ea y la energía de los choques son
+   ILUSTRATIVAS (a escala didáctica) para que la diferencia se vea. */
+SIMX.energia=function(box){
+  var RX={
+    hidro:{n:'Hidrogenación del eteno',r:'C₂H₄ + H₂',p:'C₂H₆',dH:-137,Ea:180,Ec:45,
+      cat:'níquel o platino',
+      t:'Es una <b>adición</b>: el H₂ se rompe sobre la superficie del metal y se suma al doble enlace. Sin catalizador la barrera es altísima; con Ni o Pt baja mucho.'},
+    deshid:{n:'Deshidratación del etanol',r:'CH₃CH₂OH',p:'C₂H₄ + H₂O',dH:45,Ea:210,Ec:150,
+      cat:'ácido sulfúrico',
+      t:'Es una <b>eliminación</b>: sale una molécula de agua y aparece el doble enlace. Como es endotérmica, hay que calentar de forma continua: si se deja de calentar, la reacción se frena.'},
+    comb:{n:'Combustión del metano',r:'CH₄ + 2 O₂',p:'CO₂ + 2 H₂O',dH:-890,Ea:240,Ec:120,
+      cat:'platino',
+      t:'Es una <b>oxidación</b> por radicales. Aunque libera muchísima energía, necesita una chispa que aporte la Ea para empezar; después el propio calor liberado mantiene la reacción.'}
+  };
+  var L=lienzo(box,0.62,'Perfil de energía de una reacción: barrera de activación, diferencia de energía entre reactivos y productos, y choques de moléculas que la superan o no'),ctx=L.ctx;
+  var k='hidro',cat=false,TC=25,Yc={};
+  var c1=fila(box);
+  pildoras(c1,[['hidro','Hidrogenación (exotérmica)'],['deshid','Deshidratación (endotérmica)'],['comb','Combustión (exotérmica)']],k,function(q){k=q;reiniciar();});
+  var c2=fila(box);
+  var bC=boton(c2,'Catalizador: no',function(b){cat=!cat;b.classList.toggle('on',cat);b.textContent='Catalizador: '+(cat?'sí ('+RX[k].cat+')':'no');reiniciar();});
+  var rg=deslizador(c2,'Temperatura',25,225,5,TC,function(v){TC=v;return v+' °C';});
+  rg.addEventListener('input',function(){reiniciar();});
+  var bR=boton(c2,'↺ Reiniciar conteo',function(){reiniciar();});
+  var msg=nota(box,'');
+  function sdo(x){x=(x-.2)/.6;return x<=0?0:x>=1?1:x*x*(3-2*x);}
+  function pico(x){var u=(x-.5)/.16;return Math.exp(-u*u);}
+  function curva(dH,Ea){var key=dH+'_'+Ea;if(Yc[key])return Yc[key];
+    function mk(h){var a=[];for(var i=0;i<=200;i++){var x=i/200;a.push(dH*sdo(x)+h*pico(x));}return a;}
+    function mx(a){var m=-1e9;a.forEach(function(v){if(v>m)m=v;});return m;}
+    var lo=0,hi=6*Ea;for(var n=0;n<40;n++){var mid=(lo+hi)/2;if(mx(mk(mid))<Ea)lo=mid;else hi=mid;}
+    return (Yc[key]=mk((lo+hi)/2));}
+  var i,dir,stop,exito,espera,E,att,ok;
+  function Ea(){var r=RX[k];return cat?r.Ec:r.Ea;}
+  function Y(){var r=RX[k];return curva(r.dH,Ea());}
+  function nuevo(){var Em=60*(TC+273)/298;E=-Em*Math.log(1-Math.random());if(E>400)E=400;att++;
+    i=0;dir=1;exito=E>=Ea();
+    if(exito)stop=200;else{var a=Y();stop=0;for(var j=0;j<=100;j++){if(a[j]>=E){stop=j;break;}}}}
+  function reiniciar(){bC.textContent='Catalizador: '+(cat?'sí ('+RX[k].cat+')':'no');att=0;ok=0;espera=0;nuevo();A&&A.dibujar();}
+  function flecha(x,y1,y2,c,etq,lado){ctx.strokeStyle=c;ctx.fillStyle=c;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y1);ctx.lineTo(x,y2);ctx.stroke();
+    var d=y2>y1?-1:1;[[y1,-d],[y2,d]].forEach(function(p){ctx.beginPath();ctx.moveTo(x,p[0]);ctx.lineTo(x-5,p[0]+p[1]*9);ctx.lineTo(x+5,p[0]+p[1]*9);ctx.closePath();ctx.fill();});
+    var f='800 '+Math.max(11,Math.round(L.W*.02))+'px "Outfit",sans-serif',izq=(lado||8)<0;ctx.font=f;var w=ctx.measureText(etq).width,tx=x+(lado||8),ty=(y1+y2)/2+4;
+    ctx.fillStyle='rgba(248,251,255,.88)';ctx.fillRect(izq?tx-w-3:tx-3,ty-Math.round(L.W*.02),w+6,Math.round(L.W*.026));
+    txt(ctx,etq,tx,ty,c,f,izq?'right':'left');}
+  function paso(dt){
+    var r=RX[k],a=Y(),a0=curva(r.dH,r.Ea);
+    if(espera>0){espera-=dt;if(espera<=0)nuevo();}
+    else{var v=(exito?70:55)*dt;i+=dir*v;
+      if(dir===1&&i>=stop){i=stop;if(exito){ok++;espera=1.1;}else dir=-1;}
+      else if(dir===-1&&i<=0){i=0;espera=.2;}}
+    var W=L.W,H=L.H,x0=W*.1,pw=W*.86,y0=H*.88,ph=H*.74,rango=Math.max(r.Ea,0)-Math.min(0,r.dH),yMin=Math.min(0,r.dH)-rango*.12,yMax=r.Ea+rango*.12;
+    function PX(ii){return x0+ii/200*pw;}function PY(e){return y0-(e-yMin)/(yMax-yMin)*ph;}
+    var fs=Math.max(10,Math.round(W*.017));
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#f8fbff';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#94a3b8';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,H*.06);ctx.lineTo(x0,y0);ctx.lineTo(x0+pw,y0);ctx.stroke();
+    txt(ctx,'Energía',4,H*.05,'#475569','700 '+fs+'px sans-serif','left');
+    txt(ctx,'Avance de la reacción →',x0+pw,y0+Math.round(fs*1.9),'#475569','700 '+fs+'px sans-serif','right');
+    txt(ctx,r.n,x0+pw,H*.05,'#0d2d42','800 '+Math.round(fs*1.15)+'px "Outfit",sans-serif','right');
+    /* nivel de los reactivos (referencia) */
+    ctx.setLineDash([5,4]);ctx.strokeStyle='#64748b';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x0,PY(0));ctx.lineTo(x0+pw,PY(0));ctx.stroke();ctx.setLineDash([]);
+    /* energía del choque actual */
+    if(espera<=0||!exito){ctx.setLineDash([2,4]);ctx.strokeStyle='#f59e0b';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,PY(E));ctx.lineTo(x0+pw,PY(E));ctx.stroke();ctx.setLineDash([]);}
+    /* curva sin catalizador (si hay catalizador, queda tenue) */
+    if(cat){ctx.setLineDash([6,4]);ctx.strokeStyle='#94a3b8';ctx.lineWidth=2;ctx.beginPath();a0.forEach(function(e,j){j?ctx.lineTo(PX(j),PY(e)):ctx.moveTo(PX(j),PY(e));});ctx.stroke();ctx.setLineDash([]);}
+    ctx.strokeStyle='#2563eb';ctx.lineWidth=3;ctx.beginPath();a.forEach(function(e,j){j?ctx.lineTo(PX(j),PY(e)):ctx.moveTo(PX(j),PY(e));});ctx.stroke();
+    /* flechas de Ea y ΔH */
+    flecha(PX(100),PY(0),PY(Ea()),'#c2410c','Ea ≈ '+Ea()+' kJ/mol',9);
+    var xd=PX(188);flecha(xd,PY(0),PY(r.dH),r.dH<0?'#15803d':'#7c3aed','ΔH = '+(r.dH>0?'+':'−')+Math.abs(r.dH)+' kJ/mol',-8);
+    /* formulas */
+    txt(ctx,r.r,PX(16),PY(0)-8,'#0d2d42','800 '+fs+'px "Outfit",sans-serif','left');
+    txt(ctx,r.p,PX(200)-4,PY(r.dH)+(r.dH<0?Math.round(fs*1.7):-8),'#0d2d42','800 '+fs+'px "Outfit",sans-serif','right');
+    /* bolita (choque) */
+    var bx=PX(i),by=PY(a[Math.round(i)]),rad=Math.max(7,W*.013);
+    bola(ctx,bx,by-rad,rad,exito&&i>=198?'#16a34a':'#f59e0b');
+    if(exito&&espera>0){var c=r.dH<0?'#dc2626':'#2563eb';txt(ctx,r.dH<0?'🔥 sale calor al entorno':'❄ toma calor del entorno',PX(200)-4,y0-Math.round(fs*.6)-(r.dH<0?0:Math.round(ph*.1)),c,'800 '+fs+'px "Outfit",sans-serif','right');}
+    var pc=att?Math.round(100*ok/att):0;
+    var exo=r.dH<0;
+    msg.innerHTML='<b>'+(exo?'Exotérmica (ΔH &lt; 0)':'Endotérmica (ΔH &gt; 0)')+'</b>: '+(exo?'los productos quedan con <b>menos</b> energía que los reactivos y la diferencia sale al entorno como calor.':'los productos quedan con <b>más</b> energía que los reactivos: el sistema la toma del entorno.')+
+      ' '+r.t+'<br>Choques: <b>'+att+'</b> · lograron reaccionar: <b>'+ok+'</b> ('+pc+' %). La línea punteada naranja es la energía del choque: solo reacciona si pasa por encima de la barrera. '+
+      (cat?'<br>El <b>catalizador</b> ('+r.cat+') baja la Ea de '+r.Ea+' a '+r.Ec+' kJ/mol por otro camino de reacción, pero <b>ΔH no cambia</b>: no hace la reacción «más exotérmica».':'<br>Sube la temperatura: más choques superan la barrera y la reacción es más rápida, pero <b>ΔH sigue igual</b>.')+
+      '<br><small>ΔH: valores reales aproximados. Ea y energía de los choques: a escala ilustrativa.</small>';
+  }
+  var A=null;att=0;ok=0;espera=0;nuevo();
+  A=animar(L,paso);
+};
+
+/* ── 7. Laboratorio virtual de pruebas químicas (grupos.html) ──────────────
+   Cada reactivo se agrega a una muestra y se ve el resultado en el tubo. Dos modos:
+   «Explorar» (eliges muestra y reactivo) y «Muestra misteriosa» (la muestra está oculta:
+   haces pruebas, anotas en la bitácora y decides qué tipo de compuesto es).
+   Resultados de libro de texto a temperatura ambiente o con baño de agua; son un MODELO. */
+SIMX.pruebas=function(box){
+  var st=document.createElement('style');st.textContent='.sx select{font:700 .85rem inherit;font-family:inherit;border:1.5px solid #94a3b8;border-radius:10px;padding:7px 10px;min-height:34px;background:#fff;color:#0d2d42;max-width:100%}'+
+    '.sx .sx-log{margin-top:8px;overflow-x:auto}.sx .sx-log table{border-collapse:collapse;font-size:.82rem;width:100%}.sx .sx-log th,.sx .sx-log td{border:1px solid #cbd5e1;padding:5px 8px;text-align:left}.sx .sx-log th{background:#f1f5f9}'+
+    '.sx .sx-log .p{color:#15803d;font-weight:800}.sx .sx-log .n{color:#b91c1c;font-weight:800}.sx .sx-log .a{color:#64748b}';
+  document.head.appendChild(st);
+  var AG='#e0f2fe';
+  var MU={al1:{n:'Etanol',t:'Alcohol primario',c:AG},al2:{n:'Propan-2-ol',t:'Alcohol secundario',c:AG},al3:{n:'2-metilpropan-2-ol',t:'Alcohol terciario',c:AG},
+    fen:{n:'Fenol',t:'Fenol',c:AG},ald:{n:'Etanal',t:'Aldehído alifático',c:AG},bza:{n:'Benzaldehído',t:'Aldehído aromático',c:AG},cet:{n:'Propanona',t:'Cetona',c:AG},
+    aci:{n:'Ácido etanoico (vinagre)',t:'Ácido carboxílico',c:AG},glu:{n:'Glucosa',t:'Azúcar reductor',c:AG},sac:{n:'Sacarosa (azúcar de mesa)',t:'Azúcar no reductor',c:AG},
+    alm:{n:'Almidón (maicena)',t:'Almidón',c:'#f1f5f9',turb:1},pro:{n:'Clara de huevo',t:'Proteína',c:'#fef3c7'},lip:{n:'Aceite vegetal',t:'Lípido',c:'#fcd34d'}};
+  var KS=Object.keys(MU),ORG=['al1','al2','al3','fen','ald','bza','cet','aci'];
+  var RE={
+    tollens:{n:'Tollens',f:'Ag(NH₃)₂⁺ en medio básico',nota:'baño de agua tibia',base:'#e5e7eb',ef:'espejo',pos:['ald','bza','glu'],
+      tp:'Espejo de plata en la pared del tubo: el aldehído se oxida a ácido carboxílico y el Ag⁺ se reduce a plata metálica (RCHO + 2 Ag⁺ → RCOOH + 2 Ag).',
+      tn:'Sin espejo: la muestra no tiene un grupo aldehído libre que reduzca el Ag⁺.',
+      ov:{cet:'Sin espejo: las cetonas no se oxidan con un oxidante tan suave. Por eso Tollens distingue aldehídos de cetonas.',sac:'Sin espejo: en la sacarosa los dos azúcares están unidos por sus extremos reductores, así que no hay aldehído libre.'},
+      op:{glu:'Espejo de plata: la glucosa, en su forma abierta, tiene un grupo aldehído. Es un azúcar reductor.'}},
+    fehling:{n:'Fehling',f:'Cu²⁺ con tartrato en medio básico',nota:'se calienta suavemente',base:'#1d4ed8',ef:'ppt',cp:'#b91c1c',pos:['ald','glu'],
+      tp:'Precipitado rojo ladrillo de Cu₂O: el aldehído se oxida y el Cu²⁺ (azul) se reduce a Cu⁺.',
+      tn:'Sigue azul: no hay un aldehído alifático ni un azúcar reductor que reduzca el Cu²⁺.',
+      ov:{bza:'Sigue azul: los aldehídos aromáticos no reaccionan con Fehling (sí con Tollens). Así se distinguen unos de otros.',cet:'Sigue azul: las cetonas no reducen el Cu²⁺.',sac:'Sigue azul: la sacarosa no es azúcar reductor.'},
+      op:{glu:'Precipitado rojo ladrillo: la glucosa reduce el Cu²⁺ a Cu₂O. Es un azúcar reductor.'}},
+    benedict:{n:'Benedict',f:'Cu²⁺ con citrato y carbonato',nota:'se calienta en baño de agua',base:'#2563eb',ef:'ppt',cp:'#ea580c',pos:['glu','ald'],
+      tp:'Precipitado naranja a rojo ladrillo de Cu₂O: los azúcares reductores reducen el Cu²⁺. Cuanto más azúcar, más rojizo.',
+      tn:'Sigue azul: no hay azúcar reductor (ni aldehído alifático).',
+      ov:{sac:'Sigue azul: la sacarosa no es reductora (sí lo sería después de hidrolizarla con ácido).',alm:'Sigue azul: el almidón tiene muy pocos extremos reductores y no alcanza a dar color.',bza:'Sigue azul: los aldehídos aromáticos no reducen el reactivo de Benedict.'}},
+    bicarb:{n:'Bicarbonato de sodio',f:'NaHCO₃',nota:'',base:'#e5e7eb',ef:'burbujas',pos:['aci'],
+      tp:'Burbujeo de CO₂: el ácido carboxílico cede H⁺ al bicarbonato (RCOOH + NaHCO₃ → RCOONa + H₂O + CO₂).',
+      tn:'Sin burbujas: la muestra no es lo bastante ácida para desprender CO₂.',
+      ov:{fen:'Sin burbujas: el fenol es ácido, pero mucho más débil que un ácido carboxílico y no desplaza al CO₂. Se reconoce con FeCl₃.'}},
+    fecl3:{n:'Cloruro de hierro III',f:'FeCl₃',nota:'',base:'#fde047',ef:'color',cp:'#6d28d9',pos:['fen'],
+      tp:'Color violeta intenso: el fenol forma un complejo con el ion Fe³⁺.',tn:'Sigue amarillo pálido (el color del propio FeCl₃): no hay un fenol.'},
+    lugol:{n:'Lugol',f:'I₂ en KI',nota:'',base:'#d97706',ef:'color',cp:'#1e1b4b',pos:['alm'],
+      tp:'Azul-negro: el yodo entra en la hélice del almidón y forma un complejo coloreado.',tn:'Sigue pardo-amarillo (el color del Lugol): no hay almidón.'},
+    biuret:{n:'Biuret',f:'NaOH y CuSO₄ diluido',nota:'',base:'#60a5fa',ef:'color',cp:'#7c3aed',pos:['pro'],
+      tp:'Violeta: el Cu²⁺ se une a los enlaces peptídicos, así que hay proteína.',tn:'Sigue azul: no hay enlaces peptídicos.'},
+    sudan:{n:'Sudán III',f:'colorante liposoluble',nota:'',base:'#e5e7eb',ef:'gotas',pos:['lip'],ap:['glu','sac','alm','pro','lip'],
+      tp:'Capa y gotas teñidas de rojo-naranja: el colorante se disuelve en grasas y aceites, no en el agua.',tn:'No se tiñe nada: el colorante no se disuelve en la parte acuosa.',
+      na:'No aplica: el Sudán III también se disuelve en disolventes orgánicos y daría un falso positivo. Se usa en alimentos y muestras acuosas.'},
+    dicr:{n:'Dicromato de potasio',f:'K₂Cr₂O₇ con ácido sulfúrico',nota:'',base:'#f97316',ef:'color',cp:'#15803d',pos:['al1','al2','ald','bza'],ap:['al1','al2','al3','ald','bza','cet','aci'],
+      tp:'De naranja a verde: el alcohol primario o secundario, o el aldehído, se oxida y el Cr⁶⁺ se reduce a Cr³⁺.',tn:'Sigue naranja: la muestra no se oxida con facilidad.',
+      ov:{al3:'Sigue naranja: el alcohol terciario no tiene H en el carbono del −OH y no se oxida.',cet:'Sigue naranja: las cetonas no se oxidan con facilidad.'},
+      na:'No aplica: con fenoles, azúcares y proteínas el dicromato da oxidaciones complicadas. Se usa para alcoholes y compuestos carbonílicos.'},
+    lucas:{n:'Lucas',f:'ZnCl₂ en HCl concentrado',nota:'a temperatura ambiente',base:'#e5e7eb',ef:'turbio',pos:['al3','al2'],ap:ORG,
+      tp:'Se enturbia: el alcohol pasa a cloruro de alquilo, que no se disuelve en el reactivo.',tn:'Sin turbidez: el alcohol primario casi no forma carbocatión a temperatura ambiente.',
+      op:{al3:'Turbidez inmediata: el alcohol terciario forma con facilidad el carbocatión y pasa a cloruro de alquilo.',al2:'Turbidez lenta (en la práctica, unos 5 minutos): el alcohol secundario forma el carbocatión más despacio.'},
+      ov:{fen:'Sin cambio: el fenol no reacciona con el reactivo de Lucas.',ald:'Sin cambio: no es un alcohol.',bza:'Sin cambio: no es un alcohol.',cet:'Sin cambio: no es un alcohol.',aci:'Sin cambio: no es un alcohol.'},
+      na:'No aplica: esta prueba es para distinguir alcoholes en muestras orgánicas.'}};
+  var ORD=['tollens','fehling','benedict','bicarb','fecl3','lugol','biuret','sudan','dicr','lucas'];
+  function res(r,s){var R=RE[r];
+    if(R.ap&&R.ap.indexOf(s)<0)return {e:'na',t:R.na};
+    if(R.pos.indexOf(s)>=0)return {e:'pos',t:(R.op&&R.op[s])||R.tp};
+    return {e:'neg',t:(R.ov&&R.ov[s])||R.tn};}
+  var L=lienzo(box,0.5,'Dos tubos de ensayo: la muestra sola y el resultado después de agregar el reactivo'),ctx=L.ctx;
+  var modo='explorar',sel='al1',oculta=null,cur=null,t=0,log={},burb=[],fin=false;
+  var c1=fila(box);
+  pildoras(c1,[['explorar','Explorar'],['misterio','🕵️ Muestra misteriosa']],modo,function(k){modo=k;if(k==='misterio')nueva();else{sel=sel||'al1';reiniciar();}ui();});
+  var sMu=el('select',{'aria-label':'Muestra'});KS.forEach(function(k){sMu.appendChild(el('option',{value:k},MU[k].n));});sMu.value=sel;
+  sMu.addEventListener('change',function(){sel=sMu.value;reiniciar();});c1.appendChild(sMu);
+  var bN=boton(c1,'🎲 Nueva muestra',function(){nueva();});
+  var c2=fila(box);c2.appendChild(el('span',{class:'sx-rng'},'<span>Reactivo:</span>'));
+  var pr=el('div',{class:'sx-seg',role:'group','aria-label':'Reactivos'});c2.appendChild(pr);
+  ORD.forEach(function(k){var b=el('button',{type:'button'},RE[k].n);b.dataset.k=k;pr.appendChild(b);});
+  pr.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||fin&&modo==='misterio')return;probar(b.dataset.k);});
+  var c3=fila(box);var sT=el('select',{'aria-label':'Tipo de compuesto'});sT.appendChild(el('option',{value:''},'¿Qué tipo de compuesto es?'));
+  KS.forEach(function(k){sT.appendChild(el('option',{value:k},MU[k].t));});c3.appendChild(sT);
+  var bC=boton(c3,'✔ Comprobar',function(){comprobar();});
+  var msg=nota(box,'Elige una muestra y un reactivo para ver qué pasa en el tubo.');
+  var lg=el('div',{class:'sx-log'});box.appendChild(lg);
+  function nombre(){return modo==='misterio'?'Muestra ?':MU[sel].n;}
+  function muestra(){return modo==='misterio'?oculta:sel;}
+  function ui(){sMu.style.display=modo==='explorar'?'':'none';bN.style.display=modo==='misterio'?'':'none';c3.style.display=modo==='misterio'?'':'none';pintaLog();}
+  function nueva(){oculta=KS[Math.floor(Math.random()*KS.length)];fin=false;sT.value='';reiniciar();msg.innerHTML='Hay una <b>muestra misteriosa</b>. Prueba los reactivos que quieras y anota: ¿qué tipo de compuesto es? Escoge la respuesta y pulsa «Comprobar».';}
+  function reiniciar(){log={};cur=null;t=0;burb=[];pintaLog();if(modo==='explorar')msg.innerHTML='Elige un reactivo para agregarlo a <b>'+MU[sel].n+'</b>.';A&&A.dibujar();}
+  function probar(r){cur=r;t=0;burb=[];var o=res(r,muestra());log[r]=o.e;pintaLog();A.play();
+    var R=RE[r];msg.innerHTML='<b>'+R.n+'</b> ('+R.f+')'+(R.nota?' · '+R.nota:'')+' sobre <b>'+nombre()+'</b>: '+(o.e==='pos'?'<b style="color:#15803d">positiva</b>. ':o.e==='neg'?'<b style="color:#b91c1c">negativa</b>. ':'<b>no aplica</b>. ')+o.t;}
+  function pintaLog(){var h='<table><thead><tr><th>Reactivo</th><th>Resultado</th></tr></thead><tbody>',n=0;
+    ORD.forEach(function(r){if(log[r]){n++;h+='<tr><td>'+RE[r].n+'</td><td class="'+(log[r]==='pos'?'p':log[r]==='neg'?'n':'a')+'">'+(log[r]==='pos'?'(+) positiva':log[r]==='neg'?'(−) negativa':'— no aplica')+'</td></tr>';}});
+    lg.innerHTML=n?'<div style="font-weight:800;margin:4px 0 2px">📒 Bitácora de '+nombre()+'</div>'+h+'</tbody></table>':'';}
+  function comprobar(){if(!sT.value){msg.innerHTML='Primero escoge un tipo de compuesto en la lista.';return;}
+    fin=true;var ok=sT.value===oculta,M=MU[oculta];
+    var pos=ORD.filter(function(r){return res(r,oculta).e==='pos';}).map(function(r){return RE[r].n;});
+    msg.innerHTML=(ok?'✅ <b>¡Correcto!</b> ':'❌ <b>No era ese.</b> ')+'La muestra era <b>'+M.n+'</b> ('+M.t.toLowerCase()+'). '+(pos.length?'Da positivas: '+pos.join(', ')+'.':'No da positiva ninguna de estas pruebas: se reconoce por descarte.')+' Pulsa «Nueva muestra» para otra.';}
+  /* dibujo */
+  function tubo(cx,top,w,h,liq,o){
+    var r=w/2,yb=top+h-r,nivel=top+h*.30;
+    function trazo(){ctx.beginPath();ctx.moveTo(cx-r,top);ctx.lineTo(cx-r,yb);ctx.arc(cx,yb,r,Math.PI,0,true);ctx.lineTo(cx+r,top);}
+    ctx.save();trazo();ctx.closePath();ctx.clip();
+    ctx.fillStyle=liq;ctx.fillRect(cx-r,nivel,w,top+h-nivel);
+    if(o.turb){ctx.fillStyle='rgba(248,250,252,'+(.88*o.turb)+')';ctx.fillRect(cx-r,nivel,w,top+h-nivel);}
+    if(o.ppt){ctx.fillStyle=o.ppt;var hh=h*.16*Math.min(1,o.pk);ctx.beginPath();ctx.ellipse(cx,top+h-hh*.45,r*.95,hh,0,0,PI2);ctx.fill();ctx.fillRect(cx-r,top+h-hh,w,hh);}
+    if(o.espejo){var g=ctx.createLinearGradient(cx-r,0,cx+r,0);g.addColorStop(0,'rgba(248,250,252,'+o.espejo+')');g.addColorStop(.4,'rgba(100,116,139,'+o.espejo+')');g.addColorStop(1,'rgba(226,232,240,'+o.espejo+')');
+      ctx.strokeStyle=g;ctx.lineWidth=14;ctx.beginPath();ctx.moveTo(cx-r+6,nivel);ctx.lineTo(cx-r+6,yb);ctx.arc(cx,yb,r-6,Math.PI,0,true);ctx.lineTo(cx+r-6,nivel);ctx.stroke();}
+    if(o.gotas){ctx.fillStyle='rgba(239,68,68,'+o.gotas+')';ctx.fillRect(cx-r,nivel,w,h*.07);for(var i=0;i<5;i++){circ(ctx,cx-r*.6+i*r*.3,nivel+h*.18+(i%2)*h*.12,r*.14,'rgba(239,68,68,'+o.gotas+')');}}
+    ctx.restore();
+    ctx.strokeStyle='#475569';ctx.lineWidth=3;trazo();ctx.stroke();
+    ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx-r+6,top+8);ctx.lineTo(cx-r+6,yb-4);ctx.stroke();}
+  function paso(dt){
+    t=Math.min(1,t+dt/2.2);var W=L.W,H=L.H,w=Math.min(W*.14,82),top=H*.2,h=H*.62,s=muestra(),M=MU[s]||MU.al1,fs=Math.max(11,Math.round(W*.02));
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#f8fbff';ctx.fillRect(0,0,W,H);
+    var x1=W*.27,x2=W*.73;
+    txt(ctx,nombre(),x1,H*.1,'#0d2d42','800 '+(fs+1)+'px "Outfit",sans-serif','center');
+    tubo(x1,top,w,h,modo==='misterio'?'#e2e8f0':M.c,{turb:(modo==='misterio'?0:(M.turb?1:0))});
+    var o=cur?res(cur,s):null,R=cur?RE[cur]:null;
+    txt(ctx,cur?R.n:'Reactivo',x2,H*.1,'#0d2d42','800 '+(fs+1)+'px "Outfit",sans-serif','center');
+    /* flecha con gotero */
+    ctx.strokeStyle='#94a3b8';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(W*.4,H*.5);ctx.lineTo(W*.58,H*.5);ctx.stroke();ctx.beginPath();ctx.moveTo(W*.6,H*.5);ctx.lineTo(W*.56,H*.46);ctx.lineTo(W*.56,H*.54);ctx.closePath();ctx.fillStyle='#94a3b8';ctx.fill();
+    txt(ctx,cur?'+ '+R.n:'+ reactivo',W*.5,H*.43,'#64748b','700 '+fs+'px sans-serif','center');
+    if(cur&&R.nota)txt(ctx,'🔥 '+R.nota,W*.5,H*.6,'#c2410c','700 '+(fs-1)+'px sans-serif','center');
+    if(!cur){tubo(x2,top,w,h,'rgba(226,232,240,.6)',{});txt(ctx,'elige un reactivo',x2,top+h*.55,'#94a3b8','700 '+fs+'px sans-serif','center');}
+    else if(o.e==='na'){tubo(x2,top,w,h,'rgba(226,232,240,.6)',{});txt(ctx,'no aplica',x2,top+h*.55,'#64748b','800 '+fs+'px sans-serif','center');}
+    else{var pos=o.e==='pos',op={},liq=R.base;
+      if(pos&&R.ef==='color')liq=mezcla(R.base,R.cp,t);
+      if(pos&&R.ef==='ppt')op.ppt=R.cp,op.pk=sm(.1,.9,t);
+      if(pos&&R.ef==='espejo')op.espejo=sm(.2,1,t);
+      if(pos&&R.ef==='gotas')op.gotas=sm(.1,.8,t);
+      if(R.ef==='turbio')op.turb=pos?sm(0,1,cur==='lucas'&&s==='al2'?t*.55:t):0;
+      if(R.ef==='ppt'&&!pos&&false)op={};
+      tubo(x2,top,w,h,liq,op);
+      if(pos&&R.ef==='burbujas'&&t>.1){if(Math.random()<.5)burb.push({x:x2+rnd(-w*.35,w*.35),y:top+h*.9,r:rnd(2,5),v:rnd(30,70)});
+        burb.forEach(function(b){b.y-=b.v*dt;});burb=burb.filter(function(b){return b.y>top+h*.3;});
+        burb.forEach(function(b){ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,PI2);ctx.strokeStyle='rgba(30,64,175,.7)';ctx.lineWidth=1.5;ctx.stroke();});}
+      txt(ctx,pos?'(+)':'(−)',x2,top+h+Math.round(fs*1.6),pos?'#15803d':'#b91c1c','800 '+(fs+4)+'px "Outfit",sans-serif','center');}
+  }
+  function mezcla(a,b,k){function h(x){var n=parseInt(x.slice(1),16);return [n>>16,n>>8&255,n&255];}var p=h(a),q=h(b);return 'rgb('+p.map(function(v,i){return Math.round(v+(q[i]-v)*k);}).join(',')+')';}
+  var A=null;ui();A=animar(L,paso);
+};
+
+/* ── 8. Reacción pericíclica: Diels-Alder (reacciones.html) ────────────────
+   1,3-butadieno + eteno → ciclohexeno, en un solo paso. Los enlaces se rompen y se forman
+   a la vez en un estado de transición cíclico (seis electrones que se mueven en círculo):
+   no hay radicales ni iones intermedios. MODELO: vista plana, sin los H. */
+SIMX.diels=function(box){
+  var L=lienzo(box,0.56,'Cicloadición de Diels-Alder: el butadieno y el eteno forman ciclohexeno en un solo paso, con un perfil de energía de una sola barrera'),ctx=L.ctx;
+  var p=0,auto=false,flujo=true;
+  var c1=fila(box);
+  var rg=deslizador(c1,'Avance de la reacción',0,100,1,0,function(v){p=v/100;return Math.round(v)+' %';});
+  rg.addEventListener('input',function(){auto=false;bA.textContent='▶ Animar';A.dibujar();});
+  var bA=boton(c1,'▶ Animar',function(b){if(p>=.995){p=0;rg.value=0;rg._upd();}auto=!auto;b.textContent=auto?'⏸ Pausar':'▶ Animar';A.play();});
+  boton(c1,'Flechas de electrones: sí',function(b){flujo=!flujo;b.textContent='Flechas de electrones: '+(flujo?'sí':'no');A.dibujar();});
+  var msg=nota(box,'');
+  /* átomos: [x, y, etiqueta]; y hacia abajo */
+  function at(){var q=sm(.1,.9,p);
+    return [[-1.5+.25*q,.15-.15*q,'CH₂'],[-.75,-.9,'CH'],[.75,-.9,'CH'],[1.5-.25*q,.15-.15*q,'CH₂'],
+            [-.75,3.1-2.1*q,'CH₂'],[.75,3.1-2.1*q,'CH₂']];}
+  /* enlaces: [a, b, orden inicial, orden final] */
+  var EN=[[0,1,2,1],[1,2,1,2],[2,3,2,1],[4,5,2,1],[0,4,0,1],[3,5,0,1]];
+  function paso(dt){
+    if(auto){p=Math.min(1,p+dt/5);rg.value=Math.round(p*100);rg._upd();if(p>=1){auto=false;bA.textContent='▶ Animar';}}
+    var W=L.W,H=L.H,mx=W*.33,my=H*.28,s=Math.min(W*.17,H*.13),fs=Math.max(11,Math.round(W*.02));
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#f8fbff';ctx.fillRect(0,0,W,H);
+    var A_=at();function X(i){return mx+A_[i][0]*s;}function Y(i){return my+A_[i][1]*s;}
+    txt(ctx,'Vista plana (sin dibujar los H)',W*.02,H-8,'#64748b','700 '+(fs-1)+'px sans-serif');
+    /* enlaces */
+    EN.forEach(function(e){var o=e[2]+(e[3]-e[2])*sm(.2,.8,p),x1=X(e[0]),y1=Y(e[0]),x2=X(e[1]),y2=Y(e[1]),dx=y2-y1,dy=x1-x2,d=Math.hypot(dx,dy)||1;dx=dx/d*s*.07;dy=dy/d*s*.07;
+      function ln(a,ox,oy,dash){ctx.setLineDash(dash?[6,5]:[]);ctx.strokeStyle='rgba(13,45,66,'+a+')';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x1+ox,y1+oy);ctx.lineTo(x2+ox,y2+oy);ctx.stroke();ctx.setLineDash([]);}
+      if(o<=1){if(o>.03)ln(o,0,0,o<.97);}
+      else{var a2=o-1;ln(1,-dx,-dy,false);ln(Math.max(.15,a2),dx,dy,a2<.97);}
+    });
+    /* átomos */
+    A_.forEach(function(a,i){var x=X(i),y=Y(i),r=s*.27;ctx.beginPath();ctx.arc(x,y,r,0,PI2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='#475569';ctx.lineWidth=2;ctx.stroke();
+      txt(ctx,a[2],x,y+4,'#0d2d42','800 '+Math.max(10,Math.round(s*.2))+'px "Outfit",sans-serif','center');});
+    /* nombres */
+    if(p<.5){txt(ctx,'1,3-butadieno (diene)',mx,my-s*1.3,'#0f766e','800 '+fs+'px "Outfit",sans-serif','center');
+      txt(ctx,'eteno (dienófilo)',mx,Y(4)+s*.75,'#9a3412','800 '+fs+'px "Outfit",sans-serif','center');}
+    if(p>.9)txt(ctx,'ciclohexeno',mx,Y(4)+s*.75,'#0d2d42','800 '+(fs+2)+'px "Outfit",sans-serif','center');
+    /* flechas de electrones */
+    if(flujo&&p>.08&&p<.92){var k=sm(.08,.3,p)*(1-sm(.72,.92,p));
+      function mid(i,j){return [(X(i)+X(j))/2,(Y(i)+Y(j))/2];}
+      function arco(a,b,dx,dy){var u=mid(a[0],a[1]),v=mid(b[0],b[1]);ctx.strokeStyle='rgba(220,38,38,'+k+')';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=2.5;
+        var cxp=(u[0]+v[0])/2+dx*s,cyp=(u[1]+v[1])/2+dy*s;ctx.beginPath();ctx.moveTo(u[0],u[1]);ctx.quadraticCurveTo(cxp,cyp,v[0],v[1]);ctx.stroke();
+        var ang=Math.atan2(v[1]-cyp,v[0]-cxp);ctx.beginPath();ctx.moveTo(v[0],v[1]);ctx.lineTo(v[0]-9*Math.cos(ang-.45),v[1]-9*Math.sin(ang-.45));ctx.lineTo(v[0]-9*Math.cos(ang+.45),v[1]-9*Math.sin(ang+.45));ctx.closePath();ctx.fill();}
+      arco([0,1],[1,2],-.2,-.5);arco([2,3],[3,5],.55,.1);arco([4,5],[0,4],-.45,.1);
+      txt(ctx,'seis electrones se mueven a la vez',mx,Y(4)+s*.75,'rgba(220,38,38,'+k+')','800 '+fs+'px "Outfit",sans-serif','center');}
+    /* perfil de energía: una sola barrera */
+    var gx=W*.66,gw=W*.31,gy=H*.8,gh=H*.52;
+    ctx.strokeStyle='#94a3b8';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(gx,gy-gh-8);ctx.lineTo(gx,gy);ctx.lineTo(gx+gw,gy);ctx.stroke();
+    txt(ctx,'Energía',gx,gy-gh-12,'#475569','700 '+(fs-1)+'px sans-serif');txt(ctx,'avance →',gx+gw,gy+fs*1.6,'#475569','700 '+(fs-1)+'px sans-serif','right');
+    function E(q){return .62*Math.exp(-Math.pow((q-.45)/.17,2))-.22*sm(.2,.8,q);}
+    var base=gy-gh*.45;ctx.strokeStyle='#2563eb';ctx.lineWidth=3;ctx.beginPath();for(var q=0;q<=1.001;q+=.01){var xx=gx+gw*q,yy=base-E(q)*gh*1.1;q?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();
+    circ(ctx,gx+gw*p,base-E(p)*gh*1.1,7,'#dc2626');
+    txt(ctx,'un solo paso',gx+gw*.45,base-.62*gh*1.1-12,'#0d2d42','800 '+(fs-1)+'px "Outfit",sans-serif','center');
+    msg.innerHTML=(p<.25?'<b>Reactivos.</b> El 1,3-butadieno (diene, cuatro carbonos con dos dobles enlaces) y el eteno (dienófilo, un doble enlace) se acercan.':p<.75?'<b>Estado de transición cíclico.</b> Los enlaces π se están rompiendo y los σ nuevos se están formando <b>al mismo tiempo</b>: los seis electrones giran en un anillo. No hay radicales ni iones.':'<b>Producto.</b> Ciclohexeno: se formaron dos enlaces σ nuevos (C−C) y el doble enlace quedó en el centro del antiguo diene. Todo en un solo paso.')+
+      '<br><small>Es una cicloadición [4+2] (cuatro electrones del diene y dos del dienófilo). Es exotérmica (ΔH ≈ −170 kJ/mol) y necesita una barrera de unos 115 kJ/mol; ambos valores aproximados.</small>';
   }
   var A=animar(L,paso);
 };

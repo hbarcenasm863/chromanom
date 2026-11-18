@@ -646,7 +646,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 .speak-btn:hover{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73)}
 .speak-btn.playing{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73);background:var(--cn-brand-l,#e8f4fb)}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=90">
+<link rel="stylesheet" href="chromanom.css?v=95">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -1078,6 +1078,82 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
         <details class="mx-more"><summary>🔍 Para saber más: reordenamientos</summary><p>Hay un tipo más que verás de pasada: el <strong>reordenamiento</strong>, en el que los átomos de una misma molécula cambian de lugar. Ejemplos en esta página: el carbocatión que se reorganiza en Friedel-Crafts y la <a href="#g-tautomeria" class="gloss-ref" onclick="jumpToGloss('g-tautomeria');return false;">tautomería ceto-enólica</a> en la hidratación de alquinos.</p></details>
       </div>
     </section>
+    <section class="tp-guide" id="energia-reaccion">
+      <h3 class="tp-sub">⚡ ¿Libera o absorbe energía? Exotérmica y endotérmica</h3>
+      <div class="mx">
+        <p class="mx-key"><span class="mx-lbl">💡 Idea clave</span>Toda reacción rompe enlaces (cuesta energía) y forma enlaces nuevos (libera energía). El <strong>signo de ΔH</strong> dice cuál de las dos cosas pesa más.</p>
+        <ul class="mx-pts">
+          <li><strong>Exotérmica (ΔH &lt; 0):</strong> los productos tienen menos energía que los reactivos; la diferencia sale como calor. Ejemplos: combustión, hidrogenación.</li>
+          <li><strong>Endotérmica (ΔH &gt; 0):</strong> los productos tienen más energía; la reacción toma calor del entorno. Ejemplo: deshidratación de un alcohol.</li>
+          <li>Casi todas necesitan un primer empujón: la <strong>energía de activación (Ea)</strong>, la barrera que hay que superar. Por eso el metano no arde solo, aunque la combustión sea muy exotérmica.</li>
+          <li>La <strong>temperatura</strong> y el <strong>catalizador</strong> cambian la <em>rapidez</em> (la Ea y cuántos choques la superan), no el valor de ΔH.</li>
+        </ul>
+      </div>
+      <div data-simx="energia" data-titulo="Energía de la reacción: exotérmica, endotérmica y catalizador"></div>
+    </section>
+    <div class="rxn-card tp-quiz">
+      <div class="rxn-body open" style="display:block">
+        <div class="quiz-lbl">🎯 Práctica: energía de la reacción</div>
+        <div class="quiz-q" data-qid="ee-q0">
+          <div class="quiz-q-text">Una reacción orgánica tiene ΔH = +45 kJ/mol. ¿Qué significa?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q0',false)"><span class="quiz-opt-icon">○</span> Es exotérmica: libera calor al entorno</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q0',true)"><span class="quiz-opt-icon">○</span> Es endotérmica: los productos tienen más energía que los reactivos</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q0',false)"><span class="quiz-opt-icon">○</span> Es muy rápida porque ΔH es positivo</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q0',false)"><span class="quiz-opt-icon">○</span> No necesita energía de activación</div></div>
+          <div class="quiz-fb" id="fb-ee-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="ee-q1">
+          <div class="quiz-q-text">Se agrega un catalizador a una hidrogenación (exotérmica). ¿Qué cambia en el diagrama de energía?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q1',true)"><span class="quiz-opt-icon">○</span> La energía de activación baja y ΔH queda igual</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q1',false)"><span class="quiz-opt-icon">○</span> ΔH se vuelve más negativo</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q1',false)"><span class="quiz-opt-icon">○</span> Los productos quedan con más energía</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q1',false)"><span class="quiz-opt-icon">○</span> La reacción pasa a ser endotérmica</div></div>
+          <div class="quiz-fb" id="fb-ee-q1"></div>
+        </div>
+        <div class="quiz-q" data-qid="ee-q2">
+          <div class="quiz-q-text">El metano arde liberando mucha energía, pero no se enciende solo en el aire. ¿Por qué hace falta una chispa?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q2',false)"><span class="quiz-opt-icon">○</span> Porque la combustión es endotérmica</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q2',true)"><span class="quiz-opt-icon">○</span> Porque la chispa aporta la energía de activación para empezar</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q2',false)"><span class="quiz-opt-icon">○</span> Porque la chispa cambia el valor de ΔH</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q2',false)"><span class="quiz-opt-icon">○</span> Porque sin chispa no hay oxígeno</div></div>
+          <div class="quiz-fb" id="fb-ee-q2"></div>
+        </div>
+        <div class="quiz-q" data-qid="ee-q3">
+          <div class="quiz-q-text">Para producir eteno deshidratando etanol (endotérmica) se mantiene el calentamiento todo el tiempo. ¿Por qué?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q3',true)"><span class="quiz-opt-icon">○</span> Porque la reacción toma calor del entorno y se frena si se deja de calentar</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q3',false)"><span class="quiz-opt-icon">○</span> Porque el calor es un catalizador</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q3',false)"><span class="quiz-opt-icon">○</span> Porque toda reacción necesita calor constante</div><div class="quiz-opt" onclick="rxnAnswer(this,'ee-q3',false)"><span class="quiz-opt-icon">○</span> Porque el etanol se vuelve exotérmico al calentarlo</div></div>
+          <div class="quiz-fb" id="fb-ee-q3"></div>
+        </div>
+      </div>
+    </div>
+    <section class="tp-guide" id="pericicl">
+      <h3 class="tp-sub">🔄 Tres formas de romper y formar enlaces: homolítica, heterolítica y pericíclica</h3>
+      <div class="mx">
+        <p class="mx-key"><span class="mx-lbl">💡 Idea clave</span>Además de decir <em>qué</em> tipo de reacción es, se puede describir <em>cómo</em> se mueven los electrones del enlace.</p>
+        <ul class="mx-pts">
+          <li><strong>Homolítica (radicales):</strong> el enlace se rompe y cada átomo se lleva <strong>un</strong> electrón. Aparecen radicales. Ejemplo: halogenación de un alcano con luz.</li>
+          <li><strong>Heterolítica (iones):</strong> un átomo se lleva <strong>los dos</strong> electrones del enlace. Aparecen iones, como el carbocatión. Ejemplo: adición de HBr a un alqueno.</li>
+          <li><strong>Pericíclica (en anillo):</strong> los enlaces se rompen y se forman <strong>a la vez</strong>, en un solo paso, con un anillo de electrones. No hay radicales ni iones. Ejemplo: reacción de Diels-Alder.</li>
+          <li>La <strong>óxido-reducción</strong> es otra manera de clasificar: cambia el estado de oxidación del carbono. Puede ocurrir por cualquiera de los tres mecanismos.</li>
+        </ul>
+      </div>
+      <div data-simx="diels" data-titulo="Reacción pericíclica: Diels-Alder"></div>
+    </section>
+    <div class="rxn-card tp-quiz">
+      <div class="rxn-body open" style="display:block">
+        <div class="quiz-lbl">🎯 Práctica: mecanismos de reacción</div>
+        <div class="quiz-q" data-qid="pe-q0">
+          <div class="quiz-q-text">En la reacción de Diels-Alder los enlaces se rompen y se forman todos a la vez, en un solo paso, sin radicales ni iones intermedios. ¿Qué tipo de mecanismo es?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q0',true)"><span class="quiz-opt-icon">○</span> Pericíclico</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q0',false)"><span class="quiz-opt-icon">○</span> Homolítico</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q0',false)"><span class="quiz-opt-icon">○</span> Heterolítico</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q0',false)"><span class="quiz-opt-icon">○</span> Ácido-base</div></div>
+          <div class="quiz-fb" id="fb-pe-q0"></div>
+        </div>
+        <div class="quiz-q" data-qid="pe-q1">
+          <div class="quiz-q-text">El cloro se rompe con luz y cada átomo de cloro se lleva un electrón del enlace Cl−Cl. ¿Qué tipo de ruptura es?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q1',true)"><span class="quiz-opt-icon">○</span> Homolítica: se forman radicales</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q1',false)"><span class="quiz-opt-icon">○</span> Heterolítica: se forman iones</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q1',false)"><span class="quiz-opt-icon">○</span> Pericíclica: todo ocurre a la vez</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q1',false)"><span class="quiz-opt-icon">○</span> Ninguna: el enlace no se rompe</div></div>
+          <div class="quiz-fb" id="fb-pe-q1"></div>
+        </div>
+        <div class="quiz-q" data-qid="pe-q2">
+          <div class="quiz-q-text">El HBr se agrega a un alqueno y primero se forma un carbocatión. ¿Qué tipo de ruptura ocurre en el enlace H−Br?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q2',true)"><span class="quiz-opt-icon">○</span> Heterolítica: el Br se lleva los dos electrones</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q2',false)"><span class="quiz-opt-icon">○</span> Homolítica: cada átomo se lleva un electrón</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q2',false)"><span class="quiz-opt-icon">○</span> Pericíclica: no pasa por intermediarios</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q2',false)"><span class="quiz-opt-icon">○</span> No hay ruptura de enlace</div></div>
+          <div class="quiz-fb" id="fb-pe-q2"></div>
+        </div>
+        <div class="quiz-q" data-qid="pe-q3">
+          <div class="quiz-q-text">En el diagrama de energía de una reacción pericíclica, ¿cómo se ve el camino de reactivos a productos?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',true)"><span class="quiz-opt-icon">○</span> Una sola barrera, porque ocurre en un solo paso</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Dos barreras con un intermediario entre ellas</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Una línea plana, porque no hay barrera</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Productos más altos que reactivos sin barrera</div></div>
+          <div class="quiz-fb" id="fb-pe-q3"></div>
+        </div>
+      </div>
+    </div>
     <div class="rxn-card tp-quiz">
       <div class="rxn-body open" style="display:block">
         <div class="quiz-lbl">🎯 Práctica: ¿qué tipo es?</div>
@@ -8533,7 +8609,7 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 <div class="fase-sig" id="fase-sig"></div>
 </div><!-- /app -->
 
-<script src="fx-libro.js?v=90"></script>
+<script src="fx-libro.js?v=95"></script>
 <script>
 /* ── SVG ARROWS ── */
 function mkArr(cond,w,compact){
@@ -9794,6 +9870,8 @@ function goRxn(tab,id){switchTab(tab);setTimeout(()=>jumpToRxn(id),260);}
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-fxeq]').forEach(el=>{el.innerHTML=fxBlock(el.getAttribute('data-fxeq'),'',true);});
 });
+Object.assign(QUIZ_FB,{"pe-q0":{"ok":"¡Correcto! Todo ocurre en un solo paso, con un anillo de electrones: es pericíclica.","fail":"Sin intermediarios y con enlaces que se rompen y forman a la vez: eso es una reacción pericíclica."},"pe-q1":{"ok":"¡Exacto! Un electrón para cada átomo: ruptura homolítica y radicales de cloro.","fail":"Cada átomo se lleva UN electrón: es una ruptura homolítica y se forman radicales."},"pe-q2":{"ok":"¡Bien! El Br se lleva el par de electrones y queda como Br⁻: ruptura heterolítica.","fail":"Aquí se forman iones: el Br se lleva los dos electrones. Eso es ruptura heterolítica."},"pe-q3":{"ok":"¡Muy bien! Un solo paso significa un solo estado de transición, es decir, una sola barrera.","fail":"En un solo paso no hay intermediario: el perfil tiene una única barrera entre reactivos y productos."}});
+Object.assign(QUIZ_FB,{"ee-q0":{"ok":"¡Correcto! ΔH positivo: los productos tienen más energía y el sistema la toma del entorno (endotérmica).","fail":"ΔH positivo significa que los productos quedan con MÁS energía que los reactivos: el sistema absorbe calor. Eso es endotérmica."},"ee-q1":{"ok":"¡Exacto! El catalizador abre otro camino con menor barrera, pero la diferencia de energía entre reactivos y productos (ΔH) no cambia.","fail":"El catalizador solo baja la energía de activación (la barrera). Los reactivos y los productos siguen en el mismo nivel, así que ΔH no cambia."},"ee-q2":{"ok":"¡Bien! Toda reacción necesita superar su barrera; la chispa da esa energía y luego el propio calor liberado mantiene la combustión.","fail":"La combustión SÍ es exotérmica. La chispa no cambia ΔH: solo aporta la energía de activación para empezar."},"ee-q3":{"ok":"¡Muy bien! En una endotérmica el calor es parte de lo que la reacción consume: sin calentamiento continuo se frena.","fail":"Al ser endotérmica, la reacción consume calor del entorno; si se deja de calentar, se enfría y se frena. El calor no es catalizador."}});
 Object.assign(QUIZ_FB,{"tp-q0": {"ok": "¡Bien! Apareció un doble enlace y salieron H y Br: es una eliminación.", "fail": "No: fíjate que en el producto aparece un doble enlace nuevo y salen H y Br. Eso es una eliminación."}, "tp-q1": {"ok": "¡Correcto! El doble enlace desapareció y dos moléculas quedaron en una: adición.", "fail": "Mira el doble enlace: estaba en el reactivo y ya no está. H y Br se sumaron: es una adición."}, "tp-q2": {"ok": "¡Exacto! Un H del anillo se cambió por Cl y el anillo sigue intacto: sustitución.", "fail": "El anillo no perdió sus dobles enlaces: un H se cambió por Cl. Eso es una sustitución."}, "tp-q3": {"ok": "¡Muy bien! El carbono ganó un oxígeno y perdió hidrógenos: oxidación.", "fail": "El carbono del alcohol terminó con más enlaces a oxígeno. Ganar O = oxidación."}, "tp-q4": {"ok": "¡Correcto! Solo pasó un H⁺ del HCl al nitrógeno: ácido-base.", "fail": "Ningún enlace C cambió: solo un H⁺ pasó del HCl a la amina. Es una reacción ácido-base."}, "tp-q5": {"ok": "¡Bien! El agua partió la amida en un ácido y amoníaco (como sal): hidrólisis.", "fail": "El agua rompió la molécula en dos partes (ácido + amonio). Eso es hidrólisis, lo contrario de una condensación."}});
 
 /* ── ACCESIBILIDAD: teclado + lectores de pantalla ── */
@@ -9817,20 +9895,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
   <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
 </footer>
-<script src="pwa-install.js?v=90"></script>
-<script src="text-zoom.js?v=90"></script>
-<script src="site-ui.js?v=90"></script>
-<script src="calidad.js?v=90"></script>
+<script src="pwa-install.js?v=95"></script>
+<script src="text-zoom.js?v=95"></script>
+<script src="site-ui.js?v=95"></script>
+<script src="calidad.js?v=95"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="pantalla.js?v=90"></script>
-<script src="simx.js?v=90"></script>
+<script src="pantalla.js?v=95"></script>
+<script src="simx.js?v=95"></script>
 <script>
 // Narración (narracion.js): bloques que reciben su botón «Escuchar».
 document.querySelectorAll('.tp-head').forEach(function(el){el.setAttribute('data-narrar','');});
 document.querySelectorAll('.tp-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tp-box,.tp-where,.tp-ico');});
 document.querySelectorAll('.tipo-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tipo-card-eq,.tipo-card-rules');});
 </script>
-<script src="narracion.js?v=90"></script>
+<script src="narracion.js?v=95"></script>
 <script>
 // Los botones 🔊 de cada paso del mecanismo ahora leen el paso completo
 // (título + idea clave), con la misma voz y la lectura de fórmulas del sitio.
