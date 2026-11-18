@@ -7,6 +7,19 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-18 (192) — Auditoría de calidad (Tarea 0 del plan de mejoras)
+
+### Contexto
+El docente pidió un diagnóstico de accesibilidad, SEO, PWA y analítica antes de hacer cambios, para presentar el sitio a evaluadores.
+
+### Cambios
+- `AUDITORIA.md` (nuevo): informe con Lighthouse, axe en 17 páginas, hallazgos priorizados y decisiones pendientes. No se modificó ningún archivo del sitio.
+
+### Pendiente
+- Visto bueno del docente para las Tareas 1 a 5 y respuestas a las decisiones del final de `AUDITORIA.md`. Sin cambios en `chromanom-analytics.gs`.
+
+---
+
 ## 2026-11-17 (191) — El mapa de cadenas en celular: paso a paso y pantalla completa
 
 ### Contexto
