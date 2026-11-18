@@ -19,6 +19,7 @@ Al terminar la sesión 193 quedaron cinco pendientes anotados: dos evidencias «
 - **`ambiente.html` (DBA n.º 5):** nuevas secciones «Megadiversidad y tráfico de especies» (tres ámbitos, seis situaciones de decisión, papel del ADN) y «Diseña tu investigación» (tres problemas; el estudiante arma variables, controles, instrumento y repeticiones y recibe revisión; botón para copiar). 6 preguntas nuevas en el juego y 2 abiertas en el docente.
 - **`docente.html`:** las dos evidencias del DBA n.º 5 y la pericíclica pasan a «Cubierta» en la tabla de cobertura.
 - `sw.js` y `?v=96`; `saber-juego.js` regenerado (291 preguntas).
+- **Ajuste estético de «Diseña tu investigación» (`fase4.css`, `ambiente.html`):** en el celular las casillas y círculos salían enormes y las opciones se partían, porque la regla `.calc input` (alto mínimo 44 px y ancho 120 px) también los afectaba. Ahora cada opción es una tarjeta táctil con control de 22 px, resalta al marcarla y el cuadro de hipótesis ocupa todo el ancho. `sw.js` y `?v=97`.
 
 ### Pasos manuales pendientes
 - Ninguno en `chromanom-analytics.gs` (no se tocó).

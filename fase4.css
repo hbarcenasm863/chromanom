@@ -92,3 +92,14 @@
 .sim-pregunta{font-size:.88rem;font-weight:700;color:var(--tx);margin:4px 0 6px}
 .sim-pregunta::before{content:'🤔 Predice: '}
 @media(max-width:520px){.sim-rng{flex-wrap:wrap;max-width:100%}.sim-rng input{width:100%;max-width:100%;flex:1 1 160px}.sim-rng b{min-width:0}}
+
+/* Opciones de «Diseña tu investigación»: tarjetas táctiles con casilla o círculo de tamaño normal */
+.calc fieldset{border:0;padding:0;margin:12px 0 4px;min-width:0}
+.calc legend{font-size:.9rem;font-weight:800;color:var(--tx);margin-bottom:6px;padding:0;line-height:1.35}
+.calc .iv-opt{display:flex;align-items:center;gap:12px;min-height:46px;margin:6px 0;padding:8px 14px;border:1.5px solid var(--brd);border-radius:12px;background:#fff;color:var(--tx);font-size:.9rem;font-weight:600;line-height:1.35;cursor:pointer;transition:border-color .15s,background .15s}
+.calc .iv-opt:hover{border-color:var(--brand);background:var(--brand-l)}
+.calc .iv-opt:has(input:checked){border-color:var(--brand);background:var(--brand-l);box-shadow:0 0 0 1px var(--brand) inset}
+.calc .iv-opt input{flex:none;width:22px;height:22px;min-height:0;padding:0;margin:0;border:none;background:none;accent-color:var(--brand);cursor:pointer}
+.calc .iv-opt span{flex:1;min-width:0}
+.calc textarea{width:100%;min-height:72px;margin:4px 0 12px;padding:10px 12px;border:1.5px solid var(--brd);border-radius:12px;font:inherit;font-size:.9rem;background:#fff;color:var(--tx);resize:vertical;box-sizing:border-box}
+.calc select{max-width:100%}
