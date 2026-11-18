@@ -31,9 +31,9 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="fundamentos.css?v=95">
-<link rel="stylesheet" href="chromanom.css?v=95">
-<link rel="stylesheet" href="fase4.css?v=95">
+<link rel="stylesheet" href="fundamentos.css?v=96">
+<link rel="stylesheet" href="chromanom.css?v=96">
+<link rel="stylesheet" href="fase4.css?v=96">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -78,6 +78,8 @@
   <a href="#colombia">Colombia</a>
   <a href="#glaciares">Nevados y CO₂</a>
   <a href="#accion">Plan de acción</a>
+  <a href="#megadiverso">Megadiversidad</a>
+  <a href="#investigar">Diseña tu investigación</a>
   <a href="#practica">Practica</a>
   <a href="#resumen">Resumen</a>
 </nav>
@@ -312,6 +314,42 @@
   </div>
 </section>
 
+<section class="sec" id="megadiverso">
+  <div class="sec-kicker">Ser un país megadiverso</div>
+  <h2>Megadiversidad y tráfico de especies: ¿qué implica y qué hago?</h2>
+  <div class="meta">Al terminar podrás explicar qué implica para Colombia ser megadiverso y decidir cómo actuar ante el tráfico de especies.</div>
+  <p>Colombia es uno de los países con más especies de aves y de orquídeas del mundo, y tiene ecosistemas muy distintos: páramos, selvas, humedales, costas y desiertos. Esa riqueza trae <b>oportunidades y responsabilidades</b> en tres ámbitos:</p>
+  <div class="grid-3" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:10px 0">
+    <div class="calc" style="margin:0"><b>🌿 Ambiental</b><br>Los ecosistemas dan agua, regulan el clima, polinizan cultivos y guardan carbono. Perder especies debilita todo el sistema.</div>
+    <div class="calc" style="margin:0"><b>🤝 Social y económico</b><br>La naturaleza sostiene el ecoturismo, la pesca y la agricultura. El tráfico ilegal de especies enriquece a pocos y deja sin recursos a las comunidades.</div>
+    <div class="calc" style="margin:0"><b>🎭 Cultural</b><br>Comunidades indígenas, afrocolombianas y campesinas conocen y usan plantas y animales desde hace generaciones: ese conocimiento también se pierde con la especie.</div>
+  </div>
+  <p><b>Tráfico de especies:</b> es la captura, el transporte o la venta ilegal de fauna y flora silvestres (loros, tortugas, ranas, primates, orquídeas, entre otros). Muchos animales mueren durante el transporte, y los que sobreviven pueden no adaptarse a una casa. En Colombia, las sanciones ambientales están en la Ley 1333 de 2009 y varios delitos contra los recursos naturales están en el Código Penal.</p>
+  <p><b>La química ayuda:</b> al comparar secuencias de <a href="biomoleculas.html#nucleicos">ADN</a>, los laboratorios pueden saber de qué especie es un trozo de carne, de piel o una aleta decomisados.</p>
+  <div class="calc">
+    <div style="font-weight:800;margin-bottom:6px">¿Qué haces si…?</div>
+    <div class="seg" id="tr-op" role="group" aria-label="Situaciones">
+      <button type="button" data-o="1">Un vendedor ofrece un loro o una tortuga silvestre</button><button type="button" data-o="2">Ves orquídeas o bromelias en el bosque y quieres llevarte unas</button><button type="button" data-o="3">Encuentras un animal silvestre herido</button><button type="button" data-o="4">Te ofrecen artesanías con plumas, pieles o caparazones</button><button type="button" data-o="5">Quieres ayudar a recuperar un hábitat</button><button type="button" data-o="6">Quieres disfrutar de las aves de una reserva</button>
+    </div>
+    <div class="calc-out" id="tr-out" aria-live="polite">Escoge una situación y lee la recomendación.</div>
+  </div>
+</section>
+
+<section class="sec" id="investigar">
+  <div class="sec-kicker">Diseña tu investigación</div>
+  <h2>De la pregunta al diseño: investiga un problema ambiental</h2>
+  <div class="meta">Escoge un problema, arma el diseño y revísalo: ¿qué cambias, qué mides y qué controlas?</div>
+  <div class="calc">
+    <div style="font-weight:800;margin-bottom:6px">Problema a investigar</div>
+    <div class="seg" id="iv-esc" role="group" aria-label="Problemas"><button type="button" data-e="0" class="on">Calidad del agua de una quebrada</button><button type="button" data-e="1">Residuos plásticos del colegio</button><button type="button" data-e="2">CO₂ evitado al caminar al colegio</button></div>
+    <div id="iv-form"></div>
+    <button type="button" class="btn-sm prim" id="iv-rev">✅ Revisar mi diseño</button>
+    <div class="calc-out" id="iv-out" aria-live="polite" style="margin-top:8px">Completa el diseño y pulsa «Revisar».</div>
+    <button type="button" class="btn-sm" id="iv-copiar" style="margin-top:8px">📋 Copiar mi diseño</button>
+  </div>
+  <p style="font-size:.8rem;color:#475569">Para comparar tus datos con valores de referencia busca fuentes oficiales: IDEAM, Ministerio de Ambiente, tu corporación autónoma regional o la secretaría de ambiente de tu ciudad.</p>
+</section>
+
 <section class="sec" id="practica">
   <div class="sec-kicker">Repaso con el banco del Juego</div>
   <h2>Practica: química orgánica y ambiente</h2>
@@ -342,14 +380,14 @@
   <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
   <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
 </footer>
-<script src="fundamentos.js?v=95"></script>
-<script src="temas-extra.js?v=95"></script>
-<script src="temas-11.js?v=95"></script>
-<script src="pwa-install.js?v=95"></script>
-<script src="text-zoom.js?v=95"></script>
-<script src="fx-libro.js?v=95"></script>
-<script src="fase4.js?v=95"></script>
-<script src="sim4.js?v=95"></script>
+<script src="fundamentos.js?v=96"></script>
+<script src="temas-extra.js?v=96"></script>
+<script src="temas-11.js?v=96"></script>
+<script src="pwa-install.js?v=96"></script>
+<script src="text-zoom.js?v=96"></script>
+<script src="fx-libro.js?v=96"></script>
+<script src="fase4.js?v=96"></script>
+<script src="sim4.js?v=96"></script>
 <script>
 (function(){
 'use strict';
@@ -457,16 +495,73 @@ function plan(){var P=[0,1,2].map(function(k){return AC[k][+document.getElementB
 plan();
 document.getElementById('ac-copiar').addEventListener('click',function(){var t='Mi plan de acción\n'+plan();var b=this;
   if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){b.textContent='✅ Copiado';setTimeout(function(){b.textContent='📋 Copiar mi plan';},1800);});});
+/* tráfico de especies */
+var TR={1:'🚫 <b>No lo compres.</b> Comprar fauna silvestre sin permiso alimenta el tráfico y es ilegal. Muchos animales mueren en el transporte. Avisa a la autoridad ambiental de tu región (corporación autónoma regional o Policía Ambiental).',
+ 2:'🚫 <b>No las extraigas.</b> Muchas orquídeas y bromelias crecen despacio y están protegidas. Compra plantas en viveros registrados y, si ves extracción, avisa a la autoridad ambiental.',
+ 3:'🩺 <b>No te lo lleves a casa.</b> Mantén la distancia y avisa a la autoridad ambiental: hay centros de atención de fauna que saben cómo cuidarlo y liberarlo.',
+ 4:'🔎 <b>Pregunta y evita.</b> Pueden provenir de especies protegidas. Prefiere artesanías de fibras vegetales o materiales con origen legal comprobado.',
+ 5:'🌱 <b>Buena idea.</b> Sembrar especies nativas de viveros registrados y proteger quebradas ayuda a recuperar el hábitat sin sacar organismos del bosque.',
+ 6:'🐦 <b>Práctica de bajo impacto.</b> Observar y fotografiar aves a distancia, sin ruidos fuertes ni alimentarlas, favorece a las comunidades locales y no extrae animales.'};
+document.getElementById('tr-op').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});
+  var o=document.getElementById('tr-out');o.className='calc-out'+(b.dataset.o==='5'||b.dataset.o==='6'?' ok':'');o.innerHTML=TR[b.dataset.o];});
+/* diseño de la investigación */
+var IV=[
+ {q:'¿El pH del agua de una quebrada cambia cerca de un vertimiento o de un cultivo, en comparación con un punto alejado?',
+  vi:[['Lugar de la toma de muestra (cerca y lejos del vertimiento)',1],['La hora a la que llega el grupo',0],['El color del frasco',0]],
+  vd:[['pH del agua',1],['El número de estudiantes del grupo',0],['La marca del frasco',0]],
+  ct:[['Mismo día y hora de muestreo',1],['Mismo tipo de frasco, limpio y enjuagado',1],['Misma profundidad de toma',1],['Número de estudiantes presentes',0]],
+  ins:[['Tiras indicadoras de pH o un pH-metro calibrado',1],['Una regla',0],['Un cronómetro',0]],
+  rep:[['Medir al menos tres veces en cada lugar y promediar',1],['Medir una sola vez',0],['Repetir hasta que dé el valor esperado',0]]},
+ {q:'¿La campaña de reutilizar botellas reduce los residuos plásticos del colegio?',
+  vi:[['Semanas antes y después de la campaña',1],['El color de las bolsas de basura',0],['El nombre del docente',0]],
+  vd:[['Masa de plástico desechado por semana (kg)',1],['Cuántos estudiantes opinan que la campaña es buena',0],['La marca de las botellas',0]],
+  ct:[['Mismo número de días de clase por semana',1],['Misma balanza y mismos recipientes',1],['Pesar siempre a la misma hora',1],['El color de las bolsas',0]],
+  ins:[['Una balanza',1],['Un termómetro',0],['Un pH-metro',0]],
+  rep:[['Registrar varias semanas antes y varias después',1],['Registrar solo un día',0],['Registrar solo cuando la basura se vea poca',0]]},
+ {q:'¿Cuánto CO₂ se evita si un grupo va caminando al colegio en vez de ir en un vehículo a gasolina?',
+  vi:[['Modo de transporte (caminar o vehículo)',1],['La marca de la ropa',0],['La hora de salida del sol',0]],
+  vd:[['Litros de gasolina no usados por semana, convertidos a CO₂',1],['Qué tan feliz se siente cada estudiante',0],['El color del vehículo',0]],
+  ct:[['Misma distancia entre la casa y el colegio',1],['Mismos días de la semana',1],['Mismo tipo de combustible',1],['La marca de la ropa',0]],
+  ins:[['Registro de recorridos y factor de emisión (unos 2,3 kg de CO₂ por litro de gasolina)',1],['Un pH-metro',0],['Una brújula',0]],
+  rep:[['Registrar durante varias semanas',1],['Registrar un solo día',0],['Registrar solo los días lluviosos',0]]}];
+var ivE=0,ivF=document.getElementById('iv-form');
+function radios(n,arr){return arr.map(function(a,i){return '<label style="display:flex;gap:8px;align-items:center;line-height:1.3;margin:4px 0;padding:4px 10px;border:1px solid var(--brd);border-radius:10px;background:#fff;cursor:pointer"><input style="width:18px;height:18px;margin-top:2px;flex:none" type="radio" name="iv-'+n+'" value="'+i+'"> <span>'+a[0]+'</span></label>';}).join('');}
+function ivPintar(){var d=IV[ivE];
+  ivF.innerHTML='<p style="margin:6px 0"><b>Pregunta:</b> '+d.q+'</p>'+
+   '<fieldset style="border:0;padding:0;margin:8px 0"><legend><b>1. Variable que cambias o comparas (independiente)</b></legend>'+radios('vi',d.vi)+'</fieldset>'+
+   '<fieldset style="border:0;padding:0;margin:8px 0"><legend><b>2. Variable que mides (dependiente)</b></legend>'+radios('vd',d.vd)+'</fieldset>'+
+   '<fieldset style="border:0;padding:0;margin:8px 0"><legend><b>3. Qué debes mantener igual (controles)</b> — marca todos los que correspondan</legend>'+d.ct.map(function(a,i){return '<label style="display:flex;gap:8px;align-items:center;line-height:1.3;margin:4px 0;padding:4px 10px;border:1px solid var(--brd);border-radius:10px;background:#fff;cursor:pointer"><input style="width:18px;height:18px;margin-top:2px;flex:none" type="checkbox" name="iv-ct" value="'+i+'"> <span>'+a[0]+'</span></label>';}).join('')+'</fieldset>'+
+   '<fieldset style="border:0;padding:0;margin:8px 0"><legend><b>4. Instrumento o fuente de datos</b></legend>'+radios('ins',d.ins)+'</fieldset>'+
+   '<fieldset style="border:0;padding:0;margin:8px 0"><legend><b>5. Cuántas veces mides</b></legend>'+radios('rep',d.rep)+'</fieldset>'+
+   '<label for="iv-hip" style="font-weight:800">6. Tu hipótesis (escríbela con tus palabras)</label><textarea id="iv-hip" rows="2" style="width:100%;margin:4px 0 10px;padding:8px;border:1.5px solid var(--brd);border-radius:10px;font:inherit" placeholder="Si… entonces… porque…"></textarea>';
+  document.getElementById('iv-out').className='calc-out';document.getElementById('iv-out').innerHTML='Completa el diseño y pulsa «Revisar».';}
+function ivGet(n){var r=ivF.querySelector('input[name=iv-'+n+']:checked');return r?+r.value:-1;}
+function ivResumen(){var d=IV[ivE],cts=[].slice.call(ivF.querySelectorAll('input[name=iv-ct]:checked')).map(function(x){return d.ct[+x.value][0];});
+  function t(n,k){var i=ivGet(n);return i<0?'(sin elegir)':d[k][i][0];}
+  return 'Pregunta: '+d.q+'\nVariable independiente: '+t('vi','vi')+'\nVariable dependiente: '+t('vd','vd')+'\nControles: '+(cts.length?cts.join('; '):'(sin elegir)')+'\nInstrumento: '+t('ins','ins')+'\nRepeticiones: '+t('rep','rep')+'\nHipótesis: '+((document.getElementById('iv-hip')||{}).value||'(sin escribir)');}
+document.getElementById('iv-esc').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);});ivE=+b.dataset.e;ivPintar();});
+document.getElementById('iv-rev').addEventListener('click',function(){var d=IV[ivE],o=document.getElementById('iv-out'),f=[],bien=0;
+  function chk(n,k,etq,pista){var i=ivGet(n);if(i<0){f.push('⬜ '+etq+': falta elegir.');}else if(d[k][i][1]){f.push('✅ '+etq+': bien.');bien++;}else f.push('❌ '+etq+': '+pista);}
+  chk('vi','vi','Variable independiente','es lo que tú cambias o comparas a propósito para ver su efecto.');
+  chk('vd','vd','Variable dependiente','es lo que mides y debe poder expresarse con un número y una unidad.');
+  var sel=[].slice.call(ivF.querySelectorAll('input[name=iv-ct]:checked')).map(function(x){return +x.value;}),okc=d.ct.every(function(c,i){return !!c[1]===(sel.indexOf(i)>=0);});
+  if(!sel.length)f.push('⬜ Controles: falta marcar.');else if(okc){f.push('✅ Controles: bien.');bien++;}else f.push('❌ Controles: mantén igual lo que podría alterar la medida, y no marques lo que no influye.');
+  chk('ins','ins','Instrumento','debe medir justamente la variable dependiente.');
+  chk('rep','rep','Repeticiones','repetir y promediar da más confianza y permite estimar el margen de error.');
+  var hip=(document.getElementById('iv-hip').value||'').trim();f.push(hip.length>12?'✅ Hipótesis: escrita (revisa que diga qué esperas y por qué).':'⬜ Hipótesis: escríbela con «Si… entonces… porque…».');
+  o.className='calc-out'+(bien===5?' ok':'');o.innerHTML=f.join('<br>')+'<br><br><b>'+bien+' de 5 partes bien.</b>'+(bien===5?' Tu diseño permite comparar de forma justa.':'');});
+document.getElementById('iv-copiar').addEventListener('click',function(){var b=this,t=ivResumen();if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){b.textContent='✅ Copiado';setTimeout(function(){b.textContent='📋 Copiar mi diseño';},1800);});});
+ivPintar();
 })();
 </script>
-<script src="site-ui.js?v=95"></script>
-<script src="calidad.js?v=95"></script>
+<script src="site-ui.js?v=96"></script>
+<script src="calidad.js?v=96"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="fotos-datos.js?v=95"></script>
-<script src="fotos.js?v=95"></script>
-<script src="pantalla.js?v=95"></script>
-<script src="simx.js?v=95"></script>
-<script src="narracion.js?v=95"></script>
+<script src="fotos-datos.js?v=96"></script>
+<script src="fotos.js?v=96"></script>
+<script src="pantalla.js?v=96"></script>
+<script src="simx.js?v=96"></script>
+<script src="narracion.js?v=96"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

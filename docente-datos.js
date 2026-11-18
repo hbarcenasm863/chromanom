@@ -1480,7 +1480,9 @@ var SABER={
   {a:'rx',c:'exp',k:'Q',ctx:'El 1,3-butadieno reacciona con el eteno para formar ciclohexeno. Los datos experimentales indican que no se detecta ningún radical ni carbocatión durante la reacción y que ocurre en un solo paso.',
    q:'¿Qué tipo de mecanismo explica estas observaciones?',o:['Pericíclico: los enlaces se rompen y se forman a la vez, en un estado de transición cíclico','Homolítico: se forman radicales que luego se combinan','Heterolítico: se forma un carbocatión que luego reacciona','Ácido-base: se transfiere un H⁺ al eteno']},
   {a:'rx',c:'uso',k:'Q',ctx:'En una reacción, un enlace Cl−Cl se rompe de modo que cada átomo de cloro se queda con uno de los dos electrones del enlace.',
-   q:'¿Cómo se llama esa ruptura y qué especies se forman?',o:['Homolítica; se forman radicales de cloro','Heterolítica; se forman un catión y un anión','Pericíclica; se forma un anillo','Heterolítica; se forman dos radicales']}
+   q:'¿Cómo se llama esa ruptura y qué especies se forman?',o:['Homolítica; se forman radicales de cloro','Heterolítica; se forman un catión y un anión','Pericíclica; se forma un anillo','Heterolítica; se forman dos radicales']},
+  {a:'rx',c:'exp',k:'Q',ctx:'El primer paso de la ozonólisis de un alqueno es la adición de ozono al doble enlace para formar un anillo de cinco átomos, en un solo paso y sin intermediarios radicalarios ni iónicos.',
+   q:'¿Qué tipo de mecanismo describe este paso?',o:['Pericíclico: cicloadición en un estado de transición cíclico','Homolítico: se forman radicales intermedios','Heterolítico: se forma un carbocatión intermedio','Ácido-base: se transfiere un protón']}
  ]
 };
 
@@ -1653,6 +1655,7 @@ var ABIERTAS={
   {t:'con',q:'Tienes tres frascos sin etiqueta: etanal, propanona y propan-2-ol. Diseña una secuencia de pruebas químicas (Tollens, dicromato de potasio u otras) para identificar cada uno y escribe lo que observarías en cada caso.'},
   {t:'con',q:'Explica por qué la glucosa da positivo con Benedict y la sacarosa da negativo, y qué prueba usarías para distinguir el almidón de la glucosa. Indica el color que observarías en cada caso.'},
   {t:'con',q:'Compara la halogenación de un alcano con luz (homolítica), la adición de HBr a un alqueno (heterolítica) y la reacción de Diels-Alder (pericíclica): indica qué se forma en el camino (radicales, iones o ningún intermediario) y cuántos pasos tiene cada una.'},
+  {t:'con',q:'Compara tres reacciones pericíclicas: Diels-Alder (butadieno + eteno), cierre electrocíclico de un hexatrieno y adición del ozono a un alqueno. Para cada una indica cuántas moléculas participan, cuántos electrones se mueven y qué anillo se forma.'},
   {t:'con',q:'Clasifica cada una de estas reacciones según su tipo (sustitución, adición, eliminación u oxidorreducción) y justifica brevemente cada clasificación: a) CH₂=CH₂ + Br₂ → CH₂Br−CH₂Br; b) CH₃−CH₂−Br + KOH (en etanol, con calor) → CH₂=CH₂ + KBr + H₂O; c) CH₃−CH₂−OH + CrO₃/H⁺ → CH₃−COOH; d) C₆H₆ + Cl₂ (cat. AlCl₃) → C₆H₅Cl + HCl.'}]
 };
 
@@ -1716,6 +1719,8 @@ var F4_ABIERTAS={
   {t:'con',q:'Explica qué le pasa a la clara del huevo al freírla o al pescado en el ceviche, usando los niveles de estructura de las proteínas.'},
   {t:'con',q:'Explica cómo actúa una enzima como la que hidroliza la sacarosa: qué es el sitio activo y por qué el calor excesivo o un pH extremo la dañan.'}],
  ambiente:[
+  {t:'con',q:'Explica qué implica para Colombia ser un país megadiverso en lo ambiental, lo social y lo cultural, y propón una acción para evitar el tráfico de una especie silvestre de tu región.'},
+  {t:'con',q:'Diseña una investigación para saber si una quebrada cercana al colegio está contaminada: indica la pregunta, la variable independiente, la variable dependiente, los controles, el instrumento, cuántas veces medirías y tu hipótesis.'},
   {t:'con',q:'Elige una actividad humana (minería, ganadería, tala, agricultura intensiva o vías) y explica, con una sustancia o reacción química, cómo afecta a la biodiversidad de una región de Colombia. Propón una acción local para reducir el daño.'},
   {t:'con',q:'La Sierra Nevada de Santa Marta perdió 76 % de su área de glaciar entre 1850 y 1954-1959 (unos 106 años) y 60 % entre 1954-1959 y 2001-2003 (unos 45 años). Calcula la pérdida por año en cada período, grafica los datos y analiza qué indican sobre la rapidez de la pérdida.'},
   {t:'con',q:'Con los datos de CO₂ en el aire (317 ppm en 1960, 339 ppm en 1980, 370 ppm en 2000 y 414 ppm en 2020) calcula el aumento porcentual y explica por qué esa coincidencia con la pérdida de glaciares no basta para afirmar una causa única.'},

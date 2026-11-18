@@ -646,7 +646,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 .speak-btn:hover{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73)}
 .speak-btn.playing{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73);background:var(--cn-brand-l,#e8f4fb)}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=95">
+<link rel="stylesheet" href="chromanom.css?v=96">
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -1123,11 +1123,11 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
         <ul class="mx-pts">
           <li><strong>Homolítica (radicales):</strong> el enlace se rompe y cada átomo se lleva <strong>un</strong> electrón. Aparecen radicales. Ejemplo: halogenación de un alcano con luz.</li>
           <li><strong>Heterolítica (iones):</strong> un átomo se lleva <strong>los dos</strong> electrones del enlace. Aparecen iones, como el carbocatión. Ejemplo: adición de HBr a un alqueno.</li>
-          <li><strong>Pericíclica (en anillo):</strong> los enlaces se rompen y se forman <strong>a la vez</strong>, en un solo paso, con un anillo de electrones. No hay radicales ni iones. Ejemplo: reacción de Diels-Alder.</li>
+          <li><strong>Pericíclica (en anillo):</strong> los enlaces se rompen y se forman <strong>a la vez</strong>, en un solo paso, con un anillo de electrones. No hay radicales ni iones. Ejemplos: reacción de Diels-Alder, cierre electrocíclico de un trieno y adición del ozono al eteno (primer paso de la ozonólisis).</li>
           <li>La <strong>óxido-reducción</strong> es otra manera de clasificar: cambia el estado de oxidación del carbono. Puede ocurrir por cualquiera de los tres mecanismos.</li>
         </ul>
       </div>
-      <div data-simx="diels" data-titulo="Reacción pericíclica: Diels-Alder"></div>
+      <div data-simx="diels" data-titulo="Reacciones pericíclicas: tres ejemplos"></div>
     </section>
     <div class="rxn-card tp-quiz">
       <div class="rxn-body open" style="display:block">
@@ -1151,6 +1151,16 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
           <div class="quiz-q-text">En el diagrama de energía de una reacción pericíclica, ¿cómo se ve el camino de reactivos a productos?</div>
           <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',true)"><span class="quiz-opt-icon">○</span> Una sola barrera, porque ocurre en un solo paso</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Dos barreras con un intermediario entre ellas</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Una línea plana, porque no hay barrera</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q3',false)"><span class="quiz-opt-icon">○</span> Productos más altos que reactivos sin barrera</div></div>
           <div class="quiz-fb" id="fb-pe-q3"></div>
+        </div>
+        <div class="quiz-q" data-qid="pe-q4">
+          <div class="quiz-q-text">Un 1,3,5-hexatrieno se calienta y sus dos extremos se unen formando 1,3-ciclohexadieno, sin ningún otro reactivo ni intermediario. ¿Qué tipo de reacción pericíclica es?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q4',true)"><span class="quiz-opt-icon">○</span> Cierre electrocíclico</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q4',false)"><span class="quiz-opt-icon">○</span> Diels-Alder entre dos moléculas</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q4',false)"><span class="quiz-opt-icon">○</span> Sustitución por radicales</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q4',false)"><span class="quiz-opt-icon">○</span> Adición electrofílica con carbocatión</div></div>
+          <div class="quiz-fb" id="fb-pe-q4"></div>
+        </div>
+        <div class="quiz-q" data-qid="pe-q5">
+          <div class="quiz-q-text">El primer paso de la ozonólisis es la adición de O₃ al doble enlace C=C para formar el molozónido, un anillo de cinco átomos, en un solo paso. ¿Qué tipo de mecanismo es?</div>
+          <div class="quiz-opts"><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q5',true)"><span class="quiz-opt-icon">○</span> Pericíclico: cicloadición 1,3-dipolar</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q5',false)"><span class="quiz-opt-icon">○</span> Homolítico con radicales libres</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q5',false)"><span class="quiz-opt-icon">○</span> Heterolítico con un carbocatión estable</div><div class="quiz-opt" onclick="rxnAnswer(this,'pe-q5',false)"><span class="quiz-opt-icon">○</span> Ácido-base</div></div>
+          <div class="quiz-fb" id="fb-pe-q5"></div>
         </div>
       </div>
     </div>
@@ -8609,7 +8619,7 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 <div class="fase-sig" id="fase-sig"></div>
 </div><!-- /app -->
 
-<script src="fx-libro.js?v=95"></script>
+<script src="fx-libro.js?v=96"></script>
 <script>
 /* ── SVG ARROWS ── */
 function mkArr(cond,w,compact){
@@ -9870,7 +9880,7 @@ function goRxn(tab,id){switchTab(tab);setTimeout(()=>jumpToRxn(id),260);}
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-fxeq]').forEach(el=>{el.innerHTML=fxBlock(el.getAttribute('data-fxeq'),'',true);});
 });
-Object.assign(QUIZ_FB,{"pe-q0":{"ok":"¡Correcto! Todo ocurre en un solo paso, con un anillo de electrones: es pericíclica.","fail":"Sin intermediarios y con enlaces que se rompen y forman a la vez: eso es una reacción pericíclica."},"pe-q1":{"ok":"¡Exacto! Un electrón para cada átomo: ruptura homolítica y radicales de cloro.","fail":"Cada átomo se lleva UN electrón: es una ruptura homolítica y se forman radicales."},"pe-q2":{"ok":"¡Bien! El Br se lleva el par de electrones y queda como Br⁻: ruptura heterolítica.","fail":"Aquí se forman iones: el Br se lleva los dos electrones. Eso es ruptura heterolítica."},"pe-q3":{"ok":"¡Muy bien! Un solo paso significa un solo estado de transición, es decir, una sola barrera.","fail":"En un solo paso no hay intermediario: el perfil tiene una única barrera entre reactivos y productos."}});
+Object.assign(QUIZ_FB,{"pe-q0":{"ok":"¡Correcto! Todo ocurre en un solo paso, con un anillo de electrones: es pericíclica.","fail":"Sin intermediarios y con enlaces que se rompen y forman a la vez: eso es una reacción pericíclica."},"pe-q1":{"ok":"¡Exacto! Un electrón para cada átomo: ruptura homolítica y radicales de cloro.","fail":"Cada átomo se lleva UN electrón: es una ruptura homolítica y se forman radicales."},"pe-q2":{"ok":"¡Bien! El Br se lleva el par de electrones y queda como Br⁻: ruptura heterolítica.","fail":"Aquí se forman iones: el Br se lleva los dos electrones. Eso es ruptura heterolítica."},"pe-q4":{"ok":"¡Correcto! Una sola molécula cierra un anillo con seis electrones: cierre electrocíclico.","fail":"No participa otra molécula ni hay intermediarios: una sola molécula se cierra en un anillo. Eso es un cierre electrocíclico."},"pe-q5":{"ok":"¡Exacto! El ozono se suma al C=C en un solo paso cíclico: cicloadición 1,3-dipolar.","fail":"Todo ocurre a la vez en un anillo de cinco átomos, sin radicales ni iones: es un mecanismo pericíclico."},"pe-q3":{"ok":"¡Muy bien! Un solo paso significa un solo estado de transición, es decir, una sola barrera.","fail":"En un solo paso no hay intermediario: el perfil tiene una única barrera entre reactivos y productos."}});
 Object.assign(QUIZ_FB,{"ee-q0":{"ok":"¡Correcto! ΔH positivo: los productos tienen más energía y el sistema la toma del entorno (endotérmica).","fail":"ΔH positivo significa que los productos quedan con MÁS energía que los reactivos: el sistema absorbe calor. Eso es endotérmica."},"ee-q1":{"ok":"¡Exacto! El catalizador abre otro camino con menor barrera, pero la diferencia de energía entre reactivos y productos (ΔH) no cambia.","fail":"El catalizador solo baja la energía de activación (la barrera). Los reactivos y los productos siguen en el mismo nivel, así que ΔH no cambia."},"ee-q2":{"ok":"¡Bien! Toda reacción necesita superar su barrera; la chispa da esa energía y luego el propio calor liberado mantiene la combustión.","fail":"La combustión SÍ es exotérmica. La chispa no cambia ΔH: solo aporta la energía de activación para empezar."},"ee-q3":{"ok":"¡Muy bien! En una endotérmica el calor es parte de lo que la reacción consume: sin calentamiento continuo se frena.","fail":"Al ser endotérmica, la reacción consume calor del entorno; si se deja de calentar, se enfría y se frena. El calor no es catalizador."}});
 Object.assign(QUIZ_FB,{"tp-q0": {"ok": "¡Bien! Apareció un doble enlace y salieron H y Br: es una eliminación.", "fail": "No: fíjate que en el producto aparece un doble enlace nuevo y salen H y Br. Eso es una eliminación."}, "tp-q1": {"ok": "¡Correcto! El doble enlace desapareció y dos moléculas quedaron en una: adición.", "fail": "Mira el doble enlace: estaba en el reactivo y ya no está. H y Br se sumaron: es una adición."}, "tp-q2": {"ok": "¡Exacto! Un H del anillo se cambió por Cl y el anillo sigue intacto: sustitución.", "fail": "El anillo no perdió sus dobles enlaces: un H se cambió por Cl. Eso es una sustitución."}, "tp-q3": {"ok": "¡Muy bien! El carbono ganó un oxígeno y perdió hidrógenos: oxidación.", "fail": "El carbono del alcohol terminó con más enlaces a oxígeno. Ganar O = oxidación."}, "tp-q4": {"ok": "¡Correcto! Solo pasó un H⁺ del HCl al nitrógeno: ácido-base.", "fail": "Ningún enlace C cambió: solo un H⁺ pasó del HCl a la amina. Es una reacción ácido-base."}, "tp-q5": {"ok": "¡Bien! El agua partió la amida en un ácido y amoníaco (como sal): hidrólisis.", "fail": "El agua rompió la molécula en dos partes (ácido + amonio). Eso es hidrólisis, lo contrario de una condensación."}});
 
@@ -9895,20 +9905,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
   <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
 </footer>
-<script src="pwa-install.js?v=95"></script>
-<script src="text-zoom.js?v=95"></script>
-<script src="site-ui.js?v=95"></script>
-<script src="calidad.js?v=95"></script>
+<script src="pwa-install.js?v=96"></script>
+<script src="text-zoom.js?v=96"></script>
+<script src="site-ui.js?v=96"></script>
+<script src="calidad.js?v=96"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="pantalla.js?v=95"></script>
-<script src="simx.js?v=95"></script>
+<script src="pantalla.js?v=96"></script>
+<script src="simx.js?v=96"></script>
 <script>
 // Narración (narracion.js): bloques que reciben su botón «Escuchar».
 document.querySelectorAll('.tp-head').forEach(function(el){el.setAttribute('data-narrar','');});
 document.querySelectorAll('.tp-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tp-box,.tp-where,.tp-ico');});
 document.querySelectorAll('.tipo-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tipo-card-eq,.tipo-card-rules');});
 </script>
-<script src="narracion.js?v=95"></script>
+<script src="narracion.js?v=96"></script>
 <script>
 // Los botones 🔊 de cada paso del mecanismo ahora leen el paso completo
 // (título + idea clave), con la misma voz y la lectura de fórmulas del sitio.

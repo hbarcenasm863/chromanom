@@ -7,6 +7,30 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-18 (194) — Cierre de los pendientes de la sesión 193 (DBA 11.º)
+
+### Contexto
+Al terminar la sesión 193 quedaron cinco pendientes anotados: dos evidencias «Parciales» del DBA n.º 5, un solo ejemplo pericíclico, las energías de activación ilustrativas, los resultados del laboratorio «de libro de texto» y los casos «no aplica». El docente pidió resolverlos.
+
+### Cambios
+- **Pericíclicas (`simx.js`, `reacciones.html`):** la simulación `diels` ahora trae tres ejemplos con selector: Diels-Alder, cierre electrocíclico [6π] del hexatrieno y ozono + eteno (cicloadición 1,3-dipolar, primer paso de la ozonólisis). Dos preguntas de práctica más en la página, 2 en el juego y 1 + 1 en el docente.
+- **Laboratorio de pruebas (`simx.js`):** los «no aplica» se reemplazaron por **«⚠ no concluyente»**: el tubo muestra lo que de verdad ocurre (por ejemplo, el Sudán III tiñe de rojo una solución de etanol: falso positivo) y se explica por qué. Ya no hay pistas escondidas en el modo «Muestra misteriosa». Se agregó una **tabla de referencia con todos los resultados** (13 muestras × 10 reactivos) para que el docente la compare con su guía de laboratorio. 2 preguntas nuevas en el juego.
+- **Energía de la reacción (`simx.js`):** la flecha dice «Ea ilustrativa» y «ΔH (tablas)», la combustión indica agua líquida y la nota aclara qué valores son de tablas y cuáles ilustrativos.
+- **`ambiente.html` (DBA n.º 5):** nuevas secciones «Megadiversidad y tráfico de especies» (tres ámbitos, seis situaciones de decisión, papel del ADN) y «Diseña tu investigación» (tres problemas; el estudiante arma variables, controles, instrumento y repeticiones y recibe revisión; botón para copiar). 6 preguntas nuevas en el juego y 2 abiertas en el docente.
+- **`docente.html`:** las dos evidencias del DBA n.º 5 y la pericíclica pasan a «Cubierta» en la tabla de cobertura.
+- `sw.js` y `?v=96`; `saber-juego.js` regenerado (291 preguntas).
+
+### Pasos manuales pendientes
+- Ninguno en `chromanom-analytics.gs` (no se tocó).
+- Falta fusionar la rama de trabajo en `main` para publicar.
+
+### Pendiente o sin resolver
+- Las energías de activación siguen siendo ilustrativas (no hay valores experimentales sencillos para esas tres reacciones); ahora está dicho en la propia pantalla.
+- La confirmación científica final de los resultados del laboratorio la hace el docente con la tabla de referencia.
+- La investigación con datos propios (salida a campo, mediciones) se hace en el colegio; el sitio solo guía el diseño.
+
+---
+
 ## 2026-11-18 (193) — Los DBA de Ciencias Naturales de 11.º: lo que faltaba en páginas, juego y docente
 
 ### Contexto
