@@ -7,16 +7,29 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-11-18 (192) — Auditoría de calidad (Tarea 0 del plan de mejoras)
+## 2026-11-18 (192) — Calidad: accesibilidad, SEO, credibilidad y analítica (plan de mejoras, tareas 0 a 5)
 
 ### Contexto
-El docente pidió un diagnóstico de accesibilidad, SEO, PWA y analítica antes de hacer cambios, para presentar el sitio a evaluadores.
+El docente quiere presentar ChromaNom a evaluadores (Premio SED 2027, revista *Tecné, Episteme y Didaxis*) y a colegios. Pidió una auditoría (`AUDITORIA.md`) y luego aplicar las tareas de accesibilidad, SEO, PWA, versión/contacto y analítica. Respuestas del docente: contacto `harvey.barcenas604@educacionbogota.edu.co`, «Bárcenas» con tilde, ajustar tonos de contraste, y en modo estudiante solo se escribe un código que el Apps Script cruza con el nombre.
 
 ### Cambios
-- `AUDITORIA.md` (nuevo): informe con Lighthouse, axe en 17 páginas, hallazgos priorizados y decisiones pendientes. No se modificó ningún archivo del sitio.
+- **Todas las páginas:** enlace «Saltar al contenido», `<main id="contenido">`, menú con `aria-label`, pie en `<footer>` con versión, fecha, autor, institución, licencia, «Cómo citar», contacto y privacidad; descripción (140–160 caracteres), canonical, Open Graph y Twitter Card. `generador.html` solo `noindex`.
+- **Nuevos:** `calidad.js` (emojis decorativos ocultos al lector, elementos clicables operables con teclado, SVG con nombre), `citar.html` (APA 7, licencia, privacidad, evidencia pendiente), `og-chromanom.png`, `sitemap.xml`, `robots.txt`, `CHANGELOG.md`, `analitica/README.md`, `herramientas/sellar-version.js`. JSON-LD `LearningResource` en `index.html`.
+- **`index.html`:** el tour es un diálogo accesible (foco atrapado, Esc, devuelve foco); nombres accesibles de los átomos incluyen el texto visible.
+- **Contraste:** quitada la opacidad de textos pequeños (`.fs-next small`, `.mp`, `.mx-lbl`, `.grupo-lbl`, mapa de cadenas), verde de los orbitales 2p `#16a34a`→`#15803d`, cabeceras turquesa de `referencia.html` con el tono oscuro `--c1t`. Los cuatro colores MDEC conservan su significado.
+- **Otros:** `aria-live` en el mensaje del juego; `h1` en juego y referencia; `h4`→`h3` en los árboles; `role=region` en `#vista`; `tc-svg` como grupo; tarjetas de grupos sin `aria-label` que contradiga el texto; botones A−/A+.
+- **`juego.html`:** cola de reenvío: si el envío final falla, la partida se guarda en el dispositivo y se reenvía al volver la red.
+- **`sw.js`:** caché `chromanom-v90`; `?v=90` en todas las páginas.
 
-### Pendiente
-- Visto bueno del docente para las Tareas 1 a 5 y respuestas a las decisiones del final de `AUDITORIA.md`. Sin cambios en `chromanom-analytics.gs`.
+### Pasos manuales pendientes
+- Ninguno en `chromanom-analytics.gs` (no se tocó).
+- Para activar el modo estudiante hay que poner `MODO_ESTUDIANTE_ACTIVO = true` en `juego.html` (hoy está en `false`).
+- Rellenar la tabla de evidencia de `citar.html` cuando haya datos pre/post.
+
+### Pendiente o sin resolver
+- Duración total de sesión: no se registra (requiere cambiar el `.gs`).
+- Rendimiento de `juego.html` y `docente.html` (archivos muy grandes).
+- Fusionar la rama en `main` (el docente aún no lo ha pedido).
 
 ---
 

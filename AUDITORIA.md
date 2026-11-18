@@ -84,3 +84,34 @@ Moderados: `landmark-one-main` (16 de 17 páginas), `region` (contenido fuera de
 3. ¿Se acepta «Bárcenas» con tilde en los textos nuevos?
 4. ¿Qué datos pide hoy la analítica (nombre, curso)? Define el texto de privacidad.
 5. ¿Sigo con las Tareas 1 a 5 en el orden del plan?
+
+---
+
+# Actualización tras las Tareas 1 a 5 (2026-11-18)
+
+## Lighthouse: antes y después
+
+| Página | Accesibilidad | SEO | Mejores prácticas |
+|---|---|---|---|
+| index | 97 → **100** | 91 → **100** | 100 → 100 |
+| juego | 98 → **100** | 91 → **100** | 100 → 100 |
+| grupos | 98 → **100** | 91 → **100** | 100 → 100 |
+| docente | 97 → **100** | 100 → 100 | 100 → 100 |
+
+Rendimiento (no era requisito): index 99→92, juego 48→57, grupos 87→87, docente 75→44. La variación de `docente` y `index` es en parte ruido de medición (una sola corrida en un contenedor); conviene volver a medir en GitHub Pages. El mayor costo real sigue siendo `juego.html` y `docente.html` (archivos de ~1 MB y 100 KB de JS en línea), tema de la prioridad Baja.
+
+## axe-core (18 páginas, escritorio)
+Errores críticos: 0. Errores serios: **0** (antes: contraste, nombres que no incluían el texto visible, `aria-prohibited-attr`, `nested-interactive`). Quedan solo avisos *moderados* de «contenido fuera de landmarks» (`region`) en elementos flotantes (widget de zoom, barra inferior del celular) y no afectan el uso.
+
+## Pruebas funcionales hechas
+- 18 páginas sin errores de JavaScript.
+- Juego: 22 preguntas recorridas en cada bloque (Hidrocarburos, Oxigenados, Nitrogenados, Juego Completo) y Constructor molecular, con todos los tipos de pregunta (opción múltiple, arrastrar, identificar, escribir, construir, reacciones): sin errores.
+- Sin conexión (service worker): index, juego, teoría, carbono, citar y docente cargan; el juego arranca.
+- Teclado: «Saltar al contenido» lleva a `#contenido`; el tour atrapa el foco, se cierra con Esc y devuelve el foco; las pestañas de pasos de teoría se activan con Enter.
+
+## Lo que quedó distinto de lo que pedía el plan
+- **PWA:** ya existía. Se mantiene `manifest.json` (no `manifest.webmanifest`) y `sw.js` con «red primero» (decisión previa del proyecto: evita mezclar archivos viejos y nuevos); el caché es `chromanom-v90`, no `v1.0.0`, porque el nombre de caché sube con cada despliegue.
+- **`<header>`:** no se envolvió el menú en `<header>` porque el menú es `position: sticky` y se rompería; el menú tiene `aria-label="Principal"` y el contenido está en `<main id="contenido">`.
+- **Duración de sesión:** la analítica registra preguntas con tiempo agotado, pero no la duración total; agregarla exige cambiar `chromanom-analytics.gs` (y redesplegarlo).
+- **Modo estudiante:** en `juego.html` está desactivado (`MODO_ESTUDIANTE_ACTIVO = false`), así que hoy no se envía nada.
+- `generador.html` solo se marcó `noindex` (es una página de datos que se carga oculta desde `docente.html` y redirige).

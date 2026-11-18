@@ -8,10 +8,28 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ChromaNom">
-<meta name="description" content="Generador de guías, talleres y evaluaciones tipo Saber 11 para el docente de química orgánica, alineado con los aprendizajes priorizados, y orientaciones para usar ChromaNom en clase.">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Docente</title>
+<meta name="description" content="Generador de guías, talleres y evaluaciones tipo Saber 11 para docentes de química orgánica, alineado con los aprendizajes priorizados y listo para imprimir.">
+<link rel="canonical" href="https://hbarcenasm863.github.io/chromanom/docente.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChromaNom">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="ChromaNom · Docente">
+<meta property="og:description" content="Generador de guías, talleres y evaluaciones tipo Saber 11 para docentes de química orgánica, alineado con los aprendizajes priorizados y listo para imprimir.">
+<meta property="og:url" content="https://hbarcenasm863.github.io/chromanom/docente.html">
+<meta property="og:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ChromaNom: nomenclatura orgánica IUPAC con el método MDEC de cuatro colores">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ChromaNom · Docente">
+<meta name="twitter:description" content="Generador de guías, talleres y evaluaciones tipo Saber 11 para docentes de química orgánica, alineado con los aprendizajes priorizados y listo para imprimir.">
+<meta name="twitter:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta name="author" content="Harvey Bárcenas Morales">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -387,15 +405,16 @@ body.sin-eval .solo-eval{display:none}
 .hoja .t-rub th{color:#fff}
 .hoja .t-rub th:first-child{background:#0d4a73;color:#fff}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=89">
-<link rel="stylesheet" href="actividades.css?v=89">
+<link rel="stylesheet" href="chromanom.css?v=90">
+<link rel="stylesheet" href="actividades.css?v=90">
 <!-- Página de las guías, talleres y evaluaciones (carta vertical con márgenes).
      Laberintos y crucigramas lo desactivan mientras imprimen (media="not all"):
      con esta regla activa cada laberinto salía partido en dos páginas. -->
 <style id="estilo-pagina-guias">@media print{@page{size:letter;margin:12mm 11mm!important}}</style>
 </head>
 <body class="tab-gen">
-<nav class="site-nav">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<nav class="site-nav" aria-label="Principal">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
@@ -410,6 +429,7 @@ body.sin-eval .solo-eval{display:none}
     <a href="docente.html" class="nav-link active" aria-current="page">📘 <span class="full">Docente</span></a>
   </div>
 </nav>
+<main id="contenido" tabindex="-1">
 
 <div class="app">
   <header class="cn-page-head cn-in">
@@ -537,7 +557,7 @@ body.sin-eval .solo-eval{display:none}
       </form>
       <div id="vista-wrap">
         <div id="vista-info"><div class="vista-vacia">Configure el documento y pulse <b>Generar vista previa</b>. Aquí aparecerán las hojas tal como se imprimen (tamaño carta).</div></div>
-        <div id="vista" aria-label="Vista previa del documento"></div>
+        <div id="vista" role="region" aria-label="Vista previa del documento"></div>
         <div id="medidor" aria-hidden="true"></div>
       </div>
     </div>
@@ -1065,9 +1085,12 @@ body.sin-eval .solo-eval{display:none}
 </div>
 
 <!-- PIE DE PÁGINA: licencia Creative Commons (igual en todas las páginas) -->
-<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
-  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
-</div>
+</main>
+<footer class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.7">
+  <div><a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> <span data-pie-ver style="color:inherit;font-weight:inherit">v1.0.0</span> · actualizado el <span data-pie-fecha style="color:inherit;font-weight:inherit">18 de noviembre de 2026</span> · © 2026 Harvey Bárcenas Morales · Colegio Rufino José Cuervo IED, Bogotá</div>
+  <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
+  <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
+</footer>
 <script>
 // Imprimir toda la guía o solo la secuencia y las rúbricas (lo que el docente
 // suele querer en papel). Las preguntas frecuentes se abren para imprimirse.
@@ -1144,23 +1167,24 @@ window.addEventListener('afterprint',function(){
 <div id="ah-print-root" aria-hidden="true"></div>
 <div id="sp-print-root" aria-hidden="true"></div>
 <div id="ex-print-root" aria-hidden="true"></div>
-<script src="fx-libro.js?v=89"></script>
-<script src="docente-datos.js?v=89"></script>
-<script src="saber-icfes.js?v=89"></script>
-<script src="icfes-datos.js?v=89"></script>
-<script src="docente-app.js?v=89"></script>
-<script src="fundamentos.js?v=89"></script>
-<script src="temas-extra.js?v=89"></script>
-<script src="temas-11.js?v=89"></script>
-<script src="laberinto.js?v=89"></script>
-<script src="crucigrama.js?v=89"></script>
-<script src="ahorcado-datos.js?v=89"></script>
-<script src="ahorcado.js?v=89"></script>
-<script src="sopa.js?v=89"></script>
-<script src="extras.js?v=89"></script>
-<script src="pwa-install.js?v=89"></script>
-<script src="text-zoom.js?v=89"></script>
-<script src="site-ui.js?v=89"></script>
+<script src="fx-libro.js?v=90"></script>
+<script src="docente-datos.js?v=90"></script>
+<script src="saber-icfes.js?v=90"></script>
+<script src="icfes-datos.js?v=90"></script>
+<script src="docente-app.js?v=90"></script>
+<script src="fundamentos.js?v=90"></script>
+<script src="temas-extra.js?v=90"></script>
+<script src="temas-11.js?v=90"></script>
+<script src="laberinto.js?v=90"></script>
+<script src="crucigrama.js?v=90"></script>
+<script src="ahorcado-datos.js?v=90"></script>
+<script src="ahorcado.js?v=90"></script>
+<script src="sopa.js?v=90"></script>
+<script src="extras.js?v=90"></script>
+<script src="pwa-install.js?v=90"></script>
+<script src="text-zoom.js?v=90"></script>
+<script src="site-ui.js?v=90"></script>
+<script src="calidad.js?v=90"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

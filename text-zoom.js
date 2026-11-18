@@ -57,9 +57,9 @@
     wrap.setAttribute('role','group');
     wrap.setAttribute('aria-label','Tamaño de texto');
     wrap.innerHTML=
-      '<button type="button" id="tz-minus" aria-label="Reducir tamaño de texto" title="Reducir texto">A−</button>'+
+      '<button type="button" id="tz-minus" aria-label="A− Reducir tamaño de texto" title="Reducir texto">A−</button>'+
       '<span id="tz-label" aria-live="polite"></span>'+
-      '<button type="button" id="tz-plus" aria-label="Aumentar tamaño de texto" title="Aumentar texto">A+</button>'+
+      '<button type="button" id="tz-plus" aria-label="A+ Aumentar tamaño de texto" title="Aumentar texto">A+</button>'+
       '<button type="button" id="tz-reset" aria-label="Restablecer tamaño de texto" title="Restablecer (115%)">↺</button>';
     document.body.appendChild(wrap);
 

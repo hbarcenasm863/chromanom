@@ -11,6 +11,25 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Reacciones</title>
+<meta name="description" content="Reacciones orgánicas esenciales por grupo funcional: sustitución, adición, eliminación, oxidación y reducción, con mecanismos y ejemplos de nombrar productos.">
+<link rel="canonical" href="https://hbarcenasm863.github.io/chromanom/reacciones.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChromaNom">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="ChromaNom · Reacciones">
+<meta property="og:description" content="Reacciones orgánicas esenciales por grupo funcional: sustitución, adición, eliminación, oxidación y reducción, con mecanismos y ejemplos de nombrar productos.">
+<meta property="og:url" content="https://hbarcenasm863.github.io/chromanom/reacciones.html">
+<meta property="og:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ChromaNom: nomenclatura orgánica IUPAC con el método MDEC de cuatro colores">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ChromaNom · Reacciones">
+<meta name="twitter:description" content="Reacciones orgánicas esenciales por grupo funcional: sustitución, adición, eliminación, oxidación y reducción, con mecanismos y ejemplos de nombrar productos.">
+<meta name="twitter:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta name="author" content="Harvey Bárcenas Morales">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -506,13 +525,13 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 .rx-v2 .rxn-regla,.rx-v2 .rxn-extra-box{font-size:.85rem}
 .rx-v2 .rxn-vida{font-size:.88rem}
 /* control de tamaño de letra: discreto hasta que se usa */
-.rx-v2 #text-zoom-widget{opacity:.5;transform:scale(.85);transform-origin:bottom right;transition:opacity .2s}
+.rx-v2 #text-zoom-widget{opacity:.85;transform:scale(.85);transform-origin:bottom right;transition:opacity .2s}
 .rx-v2 #text-zoom-widget:hover,.rx-v2 #text-zoom-widget:focus-within{opacity:1}
 /* ── TEXTO EXPLICATIVO CON PRINCIPIOS DE MAYER ──
    Señalización: "Idea clave" primero. Segmentación: pasos cortos en lista.
    Coherencia: lo accesorio va plegado en "Para saber más". */
 .mx{font-size:.9rem;line-height:1.6;color:var(--tx)}
-.mx .mx-lbl{display:block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;opacity:.85}
+.mx .mx-lbl{display:block;font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
 .mx .mx-key{background:var(--c1b);color:var(--c1t);border-left:4px solid var(--c1);border-radius:8px;padding:8px 12px;margin:0 0 8px;font-weight:500}
 .mx .mx-key strong{color:inherit}
 .mx .mx-pts{margin:0 0 8px;padding-left:1.25em;display:flex;flex-direction:column;gap:4px}
@@ -627,9 +646,10 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 .speak-btn:hover{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73)}
 .speak-btn.playing{border-color:var(--cn-brand,#1a6ea8);color:var(--cn-brand-d,#0d4a73);background:var(--cn-brand-l,#e8f4fb)}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=89">
+<link rel="stylesheet" href="chromanom.css?v=90">
 </head>
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
 <marker id="arrFull" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
@@ -640,7 +660,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
 </marker>
 </defs>
 </svg>
-<nav class="site-nav">
+<nav class="site-nav" aria-label="Principal">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
     <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
@@ -655,6 +675,7 @@ body.fx-practice .rxn-ex .fx-rhs:not(.show){filter:blur(7px);cursor:pointer;user
     <a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
   </div>
 </nav>
+<main id="contenido" tabindex="-1">
 
 <div class="app">
   <div class="cn-page-head cn-in">
@@ -8512,7 +8533,7 @@ LiAlH₄ reduce C=O de amida + N: da RCH₂NH₂ (amina primaria, no alcohol)</d
 <div class="fase-sig" id="fase-sig"></div>
 </div><!-- /app -->
 
-<script src="fx-libro.js?v=89"></script>
+<script src="fx-libro.js?v=90"></script>
 <script>
 /* ── SVG ARROWS ── */
 function mkArr(cond,w,compact){
@@ -9790,22 +9811,26 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 </script>
 <!-- PIE DE PÁGINA: licencia Creative Commons (igual en todas las páginas) -->
-<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
-  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
-</div>
-<script src="pwa-install.js?v=89"></script>
-<script src="text-zoom.js?v=89"></script>
-<script src="site-ui.js?v=89"></script>
+</main>
+<footer class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.7">
+  <div><a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> <span data-pie-ver style="color:inherit;font-weight:inherit">v1.0.0</span> · actualizado el <span data-pie-fecha style="color:inherit;font-weight:inherit">18 de noviembre de 2026</span> · © 2026 Harvey Bárcenas Morales · Colegio Rufino José Cuervo IED, Bogotá</div>
+  <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
+  <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
+</footer>
+<script src="pwa-install.js?v=90"></script>
+<script src="text-zoom.js?v=90"></script>
+<script src="site-ui.js?v=90"></script>
+<script src="calidad.js?v=90"></script>
 <script>window.PANTALLA_EXTRA=['.lab'];</script>
-<script src="pantalla.js?v=89"></script>
-<script src="simx.js?v=89"></script>
+<script src="pantalla.js?v=90"></script>
+<script src="simx.js?v=90"></script>
 <script>
 // Narración (narracion.js): bloques que reciben su botón «Escuchar».
 document.querySelectorAll('.tp-head').forEach(function(el){el.setAttribute('data-narrar','');});
 document.querySelectorAll('.tp-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tp-box,.tp-where,.tp-ico');});
 document.querySelectorAll('.tipo-card').forEach(function(el){el.setAttribute('data-narrar','');el.setAttribute('data-narrar-excluir','.tipo-card-eq,.tipo-card-rules');});
 </script>
-<script src="narracion.js?v=89"></script>
+<script src="narracion.js?v=90"></script>
 <script>
 // Los botones 🔊 de cada paso del mecanismo ahora leen el paso completo
 // (título + idea clave), con la misma voz y la lectura de fórmulas del sitio.

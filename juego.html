@@ -11,6 +11,25 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <title>ChromaNom · Juego de práctica</title>
+<meta name="description" content="Practica nomenclatura orgánica con más de 1.400 preguntas por bloques: hidrocarburos, oxigenados, nitrogenados y general. Gratis, con constructor molecular.">
+<link rel="canonical" href="https://hbarcenasm863.github.io/chromanom/juego.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChromaNom">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="ChromaNom · Juego de práctica">
+<meta property="og:description" content="Practica nomenclatura orgánica con más de 1.400 preguntas por bloques: hidrocarburos, oxigenados, nitrogenados y general. Gratis, con constructor molecular.">
+<meta property="og:url" content="https://hbarcenasm863.github.io/chromanom/juego.html">
+<meta property="og:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ChromaNom: nomenclatura orgánica IUPAC con el método MDEC de cuatro colores">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ChromaNom · Juego de práctica">
+<meta name="twitter:description" content="Practica nomenclatura orgánica con más de 1.400 preguntas por bloques: hidrocarburos, oxigenados, nitrogenados y general. Gratis, con constructor molecular.">
+<meta name="twitter:image" content="https://hbarcenasm863.github.io/chromanom/og-chromanom.png">
+<meta name="author" content="Harvey Bárcenas Morales">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -886,10 +905,11 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 }
 .saber-ctx{font-size:.9rem;font-style:italic;opacity:.85;margin:6px 0 8px;line-height:1.45}.saber-ctx+.icfes-fig img,.q-title ~ .icfes-fig img{max-width:100%;height:auto;max-height:240px}.icfes-fig img{max-width:100%;height:auto;max-height:240px;background:#fff;border-radius:6px}.icfes-tab{font-size:.8em;margin:6px 0;background:#fff;color:#111}.icfes-cred{font-size:.72rem;opacity:.7;font-style:italic;margin-top:4px}
 </style>
-<link rel="stylesheet" href="chromanom.css?v=89">
+<link rel="stylesheet" href="chromanom.css?v=90">
 </head>
 <body>
-<nav class="site-nav">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<nav class="site-nav" aria-label="Principal">
   <a href="index.html" class="nav-brand">ChromaNom</a>
   <div class="nav-links">
 <a href="index.html" class="nav-link">🏠 <span class="full">Inicio</span></a>
@@ -904,12 +924,13 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 <a href="docente.html" class="nav-link">📘 <span class="full">Docente</span></a>
   </div>
 </nav>
+<main id="contenido" tabindex="-1">
 
 <!-- ══════════════════════════════════════════
      SCREEN 1: PORTADA
 ══════════════════════════════════════════ -->
 <div id="s-portada" class="screen active">
-  <div class="portada-inner">
+  <div class="portada-inner"><h1 class="sr-only">ChromaNom: juego de práctica de nomenclatura orgánica</h1>
     <img src="logo-chromanom.png" style="height:48px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.18))" alt="Nomenclatura Orgánica Fácil"/>
     <div class="portada-title" style="font-size:1.6rem;margin-top:8px">Modo <em>Reto</em></div>
     <div class="portada-sub">Pon a prueba tu nomenclatura IUPAC.<br>Elige un nivel y empieza a jugar.</div>
@@ -1233,14 +1254,14 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
-<script src="fundamentos.js?v=89"></script>
-<script src="temas-extra.js?v=89"></script>
-<script src="temas-11.js?v=89"></script>
-<script src="ahorcado-datos.js?v=89"></script>
-<script src="saber-icfes.js?v=89"></script>
-<script src="icfes-datos.js?v=89"></script>
-<script src="saber-juego.js?v=89"></script>
-<script src="retos.js?v=89"></script>
+<script src="fundamentos.js?v=90"></script>
+<script src="temas-extra.js?v=90"></script>
+<script src="temas-11.js?v=90"></script>
+<script src="ahorcado-datos.js?v=90"></script>
+<script src="saber-icfes.js?v=90"></script>
+<script src="icfes-datos.js?v=90"></script>
+<script src="saber-juego.js?v=90"></script>
+<script src="retos.js?v=90"></script>
 <script>
 // ════════════════════════════════════════════════════════
 // SVG ENGINE (minimal version for game)
@@ -3317,7 +3338,7 @@ function loadQuestion(){
   else if(q.type==='ahorcado') html+='<div id="area-ahorcado"></div>';
   else if(q.type==='crucigrama'||q.type==='sopa') html+='<div id="area-mini"></div>';
 
-  html+=`<div id="pista-box"></div><div class="feedback" id="feedback"></div>`;
+  html+=`<div id="pista-box"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div>`;
   html+=`<button class="q-next" id="q-next" onclick="nextQ()">Siguiente pregunta →</button>`;
 
   area.innerHTML=html;
@@ -7604,6 +7625,37 @@ function buildPayload(trigger){
 // primero, como ya hace sendSessionStart(), recupera la mayoría de esos
 // tropiezos momentáneos sin depender de que el estudiante actúe.
 const _ANALYTICS_INTENTOS=3;
+// ── Cola de reenvío sin conexión ─────────────────────────────────────────
+// Si el envío de una partida falla de todos modos (por ejemplo, sin internet),
+// se guarda en este dispositivo (solo lo que ya se iba a enviar: el mismo
+// resultado, nada más) y se reenvía en silencio cuando vuelve la red o al
+// abrir el juego otra vez. Se guarda a lo sumo una copia por sesión.
+const _COLA_KEY='chromanom_cola_envio';
+function _colaLeer(){try{return JSON.parse(localStorage.getItem(_COLA_KEY)||'[]')||[];}catch(e){return [];}}
+function _colaEscribir(a){try{localStorage.setItem(_COLA_KEY,JSON.stringify(a.slice(-20)));}catch(e){}}
+function _colaGuardar(body){
+  try{
+    const d=JSON.parse(body);
+    const a=_colaLeer().filter(x=>x.sesion!==d.sesion);
+    a.push({sesion:d.sesion,body:body});_colaEscribir(a);
+  }catch(e){}
+}
+function _colaQuitar(sesion){_colaEscribir(_colaLeer().filter(x=>x.sesion!==sesion));}
+function _colaVaciar(){
+  if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
+  if(navigator.onLine===false) return;
+  _colaLeer().forEach(item=>{
+    try{
+      fetch(ANALYTICS_URL,{method:'POST',body:item.body,headers:{'Content-Type':'text/plain'}})
+        .then(r=>r.ok?r.json():null)
+        .then(j=>{ if(j&&j.ok) _colaQuitar(item.sesion); })
+        .catch(()=>{});
+    }catch(e){}
+  });
+}
+window.addEventListener('online',_colaVaciar);
+setTimeout(_colaVaciar,4000);
+
 function sendAnalytics(trigger){
   if(!MODO_ESTUDIANTE_ACTIVO||!ANALYTICS_URL||ANALYTICS_URL==='PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') return;
   if(_analyticsSent) return;
@@ -7635,15 +7687,15 @@ function sendAnalytics(trigger){
         .then(j=>{
           if(j&&j.ok){ _updateSheetsStatus('ok'); return; }
           if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
-          _analyticsSent=false; _updateSheetsStatus('error');
+          _analyticsSent=false; _colaGuardar(body); _updateSheetsStatus('error');
         })
         .catch(()=>{
           if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
-          _analyticsSent=false; _updateSheetsStatus('error');
+          _analyticsSent=false; _colaGuardar(body); _updateSheetsStatus('error');
         });
     }catch(e){
       if(n<_ANALYTICS_INTENTOS-1){ setTimeout(()=>intentar(n+1), 1500*(n+1)); return; }
-      _analyticsSent=false; _updateSheetsStatus('error');
+      _analyticsSent=false; _colaGuardar(body); _updateSheetsStatus('error');
     }
   }
   intentar(0);
@@ -7710,11 +7762,12 @@ function sendToSheets(){
   }
   if(btn){btn.disabled=true;btn.innerHTML='⏳ Enviando…';}
   _analyticsSent=false;
-  fetch(ANALYTICS_URL,{method:'POST',body:JSON.stringify(buildPayload('manual')),headers:{'Content-Type':'text/plain'}})
+  const body0=JSON.stringify(buildPayload('manual'));
+  fetch(ANALYTICS_URL,{method:'POST',body:body0,headers:{'Content-Type':'text/plain'}})
     .then(r=>r.ok?r.json():Promise.reject(r.status))
     .then(j=>{
       if(!j||!j.ok) return Promise.reject(j&&j.error||'respuesta sin ok');
-      _analyticsSent=true;
+      _analyticsSent=true; try{_colaQuitar(JSON.parse(body0).sesion);}catch(e){}
       if(btn){btn.style.display='none';}
       if(status) status.textContent='✅ Resultados guardados en Google Sheets.';
       showEnvioModal('ok');
@@ -7887,13 +7940,17 @@ function confirmExitGame(){
 </script>
 
 <!-- FOOTER COPYRIGHT -->
-<div class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.6">
-  <a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> © 2026 · Harvey Barcenas Morales · Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor)
-</div>
-<script src="pwa-install.js?v=89"></script>
-<script src="text-zoom.js?v=89"></script>
-<script src="fx-libro.js?v=89"></script>
-<script src="site-ui.js?v=89"></script>
+</main>
+<footer class="site-footer" style="text-align:center;padding:16px;font-size:.74rem;color:rgba(255,255,255,.88);background:var(--tx,#1a1714);margin-top:auto;line-height:1.7">
+  <div><a href="https://hbarcenasm863.github.io/chromanom/" style="color:#fff;font-weight:700">ChromaNom</a> <span data-pie-ver style="color:inherit;font-weight:inherit">v1.0.0</span> · actualizado el <span data-pie-fecha style="color:inherit;font-weight:inherit">18 de noviembre de 2026</span> · © 2026 Harvey Bárcenas Morales · Colegio Rufino José Cuervo IED, Bogotá</div>
+  <div>Licencia <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" style="color:#fff;text-decoration:underline">CC BY-NC 4.0</a> (uso libre sin fines comerciales, citando al autor) · <a href="citar.html" style="color:#fff;text-decoration:underline">Cómo citar</a> · <a href="mailto:harvey.barcenas604@educacionbogota.edu.co" style="color:#fff;text-decoration:underline">Contacto</a> · <a href="citar.html#privacidad" style="color:#fff;text-decoration:underline">Privacidad</a></div>
+  <div style="font-size:.7rem;opacity:.9">Privacidad: en modo libre no se registra nada; en modo estudiante solo se escribe un código, que el docente asocia con el nombre en su propia hoja.</div>
+</footer>
+<script src="pwa-install.js?v=90"></script>
+<script src="text-zoom.js?v=90"></script>
+<script src="fx-libro.js?v=90"></script>
+<script src="site-ui.js?v=90"></script>
+<script src="calidad.js?v=90"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

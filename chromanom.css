@@ -184,6 +184,14 @@ body{
 .fs-prev,.fs-next{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:10px 16px;border-radius:var(--cn-r-s);text-decoration:none;font-weight:800;font-size:.9rem}
 .fs-prev{color:var(--cn-tx2);border:1.5px solid var(--cn-brd);background:var(--cn-surf)}
 .fs-next{--fc:var(--cn-brand);margin-left:auto;background:var(--fc);color:#fff;box-shadow:var(--cn-sh);text-align:right}
-.fs-next small{font-size:.7rem;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.fs-next small{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .fs-next:hover{filter:brightness(1.08)}
 @media (max-width:560px){.fs-prev,.fs-next{width:100%;text-align:left}.fs-next{margin-left:0}}
+
+/* ── Accesibilidad: enlace «Saltar al contenido» y foco del <main> ── */
+.skip-link{position:absolute;left:8px;top:-60px;z-index:100000;background:#fff;color:#0d4a73;font-weight:800;padding:10px 16px;border-radius:0 0 10px 10px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:top .15s}
+.skip-link:focus{top:0;outline:3px solid #0d4a73;outline-offset:2px}
+main#contenido{display:block}
+main#contenido:focus{outline:none}
+@media (prefers-reduced-motion:reduce){.skip-link{transition:none}}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

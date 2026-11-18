@@ -51,7 +51,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;min-he
 .tree.three{grid-template-columns:repeat(3,1fr)}
 .tree-root{grid-column:1/-1;text-align:center;font-family:'Fraunces',serif;font-weight:900;font-size:1.05rem;background:var(--brand-d);color:#fff;border-radius:var(--rs);padding:10px}
 .tree-col{border:1.5px solid var(--brd);border-radius:var(--rs);padding:12px;background:var(--surf2)}
-.tree-col h4{font-size:.92rem;font-weight:800;margin-bottom:4px;color:var(--brand-d)}
+.tree-col h3{font-size:.92rem;font-weight:800;margin-bottom:4px;color:var(--brand-d)}
 .tree-col p{font-size:.8rem;margin-bottom:8px;line-height:1.5}
 .tree-leaf{display:block;background:#fff;border:1px solid var(--brd);border-radius:8px;padding:7px 10px;margin-top:6px;font-size:.8rem;line-height:1.45;color:var(--dim);text-decoration:none}
 .tree-leaf b{color:var(--tx)}

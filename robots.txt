@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /generador.html
+
+Sitemap: https://hbarcenasm863.github.io/chromanom/sitemap.xml

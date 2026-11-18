@@ -3,7 +3,7 @@
 // JS y CSS: red primero. Íconos y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v89';
+const CACHE = 'chromanom-v90';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -61,6 +61,10 @@ const ASSETS = [
   './pwa-install.js',
   './text-zoom.js',
   './site-ui.js',
+  './calidad.js',
+  './citar.html',
+  './favicon.ico',
+  './icons/favicon-32.png',
   './chromanom.css',
   './fondo-moleculas.svg'
 ];

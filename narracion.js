@@ -82,7 +82,7 @@
   // de idea clave; sin práctica, tablas, figuras ni controles.
   function textoDe(sec){
     var out=[],h=sec.querySelector('h1,h2');if(h){var th=h.textContent.trim();out.push(/[.!?:]$/.test(th)?th:th+'.');}
-    sec.querySelectorAll('p,li,.key,.warn,.lab-msg,.tree-col h4,.tree-col p,.crit h4').forEach(function(el){
+    sec.querySelectorAll('p,li,.key,.warn,.lab-msg,.tree-col h4,.tree-col h3,.tree-col p,.crit h4').forEach(function(el){
       if(el.closest('.prac,.pq,.lab-view,.fig,.tbl-wrap,.cn-legend,figure,button,svg,.fase-nav,.tipo,.dato'))return;
       if(el.parentElement&&el.parentElement.closest('.key,.warn,li,.lab-msg'))return; // ya incluido en su contenedor
       var c=el.cloneNode(true);c.querySelectorAll('[aria-hidden="true"]').forEach(function(x){x.remove();});var t=c.textContent.replace(/\s+/g,' ').trim();if(t)out.push(/[.!?:]$/.test(t)?t:t+'.');
