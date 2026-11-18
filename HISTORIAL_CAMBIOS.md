@@ -23,7 +23,7 @@ Al terminar la sesión 193 quedaron cinco pendientes anotados: dos evidencias «
 
 ### Pasos manuales pendientes
 - Ninguno en `chromanom-analytics.gs` (no se tocó).
-- Falta fusionar la rama de trabajo en `main` para publicar.
+- Fusionado en `main` al cierre de esta sesión (fast-forward desde la rama de trabajo, que incluye las sesiones 193 y 194). Para ver los cambios en un celular o computador con la app vieja, recargar sin caché.
 
 ### Pendiente o sin resolver
 - Las energías de activación siguen siendo ilustrativas (no hay valores experimentales sencillos para esas tres reacciones); ahora está dicho en la propia pantalla.
@@ -52,7 +52,7 @@ El docente pidió revisar si ChromaNom representa por completo los DBA de Cienci
 
 ### Pasos manuales pendientes
 - Ninguno en `chromanom-analytics.gs` (no se tocó).
-- Los cambios van en la rama de trabajo; falta fusionarlos en `main` para que GitHub Pages los publique.
+- Fusionado en `main` en la sesión 194 (ver abajo): GitHub Pages ya publica estos cambios.
 
 ### Pendiente o sin resolver
 - DBA n.º 5: «Parcial» en dos evidencias: el diseño de investigaciones y el tráfico de especies quedan para el trabajo en clase.
