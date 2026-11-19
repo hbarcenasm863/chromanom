@@ -7,6 +7,43 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-19 (197) — Planeación temporizada con el calendario real
+
+### Contexto
+El docente pidió que la skill `nom-planeacion` sepa temporizar mallas y planes de período con estos cuatro pasos:
+1. tiempo efectivo y no el del calendario, con una holgura del 15 % al 20 %;
+2. contenidos agrupados en núcleos, con núcleo esencial y contenidos complementarios;
+3. horas por tipo de tarea;
+4. un cronograma de hitos.
+
+También pidió que sepa controlar si se alcanzará lo planeado: diagnóstico, semáforo cada 2 o 3 semanas y repriorización a tiempo. Luego agregó:
+- preguntar las horas de clase de cada día y las fechas de inicio y cierre del período;
+- calcular con eso los festivos de Colombia;
+- reservar semanas al final para la evaluación final y el refuerzo;
+- dar a cada tema una clase de evaluación.
+
+### Cambios (`skill/nom-planeacion/`)
+- **`scripts/festivos-co.js`** (nuevo): festivos de Colombia de cualquier año. Incluye los fijos, los que la Ley Emiliani pasa al lunes y los que dependen de la Pascua, más la Semana Santa. Comprobado con 2026.
+- **`scripts/tiempo.js`** (nuevo):
+  - `sugerir` propone las unidades desde los temas; lo marcado «Profundización 10.°–11.°» queda como complementario.
+  - `calcular` recorre el período día por día con el horario del curso. Descuenta festivos, Semana Santa, recesos, días sin clase, horas sin fecha, semanas de evaluación final y de refuerzo, holgura y diagnóstico. Reparte las horas por unidad (primero el mínimo del núcleo) y por tipo de tarea, con una clase de evaluación al final de cada unidad. Entrega el cronograma por semanas, las fechas del semáforo y avisos de viabilidad.
+  - `semaforo` compara el avance real con los hitos, el logro en los chequeos y el tiempo real, y propone cómo repriorizar.
+- **`scripts/actualizar.js`**: marca las secciones de profundización de las páginas.
+- **`SKILL.md`** y **`referencias/estructuras.md`**:
+  - qué preguntar (fechas, horario por día, recesos y semanas finales);
+  - el paso obligatorio de temporizar;
+  - la sección «Control del avance» con el semáforo y los tres pasos para repriorizar.
+- **`referencias/ejemplo-unidades.json`** y `skill/nom-planeacion.zip` actualizados.
+
+### Pasos manuales pendientes
+- Volver a instalar la skill `nom-planeacion` en claude.ai.
+- Los recesos y jornadas institucionales no se pueden calcular: se le preguntan al docente o se toman del calendario académico de la SED de cada año.
+
+### Pendiente o sin resolver
+- Llevar a las secuencias de `nom-planeacion` los criterios didácticos de las presentaciones (ticket de salida, tres niveles de representación), si el docente lo quiere.
+
+---
+
 ## 2026-11-19 (196) — Presentaciones más completas con los criterios didácticos del docente
 
 ### Contexto

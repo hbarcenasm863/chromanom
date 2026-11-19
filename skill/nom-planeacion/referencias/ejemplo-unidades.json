@@ -1,0 +1,58 @@
+[
+ {
+  "nombre": "La célula: historia, tipos y partes",
+  "temas": [
+   "bio:celula"
+  ],
+  "complejidad": "alta",
+  "practica": true,
+  "nucleo": [
+   "Teoría celular e historia",
+   "Procariota y eucariota",
+   "Organelos y funciones",
+   "Transporte por la membrana",
+   "Energía: fotosíntesis y respiración"
+  ],
+  "complementario": [
+   "Laboratorio virtual de microscopía",
+   "Tamaño de la célula"
+  ],
+  "evidencia": "Explica el rol de la membrana plasmática en el mantenimiento del equilibrio interno de la célula, y describe la interacción del agua y las partículas (ósmosis y difusión) que entran y salen de la célula mediante el uso de modelos."
+ },
+ {
+  "nombre": "División celular: mitosis y meiosis",
+  "temas": [
+   "bio:division"
+  ],
+  "complejidad": "media",
+  "practica": true,
+  "nucleo": [
+   "Ciclo celular",
+   "Mitosis",
+   "Meiosis y variabilidad"
+  ],
+  "complementario": [
+   "Cáncer y control del ciclo"
+  ],
+  "evidencia": "Explica el rol de la membrana plasmática en el mantenimiento del equilibrio interno de la célula, y describe la interacción del agua y las partículas (ósmosis y difusión) que entran y salen de la célula mediante el uso de modelos."
+ },
+ {
+  "nombre": "Reinos y clasificación de los seres vivos",
+  "temas": [
+   "bio:reinos"
+  ],
+  "complejidad": "media",
+  "practica": false,
+  "nucleo": [
+   "Clasificar: por qué y cómo",
+   "Dominios y reinos",
+   "Clave dicotómica",
+   "Biodiversidad de Colombia"
+  ],
+  "complementario": [
+   "Virus: ¿seres vivos?",
+   "Líquenes y casos difíciles"
+  ],
+  "evidencia": "Clasifica los organismos en diferentes dominios, de acuerdo con sus tipos de células (procariota, eucariota, animal, vegetal)."
+ }
+]

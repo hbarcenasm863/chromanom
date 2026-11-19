@@ -33,7 +33,9 @@ function indice(dir, archivo, base) {
     if (!t || /['+]\s*\+|\+\s*'/.test(t) || /^Palabras clave/i.test(t) || vistos.has(t)) continue;
     const antes = h.slice(Math.max(0, m.index - 2500), m.index);
     const ids = [...antes.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map(x => x[1]);
-    vistos.add(t); secciones.push({ id: ids.length ? ids[ids.length - 1] : null, titulo: t.slice(0, 110) });
+    vistos.add(t);
+    const prof = /Profundizaci[oó]n\s*10/.test(t);
+    secciones.push(Object.assign({ id: ids.length ? ids[ids.length - 1] : null, titulo: t.replace(/\s*Profundizaci[oó]n\s*10\.?°?[–-]11\.?°?/, '').trim().slice(0, 110) }, prof ? { profundizacion: true } : {}));
   }
   const sims = (h.match(/data-(simx|anim|pantalla)="[^"]+"/g) || []).length + (h.match(/<canvas\b/g) || []).length;
   return { archivo, url: base + archivo, titulo, secciones, simulaciones: sims > 0 };

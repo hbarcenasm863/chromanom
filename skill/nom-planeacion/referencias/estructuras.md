@@ -7,7 +7,8 @@ en Word o en PDF.
 ## Índice
 1. Plan de clase (una sesión)
 2. Secuencia didáctica de 4 sesiones (formato del panel docente)
-3. Plan de período o unidad
+3. Plan de período o unidad (con su tiempo efectivo)
+   · Control del avance (diagnóstico, semáforo y repriorización)
 4. Malla curricular (año)
 
 ---
@@ -62,18 +63,51 @@ recoge y ajuste DUA. Al final: rúbrica o criterios de valoración y la autoeval
 
 **Pregunta problematizadora** del período (relacionada con el contexto colombiano).
 
-| Semana | Tema (sitio · id) | DBA / estándar / evidencia SED | Objetivo | Actividades y recursos | Evaluación |
-|---|---|---|---|---|---|
+**Tiempo efectivo** (tabla de `tiempo.js calcular`): clases según el calendario, festivos y recesos
+con sus fechas, horas sin fecha fija, semanas de evaluación final y de refuerzo, holgura,
+diagnóstico y horas para planear. Si algún dato es estimado, decirlo.
 
-Debajo: criterios de evaluación del período (porcentajes si el colegio los usa, preguntados al
-docente), actividades de nivelación o refuerzo y producto final.
+**Cronograma por semanas** (también de `calcular`): inicio, clase de evaluación y cierre de cada
+unidad, festivos, recesos, holgura, evaluación final y refuerzo.
+
+**Unidades** (una fila por unidad):
+
+| Unidad | Meta y evidencia de aprendizaje | Núcleo (no se negocia) | Complementario | Horas | Construcción · Práctica · Experimental · Retroalimentación · Clase de evaluación | Fechas (inicio → evaluación) |
+|---|---|---|---|---|---|---|
+
+Debajo de la tabla van:
+- los recursos de los sitios por unidad (secciones, simulaciones, juego, hojas de referencia);
+- los criterios de evaluación del período (los porcentajes se le preguntan al docente);
+- la nivelación o el refuerzo y el producto final;
+- la sección **Control del avance**.
+
+## Control del avance (en todo plan de período, unidad o malla)
+
+- **Diagnóstico inicial** (semana 1): una actividad corta sobre los prerrequisitos. Si hay vacíos
+  grandes, se ajusta el ritmo desde el principio en vez de avanzar sobre bases débiles.
+- **Semáforo** en las semanas que da `calcular` (cada 2 o 3 semanas), con `tiempo.js semaforo`:
+
+| Indicador | 🟢 | 🟡 | 🔴 |
+|---|---|---|---|
+| Ritmo de cobertura (retraso frente a los hitos) | usa menos de la mitad de la holgura | usa entre la mitad y toda la holgura | ya se pasó de la holgura |
+| Apropiación en los chequeos (% del curso que acierta) | 70 % o más | 50 % a 69 %: corregir errores frecuentes | menos de 50 %: detenerse y volver a enseñar |
+| Tiempo real de las actividades frente al estimado | hasta 1,2 veces | 1,2 a 1,5 veces | más de 1,5 veces |
+
+- **Si no va a alcanzar, repriorizar a tiempo, no acelerar a ciegas**:
+  1. mantener intactos el núcleo y los momentos de práctica y retroalimentación;
+  2. compactar o integrar lo complementario en un taller, proyecto o pregunta integradora;
+  3. pasar ejercicios extensos a trabajo autónomo (juego en Modo Estudiante, hojas de referencia,
+     guías del sitio) y dejar el aula para lo que necesita guía directa.
 
 ---
 
 ## 4. Malla curricular (año)
 
-| Período | Ejes / temas | DBA (n.º y texto corto) | Estándares | Evidencias de aprendizaje | Recursos de los sitios |
-|---|---|---|---|---|---|
+Primero se temporiza cada período con `tiempo.js` (un `calcular` por período, con sus propios
+descuentos: semana santa, receso de mitad de año, semana de desarrollo institucional, etc.).
+
+| Período | Semanas · horas efectivas | Unidades (núcleo) | DBA (n.º y texto corto) | Estándares | Evidencias de aprendizaje | Hitos de cierre | Recursos de los sitios |
+|---|---|---|---|---|---|---|---|
 
 Reglas para la malla:
 - Respeta el orden de los módulos de cada sitio (BioNom: Célula → División → Reinos → Ecosistemas →
@@ -81,4 +115,7 @@ Reglas para la malla:
   el docente pida otro.
 - Usa `node scripts/plan.js curso bio <grado>` para ver qué DBA y estándares tocan a ese grado y
   que ninguno quede sin período.
-- En la última fila, anota los DBA o estándares que el año **no** cubre, si los hay.
+- Menos temas aislados y más núcleos articulados: si un período tiene más de 4 o 5 unidades para su
+  tiempo efectivo, fusiónalas alrededor de una meta común.
+- En la última fila, anota los DBA o estándares que el año **no** cubre, si los hay, y lo que quedó
+  como complementario.

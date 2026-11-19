@@ -1009,7 +1009,8 @@
         },
         {
          "id": "neurona",
-         "titulo": "08 La neurona y el impulso nervioso Profundización 10.°–11.°"
+         "titulo": "08 La neurona y el impulso nervioso",
+         "profundizacion": true
         },
         {
          "id": "reproduccion",
@@ -1180,7 +1181,8 @@
         },
         {
          "id": "fluidos",
-         "titulo": "07 La mecánica de fluidos en los seres vivos Profundización 10.°–11.°"
+         "titulo": "07 La mecánica de fluidos en los seres vivos",
+         "profundizacion": true
         }
        ],
        "simulaciones": false
@@ -1861,11 +1863,13 @@
         },
         {
          "id": "tipos-sel",
-         "titulo": "13 Tipos de selección natural Profundización 10.°–11.°"
+         "titulo": "13 Tipos de selección natural",
+         "profundizacion": true
         },
         {
          "id": "variacion",
-         "titulo": "14 ¿De dónde sale la variación? Y el papel del azar Profundización 10.°–11.°"
+         "titulo": "14 ¿De dónde sale la variación? Y el papel del azar",
+         "profundizacion": true
         }
        ],
        "simulaciones": true
