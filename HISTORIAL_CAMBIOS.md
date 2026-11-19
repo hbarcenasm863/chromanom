@@ -7,6 +7,30 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-19 (195) — Cuatro skills nuevas para hacer documentos en el chat
+
+### Contexto
+El docente preguntó qué otras skills de Claude se podían crear a partir de lo que ya tienen BioNom, ChromaNom e IonNom, sin repetir las que ya tiene instaladas (`nom-banco`, `estilo-evaluaciones-rufino-cuervo`, `chromanom-estructuras`). De las propuestas escogió cuatro: planeación de clases, hojas de referencia, fórmulas inorgánicas y presentaciones. La idea es pedirle a Claude en el chat planeaciones, hojas y diapositivas que se vean y se escriban igual que sus sitios.
+
+### Cambios (carpeta `skill/`, junto a `chromanom-estructuras`)
+- **`nom-planeacion`**: planes de clase, secuencias de 4 sesiones (la misma lógica de las guías del panel docente), planes de período y mallas. Trae los temas de los tres sitios con su alineación copiada sin cambios: DBA de biología con sus evidencias y Estándares del MEN de BioNom; DBA 11.º, evidencias SED y estándares de ChromaNom. En IonNom la alineación con la SED de 10.º es una **propuesta de la skill**, marcada así, porque IonNom no la trae escrita. También trae las secciones de cada página con su enlace, las sesiones 1 y 2 del panel docente y los «Puedo…». `scripts/plan.js` consulta los datos y `scripts/actualizar.js` los vuelve a sacar de los repositorios.
+- **`nom-hoja-referencia`**: hojas de referencia en PDF tamaño carta con el logo, la marca de agua, los colores y el pie de cada sitio. El contenido se agranda solo hasta llenar la página, como `ajustar()` de `referencias.js` de BioNom. Antes de entregar avisa de emojis que Windows no dibuja, fórmulas orgánicas con paréntesis, «semanas de gestación» y ATP. Trae la letra Outfit, Fraunces y JetBrains Mono (licencia OFL) y las 164 fotos de los tres sitios con su cita APA (`scripts/fotos.js`).
+- **`ionom-formulas`**: equivalente de `chromanom-estructuras` para la química inorgánica. Trae los 552 compuestos del banco de IonNom y `scripts/formula.js`, que da los nombres en los tres sistemas tal como están en el sitio y formula a partir del nombre. Escribe subíndices y cargas reales, pinta el código de 4 colores de IonNom (catión, anión, OH⁻ y oxoanión) en HTML, SVG o PNG, balancea ecuaciones y calcula la masa molar. Lo que no está en el banco lo calcula con las reglas del sitio y lo marca «calculado: revisar».
+- **`nom-presentacion`**: diapositivas de clase (.pptx) con la marca de cada sitio, hechas con `scripts/nom-pptx.js` sobre pptxgenjs. Trae portada, palabras clave, secciones, fotos con su cita APA debajo, chequeos con la explicación de cada opción, notas del orador y una diapositiva final con código QR al sitio. Sigue los principios de Mayer de los sitios.
+- Cada skill trae también su `.zip` (`skill/<nombre>.zip`), listo para subir a claude.ai.
+
+### Pasos manuales pendientes
+- Instalar las cuatro skills en claude.ai (Configuración → Capacidades → Skills → subir cada `.zip`), o con el botón «Guardar skill» de los archivos que se enviaron en el chat.
+- Cuando cambien los sitios, actualizar los datos de las skills con `actualizar.js` (planeación, fórmulas) y `fotos.js actualizar` (hojas y presentaciones), y volver a subirlas.
+- No se tocó `chromanom-analytics.gs` ni ninguna página del sitio: no hay que redesplegar ni subir la versión del caché.
+
+### Pendiente o sin resolver
+- Los DBA de química de 10.º no están en los datos de ningún sitio: la planeación de IonNom los deja «por verificar» hasta que el docente dé el texto oficial.
+- La alineación SED de los temas de IonNom es una propuesta: conviene que el docente la confirme y, si quiere, escribirla en `assets/docente-datos.js` de IonNom.
+- En IonNom conviven «hierro (III)» y «hierro(III)», y «2H₂O» y «2 H₂O»: la skill usa la forma del banco («hierro (III)») y el coeficiente con espacio.
+
+---
+
 ## 2026-11-18 (194) — Cierre de los pendientes de la sesión 193 (DBA 11.º)
 
 ### Contexto
