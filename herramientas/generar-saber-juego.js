@@ -20,7 +20,7 @@ const RXN=[[/exot[ée]rmic|endot[ée]rmic|energ[ií]a de activaci[óo]n|ΔH|Biur
   [/amina|nitrilo/i,'rxn_aminas'],
   [/[aá]cido|carbox[ií]l/i,'rxn_acidos']];
 const TEMA={
-  cadena:()=> 'cadena_principal', alcanos:()=>'alcanos', aromaticos:()=>'benceno', haluros:()=>'haluros',
+  carbono:()=>'hibridacion', cadena:()=> 'cadena_principal', alcanos:()=>'alcanos', aromaticos:()=>'benceno', haluros:()=>'haluros',
   polifuncionales:()=>'polifuncionales', isomeria:()=>'isomeria',
   alquenos:t=>/alquino|etino|acetileno/i.test(t)?'alquinos':'alquenos',
   alcoholes:t=>/fenol/i.test(t)?'fenoles':/[ée]ter|etoxi|metoxi/i.test(t)?'eteres':'alcoholes',

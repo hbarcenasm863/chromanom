@@ -7,6 +7,22 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-19 (199) — Banco Saber: 84 preguntas nuevas desde hibridación en adelante
+
+### Contexto
+El docente pidió ampliar los bancos hacia ~30 preguntas por tema y competencia, reforzando sobre todo la **indagación** (lo más débil en las instituciones), y pasar a ChromaNom «desde hibridación en adelante». El tema de hibridación (`carbono`) no tenía ninguna pregunta tipo Saber y la explicación era la competencia más corta en casi todos los temas (4 a 13 por tema).
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 84 preguntas Saber originales: 12 del tema nuevo `carbono` (hibridación: 3 de uso, 4 de explicación, 5 de indagación) y 6 en cada uno de los otros 12 temas (cadena, alcanos, alquenos, aromáticos, haluros, alcoholes, carbonilos, ácidos, nitrogenados, polifuncionales, isomería y reacciones; en cadena 2/2/2, en el resto 1/2/3). En total 16 de uso, 28 de explicación y 40 de indagación; 9 de ciencia, tecnología y sociedad; 9 con estructura dibujada (`f`, todas se dibujan con el motor de ChromaNom). Ninguna fórmula lleva ramas entre paréntesis.
+- **Auditoría independiente** (un agente resolvió las 84 a ciegas y las contrastó con el Marco del Icfes): coincidió con la clave en 83 de 84; 64 aprobadas, 13 con ajuste menor y 7 por corregir. Se aplicó el informe completo: P5 tenía el texto de otra pregunta como correcta; en P67 el dibujo salía sin su hidrógeno (−COOH); etoximetano y metoxietano eran el mismo compuesto (ahora propan-2-ol); opciones duplicadas; una tabla de pruebas de reconocimiento que no sustentaba la clave (ahora con 2,4-DNPH); letras de muestras que chocaban con las de las opciones; y plantillas repetidas. La opción correcta es la más larga en 24 % de las preguntas y nunca por más de 8 caracteres.
+- `herramientas/generar-saber-juego.js`: el tema `carbono` se asigna al tema del Juego `hibridacion`. `saber-juego.js` regenerado: 366 preguntas (hibridación pasa de 0 a 11 en el Juego; las de estructura dibujada solo salen en el panel docente).
+- `sw.js`: caché `chromanom-v99`; `docente-datos.js?v=99` y `saber-juego.js?v=99`. Probado con Playwright: `docente.html` y `juego.html` cargan sin errores y el tema `carbono` aparece con 12 preguntas.
+
+### Pendiente
+Revisión del docente por muestreo (sobre todo indagación). Faltan preguntas para llegar a 30 por competencia en cada tema (por ejemplo, alquenos tiene 19 de uso, 6 de explicación y 12 de indagación) y para las evidencias 2.3, 4.7, 5.7, 6.2, 7.1 y 8.2; hay una sola pregunta de nivel 4. Los temas de propiedades y biomoléculas siguen sin bloque propio de preguntas Saber. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-11-19 (198) — Aviso de uso de IA según la Directiva 002 de 2026
 
 ### Contexto
