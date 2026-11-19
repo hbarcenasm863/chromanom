@@ -7,6 +7,20 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-19 (198) — Aviso de uso de IA según la Directiva 002 de 2026
+
+### Contexto
+El docente compartió la Directiva 002 de 2026 de la Secretaría General de Bogotá (uso de IA generativa en comunicaciones institucionales, radicada el 8 de octubre de 2026) y pidió aplicar a los sitios los arreglos que resultaran de revisarla. La directiva (numerales 3.4 y 4.1.8) pide declarar cuando la IA generó sustancialmente el texto de una pieza pública, y que en caso de duda se declare.
+
+### Cambios
+- `site-ui.js`: el `<footer>` de todas las páginas agrega «Parte de este contenido fue generado con apoyo de inteligencia artificial y revisado y aprobado por el docente Harvey Bárcenas Morales.» (clase `aviso-ia`).
+- `sw.js`: caché `chromanom-v98`; `site-ui.js?v=98` en las 18 páginas. Probado con Playwright en cuatro páginas: aviso presente y sin errores.
+
+### Pendiente
+Preguntar a rectoría o a la SED si el material del aula cuenta como «comunicación institucional»; mientras tanto se declara. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-11-19 (197) — Planeación temporizada con el calendario real
 
 ### Contexto

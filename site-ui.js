@@ -270,3 +270,18 @@ window.CN_FASES_EXTRA=[];
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',pinta);else pinta();
 })();
+
+/* Aviso de uso de IA (Directiva 002 de 2026, Secretaría General de Bogotá, numeral 3.4):
+   se agrega al pie de todas las páginas. */
+(function(){
+  function aviso(){
+    var pie=document.querySelector('footer');
+    if(!pie||pie.querySelector('.aviso-ia'))return;
+    var d=document.createElement('div');
+    d.className='aviso-ia';
+    d.style.cssText='margin-top:6px;font-size:.72rem;opacity:.92;line-height:1.5';
+    d.textContent='Parte de este contenido fue generado con apoyo de inteligencia artificial y revisado y aprobado por el docente Harvey Bárcenas Morales.';
+    pie.appendChild(d);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',aviso);else aviso();
+})();
