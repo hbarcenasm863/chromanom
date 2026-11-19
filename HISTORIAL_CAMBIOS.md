@@ -7,6 +7,34 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-19 (196) — Presentaciones más completas con los criterios didácticos del docente
+
+### Contexto
+El docente revisó la presentación de óxidos de la sesión 195 y la encontró muy básica: no explicaba bien el cruce de cargas ni cada sistema de nomenclatura y le faltaban ejemplos. Además pidió que **todas** las presentaciones cumplan sus criterios: apertura (meta, fenómeno ancla y activación de ideas previas), construcción (vocabulario, los tres niveles de representación de Johnstone y andamiaje paso a paso), práctica guiada (ejemplo resuelto, chequeos cada 10–15 minutos y consigna de actividad), cierre (síntesis y ticket de salida) y diseño (una idea por diapositiva, 30 % de texto como máximo, señalización). Señaló fallas concretas de la versión anterior: los anhídridos con menos desarrollo, la foto de halita (NaCl) en un tema de óxidos, la falta de un ejemplo guiado antes del chequeo de CuO y la falta de un cierre que volviera a la reja. También pidió que las flechas del cruce de cargas no se vieran desordenadas.
+
+### Cambios (`skill/nom-presentacion/`)
+- **`scripts/nom-pptx.js`**: diapositivas nuevas:
+  - apertura: `objetivo` y `encuesta` (predicción sin respuesta);
+  - construcción: `johnstone` (foto, modelo de partículas y símbolos), `modeloIonico`, `modeloMolecula`, `pasos` progresivos, `cruce` de cargas dibujado, `tabla` y `fichas` con el código de colores;
+  - práctica: `ejemplo` resuelto que se revela paso a paso, `ejercicios` con su diapositiva de respuestas, `consigna` con roles, criterios de éxito y tiempo;
+  - cierre: `mapa` conceptual incompleto con su versión resuelta y `ticket` de salida.
+  Al guardar avisa de las viñetas de más de 8 palabras y de las diapositivas con más de 45 palabras. Se agrandó la letra de tablas, tarjetas, pasos y ejemplos para proyectar en el salón.
+- **Cruce de cargas**: cada flecha sale justo debajo de una carga y llega justo encima del subíndice que produce. Las dos se cruzan en el espacio vacío entre las filas, sin pasar por encima de los recuadros, y cada número va del color del ion del que viene.
+- **`referencias/guion.md`**: los criterios del docente como estructura obligatoria, con reglas de diseño, extensión y lista de revisión. **`SKILL.md`** remite a ellos y exige profundidad (regla + ejemplo resuelto + ejercicios).
+- **`referencias/ejemplo.js`**: clase completa de óxidos de 71 diapositivas (bloque de 110 minutos), con todas las correcciones que pidió el docente. Incluye la diapositiva espejo de anhídridos y los cruces C⁴⁺ → CO₂ y S⁶⁺ → SO₃.
+- Foto nueva con su cita APA: herrumbre (McLassus, 2006, CC BY-SA 3.0), en `assets/fotos-extra/`, registrada como `oxido_hierro`.
+- `skill/nom-presentacion.zip` actualizado.
+
+### Pasos manuales pendientes
+- Volver a instalar la skill `nom-presentacion` en claude.ai (reemplaza la versión anterior).
+- No se tocó ninguna página del sitio ni `chromanom-analytics.gs`.
+
+### Pendiente o sin resolver
+- Los criterios quedaron en `nom-presentacion`. Si el docente quiere, se pueden llevar también a las guías de `nom-planeacion` (por ejemplo, el ticket de salida y los tres niveles de representación en cada sesión).
+- La foto de la herrumbre podría sumarse a IonNom (`assets/fotos/`) para usarla en el sitio.
+
+---
+
 ## 2026-11-19 (195) — Cuatro skills nuevas para hacer documentos en el chat
 
 ### Contexto

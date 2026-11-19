@@ -59,7 +59,8 @@ if (cmd === 'buscar') {
       const f = una(k); const nombre = path.join(destino, path.basename(f.archivo));
       const urls = [`https://raw.githubusercontent.com/hbarcenasm863/${f.repo}/main/${f.archivo}`, `https://hbarcenasm863.github.io/${f.repo}/${f.archivo}`];
       let ok = false;
-      for (const u of urls) {
+      if (f.local && fs.existsSync(path.join(__dirname, '..', f.local))) { fs.copyFileSync(path.join(__dirname, '..', f.local), nombre); ok = true; }
+      if (!ok) for (const u of urls) {
         try { const r = await fetch(u); if (r.ok) { fs.writeFileSync(nombre, Buffer.from(await r.arrayBuffer())); ok = true; break; } } catch (e) { /* siguiente */ }
       }
       console.log(ok ? `${nombre}\n  Cita: ${apa(f)}` : `No pude descargar «${k}». Si los repositorios están en el equipo, cópiala de ${f.repo}/${f.archivo}.`);
