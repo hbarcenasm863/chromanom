@@ -18,11 +18,14 @@ El docente pidió continuar con las preguntas pendientes de los tres sitios (un 
 - `saber-juego.js` regenerado con `node herramientas/generar-saber-juego.js`: 402 preguntas (las 36 nuevas entran al Juego).
 - `sw.js`: caché `chromanom-v100`; `docente-datos.js?v=100`, `saber-juego.js?v=100`. Probado con Playwright: `docente.html` y `juego.html` sin errores.
 
+### Auditoría con agente experto (ciencias naturales, Saber 11/Icfes y MEN)
+Coincidió con la clave en 36 de 36; 4 aprobadas, 13 con ajuste menor y 19 corregidas. Se aplicó todo: la pregunta de hidrogenación del benceno decía «un doble enlace menos» (tiene uno más) y se rehízo con 3 × 120 = 360 kJ/mol frente a 208; el ácido etanoico se compara ahora con propan-1-ol (misma masa molar); la viscosidad lleva propan-1-ol y masa molar; las de amina y permanganato se reformularon; se cambiaron distractores absurdos y se igualaron largos (la correcta es la más larga en 11 de 36). Datos con fuente (CRC, Brown, Wade) o marcados «de ejemplo». Caché `chromanom-v101`.
+
 ### Pasos manuales pendientes
 Ninguno (no se tocó `chromanom-analytics.gs`).
 
 ### Pendiente o sin resolver
-- Esta vez **no** hubo auditoría independiente a ciegas: la revisión de contenido la hizo el mismo autor. Conviene que el docente revise una muestra (sobre todo las de indagación).
+- Que el docente revise una muestra, sobre todo las de indagación, y a ojo las tablas y gráficas de las preguntas 4, 6, 12, 23, 27 y 35.
 - Siguen por debajo de 30 por competencia todos los temas (cadena, alcanos, haluros, alcoholes, carbonilos, reacciones y carbono, entre otros) y las evidencias 2.3, 4.7, 5.7, 6.2, 7.1 y 8.2. Propiedades y biomoléculas siguen sin bloque propio.
 
 ---
