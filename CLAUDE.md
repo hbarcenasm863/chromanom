@@ -40,6 +40,30 @@ en este repositorio: cuando una tarea queda lista y probada, Claude hace commit 
 push a `main` (desde la rama de trabajo, fast-forward) sin volver a preguntar. Si
 en una sesión el docente indica otra cosa, se respeta lo que diga en esa sesión.
 
+## Regla: toda auditoría de contenido se hace con agentes expertos
+
+Establecida por el docente (22-11-2026). Cada lote de preguntas, guías, talleres
+o contenido nuevo que se agregue a los bancos o a las páginas **se audita con
+agentes expertos independientes** (no basta la revisión del mismo autor), uno
+por cada categoría que el contenido necesite. Como mínimo:
+
+- **Experto en ciencias naturales** de la disciplina (biología, química orgánica
+  o química inorgánica): resuelve cada pregunta a ciegas y verifica datos,
+  cálculos, nomenclatura y rigor científico.
+- **Experto en evaluación Saber 11 / Icfes**: modelo basado en evidencias,
+  competencia y afirmación correctas (`c`, `af`), calidad de ítem y distractores.
+- **Experto en currículo MEN**: Estándares Básicos de Competencias y DBA que
+  cubre cada pregunta.
+- **Experto en datos, tablas y gráficas** (cuando haya): calidad de libro de
+  texto, unidades, fuentes o «Datos de ejemplo», y que los datos sustenten la clave.
+- Otros expertos según el contenido (didáctica y principios de Mayer, fórmulas
+  sin paréntesis, imágenes y licencias, accesibilidad, etc.).
+
+Los agentes reciben el archivo del lote, resuelven a ciegas y entregan una
+versión corregida más un informe; Claude aplica el informe completo, regenera
+lo que dependa (p. ej. `saber-juego.js`) y deja constancia en el historial de
+cuántos agentes participaron y qué hallaron.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las
