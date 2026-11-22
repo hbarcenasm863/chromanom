@@ -33,6 +33,13 @@ contenido del repositorio (`juego.html`, `chromanom-analytics.gs`,
 puramente de consulta (preguntas, explicaciones) sin tocar archivos, no
 hace falta registrar nada.
 
+## Push a `main`
+
+El docente estableció (22-11-2026) que hacer **push a `main` está autorizado**
+en este repositorio: cuando una tarea queda lista y probada, Claude hace commit y
+push a `main` (desde la rama de trabajo, fast-forward) sin volver a preguntar. Si
+en una sesión el docente indica otra cosa, se respeta lo que diga en esa sesión.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las
