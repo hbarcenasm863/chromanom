@@ -7,6 +7,25 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-22 (201) — Lote 2 del banco Saber: 36 preguntas con tablas y gráficas, auditadas por tres expertos
+
+### Contexto
+El docente pidió el siguiente lote con tablas y gráficas «de libro de texto» y que toda auditoría la hagan agentes expertos de cada categoría (regla nueva en `CLAUDE.md`).
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 36 preguntas Saber en cadena, alcanos, haluros, alcoholes, carbonilos e hibridación; 33 traen tabla o gráfica (CRC, Brown, Wade, McMurry, IPCC); sin fórmulas con ramas entre paréntesis.
+- **Proceso:** (1) un agente redactó el lote; (2) un experto en química orgánica y datos verificó cada cifra (corrigió el bromuro/etóxido: 91/9 y 21/79 se midieron a 55 °C, retiró citas insostenibles y rotuló datos aproximados); (3) un experto en Saber/Icfes y MEN detectó que el lote no tenía preguntas de uso comprensivo ni N1 y reemplazó 5 (Wöhler, alcanos, solubilidad de alcoholes, derivado 2,4-DNFH y R-134a), con lo que se cubren las seis evidencias poco trabajadas (2.3, 4.7, 5.7, 6.2, 7.1, 8.2); (4) un último experto verificó los datos de esas 5 (GWP del IPCC 2007, puntos de ebullición, solubilidades de Wade, puntos de fusión de derivados). Coincidencia con la clave a ciegas: 36 de 36.
+- Composición: uso 2, explicación 15, indagación 19; 5 ítems de nivel 4.
+- `saber-juego.js` regenerado (438 preguntas). Caché `chromanom-v103`; `docente-datos.js?v=103`, `saber-juego.js?v=103`. Probado con Playwright sin errores.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+Falta el tipo de pregunta I3 y hay pocas de uso comprensivo: compensar en el próximo lote. Conviene que el docente revise a ojo las tablas de alcanos, alcoholes y derivados y la referencia histórica de Wöhler.
+
+---
+
 ## 2026-11-22 (200) — Banco Saber: 36 preguntas más de explicación e indagación
 
 ### Contexto
