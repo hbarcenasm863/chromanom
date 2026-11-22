@@ -7,6 +7,26 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-22 (200) — Banco Saber: 36 preguntas más de explicación e indagación
+
+### Contexto
+El docente pidió continuar con las preguntas pendientes de los tres sitios (un lote por sitio), llevando cada tema hacia ~30 por competencia y reforzando la indagación. En ChromaNom se escogieron los temas con menos explicación: alquenos (6), nitrogenados (7) y los de 9 (aromáticos, ácidos, polifuncionales, isomería).
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 36 preguntas Saber originales, 6 por tema en alquenos, nitrogenados, aromáticos, ácidos, polifuncionales e isomería (2 o 3 de explicación y 3 o 4 de indagación). 12 traen tabla o gráfica; todas sin fórmulas con ramas entre paréntesis (se usan nombres, fórmulas moleculares y enlaces lineales). Las cifras inventadas dicen «Datos de ejemplo»; las reales, «Valores aproximados».
+- Cuentas nuevas (explicación / indagación): alquenos 9 / 15, nitrogenados 10 / 14, aromáticos 11 / 16, ácidos 11 / 16, polifuncionales 11 / 15, isomería 11 / 15.
+- `saber-juego.js` regenerado con `node herramientas/generar-saber-juego.js`: 402 preguntas (las 36 nuevas entran al Juego).
+- `sw.js`: caché `chromanom-v100`; `docente-datos.js?v=100`, `saber-juego.js?v=100`. Probado con Playwright: `docente.html` y `juego.html` sin errores.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+- Esta vez **no** hubo auditoría independiente a ciegas: la revisión de contenido la hizo el mismo autor. Conviene que el docente revise una muestra (sobre todo las de indagación).
+- Siguen por debajo de 30 por competencia todos los temas (cadena, alcanos, haluros, alcoholes, carbonilos, reacciones y carbono, entre otros) y las evidencias 2.3, 4.7, 5.7, 6.2, 7.1 y 8.2. Propiedades y biomoléculas siguen sin bloque propio.
+
+---
+
 ## 2026-11-19 (199) — Banco Saber: 84 preguntas nuevas desde hibridación en adelante
 
 ### Contexto
