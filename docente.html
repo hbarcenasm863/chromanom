@@ -451,6 +451,7 @@ body.sin-eval .solo-eval{display:none}
     <button type="button" role="tab" id="tab-guias" data-tab="guias" data-panel="gen" data-tipo="guia" aria-controls="panel-gen" aria-selected="true">📘 Guías</button>
     <button type="button" role="tab" id="tab-talleres" data-tab="talleres" data-panel="gen" data-tipo="taller" aria-controls="panel-gen" aria-selected="false" tabindex="-1">✏️ Talleres</button>
     <button type="button" role="tab" id="tab-evaluaciones" data-tab="evaluaciones" data-panel="gen" data-tipo="evaluacion" aria-controls="panel-gen" aria-selected="false" tabindex="-1">📝 Evaluaciones</button>
+    <button type="button" role="tab" id="tab-banco" data-tab="banco" data-panel="bs" aria-controls="panel-bs" aria-selected="false" tabindex="-1">📚 Banco de preguntas<span id="bsel-insignia"></span></button>
     <button type="button" role="tab" id="tab-laberintos" data-tab="laberintos" data-panel="lab" aria-controls="panel-lab" aria-selected="false" tabindex="-1">🧭 Laberintos</button>
     <button type="button" role="tab" id="tab-crucigramas" data-tab="crucigramas" data-panel="cz" aria-controls="panel-cz" aria-selected="false" tabindex="-1">🔤 Crucigramas</button>
     <button type="button" role="tab" id="tab-ahorcado" data-tab="ahorcado" data-panel="ah" aria-controls="panel-ah" aria-selected="false" tabindex="-1">🪢 Ahorcado</button>
@@ -462,6 +463,7 @@ body.sin-eval .solo-eval{display:none}
   </div>
 
   <section class="panel" id="panel-gen" role="tabpanel" aria-labelledby="tab-guias">
+    <div id="bsel-aviso" class="no-print"></div>
     <div class="tipo-intro" data-solo="guia"><strong>📘 Guía de aprendizaje</strong> Cuatro sesiones: aprendizajes previos, información del tema, trabajo práctico y la evaluación en hojas aparte.</div>
     <div class="tipo-intro" data-solo="taller" hidden><strong>✏️ Taller</strong> Hojas de ejercicios de práctica (nombrar, dibujar, partes del nombre, reacciones, cazar errores, selección múltiple y ejercicios abiertos).</div>
     <div class="tipo-intro" data-solo="evaluacion" hidden><strong>📝 Evaluación</strong> Preguntas tipo Saber 11 de selección múltiple, preguntas abiertas y ejercicios de cazar errores, con hoja de respuestas y rúbricas opcionales.</div>
@@ -564,6 +566,9 @@ body.sin-eval .solo-eval{display:none}
   </section>
 
   <!-- ══════════════ LABERINTOS (laberinto.js) ══════════════ -->
+  <!-- ══ BANCO DE PREGUNTAS (banco-sel.js) ══ -->
+  <section class="panel act-panel" id="panel-bs" role="tabpanel" aria-labelledby="tab-banco" hidden><div id="bs-app"></div></section>
+
   <section class="panel act-panel" id="panel-lab" role="tabpanel" aria-labelledby="tab-laberintos" hidden>
    <div id="lab-app" data-mode="nom">
     <div class="tipo-intro"><strong>🧭 Laberinto</strong> Una hoja con casillas A, B, C…: en cada una el estudiante resuelve un ejercicio y sigue la flecha rotulada con su respuesta hasta llegar a FIN. Solo hay una ruta correcta; algunas casillas son trampas. Se puede imprimir o jugar en pantalla.</div>
@@ -1131,7 +1136,7 @@ window.addEventListener('afterprint',function(){
 (function(){
   var btns=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
   var IDS=btns.map(function(b){return b.dataset.tab;});
-  var PANELES={gen:'panel-gen',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',sp:'panel-sp',cr:'panel-cr',mp:'panel-mp',dt:'panel-dt',ori:'panel-ori'};
+  var PANELES={gen:'panel-gen',bs:'panel-bs',lab:'panel-lab',cz:'panel-cz',ah:'panel-ah',sp:'panel-sp',cr:'panel-cr',mp:'panel-mp',dt:'panel-dt',ori:'panel-ori'};
   var oriIds=['metodo','mapa','secuencia','curriculo','rubricas','seguimiento','evaluacion','faq'];
   function aplicarTipo(tipo){
     var r=document.querySelector('input[name=tipodoc][value="'+tipo+'"]');
@@ -1149,12 +1154,13 @@ window.addEventListener('afterprint',function(){
     var b=btns.filter(function(x){return x.dataset.tab===id;})[0]||btns[0],panel=b.dataset.panel;
     btns.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on?'true':'false');x.tabIndex=on?0:-1;});
     Object.keys(PANELES).forEach(function(k){var el=document.getElementById(PANELES[k]);if(el)el.hidden=k!==panel;});
-    ['gen','lab','cz','ah','sp','cr','mp','dt','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
+    ['gen','bs','lab','cz','ah','sp','cr','mp','dt','ori'].forEach(function(k){document.body.classList.toggle('tab-'+k,k===panel);});
     document.getElementById(PANELES[panel]).setAttribute('aria-labelledby',b.id);
     if(b.dataset.tipo)aplicarTipo(b.dataset.tipo);
     if(!sinGuardar){try{localStorage.setItem('chromanom-docente-tab',b.dataset.tab);}catch(e){}
       history.replaceState(null,'',b.dataset.tab==='guias'?location.pathname:'#'+b.dataset.tab);}
     if(panel==='gen')window.dispatchEvent(new Event('resize'));
+    if(panel==='bs'&&window.BancoSel)window.BancoSel.montar(document.getElementById('bs-app'));
     if(panel==='lab'&&window.LABERINTO)window.LABERINTO.ajustar();
     if(panel==='cz'&&window.CRUCIGRAMA)window.CRUCIGRAMA.render();
     if(panel==='ah'&&window.AHORCADO)window.AHORCADO.render();
@@ -1187,6 +1193,9 @@ window.addEventListener('afterprint',function(){
 <script src="docente-datos.js?v=105"></script>
 <script src="saber-icfes.js?v=97"></script>
 <script src="icfes-datos.js?v=97"></script>
+<script src="referentes-men.js?v=1"></script>
+<script src="banco-sel-cfg.js?v=1"></script>
+<script src="banco-sel.js?v=1"></script>
 <script src="docente-app.js?v=97"></script>
 <script src="fundamentos.js?v=97"></script>
 <script src="temas-extra.js?v=97"></script>
