@@ -21,6 +21,25 @@ Ningún banco de ChromaNom usa aún los campos nuevos; falta el lote de química
 
 ---
 
+## 2026-11-23 (207) — Lote 5 del banco Saber: N1, E3 y nivel 4 en los seis temas nuevos, auditado por dos expertos
+
+### Contexto
+Seis temas del panel docente (tipos de carbono, cadenas, orbitales, propiedades, biomoléculas y ambiente) quedaron con solo 6 preguntas Saber tras el lote de la sesión 203. El docente pidió continuar con lo pendiente. El lote se construyó con el modelo basado en evidencias del Icfes y `REFERENTES_CURRICULARES.md` (regla del 23-11-2026).
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 36 preguntas Saber, 6 por tema (1 de uso comprensivo, 2 de explicación y 3 de indagación; 6 N1 reales: preguntas investigables, la hipótesis de Baeyer sobre los anillos y el experimento de Avery, MacLeod y McCarty). Las 36 traen tabla o gráfica (CRC, McMurry, Wade, Brown, Bruice, Nelson y Cox, Clayden, NOAA, Woodwell; los inventados dicen «Datos de ejemplo»). Sin fórmulas con ramas entre paréntesis.
+- **Proceso (3 agentes):** (1) redactor; (2) experto en química y datos corrigió 20: la tabla de tipos de carbono solo traía puntos de ebullición y se le agregó la columna que clasifica el carbono, el 80 % de caña de azúcar era 86 %, varias citas a Brown retiradas por no sostenerse y gráficas con eje truncado que ahora parten de cero; (3) experto en Saber/Icfes y MEN corrigió 12 (reclasificó una N3 a N2, bajó el nivel 4 de 14 a 7, quitó absolutos delatores, igualó claves más largas) y anotó estándar, DBA y priorizado de cada una. Coincidencia con la clave a ciegas: 36 de 36 en ambas auditorías.
+- **Contradicción resuelta por Claude:** los dos auditores se contradijeron sobre la concentración de DDT en el agua (Woodwell et al., 1967): el primero retiró 0,00005 ppm por no sostenerse (las fuentes dan unos 3 × 10⁻⁶ ppm) y el segundo la restituyó. Con los valores del mismo estudio (6,0 ppm en la gaviota argéntea) la relación es de más de un millón de veces: se dejó 0,000003 ppm.
+- `saber-juego.js` regenerado (474; estos temas solo salen en el panel docente). Caché `chromanom-v109`; `docente-datos.js?v=` +1. Probado con Playwright sin errores.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+Cada uno de esos seis temas tiene 12 preguntas Saber (la meta es 30 por competencia). Los auditores no pudieron consultar fuentes en línea: conviene que el docente revise a ojo las tablas de propiedades y biomoléculas. El tema tipos_carbono no tiene ninguna pregunta de nivel 4.
+
+---
+
 ## 2026-11-23 (206) — Mensaje del generador cuando hay selección del Banco de preguntas
 
 ### Contexto
