@@ -7,6 +7,20 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (207) — Motor de figuras nuevo en `saber-icfes.js` (sin preguntas todavía)
+
+### Contexto
+El docente pidió preguntas que dependan de analizar gráficas, imágenes o tablas (ejemplo: esquema de tamaños atómicos y gráfica de radio contra Z). El primer lote se hizo en IonNom y el archivo `saber-icfes.js` es el mismo en los tres sitios.
+
+### Cambios
+- `saber-icfes.js`: nuevos `graf:{tipo:'xy'}`, `esq:{tipo:'tp'}` / `esq:{svg}` y `opsGraf` (opciones A–D dibujadas). Copia idéntica a la de IonNom.
+- `sw.js`: `CACHE` de `chromanom-v107` a `chromanom-v108`.
+
+### Pendiente
+Ningún banco de ChromaNom usa aún los campos nuevos; falta el lote de química orgánica con figuras. Detalle y auditoría en el `CHANGELOG.md` de IonNom.
+
+---
+
 ## 2026-11-23 (206) — Mensaje del generador cuando hay selección del Banco de preguntas
 
 ### Contexto
