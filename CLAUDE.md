@@ -64,6 +64,26 @@ versión corregida más un informe; Claude aplica el informe completo, regenera
 lo que dependa (p. ej. `saber-juego.js`) y deja constancia en el historial de
 cuántos agentes participaron y qué hallaron.
 
+## Regla: todo contenido se revisa contra `REFERENTES_CURRICULARES.md`
+
+Establecida por el docente (23-11-2026). `REFERENTES_CURRICULARES.md` (el mismo
+archivo en BioNom, ChromaNom e IonNom) resume, grado por grado de 6.° a 11.°,
+los Estándares Básicos de Competencias (MEN, 2004), los DBA (MEN, 2016) y los
+Aprendizajes priorizados (SED Bogotá, 2025) de biología, química y física, más
+el modelo basado en evidencias del Icfes (DCE, Marco Saber 11.° 2019).
+
+- **Antes de agregar** preguntas del juego, Saber, abiertas, guías, talleres,
+  evaluaciones, crucigramas, sopas, ahorcados, criptogramas, detective o
+  laberintos, se pasa la lista de verificación de su sección 7: grado y DBA,
+  estándar, priorizado, competencia, vocabulario del grado y rigor.
+- **Toda pregunta de opción múltiple se construye con el modelo basado en
+  evidencias del Icfes** (sección 6): primero competencia (`c`), afirmación
+  (`af`), evidencia del Marco, componente y nivel (1 a 4); después la tarea y el
+  ítem, con distractores que nacen de errores concretos.
+- Los agentes expertos que auditan cada lote reciben este archivo y verifican
+  contra él; el historial deja constancia de lo que encontraron.
+- Si se cambia el archivo en un repositorio, se copia igual a los otros dos.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las

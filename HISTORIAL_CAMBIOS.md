@@ -7,6 +7,23 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (204) — Resumen de estándares, DBA y aprendizajes priorizados (`REFERENTES_CURRICULARES.md`)
+
+### Contexto
+El docente subió los Estándares Básicos de Competencias (MEN 2004), los DBA de Ciencias Naturales (MEN 2016), los Aprendizajes priorizados de la SED Bogotá (2025) y la Guía del Diseño Centrado en Evidencias del Icfes, y pidió un resumen por grado (biología, química y física) contra el que se revise toda pregunta nueva de los tres sitios, con las de opción múltiple hechas según el modelo basado en evidencias del Icfes.
+
+### Cambios
+- `REFERENTES_CURRICULARES.md` (nuevo, igual en BioNom, ChromaNom e IonNom): estándares por grupo de grados, DBA de 6.° a 11.° con sus evidencias, priorizados SED por grado, qué cubre cada sitio (ChromaNom: DBA 11.4 como eje, con 8.2, 9.3 y lo químico de 11.5), progresión por eje, modelo DCE del Icfes con la equivalencia entre los códigos `af` y las afirmaciones y evidencias del Marco 2019, niveles de desempeño, reglas del ítem y listas de verificación.
+- `CLAUDE.md`: regla nueva «todo contenido se revisa contra `REFERENTES_CURRICULARES.md`».
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente
+El banco existente no se revisó contra el resumen; la regla se aplica a lo nuevo.
+
+---
+
 ## 2026-11-23 (203) — Lote 4 del banco Saber: los seis temas que no tenían ninguna pregunta, auditado por tres expertos
 
 ### Contexto
