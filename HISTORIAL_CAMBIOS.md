@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (203) — Lote 4 del banco Saber: los seis temas que no tenían ninguna pregunta, auditado por tres expertos
+
+### Contexto
+Seis temas del panel docente (tipos de carbono, clasificación de cadenas, orbitales y aromaticidad, propiedades físicas, biomoléculas y ambiente) tenían 0 preguntas Saber. El docente pidió seguir con el siguiente lote enfocado en lo que quedó corto (preguntas N1 y E3) y con tablas y gráficas de libro.
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 36 preguntas Saber, 6 por tema (2 de uso comprensivo, 2 de explicación y 2 de indagación); las 36 traen tabla o gráfica (CRC, Brown, Wade, McMurry, Nelson y Cox, Campbell, IPCC, OMS, NOAA, Marmur y Doty; los inventados dicen «Datos de ejemplo»). Sin fórmulas con ramas entre paréntesis.
+- **Proceso (4 agentes):** (1) redactor; (2) experto en química y datos: serie de ozono de Halley Bay recortada a 1960–1984 (la publicación de Farman et al. usaba datos hasta 1984), reemplazó la pregunta de cinética enzimática por la de temperatura de fusión del ADN frente a % de G+C, corrigió una explicación errónea sobre el flúor y los máximos de absorción de filtros solares; (3) experto en Saber/Icfes y MEN: verificó que hay 4 N1 reales (no 6) y 9 de nivel 4, reclasificó 8 `af`, reemplazó la vulcanización (no se enseña) por detergentes ABS y LAS y amplió la tabla de orbitales moleculares; (4) experto en datos verificó las 5 reescritas: corrigió el C₂ (602 kJ/mol y 124 pm según el CRC) y comprobó Tm con la relación de Marmur y Doty (69,3 + 0,41·%G+C). Coincidencia con la clave a ciegas: 36 de 36.
+- `saber-juego.js` regenerado (474; estos seis temas no tienen equivalente en el Juego, así que solo salen en el panel docente). Caché `chromanom-v105`; `docente-datos.js?v=105`, `saber-juego.js?v=105`. Probado con Playwright sin errores.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+Cada uno de esos seis temas tiene solo 6 preguntas Saber (la meta es 30 por competencia). Las que no se enseñan en las páginas (MTBE, Meselson-Stahl) llevan el contexto necesario dentro de la pregunta. Sumar las evidencias `sed11c` y est4 a la `alin` de los temas.
+
+---
+
 ## 2026-11-23 (202) — Lote 3 del banco Saber: uso comprensivo, indagación y nivel 4, auditado por dos expertos
 
 ### Contexto
