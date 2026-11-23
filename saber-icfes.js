@@ -88,7 +88,7 @@ function componente(q,defecto){
 
 /* ── generador de números al azar: se usa el que pasa cada sitio ── */
 function mezclar(a,r){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function tieneCtx(q){return !!(q.icfes||(q.ctx&&String(q.ctx).replace(/<[^>]+>/g,'').trim().length>25)||q.img||q.tabla||q.graf||q.fig||q.f);}
+function tieneCtx(q){return !!(q.icfes||(q.ctx&&String(q.ctx).replace(/<[^>]+>/g,'').trim().length>25)||q.img||q.tabla||q.graf||q.esq||q.opsGraf||q.fig||q.f);}
 /* Escoge n preguntas del pool repartidas por competencia.
    op.prioIcfes (por defecto true): las oficiales del Icfes van primero.
    op.tema(q): función que devuelve el tema (para no repetir tema seguido).
@@ -150,6 +150,7 @@ function imgsHTML(l,cls){
    Lleva ancho y alto fijos para que la paginación mida bien la hoja. */
 function numTxt(v){return String(Math.round(v*100)/100).replace('.',',');}
 function grafHTML(g){
+  if(g&&g.tipo==='xy')return '<div class="icfes-fig icfes-graf">'+xyHTML(g)+'</div>';
   if(!g||!g.x)return '';
   var W=300,H=176,L=46,R=10,T=16,B=48,ser=g.series||[{n:'',y:g.y}],bar=g.tipo==='bar';
   var lo=g.ymin||0,mx=lo;ser.forEach(function(z){z.y.forEach(function(v){if(v>mx)mx=v;});});
@@ -175,10 +176,83 @@ function grafHTML(g){
   if(m>1)ser.forEach(function(z,k){o+='<rect x="'+(L+k*84)+'" y="1" width="9" height="7" fill="'+col[k%3]+'"/><text x="'+(L+k*84+12)+'" y="7.5" font-size="9">'+e(z.n)+'</text>';});
   return '<div class="icfes-fig icfes-graf"><svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:100%;height:auto;font-family:sans-serif" role="img" aria-label="Gráfica de datos de la pregunta">'+o+'</svg></div>';
 }
+/* ── Figuras nuevas (versión de 23-11-2026) ─────────────────────────────
+   graf:{tipo:'xy', series:[{n,pts:[[x,y],…]}], xmin,xmax,ymin,ymax, ex,ey,
+         sinNum:true (ejes sin números: gráficas cualitativas), mini:true
+         (tamaño de opción), puntos:true, notas:[{x,y,t}]}
+   esq:{tipo:'tp', circulos:true, hasta:5, marcas:{Z:'X'}, rotulos:false}
+       esquema de la tabla periódica (Z 1 a 54): con circulos:true cada
+       celda dibuja el radio atómico calculado; con marcas, la celda de
+       ese Z muestra solo la letra (sin símbolo).
+   esq:{svg:'<svg …>'}  dibujo propio (el autor pone width, height y aria-label).
+   opsGraf:[graf|esq ×4]  opciones A–D dibujadas; la pregunta lleva fijo:true y r. */
+var TP_RAD=[0,53,31,167,112,87,67,56,48,42,38,190,145,118,111,98,88,79,71,243,194,184,176,171,166,161,156,152,149,145,142,136,125,114,103,94,88,265,219,212,206,198,190,183,178,173,169,165,161,156,145,133,123,115,108];
+var TP_SIM='H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe'.split(' ');
+function tpPos(z){
+  if(z<=2)return [1,z===1?1:18];
+  if(z<=10)return [2,z<=4?z-2:z+8];
+  if(z<=18)return [3,z<=12?z-10:z-0];
+  var i=z<=36?z-19:z-37;return [z<=36?4:5,i+1];
+}
+function ticksNice(lo,hi,max){
+  var rango=(hi-lo)||1,mag=Math.pow(10,Math.floor(Math.log10(rango/max))),paso=mag;
+  [1,2,2.5,5,10].some(function(m){paso=m*mag;return rango/paso<=max;});
+  var t=[],a=Math.ceil(lo/paso-1e-9)*paso;for(var v=a;v<=hi+1e-9;v+=paso)t.push(Math.round(v*1e6)/1e6);return t;
+}
+function xyHTML(g){
+  var mini=!!g.mini,sn=!!g.sinNum,W=mini?176:300,H=mini?120:180,L=sn?(mini?16:20):44,R=8,T=g.series.length>1?18:8,B=sn?(mini?20:24):38,fs=mini?8:9;
+  var xs=[],ys=[];g.series.forEach(function(s){s.pts.forEach(function(p){xs.push(p[0]);ys.push(p[1]);});});
+  var x0=g.xmin!=null?g.xmin:Math.min.apply(null,xs),x1=g.xmax!=null?g.xmax:Math.max.apply(null,xs);
+  var y0=g.ymin!=null?g.ymin:Math.min.apply(null,ys),y1=g.ymax!=null?g.ymax:Math.max.apply(null,ys);
+  if(y1===y0)y1=y0+1;if(x1===x0)x1=x0+1;
+  var xt=g.xt||(sn?[]:ticksNice(x0,x1,6)),yt=g.yt||(sn?[]:ticksNice(y0,y1,5));
+  var pw=W-L-R,ph=H-T-B;
+  function X(v){return L+(v-x0)/(x1-x0)*pw;}function Y(v){return T+ph-(v-y0)/(y1-y0)*ph;}
+  var col=['#1f4e79','#c55a11','#2e7d32','#7b1fa2'],o='';
+  yt.forEach(function(t){o+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(t).toFixed(1)+'" y2="'+Y(t).toFixed(1)+'" stroke="#ddd"/><text x="'+(L-4)+'" y="'+(Y(t)+3).toFixed(1)+'" text-anchor="end" font-size="'+fs+'">'+numTxt(t)+'</text>';});
+  xt.forEach(function(t){o+='<line x1="'+X(t).toFixed(1)+'" x2="'+X(t).toFixed(1)+'" y1="'+(T+ph)+'" y2="'+(T+ph+3)+'" stroke="#333"/><text x="'+X(t).toFixed(1)+'" y="'+(T+ph+12)+'" text-anchor="middle" font-size="'+fs+'">'+numTxt(t)+'</text>';});
+  o+='<line x1="'+L+'" x2="'+L+'" y1="'+T+'" y2="'+(T+ph)+'" stroke="#333"/><line x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ph)+'" y2="'+(T+ph)+'" stroke="#333"/>';
+  g.series.forEach(function(s,k){
+    var d=s.pts.map(function(p){return X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1);}).join(' ');
+    o+='<polyline fill="none" stroke="'+col[k%4]+'" stroke-width="'+(mini?1.4:1.8)+'"'+(k===1?' stroke-dasharray="5 3"':'')+' points="'+d+'"/>';
+    if(g.puntos)s.pts.forEach(function(p){o+='<circle cx="'+X(p[0]).toFixed(1)+'" cy="'+Y(p[1]).toFixed(1)+'" r="2.6" fill="'+col[k%4]+'"/>';});
+  });
+  (g.notas||[]).forEach(function(n){o+='<text x="'+X(n.x).toFixed(1)+'" y="'+Y(n.y).toFixed(1)+'" font-size="'+(fs+1)+'" font-weight="700" text-anchor="middle">'+e(n.t)+'</text>';});
+  if(g.ex)o+='<text x="'+(L+pw/2)+'" y="'+(H-(mini?4:6))+'" text-anchor="middle" font-size="'+(mini?8:10)+'" font-weight="700">'+e(g.ex)+'</text>';
+  if(g.ey)o+='<text transform="translate('+(mini?9:11)+','+(T+ph/2)+') rotate(-90)" text-anchor="middle" font-size="'+(mini?8:10)+'" font-weight="700">'+e(g.ey)+'</text>';
+  if(g.series.length>1)g.series.forEach(function(z,k){o+='<rect x="'+(L+k*92)+'" y="3" width="9" height="7" fill="'+col[k%4]+'"/><text x="'+(L+k*92+12)+'" y="9.5" font-size="9">'+e(z.n)+'</text>';});
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:100%;height:auto;font-family:sans-serif" role="img" aria-label="'+e(g.alt||'Gráfica de la pregunta')+'">'+o+'</svg>';
+}
+function tpHTML(f){
+  var c=18,mL=18,mT=16,per=f.hasta||5,W=mL+18*c+4,H=mT+per*c+4,o='',marc=f.marcas||{};
+  for(var g=1;g<=18;g++)o+='<text x="'+(mL+(g-0.5)*c)+'" y="'+(mT-4)+'" text-anchor="middle" font-size="8" fill="#555">'+g+'</text>';
+  for(var p=1;p<=per;p++)o+='<text x="'+(mL-5)+'" y="'+(mT+(p-0.5)*c+3)+'" text-anchor="end" font-size="8" fill="#555">'+p+'</text>';
+  var zmax=[0,2,10,18,36,54][per];
+  for(var z=1;z<=zmax;z++){
+    var ps=tpPos(z),cx=mL+(ps[1]-0.5)*c,cy=mT+(ps[0]-0.5)*c,m=marc[z];
+    o+='<rect x="'+(cx-c/2)+'" y="'+(cy-c/2)+'" width="'+c+'" height="'+c+'" fill="'+(m?'#fff3cd':'#fff')+'" stroke="#777"/>';
+    if(f.circulos&&!m){var r=TP_RAD[z]/265*(c/2-1);o+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r.toFixed(2)+'" fill="'+(f.relleno?'#cfe2f3':'none')+'" stroke="#1f4e79" stroke-width="1"/>';}
+    if(m)o+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="11" font-weight="700">'+e(m)+'</text>';
+    else if(f.simbolos)o+='<text x="'+cx+'" y="'+(cy+3)+'" text-anchor="middle" font-size="8">'+TP_SIM[z-1]+'</text>';
+  }
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:100%;height:auto;font-family:sans-serif" role="img" aria-label="'+e(f.alt||'Esquema de la tabla periódica')+'">'+o+'</svg>';
+}
+function esqHTML(f){
+  if(!f)return '';
+  var s=f.tipo==='tp'?tpHTML(f):(f.svg||'');
+  return s?'<div class="icfes-fig icfes-graf">'+s+(f.pie?'<div class="icfes-cred">'+e(f.pie)+'</div>':'')+'</div>':'';
+}
+function opsGrafHTML(q){
+  if(!q.opsGraf)return '';
+  return '<div class="icfes-ops-graf">'+q.opsGraf.map(function(g,i){
+    var s=g.tipo==='xy'?xyHTML(g):(g.tipo==='tp'?tpHTML(g):(g.svg||''));
+    return '<div class="og"><b>'+'ABCD'.charAt(i)+')</b><br>'+s+'</div>';}).join('')+'</div>';
+}
+
 // Lo que va entre el contexto y el enunciado: figuras, tablas y gráficas.
-function extraHTML(q){return (q.icfes?imgsHTML(q.img):'')+tablaHTML(q.tabla)+grafHTML(q.graf);}
+function extraHTML(q){return (q.icfes?imgsHTML(q.img):'')+tablaHTML(q.tabla)+grafHTML(q.graf)+esqHTML(q.esq);}
 // Figura con las opciones A–D dibujadas (las opciones no se barajan).
-function opsImgHTML(q){return q.imgOps?imgsHTML(q.imgOps,'ops'):'';}
+function opsImgHTML(q){return q.opsGraf?opsGrafHTML(q):(q.imgOps?imgsHTML(q.imgOps,'ops'):'');}
 function creditoHTML(q){
   if(!q.icfes)return '';
   return '<div class="icfes-cred">Pregunta '+q.icfes+' del <i>Cuadernillo de preguntas Saber 11.º, Prueba Ciencias Naturales</i> (Icfes, 2026). Uso académico, sin ánimo de lucro.</div>';
@@ -338,6 +412,7 @@ function css(){
   var s=document.createElement('style');s.id='icfes-css';
   s.textContent='.icfes-fig{margin:6px 0;text-align:center;break-inside:avoid}.icfes-fig img{max-width:100%;height:auto}'+
     '.icfes-tab{border-collapse:collapse;margin:6px auto;font-size:.86em}.icfes-tab th,.icfes-tab td{border:1px solid #888;padding:2px 7px;text-align:center}.icfes-tab th{background:#eef2f6}'+
+    '.icfes-ops-graf{display:flex;flex-wrap:wrap;gap:6px 10px;justify-content:center;margin:6px 0}.icfes-ops-graf .og{flex:0 0 46%;text-align:center;font-size:.85em;break-inside:avoid}'+
     '.icfes-cred{font-size:.72em;color:#555;font-style:italic;margin-top:3px}'+
     '.icfes-mat table{border-collapse:collapse;width:100%;font-size:.78em}.icfes-mat th,.icfes-mat td{border:1px solid #999;padding:3px 5px;vertical-align:top;text-align:left}.icfes-mat th{background:#eef2f6}'+
     '.icfes-res,.icfes-cita{font-size:.78em;margin:6px 0}'+
@@ -350,5 +425,5 @@ if(typeof document!=='undefined'){if(document.readyState==='loading')document.ad
 window.SABER_ICFES={AF:AF,COMP:COMP,COMPONENTE:COMPONENTE,META:META,CITA:CITA,
   competencia:competencia,afirmacion:afirmacion,componente:componente,elegir:elegir,resumen:resumen,
   extraHTML:extraHTML,opsImgHTML:opsImgHTML,creditoHTML:creditoHTML,matrizHTML:matrizHTML,citaHTML:citaHTML,
-  tablaHTML:tablaHTML,grafHTML:grafHTML,preguntas:preguntas,colocar:colocar,matrizBloques:matrizBloques,renumerar:renumerar,aplicarOrden:aplicarOrden};
+  tablaHTML:tablaHTML,grafHTML:grafHTML,esqHTML:esqHTML,opsGrafHTML:opsGrafHTML,preguntas:preguntas,colocar:colocar,matrizBloques:matrizBloques,renumerar:renumerar,aplicarOrden:aplicarOrden};
 })();
