@@ -1157,7 +1157,7 @@ var ultimo=null;
 function generar(){
   var F=leerForm();
   var info=$('vista-info');
-  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marque al menos un tema.</p>';return Promise.resolve();}
+  if(!F.temas.length){info.innerHTML='<p class="aviso warn">Marque al menos un tema'+(window.BancoSel&&window.BancoSel.activo()?' (da el título y los ejercicios del documento; las preguntas Saber siguen siendo las que elegiste en el Banco de preguntas)':'')+'.</p>';return Promise.resolve();}
   info.innerHTML='<p class="aviso">⏳ Armando el documento'+(F.nVersiones>1?'s':'')+'…</p>';
   return bancosListos.then(function(){
     // La letra de libro (STIX) se descarga solo cuando se usa: hay que

@@ -7,6 +7,22 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (206) — Mensaje del generador cuando hay selección del Banco de preguntas
+
+### Contexto
+Con la selección del Banco de preguntas activa, el formulario sigue exigiendo marcar al menos un tema y el aviso no explicaba por qué.
+
+### Cambios
+- `docente-app.js`: el aviso «Marque al menos un tema» ahora aclara que el tema da el título y los ejercicios del documento y que las preguntas Saber siguen siendo las elegidas en el Banco de preguntas. Quitar el requisito no es posible sin rehacer el generador (el tema fija el título, los ejercicios y las preguntas abiertas). Caché `chromanom-v107`; `docente-app.js?v=98`.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente o sin resolver
+Los lotes de preguntas en curso (ver las próximas entradas).
+
+---
+
 ## 2026-11-23 (205) — «Banco de preguntas»: selector por grado, DBA, estándar y aprendizaje priorizado
 
 ### Contexto
