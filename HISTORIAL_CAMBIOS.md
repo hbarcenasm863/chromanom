@@ -7,6 +7,24 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (202) — Lote 3 del banco Saber: uso comprensivo, indagación y nivel 4, auditado por dos expertos
+
+### Contexto
+El docente pidió seguir con el siguiente lote, enfocado en lo que quedó corto: preguntas de uso comprensivo, indagación y nivel 4, con tablas y gráficas de libro de texto.
+
+### Cambios
+- `docente-datos.js` (bloque nuevo al final): 36 preguntas Saber en alquenos, nitrogenados, aromáticos, ácidos, polifuncionales e isomería, todas con tabla o gráfica; sin fórmulas con ramas entre paréntesis (solo Stock y signos ópticos).
+- **Proceso:** (1) un agente redactó el lote; (2) un experto en química orgánica y datos corrigió 12 preguntas: el distractor «3-hidroxipropanal» no era isómero (C₃H₆O₂ y no C₃H₆O₃), el de «anilina» en la nitración era dudoso (se protona y da cerca de 47 % meta), cifras de rapidez de bromación sin fuente (rotuladas «de ejemplo»), carbono del hexano 83,6 %, pKa del ácido sórbico 4,76 y una curva de titulación ampliada a 9 puntos; (3) un experto en Saber/Icfes y MEN reclasificó 8 (el lote casi no tenía indagación: quedó uso 13, explicación 12, indagación 11), hizo que la tabla de estereoisómeros de aldosas sea necesaria (aldoheptosa: 2⁵ = 32) y quitó pistas que regalaban la clave. Cuentas verificadas de nuevo por Claude (Henderson-Hasselbalch de la glicina y estereoisómeros). Coincidencia con la clave a ciegas: 36 de 36.
+- `saber-juego.js` regenerado. Caché `chromanom-v104`; `docente-datos.js?v=104`, `saber-juego.js?v=104`. Probado con Playwright sin errores.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+Este lote usa por primera vez E3/CTS y deja de usar N1: conviene equilibrar en el próximo. Revisar a ojo las tablas y los estándares citados (en 11.° no hay DBA de orgánica).
+
+---
+
 ## 2026-11-22 (201) — Lote 2 del banco Saber: 36 preguntas con tablas y gráficas, auditadas por tres expertos
 
 ### Contexto
