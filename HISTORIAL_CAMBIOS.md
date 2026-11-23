@@ -7,6 +7,25 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-23 (204) — «Banco de preguntas»: selector por grado, DBA, estándar y aprendizaje priorizado
+
+### Contexto
+El docente preguntó si las preguntas nuevas llegaban a talleres, evaluaciones y guías (sí, por sorteo) y pidió poder escoger las preguntas filtrando por grado, estándar y/o DBA, e implementar los DBA, estándares y aprendizajes priorizados en ciencias en los tres sitios, con una pestaña aparte.
+
+### Cambios
+- **Pestaña «📚 Banco de preguntas»** en `docente.html` (`banco-sel.js`, `banco-sel-cfg.js`, `referentes-men.js`): filtra las 562 preguntas Saber por grado, DBA, estándar, aprendizaje priorizado, tema, competencia, afirmación y datos; muestra el texto oficial de cada referente; se eligen con casillas y, con la selección activa, `SABER_ICFES.elegir` entrega las elegidas a guías, talleres y evaluaciones (completa al azar si piden más). Aviso en el panel de generación y contador en la pestaña.
+- **Textos oficiales** (generados): 29 DBA V.1 (MEN, 2016) cotejados con el PDF oficial, 243 Estándares Básicos (MEN, 2004) cotejados con el libro oficial y 30 aprendizajes priorizados (SED Bogotá, 2025, CC BY-NC-ND 4.0, citados sin adaptar).
+- **Relaciones** tema → DBA → estándares y priorizados de los 19 temas: propuestas por un agente experto en currículo y auditadas por otro independiente (alcoholes y carbonilos pasaron a DBA 11.4 directo; se quitó un DBA de alcanos). Cada pregunta hereda las de su tema.
+- `sw.js`: caché `chromanom-v106`; `banco-sel.js?v=2`. Probado con Playwright: filtros, texto oficial y evaluación generada con las preguntas elegidas.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente o sin resolver
+Con la selección activa el formulario sigue exigiendo marcar al menos un tema. Las relaciones de 11.° con DBA son «apoyo» en los temas de nomenclatura (el DBA 11.4 habla de mecanismos). «Propiedades» (fuerzas intermoleculares) se apoya en el DBA 9.3, que es de 9.°.
+
+---
+
 ## 2026-11-23 (203) — Lote 4 del banco Saber: los seis temas que no tenían ninguna pregunta, auditado por tres expertos
 
 ### Contexto
