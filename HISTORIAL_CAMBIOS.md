@@ -21,7 +21,7 @@ Ningún banco de ChromaNom usa aún los campos nuevos; falta el lote de química
 
 ---
 
-## 2026-11-23 (207) — Lote 5 del banco Saber: N1, E3 y nivel 4 en los seis temas nuevos, auditado por dos expertos
+## 2026-11-23 (208) — Lote 5 del banco Saber: N1, E3 y nivel 4 en los seis temas nuevos, auditado por dos expertos
 
 ### Contexto
 Seis temas del panel docente (tipos de carbono, cadenas, orbitales, propiedades, biomoléculas y ambiente) quedaron con solo 6 preguntas Saber tras el lote de la sesión 203. El docente pidió continuar con lo pendiente. El lote se construyó con el modelo basado en evidencias del Icfes y `REFERENTES_CURRICULARES.md` (regla del 23-11-2026).
