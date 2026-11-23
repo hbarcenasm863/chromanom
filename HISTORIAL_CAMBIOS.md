@@ -7,7 +7,7 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
-## 2026-11-23 (204) — «Banco de preguntas»: selector por grado, DBA, estándar y aprendizaje priorizado
+## 2026-11-23 (205) — «Banco de preguntas»: selector por grado, DBA, estándar y aprendizaje priorizado
 
 ### Contexto
 El docente preguntó si las preguntas nuevas llegaban a talleres, evaluaciones y guías (sí, por sorteo) y pidió poder escoger las preguntas filtrando por grado, estándar y/o DBA, e implementar los DBA, estándares y aprendizajes priorizados en ciencias en los tres sitios, con una pestaña aparte.
@@ -18,11 +18,23 @@ El docente preguntó si las preguntas nuevas llegaban a talleres, evaluaciones y
 - **Relaciones** tema → DBA → estándares y priorizados de los 19 temas: propuestas por un agente experto en currículo y auditadas por otro independiente (alcoholes y carbonilos pasaron a DBA 11.4 directo; se quitó un DBA de alcanos). Cada pregunta hereda las de su tema.
 - `sw.js`: caché `chromanom-v106`; `banco-sel.js?v=2`. Probado con Playwright: filtros, texto oficial y evaluación generada con las preguntas elegidas.
 
+## 2026-11-23 (204) — Resumen de estándares, DBA y aprendizajes priorizados (`REFERENTES_CURRICULARES.md`)
+
+### Contexto
+El docente subió los Estándares Básicos de Competencias (MEN 2004), los DBA de Ciencias Naturales (MEN 2016), los Aprendizajes priorizados de la SED Bogotá (2025) y la Guía del Diseño Centrado en Evidencias del Icfes, y pidió un resumen por grado (biología, química y física) contra el que se revise toda pregunta nueva de los tres sitios, con las de opción múltiple hechas según el modelo basado en evidencias del Icfes.
+
+### Cambios
+- `REFERENTES_CURRICULARES.md` (nuevo, igual en BioNom, ChromaNom e IonNom): estándares por grupo de grados, DBA de 6.° a 11.° con sus evidencias, priorizados SED por grado, qué cubre cada sitio (ChromaNom: DBA 11.4 como eje, con 8.2, 9.3 y lo químico de 11.5), progresión por eje, modelo DCE del Icfes con la equivalencia entre los códigos `af` y las afirmaciones y evidencias del Marco 2019, niveles de desempeño, reglas del ítem y listas de verificación.
+- `CLAUDE.md`: regla nueva «todo contenido se revisa contra `REFERENTES_CURRICULARES.md`».
+
 ### Pasos manuales pendientes
 Ninguno (no se tocó `chromanom-analytics.gs`).
 
 ### Pendiente o sin resolver
 Con la selección activa el formulario sigue exigiendo marcar al menos un tema. Las relaciones de 11.° con DBA son «apoyo» en los temas de nomenclatura (el DBA 11.4 habla de mecanismos). «Propiedades» (fuerzas intermoleculares) se apoya en el DBA 9.3, que es de 9.°.
+
+### Pendiente
+El banco existente no se revisó contra el resumen; la regla se aplica a lo nuevo.
 
 ---
 
