@@ -1,0 +1,796 @@
+{
+ "lote": "icfes-chr-1",
+ "experto": "icfes",
+ "revisadas": 166,
+ "coincidencias_a_ciegas": 166,
+ "ev": {
+  "cadena|fpmn7": "5.6",
+  "cadena|129srvs": "2.2",
+  "cadena|gwbzu9": "5.6",
+  "cadena|1xurxap": "4.8",
+  "cadena|101f1x8": "2.2",
+  "cadena|1kj0gb5": "7.3",
+  "cadena|1v85ca7": "9.2",
+  "cadena|424uqb": "5.6",
+  "cadena|2jxewa": "4.8",
+  "cadena|12ixhkr": "2.2",
+  "cadena|15yir2c": "2.2",
+  "cadena|19c5cjs": "9.2",
+  "cadena|2yinl3": "5.6",
+  "cadena|16icoi4": "2.2",
+  "cadena|1w9vs8q": "5.7",
+  "cadena|10t9ml4": "9.2",
+  "cadena|1grwq5d": "2.2",
+  "cadena|1b0ulsk": "2.2",
+  "cadena|1tprxvw": "2.2",
+  "cadena|4col00": "7.3",
+  "cadena|udha5z": "6.2",
+  "cadena|1lq2ig5": "8.1",
+  "cadena|1pbhzg1": "7.3",
+  "cadena|khxr2j": "5.6",
+  "cadena|vhfe0t": "5.6",
+  "cadena|1qopolu": "2.2",
+  "cadena|g5j9d6": "2.2",
+  "cadena|12cp2vv": "7.4",
+  "cadena|1xb8typ": "8.1",
+  "cadena|190puy7": "2.3",
+  "cadena|17fv7on": "3.2",
+  "cadena|pgnjvf": "2.3",
+  "cadena|11e0xwl": "7.3",
+  "cadena|1hemith": "6.2",
+  "cadena|1piiqv9": "8.2",
+  "alcanos|d98x13": "5.6",
+  "alcanos|gjerwh": "5.6",
+  "alcanos|1y1he1q": "2.1",
+  "alcanos|1xurxap": "4.8",
+  "alcanos|1nwpg0c": "2.1",
+  "alcanos|1vpapk7": "7.4",
+  "alcanos|ybhcn0": "1.2",
+  "alcanos|1lstcna": "5.6",
+  "alcanos|10tonkb": "4.6",
+  "alcanos|1hlk637": "1.3",
+  "alcanos|7r8c88": "5.6",
+  "alcanos|1jwlj8i": "2.3",
+  "alcanos|1ss3mqb": "2.2",
+  "alcanos|g2ld06": "7.3",
+  "alcanos|1dbah3m": "5.6",
+  "alcanos|1gyh1gc": "2.3",
+  "alcanos|146zdom": "2.1",
+  "alcanos|1vcki3s": "9.5",
+  "alcanos|1rdev2": "1.3",
+  "alcanos|6o4fph": "5.6",
+  "alcanos|c2kdfi": "4.6",
+  "alcanos|izwqdh": "2.2",
+  "alcanos|mn0xzn": "2.3",
+  "alcanos|9upjjw": "7.4",
+  "alcanos|3v1ryd": "9.2",
+  "alcanos|1b3ujix": "9.2",
+  "alcanos|2gdl1u": "7.3",
+  "alcanos|10f5plu": "8.1",
+  "alcanos|1ybkfpt": "4.6",
+  "alcanos|18absd": "2.2",
+  "alcanos|4hanlm": "1.1",
+  "alcanos|e7tfk8": "9.2",
+  "alcanos|1tf3byq": "8.1",
+  "alcanos|151m60t": "7.4",
+  "alcanos|17pzio3": "2.1",
+  "alcanos|1b047xn": "3.2",
+  "alcanos|vzup9g": "1.2",
+  "alcanos|u6g4ow": "7.3",
+  "alcanos|y5x8zk": "9.5",
+  "alcanos|1fatsl5": "8.1",
+  "alquenos|1xurxap": "4.8",
+  "alquenos|a4y0yw": "5.6",
+  "alquenos|phfjt5": "2.1",
+  "alquenos|hctgkp": "5.6",
+  "alquenos|gw6753": "7.3",
+  "alquenos|1gap1l4": "2.2",
+  "alquenos|82bam5": "4.8",
+  "alquenos|rg62a7": "2.1",
+  "alquenos|1keid8r": "5.6",
+  "alquenos|1teabjs": "5.6",
+  "alquenos|17ygjiu": "4.6",
+  "alquenos|kbahn2": "2.1",
+  "alquenos|1jna30t": "5.6",
+  "alquenos|cjwtd2": "5.6",
+  "alquenos|7k0e0c": "7.4",
+  "alquenos|1gfxroq": "5.7",
+  "alquenos|1k9630o": "4.8",
+  "alquenos|1lru740": "4.6",
+  "alquenos|1ny5fis": "4.6",
+  "alquenos|sdk845": "7.3",
+  "alquenos|18r3ydf": "9.2",
+  "alquenos|be84rv": "7.3",
+  "alquenos|dh06r6": "9.2",
+  "alquenos|pq60rp": "8.1",
+  "alquenos|c27hp9": "6.2",
+  "alquenos|16jgnty": "7.3",
+  "alquenos|zy9ggo": "5.6",
+  "alquenos|1yuiop2": "2.2",
+  "alquenos|17m3ilp": "2.1",
+  "alquenos|1aow74f": "8.1",
+  "alquenos|jklu42": "7.3",
+  "alquenos|he01pg": "9.2",
+  "alquenos|1lw034q": "2.2",
+  "alquenos|20z3sc": "3.2",
+  "alquenos|qfehfm": "2.9",
+  "alquenos|rqnfsm": "7.3",
+  "alquenos|1g839eb": "9.2",
+  "alquenos|1b9mz32": "8.1",
+  "alquenos|1qqcj5s": "5.6",
+  "alquenos|sacj6k": "4.8",
+  "alquenos|bz2hzf": "5.6",
+  "alquenos|1iirxy3": "3.2",
+  "alquenos|1kn3a8m": "2.2",
+  "alquenos|8312wz": "7.3",
+  "aromaticos|1i15vi8": "4.8",
+  "aromaticos|cgi8zc": "2.2",
+  "aromaticos|1j7nta7": "4.8",
+  "aromaticos|1np1745": "1.1",
+  "aromaticos|1ylik2b": "9.5",
+  "aromaticos|1lawj9e": "5.6",
+  "aromaticos|11ongu7": "2.1",
+  "aromaticos|maes9k": "4.8",
+  "aromaticos|1n94gzf": "5.6",
+  "aromaticos|9dfg3c": "2.1",
+  "aromaticos|jk1a50": "5.6",
+  "aromaticos|164vbq": "5.6",
+  "aromaticos|1cvupr8": "2.2",
+  "aromaticos|1shlmvg": "7.4",
+  "aromaticos|q5oxhs": "4.8",
+  "aromaticos|343hzi": "2.2",
+  "aromaticos|1cdaauj": "5.6",
+  "aromaticos|1nfp8ug": "1.1",
+  "aromaticos|1xxfu5a": "5.6",
+  "aromaticos|16kr0v": "4.8",
+  "aromaticos|61y32n": "4.8",
+  "aromaticos|1ro46iu": "2.1",
+  "aromaticos|1i8t0m2": "6.2",
+  "aromaticos|1vnk4o1": "7.3",
+  "aromaticos|g5u124": "7.3",
+  "aromaticos|rdtij9": "9.2",
+  "aromaticos|12gesvo": "8.1",
+  "aromaticos|ozyoki": "6.2",
+  "aromaticos|1fbjcel": "8.1",
+  "aromaticos|3cp19z": "5.6",
+  "aromaticos|tthasn": "2.2",
+  "aromaticos|1lx06nt": "3.2",
+  "aromaticos|a9w9d3": "8.1",
+  "aromaticos|1ydzfrg": "7.4",
+  "aromaticos|7kx6l8": "9.5",
+  "aromaticos|t6h8ys": "2.2",
+  "aromaticos|h7y8rk": "2.2",
+  "aromaticos|ohmbj": "7.3",
+  "aromaticos|1hmqk4e": "9.2",
+  "aromaticos|1g4qw0v": "8.1",
+  "aromaticos|5wphnk": "6.2",
+  "aromaticos|dbakjc": "7.3",
+  "aromaticos|1lfcpw8": "4.8",
+  "aromaticos|ubkmvq": "7.3",
+  "aromaticos|a1gsle": "2.2",
+  "aromaticos|b2b913": "2.1",
+  "aromaticos|1l7ebcd": "8.1"
+ },
+ "nd": {
+  "cadena|fpmn7": 2,
+  "cadena|129srvs": 3,
+  "cadena|gwbzu9": 2,
+  "cadena|1xurxap": 2,
+  "cadena|101f1x8": 2,
+  "cadena|1kj0gb5": 3,
+  "cadena|1v85ca7": 2,
+  "cadena|424uqb": 2,
+  "cadena|2jxewa": 2,
+  "cadena|12ixhkr": 2,
+  "cadena|15yir2c": 2,
+  "cadena|19c5cjs": 3,
+  "cadena|2yinl3": 1,
+  "cadena|16icoi4": 2,
+  "cadena|1w9vs8q": 1,
+  "cadena|10t9ml4": 3,
+  "cadena|1grwq5d": 1,
+  "cadena|1b0ulsk": 3,
+  "cadena|1tprxvw": 2,
+  "cadena|4col00": 2,
+  "cadena|udha5z": 3,
+  "cadena|1lq2ig5": 2,
+  "cadena|1pbhzg1": 2,
+  "cadena|khxr2j": 2,
+  "cadena|vhfe0t": 2,
+  "cadena|1qopolu": 3,
+  "cadena|g5j9d6": 2,
+  "cadena|12cp2vv": 2,
+  "cadena|1xb8typ": 2,
+  "cadena|190puy7": 3,
+  "cadena|17fv7on": 3,
+  "cadena|pgnjvf": 3,
+  "cadena|11e0xwl": 4,
+  "cadena|1hemith": 3,
+  "cadena|1piiqv9": 3,
+  "alcanos|d98x13": 1,
+  "alcanos|gjerwh": 1,
+  "alcanos|1y1he1q": 2,
+  "alcanos|1xurxap": 1,
+  "alcanos|1nwpg0c": 3,
+  "alcanos|1vpapk7": 2,
+  "alcanos|ybhcn0": 2,
+  "alcanos|1lstcna": 1,
+  "alcanos|10tonkb": 2,
+  "alcanos|1hlk637": 1,
+  "alcanos|7r8c88": 1,
+  "alcanos|1jwlj8i": 2,
+  "alcanos|1ss3mqb": 2,
+  "alcanos|g2ld06": 2,
+  "alcanos|1dbah3m": 2,
+  "alcanos|1gyh1gc": 3,
+  "alcanos|146zdom": 2,
+  "alcanos|1vcki3s": 3,
+  "alcanos|1rdev2": 2,
+  "alcanos|6o4fph": 2,
+  "alcanos|c2kdfi": 3,
+  "alcanos|izwqdh": 3,
+  "alcanos|mn0xzn": 2,
+  "alcanos|9upjjw": 2,
+  "alcanos|3v1ryd": 2,
+  "alcanos|1b3ujix": 2,
+  "alcanos|2gdl1u": 2,
+  "alcanos|10f5plu": 2,
+  "alcanos|1ybkfpt": 1,
+  "alcanos|18absd": 2,
+  "alcanos|4hanlm": 2,
+  "alcanos|e7tfk8": 3,
+  "alcanos|1tf3byq": 2,
+  "alcanos|151m60t": 2,
+  "alcanos|17pzio3": 3,
+  "alcanos|1b047xn": 3,
+  "alcanos|vzup9g": 3,
+  "alcanos|u6g4ow": 3,
+  "alcanos|y5x8zk": 3,
+  "alcanos|1fatsl5": 3,
+  "alquenos|1xurxap": 1,
+  "alquenos|a4y0yw": 1,
+  "alquenos|phfjt5": 3,
+  "alquenos|hctgkp": 2,
+  "alquenos|gw6753": 2,
+  "alquenos|1gap1l4": 2,
+  "alquenos|82bam5": 3,
+  "alquenos|rg62a7": 3,
+  "alquenos|1keid8r": 1,
+  "alquenos|1teabjs": 1,
+  "alquenos|17ygjiu": 2,
+  "alquenos|kbahn2": 3,
+  "alquenos|1jna30t": 1,
+  "alquenos|cjwtd2": 1,
+  "alquenos|7k0e0c": 2,
+  "alquenos|1gfxroq": 1,
+  "alquenos|1k9630o": 1,
+  "alquenos|1lru740": 2,
+  "alquenos|1ny5fis": 3,
+  "alquenos|sdk845": 2,
+  "alquenos|18r3ydf": 3,
+  "alquenos|be84rv": 2,
+  "alquenos|dh06r6": 2,
+  "alquenos|pq60rp": 2,
+  "alquenos|c27hp9": 2,
+  "alquenos|16jgnty": 2,
+  "alquenos|zy9ggo": 1,
+  "alquenos|1yuiop2": 2,
+  "alquenos|17m3ilp": 2,
+  "alquenos|1aow74f": 3,
+  "alquenos|jklu42": 2,
+  "alquenos|he01pg": 1,
+  "alquenos|1lw034q": 2,
+  "alquenos|20z3sc": 2,
+  "alquenos|qfehfm": 2,
+  "alquenos|rqnfsm": 3,
+  "alquenos|1g839eb": 2,
+  "alquenos|1b9mz32": 1,
+  "alquenos|1qqcj5s": 3,
+  "alquenos|sacj6k": 3,
+  "alquenos|bz2hzf": 3,
+  "alquenos|1iirxy3": 3,
+  "alquenos|1kn3a8m": 3,
+  "alquenos|8312wz": 4,
+  "aromaticos|1i15vi8": 1,
+  "aromaticos|cgi8zc": 2,
+  "aromaticos|1j7nta7": 1,
+  "aromaticos|1np1745": 1,
+  "aromaticos|1ylik2b": 2,
+  "aromaticos|1lawj9e": 1,
+  "aromaticos|11ongu7": 2,
+  "aromaticos|maes9k": 1,
+  "aromaticos|1n94gzf": 2,
+  "aromaticos|9dfg3c": 2,
+  "aromaticos|jk1a50": 1,
+  "aromaticos|164vbq": 1,
+  "aromaticos|1cvupr8": 2,
+  "aromaticos|1shlmvg": 2,
+  "aromaticos|q5oxhs": 2,
+  "aromaticos|343hzi": 2,
+  "aromaticos|1cdaauj": 1,
+  "aromaticos|1nfp8ug": 2,
+  "aromaticos|1xxfu5a": 1,
+  "aromaticos|16kr0v": 2,
+  "aromaticos|61y32n": 2,
+  "aromaticos|1ro46iu": 3,
+  "aromaticos|1i8t0m2": 2,
+  "aromaticos|1vnk4o1": 3,
+  "aromaticos|g5u124": 2,
+  "aromaticos|rdtij9": 2,
+  "aromaticos|12gesvo": 2,
+  "aromaticos|ozyoki": 2,
+  "aromaticos|1fbjcel": 1,
+  "aromaticos|3cp19z": 2,
+  "aromaticos|tthasn": 2,
+  "aromaticos|1lx06nt": 2,
+  "aromaticos|a9w9d3": 3,
+  "aromaticos|1ydzfrg": 3,
+  "aromaticos|7kx6l8": 3,
+  "aromaticos|t6h8ys": 2,
+  "aromaticos|h7y8rk": 2,
+  "aromaticos|ohmbj": 2,
+  "aromaticos|1hmqk4e": 2,
+  "aromaticos|1g4qw0v": 3,
+  "aromaticos|5wphnk": 3,
+  "aromaticos|dbakjc": 4,
+  "aromaticos|1lfcpw8": 3,
+  "aromaticos|ubkmvq": 3,
+  "aromaticos|a1gsle": 3,
+  "aromaticos|b2b913": 3,
+  "aromaticos|1l7ebcd": 4
+ },
+ "hallazgos": [
+  {
+   "id": "aromaticos|61y32n",
+   "gravedad": "alta",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "El 2,4,6-triclorofenol se usó como conservante de la madera.",
+     "nuevo": "Un triclorofenol se usó como conservante de la madera."
+    }
+   ],
+   "motivo": "La pregunta se responde sin razonar: el contexto ya escribe el nombre que se pide (2,4,6-triclorofenol), que es la clave."
+  },
+  {
+   "id": "aromaticos|1xxfu5a",
+   "gravedad": "alta",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "Cuando un anillo de benceno está unido a una cadena de carbono más larga que él mismo, el anillo ya no se trata como la cadena principal: se nombra como sustituyente, con el nombre del grupo fenilo (C₆H₅−).",
+     "nuevo": "Muchos textos escolares usan un criterio anterior a las recomendaciones IUPAC de 2013: cuando un anillo de benceno está unido a una cadena de carbono más larga que él mismo, el anillo se nombra como sustituyente, con el nombre del grupo fenilo (C₆H₅−). Desde 2013 la IUPAC prefiere tomar siempre el anillo como base."
+    },
+    {
+     "campo": "q",
+     "original": "¿Cómo se nombra un compuesto con un anillo de benceno unido a una cadena lineal de ocho carbonos?",
+     "nuevo": "Según el criterio escolar descrito, ¿cómo se nombra un compuesto con un anillo de benceno unido a una cadena lineal de ocho carbonos?"
+    },
+    {
+     "campo": "distractor",
+     "original": "Con un nombre conservado, distinto de los dos anteriores",
+     "nuevo": "Con un nombre conservado propio, como el tolueno o el estireno"
+    }
+   ],
+   "motivo": "Según las recomendaciones IUPAC de 2013 (P-44.1.2.2) el anillo es siempre superior a la cadena y el nombre preferido es octilbenceno: la opción «benceno con sustituyente octilo» también sería correcta. Se acota al criterio escolar anterior a 2013 y se aclara la regla vigente. Además el distractor «distinto de los dos anteriores» deja de tener sentido cuando se barajan las opciones."
+  },
+  {
+   "id": "aromaticos|1ro46iu",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Los directores orto/para aportan densidad electrónica al anillo (son activantes); los directores meta la retiran (son desactivantes)",
+     "nuevo": "Los grupos −CH₃ y −OH ceden densidad electrónica al anillo (lo activan); −NO₂ y −COOH la retiran (lo desactivan)"
+    }
+   ],
+   "motivo": "La clave generaliza «los directores orto/para aportan densidad electrónica (son activantes)», lo cual es falso para los halógenos (orientan a orto/para y son desactivantes; el mismo lote usa clorobenceno en ubkmvq y 1fbjcel). Se limita la afirmación a los grupos nombrados."
+  },
+  {
+   "id": "aromaticos|16kr0v",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "distractor",
+     "original": "ácido O-hidroxibenzoico",
+     "nuevo": "ácido 6-hidroxibenzoico"
+    }
+   ],
+   "motivo": "El distractor «ácido O-hidroxibenzoico» se lee como el nombre tradicional válido «ácido o-hidroxibenzoico» (mismo compuesto): segunda respuesta defendible. Se cambia por un error de numeración."
+  },
+  {
+   "id": "alquenos|1k9630o",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Isomería geométrica (cis/trans)",
+     "nuevo": "Isomería geométrica"
+    }
+   ],
+   "motivo": "El contexto dice «isómeros distintos, cis y trans» y la clave repite «(cis/trans)»: la palabra delata la respuesta."
+  },
+  {
+   "id": "cadena|19c5cjs",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Escoger qué prueba confirmaría la identidad del gas es diseñar/usar un procedimiento para evaluar una hipótesis (evidencia 9.2), no derivar una conclusión de datos (N2)."
+  },
+  {
+   "id": "alcanos|1vcki3s",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Elegir qué dato adicional sirve para decidir entre dos hipótesis es la evidencia 9.5 (N3), no una conclusión de datos dados (N2)."
+  },
+  {
+   "id": "alcanos|9upjjw",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "«Si el patrón se mantiene, ¿qué valor es más probable?» es predecir con base en patrones (evidencia 7.4, N2), no interpretar datos (N4)."
+  },
+  {
+   "id": "alcanos|ybhcn0",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "Valorar el efecto ambiental de las fugas de metano en la explotación de gas es CTS (afirmación 1, evidencia 1.2), no E1. Además, la clave era mucho más larga que los distractores (pista por longitud): se acorta.",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque el metano es un gas de efecto invernadero más potente que el CO₂ por molécula",
+     "nuevo": "Porque es un gas de efecto invernadero más potente que el CO₂"
+    }
+   ]
+  },
+  {
+   "id": "alcanos|1hlk637",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "La razón de odorizar el gas es el uso seguro de una tecnología (evidencia 1.3, E3). Además, la clave era mucho más larga que los distractores (pista por longitud): se acorta.",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Permite detectar una fuga por el olfato, antes de que el gas acumulado sea un riesgo de explosión",
+     "nuevo": "Permite detectar una fuga por el olor, antes de que haya riesgo"
+    }
+   ]
+  },
+  {
+   "id": "alcanos|1rdev2",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "Derivar una recomendación de seguridad ante fugas de GLP es uso seguro de una tecnología (evidencia 1.3, E3). Además, la clave era mucho más larga que los distractores (pista por longitud): se acorta.",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Ventilar por la parte baja del espacio y evitar generar chispas cerca del piso si se sospecha una fuga",
+     "nuevo": "Ventilar por la parte baja y evitar chispas cerca del piso"
+    }
+   ]
+  },
+  {
+   "id": "alcanos|1jwlj8i",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E1"
+   },
+   "motivo": "Explicar el estado físico por las fuerzas de London es explicar un fenómeno con conceptos (evidencia 2.3, E1); no tiene componente CTS (E3)."
+  },
+  {
+   "id": "aromaticos|1np1745",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "Pregunta sobre el efecto del benceno en la salud de los trabajadores: es CTS, salud individual y pública (evidencia 1.1, E3), no uso I1."
+  },
+  {
+   "id": "aromaticos|1nfp8ug",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "Justificar la norma que limita el benceno por su toxicidad es CTS, salud pública (evidencia 1.1, E3). Además, la clave era mucho más larga que los distractores (pista por longitud): se acorta.",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque el benceno es cancerígeno comprobado, mientras que sus derivados metilados son considerablemente menos tóxicos",
+     "nuevo": "Porque el benceno es cancerígeno comprobado y sus derivados metilados son menos tóxicos"
+    }
+   ]
+  },
+  {
+   "id": "alcanos|10tonkb",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Balancear la ecuación de combustión es la evidencia 4.6 (reacciones y conservación de la masa), de la afirmación 4 (I2)."
+  },
+  {
+   "id": "alcanos|1ybkfpt",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Reconocer los productos de una combustión es asociar un tipo de reacción (evidencia 4.6, I2)."
+  },
+  {
+   "id": "alquenos|17ygjiu",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Reconocer la hidrogenación (adición de H₂) es identificar un tipo de reacción (evidencia 4.6, I2)."
+  },
+  {
+   "id": "alquenos|1lru740",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Balancear la combustión del propeno es la evidencia 4.6 (I2)."
+  },
+  {
+   "id": "alquenos|1ny5fis",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Predecir el producto de la doble adición de HBr es reconocer un tipo de reacción (evidencia 4.6, I2)."
+  },
+  {
+   "id": "cadena|101f1x8",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque los sustituyentes se ordenan alfabéticamente y el prefijo di- no se tiene en cuenta",
+     "nuevo": "Por orden alfabético, sin contar el prefijo di-"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "cadena|1v85ca7",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Contar los carbonos de todos los caminos posibles entre extremos y escoger el más largo",
+     "nuevo": "Contar los carbonos de cada camino posible y escoger el más largo"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "cadena|1w9vs8q",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Resiste mejor la autoignición (el «cascabeleo» del motor), de forma parecida al isooctano",
+     "nuevo": "Resiste mejor la autoignición, como el isooctano"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "cadena|udha5z",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Que existen alcanos estables de más de 30 carbonos, como los de la parafina, con cadenas de enlaces C−C",
+     "nuevo": "Que existen alcanos estables de más de 30 carbonos, como los de la parafina"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alcanos|1ss3mqb",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque sus enlaces C−C y C−H son poco polares y muy estables, así que no reaccionan con facilidad",
+     "nuevo": "Porque sus enlaces C−C y C−H son poco polares y muy estables"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alcanos|1gyh1gc",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque a temperatura ambiente bastan unas 8 atm para que sus fuerzas de London mantengan las moléculas unidas como líquido",
+     "nuevo": "Porque unas 8 atm bastan para que sus fuerzas de London lo mantengan líquido"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alcanos|mn0xzn",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Son apolares (no se mezclan con el agua, que es polar) y menos densos que el agua",
+     "nuevo": "Son apolares y menos densos que el agua"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alcanos|3v1ryd",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Que los dos líquidos estén a la misma temperatura, con la misma superficie y la misma ventilación",
+     "nuevo": "Igual temperatura, superficie expuesta y ventilación"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alcanos|1b3ujix",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Agregar la misma cantidad de hexano a tubos con igual volumen de agua y de aceite, y observar si se forman capas",
+     "nuevo": "Agregar igual cantidad de hexano a agua y a aceite, y ver si se forman capas"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "alquenos|dh06r6",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Dejar un tubo a la luz y otro cubierto, a la misma temperatura, y medir cuánto tarda en perderse el color",
+     "nuevo": "Uno a la luz y otro cubierto, a igual temperatura, y medir cuándo se decolora"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "aromaticos|cgi8zc",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque sus 6 electrones π están deslocalizados en el anillo y la sustitución conserva esa estabilidad",
+     "nuevo": "Porque la sustitución conserva sus electrones π deslocalizados"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "aromaticos|11ongu7",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Ayuda a formar el ion nitronio (NO₂⁺), que es el electrófilo que ataca el anillo",
+     "nuevo": "Ayuda a formar el ion nitronio, NO₂⁺, el electrófilo"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "aromaticos|1shlmvg",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "El ciclohexeno decolora el KMnO₄ porque su doble enlace se oxida; el benceno no reacciona en esas condiciones",
+     "nuevo": "El ciclohexeno decolora el KMnO₄ porque su doble enlace se oxida; el benceno, no"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "aromaticos|1vnk4o1",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Que los seis enlaces son iguales e intermedios entre sencillo y doble, lo que apoya el modelo de anillo con electrones deslocalizados",
+     "nuevo": "Que los seis enlaces son iguales e intermedios, como en un anillo con electrones deslocalizados"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "aromaticos|rdtij9",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Poner volúmenes iguales de cada líquido en vidrios iguales, a la misma temperatura, y medir cuánto tardan en evaporarse",
+     "nuevo": "Poner volúmenes iguales en vidrios iguales, a igual temperatura, y medir cuánto tardan en evaporarse"
+    }
+   ],
+   "motivo": "La clave es mucho más larga que los tres distractores (30 % o más): se elige por longitud. Se acorta sin cambiar su contenido."
+  },
+  {
+   "id": "cadena|129srvs",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "CH₃−CH(C₂H₅)−CH₂−CH₃",
+     "nuevo": "CH₃−⟦C₂H₅|CH⟧−CH₂−CH₃"
+    }
+   ],
+   "motivo": "Fórmula con rama entre paréntesis en el contexto (regla del sitio). Se escribe con la notación del motor FX de fx-libro.js (rama dibujada sobre su carbono)."
+  },
+  {
+   "id": "cadena|12ixhkr",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "CH₃−CH(CH₃)−CH₂−CH(CH₃)−CH₃",
+     "nuevo": "CH₃−⟦CH₃|CH⟧−CH₂−⟦CH₃|CH⟧−CH₃"
+    }
+   ],
+   "motivo": "Fórmula con rama entre paréntesis en el contexto (regla del sitio). Se escribe con la notación del motor FX de fx-libro.js (rama dibujada sobre su carbono)."
+  },
+  {
+   "id": "alcanos|g2ld06",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "CH₃−CH(CH₃)−CH₃",
+     "nuevo": "CH₃−⟦CH₃|CH⟧−CH₃"
+    }
+   ],
+   "motivo": "Fórmula con rama entre paréntesis en el contexto (regla del sitio). Se escribe con la notación del motor FX de fx-libro.js (rama dibujada sobre su carbono)."
+  },
+  {
+   "id": "alquenos|kbahn2",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "CH₂=C(CH₃)−CH₃",
+     "nuevo": "CH₂=⟦CH₃|C⟧−CH₃"
+    }
+   ],
+   "motivo": "Fórmula con rama entre paréntesis en el contexto (regla del sitio). Se escribe con la notación del motor FX de fx-libro.js (rama dibujada sobre su carbono)."
+  }
+ ]
+}

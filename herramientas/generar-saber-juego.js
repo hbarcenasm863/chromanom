@@ -5,7 +5,7 @@
    Hay que volver a correrlo cada vez que se agregan o cambian preguntas SABER. */
 const fs=require('fs'),vm=require('vm');
 const c={console};c.window=c;vm.createContext(c);
-['saber-icfes.js','docente-datos.js'].forEach(f=>vm.runInContext(fs.readFileSync(f,'utf8'),c));
+['saber-icfes.js','docente-datos.js','revision-ref.js'].forEach(f=>vm.runInContext(fs.readFileSync(f,'utf8'),c));
 const SI=c.SABER_ICFES;
 const lim=s=>String(s==null?'':s).replace(/<[^>]+>/g,'');
 const PAREN=/[A-Za-zₐ-ₜ₀-₉]\([A-Za-z₀-₉]+\)[₀-₉]|\(CH|\)CH|C\(/;

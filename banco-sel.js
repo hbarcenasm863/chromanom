@@ -47,7 +47,7 @@ function construir(){
     var q=x.q,tema=x.tema,c=SI?SI.competencia(q):(q.c||'uso'),af=SI?SI.afirmacion(q).cod:(q.af||'');
     var mt=MAPA.temas[tema]||{};
     var delTema=(mt.dba||[]).map(function(d){return d.id||d;});
-    var propios=CFG.dbaDe?CFG.dbaDe(q,tema):null;
+    var propios=CFG.dbaDe?CFG.dbaDe(q,tema):(q.dba?[].concat(q.dba).filter(function(d){return d&&d!=='sin';}).map(String):null);
     var dba=unicos(propios||delTema);
     var est=(mt.estandares||[]).slice(),pri=[];
     /* sin DBA propio, hereda estándares y priorizados de los DBA «cercanos» del tema */
@@ -55,6 +55,7 @@ function construir(){
     (mt.priorizados||[]).forEach(function(p){pri.push(p);});
     var grados=[];
     if(CFG.gradoDe){var gq=CFG.gradoDe(q,tema);if(gq!=null)grados=[].concat(gq);}
+    else if(q.curso)grados=[].concat(q.curso);
     if(!grados.length){dba.forEach(function(d){var n=parseInt(d,10);if(n)grados.push(n);});}
     if(!grados.length){grados=[].concat(mt.grados||mt.grado||[]);}
     var it={q:q,tema:tema,key:claveDe(q,tema),c:c,af:af,dba:dba,est:unicos(est),pri:unicos(pri),grados:unicos(grados).sort(function(a,b){return a-b;}),
@@ -114,7 +115,7 @@ function css(){
 }
 
 /* ── interfaz ── */
-var F={grado:'',dba:'',est:'',pri:'',tema:'',comp:'',af:'',datos:'',q:'',soloSel:false,max:40};
+var F={grado:'',dba:'',est:'',pri:'',tema:'',comp:'',af:'',nd:'',datos:'',q:'',soloSel:false,max:40};
 var RAIZ=null;
 function opcionesCuenta(campo,items){
   var m={};items.forEach(function(it){[].concat(it[campo]).forEach(function(v){m[v]=(m[v]||0)+1;});});return m;
@@ -142,6 +143,7 @@ function filtrar(){
     if(F.tema&&it.tema!==F.tema)return false;
     if(F.comp&&it.c!==F.comp)return false;
     if(F.af&&it.af!==F.af)return false;
+    if(F.nd&&String(it.q.nd||'')!==F.nd)return false;
     if(F.datos==='si'&&!it.datos)return false;
     if(qlow&&it.texto.indexOf(qlow)<0)return false;
     return true;
@@ -154,6 +156,7 @@ function tarjeta(it,sel){
     (it.grados.length?'<span class="bs-t">Grado '+it.grados.join('–')+'.°</span>':'')+
     '<span class="bs-t">'+nombreComp(it.c)+(it.af?' · '+e(it.af):'')+'</span>'+
     it.dba.map(function(d){return '<span class="bs-t">DBA '+e(d)+'</span>';}).join('')+
+    (q.ev?'<span class="bs-t" title="Evidencia del Marco de referencia Saber 11.° (Icfes, 2019)">Evidencia '+e(q.ev)+'</span>':'')+(q.nd?'<span class="bs-t" title="Nivel de desempeño Saber 11.° que exige la pregunta">Nivel '+e(q.nd)+'</span>':'')+
     (q.icfes?'<span class="bs-t">Oficial Icfes '+e(q.icfes)+'</span>':'')+(it.datos?'<span class="bs-t">Con datos</span>':'');
   return '<div class="bs-q'+(sel?' on':'')+'" data-k="'+e(it.key)+'"><div class="bs-cab"><input type="checkbox" aria-label="Elegir esta pregunta"'+(sel?' checked':'')+'><div style="flex:1"><div class="bs-tags">'+tags+'</div>'+
     (q.ctx?'<div class="bs-ctx">'+e(limpio(q.ctx))+'</div>':'')+extra+'<div class="bs-enun">'+e(limpio(q.q))+'</div>'+
@@ -178,7 +181,7 @@ function pintar(){
   var aOpts=afs.filter(function(a){return cA[a];}).map(function(a){return [a,a+' ('+cA[a]+')'];});
   var h='<div class="bsel"><h3>📚 Banco de preguntas</h3><p class="bs-sub">Filtra por grado, DBA, estándar básico o aprendizaje priorizado, elige las preguntas y úsalas en las guías, talleres y evaluaciones. Hay '+items.length+' preguntas tipo Saber 11.</p>'+
    '<div class="bs-filtros">'+selectHTML('bs-grado','Grado',gOpts,F.grado)+selectHTML('bs-dba','DBA (MEN, 2016)',dOpts,F.dba)+selectHTML('bs-est','Estándar básico (MEN, 2004)',eOpts,F.est)+selectHTML('bs-pri','Aprendizaje priorizado (SED Bogotá, 2025)',pOpts,F.pri)+
-   selectHTML('bs-tema','Tema',tOpts,F.tema)+selectHTML('bs-comp','Competencia',[['uso','Uso comprensivo'],['exp','Explicación de fenómenos'],['ind','Indagación']],F.comp)+selectHTML('bs-af','Afirmación (Icfes)',aOpts,F.af)+
+   selectHTML('bs-tema','Tema',tOpts,F.tema)+selectHTML('bs-comp','Competencia',[['uso','Uso comprensivo'],['exp','Explicación de fenómenos'],['ind','Indagación']],F.comp)+selectHTML('bs-af','Afirmación (Icfes)',aOpts,F.af)+selectHTML('bs-nd','Nivel de desempeño (Icfes)',[['1','Nivel 1'],['2','Nivel 2'],['3','Nivel 3'],['4','Nivel 4']],F.nd)+
    selectHTML('bs-datos','Datos',[['si','Con tabla o gráfica']],F.datos)+
    '<div><label for="bs-q">Buscar en el texto</label><input type="search" id="bs-q" value="'+e(F.q)+'" placeholder="palabra o frase"></div></div>'+
    infoRef()+
@@ -197,7 +200,7 @@ function pintar(){
   if(foco){var f=document.getElementById(foco);if(f&&f.id==='bs-q'){f.focus();try{f.setSelectionRange(pos,pos);}catch(x){}}}
 }
 function enlazar(lista){
-  var ids={'bs-grado':'grado','bs-dba':'dba','bs-est':'est','bs-pri':'pri','bs-tema':'tema','bs-comp':'comp','bs-af':'af','bs-datos':'datos'};
+  var ids={'bs-grado':'grado','bs-dba':'dba','bs-est':'est','bs-pri':'pri','bs-tema':'tema','bs-comp':'comp','bs-af':'af','bs-nd':'nd','bs-datos':'datos'};
   Object.keys(ids).forEach(function(id){var el=document.getElementById(id);if(el)el.onchange=function(){F[ids[id]]=el.value;F.max=40;pintar();};});
   var q=document.getElementById('bs-q');if(q)q.oninput=function(){F.q=q.value;F.max=40;clearTimeout(enlazar.t);enlazar.t=setTimeout(pintar,250);};
   var u=document.getElementById('bs-usar');if(u)u.onchange=function(){estado.usar=u.checked;guardar();evento();};

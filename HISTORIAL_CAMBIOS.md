@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-24 (210) — Revisión del banco Saber contra los referentes curriculares (parte 1: evaluación Icfes)
+
+### Contexto
+El docente pidió revisar todo el banco existente de los tres sitios contra `REFERENTES_CURRICULARES.md` con agentes expertos y dejarlo en `main`. El límite de uso cortó a los agentes dos veces, así que se publica por partes. Esta parte cubre **398 de las 637 preguntas Saber** de ChromaNom (lotes 1, 2 y 4: cadena, alcanos, alquenos, aromáticos, haluros, alcoholes, carbonilos, ácidos y los seis temas nuevos).
+
+### Proceso
+Tres agentes expertos en evaluación Icfes (química orgánica) resolvieron las 398 **a ciegas**: 398 de 398 coinciden con la clave. Asignaron evidencia del Marco Saber 11.° 2019 y nivel de desempeño a todas y revisaron competencia, afirmación y calidad del ítem. Instrucciones e informes en `revision-referentes-2026-11/`.
+
+### Hallazgos (77)
+- **2 altos:** una pregunta de aromáticos que se respondía sin razonar (el contexto traía el nombre pedido) y la del octilbenceno, que según la IUPAC 2013 tenía dos respuestas defendibles (se acotó y se aclaró la regla vigente).
+- **58 medios:** 36 afirmaciones y 28 competencias corregidas (CFC, HFC, metanol y formol pasan a E3; reconocer una reacción o un nombre pasa a uso I2; predicciones con datos pasan a N2), **fórmulas con ramas entre paréntesis** en contextos y opciones reescritas sin paréntesis, y un dato histórico del benceno (Kekulé 1865, objeción de Ladenburg 1869).
+- **7 bajos:** distractores débiles y preguntas casi repetidas.
+- 36 correcciones de texto aplicadas y verificadas una por una.
+
+### Cambios
+- `docente-datos.js`: correcciones de texto. `revision-ref.js` (nuevo, generado): etiquetas revisadas (`c`, `af`, `ev`, `nd`) por la clave del «Banco de preguntas»; se carga después de `docente-datos.js` y lo usa `herramientas/generar-saber-juego.js`.
+- `banco-sel.js` (igual en los tres sitios): muestra evidencia y nivel de desempeño, filtro nuevo «Nivel de desempeño (Icfes)» y acepta `dba`/`curso` escritos en la pregunta.
+- `saber-juego.js` regenerado. Caché `chromanom-v111`; `docente-datos.js?v=108`, `banco-sel.js?v=4`. Probado con Playwright: panel sin errores, filtro de nivel funcionando.
+
+### Pasos manuales pendientes
+Ninguno (no se tocó `chromanom-analytics.gs`).
+
+### Pendiente
+Lote 3 Saber (nitrogenados, polifuncionales, isomería, reacciones, carbono) y las preguntas del lote 5; revisión de currículo MEN y de ciencias (juego, abiertas y palabras). Solo hay cerca de 5 % de preguntas de nivel 4 (la guía pide 30 %). El dato de DDT en la gaviota (Woodwell, 1967) de la pregunta ambiente|3ykhpi queda por verificar.
+
+---
+
 ## 2026-11-24 (209) — Al menos 10 preguntas con figura por tema (lote 7: 41 preguntas)
 
 ### Contexto

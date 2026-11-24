@@ -1,0 +1,245 @@
+{
+ "lote": "icfes-chr-4",
+ "experto": "icfes",
+ "revisadas": 72,
+ "coincidencias_a_ciegas": 72,
+ "ev": {
+  "tipos_carbono|1i5k8qq": "4.8",
+  "tipos_carbono|15aioc": "5.6",
+  "tipos_carbono|qlrgx6": "3.2",
+  "tipos_carbono|w8dk3b": "1.2",
+  "tipos_carbono|1i1qc66": "7.3",
+  "tipos_carbono|oymfk7": "7.4",
+  "tipos_carbono|rmz752": "5.6",
+  "tipos_carbono|1kuwiu7": "2.3",
+  "tipos_carbono|1l6012e": "3.2",
+  "tipos_carbono|19pb5up": "6.1",
+  "tipos_carbono|1kbpqwj": "8.1",
+  "tipos_carbono|1xvtc7k": "7.3",
+  "cadenas|12yromj": "5.6",
+  "cadenas|1hz3nv5": "4.8",
+  "cadenas|msqy16": "3.2",
+  "cadenas|1aed3ec": "1.2",
+  "cadenas|g1u812": "6.2",
+  "cadenas|11u0j7q": "7.4",
+  "cadenas|bld6aa": "5.6",
+  "cadenas|hugvwn": "2.3",
+  "cadenas|1ppywwh": "3.2",
+  "cadenas|1pkl3yc": "8.1",
+  "cadenas|1j6x3gi": "6.2",
+  "cadenas|16wt9k9": "9.2",
+  "orbitales|15c20kd": "5.6",
+  "orbitales|mrhsb5": "7.4",
+  "orbitales|1n1sy3m": "3.2",
+  "orbitales|11u5qtm": "1.3",
+  "orbitales|1lldgtz": "6.2",
+  "orbitales|iggdn3": "7.4",
+  "orbitales|15nj47v": "4.8",
+  "orbitales|r91z2y": "2.2",
+  "orbitales|8k380g": "3.2",
+  "orbitales|1q2i17e": "6.1",
+  "orbitales|16ek65f": "8.1",
+  "orbitales|1xkvui": "7.3",
+  "propiedades|c3djb0": "4.8",
+  "propiedades|sqnhzy": "7.4",
+  "propiedades|qi8lzi": "3.2",
+  "propiedades|vzc454": "1.2",
+  "propiedades|1oe1cp": "6.2",
+  "propiedades|mcjx35": "7.4",
+  "propiedades|1b819ch": "4.8",
+  "propiedades|1f9eu7u": "2.3",
+  "propiedades|qw69mr": "3.2",
+  "propiedades|vs57de": "6.1",
+  "propiedades|1psrd4g": "8.1",
+  "propiedades|7frcx1": "9.2",
+  "biomoleculas|1bb30nj": "5.6",
+  "biomoleculas|z02r5n": "4.4",
+  "biomoleculas|3ff5rp": "3.2",
+  "biomoleculas|1ktgt6z": "1.1",
+  "biomoleculas|tgcadq": "7.3",
+  "biomoleculas|imljqs": "7.4",
+  "biomoleculas|1os6bew": "4.8",
+  "biomoleculas|1lk4qoq": "2.2",
+  "biomoleculas|yeiolw": "1.1",
+  "biomoleculas|g2f92y": "6.2",
+  "biomoleculas|1yxydhq": "8.1",
+  "biomoleculas|14jozb7": "7.3",
+  "ambiente|231fv5": "5.7",
+  "ambiente|m7gvp7": "4.7",
+  "ambiente|1d5zgbz": "3.2",
+  "ambiente|ou0mxf": "1.2",
+  "ambiente|h40zae": "6.2",
+  "ambiente|vcrquo": "7.4",
+  "ambiente|1v796bu": "4.6",
+  "ambiente|24sxr3": "1.2",
+  "ambiente|15wgm73": "3.2",
+  "ambiente|3sqv2o": "6.1",
+  "ambiente|3ykhpi": "8.1",
+  "ambiente|166ncvh": "9.2"
+ },
+ "nd": {
+  "tipos_carbono|1i5k8qq": 2,
+  "tipos_carbono|15aioc": 3,
+  "tipos_carbono|qlrgx6": 3,
+  "tipos_carbono|w8dk3b": 3,
+  "tipos_carbono|1i1qc66": 3,
+  "tipos_carbono|oymfk7": 3,
+  "tipos_carbono|rmz752": 2,
+  "tipos_carbono|1kuwiu7": 3,
+  "tipos_carbono|1l6012e": 3,
+  "tipos_carbono|19pb5up": 3,
+  "tipos_carbono|1kbpqwj": 2,
+  "tipos_carbono|1xvtc7k": 2,
+  "cadenas|12yromj": 2,
+  "cadenas|1hz3nv5": 2,
+  "cadenas|msqy16": 3,
+  "cadenas|1aed3ec": 3,
+  "cadenas|g1u812": 4,
+  "cadenas|11u0j7q": 3,
+  "cadenas|bld6aa": 2,
+  "cadenas|hugvwn": 3,
+  "cadenas|1ppywwh": 3,
+  "cadenas|1pkl3yc": 2,
+  "cadenas|1j6x3gi": 4,
+  "cadenas|16wt9k9": 3,
+  "orbitales|15c20kd": 2,
+  "orbitales|mrhsb5": 3,
+  "orbitales|1n1sy3m": 3,
+  "orbitales|11u5qtm": 3,
+  "orbitales|1lldgtz": 3,
+  "orbitales|iggdn3": 3,
+  "orbitales|15nj47v": 2,
+  "orbitales|r91z2y": 3,
+  "orbitales|8k380g": 3,
+  "orbitales|1q2i17e": 2,
+  "orbitales|16ek65f": 2,
+  "orbitales|1xkvui": 3,
+  "propiedades|c3djb0": 2,
+  "propiedades|sqnhzy": 2,
+  "propiedades|qi8lzi": 3,
+  "propiedades|vzc454": 3,
+  "propiedades|1oe1cp": 4,
+  "propiedades|mcjx35": 3,
+  "propiedades|1b819ch": 2,
+  "propiedades|1f9eu7u": 3,
+  "propiedades|qw69mr": 3,
+  "propiedades|vs57de": 2,
+  "propiedades|1psrd4g": 3,
+  "propiedades|7frcx1": 3,
+  "biomoleculas|1bb30nj": 3,
+  "biomoleculas|z02r5n": 2,
+  "biomoleculas|3ff5rp": 3,
+  "biomoleculas|1ktgt6z": 3,
+  "biomoleculas|tgcadq": 4,
+  "biomoleculas|imljqs": 3,
+  "biomoleculas|1os6bew": 2,
+  "biomoleculas|1lk4qoq": 3,
+  "biomoleculas|yeiolw": 3,
+  "biomoleculas|g2f92y": 4,
+  "biomoleculas|1yxydhq": 3,
+  "biomoleculas|14jozb7": 3,
+  "ambiente|231fv5": 3,
+  "ambiente|m7gvp7": 2,
+  "ambiente|1d5zgbz": 3,
+  "ambiente|ou0mxf": 4,
+  "ambiente|h40zae": 4,
+  "ambiente|vcrquo": 3,
+  "ambiente|1v796bu": 2,
+  "ambiente|24sxr3": 3,
+  "ambiente|15wgm73": 3,
+  "ambiente|3sqv2o": 2,
+  "ambiente|3ykhpi": 2,
+  "ambiente|166ncvh": 3
+ },
+ "hallazgos": [
+  {
+   "id": "tipos_carbono|oymfk7",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "La tarea pide una predicción (mezcla de productos) a partir de los datos: evidencia 7.4 (N2), no 8.1 (N4)."
+  },
+  {
+   "id": "cadenas|g1u812",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "ctx",
+     "original": "Hacia 1869 se propuso para el benceno, C₆H₆,",
+     "nuevo": "En 1865 Kekulé propuso para el benceno, C₆H₆,"
+    },
+    {
+     "campo": "ctx",
+     "original": "Albert Ladenburg preparó derivados con dos bromos, C₆H₄Br₂, y encontró solo tres compuestos distintos.",
+     "nuevo": "En 1869 Albert Ladenburg señaló que de los derivados con dos bromos, C₆H₄Br₂, solo se conocían tres compuestos distintos."
+    }
+   ],
+   "motivo": "Dato histórico impreciso: el modelo de enlaces alternados fijos es de Kekulé (1865); Ladenburg (1869) planteó la objeción de que ese modelo predecía dos isómeros 1,2 cuando solo se conocía uno, no fue quien preparó y contó los derivados. La pregunta y la clave no cambian."
+  },
+  {
+   "id": "cadenas|11u0j7q",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "«Si el patrón de la gráfica continúa, ¿qué predicción…?» extrapola a 8 carbonos: es la evidencia 7.4 (N2), no 8.1 (N4)."
+  },
+  {
+   "id": "orbitales|mrhsb5",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Se pide predecir la longitud y energía del enlace del O₂⁺ a partir del patrón orden de enlace–energía–longitud de la tabla: evidencia 7.4 (N2). No es identificar o asociar un concepto (uso, I2)."
+  },
+  {
+   "id": "orbitales|iggdn3",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Predice la absorción de un polieno de 8 dobles enlaces extrapolando la gráfica: evidencia 7.4 (N2), no 8.1 (N4)."
+  },
+  {
+   "id": "propiedades|sqnhzy",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "«¿Qué se predice para la solubilidad del octan-1-ol?» es predecir el siguiente valor de una serie de la tabla: evidencia 7.4 (N2), no uso (I1)."
+  },
+  {
+   "id": "propiedades|mcjx35",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Predicción para 10 carbonos extrapolando dos series de la gráfica: evidencia 7.4 (N2), no 8.1 (N4)."
+  },
+  {
+   "id": "biomoleculas|imljqs",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "«Si el patrón de la gráfica continúa, ¿qué predicción…?» extrapola a 20 % y 80 % de G+C: evidencia 7.4 (N2), no 8.1 (N4)."
+  },
+  {
+   "id": "ambiente|vcrquo",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Predicción del CO₂ para 2030 extrapolando la serie: evidencia 7.4 (N2), no 8.1 (N4)."
+  }
+ ]
+}
