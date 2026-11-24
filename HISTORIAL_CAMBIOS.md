@@ -7,6 +7,23 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-24 (209) — Al menos 10 preguntas con figura por tema (lote 7: 41 preguntas)
+
+### Contexto
+El docente pidió al menos 10 preguntas por tema cuya respuesta dependa de analizar una gráfica, imagen, esquema o tabla. Con conteo estricto (las estructuras dibujadas solas no cuentan), faltaban 41: cadena, alcanos, haluros, alcoholes, carbonilos, reacciones y carbono, y 4 en cada tema de fundamentos y aplicaciones (tipos de carbono, cadenas, orbitales, propiedades, biomoléculas, ambiente).
+
+### Cambios
+- `docente-datos.js`: bloque «Lote 7» con 41 preguntas (puntos de ebullición, octanaje, perfiles de energía, espectro IR, cromatograma, calibración de glucosa, CO₂ de Mauna Loa, orbitales y estructuras dibujadas en SVG, opciones A–D dibujadas…). Todos los temas quedan con 10 o más. Ninguna fórmula lleva ramas entre paréntesis.
+- `saber-icfes.js`: motor mejorado (igual que IonNom: barras con base en cero, hasta 4 series con trazos distintos, tablas con desplazamiento en celular, `alt`). `juego.html`, `docente-app.js`, `banco-sel.js` y `herramientas/generar-saber-juego.js` aceptan `esq`, `opsGraf` y las opciones A–D sin barajar; `saber-juego.js` regenerado. Probado jugando una pregunta con opciones A–D en el juego.
+- `sw.js`: `CACHE` de `chromanom-v109` a `chromanom-v110`; `?v=` de las páginas subidos.
+- Proceso: (1) Siete agentes redactaron los lotes por grupos de temas; (2) un validador automático revisó el formato (campos, competencia y afirmación coherentes, una sola clave, opciones de longitud parecida, sin «todas/ninguna», `alt` distinto en cada opción dibujada); (3) expertos en química (orgánica o inorgánica) o biología resolvieron cada pregunta a ciegas y verificaron los datos; (4) expertos en Saber 11/Icfes y MEN revisaron competencia, afirmación, nivel, necesidad de la figura, distractores y grado; (5) un experto en figuras y accesibilidad revisó las 171 preguntas a 760 y 390 px y sus hallazgos se aplicaron al motor y a las preguntas.
+- Hallazgos graves corregidos: orbitales π con fase opuesta en dos opciones dibujadas, dato de propanal (48 °C), glucosa (punto más cercano), CO₂ mensual de Mauna Loa, nivel de cinética de primer orden.
+
+### Pendiente
+Revisar a ojo una muestra (varios datos están rotulados «Datos de ejemplo»); IR, SN1 y perfiles de energía son profundización de 11.° sin DBA propio. No se tocó `chromanom-analytics.gs`.
+
+---
+
 ## 2026-11-23 (207) — Motor de figuras nuevo en `saber-icfes.js` (sin preguntas todavía)
 
 ### Contexto

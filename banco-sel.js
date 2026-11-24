@@ -58,7 +58,7 @@ function construir(){
     if(!grados.length){dba.forEach(function(d){var n=parseInt(d,10);if(n)grados.push(n);});}
     if(!grados.length){grados=[].concat(mt.grados||mt.grado||[]);}
     var it={q:q,tema:tema,key:claveDe(q,tema),c:c,af:af,dba:dba,est:unicos(est),pri:unicos(pri),grados:unicos(grados).sort(function(a,b){return a-b;}),
-      texto:(limpio(q.ctx)+' '+limpio(q.q)+' '+(q.o||[]).map(limpio).join(' ')).toLowerCase(),datos:!!(q.tabla||q.graf)};
+      texto:(limpio(q.ctx)+' '+limpio(q.q)+' '+(q.o||[]).map(limpio).join(' ')).toLowerCase(),datos:!!(q.tabla||q.graf||q.esq||q.opsGraf)};
     if(POR_CLAVE[it.key])return;POR_CLAVE[it.key]=it;TODAS.push(it);
   });
   return TODAS;
@@ -148,7 +148,7 @@ function filtrar(){
   });
 }
 function tarjeta(it,sel){
-  var q=it.q,ok=q.icfes?q.r:0,ops=(q.o||[]).map(function(o,i){return '<li'+(i===ok?' class="ok"':'')+'>'+e(limpio(o))+'</li>';}).join('');
+  var q=it.q,ok=(q.icfes||q.fijo)?q.r:0,ops=(q.o||[]).map(function(o,i){return '<li'+(i===ok?' class="ok"':'')+'>'+e(limpio(o))+'</li>';}).join('');
   var extra=SI&&SI.extraHTML?SI.extraHTML(q):'';
   var tags='<span class="bs-t">'+e(CFG.temaNombre?CFG.temaNombre(it.tema):it.tema)+'</span>'+
     (it.grados.length?'<span class="bs-t">Grado '+it.grados.join('–')+'.°</span>':'')+
@@ -157,7 +157,7 @@ function tarjeta(it,sel){
     (q.icfes?'<span class="bs-t">Oficial Icfes '+e(q.icfes)+'</span>':'')+(it.datos?'<span class="bs-t">Con datos</span>':'');
   return '<div class="bs-q'+(sel?' on':'')+'" data-k="'+e(it.key)+'"><div class="bs-cab"><input type="checkbox" aria-label="Elegir esta pregunta"'+(sel?' checked':'')+'><div style="flex:1"><div class="bs-tags">'+tags+'</div>'+
     (q.ctx?'<div class="bs-ctx">'+e(limpio(q.ctx))+'</div>':'')+extra+'<div class="bs-enun">'+e(limpio(q.q))+'</div>'+
-    ((q.f||q.fig||q.gen)?'<div class="bs-ctx">(Esta pregunta lleva una estructura o figura dibujada: se ve en el documento.)</div>':'')+(q.imgOps?'<div class="bs-ctx">(Opciones dibujadas: se ven en el documento.)</div>':'<ol class="bs-o">'+ops+'</ol>')+
+    ((q.f||q.fig||q.gen)?'<div class="bs-ctx">(Esta pregunta lleva una estructura o figura dibujada: se ve en el documento.)</div>':'')+((q.imgOps||q.opsGraf)?(q.opsGraf?SI.opsImgHTML(q):'<div class="bs-ctx">(Opciones dibujadas: se ven en el documento.)</div>'):'<ol class="bs-o">'+ops+'</ol>')+
     (q.exp?'<details><summary>Explicación</summary>'+e(limpio(q.exp))+'</details>':'')+'</div></div></div>';
 }
 function resumenSel(){
