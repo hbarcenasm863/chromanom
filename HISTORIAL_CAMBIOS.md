@@ -7,6 +7,25 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (222) — Palabras con DBA y curso
+
+### Contexto
+El docente pidió que las palabras de crucigramas, sopas, ahorcados y criptogramas también tengan DBA, como ya lo tienen las preguntas.
+
+### Cambios
+- `palabras-dba-datos.js` (nuevo, generado): un agente experto en currículo MEN dio a cada una de las 146 palabras su DBA y su curso mínimo.
+  - Por curso quedaron 14 en 9.°, 2 en 10.° y 130 en 11.°.
+  - 36 quedaron «sin DBA propio»: hibridación, resonancia, isomería espacial, entre otras.
+  - Respetó las 46 etiquetas de la revisión anterior.
+- `palabras-dba.js` (nuevo, el mismo archivo en los tres sitios): pone el selector **«Palabras hasta el curso»** en las pestañas de Crucigramas, Ahorcado, Sopa de letras y Criptograma del panel docente. Por ejemplo, «Hasta 9.°» deja 14 palabras.
+- Caché `chromanom-v123`.
+- Probado con Playwright: el selector aparece en las cuatro pestañas, filtra bien y no hay errores.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (221) — `revision-ref.js` se puede cargar fuera del navegador
 
 ### Contexto
