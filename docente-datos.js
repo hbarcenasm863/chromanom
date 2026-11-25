@@ -1406,7 +1406,7 @@ var SABER={
   {a:'nom',c:'exp',k:'Q',ctx:'El hex-3-eno, CH₃−CH₂−CH=CH−CH₂−CH₃, tiene un doble enlace entre el C3 y el C4.',
    q:'¿Tiene isomería cis/trans?',o:['Sí, porque cada carbono del doble enlace está unido a un H y a un grupo etilo, dos sustituyentes distintos','No, porque los dos lados de la molécula son iguales y eso impide la isomería','No, porque el doble enlace no está en el centro exacto de la cadena','Sí, pero solo existe la forma cis, porque la trans es inestable']},
   {a:'nom',c:'uso',k:'Q',ctx:'El ciclopropano (un anillo de 3 carbonos) y el propeno (CH₂=CH−CH₃) tienen ambos fórmula molecular C₃H₆.',
-   q:'¿Qué tipo de isómeros son?',o:['De función','De posición','De cadena','Cis/trans']}
+   q:'¿Qué tipo de isómeros son?',o:['De función','De posición','De cadena','Cis/trans'],exp:'Tienen la misma fórmula, C₃H₆, pero son de clases distintas: el propeno es un alqueno (tiene el doble enlace C=C) y el ciclopropano es un cicloalcano (sin doble enlace). Cuando cambia la clase de compuesto se trata de isomería de función. No es de cadena, porque en la de cadena los dos compuestos son de la misma clase y solo cambia la forma del esqueleto.'}
  ],
  reacciones:[
   {a:'rx',c:'uso',k:'Q',ctx:'CH₂=CH₂ + H₂O → CH₃−CH₂−OH (con H₂SO₄ como catalizador)',

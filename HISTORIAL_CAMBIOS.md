@@ -28,7 +28,7 @@ Un agente experto en evaluación Icfes (química orgánica) resolvió las 198 a 
 Ninguno.
 
 ### Pendiente
-- **Decisión del docente:** la pregunta de ciclopropano y propeno (cadena o función).
+- **Decidido por el docente:** la pregunta de ciclopropano y propeno es de **isomería de función** (se mantiene la clave y se agregó la explicación).
 - **Fórmulas con paréntesis:** unas 15 preguntas tienen fórmulas con ramas entre paréntesis en estructuras que se ven dibujadas. Comprobar en pantalla que `fxAuto` también convierte las opciones.
 - **Siguientes partes de la revisión:** currículo MEN y ciencias.
 
