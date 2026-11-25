@@ -7,6 +7,46 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (215) — Revisión de lo pendiente en ChromaNom
+
+### Contexto
+El docente pidió revisar lo que había quedado pendiente de ChromaNom en la revisión contra los referentes (sesiones 210 a 214).
+
+### Proceso
+Tres agentes expertos independientes:
+- **Evaluación Icfes:** resolvió a ciegas las **41 preguntas Saber** agregadas en los lotes 5 y 7 (varias con figura), con **41 de 41** coincidencias.
+- **Currículo MEN:** revisó esas 41 y los 24 ejercicios abiertos MDEC.
+- **Química orgánica:** revisó los **24 nombres IUPAC** de los ejercicios MDEC.
+
+### Hallazgos
+- **Saber (41):** ninguna clave equivocada ni error científico.
+  - 4 afirmaciones corregidas: las que piden leer datos pasan a N4 (evidencia 8.1).
+  - 3 textos corregidos:
+    - en una explicación, la muestra 1 también podría ser un alquino;
+    - en otra pregunta, la correcta era la única opción sin sujeto y eso la delataba;
+    - la explicación del distractor «5 veces» no cuadraba con el cálculo.
+  - DBA: la hibridación del eteno y cuatro preguntas de orbitales quedan «sin DBA», como profundización de 11.°; la de pH pasa a 9.2 con 11.5 y la de presión de vapor en Bogotá a 8.3 con 9.3.
+  - Las 41 tienen ahora evidencia y nivel: 32 son de nivel 3 y 9 de nivel 2.
+- **MDEC (24 nombres):** todos correctos según la IUPAC y apropiados para 11.° (DBA 11.4).
+- **Juego:** se quitó la pregunta repetida del ácido propanoico y el etanoato de metilo, y quedó la versión con mejor explicación. Las dos de 2,3-dimetilbutano se dejaron porque muestran dos dibujos del mismo compuesto.
+- **Signos < y >:** se verificó que el juego los muestra bien, porque las explicaciones se escriben como HTML.
+
+### Cambios
+- `docente-datos.js` y `fundamentos.js` con las correcciones.
+- `revision-ref.js` regenerado: las **637 preguntas Saber** únicas tienen sus etiquetas revisadas. En el panel salen 678, porque cuenta las repetidas, y todas muestran evidencia y nivel.
+- Caché `chromanom-v117`; `docente-datos.js?v=111`, `revision-ref.js?v=4` y `fundamentos.js?v=98` en todas las páginas.
+- Probado con Playwright: el panel y el juego cargan sin errores.
+- Informes en `revision-referentes-2026-11/`.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+- El tema «nomenclatura» de los ejercicios MDEC no está en `banco-sel-cfg.js`.
+- Las preguntas del juego y las abiertas siguen sin un campo propio de DBA.
+
+---
+
 ## 2026-11-25 (214) — Revisión contra los referentes (parte 4: ciencias del juego, abiertas y palabras)
 
 ### Contexto

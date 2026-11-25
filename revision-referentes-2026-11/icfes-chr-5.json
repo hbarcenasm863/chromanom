@@ -1,0 +1,166 @@
+{
+ "lote": "icfes-chr-5",
+ "experto": "icfes",
+ "revisadas": 41,
+ "coincidencias_a_ciegas": 41,
+ "ev": {
+  "cadena|17dx1gb": "8.1",
+  "cadena|1w871jq": "5.7",
+  "cadena|73pisg": "2.2",
+  "alcanos|gerz53": "3.2",
+  "alcanos|nnwiw1": "8.1",
+  "haluros|9ognoi": "3.2",
+  "haluros|1kvipoo": "2.2",
+  "alcoholes|viw26s": "7.3",
+  "carbonilos|1b1uubc": "2.2",
+  "reacciones|1xo55nu": "3.2",
+  "reacciones|8ca005": "8.1",
+  "reacciones|1vxk9zp": "4.6",
+  "reacciones|74bdpw": "7.4",
+  "reacciones|cw27wj": "7.3",
+  "reacciones|294een": "7.4",
+  "reacciones|atb9ps": "2.9",
+  "carbono|kvszkh": "5.6",
+  "tipos_carbono|14y8o5v": "4.8",
+  "tipos_carbono|191alor": "8.1",
+  "tipos_carbono|2w3bza": "2.1",
+  "tipos_carbono|1tkbxdz": "5.6",
+  "cadenas|1xwwz6x": "7.4",
+  "cadenas|1nwa584": "5.6",
+  "cadenas|1b8kyq9": "7.3",
+  "cadenas|o0pxbv": "2.2",
+  "orbitales|1gp82bw": "5.6",
+  "orbitales|1a8a2ec": "7.4",
+  "orbitales|12oi6k7": "3.2",
+  "orbitales|1nvnzln": "2.2",
+  "propiedades|1gkhsd9": "7.4",
+  "propiedades|v1xj5r": "8.1",
+  "propiedades|y3msy8": "2.2",
+  "propiedades|1o939jh": "4.8",
+  "biomoleculas|1tkipp1": "7.4",
+  "biomoleculas|r05veq": "5.5",
+  "biomoleculas|1nji5y2": "8.1",
+  "biomoleculas|1sv98aa": "2.2",
+  "ambiente|11nf7ye": "2.8",
+  "ambiente|ul93jx": "7.3",
+  "ambiente|9czs7x": "1.2",
+  "ambiente|m5omaf": "4.8"
+ },
+ "nd": {
+  "cadena|17dx1gb": 3,
+  "cadena|1w871jq": 2,
+  "cadena|73pisg": 3,
+  "alcanos|gerz53": 3,
+  "alcanos|nnwiw1": 2,
+  "haluros|9ognoi": 3,
+  "haluros|1kvipoo": 3,
+  "alcoholes|viw26s": 3,
+  "carbonilos|1b1uubc": 3,
+  "reacciones|1xo55nu": 3,
+  "reacciones|8ca005": 3,
+  "reacciones|1vxk9zp": 2,
+  "reacciones|74bdpw": 3,
+  "reacciones|cw27wj": 3,
+  "reacciones|294een": 3,
+  "reacciones|atb9ps": 3,
+  "carbono|kvszkh": 2,
+  "tipos_carbono|14y8o5v": 3,
+  "tipos_carbono|191alor": 3,
+  "tipos_carbono|2w3bza": 3,
+  "tipos_carbono|1tkbxdz": 2,
+  "cadenas|1xwwz6x": 3,
+  "cadenas|1nwa584": 2,
+  "cadenas|1b8kyq9": 3,
+  "cadenas|o0pxbv": 3,
+  "orbitales|1gp82bw": 2,
+  "orbitales|1a8a2ec": 3,
+  "orbitales|12oi6k7": 3,
+  "orbitales|1nvnzln": 3,
+  "propiedades|1gkhsd9": 3,
+  "propiedades|v1xj5r": 3,
+  "propiedades|y3msy8": 3,
+  "propiedades|1o939jh": 2,
+  "biomoleculas|1tkipp1": 3,
+  "biomoleculas|r05veq": 2,
+  "biomoleculas|1nji5y2": 3,
+  "biomoleculas|1sv98aa": 3,
+  "ambiente|11nf7ye": 3,
+  "ambiente|ul93jx": 3,
+  "ambiente|9czs7x": 3,
+  "ambiente|m5omaf": 3
+ },
+ "hallazgos": [
+  {
+   "id": "alcanos|nnwiw1",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N4"
+   },
+   "motivo": "La tarea es leer una tabla de dos variables (llama y hollín frente al O₂) y escoger el menor valor que cumple el criterio: interpretar datos (evidencia 8.1, N4), no derivar una conclusión de una investigación propia (N2)."
+  },
+  {
+   "id": "reacciones|8ca005",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N4"
+   },
+   "motivo": "Se pide interpretar un diagrama de energía (ubicar el intermediario y comparar las barreras de los dos picos): evidencia 8.1 (N4). La etiqueta uso/I1 (5.x, procesos de ecosistemas y materia) no corresponde."
+  },
+  {
+   "id": "propiedades|v1xj5r",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N4"
+   },
+   "motivo": "El enunciado ya define que hierve cuando la presión de vapor iguala la atmosférica; lo que se evalúa es leer la curva del etanol en 560 mmHg (evidencia 8.1, N4), no aplicar un concepto por sí mismo (I2)."
+  },
+  {
+   "id": "biomoleculas|1nji5y2",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N4"
+   },
+   "motivo": "Interpolar una concentración en una curva de calibración es leer datos en una gráfica (evidencia 8.1, N4); no se predice ni se concluye de una investigación (N2)."
+  },
+  {
+   "id": "cadenas|1b8kyq9",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "exp",
+     "original": "B corresponde a la muestra 1, que consume 2 mol y da una cadena abierta.",
+     "nuevo": "B sería coherente con la muestra 1 (consume 2 mol y da una cadena abierta), no con la 2, que consume solo 1 mol."
+    }
+   ],
+   "motivo": "La muestra 1 (C₆H₁₀, 2 mol de H₂) también podría ser un alquino; decir que «corresponde» a dos dobles enlaces afirma de más."
+  },
+  {
+   "id": "cadenas|o0pxbv",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Se pliega en silla y conserva ángulos de 109,5°; en el anillo de tres carbonos son de 60°.",
+     "nuevo": "El ciclohexano se pliega en silla y conserva ángulos de 109,5°; en el anillo de tres carbonos son de 60°."
+    }
+   ],
+   "motivo": "Es la única opción sin sujeto nombrado (el resto dice «El ciclopropano…», «El ciclohexano…»): queda como pista gramatical y de estructura. Con el sujeto las cuatro opciones son parejas."
+  },
+  {
+   "id": "ambiente|m5omaf",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "exp",
+     "original": "C resulta de dividir 5,6 entre 4,6 y similares, sin considerar la escala logarítmica.",
+     "nuevo": "C (5 veces) no sale de la relación logarítmica ni de una escala lineal: es un valor sin sustento que solo se escoge adivinando."
+    }
+   ],
+   "motivo": "Dividir 5,6 entre 4,6 da 1,2, no 5: la explicación del distractor no corresponde a la opción."
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "lote": "men-chr-3",
+ "experto": "men",
+ "revisadas": 65,
+ "coincidencias_a_ciegas": 0,
+ "ev": {},
+ "nd": {},
+ "hallazgos": [
+  {
+   "id": "carbono|kvszkh",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Hibridación sp² del eteno y diagramas de orbitales: ningún DBA la nombra (8.2 y 10.3 son solo prerrequisito); priorizado SED 11.° «hibridación y reactividad»; sube a 11.° (el tema carbono es de 10.°)."
+  },
+  {
+   "id": "orbitales|1gp82bw",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Exige orbitales/hibridación o energía de enlace por resonancia: ningún DBA lo nombra (solo el priorizado SED 11.° «hibridación y reactividad, orbitales moleculares»); profundización de 11.°."
+  },
+  {
+   "id": "orbitales|1a8a2ec",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Exige orbitales/hibridación o energía de enlace por resonancia: ningún DBA lo nombra (solo el priorizado SED 11.° «hibridación y reactividad, orbitales moleculares»); profundización de 11.°."
+  },
+  {
+   "id": "orbitales|12oi6k7",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Exige orbitales/hibridación o energía de enlace por resonancia: ningún DBA lo nombra (solo el priorizado SED 11.° «hibridación y reactividad, orbitales moleculares»); profundización de 11.°."
+  },
+  {
+   "id": "orbitales|1nvnzln",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Exige orbitales/hibridación o energía de enlace por resonancia: ningún DBA lo nombra (solo el priorizado SED 11.° «hibridación y reactividad, orbitales moleculares»); profundización de 11.°."
+  },
+  {
+   "id": "ambiente|m5omaf",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "11.5"
+    ]
+   },
+   "motivo": "Calcular cuántas veces cambia [H₃O⁺] a partir del pH es contenido de 9.2 (escala de pH, ácidos y bases), no de 11.4; 11.5 queda por el contexto de lluvia ácida."
+  },
+  {
+   "id": "propiedades|v1xj5r",
+   "gravedad": "baja",
+   "etiquetas": {
+    "dba": [
+     "8.3",
+     "9.3"
+    ]
+   },
+   "motivo": "Presión de vapor y presión atmosférica (a 2 600 m) se apoyan en el DBA 8.3 (comportamiento de gases y presión), además de 9.3 (propiedades físicas)."
+  }
+ ]
+}
