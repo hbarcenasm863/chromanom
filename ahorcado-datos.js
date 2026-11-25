@@ -935,7 +935,7 @@ window.BANCO_AHORCADO=[
 "amb",
 "Fracción del petróleo de 5 a 10 carbonos.",
 "Se modela como octano.",
-"Un galón produce unos 8,6 kg de CO₂."
+"Un galón produce unos 8,9 kg de CO₂."
 ],
 [
 "DIÉSEL",

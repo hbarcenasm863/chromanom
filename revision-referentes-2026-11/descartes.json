@@ -10,5 +10,10 @@
   "id": "balanceo|46xdsc",
   "quitados": 1,
   "por": "Dato no verificado por el agente; Abocol produce amoníaco en Cartagena."
+ },
+ {
+  "lote": "cien-ion-1.json",
+  "id": "ion-j205",
+  "por": "Falso positivo: el volcado borró los signos < y > como si fueran etiquetas; en el sitio la explicación está completa."
  }
 ]

@@ -1,0 +1,50 @@
+{
+ "lote": "cien-chr-1",
+ "experto": "ciencia",
+ "revisadas": 949,
+ "coincidencias_a_ciegas": 863,
+ "hallazgos": [
+  {
+   "id": "chr-a129",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "q",
+     "original": "(pueden ser alcoholes)",
+     "nuevo": "(pueden ser cetonas, como las heptanonas, o alcoholes con un doble enlace o un anillo)"
+    }
+   ],
+   "motivo": "Un alcohol saturado de 7 carbonos es C7H16O, no C7H14O (IDH = 1). La indicacion 'pueden ser alcoholes' lleva al estudiante a una formula equivocada; las heptan-2-, 3- y 4-ona si son C7H14O e isomeros de posicion."
+  },
+  {
+   "id": "chr-a43",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "q",
+     "original": "Aplica la regla de Markovnikov y escribe el producto principal con su nombre.",
+     "nuevo": "Explica por qué la regla de Markovnikov no permite predecir un solo producto principal (los dos carbonos del doble enlace tienen un solo H y quedan como carbonos secundarios) y escribe y nombra los dos productos posibles."
+    }
+   ],
+   "motivo": "En el hex-2-eno ambos carbonos del doble enlace son secundarios: Markovnikov no distingue entre 2-clorohexano y 3-clorohexano; se obtiene una mezcla. Pedir 'el producto principal' es cientificamente incorrecto."
+  },
+  {
+   "id": "chr-a76",
+   "gravedad": "alta",
+   "textos": [
+    {
+     "campo": "q",
+     "original": "¿Por qué se prefiere este reactivo sobre HCl para un alcohol terciario?",
+     "nuevo": "¿Por qué el SOCl₂ se prefiere al HCl para alcoholes primarios y secundarios, mientras que el alcohol terciario ya reacciona fácilmente con HCl concentrado (prueba de Lucas)?"
+    }
+   ],
+   "motivo": "Premisa falsa: el alcohol terciario es el que mejor reacciona con HCl (SN1, carbocation estable). El SOCl2 se prefiere para primarios y secundarios (sin transposiciones, subproductos gaseosos SO2 y HCl); con terciarios tiende a dar eliminacion."
+  }
+ ],
+ "notas": [
+  "10 abiertas llegan sin campo q en el lote (chr-a29, a30, a40, a41, a73, a74, a96, a97, a126, a127): no se pudieron revisar; verificar que el enunciado no se haya perdido al extraer el lote.",
+  "Preguntas 'de esta estructura' dependen de imagen: se verifico la coherencia entre clave, explicacion y opciones, no el dibujo.",
+  "chr-j78 y chr-j80 son la misma pregunta (duplicada); chr-j577 y chr-j683 tienen las mismas opciones.",
+  "chr-j243, j244, j249, j250, j381 usan &lt; y &gt; en exp: comprobar que se rendericen como < y >."
+ ]
+}

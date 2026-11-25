@@ -1543,7 +1543,7 @@ var ABIERTAS={
   {g:'alquenos',t:'mdec',n:'4-metilpent-1-eno'},
   {g:'alquinos',t:'mdec',n:'3-metilbut-1-ino'},
   {g:'alquenos',t:'rx',q:'El 1,2-dicloroheptano se obtiene por adición de Cl₂ a un alqueno. Dibuja y nombra el alqueno de partida, y escribe la ecuación completa de la reacción.'},
-  {g:'alquenos',t:'rx',q:'CH₃−CH=CH−CH₂−CH₂−CH₃ (hex-2-eno) + HCl → ? Aplica la regla de Markovnikov y escribe el producto principal con su nombre.'},
+  {g:'alquenos',t:'rx',q:'CH₃−CH=CH−CH₂−CH₂−CH₃ (hex-2-eno) + HCl → ? Explica por qué la regla de Markovnikov no permite predecir un solo producto principal (los dos carbonos del doble enlace tienen un solo H y quedan como carbonos secundarios) y escribe y nombra los dos productos posibles.'},
   {g:'alquenos',t:'rx',q:'CH₃−CH=CH−CH₂−CH₂−CH₃ (hex-2-eno) + KMnO₄ (frío y diluido) → ? Escribe y nombra el diol que se forma (prueba de Baeyer).'}],
  aromaticos:[
   {t:'rx',q:'Benceno + Br₂ → ? (con FeBr₃). Dibuja y nombra el producto orgánico e indica el subproducto.'},
@@ -1579,7 +1579,7 @@ var ABIERTAS={
   {g:'alcoholes',t:'mdec',n:'2-metilbutan-2-ol'},
   {g:'alcoholes',t:'mdec',n:'3-metilbutan-1-ol'},
   {g:'alcoholes',t:'rx',q:'CH₃−CH₂−CH₂−COOH + CH₃−OH → ? (esterificación de Fischer, con H⁺ y calor). Escribe y nombra el éster que se forma (tiene aroma a piña).'},
-  {g:'alcoholes',t:'rx',q:'(CH₃)₃C−OH + SOCl₂ → ? Escribe y nombra el producto orgánico y los dos subproductos gaseosos. ¿Por qué se prefiere este reactivo sobre HCl para un alcohol terciario?'},
+  {g:'alcoholes',t:'rx',q:'(CH₃)₃C−OH + SOCl₂ → ? Escribe y nombra el producto orgánico y los dos subproductos gaseosos. ¿Por qué el SOCl₂ se prefiere al HCl para alcoholes primarios y secundarios, mientras que el alcohol terciario ya reacciona fácilmente con HCl concentrado (prueba de Lucas)?'},
   {g:'alcoholes',t:'rx',q:'Un alqueno se obtuvo por deshidratación ácida (H₂SO₄, calor) de un alcohol de partida; solo existía una posición posible para la eliminación. Si el alqueno es CH₃−CH₂−CH=CH₂, dibuja y nombra el alcohol de partida.'},
   {g:'alcoholes',t:'con',q:'Propón una reacción (reactivos y condiciones) que permita obtener propan-2-ol. Escribe la ecuación completa y nombra el tipo de reacción.'},
   {g:'alcoholes',t:'rx',q:'Un alcohol primario se oxida con CCP (oxidante suave) y se obtiene 3-metilbutanal. Dibuja y nombra el alcohol de partida.'}],
@@ -1637,7 +1637,7 @@ var ABIERTAS={
   {t:'mdec',n:'2,2-dimetilpropano'},
   {t:'mdec',n:'pent-2-eno'},
   {t:'con',q:'Calcula el índice de deficiencia de hidrógeno (IDH) de C₁₀H₁₄ y de C₅H₁₂O. Para cada fórmula, explica qué te dice ese valor sobre los anillos y/o enlaces múltiples que puede tener la molécula, y dibuja una estructura posible.'},
-  {t:'nom',q:'Formula y nombra 3 isómeros de posición de fórmula C₇H₁₄O (pueden ser alcoholes).'},
+  {t:'nom',q:'Formula y nombra 3 isómeros de posición de fórmula C₇H₁₄O (pueden ser cetonas, como las heptanonas, o alcoholes con un doble enlace o un anillo).'},
   {t:'nom',q:'Dibuja y nombra la forma cis y la forma trans del 3-metilhex-3-eno.'},
   {t:'con',q:'Para cada par, indica si son isómeros entre sí y, si lo son, de qué tipo (cadena, posición, función o geométrica): a) pentano y 2-metilbutano; b) propeno y propino; c) ciclobutano y metilciclopropano; d) ácido butanoico y propanoato de metilo; e) cis-pent-2-eno y trans-pent-2-eno.'}],
  reacciones:[

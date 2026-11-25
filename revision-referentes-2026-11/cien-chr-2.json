@@ -1,0 +1,3 @@
+{"lote":"cien-chr-2","experto":"ciencia","revisadas":277,"coincidencias_a_ciegas":0,"hallazgos":[
+{"id":"chr-p132","gravedad":"baja","textos":[{"campo":"pistas","original":"Un galón produce unos 8,6 kg de CO₂.","nuevo":"Un galón produce unos 8,9 kg de CO₂."}],"motivo":"El factor habitual (EPA) para un galón de gasolina es 8,89 kg de CO₂; 8,6 queda por debajo."}
+]}

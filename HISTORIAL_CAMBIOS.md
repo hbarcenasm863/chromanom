@@ -7,6 +7,40 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-25 (214) — Revisión contra los referentes (parte 4: ciencias del juego, abiertas y palabras)
+
+### Contexto
+Última parte de la revisión (sesiones 210, 211 y 213). Dos agentes expertos en química orgánica revisaron **1226 entradas**: el juego, las abiertas y las palabras. Resolvieron a ciegas las 863 preguntas de opción múltiple y de escribir, y todas las claves salieron bien.
+
+### Hallazgos (4)
+- **Alto:** una abierta preguntaba por qué se prefiere SOCl₂ al HCl para un alcohol terciario, pero el terciario es justamente el que mejor reacciona con HCl. Se reescribió para alcoholes primarios y secundarios, con la prueba de Lucas.
+- **Medios:**
+  - Un alcohol saturado de 7 carbonos es C₇H₁₆O, no C₇H₁₄O.
+  - El hex-2-eno con HCl no tiene un producto principal por Markovnikov, porque los dos carbonos del doble enlace son secundarios.
+- **Bajo:** la gasolina da 8,9 kg de CO₂ por galón, no 8,6.
+
+### Cambios
+- `docente-datos.js` y `ahorcado-datos.js`.
+- Caché `chromanom-v116`; `docente-datos.js?v=110` y `ahorcado-datos.js?v=99`.
+- Probado con Playwright sin errores. Informes en `revision-referentes-2026-11/`.
+
+**Resumen de toda la revisión contra los referentes (partes 1 a 4).** Se revisaron las tres bases completas con agentes expertos independientes de tres categorías:
+- **Evaluación Icfes:** 2794 preguntas Saber resueltas a ciegas, con evidencia del Marco y nivel de desempeño en todas.
+- **Currículo MEN:** DBA y curso de unas 6870 entradas.
+- **Ciencias:** juego, abiertas y palabras.
+
+Ninguna clave del juego estaba equivocada. Los problemas de fondo eran las etiquetas, las pistas que delataban la clave y los distractores débiles. El banco queda con pocas preguntas de nivel 4 y con mucho uso comprensivo frente a explicación e indagación: los próximos lotes deben ir en esa dirección.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+- 10 abiertas con figura no traían enunciado en el volcado y no se revisaron: chr-a29, a30, a40, a41, a73, a74, a96, a97, a126 y a127.
+- Hay preguntas duplicadas: chr-j78 y chr-j80 son la misma; chr-j577 y chr-j683 tienen las mismas opciones.
+- Comprobar en pantalla que `&lt;` y `&gt;` se ven como < y > en las explicaciones de chr-j243, j244, j249, j250 y j381.
+
+---
+
 ## 2026-11-25 (213) — Revisión contra los referentes (parte 3: currículo MEN, DBA y curso)
 
 ### Contexto
