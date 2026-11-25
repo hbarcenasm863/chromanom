@@ -1,0 +1,756 @@
+{
+ "lote": "icfes-chr-3",
+ "experto": "icfes",
+ "revisadas": 198,
+ "coincidencias_a_ciegas": 197,
+ "ev": {
+  "nitrogenados|1xurxap": "4.8",
+  "nitrogenados|fefzdf": "2.2",
+  "nitrogenados|1f4bgba": "1.3",
+  "nitrogenados|1efwpnx": "5.6",
+  "nitrogenados|1mjb9k2": "4.8",
+  "nitrogenados|1l5bfsy": "9.2",
+  "nitrogenados|1u24eqq": "2.2",
+  "nitrogenados|dpyixr": "2.2",
+  "nitrogenados|8gahn0": "5.6",
+  "nitrogenados|1pyrlf4": "9.2",
+  "nitrogenados|1rdiip8": "5.6",
+  "nitrogenados|114nquq": "2.2",
+  "nitrogenados|1nk85wi": "4.8",
+  "nitrogenados|1qdv5vl": "5.6",
+  "nitrogenados|1aq1b87": "5.6",
+  "nitrogenados|fnu28n": "4.8",
+  "nitrogenados|1dxv979": "4.8",
+  "nitrogenados|1m6dmp6": "5.6",
+  "nitrogenados|1hroo07": "2.2",
+  "nitrogenados|8l5cah": "9.1",
+  "nitrogenados|1sl2rzb": "9.5",
+  "nitrogenados|1clzrpi": "7.3",
+  "nitrogenados|141p1cy": "9.2",
+  "nitrogenados|vl1enj": "9.5",
+  "nitrogenados|jjw851": "8.1",
+  "nitrogenados|2wr0fh": "5.6",
+  "nitrogenados|xaz1ea": "2.2",
+  "nitrogenados|p4qa53": "2.2",
+  "nitrogenados|wqcqom": "8.1",
+  "nitrogenados|18a9ixg": "7.4",
+  "nitrogenados|1m625sa": "9.5",
+  "nitrogenados|14efgmk": "2.2",
+  "nitrogenados|151xtbx": "2.2",
+  "nitrogenados|1ihxaxr": "2.2",
+  "nitrogenados|mjfzjt": "7.3",
+  "nitrogenados|17l9udf": "9.2",
+  "nitrogenados|72stbl": "8.1",
+  "nitrogenados|1ewrelx": "4.8",
+  "nitrogenados|1htb2qf": "7.3",
+  "nitrogenados|x1l7v1": "4.8",
+  "nitrogenados|g0bb07": "3.2",
+  "nitrogenados|5gemmm": "2.2",
+  "nitrogenados|1aj6lmu": "8.1",
+  "polifuncionales|1k3gusn": "4.8",
+  "polifuncionales|143zgj": "4.8",
+  "polifuncionales|1xurxap": "4.8",
+  "polifuncionales|416t00": "4.6",
+  "polifuncionales|16raz3g": "4.8",
+  "polifuncionales|fo1ubr": "2.2",
+  "polifuncionales|wz2kfu": "9.2",
+  "polifuncionales|jvih6q": "5.6",
+  "polifuncionales|t2lon7": "4.8",
+  "polifuncionales|1f1cnit": "4.8",
+  "polifuncionales|klnzw5": "7.3",
+  "polifuncionales|1e7wiv2": "4.8",
+  "polifuncionales|devbck": "4.8",
+  "polifuncionales|tvrnu": "4.8",
+  "polifuncionales|xyji45": "5.6",
+  "polifuncionales|1nma2ea": "5.6",
+  "polifuncionales|7munh": "4.8",
+  "polifuncionales|1buq9n8": "7.3",
+  "polifuncionales|q6bmno": "7.3",
+  "polifuncionales|18y5ozp": "9.2",
+  "polifuncionales|yi8vyw": "9.1",
+  "polifuncionales|un5e0t": "9.5",
+  "polifuncionales|ccgh3u": "6.2",
+  "polifuncionales|1be3em2": "5.6",
+  "polifuncionales|10y977v": "2.2",
+  "polifuncionales|r4zsyv": "3.2",
+  "polifuncionales|jompwy": "7.3",
+  "polifuncionales|khb5bu": "9.2",
+  "polifuncionales|ny2oth": "7.4",
+  "polifuncionales|122a4k1": "2.2",
+  "polifuncionales|16z48qq": "3.2",
+  "polifuncionales|s5ar47": "8.1",
+  "polifuncionales|u5g4w3": "9.2",
+  "polifuncionales|140wa7w": "8.1",
+  "polifuncionales|ytiuqt": "6.2",
+  "polifuncionales|5owaxf": "7.3",
+  "polifuncionales|16o3uak": "7.3",
+  "polifuncionales|1cklra8": "4.8",
+  "polifuncionales|1jhakch": "2.2",
+  "polifuncionales|19r3157": "2.2",
+  "polifuncionales|vb1wun": "8.1",
+  "isomeria|i7vw1k": "4.8",
+  "isomeria|ctc68w": "5.6",
+  "isomeria|1vqzwf1": "4.8",
+  "isomeria|1354gul": "2.2",
+  "isomeria|1tvmfs3": "5.6",
+  "isomeria|121c0ti": "5.6",
+  "isomeria|1hp67bg": "2.2",
+  "isomeria|1mrva5h": "9.2",
+  "isomeria|1a3a8x": "5.6",
+  "isomeria|hgnkbw": "5.6",
+  "isomeria|1txek5y": "2.2",
+  "isomeria|1ook1y3": "2.2",
+  "isomeria|cbb8cc": "9.2",
+  "isomeria|1sz95qh": "4.8",
+  "isomeria|w47l0f": "5.6",
+  "isomeria|183nebj": "4.8",
+  "isomeria|1lbtw79": "2.2",
+  "isomeria|um6evx": "2.2",
+  "isomeria|1inp55i": "4.8",
+  "isomeria|7fohpy": "5.6",
+  "isomeria|1x9zzug": "4.8",
+  "isomeria|183i7mt": "5.6",
+  "isomeria|2l7y9b": "2.2",
+  "isomeria|8suo00": "4.8",
+  "isomeria|1xmzzun": "7.3",
+  "isomeria|1vorwvn": "9.2",
+  "isomeria|erdsuh": "9.2",
+  "isomeria|fbj0w": "7.3",
+  "isomeria|194o18h": "9.5",
+  "isomeria|h03euk": "8.1",
+  "isomeria|1b5k7t4": "4.8",
+  "isomeria|5qzh5x": "2.2",
+  "isomeria|es7qlu": "3.2",
+  "isomeria|1wasyaz": "8.1",
+  "isomeria|191hcce": "7.3",
+  "isomeria|1eraxsu": "9.2",
+  "isomeria|11oakkv": "2.2",
+  "isomeria|hpzy4c": "3.2",
+  "isomeria|cm9e67": "7.3",
+  "isomeria|1xvzv51": "9.2",
+  "isomeria|3402lg": "8.1",
+  "isomeria|it3dei": "6.2",
+  "isomeria|3s8frf": "7.4",
+  "isomeria|1cbuyja": "4.8",
+  "isomeria|1azy9t": "5.6",
+  "isomeria|1z119pi": "3.2",
+  "isomeria|1ff2k5u": "3.2",
+  "isomeria|120366t": "8.1",
+  "reacciones|8yjfpv": "4.6",
+  "reacciones|14j4wsx": "4.6",
+  "reacciones|1kbqupf": "7.2",
+  "reacciones|socjve": "4.6",
+  "reacciones|1g8mo2w": "4.6",
+  "reacciones|wz8rjn": "4.6",
+  "reacciones|1okbain": "1.2",
+  "reacciones|vbqpo4": "9.2",
+  "reacciones|e4w86b": "4.6",
+  "reacciones|tgdhdb": "4.6",
+  "reacciones|d89hbs": "4.6",
+  "reacciones|152u5h1": "4.6",
+  "reacciones|16yoeom": "4.6",
+  "reacciones|8u2qg7": "7.2",
+  "reacciones|aoa4o8": "4.6",
+  "reacciones|sltbnd": "4.6",
+  "reacciones|1nghogj": "2.1",
+  "reacciones|1m2nqa2": "2.1",
+  "reacciones|1s40mit": "9.2",
+  "reacciones|ja5h9u": "4.6",
+  "reacciones|1ghs6vr": "4.6",
+  "reacciones|zwc0x6": "4.6",
+  "reacciones|vqd0hf": "4.6",
+  "reacciones|l43dj6": "4.6",
+  "reacciones|vyqo9w": "7.3",
+  "reacciones|10tij76": "4.3",
+  "reacciones|z25546": "2.6",
+  "reacciones|jh543i": "7.3",
+  "reacciones|1se5jdm": "2.1",
+  "reacciones|50i3gq": "7.3",
+  "reacciones|1wkvlqt": "2.1",
+  "reacciones|18w8uso": "7.3",
+  "reacciones|14y7vbe": "5.6",
+  "reacciones|1a818jj": "7.3",
+  "reacciones|10wlbj3": "2.1",
+  "reacciones|phtej": "4.6",
+  "reacciones|1gmd5wo": "2.1",
+  "reacciones|1po4cc9": "7.3",
+  "reacciones|fmy3s5": "9.2",
+  "reacciones|zs7ucb": "9.5",
+  "reacciones|oqqvu4": "6.2",
+  "reacciones|69vuif": "8.1",
+  "reacciones|1mknumw": "4.6",
+  "reacciones|tnhodw": "2.1",
+  "reacciones|15xjo45": "1.2",
+  "reacciones|15uy95e": "8.1",
+  "reacciones|nbyxnk": "7.3",
+  "reacciones|glris8": "9.2",
+  "carbono|ozbkw0": "4.8",
+  "carbono|45n94a": "4.8",
+  "carbono|1ng73ts": "4.8",
+  "carbono|7gsy0o": "3.2",
+  "carbono|7s4fjw": "3.2",
+  "carbono|g5lic5": "2.2",
+  "carbono|xup0id": "1.2",
+  "carbono|18mix0m": "6.1",
+  "carbono|6c9k5t": "7.3",
+  "carbono|1ph2pqk": "9.5",
+  "carbono|10vka2q": "8.1",
+  "carbono|1wxcnwz": "8.1",
+  "carbono|t2snuz": "2.2",
+  "carbono|eu5qzd": "3.2",
+  "carbono|5h9xbz": "1.2",
+  "carbono|1vcdam6": "7.3",
+  "carbono|1uv9ohc": "9.2",
+  "carbono|8hqudr": "8.1"
+ },
+ "nd": {
+  "nitrogenados|1xurxap": 2,
+  "nitrogenados|fefzdf": 2,
+  "nitrogenados|1f4bgba": 2,
+  "nitrogenados|1efwpnx": 1,
+  "nitrogenados|1mjb9k2": 1,
+  "nitrogenados|1l5bfsy": 3,
+  "nitrogenados|1u24eqq": 3,
+  "nitrogenados|dpyixr": 3,
+  "nitrogenados|8gahn0": 1,
+  "nitrogenados|1pyrlf4": 3,
+  "nitrogenados|1rdiip8": 1,
+  "nitrogenados|114nquq": 2,
+  "nitrogenados|1nk85wi": 1,
+  "nitrogenados|1qdv5vl": 1,
+  "nitrogenados|1aq1b87": 2,
+  "nitrogenados|fnu28n": 2,
+  "nitrogenados|1dxv979": 2,
+  "nitrogenados|1m6dmp6": 2,
+  "nitrogenados|1hroo07": 3,
+  "nitrogenados|8l5cah": 3,
+  "nitrogenados|1sl2rzb": 2,
+  "nitrogenados|1clzrpi": 2,
+  "nitrogenados|141p1cy": 3,
+  "nitrogenados|vl1enj": 3,
+  "nitrogenados|jjw851": 2,
+  "nitrogenados|2wr0fh": 1,
+  "nitrogenados|xaz1ea": 3,
+  "nitrogenados|p4qa53": 2,
+  "nitrogenados|wqcqom": 3,
+  "nitrogenados|18a9ixg": 2,
+  "nitrogenados|1m625sa": 3,
+  "nitrogenados|14efgmk": 2,
+  "nitrogenados|151xtbx": 3,
+  "nitrogenados|1ihxaxr": 3,
+  "nitrogenados|mjfzjt": 2,
+  "nitrogenados|17l9udf": 3,
+  "nitrogenados|72stbl": 2,
+  "nitrogenados|1ewrelx": 3,
+  "nitrogenados|1htb2qf": 3,
+  "nitrogenados|x1l7v1": 3,
+  "nitrogenados|g0bb07": 4,
+  "nitrogenados|5gemmm": 4,
+  "nitrogenados|1aj6lmu": 4,
+  "polifuncionales|1k3gusn": 2,
+  "polifuncionales|143zgj": 2,
+  "polifuncionales|1xurxap": 2,
+  "polifuncionales|416t00": 3,
+  "polifuncionales|16raz3g": 2,
+  "polifuncionales|fo1ubr": 2,
+  "polifuncionales|wz2kfu": 2,
+  "polifuncionales|jvih6q": 1,
+  "polifuncionales|t2lon7": 2,
+  "polifuncionales|1f1cnit": 2,
+  "polifuncionales|klnzw5": 2,
+  "polifuncionales|1e7wiv2": 2,
+  "polifuncionales|devbck": 2,
+  "polifuncionales|tvrnu": 2,
+  "polifuncionales|xyji45": 1,
+  "polifuncionales|1nma2ea": 1,
+  "polifuncionales|7munh": 2,
+  "polifuncionales|1buq9n8": 2,
+  "polifuncionales|q6bmno": 2,
+  "polifuncionales|18y5ozp": 3,
+  "polifuncionales|yi8vyw": 3,
+  "polifuncionales|un5e0t": 3,
+  "polifuncionales|ccgh3u": 3,
+  "polifuncionales|1be3em2": 2,
+  "polifuncionales|10y977v": 3,
+  "polifuncionales|r4zsyv": 3,
+  "polifuncionales|jompwy": 3,
+  "polifuncionales|khb5bu": 3,
+  "polifuncionales|ny2oth": 2,
+  "polifuncionales|122a4k1": 2,
+  "polifuncionales|16z48qq": 3,
+  "polifuncionales|s5ar47": 2,
+  "polifuncionales|u5g4w3": 3,
+  "polifuncionales|140wa7w": 2,
+  "polifuncionales|ytiuqt": 3,
+  "polifuncionales|5owaxf": 3,
+  "polifuncionales|16o3uak": 3,
+  "polifuncionales|1cklra8": 3,
+  "polifuncionales|1jhakch": 3,
+  "polifuncionales|19r3157": 3,
+  "polifuncionales|vb1wun": 4,
+  "isomeria|i7vw1k": 1,
+  "isomeria|ctc68w": 1,
+  "isomeria|1vqzwf1": 1,
+  "isomeria|1354gul": 2,
+  "isomeria|1tvmfs3": 2,
+  "isomeria|121c0ti": 1,
+  "isomeria|1hp67bg": 2,
+  "isomeria|1mrva5h": 3,
+  "isomeria|1a3a8x": 1,
+  "isomeria|hgnkbw": 2,
+  "isomeria|1txek5y": 2,
+  "isomeria|1ook1y3": 3,
+  "isomeria|cbb8cc": 2,
+  "isomeria|1sz95qh": 1,
+  "isomeria|w47l0f": 1,
+  "isomeria|183nebj": 1,
+  "isomeria|1lbtw79": 3,
+  "isomeria|um6evx": 2,
+  "isomeria|1inp55i": 1,
+  "isomeria|7fohpy": 2,
+  "isomeria|1x9zzug": 1,
+  "isomeria|183i7mt": 2,
+  "isomeria|2l7y9b": 2,
+  "isomeria|8suo00": 2,
+  "isomeria|1xmzzun": 2,
+  "isomeria|1vorwvn": 3,
+  "isomeria|erdsuh": 3,
+  "isomeria|fbj0w": 2,
+  "isomeria|194o18h": 3,
+  "isomeria|h03euk": 2,
+  "isomeria|1b5k7t4": 2,
+  "isomeria|5qzh5x": 3,
+  "isomeria|es7qlu": 3,
+  "isomeria|1wasyaz": 2,
+  "isomeria|191hcce": 2,
+  "isomeria|1eraxsu": 3,
+  "isomeria|11oakkv": 3,
+  "isomeria|hpzy4c": 3,
+  "isomeria|cm9e67": 2,
+  "isomeria|1xvzv51": 3,
+  "isomeria|3402lg": 2,
+  "isomeria|it3dei": 3,
+  "isomeria|3s8frf": 3,
+  "isomeria|1cbuyja": 3,
+  "isomeria|1azy9t": 3,
+  "isomeria|1z119pi": 4,
+  "isomeria|1ff2k5u": 4,
+  "isomeria|120366t": 4,
+  "reacciones|8yjfpv": 2,
+  "reacciones|14j4wsx": 2,
+  "reacciones|1kbqupf": 2,
+  "reacciones|socjve": 2,
+  "reacciones|1g8mo2w": 1,
+  "reacciones|wz8rjn": 2,
+  "reacciones|1okbain": 3,
+  "reacciones|vbqpo4": 2,
+  "reacciones|e4w86b": 2,
+  "reacciones|tgdhdb": 2,
+  "reacciones|d89hbs": 2,
+  "reacciones|152u5h1": 2,
+  "reacciones|16yoeom": 2,
+  "reacciones|8u2qg7": 3,
+  "reacciones|aoa4o8": 1,
+  "reacciones|sltbnd": 2,
+  "reacciones|1nghogj": 3,
+  "reacciones|1m2nqa2": 2,
+  "reacciones|1s40mit": 3,
+  "reacciones|ja5h9u": 2,
+  "reacciones|1ghs6vr": 2,
+  "reacciones|zwc0x6": 2,
+  "reacciones|vqd0hf": 2,
+  "reacciones|l43dj6": 2,
+  "reacciones|vyqo9w": 3,
+  "reacciones|10tij76": 3,
+  "reacciones|z25546": 3,
+  "reacciones|jh543i": 3,
+  "reacciones|1se5jdm": 3,
+  "reacciones|50i3gq": 3,
+  "reacciones|1wkvlqt": 3,
+  "reacciones|18w8uso": 2,
+  "reacciones|14y7vbe": 1,
+  "reacciones|1a818jj": 2,
+  "reacciones|10wlbj3": 3,
+  "reacciones|phtej": 2,
+  "reacciones|1gmd5wo": 3,
+  "reacciones|1po4cc9": 2,
+  "reacciones|fmy3s5": 3,
+  "reacciones|zs7ucb": 3,
+  "reacciones|oqqvu4": 3,
+  "reacciones|69vuif": 3,
+  "reacciones|1mknumw": 1,
+  "reacciones|tnhodw": 3,
+  "reacciones|15xjo45": 3,
+  "reacciones|15uy95e": 4,
+  "reacciones|nbyxnk": 2,
+  "reacciones|glris8": 3,
+  "carbono|ozbkw0": 1,
+  "carbono|45n94a": 2,
+  "carbono|1ng73ts": 2,
+  "carbono|7gsy0o": 3,
+  "carbono|7s4fjw": 3,
+  "carbono|g5lic5": 2,
+  "carbono|xup0id": 3,
+  "carbono|18mix0m": 2,
+  "carbono|6c9k5t": 2,
+  "carbono|1ph2pqk": 3,
+  "carbono|10vka2q": 2,
+  "carbono|1wxcnwz": 2,
+  "carbono|t2snuz": 3,
+  "carbono|eu5qzd": 4,
+  "carbono|5h9xbz": 4,
+  "carbono|1vcdam6": 2,
+  "carbono|1uv9ohc": 4,
+  "carbono|8hqudr": 2
+ },
+ "hallazgos": [
+  {
+   "id": "nitrogenados|1f4bgba",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E3"
+   },
+   "motivo": "Pregunta sobre procesar la yuca para eliminar un tóxico: es CTS/salud (evidencia 1.3), no uso conceptual."
+  },
+  {
+   "id": "nitrogenados|p4qa53",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E1"
+   },
+   "motivo": "Explica un fenómeno cotidiano (neutralización de una base volátil); no hay salud ni tecnología en juego: E1."
+  },
+  {
+   "id": "nitrogenados|1htb2qf",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Hay tabla y se pide concluir qué grupo funcional tiene la muestra a partir de datos: indagación (7.3), no uso."
+  },
+  {
+   "id": "polifuncionales|143zgj",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Aplicar la regla de prioridad IUPAC es nomenclatura (uso, 4.8), no explicar un fenómeno; coherente con el ítem 55, ya marcado I2."
+  },
+  {
+   "id": "polifuncionales|t2lon7",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Aplicar la regla de prioridad IUPAC es nomenclatura (uso, 4.8); coherente con el ítem 55."
+  },
+  {
+   "id": "polifuncionales|1e7wiv2",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Aplicar la regla del sufijo -diona es nomenclatura (uso, 4.8)."
+  },
+  {
+   "id": "polifuncionales|7munh",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Aplicar la regla de prioridad IUPAC es nomenclatura (uso, 4.8)."
+  },
+  {
+   "id": "polifuncionales|416t00",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Reconocer qué tipo de reacción ocurre (reducción de una cetona) es uso (4.6), no explicar un fenómeno."
+  },
+  {
+   "id": "reacciones|socjve",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Reconocer el tipo de reacción (oxidación) es uso (4.6)."
+  },
+  {
+   "id": "reacciones|wz8rjn",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Es la misma tarea que el ítem 167 (ruptura homolítica), que está marcado I2; mismo criterio (uso, 4.6). Además casi repite 167: no ponerlos juntos."
+  },
+  {
+   "id": "reacciones|d89hbs",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Reconocer el tipo de reacción (saponificación) es uso (4.6)."
+  },
+  {
+   "id": "polifuncionales|tvrnu",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Es nomenclatura (cómo se nombran los -OH como prefijo hidroxi-), no CTS: uso I2 (4.8). Etiqueta E3 equivocada."
+  },
+  {
+   "id": "isomeria|1ook1y3",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E1"
+   },
+   "motivo": "Explica por qué cambia el punto de fusión según el empaquetamiento: propiedades y estructura (2.2); no analiza efectos de una tecnología o de la salud."
+  },
+  {
+   "id": "reacciones|10tij76",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "uso",
+    "af": "I2"
+   },
+   "motivo": "Se leen Ea y ΔH de un diagrama de energía: aplicar conceptos de energía (uso 4.3), no explicar un fenómeno."
+  },
+  {
+   "id": "reacciones|z25546",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "exp",
+    "af": "E1"
+   },
+   "motivo": "«¿Qué ocurriría si...?» con un modelo de reacción endotérmica es explicación (2.6), según 6.6 del archivo de referentes."
+  },
+  {
+   "id": "nitrogenados|8l5cah",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "«Qué explicación es coherente con los datos» es la evidencia 9.1 (explicaciones consistentes con la ciencia): N3, no N2."
+  },
+  {
+   "id": "polifuncionales|yi8vyw",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "«Qué explicación es coherente con los datos» es la evidencia 9.1: N3, no N2."
+  },
+  {
+   "id": "polifuncionales|wz2kfu",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Elegir la comparación más útil para responder una pregunta es diseño de la investigación (9.2): N3."
+  },
+  {
+   "id": "isomeria|cbb8cc",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Elegir la propiedad que permite distinguir dos sustancias es 9.2/9.3: N3, no N2."
+  },
+  {
+   "id": "reacciones|vbqpo4",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Decidir qué variables se mantienen iguales es diseño experimental (9.2): N3, según 6.6."
+  },
+  {
+   "id": "polifuncionales|s5ar47",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N4"
+   },
+   "motivo": "«¿Qué relación muestran los datos?» con una tabla es leer patrones (8.1): N4; coherente con 113 y 117."
+  },
+  {
+   "id": "isomeria|3s8frf",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N2"
+   },
+   "motivo": "Hay que extender un patrón de la tabla (1, 2 y 3 carbonos quirales a 5) para predecir el siguiente valor: evidencia 7.4, N2, según la nota de la sección 6.3."
+  },
+  {
+   "id": "nitrogenados|vl1enj",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Se contrasta una predicción con una observación aislada (no hay patrón en datos): evidencia 9.5, N3."
+  },
+  {
+   "id": "polifuncionales|un5e0t",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Se contrasta una predicción con una observación aislada: evidencia 9.5, N3."
+  },
+  {
+   "id": "isomeria|194o18h",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Se contrasta una predicción con dos valores consultados: evidencia 9.5, N3."
+  },
+  {
+   "id": "reacciones|zs7ucb",
+   "gravedad": "media",
+   "etiquetas": {
+    "c": "ind",
+    "af": "N3"
+   },
+   "motivo": "Se contrasta una predicción con una observación aislada: evidencia 9.5, N3."
+  },
+  {
+   "id": "nitrogenados|1u24eqq",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque se forman a partir de aminoácidos de las proteínas a medida que el alimento se descompone, y su concentración aumenta con el tiempo",
+     "nuevo": "Porque se forman de las proteínas al descomponerse el alimento, y su concentración aumenta con el tiempo"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "nitrogenados|8l5cah",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "La propilamina tiene enlaces N−H y forma puentes de hidrógeno entre sus moléculas; la trimetilamina no tiene hidrógenos unidos al nitrógeno",
+     "nuevo": "La propilamina forma puentes de hidrógeno por sus enlaces N−H; la trimetilamina no tiene H unido al N"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "isomeria|1ook1y3",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "La forma doblada de la cadena cis impide que las moléculas se empaqueten tan ordenadamente como las del isómero trans, de forma más recta",
+     "nuevo": "La cadena cis, doblada, se empaqueta peor que la del isómero trans, más recta"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "isomeria|um6evx",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque aunque tienen los mismos átomos, están unidos de forma distinta, lo que cambia la polaridad y las fuerzas entre sus moléculas",
+     "nuevo": "Porque sus átomos están unidos de forma distinta, y eso cambia las fuerzas entre sus moléculas"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "reacciones|1nghogj",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Porque ocurre por la acción de microorganismos (levaduras) y sin necesidad de oxígeno del aire, a diferencia de la combustión",
+     "nuevo": "Porque la hacen levaduras y no necesita oxígeno del aire, a diferencia de la combustión"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "reacciones|1se5jdm",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Toda reacción necesita superar una barrera; la chispa del motor aporta la energía de activación y luego el calor liberado mantiene la combustión",
+     "nuevo": "Toda reacción necesita superar una barrera: la chispa aporta la energía de activación"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "reacciones|1wkvlqt",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "La glucosa tiene un grupo aldehído libre que reduce el Cu²⁺; en la sacarosa los extremos reductores están unidos entre sí",
+     "nuevo": "La glucosa tiene un aldehído libre que reduce el Cu²⁺; la sacarosa no lo tiene libre"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "reacciones|fmy3s5",
+   "gravedad": "baja",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Preparar dos mezclas iguales de ácido y alcohol a la misma temperatura, una con ácido sulfúrico y otra sin él, y comparar cuánto éster se forma en el mismo tiempo",
+     "nuevo": "Preparar dos mezclas iguales a la misma temperatura, una con ácido sulfúrico y otra sin él, y comparar el éster formado en el mismo tiempo"
+    }
+   ],
+   "motivo": "La opción correcta es la más larga y detallada (en este lote lo es en 117 de 198 ítems): se acorta para que la longitud no delate la clave. Si la explicación cita lo suprimido, ajustarla."
+  },
+  {
+   "id": "isomeria|8suo00",
+   "gravedad": "alta",
+   "textos": [],
+   "motivo": "Clave dudosa: ciclopropano/propeno es isomería anillo-cadena. Muchos textos la llaman «de cadena» (esqueleto) y el mismo banco, en el taller de isomería, pide ciclobutano y metilciclopropano entre las de cadena; otros la llaman «de función» (alqueno frente a cicloalcano). Un estudiante puede razonar bien y marcar «De cadena», que está entre las opciones. Se cambia el par a dos cicloalcanos de esqueleto distinto, donde la clave es sin discusión «De cadena». Reescribir también la explicación (exp): pasa de «función» a «cadena: el esqueleto de carbonos es distinto (anillo de 4 frente a anillo de 3 con un metilo)». Resolví a ciegas «De cadena» (única discrepancia del lote)."
+  },
+  {
+   "id": "reacciones|69vuif",
+   "gravedad": "media",
+   "textos": [
+    {
+     "campo": "correcta",
+     "original": "Acelera la reacción: con él se llega antes a un mayor rendimiento",
+     "nuevo": "Acelera la reacción: en el mismo tiempo se forma mucho más éster con él que sin él"
+    }
+   ],
+   "motivo": "«Un mayor rendimiento» sugiere que el catalizador sube el rendimiento de equilibrio, lo cual es un error conceptual (el catalizador solo acelera). La gráfica solo muestra más éster en el mismo tiempo."
+  }
+ ]
+}

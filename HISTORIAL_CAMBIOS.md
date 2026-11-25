@@ -7,6 +7,33 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-25 (211) — Revisión del banco Saber contra los referentes curriculares (parte 2: lote 3)
+
+### Contexto
+Continúa la revisión que pidió el docente (ver la sesión 210). Esta parte cubre las **198 preguntas Saber restantes** (nitrogenados, polifuncionales, isomería, reacciones y carbono). Con ella, la revisión de evaluación Icfes de ChromaNom queda completa: **596 preguntas**, todas con evidencia del Marco y nivel de desempeño.
+
+### Proceso
+Un agente experto en evaluación Icfes (química orgánica) resolvió las 198 a ciegas: **197 de 198** coinciden con la clave.
+
+### Hallazgos (36)
+- **Alta (1):** ciclopropano frente a propeno. La clave dice «de función» y el experto dice «de cadena», porque los textos escolares la llaman de las dos formas. **No se cambió**: queda para decisión del docente (anotado en `revision-referentes-2026-11/descartes.json`).
+- **Media (27):** 26 etiquetas corregidas (nomenclatura y tipo de reacción pasan a uso I2; varias de indagación entre N2, N3 y N4) y una gráfica de esterificación que sugería que el catalizador sube el rendimiento de equilibrio (se reescribió).
+- **Baja (8):** en 8 preguntas la correcta era claramente la opción más larga; se acortó.
+
+### Cambios
+- `docente-datos.js` (correcciones de texto), `revision-ref.js` regenerado (596 preguntas con `c`, `af`, `ev` y `nd`) y `saber-juego.js` regenerado.
+- Caché `chromanom-v112`; `revision-ref.js?v=2`. Probado con Playwright: panel y juego sin errores, 637 preguntas con evidencia y nivel.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+- **Decisión del docente:** la pregunta de ciclopropano y propeno (cadena o función).
+- **Fórmulas con paréntesis:** unas 15 preguntas tienen fórmulas con ramas entre paréntesis en estructuras que se ven dibujadas. Comprobar en pantalla que `fxAuto` también convierte las opciones.
+- **Siguientes partes de la revisión:** currículo MEN y ciencias.
+
+---
+
 ## 2026-11-24 (210) — Revisión del banco Saber contra los referentes curriculares (parte 1: evaluación Icfes)
 
 ### Contexto
