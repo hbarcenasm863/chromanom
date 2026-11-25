@@ -7,6 +7,21 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (221) — `revision-ref.js` se puede cargar fuera del navegador
+
+### Contexto
+Al generar de nuevo `saber-juego.js` en IonNom, el archivo de etiquetas de la revisión fallaba fuera del navegador.
+
+### Cambios
+- `revision-ref.js` (`?v=7`) revisa que exista la página antes de esperar a que cargue. Las etiquetas no cambian.
+- `saber-juego.js` se generó de nuevo y quedó igual.
+- Caché `chromanom-v122`.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (220) — Pendientes del MDEC: nombres bien partidos, ésteres, contador y DBA del Juego
 
 ### Contexto

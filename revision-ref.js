@@ -30,5 +30,5 @@ window.REVISION_REF_OTRAS={"1e0vcic":{"dba":["sin"],"curso":11},"g2y55u":{"dba":
     J.forEach(function(L){(L||[]).forEach(poner);});
   }
   aplicar();
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',aplicar);
+  if(typeof document!=='undefined'&&document.readyState==='loading')document.addEventListener('DOMContentLoaded',aplicar);
 })();
