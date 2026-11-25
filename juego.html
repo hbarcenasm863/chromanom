@@ -7135,8 +7135,9 @@ QBANK.push(...QBANK_RXN_BUILD);
   //  · «¿Cuál es el nombre de esta estructura?» con fichas de colores y opciones que son nombres reales
   //    que cambian una sola ficha (el Juego pinta cada nombre con los colores del método).
   //  · «¿A qué parte pertenece el fragmento…?» con las cuatro partes del modelo.
-  const COL={r:'#0891b2',c:'#166534',i:'#b45309',g:'#CC79A7'},PART={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturación (o saturación)',g:'④ Grupo funcional'};
-  const chip=(t,c)=>`<span style="display:inline-block;padding:0 6px;margin:1px;border-radius:5px;font-weight:700;color:#fff;background:${COL[c]}">${t}</span>`;
+  // los mismos colores de las etiquetas del sitio (.cn-chip): [texto, borde, fondo]
+  const COL={r:['#0e7490','#0891b2','#ecfeff'],c:['#14532d','#166534','#f0fdf4'],i:['#92400e','#b45309','#fffbeb'],g:['#9a4a78','#CC79A7','#fdf2f8']},PART={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturación (o saturación)',g:'④ Grupo funcional'};
+  const chip=(t,c)=>`<span style="display:inline-block;padding:0 7px;margin:1px;border-radius:999px;font-weight:700;color:${COL[c][0]};border:1.5px solid ${COL[c][1]};background:${COL[c][2]}">${t}</span>`;
   const firma=m=>m.p.map(p=>p[1]).join('');
   const vecinos=m=>L.filter(x=>x.k!==m.k&&x.n!==m.n&&firma(x)===firma(m)&&m.p.filter((p,i)=>p[0]!==x.p[i][0]).length===1);
   const cuentaMC={};

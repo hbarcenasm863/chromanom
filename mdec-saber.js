@@ -17,10 +17,11 @@ var TEMA={alcanos:'alcanos',alquenos:'alquenos',alquinos:'alquenos',benceno:'aro
 var PARTE={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturación (o saturación)',g:'④ Grupo funcional'};
 var QUE={r:'los sustituyentes',c:'la cadena principal',i:'la insaturación (o la saturación)',g:'el grupo funcional'};
 var POR_TIPO=4;
-/* Colores del método (la parte más importante del MDEC): ① cian, ② verde, ③ ámbar, ④ rosado */
-var COL={r:'#0891b2',c:'#166534',i:'#b45309',g:'#CC79A7'};
+/* Colores del método (la parte más importante del MDEC), los mismos de las etiquetas del sitio (.cn-chip):
+   [texto, borde, fondo] de ① sustituyentes, ② cadena principal, ③ insaturaciones y ④ grupo funcional */
+var COL={r:['#0e7490','#0891b2','#ecfeff'],c:['#14532d','#166534','#f0fdf4'],i:['#92400e','#b45309','#fffbeb'],g:['#9a4a78','#CC79A7','#fdf2f8']};
 function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function chip(t,cls){return '<span style="display:inline-block;padding:0 6px;margin:1px;border-radius:5px;font-weight:700;color:#fff;background:'+COL[cls]+'">'+esc(t)+'</span>';}
+function chip(t,cls){var c=COL[cls];return '<span style="display:inline-block;padding:0 7px;margin:1px;border-radius:999px;font-weight:700;color:'+c[0]+';border:1.5px solid '+c[1]+';background:'+c[2]+'">'+esc(t)+'</span>';}
 function nombreColor(p){return '<span style="white-space:nowrap">'+p.map(function(x){return chip(x[0].trim(),x[1]);}).join('')+'</span>';}
 var LEYENDA=chip('① sustituyentes','r')+' '+chip('② cadena principal','c')+' '+chip('③ insaturación o saturación','i')+' '+chip('④ grupo funcional','g');
 var PARTE_HTML={r:chip(PARTE.r,'r'),c:chip(PARTE.c,'c'),i:chip(PARTE.i,'i'),g:chip(PARTE.g,'g')};

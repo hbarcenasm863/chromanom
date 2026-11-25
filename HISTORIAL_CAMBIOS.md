@@ -7,6 +7,20 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (218) — Preguntas MDEC con los colores exactos del sitio
+
+### Contexto
+El docente mostró los colores de ChromaNom: las etiquetas ① sustituyentes, ② cadena principal, ③ insaturaciones y ④ grupo funcional, con el texto y el borde del color de cada parte sobre un fondo claro.
+
+### Cambios
+- `mdec-saber.js` y el bloque MDEC de `juego.html`: las fichas, la leyenda y las opciones de las preguntas MDEC ahora usan exactamente los colores y el estilo de `.cn-chip` de `chromanom.css` (texto, borde y fondo de cada parte), en vez de fichas rellenas de color.
+- Caché `chromanom-v120`; `mdec-saber.js?v=2`. Probado con Playwright: el Banco de preguntas muestra las fichas con el estilo del sitio y no hay errores.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (217) — Preguntas MDEC en todo el banco: juego, talleres, evaluaciones y Banco, con los colores del método
 
 ### Contexto
