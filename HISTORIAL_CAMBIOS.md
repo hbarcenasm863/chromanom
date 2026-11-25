@@ -7,6 +7,35 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (223) — Lote 8: 12 preguntas Saber de nivel 4
+
+### Contexto
+El docente pidió preguntas nuevas de nivel 4 (el más alto de la prueba Saber 11). El banco tenía solo 27.
+
+### Cambios
+- `docente-datos.js`: nuevo bloque «Lote 8» con 12 preguntas de nivel 4.
+  - Competencias: 5 de indagación, 5 de explicación y 2 de uso comprensivo.
+  - Todas traen tabla y son de 12 temas distintos: puntos de ebullición de isómeros, hidratación de alquenos, halogenación del propano, pruebas de carbonilos, esterificación, diseño experimental, solubilidad de alcoholes, cis y trans-2-buteno, amilasa, PLA, pKa de hidroxibenzoicos y separación por extracción.
+  - Cada pregunta trae `c`, `af`, `ev`, `nd`, `dba` y `curso`.
+- La revisaron 4 agentes en cadena (`revision-lote8-2026-11/`):
+  - **Autor**, que siguió REFERENTES_CURRICULARES.md.
+  - **Química orgánica**: resolvió a ciegas las 12 y todas coincidieron con la clave. Confirmó los datos de la literatura y corrigió 2 explicaciones.
+  - **Evaluación Icfes, datos y tablas**:
+    - En 9 preguntas la clave era la opción más larga: igualó el largo de las opciones.
+    - Volvió más exigentes 3 preguntas que no eran de nivel 4 real.
+    - Reescribió distractores débiles y completó 2 tablas.
+  - **Currículo MEN**:
+    - Ajustó el DBA de 4 preguntas: alcoholes a 9.3, propiedades a 9.3 y 8.2, isomería geométrica a «sin DBA» y acidez a 9.2.
+    - Resolvió a ciegas las preguntas que el auditor Icfes reescribió y las confirmó.
+- `saber-juego.js` regenerado.
+- Caché `chromanom-v124`, `docente-datos.js?v=112` y `saber-juego.js?v=108`.
+- Probado con Playwright: el panel y el Juego cargan sin errores.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (222) — Palabras con DBA y curso
 
 ### Contexto
