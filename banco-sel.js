@@ -53,11 +53,14 @@ function construir(){
     /* sin DBA propio, hereda estándares y priorizados de los DBA «cercanos» del tema */
     (dba.length?dba:(mt.dbaCercano||[])).forEach(function(d){var m=MAPA.dba[d]||{};est=est.concat(m.estandares||[]);pri=pri.concat(m.priorizados||[]);});
     (mt.priorizados||[]).forEach(function(p){pri.push(p);});
+    /* Método MDEC (modelo propio del docente): no se enlaza a ningún DBA, estándar ni priorizado */
+    if(q.mdec){dba=[];est=[];pri=[];}
     var grados=[];
     if(CFG.gradoDe){var gq=CFG.gradoDe(q,tema);if(gq!=null)grados=[].concat(gq);}
     else if(q.curso)grados=[].concat(q.curso);
     if(!grados.length){dba.forEach(function(d){var n=parseInt(d,10);if(n)grados.push(n);});}
     if(!grados.length){grados=[].concat(mt.grados||mt.grado||[]);}
+    if(q.mdec&&CFG.gradoMdec)grados=[].concat(CFG.gradoMdec);
     var it={q:q,tema:tema,key:claveDe(q,tema),c:c,af:af,dba:dba,est:unicos(est),pri:unicos(pri),grados:unicos(grados).sort(function(a,b){return a-b;}),
       texto:(limpio(q.ctx)+' '+limpio(q.q)+' '+(q.o||[]).map(limpio).join(' ')).toLowerCase(),datos:!!(q.tabla||q.graf||q.esq||q.opsGraf)};
     if(POR_CLAVE[it.key])return;POR_CLAVE[it.key]=it;TODAS.push(it);
@@ -145,21 +148,25 @@ function filtrar(){
     if(F.af&&it.af!==F.af)return false;
     if(F.nd&&String(it.q.nd||'')!==F.nd)return false;
     if(F.datos==='si'&&!it.datos)return false;
+    if(F.datos==='mdec'&&!it.q.mdec)return false;
+    if(F.datos==='sinmdec'&&it.q.mdec)return false;
     if(qlow&&it.texto.indexOf(qlow)<0)return false;
     return true;
   });
 }
 function tarjeta(it,sel){
-  var q=it.q,ok=(q.icfes||q.fijo)?q.r:0,ops=(q.o||[]).map(function(o,i){return '<li'+(i===ok?' class="ok"':'')+'>'+e(limpio(o))+'</li>';}).join('');
+  /* las preguntas MDEC traen su versión con los colores del método (q.html), que es lo central del modelo */
+  var q=it.q,H=(q.mdec&&q.html)||{},ok=(q.icfes||q.fijo)?q.r:0,ops=(q.o||[]).map(function(o,i){return '<li'+(i===ok?' class="ok"':'')+'>'+((H.o&&H.o[o])||e(limpio(o)))+'</li>';}).join('');
   var extra=SI&&SI.extraHTML?SI.extraHTML(q):'';
   var tags='<span class="bs-t">'+e(CFG.temaNombre?CFG.temaNombre(it.tema):it.tema)+'</span>'+
     (it.grados.length?'<span class="bs-t">Grado '+it.grados.join('–')+'.°</span>':'')+
     '<span class="bs-t">'+nombreComp(it.c)+(it.af?' · '+e(it.af):'')+'</span>'+
     it.dba.map(function(d){return '<span class="bs-t">DBA '+e(d)+'</span>';}).join('')+
     (q.ev?'<span class="bs-t" title="Evidencia del Marco de referencia Saber 11.° (Icfes, 2019)">Evidencia '+e(q.ev)+'</span>':'')+(q.nd?'<span class="bs-t" title="Nivel de desempeño Saber 11.° que exige la pregunta">Nivel '+e(q.nd)+'</span>':'')+
+    (q.mdec?'<span class="bs-t" title="Método MDEC: modelo propio del docente, sin DBA ni estándar">Método MDEC</span>':'')+
     (q.icfes?'<span class="bs-t">Oficial Icfes '+e(q.icfes)+'</span>':'')+(it.datos?'<span class="bs-t">Con datos</span>':'');
   return '<div class="bs-q'+(sel?' on':'')+'" data-k="'+e(it.key)+'"><div class="bs-cab"><input type="checkbox" aria-label="Elegir esta pregunta"'+(sel?' checked':'')+'><div style="flex:1"><div class="bs-tags">'+tags+'</div>'+
-    (q.ctx?'<div class="bs-ctx">'+e(limpio(q.ctx))+'</div>':'')+extra+'<div class="bs-enun">'+e(limpio(q.q))+'</div>'+
+    (q.ctx?'<div class="bs-ctx">'+(H.ctx||e(limpio(q.ctx)))+'</div>':'')+extra+'<div class="bs-enun">'+(H.q||e(limpio(q.q)))+'</div>'+
     ((q.f||q.fig||q.gen)?'<div class="bs-ctx">(Esta pregunta lleva una estructura o figura dibujada: se ve en el documento.)</div>':'')+((q.imgOps||q.opsGraf)?(q.opsGraf?SI.opsImgHTML(q):'<div class="bs-ctx">(Opciones dibujadas: se ven en el documento.)</div>'):'<ol class="bs-o">'+ops+'</ol>')+
     (q.exp?'<details><summary>Explicación</summary>'+e(limpio(q.exp))+'</details>':'')+'</div></div></div>';
 }
@@ -182,7 +189,7 @@ function pintar(){
   var h='<div class="bsel"><h3>📚 Banco de preguntas</h3><p class="bs-sub">Filtra por grado, DBA, estándar básico o aprendizaje priorizado, elige las preguntas y úsalas en las guías, talleres y evaluaciones. Hay '+items.length+' preguntas tipo Saber 11.</p>'+
    '<div class="bs-filtros">'+selectHTML('bs-grado','Grado',gOpts,F.grado)+selectHTML('bs-dba','DBA (MEN, 2016)',dOpts,F.dba)+selectHTML('bs-est','Estándar básico (MEN, 2004)',eOpts,F.est)+selectHTML('bs-pri','Aprendizaje priorizado (SED Bogotá, 2025)',pOpts,F.pri)+
    selectHTML('bs-tema','Tema',tOpts,F.tema)+selectHTML('bs-comp','Competencia',[['uso','Uso comprensivo'],['exp','Explicación de fenómenos'],['ind','Indagación']],F.comp)+selectHTML('bs-af','Afirmación (Icfes)',aOpts,F.af)+selectHTML('bs-nd','Nivel de desempeño (Icfes)',[['1','Nivel 1'],['2','Nivel 2'],['3','Nivel 3'],['4','Nivel 4']],F.nd)+
-   selectHTML('bs-datos','Datos',[['si','Con tabla o gráfica']],F.datos)+
+   selectHTML('bs-datos','Datos y tipo',[['si','Con tabla o gráfica'],['mdec','Solo método MDEC'],['sinmdec','Sin método MDEC']],F.datos)+
    '<div><label for="bs-q">Buscar en el texto</label><input type="search" id="bs-q" value="'+e(F.q)+'" placeholder="palabra o frase"></div></div>'+
    infoRef()+
    '<div class="bs-barra" id="bs-sel"><b>'+e(resumenSel())+'</b>'+

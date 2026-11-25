@@ -401,10 +401,15 @@ function errorDeNombre(nombre){
   return cands[h%cands.length];
 }
 function poolEjercicios(temas){
-  var P={A:[],B:[],C:[],D:[],X:[],Q:[],E:[]},nomA={},nomB={},nomC={},rx={};
+  var P={A:[],B:[],C:[],M:[],D:[],X:[],Q:[],E:[]},nomA={},nomB={},nomC={},nomM={},rx={};
   function addA(nombre,item){var k=normNombre(nombre);if(!k||nomA[k])return;nomA[k]=1;item.nombre=nombre;P.A.push(item);}
   function addB(nombre,item){var k=normNombre(nombre);if(!k||nomB[k])return;nomB[k]=1;P.B.push(item);}
   function addC(nombre,item){var k=normNombre(nombre);if(!k||nomC[k])return;nomC[k]=1;P.C.push(item);}
+  /* «Armar el nombre»: se dejan fuera las particiones dudosas (auditoría química, 26-11-2026): la «o» pegada a
+     un sufijo («onitrilo», «odioico»), fragmentos que no son morfemas («ald», «ehído») y nombres sin ② o sin ④ */
+  function particionDudosa(pp){var t=pp.map(function(p){return Array.isArray(p)?[p[0],p[1]]:[p.t,p.cls];}),cls=t.map(function(x){return x[1];});
+    return cls.indexOf('c')<0||cls.indexOf('g')<0||t.some(function(x){return (x[1]==='g'&&/^o(nitrilo|di|tri|tetra|carb|\d)/.test(x[0]))||/^(ald|ehído)$/.test(x[0]);});}
+  function addM(nombre,item){var k=normNombre(nombre);if(!k||nomM[k]||!item.partes||item.partes.length<2||particionDudosa(item.partes))return;nomM[k]=1;item.nombre=nombre;P.M.push(item);}
   temas.forEach(function(t){
     // 1) Generador (MOLS)
     B.genMols.forEach(function(m){
@@ -414,6 +419,7 @@ function poolEjercicios(temas){
       addA(nom,{k:'A',fig:{gen:m.key},fuente:'Generador',sub:m.topic});
       addB(nom,{k:'B',nombre:nom,fuente:'Generador',sub:m.topic});
       if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addC(nom,{k:'C',nombre:nom,partes:m.parts,fuente:'Generador',sub:m.topic});
+      if(m.parts&&m.parts.length&&!/\s(éter|cetona)$/.test(nom))addM(nom,{k:'M',fig:{gen:m.key},partes:m.parts,fuente:'Generador',sub:m.topic});
     });
     // 2) Juego
     if(t.jue)B.jue.forEach(function(q){
@@ -423,6 +429,13 @@ function poolEjercicios(temas){
         addA(q.ans,{k:'A',fig:{svgFn:svgJuego(q.mol),cadena:cadenaJuego(q.mol),key:q.mol},fuente:'Juego',sub:q.topic});
         addB(q.ans,{k:'B',nombre:q.ans,fuente:'Juego',sub:q.topic});
         if(Array.isArray(q.parts)&&q.parts.length&&!/\s(éter|cetona)$/.test(q.ans))addC(q.ans,{k:'C',nombre:q.ans,partes:q.parts,fuente:'Juego',sub:q.topic});
+      }else if(q.type==='drag'&&q.mol&&typeof q.ans==='string'&&Array.isArray(q.slots)){
+        /* «Arrastra cada fragmento» del Juego: sus fichas (con las que sobran) sirven para «Armar el nombre» */
+        var dd=function(x){if(typeof x!=='string'||!/^[A-Za-z0-9+\/]+={0,2}$/.test(x)||x.length%4)return x;try{return decodeURIComponent(escape(atob(x)));}catch(e){return x;}};
+        var fr=q.slots.map(function(sl){return {t:dd(sl.correct),cls:dd(sl.cls)};}).filter(function(x){return x.t;});
+        var sobT=(q.tokens||[]).map(function(tk){return {t:dd(tk.text),cls:dd(tk.cls)};}).filter(function(x){return x.t&&!fr.some(function(f){return f.t===x.t;});});
+        var sob=sobT.map(function(x){return x.t;});
+        addM(dd(q.ans),{k:'M',fig:{svgFn:svgJuego(dd(q.mol)),cadena:cadenaJuego(dd(q.mol)),key:dd(q.mol)},partes:fr,sobran:sob,sobranCls:sobT,fuente:'Juego',sub:q.topic});
       }else if(q.type==='build'){
         var mm=String(q.q||'').match(/<strong>([^<]+)<\/strong>/);
         if(mm)addB(mm[1],{k:'B',nombre:mm[1],fuente:'Juego'});
@@ -498,6 +511,7 @@ var TIPOS_EJ=[
   {k:'A',t:'Nombrar (estructura → nombre)'},
   {k:'B',t:'Dibujar (nombre → estructura)'},
   {k:'C',t:'Reconocimiento de partes del nombre'},
+  {k:'M',t:'Armar el nombre con fichas (MDEC)'},
   {k:'D',t:'Reacciones'},
   {k:'X',t:'Cazar errores'},
   {k:'Q',t:'Selección múltiple (conceptos del Juego)'},
@@ -539,7 +553,7 @@ function pintarTemas(){
   var previos={};document.querySelectorAll('input[name=tema]:checked').forEach(function(c){previos[c.value]=1;});
   var prevG={};document.querySelectorAll('input[name=grupo]').forEach(function(c){prevG[c.dataset.tema+':'+c.value]=c.checked;});
   cont.innerHTML=TEMAS.map(function(t){
-    var P=poolEjercicios([t]);var nEj=P.A.length+P.B.length+P.C.length+P.D.length+P.X.length+P.Q.length+P.E.length;
+    var P=poolEjercicios([t]);var nEj=P.A.length+P.B.length+P.C.length+P.M.length+P.D.length+P.X.length+P.Q.length+P.E.length;
     var nS=saberDe(t).length;
     var gr=t.grupos?'<div class="grupos" data-tema="'+t.id+'"'+(previos[t.id]?'':' hidden')+'><span>Grupos:</span>'+t.grupos.map(function(x){
       return '<label><input type="checkbox" name="grupo" data-tema="'+t.id+'" value="'+x.id+'"'+(prevG[t.id+':'+x.id]===false?'':' checked')+'> '+esc(x.t)+'</label>';}).join('')+'</div>':'';
@@ -697,16 +711,49 @@ var INSTR={
   A:'Escribe el nombre IUPAC de cada estructura.',
   B:'Dibuja la estructura de cada compuesto (fórmula esquelética o semidesarrollada).',
   C:'Cada fragmento del nombre está coloreado según el modelo de cuatro partes. Escribe a qué parte pertenece y qué significa. En los aromáticos, «benceno» es a la vez cadena (②) y grupo (④).',
+  M:'Mira la estructura y arma su nombre IUPAC con las fichas. Cada ficha tiene el color de su parte en el modelo (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional): ordénalas por color, elige las que corresponden a la estructura (sobran dos) y escribe el nombre.',
   D:'Completa cada reacción según lo que se pide. Cuando se pida el producto, dibuja su estructura y escribe su nombre IUPAC.',
   X:'Revisa el nombre que un compañero escribió para cada estructura. Si tiene un error, explícalo y escribe el nombre correcto.',
   Q:'Lee cada pregunta y encierra la letra de la respuesta correcta. Justifica brevemente tu elección.',
   E:'Resuelve en el espacio indicado.'
 };
-var TIT={A:'Nombrar',B:'Dibujar',C:'Reconocimiento de partes del nombre',D:'Reacciones',X:'Cazar errores',Q:'Selección múltiple',E:'Ejercicios abiertos'};
+var TIT={A:'Nombrar',B:'Dibujar',C:'Reconocimiento de partes del nombre',M:'Armar el nombre con fichas',D:'Reacciones',X:'Cazar errores',Q:'Selección múltiple',E:'Ejercicios abiertos'};
+/* «Armar el nombre con fichas» (método MDEC, modelo propio del docente): la estructura y las fichas del
+   nombre desordenadas, más dos que sobran. Las que sobran salen del Juego o de otras moléculas del banco
+   con la misma parte (①–④), para que el estudiante tenga que pensar cuál corresponde. */
+var _FICHAS_POOL=null;
+function fichasPool(){
+  if(_FICHAS_POOL)return _FICHAS_POOL;_FICHAS_POOL={r:[],c:[],i:[],g:[]};
+  (B.genMols||[]).forEach(function(m){(m.parts||[]).forEach(function(p){var t=p.t,c=p.cls;if(t&&_FICHAS_POOL[c]&&_FICHAS_POOL[c].indexOf(t)<0)_FICHAS_POOL[c].push(t);});});
+  return _FICHAS_POOL;
+}
+function fichasDe(it){
+  var r=rng('armar|'+it.nombre),propias=it.partes.map(function(p){return Array.isArray(p)?p[0]:p.t;});
+  var sobran=(it.sobran||[]).filter(function(x){return propias.indexOf(x)<0;}).slice(0,2);
+  if(sobran.length<2){
+    var pool=fichasPool(),cls=it.partes.map(function(p){return Array.isArray(p)?p[1]:p.cls;});
+    var cand=[];cls.forEach(function(c){(pool[c]||[]).forEach(function(t){if(propias.indexOf(t)<0&&sobran.indexOf(t)<0&&cand.indexOf(t)<0)cand.push(t);});});
+    /* se prefieren fichas parecidas (que compartan letras con las del nombre) */
+    cand=barajar(cand,r);cand.sort(function(a,b){function sim(x){return propias.some(function(p){return p.slice(0,3)===x.slice(0,3)||p.slice(-3)===x.slice(-3);})?0:1;}return sim(a)-sim(b);});
+    while(sobran.length<2&&cand.length)sobran.push(cand.shift());
+  }
+  /* cada ficha lleva el color de su parte (las que sobran, el de la parte a la que pertenecen) */
+  var clsDe={};it.partes.forEach(function(p){clsDe[Array.isArray(p)?p[0]:p.t]=Array.isArray(p)?p[1]:p.cls;});
+  var pool=fichasPool();sobran.forEach(function(t){if(!clsDe[t])Object.keys(pool).forEach(function(c){if(pool[c].indexOf(t)>=0&&!clsDe[t])clsDe[t]=c;});});
+  (it.sobranCls||[]).forEach(function(x){if(x&&x.t)clsDe[x.t]=x.cls;});
+  return barajar(propias.concat(sobran),r).map(function(t){return {t:t,cls:clsDe[t]||'n'};});
+}
+function htmlArmar(it,num){
+  var f=fichasDe(it);
+  return '<div class="ej"><span class="num">'+num+'</span>'+figura(it.fig,330,120)+
+    '<div class="pills fichas">'+f.map(function(x){return '<span class="pill p-'+x.cls+'">'+esc(x.t)+'</span>';}).join('')+'</div>'+
+    '<div class="resp">Nombre IUPAC:<i></i></div></div>';
+}
 function htmlEjercicio(it,num){
   if(it.k==='A'){var fa=it._fig||figura(it.fig,330,120);return '<div class="ej'+(it._ancho?'':' mitad')+'"><span class="num">'+num+'</span>'+fa+'<div class="resp">Nombre IUPAC:<i></i></div></div>';}
   if(it.k==='B')return '<div class="ej mitad"><span class="num">'+num+'</span><div class="nom">'+esc(it.nombre)+'</div>'+cuad(6,'dibujo')+'</div>';
   if(it.k==='C')return '<div class="ej"><span class="num">'+num+'</span>'+pastillas(it.partes,false)+'<table class="mdec-tab blanco"><thead><tr><th>Fragmento</th><th>Parte (①–④)</th><th>¿Qué significa?</th></tr></thead><tbody>'+it.partes.map(function(p){return '<tr><td>'+esc(p.t)+'</td><td></td><td></td></tr>';}).join('')+'</tbody></table></div>';
+  if(it.k==='M')return htmlArmar(it,num);
   if(it.k==='D')return htmlRxnLibro(it.rxn,num);
   if(it.k==='X'&&it.afirma)return '<div class="ej"><span class="num">'+num+'</span><div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Versión correcta:<i></i></div>'+cuad(2)+'</div></div>';
   if(it.k==='X')return '<div class="ej"><span class="num">'+num+'</span><div class="x-fila">'+figura(it.fig,260,110)+'<div class="x-txt"><p>'+it.texto+'</p><div class="resp">Error:<i></i></div><div class="resp">Nombre correcto:<i></i></div></div></div></div>';
@@ -734,7 +781,7 @@ function elegirEjercicios(P,tipos,n,r){
   // Un «cazar errores» no puede ser de una molécula que ya sale en Nombrar,
   // Dibujar o Partes del nombre del mismo documento (se regalaría el nombre).
   if(cuenta.X){
-    var usados={};['A','B','C'].forEach(function(k){if(cuenta[k])colas[k].slice(0,cuenta[k]).forEach(function(it){usados[normNombre(it.nombre)]=1;});});
+    var usados={};['A','B','C','M'].forEach(function(k){if(cuenta[k])colas[k].slice(0,cuenta[k]).forEach(function(it){usados[normNombre(it.nombre)]=1;});});
     colas.X=colas.X.filter(function(it){return !it.nombre||!usados[normNombre(it.nombre)];});
     cuenta.X=Math.min(cuenta.X,colas.X.length);
   }
@@ -746,7 +793,7 @@ function bloquesEjercicios(sel,numIni){
   var out=[],num=numIni||1;
   sel.porTipo.forEach(function(g){
     var ins=INSTR[g.k];if(g.k==='X'&&g.items.every(function(it){return it.afirma;}))ins='Cada afirmación tiene un error. Encuéntralo, explica por qué está mal y escríbela de forma correcta.';else if(g.k==='X'&&g.items.some(function(it){return it.afirma;}))ins='Cada ejercicio tiene un error (en un nombre o en una afirmación). Encuéntralo, explícalo y escribe la versión correcta.';
-    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(ins)+'</small></h4>'+(g.k==='C'?leyendaPartes():'');
+    var tit='<h4 class="sub">'+esc(TIT[g.k])+' <small>'+esc(ins)+'</small></h4>'+(g.k==='C'||g.k==='M'?leyendaPartes():'');
     var primero=true;
     if(g.k==='A'||g.k==='B'){
       // Estructuras muy anchas (cadenas largas semidesarrolladas) van en una
@@ -779,8 +826,10 @@ function bloquesSaber(qs,r){
     var muyCortas=ops.every(function(o){return o.length<=16;});
     var fig=(ofi||q.tabla||q.graf||q.esq)?(SI?SI.extraHTML(q):''):q.fig?figura(q.fig,330,130):(q.f||q.gen)?figura(q.gen?{gen:q.gen,t:q.t}:{f:q.f,t:q.t},330,130):'';
     // Sin rótulo de competencia: el número va al inicio del contexto.
-    return '<div class="sq" data-k="'+i+'"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+escQ(q.ctx)+'</p>'+fig+(q.q?'<p class="sq-q">'+escQ(q.q)+'</p>':'')+
-      ((q.imgOps||q.opsGraf)&&SI?SI.opsImgHTML(q):'<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+escQ(o)+'</li>';}).join('')+'</ol>')+
+    /* las preguntas MDEC traen su versión con colores (q.html): el color es la parte central del método */
+    var H=q.mdec&&q.html||{};
+    return '<div class="sq" data-k="'+i+'"><p class="sq-ctx"><span class="num">'+(i+1)+'</span>'+(H.ctx||escQ(q.ctx))+'</p>'+fig+(q.q?'<p class="sq-q">'+(H.q||escQ(q.q))+'</p>':'')+
+      ((q.imgOps||q.opsGraf)&&SI?SI.opsImgHTML(q):'<ol class="sq-ops'+(cortas?' dos':'')+(muyCortas?' mc':'')+'">'+ops.map(function(o,j){return '<li><span class="let">'+letras[j]+'</span> '+((H.o&&H.o[o])||escQ(o))+'</li>';}).join('')+'</ol>')+
       (ofi&&SI?SI.creditoHTML(q):'')+'</div>';
   });
 }

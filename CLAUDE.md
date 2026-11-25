@@ -102,6 +102,19 @@ Establecido por el docente (26-11-2026). El método MDEC (código de cuatro colo
 es un **modelo propio del docente**: sus ejercicios (abiertas `t:'mdec'`), explicaciones y actividades no se
 enlazan a ningún DBA ni estándar. `revision-ref.js` los omite al poner etiquetas; no agregarles `dba` ni `curso`.
 
+## Preguntas MDEC en todo el banco (26-11-2026)
+
+`herramientas/generar-mdec.js` genera `mdec-moleculas.js` desde las moléculas del Generador (`MOLS` de
+`generador.html`), con la partición de cada nombre en las cuatro partes del MDEC y, para las que el Juego no
+sabe dibujar, el dibujo del Generador. Volver a correrlo si cambian esas moléculas. Con esos datos:
+- **Juego** (`juego.html`, bloque «Más preguntas MDEC»): preguntas de arrastrar fragmentos y de reconocer la
+  parte, hasta 20 por familia, más selección múltiple MDEC con fichas de colores (hasta 12 por familia).
+- **Panel docente**: ejercicio imprimible «Armar el nombre con fichas» (tipo `M` en `docente-app.js`) y
+  `mdec-saber.js`, que agrega preguntas MDEC de selección múltiple (`mdec:true`, con `q.html` en colores)
+  a evaluaciones, talleres, guías y al «Banco de preguntas» (que las marca «Método MDEC», sin DBA).
+- **Los colores del método son lo central**: toda pregunta MDEC nueva lleva sus colores (① cian, ② verde,
+  ③ ámbar, ④ rosado); solo se dejan sin color cuando el color daría la respuesta.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las

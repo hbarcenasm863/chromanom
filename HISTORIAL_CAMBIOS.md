@@ -7,6 +7,38 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (217) — Preguntas MDEC en todo el banco: juego, talleres, evaluaciones y Banco, con los colores del método
+
+### Contexto
+El docente pidió ampliar las preguntas MDEC (crear nombres y reconocer partes, como en el juego) para que formen parte de todo el banco, con suficientes preguntas de esos tipos, y recordó que **los colores son la parte importante del método**. Luego pidió reforzar el modo juego con esas preguntas.
+
+### Cambios
+- **`herramientas/generar-mdec.js` y `mdec-moleculas.js`** (nuevos): 314 moléculas del Generador con su nombre partido en ① ② ③ ④. Se dejaron fuera las particiones dudosas que señaló el experto: la «o» pegada al sufijo («onitrilo», «odioico»), «ald + ehído» y nombres sin ② o sin ④. Las que el Juego no sabe dibujar llevan el dibujo del Generador.
+- **Juego (`juego.html`):**
+  - 241 preguntas nuevas de «arrastra cada fragmento» (dos fichas sobran) y «¿a qué parte corresponde?»; la mayoría de las familias llega a 20 de cada tipo.
+  - Unas 150 de selección múltiple MDEC, hasta 12 por familia: nombrar la estructura con fichas de colores, donde los distractores son nombres reales que cambian una ficha, y reconocer la parte de un fragmento.
+  - Entran en los niveles de cada familia y en el modo completo.
+- **Panel docente:**
+  - Ejercicio imprimible nuevo **«Armar el nombre con fichas»**: la estructura y las fichas con el color de su parte, y dos sobran.
+  - **`mdec-saber.js`**: 74 preguntas MDEC de selección múltiple para evaluaciones, talleres y guías (reconocer, fragmento y armar), cada una con una molécula distinta y con sus colores.
+- **`banco-sel.js`** (igual en los tres sitios):
+  - Las preguntas MDEC salen marcadas «Método MDEC», sin DBA, estándar ni priorizado, y con sus colores.
+  - El filtro «Datos y tipo» permite «Solo método MDEC» o «Sin método MDEC».
+- **`contador.js`** también cuenta las preguntas MDEC del panel.
+- Caché `chromanom-v119`; `docente-app.js?v=100`, `banco-sel.js?v=5`, `contador.js?v=2`.
+
+**Auditoría (4 agentes expertos independientes).** Química orgánica, química inorgánica y evaluación revisaron las primeras versiones; un cuarto agente verificó las rehechas (144 preguntas: ningún hallazgo alto). Informes en `revision-mdec-2026-11/`.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+- En `generador.html`, unas 50 moléculas tienen la partición dudosa: la «o» pegada al sufijo, «benz + ald + ehído» y la de «ciclohexanocarbonitrilo». El ejercicio «Reconocimiento de partes», que ya existía, todavía las usa. Corregirlas a mano allí y volver a correr la herramienta.
+- Los ésteres usan «de metilo» como ①, que es convenio del método. Por eso no entran en «armar».
+- Pocas moléculas de nitrilos y aromáticos.
+
+---
+
 ## 2026-11-26 (216) — MDEC sin DBA y DBA propio en preguntas del juego y abiertas
 
 ### Contexto

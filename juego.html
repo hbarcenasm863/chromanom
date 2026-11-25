@@ -1254,6 +1254,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
+<script src="mdec-moleculas.js?v=1"></script>
 <script src="fundamentos.js?v=98"></script>
 <script src="temas-extra.js?v=97"></script>
 <script src="temas-11.js?v=97"></script>
@@ -7083,6 +7084,83 @@ const QBANK_RXN_BUILD=[
    q:'Dibuja el <strong>producto</strong> de esta sustitución: CH₃−CH₂−CH₂OH + HBr → ? (fórmula: C₃H₇Br)',expl:'El HBr protona el −OH (sale como agua) y el Br⁻ ocupa su lugar → CH₃−CH₂−CH₂Br (1-bromopropano).'},
 ];
 QBANK.push(...QBANK_RXN_BUILD);
+
+// ── Más preguntas MDEC (método propio del docente) a partir de las moléculas del Generador ─────
+// mdec-moleculas.js trae cada molécula con las partes de su nombre. Aquí se arman preguntas de
+// «arrastra cada fragmento» (con dos fichas que sobran) y de «¿a qué parte corresponde el fragmento?»,
+// hasta que cada familia tenga al menos 20 de cada tipo. Solo se usan moléculas que el Juego sabe
+// dibujar y que no tengan ya una pregunta de ese tipo.
+(function(){
+  const L=window.MDEC_MOLS;if(!Array.isArray(L))return;
+  const META=20,ETQ={r:'Sustituyentes',c:'Cadena principal',i:'Insaturación (o saturación)',g:'Grupo funcional'};
+  const NUM={r:'①',c:'②',i:'③',g:'④'};
+  const dibuja=k=>typeof M[k]==='function'||(typeof MOLDES!=='undefined'&&Array.isArray(MOLDES[k]));
+  // las que el Juego no sabe dibujar traen el dibujo del Generador (campo s)
+  L.forEach(m=>{if(m.s&&!dibuja(m.k))M[m.k]=()=>m.s;});
+  const ya={drag:new Set(),id:new Set()},cuenta={drag:{},id:{}};
+  QBANK.forEach(q=>{if(q.type==='drag'||q.type==='id'){ya[q.type].add(q.mol);cuenta[q.type][q.topic]=(cuenta[q.type][q.topic]||0)+1;}});
+  // fichas de reserva por parte, para las que sobran
+  const reserva={r:[],c:[],i:[],g:[]};L.forEach(m=>m.p.forEach(([t,c])=>{if(reserva[c]&&!reserva[c].includes(t))reserva[c].push(t);}));
+  let semilla=7;const azar=()=>{semilla=(semilla*16807)%2147483647;return semilla/2147483647;};
+  function sobrantes(m){
+    const propias=m.p.map(p=>p[0]),out=[];
+    const cls=m.p.map(p=>p[1]).filter(c=>c==='r'||c==='c'||c==='g');
+    for(let i=0;i<20&&out.length<2;i++){const c=cls[Math.floor(azar()*cls.length)]||'c',pool=reserva[c];
+      const t=pool[Math.floor(azar()*pool.length)];if(t&&!propias.includes(t)&&!out.some(o=>o.text===t))out.push({text:t,cls:c});}
+    return out;
+  }
+  const nuevas=[];
+  L.forEach(m=>{
+    if(!dibuja(m.k))return;
+    if(!ya.drag.has(m.k)&&(cuenta.drag[m.t]||0)<META){
+      const slots=m.p.map((p,i)=>({id:'md'+i,label:ETQ[p[1]]||p[1],correct:p[0],cls:p[1]}));
+      nuevas.push({type:'drag',mol:m.k,topic:m.t,q:'Arrastra cada fragmento a su posición en el nombre IUPAC. Sobran dos fichas.',
+        ans:m.n,slots,tokens:m.p.map(p=>({text:p[0],cls:p[1]})).concat(sobrantes(m)),mdec:true});
+      cuenta.drag[m.t]=(cuenta.drag[m.t]||0)+1;
+    }
+    if(!ya.id.has(m.k)&&(cuenta.id[m.t]||0)<META){
+      // se resalta una parte con contenido (no la «o» final ni la «an» si hay otras)
+      const cand=m.p.map((p,i)=>({p,i})).filter(x=>x.p[0].length>1);const el=cand.length?cand[Math.floor(azar()*cand.length)]:{p:m.p[0],i:0};
+      let at=0;for(let j=0;j<el.i;j++)at+=m.p[j][0].length;
+      // posición real dentro del nombre (el nombre lleva guiones que las partes pueden no traer)
+      const pos=m.n.indexOf(el.p[0],Math.max(0,at-2));
+      if(pos<0)return;
+      nuevas.push({type:'id',mol:m.k,topic:m.t,q:'¿A qué parte del esquema de nomenclatura corresponde el fragmento resaltado?',
+        name:m.n,highlight:{text:el.p[0],cls:el.p[1],at:pos},correct:el.p[1],
+        expl:'«'+el.p[0]+'» es <b>'+ETQ[el.p[1]]+'</b> (parte '+NUM[el.p[1]]+') en <b>'+m.n+'</b>.',mdec:true});
+      cuenta.id[m.t]=(cuenta.id[m.t]||0)+1;
+    }
+  });
+  // Selección múltiple MDEC (una por molécula que aún no tenga pregunta de este tipo, hasta 12 por familia):
+  //  · «¿Cuál es el nombre de esta estructura?» con fichas de colores y opciones que son nombres reales
+  //    que cambian una sola ficha (el Juego pinta cada nombre con los colores del método).
+  //  · «¿A qué parte pertenece el fragmento…?» con las cuatro partes del modelo.
+  const COL={r:'#0891b2',c:'#166534',i:'#b45309',g:'#CC79A7'},PART={r:'① Sustituyentes',c:'② Cadena principal',i:'③ Insaturación (o saturación)',g:'④ Grupo funcional'};
+  const chip=(t,c)=>`<span style="display:inline-block;padding:0 6px;margin:1px;border-radius:5px;font-weight:700;color:#fff;background:${COL[c]}">${t}</span>`;
+  const firma=m=>m.p.map(p=>p[1]).join('');
+  const vecinos=m=>L.filter(x=>x.k!==m.k&&x.n!==m.n&&firma(x)===firma(m)&&m.p.filter((p,i)=>p[0]!==x.p[i][0]).length===1);
+  const cuentaMC={};
+  L.forEach((m,idx)=>{
+    if(!dibuja(m.k)&&!(m.s))return;
+    if((cuentaMC[m.t]||0)>=12)return;
+    if(idx%2===0&&m.t!=='esteres'){
+      const vs=vecinos(m).slice(0,3);if(vs.length<3)return;
+      const fichas=[...m.p];vs.forEach(v=>v.p.forEach(p=>{if(!fichas.some(f=>f[0]===p[0]))fichas.push(p);}));
+      fichas.sort(()=>azar()-.5);
+      QBANK.push({type:'mc',mol:m.k,topic:m.t,mdec:true,
+        q:'¿Cuál es el nombre IUPAC de esta estructura? Fichas del método MDEC (algunas sobran): '+fichas.map(f=>chip(f[0].trim(),f[1])).join(' '),
+        ans:m.n,opts:[m.n,...vs.map(v=>v.n)],expl:'La estructura es <b>'+m.n+'</b>. Las otras opciones cambian una sola ficha: son nombres de otros compuestos.'});
+    }else if(m.t!=='eteres'){
+      const cand=m.p.filter(p=>p[0].trim().length>1&&!/^(an|o)$/.test(p[0].trim()));if(!cand.length)return;
+      const p=cand[Math.floor(azar()*cand.length)];
+      QBANK.push({type:'mc',mol:m.k,topic:m.t,mdec:true,
+        q:'En el nombre <b>'+m.n+'</b>, ¿a qué parte del método MDEC pertenece el fragmento <b><u>'+p[0].trim()+'</u></b>? '+['r','c','i','g'].map(c=>chip(PART[c],c)).join(' '),
+        ans:PART[p[1]],opts:['r','c','i','g'].map(c=>PART[c]),expl:'«'+p[0].trim()+'» es '+PART[p[1]]+' en <b>'+m.n+'</b>.'});
+    }else return;
+    cuentaMC[m.t]=(cuentaMC[m.t]||0)+1;
+  });
+  QBANK.push(...nuevas);
+})();
 
 // ── FASE 1 «EL CARBONO» E ISOMERÍA ─────────────────────────────────────────
 // Banco en fundamentos.js (texto plano, sin codificar: NO pasa por

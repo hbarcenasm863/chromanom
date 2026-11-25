@@ -1,0 +1,116 @@
+{
+ "lote": "verificacion",
+ "experto": "quimica+evaluacion",
+ "revisadas": 144,
+ "preguntas": [
+  {
+   "id": "ion-20",
+   "gravedad": "media",
+   "problema": "Pb(OH)4 no es un compuesto real conocido (el Pb(IV) se presenta como PbO2); pregunta sobre compuesto inexistente.",
+   "propuesta": "Sustituir por Sn(OH)4 o Pb(OH)2 en armar."
+  },
+  {
+   "id": "ion-21",
+   "gravedad": "media",
+   "problema": "Pd(OH)4 es un compuesto dudoso (se conoce PdO2·nH2O).",
+   "propuesta": "Sustituir por Sn(OH)4 o Ce(OH)4 ya usado; o Zr(OH)4."
+  },
+  {
+   "id": "ion-49",
+   "gravedad": "media",
+   "problema": "AuI3 no existe como compuesto estable (se conoce AuI); era un hallazgo previo no resuelto.",
+   "propuesta": "Cambiar por AuCl3 ya presente o por AlI3/FeI3."
+  },
+  {
+   "id": "ion-30",
+   "gravedad": "media",
+   "problema": "H3PO4 en agua también produce H2PO4- y HPO4 2- (opciones del propio banco); la clave PO4 3- solo es única si se dice que libera todos sus H+.",
+   "propuesta": "Enunciado: «Si libera todos sus H+, ¿cuál es el oxoanión…?»."
+  },
+  {
+   "id": "ion-33",
+   "gravedad": "media",
+   "problema": "Igual que ion-30: HCO3- es un anión real de H2CO3 disuelto.",
+   "propuesta": "Añadir «al liberar todos sus H+»."
+  },
+  {
+   "id": "ion-14",
+   "gravedad": "baja",
+   "problema": "«puede liberar» admite 1 (ácidos que se ionizan por etapas); la clave es el máximo.",
+   "propuesta": "Decir «como máximo» o «en total»; ion-14 (H2Se) pide además decir «disuelto en agua»."
+  },
+  {
+   "id": "ion-31",
+   "gravedad": "baja",
+   "problema": "«puede liberar» admite 1 (ácidos que se ionizan por etapas); la clave es el máximo.",
+   "propuesta": "Decir «como máximo» o «en total»; ion-14 (H2Se) pide además decir «disuelto en agua»."
+  },
+  {
+   "id": "ion-34",
+   "gravedad": "baja",
+   "problema": "«puede liberar» admite 1 (ácidos que se ionizan por etapas); la clave es el máximo.",
+   "propuesta": "Decir «como máximo» o «en total»; ion-14 (H2Se) pide además decir «disuelto en agua»."
+  },
+  {
+   "id": "ion-36",
+   "gravedad": "baja",
+   "problema": "«puede liberar» admite 1 (ácidos que se ionizan por etapas); la clave es el máximo.",
+   "propuesta": "Decir «como máximo» o «en total»; ion-14 (H2Se) pide además decir «disuelto en agua»."
+  },
+  {
+   "id": "ion-37",
+   "gravedad": "baja",
+   "problema": "«puede liberar» admite 1 (ácidos que se ionizan por etapas); la clave es el máximo.",
+   "propuesta": "Decir «como máximo» o «en total»; ion-14 (H2Se) pide además decir «disuelto en agua»."
+  },
+  {
+   "id": "ion-13",
+   "gravedad": "baja",
+   "problema": "H2S en agua forma sobre todo HS-; S2- es el anión tras liberar todos los H+.",
+   "propuesta": "Añadir «al liberar todos sus H+»."
+  },
+  {
+   "id": "ion-58",
+   "gravedad": "baja",
+   "problema": "Distractor N2O2 2- poco plausible para un estudiante de 10.°.",
+   "propuesta": "Usar NO2-, NO3 2-, NO4 -."
+  },
+  {
+   "id": "ion-61",
+   "gravedad": "baja",
+   "problema": "CoPO4 (cobalto III) es un compuesto poco común.",
+   "propuesta": "Cambiar por Co3(PO4)2 u otro fosfato común."
+  },
+  {
+   "id": "chr-50",
+   "gravedad": "baja",
+   "problema": "«de etilo» como ① Sustituyentes es convenio del método pero defendible como parte del grupo éster (④); el contexto no lo dice.",
+   "propuesta": "Nota en el contexto de los ésteres: «el resto del alcohol se cuenta como sustituyente»."
+  },
+  {
+   "id": "chr-30",
+   "gravedad": "baja",
+   "problema": "«2-isopropoxipropano» no es nombre IUPAC actual (2-(propan-2-iloxi)propano); aceptable por convención del sitio.",
+   "propuesta": "Mantener; opcional aclararlo."
+  },
+  {
+   "id": "chr-4",
+   "gravedad": "baja",
+   "problema": "La explicación de todos los ítems «armar» dice «cada opción incorrecta cambia una sola ficha», falso en varios (chr-4, 7, 11, 12, 28: distractores éter/alcohol que cambian varias).",
+   "propuesta": "Cambiar la explicación a «cada opción incorrecta es el nombre de otro compuesto»."
+  },
+  {
+   "id": "chr-12",
+   "gravedad": "baja",
+   "problema": "Distractores de otra familia (1-metoxipentano, 2-metilpentan-1-ol) para una estructura de alcano se descartan por tener O; discriminan poco.",
+   "propuesta": "Usar isómeros de cadena (3-metilpentano, 2,2-dimetilbutano)."
+  },
+  {
+   "id": "chr-11",
+   "gravedad": "baja",
+   "problema": "Igual: 1-etoxibutano y 1-propoxibutano no corresponden a un alcano ramificado.",
+   "propuesta": "Usar 3-metilpentano, 2-metilpentano, 2,2-dimetilbutano… con fichas acordes."
+  }
+ ],
+ "resumen": "144 preguntas (74 ChromaNom, 70 IonNom). Alta 0, media 5, baja 12 (15 ítems con baja contando los 5 hplus). Problemas previos corregidos: sin Hg+, sin hidruros covalentes, HS- ya no es oxoanión, enunciado «fórmula más sencilla», sin distractores de basura concatenada, sin ítems de «ehído»/espacios, nombres IUPAC y claves únicas verificados. Fichas de «armar» contienen siempre las piezas de la clave."
+}
