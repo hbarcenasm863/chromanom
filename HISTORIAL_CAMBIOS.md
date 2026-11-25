@@ -7,6 +7,19 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (219) — Regla: los colores del MDEC son solo los tonos predefinidos
+
+### Contexto
+El docente pidió que todo el MDEC use solo los tonos ya definidos en el sitio, con el ③ insaturaciones en dorado, y que eso quede como regla escrita.
+
+### Cambios
+- `CLAUDE.md`: nueva regla «Los colores del MDEC son solo los tonos predefinidos», con la tabla de los cuatro colores: turquesa, verde, dorado y rosa. Para cada uno trae los valores de borde, texto y fondo, y dice de dónde salen (`.cn-chip` y `--c1…--c4`). Se verificó que todo lo MDEC nuevo ya los usa.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (218) — Preguntas MDEC con los colores exactos del sitio
 
 ### Contexto

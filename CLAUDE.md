@@ -115,6 +115,24 @@ sabe dibujar, el dibujo del Generador. Volver a correrlo si cambian esas molécu
 - **Los colores del método son lo central**: toda pregunta MDEC nueva lleva sus colores (① cian, ② verde,
   ③ ámbar, ④ rosado); solo se dejan sin color cuando el color daría la respuesta.
 
+## Regla: los colores del MDEC son solo los tonos predefinidos
+
+Establecida por el docente (26-11-2026). Los colores son la parte central del método MDEC y se usan **solo**
+los tonos ya definidos en el sitio, sin inventar ni «mejorar» ninguno, en todo lo que muestre partes del
+nombre (páginas, juego, panel docente, preguntas, fichas, hojas impresas):
+
+| Parte | Nombre del color | Borde / base | Texto | Fondo claro |
+|---|---|---|---|---|
+| ① Sustituyentes | turquesa | `#0891b2` | `#0e7490` | `#ecfeff` |
+| ② Cadena principal | verde | `#166534` | `#14532d` | `#f0fdf4` |
+| ③ Insaturaciones | **dorado** | `#b45309` | `#92400e` | `#fffbeb` (o `#fef3c7`) |
+| ④ Grupo funcional | rosa | `#CC79A7` | `#9a4a78` | `#fdf2f8` |
+
+Fuente: `.cn-chip.r/.c/.i/.g` de `chromanom.css` y las variables `--c1…--c4` (`--c1t…`, `--c1b…`) de cada
+página. Si se agrega algo nuevo, usar esas clases o variables (o exactamente estos valores). Si algún día se
+cambia un tono, se cambia en todo el sitio a la vez. El color nunca se usa en un botón ni para otra cosa que
+las cuatro partes del nombre.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las
