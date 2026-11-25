@@ -7,6 +7,41 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-25 (213) — Revisión contra los referentes (parte 3: currículo MEN, DBA y curso)
+
+### Contexto
+Sigue la revisión del banco contra `REFERENTES_CURRICULARES.md`. Dos agentes expertos en currículo MEN revisaron **las 1822 entradas de ChromaNom**: juego, Saber, abiertas y palabras. Compararon el DBA y el grado de cada una con el de su tema.
+
+### Hallazgos (411)
+- **Medios (208):**
+  - Hibridación, orbitales moleculares, enlaces σ/π, aromaticidad y conjugación: ningún DBA las nombra. Quedan «sin DBA», como profundización de 11.°.
+  - ADN, replicación y traducción pasan a 9.5.
+  - Configuración electrónica y estequiometría de combustión pasan a 10.3.
+  - Truchas y minería en Boyacá van a 7.4, y el pH de una quebrada a 9.2 con 11.5.
+- **Bajos (203):** sobre todo DBA de apoyo más precisos:
+  - fuerzas intermoleculares, solubilidad y puntos de ebullición, 9.3;
+  - acidez, pH y pKa, 9.2;
+  - pruebas de grupo funcional, 11.4;
+  - impacto ambiental, 11.5.
+- **Pistas corregidas:** en CIS y TRANS, «equivale» a E/Z pasa a «en casos sencillos equivale».
+- **Ningún error científico** ni contenido de un grado posterior.
+
+### Cambios
+- `revision-ref.js`: `dba` y `curso` revisados en 234 preguntas Saber. La pestaña «Banco de preguntas» ya filtra por ellos.
+- `ahorcado-datos.js`: pistas corregidas.
+- Caché `chromanom-v115`; `revision-ref.js?v=3` y `ahorcado-datos.js?v=98`. Probado con Playwright: el panel y el juego cargan sin errores.
+- Informes en `revision-referentes-2026-11/`.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+- Las preguntas del juego y las abiertas no tienen un campo propio de DBA. Sus etiquetas quedan en los informes (`men-chr-*.json`) para cuando se agregue ese campo.
+- El experto recomienda pasar el tema «carbono» a «sin DBA» con 8.2 de apoyo en `banco-sel-cfg.js`. No se cambió.
+- Falta la revisión de ciencias (en curso).
+
+---
+
 ## 2026-11-25 (212) — Contador de preguntas en la portada y en el panel docente
 
 El docente pidió un **contador de preguntas** en la portada y en el panel docente que se calcule solo y cambie siempre que cambie el banco.

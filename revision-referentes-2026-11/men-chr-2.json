@@ -1,0 +1,1655 @@
+{
+ "lote": "men-chr-2",
+ "experto": "men",
+ "revisadas": 796,
+ "coincidencias_a_ciegas": 0,
+ "ev": {},
+ "nd": {},
+ "hallazgos": [
+  {
+   "id": "chr-j1",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Número atómico, configuración electrónica y electrones de valencia: DBA 10.3 ev. 1 (distribución electrónica y comportamiento químico); grado 10, no el del tema."
+  },
+  {
+   "id": "chr-j2",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Número atómico, configuración electrónica y electrones de valencia: DBA 10.3 ev. 1 (distribución electrónica y comportamiento químico); grado 10, no el del tema."
+  },
+  {
+   "id": "chr-j3",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Número atómico, configuración electrónica y electrones de valencia: DBA 10.3 ev. 1 (distribución electrónica y comportamiento químico); grado 10, no el del tema."
+  },
+  {
+   "id": "chr-j4",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j5",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j6",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j7",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j8",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j9",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j10",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j11",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j12",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j13",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j14",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j15",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j16",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j17",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j18",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j19",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j20",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j21",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j22",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j23",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j24",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j25",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j26",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j27",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j28",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j151",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j168",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j190",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Ningún DBA nombra este contenido (hibridación, geometría, enlaces σ y π del carbono); es profundización de 11.° apoyada en el priorizado SED 11.° (hibridación, enlace de valencia). Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j286",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j287",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j288",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j289",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j290",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j291",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j292",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j293",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j294",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j295",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j296",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j297",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j298",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j299",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j300",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j301",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j302",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j303",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j304",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j305",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j306",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j307",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Teoría de orbitales moleculares, conjugación, resonancia y regla de Hückel: ningún DBA los nombra; son profundización de 11.° (priorizado SED 11.°: orbitales moleculares). El tema los hereda de 8.2/10.3, pero eso es solo prerrequisito. Etiquetar «sin»."
+  },
+  {
+   "id": "chr-j152",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Tensión del anillo y reactividad del ciclopropano: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-j153",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Conformación en silla del ciclohexano: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-j149",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Isomería estructural: ningún DBA la nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura); contenido sin DBA propio de 11.°."
+  },
+  {
+   "id": "chr-j530",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Isomería estructural: ningún DBA la nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura); contenido sin DBA propio de 11.°."
+  },
+  {
+   "id": "chr-j276",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Error de una medida frente al valor de referencia: es el priorizado SED 11.° (interpretar resultados con margen de error), no un DBA de fuerzas intermoleculares 9.3."
+  },
+  {
+   "id": "chr-j278",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Formular y contrastar hipótesis con una variable: priorizado SED 11.° (construcción del conocimiento); ningún DBA lo nombra."
+  },
+  {
+   "id": "chr-j285",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Exactitud y precisión de medidas repetidas: priorizado SED 11.° (margen de error); no es un DBA de fuerzas intermoleculares."
+  },
+  {
+   "id": "chr-j277",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "6.2"
+    ]
+   },
+   "motivo": "Efecto de la presión (altitud de Bogotá) sobre el punto de ebullición: DBA 6.2 (T y P influyen en puntos de ebullición); el aporte de 11.° es el margen de error (priorizado)."
+  },
+  {
+   "id": "chr-j281",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "8.3",
+     "9.3"
+    ]
+   },
+   "motivo": "Pipeta de gas es ejemplo del DBA 8.3 (gases); licuado por presión y fuerzas de London: 9.3 ev. 4."
+  },
+  {
+   "id": "chr-j154",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Punto de ebullición explicado por fuerzas intermoleculares: DBA 9.3 ev. 4 (no 11.4)."
+  },
+  {
+   "id": "chr-j240",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Tendencia de puntos de ebullición con el tamaño del anillo: fuerzas de London, DBA 9.3 ev. 4."
+  },
+  {
+   "id": "chr-j174",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "8.2"
+    ]
+   },
+   "motivo": "Solubilidad del fenol por puentes de hidrógeno y polaridad: 9.3 ev. 4 y 8.2 (propiedades según el enlace)."
+  },
+  {
+   "id": "chr-j162",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Comparar la acidez del fenol y del etanol (Brønsted-Lowry): DBA 9.2."
+  },
+  {
+   "id": "chr-j241",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Orden de acidez con valores de pKa: DBA 9.2 (acidez cuantitativa)."
+  },
+  {
+   "id": "chr-j206",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "10.3"
+    ]
+   },
+   "motivo": "Neutralización ácido-base: 9.2 (Brønsted-Lowry) y 10.3 (neutralización), además de 11.4."
+  },
+  {
+   "id": "chr-j207",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Reacción ácido-base de una amina con HCl (basicidad): DBA 9.2."
+  },
+  {
+   "id": "chr-j362",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "6.2",
+     "9.3"
+    ]
+   },
+   "motivo": "Flotabilidad y no mezcla de un derrame: densidad y solubilidad (6.2) y polaridad (9.3), más que 11.5."
+  },
+  {
+   "id": "chr-a217",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "6.2",
+     "9.3"
+    ]
+   },
+   "motivo": "Mancha de petróleo sobre el agua: densidad y solubilidad (6.2) y polaridad (9.3)."
+  },
+  {
+   "id": "chr-j349",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "6.2",
+     "9.3"
+    ]
+   },
+   "motivo": "Separación por punto de ebullición (destilación): DBA 6.2 (técnicas de separación) y 9.3 (fuerzas intermoleculares)."
+  },
+  {
+   "id": "chr-a209",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Destilación explicada con fuerzas de London: DBA 9.3 ev. 4."
+  },
+  {
+   "id": "ambiente|m7gvp7",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Fracción de destilación según masa molar y fuerzas de London: DBA 9.3 ev. 4 (en vez de 11.5)."
+  },
+  {
+   "id": "chr-j350",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo con relaciones molares y masas (estequiometría): DBA 10.3 ev. 3; es grado 10, no 11.5."
+  },
+  {
+   "id": "chr-j351",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo con relaciones molares y masas (estequiometría): DBA 10.3 ev. 3; es grado 10, no 11.5."
+  },
+  {
+   "id": "chr-j352",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo con relaciones molares y masas (estequiometría): DBA 10.3 ev. 3; es grado 10, no 11.5."
+  },
+  {
+   "id": "chr-j365",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo con relaciones molares y masas (estequiometría): DBA 10.3 ev. 3; es grado 10, no 11.5."
+  },
+  {
+   "id": "chr-j370",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo con relaciones molares y masas (estequiometría): DBA 10.3 ev. 3; es grado 10, no 11.5."
+  },
+  {
+   "id": "chr-a203",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Cálculo de masa de CO₂ con la ecuación balanceada: estequiometría, DBA 10.3."
+  },
+  {
+   "id": "chr-a204",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "10.3"
+    ],
+    "curso": 10
+   },
+   "motivo": "Conservación de la masa en una combustión (balanceo y relaciones molares): DBA 10.3 ev. 2."
+  },
+  {
+   "id": "chr-j385",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "7.4",
+     "11.5"
+    ]
+   },
+   "motivo": "Minería de carbón a cielo abierto y muerte de truchas en Boyacá es el ejemplo literal del DBA 7.4 (contaminación y ciclos); 11.5 queda como segundo DBA."
+  },
+  {
+   "id": "chr-j386",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "7.4",
+     "11.5"
+    ]
+   },
+   "motivo": "Minería de carbón a cielo abierto y muerte de truchas en Boyacá es el ejemplo literal del DBA 7.4 (contaminación y ciclos); 11.5 queda como segundo DBA."
+  },
+  {
+   "id": "chr-j388",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "7.4",
+     "11.5"
+    ]
+   },
+   "motivo": "Quema de bosque y CO₂: efectos de la deforestación en el ciclo del carbono, DBA 7.4 ev. 2; 11.5 por la visión sistémica."
+  },
+  {
+   "id": "chr-j369",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "7.4",
+     "11.5"
+    ]
+   },
+   "motivo": "Quema de bosque y CO₂: efectos de la deforestación en el ciclo del carbono, DBA 7.4 ev. 2; 11.5 por la visión sistémica."
+  },
+  {
+   "id": "chr-j389",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "7.4",
+     "11.5"
+    ]
+   },
+   "motivo": "Eutrofización por nitratos y fosfatos: ciclo del nitrógeno y contaminación, DBA 7.4."
+  },
+  {
+   "id": "chr-j399",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "11.5"
+    ]
+   },
+   "motivo": "Diseño de investigación sobre el pH de una quebrada: pH es 9.2; la contaminación hídrica es 11.5."
+  },
+  {
+   "id": "chr-j400",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "11.5"
+    ]
+   },
+   "motivo": "Control de variables en la medición del pH de una quebrada: 9.2 y 11.5."
+  },
+  {
+   "id": "chr-j401",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "11.5"
+    ]
+   },
+   "motivo": "Repetir y promediar medidas de pH: 9.2 y 11.5 (priorizado de margen de error)."
+  },
+  {
+   "id": "chr-a199",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.2",
+     "11.5"
+    ]
+   },
+   "motivo": "Investigación sobre la contaminación de una quebrada con pH: 9.2 y 11.5."
+  },
+  {
+   "id": "chr-j327",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j328",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j343",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j344",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j345",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j346",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j347",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-j348",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "biomoleculas|z02r5n",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "biomoleculas|tgcadq",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "biomoleculas|imljqs",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "biomoleculas|g2f92y",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a182",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a192",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a193",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a194",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a195",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p81",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p82",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p83",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p84",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p85",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-p86",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.5"
+    ],
+    "curso": 9
+   },
+   "motivo": "Estructura del ADN, apareamiento de bases, replicación y traducción: DBA 9.5 de biología (grado 9); no es el 11.4 de las biomoléculas. La replicación semiconservativa no la nombra ningún DBA pero 9.5 es el más cercano."
+  },
+  {
+   "id": "chr-a183",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "6.4",
+     "11.4"
+    ]
+   },
+   "motivo": "Respiración celular frente a fermentación: DBA 6.4 (obtención de energía, respiración); el 11.4 solo aporta la reacción química."
+  },
+  {
+   "id": "biomoleculas|1os6bew",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Estereoisómeros y centros quirales de aldosas: ningún DBA nombra estereoisomería; profundización de 11.°."
+  },
+  {
+   "id": "chr-p40",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p41",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p42",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p43",
+   "gravedad": "baja",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°. Pista 2 «Equivale a E»: cis/trans no siempre equivale a Z/E (depende de las prioridades CIP). Corregir a «En casos sencillos equivale a E».",
+   "textos": [
+    {
+     "campo": "pista",
+     "original": "Equivale a E en la notación IUPAC.",
+     "nuevo": "En casos sencillos equivale a E en la notación IUPAC."
+    }
+   ]
+  },
+  {
+   "id": "chr-p108",
+   "gravedad": "baja",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°. Pista 2 «Equivale a Z»: no siempre equivale (prioridades CIP). Corregir a «En casos sencillos equivale a Z».",
+   "textos": [
+    {
+     "campo": "pista",
+     "original": "Equivale a Z en la notación IUPAC.",
+     "nuevo": "En casos sencillos equivale a Z en la notación IUPAC."
+    }
+   ]
+  },
+  {
+   "id": "chr-p109",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p110",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p111",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p112",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de isomería: ningún DBA lo nombra (11.4 ev. 1 solo pide fórmulas y nomenclatura). Profundización de 11.°."
+  },
+  {
+   "id": "chr-p54",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p55",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p56",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p57",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p58",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p118",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p126",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de orbitales moleculares y aromaticidad: sin DBA; profundización de 11.° (priorizado SED 11.°)."
+  },
+  {
+   "id": "chr-p59",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p60",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p61",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p119",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p120",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p121",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p122",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Vocabulario de conjugación y pigmentos: ningún DBA lo nombra; profundización de 11.°."
+  },
+  {
+   "id": "chr-p62",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "8.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Fuerzas intermoleculares y polaridad: DBA 9.3 ev. 4 y 8.2; grado 9."
+  },
+  {
+   "id": "chr-p63",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "8.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Fuerzas intermoleculares y polaridad: DBA 9.3 ev. 4 y 8.2; grado 9."
+  },
+  {
+   "id": "chr-p64",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "8.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Fuerzas intermoleculares y polaridad: DBA 9.3 ev. 4 y 8.2; grado 9."
+  },
+  {
+   "id": "chr-p123",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "8.2"
+    ],
+    "curso": 9
+   },
+   "motivo": "Fuerzas intermoleculares y polaridad: DBA 9.3 ev. 4 y 8.2; grado 9."
+  },
+  {
+   "id": "chr-p66",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Solubilidad, polaridad y punto de ebullición por fuerzas intermoleculares: DBA 9.3 (la ebullición también 6.2)."
+  },
+  {
+   "id": "chr-p67",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Solubilidad, polaridad y punto de ebullición por fuerzas intermoleculares: DBA 9.3 (la ebullición también 6.2)."
+  },
+  {
+   "id": "chr-p124",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Solubilidad, polaridad y punto de ebullición por fuerzas intermoleculares: DBA 9.3 (la ebullición también 6.2)."
+  },
+  {
+   "id": "chr-p125",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3"
+    ],
+    "curso": 9
+   },
+   "motivo": "Solubilidad, polaridad y punto de ebullición por fuerzas intermoleculares: DBA 9.3 (la ebullición también 6.2)."
+  },
+  {
+   "id": "chr-p127",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "sin"
+    ],
+    "curso": 11
+   },
+   "motivo": "Error de una medida: priorizado SED 11.° (margen de error); ningún DBA."
+  },
+  {
+   "id": "chr-p65",
+   "gravedad": "media",
+   "etiquetas": {
+    "dba": [
+     "9.3",
+     "11.4"
+    ]
+   },
+   "motivo": "Micela y jabón: polaridad y fuerzas intermoleculares (9.3), jabón también en 9.2; saponificación en 11.4."
+  }
+ ]
+}

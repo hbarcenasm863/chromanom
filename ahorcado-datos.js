@@ -311,7 +311,7 @@ window.BANCO_AHORCADO=[
 "TRANS",
 "fase3",
 "Grupos en lados opuestos del doble enlace.",
-"Equivale a E en la notación IUPAC.",
+"En casos sencillos equivale a E en la notación IUPAC.",
 "Grasas ___: cadena casi recta y sólida."
 ],
 [
@@ -766,7 +766,7 @@ window.BANCO_AHORCADO=[
 "CIS",
 "fase3",
 "Grupos del mismo lado del doble enlace.",
-"Equivale a Z en la notación IUPAC.",
+"En casos sencillos equivale a Z en la notación IUPAC.",
 "Lo contrario de trans."
 ],
 [
