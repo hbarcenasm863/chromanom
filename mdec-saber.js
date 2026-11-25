@@ -25,6 +25,9 @@ function chip(t,cls){var c=COL[cls];return '<span style="display:inline-block;pa
 function nombreColor(p){return '<span style="white-space:nowrap">'+p.map(function(x){return chip(x[0].trim(),x[1]);}).join('')+'</span>';}
 var LEYENDA=chip('① sustituyentes','r')+' '+chip('② cadena principal','c')+' '+chip('③ insaturación o saturación','i')+' '+chip('④ grupo funcional','g');
 var PARTE_HTML={r:chip(PARTE.r,'r'),c:chip(PARTE.c,'c'),i:chip(PARTE.i,'i'),g:chip(PARTE.g,'g')};
+/* en los ésteres el método MDEC pone el grupo del alcohol («de metilo»…) como ① sustituyente, al final del nombre */
+var NOTA_ESTER=' En los ésteres, el método toma el grupo del alcohol («de metilo», «de etilo»…) como ① sustituyente, escrito al final del nombre.';
+var NOTA_ESTER_H=' En los ésteres, el método toma el grupo del alcohol («de metilo», «de etilo»…) como '+chip('① sustituyente','r')+', escrito al final del nombre.';
 function fr(t){return '«'+String(t).trim()+'»';}
 var semilla=11;function azar(){semilla=(semilla*16807)%2147483647;return semilla/2147483647;}
 function barajar(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(azar()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -78,17 +81,17 @@ Object.keys(porTema).forEach(function(t){
                 q:'En el nombre <b>'+esc(m.n)+'</b>, ¿qué fragmento indica '+chip(QUE[c2],c2)+'?'}});
             cuenta.fra++;hecho=true;}}
       }
-      if(tipo==='arm'&&cuenta.arm<POR_TIPO&&!ester&&m.p.length>=3){
+      if(tipo==='arm'&&cuenta.arm<POR_TIPO&&m.p.length>=3){
         var vv=vecinos(m),mismas=vv.filter(function(x){return x.t===m.t;});var vs=(mismas.length>=3?barajar(mismas):barajar(mismas).concat(barajar(vv.filter(function(x){return x.t!==m.t;})))).slice(0,3);
         if(vs.length===3){
           /* fichas: las del nombre más las que traen los nombres vecinos (sobran), todas con su color */
           var fichas=m.p.slice();vs.forEach(function(v){v.p.forEach(function(p){if(!fichas.some(function(f){return f[0]===p[0];}))fichas.push(p);});});
           fichas=barajar(fichas);var opsH={};opsH[m.n]=nombreColor(m.p);vs.forEach(function(v){opsH[v.n]=nombreColor(v.p);});
           nuevas.push({t:t,c:'uso',mdec:true,tipoMdec:'armar',gen:m.k,
-            ctx:'Un estudiante quiere nombrar la estructura dibujada con fichas del método MDEC. Tiene estas fichas (algunas sobran): '+fichas.map(function(f){return fr(f[0]);}).join(', ')+'.',
+            ctx:'Un estudiante quiere nombrar la estructura dibujada con fichas del método MDEC. Tiene estas fichas (algunas sobran): '+fichas.map(function(f){return fr(f[0]);}).join(', ')+'.'+(ester?NOTA_ESTER:''),
             q:'¿Cuál es el nombre IUPAC de la estructura?',o:[m.n].concat(vs.map(function(v){return v.n;})),
             exp:'La estructura corresponde a «'+m.n+'». Las otras opciones son nombres de otros compuestos: cambian una ficha respecto al correcto.',
-            html:{ctx:'Un estudiante quiere nombrar la estructura dibujada con fichas del método MDEC; cada ficha tiene el color de su parte ('+LEYENDA+'). Tiene estas fichas, y algunas sobran: '+fichas.map(function(f){return chip(f[0].trim(),f[1]);}).join(' ')+'.',o:opsH}});
+            html:{ctx:'Un estudiante quiere nombrar la estructura dibujada con fichas del método MDEC; cada ficha tiene el color de su parte ('+LEYENDA+'). Tiene estas fichas, y algunas sobran: '+fichas.map(function(f){return chip(f[0].trim(),f[1]);}).join(' ')+'.'+(ester?NOTA_ESTER_H:''),o:opsH}});
           cuenta.arm++;hecho=true;}
       }
     }

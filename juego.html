@@ -1254,7 +1254,7 @@ select.modal-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
 </div>
 
-<script src="mdec-moleculas.js?v=1"></script>
+<script src="mdec-moleculas.js?v=2"></script>
 <script src="fundamentos.js?v=98"></script>
 <script src="temas-extra.js?v=97"></script>
 <script src="temas-11.js?v=97"></script>
@@ -7091,6 +7091,15 @@ QBANK.push(...QBANK_RXN_BUILD);
 // hasta que cada familia tenga al menos 20 de cada tipo. Solo se usan moléculas que el Juego sabe
 // dibujar y que no tengan ya una pregunta de ese tipo.
 (function(){
+  // Partición MDEC (auditoría química, 26-11-2026): la «o» de «ano» no va pegada al sufijo
+  // («an» + «onitrilo» → «ano» + «nitrilo»; «2-en» + «onitrilo» → «2-eno» + «nitrilo»).
+  // Se corrige al cargar en partes, casillas y fichas de todas las preguntas del Juego.
+  const _pegada=/^o(nitrilo|di|tri|tetra|carb|\d)/;
+  function _arregla(arr,tk,ck){if(!Array.isArray(arr))return;const g=arr.find(x=>x&&x[ck]==='g'&&typeof x[tk]==='string'&&_pegada.test(x[tk]));if(!g)return;
+    const i=arr.find(x=>x&&x[ck]==='i'&&(x[tk]==='an'||/^\d+-en$/.test(x[tk])));if(!i)return;i[tk]+='o';g[tk]=g[tk].slice(1);}
+  QBANK.forEach(q=>{if(!q)return;_arregla(q.parts,'t','cls');_arregla(q.slots,'correct','cls');_arregla(q.tokens,'text','cls');});
+})();
+(function(){
   const L=window.MDEC_MOLS;if(!Array.isArray(L))return;
   const META=20,ETQ={r:'Sustituyentes',c:'Cadena principal',i:'Insaturación (o saturación)',g:'Grupo funcional'};
   const NUM={r:'①',c:'②',i:'③',g:'④'};
@@ -7144,12 +7153,12 @@ QBANK.push(...QBANK_RXN_BUILD);
   L.forEach((m,idx)=>{
     if(!dibuja(m.k)&&!(m.s))return;
     if((cuentaMC[m.t]||0)>=12)return;
-    if(idx%2===0&&m.t!=='esteres'){
+    if(idx%2===0){
       const vs=vecinos(m).slice(0,3);if(vs.length<3)return;
       const fichas=[...m.p];vs.forEach(v=>v.p.forEach(p=>{if(!fichas.some(f=>f[0]===p[0]))fichas.push(p);}));
       fichas.sort(()=>azar()-.5);
       QBANK.push({type:'mc',mol:m.k,topic:m.t,mdec:true,
-        q:'¿Cuál es el nombre IUPAC de esta estructura? Fichas del método MDEC (algunas sobran): '+fichas.map(f=>chip(f[0].trim(),f[1])).join(' '),
+        q:'¿Cuál es el nombre IUPAC de esta estructura? Fichas del método MDEC (algunas sobran): '+fichas.map(f=>chip(f[0].trim(),f[1])).join(' ')+(m.t==='esteres'?'<br><small>En los ésteres, el método pone el grupo del alcohol («de metilo», «de etilo»…) como '+chip('① sustituyente','r')+' al final del nombre.</small>':''),
         ans:m.n,opts:[m.n,...vs.map(v=>v.n)],expl:'La estructura es <b>'+m.n+'</b>. Las otras opciones cambian una sola ficha: son nombres de otros compuestos.'});
     }else if(m.t!=='eteres'){
       const cand=m.p.filter(p=>p[0].trim().length>1&&!/^(an|o)$/.test(p[0].trim()));if(!cand.length)return;
@@ -8030,6 +8039,8 @@ function confirmExitGame(){
 <script src="fx-libro.js?v=97"></script>
 <script src="site-ui.js?v=98"></script>
 <script src="calidad.js?v=97"></script>
+<!-- DBA y curso de cada pregunta del Juego según la revisión del banco (agentes expertos); MDEC no lleva DBA -->
+<script src="revision-ref.js?v=6"></script>
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

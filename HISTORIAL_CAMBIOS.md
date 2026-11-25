@@ -7,6 +7,27 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (220) — Pendientes del MDEC: nombres bien partidos, ésteres, contador y DBA del Juego
+
+### Contexto
+El docente pidió hacer todos los pendientes de la revisión. En ChromaNom quedaban: nombres partidos de forma dudosa en el método MDEC (la «o» de «ano» pegada al sufijo, como «an» + «onitrilo»), ésteres fuera de las preguntas de «armar el nombre», el contador de la portada sin las preguntas MDEC que el Juego arma al cargar, las etiquetas de DBA sin aplicar a las preguntas del Juego y revisar las fórmulas con paréntesis de las preguntas Saber.
+
+### Cambios
+- `generador.html`: 45 moléculas con el nombre bien partido en las cuatro partes: «ano» + «nitrilo» (no «an» + «onitrilo»), «2-eno» + «nitrilo», «hex» + «ano» + «dioico», «benz» + «aldehído» y «ciclohex» + «ano» + «carbonitrilo».
+- `juego.html`: al cargar, corrige con la misma regla las partes, casillas y fichas de las preguntas escritas a mano (por ejemplo, propanonitrilo queda «prop» + «ano» + «nitrilo»). Lo usa también el panel docente, que lee el Juego.
+- Ésteres en «armar el nombre» (Juego y `mdec-saber.js`), con la nota de que el método pone el grupo del alcohol («de metilo», «de etilo») como ① sustituyente al final del nombre.
+- `herramientas/generar-mdec.js`: ya no se confunde con su propio archivo anterior (daba resultados distintos en cada corrida). Ahora cuenta las preguntas MDEC que arma el Juego (410) y las deja en `mdec-moleculas.js` (`MDEC_JUEGO_N`). Hay 357 moléculas y 111 dibujos del Generador.
+- `contador.js` (igual en los tres sitios, `?v=3`): suma esas 410 al número del Juego. La portada ahora muestra 1665 preguntas del Juego.
+- `revision-ref.js`: las etiquetas de DBA y curso de la revisión ahora también se ponen en las preguntas del Juego (91), y nunca en las MDEC (`mdec:true`). Se carga en `juego.html`.
+- Fórmulas con paréntesis en las preguntas Saber: se revisaron las 10. El motor FX (`fx-libro.js`, cargado en el panel y el Juego) las dibuja todas con sus enlaces, así que no hubo que reescribirlas.
+- Caché `chromanom-v121`; `mdec-moleculas.js?v=2`, `mdec-saber.js?v=3`, `revision-ref.js?v=6`.
+- Probado con Playwright: el Juego no tiene errores, no queda ninguna «o» pegada al sufijo, el Saber MDEC tiene 74 preguntas (24 de armar, dos de ellas con ésteres) y el contador funciona en los tres sitios.
+
+### Pasos manuales pendientes
+Ninguno.
+
+---
+
 ## 2026-11-26 (219) — Regla: los colores del MDEC son solo los tonos predefinidos
 
 ### Contexto

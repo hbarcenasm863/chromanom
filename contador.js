@@ -15,9 +15,10 @@ var CFG={
     cuentas:{juego:'BANCO_BIO.length',saber:'DOCENTE_DATOS.SABER.length',
       abiertas:'('+SUMA_OBJ+')(DOCENTE_DATOS.ABIERTAS)',palabras:'BANCO_AHORCADO.length'}},
   chromanom:{scripts:['fundamentos.js','temas-extra.js','temas-11.js','docente-datos.js','mdec-moleculas.js','mdec-saber.js','ahorcado-datos.js'],
-    cuentas:{juego:'FUND_BANCO.length',saber:'('+SUMA_OBJ+')(DOCENTE_DATOS.SABER)',
+    cuentas:{juego:'FUND_BANCO.length+(window.MDEC_JUEGO_N||0)',saber:'('+SUMA_OBJ+')(DOCENTE_DATOS.SABER)',
       abiertas:'('+SUMA_OBJ+')(DOCENTE_DATOS.ABIERTAS)',palabras:'BANCO_AHORCADO.length'},
-    /* el juego de ChromaNom tiene además bancos escritos dentro de juego.html */
+    /* el juego de ChromaNom tiene además bancos escritos dentro de juego.html, y las preguntas MDEC que
+       arma al cargar (MDEC_JUEGO_N, en mdec-moleculas.js) */
     juegoHtml:{url:'juego.html',arreglos:['QBANK','QBANK_EXTRA','QBANK_NOMENCLATURA_50','QBANK_HIDRO150']}},
   ionom:{scripts:['banco.js','assets/bancos-extra.js','assets/docente-datos.js','assets/mdec-compuestos.js','assets/mdec-saber.js'],
     cuentas:{juego:'[BANCO_ATOMO,BANCO_ENLACE,BANCO_PH,BANCO_INDUSTRIA,BANCO_MODELOS,BANCO_GASES,BANCO_SOLUCIONES,BANCO_ESTEQUIOMETRIA].reduce(function(a,x){return a+x.length;},0)',
