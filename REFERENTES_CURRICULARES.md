@@ -315,6 +315,8 @@ moleculares, nomenclatura de casos raros, etc.): se marca **`sin`** y va como
 o en el priorizado SED de 11.° (hibridación, enlace de valencia, orbitales
 moleculares).
 
+**Método MDEC (modelo propio del docente).** El método MDEC de cuatro colores (① sustituyentes, ② cadena principal, ③ insaturaciones, ④ grupo funcional) es un **modelo didáctico propio** del docente para aprender nomenclatura. Sus ejercicios, explicaciones y actividades **no se enlazan a ningún DBA ni estándar** (ni en las etiquetas `dba`/`curso`, ni en la pestaña «Banco de preguntas», ni en las tablas de alineación). Al revisar contenido, los ejercicios de tipo `mdec` se dejan sin DBA.
+
 **Física.** Ningún sitio tiene hoy un módulo de física. Cuando una pregunta
 toque física (energía en ecosistemas, gases, circuitos en neuronas, ondas en la
 visión), se cita el DBA de física del grado correspondiente.
@@ -460,7 +462,7 @@ crédito**, en `icfes-datos.js`).
 
 ### 7.1 Para TODO tipo de contenido (juego, taller, guía, evaluación, abiertas, crucigrama, sopa, ahorcado, criptograma, detective, laberinto, mapa conceptual, hojas de referencia)
 
-- [ ] **Grado y DBA.** Tiene `curso` y `dba` (código grado.número) o se deduce bien en `dba-bio.js`; el contenido **no exige nada de un grado posterior** a su curso. Si ningún DBA lo nombra: `dba:'sin'` y profundización de 10.°–11.°.
+- [ ] **Grado y DBA** (salvo los ejercicios MDEC, que no se enlazan a DBA ni estándar). Tiene `curso` y `dba` (código grado.número) o se deduce bien en `dba-bio.js`; el contenido **no exige nada de un grado posterior** a su curso. Si ningún DBA lo nombra: `dba:'sin'` y profundización de 10.°–11.°.
 - [ ] **Estándar.** Se puede señalar el enunciado del estándar del grupo de grados (sección 1) al que contribuye.
 - [ ] **Priorizado SED.** Cuando encaje, usa el énfasis o el contexto del priorizado del grado (problemáticas del territorio, regiones de Colombia, El Niño y La Niña, cambio en el uso del suelo, alimentación).
 - [ ] **Competencia.** Está claro qué competencia moviliza (uso, explicación o indagación); en las preguntas abiertas y en las guías se cubren las tres a lo largo del tema.

@@ -96,6 +96,12 @@ el modelo basado en evidencias del Icfes (DCE, Marco Saber 11.° 2019).
   contra él; el historial deja constancia de lo que encontraron.
 - Si se cambia el archivo en un repositorio, se copia igual a los otros dos.
 
+## El método MDEC no se enlaza a DBA ni estándares
+
+Establecido por el docente (26-11-2026). El método MDEC (código de cuatro colores para leer y armar nombres)
+es un **modelo propio del docente**: sus ejercicios (abiertas `t:'mdec'`), explicaciones y actividades no se
+enlazan a ningún DBA ni estándar. `revision-ref.js` los omite al poner etiquetas; no agregarles `dba` ni `curso`.
+
 ## Otras convenciones del repositorio
 
 - El usuario es docente de química (no necesariamente técnico); las

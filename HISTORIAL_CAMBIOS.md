@@ -7,6 +7,26 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-26 (216) — MDEC sin DBA y DBA propio en preguntas del juego y abiertas
+
+### Contexto
+El docente pidió hacer los cambios pendientes de la sesión 215 y aclaró que el método MDEC es un modelo propio, así que no se enlaza a ningún DBA ni estándar.
+
+### Cambios
+- **Regla del MDEC.** `REFERENTES_CURRICULARES.md` (igual en los tres sitios): nota nueva en la sección 3 que dice que el método MDEC es un modelo propio del docente y que sus ejercicios no se enlazan a ningún DBA ni estándar; la lista de verificación 7.1 lo excluye del requisito de DBA. En `CLAUDE.md` se agregó la regla «El método MDEC no se enlaza a DBA ni estándares». Por eso el tema «nomenclatura» de los ejercicios MDEC no se agrega a `banco-sel-cfg.js`.
+- **`revision-ref.js`.** Ahora también pone `dba` y `curso` en las preguntas del juego (`FUND_BANCO`) y en las abiertas, con las etiquetas del experto en currículo MEN de la revisión: 131 en total, por hash del enunciado. Los ejercicios `t:'mdec'` se saltan siempre.
+  - En el panel docente quedan etiquetadas 65: 27 del juego y 38 abiertas.
+  - Las otras 66 son preguntas escritas dentro de `juego.html` (QBANK). Sus etiquetas quedan en `revision-referentes-2026-11/men-chr-*.json`.
+- Caché `chromanom-v118`; `revision-ref.js?v=5`. Probado con Playwright: el panel carga sin errores y ningún ejercicio MDEC tiene DBA.
+
+### Pasos manuales pendientes
+Ninguno.
+
+### Pendiente
+Las etiquetas de las palabras (crucigrama, sopa y ahorcado) quedan solo en los informes, porque las palabras no tienen campo para el DBA.
+
+---
+
 ## 2026-11-26 (215) — Revisión de lo pendiente en ChromaNom
 
 ### Contexto
