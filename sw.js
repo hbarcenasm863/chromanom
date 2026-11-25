@@ -3,7 +3,7 @@
 // JS y CSS: red primero. Íconos y fuentes: stale-while-revalidate (rápido y se
 // autoactualiza en segundo plano). Todo funciona offline como respaldo.
 
-const CACHE = 'chromanom-v113';
+const CACHE = 'chromanom-v114';
 const FONT_CACHE = 'chromanom-fonts-v1';
 
 const ASSETS = [
@@ -49,6 +49,7 @@ const ASSETS = [
   './docente-datos.js',
   './revision-ref.js',
   './banco-sel.js',
+  './contador.js',
   './banco-sel-cfg.js',
   './referentes-men.js',
   './docente-app.js',

@@ -7,6 +7,18 @@ Ver `CLAUDE.md` para la regla que mantiene este archivo actualizado.
 
 ---
 
+## 2026-11-25 (212) — Contador de preguntas en la portada y en el panel docente
+
+El docente pidió un **contador de preguntas** en la portada y en el panel docente que se calcule solo y cambie siempre que cambie el banco.
+
+- **`contador.js`** (nuevo, el mismo archivo en los tres sitios): cada vez que se abre la página, después de que termina de cargar, carga los bancos en un marco invisible y cuenta el banco completo: preguntas del juego, tipo Saber 11, abiertas, palabras con pistas. No hay que actualizar ningún número a mano.
+- **`index.html`** y **`docente.html`**: recuadro `#contador-preguntas` debajo del encabezado.
+- Hoy muestra 2 151 (1 256 del juego, 678 tipo Saber 11 y 217 abiertas), más 146 palabras. Probado con Playwright en las dos páginas (mismo número en ambas, sin errores).
+- En ChromaNom también suma los bancos escritos dentro de `juego.html` (QBANK y similares).
+- Caché `chromanom-v114`. Sin pasos manuales.
+
+---
+
 ## 2026-11-25 (211) — Revisión del banco Saber contra los referentes curriculares (parte 2: lote 3)
 
 ### Contexto
